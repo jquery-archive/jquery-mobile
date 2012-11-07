@@ -161,7 +161,7 @@
 		},
 
 		openPage: function(hash){
-			location.href = location.href.split('#')[0] + hash;
+			location.hash = hash;
 		},
 
 		sequence: function(fns, interval){
@@ -272,14 +272,17 @@
 
 				stop();
 
-				timeout = setTimeout( start, 2000);
+				timeout = setTimeout(function(){
+					throw "navReset timeout reached";
+					start();
+				}, 5000);
 
 				$(document).one( "pagechange", function() {
 					clearTimeout( timeout );
 					start();
 				});
 
-				location.hash = hash ? "#" + hash : "";
+				location.hash = location.hash.replace("#", "") === hash ? "" : "#" + hash;
 			};
 
 			// force the page reset for hash based tests
@@ -291,6 +294,15 @@
 			if ( $.support.pushState ) {
 				pageReset( url );
 			}
+		},
+
+		delayStart: function( milliseconds ) {
+			// stop qunit from running the tests until everything is in the page
+			QUnit.config.autostart = false;
+
+			setTimeout(function() {
+				start();
+			}, milliseconds || 2000 );
 		}
 	};
 })(jQuery);

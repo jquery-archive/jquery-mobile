@@ -16,21 +16,26 @@ define([ "jquery",
 
 		popstate: function( event ) {
 			var newEvent = new $.Event( "navigate" ),
-				state = event.originalEvent.state || {};
+				state = event.originalEvent.state || {},
+			href = location.href;
+
 
 			if( event.historyState ){
-				state.direction = event.historyState.direction;
+				$.extend(state, event.historyState);
 			}
 
 			// Make sure the original event is tracked for the end
 			// user to inspect incase they want to do something special
 			newEvent.originalEvent = event;
 
-			// NOTE the `|| {}` is there to ensure consistency between
-			//      the popstate navigate event and the hashchange navigate
-			//      event data
-			$win.trigger( newEvent, {
-				state: state
+			// NOTE we let the current stack unwind because any assignment to
+			//      location.hash will stop the world and run this event handler. By
+			//      doing this we create a similar behavior to hashchange on hash
+			//      assignment
+			setTimeout(function() {
+				$win.trigger( newEvent, {
+					state: state
+				});
 			});
 		},
 

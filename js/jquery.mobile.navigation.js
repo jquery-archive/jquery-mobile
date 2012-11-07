@@ -28,73 +28,7 @@ define( [
 
 		//urlHistory is purely here to make guesses at whether the back or forward button was clicked
 		//and provide an appropriate transition
-		urlHistory = {
-			// Array of pages that are visited during a single page load.
-			// Each has a url and optional transition, title, and pageUrl (which represents the file path, in cases where URL is obscured, such as dialogs)
-			stack: [],
-
-			//maintain an index number for the active page in the stack
-			activeIndex: 0,
-
-			//get active
-			getActive: function() {
-				return urlHistory.stack[ urlHistory.activeIndex ];
-			},
-
-			getPrev: function() {
-				return urlHistory.stack[ urlHistory.activeIndex - 1 ];
-			},
-
-			getNext: function() {
-				return urlHistory.stack[ urlHistory.activeIndex + 1 ];
-			},
-
-			// addNew is used whenever a new page is added
-			addNew: function( url, transition, title, pageUrl, role ) {
-				//if there's forward history, wipe it
-				if ( urlHistory.getNext() ) {
-					urlHistory.clearForward();
-				}
-
-				urlHistory.stack.push( {url : url, transition: transition, title: title, pageUrl: pageUrl, role: role } );
-
-				urlHistory.activeIndex = urlHistory.stack.length - 1;
-			},
-
-			//wipe urls ahead of active index
-			clearForward: function() {
-				urlHistory.stack = urlHistory.stack.slice( 0, urlHistory.activeIndex + 1 );
-			},
-
-			directHashChange: function( opts ) {
-				var back , forward, newActiveIndex, prev = this.getActive();
-
-				// check if url is in history and if it's ahead or behind current page
-				$.each( urlHistory.stack, function( i, historyEntry ) {
-
-					//if the url is in the stack, it's a forward or a back
-					if ( decodeURIComponent( opts.currentUrl ) === decodeURIComponent( historyEntry.url ) ) {
-						//define back and forward by whether url is older or newer than current page
-						back = i < urlHistory.activeIndex;
-						forward = !back;
-						newActiveIndex = i;
-					}
-				});
-
-				// save new page index, null check to prevent falsey 0 result
-				this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
-
-				if ( back ) {
-					( opts.either || opts.isBack )( true );
-				} else if ( forward ) {
-					( opts.either || opts.isForward )( false );
-				}
-			},
-
-			//disable hashchange event listener internally to ignore one change
-			//toggled internally when location.hash is updated to match the url of a successful page load
-			ignoreNextHashChange: false
-		},
+		urlHistory = $.navigate.history,
 
 		//define first selector to receive focus when a page is shown
 		focusable = "[tabindex],a,button:visible,select:visible,input",
@@ -723,6 +657,7 @@ define( [
 		// Let listeners know we're about to change the current page.
 		mpc.trigger( pbcEvent, triggerData );
 
+
 		// If the default behavior is prevented, stop here!
 		if ( pbcEvent.isDefaultPrevented() ) {
 			return;
@@ -736,7 +671,6 @@ define( [
 		// Set the isPageTransitioning flag to prevent any requests from
 		// entering this method while we are in the midst of loading a page
 		// or transitioning.
-
 		isPageTransitioning = true;
 
 		// If the caller passed us a url, call loadPage()
@@ -804,11 +738,7 @@ define( [
 
 			// Even if there is no page change to be done, we should keep the urlHistory in sync with the hash changes
 			if ( settings.fromHashChange ) {
-				urlHistory.directHashChange({
-					currentUrl:	url,
-					isBack:		function() {},
-					isForward:	function() {}
-				});
+				urlHistory.direct({ url: url });
 			}
 
 			return;
@@ -821,11 +751,7 @@ define( [
 		// page is already within the urlHistory stack. If so, we'll assume the user hit
 		// the forward/back button and will try to match the transition accordingly.
 		if ( settings.fromHashChange ) {
-			urlHistory.directHashChange({
-				currentUrl:	url,
-				isBack:		function() { historyDir = -1; },
-				isForward:	function() { historyDir = 1; }
-			});
+			historyDir = options.direction === "back" ? -1 : 1;
 		}
 
 		// Kill the keyboard.
@@ -896,19 +822,30 @@ define( [
 			if ( alreadyThere ) {
 				urlHistory.activeIndex = Math.max( 0, urlHistory.activeIndex - 1 );
 			}
-			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
 		}
 
 		// Set the location hash.
 		if ( settings.changeHash !== false && url ) {
 			//disable hash listening temporarily
 			urlHistory.ignoreNextHashChange = true;
-			//update hash and history
-			path.set( url );
+
+			// rebuilding the hash here since we loose it earlier on
+			// TODO preserve the originally passed in path
+			if( !path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
+				url = "#" + url;
+			}
+
+			// TODO the property names here are just silly
+			$.navigate( url, {
+				transition: settings.transition,
+				title: pageTitle,
+				pageUrl: pageUrl,
+				role: settings.role
+			}, true);
 		}
 
 		//set page title
-		document.title = urlHistory.getActive().title;
+		document.title = urlHistory.getActive().title || document.title;
 
 		//set "toPage" as activePage
 		$.mobile.activePage = toPage;
@@ -933,10 +870,8 @@ define( [
 					$.mobile.focusPage( toPage );
 				}
 
-				releasePageTransitionLock();
-
-				// Let listeners know we're all done changing the current page.
 				mpc.trigger( "pagechange", triggerData );
+				releasePageTransitionLock();
 			});
 	};
 
@@ -1183,38 +1118,26 @@ define( [
 			});
 		});
 
-		$.mobile._handleHashChange = function( hash ) {
+		$.mobile._handleHashChange = function( url, data ) {
 			//find first page via hash
-			var to = path.stripHash( hash ),
+			var to = path.stripHash(url),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
 				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
-
-				// "navigate" event fired to allow others to take advantage of the more robust hashchange handling
-				navEvent = new $.Event( "navigate" ),
 
 				// default options for the changPage calls made after examining the current state
 				// of the page and the hash
 				changePageOptions = {
 					transition: transition,
 					changeHash: false,
-					fromHashChange: true
+					fromHashChange: true,
+					reverse: data.direction === "back"
 				};
 
+			$.extend( changePageOptions, data );
+
+			// TODO we can set this earlier and avoid checking it every time we run the hashchange
 			if ( 0 === urlHistory.stack.length ) {
 				urlHistory.initialDst = to;
-			}
-
-			// We should probably fire the "navigate" event from those places that make calls to _handleHashChange,
-			// and have _handleHashChange hook into the "navigate" event instead of triggering it here
-			// $.mobile.pageContainer.trigger( navEvent );
-			if ( navEvent.isDefaultPrevented() ) {
-				return;
-			}
-
-			//if listening is disabled (either globally or temporarily), or it's a dialog hash
-			if ( !$.mobile.hashListeningEnabled || urlHistory.ignoreNextHashChange ) {
-				urlHistory.ignoreNextHashChange = false;
-				return;
 			}
 
 			// special case for dialogs
@@ -1225,35 +1148,26 @@ define( [
 				if ( !$.mobile.activePage.is( ".ui-dialog" ) ) {
 					//determine if we're heading forward or backward and continue accordingly past
 					//the current dialog
-					urlHistory.directHashChange({
-						currentUrl: to,
-						isBack: function() { $.mobile.back(); },
-						isForward: function() { window.history.forward(); }
-					});
+					if( data.direction === "back" ) {
+						$.mobile.back();
+					} else {
+						window.history.forward();
+					}
 
-					// prevent changePage()
+					// prevent changePage call
 					return;
 				} else {
 					// if the current active page is a dialog and we're navigating
 					// to a dialog use the dialog objected saved in the stack
-					urlHistory.directHashChange({
-						currentUrl: to,
+					to = data.pageUrl;
+					var active = $.mobile.urlHistory.getActive();
 
-						// regardless of the direction of the history change
-						// do the following
-						either: function( isBack ) {
-							var active = $.mobile.urlHistory.getActive();
-
-							to = active.pageUrl;
-
-							// make sure to set the role, transition and reversal
-							// as most of this is lost by the domCache cleaning
-							$.extend( changePageOptions, {
-								role: active.role,
-								transition: active.transition,
-								reverse: isBack
-							});
-						}
+					// make sure to set the role, transition and reversal
+					// as most of this is lost by the domCache cleaning
+					$.extend( changePageOptions, {
+						role: active.role,
+						transition: active.transition,
+						reverse: data.direction == "back"
 					});
 				}
 			}
@@ -1265,7 +1179,7 @@ define( [
 				// an id, we need to resolve it against the documentBase, not the location.href,
 				// since the hashchange could've been the result of a forward/backward navigation
 				// that crosses from an external page/dialog to an internal page/dialog.
-				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( path.makeUrlAbsolute( '#' + to, documentBase ) ) : to;
+				to = !path.isPath( to ) ? ( path.makeUrlAbsolute( '#' + to, documentBase ) ) : to;
 
 				// If we're about to go to an initial URL that contains a reference to a non-existent
 				// internal page, go to the first page instead. We know that the initial hash refers to a
@@ -1274,18 +1188,24 @@ define( [
 					urlHistory.stack.length && urlHistory.stack[0].url !== urlHistory.initialDst.replace( dialogHashKey, "" ) ) {
 					to = $.mobile.firstPage;
 				}
+
 				$.mobile.changePage( to, changePageOptions );
 			}	else {
+
 				//there's no hash, go to the first page in the dom
 				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
 			}
 		};
 
 		//hashchange event handler
-		$window.bind( "hashchange", function( e, triggered ) {
-			// Firefox auto-escapes the location.hash as for v13 but
-			// leaves the href untouched
-			$.mobile._handleHashChange( path.parseLocation().hash );
+		$window.bind( "navigate", function( e, data ) {
+			var url = data.state.url;
+
+			if( !url ) {
+				url = $.mobile.path.stripHash( $.mobile.path.parseLocation().hash );
+			}
+
+			$.mobile._handleHashChange( url, data.state );
 		});
 
 		//set page min-heights to be device specific

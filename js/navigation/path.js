@@ -227,7 +227,7 @@ define([
 			// TODO leave the dialog hashkey cleaning in nav core
 			//remove the preceding hash, any query params, and dialog notations
 			cleanHash: function( hash ) {
-				return path.stripHash( hash ).replace( dialogHashKey, "" );
+				return path.stripHash( hash.replace( /\?.*$/, "" ).replace( dialogHashKey, "" ) );
 			},
 
 			isHashValid: function( hash ) {

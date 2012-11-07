@@ -30,12 +30,12 @@ define([
 		//           We then trigger a new popstate event on the window with a null state
 		//           so that the navigate events can conclude their work properly
 		history.ignoreNextHashChange = true;
-		window.location.hash = path.cleanHash( url );
+		window.location.hash = url;
 
-		state = $.extend( data, {
+		state = $.extend({
 			url: url,
 			title: document.title
-		});
+		}, data);
 
 		if( $.support.pushState ) {
 			popstateEvent = new $.Event( "popstate" );
@@ -44,7 +44,7 @@ define([
 				state: null
 			};
 
-			$.navigate.squash( url, data );
+			$.navigate.squash( url, state );
 
 			// Trigger a new faux popstate event to replace the one that we
 			// caught that was triggered by the hash setting above.
@@ -60,6 +60,8 @@ define([
 		history.add( url, state );
 	};
 
+	// TODO this whole method is absolute trash :(
+	// TODO move this into the path helpers
 	$.navigate.squash = function( url, data ) {
 		var state, href,
 			isPath = path.isPath( url ),
@@ -71,24 +73,32 @@ define([
 		// make the hash abolute with the current href
 		href = path.makeUrlAbsolute( hash, resolutionUrl );
 
+		// TODO all this crap is terrible, clean it up
 		if ( isPath ) {
 			passedSearch = hashUri.search;
 			currentSearch = path.parseUrl( resolutionUrl ).search;
-			mergedSearch = path.mergeSearch( passedSearch, currentSearch );
+			mergedSearch = path.mergeSearch( currentSearch, passedSearch );
 
+			// if we get a value back from the merged serve prepend a "?"
 			mergedSearch = mergedSearch ? "?" + mergedSearch : "";
-			preservedHash = (hashUri.hash || path.parseLocation().hash);
 
+			// Get a hash where possible and, as long as it's not a path
+			// preserve it on the current url
+			preservedHash = (hashUri.hash || path.parseLocation().hash);
+			preservedHash = path.isPath( preservedHash ) ? "" : preservedHash;
+
+			// reconstruct each of the pieces with the new search string and hash
 			href = path.parseUrl( href );
 			href = href.protocol + "//" + href.host + href.pathname + mergedSearch + preservedHash;
 			href = path.resetUIKeys( href );
 		}
 
-		state = $.extend( data, {
-			url: url,
+		// make sure to provide this information when it isn't explicitly set in the
+		// data object that was passed to the squash method
+		state = $.extend({
 			hash: hash,
-			title: document.title
-		});
+			url: href
+		}, data);
 
 		// replace the current url with the new href and store the state
 		// Note that in some cases we might be replacing an url with the
@@ -100,7 +110,7 @@ define([
 		// Ensuring each history entry has a state object means that onPopState()
 		// will always trigger our hashchange callback even when a hashchange event
 		// is not fired.
-		window.history.replaceState( state, document.title, href );
+		window.history.replaceState( state, state.title || document.title, href );
 
 		return state;
 	};
@@ -143,21 +153,27 @@ define([
 		if( !event.originalEvent.state ) {
 			hash = path.parseLocation().hash;
 
-			// squash a hash with replacestate
-			if( path.isPath(hash) ) {
-				console.log( "location  before squash" + location.href );
-				console.log( "squashing hash with:" + hash );
+			// avoid initial page load popstate trigger when there is no hash
+			if( hash ) {
+
+				var matchingIndex = history.closest( hash );
+
 				state = $.navigate.squash( hash );
-				console.log( "location after squash" + location.href );
+
+//				if( Math.abs(matchingIndex - history.activeIndex) > 1 ) {
+					// record the new hash as an additional history entry
+					// to match the browser's treatment of hash assignment
+					history.add( hash, state );
+//				}
+
+				// pass the newly created state information
+				// along with the event
+				event.historyState = state;
+
+				// do not alter history, we've added a new history entry
+				// so we know where we are
+				return;
 			}
-
-			// record the new hash as an additional history entry
-			// to match the browser's treatment of hash assignment
-			history.add( hash, state );
-
-			// do not alter history, we've added a new history entry
-			// so we know where we are
-			return;
 		}
 
 		// If all else fails this is a popstate that comes from the back or forward buttons
@@ -286,15 +302,15 @@ define([
 			return index;
 		},
 
-		direct: function( opts ) {
-			var newActiveIndex, a = this.activeIndex;
+		closest: function( url ) {
+			var closest, a = this.activeIndex;
 
 			// First, take the slice of the history stack before the current index and search
 			// for a url match. If one is found, we'll avoid avoid looking through forward history
 			// NOTE the preference for backward history movement is driven by the fact that
 			//      most mobile browsers only have a dedicated back button, and users rarely use
 			//      the forward button in desktop browser anyhow
-			newActiveIndex = this.find( opts.url, this.stack.slice(0, a) );
+			closest = this.find( url, this.stack.slice(0, a) );
 
 			// If nothing was found in backward history check forward. The `true`
 			// value passed as the third parameter causes the find method to break
@@ -303,10 +319,16 @@ define([
 			// in the original history stack :( :(
 			//
 			// TODO this is hyper confusing and should be cleaned up (ugh so bad)
-			if( newActiveIndex === undefined ) {
-				newActiveIndex = this.find( opts.url, this.stack.slice(a + 1), true );
-				newActiveIndex = newActiveIndex === undefined ? newActiveIndex : newActiveIndex + a + 1;
+			if( closest === undefined ) {
+				closest = this.find( url, this.stack.slice(a + 1), true );
+				closest = closest === undefined ? closest : closest + a + 1;
 			}
+
+			return closest;
+		},
+
+		direct: function( opts ) {
+			var newActiveIndex = this.closest(opts.url), a = this.activeIndex;
 
 			// save new page index, null check to prevent falsey 0 result
 			this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
@@ -332,9 +354,12 @@ define([
 		ignoreNextHashChange: false
 	};
 
+	var loc = path.parseLocation();
 
 	// Record the initial page with a replace state where necessary
-	history.add( location.href, {});
+	history.add( loc.href, {
+		hash: loc.pathname + loc.search
+	});
 })( jQuery );
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
