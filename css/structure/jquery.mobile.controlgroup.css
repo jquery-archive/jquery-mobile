@@ -4,16 +4,10 @@
 .ui-bar .ui-controlgroup { margin: 0 5px; }
 
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
-.ui-controlgroup li { list-style: none; }
-.ui-controlgroup-vertical .ui-btn,
-.ui-controlgroup-vertical .ui-checkbox, .ui-controlgroup-vertical .ui-radio { margin: 0; border-bottom-width: 0; }
-.ui-controlgroup-controls .ui-radio:last-child .ui-btn,
-.ui-controlgroup-controls .ui-checkbox:last-child .ui-btn,
-.ui-controlgroup-controls .ui-select:last-child .ui-btn,
-.ui-controlgroup-controls label:last-child + .ui-select .ui-btn,
-.ui-controlgroup-controls li:last-child > .ui-btn,
-.ui-controlgroup-controls > .ui-btn:last-child { border-bottom-width: 1px; }
 .ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
+.ui-controlgroup li { list-style: none; }
+/* we need a high level of specificity here to override checkboxradio defaults */
+.ui-controlgroup.ui-controlgroup-vertical .ui-controlgroup-controls .ui-btn { margin: 0 0 -1px; }
 
 .ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
 .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
