@@ -14,6 +14,7 @@ define( [ "jquery",
 	$.widget( "mobile.controlgroup", $.mobile.widget, {
 		options: {
 			shadow: false,
+			corners: true,
 			excludeInvisible: true,
 			type: "vertical",
 			mini: false,
@@ -73,6 +74,12 @@ define( [ "jquery",
 			this.refresh();
 		},
 
+		_setCorners: function( value ) {
+			this.element.toggleClass( "ui-corner-all", value );
+			this.options.corners = value;
+			this.refresh();
+		},
+
 		_setShadow: function( value ) {
 			this.element.toggleClass( "ui-shadow", value );
 		},
@@ -87,7 +94,9 @@ define( [ "jquery",
 				.not( '.ui-slider-handle' ),
 				corners = [ true, true ];
 
-			if ( els.length > 1 ) {
+			if ( !this.options.corners ) {
+				corners = [ false, false ];
+			} else if ( els.length > 1 ) {
 				corners = ( this.options.type === "horizontal" ? [ "left", "right" ] : [ "top", "bottom" ] );
 			}
 
