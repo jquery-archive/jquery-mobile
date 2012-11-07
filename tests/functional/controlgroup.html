@@ -21,7 +21,7 @@
 				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 				$el.buttonMarkup();
 			} else if ( widgetType === "select" ) {
-				$el = $( "<label for='widget" + counter + "' class='ui-hidden-accessible'>Select " + counter + "</label><select><option id='widget" + counter + "' value='default'>Select " + counter + "</option><option value='remove'>Remove</option></select>" );
+				$el = $( "<label for='widget" + counter + "'>Select " + counter + "</label><select id='widget" + counter + "'><option id='widget" + counter + "' value='default'>Select " + counter + "</option><option value='remove'>Remove</option></select>" );
 				$( $el[ 1 ] ).bind( "change", function( e ) { $el.remove(); });
 				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 				$( $el[ 1 ] ).selectmenu();
