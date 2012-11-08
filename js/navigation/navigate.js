@@ -68,20 +68,13 @@ define([
 			hash = isPath ? path.stripHash(url) : url,
 			hashUri = path.parseUrl( hash ),
 			resolutionUrl = isPath ? path.getLocation() : $.mobile.getDocumentUrl(),
-			passedSearch, currentSearch, mergedSearch, preservedHash;
+			passedSearch, preservedHash;
 
 		// make the hash abolute with the current href
 		href = path.makeUrlAbsolute( hash, resolutionUrl );
 
 		// TODO all this crap is terrible, clean it up
 		if ( isPath ) {
-			passedSearch = hashUri.search;
-			currentSearch = path.parseUrl( resolutionUrl ).search;
-			mergedSearch = path.mergeSearch( currentSearch, passedSearch );
-
-			// if we get a value back from the merged serve prepend a "?"
-			mergedSearch = mergedSearch ? "?" + mergedSearch : "";
-
 			// Get a hash where possible and, as long as it's not a path
 			// preserve it on the current url
 			preservedHash = (hashUri.hash || path.parseLocation().hash);
@@ -89,7 +82,7 @@ define([
 
 			// reconstruct each of the pieces with the new search string and hash
 			href = path.parseUrl( href );
-			href = href.protocol + "//" + href.host + href.pathname + mergedSearch + preservedHash;
+			href = href.protocol + "//" + href.host + href.pathname + hashUri.search + preservedHash;
 			href = path.resetUIKeys( href );
 		}
 
@@ -290,7 +283,8 @@ define([
 			for ( i = 0; i < length; i++ ) {
 				entry = stack[i];
 
-				if ( decodeURIComponent( url ) === decodeURIComponent( entry.url ) ) {
+				if ( decodeURIComponent(url) === decodeURIComponent(entry.url)
+					 || decodeURIComponent(url) === decodeURIComponent(entry.hash) ) {
 					index = i;
 
 					if( earlyReturn ) {
