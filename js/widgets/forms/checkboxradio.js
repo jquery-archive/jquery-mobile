@@ -16,11 +16,13 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	options: {
 		theme: null,
+		mini: false,
 		initSelector: "input[type='checkbox'],input[type='radio']"
 	},
 	_create: function() {
 		var self = this,
 			input = this.element,
+			o = this.options,
 			inheritAttr = function( input, dataAttr ) {
 				return input.jqmData( dataAttr ) || input.closest( "form, fieldset" ).jqmData( dataAttr );
 			},
@@ -29,7 +31,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			parentLabel = $( input ).closest( "label" ),
 			label = parentLabel.length ? parentLabel : $( input ).closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ).first(),
 			inputtype = input[0].type,
-			mini = inheritAttr( input, "mini" ),
+			mini = inheritAttr( input, "mini" ) || o.mini,
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
 			icon = input.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
@@ -55,12 +57,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		});
 
 		// If there's no selected theme check the data attr
-		if ( !this.options.theme ) {
-			this.options.theme = $.mobile.getInheritedTheme( this.element, "c" );
+		if ( !o.theme ) {
+			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
 
 		label.buttonMarkup({
-			theme: this.options.theme,
+			theme: o.theme,
 			icon: icon,
 			shadow: false,
 			mini: mini,
