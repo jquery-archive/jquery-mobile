@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Listviews - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jqm-demos.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Grids</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+		
+			<h2>Responsive grids</h2>
+
+			<style>
+		
+		.rwd-stack div {
+            text-align:center;
+            min-height:40px;
+            border-color:#eee
+		}
+		
+		/* Stack all blocks to start */
+		.rwd-stack .ui-block-a, 
+		.rwd-stack .ui-block-b, 
+		.rwd-stack .ui-block-c,
+		.rwd-stack .ui-block-d,
+		.rwd-stack .ui-block-e { 
+			width: 100%; 
+			float:none; 
+		}
+		
+		/* Float and set widths above 576px (36em * 16px) */
+		@media all and (min-width: 36em){
+			/* Float all blocks */
+			.rwd-stack .ui-block-a, 
+			.rwd-stack .ui-block-b, 
+			.rwd-stack .ui-block-c,
+			.rwd-stack .ui-block-d,
+			.rwd-stack .ui-block-e { 
+				float:left; 
+			}
+			/* Set widths for 2-up grids */
+			.rwd-stack.ui-grid-a .ui-block-a, 
+			.rwd-stack.ui-grid-a .ui-block-b { 
+				width: 49.95%; 
+			}
+			/* Set widths for 3-up grids */
+			.rwd-stack.ui-grid-b .ui-block-a, 
+			.rwd-stack.ui-grid-b .ui-block-b, 
+			.rwd-stack.ui-grid-b .ui-block-c { 
+				width: 33.25%; 
+			}
+			/* Set widths for 4-up grids */
+			.rwd-stack.ui-grid-c .ui-block-a, 
+			.rwd-stack.ui-grid-c .ui-block-b, 
+			.rwd-stack.ui-grid-c .ui-block-c,
+			.rwd-stack.ui-grid-c .ui-block-d { 
+				width: 24.925%;
+			}
+			/* Set widths for 4-up grids */
+			.rwd-stack.ui-grid-d .ui-block-a, 
+			.rwd-stack.ui-grid-d .ui-block-b, 
+			.rwd-stack.ui-grid-d .ui-block-c,
+			.rwd-stack.ui-grid-d .ui-block-d,
+			.rwd-stack.ui-grid-d .ui-block-e { 
+				width: 19.925%;
+			}
+		}
+		</style>
+		
+		<p>It's straightforward to take the standard grids and make them responsive. In this example, all the grid blocks are stacked at narrow widths like a smartphone. Above 36em (576 pixels) wide, the side-by-side grids are created by floating the blocks and setting percentage widths.</p>
+		
+		
+
+		<h2>Responsive grid demo</h2>
+
+		<p>Each of these grids will display as a stacked set of blocks at narrow widths.</p>
+		
+		<h3>Grid A (50/50)</h3>
+		
+		<div class="ui-grid-a rwd-stack">
+			<div class="ui-block-a"><div class="ui-body ui-body-d">Block A</div></div>
+			<div class="ui-block-b"><div class="ui-body ui-body-d">Block B</div></div>
+		</div><!-- /grid-a -->
+
+		
+		<h3>Grid B (33/33/33)</h3>
+
+		<div class="ui-grid-b rwd-stack">
+			<div class="ui-block-a"><div class="ui-body ui-body-d">Block A</div></div>
+			<div class="ui-block-b"><div class="ui-body ui-body-d">Block B</div></div>
+			<div class="ui-block-c"><div class="ui-body ui-body-d">Block C</div></div>
+		</div><!-- /grid-b -->
+
+		
+		<h3>Grid C (25/25/25/25)</h3>
+	
+		<div class="ui-grid-c rwd-stack">
+			<div class="ui-block-a"><div class="ui-body ui-body-d">A</div></div>
+			<div class="ui-block-b"><div class="ui-body ui-body-d">B</div></div>
+			<div class="ui-block-c"><div class="ui-body ui-body-d">C</div></div>
+			<div class="ui-block-d"><div class="ui-body ui-body-d">D</div></div>
+		</div><!-- /grid-c -->		
+
+		
+		<h3>Grid D (20/20/20/20/20)</h3>
+	
+		<div class="ui-grid-d rwd-stack">
+			<div class="ui-block-a"><div class="ui-body ui-body-d">A</div></div>
+			<div class="ui-block-b"><div class="ui-body ui-body-d">B</div></div>
+			<div class="ui-block-c"><div class="ui-body ui-body-d">C</div></div>
+			<div class="ui-block-d"><div class="ui-body ui-body-d">D</div></div>
+			<div class="ui-block-e"><div class="ui-body ui-body-d">E</div></div>
+		</div><!-- /grid-d -->
+
+      	
+      
+      <h2>Example styles</h2>
+      <p>Here are the styles you need to stack all the grids. These all work by adding the <code>rwd-stack</code> to each the grid container.</p>
+		
+<pre><code>
+/* Stack all blocks to start */
+.rwd-stack .ui-block-a, 
+.rwd-stack .ui-block-b, 
+.rwd-stack .ui-block-c,
+.rwd-stack .ui-block-d,
+.rwd-stack .ui-block-e { 
+	width: 100%; 
+	float:none; 
+}
+
+/* Float and set widths above 576px (36em * 16px) */
+@media all and (min-width: 36em){
+	/* Float all blocks */
+	.rwd-stack .ui-block-a, 
+	.rwd-stack .ui-block-b, 
+	.rwd-stack .ui-block-c,
+	.rwd-stack .ui-block-d,
+	.rwd-stack .ui-block-e { 
+		float:left; 
+	}
+	/* Set widths for 2-up grids */
+	.rwd-stack.ui-grid-a .ui-block-a, 
+	.rwd-stack.ui-grid-a .ui-block-b { 
+		width: 49.95%; 
+	}
+	/* Set widths for 3-up grids */
+	.rwd-stack.ui-grid-b .ui-block-a, 
+	.rwd-stack.ui-grid-b .ui-block-b, 
+	.rwd-stack.ui-grid-b .ui-block-c { 
+		width: 33.25%; 
+	}
+	/* Set widths for 4-up grids */
+	.rwd-stack.ui-grid-c .ui-block-a, 
+	.rwd-stack.ui-grid-c .ui-block-b, 
+	.rwd-stack.ui-grid-c .ui-block-c,
+	.rwd-stack.ui-grid-c .ui-block-d { 
+		width: 24.925%;
+	}
+	/* Set widths for 5-up grids */
+	.rwd-stack.ui-grid-d .ui-block-a, 
+	.rwd-stack.ui-grid-d .ui-block-b, 
+	.rwd-stack.ui-grid-d .ui-block-c,
+	.rwd-stack.ui-grid-d .ui-block-d,
+	.rwd-stack.ui-grid-d .ui-block-e { 
+		width: 19.925%;
+	}
+}
+</code></pre>
+	
+
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>
