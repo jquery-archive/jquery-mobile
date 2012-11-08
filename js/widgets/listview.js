@@ -119,7 +119,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$list.find( ".ui-li-dec" ).remove();
 		}
 
-		if ( ol ) {	
+		if ( ol ) {
 			// Check if a start attribute has been set while taking a value of 0 into account
 			if ( start || start === 0 ) {
 				if ( !jsCount ) {
