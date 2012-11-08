@@ -13,15 +13,17 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtnText: "Close",
 		overlayTheme: "a",
+		corners: true,
 		initSelector: ":jqmData(role='dialog')"
 	},
 	_create: function() {
 		var self = this,
 			$el = this.element,
 			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
+			cornerClass = !!this.options.corners ? " ui-corner-all" : "",
 			dialogWrap = $( "<div/>", {
 					"role" : "dialog",
-					"class" : "ui-dialog-contain ui-corner-all ui-overlay-shadow"
+					"class" : "ui-dialog-contain ui-overlay-shadow" + cornerClass
 				});
 
 		$el.addClass( "ui-dialog ui-overlay-" + this.options.overlayTheme );
