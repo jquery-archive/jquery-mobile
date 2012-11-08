@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Behavior for "fixed" headers and footers
+//>>description: Behavior for "fixed" headers and footers - be sure to also include the item 'Browser specific workarounds for "fixed" headers and footers' when supporting Android 2.x or iOS 5
 //>>label: Toolbars: Fixed
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
