@@ -14,23 +14,28 @@
 	$( document ).bind( "pageinit", function( e ) {
 		$( "#prepend,#append", e.target ).bind( "click", function( e ) {
 			counter++;
-			var widgetType = $( "[name='radio-widget']:checked" ).attr( "id" ), $el;
+			var widgetType = $( "[name='radio-widget']:checked" ).attr( "id" ),
+				grp = $( "#controlgroup" ),
+				op = $( "[name='radio-op']:checked" ).attr( "id" ),
+				$el;
 
 			if ( widgetType === "link" ) {
-				$el = $( "<a href='#'>Remove " + counter + "</a>" ).bind( "click", function( e ) { $el.remove(); });
+				$el = $( "<a href='#'>Remove " + counter + "</a>" ).bind( "click", function( e ) { $el[op](); grp.controlgroup( "refresh" ); } );
 				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 				$el.buttonMarkup();
 			} else if ( widgetType === "select" ) {
 				$el = $( "<label for='widget" + counter + "'>Select " + counter + "</label><select id='widget" + counter + "'><option id='widget" + counter + "' value='default'>Select " + counter + "</option><option value='remove'>Remove</option></select>" );
-				$( $el[ 1 ] ).bind( "change", function( e ) { $el.remove(); });
+				$( $el[ 1 ] ).bind( "change", function( e ) { $el[op](); grp.controlgroup( "refresh" ); });
 				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 				$( $el[ 1 ] ).selectmenu();
 			} else {
 				$el = $( "<label for='widget" + counter + "'>Remove " + counter + "</label><input type='checkbox' id='widget" + counter + "'></input>" );
-				$( $el[ 1 ] ).bind( "change", function( e ) { $el.remove(); });
+				$( $el[ 1 ] ).bind( "change", function( e ) { $el[op](); grp.controlgroup( "refresh" ); });
 				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 				$( $el[ 1 ] ).checkboxradio();
 			}
+
+			grp.controlgroup( "refresh" );
 		});
 		$( "#isHorizontal" ).bind( "change", function( e ) {
 			$( "#controlgroup" ).controlgroup( "option", "type", ( $( "#isHorizontal" ).is( ":checked" ) ? "horizontal" : "vertical" ) );
@@ -65,6 +70,14 @@
 
 	        				<input type="radio" name="radio-widget" id="checkbox" value="checkbox"  />
 	        				<label for="checkbox">Checkbox</label>
+	  				</fieldset>
+	  				<fieldset data-role="controlgroup" data-type="horizontal">
+	    				<legend>Operation</legend>
+	        				<input type="radio" name="radio-op" id="remove" value="remove" checked="checked"  />
+	        				<label for="remove">Remove</label>
+
+	        				<input type="radio" name="radio-op" id="hide" value="hide"  />
+	        				<label for="hide">Hide</label>
 	  				</fieldset>
 					<div data-role="fieldcontain">
 						<input id="isHorizontal" data-inline="true" type="checkbox"></input>
