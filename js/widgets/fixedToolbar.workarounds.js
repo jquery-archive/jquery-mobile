@@ -28,7 +28,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				} else if( ua.indexOf( "Android" ) > -1 ){
 					os = "android";
 				} else {
-					return
+					return;
 				}
 				//check os version if it dosent match one with workarounds return
 				if( os === "ios" && wkversion && wkversion > 533 && wkversion < 536 ) {
@@ -39,7 +39,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 					self._bindScrollWorkaround();
 					self._bindListThumbWorkaround();
 				} else {
-					return
+					return;
 				}
 			},
 
