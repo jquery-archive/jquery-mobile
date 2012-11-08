@@ -24,6 +24,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		icon: "arrow-r",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
+		corners: true,
+		shadow: true,
 		inset: false,
 		initSelector: ":jqmData(role='listview')"
 	},
@@ -32,11 +34,16 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var t = this,
 			listviewClasses = "";
 
-		listviewClasses += t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "";
+		listviewClasses += t.options.inset ? " ui-listview-inset" : "";
+		
+		if ( !!t.options.inset ) {
+			listviewClasses += t.options.corners ? " ui-corner-all" : "";
+			listviewClasses += t.options.shadow ? " ui-shadow" : "";
+		}
 
 		// create listview markup
 		t.element.addClass(function( i, orig ) {
-			return orig + " ui-listview " + listviewClasses;
+			return orig + " ui-listview" + listviewClasses;
 		});
 
 		t.refresh( true );
