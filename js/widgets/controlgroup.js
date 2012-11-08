@@ -43,6 +43,8 @@ define( [ "jquery",
 				self.options[ key ] = undefined;
 				self._setOption( key, value, true );
 			});
+
+			this._refresh( true );
 		},
 
 		_setOption: function( key, value ) {
@@ -76,6 +78,21 @@ define( [ "jquery",
 
 		container: function() {
 			return this.element.children( ".ui-controlgroup-controls" );
+		},
+
+		_refresh: function( create ) {
+			var els = this.element.find( ".ui-btn" ).not( ".ui-slider-handle" );
+
+			els.removeClass( "ui-first-child ui-last-child" );
+			if ( !create && this.options.excludeInvisible ) {
+				els = els.filter( ":visible" );
+			}
+
+			els.eq( 0 ).addClass( "ui-first-child" ).end().last().addClass( "ui-last-child" );
+		},
+
+		refresh: function() {
+			this._refresh( false );
 		}
 	});
 
