@@ -53,6 +53,7 @@ $files = array(
 	'widgets/controlgroup.js',
 	'jquery.mobile.links.js',
 	'widgets/fixedToolbar.js',
+	'widgets/fixedToolbar.workarounds.js',
 	'widgets/popup.js',
 	'jquery.mobile.zoom.js',
 	'jquery.mobile.zoom.iosorientationfix.js',
