@@ -5,9 +5,9 @@ ol.ui-listview, ol.ui-listview .ui-li-divider { counter-reset: listnumbering; }
 .ui-content .ui-listview-inset { margin: 1em 0; }
 .ui-collapsible-content .ui-listview-inset { margin: .5em 0; }
 .ui-listview, .ui-li { list-style: none; padding: 0; }
-.ui-li, .ui-li.ui-field-contain { display: block; margin: 0; position: relative; overflow: visible; text-align: left; border-width: 1px 0; }
+.ui-li, .ui-li.ui-field-contain { display: block; margin: 0; position: relative; overflow: visible; text-align: left; border-width: 1px 0 1px 0; }
 .ui-li.ui-btn, .ui-li.ui-field-contain, .ui-li-static { margin: 0 0 -1px; }
-.ui-listview-inset .ui-li.ui-btn, .ui-listview-inset .ui-li.ui-field-contain, .ui-listview-inset .ui-li-static { border-right-width: 1px; border-left-width: 1px; }
+.ui-listview-inset .ui-li.ui-btn, .ui-listview-inset .ui-li-divider, .ui-listview-inset .ui-li.ui-field-contain, .ui-listview-inset .ui-li-static { border-right-width: 1px; border-left-width: 1px; }
 .ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset) .ui-listview > .ui-li:last-child { border-bottom-width: 0; }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) > .ui-li:first-child { border-top-width: 0; }
 .ui-li .ui-btn-text a.ui-link-inherit { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
