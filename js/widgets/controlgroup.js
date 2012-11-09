@@ -7,6 +7,7 @@
 
 define( [ "jquery",
 	"../jquery.mobile.buttonMarkup",
+	"./addFirstLastClasses",
 	"../jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -82,19 +83,15 @@ define( [ "jquery",
 
 		_refresh: function( create ) {
 			var els = this.element.find( ".ui-btn" ).not( ".ui-slider-handle" );
-
-			els.removeClass( "ui-first-child ui-last-child" );
-			if ( !create && this.options.excludeInvisible ) {
-				els = els.filter( ":visible" );
-			}
-
-			els.eq( 0 ).addClass( "ui-first-child" ).end().last().addClass( "ui-last-child" );
+			this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
 		},
 
 		refresh: function() {
 			this._refresh( false );
 		}
 	});
+
+	$.widget( "mobile.controlgroup", $.mobile.controlgroup, $.mobile.behaviors.addFirstLastClasses );
 
 	// TODO: Implement a mechanism to allow widgets to become enhanced in the
 	// correct order when their correct enhancement depends on other widgets in
