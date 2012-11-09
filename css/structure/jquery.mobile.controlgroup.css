@@ -39,7 +39,8 @@
 .ui-controlgroup .ui-controlgroup-controls,
 .ui-controlgroup .ui-radio,
 .ui-controlgroup .ui-checkbox,
-.ui-controlgroup .ui-select {
+.ui-controlgroup .ui-select,
+.ui-controlgroup li {
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
