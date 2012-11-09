@@ -80,20 +80,18 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.theme = $.mobile.getInheritedTheme( $el, "c" );
 			}
 		}
-		
-		if ( !!o.inset ) {
-			var collapsibleClasses = "ui-collapsible-inset";
-			if ( !!o.corners ) {
-				collapsibleClasses += " ui-corner-all";
-			}
-			if ( o.contentTheme ) {
-				collapsibleClasses += " ui-collapsible-themed-content";
-			}
+
+		var collapsibleClasses = "";
+		!!o.inset ? collapsibleClasses += "ui-collapsible-inset" : "";
+		!!o.corners && !!o.inset ? collapsibleClasses += " ui-corner-all" : "";
+		if ( o.contentTheme ) {
+			collapsibleClasses += " ui-collapsible-themed-content";
+			collapsibleContent.addClass( "ui-body-" + o.contentTheme );
+		}
+		if ( collapsibleClasses !== "" ) {
 			collapsible.addClass( collapsibleClasses );
 		}
 		
-		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
-
 		collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon || "plus";
 		expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon || "minus";
 
