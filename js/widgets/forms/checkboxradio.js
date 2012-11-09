@@ -36,8 +36,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			uncheckedState = inputtype + "-off",
 			icon = uncheckedState,
 			iconpos = inheritAttr( input, "iconpos" ),
-			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
-			checkedClass = "ui-" + checkedState + activeBtn,
+			horizontal = input.parents( ":jqmData(type='horizontal')" ).length,
+			activeBtn = $.mobile.activeBtnClass,
+			checkedClass = "ui-" + checkedState,
 			uncheckedClass = "ui-" + uncheckedState,
 			checkedicon = icon ? checkedState : undefined,
 			uncheckedicon = icon ? uncheckedState : undefined;
@@ -50,6 +51,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		$.extend( this, {
 			label: label,
 			inputtype: inputtype,
+			horizontal: horizontal,
+			activeBtn: activeBtn,
 			checkedClass: checkedClass,
 			uncheckedClass: uncheckedClass,
 			checkedicon: checkedicon,
@@ -182,11 +185,15 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	refresh: function() {
 		var input = this.element[0],
 			label = this.label;
+			
+		if ( this.horizontal ) {
+			this.checkedClass = this.checkedClass + " " + this.activeBtn;
+		}
 
 		if ( input.checked ) {
 			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass ).buttonMarkup( { icon: this.checkedicon } );
 		} else {
-			label.removeClass( this.checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( { icon: this.uncheckedicon } );;
+			label.removeClass( this.checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( { icon: this.uncheckedicon } );
 		}
 
 		if ( input.disabled ) {
