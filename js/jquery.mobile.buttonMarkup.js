@@ -115,8 +115,6 @@ $.fn.buttonMarkup = function( options ) {
 			}
 		}
 
-		innerClass += o.corners ? " ui-btn-corner-all" : "";
-
 		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
 			el.attr( "title", el.getEncodedText() );
 		}
@@ -127,7 +125,6 @@ $.fn.buttonMarkup = function( options ) {
 		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
-
 		buttonText.className = textClass;
 		if ( !buttonElements ) {
 			buttonInner.appendChild( buttonText );
