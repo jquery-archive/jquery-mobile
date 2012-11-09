@@ -6,9 +6,8 @@
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
 .ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
 .ui-controlgroup li { list-style: none; }
-/* we need a high level of specificity here to override checkboxradio defaults */
-.ui-controlgroup.ui-controlgroup-vertical .ui-controlgroup-controls .ui-btn { margin: 0 0 -1px; }
 
+.ui-controlgroup .ui-btn { margin: 0; }
 .ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
 .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
 .ui-controlgroup-horizontal .ui-btn-icon-notext .ui-btn-inner { width: 18px; }
@@ -16,85 +15,53 @@
 .ui-header .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner,
 .ui-footer .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 16px; padding: .55em 11px .5em 11px; }
 .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; right: 50%; margin: -9px -9px 0 0; }
+.ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
+.ui-controlgroup-horizontal.ui-mini .ui-btn-inner { height: 16px; line-height: 16px; }
+.ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px; }
 
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { content: ""; display: table; }
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after { clear: both; }
 .ui-controlgroup-horizontal .ui-controlgroup-controls { display: inline-block; vertical-align: middle; zoom: 1; }
-.ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
-.ui-controlgroup-horizontal.ui-mini .ui-btn-inner { height: 16px; line-height: 16px; }
-.ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select,
-.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
-.ui-controlgroup-horizontal .ui-select .ui-btn,
-.ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn { float: none; margin: 0; }
-.ui-controlgroup-horizontal .ui-controlgroup-last, .ui-controlgroup-horizontal .ui-select:last-child,
-.ui-controlgroup-horizontal .ui-checkbox:last-child, .ui-controlgroup-horizontal .ui-radio:last-child { margin-right: 0; }
-.ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls > .ui-btn, .ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-btn,
+.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio,
+.ui-controlgroup-horizontal .ui-select { float: left; clear: none; margin: 0; }
 
-/* Corner styling */
-.ui-controlgroup .ui-controlgroup-controls {
-	-webkit-border-radius: inherit;
-	border-radius: inherit;
-}
+.ui-controlgroup-vertical .ui-btn {	border-bottom-width: 0; }
+.ui-controlgroup-vertical .ui-btn.ui-last-child { border-bottom-width: 1px; }
+.ui-controlgroup-horizontal .ui-btn { border-right-width: 0; }
+.ui-controlgroup-horizontal .ui-btn.ui-last-child {	border-right-width: 1px; }
+
 .ui-controlgroup .ui-btn-corner-all {
 	-webkit-border-radius: 0;
 	border-radius: 0;
 }
-.ui-controlgroup-vertical .ui-radio:first-child,
-.ui-controlgroup-vertical .ui-radio:first-child .ui-btn,
-.ui-controlgroup-vertical .ui-checkbox:first-child,
-.ui-controlgroup-vertical .ui-checkbox:first-child .ui-btn,
-.ui-controlgroup-vertical .ui-select:first-child,
-.ui-controlgroup-vertical .ui-select:first-child .ui-btn,
-.ui-controlgroup-vertical label:first-child + .ui-select,
-.ui-controlgroup-vertical label:first-child + .ui-select .ui-btn,
-.ui-controlgroup-vertical li:first-child,
-.ui-controlgroup-vertical .ui-btn:first-child {
+.ui-controlgroup .ui-controlgroup-controls,
+.ui-controlgroup .ui-radio,
+.ui-controlgroup .ui-checkbox,
+.ui-controlgroup .ui-select {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+.ui-controlgroup-vertical .ui-btn.ui-first-child {
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 }
-.ui-controlgroup-vertical .ui-radio:last-child,
-.ui-controlgroup-vertical .ui-radio:last-child .ui-btn,
-.ui-controlgroup-vertical .ui-checkbox:last-child,
-.ui-controlgroup-vertical .ui-checkbox:last-child .ui-btn,
-.ui-controlgroup-vertical .ui-select:last-child,
-.ui-controlgroup-vertical .ui-select:last-child .ui-btn,
-.ui-controlgroup-vertical label:last-child + .ui-select,
-.ui-controlgroup-vertical label:last-child + .ui-select .ui-btn,
-.ui-controlgroup-vertical li:last-child,
-.ui-controlgroup-vertical .ui-btn:last-child {
+.ui-controlgroup-vertical .ui-btn.ui-last-child {
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
-.ui-controlgroup-horizontal .ui-radio:first-child,
-.ui-controlgroup-horizontal .ui-radio:first-child .ui-btn,
-.ui-controlgroup-horizontal .ui-checkbox:first-child,
-.ui-controlgroup-horizontal .ui-checkbox:first-child .ui-btn,
-.ui-controlgroup-horizontal .ui-select:first-child,
-.ui-controlgroup-horizontal .ui-select:first-child .ui-btn,
-.ui-controlgroup-horizontal label:first-child + .ui-select,
-.ui-controlgroup-horizontal label:first-child + .ui-select .ui-btn,
-.ui-controlgroup-horizontal li:first-child,
-.ui-controlgroup-horizontal .ui-btn:first-child {
+.ui-controlgroup-horizontal .ui-btn.ui-first-child {
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 }
-.ui-controlgroup-horizontal .ui-radio:last-child,
-.ui-controlgroup-horizontal .ui-radio:last-child .ui-btn,
-.ui-controlgroup-horizontal .ui-checkbox:last-child,
-.ui-controlgroup-horizontal .ui-checkbox:last-child .ui-btn,
-.ui-controlgroup-horizontal .ui-select:last-child,
-.ui-controlgroup-horizontal .ui-select:last-child .ui-btn,
-.ui-controlgroup-horizontal label:last-child + .ui-select,
-.ui-controlgroup-horizontal label:last-child + .ui-select .ui-btn,
-.ui-controlgroup-horizontal li:last-child,
-.ui-controlgroup-horizontal .ui-btn:last-child {
+.ui-controlgroup-horizontal .ui-btn.ui-last-child {
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 	-webkit-border-bottom-right-radius: inherit;
