@@ -63,6 +63,7 @@ define( [ "jquery",
 			this.element
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
 				.addClass( "ui-controlgroup-" + value );
+			this._refresh( false );
 		},
 
 		_setCorners: function( value ) {
@@ -83,6 +84,7 @@ define( [ "jquery",
 
 		_refresh: function( create ) {
 			var els = this.element.find( ".ui-btn" ).not( ".ui-slider-handle" );
+			this.element.find( ":mobile-checkboxradio" ).checkboxradio( "refresh" );
 			this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
 		},
 
