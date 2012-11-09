@@ -49,6 +49,21 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		t.refresh( true );
 	},
 
+	_addFirstLastClasses: function( create ) {
+		var lis = this.element.children( "li" ),
+			visiblelis;
+
+		lis.removeClass( "ui-first-child ui-last-child" );
+		// At create time and when autodividers calls refresh the li are not visible yet so we need to rely on .ui-screen-hidden
+		visiblelis = create || lis.filter( ":visible" ).length === 0 ? lis.not( ".ui-screen-hidden" ) : lis.filter( ":visible" );
+
+		visiblelis.eq( 0 ).addClass( "ui-first-child" ).end().last().addClass( "ui-last-child" );
+					
+		if ( !create ) {
+			this.element.trigger( "updatelayout" );
+		}
+	},
+
 	// This is a generic utility method for finding the first
 	// node with a given nodeName. It uses basic DOM traversal
 	// to be fast and is meant to be a substitute for simple
@@ -278,7 +293,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		this._addThumbClasses( li );
 		this._addThumbClasses( $list.find( ".ui-link-inherit" ) );
-
+		
+		this._addFirstLastClasses( create );
 		// autodividers binds to this to redraw dividers after the listview refresh
 		this._trigger( "afterrefresh" );
 	},
