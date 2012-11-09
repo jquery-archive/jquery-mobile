@@ -15,22 +15,24 @@
 		$( "#prepend,#append", e.target ).bind( "click", function( e ) {
 			counter++;
 			var widgetType = $( "[name='radio-widget']:checked" ).attr( "id" ),
-				grp = $( "#controlgroup" ),
-				op = $( "[name='radio-op']:checked" ).attr( "id" ),
-				$el;
+				grp = $( "#controlgroup" ), $el,
+				action = function() {
+					var op = $( "[name='radio-op']:checked" ).attr( "id" );
+					$el[ op ](); grp.controlgroup( "refresh" );
+				};
 
 			if ( widgetType === "link" ) {
-				$el = $( "<a href='#'>Remove " + counter + "</a>" ).bind( "click", function( e ) { $el[op](); grp.controlgroup( "refresh" ); } );
+				$el = $( "<a href='#'>Remove " + counter + "</a>" ).bind( "click", action );
 				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 				$el.buttonMarkup();
 			} else if ( widgetType === "select" ) {
 				$el = $( "<label for='widget" + counter + "'>Select " + counter + "</label><select id='widget" + counter + "'><option id='widget" + counter + "' value='default'>Select " + counter + "</option><option value='remove'>Remove</option></select>" );
-				$( $el[ 1 ] ).bind( "change", function( e ) { $el[op](); grp.controlgroup( "refresh" ); });
+				$( $el[ 1 ] ).bind( "change", action);
 				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 				$( $el[ 1 ] ).selectmenu();
 			} else {
 				$el = $( "<label for='widget" + counter + "'>Remove " + counter + "</label><input type='checkbox' id='widget" + counter + "'></input>" );
-				$( $el[ 1 ] ).bind( "change", function( e ) { $el[op](); grp.controlgroup( "refresh" ); });
+				$( $el[ 1 ] ).bind( "change", action );
 				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
 				$( $el[ 1 ] ).checkboxradio();
 			}
@@ -78,6 +80,9 @@
 
 	        				<input type="radio" name="radio-op" id="hide" value="hide"  />
 	        				<label for="hide">Hide</label>
+
+	        				<input type="radio" name="radio-op" id="width" value="width"  />
+	        				<label for="width">Nothing</label>
 	  				</fieldset>
 					<div data-role="fieldcontain">
 						<input id="isHorizontal" data-inline="true" type="checkbox"></input>
