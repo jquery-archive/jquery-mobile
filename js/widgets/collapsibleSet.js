@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./collapsible" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastClasses" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -64,25 +64,19 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	},
 
 	_refresh: function( create ) {
-		var $el = this.element,
-			o = this.options,
-			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
+		var collapsiblesInSet = this.element.children( ":jqmData(role='collapsible')" );
 
 		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
-		collapsiblesInSet.removeClass( "ui-first-child ui-last-child" );
-		if ( !create ) {
-			collapsiblesInSet = collapsiblesInSet.filter( ":visible" );
-		}
-		collapsiblesInSet
-			.eq( 0 ).addClass( "ui-first-child" )
-			.end()
-			.last().addClass( "ui-last-child" );
+
+		this._addFirstLastClasses( collapsiblesInSet, this._getVisibles( collapsiblesInSet, create ), create );
 	},
 
 	refresh: function() {
 		this._refresh( false );
 	}
 });
+
+$.widget( "mobile.collapsibleset", $.mobile.collapsibleset, $.mobile.behaviors.addFirstLastClasses );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
