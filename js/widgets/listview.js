@@ -55,7 +55,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		lis.removeClass( "ui-first-child ui-last-child" );
 		// At create time and when autodividers calls refresh the li are not visible yet so we need to rely on .ui-screen-hidden
-		visiblelis = create || lis.filter( ":visible" ).length === 0 ? lis.not( ".ui-screen-hidden" ) : lis.filter( ":visible" );
+		if ( create ) {
+			visiblelis = lis.not( ".ui-screen-hidden" );
+		} else {
+			visiblelis = lis.filter( ":visible" );
+			if ( visiblelis.length === 0 ) {
+				visiblelis = lis.not( ".ui-screen-hidden" );
+			}
+		}
 
 		visiblelis.eq( 0 ).addClass( "ui-first-child" ).end().last().addClass( "ui-last-child" );
 					
