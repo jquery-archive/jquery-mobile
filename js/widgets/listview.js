@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "./page", "./page.sections" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "./page", "./page.sections", "./addFirstLastClasses" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -47,28 +47,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		});
 
 		t.refresh( true );
-	},
-
-	_addFirstLastClasses: function( create ) {
-		var lis = this.element.children( "li" ),
-			visiblelis;
-
-		lis.removeClass( "ui-first-child ui-last-child" );
-		// At create time and when autodividers calls refresh the li are not visible yet so we need to rely on .ui-screen-hidden
-		if ( create ) {
-			visiblelis = lis.not( ".ui-screen-hidden" );
-		} else {
-			visiblelis = lis.filter( ":visible" );
-			if ( visiblelis.length === 0 ) {
-				visiblelis = lis.not( ".ui-screen-hidden" );
-			}
-		}
-
-		visiblelis.eq( 0 ).addClass( "ui-first-child" ).end().last().addClass( "ui-last-child" );
-					
-		if ( !create ) {
-			this.element.trigger( "updatelayout" );
-		}
 	},
 
 	// This is a generic utility method for finding the first
@@ -301,7 +279,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		this._addThumbClasses( li );
 		this._addThumbClasses( $list.find( ".ui-link-inherit" ) );
 		
-		this._addFirstLastClasses( create );
+		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh
 		this._trigger( "afterrefresh" );
 	},
@@ -401,6 +379,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		return $( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey + "')" );
 	}
 });
+
+$.widget( "mobile.listview", $.mobile.listview, $.mobile.behaviors.addFirstLastClasses );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
