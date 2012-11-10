@@ -31,7 +31,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon,
 			expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon,
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
-			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" );
+			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
+			collapsibleClasses = "";
 
 		// Replace collapsibleHeading if it's a legend
 		if ( collapsibleHeading.is( "legend" ) ) {
@@ -81,9 +82,12 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			}
 		}
 
-		var collapsibleClasses = "";
-		!!o.inset ? collapsibleClasses += "ui-collapsible-inset" : "";
-		!!o.corners && !!o.inset ? collapsibleClasses += " ui-corner-all" : "";
+		if ( !!o.inset ) {
+			collapsibleClasses += " ui-collapsible-inset";
+			if ( !!o.corners ) {
+				collapsibleClasses += " ui-corner-all" ;
+			}
+		}
 		if ( o.contentTheme ) {
 			collapsibleClasses += " ui-collapsible-themed-content";
 			collapsibleContent.addClass( "ui-body-" + o.contentTheme );
