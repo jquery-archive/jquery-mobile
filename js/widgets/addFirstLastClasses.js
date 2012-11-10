@@ -3,7 +3,7 @@
 //>>label: addFirstLastClasses
 //>>group: Widgets
 
-define( [ "jquery", "../../jquery.mobile.core" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
