@@ -84,7 +84,9 @@ define( [ "jquery",
 
 		_refresh: function( create ) {
 			var els = this.element.find( ".ui-btn" ).not( ".ui-slider-handle" );
-			this.element.find( ":mobile-checkboxradio" ).checkboxradio( "refresh" );
+			if ( $.mobile.checkboxradio ) {
+				this.element.find( ":mobile-checkboxradio" ).checkboxradio( "refresh" );
+			}
 			this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
 		},
 
