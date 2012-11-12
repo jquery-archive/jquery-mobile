@@ -599,7 +599,7 @@
 		setup: function() {
 			var self = this;
 			this._refreshCornersCount = 0;
-			this._refreshCornersFn = $.mobile.listview.prototype._refreshCorners;
+			this._refreshCornersFn = $.mobile.listview.prototype._addFirstLastClasses;
 
 			this.startTest = function() {
 				return this._refreshCornersCount === 1;
@@ -607,7 +607,7 @@
 
 			// _refreshCorners is the last method called in the filter loop
 			// so we count the number of times _refreshCorners gets invoked to stop the test
-			$.mobile.listview.prototype._refreshCorners = function() {
+			$.mobile.listview.prototype._addFirstLastClasses = function() {
 				self._refreshCornersCount += 1;
 				self._refreshCornersFn.apply( this, arguments );
 				if ( self.startTest() ) {
