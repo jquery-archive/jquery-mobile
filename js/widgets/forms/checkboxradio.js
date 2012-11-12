@@ -177,23 +177,15 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	refresh: function() {
 		var input = this.element[ 0 ],
-			horizontal = this.element.parents( ".ui-controlgroup-horizontal" ).length,
 			active = " " + $.mobile.activeBtnClass,
-			checkedClass = this.checkedClass + ( horizontal ? active : "" ),
-			icon, label = this.label;
+			checkedClass = this.checkedClass + ( this.element.parents( ".ui-controlgroup-horizontal" ).length ? active : "" ),
+			label = this.label;
 
 		if ( input.checked ) {
-			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass );
-			icon = this.checkedicon;
+			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass ).buttonMarkup( { icon: this.checkedicon } );
 		} else {
-			label.removeClass( checkedClass ).addClass( this.uncheckedClass );
-			icon = this.uncheckedicon;
+			label.removeClass( checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( { icon: this.uncheckedicon } );
 		}
-		if ( horizontal ) {
-			icon = undefined;
-		}
-
-		label.buttonMarkup( { icon: icon } );
 
 		if ( input.disabled ) {
 			this.disable();
