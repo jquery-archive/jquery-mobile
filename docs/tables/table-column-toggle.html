@@ -31,14 +31,14 @@
 	      chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. </p>
 	
 		
-         <table data-role="table" id="movie-table" data-mode="columntoggle" class="movie-toggle">
+         <table data-role="table" id="movie-table" data-mode="columntoggle" class="breakpoint-columntoggle-std">
               <thead>
                 <tr>
-                  <th data-priority="1">Rank</th>
+                  <th data-priority="2">Rank</th>
                   <th>Movie Title</th>
-                  <th data-priority="2">Year</th>
-                  <th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-                  <th data-priority="4">Reviews</th>
+                  <th data-priority="3">Year</th>
+                  <th data-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+                  <th data-priority="5">Reviews</th>
                 </tr>
               </thead>
               <tbody>
@@ -161,139 +161,92 @@
 				}
 			</style>
 
-			<h3>Using column toggle mode</h3>
-			<p>The plugin automates a few key things: injecting the column chooser button, and generating the popup with pick list of column names. The list of columns in the menu is populated by parsing the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements found in the table. It also correctly sets the check state for each column checkbox to match the columns currently visible to sync these with what's applied via media queries.</p>
+			
+			
+			<h3>Applying column chooser mode to a table</h3>
 
-			<p>The automatic column hiding is accomplished added adding media queries in your custom stylesheet that hide or show certain column priorities at various screen widths. Since each site will have different content and column configurations, we provide a simple media query block that you can copy, paste and customize for each project. This is explained in detail below.</p>
+			<p>The column chooser mode requires a <code>table</code> element with two attributes: <code>data-role=&quot;table&quot;</code> and <code>data-mode=&quot;columntoggle&quot;</code>. An <code>ID</code> attribute is also required on the table to associate it with the column chooser popup menu.</p>
 
-			 <p>The column preferences take precedence over the default class priority. Because of the flexibility, it's possible for users to introduce horizontal scrolling if the data in each column is long or if many columns are selected to be shown on a smaller screen. </p>
+			<pre><code>&lt;table <strong>data-role=&quot;table&quot; data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;</strong>&gt;</code></pre>
+						
+			
+			
+			<h3>How column toggle mode works</h3>
+			<p>The plugin automates a few key things: it injects the column chooser button, and generates the popup with check list of columns that can be hidden or shown by the user. The list of columns in the chooser menu is populated by parsing the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements. Only headers that have a <code>data-priority</code> attribute are included in the column chooser; headers without this attribute won't made available in the chooser to allow developers to identify critical columns that shouldn't be hidden. If columns are hidden via responsive media queries, these will be unchecked in the chooser to reflect the current column visibility.</p>
+
+			<p>The automatic column hiding behavior is accomplished by CSS media queries that hide or show columns based on priority levels at various screen widths. Since each site will have different content and column configurations, we provide a simple media query block that you can copy, paste and customize for each project. This is explained in detail below.</p>
+
+			 <p>The priorities assigned to headers and media queries used to hide columns act as a sensible default for showing the most important columns that will fit on a device. The column chooser menu gives the end user the ability to override these default and choose which columns they want to see. These preference take precedence over the priority mappings so if a column is manually checked, it will remain visible across all screen widths until the page is refreshed. </p>
+			<p>Because of the flexibility this plugin provides, it's possible for users to introduce horizontal scrolling if the data in each column is long or if many columns are selected to be shown on a smaller screen. </p>
 
 			<h3>Setting column priority</h3>
 
-			<p>The table works by hiding and showing columns based on two inputs: available screen width by applying media queries or by the user checking and unchecking which columns to display in a column picker popup. To begin, add the <code>data-mode=&quot;columntoggle&quot;</code> attribute to the table to switch it to the column toggle mode.</p>
-			
-			<pre><code>&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;columntoggle&quot;</strong>&gt;			</code></pre>
-			
-      <p>Note that in the column toggle mode, you must add an <code>ID</code> attribute to your table, so that it properly associates with the popup menu.</p>
-
-			
-			<p>Next, add <code>data-priority</code> attributes to each of the table headers of columns you want to responsively display and assign a priority (1 = highest, 6 = lowest). Any table header given a priority will be available in the column picker menu. </p>
+			<p>The table works by hiding and showing columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to each of the table headers of columns you want to responsively display and assign a priority (1 = highest, 6 = lowest). Any table header given a priority will be available in the column picker menu. </p>
 			<p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. This will make the column visible at all widths and won't be available in the column chooser menu.</p>
 
 <pre><code>&lt;th&gt;I&#x27;m am critical and can&#x27;t be removed&lt;/th&gt;
-&lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m important&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m very important&lt;/th&gt;
 &lt;th <strong>data-priority=&quot;3&quot;</strong>&gt;I&#x27;m somewhat&lt;/th&gt;
 &lt;th <strong>data-priority=&quot;5&quot;</strong>&gt;I&#x27;m less important&lt;/th&gt;
 </code></pre>
 
-		<p>Behind the scenes, the plugin will apply classes to each cell that map to the priority set in the data attribute on the header. So a table heading with a <code>data-priority="3"</code> will result in every cell in that column being assigned a <code>ui-table-priority-3</code> class once enhanced. These classes are then used to create some simple media queries to hide and show columns based on screen width (see below).</p>
+		
+		<p>Behind the scenes, the plugin will apply classes to each cell that map to the priority set in the data attribute on the header. For example, if a table heading has a <code>data-priority="3"</code> attribute, every cell in that column will assigned a <code>ui-table-priority-<strong>3</strong></code> class once enhanced. These classes are then used in media queries to hide and show columns based on screen width (see below).</p>
 	
 <pre><code>&lt;td <strong>class=&quot;ui-table-priority-3&quot;</strong>&gt;97%&lt;/td&gt;
 </code></pre>
 
+		<h3>Customizing priority names</h3>
 	
-		<p>Note that you may use whatever priority naming convention you want because the script will generate classes based on the string added to the <code>data-priority</code> attribute. For example, if a priority of <code>critical</code> was added to the heading, a class of <code>ui-table-priority-critial</code> will be applied to each cell in that column. You can then style against those classes. You will need to review the default table classes in the widget if you decide to use custom priority names and copy over key styles.</p> 
+		<p>You may use any priority naming convention and assign as many (or few) levels of priority for the columns. The plugin  simply generates class names based on the values in the <code>data-priority</code> attribute so even though we default to using a numeric system of 1-6, any naming convention is possible. For example, if a priority of <code>data-priority="critical"</code> is added to the heading, a class of <code>ui-table-priority-critial</code> will be applied to each cell in that column. If a priority is assigned, the column will be made available for the toggling in the column menu and adds the classes to each cell, the rest of the styling and media query creation is up to you write in your custom stylesheet. </p> 
 	    
 
-    <h3>Options</h3>
-    <p>The columntoggle table comes with several options:</p>
-
-    <ul>
-      <li><code>columnBtnTheme</code> default: null</li>
-      <li><code>columnPopupTheme</code> default: null</li>
-      <li><code>columnBtnText</code> default: "Columns..."</li>
-    </ul>
-
-    <p>The columntoggle mode also has an option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
-
-      <ul>
-        <li><code>classes.popup</code> default: "ui-table-columntoggle-popup"</li>
-        <li><code>classes.columnBtn</code> default: "ui-table-columntoggle-btn"</li>
-        <li><code>classes.priorityPrefix</code> default: "ui-table-priority-"</li>
-        <li><code>classes.columnToggleTable</code> default: "ui-table-columntoggle"</li>
-      </ul>
-
-
-      <h3>Methods</h3>
-    <p>The columntoggle table comes with one method: <code>refresh</code>, which updates the checkboxes in the menu to represent the columns that are currently visible.</p>
-
-<pre><code>$( myTable ).table( "refresh" );</code></pre>
-
-	    
+   
 			<h3>Setting media queries for column auto-hiding</h3>
 			
 			<p>The framework does not ship with the media query  based styles to autohide columns in the structure CSS file. We do this to make it easier for developers to customize the media query widths for each priority level. We recommend that you simply copy the following style block into your custom style overrides and adjust the min-width values that specify the widths where various priority columns should hide. From there, you can choose which widths to show and hide columns based on your content.</p>
 			
-			<p>The styles for the all priority columns start as hidden by default in the structure stylesheet:</p>
-
-<pre><code>@media only all {
- th.ui-table-priority-6,
- td.ui-table-priority-6,
- th.ui-table-priority-5,
- td.ui-table-priority-5,
- th.ui-table-priority-4,
- td.ui-table-priority-4,
- th.ui-table-priority-3,
- td.ui-table-priority-3,
- th.ui-table-priority-2,
- td.ui-table-priority-2,
- th.ui-table-priority-1,
- td.ui-table-priority-1 {
-   display: none;
- }
-}
-</code></pre>
-		
+			<p>The styles for the all priority columns (1-6) start as <code>display: none;</code> in the structure stylesheet since we're taking a mobile-first approach to our styles. This means that only columns that should be persistent are visible in the styles to start.</p>
 			
-			<p>The media queries that add the responsive behavior to show and hide columns by priority really need to be customized for the needs of your project's content. Simply copy the style block below, paste it into your custom styles and tweak the media query widths to suit your needs.</p>
-			<p>Each media query is written using <code>min-width</code> widths so they build on top of each other. The widths are set in ems so they respond to font size changes. To calculate a pixel withs in em's, divide the target width by 16 (pixels) - it's that easy.</p>
-			<p>Inside each media query, we are overriding the <code>display:none;</code> style properties set on all the priority columns in the basic styles to <code>display: table-cell;</code> so they become visible. The priority 1 columns are shown first, at widths above <code>20em</code> (320px), then priority 2 kicks in above <code>30em</code> (480px) and so on up to wide desktop widths with priority 6 at <code>75em</code> (1,200px). These are just the defaults, so feel free to change these breakpoints in your stylesheet and choose how many priority levels you'd like to use.</p>
+			<p>Media queries add the responsive behavior to show and hide columns by priority. Each media query is written using <code>min-width</code> widths so they build on top of each other. The widths are set in ems so they respond to font size changes. To calculate a pixel withs in em's, divide the target width by 16 (pixels) - it's that easy.</p>
+			<p>Inside each media query, we are overriding the <code>display:none;</code> style properties set on all the priority columns in the basic styles to <code>display: table-cell;</code> so they become visible again and act as a table. The priority 1 columns are shown first, at widths above <code>20em</code> (320px), then priority 2 kicks in above <code>30em</code> (480px) and so on up to wide desktop widths with priority 6. Feel free to change these breakpoints in your stylesheet and choose how many priority levels you'd like to use.</p>
 
 
 <pre><code>
-/* Show priority 1 at 320px (20em x 16px) */ 
+<strong>/* Show priority 1 at 320px (20em x 16px) */</strong> 
 @media screen and (min-width: 20em) {
    th.ui-table-priority-1,
    td.ui-table-priority-1 {
      display: table-cell;
    }
 }
-/* Show priority 2 at 480px (30em x 16px) */ 
+<strong>/* Show priority 2 at 480px (30em x 16px) */</strong> 
 @media screen and (min-width: 30em) {
    th.ui-table-priority-2,
    td.ui-table-priority-2 {
      display: table-cell;
    }
 }
-/* Show priority 3 at 640px (40em x 16px) */ 
-@media screen and (min-width: 40em) {
-   th.ui-table-priority-3,
-   td.ui-table-priority-3 {
-     display: table-cell;
-   }
-}
-/* Show priority 4 at 800px (50em x 16px) */ 
-@media screen and (min-width: 50em) {
-  th.ui-table-priority-4,
-  td.ui-table-priority-4 {
-     display: table-cell;
-   }
-}
-/* Show priority 5 at 960px (60em x 16px) */ 
-@media screen and (min-width: 60em) {
-  th.ui-table-priority-5,
-  td.ui-table-priority-5 {
-     display: table-cell;
-   }
-}
-/* Show priority 6 at 1200 (75em x 16px) */ 
-@media screen and (min-width: 75em) {
-  th.ui-table-priority-6,
-  td.ui-table-priority-6 {
-     display: table-cell;
-   }
-}
+...more breakpoints...
 </code></pre>
+
+			<h3>Breakpoint presets</h3>
+			<p>Even though we strongly encourage you to write breakpoints yourself, the framework includes a set of pre-configured breakpoints for each of the six priority levels that you can use if they happen work well for your content. These breakpoints can applied by adding a <code>class="breakpoint-columntoggle-std"</code> to the table element. Here is an example of a table element with this class added:</p>
+
+			<pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;breakpoint-columntoggle-std&quot;</strong> data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;&gt;</code></pre>
+
+			<p>The six preset breakpoints classes included in the column toggle stylesheet use regular increments of 10em (160 pixels). If these preset breakpoints don't work for your content and layout needs, we recommend that you create custom breakpoints to fine tune the styles. These will be applied when you assign the priority attributes to each header: </p>
+			<dl>
+				<dt><code>data-priority="1"</code></dt><dd> Displays the column at 320px (20em) </dd>
+				<dt><code>data-priority="2"</code></dt><dd> Displays the column at 480px (30em) </dd>
+				<dt><code>data-priority="3"</code></dt><dd> Displays the column at 640px (40em) </dd>
+				<dt><code>data-priority="4"</code></dt><dd> Displays the column at 800px (50em) </dd>
+				<dt><code>data-priority="5"</code></dt><dd> Displays the column at 960px (60em) </dd>
+				<dt><code>data-priority="6"</code></dt><dd> Displays the column at 1,120px (70em) </dd>
+			</dl>
+
+
+
 
 			<h3>How the column menu classes work</h3>
 
@@ -313,7 +266,33 @@
 			<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser. See an example of <a href="financial-grouped-columns.html">grouped column table</a>.</p>
 			
 
-            
+            <h2>Options</h2>
+		    <p>The columntoggle table comes with several options:</p>
+
+		    <dl>
+		      <dt><code>columnBtnTheme</code> default: null</dt><dd>Sets the theme for the column chooser button. Set to any valid swatch letter in your theme.</dd>
+		      <dt><code>columnPopupTheme</code> default: null</dt><dd>Sets the theme for the column chooser popup checkboxes. Set to any valid swatch letter in your theme.</dd>
+		      <dt><code>columnBtnText</code> default: "Columns..."</dt><dd>Sets the text for the for the column chooser button.</dd>
+		    </dl>
+
+		    <p>The columntoggle mode also has an option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
+
+		      <dl>
+				<dt><code>classes.columnToggleTable</code> default: "ui-table-columntoggle"</dt>Class assigned to the table.        
+				<dt><code>classes.columnBtn</code> default: "ui-table-columntoggle-btn"</dt><dd>Class assigned to the column toggle button.</dd>
+				<dt><code>classes.popup</code> default: "ui-table-columntoggle-popup"</dt><dd>Class assigned to the column chooser popup.</dd>
+
+				<dt><code>classes.priorityPrefix</code> default: "ui-table-priority-"</dt>Class prefix added to each cell in a column. This string is appended to the priority value set on the headers.
+			</dl>
+
+
+		    <h2>Methods</h2>
+		    <p>The columntoggle table has one method: 
+			<dl>
+				<dt><code>refresh</code></dt><dd>Updates the labels in the cells.<pre><code>$( myTable ).table( "refresh" );</code></pre></dd>
+			</dl>
+
+		
 
 
       

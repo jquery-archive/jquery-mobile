@@ -32,7 +32,7 @@
 		display: inline-block; 
 		margin: -.4em 1em -.4em -.4em;
 	}
-	/* For grouped headers, have a different style can have a different style */ 
+	/* For grouped headers, have a different style to visually separate the levels by classing the first label in each col group */ 
 	.ui-table-reflow th .ui-table-cell-label-top,
 	.ui-table-reflow td .ui-table-cell-label-top {
 		display: block;
@@ -45,4 +45,43 @@
 }
 
 
+
+/* Media query to show as a standard table at 560px (35em x 16px) or wider */ 
+@media ( min-width: 35em ) {
+	/* Show the table header rows */ 
+	.breakpoint-stack-std td,
+	.breakpoint-stack-std th,
+	.breakpoint-stack-std tbody th,
+	.breakpoint-stack-std tbody td,
+	.breakpoint-stack-std thead td,
+	.breakpoint-stack-std thead th {
+		display: table-cell;
+		margin: 0;
+	}
+	/* Hide the labels in each cell */ 
+	.breakpoint-stack-std td .ui-table-cell-label,
+	.breakpoint-stack-std th .ui-table-cell-label { 
+		display: none;
+	}
+}
+
+
+/* Media query to show as a standard table at 768px (48em x 16px) or wider */ 
+@media ( min-width: 48em ) {
+	/* Show the table header rows */ 
+	.breakpoint-stack-wide td,
+	.breakpoint-stack-wide th,
+	.breakpoint-stack-wide tbody th,
+	.breakpoint-stack-wide tbody td,
+	.breakpoint-stack-wide thead td,
+	.breakpoint-stack-wide thead th {
+		display: table-cell;
+		margin: 0;
+	}
+	/* Hide the labels in each cell */ 
+	.breakpoint-stack-wide td .ui-table-cell-label,
+	.breakpoint-stack-wide th .ui-table-cell-label { 
+		display: none;
+	}
+}
 

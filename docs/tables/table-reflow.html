@@ -27,10 +27,10 @@
         <h2>Reflow table mode</h2>
 
 
-	<p>The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row. Since the HTML source order of a table prohibits styling a table to look like this,  the plugin dynamically adds a bit of  markup to make the display work (without affecting accessibility).</p>
+	<p>The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row. Since the HTML source order of a table prohibits styling a table to look like this,  the plugin dynamically adds a bit of  markup to make the display work (without affecting accessibility). Here is a demo of a table using reflow mode:</p>
 
 
-    <table data-role="table" id="movie-table" data-mode="reflow" class="movies-stack">
+    <table data-role="table" id="movie-table" data-mode="reflow" class="breakpoint-stack-wide">
       <thead>
         <tr>
           <th data-priority="1">Rank</th>
@@ -139,76 +139,93 @@
 	</style>
 
 
-		<h3>Using reflow mode</h3>
+		<h3>Applying reflow mode to a table</h3>
 	
 		<p>The reflow responsive table mode is the simplest in terms of markup requirements because it only requires a table with a <code>data-role=&quot;table&quot;</code> on the table element. There is no need to set the <code>data-mode</code> attribute since <code>reflow</code> is the default.</p>
 	
-		<pre><code>&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot;</strong>&gt;</code></pre>
+		<pre><code>&lt;table <strong>data-role=&quot;table&quot;</strong> id=&quot;my-table&quot;&gt;</code></pre>
 
-    <h3>Options</h3>
-    <p>The reflow mode has one option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
 
-      <ul>
-        <li><code>classes.reflowTable</code> (default: "ui-table-reflow")</li>
-        <li><code>classes.cellLabels</code> (default: "ui-table-cell-label")</li>
-      </ul>
-
-    <h3>How it works</h3>
-	
+    <h3>How reflow mode works</h3>
 	
 		<p>The plugin works by parsing the values (or <code>abbr title</code>) of the first row of header (<code>TH</code>) elements found in the table. For example, in the table above, the third table header is parsed to grab the contents ("Year"):</p>
 
 		<pre><code>&lt;th&gt;<strong>Year</strong>&lt;/th&gt;</code></pre>
 
-		<p>The script then appends an element with the table header text <em>before</em> the contents of every cell. This is styled to look like a left aligned label for the cell when stacked at narrow widths. For example, for every table cell in the year column:</p>
+		<p>The script then appends an element with the table header text <em>before</em> the contents of every cell in that column. For example, for every table cell in the year column:</p>
 		
 		<pre><code><strong>&lt;td&gt;1941&lt;/td&gt;</strong></code></pre>
 	
-		<p>An element is added before the text with a <code>class</code> of <code>ui-table-cell-label</code>:</p>
+		<p>An element is added before the text of each cell with a <code>class</code> of <code>ui-table-cell-label</code>:</p>
 		<pre><code>&lt;td&gt;<strong>&lt;b class=&quot;ui-table-cell-label&quot;&gt;</strong>Year<strong>&lt;/b&gt;</strong>1941&lt;/td&gt;</code></pre>
-	
-		<h3>Setting media queries for the stack point</h3>
 		
-		<p>With our mobile-first approach, the base styles for reflow display the table in the stacked label/date format. This is done by hiding the table header rows, making each cell <code>display:block</code> and showing the label element injected into each cell. The label elements in each cell are styled like this:</p>
-				
-<pre><code>
-.ui-table-reflow td .ui-table-cell-label,
-.ui-table-reflow th .ui-table-cell-label { 
-	display: block;
-	min-width: 30%; 
-	display: inline-block; 
-}	
-</code></pre>
+		<p>With our mobile-first approach, the base styles for a reflow table stacks each row and presents each cell in the label/data style format. This is done by hiding the table header rows, making each table cell <code>display:block</code> so they are stacked. The the label element injected into each cell is styled as <code>display:inline-block</code> with a <code>min-width:30%</code> rule to place the labels on the same line as the content at a consistent width to form a two column presentation.
 
-		<p>At wider widths, a single media query switches to a standard table presentation by showing the table headers and hiding the labels in each cell.This media query should be copied and added to your custom stylesheet so you can modify the width breakpoint for the needs of data in your table. </p>
+		<h3>Making the table responsive</h3>
+		
+		<p>By default, a table with reflow mode will display the stacked presentation style on all screen widths. The styles to make the table responsive are added by applying a media query with rules to switch to the tabular style presentation above a specific screen width.</p>
+		<p>This is done by wrapping a few simple CSS rules in and a media query that only applies the rules above a certain width breakpoint. The styles make the table header rows visible, display the cells in a tabular format, and hide the generated label elements within each. Here is an example media query that swaps the presentation at 40em (640 pixels):  </p>
+		
 			
 <pre><code><strong>@media ( min-width: 40em ) {</strong>
-	/* Show the table header rows */ 
-	.ui-table-reflow td,
-	.ui-table-reflow th,
-	.ui-table-reflow tbody th,
-	.ui-table-reflow tbody td,
-	.ui-table-reflow thead td,
-	.ui-table-reflow thead th {
+	/* Show the table header rows and set all cells to display: table-cell */ 
+	.my-custom-breakpoint td,
+	.my-custom-breakpoint th,
+	.my-custom-breakpoint tbody th,
+	.my-custom-breakpoint tbody td,
+	.my-custom-breakpoint thead td,
+	.my-custom-breakpoint thead th {
 		display: table-cell;
 		margin: 0;
 	}
 	/* Hide the labels in each cell */ 
-	.ui-table-reflow td .ui-table-cell-label,
-	.ui-table-reflow th .ui-table-cell-label { 
+	.my-custom-breakpoint td .ui-table-cell-label,
+	.my-custom-breakpoint th .ui-table-cell-label { 
 		display: none;
 	}
 <strong>}</strong>
 </code></pre>
 
+		<p>It's best to use a <code>class</code> on the table to apply the breakpoint. Add these rules to your custom stylesheet that is included in the <code>head</code> of the page. We recommend creating a set of custom breakpoint classes that can be used to apply standard table breakpoints in your project.</p>
+		
+		<p>In the example above, we're assuming there is a class of <code>my-custom-breakpoint</code> added to the table to apply the breakpoint. Each of the rules in the custom media query is scoped against that table class to target only tables that have the <code>my-custom-breakpoint</code> class.</p>
+
 		<h3>Choosing a breakpoint</h3>
-		<p>In reflow mode, you want to pick at minimum width at which the <em>entire table</em> will fit comfortably within the screen as the breakpoint. On some sites, this may be 30em (480px) and on others, it could be as wide as 100em (1,600px) so there is no way for us to decide on a "standard breakpoint" that will work for everyone -- that's why this media query should be custom to your application.<p>
-		<p>All media query widths are set in ems so they respond to font size changes. To calculate a pixel withs in em's, divide the target width by 16 (pixels) then edit the 40em value in the example breakpoint.</p>
-		<p>It's  possible that this breakpoint will vary for each table within a page if the content length and number of columns is very different across tables. If that's the case, create a set of table classes that can be used to apply one of a few standard table breakpoints.</p>
+		<p>The goal is to determine the minimum width at which the <em>entire table</em> will fit comfortably within the screen. Find this width by populating a table with realistic sample data, then adjust the browser window until the table completely fits and has a bit of extra space to account for rendering differences across devices. This is the natural place to set the breakpoint that switches between the stacked and tabular presentation modes. </p>
+		<p>The breakpoint width is highly dependent on the number of columns in the table and content within each cell. On some sites, this may be as low as 30em (480px) and on others, it could be as wide as 100em (1,600px). There is no way for the framework to decide on a "standard breakpoint" that will work for everyone &#8212; that's why there isn't a breakpoint built into the table by default.<p>
+		<p>We recommend writing media query widths are in <code>em</code>'s so they respond to font size changes. To convert a pixel width into  <code>em</code>'s, divide the target width by 16 (pixels). Use this value for the <code>min-width</code> value in the media query above.</p>
+
+		<h3>Breakpoint presets</h3>
+		<p>Even though we strongly encourage you to write breakpoints yourself, the framework includes two pre-configured breakpoints that you can use if they happen work well for your content. These breakpoints are applied by adding a <code>class</code> to the table to specify that you want to use a preset breakpoint.</p>
+		
+		<pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;breakpoint-reflow-std&quot;</strong>&gt;</code></pre>
+		
+		<p>Here are the two preset breakpoints classes included in the reflow stylesheet. Add these to your table to apply the breakpoint:</p>
+		<dl>
+			<dt><code>breakpoint-reflow-std</code></dt><dd>Converts to a tabular presentation at 560px (35em) to target anything larger than a smartphone-sized device</dd>
+			<dt><code>breakpoint-reflow-wide</code></dt><dd>Converts to a tabular presentation at 768px (48em), best for larger tables that don't fit on lower resolution tablets</dd>
+		</dl>
+		
+		<h3>Working with grouped column headers</h3>
+		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a  class to the label of the first cell in each group to allow you to style these differently and provide aditional visual hierarchy. See an example of <a href="financial-grouped-columns.html">grouped column table</a>.</p>
+		
+	    <h2>Options</h2>
+	    <p>The reflow mode has one option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
+
+			<dl>
+				<dt><code>classes.reflowTable</code> (default: "ui-table-reflow")</dt><dd>Class added to the generated label content added to each table cell based on the header name</dd>
+				<dt><code>classes.cellLabels</code> (default: "ui-table-cell-label")</dt><dd>Class added to the first cell within each grouped header's column. This makes it easy to style these differently to visually delineate the column groups.</dd>
+			</dl>
 
 
-
-     
+			<h2>Methods</h2>
+		    <p>The reflow table has one method: 
+			<dl>
+				<dt><code>refresh</code></dt><dd>Updates the checkboxes in the menu to represent the columns that are currently visible.<pre><code>$( myTable ).table( "refresh" );</code></pre></dd>
+			</dl>
+		
+     	<h2>Events</h2>
+		<p>Since this plugin is written as an extension to the core <a href="index.html">table plugin</a>, it binds to the table <code>create</code> event but does not issue any additional events.</p>
 
          </div><!-- /content -->
 
