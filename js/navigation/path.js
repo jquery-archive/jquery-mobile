@@ -341,6 +341,32 @@ define([
 
 					object[key] = value;
 				});
+			},
+
+			squash: function( url, resolutionUrl ) {
+				var state, href,
+					isPath = path.isPath( url ),
+					hash = isPath ? path.stripHash(url) : url,
+					hashUri = path.parseUrl( hash ),
+					passedSearch, preservedHash;
+
+				// make the hash abolute with the current href
+				href = path.makeUrlAbsolute( hash, resolutionUrl );
+
+				// TODO all this crap is terrible, clean it up
+				if ( isPath ) {
+					// Get a hash where possible and, as long as it's not a path
+					// preserve it on the current url
+					preservedHash = (hashUri.hash || path.parseLocation().hash);
+					preservedHash = path.isPath( preservedHash ) ? "" : preservedHash;
+
+					// reconstruct each of the pieces with the new search string and hash
+					href = path.parseUrl( href );
+					href = href.protocol + "//" + href.host + href.pathname + hashUri.search + preservedHash;
+					href = path.resetUIKeys( href );
+				}
+
+				return href;
 			}
 		};
 

@@ -15,13 +15,29 @@ define([
 
 	// TODO consider queueing navigation activity until previous activities have completed
 	//      so that end users don't have to think about it. Punting for now
+	// TODO !! move the event bindings into callbacks on the navigate event
 	$.navigate = function( url, data, noEvents ) {
-		var state;
+		var state, href, parsed, hash,
+			resolutionUrl = path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl();
 
-		// NOTE we currently _leave_ the appended hash in the hash in the interest
-		//      of seeing what happens and if we can support that before the hash is
-		//      pushed down, though we note here that the # char is not permitted by
-		//      rfc3986
+		// Get the url as it would look squashed on to the current resolution url
+		href = path.squash( url, resolutionUrl );
+
+		// Grab the hash for recording. If the passed url is a path
+		// we used the parsed version of the squashed url to reconstruct,
+		// otherwise we assume it's a hash and store it directly
+		parsed = path.parseUrl( href );
+		hash = path.isPath(url) ? parsed.pathname + parsed.search : url;
+
+		// Here we prevent the next hash change or popstate event from doing any
+		// history management. In the case of hashchange we don't swallow it
+		// if there will be not hashchange fired (since that won't reset the value)
+		// and will swallow the following hashchange
+		history.ignoreNextHashChange = true;
+		if( noEvents && hash !== path.stripHash(path.parseLocation().hash) ) {
+			history.preventNextHashChange = noEvents;
+		}
+
 		// IMPORTANT in the case where popstate is supported the event will be triggered
 		//           directly, stopping further execution - ie, interupting the flow of this
 		//           method call to fire bindings at this expression. Below the navigate method
@@ -29,8 +45,10 @@ define([
 		//
 		//           We then trigger a new popstate event on the window with a null state
 		//           so that the navigate events can conclude their work properly
-		history.ignoreNextHashChange = true;
-		window.location.hash = url;
+		//
+		// if the url is a path we want to preserve the query params that are available on
+		// the current url.
+		window.location.hash = path.isPath(url) ? parsed.pathname + parsed.search : url;
 
 		state = $.extend({
 			url: url,
@@ -64,27 +82,10 @@ define([
 	// TODO move this into the path helpers
 	$.navigate.squash = function( url, data ) {
 		var state, href,
-			isPath = path.isPath( url ),
-			hash = isPath ? path.stripHash(url) : url,
-			hashUri = path.parseUrl( hash ),
-			resolutionUrl = isPath ? path.getLocation() : $.mobile.getDocumentUrl(),
-			passedSearch, preservedHash;
+			hash = path.isPath(url) ? path.stripHash(url) : url,
+			resolutionUrl = path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl();
 
-		// make the hash abolute with the current href
-		href = path.makeUrlAbsolute( hash, resolutionUrl );
-
-		// TODO all this crap is terrible, clean it up
-		if ( isPath ) {
-			// Get a hash where possible and, as long as it's not a path
-			// preserve it on the current url
-			preservedHash = (hashUri.hash || path.parseLocation().hash);
-			preservedHash = path.isPath( preservedHash ) ? "" : preservedHash;
-
-			// reconstruct each of the pieces with the new search string and hash
-			href = path.parseUrl( href );
-			href = href.protocol + "//" + href.host + href.pathname + hashUri.search + preservedHash;
-			href = path.resetUIKeys( href );
-		}
+		href = path.squash( url, resolutionUrl );
 
 		// make sure to provide this information when it isn't explicitly set in the
 		// data object that was passed to the squash method
@@ -125,7 +126,7 @@ define([
 		}
 
 		// If this is the popstate triggered by the actual alteration of the hash
-		// swallow it completely to prevent handling
+		// prevent it completely to prevent handling
 		if( history.ignoreNextHashChange ) {
 			history.ignoreNextHashChange = false;
 			event.stopImmediatePropagation();
@@ -153,11 +154,12 @@ define([
 
 				state = $.navigate.squash( hash );
 
-//				if( Math.abs(matchingIndex - history.activeIndex) > 1 ) {
-					// record the new hash as an additional history entry
-					// to match the browser's treatment of hash assignment
-					history.add( hash, state );
-//				}
+				// TODO it might be better to only add to the history stack
+				//      when the hash is adjacent to the active history entry
+
+				// record the new hash as an additional history entry
+				// to match the browser's treatment of hash assignment
+				history.add( hash, state );
 
 				// pass the newly created state information
 				// along with the event
@@ -197,11 +199,25 @@ define([
 			return;
 		}
 
+		// On occasion explicitly want to prevent the next hash from propogating because we only
+		// with to alter the url to represent the new state do so here
+		if( history.preventNextHashChange ){
+			history.preventNextHashChange = false;
+			history.ignoreNextHashChange = false;
+			event.stopImmediatePropagation();
+			return;
+		}
+
 		// If the hashchange has been explicitly ignored or we have no history at
 		// this point skip the history managment and the addition of the history
 		// entry to the event for the `navigate` bindings
 		if( history.ignoreNextHashChange ) {
 			history.ignoreNextHashChange = false;
+		}
+
+		// If the stack is empty (it's been reset or some such) don't return,
+		// we need to record it in the missing callback below.
+		if( history.ignoreNextHashChange && history.stack.length > 0 ) {
 			return;
 		}
 
@@ -314,15 +330,15 @@ define([
 			//
 			// TODO this is hyper confusing and should be cleaned up (ugh so bad)
 			if( closest === undefined ) {
-				closest = this.find( url, this.stack.slice(a + 1), true );
-				closest = closest === undefined ? closest : closest + a + 1;
+				closest = this.find( url, this.stack.slice(a), true );
+				closest = closest === undefined ? closest : closest + a;
 			}
 
 			return closest;
 		},
 
 		direct: function( opts ) {
-			var newActiveIndex = this.closest(opts.url), a = this.activeIndex;
+			var newActiveIndex = this.closest( opts.url ), a = this.activeIndex;
 
 			// save new page index, null check to prevent falsey 0 result
 			this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
@@ -338,7 +354,7 @@ define([
 				if( opts.current ) {
 					opts.current( this.getActiveIndex );
 				}
-			} else if ( opts.missing ){
+			} else if ( newActiveIndex === undefined && opts.missing ){
 				opts.missing( this.getActive() );
 			}
 		},

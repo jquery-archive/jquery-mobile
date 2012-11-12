@@ -70,7 +70,7 @@ define( [
 
 			//set the generated BASE element's href attribute to a new page's base path
 			reset: function() {
-				base.element.attr( "href", documentBase.hrefNoHash );
+				base.element.attr( "href", documentBase.hrefNoSearch );
 			}
 
 		} : undefined;
@@ -219,7 +219,6 @@ define( [
 			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
-
 			//trigger show/hide events
 			if ( fromPage ) {
 				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
@@ -306,7 +305,7 @@ define( [
 		if ( !page.data( "page" ).options.domCache &&
 				page.is( ":jqmData(external-page='true')" ) ) {
 
-			page.bind( 'pagehide.remove', function() {
+			page.bind( 'pagehide.remove', function( e ) {
 				var $this = $( this ),
 					prEvent = new $.Event( "pageremove" );
 
@@ -845,7 +844,7 @@ define( [
 		}
 
 		//set page title
-		document.title = urlHistory.getActive().title || document.title;
+		document.title = pageTitle;
 
 		//set "toPage" as activePage
 		$.mobile.activePage = toPage;
@@ -870,8 +869,8 @@ define( [
 					$.mobile.focusPage( toPage );
 				}
 
-				mpc.trigger( "pagechange", triggerData );
 				releasePageTransitionLock();
+				mpc.trigger( "pagechange", triggerData );
 			});
 	};
 

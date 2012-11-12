@@ -16,6 +16,7 @@
 
 	test( "path.get method is working properly", function(){
 		window.location.hash = "foo";
+		debugger;
 		deepEqual($.mobile.path.get(), "foo", "get method returns location.hash minus hash character");
 		deepEqual($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
 		deepEqual($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");

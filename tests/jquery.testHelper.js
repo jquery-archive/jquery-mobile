@@ -285,15 +285,7 @@
 				location.hash = location.hash.replace("#", "") === hash ? "" : "#" + hash;
 			};
 
-			// force the page reset for hash based tests
-			if ( location.hash && !$.support.pushState ) {
-				pageReset();
-			}
-
-			// force the page reset for all pushstate tests
-			if ( $.support.pushState ) {
-				pageReset( url );
-			}
+			pageReset( url );
 		},
 
 		delayStart: function( milliseconds ) {

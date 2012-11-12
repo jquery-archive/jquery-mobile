@@ -283,7 +283,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 
 	$.removeWithDependents = function( elem ) {
 		var $elem = $( elem );
-
+		
 		( $elem.jqmData( 'dependents' ) || $() ).remove();
 		$elem.remove();
 	};

@@ -14,6 +14,8 @@ define([ "jquery",
 	$.event.special.navigate = self = {
 		bound: false,
 
+		pushStateEnabled: true,
+
 		popstate: function( event ) {
 			var newEvent = new $.Event( "navigate" ),
 				state = event.originalEvent.state || {},
@@ -36,7 +38,7 @@ define([ "jquery",
 				$win.trigger( newEvent, {
 					state: state
 				});
-			});
+			}, 0);
 		},
 
 		hashchange: function( event, data ) {
@@ -68,7 +70,7 @@ define([ "jquery",
 
 			self.bound = true;
 
-			if( $.support.pushState ) {
+			if( $.support.pushState && self.pushStateEnabled ) {
 				$win.bind( "popstate.navigate", self.popstate );
 			} else {
 				$win.bind( "hashchange.navigate", self.hashchange );

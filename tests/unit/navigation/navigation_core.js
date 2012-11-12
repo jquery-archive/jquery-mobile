@@ -1,3 +1,4 @@
+$.testHelper.delayStart();
 /*
  * mobile navigation unit tests
  */
@@ -342,22 +343,22 @@
 	};
 
 	test( "when loading a page where data-url is not defined on a sub element hash defaults to the url", function(){
-		testDataUrlHash( "#non-data-url a", {hashOrPush: siteDirectory + "data-url-tests/non-data-url.html" + search} );
+		testDataUrlHash( "#non-data-url a", {hashOrPush: siteDirectory + "data-url-tests/non-data-url.html"} );
 	});
 
 	test( "data url works for nested paths", function(){
 		var url = "foo/bar.html";
-		testDataUrlHash( "#nested-data-url a", {hash: url, push: home + url + search });
+		testDataUrlHash( "#nested-data-url a", {hashOrPush: home + url });
 	});
 
 	test( "data url works for single quoted paths and roles", function(){
 		var url = "foo/bar/single.html";
-		testDataUrlHash( "#single-quotes-data-url a", {hash: url, push: home + url + search} );
+		testDataUrlHash( "#single-quotes-data-url a", {hashOrPush: home + url } );
 	});
 
 	test( "data url works when role and url are reversed on the page element", function(){
 		var url = "foo/bar/reverse.html";
-		testDataUrlHash( "#reverse-attr-data-url a", {hash: url, push: home + url + search } );
+		testDataUrlHash( "#reverse-attr-data-url a", {hashOrPush: home + url } );
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
@@ -446,7 +447,6 @@
 	});
 
 	asyncTest( "going back from a stale dialog history entry does not cause the base tag to be reset", function() {
-
 		var baseHRef;
 
 		expect( 1 );
@@ -459,15 +459,17 @@
 			function() { $( "#dialog-base-tag-test-page a" ).click(); },
 
 			// record the base href and launch the dialog
-			function() {
+			function( timedOut ) {
 				baseHRef = $( "base" ).attr( "href" );
 				$( "a#go-to-dialog" ).click();
 			},
 
 			// close the dialog - this assumes a close button link will be added to the dialog as part of the enhancement process
-			function() { $( "#dialog-base-tag-test a" ).click(); },
+			function( timedOut ) {
+				$( "#dialog-base-tag-test a" ).click();
+			},
 
-			function() {
+			function(timedOut) {
 				// $.testHelper.pageSequence cannot be used here because no page changes occur
 				$.testHelper.sequence([
 					// Go forward to reach the now-stale dialogHashKey history entry
@@ -697,7 +699,7 @@
 				$.testHelper.assertUrlLocation({
 					// TODO note there's no guarantee that the query params will remain in this order
 					//      we should fix the comparison to take a callback and do something more complex
-					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar" + ( search ? "&" + search.replace( "?", "") : ""),
+					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url has query params"
 				});
 
@@ -721,7 +723,7 @@
 				$.testHelper.assertUrlLocation({
 					// TODO note there's no guarantee that the query params will remain in this order
 					//      we should fix the comparison to take a callback and do something more complex
-					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar" + ( search ? "&" + search.replace( "?", "") : ""),
+					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url has query params"
 				});
 
@@ -732,7 +734,7 @@
 				$.testHelper.assertUrlLocation({
 					// TODO note there's no guarantee that the query params will remain in this order
 					//      we should fix the comparison to take a callback and do something more complex
-					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar" + ( search ? "&" + search.replace( "?", "") : ""),
+					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url still has query params"
 				});
 
@@ -782,7 +784,7 @@
 			function(){
 				$.mobile.changePage( "form-tests/changepage-data.html", {
 					data: "foo=1&bar=2"
-				} );
+				});
 			},
 
 			function(){
@@ -805,7 +807,7 @@
 						foo: 3,
 						bar: 4
 					}
-				} );
+				});
 			},
 
 			function(){

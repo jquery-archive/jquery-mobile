@@ -10,6 +10,8 @@ $.testHelper.setPushState();
 			stop();
 
 			$( window ).one( "navigate", function() {
+				$.navigate.history.stack = [];
+				$.navigate.history.activeIndex = 0;
 				start();
 			});
 
@@ -21,9 +23,6 @@ $.testHelper.setPushState();
 				// sure it resumes
 				$.navigate( "#seriously-reset" );
 			}
-
-			$.navigate.history.stack = [];
-			$.navigate.history.activeIndex = 0;
 		}
 	});
 
@@ -46,17 +45,6 @@ $.testHelper.setPushState();
 
 			equal( $.mobile.path.parseLocation().pathname, url.pathname, "the resulting url has the same pathname as the original test url" );
 			equal( location.hash, "#foo", "the hash has been altered" );
-		});
-	} else {
-		test( "navigation should append the hash with a path", function() {
-			var destination = home + "#foo";
-
-			ok( location.hash.indexOf(home) == -1, "the hash is clean" );
-			ok( $.mobile.path.isPath(destination), "the destination is a path" );
-
-			$.navigate( destination );
-
-			equal( $.mobile.path.parseLocation().hash, "#" + destination, "the resulting url has the same pathname as the original test url" );
 		});
 	}
 
@@ -106,7 +94,7 @@ $.testHelper.setPushState();
 			},
 
 			function() {
-				$.navigate( "#foo" );
+				$.navigate( "#baz" );
 			},
 
 			function() {
