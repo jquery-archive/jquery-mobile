@@ -46,6 +46,7 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 			var $this = $( this ),
 				val = this.value.toLowerCase(),
 				listItems = null,
+				li = list.children(),
 				lastval = $this.jqmData( "lastval" ) + "",
 				childItems = false,
 				itemtext = "",
@@ -114,7 +115,7 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 				//filtervalue is empty => show all
 				listItems.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
 			}
-			listview._refreshCorners();
+			listview._addFirstLastClasses( li, listview._getVisibles( li, false ), false );
 		})
 		.appendTo( wrapper )
 		.textinput();

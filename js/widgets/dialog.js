@@ -13,15 +13,17 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtnText: "Close",
 		overlayTheme: "a",
+		corners: true,
 		initSelector: ":jqmData(role='dialog')"
 	},
 	_create: function() {
 		var self = this,
 			$el = this.element,
 			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
+			cornerClass = !!this.options.corners ? " ui-corner-all" : "",
 			dialogWrap = $( "<div/>", {
 					"role" : "dialog",
-					"class" : "ui-dialog-contain ui-corner-all ui-overlay-shadow"
+					"class" : "ui-dialog-contain ui-overlay-shadow" + cornerClass
 				});
 
 		$el.addClass( "ui-dialog ui-overlay-" + this.options.overlayTheme );
@@ -32,13 +34,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			.wrapInner( dialogWrap )
 			.children()
 				.find( ":jqmData(role='header')" )
-					.prepend( headerCloseButton )
-				.end()
-				.children( ':first-child')
-					.addClass( "ui-corner-top" )
-				.end()
-				.children( ":last-child" )
-					.addClass( "ui-corner-bottom" );
+					.prepend( headerCloseButton );
 
 		// this must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back

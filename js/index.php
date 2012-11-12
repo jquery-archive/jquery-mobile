@@ -34,6 +34,7 @@ $files = array(
 	'widgets/dialog.js',
 	'widgets/page.sections.js',
 	'widgets/collapsible.js',
+	'widgets/addFirstLastClasses.js',
 	'widgets/collapsibleSet.js',
 	'jquery.mobile.fieldContain.js',
 	'jquery.mobile.grid.js',

@@ -7,6 +7,7 @@
 
 define( [ "jquery",
 	"../jquery.mobile.buttonMarkup",
+	"./addFirstLastClasses",
 	"../jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -47,14 +48,6 @@ define( [ "jquery",
 			this._refresh( true );
 		},
 
-		_flipClasses: function( els, flCorners  ) {
-			els.removeClass( "ui-controlgroup-last" )
-				.buttonMarkup( { corners: false, shadow: false } )
-				.eq( 0 ).buttonMarkup( { corners: flCorners[ 0 ], cornerstyle: "group" } )
-				.end()
-				.last().buttonMarkup( { corners: flCorners[ 1 ], cornerstyle: "group" } ).addClass( "ui-controlgroup-last" );
-		},
-
 		_setOption: function( key, value ) {
 			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 
@@ -70,14 +63,11 @@ define( [ "jquery",
 			this.element
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
 				.addClass( "ui-controlgroup-" + value );
-			this.options.type = value;
-			this.refresh();
+			this._refresh( false );
 		},
 
 		_setCorners: function( value ) {
 			this.element.toggleClass( "ui-corner-all", value );
-			this.options.corners = value;
-			this.refresh();
 		},
 
 		_setShadow: function( value ) {
@@ -88,25 +78,24 @@ define( [ "jquery",
 			this.element.toggleClass( "ui-mini", value );
 		},
 
+		container: function() {
+			return this.element.children( ".ui-controlgroup-controls" );
+		},
+
 		_refresh: function( create ) {
-			var els = this.element
-				.find( ".ui-btn" + ( ( !create && this.options.excludeInvisible ) ? ":visible" : "" ) )
-				.not( '.ui-slider-handle' ),
-				corners = [ true, true ];
-
-			if ( !this.options.corners ) {
-				corners = [ false, false ];
-			} else if ( els.length > 1 ) {
-				corners = ( this.options.type === "horizontal" ? [ "left", "right" ] : [ "top", "bottom" ] );
+			var els = this.element.find( ".ui-btn" ).not( ".ui-slider-handle" );
+			if ( $.mobile.checkboxradio ) {
+				this.element.find( ":mobile-checkboxradio" ).checkboxradio( "refresh" );
 			}
-
-			this._flipClasses( els, corners );
+			this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
 		},
 
 		refresh: function() {
 			this._refresh( false );
 		}
 	});
+
+	$.widget( "mobile.controlgroup", $.mobile.controlgroup, $.mobile.behaviors.addFirstLastClasses );
 
 	// TODO: Implement a mechanism to allow widgets to become enhanced in the
 	// correct order when their correct enhancement depends on other widgets in

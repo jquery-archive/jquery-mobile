@@ -7,6 +7,7 @@
 	module( "Collapsible section", {});
 
 	asyncTest( "The page should be enhanced correctly", function(){
+		expect( 5 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-test" );
@@ -19,13 +20,13 @@
 				ok($page.find( ".ui-content >:eq(0) > div" ).hasClass( "ui-collapsible-content" ), ".ui-collapsible-content class added to collapsible content" );
 				ok($page.find( ".ui-content >:eq(0)" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed added to collapsed elements" );
 				ok(!$page.find( ".ui-content >:eq(1)" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed not added to expanded elements" );
-				ok($page.find( ".ui-collapsible.ui-collapsible-collapsed" ).find( ".ui-collapsible-heading-toggle > .ui-btn-inner" ).hasClass( "ui-corner-top ui-corner-bottom" ), "Collapsible header button should have class ui-corner-all" );
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "Expand/Collapse", function(){
+		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-test" );
@@ -45,6 +46,7 @@
 	module( "Collapsible set", {});
 
 	asyncTest( "The page should be enhanced correctly", function(){
+		var nTests = 2;
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-set-test" );
@@ -57,16 +59,19 @@
 				ok($page.find( ".ui-content >:eq(0) > div" ).hasClass( "ui-collapsible" ), ".ui-collapsible class added to collapsible elements" );
 				$page.find( ".ui-collapsible-set" ).each(function() {
 					var $this = $( this );
-					ok($this.find( ".ui-collapsible" ).first().find( ".ui-collapsible-heading-toggle > .ui-btn-inner" ).hasClass( "ui-corner-top" ), "First collapsible header button should have class ui-corner-top" );
-					ok($this.find( ".ui-collapsible" ).last().find( ".ui-collapsible-heading-toggle > .ui-btn-inner" ).hasClass( "ui-corner-bottom" ), "Last collapsible header button should have class ui-corner-bottom" );
+					nTests += 2;
+					ok($this.find( ".ui-collapsible" ).first().hasClass( "ui-first-child" ), "First collapsible header button should have class ui-first-child" );
+					ok($this.find( ".ui-collapsible" ).last().hasClass( "ui-last-child" ), "Last collapsible header button should have class ui-last-child" );
 				});
 
+				expect( nTests );
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "Collapsible set with only one collapsible", function() {
+		var nTests = 0;
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#collapsible-set-with-lonely-collapsible-test" );
@@ -76,16 +81,19 @@
 				var $page = $( "#collapsible-set-with-lonely-collapsible-test" );
 				$page.find( ".ui-collapsible-set" ).each(function() {
 					var $this = $( this );
-					ok($this.find( ".ui-collapsible" ).first().find( ".ui-collapsible-heading-toggle > .ui-btn-inner" ).hasClass( "ui-corner-top" ), "First collapsible header button should have class ui-corner-top" );
-					ok($this.find( ".ui-collapsible" ).last().find( ".ui-collapsible-heading-toggle > .ui-btn-inner" ).hasClass( "ui-corner-bottom" ), "Last collapsible header button should have class ui-corner-bottom" );
+					nTests += 2;
+					ok($this.find( ".ui-collapsible" ).first().hasClass( "ui-first-child" ), "First collapsible header button should have class ui-first-child" );
+					ok($this.find( ".ui-collapsible" ).last().hasClass( "ui-last-child" ), "Last collapsible header button should have class ui-last-child" );
 				});
 
+				expect( nTests );
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "Section expanded by default", function(){
+		expect( 2 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-set-test" );
@@ -100,6 +108,7 @@
 	});
 
 	asyncTest( "Expand/Collapse", function(){
+		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#basic-collapsible-set-test" );
@@ -117,6 +126,7 @@
 	});
 
 	asyncTest( "Collapsible Set with dynamic content", function(){
+		expect( 7 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#collapsible-set-with-dynamic-content" );
@@ -129,18 +139,19 @@
 				}
 				set.collapsibleset( "refresh" );
 				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
-				ok( set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-top" ), "The 1st collapsible should have top corners" );
-				ok( !set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 1st collapsible should NOT have bottom corners" );
-				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-top" ), "The 2nd collapsible should NOT have top corners" );
-				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 2nd collapsible should NOT have bottom corners" );
-				ok( set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 3rd collapsible should have bottom corners" );
-				ok( !set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-top" ), "The 3rd collapsible should NOT have top corners" );
+				ok( set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-first-child" ), "The 1st collapsible should have top corners" );
+				ok( !set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-last-child" ), "The 1st collapsible should NOT have bottom corners" );
+				ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-first-child" ), "The 2nd collapsible should NOT have top corners" );
+				ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-last-child" ), "The 2nd collapsible should NOT have bottom corners" );
+				ok( set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-last-child" ), "The 3rd collapsible should have bottom corners" );
+				ok( !set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-first-child" ), "The 3rd collapsible should NOT have top corners" );
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "Collapsible Set with static and dynamic content", function(){
+		expect( 7 );
 		$.testHelper.pageSequence([
 			function(){
   				$.testHelper.openPage( "#collapsible-set-with-static-and-dynamic-content" );
@@ -153,18 +164,19 @@
   				}
   				set.collapsibleset( "refresh" );
   				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
-  				ok( set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-top" ), "The 1st collapsible should have top corners" );
-  				ok( !set.find( ".ui-collapsible" ).eq( 0 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 1st collapsible should NOT have bottom corners" );
-  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-top" ), "The 2nd collapsible should NOT have top corners" );
-  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 2nd collapsible should NOT have bottom corners" );
-  				ok( set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-bottom" ), "The 3rd collapsible should have bottom corners" );
-  				ok( !set.find( ".ui-collapsible" ).eq( 2 ).find( "a" ).hasClass( "ui-corner-top" ), "The 3rd collapsible should NOT have top corners" );
+  				ok( set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-first-child" ), "The 1st collapsible should have top corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-last-child" ), "The 1st collapsible should NOT have bottom corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-first-child" ), "The 2nd collapsible should NOT have top corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-last-child" ), "The 2nd collapsible should NOT have bottom corners" );
+  				ok( set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-last-child" ), "The 3rd collapsible should have bottom corners" );
+  				ok( !set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-first-child" ), "The 3rd collapsible should NOT have top corners" );
   				start();
   			}
   		]);
   	});
 
 	asyncTest( "Collapsible set with last collapsible expanded", function(){
+		expect( 1 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#collapsible-set-with-last-collapsible-expanded" );
@@ -172,13 +184,14 @@
 
 			function() {
 				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.last().find( ".ui-collapsible-content" ).hasClass( "ui-corner-bottom" ), "Content of last collapsible should have class ui-corner-bottom");
+				ok( collapsibles.last().hasClass( "ui-last-child" ), "Content of last collapsible should have class ui-last-child");
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "Collapsible Set", function(){
+		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#collapsible-set-with-legends" );
@@ -186,9 +199,9 @@
 
 			function() {
 				var collapsibles = $.mobile.activePage.find( ".ui-collapsible-heading" );
-				ok( !collapsibles.eq(0).find( ".ui-btn" ).is( ".ui-corner-bottom" ), "First collapsible should NOT have class ui-corner-bottom");
-				ok( !collapsibles.eq(1).find( ".ui-btn" ).is( ".ui-corner-bottom,.ui-corner-top" ), "Middle collapsible should NOT have class ui-corner-top or ui-corner-bottom");
-				ok( !collapsibles.eq(2).find( ".ui-btn" ).is( ".ui-corner-top" ), "Last collapsible should NOT have class ui-corner-top");
+				ok( !collapsibles.eq(0).is( ".ui-first-child" ), "First collapsible should NOT have class ui-last-child");
+				ok( !collapsibles.eq(1).is( ".ui-last-child,.ui-first-child" ), "Middle collapsible should NOT have class ui-first-child or ui-last-child");
+				ok( !collapsibles.eq(2).is( ".ui-first-child" ), "Last collapsible should NOT have class ui-first-child");
 				start();
 			}
 		]);
@@ -197,6 +210,7 @@
 	module( "Icons", {});
 
 	asyncTest( "Collapsible with custom icons", function(){
+		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#collapsible-with-custom-icons" );
@@ -220,6 +234,7 @@
 	});
 
 	asyncTest( "Collapsible sets with custom icons", function(){
+		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#collapsible-set-with-custom-icons" );
@@ -241,6 +256,7 @@
 	module( "Theming", {});
 
 	asyncTest( "Collapsible", 6, function(){
+		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#collapsible-with-theming" );
@@ -261,6 +277,7 @@
 
 
 	asyncTest( "Collapsible Set", function(){
+		expect( 13 );
 		$.testHelper.pageSequence([
 			function(){
 				$.testHelper.openPage( "#collapsible-set-with-theming" );

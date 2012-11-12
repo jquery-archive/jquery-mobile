@@ -34,13 +34,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			mini = inheritAttr( input, "mini" ) || o.mini,
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
-			icon = input.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
 			iconpos = inheritAttr( input, "iconpos" ),
-			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
-			checkedClass = "ui-" + checkedState + activeBtn,
-			uncheckedClass = "ui-" + uncheckedState,
-			checkedicon = icon ? checkedState : undefined,
-			uncheckedicon = icon ? uncheckedState : undefined;
+			checkedClass = "ui-" + checkedState,
+			uncheckedClass = "ui-" + uncheckedState;
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
 			return;
@@ -52,8 +48,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			inputtype: inputtype,
 			checkedClass: checkedClass,
 			uncheckedClass: uncheckedClass,
-			checkedicon: checkedicon,
-			uncheckedicon: uncheckedicon
+			checkedicon: checkedState,
+			uncheckedicon: uncheckedState
 		});
 
 		// If there's no selected theme check the data attr
@@ -63,7 +59,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 		label.buttonMarkup({
 			theme: o.theme,
-			icon: icon,
+			icon: uncheckedState,
 			shadow: false,
 			mini: mini,
 			iconpos: iconpos
@@ -180,13 +176,15 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	},
 
 	refresh: function() {
-		var input = this.element[0],
+		var input = this.element[ 0 ],
+			active = " " + $.mobile.activeBtnClass,
+			checkedClass = this.checkedClass + ( this.element.parents( ".ui-controlgroup-horizontal" ).length ? active : "" ),
 			label = this.label;
 
 		if ( input.checked ) {
-			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass ).buttonMarkup( { icon: this.checkedicon } );
+			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass ).buttonMarkup( { icon: this.checkedicon } );
 		} else {
-			label.removeClass( this.checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( { icon: this.uncheckedicon } );;
+			label.removeClass( checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( { icon: this.uncheckedicon } );
 		}
 
 		if ( input.disabled ) {

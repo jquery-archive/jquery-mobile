@@ -13,11 +13,10 @@
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
 			length = buttons.length;
 
-		ok( !buttons.hasClass( "ui-btn-corner-all" ), "no button should have class 'ui-btn-corner-all'");
-		ok( buttons.first().hasClass( "ui-corner-top" ), "first button should have class 'ui-corner-top'" );
-		ok( !middlebuttons.hasClass( "ui-corner-top" ), "middle buttons should not have class 'ui-corner-top'" );
-		ok( !middlebuttons.hasClass( "ui-corner-bottom" ), "middle buttons should not have class 'ui-corner-bottom'" );
-		ok( buttons.last().hasClass( "ui-corner-bottom"), "last button should have class 'ui-corner-bottom'" );
+		ok( buttons.first().hasClass( "ui-first-child" ), "first button should have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-first-child" ), "middle buttons should not have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-last-child" ), "middle buttons should not have class 'ui-last-child'" );
+		ok( buttons.last().hasClass( "ui-last-child"), "last button should have class 'ui-last-child'" );
 	});
 
 	module( 'vertical controlgroup, refresh', {
@@ -39,10 +38,10 @@
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
 			length = buttons.length;
 
-		ok( buttons.first().hasClass( "ui-corner-top" ), "first visible button should have class 'ui-corner-top'" );
-		ok( !middlebuttons.hasClass( "ui-corner-top" ), "middle buttons should not have class 'ui-corner-top'" );
-		ok( !middlebuttons.hasClass( "ui-corner-bottom" ), "middle buttons should not have class 'ui-corner-bottom'" );
-		ok( buttons.last().hasClass( "ui-corner-bottom"), "last visible button should have class 'ui-corner-bottom'" );
+		ok( buttons.first().hasClass( "ui-first-child" ), "first visible button should have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-first-child" ), "middle buttons should not have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-last-child" ), "middle buttons should not have class 'ui-last-child'" );
+		ok( buttons.last().hasClass( "ui-last-child"), "last visible button should have class 'ui-last-child'" );
 	});
 
 	test( "vertical controlgroup after last button was hidden", function() {
@@ -56,10 +55,10 @@
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
 			length = buttons.length;
 
-		ok( buttons.first().hasClass( "ui-corner-top" ), "first visible button should have class 'ui-corner-top'" );
-		ok( !middlebuttons.hasClass( "ui-corner-top" ), "middle buttons should not have class 'ui-corner-top'" );
-		ok( !middlebuttons.hasClass( "ui-corner-bottom" ), "middle buttons should not have class 'ui-corner-bottom'" );
-		ok( buttons.last().hasClass( "ui-corner-bottom"), "last visible button should have class 'ui-corner-bottom'" );
+		ok( buttons.first().hasClass( "ui-first-child" ), "first visible button should have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-first-child" ), "middle buttons should not have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-last-child" ), "middle buttons should not have class 'ui-last-child'" );
+		ok( buttons.last().hasClass( "ui-last-child"), "last visible button should have class 'ui-last-child'" );
 	});
 
 	module( 'horizontal controlgroup, no refresh', {
@@ -73,11 +72,10 @@
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
 			length = buttons.length;
 
-		ok( !buttons.hasClass( "ui-btn-corner-all" ), "no button should have class 'ui-btn-corner-all'");
-		ok( buttons.first().hasClass( "ui-corner-left" ), "first button should have class 'ui-corner-left'" );
-		ok( !middlebuttons.hasClass( "ui-corner-left" ), "middle buttons should not have class 'ui-corner-left'" );
-		ok( !middlebuttons.hasClass( "ui-corner-right" ), "middle buttons should not have class 'ui-corner-right'" );
-		ok( buttons.last().hasClass( "ui-corner-right"), "last button should have class 'ui-corner-right'" );
+		ok( buttons.first().hasClass( "ui-first-child" ), "first button should have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-first-child" ), "middle buttons should not have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-last-child" ), "middle buttons should not have class 'ui-last-child'" );
+		ok( buttons.last().hasClass( "ui-last-child"), "last button should have class 'ui-last-child'" );
 	});
 
 	module( 'horizontal controlgroup, refresh', {
@@ -97,10 +95,10 @@
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
 			length = buttons.length;
 
-		ok( buttons.first().hasClass( "ui-corner-left" ), "first visible button should have class 'ui-corner-left'" );
-		ok( !middlebuttons.hasClass( "ui-corner-left" ), "middle buttons should not have class 'ui-corner-left'" );
-		ok( !middlebuttons.hasClass( "ui-corner-right" ), "middle buttons should not have class 'ui-corner-right'" );
-		ok( buttons.last().hasClass( "ui-corner-right"), "last visible button should have class 'ui-corner-right'" );
+		ok( buttons.first().hasClass( "ui-first-child" ), "first visible button should have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-first-child" ), "middle buttons should not have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-last-child" ), "middle buttons should not have class 'ui-last-child'" );
+		ok( buttons.last().hasClass( "ui-last-child"), "last visible button should have class 'ui-last-child'" );
 	});
 
 	test( "horizontal controlgroup after last button was hidden", function() {
@@ -112,10 +110,10 @@
 			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
 			length = buttons.length;
 
-		ok( buttons.first().hasClass( "ui-corner-left" ), "first visible button should have class 'ui-corner-left'" );
-		ok( !middlebuttons.hasClass( "ui-corner-left" ), "middle buttons should not have class 'ui-corner-left'" );
-		ok( !middlebuttons.hasClass( "ui-corner-right" ), "middle buttons should not have class 'ui-corner-right'" );
-		ok( buttons.last().hasClass( "ui-corner-right"), "last visible button should have class 'ui-corner-right'" );
+		ok( buttons.first().hasClass( "ui-first-child" ), "first visible button should have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-first-child" ), "middle buttons should not have class 'ui-first-child'" );
+		ok( !middlebuttons.hasClass( "ui-last-child" ), "middle buttons should not have class 'ui-last-child'" );
+		ok( buttons.last().hasClass( "ui-last-child"), "last visible button should have class 'ui-last-child'" );
 	});
 
 
