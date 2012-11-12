@@ -251,7 +251,7 @@ define([
 				var u = path.parseUrl( path.makeUrlAbsolute( url, path.documentBase ) ),
 
 					// Does the url have the same path as the document?
-					samePath = u.hrefNoHash === path.documentUrl.hrefNoHash || ( path.documentBaseDiffers && u.hrefNoHash === documentBase.hrefNoHash ),
+					samePath = u.hrefNoHash === path.documentUrl.hrefNoHash || ( path.documentBaseDiffers && u.hrefNoHash === path.documentBase.hrefNoHash ),
 
 					// Get the first page element.
 					fp = $.mobile.firstPage,
