@@ -336,7 +336,7 @@
 
 	// issue #2547
 	test( "custom select list item links have encoded option text values", function() {
-		$( "#encoded-option" ).data( 'selectmenu' )._buildList();
+		$( "#encoded-option" ).data( 'mobile-selectmenu' )._buildList();
 		deepEqual(window.encodedValueIsDefined, undefined);
 	});
 

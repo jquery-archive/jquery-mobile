@@ -177,7 +177,7 @@
 
 	test( "toggle switch should fire one change event when clicked", function(){
 		var control = $( "#slider-switch" ),
-			widget = control.data( "slider" ),
+			widget = control.data( "mobile-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			changeCount = 0,
@@ -226,7 +226,7 @@
 
 	asyncTest( "toggle switch handle should snap in the old position if dragged less than half of the slider width, in the new position if dragged more than half of the slider width", function() {
 		var control = $( "#slider-switch" ),
-			widget = control.data( "slider" ),
+			widget = control.data( "mobile-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			width = handle.width(),
@@ -291,7 +291,7 @@
 
 	asyncTest( "toggle switch handle should not move if user is dragging and value is changed", function() {
 		var control = $( "#slider-switch" ),
-			widget = control.data( "slider" ),
+			widget = control.data( "mobile-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			width = handle.width(),
@@ -339,7 +339,7 @@
 
 	asyncTest( "toggle switch should refresh when disabled", function() {
 		var control = $( "#slider-switch" ),
-			handle = control.data( "slider" ).handle;
+			handle = control.data( "mobile-slider" ).handle;
 
 		$.testHelper.sequence([
 			function() {
@@ -376,7 +376,7 @@
 
 	asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events", function() {
 		var control = $( "#start-stop-events" ),
-			widget = control.data( "slider" ),
+			widget = control.data( "mobile-slider" ),
 			slider = widget.slider;
 
 		$.testHelper.eventCascade([
