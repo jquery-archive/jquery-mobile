@@ -17,45 +17,39 @@
    <div data-role="page">
 
       <div data-role="header" data-theme="f">
-      <h1>Responsive Table</h1>
+      <h1>RWD Tables</h1>
       <a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
       <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
    </div><!-- /header -->
 
    <div data-role="content">
-        <h2>Responsive table</h2>
+        <h2>Responsive tables</h2>
 
-        <p>One of the biggest challenges in responsive designs is tabular data. Large tables with lots of columns don't fit on smaller screens and there isn't a simple way to re-format the content with CSS and media queries for an acceptable presentation. To address this, the framework offers two different options for presenting tables responsively. Each has benefits and tradeoffs, the right choice will depend on the data being presented.</p>
+        <p>One of the biggest challenges in responsive web design (RWD) is presenting tabular data. Large tables with lots of columns don't fit on smaller screens and there isn't a simple way to re-format the table content with CSS and media queries for an acceptable presentation. To address this, the framework offers two different options for presenting tables responsively. Each has benefits and tradeoffs, the right choice will depend on the data being presented.</p>
 		
 		<p><a href="table-reflow.html">Reflow mode</a> - Re-formats the table columns at narrow widths so each row of data is presented as a formatted block of label/data pairs. This is ideal for tables with product or contact information with more complex or lengthy data formatting that doesn't need comparison across rows of data.</p>
 		
 		<p><a href="table-column-toggle.html">Column toggle mode</a> - Selectively hides columns at narrower widths as a sensible default but also offers a menu to let users manually control which columns they want to see. This mode is better for financial data tables that have compact values and need to maintain comparisons across columns and rows of data. It can also be used for building things like product comparison tables.</p>
+
+
+		<p>The responsive table feature is built with a core table plugin (<code>jquery.mobile.table.js</code>)  that initializes when the <code>data-role="table"</code> attribute is added to the markup. This plugin is very lightweight and adds <code>ui-table</code> class, parses the table headers and generates information on the columns of data, and fires a <code>create</code> event. Both the table modes, <a href="table-reflow.html">reflow</a> and <a href="table-column-toggle.html">column toggle</a>, are written as extensions to the table widget that hook in via the <code>create</code> event to add the additional behaviors that make the tables responsive. Reflow is the default mode so if the extension is present, it will be applied automatically if the <code>data-role="table"</code> attribute is on the table.</p>
+		<p>If only one mode is used on a project, the download builder tool can be used to package only the table plugin and the single extension to save code weight.</p>
 		
+		<h2>API docs and demos</h2>
 		<ul data-role="listview" data-inset="true"data-divider-theme="d">
-			<li data-role="list-divider">Responsive table</li>
 			<li><a href="table-reflow.html">API: Reflow mode basics</a> </li>
 			<li><a href="table-column-toggle.html">API: Column toggle mode basics</a></li>
 			<li><a href="movie-list.html">Demo: Movie ranking styled reflow </a></li>
+			<li><a href="movie-list-toggle-options.html">Demo: Movie ranking column toggle  options </a></li>
             <li><a href="phone-compare.html">Demo: Phone comparison</a></li>
             <li><a href="financial-grouped-columns.html">Demo: Financial data w/heading groups</a></li>
 		</ul>
 		
-			
-		<h2>General markup guidelines</h2>
-	    <p>Both table modes start with standard HTML table markup but there are some specific guidelines you must follow for the responsive table to work correctly:  </p>
-	
-		<ol>
-			<li>Assign a unique <code>ID</code> to the table</li>
-			<li>Add the <code>data-role="table"</code> to apply the responsive table plugin</li>
-			<li>The default table mode is <code>reflow</code>, add <code>data-mode="columntoggle"</code> change modes</li>
-			<li>The first row of the table must contain the table headers, be sure to use <code>TH</code> instead of <code>TD</code> tags</li>
-			<li>To display longer table header text in the column chooser or reflow labels, wrap the text in the <code>TH</code> with a <code>abbr</code> element and set the <code>title</code>. This string will be used in place.</li>
-			<li>Do not use <code>rowspan</code> or <code>colspan</code> in your tables, these aren't supported except for grouped headers (see below)</li>
-			<li>Adding <code>thead</code> and <code>tbody</code> elements are optional but provide improved semantics</li>
-			
-		</ol>
 
-		<p>Here is a basic table that covers the points above.</p>
+		
+		<h2>General table markup guidelines</h2>
+	    
+		<p>Here is the basic table markup you should use for both table modes:</p>
 <pre><code>&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;reflow&quot;</strong>&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -74,13 +68,24 @@
       &lt;td&gt;100%&lt;/td&gt;
       &lt;td&gt;74&lt;/td&gt;
     &lt;/tr&gt;
+    &lt;/tbody&gt;
 &lt;/table&gt;
 </code></pre>
+
+		<p>Both table modes start with standard HTML table markup but there are some specific guidelines you must follow for the responsive table to work correctly:  </p>
+		<ul class="bullet">
+			<li>Follow standard HTML table markup guidelines for proper semantics</li>
+			<li>Do not use <code>rowspan</code> or <code>colspan</code> in your tables, these aren't supported except for grouped headers (see below)</li>
+			<li>Adding <code>thead</code> and <code>tbody</code> elements are optional but provide improved semantics</li>
+			<li>Assign a unique <code>ID</code> to the table (required for the column toggle mode)</li>
+			<li>Add the <code>data-role="table"</code> to apply the responsive table plugin</li>
+			<li>The default table mode is <code>reflow</code>, add <code>data-mode="columntoggle"</code> change modes</li>
+			<li>The first row of the table must contain the table headers, be sure to use <code>TH</code> instead of <code>TD</code> tags</li>
+			<li>To display longer table header text in the column chooser or reflow labels, wrap the text in the <code>TH</code> with a <code>abbr</code> element and set the <code>title</code>. This string will be used in place.</li>
+		</ul>
+
+		
 	
-			<h2>Table plugin and extensions</h2>
-	
-			<p>The responsive table feature is built with a core table plugin (<code>jquery.mobile.table.js</code>)  that initializes when the <code>data-role="table"</code> attribute is added to the markup. This plugin is very lightweight and adds <code>ui-table</code> class, parses the table headers and generates information on the columns of data, and fires a <code>create</code> event.</p>
-			<p>Each of the table modes, <a href="table-reflow.html">reflow</a> and <a href="table-column-toggle.html">column toggle</a>, are written as extensions to the table widget that hook in via the <code>create</code> event to add the additional behaviors that make the tables responsive. If only one mode is used on a project, the download builder tool can be used to package only the table plugin and the single extension to save code weight.</p>
 	
 			<h2>Styling and theming tables</h2>
 			
