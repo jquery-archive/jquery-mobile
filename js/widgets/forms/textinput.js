@@ -81,6 +81,29 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			input.bind( 'paste cut keyup focus change blur', toggleClear );
 
+		} else if ( input.not( ":jqmData(clear-btn='false')" ).is( "[type='text'],:jqmData(clear-btn='true')" ) ) {
+			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-btn-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
+			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearSearchButtonText + "'>" + o.clearSearchButtonText + "</a>" )
+				.bind('click', function( event ) {
+					input
+						.val( "" )
+						.focus()
+						.trigger( "change" );
+					clearbtn.addClass( "ui-input-clear-hidden" );
+					event.preventDefault();
+				})
+				.appendTo( focusedEl )
+				.buttonMarkup({
+					icon: "delete",
+					iconpos: "notext",
+					corners: true,
+					shadow: true,
+					mini: o.mini
+				});
+
+			toggleClear();
+
+			input.bind( 'paste cut keyup focus change blur', toggleClear );
 		} else {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
