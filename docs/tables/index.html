@@ -77,10 +77,10 @@
 &lt;/table&gt;
 </code></pre>
 	
-			<h2>Table plugins</h2>
+			<h2>Table plugin and extensions</h2>
 	
-			<p>The responsive table feature is built with a core table plugin (<code>jquery.mobile.table.js</code>)  that initializes when the <code>data-role="table"</code> attribute is added to the markup. This plugin is very lightweight and adds <code>ui-table</code> class, parses the table headers and generates information on the columns of data, and fires a <code>tablecreate</code> event.</p>
-			<p>Each of the table modes, reflow and column chooser, are written as extensions to the table widget that hook in via the <code>tablecreate</code> event. If only one mode is used on a project, the download builder tool can be used to package only the table plugin and the single extension to save code weight.</p>
+			<p>The responsive table feature is built with a core table plugin (<code>jquery.mobile.table.js</code>)  that initializes when the <code>data-role="table"</code> attribute is added to the markup. This plugin is very lightweight and adds <code>ui-table</code> class, parses the table headers and generates information on the columns of data, and fires a <code>create</code> event.</p>
+			<p>Each of the table modes, <a href="table-reflow.html">reflow</a> and <a href="table-column-toggle.html">column toggle</a>, are written as extensions to the table widget that hook in via the <code>create</code> event to add the additional behaviors that make the tables responsive. If only one mode is used on a project, the download builder tool can be used to package only the table plugin and the single extension to save code weight.</p>
 	
 			<h2>Styling and theming tables</h2>
 			
