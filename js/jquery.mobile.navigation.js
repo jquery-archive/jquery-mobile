@@ -552,10 +552,10 @@ define( [
 
 		if ( fromPage ) {
 			//trigger before show/hide events
-			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
+			fromPage.data( "mobile-page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
 
-		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
+		toPage.data( "mobile-page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
@@ -572,11 +572,11 @@ define( [
 
 			//trigger show/hide events
 			if ( fromPage ) {
-				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
+				fromPage.data( "mobile-page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
 
 			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
-			toPage.data( "page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
+			toPage.data( "mobile-page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
 		});
 
 		return promise;
@@ -649,7 +649,7 @@ define( [
 		var page = $( this );
 
 		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
-		if ( !page.data( "page" ).options.domCache &&
+		if ( !page.data( "mobile-page" ).options.domCache &&
 				page.is( ":jqmData(external-page='true')" ) ) {
 
 			page.bind( 'pagehide.remove', function() {

@@ -347,7 +347,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		// and aren't embedded
 		if ( hasSubPages &&
 			parentPage.is( ":jqmData(external-page='true')" ) &&
-			parentPage.data( "page" ).options.domCache === false ) {
+			parentPage.data( "mobile-page" ).options.domCache === false ) {
 
 			var newRemove = function( e, ui ) {
 				var nextPage = ui.nextPage, npURL,

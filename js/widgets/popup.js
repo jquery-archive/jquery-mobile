@@ -838,7 +838,7 @@ define( [ "jquery",
 			popup = $( $.mobile.path.parseUrl($link.attr( "href" )).hash, scope[0] ),
 			offset;
 
-		if ( popup.data( "popup" ) ) {
+		if ( popup.data( "mobile-popup" ) ) {
 			offset = $link.offset();
 			popup.popup( "open", {
 				x: offset.left + $link.outerWidth() / 2,

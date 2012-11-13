@@ -559,7 +559,7 @@ define( [
 
 	// issue #3894 - core doesn't trigger events on disabled delegates
 	$( document ).bind( "selectmenubeforecreate", function( event ) {
-		var selectmenuWidget = $( event.target ).data( "selectmenu" );
+		var selectmenuWidget = $( event.target ).data( "mobile-selectmenu" );
 
 		if ( !selectmenuWidget.options.nativeMenu &&
 				selectmenuWidget.element.parents( ":jqmData(role='popup')" ).length === 0 ) {
