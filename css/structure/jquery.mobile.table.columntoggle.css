@@ -3,7 +3,8 @@
 */
 
 .ui-table-columntoggle-btn {
-   float: right;
+	float: right;
+	margin-bottom:.8em;
 }
 /* Remove top/bottom margins around the fieldcontain on check list */ 
 .ui-table-columntoggle-popup fieldset {

@@ -40,7 +40,7 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
    self.element.addClass( o.classes.columnToggleTable );
 
    var id = ( $table.attr( "id" ) || self.options.classes.popup ) + "-popup", //TODO BETTER FALLBACK ID HERE
-      $menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-rel='popup'>" + o.columnBtnText + "</a>" ),
+      $menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-rel='popup' data-mini='true'>" + o.columnBtnText + "</a>" ),
       $popup = $( "<div data-role='popup' data-role='fieldcontain' class='" + o.classes.popup + "' id='" + id + "'></div>"),
       $menu = $("<fieldset data-role='controlgroup'></fieldset>").appendTo( $popup );
 

@@ -238,14 +238,111 @@
 			<h3>Working with grouped column headers</h3>
 			<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser. See an example of <a href="financial-grouped-columns.html">grouped column table</a>.</p>
 			
+			<h3>Customized demo</h3>
+			<p>This table uses the wide breakpoint, custom button theme and text, and themed menu</p>
+			<style>
+			.movie-custom tbody tr:nth-child(odd) td,
+			.movie-custom tbody tr:nth-child(odd) th {
+			  background-color: rgba(51,102,205,0.05);
+			}
+			.ui-table.movie-custom th,
+			.ui-table.movie-custom td {
+				border-bottom:none;
+			}
+			</style>
+		
+			 <table data-role="table" id="table-custom-2" data-mode="columntoggle" class="ui-body-d ui-shadow movie-custom breakpoint-columntoggle-std" data-column-btn-theme="b" data-column-btn-text="Display..." data-column-popup-theme="a">
+				
+	              <thead>
+	                <tr>
+	                  <th data-priority="2">Rank</th>
+	                  <th>Movie Title</th>
+	                  <th data-priority="3">Year</th>
+	                  <th data-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+	                  <th data-priority="5">Reviews</th>
+	                </tr>
+	              </thead>
+	              <tbody>
+	                <tr>
+	                  <th>1</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+	                  <td>1941</td>
+	                  <td>100%</td>
+	                  <td>74</td>
+	                </tr>
+	                <tr>
+	                  <th>2</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+	                  <td>1942</td>
+	                  <td>97%</td>
+	                  <td>64</td>
+	                </tr>
+	                <tr>
+	                  <th>3</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
+	                  <td>1972</td>
+	                  <td>97%</td>
+	                  <td>87</td>
+	                </tr>
+	                <tr>
+	                  <th>4</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
+	                  <td>1939</td>
+	                  <td>96%</td>
+	                  <td>87</td>
+	                </tr>
+	                <tr>
+	                  <th>5</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
+	                  <td>1962</td>
+	                  <td>94%</td>
+	                  <td>87</td>
+	                </tr>
+	                <tr>
+	                  <th>6</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
+	                  <td>1964</td>
+	                  <td>92%</td>
+	                  <td>74</td>
+	                </tr>
+	                <tr>
+	                  <th>7</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+	                  <td>1967</td>
+	                  <td>91%</td>
+	                  <td>122</td>
+	                </tr>
+	                <tr>
+	                  <th>8</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
+	                  <td>1939</td>
+	                  <td>90%</td>
+	                  <td>72</td>
+	                </tr>
+	                <tr>
+	                  <th>9</th>
+	                  <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external">Singin' in the Rain</a></td>
+	                  <td>1952</td>
+	                  <td>89%</td>
+	                  <td>85</td>
+	                </tr>
+	                <tr>
+	                  <th>10</th>
+	                  <td class="title"><a href="http://en.wikipedia.org/wiki/Inception" data-rel="external">Inception</a></td>
+	                  <td>2010</td>
+	                  <td>84%</td>
+	                  <td>78</td>
+	                </tr>
+	              </tbody>
+	            </table>
 
             <h2>Options</h2>
 		    <p>The columntoggle table comes with several options:</p>
 
 		    <dl>
-		      <dt><code>columnBtnTheme</code> default: null</dt><dd>Sets the theme for the column chooser button. Set to any valid swatch letter in your theme.</dd>
-		      <dt><code>columnPopupTheme</code> default: null</dt><dd>Sets the theme for the column chooser popup checkboxes. Set to any valid swatch letter in your theme.</dd>
-		      <dt><code>columnBtnText</code> default: "Columns..."</dt><dd>Sets the text for the for the column chooser button.</dd>
+				<dt><code>columnBtnTheme</code> default: null</dt><dd>Sets the theme for the column chooser button. Set to any valid swatch letter in your theme. Available as the <code>data-column-btn-theme</code> attribute.</dd>
+				<dt><code>columnBtnText</code> default: "Columns..."</dt><dd>Sets the text for the for the column chooser button. Available as the <code>data-column-btn-text</code> attribute.</dd>
+				<dt><code>columnPopupTheme</code> default: null</dt><dd>Sets the theme for the column chooser popup checkboxes. Set to any valid swatch letter in your theme. Available as the <code>data-popup-theme</code> attribute.</dd>
 		    </dl>
 
 		    <p>The columntoggle mode also has an option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
