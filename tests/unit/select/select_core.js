@@ -17,6 +17,57 @@
 		$.mobile.activePage.find("li a").first().click();
 	};
 
+	// Check if two chunks of DOM are identical
+	domEqual = function( l, r ) {
+		var idx, idxAttr, lattr, rattr;
+
+		// If the lengths of the two jQuery objects are different, the DOM
+		// must be different so don't bother checking
+		if ( l.length === r.length ) {
+			// Otherwise, examine each element
+			for ( idx = 0 ; idx < l.length ; idx++ ) {
+				l = l.eq( idx ); r = r.eq( idx );
+
+				// If the tagName is different the DOM must be different
+				if ( l[ 0 ].tagName !== r[ 0 ].tagName ){
+					return false;
+				}
+
+				// Otherwise, check the attributes
+				if ( l[ 0 ].attributes.length === r[ 0 ].attributes.length ) {
+					// convert attributes array to dictionary, because the order
+					// of the attributes may be different between l and r
+					lattr = {};
+					rattr = {};
+					for ( idxAttr = 0 ; idxAttr < l[ 0 ].attributes.length ; idxAttr++ ) {
+						lattr[ l[ 0 ].attributes[ idxAttr ].name ] = l[ 0 ].attributes[ idxAttr ].value;
+						rattr[ r[ 0 ].attributes[ idxAttr ].name ] = r[ 0 ].attributes[ idxAttr ].value;
+					}
+
+					// Check if each attribute in lattr has the same value in rattr
+					for ( idxAttr in lattr ) {
+						if ( rattr[ idxAttr ] !== lattr[ idxAttr ] ) {
+							return false;
+						}
+					}
+
+					// If so, compare the children of l and r recursively
+					if ( !domEqual( $( l[ 0 ] ).children(), $( r[ 0 ] ).children() ) ) {
+						return false;
+					}
+				} else {
+					return false;
+				}
+				l = l.end(); r = r.end();
+			}
+			if ( idx === l.length ) {
+				return true;
+			}
+		}
+
+		return false;
+	};
+
 	module(libName, {
 		teardown: function(){
 			$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
@@ -412,4 +463,56 @@
 
 		deepEqual( "Standard: 7 day, Rush: 3 days", $select.parent().find( ".ui-btn-text" ).text() );
 	});
+
+	asyncTest( "destroying a select menu leaves no traces", function() {
+		$.testHelper.pageSequence( [
+			function() { $.mobile.changePage( "#destroyTest" ); },
+			// Check if two chunks of DOM are identical
+			function() {
+				var unenhancedSelect = $(
+						"<select>" +
+						"<option>Title</option>" +
+						"<option value='option1'>Option 1</option>" +
+						"<option value='option2'>Option 2</option>" +
+						"</select>"),
+					unenhancedSelectClone = unenhancedSelect.clone();
+
+				$( "#destroyTest" ).append( unenhancedSelectClone );
+				unenhancedSelectClone.selectmenu();
+				unenhancedSelectClone.selectmenu( "destroy" );
+				unenhancedSelectClone.remove();
+
+				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, destroying, and removing the select menu, the page is empty" );
+				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+			},
+			function() { $.mobile.back(); },
+			function() { start(); }
+		]);
+	});
+
+	asyncTest( "destroying a custom select menu leaves no traces", function() {
+		$.testHelper.pageSequence( [
+			function() { $.mobile.changePage( "#destroyTestCustom" ); },
+			function() {
+				var unenhancedSelect = $(
+						"<select data-" + ( $.mobile.ns || "" ) + "native-menu='false'>" +
+						"<option>Title</option>" +
+						"<option value='option1'>Option 1</option>" +
+						"<option value='option2'>Option 2</option>" +
+						"</select>"),
+					unenhancedSelectClone = unenhancedSelect.clone();
+
+				$( "#destroyTestCustom" ).append( unenhancedSelectClone );
+				unenhancedSelectClone.selectmenu();
+				unenhancedSelectClone.selectmenu( "destroy" );
+				unenhancedSelectClone.remove();
+
+				deepEqual( $( "#destroyTestCustom" ).children().length, 0, "After adding, enhancing, destroying, and removing the select menu, the page is empty" );
+				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+			},
+			function() { $.mobile.back(); },
+			function() { start(); }
+		]);
+	});
+
 })(jQuery);
