@@ -4,7 +4,6 @@
  */
 
 (function($){
-	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search;
 
 	module( "Basic Table", {
 		setup: function(){
@@ -66,7 +65,7 @@
 	});
 	asyncTest( "The page should be enhanced correctly" , function(){
 		setTimeout(function() {
-			ok($('#reflow-table-test .ui-table').length, ".ui-table class added to table element");
+			ok($('#reflow-table-test .ui-table-reflow').length, ".ui-table-reflow class added to table element");
 			start();
 		}, 800);
 	});
@@ -74,8 +73,10 @@
 		setTimeout(function(){
 			var $table = $( "#reflow-table-test table" ),
 				$body = $table.find( "tbody" ),
-				$tds = $body.find( "td" );
-			ok( $tds.find( "b.ui-table-cell-label" ).length , "Appropriate label placed" );
+				$tds = $body.find( "td" ),
+				labels = $tds.find( "b.ui-table-cell-label" );
+			ok( labels , "Appropriate label placed" );
+			equal( $( labels[0] ).text(), "Movie Title" , "Appropriate label placed" );
 			start();
 		}, 800);
 	});
