@@ -35,6 +35,9 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 	var wrapper = $( "<form>", {
 			"class": "ui-listview-filter ui-bar-" + listview.options.filterTheme,
 			"role": "search"
+		}).submit( function( e ) {
+			e.preventDefault();
+			search.blur();
 		}),
 		search = $( "<input>", {
 			placeholder: listview.options.filterPlaceholder
