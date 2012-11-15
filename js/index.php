@@ -62,9 +62,10 @@ $files = array(
 );
 
 function getCommitId() {
-	$logs = file_get_contents( "../.git/logs/HEAD" );
-	if ( $logs ) {
-		$logs = explode( "\n", $logs );
+	$gitHeadPath = '../.git/logs/HEAD';
+	// Verify the file exists and is readable before trying to open it
+	if ( is_readable( $gitHeadPath ) ) {
+		$logs = explode( "\n", file_get_contents( $gitHeadPath ) );
 		$n_logs = count( $logs );
 		if ( $n_logs > 1 ) {
 			$log = explode( " ", $logs[ $n_logs - 2 ] );
