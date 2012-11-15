@@ -10,7 +10,7 @@
 		expect( 5 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-test" );
+				$.mobile.changePage( $( "#basic-collapsible-test" ) );
 			},
 
 			function() {
@@ -29,7 +29,7 @@
 		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-test" );
+				$.mobile.changePage( $( "#basic-collapsible-test" ) );
 			},
 
 			function() {
@@ -49,7 +49,7 @@
 		var nTests = 2;
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-set-test" );
+				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -74,7 +74,7 @@
 		var nTests = 0;
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-lonely-collapsible-test" );
+				$.mobile.changePage( $( "#collapsible-set-with-lonely-collapsible-test" ) );
 			},
 
 			function() {
@@ -96,7 +96,7 @@
 		expect( 2 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-set-test" );
+				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -111,7 +111,7 @@
 		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#basic-collapsible-set-test" );
+				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -129,7 +129,7 @@
 		expect( 7 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-dynamic-content" );
+				$.mobile.changePage( $( "#collapsible-set-with-dynamic-content" ) );
 			},
 
 			function() {
@@ -154,7 +154,7 @@
 		expect( 7 );
 		$.testHelper.pageSequence([
 			function(){
-  				$.testHelper.openPage( "#collapsible-set-with-static-and-dynamic-content" );
+  				$.mobile.changePage( $( "#collapsible-set-with-static-and-dynamic-content" ) );
   			},
 
   			function() {
@@ -179,7 +179,7 @@
 		expect( 1 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-last-collapsible-expanded" );
+				$.mobile.changePage( $( "#collapsible-set-with-last-collapsible-expanded" ) );
 			},
 
 			function() {
@@ -194,7 +194,7 @@
 		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-legends" );
+				$.mobile.changePage( $( "#collapsible-set-with-legends" ) );
 			},
 
 			function() {
@@ -213,7 +213,7 @@
 		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-with-custom-icons" );
+				$.mobile.changePage( $( "#collapsible-with-custom-icons" ) );
 			},
 
 			function() {
@@ -237,7 +237,7 @@
 		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-custom-icons" );
+				$.mobile.changePage( $( "#collapsible-set-with-custom-icons" ) );
 			},
 
 			function() {
@@ -259,7 +259,7 @@
 		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-with-theming" );
+				$.mobile.changePage( $( "#collapsible-with-theming" ) );
 			},
 
 			function() {
@@ -280,7 +280,7 @@
 		expect( 13 );
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage( "#collapsible-set-with-theming" );
+				$.mobile.changePage( $( "#collapsible-set-with-theming" ) );
 			},
 
 			function() {
