@@ -80,5 +80,28 @@
 			start();
 		}, 800);
 	});
+	module( "Column toggle table Mode", {
+		setup: function(){
+			var hash = "#column-table-test";
+			if( location.hash != hash ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( hash );
+			}
+		},
+
+		teardown: function() {
+		}
+	});
+	asyncTest( "The page should be enhanced correctly" , function(){
+		setTimeout(function() {
+			ok($('#column-table-test .ui-table-columntoggle').length, ".ui-table-columntoggle class added to table element");
+			start();
+		}, 800);
+	});
 
 })(jQuery);

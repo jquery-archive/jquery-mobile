@@ -20,8 +20,8 @@
 		$.testHelper.asyncLoad([
 			[
 				"widgets/jquery.mobile.table",
-				"widgets/jquery.mobile.table.reflow"
-//				"widgets/jquery.mobile.table.columntoggle"
+				"widgets/jquery.mobile.table.reflow",
+				"widgets/jquery.mobile.table.columntoggle"
 			],
 			[ "jquery.mobile.init" ],
 			[ "table_core.js" ]
@@ -97,6 +97,33 @@
 	</div>
 </div>
 
+<div data-nstest-role="page" id='column-table-test'>
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1>Basic Table</h1>
+	</div>
+	<div data-nstest-role="content">
+		<table data-nstest-role="table" data-nstest-mode="columntoggle" id="movie-table-column">
+			<thead>
+				<tr>
+					<th data-priority="1">Rank</th>
+					<th data-priority="persist">Movie Title</th>
+					<th data-priority="2">Year</th>
+					<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+					<th data-priority="4">Reviews</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>1</th>
+					<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+					<td>1941</td>
+					<td>100%</td>
+					<td>74</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
 <div data-nstest-role='page' id='basic-table-results'>
 	<div data-nstest-role="header" data-nstest-position="inline">
 		<h1>Results</h1>
