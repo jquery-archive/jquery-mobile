@@ -100,6 +100,10 @@
 	asyncTest( "The page should be enhanced correctly" , function(){
 		setTimeout(function() {
 			ok($('#column-table-test .ui-table-columntoggle').length, ".ui-table-columntoggle class added to table element");
+			ok($('#column-table-test .ui-table-columntoggle-btn').length, ".ui-table-columntoggle-btn button added");
+			equal($('#column-table-test .ui-table-columntoggle-btn').text(), "Columns...",  "Column toggle button has correct text");
+			ok($('#column-table-test #movie-table-column-popup-popup').length, "dialog added");
+			ok($('#column-table-test #movie-table-column-popup-popup').not( ":visible" ) , "dialog hidden");
 			start();
 		}, 800);
 	});
