@@ -19,8 +19,8 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"widgets/jquery.mobile.table"
-//				"widgets/jquery.mobile.table.reflow",
+				"widgets/jquery.mobile.table",
+				"widgets/jquery.mobile.table.reflow"
 //				"widgets/jquery.mobile.table.columntoggle"
 			],
 			[ "jquery.mobile.init" ],
@@ -48,6 +48,33 @@
 	</div>
 	<div data-nstest-role="content">
 		<table data-nstest-role="table" id="movie-table">
+			<thead>
+				<tr>
+					<th data-priority="1">Rank</th>
+					<th data-priority="persist">Movie Title</th>
+					<th data-priority="2">Year</th>
+					<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+					<th data-priority="4">Reviews</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>1</th>
+					<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+					<td>1941</td>
+					<td>100%</td>
+					<td>74</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div data-nstest-role="page" id='reflow-table-test'>
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1>Basic Table</h1>
+	</div>
+	<div data-nstest-role="content">
+		<table data-nstest-role="table" data-nstest-mode="reflow" id="movie-table-reflow">
 			<thead>
 				<tr>
 					<th data-priority="1">Rank</th>
