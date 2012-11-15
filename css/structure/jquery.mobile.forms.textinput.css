@@ -28,11 +28,11 @@ input:-moz-placeholder { color: #aaa; }
 input[type=number]::-webkit-outer-spin-button { margin: 0; }
 
 @media all and (min-width: 450px){
-	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
+	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 20%; margin: 0 1% 0 0 }
 	.ui-field-contain input.ui-input-text,
 	.ui-field-contain textarea.ui-input-text,
-	.ui-field-contain .ui-input-search { width: 78%; display: inline-block; }
-  .ui-field-contain div.ui-input-text { width: 77%; display: inline-block; }
+	.ui-field-contain .ui-input-search,
+  .ui-field-contain .ui-input-text { width: 78%; display: inline-block; }
 	.ui-hide-label input.ui-input-text,
 	.ui-hide-label textarea.ui-input-text,
 	.ui-hide-label .ui-input-search, .ui-hide-label .ui-input-text { width: 100%; }

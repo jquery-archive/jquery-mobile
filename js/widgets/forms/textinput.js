@@ -16,7 +16,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
-		clearSearchButtonText: "clear text",
+		clearBtn: false,
+		clearSearchButtonText: "clear text", //deprecating for 1.3...
+		clearButtonText: clearSearchButtonText || "clear text",
 		disabled: false
 	},
 
@@ -54,12 +56,21 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input[0].setAttribute( "autocomplete", "off" );
 		}
 
+		var searchNeedsIcon = input.is( "[type='search'],:jqmData(type='search')" ),
+				searchNeedsClearBtn = searchNeedsIcon && !input.is( ':jqmData(clear-btn="false")' ),
+				searchNeedsIconNoBtn = searchNeedsIcon && !searchNeedsClearBtn,
+				textNeedsClearBtn = input.is( "[type='text'],textarea" ) && !!o.clearBtn,
+				needsClearBtn = textNeedsClearBtn || ( searchNeedsIcon && searchNeedsClearBtn );
 
-		//"search" input widget
-		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
-
+		//"search" and "text" input widgets
+		if ( searchNeedsIcon ) {
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearSearchButtonText + "'>" + o.clearSearchButtonText + "</a>" )
+		} else if ( textNeedsClearBtn ) {
+			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
+		}
+
+		if( needsClearBtn ) {
+			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearButtonText + "'>" + o.clearButtonText + "</a>" )
 				.bind('click', function( event ) {
 					input
 						.val( "" )
@@ -80,31 +91,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			toggleClear();
 
 			input.bind( 'paste cut keyup focus change blur', toggleClear );
-
-		} else if ( input.not( ":jqmData(clear-btn='false')" ).is( "[type='text'],:jqmData(clear-btn='true')" ) ) {
-			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-btn-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
-			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearSearchButtonText + "'>" + o.clearSearchButtonText + "</a>" )
-				.bind('click', function( event ) {
-					input
-						.val( "" )
-						.focus()
-						.trigger( "change" );
-					clearbtn.addClass( "ui-input-clear-hidden" );
-					event.preventDefault();
-				})
-				.appendTo( focusedEl )
-				.buttonMarkup({
-					icon: "delete",
-					iconpos: "notext",
-					corners: true,
-					shadow: true,
-					mini: o.mini
-				});
-
-			toggleClear();
-
-			input.bind( 'paste cut keyup focus change blur', toggleClear );
-		} else {
+		}
+		else if( !searchNeedsIconNoBtn ) { //special case
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
@@ -163,8 +151,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	},
 
 	disable: function() {
-		var $el;
-		if ( this.element.attr( "disabled", true ).is( "[type='search'], :jqmData(type='search')" ) ) {
+		var $el,
+				parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( this.element.is( "[type='search'], :jqmData(type='search')" ) || ( this.element.is( "[type='text'],textarea" ) && !!this.options.clearBtn ) );
+		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
@@ -174,10 +163,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	},
 
 	enable: function() {
-		var $el;
+		var $el,
+				parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( this.element.is( "[type='search'], :jqmData(type='search')" ) || ( this.element.is( "[type='text'],textarea" ) && !!this.options.clearBtn ) );
 
 		// TODO using more than one line of code is acceptable ;)
-		if ( this.element.attr( "disabled", false ).is( "[type='search'], :jqmData(type='search')" ) ) {
+		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
