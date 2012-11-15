@@ -17,8 +17,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
 		clearBtn: false,
-		clearSearchButtonText: "clear text", //deprecating for 1.3...
-		clearButtonText: clearSearchButtonText || "clear text",
+		clearSearchButtonText: null, //deprecating for 1.3...
+		clearButtonText: "clear text",
 		disabled: false
 	},
 
@@ -30,7 +30,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
 			miniclass = o.mini ? " ui-mini" : "",
-			focusedEl, clearbtn;
+			focusedEl,
+			clearbtn,
+			clearButtonText = o.clearSearchButtonText || o.clearButtonText;
 
 		function toggleClear() {
 			setTimeout( function() {
@@ -70,7 +72,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 
 		if( needsClearBtn ) {
-			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearButtonText + "'>" + o.clearButtonText + "</a>" )
+			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearButtonText + "'>" + clearButtonText + "</a>" )
 				.bind('click', function( event ) {
 					input
 						.val( "" )
