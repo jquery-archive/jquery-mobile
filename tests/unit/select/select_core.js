@@ -470,7 +470,7 @@
 			// Check if two chunks of DOM are identical
 			function() {
 				var unenhancedSelect = $(
-						"<select>" +
+						"<select data-" + ( $.mobile.ns || "" ) + "native-menu='true'>" +
 						"<option>Title</option>" +
 						"<option value='option1'>Option 1</option>" +
 						"<option value='option2'>Option 2</option>" +
