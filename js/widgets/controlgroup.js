@@ -38,14 +38,20 @@ define( [ "jquery",
 			}
 			$el.addClass( "ui-corner-all ui-controlgroup" );
 
+			$.extend( this, {
+				_initialRefresh: true
+			});
+
 			$.each( this.options, function( key, value ) {
 				// Cause initial options to be applied by their handler by temporarily setting the option to undefined
 				// - the handler then sets it to the initial value
 				self.options[ key ] = undefined;
 				self._setOption( key, value, true );
 			});
+		},
 
-			this._refresh( true );
+		_init: function() {
+			this.refresh();
 		},
 
 		_setOption: function( key, value ) {
@@ -63,7 +69,7 @@ define( [ "jquery",
 			this.element
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
 				.addClass( "ui-controlgroup-" + value );
-			this._refresh( false );
+			this.refresh();
 		},
 
 		_setCorners: function( value ) {
@@ -82,16 +88,14 @@ define( [ "jquery",
 			return this.element.children( ".ui-controlgroup-controls" );
 		},
 
-		_refresh: function( create ) {
-			var els = this.element.find( ".ui-btn" ).not( ".ui-slider-handle" );
+		refresh: function() {
+			var els = this.element.find( ".ui-btn" ).not( ".ui-slider-handle" ),
+				create = this._initialRefresh;
 			if ( $.mobile.checkboxradio ) {
 				this.element.find( ":mobile-checkboxradio" ).checkboxradio( "refresh" );
 			}
 			this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
-		},
-
-		refresh: function() {
-			this._refresh( false );
+			this._initialRefresh = false;
 		}
 	});
 
