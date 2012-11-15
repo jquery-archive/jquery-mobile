@@ -99,7 +99,7 @@ define( [
 				self.refresh();
 
 				if ( self._origTabIndex === undefined ) {
-					self._origTabIndex = self.select.attr( "tabindex" );
+					self._origTabIndex = self.select[ 0 ].hasAttribute( "tabindex" ) ? self.select.attr( "tabindex" ) : undefined;
 					// Map undefined to false, because self._origTabIndex === undefined
 					// indicates that we have not yet checked whether the select has
 					// originally had a tabindex attribute, whereas false indicates that
