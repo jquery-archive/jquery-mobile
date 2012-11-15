@@ -99,7 +99,7 @@ define( [
 				self.refresh();
 
 				if ( self._origTabIndex === undefined ) {
-					self._origTabIndex = self.select.attr( "tabindex" );
+					self._origTabIndex = self.select[ 0 ].hasAttribute( "tabindex" ) ? self.select.attr( "tabindex" ) : undefined;
 					// Map undefined to false, because self._origTabIndex === undefined
 					// indicates that we have not yet checked whether the select has
 					// originally had a tabindex attribute, whereas false indicates that
@@ -559,7 +559,7 @@ define( [
 
 	// issue #3894 - core doesn't trigger events on disabled delegates
 	$( document ).bind( "selectmenubeforecreate", function( event ) {
-		var selectmenuWidget = $( event.target ).data( "selectmenu" );
+		var selectmenuWidget = $( event.target ).data( "mobile-selectmenu" );
 
 		if ( !selectmenuWidget.options.nativeMenu &&
 				selectmenuWidget.element.parents( ":jqmData(role='popup')" ).length === 0 ) {

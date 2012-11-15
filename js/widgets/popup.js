@@ -683,6 +683,13 @@ define( [ "jquery",
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
 			this._setTheme( "none" );
 			this.element
+				// Cannot directly insertAfter() - we need to detach() first, because
+				// insertAfter() will do nothing if the payload div was not attached
+				// to the DOM at the time the widget was created, and so the payload
+				// will remain inside the container even after we call insertAfter().
+				// If that happens and we remove the container a few lines below, we
+				// will cause an infinite recursion - #5244
+				.detach()
 				.insertAfter( this._ui.placeholder )
 				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
 			this._ui.screen.remove();
@@ -831,7 +838,7 @@ define( [ "jquery",
 			popup = $( $.mobile.path.parseUrl($link.attr( "href" )).hash, scope[0] ),
 			offset;
 
-		if ( popup.data( "popup" ) ) {
+		if ( popup.data( "mobile-popup" ) ) {
 			offset = $link.offset();
 			popup.popup( "open", {
 				x: offset.left + $link.outerWidth() / 2,

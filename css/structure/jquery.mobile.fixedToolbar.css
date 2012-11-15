@@ -49,3 +49,6 @@
 .ui-footer-fixed .ui-btn { 
 	z-index: 10;
 }
+.ui-android-2x-fixed .ui-li-has-thumb {
+	-webkit-transform: translate3d(0,0,0);
+}

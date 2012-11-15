@@ -15,7 +15,7 @@
 	function popupEnhancementTests( $sel, prefix ) {
 		var $container = $sel.parent(), $screen = $sel.parent().prev();
 
-		ok( $sel.data( "popup" ),  prefix + ", popup div is associated with a popup widget" );
+		ok( $sel.data( "mobile-popup" ),  prefix + ", popup div is associated with a popup widget" );
 		ok( $sel.hasClass( "ui-popup" ),  prefix + ", popup payload has class 'ui-popup'" );
 		ok( $container.hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
 		ok( $container.parent().hasClass( "ui-page" ), prefix + ", popup container parent is the page" );
@@ -31,7 +31,7 @@
 
 	test( "Popup tolerances are parsed correctly", function() {
 		var tolTestElement = $( "#tolerance-test" ),
-			tolTestPopup = tolTestElement.data( "popup" ),
+			tolTestPopup = tolTestElement.data( "mobile-popup" ),
 			defaultValues = tolTestPopup._tolerance;
 
 		ok( (
@@ -185,7 +185,7 @@
 	asyncTest( "Popup interacts correctly with hashchange", function() {
 		var baseUrl, activeIndex, $popup = $( "#test-popup" );
 
-		if( !$popup.data( "popup" ).options.history ) {
+		if( !$popup.data( "mobile-popup" ).options.history ) {
 			expect( 1 )
 			ok( true, "hash change disabled" );
 			start();
@@ -237,7 +237,7 @@
 			initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority + initialHRef.directory,
 			$popup = $( "#test-popup" );
 
-		if( !$popup.data( "popup" ).options.history ) {
+		if( !$popup.data( "mobile-popup" ).options.history ) {
 			expect( 1 )
 			ok( true, "hash change disabled" );
 			start();
@@ -415,7 +415,7 @@
 
 		expect( 3 );
 
-		ok( !$popup.data( "popup" )._isOpen, "popup is initially closed" );
+		ok( !$popup.data( "mobile-popup" )._isOpen, "popup is initially closed" );
 
 		$.testHelper.detailedEventCascade([
 			function() {
@@ -427,7 +427,7 @@
 			},
 
 			function() {
-				ok( $popup.data( "popup" )._isOpen, "popup is opened with open method" );
+				ok( $popup.data( "mobile-popup" )._isOpen, "popup is opened with open method" );
 				$popup.find( "a" ).click();
 			},
 
@@ -436,7 +436,7 @@
 			},
 
 			function() {
-				ok( !$popup.data( "popup" )._isOpen, "popup is closed on link click" );
+				ok( !$popup.data( "mobile-popup" )._isOpen, "popup is closed on link click" );
 			},
 
 			{ timeout: { length: 500 } },

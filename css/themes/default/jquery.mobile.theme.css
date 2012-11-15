@@ -798,76 +798,17 @@ a.ui-link-inherit {
 /* corner rounding classes
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-corner-tl {
-	-moz-border-radius-topleft: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-top-left-radius: 	.6em /*{global-radii-blocks}*/;
-	border-top-left-radius: 			.6em /*{global-radii-blocks}*/;
-}
-.ui-corner-tr {
-	-moz-border-radius-topright: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-top-right-radius: 	.6em /*{global-radii-blocks}*/;
-	border-top-right-radius: 			.6em /*{global-radii-blocks}*/;
-}
-.ui-corner-bl {
-	-moz-border-radius-bottomleft: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-bottom-left-radius: 	.6em /*{global-radii-blocks}*/;
-	border-bottom-left-radius: 			.6em /*{global-radii-blocks}*/;
-}
-.ui-corner-br {
-	-moz-border-radius-bottomright: 	.6em /*{global-radii-blocks}*/;
-	-webkit-border-bottom-right-radius: .6em /*{global-radii-blocks}*/;
-	border-bottom-right-radius: 		.6em /*{global-radii-blocks}*/;
-}
-.ui-corner-top {
-	-moz-border-radius-topleft: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-top-left-radius: 	.6em /*{global-radii-blocks}*/;
-	border-top-left-radius: 			.6em /*{global-radii-blocks}*/;
-	-moz-border-radius-topright: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-top-right-radius: 	.6em /*{global-radii-blocks}*/;
-	border-top-right-radius: 			.6em /*{global-radii-blocks}*/;
-}
-.ui-corner-bottom {
-	-moz-border-radius-bottomleft: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-bottom-left-radius: 	.6em /*{global-radii-blocks}*/;
-	border-bottom-left-radius: 			.6em /*{global-radii-blocks}*/;
-	-moz-border-radius-bottomright: 	.6em /*{global-radii-blocks}*/;
-	-webkit-border-bottom-right-radius: .6em /*{global-radii-blocks}*/;
-	border-bottom-right-radius: 		.6em /*{global-radii-blocks}*/;
-	}
-.ui-corner-right {
-	-moz-border-radius-topright: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-top-right-radius: 	.6em /*{global-radii-blocks}*/;
-	border-top-right-radius: 			.6em /*{global-radii-blocks}*/;
-	-moz-border-radius-bottomright: 	.6em /*{global-radii-blocks}*/;
-	-webkit-border-bottom-right-radius: .6em /*{global-radii-blocks}*/;
-	border-bottom-right-radius: 		.6em /*{global-radii-blocks}*/;
-}
-.ui-corner-left {
-	-moz-border-radius-topleft: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-top-left-radius: 	.6em /*{global-radii-blocks}*/;
-	border-top-left-radius: 			.6em /*{global-radii-blocks}*/;
-	-moz-border-radius-bottomleft: 		.6em /*{global-radii-blocks}*/;
-	-webkit-border-bottom-left-radius: 	.6em /*{global-radii-blocks}*/;
-	border-bottom-left-radius: 			.6em /*{global-radii-blocks}*/;
-}
 .ui-corner-all {
-	-moz-border-radius: 				.6em /*{global-radii-blocks}*/;
 	-webkit-border-radius: 				.6em /*{global-radii-blocks}*/;
 	border-radius: 						.6em /*{global-radii-blocks}*/;
-}
-.ui-corner-none {
-	-moz-border-radius: 				   0;
-	-webkit-border-radius: 				   0;
-	border-radius: 						   0;
 }
 
 /* Form field separator
 -----------------------------------------------------------------------------------------------------------*/
 .ui-br {
-	border-bottom: rgb(130,130,130);
-	border-bottom: rgba(130,130,130,.3);
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
+	border-color: rgb(130,130,130);
+	border-color: rgba(130,130,130,.3);
+	border-style: solid;
 }
 
 /* Interaction cues
@@ -1032,83 +973,13 @@ a.ui-link-inherit {
 
 /* Button corner classes
 -----------------------------------------------------------------------------------------------------------*/
-
-.ui-btn-corner-tl {
-	-moz-border-radius-topleft: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-top-left-radius: 	1em /*{global-radii-buttons}*/;
-	border-top-left-radius: 			1em /*{global-radii-buttons}*/;
-}
-.ui-btn-corner-tr {
-	-moz-border-radius-topright: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-top-right-radius: 	1em /*{global-radii-buttons}*/;
-	border-top-right-radius: 			1em /*{global-radii-buttons}*/;
-}
-.ui-btn-corner-bl {
-	-moz-border-radius-bottomleft: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-bottom-left-radius: 	1em /*{global-radii-buttons}*/;
-	border-bottom-left-radius: 			1em /*{global-radii-buttons}*/;
-}
-.ui-btn-corner-br {
-	-moz-border-radius-bottomright: 	1em /*{global-radii-buttons}*/;
-	-webkit-border-bottom-right-radius: 1em /*{global-radii-buttons}*/;
-	border-bottom-right-radius: 		1em /*{global-radii-buttons}*/;
-}
-.ui-btn-corner-top {
-	-moz-border-radius-topleft: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-top-left-radius: 	1em /*{global-radii-buttons}*/;
-	border-top-left-radius: 			1em /*{global-radii-buttons}*/;
-	-moz-border-radius-topright: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-top-right-radius: 	1em /*{global-radii-buttons}*/;
-	border-top-right-radius: 			1em /*{global-radii-buttons}*/;
-}
-.ui-btn-corner-bottom {
-	-moz-border-radius-bottomleft: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-bottom-left-radius: 	1em /*{global-radii-buttons}*/;
-	border-bottom-left-radius: 			1em /*{global-radii-buttons}*/;
-	-moz-border-radius-bottomright: 	1em /*{global-radii-buttons}*/;
-	-webkit-border-bottom-right-radius: 1em /*{global-radii-buttons}*/;
-	border-bottom-right-radius: 		1em /*{global-radii-buttons}*/;
-}
-.ui-btn-corner-right {
-	 -moz-border-radius-topright: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-top-right-radius: 	1em /*{global-radii-buttons}*/;
-	border-top-right-radius: 			1em /*{global-radii-buttons}*/;
-	-moz-border-radius-bottomright: 	1em /*{global-radii-buttons}*/;
-	-webkit-border-bottom-right-radius: 1em /*{global-radii-buttons}*/;
-	border-bottom-right-radius: 		1em /*{global-radii-buttons}*/;
-}
-.ui-btn-corner-left {
-	-moz-border-radius-topleft: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-top-left-radius: 	1em /*{global-radii-buttons}*/;
-	border-top-left-radius: 			1em /*{global-radii-buttons}*/;
-	-moz-border-radius-bottomleft: 		1em /*{global-radii-buttons}*/;
-	-webkit-border-bottom-left-radius: 	1em /*{global-radii-buttons}*/;
-	border-bottom-left-radius: 			1em /*{global-radii-buttons}*/;
-}
 .ui-btn-corner-all {
-	-moz-border-radius: 				1em /*{global-radii-buttons}*/;
 	-webkit-border-radius: 				1em /*{global-radii-buttons}*/;
 	border-radius: 						1em /*{global-radii-buttons}*/;
 }
 
 /* radius clip workaround for cleaning up corner trapping */
-.ui-corner-tl,
-.ui-corner-tr,
-.ui-corner-bl,
-.ui-corner-br,
-.ui-corner-top,
-.ui-corner-bottom,
-.ui-corner-right,
-.ui-corner-left,
 .ui-corner-all,
-.ui-btn-corner-tl,
-.ui-btn-corner-tr,
-.ui-btn-corner-bl,
-.ui-btn-corner-br,
-.ui-btn-corner-top,
-.ui-btn-corner-bottom,
-.ui-btn-corner-right,
-.ui-btn-corner-left,
 .ui-btn-corner-all {
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;

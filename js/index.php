@@ -34,6 +34,7 @@ $files = array(
 	'widgets/dialog.js',
 	'widgets/page.sections.js',
 	'widgets/collapsible.js',
+	'widgets/addFirstLastClasses.js',
 	'widgets/collapsibleSet.js',
 	'jquery.mobile.fieldContain.js',
 	'jquery.mobile.grid.js',
@@ -50,9 +51,10 @@ $files = array(
 	'widgets/forms/select.custom.js',
 	'widgets/forms/select.js',
 	'jquery.mobile.buttonMarkup.js',
-	'jquery.mobile.controlGroup.js',
+	'widgets/controlgroup.js',
 	'jquery.mobile.links.js',
 	'widgets/fixedToolbar.js',
+	'widgets/fixedToolbar.workarounds.js',
 	'widgets/popup.js',
 	'widgets/jquery.mobile.table.js',
 	'widgets/jquery.mobile.table.columntoggle.js',
@@ -61,5 +63,29 @@ $files = array(
 	'jquery.mobile.zoom.iosorientationfix.js',
 	'jquery.mobile.init.js'
 );
+
+function getCommitId() {
+	$gitHeadPath = "../.git/logs/HEAD";
+	$logs = ( is_readable( $gitHeadPath ) ? file_get_contents( $gitHeadPath ) : false );
+	if ( $logs ) {
+		$logs = explode( "\n", $logs );
+		$n_logs = count( $logs );
+		if ( $n_logs > 1 ) {
+			$log = explode( " ", $logs[ $n_logs - 2 ] );
+			if ( count( $log ) > 1 ) {
+				return $log[ 1 ];
+			}
+		}
+	}
+
+	return false;
+}
+
+$comment = getCommitId();
+if ( !$comment ) {
+	unset( $comment );
+} else {
+	$comment = "/* git commitid " . $comment . " */\n";
+}
 
 require_once('../combine.php');

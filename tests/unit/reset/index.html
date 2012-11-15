@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Form Reset Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/controlgroup",
+				"widgets/forms/checkboxradio",
+				"widgets/forms/select",
+				"widgets/forms/slider",
+				"widgets/forms/textinput"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"reset_core.js"
+			]
+		]);
+	</script>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+  <div id="qunit"></div>
+
+	<div id="startPage" data-nstest-role="page">
+		<a href="#testPage" id="goToTestPage">Go</a>
+	</div>
+
+  <div id="testPage" data-nstest-role="page">
+    <div data-nstest-role="content">
+			<form id="theForm" action="#" method="get">
+				<fieldset data-nstest-role="controlgroup">
+					<label for="testVCheckbox1">Test Vertical Checkbox 1</label>
+					<input type="checkbox" id="testVCheckbox1"></input>
+
+					<label for="testVCheckbox4">Test Vertical Checkbox 4</label>
+					<input type="checkbox" id="testVCheckbox4" checked></input>
+				</fieldset>
+				<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal">
+					<label for="testHCheckbox1">Test Horizontal Checkbox 1</label>
+					<input type="checkbox" id="testHCheckbox1" checked></input>
+
+					<label for="testHCheckbox4">Test Horizontal Checkbox 4</label>
+					<input type="checkbox" id="testHCheckbox4"></input>
+				</fieldset>
+				<fieldset data-nstest-role="controlgroup">
+					<label for="testVRadio1">Test Vertical Radio 1</label>
+					<input type="radio" name="vradioTest" id="testVRadio1"></input>
+
+					<label for="testVRadio4">Test Vertical Radio 4</label>
+					<input type="radio" name="vradioTest" id="testVRadio4"></input>
+				</fieldset>
+				<fieldset data-nstest-role="controlgroup" data-nstest-type="horizontal">
+					<label for="testHRadio1">Test Horizontal Radio 1</label>
+					<input type="radio" name="hradioTest" id="testHRadio1"></input>
+
+					<label for="testHRadio4">Test Horizontal Radio 4</label>
+					<input type="radio" name="hradioTest" id="testHRadio4"></input>
+				</fieldset>
+				<div data-nstest-role="fieldcontain">
+					<label for="selectTest">Select Test</label>
+					<select id="selectTest">
+						<option value="option1">Option 1</option>
+						<option value="option2">Option 2</option>
+						<option value="option3">Option 3</option>
+					</select>
+				</div>
+				<div data-nstest-role="fieldcontain">
+					<label for="testRange">Test Range</label>
+					<input id="testRange" type="range" min="0" max="100" value="42"></input>
+				</div>
+				<button id="reset" type="reset" value="Test Reset"></button>
+			</form>
+			<a href="#startPage" id="goToStartPage">Go</a>
+    </div>
+  </div>
+</body>
+</html>

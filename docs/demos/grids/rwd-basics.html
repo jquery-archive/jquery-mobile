@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Listviews - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jqm-demos.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Grids</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+
+      	<h2>Responsive Web Design (RWD) Basics</h2>
+		<p>Creating responsive layouts is easy, but there are a few key things to keep in mind.</p>
+		<ul>
+			<li><strong>Create a style override stylesheet and include it after the jQuery Mobile framework stylesheet.</strong> This will hold all your custom styles, tweaks to the default widgets and media queries.</li>
+			<li><strong>Start by writing the styles you want to see at the narrowest screen width (i.e. "mobile first").</strong> These should be outside a media query. For example, we'd start with each of our grid containers set to 100% width and not floated so they start off stacked at smartphone widths.</li>
+			<li><strong>Choose the breakpoints based on your content, not a specific device.</strong> Since there are devices of every imaginable width, it's smarter to choose breakpoints based on how your <em>content</em> looks in your design system. As you re-size the window to wider widths, identify where your content hits a point where it could adapt to take advantage of a wider width.</li>
+			<li><strong>Write media queries using ems and min-widths</strong> Write a media query block that uses ems instead of pixels to ensure the layout will adapt to font size changes. To calculate the width, simply divide the target breakpoint (320px) with by 16px (the default font size) to get the em-based width (20em). 
+<pre><code>@media all and (min-width: 36em){
+	/* Styles that apply above 576px go here */
+}
+</code></pre>
+			</li>
+			<li><strong>Build additional breakpoints on top of each other at increasingly wider widths</strong> This means that the next breakpoint can add additional styles that build on top of the basic styles and those in the first breakpoint.</li>
+		</ul>
+      
+	
+
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

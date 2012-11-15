@@ -18,6 +18,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		theme: null,
 		contentTheme: null,
 		inset: true,
+		corners: true,
 		mini: false,
 		initSelector: ":jqmData(role='collapsible')"
 	},
@@ -30,7 +31,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon,
 			expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon,
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
-			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" );
+			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
+			collapsibleClasses = "";
 
 		// Replace collapsibleHeading if it's a legend
 		if ( collapsibleHeading.is( "legend" ) ) {
@@ -67,6 +69,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			} else {
 				o.inset = true;
 			}
+			// Set corners for individual collapsibles to false when in a collapsible-set
+			o.corners = false;
 			// Gets the preference for mini in the set
 			if ( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
@@ -77,13 +81,21 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.theme = $.mobile.getInheritedTheme( $el, "c" );
 			}
 		}
-		
+
 		if ( !!o.inset ) {
-			collapsible.addClass( "ui-collapsible-inset" );
+			collapsibleClasses += " ui-collapsible-inset";
+			if ( !!o.corners ) {
+				collapsibleClasses += " ui-corner-all" ;
+			}
+		}
+		if ( o.contentTheme ) {
+			collapsibleClasses += " ui-collapsible-themed-content";
+			collapsibleContent.addClass( "ui-body-" + o.contentTheme );
+		}
+		if ( collapsibleClasses !== "" ) {
+			collapsible.addClass( collapsibleClasses );
 		}
 		
-		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
-
 		collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon || "plus";
 		expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon || "minus";
 
@@ -105,19 +117,12 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					theme: o.theme
 				});
 
-		if ( !!o.inset ) {				
-			collapsibleHeading
-				.find( "a" ).first().add( ".ui-btn-inner", $el )
-					.addClass( "ui-corner-top ui-corner-bottom" );
-		}
-
 		//events
 		collapsible
 			.bind( "expand collapse", function( event ) {
 				if ( !event.isDefaultPrevented() ) {
 					var $this = $( this ),
-						isCollapse = ( event.type === "collapse" ),
-						contentTheme = o.contentTheme;
+						isCollapse = ( event.type === "collapse" );
 
 					event.preventDefault();
 
@@ -136,12 +141,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
 
-					if ( contentTheme && !!o.inset && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
-						collapsibleHeading
-							.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
-							.toggleClass( "ui-corner-bottom", isCollapse );
-						collapsibleContent.toggleClass( "ui-corner-bottom", !isCollapse );
-					}
 					collapsibleContent.trigger( "updatelayout" );
 				}
 			})

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Collapsible Set - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jqm-demos.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Collapsible Set</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+
+			<h2>Inset collapsible set</h2>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+					<div data-role="collapsible">
+						<h4>Heading</h4>
+					<p>I'm the collapsible content with a themed content block set to "d". I also contain a <a href="#">link</a>.</p>
+					</div>
+					<div data-role="collapsible">
+						<h4>Heading</h4>
+						<ul data-role="listview" data-inset="true">
+                            <li><a href="#">List item 1</a></li>
+                            <li><a href="#">List item 2</a></li>
+                            <li><a href="#">List item 3</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h4>Heading</h4>
+						<ul data-role="listview">
+                            <li><a href="#">List item 1</a></li>
+                            <li><a href="#">List item 2</a></li>
+                            <li><a href="#">List item 3</a></li>
+						</ul>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h3>One collapsible expanded</h3>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+					<div data-role="collapsible" data-collapsed="false">
+                        <h4>Heading</h4>
+						<ul data-role="listview" data-filter="true">
+                            <li><a href="#">List item 1</a></li>
+                            <li><a href="#">List item 2</a></li>
+                            <li><a href="#">List item 3</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+                        <h4>Heading</h4>
+						<ul data-role="listview" data-inset="true" data-filter="true">
+                            <li><a href="#">List item 1</a></li>
+                            <li><a href="#">List item 2</a></li>
+                            <li><a href="#">List item 3</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+                        <h4>Heading</h4>
+						<ul data-role="listview" data-autodividers="true" data-divider-theme="d">
+							<li><a href="index.html">Adam Kinkaid</a></li>
+							<li><a href="index.html">Alex Wickerham</a></li>
+							<li><a href="index.html">Avery Johnson</a></li>
+							<li><a href="index.html">Bob Cabot</a></li>
+							<li><a href="index.html">Caleb Booth</a></li>
+							<li><a href="index.html">Christopher Adams</a></li>
+							<li><a href="index.html">Culver James</a></li>
+							<li><a href="index.html">David Walsh</a></li>
+							<li><a href="index.html">Drake Alfred</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+                        <h4>Heading</h4>
+						<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+							<li><a href="index.html">
+                                <img src="../_assets/img/album-bb.jpg" />
+                                <h3>Broken Bells</h3>
+								<p>Broken Bells</p>
+								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
+							</li>
+							<li><a href="index.html">
+								<img src="../_assets/img/album-hc.jpg" />
+								<h3>Warning</h3>
+								<p>Hot Chip</p>
+								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
+							</li>
+							<li><a href="index.html">
+								<img src="../_assets/img/album-p.jpg" />
+								<p>Wolfgang Amadeus Phoenix</h3>
+								<p>Phoenix</p>
+								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h3>Legends</h3>
+
+			<div data-demo-html="true">
+				<form data-role="collapsible-set" data-theme="b" data-content-theme="d">
+					<fieldset data-role="collapsible">
+						<legend>Legend</legend>
+						<div data-role="controlgroup">
+							<input type="checkbox" name="checkbox-4-a" id="checkbox-4-a" />
+							<label for="checkbox-4-a">One</label>
+							<input type="checkbox" name="checkbox-5-a" id="checkbox-5-a" />
+							<label for="checkbox-5-a">Two</label>
+							<input type="checkbox" name="checkbox-6-a" id="checkbox-6-a" />
+							<label for="checkbox-6-a">Three</label>
+						</div>	
+					</fieldset>
+					<fieldset data-role="collapsible">
+						<legend>Legend</legend>
+						<div data-role="controlgroup">
+							<input type="checkbox" name="checkbox-7-a" id="checkbox-7-a" />
+							<label for="checkbox-7-a">One</label>
+							<input type="checkbox" name="checkbox-8-a" id="checkbox-8-a" />
+							<label for="checkbox-8-a">Two</label>
+							<input type="checkbox" name="checkbox-9-a" id="checkbox-9-a" />
+							<label for="checkbox-9-a">Three</label>
+						</div>	
+					</fieldset>
+				</form>
+			</div><!--/demo-html -->
+
+			<h2>Non-inset collapsible set</h2>
+
+			<div data-demo-html="true">
+                <div data-role="collapsible-set" data-inset="false" data-theme="b" data-content-theme="d">
+                    <div data-role="collapsible">
+                        <h4>Heading</h4>
+                        <p>I'm the collapsible content with a themed content block set to "d". I also contain a <a href="#">link</a>.</p>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Heading</h4>
+                        <ul data-role="listview" data-inset="true">
+                            <li><a href="#">Linked One</a></li>
+                            <li><a href="#">Linked Two</a></li>
+                            <li><a href="#">Linked Three</a></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Heading</h4>
+                        <ul data-role="listview">
+                            <li><a href="#">Linked One</a></li>
+                            <li><a href="#">Linked Two</a></li>
+                            <li><a href="#">Linked Three</a></li>
+                        </ul>
+                    </div>
+                </div>
+			</div><!--/demo-html -->
+
+			<h3>One collapsible expanded</h3>
+
+			<div data-demo-html="true">
+                <div data-role="collapsible-set" data-inset="false" data-theme="b" data-content-theme="d">
+                    <div data-role="collapsible" data-collapsed="false">
+                        <h4>Heading</h4>
+                        <ul data-role="listview" data-filter="true">
+                            <li><a href="#">List item 1</a></li>
+                            <li><a href="#">List item 2</a></li>
+                            <li><a href="#">List item 3</a></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Heading</h4>
+                        <ul data-role="listview" data-inset="true" data-filter="true">
+                            <li><a href="#">List item 1</a></li>
+                            <li><a href="#">List item 2</a></li>
+                            <li><a href="#">List item 3</a></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Heading</h4>
+                        <ul data-role="listview" data-autodividers="true" data-divider-theme="d">
+                            <li><a href="index.html">Adam Kinkaid</a></li>
+                            <li><a href="index.html">Alex Wickerham</a></li>
+                            <li><a href="index.html">Avery Johnson</a></li>
+                            <li><a href="index.html">Bob Cabot</a></li>
+                            <li><a href="index.html">Caleb Booth</a></li>
+                            <li><a href="index.html">Christopher Adams</a></li>
+                            <li><a href="index.html">Culver James</a></li>
+                            <li><a href="index.html">David Walsh</a></li>
+                            <li><a href="index.html">Drake Alfred</a></li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h4>Heading</h4>
+                        <ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+							<li><a href="index.html">
+                                <img src="../_assets/img/album-bb.jpg" />
+                                <h3>Broken Bells</h3>
+								<p>Broken Bells</p>
+								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
+							</li>
+							<li><a href="index.html">
+								<img src="../_assets/img/album-hc.jpg" />
+								<h3>Warning</h3>
+								<p>Hot Chip</p>
+								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
+							</li>
+							<li><a href="index.html">
+								<img src="../_assets/img/album-p.jpg" />
+								<p>Wolfgang Amadeus Phoenix</h3>
+								<p>Phoenix</p>
+								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album</a>
+							</li>
+                        </ul>
+                    </div>
+                </div>
+			</div><!--/demo-html -->
+
+			<h3>Legends</h3>
+
+			<div data-demo-html="true">
+                <form data-role="collapsible-set" data-theme="b" data-content-theme="d" data-inset="false">
+                    <fieldset data-role="collapsible">
+                        <legend>Legend</legend>
+                        <div data-role="controlgroup">
+                            <input type="checkbox" name="checkbox-4-b" id="checkbox-4-b" />
+                            <label for="checkbox-4-b">One</label>
+                            <input type="checkbox" name="checkbox-5-b" id="checkbox-5-b" />
+                            <label for="checkbox-5-b">Two</label>
+                            <input type="checkbox" name="checkbox-6-b" id="checkbox-6-b" />
+                            <label for="checkbox-6-b">Three</label>
+                        </div>	
+                    </fieldset>
+                    <fieldset data-role="collapsible">
+                        <legend>Legend</legend>
+                        <div data-role="controlgroup">
+                            <input type="checkbox" name="checkbox-7-b" id="checkbox-7-b" />
+                            <label for="checkbox-7-b">One</label>
+                            <input type="checkbox" name="checkbox-8-b" id="checkbox-8-b" />
+                            <label for="checkbox-8-b">Two</label>
+                            <input type="checkbox" name="checkbox-9-b" id="checkbox-9-b" />
+                            <label for="checkbox-9-b">Three</label>
+                        </div>	
+                    </fieldset>
+                </form>
+			</div><!--/demo-html -->
+
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

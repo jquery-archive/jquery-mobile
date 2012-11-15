@@ -19,10 +19,10 @@ var defaultFilterCallback = function( text, searchValue, item ) {
 
 $.mobile.listview.prototype.options.filterCallback = defaultFilterCallback;
 
-$( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function() {
+$( document ).delegate( "ul, ol", "listviewcreate", function() {
 
 	var list = $( this ),
-		listview = list.data( "listview" );
+		listview = list.data( "mobile-listview" );
 
 	if ( !listview.options.filter ) {
 		return;
@@ -35,6 +35,9 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 	var wrapper = $( "<form>", {
 			"class": "ui-listview-filter ui-bar-" + listview.options.filterTheme,
 			"role": "search"
+		}).submit( function( e ) {
+			e.preventDefault();
+			search.blur();
 		}),
 		search = $( "<input>", {
 			placeholder: listview.options.filterPlaceholder
@@ -46,6 +49,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 			var $this = $( this ),
 				val = this.value.toLowerCase(),
 				listItems = null,
+				li = list.children(),
 				lastval = $this.jqmData( "lastval" ) + "",
 				childItems = false,
 				itemtext = "",
@@ -114,7 +118,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 				//filtervalue is empty => show all
 				listItems.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
 			}
-			listview._refreshCorners();
+			listview._addFirstLastClasses( li, listview._getVisibles( li, false ), false );
 		})
 		.appendTo( wrapper )
 		.textinput();

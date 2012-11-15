@@ -72,7 +72,7 @@
 
 
 			<h2>List dividers</h2>
-			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the bar swatch "b" by default (blue in the default theme) but you can specify a theme for dividers by adding the <code>data-divider-theme</code> attribute to the list element (<code>ul</code> or <code>ol</code>) and specifying a theme swatch letter.</p>
+			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the bar swatch "b" by default (blue in the default theme) but you can specify a theme for dividers by adding the <code>data-divider-theme</code> attribute to the list element (<code>ul</code> or <code>ol</code>) and specifying a theme swatch letter. You can override the divider-theme for a specific divider by adding the <code>data-theme</code> attribute to the list item.</p>
 
 			<a href="lists-divider.html" data-role="button" data-icon="arrow-r" data-iconpos="right">List divider example</a>
 
@@ -193,7 +193,7 @@ $("#mylistview").listview({
 
 							<li><a href="lists-collapsible.html">Collapsible lists</a></li>
 							
-							<li><a href="lists-performance.html">List performance test</a></li>
+							<li><a href="lists-performance.html" data-transition="none">List performance test</a></li>
 							<li><a href="lists-themes.html">Theming lists</a></li>
 
 						</ul>

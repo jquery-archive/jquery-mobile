@@ -114,13 +114,13 @@
 				deepEqual( $(":jqmData(role='dialog')").length, dialogCount);
 
 				// manually trigger dialog opening
-				$( "#domcache-uncached-page-select" ).data( 'selectmenu' ).open();
+				$( "#domcache-uncached-page-select" ).data( 'mobile-selectmenu' ).open();
 			},
 
 			function(){
 				// check if dialog was successfully  created
 				deepEqual( $(":jqmData(role='dialog')").length, dialogCount + 1 );
-				$( "#domcache-uncached-page-select" ).data( 'selectmenu' ).close();
+				$( "#domcache-uncached-page-select" ).data( 'mobile-selectmenu' ).close();
 			},
 
 			function(){

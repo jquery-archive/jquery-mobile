@@ -553,8 +553,8 @@
 		var checkClasses = function() {
 			var $page = $( ".ui-page-active" ),
 				$li = $page.find( "li:visible" );
-			ok($li.first().hasClass( "ui-corner-top" ), $li.length+" li elements: First visible element should have class ui-corner-top");
-			ok($li.last().hasClass( "ui-corner-bottom" ), $li.length+" li elements: Last visible element should have class ui-corner-bottom");
+			ok($li.first().hasClass( "ui-first-child" ), $li.length+" li elements: First visible element should have class ui-first-child");
+			ok($li.last().hasClass( "ui-last-child" ), $li.length+" li elements: Last visible element should have class ui-last-child");
 		};
 
 		$.testHelper.pageSequence([
@@ -599,7 +599,7 @@
 		setup: function() {
 			var self = this;
 			this._refreshCornersCount = 0;
-			this._refreshCornersFn = $.mobile.listview.prototype._refreshCorners;
+			this._refreshCornersFn = $.mobile.listview.prototype._addFirstLastClasses;
 
 			this.startTest = function() {
 				return this._refreshCornersCount === 1;
@@ -607,7 +607,7 @@
 
 			// _refreshCorners is the last method called in the filter loop
 			// so we count the number of times _refreshCorners gets invoked to stop the test
-			$.mobile.listview.prototype._refreshCorners = function() {
+			$.mobile.listview.prototype._addFirstLastClasses = function() {
 				self._refreshCornersCount += 1;
 				self._refreshCornersFn.apply( this, arguments );
 				if ( self.startTest() ) {
@@ -628,7 +628,7 @@
 
 		this.startTest = function() {
 			if ( this._refreshCornersCount === 3 ) {
-				equal( filterCallbackCount, expectedCount, "filterCallback should be call exactly "+ expectedCount +" times" );
+				equal( filterCallbackCount, expectedCount, "filterCallback should be called exactly "+ expectedCount +" times" );
 			}
 			return this._refreshCornersCount === 3;
 		}
@@ -754,7 +754,7 @@
 				$.mobile.changePage( "#programmatically-generated-list" );
 			},
 			function() {
-				ok(!$( "#programmatically-generated-list-items li:first-child" ).hasClass( "ui-corner-bottom" ), "First list item should not have class ui-corner-bottom" );
+				ok(!$( "#programmatically-generated-list-items li:first-child" ).hasClass( "ui-last-child" ), "First list item should not have class ui-last-child" );
 				start();
 			}
 		]);
@@ -774,13 +774,13 @@
 				equal(ul.find("li").length, 3, "There should be only 3 list items left");
 
 				ul.listview('refresh');
-				ok(ul.find("li").first().hasClass("ui-corner-top"), "First list item should have class ui-corner-top");
+				ok(ul.find("li").first().hasClass("ui-first-child"), "First list item should have class ui-first-child");
 
 				ul.find("li").last().remove();
 				equal(ul.find("li").length, 2, "There should be only 2 list items left");
 
 				ul.listview('refresh');
-				ok(ul.find("li").last().hasClass("ui-corner-bottom"), "Last list item should have class ui-corner-bottom");
+				ok(ul.find("li").last().hasClass("ui-last-child"), "Last list item should have class ui-last-child");
 				start();
 			}
 		]);
@@ -800,19 +800,19 @@
 				for( var t = 0; t<3; t++){
 					ul.append("<li>Item " + t + "</li>");
 					ul.listview('refresh');
-					equal(ul.find(".ui-corner-top").length, 1, "There should be only one element with class ui-corner-top");
-					equal(ul.find("li:visible").first()[0], ul.find(".ui-corner-top")[0], "First list item should have class ui-corner-top in list with " + ul.find("li").length + " item(s)");
-					equal(ul.find(".ui-corner-bottom").length, 1, "There should be only one element with class ui-corner-bottom");
-					equal(ul.find("li:visible").last()[0], ul.find(".ui-corner-bottom")[0], "Last list item should have class ui-corner-bottom in list with " + ul.find("li").length + " item(s)");
+					equal(ul.find(".ui-first-child").length, 1, "There should be only one element with class ui-first-child");
+					equal(ul.find("li:visible").first()[0], ul.find(".ui-first-child")[0], "First list item should have class ui-first-child in list with " + ul.find("li").length + " item(s)");
+					equal(ul.find(".ui-last-child").length, 1, "There should be only one element with class ui-last-child");
+					equal(ul.find("li:visible").last()[0], ul.find(".ui-last-child")[0], "Last list item should have class ui-last-child in list with " + ul.find("li").length + " item(s)");
 				}
 
 				ul.find( "li" ).first().hide();
 				ul.listview( "refresh" );
-				equal(ul.find("li:visible").first()[0], ul.find(".ui-corner-top")[0], "First visible list item should have class ui-corner-top");
+				equal(ul.find("li:visible").first()[0], ul.find(".ui-first-child")[0], "First visible list item should have class ui-first-child");
 
 				ul.find( "li" ).last().hide();
 				ul.listview( "refresh" );
-				equal(ul.find("li:visible").last()[0], ul.find(".ui-corner-bottom")[0], "Last visible list item should have class ui-corner-bottom");
+				equal(ul.find("li:visible").last()[0], ul.find(".ui-last-child")[0], "Last visible list item should have class ui-last-child");
 
 				start();
 			}
