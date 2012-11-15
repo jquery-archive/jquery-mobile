@@ -27,7 +27,7 @@
 		<ul>
 			<li><strong>Create a style override stylesheet and include it after the jQuery Mobile framework stylesheet.</strong> This will hold all your custom styles, tweaks to the default widgets and media queries.</li>
 			<li><strong>Start by writing the styles you want to see at the narrowest screen width (i.e. "mobile first").</strong> These should be outside a media query. For example, we'd start with each of our grid containers set to 100% width and not floated so they start off stacked at smartphone widths.</li>
-			<li><strong>Choose the breakpoints based on your content, not a specific device.</strong> Since there are devices of every imaginable width, it's smarter to choose breakpoints based on how your <em>content</em> looks in your design system. As you re-size the window to wider widths, identify where where your content hits a point where it could adapt to take advantage of a wider width.</li>
+			<li><strong>Choose the breakpoints based on your content, not a specific device.</strong> Since there are devices of every imaginable width, it's smarter to choose breakpoints based on how your <em>content</em> looks in your design system. As you re-size the window to wider widths, identify where your content hits a point where it could adapt to take advantage of a wider width.</li>
 			<li><strong>Write media queries using ems and min-widths</strong> Write a media query block that uses ems instead of pixels to ensure the layout will adapt to font size changes. To calculate the width, simply divide the target breakpoint (320px) with by 16px (the default font size) to get the em-based width (20em). 
 <pre><code>@media all and (min-width: 36em){
 	/* Styles that apply above 576px go here */
