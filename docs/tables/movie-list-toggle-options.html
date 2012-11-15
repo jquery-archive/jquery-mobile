@@ -24,22 +24,14 @@
 
    <div data-role="content">
       <h2>Column toggle customization options</h2>
-      <p>This table illustrates the standard customization options for a column toggle table. The table has a custom theme and label text for the column chooser button, and a theme set on the popup. A few extra styles make the table rows striped.</p>
-      <style>
-      .movie-custom tbody tr:nth-child(odd) td,
-      .movie-custom tbody tr:nth-child(odd) th {
-        background-color: rgba(51,153,255,0.08);
-      }
-      .ui-table.movie-custom th,
-      .ui-table.movie-custom td {
-        border-bottom:none;
-      }
-      </style>
+      <p>This table illustrates the standard customization options for a column toggle table. The table has a custom theme and label text for the column chooser button, and a theme set on the popup.</p>
+      <p>The table background is themed by adding <code>class="ui-body-d"</code> to the table element. The table header is given a themed appearance by adding the <code>class="ui-bar-d"</code> to the header row. The striped rows are created by adding the <code>table-stripe</code> class to the table element.</p>
+
     
-       <table data-role="table" id="table-custom-2" data-mode="columntoggle" class="ui-body-d ui-shadow movie-custom breakpoint-columntoggle-std" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">
+       <table data-role="table" id="table-custom-2" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe breakpoint-columntoggle-std" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">
         
                 <thead>
-                  <tr>
+                  <tr class="ui-bar-d">
                     <th data-priority="2">Rank</th>
                     <th>Movie Title</th>
                     <th data-priority="3">Year</th>

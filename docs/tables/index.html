@@ -92,26 +92,36 @@
 			<p>The responsive table plugin is as minimally styled as possible to give you a clean slate for your designs. The plugin focuses primarily on the difficult scripting elements: generating the labels for the reflow table and creating the button and column chooser popup. Out of the box, the table just has a few basic style rules to add a bit of padding and set the vertical alignment of cells to be top left for visual consistency. </p>
 			<p>The table will adapt to whatever content block it sits on, but there isn't an explicit theming attribute for this widget. We did this because it's simple enough to add theme classes like <code>ui-body-a</code> to individual cells if a more heavily themed look is wanted.</p>
 			
-			<h3>Row lines and strokes</h3>
-			<p>To add lines between each row, add a custom style to your stylesheet that adds a border to the table headers and cells. In this example, RGBA is used to set a color (black) at an opacity of 8% so this will work on any background color:</p>
+			<h3>Row strokes</h3>
+			<p>To add horizontal lines between each row, add a custom style to your stylesheet that adds a border to the table headers and cells. In this example, RGBA is used to set a color (black) at an opacity of 5% so this will work on any background color:</p>
 			
-<pre><code>.ui-table th,
-.ui-table td {
-  border-bottom: 1px solid rgba(0, 0, 0, .08);
+<pre><code>.table-stroke thead th {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+.table-stroke tbody th,
+.table-stroke tbody td {
+  border-bottom: 1px solid rgba(0, 0, 0, .05);
 }
 </code></pre>
+			<p>This standard table stroke style can be also applied by adding <code>table-stroke</code> <code>class</code> to the <code>table</code> element. If you prefer a custom stroke style, use the example above as a starting point. Note that adding styles that set a color for the stroke will override a theme class so do not use these together.</p>
 			
 
 			<h3>Row stripes</h3>
 			<p>To add alternating row stripes between each row, add a custom style to your stylesheet that sets the color for each row using the <code>tr:nth-child(odd)</code> or <code>tr:nth-child(even)</code> selector.</p>
 			
-<pre><code>.table-stripe tbody tr:nth-child(odd) td,
+<pre><code>/* Add alternating row stripes */
+.table-stripe tbody tr:nth-child(odd) td,
 .table-stripe tbody tr:nth-child(odd) th {
-  background-color: rgba(0,0,0,0.06);
+  background-color: rgba(0,0,0,0.04);
+}
+/* Add stroke to the header and last item */
+.table-stripe thead th,
+.table-stripe tbody tr:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
 </code></pre>
 
-     
+     	<p>This standard alternating row stripe style can be also applied by adding <code>table-stripe</code> <code>class</code> to the <code>table</code> element. If you prefer a custom stroke style, use the example above as a starting point. Note that adding styles that set a color for the stroke will override a theme class so do not use these together.</p>
 
          </div><!-- /content -->
 
