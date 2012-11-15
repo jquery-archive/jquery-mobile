@@ -18,7 +18,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
 		clearBtn: false,
 		clearSearchButtonText: null, //deprecating for 1.3...
-		clearButtonText: "clear text",
+		clearBtnText: "clear text",
 		disabled: false
 	},
 
@@ -32,7 +32,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			miniclass = o.mini ? " ui-mini" : "",
 			focusedEl,
 			clearbtn,
-			clearButtonText = o.clearSearchButtonText || o.clearButtonText;
+			clearBtnText = o.clearSearchButtonText || o.clearBtnText;
 
 		function toggleClear() {
 			setTimeout( function() {
@@ -72,7 +72,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 
 		if( needsClearBtn ) {
-			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearButtonText + "'>" + clearButtonText + "</a>" )
+			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>" )
 				.bind('click', function( event ) {
 					input
 						.val( "" )
