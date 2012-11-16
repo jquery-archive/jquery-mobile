@@ -31,7 +31,7 @@
         chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. </p>
   
     
-         <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="breakpoint-columntoggle-std table-stroke">
+         <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
               <thead>
                 <tr>
                   <th data-priority="2">Rank</th>
@@ -115,7 +115,9 @@
               </tbody>
             </table>
 
-      
+      <p>For a more advanced demo of column chooser mode, see this <a href="phone-compare.html">phone comparison demo</a> that uses custom breakpoints and styling or a <a href="movie-list-toggle-options.html">movie table</a> showing plugin options and theming.</p>
+
+
       <h3>Applying column chooser mode to a table</h3>
 
       <p>The column chooser mode requires a <code>table</code> element with two attributes: <code>data-role=&quot;table&quot;</code> and <code>data-mode=&quot;columntoggle&quot;</code>. An <code>ID</code> attribute is also required on the table to associate it with the column chooser popup menu.</p>
@@ -201,11 +203,11 @@
    display: table-cell;
 }
 </code></pre>
-      <h3>Breakpoint presets</h3>
-      <p>Even though we strongly encourage you to write breakpoints yourself, the framework includes a set of pre-configured breakpoints for each of the six priority levels that you can use if they happen work well for your content. </p>
-      <p>These breakpoints can applied by adding a <code>class="breakpoint-columntoggle-std"</code> to the table element. Here is an example of a table with this class added:</p>
+      <h3>Applying a preset breakpoint</h3>
+      <p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a set of pre-configured breakpoints for each of the six priority levels that you can use if they happen work well for your content. </p>
+      <p>These breakpoints can applied by adding a <code>class="ui-responsive"</code> to the table element. Here is an example of a table with this class added:</p>
 
-      <pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;breakpoint-columntoggle-std&quot;</strong> data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;&gt;</code></pre>
+      <pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;ui-responsive&quot;</strong> data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;&gt;</code></pre>
 
       <p>The six preset breakpoints classes included in the column toggle stylesheet use regular increments of 10em (160 pixels). Here is a summary of the breakpoints assigned to each priority in the preset styles: </p>
       <dl>

@@ -49,39 +49,21 @@
 /* Media query to show as a standard table at 560px (35em x 16px) or wider */ 
 @media ( min-width: 35em ) {
 	/* Show the table header rows */ 
-	.breakpoint-stack-std td,
-	.breakpoint-stack-std th,
-	.breakpoint-stack-std tbody th,
-	.breakpoint-stack-std tbody td,
-	.breakpoint-stack-std thead td,
-	.breakpoint-stack-std thead th {
+	.ui-table-reflow.ui-responsive td,
+	.ui-table-reflow.ui-responsived th,
+	.ui-table-reflow.ui-responsive tbody th,
+	.ui-table-reflow.ui-responsive tbody td,
+	.ui-table-reflow.ui-responsive thead td,
+	.ui-table-reflow.ui-responsive thead th {
 		display: table-cell;
 		margin: 0;
 	}
 	/* Hide the labels in each cell */ 
-	.breakpoint-stack-std td .ui-table-cell-label,
-	.breakpoint-stack-std th .ui-table-cell-label { 
+	.ui-table-reflow.ui-responsive td .ui-table-cell-label,
+	.ui-table-reflow.ui-responsive th .ui-table-cell-label { 
 		display: none;
 	}
 }
 
 
-/* Media query to show as a standard table at 768px (48em x 16px) or wider */ 
-@media ( min-width: 48em ) {
-	/* Show the table header rows */ 
-	.breakpoint-stack-wide td,
-	.breakpoint-stack-wide th,
-	.breakpoint-stack-wide tbody th,
-	.breakpoint-stack-wide tbody td,
-	.breakpoint-stack-wide thead td,
-	.breakpoint-stack-wide thead th {
-		display: table-cell;
-		margin: 0;
-	}
-	/* Hide the labels in each cell */ 
-	.breakpoint-stack-wide td .ui-table-cell-label,
-	.breakpoint-stack-wide th .ui-table-cell-label { 
-		display: none;
-	}
-}
 

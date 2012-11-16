@@ -27,10 +27,10 @@
         <h2>Reflow table mode</h2>
 
 
-	<p>The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row. Since the HTML source order of a table prohibits styling a table to look like this,  the plugin dynamically adds a bit of  markup to make the display work (without affecting accessibility). Here is a demo of a table using reflow mode:</p>
+	<p>The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row. Since the HTML source order of a table prohibits styling a table to look like this,  the plugin dynamically adds a bit of  markup to make the display work (without affecting accessibility). Here is a demo of a basic table using reflow mode:</p>
 
 
-    <table data-role="table" id="movie-table" data-mode="reflow" class="breakpoint-stack-std table-stroke">
+    <table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
       <thead>
         <tr>
           <th data-priority="1">Rank</th>
@@ -114,30 +114,7 @@
       </tbody>
     </table>
 
-
-	<!-- We're using a style block to make it easy to view the custom styles -->
-	<!-- In production, these should be added to an custom.css file loaded in the head -->
-	<style>
-	/* Media query to show as a standard table at wider widths */ 
-	@media ( min-width: 30em ) {
-		/* Show the table header rows */ 
-		.movies-stack td,
-		.movies-stack th,
-		.movies-stack tbody th,
-		.movies-stack tbody td,
-		.movies-stack thead td,
-		.movies-stack thead th {
-			display: table-cell;
-			margin: 0;
-		}
-		/* Hide the labels in each cell */ 
-		.movies-stack td .ui-table-cell-label,
-		.movies-stack th .ui-table-cell-label { 
-			display: none;
-		}
-	}
-	</style>
-
+    <p>For a more advanced demo of reflow table, see this <a href="movie-list.html">custom reflow example</a> that uses custom breakpoints and styling.</p>
 
 		<h3>Applying reflow mode to a table</h3>
 	
@@ -195,16 +172,13 @@
 		<p>The breakpoint width is highly dependent on the number of columns in the table and content within each cell. On some sites, this may be as low as 30em (480px) and on others, it could be as wide as 100em (1,600px). There is no way for the framework to decide on a "standard breakpoint" that will work for everyone &#8212; that's why there isn't a breakpoint built into the table by default.<p>
 		<p>We recommend writing media query widths are in <code>em</code>'s so they respond to font size changes. To convert a pixel width into  <code>em</code>'s, divide the target width by 16 (pixels). Use this value for the <code>min-width</code> value in the media query above.</p>
 
-		<h3>Breakpoint presets</h3>
-		<p>Even though we strongly encourage you to write breakpoints yourself, the framework includes two pre-configured breakpoints that you can use if they happen work well for your content. These breakpoints are applied by adding a <code>class</code> to the table to specify that you want to use a preset breakpoint.</p>
+		<h3>Applying a preset breakpoint</h3>
+		<p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a single pre-configured breakpoint that targets the stacked style to smaller phones and swaps to a tabular prsentation on larger phones, tablet and desktop devices. To use this preset breakpoint, add the <code>ui-responsive</code> class to the table to convert from the stacked presentation to a tabular presentation at 560px (35em). If this breakpoint doesn't work for your content, we encourage you to write a custom breakpoint as descibed above.</p>
 		
-		<pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;breakpoint-reflow-std&quot;</strong>&gt;</code></pre>
+		<pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;ui-responsive&quot;</strong>&gt;</code></pre>
 		
-		<p>Here are the two preset breakpoints classes included in the reflow stylesheet. Add these to your table to apply the breakpoint:</p>
-		<dl>
-			<dt><code>breakpoint-reflow-std</code></dt><dd>Converts to a tabular presentation at 560px (35em) to target anything larger than a smartphone-sized device</dd>
-			<dt><code>breakpoint-reflow-wide</code></dt><dd>Converts to a tabular presentation at 768px (48em), best for larger tables that don't fit on lower resolution tablets</dd>
-		</dl>
+		<p></p>
+		
 		
 		<h3>Working with grouped column headers</h3>
 		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a  class to the label of the first cell in each group to allow you to style these differently and provide aditional visual hierarchy. See an example of <a href="financial-grouped-columns.html">grouped column table</a>.</p>
