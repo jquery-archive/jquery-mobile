@@ -2,7 +2,7 @@
 module.exports = function( grunt ) {
 
 /*
-To test these tasks locally, create a testswarm-local.json file like this, replacing the token and urls:
+To test these tasks locally, create a testswarm-local.json file like this, replacing token, urls and browserSets:
 
 {
     "jquerymobile": {
@@ -10,7 +10,8 @@ To test these tasks locally, create a testswarm-local.json file like this, repla
         "authToken": "1489f0baccc7af70b15d4bee6b0498f66b1ef611",
         "swarmUrl": "http://swarm.local/",
         "testUrl": "http://localhost/",
-        "runMax": 1
+        "runMax": 1,
+        "browserSets": ["example"]
     }
 }
 
@@ -42,7 +43,7 @@ function submit( commit, tests, configFile, done ) {
 		runMax: config.runMax,
 		"runNames[]": Object.keys(tests),
 		"runUrls[]": testUrls,
-		"browserSets[]": ["mobile"]
+		"browserSets[]": config.browserSets
 	});
 }
 
