@@ -98,6 +98,7 @@ $.testHelper.excludeFileProtocol(function(){
 		if ( !$.browser ) {
 			ok( true, "Cannot perform test because $.browser has been removed" );
 			start();
+			return;
 		}
 		$.testHelper.reloadModule( moduleName ).done( function() {
 		//here we're just comparing our version to what the conditional compilation finds
