@@ -12,6 +12,8 @@ define( [ "jquery", "../jquery.mobile.widget" ], function( $ ) {
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtnText: "Close",
+        closeBtnIcon: "delete",
+        closeBtnIconpos: "notext",
 		overlayTheme: "a",
 		corners: true,
 		initSelector: ":jqmData(role='dialog')"
@@ -19,7 +21,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	_create: function() {
 		var self = this,
 			$el = this.element,
-			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
+			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='" + this.options.closeBtnIcon + "' data-" + $.mobile.ns + "iconpos='" + this.options.closeBtnIconpos + "'>"+ this.options.closeBtnText + "</a>" ),
 			cornerClass = !!this.options.corners ? " ui-corner-all" : "",
 			dialogWrap = $( "<div/>", {
 					"role" : "dialog",
