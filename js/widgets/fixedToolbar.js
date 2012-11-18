@@ -88,6 +88,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				$page.addClass( "ui-page-" + tbtype + "-fixed" );
 			}
 
+			$.extend( this, {
+				_thisPage: null
+			});
+
 			self._addTransitionClass();
 			self._bindPageEvents();
 			self._bindToggleHandlers();
