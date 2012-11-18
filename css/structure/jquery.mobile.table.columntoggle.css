@@ -78,12 +78,16 @@
 
 /* Unchecked manually: Always hide */ 
 .ui-table-columntoggle th.ui-table-cell-hidden,
-.ui-table-columntoggle td.ui-table-cell-hidden {
+.ui-table-columntoggle td.ui-table-cell-hidden,
+.ui-table-columntoggle.ui-responsive th.ui-table-cell-hidden,
+.ui-table-columntoggle.ui-responsive td.ui-table-cell-hidden {
   display: none;
 }
 
 /* Checked manually: Always show */ 
 .ui-table-columntoggle th.ui-table-cell-visible,
-.ui-table-columntoggle td.ui-table-cell-visible {
+.ui-table-columntoggle td.ui-table-cell-visible,
+.ui-table-columntoggle.ui-responsive th.ui-table-cell-visible,
+.ui-table-columntoggle.ui-responsive td.ui-table-cell-visible {
    display: table-cell;
 }
