@@ -32,7 +32,7 @@
 	asyncTest( "Has data object attributed to table" , function(){
 		setTimeout(function(){
 			var $table = $('#basic-table-test .ui-table'),
-				self = $table.data( "table" );
+				self = $table.data( "mobile-table" );
 			ok( self , "Data object is available" );
 			start();
 		}, 800);
@@ -40,7 +40,7 @@
 	asyncTest( "Has headers option" , function(){
 		setTimeout(function() {
 			var $table = $('#basic-table-test .ui-table'),
-				self = $table.data( "table" );
+				self = $table.data( "mobile-table" );
 			ok( self.headers.length , "Header array is not empty");
 			equal( 5 , self.headers.length , "Number of headers is correct");
 			start();

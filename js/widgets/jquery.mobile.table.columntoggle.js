@@ -30,7 +30,7 @@ $.mobile.table.prototype.options.classes = $.extend(
 $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
 	var $table = $( this ),
-		self = $table.data( "table" ),
+		self = $table.data( "mobile-table" ),
 		o = self.options;
 
 	if( o.mode !== "columntoggle" ){
