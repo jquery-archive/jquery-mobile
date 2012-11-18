@@ -21,3 +21,15 @@
 .ui-grid-d .ui-block-a, .ui-grid-d .ui-block-b, .ui-grid-d .ui-block-c, .ui-grid-d .ui-block-d, .ui-grid-d .ui-block-e { width: 19.925%; }
 .ui-grid-d > :nth-child(n) { width: 20%; }
 .ui-grid-d .ui-block-a { clear: left; }
+
+/* preset breakpoint to switch to stacked grid styles below 35em (560px) */
+@media all and (max-width: 35em) {
+	.ui-responsive .ui-block-a, 
+	.ui-responsive .ui-block-b, 
+	.ui-responsive .ui-block-c,
+	.ui-responsive .ui-block-d,
+	.ui-responsive .ui-block-e { 
+		width: 100%; 
+		float:none; 
+	}
+}

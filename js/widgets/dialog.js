@@ -11,6 +11,7 @@ define( [ "jquery", "../jquery.mobile.widget" ], function( $ ) {
 
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
+		closeBtn: "left",
 		closeBtnText: "Close",
 		overlayTheme: "a",
 		corners: true,
@@ -19,7 +20,6 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	_create: function() {
 		var self = this,
 			$el = this.element,
-			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
 			cornerClass = !!this.options.corners ? " ui-corner-all" : "",
 			dialogWrap = $( "<div/>", {
 					"role" : "dialog",
@@ -30,21 +30,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 		// Class the markup for dialog styling
 		// Set aria role
-		$el
-			.wrapInner( dialogWrap )
-			.children()
-				.find( ":jqmData(role='header')" )
-					.prepend( headerCloseButton );
-
-		// this must be an anonymous function so that select menu dialogs can replace
-		// the close method. This is a change from previously just defining data-rel=back
-		// on the button and letting nav handle it
-		//
-		// Use click rather than vclick in order to prevent the possibility of unintentionally
-		// reopening the dialog if the dialog opening item was directly under the close button.
-		headerCloseButton.bind( "click", function() {
-			self.close();
-		});
+		$el.wrapInner( dialogWrap );
 
 		/* bind events
 			- clicks and submits should use the closing transition that the dialog opened with
@@ -75,6 +61,46 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 					.page( "setContainerBackground", self.options.overlayTheme );
 			}
 		});
+
+		this._setCloseBtn( this.options.closeBtn );
+	},
+
+	_setCloseBtn: function( value ) {
+		var self = this, btn, location;
+
+		if ( this._headerCloseButton ) {
+			this._headerCloseButton.remove();
+			this._headerCloseButton = null;
+		}
+		if ( value !== "none" ) {
+			// Sanitize value
+			location = ( value === "left" ? "left" : "right" );
+			btn = $( "<a href='#' class='ui-btn-" + location + "' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
+			if ( $.fn.buttonMarkup ) {
+				btn.buttonMarkup();
+			}
+			this.element.children().find( ":jqmData(role='header')" ).prepend( btn );
+
+			// this must be an anonymous function so that select menu dialogs can replace
+			// the close method. This is a change from previously just defining data-rel=back
+			// on the button and letting nav handle it
+			//
+			// Use click rather than vclick in order to prevent the possibility of unintentionally
+			// reopening the dialog if the dialog opening item was directly under the close button.
+			btn.bind( "click", function() {
+				self.close();
+			});
+
+			this._headerCloseButton = btn;
+		}
+	},
+
+	_setOption: function( key, value ) {
+		if ( key === "closeBtn" ) {
+			this._setCloseBtn( value );
+			this._super( key, value );
+			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "close-btn", value );
+		}
 	},
 
 	// Close method goes back in history

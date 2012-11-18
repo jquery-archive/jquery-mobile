@@ -103,7 +103,7 @@
 	vertical-align: middle;
 }
 
-@media all and (min-width: 450px){
+@media all and (min-width: 28em){
 	.ui-popup .ui-field-contain label.ui-submit,
 	.ui-popup .ui-field-contain .ui-controlgroup-label,
 	.ui-popup .ui-field-contain label.ui-select,

@@ -75,7 +75,7 @@
 	box-shadow: none;
 }
 
-@media all and (min-width: 450px){
+@media all and (min-width: 28em){
 	.ui-field-contain .ui-controlgroup-label { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
 	.ui-field-contain .ui-controlgroup-controls { width: 78%; display: inline-block; }
 	.ui-field-contain .ui-controlgroup .ui-select { width: 100%; display: block; } 
