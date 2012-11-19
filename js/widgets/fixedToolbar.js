@@ -261,13 +261,13 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ) {
 						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system 
 						//controls causes fixed position, tap-toggle false Header to reveal itself 
-						if(e.type === "focusout" && self._visible ){
+						if( e.type === "focusout" && self._visible ) {
 							//wait for the stack to unwind and see if we have jumped to another input
-							delay = setTimeout(function(){
+							delay = setTimeout( function() {
 								self.show();
-							},0); 
-						} else if( e.type === "focusin" && self._visible ) {
-							//if we have jumped to another input clear the time out to cancle the show.
+							}, 0 ); 
+						} else if ( e.type === "focusin" && self._visible ) {
+							//if we have jumped to another input clear the time out to cancel the show.
 							clearTimeout( delay );
 							self.hide();
 						}
