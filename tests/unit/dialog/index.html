@@ -45,6 +45,7 @@
 
 <div id="mypage" data-nstest-role="page" data-nstest-theme="a">
 	<a href="#foo-dialog" id="foo-dialog-link" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog"></a>
+	<a href="#close-btn-test" id="close-btn-test-link" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">Go</a>
 	<a href="#dialog-a" id="link-a" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">no theme set</a>
 	<a href="#dialog-b" id="link-b" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">data-theme set</a>
 	<a href="#dialog-c" id="link-c" data-nstest-role="button" data-nstest-inline="true" data-nstest-rel="dialog">data-theme & data-nstest-overlay-theme set</a>
@@ -57,6 +58,18 @@
 </div>
 
 <div id="foo-dialog" data-nstest-role="dialog" data-nstest-theme="b">
+	<div  data-nstest-role="header" data-nstest-position="inline">
+		<h1>Dialog</h1>
+	</div>
+	<div data-nstest-role="content" >
+		<a href="#" id="internal-link">foo</a>
+	</div>
+	<div data-nstest-role="footer">
+		footer
+	</div>
+</div>
+
+<div id="close-btn-test" data-nstest-role="dialog" data-nstest-theme="b" data-nstest-close-btn="none">
 	<div  data-nstest-role="header" data-nstest-position="inline">
 		<h1>Dialog</h1>
 	</div>

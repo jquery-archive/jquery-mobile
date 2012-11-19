@@ -193,7 +193,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		closestPageData: function( $target ) {
 			return $target
 				.closest( ':jqmData(role="page"), :jqmData(role="dialog")' )
-				.data( "page" );
+				.data( "mobile-page" );
 		},
 
 		enhanceable: function( $set ) {

@@ -12,6 +12,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
+		mini: false,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
@@ -26,8 +27,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			o = this.options,
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
-			mini = input.jqmData( "mini" ) === true,
-			miniclass = mini ? " ui-mini" : "",
+			miniclass = o.mini ? " ui-mini" : "",
 			focusedEl, clearbtn;
 
 		function toggleClear() {
@@ -74,7 +74,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					iconpos: "notext",
 					corners: true,
 					shadow: true,
-					mini: mini
+					mini: o.mini
 				});
 
 			toggleClear();

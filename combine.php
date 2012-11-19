@@ -8,6 +8,10 @@ if ( ! isset($type) || ! isset($files) )
 
 $contents = '';
 
+if ( isset( $comment ) ) {
+	$contents .= $comment;
+}
+
 // Loop through the files adding them to a string
 foreach ( $files as $file ) {
 	$contents .= file_get_contents($file). "\n\n";

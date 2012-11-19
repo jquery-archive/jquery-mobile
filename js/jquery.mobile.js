@@ -26,7 +26,7 @@ define([
 	'./widgets/forms/select.custom',
 	'./widgets/forms/select',
 	'./jquery.mobile.buttonMarkup',
-	'./jquery.mobile.controlGroup',
+	'./widgets/controlgroup',
 	'./jquery.mobile.links',
 	'./widgets/fixedToolbar',
 	'./widgets/popup',

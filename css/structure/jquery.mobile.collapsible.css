@@ -27,6 +27,36 @@
 .ui-collapsible-inset .ui-collapsible-content { margin: 0; border-right-width: 1px; border-left-width: 1px; }
 .ui-collapsible-content-collapsed { display: none; }
 
+.ui-collapsible-set > .ui-collapsible.ui-corner-all {
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+.ui-collapsible-heading,
+.ui-collapsible-heading > .ui-btn {
+	-webkit-border-radius: inherit;	
+	border-radius: inherit;	
+}
+.ui-collapsible-set .ui-collapsible.ui-first-child {
+	-webkit-border-top-right-radius: inherit;	
+	border-top-right-radius: inherit;
+	-webkit-border-top-left-radius: inherit;	
+	border-top-left-radius: inherit;		
+}
+.ui-collapsible-content,
+.ui-collapsible-set .ui-collapsible.ui-last-child {
+	-webkit-border-bottom-right-radius: inherit;	
+	border-bottom-right-radius: inherit;
+	-webkit-border-bottom-left-radius: inherit;	
+	border-bottom-left-radius: inherit;		
+}
+
+.ui-collapsible-themed-content:not(.ui-collapsible-collapsed) > .ui-collapsible-heading {
+	-webkit-border-bottom-right-radius: 0;	
+	border-bottom-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;	
+	border-bottom-left-radius: 0;		
+}
+
 .ui-collapsible-set { margin: .5em 0; }
 .ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }
-.ui-collapsible-set .ui-collapsible:first-child { margin-top: 0; }
+.ui-collapsible-set .ui-collapsible.ui-first-child { margin-top: 0; }
