@@ -981,9 +981,8 @@ a.ui-link-inherit {
 /* radius clip workaround for cleaning up corner trapping */
 .ui-corner-all,
 .ui-btn-corner-all {
-  -webkit-background-clip: padding-box;
-     -moz-background-clip: padding;
-          background-clip: padding-box;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
 }
 
 /* Overlay / modal
