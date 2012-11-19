@@ -372,6 +372,36 @@
 			}
 		},
 
+		// Convert a pair of version strings into a pair of integers and pass the
+		// resulting integers to a comparison function
+		versionTest: function( l, t, r ) {
+			var lAr = l.split( "." ), lLength = lAr.length,
+				rAr = r.split( "." ), rLength = rAr.length,
+				lVal, rVal, lRes = "", rRes = "", min, max, str, idx1, diff;
+			for ( idx = 0 ; idx < lLength || idx < rLength ; idx++ ) {
+				str = {};
+				lVal = ( idx < lLength ? parseInt( lAr[ idx ] ) : 0 );
+				rVal = ( idx < rLength ? parseInt( rAr[ idx ] ) : 0 );
+
+				// This ignores things like 10a vs. 10b for now
+				str.l = String( lVal );
+				str.r = String( rVal );
+				min = ( str.l.length < str.r.length ) ? "l" : "r";
+				max = ( str.l.length < str.r.length ) ? "r" : "l";
+				diff = str[ max ].length - str[ min ].length;
+
+				// Make sure orders of magnitude align
+				for ( idx1 = 0; idx1 < diff ; idx1++ ) {
+					str[ min ] = "0" + str[ min ];
+				}
+				lRes = lRes + str.l;
+				rRes = rRes + str.r;
+			}
+
+			// trim initial 0s and return the result of the comparison
+			return t( parseInt( lRes.replace( /^0*/, "" ) ), parseInt( rRes.replace( /^0*/, "" ) ) );
+		},
+
 		navReset: function( url ) {
 			var pageReset = function( hash ) {
 				var timeout;
