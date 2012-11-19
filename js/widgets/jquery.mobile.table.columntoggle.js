@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
 
-define( [ "jquery", "./jquery.mobile.table", "../jquery.mobile.buttonMarkup", "./popup", "../jquery.mobile.fieldContain", "widgets/controlgroup" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.table", "../jquery.mobile.buttonMarkup", "./popup", "../jquery.mobile.fieldContain", "widgets/controlgroup", "widgets/forms/checkboxradio" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -31,7 +31,8 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
 	var $table = $( this ),
 		self = $table.data( "mobile-table" ),
-		o = self.options;
+		o = self.options,
+		ns = $.mobile.ns;
 
 	if( o.mode !== "columntoggle" ){
 		return;
@@ -39,10 +40,10 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
 	self.element.addClass( o.classes.columnToggleTable );
 
-	var id = ( $table.attr( "id" ) || self.options.classes.popup ) + "-popup", //TODO BETTER FALLBACK ID HERE
-		$menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-rel='popup' data-mini='true'>" + o.columnBtnText + "</a>" ),
-		$popup = $( "<div data-role='popup' data-role='fieldcontain' class='" + o.classes.popup + "' id='" + id + "'></div>"),
-		$menu = $("<fieldset data-role='controlgroup'></fieldset>").appendTo( $popup );
+	var id = ( $table.attr( "id" ) || o.classes.popup ) + "-popup", //TODO BETTER FALLBACK ID HERE
+		$menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-" + ns + "rel='popup' data-" + ns + "mini='true'>" + o.columnBtnText + "</a>" ),
+		$popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + o.classes.popup + "' id='" + id + "'></div>"),
+		$menu = $("<fieldset data-" + ns + "role='controlgroup'></fieldset>");
 
 	// create the hide/show toggles
 	self.headers.not( "td" ).each(function(){
@@ -59,11 +60,11 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 				.children( 0 )
 				.jqmData( "cells", $cells )
 				.checkboxradio({
-					 theme: o.columnPopupTheme
+					theme: o.columnPopupTheme
 				});
 		}
-
 	});
+		$menu.appendTo( $popup );
 
 	// bind change event listeners to inputs - TODO: move to a private method?
 	$menu.on( "change", "input", function( e ){

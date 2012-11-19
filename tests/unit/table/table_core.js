@@ -99,13 +99,46 @@
 	});
 	asyncTest( "The page should be enhanced correctly" , function(){
 		setTimeout(function() {
+			var $popup = $('#column-table-test #movie-table-column-popup-popup');
 			ok($('#column-table-test .ui-table-columntoggle').length, ".ui-table-columntoggle class added to table element");
 			ok($('#column-table-test .ui-table-columntoggle-btn').length, ".ui-table-columntoggle-btn button added");
 			equal($('#column-table-test .ui-table-columntoggle-btn').text(), "Columns...",  "Column toggle button has correct text");
-			ok($('#column-table-test #movie-table-column-popup-popup').length, "dialog added");
-			ok($('#column-table-test #movie-table-column-popup-popup').not( ":visible" ) , "dialog hidden");
+			ok( $popup.length, "dialog added" );
+			ok( $popup.is( ".ui-popup-hidden" ) , "dialog hidden");
+			ok($('#column-table-test #movie-table-column-popup-popup').find( "input[type=checkbox]" ).length > 0 , "Checkboxes added");
 			start();
 		}, 800);
 	});
 
+	asyncTest( "The dialog should become visible when button is clicked" , function(){
+		expect( 2 );
+		var $input;
+		$.testHelper.pageSequence([
+			function() {
+				$( ".ui-table-columntoggle-btn" ).click();
+			},
+			function() {
+				setTimeout(function() {
+					ok( $( "#movie-table-column-popup-popup" ).not( ".ui-popup-hidden" ) , "Table popup is shown on click" );
+				}, 800);
+			},
+			function() {
+				$input = $( ".ui-popup-container" ).find( "input:first" );
+				$input.click();
+			},
+			function(){
+				setTimeout(function(){
+					var headers = $( "#column-table-test table tr" ).find( "th:first" );
+					if( $input.is( ":checked" ) ){
+						ok( headers.not( ".ui-table-cell-hidden" ) );
+					} else {
+						ok( headers.is( ".ui-table-cell-hidden" ) );
+					}
+				}, 800);
+			},
+			function() {
+				start();
+			}
+		]);
+	});
 })(jQuery);
