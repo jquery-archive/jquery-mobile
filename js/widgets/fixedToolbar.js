@@ -88,6 +88,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				$page.addClass( "ui-page-" + tbtype + "-fixed" );
 			}
 
+			$.extend( this, {
+				_thisPage: null
+			});
+
 			self._addTransitionClass();
 			self._bindPageEvents();
 			self._bindToggleHandlers();
@@ -107,62 +111,70 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		},
 
 		_bindPageEvents: function() {
-			var self = this,
-				o = self.options,
-				$el = self.element;
-
+			this._thisPage = this.element.closest( ".ui-page" );
 			//page event bindings
 			// Fixed toolbars require page zoom to be disabled, otherwise usability issues crop up
 			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
-			$el.closest( ".ui-page" )
-				.bind( "pagebeforeshow", function() {
-					if ( o.disablePageZoom ) {
-						$.mobile.zoom.disable( true );
-					}
-					if ( !o.visibleOnPageShow ) {
-						self.hide( true );
-					}
-				} )
-				.bind( "webkitAnimationStart animationstart updatelayout", function() {
-					var thisPage = this;
-					if ( o.updatePagePadding ) {
-						self.updatePagePadding( thisPage );
-					}
-				})
-				.bind( "pageshow", function() {
-					var thisPage = this;
-					self.updatePagePadding( thisPage );
-					if ( o.updatePagePadding ) {
-						$( window ).bind( "throttledresize." + self.widgetName, function() {
-							self.updatePagePadding( thisPage );
-						});
-					}
-				})
-				.bind( "pagebeforehide", function( e, ui ) {
-					if ( o.disablePageZoom ) {
-						$.mobile.zoom.enable( true );
-					}
-					if ( o.updatePagePadding ) {
-						$( window ).unbind( "throttledresize." + self.widgetName );
-					}
+			this._on( this._thisPage, {
+				"pagebeforeshow": "_handlePageBeforeShow",
+				"webkitAnimationStart animationstart updatelayout": "_handleAnimationStart",
+				"pageshow": "_handlePageShow",
+				"pagebeforehide": "_handlePageBeforeHide"
+			});
+		},
 
-					if ( o.trackPersistentToolbars ) {
-						var thisFooter = $( ".ui-footer-fixed:jqmData(id)", this ),
-							thisHeader = $( ".ui-header-fixed:jqmData(id)", this ),
-							nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ) || $(),
-							nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage ) || $();
+		_handlePageBeforeShow: function() {
+			var o = this.options;
+			if ( o.disablePageZoom ) {
+				$.mobile.zoom.disable( true );
+			}
+			if ( !o.visibleOnPageShow ) {
+				this.hide( true );
+			}
+		},
 
-							if ( nextFooter.length || nextHeader.length ) {
+		_handleAnimationStart: function() {
+			if ( this.options.updatePagePadding ) {
+				this.updatePagePadding( this._thisPage );
+			}
+		},
 
-								nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
+		_handlePageShow: function() {
+			this.updatePagePadding( this._thisPage );
+			if ( this.options.updatePagePadding ) {
+				this._on( $( window ), { "throttledresize": "updatePagePadding" } );
+			}
+		},
 
-								ui.nextPage.one( "pageshow", function() {
-									nextHeader.prependTo( this );
-									nextFooter.appendTo( this );
-								});
-							}
-					}
-				});
+		_handlePageBeforeHide: function( e, ui ) {
+			var o = this.options;
+
+			if ( o.disablePageZoom ) {
+				$.mobile.zoom.enable( true );
+			}
+			if ( o.updatePagePadding ) {
+				this._off( $( window ), "throttledresize" );
+			}
+
+			if ( o.trackPersistentToolbars ) {
+				var thisFooter = $( ".ui-footer-fixed:jqmData(id)", this._thisPage ),
+					thisHeader = $( ".ui-header-fixed:jqmData(id)", this._thisPage ),
+					nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ) || $(),
+					nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage ) || $();
+
+				if ( nextFooter.length || nextHeader.length ) {
+
+					nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
+
+					this._on( ui.nextPage, {
+						pageshow: function() {
+							nextHeader.prependTo( ui.nextPage );
+							nextFooter.appendTo( ui.nextPage );
+							this._off( ui.nextPage, "pageshow" );
+						}
+					});
+				}
+			}
 		},
 
 		_visible: true,
@@ -176,7 +188,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			// This behavior only applies to "fixed", not "fullscreen"
 			if ( this.options.fullscreen ) { return; }
 
-			tbPage = tbPage || $el.closest( ".ui-page" );
+			tbPage = tbPage || this._thisPage || $el.closest( ".ui-page" );
 			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() + pos );
 		},
 
