@@ -8,7 +8,7 @@
 	// and with the advent of the widget _on method we are actually testing the
 	// widget from UI which has it's own test suite for these sorts of things
 	// ie, don't test your dependencies / framework
-	if( !( $.fn.jquery.match(/^1.8/) )){
+	if( $.testHelper.versionTest( $.fn.jquery, function( l, r ) { return ( l < r ); }, "1.8" ) ){
 		test( "input is cleaned up on destroy", function(){
 			var input = $( "#destroycorrectly" ),
 			win = $( window ),
