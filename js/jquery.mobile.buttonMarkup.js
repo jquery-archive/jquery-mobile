@@ -36,6 +36,8 @@ $.fn.buttonMarkup = function( options ) {
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
 			buttonClass, iconClass,
+			hover = false,
+			state = "up",
 			// Button inner markup
 			buttonInner,
 			buttonText,
@@ -60,6 +62,8 @@ $.fn.buttonMarkup = function( options ) {
 			// We will recreate this icon below
 			$( buttonElements.icon ).remove();
 			buttonElements.icon = null;
+			hover = buttonElements.hover;
+			state = buttonElements.state;
 		}
 		else {
 			buttonInner = document.createElement( o.wrapperEls );
@@ -76,7 +80,9 @@ $.fn.buttonMarkup = function( options ) {
 			o.theme = $.mobile.getInheritedTheme( el, "c" );
 		}
 
-		buttonClass = "ui-btn ui-btn-up-" + o.theme;
+		buttonClass = "ui-btn ";
+		buttonClass += ( hover ? "ui-btn-hover-" + o.theme : "" );
+		buttonClass += ( state ? " ui-btn-" + state + "-" + o.theme : "" );
 		buttonClass += o.shadow ? " ui-shadow" : "";
 		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
@@ -109,8 +115,6 @@ $.fn.buttonMarkup = function( options ) {
 			}
 		}
 
-		innerClass += o.corners ? " ui-btn-corner-all" : "";
-
 		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
 			el.attr( "title", el.getEncodedText() );
 		}
@@ -121,7 +125,6 @@ $.fn.buttonMarkup = function( options ) {
 		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
-
 		buttonText.className = textClass;
 		if ( !buttonElements ) {
 			buttonInner.appendChild( buttonText );
@@ -145,6 +148,8 @@ $.fn.buttonMarkup = function( options ) {
 		// Assign a structure containing the elements of this button to the elements of this button. This
 		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
 		buttonElements = {
+			hover : hover,
+			state : state,
 			bcls  : buttonClass,
 			outer : e,
 			inner : buttonInner,
@@ -189,6 +194,21 @@ function closestEnabledButton( element ) {
     return element;
 }
 
+function updateButtonClass( $btn, classToRemove, classToAdd, hover, state ) {
+	var buttonElements = $.data( $btn[ 0 ], "buttonElements" );
+	$btn.removeClass( classToRemove ).addClass( classToAdd );
+	if ( buttonElements ) {
+		buttonElements.bcls = $( document.createElement( "div" ) )
+			.addClass( buttonElements.bcls + " " + classToAdd )
+			.removeClass( classToRemove )
+			.attr( "class" );
+		if ( hover !== undefined ) {
+			buttonElements.hover = hover;
+		}
+		buttonElements.state = state;
+	}
+}
+
 var attachEvents = function() {
 	var hoverDelay = $.mobile.buttonMarkup.hoverDelay, hov, foc;
 
@@ -206,24 +226,24 @@ var attachEvents = function() {
 					if ( isTouchEvent ) {
 						// Use a short delay to determine if the user is scrolling before highlighting
 						hov = setTimeout( function() {
-							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+							updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-down-" + theme, undefined, "down" );
 						}, hoverDelay );
 					} else {
-						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+						updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-down-" + theme, undefined, "down" );
 					}
 				} else if ( evt === "vmousecancel" || evt === "vmouseup" ) {
-					$btn.removeClass( "ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+					updateButtonClass( $btn, "ui-btn-down-" + theme, "ui-btn-up-" + theme, undefined, "up" );
 				} else if ( evt === "vmouseover" || evt === "focus" ) {
 					if ( isTouchEvent ) {
 						// Use a short delay to determine if the user is scrolling before highlighting
 						foc = setTimeout( function() {
-							$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+							updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-hover-" + theme, true, "" );
 						}, hoverDelay );
 					} else {
-						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+						updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-hover-" + theme, true, "" );
 					}
 				} else if ( evt === "vmouseout" || evt === "blur" || evt === "scrollstart" ) {
-					$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+					updateButtonClass( $btn, "ui-btn-hover-" + theme  + " ui-btn-down-" + theme, "ui-btn-up-" + theme, false, "up" );
 					if ( hov ) {
 						clearTimeout( hov );
 					}

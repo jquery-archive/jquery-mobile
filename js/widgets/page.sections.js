@@ -20,7 +20,7 @@ $.mobile.page.prototype.options.contentTheme = null;
 //      on which it depends
 $( document ).bind( "pagecreate", function( e ) {
 	var $page = $( e.target ),
-		o = $page.data( "page" ).options,
+		o = $page.data( "mobile-page" ).options,
 		pageRole = $page.jqmData( "role" ),
 		pageTheme = o.theme;
 

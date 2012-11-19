@@ -38,6 +38,38 @@
 		]);
 	});
 
+	asyncTest( "Test option data-close-btn", function() {
+		expect( 5 );
+
+		$.testHelper.pageSequence([
+			function() {
+				// bring up the dialog
+				$( "#close-btn-test-link" ).click();
+			},
+
+			function() {
+				var a = $( "#close-btn-test .ui-header a" );
+				deepEqual( a.length, 0, "Initially, the dialog header has no anchor elements (option value 'none')" );
+
+				$( "#close-btn-test" ).dialog( "option", "closeBtn", "left" );
+				a = $( "#close-btn-test .ui-header a" );
+				deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'left'" );
+				ok( a.hasClass( "ui-btn-left" ), "The close button has class ui-btn-left when the closeBtn option is set to 'left'" );
+
+				$( "#close-btn-test" ).dialog( "option", "closeBtn", "right" );
+				a = $( "#close-btn-test .ui-header a" );
+				deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'right'" );
+				ok( a.hasClass( "ui-btn-right" ), "The close button has class ui-btn-right when the closeBtn option is set to 'right'" );
+
+				$( "#close-btn-test" ).dialog( "close" );
+			},
+
+			function() {
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "clicking dialog 'Close' button twice in quick succession does not cause the browser history to retreat by two", function() {
 		var correctLocation;
 

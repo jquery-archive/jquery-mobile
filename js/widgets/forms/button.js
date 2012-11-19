@@ -119,6 +119,18 @@ $.widget( "mobile.button", $.mobile.widget, {
 		this.refresh();
 	},
 
+	_setOption: function( key, value ) {
+		var op = {};
+
+		op[ key ] = value;
+		if ( key !== "initSelector" ) {
+			this.button.buttonMarkup( op );
+			// Record the option change in the options and in the DOM data-* attributes
+			this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
+		}
+		this._super( "_setOption", key, value );
+	},
+
 	enable: function() {
 		this.element.attr( "disabled", false );
 		this.button.removeClass( "ui-disabled" ).attr( "aria-disabled", false );

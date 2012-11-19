@@ -94,6 +94,12 @@ $.testHelper.excludeFileProtocol(function(){
 	});
 
 	asyncTest( "jQM's IE browser check properly detects IE versions", function(){
+		expect( 1 );
+		if ( !$.browser ) {
+			ok( true, "Cannot perform test because $.browser has been removed" );
+			start();
+			return;
+		}
 		$.testHelper.reloadModule( moduleName ).done( function() {
 		//here we're just comparing our version to what the conditional compilation finds
 		 var ie 			= !!$.browser.msie, //get a boolean

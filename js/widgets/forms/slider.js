@@ -10,6 +10,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 (function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
+	widgetEventPrefix: "slide",
+
 	options: {
 		theme: null,
 		trackTheme: null,
@@ -476,11 +478,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 });
 
 $.widget( "mobile.slider", $.mobile.slider, $.mobile.behaviors.formReset );
-
-// FIXME: Move the declaration of widgetEventPrefix back to the top of the
-// initial declaration of the slider widget once we start using a version of
-// the widget factory that includes a fix for http://bugs.jqueryui.com/ticket/8724
-$.widget( "mobile.slider", $.mobile.slider, { widgetEventPrefix: "slide" } );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
