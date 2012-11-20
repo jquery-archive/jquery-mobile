@@ -13,7 +13,7 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 .ui-input-search .ui-input-clear, .ui-input-text .ui-input-clear { position: absolute; right: 0; top: 50%; margin-top: -13px; }
 .ui-mini .ui-input-clear { right: -3px; }
 
-.ui-input-text { padding: 0; }
+.ui-input-text { padding-left: 0; }
 .ui-input-text input.ui-input-text, .ui-input-text textarea.ui-input-text { padding: .4em; }
 
 .ui-input-search .ui-input-clear-hidden, .ui-input-text .ui-input-clear-hidden { display: none; }
