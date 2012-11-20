@@ -58,10 +58,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input[0].setAttribute( "autocomplete", "off" );
 		}
 
-		var searchNeedsIcon = input.is( "[type='search'],:jqmData(type='search')" ),
-				searchNeedsClearBtn = searchNeedsIcon && !input.is( ':jqmData(clear-btn="false")' ),
+		var searchNeedsIcon = input.is( "[type='search'], :jqmData(type='search')" ),
+				searchNeedsClearBtn = searchNeedsIcon && !input.is( ":jqmData(clear-btn='false')" ),
 				searchNeedsIconNoBtn = searchNeedsIcon && !searchNeedsClearBtn,
-				textNeedsClearBtn = input.is( "[type='text'],textarea" ) && !!o.clearBtn,
+				textNeedsClearBtn = input.is( "[type='text'], textarea" ) && !!o.clearBtn,
 				needsClearBtn = textNeedsClearBtn || ( searchNeedsIcon && searchNeedsClearBtn );
 
 		//"search" and "text" input widgets
@@ -73,7 +73,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 		if( needsClearBtn ) {
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>" )
-				.bind('click', function( event ) {
+				.bind( "click", function( event ) {
 					input
 						.val( "" )
 						.focus()
@@ -92,7 +92,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			toggleClear();
 
-			input.bind( 'paste cut keyup focus change blur', toggleClear );
+			input.bind( "paste cut keyup focus change blur", toggleClear );
 		}
 		else if( !searchNeedsIconNoBtn ) { //special case
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
@@ -138,13 +138,13 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			this._on( $(document), {"pagechange": "_keyup" });
+			this._on( $( document ), { "pagechange": "_keyup" });
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				this._on( $(window), {"load": "_keyup"});
+				this._on( $( window ), {"load": "_keyup"});
 			}
 		}
 		if ( input.attr( "disabled" ) ) {
