@@ -81,4 +81,13 @@
 	test( "'clear text' button for search inputs should use configured text", function(){
 		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
 	});
+
+	test( "data-clear-btn adds clear button to text inputs", function() {
+		ok( $( '#text-input-clear-btn' ).next().is( 'a.ui-input-clear' ), "data-clear-btn adds clear button to text inputs" );
+	});
+
+	test( "data-clear-btn does not add clear button to textarea", function() {
+		ok( ! $( "#textarea-clear-btn" ).next().is( "a.ui-input-clear" ), "data-clear-btn does not add clear button to textarea" );
+	});
+	
 })(jQuery);
