@@ -34,7 +34,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			focusedEl,
 			clearbtn,
 			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
-			clearBtnBlacklist = input.is( "textarea" ),
+			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
 			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist;
 
 		function toggleClear() {
