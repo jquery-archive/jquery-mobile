@@ -3,37 +3,20 @@
  */
 
 (function($){
-	var cssFn = $.fn.css,
-			widthFn = $.fn.width;
 
-	// make sure original definitions are reset
-	module('jquery.mobile.media.js', {
-		setup: function(){
-			$(document).trigger('mobileinit.htmlclass');
-		},
-		teardown: function(){
-			$.fn.css = cssFn;
-			$.fn.width = widthFn;
-		}
+	test( "$.mobile.media function returns same boolean result as window.matchMedia", function(){
+		deepEqual($.mobile.media("screen"), window.matchMedia("screen").matches);
 	});
 
-	test( "media query check returns true when the position is absolute", function(){
-		$.fn.css = function(){ return "absolute"; };
-		deepEqual($.mobile.media("screen 1"), true);
+	test( "$.mobile.media function returns boolean result", function(){
+		deepEqual( typeof $.mobile.media("screen"), "boolean" );
 	});
 
-	test( "media query check returns false when the position is not absolute", function(){
-		$.fn.css = function(){ return "not absolute"; };
-		deepEqual($.mobile.media("screen 2"), false);
+	test( "$.mobile.media function returns false result for inapplicable media", function(){
+		deepEqual( $.mobile.media("foo"), false );
 	});
 
-	test( "media query check is cached", function(){
-		$.fn.css = function(){ return "absolute"; };
-		deepEqual($.mobile.media("screen 3"), true);
 
-		$.fn.css = function(){ return "not absolute"; };
-		deepEqual($.mobile.media("screen 3"), true);
-	});
 
 
 })(jQuery);
