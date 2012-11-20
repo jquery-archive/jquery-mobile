@@ -27,20 +27,23 @@ define( [
 		var select = widget.select,
 			origDestroy = widget._destroy,
 			selectID  = widget.selectID,
+			prefix = ( selectID ? selectID : ( ( $.mobile.ns || "" ) + "uuid-" + widget.uuid ) ),
+			popupID = prefix + "-listbox",
+			dialogID = prefix + "-dialog",
 			label = widget.label,
 			thisPage = widget.select.closest( ".ui-page" ),
 			selectOptions = widget._selectOptions(),
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
-			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.theme +"' data-" +$.mobile.ns + "overlay-theme='"+ widget.options.overlayTheme +"'>" +
+			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' id='" + dialogID + "' data-" +$.mobile.ns + "theme='"+ widget.options.theme +"' data-" +$.mobile.ns + "overlay-theme='"+ widget.options.overlayTheme +"'>" +
 				"<div data-" + $.mobile.ns + "role='header'>" +
 				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ),
 
-			listbox =  $( "<div>", { "class": "ui-selectmenu" } ).insertAfter( widget.select ).popup( { theme: widget.options.overlayTheme } ),
+			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup( { theme: widget.options.overlayTheme } ),
 
 			list = $( "<ul>", {
 				"class": "ui-selectmenu-list",
@@ -77,6 +80,8 @@ define( [
 			selectID: selectID,
 			buttonId: buttonId,
 			menuId: menuId,
+			popupID: popupID,
+			dialogID: dialogID,
 			thisPage: thisPage,
 			menuPage: menuPage,
 			label: label,
@@ -120,8 +125,14 @@ define( [
 							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
 																event.keyCode === $.mobile.keyCode.SPACE)) {
 
-						self.open();
-						event.preventDefault();
+						self._decideFormat();
+						if ( self.menuType === "overlay" ) {
+							self.button.attr( "href", "#" + self.popupID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+						} else {
+							self.button.attr( "href", "#" + self.dialogID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+						}
+						self.isOpen = true;
+						// Do not prevent default, so the navigation may have a chance to actually open the chosen format
 					}
 				});
 
@@ -327,10 +338,7 @@ define( [
 				var self = this;
 
 				if ( self.menuType === "page" ) {
-					// doesn't solve the possible issue with calling change page
-					// where the objects don't define data urls which prevents dialog key
-					// stripping - changePage has incoming refactor
-					$.mobile.back();
+					self.menuPage.dialog( "close" );
 				} else {
 					self.listbox.popup( "close" );
 					self.list.appendTo( self.listbox );
@@ -342,6 +350,10 @@ define( [
 			},
 
 			open: function() {
+				this.button.click();
+			},
+
+			_decideFormat: function() {
 				if ( this.options.disabled ) {
 					return;
 				}
@@ -356,14 +368,6 @@ define( [
 					btnOffset = self.button.offset().top,
 					screenHeight = $window.height(),
 					screenWidth = $window.width();
-
-				//add active class to button
-				self.button.addClass( $.mobile.activeBtnClass );
-
-				//remove after delay
-				setTimeout( function() {
-					self.button.removeClass( $.mobile.activeBtnClass );
-				}, 300);
 
 				function focusMenuItem() {
 					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
@@ -403,21 +407,10 @@ define( [
 					self.menuType = "page";
 					self.menuPageContent.append( self.list );
 					self.menuPage.find("div .ui-title").text(self.label.text());
-					$.mobile.changePage( self.menuPage, {
-						transition: $.mobile.defaultDialogTransition
-					});
 				} else {
 					self.menuType = "overlay";
 
-					self.listbox
-						.one( "popupafteropen", focusMenuItem )
-						.popup( "open", {
-							x: self.button.offset().left + self.button.outerWidth() / 2,
-							y: self.button.offset().top + self.button.outerHeight() / 2
-						});
-
-					// duplicate with value set in page show for dialog sized selects
-					self.isOpen = true;
+					self.listbox.one( "popupafteropen", focusMenuItem );
 				}
 			},
 
