@@ -121,6 +121,10 @@ define( [
 
 				// Button events
 				self.button.bind( "vclick keydown" , function( event ) {
+					if ( self.options.disabled || self.isOpen ) {
+						return;
+					}
+
 					if (event.type === "vclick" ||
 							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
 																event.keyCode === $.mobile.keyCode.SPACE)) {
@@ -238,9 +242,6 @@ define( [
 				// button refocus ensures proper height calculation
 				// by removing the inline style and ensuring page inclusion
 				self.menuPage.bind( "pagehide", function() {
-					self.list.appendTo( self.listbox );
-					self._focusButton();
-
 					// TODO centralize page removal binding / handling in the page plugin.
 					// Suggestion from @jblas to do refcounting
 					//
@@ -339,12 +340,12 @@ define( [
 
 				if ( self.menuType === "page" ) {
 					self.menuPage.dialog( "close" );
+					self.list.appendTo( self.listbox );
 				} else {
 					self.listbox.popup( "close" );
-					self.list.appendTo( self.listbox );
-					self._focusButton();
 				}
 
+				self._focusButton();
 				// allow the dialog to be closed again
 				self.isOpen = false;
 			},
@@ -354,10 +355,6 @@ define( [
 			},
 
 			_decideFormat: function() {
-				if ( this.options.disabled ) {
-					return;
-				}
-
 				var self = this,
 					$window = $( window ),
 					selfListParent = self.list.parent(),
@@ -398,10 +395,9 @@ define( [
 					self.menuPage
 						.one( "pageshow", function() {
 							focusMenuItem();
-							self.isOpen = true;
 						})
 						.one( "pagehide", function() {
-							self.isOpen = false;
+							self.close();
 						});
 
 					self.menuType = "page";
