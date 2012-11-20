@@ -114,7 +114,7 @@
       </tbody>
     </table>
 
-    <p>For a more advanced demo of reflow table, see this <a href="movie-list.html">custom reflow example</a> that uses custom breakpoints and styling.</p>
+  
 
 		<h3>Applying reflow mode to a table</h3>
 	
@@ -181,7 +181,7 @@
 		
 		
 		<h3>Working with grouped column headers</h3>
-		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a  class to the label of the first cell in each group to allow you to style these differently and provide aditional visual hierarchy. See an example of <a href="financial-grouped-columns.html">grouped column table</a>.</p>
+		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a  class to the label of the first cell in each group to allow you to style these differently and provide aditional visual hierarchy. </p>
 		
 	    <h2>Options</h2>
 	    <p>The reflow mode has one option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
@@ -199,7 +199,7 @@
 			</dl>
 		
      	<h2>Events</h2>
-		<p>Since this plugin is written as an extension to the core <a href="index.html">table plugin</a>, it binds to the table <code>create</code> event but does not issue any additional events.</p>
+		<p>Since this plugin is written as an extension to the core <a href="index.html">table plugin</a>, it binds to the <code>tablecreate</code> event but does not issue any additional events.</p>
 
          </div><!-- /content -->
 

@@ -115,7 +115,7 @@
               </tbody>
             </table>
 
-      <p>For a more advanced demo of column chooser mode, see this <a href="phone-compare.html">phone comparison demo</a> that uses custom breakpoints and styling or a <a href="movie-list-toggle-options.html">movie table</a> showing plugin options and theming.</p>
+    
 
 
       <h3>Applying column chooser mode to a table</h3>
@@ -238,7 +238,7 @@
       <p>The theme for the column chooser popup can be set by adding the <code>data-column-popup-theme</code> attribute to the table and specifying any swatch letter in your theme. For custom styles or scripting, all the column chooser popups can be targeted by using the <code>ui-table-columntoggle-popup</code> structural class added to these popups. To customize a single popup, use the generated <code>ID</code> based on the table <code>ID</code> that added to each specific popup (such as <code>#movie-table-popup</code>) to target a specific popup.</p>
 
       <h3>Working with grouped column headers</h3>
-      <p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser. See an example of <a href="financial-grouped-columns.html">grouped column table</a>.</p>
+      <p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser. </p>
       
 
         <h2>Options</h2>
@@ -267,7 +267,8 @@
         <dt><code>refresh</code></dt><dd>Updates the labels in the cells.<pre><code>$( myTable ).table( "refresh" );</code></pre></dd>
       </dl>
 
-    
+      <h2>Events</h2>
+      <p>Since this plugin is written as an extension to the core <a href="index.html">table plugin</a>, it binds to the <code>tablecreate</code> event but does not issue any additional events.</p>
 
 
       
