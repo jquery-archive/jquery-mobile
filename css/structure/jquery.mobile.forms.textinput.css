@@ -33,7 +33,8 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; }
 	.ui-field-contain div.ui-input-text { width: 78%; display: inline-block; }
 	.ui-hide-label input.ui-input-text,
 	.ui-hide-label textarea.ui-input-text,
-	.ui-hide-label .ui-input-search, .ui-hide-label .ui-input-text { width: 100%; }
+	.ui-hide-label .ui-input-search,
+	.ui-hide-label div.ui-input-text { width: 100%; }
 	.ui-input-search input.ui-input-text,
 	div.ui-input-text input.ui-input-text { width: 100%; /*echos rule from above*/ }
 }
