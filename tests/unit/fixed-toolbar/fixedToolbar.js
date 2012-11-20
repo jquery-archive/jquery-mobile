@@ -195,11 +195,17 @@
 
 			function() {
 				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class');
+			},
+
+			function() {
 				$( '#classes-test-g' ).fixedtoolbar( "toggle" );
 			},
 
 			function() {
 				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does have the ui-fixed-hidden class');
+			},
+
+			function() {
 				$( '#classes-test-g' ).fixedtoolbar( "toggle" );
 			},
 
