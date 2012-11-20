@@ -83,10 +83,10 @@
 	});
 
 	test( "data-clear-btn adds clear button to text inputs", function() {
-		ok( $( '#text-input-clear-btn' ).next( 'a.ui-input-clear' ), "data-clear-btn adds clear button to text inputs" );
+		ok( $( '#text-input-clear-btn' ).next().is( 'a.ui-input-clear' ), "data-clear-btn adds clear button to text inputs" );
 	});
 
 	test( "data-clear-btn does not add clear button to textarea", function() {
-		ok( $( "#textarea-clear-btn" ).next( "a.ui-input-clear" ), "data-clear-btn does not add clear button to textarea" );
+		ok( ! $( "#textarea-clear-btn" ).next().is( "a.ui-input-clear" ), "data-clear-btn does not add clear button to textarea" );
 	});
 })(jQuery);
