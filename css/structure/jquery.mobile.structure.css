@@ -23,3 +23,6 @@
 @import url( "jquery.mobile.forms.textinput.css" );
 @import url( "jquery.mobile.listview.css" );
 @import url( "jquery.mobile.forms.slider.css" );
+@import url( "jquery.mobile.table.css" );
+@import url( "jquery.mobile.table.columntoggle.css" );
+@import url( "jquery.mobile.table.reflow.css" );

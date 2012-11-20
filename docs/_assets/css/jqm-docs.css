@@ -452,6 +452,9 @@ dl dd ul li li { list-style: circle; }
 dl dd ul li li li { list-style: square; }
 dl dd ul li { border: none; }
 
+ul.bullet li { list-style:square; padding:.4em 0; margin-left:1.2em; border-bottom:none; }
+
+
 .ui-mobile-viewport .localnav li {
 	border: none;	
 }
