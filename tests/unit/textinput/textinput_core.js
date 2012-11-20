@@ -82,11 +82,11 @@
 		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
 	});
 
-	test( "inputs [type='text'] have clear text button by default", function() {
-		ok( $( '#text-input' ).next( 'a.ui-input-clear' ), "input of type=text have clear button by default" );
+	test( "data-clear-btn adds clear button to text inputs", function() {
+		ok( $( '#text-input-clear-btn' ).next( 'a.ui-input-clear' ), "data-clear-btn adds clear button to text inputs" );
 	});
 
-	test( "data-clear-btn adds clear text button to inputs", function() {
-		ok( $( "#textarea-clear-button" ).next( "a.ui-input-clear" ), "textarea with data-clear-btn=true has clear button" );
+	test( "data-clear-btn does not add clear button to textarea", function() {
+		ok( $( "#textarea-clear-btn" ).next( "a.ui-input-clear" ), "data-clear-btn does not add clear button to textarea" );
 	});
 })(jQuery);
