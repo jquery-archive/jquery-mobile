@@ -25,8 +25,8 @@ input:-moz-placeholder { color: #aaa; }
 /* Resolves issue #5131: Width of textinput depends on its type, for Android 4.1 */
 input[type=number]::-webkit-outer-spin-button { margin: 0; }
 
-@media all and (min-width: 450px){
-	.ui-field-contain label.ui-input-text { vertical-align: top; display: inline-block; width: 20%; margin: 0 1% 0 0 }
+@media all and (min-width: 28em){
+	.ui-field-contain label.ui-input-text { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
 	.ui-field-contain input.ui-input-text,
 	.ui-field-contain textarea.ui-input-text,
 	.ui-field-contain .ui-input-search,
@@ -34,7 +34,7 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; }
 	.ui-hide-label input.ui-input-text,
 	.ui-hide-label textarea.ui-input-text,
 	.ui-hide-label .ui-input-search,
-	.ui-hide-label div.ui-input-text { width: 100%; }
+	.ui-hide-label div.ui-input-text,
 	.ui-input-search input.ui-input-text,
-	div.ui-input-text input.ui-input-text { width: 100%; /*echos rule from above*/ }
+	div.ui-input-text input.ui-input-text { width: 100%; }
 }
