@@ -6,7 +6,7 @@ input.ui-input-text, textarea.ui-input-text, .ui-input-search { -webkit-box-sizi
 input.ui-input-text { -webkit-appearance: none; }
 textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; -moz-transition: height 200ms linear; -o-transition: height 200ms linear; transition: height 200ms linear; }
 .ui-input-search, .ui-input-text { padding: 0 30px; margin: .5em 0; background-image: none; position: relative; }
-.ui-input-search.ui-mini { margin: .25em 0; }
+.ui-input-search.ui-mini, div.ui-input-text.ui-mini { margin: .25em 0; }
 .ui-field-contain .ui-input-search, .ui-field-contain .ui-input-text { margin: 0; }
 .ui-icon-searchfield:after { position: absolute; left: 7px; top: 50%; margin-top: -9px; content: ""; width: 18px; height: 18px; opacity: .5; }
 .ui-input-search input.ui-input-text, .ui-input-text input.ui-input-text, .ui-input-text textarea.ui-input-text { border: none; width: 98%; padding: .4em 0; margin: 0; display: block; background: transparent none; outline: 0 !important; }
