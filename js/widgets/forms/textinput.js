@@ -33,7 +33,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
 			focusedEl,
 			clearbtn,
-			clearBtnText = o.clearSearchButtonText || o.clearBtnText;
+			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
+			clearBtnBlacklist = input.is( "textarea" ),
+			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist;
 
 		function toggleClear() {
 			setTimeout( function() {
@@ -62,11 +64,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		//"search" and "text" input widgets
 		if ( isSearch ) {
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-		} else if ( !!o.clearBtn && !isSearch ) {
+		} else if ( inputNeedsClearBtn ) {
 			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
 		}
 
-		if( !!o.clearBtn || isSearch ) {
+		if( inputNeedsClearBtn || isSearch ) {
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>" )
 				.bind( "click", function( event ) {
 					input
@@ -89,7 +91,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			input.bind( "paste cut keyup focus change blur", toggleClear );
 		}
-		else if( !o.clearBtn && !isSearch ) {
+		else if ( !inputNeedsClearBtn && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 

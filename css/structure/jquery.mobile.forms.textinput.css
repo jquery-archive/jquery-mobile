@@ -2,10 +2,10 @@ label.ui-input-text { font-size: 16px; line-height: 1.4; display: block; font-we
 input.ui-input-text, textarea.ui-input-text { background-image: none; padding: .4em; margin: .5em 0; line-height: 1.4; font-size: 16px; display: block; width: 100%; outline: 0; }
 input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
-.ui-input-search input.ui-input-text { border: none; width: 98%; padding: .4em 0; margin: 0; display: block; background: transparent none; outline: 0 !important; }
-.ui-input-search, div.ui-input-text { padding: 0 30px; margin: .5em 0; background-image: none; position: relative; }
-div.ui-input-text { padding-left: 0; }
-div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text { padding: .4em; }
+.ui-input-search input.ui-input-text { border: none; width: 100%; padding: .4em 0; margin: 0; display: block; background: transparent none; outline: 0 !important; }
+.ui-input-search, div.ui-input-text { margin: .5em 0; background-image: none; position: relative; }
+.ui-input-search { padding: 0 30px; }
+div.ui-input-text input.ui-input-text { padding: .4em 30px .4em .4em; }
 input.ui-input-text.ui-mini, textarea.ui-input-text.ui-mini,
 .ui-input-search.ui-mini, div.ui-input-text.ui-mini { margin: .25em 0; }
 .ui-field-contain input.ui-input-text, .ui-field-contain textarea.ui-input-text,
@@ -35,5 +35,5 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; }
 	.ui-hide-label textarea.ui-input-text,
 	.ui-hide-label .ui-input-search, .ui-hide-label .ui-input-text { width: 100%; }
 	.ui-input-search input.ui-input-text,
-	div.ui-input-text input.ui-input-text { width: 98%; /*echos rule from above*/ }
+	div.ui-input-text input.ui-input-text { width: 100%; /*echos rule from above*/ }
 }
