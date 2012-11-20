@@ -50,7 +50,6 @@ $( document ).delegate( ":jqmData(role='table')", "tablecreate", function() {
 
 					if( iteration ){
 						filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
-						console.log("td:nth-child("+ iteration +"n + " + ( colstart ) +")");
 					}
 					$cells.filter( filter ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );
 				}
