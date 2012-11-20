@@ -30,6 +30,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
 			miniclass = o.mini ? " ui-mini" : "",
+			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
 			focusedEl,
 			clearbtn,
 			clearBtnText = o.clearSearchButtonText || o.clearBtnText;
@@ -58,20 +59,14 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input[0].setAttribute( "autocomplete", "off" );
 		}
 
-		var searchNeedsIcon = input.is( "[type='search'], :jqmData(type='search')" ),
-				searchNeedsClearBtn = searchNeedsIcon && !input.is( ":jqmData(clear-btn='false')" ),
-				searchNeedsIconNoBtn = searchNeedsIcon && !searchNeedsClearBtn,
-				textNeedsClearBtn = input.is( "[type='text'], textarea" ) && !!o.clearBtn,
-				needsClearBtn = textNeedsClearBtn || ( searchNeedsIcon && searchNeedsClearBtn );
-
 		//"search" and "text" input widgets
-		if ( searchNeedsIcon ) {
+		if ( isSearch ) {
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-		} else if ( textNeedsClearBtn ) {
+		} else if ( !!o.clearBtn && !isSearch ) {
 			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
 		}
 
-		if( needsClearBtn ) {
+		if( !!o.clearBtn || isSearch ) {
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>" )
 				.bind( "click", function( event ) {
 					input
@@ -94,7 +89,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			input.bind( "paste cut keyup focus change blur", toggleClear );
 		}
-		else if( !searchNeedsIconNoBtn ) { //special case
+		else if( !o.clearBtn && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
