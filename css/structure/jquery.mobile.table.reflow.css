@@ -49,12 +49,12 @@
 	tr,
 	th,
 	td {
-	    width:100%;
+	    width: 100%;
 	    -webkit-box-sizing: border-box;
 	    -moz-box-sizing: border-box;
 	    box-sizing: border-box;
-	    float:left;
-	    clear:left;
+	    float: left;
+	    clear: left;
 	}
 }
 
@@ -84,9 +84,9 @@
 	tr,
 	th,
 	td {
-	    width:auto;
-	    float:none;
-	    clear:none;
+	    width: auto;
+	    float: none;
+	    clear: none;
 	}
 }
 
