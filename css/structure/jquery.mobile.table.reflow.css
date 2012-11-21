@@ -42,6 +42,20 @@
 		font-size: .9em;
 		font-weight: normal;
 	}
+	table,
+	thead,
+	tfoot,
+	tbody,
+	tr,
+	th,
+	td {
+	    width:100%;
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	    float:left;
+	    clear:left;
+	}
 }
 
 
@@ -62,6 +76,17 @@
 	.ui-table-reflow.ui-responsive td .ui-table-cell-label,
 	.ui-table-reflow.ui-responsive th .ui-table-cell-label { 
 		display: none;
+	}
+	table,
+	thead,
+	tfoot,
+	tbody,
+	tr,
+	th,
+	td {
+	    width:auto;
+	    float:none;
+	    clear:none;
 	}
 }
 
