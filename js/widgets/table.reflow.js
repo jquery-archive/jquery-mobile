@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.table.reflow.css
 
 
-define( [ "jquery", "./jquery.mobile.table" ], function( $ ) {
+define( [ "jquery", "./table" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
