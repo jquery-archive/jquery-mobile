@@ -38,9 +38,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 
 	// This is a fallback. If anything goes wrong (JS errors, etc), or events don't fire,
 	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
-	setTimeout( function() {
-		hideRenderingClass();
-	}, 5000 );
+	setTimeout( hideRenderingClass, 5000 );
 
 	$.extend( $.mobile, {
 		// find and enhance the pages in the dom and transition to the first page.
