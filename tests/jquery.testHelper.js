@@ -121,12 +121,8 @@
 				};
 			}
 
-			var lib = this.reloads[libName].lib.clone(),
-				src = lib.attr('src');
-
-			//NOTE append "cache breaker" to force reload
-			lib.attr('src', src + "?" + this.reloads[libName].count++);
-			$("body").append(lib);
+			var src = this.reloads[libName].lib.attr('src') + "?" + this.reloads[libName].count++;
+			$.ajax( { url: src, dataType: "script", async: false } );
 		},
 
 		rerunQunit: function(){

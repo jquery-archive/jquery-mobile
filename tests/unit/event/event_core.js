@@ -36,7 +36,7 @@
 		test( "new events defined on the jquery object", function(){
 			$.each(events, function( i, name ) {
 				delete $.fn[name];
-				deepEqual($.fn[name], undefined);
+				deepEqual($.fn[name], undefined, "After deleting it, $.fn[ '" + name + "' ] is indeed undefined" );
 			});
 
 			$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
