@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<html>
+   <head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+   <title>jQuery Mobile Docs - Responsive Table</title> 
+   <link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+   <link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+   <script src="../../js/jquery.js"></script>
+   <script src="../../docs/_assets/js/jqm-docs.js"></script>
+   <script src="../../js/"></script>
+
+</head> 
+<body> 
+
+   <div data-role="page" class="type-interior">
+
+      <div data-role="header" data-theme="f">
+      <h1>Table: Column Toggle</h1>
+      <a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+      <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+   </div><!-- /header -->
+
+   <div data-role="content">
+			<div class="content-primary">
+    <h2>Column toggle table mode</h2>
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="table-column-toggle.html" data-role="button" data-transition="fade">Basics</a></li>
+				<li><a href="toggle-options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
+				<li><a href="toggle-methods.html" data-role="button" data-transition="fade">Methods</a></li>
+				<li><a href="toggle-events.html" data-role="button" data-transition="fade">Events</a></li>
+			</ul>
+        <p>The columntoggle table comes with several options:</p>
+
+        <dl>
+        <dt><code>columnBtnTheme</code> default: null</dt><dd>Sets the theme for the column chooser button. Set to any valid swatch letter in your theme. Available as the <code>data-column-btn-theme</code> attribute.</dd>
+        <dt><code>columnBtnText</code> default: "Columns..."</dt><dd>Sets the text for the for the column chooser button. Available as the <code>data-column-btn-text</code> attribute.</dd>
+        <dt><code>columnPopupTheme</code> default: null</dt><dd>Sets the theme for the column chooser popup checkboxes. Set to any valid swatch letter in your theme. Available as the <code>data-popup-theme</code> attribute.</dd>
+        </dl>
+
+        <p>The columntoggle mode also has an option, <code>classes</code>, which is only configurable via JavaScript because it expects an object literal value. The <code>classes</code> option has two properties that define the structural classnames that the plugin uses:</h3>
+
+          <dl>
+        <dt><code>classes.columnToggleTable</code> default: "ui-table-columntoggle"</dt>Class assigned to the table.        
+        <dt><code>classes.columnBtn</code> default: "ui-table-columntoggle-btn"</dt><dd>Class assigned to the column toggle button.</dd>
+        <dt><code>classes.popup</code> default: "ui-table-columntoggle-popup"</dt><dd>Class assigned to the column chooser popup.</dd>
+
+        <dt><code>classes.priorityPrefix</code> default: "ui-table-priority-"</dt>Class prefix added to each cell in a column. This string is appended to the priority value set on the headers.
+      </dl>
+	</div><!--/content-primary -->
+
+		<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>In this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+								<li data-role="list-divider">Tables</li>
+								<li><a href="table-reflow.html">Reflow mode</a></li>
+								<li><a href="table-column-toggle.html">Column toggle mode</a></li>
+							</ul>
+					</div>
+				</div>
+				
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+	</div>
+
+	</div><!-- /page -->
+
+</body>
+</html>
