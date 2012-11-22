@@ -13,8 +13,12 @@
 	<!-- We're using a style block to make it easy to view the custom styles -->
 	<!-- In production, these should be added to an custom.css file loaded in the head -->
 	<style>
+		.th-groups th {
+			background-color:rgba(0,0,0,0.07);
+			border-right:1px solid #fff;
+			text-align:center;
+		}
 		@media screen and ( max-width: 72em ) {
-
 		 /* Style the first cell in a row in a dark bar */ 
 		.financial-table-reflow th:first-child
 		 { 
@@ -56,6 +60,19 @@
 				display: none;
 			}
 		}
+	/* Hack to make IE9 and WP7.5 treat cells like block level elements */ 
+	/* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this*/ 
+	@media ( max-width: 72em ) {
+		.financial-table-reflow td,
+		.financial-table-reflow th {
+			width: 100%;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			float: left;
+			clear: left;
+		}
+	}
 	</style>
 </head> 
 <body> 

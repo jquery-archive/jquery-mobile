@@ -19,21 +19,6 @@
 		text-align: left;
 		display: block;
 	}
-	/* Make IE9 and WP7.5 treat cells like block level elements */ 
-	table.ui-table-reflow,
-	.ui-table-reflow thead,
-	.ui-table-reflow tfoot,
-	.ui-table-reflow tbody,
-	.ui-table-reflow tr,
-	.ui-table-reflow th,
-	.ui-table-reflow td {
-	    width: 100%;
-	    -webkit-box-sizing: border-box;
-	    -moz-box-sizing: border-box;
-	    box-sizing: border-box;
-	    float: left;
-	    clear: left;
-	}
 	/* Add a fair amount of top margin to visually separate each row when stacked */  
 	.ui-table-reflow tbody th {
 		margin-top: 3em;
@@ -60,8 +45,7 @@
 }
 
 
-
-/* Media query to show as a standard table at 560px (35em x 16px) or wider */ 
+/* Breakpoint to show as a standard table at 560px (35em x 16px) or wider */ 
 @media ( min-width: 35em ) {
 	/* Show the table header rows */ 
 	.ui-table-reflow.ui-responsive td,
@@ -72,23 +56,9 @@
 	.ui-table-reflow.ui-responsive thead th {
 		display: table-cell;
 		margin: 0;
+
 	}
-	/* Undo block styles for IE9 and WP7.5 */ 
-	table.ui-table-reflow.ui-responsive,
-	.ui-table-reflow.ui-responsive thead,
-	.ui-table-reflow.ui-responsive tfoot,
-	.ui-table-reflow.ui-responsive tbody,
-	.ui-table-reflow.ui-responsive tr,
-	.ui-table-reflow.ui-responsive th,
-	.ui-table-reflow.ui-responsive td {
-	    width: auto;
-	    float: none;
-	    clear: none;
-	}
-	/* Make sure the table is 100% width */ 
-	table.ui-table-reflow.ui-responsive {
-	    width: 100%;
-	}
+
 	/* Hide the labels in each cell */ 
 	.ui-table-reflow.ui-responsive td .ui-table-cell-label,
 	.ui-table-reflow.ui-responsive th .ui-table-cell-label { 
@@ -97,4 +67,17 @@
 }
 
 
+/* Hack to make IE9 and WP7.5 treat cells like block level elements, scoped to ui-responsive class */ 
+/* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this*/ 
+@media ( max-width: 35em ) {
+	.ui-table-reflow.ui-responsive td,
+	.ui-table-reflow.ui-responsive th {
+		width: 100%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		float: left;
+		clear: left;
+	}
+}
 
