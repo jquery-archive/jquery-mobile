@@ -62,7 +62,8 @@ $files = array(
 );
 
 function getCommitId() {
-	$logs = file_get_contents( "../.git/logs/HEAD" );
+	$gitHeadPath = "../.git/logs/HEAD";
+	$logs = ( is_readable( $gitHeadPath ) ? file_get_contents( $gitHeadPath ) : false );
 	if ( $logs ) {
 		$logs = explode( "\n", $logs );
 		$n_logs = count( $logs );
