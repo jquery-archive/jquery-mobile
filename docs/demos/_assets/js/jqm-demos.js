@@ -135,7 +135,7 @@ $( document ).on( "pageinit", function(){
 		$(".code", this ).find( ".line" ).css( "height", "auto" );
 		$(".gutter", this ).find( ".line" ).each( function(){
 			var linenumber = ".number" + /number(\w+)/.exec( this.className )[1],
-				code = $( this ).parents( "tr" ).find( "td.code" ).first();
+				code = $( this ).parents( "tr" ).find( "td.code" ).first(),
 				line = $( code ).find( linenumber ),
 				height = $( line ).height();
 			

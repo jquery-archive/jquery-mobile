@@ -373,7 +373,7 @@
 		versionTest: function( l, t, r ) {
 			var lAr = l.split( "." ), lLength = lAr.length,
 				rAr = r.split( "." ), rLength = rAr.length,
-				lVal, rVal, lRes = "", rRes = "", min, max, str, idx1, diff;
+				lVal, rVal, lRes = "", rRes = "", min, max, str, idx, idx1, diff;
 			for ( idx = 0 ; idx < lLength || idx < rLength ; idx++ ) {
 				str = {};
 				lVal = ( idx < lLength ? parseInt( lAr[ idx ] ) : 0 );
