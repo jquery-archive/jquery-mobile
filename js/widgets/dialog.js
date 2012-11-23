@@ -17,6 +17,17 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		corners: true,
 		initSelector: ":jqmData(role='dialog')"
 	},
+
+	// Override the theme set by the page plugin on pageshow
+	_handlePageBeforeShow: function() {
+		this._isCloseable = true;
+		if ( this.options.overlayTheme ) {
+			this.element
+				.page( "removeContainerBackground" )
+				.page( "setContainerBackground", this.options.overlayTheme );
+		}
+	},
+
 	_create: function() {
 		var self = this,
 			$el = this.element,
@@ -51,15 +62,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagehide", function( e, ui ) {
 			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
-		})
-		// Override the theme set by the page plugin on pageshow
-		.bind( "pagebeforeshow", function() {
-			self._isCloseable = true;
-			if ( self.options.overlayTheme ) {
-				self.element
-					.page( "removeContainerBackground" )
-					.page( "setContainerBackground", self.options.overlayTheme );
-			}
+		});
+
+		this._on( $el, {
+			pagebeforeshow: "_handlePageBeforeShow"
 		});
 
 		$.extend( this, {
