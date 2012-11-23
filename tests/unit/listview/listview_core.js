@@ -717,7 +717,7 @@
 
 	module( "Programmatically generated list items", {
 		setup: function(){
-			var item,
+			var label, item,
 				data = [
 					{
 						id: 1,

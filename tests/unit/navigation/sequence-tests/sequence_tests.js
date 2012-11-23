@@ -311,7 +311,7 @@
 	});
 
 	asyncTest( "Opening another page after returning from a popup works", function() {
-		var eventNs = ".openingAnotherPageAfterPopup";
+		var origActive, eventNs = ".openingAnotherPageAfterPopup";
 
 		expect( 7 );
 

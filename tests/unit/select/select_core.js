@@ -18,7 +18,7 @@
 	};
 
 	// Check if two chunks of DOM are identical
-	domEqual = function( l, r ) {
+	var domEqual = function( l, r ) {
 		var idx, idxAttr, lattr, rattr;
 
 		// If the lengths of the two jQuery objects are different, the DOM
