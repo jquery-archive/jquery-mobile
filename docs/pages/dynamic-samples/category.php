@@ -127,7 +127,7 @@ header('Content-type: text/html; charset=UTF-8');
 <?php
 		} else {
 ?>
-		<p><?php echo htmlspecialchars( $catgory_object['description'] ); ?></p>
+		<p><?php echo htmlspecialchars( $category_object['description'] ); ?></p>
 		<ul data-role="listview" data-inset="true">
 <?php
 			$arr = $category_obj[ 'items' ];
