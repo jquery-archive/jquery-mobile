@@ -197,18 +197,32 @@ div.jqm-demo-link {
 /* Source code view */
 [id|="jqm-demo"].ui-popup-container {
 	width: 90%;
-	max-width: 1400px;
+	max-width: 1500px;
 }
 .jqm-demo .ui-collapsible-set {
 	margin: 0;
 }
 .jqm-demo .ui-collapsible-content {
 	padding: 0;
+	overflow: auto;
 }
 .jqm-demo .ui-collapsible-content > div,
 .jqm-demo .ui-collapsible-content .syntaxhighlighter {
 	border-bottom-right-radius: inherit;
 	border-bottom-left-radius: inherit;
+}
+.jqm-demo .ui-collapsible-content::-webkit-scrollbar {
+    width: 5px;
+}
+.jqm-demo .ui-collapsible-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+ 
+.jqm-demo .ui-collapsible-content::-webkit-scrollbar-thumb {
+	background: #435A5F;
+	border: solid #222;
+	border-width: 12px 2px 12px 0;
+	border-bottom-right-radius: 5px;
 }
 
 /**
@@ -269,7 +283,6 @@ div.jqm-demo-link {
 	position: relative;
 	overflow: auto;
 	font-size: .8125em;
-	background-color: #222;
 }
 .syntaxhighlighter.source {
 	overflow: hidden;
