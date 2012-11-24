@@ -121,14 +121,13 @@ $.fn.viewSourceCode = function() {
 
 $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 	$( this ).find( "[data-demo-html='true'], [data-demo-js='true'], [data-demo-css='true']" ).viewSourceCode();
+	SyntaxHighlighter.all();
 });
 
 $( document ).on( "pageinit", function() {
 	// reposition when switching between html / js / css
-	$( ".jqm-demo .ui-collapsible-heading" ).on( "click", function() {
-		if ( !$( this ).is( ".ui-collapsible-heading-collapsed" ) ) {
-			$( this ).parents( ".jqm-demo" ).trigger( "resize" );
-		}
+	$( ".jqm-demo .ui-collapsible" ).on( "expand", function() {
+		$( this ).parents( ".jqm-demo" ).trigger( "resize" );
 	});
 
 	$( ".jqm-demo" ).on( "popupbeforeposition", function() {
@@ -137,22 +136,21 @@ $( document ).on( "pageinit", function() {
 			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
 		
 		$( this ).find( ".ui-collapsible-content" ).css( "max-height", maxHeight + "px" );
-				
-		// keep line numbers and code lines in sync		
-		$(".code", this ).find( ".line" ).css( "height", "auto" );
-		$(".gutter", this ).find( ".line" ).each( function() {
-			var linenumber = ".number" + /number(\w+)/.exec( this.className )[1],
-				code = $( this ).parents( "tr" ).find( "td.code" ).first(),
-				line = $( code ).find( linenumber ),
-				height = $( line ).height();
+		
+		// keep line numbers and code lines in sync
+		$(".ui-collapsible:not(.ui-collapsible-collapsed) .gutter", this ).find( ".line" ).css( "height", "");
 			
-			if ( $( this ).height() !== height ) {
-				 $( this ).height( height );
-				 $( line ).height( height );
+		$(".ui-collapsible:not(.ui-collapsible-collapsed) .code", this ).find( ".line" ).each( function() {
+			if ( $( this ).height() !== 16 ) {
+				var height = $( this ).height(),
+					linenumber = ".number" + /number(\w+)/.exec( this.className )[1],
+					gutter = $( this ).parents( "tr" ).find( "td.gutter" ).first(),
+					line = $( gutter ).find( linenumber );
+
+				$( line ).height( height );
 			}
 		});
 	});
-	
 });
 
 /**
@@ -289,7 +287,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 						'content counter-increment counter-reset cue-after cue-before cue cursor definition-src descent direction display ' +
 						'elevation empty-cells float font-size-adjust font-family font-size font-stretch font-style font-variant font-weight font ' +
 						'height left letter-spacing line-height list-style-image list-style-position list-style-type list-style margin-top ' +
-						'margin-right margin-bottom margin-left margin marker-offset marks mathline max-height max-width min-height min-width orphans ' +
+						'margin-right margin-bottom margin-left margin marker-offset marks mathline max-height max-width min-height min-width opacity orphans ' +
 						'outline-color outline-style outline-width outline overflow padding-top padding-right padding-bottom padding-left padding page ' +
 						'page-break-after page-break-before page-break-inside pause pause-after pause-before pitch pitch-range play-during position ' +
 						'quotes right richness size slope src speak-header speak-numeral speak-punctuation speak speech-rate stemh stemv stress ' +
@@ -339,7 +337,3 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-
-$( document ).on( "pageinit", function() {
-	SyntaxHighlighter.all()
-});

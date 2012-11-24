@@ -257,7 +257,7 @@ div.jqm-demo-link {
 	float: none;
 	left: auto;
 	height: auto;
-	line-height: 1.3em;
+	line-height: 16px;
 	margin: 0;
 	outline: 0;
 	overflow: visible;
@@ -272,7 +272,7 @@ div.jqm-demo-link {
 	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 	font-weight: normal;
 	font-style: normal;
-	font-size: 1em;
+	font-size: 13px;
 	min-height: inherit;
 	min-height: auto;
 }
@@ -282,7 +282,7 @@ div.jqm-demo-link {
 	padding: 1em 0;
 	position: relative;
 	overflow: auto;
-	font-size: .8125em;
+	font-size: 13px;
 }
 .syntaxhighlighter.source {
 	overflow: hidden;
