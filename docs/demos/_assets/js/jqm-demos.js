@@ -90,7 +90,7 @@ $.fn.viewSourceCode = function() {
 			html = $( "<div></div>" ).append( $( this ).contents().clone() ).html();
 			collapsibleHTML = $( "<div data-role='collapsible' data-collapsed='true' data-theme='b' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>HTML</h1>" +
-					"<pre class='brush: xml; toolbar: false;'></pre>" +
+					"<pre class='brush: xml;'></pre>" +
 				"</div>" );
 			appendSource( html, collapsibleHTML );
 		}
@@ -98,7 +98,7 @@ $.fn.viewSourceCode = function() {
 			js = $( "<div></div>" ).append( $( "head" ).find( "script" ).contents().clone() ).html();
 			collapsibleJS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='f' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>JS</h1>" +
-					"<pre class='brush: js; toolbar: false;'></pre>" +
+					"<pre class='brush: js;'></pre>" +
 				"</div>" );
 			appendSource( js, collapsibleJS );
 		}
@@ -107,7 +107,7 @@ $.fn.viewSourceCode = function() {
 
 			collapsibleCSS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='e' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>CSS</h1>" +
-					"<pre class='brush: css; toolbar: false;'></pre>" +
+					"<pre class='brush: css;'></pre>" +
 				"</div>" );
 			appendSource( css, collapsibleCSS );
 		}
@@ -121,6 +121,8 @@ $.fn.viewSourceCode = function() {
 
 $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 	$( this ).find( "[data-demo-html='true'], [data-demo-js='true'], [data-demo-css='true']" ).viewSourceCode();
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.defaults['auto-links'] = false;
 	SyntaxHighlighter.all();
 });
 
