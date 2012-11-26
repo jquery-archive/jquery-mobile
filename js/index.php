@@ -47,6 +47,7 @@ $files = array(
 	'widgets/forms/checkboxradio.js',
 	'widgets/forms/button.js',
 	'widgets/forms/slider.js',
+	'widgets/forms/range.js',
 	'widgets/forms/textinput.js',
 	'widgets/forms/select.custom.js',
 	'widgets/forms/select.js',

@@ -17,7 +17,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		trackTheme: null,
 		disabled: false,
 		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
-		mini: false
+		mini: false,
+		highlight: false
 	},
 
 	_create: function() {
@@ -62,7 +63,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			domSlider = document.createElement( 'div' ),
 			slider = $( domSlider ),
 
-			valuebg = control.jqmData( "highlight" ) && !this.isToggleSwitch ? (function() {
+			valuebg = this.options.highlight && !this.isToggleSwitch ? (function() {
 				var bg = document.createElement('div');
 				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
@@ -357,10 +358,16 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( this.options.disabled || this.element.attr('disabled')) {
 			this.disable();
 		}
-
+		var self = this;
 		// set the stored value for comparison later
 		this.value = this._value();
-
+		if(this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg").length == 0){
+			this.valuebg = (function() {
+				var bg = document.createElement('div');
+				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
+				return $( bg ).prependTo( self.slider );
+			})()
+		}
 		var control = this.element, percent,
 			isInput = !this.isToggleSwitch,
 			optionElements = isInput ? [] : control.find( "option" ),

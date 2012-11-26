@@ -1,0 +1,79 @@
+.ui-range{
+  position:relative;
+  display:inline-block;
+  clear:right;
+  min-height:1em;
+  width:78%;
+}
+.ui-range div.ui-slider{
+  position:absolute;
+  left:100px;
+  float:left;
+  margin-left:3.7em;
+  box-sizing:border-box;
+  margin-top:.45em;
+  max-width:80%;
+  width:100%;
+  margin-right:18px;
+}
+.ui-field-contain .ui-range div.ui-slider{
+  width:45%;
+}
+.ui-range div.ui-slider:last-child{
+  margin-left:.9em;
+}
+.ui-range.ui-range-split{
+  margin-left:70px;
+}
+.ui-range input{
+  float:left;
+  margin-right:5px;
+}
+.ui-range input.ui-range-first{
+  margin-left:-140px;
+}
+.ui-range.ui-range-split input.ui-range-first,
+.ui-range input.ui-range-last{
+  margin-left:-70px;
+}
+.ui-range div.ui-slider:last-child{
+  position:relative;
+  left:0px;
+}
+.ui-field-contain .ui-range input.ui-slider-input{
+  margin-right:.5em;
+}
+@media (max-width: 450px){
+  .ui-range{
+    width:100%;
+  }
+  .ui-field-contain .ui-range div.ui-slider{
+    width:100%;
+    left:0;
+    top:50%;
+    margin-top:1.05em;
+    margin-left:1.35em;
+  }
+  .ui-field-contain .ui-range div.ui-slider:last-child{
+    margin-top:.75em;
+  }
+  .ui-range{
+    margin-bottom:8px;
+  }
+}
+@media (max-width: 750px){
+
+  .content-primary .ui-field-contain .ui-range div.ui-slider{
+    width:100%;
+    left:0;
+    top:50%;
+    margin-top:1.05em;
+    margin-left:1.35em;
+  }
+  .ui-field-contain .ui-range div.ui-slider:last-child{
+    margin-top:.75em;
+  }
+  .ui-range{
+    margin-bottom:8px;
+  }
+}
