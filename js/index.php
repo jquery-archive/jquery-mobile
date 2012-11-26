@@ -55,6 +55,7 @@ $files = array(
 	'jquery.mobile.links.js',
 	'widgets/fixedToolbar.js',
 	'widgets/fixedToolbar.workarounds.js',
+	'widgets/panel.js',
 	'widgets/popup.js',
 	'widgets/table.js',
 	'widgets/table.columntoggle.js',

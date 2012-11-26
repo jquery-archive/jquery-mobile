@@ -1,0 +1,51 @@
+.ui-panel{
+	position: absolute;
+	border: red 2px solid;
+	/*
+	-webkit-transition: all 400ms ease-in-out;
+	-moz-transition: all 400ms ease-in-out;
+	-ms-transition: all 400ms ease-in-out;
+	-o-transition: all 400ms ease-in-out;
+	transition: all 400ms ease-in-out;
+	*/
+}
+.ui-panel-hide{
+	display: none;
+}
+.ui-panel-position-left, .ui-panel-position-right{
+	width: 25%;
+	height: 100%;
+}
+.ui-panel-position-left{
+	left: 0;
+}
+.ui-panel-position-right{
+	left: 75%;
+}
+.ui-panel-position-top{
+	width: 100%;
+	height: 25%;
+	top: 0;
+}
+.ui-panel-position-left.ui-panel-hidden{
+	left: -30%;
+}
+.ui-panel-position-right.ui-panel-hidden{
+	left: 100%;
+}
+.ui-panel-position-top.ui-panel-hidden{
+	top: -25%;
+}
+.ui-content.panel-shift-left, .ui-content.panel-shift-right, .ui-content.panel-shift-top{
+	position: relative;
+}
+.ui-content.panel-shift-left{
+	left:25%;
+}
+.ui-content.panel-shift-right{
+	right:25%;
+}
+.ui-content.panel-shift-top{
+	top:25%;
+}
+

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Panel Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../jquery.testHelper.js"></script>
+	<script src="../../../external/qunit.js"></script>
+	<script type="text/javascript">
+		// redirects from push-state-tests.html
+		$( document ).bind( 'mobileinit', function(){
+			$.testHelper.setPushState();
+		});
+	</script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/panel"
+			],
+			[ "jquery.mobile.init" ],
+			[ "panel_core.js" ]
+		]);
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Panel Integration Test</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<!-- Basic Panel test -->
+<div data-nstest-role="page" id='basic-panel-test'>
+	<div data-nstest-role="header">
+		<h1>Panel Test</h1>
+	</div>
+	<div data-nstest-role="content">
+		<a href="#panel-id" data-nstest-rel="panel" data-nstest-position="right"
+			data-nstest-dismissible="true" data-nstest-display="overlay">Open Panel</a>
+		<div data-nstest-role="panel">
+			<p>Contents of a panel would go here.</p>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
