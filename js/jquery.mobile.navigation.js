@@ -1264,19 +1264,19 @@ define( [
 	//the following deferred is resolved in the init file
 	$.mobile.navreadyDeferred = $.Deferred();
 	$.mobile._registerInternalEvents = function() {
-		var getAjaxFormData = function( $this, calculateOnly ) {
+		var getAjaxFormData = function( $form, calculateOnly ) {
 			var type, target, url, ret = true;
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
-					$this.is( ":jqmData(ajax='false')" ) ||
+					$form.is( ":jqmData(ajax='false')" ) ||
 					// test that $.mobile.ignoreContentEnabled is set and
 					// the form or one of it's parents is ajax=false
-					!$this.jqmHijackable().length ) {
+					!$form.jqmHijackable().length ) {
 				return false;
 			}
 
-			target = $this.attr( "target" );
-			url = $this.attr( "action" );
+			target = $form.attr( "target" );
+			url = $form.attr( "action" );
 
 			// If no action is specified, browsers default to using the
 			// URL of the document containing the form. Since we dynamically
@@ -1285,7 +1285,7 @@ define( [
 			// the form.
 			if ( !url ) {
 				// Get the @data-url for the page containing the form.
-				url = getClosestBaseUrl( $this );
+				url = getClosestBaseUrl( $form );
 				if ( url === documentBase.hrefNoHash ) {
 					// The url we got back matches the document base,
 					// which means the page must be an internal/embedded page,
@@ -1295,21 +1295,21 @@ define( [
 				}
 			}
 
-			url = path.makeUrlAbsolute(  url, getClosestBaseUrl( $this ) );
+			url = path.makeUrlAbsolute(  url, getClosestBaseUrl( $form ) );
 
 			if ( ( path.isExternal( url ) && !path.isPermittedCrossDomainRequest( documentUrl, url ) ) || target ) {
 				return false;
 			}
 
 			if ( !calculateOnly ) {
-				type = $this.attr( "method" );
+				type = $form.attr( "method" );
 				ret = {
 					url: url,
 					options: {
 						type:		type && type.length && type.toLowerCase() || "get",
-						data:		$this.serialize(),
-						transition:	$this.jqmData( "transition" ),
-						reverse:	$this.jqmData( "direction" ) === "reverse",
+						data:		$form.serialize(),
+						transition:	$form.jqmData( "transition" ),
+						reverse:	$form.jqmData( "direction" ) === "reverse",
 						reloadPage:	true
 					}
 				};
