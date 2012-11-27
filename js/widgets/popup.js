@@ -203,6 +203,7 @@ define( [ "jquery",
 
 			// Define instance variables
 			$.extend( this, {
+				_scrollTop: 0,
 				_page: thisPage,
 				_ui: ui,
 				_fallbackTransition: "",
@@ -701,6 +702,8 @@ define( [ "jquery",
 		_closePopup: function( e, data ) {
 			var parsedDst, toUrl;
 
+			window.scrollTo( 0, this._scrollTop );
+
 			if ( e.type === "pagebeforechange" && data ) {
 				// Determine whether we need to rapid-close the popup, or whether we can
 				// take the time to run the closing transition
@@ -746,6 +749,7 @@ define( [ "jquery",
 
 			// set the global popup mutex
 			$.mobile.popup.active = this;
+			this._scrollTop = $( window ).scrollTop();
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
@@ -811,6 +815,8 @@ define( [ "jquery",
 			if( !$.mobile.popup.active ){
 				return;
 			}
+
+			this._scrollTop = $( window ).scrollTop();
 
 			if( this.options.history ) {
 				$.mobile.back();
