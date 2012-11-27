@@ -31,7 +31,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_create: function() {
 		var o = this.options,
 			klass = o.classes.panel,
-			$el = this.element;
+			$el = this.element,
+			$closeLink = $el.find( "[data-rel=close]" );
+			console.log( $closeLink );
 		$el.addClass( klass + "-hide" )
 			.addClass( klass );
 		this._handleLink( "panel" , function( $link ){
@@ -40,6 +42,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				dismissible: $link.jqmData( "dismissible" ),//true or false
 				display: $link.jqmData( "display" )// overlay or push
 			});
+		});
+		$closeLink.on( "click" , function( e ){
+			e.preventDefault();
+			var position = $( this ).parent( ".ui-panel" ).hasClass( "ui-panel-position-left" ) ? "left" : "right";
+			$el.panel( "close" , {
+				position: position
+			});
+			return false;
 		});
 	},
 	_destroy: function(){},
@@ -52,12 +62,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		options.dismissible = options.dismissible || o.dismissible;
 		options.display = options.display || o.display;
 
+		var match = $el[0].className.match(/ui-panel-position-\w+/);
+		if( match && match.length ){
+			$el.removeClass( match[0] );
+		}
 		$el.addClass( klass + "-position-" + options.position )
 			.addClass( klass + "-dismissible-" + options.dismissible )
 			.addClass( klass + "-display-" + options.display )
 			.removeClass( klass + "-hide" );
 		if( options.display === "push" ){
-			$( ".ui-content" ).addClass( "panel-shift-" + options.position );
+			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + options.position );
 		} else {
 			$( ".ui-content" ).removeClass( "panel-shift-" + options.position );
 		}
@@ -66,7 +80,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 	close: function( options ){
 		var klass = this.options.classes.panel;
-		$( ".ui-content" ).removeClass( "panel-shift-" + options.position );
+		$( ".ui-content, .ui-header, .ui-footer" )
+			.removeClass( "panel-shift-left" )
+			.removeClass( "panel-shift-right" );
 		this.element.addClass( klass + "-hidden" );
 		$.mobile.panel.active = false;
 	},
