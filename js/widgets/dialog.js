@@ -88,7 +88,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 		if ( this._isCloseable ) {
 			this._isCloseable = false;
-			if ( $.mobile.hashListeningEnabled ) {
+			// If the hash listening is enabled and there is at least one preceding history
+			// entry it's ok to go back. Initial pages with the dialog hash state are an example
+			// where the stack check is necessary
+			if ( $.mobile.hashListeningEnabled && $.mobile.urlHistory.stack.length > 1 ) {
 				$.mobile.back();
 			} else {
 				dst = $.mobile.urlHistory.getActive().url;
