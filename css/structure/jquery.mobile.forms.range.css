@@ -52,8 +52,8 @@
   width:70%;
   margin-left:25%;
 }
-.ui-field-contain .ui-range div.ui-range-sliders div.ui-slider.ui-slider-mini{
-  margin-top:.5em;
+.ui-range div.ui-range-sliders div.ui-slider.ui-slider-mini{
+  margin-top:.4em;
 }
 @media (max-width: 28em) {
   .ui-field-contain .ui-range div.ui-range-sliders div.ui-slider{
