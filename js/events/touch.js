@@ -167,18 +167,15 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				$this = $( thisObject );
 
 			$this.bind( touchStartEvent, function( event ) {
-				var data = event.originalEvent.touches ?
-					event.originalEvent.touches[ 0 ] : event,
-					start = $.event.special.swipe.start( event ),
+				var start = $.event.special.swipe.start( event ),
 					stop;
 
 				function moveHandler( event ) {
-
 					if ( !start ) {
 						return;
 					}
 
-					stop = $.event.special.swipe.start( event );
+					stop = $.event.special.swipe.stop( event );
 
 					// prevent scrolling
 					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
