@@ -25,7 +25,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			self = this,
 			$el = self.element,
 			o = this.options;
-
 			inputFirst = $el.find( "input:first" );
 			inputLast = $el.find( "input:last" );
 			inputFirst.addClass( "ui-range-first" );
