@@ -1264,17 +1264,14 @@ define( [
 	//the following deferred is resolved in the init file
 	$.mobile.navreadyDeferred = $.Deferred();
 	$.mobile._registerInternalEvents = function() {
-		//bind to form submit events, handle with Ajax
-		$( document ).delegate( "form", "submit", function( event ) {
-			var $this = $( this );
-
+		var getAjaxFormData = function( $this ) {
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
 					$this.is( ":jqmData(ajax='false')" ) ||
 					// test that $.mobile.ignoreContentEnabled is set and
 					// the form or one of it's parents is ajax=false
 					!$this.jqmHijackable().length ) {
-				return;
+				return false;
 			}
 
 			var type = $this.attr( "method" ),
@@ -1301,20 +1298,29 @@ define( [
 			url = path.makeUrlAbsolute(  url, getClosestBaseUrl( $this ) );
 
 			if ( ( path.isExternal( url ) && !path.isPermittedCrossDomainRequest( documentUrl, url ) ) || target ) {
-				return;
+				return false;
 			}
 
-			$.mobile.changePage(
-				url,
-				{
+			return {
+				url: url,
+				options: {
 					type:		type && type.length && type.toLowerCase() || "get",
 					data:		$this.serialize(),
 					transition:	$this.jqmData( "transition" ),
 					reverse:	$this.jqmData( "direction" ) === "reverse",
 					reloadPage:	true
 				}
-			);
-			event.preventDefault();
+			};
+		};
+
+		//bind to form submit events, handle with Ajax
+		$( document ).delegate( "form", "submit", function( event ) {
+			var formData = getAjaxFormData( $( this ) );
+
+			if ( formData ) {
+				$.mobile.changePage( formData.url, formData.options );
+				event.preventDefault();
+			}
 		});
 
 		//add active state on vclick
