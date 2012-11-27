@@ -1330,28 +1330,38 @@ define( [
 
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
+			var link, $link, $btn, $target = $( event.target );
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
 			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
 				return;
 			}
 
-			var link = findClosestLink( event.target ), $btn;
+			if ( $target.data( "mobile-button" ) ) {
+				if ( !getAjaxFormData( $target.closest( "form" ), true ) ) {
+					return;
+				}
+			} else {
+				link = findClosestLink( event.target );
+				if ( !( link && path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) ) {
+					return;
+				}
 
-			// split from the previous return logic to avoid find closest where possible
-			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
-			// can be avoided
-			if ( !$( link ).jqmHijackable().length ) {
-				return;
+				$link = $( link );
+				// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+				// can be avoided
+				if ( !$link.jqmHijackable().length ) {
+					return;
+				}
+
+				$target = $link;
 			}
 
-			if ( link ) {
-				$btn = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
-				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" && !$btn.hasClass( $.mobile.activeBtnClass ) ) {
-					removeActiveLinkClass( true );
-					$activeClickedLink = $btn;
-					$activeClickedLink.addClass( $.mobile.activeBtnClass );
-				}
+			$btn = $target.closest( ".ui-btn" ).not( ".ui-disabled" );
+			if ( !$btn.hasClass( $.mobile.activeBtnClass ) ) {
+				removeActiveLinkClass( true );
+				$activeClickedLink = $btn;
+				$activeClickedLink.addClass( $.mobile.activeBtnClass );
 			}
 		});
 
