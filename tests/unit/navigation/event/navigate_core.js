@@ -4,6 +4,10 @@ $.testHelper.setPushState();
 	module( "navigate", {
 		setup: function() {
 			location.hash = "";
+		},
+
+		teardown: function() {
+			$( window ).unbind( "navigate" );
 		}
 	});
 
@@ -41,6 +45,27 @@ $.testHelper.setPushState();
 		});
 
 		location.hash = "foo";
+	});
+
+	asyncTest( "navigation events can be disabled with prevent default on beforenavigate", function() {
+		// Failure in this test would be 3 test assertions
+		expect( 2 );
+
+		$( window ).one( "beforenavigate", function( e ) {
+			ok( true, "beforenavigate fired" );
+			e.preventDefault();
+		});
+
+		$( window ).one( "navigate", function() {
+			ok( true, "navigate fired" );
+			start();
+		});
+
+		// fire a navigate that will be prevented
+		location.hash = "foo";
+
+		// fire another to absorb the navigate binding
+		location.hash = "bar";
 	});
 
 	if( $.support.pushState ) {

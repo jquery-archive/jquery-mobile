@@ -51,7 +51,7 @@ define([
 		window.location.hash = hash;
 
 		state = $.extend({
-			url: url,
+			url: href,
 			hash: parsed.hash,
 			title: document.title
 		}, data);
