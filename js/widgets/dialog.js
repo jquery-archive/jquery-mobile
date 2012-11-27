@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.navigation" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -15,6 +15,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		overlayTheme: "a",
 		initSelector: ":jqmData(role='dialog')"
 	},
+
 	_create: function() {
 		var self = this,
 			$el = this.element,
@@ -90,7 +91,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			if ( $.mobile.hashListeningEnabled ) {
 				$.mobile.back();
 			} else {
-				dst = $.mobile.urlHistory.getPrev().url;
+				dst = $.mobile.urlHistory.getActive().url;
 				if ( !$.mobile.path.isPath( dst ) ) {
 					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
 				}
