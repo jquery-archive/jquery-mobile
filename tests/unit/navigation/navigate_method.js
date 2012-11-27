@@ -7,20 +7,20 @@ $.testHelper.setPushState();
 
 	module( "navigate", {
 		setup: function() {
+			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
+		},
+
+		teardown: function() {
 			stop();
 
 			$( window ).one( "navigate", function() {
-				$.navigate.history.stack = [];
-				$.navigate.history.activeIndex = 0;
 				start();
 			});
 
 			if( location.hash !== "#reset" ) {
 				$.navigate( "#reset" );
 			} else {
-				// handle the case where it is still set to reset
-				// we've stopped test execution so we need to make
-				// sure it resumes
 				$.navigate( "#seriously-reset" );
 			}
 		}

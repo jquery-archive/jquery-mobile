@@ -366,8 +366,6 @@
 			},
 
 			function( result ) {
-
-				console.log( result.pagechange );
 				var active = $.mobile.urlHistory.getActive(),
 						identical = true;
 
@@ -411,7 +409,6 @@
 
 		$.testHelper.detailedEventCascade([
 			function() {
-				console.log( $.mobile.activePage );
 				$( "#popup-sequence-test" ).popup( "open" );
 			},
 
@@ -447,11 +444,9 @@
 			},
 
 			function( result ) {
-				console.log( "opening popup inside dialog" );
 				ok( !result.opened.timedOut, "Popup inside dialog has emitted 'popupafteropen'" );
 				ok( !result.hashchange.timedOut, "Popup inside dialog has caused a 'hashchange'" );
 				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is the active page" );
-				debugger;
 				window.history.back();
 			},
 
@@ -464,7 +459,6 @@
 				ok( !result.close.timedOut, "Popup inside dialog has emitted 'popupafterclose'" );
 				ok( !result.hashchange.timedOut, "The closing of the inside popup has resulted in a 'hashchange'" );
 				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is the active page" );
-				debugger;
 				window.history.back();
 			},
 
