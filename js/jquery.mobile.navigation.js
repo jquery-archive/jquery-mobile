@@ -1264,7 +1264,8 @@ define( [
 	//the following deferred is resolved in the init file
 	$.mobile.navreadyDeferred = $.Deferred();
 	$.mobile._registerInternalEvents = function() {
-		var getAjaxFormData = function( $this ) {
+		var getAjaxFormData = function( $this, calculateOnly ) {
+			var type, target, url, ret = true;
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
 					$this.is( ":jqmData(ajax='false')" ) ||
@@ -1274,9 +1275,8 @@ define( [
 				return false;
 			}
 
-			var type = $this.attr( "method" ),
-				target = $this.attr( "target" ),
-				url = $this.attr( "action" );
+			target = $this.attr( "target" );
+			url = $this.attr( "action" );
 
 			// If no action is specified, browsers default to using the
 			// URL of the document containing the form. Since we dynamically
@@ -1301,16 +1301,21 @@ define( [
 				return false;
 			}
 
-			return {
-				url: url,
-				options: {
-					type:		type && type.length && type.toLowerCase() || "get",
-					data:		$this.serialize(),
-					transition:	$this.jqmData( "transition" ),
-					reverse:	$this.jqmData( "direction" ) === "reverse",
-					reloadPage:	true
-				}
-			};
+			if ( !calculateOnly ) {
+				type = $this.attr( "method" );
+				ret = {
+					url: url,
+					options: {
+						type:		type && type.length && type.toLowerCase() || "get",
+						data:		$this.serialize(),
+						transition:	$this.jqmData( "transition" ),
+						reverse:	$this.jqmData( "direction" ) === "reverse",
+						reloadPage:	true
+					}
+				};
+			}
+
+			return ret;
 		};
 
 		//bind to form submit events, handle with Ajax
