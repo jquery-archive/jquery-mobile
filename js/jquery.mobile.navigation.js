@@ -1330,7 +1330,7 @@ define( [
 
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
-			var link, $link, $btn, $target = $( event.target );
+			var link, $link, $btn, btnEls, $target = $( event.target );
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
 			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
@@ -1340,6 +1340,8 @@ define( [
 			if ( $target.data( "mobile-button" ) ) {
 				if ( !getAjaxFormData( $target.closest( "form" ), true ) ) {
 					return;
+				} else {
+					$target = $target.parent();
 				}
 			} else {
 				link = findClosestLink( event.target );
@@ -1357,7 +1359,14 @@ define( [
 				$target = $link;
 			}
 
-			$btn = $target.closest( ".ui-btn" ).not( ".ui-disabled" );
+			btnEls = $.data( $target[ 0 ], "buttonElements" );
+			if ( btnEls ) {
+				$target = $( btnEls.outer );
+			} else {
+				$target = $target.closest( ".ui-btn" );
+			}
+
+			$btn = $target.not( ".ui-disabled" );
 			if ( !$btn.hasClass( $.mobile.activeBtnClass ) ) {
 				removeActiveLinkClass( true );
 				$activeClickedLink = $btn;
