@@ -7,6 +7,7 @@ define( [
 	"jquery",
 	"./jquery.mobile.core",
 	"./navigation/path",
+	"./navigation/navigate",
 	"./jquery.mobile.events",
 	"./jquery.mobile.support",
 	"depend!./jquery.hashchange[jquery]",
