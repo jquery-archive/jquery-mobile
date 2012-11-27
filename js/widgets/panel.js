@@ -82,7 +82,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var klass = this.options.classes.panel;
 		$( ".ui-content, .ui-header, .ui-footer" )
 			.removeClass( "panel-shift-left" )
-			.removeClass( "panel-shift-right" );
+			.removeClass( "panel-shift-right" )
+			.removeClass( "panel-shift-top" );
 		this.element.addClass( klass + "-hidden" );
 		$.mobile.panel.active = false;
 	},
