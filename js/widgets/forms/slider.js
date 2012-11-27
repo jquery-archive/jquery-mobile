@@ -368,6 +368,15 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				return $( bg ).prependTo( self.slider );
 			})()
 		}
+
+		if(self.options.mini){
+			self.slider.addClass( "ui-slider-mini" );
+			self.element.addClass( "ui-mini" );
+		} else {
+			self.slider.removeClass( "ui-slider-mini" );
+			self.element.removeClass( "ui-mini" );
+		}
+
 		var control = this.element, percent,
 			isInput = !this.isToggleSwitch,
 			optionElements = isInput ? [] : control.find( "option" ),

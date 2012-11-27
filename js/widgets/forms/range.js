@@ -17,11 +17,11 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			disabled: false,
 			initSelector: ":jqmData(role='range')",
 			mini: false,
-			highlight: true
+			highlight: false
 		},
 
 		_create: function() {
-			var inputFirst, inputLast, sliderFirst, sliderLast, sliderLastWidth, sliderFirstWidth, label, wrap,
+			var inputFirst,inputs,sliders, inputLast, sliderFirst, sliderLast, sliderLastWidth, sliderFirstWidth, label,
 			self = this,
 			$el = self.element,
 			o = this.options;
@@ -31,9 +31,19 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			inputFirst.addClass( "ui-range-first" );
 			inputLast.addClass( "ui-range-last" );
 			label = $el.find( "label" );
-			$el.wrap( "<div class=\"ui-range-wrap ui-field-contain\" />" );
-			wrap = $el.closest( ".ui-range-wrap" );
-			label.prependTo(wrap).addClass( "ui-slider" );
+			//$el.wrap( "<div class=\"ui-range-wrap\" />" );
+			//wrap = $el.closest( ".ui-range-wrap" );
+			$el.append("<div class=\"ui-range-inputs\" />").append("<div class=\"ui-range-sliders\" />");
+			inputs = $el.find(".ui-range-inputs");
+			sliders = $el.find(".ui-range-sliders");
+			
+			inputFirst.appendTo( inputs );
+			inputs.append(" - ");
+			inputLast.appendTo( inputs );
+			if( o.mini ){
+				label.addClass("ui-mini");
+				self.element.addClass("ui-mini");
+			}
 			$el.find( "input" ).slider({
 				theme: o.theme,
 				trackTheme: o.trackTheme,
@@ -44,22 +54,20 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			$el.addClass( "ui-range" );
 			sliderFirst = $el.find( ".ui-slider:first" ).addClass( "ui-slider-first" );
 			sliderLast = $el.find( ".ui-slider:last" ).addClass( "ui-slider-last" );
-			
+			sliderFirst.appendTo(sliders);
+			sliderLast.appendTo(sliders);
+			label.prependTo(inputs).addClass( "ui-slider" );
 			$.extend( self, {
 				inputFirst: inputFirst,
 				inputLast: inputLast,
 				label: label,
-				wrap: wrap,
 				sliderFirst: sliderFirst,
 				sliderLast: sliderLast,
 				sliderFirstWidth: sliderFirstWidth,
 				sliderLastWidth: sliderLastWidth
 			});
 
-			$(function(){
-				self.sliderFirstWidth = sliderFirst.find( ".ui-slider-bg" ).width();
-				self.sliderLastWidth = sliderLast.find( ".ui-slider-bg" ).width();
-			});
+			self._bindResize();
 			self._bindChangeEvents();
 			self._bindToggle();
 		},
@@ -83,6 +91,21 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 		},
 
+		_bindResize: function() {
+			var self = this,delay;
+			this._on( this.element.closest(".ui-page") , {
+				"pageshow": function(){
+					self.sliderFirstWidth = self.sliderFirst.find( ".ui-slider-bg" ).width();
+					self.sliderLastWidth = self.sliderLast.find( ".ui-slider-bg" ).width();
+				}
+			});
+			this._on( window , {
+				"throttledresize": function(event){
+					self.sliderLastWidth = self.sliderLast.find( ".ui-slider-bg" ).width();
+				}
+			});
+		},
+
 		_bindToggle: function() {
 			this._on( this.element.find( ".ui-slider-handle" ), {
 				"vclick": function( event ){
@@ -95,7 +118,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		_updateHighlight: function() {
 			var newWidth = this.sliderLastWidth - this.sliderFirstWidth,
 				tWidth = this.sliderLast.width();
-				console.log(newWidth);
 				this.element.find( ".ui-slider-bg" ).css({
 					"margin-left": parseInt(this.sliderFirstWidth / tWidth * 100) + "%",
 					"width": parseInt((newWidth) / tWidth * 100) + "%"
