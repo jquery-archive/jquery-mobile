@@ -14,6 +14,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		classes: {
 			panel: "ui-panel"
 		},
+		theme: null,
 		position: "left",
 		dismissible: true,
 		display: "push",
@@ -36,6 +37,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			console.log( $closeLink );
 		$el.addClass( klass + "-hide" )
 			.addClass( klass );
+		if( o.theme ){
+			$el.addClass( "ui-body-" + o.theme );
+		}
 		this._handleLink( "panel" , function( $link ){
 			$el.panel( "toggle" , {
 				position: $link.jqmData( "position" ),//left right top
@@ -70,6 +74,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.addClass( klass + "-dismissible-" + options.dismissible )
 			.addClass( klass + "-display-" + options.display )
 			.removeClass( klass + "-hide" );
+		$el.data( "position" , options.position );
 		if( options.display === "push" ){
 			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + options.position );
 		} else {
@@ -80,10 +85,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 	close: function( options ){
 		var klass = this.options.classes.panel;
+		var position = this.element.data( "position" );
 		$( ".ui-content, .ui-header, .ui-footer" )
-			.removeClass( "panel-shift-left" )
-			.removeClass( "panel-shift-right" )
-			.removeClass( "panel-shift-top" );
+			.removeClass( "panel-shift-" + position );
 		this.element.addClass( klass + "-hidden" );
 		$.mobile.panel.active = false;
 	},
