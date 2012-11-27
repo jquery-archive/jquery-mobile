@@ -1,6 +1,5 @@
 .ui-panel{
 	position: absolute;
-	border: red 2px solid;
 	/*
 	-webkit-transition: all 400ms ease-in-out;
 	-moz-transition: all 400ms ease-in-out;
@@ -55,5 +54,8 @@
 .ui-header.panel-shift-top,
 .ui-footer.panel-shift-top{
 	top:200px;
+}
+.ui-panel-display-overlay{
+	z-index: 2;
 }
 
