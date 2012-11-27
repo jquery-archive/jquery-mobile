@@ -361,12 +361,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		var self = this;
 		// set the stored value for comparison later
 		this.value = this._value();
-		if(this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg").length == 0){
+		if(this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg").length === 0){
 			this.valuebg = (function() {
 				var bg = document.createElement('div');
 				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( self.slider );
-			})()
+			})();
 		}
 
 		if(self.options.mini){
@@ -399,7 +399,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 			percent = Math.round( ( ( data.pageX - left ) / width ) * 100 );
 		} else {
-			if ( val == null ) {
+			if ( val === null ) {
 				val = isInput ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
 			}
 			percent = ( parseFloat( val ) - min ) / ( max - min ) * 100;
