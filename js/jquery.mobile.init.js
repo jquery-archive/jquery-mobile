@@ -4,8 +4,17 @@
 //>>group: Core
 
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
-	"./jquery.mobile.navigation.pushstate", "./widgets/loader", "./jquery.mobile.vmouse", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
+define([
+	"jquery",
+	"./jquery.mobile.core",
+	"./jquery.mobile.support",
+	'./navigation/events/navigate',
+	'./navigation/path',
+	'./navigation/navigate',
+	"./jquery.mobile.navigation",
+	"./widgets/loader",
+	"./jquery.mobile.vmouse",
+	"depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),

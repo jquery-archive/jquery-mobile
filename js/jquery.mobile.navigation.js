@@ -816,11 +816,8 @@ define( [
 			( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		//add page to history stack if it's not back or forward
-		if ( !historyDir ) {
-			// Overwrite the current entry if it's a leftover from a dialog
-			if ( alreadyThere ) {
-				urlHistory.activeIndex = Math.max( 0, urlHistory.activeIndex - 1 );
-			}
+		if ( !historyDir && alreadyThere ) {
+			urlHistory.getActive().pageUrl = pageUrl;
 		}
 
 		// Set the location hash.
@@ -1118,6 +1115,7 @@ define( [
 		});
 
 		$.mobile._handleHashChange = function( url, data ) {
+
 			//find first page via hash
 			var to = path.stripHash(url),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
@@ -1166,7 +1164,7 @@ define( [
 					$.extend( changePageOptions, {
 						role: active.role,
 						transition: active.transition,
-						reverse: data.direction == "back"
+						reverse: data.direction === "back"
 					});
 				}
 			}
@@ -1196,12 +1194,12 @@ define( [
 			}
 		};
 
-		//hashchange event handler
+		// TODO roll the logic here into the handleHashChange method
 		$window.bind( "navigate", function( e, data ) {
 			var url = data.state.url;
 
 			if( !url ) {
-				url = $.mobile.path.stripHash( $.mobile.path.parseLocation().hash );
+				url = $.mobile.path.parseLocation().hash;
 			}
 
 			$.mobile._handleHashChange( url, data.state );

@@ -8,6 +8,8 @@
 
 	module( "jquery.mobile.popup.js", {
 		setup: function() {
+			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( home );
 		}
 	});
@@ -300,7 +302,7 @@
 
 			{
 				closed: { src: $( "#test-popup" ), event: "popupafterclose.hashInteractStep2" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate.hashInteractStep2" }
+				navigate: { src: $(window), event: "navigate.hashInteractStep2" }
 			},
 
 			function( result ) {
@@ -359,11 +361,13 @@
 			},
 
 			{
-				hashchange: { src: $( window ), event: "hashchange.anotherPageStep3" },
+				hashchange: { src: $( window ), event: "navigate.anotherPageStep3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange.anotherPageStep3" }
 			},
 
 			function( result ) {
+
+				console.log( result.pagechange );
 				var active = $.mobile.urlHistory.getActive(),
 						identical = true;
 
@@ -383,12 +387,13 @@
 					});
 				}
 
+
 				ok( decodeURIComponent( location.href ) === initialHRef.href, "Going back once places the browser on the initial page" );
 				ok( identical, "Going back returns $.mobile.urlHistory to its initial value" );
 				ok( $.mobile.urlHistory.activeIndex === $.mobile.urlHistory.stack.length - 3, "Going back leaves exactly two entries ahead in $.mobile.urlHistory" );
 
 				setTimeout( function() { start(); }, 500 );
-			},
+			}
 		]);
 	});
 
@@ -396,15 +401,17 @@
 		var originallyActivePage = $.mobile.activePage[ 0 ], $popup = $( "#test-popup" );
 
 		if( !$popup.data( "popup" ).options.history ) {
-			expect( 1 )
+			expect( 1 );
 			ok( true, "hash change disabled" );
 			start();
 			return;
 		}
 
-		expect( 15 );
+		expect( 16 );
+
 		$.testHelper.detailedEventCascade([
 			function() {
+				console.log( $.mobile.activePage );
 				$( "#popup-sequence-test" ).popup( "open" );
 			},
 
@@ -440,8 +447,11 @@
 			},
 
 			function( result ) {
+				console.log( "opening popup inside dialog" );
 				ok( !result.opened.timedOut, "Popup inside dialog has emitted 'popupafteropen'" );
 				ok( !result.hashchange.timedOut, "Popup inside dialog has caused a 'hashchange'" );
+				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is the active page" );
+				debugger;
 				window.history.back();
 			},
 
@@ -453,7 +463,8 @@
 			function( result ) {
 				ok( !result.close.timedOut, "Popup inside dialog has emitted 'popupafterclose'" );
 				ok( !result.hashchange.timedOut, "The closing of the inside popup has resulted in a 'hashchange'" );
-				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is once more the active page" );
+				ok( $.mobile.activePage[ 0 ] === $( "#popup-sequence-test-dialog" )[ 0 ], "The dialog is the active page" );
+				debugger;
 				window.history.back();
 			},
 

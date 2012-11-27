@@ -16,11 +16,18 @@ define([ "jquery",
 
 		pushStateEnabled: true,
 
+		// TODO a lot of duplication between popstate and hashchange
 		popstate: function( event ) {
 			var newEvent = new $.Event( "navigate" ),
+				beforeNavigate = new $.Event( "beforenavigate" ),
 				state = event.originalEvent.state || {},
-			href = location.href;
+				href = location.href;
 
+			$win.trigger( beforeNavigate );
+
+			if( beforeNavigate.isDefaultPrevented() ){
+				return;
+			}
 
 			if( event.historyState ){
 				$.extend(state, event.historyState);
@@ -42,7 +49,14 @@ define([ "jquery",
 		},
 
 		hashchange: function( event, data ) {
-			var newEvent = new $.Event( "navigate" );
+			var newEvent = new $.Event( "navigate" ),
+				beforeNavigate = new $.Event( "beforenavigate" );
+
+			$win.trigger( beforeNavigate );
+
+			if( beforeNavigate.isDefaultPrevented() ){
+				return;
+			}
 
 			// Make sure the original event is tracked for the end
 			// user to inspect incase they want to do something special

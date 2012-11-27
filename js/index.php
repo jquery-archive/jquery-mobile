@@ -24,7 +24,6 @@ $files = array(
 	'navigation/path.js',
 	'navigation/navigate.js',
 	'jquery.mobile.navigation.js',
-	'jquery.mobile.navigation.pushstate.js',
 	'jquery.mobile.transition.js',
 	'transitions/pop.js',
 	'transitions/slide.js',

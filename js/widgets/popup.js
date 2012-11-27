@@ -5,9 +5,13 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 //>>css.structure: ../css/structure/jquery.mobile.popup.css,../css/structure/jquery.mobile.transition.css,../css/structure/jquery.mobile.transition.fade.css
 
-define( [ "jquery",
+define( [
+	"jquery",
 	"../jquery.mobile.widget",
 	"../jquery.mobile.support",
+	"../navigation/events/navigate",
+	"../navigation/path",
+	"../navigation/navigate",
 	"../jquery.mobile.navigation",
 	"depend!../jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -516,6 +520,7 @@ define( [ "jquery",
 		},
 
 		_open: function( options ) {
+			// TODO move blacklist to private method
 			var coords, transition,
 				androidBlacklist = ( function() {
 					var w = window,
@@ -726,7 +731,7 @@ define( [ "jquery",
 			hashkey = $.mobile.dialogHashKey;
 			activePage = $.mobile.activePage;
 			currentIsDialog = activePage.is( ".ui-dialog" );
-			url = $.mobile.urlHistory.getActive().url;
+			url = ""; // $.mobile.urlHistory.getActive().url;
 			hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog;
 			urlHistory = $.mobile.urlHistory;
 
@@ -739,7 +744,7 @@ define( [ "jquery",
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
 			if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ){
-				url = url + hashkey;
+				url = url + (hasHash ? hashkey : "#" + hashkey);
 			} else {
 				url = $.mobile.path.parseLocation().hash + hashkey;
 			}
@@ -750,19 +755,13 @@ define( [ "jquery",
 			}
 
 			// swallow the the initial navigation event, and bind for the next
-			opts.container.one( opts.navigateEvents, function( e ) {
+			$(window).one( "beforenavigate", function( e ) {
 				e.preventDefault();
 				self._open( options );
 				self._bindContainerClose();
 			});
 
-			urlHistory.ignoreNextHashChange = currentIsDialog;
-
-			// Gotta love methods with 1mm args :(
-			urlHistory.addNew( url, undefined, undefined, undefined, "dialog" );
-
-			// set the new url with (or without) the new dialog hash key
-			$.mobile.path.set( url );
+			$.navigate( url, {role: "dialog"} );
 		},
 
 		close: function() {

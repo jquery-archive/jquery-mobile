@@ -48,10 +48,11 @@ define([
 		//
 		// if the url is a path we want to preserve the query params that are available on
 		// the current url.
-		window.location.hash = path.isPath(url) ? parsed.pathname + parsed.search : url;
+		window.location.hash = hash;
 
 		state = $.extend({
 			url: url,
+			hash: parsed.hash,
 			title: document.title
 		}, data);
 
@@ -82,10 +83,9 @@ define([
 	// TODO move this into the path helpers
 	$.navigate.squash = function( url, data ) {
 		var state, href,
-			hash = path.isPath(url) ? path.stripHash(url) : url,
-			resolutionUrl = path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl();
+			hash = path.isPath(url) ? path.stripHash(url) : url;
 
-		href = path.squash( url, resolutionUrl );
+		href = path.squash( url );
 
 		// make sure to provide this information when it isn't explicitly set in the
 		// data object that was passed to the squash method
@@ -117,7 +117,7 @@ define([
 	// TODO grab the original event here and use it for the synthetic event in the
 	//      second half of the navigate execution that will follow this binding
 	$( window ).bind( "popstate.history", function( event ) {
-		var hash, state;
+		var loc, hash, state;
 
 		// Partly to support our test suite which manually alters the support
 		// value to test hashchange. Partly to prevent all around weirdness
@@ -145,13 +145,11 @@ define([
 		// then need to squash the hash. See below for handling of hash assignment that
 		// matches an existing history entry
 		if( !event.originalEvent.state ) {
-			hash = path.parseLocation().hash;
+			loc = path.parseLocation();
+			hash = loc.hash;
 
 			// avoid initial page load popstate trigger when there is no hash
 			if( hash ) {
-
-				var matchingIndex = history.closest( hash );
-
 				state = $.navigate.squash( hash );
 
 				// TODO it might be better to only add to the history stack
@@ -159,7 +157,7 @@ define([
 
 				// record the new hash as an additional history entry
 				// to match the browser's treatment of hash assignment
-				history.add( hash, state );
+				history.add( state.url, state );
 
 				// pass the newly created state information
 				// along with the event
@@ -179,7 +177,8 @@ define([
 			// When the url is either forward or backward in history include the entry
 			// as data on the event object for merging as data in the navigate event
 			present: function( historyEntry, direction ) {
-				event.historyState = historyEntry;
+				// make sure to create a new object to pass down as the navigate event data
+				event.historyState = $.extend({}, historyEntry);
 				event.historyState.direction = direction;
 			}
 		});
@@ -229,7 +228,8 @@ define([
 			// When the url is either forward or backward in history include the entry
 			// as data on the event object for merging as data in the navigate event
 			present: function( historyEntry, direction ) {
-				event.hashchangeState = historyEntry;
+				// make sure to create a new object to pass down as the navigate event data
+				event.hashchangeState = $.extend({}, historyEntry);
 				event.hashchangeState.direction = direction;
 			},
 
@@ -299,8 +299,8 @@ define([
 			for ( i = 0; i < length; i++ ) {
 				entry = stack[i];
 
-				if ( decodeURIComponent(url) === decodeURIComponent(entry.url)
-					 || decodeURIComponent(url) === decodeURIComponent(entry.hash) ) {
+				if ( decodeURIComponent(url) === decodeURIComponent(entry.url) ||
+						decodeURIComponent(url) === decodeURIComponent(entry.hash) ) {
 					index = i;
 
 					if( earlyReturn ) {
@@ -367,9 +367,7 @@ define([
 	var loc = path.parseLocation();
 
 	// Record the initial page with a replace state where necessary
-	history.add( loc.href, {
-		hash: loc.pathname + loc.search
-	});
+	$.navigate( loc.href, {}, true);
 })( jQuery );
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -298,7 +298,7 @@ define([
 					dialogIndex = url.indexOf( dialog );
 
 				if ( dialogIndex > -1 ) {
-					url = url.slice( 0, dialogIndex ) + "#" + url.slice( dialogIndex );
+					url = url.slice( 0, dialogIndex ).replace("#", "") + "#" + url.slice( dialogIndex );
 				} else if ( url.indexOf( subkey ) > -1 ) {
 					url = url.split( subkey ).join( "#" + subkey );
 				}
@@ -349,6 +349,8 @@ define([
 					hash = isPath ? path.stripHash(url) : url,
 					hashUri = path.parseUrl( hash ),
 					passedSearch, preservedHash;
+
+				resolutionUrl = resolutionUrl || path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl();
 
 				// make the hash abolute with the current href
 				href = path.makeUrlAbsolute( hash, resolutionUrl );
