@@ -26,7 +26,11 @@
 	height: 25%;
 	top: 0;
 }
-.ui-panel-hidden, .ui-panel-position-left.ui-panel-hidden{
+.ui-panel-hidden{
+	display: none;
+}
+/**
+.ui-panel-position-left.ui-panel-hidden{
 	left: -30%;
 }
 .ui-panel-position-right.ui-panel-hidden{
@@ -35,6 +39,7 @@
 .ui-panel-position-top.ui-panel-hidden{
 	top: -25%;
 }
+*/
 .ui-content.panel-shift-left, .ui-content.panel-shift-right, .ui-content.panel-shift-top,
 .ui-header.panel-shift-left, .ui-header.panel-shift-right, .ui-header.panel-shift-top,
 .ui-footer.panel-shift-left, .ui-footer.panel-shift-right, .ui-footer.panel-shift-top{

@@ -48,11 +48,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el.addClass( "ui-body-" + o.theme );
 		}
 		this._handleLink( "panel" , function( $link , id ){
-				$( "#" + id ).panel( "toggle" , {
-					position: $link.jqmData( "position" ),//left right top
-					dismissible: $link.jqmData( "dismissible" ),//true or false
-					display: $link.jqmData( "display" )// overlay or push
-				});
+			$( "#" + id ).panel( "toggle" , {
+				position: $link.jqmData( "position" ),//left right top
+				dismissible: $link.jqmData( "dismissible" ),//true or false
+				display: $link.jqmData( "display" )// overlay or push
+			});
 		});
 		$closeLink.on( "click" , function( e ){
 			e.preventDefault();
@@ -87,7 +87,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		this._trigger( "open" );
 		return this;
 	},
-	close: function( options ){
+	close: function(){
 		var klass = this.options.classes.panel,
 			$el = this.element,
 			position = $el.jqmData( "position" ),
@@ -104,10 +104,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var $el = this.element;
 		if( $.mobile.panel.active &&
 				( $.mobile.panel.active.element.jqmData( "position") === options.position ) &&
-				( $.mobile.panel.active.element.attr( "id" ) === $el.attr( "id" ) ) ){
-			return $.mobile.panel.active.close( options );
+				( $.mobile.panel.active.element.attr( "id" ) === $el.attr( "id" ) ) &&
+				( $.mobile.panel.active.element.jqmData( "display" ) === options.display ) ){
+			return $.mobile.panel.active.close();
 		} else if ( $.mobile.panel.active ){
-			$.mobile.panel.active.close( options );
+			$.mobile.panel.active.close();
 			return this.open( options );
 		} else {
 			return this.open( options );
