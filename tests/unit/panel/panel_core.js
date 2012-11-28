@@ -28,4 +28,34 @@
 			start();
 		}, 800);
 	});
+	asyncTest( "Attributes on panel should be correctly created when open is called" , function(){
+		expect( 2 );
+		var $uipanel = $('#basic-panel-test .ui-panel'),
+			$panel = $uipanel.data( "mobile-panel" ),
+			position, display;
+		$.testHelper.pageSequence([
+			function() {
+				$uipanel.on( "panelopen" , function(){
+					position = $( this ).hasClass( "ui-panel-position-right" );
+					display = $( this ).hasClass( "ui-panel-display-push" );
+				});
+			},
+			function() {
+				$panel.open({
+					position: "right",
+					dismissible: "false",
+					display: "push"
+				});
+			},
+			function() {
+				setTimeout(function(){
+					ok( position , "has the correct position class" );
+					ok( display , "has the correct display class" );
+				},800);
+			},
+			function() {
+				start();
+			}
+		]);
+	});
 }( jQuery ));
