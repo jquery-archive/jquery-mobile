@@ -35,7 +35,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			klass = o.classes.panel,
 			$el = this.element,
 			$closeLink = $el.find( "[data-rel=close]" );
-			console.log( $closeLink );
 		$el.addClass( klass + "-hide" )
 			.addClass( klass );
 		if( o.theme ){
@@ -90,7 +89,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		$.mobile.panel.active = false;
 	},
 	toggle: function( options ){
-		if( $.mobile.panel.active ){
+		var $el = this.element;
+		if( $.mobile.panel.active && ($el.jqmData( "position") !== options.position )){
+			this.close( options );
+			this.open( options );
+		} else if ( $.mobile.panel.active ){
 			this.close( options );
 		} else {
 			this.open( options );
