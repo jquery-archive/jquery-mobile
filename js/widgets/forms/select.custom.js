@@ -473,7 +473,7 @@ define( [
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
 						}
-						if (!placeholder) {
+						if ( placeholder !== text ) {
 							placeholder = self.placeholder = text;
 						}
 					}
