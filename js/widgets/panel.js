@@ -101,14 +101,15 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		return this;
 	},
 	toggle: function( options ){
-		var $el = this.element;
-		if( $.mobile.panel.active &&
-				( $.mobile.panel.active.element.jqmData( "position") === options.position ) &&
-				( $.mobile.panel.active.element.attr( "id" ) === $el.attr( "id" ) ) &&
-				( $.mobile.panel.active.element.jqmData( "display" ) === options.display ) ){
-			return $.mobile.panel.active.close();
-		} else if ( $.mobile.panel.active ){
-			$.mobile.panel.active.close();
+		var $el = this.element,
+			active = $.mobile.panel.active;
+		if( active &&
+				( active.element.jqmData( "position") === options.position ) &&
+				( active.element.attr( "id" ) === $el.attr( "id" ) ) &&
+				( active.element.jqmData( "display" ) === options.display ) ){
+			return active.close();
+		} else if ( active ){
+			active.close();
 			return this.open( options );
 		} else {
 			return this.open( options );
