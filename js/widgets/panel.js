@@ -22,10 +22,17 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_handleLink: function( roleType , callback ){
+		var elId = this.element.attr( "id" );
 		$( document ).bind( "pagebeforechange", function( e, data ) {
+			var $link, id;
 			if ( data.options.role === roleType ) {
 				e.preventDefault();
-				callback( data.options.link );
+
+				$link = data.options.link;
+				id = $link.attr( "href" ).split( "#" )[1];
+				if( elId === id ){
+					callback( $link , id );
+				}
 				return false;
 			}
 		});
@@ -40,12 +47,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
 		}
-		this._handleLink( "panel" , function( $link ){
-			$el.panel( "toggle" , {
-				position: $link.jqmData( "position" ),//left right top
-				dismissible: $link.jqmData( "dismissible" ),//true or false
-				display: $link.jqmData( "display" )// overlay or push
-			});
+		this._handleLink( "panel" , function( $link , id ){
+				$( "#" + id ).panel( "toggle" , {
+					position: $link.jqmData( "position" ),//left right top
+					dismissible: $link.jqmData( "dismissible" ),//true or false
+					display: $link.jqmData( "display" )// overlay or push
+				});
 		});
 		$closeLink.on( "click" , function( e ){
 			e.preventDefault();
@@ -75,7 +82,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + options.position );
 		}
 		$el.removeClass( klass + "-hidden" );
-		$.mobile.panel.active = true;
+		$.mobile.panel.active = this;
 	},
 	close: function( options ){
 		var klass = this.options.classes.panel,
@@ -90,11 +97,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 	toggle: function( options ){
 		var $el = this.element;
-		if( $.mobile.panel.active && ($el.jqmData( "position") !== options.position )){
-			this.close( options );
-			this.open( options );
+		if( $.mobile.panel.active &&
+				( $.mobile.panel.active.element.jqmData( "position") === options.position ) &&
+				( $.mobile.panel.active.element.attr( "id" ) === $el.attr( "id" ) ) ){
+			$.mobile.panel.active.close( options );
 		} else if ( $.mobile.panel.active ){
-			this.close( options );
+			$.mobile.panel.active.close( options );
+			this.open( options );
 		} else {
 			this.open( options );
 		}

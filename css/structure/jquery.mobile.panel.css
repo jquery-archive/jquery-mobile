@@ -26,7 +26,7 @@
 	height: 25%;
 	top: 0;
 }
-.ui-panel-position-left.ui-panel-hidden{
+.ui-panel-hidden, .ui-panel-position-left.ui-panel-hidden{
 	left: -30%;
 }
 .ui-panel-position-right.ui-panel-hidden{
@@ -58,7 +58,3 @@
 .ui-panel-display-overlay{
 	z-index: 2;
 }
-.ui-panel-display-overlay.ui-panel-hidden{
-	z-index: 0;
-}
-
