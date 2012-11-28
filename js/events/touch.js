@@ -161,9 +161,12 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 						coords: [ data.pageX, data.pageY ]
 					};
 
-					// prevent scrolling
-					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
-						event.preventDefault();
+					// prevent scrolling if swipeleft and swiperight are unbound
+					if (!($this.data("events").swipeleft == undefined && $this.data("events").swiperight == undefined))
+					{
+					    if (Math.abs(start.coords[0] - stop.coords[0]) > $.event.special.swipe.scrollSupressionThreshold) {
+					        event.preventDefault();
+					    }
 					}
 				}
 
