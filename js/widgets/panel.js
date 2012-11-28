@@ -49,9 +49,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		});
 		$closeLink.on( "click" , function( e ){
 			e.preventDefault();
-			var position = $( this ).parent( ".ui-panel" ).hasClass( "ui-panel-position-left" ) ? "left" : "right";
 			$el.panel( "close" , {
-				position: position
+				position: $el.jqmData( "position" )
 			});
 			return false;
 		});
@@ -74,7 +73,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.addClass( klass + "-dismissible-" + options.dismissible )
 			.addClass( klass + "-display-" + options.display )
 			.removeClass( klass + "-hide" );
-		$el.data( "position" , options.position );
+		$el.jqmData( "position" , options.position );
 		if( options.display === "push" ){
 			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + options.position );
 		} else {
@@ -85,7 +84,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 	close: function( options ){
 		var klass = this.options.classes.panel;
-		var position = this.element.data( "position" );
+		var position = this.element.jqmData( "position" );
 		$( ".ui-content, .ui-header, .ui-footer" )
 			.removeClass( "panel-shift-" + position );
 		this.element.addClass( klass + "-hidden" );
