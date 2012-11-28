@@ -26,6 +26,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			if ( data.options.role === roleType ) {
 				e.preventDefault();
 				callback( data.options.link );
+				return false;
 			}
 		});
 	},
