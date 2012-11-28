@@ -58,4 +58,7 @@
 .ui-panel-display-overlay{
 	z-index: 2;
 }
+.ui-panel-display-overlay.ui-panel-hidden{
+	z-index: 0;
+}
 

@@ -49,9 +49,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		});
 		$closeLink.on( "click" , function( e ){
 			e.preventDefault();
-			$el.panel( "close" , {
-				position: $el.jqmData( "position" )
-			});
+			$el.panel( "close" );
 			return false;
 		});
 	},
@@ -65,29 +63,29 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		options.dismissible = options.dismissible || o.dismissible;
 		options.display = options.display || o.display;
 
-		var match = $el[0].className.match(/ui-panel-position-\w+/);
-		if( match && match.length ){
-			$el.removeClass( match[0] );
-		}
 		$el.addClass( klass + "-position-" + options.position )
 			.addClass( klass + "-dismissible-" + options.dismissible )
 			.addClass( klass + "-display-" + options.display )
-			.removeClass( klass + "-hide" );
-		$el.jqmData( "position" , options.position );
+			.removeClass( klass + "-hide" )
+			.jqmData( "position" , options.position )
+			.jqmData( "display" , options.display );
 		if( options.display === "push" ){
 			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + options.position );
 		} else {
-			$( ".ui-content" ).removeClass( "panel-shift-" + options.position );
+			$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + options.position );
 		}
 		$el.removeClass( klass + "-hidden" );
 		$.mobile.panel.active = true;
 	},
 	close: function( options ){
-		var klass = this.options.classes.panel;
-		var position = this.element.jqmData( "position" );
-		$( ".ui-content, .ui-header, .ui-footer" )
-			.removeClass( "panel-shift-" + position );
-		this.element.addClass( klass + "-hidden" );
+		var klass = this.options.classes.panel,
+			$el = this.element,
+			position = $el.jqmData( "position" ),
+			display = $el.jqmData( "display" );
+		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position );
+		$el.removeClass( klass + "-position-" + position )
+			.removeClass( klass + "-display-" + display )
+			.addClass( klass + "-hidden" );
 		$.mobile.panel.active = false;
 	},
 	toggle: function( options ){
