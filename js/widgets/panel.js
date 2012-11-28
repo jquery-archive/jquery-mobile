@@ -59,6 +59,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el.panel( "close" );
 			return false;
 		});
+		this._trigger( "create" );
 	},
 	_destroy: function(){},
 	open: function( options ){
@@ -83,6 +84,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 		$el.removeClass( klass + "-hidden" );
 		$.mobile.panel.active = this;
+		this._trigger( "open" );
+		return this;
 	},
 	close: function( options ){
 		var klass = this.options.classes.panel,
@@ -94,18 +97,20 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.removeClass( klass + "-display-" + display )
 			.addClass( klass + "-hidden" );
 		$.mobile.panel.active = false;
+		this._trigger( "close" );
+		return this;
 	},
 	toggle: function( options ){
 		var $el = this.element;
 		if( $.mobile.panel.active &&
 				( $.mobile.panel.active.element.jqmData( "position") === options.position ) &&
 				( $.mobile.panel.active.element.attr( "id" ) === $el.attr( "id" ) ) ){
-			$.mobile.panel.active.close( options );
+			return $.mobile.panel.active.close( options );
 		} else if ( $.mobile.panel.active ){
 			$.mobile.panel.active.close( options );
-			this.open( options );
+			return this.open( options );
 		} else {
-			this.open( options );
+			return this.open( options );
 		}
 	},
 	refresh: function(){
