@@ -720,7 +720,8 @@ define( [ "jquery",
 					this.options.container.unbind( this.options.closeEvents );
 					this._close( true );
 				} else {
-					this._close();
+					this.close();
+					e.preventDefault();
 				}
 
 				return;
