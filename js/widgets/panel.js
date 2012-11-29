@@ -15,6 +15,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panel: "ui-panel"
 		},
 		theme: null,
+		link: null,
 		position: "left",
 		dismissible: true,
 		display: "push",
@@ -26,7 +27,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var $link, id;
 			if ( data.options.role === roleType ) {
 				e.preventDefault();
-
 				$link = data.options.link;
 				id = $link.attr( "href" ).split( "#" )[1];
 				if( elId === id ){
@@ -68,7 +68,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$( "#" + id ).panel( "toggle" , {
 				position: $link.jqmData( "position" ),//left right
 				dismissible: $link.jqmData( "dismissible" ),//true or false
-				display: $link.jqmData( "display" )// overlay or push
+				display: $link.jqmData( "display" ),// overlay or push
+				link: $link
 			});
 		});
 		$closeLink.on( "click" , function( e ){
@@ -105,7 +106,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 		$el.removeClass( klass + "-hidden" );
 		$.mobile.panel.active = this;
-		this._trigger( "open" );
+		this._trigger( "open" , "open" , { link: o.link } );
 		return this;
 	},
 	close: function(){
@@ -143,6 +144,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	}
 });
 
+$( document ).bind( "panelopen" , function( e , data ){
+	var $link = data.link,
+		$parent = $link.parent().parent();
+	if ($parent.hasClass("ui-li")) {
+		$link = $parent.parent();
+	}
+	$link.removeClass( $.mobile.activeBtnClass );
+});
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.panel.prototype.enhanceWithin( e.target );
