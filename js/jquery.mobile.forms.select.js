@@ -178,10 +178,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			if( self.options.preventFocusZoom ){
 				$.mobile.zoom.disable( true );
 			}
-		})
-		.bind( "mouseup", function() {
-			if( self.options.preventFocusZoom ){
-				$.mobile.zoom.enable( true );
+		}).bind( "mouseup", function() {
+			if ( self.options.preventFocusZoom ) {
+				setTimeout(function() {
+					$.mobile.zoom.enable( true );
+				}, 0);
 			}
 		});
 	},
