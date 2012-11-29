@@ -1339,12 +1339,15 @@ define( [
 
 			// Try to find a target element to which the active class will be applied
 			if ( $.data( target, "mobile-button" ) ) {
+				// If the form will not be submitted via AJAX, do not add active class
 				if ( !getAjaxFormData( $( target ).closest( "form" ), true ) ) {
 					return;
 				}
 				// We will apply the active state to this button widget - the parent
 				// of the input that was clicked will have the associated data
-				target = target.parentNode;
+				if ( target.parentNode ) {
+					target = target.parentNode;
+				}
 			} else {
 				target = findClosestLink( target );
 				if ( !( target && path.parseUrl( target.getAttribute( "href" ) || "#" ).hash !== "#" ) ) {
@@ -1359,7 +1362,16 @@ define( [
 			}
 
 			// Avoid calling .closest by using the data set during .buttonMarkup()
-			btnEls = $.data( target, "buttonElements" );
+			// List items have the button data in the parent of the element clicked
+			if ( !!~target.className.indexOf( "ui-link-inherit" ) ) {
+				if ( target.parentNode ) {
+					btnEls = $.data( target.parentNode, "buttonElements" );
+				}
+			// Otherwise, look for the data on the target itself
+			} else {
+				btnEls = $.data( target, "buttonElements" );
+			}
+			// If found, grab the button's outer element
 			if ( btnEls ) {
 				target = btnEls.outer;
 			} else {
@@ -1367,11 +1379,12 @@ define( [
 			}
 
 			$btn = $( target );
+			// If the outer element wasn't found by the our heuristics, use .closest()
 			if ( needClosest ) {
 				$btn = $btn.closest( ".ui-btn" );
 			}
-			$btn = $btn.not( ".ui-disabled" );
-			if ( $btn.length > 0 && !$btn.hasClass( $.mobile.activeBtnClass ) ) {
+
+			if ( $btn.length > 0 && !( $btn.hasClass( $.mobile.activeBtnClass ) || $btn.hasClass( "ui-disabled" ) ) ) {
 				removeActiveLinkClass( true );
 				$activeClickedLink = $btn;
 				$activeClickedLink.addClass( $.mobile.activeBtnClass );
