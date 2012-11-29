@@ -28,14 +28,20 @@
 			start();
 		}, 800);
 	});
-	asyncTest( "Attributes on panel should be correctly created when open is called" , function(){
-		expect( 3 );
+	asyncTest( "Attributes on panel should be correctly created when open and close is called" , function(){
+		expect( 6 );
 		var $uipanel = $('#basic-panel-test .ui-panel'),
 			$panel = $uipanel.data( "mobile-panel" ),
 			position, display, dismissible;
 		$.testHelper.pageSequence([
 			function() {
 				$uipanel.on( "panelopen" , function(){
+					var $this = $( this );
+					position = $this.hasClass( "ui-panel-position-right" );
+					display = $this.hasClass( "ui-panel-display-push" );
+					dismissible = $this.hasClass( "ui-panel-dismissible-true" );
+				});
+				$uipanel.on( "panelclose" , function(){
 					var $this = $( this );
 					position = $this.hasClass( "ui-panel-position-right" );
 					display = $this.hasClass( "ui-panel-display-push" );
@@ -54,6 +60,14 @@
 					ok( position , "has the correct position class" );
 					ok( display , "has the correct display class" );
 					ok( dismissible , "has the correct dismissible class" );
+					$panel.close();
+				},800);
+			},
+			function() {
+				setTimeout(function(){
+					ok( !position , "has the correct position class" );
+					ok( !display , "has the correct display class" );
+					ok( !dismissible , "has the correct dismissible class" );
 				},800);
 			},
 			function() {

@@ -20,7 +20,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		display: "push",
 		initSelector: ":jqmData(role='panel')"
 	},
-
 	_handleLink: function( roleType , callback ){
 		var elId = this.element.attr( "id" );
 		$( document ).bind( "pagebeforechange", function( e, data ) {
@@ -42,6 +41,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			klass = o.classes.panel,
 			$el = this.element,
 			$closeLink = $el.find( "[data-rel=close]" );
+
 		$el.addClass( klass + "-hide" )
 			.addClass( klass );
 		if( o.theme ){
@@ -76,7 +76,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.addClass( klass + "-display-" + options.display )
 			.removeClass( klass + "-hide" )
 			.jqmData( "position" , options.position )
-			.jqmData( "display" , options.display );
+			.jqmData( "display" , options.display )
+			.jqmData( "dismissible" , options.dismissible );
 		if( options.display === "push" ){
 			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + options.position );
 		} else {
@@ -91,10 +92,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var klass = this.options.classes.panel,
 			$el = this.element,
 			position = $el.jqmData( "position" ),
-			display = $el.jqmData( "display" );
+			display = $el.jqmData( "display" ),
+			dismissible = $el.jqmData( "dismissible" );
 		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position );
 		$el.removeClass( klass + "-position-" + position )
 			.removeClass( klass + "-display-" + display )
+			.removeClass( klass + "-dismissible-" + dismissible )
 			.addClass( klass + "-hidden" );
 		$.mobile.panel.active = false;
 		this._trigger( "close" );
