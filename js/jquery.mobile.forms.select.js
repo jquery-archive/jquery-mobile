@@ -174,17 +174,25 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			});
 
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
-		self.button.bind( "vmousedown", function() {
-			if( self.options.preventFocusZoom ){
+		if ( self.options.preventFocusZoom ) {
+			self.button.bind( "vmousedown", function() {
 				$.mobile.zoom.disable( true );
-			}
-		}).bind( "mouseup", function() {
-			if ( self.options.preventFocusZoom ) {
+			});
+			self.label.bind( "click focus", function() {
+				$.mobile.zoom.disable( true );
+			});
+			self.select.bind( "focus", function() {
+				$.mobile.zoom.disable( true );
+			});
+			self.button.bind( "mouseup", function() {
 				setTimeout(function() {
 					$.mobile.zoom.enable( true );
-				}, 0);
-			}
-		});
+				}, 0 );
+			});
+			self.select.bind( "blur", function() {
+				$.mobile.zoom.enable( true );
+			});
+		}
 	},
 
 	selected: function() {
