@@ -43,12 +43,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			slideDir = position === "left" ? "right" : "left";
 		$div.css( "z-index" , 99999)
 			.css( "width" , $( window ).width() - $( ".ui-panel" ).width() )
-			.css( "height" , $( window ).height() )
+			.css( "height" , $.mobile.activePage.height() )
 			.css( "position" , "absolute" )
 			.css( "top" , 0 )
 			.css( slideDir , 0 )
 			.attr( "id" , "page-block" )
-			.appendTo( "body" );
+			.appendTo( $.mobile.activePage );
 		$div.bind( "click" , function(){
 			$panel.close();
 		});
