@@ -66,7 +66,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 		this._handleLink( "panel" , function( $link , id ){
 			$( "#" + id ).panel( "toggle" , {
-				position: $link.jqmData( "position" ),//left right top
+				position: $link.jqmData( "position" ),//left right
 				dismissible: $link.jqmData( "dismissible" ),//true or false
 				display: $link.jqmData( "display" )// overlay or push
 			});

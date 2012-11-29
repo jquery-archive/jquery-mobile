@@ -21,11 +21,6 @@
 .ui-panel-position-right{
 	left: 75%;
 }
-.ui-panel-position-top{
-	width: 100%;
-	height: 25%;
-	top: 0;
-}
 .ui-panel-hidden{
 	display: none;
 }
@@ -36,13 +31,10 @@
 .ui-panel-position-right.ui-panel-hidden{
 	left: 100%;
 }
-.ui-panel-position-top.ui-panel-hidden{
-	top: -25%;
-}
 */
-.ui-content.panel-shift-left, .ui-content.panel-shift-right, .ui-content.panel-shift-top,
-.ui-header.panel-shift-left, .ui-header.panel-shift-right, .ui-header.panel-shift-top,
-.ui-footer.panel-shift-left, .ui-footer.panel-shift-right, .ui-footer.panel-shift-top{
+.ui-content.panel-shift-left, .ui-content.panel-shift-right,
+.ui-header.panel-shift-left, .ui-header.panel-shift-right,
+.ui-footer.panel-shift-left, .ui-footer.panel-shift-right{
 	position: relative;
 }
 .ui-content.panel-shift-left,
@@ -54,11 +46,6 @@
 .ui-header.panel-shift-right,
 .ui-footer.panel-shift-right{
 	right:25%;
-}
-.ui-content.panel-shift-top,
-.ui-header.panel-shift-top,
-.ui-footer.panel-shift-top{
-	top:200px;
 }
 .ui-panel-display-overlay{
 	z-index: 2;
