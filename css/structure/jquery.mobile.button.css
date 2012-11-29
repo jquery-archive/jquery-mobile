@@ -25,6 +25,7 @@
 .ui-btn-icon-notext .ui-btn-inner .ui-icon { margin: 2px 1px 2px 3px; float: left; }
 
 .ui-btn-text { position: relative; z-index: 1; width: 100%; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
+div.ui-btn-text { width: auto; }
 .ui-btn-icon-notext .ui-btn-text { position: absolute; left: -9999px; }
 
 .ui-btn-icon-left .ui-btn-inner { padding-left: 40px; }
