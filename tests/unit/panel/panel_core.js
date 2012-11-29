@@ -75,4 +75,42 @@
 			}
 		]);
 	});
+
+	module( "Link Panel Tests", {
+		setup: function(){
+			var hash = "#link-panel-test";
+			if( location.hash != hash ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( hash );
+			}
+		},
+
+		teardown: function() {
+		}
+	});
+	asyncTest( "The link should bring forward the proper panel" , function(){
+		expect( 3 );
+		$.testHelper.pageSequence([
+			function() {
+				$( "[href=\"#panel-id\"]" ).click();
+			},
+			function() {
+				setTimeout( function(){
+					var $uipanel = $('#link-panel-test .ui-panel'),
+						$panel = $uipanel.data( "mobile-panel" );
+						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
+						equal( $panel.element.jqmData( "dismissible" ) , true , "Dimissible upon clicking link is true" );
+						equal( $panel.element.jqmData( "display" ) , "overlay" , "Display upon clicking link is overlay" );
+				} , 800 );
+			},
+			function() {
+				start();
+			}
+		]);
+	});
 }( jQuery ));
