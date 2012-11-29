@@ -17,6 +17,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			disabled: false,
 			initSelector: ":jqmData(role='range')",
 			mini: false,
+			split: false,
 			highlight: false
 		},
 
@@ -30,17 +31,13 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			inputFirst.addClass( "ui-range-first" );
 			inputLast.addClass( "ui-range-last" );
 			label = $el.find( "label" );
-			//$el.wrap( "<div class=\"ui-range-wrap\" />" );
-			//wrap = $el.closest( ".ui-range-wrap" );
-			$el.append("<div class=\"ui-range-inputs\" />").append("<div class=\"ui-range-sliders\" />");
-			inputs = $el.find(".ui-range-inputs");
+			$el.append("<div class=\"ui-range-sliders\" />");
 			sliders = $el.find(".ui-range-sliders");
 			
-			inputFirst.appendTo( inputs );
-			inputs.append(" - ");
-			inputLast.appendTo( inputs );
 			if( o.mini ){
 				label.addClass("ui-mini");
+				inputFirst.addClass( "ui-mini" );
+				inputLast.addClass( "ui-mini" );
 				self.element.addClass("ui-mini");
 			}
 			$el.find( "input" ).slider({
@@ -54,8 +51,13 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			sliderFirst = $el.find( ".ui-slider:first" ).addClass( "ui-slider-first" );
 			sliderLast = $el.find( ".ui-slider:last" ).addClass( "ui-slider-last" );
 			sliderFirst.appendTo(sliders);
+			if( o.split ) {
+				$el.addClass( "ui-range-split" );
+			}
+			inputFirst.after("<span class=\"ui-range-dash\">&nbsp;-&nbsp;</span>");
+			
 			sliderLast.appendTo(sliders);
-			label.prependTo(inputs).addClass( "ui-slider" );
+			label.addClass( "ui-slider" );
 			$.extend( self, {
 				inputFirst: inputFirst,
 				inputLast: inputLast,
@@ -74,8 +76,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		_bindChangeEvents: function() {
 			this._on( {
 				"change input": function( event ){
-					var min = parseInt( this.inputFirst.val() ),
-						max = parseInt( this.inputLast.val() ),
+					var min = parseFloat( this.inputFirst.val(), 10 ),
+						max = parseFloat( this.inputLast.val(), 10 ),
 						first = $(event.target).hasClass("ui-range-first");
 						if( min > max )  {
 							$( event.target ).val(first ? max: min).slider("refresh");
@@ -108,7 +110,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		_bindToggle: function() {
 			this._on( this.element.find( ".ui-slider-handle" ), {
 				"vclick": function( event ){
-					var first = $(event.target).closest( ".ui-slider" ).hasClass( "ui-slider-first" );
+					var first = $(event.target).closest( ".ui-slider" ).is( ":first-child" );
+					console.log(first);
 					this.sliderFirst.css( "z-index", first ? 1 : "" );
 				}
 			});
@@ -118,8 +121,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			var newWidth = this.sliderLastWidth - this.sliderFirstWidth,
 				tWidth = this.sliderLast.width();
 				this.element.find( ".ui-slider-bg" ).css({
-					"margin-left": parseInt(this.sliderFirstWidth / tWidth * 100) + "%",
-					"width": parseInt((newWidth) / tWidth * 100) + "%"
+					"margin-left": this.sliderFirstWidth / tWidth * 100 + "%",
+					"width": (newWidth) / tWidth * 100 + "%"
 				});
 		}
 

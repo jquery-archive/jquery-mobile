@@ -371,7 +371,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				return $( bg ).prependTo( self.slider );
 			})()
 		}
-		console.log(this.options.trackTheme);
 		this.handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
 		self.slider[0].className = ['ui-slider ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.inline ) ? " ui-slider-inline" : "", ( this.options.mini ) ? " ui-slider-mini":""].join( "" );
 

@@ -1,15 +1,17 @@
 .ui-range{
   position:relative;
   display:inline-block;
-  clear:right;
   min-height:1em;
   width:100%;
+  padding-right:30px;
+  box-sizing:border-box;
 }
 .ui-range div.ui-slider{
   position:absolute;
   left:0;
   top:0;
-  width:95%;
+  width:100%;
+  margin:0;
 }
 .ui-range label.ui-slider{
   font-weight: bold;
@@ -23,13 +25,26 @@
   display:inline-block;
   width:60%;
   min-height:1em;
+  margin:0 0 0 20px;
 }
-.ui-range-inputs{
-  position:relative;
-  display:inline-block;
+
+.ui-range input.ui-slider-input:last-child{
+  margin-left:20px;
 }
+
+/*full width style*/
 .ui-range.ui-range-full .ui-range-sliders{
   width:100%;
+}
+
+/*mini styles*/
+.ui-range.ui-mini .ui-range-sliders,
+.ui-range.ui-mini.ui-range-split.ui-range-full .ui-range-sliders{
+  margin-top:0;
+}
+.ui-range label.ui-slider.ui-mini,
+.ui-range.ui-mini span.ui-range-dash{
+  margin-top:.5em;
 }
 /*field-contain styling*/
 .ui-field-contain .ui-range label.ui-slider{
@@ -38,26 +53,87 @@
   margin: 0 2% 0 0;
   display:inline-block;
 }
-.ui-field-contain .ui-range .ui-range-inputs{
-  width:100%;
-  white-space: nowrap;
+.ui-field-contain .ui-range span.ui-range-dash{
+  margin-top:.5em;
 }
 .ui-field-contain .ui-range .ui-range-sliders{
-  width:59%;
-  position:absolute;
-  right:0;
-  margin-top:5px;
+  margin-top:0;
 }
-.ui-field-contain .ui-range div.ui-range-sliders div.ui-slider{
-  width:70%;
-  margin-left:25%;
+/*split styles*/
+.ui-range.ui-range-split .ui-range-dash{
+  display:none;
 }
-.ui-range div.ui-range-sliders div.ui-slider.ui-slider-mini{
-  margin-top:.4em;
+.ui-range.ui-range-split.ui-range-full label.ui-slider{
+  display:block;
+  float:none;
+  margin-top:0;
 }
+.ui-range label.ui-slider,
+.ui-range span.ui-range-dash{
+  float:left;
+  margin-top:1em;
+}
+.ui-range input.ui-slider-input{
+  float:left;
+}
+.ui-range.ui-range-split input.ui-slider-input.ui-range-last{
+  float:right;
+}
+.ui-range .ui-range-sliders{
+  overflow: hidden;
+  height: 2.5em;
+  margin-top: .5em;
+  width: auto;
+  display:block;
+}
+.ui-range.ui-range-split.ui-range-full .ui-range-sliders{
+  margin-top:.7em;
+}
+.ui-range .ui-range-sliders .ui-slider{
+  width:86%;
+  margin-left:20px;
+  top:.7em;
+}
+.ui-range.ui-range-split .ui-range-sliders .ui-slider{
+  margin-left:7%;
+}
+.ui-range.ui-range-split.ui-range-full .ui-range-sliders{
+  width:auto;
+}
+
 @media (max-width: 28em) {
-  .ui-field-contain .ui-range div.ui-range-sliders div.ui-slider{
-    width:90%;
+  .ui-range div.ui-range-sliders,
+  .ui-range.ui-range-split.ui-range-full div.ui-range-sliders{
+    width:100%;
+    margin:0 0 0 15px;
+  }
+  .ui-range label.ui-slider,
+  .ui-range.ui-range-split.ui-range-full label.ui-slider,
+  .ui-range.ui-range-full label.ui-slider,{
+    margin-top:1em;
+    display:inline;
+  }
+  .ui-range .ui-range-dash {
+    display: inline;
+  }
+  .ui-range label.ui-slider{
+    display:inline-block;
+  }
+  .ui-range input.ui-slider-input,
+  .ui-range span.ui-range-dash,
+  .ui-range.ui-range-split input.ui-slider-input,
+  .ui-range.ui-range-split input.ui-slider-input.ui-range-last{
+    float:none;
+  }
+  .ui-range.ui-range-split .ui-range-sliders,
+  .ui-range .ui-range-sliders{
+    width:100%;
+    margin-top:0;
+    overflow:visible;
+    height:1.4em;
+  }
+  .ui-range.ui-range-split .ui-range-sliders .ui-slider{
+    width:100%;
     margin-left:0;
   }
 }
