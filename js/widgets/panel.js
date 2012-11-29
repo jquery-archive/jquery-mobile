@@ -36,6 +36,23 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		});
 	},
+	_blockPage: function(){
+		var $div = $( "<div>" );
+		var $panel = this,
+			position = $panel.element.position,
+			slideDir = position === "left" ? "right" : "left";
+		$div.css( "z-index" , 99999)
+			.css( "width" , $( window ).width() - $( ".ui-panel" ).width() )
+			.css( "height" , $( window ).height() )
+			.css( "position" , "absolute" )
+			.css( "top" , 0 )
+			.css( slideDir , 0 )
+			.attr( "id" , "page-block" )
+			.appendTo( "body" );
+		$div.bind( "click" , function(){
+			$panel.close();
+		});
+	},
 	_create: function() {
 		var o = this.options,
 			klass = o.classes.panel,
@@ -83,6 +100,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		} else {
 			$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + o.position );
 		}
+		if( o.dismissible ){
+			this._blockPage();
+		}
 		$el.removeClass( klass + "-hidden" );
 		$.mobile.panel.active = this;
 		this._trigger( "open" );
@@ -99,6 +119,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.removeClass( klass + "-display-" + display )
 			.removeClass( klass + "-dismissible-" + dismissible )
 			.addClass( klass + "-hidden" );
+		$( "#page-block" ).remove();
 		$.mobile.panel.active = false;
 		this._trigger( "close" );
 		return this;
