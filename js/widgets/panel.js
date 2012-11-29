@@ -68,7 +68,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el = this.element;
 		options = options || {};
 		options.position = options.position || o.position;
-		options.dismissible = options.dismissible || o.dismissible;
+		options.dismissible = options.dismissible === false ? false : o.dismissible;
 		options.display = options.display || o.display;
 
 		$el.addClass( klass + "-position-" + options.position )
