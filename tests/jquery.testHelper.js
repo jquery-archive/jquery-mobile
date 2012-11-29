@@ -121,12 +121,8 @@
 				};
 			}
 
-			var lib = this.reloads[libName].lib.clone(),
-				src = lib.attr('src');
-
-			//NOTE append "cache breaker" to force reload
-			lib.attr('src', src + "?" + this.reloads[libName].count++);
-			$("body").append(lib);
+			var src = this.reloads[libName].lib.attr('src') + "?" + this.reloads[libName].count++;
+			$.ajax( { url: src, dataType: "script", async: false } );
 		},
 
 		rerunQunit: function(){
@@ -377,7 +373,7 @@
 		versionTest: function( l, t, r ) {
 			var lAr = l.split( "." ), lLength = lAr.length,
 				rAr = r.split( "." ), rLength = rAr.length,
-				lVal, rVal, lRes = "", rRes = "", min, max, str, idx1, diff;
+				lVal, rVal, lRes = "", rRes = "", min, max, str, idx, idx1, diff;
 			for ( idx = 0 ; idx < lLength || idx < rLength ; idx++ ) {
 				str = {};
 				lVal = ( idx < lLength ? parseInt( lAr[ idx ] ) : 0 );

@@ -24,9 +24,7 @@
 
    <div data-role="content">
      
-        <h2>Reflow table mode</h2>
-
-
+    <h2>Reflow table mode</h2>
 	<p>The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row. Since the HTML source order of a table prohibits styling a table to look like this,  the plugin dynamically adds a bit of  markup to make the display work (without affecting accessibility). Here is a demo of a basic table using reflow mode:</p>
 
 
@@ -166,6 +164,8 @@
 		<p>It's best to use a <code>class</code> on the table to apply the breakpoint. Add these rules to your custom stylesheet that is included in the <code>head</code> of the page. We recommend creating a set of custom breakpoint classes that can be used to apply standard table breakpoints in your project.</p>
 		
 		<p>In the example above, we're assuming there is a class of <code>my-custom-breakpoint</code> added to the table to apply the breakpoint. Each of the rules in the custom media query are scoped against that table class to target only tables that have the <code>my-custom-breakpoint</code> class.</p>
+		
+		<p>In order for this technique to work, a browser must support media queries and the ability to style table cells as block-level elements. In testing, most popular desktop and mobile browsers meet these criteria, but older versions of Internet Explorer (8 and older) 	 fall back to a normal table presentation. IE 9 can support this technique but there are a few additional styles needed so we recommend applying these in a <code>max-width</code> media query to only apply them below the table presentation because they are hard to negate. </p>
 
 		<h3>Choosing a breakpoint</h3>
 		<p>The goal is to determine the minimum width at which the <em>entire table</em> will fit comfortably within the screen. Find this width by populating a table with realistic sample data, then adjust the browser window until the table completely fits and has a bit of extra space to account for rendering differences across devices. This is the natural place to set the breakpoint that switches between the stacked and tabular presentation modes. </p>

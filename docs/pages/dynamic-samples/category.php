@@ -8,60 +8,60 @@
 // are just using some static in-memory data.
 
 $category_data = array(
-	animals => array(
-		name => "Animals",
-		description => "All your favorites from aardvarks to zebras.",
-		items => array(
+	"animals" => array(
+		"name" => "Animals",
+		"description" => "All your favorites from aardvarks to zebras.",
+		"items" => array(
 			array(
-				name => "Pets",
+				"name" => "Pets",
 			),
 			array(
-				name => "Farm Animals",
+				"name" => "Farm Animals",
 			),
 			array(
-				name => "Wild Animals",
+				"name" => "Wild Animals",
 			)
 		)
 	),
-	colors => array(
-		name => "Colors",
-		description => "Fresh colors from the magic rainbow.",
-		items => array(
+	"colors" => array(
+		"name" => "Colors",
+		"description" => "Fresh colors from the magic rainbow.",
+		"items" => array(
 			array(
-				name => "Blue",
+				"name" => "Blue",
 			),
 			array(
-				name => "Green",
+				"name" => "Green",
 			),
 			array(
-				name => "Orange",
+				"name" => "Orange",
 			),
 			array(
-				name => "Purple",
+				"name" => "Purple",
 			),
 			array(
-				name => "Red",
+				"name" => "Red",
 			),
 			array(
-				name => "Yellow",
+				"name" => "Yellow",
 			),
 			array(
-				name => "Violet",
+				"name" => "Violet",
 			)
 		)
 	),
-	vehicles => array(
-		name => "Vehicles",
-		description => "Everything from cars to planes.",
-		items => array(
+	"vehicles" => array(
+		"name" => "Vehicles",
+		"description" => "Everything from cars to planes.",
+		"items" => array(
 			array(
-				name => "Cars",
+				"name" => "Cars",
 			),
 			array(
-				name => "Planes",
+				"name" => "Planes",
 			),
 			array(
-				name => "Construction",
+				"name" => "Construction",
 			)
 		)
 	)
@@ -70,44 +70,35 @@ $category_data = array(
 // Get the name of the category to display from
 // the query params for the script.
 
-$category_name = '';
-if ( $_GET[ 'id' ] ) {
+if ( isset( $_GET[ 'id' ] ) ) {
 	$category_name = $_GET[ 'id' ];
+} else {
+	$category_name = false;
 }
 
 // Now get the category data, by name, from our in-memory
 // dictionary. This is the part where a script normally fetches
 // the data from a database.
 
-$category_obj  = $category_data[ $category_name ];
+if ( $category_name && isset( $category_data[ $category_name ] ) ) {
+	$category_obj = $category_data[ $category_name ];
+} else {
+	$category_obj = null;
+}
 
 // Now figure out how the script is being called. If it's being
 // called via XmlHttpRequest, then send the data back as JSON.
 // If not, then send it back as a list in an HTML document.
 
-if( $_SERVER[ "HTTP_X_REQUESTED_WITH" ] && $_SERVER[ "HTTP_X_REQUESTED_WITH" ] ==="XMLHttpRequest" ) {
+if ( isset( $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] ) && $_SERVER[ 'HTTP_X_REQUESTED_WITH' ] === 'XMLHttpRequest' ) {
 	// Data should be written out as JSON.
-	header("Content-type: application/json");
-	if ( !$category_obj ) {
-		echo 'null';
-	} else {
-		echo '{"name":"' . $category_obj[ 'name' ]
-			. '","description":"' . $category_obj[ 'description' ]
-			. '","items":[';
+	header('Content-type: application/json; charset=UTF-8');
+	echo json_encode( $category_obj );
+	exit;
+}
 
-		$arr = $category_obj[ 'items' ];
-		$count = count($arr);
-		for ( $i = 0; $i < $count; $i++ ) {
-			if ( $i ) {
-				echo ",";
-			}
-			echo '{"name":"' . $arr[ $i ][ 'name' ] . '"}';
-		}
-		echo "]}";
-	}
-} else {
-	// Data should be written out as HTML.
-	header("Content-type: text/html");
+// Data should be written out as HTML.
+header('Content-type: text/html; charset=UTF-8');
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -121,30 +112,35 @@ if( $_SERVER[ "HTTP_X_REQUESTED_WITH" ] && $_SERVER[ "HTTP_X_REQUESTED_WITH" ] =
 </head>
 <body>
 <div data-role="page" data-add-back-btn="true">
-	<div data-role="header"><h1><?php if ( $category_obj ) { echo $category_obj['name']; } else { echo "No Match"; } ?></h1></div>
+	<div data-role="header"><h1><?php
+	if ( $category_obj ) {
+		echo htmlspecialchars( $category_obj[ 'name' ] );
+	} else {
+		echo 'No Match';
+	}
+?></h1></div>
 	<div data-role="content">
 <?php
-		if ( !$category_obj ) {
+	if ( !$category_obj ) {
 ?>
 		<p>No matches found.</p>
 <?php
-		} else {
+	} else {
 ?>
-		<p><?php echo $catgory_object['description']; ?></p>
+		<p><?php echo htmlspecialchars( $category_obj['description'] ); ?></p>
 		<ul data-role="listview" data-inset="true">
 <?php
-			$arr = $category_obj[ 'items' ];
-			$count = count($arr);
-			for ( $i = 0; $i < $count; $i++ ) {
-				echo "\t\t\t<li>" . $arr[ $i ][ 'name' ] . "</li>\n";
-			}
+		$arr = $category_obj[ 'items' ];
+		$count = count($arr);
+		for ( $i = 0; $i < $count; $i++ ) {
+			echo "\t\t\t<li>" . htmlspecialchars( $arr[ $i ][ 'name' ] ) . "</li>\n";
+		}
 ?>
 		</ul>
 <?php
-		}
+	}
 ?>
 	</div>
 </div>
 </body>
 </html>
-<?php }

@@ -13,6 +13,7 @@ define( [
 	"jquery",
 	"../../jquery.mobile.buttonMarkup",
 	"../../jquery.mobile.core",
+	"../../jquery.mobile.navigation",
 	"../dialog",
 	"./select",
 	"../listview",
@@ -472,7 +473,7 @@ define( [
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
 						}
-						if (!placeholder) {
+						if ( placeholder !== text ) {
 							placeholder = self.placeholder = text;
 						}
 					}

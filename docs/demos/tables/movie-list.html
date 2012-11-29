@@ -100,6 +100,19 @@
       display: none;
     }
   }
+	/* Hack to make IE9 and WP7.5 treat cells like block level elements */ 
+	/* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this*/ 
+	@media ( max-width: 40em ) {
+		.movie-list td,
+		.movie-list th {
+			width: 100%;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			float: left;
+			clear: left;
+		}
+	}
   </style>
 </head> 
 <body> 
