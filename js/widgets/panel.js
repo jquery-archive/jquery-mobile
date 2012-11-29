@@ -66,22 +66,22 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options,
 			klass = o.classes.panel,
 			$el = this.element;
-		options = options || {};
-		options.position = options.position || o.position;
-		options.dismissible = options.dismissible === false ? false : o.dismissible;
-		options.display = options.display || o.display;
-
-		$el.addClass( klass + "-position-" + options.position )
-			.addClass( klass + "-dismissible-" + options.dismissible )
-			.addClass( klass + "-display-" + options.display )
+		for( var i in options ){
+			if( options.hasOwnProperty( i ) ){
+				o[ i ] = options [ i ];
+			}
+		}
+		$el.addClass( klass + "-position-" + o.position )
+			.addClass( klass + "-dismissible-" + o.dismissible )
+			.addClass( klass + "-display-" + o.display )
 			.removeClass( klass + "-hide" )
-			.jqmData( "position" , options.position )
-			.jqmData( "display" , options.display )
-			.jqmData( "dismissible" , options.dismissible );
-		if( options.display === "push" ){
-			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + options.position );
+			.jqmData( "position" , o.position )
+			.jqmData( "display" , o.display )
+			.jqmData( "dismissible" , o.dismissible );
+		if( o.display === "push" ){
+			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
 		} else {
-			$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + options.position );
+			$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + o.position );
 		}
 		$el.removeClass( klass + "-hidden" );
 		$.mobile.panel.active = this;
