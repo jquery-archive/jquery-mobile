@@ -64,7 +64,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		//"search" and "text" input widgets
 		if ( isSearch ) {
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-		} else if ( inputNeedsClearBtn ) {
+		} else if ( input.is( "input" ) ) {
 			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
 		}
 
@@ -91,7 +91,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			input.bind( "paste cut keyup focus change blur", toggleClear );
 		}
-		else if ( !inputNeedsClearBtn && !isSearch ) {
+		else if ( input.is( "textarea" ) ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 

@@ -1264,22 +1264,19 @@ define( [
 	//the following deferred is resolved in the init file
 	$.mobile.navreadyDeferred = $.Deferred();
 	$.mobile._registerInternalEvents = function() {
-		//bind to form submit events, handle with Ajax
-		$( document ).delegate( "form", "submit", function( event ) {
-			var $this = $( this );
-
+		var getAjaxFormData = function( $form, calculateOnly ) {
+			var type, target, url, ret = true;
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
-					$this.is( ":jqmData(ajax='false')" ) ||
+					$form.is( ":jqmData(ajax='false')" ) ||
 					// test that $.mobile.ignoreContentEnabled is set and
 					// the form or one of it's parents is ajax=false
-					!$this.jqmHijackable().length ) {
-				return;
+					!$form.jqmHijackable().length ) {
+				return false;
 			}
 
-			var type = $this.attr( "method" ),
-				target = $this.attr( "target" ),
-				url = $this.attr( "action" );
+			target = $form.attr( "target" );
+			url = $form.attr( "action" );
 
 			// If no action is specified, browsers default to using the
 			// URL of the document containing the form. Since we dynamically
@@ -1288,7 +1285,7 @@ define( [
 			// the form.
 			if ( !url ) {
 				// Get the @data-url for the page containing the form.
-				url = getClosestBaseUrl( $this );
+				url = getClosestBaseUrl( $form );
 				if ( url === documentBase.hrefNoHash ) {
 					// The url we got back matches the document base,
 					// which means the page must be an internal/embedded page,
@@ -1298,49 +1295,99 @@ define( [
 				}
 			}
 
-			url = path.makeUrlAbsolute(  url, getClosestBaseUrl( $this ) );
+			url = path.makeUrlAbsolute(  url, getClosestBaseUrl( $form ) );
 
 			if ( ( path.isExternal( url ) && !path.isPermittedCrossDomainRequest( documentUrl, url ) ) || target ) {
-				return;
+				return false;
 			}
 
-			$.mobile.changePage(
-				url,
-				{
-					type:		type && type.length && type.toLowerCase() || "get",
-					data:		$this.serialize(),
-					transition:	$this.jqmData( "transition" ),
-					reverse:	$this.jqmData( "direction" ) === "reverse",
-					reloadPage:	true
-				}
-			);
-			event.preventDefault();
+			if ( !calculateOnly ) {
+				type = $form.attr( "method" );
+				ret = {
+					url: url,
+					options: {
+						type:		type && type.length && type.toLowerCase() || "get",
+						data:		$form.serialize(),
+						transition:	$form.jqmData( "transition" ),
+						reverse:	$form.jqmData( "direction" ) === "reverse",
+						reloadPage:	true
+					}
+				};
+			}
+
+			return ret;
+		};
+
+		//bind to form submit events, handle with Ajax
+		$( document ).delegate( "form", "submit", function( event ) {
+			var formData = getAjaxFormData( $( this ) );
+
+			if ( formData ) {
+				$.mobile.changePage( formData.url, formData.options );
+				event.preventDefault();
+			}
 		});
 
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
+			var $btn, btnEls, target = event.target, needClosest = false;
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
 			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
 				return;
 			}
 
-			var link = findClosestLink( event.target ), $btn;
+			// Try to find a target element to which the active class will be applied
+			if ( $.data( target, "mobile-button" ) ) {
+				// If the form will not be submitted via AJAX, do not add active class
+				if ( !getAjaxFormData( $( target ).closest( "form" ), true ) ) {
+					return;
+				}
+				// We will apply the active state to this button widget - the parent
+				// of the input that was clicked will have the associated data
+				if ( target.parentNode ) {
+					target = target.parentNode;
+				}
+			} else {
+				target = findClosestLink( target );
+				if ( !( target && path.parseUrl( target.getAttribute( "href" ) || "#" ).hash !== "#" ) ) {
+					return;
+				}
 
-			// split from the previous return logic to avoid find closest where possible
-			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
-			// can be avoided
-			if ( !$( link ).jqmHijackable().length ) {
-				return;
+				// TODO teach $.mobile.hijackable to operate on raw dom elements so the
+				// link wrapping can be avoided
+				if ( !$( target ).jqmHijackable().length ) {
+					return;
+				}
 			}
 
-			if ( link ) {
-				$btn = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
-				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" && !$btn.hasClass( $.mobile.activeBtnClass ) ) {
-					removeActiveLinkClass( true );
-					$activeClickedLink = $btn;
-					$activeClickedLink.addClass( $.mobile.activeBtnClass );
+			// Avoid calling .closest by using the data set during .buttonMarkup()
+			// List items have the button data in the parent of the element clicked
+			if ( !!~target.className.indexOf( "ui-link-inherit" ) ) {
+				if ( target.parentNode ) {
+					btnEls = $.data( target.parentNode, "buttonElements" );
 				}
+			// Otherwise, look for the data on the target itself
+			} else {
+				btnEls = $.data( target, "buttonElements" );
+			}
+			// If found, grab the button's outer element
+			if ( btnEls ) {
+				target = btnEls.outer;
+			} else {
+				needClosest = true;
+			}
+
+			$btn = $( target );
+			// If the outer element wasn't found by the our heuristics, use .closest()
+			if ( needClosest ) {
+				$btn = $btn.closest( ".ui-btn" );
+			}
+
+			if ( $btn.length > 0 && !( $btn.hasClass( $.mobile.activeBtnClass ) || $btn.hasClass( "ui-disabled" ) ) ) {
+				removeActiveLinkClass( true );
+				$activeClickedLink = $btn;
+				$activeClickedLink.addClass( $.mobile.activeBtnClass );
 			}
 		});
 

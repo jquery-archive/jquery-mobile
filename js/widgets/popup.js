@@ -52,7 +52,7 @@ define( [ "jquery",
 			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
-			dismissable: true,
+			dismissible: true,
 
 			// NOTE Windows Phone 7 has a scroll position caching issue that
 			//      requires us to disable popup history management by default
@@ -65,7 +65,7 @@ define( [ "jquery",
 		_eatEventAndClose: function( e ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-			if ( this.options.dismissable ) {
+			if ( this.options.dismissible ) {
 				this.close();
 			}
 			return false;
@@ -843,8 +843,7 @@ define( [ "jquery",
 				x: offset.left + $link.outerWidth() / 2,
 				y: offset.top + $link.outerHeight() / 2,
 				transition: $link.jqmData( "transition" ),
-				positionTo: $link.jqmData( "position-to" ),
-				link: $link
+				positionTo: $link.jqmData( "position-to" )
 			});
 		}
 

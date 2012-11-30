@@ -475,8 +475,8 @@
 		]);
 	});
 
-	asyncTest( "Cannot close a non-dismissable popup by clicking on the screen", function() {
-		var $popup = $( "#test-popup-dismissable" ), eventNs = ".cannotCloseNonDismissablePopup";
+	asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", function() {
+		var $popup = $( "#test-popup-dismissible" ), eventNs = ".cannotCloseNonDismissiblePopup";
 
 		$.testHelper.detailedEventCascade([
 			function() {
