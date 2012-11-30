@@ -58,9 +58,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			klass = o.classes.panel,
 			$el = this.element,
 			$closeLink = $el.find( "[data-rel=close]" );
-
-		$el.addClass( klass + "-hide" )
-			.addClass( klass );
+		$el.addClass( klass );
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
 		}
@@ -79,8 +77,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		});
 		this._trigger( "create" );
 	},
-	_destroy: function(){},
-	open: function( options ){
+	_position: function( options ){
 		var o = this.options,
 			klass = o.classes.panel,
 			$el = this.element;
@@ -92,10 +89,21 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		$el.addClass( klass + "-position-" + o.position )
 			.addClass( klass + "-dismissible-" + o.dismissible )
 			.addClass( klass + "-display-" + o.display )
-			.removeClass( klass + "-hide" )
 			.jqmData( "position" , o.position )
 			.jqmData( "display" , o.display )
 			.jqmData( "dismissible" , o.dismissible );
+	},
+	_destroy: function(){},
+	open: function( options ){
+		var o = this.options,
+			klass = o.classes.panel,
+			$el = this.element;
+		for( var i in options ){
+			if( options.hasOwnProperty( i ) ){
+				o[ i ] = options [ i ];
+			}
+		}
+		this._position( o );
 		if( o.display === "push" ){
 			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
 		} else {
@@ -104,25 +112,31 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( o.dismissible ){
 			this._blockPage();
 		}
-		$el.removeClass( klass + "-hidden" );
+		$el.addClass( klass + "-active" );
 		$.mobile.panel.active = this;
 		this._trigger( "open" , "open" , { link: o.link } );
 		return this;
 	},
-	close: function(){
-		var klass = this.options.classes.panel,
+	close: function( options ){
+		var o = this.options,
+			klass = o.classes.panel,
 			$el = this.element,
 			position = $el.jqmData( "position" ),
 			display = $el.jqmData( "display" ),
 			dismissible = $el.jqmData( "dismissible" );
+		$el.removeClass( klass + "-active" );
+		for( var i in options ){
+			if( options.hasOwnProperty( i ) ){
+				o[ i ] = options [ i ];
+			}
+		}
 		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position );
 		$el.removeClass( klass + "-position-" + position )
 			.removeClass( klass + "-display-" + display )
-			.removeClass( klass + "-dismissible-" + dismissible )
-			.addClass( klass + "-hidden" );
+			.removeClass( klass + "-dismissible-" + dismissible );
 		$( "#page-block" ).remove();
 		$.mobile.panel.active = false;
-		this._trigger( "close" );
+		this._trigger( "close" , "close" , { link: o.link } );
 		return this;
 	},
 	toggle: function( options ){
@@ -132,9 +146,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				( active.element.jqmData( "position") === options.position ) &&
 				( active.element.attr( "id" ) === $el.attr( "id" ) ) &&
 				( active.element.jqmData( "display" ) === options.display ) ){
-			return active.close();
+			return active.close( options );
 		} else if ( active ){
-			active.close();
+			active.close( options );
 			return this.open( options );
 		} else {
 			return this.open( options );
@@ -144,7 +158,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	}
 });
 
-$( document ).bind( "panelopen" , function( e , data ){
+$( document ).bind( "panelopen panelclose" , function( e , data ){
 	var $link = data.link,
 		$parent = $link.parent().parent();
 	if ($parent.hasClass("ui-li")) {

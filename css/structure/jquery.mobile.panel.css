@@ -1,37 +1,28 @@
 .ui-panel{
 	position: absolute;
-	/*
-	-webkit-transition: all 400ms ease-in-out;
-	-moz-transition: all 400ms ease-in-out;
-	-ms-transition: all 400ms ease-in-out;
-	-o-transition: all 400ms ease-in-out;
-	transition: all 400ms ease-in-out;
-	*/
-}
-.ui-panel-hide{
-	display: none;
+	-webkit-transition: left 200ms ease-in-out;
+	-moz-transition: left 200ms ease-in-out;
+	-ms-transition: left 200ms ease-in-out;
+	-o-transition: left 200ms ease-in-out;
+	transition: left 200ms ease-in-out;
 }
 .ui-panel-position-left, .ui-panel-position-right{
 	width: 25%;
 	height: 100%;
 }
 .ui-panel-position-left{
-	left: 0;
-}
-.ui-panel-position-right{
-	left: 75%;
-}
-.ui-panel-hidden{
-	display: none;
-}
-/**
-.ui-panel-position-left.ui-panel-hidden{
 	left: -30%;
 }
-.ui-panel-position-right.ui-panel-hidden{
+.ui-panel-position-right{
 	left: 100%;
 }
-*/
+.ui-panel-position-left.ui-panel-active{
+	left: 0;
+}
+.ui-panel-position-right.ui-panel-active{
+	left: 75%;
+}
+
 .ui-content.panel-shift-left, .ui-content.panel-shift-right,
 .ui-header.panel-shift-left, .ui-header.panel-shift-right,
 .ui-footer.panel-shift-left, .ui-footer.panel-shift-right{
