@@ -26,15 +26,14 @@
 }
 
 .panel-page .ui-content, .panel-page .ui-header, .panel-page .ui-footer {
+	position: relative;
 	-webkit-transition: left 200ms ease-in-out, right 200ms ease-in-out;
 	-moz-transition: left 200ms ease-in-out, right 200ms ease-in-out;
 	-ms-transition: left 200ms ease-in-out, right 200ms ease-in-out;
 	-o-transition: left 200ms ease-in-out, right 200ms ease-in-out;
 	transition: left 200ms ease-in-out, right 200ms ease-in-out;
 }
-.panel-page .panel-shift-left, .panel-page .panel-shift-right{
-	position: relative;
-}
+
 .panel-page .panel-shift-left{
 	left:25%;
 }
