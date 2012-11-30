@@ -5,6 +5,12 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 //>>css.structure: ../css/structure/jquery.mobile.popup.css,../css/structure/jquery.mobile.transition.css,../css/structure/jquery.mobile.transition.fade.css
 
+// Lessons:
+// You must remove nav bindings even if there is no history. Make sure you
+// remove nav bindings in the same frame as the beginning of the close process
+// if there is no history. If there is history, remove nav bindings from the nav
+// bindings handler - that way, only one of them can fire per close process.
+
 define( [ "jquery",
 	"../jquery.mobile.widget",
 	"../jquery.mobile.support",
@@ -634,12 +640,6 @@ define( [ "jquery",
 
 			this._ui.container.removeAttr( "tabindex" );
 
-			// remove nav bindings if they are still present
-			opts.container.unbind( opts.closeEvents );
-
-			// unbind click handlers added when history is disabled
-			this.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
-
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
 
@@ -700,11 +700,18 @@ define( [ "jquery",
 		},
 
 		_closePopup: function( e, data ) {
-			var parsedDst, toUrl;
+			var parsedDst, toUrl, o = this.options;
 
+			// restore location on screen
 			window.scrollTo( 0, this._scrollTop );
 
-			if ( e.type === "pagebeforechange" && data ) {
+			// remove nav bindings
+			o.container.unbind( o.closeEvents );
+
+			// unbind click handlers added when history is disabled
+			this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
+
+			if ( e && e.type === "pagebeforechange" && data ) {
 				// Determine whether we need to rapid-close the popup, or whether we can
 				// take the time to run the closing transition
 				if ( typeof data.toPage === "string" ) {
@@ -717,7 +724,6 @@ define( [ "jquery",
 
 				if ( this._myUrl !== toUrl ) {
 					// Going to a different page - close immediately
-					this.options.container.unbind( this.options.closeEvents );
 					this._close( true );
 				} else {
 					this.close();
@@ -763,7 +769,7 @@ define( [ "jquery",
 				// relying on history to do it for us
 				self.element
 					.delegate( opts.closeLinkSelector, opts.closeLinkEvents, function( e ) {
-						self._close();
+						self.close();
 
 						// NOTE prevent the browser and navigation handlers from
 						// working with the link's rel=back. This may cause
@@ -822,7 +828,8 @@ define( [ "jquery",
 			if( this.options.history ) {
 				$.mobile.back();
 			} else {
-				this._close();
+				// simulate the nav bindings having fired
+				this._closePopup();
 			}
 		}
 	});
