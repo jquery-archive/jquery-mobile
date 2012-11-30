@@ -1,5 +1,5 @@
 label.ui-input-text { font-size: 16px; line-height: 1.4; display: block; font-weight: normal; margin: 0 0 .3em; }
-input.ui-input-text, textarea.ui-input-text { background-image: none; padding: .4em; margin: .5em 0; line-height: 1.4; font-size: 16px; display: block; width: 100%; outline: 0; }
+input.ui-input-text, textarea.ui-input-text { background-image: none; padding: .4em; margin: .5em 0; min-height: 2.2em; line-height: 1.4em; font-size: 16px; display: block; width: 100%; outline: 0; }
 input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
 .ui-input-search input.ui-input-text { border: none; width: 100%; padding: .4em 0; margin: 0; display: block; background: transparent none; outline: 0 !important; }
