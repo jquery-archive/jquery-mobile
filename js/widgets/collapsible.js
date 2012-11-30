@@ -15,9 +15,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		collapseCueText: " click to collapse contents",
 		collapsed: true,
 		heading: "h1,h2,h3,h4,h5,h6,legend",
- 	        collapsedIcon: "plus",
-                expandedIcon: "minus",
-                iconPos: "left",
+		collapsedIcon: "plus",
+		expandedIcon: "minus",
+		iconPos: "left",
 		theme: null,
 		contentTheme: null,
 		inset: true,
@@ -100,7 +100,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		}
 		
 		collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon ;
-	        expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon ;
+		expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon ;
 
 		collapsibleHeading
 			//drop heading in before content
