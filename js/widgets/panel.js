@@ -159,12 +159,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 });
 
 $( document ).bind( "panelopen panelclose" , function( e , data ){
-	var $link = data.link,
+	var $link = data.link;
+	if( $link ){
 		$parent = $link.parent().parent();
-	if ($parent.hasClass("ui-li")) {
-		$link = $parent.parent();
+		if ($parent.hasClass("ui-li")) {
+			$link = $parent.parent();
+		}
+		$link.removeClass( $.mobile.activeBtnClass );
 	}
-	$link.removeClass( $.mobile.activeBtnClass );
 });
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
