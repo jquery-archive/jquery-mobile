@@ -15,30 +15,29 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_create: function() {
-		
-		var self = this;
-		
 		// if false is returned by the callbacks do not create the page
-		if ( self._trigger( "beforecreate" ) === false ) {
+		if ( this._trigger( "beforecreate" ) === false ) {
 			return false;
 		}
 
-		self.element
+		this.element
 			.attr( "tabindex", "0" )
-			.addClass( "ui-page ui-body-" + self.options.theme )
-			.bind( "pagebeforehide", function() {
-				self.removeContainerBackground();
-			} )
-			.bind( "pagebeforeshow", function() {
-				self.setContainerBackground();
-			} );
+			.addClass( "ui-page ui-body-" + this.options.theme );
 
+		this._on( this.element, {
+			pagebeforehide: "removeContainerBackground",
+			pagebeforeshow: "_handlePageBeforeShow"
+		});
 	},
-	
+
+	_handlePageBeforeShow: function( e ) {
+		this.setContainerBackground();
+	},
+
 	removeContainerBackground: function() {
 		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element.parent() ) );
 	},
-	
+
 	// set the page container background to the page theme
 	setContainerBackground: function( theme ) {
 		if ( this.options.theme ) {

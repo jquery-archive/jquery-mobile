@@ -1,5 +1,5 @@
 .ui-select { display: block; position: relative; }
-.ui-select select { position: absolute; left: -9999px; }
+.ui-select select { position: absolute; left: -9999px; top: -9999px; }
 .ui-select .ui-btn { opacity: 1; }
 .ui-field-contain .ui-select .ui-btn { margin: 0; }
 /* Fixes #2588: When Windows Phone 7.5 (Mango) tries to calculate a numeric opacity for a select (including "inherit") without explicitly specifying an opacity on the parent to give it context, a bug appears where clicking elsewhere on the page after opening the select will open the select again. */

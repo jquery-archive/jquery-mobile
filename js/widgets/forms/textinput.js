@@ -96,22 +96,18 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 
 		input.focus(function() {
+				// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
+				if ( o.preventFocusZoom ) {
+					$.mobile.zoom.disable( true );
+				}			
 				focusedEl.addClass( $.mobile.focusClass );
 			})
 			.blur(function() {
 				focusedEl.removeClass( $.mobile.focusClass );
-			})
-			// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
-			.bind( "focus", function() {
-				if ( o.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
-				}
-			})
-			.bind( "blur", function() {
 				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.enable( true );
-				}
-			});
+				}				
+			})
 
 		// Autogrow
 		if ( input.is( "textarea" ) ) {

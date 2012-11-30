@@ -52,7 +52,7 @@ define( [ "jquery",
 			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
-			dismissable: true,
+			dismissible: true,
 
 			// NOTE Windows Phone 7 has a scroll position caching issue that
 			//      requires us to disable popup history management by default
@@ -65,7 +65,7 @@ define( [ "jquery",
 		_eatEventAndClose: function( e ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-			if ( this.options.dismissable ) {
+			if ( this.options.dismissible ) {
 				this.close();
 			}
 			return false;
@@ -203,6 +203,7 @@ define( [ "jquery",
 
 			// Define instance variables
 			$.extend( this, {
+				_scrollTop: 0,
 				_page: thisPage,
 				_ui: ui,
 				_fallbackTransition: "",
@@ -701,6 +702,8 @@ define( [ "jquery",
 		_closePopup: function( e, data ) {
 			var parsedDst, toUrl;
 
+			window.scrollTo( 0, this._scrollTop );
+
 			if ( e.type === "pagebeforechange" && data ) {
 				// Determine whether we need to rapid-close the popup, or whether we can
 				// take the time to run the closing transition
@@ -717,7 +720,8 @@ define( [ "jquery",
 					this.options.container.unbind( this.options.closeEvents );
 					this._close( true );
 				} else {
-					this._close();
+					this.close();
+					e.preventDefault();
 				}
 
 				return;
@@ -746,6 +750,7 @@ define( [ "jquery",
 
 			// set the global popup mutex
 			$.mobile.popup.active = this;
+			this._scrollTop = $( window ).scrollTop();
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
@@ -812,6 +817,8 @@ define( [ "jquery",
 				return;
 			}
 
+			this._scrollTop = $( window ).scrollTop();
+
 			if( this.options.history ) {
 				$.mobile.back();
 			} else {
@@ -836,8 +843,7 @@ define( [ "jquery",
 				x: offset.left + $link.outerWidth() / 2,
 				y: offset.top + $link.outerHeight() / 2,
 				transition: $link.jqmData( "transition" ),
-				positionTo: $link.jqmData( "position-to" ),
-				link: $link
+				positionTo: $link.jqmData( "position-to" )
 			});
 		}
 

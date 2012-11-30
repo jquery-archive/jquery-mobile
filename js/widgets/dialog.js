@@ -17,6 +17,17 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		corners: true,
 		initSelector: ":jqmData(role='dialog')"
 	},
+
+	// Override the theme set by the page plugin on pageshow
+	_handlePageBeforeShow: function() {
+		this._isCloseable = true;
+		if ( this.options.overlayTheme ) {
+			this.element
+				.page( "removeContainerBackground" )
+				.page( "setContainerBackground", this.options.overlayTheme );
+		}
+	},
+
 	_create: function() {
 		var self = this,
 			$el = this.element,
@@ -51,15 +62,14 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagehide", function( e, ui ) {
 			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
-		})
-		// Override the theme set by the page plugin on pageshow
-		.bind( "pagebeforeshow", function() {
-			self._isCloseable = true;
-			if ( self.options.overlayTheme ) {
-				self.element
-					.page( "removeContainerBackground" )
-					.page( "setContainerBackground", self.options.overlayTheme );
-			}
+		});
+
+		this._on( $el, {
+			pagebeforeshow: "_handlePageBeforeShow"
+		});
+
+		$.extend( this, {
+			_createComplete: false
 		});
 
 		this._setCloseBtn( this.options.closeBtn );
@@ -76,10 +86,11 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			// Sanitize value
 			location = ( value === "left" ? "left" : "right" );
 			btn = $( "<a href='#' class='ui-btn-" + location + "' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
-			if ( $.fn.buttonMarkup ) {
+			this.element.children().find( ":jqmData(role='header')" ).prepend( btn );
+			if ( this._createComplete && $.fn.buttonMarkup ) {
 				btn.buttonMarkup();
 			}
-			this.element.children().find( ":jqmData(role='header')" ).prepend( btn );
+			this._createComplete = true;
 
 			// this must be an anonymous function so that select menu dialogs can replace
 			// the close method. This is a change from previously just defining data-rel=back
