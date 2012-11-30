@@ -62,6 +62,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el = this.element,
 			$closeLink = $el.find( "[data-rel=close]" );
 		$el.addClass( klass );
+		$el.parents( "[data-role=page]" ).addClass( "panel-page" );
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
 		}
@@ -107,12 +108,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		}
 		this._position( o );
+		this._blockPage( o.dismissible );
 		if( o.display === "push" ){
 			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
 		} else {
 			$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + o.position );
 		}
-		this._blockPage( o.dismissible );
 		$el.addClass( klass + "-active" );
 		$.mobile.panel.active = this;
 		this._trigger( "open" , "open" , { link: o.link } );
@@ -126,6 +127,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			display = $el.jqmData( "display" ),
 			dismissible = $el.jqmData( "dismissible" );
 		$el.removeClass( klass + "-active" );
+		$( "#page-block" ).remove();
 		for( var i in options ){
 			if( options.hasOwnProperty( i ) ){
 				o[ i ] = options [ i ];
@@ -135,7 +137,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		$el.removeClass( klass + "-position-" + position )
 			.removeClass( klass + "-display-" + display )
 			.removeClass( klass + "-dismissible-" + dismissible );
-		$( "#page-block" ).remove();
 		$.mobile.panel.active = false;
 		this._trigger( "close" , "close" , { link: o.link } );
 		return this;
