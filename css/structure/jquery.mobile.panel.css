@@ -1,14 +1,16 @@
 .ui-panel{
 	position: absolute;
+	display: none;
+}
+.ui-panel-position-left, .ui-panel-position-right{
+	display: block;
+	width: 25%;
+	height: 100%;
 	-webkit-transition: left 200ms ease-in-out;
 	-moz-transition: left 200ms ease-in-out;
 	-ms-transition: left 200ms ease-in-out;
 	-o-transition: left 200ms ease-in-out;
 	transition: left 200ms ease-in-out;
-}
-.ui-panel-position-left, .ui-panel-position-right{
-	width: 25%;
-	height: 100%;
 }
 .ui-panel-position-left{
 	left: -30%;
@@ -40,4 +42,11 @@
 }
 .ui-panel-display-overlay{
 	z-index: 2;
+}
+
+.ui-panel-dismiss{
+	z-index: 99999;
+}
+.ui-panel-no-dismiss{
+	z-index: 0;
 }

@@ -36,22 +36,25 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		});
 	},
-	_blockPage: function(){
-		var $div = $( "<div>" );
-		var $panel = this,
-			position = $panel.element.position,
-			slideDir = position === "left" ? "right" : "left";
-		$div.css( "z-index" , 99999)
-			.css( "width" , $( window ).width() - $( ".ui-panel" ).width() )
+	_blockPage: function( clickable ){
+		var $div = $( "<div>" ),
+			$panel = this,
+			position = $panel.element.jqmData( "position" ),
+			slideDir = position === "left" ? "right" : "left",
+			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss";
+		$div.css( "width" , "70%" )
 			.css( "height" , $.mobile.activePage.height() )
 			.css( "position" , "absolute" )
 			.css( "top" , 0 )
 			.css( slideDir , 0 )
 			.attr( "id" , "page-block" )
+			.addClass( klass )
 			.appendTo( $.mobile.activePage );
-		$div.bind( "click" , function(){
-			$panel.close();
-		});
+		if( clickable ){
+			$div.bind( "click" , function(){
+				$panel.close();
+			});
+		}
 	},
 	_create: function() {
 		var o = this.options,
@@ -109,9 +112,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		} else {
 			$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + o.position );
 		}
-		if( o.dismissible ){
-			this._blockPage();
-		}
+		this._blockPage( o.dismissible );
 		$el.addClass( klass + "-active" );
 		$.mobile.panel.active = this;
 		this._trigger( "open" , "open" , { link: o.link } );
@@ -159,7 +160,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 });
 
 $( document ).bind( "panelopen panelclose" , function( e , data ){
-	var $link = data.link;
+	var $link = data.link, $parent;
 	if( $link ){
 		$parent = $link.parent().parent();
 		if ($parent.hasClass("ui-li")) {
