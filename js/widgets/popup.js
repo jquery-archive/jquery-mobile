@@ -306,7 +306,7 @@ define( [ "jquery",
 		_setTolerance: function( value ) {
 			var tol = { t: 30, r: 15, b: 30, l: 15 };
 
-			if ( value ) {
+			if ( value !== undefined ) {
 				var ar = String( value ).split( "," );
 
 				$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
