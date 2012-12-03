@@ -14,7 +14,61 @@
 	<body>
 		<div data-role="page">
 			<div data-role="panel" id="mypanel" data-theme="a">
-				<a href="#" data-rel="close" data-role="button" data-inline="true" data-mini="true" data-theme="a" data-icon="delete">Close panel</a>
+					<style>
+					.nav-search .ui-btn-up-a {
+						background-image:none;
+						background-color:#333333;
+					}
+					.nav-search .ui-btn-inner {
+						border-top: 1px solid #888;
+						border-color: rgba(255, 255, 255, .1);
+					}
+				</style>
+		
+				<ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-2px;" class="nav-search">
+					<li data-icon="delete" style="background-color:#111;">
+						<a href="#" data-rel="close">Close menu</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a href="about/accessibility.html">Accessibility</a>
+					</li>
+					<li data-filtertext="accordions collapsible set collapsible-set collapsed">
+						<a href="content/content-collapsible-set.html">Accordions</a>
+					</li>
+					<li data-filtertext="ajax navigation model">
+						<a href="pages/page-navmodel.html">Ajax navigation model</a>
+					</li>
+					<li data-filtertext="anatomy of page viewport">
+						<a href="pages/page-anatomy.html">Anatomy of a page</a>
+					</li>
+					<li data-filtertext="events api animationComplete transition css">
+						<a href="api/events.html">Animation events</a>
+					</li>
+					<li data-filtertext="listview autodivider">
+						<a href="lists/lists-autodividers.html">Automatic listview dividers</a>
+					</li>
+					<li data-filtertext="button link submit cancel image reset mini buttonmarkup enable disable">
+						<a href="buttons/buttons-types.html">Buttons</a>
+					</li>
+					<li data-filtertext="button icon">
+						<a href="buttons/buttons-icons.html">Button icons</a>
+					</li>
+					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
+						<a href="pages/page-cache.html">Caching pages</a>
+					</li>
+					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
+						<a href="forms/checkboxes/">Checkbox</a>
+					</li>
+					<li data-filtertext="button icon">
+						<a href="buttons/buttons-icons.html">Button icons</a>
+					</li>
+					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
+						<a href="pages/page-cache.html">Caching pages</a>
+					</li>
+					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
+						<a href="forms/checkboxes/">Checkbox</a>
+					</li>
+				</ul>
 				<!-- panel content goes here -->
 			</div><!-- /panel -->
 			<div data-role="panel" id="mypanel1" data-theme="d">
