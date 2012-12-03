@@ -1,5 +1,6 @@
 .ui-panel{
 	width: 80%;
+	min-width:15em;
 }
 .ui-panel-position-left{
 	left: -85%;
@@ -47,6 +48,17 @@
 
 .ui-panel-display-overlay{
 	z-index: 2;
+}
+
+.ui-panel-display-overlay.ui-panel-active.ui-panel-position-left{
+	-moz-box-shadow: 5px 0px 25px 			rgba(0,0,0,.3);
+	-webkit-box-shadow: 5px 0px 25px 		rgba(0,0,0,.3);
+	box-shadow: 5px 0px 25px 				rgba(0,0,0,.3);
+}
+.ui-panel-display-overlay.ui-panel-active.ui-panel-position-right{
+	-moz-box-shadow: -5px 0px 25px 			rgba(0,0,0,.3);
+	-webkit-box-shadow: -5px 0px 25px 		rgba(0,0,0,.3);
+	box-shadow: -5px 0px 25px 				rgba(0,0,0,.3);
 }
 
 .ui-panel-dismiss{
