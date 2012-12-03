@@ -67,6 +67,7 @@
 				<p>Alternately, it's possible to add the panel markup after the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want to page content to read for people experiencing the page in a C-grade device (HTML only) or for a screen reader.</p>
 
 				<h2>Opening a panel from a link</h2>
+				
 				<p>A panel's visibility is toggled by a link somewhere on the page or by calling the panel's <code>open</code> and <code>close</code> methods directly.</p>
 
 				<p>To have a link control a panel, add a link with an <code>href</code> that references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above.</p>
@@ -76,10 +77,22 @@
 <pre><code>
 &lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Menu&lt;/a&gt;
 </code></pre>
-				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens. Clicking out of the panel, clicking the link again, or hitting the Esc key will all close the panel.</p>
+				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (pan mode). Clicking out of the panel, clicking the link again, or hitting the Esc key will all close the panel.</p>
 				<a href="#mypanel" data-rel="panel" data-display="push" data-position="left">Menu</a>
 
-				
+				<h2>Setting panel display mode</h2>
+
+				<p>Panels can display in three different ways. The default display mode is <code>pan</code> but this can be set on each link by adding the <code>data-display</code> attribute and specifying a display mode.</p>
+
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan">pan</a></code> (default)</dt><dd>The panel shifts the viewport over open, partially obscuring part of the page when it pushes it out of view.</dd>
+				</dl>
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="push">push</a></code></dt><dd>The panel behaves just like pan at narrow widths. At wider viewports, the content re-flows to make room for the panel so it can stay open.</dd>
+				</dl>
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="overlay">overlay</a></code></dt><dd>The panel slides over the content like a standard menu.</dd>
+				</dl>
 			</div><!-- /content -->
 			<div data-role="footer" class="footer-docs" data-theme="c">
 				<p class="jqm-version"></p>
