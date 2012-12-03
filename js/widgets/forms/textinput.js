@@ -90,7 +90,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			toggleClear();
 
-			input.bind( "paste cut keyup focus change blur", toggleClear );
+			input.bind( "paste cut keyup input focus change blur", toggleClear );
 		}
 		else if ( !inputNeedsWrap && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
