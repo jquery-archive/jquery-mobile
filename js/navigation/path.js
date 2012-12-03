@@ -351,7 +351,7 @@ define([
 						preservedHash = "";
 					}
 
-					if( preservedHash.indexOf( "#" ) == -1 && preservedHash !== "" ){
+					if( preservedHash.indexOf( "#" ) === -1 && preservedHash !== "" ){
 						preservedHash = "#" + preservedHash;
 					}
 
