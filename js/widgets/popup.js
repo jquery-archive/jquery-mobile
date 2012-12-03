@@ -540,7 +540,8 @@ define( [ "jquery",
 		},
 
 		_open: function( options ) {
-			var coords, transition,
+			var coords,
+				o = $.extend( {}, this.options, options ),
 				androidBlacklist = ( function() {
 					var w = window,
 						ua = navigator.userAgent,
@@ -558,16 +559,10 @@ define( [ "jquery",
 					return false;
 				}());
 
-			// Make sure options is defined
-			options = ( options || {} );
-
-			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
-			transition = options.transition || this.options.transition;
-
 			// Give applications a chance to modify the contents of the container before it appears
 			this._trigger( "beforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( options.x, options.y, options.positionTo || this.options.positionTo || "origin" ) );
+			coords = this._placementCoords( this._desiredCoords( o.x, o.y, o.positionTo ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -577,12 +572,8 @@ define( [ "jquery",
 				$.noop,
 				$.proxy( this, "_openPrereqsComplete" ) );
 
-			if ( transition ) {
-				this._currentTransition = transition;
-				this._applyTransition( transition );
-			} else {
-				transition = this.options.transition;
-			}
+			this._currentTransition = o.transition;
+			this._applyTransition( o.transition );
 
 			if ( !this.options.theme ) {
 				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
@@ -613,7 +604,7 @@ define( [ "jquery",
 			}
 			this._animate({
 				additionalCondition: true,
-				transition: transition,
+				transition: o.transition,
 				classToRemove: "",
 				screenClassToAdd: "in",
 				containerClassToAdd: "in",
@@ -663,7 +654,7 @@ define( [ "jquery",
 
 			this._animate( {
 				additionalCondition: this._ui.screen.hasClass( "in" ),
-				transition: ( immediate ? "none" : ( this._currentTransition || this.options.transition ) ),
+				transition: ( immediate ? "none" : ( this._currentTransition ) ),
 				classToRemove: "in",
 				screenClassToAdd: "out",
 				containerClassToAdd: "reverse out",
