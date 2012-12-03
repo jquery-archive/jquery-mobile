@@ -14,11 +14,11 @@
 	<body>
 		<div data-role="page">
 			<div data-role="panel" id="mypanel" data-theme="a">
-				<a href="#" data-rel="close">Close panel</a>
+				<a href="#" data-rel="close" data-role="button" data-inline="true" data-mini="true" data-theme="a" data-icon="delete">Close panel</a>
 				<!-- panel content goes here -->
 			</div><!-- /panel -->
-			<div data-role="panel" id="mypanel1" data-theme="a">
-				<a href="#" data-rel="close">Close panel 2</a>
+			<div data-role="panel" id="mypanel1" data-theme="d">
+				<a href="#" data-rel="close" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Close panel 2</a>
 				<!-- panel content goes here -->
 			</div><!-- /panel -->
 			<div data-role="header" data-theme="f">
@@ -30,25 +30,27 @@
 				<h1>Panels</h1>
 				<p>Panels can be used for a wide variety of purposes in a sote or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more.</p>
 
-				<h2>Pan Panel</h2>
-				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="left">Left</a>
-				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="right">Right</a>
-				<h2>Overlay Panel</h2>
-				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="left">Left</a>
-				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="right">Right</a>
-				<h2>Pan Panel 2</h2>
-				<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="left" data-dismissible="false">Left</a>
-				<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="right" data-dismissible="false">Right</a>
-				<h2>Overlay Panel 2</h2>
-				<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="left" data-dismissible="true">Left</a>
-				<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="right" data-dismissible="false">Right</a>
-
-				<p>A panel must sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>before</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
+				<h3>Left Panel: Nav</h3>
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="left" data-dismissible="true">Pan</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="push" data-position="left" data-dismissible="true">Push</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="left" data-dismissible="true">Overlay</a>
+				</div>
+				
+				<h3>Right Panel: Details</h3>
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="right" data-dismissible="true">Pan</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="push" data-position="right" data-dismissible="true">Push</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="right" data-dismissible="true">Overlay</a>
+				</div>
+				
 
 				<h2>Basic panel markup</h2>
 				<p>A panel consists of a container with a <code>data-role=&quot;panel&quot;</code> attribute and a unique <code>ID</code>. This <code>ID</code> will be referenced by the link or button to open and close the panel.</p>
+				
+				<p>A panel must sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>before</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
 
-				<p>The panel container must be immediately inside the page container. Here is an example of the panel before the header, content and footer in the source order:</p>
+				<p>Here is an example of the panel before the header, content and footer in the source order:</p>
 
 				<pre><code>
 &lt;div data-role=&quot;page&quot;&gt;			
