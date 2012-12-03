@@ -134,6 +134,65 @@
 				<dl>
 					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan" data-position="left" data-dismissible="false">false</a></code></dt><dd>The panel will not auto-close when a user taps outside the panel. Recommended for the <code>push</code> display mode to allow a user to interact with the page when the panel is seen at wider widths.</dd>
 				</dl>
+
+
+
+				<h2>Options</h2>
+
+				<dl>
+					<dt><code>classes.panel</code> default: "ui-panel"</dt>
+					<dd>The <code>classes</code> option has two properties that define the structural classnames that the plugin uses. This is only configurable via JavaScript because it expects an object literal value. </dd>
+
+					<dt><code>dismissible</code> default: true</dt>
+					<dd>Sets whether the panel can be closed by clicking outside onto the page. Also available via the <code>data-dismissible</code> attribute on the link that opens the popup.</dd>
+
+					<dt><code>display</code> default: "pan"</dt>
+					<dd>The relationship of the panel to the page contents. Can either push the page over ("pan"), re-flow the content to fit the panel content as a column ("push"), or sit over the content ("overlay"). Also available via the <code>data-display</code> attribute on the link that opens the popup.</dd>
+
+					<dt><code>initSelector</code> default: ":jqmData(role='panel')"</dt>
+					<dd>The role (or and valid jQuery selector) used to trigger auto-initialization of the panel widget.</dd>
+
+					<dt><code>position</code> default: "left"</dt>
+					<dd>The side of the screen the panel appears on. Values can be "left" or "right. Also available via the <code>data-position</code> attribute on the link that opens the popup.</dd>
+
+					<dt><code>theme</code> default: null</dt>
+					<dd>Theme swatch for the panel. Can be any valid swatch letter in your theme (a-z). Also available via the <code>data-theme</code> attribute on the popup container.</dd>
+
+				</dl>
+
+
+
+				<h2>Methods</h2>
+
+				<dl>
+					<dt><code>close</code></dt>
+					<dd>Closes the panel.
+					.<pre><code>$( myPanel ).panel( "close" );</code></pre>
+					</dd>
+
+					<dt><code>open</code></dt>
+					<dd>Opens the panel.
+					<pre><code>$( myPanel ).panel( "open" );</code></pre>
+					</dd>
+
+					<dt><code>refresh</code></dt>
+					<dd>Re-enhances any new markup in the panel.
+					<pre><code>$( myPanel ).panel( "refresh" );</code></pre>
+					</dd>
+
+					<dt><code>toggle</code></dt>
+					<dd>Toggles the visibility the panel so it will open a closed panel or close and open panel.
+					<pre><code>$( myPanel ).panel( "toggle" );</code></pre>
+					</dd>
+				</dl>
+
+
+				<h2>Events</h2>
+
+				<dl>
+					<dt><code>create</code> Type: panelcreate</dt>
+					<dd>Triggered when the panel is created.</dd>
+				</dl>
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
