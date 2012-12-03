@@ -35,7 +35,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			clearbtn,
 			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
 			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
-			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist;
+			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist,
+			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" );
 
 		function toggleClear() {
 			setTimeout( function() {
@@ -64,7 +65,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		//"search" and "text" input widgets
 		if ( isSearch ) {
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-		} else if ( input.is( "input" ) ) {
+		} else if ( inputNeedsWrap ) {
 			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
 		}
 
@@ -89,9 +90,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			toggleClear();
 
-			input.bind( "paste cut keyup focus change blur", toggleClear );
+			input.bind( "paste cut keyup input focus change blur", toggleClear );
 		}
-		else if ( input.is( "textarea" ) ) {
+		else if ( !inputNeedsWrap && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
