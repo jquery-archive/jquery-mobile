@@ -38,13 +38,13 @@
 				$uipanel.on( "panelopen" , function(){
 					var $this = $( this );
 					position = $this.hasClass( "ui-panel-position-right" );
-					display = $this.hasClass( "ui-panel-display-push" );
+					display = $this.hasClass( "ui-panel-display-pan" );
 					dismissible = $this.hasClass( "ui-panel-dismissible-true" );
 				});
 				$uipanel.on( "panelclose" , function(){
 					var $this = $( this );
 					position = $this.hasClass( "ui-panel-position-right" );
-					display = $this.hasClass( "ui-panel-display-push" );
+					display = $this.hasClass( "ui-panel-display-pan" );
 					dismissible = $this.hasClass( "ui-panel-dismissible-true" );
 				});
 			},
@@ -52,7 +52,7 @@
 				$panel.open({
 					position: "right",
 					dismissible: "true",
-					display: "push"
+					display: "pan"
 				});
 			},
 			function() {
@@ -142,7 +142,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "left" , "Link-1: Position upon clicking link is 'left'" );
 						equal( $panel.element.jqmData( "dismissible" ) , true , "Link-1: Dimissible upon clicking link is true" );
-						equal( $panel.element.jqmData( "display" ) , "push" , "Link-1: Display upon clicking link is push" );
+						equal( $panel.element.jqmData( "display" ) , "pan" , "Link-1: Display upon clicking link is pan" );
 				} , 800 );
 			},
 			function() {
@@ -166,7 +166,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "left" , "Link-3: Position upon clicking link is 'left'" );
 						equal( $panel.element.jqmData( "dismissible" ) , false , "Link-3: Dimissible upon clicking link is false" );
-						equal( $panel.element.jqmData( "display" ) , "push" , "Link-3: Display upon clicking link is push" );
+						equal( $panel.element.jqmData( "display" ) , "pan" , "Link-3: Display upon clicking link is pan" );
 				} , 800 );
 			},
 			function() {
@@ -190,7 +190,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
 						equal( $panel.element.jqmData( "dismissible" ) , true , "Dimissible upon clicking link is true" );
-						equal( $panel.element.jqmData( "display" ) , "push" , "Display upon clicking link is push" );
+						equal( $panel.element.jqmData( "display" ) , "pan" , "Display upon clicking link is pan" );
 				} , 800 );
 			},
 			function() {
@@ -214,7 +214,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
 						equal( $panel.element.jqmData( "dismissible" ) , false , "Dimissible upon clicking link is false" );
-						equal( $panel.element.jqmData( "display" ) , "push" , "Display upon clicking link is push" );
+						equal( $panel.element.jqmData( "display" ) , "pan" , "Display upon clicking link is pan" );
 				} , 800 );
 			},
 			function() {

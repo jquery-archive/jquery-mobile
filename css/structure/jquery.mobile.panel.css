@@ -1,20 +1,8 @@
 .ui-panel{
-	position: absolute;
-	display: none;
-	width: 25%;
-	height: 100%;
+	width: 80%;
 }
-.ui-panel-position-left, .ui-panel-position-right{
-	display: block;
-	-webkit-transition: left 200ms ease-in-out;
-	-moz-transition: left 200ms ease-in-out;
-	-ms-transition: left 200ms ease-in-out;
-	-o-transition: left 200ms ease-in-out;
-	transition: left 200ms ease-in-out;
-}
-
 .ui-panel-position-left{
-	left: -30%;
+	left: -85%;
 }
 .ui-panel-position-right{
 	left: 100%;
@@ -23,7 +11,29 @@
 	left: 0;
 }
 .ui-panel-position-right.ui-panel-active{
-	left: 75%;
+	left: 20%;
+}
+
+.panel-page .panel-shift-left{
+	left:80%;
+}
+.panel-page .panel-shift-right{
+	right:80%;
+}
+
+.ui-panel{
+	position: absolute;
+	display: none;
+	height: 100%;
+}
+
+.ui-panel-position-left, .ui-panel-position-right{
+	display: block;
+	-webkit-transition: left 200ms ease-in-out;
+	-moz-transition: left 200ms ease-in-out;
+	-ms-transition: left 200ms ease-in-out;
+	-o-transition: left 200ms ease-in-out;
+	transition: left 200ms ease-in-out;
 }
 
 .panel-page .ui-content, .panel-page .ui-header, .panel-page .ui-footer {
@@ -35,12 +45,6 @@
 	transition: left 200ms ease-in-out, right 200ms ease-in-out;
 }
 
-.panel-page .panel-shift-left{
-	left:25%;
-}
-.panel-page .panel-shift-right{
-	right:25%;
-}
 .ui-panel-display-overlay{
 	z-index: 2;
 }
@@ -54,4 +58,30 @@
 
 .hidden{
 	display: none;
+}
+
+@media screen and (min-width: 30em){
+	.ui-panel{
+		width: 25%;
+	}
+
+	.ui-panel-position-left{
+		left: -30%;
+	}
+	.ui-panel-position-right{
+		left: 100%;
+	}
+	.ui-panel-position-left.ui-panel-active{
+		left: 0;
+	}
+	.ui-panel-position-right.ui-panel-active{
+		left: 75%;
+	}
+
+	.panel-page .panel-shift-left{
+		left:25%;
+	}
+	.panel-page .panel-shift-right{
+		right:25%;
+	}
 }

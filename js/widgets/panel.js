@@ -18,7 +18,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		link: null,
 		position: "left",
 		dismissible: true,
-		display: "push",
+		display: "pan",
 		initSelector: ":jqmData(role='panel')"
 	},
 	_handleLink: function( roleType , callback ){
@@ -121,9 +121,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		})
 		.then( function(){
 			$el.addClass( klass + "-active" );
-			if( o.display === "push" ){
+			if( o.display === "pan" ){
 				$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
 			}
+			self._trigger( "open" , "open" , { link: o.link } );
 			deferred.resolve();
 		});
 		return deferred.promise();
