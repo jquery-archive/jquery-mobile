@@ -15,7 +15,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panel: "ui-panel"
 		},
 		theme: null,
-		link: null,
 		position: "left",
 		dismissible: true,
 		display: "pan",
