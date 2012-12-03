@@ -28,17 +28,18 @@
 			</div><!-- /header -->
 			<div data-role="content">
 				<h1>Panels</h1>
-				<p>Panels can be used for a wide variety of purposes in a sote or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more.</p>
+				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
 
-				<h3>Left Panel: Nav</h3>
+				<a href="#mypanel" data-rel="panel" data-role="button" data-inline="true">Default panel</a>
+
+				<h4>Left Panel: Navigation example</h4>
 				<div data-role="controlgroup" data-type="horizontal">
 					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="left" data-dismissible="true">Pan</a>
 					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="push" data-position="left" data-dismissible="true">Push</a>
 					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="left" data-dismissible="true">Overlay</a>
-					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel">Default</a>
 				</div>
 				
-				<h3>Right Panel: Details</h3>
+				<h4>Right Panel: Detail panel</h4>
 				<div data-role="controlgroup" data-type="horizontal">
 					<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="right" data-dismissible="true">Pan</a>
 					<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="push" data-position="right" data-dismissible="true">Push</a>
@@ -73,23 +74,32 @@
 				
 				<p>A panel's visibility is toggled by a link somewhere on the page or by calling the panel's <code>open</code> method directly.</p>
 
-				<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above.</p>
+				<pre><code>$( "#idofpanel" ).panel( "open" , optionsHash );</code></pre>
 
-				<p>To this link, add a <code>data-rel="panel"</code> attribute. This instructs the framework to bind the link to the popup. This link will toggle the visibility of the popup so tapping it will open the panel, and tapping it again will close it.</p>
+				<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above), and  add the <code>data-rel="panel"</code> attribute. This instructs the framework to bind the link to the popup. This link will toggle the visibility of the popup so tapping it will open the panel, and tapping it again will close it.</p>
 
-<pre><code>
-&lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Open panel&lt;/a&gt;
+				<pre><code>&lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Open panel&lt;/a&gt;</code></pre>
+
+				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (pan mode). Here is a panel link with the defaults:</p>
+				<a href="#mypanel" data-rel="panel">Open panel</a>
+
+				<p>When using markup to control panels, you can only have a single panel open at once. Clicking a link to open a panel while one is already open will auto-close the first. This is done to keep the markup-only configuration simple.</p>
+
+				<p>That said, it's possible to open multiple panels at once programmatically:</p>
+				<pre><code>
+$( "#idofpanel" )
+.panel( "open" , optionsHash )
+.then( function( options ){
+	$( "#idofpanel2" ).panel( "open" , options );
+});
 </code></pre>
-				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (pan mode). </p>
-				<a href="#mypanel" data-rel="panel" data-display="push" data-position="left">Open panel</a>
-
-				<p>Using markup to control panels, can only have a single panel open at once so clicking a link to open a panel while one is already open will auto-close the first. This is done to keep the markup-only configuration simple.</p>
-
-				That said, it's possible to use JavaScript to open multiple panels at once, like this:
 
 				<h2>Closing a panel</h2>
 				
 				<p>Clicking the link that opened the panel, or tapping the Esc key will close the panel. A panel can also be closed by calling the panel's <code>close</code> methods directly.</p>
+
+				<pre><code>$( "#idofpanel" ).panel( "close" );</code></pre>
+
 
 				<p>By default, clicking out of the panel onto the page will also close the panel. This behavior can be controlled via the <code>dismissible</code> option.</p>
 
