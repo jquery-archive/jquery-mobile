@@ -23,7 +23,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 	_handleLink: function( roleType , callback ){
 		var elId = this.element.attr( "id" ),
-			defaultOptions = this.options;
+			self = this;
 		$( document ).bind( "pagebeforechange", function( e, data ) {
 			var $link, id;
 			if ( data.options.role === roleType ) {
@@ -31,7 +31,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				$link = data.options.link;
 				id = $link.attr( "href" ).split( "#" )[1];
 				if( elId === id ){
-					callback( $link , id , defaultOptions );
+					callback.call( self , $link , id );
 				}
 				return false;
 			}
@@ -71,15 +71,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
 		}
-		this._handleLink( "panel" , function( $link , id , options ){
-			var o = {
-				position: $link.jqmData( "position" ),
-				dismissible: $link.jqmData( "dismissible" ),
-				display: $link.jqmData( "display" )
-			};
-			for( var i in o ){
-				if( o.hasOwnProperty( i ) && typeof o[ i ] !== "undefined" ){
-					options[ i ] = o[ i ];
+		this._handleLink( "panel" , function( $link , id ){
+			var options = $.extend( {} , this.options ),
+				op = {
+					position: $link.jqmData( "position" ),
+					dismissible: $link.jqmData( "dismissible" ),
+					display: $link.jqmData( "display" )
+				};
+			for( var i in op ){
+				if( op.hasOwnProperty( i ) && typeof op[ i ] !== "undefined" ){
+					options[ i ] = op[ i ];
 				}
 			}
 			$( "#" + id ).panel( "toggle" , {
@@ -118,7 +119,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	open: function( options , toggle ){
 		var self = this;
 		var deferred = $.Deferred();
-		var o = this.options,
+		var o = $.extend( {} , this.options ),
 			klass = o.classes.panel,
 			$el = this.element;
 		for( var i in options ){
@@ -131,18 +132,20 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			return self._blockPage( o.dismissible , o.position );
 		})
 		.then( function(){
+			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , function(){
+				self._trigger( "open" , "open" , { link: o.link } );
+				deferred.resolve();
+			});
 			$el.addClass( klass + "-active" );
 			if( o.display === "pan" ){
 				$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
 			}
-			self._trigger( "open" , "open" , { link: o.link } );
-			deferred.resolve();
 		});
 		return deferred.promise();
 	},
 	close: function( options , toggle ){
 		var deferred = $.Deferred();
-		var o = this.options,
+		var o = $.extend( {} , this.options ),
 			klass = o.classes.panel,
 			$el = this.element,
 			position = $el.jqmData( "position" ),
