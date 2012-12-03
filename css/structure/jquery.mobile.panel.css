@@ -1,5 +1,6 @@
 .ui-panel{
 	width: 80%;
+	border:0;
 }
 .ui-panel-position-left{
 	left: -85%;
