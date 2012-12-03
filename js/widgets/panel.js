@@ -201,6 +201,12 @@ $( document ).bind( "panelopen panelclose" , function( e , data ){
 	}
 });
 
+$(document).keyup(function(e) {
+	if( e.keyCode == 27 && $( ".ui-panel-active" ).length ){
+		$( ".ui-panel-active" ).data( "mobile-panel" ).close();
+	}
+});
+
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.panel.prototype.enhanceWithin( e.target );
