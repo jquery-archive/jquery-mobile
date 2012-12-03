@@ -36,25 +36,29 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		});
 	},
-	_blockPage: function( clickable ){
+	_blockPage: function( clickable , position ){
+		var deferred = $.Deferred();
 		var $div = $( "<div>" ),
 			$panel = this,
-			position = $panel.element.jqmData( "position" ),
 			slideDir = position === "left" ? "right" : "left",
 			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss";
-		$div.css( "width" , "70%" )
-			.css( "height" , $.mobile.activePage.height() )
-			.css( "position" , "absolute" )
-			.css( "top" , 0 )
-			.css( slideDir , 0 )
-			.attr( "id" , "page-block" )
-			.addClass( klass )
-			.appendTo( $.mobile.activePage );
-		if( clickable ){
-			$div.bind( "click" , function(){
-				$panel.close();
-			});
-		}
+		setTimeout(function(){
+			$div.css( "width" , "70%" )
+				.css( "height" , $.mobile.activePage.height() )
+				.css( "position" , "absolute" )
+				.css( "top" , 0 )
+				.css( slideDir , 0 )
+				.attr( "id" , "page-block" )
+				.addClass( klass )
+				.appendTo( $.mobile.activePage );
+			if( clickable ){
+				$div.bind( "vclick" , function(){
+					$panel.close();
+				});
+			}
+			deferred.resolve();
+		}, 0); // TODO get rid of setTimeout 0 hacks
+		return deferred.promise();
 	},
 	_create: function() {
 		var o = this.options,
@@ -74,7 +78,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				link: $link
 			});
 		});
-		$closeLink.on( "click" , function( e ){
+		$closeLink.on( "vclick" , function( e ){
 			e.preventDefault();
 			$el.panel( "close" );
 			return false;
@@ -86,19 +90,22 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = options,
 			klass = o.classes.panel,
 			$el = this.element;
-		$el.addClass( klass + "-position-" + o.position )
-			.addClass( klass + "-dismissible-" + o.dismissible )
-			.addClass( klass + "-display-" + o.display )
-			.jqmData( "position" , o.position )
-			.jqmData( "display" , o.display )
-			.jqmData( "dismissible" , o.dismissible );
 		setTimeout(function(){
-			deferred.resolve( options );
-		}, 0);
+			$el.addClass( "hidden" )
+				.addClass( klass + "-position-" + o.position )
+				.addClass( klass + "-dismissible-" + o.dismissible )
+				.addClass( klass + "-display-" + o.display )
+				.jqmData( "position" , o.position )
+				.jqmData( "display" , o.display )
+				.jqmData( "dismissible" , o.dismissible )
+				.removeClass( "hidden" );
+				deferred.resolve( options );
+		}, 0); // TODO get rid of setTimeout 0 hacks
 		return deferred.promise();
 	},
 	_destroy: function(){},
 	open: function( options , toggle ){
+		var self = this;
 		var deferred = $.Deferred();
 		var o = this.options,
 			klass = o.classes.panel,
@@ -108,9 +115,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				o[ i ] = options[ i ];
 			}
 		}
-		this._blockPage( o.dismissible );
 		this._position( o )
-		.then( function( o ){
+		.then( function(){
+			return self._blockPage( o.dismissible , o.position );
+		})
+		.then( function(){
 			$el.addClass( klass + "-active" );
 			if( o.display === "push" ){
 				$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
@@ -135,9 +144,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( toggle ){
 			$el.addClass( "ui-panel-toggle" );
 		}
-		$el.removeClass( klass + "-active" );
-		$( "#page-block" ).remove();
-		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position );
 
 		$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , function(){
 			var $this = $( this );
@@ -147,6 +153,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$this.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
 			deferred.resolve( o , toggle );
 		});
+
+		$el.removeClass( klass + "-active" );
+		$( "#page-block" ).remove();
+		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position );
 		return deferred.promise();
 	},
 	toggle: function( options ){
