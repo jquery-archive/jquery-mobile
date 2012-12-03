@@ -1,6 +1,5 @@
 .ui-panel{
 	width: 80%;
-	min-width:15em;
 }
 .ui-panel-position-left{
 	left: -85%;
@@ -30,20 +29,20 @@
 
 .ui-panel-position-left, .ui-panel-position-right{
 	display: block;
-	-webkit-transition: left 200ms ease-in-out;
-	-moz-transition: left 200ms ease-in-out;
-	-ms-transition: left 200ms ease-in-out;
-	-o-transition: left 200ms ease-in-out;
-	transition: left 200ms ease-in-out;
+	-webkit-transition: left 200ms ease;
+	-moz-transition: left 200ms ease;
+	-ms-transition: left 200ms ease;
+	-o-transition: left 200ms ease;
+	transition: left 200ms ease;
 }
 
 .panel-page .ui-content, .panel-page .ui-header, .panel-page .ui-footer {
 	position: relative;
-	-webkit-transition: left 200ms ease-in-out, right 200ms ease-in-out;
-	-moz-transition: left 200ms ease-in-out, right 200ms ease-in-out;
-	-ms-transition: left 200ms ease-in-out, right 200ms ease-in-out;
-	-o-transition: left 200ms ease-in-out, right 200ms ease-in-out;
-	transition: left 200ms ease-in-out, right 200ms ease-in-out;
+	-webkit-transition: left 200ms ease, right 200ms ease;
+	-moz-transition: left 200ms ease, right 200ms ease;
+	-ms-transition: left 200ms ease, right 200ms ease;
+	-o-transition: left 200ms ease, right 200ms ease;
+	transition: left 200ms ease, right 200ms ease;
 }
 
 .ui-panel-display-overlay{
