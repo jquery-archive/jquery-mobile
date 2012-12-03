@@ -66,19 +66,35 @@
 
 				<p>Alternately, it's possible to add the panel markup after the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want to page content to read for people experiencing the page in a C-grade device (HTML only) or for a screen reader.</p>
 
-				<h2>Opening a panel from a link</h2>
+				<h2>Opening a panel</h2>
 				
-				<p>A panel's visibility is toggled by a link somewhere on the page or by calling the panel's <code>open</code> and <code>close</code> methods directly.</p>
+				<p>A panel's visibility is toggled by a link somewhere on the page or by calling the panel's <code>open</code> method directly.</p>
 
-				<p>To have a link control a panel, add a link with an <code>href</code> that references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above.</p>
+				<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above.</p>
 
 				<p>To this link, add a <code>data-rel="panel"</code> attribute. This instructs the framework to bind the link to the popup. This link will toggle the visibility of the popup so tapping it will open the panel, and tapping it again will close it.</p>
 
 <pre><code>
-&lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Menu&lt;/a&gt;
+&lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Open panel&lt;/a&gt;
 </code></pre>
-				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (pan mode). Clicking out of the panel, clicking the link again, or hitting the Esc key will all close the panel.</p>
-				<a href="#mypanel" data-rel="panel" data-display="push" data-position="left">Menu</a>
+				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (pan mode). </p>
+				<a href="#mypanel" data-rel="panel" data-display="push" data-position="left">Open panel</a>
+
+				<p>Using markup to control panels, can only have a single panel open at once so clicking a link to open a panel while one is already open will auto-close the first. This is done to keep the markup-only configuration simple.</p>
+
+				That said, it's possible to use JavaScript to open multiple panels at once, like this:
+
+				<h2>Closing a panel</h2>
+				
+				<p>Clicking the link that opened the panel, or tapping the Esc key will close the panel. A panel can also be closed by calling the panel's <code>close</code> methods directly.</p>
+
+				<p>By default, clicking out of the panel onto the page will also close the panel. This behavior can be controlled via the <code>dismissible</code> option.</p>
+
+				<p>It's common to also add a close button inside the panel. To add a link that will close a panel, add a link somewhere inside the panel that has the <code>data-rel="close"</code> attribute. This will tell the framework to close that panel.</p>
+
+<pre><code>
+&lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;close&quot;</strong>&gt;Close panel&lt;/a&gt;
+</code></pre>
 
 				<h2>Setting panel display mode</h2>
 
@@ -88,7 +104,7 @@
 					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan"data-position="left" data-dismissible="true">pan</a></code> (default)</dt><dd>The panel shifts the viewport over open, partially obscuring part of the page when it pushes it out of view.</dd>
 				</dl>
 				<dl>
-					<dt><code><a href="#mypanel" data-rel="panel" data-display="push" data-position="left" data-dismissible="false">push</a></code></dt><dd>The panel behaves just like pan at narrow widths. At wider viewports, the content re-flows to make room for the panel so it can stay open.</dd>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="push" data-position="left" data-dismissible="false">push</a></code></dt><dd>The panel behaves just like pan at narrow widths but at wider viewports (above 600 pixels), the content re-flows to make room for the panel so it can stay open permanently. Note that at wider screens, the <code>dismissible</code> option will be set to <code>false</code> so you can interact with both the panel and page.</dd>
 				</dl>
 				<dl>
 					<dt><code><a href="#mypanel" data-rel="panel" data-display="overlay" data-position="left" data-dismissible="true">overlay</a></code></dt><dd>The panel slides over the content like a standard menu.</dd>
@@ -103,6 +119,17 @@
 				</dl>
 				<dl>
 					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan" data-position="right" data-dismissible="true">right</a></code></dt><dd>The panel will slide in from the right edge of the page.</dd>
+				</dl>
+
+				<h2>Setting dismiss behavior</h2>
+
+				<p>Clicking outside of an open panel will close the panel by default. This behavior can be prevented by adding the <code>data-dismissible</code> attribute to the link and specifying <code>true</code> or <code>false</code>.</p>
+
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan"data-position="left" data-dismissible="true">true</a></code> (default)</dt><dd>The panel will auto-close when a user taps outside the panel.</dd>
+				</dl>
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan" data-position="left" data-dismissible="false">false</a></code></dt><dd>The panel will not auto-close when a user taps outside the panel. Recommended for the <code>push</code> display mode to allow a user to interact with the page when the panel is seen at wider widths.</dd>
 				</dl>
 			</div><!-- /content -->
 
