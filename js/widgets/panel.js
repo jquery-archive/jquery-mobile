@@ -82,76 +82,85 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		this._trigger( "create" );
 	},
 	_position: function( options ){
-		var o = this.options,
+		var deferred = $.Deferred();
+		var o = options,
 			klass = o.classes.panel,
 			$el = this.element;
-		for( var i in options ){
-			if( options.hasOwnProperty( i ) ){
-				o[ i ] = options [ i ];
-			}
-		}
 		$el.addClass( klass + "-position-" + o.position )
 			.addClass( klass + "-dismissible-" + o.dismissible )
 			.addClass( klass + "-display-" + o.display )
 			.jqmData( "position" , o.position )
 			.jqmData( "display" , o.display )
 			.jqmData( "dismissible" , o.dismissible );
+		setTimeout(function(){
+			deferred.resolve( options );
+		}, 0);
+		return deferred.promise();
 	},
 	_destroy: function(){},
-	open: function( options ){
+	open: function( options , toggle ){
 		var o = this.options,
 			klass = o.classes.panel,
 			$el = this.element;
 		for( var i in options ){
 			if( options.hasOwnProperty( i ) ){
-				o[ i ] = options [ i ];
+				o[ i ] = options[ i ];
 			}
 		}
-		this._position( o );
 		this._blockPage( o.dismissible );
-		if( o.display === "push" ){
-			$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
-		} else {
-			$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + o.position );
-		}
-		$el.addClass( klass + "-active" );
-		$.mobile.panel.active = this;
-		this._trigger( "open" , "open" , { link: o.link } );
+		this._position( o )
+		.then( function( o ){
+			$el.addClass( klass + "-active" );
+			if( o.display === "push" ){
+				$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
+			}
+		});
 		return this;
 	},
-	close: function( options ){
+	close: function( options , toggle ){
+		var deferred = $.Deferred();
 		var o = this.options,
 			klass = o.classes.panel,
 			$el = this.element,
 			position = $el.jqmData( "position" ),
 			display = $el.jqmData( "display" ),
 			dismissible = $el.jqmData( "dismissible" );
-		$el.removeClass( klass + "-active" );
-		$( "#page-block" ).remove();
 		for( var i in options ){
 			if( options.hasOwnProperty( i ) ){
-				o[ i ] = options [ i ];
+				o[ i ] = options[ i ];
 			}
 		}
+		if( toggle ){
+			$el.addClass( "ui-panel-toggle" );
+		}
+		$el.removeClass( klass + "-active" );
+		$( "#page-block" ).remove();
 		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position );
-		$el.removeClass( klass + "-position-" + position )
-			.removeClass( klass + "-display-" + display )
-			.removeClass( klass + "-dismissible-" + dismissible );
-		$.mobile.panel.active = false;
-		this._trigger( "close" , "close" , { link: o.link } );
-		return this;
+
+		$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , function(){
+			var $this = $( this );
+			$this.removeClass( klass + "-position-" + position )
+				.removeClass( klass + "-display-" + display )
+				.removeClass( klass + "-dismissible-" + dismissible );
+			$this.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
+			deferred.resolve( o , toggle );
+		});
+		return deferred.promise();
 	},
 	toggle: function( options ){
 		var $el = this.element,
-			active = $.mobile.panel.active;
+			active = $( ".ui-panel-active" ).data( "mobile-panel" ),
+			self = this;
 		if( active &&
 				( active.element.jqmData( "position") === options.position ) &&
 				( active.element.attr( "id" ) === $el.attr( "id" ) ) &&
 				( active.element.jqmData( "display" ) === options.display ) ){
 			return active.close( options );
 		} else if ( active ){
-			active.close( options );
-			return this.open( options );
+			active.close( options , true ).
+			then( function( options , toggle ){
+				self.open( options , toggle );
+			});
 		} else {
 			return this.open( options );
 		}
@@ -170,6 +179,7 @@ $( document ).bind( "panelopen panelclose" , function( e , data ){
 		$link.removeClass( $.mobile.activeBtnClass );
 	}
 });
+
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.panel.prototype.enhanceWithin( e.target );

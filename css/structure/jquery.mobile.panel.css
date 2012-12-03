@@ -1,17 +1,18 @@
 .ui-panel{
 	position: absolute;
 	display: none;
+	width: 25%;
+	height: 100%;
 }
 .ui-panel-position-left, .ui-panel-position-right{
 	display: block;
-	width: 25%;
-	height: 100%;
 	-webkit-transition: left 200ms ease-in-out;
 	-moz-transition: left 200ms ease-in-out;
 	-ms-transition: left 200ms ease-in-out;
 	-o-transition: left 200ms ease-in-out;
 	transition: left 200ms ease-in-out;
 }
+
 .ui-panel-position-left{
 	left: -30%;
 }
