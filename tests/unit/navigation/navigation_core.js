@@ -126,8 +126,6 @@ $.testHelper.delayStart();
 
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
-
 			function(){
 				$.mobile.changePage( "cached-external.html" );
 			},
@@ -148,8 +146,6 @@ $.testHelper.delayStart();
 
 	asyncTest( "external page is cached in the DOM after pagehide when option is set globally", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
-
 			function(){
 				$.mobile.page.prototype.options.domCache = true;
 				$.mobile.changePage( "external.html" );

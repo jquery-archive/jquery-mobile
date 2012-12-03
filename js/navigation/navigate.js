@@ -17,21 +17,34 @@ define([
 	//      so that end users don't have to think about it. Punting for now
 	// TODO !! move the event bindings into callbacks on the navigate event
 	$.navigate = function( url, data, noEvents ) {
-		var state, href, parsed, hash,
-			resolutionUrl = path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl();
+		var state, href, parsed, loc, hash,
+			resolutionUrl = path.isPath( url ) ? path.getLocation() : $.mobile.getDocumentUrl();
 
 		// Get the url as it would look squashed on to the current resolution url
-		href = path.squash( url, resolutionUrl );
+		href = path.squash( url );
 
 		// Grab the hash for recording. If the passed url is a path
 		// we used the parsed version of the squashed url to reconstruct,
 		// otherwise we assume it's a hash and store it directly
-		parsed = path.parseUrl( href );
-		hash = path.isPath(url) ? parsed.pathname + parsed.search : url;
+		parsed = path.parseUrl( url );
+		loc = path.parseLocation();
+
+		if( loc.pathname + loc.search === parsed.pathname + parsed.search ) {
+			// If the pathname and search of the passed url is identical to the current loc
+			// then we must use the hash. Otherwise there will be no event
+			// eg, url = "/foo/bar?baz#bang", location.href = "http://example.com/foo/bar?baz"
+			hash = parsed.hash ? parsed.hash : parsed.pathname + parsed.search;
+		} else if ( path.isPath(url) ) {
+			var resolved = path.parseUrl( href );
+			// If the passed url is a path, make it domain relative and remove any trailing hash
+			hash = resolved.pathname + resolved.search;
+		} else {
+			hash = url;
+		}
 
 		// Here we prevent the next hash change or popstate event from doing any
 		// history management. In the case of hashchange we don't swallow it
-		// if there will be not hashchange fired (since that won't reset the value)
+		// if there will be no hashchange fired (since that won't reset the value)
 		// and will swallow the following hashchange
 		history.ignoreNextHashChange = true;
 		if( noEvents && hash !== path.stripHash(path.parseLocation().hash) ) {
@@ -76,7 +89,7 @@ define([
 		// record the history entry so that the information can be included
 		// in hashchange event driven navigate events in a similar fashion to
 		// the state that's provided by popstate
-		history.add( url, state );
+		history.add( state.url, state );
 	};
 
 	// TODO this whole method is absolute trash :(
@@ -172,7 +185,7 @@ define([
 		// If all else fails this is a popstate that comes from the back or forward buttons
 		// make sure to set the state of our history stack properly, and record the directionality
 		history.direct({
-			url: (event.originalEvent.state || {}).hash || hash,
+			url: (event.originalEvent.state || {}).url || hash,
 
 			// When the url is either forward or backward in history include the entry
 			// as data on the event object for merging as data in the navigate event
@@ -264,12 +277,16 @@ define([
 			return this.stack[ this.activeIndex ];
 		},
 
-		getPrev: function() {
-			return this.stack[ this.activeIndex - 1 ];
+		getLast: function() {
+			return this.stack[ this.previousIndex ];
 		},
 
 		getNext: function() {
 			return this.stack[ this.activeIndex + 1 ];
+		},
+
+		getPrev: function() {
+			return this.stack[ this.activeIndex - 1 ];
 		},
 
 		// addNew is used whenever a new page is added
@@ -341,7 +358,11 @@ define([
 			var newActiveIndex = this.closest( opts.url ), a = this.activeIndex;
 
 			// save new page index, null check to prevent falsey 0 result
-			this.activeIndex = newActiveIndex !== undefined ? newActiveIndex : this.activeIndex;
+			// record the previous index for reference
+			if( newActiveIndex !== undefined ) {
+				this.activeIndex = newActiveIndex;
+				this.previousIndex = a;
+			}
 
 			// invoke callbacks where appropriate
 			//
@@ -350,10 +371,6 @@ define([
 				( opts.present || opts.back || $.noop )( this.getActive(), 'back' );
 			} else if ( newActiveIndex > a ) {
 				( opts.present || opts.forward || $.noop )( this.getActive(), 'forward' );
-			} else if ( newActiveIndex === a ) {
-				if( opts.current ) {
-					opts.current( this.getActiveIndex );
-				}
 			} else if ( newActiveIndex === undefined && opts.missing ){
 				opts.missing( this.getActive() );
 			}

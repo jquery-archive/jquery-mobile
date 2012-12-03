@@ -292,20 +292,6 @@ define([
 					reqUrl.search( /^https?:/ ) !== -1;
 			},
 
-			resetUIKeys: function( url ) {
-				var dialog = $.mobile.dialogHashKey,
-					subkey = "&" + $.mobile.subPageUrlKey,
-					dialogIndex = url.indexOf( dialog );
-
-				if ( dialogIndex > -1 ) {
-					url = url.slice( 0, dialogIndex ).replace("#", "") + "#" + url.slice( dialogIndex );
-				} else if ( url.indexOf( subkey ) > -1 ) {
-					url = url.split( subkey ).join( "#" + subkey );
-				}
-
-				return url;
-			},
-
 			mergeSearch: function( first, second ) {
 				var firstSearch, secondSearch,
 					resolvedSearch = {},
@@ -360,12 +346,18 @@ define([
 					// Get a hash where possible and, as long as it's not a path
 					// preserve it on the current url
 					preservedHash = (hashUri.hash || path.parseLocation().hash);
-					preservedHash = path.isPath( preservedHash ) ? "" : preservedHash;
+
+					if( path.isPath( preservedHash )) {
+						preservedHash = "";
+					}
+
+					if( preservedHash.indexOf( "#" ) == -1 && preservedHash !== "" ){
+						preservedHash = "#" + preservedHash;
+					}
 
 					// reconstruct each of the pieces with the new search string and hash
 					href = path.parseUrl( href );
 					href = href.protocol + "//" + href.host + href.pathname + hashUri.search + preservedHash;
-					href = path.resetUIKeys( href );
 				}
 
 				return href;

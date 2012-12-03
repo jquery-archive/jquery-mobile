@@ -189,5 +189,13 @@ $.testHelper.setPushState();
 
 			$.navigate.squash( url.pathname + url.search );
 		});
+
+
+		test( "navigating with an absolute url matching the current url save for the hash should transplant the hash", function() {
+			var loc = $.mobile.path.parseLocation();
+
+			$.navigate( loc.hrefNoHash + loc.hash + "foo" );
+			equal( location.hash, loc.hash + "foo", "the hash is set properly" );
+		});
 	}
 })( jQuery );

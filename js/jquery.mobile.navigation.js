@@ -66,6 +66,7 @@ define( [
 
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ) {
+				href = path.parseUrl(href).hrefNoHash;
 				base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
 			},
 
@@ -792,7 +793,14 @@ define( [
 
 			// Normally, we tack on a dialog hash key, but if this is the location of a stale dialog,
 			// we reuse the URL from the entry
-			url = ( active.url || "" ) + ( alreadyThere ? "" : dialogHashKey );
+			url = ( active.url || "" );
+
+			// account for absolute urls instead of just relative urls use as hashes
+			if( !alreadyThere && url.indexOf("#") > -1 ) {
+				url += dialogHashKey;
+			} else {
+				url += "#" + dialogHashKey;
+			}
 
 			// tack on another dialogHashKey if this is the same as the initial hash
 			// this makes sure that a history entry is created for this dialog
@@ -1123,9 +1131,10 @@ define( [
 				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
 
 				// default options for the changPage calls made after examining the current state
-				// of the page and the hash
+				// of the page and the hash, NOTE that the transition is derived from the previous
+				// history entry
 				changePageOptions = {
-					transition: transition,
+					transition: (urlHistory.getLast() || {}).transition || transition,
 					changeHash: false,
 					fromHashChange: true,
 					reverse: data.direction === "back"
