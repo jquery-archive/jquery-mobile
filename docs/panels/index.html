@@ -27,18 +27,59 @@
 				<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 			</div><!-- /header -->
 			<div data-role="content">
+				<h1>Panels</h1>
+				<p>Panels can be used for a wide variety of purposes in a sote or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more.</p>
+
 				<h2>Pan Panel</h2>
-				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="left" data-dismissible="false">Left</a>
-				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="right" data-dismissible="true">Right</a>
+				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="left">Left</a>
+				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="right">Right</a>
 				<h2>Overlay Panel</h2>
-				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="left" data-dismissible="false">Left</a>
-				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="right" data-dismissible="false">Right</a>
+				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="left">Left</a>
+				<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="right">Right</a>
 				<h2>Pan Panel 2</h2>
 				<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="left" data-dismissible="false">Left</a>
 				<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="right" data-dismissible="false">Right</a>
 				<h2>Overlay Panel 2</h2>
 				<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="left" data-dismissible="true">Left</a>
 				<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="right" data-dismissible="false">Right</a>
+
+				<p>A panel must sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>before</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
+
+				<h2>Basic panel markup</h2>
+				<p>A panel consists of a container with a <code>data-role=&quot;panel&quot;</code> attribute and a unique <code>ID</code>. This <code>ID</code> will be referenced by the link or button to open and close the panel.</p>
+
+				<p>The panel container must be immediately inside the page container. Here is an example of the panel before the header, content and footer in the source order:</p>
+
+				<pre><code>
+&lt;div data-role=&quot;page&quot;&gt;			
+
+	<strong>&lt;div data-role=&quot;panel&quot; id=&quot;mypanel&quot;</strong>&gt;</strong>
+		&lt;!-- panel content goes here --&gt;
+	<strong>&lt;/div&gt;&lt;!-- /panel --&gt;</strong>
+
+	&lt;!-- header --&gt;
+	&lt;!-- content --&gt;
+	&lt;!-- footer --&gt;
+
+&lt;/div&gt;&lt;!-- page --&gt;
+				</code></pre>
+
+				<p>Alternately, it's possible to add the panel markup after the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want to page content to read for people experiencing the page in a C-grade device (HTML only) or for a screen reader.</p>
+
+				<h2>Opening a panel from a link</h2>
+				<p>A panel's visibility is toggled by a link somewhere on the page or by calling the panel's <code>open</code> and <code>close</code> methods directly.</p>
+
+				<p>To have a link control a panel, add a link with an <code>href</code> that references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above.</p>
+
+				<p>To this link, add a <code>data-rel="panel"</code> attribute. This instructs the framework to bind the link to the popup. This link will toggle the visibility of the popup so tapping it will open the panel, and tapping it again will close it.</p>
+
+<pre><code>
+&lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Menu&lt;/a&gt;
+</code></pre>
+				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens. Clicking out of the panel, clicking the link again, or hitting the Esc key will all close the panel.</p>
+				<a href="#mypanel" data-rel="panel" data-display="push" data-position="left">Menu</a>
+
+				
 			</div><!-- /content -->
 			<div data-role="footer" class="footer-docs" data-theme="c">
 				<p class="jqm-version"></p>
