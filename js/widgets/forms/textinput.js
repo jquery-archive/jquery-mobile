@@ -121,11 +121,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					input.height(scrollHeight + extraLineHeight);
+					input.height( scrollHeight + extraLineHeight );
 				}
 			};
 
-			input.keyup(function() {
+			input.on( "keyup change input paste", function() {
 				clearTimeout( keyupTimeout );
 				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
 			});
