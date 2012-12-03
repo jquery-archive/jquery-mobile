@@ -68,6 +68,12 @@
 	z-index: 0;
 }
 
+.ui-panel-dismiss-overlay{
+	width: 20%;
+	position: absolute;
+	top: 0;
+}
+
 .hidden{
 	display: none;
 }
@@ -95,5 +101,8 @@
 	}
 	.panel-page .panel-shift-right{
 		right:25%;
+	}
+	.ui-panel-dismiss-overlay{
+		width: 75%;
 	}
 }

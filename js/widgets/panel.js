@@ -40,10 +40,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			slideDir = position === "left" ? "right" : "left",
 			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss";
 		setTimeout(function(){
-			$div.css( "width" , "70%" )
+			$div.addClass( "ui-panel-dismiss-overlay" )
 				.css( "height" , $.mobile.activePage.height() )
-				.css( "position" , "absolute" )
-				.css( "top" , 0 )
 				.css( slideDir , 0 )
 				.attr( "id" , "page-block" )
 				.addClass( klass )
