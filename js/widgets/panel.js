@@ -99,6 +99,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 	_destroy: function(){},
 	open: function( options , toggle ){
+		var deferred = $.Deferred();
 		var o = this.options,
 			klass = o.classes.panel,
 			$el = this.element;
@@ -114,8 +115,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			if( o.display === "push" ){
 				$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
 			}
+			deferred.resolve();
 		});
-		return this;
+		return deferred.promise();
 	},
 	close: function( options , toggle ){
 		var deferred = $.Deferred();
