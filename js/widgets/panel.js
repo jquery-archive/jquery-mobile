@@ -23,15 +23,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_handleLink: function( roleType , callback ){
 		var elId = this.element.attr( "id" ),
 			self = this;
-		$( document ).bind( "pagebeforechange", function( e, data ) {
-			var $link, id;
-			if ( data.options.role === roleType ) {
-				e.preventDefault();
-				$link = data.options.link;
+		$( document ).on( "click" , "a", function( e ) {
+			var $link = $( this ),
 				id = $link.attr( "href" ).split( "#" )[1];
-				if( elId === id ){
-					callback.call( self , $link , id );
-				}
+			if( elId === id ){
+				e.preventDefault();
+				callback.call( self , $link , id );
 				return false;
 			}
 		});

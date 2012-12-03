@@ -32,17 +32,17 @@
 
 				<h3>Left Panel: Nav</h3>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="left" data-dismissible="true">Pan</a>
-					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="push" data-position="left" data-dismissible="true">Push</a>
-					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="left" data-dismissible="true">Overlay</a>
-					<a href="#mypanel" data-role="button" data-inline="true" data-rel="panel">Default</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="pan" data-position="left" data-dismissible="true">Pan</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="push" data-position="left" data-dismissible="true">Push</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="overlay" data-position="left" data-dismissible="true">Overlay</a>
+					<a href="#mypanel" data-role="button" data-inline="true" >Default</a>
 				</div>
 				
 				<h3>Right Panel: Details</h3>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="pan" data-position="right" data-dismissible="true">Pan</a>
-					<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="push" data-position="right" data-dismissible="true">Push</a>
-					<a href="#mypanel1" data-role="button" data-inline="true" data-rel="panel" data-display="overlay" data-position="right" data-dismissible="true">Overlay</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-display="pan" data-position="right" data-dismissible="true">Pan</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-display="push" data-position="right" data-dismissible="true">Push</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-display="overlay" data-position="right" data-dismissible="true">Overlay</a>
 				</div>
 				
 
@@ -74,8 +74,6 @@
 				<p>A panel's visibility is toggled by a link somewhere on the page or by calling the panel's <code>open</code> method directly.</p>
 
 				<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above.</p>
-
-				<p>To this link, add a <code>data-rel="panel"</code> attribute. This instructs the framework to bind the link to the popup. This link will toggle the visibility of the popup so tapping it will open the panel, and tapping it again will close it.</p>
 
 <pre><code>
 &lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Open panel&lt;/a&gt;
