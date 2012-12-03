@@ -22,7 +22,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		initSelector: ":jqmData(role='panel')"
 	},
 	_handleLink: function( roleType , callback ){
-		var elId = this.element.attr( "id" );
+		var elId = this.element.attr( "id" ),
+			defaultOptions = this.options;
 		$( document ).bind( "pagebeforechange", function( e, data ) {
 			var $link, id;
 			if ( data.options.role === roleType ) {
@@ -30,7 +31,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				$link = data.options.link;
 				id = $link.attr( "href" ).split( "#" )[1];
 				if( elId === id ){
-					callback( $link , id );
+					callback( $link , id , defaultOptions );
 				}
 				return false;
 			}
@@ -70,11 +71,21 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
 		}
-		this._handleLink( "panel" , function( $link , id ){
+		this._handleLink( "panel" , function( $link , id , options ){
+			var o = {
+				position: $link.jqmData( "position" ),
+				dismissible: $link.jqmData( "dismissible" ),
+				display: $link.jqmData( "display" )
+			};
+			for( var i in o ){
+				if( o.hasOwnProperty( i ) && typeof o[ i ] !== "undefined" ){
+					options[ i ] = o[ i ];
+				}
+			}
 			$( "#" + id ).panel( "toggle" , {
-				position: $link.jqmData( "position" ),//left right
-				dismissible: $link.jqmData( "dismissible" ),//true or false
-				display: $link.jqmData( "display" ),// overlay or push
+				position: options.position,//left right
+				dismissible: options.dismissible,//true or false
+				display: options.display,// overlay or push
 				link: $link
 			});
 		});
