@@ -12,8 +12,10 @@
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
+			[ "settings.js" ],
 			[
-				"widgets/forms/slider"
+				"widgets/forms/slider",
+				"widgets/forms/textinput"
 			],
 			[
 				"slider_events.js",
@@ -107,10 +109,16 @@
 		<input type="range" name="slider" id="mouseup-refresh" value="25" min="0" max="100"/>
 	</div>
 
-  <div data-role="fieldcontain">
-    <label for="remove-events-slider">Input slider:</label>
-    <input type="range" name="remove-events-slider" id="remove-events-slider" value="25" min="0" max="100"/>
-  </div>
+    <div data-role="fieldcontain">
+        <label for="remove-events-slider">Input slider:</label>
+        <input type="range" name="remove-events-slider" id="remove-events-slider" value="25" min="0" max="100"/>
+    </div>
+
+    <div data-role="fieldcontain" class="textinput-test">
+        <label for="textinput-test">Input slider:</label>
+        <input type="range" data-clear-btn="true" name="slider" id="textinput-test" value="25" min="0" max="100"/>
+    </div>
+      
 </div>
 
 <div id="enhancetest">
