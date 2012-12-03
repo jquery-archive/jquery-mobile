@@ -73,6 +73,15 @@
 	position: absolute;
 	top: 0;
 }
+.ui-panel-display-pan ~ .ui-panel-dismiss-overlay,
+.ui-panel-display-push ~ .ui-panel-dismiss-overlay{
+	-moz-box-shadow: 0 0 25px 			rgba(0,0,0,.4);
+	-webkit-box-shadow: 0 0 25px 		rgba(0,0,0,.4);
+	box-shadow: 0 0 25px 				rgba(0,0,0,.4);
+	-webkit-transition: -webkit-box-shadow 150ms ease;
+	-moz-transition: -moz-box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+}
 
 .hidden{
 	display: none;
