@@ -64,10 +64,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options,
 			klass = o.classes.panel,
 			$el = this.element,
-			$closeLink = $el.find( "[data-rel=close]" ),
-			$page = $el.parents( "[data-role=page]" );
+			$closeLink = $el.find( "[data-rel=close]" );
 		$el.addClass( klass );
-		$page.addClass( "panel-page" );
 		if( $( "." + o.classes.contentWrap ).length === 0 ){
 			$( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + o.classes.contentWrap + '" />' );
 		}
@@ -125,14 +123,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = $.extend( {} , this.options ),
 			klass = o.classes.panel,
 			$el = this.element,
-			$page = $el.parents( "[data-role=page]" );
+			$contentsWrap = $( "." + o.classes.contentWrap );
 		for( var i in options ){
 			if( options.hasOwnProperty( i ) ){
 				o[ i ] = options[ i ];
 			}
 		}
 		if( $el.hasClass( "ui-responsive" ) ){
-			$page.addClass( "ui-responsive" );
+			$contentsWrap.addClass( "ui-responsive" );
 		}
 		this._position( o )
 		.then( function( o ){
@@ -146,10 +144,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			setTimeout(function(){
 				$el.addClass( klass + "-active" );
 				if( o.display === "reveal" || o.display === "push" ){
-					$( "." + o.classes.contentWrap ).addClass( "panel-shift-" + o.position );
+					$contentsWrap.addClass( "panel-shift-" + o.position );
 				}
 				if( o.display === "push" ){
-					$( "." + o.classes.contentWrap ).addClass( "panel-push" );
+					$contentsWrap.addClass( "panel-push" );
 				}
 			}, 0);//TODO setTimout hacks
 		});
@@ -163,12 +161,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			position = $el.jqmData( "position" ),
 			display = $el.jqmData( "display" ),
 			dismissible = $el.jqmData( "dismissible" ),
-			$page = $el.parents( "[data-role=page]" ),
+			$contentsWrap = $( "." + o.classes.contentWrap );
 			_closePanel = function(){
 				$el.removeClass( klass + "-position-" + position )
 					.removeClass( klass + "-display-" + display )
 					.removeClass( klass + "-dismissible-" + dismissible );
-				$page.removeClass( "ui-responsive" );
+				$contentsWrap.removeClass( "ui-responsive" );
 				$el.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
 				deferred.resolve( o , toggle );
 			};
@@ -181,7 +179,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el.addClass( "ui-panel-toggle" );
 		}
 		if( display === "reveal" ){
-			$( "." + o.classes.contentWrap ).one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
+			$contentsWrap.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
 		} else {
 			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
 		}

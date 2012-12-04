@@ -15,10 +15,10 @@
 	left: 20%;
 }
 
-.panel-page .panel-shift-left{
+.ui-panel-content-wrap.panel-shift-left{
 	left:80%;
 }
-.panel-page .panel-shift-right{
+.ui-panel-content-wrap.panel-shift-right{
 	right:80%;
 }
 
@@ -37,7 +37,7 @@
 	transition: left 150ms ease;
 }
 
-.panel-page .ui-panel-content-wrap{
+.ui-panel-content-wrap{
 	position: relative;
 	-webkit-transition: left 150ms ease, right 150ms ease;
 	-moz-transition: left 150ms ease, right 150ms ease;
@@ -46,7 +46,7 @@
 	transition: left 150ms ease, right 150ms ease;
 }
 
-.panel-page .ui-panel-content-wrap{
+.ui-panel-content-wrap{
 	background: inherit;
 }
 
@@ -112,10 +112,10 @@
 		left: 75%;
 	}
 
-	.ui-responsive.panel-page .panel-shift-left{
+	.ui-responsive.ui-panel-content-wrap.panel-shift-left{
 		left:25%;
 	}
-	.ui-responsive.panel-page .panel-shift-right{
+	.ui-responsive.ui-panel-content-wrap.panel-shift-right{
 		right:25%;
 	}
 	.ui-responsive.ui-panel-dismiss-overlay{
@@ -127,10 +127,10 @@
 	.ui-responsive.panel-push{
 		width: 75%;
 	}
-	.ui-responsive.panel-page .panel-shift-left.panel-push{
+	.ui-responsive.ui-panel-content-wrap.panel-shift-left.panel-push{
 		left:25%;
 	}
-	.ui-responsive.panel-page .panel-shift-right.panel-push{
+	.ui-responsive.ui-panel-content-wrap.panel-shift-right.panel-push{
 		right:25%;
 	}
 }
