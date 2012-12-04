@@ -52,7 +52,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					$panel.close();
 				});
 			}
-			deferred.resolve();
+			deferred.resolve( options );
 		}, 0); // TODO get rid of setTimeout 0 hacks
 		return deferred.promise();
 	},
