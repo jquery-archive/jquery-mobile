@@ -11,15 +11,9 @@
 
 	module( "Basic Linked list", {
 		setup: function(){
-			if( location.hash != "#basic-linked-test" ){
-				stop();
-
-				$(document).one("pagechange", function() {
-					start();
-				});
-
-				$.mobile.changePage( home );
-			}
+			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
+			$.testHelper.navReset( home );
 		},
 
 		teardown: function() {

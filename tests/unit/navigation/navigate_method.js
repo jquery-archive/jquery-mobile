@@ -131,7 +131,7 @@ $.testHelper.setPushState();
 
 			function() {
 				equal($.navigate.history.stack.length, 2, "there are two entries in the history stack" );
-				equal($.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
+				equal($.navigate.history.getActive().hash, "foo", "the url for the active history entry matches the hash" );
 				start();
 			}
 		]);
@@ -147,13 +147,13 @@ $.testHelper.setPushState();
 
 			function() {
 				equal($.navigate.history.stack.length, 1, "there is one entry in the history stack" );
-				equal($.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
+				equal($.navigate.history.getActive().hash, "foo", "the url for the active history entry matches the hash" );
 				location.hash = "#foo";
 			},
 
 			function( timedOut ) {
 				equal($.navigate.history.stack.length, 1, "there is one entry in the history stack" );
-				equal($.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
+				equal($.navigate.history.getActive().hash, "foo", "the url for the active history entry matches the hash" );
 				ok( timedOut, "there was no navigation event from setting the same hash" );
 				start();
 			}

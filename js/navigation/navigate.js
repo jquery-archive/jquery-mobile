@@ -65,7 +65,7 @@ define([
 
 		state = $.extend({
 			url: href,
-			hash: parsed.hash,
+			hash: hash.replace( /^#/, "" ),
 			title: document.title
 		}, data);
 
@@ -103,7 +103,7 @@ define([
 		// make sure to provide this information when it isn't explicitly set in the
 		// data object that was passed to the squash method
 		state = $.extend({
-			hash: hash,
+			hash: hash.replace( /^#/, "" ),
 			url: href
 		}, data);
 
@@ -202,7 +202,7 @@ define([
 	// TODO add a check here that `hashchange.navigate` is bound already otherwise it's
 	//      broken (exception?)
 	$( window ).bind( "hashchange.history", function( event ) {
-		var hash = path.parseLocation().hash;
+		var hash = path.parseLocation().hash.replace(/^#/, "");
 
 		// If pushstate is supported the state will be included in the popstate event
 		// data and appended to the navigate event. Late check here for late settings (eg tests)
@@ -251,11 +251,12 @@ define([
 			// NOTE it's not entirely clear that this is the right thing to do given that we
 			//      can't know the users intention. It might be better to explicitly _not_
 			//      support location.hash assignment in preference to $.navigate calls
+			// TODO first arg to add should be the href, but it causes issues in identifying
+			//      embeded pages
 			missing: function() {
 				history.add( hash, {
 					hash: hash,
-					title: document.title,
-					url: location.href
+					title: document.title
 				});
 			}
 		});
@@ -316,7 +317,7 @@ define([
 				entry = stack[i];
 
 				if ( decodeURIComponent(url) === decodeURIComponent(entry.url) ||
-						decodeURIComponent(url) === decodeURIComponent(entry.hash) ) {
+					decodeURIComponent(url) === decodeURIComponent(entry.hash) ) {
 					index = i;
 
 					if( earlyReturn ) {

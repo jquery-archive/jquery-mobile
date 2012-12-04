@@ -69,7 +69,7 @@ $.testHelper.delayStart();
 			},
 
 			// external-test is *NOT* cached in the dom after transitioning away
-			function() {
+			function( timedOut ) {
 				deepEqual( $( "#external-test" ).length, 0 );
 				start( 1000 );
 			}

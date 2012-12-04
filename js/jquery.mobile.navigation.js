@@ -201,7 +201,6 @@ define( [
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
-
 		if ( fromPage ) {
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
@@ -305,7 +304,7 @@ define( [
 
 		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
 		if ( !page.data( "page" ).options.domCache &&
-				page.is( ":jqmData(external-page='true')" ) ) {
+			page.is( ":jqmData(external-page='true')" ) ) {
 
 			page.bind( 'pagehide.remove', function( e ) {
 				var $this = $( this ),
@@ -342,7 +341,6 @@ define( [
 			// The absolute version of the URL passed into the function. This
 			// version of the URL may contain dialog/subpage params in it.
 			absUrl = path.makeUrlAbsolute( url, findBaseWithDefault() );
-
 
 		// If the caller provided data, and we're using "get" request,
 		// append the data to the URL.
@@ -546,8 +544,6 @@ define( [
 						page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url='" + dataUrl + "']" );
 					}
 
-					//bind pageHide to removePage after it's hidden, if the page options specify to do so
-
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
 						hideMsg();
@@ -722,6 +718,7 @@ define( [
 			historyDir = 0,
 			pageTitle = document.title,
 			isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
+
 
 		// By default, we prevent changePage requests when the fromPage and toPage
 		// are the same element, but folks that generate content manually/dynamically

@@ -79,13 +79,10 @@
 				});
 
 				// Navigate to an internal page.
-				console.log( $("#content-page-2 .ip1") );
-				window.foo = true;
 				$("#content-page-2 .ip1").click();
 			},
 
 			function(){
-				window.foo = false;
 				// Verify that we are on the expected page.
 				// the hash based nav result (hash:) is dictate by the fact that #internal-page-1
 				// is the original root page element
