@@ -33,11 +33,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		});
 	},
-	_blockPage: function( clickable , position ){
+	_blockPage: function( options ){
 		var deferred = $.Deferred();
 		var $div = $( "<div>" ),
 			$panel = this,
-			slideDir = position === "left" ? "right" : "left",
+			slideDir = options.position === "left" ? "right" : "left",
+			clickable = options.dismissible && options.display !== "push",
 			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss";
 		setTimeout(function(){
 			$div.addClass( "ui-panel-dismiss-overlay" )
@@ -122,18 +123,23 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		}
 		this._position( o )
-		.then( function(){
-			return self._blockPage( o.dismissible , o.position );
+		.then( function( o ){
+			return self._blockPage( o );
 		})
-		.then( function(){
+		.then( function( o ){
 			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , function(){
 				self._trigger( "open" , "open" , { link: o.link } );
-				deferred.resolve();
+				deferred.resolve( o );
 			});
-			$el.addClass( klass + "-active" );
-			if( o.display === "pan" ){
-				$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
-			}
+			setTimeout(function(){
+				$el.addClass( klass + "-active" );
+				if( o.display === "pan" || o.display === "push" ){
+					$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
+				}
+				if( o.display === "push" ){
+					$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-push" );
+				}
+			}, 0);//TODO setTimout hacks
 		});
 		return deferred.promise();
 	},
