@@ -244,14 +244,12 @@ $( document ).bind( "panelopen panelclose" , function( e , data ){
 });
 
 $( document ).bind( "pagehide" , function( e , data ){
-	if( $( ".ui-panel-active" ).length ){
-		$( ".ui-panel-active" ).data( "mobile-panel" ).close();
-	}
+	$( ".ui-panel-active" ).panel( "close" );
 });
 
 $(document).keyup(function(e) {
-	if( e.keyCode === 27 && $( ".ui-panel-active" ).length ){
-		$( ".ui-panel-active" ).data( "mobile-panel" ).close();
+	if( e.keyCode === 27 ){
+		$( ".ui-panel-active" ).panel( "close" );
 	}
 });
 
