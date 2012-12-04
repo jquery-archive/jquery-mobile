@@ -79,6 +79,17 @@
 				<p>This option is also exposed as a data attribute: <code>data-content-theme=&quot;a&quot;</code>.</p>
 			</dd>
 
+			<dt><code>corners</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>Applies the theme border-radius if set to true. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.corners = false;</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-corners=&quot;false&quot;</code>.</p>
+			</dd>
+
 			<dt><code>expandCueText</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: " click to expand contents"</p>
