@@ -41,6 +41,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			clickable = options.dismissible && options.display !== "push",
 			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss";
 		setTimeout(function(){
+			if( $panel.element.hasClass( "ui-responsive" ) ){
+				$div.addClass( "ui-responsive" );
+			}
 			$div.addClass( "ui-panel-dismiss-overlay" )
 				.css( "height" , $.mobile.activePage.height() )
 				.css( slideDir , 0 )
@@ -60,9 +63,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options,
 			klass = o.classes.panel,
 			$el = this.element,
-			$closeLink = $el.find( "[data-rel=close]" );
+			$closeLink = $el.find( "[data-rel=close]" ),
+			$page = $el.parents( "[data-role=page]" );
 		$el.addClass( klass );
-		$el.parents( "[data-role=page]" ).addClass( "panel-page" );
+		$page.addClass( "panel-page" );
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
 		}
@@ -116,11 +120,15 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var deferred = $.Deferred();
 		var o = $.extend( {} , this.options ),
 			klass = o.classes.panel,
-			$el = this.element;
+			$el = this.element,
+			$page = $el.parents( "[data-role=page]" );
 		for( var i in options ){
 			if( options.hasOwnProperty( i ) ){
 				o[ i ] = options[ i ];
 			}
+		}
+		if( $el.hasClass( "ui-responsive" ) ){
+			$page.addClass( "ui-responsive" );
 		}
 		this._position( o )
 		.then( function( o ){
@@ -151,10 +159,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			position = $el.jqmData( "position" ),
 			display = $el.jqmData( "display" ),
 			dismissible = $el.jqmData( "dismissible" ),
+			$page = $el.parents( "[data-role=page]" ),
 			_closePanel = function(){
 				$el.removeClass( klass + "-position-" + position )
 					.removeClass( klass + "-display-" + display )
 					.removeClass( klass + "-dismissible-" + dismissible );
+				$page.removeClass( "ui-responsive" );
 				$el.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
 				deferred.resolve( o , toggle );
 			};

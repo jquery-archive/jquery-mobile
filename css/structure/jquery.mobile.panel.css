@@ -92,45 +92,45 @@
 }
 
 @media screen and (min-width: 30em){
-	.ui-panel{
+	.ui-responsive .ui-panel{
 		width: 25%;
 	}
 
-	.ui-panel-position-left{
+	.ui-responsive.ui-panel-position-left{
 		left: -30%;
 	}
-	.ui-panel-position-right{
+	.ui-responsive.ui-panel-position-right{
 		left: 100%;
 	}
-	.ui-panel-display-reveal{
+	.ui-responsive.ui-panel-display-reveal{
 		z-index: 0;
 	}
-	.ui-panel-position-left.ui-panel-display-reveal, .ui-panel-position-left.ui-panel-active{
+	.ui-responsive.ui-panel-position-left.ui-panel-display-reveal, .ui-responsive.ui-panel-position-left.ui-panel-active{
 		left: 0;
 	}
-	.ui-panel-position-right.ui-panel-display-reveal, .ui-panel-position-right.ui-panel-active{
+	.ui-responsive.ui-panel-position-right.ui-panel-display-reveal, .ui-responsive.ui-panel-position-right.ui-panel-active{
 		left: 75%;
 	}
 
-	.panel-page .panel-shift-left{
+	.ui-responsive.panel-page .panel-shift-left{
 		left:25%;
 	}
-	.panel-page .panel-shift-right{
+	.ui-responsive.panel-page .panel-shift-right{
 		right:25%;
 	}
-	.ui-panel-dismiss-overlay{
+	.ui-responsive.ui-panel-dismiss-overlay{
 		width: 75%;
 	}
 }
 
 @media screen and (min-width: 40em){
-	.panel-push{
+	.ui-responsive.panel-push{
 		width: 75%;
 	}
-	.panel-page .panel-shift-left.panel-push{
+	.ui-responsive.panel-page .panel-shift-left.panel-push{
 		left:25%;
 	}
-	.panel-page .panel-shift-right.panel-push{
+	.ui-responsive.panel-page .panel-shift-right.panel-push{
 		right:25%;
 	}
 }
