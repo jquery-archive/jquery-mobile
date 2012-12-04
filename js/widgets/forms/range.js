@@ -65,7 +65,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				sliderFirst: sliderFirst,
 				sliderLast: sliderLast,
 				sliderFirstWidth: sliderFirstWidth,
-				sliderLastWidth: sliderLastWidth
+				sliderLastWidth: sliderLastWidth,
+				wasVisible:true
 			});
 
 			self._bindResize();
@@ -74,20 +75,23 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_bindChangeEvents: function() {
-			this._on( {
-				"change input": function( event ){
-					var min = parseFloat( this.inputFirst.val(), 10 ),
+			this._on(this.element.find("input"), {
+				"change": function( event ){
+					var self = this,
+						min = parseFloat( this.inputFirst.val(), 10 ),
 						max = parseFloat( this.inputLast.val(), 10 ),
-						first = $(event.target).hasClass("ui-range-first");
+						first = $(event.target).hasClass("ui-range-first"),
+						slider = (first)? this.sliderFirst.find(".ui-slider-bg"):this.sliderLast.find(".ui-slider-bg");
 						if( min > max )  {
 							$( event.target ).val(first ? max: min).slider("refresh");
 						}
-						if(first){
-							this.sliderFirstWidth = this.sliderFirst.find( ".ui-slider-bg" ).width();
-						} else {
-							this.sliderLastWidth = this.sliderLast.find( ".ui-slider-bg" ).width();
+						this.element.find(".ui-slider-bg").css('visibility',"visible");
+						if(!this.wasVisible && min <= max && !first){
+							this.inputFirst.slider('refresh');
 						}
-						if( min !== max || !first ) this._updateHighlight();
+						(first)? this.sliderFirstWidth = slider.width():this.sliderLastWidth = slider.width()
+						self._updateHighlight((min > max)? true:false);
+						
 				}
 			});
 		},
@@ -117,12 +121,14 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 		},
 
-		_updateHighlight: function() {
+		_updateHighlight: function(hide) {
 			var newWidth = this.sliderLastWidth - this.sliderFirstWidth,
 				tWidth = this.sliderLast.width();
+				this.wasVisible = (hide)? false:true;
 				this.element.find( ".ui-slider-bg" ).css({
-					"margin-left": this.sliderFirstWidth / tWidth * 100 + "%",
-					"width": (newWidth) / tWidth * 100 + "%"
+					"margin-left":this.sliderFirstWidth / tWidth * 100 + "%",
+					"width":(newWidth) / tWidth * 100 + "%",
+					"visibility":(hide)? "hidden":"visible"
 				});
 		}
 
