@@ -116,6 +116,34 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}, 0); // TODO get rid of setTimeout 0 hacks
 		return deferred.promise();
 	},
+	_openPanel: function( options ){
+		var deferred = $.Deferred();
+		var o = options,
+			$el = this.element,
+			klass = o.classes.panel,
+			$contentsWrap = $( "." + o.classes.contentWrap ),
+			self = this,
+			_triggerAndResolve = function(){
+				self._trigger( "open" , "open" , { link: o.link } );
+				deferred.resolve( options );
+			};
+		if( o.display === "reveal" ){
+			$contentsWrap.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _triggerAndResolve );
+		} else {
+			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _triggerAndResolve );
+		}
+		setTimeout(function(){
+			$el.addClass( klass + "-active" );
+			if( o.display === "reveal" || o.display === "push" ){
+				$contentsWrap.addClass( "panel-shift-" + o.position );
+			}
+			if( o.display === "push" ){
+				$contentsWrap.addClass( "panel-push" );
+			}
+			$( "body" ).addClass( "ui-panel-body-scroll-block" );
+		}, 0);//TODO setTimout hacks
+		return deferred.promise();
+	},
 	_destroy: function(){},
 	open: function( options , toggle ){
 		var self = this;
@@ -134,22 +162,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 		this._position( o )
 		.then( function( o ){
+			return self._openPanel( o );
+		})
+		.then( function( o ){
 			return self._blockPage( o );
 		})
 		.then( function( o ){
-			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , function(){
-				self._trigger( "open" , "open" , { link: o.link } );
-				deferred.resolve( o );
-			});
-			setTimeout(function(){
-				$el.addClass( klass + "-active" );
-				if( o.display === "reveal" || o.display === "push" ){
-					$contentsWrap.addClass( "panel-shift-" + o.position );
-				}
-				if( o.display === "push" ){
-					$contentsWrap.addClass( "panel-push" );
-				}
-			}, 0);//TODO setTimout hacks
+			deferred.resolve( o );
 		});
 		return deferred.promise();
 	},
@@ -188,6 +207,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		$( "#page-block" ).remove();
 		$( "." + o.classes.contentWrap ).removeClass( "panel-shift-" + position )
 			.removeClass( "panel-push" );
+		$( "body" ).removeClass( "ui-panel-body-scroll-block" );
 		return deferred.promise();
 	},
 	toggle: function( options ){

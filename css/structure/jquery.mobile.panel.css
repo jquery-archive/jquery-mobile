@@ -1,6 +1,9 @@
 .ui-panel{
 	width: 80%;
 	border:0;
+	position: absolute;
+	display: none;
+	height: 100%;
 }
 .ui-panel-position-left{
 	left: -85%;
@@ -22,12 +25,6 @@
 	right:80%;
 }
 
-.ui-panel{
-	position: absolute;
-	display: none;
-	height: 100%;
-}
-
 .ui-panel-position-left, .ui-panel-position-right{
 	display: block;
 	-webkit-transition: left 150ms ease;
@@ -39,15 +36,12 @@
 
 .ui-panel-content-wrap{
 	position: relative;
+	background: inherit;
 	-webkit-transition: left 150ms ease, right 150ms ease;
 	-moz-transition: left 150ms ease, right 150ms ease;
 	-ms-transition: left 150ms ease, right 150ms ease;
 	-o-transition: left 150ms ease, right 150ms ease;
 	transition: left 150ms ease, right 150ms ease;
-}
-
-.ui-panel-content-wrap{
-	background: inherit;
 }
 
 .ui-panel-display-overlay{
@@ -89,6 +83,17 @@
 
 .hidden{
 	display: none;
+}
+
+.ui-panel-body-scroll-block{
+	position:fixed;
+	top:0;
+	right:0;
+	bottom:1px;
+	left:0;
+	border-bottom: 1px solid transparent;
+	overflow-x:hidden;
+	overflow-y: auto;
 }
 
 @media screen and (min-width: 30em){
