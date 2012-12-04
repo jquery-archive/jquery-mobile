@@ -35,13 +35,13 @@
 			position, display, dismissible;
 		$.testHelper.pageSequence([
 			function() {
-				$uipanel.on( "panelopen" , function(){
+				$uipanel.one( "panelopen" , function(){
 					var $this = $( this );
 					position = $this.hasClass( "ui-panel-position-right" );
 					display = $this.hasClass( "ui-panel-display-pan" );
 					dismissible = $this.hasClass( "ui-panel-dismissible-true" );
 				});
-				$uipanel.on( "panelclose" , function(){
+				$uipanel.one( "panelclose" , function(){
 					var $this = $( this );
 					position = $this.hasClass( "ui-panel-position-right" );
 					display = $this.hasClass( "ui-panel-display-pan" );

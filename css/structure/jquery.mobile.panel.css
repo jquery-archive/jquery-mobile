@@ -46,6 +46,10 @@
 	transition: left 150ms ease, right 150ms ease;
 }
 
+.panel-page .ui-content{
+	background: inherit;
+}
+
 .ui-panel-display-overlay{
 	z-index: 2;
 }
@@ -98,10 +102,13 @@
 	.ui-panel-position-right{
 		left: 100%;
 	}
-	.ui-panel-position-left.ui-panel-active{
+	.ui-panel-display-pan{
+		z-index: 0;
+	}
+	.ui-panel-position-left.ui-panel-display-pan, .ui-panel-position-left.ui-panel-active{
 		left: 0;
 	}
-	.ui-panel-position-right.ui-panel-active{
+	.ui-panel-position-right.ui-panel-display-pan, .ui-panel-position-right.ui-panel-active{
 		left: 75%;
 	}
 

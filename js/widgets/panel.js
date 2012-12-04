@@ -150,7 +150,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el = this.element,
 			position = $el.jqmData( "position" ),
 			display = $el.jqmData( "display" ),
-			dismissible = $el.jqmData( "dismissible" );
+			dismissible = $el.jqmData( "dismissible" ),
+			_closePanel = function(){
+				$el.removeClass( klass + "-position-" + position )
+					.removeClass( klass + "-display-" + display )
+					.removeClass( klass + "-dismissible-" + dismissible );
+				$el.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
+				deferred.resolve( o , toggle );
+			};
 		for( var i in options ){
 			if( options.hasOwnProperty( i ) ){
 				o[ i ] = options[ i ];
@@ -159,19 +166,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( toggle ){
 			$el.addClass( "ui-panel-toggle" );
 		}
-
-		$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , function(){
-			var $this = $( this );
-			$this.removeClass( klass + "-position-" + position )
-				.removeClass( klass + "-display-" + display )
-				.removeClass( klass + "-dismissible-" + dismissible );
-			$this.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
-			deferred.resolve( o , toggle );
-		});
+		if( display === "pan" ){
+			$( ".panel-page .ui-content" ).one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
+		} else {
+			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
+		}
 
 		$el.removeClass( klass + "-active" );
 		$( "#page-block" ).remove();
-		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position );
+		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position )
+			.removeClass( "panel-push" );
 		return deferred.promise();
 	},
 	toggle: function( options ){
@@ -208,7 +212,7 @@ $( document ).bind( "panelopen panelclose" , function( e , data ){
 });
 
 $(document).keyup(function(e) {
-	if( e.keyCode == 27 && $( ".ui-panel-active" ).length ){
+	if( e.keyCode === 27 && $( ".ui-panel-active" ).length ){
 		$( ".ui-panel-active" ).data( "mobile-panel" ).close();
 	}
 });
