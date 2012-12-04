@@ -12,7 +12,8 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], fu
 $.widget( "mobile.panel", $.mobile.widget, {
 	options: {
 		classes: {
-			panel: "ui-panel"
+			panel: "ui-panel",
+			contentWrap: "ui-panel-content-wrap"
 		},
 		theme: null,
 		position: "left",
@@ -67,6 +68,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$page = $el.parents( "[data-role=page]" );
 		$el.addClass( klass );
 		$page.addClass( "panel-page" );
+		if( $( "." + o.classes.contentWrap ).length === 0 ){
+			$( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + o.classes.contentWrap + '" />' );
+		}
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
 		}
@@ -142,10 +146,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			setTimeout(function(){
 				$el.addClass( klass + "-active" );
 				if( o.display === "reveal" || o.display === "push" ){
-					$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
+					$( "." + o.classes.contentWrap ).addClass( "panel-shift-" + o.position );
 				}
 				if( o.display === "push" ){
-					$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-push" );
+					$( "." + o.classes.contentWrap ).addClass( "panel-push" );
 				}
 			}, 0);//TODO setTimout hacks
 		});
@@ -177,14 +181,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el.addClass( "ui-panel-toggle" );
 		}
 		if( display === "reveal" ){
-			$( ".panel-page .ui-content" ).one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
+			$( "." + o.classes.contentWrap ).one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
 		} else {
 			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
 		}
 
 		$el.removeClass( klass + "-active" );
 		$( "#page-block" ).remove();
-		$( ".ui-content, .ui-header, .ui-footer" ).removeClass( "panel-shift-" + position )
+		$( "." + o.classes.contentWrap ).removeClass( "panel-shift-" + position )
 			.removeClass( "panel-push" );
 		return deferred.promise();
 	},

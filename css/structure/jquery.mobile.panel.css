@@ -37,7 +37,7 @@
 	transition: left 150ms ease;
 }
 
-.panel-page .ui-content, .panel-page .ui-header, .panel-page .ui-footer {
+.panel-page .ui-panel-content-wrap{
 	position: relative;
 	-webkit-transition: left 150ms ease, right 150ms ease;
 	-moz-transition: left 150ms ease, right 150ms ease;
@@ -46,7 +46,7 @@
 	transition: left 150ms ease, right 150ms ease;
 }
 
-.panel-page .ui-content{
+.panel-page .ui-panel-content-wrap{
 	background: inherit;
 }
 
@@ -92,7 +92,7 @@
 }
 
 @media screen and (min-width: 30em){
-	.ui-responsive .ui-panel{
+	.ui-responsive.ui-panel{
 		width: 25%;
 	}
 
