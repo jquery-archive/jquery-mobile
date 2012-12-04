@@ -7,10 +7,12 @@
 			function() {
 				$( "#openBasicDialog" ).click();
 			},
+
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 				$( "a", $.mobile.activePage[ 0 ] ).click();
 			},
+
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();

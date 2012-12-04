@@ -103,11 +103,20 @@ define([
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
 					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
 				}
+
 				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
 			}
 			// otherwise, trigger a hashchange to load a deeplink
 			else {
-				$window.trigger( "hashchange", [ true ] );
+				var event = $.Event( $.support.pushState ? "popstate" : "hashchange" );
+
+				// mock the state value that should come with a popstate
+				// TODO ugh
+				event.originalEvent = {
+					state: {}
+				};
+
+				$window.trigger( event, [true] );
 			}
 		}
 	});

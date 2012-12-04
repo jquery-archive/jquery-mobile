@@ -162,9 +162,8 @@ define([
 			hash = loc.hash;
 
 			// avoid initial page load popstate trigger when there is no hash
-			if( hash ) {
+			if( history.stack.length !== 1 || hash !== history.getActive().hash ) {
 				state = $.navigate.squash( hash );
-
 				// TODO it might be better to only add to the history stack
 				//      when the hash is adjacent to the active history entry
 
@@ -384,7 +383,7 @@ define([
 	var loc = path.parseLocation();
 
 	// Record the initial page with a replace state where necessary
-	$.navigate( loc.href, {}, true);
+	$.navigate.history.add( loc.href, { hash: loc.hash } );
 })( jQuery );
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

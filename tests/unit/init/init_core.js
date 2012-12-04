@@ -115,7 +115,7 @@
 			deepEqual($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
-		asyncTest( "hashchange triggered on document ready with single argument: true", function(){
+		asyncTest( "url manip event triggered on document ready with single argument: true", function(){
 			$.testHelper.sequence([
 				function(){
 					location.hash = "#foo";
@@ -123,7 +123,7 @@
 
 				// delay the bind until the first hashchange
 				function(){
-					$(window).one("hashchange", function(ev, arg){
+					$(window).one( ($.support.pushState ? "popstate" : "hashchange"), function(ev, arg){
 						deepEqual(arg, true);
 						start();
 					});

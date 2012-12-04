@@ -1134,13 +1134,14 @@ define( [
 				// of the page and the hash, NOTE that the transition is derived from the previous
 				// history entry
 				changePageOptions = {
-					transition: (urlHistory.getLast() || {}).transition || transition,
 					changeHash: false,
 					fromHashChange: true,
 					reverse: data.direction === "back"
 				};
 
-			$.extend( changePageOptions, data );
+			$.extend( changePageOptions, data, {
+				transition: (urlHistory.getLast() || {}).transition || transition
+			});
 
 			// TODO we can set this earlier and avoid checking it every time we run the hashchange
 			if ( 0 === urlHistory.stack.length ) {
