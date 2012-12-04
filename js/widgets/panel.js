@@ -17,7 +17,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		theme: null,
 		position: "left",
 		dismissible: true,
-		display: "pan",
+		display: "reveal",
 		initSelector: ":jqmData(role='panel')"
 	},
 	_handleLink: function( roleType , callback ){
@@ -133,7 +133,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			});
 			setTimeout(function(){
 				$el.addClass( klass + "-active" );
-				if( o.display === "pan" || o.display === "push" ){
+				if( o.display === "reveal" || o.display === "push" ){
 					$( ".ui-content, .ui-header, .ui-footer" ).addClass( "panel-shift-" + o.position );
 				}
 				if( o.display === "push" ){
@@ -166,7 +166,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( toggle ){
 			$el.addClass( "ui-panel-toggle" );
 		}
-		if( display === "pan" ){
+		if( display === "reveal" ){
 			$( ".panel-page .ui-content" ).one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
 		} else {
 			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );

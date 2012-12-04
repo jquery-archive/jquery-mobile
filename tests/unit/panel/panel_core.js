@@ -52,7 +52,7 @@
 				$panel.open({
 					position: "right",
 					dismissible: "true",
-					display: "pan"
+					display: "reveal"
 				});
 			},
 			function() {
@@ -142,7 +142,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "left" , "Link-1: Position upon clicking link is 'left'" );
 						equal( $panel.element.jqmData( "dismissible" ) , true , "Link-1: Dimissible upon clicking link is true" );
-						equal( $panel.element.jqmData( "display" ) , "pan" , "Link-1: Display upon clicking link is pan" );
+						equal( $panel.element.jqmData( "display" ) , "reveal" , "Link-1: Display upon clicking link is pan" );
 				} , 800 );
 			},
 			function() {
@@ -166,7 +166,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "left" , "Link-3: Position upon clicking link is 'left'" );
 						equal( $panel.element.jqmData( "dismissible" ) , false , "Link-3: Dimissible upon clicking link is false" );
-						equal( $panel.element.jqmData( "display" ) , "pan" , "Link-3: Display upon clicking link is pan" );
+						equal( $panel.element.jqmData( "display" ) , "reveal" , "Link-3: Display upon clicking link is pan" );
 				} , 800 );
 			},
 			function() {
@@ -190,7 +190,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
 						equal( $panel.element.jqmData( "dismissible" ) , true , "Dimissible upon clicking link is true" );
-						equal( $panel.element.jqmData( "display" ) , "pan" , "Display upon clicking link is pan" );
+						equal( $panel.element.jqmData( "display" ) , "reveal" , "Display upon clicking link is pan" );
 				} , 800 );
 			},
 			function() {
@@ -214,7 +214,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
 						equal( $panel.element.jqmData( "dismissible" ) , false , "Dimissible upon clicking link is false" );
-						equal( $panel.element.jqmData( "display" ) , "pan" , "Display upon clicking link is pan" );
+						equal( $panel.element.jqmData( "display" ) , "reveal" , "Display upon clicking link is pan" );
 				} , 800 );
 			},
 			function() {

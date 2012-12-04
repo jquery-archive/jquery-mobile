@@ -88,14 +88,14 @@
 
 				<h4>Left Panel: Navigation example</h4>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel" data-role="button" data-inline="true" data-display="pan" data-position="left" data-dismissible="false">Pan</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="reveal" data-position="left" data-dismissible="false">Reveal</a>
 					<a href="#mypanel" data-role="button" data-inline="true" data-display="push" data-position="left" data-dismissible="true">Push</a>
 					<a href="#mypanel" data-role="button" data-inline="true" data-display="overlay" data-position="left" data-dismissible="true">Overlay</a>
 				</div>
 				
 				<h4>Right Panel: Detail panel</h4>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel1" data-role="button" data-inline="true" data-display="pan" data-position="right" data-dismissible="true">Pan</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-display="reveal" data-position="right" data-dismissible="true">Reveal</a>
 					<a href="#mypanel1" data-role="button" data-inline="true" data-display="push" data-position="right" data-dismissible="true">Push</a>
 					<a href="#mypanel1" data-role="button" data-inline="true" data-display="overlay" data-position="right" data-dismissible="true">Overlay</a>
 				</div>
@@ -133,11 +133,11 @@
 <pre><code>
 &lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Open panel&lt;/a&gt;
 </code></pre>
-				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (pan mode). </p>
+				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (reveal mode). </p>
 				<a href="#mypanel" data-rel="panel" data-display="push" data-position="left">Open panel</a>
 				<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above), and  add the <code>data-rel="panel"</code> attribute. This instructs the framework to bind the link to the popup. This link will toggle the visibility of the popup so tapping it will open the panel, and tapping it again will close it.</p>
 
-				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (pan mode). Here is a panel link with the defaults:</p>
+				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (reveal mode). Here is a panel link with the defaults:</p>
 				<a href="#mypanel" data-rel="panel">Open panel</a>
 
 				<p>When using markup to control panels, you can only have a single panel open at once. Clicking a link to open a panel while one is already open will auto-close the first. This is done to keep the markup-only configuration simple.</p>
@@ -168,10 +168,10 @@ $( "#idofpanel" )
 
 				<h2>Setting panel display mode</h2>
 
-				<p>Panels can display in three different ways. The default display mode is <code>pan</code> but this can be set on each link by adding the <code>data-display</code> attribute and specifying a display mode.</p>
+				<p>Panels can display in three different ways. The default display mode is <code>reveal</code> but this can be set on each link by adding the <code>data-display</code> attribute and specifying a display mode.</p>
 
 				<dl>
-					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan" data-position="left" data-dismissible="true">pan</a></code> (default)</dt><dd>The panel shifts the viewport over open, partially obscuring part of the page when it pushes it out of view.</dd>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="left" data-dismissible="true">reveal</a></code> (default)</dt><dd>The panel shifts the viewport over open, partially obscuring part of the page when it pushes it out of view.</dd>
 				</dl>
 				<dl>
 					<dt><code><a href="#mypanel" data-rel="panel" data-display="push" data-position="left" data-dismissible="false">push</a></code></dt><dd>The panel behaves just like pan at narrow widths but at wider viewports (above 600 pixels), the content re-flows to make room for the panel so it can stay open permanently. Note that at wider screens, the <code>dismissible</code> option will be set to <code>false</code> so you can interact with both the panel and page.</dd>
@@ -185,10 +185,10 @@ $( "#idofpanel" )
 				<p>Panels can open to the left or right of the page and this is controlled by the link that opens them. The default position is <code>left</code> but this can be set on each link by adding the <code>data-position</code> attribute and specifying a display position.</p>
 
 				<dl>
-					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan"data-position="left" data-dismissible="true">left</a></code> (default)</dt><dd>The panel will slide in from the left edge of the page.</dd>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="left" data-dismissible="true">left</a></code> (default)</dt><dd>The panel will slide in from the left edge of the page.</dd>
 				</dl>
 				<dl>
-					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan" data-position="right" data-dismissible="true">right</a></code></dt><dd>The panel will slide in from the right edge of the page.</dd>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="right" data-dismissible="true">right</a></code></dt><dd>The panel will slide in from the right edge of the page.</dd>
 				</dl>
 
 				<h2>Setting dismiss behavior</h2>
@@ -196,10 +196,10 @@ $( "#idofpanel" )
 				<p>Clicking outside of an open panel will close the panel by default. This behavior can be prevented by adding the <code>data-dismissible</code> attribute to the link and specifying <code>true</code> or <code>false</code>.</p>
 
 				<dl>
-					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan"data-position="left" data-dismissible="true">true</a></code> (default)</dt><dd>The panel will auto-close when a user taps outside the panel.</dd>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="left" data-dismissible="true">true</a></code> (default)</dt><dd>The panel will auto-close when a user taps outside the panel.</dd>
 				</dl>
 				<dl>
-					<dt><code><a href="#mypanel" data-rel="panel" data-display="pan" data-position="left" data-dismissible="false">false</a></code></dt><dd>The panel will not auto-close when a user taps outside the panel. Recommended for the <code>push</code> display mode to allow a user to interact with the page when the panel is seen at wider widths.</dd>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="left" data-dismissible="false">false</a></code></dt><dd>The panel will not auto-close when a user taps outside the panel. Recommended for the <code>push</code> display mode to allow a user to interact with the page when the panel is seen at wider widths.</dd>
 				</dl>
 
 
@@ -213,8 +213,8 @@ $( "#idofpanel" )
 					<dt><code>dismissible</code> default: true</dt>
 					<dd>Sets whether the panel can be closed by clicking outside onto the page. Also available via the <code>data-dismissible</code> attribute on the link that opens the popup.</dd>
 
-					<dt><code>display</code> default: "pan"</dt>
-					<dd>The relationship of the panel to the page contents. Can either push the page over ("pan"), re-flow the content to fit the panel content as a column ("push"), or sit over the content ("overlay"). Also available via the <code>data-display</code> attribute on the link that opens the popup.</dd>
+					<dt><code>display</code> default: "reveal"</dt>
+					<dd>The relationship of the panel to the page contents. Can either push the page over ("reveal"), re-flow the content to fit the panel content as a column ("push"), or sit over the content ("overlay"). Also available via the <code>data-display</code> attribute on the link that opens the popup.</dd>
 
 					<dt><code>initSelector</code> default: ":jqmData(role='panel')"</dt>
 					<dd>The role (or and valid jQuery selector) used to trigger auto-initialization of the panel widget.</dd>

@@ -77,7 +77,7 @@
 	position: absolute;
 	top: 0;
 }
-.ui-panel-display-pan ~ .ui-panel-dismiss-overlay,
+.ui-panel-display-reveal ~ .ui-panel-dismiss-overlay,
 .ui-panel-display-push ~ .ui-panel-dismiss-overlay{
 	-moz-box-shadow: 0 0 25px 			rgba(0,0,0,.4);
 	-webkit-box-shadow: 0 0 25px 		rgba(0,0,0,.4);
@@ -102,13 +102,13 @@
 	.ui-panel-position-right{
 		left: 100%;
 	}
-	.ui-panel-display-pan{
+	.ui-panel-display-reveal{
 		z-index: 0;
 	}
-	.ui-panel-position-left.ui-panel-display-pan, .ui-panel-position-left.ui-panel-active{
+	.ui-panel-position-left.ui-panel-display-reveal, .ui-panel-position-left.ui-panel-active{
 		left: 0;
 	}
-	.ui-panel-position-right.ui-panel-display-pan, .ui-panel-position-right.ui-panel-active{
+	.ui-panel-position-right.ui-panel-display-reveal, .ui-panel-position-right.ui-panel-active{
 		left: 75%;
 	}
 
