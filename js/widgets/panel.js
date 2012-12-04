@@ -244,7 +244,9 @@ $( document ).bind( "panelopen panelclose" , function( e , data ){
 });
 
 $( document ).bind( "pagehide" , function( e , data ){
-	$( ".ui-active-panel" ).data( "mobile-panel" ).close();
+	if( $( ".ui-panel-active" ).length ){
+		$( ".ui-panel-active" ).data( "mobile-panel" ).close();
+	}
 });
 
 $(document).keyup(function(e) {
