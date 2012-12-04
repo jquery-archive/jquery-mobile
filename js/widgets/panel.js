@@ -42,16 +42,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			clickable = options.dismissible && options.display !== "push",
 			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss";
 		setTimeout(function(){
-			if( $panel.element.hasClass( "ui-responsive" ) ){
-				$div.addClass( "ui-responsive" );
-			}
-			$div.addClass( "ui-panel-dismiss-overlay" )
-				.css( "height" , $.mobile.activePage.height() )
-				.css( slideDir , 0 )
-				.attr( "id" , "page-block" )
-				.addClass( klass )
-				.appendTo( $.mobile.activePage );
 			if( clickable ){
+				if( $panel.element.hasClass( "ui-responsive" ) ){
+					$div.addClass( "ui-responsive" );
+				}
+				$div.addClass( "ui-panel-dismiss-overlay" )
+					.css( "height" , $.mobile.activePage.height() )
+					.css( slideDir , 0 )
+					.attr( "id" , "page-block" )
+					.addClass( klass )
+					.appendTo( $.mobile.activePage );
 				$div.bind( "vclick" , function(){
 					$panel.close();
 				});
