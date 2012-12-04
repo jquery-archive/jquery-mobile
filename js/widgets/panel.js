@@ -140,7 +140,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			if( o.display === "push" ){
 				$contentsWrap.addClass( "panel-push" );
 			}
-			$( "body" ).addClass( "ui-panel-body-scroll-block" );
+			$( ".ui-page-active" ).addClass( "ui-panel-body-scroll-block" );
 		}, 0);//TODO setTimout hacks
 		return deferred.promise();
 	},
@@ -207,7 +207,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		$( "#page-block" ).remove();
 		$( "." + o.classes.contentWrap ).removeClass( "panel-shift-" + position )
 			.removeClass( "panel-push" );
-		$( "body" ).removeClass( "ui-panel-body-scroll-block" );
+		$( ".ui-page-active" ).removeClass( "ui-panel-body-scroll-block" );
 		return deferred.promise();
 	},
 	toggle: function( options ){

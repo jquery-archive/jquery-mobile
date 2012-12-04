@@ -85,15 +85,8 @@
 	display: none;
 }
 
-.ui-panel-body-scroll-block{
-	position:fixed;
-	top:0;
-	right:0;
-	bottom:1px;
-	left:0;
-	border-bottom: 1px solid transparent;
+.ui-page-active.ui-panel-body-scroll-block{
 	overflow-x:hidden;
-	overflow-y: auto;
 }
 
 @media screen and (min-width: 30em){
