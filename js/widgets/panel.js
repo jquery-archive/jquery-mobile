@@ -64,7 +64,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options,
 			klass = o.classes.panel,
 			$el = this.element,
-			$closeLink = $el.find( "[data-rel=close]" );
+			$closeLink = $el.find( "[data-rel=close]" ),
+			$page = $el.closest( ":jqmData(role='page')" );
+
 		$el.addClass( klass );
 		if( $( "." + o.classes.contentWrap ).length === 0 ){
 			$( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + o.classes.contentWrap + '" />' );
@@ -72,6 +74,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
 		}
+
+		$page.addClass( $.support.cssTransform3d ? "ui-panel-transforms" : "ui-panel-positioning" );
+
 		this._handleLink( "panel" , function( $link , id ){
 			var options = $.extend( {} , this.options ),
 				op = {
