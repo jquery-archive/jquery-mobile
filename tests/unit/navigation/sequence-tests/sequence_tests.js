@@ -21,7 +21,7 @@
 				// page to be loaded via AJAX, the loading process which is done via a
 				// synthetic hashchange event completes.
 				function() { },
-				{ navigate: { src: $( document ), event: "navigate" + prefix + "0" } },
+				{ navigate: { src: $( window ), event: "navigate" + prefix + "0" } },
 				function() {
 					$.testHelper.detailedEventCascade( seq );
 				}
@@ -39,13 +39,14 @@
 	}
 
 	asyncTest( "Returning from a dialog results in the page from which it opened", function() {
-		var eventNs = ".returningFromADialog"
+		var eventNs = ".returningFromADialog";
 		expect( 2 );
 
 		maybeWaitForStartPage([
-			function() { $( "#openBasicDialog" ).click(); },
+			function() {
+				$( "#openBasicDialog" ).click();
+			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "1" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
@@ -53,7 +54,6 @@
 				$( "a:first", $.mobile.activePage[ 0 ] ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
@@ -66,7 +66,7 @@
 	asyncTest( "Returning from a popup results in the page from which it opened", function() {
 		var origActive, eventNs = ".returningFromAPopup";
 
-		expect( 5 );
+		expect( 3 );
 
 		maybeWaitForStartPage([
 			function() {
@@ -74,24 +74,20 @@
 				$( "#openPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#thePopup" ).parent().prev().click();
 			},
 			{
-				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "2" }
+				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" }
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				start();
-			},
+			}
 		], eventNs );
 	});
 
@@ -103,7 +99,6 @@
 		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "1" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
@@ -111,7 +106,6 @@
 				$( "#fromDialogToAnotherPage" ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
@@ -119,7 +113,6 @@
 				$.mobile.back();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
@@ -132,23 +125,20 @@
 	asyncTest( "Going from a popup to another page works", function() {
 		var eventNs = ".goingFromAPopupToAnotherPage";
 
-		expect( 4 );
+		expect( 3 );
 
 		maybeWaitForStartPage([
 			function() {
 				$( "#openPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#openPageFromPopup" ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
@@ -156,7 +146,6 @@
 				$.mobile.back();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
@@ -175,7 +164,6 @@
 			// NOTE: The first part of this test is a copy of the test above
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "1" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
@@ -183,7 +171,6 @@
 				$( "a:first", $.mobile.activePage[ 0 ] ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 
@@ -193,7 +180,6 @@
 				$( "#openAnotherDialog" ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
@@ -201,20 +187,19 @@
 				$( "a:first", $.mobile.activePage[ 0 ] ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "4" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
-			},
+			}
 		], eventNs );
 	});
 
 	asyncTest( "Opening one popup followed by opening another popup works", function() {
 		var origActive, eventNs = ".openingOnePopupFollowedByAnother";
 
-		expect( 10 );
+		expect( 6 );
 
 		maybeWaitForStartPage([
 			// NOTE: This is basically two copies of the "returning from a popup test" one after the other
@@ -223,17 +208,14 @@
 				$( "#openPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#thePopup" ).parent().prev().click();
 			},
 			{
 				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "2" },
 				// bogus event to delay the opening of the second popup in order to make
 				// sure that the pushState handler comes out of its timeout-induced
 				// slumber. This is unnecessary for dialogs, because they have transitions which
@@ -242,26 +224,21 @@
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of closing the popup" );
 				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				$( "#openAnotherPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#anotherPopup" ); }, event: "popupafteropen" + eventNs + "3" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "3" }
+				popupafteropen: { src: function() { return $( "#anotherPopup" ); }, event: "popupafteropen" + eventNs + "3" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#anotherPopup" ).parent().prev().click();
 			},
 			{
-				popupafterclose: { src: function() { return $( "#anotherPopup" ); }, event: "popupafterclose" + eventNs + "4" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "4" }
+				popupafterclose: { src: function() { return $( "#anotherPopup" ); }, event: "popupafterclose" + eventNs + "4" }
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				start();
 			}
@@ -276,7 +253,6 @@
 		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "1" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
@@ -284,7 +260,6 @@
 				$( "a:first", $.mobile.activePage[ 0 ] ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
@@ -292,7 +267,6 @@
 				$( "#openAnotherPage" ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
@@ -300,20 +274,19 @@
 				$.mobile.back();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "4" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
-			},
+			}
 		], eventNs );
 	});
 
 	asyncTest( "Opening another page after returning from a popup works", function() {
 		var origActive, eventNs = ".openingAnotherPageAfterPopup";
 
-		expect( 7 );
+		expect( 5 );
 
 		maybeWaitForStartPage([
 			function() {
@@ -321,26 +294,21 @@
 				$( "#openPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#thePopup" ).parent().prev().click();
 			},
 			{
-				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "2" }
+				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" }
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				$( "#openAnotherPage" ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
@@ -348,7 +316,6 @@
 				$.mobile.back();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "4" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
@@ -361,12 +328,11 @@
 	asyncTest( "Sequence page1 -> dialog1 -> popup1 -> page2 <- back", function() {
 		var eventNs = ".page1Dialog1Popup1Page2Back";
 
-		expect( 6 );
+		expect( 5 );
 
 		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "1" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" },
 				xyzzy: { src: $( document ), event: "xyzzy" + eventNs + "1" }
 			},
@@ -376,17 +342,14 @@
 			},
 			{
 				popupafteropen: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafteropen" + eventNs + "2" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "2" },
 				xyzzy: { src: $( document ), event: "xyzzy" + eventNs + "2" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#fromDialogPopupToAnotherPage" ).click();
 			},
 			{
 				popupafterclose: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafterclose" + eventNs + "3" },
-				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function( result ) {
@@ -395,36 +358,32 @@
 				$.mobile.back();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "4" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
-			},
+			}
 		]);
 	});
 
 	asyncTest( "Sequence page1 -> popup1 -> dialog1 -> page2 <- back", function() {
 		var eventNs = ".page1Popup1Dialog1Page2";
 
-		expect( 5 );
+		expect( 4 );
 
 		maybeWaitForStartPage([
 			function() {
 				$( "#openPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#openDialogFromPopup" ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
@@ -432,7 +391,6 @@
 				$( "#fromDialogToAnotherPage" ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
@@ -440,7 +398,6 @@
 				$.mobile.back();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "4" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
@@ -453,24 +410,21 @@
 	asyncTest( "Sequence page -> popup1 -> dialog -> popup2 <- back <- back", function() {
 		var eventNs = ".pagePopupDialogPopup";
 
-		expect( 12 );
+		expect( 8 );
 
 		maybeWaitForStartPage([
 			function() {
 				$( "#openPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#openDialogFromPopup" ).click();
 			},
 			{
 				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" },
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function( result ) {
@@ -479,30 +433,24 @@
 				$( "#fromDialogToPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafteropen" + eventNs + "1" },
-				navigate: { src: $.mobile.pageContainer, event: "navigate" + eventNs + "1" }
+				popupafteropen: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafteropen" + eventNs + "1" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of opening the popup" );
 				$( "#popupFromBasicDialog" ).parent().prev().click();
 			},
 			{
-				popupafterclose: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafterclose" + eventNs + "2" },
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
+				popupafterclose: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafterclose" + eventNs + "2" }
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of closing the popup" );
 				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog is active page" );
 				$( "a:first", $.mobile.activePage[ 0 ] ).click();
 			},
 			{
-				navigate: { src: $( document ), event: "navigate" + eventNs + "2" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function( result ) {
-				ok( !result.navigate.timedOut, "A 'navigate' event has occurred as a result of returning from the dialog" );
 				ok( !result.pagechange.timedOut, "A pagechange event has occurred as a result of returning from the dialog" );
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Basic test page is active page" );
 				start();
