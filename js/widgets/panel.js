@@ -101,6 +101,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el.panel( "close" );
 			return false;
 		});
+		$el.on( "swipeleft" , function( e ){
+			$el.panel( "close" );
+		});
 		this._trigger( "create" );
 	},
 	_position: function( options ){
