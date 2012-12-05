@@ -50,7 +50,7 @@
 
 			<p>So in PhoneGap apps that must "phone home" by loading assets off a remote server, both the <code>$.support.cors</code> AND <code>$.mobile.allowCrossDomainPages</code> must be set to <code>true</code>.  The <code>$.mobile.allowCrossDomainPages</code> option must be set before any cross-domain request is made so we recommend wrapping this in a <code>mobileinit</code> handler:</p>
 
-<pre><code>$( document ).bind( "mobileinit", function() {
+<pre><code>$( document ).on( "mobileinit", function() {
     // Make your jQuery Mobile framework configuration changes here!
 
     $.mobile.allowCrossDomainPages = true;

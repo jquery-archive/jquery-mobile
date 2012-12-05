@@ -112,7 +112,7 @@
 			<dd>
 				<p class="default">default: "button, [type='button'], [type='submit'], [type='reset']"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as form buttons. To change which elements are initialized, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.button.prototype.options.initSelector = ".myButtons";</strong>
 });
 </code></pre>

@@ -2686,7 +2686,7 @@ jQuery.event = {
     }
 
     // Handle multiple events separated by a space
-    // jQuery(...).bind("mouseover mouseout", fn);
+    // jQuery(...).on("mouseover mouseout", fn);
     types = jQuery.trim( hoverHack(types) ).split( " " );
     for ( t = 0; t < types.length; t++ ) {
 
