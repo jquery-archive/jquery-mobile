@@ -184,7 +184,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				}
 
 				$this.bind( touchMoveEvent, moveHandler )
-					.one( touchStopEvent, function( event ) {
+					.one( touchStopEvent, function() {
 						$this.unbind( touchMoveEvent, moveHandler );
 
 						if ( start && stop ) {
