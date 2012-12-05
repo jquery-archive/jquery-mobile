@@ -253,7 +253,7 @@
 		transform: translateX(75%);
 	}
 
-	.ui-responsive.ui-panel-dismiss-overlay {
+	.ui-responsive.ui-panel-dismiss-overlay, .ui-panel-content-wrap.panel-shift-left.panel-push, .ui-panel-content-wrap.panel-shift-right.panel-push {
 		width: 75%;
 	}
 }

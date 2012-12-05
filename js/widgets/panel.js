@@ -39,7 +39,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var $div = $( "<div>" ),
 			$panel = this,
 			slideDir = options.position === "left" ? "right" : "left",
-			clickable = options.dismissible && options.display !== "push",
+			clickable = options.dismissible,
 			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss";
 		setTimeout(function(){
 			if( clickable ){
@@ -69,7 +69,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		$el.addClass( klass );
 		if( $( "." + o.classes.contentWrap ).length === 0 ){
-			$( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + o.classes.contentWrap + '" />' );
+			$page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + o.classes.contentWrap + '" />' );
 		}
 		if( o.theme ){
 			$el.addClass( "ui-body-" + o.theme );
