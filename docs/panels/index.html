@@ -30,45 +30,47 @@
 						<a href="#" data-rel="close">Close menu</a>
 					</li>
 					<li data-filtertext="wai-aria voiceover accessibility screen reader">
-						<a href="about/accessibility.html">Accessibility</a>
+						<a href="../about/accessibility.html">Accessibility</a>
 					</li>
 					<li data-filtertext="accordions collapsible set collapsible-set collapsed">
-						<a href="content/content-collapsible-set.html">Accordions</a>
+						<a href="../content/content-collapsible-set.html">Accordions</a>
 					</li>
 					<li data-filtertext="ajax navigation model">
-						<a href="pages/page-navmodel.html">Ajax navigation model</a>
+						<a href="../pages/page-navmodel.html">Ajax navigation model</a>
 					</li>
 					<li data-filtertext="anatomy of page viewport">
-						<a href="pages/page-anatomy.html">Anatomy of a page</a>
+						<a href="../pages/page-anatomy.html">Anatomy of a page</a>
 					</li>
 					<li data-filtertext="events api animationComplete transition css">
-						<a href="api/events.html">Animation events</a>
+						<a href="../api/events.html">Animation events</a>
 					</li>
 					<li data-filtertext="listview autodivider">
-						<a href="lists/lists-autodividers.html">Automatic listview dividers</a>
+						<a href="../lists/lists-autodividers.html">Automatic listview dividers</a>
 					</li>
 					<li data-filtertext="button link submit cancel image reset mini buttonmarkup enable disable">
-						<a href="buttons/buttons-types.html">Buttons</a>
+						<a href="../buttons/buttons-types.html">Buttons</a>
+					</li>
+					<li data-filtertext="button icon">
+						<a href="../buttons/buttons-icons.html">Button icons</a>
+					</li>
+					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
+						<a href="../pages/page-cache.html">Caching pages</a>
+					</li>
+					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
+						<a href="../forms/checkboxes/">Checkbox</a>
 					</li>
 					<li data-filtertext="button icon">
 						<a href="buttons/buttons-icons.html">Button icons</a>
 					</li>
 					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
-						<a href="pages/page-cache.html">Caching pages</a>
+						<a href="../pages/page-cache.html">Caching pages</a>
 					</li>
 					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
-						<a href="forms/checkboxes/">Checkbox</a>
-					</li>
-					<li data-filtertext="button icon">
-						<a href="buttons/buttons-icons.html">Button icons</a>
-					</li>
-					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
-						<a href="pages/page-cache.html">Caching pages</a>
-					</li>
-					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
-						<a href="forms/checkboxes/">Checkbox</a>
+						<a href="../forms/checkboxes/">Checkbox</a>
 					</li>
 				</ul>
+				
+				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
 				<!-- panel content goes here -->
 			</div><!-- /panel -->
 			<div data-role="panel" id="mypanel1" data-theme="d">
@@ -82,13 +84,11 @@
 			</div><!-- /header -->
 			<div data-role="content">
 				<h1>Panels</h1>
-				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
-
-				<a href="#mypanel" data-rel="panel" data-role="button" data-inline="true">Default panel</a>
+				
 
 				<h4>Left Panel: Navigation example</h4>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel" data-role="button" data-inline="true" data-display="reveal" data-position="left" data-dismissible="false">Reveal</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="reveal" data-position="left" data-dismissible="true">Reveal</a>
 					<a href="#mypanel" data-role="button" data-inline="true" data-display="push" data-position="left" data-dismissible="true">Push</a>
 					<a href="#mypanel" data-role="button" data-inline="true" data-display="overlay" data-position="left" data-dismissible="true">Overlay</a>
 				</div>
@@ -100,6 +100,9 @@
 					<a href="#mypanel1" data-role="button" data-inline="true" data-display="overlay" data-position="right" data-dismissible="true">Overlay</a>
 				</div>
 				
+				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
+
+				<a href="#mypanel" data-rel="panel" data-role="button" data-inline="true">Default panel</a>
 
 				<h2>Basic panel markup</h2>
 				<p>A panel consists of a container with a <code>data-role=&quot;panel&quot;</code> attribute and a unique <code>ID</code>. This <code>ID</code> will be referenced by the link or button to open and close the panel.</p>
@@ -134,10 +137,8 @@
 &lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Open panel&lt;/a&gt;
 </code></pre>
 				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (reveal mode). </p>
-				<a href="#mypanel" data-rel="panel" data-display="push" data-position="left">Open panel</a>
+				
 				<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above), and  add the <code>data-rel="panel"</code> attribute. This instructs the framework to bind the link to the popup. This link will toggle the visibility of the popup so tapping it will open the panel, and tapping it again will close it.</p>
-
-				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (reveal mode). Here is a panel link with the defaults:</p>
 				<a href="#mypanel" data-rel="panel">Open panel</a>
 
 				<p>When using markup to control panels, you can only have a single panel open at once. Clicking a link to open a panel while one is already open will auto-close the first. This is done to keep the markup-only configuration simple.</p>
