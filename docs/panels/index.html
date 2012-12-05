@@ -117,23 +117,26 @@
 
 				<h4>Left Panel: Navigation example</h4>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel" data-role="button" data-inline="true" data-display="reveal" data-position="left" data-dismissible="true" data-icon="bars">Reveal</a>
-					<a href="#mypanel" data-role="button" data-inline="true" data-display="push" data-position="left" data-dismissible="true">Push</a>
-					<a href="#mypanel" data-role="button" data-inline="true" data-display="overlay" data-position="left" data-dismissible="true">Overlay</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="reveal" data-position="left" data-dismissible="true" data-icon="bars" data-mini="true">Reveal</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="push" data-position="left" data-dismissible="true" data-mini="true">Push</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="overlay" data-position="left" data-dismissible="true" data-mini="true">Overlay</a>
 				</div>
 				
 				<h4>Right Panel: Edit panel</h4>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel1" data-role="button" data-inline="true" data-display="reveal" data-position="right" data-dismissible="true" data-icon="edit">Reveal</a>
-					<a href="#mypanel1" data-role="button" data-inline="true" data-display="push" data-position="right" data-dismissible="true">Push</a>
-					<a href="#mypanel1" data-role="button" data-inline="true" data-display="overlay" data-position="right" data-dismissible="true">Overlay</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-display="reveal" data-position="right" data-dismissible="true" data-icon="edit" data-mini="true">Reveal</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-display="push" data-position="right" data-dismissible="true" data-mini="true">Push</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-display="overlay" data-position="right" data-dismissible="true" data-mini="true">Overlay</a>
 				</div>
 				
+				
+
+				<h2>Basic panel markup</h2>
+
 				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
 
 				<a href="#mypanel" data-rel="panel" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
-
-				<h2>Basic panel markup</h2>
+				
 				<p>A panel consists of a container with a <code>data-role=&quot;panel&quot;</code> attribute and a unique <code>ID</code>. This <code>ID</code> will be referenced by the link or button to open and close the panel.</p>
 				
 				<p>A panel must sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>before</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
