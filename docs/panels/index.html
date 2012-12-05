@@ -70,11 +70,40 @@
 					</li>
 				</ul>
 				
-				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
 				<!-- panel content goes here -->
 			</div><!-- /panel -->
-			<div data-role="panel" id="mypanel1" data-theme="d">
-				<a href="#" data-rel="close" data-role="button" data-inline="true" data-mini="true" data-icon="delete">Close panel 2</a>
+			<div data-role="panel" id="mypanel1" data-theme="b">
+				<style>
+				.userform { padding:.8em 1.2em; }
+				.userform h2 { color:#555; margin:0.3em 0 .8em 0; padding-bottom:.5em; border-bottom:1px solid rgba(0,0,0,.1); }
+				.userform label { display:block; margin-top:1.2em; }
+				.switch .ui-slider-switch { width: 7.5em }
+				.ui-grid-a { margin-top:1em; padding-top:.8em; margin-top:1.4em; border-top:1px solid rgba(0,0,0,.1); }
+				</style>
+				<form class="userform">
+					<h2>Create new user</h2>
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" value="" data-clear-btn="true">
+
+					<label for="email">Email</label>
+					<input type="email" name="email" id="status" value="" data-clear-btn="true">
+
+					<label for="password">Password:</label>
+					<input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off">
+
+					<div class="switch">
+					<label for="status">Status</label>
+					<select name="status" id="slider2" data-role="slider">
+					    <option value="off">Inactive</option>
+					    <option value="on">Active</option>
+					</select>
+					</div>
+
+					<div class="ui-grid-a">
+					    <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c">Cancel</a></div>
+					    <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b">Save</a></div>
+					</div>
+
 				<!-- panel content goes here -->
 			</div><!-- /panel -->
 			<div data-role="header" data-theme="f">
