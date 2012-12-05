@@ -97,7 +97,7 @@ $.fn.viewSourceCode = function() {
 		if ( $( this ).is( "[data-demo-js]" ) ) {
 			var scriptId = $( this ).attr( "data-demo-js" );
 
-			if ( scriptId === true ) {
+			if ( scriptId === "true" ) {
 				scriptId = "";
 			}
 			js = $( "<div></div>" ).append( $( "head" ).find( "script" + scriptId ).contents().clone() ).html();
@@ -110,7 +110,7 @@ $.fn.viewSourceCode = function() {
 		if ( $( this ).is( "[data-demo-css]" ) ) {
 			var styleId = $( this ).attr( "data-demo-css" );
 
-			if ( styleId === true ) {
+			if ( styleId === "true" ) {
 				styleId = "";
 			}
 			css = $( "<div></div>" ).append( $( "head" ).find( "style" + styleId ).contents().clone() ).html();
