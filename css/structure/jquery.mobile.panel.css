@@ -214,9 +214,9 @@
 	}
 	.ui-panel-transforms .ui-responsive.ui-panel-position-right {
 		-webkit-transform: translateX(400%);
-		-moz-transform: translateX(100%);
-		-ms-transform: translateX(100%);
-		-o-transform: translateX(100%);
+		-moz-transform: translateX(400%);
+		-ms-transform: translateX(400%);
+		-o-transform: translateX(400%);
 		transform: translateX(400%);
 	}
 
