@@ -94,8 +94,13 @@ $.fn.viewSourceCode = function() {
 				"</div>" );
 			appendSource( html, collapsibleHTML );
 		}
-		if ( $( this ).is( "[data-demo-js='true']" ) ) {
-			js = $( "<div></div>" ).append( $( "head" ).find( "script" ).contents().clone() ).html();
+		if ( $( this ).is( "[data-demo-js]" ) ) {
+			var scriptId = $( this ).attr( "data-demo-js" );
+
+			if ( scriptId === true ) {
+				scriptId = "";
+			}
+			js = $( "<div></div>" ).append( $( "head" ).find( "script" + scriptId ).contents().clone() ).html();
 			collapsibleJS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='f' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>JS</h1>" +
 					"<pre class='brush: js;'></pre>" +
