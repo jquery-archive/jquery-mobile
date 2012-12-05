@@ -194,7 +194,7 @@
 .ui-page-active.ui-panel-body-scroll-block{
 	overflow-x:hidden;
 }
-@media screen and (min-width: 50em){
+@media screen and (min-width: 45em){
 	.ui-panel-dismiss {
 		width: 75%;
 	}
