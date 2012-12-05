@@ -5,6 +5,12 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 //>>css.structure: ../css/structure/jquery.mobile.popup.css,../css/structure/jquery.mobile.transition.css,../css/structure/jquery.mobile.transition.fade.css
 
+// Lessons:
+// You must remove nav bindings even if there is no history. Make sure you
+// remove nav bindings in the same frame as the beginning of the close process
+// if there is no history. If there is history, remove nav bindings from the nav
+// bindings handler - that way, only one of them can fire per close process.
+
 define( [ "jquery",
 	"../jquery.mobile.widget",
 	"../jquery.mobile.support",
@@ -52,7 +58,7 @@ define( [ "jquery",
 			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
-			dismissable: true,
+			dismissible: true,
 
 			// NOTE Windows Phone 7 has a scroll position caching issue that
 			//      requires us to disable popup history management by default
@@ -65,7 +71,7 @@ define( [ "jquery",
 		_eatEventAndClose: function( e ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-			if ( this.options.dismissable ) {
+			if ( this.options.dismissible ) {
 				this.close();
 			}
 			return false;
@@ -203,6 +209,7 @@ define( [ "jquery",
 
 			// Define instance variables
 			$.extend( this, {
+				_scrollTop: 0,
 				_page: thisPage,
 				_ui: ui,
 				_fallbackTransition: "",
@@ -299,7 +306,7 @@ define( [ "jquery",
 		_setTolerance: function( value ) {
 			var tol = { t: 30, r: 15, b: 30, l: 15 };
 
-			if ( value ) {
+			if ( value !== undefined ) {
 				var ar = String( value ).split( "," );
 
 				$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
@@ -533,7 +540,8 @@ define( [ "jquery",
 		},
 
 		_open: function( options ) {
-			var coords, transition,
+			var coords,
+				o = $.extend( {}, this.options, options ),
 				androidBlacklist = ( function() {
 					var w = window,
 						ua = navigator.userAgent,
@@ -551,16 +559,10 @@ define( [ "jquery",
 					return false;
 				}());
 
-			// Make sure options is defined
-			options = ( options || {} );
-
-			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
-			transition = options.transition || this.options.transition;
-
 			// Give applications a chance to modify the contents of the container before it appears
 			this._trigger( "beforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( options.x, options.y, options.positionTo || this.options.positionTo || "origin" ) );
+			coords = this._placementCoords( this._desiredCoords( o.x, o.y, o.positionTo ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -570,12 +572,8 @@ define( [ "jquery",
 				$.noop,
 				$.proxy( this, "_openPrereqsComplete" ) );
 
-			if ( transition ) {
-				this._currentTransition = transition;
-				this._applyTransition( transition );
-			} else {
-				transition = this.options.transition;
-			}
+			this._currentTransition = o.transition;
+			this._applyTransition( o.transition );
 
 			if ( !this.options.theme ) {
 				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
@@ -606,7 +604,7 @@ define( [ "jquery",
 			}
 			this._animate({
 				additionalCondition: true,
-				transition: transition,
+				transition: o.transition,
 				classToRemove: "",
 				screenClassToAdd: "in",
 				containerClassToAdd: "in",
@@ -633,12 +631,6 @@ define( [ "jquery",
 
 			this._ui.container.removeAttr( "tabindex" );
 
-			// remove nav bindings if they are still present
-			opts.container.unbind( opts.closeEvents );
-
-			// unbind click handlers added when history is disabled
-			this.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
-
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
 
@@ -662,7 +654,7 @@ define( [ "jquery",
 
 			this._animate( {
 				additionalCondition: this._ui.screen.hasClass( "in" ),
-				transition: ( immediate ? "none" : ( this._currentTransition || this.options.transition ) ),
+				transition: ( immediate ? "none" : ( this._currentTransition ) ),
 				classToRemove: "in",
 				screenClassToAdd: "out",
 				containerClassToAdd: "reverse out",
@@ -699,9 +691,18 @@ define( [ "jquery",
 		},
 
 		_closePopup: function( e, data ) {
-			var parsedDst, toUrl;
+			var parsedDst, toUrl, o = this.options;
 
-			if ( e.type === "pagebeforechange" && data ) {
+			// restore location on screen
+			window.scrollTo( 0, this._scrollTop );
+
+			// remove nav bindings
+			o.container.unbind( o.closeEvents );
+
+			// unbind click handlers added when history is disabled
+			this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
+
+			if ( e && e.type === "pagebeforechange" && data ) {
 				// Determine whether we need to rapid-close the popup, or whether we can
 				// take the time to run the closing transition
 				if ( typeof data.toPage === "string" ) {
@@ -714,10 +715,10 @@ define( [ "jquery",
 
 				if ( this._myUrl !== toUrl ) {
 					// Going to a different page - close immediately
-					this.options.container.unbind( this.options.closeEvents );
 					this._close( true );
 				} else {
-					this._close();
+					this.close();
+					e.preventDefault();
 				}
 
 				return;
@@ -746,6 +747,7 @@ define( [ "jquery",
 
 			// set the global popup mutex
 			$.mobile.popup.active = this;
+			this._scrollTop = $( window ).scrollTop();
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
@@ -758,7 +760,7 @@ define( [ "jquery",
 				// relying on history to do it for us
 				self.element
 					.delegate( opts.closeLinkSelector, opts.closeLinkEvents, function( e ) {
-						self._close();
+						self.close();
 
 						// NOTE prevent the browser and navigation handlers from
 						// working with the link's rel=back. This may cause
@@ -812,10 +814,13 @@ define( [ "jquery",
 				return;
 			}
 
+			this._scrollTop = $( window ).scrollTop();
+
 			if( this.options.history ) {
 				$.mobile.back();
 			} else {
-				this._close();
+				// simulate the nav bindings having fired
+				this._closePopup();
 			}
 		}
 	});
@@ -836,8 +841,7 @@ define( [ "jquery",
 				x: offset.left + $link.outerWidth() / 2,
 				y: offset.top + $link.outerHeight() / 2,
 				transition: $link.jqmData( "transition" ),
-				positionTo: $link.jqmData( "position-to" ),
-				link: $link
+				positionTo: $link.jqmData( "position-to" )
 			});
 		}
 

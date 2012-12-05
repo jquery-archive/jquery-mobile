@@ -5,7 +5,7 @@
 .ui-collapsible-inset .ui-collapsible-heading .ui-btn { border-right-width: 1px; border-left-width: 1px; }
 .ui-collapsible-collapsed + .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn { border-top-width: 0; }
 .ui-collapsible-set .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn { border-top-width: 1px; }
-.ui-collapsible-heading .ui-btn-inner,
+.ui-collapsible-heading .ui-btn-inner { padding-left: 12px; }
 .ui-collapsible-heading .ui-btn-icon-left .ui-btn-inner { padding-left: 40px; }
 .ui-collapsible-heading .ui-btn-icon-right .ui-btn-inner { padding-left: 12px; padding-right: 40px; }
 .ui-collapsible-heading .ui-btn-icon-top .ui-btn-inner,

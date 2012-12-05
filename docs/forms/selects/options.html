@@ -50,7 +50,7 @@
 			<dd>
 				<p class="default">default: "b"</p>
 				<p>Sets the color scheme (swatch) for dividers in popup-based custom select menus when using the <code>optgroup</code> support. It accepts a single letter from a-z that maps to the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-				<pre><code>$( document ).bind( "mobileinit", function(){
+				<pre><code>$( document ).on( "mobileinit", function(){
 	<strong>$.mobile.listview.prototype.options.dividerTheme = "a";</strong>
 });
 </code></pre>
@@ -85,7 +85,7 @@
 			<dd>
 				<p class="default">default: "select:not(:jqmData(role='slider'))"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as select menus. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-				<pre><code>$( document ).bind( "mobileinit", function(){
+				<pre><code>$( document ).on( "mobileinit", function(){
 	<strong>$.mobile.selectmenu.prototype.options.initSelector = ".myselect";</strong>
 });
 </code></pre>

@@ -33,7 +33,7 @@
 
 			<pre>
 				<code>
-$(document).bind("mobileinit", function(){
+$(document).on("mobileinit", function(){
   //apply overrides here
 });
 				</code>
@@ -53,7 +53,7 @@ $(document).bind("mobileinit", function(){
 
 			<pre>
 				<code>
-$(document).bind("mobileinit", function(){
+$(document).on("mobileinit", function(){
   $.extend(  $.mobile , {
     <strong>foo: bar</strong>
   });
@@ -64,7 +64,7 @@ $(document).bind("mobileinit", function(){
 			<p>Alternatively, you can set them using object property notation.</p>
 			<pre>
 				<code>
-$(document).bind("mobileinit", function(){
+$(document).on("mobileinit", function(){
   <strong>$.mobile.foo = bar;</strong>
 });
 				</code>

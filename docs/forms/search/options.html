@@ -56,7 +56,7 @@
 			<dd>
 				<p class="default">default: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input:not([type])"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as textinputs. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.textinput.prototype.options.initSelector = ".myInputs";</strong>
 });
 </code></pre>

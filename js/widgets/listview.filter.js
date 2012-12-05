@@ -44,7 +44,7 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 		})
 		.attr( "data-" + $.mobile.ns + "type", "search" )
 		.jqmData( "lastval", "" )
-		.bind( "keyup change", function() {
+		.bind( "keyup change input", function() {
 
 			var $this = $( this ),
 				val = this.value.toLowerCase(),

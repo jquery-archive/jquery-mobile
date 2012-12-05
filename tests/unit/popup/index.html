@@ -15,6 +15,16 @@
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 	<script src="../../../external/qunit.js"></script>
 	<script>
+		( function( $, undefined ) {
+			// Set the default transition to "fade" if specified in the query
+			if ( !!~location.search.indexOf( "setFadeTransition" ) ) {
+				$( document ).one( "mobileinit", function() {
+					$.mobile.popup.prototype.options.transition = "fade";
+				});
+			}
+		})( jQuery );
+	</script>
+	<script>
 		$.testHelper.asyncLoad([
 			[
 				"widgets/popup",
@@ -33,7 +43,7 @@
 <body>
   <div id="qunit"></div>
 
-  <div data-nstest-role="page">
+  <div data-nstest-role="page" id="start-page">
     <div data-nstest-role="content" id="page-content">
       <div data-nstest-role="popup" id="test-popup">
         <p>This is the test popup</p>
@@ -63,9 +73,10 @@
         <p>This is the test popup</p>
       </div>
 
-      <div data-nstest-role="popup" id="test-popup-dismissable" data-nstest-dismissable="false">
+      <div data-nstest-role="popup" id="test-popup-dismissible" data-nstest-dismissible="false">
         <p>This is the test popup</p>
       </div>
+      <a id="go-to-another-page" href="back-two.html">Go</a>
     </div>
   </div>
 

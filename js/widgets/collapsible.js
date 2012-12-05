@@ -15,6 +15,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		collapseCueText: " click to collapse contents",
 		collapsed: true,
 		heading: "h1,h2,h3,h4,h5,h6,legend",
+		collapsedIcon: "plus",
+		expandedIcon: "minus",
+		iconpos: "left",
 		theme: null,
 		contentTheme: null,
 		inset: true,
@@ -28,8 +31,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			o = this.options,
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.children( o.heading ).first(),
-			collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon,
-			expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon,
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
 			collapsibleClasses = "";
@@ -51,18 +52,15 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
 
-			// Get the preference for collapsed icon in the set
-			if ( !o.collapsedIcon ) {
-				o.collapsedIcon = collapsibleSet.jqmData( "collapsed-icon" );
-			}
-			// Get the preference for expanded icon in the set
-			if ( !o.expandedIcon ) {
-				o.expandedIcon = collapsibleSet.jqmData( "expanded-icon" );
-			}
-			// Gets the preference icon position in the set
-			if ( !o.iconpos ) {
-				o.iconpos = collapsibleSet.jqmData( "iconpos" );
-			}
+			// Get the preference for collapsed icon in the set, but override with data- attribute on the individual collapsible
+			o.collapsedIcon = $el.jqmData( "collapsed-icon" ) || collapsibleSet.jqmData( "collapsed-icon" ) || o.collapsedIcon;
+
+			// Get the preference for expanded icon in the set, but override with data- attribute on the individual collapsible
+			o.expandedIcon = $el.jqmData( "expanded-icon" ) || collapsibleSet.jqmData( "expanded-icon" ) || o.expandedIcon;
+
+			// Gets the preference icon position in the set, but override with data- attribute on the individual collapsible
+			o.iconpos = $el.jqmData( "iconpos" ) || collapsibleSet.jqmData( "iconpos" ) || o.iconpos;
+
 			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
 			if ( collapsibleSet.jqmData( "inset" ) !== undefined ) {
 				o.inset = collapsibleSet.jqmData( "inset" );
@@ -96,9 +94,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsible.addClass( collapsibleClasses );
 		}
 		
-		collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon || "plus";
-		expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon || "minus";
-
 		collapsibleHeading
 			//drop heading in before content
 			.insertBefore( collapsibleContent )
@@ -111,8 +106,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.buttonMarkup({
 					shadow: false,
 					corners: false,
-					iconpos: $el.jqmData( "iconpos" ) || o.iconpos || "left",
-					icon: collapsedIcon,
+					iconpos: o.iconpos,
+					icon: o.collapsedIcon,
 					mini: o.mini,
 					theme: o.theme
 				});
@@ -132,9 +127,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.text( isCollapse ? o.expandCueText : o.collapseCueText )
 						.end()
 						.find( ".ui-icon" )
-							.toggleClass( "ui-icon-" + expandedIcon, !isCollapse )
+							.toggleClass( "ui-icon-" + o.expandedIcon, !isCollapse )
 							// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
-							.toggleClass( "ui-icon-" + collapsedIcon, ( isCollapse || expandedIcon === collapsedIcon ) )
+							.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
 						.end()
 						.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
 

@@ -49,7 +49,7 @@
 			<dd>
 				<p class="default">default: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as sliders. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.slider.prototype.options.initSelector = ".myslider";</strong>
 });
 </code></pre>

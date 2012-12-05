@@ -78,6 +78,52 @@
 		ok( $container.children().is( $payload ), "After destroying on-the-fly popup, its payload is returned to its original location" );
 	});
 
+	asyncTest( "Popup does not go back in history twice when opening on separate page", function() {
+		var eventNs = ".backTwice", popup = function() { return $( "#back-twice-test-popup" ); };
+		$.testHelper.detailedEventCascade([
+			function() {
+				$( "#go-to-another-page" ).click();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate" + eventNs + "1" },
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+			},
+			function() {
+				deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Reached another page" );
+				$( "#open-back-twice-test-popup" ).click();
+			},
+			{
+				popupafteropen: { src: popup, event: "popupafteropen" + eventNs + "2" },
+				navigate: { src: $(document), event: "navigate" + eventNs + "2" }
+			},
+			function( result ) {
+				deepEqual( result.popupafteropen.timedOut, false, "popupafteropen event did arrive" );
+				deepEqual( result.navigate.timedOut, false, "navigate event did arrive" );
+				$( "#back-twice-test-popup-screen" ).click();
+			},
+			{
+				popupafterclose: { src: popup, event: "popupafterclose" + eventNs + "3" },
+				navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
+				pagechange: { src: $( document ), event: "pagechange" + eventNs + "3" }
+			},
+			function( result ) {
+				deepEqual( result.popupafterclose.timedOut, false, "popupafterclose event did arrive" );
+				deepEqual( result.navigate.timedOut, false, "navigate event did arrived" );
+				deepEqual( result.pagechange.timedOut, false, "pagechange event did arrive" );
+				deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Back to another page" );
+				$.mobile.back();
+			},
+			{
+				navigate: { src: $( document ), event: "navigate" + eventNs + "4" }
+			},
+			function( result ) {
+				deepEqual( result.navigate.timedOut, false, "navigate event did arrive" );
+				deepEqual( $.mobile.activePage.attr( "id" ), "start-page", "Back to start page" );
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "Popup opens and closes", function() {
 		var $popup = $( "#test-popup" );
 		expect( 9 );
@@ -475,8 +521,8 @@
 		]);
 	});
 
-	asyncTest( "Cannot close a non-dismissable popup by clicking on the screen", function() {
-		var $popup = $( "#test-popup-dismissable" ), eventNs = ".cannotCloseNonDismissablePopup";
+	asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", function() {
+		var $popup = $( "#test-popup-dismissible" ), eventNs = ".cannotCloseNonDismissiblePopup";
 
 		$.testHelper.detailedEventCascade([
 			function() {

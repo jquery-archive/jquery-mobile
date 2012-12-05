@@ -47,12 +47,12 @@
 				<pre><code>$( ".selector" ).popup(<strong>{ corners: false }</strong>);</code></pre>
 			</dd>
 
-			<dt><code>dismissable</code> <em>boolean</em></dt>
+			<dt><code>dismissible</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: true</p>
-				<p>Sets whether clicking outside the popup or pressing Escape while the popup is open will close the popup. This option is also exposed as a data attribute: <code>data-dismissable=&quot;false&quot;</code></p>
+				<p>Sets whether clicking outside the popup or pressing Escape while the popup is open will close the popup. This option is also exposed as a data attribute: <code>data-dismissible=&quot;false&quot;</code></p>
 				<p><em>Note:</em> When history support is turned on, pressing the browser's "Back" button will dismiss the popup even if this option is set to false.
-				<pre><code>$( ".selector" ).popup(<strong>{ dismissable: false }</strong>);</code></pre>
+				<pre><code>$( ".selector" ).popup(<strong>{ dismissible: false }</strong>);</code></pre>
 			</dd>
 
 			<dt><code>history</code> <em>boolean</em></dt>
@@ -66,7 +66,7 @@
 			<dd>
 				<p class="default">default: ":jqmData(role='popup')"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as popups. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.popup.prototype.options.initSelector = ".mypopup";</strong>
 });
 </code></pre>
