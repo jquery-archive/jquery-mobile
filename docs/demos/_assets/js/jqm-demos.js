@@ -107,8 +107,13 @@ $.fn.viewSourceCode = function() {
 				"</div>" );
 			appendSource( js, collapsibleJS );
 		}
-		if ( $( this ).is( "[data-demo-css='true']" ) ) {
-			css = $( "<div></div>" ).append( $( "head" ).find( "style" ).contents().clone() ).html();
+		if ( $( this ).is( "[data-demo-css]" ) ) {
+			var styleId = $( this ).attr( "data-demo-css" );
+
+			if ( styleId === true ) {
+				styleId = "";
+			}
+			css = $( "<div></div>" ).append( $( "head" ).find( "style" + styleId ).contents().clone() ).html();
 
 			collapsibleCSS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='e' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>CSS</h1>" +
@@ -125,7 +130,7 @@ $.fn.viewSourceCode = function() {
 };
 
 $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
-	$( this ).find( "[data-demo-html='true'], [data-demo-js], [data-demo-css='true']" ).viewSourceCode();
+	$( this ).find( "[data-demo-html='true'], [data-demo-js], [data-demo-css]" ).viewSourceCode();
 	SyntaxHighlighter.defaults['toolbar'] = false;
 	SyntaxHighlighter.defaults['auto-links'] = false;
 	SyntaxHighlighter.all();
