@@ -80,51 +80,46 @@
 		ok( $container.children().is( $payload ), "After destroying on-the-fly popup, its payload is returned to its original location" );
 	});
 
-	// asyncTest( "Popup does not go back in history twice when opening on separate page", function() {
-	// 	var eventNs = ".backTwice", popup = function() { return $( "#back-twice-test-popup" ); };
-	// 	$.testHelper.detailedEventCascade([
-	// 		function() {
-	// 			$( "#go-to-another-page" ).click();
-	// 		},
-	// 		{
-	// 			navigate: { src: $( document ), event: "navigate" + eventNs + "1" },
-	// 			pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
-	// 		},
-	// 		function() {
-	// 			deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Reached another page" );
-	// 			$( "#open-back-twice-test-popup" ).click();
-	// 		},
-	// 		{
-	// 			popupafteropen: { src: popup, event: "popupafteropen" + eventNs + "2" },
-	// 			navigate: { src: $(document), event: "navigate" + eventNs + "2" }
-	// 		},
-	// 		function( result ) {
-	// 			deepEqual( result.popupafteropen.timedOut, false, "popupafteropen event did arrive" );
-	// 			deepEqual( result.navigate.timedOut, false, "navigate event did arrive" );
-	// 			$( "#back-twice-test-popup-screen" ).click();
-	// 		},
-	// 		{
-	// 			popupafterclose: { src: popup, event: "popupafterclose" + eventNs + "3" },
-	// 			navigate: { src: $( document ), event: "navigate" + eventNs + "3" },
-	// 			pagechange: { src: $( document ), event: "pagechange" + eventNs + "3" }
-	// 		},
-	// 		function( result ) {
-	// 			deepEqual( result.popupafterclose.timedOut, false, "popupafterclose event did arrive" );
-	// 			deepEqual( result.navigate.timedOut, false, "navigate event did arrived" );
-	// 			deepEqual( result.pagechange.timedOut, false, "pagechange event did arrive" );
-	// 			deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Back to another page" );
-	// 			$.mobile.back();
-	// 		},
-	// 		{
-	// 			navigate: { src: $( document ), event: "navigate" + eventNs + "4" }
-	// 		},
-	// 		function( result ) {
-	// 			deepEqual( result.navigate.timedOut, false, "navigate event did arrive" );
-	// 			deepEqual( $.mobile.activePage.attr( "id" ), "start-page", "Back to start page" );
-	// 			start();
-	// 		}
-	// 	]);
-	// });
+	asyncTest( "Popup does not go back in history twice when opening on separate page", function() {
+		var eventNs = ".backTwice", popup = function() { return $( "#back-twice-test-popup" ); };
+		$.testHelper.detailedEventCascade([
+			function() {
+				$( "#go-to-another-page" ).click();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+			},
+			function() {
+				deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Reached another page" );
+				$( "#open-back-twice-test-popup" ).click();
+			},
+			{
+				popupafteropen: { src: popup, event: "popupafteropen" + eventNs + "2" }
+			},
+			function( result ) {
+				deepEqual( result.popupafteropen.timedOut, false, "popupafteropen event did arrive" );
+				$( "#back-twice-test-popup-screen" ).click();
+			},
+			{
+				popupafterclose: { src: popup, event: "popupafterclose" + eventNs + "3" },
+				pagechange: { src: $( document ), event: "pagechange" + eventNs + "3" }
+			},
+			function( result ) {
+				deepEqual( result.popupafterclose.timedOut, false, "popupafterclose event did arrive" );
+				deepEqual( result.pagechange.timedOut, false, "pagechange event did arrive" );
+				deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Back to another page" );
+				$.mobile.back();
+			},
+			{
+				pagechange: { src: $( document ), event: "pagechange" + eventNs + "4" }
+			},
+			function( result ) {
+				deepEqual( result.pagechange.timedOut, false, "pagechange event did arrive" );
+				deepEqual( $.mobile.activePage.attr( "id" ), "start-page", "Back to start page" );
+				start();
+			}
+		]);
+	});
 
 	asyncTest( "Popup opens and closes", function() {
 		var $popup = $( "#test-popup" );
@@ -137,7 +132,7 @@
 
 			{
 				opened: { src: $popup, event: "popupafteropen.opensandcloses" },
-				hashchange: { src: $(document), event: "navigate.opensandcloses" }
+				navigate: { src: $(window), event: $.event.special.navigate.originalEventName + ".opensandcloses" }
 			},
 
 			function( result ) {
@@ -156,7 +151,7 @@
 
 			{
 				closed: { src: $popup, event: "popupafterclose.opensandcloses2" },
-				hashchange: { src: $(document), event: "navigate.opensandcloses2" }
+				navigate: { src: $(window), event: $.event.special.navigate.originalEventName + ".opensandcloses2" }
 			},
 
 			function( result) {
@@ -182,7 +177,7 @@
 
 			{
 				opened: { src: $( "#test-popup" ), event: "popupafteropen.linkActiveTestStep1" },
-				hashchange: { src: $(document), event: "navigate.linkActive" },
+				navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + ".linkActive" },
 				timeout: { length: 1000 }
 			},
 
@@ -194,7 +189,7 @@
 
 			{
 				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep2" },
-				hashchange: { src: $(document), event: "navigate.linkActive2" }
+				navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + ".linkActive2" }
 			},
 
 			function( result ) {
@@ -213,7 +208,7 @@
 
 			{
 				opened: { src: $( "#test-popup" ), event: "popupafteropen.linkActiveTestStep4" },
-				hashchange: { src: $( document ), event: "navigate.linkActive4" }
+				navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + ".linkActive4" }
 			},
 
 			function() {
@@ -222,7 +217,7 @@
 
 			{
 				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep4" },
-				hashchange: { src: $( document ), event: "navigate.linkActive4" },
+				navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + ".linkActive4" },
 				timeout: { length: 500 }
 			},
 
@@ -240,7 +235,7 @@
 			return;
 		}
 
-		expect( 6 );
+		expect( 5 );
 
 		$.testHelper.detailedEventCascade([
 			function() {
@@ -262,12 +257,10 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "popupafterclose.hashInteractStep2" },
-				navigate: { src: $(window), event: "navigate.hashInteractStep2" }
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.hashInteractStep2" }
 			},
 
 			function( result ) {
-				ok( !result.navigate.timedOut, "Closing a popup from a non-dialogHashKey location causes a 'navigate' event" );
 				ok( decodeURIComponent( location.href ) === baseUrl, "location.href has been restored after the popup" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex, "$.mobile.urlHistory has been restored correctly" );
 			},
@@ -322,7 +315,7 @@
 			},
 
 			{
-				hashchange: { src: $( window ), event: "navigate.anotherPageStep3" },
+				hashchange: { src: $( window ), event: $.event.special.navigate.originalEventName + ".anotherPageStep3" },
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange.anotherPageStep3" }
 			},
 
@@ -370,8 +363,7 @@
 
 			{
 				focus: { src: $popup.parent(), event: "focus.popupFocusedAfterOpen1" },
-				opened: { src: $popup, event: "popupafteropen.popupFocusedAfterOpen1" },
-				navigate: { src: $( document ), event: "navigate.popupFocusedAfterOpen1" }
+				opened: { src: $popup, event: "popupafteropen.popupFocusedAfterOpen1" }
 			},
 
 			function( result ) {
@@ -381,8 +373,7 @@
 			},
 
 			{
-				closed: { src: $popup, event: "popupafterclose.popupFocusedAfterOpen2" },
-				navigate: { src: $( document ), event: "navigate.popupFocusedAfterOpen1" }
+				closed: { src: $popup, event: "popupafterclose.popupFocusedAfterOpen2" }
 			},
 
 			function( result ) {
@@ -534,35 +525,29 @@
 			},
 
 			{
-				navigate: { src: $( window ), event: "navigate" + eventNs + "0" },
 				popupafteropen: { src: $popup, event: "popupafteropen" + eventNs + "0" }
 			},
 
 			function( results ) {
-				ok( !results.navigate.timedOut, "A 'navigate' event has occurred" );
 				ok( !results.popupafteropen.timedOut, "The popup has emitted a 'popupafteropen' event" );
 				// Click on popup screen
 				$popup.parent().prev().click();
 			},
 
 			{
-				navigate: { src: $( window ), event: "navigate" + eventNs + "1" },
 				popupafterclose: { src: $popup, event: "popupafterclose" + eventNs + "1" }
 			},
 
 			function( results ) {
-				ok( results.navigate.timedOut, "A 'navigate' event has not occurred" );
 				ok( results.popupafterclose.timedOut, "The popup has not emitted a 'popupafterclose' event" );
 				$.mobile.back();
 			},
 
 			{
-				navigate: { src: $( window ), event: "navigate" + eventNs + "2" },
 				popupafterclose: { src: $popup, event: "popupafterclose" + eventNs + "2" }
 			},
 
 			function( results ) {
-				ok( !results.navigate.timedOut, "A 'navigate' event has occurred" );
 				ok( !results.popupafterclose.timedOut, "The popup has emitted a 'popupafterclose' event" );
 				start();
 			}

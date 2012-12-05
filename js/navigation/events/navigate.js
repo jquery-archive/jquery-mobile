@@ -16,6 +16,8 @@ define([ "jquery",
 
 		pushStateEnabled: true,
 
+		originalEventName: undefined,
+
 		// TODO a lot of duplication between popstate and hashchange
 		popstate: function( event ) {
 			var newEvent = new $.Event( "navigate" ),
@@ -85,9 +87,11 @@ define([ "jquery",
 			self.bound = true;
 
 			if( $.support.pushState && self.pushStateEnabled ) {
-				$win.bind( "popstate.navigate", self.popstate );
+				self.originalEventName = "popstate.navigate";
+				$win.bind( self.originalEventName, self.popstate );
 			} else {
-				$win.bind( "hashchange.navigate", self.hashchange );
+				self.originalEventName = "hashchange.navigate";
+				$win.bind( self.originalEventName, self.hashchange );
 			}
 		}
 	};
