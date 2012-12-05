@@ -31,6 +31,8 @@ input[type=number]::-webkit-outer-spin-button { margin: 0; }
 	.ui-field-contain textarea.ui-input-text,
 	.ui-field-contain .ui-input-search,
 	.ui-field-contain div.ui-input-text { width: 78%; display: inline-block; }
+	.ui-field-contain .ui-input-search,
+	.ui-field-contain div.ui-input-text { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
 	.ui-hide-label input.ui-input-text,
 	.ui-hide-label textarea.ui-input-text,
 	.ui-hide-label .ui-input-search,
