@@ -125,7 +125,7 @@ $.fn.viewSourceCode = function() {
 };
 
 $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
-	$( this ).find( "[data-demo-html='true'], [data-demo-js='true'], [data-demo-css='true']" ).viewSourceCode();
+	$( this ).find( "[data-demo-html='true'], [data-demo-js], [data-demo-css='true']" ).viewSourceCode();
 	SyntaxHighlighter.defaults['toolbar'] = false;
 	SyntaxHighlighter.defaults['auto-links'] = false;
 	SyntaxHighlighter.all();
