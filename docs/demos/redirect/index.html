@@ -8,17 +8,6 @@
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../_assets/js/jqm-demos.js"></script>
-	<script>
-	$( function() {
-		$.ajax( "redirect.php?source" )
-			.success( function( data ) {
-				$( "#phpSource" ).html( data );
-			})
-			.error( function() {
-				$( "#phpSource" ).html( "<p>Failed to retrieve PHP source</p>" );
-			});
-	});
-	</script>
 	<script src="../../../js/"></script>
 	<script id="redirectCode">
 	$( document ).bind( "pagebeforechange", function( e, data ) {
@@ -49,11 +38,11 @@
 	<div data-role="content">
 	
 		<div class="content-primary">
-			<div data-role="popup" class="ui-content" data-position-to="window" id="phpSource"><p>Loading PHP source ...</p></div>
-			<div data-demo-html="true" data-demo-js="#redirectCode">
+            
+			<div data-demo-html="true" data-demo-js="#redirectCode" data-demo-php="redirect">
 				<p><a href="redirect.php?to=redirect-target.html" data-role="button" data-inline="true">Redirect</a></p>
 			</div><!--/demo-html -->
-			<p><a href="#phpSource" data-rel="popup" data-role="button" data-inline="true">View PHP Source</a></p>
+
 		</div><!--/content-primary -->
 	
 	</div><!-- /content -->
