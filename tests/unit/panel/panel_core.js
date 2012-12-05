@@ -28,28 +28,30 @@
 			start();
 		}, 800);
 	});
-	asyncTest( "Attributes on panel should be correctly created when open and close is called" , function(){
-		expect( 6 );
-		var $uipanel = $('#basic-panel-test .ui-panel'),
-			$panel = $uipanel.data( "mobile-panel" ),
+	module( "Open/Close Panel", {
+		setup: function(){
+			var hash = "#open-close-panel-test";
+			if( location.hash != hash ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( hash );
+			}
+		},
+
+		teardown: function() {
+		}
+	});
+	asyncTest( "Attributes on panel should be correctly created when open is called" , function(){
+		expect( 3 );
+		var $uipanel = $('#open-close-panel-test .ui-panel'),
 			position, display, dismissible;
 		$.testHelper.pageSequence([
 			function() {
-				$uipanel.one( "panelopen" , function(){
-					var $this = $( this );
-					position = $this.hasClass( "ui-panel-position-right" );
-					display = $this.hasClass( "ui-panel-display-pan" );
-					dismissible = $this.hasClass( "ui-panel-dismissible-true" );
-				});
-				$uipanel.one( "panelclose" , function(){
-					var $this = $( this );
-					position = $this.hasClass( "ui-panel-position-right" );
-					display = $this.hasClass( "ui-panel-display-pan" );
-					dismissible = $this.hasClass( "ui-panel-dismissible-true" );
-				});
-			},
-			function() {
-				$panel.open({
+				$uipanel.panel( "open" , {
 					position: "right",
 					dismissible: "true",
 					display: "reveal"
@@ -57,20 +59,12 @@
 			},
 			function() {
 				setTimeout(function(){
-					ok( position , "has the correct position class" );
-					ok( display , "has the correct display class" );
-					ok( dismissible , "has the correct dismissible class" );
-					$panel.close();
+					ok( $uipanel.hasClass( "ui-panel-position-right" ) , "has the correct position class" );
+					ok( $uipanel.hasClass( "ui-panel-display-reveal" ) , "has the correct display class" );
+					ok( $uipanel.hasClass( "ui-panel-dismissible-true" ) , "has the correct dismissible class" );
 				},800);
 			},
-			function() {
-				setTimeout(function(){
-					ok( !position , "has the correct position class" );
-					ok( !display , "has the correct display class" );
-					ok( !dismissible , "has the correct dismissible class" );
-				},800);
-			},
-			function() {
+			function(){
 				start();
 			}
 		]);
@@ -130,8 +124,8 @@
 		teardown: function() {
 		}
 	});
-	asyncTest( "Each link should bring forward the proper panel with the proper attributes set" , function(){
-		expect( 24 );
+	asyncTest( "A link should bring forward the proper panel with the proper attributes set" , function(){
+		expect( 3 );
 		$.testHelper.pageSequence([
 			function() {
 				$( "#link-1" ).click();
@@ -142,91 +136,7 @@
 						$panel = $uipanel.data( "mobile-panel" );
 						equal( $panel.element.jqmData( "position" ) , "left" , "Link-1: Position upon clicking link is 'left'" );
 						equal( $panel.element.jqmData( "dismissible" ) , true , "Link-1: Dimissible upon clicking link is true" );
-						equal( $panel.element.jqmData( "display" ) , "reveal" , "Link-1: Display upon clicking link is pan" );
-				} , 800 );
-			},
-			function() {
-				$( "#link-2" ).click();
-			},
-			function() {
-				setTimeout( function(){
-					var $uipanel = $('#link-panel-advanced-test .ui-panel'),
-						$panel = $uipanel.data( "mobile-panel" );
-						equal( $panel.element.jqmData( "position" ) , "left" , "Link-2: Position upon clicking link is 'left'" );
-						equal( $panel.element.jqmData( "dismissible" ) , true , "Link-2: Dimissible upon clicking link is true" );
-						equal( $panel.element.jqmData( "display" ) , "overlay" , "Link-2: Display upon clicking link is overlay" );
-				} , 800 );
-			},
-			function() {
-				$( "#link-3" ).click();
-			},
-			function() {
-				setTimeout( function(){
-					var $uipanel = $('#link-panel-advanced-test .ui-panel'),
-						$panel = $uipanel.data( "mobile-panel" );
-						equal( $panel.element.jqmData( "position" ) , "left" , "Link-3: Position upon clicking link is 'left'" );
-						equal( $panel.element.jqmData( "dismissible" ) , false , "Link-3: Dimissible upon clicking link is false" );
-						equal( $panel.element.jqmData( "display" ) , "reveal" , "Link-3: Display upon clicking link is pan" );
-				} , 800 );
-			},
-			function() {
-				$( "#link-4" ).click();
-			},
-			function() {
-				setTimeout( function(){
-					var $uipanel = $('#link-panel-advanced-test .ui-panel'),
-						$panel = $uipanel.data( "mobile-panel" );
-						equal( $panel.element.jqmData( "position" ) , "left" , "Position upon clicking link is 'left'" );
-						equal( $panel.element.jqmData( "dismissible" ) , false , "Dimissible upon clicking link is false" );
-						equal( $panel.element.jqmData( "display" ) , "overlay" , "Display upon clicking link is overlay" );
-				} , 800 );
-			},
-			function() {
-				$( "#link-5" ).click();
-			},
-			function() {
-				setTimeout( function(){
-					var $uipanel = $('#link-panel-advanced-test .ui-panel'),
-						$panel = $uipanel.data( "mobile-panel" );
-						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
-						equal( $panel.element.jqmData( "dismissible" ) , true , "Dimissible upon clicking link is true" );
-						equal( $panel.element.jqmData( "display" ) , "reveal" , "Display upon clicking link is pan" );
-				} , 800 );
-			},
-			function() {
-				$( "#link-6" ).click();
-			},
-			function() {
-				setTimeout( function(){
-					var $uipanel = $('#link-panel-advanced-test .ui-panel'),
-						$panel = $uipanel.data( "mobile-panel" );
-						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
-						equal( $panel.element.jqmData( "dismissible" ) , true , "Dimissible upon clicking link is true" );
-						equal( $panel.element.jqmData( "display" ) , "overlay" , "Display upon clicking link is overlay" );
-				} , 800 );
-			},
-			function() {
-				$( "#link-7" ).click();
-			},
-			function() {
-				setTimeout( function(){
-					var $uipanel = $('#link-panel-advanced-test .ui-panel'),
-						$panel = $uipanel.data( "mobile-panel" );
-						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
-						equal( $panel.element.jqmData( "dismissible" ) , false , "Dimissible upon clicking link is false" );
-						equal( $panel.element.jqmData( "display" ) , "reveal" , "Display upon clicking link is pan" );
-				} , 800 );
-			},
-			function() {
-				$( "#link-8" ).click();
-			},
-			function() {
-				setTimeout( function(){
-					var $uipanel = $('#link-panel-advanced-test .ui-panel'),
-						$panel = $uipanel.data( "mobile-panel" );
-						equal( $panel.element.jqmData( "position" ) , "right" , "Position upon clicking link is 'right'" );
-						equal( $panel.element.jqmData( "dismissible" ) , false , "Dimissible upon clicking link is false" );
-						equal( $panel.element.jqmData( "display" ) , "overlay" , "Display upon clicking link is overlay" );
+						equal( $panel.element.jqmData( "display" ) , "reveal" , "Link-1: Display upon clicking link is reveal" );
 				} , 800 );
 			},
 			function() {
