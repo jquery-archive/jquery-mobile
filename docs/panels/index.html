@@ -77,31 +77,31 @@
 				.userform { padding:.8em 1.2em; }
 				.userform h2 { color:#555; margin:0.3em 0 .8em 0; padding-bottom:.5em; border-bottom:1px solid rgba(0,0,0,.1); }
 				.userform label { display:block; margin-top:1.2em; }
-				.switch .ui-slider-switch { width: 7.5em }
+				.switch .ui-slider-switch { width: 6.5em !important }
 				.ui-grid-a { margin-top:1em; padding-top:.8em; margin-top:1.4em; border-top:1px solid rgba(0,0,0,.1); }
 				</style>
 				<form class="userform">
 					<h2>Create new user</h2>
 					<label for="name">Name</label>
-					<input type="text" name="name" id="name" value="" data-clear-btn="true">
+					<input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
 
 					<label for="email">Email</label>
-					<input type="email" name="email" id="status" value="" data-clear-btn="true">
+					<input type="email" name="email" id="status" value="" data-clear-btn="true" data-mini="true">
 
 					<label for="password">Password:</label>
-					<input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off">
+					<input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 
 					<div class="switch">
 					<label for="status">Status</label>
-					<select name="status" id="slider2" data-role="slider">
+					<select name="status" id="slider2" data-role="slider" data-mini="true">
 					    <option value="off">Inactive</option>
 					    <option value="on">Active</option>
 					</select>
 					</div>
 
 					<div class="ui-grid-a">
-					    <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c">Cancel</a></div>
-					    <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b">Save</a></div>
+					    <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Cancel</a></div>
+					    <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Save</a></div>
 					</div>
 
 				<!-- panel content goes here -->
@@ -117,21 +117,21 @@
 
 				<h4>Left Panel: Navigation example</h4>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel" data-role="button" data-inline="true" data-display="reveal" data-position="left" data-dismissible="true">Reveal</a>
+					<a href="#mypanel" data-role="button" data-inline="true" data-display="reveal" data-position="left" data-dismissible="true" data-icon="bars">Reveal</a>
 					<a href="#mypanel" data-role="button" data-inline="true" data-display="push" data-position="left" data-dismissible="true">Push</a>
 					<a href="#mypanel" data-role="button" data-inline="true" data-display="overlay" data-position="left" data-dismissible="true">Overlay</a>
 				</div>
 				
-				<h4>Right Panel: Detail panel</h4>
+				<h4>Right Panel: Edit panel</h4>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#mypanel1" data-role="button" data-inline="true" data-display="reveal" data-position="right" data-dismissible="true">Reveal</a>
+					<a href="#mypanel1" data-role="button" data-inline="true" data-display="reveal" data-position="right" data-dismissible="true" data-icon="edit">Reveal</a>
 					<a href="#mypanel1" data-role="button" data-inline="true" data-display="push" data-position="right" data-dismissible="true">Push</a>
 					<a href="#mypanel1" data-role="button" data-inline="true" data-display="overlay" data-position="right" data-dismissible="true">Overlay</a>
 				</div>
 				
 				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
 
-				<a href="#mypanel" data-rel="panel" data-role="button" data-inline="true">Default panel</a>
+				<a href="#mypanel" data-rel="panel" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
 
 				<h2>Basic panel markup</h2>
 				<p>A panel consists of a container with a <code>data-role=&quot;panel&quot;</code> attribute and a unique <code>ID</code>. This <code>ID</code> will be referenced by the link or button to open and close the panel.</p>
