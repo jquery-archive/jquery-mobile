@@ -11,9 +11,13 @@
 // if there is no history. If there is history, remove nav bindings from the nav
 // bindings handler - that way, only one of them can fire per close process.
 
-define( [ "jquery",
+define( [
+	"jquery",
 	"../jquery.mobile.widget",
 	"../jquery.mobile.support",
+	"../navigation/events/navigate",
+	"../navigation/path",
+	"../navigation/navigate",
 	"../jquery.mobile.navigation",
 	"depend!../jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -542,6 +546,7 @@ define( [ "jquery",
 		_open: function( options ) {
 			var coords,
 				o = $.extend( {}, this.options, options ),
+				// TODO move blacklist to private method
 				androidBlacklist = ( function() {
 					var w = window,
 						ua = navigator.userAgent,
@@ -785,7 +790,13 @@ define( [ "jquery",
 				return;
 			}
 
-			url = url + hashkey;
+			// if the current url has no dialog hash key proceed as normal
+			// otherwise, if the page is a dialog simply tack on the hash key
+			if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ){
+				url = url + (hasHash ? hashkey : "#" + hashkey);
+			} else {
+				url = $.mobile.path.parseLocation().hash + hashkey;
+			}
 
 			// Tack on an extra hashkey if this is the first page and we've just reconstructed the initial hash
 			if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
@@ -793,19 +804,13 @@ define( [ "jquery",
 			}
 
 			// swallow the the initial navigation event, and bind for the next
-			opts.container.one( opts.navigateEvents, function( e ) {
+			$(window).one( "beforenavigate", function( e ) {
 				e.preventDefault();
 				self._open( options );
 				self._bindContainerClose();
 			});
 
-			urlHistory.ignoreNextHashChange = currentIsDialog;
-
-			// Gotta love methods with 1mm args :(
-			urlHistory.addNew( url, undefined, undefined, undefined, "dialog" );
-
-			// set the new url with (or without) the new dialog hash key
-			$.mobile.path.set( url );
+			$.navigate( url, {role: "dialog"} );
 		},
 
 		close: function() {

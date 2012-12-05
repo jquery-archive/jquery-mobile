@@ -2,17 +2,15 @@
  * mobile navigation unit tests
  */
 (function($){
-	var siteDirectory = location.pathname.replace(/[^/]+$/, "");
+	var siteDirectory = location.pathname.replace(/[^/]+$/, ""),
+		home = $.mobile.path.parseUrl(location.pathname).directory,
+		homeWithSearch = home + location.search;
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
-			if ( location.hash && location.hash !== "#" ) {
-				stop();
-				$(document).one("pagechange", function() {
-					start();
-				} );
-				location.hash = "";
-			}
+			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
+			$.testHelper.navReset( homeWithSearch );
 		}
 	});
 

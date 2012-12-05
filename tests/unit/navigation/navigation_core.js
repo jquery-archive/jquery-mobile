@@ -1,3 +1,4 @@
+$.testHelper.delayStart();
 /*
  * mobile navigation unit tests
  */
@@ -9,71 +10,68 @@
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
 		home = $.mobile.path.parseUrl(location.pathname).directory,
 		homeWithSearch = home + location.search,
+		search = location.search;
+
 		navigateTestRoot = function(){
 			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
 
 	module('jquery.mobile.navigation.js', {
-		setup: function(){
-			$.mobile.changePage = changePageFn;
-			document.title = originalTitle;
-
-			// fix the hash before each test
+		setup: function() {
+			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( homeWithSearch );
+		},
 
-			$.mobile.urlHistory.stack = [];
-			$.mobile.urlHistory.activeIndex = 0;
+		teardown: function() {
 			$.Event.prototype.which = undefined;
 			$.mobile.linkBindingEnabled = originalLinkBinding;
+			$.mobile.changePage = changePageFn;
+			document.title = originalTitle;
 		}
 	});
 
 	asyncTest( "window.history.back() from external to internal page", function(){
-
 		$.testHelper.pageSequence([
-
 			// open our test page
-			function(){
+			function() {
 				$.testHelper.openPage("#active-state-page1");
 			},
 
 			function(){
 				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation to internal page." );
 
-				//location.hash = siteDirectory + "external.html";
-				$.mobile.changePage("external.html");
+				$.testHelper.openPage("#/tests/unit/navigation/external.html");
 			},
 
-			function(){
-				ok( $.mobile.activePage[0] !== $( "#active-state-page1" )[ 0 ], "successful navigation to external page." );
-
+			function() {
+				ok( $.mobile.activePage.attr("id"), "external-test", "successful navigation to external page." );
 				window.history.back();
 			},
 
-			function(){
+			function() {
 				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation back to internal page." );
-
-				start();
+				start( 1000 );
 			}
 		]);
 	});
 
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
-			function(){
+			function() {
 				$.mobile.changePage( "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
-			function(){
+			function() {
 				deepEqual( $( "#external-test" ).length, 1 );
 				window.history.back();
 			},
 
 			// external-test is *NOT* cached in the dom after transitioning away
-			function(){
+			function( timedOut ) {
 				deepEqual( $( "#external-test" ).length, 0 );
-				start();
+				start( 1000 );
 			}
 		]);
 	});
@@ -89,7 +87,6 @@
 		$( document ).bind( "pageremove", removeCallback );
 
 		$.testHelper.pageSequence([
-
 			function(){
 				$.mobile.changePage( "external.html" );
 			},
@@ -101,7 +98,7 @@
 			},
 
 			// external-test *IS* cached in the dom after transitioning away
-			function(){
+			function() {
 				deepEqual( $( "#external-test" ).length, 1 );
 
 				// Switch back to the page again!
@@ -109,7 +106,7 @@
 			},
 
 			// page is still present and displayed in the dom
-			function(){
+			function() {
 				deepEqual( $( "#external-test" ).length, 1 );
 
 				// Now turn off our removal prevention.
@@ -119,17 +116,16 @@
 			},
 
 			// external-test is *NOT* cached in the dom after transitioning away
-			function(){
-				deepEqual( $( "#external-test" ).length, 0 );
+			function() {
+				deepEqual( $( "#external-test" ).length, 0, "#external-test is gone" );
 				$( document ).unbind( "pageremove", removeCallback );
-				start();
+				start( 1000 );
 			}
 		]);
 	});
 
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
-
 			function(){
 				$.mobile.changePage( "cached-external.html" );
 			},
@@ -150,7 +146,6 @@
 
 	asyncTest( "external page is cached in the DOM after pagehide when option is set globally", function(){
 		$.testHelper.pageSequence([
-
 			function(){
 				$.mobile.page.prototype.options.domCache = true;
 				$.mobile.changePage( "external.html" );
@@ -292,7 +287,7 @@
 
 		//add new
 		$.mobile.urlHistory.activeIndex = 2;
-		$.mobile.urlHistory.addNew("test");
+		$.mobile.urlHistory.add("test");
 		deepEqual( $.mobile.urlHistory.stack.length, 4, "urlHistory.addNew() adds an item after the active index" );
 		deepEqual( $.mobile.urlHistory.activeIndex, 3, "urlHistory.addNew() moves the activeIndex to the newly added item" );
 
@@ -349,24 +344,21 @@
 
 	test( "data url works for nested paths", function(){
 		var url = "foo/bar.html";
-		testDataUrlHash( "#nested-data-url a", {hash: url, push: home + url} );
+		testDataUrlHash( "#nested-data-url a", {hashOrPush: home + url });
 	});
 
 	test( "data url works for single quoted paths and roles", function(){
 		var url = "foo/bar/single.html";
-		testDataUrlHash( "#single-quotes-data-url a", {hash: url, push: home + url} );
+		testDataUrlHash( "#single-quotes-data-url a", {hashOrPush: home + url } );
 	});
 
 	test( "data url works when role and url are reversed on the page element", function(){
 		var url = "foo/bar/reverse.html";
-		testDataUrlHash( "#reverse-attr-data-url a", {hash: url, push: home + url} );
+		testDataUrlHash( "#reverse-attr-data-url a", {hashOrPush: home + url } );
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
-		// make sure the stack is clear after initial page load an any other delayed page loads
-		// TODO better browser state management
-		$.mobile.urlHistory.stack = [];
-		$.mobile.urlHistory.activeIndex = 0;
+		var stackLength = $.navigate.history.stack.length;
 
 		$.testHelper.pageSequence([
 			function(){ $.testHelper.openPage("#dup-history-first"); },
@@ -374,13 +366,14 @@
 			function(){ $("#dup-history-second a:first").click(); },
 			function(){ $("#dup-history-first a").click(); },
 			function(){ $("#dup-history-second a:last").click(); },
-			function(){ $("#dup-history-dialog a:contains('Close')").click(); },
 			function(){
+				$("#dup-history-dialog a:contains('Close')").click();
+			},
 
-				// fourth page (third index) in the stack to account for first page being hash manipulation,
-				// the third page is dup-history-second which has two entries in history
-				// the test is to make sure the index isn't 1 in this case, or the first entry for dup-history-second
-				deepEqual($.mobile.urlHistory.activeIndex, 3, "should be the fourth page in the stack");
+			function(){
+				// it should be the third page after whatever is in the stack to start with
+				// [wherever this test starts] -> #dup-history-first -> #dup-history-second -> #dup-history-first -> #dup-history-second -> dialog --close/back button--> [first #dup-history-second-entry]
+				deepEqual($.mobile.urlHistory.activeIndex, 3 + stackLength, "should be the fourth page in the stack");
 				start();
 			}]);
 	});
@@ -388,16 +381,24 @@
 	asyncTest( "going back from a page entered from a dialog skips the dialog and goes to the previous page", function(){
 		$.testHelper.pageSequence([
 			// setup
-			function(){ $.testHelper.openPage("#skip-dialog-first"); },
+			function(){
+				$.mobile.changePage("#skip-dialog-first");
+			},
 
 			// transition to the dialog
-			function(){ $("#skip-dialog-first a").click(); },
+			function(){
+				$("#skip-dialog-first a").click();
+			},
 
 			// transition to the second page
-			function(){ $("#skip-dialog a").click(); },
+			function(){
+				$("#skip-dialog a").click();
+			},
 
 			// transition past the dialog via data-rel=back link on the second page
-			function(){ $("#skip-dialog-second a").click(); },
+			function(){
+				$("#skip-dialog-second a").click();
+			},
 
 			// make sure we're at the first page and not the dialog
 			function(){
@@ -408,7 +409,8 @@
 				});
 
 				start();
-			}]);
+			}
+		]);
 	});
 
 	asyncTest( "going forward from a page entered from a dialog skips the dialog and goes to the next page", function(){
@@ -441,7 +443,6 @@
 	});
 
 	asyncTest( "going back from a stale dialog history entry does not cause the base tag to be reset", function() {
-
 		var baseHRef;
 
 		expect( 1 );
@@ -454,15 +455,17 @@
 			function() { $( "#dialog-base-tag-test-page a" ).click(); },
 
 			// record the base href and launch the dialog
-			function() {
+			function( timedOut ) {
 				baseHRef = $( "base" ).attr( "href" );
 				$( "a#go-to-dialog" ).click();
 			},
 
 			// close the dialog - this assumes a close button link will be added to the dialog as part of the enhancement process
-			function() { $( "#dialog-base-tag-test a" ).click(); },
+			function( timedOut ) {
+				$( "#dialog-base-tag-test a" ).click();
+			},
 
-			function() {
+			function(timedOut) {
 				// $.testHelper.pageSequence cannot be used here because no page changes occur
 				$.testHelper.sequence([
 					// Go forward to reach the now-stale dialogHashKey history entry
@@ -486,7 +489,7 @@
 							// Conclude the test
 							function() { start(); }
 						]);
-					},
+					}
 				], 2000);
 			}
 		]);
@@ -519,24 +522,29 @@
 				setTimeout( function() {
 					deepEqual($("#dialog-double-hash-test")[0], $.mobile.activePage[0], "should be back to the test page");
 					start();
-				}, 300);
+				}, 800);
 			}
 		]);
 	});
 
 	asyncTest( "going back from a dialog triggered from a dialog should result in the first dialog ", function(){
 		$.testHelper.pageSequence([
-			// setup
-			function(){ $.testHelper.openPage("#nested-dialog-page"); },
+			function(){
+				$.testHelper.openPage("#nested-dialog-page");
+			},
 
 			// transition to the dialog
 			function(){ $("#nested-dialog-page a").click(); },
 
 			// transition to the second dialog
-			function(){ $("#nested-dialog-first a").click(); },
+			function(){
+				$("#nested-dialog-first a").click();
+			},
 
 			// transition to back to the first dialog
-			function(){ window.history.back(); },
+			function(){
+				window.history.back();
+			},
 
 			// make sure we're on first dialog
 			function(){
@@ -685,6 +693,8 @@
 
 			function(){
 				$.testHelper.assertUrlLocation({
+					// TODO note there's no guarantee that the query params will remain in this order
+					//      we should fix the comparison to take a callback and do something more complex
 					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url has query params"
 				});
@@ -707,6 +717,8 @@
 
 			function(){
 				$.testHelper.assertUrlLocation({
+					// TODO note there's no guarantee that the query params will remain in this order
+					//      we should fix the comparison to take a callback and do something more complex
 					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url has query params"
 				});
@@ -716,6 +728,8 @@
 
 			function(){
 				$.testHelper.assertUrlLocation({
+					// TODO note there's no guarantee that the query params will remain in this order
+					//      we should fix the comparison to take a callback and do something more complex
 					hashOrPush: home + "data-url-tests/non-data-url.html?foo=bar",
 					report: "the hash or url still has query params"
 				});
@@ -760,13 +774,13 @@
 		]);
 	});
 
- 	asyncTest( "query data passed as string to changePage is appended to URL", function(){
+ 	asyncTest( "query data passed as a string to changePage is appended to URL", function(){
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
 				$.mobile.changePage( "form-tests/changepage-data.html", {
 					data: "foo=1&bar=2"
-				} );
+				});
 			},
 
 			function(){
@@ -780,7 +794,7 @@
 		]);
 	});
 
-	asyncTest( "query data passed as object to changePage is appended to URL", function(){
+	asyncTest( "query data passed as an object to changePage is appended to URL", function(){
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -789,7 +803,7 @@
 						foo: 3,
 						bar: 4
 					}
-				} );
+				});
 			},
 
 			function(){
@@ -1243,7 +1257,7 @@
 		]);
 	});
 
-	asyncTest( "test that *vclicks* are ignored where data-ajax='false' parents exist", function() {
+	asyncTest( "vclicks are ignored where data-ajax='false' parents exist", function() {
 		var $disabledByParent = $( "#unhijacked-link-by-parent" ),
 			$disabledByAttr = $( "#unhijacked-link-by-attr" ),
 			$hijacked = $( "#hijacked-link" );
@@ -1273,7 +1287,7 @@
 		]);
 	});
 
-	asyncTest( "test that data-urls with parens work properly (avoid jqmData regex)", function() {
+	asyncTest( "data-urls with parens work properly (avoid jqmData regex)", function() {
 		$.testHelper.pageSequence([
 			function() {
 				$.mobile.changePage( "data-url-tests/parentheses.html?foo=(bar)" );
@@ -1283,7 +1297,8 @@
 				window.history.back();
 			},
 
-			function() {
+			function( timedOut ) {
+				ok( !timedOut, "the call to back didn't time out" );
 				window.history.forward();
 			},
 
@@ -1320,5 +1335,32 @@
 
 		]);
 	});
-	
+
+	var absHomeUrl = $.mobile.path.parseLocation().hrefNoHash,
+	    homeDomain = $.mobile.path.parseLocation().domain;
+
+	asyncTest( "page load events are providided with the absolute url for the content", function() {
+		var requestPath;
+
+		expect( 3 );
+
+		$( document ).one( "pagebeforechange", function( event, data ) {
+			equal( data.absUrl, absHomeUrl + "#bar");
+		});
+
+		$( document ).one( "pagechange", function( event, data ) {
+			equal( data.absUrl, absHomeUrl + "#bar" );
+		});
+
+		$.mobile.changePage( "#bar" );
+
+		requestPath = "/theres/no/way/this/page/exists.html";
+
+		$( document ).one( "pagechangefailed", function( event, data ) {
+			equal( data.absUrl, homeDomain + requestPath );
+			start();
+		});
+
+		$.mobile.changePage( requestPath );
+	});
 })(jQuery);

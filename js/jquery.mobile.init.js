@@ -4,8 +4,17 @@
 //>>group: Core
 
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
-	"./jquery.mobile.navigation.pushstate", "./widgets/loader", "./jquery.mobile.vmouse", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
+define([
+	"jquery",
+	"./jquery.mobile.core",
+	"./jquery.mobile.support",
+	'./navigation/events/navigate',
+	'./navigation/path',
+	'./navigation/navigate',
+	"./jquery.mobile.navigation",
+	"./widgets/loader",
+	"./jquery.mobile.vmouse",
+	"depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),
@@ -102,8 +111,15 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 					fromHashChange: true
 				});
 			} else {
-				// otherwise, trigger a hashchange to load a deeplink
-				$window.trigger( "hashchange", [ true ] );
+				var event = $.Event( $.support.pushState ? "popstate" : "hashchange" );
+
+				// mock the state value that should come with a popstate
+				// TODO ugh
+				event.originalEvent = {
+					state: {}
+				};
+
+				$window.trigger( event, [true] );
 			}
 		}
 	});
