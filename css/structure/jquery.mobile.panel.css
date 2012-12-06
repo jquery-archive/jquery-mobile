@@ -162,16 +162,7 @@
 	transition: transform 450ms ease;
 }
 
-.panel-shift-left {
-	-webkit-box-shadow: -5px 0px 25px 		rgba(0,0,0,.4);
-	-moz-box-shadow: -5px 0px 25px 			rgba(0,0,0,.4);
-	box-shadow: -5px 0px 25px 				rgba(0,0,0,.4);
-}
-.panel-shift-right {
-	-webkit-box-shadow: 5px 0px 25px 		rgba(0,0,0,.4);
-	-moz-box-shadow: 5px 0px 25px 			rgba(0,0,0,.4);
-	box-shadow: 5px 0px 25px 				rgba(0,0,0,.4);
-}
+
 .ui-panel-position-left.ui-panel-display-overlay {
 	-webkit-box-shadow: 5px 0px 25px 		rgba(0,0,0,.4);
 	-moz-box-shadow: 5px 0px 25px 			rgba(0,0,0,.4);
