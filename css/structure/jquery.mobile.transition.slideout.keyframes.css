@@ -7,6 +7,10 @@
     from { -moz-transform: translateX(0); }
     to { -moz-transform: translateX(-100%); }
 }
+@keyframes slideouttoleft {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+}
 
 @-webkit-keyframes slideouttoright {
     from { -webkit-transform: translateX(0); }
@@ -15,4 +19,8 @@
 @-moz-keyframes slideouttoright {
     from { -moz-transform: translateX(0); }
     to { -moz-transform: translateX(100%); }
+}
+@keyframes slideouttoright {
+    from { transform: translateX(0); }
+    to { transform: translateX(100%); }
 }
