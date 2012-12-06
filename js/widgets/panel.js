@@ -30,7 +30,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			if( elId === id ){
 				e.preventDefault();
 				callback.call( self , $link , id );
-				$link.addClass("ui-btn-active");
+				$link.addClass( $.mobile.activeBtnClass );
 				return false;
 			}
 		});
@@ -109,7 +109,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		});
 
 		$page.on( "swipe" , function( e ){
-  			$( ".ui-panel-active" ).panel( "close" );
+			$( ".ui-panel-active" ).panel( "close" );
 		});
 
 		this._trigger( "create" );
