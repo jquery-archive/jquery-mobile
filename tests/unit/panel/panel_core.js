@@ -46,8 +46,9 @@
 		}
 	});
 	asyncTest( "Attributes on panel should be correctly created when open is called" , function(){
-		expect( 3 );
+		expect( 4 );
 		var $uipanel = $('#open-close-panel-test .ui-panel'),
+			$page = $uipanel.siblings( ".ui-panel-content-wrap" ),
 			position, display, dismissible;
 		$.testHelper.pageSequence([
 			function() {
@@ -62,6 +63,7 @@
 					ok( $uipanel.hasClass( "ui-panel-position-right" ) , "has the correct position class" );
 					ok( $uipanel.hasClass( "ui-panel-display-reveal" ) , "has the correct display class" );
 					ok( $uipanel.hasClass( "ui-panel-dismissible-true" ) , "has the correct dismissible class" );
+					ok( $page.hasClass( "ui-responsive-test" ) , "has the correct custom responsive class" );
 				},800);
 			},
 			function(){

@@ -38,13 +38,19 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var deferred = $.Deferred();
 		var $div = $( "<div>" ),
 			$panel = this,
+			$el = this.element,
 			slideDir = options.position === "left" ? "right" : "left",
 			clickable = options.dismissible,
-			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss";
+			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss",
+			$page = $el.closest( ":jqmData(role='page')" ),
+			$contentsWrap = $page.find( "." + options.classes.contentWrap ),
+			responsiveClasses;
+
 		setTimeout(function(){
 			if( clickable ){
-				if( $panel.element.hasClass( "ui-responsive" ) ){
-					$div.addClass( "ui-responsive" );
+				responsiveClasses = $panel.element[0].className.match(/ui-responsive-?\w*/g) || [];
+				for( var j = 0, len = responsiveClasses.length; j < len; j++ ){
+					$contentsWrap.addClass( responsiveClasses[ j ] );
 				}
 				$div.addClass( "ui-panel-dismiss-overlay" )
 					.css( "height" , $.mobile.activePage.height() )
@@ -68,7 +74,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$page = $el.closest( ":jqmData(role='page')" );
 
 		$el.addClass( klass );
-		if( $( "." + o.classes.contentWrap ).length === 0 ){
+		if( $page.find( "." + o.classes.contentWrap ).length === 0 ){
 			$page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + o.classes.contentWrap + '" />' );
 		}
 		if( o.theme ){
@@ -102,7 +108,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			return false;
 		});
 		$el.on( "swipeleft" , function( e ){
-			$el.panel( "close" );
+			$( this ).panel( "close" );
 		});
 		this._trigger( "create" );
 	},
@@ -129,7 +135,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = options,
 			$el = this.element,
 			klass = o.classes.panel,
-			$contentsWrap = $( "." + o.classes.contentWrap ),
+			$page = $el.closest( ":jqmData(role='page')" ),
+			$contentsWrap = $page.find( "." + o.classes.contentWrap ),
 			self = this,
 			_triggerAndResolve = function(){
 				self._trigger( "open" , "open" , { link: o.link } );
@@ -159,15 +166,21 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = $.extend( {} , this.options ),
 			klass = o.classes.panel,
 			$el = this.element,
-			$contentsWrap = $( "." + o.classes.contentWrap );
+			$page = $el.closest( ":jqmData(role='page')" ),
+			$contentsWrap = $page.find( "." + o.classes.contentWrap ),
+			responsiveClasses;
+
 		for( var i in options ){
 			if( options.hasOwnProperty( i ) ){
 				o[ i ] = options[ i ];
 			}
 		}
-		if( $el.hasClass( "ui-responsive" ) ){
-			$contentsWrap.addClass( "ui-responsive" );
+
+		responsiveClasses = $el[0].className.match(/ui-responsive-?\w*/g) || [];
+		for( var j = 0, len = responsiveClasses.length; j < len; j++ ){
+			$contentsWrap.addClass( responsiveClasses[ j ] );
 		}
+
 		this._position( o )
 		.then( function( o ){
 			return self._openPanel( o );
@@ -188,12 +201,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			position = $el.jqmData( "position" ),
 			display = $el.jqmData( "display" ),
 			dismissible = $el.jqmData( "dismissible" ),
-			$contentsWrap = $( "." + o.classes.contentWrap );
+			$page = $el.closest( ":jqmData(role='page')" ),
+			$contentsWrap = $page.find( "." + o.classes.contentWrap );
 			_closePanel = function(){
+				var responsiveClasses = $el[0].className.match(/ui-responsive-?\w*/g) || [];
 				$el.removeClass( klass + "-position-" + position )
 					.removeClass( klass + "-display-" + display )
 					.removeClass( klass + "-dismissible-" + dismissible );
-				$contentsWrap.removeClass( "ui-responsive" );
+				for( var j = 0, len = responsiveClasses.length; j < len; j++ ){
+					$contentsWrap.removeClass( responsiveClasses[ j ] );
+				}
 				$el.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
 				deferred.resolve( o , toggle );
 			};
