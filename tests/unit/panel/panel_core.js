@@ -106,10 +106,205 @@
 			},
 			function() {
 				setTimeout(function(){
+					ok( !$uipanel.hasClass( "ui-panel-position-left" ) && !$uipanel.hasClass( "ui-panel-position-right" ), "has no position class" );
+					ok( !$uipanel.hasClass( "ui-panel-display-reveal" ) && !$uipanel.hasClass( "ui-panel-display-push" ) && !$uipanel.hasClass( "ui-panel-display-overlay" ), "has no display class" );
+					ok( !$uipanel.hasClass( "ui-panel-dismissible-true" ) && !$uipanel.hasClass( "ui-panel-dismissible-false" ), "has no dismissible class" );
+					ok( !$page.hasClass( "ui-responsive-test" ) , "has the correct custom responsive class" );
+				},800);
+			},
+			function(){
+				start();
+			}
+		]);
+	});
+	module( "Toggle Panel", {
+		setup: function(){
+			var hash = "#toggle-panel-test";
+			if( location.hash != hash ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( hash );
+			}
+		},
+
+		teardown: function() {
+		}
+	});
+	asyncTest( "A single toggle should open a panel" , function(){
+		expect( 4 );
+		var $uipanel = $('#toggle-panel-test .ui-panel'),
+			$page = $uipanel.siblings( ".ui-panel-content-wrap" ),
+			position, display, dismissible;
+		$.testHelper.pageSequence([
+			function() {
+				$uipanel.panel( "toggle" , {
+					position: "right",
+					dismissible: "true",
+					display: "reveal"
+				});
+			},
+			function() {
+				setTimeout(function(){
+					ok( $uipanel.hasClass( "ui-panel-position-right" ) , "has the correct position class" );
+					ok( $uipanel.hasClass( "ui-panel-display-reveal" ) , "has the correct display class" );
+					ok( $uipanel.hasClass( "ui-panel-dismissible-true" ) , "has the correct dismissible class" );
+					ok( $page.hasClass( "ui-responsive-test" ) , "has the correct custom responsive class" );
+				},800);
+			},
+			function(){
+				start();
+			}
+		]);
+	});
+	module( "Toggle Panel", {
+		setup: function(){
+			var hash = "#toggle-panel-test-2";
+			if( location.hash != hash ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( hash );
+			}
+		},
+
+		teardown: function() {
+		}
+	});
+	asyncTest( "Two toggles on the exact same panel should close the panel" , function(){
+		expect( 4 );
+		var $uipanel = $('#toggle-panel-test-2 .ui-panel'),
+			$page = $uipanel.siblings( ".ui-panel-content-wrap" ),
+			position, display, dismissible;
+		$.testHelper.pageSequence([
+			function() {
+				$uipanel.panel( "toggle" , {
+					position: "right",
+					dismissible: "true",
+					display: "reveal"
+				}).then( function(){
+					$uipanel.panel( "toggle" , {
+						position: "right",
+						dismissible: "true",
+						display: "reveal"
+					});
+				});
+			},
+			function() {
+				setTimeout(function(){
 					ok( !$uipanel.hasClass( "ui-panel-position-right" ) , "has the correct position class" );
 					ok( !$uipanel.hasClass( "ui-panel-display-reveal" ) , "has the correct display class" );
 					ok( !$uipanel.hasClass( "ui-panel-dismissible-true" ) , "has the correct dismissible class" );
 					ok( !$page.hasClass( "ui-responsive-test" ) , "has the correct custom responsive class" );
+				},800);
+			},
+			function(){
+				start();
+			}
+		]);
+	});
+	module( "Toggle Panel", {
+		setup: function(){
+			var hash = "#toggle-panel-test-3";
+			if( location.hash != hash ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( hash );
+			}
+		},
+
+		teardown: function() {
+		}
+	});
+	asyncTest( "A toggle on the same panel with different attributes should show the panel with only the new attributes" , function(){
+		expect( 4 );
+		var $uipanel = $('#toggle-panel-test-3 .ui-panel'),
+			$page = $uipanel.siblings( ".ui-panel-content-wrap" ),
+			position, display, dismissible;
+		$.testHelper.pageSequence([
+			function() {
+				$uipanel.panel( "toggle" , {
+					position: "right",
+					dismissible: "true",
+					display: "reveal"
+				}).then( function(){
+					$uipanel.panel( "toggle" , {
+						position: "left",
+						dismissible: "false",
+						display: "push"
+					});
+				});
+			},
+			function() {
+				setTimeout(function(){
+					ok( $uipanel.hasClass( "ui-panel-position-left" ) && !$uipanel.hasClass( "ui-panel-position-right" ), "has the correct position class" );
+					ok( $uipanel.hasClass( "ui-panel-display-push" )  && !$uipanel.hasClass( "ui-panel-position-reveal" ), "has the correct display class" );
+					ok( $uipanel.hasClass( "ui-panel-dismissible-false" )  && !$uipanel.hasClass( "ui-panel-dismissible-true" ), "has the correct dismissible class" );
+					ok( $page.hasClass( "ui-responsive-test" ) , "has the correct custom responsive class" );
+				},800);
+			},
+			function(){
+				start();
+			}
+		]);
+	});
+	module( "Toggle Panel", {
+		setup: function(){
+			var hash = "#toggle-panel-test-4";
+			if( location.hash != hash ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( hash );
+			}
+		},
+
+		teardown: function() {
+		}
+	});
+	asyncTest( "A toggle on a different panel than what is open should show the new panel with only the new attributes" , function(){
+		expect( 7 );
+		var $uipanels = $('#toggle-panel-test-4 .ui-panel'),
+			$uipanel = $( $uipanels[0] ),
+			$uipanel2 = $( $uipanels[1] ),
+			$page = $uipanel.siblings( ".ui-panel-content-wrap" ),
+			position, display, dismissible;
+		$.testHelper.pageSequence([
+			function() {
+				$uipanel.panel( "toggle" , {
+					position: "right",
+					dismissible: "true",
+					display: "reveal"
+				}).then( function(){
+					$uipanel2.panel( "toggle" , {
+						position: "left",
+						dismissible: "false",
+						display: "push"
+					});
+				});
+			},
+			function() {
+				setTimeout(function(){
+					ok( !$uipanel.hasClass( "ui-panel-position-left" ), "has the correct position class" );
+					ok( !$uipanel.hasClass( "ui-panel-display-push" ), "has the correct display class" );
+					ok( !$uipanel.hasClass( "ui-panel-dismissible-false" ), "has the correct dismissible class" );
+					ok( $uipanel2.hasClass( "ui-panel-position-left" ), "has the correct position class" );
+					ok( $uipanel2.hasClass( "ui-panel-display-push" ), "has the correct display class" );
+					ok( $uipanel2.hasClass( "ui-panel-dismissible-false" ), "has the correct dismissible class" );
+					ok( $page.hasClass( "ui-responsive-test" ) , "has the correct custom responsive class" );
 				},800);
 			},
 			function(){
