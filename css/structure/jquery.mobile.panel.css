@@ -24,18 +24,18 @@
 }
 
 .ui-panel-positioning .ui-panel {
-	-webkit-transition: left 450ms ease, right 450ms ease;
-	-moz-transition: left 450ms ease, right 450ms ease;
-	-ms-transition: left 450ms ease, right 450ms ease;
-	-o-transition: left 450ms ease, right 450ms ease;
-	transition: left 450ms ease, right 450ms ease;
+	-webkit-transition: left 250ms ease, right 250ms ease;
+	-moz-transition: left 250ms ease, right 250ms ease;
+	-ms-transition: left 250ms ease, right 250ms ease;
+	-o-transition: left 250ms ease, right 250ms ease;
+	transition: left 250ms ease, right 250ms ease;
 }
 .ui-panel-transforms .ui-panel {
-	-webkit-transition: -webkit-transform 450ms ease;
-	-moz-transition: -moz-transform 450ms ease;
-	-ms-transition: -o-transform 450ms ease;
-	-o-transition: -o-transform 450ms ease;
-	transition: transform 450ms ease;
+	-webkit-transition: -webkit-transform 250ms ease;
+	-moz-transition: -moz-transform 250ms ease;
+	-ms-transition: -o-transform 250ms ease;
+	-o-transition: -o-transform 250ms ease;
+	transition: transform 250ms ease;
 }
 
 .ui-panel-positioning .ui-panel-position-left {
@@ -81,11 +81,11 @@
 }
 
 .ui-panel-positioning .ui-panel-content-wrap {
-	-webkit-transition: -webkit-box-shadow 450ms ease, left 450ms ease, right 450ms ease;
-	-moz-transition: -moz-box-shadow 450ms ease, left 450ms ease, right 450ms ease;
-	-ms-transition: -ms-box-shadow 450ms ease, left 450ms ease, right 450ms ease;
-	-o-transition: -o-box-shadow 450ms ease, left 450ms ease, right 450ms ease;
-	transition: box-shadow 450ms ease, left 450ms ease, right 450ms ease;
+	-webkit-transition: -webkit-box-shadow 250ms ease, left 250ms ease, right 250ms ease;
+	-moz-transition: -moz-box-shadow 250ms ease, left 250ms ease, right 250ms ease;
+	-ms-transition: -ms-box-shadow 250ms ease, left 250ms ease, right 250ms ease;
+	-o-transition: -o-box-shadow 250ms ease, left 250ms ease, right 250ms ease;
+	transition: box-shadow 250ms ease, left 250ms ease, right 250ms ease;
 }
 .ui-panel-transforms .ui-panel-content-wrap {
 	-webkit-transform: translateX(0%);
@@ -94,11 +94,11 @@
 	-o-transform: translateX(0%);
 	transform: translateX(0%);
 
-	-webkit-transition: -webkit-box-shadow 450ms ease, -webkit-transform 450ms ease;
-	-moz-transition: -moz-box-shadow 450ms ease, -moz-transform 450ms ease;
-	-ms-transition: -ms-box-shadow 450ms ease, -ms-transform 450ms ease;
-	-o-transition: -o-box-shadow 450ms ease, -o-transform 450ms ease;
-	transition: box-shadow 450ms ease, transform 450ms ease;
+	-webkit-transition: -webkit-box-shadow 250ms ease, -webkit-transform 250ms ease;
+	-moz-transition: -moz-box-shadow 250ms ease, -moz-transform 250ms ease;
+	-ms-transition: -ms-box-shadow 250ms ease, -ms-transform 250ms ease;
+	-o-transition: -o-box-shadow 250ms ease, -o-transform 250ms ease;
+	transition: box-shadow 250ms ease, transform 250ms ease;
 }
 
 /* Shift  transition */
@@ -148,18 +148,18 @@
 	background: inherit;
 }
 .ui-panel-positioning .ui-panel-content-wrap {
-	-webkit-transition: left 450ms ease, right 450ms ease;
-	-moz-transition: left 450ms ease, right 450ms ease;
-	-ms-transition: left 450ms ease, right 450ms ease;
-	-o-transition: left 450ms ease, right 450ms ease;
-	transition: left 450ms ease, right 450ms ease;
+	-webkit-transition: left 250ms ease, right 250ms ease;
+	-moz-transition: left 250ms ease, right 250ms ease;
+	-ms-transition: left 250ms ease, right 250ms ease;
+	-o-transition: left 250ms ease, right 250ms ease;
+	transition: left 250ms ease, right 250ms ease;
 }
 .ui-panel-transforms .ui-panel-content-wrap {
-	-webkit-transition: -webkit-transform 450ms ease;
-	-moz-transition: -moz-transform 450ms ease;
-	-ms-transition: -ms-transform 450ms ease;
-	-o-transition: -o-transform 450ms ease;
-	transition: transform 450ms ease;
+	-webkit-transition: -webkit-transform 250ms ease;
+	-moz-transition: -moz-transform 250ms ease;
+	-ms-transition: -ms-transform 250ms ease;
+	-o-transition: -o-transform 250ms ease;
+	transition: transform 250ms ease;
 }
 
 
@@ -288,11 +288,11 @@
 		width: 100%;
 	}
 	.ui-panel-transforms .ui-panel-display-push ~ .ui-panel-content-wrap {
-		-webkit-transition: width 450ms ease, -webkit-transform 450ms ease;
-		-moz-transition: width 450ms ease, -moz-transform 450ms ease;
-		-ms-transition: width 450ms ease, -ms-transform 450ms ease;
-		-o-transition: width 450ms ease, -o-transform 450ms ease;
-		transition: width 450ms ease, transform 450ms ease;
+		-webkit-transition: width 250ms ease, -webkit-transform 250ms ease;
+		-moz-transition: width 250ms ease, -moz-transform 250ms ease;
+		-ms-transition: width 250ms ease, -ms-transform 250ms ease;
+		-o-transition: width 250ms ease, -o-transform 250ms ease;
+		transition: width 250ms ease, transform 250ms ease;
 		-webkit-transform: none !important;
 		transform: none !important;
 	}
