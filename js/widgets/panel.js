@@ -41,7 +41,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el = this.element,
 			slideDir = options.position === "left" ? "right" : "left",
 			clickable = options.dismissible,
-			klass = clickable ? "ui-panel-dismiss" : "ui-panel-no-dismiss",
+			klass = "ui-panel-dismiss",
 			$page = $el.closest( ":jqmData(role='page')" ),
 			$contentsWrap = $page.find( "." + options.classes.contentWrap ),
 			responsiveClasses;
@@ -68,12 +68,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 	_create: function() {
 		var o = this.options,
-			klass = o.classes.panel,
 			$el = this.element,
 			$closeLink = $el.find( "[data-rel=close]" ),
 			$page = $el.closest( ":jqmData(role='page')" );
 
-		$el.addClass( klass );
+		$el.addClass( o.classes.panel );
 		if( $page.find( "." + o.classes.contentWrap ).length === 0 ){
 			$page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + o.classes.contentWrap + '" />' );
 		}
@@ -107,9 +106,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el.panel( "close" );
 			return false;
 		});
+
 		$el.on( "swipeleft" , function( e ){
 			$( this ).panel( "close" );
 		});
+
 		this._trigger( "create" );
 	},
 	_position: function( options ){
@@ -202,9 +203,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			display = $el.jqmData( "display" ),
 			dismissible = $el.jqmData( "dismissible" ),
 			$page = $el.closest( ":jqmData(role='page')" ),
-			$contentsWrap = $page.find( "." + o.classes.contentWrap );
+			$contentsWrap = $page.find( "." + o.classes.contentWrap ),
 			_closePanel = function(){
 				var responsiveClasses = $el[0].className.match(/ui-responsive-?\w*/g) || [];
+
 				$el.removeClass( klass + "-position-" + position )
 					.removeClass( klass + "-display-" + display )
 					.removeClass( klass + "-dismissible-" + dismissible );
@@ -237,16 +239,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 	toggle: function( options ){
 		var $el = this.element,
-			active = $( ".ui-panel-active" ).data( "mobile-panel" ),
+			active = $( ".ui-panel-active" ),
 			self = this;
-		if( active &&
-				( active.element.jqmData( "position") === options.position ) &&
-				( active.element.attr( "id" ) === $el.attr( "id" ) ) &&
-				( active.element.jqmData( "display" ) === options.display ) ){
-			return active.close( options );
-		} else if ( active ){
-			active.close( options , true ).
-			then( function( options , toggle ){
+		if( active.length > 0 &&
+				( active.jqmData( "position") === options.position ) &&
+				( active.attr( "id" ) === $el.attr( "id" ) ) &&
+				( active.jqmData( "display" ) === options.display ) ){
+			return active.panel( "close" , options );
+		} else if ( active.length > 0 ){
+			active.panel( "close" , options , true )
+			.then( function( options , toggle ){
 				self.open( options , toggle );
 			});
 		} else {
