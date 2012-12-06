@@ -7,6 +7,17 @@
 	height: 100%;
 }
 
+.ui-panel-content-wrap,
+.ui-panel-content-wrap *,
+.ui-panel,
+.ui-panel * {
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	-o-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
 .ui-panel-position-left, .ui-panel-position-right {
 	display: block;
 }
