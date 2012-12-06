@@ -62,7 +62,6 @@ function validStyle( prop, value, check_vend ) {
 // Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz/unprefixed to prevent a false positive for 3D transforms on Android.
 function transform3dTest() {
 	var prop = "transform-3d";
-	console.log( validStyle( 'perspective', '10px', ['moz', ''] ) );
 	return validStyle( 'perspective', '10px', ['moz', ''] ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
 }
 
