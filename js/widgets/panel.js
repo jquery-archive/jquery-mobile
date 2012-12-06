@@ -142,6 +142,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			_triggerAndResolve = function(){
 				self._trigger( "open" , "open" , { link: o.link } );
 				deferred.resolve( options );
+				$page.addClass( "ui-panel-open" );
 			};
 		if( o.display === "reveal" ){
 			$contentsWrap.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _triggerAndResolve );
@@ -221,6 +222,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				o[ i ] = options[ i ];
 			}
 		}
+		$page.removeClass( "ui-panel-open" );
 		if( toggle ){
 			$el.addClass( "ui-panel-toggle" );
 		}

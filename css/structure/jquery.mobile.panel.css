@@ -284,17 +284,20 @@
 	.ui-panel-transforms .ui-panel-content-wrap {
 		width: 100%;
 	}
-	.ui-panel-transforms .ui-panel-display-push ~ .ui-panel-content-wrap {
-		-webkit-transition: width 250ms ease, -webkit-transform 250ms ease;
-		-moz-transition: width 250ms ease, -moz-transform 250ms ease;
-		-ms-transition: width 250ms ease, -ms-transform 250ms ease;
-		-o-transition: width 250ms ease, -o-transform 250ms ease;
-		transition: width 250ms ease, transform 250ms ease;
-		-webkit-transform: none !important;
-		transform: none !important;
-	}
-	.ui-panel-transforms .ui-responsive.ui-panel-content-wrap.panel-push {
+
+	.ui-panel-open .ui-responsive.ui-panel-content-wrap.panel-push {
+		-webkit-transform: none;
+		-moz-transform: none;
+		-o-transform: none;
+		-ms-transform: none;
+		transform: none;
+		-webkit-transition: none;
+		-moz-transition: none;
+		-o-transition: none;
+		-ms-transition: none;
+		transition: none;
 		width: 75%;
+		left: 25%;
 	}
 
 	.ui-panel-transforms .ui-panel-display-push.ui-panel-position-right ~ .ui-responsive.ui-panel-content-wrap {
