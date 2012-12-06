@@ -107,8 +107,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			return false;
 		});
 
-		$el.on( "swipeleft" , function( e ){
-			$( this ).panel( "close" );
+		$page.on( "swipe" , function( e ){
+  			$( ".ui-panel-active" ).panel( "close" );
 		});
 
 		this._trigger( "create" );
