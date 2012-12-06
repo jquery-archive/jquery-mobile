@@ -28,9 +28,9 @@
 			start();
 		}, 800);
 	});
-	module( "Open/Close Panel", {
+	module( "Open Panel", {
 		setup: function(){
-			var hash = "#open-close-panel-test";
+			var hash = "#open-panel-test";
 			if( location.hash != hash ){
 				stop();
 
@@ -47,7 +47,7 @@
 	});
 	asyncTest( "Attributes on panel should be correctly created when open is called" , function(){
 		expect( 4 );
-		var $uipanel = $('#open-close-panel-test .ui-panel'),
+		var $uipanel = $('#open-panel-test .ui-panel'),
 			$page = $uipanel.siblings( ".ui-panel-content-wrap" ),
 			position, display, dismissible;
 		$.testHelper.pageSequence([
@@ -72,6 +72,51 @@
 		]);
 	});
 
+	module( "Close Panel", {
+		setup: function(){
+			var hash = "#close-panel-test";
+			if( location.hash != hash ){
+				stop();
+
+				$(document).one("pagechange", function() {
+					start();
+				});
+
+				$.mobile.changePage( hash );
+			}
+		},
+
+		teardown: function() {
+		}
+	});
+	asyncTest( "Attributes on panel should be correctly created when close is called" , function(){
+		expect( 4 );
+		var $uipanel = $('#close-panel-test .ui-panel'),
+			$page = $uipanel.siblings( ".ui-panel-content-wrap" ),
+			position, display, dismissible;
+		$.testHelper.pageSequence([
+			function() {
+				$uipanel.panel( "open" , {
+					position: "right",
+					dismissible: "true",
+					display: "reveal"
+				}).then( function(){
+					$uipanel.panel( "close" );
+				});
+			},
+			function() {
+				setTimeout(function(){
+					ok( !$uipanel.hasClass( "ui-panel-position-right" ) , "has the correct position class" );
+					ok( !$uipanel.hasClass( "ui-panel-display-reveal" ) , "has the correct display class" );
+					ok( !$uipanel.hasClass( "ui-panel-dismissible-true" ) , "has the correct dismissible class" );
+					ok( !$page.hasClass( "ui-responsive-test" ) , "has the correct custom responsive class" );
+				},800);
+			},
+			function(){
+				start();
+			}
+		]);
+	});
 	module( "Link Panel Tests", {
 		setup: function(){
 			var hash = "#link-panel-test";
