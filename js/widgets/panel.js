@@ -24,7 +24,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_handleLink: function( roleType , callback ){
 		var elId = this.element.attr( "id" ),
 			self = this;
-		$( document ).on( "click" , "a", function( e ) {
+		$( document ).on( "vclick" , "a", function( e ) {
 			var $link = $( this ),
 				id = $link.attr( "href" ).split( "#" )[1];
 			if( elId === id ){
