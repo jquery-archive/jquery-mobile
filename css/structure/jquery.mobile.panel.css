@@ -297,7 +297,6 @@
 		-ms-transition: none;
 		transition: none;
 		width: 75%;
-		left: 25%;
 	}
 
 	.ui-panel-transforms .ui-panel-display-push.ui-panel-position-right ~ .ui-responsive.ui-panel-content-wrap {
