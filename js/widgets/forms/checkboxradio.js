@@ -101,6 +101,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				self._getInputSet().not( input ).prop( "checked", false );
 
 				self._updateAll();
+				return false;
 			}
 		});
 
