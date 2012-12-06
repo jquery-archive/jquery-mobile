@@ -30,6 +30,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			if( elId === id ){
 				e.preventDefault();
 				callback.call( self , $link , id );
+				$link.addClass("ui-btn-active");
 				return false;
 			}
 		});
@@ -217,12 +218,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				$el.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
 				deferred.resolve( o , toggle );
 			};
+		$page.removeClass( "ui-panel-open" );
 		for( var i in options ){
 			if( options.hasOwnProperty( i ) ){
 				o[ i ] = options[ i ];
 			}
 		}
-		$page.removeClass( "ui-panel-open" );
+		
 		if( toggle ){
 			$el.addClass( "ui-panel-toggle" );
 		}
