@@ -121,11 +121,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					input.height(scrollHeight + extraLineHeight);
+					input.height( scrollHeight + extraLineHeight );
 				}
 			};
 
-			input.keyup(function() {
+			input.on( "keyup change input paste", function() {
 				clearTimeout( keyupTimeout );
 				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
 			});
@@ -148,7 +148,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	disable: function() {
 		var $el,
-				parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( this.element.is( "[type='search'], :jqmData(type='search')" ) || ( this.element.is( "[type='text'],textarea" ) && !!this.options.clearBtn ) );
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
+			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
+			
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
@@ -160,9 +163,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	enable: function() {
 		var $el,
-				parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( this.element.is( "[type='search'], :jqmData(type='search')" ) || ( this.element.is( "[type='text'],textarea" ) && !!this.options.clearBtn ) );
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
+			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
 
-		// TODO using more than one line of code is acceptable ;)
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {

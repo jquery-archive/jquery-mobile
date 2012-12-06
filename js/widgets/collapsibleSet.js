@@ -25,7 +25,11 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		if ( !o.contentTheme ) {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
-
+		// Inherit the corner styling from collapsible-set
+		if ( !o.corners ) {
+			o.corners = $el.jqmData( "corners" );
+		}
+		
 		if ( $el.jqmData( "inset" ) !== undefined ) {
 			o.inset = $el.jqmData( "inset" );
 		}

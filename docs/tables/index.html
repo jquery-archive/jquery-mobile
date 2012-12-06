@@ -14,7 +14,7 @@
 </head> 
 <body> 
 
-   <div data-role="page">
+   <div data-role="page" class="type-interior">
 
       <div data-role="header" data-theme="f">
       <h1>RWD Tables</h1>
@@ -23,23 +23,23 @@
    </div><!-- /header -->
 
    <div data-role="content">
-        <h2>Responsive tables</h2>
+		<div class="content-primary">
+			<h2>Responsive tables</h2>
+				<p>One of the biggest challenges in responsive web design (RWD) is presenting tabular data. Large tables with lots of columns don't fit on smaller screens and there isn't a simple way to re-format the table content with CSS and media queries for an acceptable presentation. To address this, the framework offers two different options for presenting tables responsively. Each has benefits and tradeoffs, the right choice will depend on the data being presented.</p>
 
-        <p>One of the biggest challenges in responsive web design (RWD) is presenting tabular data. Large tables with lots of columns don't fit on smaller screens and there isn't a simple way to re-format the table content with CSS and media queries for an acceptable presentation. To address this, the framework offers two different options for presenting tables responsively. Each has benefits and tradeoffs, the right choice will depend on the data being presented.</p>
-		
-		<p><a href="table-reflow.html">Reflow mode</a> - Re-formats the table columns at narrow widths so each row of data is presented as a formatted block of label/data pairs. This is ideal for tables with product or contact information with more complex or lengthy data formatting that doesn't need comparison across rows of data.</p>
-		
-		<p><a href="table-column-toggle.html">Column toggle mode</a> - Selectively hides columns at narrower widths as a sensible default but also offers a menu to let users manually control which columns they want to see. This mode is better for financial data tables that have compact values and need to maintain comparisons across columns and rows of data. It can also be used for building things like product comparison tables.</p>
+				<p><a href="table-reflow.html">Reflow mode</a> - Re-formats the table columns at narrow widths so each row of data is presented as a formatted block of label/data pairs. This is ideal for tables with product or contact information with more complex or lengthy data formatting that doesn't need comparison across rows of data.</p>
+
+				<p><a href="table-column-toggle.html">Column toggle mode</a> - Selectively hides columns at narrower widths as a sensible default but also offers a menu to let users manually control which columns they want to see. This mode is better for financial data tables that have compact values and need to maintain comparisons across columns and rows of data. It can also be used for building things like product comparison tables.</p>
 
 
-		<p>The responsive table feature is built with a core table plugin (<code>table.js</code>)  that initializes when the <code>data-role="table"</code> attribute is added to the markup. This plugin is very lightweight and adds <code>ui-table</code> class, parses the table headers and generates information on the columns of data, and fires a <code>tablecreate</code> event. Both the table modes, <a href="table-reflow.html">reflow</a> and <a href="table-column-toggle.html">column toggle</a>, are written as extensions to the table widget that hook in via the <code>create</code> event to add the additional behaviors that make the tables responsive. Reflow is the default mode so if the extension is present, it will be applied automatically if the <code>data-role="table"</code> attribute is on the table.</p>
-		<p>If only one mode is used on a project, the download builder tool can be used to package only the table plugin and the single extension to save code weight.</p>
-			
+				<p>The responsive table feature is built with a core table plugin (<code>table.js</code>)  that initializes when the <code>data-role="table"</code> attribute is added to the markup. This plugin is very lightweight and adds <code>ui-table</code> class, parses the table headers and generates information on the columns of data, and fires a <code>tablecreate</code> event. Both the table modes, <a href="table-reflow.html">reflow</a> and <a href="table-column-toggle.html">column toggle</a>, are written as extensions to the table widget that hook in via the <code>create</code> event to add the additional behaviors that make the tables responsive. Reflow is the default mode so if the extension is present, it will be applied automatically if the <code>data-role="table"</code> attribute is on the table.</p>
+				<p>If only one mode is used on a project, the download builder tool can be used to package only the table plugin and the single extension to save code weight.</p>
 
-		
-		<h2>General table markup guidelines</h2>
-	    
-		<p>Here is the basic table markup you should use for both table modes:</p>
+
+
+			<h2>General table markup guidelines</h2>
+
+				<p>Here is the basic table markup you should use for both table modes:</p>
 <pre><code>&lt;table <strong>data-role=&quot;table&quot; id=&quot;my-table&quot; data-mode=&quot;reflow&quot;</strong>&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -112,7 +112,22 @@
 </code></pre>
 
      	<p>This standard alternating row stripe style can be also applied by adding <code>table-stripe</code> <code>class</code> to the <code>table</code> element. If you prefer a custom stroke style, use the example above as a starting point. Note that adding styles that set a color for the stroke will override a theme class so do not use these together.</p>
+		</div>
+		
+		<div class="content-secondary">
 
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>In this section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+								<li data-role="list-divider">Tables</li>
+								<li><a href="table-reflow.html">Reflow mode</a></li>
+								<li><a href="table-column-toggle.html">Column toggle mode</a></li>
+							</ul>
+					</div>
+				</div>
+				
          </div><!-- /content -->
 
          <div data-role="footer" class="footer-docs" data-theme="c">

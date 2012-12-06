@@ -6,7 +6,7 @@ $(function(){
 });
 
 // display the version of jQM
-$(document).bind( 'pageinit', function() {
+$(document).on( 'pageinit', function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
@@ -45,7 +45,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
   $(fixLinks);
 
   // fix the links for subsequent ajax page loads
-  $(document).bind( 'pagecreate', fixLinks );
+  $(document).on( 'pagecreate', fixLinks );
 
   // Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
   $.ajax({
@@ -54,7 +54,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     isLocal: true
   }).error(function() {
     // Ajax doesn't work so turn it off
-    $( document ).bind( "mobileinit", function() {
+    $( document ).on( "mobileinit", function() {
       $.mobile.ajaxEnabled = false;
 
       var message = $( '<div>' , {
@@ -67,7 +67,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
         .append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
         .append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>view help</a>.</p>" );
 
-      $( document ).bind( "pagecreate", function( event ) {
+      $( document ).on( "pagecreate", function( event ) {
         $( event.target ).append( message );
       });
     });
@@ -77,7 +77,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 // Measure the time from pageload until pageshow for page lists-performance.html
 // NB: lists-performance.html should load without a transition to avoid having
 // the transition's duration included in the measurement
-$( document ).bind( "pageload", function( e, data ) {
+$( document ).on( "pageload", function( e, data ) {
 	var ar = data.dataUrl.split( "/" ), then;
 
 	// If we're loading "lists-performance.html ..."

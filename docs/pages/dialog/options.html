@@ -40,6 +40,15 @@
 
 		<dl>
 
+			<dt><code>closeBtn</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "left"</p>
+				<p>Sets the position of the dialog close button in the header (left or right) or prevents the framework from adding a close button (none).</p>
+				<p>This option is also exposed as a data attribute: <code>data-close-btn</code>.</p>
+                
+				<pre><code>$( ".selector" ).dialog(<strong>{ closeBtn: "none" }</strong>);</code></pre>
+			</dd>
+
 			<dt><code>closeBtnText</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "Close"</p>
@@ -49,11 +58,20 @@
 				<pre><code>$( ".selector" ).dialog(<strong>{ closeBtnText: "Fermer" }</strong>);</code></pre>
 			</dd>
 
+			<dt><code>corners</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>Sets whether to draw the dialo with rounded corners.</p>
+				<p>This option is also exposed as a data attribute: <code>data-corners="false"</code>.</p>
+                
+				<pre><code>$( ".selector" ).dialog(<strong>{ corners: false }</strong>);</code></pre>
+			</dd>
+            
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: ":jqmData(role='dialog')"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as dialogs. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.dialog.prototype.options.initSelector = ".mydialog";</strong>
 });
 </code></pre>

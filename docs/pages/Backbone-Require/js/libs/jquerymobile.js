@@ -1447,7 +1447,7 @@ function getSpecialEventObject( eventType ) {
       // for elements unless they actually have handlers registered on them.
       // To get around this, we register dummy handlers on the elements.
 
-      $( this ).bind( realType, dummyMouseHandler );
+      $( this ).on( realType, dummyMouseHandler );
 
       // For now, if event capture is not supported, we rely on mouse handlers.
       if ( eventCaptureSupported ) {
@@ -1716,7 +1716,7 @@ if ( eventCaptureSupported ) {
 
         $this.bind( "vmouseup", clearTapTimer )
           .bind( "vclick", clickHandler );
-        $( document ).bind( "vmousecancel", clearTapHandlers );
+        $( document ).on( "vmousecancel", clearTapHandlers );
 
         timer = setTimeout( function() {
           triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
@@ -1796,7 +1796,7 @@ if ( eventCaptureSupported ) {
 
     $.event.special[ event ] = {
       setup: function() {
-        $( this ).bind( sourceEvent, $.noop );
+        $( this ).on( sourceEvent, $.noop );
       }
     };
   });
@@ -1814,7 +1814,7 @@ if ( eventCaptureSupported ) {
   (function( $ ) {
     $.event.special.throttledresize = {
       setup: function() {
-        $( this ).bind( "resize", handler );
+        $( this ).on( "resize", handler );
       },
       teardown: function() {
         $( this ).unbind( "resize", handler );
@@ -2386,7 +2386,7 @@ $.widget( "mobile.page", $.mobile.widget, {
   // 
   //  handler - (Function) Optional handler to be bound to the hashchange
   //    event. This is a "shortcut" for the more verbose form:
-  //    jQuery(window).bind( 'hashchange', handler ). If handler is omitted,
+  //    jQuery(window).on( 'hashchange', handler ). If handler is omitted,
   //    all bound window.onhashchange event handlers will be triggered. This
   //    is a shortcut for the more verbose
   //    jQuery(window).trigger( 'hashchange' ). These forms are described in
@@ -2466,7 +2466,7 @@ $.widget( "mobile.page", $.mobile.widget, {
   // A more verbose usage that allows for event namespacing:
   // 
   // > // Bind an event handler.
-  // > jQuery(window).bind( 'hashchange', function(e) {
+  // > jQuery(window).on( 'hashchange', function(e) {
   // >   var hash = location.hash;
   // >   ...
   // > });
@@ -4111,7 +4111,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
     });
 
     //add active state on vclick
-    $( document ).bind( "vclick", function( event ) {
+    $( document ).on( "vclick", function( event ) {
       // if this isn't a left click we don't care. Its important to note
       // that when the virtual event is generated it will create the which attr
       if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
@@ -4137,7 +4137,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
     });
 
     // click routing - direct to HTTP or Ajax, accordingly
-    $( document ).bind( "click", function( event ) {
+    $( document ).on( "click", function( event ) {
       if ( !$.mobile.linkBindingEnabled ) {
         return;
       }
@@ -4355,8 +4355,8 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
     });
 
     //set page min-heights to be device specific
-    $( document ).bind( "pageshow", resetActivePageHeight );
-    $( window ).bind( "throttledresize", resetActivePageHeight );
+    $( document ).on( "pageshow", resetActivePageHeight );
+    $( window ).on( "throttledresize", resetActivePageHeight );
 
   });//navreadyDeferred done callback
 
@@ -4609,7 +4609,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
 
   var page = $.mobile.closestPageData( $( e.target ) ), options;
 
@@ -4754,7 +4754,7 @@ $.mobile.page.prototype.options.contentTheme = null;
 //      which expects .ui-footer top be applied in its gigantic selector
 // TODO remove the buttonMarkup giant selector and move it to the various modules
 //      on which it depends
-$( document ).bind( "pagecreate", function( e ) {
+$( document ).on( "pagecreate", function( e ) {
   var $page = $( e.target ),
     o = $page.data( "page" ).options,
     pageRole = $page.jqmData( "role" ),
@@ -4844,7 +4844,7 @@ $.fn.fieldcontain = function( options ) {
 };
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $( ":jqmData(role='fieldcontain')", e.target ).jqmEnhanceable().fieldcontain();
 });
 
@@ -4900,7 +4900,7 @@ $.fn.grid = function( options ) {
 
 (function( $, undefined ) {
 
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $( ":jqmData(role='nojs')", e.target ).addClass( "ui-nojs" );
   
 });
@@ -5092,7 +5092,7 @@ function closestEnabledButton( element ) {
 var attachEvents = function() {
   var hoverDelay = $.mobile.buttonMarkup.hoverDelay, hov, foc;
 
-  $( document ).bind( {
+  $( document ).on( {
     "vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
       var theme,
         $btn = $( closestEnabledButton( event.target ) ),
@@ -5146,7 +5146,7 @@ var attachEvents = function() {
 
 //links in bars, or those with  data-role become buttons
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
 
   $( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
     .jqmEnhanceable()
@@ -5314,7 +5314,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.collapsible.prototype.enhanceWithin( e.target );
 });
 
@@ -5421,7 +5421,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.collapsibleset.prototype.enhanceWithin( e.target );
 });
 
@@ -5464,14 +5464,14 @@ $.widget( "mobile.navbar", $.mobile.widget, {
     });
 
     // Buttons in the navbar with ui-state-persist class should regain their active state before page show
-    $navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
+    $navbar.closest( ".ui-page" ).on( "pagebeforeshow", function() {
       $navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
     });
   }
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.navbar.prototype.enhanceWithin( e.target );
 });
 
@@ -5908,7 +5908,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.listview.prototype.enhanceWithin( e.target );
 });
 
@@ -6166,7 +6166,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.checkboxradio.prototype.enhanceWithin( e.target, true );
 });
 
@@ -6311,7 +6311,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.button.prototype.enhanceWithin( e.target, true );
 });
 
@@ -6378,7 +6378,7 @@ $.fn.controlgroup = function( options ) {
 
 (function( $, undefined ) {
 
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
 
   //links within content areas, tests included with page
   $( e.target )
@@ -7188,14 +7188,14 @@ $( document ).bind( "pagecreate create", function( e ) {
   };
 
   // TODO move inside _create
-  $( document ).bind( "pagebeforechange", function( e, data ) {
+  $( document ).on( "pagebeforechange", function( e, data ) {
     if ( data.options.role === "popup" ) {
       $.mobile.popup.handleLink( data.options.link );
       e.preventDefault();
     }
   });
 
-  $( document ).bind( "pagecreate create", function( e )  {
+  $( document ).on( "pagecreate create", function( e )  {
     $.mobile.popup.prototype.enhanceWithin( e.target, true );
   });
 
@@ -7393,7 +7393,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.textinput.prototype.enhanceWithin( e.target, true );
 });
 
@@ -7953,7 +7953,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.slider.prototype.enhanceWithin( e.target, true );
 });
 
@@ -8130,7 +8130,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
       if ( self.options.preventFocusZoom ) {
         $.mobile.zoom.disable( true );
       }
-    }).bind( "mouseup", function() {
+    }).on( "mouseup", function() {
       if ( self.options.preventFocusZoom ) {
         setTimeout(function() {
           $.mobile.zoom.enable( true );
@@ -8204,7 +8204,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$( document ).on( "pagecreate create", function( e ) {
   $.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
 });
 })( jQuery );
@@ -8702,7 +8702,7 @@ $( document ).bind( "pagecreate create", function( e ) {
   };
 
   // issue #3894 - core doesn't trigger events on disabled delegates
-  $( document ).bind( "selectmenubeforecreate", function( event ) {
+  $( document ).on( "selectmenubeforecreate", function( event ) {
     var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
     if ( !selectmenuWidget.options.nativeMenu &&
@@ -8838,7 +8838,7 @@ $( document ).bind( "pagecreate create", function( e ) {
           var thisPage = this;
           self.updatePagePadding( thisPage );
           if ( o.updatePagePadding ) {
-            $( window ).bind( "throttledresize." + self.widgetName, function() {
+            $( window ).on( "throttledresize." + self.widgetName, function() {
               self.updatePagePadding( thisPage );
             });
           }
@@ -9128,7 +9128,7 @@ $( document ).bind( "pagecreate create", function( e ) {
     // TODO: Implement a proper registration mechanism with dependency handling in order to not have exceptions like the one below
     //auto self-init widgets for those widgets that have a soft dependency on others
     if ( $.fn.controlgroup ) {
-      $( document ).bind( "pagecreate create", function( e ) {
+      $( document ).on( "pagecreate create", function( e ) {
         $( ":jqmData(role='controlgroup')", e.target )
           .jqmEnhanceable()
           .controlgroup({ excludeInvisible: false });

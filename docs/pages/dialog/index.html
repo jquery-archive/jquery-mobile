@@ -35,7 +35,7 @@
 				<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 			</ul>
             
-			<p>Any page can be presented as a modal dialog by adding the <code>data-rel="dialog"</code> attribute to the page anchor link. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page. If the dialog has a header the framework will also add a close button at the left side of the header.</p>
+			<p>Any page can be presented as a modal dialog by adding the <code>data-rel="dialog"</code> attribute to the page anchor link. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page. By default the framework will also add a close button if the dialog has a header.</p>
 
 			<p>
 			<code>
@@ -63,6 +63,11 @@
 
 			<h2>Closing dialogs</h2>
 			<p>When any link is clicked within a dialog, the framework will automatically close the dialog and transition to the requested page, just as if the dialog were a normal page. Nevertheless, dialogs can also be chained, as explained below under <strong>"Chaining Dialogs"</strong>. Similarly, a link that opens a popup will also leave the dialog in place.</p>
+
+            <p>If the dialog has a header the framework will add a close button at the left side of the header. You can change the position by adding <code>data-close-btn="right"</code> to the dialog container. If you don't want a close button in the header or add a custom close button, you can use <code>data-close-btn="none"</code>.</p>
+			<a href="../dialog-rightclosebtn.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Right close button</a>
+			<a href="../dialog-noclosebtn.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">No close button</a>
+             
 			<p>To create a "cancel" button in a dialog, just link to the page that triggered the dialog to open and add the <code>data-rel="back"</code> attribute to your link. This pattern of linking to the previous page is also usable in non-JS devices as well.</p>
 			<p>For JavaScript-generated links, you can simply set the href attribute to "#" and use the <code>data-rel="back"</code> attribute. You can also call the dialog's <code>close()</code> method to programmatically close dialogs, for example: <code>$('.ui-dialog').dialog('close')</code>. </p>
 
@@ -81,6 +86,9 @@
 			<h2>Styling &amp; theming</h2>
 			<p>Dialogs can be styled with different theme swatches, just like any page by adding <code>data-theme</code> attributes to the header, content, or footer containers. Here is an example of a different dialog design:</p>
 				<a href="../dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">An alternate color scheme</a>
+
+			<p>By default dialogs have rounded corners. The option <code>corners</code> can be set to <code>false</code> by adding <code>data-corners="false"</code> to the dialog container:</p>
+				<a href="../dialog-corners.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">No rounded corners</a>
 
 			<p>Dialogs appear to be floating above an overlay layer. This overlay adopts the swatch "a" content color by default, but the <code>data-overlay-theme</code> attribute can be added to the page wrapper to set the overlay to any swatch letter. Here is an example of a dialog with the overlay set to swatch "e":</p>
 				<a href="../dialog-overlay.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Custom overlay swatch</a>
