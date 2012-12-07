@@ -139,9 +139,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			klass = o.classes.panel,
 			$page = $el.closest( ":jqmData(role='page')" ),
 			$contentsWrap = $page.find( "." + o.classes.contentWrap ),
-			self = this,
 			_triggerAndResolve = function(){
-				self._trigger( "open" , "open" , { link: o.link } );
 				deferred.resolve( options );
 				$page.addClass( "ui-panel-open" );
 			};
@@ -163,7 +161,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		return deferred.promise();
 	},
 	_destroy: function(){},
-	open: function( options , toggle ){
+	open: function( options ){
 		var self = this;
 		var deferred = $.Deferred();
 		var o = $.extend( {} , this.options ),
@@ -192,11 +190,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			return self._blockPage( o );
 		})
 		.then( function( o ){
+			self._trigger( "open" , "open" , { link: o.link } );
 			deferred.resolve( o );
 		});
 		return deferred.promise();
 	},
-	close: function( options , toggle ){
+	close: function( options , pagehide ){
 		var deferred = $.Deferred();
 		var o = $.extend( {} , this.options ),
 			klass = o.classes.panel,
@@ -216,7 +215,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					$contentsWrap.removeClass( responsiveClasses[ j ] );
 				}
 				$el.data( "mobile-panel" )._trigger( "close" , "close" , { link: o.link } );
-				deferred.resolve( o , toggle );
+				deferred.resolve( o );
 			};
 		$page.removeClass( "ui-panel-open" );
 		for( var i in options ){
@@ -225,13 +224,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		}
 		
-		if( toggle ){
-			$el.addClass( "ui-panel-toggle" );
-		}
-		if( display === "reveal" ){
-			$contentsWrap.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
-		} else {
-			$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
+		if( !pagehide ){
+			if( display === "reveal" ){
+				$contentsWrap.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
+			} else {
+				$el.one( "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd" , _closePanel );
+			}
 		}
 
 		$el.removeClass( klass + "-active" );
@@ -251,9 +249,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				( active.jqmData( "display" ) === options.display ) ){
 			return active.panel( "close" , options );
 		} else if ( active.length > 0 ){
-			active.panel( "close" , options , true )
-			.then( function( options , toggle ){
-				self.open( options , toggle );
+			active.panel( "close" , options )
+			.then( function( options ){
+				self.open( options );
 			});
 		} else {
 			return this.open( options );
@@ -274,8 +272,8 @@ $( document ).bind( "panelopen panelclose" , function( e , data ){
 	}
 });
 
-$( document ).bind( "pagehide" , function( e , data ){
-	$( ".ui-panel-active" ).panel( "close" );
+$( document ).bind( "pagebeforehide" , function( e , data ){
+	$( ".ui-panel-active" ).panel( "close" , {} , true );
 });
 
 $(document).keyup(function(e) {
