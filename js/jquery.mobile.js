@@ -22,7 +22,7 @@ define([
 	'./widgets/forms/checkboxradio',
 	'./widgets/forms/button',
 	'./widgets/forms/slider',
-	'./widgets/forms/range',
+	'./widgets/forms/rangeslider',
 	'./widgets/forms/textinput',
 	'./widgets/forms/select.custom',
 	'./widgets/forms/select',
