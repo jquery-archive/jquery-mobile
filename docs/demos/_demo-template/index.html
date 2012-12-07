@@ -27,7 +27,7 @@
 	</style>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="myMarkup">
 
 	<div data-role="header" data-theme="f">
 		<h1>Demo title</h1>
@@ -38,23 +38,23 @@
 	
 		<div class="content-primary">
 		
-			<h2>Heading</h2>
+			<h2>How does "view source code" work</h2>
 			
-			<h3>Subheading</h3>
-
 			<div data-demo-html="true" data-demo-js="true" data-demo-css="true" data-demo-php="file-name">
-				<!-- data-demo-html="true" to include the markup in this div in the source code view -->
-				<!-- data-demo-js="true" to include scripts from the head in the source code view -->
-				<!-- data-demo-css="true" to include style from the head in the source code view -->
-                <!-- data-demo-php="fileName" to include PHP script from file-name.php in the source code view --> 
+            	<p>This is a div with...</p>
+				<p>data-demo-html="true" to include the markup in this div in the source code view</p>
+				<p>data-demo-js="true" to include all scripts from the head in the source code view</p>
+				<p>data-demo-css="true" to include all style from the head in the source code view</p>
+                <p>data-demo-php="fileName" to include PHP script from file-name.php in the source code view</p> 
 			</div><!--/demo-html -->
 
-			<h3>Subheading</h3>
+			<h3>Specify which markup, script or style to show</h3>
 
-			<div data-demo-html="true" data-demo-js="#myScript" data-demo-css="#myStyle">
-				<!-- data-demo-html="true" to include the markup in this div in the source code view -->
-				<!-- data-demo-js="myScript" to include a specific script from the head in the source code view -->
-				<!-- data-demo-css="myStyle" to include a specific style from the head in the source code view -->   
+			<div data-demo-html="#myMarkup" data-demo-js="#myScript" data-demo-css="#myStyle">
+				<p>This is a div with...</p>
+				<p>data-demo-html="#myMarkup" to include specific markup in the source code view</p>
+				<p>data-demo-js="#myScript" to include a specific script from the head in the source code view</p>
+				<p>data-demo-css="#myStyle" to include a specific style from the head in the source code view</p>   
 			</div><!--/demo-html -->
             					
 		</div><!--/content-primary -->
