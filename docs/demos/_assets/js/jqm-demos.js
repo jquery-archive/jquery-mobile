@@ -85,12 +85,23 @@ $.fn.viewSourceCode = function() {
 			collapsible.appendTo( collapsibleSet );
 		};
 
-		if ( $( this ).is( "[data-demo-html='true']" ) ) {
-			html = $( "<div></div>" ).append( $( this ).contents().clone() ).html();
+		if ( $( this ).is( "[data-demo-html]" ) ) {
+			var markupId = $( this ).attr( "data-demo-html" );
+
+			if ( markupId === "true" ) {
+				var element = $( this );
+			}
+			else {
+				var element = $( markupId );
+			}
+			
+			html = $( "<div></div>" ).append( element.clone() ).html();
+			
 			collapsibleHTML = $( "<div data-role='collapsible' data-collapsed='true' data-theme='b' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>HTML</h1>" +
 					"<pre class='brush: xml;'></pre>" +
 				"</div>" );
+				
 			appendSource( html, collapsibleHTML );
 		}
 		if ( $( this ).is( "[data-demo-php]" ) ) {
@@ -123,11 +134,14 @@ $.fn.viewSourceCode = function() {
 			if ( scriptId === "true" ) {
 				scriptId = "";
 			}
+			
 			js = $( "<div></div>" ).append( $( "head" ).find( "script" + scriptId ).contents().clone() ).html();
+			
 			collapsibleJS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='f' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>JS</h1>" +
 					"<pre class='brush: js;'></pre>" +
 				"</div>" );
+				
 			appendSource( js, collapsibleJS );
 		}
 		if ( $( this ).is( "[data-demo-css]" ) ) {
@@ -136,12 +150,14 @@ $.fn.viewSourceCode = function() {
 			if ( styleId === "true" ) {
 				styleId = "";
 			}
+			
 			css = $( "<div></div>" ).append( $( "head" ).find( "style" + styleId ).contents().clone() ).html();
-
+			
 			collapsibleCSS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='e' data-iconpos='right' data-content-theme='a'>" +
 					"<h1>CSS</h1>" +
 					"<pre class='brush: css;'></pre>" +
 				"</div>" );
+				
 			appendSource( css, collapsibleCSS );
 		}
 
