@@ -21,25 +21,27 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_create: function() {
-			var inputFirst, sliders, inputLast, sliderFirst, sliderLast, sliderLastWidth, sliderFirstWidth, label,
+			var inputFirst, sliders, inputLast, sliderFirst, sliderLast, sliderLastWidth, sliderFirstWidth, label, secondLabel
 			$el = this.element;
 
 			inputFirst = $el.find( "input:first" );
 			inputLast = $el.find( "input:last" );
 			inputFirst.addClass( "ui-rangeslider-first" );
 			inputLast.addClass( "ui-rangeslider-last" );
-			label = $el.find( "label" );
-			sliderFirst = $el.find( ".ui-slider:first" ).addClass( "ui-slider-first" );
-			sliderLast = $el.find( ".ui-slider:last" ).addClass( "ui-slider-last" );
+			label = $el.find( "label:first" );
+			if($el.find( "label" ).length > 1 ) {
+				secondLabel = $el.find( "label:last" ).hide();
+			}
+			
+			
 			
 			$el.append( "<div class=\"ui-rangeslider-sliders\" />" );
 			$el.addClass( "ui-rangeslider" );
 			
 			sliders = $el.find( ".ui-rangeslider-sliders" );
-			sliderFirst.appendTo( sliders );
-			inputFirst.after( "<span class=\"ui-rangeslider-dash\">&nbsp;-&nbsp;</span>" );
-			sliderLast.appendTo( sliders );
-			label.addClass( "ui-slider" );
+			
+			sliderFirst = $el.find( "div.ui-slider:first" ).addClass( "ui-slider-first" );
+			sliderLast = $el.find( "div.ui-slider:last" ).addClass( "ui-slider-last" );
 
 			$.extend( this, {
 				inputFirst: inputFirst,
@@ -54,6 +56,15 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 
 			this.refresh();
+
+
+
+			
+			
+			sliderFirst.appendTo( sliders );
+			inputFirst.after( "<span class=\"ui-rangeslider-dash\">&nbsp;-&nbsp;</span>" );
+			sliderLast.appendTo( sliders );
+			label.prependTo($el);
 			this._bindResize();
 			this._bindChangeEvents();
 			this._bindToggle();
