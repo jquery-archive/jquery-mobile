@@ -70,7 +70,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelClasses +=  " ui-panel-positioning";
 		}
 
-		panelClasses += " " + "ui-panel-position-" + o.position;
+		panelClasses += " " + "ui-panel-position-" + o.position + " " + "ui-panel-display-" + o.display;
 
 		$el.addClass( panelClasses );
 	},
@@ -84,20 +84,18 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		});
 	},
 
-	_bindLinkListeners: function( roleType , callback ){
+	_bindLinkListeners: function(){
 		var self = this;
 
-		$( document ).on( "vclick" , "a", function( e ) {
+		$( document ).on( "click" , "a", function( e ) {
 			if( this.href.split( "#" )[ 1 ] === self._panelID ){
-				var $link = $( this );
 				e.preventDefault();
-				self.toggle();
+				var $link = $( this );
 				$link.addClass( $.mobile.activeBtnClass );
-
-				self.element.bind( "open close", function(){
+				self.element.one( "panelopen panelclose", function(){
 					$link.removeClass( $.mobile.activeBtnClass );
 				});
-
+				self.toggle();
 				return false;
 			}
 		});
@@ -140,7 +138,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			};
 		self._trigger( "beforeopen" );
 
-		if ( $.support.cssTransitions ) {
+		if ( $.mobile.support.cssTransitions ) {
 			self.element.one( self._transitionEndEvents , cb );
 		} else{
 			setTimeout( cb , 0 );
