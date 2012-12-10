@@ -158,8 +158,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options;
 		this._trigger( "beforeclose" );
 
-		this.element.removeClass( o.classes.active );
-		this.element.removeClass( o.classes.panelOpen + " " + this._getOpenClasses( o.classes.panel ) );
+		this.element.removeClass( o.classes.active + " " + o.classes.panelOpen );
+//		this.element.removeClass( o.classes.panelOpen + " " + this._getOpenClasses( o.classes.panel ) );
 		this._modal.removeClass( this._getOpenClasses( o.classes.modal ) );
 
 		this._open = false;
