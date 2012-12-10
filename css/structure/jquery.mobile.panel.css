@@ -3,7 +3,6 @@
 	width: 80%;
 	border:0;
 	position: absolute;
-	display: none;
 	height: 100%;
 }
 
@@ -20,14 +19,14 @@
 	display: block;
 }
 
-.ui-panel-positioning .ui-panel {
+.ui-panel-positioning.ui-panel {
 	-webkit-transition: left 250ms ease, right 250ms ease;
 	-moz-transition: left 250ms ease, right 250ms ease;
 	-ms-transition: left 250ms ease, right 250ms ease;
 	-o-transition: left 250ms ease, right 250ms ease;
 	transition: left 250ms ease, right 250ms ease;
 }
-.ui-panel-transforms .ui-panel {
+.ui-panel-transforms.ui-panel {
 	-webkit-transition: -webkit-transform 250ms ease;
 	-moz-transition: -moz-transform 250ms ease;
 	-ms-transition: -o-transform 250ms ease;
@@ -35,20 +34,20 @@
 	transition: transform 250ms ease;
 }
 
-.ui-panel-positioning .ui-panel-position-left {
+.ui-panel-positioning.ui-panel-position-left {
 	left: -85%;
 }
-.ui-panel-positioning .ui-panel-position-left.ui-panel-active {
+.ui-panel-positioning.ui-panel-position-left.ui-panel-active {
 	left: 0;
 }
-.ui-panel-transforms .ui-panel-position-left {
+.ui-panel-transforms.ui-panel-position-left {
 	-webkit-transform: translateX(-100%);
 	-moz-transform: translateX(-100%);
 	-ms-transform: translateX(-100%);
 	-o-transform: translateX(-100%);
 	transform: translateX(-100%);
 }
-.ui-panel-transforms .ui-panel-position-left.ui-panel-active {
+.ui-panel-transforms.ui-panel-position-left.ui-panel-active {
 	-webkit-transform: translateX(0%);
 	-moz-transform: translateX(0%);
 	-ms-transform: translateX(0%);
@@ -56,20 +55,20 @@
 	transform: translateX(0%);
 }
 
-.ui-panel-positioning .ui-panel-position-right {
+.ui-panel-positioning.ui-panel-position-right {
 	left: 100%;
 }
-.ui-panel-positioning .ui-panel-position-right.ui-panel-active {
+.ui-panel-positioning.ui-panel-position-right.ui-panel-active {
 	left: 20%;
 }
-.ui-panel-transforms .ui-panel-position-right {
+.ui-panel-transforms.ui-panel-position-right {
 	-webkit-transform: translateX(125%);
 	-moz-transform: translateX(100%);
 	-ms-transform: translateX(100%);
 	-o-transform: translateX(100%);
 	transform: translateX(125%);
 }
-.ui-panel-transforms .ui-panel-position-right.ui-panel-active {
+.ui-panel-transforms.ui-panel-position-right.ui-panel-active {
 	-webkit-transform: translateX(25%);
 	-moz-transform: translateX(25%);
 	-ms-transform: translateX(25%);
