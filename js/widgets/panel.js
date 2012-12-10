@@ -127,30 +127,21 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		this._trigger( "open" );
 	},
 
-	// TODO: simplify internals, use stored property references, options
-	_position: function( options ){
-		var deferred = $.Deferred();
-		var o = options,
-			klass = o.classes.panel,
-			$el = this.element;
-		setTimeout(function(){
-			$el.addClass( "hidden" )
-				.addClass( klass + "-position-" + o.position )
-				.addClass( klass + "-dismissible-" + o.dismissible )
-				.addClass( klass + "-display-" + o.display )
-				.jqmData( "position" , o.position )
-				.jqmData( "display" , o.display )
-				.jqmData( "dismissible" , o.dismissible )
-				.removeClass( "hidden" );
-				deferred.resolve( options );
-		}, 0); // TODO get rid of setTimeout 0 hacks
-		return deferred.promise();
+	// cached string of classes used to last open the panel
+	_lastOpenClasses: null,
+
+	// return string of classes needed for opening panel
+	_getOpenClasses: function( options ){
+		this._lastOpenClasses = [
+				"-position-" + o.position,
+				"-dismissible-" + o.dismissible,
+				"-display-" + o.display
+			].join( " " + o.classes.panel );
+
+		return this._lastOpenClasses;
 	},
 
-	//TODO - simplify internals, use stored property references and options, 
-	// remove references to the page wrapper
-	_openPanel: function( options ){
-		var deferred = $.Deferred();
+	_openPanel: function(){
 		var o = options,
 			$el = this.element,
 			klass = o.classes.panel,
