@@ -13,6 +13,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	options: {
 		classes: {
 			panel: "ui-panel",
+			panelOpen: "ui-panel",
 			modal: "ui-panel-dismiss"
 		},
 		theme: null,
@@ -84,9 +85,15 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		$( document ).on( "vclick" , "a", function( e ) {
 			if( this.href.split( "#" )[ 1 ] === self._panelID ){
+				var $link = $( this );
 				e.preventDefault();
 				self.toggle();
-				$( this ).addClass( $.mobile.activeBtnClass );
+				$link.addClass( $.mobile.activeBtnClass );
+
+				this.element._bind( "open close", function(){
+					$link.removeClass( $.mobile.activeBtnClass );
+				});
+
 				return false;
 			}
 		});
@@ -121,135 +128,53 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	open: function( options ){
 		this._trigger( "beforeopen" );
-		this._position( o );
-		this._openPanel( o );
+
+		this.element.one( this._transitionEndEvents, function(){
+			this.element.addClass( o.classes.panelOpen );
+		} );
+
+		this._modal.addClass( this._getOpenClasses( o.classes.modal ) );
+		this.element.addClass( this._getOpenClasses( o.classes.panel ) );
+
 		this._open = true;
 		this._trigger( "open" );
 	},
 
-	// cached string of classes used to last open the panel
-	_lastOpenClasses: null,
-
-	// return string of classes needed for opening panel
-	_getOpenClasses: function( options ){
-		this._lastOpenClasses = [
-				"-position-" + o.position,
-				"-dismissible-" + o.dismissible,
-				"-display-" + o.display
-			].join( " " + o.classes.panel );
-
-		return this._lastOpenClasses;
-	},
-
-	_openPanel: function(){
-		var o = options,
-			$el = this.element,
-			klass = o.classes.panel,
-			$page = $el.closest( ":jqmData(role='page')" ),
-			$contentsWrap = $page.find( "." + o.classes.contentWrap ),
-			self = this,
-			_triggerAndResolve = function(){
-				self._trigger( "open" , "open" , { link: o.link } );
-				deferred.resolve( options );
-				$page.addClass( "ui-panel-open" );
-			};
-		
-		$el.one( self._transitionEndEvents , _triggerAndResolve );
-
-		setTimeout(function(){
-			$el.addClass( klass + "-active" );
-			if( o.display === "reveal" || o.display === "push" ){
-				$contentsWrap.addClass( "panel-shift-" + o.position );
-			}
-			if( o.display === "push" ){
-				$contentsWrap.addClass( "panel-push" );
-			}
-			$( ".ui-page-active" ).addClass( "ui-panel-body-scroll-block" );
-		}, 0);//TODO setTimout hacks
-		return deferred.promise();
-	},
-
-	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
-
-	// TODO: simplify internals
 	close: function( immediate ){
-		/* 
-		TODO: this method should largely mimic the open method's flow:
 		this._trigger( "beforeclose" );
-		this._position();
-		this._closePanel();
+
+		this.element.removeClass( o.classes.panelOpen + " " + this._getOpenClasses( o.classes.panel ) );
+		this._modal.addClass( this._getOpenClasses( o.classes.modal ) );
+
 		this._open = false;
 		this._trigger( "close" );
-
-		"immediate" arg should forego adding transition classes
-		*/
-
-
-		var deferred = $.Deferred();
-		var o = $.extend( {} , this.options ),
-			klass = o.classes.panel,
-			$el = this.element,
-			position = $el.jqmData( "position" ),
-			display = $el.jqmData( "display" ),
-			dismissible = $el.jqmData( "dismissible" ),
-			$page = $el.closest( ":jqmData(role='page')" ),
-			$contentsWrap = $page.find( "." + o.classes.contentWrap ),
-			_closePanel = function(){
-				var responsiveClasses = $el[0].className.match(/ui-responsive-?\w*/g) || [];
-
-				$el.removeClass( klass + "-position-" + position )
-					.removeClass( klass + "-display-" + display )
-					.removeClass( klass + "-dismissible-" + dismissible );
-				for( var j = 0, len = responsiveClasses.length; j < len; j++ ){
-					$contentsWrap.removeClass( responsiveClasses[ j ] );
-				}
-				$el.trigger( "close" );
-				deferred.resolve( o , toggle );
-			};
-		$page.removeClass( "ui-panel-open" );
-		for( var i in options ){
-			if( options.hasOwnProperty( i ) ){
-				o[ i ] = options[ i ];
-			}
-		}
-		
-		if( toggle ){
-			$el.addClass( "ui-panel-toggle" );
-		}
-		
-		$el.one( transitionEndEvents , _closePanel );
-
-		$el.removeClass( klass + "-active" );
-
-		$( "#page-block" ).remove();
-
-		$( "." + o.classes.contentWrap ).removeClass( "panel-shift-" + position )
-			.removeClass( "panel-push" );
-		$( ".ui-page-active" ).removeClass( "ui-panel-body-scroll-block" );
-		return deferred.promise();
 	},
 
 	toggle: function( options ){
 		this[ this._open ? "close" : "open" ]();
 	},
 
-	destroy: function(){
+	// cached string of classes used to last open the panel
+	_lastOpenClasses: null,
 
+	// return string of classes needed for opening panel
+	_getOpenClasses: function( joiner ){
+		this._lastOpenClasses = [
+				"",
+				"-position-" + o.position,
+				"-dismissible-" + o.dismissible,
+				"-display-" + o.display
+			].join( " " + joiner );
+
+		return this._lastOpenClasses;
 	},
-});
 
-// TODO: not sure if this is needed?
-$( document ).bind( "panelopen panelclose" , function( e , data ){
-	var $link = data.link, $parent;
-	if( $link ){
-		$parent = $link.parent().parent();
-		if ($parent.hasClass("ui-li")) {
-			$link = $parent.parent();
-		}
-		$link.removeClass( $.mobile.activeBtnClass );
+	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
+
+	destroy: function(){
+		// unbind events, remove generated elements, remove classes, remove data
 	}
 });
-
 
 
 //auto self-init widgets
