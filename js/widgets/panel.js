@@ -14,7 +14,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		classes: {
 			panel: "ui-panel",
 			panelOpen: "ui-panel-open",
-			modal: "ui-panel-dismiss"
+			modal: "ui-panel-dismiss",
+			active: "ui-panel-active"
 		},
 		theme: null,
 		position: "left",
@@ -69,6 +70,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelClasses +=  " ui-panel-positioning";
 		}
 
+		panelClasses += " " + "ui-panel-position-" + o.position;
+
 		$el.addClass( panelClasses );
 	},
 
@@ -106,20 +109,22 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._page
 			// on swipe, close the panel (should swipe open too?)
 			.on( "swipe" , function( e ){
-				self.close();
+				self.close.call( self );
 			})
 			// Close immediately if another panel on the page opens
 			.on( "pagebeforeopen", function( e ){
 				if( self._open && e.target !== self.element ){
-					self.close( true );
+					self.close.call( self , true );
 				}
 			})
 			// clean up open panels after page hide
-			.on(  "pagehide", self.close )
+			.on(  "pagebeforehide", function( e ) {
+				self.close.call( self );
+			})
 			// on escape, close? might need to have a target check too...
-			.on( "keyup", function() {
+			.on( "keyup", function( e ) {
 				if( e.keyCode === 27 && self._open ){
-					self.close();
+					self.close.call( self );
 				}
 			});
 	},
@@ -128,31 +133,34 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_open: false,
 
 	open: function( options ){
-		var o = this.options,
+		var self = this,
+			o = self.options,
 			cb = function(){
-				this.element.addClass( o.classes.panelOpen );
+				self.element.addClass( o.classes.panelOpen );
 			};
-		this._trigger( "beforeopen" );
+		self._trigger( "beforeopen" );
 
 		if ( $.support.cssTransitions ) {
-			this.element.one( this._transitionEndEvents , cb );
+			self.element.one( self._transitionEndEvents , cb );
 		} else{
 			setTimeout( cb , 0 );
 		}
 
-		this._modal.addClass( this._getOpenClasses( o.classes.modal ) );
-		this.element.addClass( this._getOpenClasses( o.classes.panel ) );
+		self._modal.addClass( self._getOpenClasses( o.classes.modal ) );
+		self.element.addClass( self._getOpenClasses( o.classes.panel ) );
 
-		this._open = true;
-		this._trigger( "open" );
+		self.element.addClass( o.classes.active );
+		self._open = true;
+		self._trigger( "open" );
 	},
 
 	close: function( immediate ){
 		var o = this.options;
 		this._trigger( "beforeclose" );
 
+		this.element.removeClass( o.classes.active );
 		this.element.removeClass( o.classes.panelOpen + " " + this._getOpenClasses( o.classes.panel ) );
-		this._modal.addClass( this._getOpenClasses( o.classes.modal ) );
+		this._modal.removeClass( this._getOpenClasses( o.classes.modal ) );
 
 		this._open = false;
 		this._trigger( "close" );
