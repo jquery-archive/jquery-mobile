@@ -62,18 +62,18 @@
 	left: 20%;
 }
 .ui-panel-transforms.ui-panel-position-right {
-	-webkit-transform: translateX(125%);
-	-moz-transform: translateX(100%);
-	-ms-transform: translateX(100%);
-	-o-transform: translateX(100%);
-	transform: translateX(125%);
+	-webkit-transform: translateX(400%);
+	-moz-transform: translateX(400%);
+	-ms-transform: translateX(400%);
+	-o-transform: translateX(400%);
+	transform: translateX(400%);
 }
 .ui-panel-transforms.ui-panel-position-right.ui-panel-active {
-	-webkit-transform: translateX(25%);
-	-moz-transform: translateX(25%);
-	-ms-transform: translateX(25%);
-	-o-transform: translateX(25%);
-	transform: translateX(25%);
+	-webkit-transform: translateX(0%);
+	-moz-transform: translateX(0%);
+	-ms-transform: translateX(0%);
+	-o-transform: translateX(0%);
+	transform: translateX(0%);
 }
 
 .ui-panel-positioning .ui-panel-content-wrap {
