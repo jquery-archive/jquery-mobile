@@ -7,9 +7,12 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window ) {
 
+	$.mobile.iosorientationfixEnabled = true;
+
 	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
 	var ua = navigator.userAgent;
 	if( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test( ua ) && ua.indexOf( "AppleWebKit" ) > -1 ) ){
+		$.mobile.iosorientationfixEnabled = false;
 		return;
 	}
 
@@ -34,9 +37,13 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 		}
 	}
 
-	$( window )
-		.bind( "orientationchange.iosorientationfix", zoom.enable )
-		.bind( "devicemotion.iosorientationfix", checkTilt );
+	$( document ).on( "mobileinit", function(){
+		if( $.mobile.iosorientationfixEnabled ){
+			$( window )
+				.bind( "orientationchange.iosorientationfix", zoom.enable )
+				.bind( "devicemotion.iosorientationfix", checkTilt );
+		}
+	});
 
 }( jQuery, this ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
