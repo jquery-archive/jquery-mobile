@@ -16,27 +16,35 @@
 				var dir = event.type === "swipeleft" ? "left" : "right",
 					listitem = $( this );
 				
+				// Show the confirmation popup
 				$( "#confirm" ).popup( "open" );
 				
 				$( "#confirm #yes" ).on( "click", function() {
-					
-					listitem
-						// Add the class for the transition
-						.addClass( dir )
-						// When the transition is done...
-						.on( "webkitTransitionEnd transitionend otransitionend", function() {
-							// ...the list item will be removed
-							$( this ).remove();
-							// ...the list will be refreshed and the border styling class removed
-							$( "#list" ).listview( "refresh" ).find( ".ui-li.border" ).removeClass( "border" );
-						})
-						// During the transition the previous list item should get bottom border
-						.prev( ".ui-li" ).addClass( "border" )
+					// Check if the browser supports our CSS transition
+					if ( $.mobile.support.cssTransform3d ) {
+						listitem
+							// Add the class for the transition
+							.addClass( dir )
+							// When the transition is done...
+							.on( "webkitTransitionEnd transitionend otransitionend", function() {
+								// ...the list item will be removed
+								listitem.remove();
+								// ...the list will be refreshed and the border styling class removed
+								$( "#list" ).listview( "refresh" ).find( ".ui-li.border" ).removeClass( "border" );
+							})
+							// During the transition the previous list item should get bottom border
+							.prev( ".ui-li" ).addClass( "border" );
+					}
+					// Otherwise just remove the list item and refresh the list
+					else {
+						listitem.remove();
+						$( "#list" ).listview( "refresh" );
+					}
 				});
 			});
 
 			if ( ! $.mobile.support.touch ) {
-				// Use a class to hide the delete button on touch devices				
+				// Remove the class that is used to hide the delete button on touch devices				
 				$( "#list" ).removeClass( "touch" );
 				
 				// Handles removal of the list item when the delete button is clicked
