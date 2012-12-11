@@ -15,12 +15,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panel: "ui-panel",
 			panelOpen: "ui-panel-open",
 			modal: "ui-panel-dismiss",
-			active: "ui-panel-active"
+			modalOpen: "ui-panel-dismiss-open",
+			openComplete: "ui-panel-open-complete"
 		},
 		theme: null,
 		position: "left",
 		dismissible: true,
-		display: "reveal",
+		display: "overlay", //accepts reveal, push, overlay
 		initSelector: ":jqmData(role='panel')"
 	},
 
@@ -58,19 +59,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_addPanelClasses: function(){
 		var $el = this.element,
 			o = this.options,
-			panelClasses = o.classes.panel;
+			panelClasses = [ 
+				" ",
+				" ",
+				"-position-" + o.position,
+				"-display-" + o.display
+				].join( " " + o.classes.panel );
 
 		if( o.theme ){
 			panelClasses += " ui-body-" + o.theme;
 		}
-
-		if( $.support.cssTransform3d ){
-			panelClasses += " ui-panel-transforms";
-		} else {
-			panelClasses +=  " ui-panel-positioning";
-		}
-
-		panelClasses += " " + "ui-panel-position-" + o.position;
 
 		$el.addClass( panelClasses );
 	},
@@ -136,8 +134,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var self = this,
 			o = self.options,
 			cb = function(){
-				self.element.addClass( o.classes.panelOpen );
+				self.element.addClass( o.classes.openComplete );
 			};
+
+		// move the panel to the right place in the DOM
+		self.element[ o.position === "left" ? "prependTo" : "appendTo" ]( o._page );
+
 		self._trigger( "beforeopen" );
 
 		if ( $.support.cssTransitions ) {
@@ -146,10 +148,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			setTimeout( cb , 0 );
 		}
 
-		self._modal.addClass( self._getOpenClasses( o.classes.modal ) );
-		self.element.addClass( self._getOpenClasses( o.classes.panel ) );
+		self._modal.addClass( o.classes.modalOpen );
+		self.element.addClass( o.classes.panelOpen );
 
-		self.element.addClass( o.classes.active );
 		self._open = true;
 		self._trigger( "open" );
 	},
@@ -158,9 +159,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options;
 		this._trigger( "beforeclose" );
 
-		this.element.removeClass( o.classes.active + " " + o.classes.panelOpen );
-//		this.element.removeClass( o.classes.panelOpen + " " + this._getOpenClasses( o.classes.panel ) );
-		this._modal.removeClass( this._getOpenClasses( o.classes.modal ) );
+		this.element.removeClass( o.classes.panelOpen );
+		this._modal.removeClass( o.classes.modalOpen );
 
 		this._open = false;
 		this._trigger( "close" );
@@ -168,22 +168,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	toggle: function( options ){
 		this[ this._open ? "close" : "open" ]();
-	},
-
-	// cached string of classes used to last open the panel
-	_lastOpenClasses: null,
-
-	// return string of classes needed for opening panel
-	_getOpenClasses: function( joiner ){
-		var o = this.options;
-		this._lastOpenClasses = [
-				"",
-				"-position-" + o.position,
-				"-dismissible-" + o.dismissible,
-				"-display-" + o.display
-			].join( " " + joiner );
-
-		return this._lastOpenClasses;
 	},
 
 	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
