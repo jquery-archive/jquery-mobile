@@ -56,6 +56,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( self.options.dismissible ){
 			self._createModal();
 		}
+		// move the panel to the right place in the DOM
+		self.element[ this.options.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
 
 		self._trigger( "create" );
 	},
@@ -117,13 +119,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self.close.call( self );
 			})
 			// Close immediately if another panel on the page opens
-			.on( "pagebeforeopen", function( e ){
+			.on( "panelbeforeopen", function( e ){
 				if( self._open && e.target !== self.element ){
 					self.close.call( self , true );
 				}
 			})
 			// clean up open panels after page hide
-			.on(  "pagebeforehide", function( e ) {
+			.on(  "panelbeforehide", function( e ) {
 				self.close.call( self );
 			})
 			// on escape, close? might need to have a target check too...
@@ -145,8 +147,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self._trigger( "open" );
 			};
 
-		// move the panel to the right place in the DOM
-		self.element[ o.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
 
 		self._trigger( "beforeopen" );
 
@@ -158,6 +158,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self._modal.addClass( o.classes.modalOpen );
 		self.element.addClass( o.classes.panelOpen );
+		self._wrapper.addClass( o.display + "-" + o.position );
 
 		self._open = true;
 
@@ -165,16 +166,18 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	close: function( immediate ){
 		var o = this.options,
+			self = this,
 			complete = function(){
 				self._trigger( "close" );
 			};
 
-		this._trigger( "beforeclose" );
+		self._trigger( "beforeclose" );
 
-		this.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
-		this._modal.removeClass( o.classes.modalOpen );
+		self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
+		self._modal.removeClass( o.classes.modalOpen );
+		self._wrapper.removeClass( o.display + "-" + o.position );
 
-		this._open = false;
+		self._open = false;
 	},
 
 	toggle: function( options ){

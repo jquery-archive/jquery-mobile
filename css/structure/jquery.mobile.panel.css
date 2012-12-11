@@ -2,11 +2,11 @@
 .ui-panel{
 	height: 100%;
 	border:0;
-}
-.ui-panel.ui-panel-open {
 	max-width: 28em;
 	width: 90%;
+	top: 0;
 }
+
 .ui-panel-open,
 .ui-panel-open *,
 .ui-panel-open + *,
@@ -31,17 +31,22 @@
 .ui-panel-display-push,
 .ui-panel-content-wrap,
 .ui-panel-dismiss {
-	z-index: 99999;
 	-webkit-transition: width 250ms ease, left 250ms ease, right 250ms ease;
 	-moz-transition: width 250ms ease, left 250ms ease, right 250ms ease;
 	-o-transition: width 250ms ease, left 250ms ease, right 250ms ease;
 	-ms-transition: width 250ms ease, left 250ms ease, right 250ms ease;
 	transition: width 250ms ease, left 250ms ease, right 250ms ease;
 }
+.ui-panel-display-overlay,
+.ui-panel-display-push,
+.ui-panel-dismiss {
+	z-index: 99999;
+}
 
 /* display and reveal */
 .ui-panel-display-overlay,
-.ui-panel-display-reveal {
+.ui-panel-display-reveal,
+.ui-panel-display-push {
 	position: absolute;
 }
 
@@ -50,33 +55,24 @@
 }
 
 .ui-panel-display-overlay.ui-panel-position-left,
-.ui-panel-display-reveal.ui-panel-position-left {
+.ui-panel-display-push.ui-panel-position-left {
 	left: -80%;
 }
 .ui-panel-open.ui-panel-display-overlay.ui-panel-position-left,
-.ui-panel-open.ui-panel-display-reveal.ui-panel-position-left{
+.ui-panel-open.ui-panel-display-push.ui-panel-position-left,
+.ui-panel-display-reveal.ui-panel-position-left{
 	left: 0;
 }
 .ui-panel-display-overlay.ui-panel-position-right,
-.ui-panel-display-reveal.ui-panel-position-right {
+.ui-panel-display-push.ui-panel-position-right {
 	right: -80%;
 }
 .ui-panel-open.ui-panel-display-overlay.ui-panel-position-right,
-.ui-panel-open.ui-panel-display-reveal.ui-panel-position-right {
+.ui-panel-open.ui-panel-display-push.ui-panel-position-right,
+.ui-panel-display-reveal.ui-panel-position-right {
 	right: 0;
 }
 
-/* push */
-.ui-panel-display-push {
-	width: 0;
-	overflow: hidden;
-}
-.ui-panel-display-push.ui-panel-position-left {
-	float: left;
-}
-.ui-panel-display-push.ui-panel-position-right {
-	float: right;
-}
 
 
 /* content-wrap */
@@ -84,12 +80,14 @@
 .ui-panel-content-wrap {
 	position: relative;
 	background: inherit;
-}
-.ui-panel-open.ui-panel-display-push.ui-panel-position-left ~.ui-panel-content-wrap {
+	z-index: 1;
 	display: table;
 }
-.ui-panel-open.ui-panel-display-push.ui-panel-position-right ~.ui-panel-content-wrap{
-	display: table;
+.ui-panel-content-wrap.reveal-left, .ui-panel-content-wrap.push-left {
+	left: 28em;
+}
+.ui-panel-content-wrap.reveal-right, .ui-panel-content-wrap.push-right {
+	right: 28em;
 }
 
 
