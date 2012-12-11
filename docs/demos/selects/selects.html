@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Native selects - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jqm-demos.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Native selects</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+        
+        	<form>
+		
+                <div data-demo-html="true">
+                    <div data-role="fieldcontain">
+                        <label for="select-native-1" class="select">Basic:</label>
+                        <select name="select-native-1" id="select-native-1">
+                            <option value="1">The 1st Option</option>
+                            <option value="2">The 2nt Option</option>
+                            <option value="3">The 3rd Option</option>
+                            <option value="4">The 4th Option</option>
+                        </select>
+                    </div>
+                </div><!--/demo-html -->
+    
+                <div data-demo-html="true">
+                    <div data-role="fieldcontain">
+                        <label for="select-native-2" class="select">Mini sized:</label>
+                        <select name="select-native-2" id="select-native-2" data-mini="true">
+                            <option value="1">The 1st Option</option>
+                            <option value="2">The 2nt Option</option>
+                            <option value="3">The 3rd Option</option>
+                            <option value="4">The 4th Option</option>
+                        </select>
+                    </div>
+                </div><!--/demo-html -->
+    
+                <div data-demo-html="true">
+                    <div data-role="fieldcontain">
+                        <label for="select-native-3" class="select">Icon left:</label>
+                        <select name="select-native-3" id="select-native-3" data-iconpos="left">
+                            <option value="1">The 1st Option</option>
+                            <option value="2">The 2nt Option</option>
+                            <option value="3">The 3rd Option</option>
+                            <option value="4">The 4th Option</option>
+                        </select>
+                    </div>
+                </div><!--/demo-html -->
+
+                <div data-demo-html="true">
+                    <div data-role="fieldcontain">
+                        <label for="select-native-17" class="select">1 option selected:</label>
+                        <select name="select-native-17" id="select-native-17">
+                            <option value="1">The 1st Option</option>
+                            <option value="2">The 2nt Option</option>
+                            <option value="3" selected="selected">The 3rd Option</option>
+                            <option value="4">The 4th Option</option>
+                        </select>
+                    </div>
+                </div><!--/demo-html -->
+    
+                <div data-demo-html="true">
+                    <div data-role="fieldcontain">
+                        <label for="select-native-18" class="select">1 option disabled:</label>
+                        <select name="select-native-18" id="select-native-18">
+                            <option value="1">The 1st Option</option>
+                            <option value="2">The 2nt Option</option>
+                            <option value="3" disabled="disabled">The 3rd Option</option>
+                            <option value="4">The 4th Option</option>
+                        </select>
+                    </div>
+                </div><!--/demo-html -->
+
+                <div data-demo-html="true">
+                    <div data-role="fieldcontain">
+                        <label for="select-native-4" class="select">Optgroup (if supported):</label>
+                        <select name="select-native-4" id="select-native-4">
+                            <option>Choose...</option>
+                            <optgroup label="Group 1">
+                                <option value="1">The 1st Option</option>
+                                <option value="2">The 2nt Option</option>
+                                <option value="3">The 3rd Option</option>
+                                <option value="4">The 4th Option</option>
+                            </optgroup>
+                            <optgroup label="Group 2">
+                                <option value="5">The 5th Option</option>
+                                <option value="6">The 6th Option</option>
+                                <option value="7">The 7th Option</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div><!--/demo-html -->
+    
+                <div data-demo-html="true">					
+                    <fieldset data-role="controlgroup">
+                        <legend>Vertical controlgroup:</legend>
+                        <label for="select-native-5">Select A</label>
+                        <select name="select-native-5" id="select-native-5">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-native-6">Select B</label>
+                        <select name="select-native-6" id="select-native-6">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-native-7">Select C</label>
+                        <select name="select-native-7" id="select-native-7">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div><!--/demo-html -->
+                
+                <div data-demo-html="true">					
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Vertical controlgroup, icon left, mini sized:</legend>
+                        <label for="select-native-8">Select A</label>
+                        <select name="select-native-8" id="select-native-8" data-iconpos="left">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-native-9">Select B</label>
+                        <select name="select-native-9" id="select-native-9" data-iconpos="left">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-native-10">Select C</label>
+                        <select name="select-native-10" id="select-native-10" data-iconpos="left">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div><!--/demo-html -->
+                
+                <div data-demo-html="true">					
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Horizontal controlgroup:</legend>
+                        <label for="select-native-11">Select A</label>
+                        <select name="select-native-11" id="select-native-11">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-native-12">Select B</label>
+                        <select name="select-native-12" id="select-native-12">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-native-13">Select C</label>
+                        <select name="select-native-13" id="select-native-13">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div><!--/demo-html -->
+                
+                <div data-demo-html="true">					
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Horizontal controlgroup, mini sized:</legend>
+                        <label for="select-native-14">Select A</label>
+                        <select name="select-native-14" id="select-native-14">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-native-15">Select B</label>
+                        <select name="select-native-15" id="select-native-15">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                        <label for="select-native-16">Select C</label>
+                        <select name="select-native-16" id="select-native-16">
+                            <option value="#">One</option>
+                            <option value="#">Two</option>
+                            <option value="#">Three</option>
+                        </select>
+                    </fieldset>
+                </div><!--/demo-html -->
+                
+			</form>
+					
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

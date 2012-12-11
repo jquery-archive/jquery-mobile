@@ -26,7 +26,7 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
 
 * What? - Keep the test page as simple as possible. Only include markup/code that is required to reproduce the issue.
 
-* How? - Use our [JS Bin template](http://jsbin.com/uzaret/edit) which uses latest code on branch "master". Copy the updated url when you are done editing.
+* How? - Use our [JS Bin template](http://jsbin.com/amozef/1/edit) which uses latest code on branch "master". When you start editing the JS Bin, the url will update and contain a new version number. As long as you keep the JS Bin open in your browser this url won't change. Copy the url in your issue report when you are done editing. If your test case requires multiple "single" jQuery Mobile pages, open the JS Bin on multiple tabs on your browser and each of them will get an unique url. Link to this url without "/edit" at the end on your other page(s).  
   * You will notice if the issue has been fixed already
   * It enables us to edit your code if necessary
   * The test page won't disappear or change while we are looking into the issue

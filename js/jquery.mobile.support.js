@@ -33,12 +33,16 @@ function validStyle( prop, value, check_vend ) {
 			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
 		},
 		vend_pref = function( vend ) {
-			return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
+			if( vend === "" ) {
+				return "";
+			} else {
+				return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
+			}
 		},
 		check_style = function( vend ) {
 			var vend_prop = vend_pref( vend ) + prop + ": " + value + ";",
 				uc_vend = uc( vend ),
-				propStyle = uc_vend + uc( prop );
+				propStyle = uc_vend + ( uc_vend === "" ? prop : uc( prop ) );
 
 			div.setAttribute( "style", vend_prop );
 
@@ -46,7 +50,7 @@ function validStyle( prop, value, check_vend ) {
 				ret = true;
 			}
 		},
-		check_vends = check_vend ? [ check_vend ] : vendors,
+		check_vends = check_vend ? check_vend : vendors,
 		ret;
 
 	for( var i = 0; i < check_vends.length; i++ ) {
@@ -55,10 +59,10 @@ function validStyle( prop, value, check_vend ) {
 	return !!ret;
 }
 
-// Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz to prevent a false positive for 3D transforms on Android.
+// Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz/unprefixed to prevent a false positive for 3D transforms on Android.
 function transform3dTest() {
 	var prop = "transform-3d";
-	return validStyle( 'perspective', '10px', 'moz' ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+	return validStyle( 'perspective', '10px', ['moz', ''] ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
 }
 
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
@@ -127,7 +131,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ) && !opera,
+	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "O", "" ] ) && !opera,
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
