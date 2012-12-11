@@ -21,7 +21,7 @@ define( [
 		$html = $( 'html' ),
 		$head = $( 'head' ),
 
-	  path = $.mobile.path,
+		path = $.mobile.path,
 
 		//will be defined when a link is clicked and given an active class
 		$activeClickedLink = null,
