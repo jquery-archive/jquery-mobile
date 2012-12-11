@@ -41,20 +41,22 @@
 	position: absolute;
 }
 
-.ui-panel-display-overlay.ui-panel-position-left,
-.ui-panel-display-reveal.ui-panel-position-left {
+.ui-panel-display-reveal{
+	z-index: 0;
+}
+
+.ui-panel-display-overlay.ui-panel-position-left{
 	left: -80%;
 }
 .ui-panel-open.ui-panel-display-overlay.ui-panel-position-left,
-.ui-panel-open.ui-panel-display-reveal.ui-panel-position-left {
+.ui-panel-display-reveal.ui-panel-position-left{
 	left: 0;
 }
-.ui-panel-display-overlay.ui-panel-position-right,
-.ui-panel-display-reveal.ui-panel-position-right {
+.ui-panel-display-overlay.ui-panel-position-right{
 	right: -80%;
 }
 .ui-panel-open.ui-panel-display-overlay.ui-panel-position-right,
-.ui-panel-open.ui-panel-display-reveal.ui-panel-position-right {
+.ui-panel-display-reveal.ui-panel-position-right{
 	right: 0;
 }
 
@@ -74,6 +76,12 @@
 }
 
 
+/* content-wrap */
+
+.ui-panel-content-wrap{
+	position: relative;
+	background: inherit;
+}
 /* Shift  transition 
 
 .ui-panel-positioning .ui-panel-content-wrap.panel-shift-left{
