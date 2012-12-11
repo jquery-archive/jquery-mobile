@@ -33,13 +33,20 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_create: function() {
 		var self = this,
-			$el = self.element;
+			$el = self.element,
+			_getWrapper = function(){
+				var $wrapper = $( "." + self.options.classes.contentWrap );
+				if( $wrapper.length === 0 ){
+					$wrapper = self._page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
+				}
+				return $wrapper;
+			};
 
 		// expose some private props to other methods
 		self._panelID = $el.attr( "id" );
 		self._closeLink = $el.find( ":jqmData(rel='close')" );
 		self._page = $el.closest( ":jqmData(role='page')" );
-		self._wrapper = self._page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
+		self._wrapper = _getWrapper();
 		self._addPanelClasses();
 		self._bindCloseEvents();
 		self._bindLinkListeners();
