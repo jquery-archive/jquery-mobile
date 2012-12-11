@@ -124,7 +124,10 @@
 		}
 		/* Custom styling for the popup */
 		#confirm {
-			border: 1px solid rgba(4,64,98,.4);
+			border: 1px solid;
+			border-color: #044062; /* Fallback for older browsers */
+			border-color: rgba(4,64,98,.4);
+			background: #456f9a; /* Fallback for older browsers */
 			background: rgba(69,111,154,.8);
 			-moz-box-shadow: 0 2px 6px rgba(69,111,154,.5), inset 0 1px rgba(255,255,255,.3), inset 0 6px rgba(255,255,255,.1), inset 0 10px 20px rgba(255,255,255,.25), inset 0 -15px 30px rgba(69,111,154,.3);
 			-webkit-box-shadow: 0 2px 6px rgba(69,111,154,.5), inset 0 1px rgba(255,255,255,.3), inset 0 6px rgba(255,255,255,.1), inset 0 10px 20px rgba(255,255,255,.25), inset 0 -15px 30px rgba(69,111,154,.3);
@@ -163,7 +166,7 @@
 
 		<div class="content-primary">
         
-        	<h2>Using swipe event to remove a list item</h2>
+        	<h2>Swipe to remove a list item</h2>
         
             <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true">
             	<p>This demo shows how you can remove list items by swiping left or right. For devices without touchscreen there is a delete button. This demo also contains a custom styled confirmation popup.</p>
