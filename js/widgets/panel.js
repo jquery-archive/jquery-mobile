@@ -16,7 +16,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelOpen: "ui-panel-open",
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
-			openComplete: "ui-panel-open-complete"
+			openComplete: "ui-panel-open-complete",
+			contentWrap: "ui-panel-content-wrap"
 		},
 		theme: null,
 		position: "left",
@@ -38,7 +39,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._panelID = $el.attr( "id" );
 		self._closeLink = $el.find( ":jqmData(rel='close')" );
 		self._page = $el.closest( ":jqmData(role='page')" );
-
+		self._wrapper = self._page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
 		self._addPanelClasses();
 		self._bindCloseEvents();
 		self._bindLinkListeners();
