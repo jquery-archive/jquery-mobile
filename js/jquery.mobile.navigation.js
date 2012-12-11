@@ -26,6 +26,9 @@ define( [
 		//will be defined when a link is clicked and given an active class
 		$activeClickedLink = null,
 
+		// resolved on domready
+		domreadyDeferred = $.Deferred(),
+
 		//urlHistory is purely here to make guesses at whether the back or forward button was clicked
 		//and provide an appropriate transition
 		urlHistory = $.navigate.history,
@@ -1271,7 +1274,10 @@ define( [
 		$( window ).bind( "throttledresize", resetActivePageHeight );
 
 	};//navreadyDeferred done callback
-	$.mobile.navreadyDeferred.done( function() { $.mobile._registerInternalEvents(); } );
+
+	$( function() { domreadyDeferred.resolve(); } );
+
+	$.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() { $.mobile._registerInternalEvents(); } );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
