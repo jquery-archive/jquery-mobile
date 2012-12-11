@@ -30,12 +30,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_closeLink: null,
 	_page: null,
 	_modal: null,
+	_wrapper: null,
 
 	_create: function() {
 		var self = this,
 			$el = self.element,
 			_getWrapper = function(){
-				var $wrapper = $( "." + self.options.classes.contentWrap );
+				var $wrapper = self._page.find( "." + self.options.classes.contentWrap );
 				if( $wrapper.length === 0 ){
 					$wrapper = self._page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
 				}
@@ -139,37 +140,41 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	open: function( options ){
 		var self = this,
 			o = self.options,
-			cb = function(){
+			complete = function(){
 				self.element.addClass( o.classes.openComplete );
+				self._trigger( "open" );
 			};
 
 		// move the panel to the right place in the DOM
-		self.element[ o.position === "left" ? "prependTo" : "appendTo" ]( o._page );
+		self.element[ o.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
 
 		self._trigger( "beforeopen" );
 
 		if ( $.mobile.support.cssTransitions ) {
-			self.element.one( self._transitionEndEvents , cb );
+			self.element.one( self._transitionEndEvents , complete );
 		} else{
-			setTimeout( cb , 0 );
+			setTimeout( complete , 0 );
 		}
 
 		self._modal.addClass( o.classes.modalOpen );
 		self.element.addClass( o.classes.panelOpen );
 
 		self._open = true;
-		self._trigger( "open" );
+
 	},
 
 	close: function( immediate ){
-		var o = this.options;
+		var o = this.options,
+			complete = function(){
+				self._trigger( "close" );
+			};
+
 		this._trigger( "beforeclose" );
 
-		this.element.removeClass( o.classes.panelOpen );
+		this.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
 		this._modal.removeClass( o.classes.modalOpen );
 
 		this._open = false;
-		this._trigger( "close" );
 	},
 
 	toggle: function( options ){
