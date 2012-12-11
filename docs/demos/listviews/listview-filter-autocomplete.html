@@ -10,22 +10,18 @@
 	<script src="../_assets/js/jqm-demos.js"></script>
 	<script src="../../../js/"></script>
     <script>
-        $( document ).ready( function() {
-            $( "#autocomplete" ).listview({
-                filter: true
-            });
-
+        $( document ).ready( function () {
             $( "#autocomplete" ).on( "listviewbeforefilter",
-                    function( e, data ) {
+                    function ( e, data ) {
                         var $ul = $( this ),
-                                $input = $( data.input ),
-                                value = $input.val(),
-                                html = "";
+                            $input = $( data.input ),
+                            value = $input.val(),
+                            html = "";
                         $ul.html( "" );
                         if ( value && value.length > 2 ) {
-                            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>");
+                            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
                             $ul.listview( "refresh" );
-                            $.ajax({
+                            $.ajax( {
                                 url: "http://gd.geobytes.com/AutoCompleteCity",
                                 dataType: "jsonp",
                                 crossDomain: true,
@@ -34,10 +30,10 @@
                                 }
                             }).
                                 then(
-                                function( response ) {
-                                    $.each( response, function( i, val ) {
+                                function ( response ) {
+                                    $.each( response, function ( i, val ) {
                                         html += "<li>" + val + "</li>";
-                                    });
+                                    } );
                                     $ul.html( html );
                                     $ul.listview( "refresh" );
                                 }
@@ -45,7 +41,7 @@
                         }
                     }
             );
-        });
+        } );
     </script>
 </head>
 <body>
@@ -55,25 +51,25 @@
 		<h1>Listview Autocomplete</h1>
 		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
-	
+
 	<div data-role="content">
-	
+
 		<div class="content-primary">
-		
+
 			<div data-demo-html="true" data-demo-js="true">
-				<ul id="autocomplete" data-filter-theme="d"></ul>
+				<ul id="autocomplete" data-role="listview" data-filter="true" data-filter-theme="d"></ul>
 			</div><!--/demo-html -->
 
 
 		</div><!--/content-primary -->
-	
+
 	</div><!-- /content -->
-	
+
 	<div class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>&copy; 2012 jQuery Foundation and other contributors</p>
 	</div><!-- /jqm-footer -->
-	
+
 </div><!-- /page -->
 
 </body>
