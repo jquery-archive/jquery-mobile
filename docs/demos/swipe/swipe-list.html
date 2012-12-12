@@ -13,42 +13,15 @@
 		$( document ).on( "pageinit", "#demo-page", function() {
 			
 			// Swipe to remove list item
-			$( document ).on( "swipeleft swiperight", "#list .ui-li", function( event ) {
-				var dir = event.type === "swipeleft" ? "left" : "right",
-					listitem = $( this );
-
-				// Inject topic in confirmation popup after removing any previous injected topics
-				$( "#confirm .topic" ).remove();
-				listitem.find( ".topic" ).clone().insertAfter( "#question" );
-					
-				// Show the confirmation popup
-				$( "#confirm" ).popup( "open" );
-				
-				$( "#confirm #yes" ).on( "click", function() {
-					
+			$( document ).on( "swipeleft swiperight", "#list li.ui-li", function( event ) {
+				var listitem = $( this ),
+					// These are the classnames used for the CSS transition
+					dir = event.type === "swipeleft" ? "left" : "right",
 					// Check if the browser supports the transform (3D) CSS transition
-					// TO DO: CHANGE .touch INTO .cssTransform3d WHEN THE SUPPORT TEST HAS BEEN FIXED: #5359
-					if ( $.mobile.support.touch ) {
-						
-						listitem
-							// Add the class for the transition
-							.addClass( dir )
-							// When the transition is done...
-							.on( "webkitTransitionEnd transitionend otransitionend", function() {
-								// ...the list item will be removed
-								listitem.remove();
-								// ...the list will be refreshed and the temporary class for border styling removed
-								$( "#list" ).listview( "refresh" ).find( ".ui-li.border" ).removeClass( "border" );
-							})
-							// During the transition the previous list item should get bottom border
-							.prev( ".ui-li" ).addClass( "border" );
-					}
-					// If the CSS transition isn't supported just remove the list item and refresh the list
-					else {
-						listitem.remove();
-						$( "#list" ).listview( "refresh" );
-					}
-				});
+					// TO DO: CHANGE INTO "$.mobile.support.cssTransform3d" WHEN THE SUPPORT TEST HAS BEEN FIXED: #5359
+					transition = $.mobile.support.touch ? dir : false;
+					
+					confirmAndDelete( listitem, transition );
 			});
 
 			// If it's not a touch device...
@@ -59,29 +32,51 @@
 				
 				// Click delete split-button to remove list item
 				$( ".delete" ).on( "click", function() {
-					var splitbutton = $( this );
+					var listitem = $( this ).parent( "li.ui-li" );
 					
-					// Inject topic in confirmation popup after removing any previous injected topics
-					$( "#confirm .topic" ).remove();
-					splitbutton.parent( ".ui-li" ).find( ".topic" ).clone().insertAfter( "#question" );
-
-					// Show the confirmation popup
-					$( "#confirm" ).popup( "open" );
-					
-					$( "#confirm #yes" ).on( "click", function() {
-
-						// Remove the list item and refresh the list
-						splitbutton.parent( ".ui-li" ).remove();
-						$( "#list" ).listview( "refresh" );
-					});
+					confirmAndDelete( listitem );
 				});
 			}
-			
-			// Unbind when the cancel button is clicked
-			$( "#confirm #cancel" ).on( "click", function() {
-				$( "#confirm #yes" ).off();	
-			});
 
+			function confirmAndDelete( listitem, transition ) {
+				// Set the list item to the active state
+				listitem.addClass( $.mobile.activeBtnClass );
+				// Inject topic in confirmation popup after removing any previous injected topics
+				$( "#confirm .topic" ).remove();
+				listitem.find( ".topic" ).clone().insertAfter( "#question" );
+				// Show the confirmation popup
+				$( "#confirm" ).popup( "open" );
+				// Proceed when the user confirms
+				$( "#confirm #yes" ).on( "click", function() {
+					// Remove with a transition
+					if ( transition ) {
+						
+						listitem
+							.removeClass( $.mobile.activeBtnClass )
+							// Add the class for the transition direction
+							.addClass( transition )
+							// When the transition is done...
+							.on( "webkitTransitionEnd transitionend otransitionend", function() {
+								// ...the list item will be removed
+								listitem.remove();
+								// ...the list will be refreshed and the temporary class for border styling removed
+								$( "#list" ).listview( "refresh" ).find( ".ui-li.border" ).removeClass( "border" );
+							})
+							// During the transition the previous list item should get bottom border
+							.prev( "li.ui-li" ).addClass( "border" );
+					}
+					// If it's not a touch device or the CSS transition isn't supported just remove the list item and refresh the list
+					else {
+						listitem.remove();
+						$( "#list" ).listview( "refresh" );
+					}
+				});
+				// Remove active state and unbind when the cancel button is clicked
+				$( "#confirm #cancel" ).on( "click", function() {
+					listitem.removeClass( $.mobile.activeBtnClass );
+					$( "#confirm #yes" ).off();	
+				});
+			}
 		});
     </script>
 	<style>
