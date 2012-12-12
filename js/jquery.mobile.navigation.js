@@ -1196,11 +1196,6 @@ define( [
 				transition: (urlHistory.getLast() || {}).transition || transition
 			});
 
-			// TODO we can set this earlier and avoid checking it every time we run the hashchange
-			if ( 0 === urlHistory.stack.length ) {
-				urlHistory.initialDst = to;
-			}
-
 			// special case for dialogs
 			if ( urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && urlHistory.initialDst !== to ) {
 
