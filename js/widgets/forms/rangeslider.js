@@ -49,22 +49,36 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				targetVal: null,
 				sliderTarget:false,
 				sliders: sliders,
-				sliderLast: sliderLast
+				sliderLast: sliderLast,
+				proxy:false
 			});
 			
 			this.refresh();
 			this._on( this.element.find( "input.ui-slider-input" ), {
 				"slidebeforestart": function( event ){
-					this.sliderTarget = false;
+					var min = parseFloat( this.inputFirst.val(), 10 ),
+						max = parseFloat( this.inputLast.val(), 10 ),
+						first = ($(event.target).is(this.inputFirst))? true:false
+						otherSlider = (first)? this.inputLast: this.inputFirst;
 					if($(event.originalEvent.target).hasClass("ui-slider")){
-						this.targetVal = $(event.target).val();
 						this.sliderTarget = true;
+						this.targetVal = $(event.target).val();
 					}
-						
-					var self = this;
-					this.element.one("vmousemove",function(){
-						self.sliderTarget = false;
-					});
+				},
+				"slidestop": function(){
+					this.proxy = false;
+					this.element.find("input").trigger("vmouseup");
+				},
+				"slidedrag":function(event){
+					var min = parseFloat( this.inputFirst.val(), 10 ),
+						max = parseFloat( this.inputLast.val(), 10 ),
+						first = ($(event.target).is(this.inputFirst))? true:false
+						otherSlider = (first)? this.inputLast: this.inputFirst;
+					if((this.proxy == "first" && first) || (this.proxy == "last" && !first)){
+						otherSlider.data("mobileSlider").dragging = true;
+						otherSlider.data("mobileSlider").refresh(event);
+						return false;
+					}
 				},
 				"change": "_change",
 				"blur": "_change",
@@ -102,21 +116,22 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				this._updateHighlight();
 				return false;
 			}
+
 			var min = parseFloat( this.inputFirst.val(), 10 ),
 				max = parseFloat( this.inputLast.val(), 10 ),
 				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
 				thisSlider = first? this.inputFirst: this.inputLast,
 				otherSlider = first? this.inputLast: this.inputFirst;
-
-				if( min > max && !this.sliderTarget)  {
-					thisSlider.val(first ? max: min).slider( "refresh" );
-				} else if ( min > max) {
-		            thisSlider.val(this.targetVal).slider("refresh");
-		            setTimeout(function(){
-		              otherSlider.val(first? min: max).slider("refresh");
-		            },0);
-				}
-				this._updateHighlight();
+					if( min > max && !this.sliderTarget)  {
+						thisSlider.val(first ? max: min).slider( "refresh" );
+					} else if ( min > max) {
+			            thisSlider.val(this.targetVal).slider("refresh");
+			            setTimeout(function(){
+			              otherSlider.val(first? min: max).slider("refresh");
+			            },0);
+			            this.proxy = (first)? "first":"last";
+					}
+					this._updateHighlight();
 		},
 
 		_updateHighlight: function() {

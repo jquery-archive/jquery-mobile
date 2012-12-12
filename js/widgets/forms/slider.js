@@ -310,7 +310,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					// make the handle move in sync with the mouse
 					this.handle.removeClass( "ui-slider-handle-snapping" );
 				}
-
+				if(this._trigger("drag",event) === false){
+					return false;
+				}
 				this.refresh( event );
 
 				// only after refresh() you can calculate this.userModified
@@ -335,7 +337,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
-
 		// NOTE: we don't return here because we want to support programmatic
 		//       alteration of the input value, which should still update the slider
 		if ( this.options.disabled || this.element.attr('disabled') ) {
