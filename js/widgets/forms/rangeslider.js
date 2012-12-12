@@ -17,57 +17,65 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			disabled: false,
 			initSelector: ":jqmData(role='rangeslider')",
 			mini: false,
-			highlight: false
+			highlight: true
 		},
 
 		_create: function() {
-			var inputFirst, sliders, inputLast, sliderFirst, sliderLast, sliderLastWidth, sliderFirstWidth, label, secondLabel
-			$el = this.element;
-
-			inputFirst = $el.find( "input:first" );
-			inputLast = $el.find( "input:last" );
-			inputFirst.addClass( "ui-rangeslider-first" );
-			inputLast.addClass( "ui-rangeslider-last" );
-			label = $el.find( "label:first" );
+			var sliders, secondLabel
+			$el = this.element,
+			inputFirst = $el.find( "input:first" ),
+			inputLast = $el.find( "input:last" ),
+			label = $el.find( "label:first" ),
+			sliderFirst = $el.find( "div.ui-slider:first" ),
+			sliderLast = $el.find( "div.ui-slider:last" );
+			
 			if($el.find( "label" ).length > 1 ) {
 				secondLabel = $el.find( "label:last" ).hide();
 			}
-			
-			
-			
-			$el.append( "<div class=\"ui-rangeslider-sliders\" />" );
-			$el.addClass( "ui-rangeslider" );
-			
-			sliders = $el.find( ".ui-rangeslider-sliders" );
-			
-			sliderFirst = $el.find( "div.ui-slider:first" ).addClass( "ui-slider-first" );
-			sliderLast = $el.find( "div.ui-slider:last" ).addClass( "ui-slider-last" );
 
+			inputFirst.addClass( "ui-rangeslider-first" );
+			inputFirst.after( "<span class=\"ui-rangeslider-dash\">&nbsp;-&nbsp;</span>" );
+			inputLast.addClass( "ui-rangeslider-last" );
+			$el.addClass( "ui-rangeslider" ).append( "<div class=\"ui-rangeslider-sliders\" />" );
+			sliders = $el.find( ".ui-rangeslider-sliders" );
+			sliderFirst.appendTo( sliders );
+			sliderLast.appendTo( sliders );
+			label.prependTo($el);
+			
 			$.extend( this, {
 				inputFirst: inputFirst,
 				inputLast: inputLast,
 				sliderFirst: sliderFirst,
-				label: label,
+				targetVal: null,
+				sliderTarget:false,
 				sliders: sliders,
-				sliderLast: sliderLast,
-				sliderFirstWidth: sliderFirstWidth,
-				sliderLastWidth: sliderLastWidth,
-				wasVisible: true
+				sliderLast: sliderLast
 			});
-
+			
 			this.refresh();
-
-
-
-			
-			
-			sliderFirst.appendTo( sliders );
-			inputFirst.after( "<span class=\"ui-rangeslider-dash\">&nbsp;-&nbsp;</span>" );
-			sliderLast.appendTo( sliders );
-			label.prependTo($el);
-			this._bindResize();
-			this._bindChangeEvents();
-			this._bindToggle();
+			this._on( this.element.find( "input.ui-slider-input" ), {
+				"slidebeforestart": function( event ){
+					this.sliderTarget = false;
+					if($(event.originalEvent.target).hasClass("ui-slider")){
+						this.targetVal = $(event.target).val();
+						this.sliderTarget = true;
+					}
+						
+					var self = this;
+					this.element.one("vmousemove",function(){
+						self.sliderTarget = false;
+					});
+				},
+				"change": "_change",
+				"blur": "_change",
+				"keyup": "_change"
+			});
+			this._on( this.element.find( ".ui-slider-handle" ), {
+				"vmousedown": function( event ){
+					var first = $(event.target).closest( ".ui-slider" ).is( ":first-child" );
+					this.sliderFirst.css( "z-index", first ? 1 : "" );
+				}
+			});
 		},
 
 		_setOption: function( options ){
@@ -79,17 +87,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			var $el = this.element,
 				o = this.options;
 
-			if( o.mini ){
-				this.label.addClass( "ui-mini" );
-				this.inputFirst.addClass( "ui-mini" );
-				this.inputLast.addClass( "ui-mini" );
-				this.element.addClass( "ui-mini" );
-			} else {
-				this.label.removeClass( "ui-mini" );
-				this.inputFirst.removeClass( "ui-mini" );
-				this.inputLast.removeClass( "ui-mini" );
-				this.element.removeClass( "ui-mini" );
-			}
 			$el.find( "input" ).slider({
 				theme: o.theme,
 				trackTheme: o.trackTheme,
@@ -97,82 +94,49 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				mini: o.mini,
 				highlight: o.highlight
 			}).slider( "refresh" );
+			this._updateHighlight();
 		},
 
-		_bindChangeEvents: function() {
-			this._on( this.element.find( "input" ), {
-				"change": function( event ){
-					var min = parseFloat( this.inputFirst.val(), 10 ),
-						max = parseFloat( this.inputLast.val(), 10 ),
-						first = $( event.target ).hasClass( "ui-rangeslider-first" ),
-						slider = ( first )? this.sliderFirst.find( ".ui-slider-bg" ): this.sliderLast.find( ".ui-slider-bg" );
+		_change: function( event ) {
+			if( event.type == "keyup" ){
+				this._updateHighlight();
+				return false;
+			}
+			var min = parseFloat( this.inputFirst.val(), 10 ),
+				max = parseFloat( this.inputLast.val(), 10 ),
+				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
+				thisSlider = first? this.inputFirst: this.inputLast,
+				otherSlider = first? this.inputLast: this.inputFirst;
 
-					if( min > max )  {
-						$( event.target ).val(first ? max: min).slider( "refresh" );
-					}
-
-					this.element.find( ".ui-slider-bg" ).css( "visibility", "visible" );
-
-					if( !this.wasVisible && min <= max && !first ){
-						this.inputFirst.slider( "refresh" );
-					}
-
-					if( first ) {
-						this.sliderFirstWidth = slider.width();
-					} else {
-						this.sliderLastWidth = slider.width();
-					}
-
-					this._updateHighlight( (min > max)? true:false );
-						
+				if( min > max && !this.sliderTarget)  {
+					thisSlider.val(first ? max: min).slider( "refresh" );
+				} else if ( min > max) {
+		            thisSlider.val(this.targetVal).slider("refresh");
+		            setTimeout(function(){
+		              otherSlider.val(first? min: max).slider("refresh");
+		            },0);
 				}
-			});
+				this._updateHighlight();
 		},
 
-		_bindResize: function() {
-			this._on( this.element.closest( ".ui-page" ) , {
-				"pageshow": function(){
-					this.sliderFirstWidth = this.sliderFirst.find( ".ui-slider-bg" ).width();
-					this.sliderLastWidth = this.sliderLast.find( ".ui-slider-bg" ).width();
-				}
-			});
-			this._on( window , {
-				"throttledresize": function( event ){
-					this.sliderLastWidth = this.sliderLast.find( ".ui-slider-bg" ).width();
-				}
-			});
-		},
+		_updateHighlight: function() {
+			var min = parseInt(this.sliderFirst.find( ".ui-slider-handle" )[0].style.left, 10),
+				max = parseInt(this.sliderLast.find( ".ui-slider-handle" )[0].style.left, 10),
+				width = (max - min);
 
-		_bindToggle: function() {
-			this._on( this.element.find( ".ui-slider-handle" ), {
-				"vclick": function( event ){
-					var first = $(event.target).closest( ".ui-slider" ).is( ":first-child" );
-					this.sliderFirst.css( "z-index", first ? 1 : "" );
-				}
+			this.element.find( ".ui-slider-bg" ).css({
+				"margin-left": min + "%",
+				"width": width + "%"
 			});
-		},
-
-		_updateHighlight: function( hide ) {
-			var newWidth = this.sliderLastWidth - this.sliderFirstWidth,
-				tWidth = this.sliderLast.width();
-				this.wasVisible = ( hide )? false:true;
-				this.element.find( ".ui-slider-bg" ).css({
-					"margin-left": this.sliderFirstWidth / tWidth * 100 + "%",
-					"width": ( newWidth ) / tWidth * 100 + "%",
-					"visibility": ( hide )? "hidden":"visible"
-				});
 		},
 
 		_destroy: function() {
-			this.element.removeClass( "ui-rangeslider ui-mini" );
-			this.sliders.removeClass( "ui-rangeslider-sliders" );
-			this.label.removeClass( "ui-slider ui-mini" );
+			this.element.removeClass( "ui-rangeslider ui-mini" ).find("label").show();
 			this.element.find( ".ui-rangeslider-dash" ).remove();
-			this.element.find('.ui-slider-input').removeClass( "ui-rangeslider-first ui-rangeslider-last" );
 			this.inputFirst.after(this.sliderFirst);
 			this.inputLast.after(this.sliderLast);
 			this.sliders.remove();
-			this.element.find( "input" ).slider( "destroy" );
+			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
 		}
 
 	});

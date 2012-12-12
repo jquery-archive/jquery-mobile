@@ -1,151 +1,121 @@
-.ui-rangeslider{
-	position:relative;
-	display:inline-block;
-	min-height:1em;
-	width:100%;
-	padding-right:30px;
-	box-sizing:border-box;
+.ui-rangeslider {
+	position: relative;
+	display: inline-block;
+	min-height: 1em;
+	width: 100%;
+	padding-right: 30px;
 }
-.ui-rangeslider div.ui-slider{
-	position:absolute;
-	left:0;
-	top:0;
-	width:100%;
-	margin:0;
+.ui-rangeslider div.ui-slider {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	margin: 0;
 }
-.ui-rangeslider label.ui-slider{
-	
-	color: #222 /*{c-bup-color}*/;
-	text-shadow: 0 /*{c-bup-shadow-x}*/ 1px /*{c-bup-shadow-y}*/ 0 /*{c-bup-shadow-radius}*/ #fff /*{c-bup-shadow-color}*/;
-
-	margin-right:3px;
+.ui-rangeslider label.ui-slider {
+	margin-right: 3px;
 }
-.ui-rangeslider-sliders{
-	position:relative;
-	display:inline-block;
-	width:60%;
-	min-height:1em;
-	margin:0 0 0 20px;
+.ui-rangeslider-sliders {
+	position: relative;
+	display: inline-block;
+	width: 60%;
+	min-height: 1em;
+	margin: 0 0 0 20px;
 }
 
-.ui-rangeslider input.ui-slider-input:last-child{
-	margin-left:20px;
+.ui-rangeslider input.ui-slider-input:last-child {
+	margin-left: 20px;
 }
 
-.ui-rangeslider .ui-rangeslider-sliders .ui-slider{
-	width:86%;
-	margin-left:20px;
-	top:.7em;
+.ui-rangeslider .ui-rangeslider-sliders .ui-slider {
+	width: 86%;
+	margin-left: 20px;
+	top: .7em;
 }
 
 /*full width style*/
-.ui-rangeslider.ui-rangeslider-full .ui-rangeslider-sliders{
-	width:100%;
-	clear:both;
+.ui-rangeslider.ui-rangeslider-full .ui-rangeslider-sliders {
+	width: 98%;
+	margin:0;
+	margin-left:1%;
+	clear: both;
 	overflow: visible;
 }
-.ui-rangeslider.ui-rangeslider-full .ui-rangeslider-sliders .ui-slider{
-	width:100%;
-	margin-left:0;
+.ui-rangeslider.ui-rangeslider-full .ui-rangeslider-sliders .ui-slider {
+	width: 100%;
+	margin-left: 0;
 }
-.ui-rangeslider.ui-rangeslider-full label.ui-slider{
-	float:left;
-	margin-top:1em;
+.ui-rangeslider.ui-rangeslider-full label.ui-slider {
+	float: left;
+	margin-top: 1em;
 }
 
 /*mini styles*/
 .ui-rangeslider.ui-mini .ui-rangeslider-sliders,
 .ui-rangeslider.ui-mini.ui-rangeslider-split.ui-rangeslider-full .ui-rangeslider-sliders{
-	margin-top:0;
+	margin-top: 0;
 }
 .ui-rangeslider label.ui-slider.ui-mini,
 .ui-rangeslider.ui-mini span.ui-rangeslider-dash{
-	margin-top:.5em;
+	margin-top: .5em;
 }
 /*field-contain styling*/
-.ui-field-contain .ui-rangeslider label.ui-slider{
-	width:20%;
-	font-weight:normal;
+.ui-field-contain .ui-rangeslider label.ui-slider {
+	width: 20%;
+	font-weight: normal;
 	margin: 0 2% 0 0;
-	display:inline-block;
-	float:left;
+	display: inline-block;
+	float: left;
 }
-.ui-field-contain .ui-rangeslider span.ui-rangeslider-dash{
-	margin-top:.5em;
-	float:left;
-}
-.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders{
-	margin-top:0;
-	width:auto;
-	margin-left:22%;
-}
-.ui-field-contain .ui-rangeslider.ui-rangeslider-split .ui-rangeslider-sliders .ui-slider{
-	margin-left:20px;
-}
-.ui-field-contain .ui-rangeslider input.ui-slider-input,
-.ui-field-contain .ui-rangeslider span.ui-rangeslider-dash{
-	float:left;
-}
-.ui-field-contain .ui-rangeslider{
-	padding-right:0px;
-}
+
 /*split styles*/
-.ui-rangeslider.ui-rangeslider-split{
-	padding-right:0px;
+.ui-rangeslider.ui-rangeslider-split {
+	padding-right: 0px;
 }
-.ui-rangeslider.ui-rangeslider-split .ui-rangeslider-dash{
-	display:none;
+.ui-rangeslider.ui-rangeslider-split .ui-rangeslider-dash {
+	display: none;
 }
-.ui-rangeslider.ui-rangeslider-split.ui-rangeslider-full label.ui-slider{
-	display:block;
-	float:none;
-	margin-top:0;
+.ui-rangeslider.ui-rangeslider-split.ui-rangeslider-full label.ui-slider {
+	display: block;
+	float: none;
+	margin-top: 0;
 }
-.ui-rangeslider span.ui-rangeslider-dash{
-	float:left;
-	margin-top:1em;
+.ui-rangeslider span.ui-rangeslider-dash {
+	float: left;
+	margin-top: 1em;
 }
-.ui-rangeslider input.ui-slider-input{
-	float:left;
+.ui-rangeslider input.ui-slider-input {
+	float: left;
 }
-.ui-rangeslider.ui-rangeslider-split input.ui-slider-input.ui-rangeslider-last{
-	float:right;
+.ui-rangeslider.ui-rangeslider-split input.ui-slider-input.ui-rangeslider-last {
+	float: right;
 }
-.ui-rangeslider .ui-rangeslider-sliders{
+.ui-rangeslider .ui-rangeslider-sliders {
 	overflow: hidden;
 	height: 2.5em;
-	margin-top: .5em;
 	width: auto;
-	display:block;
+	display: block;
 }
 
-.ui-rangeslider.ui-rangeslider-split.ui-rangeslider-full .ui-rangeslider-sliders{
-	margin-top:.7em;
-	clear:none;
+.ui-rangeslider.ui-rangeslider-split.ui-rangeslider-full .ui-rangeslider-sliders {
+	margin-top: .7em;
+	clear: none;
 }
 
-.ui-rangeslider.ui-rangeslider-split .ui-rangeslider-sliders .ui-slider{
-	margin-left:7%;
-	width:86%;
-	top:.7em;
+.ui-rangeslider.ui-rangeslider-split .ui-rangeslider-sliders .ui-slider {
+	margin-left: 7%;
+	width: 86%;
+	top: .7em;
 }
-.ui-rangeslider.ui-rangeslider-split.ui-rangeslider-full .ui-rangeslider-sliders{
-	width:auto;
-	margin-left:0;
-	overflow:hidden;
+.ui-rangeslider.ui-rangeslider-split.ui-rangeslider-full .ui-rangeslider-sliders {
+	width: auto;
+	margin-left: 0;
+	overflow: hidden;
 }
-.ui-field-contain .ui-rangeslider.ui-rangeslider-split .ui-rangeslider-sliders {
-	margin-top: -2.2em;
-	width:70%;
-	float:right;
-}
-.ui-field-contain .ui-rangeslider.ui-rangeslider-split.ui-mini .ui-rangeslider-sliders .ui-slider{
-	margin-left:20px;
-}
-@media (max-width: 28em) {
-	.ui-rangeslider .ui-rangeslider-sliders .ui-slider{
-		width:100%;
-		margin-left:0;
+@media ( max-width: 28em ) {
+	.ui-rangeslider .ui-rangeslider-sliders .ui-slider {
+		width: 100%;
+		margin-left: 0;
 	}
 	.ui-rangeslider div.ui-rangeslider-sliders,
 	.ui-rangeslider.ui-rangeslider-split.ui-rangeslider-full div.ui-rangeslider-sliders,
@@ -156,40 +126,40 @@
 		margin-left: 1%;
 		overflow: visible;
 	}
-	.ui-rangeslider{
-		padding-right:0;
+	.ui-rangeslider {
+		padding-right: 0;
 	}
 	.ui-rangeslider label.ui-slider,
 	.ui-rangeslider.ui-rangeslider-split.ui-rangeslider-full label.ui-slider,
-	.ui-rangeslider.ui-rangeslider-full label.ui-slider,{
-		margin-top:1em;
-		display:inline;
+	.ui-rangeslider.ui-rangeslider-full label.ui-slider {
+		margin-top: 1em;
+		display: inline;
 	}
 	.ui-rangeslider .ui-rangeslider-dash {
 		display: inline;
 	}
-	.ui-rangeslider label.ui-slider{
-		display:inline-block;
+	.ui-rangeslider label.ui-slider {
+		display: inline-block;
 	}
 	.ui-rangeslider input.ui-slider-input,
 	.ui-rangeslider span.ui-rangeslider-dash,
 	.ui-rangeslider.ui-rangeslider-split input.ui-slider-input,
-	.ui-rangeslider.ui-rangeslider-split input.ui-slider-input.ui-rangeslider-last{
-		float:none;
+	.ui-rangeslider.ui-rangeslider-split input.ui-slider-input.ui-rangeslider-last {
+		float: none;
 	}
 	.ui-rangeslider.ui-rangeslider-split .ui-rangeslider-sliders,
-	.ui-rangeslider .ui-rangeslider-sliders{
-		width:98%;
-		margin-top:0;
-		margin-left:1%;
-		overflow:visible;
-		height:1.4em;
+	.ui-rangeslider .ui-rangeslider-sliders {
+		width: 98%;
+		margin-top: 0;
+		margin-left: 1%;
+		overflow: visible;
+		height: 1.4em;
 	}
-	.ui-rangeslider.ui-rangeslider-split .ui-rangeslider-sliders .ui-slider{
-		width:98%%;
-		margin-left:1%;
+	.ui-rangeslider.ui-rangeslider-split .ui-rangeslider-sliders .ui-slider {
+		width: 98%%;
+		margin-left: 1%;
 	}
-	.ui-field-contain .ui-rangeslider div.ui-rangeslider-sliders{
+	.ui-field-contain .ui-rangeslider div.ui-rangeslider-sliders {
 		width: 92%;
 		margin-left: 4%;
 		display: inline-block;

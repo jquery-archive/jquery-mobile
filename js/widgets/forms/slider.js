@@ -53,7 +53,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			})() : false,
 
 			options;
-
+		this.element.addClass("ui-mini");
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
 		domSlider.className = ["ui-slider ",selectClass," ui-btn-down-",trackTheme," ui-btn-corner-all", inlineClass, miniClass].join( "" );
@@ -265,7 +265,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( this.isToggleSwitch ) {
 			this.beforeStart = this.element[0].selectedIndex;
 		}
-
+		this._trigger( "beforestart", event );
 		this.refresh( event );
  		this._trigger( "start" );
 		return false;
@@ -357,13 +357,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
 		self.slider[0].className = ['ui-slider ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.inline ) ? " ui-slider-inline" : "", ( this.options.mini ) ? " ui-slider-mini":""].join( "" );
 
-		var control = this.element, percent,
+		var pxStep, percent,
+			control = this.element,
 			isInput = !this.isToggleSwitch,
 			optionElements = isInput ? [] : control.find( "option" ),
 			min =  isInput ? parseFloat( control.attr( "min" ) ) : 0,
 			max = isInput ? parseFloat( control.attr( "max" ) ) : optionElements.length - 1,
 			step = ( isInput && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
-
+			
 		if ( typeof val === "object" ) {
 			var left, width, data = val,
 				// a slight tolerance helped get to the ends of the slider
@@ -371,13 +372,17 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			left = this.slider.offset().left;
 			width = this.slider.width();
-
+			pxStep = width/((max-min)/step);
 			if ( !this.dragging ||
 					data.pageX < left - tol ||
 					data.pageX > left + width + tol ) {
 				return;
 			}
-			percent = Math.round( ( ( data.pageX - left ) / width ) * 100 );
+			if(pxStep > 1){
+				percent = ( ( data.pageX - left ) / width ) * 100;
+			} else {
+				percent = Math.round( ( ( data.pageX - left ) / width ) * 100 );
+			}
 		} else {
 			if ( val == null ) {
 				val = isInput ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
@@ -389,13 +394,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			return;
 		}
 
-		if ( percent < 0 ) {
-			percent = 0;
-		}
-
-		if ( percent > 100 ) {
-			percent = 100;
-		}
+		
 
 		var newval = ( percent / 100 ) * ( max - min ) + min;
 
@@ -406,9 +405,25 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( Math.abs( valModStep ) * 2 >= step ) {
 			alignValue += ( valModStep > 0 ) ? step : ( -step );
 		}
+
+		var percentPerStep = 100/((max-min)/step);
 		// Since JavaScript has problems with large floats, round
 		// the final value to 5 digits after the decimal point (see jQueryUI: #4124)
 		newval = parseFloat( alignValue.toFixed(5) );
+
+		if(typeof pxStep === "undefined"){
+			pxstep = width/((max-min)/step);
+		}
+		if(pxStep > 1 && isInput){
+			percent = (newval - min)*percentPerStep * (1/step);
+		}
+		if ( percent < 0 ) {
+			percent = 0;
+		}
+
+		if ( percent > 100 ) {
+			percent = 100;
+		}
 
 		if ( newval < min ) {
 			newval = min;
