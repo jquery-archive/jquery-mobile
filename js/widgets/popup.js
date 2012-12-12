@@ -691,16 +691,10 @@ define( [ "jquery",
 		},
 
 		_closePopup: function( e, data ) {
-			var parsedDst, toUrl, o = this.options;
+			var parsedDst, toUrl, o = this.options, close = { method: "_close" };
 
 			// restore location on screen
 			window.scrollTo( 0, this._scrollTop );
-
-			// remove nav bindings
-			o.container.unbind( o.closeEvents );
-
-			// unbind click handlers added when history is disabled
-			this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
 
 			if ( e && e.type === "pagebeforechange" && data ) {
 				// Determine whether we need to rapid-close the popup, or whether we can
@@ -715,16 +709,20 @@ define( [ "jquery",
 
 				if ( this._myUrl !== toUrl ) {
 					// Going to a different page - close immediately
-					this._close( true );
+					close.arg = true;
 				} else {
-					this.close();
+					close.method = "close";
 					e.preventDefault();
 				}
-
-				return;
 			}
 
-			this._close();
+			if ( close.method === "_close" ) {
+				// remove nav bindings
+				o.container.unbind( o.closeEvents );
+				// unbind click handlers added when history is disabled
+				this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
+			}
+			this[ close.method ]( close.arg );
 		},
 
 		// any navigation event after a popup is opened should close the popup
