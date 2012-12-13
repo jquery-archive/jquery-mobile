@@ -111,7 +111,7 @@ $.fn.viewSourceCode = function() {
 					"<pre class='brush: php;'></pre>" +
 				"</div>" );
 
-			var phpSource = $( this ).attr( "data-demo-php" ),
+			var phpSource = $( this ).attr( "data-demo-php" );
 			$.ajax( phpSource, { async: false } )
 				.success( function( data ) {
 					collapsiblePHP.find( ".phpStatus" ).remove();
