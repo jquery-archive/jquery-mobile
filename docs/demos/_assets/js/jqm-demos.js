@@ -172,7 +172,7 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 	$( this ).find( "[data-demo-html='true'], [data-demo-js], [data-demo-css], [data-demo-php]" ).viewSourceCode();
 	SyntaxHighlighter.defaults['toolbar'] = false;
 	SyntaxHighlighter.defaults['auto-links'] = false;
-	SyntaxHighlighter.all();
+	SyntaxHighlighter.highlight();
 });
 
 $( document ).on( "pageinit", function() {
