@@ -114,6 +114,7 @@ $.fn.viewSourceCode = function() {
 			var phpSource = $( this ).attr( "data-demo-php" );
 			$.ajax( phpSource, { async: false } )
 				.success( function( data ) {
+					data = data.replace( /</gmi, '&lt;' );
 					collapsiblePHP.find( ".phpStatus" ).remove();
 					collapsiblePHP.find( "pre" ).append( data );
 				})
