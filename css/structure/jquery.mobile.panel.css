@@ -23,11 +23,11 @@
 .ui-panel-display-reveal,
 .ui-panel-content-wrap,
 .ui-panel-dismiss {
-	-webkit-transition: width 250ms ease, margin-left 250ms ease, margin-right 250ms ease, -webkit-transform 250ms ease;
-	-moz-transition: width 250ms ease, margin-left 250ms ease, margin-right 250ms ease, -moz-transform 250ms ease;
-	-o-transition: width 250ms ease, margin-left 250ms ease, margin-right 250ms ease, -o-transform 250ms ease;
-	-ms-transition: width 250ms ease, margin-left 250ms ease, margin-right 250ms ease, -ms-transform 250ms ease;
-	transition: width 250ms ease, margin-left 250ms ease, margin-right 250ms ease, transform 250ms ease;
+	-webkit-transition: margin-left 250ms ease, margin-right 250ms ease, -webkit-transform 250ms ease;
+	-moz-transition: margin-left 250ms ease, margin-right 250ms ease, -moz-transform 250ms ease;
+	-o-transition: margin-left 250ms ease, margin-right 250ms ease, -o-transform 250ms ease;
+	-ms-transition: margin-left 250ms ease, margin-right 250ms ease, -ms-transform 250ms ease;
+	transition: margin-left 250ms ease, margin-right 250ms ease, transform 250ms ease;
 }
 .ui-panel-display-overlay,
 .ui-panel-display-push,
