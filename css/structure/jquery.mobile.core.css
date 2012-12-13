@@ -63,6 +63,8 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-header-fixed.ui-fixed-hidden .ui-btn-icon-notext { top: 6px; }
 .ui-header-fixed .ui-btn-icon-notext { top: 7px;}
 .ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 30% .8em; padding: 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
+.ui-header .ui-title:only-child { margin: .6em .8em .8em; }
+.ui-header .ui-btn-icon-notext + .ui-title:last-child, .ui-header .ui-btn-icon-notext ~ .ui-title:first-child {  margin: .6em 2.5em .8em; }
 .ui-footer .ui-title { margin: .6em 15px .8em; }
 
 /* content area*/
