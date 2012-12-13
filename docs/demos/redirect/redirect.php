@@ -1,9 +1,10 @@
 <?php
-	if ( 
+	if (
 		( isset( $_GET[ "source" ] ) || 
 		  isset( $_POST[ "source" ] ) ) && 
 				isset( $_SERVER[ "SCRIPT_FILENAME" ] ) ) {
-		show_source( $_SERVER[ "SCRIPT_FILENAME" ] );
+		header("Content-Type: text/plain");
+		echo( file_get_contents( $_SERVER[ "SCRIPT_FILENAME" ] ) );
 	} else {
 		$dst = ( isset( $_GET[ "to" ] ) 
 			? $_GET[ "to" ] 
