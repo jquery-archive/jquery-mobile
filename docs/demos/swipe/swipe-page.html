@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Swipe page demo - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jqm-demos.js"></script>
+	<script>
+		// Bind to "mobileinit" before you load jquery.mobile.js
+		// Set the default transition to slide
+		$(document).on("mobileinit", function(){
+			$.mobile.defaultPageTransition = "slide";
+		});	
+	</script>
+	<script src="../../../js/"></script>
+	<script>
+		$( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
+			var page = "#" + $( this ).attr( "id" ),
+				prev = $( this ).jqmData( "prev" ),
+				next = $( this ).jqmData( "next" );
+			
+			// Check the data-next attribute that we added to the page markup.
+			if ( next ) {
+				// Navigate to next page on swipe left
+				$( document ).on( "swipeleft", page, function() {
+					$.mobile.changePage( next + ".html" );
+				});
+				// Navigate to next page when the "next" button is clicked
+				$( ".control .next", page ).on( "click", function() {
+					$.mobile.changePage( next + ".html" );
+				});
+			}
+			// Disable the "next" button if there is no next page
+			else {
+				$( ".control .next", page ).addClass( "ui-disabled" );
+			}
+			// Same for the previous page
+			if ( prev ) {
+				$( document ).on( "swiperight", page, function() {
+					$.mobile.changePage( prev + ".html", { reverse: true } );
+				});
+				$( ".control .prev", page ).on( "click", function() {
+					$.mobile.changePage( prev + ".html", { reverse: true } );
+				});
+			}
+			else {
+				$( ".control .prev", page ).addClass( "ui-disabled" );
+			}
+		});
+    </script>
+	<style id="demo-style">
+		/* Set the background image sources */
+		#ny { background-image: url(../_assets/img/newyork.jpg); }
+		#ba { background-image: url(../_assets/img/buenosaires.jpg); }
+		#pa { background-image: url(../_assets/img/paris.jpg); }
+		#ct { background-image: url(../_assets/img/capetown.jpg); }
+		#sl { background-image: url(../_assets/img/seoul.jpg); }
+		#sy { background-image: url(../_assets/img/sydney.jpg); }
+		/* Background settings */
+		.demo-page {
+			background-size: cover;
+			background-position: center center;
+			background-repeat: no-repeat;
+		}
+		/* Transparent footer */
+		.ui-footer {
+			background: none;
+			border: none;
+		}
+		/* Button positioning */
+		.control.ui-btn-left, .trivia-btn.ui-btn-right {
+			top: auto;
+			bottom: 7px;
+			margin: 0;
+		}
+		/* Some styling for the popup */
+		.trivia {
+			padding: 15px;
+		}
+		small {
+			font-size: .75em;
+			color: #666;
+		}
+		/* Prevent text selection while swiping with mouse */
+		.ui-header, .ui-title, .control .ui-btn, .trivia-btn {
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+		}
+	</style>
+    <style>
+		.demo-page div.jqm-demo-link {
+			border: none;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			right: 5px;
+			top: 6px;
+		}
+		.demo-page div[data-demo-html] {
+			border: none;
+			padding: 0;
+		}
+    </style>
+</head>
+<body>
+
+<div data-role="page" data-theme="d">
+
+    <div data-role="header" data-theme="b">
+        <h1>Swipe page demo</h1>
+        <a href="../" data-icon="home" data-iconpos="notext" data-shadow="false" data-icon-shadow="false" data-ajax="false">Home</a>
+    </div><!-- /header -->
+  
+	<div data-role="content">
+
+		<div class="content-primary">
+        
+        	<h2>Swipe to navigate</h2>
+        
+            <div data-demo-js="true" data-demo-css="#demo-style">
+            	<p>This demo shows how you can use the swipe event to navigate between pages. Here you can see the JavaScript and CSS source. On each of the demo pages you can see the markup source as well.</p>
+                
+                <p><a href="ny.html" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open swipe page demo</a></p>
+            </div>
+            
+		</div><!--/content-primary -->
+    
+	</div><!-- /content -->
+
+</div><!-- /page -->
+
+</body>
+</html>
