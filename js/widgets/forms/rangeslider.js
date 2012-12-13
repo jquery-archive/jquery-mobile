@@ -60,10 +60,13 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 						max = parseFloat( this.inputLast.val(), 10 ),
 						first = ($(event.target).is(this.inputFirst))? true:false
 						otherSlider = (first)? this.inputLast: this.inputFirst;
+
+					this.sliderTarget = false;
 					if($(event.originalEvent.target).hasClass("ui-slider")){
 						this.sliderTarget = true;
 						this.targetVal = $(event.target).val();
 					}
+
 				},
 				"slidestop": function(){
 					this.proxy = false;
@@ -72,12 +75,14 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				"slidedrag":function(event){
 					var min = parseFloat( this.inputFirst.val(), 10 ),
 						max = parseFloat( this.inputLast.val(), 10 ),
-						first = ($(event.target).is(this.inputFirst))? true:false
+						first = ($(event.target).is(this.inputFirst))? true:false,
 						otherSlider = (first)? this.inputLast: this.inputFirst;
+						this.sliderTarget = false;
 					if((this.proxy == "first" && first) || (this.proxy == "last" && !first)){
 						otherSlider.data("mobileSlider").dragging = true;
-						otherSlider.data("mobileSlider").refresh(event);
+						otherSlider.data("mobileSlider").refresh($.proxy(event,(first)? this.inputLast:this.inputFirst));
 						return false;
+						
 					}
 				},
 				"change": "_change",
@@ -124,6 +129,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				otherSlider = first? this.inputLast: this.inputFirst;
 					if( min > max && !this.sliderTarget)  {
 						thisSlider.val(first ? max: min).slider( "refresh" );
+						//this.proxy = false;
 					} else if ( min > max) {
 			            thisSlider.val(this.targetVal).slider("refresh");
 			            setTimeout(function(){
