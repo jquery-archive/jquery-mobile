@@ -18,7 +18,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			modalOpen: "ui-panel-dismiss-open",
 			openComplete: "ui-panel-open-complete",
 			contentWrap: "ui-panel-content-wrap",
-			wrapOpenComplete: "ui-panel-content-wrap-open-complete"
+			wrapOpenComplete: "ui-panel-content-wrap-open-complete",
+			pageBlock: "ui-panel-page-block"
 		},
 		theme: null,
 		position: "left",
@@ -56,6 +57,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		if( self.options.dismissible ){
 			self._createModal();
+		}
+
+		if( !self._page.hasClass( self.options.classes.pageBlock ) ){
+			self._page.addClass( self.options.classes.pageBlock );
 		}
 		// move the panel to the right place in the DOM
 		self.element[ this.options.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );

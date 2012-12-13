@@ -5,6 +5,11 @@
 	top: 0;
 	display: block;
 	width: 80%;
+	clip: rect(0,0,0,0);
+}
+
+.ui-panel-open{
+	clip: auto;
 }
 
 .ui-panel,
@@ -185,6 +190,6 @@
 
 
 
-.ui-page-active.ui-panel-body-scroll-block{
+.ui-page-active.ui-panel-page-block{
 	overflow-x:hidden;
 }
