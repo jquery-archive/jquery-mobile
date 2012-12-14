@@ -36,28 +36,28 @@
 	
 	<div data-role="content">
 	
-		<div class="content-primary">
-		
-			<h2>How does "view source code" work</h2>
-			
-			<div data-demo-html="true" data-demo-js="true" data-demo-css="true" data-demo-php="file-name">
-            	<p>This is a div with...</p>
-				<p>data-demo-html="true" to include the markup in this div in the source code view</p>
-				<p>data-demo-js="true" to include all scripts from the head in the source code view</p>
-				<p>data-demo-css="true" to include all style from the head in the source code view</p>
-                <p>data-demo-php="fileName" to include PHP script from file-name.php in the source code view</p> 
-			</div><!--/demo-html -->
-
-			<h3>Specify which markup, script or style to show</h3>
-
-			<div data-demo-html="#myMarkup" data-demo-js="#myScript" data-demo-css="#myStyle">
-				<p>This is a div with...</p>
-				<p>data-demo-html="#myMarkup" to include specific markup in the source code view</p>
-				<p>data-demo-js="#myScript" to include a specific script from the head in the source code view</p>
-				<p>data-demo-css="#myStyle" to include a specific style from the head in the source code view</p>   
-			</div><!--/demo-html -->
-            					
-		</div><!--/content-primary -->
+        <div class="content-primary">
+        
+            <h2>How does "view source code" work</h2>
+            
+            <div data-demo-html="true" data-demo-js="true" data-demo-css="true">
+                <p>This is a div with...</p>
+                <p>data-demo-html="true" to include the markup in this div in the source code view.</p>
+                <p>data-demo-js="true" to include all scripts from the head in the source code view.</p>
+                <p>data-demo-css="true" to include all style from the head in the source code view.</p>
+            </div><!--/demo-html -->
+            
+            <h3>Specify which markup, script or style to show</h3>
+            
+            <div data-demo-html="#myMarkup" data-demo-js="#myScript" data-demo-css="#myStyle" data-demo-php="source.php">
+                <p>This is a div with...</p>
+                <p>data-demo-html="#myMarkup" to include specific markup in the source code view.</p>
+                <p>data-demo-js="#myScript" to include a specific script from the head in the source code view.</p>
+                <p>data-demo-css="#myStyle" to include a specific style from the head in the source code view.</p>
+                <p>data-demo-php="source.php" to include PHP script from source.php, which is the plain text version of file-name.php, in the source code view (see files in this folder).</p> 
+            </div><!--/demo-html -->
+                
+        </div><!--/content-primary -->
 	
 	</div><!-- /content -->
 	
