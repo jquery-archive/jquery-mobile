@@ -10,6 +10,8 @@ define([
 		var path, documentBase, $base, dialogHashKey = "&ui-state=dialog";
 
 		$.mobile.path = path = {
+			uiStateKey: "&ui-state",
+
 			// This scary looking regular expression parses an absolute URL or its relative
 			// variants (protocol, site, document, query, and hash), into the various
 			// components (protocol, host, path, query, fragment, etc that make up the
@@ -261,10 +263,10 @@ define([
 					// Get the id of the first page element if it has one.
 					fpId = fp && fp[0] ? fp[0].id : undefined;
 
-					// The url refers to the first page if the path matches the document and
-					// it either has no hash value, or the hash is exactly equal to the id of the
-					// first page element.
-					return samePath && ( !u.hash || u.hash === "#" || ( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
+				// The url refers to the first page if the path matches the document and
+				// it either has no hash value, or the hash is exactly equal to the id of the
+				// first page element.
+				return samePath && ( !u.hash || u.hash === "#" || ( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
 			},
 
 			isEmbeddedPage: function( url ) {
@@ -276,7 +278,7 @@ define([
 				//application document, whereas links embedded within the application
 				//document will be resolved against the document base.
 				if ( u.protocol !== "" ) {
-					return ( u.hash && ( u.hrefNoHash === this.documentUrl.hrefNoHash || ( this.documentBaseDiffers && u.hrefNoHash === this.documentBase.hrefNoHash ) ) );
+					return ( !this.isPath(u.hash) && u.hash && ( u.hrefNoHash === this.documentUrl.hrefNoHash || ( this.documentBaseDiffers && u.hrefNoHash === this.documentBase.hrefNoHash ) ) );
 				}
 				return ( /^#/ ).test( u.href );
 			},
@@ -299,12 +301,19 @@ define([
 					isPath = path.isPath( url ),
 					hash = isPath ? path.stripHash(url) : url,
 					hashUri = path.parseUrl( hash ),
-					passedSearch, preservedHash;
+					uiState = "", stateIndex, preservedHash = hashUri.hash;
 
 				resolutionUrl = resolutionUrl || path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl();
 
 				// make the hash abolute with the current href
 				href = path.makeUrlAbsolute( hash, resolutionUrl );
+
+				// Split the UI State keys off the href
+				stateIndex = href.indexOf( this.uiStateKey );
+
+				if( stateIndex > -1 ){
+					uiState = href.slice( stateIndex );
+				}
 
 				// TODO all this crap is terrible, clean it up
 				if ( isPath ) {
@@ -312,10 +321,18 @@ define([
 					// preserve it on the current url
 					preservedHash = (hashUri.hash || path.parseLocation().hash);
 
-					if( path.isPath( preservedHash )) {
+					// reject the hash if it's a path or it's just a dialog key
+					if( path.isPath( preservedHash ) || preservedHash.replace("#", "").indexOf( this.uiStateKey ) === 0) {
 						preservedHash = "";
 					}
 
+					// Append the UI State keys where it exists and it's been removed
+					// from the url
+					if( uiState && preservedHash.indexOf( this.uiStateKey ) === -1){
+						preservedHash += uiState;
+					}
+
+					// make sure that pound is on the front of the hash
 					if( preservedHash.indexOf( "#" ) === -1 && preservedHash !== "" ){
 						preservedHash = "#" + preservedHash;
 					}

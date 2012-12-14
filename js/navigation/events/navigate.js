@@ -87,11 +87,11 @@ define([ "jquery",
 			self.bound = true;
 
 			if( $.support.pushState && self.pushStateEnabled ) {
-				self.originalEventName = "popstate.navigate";
-				$win.bind( self.originalEventName, self.popstate );
+				self.originalEventName = "popstate";
+				$win.bind( "popstate.navigate", self.popstate );
 			} else {
-				self.originalEventName = "hashchange.navigate";
-				$win.bind( self.originalEventName, self.hashchange );
+				self.originalEventName = "hashchange";
+				$win.bind( "hashchange.navigate", self.hashchange );
 			}
 		}
 	};

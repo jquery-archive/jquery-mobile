@@ -104,6 +104,8 @@ define([
 					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
 				}
 
+				var loc = path.parseLocation();
+				// $.navigate.history.add( loc.href, {hash: loc.hash} );
 				$.mobile.changePage( $.mobile.firstPage, {
 					transition: "none",
 					reverse: true,
@@ -111,15 +113,16 @@ define([
 					fromHashChange: true
 				});
 			} else {
-				var event = $.Event( $.support.pushState ? "popstate" : "hashchange" );
-
-				// mock the state value that should come with a popstate
-				// TODO ugh
-				event.originalEvent = {
-					state: {}
-				};
-
-				$window.trigger( event, [true] );
+				// trigger hashchange or navigate to squash and record the correct
+				// history entry for an initial hash path
+				if( $.event.special.navigate.originalEventName === "hashchange" ) {
+					$window.trigger( "hashchange", [true] );
+				} else {
+					// TODO figure out how to simplify this interaction with the initial history entry
+					// at the bottom js/navigate/navigate.js
+					$.navigate.history.stack = [];
+					$.navigate( $.mobile.path.isPath( location.hash ) ? location.hash : location.href );
+				}
 			}
 		}
 	});

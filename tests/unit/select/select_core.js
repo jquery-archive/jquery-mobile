@@ -68,7 +68,15 @@
 		return false;
 	};
 
+	var homeWithSearch = $.mobile.path.parseUrl(location.pathname).pathname + location.search;
+
 	module(libName, {
+		setup: function() {
+			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
+			$.testHelper.navReset( homeWithSearch );
+		},
+
 		teardown: function(){
 			$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
 			$.mobile.defaultTransitionHandler = originalDefTransitionHandler;
@@ -419,8 +427,6 @@
 		var $select = $( "#select-choice-many-1" ),
 			$label = $select.parent().siblings( "label" ),
 			$button = $select.siblings( "a" );
-
-		$label.text( "foo" );
 
 		$.testHelper.pageSequence([
 			function() {

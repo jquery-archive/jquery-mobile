@@ -791,7 +791,11 @@ define( [
 			// However, if a dialog is already displayed at this point, and we're
 			// about to display another dialog, then we must add another hash and
 			// history entry on top so that one may navigate back to the original dialog
-			if ( active.url && active.url.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" ) ) {
+			if ( active.url &&
+				active.url.indexOf( dialogHashKey ) > -1 &&
+				$.mobile.activePage &&
+				!$.mobile.activePage.is( ".ui-dialog" ) &&
+				urlHistory.activeIndex > 0 ) {
 				settings.changeHash = false;
 				alreadyThere = true;
 			}
@@ -1197,11 +1201,11 @@ define( [
 			});
 
 			// special case for dialogs
-			if ( urlHistory.stack.length > 1 && to.indexOf( dialogHashKey ) > -1 && urlHistory.initialDst !== to ) {
+			if ( urlHistory.activeIndex > 0 && to.indexOf( dialogHashKey ) > -1 && urlHistory.initialDst !== to ) {
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
-				if ( !$.mobile.activePage.is( ".ui-dialog" ) ) {
+				if ( $.mobile.activePage && !$.mobile.activePage.is( ".ui-dialog" ) ) {
 					//determine if we're heading forward or backward and continue accordingly past
 					//the current dialog
 					if( data.direction === "back" ) {
@@ -1255,10 +1259,14 @@ define( [
 
 		// TODO roll the logic here into the handleHashChange method
 		$window.bind( "navigate", function( e, data ) {
-			var url = data.state.url;
+			var url = $.event.special.navigate.originalEventName.indexOf( "hashchange" ) > -1 ? data.state.hash : data.state.url;
 
 			if( !url ) {
 				url = $.mobile.path.parseLocation().hash;
+			}
+
+			if( !url || url === "#" || url.indexOf( "#" + $.mobile.path.uiStateKey ) === 0 ){
+				url = location.href;
 			}
 
 			$.mobile._handleHashChange( url, data.state );
@@ -1273,7 +1281,6 @@ define( [
 	$( function() { domreadyDeferred.resolve(); } );
 
 	$.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() { $.mobile._registerInternalEvents(); } );
-
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

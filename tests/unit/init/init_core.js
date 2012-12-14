@@ -115,26 +115,6 @@
 			deepEqual($.mobile.pageContainer[0], firstPage.parent()[0]);
 		});
 
-		asyncTest( "url manip event triggered on document ready with single argument: true", function(){
-			$.testHelper.sequence([
-				function(){
-					location.hash = "#foo";
-				},
-
-				// delay the bind until the first hashchange
-				function(){
-					$(window).one( ($.support.pushState ? "popstate" : "hashchange"), function(ev, arg){
-						deepEqual(arg, true);
-						start();
-					});
-				},
-
-				function(){
-					$.testHelper.reloadLib(libName);
-				}
-			], 1000);
-		});
-
 		test( "pages without a data-url attribute have it set to their id", function(){
 			deepEqual($("#foo").jqmData('url'), "foo");
 		});

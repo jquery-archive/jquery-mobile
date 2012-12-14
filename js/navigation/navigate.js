@@ -65,7 +65,7 @@ define([
 
 		state = $.extend({
 			url: href,
-			hash: hash.replace( /^#/, "" ),
+			hash: hash,
 			title: document.title
 		}, data);
 
@@ -103,7 +103,7 @@ define([
 		// make sure to provide this information when it isn't explicitly set in the
 		// data object that was passed to the squash method
 		state = $.extend({
-			hash: hash.replace( /^#/, "" ),
+			hash: hash,
 			url: href
 		}, data);
 
@@ -130,7 +130,7 @@ define([
 	// TODO grab the original event here and use it for the synthetic event in the
 	//      second half of the navigate execution that will follow this binding
 	$( window ).bind( "popstate.history", function( event ) {
-		var loc, hash, state;
+		var active, hash, state, closestIndex;
 
 		// Partly to support our test suite which manually alters the support
 		// value to test hashchange. Partly to prevent all around weirdness
@@ -158,10 +158,15 @@ define([
 		// then need to squash the hash. See below for handling of hash assignment that
 		// matches an existing history entry
 		if( !event.originalEvent.state ) {
-			loc = path.parseLocation();
-			hash = loc.hash;
+			hash = path.parseLocation().hash;
+			closestIndex = history.closest( hash );
+			var index = history.activeIndex;
+			active = history.getActive();
 
-			// avoid initial page load popstate trigger when there is no hash
+			// Avoid adding a history entry in two cases
+			// 1) on the initial hashchange
+			// 2) when the current history entry hash is identical to the
+			//    current location hash
 			if( history.stack.length !== 1 || hash !== history.getActive().hash ) {
 				state = $.navigate.squash( hash );
 				// TODO it might be better to only add to the history stack
@@ -202,7 +207,7 @@ define([
 	// TODO add a check here that `hashchange.navigate` is bound already otherwise it's
 	//      broken (exception?)
 	$( window ).bind( "hashchange.history", function( event ) {
-		var hash = path.parseLocation().hash.replace(/^#/, "");
+		var hash = path.parseLocation().hash;
 
 		// If pushstate is supported the state will be included in the popstate event
 		// data and appended to the navigate event. Late check here for late settings (eg tests)
@@ -300,6 +305,12 @@ define([
 				this.clearForward();
 			}
 
+			// if the hash is included in the data make sure the shape
+			// is consistent for comparison
+			if( data.hash && data.hash.indexOf( "#" ) === -1) {
+				data.hash = "#" + data.hash;
+			}
+
 			data.url = url;
 			this.stack.push( data );
 			this.activeIndex = this.stack.length - 1;
@@ -376,17 +387,11 @@ define([
 			} else if ( newActiveIndex === undefined && opts.missing ){
 				opts.missing( this.getActive() );
 			}
-		},
-
-		//disable hashchange event listener internally to ignore one change
-		//toggled internally when location.hash is updated to match the url of a successful page load
-		ignoreNextHashChange: false
+		}
 	};
 
 	var loc = path.parseLocation();
-
-	// Record the initial page with a replace state where necessary
-	$.navigate.history.add( loc.href, { hash: loc.hash } );
+	$.navigate.history.add( loc.href, {hash: loc.hash} );
 })( jQuery );
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

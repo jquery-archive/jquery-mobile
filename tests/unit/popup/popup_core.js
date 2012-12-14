@@ -229,7 +229,7 @@
 		var baseUrl, activeIndex, $popup = $( "#test-popup" );
 
 		if( !$popup.data( "mobile-popup" ).options.history ) {
-			expect( 1 )
+			expect( 1 );
 			ok( true, "hash change disabled" );
 			start();
 			return;
@@ -251,7 +251,7 @@
 
 			function( result ) {
 				ok( !result.hashchange.timedOut, "Opening a popup from a non-dialogHashKey location causes a hashchange event" );
-				ok( decodeURIComponent( location.href ) === baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey, "location.href has been updated correctly" );
+				equal( decodeURIComponent( location.href ), baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey, "location.href has been updated correctly" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex + 1, "$.mobile.urlHistory has been advanced correctly" );
 				$( "#test-popup" ).popup( "close" );
 			},

@@ -166,6 +166,7 @@ define( [
 			if ( this._isOpen &&
 				e.target !== this._ui.container[ 0 ] &&
 				0 === $( e.target ).parents().filter( this._ui.container[ 0 ] ).length ) {
+
 				this._ui.container.focus();
 				e.preventDefault();
 				e.stopImmediatePropagation();
@@ -791,7 +792,7 @@ define( [
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
 			if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ){
-				url = url + (hasHash ? hashkey : "#" + hashkey);
+				url = url + (url.indexOf( "#" ) > -1 ? hashkey : "#" + hashkey);
 			} else {
 				url = $.mobile.path.parseLocation().hash + hashkey;
 			}
@@ -808,6 +809,7 @@ define( [
 				self._bindContainerClose();
 			});
 
+			this.urlAltered = true;
 			$.navigate( url, {role: "dialog"} );
 		},
 
@@ -819,8 +821,9 @@ define( [
 
 			this._scrollTop = $( window ).scrollTop();
 
-			if( this.options.history ) {
+			if( this.options.history && this.urlAltered ) {
 				$.mobile.back();
+				this.urlAltered = false;
 			} else {
 				// simulate the nav bindings having fired
 				this._closePopup();

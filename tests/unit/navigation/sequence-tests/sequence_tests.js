@@ -49,7 +49,7 @@
 			{
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
-			function() {
+			function( result ) {
 				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 				$( "a:first", $.mobile.activePage[ 0 ] ).click();
 			},
@@ -108,6 +108,7 @@
 			{
 				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
+
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
 				$.mobile.back();
@@ -215,12 +216,7 @@
 				$( "#thePopup" ).parent().prev().click();
 			},
 			{
-				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" },
-				// bogus event to delay the opening of the second popup in order to make
-				// sure that the pushState handler comes out of its timeout-induced
-				// slumber. This is unnecessary for dialogs, because they have transitions which
-				// take longer than the timeout
-				xyzzy: { src: $.mobile.pageContainer, event: "xyzzy" + eventNs + "2" }
+				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" }
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
@@ -321,7 +317,7 @@
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
-			},
+			}
 		], "openingAnotherPageAfterPopup" );
 	});
 
@@ -333,16 +329,14 @@
 		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" },
-				xyzzy: { src: $( document ), event: "xyzzy" + eventNs + "1" }
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
 				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 				$( "#fromDialogToPopup" ).click();
 			},
 			{
-				popupafteropen: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafteropen" + eventNs + "2" },
-				xyzzy: { src: $( document ), event: "xyzzy" + eventNs + "2" }
+				popupafteropen: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafteropen" + eventNs + "2" }
 			},
 			function( result ) {
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );

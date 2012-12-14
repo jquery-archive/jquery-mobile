@@ -298,7 +298,7 @@
 								recordResult( key, event, { timedOut: true } );
 							}
 						});
-					}, 20000);
+					}, 5000);
 
 				$.each( events, function( key, event ) {
 					// Count the events so that we may know how many responses to expect
