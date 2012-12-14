@@ -11,7 +11,7 @@
 .ui-panel-open{
 	clip: auto;
 }
-
+/*
 .ui-panel-open,
 .ui-panel-open *,
 .ui-panel-content-wrap-open ,
@@ -32,7 +32,7 @@
 	-ms-transform: none;
 	transform: none;
 }
-
+*/
 .ui-panel-display-overlay,
 .ui-panel-display-push,
 .ui-panel-display-reveal,

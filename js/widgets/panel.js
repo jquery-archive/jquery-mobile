@@ -81,6 +81,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_addPanelClasses: function(){
 		var $el = this.element,
+			$wrap = this.element,
 			o = this.options,
 			panelClasses = [
 				" ",
@@ -91,6 +92,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		if( o.theme ){
 			panelClasses += " ui-body-" + o.theme;
+		}
+
+		if ( $.support.cssTransitions && o.animate ) {
+			$el.add( $wrap ).addClass( "ui-panel-animate" );
 		}
 
 		$el.addClass( panelClasses );
