@@ -22,6 +22,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			wrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block"
 		},
+		animate: true,
 		theme: null,
 		position: "left",
 		dismissible: true,
@@ -162,7 +163,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self._trigger( "beforeopen" );
 
-		if ( $.support.cssTransitions ) {
+		if ( $.support.cssTransitions && o.animate ) {
 			self.element.one( self._transitionEndEvents , complete );
 		} else{
 			setTimeout( complete , 0 );

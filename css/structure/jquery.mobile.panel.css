@@ -26,11 +26,11 @@
 .ui-panel-open-complete *,
 .ui-panel-content-wrap-open-complete ,
 .ui-panel-content-wrap-open-complete * {
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
-	-o-transform: translate3d(0, 0, 0);
-	-ms-transform: translate3d(0, 0, 0);
-	transform: translate3d(0, 0, 0);
+	-webkit-transform: none;
+	-moz-transform: none;
+	-o-transform: none;
+	-ms-transform: none;
+	transform: none;
 }
 
 .ui-panel-display-overlay,
