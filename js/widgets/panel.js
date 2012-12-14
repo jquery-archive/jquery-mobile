@@ -83,12 +83,18 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var $el = this.element,
 			$wrap = this.element,
 			o = this.options,
-			panelClasses = [
-				" ",
-				" ",
-				"-position-" + o.position,
-				"-display-" + o.display
-				].join( " " + o.classes.panel );
+			elClasses = function( prefix ){
+				return [
+					" ",
+					" ",
+					"-position-" + o.position,
+					"-display-" + o.display
+				].join( " " + prefix );
+			},
+			panelClasses = elClasses( o.classes.panel ),
+			wrapClasses = elClasses( o.classes.contentWrap ),
+			dismissClasses = elClasses( o.classes.modal );
+				
 
 		if( o.theme ){
 			panelClasses += " ui-body-" + o.theme;
@@ -99,6 +105,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 
 		$el.addClass( panelClasses );
+		this._wrapper.addClass( wrapClasses );
+		//this._modal.addClass( dismissClasses );
 	},
 
 	_bindCloseEvents: function(){
@@ -176,7 +184,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self._modal.addClass( o.classes.modalOpen );
 		self.element.addClass( o.classes.panelOpen );
-		self._wrapper.addClass( o.classes.contentWrapOpen + " " + o.display + "-" + o.position );
+		self._wrapper.addClass( o.classes.contentWrapOpen );
 
 		self._open = true;
 
