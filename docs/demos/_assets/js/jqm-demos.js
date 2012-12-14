@@ -65,8 +65,9 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 }
 
 // View demo source code
+var demoId = 0;
+
 $.fn.viewSourceCode = function() {
-	var demoId = 0;
 
 	return $( this ).each( function() {
 		demoId++
