@@ -151,14 +151,22 @@ $( "#idofpanel" )
 </code></pre>
 
 			
+				<h2>Styling panels</h2>
 
+				<p>By default, panels have very simple styles to let you customize them as needed. Panels are essentially just simple blocks with no padding or margins that sit on either side of the page content. </p>
+
+				<p>The framework does need to set a width in order for the CSS animations to work correctly so below 25ems (400px), the panel is set to 80% of the screen width. Above 400px, the panel has a max width of 20ems (320px) since that is a typical panel size. Unfortunately, the styles to set widths on panels are fairly complex but these can be overridden with CSS as needed.</p>
+
+				<p>Other than the width and 100% height styles, panels have very little styling on their own. You can set a theme on the panel by add a <code>data-theme</code> to the panel container or add your own classes to style it as needed.</p>
+				<p>Note that adding padding, borders, or margins directly to the panel container will alter the overall dimensions and could cause the positioning and animation to be affected.</p>
+
+				<p>To add padding to a panel, we recommend adding a container inside the panel and applying styles to that to avoid any issues. All the exampels on this page follow this pattern.</p>
 
 
 				<h2>Options</h2>
 
+
 				<dl>
-					<dt><code>classes.panel</code> default: "ui-panel"</dt>
-					<dd>The <code>classes</code> option has two properties that define the structural classnames that the plugin uses. This is only configurable via JavaScript because it expects an object literal value. </dd>
 
 					<dt><code>dismissible</code> default: true</dt>
 					<dd>Sets whether the panel can be closed by clicking outside onto the page. Also available via the <code>data-dismissible</code> attribute on the link that opens the popup.</dd>
@@ -177,6 +185,37 @@ $( "#idofpanel" )
 
 				</dl>
 
+				<h3>Classes Option</h3>
+				<p>The <code>classes</code> option define the structural classnames that the plugin uses. This is only configurable via JavaScript because it expects an object literal value.</p>
+
+				<dl>
+					<dt><code>classes.panel</code> default: "ui-panel"</dt>
+					<dd>Class added to the panel.</dd>
+
+					<dt><code>classes.panelOpen</code> default: "ui-panel-open"</dt>
+					<dd>Class added to the panel when opening. Used for targeting hardware acceleration only during transitions.</dd>
+
+					<dt><code>classes.modal</code> default: "ui-panel-dismiss"</dt>
+					<dd>Class added to the overlay on the page to dismiss the panel when hidden.</dd>
+
+					<dt><code>classes.modalOpen</code> default: "ui-panel-dismiss-open"</dt>
+					<dd>Class added to the invisible overlay over the page when the popup is open. Used to dismiss the panel.</dd>
+
+					<dt><code>classes.openComplete</code> default: "ui-panel-open-complete"</dt>
+					<dd>Class added to the page when the panel animation is complete.</dd>
+
+					<dt><code>classes.contentWrap</code> default: "ui-panel-content-wrap"</dt>
+					<dd>Class added to the wrapper injected around the page contents (header, content, footer), needed for positioning of the panel.</dd>
+
+					<dt><code>classes.contentWrapOpen</code> default: "ui-panel-content-wrap-open"</dt>
+					<dd>Class added to the wrapper injected around the page contents (header, content, footer) when the panel is opening. Used for targeting hardware acceleration only during transitions.</dd>
+
+					<dt><code>classes.wrapOpenComplete</code> default: "ui-panel-content-wrap-open-complete"</dt>
+					<dd>Class added to the page contents wrapper after the open animaation is complete.</dd>
+
+					<dt><code>classes.pageBlock</code> default: "ui-panel-page-block"</dt>
+					<dd>Class added to the page container to suppress scrolling horizontally</dd>
+				</dl>
 
 
 				<h2>Methods</h2>
