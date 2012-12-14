@@ -10,7 +10,7 @@
 	<script src="../_assets/js/jqm-demos.js"></script>
 	<script src="../../../js/"></script>
     <script>
-        $( document ).ready( function () {
+        $( document ).on( "pageinit", "#myPage", function() {
             $( "#autocomplete" ).on( "listviewbeforefilter",
                     function ( e, data ) {
                         var $ul = $( this ),
@@ -45,7 +45,7 @@
     </script>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="myPage">
 
 	<div data-role="header" data-theme="f">
 		<h1>Listview Autocomplete</h1>
