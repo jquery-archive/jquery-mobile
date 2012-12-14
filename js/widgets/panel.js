@@ -18,6 +18,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			modalOpen: "ui-panel-dismiss-open",
 			openComplete: "ui-panel-open-complete",
 			contentWrap: "ui-panel-content-wrap",
+			contentWrapOpen: "ui-panel-content-wrap-open",
 			wrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block"
 		},
@@ -169,7 +170,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self._modal.addClass( o.classes.modalOpen );
 		self.element.addClass( o.classes.panelOpen );
-		self._wrapper.addClass( o.display + "-" + o.position );
+		self._wrapper.addClass( o.classes.contentWrapOpen + " " + o.display + "-" + o.position );
 
 		self._open = true;
 
@@ -187,7 +188,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
 		self._modal.removeClass( o.classes.modalOpen );
 		self._wrapper.removeClass( o.display + "-" + o.position );
-		self._wrapper.removeClass( o.classes.wrapOpenComplete );
+		self._wrapper.removeClass( o.classes.wrapOpenComplete + " " + o.classes.contentWrapOpen );
 
 		self._open = false;
 	},
