@@ -108,6 +108,20 @@ div.jqm-demo-link {
 .jqm-demo-link .ui-btn.ui-mini {
 	margin: 0;
 }
+.ui-header div.jqm-demo-link,
+.ui-footer div.jqm-demo-link {
+	border: none;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	right: 5px;
+	top: 6px;
+}
+.ui-header div[data-demo-html],
+.ui-footer div[data-demo-html] {
+	border: none;
+	padding: 0;
+}
 
 /* Swatch F - bar & buttons */
 .ui-bar-f {
@@ -308,7 +322,6 @@ div.jqm-demo-link {
 .jqm-demo .ui-collapsible-content::-webkit-scrollbar-track {
     background: transparent;
 }
- 
 .jqm-demo .ui-collapsible-content::-webkit-scrollbar-thumb {
 	background: #435A5F;
 	border: solid #222;
