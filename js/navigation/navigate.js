@@ -274,7 +274,7 @@ define([
 		// Each has a url and optional transition, title, and pageUrl (which represents the file path, in cases where URL is obscured, such as dialogs)
 		stack: [],
 
-		initialDst: $.mobile.path.parseLocation().hash,
+		initialDst: $.mobile.path.parseLocation().hash.replace( /^#/, "" ),
 
 		//maintain an index number for the active page in the stack
 		activeIndex: 0,
