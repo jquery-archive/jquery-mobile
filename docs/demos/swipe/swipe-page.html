@@ -11,7 +11,7 @@
 	<script>
 		// Bind to "mobileinit" before you load jquery.mobile.js
 		// Set the default transition to slide
-		$(document).on("mobileinit", function(){
+		$(document).on( "mobileinit", function() {
 			$.mobile.defaultPageTransition = "slide";
 		});	
 	</script>
@@ -24,6 +24,8 @@
 			
 			// Check the data-next attribute that we added to the page markup.
 			if ( next ) {
+				// Prefetch the next page (the filenames are equal to the page ID's)
+				$.mobile.loadPage( next + ".html" );
 				// Navigate to next page on swipe left
 				$( document ).on( "swipeleft", page, function() {
 					$.mobile.changePage( next + ".html" );
@@ -37,7 +39,7 @@
 			else {
 				$( ".control .next", page ).addClass( "ui-disabled" );
 			}
-			// Same for the previous page
+			// Same for the previous page (we set data-dom-cache="true" so there is no need to prefetch)
 			if ( prev ) {
 				$( document ).on( "swiperight", page, function() {
 					$.mobile.changePage( prev + ".html", { reverse: true } );
@@ -124,7 +126,7 @@
         	<h2>Swipe to navigate</h2>
         
             <div data-demo-js="true" data-demo-css="#demo-style">
-            	<p>This demo shows how you can use the swipe event to navigate between pages. Here you can see the JavaScript and CSS source. On each of the demo pages you can see the markup source as well.</p>
+            	<p>This demo shows how you can use the swipe event to navigate between pages. We using single HTML files for each page. Here you can see the JavaScript and CSS source. On each of the demo pages you can see the page markup as well.</p>
                 
                 <p><a href="ny.html" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open swipe page demo</a></p>
             </div>

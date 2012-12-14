@@ -11,7 +11,7 @@
 	<script>
 		// Bind to "mobileinit" before you load jquery.mobile.js
 		// Set the default transition to slide
-		$(document).on("mobileinit", function(){
+		$(document).on( "mobileinit", function() {
 			$.mobile.defaultPageTransition = "slide";
 		});	
 	</script>
@@ -24,6 +24,8 @@
 			
 			// Check the data-next attribute that we added to the page markup.
 			if ( next ) {
+				// Prefetch the next page (the filenames are equal to the page ID's)
+				$.mobile.loadPage( next + ".html" );
 				// Navigate to next page on swipe left
 				$( document ).on( "swipeleft", page, function() {
 					$.mobile.changePage( next + ".html" );
@@ -37,7 +39,7 @@
 			else {
 				$( ".control .next", page ).addClass( "ui-disabled" );
 			}
-			// Same for the previous page
+			// Same for the previous page (we set data-dom-cache="true" so there is no need to prefetch)
 			if ( prev ) {
 				$( document ).on( "swiperight", page, function() {
 					$.mobile.changePage( prev + ".html", { reverse: true } );

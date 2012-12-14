@@ -11,7 +11,7 @@
 	<script>
 		// Bind to "mobileinit" before you load jquery.mobile.js
 		// Set the default transition to slide
-		$(document).on("mobileinit", function(){
+		$(document).on( "mobileinit", function() {
 			$.mobile.defaultPageTransition = "slide";
 		});	
 	</script>
@@ -24,6 +24,8 @@
 			
 			// Check the data-next attribute that we added to the page markup.
 			if ( next ) {
+				// Prefetch the next page (the filenames are equal to the page ID's)
+				$.mobile.loadPage( next + ".html" );
 				// Navigate to next page on swipe left
 				$( document ).on( "swipeleft", page, function() {
 					$.mobile.changePage( next + ".html" );
@@ -37,7 +39,7 @@
 			else {
 				$( ".control .next", page ).addClass( "ui-disabled" );
 			}
-			// Same for the previous page
+			// Same for the previous page (we set data-dom-cache="true" so there is no need to prefetch)
 			if ( prev ) {
 				$( document ).on( "swiperight", page, function() {
 					$.mobile.changePage( prev + ".html", { reverse: true } );
@@ -122,7 +124,7 @@
 
 		<div data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="d" class="trivia" id="info-sy">
         	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-        	<p>The Opera House provides 45,000 square metres (11 acres) of usable office space out of 18,000 square metres (4.5 acres) of land. It is 183 metres (600 feet) tall and about 120 metres (388 feet) wide at its widest point. It is supported on 580 concrete piers sunk up to 25 metres below sea level. It has about 1000 rooms. It has five theatres, five rehearsal studios, two main halls, four restaurants, six bars and numerous souvenir shops. <small>source:&nbsp;sheppardsoftware.com</small></p>
+        	<p>The Sydney Opera House provides 45,000 square metres (11 acres) of usable office space out of 18,000 square metres (4.5 acres) of land. It is 183 metres (600 feet) tall and about 120 metres (388 feet) wide at its widest point. It is supported on 580 concrete piers sunk up to 25 metres below sea level. It has about 1000 rooms. It has five theatres, five rehearsal studios, two main halls, four restaurants, six bars and numerous souvenir shops. <small>source:&nbsp;sheppardsoftware.com</small></p>
         </div>
 
 	</div><!-- /content -->
