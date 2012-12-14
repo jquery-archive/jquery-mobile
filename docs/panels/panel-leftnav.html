@@ -10,28 +10,117 @@
 		<script src="../../js/jquery.js"></script>
 		<script src="../../docs/_assets/js/jqm-docs.js"></script>
 		<script src="../../js/"></script>
-		<style>
-			.panel-content { padding:15px; }
-		</style>
 	</head>
 	<body>
 		<div data-role="page">
 
+			<style>
+					.nav-search .ui-btn-up-a {
+						background-image:none;
+						background-color:#333333;
+					}
+					.nav-search .ui-btn-inner {
+						border-top: 1px solid #888;
+						border-color: rgba(255, 255, 255, .1);
+					}
+				</style>
+
+			<div data-role="panel" data-position="left" data-dismissible="true" data-display="reveal" id="leftpanel1" data-theme="a">
+					
+		
+				<ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-1px;" class="nav-search">
+					<li data-icon="delete" style="background-color:#111;">
+						<a href="#" data-rel="close">Close menu</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a href="../about/accessibility.html">Accessibility</a>
+					</li>
+					<li data-filtertext="accordions collapsible set collapsible-set collapsed">
+						<a href="../content/content-collapsible-set.html">Accordions</a>
+					</li>
+					<li data-filtertext="ajax navigation model">
+						<a href="../pages/page-navmodel.html">Ajax navigation model</a>
+					</li>
+					<li data-filtertext="anatomy of page viewport">
+						<a href="../pages/page-anatomy.html">Anatomy of a page</a>
+					</li>
+					<li data-filtertext="events api animationComplete transition css">
+						<a href="../api/events.html">Animation events</a>
+					</li>
+					<li data-filtertext="listview autodivider">
+						<a href="../lists/lists-autodividers.html">Automatic listview dividers</a>
+					</li>
+					<li data-filtertext="button link submit cancel image reset mini buttonmarkup enable disable">
+						<a href="../buttons/buttons-types.html">Buttons</a>
+					</li>
+					<li data-filtertext="button icon">
+						<a href="../buttons/buttons-icons.html">Button icons</a>
+					</li>
+					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
+						<a href="../pages/page-cache.html">Caching pages</a>
+					</li>
+					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
+						<a href="../forms/checkboxes/">Checkbox</a>
+					</li>
+					<li data-filtertext="button icon">
+						<a href="buttons/buttons-icons.html">Button icons</a>
+					</li>
+					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
+						<a href="../pages/page-cache.html">Caching pages</a>
+					</li>
+					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
+						<a href="../forms/checkboxes/">Checkbox</a>
+					</li>
+				</ul>
+				
+				<!-- panel content goes here -->
+			</div><!-- /panel -->
 
 			
-			<!-- defaultpanel  -->
-			<div data-role="panel" id="defaultpanel" data-theme="b">
-				
-				<div class="panel-content">
-					<h3>Default panel options</h3>
-					<p>This panel has all the default options: positioned on the left with the reveal display mode. The panel markup is <em>before</em> the header, content and footer in the source order.</p>
-					<p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-					<a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
-				</div><!-- /content wrapper for padding -->
-				
-			</div><!-- /defaultpanel -->
 
-			<!-- Note: all other panels are at the end of the page, scroll down  -->
+			<style>
+				.userform { padding:.8em 1.2em; }
+				.userform h2 { color:#555; margin:0.3em 0 .8em 0; padding-bottom:.5em; border-bottom:1px solid rgba(0,0,0,.1); }
+				.userform label { display:block; margin-top:1.2em; }
+				.switch .ui-slider-switch { width: 6.5em !important }
+				.ui-grid-a { margin-top:1em; padding-top:.8em; margin-top:1.4em; border-top:1px solid rgba(0,0,0,.1); }
+				</style>
+
+
+
+			<div data-role="panel" data-position="right" data-dismissible="true" data-display="reveal" id="rightpanel1" data-theme="b">
+				
+				<form class="userform">
+					<h2>Create new user</h2>
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+
+					<label for="email">Email</label>
+					<input type="email" name="email" id="status" value="" data-clear-btn="true" data-mini="true">
+
+					<label for="password">Password:</label>
+					<input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+
+					<div class="switch">
+					<label for="status">Status</label>
+					<select name="status" id="slider" data-role="slider" data-mini="true">
+					    <option value="off">Inactive</option>
+					    <option value="on">Active</option>
+					</select>
+					</div>
+
+					<div class="ui-grid-a">
+					    <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Cancel</a></div>
+					    <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Save</a></div>
+					</div>
+				</form>
+
+				<!-- panel content goes here -->
+			</div><!-- /panel -->
+
+
+
+			
 
 
 
@@ -41,7 +130,7 @@
 				<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 			</div><!-- /header -->
 			<div data-role="content">
-				<h1 id="demo-links">Panels</h1>
+				<h1>Panels</h1>
 				
 
 				<h4>Left Panel: Navigation example</h4>
@@ -64,7 +153,7 @@
 
 				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
 
-				<p>A panel must be a sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>after</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
+				<p>A panel must be a sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>before</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
 
 				<p>Here is an example of the panel before the header, content and footer in the source order:</p>
 
@@ -86,7 +175,7 @@
 
 				<h2>Panel markup conventions</h2>
 
-				<a href="#defaultpanel" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
+				<a href="#leftpanel1" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
 				
 				<p>A panel consists of a container with a <code>data-role=&quot;panel&quot;</code> attribute and a unique <code>ID</code>. This <code>ID</code> will be referenced by the link or button to open and close the panel.</p>
 
@@ -242,90 +331,6 @@ $( "#idofpanel" )
 				<p class="jqm-version"></p>
 				<p>&copy; 2012 jQuery Foundation and other contributors</p>
 			</div>
-
-
-			<!-- Here are a bunch of panels at the end, just before the close page tag  -->
-
-			<!-- leftpanel1  -->
-			<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-dismissible="true" data-theme="b">
-				
-				<div class="panel-content">
-					<h3>Left Panel: Reveal</h3>
-					<p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-					<p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-					<a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
-				</div><!-- /content wrapper for padding -->
-				
-			</div><!-- /leftpanel1 -->
-
-
-
-			<!-- leftpanel2  -->
-			<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-dismissible="true" data-theme="b">
-				
-				<div class="panel-content">
-					<h3>Left Panel: Push</h3>
-					<p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-					<p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-					<a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
-				</div><!-- /content wrapper for padding -->
-				
-			</div><!-- /leftpanel2 -->
-
-
-
-			<!-- leftpanel3  -->
-			<div data-role="panel" id="leftpanel3" data-position="left" data-display="push" data-dismissible="true" data-theme="b">
-				
-				<div class="panel-content">
-					<h3>Left Panel: Overlay</h3>
-					<p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-					<p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-					<a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
-				</div><!-- /content wrapper for padding -->
-				
-			</div><!-- /leftpanel3 -->
-
-
-
-			<!-- rightpanel1  -->
-			<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-dismissible="true" data-theme="b">
-				
-				<div class="panel-content">
-					<h3>Right Panel: Reveal</h3>
-					<p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-					<p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-					<a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
-				</div><!-- /content wrapper for padding -->
-	
-			</div><!-- /rightpanel1 -->
-	
-
-			<!-- rightpanel2  -->
-			<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-dismissible="true" data-theme="b">
-				
-				<div class="panel-content">
-					<h3>Right Panel: Push</h3>
-					<p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-					<p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-					<a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
-				</div><!-- /content wrapper for padding -->
-	
-			</div><!-- /rightpanel2 -->
-
-
-			<!-- rightpanel3  -->
-			<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-dismissible="true" data-theme="b">
-				
-				<div class="panel-content">
-					<h3>Right Panel: Overlay</h3>
-					<p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-					<p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-					<a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
-				</div><!-- /content wrapper for padding -->
-	
-			</div><!-- /rightpanel3 -->
-
 		</div><!-- /page -->
 	</body>
 </html>
