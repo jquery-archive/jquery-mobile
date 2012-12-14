@@ -65,6 +65,29 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 }
 
 // View demo source code
+
+function attachPopupHandler( popup, sources ) {
+	popup.one( "popupbeforeposition", function() {
+		var
+			collapsibleSet = popup.find( "[data-role='collapsible-set']" ),
+			collapsible, pre;
+
+		$.each( sources, function( idx, options ) {
+			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-content-theme='a'>" +
+					"<h1>" + options.title + "</h1>" +
+					"<pre class='brush: " + options.brush + ";'></pre>" +
+				"</div>" );
+			pre = collapsible.find( "pre" );
+			pre.append( options.data.replace( /</gmi, '&lt;' ) );
+			collapsible.appendTo( collapsibleSet );
+			SyntaxHighlighter.highlight( {}, pre[ 0 ] );
+		});
+
+		collapsibleSet.find( "[data-role='collapsible']" ).first().attr( "data-collapsed", "false" );
+		popup.trigger( "create" );
+	});
+}
+
 var demoId = 0;
 
 $.fn.viewSourceCode = function() {
@@ -75,91 +98,57 @@ $.fn.viewSourceCode = function() {
 			popup = $( "<div id='jqm-demo-" + demoId + "' class='jqm-demo' data-role='popup' data-theme='none' data-position-to='window'>" +
 					"<div data-role='collapsible-set' data-inset='true'></div>" +
 				"</div>" ),
-			collapsibleSet = popup.find( "[data-role='collapsible-set']" ),
-			page = $( this ).closest( "[data-role='page']" ),
-			html, js, css, collapsiblePHP, collapsibleHTML, collapsibleJS, collapsibleCSS;
+			self = $( this ),
+			page = self.closest( "[data-role='page']" ),
+			data,
+			sources = [];
 
-		function appendSource( code, collapsible ){
-			var escaped = code.replace( /</gmi, '&lt;' );
+		// Collect source code before it becomes enhanced
 
-			collapsible.find( "pre" ).append( escaped );
-			collapsible.appendTo( collapsibleSet );
-		};
-
-		if ( $( this ).is( "[data-demo-html]" ) ) {
-			var markupId = $( this ).attr( "data-demo-html" );
-
-			if ( markupId === "true" ) {
-				var element = $( this );
+		if ( self.is( "[data-demo-html]" ) ) {
+			if ( self.attr( "data-demo-html" ) === "true" ) {
+				data = self.html();
+			} else {
+				data = $( markupId ).html();
 			}
-			else {
-				var element = $( markupId );
-			}
-
-			html = $( "<div></div>" ).append( element.clone() ).html();
-
-			collapsibleHTML = $( "<div data-role='collapsible' data-collapsed='true' data-theme='b' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>HTML</h1>" +
-					"<pre class='brush: xml;'></pre>" +
-				"</div>" );
-
-			appendSource( html, collapsibleHTML );
+			sources.push( { title: "HTML", theme: "b", brush: "xml", data: data } );
 		}
-		if ( $( this ).is( "[data-demo-php]" ) ) {
-			collapsiblePHP = $( "<div data-role='collapsible' data-collapsed='true' data-theme='g' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>PHP</h1>" +
-					"<p class='phpStatus'>Loading PHP source ...</p>" +
-					"<pre class='brush: php;'></pre>" +
-				"</div>" );
 
-			var phpSource = $( this ).attr( "data-demo-php" );
-			$.ajax( phpSource, { async: false } )
-				.success( function( data ) {
-					data = data.replace( /</gmi, '&lt;' );
-					collapsiblePHP.find( ".phpStatus" ).remove();
-					collapsiblePHP.find( "pre" ).append( data );
+		if ( self.is( "[data-demo-php]" ) ) {
+			$.ajax( self.attr( "data-demo-php" ), { async: false } )
+				.success( function( incoming ) {
+					data = incoming;
 				})
 				.error( function() {
-					collapsiblePHP.find( "pre" ).remove();
-					collapsiblePHP.find( ".phpStatus" ).html( "Failed to retrieve PHP source" );
+					data = "// Failed to retrieve PHP source code";
 				});
 
-			collapsiblePHP.appendTo( collapsibleSet );
+			sources.push( { title: "PHP", theme: "g", brush: "php", data: data } );
 		}
-		if ( $( this ).is( "[data-demo-js]" ) ) {
-			var scriptId = $( this ).attr( "data-demo-js" );
+
+		if ( self.is( "[data-demo-js]" ) ) {
+			var scriptId = self.attr( "data-demo-js" );
 
 			if ( scriptId === "true" ) {
 				scriptId = "";
 			}
 
-			js = $( "<div></div>" ).append( $( "head" ).find( "script" + scriptId ).contents().clone() ).html();
-
-			collapsibleJS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='f' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>JS</h1>" +
-					"<pre class='brush: js;'></pre>" +
-				"</div>" );
-
-			appendSource( js, collapsibleJS );
+			data = $( "<div></div>" ).append( $( "head" ).find( "script" + scriptId ).contents().clone() ).html();
+			sources.push( { title: "JS", theme: "f", brush: "js", data: data } );
 		}
-		if ( $( this ).is( "[data-demo-css]" ) ) {
-			var styleId = $( this ).attr( "data-demo-css" );
+
+		if ( self.is( "[data-demo-css]" ) ) {
+			var styleId = self.attr( "data-demo-css" );
 
 			if ( styleId === "true" ) {
 				styleId = "";
 			}
 
-			css = $( "<div></div>" ).append( $( "head" ).find( "style" + styleId ).contents().clone() ).html();
-
-			collapsibleCSS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='e' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>CSS</h1>" +
-					"<pre class='brush: css;'></pre>" +
-				"</div>" );
-
-			appendSource( css, collapsibleCSS );
+			data = $( "<div></div>" ).append( $( "head" ).find( "style" + styleId ).contents().clone() ).html();
+			sources.push( { title: "CSS", theme: "e", brush: "css", data: data } );
 		}
 
-		collapsibleSet.find( "[data-role='collapsible']" ).first().attr( "data-collapsed", "false" );
+		attachPopupHandler( popup, sources );
 		button.insertAfter( this );
 		popup.appendTo( page );
 
@@ -170,10 +159,9 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 	$( this ).find( "[data-demo-html='true'], [data-demo-js], [data-demo-css], [data-demo-php]" ).viewSourceCode();
 	SyntaxHighlighter.defaults['toolbar'] = false;
 	SyntaxHighlighter.defaults['auto-links'] = false;
-	SyntaxHighlighter.highlight();
 });
 
-$( document ).on( "pageinit", function() {
+$( document ).on( "pageinit", function( e ) {
 	// prevent page scroll while scrolling source code
 	$( ".jqm-demo .ui-collapsible-content" ).on( "mousewheel", function( e, d ) {
 		if ( d > 0 && $( this ).scrollTop() == 0 ) {
@@ -184,7 +172,7 @@ $( document ).on( "pageinit", function() {
 	});
 
 	// reposition when switching between html / js / css
-	$( ".jqm-demo .ui-collapsible" ).on( "expand", function() {
+	$( e.target ).delegate( ".jqm-demo .ui-collapsible", "expand", function() {
 		$( this ).parents( ".jqm-demo" ).trigger( "resize" );
 	});
 
