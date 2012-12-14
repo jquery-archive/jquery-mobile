@@ -39,8 +39,8 @@
 			}
 
 			function confirmAndDelete( listitem, transition ) {
-				// Set the list item to the active state
-				listitem.addClass( $.mobile.activeBtnClass );
+				// Highlight the list item that will be removed
+				listitem.addClass( "ui-btn-down-d" );
 				// Inject topic in confirmation popup after removing any previous injected topics
 				$( "#confirm .topic" ).remove();
 				listitem.find( ".topic" ).clone().insertAfter( "#question" );
@@ -52,7 +52,8 @@
 					if ( transition ) {
 						
 						listitem
-							.removeClass( $.mobile.activeBtnClass )
+							// Remove the highlight
+							.removeClass( "ui-btn-down-d" )
 							// Add the class for the transition direction
 							.addClass( transition )
 							// When the transition is done...
@@ -317,7 +318,7 @@
 
     </div><!-- /content -->
     
-    <div id="confirm" class="ui-content" data-role="popup" data-overlay-theme="a" data-theme="none">
+    <div id="confirm" class="ui-content" data-role="popup" data-theme="none">
         
         <p id="question">Are you sure you want to delete</p>
         
