@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>jQuery Mobile Docs - Slide Panel</title>
+		<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+		<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+		<script src="../../js/jquery.js"></script>
+		<script src="../../docs/_assets/js/jqm-docs.js"></script>
+		<script src="../../js/"></script>
+	</head>
+	<body>
+		<div data-role="page">
+
+			<style>
+					.nav-search .ui-btn-up-a {
+						background-image:none;
+						background-color:#333333;
+					}
+					.nav-search .ui-btn-inner {
+						border-top: 1px solid #888;
+						border-color: rgba(255, 255, 255, .1);
+					}
+				</style>
+
+			<div data-role="panel" data-position="left" data-dismissible="true" data-display="reveal" id="leftpanel1" data-theme="a">
+					
+		
+				<ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-1px;" class="nav-search">
+					<li data-icon="delete" style="background-color:#111;">
+						<a href="#" data-rel="close">Close menu</a>
+					</li>
+					<li data-filtertext="wai-aria voiceover accessibility screen reader">
+						<a href="../about/accessibility.html">Accessibility</a>
+					</li>
+					<li data-filtertext="accordions collapsible set collapsible-set collapsed">
+						<a href="../content/content-collapsible-set.html">Accordions</a>
+					</li>
+					<li data-filtertext="ajax navigation model">
+						<a href="../pages/page-navmodel.html">Ajax navigation model</a>
+					</li>
+					<li data-filtertext="anatomy of page viewport">
+						<a href="../pages/page-anatomy.html">Anatomy of a page</a>
+					</li>
+					<li data-filtertext="events api animationComplete transition css">
+						<a href="../api/events.html">Animation events</a>
+					</li>
+					<li data-filtertext="listview autodivider">
+						<a href="../lists/lists-autodividers.html">Automatic listview dividers</a>
+					</li>
+					<li data-filtertext="button link submit cancel image reset mini buttonmarkup enable disable">
+						<a href="../buttons/buttons-types.html">Buttons</a>
+					</li>
+					<li data-filtertext="button icon">
+						<a href="../buttons/buttons-icons.html">Button icons</a>
+					</li>
+					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
+						<a href="../pages/page-cache.html">Caching pages</a>
+					</li>
+					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
+						<a href="../forms/checkboxes/">Checkbox</a>
+					</li>
+					<li data-filtertext="button icon">
+						<a href="buttons/buttons-icons.html">Button icons</a>
+					</li>
+					<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
+						<a href="../pages/page-cache.html">Caching pages</a>
+					</li>
+					<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
+						<a href="../forms/checkboxes/">Checkbox</a>
+					</li>
+				</ul>
+				
+				<!-- panel content goes here -->
+			</div><!-- /panel -->
+
+			
+
+			<style>
+				.userform { padding:.8em 1.2em; }
+				.userform h2 { color:#555; margin:0.3em 0 .8em 0; padding-bottom:.5em; border-bottom:1px solid rgba(0,0,0,.1); }
+				.userform label { display:block; margin-top:1.2em; }
+				.switch .ui-slider-switch { width: 6.5em !important }
+				.ui-grid-a { margin-top:1em; padding-top:.8em; margin-top:1.4em; border-top:1px solid rgba(0,0,0,.1); }
+				</style>
+
+
+
+			<div data-role="panel" data-position="right" data-dismissible="true" data-display="reveal" id="rightpanel1" data-theme="b">
+				
+				<form class="userform">
+					<h2>Create new user</h2>
+					<label for="name">Name</label>
+					<input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+
+					<label for="email">Email</label>
+					<input type="email" name="email" id="status" value="" data-clear-btn="true" data-mini="true">
+
+					<label for="password">Password:</label>
+					<input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+
+					<div class="switch">
+					<label for="status">Status</label>
+					<select name="status" id="slider" data-role="slider" data-mini="true">
+					    <option value="off">Inactive</option>
+					    <option value="on">Active</option>
+					</select>
+					</div>
+
+					<div class="ui-grid-a">
+					    <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Cancel</a></div>
+					    <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Save</a></div>
+					</div>
+				</form>
+
+				<!-- panel content goes here -->
+			</div><!-- /panel -->
+
+
+
+			
+
+
+
+			<div data-role="header" data-theme="f">
+				<h1>Panels</h1>
+				<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+				<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+			</div><!-- /header -->
+			<div data-role="content">
+				<h1>Panels</h1>
+				
+
+				<h4>Left Panel: Navigation example</h4>
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#leftpanel1" data-role="button">Reveal</a>
+					<a href="#leftpanel2" data-role="button">Push</a>
+					<a href="#leftpanel3" data-role="button">Overlay</a>
+				</div>
+				
+				<h4>Right Panel: Edit panel</h4>
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#rightpanel1" data-role="button">Reveal</a>
+					<a href="#rightpanel2" data-role="button">Push</a>
+					<a href="#rightpanel3" data-role="button">Overlay</a>
+				</div>
+				
+				
+
+				<h2>Where panel markup goes in a page</h2>
+
+				<p>Panels can be used for a wide variety of purposes in a site or application. They are designed to be as open-ended as possible to make it easy to create menus, collapsible columns, drawers, inspectors panes and more. These are simply blocks that can sit to the left or right of the page content and appear in various ways when activated with a link.</p>
+
+				<p>A panel must be a sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>before</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
+
+				<p>Here is an example of the panel before the header, content and footer in the source order:</p>
+
+				<pre><code>
+&lt;div data-role=&quot;page&quot;&gt;			
+
+	<strong>&lt;div data-role=&quot;panel&quot; id=&quot;mypanel&quot;</strong>&gt;</strong>
+		&lt;!-- panel content goes here --&gt;
+	<strong>&lt;/div&gt;&lt;!-- /panel --&gt;</strong>
+
+	&lt;!-- header --&gt;
+	&lt;!-- content --&gt;
+	&lt;!-- footer --&gt;
+
+&lt;/div&gt;&lt;!-- page --&gt;
+				</code></pre>
+
+				<p>Alternately, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want to page content to read for people experiencing the page in a C-grade device (HTML only) or for a screen reader.</p>
+
+				<h2>Panel markup conventions</h2>
+
+				<a href="#leftpanel1" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
+				
+				<p>A panel consists of a container with a <code>data-role=&quot;panel&quot;</code> attribute and a unique <code>ID</code>. This <code>ID</code> will be referenced by the link or button to open and close the panel.</p>
+
+				<p>The <strong>position</strong> of the panel on the screen is set by the <code>data-position</code> attribute. The defaults to <code>left</code>, meaning it will appear from the left edge of the screen. Specify <code>data-position="right"</code> for it to appear from the right edge instead.</p>
+
+				<p>The <strong>display mode</strong> of the panel is set by the <code>data-display</code> attribute. The defaults to <code>reveal</code>, meaning the panel will appear to sit under the page and is revealed as the page slides away. Specify <code>data-display="overlay"</code> for it to appear on top of the page contents. A thrird mode, <code>data-display="push"</code> looks similar to reveal on smaller screens, but at wider widths, the panel slides in and causes the page contents to re-flow to make room so the panel can stay open, so it works like a dismissable column.</p>
+
+<pre><code>
+&lt;div data-role=&quot;panel&quot; id=&quot;leftpanel1&quot; data-position=&quot;left&quot; data-display=&quot;reveal&quot;&gt;
+	&lt;!-- panel content goes here --&gt;
+&lt;/div&gt;
+</code></pre>
+
+				
+
+				<h2>Opening a panel</h2>
+				
+				<p>A panel's visibility is toggled by a link somewhere on the page or by calling the panel's <code>open</code> method directly.</p>
+
+				<pre><code>$( "#idofpanel" ).panel( "open" , optionsHash );</code></pre>
+
+<pre><code>
+&lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;panel&quot;</strong>&gt;Open panel&lt;/a&gt;
+</code></pre>
+				<p>This will create a link that opens our panel with the default options. The defaults place the panel on the left and will push the page over when it opens (reveal mode). </p>
+				
+				<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above), and  add the <code>data-rel="panel"</code> attribute. This instructs the framework to bind the link to the popup. This link will toggle the visibility of the popup so tapping it will open the panel, and tapping it again will close it.</p>
+				<a href="#mypanel" data-rel="panel">Open panel</a>
+
+				<p>When using markup to control panels, you can only have a single panel open at once. Clicking a link to open a panel while one is already open will auto-close the first. This is done to keep the markup-only configuration simple.</p>
+
+				<p>That said, it's possible to open multiple panels at once programmatically:</p>
+				<pre><code>
+$( "#idofpanel" )
+.panel( "open" , optionsHash )
+.then( function( options ){
+	$( "#idofpanel2" ).panel( "open" , options );
+});
+</code></pre>
+
+				<h2>Closing a panel</h2>
+				
+				<p>Clicking the link that opened the panel, or tapping the Esc key will close the panel. A panel can also be closed by calling the panel's <code>close</code> methods directly.</p>
+
+				<pre><code>$( "#idofpanel" ).panel( "close" );</code></pre>
+
+
+				<p>By default, clicking out of the panel onto the page will also close the panel. This behavior can be controlled via the <code>dismissible</code> option.</p>
+
+				<p>It's common to also add a close button inside the panel. To add a link that will close a panel, add a link somewhere inside the panel that has the <code>data-rel="close"</code> attribute. This will tell the framework to close that panel.</p>
+
+<pre><code>
+&lt;a href=&quot;#mypanel&quot; <strong>data-rel=&quot;close&quot;</strong>&gt;Close panel&lt;/a&gt;
+</code></pre>
+
+				<h2>Setting panel display mode</h2>
+
+				<p>Panels can display in three different ways. The default display mode is <code>reveal</code> but this can be set on each link by adding the <code>data-display</code> attribute and specifying a display mode.</p>
+
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="left" data-dismissible="true">reveal</a></code> (default)</dt><dd>The panel shifts the viewport over open, partially obscuring part of the page when it pushes it out of view.</dd>
+				</dl>
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="push" data-position="left" data-dismissible="false">push</a></code></dt><dd>The panel behaves just like pan at narrow widths but at wider viewports (above 600 pixels), the content re-flows to make room for the panel so it can stay open permanently. Note that at wider screens, the <code>dismissible</code> option will be set to <code>false</code> so you can interact with both the panel and page.</dd>
+				</dl>
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="overlay" data-position="left" data-dismissible="true">overlay</a></code></dt><dd>The panel slides over the content like a standard menu.</dd>
+				</dl>
+
+				<h2>Setting panel position</h2>
+
+				<p>Panels can open to the left or right of the page and this is controlled by the link that opens them. The default position is <code>left</code> but this can be set on each link by adding the <code>data-position</code> attribute and specifying a display position.</p>
+
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="left" data-dismissible="true">left</a></code> (default)</dt><dd>The panel will slide in from the left edge of the page.</dd>
+				</dl>
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="right" data-dismissible="true">right</a></code></dt><dd>The panel will slide in from the right edge of the page.</dd>
+				</dl>
+
+				<h2>Setting dismiss behavior</h2>
+
+				<p>Clicking outside of an open panel will close the panel by default. This behavior can be prevented by adding the <code>data-dismissible</code> attribute to the link and specifying <code>true</code> or <code>false</code>.</p>
+
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="left" data-dismissible="true">true</a></code> (default)</dt><dd>The panel will auto-close when a user taps outside the panel.</dd>
+				</dl>
+				<dl>
+					<dt><code><a href="#mypanel" data-rel="panel" data-display="reveal" data-position="left" data-dismissible="false">false</a></code></dt><dd>The panel will not auto-close when a user taps outside the panel. Recommended for the <code>push</code> display mode to allow a user to interact with the page when the panel is seen at wider widths.</dd>
+				</dl>
+
+
+
+				<h2>Options</h2>
+
+				<dl>
+					<dt><code>classes.panel</code> default: "ui-panel"</dt>
+					<dd>The <code>classes</code> option has two properties that define the structural classnames that the plugin uses. This is only configurable via JavaScript because it expects an object literal value. </dd>
+
+					<dt><code>dismissible</code> default: true</dt>
+					<dd>Sets whether the panel can be closed by clicking outside onto the page. Also available via the <code>data-dismissible</code> attribute on the link that opens the popup.</dd>
+
+					<dt><code>display</code> default: "reveal"</dt>
+					<dd>The relationship of the panel to the page contents. Can either push the page over ("reveal"), re-flow the content to fit the panel content as a column ("push"), or sit over the content ("overlay"). Also available via the <code>data-display</code> attribute on the link that opens the popup.</dd>
+
+					<dt><code>initSelector</code> default: ":jqmData(role='panel')"</dt>
+					<dd>The role (or and valid jQuery selector) used to trigger auto-initialization of the panel widget.</dd>
+
+					<dt><code>position</code> default: "left"</dt>
+					<dd>The side of the screen the panel appears on. Values can be "left" or "right. Also available via the <code>data-position</code> attribute on the link that opens the popup.</dd>
+
+					<dt><code>theme</code> default: null</dt>
+					<dd>Theme swatch for the panel. Can be any valid swatch letter in your theme (a-z). Also available via the <code>data-theme</code> attribute on the popup container.</dd>
+
+				</dl>
+
+
+
+				<h2>Methods</h2>
+
+				<dl>
+					<dt><code>close</code></dt>
+					<dd>Closes the panel.
+					.<pre><code>$( myPanel ).panel( "close" );</code></pre>
+					</dd>
+
+					<dt><code>open</code></dt>
+					<dd>Opens the panel.
+					<pre><code>$( myPanel ).panel( "open" );</code></pre>
+					</dd>
+
+					<dt><code>refresh</code></dt>
+					<dd>Re-enhances any new markup in the panel.
+					<pre><code>$( myPanel ).panel( "refresh" );</code></pre>
+					</dd>
+
+					<dt><code>toggle</code></dt>
+					<dd>Toggles the visibility the panel so it will open a closed panel or close and open panel.
+					<pre><code>$( myPanel ).panel( "toggle" );</code></pre>
+					</dd>
+				</dl>
+
+
+				<h2>Events</h2>
+
+				<dl>
+					<dt><code>create</code> Type: panelcreate</dt>
+					<dd>Triggered when the panel is created.</dd>
+				</dl>
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+				<p class="jqm-version"></p>
+				<p>&copy; 2012 jQuery Foundation and other contributors</p>
+			</div>
+		</div><!-- /page -->
+	</body>
+</html>
