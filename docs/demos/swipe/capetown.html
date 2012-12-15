@@ -57,12 +57,12 @@
     </script>
 	<style>
 		/* Set the background image sources */
-		#ny { background-image: url(../_assets/img/newyork.jpg); }
-		#ba { background-image: url(../_assets/img/buenosaires.jpg); }
-		#pa { background-image: url(../_assets/img/paris.jpg); }
-		#ct { background-image: url(../_assets/img/capetown.jpg); }
-		#sl { background-image: url(../_assets/img/seoul.jpg); }
-		#sy { background-image: url(../_assets/img/sydney.jpg); }
+		#newyork { background-image: url(../_assets/img/newyork.jpg); }
+		#buenosaires { background-image: url(../_assets/img/buenosaires.jpg); }
+		#paris { background-image: url(../_assets/img/paris.jpg); }
+		#capetown { background-image: url(../_assets/img/capetown.jpg); }
+		#seoul { background-image: url(../_assets/img/seoul.jpg); }
+		#sydney { background-image: url(../_assets/img/sydney.jpg); }
 		/* Background settings */
 		.demo-page {
 			background-size: cover;
@@ -98,7 +98,7 @@
 </head>
 <body>
 
-<div data-role="page" id="ct" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="pa" data-next="sl">
+<div data-role="page" id="capetown" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="paris" data-next="seoul">
 
 	<div data-role="header" data-position="fixed" data-fullscreen="true" data-id="hdr" data-tap-toggle="false">
 		<h1>Cape Town</h1>
@@ -107,7 +107,7 @@
 	
 	<div data-role="content">
 		
-		<div id="trivia-ct" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="d">
+		<div id="trivia-capetown" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="d">
         	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         	<p> Although it’s the youngest official language in the world, Afrikaans is most widely spoken and is home language for 40% of the Cape's population. The remainder of the population speaks either Xhosa or English as a home language. <small>source:&nbsp;gotravel24.com</small></p>
         </div>
@@ -120,7 +120,7 @@
         	<a href="#" class="next" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="d">Next</a>
         </div>
         
-		<a href="#trivia-ct" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-theme="d" data-mini="true">Trivia</a>
+		<a href="#trivia-capetown" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-theme="d" data-mini="true">Trivia</a>
     </div><!-- /footer -->
 
 </div><!-- /page -->

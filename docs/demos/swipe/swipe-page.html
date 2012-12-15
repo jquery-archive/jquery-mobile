@@ -57,12 +57,12 @@
     </script>
 	<style>
 		/* Set the background image sources */
-		#ny { background-image: url(../_assets/img/newyork.jpg); }
-		#ba { background-image: url(../_assets/img/buenosaires.jpg); }
-		#pa { background-image: url(../_assets/img/paris.jpg); }
-		#ct { background-image: url(../_assets/img/capetown.jpg); }
-		#sl { background-image: url(../_assets/img/seoul.jpg); }
-		#sy { background-image: url(../_assets/img/sydney.jpg); }
+		#newyork { background-image: url(../_assets/img/newyork.jpg); }
+		#buenosaires { background-image: url(../_assets/img/buenosaires.jpg); }
+		#paris { background-image: url(../_assets/img/paris.jpg); }
+		#capetown { background-image: url(../_assets/img/capetown.jpg); }
+		#seoul { background-image: url(../_assets/img/seoul.jpg); }
+		#sydney { background-image: url(../_assets/img/sydney.jpg); }
 		/* Background settings */
 		.demo-page {
 			background-size: cover;
@@ -114,7 +114,7 @@
             <div data-demo-html="#city" data-demo-js="true" data-demo-css="true">
             	<p>This demo shows how you can use the swipe event to navigate between pages. We using single HTML files for each page. Here you can see the JavaScript and CSS source. On each of the demo pages you can see the page markup as well.</p>
                 
-                <p><a href="ny.html" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open swipe page demo</a></p>
+                <p><a href="newyork.html" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open swipe page demo</a></p>
             </div>
             
 		</div><!--/content-primary -->
@@ -124,6 +124,8 @@
 </div><!-- /page -->
 
 <div data-role="page" id="city" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="prevCity" data-next="nextCity">
+
+	<!-- "city", "prevCity" and "nextCity" are used as placeholders and contain the name of the applicable city in our demo files. -->
 
 	<div data-role="header" data-position="fixed" data-fullscreen="true" data-id="hdr" data-tap-toggle="false">
 		<h1>City</h1>
@@ -135,7 +137,7 @@
 		<div id="trivia-city" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="d">
         	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
 			<p>Here some text.</small></p>
-        </div>
+        </div><!-- /popup -->
 
 	</div><!-- /content -->
     
