@@ -74,7 +74,7 @@
 				});
 				// Remove active state and unbind when the cancel button is clicked
 				$( "#confirm #cancel" ).on( "click", function() {
-					listitem.removeClass( $.mobile.activeBtnClass );
+					listitem.removeClass( "ui-btn-down-d" );
 					$( "#confirm #yes" ).off();	
 				});
 			}
