@@ -776,12 +776,12 @@ define( [
 			}
 
 			// cache some values for min/readability
+			urlHistory = $.mobile.urlHistory;
 			hashkey = $.mobile.dialogHashKey;
 			activePage = $.mobile.activePage;
 			currentIsDialog = activePage.is( ".ui-dialog" );
-			this._myUrl = url = $.mobile.urlHistory.getActive().url;
-			hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog;
-			urlHistory = $.mobile.urlHistory;
+			this._myUrl = url = urlHistory.getActive().url;
+			hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog && ( urlHistory.activeIndex > 0 );
 
 			if ( hasHash ) {
 				self._open( options );
