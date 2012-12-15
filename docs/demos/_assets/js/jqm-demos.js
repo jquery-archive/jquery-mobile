@@ -116,7 +116,7 @@ $.fn.viewSourceCode = function() {
 			if ( self.attr( "data-demo-html" ) === "true" ) {
 				data = self.html();
 			} else {
-				data = $( markupId ).html();
+				data = $( self.attr( "data-demo-html" ) ).html();
 			}
 			sources.push( { title: "HTML", theme: "b", brush: "xml", data: data } );
 		}
