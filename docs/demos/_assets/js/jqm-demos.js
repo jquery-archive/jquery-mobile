@@ -116,7 +116,7 @@ $.fn.viewSourceCode = function() {
 			if ( self.attr( "data-demo-html" ) === "true" ) {
 				data = self.html();
 			} else {
-				data = $( self.attr( "data-demo-html" ) ).html();
+				data = $( "<div></div>" ).append( $( self.attr( "data-demo-html" ) ).clone() ).html();
 			}
 			sources.push( { title: "HTML", theme: "b", brush: "xml", data: data } );
 		}
