@@ -103,12 +103,11 @@
 	<div data-role="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
 		<h1>Cape Town</h1>
         <a href="swipe-page.html" data-direction="reverse" data-icon="delete" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
-		<div class="ui-btn-right" data-demo-html="#ct" data-demo-js="true" data-demo-css="true"></div>
     </div><!-- /header -->
 	
 	<div data-role="content">
 		
-		<div data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="d" class="trivia" id="info-ct">
+		<div id="trivia-ct" class="trivia" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="d">
         	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
         	<p> Although it’s the youngest official language in the world, Afrikaans is most widely spoken and is home language for 40% of the Cape's population. The remainder of the population speaks either Xhosa or English as a home language. <small>source:&nbsp;gotravel24.com</small></p>
         </div>
@@ -121,7 +120,7 @@
         	<a href="#" class="next" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="d">Next</a>
         </div>
         
-		<a href="#info-ct" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-theme="d" data-mini="true">Trivia</a>
+		<a href="#trivia-ct" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-theme="d" data-mini="true">Trivia</a>
     </div><!-- /footer -->
 
 </div><!-- /page -->
