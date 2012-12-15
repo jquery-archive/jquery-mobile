@@ -90,6 +90,13 @@ function attachPopupHandler( popup, sources ) {
 
 var demoId = 0;
 
+function getHeadSnippet( type, selector ) {
+	if ( selector === "true" ) {
+		selector = "";
+	}
+	return $( "<div></div>" ).append( $( "head" ).find( type + selector ).contents().clone() ).html();
+}
+
 $.fn.viewSourceCode = function() {
 
 	return $( this ).each( function() {
@@ -127,24 +134,12 @@ $.fn.viewSourceCode = function() {
 		}
 
 		if ( self.is( "[data-demo-js]" ) ) {
-			var scriptId = self.attr( "data-demo-js" );
-
-			if ( scriptId === "true" ) {
-				scriptId = "";
-			}
-
-			data = $( "<div></div>" ).append( $( "head" ).find( "script" + scriptId ).contents().clone() ).html();
+			data = getHeadSnippet( "script", self.attr( "data-demo-js" ) );
 			sources.push( { title: "JS", theme: "f", brush: "js", data: data } );
 		}
 
 		if ( self.is( "[data-demo-css]" ) ) {
-			var styleId = self.attr( "data-demo-css" );
-
-			if ( styleId === "true" ) {
-				styleId = "";
-			}
-
-			data = $( "<div></div>" ).append( $( "head" ).find( "style" + styleId ).contents().clone() ).html();
+			data = getHeadSnippet( "style", self.attr( "data-demo-css" ) );
 			sources.push( { title: "CSS", theme: "e", brush: "css", data: data } );
 		}
 
