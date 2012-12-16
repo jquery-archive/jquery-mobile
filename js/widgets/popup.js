@@ -815,7 +815,7 @@ define( [
 
 		close: function() {
 			// make sure close is idempotent
-			if( !$.mobile.popup.active ){
+			if( $.mobile.popup.active !== this ) {
 				return;
 			}
 
