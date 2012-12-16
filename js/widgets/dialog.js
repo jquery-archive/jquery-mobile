@@ -86,7 +86,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			// Sanitize value
 			location = ( value === "left" ? "left" : "right" );
 			btn = $( "<a href='#' class='ui-btn-" + location + "' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
-			this.element.children().find( ":jqmData(role='header')" ).prepend( btn );
+			this.element.children().find( ":jqmData(role='header')" ).first().prepend( btn );
 			if ( this._createComplete && $.fn.buttonMarkup ) {
 				btn.buttonMarkup();
 			}
