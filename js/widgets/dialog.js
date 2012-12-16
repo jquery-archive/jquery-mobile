@@ -31,7 +31,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		$el
 			.wrapInner( dialogWrap )
 			.children()
-				.find( ":jqmData(role='header')" )
+				.find( ":jqmData(role='header')" ).first()
 					.prepend( headerCloseButton )
 				.end()
 				.children( ':first-child')
