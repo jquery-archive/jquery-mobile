@@ -40,6 +40,11 @@
 			});
 		});
     </script>
+	<style>
+		.ui-listview-filter-inset {
+			margin-top: 0;
+		}
+    </style>
 </head>
 <body>
 <div data-role="page" id="myPage">
@@ -52,9 +57,12 @@
 	<div data-role="content">
 
 		<div class="content-primary">
+        
+        	<h2>Cities worldwide</h2>
 
-			<div data-demo-html="true" data-demo-js="true">
-				<ul id="autocomplete" data-role="listview" data-filter="true" data-filter-theme="d"></ul>
+			<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
+            	<p>After you entered at least three characters the autocomplete function will show all possible matches.</p> 
+				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-theme="d"></ul>
 			</div><!--/demo-html -->
 
 
