@@ -158,14 +158,14 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 
 $( document ).on( "pageinit", function( e ) {
 	// prevent page scroll while scrolling source code
-	$( ".jqm-demo .ui-collapsible-content" ).on( "mousewheel", function( e, d ) {
-		if ( d > 0 && $( this ).scrollTop() == 0 ) {
-			e.preventDefault();
-		} else if ( d < 0 &&  $( this ).scrollTop() == $( this ).get(0).scrollHeight - $( this ).innerHeight() ) {
-			e.preventDefault();
+	$( document ).on( "mousewheel", ".jqm-demo .ui-collapsible-content", function( event, delta ) {
+		if ( delta > 0 && $( this ).scrollTop() === 0 ) {
+			event.preventDefault();
+		} else if ( delta < 0 &&  $( this ).scrollTop() === $( this ).get( 0 ).scrollHeight - $( this ).innerHeight() ) {
+			event.preventDefault();
 		}
 	});
-
+	
 	// reposition when switching between html / js / css
 	$( e.target ).delegate( ".jqm-demo .ui-collapsible", "expand", function() {
 		$( this ).parents( ".jqm-demo" ).trigger( "resize" );
