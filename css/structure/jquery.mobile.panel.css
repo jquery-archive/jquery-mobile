@@ -22,8 +22,8 @@
 	transition: transform 350ms ease;
 }
 /* during transitions, this class is added to the page, which triggers hw accel */
-.ui-page-panel-animating,
-.ui-page-panel-animating * {
+.ui-page,
+.ui-page * {
 	-webkit-perspective: 1000;
 	-moz-perspective: 1000;
 	-o-perspective: 1000;
