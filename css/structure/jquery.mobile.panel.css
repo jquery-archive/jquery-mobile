@@ -80,10 +80,14 @@
 .ui-panel-dismiss{
 	position: absolute;
 	top: 0;
+	left:0;
+	height: 100%;
+	width: 100%;
+	display: none;
 }
 .ui-panel-dismiss-open{
-	width: 100%;
-	height: 100%;
+	display: block;
+	background: rgba(34,22,45,.6)
 }
 
 /* content-wrap */
@@ -96,9 +100,10 @@
 }
 
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
-.ui-panel-dismiss-open.ui-panel-display-reveal,
+.ui-panel-dismiss-open.ui-panel-dismiss-display-reveal,
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push, 
-.ui-panel-dismiss-open.ui-panel-display-push {
+.ui-panel-dismiss-open.ui-panel-dismiss-display-push,
+.ui-panel-dismiss-open.ui-panel-dismiss-display-overlay {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	-ms-transform: translateX(17em);
@@ -107,25 +112,15 @@
 }
 
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right, 
-.ui-panel-dismiss-open.ui-panel-dismiss-display-reveal.ui-panel-position-right,
+.ui-panel-dismiss-open.ui-panel-dismiss-display-reveal.ui-panel-dismiss-position-right,
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right, 
-.ui-panel-dismiss-open.ui-panel-dismiss-display-push.ui-panel-dismiss-position-right{
+.ui-panel-dismiss-open.ui-panel-dismiss-display-push.ui-panel-dismiss-position-right,
+.ui-panel-dismiss-open.ui-panel-dismiss-display-overlay.ui-panel-dismiss-position-right {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	-ms-transform: translateX(-17em);
 	-o-transform: translateX(-17em);
 	transform: translateX(-17em);
-}
-
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-overlay, 
-.ui-panel-dismiss-open.ui-panel-display-overlay.ui-panel-position-left,
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-overlay.ui-panel-content-wrap-position-left, 
-.ui-panel-dismiss-open.ui-panel-display-overlay.ui-panel-position-left{
-	-webkit-transform: translateX(0);
-	-moz-transform: translateX(0);
-	-ms-transform: translateX(0);
-	-o-transform: translateX(0);
-	transform: translateX(0);
 }
 
 .ui-page-active.ui-panel-page-block{
