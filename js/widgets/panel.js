@@ -69,8 +69,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._createModal();
 		}
 
-		self._page.addClass( "ui-page-panel" );
-
+		// move the panel to the right place in the DOM
+		self.element[ this.options.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
 
 		self._trigger( "create" );
 	},
@@ -169,15 +169,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self._wrapper.addClass( o.classes.contentWrapOpenComplete );
 				self._page.removeClass( o.classes.panelAnimating );
 				self._trigger( "open" );
-			},
-			start = function(){
-				self.element.removeClass( o.classes.panelClosed );
-				self.element.addClass( o.classes.panelOpen );
-				self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
-				self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
-				self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
-				self._modal.addClass( self._modalOpenClasses );
-				self._open = true;
 			};
 
 
@@ -189,9 +180,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			setTimeout( complete , 0 );
 		}
 		self._page.addClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
-		setTimeout( start, 100 );
+		self.element.removeClass( o.classes.panelClosed );
+		self.element.addClass( o.classes.panelOpen );
+		self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
+		self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
+		self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
+		self._modal.addClass( self._modalOpenClasses );
 
-		
+		self._open = true;
 
 	},
 
@@ -206,12 +202,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self._page.removeClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
 				self._trigger( "close" );
 				complete = null;
-			},
-			start = function(){
-				self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
-				self._modal.removeClass( self._modalOpenClasses );
-				self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
-				self._open = false;
 			};
 
 		self._trigger( "beforeclose" );
@@ -223,9 +213,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 
 		self._page.addClass( o.classes.panelAnimating );
-		setTimeout( start, 100 );
+		self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
+		self._modal.removeClass( self._modalOpenClasses );
+		self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
 
-		
+		self._open = false;
 	},
 
 	toggle: function( options ){
