@@ -1,5 +1,5 @@
 
-.ui-panel{
+.ui-panel {
 	height: 100%;
 	border:0;
 	top: 0;
@@ -13,6 +13,7 @@
 	overflow: hidden;
 }
 
+/* animate class is added to panel and wrapper, toggling on transitions */
 .ui-panel-animate {
 	-webkit-transition: -webkit-transform 350ms ease;
 	-moz-transition: -moz-transform 350ms ease;
@@ -20,6 +21,7 @@
 	-ms-transition: -ms-transform 350ms ease;
 	transition: transform 350ms ease;
 }
+/* during transitions, this class is added to the page, which triggers hw accel */
 .ui-page-panel-animating,
 .ui-page-panel-animating * {
 	-webkit-backface-visibility: hidden;
@@ -35,8 +37,6 @@
 	z-index: 0;
 }
 
-
-
 /* display and reveal */
 .ui-panel-display-overlay,
 .ui-panel-display-reveal,
@@ -44,6 +44,7 @@
 	position: absolute;
 }
 
+/* panel default positions */
 .ui-panel-position-left{
 	left: -17em;
 }
@@ -58,6 +59,7 @@
 	right: 0;
 }
 
+/* panel open positions */
 .ui-panel-open.ui-panel-display-overlay,
 .ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translateX(17em);
@@ -76,7 +78,6 @@
 }
 
 /* dismiss */
-
 .ui-panel-dismiss{
 	position: absolute;
 	top: 0;
@@ -98,6 +99,8 @@
 	z-index: 1;
 	left: 0;
 }
+
+/* dismiss and content wrap open positions */
 
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
 .ui-panel-dismiss-open.ui-panel-dismiss-display-reveal,
@@ -123,6 +126,7 @@
 	transform: translateX(-17em);
 }
 
+/* while open, page x overflow is disabled */
 .ui-page-active.ui-panel-page-block{
 	overflow-x:hidden;
 }
