@@ -11,13 +11,13 @@ define([
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-	var path = $.mobile.path, history, popstateEvent;
+	var path = $.mobile.path, history;
 
 	// TODO consider queueing navigation activity until previous activities have completed
 	//      so that end users don't have to think about it. Punting for now
 	// TODO !! move the event bindings into callbacks on the navigate event
 	$.navigate = function( url, data, noEvents ) {
-		var state, href, parsed, loc, hash,
+		var state, href, parsed, loc, hash, popstateEvent,
 			resolutionUrl = path.isPath( url ) ? path.getLocation() : $.mobile.getDocumentUrl();
 
 		// Get the url as it would look squashed on to the current resolution url
@@ -69,7 +69,7 @@ define([
 			title: document.title
 		}, data);
 
-		if( $.support.pushState ) {
+		if( $.event.special.navigate.isPushStateEnabled() ) {
 			popstateEvent = new $.Event( "popstate" );
 			popstateEvent.originalEvent = {
 				type: "popstate",
@@ -134,7 +134,7 @@ define([
 
 		// Partly to support our test suite which manually alters the support
 		// value to test hashchange. Partly to prevent all around weirdness
-		if( !$.support.pushState ){
+		if( !$.event.special.navigate.isPushStateEnabled() ){
 			return;
 		}
 
@@ -211,7 +211,7 @@ define([
 
 		// If pushstate is supported the state will be included in the popstate event
 		// data and appended to the navigate event. Late check here for late settings (eg tests)
-		if( $.support.pushState ) {
+		if( $.event.special.navigate.isPushStateEnabled() ) {
 			return;
 		}
 

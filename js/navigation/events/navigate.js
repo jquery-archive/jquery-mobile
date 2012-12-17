@@ -18,6 +18,10 @@ define([ "jquery",
 
 		originalEventName: undefined,
 
+		isPushStateEnabled: function() {
+			return $.support.pushState && $.mobile && $.mobile.pushStateEnabled;
+		},
+
 		// TODO a lot of duplication between popstate and hashchange
 		popstate: function( event ) {
 			var newEvent = new $.Event( "navigate" ),
@@ -86,7 +90,7 @@ define([ "jquery",
 
 			self.bound = true;
 
-			if( $.support.pushState && self.pushStateEnabled ) {
+			if( self.isPushStateEnabled() ) {
 				self.originalEventName = "popstate";
 				$win.bind( "popstate.navigate", self.popstate );
 			} else {
