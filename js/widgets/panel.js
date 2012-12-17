@@ -20,7 +20,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			openComplete: "ui-panel-open-complete",
 			contentWrap: "ui-panel-content-wrap",
 			contentWrapOpen: "ui-panel-content-wrap-open",
-			wrapOpenComplete: "ui-panel-content-wrap-open-complete",
+			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
 			panelAnimating: "ui-page-panel-animating"
 		},
@@ -85,16 +85,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_getPosDisplayClasses: function( prefix ){
-		return [
-			" ",
-			" ",
-			"-position-" + this.options.position,
-			"-display-" + this.options.display
-		].join( " " + prefix );
+		return prefix + "-position-" + this.options.position + " " + prefix + "-display-" + this.options.display;
 	},
 
 	_addPanelClasses: function(){
-		var panelClasses = this._getPosDisplayClasses( this.options.classes.panel ) + " " + this.options.classes.panelClosed;
+		var panelClasses = this.options.classes.panel +
+						" " + this._getPosDisplayClasses( this.options.classes.panel ) +
+						" " + this.options.classes.panelClosed;
 
 		if( this.options.theme ){
 			panelClasses += " ui-body-" + this.options.theme;
@@ -168,9 +165,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			o = self.options,
 			complete = function(){
 				self.element.addClass( o.classes.openComplete );
-				self._wrapper.addClass( o.classes.wrapOpenComplete );
+				self._wrapper.addClass( o.classes.contentWrapOpenComplete );
 				self._page.removeClass( o.classes.panelAnimating );
 				self._trigger( "open" );
+				complete = null;
 			};
 
 
@@ -178,6 +176,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		if ( $.support.cssTransitions && o.animate ) {
 			self.element.one( self._transitionEndEvents , complete );
+			self._wrapper.one( self._transitionEndEvents , complete );
 		} else{
 			setTimeout( complete , 0 );
 		}
@@ -201,12 +200,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self._wrapper.removeClass( self._contentWrapOpenClasses );
 				self._page.removeClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
 				self._trigger( "close" );
+				complete = null;
 			};
 
 		self._trigger( "beforeclose" );
 
 		if ( $.support.cssTransitions && o.animate ) {
 			self.element.one( self._transitionEndEvents , complete );
+			self._wrapper.one( self._transitionEndEvents , complete );
 		} else{
 			setTimeout( complete , 0 );
 		}

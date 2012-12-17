@@ -13,8 +13,7 @@
 	overflow: hidden;
 }
 
-.ui-panel.ui-panel-animate,
-.ui-panel-content-wrap.ui-panel-animate {
+.ui-panel-animate {
 	-webkit-transition: -webkit-transform 350ms ease;
 	-moz-transition: -moz-transform 350ms ease;
 	-o-transition: -o-transform 350ms ease;
