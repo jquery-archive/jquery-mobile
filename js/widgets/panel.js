@@ -22,6 +22,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			contentWrapOpen: "ui-panel-content-wrap-open",
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
+			pagePanel: "ui-page-panel",
 			panelAnimating: "ui-page-panel-animating"
 		},
 		animate: true,
@@ -68,6 +69,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( self.options.dismissible ){
 			self._createModal();
 		}
+
+		self._page.addClass( this.options.classes.pagePanel );
 
 		// move the panel to the right place in the DOM
 		self.element[ this.options.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
@@ -167,7 +170,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
 				self.element.addClass( o.classes.openComplete );
 				self._wrapper.addClass( o.classes.contentWrapOpenComplete );
-				self._page.removeClass( o.classes.panelAnimating );
 				self._trigger( "open" );
 			};
 
@@ -179,7 +181,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		} else{
 			setTimeout( complete , 0 );
 		}
-		self._page.addClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
+		self._page.addClass( self.options.classes.pageBlock );
 		self.element.removeClass( o.classes.panelClosed );
 		self.element.addClass( o.classes.panelOpen );
 		self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
@@ -199,7 +201,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 				self.element.addClass( o.classes.panelClosed );
 				self._wrapper.removeClass( self._contentWrapOpenClasses );
-				self._page.removeClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
+				self._page.removeClass( self.options.classes.pageBlock );
 				self._trigger( "close" );
 				complete = null;
 			};
@@ -212,7 +214,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			setTimeout( complete , 0 );
 		}
 
-		self._page.addClass( o.classes.panelAnimating );
 		self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
 		self._modal.removeClass( self._modalOpenClasses );
 		self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
