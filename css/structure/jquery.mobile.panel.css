@@ -140,7 +140,7 @@
 	box-shadow: 5px 0px 25px rgba(0,0,0,.4);
 }
 .ui-panel-content-wrap-position-right.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-open-complete,
-.ui-panel-position-left.ui-panel-display-overlay.ui-panel-open-complete {
+.ui-panel-position-right.ui-panel-display-overlay.ui-panel-open-complete {
 	-webkit-box-shadow: -5px 0px 25px rgba(0,0,0,.4);
 	-moz-box-shadow: -5px 0px 25px rgba(0,0,0,.4);
 	box-shadow: -5px 0px 25px rgba(0,0,0,.4);
