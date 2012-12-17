@@ -104,8 +104,12 @@ define([
 					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
 				}
 
-				var loc = path.parseLocation();
-				// $.navigate.history.add( loc.href, {hash: loc.hash} );
+				// make sure to set initial popstate state if it exists
+				// so that navigation back to the initial page works properly
+				if( $.event.special.navigate.isPushStateEnabled() ) {
+					$.navigate.navigator.squash( path.parseLocation().href );
+				}
+
 				$.mobile.changePage( $.mobile.firstPage, {
 					transition: "none",
 					reverse: true,
@@ -115,7 +119,7 @@ define([
 			} else {
 				// trigger hashchange or navigate to squash and record the correct
 				// history entry for an initial hash path
-				if( $.event.special.navigate.originalEventName === "hashchange" ) {
+				if( !$.event.special.navigate.isPushStateEnabled() ) {
 					$window.trigger( "hashchange", [true] );
 				} else {
 					// TODO figure out how to simplify this interaction with the initial history entry
