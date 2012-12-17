@@ -168,7 +168,7 @@ $( document ).on( "pageinit", function( e ) {
 	
 	// reposition when switching between html / js / css
 	$( e.target ).delegate( ".jqm-demo .ui-collapsible", "expand", function() {
-		$( this ).parents( ".jqm-demo" ).trigger( "resize" );
+		$( this ).parents( ":mobile-popup" ).popup( "reposition", { positionTo: "window" } );
 	});
 
 	$( ".jqm-demo" ).on( "popupbeforeposition", function() {
