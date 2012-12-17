@@ -20,8 +20,8 @@
 	-o-transition: -o-transform 350ms ease;
 	-ms-transition: -ms-transform 350ms ease;
 	transition: transform 350ms ease;
-	
 }
+
 /* during transitions, this class is added to the page, which triggers hw accel */
 .ui-page-panel-animate,
 .ui-page-panel-animate * {
@@ -96,7 +96,6 @@
 }
 
 /* content-wrap */
-
 .ui-panel-content-wrap {
 	position: relative;
 	background: inherit;
@@ -158,9 +157,9 @@
 }
 
 
-/* Media query to wrap contents so the panel becomes a column above 720px - TODO: make this and external demo */ 
+
 /* wrap push on wide viewports once open */
-@media (min-width: 45em){
+@media (min-width: 60em){
 	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push {
 		margin-right: 17em;
 	}
