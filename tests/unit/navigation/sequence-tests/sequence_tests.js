@@ -452,4 +452,97 @@
 		], eventNs );
 	});
 
+	asyncTest( "Sequence page1 -> dialog -> page2 <- back -> forward <- back", function() {
+		var eventNs = ".pageDialogPageBackForward";
+
+		expect( 5 );
+
+		maybeWaitForStartPage([
+			function() { $( "#openBasicDialog" ).click(); },
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "#fromDialogToAnotherPage" ).click();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+			},
+
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.mobile.back();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				window.history.forward();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
+				$.mobile.back();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
+				start();
+			}
+		], eventNs );
+	});
+
+	asyncTest( "Sequence page1 -> popup -> page2 <- back -> forward <- back", function() {
+		var eventNs = ".goingFromAPopupToAnotherPage";
+
+		expect( 5 );
+
+		maybeWaitForStartPage([
+			function() {
+				$( "#openPopup" ).click();
+			},
+			{
+				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" }
+			},
+			function( result ) {
+				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
+				$( "#openPageFromPopup" ).click();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.mobile.back();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				window.history.forward();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
+				$.mobile.back();
+			},
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
+				start();
+			}
+		], eventNs );
+	});
+
 })( jQuery );
