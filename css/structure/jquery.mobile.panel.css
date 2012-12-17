@@ -150,20 +150,14 @@
 	-o-transform: translateX(-17em);
 	transform: translateX(-17em);
 }
-/* wrap push after open 
+/* wrap push after open */
 .ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push {
-	-webkit-transform: translateX(0);
-	-moz-transform: translateX(0);
-	-ms-transform: translateX(0);
-	-o-transform: translateX(0);
-	transform: translateX(0);
-	margin-left: 17em;
+	margin-right: 17em;
 }
 .ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
-	margin-right: 17em;
-	margin-left: 0;
+	margin: 0 0 0 17em;
 }
-*/
+
 
 /* while open, page x overflow is disabled */
 .ui-page-active.ui-panel-page-block{
