@@ -15,11 +15,12 @@
 
 /* animate class is added to panel and wrapper, toggling on transitions */
 .ui-panel-animate {
-	-webkit-transition: -webkit-transform 350ms ease;
-	-moz-transition: -moz-transform 350ms ease;
-	-o-transition: -o-transform 350ms ease;
-	-ms-transition: -ms-transform 350ms ease;
-	transition: transform 350ms ease;
+	-webkit-transition: -webkit-transform 350ms ease, box-shadow 250ms ease;
+	-moz-transition: -moz-transform 350ms ease, box-shadow 250ms ease;
+	-o-transition: -o-transform 350ms ease, box-shadow 250ms ease;
+	-ms-transition: -ms-transform 350ms ease, box-shadow 250ms ease;
+	transition: transform 350ms ease, box-shadow 250ms ease;
+	
 }
 /* during transitions, this class is added to the page, which triggers hw accel */
 .ui-page-panel-animate,
@@ -102,6 +103,9 @@
 	z-index: 1;
 	left: 0;
 }
+.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push {
+	width: calc(100%-17em);
+}
 
 /* dismiss and content wrap open positions */
 
@@ -127,6 +131,19 @@
 	-ms-transform: translateX(-17em);
 	-o-transform: translateX(-17em);
 	transform: translateX(-17em);
+}
+
+.ui-panel-content-wrap-position-left.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-open-complete,
+.ui-panel-position-left.ui-panel-display-overlay.ui-panel-open-complete {
+	-webkit-box-shadow: 5px 0px 25px rgba(0,0,0,.4);
+	-moz-box-shadow: 5px 0px 25px rgba(0,0,0,.4);
+	box-shadow: 5px 0px 25px rgba(0,0,0,.4);
+}
+.ui-panel-content-wrap-position-right.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-open-complete,
+.ui-panel-position-left.ui-panel-display-overlay.ui-panel-open-complete {
+	-webkit-box-shadow: -5px 0px 25px rgba(0,0,0,.4);
+	-moz-box-shadow: -5px 0px 25px rgba(0,0,0,.4);
+	box-shadow: -5px 0px 25px rgba(0,0,0,.4);
 }
 
 /* while open, page x overflow is disabled */
