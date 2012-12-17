@@ -18,7 +18,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
 			openComplete: "ui-panel-open-complete",
-
 			contentWrap: "ui-panel-content-wrap",
 			contentWrapOpen: "ui-panel-content-wrap-open",
 			wrapOpenComplete: "ui-panel-content-wrap-open-complete",
@@ -68,10 +67,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		if( self.options.dismissible ){
 			self._createModal();
-		}
-
-		if( !self._page.hasClass( self.options.classes.pageBlock ) ){
-			self._page.addClass( self.options.classes.pageBlock );
 		}
 
 		// move the panel to the right place in the DOM
@@ -186,7 +181,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		} else{
 			setTimeout( complete , 0 );
 		}
-		self._page.addClass( o.classes.panelAnimating );
+		self._page.addClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
 		self.element.removeClass( o.classes.panelClosed );
 		self.element.addClass( o.classes.panelOpen );
 		self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
@@ -204,7 +199,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			complete = function(){
 				self.element.addClass( o.classes.panelClosed );
 				self._wrapper.removeClass( self._contentWrapOpenClasses );
-				self._page.removeClass( o.classes.panelAnimating );
+				self._page.removeClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
 				self._trigger( "close" );
 			};
 

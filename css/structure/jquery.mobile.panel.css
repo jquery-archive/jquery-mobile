@@ -9,6 +9,7 @@
 /* needed for hiding reveal panels */
 .ui-panel-closed {
 	clip: rect(0,0,0,0);
+	width: 0;
 	overflow: hidden;
 }
 
@@ -22,7 +23,7 @@
 }
 .ui-page-panel-animating,
 .ui-page-panel-animating * {
-	-webkit-perspective: 1000;
+	-webkit-backface-visibility: hidden;
 }
 
 /* z stacking */
