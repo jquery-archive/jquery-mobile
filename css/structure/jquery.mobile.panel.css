@@ -20,8 +20,8 @@
 	-o-transition: -o-transform 350ms ease;
 	-ms-transition: -ms-transform 350ms ease;
 	transition: transform 350ms ease;
-	
 }
+
 /* during transitions, this class is added to the page, which triggers hw accel */
 .ui-page-panel-animate,
 .ui-page-panel-animate * {
@@ -96,7 +96,6 @@
 }
 
 /* content-wrap */
-
 .ui-panel-content-wrap {
 	position: relative;
 	background: inherit;
@@ -150,16 +149,19 @@
 	-o-transform: translateX(-17em);
 	transform: translateX(-17em);
 }
-/* wrap push after open */
-.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push {
-	margin-right: 17em;
-}
-.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
-	margin: 0 0 0 17em;
-}
-
 
 /* while open, page x overflow is disabled */
 .ui-page-active.ui-panel-page-block{
 	overflow-x:hidden;
+}
+
+/* wrap push on wide viewports once open */
+@media (min-width: 60em){
+	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push {
+		margin-right: 17em;
+	}
+	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
+		margin: 0 0 0 17em;
+	}
+	.ui-panel-dismiss { display: none }
 }
