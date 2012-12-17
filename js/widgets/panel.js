@@ -69,8 +69,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._createModal();
 		}
 
-		// move the panel to the right place in the DOM
-		self.element[ this.options.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
+		self._page.addClass( "ui-page-panel" );
+
 
 		self._trigger( "create" );
 	},
@@ -189,7 +189,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			setTimeout( complete , 0 );
 		}
 		self._page.addClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
-		setTimeout( start, 0 );
+		setTimeout( start, 100 );
 
 		
 
@@ -223,7 +223,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 
 		self._page.addClass( o.classes.panelAnimating );
-		setTimeout( start, 0 );
+		setTimeout( start, 100 );
 
 		
 	},
