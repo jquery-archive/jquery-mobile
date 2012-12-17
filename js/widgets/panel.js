@@ -81,7 +81,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_createModal: function( options ){
 		var self = this;
 		self._modal = $( "<div class='" + self.options.classes.modal + " " + self.options.display + "-" + self.options.position +"' data-panelid='" + self._panelID + "'></div>" )
-			.on( "vclick" , function(){
+			.on( "click" , function(){
 				self.close.call( self );
 			})
 			.appendTo( this._page );
