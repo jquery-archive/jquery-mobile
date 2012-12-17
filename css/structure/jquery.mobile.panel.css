@@ -6,9 +6,9 @@
 	display: block;
 	width: 20em;
 }
+/* needed for hiding reveal panels */
 .ui-panel-closed {
-	clip: rect(0,0,0,0);
-	overflow: hidden;
+	visibility: hidden;
 }
 
 .ui-panel.ui-panel-animate,
@@ -20,10 +20,14 @@
 	transition: transform 950ms ease;
 }
 
+/* z stacking */
 .ui-panel-display-overlay,
 .ui-panel-display-push,
 .ui-panel-dismiss {
 	z-index: 99999;
+}
+.ui-panel-display-reveal{
+	z-index: 0;
 }
 
 
@@ -42,7 +46,6 @@
 	right: -20em;
 }
 .ui-panel-display-reveal{
-	z-index: 0;
 	left:0;
 }
 .ui-panel-display-reveal.ui-panel-position-right {
