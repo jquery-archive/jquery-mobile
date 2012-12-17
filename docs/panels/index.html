@@ -151,6 +151,14 @@ $( "#idofpanel" )
 </code></pre>
 
 			
+				<h2>Panel animations</h2>
+
+				<p>Panels will animate if the browser supports 3D transforms, the same criteria for CSS animation support we use for page transitions. Panel animations use <code>translateX</code> CSS transforms to ensure they are hardware accelerated and smooth.</p>
+				<p>The framework has a feature test to detect if the required CSS properties are supported and will fall back to a simple hide/show if not available. After thorough testing, we decided to not animate panels on less capable platforms because the choppier animations weren't a better experience than a simple hide/show.</p>
+
+				<p>The <code>animate</code> option allows you to turn off panel animations. To turn off animations via markup, add the  <code>data-animate="false"</code> attribute to the popup container.</p>
+
+
 				<h2>Styling panels</h2>
 
 				<p>By default, panels have very simple styles to let you customize them as needed. Panels are essentially just simple blocks with no padding or margins that sit on either side of the page content. </p>
@@ -167,6 +175,9 @@ $( "#idofpanel" )
 
 
 				<dl>
+
+					<dt><code>animate</code> default: true</dt>
+					<dd>Sets whether the panel will animate when opening and closing. If set to false, the panel will just appear and disappear without animation. This is recommended for fastest performance. Also available via the <code>data-animate</code> attribute on the popup container.</dd>
 
 					<dt><code>dismissible</code> default: true</dt>
 					<dd>Sets whether the panel can be closed by clicking outside onto the page. Also available via the <code>data-dismissible</code> attribute on the link that opens the popup.</dd>
