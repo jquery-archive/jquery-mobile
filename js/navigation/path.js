@@ -320,7 +320,7 @@ define([
 
 				// store the ui state keys for use
 				if( stateIndex > -1 ){
-					uiState = cleanedUrl.slice( stateIndex );;
+					uiState = cleanedUrl.slice( stateIndex );
 					cleanedUrl = cleanedUrl.slice( 0, stateIndex );
 				}
 
