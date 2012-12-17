@@ -112,10 +112,32 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		});
 	},
 
-	_securePanelPositioning: function(){
+	_positionPanel: function(){
 		if( this.element.height() > $.mobile.getScreenHeight() ){
-			this.element.addClass( this.options.classes.panelUnfixed );
+			this._unfixPanel();
 		}
+		else {
+			this._fixPanel();
+		}
+	},
+
+	_bindFixListener: function(){
+		var self = this;
+		$( window ).on( "throttledresize.panel", function(){
+			self._positionPanel();
+		} );
+	},
+
+	_unbindFixListener: function(){
+		$( window ).off( "throttledresize.panel" );
+	},
+
+	_unfixPanel: function(){
+		this.element.addClass( this.options.classes.panelUnfixed );
+	},
+
+	_fixPanel: function(){
+		this.element.removeClass( this.options.classes.panelUnfixed );
 	},
 
 	_bindLinkListeners: function(){
@@ -176,7 +198,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
 				self.element.addClass( o.classes.openComplete );
 				self._wrapper.addClass( o.classes.contentWrapOpenComplete );
-				self._securePanelPositioning();
+				self._positionPanel();
+				self._bindFixListener();
 				self._trigger( "open" );
 			};
 
@@ -205,10 +228,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self = this,
 			complete = function(){
 				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
-
 				self.element.addClass( o.classes.panelClosed );
 				self._wrapper.removeClass( self._contentWrapOpenClasses );
 				self._page.removeClass( self.options.classes.pageBlock );
+				self._fixPanel();
+				self._unbindFixListener();
 				self._trigger( "close" );
 				complete = null;
 			};
