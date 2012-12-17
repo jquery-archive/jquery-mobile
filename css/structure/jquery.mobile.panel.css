@@ -162,7 +162,7 @@
 
 
 /* wrap push on wide viewports once open */
-@media (min-width: 60em){
+@media (min-width: 45em){
 	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push {
 		margin-right: 17em;
 	}
