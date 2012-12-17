@@ -20,10 +20,8 @@
 	-ms-transition: -ms-transform 350ms ease;
 	transition: transform 350ms ease;
 }
-.ui-panel-open.ui-panel-animate,
-.ui-panel-open.ui-panel-animate *,
-.ui-panel-content-wrap-open.ui-panel-animate,
-.ui-panel-content-wrap-open.ui-panel-animate * {
+.ui-page-panel-animating,
+.ui-page-panel-animating * {
 	-webkit-perspective: 1000;
 }
 
