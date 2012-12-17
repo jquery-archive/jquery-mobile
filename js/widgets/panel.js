@@ -24,7 +24,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			wrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block"
 		},
-		animate: false,
+		animate: true,
 		theme: null,
 		position: "left",
 		dismissible: true,
