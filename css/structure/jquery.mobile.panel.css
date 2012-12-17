@@ -123,6 +123,4 @@
 	transform: translateX(0);
 }
 
-.ui-page-active.ui-panel-page-block{
-	overflow-x:hidden;
-}
+

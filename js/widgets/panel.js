@@ -18,12 +18,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
 			openComplete: "ui-panel-open-complete",
+
 			contentWrap: "ui-panel-content-wrap",
 			contentWrapOpen: "ui-panel-content-wrap-open",
 			wrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block"
 		},
-		animate: true,
+		animate: false,
 		theme: null,
 		position: "left",
 		dismissible: true,
@@ -71,6 +72,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( !self._page.hasClass( self.options.classes.pageBlock ) ){
 			self._page.addClass( self.options.classes.pageBlock );
 		}
+
 		// move the panel to the right place in the DOM
 		self.element[ this.options.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
 
@@ -134,25 +136,27 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_bindPageEvents: function(){
 		var self = this;
 
-		self._page
+		$( window )
 			// on swipe, close the panel (should swipe open too?)
 			.on( "swipe" , function( e ){
-				self.close.call( self );
-			})
+				self.close( true );
+			});
+
+		self._page
 			// Close immediately if another panel on the page opens
 			.on( "panelbeforeopen", function( e ){
 				if( self._open && e.target !== self.element ){
-					self.close.call( self , true );
+					self.close( true );
 				}
 			})
 			// clean up open panels after page hide
 			.on(  "panelbeforehide", function( e ) {
-				self.close.call( self );
+				self.close( true );
 			})
 			// on escape, close? might need to have a target check too...
 			.on( "keyup", function( e ) {
 				if( e.keyCode === 27 && self._open ){
-					self.close.call( self );
+					self.close( true );
 				}
 			});
 	},
