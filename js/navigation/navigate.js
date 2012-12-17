@@ -18,6 +18,7 @@ define([
 	// TODO !! move the event bindings into callbacks on the navigate event
 	$.navigate = function( url, data, noEvents ) {
 		var state, href, parsed, loc, hash, popstateEvent,
+			isPopStateEvent = $.event.special.navigate.isPushStateEnabled(),
 			resolutionUrl = path.isPath( url ) ? path.getLocation() : $.mobile.getDocumentUrl();
 
 		// Get the url as it would look squashed on to the current resolution url
@@ -37,7 +38,7 @@ define([
 		} else if ( path.isPath(url) ) {
 			var resolved = path.parseUrl( href );
 			// If the passed url is a path, make it domain relative and remove any trailing hash
-			hash = resolved.pathname + resolved.search;
+			hash = resolved.pathname + resolved.search + (path.isPreservableHash( resolved.hash )? resolved.hash.replace( "#", "" ) : "");
 		} else {
 			hash = url;
 		}
@@ -69,7 +70,7 @@ define([
 			title: document.title
 		}, data);
 
-		if( $.event.special.navigate.isPushStateEnabled() ) {
+		if( isPopStateEvent ) {
 			popstateEvent = new $.Event( "popstate" );
 			popstateEvent.originalEvent = {
 				type: "popstate",

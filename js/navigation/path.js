@@ -299,27 +299,39 @@ define([
 			squash: function( url, resolutionUrl ) {
 				var state, href,
 					isPath = path.isPath( url ),
-					hash = isPath ? path.stripHash(url) : url,
-					hashUri = path.parseUrl( hash ),
-					uiState = "", stateIndex, preservedHash = hashUri.hash;
+					uri = path.parseUrl( url ),
+					preservedHash = uri.hash,
+					cleanedUrl,
+					uiState = "", stateIndex;
 
-				resolutionUrl = resolutionUrl || path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl();
+				resolutionUrl = resolutionUrl || (path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl());
 
-				// make the hash abolute with the current href
-				href = path.makeUrlAbsolute( hash, resolutionUrl );
+				// If the url is anything but a simple string, remove any preceding hash
+				// eg #foo/bar -> foo/bar
+				//    #foo -> #foo
+				cleanedUrl = isPath ? path.stripHash( url ) : url;
+
+				// If the url is a full url with a hash check if the parsed hash is a path
+				// if it is, strip the #, and use it otherwise continue without change
+				cleanedUrl = path.isPath( uri.hash ) ? path.stripHash( uri.hash ) : cleanedUrl;
 
 				// Split the UI State keys off the href
-				stateIndex = href.indexOf( this.uiStateKey );
+				stateIndex = cleanedUrl.indexOf( this.uiStateKey );
 
+				// store the ui state keys for use
 				if( stateIndex > -1 ){
-					uiState = href.slice( stateIndex );
+					uiState = cleanedUrl.slice( stateIndex );;
+					cleanedUrl = cleanedUrl.slice( 0, stateIndex );
 				}
+
+				// make the cleanedUrl absolute relative to the resolution url
+				href = path.makeUrlAbsolute( cleanedUrl, resolutionUrl );
 
 				// TODO all this crap is terrible, clean it up
 				if ( isPath ) {
 					// Get a hash where possible and, as long as it's not a path
 					// preserve it on the current url
-					preservedHash = (hashUri.hash || path.parseLocation().hash);
+					preservedHash = (uri.hash || path.parseLocation().hash);
 
 					// reject the hash if it's a path or it's just a dialog key
 					if( path.isPath( preservedHash ) || preservedHash.replace("#", "").indexOf( this.uiStateKey ) === 0) {
@@ -339,10 +351,16 @@ define([
 
 					// reconstruct each of the pieces with the new search string and hash
 					href = path.parseUrl( href );
-					href = href.protocol + "//" + href.host + href.pathname + hashUri.search + preservedHash;
+					href = href.protocol + "//" + href.host + href.pathname + uri.search + preservedHash;
+				} else {
+					href += href.indexOf( "#" ) > -1 ? uiState : "#" + uiState;
 				}
 
 				return href;
+			},
+
+			isPreservableHash: function( hash ) {
+				return hash.replace( "#", "" ).indexOf( this.uiStateKey ) === 0;
 			}
 		};
 

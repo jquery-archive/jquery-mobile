@@ -265,4 +265,28 @@
 		$.mobile.back();
 		$.mobile.phonegapNavigationEnabled = previous;
 	});
+
+	test( "make sure squash is working properly", function() {
+		var squash = $.proxy( $.mobile.path.squash, $.mobile.path );
+
+		equal( squash("#foo/bar.html", "http://example.com/"), "http://example.com/foo/bar.html", "relative path hash" );
+		equal( squash("foo/bar.html", "http://example.com/"), "http://example.com/foo/bar.html", "document relative path" );
+		equal( squash("#foo/bar.html", "http://example.com/bing/"), "http://example.com/bing/foo/bar.html", "relative path hash applied to subdir" );
+		equal( squash("foo/bar.html", "http://example.com/bing/"), "http://example.com/bing/foo/bar.html", "relative path applied to subdir" );
+
+		equal( squash("#foo/bar.html", "http://example.com/bing.html"), "http://example.com/foo/bar.html", "relative path hash applied to subdocument" );
+		equal( squash("foo/bar.html", "http://example.com/bing.html"), "http://example.com/foo/bar.html", "relative path applied to subdocument" );
+
+
+		equal( squash("http://example.com/#foo/bar.html", "http://example.com/"), "http://example.com/foo/bar.html", "relative path hash on full url" );
+		equal( squash("http://example.com/#foo/bar.html", "http://example.com/bing/"), "http://example.com/bing/foo/bar.html", "relative path hash on full url applied to subdir" );
+
+		equal( squash("http://example.com/#foo/bar.html", "http://example.com/bing.html"), "http://example.com/foo/bar.html", "relative path hash on full url applied to subdocument" );
+
+		equal( squash("#foo/bar.html&ui-state=foo", "http://example.com/"), "http://example.com/foo/bar.html#&ui-state=foo", "relative path hash on full url" );
+		equal( squash("foo/bar.html#&ui-state=foo", "http://example.com/"), "http://example.com/foo/bar.html#&ui-state=foo", "relative path hash on full url" );
+
+		equal( squash("#foo&ui-state=foo", "http://example.com/"), "http://example.com/#foo&ui-state=foo", "ui-state keys attached to simple string hashes are preserved" );
+
+	});
 })(jQuery);
