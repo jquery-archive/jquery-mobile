@@ -14,6 +14,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		classes: {
 			panel: "ui-panel",
 			panelOpen: "ui-panel-open",
+			panelClosed: "ui-panel-closed",
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
 			openComplete: "ui-panel-open-complete",
@@ -53,6 +54,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._page = $el.closest( ":jqmData(role='page')" );
 		self._wrapper = _getWrapper();
 		self._addPanelClasses();
+
+		// if animating, add the class to do so
+		if ( $.support.cssTransitions && self.options.animate ) {
+			this.element.add( self._wrapper ).addClass( "ui-panel-animate" );
+		}
+
 		self._bindCloseEvents();
 		self._bindLinkListeners();
 		self._bindPageEvents();
@@ -79,34 +86,23 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.appendTo( this._page );
 	},
 
+	_getPosDisplayClasses: function( prefix ){
+		return [
+			" ",
+			" ",
+			"-position-" + this.options.position,
+			"-display-" + this.options.display
+		].join( " " + prefix );
+	},
+
 	_addPanelClasses: function(){
-		var $el = this.element,
-			$wrap = this.element,
-			o = this.options,
-			elClasses = function( prefix ){
-				return [
-					" ",
-					" ",
-					"-position-" + o.position,
-					"-display-" + o.display
-				].join( " " + prefix );
-			},
-			panelClasses = elClasses( o.classes.panel ),
-			wrapClasses = elClasses( o.classes.contentWrap ),
-			dismissClasses = elClasses( o.classes.modal );
-				
+		var panelClasses = this._getPosDisplayClasses( this.options.classes.panel ) + " " + this.options.classes.panelClosed;
 
-		if( o.theme ){
-			panelClasses += " ui-body-" + o.theme;
+		if( this.options.theme ){
+			panelClasses += " ui-body-" + this.options.theme;
 		}
 
-		if ( $.support.cssTransitions && o.animate ) {
-			$el.add( $wrap ).addClass( "ui-panel-animate" );
-		}
-
-		$el.addClass( panelClasses );
-		this._wrapper.addClass( wrapClasses );
-		//this._modal.addClass( dismissClasses );
+		this.element.addClass( panelClasses );
 	},
 
 	_bindCloseEvents: function(){
@@ -164,6 +160,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	// state storage of open or closed
 	_open: false,
 
+	_contentWrapOpenClasses: null,
+	_modalOpenClasses: null,
+
 	open: function( options ){
 		var self = this,
 			o = self.options,
@@ -181,10 +180,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		} else{
 			setTimeout( complete , 0 );
 		}
-
-		self._modal.addClass( o.classes.modalOpen );
+		self.element.removeClass( o.classes.panelClosed );
 		self.element.addClass( o.classes.panelOpen );
-		self._wrapper.addClass( o.classes.contentWrapOpen );
+		self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
+		self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
+		self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
+		self._modal.addClass( self._modalOpenClasses );
 
 		self._open = true;
 
@@ -194,15 +195,22 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options,
 			self = this,
 			complete = function(){
+				self.element.addClass( o.classes.panelClosed );
+				self._wrapper.removeClass( self._contentWrapOpenClasses );
 				self._trigger( "close" );
 			};
 
 		self._trigger( "beforeclose" );
 
+		if ( $.support.cssTransitions && o.animate ) {
+			self.element.one( self._transitionEndEvents , complete );
+		} else{
+			setTimeout( complete , 0 );
+		}
+
 		self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
-		self._modal.removeClass( o.classes.modalOpen );
-		self._wrapper.removeClass( o.display + "-" + o.position );
-		self._wrapper.removeClass( o.classes.wrapOpenComplete + " " + o.classes.contentWrapOpen );
+		self._modal.removeClass( self._modalOpenClasses );
+		self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
 
 		self._open = false;
 	},
