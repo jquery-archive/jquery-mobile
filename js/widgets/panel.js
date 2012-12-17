@@ -164,19 +164,18 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var self = this,
 			o = self.options,
 			complete = function(){
+				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
 				self.element.addClass( o.classes.openComplete );
 				self._wrapper.addClass( o.classes.contentWrapOpenComplete );
 				self._page.removeClass( o.classes.panelAnimating );
 				self._trigger( "open" );
-				complete = null;
 			};
 
 
 		self._trigger( "beforeopen" );
 
 		if ( $.support.cssTransitions && o.animate ) {
-			self.element.one( self._transitionEndEvents , complete );
-			self._wrapper.one( self._transitionEndEvents , complete );
+			self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
 		} else{
 			setTimeout( complete , 0 );
 		}
@@ -196,6 +195,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options,
 			self = this,
 			complete = function(){
+				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
+
 				self.element.addClass( o.classes.panelClosed );
 				self._wrapper.removeClass( self._contentWrapOpenClasses );
 				self._page.removeClass( o.classes.panelAnimating + " " + self.options.classes.pageBlock );
@@ -206,8 +207,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._trigger( "beforeclose" );
 
 		if ( $.support.cssTransitions && o.animate ) {
-			self.element.one( self._transitionEndEvents , complete );
-			self._wrapper.one( self._transitionEndEvents , complete );
+			self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
 		} else{
 			setTimeout( complete , 0 );
 		}
