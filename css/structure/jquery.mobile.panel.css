@@ -1,6 +1,6 @@
 
 .ui-panel {
-	height: 100%;
+	min-height: 100%;
 	border-width:0;
 	top: 0;
 	display: block;
@@ -23,7 +23,7 @@
 }
 
 /* during transitions, this class is added to the page, which triggers hw accel */
-.ui-page-panel-animate,
+
 .ui-page-panel-animate * {
 	-webkit-transform: translateZ(0);
 	-moz-transform: translateZ(0);
@@ -46,6 +46,9 @@
 .ui-panel-display-overlay,
 .ui-panel-display-reveal,
 .ui-panel-display-push {
+	position: fixed;
+}
+.ui-panel-unfixed {
 	position: absolute;
 }
 

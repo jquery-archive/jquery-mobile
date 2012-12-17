@@ -20,6 +20,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			openComplete: "ui-panel-open-complete",
 			contentWrap: "ui-panel-content-wrap",
 			contentWrapOpen: "ui-panel-content-wrap-open",
+			panelUnfixed: "ui-panel-unfixed",
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
 			pagePanel: "ui-page-panel",
@@ -111,6 +112,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		});
 	},
 
+	_securePanelPositioning: function(){
+		if( this.element.height() > $.mobile.getScreenHeight() ){
+			this.element.addClass( this.options.classes.panelUnfixed );
+		}
+	},
+
 	_bindLinkListeners: function(){
 		var self = this;
 
@@ -169,6 +176,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
 				self.element.addClass( o.classes.openComplete );
 				self._wrapper.addClass( o.classes.contentWrapOpenComplete );
+				self._securePanelPositioning();
 				self._trigger( "open" );
 			};
 
