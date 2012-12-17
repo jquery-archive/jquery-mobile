@@ -163,29 +163,29 @@ $.testHelper.setPushState();
 	if( $.support.pushState ) {
 		test( "squash is working properly", function() {
 			var path = $.mobile.path, loc;
-			$.navigate.squash( url.pathname + url.search + "#test-hash" );
+			$.navigate.navigator.squash( url.pathname + url.search + "#test-hash" );
 
-			$.navigate.squash("#foo/bar");
+			$.navigate.navigator.squash("#foo/bar");
 			loc = path.parseLocation();
 			equal( loc.pathname, url.directory + "foo/bar", "foo/bar has been squashed onto the url" );
 			equal( loc.search, url.search, "the search is preserved" );
 
-			$.navigate.squash("bar/baz");
+			$.navigate.navigator.squash("bar/baz");
 			loc = path.parseLocation();
 			equal( loc.pathname, url.directory + "foo/bar/baz", "foo/bar has been squashed onto the url" );
 			equal( loc.search, url.search, "the search is preserved" );
 
-			$.navigate.squash("#foo");
+			$.navigate.navigator.squash("#foo");
 			loc = path.parseLocation();
 			equal( loc.hash, "#foo", "foo is now the hash" );
 			equal( loc.search, url.search, "the search is preserved" );
 
 			// Make sure that the search delimiter is dictated by the squashed value
-			$.navigate.squash("#foo/bar" + location.search.replace( "&", ";" ));
+			$.navigate.navigator.squash("#foo/bar" + location.search.replace( "&", ";" ));
 			loc = path.parseLocation();
 			ok( loc.search.indexOf( "&" ) === -1, "the amp has been replaced" );
 
-			$.navigate.squash( url.pathname + url.search );
+			$.navigate.navigator.squash( url.pathname + url.search );
 		});
 
 
