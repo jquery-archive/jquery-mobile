@@ -150,16 +150,22 @@
 	-o-transform: translateX(-17em);
 	transform: translateX(-17em);
 }
-/* wrap push after open */
-.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push {
-	margin-right: 17em;
-}
-.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
-	margin: 0 0 0 17em;
-}
 
 
 /* while open, page x overflow is disabled */
 .ui-page-active.ui-panel-page-block{
 	overflow-x:hidden;
+}
+
+
+/* Media query to wrap contents so the panel becomes a column above 720px - TODO: make this and external demo */ 
+/* wrap push on wide viewports once open */
+@media (min-width: 45em){
+	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push {
+		margin-right: 17em;
+	}
+	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
+		margin: 0 0 0 17em;
+	}
+	.ui-panel-dismiss-display-push { display: none }
 }
