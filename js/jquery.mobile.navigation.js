@@ -1060,7 +1060,7 @@ define( [
 				$btn = $btn.closest( ".ui-btn" );
 			}
 
-			if ( $btn.length > 0 && !( $btn.hasClass( $.mobile.activeBtnClass ) || $btn.hasClass( "ui-disabled" ) ) ) {
+			if ( $btn.length > 0 && !$btn.hasClass( "ui-disabled" ) ) {
 				removeActiveLinkClass( true );
 				$activeClickedLink = $btn;
 				$activeClickedLink.addClass( $.mobile.activeBtnClass );

@@ -308,7 +308,6 @@ div.jqm-demo-link {
 .jqm-demo .ui-collapsible-content::-webkit-scrollbar-track {
     background: transparent;
 }
- 
 .jqm-demo .ui-collapsible-content::-webkit-scrollbar-thumb {
 	background: #435A5F;
 	border: solid #222;

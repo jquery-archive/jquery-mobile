@@ -15,7 +15,7 @@
 		setup: function(){
 
 			// ensure bindings are removed
-			$.each(events + "vmouseup vmousedown".split(" "), function(i, name){
+			$.each( events.concat( "vmouseup vmousedown".split(" ") ), function(i, name){
 				$("#qunit-fixture").unbind();
 			});
 

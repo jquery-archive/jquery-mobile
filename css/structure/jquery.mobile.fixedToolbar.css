@@ -34,8 +34,8 @@
 .ui-page-footer-fixed {
 	padding-bottom: 2.6875em;
 }
-.ui-page-header-fullscreen .ui-content,
-.ui-page-footer-fullscreen .ui-content {
+.ui-page-header-fullscreen > .ui-content,
+.ui-page-footer-fullscreen > .ui-content {
 	padding: 0;
 }
 .ui-fixed-hidden {

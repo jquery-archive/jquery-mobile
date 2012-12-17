@@ -13,42 +13,15 @@
 		$( document ).on( "pageinit", "#demo-page", function() {
 			
 			// Swipe to remove list item
-			$( document ).on( "swipeleft swiperight", "#list .ui-li", function( event ) {
-				var dir = event.type === "swipeleft" ? "left" : "right",
-					listitem = $( this );
-
-				// Inject topic in confirmation popup after removing any previous injected topics
-				$( "#confirm .topic" ).remove();
-				listitem.find( ".topic" ).clone().insertAfter( "#question" );
-					
-				// Show the confirmation popup
-				$( "#confirm" ).popup( "open" );
-				
-				$( "#confirm #yes" ).on( "click", function() {
-					
+			$( document ).on( "swipeleft swiperight", "#list li.ui-li", function( event ) {
+				var listitem = $( this ),
+					// These are the classnames used for the CSS transition
+					dir = event.type === "swipeleft" ? "left" : "right",
 					// Check if the browser supports the transform (3D) CSS transition
-					// TO DO: CHANGE .touch INTO .cssTransform3d WHEN THE SUPPORT TEST HAS BEEN FIXED: #5359
-					if ( $.mobile.support.touch ) {
-						
-						listitem
-							// Add the class for the transition
-							.addClass( dir )
-							// When the transition is done...
-							.on( "webkitTransitionEnd transitionend otransitionend", function() {
-								// ...the list item will be removed
-								listitem.remove();
-								// ...the list will be refreshed and the temporary class for border styling removed
-								$( "#list" ).listview( "refresh" ).find( ".ui-li.border" ).removeClass( "border" );
-							})
-							// During the transition the previous list item should get bottom border
-							.prev( ".ui-li" ).addClass( "border" );
-					}
-					// If the CSS transition isn't supported just remove the list item and refresh the list
-					else {
-						listitem.remove();
-						$( "#list" ).listview( "refresh" );
-					}
-				});
+					// TO DO: CHANGE INTO "$.mobile.support.cssTransform3d" WHEN THE SUPPORT TEST HAS BEEN FIXED: #5359
+					transition = $.mobile.support.touch ? dir : false;
+					
+					confirmAndDelete( listitem, transition );
 			});
 
 			// If it's not a touch device...
@@ -59,29 +32,52 @@
 				
 				// Click delete split-button to remove list item
 				$( ".delete" ).on( "click", function() {
-					var splitbutton = $( this );
+					var listitem = $( this ).parent( "li.ui-li" );
 					
-					// Inject topic in confirmation popup after removing any previous injected topics
-					$( "#confirm .topic" ).remove();
-					splitbutton.parent( ".ui-li" ).find( ".topic" ).clone().insertAfter( "#question" );
-
-					// Show the confirmation popup
-					$( "#confirm" ).popup( "open" );
-					
-					$( "#confirm #yes" ).on( "click", function() {
-
-						// Remove the list item and refresh the list
-						splitbutton.parent( ".ui-li" ).remove();
-						$( "#list" ).listview( "refresh" );
-					});
+					confirmAndDelete( listitem );
 				});
 			}
-			
-			// Unbind when the cancel button is clicked
-			$( "#confirm #cancel" ).on( "click", function() {
-				$( "#confirm #yes" ).off();	
-			});
 
+			function confirmAndDelete( listitem, transition ) {
+				// Highlight the list item that will be removed
+				listitem.addClass( "ui-btn-down-d" );
+				// Inject topic in confirmation popup after removing any previous injected topics
+				$( "#confirm .topic" ).remove();
+				listitem.find( ".topic" ).clone().insertAfter( "#question" );
+				// Show the confirmation popup
+				$( "#confirm" ).popup( "open" );
+				// Proceed when the user confirms
+				$( "#confirm #yes" ).on( "click", function() {
+					// Remove with a transition
+					if ( transition ) {
+						
+						listitem
+							// Remove the highlight
+							.removeClass( "ui-btn-down-d" )
+							// Add the class for the transition direction
+							.addClass( transition )
+							// When the transition is done...
+							.on( "webkitTransitionEnd transitionend otransitionend", function() {
+								// ...the list item will be removed
+								listitem.remove();
+								// ...the list will be refreshed and the temporary class for border styling removed
+								$( "#list" ).listview( "refresh" ).find( ".ui-li.border" ).removeClass( "border" );
+							})
+							// During the transition the previous list item should get bottom border
+							.prev( "li.ui-li" ).addClass( "border" );
+					}
+					// If it's not a touch device or the CSS transition isn't supported just remove the list item and refresh the list
+					else {
+						listitem.remove();
+						$( "#list" ).listview( "refresh" );
+					}
+				});
+				// Remove active state and unbind when the cancel button is clicked
+				$( "#confirm #cancel" ).on( "click", function() {
+					listitem.removeClass( "ui-btn-down-d" );
+					$( "#confirm #yes" ).off();	
+				});
+			}
 		});
     </script>
 	<style>
@@ -124,7 +120,10 @@
 		}
 		/* Custom styling for the popup */
 		#confirm {
-			border: 1px solid rgba(4,64,98,.4);
+			border: 1px solid;
+			border-color: #044062; /* Fallback for older browsers */
+			border-color: rgba(4,64,98,.4);
+			background: #456f9a; /* Fallback for older browsers */
 			background: rgba(69,111,154,.8);
 			-moz-box-shadow: 0 2px 6px rgba(69,111,154,.5), inset 0 1px rgba(255,255,255,.3), inset 0 6px rgba(255,255,255,.1), inset 0 10px 20px rgba(255,255,255,.25), inset 0 -15px 30px rgba(69,111,154,.3);
 			-webkit-box-shadow: 0 2px 6px rgba(69,111,154,.5), inset 0 1px rgba(255,255,255,.3), inset 0 6px rgba(255,255,255,.1), inset 0 10px 20px rgba(255,255,255,.25), inset 0 -15px 30px rgba(69,111,154,.3);
@@ -152,9 +151,9 @@
 </head>
 <body>
 
-<div data-role="page" id="demo-intro" data-theme="d">
+<div data-role="page" id="demo-intro" data-theme="c">
 
-    <div data-role="header" data-theme="b">
+    <div data-role="header" data-theme="f">
         <h1>Swipe list demo</h1>
         <a href="../" data-icon="home" data-iconpos="notext" data-shadow="false" data-icon-shadow="false" data-ajax="false">Home</a>
     </div><!-- /header -->
@@ -163,7 +162,7 @@
 
 		<div class="content-primary">
         
-        	<h2>Using swipe event to remove a list item</h2>
+        	<h2>Swipe to remove a list item</h2>
         
             <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true">
             	<p>This demo shows how you can remove list items by swiping left or right. For devices without touchscreen there is a delete button. This demo also contains a custom styled confirmation popup.</p>
@@ -319,7 +318,7 @@
 
     </div><!-- /content -->
     
-    <div id="confirm" class="ui-content" data-role="popup" data-overlay-theme="a" data-theme="none">
+    <div id="confirm" class="ui-content" data-role="popup" data-theme="none">
         
         <p id="question">Are you sure you want to delete</p>
         

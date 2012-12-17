@@ -11,7 +11,7 @@
 	<script src="../../../js/"></script>
 	
 	<!-- We're using a style block to make it easy to view the custom styles -->
-	<!-- In production, these should be added to an custom.css file loaded in the head -->
+	<!-- In production, these should be added to a custom.css file loaded in the head -->
 	<style>
 	/* stack all grids below 40em (640px) */
 	@media all and (max-width: 35em) {
@@ -44,9 +44,9 @@
 			
 			<p>We normally recommend writing breakpoints using <code>min-width</code> breakpoints to progressively layer styles over multiple breakpoints, from the smallest to widest screens. </p>
 			
-			<p>However, in this situation since we just want to override the floats and widths of the standard grid styles <em>below</em> a single breakpoint it's simpler to add a <code>max-width</code> breakpoints that will only apply the stacked styling below a certain width. This allows us to take advantage of all the default grid styles above that breakpoint width.</p>
+			<p>However, in this situation since we just want to override the floats and widths of the standard grid styles <em>below</em> a single breakpoint it's simpler to add a <code>max-width</code> breakpoint that will only apply the stacked styling below a certain width. This allows us to take advantage of all the default grid styles above that breakpoint width.</p>
 			
-			<p>To make this all work, add a class (<code>my-breakpoint</code>) to the grid container to scope the stacked styles for each block class within breakpoint's media query. The styles within the breakpoint to make all the blocks stack are really concise:</p>
+			<p>To make this all work, add a class (<code>my-breakpoint</code>) to the grid container to scope the stacked styles for each block class within the breakpoint's media query. The styles within the breakpoint to make all the blocks stack are really concise:</p>
 			
 <pre><code>
 /* stack all grids below 40em (640px) */

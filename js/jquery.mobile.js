@@ -31,6 +31,7 @@ define([
 	'./widgets/controlgroup',
 	'./jquery.mobile.links',
 	'./widgets/fixedToolbar',
+	'./widgets/fixedToolbar.workarounds',
 	'./widgets/popup',
 	'./widgets/table',
 	'./widgets/table.columntoggle',

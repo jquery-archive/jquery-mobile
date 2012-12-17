@@ -65,106 +65,88 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 }
 
 // View demo source code
+
+function attachPopupHandler( popup, sources ) {
+	popup.one( "popupbeforeposition", function() {
+		var
+			collapsibleSet = popup.find( "[data-role='collapsible-set']" ),
+			collapsible, pre;
+
+		$.each( sources, function( idx, options ) {
+			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-content-theme='a'>" +
+					"<h1>" + options.title + "</h1>" +
+					"<pre class='brush: " + options.brush + ";'></pre>" +
+				"</div>" );
+			pre = collapsible.find( "pre" );
+			pre.append( options.data.replace( /</gmi, '&lt;' ) );
+			collapsible.appendTo( collapsibleSet );
+			SyntaxHighlighter.highlight( {}, pre[ 0 ] );
+		});
+
+		collapsibleSet.find( "[data-role='collapsible']" ).first().attr( "data-collapsed", "false" );
+		popup.trigger( "create" );
+	});
+}
+
+var demoId = 0;
+
+function getHeadSnippet( type, selector ) {
+	if ( selector === "true" ) {
+		selector = "";
+	}
+	return $( "<div></div>" ).append( $( "head" ).find( type + selector ).contents().clone() ).html();
+}
+
 $.fn.viewSourceCode = function() {
-	var demoId = 0;
-	
+
 	return $( this ).each( function() {
 		demoId++
 		var button = $( "<div class='jqm-demo-link'><a href='#jqm-demo-" + demoId + "' data-rel='popup' data-role='button' data-icon='arrow-u' data-mini='true' data-inline='true' data-shadow='false'>View Source</a></div>" ),
 			popup = $( "<div id='jqm-demo-" + demoId + "' class='jqm-demo' data-role='popup' data-theme='none' data-position-to='window'>" +
 					"<div data-role='collapsible-set' data-inset='true'></div>" +
 				"</div>" ),
-			collapsibleSet = popup.find( "[data-role='collapsible-set']" ),
-			page = $( this ).closest( "[data-role='page']" ),
-			php, html, js, css, collapsiblePHP, collapsibleHTML, collapsibleJS, collapsibleCSS;
-		
-		function appendSource( code, collapsible ){
-			var escaped = code.replace( /</gmi, '&lt;' );
-				
-			collapsible.find( "pre" ).append( escaped );
-			collapsible.appendTo( collapsibleSet );
-		};
+			self = $( this ),
+			page = self.closest( "[data-role='page']" ),
+			data,
+			sources = [];
 
-		if ( $( this ).is( "[data-demo-html]" ) ) {
-			var markupId = $( this ).attr( "data-demo-html" );
+		// Collect source code before it becomes enhanced
 
-			if ( markupId === "true" ) {
-				var element = $( this );
+		if ( self.is( "[data-demo-html]" ) ) {
+			if ( self.attr( "data-demo-html" ) === "true" ) {
+				data = self.html();
+			} else {
+				data = $( "<div></div>" ).append( $( self.attr( "data-demo-html" ) ).clone() ).html();
 			}
-			else {
-				var element = $( markupId );
-			}
-			
-			html = $( "<div></div>" ).append( element.clone() ).html();
-			
-			collapsibleHTML = $( "<div data-role='collapsible' data-collapsed='true' data-theme='b' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>HTML</h1>" +
-					"<pre class='brush: xml;'></pre>" +
-				"</div>" );
-				
-			appendSource( html, collapsibleHTML );
+			sources.push( { title: "HTML", theme: "b", brush: "xml", data: data } );
 		}
-		if ( $( this ).is( "[data-demo-php]" ) ) {
-			collapsiblePHP = $( "<div data-role='collapsible' data-collapsed='true' data-theme='g' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>PHP</h1>" +
-					"<p class='phpStatus'>Loading PHP source ...</p>" +
-					"<pre class='brush: php;'></pre>" +
-				"</div>" );
 
-			var phpSource = $( this ).attr( "data-demo-php" ),
-				source = phpSource + ".php?source";
-
-			$.ajax( source )
-				.success( function( data ) {
-					php = $( data ).text();
-					php.replace( /</gmi, '&lt;' );
-					collapsiblePHP.find( ".phpStatus" ).remove();
-					collapsiblePHP.find( "pre" ).append( php );
+		if ( self.is( "[data-demo-php]" ) ) {
+			$.ajax( self.attr( "data-demo-php" ), { async: false } )
+				.success( function( incoming ) {
+					data = incoming;
 				})
 				.error( function() {
-					collapsiblePHP.find( "pre" ).remove();
-					collapsiblePHP.find( ".phpStatus" ).html( "Failed to retrieve PHP source" );
+					data = "// Failed to retrieve PHP source code";
 				});
 
-			collapsiblePHP.appendTo( collapsibleSet );
-		}
-		if ( $( this ).is( "[data-demo-js]" ) ) {
-			var scriptId = $( this ).attr( "data-demo-js" );
-
-			if ( scriptId === "true" ) {
-				scriptId = "";
-			}
-			
-			js = $( "<div></div>" ).append( $( "head" ).find( "script" + scriptId ).contents().clone() ).html();
-			
-			collapsibleJS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='f' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>JS</h1>" +
-					"<pre class='brush: js;'></pre>" +
-				"</div>" );
-				
-			appendSource( js, collapsibleJS );
-		}
-		if ( $( this ).is( "[data-demo-css]" ) ) {
-			var styleId = $( this ).attr( "data-demo-css" );
-
-			if ( styleId === "true" ) {
-				styleId = "";
-			}
-			
-			css = $( "<div></div>" ).append( $( "head" ).find( "style" + styleId ).contents().clone() ).html();
-			
-			collapsibleCSS = $( "<div data-role='collapsible' data-collapsed='true' data-theme='e' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>CSS</h1>" +
-					"<pre class='brush: css;'></pre>" +
-				"</div>" );
-				
-			appendSource( css, collapsibleCSS );
+			sources.push( { title: "PHP", theme: "g", brush: "php", data: data } );
 		}
 
-		collapsibleSet.find( "[data-role='collapsible']" ).first().attr( "data-collapsed", "false" );
+		if ( self.is( "[data-demo-js]" ) ) {
+			data = getHeadSnippet( "script", self.attr( "data-demo-js" ) );
+			sources.push( { title: "JS", theme: "f", brush: "js", data: data } );
+		}
+
+		if ( self.is( "[data-demo-css]" ) ) {
+			data = getHeadSnippet( "style", self.attr( "data-demo-css" ) );
+			sources.push( { title: "CSS", theme: "e", brush: "css", data: data } );
+		}
+
+		attachPopupHandler( popup, sources );
 		button.insertAfter( this );
 		popup.appendTo( page );
-		
+
 	});
 };
 
@@ -172,21 +154,20 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 	$( this ).find( "[data-demo-html='true'], [data-demo-js], [data-demo-css], [data-demo-php]" ).viewSourceCode();
 	SyntaxHighlighter.defaults['toolbar'] = false;
 	SyntaxHighlighter.defaults['auto-links'] = false;
-	SyntaxHighlighter.all();
 });
 
-$( document ).on( "pageinit", function() {
+$( document ).on( "pageinit", function( e ) {
 	// prevent page scroll while scrolling source code
-	$( ".jqm-demo .ui-collapsible-content" ).on( "mousewheel", function( e, d ) {  
-		if ( d > 0 && $( this ).scrollTop() == 0 ) { 
-			e.preventDefault();
-		} else if ( d < 0 &&  $( this ).scrollTop() == $( this ).get(0).scrollHeight - $( this ).innerHeight() ) {  
-			e.preventDefault(); 
+	$( document ).on( "mousewheel", ".jqm-demo .ui-collapsible-content", function( event, delta ) {
+		if ( delta > 0 && $( this ).scrollTop() === 0 ) {
+			event.preventDefault();
+		} else if ( delta < 0 &&  $( this ).scrollTop() === $( this ).get( 0 ).scrollHeight - $( this ).innerHeight() ) {
+			event.preventDefault();
 		}
 	});
 	
 	// reposition when switching between html / js / css
-	$( ".jqm-demo .ui-collapsible" ).on( "expand", function() {
+	$( e.target ).delegate( ".jqm-demo .ui-collapsible", "expand", function() {
 		$( this ).parents( ".jqm-demo" ).trigger( "resize" );
 	});
 
@@ -194,12 +175,12 @@ $( document ).on( "pageinit", function() {
 		// max height: screen height - tolerance (2*30px) - 42px for each collapsible heading
 		var x = $( this ).find( ".ui-collapsible" ).length,
 			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
-		
+
 		$( this ).find( ".ui-collapsible-content" ).css( "max-height", maxHeight + "px" );
-		
+
 		// keep line numbers and code lines in sync
 		$(".ui-collapsible:not(.ui-collapsible-collapsed) .gutter", this ).find( ".line" ).css( "height", "");
-			
+
 		$(".ui-collapsible:not(.ui-collapsible-collapsed) .code", this ).find( ".line" ).each( function() {
 			if ( $( this ).height() !== 16 ) {
 				var height = $( this ).height(),
@@ -222,7 +203,7 @@ $( document ).on( "pageinit", function() {
  *
  * @version
  * 3.0.83 (July 02 2010)
- * 
+ *
  * @copyright
  * Copyright (C) 2004-2010 Alex Gorbatchev.
  *
@@ -245,8 +226,8 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 				tag = new XRegExp('(&lt;|<)[\\s\\/\\?]*(?<name>[:\\w-\\.]+)', 'xg').exec(code),
 				result = []
 				;
-		
-			if (match.attributes != null) 
+
+			if (match.attributes != null)
 			{
 				var attributes,
 					regex = new XRegExp('(?<name> [\\w:\\-\\.]+)' +
@@ -254,7 +235,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 										'(?<value> ".*?"|\'.*?\'|\\w+)',
 										'xg');
 
-				while ((attributes = regex.exec(code)) != null) 
+				while ((attributes = regex.exec(code)) != null)
 				{
 					result.push(new constructor(attributes.name, match.index + attributes.index, 'color1'));
 					result.push(new constructor(attributes.value, match.index + attributes.index + attributes[0].indexOf(attributes.value), 'string'));
@@ -268,7 +249,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 
 			return result;
 		}
-	
+
 		this.regexList = [
 			{ regex: new XRegExp('(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|>)', 'gm'),			css: 'color2' },	// <![ ... [ ... ]]>
 			{ regex: SyntaxHighlighter.regexLib.xmlComments,												css: 'comments' },	// <!-- ... -->
@@ -300,7 +281,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 						;
 
 		var r = SyntaxHighlighter.regexLib;
-		
+
 		this.regexList = [
 			{ regex: r.multiLineDoubleQuotedString,					css: 'string' },			// double quoted strings
 			{ regex: r.multiLineSingleQuotedString,					css: 'string' },			// single quoted strings
@@ -309,7 +290,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 			{ regex: /\s*#.*/gm,									css: 'preprocessor' },		// preprocessor tags like #region and #endregion
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),	css: 'keyword' }			// keywords
 			];
-	
+
 		this.forHtmlScript(r.scriptScriptTags);
 	};
 
@@ -333,7 +314,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 		{
 			return '\\b([a-z_]|)' + str.replace(/ /g, '(?=:)\\b|\\b([a-z_\\*]|\\*|)') + '(?=:)\\b';
 		};
-	
+
 		function getValuesCSS(str)
 		{
 			return '\\b' + str.replace(/ /g, '(?!-)(?!:)\\b|\\b()') + '\:\\b';
@@ -370,7 +351,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 						'upper-roman url visible wait white wider w-resize x-fast x-high x-large x-loud x-low x-slow x-small x-soft xx-large xx-small yellow';
 
 		var fonts =		'[mM]onospace [tT]ahoma [vV]erdana [aA]rial [hH]elvetica [sS]ans-serif [sS]erif [cC]ourier mono sans serif';
-	
+
 		this.regexList = [
 			{ regex: SyntaxHighlighter.regexLib.multiLineCComments,		css: 'comments' },	// multiline comments
 			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,		css: 'string' },	// double quoted strings
@@ -383,9 +364,9 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 			{ regex: new RegExp(this.getKeywords(fonts), 'g'),			css: 'color1' }		// fonts
 			];
 
-		this.forHtmlScript({ 
-			left: /(&lt;|<)\s*style.*?(&gt;|>)/gi, 
-			right: /(&lt;|<)\/\s*style\s*(&gt;|>)/gi 
+		this.forHtmlScript({
+			left: /(&lt;|<)\s*style.*?(&gt;|>)/gi,
+			right: /(&lt;|<)\/\s*style\s*(&gt;|>)/gi
 			});
 	};
 
@@ -445,7 +426,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 						'function include include_once global goto if implements interface instanceof namespace new ' +
 						'old_function or private protected public return require require_once static switch ' +
 						'throw try use var while xor ';
-		
+
 		var constants	= '__FILE__ __LINE__ __METHOD__ __FUNCTION__ __CLASS__';
 
 		this.regexList = [
@@ -480,13 +461,13 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
  * Thanks to: Seamus Leahy for adding deltaX and deltaY
  *
  * Version: 3.0.6
- * 
+ *
  * Requires: 1.2.2+
  */
 
 (function($) {
 	var types = ['DOMMouseScroll', 'mousewheel'];
-	
+
 	if ($.event.fixHooks) {
 		for ( var i=types.length; i; ) {
 			$.event.fixHooks[ types[--i] ] = $.event.mouseHooks;
@@ -516,7 +497,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 		mousewheel: function(fn) {
 			return fn ? this.bind("mousewheel", fn) : this.trigger("mousewheel");
 		},
-		
+
 		unmousewheel: function(fn) {
 			return this.unbind("mousewheel", fn);
 		}
@@ -525,7 +506,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 		var orgEvent = event || window.event, args = [].slice.call( arguments, 1 ), delta = 0, returnValue = true, deltaX = 0, deltaY = 0;
 		event = $.event.fix(orgEvent);
 		event.type = "mousewheel";
-		
+
 		// Old school scrollwheel delta
 		if ( orgEvent.wheelDelta ) { delta = orgEvent.wheelDelta/120; }
 		if ( orgEvent.detail     ) { delta = -orgEvent.detail/3; }
@@ -541,7 +522,7 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 		if ( orgEvent.wheelDeltaX !== undefined ) { deltaX = -1*orgEvent.wheelDeltaX/120; }
 		// Add event and delta to the front of the arguments
 		args.unshift(event, delta, deltaX, deltaY);
-		
+
 		return ($.event.dispatch || $.event.handle).apply(this, args);
 	}
 })(jQuery);
