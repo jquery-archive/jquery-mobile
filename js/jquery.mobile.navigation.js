@@ -656,7 +656,6 @@ define( [
 		// Let listeners know we're about to change the current page.
 		mpc.trigger( pbcEvent, triggerData );
 
-
 		// If the default behavior is prevented, stop here!
 		if ( pbcEvent.isDefaultPrevented() ) {
 			return;
@@ -664,8 +663,12 @@ define( [
 
 		// We allow "pagebeforechange" observers to modify the toPage in the trigger
 		// data to allow for redirects. Make sure our toPage is updated.
+		//
+		// We also need to re-evaluate whether it is a string, because an object can
+		// also be replaced by a string
 
 		toPage = triggerData.toPage;
+		isToPageString = (typeof toPage === "string");
 
 		// Set the isPageTransitioning flag to prevent any requests from
 		// entering this method while we are in the midst of loading a page
