@@ -23,7 +23,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
 			pagePanel: "ui-page-panel",
-			panelAnimating: "ui-page-panel-animating"
+			pageChildAnimations: "ui-page-panel-animate"
 		},
 		animate: true,
 		theme: null,
@@ -60,6 +60,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		// if animating, add the class to do so
 		if ( $.support.cssTransitions && self.options.animate ) {
 			this.element.add( self._wrapper ).addClass( "ui-panel-animate" );
+			self._page.addClass( this.options.classes.pageChildAnimations );
 		}
 
 		self._bindCloseEvents();
@@ -69,8 +70,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( self.options.dismissible ){
 			self._createModal();
 		}
-
-		self._page.addClass( this.options.classes.pagePanel );
 
 		// move the panel to the right place in the DOM
 		self.element[ this.options.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
