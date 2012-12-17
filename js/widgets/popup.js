@@ -126,10 +126,8 @@ define( [
 				if ( !this._expectResizeEvent() ) {
 					if ( this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 						// effectively rapid-open the popup while leaving the screen intact
-						this._trigger( "beforeposition" );
-						this._ui.container
-							.removeClass( "ui-popup-hidden" )
-							.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+						this._ui.container.removeClass( "ui-popup-hidden" );
+						this.reposition( { positionTo: "window" } );
 					}
 
 					this._resizeScreen();
@@ -494,17 +492,18 @@ define( [
 		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
 		// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
-		_desiredCoords: function( x, y, positionTo ) {
-			var dst = null, offset, winCoords = windowCoords();
+		// options: { x: coordinate, y: coordinate, positionTo: string: "origin", "window", or jQuery selector
+		_desiredCoords: function( o ) {
+			var dst = null, offset, winCoords = windowCoords(), x = o.x, y = o.y, pTo = o.positionTo;
 
 			// Establish which element will serve as the reference
-			if ( positionTo && positionTo !== "origin" ) {
-				if ( positionTo === "window" ) {
+			if ( pTo && pTo !== "origin" ) {
+				if ( pTo === "window" ) {
 					x = winCoords.cx / 2 + winCoords.x;
 					y = winCoords.cy / 2 + winCoords.y;
 				} else {
 					try {
-						dst = $( positionTo );
+						dst = $( pTo );
 					} catch( e ) {
 						dst = null;
 					}
@@ -533,6 +532,13 @@ define( [
 			}
 
 			return { x: x, y: y };
+		},
+
+		reposition: function( o ) {
+			if ( this._isOpen ) {
+				this._trigger( "beforeposition" );
+				this._ui.container.offset( this._placementCoords( this._desiredCoords( o ) ) );
+			}
 		},
 
 		_openPrereqsComplete: function() {
@@ -568,7 +574,7 @@ define( [
 			// Give applications a chance to modify the contents of the container before it appears
 			this._trigger( "beforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( o.x, o.y, o.positionTo ) );
+			coords = this._placementCoords( this._desiredCoords( o ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
