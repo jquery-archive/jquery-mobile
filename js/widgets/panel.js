@@ -20,6 +20,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			openComplete: "ui-panel-open-complete",
 			contentWrap: "ui-panel-content-wrap",
 			contentWrapOpen: "ui-panel-content-wrap-open",
+			contentWrapClosed: "ui-panel-content-wrap-closed",
 			panelUnfixed: "ui-panel-unfixed",
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
@@ -57,6 +58,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._page = $el.closest( ":jqmData(role='page')" );
 		self._wrapper = _getWrapper();
 		self._addPanelClasses();
+		self._wrapper.addClass( this.options.classes.contentWrapClosed );
 
 		// if animating, add the class to do so
 		if ( $.support.cssTransitions && self.options.animate ) {
@@ -217,6 +219,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self.element.removeClass( o.classes.panelClosed );
 		self.element.addClass( o.classes.panelOpen );
 		self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
+		self._wrapper.removeClass( o.classes.contentWrapClosed );
 		self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
 		self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
 		self._modal.addClass( self._modalOpenClasses );
@@ -232,6 +235,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
 				self.element.addClass( o.classes.panelClosed );
 				self._wrapper.removeClass( self._contentWrapOpenClasses );
+				self._wrapper.addClass( o.classes.contentWrapClosed );
 				self._page.removeClass( self.options.classes.pageBlock );
 				self._fixPanel();
 				self._unbindFixListener();

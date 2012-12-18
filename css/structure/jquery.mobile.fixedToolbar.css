@@ -49,6 +49,13 @@
 .ui-footer-fixed .ui-btn { 
 	z-index: 10;
 }
+/* workarounds for other widgets */
 .ui-android-2x-fixed .ui-li-has-thumb {
 	-webkit-transform: translate3d(0,0,0);
+}
+.ui-panel-content-wrap .ui-header-fixed {
+	-webkit-transform: translateY(-100%);
+}
+.ui-panel-content-wrap-closed .ui-header-fixed {
+	-webkit-transform: none;
 }
