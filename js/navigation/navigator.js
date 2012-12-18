@@ -2,7 +2,7 @@
 //>>description: Navigation Manager
 //>>label: AJAX Navigation System
 //>>group: Navigation
-define([ "jquery", "./events/navigate", "./path", "./history" ], function( $ ) {
+define([ "jquery", "./event", "./path", "./history" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var path = $.mobile.path;
