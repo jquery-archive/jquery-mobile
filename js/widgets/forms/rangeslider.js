@@ -55,7 +55,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			
 			this.refresh();
 			this._on( this.element.find( "input.ui-slider-input" ), {
-				"slidebeforestart": "_sliderbeforestart",
+				"slidebeforestart": "_slidebeforestart",
 				"slidestop": "_slidestop",
 				"slidedrag": "_slidedrag",
 				"change": "_change",
