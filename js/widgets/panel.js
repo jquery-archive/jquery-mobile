@@ -234,7 +234,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self._fixPanel();
 				self._unbindFixListener();
 				self._trigger( "close" );
-				complete = null;
 			};
 
 		self._trigger( "beforeclose" );
