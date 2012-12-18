@@ -124,6 +124,8 @@ define([ "jquery", "./path" ], function( $ ) {
 			}
 		}
 	});
-
 })( jQuery );
+
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
+//>>excludeEnd("jqmBuildExclude");
