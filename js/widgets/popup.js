@@ -705,7 +705,7 @@ define( [
 		},
 
 		_closePopup: function( e, data ) {
-			var parsedDst, toUrl, o = this.options, close = { method: "_close" };
+			var parsedDst, toUrl, o = this.options, immediate = false;
 
 			// restore location on screen
 			window.scrollTo( 0, this._scrollTop );
@@ -721,22 +721,20 @@ define( [
 				parsedDst = $.mobile.path.parseUrl( parsedDst );
 				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
 
-				if ( this._myUrl !== toUrl ) {
+				if ( this._myUrl !== $.mobile.path.makeUrlAbsolute( toUrl ) ) {
 					// Going to a different page - close immediately
-					close.arg = true;
+					immediate = true;
 				} else {
-					close.method = "close";
 					e.preventDefault();
 				}
 			}
 
-			if ( close.method === "_close" ) {
-				// remove nav bindings
-				o.container.unbind( o.closeEvents );
-				// unbind click handlers added when history is disabled
-				this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
-			}
-			this[ close.method ]( close.arg );
+			// remove nav bindings
+			o.container.unbind( o.closeEvents );
+			// unbind click handlers added when history is disabled
+			this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
+
+			this._close( immediate );
 		},
 
 		// any navigation event after a popup is opened should close the popup
