@@ -22,16 +22,6 @@
 	transition: transform 350ms ease;
 }
 
-/* during transitions, this class is added to the page, which triggers hw accel */
-.ui-page-panel-animate,
-.ui-page-panel-animate * {
-	-webkit-transform: translateZ(0);
-	-moz-transform: translateZ(0);
-	-o-transform: translateZ(0);
-	-ms-transform: translateZ(0);
-	transform: translateZ(0);
-}
-
 /* z stacking */
 .ui-panel-display-overlay,
 .ui-panel-display-push,
