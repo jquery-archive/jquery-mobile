@@ -70,17 +70,23 @@ $.testHelper.setPushState();
 
 	if( $.support.pushState ) {
 		asyncTest( "popstate navigation events contain pushed state", function() {
-			$( window ).one( "navigate", function( event, data ) {
-				$( window ).one( "navigate", function( event, data ) {
+			$.testHelper.eventTarget = $( window );
+
+			$.testHelper.eventSequence( "navigate", [
+				function() {
+					window.history.replaceState({ foo: "bar" }, document.title, location.href.replace(/#.*/, "" ) + "#foo");
+					location.hash = "#foo2";
+				},
+
+				function() {
+					window.history.back();
+				},
+
+				function( timedOut, data ) {
 					equal( data.state.foo, "bar", "state provided properly" );
 					start();
-				});
-
-				window.history.back();
-			});
-
-			window.history.replaceState({ foo: "bar" }, document.title, location.href.replace(/#.*/, "" ) + "#foo");
-			location.hash = "#foo2";
+				}
+			]);
 		});
 	} else {
 		// Make sure the binding happends before any of the navigate bindings
