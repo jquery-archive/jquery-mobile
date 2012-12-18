@@ -4,21 +4,36 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Sequence Test Suite</title>
-
+	<script src="../../../../external/requirejs/require.js"></script>
 	<script src="../../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../jquery.setNameSpace.js"></script>
-	<script src="../../../../tests/jquery.testHelper.js"></script>
 	<script>
 		$(document).bind('mobileinit',function(){
 			// Expect content to inherit this theme when not explicitly set
 			$.mobile.page.prototype.options.contentTheme = "d";
 		});
 	</script>
-	<script src="../../../../js/"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
+	<script src="../../../jquery.testHelper.js"></script>
+	<script src="../../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/dialog",
+				"widgets/page",
+				"widgets/page.sections",
+				"widgets/popup"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"sequence_tests.js"
+			]
+		], "../../../../js");
+	</script>
+
+
 	<link rel="stylesheet" href="../../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../../external/qunit.css"/>
-	<script src="../../../../external/qunit.js"></script>
-	<script src="sequence_tests.js"></script>
+
 	<script src="../../swarminject.js"></script>
 </head>
 <body>
