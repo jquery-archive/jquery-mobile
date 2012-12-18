@@ -56,6 +56,23 @@ $.testHelper.delayStart();
 		]);
 	});
 
+	asyncTest( "external empty page does not result in any contents", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( "blank.html" );
+			},
+
+			function() {
+				deepEqual( $.mobile.activePage.contents().length, 0, "A blank page has no contents" );
+				$.mobile.back();
+			},
+
+			function() {
+				start( 1000 );
+			}
+		]);
+	});
+
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			function() {
