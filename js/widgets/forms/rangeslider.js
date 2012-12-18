@@ -40,7 +40,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			sliders = $el.find( ".ui-rangeslider-sliders" );
 			sliderFirst.appendTo( sliders );
 			sliderLast.appendTo( sliders );
-			label.prependTo($el);
+			label.prependTo( $el );
 			
 			$.extend( this, {
 				inputFirst: inputFirst,
@@ -48,34 +48,16 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				sliderFirst: sliderFirst,
 				sliderLast: sliderLast,
 				targetVal: null,
-				sliderTarget:false,
+				sliderTarget: false,
 				sliders: sliders,
-				proxy:false
+				proxy: false
 			});
 			
 			this.refresh();
 			this._on( this.element.find( "input.ui-slider-input" ), {
-				"slidebeforestart": function( event ){
-					this.sliderTarget = false;
-					if($(event.originalEvent.target).hasClass("ui-slider")){
-						this.sliderTarget = true;
-						this.targetVal = $(event.target).val();
-					}
-				},
-				"slidestop": function(){
-					this.proxy = false;
-					this.element.find("input").trigger("vmouseup");
-				},
-				"slidedrag":function(event){
-					var first = ($(event.target).is(this.inputFirst))? true:false,
-						otherSlider = (first)? this.inputLast: this.inputFirst;
-						this.sliderTarget = false;
-					if((this.proxy == "first" && first) || (this.proxy == "last" && !first)){
-						otherSlider.data("mobileSlider").dragging = true;
-						otherSlider.data("mobileSlider").refresh(event);
-						return false;
-					}
-				},
+				"slidebeforestart": "_sliderbeforestart",
+				"slidestop": "_slidestop",
+				"slidedrag": "_slidedrag",
 				"change": "_change",
 				"blur": "_change",
 				"keyup": "_change"
@@ -88,7 +70,31 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 		},
 
-		_setOption: function( options ){
+		_slidedrag: function( event ) {
+			var first = ($(event.target).is(this.inputFirst))? true:false,
+				otherSlider = (first)? this.inputLast: this.inputFirst;
+				this.sliderTarget = false;
+			if( ( this.proxy == "first" && first ) || (this.proxy == "last" && !first ) ) {
+				otherSlider.data( "mobileSlider" ).dragging = true;
+				otherSlider.data("mobileSlider").refresh(event);
+				return false;
+			}
+		},
+
+		_slidestop: function() {
+			this.proxy = false;
+			this.element.find( "input" ).trigger( "vmouseup" );
+		},
+
+		_slidebeforestart: function( event ) {
+			this.sliderTarget = false;
+			if($(event.originalEvent.target).hasClass( "ui-slider" )){
+				this.sliderTarget = true;
+				this.targetVal = $( event.target ).val();
+			}
+		},
+
+		_setOption: function( options ) {
 			this.superApply( options );
 			this.refresh();
 		},
@@ -118,19 +124,20 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
 				thisSlider = first? this.inputFirst: this.inputLast,
 				otherSlider = first? this.inputLast: this.inputFirst;
-				if( min > max && !this.sliderTarget)  {
-					thisSlider.val(first ? max: min).slider( "refresh" );
-				} else if ( min > max ) {
-					thisSlider.val(this.targetVal).slider("refresh");
-					var self = this;
-					setTimeout(function(){
-						otherSlider.val(first? min: max).slider("refresh");
-						otherSlider.data("mobileSlider").handle.focus();
-						self.sliderFirst.css( "z-index", first ? "" : 1 );
-					},0);
-					this.proxy = (first)? "first":"last";
-				}
-				this._updateHighlight();
+			if( min > max && !this.sliderTarget)  {
+				thisSlider.val(first ? max: min).slider( "refresh" );
+			} else if ( min > max ) {
+				thisSlider.val(this.targetVal).slider( "refresh" );
+				var self = this;
+				//You must wait for the stack to unwind so first slider is updated before updating second
+				setTimeout(function(){
+					otherSlider.val(first? min: max).slider( "refresh" );
+					otherSlider.data( "mobileSlider" ).handle.focus();
+					self.sliderFirst.css( "z-index", first ? "" : 1 );
+				},0);
+				this.proxy = (first)? "first":"last";
+			}
+			this._updateHighlight();
 		},
 
 		_updateHighlight: function() {
@@ -145,7 +152,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_destroy: function() {
-			this.element.removeClass( "ui-rangeslider ui-mini" ).find("label").show();
+			this.element.removeClass( "ui-rangeslider ui-mini" ).find( "label" ).show();
 			this.element.find( ".ui-rangeslider-dash" ).remove();
 			this.inputFirst.after(this.sliderFirst);
 			this.inputLast.after(this.sliderLast);
