@@ -458,12 +458,3 @@ ul.bullet li { list-style:square; padding:.4em 0; margin-left:1.2em; border-bott
 .ui-mobile-viewport .localnav li {
 	border: none;	
 }
-
-/* range slider examples */
-@media (max-width: 750px){
-
-  .ui-field-contain .ui-rangeslider .ui-rangeslider-sliders{
-  	width:70%;
-  }
-}
-

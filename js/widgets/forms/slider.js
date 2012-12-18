@@ -171,6 +171,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	_controlChange: function( event ) {
 		// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
+		if(this._trigger("controlchange",event) === false){
+			return false;
+		}
 		if ( !this.mouseMoved ) {
 			this.refresh( this._value(), true );
 		}
@@ -198,7 +201,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	_handleKeydown: function( event ) {
 		var index = this._value();
-
 		if ( this.options.disabled ) {
 			return;
 		}
@@ -257,7 +259,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( this.options.disabled ) {
 			return false;
 		}
-
+		if( this._trigger( "beforestart", event ) === false ){
+			return false;
+		}
 		this.dragging = true;
 		this.userModified = false;
 		this.mouseMoved = false;
@@ -265,7 +269,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( this.isToggleSwitch ) {
 			this.beforeStart = this.element[0].selectedIndex;
 		}
-		this._trigger( "beforestart", event );
+
+		
 		this.refresh( event );
  		this._trigger( "start" );
 		return false;
@@ -301,8 +306,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_preventDocumentDrag: function( event ) {
 			// NOTE: we don't do this in refresh because we still want to
 			//       support programmatic alteration of disabled inputs
+			if(this._trigger("drag",event) === false){
+				return false;
+			}
 			if ( this.dragging && !this.options.disabled ) {
-
+				
 				// this.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				this.mouseMoved = true;
 
@@ -310,9 +318,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					// make the handle move in sync with the mouse
 					this.handle.removeClass( "ui-slider-handle-snapping" );
 				}
-				if(this._trigger("drag",event) === false){
-					return false;
-				}
+				
 				this.refresh( event );
 
 				// only after refresh() you can calculate this.userModified
@@ -353,9 +359,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				var bg = document.createElement( "div" );
 				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-btn-corner-all";
 				return $( bg ).prependTo( self.slider );
-			})()
+			})();
 		}
-		this.handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
+		this.handle.buttonMarkup({ corners: true, theme: theme, shadow: true });
 		self.slider[0].className = ['ui-slider ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.inline ) ? " ui-slider-inline" : "", ( this.options.mini ) ? " ui-slider-mini":""].join( "" );
 
 		var pxStep, percent,
@@ -413,7 +419,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		newval = parseFloat( alignValue.toFixed(5) );
 
 		if(typeof pxStep === "undefined"){
-			pxstep = width/((max-min)/step);
+			pxStep = width/((max-min)/step);
 		}
 		if(pxStep > 1 && isInput){
 			percent = (newval - min)*percentPerStep * (1/step);
