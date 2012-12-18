@@ -33,6 +33,7 @@
 
 /* display and reveal */
 .ui-panel {
+	position: absolute;
 	position: fixed;
 }
 .ui-panel-unfixed {
