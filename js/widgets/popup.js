@@ -15,7 +15,7 @@ define( [
 	"jquery",
 	"../jquery.mobile.widget",
 	"../jquery.mobile.support",
-	"../navigation/event",
+	"../events/navigate",
 	"../navigation/path",
 	"../navigation/history",
 	"../navigation/navigator",

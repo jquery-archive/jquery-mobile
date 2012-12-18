@@ -20,7 +20,7 @@ $files = array(
 	'widgets/page.js',
 	'jquery.mobile.core.js',
 	'widgets/loader.js',
-	'navigation/event.js',
+	'events/navigate.js',
 	'navigation/path.js',
 	'navigation/history.js',
 	'navigation/navigator.js',
