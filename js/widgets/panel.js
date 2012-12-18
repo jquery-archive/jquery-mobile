@@ -98,6 +98,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelClasses += " ui-body-" + this.options.theme;
 		}
 
+		if( $.support.cssTransform3d ){
+			panelClasses += " ui-panel-3dtransforms";
+		}
+
 		this.element.addClass( panelClasses );
 	},
 

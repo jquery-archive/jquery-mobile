@@ -32,7 +32,7 @@
 }
 
 /* display and reveal */
-.ui-panel {
+.ui-panel-3dtransforms {
 	position: fixed;
 }
 .ui-panel-unfixed {
