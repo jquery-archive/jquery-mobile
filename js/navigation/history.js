@@ -8,10 +8,9 @@ define([ "jquery", "./path" ], function( $ ) {
 (function( $ ) {
 	var path = $.mobile.path;
 
-	$.History = function( stack, index, initialDestination ) {
+	$.History = function( stack, index ) {
 		this.stack = stack || [];
 		this.activeIndex = index || 0;
-		this.initialDst = initialDestination || path.parseLocation().hash.replace( /^#/, "" );
 	};
 
 	$.extend($.History.prototype, {
