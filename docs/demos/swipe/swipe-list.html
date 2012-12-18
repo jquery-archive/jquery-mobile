@@ -18,8 +18,7 @@
 					// These are the classnames used for the CSS transition
 					dir = event.type === "swipeleft" ? "left" : "right",
 					// Check if the browser supports the transform (3D) CSS transition
-					// TO DO: CHANGE INTO "$.mobile.support.cssTransform3d" WHEN THE SUPPORT TEST HAS BEEN FIXED: #5359
-					transition = $.mobile.support.touch ? dir : false;
+					transition = $.support.cssTransform3d ? dir : false;
 					
 					confirmAndDelete( listitem, transition );
 			});
