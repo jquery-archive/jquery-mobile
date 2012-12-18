@@ -72,8 +72,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._createModal();
 		}
 
-		// move the panel to the right place in the DOM
-		self.element[ this.options.position === "left" ? "insertBefore" : "insertAfter" ]( self._wrapper );
 	},
 
 	_createModal: function( options ){
