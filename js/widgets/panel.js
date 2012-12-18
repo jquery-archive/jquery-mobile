@@ -160,10 +160,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_bindPageEvents: function(){
 		var self = this;
 
-		$( window )
+		self.element
 			// on swipe, close the panel (should swipe open too?)
 			.on( "swipe" , function( e ){
-				//self.close( true );
+				self.close( true );
 			});
 
 		self._page
