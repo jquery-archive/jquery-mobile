@@ -107,7 +107,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_bindCloseEvents: function(){
 		var self = this;
-		self._closeLink.on( "click" , function( e ){
+		self._closeLink.on( "vclick" , function( e ){
 			e.preventDefault();
 			self.close();
 			return false;
@@ -145,7 +145,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_bindLinkListeners: function(){
 		var self = this;
 
-		$( document ).on( "click" , "a", function( e ) {
+		this._wrapper.on( "vclick" , "a", function( e ) {
 			if( this.href.split( "#" )[ 1 ] === self._panelID ){
 				e.preventDefault();
 				var $link = $( this );
