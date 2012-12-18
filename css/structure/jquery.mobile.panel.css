@@ -88,11 +88,14 @@
 
 /* content-wrap */
 .ui-panel-content-wrap {
+	position: relative;
 	background: inherit;
 	z-index: 1;
 	left: 0;
 }
-
+.ui-panel-content-wrap-closed {
+	position: static;
+}
 /* shadows and borders */
 .ui-panel-display-reveal {
 	-webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
