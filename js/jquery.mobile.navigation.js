@@ -499,7 +499,7 @@ define( [
 
 					//if page elem couldn't be found, create one and insert the body element's contents
 					if ( !page.length ) {
-						page = $( "<div data-" + $.mobile.ns + "role='page'>" + html.split( /<\/?body[^>]*>/gmi )[1] + "</div>" );
+						page = $( "<div data-" + $.mobile.ns + "role='page'>" + ( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) + "</div>" );
 					}
 
 					if ( newPageTitle && !page.jqmData( "title" ) ) {
