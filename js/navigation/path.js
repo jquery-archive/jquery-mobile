@@ -297,14 +297,14 @@ define([
 			},
 
 			squash: function( url, resolutionUrl ) {
-				var state, href,
-					isPath = path.isPath( url ),
-					uri = path.parseUrl( url ),
+				var state, href, cleanedUrl, search, stateIndex,
+					isPath = this.isPath( url ),
+					uri = this.parseUrl( url ),
 					preservedHash = uri.hash,
-					cleanedUrl,
-					uiState = "", stateIndex;
+					uiState = "";
 
-				resolutionUrl = resolutionUrl || (path.isPath(url) ? path.getLocation() : $.mobile.getDocumentUrl());
+				// produce a url against which we can resole the provided path
+				resolutionUrl = resolutionUrl || (path.isPath(url) ? path.getLocation() : path.getDocumentUrl());
 
 				// If the url is anything but a simple string, remove any preceding hash
 				// eg #foo/bar -> foo/bar
@@ -326,6 +326,10 @@ define([
 
 				// make the cleanedUrl absolute relative to the resolution url
 				href = path.makeUrlAbsolute( cleanedUrl, resolutionUrl );
+
+				// grab the search from the resolved url since parsing from
+				// the passed url may not yield the correct result
+				search = this.parseUrl( href ).search;
 
 				// TODO all this crap is terrible, clean it up
 				if ( isPath ) {
@@ -351,7 +355,7 @@ define([
 
 					// reconstruct each of the pieces with the new search string and hash
 					href = path.parseUrl( href );
-					href = href.protocol + "//" + href.host + href.pathname + uri.search + preservedHash;
+					href = href.protocol + "//" + href.host + href.pathname + search + preservedHash;
 				} else {
 					href += href.indexOf( "#" ) > -1 ? uiState : "#" + uiState;
 				}

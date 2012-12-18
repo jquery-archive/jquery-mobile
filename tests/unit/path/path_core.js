@@ -288,5 +288,7 @@
 
 		equal( squash("#foo&ui-state=foo", "http://example.com/"), "http://example.com/#foo&ui-state=foo", "ui-state keys attached to simple string hashes are preserved" );
 
+		equal( squash("#/foo/bar/?foo=bar&baz=bak", "http://example.com/"), "http://example.com/foo/bar/?foo=bar&baz=bak", "ui-state keys attached to simple string hashes are preserved" );
+
 	});
 })(jQuery);
