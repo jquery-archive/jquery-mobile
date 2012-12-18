@@ -6,8 +6,6 @@
 	display: block;
 	width: 17em;
 }
-/* needed for hiding reveal panels */
-
 
 /* animate class is added to panel and wrapper, toggling on transitions */
 .ui-panel-animate {
@@ -16,6 +14,14 @@
 	-o-transition: -o-transform 350ms ease;
 	-ms-transition: -ms-transform 350ms ease;
 	transition: transform 350ms ease;
+}
+/* don't animate reveal - it stays in place */
+.ui-panel-display-reveal {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	-ms-transition: none;
+	transition: none;
 }
 
 /* z stacking */
@@ -30,9 +36,7 @@
 }
 
 /* display and reveal */
-.ui-panel-display-overlay,
-.ui-panel-display-reveal,
-.ui-panel-display-push {
+.ui-panel {
 	position: fixed;
 }
 .ui-panel-unfixed {
@@ -46,25 +50,25 @@
 .ui-panel-position-right{
 	right: -17em;
 }
-.ui-panel-display-reveal{
-	left:0;
-}
-.ui-panel-display-reveal.ui-panel-position-right {
-	left: auto;
-	right: 0;
-}
 
 /* panel open positions */
-.ui-panel-open.ui-panel-display-overlay,
-.ui-panel-open.ui-panel-display-push {
+.ui-panel-open,
+.ui-panel-display-reveal {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	-ms-transform: translateX(17em);
 	-o-transform: translateX(17em);
 	transform: translateX(17em);
 }
-.ui-panel-open.ui-panel-display-overlay.ui-panel-position-right,
-.ui-panel-open.ui-panel-display-push.ui-panel-position-right {
+/* this exception is here to keep reveal in place until the closed class is added, which is after hide */
+.ui-panel-display-reveal.ui-panel-closed {
+	-webkit-transform: translateX(0);
+	-moz-transform: translateX(0);
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
+	transform: translateX(0);
+}
+.ui-panel-open.ui-panel-position-right {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	-ms-transform: translateX(-17em);
