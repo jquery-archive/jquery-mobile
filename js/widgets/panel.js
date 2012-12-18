@@ -169,7 +169,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._page
 			// Close immediately if another panel on the page opens
 			.on( "panelbeforeopen", function( e ){
-				if( self._open && e.target !== self.element ){
+				if( self._open && e.target !== self.element[ 0 ] ){
 					self.close( true );
 				}
 			})
