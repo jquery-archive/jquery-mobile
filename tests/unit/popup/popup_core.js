@@ -106,7 +106,7 @@
 			},
 			function( result ) {
 				deepEqual( result.popupafterclose.timedOut, false, "popupafterclose event did arrive" );
-				deepEqual( result.pagechange.timedOut, false, "pagechange event did arrive" );
+				deepEqual( result.pagechange.timedOut, true, "pagechange event did not arrive" );
 				deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Back to another page" );
 				$.mobile.back();
 			},
