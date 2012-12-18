@@ -45,14 +45,8 @@ define([ "jquery", "./events/navigate", "./path", "./history" ], function( $ ) {
 			return state;
 		},
 
-		// TODO reconsider name
-		go: function( url, data, noEvents ) {
-			var state, href, parsed, loc, hash, popstateEvent,
-				isPopStateEvent = $.event.special.navigate.isPushStateEnabled(),
-				resolutionUrl = path.isPath( url ) ? path.getLocation() : path.getDocumentUrl();
-
-			// Get the url as it would look squashed on to the current resolution url
-			href = path.squash( url );
+		hash: function( url, href ) {
+			var parsed, loc, hash;
 
 			// Grab the hash for recording. If the passed url is a path
 			// we used the parsed version of the squashed url to reconstruct,
@@ -72,6 +66,20 @@ define([ "jquery", "./events/navigate", "./path", "./history" ], function( $ ) {
 			} else {
 				hash = url;
 			}
+
+			return hash;
+		},
+
+		// TODO reconsider name
+		go: function( url, data, noEvents ) {
+			var state, href, hash, popstateEvent,
+				isPopStateEvent = $.event.special.navigate.isPushStateEnabled();
+
+			// Get the url as it would look squashed on to the current resolution url
+			href = path.squash( url );
+
+			// sort out what the hash sould be from the url
+			hash = this.hash( url, href );
 
 			// Here we prevent the next hash change or popstate event from doing any
 			// history management. In the case of hashchange we don't swallow it
