@@ -77,9 +77,9 @@ define([ "jquery", "./events/navigate", "./path", "./history" ], function( $ ) {
 			// history management. In the case of hashchange we don't swallow it
 			// if there will be no hashchange fired (since that won't reset the value)
 			// and will swallow the following hashchange
-			this.history.ignoreNextHashChange = true;
+			this.ignoreNextHashChange = true;
 			if( noEvents && hash !== path.stripHash(path.parseLocation().hash) ) {
-				this.history.preventNextHashChange = noEvents;
+				this.preventNextHashChange = noEvents;
 			}
 
 			// IMPORTANT in the case where popstate is supported the event will be triggered
@@ -112,7 +112,7 @@ define([ "jquery", "./events/navigate", "./path", "./history" ], function( $ ) {
 				// Trigger a new faux popstate event to replace the one that we
 				// caught that was triggered by the hash setting above.
 				if( !noEvents ) {
-					this.history.ignoreNextPopState = true;
+					this.ignoreNextPopState = true;
 					$( window ).trigger( popstateEvent );
 				}
 			}
@@ -142,16 +142,16 @@ define([ "jquery", "./events/navigate", "./path", "./history" ], function( $ ) {
 
 			// If this is the popstate triggered by the actual alteration of the hash
 			// prevent it completely to prevent handling
-			if( this.history.ignoreNextHashChange ) {
-				this.history.ignoreNextHashChange = false;
+			if( this.ignoreNextHashChange ) {
+				this.ignoreNextHashChange = false;
 				event.stopImmediatePropagation();
 				return;
 			}
 
 			// if this is the popstate triggered after the replaceState call in the navigate
 			// method, then simply ignore it
-			if( this.history.ignoreNextPopState ) {
-				this.history.ignoreNextPopState = false;
+			if( this.ignoreNextPopState ) {
+				this.ignoreNextPopState = false;
 				return;
 			}
 
@@ -219,9 +219,9 @@ define([ "jquery", "./events/navigate", "./path", "./history" ], function( $ ) {
 
 			// On occasion explicitly want to prevent the next hash from propogating because we only
 			// with to alter the url to represent the new state do so here
-			if( this.history.preventNextHashChange ){
-				this.history.preventNextHashChange = false;
-				this.history.ignoreNextHashChange = false;
+			if( this.preventNextHashChange ){
+				this.preventNextHashChange = false;
+				this.ignoreNextHashChange = false;
 				event.stopImmediatePropagation();
 				return;
 			}
@@ -229,13 +229,13 @@ define([ "jquery", "./events/navigate", "./path", "./history" ], function( $ ) {
 			// If the hashchange has been explicitly ignored or we have no history at
 			// this point skip the history managment and the addition of the history
 			// entry to the event for the `navigate` bindings
-			if( this.history.ignoreNextHashChange ) {
-				this.history.ignoreNextHashChange = false;
+			if( this.ignoreNextHashChange ) {
+				this.ignoreNextHashChange = false;
 			}
 
 			// If the stack is empty (it's been reset or some such) don't return,
 			// we need to record it in the missing callback below.
-			if( this.history.ignoreNextHashChange && this.history.stack.length > 0 ) {
+			if( this.ignoreNextHashChange && this.history.stack.length > 0 ) {
 				return;
 			}
 

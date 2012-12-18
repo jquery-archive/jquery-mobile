@@ -844,7 +844,7 @@ define( [
 		// Set the location hash.
 		if ( settings.changeHash !== false && url ) {
 			//disable hash listening temporarily
-			urlHistory.ignoreNextHashChange = true;
+			$.navigate.navigator.ignoreNextHashChange = true;
 
 			// rebuilding the hash here since we loose it earlier on
 			// TODO preserve the originally passed in path
