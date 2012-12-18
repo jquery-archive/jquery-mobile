@@ -25,22 +25,17 @@
 	overflow: hidden;
 	height: 2.5em;
 }
-
 .ui-rangeslider input.ui-slider-input {
 	float: left;
 }
-
 .ui-rangeslider .ui-rangeslider-dash {
 	float: left;
 	margin-top: 1em;
 	display: none;
 }
-
 .ui-rangeslider input.ui-slider-input.ui-rangeslider-last {
 	float: right;
 }
-
-/*field-contain styling*/
 .ui-field-contain .ui-rangeslider label.ui-slider {
 	width: 20%;
 	font-weight: normal;
@@ -49,13 +44,12 @@
 	float: left;
 }
 
-
 @media ( max-width: 28em ) {
 	.ui-rangeslider .ui-rangeslider-sliders div.ui-slider {
 		width: 98%;
 		margin-left: 1%;
 	}
-	.ui-rangeslider div.ui-rangeslider-sliders{
+	.ui-rangeslider div.ui-rangeslider-sliders {
 		width: 98%;
 		margin: 0;
 		margin-bottom: 10px;
@@ -66,7 +60,7 @@
 	.ui-rangeslider {
 		padding-right: 0;
 	}
-	.ui-rangeslider label.ui-slider{
+	.ui-rangeslider label.ui-slider {
 		margin-top: 1em;
 	}
 	.ui-rangeslider .ui-rangeslider-dash,
@@ -75,7 +69,7 @@
 	}
 	.ui-rangeslider input.ui-slider-input,
 	.ui-rangeslider input.ui-slider-input.ui-rangeslider-last,
-	.ui-rangeslider span.ui-rangeslider-dash{
+	.ui-rangeslider span.ui-rangeslider-dash {
 		float: none;
 	}
 	.ui-field-contain .ui-rangeslider div.ui-rangeslider-sliders {
