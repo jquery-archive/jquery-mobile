@@ -30,7 +30,9 @@
 .ui-panel-display-reveal{
 	z-index: 0;
 }
-
+.ui-panel {
+	position: absolute;
+}
 /* display and reveal */
 .ui-panel-3dtransforms {
 	position: fixed;
