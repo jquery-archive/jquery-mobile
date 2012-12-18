@@ -23,7 +23,7 @@
 }
 
 /* during transitions, this class is added to the page, which triggers hw accel */
-
+.ui-page-panel-animate,
 .ui-page-panel-animate * {
 	-webkit-transform: translateZ(0);
 	-moz-transform: translateZ(0);
