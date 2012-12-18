@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sliders - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jqm-demos.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Sliders</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+        
+        	<form>
+            
+                <h2>Slider, Rangeslider and Flip Toggle Switch</h2>
+                
+                <h3>Default</h3>
+                
+                <div data-demo-html="true">
+                    <label for="slider-1">Slider:</label>
+                    <input type="range" name="slider-1" id="slider-1" min="0" max="100" value="50">
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <div data-role="rangeslider">
+                        <label for="range-1a">Rangeslider:</label>
+                        <input type="range" name="range-1a" id="range-1a" min="0" max="100" value="0">
+                        <label for="range-1b">Rangeslider:</label>
+                        <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="100">
+                    </div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <label for="flip-1">Flip toggle switch:</label>
+                    <select name="flip-1" id="flip-1" data-role="slider">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select> 
+                </div><!-- /demo-html -->
+
+                <h3>Step attribute</h3>
+                
+                <div data-demo-html="true">
+                    <label for="slider-10">Slider:</label>
+                    <input type="range" name="slider-10" id="slider-10" min="0" max="10" step=".1" value="5">
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <div data-role="rangeslider">
+                        <label for="range-10a">Rangeslider:</label>
+                        <input type="range" name="range-10a" id="range-10a" min="0" max="10" step=".1" value="0">
+                        <label for="range-10b">Rangeslider:</label>
+                        <input type="range" name="range-10b" id="range-10b" min="0" max="10" step=".1" value="10">
+                    </div>
+                </div><!-- /demo-html -->
+                
+                <h3>Highlight and theming</h3>
+                
+                <div data-demo-html="true">
+                    <label for="slider-2">Slider:</label>
+                    <input type="range" name="slider-2" id="slider-2" data-highlight="true" min="0" max="100" value="50">
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <label for="slider-3">Slider:</label>
+                    <input type="range" name="slider-3" id="slider-3" data-highlight="true" data-track-theme="a" data-theme="b" min="0" max="100" value="50">
+                </div><!-- /demo-html -->
+
+                <div data-demo-html="true">
+                    <div data-role="rangeslider" data-highlight="false">
+                        <label for="range-2a">Rangeslider:</label>
+                        <input type="range" name="range-2a" id="range-2a" min="0" max="100" value="0">
+                        <label for="range-2b">Rangeslider:</label>
+                        <input type="range" name="range-2b" id="range-2b" min="0" max="100" value="100">
+                    </div>
+                </div><!-- /demo-html -->
+
+                <div data-demo-html="true">
+                    <div data-role="rangeslider" data-track-theme="e" data-theme="a">
+                        <label for="range-3a">Rangeslider:</label>
+                        <input type="range" name="range-3a" id="range-3a" min="0" max="100" value="0">
+                        <label for="range-3b">Rangeslider:</label>
+                        <input type="range" name="range-3b" id="range-3b" min="0" max="100" value="100">
+                    </div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <label for="flip-2">Flip toggle switch:</label>
+                    <select name="flip-2" id="flip-2" data-role="slider" data-track-theme="a" data-theme="a">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select> 
+                </div><!-- /demo-html -->
+              
+                <h3>Mini sized</h3>
+                
+                <div data-demo-html="true">
+                    <label for="slider-4">Slider:</label>
+                    <input type="range" name="slider-4" id="slider-4" data-mini="true" min="0" max="100" value="50">
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <div data-role="rangeslider" data-mini="true">
+                        <label for="range-4a">Rangeslider:</label>
+                        <input type="range" name="range-4a" id="range-4a" min="0" max="100" value="0">
+                        <label for="range-4b">Rangeslider:</label>
+                        <input type="range" name="range-4b" id="range-4b" min="0" max="100" value="100">
+                    </div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <label for="flip-3">Flip toggle switch:</label>
+                    <select name="flip-3" id="flip-3" data-role="slider" data-mini="true">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select> 
+                </div><!-- /demo-html -->
+
+              
+                <h3>Disabled</h3>
+                
+                <div data-demo-html="true">
+                    <label for="slider-5">Slider:</label>
+                    <input type="range" name="slider-5" id="slider-5" disabled="disabled" min="0" max="100" value="50">
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <div data-role="rangeslider">
+                        <label for="range-5a">Rangeslider:</label>
+                        <input type="range" name="range-5a" id="range-5a" disabled="disabled" min="0" max="100" value="0">
+                        <label for="range-5b">Rangeslider:</label>
+                        <input type="range" name="range-5b" id="range-5b" disabled="disabled" min="0" max="100" value="100">
+                    </div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <label for="flip-4">Flip toggle switch:</label>
+                    <select name="flip-4" id="flip-4" data-role="slider" disabled="disabled">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select> 
+                </div><!-- /demo-html -->
+
+                <h3>Label hidden</h3>
+                
+                <div data-demo-html="true">
+                    <label for="slider-6" class="ui-hidden-accessible">Slider:</label>
+                    <input type="range" name="slider-6" id="slider-6" min="0" max="100" value="50">
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <div data-role="rangeslider">
+                        <label for="range-6a" class="ui-hidden-accessible">Rangeslider:</label>
+                        <input type="range" name="range-6a" id="range-6a" min="0" max="100" value="0">
+                        <label for="range-6b">Rangeslider:</label>
+                        <input type="range" name="range-6b" id="range-6b" min="0" max="100" value="100">
+                    </div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+                    <label for="flip-5" class="ui-hidden-accessible">Flip toggle switch:</label>
+                    <select name="flip-5" id="flip-5" data-role="slider">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select> 
+                </div><!-- /demo-html -->
+
+                <h3>Fieldcontain</h3>
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain">
+                        <label for="slider-7">Slider:</label>
+                        <input type="range" name="slider-7" id="slider-7" min="0" max="100" value="50">
+					</div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain">
+                        <div data-role="rangeslider">
+                            <label for="range-7a">Rangeslider:</label>
+                            <input type="range" name="range-7a" id="range-7a" min="0" max="100" value="0">
+                            <label for="range-7b">Rangeslider:</label>
+                            <input type="range" name="range-7b" id="range-7b" min="0" max="100" value="100">
+                        </div>
+					</div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain">
+                        <label for="flip-6">Flip toggle switch:</label>
+                        <select name="flip-6" id="flip-6" data-role="slider">
+                            <option value="off">Off</option>
+                            <option value="on">On</option>
+                        </select>
+					</div>
+                </div><!-- /demo-html -->
+
+                <h3>Fieldcontain, mini sized</h3>
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain">
+                        <label for="slider-8">Slider:</label>
+                        <input type="range" name="slider-8" id="slider-8" data-mini="true" min="0" max="100" value="50">
+					</div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain">
+                        <div data-role="rangeslider" data-mini="true">
+                            <label for="range-8a">Rangeslider:</label>
+                            <input type="range" name="range-8a" id="range-8a" min="0" max="100" value="0">
+                            <label for="range-8b">Rangeslider:</label>
+                            <input type="range" name="range-8b" id="range-8b" min="0" max="100" value="100">
+                        </div>
+					</div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain">
+                        <label for="flip-7">Flip toggle switch:</label>
+                        <select name="flip-7" id="flip-7" data-role="slider" data-mini="true">
+                            <option value="off">Off</option>
+                            <option value="on">On</option>
+                        </select>
+					</div>
+                </div><!-- /demo-html -->
+
+                <h3>Fieldcontain, hide label</h3>
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain" class="ui-hide-label">
+                        <label for="slider-9">Slider:</label>
+                        <input type="range" name="slider-9" id="slider-9" min="0" max="100" value="50">
+					</div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain" class="ui-hide-label">
+                        <div data-role="rangeslider">
+                            <label for="range-9a">Rangeslider:</label>
+                            <input type="range" name="range-9a" id="range-9a" min="0" max="100" value="0">
+                            <label for="range-9b">Rangeslider:</label>
+                            <input type="range" name="range-9b" id="range-9b" min="0" max="100" value="100">
+                        </div>
+					</div>
+                </div><!-- /demo-html -->
+                
+                <div data-demo-html="true">
+					<div data-role="fieldcontain" class="ui-hide-label">
+                        <label for="flip-8">Flip toggle switch:</label>
+                        <select name="flip-8" id="flip-8" data-role="slider">
+                            <option value="off">Off</option>
+                            <option value="on">On</option>
+                        </select>
+					</div>
+                </div><!-- /demo-html -->
+
+			</form>
+
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>&copy; 2012 jQuery Foundation and other contributors</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>
