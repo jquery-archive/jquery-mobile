@@ -7,11 +7,7 @@
 	width: 17em;
 }
 /* needed for hiding reveal panels */
-.ui-panel-closed {
-	clip: rect(0,0,0,0);
-	width: 0;
-	overflow: hidden;
-}
+
 
 /* animate class is added to panel and wrapper, toggling on transitions */
 .ui-panel-animate {
@@ -25,6 +21,7 @@
 /* z stacking */
 .ui-panel-display-overlay,
 .ui-panel-display-push,
+.ui-panel-content-wrap,
 .ui-panel-dismiss {
 	z-index: 99999;
 }
@@ -99,7 +96,6 @@
 /* shadows and borders */
 .ui-panel-display-reveal {
 	-webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
-	-moz-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
 	box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
 }
 .ui-panel-position-right.ui-panel-display-reveal {
