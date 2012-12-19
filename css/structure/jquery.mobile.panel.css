@@ -36,6 +36,9 @@
 .ui-panel-display-reveal {
 	z-index: 0;
 }
+.ui-panel-display-reveal.ui-panel-open-complete {
+	z-index: 1;
+}
 .ui-panel,
 .ui-panel.ui-panel-unfixed {
 	position: absolute;
