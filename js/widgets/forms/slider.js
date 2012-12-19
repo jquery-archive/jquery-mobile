@@ -41,18 +41,17 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 			inlineClass = ( this.options.inline || control.jqmData( "inline" ) === true ) ? " ui-slider-inline" : "",
 			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-slider-mini" : "",
-			domHandle = document.createElement( 'a' ),
+			domHandle = document.createElement( "a" ),
 			handle = $( domHandle ),
-			domSlider = document.createElement( 'div' ),
+			domSlider = document.createElement( "div" ),
 			slider = $( domSlider ),
-
 			valuebg = this.options.highlight && !this.isToggleSwitch ? (function() {
 				var bg = document.createElement( "div" );
 				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-btn-corner-all";
 				return $( bg ).prependTo( slider );
 			})() : false,
-
 			options;
+			
 		this.element.addClass("ui-mini");
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
@@ -108,10 +107,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					sliderLabel = document.createElement( "div" ),
 					sliderImg = document.createElement( "span" );
 
-				sliderImg.className = ["ui-slider-label ui-slider-label-",side,sliderTheme," ui-btn-corner-all"].join( "" );
-				sliderImg.setAttribute( "role", "img");
+				sliderImg.className = ["ui-slider-label ui-slider-label-", side, sliderTheme, " ui-btn-corner-all"].join( "" );
+				sliderImg.setAttribute( "role", "img" );
 				sliderImg.appendChild( document.createTextNode( options[i].innerHTML ) );
-				$(sliderImg).prependTo( slider );
+				$( sliderImg ).prependTo( slider );
 			}
 
 			self._labels = $( ".ui-slider-label", slider );
@@ -171,7 +170,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	_controlChange: function( event ) {
 		// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
-		if(this._trigger("controlchange",event) === false){
+		if ( this._trigger( "controlchange", event ) === false ) {
 			return false;
 		}
 		if ( !this.mouseMoved ) {
@@ -259,7 +258,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( this.options.disabled ) {
 			return false;
 		}
-		if( this._trigger( "beforestart", event ) === false ){
+		if ( this._trigger( "beforestart", event ) === false ) {
 			return false;
 		}
 		this.dragging = true;
@@ -306,7 +305,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	_preventDocumentDrag: function( event ) {
 			// NOTE: we don't do this in refresh because we still want to
 			//       support programmatic alteration of disabled inputs
-			if(this._trigger("drag",event) === false){
+			if ( this._trigger( "drag", event ) === false) {
 				return false;
 			}
 			if ( this.dragging && !this.options.disabled ) {
@@ -328,7 +327,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		},
 
 	_checkedRefresh: function() {
-		if( this.value != this._value() ){
+		if ( this.value != this._value() ) {
 			this.refresh( this._value() );
 		}
 	},
@@ -345,7 +344,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 		// NOTE: we don't return here because we want to support programmatic
 		//       alteration of the input value, which should still update the slider
-		if ( this.options.disabled || this.element.attr('disabled') ) {
+		if ( this.options.disabled || this.element.attr( "disabled" ) ) {
 			this.disable();
 		}
 		var self = this,
@@ -354,7 +353,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			trackTheme = this.options.trackTheme || parentTheme;
 		// set the stored value for comparison later
 		this.value = this._value();
-		if(this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg" ).length === 0 ){
+		if ( this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
 			this.valuebg = (function() {
 				var bg = document.createElement( "div" );
 				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-btn-corner-all";
@@ -385,7 +384,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					data.pageX > left + width + tol ) {
 				return;
 			}
-			if(pxStep > 1){
+			if ( pxStep > 1 ) {
 				percent = ( ( data.pageX - left ) / width ) * 100;
 			} else {
 				percent = Math.round( ( ( data.pageX - left ) / width ) * 100 );
@@ -400,8 +399,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( isNaN( percent ) ) {
 			return;
 		}
-
-		
 
 		var newval = ( percent / 100 ) * ( max - min ) + min;
 
@@ -418,11 +415,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		// the final value to 5 digits after the decimal point (see jQueryUI: #4124)
 		newval = parseFloat( alignValue.toFixed(5) );
 
-		if(typeof pxStep === "undefined"){
-			pxStep = width/((max-min)/step);
+		if ( typeof pxStep === "undefined" ) {
+			pxStep = width / ( (max-min) / step );
 		}
-		if(pxStep > 1 && isInput){
-			percent = (newval - min)*percentPerStep * (1/step);
+		if ( pxStep > 1 && isInput ) {
+			percent = ( newval - min ) * percentPerStep * ( 1 / step );
 		}
 		if ( percent < 0 ) {
 			percent = 0;
