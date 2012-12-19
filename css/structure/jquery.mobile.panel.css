@@ -113,9 +113,10 @@
 }
 /* a bit of hardware acceleration for iOS 6 blinking */
 .ui-panel-3dtransforms ~.ui-panel-content-wrap ,
-.ui-panel-3dtransforms ~.ui-panel-content-wrap .ui-header {
+.ui-panel-3dtransforms ~.ui-panel-content-wrap .ui-header-fixed {
 	-webkit-backface-visibility: hidden;
 }
+.ui-panel-3dtransforms ~.ui-panel-content-wrap .ui-header:not(.ui-header-fixed), /* ios4 fix */
 .ui-panel-content-wrap-closed {
 	position: static;
 }
