@@ -61,7 +61,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._wrapper.addClass( this.options.classes.contentWrapClosed );
 
 		// if animating, add the class to do so
-		if ( $.support.cssTransitions && self.options.animate ) {
+		if ( $.support.cssTransform3d && self.options.animate ) {
 			this.element.add( self._wrapper ).addClass( "ui-panel-animate" );
 			self._page.addClass( this.options.classes.pageChildAnimations );
 		}
@@ -251,7 +251,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self._trigger( "beforeclose" );
 
-		if ( $.support.cssTransitions && o.animate ) {
+		if ( $.support.cssTransform3d && o.animate ) {
 			self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
 		} else{
 			setTimeout( complete , 0 );
@@ -270,7 +270,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
 
-	destroy: function(){
+	_destroy: function(){
 		// unbind events, remove generated elements, remove classes, remove data
 	}
 });
