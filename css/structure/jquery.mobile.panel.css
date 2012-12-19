@@ -108,6 +108,9 @@
 	z-index: 1;
 	left: 0;
 }
+.ui-panel-content-wrap-display-overlay {
+	position: static;
+}
 /* a bit of hardware acceleration for iOS 6 blinking */
 .ui-panel-3dtransforms ~.ui-panel-content-wrap ,
 .ui-panel-3dtransforms ~.ui-panel-content-wrap .ui-header {
