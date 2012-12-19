@@ -20,6 +20,12 @@
 	transition: transform 350ms ease;
 }
 
+/* a bit of hardware acceleration for iOS 6 blinking */
+.ui-panel-3dtransforms.ui-panel-content-wrap,
+.ui-panel-3dtransforms ~.ui-panel-content-wrap .ui-header {
+	-webkit-backface-visibility: hidden;
+}
+
 /* z stacking */
 .ui-panel-display-overlay,
 .ui-panel-display-push,
