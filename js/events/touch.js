@@ -38,11 +38,26 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 	// also handles scrollstop
 	$.event.special.scrollstart = {
-
+		
 		enabled: true,
 
-		setup: function() {
+		mobileScrollHandler: function( event ) {
 
+			if ( !$.event.special.scrollstart.enabled ) {
+				return;
+			}
+
+			if ( !scrolling ) {
+				trigger( event, true );
+			}
+
+			clearTimeout( timer );
+			timer = setTimeout( function() {
+				trigger( event, false );
+			}, 50 );
+		},
+
+		setup: function() {
 			var thisObject = this,
 				$this = $( thisObject ),
 				scrolling,
@@ -54,21 +69,12 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 			}
 
 			// iPhone triggers scroll after a small delay; use touchmove instead
-			$this.bind( scrollEvent, function( event ) {
+			$this.bind( scrollEvent, $.event.special.scrollstart.mobileScrollHandler );
+		},
 
-				if ( !$.event.special.scrollstart.enabled ) {
-					return;
-				}
-
-				if ( !scrolling ) {
-					trigger( event, true );
-				}
-
-				clearTimeout( timer );
-				timer = setTimeout( function() {
-					trigger( event, false );
-				}, 50 );
-			});
+		teardown: function() {
+			$(this).unbind( scrollEvent , $.event.special.scrollstart.mobileScrollHandler );
+			return false;
 		}
 	};
 
