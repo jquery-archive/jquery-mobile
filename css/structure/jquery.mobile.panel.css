@@ -36,15 +36,13 @@
 .ui-panel-display-reveal {
 	z-index: 0;
 }
-.ui-panel {
+.ui-panel,
+.ui-panel.ui-panel-unfixed {
 	position: absolute;
 }
 /* display and reveal */
 .ui-panel-3dtransforms {
 	position: fixed;
-}
-.ui-panel-unfixed {
-	position: absolute;
 }
 
 /* panel default positions */
