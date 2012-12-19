@@ -170,6 +170,8 @@ $( "#idofpanel" )
 
 				<p>Making panels work with fixed toolbars is fairly complex, but the framework supports this combination. Just be aware that the animation performance will not quite a smooth as inline toolbars and that we must hide the fixed toolbar when the panel opens with the reveal or push display mode and you're scrolled down. We recommend using overlay style panels with fixed headers for best results.</p>
 
+				<p><strong>Important note</strong>: Android 2.x has a wide range of issues with select menus not working when any number of CSS properies are in play, including fixed positioning, translateX, and more. Since these are needed to make panels work, we do not recommend using select menus in panels. Even a pure native select will not work because of the fragility of these UI elements in Android.</p>
+
 
 				<h2>Styling panels</h2>
 
