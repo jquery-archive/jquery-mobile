@@ -107,7 +107,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_bindCloseEvents: function(){
 		var self = this;
-		self._closeLink.on( "vclick" , function( e ){
+		self._closeLink.on( "click" , function( e ){
 			e.preventDefault();
 			self.close();
 			return false;
