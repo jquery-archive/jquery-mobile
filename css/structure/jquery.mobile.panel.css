@@ -27,7 +27,7 @@
 .ui-panel-dismiss {
 	z-index: 99999;
 }
-.ui-panel-display-reveal{
+.ui-panel-display-reveal {
 	z-index: 0;
 }
 .ui-panel {
@@ -93,9 +93,15 @@
 	z-index: 1;
 	left: 0;
 }
+/* a bit of hardware acceleration for iOS 6 blinking */
+.ui-panel-content-wrap,
+.ui-panel-content-wrap .ui-header {
+	-webkit-backface-visibility: hidden;
+}
 .ui-panel-content-wrap-closed {
 	position: static;
 }
+
 /* shadows and borders */
 .ui-panel-display-reveal {
 	-webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
@@ -159,7 +165,7 @@
 
 
 /* wrap push on wide viewports once open */
-@media (min-width: 45em){
+@media (min-width: 60em){
 	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push,
 	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-reveal {
 		margin-right: 17em;
