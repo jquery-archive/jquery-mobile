@@ -52,14 +52,14 @@ define( [
 		$base = $head.children( "base" ),
 
 		//tuck away the original document URL minus any fragment.
-		documentUrl = path.parseLocation(),
+		documentUrl = path.documentUrl,
 
 		//if the document has an embedded base tag, documentBase is set to its
 		//initial value. If a base tag does not exist, then we default to the documentUrl.
-		documentBase = $base.length ? path.parseUrl( path.makeUrlAbsolute( $base.attr( "href" ), documentUrl.href ) ) : documentUrl,
+		documentBase = path.documentBase,
 
 		//cache the comparison once.
-		documentBaseDiffers = ( documentUrl.hrefNoHash !== documentBase.hrefNoHash ),
+		documentBaseDiffers = path.documentBaseDiffers,
 
 		getScreenHeight = $.mobile.getScreenHeight;
 
@@ -81,6 +81,13 @@ define( [
 			}
 
 		} : undefined;
+
+
+	//return the original document url
+	$.mobile.getDocumentUrl = path.getDocumentUrl;
+
+	//return the original document base url
+	$.mobile.getDocumentBase = path.getDocumentBase;
 
 	/* internal utility functions */
 
@@ -293,16 +300,6 @@ define( [
 
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
-
-	//return the original document url
-	$.mobile.getDocumentUrl = function( asParsedObject ) {
-		return asParsedObject ? $.extend( {}, documentUrl ) : documentUrl.href;
-	};
-
-	//return the original document base url
-	$.mobile.getDocumentBase = function( asParsedObject ) {
-		return asParsedObject ? $.extend( {}, documentBase ) : documentBase.href;
-	};
 
 	$.mobile._bindPageRemove = function() {
 		var page = $( this );

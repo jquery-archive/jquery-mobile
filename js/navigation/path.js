@@ -379,12 +379,12 @@ define([
 		path.documentBaseDiffers = (path.documentUrl.hrefNoHash !== path.documentBase.hrefNoHash);
 
 		//return the original document url
-		path.getDocumentUrl = $.mobile.getDocumentUrl = function( asParsedObject ) {
+		path.getDocumentUrl = function( asParsedObject ) {
 			return asParsedObject ? $.extend( {}, path.documentUrl ) : path.documentUrl.href;
 		};
 
 		//return the original document base url
-		path.getDocumentUrl = $.mobile.getDocumentBase = function( asParsedObject ) {
+		path.getDocumentBase = function( asParsedObject ) {
 			return asParsedObject ? $.extend( {}, path.documentBase ) : path.documentBase.href;
 		};
 
