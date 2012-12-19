@@ -56,16 +56,27 @@
 }
 
 /* panel default positions */
-.ui-panel-position-left{
+.ui-panel-position-left,
+.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-open {
 	left: -17em;
 }
-.ui-panel-position-right {
+.ui-panel-position-right,
+.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-open {
 	right: -17em;
+}
+/* non-3d positioning */
+.ui-panel-position-left.ui-panel-open,
+.ui-panel-position-left.ui-panel-display-reveal {
+	left: 0;
+}
+.ui-panel-position-right.ui-panel-open,
+.ui-panel-position-right.ui-panel-display-reveal {
+	right: 0;
 }
 
 /* panel open positions */
-.ui-panel-open,
-.ui-panel-display-reveal {
+.ui-panel-3dtransforms.ui-panel-open,
+.ui-panel-3dtransforms.ui-panel-display-reveal {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	-ms-transform: translateX(17em);
@@ -73,14 +84,14 @@
 	transform: translateX(17em);
 }
 /* this exception is here to keep reveal in place until the closed class is added, which is after hide */
-.ui-panel-display-reveal.ui-panel-closed {
+.ui-panel-3dtransforms.ui-panel-display-reveal.ui-panel-closed {
 	-webkit-transform: translateX(0);
 	-moz-transform: translateX(0);
 	-ms-transform: translateX(0);
 	-o-transform: translateX(0);
 	transform: translateX(0);
 }
-.ui-panel-open.ui-panel-position-right {
+.ui-panel-3dtransforms.ui-panel-open.ui-panel-position-right {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	-ms-transform: translateX(-17em);
@@ -156,23 +167,32 @@
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push, 
 .ui-panel-dismiss-open.ui-panel-dismiss-display-push,
 .ui-panel-dismiss-open.ui-panel-dismiss-display-overlay {
+	left: 17em;
+}
+.ui-panel-3dtransforms ~.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
+.ui-panel-3dtransforms ~.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	-ms-transform: translateX(17em);
 	-o-transform: translateX(17em);
 	transform: translateX(17em);
+	left: 0;
 }
-
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right, 
 .ui-panel-dismiss-open.ui-panel-dismiss-display-reveal.ui-panel-dismiss-position-right,
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right, 
 .ui-panel-dismiss-open.ui-panel-dismiss-display-push.ui-panel-dismiss-position-right,
 .ui-panel-dismiss-open.ui-panel-dismiss-display-overlay.ui-panel-dismiss-position-right {
+	left: -17em;
+}
+.ui-panel-3dtransforms ~.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right, 
+.ui-panel-3dtransforms ~.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	-ms-transform: translateX(-17em);
 	-o-transform: translateX(-17em);
 	transform: translateX(-17em);
+	left: 0;
 }
 
 
