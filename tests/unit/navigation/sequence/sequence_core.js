@@ -26,15 +26,14 @@
 					$.testHelper.detailedEventCascade( seq );
 				}
 			]);
-		}
-		else {
+		} else {
 			// You can tweak the timeout below to make the tests run faster, but if
 			// you do, make sure it greatly exceeds the timeout used for the pushState
 			// slumber - i.e., the brief time immediately following an adjustment made
 			// by the pushState plugin during which, if the location were to require
 			// an adjustment by the pushState plugin, it will not get such an
 			// adjustment because the pushState plugin ignores such requests.
-			setTimeout( function() { $.testHelper.detailedEventCascade( seq ); }, 1000 );
+			setTimeout( function() { $.testHelper.detailedEventCascade( seq ); }, 200 );
 		}
 	}
 

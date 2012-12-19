@@ -55,6 +55,14 @@
 			}
 		},
 
+		setPageTransition: function() {
+			if( location.search.indexOf( "transition=none" ) >= 0 ) {
+				$( document ).bind( 'mobileinit', function() {
+					$.mobile.defaultPageTransition = "none";
+				});
+			}
+		},
+
 		redirect: function( filename, paramPairs ) {
 			var search, pairs = [];
 

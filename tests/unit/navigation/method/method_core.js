@@ -168,12 +168,10 @@ $.testHelper.setPushState();
 			$.navigate.navigator.squash("#foo/bar");
 			loc = path.parseLocation();
 			equal( loc.pathname, url.directory + "foo/bar", "foo/bar has been squashed onto the url" );
-			equal( loc.search, url.search, "the search is preserved" );
 
 			$.navigate.navigator.squash("bar/baz");
 			loc = path.parseLocation();
 			equal( loc.pathname, url.directory + "foo/bar/baz", "foo/bar has been squashed onto the url" );
-			equal( loc.search, url.search, "the search is preserved" );
 
 			$.navigate.navigator.squash("#foo");
 			loc = path.parseLocation();
