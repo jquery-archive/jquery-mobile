@@ -6,11 +6,11 @@
 	display: block;
 	width: 17em;
 }
-/* needed for hiding reveal panels */
 .ui-panel-closed {
 	width: 0;
 	overflow: hidden;
 }
+
 /* animate class is added to panel and wrapper, toggling on transitions */
 .ui-panel-animate {
 	-webkit-transition: -webkit-transform 350ms ease;
@@ -26,6 +26,16 @@
 	-webkit-backface-visibility: hidden;
 }
 
+/* don't animate reveal - it stays in place */
+.ui-panel-display-reveal {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	-ms-transition: none;
+	transition: none;
+}
+
+
 /* z stacking */
 .ui-panel-display-overlay,
 .ui-panel-display-push,
@@ -35,9 +45,6 @@
 }
 .ui-panel-display-reveal {
 	z-index: 0;
-}
-.ui-panel-display-reveal.ui-panel-open-complete {
-	z-index: 1;
 }
 .ui-panel,
 .ui-panel.ui-panel-unfixed {
@@ -55,24 +62,25 @@
 .ui-panel-position-right {
 	right: -17em;
 }
-.ui-panel-display-reveal.ui-panel-position-left {
-	left: 0;
-}
-.ui-panel-display-reveal.ui-panel-position-right {
-	right: 0;
-}
 
 /* panel open positions */
-.ui-panel-open.ui-panel-display-overlay,
-.ui-panel-open.ui-panel-display-push {
+.ui-panel-open,
+.ui-panel-display-reveal {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	-ms-transform: translateX(17em);
 	-o-transform: translateX(17em);
 	transform: translateX(17em);
 }
-.ui-panel-open.ui-panel-position-right.ui-panel-display-overlay,
-.ui-panel-open.ui-panel-position-right.ui-panel-display-push {
+/* this exception is here to keep reveal in place until the closed class is added, which is after hide */
+.ui-panel-display-reveal.ui-panel-closed {
+	-webkit-transform: translateX(0);
+	-moz-transform: translateX(0);
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
+	transform: translateX(0);
+}
+.ui-panel-open.ui-panel-position-right {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	-ms-transform: translateX(-17em);
