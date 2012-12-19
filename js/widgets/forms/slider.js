@@ -344,13 +344,17 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 		// NOTE: we don't return here because we want to support programmatic
 		//       alteration of the input value, which should still update the slider
-		if ( this.options.disabled || this.element.attr( "disabled" ) ) {
-			this.disable();
-		}
+		
 		var self = this,
 			parentTheme = $.mobile.getInheritedTheme( this.element, "c" ),
 			theme = this.options.theme || parentTheme,
 			trackTheme = this.options.trackTheme || parentTheme;
+
+		self.slider[0].className = ['ui-slider ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.inline ) ? " ui-slider-inline" : "", ( this.options.mini ) ? " ui-slider-mini":""].join( "" );
+		if ( this.options.disabled || this.element.attr( "disabled" ) ) {
+			this.disable();
+		}
+
 		// set the stored value for comparison later
 		this.value = this._value();
 		if ( this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
@@ -361,7 +365,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			})();
 		}
 		this.handle.buttonMarkup({ corners: true, theme: theme, shadow: true });
-		self.slider[0].className = ['ui-slider ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.inline ) ? " ui-slider-inline" : "", ( this.options.mini ) ? " ui-slider-mini":""].join( "" );
 
 		var pxStep, percent,
 			control = this.element,

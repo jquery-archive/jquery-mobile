@@ -70,6 +70,16 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 		},
 
+		disable: function() {
+			this.options.disabled = true;
+			this.element.find( "input" ).slider( "disable" );
+		},
+
+		enable: function() {
+			this.options.disabled = false;
+			this.element.find( "input" ).slider( "enable" );
+		},
+
 		_slidedrag: function( event ) {
 			var first = ($(event.target).is(this.inputFirst))? true:false,
 				otherSlider = (first)? this.inputLast: this.inputFirst;
