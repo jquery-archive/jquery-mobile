@@ -117,9 +117,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_positionPanel: function(){
 		if( this.element.height() > $.mobile.getScreenHeight() ){
 			this._unfixPanel();
+			this._scrollIntoView();
 		}
 		else {
 			this._fixPanel();
+		}
+	},
+
+	_scrollIntoView: function(){
+		if( $(window).scrollTop() > $.mobile.getScreenHeight() ){
+			window.scrollTo( 0, 0);
 		}
 	},
 
