@@ -1,8 +1,7 @@
 label.ui-slider { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; display: block; }
-input.ui-slider-input,
-.ui-field-contain input.ui-slider-input { display: inline-block; width: 50px; background-image: none; padding: .4em; margin: .5em 0; line-height: 1.4; font-size: 16px; outline: 0; }
+/* Slider input is always mini sized */
 input.ui-slider-input.ui-mini,
-.ui-field-contain input.ui-slider-input.ui-mini { width: 45px; margin: .25em 0; font-size: 14px; }
+.ui-field-contain input.ui-slider-input.ui-mini { display: inline-block; width: 45px; background-image: none; padding: .4em; margin: .5em 0; line-height: 1.4; font-size: 14px; outline: 0; }
 .ui-field-contain input.ui-slider-input { margin: 0; }
 input.ui-slider-input, .ui-field-contain input.ui-slider-input { -webkit-box-sizing: content-box; -moz-box-sizing: content-box; -ms-box-sizing: content-box; box-sizing: content-box; }
 /* Fixes input fields being to small on Safari/Mac because of the up and down arrows. */
