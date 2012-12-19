@@ -97,6 +97,8 @@
 
 				<p>The <strong>display mode</strong> of the panel is set by the <code>data-display</code> attribute. The defaults to <code>reveal</code>, meaning the panel will appear to sit under the page and is revealed as the page slides away. Specify <code>data-display="overlay"</code> for it to appear on top of the page contents. A third mode, <code>data-display="push"</code> looks similar to reveal on smaller screens, but at wider widths, the panel slides in and causes the page contents to re-flow to make room so the panel can stay open, so it works like a dismissable column.</p>
 
+				<p>The overlay style panel will always be the smoothest and most reliable display mode, especially if combined with fixed toolbars so we recommend you use that mode if possible.</p>
+
 <pre><code>
 &lt;div data-role=&quot;panel&quot; id=&quot;leftpanel1&quot; data-position=&quot;left&quot; data-display=&quot;reveal&quot;&gt;
 	&lt;!-- panel content goes here --&gt;
@@ -120,7 +122,6 @@
 				
 
 				<a href="#defaultpanel" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
-
 
 				<p>When using markup to control panels, you can only have a single panel open at once. Clicking a link to open a panel while one is already open will auto-close the first. This is done to keep the markup-only configuration simple.</p>
 
@@ -153,9 +154,23 @@ $( "#idofpanel" )
 				<h2>Panel animations</h2>
 
 				<p>Panels will animate if the browser supports 3D transforms, the same criteria for CSS animation support we use for page transitions. Panel animations use <code>translateX</code> CSS transforms to ensure they are hardware accelerated and smooth.</p>
+
 				<p>The framework has a feature test to detect if the required CSS properties are supported and will fall back to a simple hide/show if not available. After thorough testing, we decided to not animate panels on less capable platforms because the choppier animations weren't a better experience than a simple hide/show.</p>
 
-				<p>The <code>animate</code> option allows you to turn off panel animations. To turn off animations via markup, add the  <code>data-animate="false"</code> attribute to the popup container.</p>
+				<p>The <code>animate</code> option allows you to turn off panel animations for all devices. To turn off animations via markup, add the  <code>data-animate="false"</code> attribute to the popup container.</p>
+
+
+				<h2>Panel + fixed positioning</h2>
+
+				<p>The panel will be displayed with the <code>position:fixed</code> CSS property so their contents will appear no matter how far down the page you're scrolled. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and using <code>overflow</code> is not well supported enough to use at this time. </p>
+
+				<p>If a browser doesn't support fixed positioning or if the panel contents are too long to fit within the viewport, the framework will simply display the panel without fixed positioning. If the user has scrolled down and opens a panel, they may need to scroll up to view the contents.</p>
+
+				<p>In general, we recommend that you place the buttons that open the panel at the very top of the screen which is the most common UI pattern for panels.  This will avoid the need to scroll and also makes the transitions a bit smoother.</p>
+
+				<p>Making panels work with fixed toolbars is fairly complex, but the framework supports this combination. Just be aware that the animation performance will not quite a smooth as inline toolbars and that we must hide the fixed toolbar when the panel opens with the reveal or push display mode and you're scrolled down. We recommend using overlay style panels with fixed headers for best results.</p>
+
+				<p><strong>Important note</strong>: Android 2.x has a wide range of issues with select menus not working when any number of CSS properies are in play, including fixed positioning, translateX, and more. Since these are needed to make panels work, we do not recommend using select menus in panels. Even a pure native select will not work because of the fragility of these UI elements in Android.</p>
 
 
 				<h2>Styling panels</h2>
