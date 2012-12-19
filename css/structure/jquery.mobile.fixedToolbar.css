@@ -56,6 +56,10 @@
 .ui-panel-content-wrap.ui-panel-content-wrap-display-push .ui-header-fixed,
 .ui-panel-content-wrap.ui-panel-content-wrap-display-reveal .ui-header-fixed {
 	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	-o-transform: translateY(-100%);
+	-ms-transform: translateY(-100%);
+	transform: translateY(-100%);
 	position: absolute;
 	top: 0;
 }
