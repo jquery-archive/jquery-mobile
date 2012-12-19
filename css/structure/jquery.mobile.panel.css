@@ -101,8 +101,8 @@
 	left: 0;
 }
 /* a bit of hardware acceleration for iOS 6 blinking */
-.ui-panel-content-wrap.ui-panel-3dtransforms,
-.ui-panel-content-wrap.ui-panel-3dtransforms .ui-header {
+.ui-panel-3dtransforms ~.ui-panel-content-wrap ,
+.ui-panel-3dtransforms ~.ui-panel-content-wrap .ui-header {
 	-webkit-backface-visibility: hidden;
 }
 .ui-panel-content-wrap-closed {
