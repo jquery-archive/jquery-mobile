@@ -67,7 +67,7 @@
 	left: 0;
 }
 
-@media all and (max-width: 28em){
+@media all and (max-width: 27.9375em){
 	.ui-rangeslider label.ui-slider {
 		margin-right: 15px;
 	}
