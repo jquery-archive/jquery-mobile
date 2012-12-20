@@ -89,7 +89,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		return prefix + "-position-" + this.options.position + " " + prefix + "-display-" + this.options.display;
 	},
 
-	_addPanelClasses: function(){
+	_getPanelClasses: function(){
 		var panelClasses = this.options.classes.panel +
 						" " + this._getPosDisplayClasses( this.options.classes.panel ) +
 						" " + this.options.classes.panelClosed;
@@ -101,13 +101,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( $.support.cssTransform3d ){
 			panelClasses += " ui-panel-3dtransforms";
 		}
+		return panelClasses;
+	},
 
-		this.element.addClass( panelClasses );
+	_addPanelClasses: function(){
+		this.element.addClass( this._getPanelClasses() );
 	},
 
 	_bindCloseEvents: function(){
 		var self = this;
-		self._closeLink.on( "click" , function( e ){
+		self._closeLink.on( "click.panel" , function( e ){
 			e.preventDefault();
 			self.close();
 			return false;
@@ -131,14 +134,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_bindFixListener: function(){
-		var self = this;
-		$( window ).on( "throttledresize.panel", function(){
-			self._positionPanel();
-		} );
+		this._on( $( window ), { "throttledresize": "_positionPanel" });
 	},
 
 	_unbindFixListener: function(){
-		$( window ).off( "throttledresize.panel" );
+		this._off( $( window ), "throttledresize" );
 	},
 
 	_unfixPanel: function(){
@@ -152,7 +152,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_bindLinkListeners: function(){
 		var self = this;
 
-		this._page.on( "click" , "a", function( e ) {
+		this._page.on( "click.panel" , "a", function( e ) {
 			if( this.href.split( "#" )[ 1 ] === self._panelID ){
 				e.preventDefault();
 				var $link = $( this );
@@ -171,7 +171,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self.element
 			// on swipe, close the panel (should swipe open too?)
-			.on( "swipe" , function( e ){
+			.on( "swipe.panel" , function( e ){
 				self.close( true );
 			});
 
@@ -189,7 +189,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				}
 			})
 			// on escape, close? might need to have a target check too...
-			.on( "keyup", function( e ) {
+			.on( "keyup.panel", function( e ) {
 				if( e.keyCode === 27 && self._open ){
 					self.close( true );
 				}
@@ -271,7 +271,34 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
 
 	_destroy: function(){
-		// unbind events, remove generated elements, remove classes, remove data
+		var classes = this.options.classes,
+			hasOtherSiblingPanels = this.element.siblings( "." + classes.panel ).length;
+
+		// create
+		if( !hasOtherSiblingPanels ) {
+			this._wrapper.children().unwrap();
+			this._page.removeClass( classes.pageChildAnimations )
+				.find( "a" ).unbind( "panelopen panelclose" );
+		} else if( this._open ) {
+			this._wrapper.removeClass( [ classes.contentWrapOpen, classes.contentWrapOpenComplete ].join( " " ) );
+		}
+
+		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
+			.off( "swipe.panel" )
+			.off( "panelbeforeopen" )
+			.off( "panelbeforehide" )
+			.off( "keyup.panel" );
+
+		this._closeLink.off( "click.panel" );
+
+		if( this._modal ) {
+			this._modal.remove();
+		}
+
+		// open and close
+		this.element.off( this._transitionEndEvents )
+			.removeClass( [ classes.openComplete, classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
+		this._page.removeClass( classes.pageBlock );
 	}
 });
 
