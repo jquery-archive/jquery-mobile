@@ -279,6 +279,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			this._wrapper.children().unwrap();
 			this._page.removeClass( classes.pageChildAnimations )
 				.find( "a" ).unbind( "panelopen panelclose" );
+		} else if( this._open ) {
+			this._wrapper.removeClass( [ classes.contentWrapOpen, classes.contentWrapOpenComplete ].join( " " ) );
 		}
 
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
