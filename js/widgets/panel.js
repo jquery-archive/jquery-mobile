@@ -134,14 +134,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_bindFixListener: function(){
-		var self = this;
-		$( window ).on( "throttledresize.panel", function(){
-			self._positionPanel();
-		} );
+		this._on( $( window ), { "throttledresize": "_positionPanel" });
 	},
 
 	_unbindFixListener: function(){
-		$( window ).off( "throttledresize.panel" );
+		this._off( $( window ), "throttledresize" );
 	},
 
 	_unfixPanel: function(){
@@ -274,26 +271,32 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
 
 	_destroy: function(){
-		var classes = this.options.classes;
+		var classes = this.options.classes,
+			hasOtherSiblingPanels = this.element.siblings( "." + classes.panel ).length;
 
 		// create
-		this._wrapper.children().unwrap();
-		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) );
-		this._page.removeClass( classes.pageChildAnimations );
-		this._closeLink.off( "click.panel" );
-		this._page.find( "a" ).unbind( "panelopen panelclose" );
-		this.element.off( "swipe.panel" )
+		if( !hasOtherSiblingPanels ) {
+			this._wrapper.children().unwrap();
+			this._page.removeClass( classes.pageChildAnimations )
+				.find( "a" ).unbind( "panelopen panelclose" );
+		}
+
+		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
+			.off( "swipe.panel" )
 			.off( "panelbeforeopen" )
 			.off( "panelbeforehide" )
 			.off( "keyup.panel" );
-		this._page.find( "." + classes.modal ).remove();
+
+		this._closeLink.off( "click.panel" );
+
+		if( this._modal ) {
+			this._modal.remove();
+		}
 
 		// open and close
-		this.element.off( this._transitionEndEvents );
+		this.element.off( this._transitionEndEvents )
+			.removeClass( [ classes.openComplete, classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
 		this._page.removeClass( classes.pageBlock );
-		this.element.removeClass( [ classes.openComplete, classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
-		this._unbindFixListener();
-		this._open = false;
 	}
 });
 
