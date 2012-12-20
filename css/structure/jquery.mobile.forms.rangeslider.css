@@ -43,7 +43,10 @@
 .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-app {
 	margin-bottom: 9px;
 }
-
+.ui-rangeslider .ui-rangeslider-sliders .ui-slider-app.ui-disabled {
+	opacity: 1;
+	z-index: auto;
+}
 .ui-field-contain.ui-hide-label .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first {
 	display: block;
 	float: left;

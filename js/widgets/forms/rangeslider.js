@@ -45,6 +45,10 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			sliderFirst.appendTo( sliders );
 			sliderLast.appendTo( sliders );
 			label.prependTo( $el );
+
+			if( this.options.disabled ) {
+				sliders.addClass( "ui-disabled" );
+			}
 			
 			$.extend( this, {
 				inputFirst: inputFirst,
@@ -77,11 +81,13 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		disable: function() {
 			this.options.disabled = true;
 			this.element.find( "input" ).slider( "disable" );
+			this.sliders.addClass( "ui-disabled" );
 		},
 
 		enable: function() {
 			this.options.disabled = false;
 			this.element.find( "input" ).slider( "enable" );
+			this.sliders.removeClass( "ui-disabled" );
 		},
 
 		_slidedrag: function( event ) {
