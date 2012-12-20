@@ -67,6 +67,38 @@
 	left: 0;
 }
 
+@media all and (max-width: 28em){
+	.ui-rangeslider label.ui-slider {
+		margin-right: 15px;
+	}
+	.ui-rangeslider.ui-mini label.ui-slider {
+		margin-right: 8px;
+	}
+	.ui-rangeslider label.ui-slider,
+	.ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first,
+	.ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-last,
+	.ui-field-contain.ui-hide-label .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first,
+	.ui-field-contain.ui-hide-label .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-last,
+	.ui-rangeslider .ui-rangeslider-dash {
+		float: none;
+		display: inline-block;
+		margin-bottom: 1em;
+	}
+	.ui-rangeslider .ui-rangeslider-dash {
+		padding: .4em;
+		font-size: 14px;
+		line-height: 1.4;
+	}
+	.ui-rangeslider .ui-rangeslider-sliders,
+	.ui-field-contain.ui-hide-label .ui-rangeslider .ui-rangeslider-sliders {
+		margin: 0 15px .5em 15px;
+	}
+	.ui-rangeslider.ui-mini .ui-rangeslider-sliders,
+	.ui-field-contain.ui-hide-label .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+		margin: 0 8px .25em 8px;
+	}
+}
+
 @media all and (min-width: 28em){
 	.ui-field-contain .ui-rangeslider {
 		vertical-align: middle;
