@@ -41,7 +41,7 @@ $.fn.viewSourceCode = function() {
 				"</div>" ),
 			self = $( this ),
 			page = self.closest( "[data-role='page']" ),
-			data,
+			data, source,
 			sources = [];
 
 		// Collect source code before it becomes enhanced
@@ -52,7 +52,7 @@ $.fn.viewSourceCode = function() {
 			} else {
 				data = $( "<div></div>" ).append( $( self.attr( "data-demo-html" ) ).clone() ).html();
 			}
-			sources.push( { title: "HTML", theme: "b", brush: "xml", data: data } );
+			source = { title: "HTML", theme: "b", brush: "xml" };
 		}
 
 		if ( self.is( "[data-demo-php]" ) ) {
@@ -64,17 +64,22 @@ $.fn.viewSourceCode = function() {
 					data = "// Failed to retrieve PHP source code";
 				});
 
-			sources.push( { title: "PHP", theme: "g", brush: "php", data: data } );
+			source = { title: "PHP", theme: "g", brush: "php" };
 		}
 
 		if ( self.is( "[data-demo-js]" ) ) {
 			data = getHeadSnippet( "script", self.attr( "data-demo-js" ) );
-			sources.push( { title: "JS", theme: "f", brush: "js", data: data } );
+			source = { title: "JS", theme: "f", brush: "js" };
 		}
 
 		if ( self.is( "[data-demo-css]" ) ) {
 			data = getHeadSnippet( "style", self.attr( "data-demo-css" ) );
-			sources.push( { title: "CSS", theme: "e", brush: "css", data: data } );
+			source = { title: "CSS", theme: "e", brush: "css" };
+		}
+
+		if ( data && source ) {
+			source.data = data.replace( /\s+$/gm, "" );
+			sources.push( source );
 		}
 
 		attachPopupHandler( popup, sources );
