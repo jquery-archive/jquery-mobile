@@ -102,6 +102,7 @@
 @media all and (min-width: 28em){
 	.ui-field-contain .ui-rangeslider {
 		vertical-align: middle;
+		font-size: 0;
 	}
 	.ui-field-contain .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first {
 		display: inline-block;
@@ -125,6 +126,7 @@
 	.ui-field-contain .ui-rangeslider .ui-slider-app {
 		right: 88px;
 		left: 88px;
+		font-size: 16px;
 	}
 	.ui-field-contain .ui-rangeslider.ui-mini .ui-slider-app {
 		right: 74px;
