@@ -152,6 +152,14 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				}, 0 );
 				this.proxy = ( first ) ? "first" : "last";
 			}
+			//fixes issue where when both sliders are maxed they cannot be adjusted
+			if( min === max ) {
+				thisSlider.data( "mobileSlider" ).slider.css( "z-index", 1 );
+				otherSlider.data( "mobileSlider" ).slider.css( "z-index", 0 );
+			} else {
+				otherSlider.data( "mobileSlider" ).slider.css( "z-index", "" );
+				thisSlider.data( "mobileSlider" ).slider.css( "z-index", "" );
+			}
 			this._updateHighlight();
 		},
 
