@@ -31,6 +31,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			trackTheme = this.options.trackTheme || parentTheme,
 			cType = control[ 0 ].nodeName.toLowerCase(),
 			isSelect = this.isToggleSwitch = cType === "select",
+			isRangeslider = control.parent().is( ":jqmData(role='rangeslider')" ),
 			selectClass = ( this.isToggleSwitch ) ? "ui-slider-switch" : "",
 			controlID = control.attr( "id" ),
 			$label = $( "[for='" + controlID + "']" ),
@@ -40,7 +41,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			max =  !this.isToggleSwitch ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 			inlineClass = ( this.options.inline || control.jqmData( "inline" ) === true ) ? " ui-slider-inline" : "",
-			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-slider-mini" : "",
+			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
 			domHandle = document.createElement( "a" ),
 			handle = $( domHandle ),
 			domSlider = document.createElement( "div" ),
@@ -55,7 +56,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.element.addClass("ui-mini");
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = ["ui-slider ",selectClass," ui-btn-down-",trackTheme," ui-btn-corner-all", inlineClass, miniClass].join( "" );
+		domSlider.className = ["ui-slider-app ",selectClass," ui-btn-down-",trackTheme," ui-btn-corner-all", inlineClass, miniClass].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -118,6 +119,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 
 		label.addClass( "ui-slider" );
+		
+		// wrap the slider in a div for styling purposes
+		if ( !this.isToggleSwitch && !isRangeslider ) {
+			var wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
+			
+			control.wrap( wrapper );
+		}
 
 		// monitor the input for updated values
 		control.addClass( this.isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
@@ -350,7 +358,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			theme = this.options.theme || parentTheme,
 			trackTheme = this.options.trackTheme || parentTheme;
 
-		self.slider[0].className = ['ui-slider ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.inline ) ? " ui-slider-inline" : "", ( this.options.mini ) ? " ui-slider-mini":""].join( "" );
+		self.slider[0].className = ['ui-slider-app ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.inline ) ? " ui-slider-inline" : "", ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.attr( "disabled" ) ) {
 			this.disable();
 		}
