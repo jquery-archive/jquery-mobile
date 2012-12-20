@@ -68,7 +68,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 			this._on( this.element.find( ".ui-slider-handle" ), {
 				"vmousedown": function( event ) {
-					var first = $(event.target).closest( ".ui-slider" ).is( ":first-child" );
+					var first = $(event.target).closest( ".ui-slider-app" ).is( ":first-child" );
 					this.sliderFirst.css( "z-index", first ? 1 : "" );
 				}
 			});
@@ -90,7 +90,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				this.sliderTarget = false;
 			if ( ( this.proxy === "first" && first ) || ( this.proxy === "last" && !first ) ) {
 				otherSlider.data( "mobileSlider" ).dragging = true;
-				otherSlider.data( "mobileSlider ").refresh( event );
+				otherSlider.data( "mobileSlider" ).refresh( event );
 				return false;
 			}
 		},
@@ -102,7 +102,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_slidebeforestart: function( event ) {
 			this.sliderTarget = false;
-			if ( $( event.originalEvent.target ).hasClass( "ui-slider" ) ) {
+			if ( $( event.originalEvent.target ).hasClass( "ui-slider-app" ) ) {
 				this.sliderTarget = true;
 				this.targetVal = $( event.target ).val();
 			}
@@ -139,14 +139,14 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				thisSlider = first ? this.inputFirst : this.inputLast,
 				otherSlider = first ? this.inputLast : this.inputFirst;
 			if ( min > max && !this.sliderTarget ) {
-				thisSlider.val( first ? max: min).slider( "refresh" );
+				thisSlider.val( first ? max: min ).slider( "refresh" );
 			}
 			else if ( min > max ) {
 				thisSlider.val( this.targetVal ).slider( "refresh" );
 				var self = this;
 				//You must wait for the stack to unwind so first slider is updated before updating second
 				setTimeout( function() {
-					otherSlider.val(first? min: max).slider( "refresh" );
+					otherSlider.val( first? min: max ).slider( "refresh" );
 					otherSlider.data( "mobileSlider" ).handle.focus();
 					self.sliderFirst.css( "z-index", first ? "" : 1 );
 				}, 0 );
