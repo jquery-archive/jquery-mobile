@@ -40,8 +40,6 @@ div.ui-slider-switch.ui-mini a.ui-slider-handle .ui-btn-inner { height: 30px; wi
 span.ui-slider-label-a { z-index: 1; left: 0; text-indent: -1.5em; }
 span.ui-slider-label-b { z-index: 0; right: 0; text-indent: 1.5em;}
 
-.ui-slider-inline { width: 120px; display: inline-block; }
-
 @media all and (min-width: 28em){
 	.ui-field-contain label.ui-slider { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
 	.ui-field-contain div.ui-slider { display: inline-block; width: 78%; }

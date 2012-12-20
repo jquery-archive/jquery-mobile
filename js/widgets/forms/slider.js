@@ -40,7 +40,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			min = !this.isToggleSwitch ? parseFloat( control.attr( "min" ) ) : 0,
 			max =  !this.isToggleSwitch ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
-			inlineClass = ( this.options.inline || control.jqmData( "inline" ) === true ) ? " ui-slider-inline" : "",
 			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
 			domHandle = document.createElement( "a" ),
 			handle = $( domHandle ),
@@ -56,7 +55,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.element.addClass("ui-mini");
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = ["ui-slider-app ",selectClass," ui-btn-down-",trackTheme," ui-btn-corner-all", inlineClass, miniClass].join( "" );
+		domSlider.className = ["ui-slider-app ",selectClass," ui-btn-down-",trackTheme," ui-btn-corner-all", miniClass].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -358,7 +357,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			theme = this.options.theme || parentTheme,
 			trackTheme = this.options.trackTheme || parentTheme;
 
-		self.slider[0].className = ['ui-slider-app ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.inline ) ? " ui-slider-inline" : "", ( this.options.mini ) ? " ui-mini":""].join( "" );
+		self.slider[0].className = ['ui-slider-app ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.attr( "disabled" ) ) {
 			this.disable();
 		}
