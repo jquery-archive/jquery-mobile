@@ -62,7 +62,7 @@
 	margin: 0 74px;
 }
 .ui-field-contain.ui-hide-label .ui-rangeslider .ui-slider-app,
-.ui-field-contain.ui-hide-label .ui-rangeslider .ui-slider-app {
+.ui-field-contain.ui-hide-label .ui-rangeslider.ui-mini .ui-slider-app {
 	right: 0;
 	left: 0;
 }
