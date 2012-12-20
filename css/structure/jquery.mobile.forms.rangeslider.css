@@ -1,83 +1,101 @@
 .ui-rangeslider {
-	position: relative;
-	display: inline-block;
-	min-height: 1em;
-	width: 100%;
-	padding-right: 0px;
+	zoom: 1;
 }
-.ui-rangeslider .ui-rangeslider-sliders div.ui-slider {
-	position: absolute;
-	left: 0;
-	margin: 0;
-	margin-left: 7%;
-	width: 86%;
-	top: .7em;
+.ui-rangeslider:before,
+.ui-rangeslider:after {
+	content: "";
+	display: table;
+}
+.ui-rangeslider:after {
+	clear: both;
 }
 .ui-rangeslider label.ui-slider {
-	margin-right: 3px;
+	margin-bottom: .5em;
 }
-.ui-rangeslider-sliders {
-	position: relative;
-	display: block;
-	width: auto;
-	min-height: 1em;
-	margin: 0 0 0 20px;
-	overflow: hidden;
-	height: 2.5em;
+.ui-rangeslider.ui-mini label.ui-slider {
+	margin-bottom: .25em;
 }
-.ui-rangeslider input.ui-slider-input {
-	float: left;
-}
-.ui-rangeslider .ui-rangeslider-dash {
-	float: left;
-	margin-top: 1em;
-	display: none;
-}
-.ui-rangeslider input.ui-slider-input.ui-rangeslider-last {
+/* High level of specificity to override textinput and slider CSS. */
+.ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-last {
 	float: right;
 }
-.ui-field-contain .ui-rangeslider label.ui-slider {
-	width: 20%;
-	font-weight: normal;
-	margin: 0 2% 0 0;
-	display: inline-block;
-	float: left;
+.ui-rangeslider .ui-rangeslider-dash {
+	display: none;
+}
+.ui-rangeslider .ui-rangeslider-sliders {
+	position: relative;
+	top: 7px;
+	height: 32px;
+	overflow: visible;
+	margin: 0 88px .5em 88px;
+}
+.ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+	top: 9px;
+	margin: 0 74px .25em 74px;
+}
+.ui-rangeslider .ui-rangeslider-sliders .ui-slider-app {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	margin: 0 0 8px 0;
+}
+.ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-app {
+	margin-bottom: 9px;
 }
 
-@media ( max-width: 28em ) {
-	.ui-rangeslider .ui-rangeslider-sliders div.ui-slider {
-		width: 98%;
-		margin-left: 1%;
+.ui-field-contain.ui-hide-label .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first {
+	display: block;
+	float: left;
+}
+.ui-field-contain.ui-hide-label .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-last {
+	display: block;
+	margin-left: 0;
+}
+.ui-field-contain.ui-hide-label .ui-rangeslider .ui-rangeslider-sliders,
+.ui-field-contain.ui-hide-label .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+	width: auto;
+	float: none;
+	margin: 0 88px;
+}
+.ui-field-contain.ui-hide-label .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+	margin: 0 74px;
+}
+.ui-field-contain.ui-hide-label .ui-rangeslider .ui-slider-app,
+.ui-field-contain.ui-hide-label .ui-rangeslider .ui-slider-app {
+	right: 0;
+	left: 0;
+}
+
+@media all and (min-width: 28em){
+	.ui-field-contain .ui-rangeslider {
+		vertical-align: middle;
 	}
-	.ui-rangeslider div.ui-rangeslider-sliders {
-		width: 98%;
-		margin: 0;
-		margin-bottom: 10px;
-		margin-left: 1%;
-		height: 1.4em;
-		overflow: visible;
-	}
-	.ui-rangeslider {
-		padding-right: 0;
-	}
-	.ui-rangeslider label.ui-slider {
-		margin-top: 1em;
-	}
-	.ui-rangeslider .ui-rangeslider-dash,
-	.ui-rangeslider label.ui-slider {
-		display: inline;
-	}
-	.ui-rangeslider input.ui-slider-input,
-	.ui-rangeslider input.ui-slider-input.ui-rangeslider-last,
-	.ui-rangeslider span.ui-rangeslider-dash {
+	.ui-field-contain .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first {
+		display: inline-block;
 		float: none;
 	}
-	.ui-field-contain .ui-rangeslider div.ui-rangeslider-sliders {
-		width: 92%;
-		margin-left: 4%;
+	.ui-field-contain .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-last {
 		display: inline-block;
+		margin-left: 30px;
 	}
-	.ui-field-contain .ui-rangeslider label.ui-slider {
-		margin-top:.5em;
+	.ui-field-contain .ui-rangeslider.ui-mini input.ui-input-text.ui-slider-input.ui-rangeslider-last {
+		margin-left: 16px;
+	}
+	.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders {
+		float: right;
+		width: 78%;
+		margin: 0 -88px;
+	}
+	.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+		margin: 0 -74px;
+	}
+	.ui-field-contain .ui-rangeslider .ui-slider-app {
+		right: 88px;
+		left: 88px;
+	}
+	.ui-field-contain .ui-rangeslider.ui-mini .ui-slider-app {
+		right: 74px;
+		left: 74px;
 	}
 }

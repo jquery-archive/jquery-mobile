@@ -23,11 +23,12 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		_create: function() {
 			var sliders, secondLabel,
 			$el = this.element,
+			elClass,
 			inputFirst = $el.find( "input:first" ),
 			inputLast = $el.find( "input:last" ),
 			label = $el.find( "label:first" ),
-			sliderFirst = $el.find( "div.ui-slider:first" ),
-			sliderLast = $el.find( "div.ui-slider:last" );
+			sliderFirst = $el.find( "div.ui-slider-app:first" ),
+			sliderLast = $el.find( "div.ui-slider-app:last" );
 			
 			if($el.find( "label" ).length > 1 ) {
 				secondLabel = $el.find( "label:last" ).hide();
@@ -36,7 +37,10 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			inputFirst.addClass( "ui-rangeslider-first" );
 			inputFirst.after( "<span class=\"ui-rangeslider-dash\">&nbsp;-&nbsp;</span>" );
 			inputLast.addClass( "ui-rangeslider-last" );
-			$el.addClass( "ui-rangeslider" ).append( "<div class=\"ui-rangeslider-sliders\" />" );
+			
+			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider";
+			
+			$el.addClass( elClass ).append( "<div class=\"ui-rangeslider-sliders\" />" );
 			sliders = $el.find( ".ui-rangeslider-sliders" );
 			sliderFirst.appendTo( sliders );
 			sliderLast.appendTo( sliders );
