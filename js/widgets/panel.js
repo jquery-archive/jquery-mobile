@@ -89,7 +89,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		return prefix + "-position-" + this.options.position + " " + prefix + "-display-" + this.options.display;
 	},
 
-	_addPanelClasses: function(){
+	_getPanelClasses: function(){
 		var panelClasses = this.options.classes.panel +
 						" " + this._getPosDisplayClasses( this.options.classes.panel ) +
 						" " + this.options.classes.panelClosed;
@@ -101,13 +101,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( $.support.cssTransform3d ){
 			panelClasses += " ui-panel-3dtransforms";
 		}
+		return panelClasses;
+	},
 
-		this.element.addClass( panelClasses );
+	_addPanelClasses: function(){
+		this.element.addClass( this._getPanelClasses() );
 	},
 
 	_bindCloseEvents: function(){
 		var self = this;
-		self._closeLink.on( "click" , function( e ){
+		self._closeLink.on( "click.panel" , function( e ){
 			e.preventDefault();
 			self.close();
 			return false;
@@ -152,7 +155,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_bindLinkListeners: function(){
 		var self = this;
 
-		this._page.on( "click" , "a", function( e ) {
+		this._page.on( "click.panel" , "a", function( e ) {
 			if( this.href.split( "#" )[ 1 ] === self._panelID ){
 				e.preventDefault();
 				var $link = $( this );
@@ -171,7 +174,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self.element
 			// on swipe, close the panel (should swipe open too?)
-			.on( "swipe" , function( e ){
+			.on( "swipe.panel" , function( e ){
 				self.close( true );
 			});
 
@@ -189,7 +192,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				}
 			})
 			// on escape, close? might need to have a target check too...
-			.on( "keyup", function( e ) {
+			.on( "keyup.panel", function( e ) {
 				if( e.keyCode === 27 && self._open ){
 					self.close( true );
 				}
@@ -271,7 +274,26 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
 
 	_destroy: function(){
-		// unbind events, remove generated elements, remove classes, remove data
+		var classes = this.options.classes;
+
+		// create
+		this._wrapper.children().unwrap();
+		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) );
+		this._page.removeClass( classes.pageChildAnimations );
+		this._closeLink.off( "click.panel" );
+		this._page.find( "a" ).unbind( "panelopen panelclose" );
+		this.element.off( "swipe.panel" )
+			.off( "panelbeforeopen" )
+			.off( "panelbeforehide" )
+			.off( "keyup.panel" );
+		this._page.find( "." + classes.modal ).remove();
+
+		// open and close
+		this.element.off( this._transitionEndEvents );
+		this._page.removeClass( classes.pageBlock );
+		this.element.removeClass( [ classes.openComplete, classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
+		this._unbindFixListener();
+		this._open = false;
 	}
 });
 
