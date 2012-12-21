@@ -9,7 +9,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	$.widget( "mobile.rangeslider", $.mobile.widget, {
-		widgetEventPrefix: "rangeslider",
 
 		options: {
 			theme: null,
@@ -21,14 +20,16 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_create: function() {
-			var sliders, secondLabel,
+			var secondLabel,
 			$el = this.element,
-			elClass,
+			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
 			inputFirst = $el.find( "input:first" ),
 			inputLast = $el.find( "input:last" ),
 			label = $el.find( "label:first" ),
-			sliderFirst = $el.find( "div.ui-slider-app:first" ),
-			sliderLast = $el.find( "div.ui-slider-app:last" );
+			sliderFirst = inputFirst.data( "mobileSlider" ).slider,
+			sliderLast = inputLast.data( "mobileSlider" ).slider,
+			firstHandle = inputFirst.data( "mobileSlider" ).handle,
+			sliders = $("<div class=\"ui-rangeslider-sliders\" />").appendTo($el);
 			
 			if ( $el.find( "label" ).length > 1 ) {
 				secondLabel = $el.find( "label:last" ).hide();
@@ -37,19 +38,13 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			inputFirst.addClass( "ui-rangeslider-first" );
 			inputFirst.after( "<span class=\"ui-rangeslider-dash\">&nbsp;-&nbsp;</span>" );
 			inputLast.addClass( "ui-rangeslider-last" );
+			$el.addClass( elClass );
 			
-			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider";
-			
-			$el.addClass( elClass ).append( "<div class=\"ui-rangeslider-sliders\" />" );
-			sliders = $el.find( ".ui-rangeslider-sliders" );
 			sliderFirst.appendTo( sliders );
 			sliderLast.appendTo( sliders );
 			label.prependTo( $el );
+			firstHandle.appendTo(sliderLast);
 
-			if( this.options.disabled ) {
-				sliders.addClass( "ui-disabled" );
-			}
-			
 			$.extend( this, {
 				inputFirst: inputFirst,
 				inputLast: inputLast,
@@ -70,30 +65,25 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				"blur": "_change",
 				"keyup": "_change"
 			});
-			this._on( this.element.find( ".ui-slider-handle" ), {
-				"vmousedown": function( event ) {
-					var first = $(event.target).closest( ".ui-slider-app" ).is( ":first-child" );
-					this.sliderFirst.css( "z-index", first ? 1 : "" );
-				}
+			this._on( firstHandle, {
+				"vmousedown": "_dragFirstHandle"
 			});
 		},
 
-		disable: function() {
-			this.options.disabled = true;
-			this.element.find( "input" ).slider( "disable" );
-			this.sliders.addClass( "ui-disabled" );
-		},
-
-		enable: function() {
-			this.options.disabled = false;
-			this.element.find( "input" ).slider( "enable" );
-			this.sliders.removeClass( "ui-disabled" );
+		_dragFirstHandle: function() {
+			//if the first handle is dragged send the event to the first slider
+			this.inputFirst.data("mobileSlider").dragging = true;
+			this.inputFirst.data("mobileSlider").refresh( event );
+			return false;
 		},
 
 		_slidedrag: function( event ) {
 			var first = ( $( event.target ).is( this.inputFirst ) ) ? true : false,
 				otherSlider = ( first ) ? this.inputLast : this.inputFirst;
-				this.sliderTarget = false;
+
+			this.sliderTarget = false;
+			//if the drag was initaed on an extream and the other handle is focused send the events to
+			//the closest handle
 			if ( ( this.proxy === "first" && first ) || ( this.proxy === "last" && !first ) ) {
 				otherSlider.data( "mobileSlider" ).dragging = true;
 				otherSlider.data( "mobileSlider" ).refresh( event );
@@ -101,13 +91,16 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			}
 		},
 
-		_slidestop: function() {
+		_slidestop: function( event ) {
+			var first = ( $( event.target ).is( this.inputFirst ) ) ? true : false;
 			this.proxy = false;
 			this.element.find( "input" ).trigger( "vmouseup" );
+			this.sliderFirst.css( "z-index", first ? 1 : "" );
 		},
 
 		_slidebeforestart: function( event ) {
 			this.sliderTarget = false;
+			//if the track is the target remember this and the original value
 			if ( $( event.originalEvent.target ).hasClass( "ui-slider-app" ) ) {
 				this.sliderTarget = true;
 				this.targetVal = $( event.target ).val();
@@ -115,7 +108,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_setOption: function( options ) {
-			this.superApply( options );
+			this._superApply( options );
 			this.refresh();
 		},
 
@@ -145,9 +138,10 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				thisSlider = first ? this.inputFirst : this.inputLast,
 				otherSlider = first ? this.inputLast : this.inputFirst;
 			if ( min > max && !this.sliderTarget ) {
+				//this prevents min from being greater then max
 				thisSlider.val( first ? max: min ).slider( "refresh" );
-			}
-			else if ( min > max ) {
+			} else if ( min > max ) {
+				//this makes it so clicks on the target on either extream go to the closest handle
 				thisSlider.val( this.targetVal ).slider( "refresh" );
 				var self = this;
 				//You must wait for the stack to unwind so first slider is updated before updating second
@@ -158,20 +152,20 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				}, 0 );
 				this.proxy = ( first ) ? "first" : "last";
 			}
-			//fixes issue where when both sliders are maxed they cannot be adjusted
+			//fixes issue where when both sliders are at min they cannot be adjusted
 			if( min === max ) {
-				thisSlider.data( "mobileSlider" ).slider.css( "z-index", 1 );
-				otherSlider.data( "mobileSlider" ).slider.css( "z-index", 0 );
+				thisSlider.data( "mobileSlider" ).handle.css( "z-index", 1 );
+				otherSlider.data( "mobileSlider" ).handle.css( "z-index", 0 );
 			} else {
-				otherSlider.data( "mobileSlider" ).slider.css( "z-index", "" );
-				thisSlider.data( "mobileSlider" ).slider.css( "z-index", "" );
+				otherSlider.data( "mobileSlider" ).handle.css( "z-index", "" );
+				thisSlider.data( "mobileSlider" ).handle.css( "z-index", "" );
 			}
 			this._updateHighlight();
 		},
 
 		_updateHighlight: function() {
-			var min = parseInt( this.sliderFirst.find( ".ui-slider-handle" )[0].style.left, 10 ),
-				max = parseInt( this.sliderLast.find( ".ui-slider-handle" )[0].style.left, 10 ),
+			var min = parseInt( this.inputFirst.data( "mobileSlider" ).handle[0].style.left, 10 ),
+				max = parseInt( this.inputLast.data( "mobileSlider" ).handle[0].style.left, 10 ),
 				width = (max - min);
 
 			this.element.find( ".ui-slider-bg" ).css({
