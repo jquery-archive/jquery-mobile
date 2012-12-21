@@ -10,6 +10,8 @@
 
 // demo: http://jsbin.com/amozef/30
 
+// usage: $('#collapsible').live('expand',smart_scroll);
+
 function smart_scroll() { 
 
 var el_height   = $(this).height();
