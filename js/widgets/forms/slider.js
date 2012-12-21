@@ -122,9 +122,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		
 		// wrap the slider in a div for styling purposes
 		if ( !this.isToggleSwitch && !isRangeslider ) {
-			var wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
-			
-			control.wrap( wrapper );
+			wrapper = this.options.mini ? "<div class='ui-slider ui-mini'\>" : "<div class='ui-slider'\>";
+			control.add($label).wrapAll( wrapper );
 		}
 
 		// monitor the input for updated values
