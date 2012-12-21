@@ -126,22 +126,28 @@ html>/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-app:fir
 	}
 	.ui-field-contain .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first {
 		display: inline-block;
-		float: none;
+		float: left;
 	}
 	.ui-field-contain .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-last {
 		display: inline-block;
 		margin-left: 30px;
+		float:right;
 	}
 	.ui-field-contain .ui-rangeslider.ui-mini input.ui-input-text.ui-slider-input.ui-rangeslider-last {
 		margin-left: 16px;
 	}
+	.ui-field-contain .ui-rangeslider label {
+		float:left;
+	}
 	.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders {
-		float: right;
+		float: left;
 		width: 78%;
-		margin: 0 -88px;
+		margin-left: -58px;
+		margin-right: -100px;
 	}
 	.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-		margin: 0 -74px;
+		margin-left: -58px;
+		margin-right: -80px;
 	}
 	.ui-field-contain .ui-rangeslider .ui-slider-app {
 		right: 88px;
