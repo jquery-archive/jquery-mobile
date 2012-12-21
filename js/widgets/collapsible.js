@@ -8,6 +8,8 @@
 //
 // https://github.com/jquery/jquery-mobile/issues/5394
 
+// demo: http://jsbin.com/amozef/30
+
 function smart_scroll() { 
 
 var el_height   = $(this).height();
