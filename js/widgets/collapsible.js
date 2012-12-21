@@ -14,10 +14,10 @@
 //
 
 
-function smart_scroll() { 
+function smart_scroll(el) { 
 
-var el_height   = $(this).height();
-var el_pos      = $(this).offset();
+var el_height   = $(el).height();
+var el_pos      = $(el).offset();
 var el_pos_top  = el_pos.top;
 
 var vport_height = $(window).height();
@@ -183,7 +183,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 					collapsibleContent.trigger( "updatelayout" );
 					
-					if(o.autoscroll && !isCollapse) smart_scroll();
+					if(o.autoscroll && !isCollapse)  smart_scroll($this);
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
