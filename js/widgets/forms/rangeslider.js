@@ -61,7 +61,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				"slidebeforestart": "_slidebeforestart",
 				"slidestop": "_slidestop",
 				"slidedrag": "_slidedrag",
-				"change": "_change",
+				"slidebeforechange": "_change",
 				"blur": "_change",
 				"keyup": "_change"
 			});
@@ -156,11 +156,15 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			if( min === max ) {
 				thisSlider.data( "mobileSlider" ).handle.css( "z-index", 1 );
 				otherSlider.data( "mobileSlider" ).handle.css( "z-index", 0 );
+
 			} else {
 				otherSlider.data( "mobileSlider" ).handle.css( "z-index", "" );
 				thisSlider.data( "mobileSlider" ).handle.css( "z-index", "" );
 			}
 			this._updateHighlight();
+			if(min >= max){
+				return false;
+			}
 		},
 
 		_updateHighlight: function() {

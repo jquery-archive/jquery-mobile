@@ -483,7 +483,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				control[ 0 ].selectedIndex = newval;
 			}
 			if ( !isfromControl && valueChanged ) {
+				if ( this._trigger( "beforechange", event ) === false) {
+					return false;
+				}
 				control.trigger( "change" );
+
 			}
 		}
 	},
