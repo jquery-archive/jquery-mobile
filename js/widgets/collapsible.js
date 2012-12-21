@@ -1,3 +1,41 @@
+//
+//
+// scroll an element fully into view
+//
+// if fully visible: do nothing
+// if partly visible: scroll as little as to make it fully visible
+// if larger than viewport: scroll to top of screen
+//
+//
+
+function smart_scroll() { 
+
+var el_height   = $(this).height();
+var el_pos      = $(this).offset();
+var el_pos_top  = el_pos.top;
+
+var vport_height = $(window).height();
+var win_top      = $(window).scrollTop();
+
+//  alert("el_pos_top:"+el_pos_top+"  el_height:"+el_height+"win_top:"+win_top+"  vport_height:"+vport_height);
+
+var hidden = (el_pos_top + el_height) - (win_top + vport_height);   // hidden part of element
+
+if (hidden>0) // element not fully visible
+    {
+    var scroll;
+
+    if(el_height > vport_height) scroll = el_pos_top;  // larger than viewport - scroll to top
+    else scroll = win_top + hidden; // smaller than vieport - scroll minimally but fully into view
+
+    $('html, body').animate({scrollTop: scroll},200); 
+    // $.mobile.silentScroll( scroll); // jump scroll alternative, less cpu but maybe disturbing
+    }
+
+}
+
+
+
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Creates collapsible content blocks.
 //>>label: Collapsible
@@ -24,6 +62,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		corners: true,
 		mini: false,
 		initSelector: ":jqmData(role='collapsible')"
+		autoscroll: true,
 	},
 	_create: function() {
 
