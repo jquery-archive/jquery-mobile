@@ -6,7 +6,7 @@
 // if partly visible: scroll as little as to make it fully visible
 // if larger than viewport: scroll to top of screen
 //
-//
+// https://github.com/jquery/jquery-mobile/issues/5394
 
 function smart_scroll() { 
 
