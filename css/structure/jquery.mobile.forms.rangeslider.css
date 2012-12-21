@@ -82,10 +82,7 @@ html>/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-app:fir
 	right: 0;
 	left: 0;
 }
-.ui-field-contain .ui-rangeslider input.ui-input-text.ui-slider-input{
-	position: relative;
-	z-index:1;
-}
+
 @media all and (max-width: 27.9375em){
 	.ui-rangeslider label.ui-slider {
 		margin-right: 15px;
@@ -122,6 +119,10 @@ html>/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-app:fir
 	.ui-field-contain .ui-rangeslider {
 		vertical-align: middle;
 		font-size: 0;
+	}
+	.ui-field-contain .ui-rangeslider input.ui-input-text.ui-slider-input {
+		position: relative;
+		z-index: 1;
 	}
 	.ui-field-contain .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first {
 		display: inline-block;
