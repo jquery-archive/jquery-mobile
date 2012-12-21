@@ -1,6 +1,15 @@
-//
-//
-// scroll an element fully into view
+
+
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Creates collapsible content blocks.
+//>>label: Collapsible
+//>>group: Widgets
+//>>css.structure: ../css/structure/jquery.mobile.collapsible.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+
+
+
+// smart_scroll(el) - scroll an element fully into view
 //
 // if fully visible: do nothing
 // if partly visible: scroll as little as to make it fully visible
@@ -11,7 +20,6 @@
 // demo: http://jsbin.com/amozef/30
 //
 // usage: $('#collapsible').live('expand',smart_scroll);
-//
 
 
 function smart_scroll(el) { 
@@ -42,12 +50,8 @@ if (hidden>0) // element not fully visible
 
 
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Creates collapsible content blocks.
-//>>label: Collapsible
-//>>group: Widgets
-//>>css.structure: ../css/structure/jquery.mobile.collapsible.css
-//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+
+
 
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
