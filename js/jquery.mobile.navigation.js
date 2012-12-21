@@ -514,6 +514,9 @@ define( [
 									$( this ).is( '[src]' ) ? 'src' : 'action',
 								thisUrl = $( this ).attr( thisAttr );
 
+							// return if there's nothing to rewrite
+							if ( !thisUrl )
+							    return;
 							// XXX_jblas: We need to fix this so that it removes the document
 							//            base URL, and then prepends with the new page URL.
 							//if full path exists and is same, chop it - helps IE out
