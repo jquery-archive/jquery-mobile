@@ -1,4 +1,3 @@
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Creates collapsible content blocks.
 //>>label: Collapsible
@@ -20,7 +19,7 @@
 //
 // usage outside of jQM: 
 //
-//$('#collapsible').live('expand',smart_scroll); 
+//   $('#collapsible').live('expand',smart_scroll); 
 //
 // strange: when using "on" instead of "live"  'expand' seems to fire before collaps. actually expanded. 
 // el_height will then be height of closed collaps. doesn't work with "on".
