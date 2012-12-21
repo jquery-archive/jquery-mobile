@@ -7,10 +7,12 @@
 // if larger than viewport: scroll to top of screen
 //
 // https://github.com/jquery/jquery-mobile/issues/5394
-
+//
 // demo: http://jsbin.com/amozef/30
-
+//
 // usage: $('#collapsible').live('expand',smart_scroll);
+//
+
 
 function smart_scroll() { 
 
