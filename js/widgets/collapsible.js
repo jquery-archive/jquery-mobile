@@ -182,6 +182,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
 
 					collapsibleContent.trigger( "updatelayout" );
+					
+					if(o.autoscroll && !isCollapse) smart_scroll();
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
