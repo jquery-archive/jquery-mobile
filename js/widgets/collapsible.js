@@ -14,6 +14,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		expandCueText: " click to expand contents",
 		collapseCueText: " click to collapse contents",
 		collapsed: true,
+	        disabled: false,
 		heading: "h1,h2,h3,h4,h5,h6,legend",
 		collapsedIcon: "plus",
 		expandedIcon: "minus",
@@ -114,6 +115,16 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		//events
 		collapsible
+			.bind( "enable", function( event ) {
+				o.disabled=false ;
+				collapsibleHeading.find( "a" ).first().removeClass("ui-disabled") ;
+				collapsibleContent.removeClass("ui-disabled") ;
+			})
+			.bind( "disable", function( event ) {
+				o.disabled=true ;
+				collapsibleHeading.find( "a" ).first().addClass("ui-disabled") ;
+				collapsibleContent.addClass("ui-disabled") ;
+			})
 			.bind( "expand collapse", function( event ) {
 				if ( !event.isDefaultPrevented() ) {
 					var $this = $( this ),
@@ -141,18 +152,25 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
 
+		if ( o.disabled ) {
+			collapsible.trigger("disable") ;
+		}
 		collapsibleHeading
 			.bind( "tap", function( event ) {
-				collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
+				if ( ! o.disabled ) {
+					collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
+				}
 			})
 			.bind( "click", function( event ) {
+				if ( ! o.disabled ) {
 
-				var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ? "expand" : "collapse";
+					var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ? "expand" : "collapse";
 
-				collapsible.trigger( type );
+					collapsible.trigger( type );
 
-				event.preventDefault();
-				event.stopPropagation();
+					event.preventDefault();
+					event.stopPropagation();
+				}
 			});
 	}
 });
