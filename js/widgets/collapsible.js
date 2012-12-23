@@ -45,7 +45,7 @@ var win_top      = $(window).scrollTop();
  
 //  alert("el_pos_top:"+el_pos_top+"  el_height:"+el_height+"win_top:"+win_top+"  vport_height:"+vport_height);
   
-var hidden = (el_pos_top + el_height) - (win_top + vport_height);
+var hidden = (el_pos_top + el_height) - (win_top + vport_height);      // hidden part of element
   
 if ( hidden > 0 ) // element not fully visible
     {
