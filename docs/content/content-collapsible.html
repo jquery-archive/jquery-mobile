@@ -83,7 +83,31 @@
 			<h3>I'm a header</h3>
 			<p>I'm the collapsible content.</p>
 		</div>
+
+
+
+			<h2>Disabled collapsibles</h2>
 			
+			<p>By default collapsibles are enabled . To make them disabled add the <code>data-disabled="true"</code> attribute to the element.</p>
+
+		<code>		
+		&lt;div data-role=&quot;collapsible&quot; <strong>data-disabled=&quot;true&quot;&gt;</strong>
+		</code>
+
+		<p>This code will create a disabled collapsible:</p>
+
+		<div data-role="collapsible" data-disabled="true" >
+			<h3>I'm a header but disabled</h3>
+			<p>I'm the collapsible content.</p>
+		</div>
+
+		<p>This code will create a disabled collapsible in expanded state :</p>
+
+		<div data-role="collapsible" data-disabled="true" data-collapsed="false" id="DTA-COLL-1" >
+			<h3>I'm a header but disabled</h3>
+			<p>I'm the collapsible content.</p>
+		</div>
+
 			<h2>Mini collapsibles</h2>
 
 			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms/forms-all-mini.html">mini version</a>. </p>
