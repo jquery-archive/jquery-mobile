@@ -77,7 +77,7 @@ define([
 			$.mobile.firstPage = $pages.first();
 
 			// define page container
-			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+			$.mobile.pageContainer = $.mobile.firstPage.parent().addClass( "ui-mobile-viewport" );
 
 			// alert listeners that the pagecontainer has been determined for binding
 			// to events triggered on it
