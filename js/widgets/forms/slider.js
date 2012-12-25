@@ -52,10 +52,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			})() : false,
 			options;
 			
-		this.element.addClass("ui-mini");
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = ["ui-slider-app ",selectClass," ui-btn-down-",trackTheme," ui-btn-corner-all", miniClass].join( "" );
+		domSlider.className = [this.isToggleSwitch ? "ui-slider " : "ui-slider-track ",selectClass," ui-btn-down-",trackTheme," ui-btn-corner-all", miniClass].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -120,13 +119,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		label.addClass( "ui-slider" );
 		
-		// wrap the slider in a div for styling purposes
-		if ( !this.isToggleSwitch && !isRangeslider ) {
-			var wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
-			
-			control.add( $label ).wrapAll( wrapper );
-		}
-
 		// monitor the input for updated values
 		control.addClass( this.isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
 
@@ -146,6 +138,14 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this._on( slider.add( document ), { "vmouseup": "_sliderVMouseUp" });
 
 		slider.insertAfter( control );
+
+		// wrap in a div for styling purposes
+		if ( !this.isToggleSwitch && !isRangeslider ) {
+			var wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
+			
+			control.add( slider ).add( $label ).wrapAll( wrapper );
+			slider.wrap( "<div class='ui-slider-contain'>" );
+		}
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
 		if ( this.isToggleSwitch ) {
@@ -358,7 +358,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			theme = this.options.theme || parentTheme,
 			trackTheme = this.options.trackTheme || parentTheme;
 
-		self.slider[0].className = ['ui-slider-app ', ( this.isToggleSwitch ) ? "ui-slider-switch" : ""," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.mini ) ? " ui-mini":""].join( "" );
+		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.attr( "disabled" ) ) {
 			this.disable();
 		}

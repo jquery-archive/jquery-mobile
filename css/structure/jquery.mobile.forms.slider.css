@@ -1,48 +1,234 @@
-label.ui-slider { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; display: block; }
-
-div.ui-slider { margin: .5em 0; zoom: 1; }
-div.ui-slider.ui-mini { margin: .25em 0; }
-.ui-field-contain div.ui-slider, .ui-field-contain div.ui-slider.ui-mini { margin: 0; }
-div.ui-slider:before, div.ui-slider:after { content: ""; display: table; }
-div.ui-slider:after { clear: both; }
-
-/* Slider input is always mini sized. High level of specificity to override textinput CSS. */
-input.ui-input-text.ui-slider-input.ui-mini { display: block; float: left; width: 45px; background-image: none; padding: .4em; margin: 0; line-height: 1.4; font-size: 14px; outline: 0; }
-input.ui-input-text.ui-slider-input.ui-mini { -webkit-box-sizing: content-box; -moz-box-sizing: content-box; -ms-box-sizing: content-box; box-sizing: content-box; }
+div.ui-slider {
+	margin: 0;
+	zoom: 1;
+}
+div.ui-slider:before, div.ui-slider:after {
+	content: "";
+	display: table;
+}
+div.ui-slider:after {
+	clear: both;
+}
+label.ui-slider {
+	font-size: 16px;
+	line-height: 1.4;
+	font-weight: normal;
+	margin: 0;
+	display: block;
+}
+.ui-field-contain label.ui-slider {
+	margin-bottom: .4em;
+}
+/* High level of specificity to override Textinput CSS. Input always mini sized.
+Margin-top/bottom: .5em * 16px/14px to make it equal to ui-slider-contain margin */
+input.ui-input-text.ui-slider-input {
+	display: block;
+	float: left;
+	width: 45px;
+	background-image: none;
+	margin: .57143em 0;
+	padding: .4em;
+	line-height: 1.4;
+	font-size: 14px;
+	outline: 0;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	-ms-box-sizing: content-box;
+	box-sizing: content-box;
+}
+.ui-slider.ui-mini input.ui-slider-input {
+	margin: .28571em 0;
+}
 /* Fixes input fields being to small on Safari/Mac because of the up and down arrows. */
-.ui-slider-input::-webkit-outer-spin-button { margin: 0; }
-
-.ui-slider-app { position: relative; overflow: visible; height: 15px; margin: 7px 15px 8px 88px; }
-.ui-slider-app.ui-mini { height: 12px; margin: 9px 8px 9px 74px; }
-
-div.ui-slider-bg { border: none; height: 100%; padding-right: 8px; }
-
-a.ui-btn.ui-slider-handle { position: absolute; z-index: 1; top: 50%; width: 28px; height: 28px; margin: -15px 0 0 -15px; outline: 0; }
-.ui-slider-app.ui-mini a.ui-slider-handle { height: 14px; width: 14px; margin: -8px 0 0 -7px; }
-
-a.ui-btn.ui-slider-handle .ui-btn-inner { padding: 0; height: 100%; }
-div.ui-slider.ui-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: -9px 0 0 -9px; border-top: none; }
-
-select.ui-slider-switch { display: none; }
-div.ui-slider-switch { position: relative; display: inline-block; overflow: visible; height: 32px; width: 5.8em; margin: .5em 0; }
-a.ui-slider-handle-snapping { -webkit-transition: left 70ms linear; -moz-transition: left 70ms linear; }
-div.ui-slider-switch .ui-slider-handle { margin: 1px 0 0 -15px; }
-.ui-slider-inneroffset { margin: 0 16px; position: relative; z-index: 1; }
-
-div.ui-slider-switch.ui-mini { width: 5em; height: 29px; margin: .25em 0; }
-div.ui-slider-switch.ui-mini .ui-slider-inneroffset { margin: 0 15px 0 14px; }
-div.ui-slider-switch.ui-mini .ui-slider-handle { width: 25px; height: 25px; margin: 1px 0 0 -13px; }
-div.ui-slider-switch.ui-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: 0; }
-
-.ui-slider-switch span.ui-slider-label { position: absolute; text-align: center; width: 100%; overflow: hidden; font-size: 16px; top: 0; line-height: 2; min-height: 100%; border-width: 0; white-space: nowrap; cursor:pointer; }
-.ui-slider-switch.ui-mini span.ui-slider-label { font-size: 14px; }
-
-span.ui-slider-label-a { z-index: 1; left: 0; text-indent: -1.5em; }
-span.ui-slider-label-b { z-index: 0; right: 0; text-indent: 1.5em;}
+.ui-slider-input::-webkit-outer-spin-button {
+	margin: 0;
+}
+.ui-slider-contain {
+	height: 32px;
+	margin: .5em 0;
+}
+.ui-slider.ui-mini .ui-slider-contain {
+	margin: .25em 0;
+}
+.ui-field-contain input.ui-slider-input,
+.ui-field-contain .ui-slider.ui-mini input.ui-slider-input,
+.ui-field-contain .ui-slider-contain,
+.ui-field-contain .ui-slider.ui-mini .ui-slider-contain {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+/* Margin-left: 59px for the input width incl. padding and border, 30px slider handle width incl. border is actual margin. */
+.ui-slider-track,
+.ui-slider-switch {
+	position: relative;
+	overflow: visible;
+	height: 15px;
+	margin: 0 15px 0 89px;
+	top: 7px;
+}
+/* Margin-left: 59px for the input width incl. padding and border, 16px slider handle width incl. border is actual margin. */
+.ui-slider-track.ui-mini {
+	height: 12px;
+	margin: 0 8px 0 75px;
+	top: 9px;
+}
+.ui-slider-bg {
+	border: none;
+	height: 100%;
+}
+/* High level of specificity to override button margins in grids */
+.ui-slider-track .ui-btn.ui-slider-handle,
+.ui-slider-switch .ui-btn.ui-slider-handle {
+	position: absolute;
+	z-index: 1;
+	top: 50%;
+	width: 28px;
+	height: 28px;
+	margin: -15px 0 0 -15px;
+	font-size: 16px;
+	outline: 0;
+}
+.ui-slider-track.ui-mini .ui-slider-handle {
+	height: 14px;
+	width: 14px;
+	margin: -8px 0 0 -7px;
+}
+.ui-slider-handle .ui-btn-inner {
+	padding: 0;
+	height: 100%;
+}
+.ui-slider-track.ui-mini .ui-slider-handle .ui-btn-inner {
+	height: 30px;
+	width: 30px;
+	padding: 0;
+	margin: -9px 0 0 -9px;
+	border-top: none;
+}
+select.ui-slider-switch {
+	display: none;
+}
+div.ui-slider-switch {
+	display: inline-block;
+	height: 32px;
+	width: 5.8em;
+	margin: .5em 0;
+	top: 0;
+}
+.ui-slider-switch.ui-mini {
+	width: 5em;
+	height: 29px;
+	margin: .25em 0;
+	top: 0;
+}
+.ui-field-contain .ui-slider-switch,
+.ui-field-contain .ui-slider-switch.ui-mini {
+	margin: 0;
+}
+.ui-slider-inneroffset {
+	margin: 0 16px;
+	position: relative;
+	z-index: 1;
+}
+.ui-slider-switch.ui-mini .ui-slider-inneroffset {
+	margin: 0 15px 0 14px;
+}
+.ui-slider-switch .ui-btn.ui-slider-handle {
+	margin: 1px 0 0 -15px;
+}
+.ui-slider-switch.ui-mini .ui-slider-handle {
+	width: 25px;
+	height: 25px;
+	margin: 1px 0 0 -13px;
+}
+.ui-slider-handle-snapping {
+	-webkit-transition: left 70ms linear;
+	-moz-transition: left 70ms linear;
+}
+.ui-slider-switch.ui-mini .ui-slider-handle .ui-btn-inner {
+	height: 30px;
+	width: 30px;
+	padding: 0;
+	margin: 0;
+}
+.ui-slider-switch .ui-slider-label {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	overflow: hidden;
+	font-size: 16px;
+	top: 0;
+	line-height: 2;
+	min-height: 100%;
+	border-width: 0;
+	white-space: nowrap;
+	cursor: pointer;
+}
+.ui-slider-switch.ui-mini .ui-slider-label {
+	font-size: 14px;
+}
+.ui-slider-switch .ui-slider-label-a {
+	z-index: 1;
+	left: 0;
+	text-indent: -1.5em;
+}
+.ui-slider-switch .ui-slider-label-b {
+	z-index: 0;
+	right: 0;
+	text-indent: 1.5em;
+}
 
 @media all and (min-width: 28em){
-	.ui-field-contain label.ui-slider { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
-	.ui-field-contain div.ui-slider { display: inline-block; width: 78%; }
-	.ui-field-contain div.ui-slider-switch { width: 5.5em; margin: 0; }
-	.ui-field-contain.ui-hide-label div.ui-slider { display: block; width: auto; }
+	.ui-field-contain label.ui-slider {
+		vertical-align: top;
+		display: inline-block;
+		width: 20%;
+		margin: 0 2% 0 0;
+	}
+	.ui-field-contain .ui-slider label.ui-slider {
+		float:left;
+	}
+	.ui-field-contain input.ui-slider-input {
+		position: relative;
+		z-index: 1;
+	}
+	.ui-field-contain input.ui-slider-input {
+		margin-right: 30px;
+	}
+	.ui-field-contain .ui-slider.ui-mini input.ui-slider-input {
+		margin-right: 16px;
+	}
+	.ui-field-contain .ui-slider-contain {
+		float: left;
+		width: 78%;
+		margin-left: -104px;
+		margin-right: 0;
+	}
+	.ui-field-contain .ui-slider.ui-mini .ui-slider-contain {
+		margin-left: -83px;
+	}
+	.ui-field-contain .ui-slider .ui-slider-track {
+		right: 89px;
+		left: 15px;
+	}
+	.ui-field-contain .ui-slider.ui-mini .ui-slider-track {
+		right: 75px;
+		left: 8px;
+	}
+	.ui-field-contain.ui-hide-label input.ui-slider-input {
+		margin: 0;
+	}
+	.ui-field-contain.ui-hide-label .ui-slider .ui-slider-contain,
+	.ui-field-contain.ui-hide-label .ui-slider.ui-mini .ui-slider-contain {
+		float: none;
+		width: auto;
+		margin: 0;
+	}	
+	.ui-field-contain.ui-hide-label .ui-slider .ui-slider-track {
+		right: 0;
+		left: 0;
+		margin: 0 15px 0 89px;
+	}
+	.ui-field-contain.ui-hide-label .ui-slider.ui-mini .ui-slider-track {
+		margin: 0 8px 0 75px;
+	}
 }	
