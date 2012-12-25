@@ -29,7 +29,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			sliderFirst = inputFirst.data( "mobileSlider" ).slider,
 			sliderLast = inputLast.data( "mobileSlider" ).slider,
 			firstHandle = inputFirst.data( "mobileSlider" ).handle,
-			sliders = $("<div class=\"ui-rangeslider-sliders\" />").appendTo($el);
+			sliders = $( "<div class=\"ui-rangeslider-sliders\" />" ).appendTo( $el );
 			
 			if ( $el.find( "label" ).length > 1 ) {
 				secondLabel = $el.find( "label:last" ).hide();
@@ -146,7 +146,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				var self = this;
 				//You must wait for the stack to unwind so first slider is updated before updating second
 				setTimeout( function() {
-					otherSlider.val( first? min: max ).slider( "refresh" );
+					otherSlider.val( first ? min: max ).slider( "refresh" );
 					otherSlider.data( "mobileSlider" ).handle.focus();
 					self.sliderFirst.css( "z-index", first ? "" : 1 );
 				}, 0 );
@@ -162,7 +162,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				thisSlider.data( "mobileSlider" ).handle.css( "z-index", "" );
 			}
 			this._updateHighlight();
-			if(min >= max){
+			if ( min >= max ) {
 				return false;
 			}
 		},

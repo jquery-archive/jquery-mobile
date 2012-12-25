@@ -48,17 +48,17 @@
 	z-index: auto;
 }
 .ui-rangeslider .ui-rangeslider-sliders .ui-slider-app:first-child {
-	background-color:transparent;
-	background:none;
-	border:none;
-	height:0;
+	background-color: transparent;
+	background: none;
+	border: none;
+	height: 0;
 }
 /* this makes ie6 and ie7 set height to 0 to fix z-index problem */
-html>/**/body .ui-rangeslider .ui-rangeslider-sliders .ui-slider-app:first-child{
-	height:15px;
+html >/**/body .ui-rangeslider .ui-rangeslider-sliders .ui-slider-app:first-child {
+	height: 15px;
 }
-html>/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-app:first-child{
-	height:12px;
+html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-app:first-child {
+	height: 12px;
 }
 .ui-field-contain.ui-hide-label .ui-rangeslider input.ui-input-text.ui-slider-input.ui-rangeslider-first {
 	display: block;
