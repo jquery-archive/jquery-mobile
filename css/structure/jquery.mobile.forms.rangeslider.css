@@ -84,6 +84,7 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 		display: inline-block;
 	}
 	.ui-rangeslider .ui-rangeslider-dash {
+		margin: 0 2px 0 5px;
 		padding: .4em;
 		font-size: 14px;
 		line-height: 1.4;

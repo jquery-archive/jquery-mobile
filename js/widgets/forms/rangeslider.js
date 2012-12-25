@@ -36,7 +36,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			}
 
 			inputFirst.addClass( "ui-rangeslider-first" );
-			inputFirst.after( "<span class=\"ui-rangeslider-dash\">&nbsp;-&nbsp;</span>" );
+			inputFirst.after( "<span class='ui-rangeslider-dash'>&ndash;</span>" );
 			inputLast.addClass( "ui-rangeslider-last" );
 			$el.addClass( elClass );
 			
