@@ -101,7 +101,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		_slidebeforestart: function( event ) {
 			this.sliderTarget = false;
 			//if the track is the target remember this and the original value
-			if ( $( event.originalEvent.target ).hasClass( "ui-slider-app" ) ) {
+			if ( $( event.originalEvent.target ).hasClass( "ui-slider-track" ) ) {
 				this.sliderTarget = true;
 				this.targetVal = $( event.target ).val();
 			}
