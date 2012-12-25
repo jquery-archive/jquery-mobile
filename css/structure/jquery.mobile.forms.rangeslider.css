@@ -51,9 +51,8 @@
 .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track {
 	top: 9px;
 }
-.ui-rangeslider .ui-rangeslider-sliders .ui-slider-track.ui-disabled {
-	opacity: 1;
-	z-index: auto;
+.ui-rangeslider .ui-slider-track:first-child .ui-slider-bg {
+	display: none;
 }
 .ui-rangeslider .ui-rangeslider-sliders .ui-slider-track:first-child {
 	background-color: transparent;

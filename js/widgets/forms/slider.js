@@ -495,17 +495,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 	enable: function() {
 		this.element.attr( "disabled", false );
-		this.slider.removeClass( "ui-disabled" ).attr( "aria-disabled", false ).parent().removeClass( "ui-disabled" );
+		this.slider.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
 		return this._setOption( "disabled", false );
 	},
 
 	disable: function() {
 		this.element.attr( "disabled", true );
-		if( this.isRangeslider ) {
-			this.slider.attr( "aria-disabled", true ).parent().addClass( "ui-disabled" );
-		} else {
-			this.slider.addClass( "ui-disabled" ).attr( "aria-disabled", true );
-		}
+		this.slider.addClass( "ui-disabled" ).attr( "aria-disabled", true );
 		return this._setOption( "disabled", true );
 	}
 
