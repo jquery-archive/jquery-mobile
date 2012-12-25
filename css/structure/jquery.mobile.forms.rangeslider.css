@@ -10,6 +10,9 @@
 .ui-rangeslider:after {
 	clear: both;
 }
+.ui-rangeslider label.ui-slider {
+	margin-bottom: 0;
+}
 /* Margin-top/bottom: .25em * 16px/14px to make it equal to ui-rangeslider-sliders margin (input font-size is 14px) */
 .ui-rangeslider.ui-mini input.ui-slider-input {
 	margin: .28571em 0;
@@ -30,10 +33,11 @@
 .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
 	margin: .25em 75px .25em 75px;
 }
-.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input,
+.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input {
+	margin-top: 0;
+}
 .ui-field-contain .ui-rangeslider .ui-rangeslider-sliders,
 .ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-	margin-top: 0;
 	margin-bottom: 0;
 }
 .ui-rangeslider .ui-rangeslider-sliders .ui-slider-track {
@@ -79,7 +83,6 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 	.ui-rangeslider .ui-rangeslider-dash {
 		float: none;
 		display: inline-block;
-		margin-bottom: .8em;
 	}
 	.ui-rangeslider .ui-rangeslider-dash {
 		padding: .4em;
