@@ -13,6 +13,9 @@
 .ui-rangeslider label.ui-slider {
 	margin-bottom: 0;
 }
+.ui-field-contain .ui-rangeslider label.ui-slider {
+	margin-bottom: .4em;
+}
 /* Margin-top/bottom: .25em * 16px/14px to make it equal to ui-rangeslider-sliders margin (input font-size is 14px) */
 .ui-rangeslider.ui-mini input.ui-slider-input {
 	margin: .28571em 0;
@@ -33,11 +36,10 @@
 .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
 	margin: .25em 75px .25em 75px;
 }
-.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input {
-	margin-top: 0;
-}
+.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input,
 .ui-field-contain .ui-rangeslider .ui-rangeslider-sliders,
 .ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+	margin-top: 0;
 	margin-bottom: 0;
 }
 .ui-rangeslider .ui-rangeslider-sliders .ui-slider-track {
@@ -77,11 +79,13 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 		margin-right: 8px;
 	}
 	.ui-rangeslider label.ui-slider,
+	.ui-field-contain .ui-rangeslider label.ui-slider,
 	.ui-rangeslider input.ui-slider-input.ui-rangeslider-first,
 	.ui-rangeslider input.ui-slider-input.ui-rangeslider-last,
 	.ui-rangeslider .ui-rangeslider-dash {
 		float: none;
 		display: inline-block;
+		margin-bottom: 0;
 	}
 	.ui-rangeslider .ui-rangeslider-dash {
 		margin: 0 2px 0 5px;
@@ -89,13 +93,13 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 		font-size: 14px;
 		line-height: 1.4;
 	}
-	.ui-rangeslider .ui-rangeslider-sliders {
-		margin-left: 15px;
-		margin-right: 15px;
+	.ui-rangeslider .ui-rangeslider-sliders,
+	.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders {
+		margin: 1em 15px 0 15px;
 	}
-	.ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-		margin-left: 8px;
-		margin-right: 8px;
+	.ui-rangeslider.ui-mini .ui-rangeslider-sliders,
+	.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+		margin: 1em 8px 0 8px;
 	}
 }
 
@@ -113,12 +117,10 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 	.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders {
 		float: left;
 		width: 78%;
-		margin-left: -89px;
-		margin-right: -89px;
+		margin: 0 -89px 0 -89px;
 	}
 	.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-		margin-left: -75px;
-		margin-right: -75px;
+		margin: 0 -75px 0 -75px;
 	}
 	.ui-field-contain .ui-rangeslider .ui-slider-track {
 		right: 89px;

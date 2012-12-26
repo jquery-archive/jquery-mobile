@@ -19,6 +19,9 @@ label.ui-slider {
 .ui-slider label.ui-slider {
 	margin-bottom: 0;
 }
+.ui-field-contain .ui-slider label.ui-slider {
+	margin-bottom: .4em;
+}
 /* High level of specificity to override Textinput CSS. Input always mini sized.
 Margin-top/bottom: .5em * 16px/14px to make it equal to ui-slider-contain margin */
 input.ui-input-text.ui-slider-input {
@@ -51,11 +54,10 @@ input.ui-input-text.ui-slider-input {
 	margin: .25em 0;
 }
 .ui-field-contain input.ui-slider-input,
-.ui-field-contain .ui-slider.ui-mini input.ui-slider-input {
-	margin-top: 0;
-}
+.ui-field-contain .ui-slider.ui-mini input.ui-slider-input,
 .ui-field-contain .ui-slider-contain,
 .ui-field-contain .ui-slider.ui-mini .ui-slider-contain {
+	margin-top: 0;
 	margin-bottom: 0;
 }
 /* Margin-left: 59px for the input width incl. padding and border, 30px slider handle width incl. border is actual margin. */
@@ -191,9 +193,16 @@ div.ui-slider-switch {
 		margin-right: 8px;
 	}
 	.ui-slider label.ui-slider,
+	.ui-field-contain .ui-slider label.ui-slider,
 	.ui-slider input.ui-slider-input {
 		float: none;
 		display: inline-block;
+		margin-bottom: 0;
+	}
+	.ui-slider-contain,
+	.ui-field-contain .ui-slider-contain,
+	.ui-field-contain .ui-slider.ui-mini .ui-slider-contain {
+		margin-top: 1em;
 	}
 	.ui-slider .ui-slider-track {
 		margin-left: 15px;
@@ -228,11 +237,10 @@ div.ui-slider-switch {
 	.ui-field-contain .ui-slider-contain {
 		float: left;
 		width: 78%;
-		margin-left: -104px;
-		margin-right: 0;
+		margin: 0 0 0 -104px;
 	}
 	.ui-field-contain .ui-slider.ui-mini .ui-slider-contain {
-		margin-left: -83px;
+		margin: 0 0 0 -83px;
 	}
 	.ui-field-contain .ui-slider .ui-slider-track {
 		right: 89px;
