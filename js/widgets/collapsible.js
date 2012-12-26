@@ -7,57 +7,64 @@
 
 
 
-// smart_scroll(el, offset) - scroll an element fully into view
+//
+// scroll an element fully into view
 //
 // if fully visible: do nothing
 // if partly visible: scroll as little as to make it fully visible
 // if larger than viewport: scroll to top of screen
 //
-// offset: manual correction, if other elem (eg. a header above) should also be visible
+// after expanding or loading an element it's often badly positioned and you 
+// start scrolling immediately. this scrolls it into the best possible position
 //
 //
-// https://github.com/jquery/jquery-mobile/issues/5394
+// demo: http://jsbin.com/udahoh/4/
 //
-// demo: http://jsbin.com/udahoh/3
-//
-// usage outside of jQM: 
-//
-// $('#boats,#cars').live('expand', function(e){ smart_scroll(e.target); });
-//
-// when using "on"  'expand' seems to fire before it's actually expanded. 
-// el_height will then be height of closed collaps. won't work.
-
 
 
 function smart_scroll(el, offset) 
 { 
   
-if(typeof offset === "undefined") offset = 0;  // manual override if other elem should be visible
+
+offset = offset || 0; // manual correction, if other elem (eg. a header above) should also be visible
   
-var air         = 15; // above+below space so it's not tucked to the screen edge
+var air         = 15; // above+below space so element is not tucked to the screen edge
     
-var el_height   = $(el).height()+ 2 * air;
+var el_height   = $(el).height()+ 2 * air + offset;
 var el_pos      = $(el).offset();
-var el_pos_top  = el_pos.top - air;
+var el_pos_top  = el_pos.top - air - offset;
   
 var vport_height = $(window).height();
 var win_top      = $(window).scrollTop();
  
 //  alert("el_pos_top:"+el_pos_top+"  el_height:"+el_height+"win_top:"+win_top+"  vport_height:"+vport_height);
   
-var hidden = (el_pos_top + el_height) - (win_top + vport_height);      // hidden part of element
+var hidden = (el_pos_top + el_height) - (win_top + vport_height);
   
 if ( hidden > 0 ) // element not fully visible
     {
     var scroll;
     
-    if(el_height > vport_height) scroll = el_pos_top;       // larger than viewport - scroll to top
-    else                         scroll = win_top + hidden; // smaller than vieport - scroll minimally but fully into view
+    if(el_height > vport_height) scroll = el_pos_top;        // larger than viewport - scroll to top
+    else                         scroll = win_top + hidden;   // smaller than vieport - scroll minimally but fully into view
  
-    $('html, body').animate({ scrollTop: (scroll+offset) }, 200); 
+ 
+    $('html, body').animate({ scrollTop: (scroll) }, 200); 
     }
 
 }
+
+
+
+
+// when using "on"  'expand' seems to fire before it's actually expanded. 
+// el_height will then be height of closed collaps. won't work.
+
+//$('#boats,#cars').live('expand', function(e){ smart_scroll(e.target); });
+
+//$('#offset').live('expand', function(e){ 
+//  smart_scroll( e.target, $('#header').height() + 20 ); 
+//});
 
 
 
