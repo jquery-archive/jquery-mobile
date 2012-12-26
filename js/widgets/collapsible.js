@@ -5,6 +5,73 @@
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
+
+
+//
+// scroll an element fully into view
+//
+// if fully visible: do nothing
+// if partly visible: scroll as little as to make it fully visible
+// if larger than viewport: scroll to top of screen
+//
+// after expanding or loading an element it's often badly positioned and you 
+// start scrolling immediately. this scrolls it into the best possible position
+//
+//
+// demo: http://jsbin.com/udahoh/4/
+//
+
+
+function smart_scroll(el, offset) 
+{ 
+  
+
+offset = offset || 0; // manual correction, if other elem (eg. a header above) should also be visible
+  
+var air         = 15; // above+below space so element is not tucked to the screen edge
+    
+var el_height   = $(el).height()+ 2 * air + offset;
+var el_pos      = $(el).offset();
+var el_pos_top  = el_pos.top - air - offset;
+  
+var vport_height = $(window).height();
+var win_top      = $(window).scrollTop();
+ 
+//  alert("el_pos_top:"+el_pos_top+"  el_height:"+el_height+"win_top:"+win_top+"  vport_height:"+vport_height);
+  
+var hidden = (el_pos_top + el_height) - (win_top + vport_height);
+  
+if ( hidden > 0 ) // element not fully visible
+    {
+    var scroll;
+    
+    if(el_height > vport_height) scroll = el_pos_top;        // larger than viewport - scroll to top
+    else                         scroll = win_top + hidden;   // smaller than vieport - scroll minimally but fully into view
+ 
+ 
+    $('html, body').animate({ scrollTop: (scroll) }, 200); 
+    }
+
+}
+
+
+
+
+// when using "on"  'expand' seems to fire before it's actually expanded. 
+// el_height will then be height of closed collaps. won't work.
+
+//$('#boats,#cars').live('expand', function(e){ smart_scroll(e.target); });
+
+//$('#offset').live('expand', function(e){ 
+//  smart_scroll( e.target, $('#header').height() + 20 ); 
+//});
+
+
+
+
+
+
+
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -24,6 +91,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		corners: true,
 		mini: false,
 		initSelector: ":jqmData(role='collapsible')"
+		autoscroll: true,
 	},
 	_create: function() {
 
@@ -137,6 +205,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
 
 					collapsibleContent.trigger( "updatelayout" );
+					
+					if(o.autoscroll && !isCollapse)  smart_scroll($this);
 				}
 			})
 			.trigger( o.collapsed ? "collapse" : "expand" );
