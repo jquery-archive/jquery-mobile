@@ -483,7 +483,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				valueChanged = control[ 0 ].selectedIndex !== newval;
 				control[ 0 ].selectedIndex = newval;
 			}
-			if ( this._trigger( "beforechange", event ) === false) {
+			if ( this._trigger( "beforechange", val ) === false) {
 					return false;
 			}
 			if ( !isfromControl && valueChanged ) {
