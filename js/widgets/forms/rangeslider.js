@@ -23,12 +23,12 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			var secondLabel,
 			$el = this.element,
 			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
-			_inputFirst = $el.find( "input" ).first(),
+			_inputFirst = $el.find( "input:first" ),
 			_inputLast = $el.find( "input" ).last(),
 			label = $el.find( "label" ).first(),
-			_sliderFirst = $.data( _inputFirst , "mobileSlider" ).slider,
-			_sliderLast = $.data( _inputLast , "mobileSlider" ).slider,
-			firstHandle = $.data( _inputFirst , "mobileSlider" ).handle,
+			_sliderFirst = $.data( _inputFirst.get(0) , "mobileSlider" ).slider,
+			_sliderLast = $.data( _inputLast.get(0) , "mobileSlider" ).slider,
+			firstHandle = $.data( _inputFirst.get(0) , "mobileSlider" ).handle,
 			_sliders = $( "<div class=\"ui-rangeslider-_sliders\" />" ).appendTo( $el );
 			
 			if ( $el.find( "label" ).length > 1 ) {
@@ -71,8 +71,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_dragFirstHandle: function() {
 			//if the first handle is dragged send the event to the first slider
-			$.data( this._inputFirst , "mobileSlider").dragging = true;
-			$.data( this._inputFirst , "mobileSlider").refresh( event );
+			$.data( this._inputFirst.get(0) , "mobileSlider").dragging = true;
+			$.data( this._inputFirst.get(0) , "mobileSlider").refresh( event );
 			return false;
 		},
 
@@ -84,8 +84,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			//if the drag was initaed on an extream and the other handle is focused send the events to
 			//the closest handle
 			if ( ( this._proxy === "first" && first ) || ( this._proxy === "last" && !first ) ) {
-				$.data( otherSlider , "mobileSlider" ).dragging = true;
-				$.data( otherSlider , "mobileSlider" ).refresh( event );
+				$.data( otherSlider.get(0) , "mobileSlider" ).dragging = true;
+				$.data( otherSlider.get(0) , "mobileSlider" ).refresh( event );
 				return false;
 			}
 		},
@@ -158,12 +158,12 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			}
 			//fixes issue where when both _sliders are at min they cannot be adjusted
 			if( min === max ) {
-				$.data( thisSlider , "mobileSlider" ).handle.css( "z-index", 1 );
-				$.data( otherSlider , "mobileSlider" ).handle.css( "z-index", 0 );
+				$.data( thisSlider.get(0) , "mobileSlider" ).handle.css( "z-index", 1 );
+				$.data( otherSlider.get(0) , "mobileSlider" ).handle.css( "z-index", 0 );
 
 			} else {
-				$.data( otherSlider , "mobileSlider" ).handle.css( "z-index", "" );
-				$.data( thisSlider , "mobileSlider" ).handle.css( "z-index", "" );
+				$.data( otherSlider.get(0) , "mobileSlider" ).handle.css( "z-index", "" );
+				$.data( thisSlider.get(0) , "mobileSlider" ).handle.css( "z-index", "" );
 			}
 			this._updateHighlight();
 			if ( min >= max ) {
@@ -172,8 +172,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_updateHighlight: function() {
-			var min = parseInt( $.data( this._inputFirst , "mobileSlider" ).handle[0].style.left, 10 ),
-				max = parseInt( $.data( this._inputLast , "mobileSlider" ).handle[0].style.left, 10 ),
+			var min = parseInt( $.data( this._inputFirst.get(0) , "mobileSlider" ).handle[0].style.left, 10 ),
+				max = parseInt( $.data( this._inputLast.get(0) , "mobileSlider" ).handle[0].style.left, 10 ),
 				width = (max - min);
 
 			this.element.find( ".ui-slider-bg" ).css({
