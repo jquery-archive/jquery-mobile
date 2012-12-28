@@ -36,7 +36,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			}
 
 			inputFirst.addClass( "ui-rangeslider-first" );
-			inputFirst.after( "<span class='ui-rangeslider-dash'>&ndash;</span>" );
 			inputLast.addClass( "ui-rangeslider-last" );
 			$el.addClass( elClass );
 			
@@ -180,7 +179,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_destroy: function() {
 			this.element.removeClass( "ui-rangeslider ui-mini" ).find( "label" ).show();
-			this.element.find( ".ui-rangeslider-dash" ).remove();
 			this.inputFirst.after( this.sliderFirst );
 			this.inputLast.after( this.sliderLast );
 			this.sliders.remove();

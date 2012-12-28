@@ -143,8 +143,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		if ( !this.isToggleSwitch && !isRangeslider ) {
 			var wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
 			
-			control.add( slider ).add( $label ).wrapAll( wrapper );
-			slider.wrap( "<div class='ui-slider-contain'>" );
+			control.add( slider ).wrapAll( wrapper );
 		}
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
