@@ -78,7 +78,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_slidedrag: function( event ) {
 			var first = $( event.target ).is( this._inputFirst ),
-				otherSlider = ( first ) ? this.__inputLast : this._inputFirst;
+				otherSlider = ( first ) ? this._inputLast : this._inputFirst;
 
 			this._sliderTarget = false;
 			//if the drag was initaed on an extream and the other handle is focused send the events to
