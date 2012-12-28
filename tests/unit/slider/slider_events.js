@@ -18,7 +18,7 @@
 	var keypressTest = function(opts){
 		var slider = $(opts.selector),
 		    val = window.parseFloat(slider.val()),
-				handle = slider.siblings('.ui-slider-contain').find('.ui-slider-handle');
+				handle = slider.siblings('.ui-slider-track').find('.ui-slider-handle');
 
 		expect( opts.keyCodes.length );
 
