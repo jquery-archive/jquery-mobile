@@ -223,7 +223,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		} else{
 			setTimeout( complete , 0 );
 		}
-		self._page.addClass( self.options.classes.pageBlock );
+		self._page.addClass( o.classes.pageBlock );
 		self.element.removeClass( o.classes.panelClosed );
 		self.element.addClass( o.classes.panelOpen );
 		self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
@@ -240,11 +240,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var o = this.options,
 			self = this,
 			complete = function(){
-				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
+				self.element.add( self._wrapper ).unbind( self._transitionEndEvents, complete );
 				self.element.addClass( o.classes.panelClosed );
 				self._wrapper.removeClass( self._contentWrapOpenClasses );
 				self._wrapper.addClass( o.classes.contentWrapClosed );
-				self._page.removeClass( self.options.classes.pageBlock );
+				self._page.removeClass( o.classes.pageBlock );
 				self._fixPanel();
 				self._unbindFixListener();
 				self._trigger( "close" );
