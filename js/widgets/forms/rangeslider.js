@@ -23,36 +23,36 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			var secondLabel,
 			$el = this.element,
 			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
-			inputFirst = $el.find( "input:first" ),
-			inputLast = $el.find( "input:last" ),
-			label = $el.find( "label:first" ),
-			sliderFirst = inputFirst.data( "mobileSlider" ).slider,
-			sliderLast = inputLast.data( "mobileSlider" ).slider,
-			firstHandle = inputFirst.data( "mobileSlider" ).handle,
-			sliders = $( "<div class=\"ui-rangeslider-sliders\" />" ).appendTo( $el );
+			_inputFirst = $el.find( "input" ).first(),
+			_inputLast = $el.find( "input" ).last(),
+			label = $el.find( "label" ).first(),
+			_sliderFirst = $.data( _inputFirst , "mobileSlider" ).slider,
+			_sliderLast = $.data( _inputLast , "mobileSlider" ).slider,
+			firstHandle = $.data( _inputFirst , "mobileSlider" ).handle,
+			_sliders = $( "<div class=\"ui-rangeslider-_sliders\" />" ).appendTo( $el );
 			
 			if ( $el.find( "label" ).length > 1 ) {
-				secondLabel = $el.find( "label:last" ).hide();
+				secondLabel = $el.find( "label" ).last().hide();
 			}
 
-			inputFirst.addClass( "ui-rangeslider-first" );
-			inputLast.addClass( "ui-rangeslider-last" );
+			_inputFirst.addClass( "ui-rangeslider-first" );
+			_inputLast.addClass( "ui-rangeslider-last" );
 			$el.addClass( elClass );
 			
-			sliderFirst.appendTo( sliders );
-			sliderLast.appendTo( sliders );
+			_sliderFirst.appendTo( _sliders );
+			_sliderLast.appendTo( _sliders );
 			label.prependTo( $el );
-			firstHandle.appendTo(sliderLast);
+			firstHandle.appendTo(_sliderLast);
 
 			$.extend( this, {
-				inputFirst: inputFirst,
-				inputLast: inputLast,
-				sliderFirst: sliderFirst,
-				sliderLast: sliderLast,
-				targetVal: null,
-				sliderTarget: false,
-				sliders: sliders,
-				proxy: false
+				_inputFirst: _inputFirst,
+				_inputLast: _inputLast,
+				_sliderFirst: _sliderFirst,
+				_sliderLast: _sliderLast,
+				_targetVal: null,
+				_sliderTarget: false,
+				_sliders: _sliders,
+				_proxy: false
 			});
 			
 			this.refresh();
@@ -71,38 +71,40 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_dragFirstHandle: function() {
 			//if the first handle is dragged send the event to the first slider
-			this.inputFirst.data("mobileSlider").dragging = true;
-			this.inputFirst.data("mobileSlider").refresh( event );
+			$.data( this._inputFirst , "mobileSlider").dragging = true;
+			$.data( this._inputFirst , "mobileSlider").refresh( event );
 			return false;
 		},
 
 		_slidedrag: function( event ) {
-			var first = ( $( event.target ).is( this.inputFirst ) ) ? true : false,
-				otherSlider = ( first ) ? this.inputLast : this.inputFirst;
+			var first = $( event.target ).is( this._inputFirst ),
+				otherSlider = ( first ) ? this.__inputLast : this._inputFirst;
 
-			this.sliderTarget = false;
+			this._sliderTarget = false;
 			//if the drag was initaed on an extream and the other handle is focused send the events to
 			//the closest handle
-			if ( ( this.proxy === "first" && first ) || ( this.proxy === "last" && !first ) ) {
-				otherSlider.data( "mobileSlider" ).dragging = true;
-				otherSlider.data( "mobileSlider" ).refresh( event );
+			if ( ( this._proxy === "first" && first ) || ( this._proxy === "last" && !first ) ) {
+				$.data( otherSlider , "mobileSlider" ).dragging = true;
+				$.data( otherSlider , "mobileSlider" ).refresh( event );
 				return false;
 			}
 		},
 
 		_slidestop: function( event ) {
-			var first = ( $( event.target ).is( this.inputFirst ) ) ? true : false;
-			this.proxy = false;
+			var first = $( event.target ).is( this._inputFirst );
+			this._proxy = false;
+			//this stops dragging of the handle and brings the active track to the front 
+			//this makes clicks on the track go the the last handle used
 			this.element.find( "input" ).trigger( "vmouseup" );
-			this.sliderFirst.css( "z-index", first ? 1 : "" );
+			this._sliderFirst.css( "z-index", first ? 1 : "" );
 		},
 
 		_slidebeforestart: function( event ) {
-			this.sliderTarget = false;
+			this._sliderTarget = false;
 			//if the track is the target remember this and the original value
 			if ( $( event.originalEvent.target ).hasClass( "ui-slider-track" ) ) {
-				this.sliderTarget = true;
-				this.targetVal = $( event.target ).val();
+				this._sliderTarget = true;
+				this._targetVal = $( event.target ).val();
 			}
 		},
 
@@ -131,34 +133,37 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				return false;
 			}
 
-			var min = parseFloat( this.inputFirst.val(), 10 ),
-				max = parseFloat( this.inputLast.val(), 10 ),
+			var min = parseFloat( this._inputFirst.val(), 10 ),
+				max = parseFloat( this._inputLast.val(), 10 ),
 				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
-				thisSlider = first ? this.inputFirst : this.inputLast,
-				otherSlider = first ? this.inputLast : this.inputFirst;
-			if ( min > max && !this.sliderTarget ) {
+				thisSlider = first ? this._inputFirst : this._inputLast,
+				otherSlider = first ? this._inputLast : this._inputFirst;
+			if ( min > max && !this._sliderTarget ) {
 				//this prevents min from being greater then max
 				thisSlider.val( first ? max: min ).slider( "refresh" );
+				this._trigger( "normalize" );
 			} else if ( min > max ) {
 				//this makes it so clicks on the target on either extream go to the closest handle
-				thisSlider.val( this.targetVal ).slider( "refresh" );
+				thisSlider.val( this._targetVal ).slider( "refresh" );
 				var self = this;
+
 				//You must wait for the stack to unwind so first slider is updated before updating second
 				setTimeout( function() {
 					otherSlider.val( first ? min: max ).slider( "refresh" );
-					otherSlider.data( "mobileSlider" ).handle.focus();
-					self.sliderFirst.css( "z-index", first ? "" : 1 );
+					$.data( otherSlider , "mobileSlider" ).handle.focus();
+					self._sliderFirst.css( "z-index", first ? "" : 1 );
+					self._trigger( "normalize" );
 				}, 0 );
-				this.proxy = ( first ) ? "first" : "last";
+				this._proxy = ( first ) ? "first" : "last";
 			}
-			//fixes issue where when both sliders are at min they cannot be adjusted
+			//fixes issue where when both _sliders are at min they cannot be adjusted
 			if( min === max ) {
-				thisSlider.data( "mobileSlider" ).handle.css( "z-index", 1 );
-				otherSlider.data( "mobileSlider" ).handle.css( "z-index", 0 );
+				$.data( thisSlider , "mobileSlider" ).handle.css( "z-index", 1 );
+				$.data( otherSlider , "mobileSlider" ).handle.css( "z-index", 0 );
 
 			} else {
-				otherSlider.data( "mobileSlider" ).handle.css( "z-index", "" );
-				thisSlider.data( "mobileSlider" ).handle.css( "z-index", "" );
+				$.data( otherSlider , "mobileSlider" ).handle.css( "z-index", "" );
+				$.data( thisSlider , "mobileSlider" ).handle.css( "z-index", "" );
 			}
 			this._updateHighlight();
 			if ( min >= max ) {
@@ -167,8 +172,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_updateHighlight: function() {
-			var min = parseInt( this.inputFirst.data( "mobileSlider" ).handle[0].style.left, 10 ),
-				max = parseInt( this.inputLast.data( "mobileSlider" ).handle[0].style.left, 10 ),
+			var min = parseInt( $.data( this._inputFirst , "mobileSlider" ).handle[0].style.left, 10 ),
+				max = parseInt( $.data( this._inputLast , "mobileSlider" ).handle[0].style.left, 10 ),
 				width = (max - min);
 
 			this.element.find( ".ui-slider-bg" ).css({
@@ -179,9 +184,9 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_destroy: function() {
 			this.element.removeClass( "ui-rangeslider ui-mini" ).find( "label" ).show();
-			this.inputFirst.after( this.sliderFirst );
-			this.inputLast.after( this.sliderLast );
-			this.sliders.remove();
+			this._inputFirst.after( this._sliderFirst );
+			this._inputLast.after( this._sliderLast );
+			this._sliders.remove();
 			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
 		}
 
