@@ -24,10 +24,10 @@
 	position: relative;
 	overflow: visible;
 	height: 30px;
-	margin: .5em 65px;
+	margin: .5em 68px;
 }
 .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-	margin: .25em 65px;
+	margin: .25em 68px;
 }
 .ui-field-contain .ui-rangeslider input.ui-slider-input,
 .ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input,
@@ -81,12 +81,12 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 	.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
 		float: left;
 		width: 78%;
-		margin: 0 -65px;
+		margin: 0 -68px;
 	}
 	.ui-field-contain .ui-rangeslider .ui-slider-track,
 	.ui-field-contain .ui-rangeslider.ui-mini .ui-slider-track {
-		right: 65px;
-		left: 65px;
+		right: 68px;
+		left: 68px;
 	}
 	.ui-field-contain.ui-hide-label .ui-rangeslider input.ui-slider-input.ui-rangeslider-first {
 		margin: 0;
@@ -95,7 +95,7 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 	.ui-field-contain.ui-hide-label .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
 		width: auto;
 		float: none;
-		margin: 0 65px;
+		margin: 0 68px;
 	}
 	.ui-field-contain.ui-hide-label .ui-rangeslider .ui-slider-track,
 	.ui-field-contain.ui-hide-label .ui-rangeslider.ui-mini .ui-slider-track {
