@@ -25,7 +25,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
 			pagePanel: "ui-page-panel",
-			pageChildAnimations: "ui-page-panel-animate"
+			pageChildAnimations: "ui-page-panel-animate",
+			cssTransform3d: "ui-panel-3dtransforms"
 		},
 		animate: true,
 		theme: null,
@@ -99,7 +100,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 
 		if( $.support.cssTransform3d ){
-			panelClasses += " ui-panel-3dtransforms";
+			panelClasses += " " + this.options.classes.cssTransform3d;
 		}
 		return panelClasses;
 	},
