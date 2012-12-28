@@ -95,7 +95,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 						}).insertBefore( $el );
 
 						// Bind to doc to remove after submit handling
-						$( document ).one( "submit", function() {
+						$.mobile.$document.one( "submit", function() {
 							$buttonPlaceholder.remove();
 
 							// reset the local var so that the hidden input
@@ -158,7 +158,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.$document.bind( "pagecreate create", function( e ) {
 	$.mobile.button.prototype.enhanceWithin( e.target, true );
 });
 

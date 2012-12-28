@@ -38,7 +38,7 @@ var dataPropertyName = "virtualMouseBindings",
 	blockMouseTriggers = false,
 	blockTouchTriggers = false,
 	eventCaptureSupported = "addEventListener" in document,
-	$document = $( document ),
+	$document = $.mobile.$document,
 	nextTouchID = 1,
 	lastTouchID = 0, threshold;
 

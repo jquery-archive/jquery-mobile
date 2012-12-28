@@ -19,7 +19,7 @@ define([
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
-			$window = $( window );
+			$window = $.mobile.$window;
 
 	//remove initial build class (only present on first pageshow)
 	function hideRenderingClass() {
@@ -143,7 +143,7 @@ define([
 		// if defaultHomeScroll hasn't been set yet, see if scrollTop is 1
 		// it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
 		// so if it's 1, use 0 from now on
-		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $( window ).scrollTop() === 1 ) ? 0 : 1;
+		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $.mobile.$window.scrollTop() === 1 ) ? 0 : 1;
 
 		//dom-ready inits
 		if ( $.mobile.autoInitializePage ) {
@@ -159,7 +159,7 @@ define([
 			// by adding the 'ui-disabled' class to them. Using a JavaScript workaround for those browser.
 			// https://github.com/jquery/jquery-mobile/issues/3558
 
-			$( document ).delegate( ".ui-disabled", "vclick",
+			$.mobile.$document.delegate( ".ui-disabled", "vclick",
 				function( e ) {
 					e.preventDefault();
 					e.stopImmediatePropagation();
