@@ -24,12 +24,12 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			$el = this.element,
 			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
 			_inputFirst = $el.find( "input:first" ),
-			_inputLast = $el.find( "input" ).last(),
-			label = $el.find( "label" ).first(),
+			_inputLast = $el.find( "input:last" ),
+			label = $el.find( "label:first" ),
 			_sliderFirst = $.data( _inputFirst.get(0) , "mobileSlider" ).slider,
 			_sliderLast = $.data( _inputLast.get(0) , "mobileSlider" ).slider,
 			firstHandle = $.data( _inputFirst.get(0) , "mobileSlider" ).handle,
-			_sliders = $( "<div class=\"ui-rangeslider-_sliders\" />" ).appendTo( $el );
+			_sliders = $( "<div class=\"ui-rangeslider-sliders\" />" ).appendTo( $el );
 			
 			if ( $el.find( "label" ).length > 1 ) {
 				secondLabel = $el.find( "label" ).last().hide();
