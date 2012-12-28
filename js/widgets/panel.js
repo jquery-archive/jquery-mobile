@@ -202,7 +202,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_contentWrapOpenClasses: null,
 	_modalOpenClasses: null,
 
-	open: function( options ){
+	open: function( options, immediate ){
 		var self = this,
 			o = self.options,
 			complete = function(){
@@ -217,7 +217,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self._trigger( "beforeopen" );
 
-		if ( $.support.cssTransitions && o.animate ) {
+		if ( !immediate && $.support.cssTransitions && o.animate ) {
 			self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
 		} else{
 			setTimeout( complete , 0 );
@@ -251,9 +251,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		self._trigger( "beforeclose" );
 
-		if ( $.support.cssTransform3d && o.animate ) {
-			self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
-		} else{
+		if ( !immediate && $.support.cssTransform3d && o.animate ) {
+			self.element.add( self._wrapper ).on( self._transitionEndEvents, complete );
+		} else {
 			setTimeout( complete , 0 );
 		}
 
