@@ -166,12 +166,9 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 					nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
 
-					this._on( ui.nextPage, {
-						pageshow: function() {
-							nextHeader.prependTo( ui.nextPage );
-							nextFooter.appendTo( ui.nextPage );
-							this._off( ui.nextPage, "pageshow" );
-						}
+					ui.nextPage.one( "pageshow", function() {
+						nextHeader.prependTo( this );
+						nextFooter.appendTo( this );
 					});
 				}
 			}

@@ -113,32 +113,32 @@ header('Content-type: text/html; charset=UTF-8');
 <body>
 <div data-role="page" data-add-back-btn="true">
 	<div data-role="header"><h1><?php
-		if ( $category_obj ) {
-			echo htmlspecialchars( $category_obj[ 'name' ] );
-		} else {
-			echo 'No Match';
-		}
+	if ( $category_obj ) {
+		echo htmlspecialchars( $category_obj[ 'name' ] );
+	} else {
+		echo 'No Match';
+	}
 ?></h1></div>
 	<div data-role="content">
 <?php
-		if ( !$category_obj ) {
+	if ( !$category_obj ) {
 ?>
 		<p>No matches found.</p>
 <?php
-		} else {
+	} else {
 ?>
-		<p><?php echo htmlspecialchars( $catgory_object['description'] ); ?></p>
+		<p><?php echo htmlspecialchars( $category_obj['description'] ); ?></p>
 		<ul data-role="listview" data-inset="true">
 <?php
-			$arr = $category_obj[ 'items' ];
-			$count = count($arr);
-			for ( $i = 0; $i < $count; $i++ ) {
-				echo "\t\t\t<li>" . htmlspecialchars( $arr[ $i ][ 'name' ] ) . "</li>\n";
-			}
+		$arr = $category_obj[ 'items' ];
+		$count = count($arr);
+		for ( $i = 0; $i < $count; $i++ ) {
+			echo "\t\t\t<li>" . htmlspecialchars( $arr[ $i ][ 'name' ] ) . "</li>\n";
+		}
 ?>
 		</ul>
 <?php
-		}
+	}
 ?>
 	</div>
 </div>

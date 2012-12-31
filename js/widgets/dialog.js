@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.navigation" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -17,6 +17,17 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		corners: true,
 		initSelector: ":jqmData(role='dialog')"
 	},
+
+	// Override the theme set by the page plugin on pageshow
+	_handlePageBeforeShow: function() {
+		this._isCloseable = true;
+		if ( this.options.overlayTheme ) {
+			this.element
+				.page( "removeContainerBackground" )
+				.page( "setContainerBackground", this.options.overlayTheme );
+		}
+	},
+
 	_create: function() {
 		var self = this,
 			$el = this.element,
@@ -51,15 +62,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagehide", function( e, ui ) {
 			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
-		})
-		// Override the theme set by the page plugin on pageshow
-		.bind( "pagebeforeshow", function() {
-			self._isCloseable = true;
-			if ( self.options.overlayTheme ) {
-				self.element
-					.page( "removeContainerBackground" )
-					.page( "setContainerBackground", self.options.overlayTheme );
-			}
+		});
+
+		this._on( $el, {
+			pagebeforeshow: "_handlePageBeforeShow"
 		});
 
 		$.extend( this, {
@@ -80,7 +86,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			// Sanitize value
 			location = ( value === "left" ? "left" : "right" );
 			btn = $( "<a href='#' class='ui-btn-" + location + "' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
-			this.element.children().find( ":jqmData(role='header')" ).prepend( btn );
+			this.element.children().find( ":jqmData(role='header')" ).first().prepend( btn );
 			if ( this._createComplete && $.fn.buttonMarkup ) {
 				btn.buttonMarkup();
 			}
@@ -114,10 +120,13 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 		if ( this._isCloseable ) {
 			this._isCloseable = false;
-			if ( $.mobile.hashListeningEnabled ) {
+			// If the hash listening is enabled and there is at least one preceding history
+			// entry it's ok to go back. Initial pages with the dialog hash state are an example
+			// where the stack check is necessary
+			if ( $.mobile.hashListeningEnabled && $.mobile.urlHistory.activeIndex > 0 ) {
 				$.mobile.back();
 			} else {
-				dst = $.mobile.urlHistory.getPrev().url;
+				dst = $.mobile.urlHistory.getActive().url;
 				if ( !$.mobile.path.isPath( dst ) ) {
 					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
 				}

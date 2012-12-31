@@ -127,7 +127,7 @@ var categoryData = {
 <pre>
 <code>
 // Listen for any attempts to call changePage().
-$(document).bind( &quot;pagebeforechange&quot;, function( e, data ) {
+$(document).on( &quot;pagebeforechange&quot;, function( e, data ) {
 
 	// We only want to handle changePage() calls where the caller is
 	// asking us to load a page by URL.

@@ -40,18 +40,29 @@
 			<dd>
 				<p class="default">default: "plus"</p>
 				<p>Sets the icon for the headers of the collapsible containers when in a collapsed state. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.collapsedIcon = "arrow-r";</strong>
 });
 </code></pre>
 				<p>This option is also exposed as a data attribute: <code>data-collapsed-icon=&quot;arrow-r&quot;</code>.</p>
 			</dd>
 
+			<dt><code>corners</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: true</p>
+				<p>Applies the theme border-radius to the first and last collapsible if set to true. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
+<pre><code>$( document ).on( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.corners = false;</strong>
+});
+</code></pre>
+				<p>This option is also exposed as a data attribute: <code>data-corners=&quot;false&quot;</code>.</p>
+			</dd>
+
 			<dt><code>expandedIcon</code> <em>string</em></dt>
 			<dd>
 				<p class="default">default: "minus"</p>
 				<p>Sets the icon for the headers of the collapsible containers when in an expanded state. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.expandedIcon = "arrow-d";</strong>
 });
 </code></pre>
@@ -62,7 +73,7 @@
 			<dd>
 				<p class="default">default: "left"</p>
 				<p>Positions the icons in the collapsible headers. Possible values: left, right, top, bottom, none, notext.</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.iconpos = "right";</strong>
 });
 </code></pre>
@@ -73,7 +84,7 @@
 			<dd>
 				<p class="default">default: ":jqmData(role='collapsible-set')"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as collapsible sets. To change which elements are initialized, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.initSelector = ".mycollapsibleset";</strong>
 });
 </code></pre>
@@ -83,7 +94,7 @@
 			<dd>
 				<p class="default">default: true</p>
 				<p>By setting this option to false the collapsibles will get a full width appearance without corners. If the value is false for an individual collapsible container, but that container is part of a collapsible set, then the value is inherited from the parent collapsible set. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.inset = false;</strong>
 });
 </code></pre>
@@ -94,7 +105,7 @@
 			<dd>
 				<p class="default">default: false</p>
 				<p>Sets the size of the collapsibles to a more compact, <a href="../forms/forms-all-mini.html">mini version</a>. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.mini = true;</strong>
 });
 </code></pre>
@@ -104,7 +115,7 @@
 			<dd>
 				<p class="default">default: null, inherited from parent</p>
 				<p>Sets the color scheme (swatch) for the collapsible set. It accepts a single letter from a-z that maps to one of the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.theme = "a";</strong>
 });
 </code></pre>

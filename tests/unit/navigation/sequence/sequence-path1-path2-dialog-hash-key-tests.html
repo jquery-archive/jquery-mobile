@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="../../../../js/jquery.js"></script>
+	<script src="../../../../js/"></script>
+	<script>
+(function($) {
+	var l = $.mobile.path.parseLocation();
+
+	// Redirect to sequence-tests.html in the same directory as this file
+	location.href = l.protocol + "//" + l.host + l.directory + "sequence-redirect.html" + l.search + "#" + l.directory + "index.html" + "&ui-state=dialog";
+})( jQuery );
+	</script>
+</head>
+</html>

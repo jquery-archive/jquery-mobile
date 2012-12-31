@@ -15,7 +15,7 @@
 		setup: function(){
 
 			// ensure bindings are removed
-			$.each(events + "vmouseup vmousedown".split(" "), function(i, name){
+			$.each( events.concat( "vmouseup vmousedown".split(" ") ), function(i, name){
 				$("#qunit-fixture").unbind();
 			});
 
@@ -313,7 +313,7 @@
 
 	asyncTest( "stopImmediatePropagation() prevents tap propagation and execution of 2nd handler", function(){
 		var tap = 0,
-			$cf = $( "#qunit-fixture" );
+			$cf = $( "#qunit-fixture" ),
 			$doc = $( document ),
 			docTapCB = function(){
 				ok(false, "tap should NOT be triggered on document");

@@ -35,7 +35,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			clearbtn,
 			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
 			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
-			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist;
+			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist,
+			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" );
 
 		function toggleClear() {
 			setTimeout( function() {
@@ -64,7 +65,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		//"search" and "text" input widgets
 		if ( isSearch ) {
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-		} else if ( inputNeedsClearBtn ) {
+		} else if ( inputNeedsWrap ) {
 			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
 		}
 
@@ -89,29 +90,25 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			toggleClear();
 
-			input.bind( "paste cut keyup focus change blur", toggleClear );
+			input.bind( "paste cut keyup input focus change blur", toggleClear );
 		}
-		else if ( !inputNeedsClearBtn && !isSearch ) {
+		else if ( !inputNeedsWrap && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
 		input.focus(function() {
+				// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
+				if ( o.preventFocusZoom ) {
+					$.mobile.zoom.disable( true );
+				}			
 				focusedEl.addClass( $.mobile.focusClass );
 			})
 			.blur(function() {
 				focusedEl.removeClass( $.mobile.focusClass );
-			})
-			// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
-			.bind( "focus", function() {
-				if ( o.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
-				}
-			})
-			.bind( "blur", function() {
 				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.enable( true );
-				}
-			});
+				}				
+			})
 
 		// Autogrow
 		if ( input.is( "textarea" ) ) {
@@ -124,11 +121,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					input.height(scrollHeight + extraLineHeight);
+					input.height( scrollHeight + extraLineHeight );
 				}
 			};
 
-			input.keyup(function() {
+			input.on( "keyup change input paste", function() {
 				clearTimeout( keyupTimeout );
 				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
 			});
@@ -151,7 +148,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	disable: function() {
 		var $el,
-				parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( this.element.is( "[type='search'], :jqmData(type='search')" ) || ( this.element.is( "[type='text'],textarea" ) && !!this.options.clearBtn ) );
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
+			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
+			
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
@@ -163,9 +163,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	enable: function() {
 		var $el,
-				parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( this.element.is( "[type='search'], :jqmData(type='search')" ) || ( this.element.is( "[type='text'],textarea" ) && !!this.options.clearBtn ) );
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
+			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
 
-		// TODO using more than one line of code is acceptable ;)
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {

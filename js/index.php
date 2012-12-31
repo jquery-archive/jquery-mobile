@@ -20,8 +20,12 @@ $files = array(
 	'widgets/page.js',
 	'jquery.mobile.core.js',
 	'widgets/loader.js',
+	'events/navigate.js',
+	'navigation/path.js',
+	'navigation/history.js',
+	'navigation/navigator.js',
+	'navigation/method.js',
 	'jquery.mobile.navigation.js',
-	'jquery.mobile.navigation.pushstate.js',
 	'jquery.mobile.transition.js',
 	'transitions/pop.js',
 	'transitions/slide.js',
@@ -65,16 +69,40 @@ $files = array(
 	'jquery.mobile.init.js'
 );
 
+function getGitHeadPath() {
+	$gitRoot = "../";
+	$gitDir = ".git";
+	$path = $gitRoot . $gitDir;
+
+	if ( is_file( $path ) && is_readable( $path ) ) {
+		$contents = file_get_contents( $path );
+		if ( $contents ) {
+			$contents = explode( " ", $contents );
+			if ( count( $contents ) > 1 ) {
+				$contents = explode( "\n", $contents[ 1 ] );
+				if ( $contents && count( $contents ) > 0 ) {
+					$path = $gitRoot . $contents[ 0 ];
+				}
+			}
+		}
+	}
+
+	return $path . "/logs/HEAD";
+}
+
 function getCommitId() {
-	$gitHeadPath = "../.git/logs/HEAD";
-	$logs = ( is_readable( $gitHeadPath ) ? file_get_contents( $gitHeadPath ) : false );
-	if ( $logs ) {
-		$logs = explode( "\n", $logs );
-		$n_logs = count( $logs );
-		if ( $n_logs > 1 ) {
-			$log = explode( " ", $logs[ $n_logs - 2 ] );
-			if ( count( $log ) > 1 ) {
-				return $log[ 1 ];
+	$gitHeadPath = getGitHeadPath();
+
+	if ( $gitHeadPath ) {
+		$logs = ( is_readable( $gitHeadPath ) ? file_get_contents( $gitHeadPath ) : false );
+		if ( $logs ) {
+			$logs = explode( "\n", $logs );
+			$n_logs = count( $logs );
+			if ( $n_logs > 1 ) {
+				$log = explode( " ", $logs[ $n_logs - 2 ] );
+				if ( count( $log ) > 1 ) {
+					return $log[ 1 ];
+				}
 			}
 		}
 	}

@@ -33,11 +33,7 @@
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Select Event Test Suite</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests">
-</ol>
+<div id="qunit"></div>
 
 <div id="default"  data-nstest-role="page" data-nstest-theme="c">
 	<div  data-nstest-role="fieldcontain" id="select-choice-few-container">
@@ -420,6 +416,14 @@
 	<select name="select-aggregate-option-text" id="select-aggregate-option-text" multiple>
 		<option value="standard" selected>Standard: 7 day</option>
 		<option value="rush" selected>Rush: 3 days</option>
+		<option value="express">Express: next day</option>
+		<option value="overnight">Overnight</option>
+	</select>
+
+	<select name="test-placeholder-update" id="test-placeholder-update" data-nstest-native-menu="false">
+		<option>Placeholder</option>
+		<option value="standard">Standard: 7 day</option>
+		<option value="rush">Rush: 3 days</option>
 		<option value="express">Express: next day</option>
 		<option value="overnight">Overnight</option>
 	</select>

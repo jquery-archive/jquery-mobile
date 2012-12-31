@@ -1,3 +1,5 @@
+$.testHelper.delayStart();
+
 (function( $ ) {
 	module( "initial page loading tests" );
 

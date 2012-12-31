@@ -44,7 +44,7 @@
 			<p>A feature called <code>touchOverflowEnabled</code> is designed to leverage the upcoming wave of browsers that support overflow scrolling in CSS. Note that this feature is off by default to give us more time to test and debug this for best performance but we hope to turn it on by default at a later point. Here's how to enable this <a href="../api/globalconfig.html">global option</a>:</p>
 			
 <pre><code>&lt;script&gt;
-$(document).bind(&quot;mobileinit&quot;, function(){
+$(document).on(&quot;mobileinit&quot;, function(){
 <strong>  $.mobile.touchOverflowEnabled = true;
 </strong>});
 &lt;/script&gt;</code></pre>
@@ -79,7 +79,7 @@ $(document).bind(&quot;mobileinit&quot;, function(){
 			<p>Generally touchOverflow is only enabled on devices that support touch-scrolling of overflow areas, not desktop browsers.  This can make it difficult to debug problems with the touchOverflow feature.  To enable touchOverflow on all browsers, use the following code:
 
 <pre><code>&lt;script&gt;
-$(document).bind(&quot;mobileinit&quot;, function() {
+$(document).on(&quot;mobileinit&quot;, function() {
   <strong>$.support.touchOverflow = true;</strong>
   $.mobile.touchOverflowEnabled = true;
 });

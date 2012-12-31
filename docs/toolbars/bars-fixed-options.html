@@ -117,7 +117,7 @@ $.mobile.fixedToolbars
 				<p class="default">default: function that returns a boolean value</p>
 				<p>CSS <code>position: fixed</code> support is very difficult to test; in fact, at the time of version 1.1 release, there was no known way to reasonably test for fixed support without turning up false positives or negatives in certain popular browsers. This option is a function that attempts to opt-out some popular platforms that are known to be troublesome with <code>position: fixed</code> . Often, these platforms support <code>position: fixed</code>  partially, which can be worse than not supporting it at all. If overriding this option with your own blacklist logic, you simply need to provide a function that returns a true or false result when called upon initialization. You must set it on mobileinit, so that it applies when the plugin is initially created.</p>			
 				<pre><code>
-$( document ).bind("mobileinit", function(){
+$( document ).on("mobileinit", function(){
   $.mobile.fixedtoolbar.prototype.options.supportBlacklist = function(){
     var result;
     // logic to determine whether result should be true or false
@@ -131,7 +131,7 @@ $( document ).bind("mobileinit", function(){
 			<dd>
 				<p class="default">default: ":jqmData(position='fixed')"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as fixed toolbars. To change which elements are initialized, bind this option to the <a href="../api/globalconfig.html">mobileinit event</a>:</p>
-				<pre><code>$( document ).bind( "mobileinit", function(){
+				<pre><code>$( document ).on( "mobileinit", function(){
 	<strong>$.mobile.fixedtoolbar.prototype.options.initSelector = ".myselector";</strong>
 });
 </code></pre>

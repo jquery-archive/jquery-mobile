@@ -30,9 +30,7 @@
 
 			<div class="ui-body ui-body-d ui-corner-all">
 
-			<?php
-				echo "<p> " . $_REQUEST['shipping'] . "</p>";
-			?>
+			<p><?php echo isset( $_GET['shipping'] ) ? $_GET['shipping'] : ''; ?></p>
 			
 			</div>
 			

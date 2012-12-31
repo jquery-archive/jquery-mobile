@@ -18,7 +18,7 @@
 	};
 
 	// Check if two chunks of DOM are identical
-	domEqual = function( l, r ) {
+	var domEqual = function( l, r ) {
 		var idx, idxAttr, lattr, rattr;
 
 		// If the lengths of the two jQuery objects are different, the DOM
@@ -68,7 +68,15 @@
 		return false;
 	};
 
+	var homeWithSearch = $.mobile.path.parseUrl(location.pathname).pathname + location.search;
+
 	module(libName, {
+		setup: function() {
+			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
+			$.testHelper.navReset( homeWithSearch );
+		},
+
 		teardown: function(){
 			$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
 			$.mobile.defaultTransitionHandler = originalDefTransitionHandler;
@@ -420,8 +428,6 @@
 			$label = $select.parent().siblings( "label" ),
 			$button = $select.siblings( "a" );
 
-		$label.text( "foo" );
-
 		$.testHelper.pageSequence([
 			function() {
 				$label.text( "foo" );
@@ -513,6 +519,13 @@
 			function() { $.mobile.back(); },
 			function() { start(); }
 		]);
+	});
+
+	test( "changing the placeholder text for a non-native select will update the placeholder list item", function() {
+		var newText = "Updated placeholder";
+		$( "#test-placeholder-update option:first-child" ).text( newText );
+		$( "#test-placeholder-update" ).selectmenu( "refresh", true );
+		deepEqual ( $( "#test-placeholder-update-menu li:first-child .ui-btn-text" ).text(), newText, "Placeholder list item reflects new value after refresh( true )" );
 	});
 
 })(jQuery);

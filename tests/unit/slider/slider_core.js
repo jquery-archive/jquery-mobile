@@ -3,7 +3,7 @@
  */
 (function($){
 	$.mobile.page.prototype.options.keepNative = "input.should-be-native";
-
+	
 	module( "jquery.mobile.slider.js core" );
 
 	// not testing the positive case here since's it's obviously tested elsewhere
@@ -58,6 +58,15 @@
 		equal(label.attr( "id" ), slider.attr( "id" ) + "-label", "the label id is based off the slider id" );
 	});
 
+	// NOTE init binding to alter the setting is in settings.js
+	test( "slider input does not get clear button", function() {
+		deepEqual( $( ".textinput-test" ).find( ".ui-input-clear" ).length, 0, "slider input does not get clear button" );
+	});
+	
+	test( "slider input is not wrapped in div.ui-input-text", function() {
+		ok( ! $( "#textinput-test" ).parents().is( "div.ui-input-text" ), "slider input is not wrapped in div.ui-input-text" );
+	});
+	
 	test( "refresh is triggered on mouseup", function() {
 		expect( 1 );
 		var slider = $( "#mouseup-refresh" );

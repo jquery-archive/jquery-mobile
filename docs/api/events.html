@@ -28,12 +28,12 @@
 		<p>jQuery Mobile offers several custom events that build upon native events to create useful hooks for development. Note that these events employ various touch, mouse, and window events, depending on event existence, so you can bind to them for use in both handheld and desktop environments. You can bind to these events like you would with other jQuery events, using <code>live()</code> or <code>bind()</code>.</p>
 
 			<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important: Use <code>$(document).bind('pageinit')</code>, not <code>$(document).ready()</code></h4>
+		<h4 style="margin:.5em 0">Important: Use <code>$(document).on('pageinit')</code>, not <code>$(document).ready()</code></h4>
 		<p>The first thing you learn in jQuery is to call code inside the <code>$(document).ready()</code> function so everything will execute as soon as the DOM is loaded. However, in jQuery Mobile, Ajax is used to load the contents of each page into the DOM as you navigate, and the DOM ready handler only executes for the first page. To execute code whenever a new page is loaded and created, you can bind to the <code>pageinit</code> event. This event is explained in detail at the bottom of this page.</p></div>
 
       <p>&nbsp; </p>
 		<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important: <code>$(document).bind('pagecreate')</code> vs <code>$(document).bind('pageinit')</code></h4>
+		<h4 style="margin:.5em 0">Important: <code>$(document).on('pagecreate')</code> vs <code>$(document).on('pageinit')</code></h4>
    <p> Prior to Beta 2 the recommendation to users wishing to manipulate jQuery Mobile enhanced pages and child widget markup was to bind to the <code>pagecreate</code> event. In Beta 2 an internal change was made to decouple each of the widgets by binding to the <code>pagecreate</code> event in place of direct calls to the widget methods. As a result, users binding to the <code>pagecreate</code> in <code>mobileinit</code> would find their binding executing before the markup had been enhanced by each of the plugins. In keeping with the lifecycle of the jQuery UI Widget Factory, the initialization method is invoked <strong>after</strong> the create method, so the <code>pageinit</code> event provides the correct timing for post enhancement manipulation of the DOM and/or Javascript objects.
 
 		In short, if you were previously using <code>pagecreate</code> to manipulate the enhanced markup before the page was shown, it's very likely you'll want to migrate to 'pageinit'.
@@ -120,7 +120,7 @@
 			<div class="ui-body ui-body-e">
 				<h4>orientationchange timing</h4>
 
-			<p>	The timing of the <code>orientationchange</code> with relation to the change of the client height and width is different between browsers, though the current implementation will give you the correct value for <code>event.orientation</code> derived from <code>window.orientation</code>. This means that if your bindings are dependent on the height and width values you may want to disable <code>orientationChange</code> all together with <code>$.mobile.orientationChangeEnabled = false</code> to let the fallback resize code trigger your bindings.</p>
+			<p>	The timing of the <code>orientationchange</code> with relation to the change of the client height and width is different between browsers, though the current implementation will give you the correct value for <code>event.orientation</code> derived from <code>window.orientation</code>. This means that if your bindings are dependent on the height and width values you may want to disable <code>orientationChange</code> altogether with <code>$.mobile.orientationChangeEnabled = false</code> to let the fallback resize code trigger your bindings.</p>
 			</div>
 		</dl>
 
@@ -160,7 +160,7 @@
             	  <ul>
             	    <li>Callbacks that call preventDefault() on the event, *MUST* call resolve() or reject() on this object so that changePage() requests resume processing. Deferred object observers expect the deferred object to be resolved like this:</p>
                     <pre><code>
-$( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
+$( document ).on( &quot;pagebeforeload&quot;, function( event, data ){
 
 	// Let the framework know we're going to handle the load.
 
@@ -177,7 +177,7 @@ $( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
 });</code></pre>
                     <p>or rejected like this:
                     <pre><code>
-$( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
+$( document ).on( &quot;pagebeforeload&quot;, function( event, data ){
 
 	// Let the framework know we're going to handle the load.
 
@@ -259,7 +259,7 @@ $( document ).bind( &quot;pagebeforeload&quot;, function( event, data ){
             	  <ul>
             	    <li>Callbacks that call preventDefault() on the event, *MUST* call resolve() or reject() on this object so that changePage() requests resume processing. Deferred object observers expect the deferred object to be resolved like this:</p>
                     <pre><code>
-$( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
+$( document ).on( &quot;pageloadfailed&quot;, function( event, data ){
 
 	// Let the framework know we're going to handle things.
 
@@ -276,7 +276,7 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
 });</code></pre>
                     <p>or rejected like this:
                     <pre><code>
-$( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
+$( document ).on( &quot;pageloadfailed&quot;, function( event, data ){
 
 	// Let the framework know we're going to handle things.
 
@@ -497,7 +497,7 @@ $( '#foo' ).hide().trigger( 'updatelayout' );
 		<h2>Animation Events</h2>
 		<p>jQuery Mobile exposes the <code>animationComplete</code> plugin, which you can utilize after adding or removing a class that applies a CSS transition. It can be used with page transition events. For example:</p>
 <pre><code>
-$(document).bind("pagehide", function(event, ui) {
+$(document).on("pagehide", function(event, ui) {
   $(ui.nextPage).animationComplete(function() {
     alert('Animation completed');
   });

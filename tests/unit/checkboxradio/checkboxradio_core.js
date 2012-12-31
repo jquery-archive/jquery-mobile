@@ -10,20 +10,20 @@
 
 		input.checkboxradio( "disable" );
 		input.checkboxradio( "enable" );
-		ok( !input.attr( "disabled" ), "start input as enabled" );
+		ok( !input.prop("disabled"), "start input as enabled" );
 		ok( !input.parent().hasClass( "ui-disabled" ), "no disabled styles" );
-		ok( !input.attr( "checked" ), "not checked before click" );
+		ok( !input.prop("checked"), "not checked before click" );
 		button.trigger( "click" );
-		ok( input.attr( "checked" ), "checked after click" );
+		ok( input.prop("checked"), "checked after click" );
 		ok( button.hasClass( "ui-checkbox-on" ), "active styles after click" );
 		button.trigger( "click" );
 
 		input.checkboxradio( "disable" );
 		ok( input.attr( "disabled" ), "input disabled" );
 		ok( input.parent().hasClass( "ui-disabled" ), "disabled styles" );
-		ok( !input.attr( "checked" ), "not checked before click" );
+		ok( !input.prop( "checked" ), "not checked before click" );
 		button.trigger( "click" );
-		ok( !input.attr( "checked" ), "not checked after click" );
+		ok( !input.prop( "checked" ), "not checked after click" );
 		ok( !button.hasClass( "ui-checkbox-on" ), "no active styles after click" );
 	});
 
@@ -33,16 +33,16 @@
 		var input2 = $("#checkbox-32");
 		var button2 = input2.parent().find(".ui-btn");
 
-		ok(!input1.attr("checked"), "input1 not checked before click");
-		ok(!input2.attr("checked"), "input2 not checked before click");
+		ok(!input1.prop("checked"), "input1 not checked before click");
+		ok(!input2.prop("checked"), "input2 not checked before click");
 
 		button1.trigger("click");
-		ok(input1.attr("checked"), "input1 checked after click on input1");
-		ok(!input2.attr("checked"), "input2 not checked after click on input1");
+		ok(input1.prop("checked"), "input1 checked after click on input1");
+		ok(!input2.prop("checked"), "input2 not checked after click on input1");
 
 		button2.trigger("click");
-		ok(input1.attr("checked"), "input1 not changed after click on input2");
-		ok(input2.attr("checked"), "input2 checked after click on input2");
+		ok(input1.prop("checked"), "input1 not changed after click on input2");
+		ok(input2.prop("checked"), "input2 checked after click on input2");
 	});
 
 	asyncTest( "change events fired on checkbox for both check and uncheck", function(){
