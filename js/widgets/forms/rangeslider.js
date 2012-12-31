@@ -42,7 +42,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
 			label.prependTo( $el );
-			firstHandle.appendTo(_sliderLast);
+			firstHandle.prependTo(_sliderLast);
 
 			$.extend( this, {
 				_inputFirst: _inputFirst,
