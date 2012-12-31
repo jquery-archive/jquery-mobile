@@ -26,9 +26,9 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			_inputFirst = $el.find( "input:first" ),
 			_inputLast = $el.find( "input:last" ),
 			label = $el.find( "label:first" ),
-			_sliderFirst = $.data( _inputFirst.get(0) , "mobileSlider" ).slider,
-			_sliderLast = $.data( _inputLast.get(0) , "mobileSlider" ).slider,
-			firstHandle = $.data( _inputFirst.get(0) , "mobileSlider" ).handle,
+			_sliderFirst = $.data( _inputFirst.get(0), "mobileSlider" ).slider,
+			_sliderLast = $.data( _inputLast.get(0), "mobileSlider" ).slider,
+			firstHandle = $.data( _inputFirst.get(0), "mobileSlider" ).handle,
 			_sliders = $( "<div class=\"ui-rangeslider-sliders\" />" ).appendTo( $el );
 			
 			if ( $el.find( "label" ).length > 1 ) {
@@ -71,8 +71,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_dragFirstHandle: function() {
 			//if the first handle is dragged send the event to the first slider
-			$.data( this._inputFirst.get(0) , "mobileSlider").dragging = true;
-			$.data( this._inputFirst.get(0) , "mobileSlider").refresh( event );
+			$.data( this._inputFirst.get(0), "mobileSlider" ).dragging = true;
+			$.data( this._inputFirst.get(0), "mobileSlider" ).refresh( event );
 			return false;
 		},
 
@@ -84,14 +84,15 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			//if the drag was initaed on an extream and the other handle is focused send the events to
 			//the closest handle
 			if ( ( this._proxy === "first" && first ) || ( this._proxy === "last" && !first ) ) {
-				$.data( otherSlider.get(0) , "mobileSlider" ).dragging = true;
-				$.data( otherSlider.get(0) , "mobileSlider" ).refresh( event );
+				$.data( otherSlider.get(0), "mobileSlider" ).dragging = true;
+				$.data( otherSlider.get(0), "mobileSlider" ).refresh( event );
 				return false;
 			}
 		},
 
 		_slidestop: function( event ) {
 			var first = $( event.target ).is( this._inputFirst );
+			
 			this._proxy = false;
 			//this stops dragging of the handle and brings the active track to the front 
 			//this makes clicks on the track go the the last handle used
@@ -138,6 +139,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
 				thisSlider = first ? this._inputFirst : this._inputLast,
 				otherSlider = first ? this._inputLast : this._inputFirst;
+				
 			if ( min > max && !this._sliderTarget ) {
 				//this prevents min from being greater then max
 				thisSlider.val( first ? max: min ).slider( "refresh" );
@@ -145,35 +147,36 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			} else if ( min > max ) {
 				//this makes it so clicks on the target on either extream go to the closest handle
 				thisSlider.val( this._targetVal ).slider( "refresh" );
+				
 				var self = this;
-
 				//You must wait for the stack to unwind so first slider is updated before updating second
 				setTimeout( function() {
 					otherSlider.val( first ? min: max ).slider( "refresh" );
-					$.data( otherSlider , "mobileSlider" ).handle.focus();
+					$.data( otherSlider.get(0), "mobileSlider" ).handle.focus();
 					self._sliderFirst.css( "z-index", first ? "" : 1 );
 					self._trigger( "normalize" );
 				}, 0 );
 				this._proxy = ( first ) ? "first" : "last";
 			}
 			//fixes issue where when both _sliders are at min they cannot be adjusted
-			if( min === max ) {
-				$.data( thisSlider.get(0) , "mobileSlider" ).handle.css( "z-index", 1 );
-				$.data( otherSlider.get(0) , "mobileSlider" ).handle.css( "z-index", 0 );
-
+			if ( min === max ) {
+				$.data( thisSlider.get(0), "mobileSlider" ).handle.css( "z-index", 1 );
+				$.data( otherSlider.get(0), "mobileSlider" ).handle.css( "z-index", 0 );
 			} else {
-				$.data( otherSlider.get(0) , "mobileSlider" ).handle.css( "z-index", "" );
-				$.data( thisSlider.get(0) , "mobileSlider" ).handle.css( "z-index", "" );
+				$.data( otherSlider.get(0), "mobileSlider" ).handle.css( "z-index", "" );
+				$.data( thisSlider.get(0), "mobileSlider" ).handle.css( "z-index", "" );
 			}
+			
 			this._updateHighlight();
+			
 			if ( min >= max ) {
 				return false;
 			}
 		},
 
 		_updateHighlight: function() {
-			var min = parseInt( $.data( this._inputFirst.get(0) , "mobileSlider" ).handle[0].style.left, 10 ),
-				max = parseInt( $.data( this._inputLast.get(0) , "mobileSlider" ).handle[0].style.left, 10 ),
+			var min = parseInt( $.data( this._inputFirst.get(0), "mobileSlider" ).handle[0].style.left, 10 ),
+				max = parseInt( $.data( this._inputLast.get(0), "mobileSlider" ).handle[0].style.left, 10 ),
 				width = (max - min);
 
 			this.element.find( ".ui-slider-bg" ).css({
