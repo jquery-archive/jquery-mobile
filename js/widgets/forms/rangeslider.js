@@ -23,9 +23,9 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			var secondLabel,
 			$el = this.element,
 			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
-			_inputFirst = $el.find( "input:first" ),
-			_inputLast = $el.find( "input:last" ),
-			label = $el.find( "label:first" ),
+			_inputFirst = $el.find( "input" ).first(),
+			_inputLast = $el.find( "input" ).last(),
+			label = $el.find( "label" ).first(),
 			_sliderFirst = $.data( _inputFirst.get(0), "mobileSlider" ).slider,
 			_sliderLast = $.data( _inputLast.get(0), "mobileSlider" ).slider,
 			firstHandle = $.data( _inputFirst.get(0), "mobileSlider" ).handle,
@@ -175,8 +175,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_updateHighlight: function() {
-			var min = parseInt( $.data( this._inputFirst.get(0), "mobileSlider" ).handle[0].style.left, 10 ),
-				max = parseInt( $.data( this._inputLast.get(0), "mobileSlider" ).handle[0].style.left, 10 ),
+			var min = parseInt( $.data( this._inputFirst.get(0), "mobileSlider" ).handle.get(0).style.left, 10 ),
+				max = parseInt( $.data( this._inputLast.get(0), "mobileSlider" ).handle.get(0).style.left, 10 ),
 				width = (max - min);
 
 			this.element.find( ".ui-slider-bg" ).css({
