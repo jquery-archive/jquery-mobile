@@ -25,18 +25,18 @@
 			
 			deepEqual( cssMarginLeft, bgMarginLeft, "Highlight has correct left margin" );
 		} else {
-			var intMarginLeft = parseFloat( cssMarginLeft.replace("px", "") );
+			var intMarginLeft = parseFloat( cssMarginLeft.replace("px", "") ); console.log(intMarginLeft);
 			
-			bgMarginLeft = Math.floor( rangeFirst.val() / range * width );
-			// Take a rounding difference of 1px into account
-			ok( intMarginLeft === bgMarginLeft || intMarginLeft >= ( bgMarginLeft + 1 ), "Highlight has correct left margin" );
+			bgMarginLeft = Math.round( rangeFirst.val() / range * width ); console.log(bgMarginLeft);
+			// Take a rounding difference of max 2px into account
+			ok( -2 >= ( intMarginLeft - bgMarginLeft ) <= 2, "Highlight has correct left margin" );
 		}
 		
 		cssWidth = bg.css( "width" );
-		intWidth = parseFloat( cssWidth.replace("px", "") );
-		bgWidth = Math.floor( (rangeLast.val() - rangeFirst.val()) / range * width );
-		
-		ok( intWidth === bgWidth || intWidth >= ( bgWidth + 1 ), "Highlight has correct width" );
+		intWidth = parseFloat( cssWidth.replace("px", "") ); console.log(intWidth);
+		bgWidth = Math.round( (rangeLast.val() - rangeFirst.val()) / range * width ); console.log(bgWidth);
+		// Take a rounding difference of max 2px into account
+		ok( -2 >= ( intWidth - bgWidth ) <= 2, "Highlight has correct width" );
 	});
 
 	test( "First input value is always lower than last input value and vice versa", function() {
