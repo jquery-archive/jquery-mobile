@@ -71,7 +71,7 @@ define( [
 			//      https://github.com/jquery/jquery-mobile/issues/4784
 			//
 			// NOTE this option is modified in _create!
-			history: !$.mobile.browser.ie
+			history: !$.mobile.browser.oldIE
 		},
 
 		_eatEventAndClose: function( e ) {
