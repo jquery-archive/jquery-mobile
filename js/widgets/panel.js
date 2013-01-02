@@ -231,8 +231,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._wrapper.removeClass( o.classes.contentWrapClosed );
 			self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
 			self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
-			self._modal.addClass( self._modalOpenClasses );
-
+			if( this._modal ) {
+				self._modal.addClass( self._modalOpenClasses );
+			}
 			self._open = true;
 		}
 	},
@@ -261,7 +262,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 
 			self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
-			self._modal.removeClass( self._modalOpenClasses );
+			if( this._modal ) {
+				self._modal.removeClass( self._modalOpenClasses );
+			}
 			self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
 
 			self._open = false;
