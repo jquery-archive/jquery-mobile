@@ -23,6 +23,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		inset: true,
 		corners: true,
 		mini: false,
+    	        toggleTag: "a" ,
+    	        toggleTagAttr: "href='#'" ,
 		initSelector: ":jqmData(role='collapsible')"
 	},
 	_create: function() {
@@ -100,8 +102,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			//modify markup & attributes
 			.addClass( "ui-collapsible-heading" )
 			.append( "<span class='ui-collapsible-heading-status'></span>" )
-			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
-			.find( "a" )
+			.wrapInner( "<"+o.toggleTag+" "+o.toggleTagAttr+" class='ui-collapsible-heading-toggle' ></"+o.toggleTag+">" )
+			.find( ".ui-collapsible-heading-toggle" )
 				.first()
 				.buttonMarkup({
 					shadow: false,
@@ -131,7 +133,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
 							.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
 						.end()
-						.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+						.find( ".ui-collapsible-heading-toggle" ).first().removeClass( $.mobile.activeBtnClass );
 
 					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
@@ -143,7 +145,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		collapsibleHeading
 			.bind( "tap", function( event ) {
-				collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
+				collapsibleHeading.find( ".ui-collapsible-heading-toggle" ).first().addClass( $.mobile.activeBtnClass );
 			})
 			.bind( "click", function( event ) {
 
