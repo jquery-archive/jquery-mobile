@@ -216,7 +216,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._trigger( "open" );
 				};
 
-
+			if( this.element.closes( ".ui-page-active" ).length < 0 ){
+				immediate = true;
+			}
 			self._trigger( "beforeopen" );
 
 			if ( $.support.cssTransitions && o.animate && !immediate ) {
@@ -252,7 +254,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._unbindFixListener();
 					self._trigger( "close" );
 				};
-
+			if( this.element.closes( ".ui-page-active" ).length < 0 ){
+				immediate = true;
+			}
 			self._trigger( "beforeclose" );
 
 			if ( $.support.cssTransform3d && o.animate && !immediate ) {
