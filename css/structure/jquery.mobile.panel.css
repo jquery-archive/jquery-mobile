@@ -196,14 +196,6 @@
 	left: 0;
 }
 
-
-/* while open, page x overflow is disabled */
-.ui-page-active.ui-panel-page-block{
-	overflow-x:hidden;
-}
-
-
-
 /* wrap push on wide viewports once open */
 @media (min-width: 60em){
 	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push,
