@@ -32,7 +32,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		position: "left",
 		dismissible: true,
 		display: "overlay", //accepts reveal, push, overlay
-		initSelector: ":jqmData(role='panel')"
+		initSelector: ":jqmData(role='panel')",
+		swipeClose: true
 	},
 
 	_panelID: null,
@@ -168,13 +169,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_bindPageEvents: function(){
 		var self = this;
-
-		self.element
-			// on swipe, close the panel (should swipe open too?)
-			.on( "swipe.panel" , function( e ){
-				self.close( true );
-			});
-
+		if(this.option.swipeClose){
+			self.element
+				// on swipe, close the panel (should swipe open too?)
+				.on( "swipe.panel" , function( e ){
+					self.close( true );
+				});
+		}
 		self._page
 			// Close immediately if another panel on the page opens
 			.on( "panelbeforeopen", function( e ){
