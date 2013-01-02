@@ -140,7 +140,7 @@
 		<p>An element is added before the text of each cell with a <code>class</code> of <code>ui-table-cell-label</code>:</p>
 		<pre><code>&lt;td&gt;<strong>&lt;b class=&quot;ui-table-cell-label&quot;&gt;</strong>Year<strong>&lt;/b&gt;</strong>1941&lt;/td&gt;</code></pre>
 		
-		<p>With our mobile-first approach, the base styles for a reflow table stacks each row and presents each cell in the label/data style format. This is done by hiding the table header rows, making each table cell <code>display:block</code> so they are stacked. The the label element injected into each cell is styled as <code>display:inline-block</code> with a <code>min-width:30%</code> rule to place the labels on the same line as the content at a consistent width to form a two column presentation.
+		<p>With our mobile-first approach, the base styles for a reflow table stacks each row and presents each cell in the label/data style format. This is done by hiding the table header rows, making each table cell <code>display:block</code> so they are stacked. The the label element injected into each cell is styled as <code>display:inline-block</code> with a <code>min-width:30%</code> rule to place the labels on the same line as the content at a consistent width to form a two column presentation.</p>
 
 		<h3>Making the table responsive</h3>
 		
@@ -175,7 +175,7 @@
 
 		<h3>Choosing a breakpoint</h3>
 		<p>The goal is to determine the minimum width at which the <em>entire table</em> will fit comfortably within the screen. Find this width by populating a table with realistic sample data, then adjust the browser window until the table completely fits and has a bit of extra space to account for rendering differences across devices. This is the natural place to set the breakpoint that switches between the stacked and tabular presentation modes. </p>
-		<p>The breakpoint width is highly dependent on the number of columns in the table and content within each cell. On some sites, this may be as low as 30em (480px) and on others, it could be as wide as 100em (1,600px). There is no way for the framework to decide on a "standard breakpoint" that will work for everyone &#8212; that's why there isn't a breakpoint built into the table by default.<p>
+		<p>The breakpoint width is highly dependent on the number of columns in the table and content within each cell. On some sites, this may be as low as 30em (480px) and on others, it could be as wide as 100em (1,600px). There is no way for the framework to decide on a "standard breakpoint" that will work for everyone &#8212; that's why there isn't a breakpoint built into the table by default.</p>
 		<p>We recommend writing media query widths are in <code>em</code>'s so they respond to font size changes. To convert a pixel width into  <code>em</code>'s, divide the target width by 16 (pixels). Use this value for the <code>min-width</code> value in the media query above.</p>
 
 		<h3>Applying a preset breakpoint</h3>
@@ -199,7 +199,7 @@
 
 							<ul data-role="listview" data-theme="c" data-dividertheme="d">
 								<li data-role="list-divider">Tables</li>
-								<li><a href="table-reflow.html">Reflow mode</a></li>
+								<li data-theme="a"><a href="table-reflow.html">Reflow mode</a></li>
 								<li><a href="table-column-toggle.html">Column toggle mode</a></li>
 							</ul>
 					</div>

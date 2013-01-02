@@ -4,8 +4,17 @@
 //>>group: Core
 
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
-	"./jquery.mobile.navigation.pushstate", "./widgets/loader", "./jquery.mobile.vmouse", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
+define([
+	"jquery",
+	"./jquery.mobile.core",
+	"./jquery.mobile.support",
+	'./events/navigate',
+	'./navigation/path',
+	'./navigation/method',
+	"./jquery.mobile.navigation",
+	"./widgets/loader",
+	"./jquery.mobile.vmouse",
+	"depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),
@@ -68,7 +77,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			$.mobile.firstPage = $pages.first();
 
 			// define page container
-			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+			$.mobile.pageContainer = $.mobile.firstPage.parent().addClass( "ui-mobile-viewport" );
 
 			// alert listeners that the pagecontainer has been determined for binding
 			// to events triggered on it
@@ -95,6 +104,12 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
 				}
 
+				// make sure to set initial popstate state if it exists
+				// so that navigation back to the initial page works properly
+				if( $.event.special.navigate.isPushStateEnabled() ) {
+					$.navigate.navigator.squash( path.parseLocation().href );
+				}
+
 				$.mobile.changePage( $.mobile.firstPage, {
 					transition: "none",
 					reverse: true,
@@ -102,8 +117,16 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 					fromHashChange: true
 				});
 			} else {
-				// otherwise, trigger a hashchange to load a deeplink
-				$window.trigger( "hashchange", [ true ] );
+				// trigger hashchange or navigate to squash and record the correct
+				// history entry for an initial hash path
+				if( !$.event.special.navigate.isPushStateEnabled() ) {
+					$window.trigger( "hashchange", [true] );
+				} else {
+					// TODO figure out how to simplify this interaction with the initial history entry
+					// at the bottom js/navigate/navigate.js
+					$.navigate.history.stack = [];
+					$.navigate( $.mobile.path.isPath( location.hash ) ? location.hash : location.href );
+				}
 			}
 		}
 	});

@@ -8,13 +8,9 @@
 
 	module('jquery.mobile.navigation.js - base tag', {
 		setup: function(){
-			if ( location.hash ) {
-				stop();
-				$(document).one("pagechange", function() {
-					start();
-				} );
-				location.hash = "";
-			}
+			$.navigate.history.stack = [];
+			$.navigate.history.activeIndex = 0;
+			$.testHelper.navReset( home );
 		}
 	});
 

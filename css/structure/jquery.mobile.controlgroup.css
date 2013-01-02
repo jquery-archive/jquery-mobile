@@ -4,7 +4,8 @@
 .ui-bar .ui-controlgroup { margin: 0 5px; }
 
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
-.ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
+.ui-controlgroup-controls label.ui-select,
+.ui-controlgroup-controls label.ui-submit { position: absolute; left: -9999px; }
 .ui-controlgroup li { list-style: none; }
 
 .ui-controlgroup .ui-btn { margin: 0; }

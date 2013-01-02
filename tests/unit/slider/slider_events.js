@@ -18,7 +18,7 @@
 	var keypressTest = function(opts){
 		var slider = $(opts.selector),
 		    val = window.parseFloat(slider.val()),
-				handle = slider.siblings('.ui-slider').find('.ui-slider-handle');
+				handle = slider.siblings('.ui-slider-track').find('.ui-slider-handle');
 
 		expect( opts.keyCodes.length );
 
@@ -113,7 +113,7 @@
 	// generic switch test function
 	var sliderSwitchTest = function(opts){
 		var slider = $("#slider-switch"),
-			  handle = slider.siblings('.ui-slider').find('a'),
+			  handle = slider.siblings('.ui-slider-switch').find('a'),
 		    switchValues = {
 					'off' : 0,
 					'on' : 1
@@ -163,8 +163,8 @@
 	});
 
 	test( "slider controls will create when inside a container that receives a 'create' event", function(){
-		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider").length, "did not have enhancements applied" );
-		ok( $("#enhancetest").trigger("create").find(".ui-slider").length, "enhancements applied" );
+		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider-track").length, "did not have enhancements applied" );
+		ok( $("#enhancetest").trigger("create").find(".ui-slider-track").length, "enhancements applied" );
 	});
 
 	var createEvent = function( name, target, x, y ) {

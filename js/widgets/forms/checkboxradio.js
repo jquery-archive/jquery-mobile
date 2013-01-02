@@ -101,6 +101,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				self._getInputSet().not( input ).prop( "checked", false );
 
 				self._updateAll();
+				return false;
 			}
 		});
 
@@ -153,7 +154,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			return this.element;
 		}
 
-		return this.element.closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" )
+		return this.element.closest( "form, :jqmData(role='page'), :jqmData(role='dialog')" )
 			.find( "input[name='" + this.element[0].name + "'][type='" + this.inputtype + "']" );
 	},
 

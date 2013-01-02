@@ -43,7 +43,7 @@ asyncTest( "Form resets correctly", function() {
 			}
 		}
 
-		ok( slider.hasClass( "ui-slider" ), prefix + id + "'s immediate succeeding sibling has class ui-slider" );
+		ok( slider.hasClass( "ui-slider-track" ), prefix + id + "'s immediate succeeding sibling has class ui-slider-track" );
 		// This assumes an input range of 0-100
 		ok( style.left === value + "%", prefix + id + "'s button is located appropriately" );
 	}
