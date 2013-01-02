@@ -169,7 +169,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_bindPageEvents: function(){
 		var self = this;
-		if(this.option.swipeClose){
+		if( this.option.swipeClose ){
 			self.element
 				// on swipe, close the panel (should swipe open too?)
 				.on( "swipe.panel" , function( e ){
@@ -204,65 +204,68 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_modalOpenClasses: null,
 
 	open: function( options ){
-		var self = this,
-			o = self.options,
-			complete = function(){
-				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
-				self.element.addClass( o.classes.openComplete );
-				self._wrapper.addClass( o.classes.contentWrapOpenComplete );
-				self._positionPanel();
-				self._bindFixListener();
-				self._trigger( "open" );
-			};
+		if( !this._open ){
+			var self = this,
+				o = self.options,
+				complete = function(){
+					self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
+					self.element.addClass( o.classes.openComplete );
+					self._wrapper.addClass( o.classes.contentWrapOpenComplete );
+					self._positionPanel();
+					self._bindFixListener();
+					self._trigger( "open" );
+				};
 
 
-		self._trigger( "beforeopen" );
+			self._trigger( "beforeopen" );
 
-		if ( $.support.cssTransitions && o.animate ) {
-			self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
-		} else{
-			setTimeout( complete , 0 );
+			if ( $.support.cssTransitions && o.animate ) {
+				self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
+			} else{
+				setTimeout( complete , 0 );
+			}
+			self._page.addClass( self.options.classes.pageBlock );
+			self.element.removeClass( o.classes.panelClosed );
+			self.element.addClass( o.classes.panelOpen );
+			self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
+			self._wrapper.removeClass( o.classes.contentWrapClosed );
+			self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
+			self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
+			self._modal.addClass( self._modalOpenClasses );
+
+			self._open = true;
 		}
-		self._page.addClass( self.options.classes.pageBlock );
-		self.element.removeClass( o.classes.panelClosed );
-		self.element.addClass( o.classes.panelOpen );
-		self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
-		self._wrapper.removeClass( o.classes.contentWrapClosed );
-		self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
-		self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
-		self._modal.addClass( self._modalOpenClasses );
-
-		self._open = true;
-
 	},
 
 	close: function( immediate ){
-		var o = this.options,
-			self = this,
-			complete = function(){
-				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
-				self.element.addClass( o.classes.panelClosed );
-				self._wrapper.removeClass( self._contentWrapOpenClasses );
-				self._wrapper.addClass( o.classes.contentWrapClosed );
-				self._page.removeClass( self.options.classes.pageBlock );
-				self._fixPanel();
-				self._unbindFixListener();
-				self._trigger( "close" );
-			};
+		if( this._open ){
+			var o = this.options,
+				self = this,
+				complete = function(){
+					self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
+					self.element.addClass( o.classes.panelClosed );
+					self._wrapper.removeClass( self._contentWrapOpenClasses );
+					self._wrapper.addClass( o.classes.contentWrapClosed );
+					self._page.removeClass( self.options.classes.pageBlock );
+					self._fixPanel();
+					self._unbindFixListener();
+					self._trigger( "close" );
+				};
 
-		self._trigger( "beforeclose" );
+			self._trigger( "beforeclose" );
 
-		if ( $.support.cssTransform3d && o.animate ) {
-			self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
-		} else{
-			setTimeout( complete , 0 );
+			if ( $.support.cssTransform3d && o.animate ) {
+				self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
+			} else{
+				setTimeout( complete , 0 );
+			}
+
+			self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
+			self._modal.removeClass( self._modalOpenClasses );
+			self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
+
+			self._open = false;
 		}
-
-		self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
-		self._modal.removeClass( self._modalOpenClasses );
-		self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
-
-		self._open = false;
 	},
 
 	toggle: function( options ){
