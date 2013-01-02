@@ -6,8 +6,6 @@
 	var defaults = $.mobile.panel.prototype.options,
 		classes = defaults.classes;
 
-	//QUnit.config.reorder = false;
-
 	function getPageFromPanel( $panel ) {
 		return $panel.closest( ":jqmData(role='page')" );
 	}
