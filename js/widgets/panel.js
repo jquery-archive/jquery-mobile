@@ -216,7 +216,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._trigger( "open" );
 				};
 
-			if( this.element.closes( ".ui-page-active" ).length < 0 ){
+			if( this.element.closest( ".ui-page-active" ).length < 0 ){
 				immediate = true;
 			}
 			self._trigger( "beforeopen" );
@@ -254,7 +254,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._unbindFixListener();
 					self._trigger( "close" );
 				};
-			if( this.element.closes( ".ui-page-active" ).length < 0 ){
+			if( this.element.closest( ".ui-page-active" ).length < 0 ){
 				immediate = true;
 			}
 			self._trigger( "beforeclose" );
