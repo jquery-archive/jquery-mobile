@@ -59,9 +59,6 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 				$target.attr( "data-" + $.mobile.ns + "transition", ( active.transition || $.mobile.defaultDialogTransition ) )
 					.attr( "data-" + $.mobile.ns + "direction", "reverse" );
 			}
-		})
-		.bind( "pagehide", function( e, ui ) {
-			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
 		});
 
 		this._on( $el, {
