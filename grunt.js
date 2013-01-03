@@ -91,9 +91,10 @@ module.exports = function( grunt ) {
 			},
 
 			demosjs: {
-				src: [ '<banner:global.ver.header>',
+				src: [
 					path.join( 'docs', 'demos', '_assets', 'js', 'jqm-demos.js' ),
-					path.join( 'docs', 'demos', '_assets', 'js', 'view-source.js' ) ],
+					path.join( 'docs', 'demos', '_assets', 'js', 'view-source.js' )
+				],
 				dest: demosjsFile + '.js'
 			},
 
