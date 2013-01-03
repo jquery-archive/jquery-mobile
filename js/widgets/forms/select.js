@@ -60,14 +60,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			classes = $el[0].className;
 		} */
 		if ( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
-			classes =  " ui-btn-left";
+			classes = " ui-btn-left";
 		}
 
 		if (  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = " ui-btn-right";
 		}
 
-		this.select = this.element.wrap( "<div class='ui-select" + classes + "'>" );
+		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
@@ -79,6 +79,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	_destroy: function() {
 		var wrapper = this.element.parents( ".ui-select" );
 		if ( wrapper.length > 0 ) {
+			if ( wrapper.is( ".ui-btn-left, .ui-btn-right" ) ) {
+				this.element.addClass( wrapper.is( ".ui-btn-left" ) ? "ui-btn-left" : "ui-btn-right" );
+			}
 			this.element.insertAfter( wrapper );
 			wrapper.remove();
 		}
