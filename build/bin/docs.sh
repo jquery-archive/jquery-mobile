@@ -13,6 +13,8 @@ cp compiled/*.css tmp/demos/css/themes/$THEME
 cp -r compiled/images tmp/demos/css/themes/$THEME
 # ... replace "js/" with "js/jquery.mobile.js"
 # NOTE the deletion here is required by gnu/bsd sed differences
+find tmp/demos/docs/demos \( -name '*.html' -o -name '*.php' \) -exec sed -i${SED_INPLACE_EXT} -e "s@_assets/js/\"@_assets/js/$DEMOSNAME.js\"@" {} \;
+find tmp/demos/docs/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
 find tmp/demos \( -name '*.html' -o -name '*.php' \) -exec sed -i${SED_INPLACE_EXT} -e "s@js/\"@js/$NAME.js\"@" {} \;
 find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
 # make sure the docs reference the right css file names (for deploy)
