@@ -25,7 +25,7 @@
 				// Create the popup
 				$.mobile.activePage.append( popup ).trigger( "create" );
 				// Wait with opening the popup until the popup image has been loaded in the DOM.
-				// This is ensure the popup will have to correct size and position
+				// This ensures the popup gets the correct size and position
 				$( ".photo", "#popup-" + short ).load(function() {
 					var height = $( this ).height(),
 						width = $( this ).width();
@@ -42,7 +42,7 @@
 				}, 2000);
 			});
 
-			// Set a max-height to shrink the image to fit the screen if necessary.
+			// Set a max-height to make large images shrink to fit the screen.
 			$( document ).on( "popupbeforeposition", ".ui-popup", function() {
 				// -60px to take 30px top and bottom tolerance into account.
 				var maxHeight = $( window ).height() - 60 + "px";
