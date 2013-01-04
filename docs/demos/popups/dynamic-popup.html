@@ -18,12 +18,12 @@
 					model = target.find( "p" ).html(),
 					short = target.attr( "id" ),
 					closebtn = '<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-btn-right">Close</a>',
-					heading = '<div class="heading ui-bar-a"><h2>' + brand + ' ' + model + '</h2></div>',
+					header = '<div data-role="header"><h2>' + brand + ' ' + model + '</h2></div>',
 					img = '<img src="../_assets/img/' + short + '.jpg" alt="' + brand + '" class="photo">',
-					popup = '<div data-role="popup" id="popup-' + short + '" data-short="' + short +'" data-theme="none" data-overlay-theme="a" data-corners="false">' + closebtn + img + heading + '</div>';
+					popup = '<div data-role="popup" id="popup-' + short + '" data-short="' + short +'" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15">' + closebtn + header + img + '</div>';
 
-				// Create the popup
-				$.mobile.activePage.append( popup ).trigger( "create" );
+				// Create the popup. Trigger "pagecreate" instead of "create" because currently the framework doesn't bind the enhancement of toolbars to the "create" event (js/widgets/page.sections.js).
+				$.mobile.activePage.append( popup ).trigger( "pagecreate" );
 				// Wait with opening the popup until the popup image has been loaded in the DOM.
 				// This ensures the popup gets the correct size and position
 				$( ".photo", "#popup-" + short ).load(function() {
@@ -44,8 +44,8 @@
 
 			// Set a max-height to make large images shrink to fit the screen.
 			$( document ).on( "popupbeforeposition", ".ui-popup", function() {
-				// -60px to take 30px top and bottom tolerance into account.
-				var maxHeight = $( window ).height() - 60 + "px";
+				// 68px: 2 * 15px for top/bottom tolerance, 38px for the header.
+				var maxHeight = $( window ).height() - 68 + "px";
 
 				$( "img.photo", this ).css( "max-height", maxHeight );
 			});
@@ -57,22 +57,9 @@
 		});
 	</script>
     <style>
-		/* Styling and positioning of the heading */
-		.heading {
-			position: absolute;
-			top: .5em;
-			left: 0;
-			padding: .5em 1em;
-			background: #111;
-			background: rgba(0,0,0,.7);
-			border: none;
-		}
-		.heading h2 {
-			margin: 0;
-			font-size: 1em;
-		}
+		/* Reduce the height of the header on smaller screens. */
 		@media all and (max-width: 48em){
-			.heading {
+			.ui-popup .ui-title {
 				font-size: .75em;
 			}
 		}
