@@ -39,13 +39,7 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 			e.preventDefault();
 			search.blur();
 		}),
-		search = $( "<input>", {
-			placeholder: listview.options.filterPlaceholder
-		})
-		.attr( "data-" + $.mobile.ns + "type", "search" )
-		.jqmData( "lastval", "" )
-		.bind( "keyup change input", function() {
-
+		onKeyUp = function( e ) {
 			var $this = $( this ),
 				val = this.value.toLowerCase(),
 				listItems = null,
@@ -56,6 +50,11 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 				item,
 				// Check if a custom filter callback applies
 				isCustomFilterCallback = listview.options.filterCallback !== defaultFilterCallback;
+
+			if ( lastval && lastval === val ) {
+				// Execute the handler only once per value change
+				return;
+			}
 
 			listview._trigger( "beforefilter", "beforefilter", { input: this } );
 
@@ -119,7 +118,13 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 				listItems.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
 			}
 			listview._addFirstLastClasses( li, listview._getVisibles( li, false ), false );
+		},
+		search = $( "<input>", {
+			placeholder: listview.options.filterPlaceholder
 		})
+		.attr( "data-" + $.mobile.ns + "type", "search" )
+		.jqmData( "lastval", "" )
+		.bind( "keyup change input", onKeyUp )
 		.appendTo( wrapper )
 		.textinput();
 
