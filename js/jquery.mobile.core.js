@@ -84,6 +84,10 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 			hoverDelay: 200
 		},
 
+		// define the window and the document objects
+		$window: $( window ),
+		$document: $( document ),		
+
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
 			ALT: 18,
@@ -134,7 +138,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 
 			setTimeout( function() {
 				window.scrollTo( 0, ypos );
-				$( document ).trigger( "silentscroll", { x: 0, y: ypos });
+				$.mobile.$document.trigger( "silentscroll", { x: 0, y: ypos });
 			}, 20 );
 
 			setTimeout( function() {
@@ -240,7 +244,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		getScreenHeight: function() {
 			// Native innerHeight returns more accurate value for this across platforms,
 			// jQuery version is here as a normalized fallback for platforms like Symbian
-			return window.innerHeight || $( window ).height();
+			return window.innerHeight || $.mobile.$window.height();
 		}
 	}, $.mobile );
 
