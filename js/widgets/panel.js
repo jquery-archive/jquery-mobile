@@ -33,7 +33,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		dismissible: true,
 		display: "overlay", //accepts reveal, push, overlay
 		initSelector: ":jqmData(role='panel')",
-		swipeClose: true
+		swipeClose: true,
+		positionFixed: true
 	},
 
 	_panelID: null,
@@ -99,7 +100,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelClasses += " ui-body-" + this.options.theme;
 		}
 
-		if( $.support.cssTransform3d ){
+		if( $.support.cssTransform3d && !!this.options.positionFixed ) {
 			panelClasses += " ui-panel-3dtransforms";
 		}
 		return panelClasses;
@@ -119,7 +120,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_positionPanel: function(){
-		if( this.element.height() > $.mobile.getScreenHeight() ){
+		if ( this.element.height() > $.mobile.getScreenHeight() ) {
 			this._unfixPanel();
 			this._scrollIntoView();
 		}
