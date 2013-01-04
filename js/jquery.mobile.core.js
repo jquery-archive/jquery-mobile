@@ -86,7 +86,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 
 		// define the window and the document objects
 		window: $( window ),
-		document: $( document ),		
+		document: $( document ),
 
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
