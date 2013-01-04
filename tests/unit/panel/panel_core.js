@@ -2,8 +2,6 @@
  * mobile panel unit tests
  */
 
-// stop qunit from running the tests until everything is in the page
-QUnit.config.autostart = false;
 
 (function( $ ){
 
@@ -26,15 +24,11 @@ QUnit.config.autostart = false;
 		return $page.find( "." + defaults.classes.contentWrap );
 	}
 
-	$( document ).on( "pageinit", function(){
-		QUnit.start();
-	});
-
-	module( "stock panel");
+	module( "stock panel" );
 
 	test( "expected classes on create", function() {
 
-		var $panel = $( "#panel-test-stock" ),
+		var $panel = $( "#panel-test-create" ),
 			$page = getPageFromPanel( $panel );
 
 		ok( $panel.hasClass( defaults.classes.panel ), "default class is present" );
@@ -51,7 +45,7 @@ QUnit.config.autostart = false;
 
 		expect( 4 );
 
-		var $panel = $( "#panel-test-stock" );
+		var $panel = $( "#panel-test-events" );
 
 		$panel.one( "panelbeforeopen panelopen panelbeforeclose panelclose", function( event ) {
 			ok( true, event.type + " event." );
@@ -66,13 +60,13 @@ QUnit.config.autostart = false;
 	});
 
 	asyncTest( "classes modified by open", function() {
-		expect( 13 );
+		expect( 14 );
 
-		var $panel = $( "#panel-test-stock" ),
+		var $panel = $( "#panel-test-open" ),
 			$page = getPageFromPanel( $panel ),
 			$wrapper = getWrapperFromPage( $page ),
 			$modal = getModalFromPanel( $panel ),
-			$openButton = $page.find( "a[href='\\#panel-test-stock']" );
+			$openButton = $page.find( "a[href='\\#panel-test-open']" );
 
 		$panel.one( "panelopen", function( event ) {
 			ok( !$openButton.hasClass( $.mobile.activeBtnClass ), "button doesn't have active class" );
@@ -81,7 +75,9 @@ QUnit.config.autostart = false;
 			ok( !$panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
 			ok( $panel.hasClass( defaults.classes.panelOpen ), "open class added" );
 
+			equal( $wrapper.length, 1, "wrapper exists." );
 			ok( !$wrapper.hasClass( defaults.classes.contentWrapClosed ), "wrapper not closed class" );
+
 			ok( $wrapper.hasClass( defaults.classes.contentWrapOpen ), "wrapper open class" );
 
 			var prefix = defaults.classes.contentWrap;
@@ -112,11 +108,11 @@ QUnit.config.autostart = false;
 	asyncTest( "classes modified by close", function() {
 		expect( 12 );
 
-		var $panel = $( "#panel-test-stock" ),
+		var $panel = $( "#panel-test-close" ),
 			$page = getPageFromPanel( $panel ),
 			$wrapper = getWrapperFromPage( $page ),
 			$modal = getModalFromPanel( $panel ),
-			$openButton = $page.find( "a[href='\\#panel-test-stock']" );
+			$openButton = $page.find( "a[href='\\#panel-test-close']" );
 
 		$panel.one( "panelopen", function( event ) {
 			$panel.panel( "close" );
@@ -155,7 +151,7 @@ QUnit.config.autostart = false;
 	asyncTest( "toggle", function() {
 		expect( 2 );
 
-		var $panel = $( "#panel-test-stock" ),
+		var $panel = $( "#panel-test-toggle" ),
 			$page = getPageFromPanel( $panel );
 
 		$panel.one( "panelopen", function( event ) {
@@ -172,7 +168,7 @@ QUnit.config.autostart = false;
 
 	test( "wrapper exists after create", function() {
 
-		var $page = getPageFromPanel( $( "#panel-test-stock" ) ),
+		var $page = getPageFromPanel( $( "#panel-test-wrapper" ) ),
 			$wrapper = getWrapperFromPage( $page );
 
 		ok( $wrapper.length, "wrapper exists" );
@@ -182,38 +178,9 @@ QUnit.config.autostart = false;
 
 	// TODO _bindPageEvents
 
-	test( "dismissable", function() {
-
-		var $panel = $( "#panel-test-stock" );
-
-		equal( getModalFromPanel( $panel ).length, 1, "modal added to page" );
-	});
-
-	asyncTest( "click on dismissable modal closes panel", function() {
-
-		expect( 1 );
-
-		var $panel = $( "#panel-test-stock" ),
-			$modal = getModalFromPanel( $panel );
-
-		$panel.one( "panelopen", function() {
-
-			$modal.trigger( "mousedown" );
-
-		}).one( "panelclose", function() {
-
-			ok( true, "modal is closed" );
-			start();
-
-		});
-
-		$panel.panel( "open" );
-
-	});
-
 	test( "destroy method", function() {
 
-		var $panel = $( "#panel-test-stock" ),
+		var $panel = $( "#panel-test-destroy" ),
 			$page = getPageFromPanel( $panel ),
 			$wrapper = getWrapperFromPage( $page );
 
@@ -236,6 +203,35 @@ QUnit.config.autostart = false;
 		ok( !$page.hasClass( classes.pageBlock ) );
 
 		$panel.panel();
+	});
+
+	module( "dismissable panel" );
+
+	test( "dismissable", function() {
+		var $panel = $( "#panel-test-dismiss" );
+		equal( getModalFromPanel( $panel ).length, 1, "modal added to page" );
+	});
+
+	asyncTest( "click on dismissable modal closes panel", function() {
+
+		expect( 1 );
+
+		var $panel = $( "#panel-test-dismiss" ),
+			$modal = getModalFromPanel( $panel );
+
+		$panel.one( "panelopen", function() {
+
+			$modal.trigger( "mousedown" );
+
+		}).one( "panelclose", function() {
+
+			ok( true, "modal is closed" );
+			start();
+
+		});
+
+		$panel.panel( "open" );
+
 	});
 
 	module( "panel with non-default theme" );

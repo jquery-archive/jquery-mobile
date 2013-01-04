@@ -18,9 +18,7 @@
 		</script>
 		<script>
 			$.testHelper.asyncLoad([
-				[
-					"widgets/panel"
-				],
+				[ "widgets/panel" ],
 				[ "jquery.mobile.init" ],
 				[ "panel_core.js" ]
 			]);
@@ -40,7 +38,28 @@
 		</ol>
 
 		<div data-nstest-role="page">
-			<div data-nstest-role="panel" id="panel-test-stock">
+			<div data-nstest-role="panel" id="panel-test-create">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-events">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-open">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-close">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-toggle">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-wrapper">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-dismiss">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-destroy">
 				<p>Contents of a panel.</p>
 			</div>
 			<div data-nstest-role="panel" id="panel-test-non-default-theme" data-nstest-theme="c">
@@ -56,7 +75,14 @@
 			</div>
 			<div data-nstest-role="content">
 				<h1 id="demo-links">Panels</h1>
-				<a href="#panel-test-stock">Open Panel</a>
+				<a href="#panel-test-create">Open Panel</a>
+				<a href="#panel-test-events">Open Panel</a>
+				<a href="#panel-test-open">Open Panel</a>
+				<a href="#panel-test-close">Open Panel</a>
+				<a href="#panel-test-toggle">Open Panel</a>
+				<a href="#panel-test-wrapper">Open Panel</a>
+				<a href="#panel-test-dismiss">Open Panel</a>
+				<a href="#panel-test-destroy">Open Panel</a>
 				<a href="#panel-test-non-default-theme">Open Panel</a>
 				<a href="#panel-test-with-close">Open Panel</a>
 			</div>
