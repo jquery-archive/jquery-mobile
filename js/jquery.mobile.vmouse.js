@@ -38,7 +38,6 @@ var dataPropertyName = "virtualMouseBindings",
 	blockMouseTriggers = false,
 	blockTouchTriggers = false,
 	eventCaptureSupported = "addEventListener" in document,
-	$document = $.mobile.$document,
 	nextTouchID = 1,
 	lastTouchID = 0, threshold;
 
@@ -352,7 +351,7 @@ function getSpecialEventObject( eventType ) {
 			activeDocHandlers[ eventType ] = ( activeDocHandlers[ eventType ] || 0 ) + 1;
 
 			if ( activeDocHandlers[ eventType ] === 1 ) {
-				$document.bind( realType, mouseEventCallback );
+				$.mobile.$document.bind( realType, mouseEventCallback );
 			}
 
 			// Some browsers, like Opera Mini, won't dispatch mouse/click events
@@ -369,7 +368,7 @@ function getSpecialEventObject( eventType ) {
 				activeDocHandlers[ "touchstart" ] = ( activeDocHandlers[ "touchstart" ] || 0) + 1;
 
 				if ( activeDocHandlers[ "touchstart" ] === 1 ) {
-					$document.bind( "touchstart", handleTouchStart )
+					$.mobile.$document.bind( "touchstart", handleTouchStart )
 						.bind( "touchend", handleTouchEnd )
 
 						// On touch platforms, touching the screen and then dragging your finger
@@ -395,7 +394,7 @@ function getSpecialEventObject( eventType ) {
 			--activeDocHandlers[ eventType ];
 
 			if ( !activeDocHandlers[ eventType ] ) {
-				$document.unbind( realType, mouseEventCallback );
+				$.mobile.$document.unbind( realType, mouseEventCallback );
 			}
 
 			if ( eventCaptureSupported ) {
@@ -405,7 +404,7 @@ function getSpecialEventObject( eventType ) {
 				--activeDocHandlers[ "touchstart" ];
 
 				if ( !activeDocHandlers[ "touchstart" ] ) {
-					$document.unbind( "touchstart", handleTouchStart )
+					$.mobile.$document.unbind( "touchstart", handleTouchStart )
 						.unbind( "touchmove", handleTouchMove )
 						.unbind( "touchend", handleTouchEnd )
 						.unbind( "scroll", handleScroll );
