@@ -7,7 +7,7 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window ) {
-	var win = $.mobile.$window,
+	var win = $.mobile.window,
 		event_name = "orientationchange",
 		special_event,
 		get_orientation,
@@ -44,8 +44,8 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 		// developer console. The actual threshold value is somewhat arbitrary, we just
 		// need to make sure it is large enough to exclude the developer console case.
 
-		var ww = window.innerWidth || $.mobile.$window.width(),
-			wh = window.innerHeight || $.mobile.$window.height(),
+		var ww = window.innerWidth || $.mobile.window.width(),
+			wh = window.innerHeight || $.mobile.window.height(),
 			landscape_threshold = 50;
 
 		initial_orientation_is_landscape = ww > wh && ( ww - wh ) > landscape_threshold;

@@ -206,7 +206,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 $.widget( "mobile.checkboxradio", $.mobile.checkboxradio, $.mobile.behaviors.formReset );
 
 //auto self-init widgets
-$.mobile.$document.bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.checkboxradio.prototype.enhanceWithin( e.target, true );
 });
 

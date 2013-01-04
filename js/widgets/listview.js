@@ -383,7 +383,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 $.widget( "mobile.listview", $.mobile.listview, $.mobile.behaviors.addFirstLastClasses );
 
 //auto self-init widgets
-$.mobile.$document.bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.listview.prototype.enhanceWithin( e.target );
 });
 

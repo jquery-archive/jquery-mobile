@@ -110,7 +110,7 @@ define( [ "jquery",
 	// already be in place, ensuring that all widgets that need to be grouped will
 	// already have been enhanced by the time the controlgroup is created.
 	$( function() {
-		$.mobile.$document.bind( "pagecreate create", function( e )  {
+		$.mobile.document.bind( "pagecreate create", function( e )  {
 			$.mobile.controlgroup.prototype.enhanceWithin( e.target, true );
 		});
 	});

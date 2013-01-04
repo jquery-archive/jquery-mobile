@@ -27,7 +27,7 @@ $.mobile.table.prototype.options.classes = $.extend(
 	}
 );
 
-$.mobile.$document.delegate( ":jqmData(role='table')", "tablecreate", function() {
+$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate", function() {
 
 	var $table = $( this ),
 		self = $table.data( "mobile-table" ),
@@ -94,7 +94,7 @@ $.mobile.$document.delegate( ":jqmData(role='table')", "tablecreate", function()
 		});
 	};
 
-	$.mobile.$window.on( "throttledresize", self.refresh );
+	$.mobile.window.on( "throttledresize", self.refresh );
 
 	self.refresh();
 

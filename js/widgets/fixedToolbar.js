@@ -142,7 +142,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_handlePageShow: function() {
 			this.updatePagePadding( this._thisPage );
 			if ( this.options.updatePagePadding ) {
-				this._on( $.mobile.$window, { "throttledresize": "updatePagePadding" } );
+				this._on( $.mobile.window, { "throttledresize": "updatePagePadding" } );
 			}
 		},
 
@@ -153,7 +153,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				$.mobile.zoom.enable( true );
 			}
 			if ( o.updatePagePadding ) {
-				this._off( $.mobile.$window, "throttledresize" );
+				this._off( $.mobile.window, "throttledresize" );
 			}
 
 			if ( o.trackPersistentToolbars ) {
@@ -190,7 +190,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		},
 
 		_useTransition: function( notransition ) {
-			var $win = $.mobile.$window,
+			var $win = $.mobile.window,
 				$el = this.element,
 				scroll = $win.scrollTop(),
 				elHeight = $el.height(),
@@ -296,7 +296,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 	});
 
 	//auto self-init widgets
-	$.mobile.$document
+	$.mobile.document
 		.bind( "pagecreate create", function( e ) {
 
 			// DEPRECATED in 1.1: support for data-fullscreen=true|false on the page element.

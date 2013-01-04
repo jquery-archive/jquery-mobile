@@ -99,7 +99,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 					$this.unbind( "vclick", clickHandler )
 						.unbind( "vmouseup", clearTapTimer );
-					$.mobile.$document.unbind( "vmousecancel", clearTapHandlers );
+					$.mobile.document.unbind( "vmousecancel", clearTapHandlers );
 				}
 
 				function clickHandler( event ) {
@@ -114,7 +114,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 				$this.bind( "vmouseup", clearTapTimer )
 					.bind( "vclick", clickHandler );
-				$.mobile.$document.bind( "vmousecancel", clearTapHandlers );
+				$.mobile.document.bind( "vmousecancel", clearTapHandlers );
 
 				timer = setTimeout( function() {
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );

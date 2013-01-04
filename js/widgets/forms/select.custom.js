@@ -357,7 +357,7 @@ define( [
 
 			_decideFormat: function() {
 				var self = this,
-					$window = $.mobile.$window,
+					$window = $.mobile.window,
 					selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
 					menuWidth = selfListParent.outerWidth(),
@@ -548,7 +548,7 @@ define( [
 	};
 
 	// issue #3894 - core doesn't trigger events on disabled delegates
-	$.mobile.$document.bind( "selectmenubeforecreate", function( event ) {
+	$.mobile.document.bind( "selectmenubeforecreate", function( event ) {
 		var selectmenuWidget = $( event.target ).data( "mobile-selectmenu" );
 
 		if ( !selectmenuWidget.options.nativeMenu &&
