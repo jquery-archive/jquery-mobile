@@ -25,16 +25,16 @@
 			
 			deepEqual( cssMarginLeft, bgMarginLeft, "Highlight has correct left margin" );
 		} else {
-			var intMarginLeft = parseFloat( cssMarginLeft.replace("px", "") ); console.log(intMarginLeft);
+			var intMarginLeft = parseFloat( cssMarginLeft.replace("px", "") );
 			
-			bgMarginLeft = Math.round( rangeFirst.val() / range * width ); console.log(bgMarginLeft);
+			bgMarginLeft = Math.round( rangeFirst.val() / range * width );
 			// Take a rounding difference of max 2px into account
 			ok( -2 >= ( intMarginLeft - bgMarginLeft ) <= 2, "Highlight has correct left margin" );
 		}
 		
 		cssWidth = bg.css( "width" );
-		intWidth = parseFloat( cssWidth.replace("px", "") ); console.log(intWidth);
-		bgWidth = Math.round( (rangeLast.val() - rangeFirst.val()) / range * width ); console.log(bgWidth);
+		intWidth = parseFloat( cssWidth.replace("px", "") );
+		bgWidth = Math.round( (rangeLast.val() - rangeFirst.val()) / range * width );
 		// Take a rounding difference of max 2px into account
 		ok( -2 >= ( intWidth - bgWidth ) <= 2, "Highlight has correct width" );
 	});
