@@ -8,7 +8,7 @@ define([ "jquery", "./../jquery.mobile.support" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-	var $win = $( window ), self, history;
+	var $win = $.mobile.window, self, history;
 
 	$.event.special.navigate = self = {
 		bound: false,

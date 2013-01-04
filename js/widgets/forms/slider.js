@@ -508,7 +508,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 $.widget( "mobile.slider", $.mobile.slider, $.mobile.behaviors.formReset );
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.slider.prototype.enhanceWithin( e.target, true );
 });
 

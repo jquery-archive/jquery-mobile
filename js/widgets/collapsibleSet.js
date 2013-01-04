@@ -83,7 +83,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 $.widget( "mobile.collapsibleset", $.mobile.collapsibleset, $.mobile.behaviors.addFirstLastClasses );
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.collapsibleset.prototype.enhanceWithin( e.target );
 });
 

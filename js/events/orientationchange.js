@@ -44,8 +44,8 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 		// developer console. The actual threshold value is somewhat arbitrary, we just
 		// need to make sure it is large enough to exclude the developer console case.
 
-		var ww = window.innerWidth || $( window ).width(),
-			wh = window.innerHeight || $( window ).height(),
+		var ww = window.innerWidth || win.width(),
+			wh = window.innerHeight || win.height(),
 			landscape_threshold = 50;
 
 		initial_orientation_is_landscape = ww > wh && ( ww - wh ) > landscape_threshold;

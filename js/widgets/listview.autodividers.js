@@ -21,7 +21,7 @@ $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
 	return text;
 };
 
-$( document ).delegate( "ul,ol", "listviewcreate", function() {
+$.mobile.document.delegate( "ul,ol", "listviewcreate", function() {
 
 	var list = $( this ),
 			listview = list.data( "mobile-listview" );

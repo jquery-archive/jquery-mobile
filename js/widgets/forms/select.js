@@ -290,7 +290,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 $.widget( "mobile.selectmenu", $.mobile.selectmenu, $.mobile.behaviors.formReset );
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
 });
 })( jQuery );

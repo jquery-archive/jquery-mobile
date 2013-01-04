@@ -10,7 +10,7 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 	$.Navigator = function( history ) {
 		this.history = history;
 
-		$( window ).bind({
+		$.mobile.window.bind({
 			"popstate.history": $.proxy( this.popstate, this ),
 			"hashchange.history": $.proxy( this.hashchange, this )
 		});
@@ -121,7 +121,7 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 				// caught that was triggered by the hash setting above.
 				if( !noEvents ) {
 					this.ignoreNextPopState = true;
-					$( window ).trigger( popstateEvent );
+					$.mobile.window.trigger( popstateEvent );
 				}
 			}
 

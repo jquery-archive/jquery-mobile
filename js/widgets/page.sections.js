@@ -18,7 +18,7 @@ $.mobile.page.prototype.options.contentTheme = null;
 //      which expects .ui-footer top be applied in its gigantic selector
 // TODO remove the buttonMarkup giant selector and move it to the various modules
 //      on which it depends
-$( document ).bind( "pagecreate", function( e ) {
+$.mobile.document.bind( "pagecreate", function( e ) {
 	var $page = $( e.target ),
 		o = $page.data( "mobile-page" ).options,
 		pageRole = $page.jqmData( "role" ),

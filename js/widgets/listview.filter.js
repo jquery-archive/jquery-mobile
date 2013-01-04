@@ -19,7 +19,7 @@ var defaultFilterCallback = function( text, searchValue, item ) {
 
 $.mobile.listview.prototype.options.filterCallback = defaultFilterCallback;
 
-$( document ).delegate( "ul, ol", "listviewcreate", function() {
+$.mobile.document.delegate( "ul, ol", "listviewcreate", function() {
 
 	var list = $( this ),
 		listview = list.data( "mobile-listview" );
