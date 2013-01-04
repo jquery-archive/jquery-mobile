@@ -22,8 +22,6 @@ function attachPopupHandler( popup, sources ) {
 	});
 }
 
-var demoId = 0;
-
 function getHeadSnippet( type, selector ) {
 	if ( selector === "true" ) {
 		selector = "";
@@ -31,14 +29,32 @@ function getHeadSnippet( type, selector ) {
 	return $( "<div></div>" ).append( $( "head" ).find( type + selector ).contents().clone() ).html();
 }
 
-$.fn.viewSourceCode = function() {
+$( document ).bind( "pagebeforechange", function( e, data ) {
+	var popup, sources;
+	if ( data.options && data.options.role === "popup" && data.options.link ) {
+		sources = data.options.link.jqmData( "sources" );
+		if ( sources ) {
+			popup = $( "<div class='jqm-demo' data-role='popup' data-theme='none' data-position-to='window'>" +
+								"<div data-role='collapsible-set' data-inset='true'></div>" +
+							"</div>" );
 
+			attachPopupHandler( popup, sources );
+			popup
+				.appendTo( $.mobile.activePage )
+				.popup()
+				.bind( "popupafterclose", function() {
+					popup.remove();
+				})
+				.popup( "open" );
+
+			e.preventDefault();
+		}
+	}
+});
+
+$.fn.viewSourceCode = function() {
 	return $( this ).each( function() {
-		demoId++
-		var button = $( "<div class='jqm-demo-link'><a href='#jqm-demo-" + demoId + "' data-rel='popup' data-role='button' data-icon='arrow-u' data-mini='true' data-inline='true' data-shadow='false'>View Source</a></div>" ),
-			popup = $( "<div id='jqm-demo-" + demoId + "' class='jqm-demo' data-role='popup' data-theme='none' data-position-to='window'>" +
-					"<div data-role='collapsible-set' data-inset='true'></div>" +
-				"</div>" ),
+		var button = $( "<div class='jqm-demo-link'><a href='./' data-rel='popup' data-role='button' data-icon='arrow-u' data-mini='true' data-inline='true' data-shadow='false'>View Source</a></div>" ),
 			self = $( this ),
 			page = self.closest( "[data-role='page']" ),
 			fixData = function( data ) {
@@ -80,10 +96,8 @@ $.fn.viewSourceCode = function() {
 			sources.push( { title: "CSS", theme: "e", brush: "css", data: fixData( data ) } );
 		}
 
-		attachPopupHandler( popup, sources );
 		button.insertAfter( this );
-		popup.appendTo( page );
-
+		button.children().jqmData( "sources", sources );
 	});
 };
 
@@ -108,7 +122,7 @@ $( document ).on( "pageinit", function( e ) {
 		$( this ).parents( ":mobile-popup" ).popup( "reposition", { positionTo: "window" } );
 	});
 
-	$( ".jqm-demo" ).on( "popupbeforeposition", function() {
+	$( e.target ).delegate( ".jqm-demo", "popupbeforeposition", function() {
 		// max height: screen height - tolerance (2*30px) - 42px for each collapsible heading
 		var x = $( this ).find( ".ui-collapsible" ).length,
 			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
