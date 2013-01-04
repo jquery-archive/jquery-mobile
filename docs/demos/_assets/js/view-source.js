@@ -52,9 +52,29 @@ $( document ).bind( "pagebeforechange", function( e, data ) {
 	}
 });
 
+function makeButton() {
+	var d = document.createElement( "div" )
+		a = document.createElement( "a" );
+
+	d.className = "jqm-demo-link";
+
+	a.setAttribute( "href", "./" );
+	a.setAttribute( "data-rel", "popup" );
+	a.setAttribute( "data-role", "button" );
+	a.setAttribute( "data-icon", "arrow-u" );
+	a.setAttribute( "data-mini", "true" );
+	a.setAttribute( "data-inline", "true" );
+	a.setAttribute( "data-shadow", "false" );
+	a.innerHTML = "View Source";
+
+	d.appendChild( a );
+
+	return $( d );
+}
+
 $.fn.viewSourceCode = function() {
 	return $( this ).each( function() {
-		var button = $( "<div class='jqm-demo-link'><a href='./' data-rel='popup' data-role='button' data-icon='arrow-u' data-mini='true' data-inline='true' data-shadow='false'>View Source</a></div>" ),
+		var button = makeButton(),
 			self = $( this ),
 			page = self.closest( "[data-role='page']" ),
 			fixData = function( data ) {
