@@ -37,9 +37,9 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 		}
 	}
 
-	$( document ).on( "mobileinit", function(){
+	$.mobile.$document.on( "mobileinit", function(){
 		if( $.mobile.iosorientationfixEnabled ){
-			$( window )
+			$.mobile.$window
 				.bind( "orientationchange.iosorientationfix", zoom.enable )
 				.bind( "devicemotion.iosorientationfix", checkTilt );
 		}
