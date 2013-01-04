@@ -18,7 +18,7 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 
 	$.extend($.Navigator.prototype, {
 		squash: function( url, data ) {
-			var state, href,
+			var state, href, self = this,
 				hash = path.isPath(url) ? path.stripHash(url) : url;
 
 			href = path.squash( url );
@@ -41,6 +41,19 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 			// will always trigger our hashchange callback even when a hashchange event
 			// is not fired.
 			window.history.replaceState( state, state.title || document.title, href );
+
+
+			// If popstate is enabled and the browser triggers `popstate` events when the hash
+			// is set (this often happens immediately in browsers like Chrome), then the
+			// this flag will be set to false already. If it's a browser that does not trigger
+			// a `popstate` on hash assignement or `replaceState` then we need to unlock the
+			// At the time of this writing this happens with Opera 12
+			// NOTE I hate the fact that we have to do this but it captures all the possible
+			//      issues with browsers that won't trigger a popstate in either case
+			//      ie, hash assignment/replaceState
+			setTimeout(function() {
+				self.ignoreNextHashChange = false;
+			}, 100);
 
 			return state;
 		},
@@ -72,7 +85,7 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 
 		// TODO reconsider name
 		go: function( url, data, noEvents ) {
-			var state, href, hash, popstateEvent,
+			var state, href, hash, popstateEvent;
 				isPopStateEvent = $.event.special.navigate.isPushStateEnabled();
 
 			// Get the url as it would look squashed on to the current resolution url
@@ -109,6 +122,8 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 			}, data);
 
 			if( isPopStateEvent ) {
+
+
 				popstateEvent = new $.Event( "popstate" );
 				popstateEvent.originalEvent = {
 					type: "popstate",
@@ -169,15 +184,13 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 			// matches an existing history entry
 			if( !event.originalEvent.state ) {
 				hash = path.parseLocation().hash;
-				closestIndex = this.history.closest( hash );
-				var index = this.history.activeIndex;
 				active = this.history.getActive();
 
 				// Avoid adding a history entry in two cases
 				// 1) on the initial hashchange
 				// 2) when the current history entry hash is identical to the
 				//    current location hash
-				if( this.history.stack.length !== 1 || hash !== this.history.getActive().hash ) {
+				if( this.history.stack.length !== 1 || hash !== active.hash ) {
 					state = $.navigate.navigator.squash( hash );
 					// TODO it might be better to only add to the history stack
 					//      when the hash is adjacent to the active history entry
@@ -229,21 +242,7 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 			// with to alter the url to represent the new state do so here
 			if( this.preventNextHashChange ){
 				this.preventNextHashChange = false;
-				this.ignoreNextHashChange = false;
 				event.stopImmediatePropagation();
-				return;
-			}
-
-			// If the hashchange has been explicitly ignored or we have no history at
-			// this point skip the history managment and the addition of the history
-			// entry to the event for the `navigate` bindings
-			if( this.ignoreNextHashChange ) {
-				this.ignoreNextHashChange = false;
-			}
-
-			// If the stack is empty (it's been reset or some such) don't return,
-			// we need to record it in the missing callback below.
-			if( this.ignoreNextHashChange && this.history.stack.length > 0 ) {
 				return;
 			}
 
