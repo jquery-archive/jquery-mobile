@@ -12,7 +12,7 @@
 		<script src="../../js/"></script>
 	</head>
 	<body>
-		<div data-role="page">
+		<div data-role="page" class="ui-responsive-panel">
 
 			<style>
 				.panel-content { padding:15px; }
@@ -162,13 +162,15 @@ $( "#idofpanel" )
 
 				<h2>Panel + fixed positioning</h2>
 
-				<p>The panel will be displayed with the <code>position:fixed</code> CSS property so their contents will appear no matter how far down the page you're scrolled. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and using <code>overflow</code> is not well supported enough to use at this time. </p>
+				<p>The panel will be displayed with the <code>position:fixed</code> CSS property so their contents will appear no matter how far down the page you're scrolled. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and using <code>overflow</code> is not well supported enough to use at this time.</p>
 
-				<p>If a browser doesn't support fixed positioning or if the panel contents are too long to fit within the viewport, the framework will simply display the panel without fixed positioning. If the user has scrolled down and opens a panel, they may need to scroll up to view the contents.</p>
+				<p>If a browser doesn't support fixed positioning or if the panel contents are too long to fit within the viewport, the framework will simply display the panel without fixed positioning. If the user has scrolled down and opens a panel, they may need to scroll up to view the contents. </p>
 
 				<p>In general, we recommend that you place the buttons that open the panel at the very top of the screen which is the most common UI pattern for panels.  This will avoid the need to scroll and also makes the transitions a bit smoother.</p>
 
 				<p>Making panels work with fixed toolbars is fairly complex, but the framework supports this combination. Just be aware that the animation performance will not quite a smooth as inline toolbars and that we must hide the fixed toolbar when the panel opens with the reveal or push display mode and you're scrolled down. We recommend using overlay style panels with fixed headers for best results.</p>
+				
+				<p>Note that there are issues with fixed positioning within webviews within Android applications (not the browser) that can cause layout issues. We recommend that you turn off the fixed position panel option if deploying to an Android app.</p>
 
 				<h2>Styling panels</h2>
 
@@ -181,6 +183,32 @@ $( "#idofpanel" )
 
 				<p>To add padding to a panel, we recommend adding a container inside the panel and applying styles to that to avoid any issues. All the examples on this page follow this pattern.</p>
 
+					<h2>Making the panel responsive</h2>
+
+					<p>When the push or reveal display is used, a panel pushes the page aside when it opens. Since some of the page is pushed offscreen, the panel is modal and must be closed to interact with the page content again. On larger screens, you may want to have the panel work more like a collapsible column that can be opened and used alongside the page to take better use of the screen real estate. </p>
+					<p>To make the page work alongside the open panel, it needs to re-flow to a narrower width so it will fit next to the panel. This can be done purely with CSS by adding a left or right margin equal to the panel width (17em) to the page contents to force a re-flow. Second, the invisible layer placed over the page for the click out to dismiss behavior is hidden with CSS so you can click on the page and not close the menu. </p>
+					<p>Here is an example of these rules wrapped in a media query to only apply this behavior above 35em (560px):</p>
+				
+				<pre><code>
+/* wrap push on wide viewports once open */
+@media (min-width: 35em){
+	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push,
+	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-reveal {
+		margin-right: 17em;
+	}
+ 	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right,
+	.ui-panel-content-wrap.ui-panel-content-wrap-open-complete.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right {
+		margin: 0 0 0 17em;
+	}
+	.ui-panel-dismiss-display-push {
+		display: none;
+	}
+}
+				</code></pre>
+				
+				<h4>Applying a preset breakpoint</h4>
+				<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the <em>page wrapper</em> (not the panel).</p>
+				
 
 				<h2>Options</h2>
 
