@@ -27,6 +27,8 @@
 .ui-controlgroup-horizontal .ui-controlgroup-controls > .ui-btn, .ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-btn,
 .ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio,
 .ui-controlgroup-horizontal .ui-select { float: left; clear: none; margin: 0; }
+/* On IE7 the floating selects will be displayed as block if .ui-btn-text has width 100% */
+.ui-controlgroup-horizontal .ui-select .ui-btn-text { width: auto; }
 
 .ui-controlgroup-vertical .ui-btn {	border-bottom-width: 0; }
 .ui-controlgroup-vertical .ui-btn.ui-last-child { border-bottom-width: 1px; }

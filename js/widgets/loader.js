@@ -38,7 +38,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 	});
 
 	// TODO move loader class down into the widget settings
-	var loaderClass = "ui-loader", $html = $( "html" ), $window = $( window );
+	var loaderClass = "ui-loader", $html = $( "html" ), $window = $.mobile.window;
 
 	$.widget( "mobile.loader", {
 		// NOTE if the global config settings are defined they will override these
@@ -170,8 +170,8 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$( window ).unbind( "scroll", this.fakeFixLoader );
-			$( window ).unbind( "scroll", this.checkLoaderPosition );
+			$.mobile.window.unbind( "scroll", this.fakeFixLoader );
+			$.mobile.window.unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 

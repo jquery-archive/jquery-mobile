@@ -154,7 +154,7 @@
 
     <div data-role="header" data-theme="f">
         <h1>Swipe list demo</h1>
-        <a href="../" data-icon="home" data-iconpos="notext" data-shadow="false" data-icon-shadow="false" data-ajax="false">Home</a>
+        <a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
     </div><!-- /header -->
   
 	<div data-role="content">
@@ -163,7 +163,7 @@
         
         	<h2>Swipe to remove a list item</h2>
         
-            <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true">
+            <div data-demo-html="#sample-page" data-demo-js="true" data-demo-css="true">
             	<p>This demo shows how you can remove list items by swiping left or right. For devices without touchscreen there is a delete button. This demo also contains a custom styled confirmation popup.</p>
                 
                 <p><a href="#demo-page" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open swipe list demo</a></p>
@@ -177,11 +177,173 @@
 
 
 <div data-role="page" id="demo-page" data-title="Inbox" data-theme="d">
+<!--
+NOTE: If you modify this page make sure you copy your modifications over to
+#sample-page below so that your modifications will be reflected in the source
+code view
+-->
+    <div data-role="header" data-position="fixed" data-theme="b">
+        <h1>Inbox</h1>
+        <a href="#demo-intro" data-rel="back" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
+    </div><!-- /header -->
+  
+    <div data-role="content">
+    
+        <ul id="list" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-split-theme="d">
+            <li>
+                <a href="#demo-mail">
+                    <h3>Avery Walker</h3>
+                    <p class="topic"><strong>Re: Dinner Tonight</strong></p>
+                    <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
+                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Amazon.com</h3>
+                    <p class="topic"><strong>4-for-3 Books for Kids</strong></p>
+                    <p>As someone who has purchased children's books from our 4-for-3 Store, you may be interested in these featured books.</p>
+                    <p class="ui-li-aside"><strong>4:37</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Mike Taylor</h3>
+                    <p class="topic"><strong>Re: This weekend in Maine</strong></p>
+                    <p>Hey little buddy, sorry but I can't make it up to vacationland this weekend. Maybe next weekend?</p>
+                    <p class="ui-li-aside"><strong>3:24</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Redfin</h3>
+                    <p class="topic"><strong>Redfin listing updates for today</strong></p>
+                    <p>There are 3 updates for the home on your watchlist: 1 updated MLS listing and 2 homes under contract.</p>
+                    <p class="ui-li-aside"><strong>2:52</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Angela Smith</h3>
+                    <p class="topic"><strong>Link Request</strong></p>
+                    <p>My name is Angela Smith, SEO Consultant. I've greatly enjoyed looking through your site and I was wondering if you'd be interested in providing a link</p>
+                    <p class="ui-li-aside"><strong>1:24</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Stephen Weber</h3>
+                    <p class="topic"><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+                    <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+                    <p class="ui-li-aside"><strong>11:24</strong>AM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>jQuery Team</h3>
+                    <p class="topic"><strong>Boston Conference Planning</strong></p>
+                    <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+                    <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Avery Walker</h3>
+                    <p class="topic"><strong>Re: Dinner Tonight</strong></p>
+                    <p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
+                    <p class="ui-li-aside"><strong>4:48</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Amazon.com</h3>
+                    <p class="topic"><strong>4-for-3 Books for Kids</strong></p>
+                    <p>As someone who has purchased children's books from our 4-for-3 Store, you may be interested in these featured books.</p>
+                    <p class="ui-li-aside"><strong>4:37</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Mike Taylor</h3>
+                    <p class="topic"><strong>Re: This weekend in Maine</strong></p>
+                    <p>Hey little buddy, sorry but I can't make it up to vacationland this weekend. Maybe next weekend?</p>
+                    <p class="ui-li-aside"><strong>3:24</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Redfin</h3>
+                    <p class="topic"><strong>Redfin listing updates for today</strong></p>
+                    <p>There are 3 updates for the home on your watchlist: 1 updated MLS listing and 2 homes under contract.</p>
+                    <p class="ui-li-aside"><strong>2:52</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Angela Smith</h3>
+                    <p class="topic"><strong>Link Request</strong></p>
+                    <p>My name is Angela Smith, SEO Consultant. I've greatly enjoyed looking through your site and I was wondering if you'd be interested in providing a link</p>
+                    <p class="ui-li-aside"><strong>1:24</strong>PM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>Stephen Weber</h3>
+                    <p class="topic"><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
+                    <p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
+                    <p class="ui-li-aside"><strong>11:24</strong>AM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+            <li>
+                <a href="#demo-mail">
+                    <h3>jQuery Team</h3>
+                    <p class="topic"><strong>Boston Conference Planning</strong></p>
+                    <p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
+                    <p class="ui-li-aside"><strong>9:18</strong>AM</p>
+                </a>
+                <a href="#" class="delete">Delete</a>
+            </li>
+        </ul>
+
+    </div><!-- /content -->
+    
+    <div id="confirm" class="ui-content" data-role="popup" data-theme="none">
+        
+        <p id="question">Are you sure you want to delete</p>
+        
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <a id="yes" data-role="button" data-mini="true" data-shadow="false" data-theme="b" data-rel="back">Yes</a>
+            </div>
+            <div class="ui-block-b">
+                <a id="cancel" data-role="button" data-mini="true" data-shadow="false" data-theme="b" data-rel="back">Cancel</a>                
+            </div>
+        </div>
+        
+	</div><!-- /popup -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="sample-page" data-title="Inbox" data-theme="d">
 
     <div data-role="header" data-position="fixed" data-theme="b">
         <h1>Inbox</h1>
-        <a href="#demo-intro" data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
-        <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Refresh</a>
+        <a href="#demo-intro" data-rel="back" data-icon="arrow-l" data-iconpos="notext">Back</a>
+        <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
     </div><!-- /header -->
   
     <div data-role="content">
@@ -339,7 +501,7 @@
 
     <div data-role="header" data-position="fixed" data-theme="b">
         <h1>Demo</h1>
-        <a href="#demo-page" data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
+        <a href="#demo-page" data-rel="back" data-icon="arrow-l" data-iconpos="notext">Back</a>
     </div><!-- /header -->
   
     <div data-role="content">

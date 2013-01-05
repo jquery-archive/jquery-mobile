@@ -66,7 +66,7 @@ $.widget( "mobile.table", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.table.prototype.enhanceWithin( e.target );
 });
 

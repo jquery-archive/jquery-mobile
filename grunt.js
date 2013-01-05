@@ -2,7 +2,7 @@ var path = require( 'path' ), fs = require( 'fs' );
 
 module.exports = function( grunt ) {
 	var dirs, names, min = {}, cssmin = {},
-		theme, rootFile, structureFile, themeFile,
+		theme, rootFile, structureFile, themeFile, demosjsFile,
 		verOfficial, suffix;
 
 	dirs = {
@@ -18,6 +18,7 @@ module.exports = function( grunt ) {
 		base: 'jquery.mobile' + suffix,
 		// this will change for the deploy target to include version information
 		root: 'jquery.mobile' + suffix,
+		demosjs: 'jquery.mobile.demos' + suffix,
 		structure: 'jquery.mobile.structure' + suffix,
 		theme: 'jquery.mobile.theme' + suffix
 	};
@@ -26,6 +27,7 @@ module.exports = function( grunt ) {
 		return path.join( dirs.output, name );
 	}
 
+	demosjsFile = path.join( dirs.output, "demos", "docs", "demos", "_assets", "js", names.demosjs );
 	rootFile = outputPath( names.root );
 	structureFile = outputPath( names.structure );
 	themeFile = outputPath( names.theme );
@@ -86,6 +88,14 @@ module.exports = function( grunt ) {
 			js: {
 				src: [ '<banner:global.ver.header>', rootFile + '.compiled.js' ],
 				dest: rootFile + '.js'
+			},
+
+			demosjs: {
+				src: [
+					path.join( 'docs', 'demos', '_assets', 'js', 'jqm-demos.js' ),
+					path.join( 'docs', 'demos', '_assets', 'js', 'view-source.js' )
+				],
+				dest: demosjsFile + '.js'
 			},
 
 			structure: {
@@ -200,7 +210,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask('test', 'config:test:pages config:test junit');
 
 	// Ease of use aliases for users who want the zip and docs
-	grunt.registerTask('docs', 'js css legacy_tasks:docs');
+	grunt.registerTask('docs', 'js css legacy_tasks:docs concat:demosjs');
 	grunt.registerTask('zip', 'js css legacy_tasks:zip');
 
 	// load the project's default tasks

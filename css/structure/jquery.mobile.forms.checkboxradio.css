@@ -1,6 +1,5 @@
 .ui-checkbox, .ui-radio { position: relative; clear: both; margin: 0; z-index: 1; }
-.ui-checkbox .ui-btn, .ui-radio .ui-btn { margin-top: .5em; margin-bottom: .5em; text-align: left; z-index: 2; }
-.ui-checkbox .ui-btn.ui-mini, .ui-radio .ui-btn.ui-mini { margin: .25em 0; }
+.ui-checkbox .ui-btn, .ui-radio .ui-btn { text-align: left; z-index: 2; }
 .ui-controlgroup .ui-checkbox .ui-btn, .ui-controlgroup .ui-radio .ui-btn { margin: 0; }
 .ui-checkbox .ui-btn-inner, .ui-radio .ui-btn-inner { white-space: normal; }
 

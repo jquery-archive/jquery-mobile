@@ -24,8 +24,8 @@ var createHandler = function( sequential ) {
 			active	= $.mobile.urlHistory.getActive(),
 			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 			screenHeight = $.mobile.getScreenHeight(),
-			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
-			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $( window ).scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
+			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
+			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 			toPreClass = " ui-page-pre-in",
 			toggleViewportClass = function() {
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
@@ -59,7 +59,7 @@ var createHandler = function( sequential ) {
 				// Set the from page's height and start it transitioning out
 				// Note: setting an explicit height helps eliminate tiling in the transitions
 				$from
-					.height( screenHeight + $( window ).scrollTop() )
+					.height( screenHeight + $.mobile.window.scrollTop() )
 					.addClass( name + " out" + reverseClass );
 			},
 
@@ -121,7 +121,7 @@ var createHandler = function( sequential ) {
 
 				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
 				// This ensures we jump to that spot after the fact, if we aren't there already.
-				if ( $( window ).scrollTop() !== toScroll ) {
+				if ( $.mobile.window.scrollTop() !== toScroll ) {
 					scrollPage();
 				}
 

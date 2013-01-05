@@ -59,10 +59,31 @@ function validStyle( prop, value, check_vend ) {
 	return !!ret;
 }
 
-// Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz/unprefixed to prevent a false positive for 3D transforms on Android.
 function transform3dTest() {
-	var prop = "transform-3d";
-	return validStyle( 'perspective', '10px', ['moz', ''] ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+	var mqProp = "transform-3d",
+		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" );
+
+	if( ret ) {
+		return !!ret;
+	}
+
+	var el = document.createElement( "div" ),
+		transforms = {
+			'OTransform':'-o-transform',
+			'msTransform':'-ms-transform',
+			'MozTransform':'-moz-transform',
+			'transform':'transform'
+		};
+
+	fakeBody.append( el );
+
+	for ( var t in transforms ) {
+		if( el.style[ t ] !== undefined ){
+			el.style[ t ] = 'translate3d( 100px, 1px, 1px )';
+			ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
+		}
+	}
+	return ( !!ret && ret !== "none" );
 }
 
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
