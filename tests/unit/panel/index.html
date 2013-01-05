@@ -18,9 +18,7 @@
 		</script>
 		<script>
 			$.testHelper.asyncLoad([
-				[
-					"widgets/panel"
-				],
+				[ "widgets/panel" ],
 				[ "jquery.mobile.init" ],
 				[ "panel_core.js" ]
 			]);
@@ -39,126 +37,56 @@
 		<ol id="qunit-tests">
 		</ol>
 
-		<div id="qunit-fixture">
-
-			<!-- Basic Panel test -->
-			<div data-nstest-role="page">
-				<div data-nstest-role="panel" id="panel-test-1">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-1">Open Panel</a>
-				</div>
+		<div data-nstest-role="page">
+			<div data-nstest-role="panel" id="panel-test-create">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-events">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-open">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-close">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-toggle">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-wrapper">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-dismiss">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-destroy">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-non-default-theme" data-nstest-theme="c">
+				<p>Contents of a panel.</p>
+			</div>
+			<div data-nstest-role="panel" id="panel-test-with-close">
+				<p>Contents of a panel.</p>
+				<a href="#demo-links" data-nstest-rel="close" data-nstest-role="button">Close panel</a>
 			</div>
 
-
-			<div data-nstest-role="page">
-				<div data-nstest-role="panel" id="panel-test-2" data-animate="false">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-2">Open Panel</a>
-				</div>
+			<div data-nstest-role="header">
+				<h1>Panel Test</h1>
 			</div>
-
-			<div data-nstest-role="page">
-				<div data-nstest-role="panel" id="panel-test-3" data-theme="c">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-3">Open Panel</a>
-				</div>
+			<div data-nstest-role="content">
+				<h1 id="demo-links">Panels</h1>
+				<a href="#panel-test-create">Open Panel</a>
+				<a href="#panel-test-events">Open Panel</a>
+				<a href="#panel-test-open">Open Panel</a>
+				<a href="#panel-test-close">Open Panel</a>
+				<a href="#panel-test-toggle">Open Panel</a>
+				<a href="#panel-test-wrapper">Open Panel</a>
+				<a href="#panel-test-dismiss">Open Panel</a>
+				<a href="#panel-test-destroy">Open Panel</a>
+				<a href="#panel-test-non-default-theme">Open Panel</a>
+				<a href="#panel-test-with-close">Open Panel</a>
 			</div>
-
-			<div data-nstest-role="page">
-				<div data-nstest-role="panel" id='panel-tes4' data-position="right">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-4">Open Panel</a>
-				</div>
-			</div>
-
-
-			<div data-nstest-role="page">
-				<div data-nstest-role="panel" id='panel-test-5' data-display="push">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-5">Open Panel</a>
-				</div>
-			</div>
-
-			<div data-nstest-role="page">
-				<div data-nstest-role="panel" id='panel-test-6' data-display="reveal">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-6">Open Panel</a>
-				</div>
-			</div>
-
-			<div data-nstest-role="page" >
-				<div data-nstest-role="panel" id='panel-test-7' data-display="push" data-position="right">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-7">Open Panel</a>
-				</div>
-			</div>
-
-			<div data-nstest-role="page" >
-				<div data-nstest-role="panel" id='panel-test-8' data-display="reveal" data-position="right">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-8">Open Panel</a>
-				</div>
-			</div>
-
-			<div data-nstest-role="page">
-				<div data-nstest-role="panel" id='panel-test-8' data-dismissible="false">
-					<p>Contents of a panel.</p>
-				</div>
-				<div data-nstest-role="header">
-					<h1>Panel Test</h1>
-				</div>
-				<div data-nstest-role="content">
-					<a href="#panel-test-9">Open Panel</a>
-				</div>
-			</div>
-
-
-
-
-
-
 		</div>
-
 
 	</body>
 </html>
