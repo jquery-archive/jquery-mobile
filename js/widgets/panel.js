@@ -247,7 +247,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var o = this.options,
 				self = this,
 				complete = function(){
-					self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
+					self.element.add( self._wrapper ).off( self._transitionEndEvents , complete );
 					self.element.addClass( o.classes.panelClosed );
 					self._wrapper.removeClass( self._contentWrapOpenClasses );
 					self._wrapper.addClass( o.classes.contentWrapClosed );
