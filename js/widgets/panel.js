@@ -25,7 +25,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
 			pagePanel: "ui-page-panel",
-			pageChildAnimations: "ui-page-panel-animate"
+			pageChildAnimations: "ui-page-panel-animate",
+			cssTransform3d: "ui-panel-3dtransforms"
 		},
 		animate: true,
 		theme: null,
@@ -101,7 +102,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 
 		if( $.support.cssTransform3d && !!this.options.positionFixed ) {
-			panelClasses += " ui-panel-3dtransforms";
+			panelClasses += " " + this.options.classes.cssTransform3d;
 		}
 		return panelClasses;
 	},
@@ -209,7 +210,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var self = this,
 				o = self.options,
 				complete = function(){
-					self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
+					self.element.add( self._wrapper ).unbind( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.openComplete );
 					self._wrapper.addClass( o.classes.contentWrapOpenComplete );
 					self._positionPanel();
@@ -222,12 +223,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 			self._trigger( "beforeopen" );
 
-			if ( $.support.cssTransitions && o.animate && !immediate ) {
+			if ( !immediate && $.support.cssTransitions && o.animate ) {
 				self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
 			} else{
 				setTimeout( complete , 0 );
 			}
-			self._page.addClass( self.options.classes.pageBlock );
+			self._page.addClass( o.classes.pageBlock );
 			self.element.removeClass( o.classes.panelClosed );
 			self.element.addClass( o.classes.panelOpen );
 			self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
@@ -250,7 +251,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self.element.addClass( o.classes.panelClosed );
 					self._wrapper.removeClass( self._contentWrapOpenClasses );
 					self._wrapper.addClass( o.classes.contentWrapClosed );
-					self._page.removeClass( self.options.classes.pageBlock );
+					self._page.removeClass( o.classes.pageBlock );
 					self._fixPanel();
 					self._unbindFixListener();
 					self._trigger( "close" );
@@ -260,7 +261,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 			self._trigger( "beforeclose" );
 
-			if ( $.support.cssTransform3d && o.animate && !immediate ) {
+			if ( !immediate && $.support.cssTransform3d && o.animate ) {
 				self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
 			} else{
 				setTimeout( complete , 0 );
