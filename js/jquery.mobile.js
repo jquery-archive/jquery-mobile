@@ -36,6 +36,7 @@ define([
 	'./widgets/fixedToolbar',
 	'./widgets/fixedToolbar.workarounds',
 	'./widgets/popup',
+	'./widgets/panel',
 	'./widgets/table',
 	'./widgets/table.columntoggle',
 	'./widgets/table.reflow',
