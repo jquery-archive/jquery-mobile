@@ -223,7 +223,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 			self._trigger( "beforeopen" );
 
-			if ( !immediate && $.support.cssTransitions && o.animate ) {
+			if ( !immediate && $.support.cssTransform3d && o.animate ) {
 				self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
 			} else{
 				setTimeout( complete , 0 );
