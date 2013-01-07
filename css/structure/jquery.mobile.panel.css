@@ -163,15 +163,15 @@
 }
 
 /* dismiss and content wrap open positions */
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
+.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
 .ui-panel-dismiss-open.ui-panel-dismiss-display-reveal,
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push, 
+.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push,
 .ui-panel-dismiss-open.ui-panel-dismiss-display-push,
 .ui-panel-dismiss-open.ui-panel-dismiss-display-overlay {
 	left: 17em;
 }
-.ui-panel-3dtransforms ~.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
-.ui-panel-3dtransforms ~.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+.ui-panel-3dtransforms.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
+.ui-panel-3dtransforms.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	-ms-transform: translateX(17em);

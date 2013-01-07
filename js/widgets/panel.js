@@ -51,6 +51,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				var $wrapper = self._page.find( "." + self.options.classes.contentWrap );
 				if( $wrapper.length === 0 ){
 					$wrapper = self._page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
+					if( $.support.cssTransform3d && !!self.options.positionFixed ) {
+						$wrapper.addClass( self.options.classes.cssTransform3d );
+					}
 				}
 				return $wrapper;
 			};
@@ -216,6 +219,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._positionPanel();
 					self._bindFixListener();
 					self._trigger( "open" );
+					console.log( "fired" );
 				};
 
 			if( this.element.closest( ".ui-page-active" ).length < 0 ){
