@@ -196,6 +196,10 @@
 	transform: translateX(-17em);
 	left: 0;
 }
+/* while open, page x overflow is disabled */
+.ui-page-active.ui-panel-page-block {
+	overflow-x:hidden;
+}
 
 /* wrap push on wide viewports once open */
 @media (min-width:55em){
