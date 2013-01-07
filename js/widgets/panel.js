@@ -25,7 +25,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
 			pagePanel: "ui-page-panel",
-			pageChildAnimations: "ui-page-panel-animate",
 			cssTransform3d: "ui-panel-3dtransforms"
 		},
 		animate: true,
@@ -66,7 +65,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && self.options.animate ) {
 			this.element.add( self._wrapper ).addClass( "ui-panel-animate" );
-			self._page.addClass( this.options.classes.pageChildAnimations );
 		}
 
 		self._bindCloseEvents();
@@ -213,6 +211,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self.element.add( self._wrapper ).unbind( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.openComplete );
 					self._wrapper.addClass( o.classes.contentWrapOpenComplete );
+					self._page.addClass( o.classes.pageBlock );
 					self._positionPanel();
 					self._bindFixListener();
 					self._trigger( "open" );
@@ -228,7 +227,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			} else{
 				setTimeout( complete , 0 );
 			}
-			self._page.addClass( o.classes.pageBlock );
 			self.element.removeClass( o.classes.panelClosed );
 			self.element.addClass( o.classes.panelOpen );
 			self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
@@ -290,8 +288,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		// create
 		if( !hasOtherSiblingPanels ) {
 			this._wrapper.children().unwrap();
-			this._page.removeClass( classes.pageChildAnimations )
-				.find( "a" ).unbind( "panelopen panelclose" );
+			this._page.find( "a" ).unbind( "panelopen panelclose" );
 		} else if( this._open ) {
 			this._wrapper.removeClass( [ classes.contentWrapOpen, classes.contentWrapOpenComplete ].join( " " ) );
 		}
