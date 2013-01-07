@@ -219,7 +219,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._positionPanel();
 					self._bindFixListener();
 					self._trigger( "open" );
-					console.log( "fired" );
 				};
 
 			if( this.element.closest( ".ui-page-active" ).length < 0 ){

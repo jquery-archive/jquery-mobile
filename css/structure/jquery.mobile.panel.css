@@ -119,6 +119,7 @@
 	background: inherit;
 	z-index: 1;
 	left: 0;
+	min-height: inherit;
 }
 .ui-panel-content-wrap-display-overlay {
 	position: static;
