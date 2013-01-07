@@ -210,6 +210,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self.element.add( self._wrapper ).unbind( self._transitionEndEvents , complete );
 				self.element.addClass( o.classes.openComplete );
 				self._wrapper.addClass( o.classes.contentWrapOpenComplete );
+				self._page.addClass( o.classes.pageBlock );
 				self._positionPanel();
 				self._bindFixListener();
 				self._trigger( "open" );
@@ -223,7 +224,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		} else{
 			setTimeout( complete , 0 );
 		}
-		self._page.addClass( o.classes.pageBlock );
 		self.element.removeClass( o.classes.panelClosed );
 		self.element.addClass( o.classes.panelOpen );
 		self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
