@@ -17,7 +17,7 @@
 .ui-table caption {
   text-align:left;
   margin-bottom:1.4em;
-  opacity:50%;
+  opacity: .5;
 }
 
 /* Add strokes between each row */
