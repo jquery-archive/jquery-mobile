@@ -1,4 +1,4 @@
-
+/* panel */
 .ui-panel {
 	min-height: 100%;
 	border-width:0;
@@ -11,6 +11,28 @@
 	overflow: hidden;
 }
 
+/* content-wrap */
+.ui-panel-content-wrap {
+	position: relative;
+	background: inherit;
+	z-index: 1;
+	left: 0;
+	min-height: inherit;
+}
+
+/* dismiss */
+.ui-panel-dismiss{
+	position: absolute;
+	top: 0;
+	left:0;
+	height: 100%;
+	width: 100%;
+	display: none;
+}
+.ui-panel-dismiss-open{
+	display: block;
+}
+
 /* animate class is added to panel and wrapper, toggling on transitions */
 .ui-panel-animate {
 	-webkit-transition: -webkit-transform 350ms ease;
@@ -19,13 +41,6 @@
 	-ms-transition: -ms-transform 350ms ease;
 	transition: transform 350ms ease;
 }
-
-/* a bit of hardware acceleration for iOS 6 blinking */
-.ui-panel-3dtransforms.ui-panel-content-wrap,
-.ui-panel-3dtransforms.ui-panel-content-wrap .ui-header {
-	-webkit-backface-visibility: hidden;
-}
-
 /* don't animate reveal - it stays in place */
 .ui-panel-display-reveal {
 	-webkit-transition: none;
@@ -35,6 +50,11 @@
 	transition: none;
 }
 
+/* a bit of hardware acceleration for iOS 6 blinking */
+.ui-panel-3dtransforms.ui-panel-content-wrap,
+.ui-panel-3dtransforms.ui-panel-content-wrap .ui-header {
+	-webkit-backface-visibility: hidden;
+}
 
 /* z stacking */
 .ui-panel-display-overlay,
@@ -46,13 +66,20 @@
 .ui-panel-display-reveal {
 	z-index: 0;
 }
-.ui-panel,
+
+.ui-panel {
+	position: absolute;
+}
+.ui-panel.ui-panel-3dtransforms {
+	position: fixed;
+}
 .ui-panel.ui-panel-unfixed {
 	position: absolute;
 }
-/* display and reveal */
-.ui-panel-3dtransforms {
-	position: fixed;
+.ui-panel-content-wrap-display-overlay,
+.ui-panel-3dtransforms.ui-panel-content-wrap .ui-header:not(.ui-header-fixed), /* ios4 fix */
+.ui-panel-content-wrap-closed {
+	position: static;
 }
 
 /* panel default positions */
@@ -100,64 +127,6 @@
 	transform: translateX(-17em);
 }
 
-/* dismiss */
-.ui-panel-dismiss{
-	position: absolute;
-	top: 0;
-	left:0;
-	height: 100%;
-	width: 100%;
-	display: none;
-}
-.ui-panel-dismiss-open{
-	display: block;
-}
-
-/* content-wrap */
-.ui-panel-content-wrap {
-	position: relative;
-	background: inherit;
-	z-index: 1;
-	left: 0;
-	min-height: inherit;
-}
-.ui-panel-content-wrap-display-overlay {
-	position: static;
-}
-.ui-panel-3dtransforms.ui-panel-content-wrap .ui-header:not(.ui-header-fixed), /* ios4 fix */
-.ui-panel-content-wrap-closed {
-	position: static;
-}
-
-/* shadows and borders */
-.ui-panel-display-reveal {
-	-webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
-	box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
-}
-.ui-panel-position-right.ui-panel-display-reveal {
-	-webkit-box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
-	-moz-box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
-	box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
-}
-.ui-panel-position-right.ui-panel-display-overlay {
-	-webkit-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
-	-moz-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
-	box-shadow: -5px 0px 5px rgba(0,0,0,.15);
-}
-.ui-panel-position-left.ui-panel-display-overlay {
-	-webkit-box-shadow: 5px 0px 5px rgba(0,0,0,.15);
-	-moz-box-shadow: 5px 0px 5px rgba(0,0,0,.15);
-	box-shadow: 5px 0px 5px rgba(0,0,0,.15);
-}
-.ui-panel-display-push.ui-panel-open.ui-panel-position-left {
-	border-right-width: 1px;
-	margin-right: -1px;
-}
-.ui-panel-display-push.ui-panel-open.ui-panel-position-right {
-	border-left-width: 1px;
-	margin-left: -1px;
-}
-
 /* dismiss and content wrap open positions */
 .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
 .ui-panel-dismiss-open.ui-panel-dismiss-display-reveal,
@@ -191,9 +160,39 @@
 	transform: translateX(-17em);
 	left: 0;
 }
+
 /* while open, page x overflow is disabled */
 .ui-page-active.ui-panel-page-block {
 	overflow-x:hidden;
+}
+
+/* shadows and borders */
+.ui-panel-display-reveal {
+	-webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
+	box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
+}
+.ui-panel-position-right.ui-panel-display-reveal {
+	-webkit-box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
+	-moz-box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
+	box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
+}
+.ui-panel-position-right.ui-panel-display-overlay {
+	-webkit-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
+	-moz-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
+	box-shadow: -5px 0px 5px rgba(0,0,0,.15);
+}
+.ui-panel-position-left.ui-panel-display-overlay {
+	-webkit-box-shadow: 5px 0px 5px rgba(0,0,0,.15);
+	-moz-box-shadow: 5px 0px 5px rgba(0,0,0,.15);
+	box-shadow: 5px 0px 5px rgba(0,0,0,.15);
+}
+.ui-panel-display-push.ui-panel-open.ui-panel-position-left {
+	border-right-width: 1px;
+	margin-right: -1px;
+}
+.ui-panel-display-push.ui-panel-open.ui-panel-position-right {
+	border-left-width: 1px;
+	margin-left: -1px;
 }
 
 /* wrap push on wide viewports once open */
