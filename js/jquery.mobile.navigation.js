@@ -1181,7 +1181,6 @@ define( [
 		});
 
 		$.mobile._handleHashChange = function( url, data ) {
-
 			//find first page via hash
 			var to = path.stripHash(url),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
