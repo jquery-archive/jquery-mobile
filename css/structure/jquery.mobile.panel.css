@@ -22,7 +22,7 @@
 
 /* a bit of hardware acceleration for iOS 6 blinking */
 .ui-panel-3dtransforms.ui-panel-content-wrap,
-.ui-panel-3dtransforms ~.ui-panel-content-wrap .ui-header {
+.ui-panel-3dtransforms.ui-panel-content-wrap .ui-header {
 	-webkit-backface-visibility: hidden;
 }
 
@@ -124,7 +124,7 @@
 .ui-panel-content-wrap-display-overlay {
 	position: static;
 }
-.ui-panel-3dtransforms ~.ui-panel-content-wrap .ui-header:not(.ui-header-fixed), /* ios4 fix */
+.ui-panel-3dtransforms.ui-panel-content-wrap .ui-header:not(.ui-header-fixed), /* ios4 fix */
 .ui-panel-content-wrap-closed {
 	position: static;
 }
@@ -182,8 +182,8 @@
 .ui-panel-dismiss-open.ui-panel-dismiss-display-overlay.ui-panel-dismiss-position-right {
 	left: -17em;
 }
-.ui-panel-3dtransforms ~.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right, 
-.ui-panel-3dtransforms ~.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
+.ui-panel-3dtransforms.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right, 
+.ui-panel-3dtransforms.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	-ms-transform: translateX(-17em);
