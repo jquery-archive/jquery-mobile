@@ -176,7 +176,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self.element
 				// on swipe, close the panel (should swipe open too?)
 				.on( "swipe.panel" , function( e ){
-					self.close( true );
+					self.close( );
 				});
 		}
 		self._page
@@ -195,7 +195,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			// on escape, close? might need to have a target check too...
 			.on( "keyup.panel", function( e ) {
 				if( e.keyCode === 27 && self._open ){
-					self.close( true );
+					self.close( );
 				}
 			});
 	},
