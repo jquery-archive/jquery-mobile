@@ -37,16 +37,12 @@
 .ui-panel-animate {
 	-webkit-transition: -webkit-transform 350ms ease;
 	-moz-transition: -moz-transform 350ms ease;
-	-o-transition: -o-transform 350ms ease;
-	-ms-transition: -ms-transform 350ms ease;
 	transition: transform 350ms ease;		
 }
 /* don't animate reveal - it stays in place */
 .ui-panel-display-reveal {
 	-webkit-transition: none;
 	-moz-transition: none;
-	-o-transition: none;
-	-ms-transition: none;
 	transition: none;
 }
 
@@ -128,8 +124,6 @@
 .ui-panel-3dtransforms.ui-panel-position-left.ui-panel-display-push {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
-	-ms-transform: translateX(-17em);
-	-o-transform: translateX(-17em);
 	transform: translateX(-17em);
 	left: 0;
 }
@@ -138,8 +132,6 @@
 .ui-panel-3dtransforms.ui-panel-position-left.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translateX(0);
 	-moz-transform: translateX(0);
-	-ms-transform: translateX(0);
-	-o-transform: translateX(0);
 	transform: translateX(0);
 }
 /* right closed */
@@ -147,8 +139,6 @@
 .ui-panel-3dtransforms.ui-panel-position-right.ui-panel-display-push {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
-	-ms-transform: translateX(17em);
-	-o-transform: translateX(17em);
 	transform: translateX(17em);
 	right: 0;
 }
@@ -157,8 +147,6 @@
 .ui-panel-3dtransforms.ui-panel-position-right.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translateX(0);
 	-moz-transform: translateX(0);
-	-ms-transform: translateX(0);
-	-o-transform: translateX(0);
 	transform: translateX(0);
 }
 
@@ -168,8 +156,6 @@
 .ui-panel-3dtransforms.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
-	-ms-transform: translateX(17em);
-	-o-transform: translateX(17em);
 	transform: translateX(17em);
 	left: 0;
 }
@@ -178,8 +164,6 @@
 .ui-panel-3dtransforms.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
-	-ms-transform: translateX(-17em);
-	-o-transform: translateX(-17em);
 	transform: translateX(-17em);
 	left: 0;
 }
