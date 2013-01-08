@@ -33,8 +33,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		dismissible: true,
 		display: "overlay", //accepts reveal, push, overlay
 		initSelector: ":jqmData(role='panel')",
-		swipeClose: true,
-		positionFixed: true
+		swipeClose: true
 	},
 
 	_panelID: null,
@@ -50,7 +49,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				var $wrapper = self._page.find( "." + self.options.classes.contentWrap );
 				if( $wrapper.length === 0 ){
 					$wrapper = self._page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
-					if( $.support.cssTransform3d && !!self.options.positionFixed ) {
+					if( $.support.cssTransform3d ) {
 						$wrapper.addClass( self.options.classes.cssTransform3d );
 					}
 				}
@@ -102,7 +101,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelClasses += " ui-body-" + this.options.theme;
 		}
 
-		if( $.support.cssTransform3d && !!this.options.positionFixed ) {
+		if( $.support.cssTransform3d ) {
 			panelClasses += " " + this.options.classes.cssTransform3d;
 		}
 		return panelClasses;
