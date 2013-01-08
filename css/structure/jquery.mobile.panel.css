@@ -29,7 +29,7 @@
 	width: 100%;
 	display: none;
 }
-.ui-panel-dismiss-open{
+.ui-panel-dismiss-open {
 	display: block;
 }
 
@@ -39,7 +39,7 @@
 	-moz-transition: -moz-transform 350ms ease;
 	-o-transition: -o-transform 350ms ease;
 	-ms-transition: -ms-transform 350ms ease;
-	transition: transform 350ms ease;
+	transition: transform 350ms ease;		
 }
 /* don't animate reveal - it stays in place */
 .ui-panel-display-reveal {
@@ -51,8 +51,9 @@
 }
 
 /* a bit of hardware acceleration for iOS 6 blinking */
+.ui-panel-3dtransforms.ui-panel,
 .ui-panel-3dtransforms.ui-panel-content-wrap,
-.ui-panel-3dtransforms.ui-panel-content-wrap .ui-header {
+.ui-panel-3dtransforms.ui-panel-content-wrap > .ui-header-fixed {
 	-webkit-backface-visibility: hidden;
 }
 
@@ -82,61 +83,89 @@
 	position: static;
 }
 
-/* panel default positions */
-.ui-panel-position-left,
-.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-open,
-.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-display-reveal {
+/* non-3d positioning: panel */
+/* left closed */
+.ui-panel-position-left {
 	left: -17em;
 }
-.ui-panel-position-right,
-.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-open,
-.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-display-reveal {
-	right: -17em;
+/* reveal already in place */
+.ui-panel-position-left.ui-panel-display-reveal {
+	left: 0;
 }
-/* non-3d positioning */
+/* left open */
 .ui-panel-position-left.ui-panel-open {
 	left: 0;
 }
+/* right closed */
+.ui-panel-position-right {
+	right: -17em;
+}
+/* reveal panel: already in place */
+.ui-panel-position-right.ui-panel-display-reveal {
+	right: 0;
+}
+/* right open */
 .ui-panel-position-right.ui-panel-open {
 	right: 0;
 }
 
-/* panel open positions */
-.ui-panel-3dtransforms.ui-panel-open,
-.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-display-reveal {
-	-webkit-transform: translateX(17em);
-	-moz-transform: translateX(17em);
-	-ms-transform: translateX(17em);
-	-o-transform: translateX(17em);
-	transform: translateX(17em);
+/* non-3d positioning: content wrap and dismiss */
+/* panel left open */
+.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open,
+.ui-panel-dismiss-position-left.ui-panel-dismiss-open {
+	left: 17em;
 }
-/* this exception is here to keep reveal in place until the closed class is added, which is after hide */
-.ui-panel-3dtransforms.ui-panel-display-reveal.ui-panel-closed {
+/* panel right open */
+.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open,
+.ui-panel-dismiss-position-right.ui-panel-dismiss-open {
+	left: -17em;
+}
+/* .ui-panel-content-wrap-display-overlay has position static and ignores the left offset */
+
+/* 3d positioning: panel (overlay and push) */
+/* left closed */
+.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-display-overlay,
+.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-display-push {
+	-webkit-transform: translateX(-17em);
+	-moz-transform: translateX(-17em);
+	-ms-transform: translateX(-17em);
+	-o-transform: translateX(-17em);
+	transform: translateX(-17em);
+	left: 0;
+}
+/* left open */
+.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-open.ui-panel-display-overlay,
+.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translateX(0);
 	-moz-transform: translateX(0);
 	-ms-transform: translateX(0);
 	-o-transform: translateX(0);
 	transform: translateX(0);
 }
-.ui-panel-3dtransforms.ui-panel-open.ui-panel-position-right,
-.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-display-reveal {
-	-webkit-transform: translateX(-17em);
-	-moz-transform: translateX(-17em);
-	-ms-transform: translateX(-17em);
-	-o-transform: translateX(-17em);
-	transform: translateX(-17em);
+/* right closed */
+.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-display-overlay,
+.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-display-push {
+	-webkit-transform: translateX(17em);
+	-moz-transform: translateX(17em);
+	-ms-transform: translateX(17em);
+	-o-transform: translateX(17em);
+	transform: translateX(17em);
+	right: 0;
+}
+/* right open */
+.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-open.ui-panel-display-overlay,
+.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-open.ui-panel-display-push {
+	-webkit-transform: translateX(0);
+	-moz-transform: translateX(0);
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
+	transform: translateX(0);
 }
 
-/* dismiss and content wrap open positions */
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
-.ui-panel-dismiss-open.ui-panel-dismiss-display-reveal,
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push,
-.ui-panel-dismiss-open.ui-panel-dismiss-display-push,
-.ui-panel-dismiss-open.ui-panel-dismiss-display-overlay {
-	left: 17em;
-}
-.ui-panel-3dtransforms.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
-.ui-panel-3dtransforms.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+/* 3d positioning: content wrap (reveal and push) */
+/* panel left open */
+.ui-panel-3dtransforms.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
+.ui-panel-3dtransforms.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	-ms-transform: translateX(17em);
@@ -144,15 +173,9 @@
 	transform: translateX(17em);
 	left: 0;
 }
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right, 
-.ui-panel-dismiss-open.ui-panel-dismiss-display-reveal.ui-panel-dismiss-position-right,
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right, 
-.ui-panel-dismiss-open.ui-panel-dismiss-display-push.ui-panel-dismiss-position-right,
-.ui-panel-dismiss-open.ui-panel-dismiss-display-overlay.ui-panel-dismiss-position-right {
-	left: -17em;
-}
-.ui-panel-3dtransforms.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right, 
-.ui-panel-3dtransforms.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right {
+/* panel right open */
+.ui-panel-3dtransforms.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
+.ui-panel-3dtransforms.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	-ms-transform: translateX(-17em);
