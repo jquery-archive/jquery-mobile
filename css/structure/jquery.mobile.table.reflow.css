@@ -29,7 +29,7 @@
 		display: block;
 		padding: .4em; 
 		min-width: 30%; 
-		display: inline-block; 
+		display: inline-block;
 		margin: -.4em 1em -.4em -.4em;
 	}
 	/* For grouped headers, have a different style to visually separate the levels by classing the first label in each col group */ 
@@ -47,6 +47,12 @@
 
 /* Breakpoint to show as a standard table at 560px (35em x 16px) or wider */ 
 @media ( min-width: 35em ) {
+
+	/* Fixes table rendering when switching between breakpoints in Safari <= 5. See https://github.com/jquery/jquery-mobile/issues/5380 */
+	.ui-table-reflow.ui-responsive {
+		display: table-row-group;
+	}
+
 	/* Show the table header rows */ 
 	.ui-table-reflow.ui-responsive td,
 	.ui-table-reflow.ui-responsive th,
@@ -56,7 +62,6 @@
 	.ui-table-reflow.ui-responsive thead th {
 		display: table-cell;
 		margin: 0;
-
 	}
 
 	/* Hide the labels in each cell */ 
