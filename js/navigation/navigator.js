@@ -180,9 +180,9 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 			// If there is no state, and the history stack length is one were
 			// probably getting the page load popstate fired by browsers like chrome
 			// avoid it and set the one time flag to false
-			if( !event.originalEvent.state
-				&& this.history.stack.length == 1
-				&& this.ignoreInitialHashChange ) {
+			if( !event.originalEvent.state &&
+				this.history.stack.length === 1 &&
+				this.ignoreInitialHashChange ) {
 				this.ignoreInitialHashChange = false;
 
 				return;
