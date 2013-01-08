@@ -61,6 +61,7 @@ function validStyle( prop, value, check_vend ) {
 
 function transform3dTest() {
 	var mqProp = "transform-3d",
+		// Because the `translate3d` test below throws false positives in Android:
 		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" );
 
 	if( ret ) {
@@ -69,8 +70,7 @@ function transform3dTest() {
 
 	var el = document.createElement( "div" ),
 		transforms = {
-			'OTransform':'-o-transform',
-			'msTransform':'-ms-transform',
+			// We’re omitting Opera for the time being; MS uses unprefixed.
 			'MozTransform':'-moz-transform',
 			'transform':'transform'
 		};
