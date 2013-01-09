@@ -38,12 +38,6 @@
 	-moz-transition: -moz-transform 350ms ease;
 	transition: transform 350ms ease;		
 }
-/* don't animate reveal - it stays in place */
-.ui-panel-display-reveal {
-	-webkit-transition: none;
-	-moz-transition: none;
-	transition: none;
-}
 
 /* a bit of hardware acceleration for iOS 6 blinking */
 .ui-panel-3dtransforms.ui-panel,
