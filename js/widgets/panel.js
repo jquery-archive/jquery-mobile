@@ -17,18 +17,15 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelClosed: "ui-panel-closed",
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
-			openComplete: "ui-panel-open-complete",
 			contentWrap: "ui-panel-content-wrap",
 			contentWrapOpen: "ui-panel-content-wrap-open",
 			contentWrapClosed: "ui-panel-content-wrap-closed",
 			panelUnfixed: "ui-panel-unfixed",
-			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
-			pageBlock: "ui-panel-page-block",
+			pagePanelOpen: "ui-page-panel-open",
 			cssTransform3d: "ui-panel-3dtransforms",
 			contentFixedToolbar: "ui-panel-content-fixed-toolbar",
 			contentFixedToolbarOpen: "ui-panel-content-fixed-toolbar-open",
 			contentFixedToolbarClosed: "ui-panel-content-fixed-toolbar-closed",
-			contentFixedToolbarOpenComplete: "ui-panel-content-fixed-toolbar-open-complete"
 		},
 		animate: true,
 		theme: null,
@@ -227,10 +224,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				o = self.options,
 				complete = function() {
 					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents, complete );
-					self.element.addClass( o.classes.openComplete );
-					self._wrapper.addClass( o.classes.contentWrapOpenComplete );
-					self._fixedToolbar.addClass( o.classes.contentFixedToolbarOpenComplete );
-					self._page.addClass( o.classes.pageBlock );
+					self._page.addClass( o.classes.pagePanelOpen );
 					self._positionPanel();
 					self._bindFixListener();
 					self._trigger( "open" );
@@ -273,7 +267,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._wrapper.addClass( o.classes.contentWrapClosed );
 					self._fixedToolbar.removeClass( self._fixedToolbarOpenClasses );
 					self._fixedToolbar.addClass( o.classes.contentFixedToolbarClosed );
-					self._page.removeClass( o.classes.pageBlock );
+					self._page.removeClass( o.classes.pagePanelOpen );
 					self._fixPanel();
 					self._unbindFixListener();
 					self._trigger( "close" );
@@ -289,12 +283,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				setTimeout( complete , 0 );
 			}
 
-			self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
+			self.element.removeClass( o.classes.panelOpen );
 			if ( this._modal ) {
 				self._modal.removeClass( self._modalOpenClasses );
 			}
-			self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
-			self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen + " " + o.classes.contentFixedToolbarOpenComplete );
+			self._wrapper.removeClass( o.classes.contentWrapOpen );
+			self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
 
 			self._open = false;
 		}
@@ -315,8 +309,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			this._wrapper.children().unwrap();
 			this._page.find( "a" ).unbind( "panelopen panelclose" );
 		} else if ( this._open ) {
-			this._wrapper.removeClass( [ classes.contentWrapOpen, classes.contentWrapOpenComplete ].join( " " ) );
-			this._fixedToolbar.removeClass( [ classes.contentFixedToolbarOpen, classes.contentFixedToolbarOpenComplete ].join( " " ) );
+			this._wrapper.removeClass( classes.contentWrapOpen );
+			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
 		}
 
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
@@ -333,8 +327,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		// open and close
 		this.element.off( this._transitionEndEvents )
-			.removeClass( [ classes.openComplete, classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
-		this._page.removeClass( classes.pageBlock );
+			.removeClass( [ classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
+		this._page.removeClass( classes.pagePanelOpen );
 	}
 });
 
