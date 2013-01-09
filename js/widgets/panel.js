@@ -51,9 +51,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el = self.element,
 			_getWrapper = function() {
 				var $wrapper = self._page.find( "." + self.options.classes.contentWrap );
-				if( $wrapper.length === 0 ) {
+				if ( $wrapper.length === 0 ) {
 					$wrapper = self._page.find( ".ui-header:not(.ui-header-fixed), .ui-content, .ui-footer:not(.ui-footer-fixed)" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
-					if( $.support.cssTransform3d ) {
+					if ( $.support.cssTransform3d ) {
 						$wrapper.addClass( self.options.classes.cssTransform3d );
 					}
 				}
@@ -61,9 +61,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			},
 			_getFixedToolbar = function() {
 				var $fixedToolbar = self._page.find( "." + self.options.classes.contentFixedToolbar );
-				if( $fixedToolbar.length === 0 ) {
+				if ( $fixedToolbar.length === 0 ) {
 					$fixedToolbar = self._page.find( ".ui-header-fixed, .ui-footer-fixed" ).addClass( self.options.classes.contentFixedToolbar );
-					if( $.support.cssTransform3d ) {
+					if ( $.support.cssTransform3d ) {
 						$fixedToolbar.addClass( self.options.classes.cssTransform3d );
 					}
 				}
@@ -89,54 +89,54 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._bindLinkListeners();
 		self._bindPageEvents();
 
-		if( self.options.dismissible ){
+		if ( self.options.dismissible ) {
 			self._createModal();
 		}
 
 	},
 
-	_createModal: function( options ){
+	_createModal: function( options ) {
 		var self = this;
 		self._modal = $( "<div class='" + self.options.classes.modal + " " + self.options.display + "-" + self.options.position +"' data-panelid='" + self._panelID + "'></div>" )
-			.on( "mousedown" , function(){
+			.on( "mousedown" , function() {
 				self.close();
 			})
 			.appendTo( this._page );
 	},
 
-	_getPosDisplayClasses: function( prefix ){
+	_getPosDisplayClasses: function( prefix ) {
 		return prefix + "-position-" + this.options.position + " " + prefix + "-display-" + this.options.display;
 	},
 
-	_getPanelClasses: function(){
+	_getPanelClasses: function() {
 		var panelClasses = this.options.classes.panel +
 						" " + this._getPosDisplayClasses( this.options.classes.panel ) +
 						" " + this.options.classes.panelClosed;
 
-		if( this.options.theme ){
+		if ( this.options.theme ) {
 			panelClasses += " ui-body-" + this.options.theme;
 		}
 
-		if( $.support.cssTransform3d ) {
+		if ( $.support.cssTransform3d ) {
 			panelClasses += " " + this.options.classes.cssTransform3d;
 		}
 		return panelClasses;
 	},
 
-	_addPanelClasses: function(){
+	_addPanelClasses: function() {
 		this.element.addClass( this._getPanelClasses() );
 	},
 
-	_bindCloseEvents: function(){
+	_bindCloseEvents: function() {
 		var self = this;
-		self._closeLink.on( "click.panel" , function( e ){
+		self._closeLink.on( "click.panel" , function( e ) {
 			e.preventDefault();
 			self.close();
 			return false;
 		});
 	},
 
-	_positionPanel: function(){
+	_positionPanel: function() {
 		if ( this.element.height() > $.mobile.getScreenHeight() ) {
 			this._unfixPanel();
 			this._scrollIntoView();
@@ -146,37 +146,37 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 	},
 
-	_scrollIntoView: function(){
-		if( $(window).scrollTop() > $.mobile.getScreenHeight() ){
+	_scrollIntoView: function() {
+		if ( $(window).scrollTop() > $.mobile.getScreenHeight() ) {
 			window.scrollTo( 0, 0);
 		}
 	},
 
-	_bindFixListener: function(){
+	_bindFixListener: function() {
 		this._on( $( window ), { "throttledresize": "_positionPanel" });
 	},
 
-	_unbindFixListener: function(){
+	_unbindFixListener: function() {
 		this._off( $( window ), "throttledresize" );
 	},
 
-	_unfixPanel: function(){
+	_unfixPanel: function() {
 		this.element.addClass( this.options.classes.panelUnfixed );
 	},
 
-	_fixPanel: function(){
+	_fixPanel: function() {
 		this.element.removeClass( this.options.classes.panelUnfixed );
 	},
 
-	_bindLinkListeners: function(){
+	_bindLinkListeners: function() {
 		var self = this;
 
 		this._page.on( "click.panel" , "a", function( e ) {
-			if( this.href.split( "#" )[ 1 ] === self._panelID ){
+			if ( this.href.split( "#" )[ 1 ] === self._panelID ) {
 				e.preventDefault();
 				var $link = $( this );
 				$link.addClass( $.mobile.activeBtnClass );
-				self.element.one( "panelopen panelclose", function(){
+				self.element.one( "panelopen panelclose", function() {
 					$link.removeClass( $.mobile.activeBtnClass );
 				});
 				self.toggle();
@@ -185,31 +185,31 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		});
 	},
 
-	_bindPageEvents: function(){
+	_bindPageEvents: function() {
 		var self = this;
-		if( this.option.swipeClose ){
+		if ( this.option.swipeClose ) {
 			self.element
 				// on swipe, close the panel (should swipe open too?)
-				.on( "swipe.panel" , function( e ){
+				.on( "swipe.panel" , function( e ) {
 					self.close( true );
 				});
 		}
 		self._page
 			// Close immediately if another panel on the page opens
-			.on( "panelbeforeopen", function( e ){
-				if( self._open && e.target !== self.element[ 0 ] ){
+			.on( "panelbeforeopen", function( e ) {
+				if ( self._open && e.target !== self.element[ 0 ] ) {
 					self.close( true );
 				}
 			})
 			// clean up open panels after page hide
 			.on(  "pagebeforehide", function( e ) {
-				if( self._open ){
+				if ( self._open ) {
 					self.close( true );
 				}
 			})
 			// on escape, close? might need to have a target check too...
 			.on( "keyup.panel", function( e ) {
-				if( e.keyCode === 27 && self._open ){
+				if ( e.keyCode === 27 && self._open ) {
 					self.close( true );
 				}
 			});
@@ -221,11 +221,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_contentWrapOpenClasses: null,
 	_modalOpenClasses: null,
 
-	open: function( immediate ){
-		if( !this._open ){
+	open: function( immediate ) {
+		if ( !this._open ) {
 			var self = this,
 				o = self.options,
-				complete = function(){
+				complete = function() {
 					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.openComplete );
 					self._wrapper.addClass( o.classes.contentWrapOpenComplete );
@@ -236,7 +236,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._trigger( "open" );
 				};
 
-			if( this.element.closest( ".ui-page-active" ).length < 0 ){
+			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
 				immediate = true;
 			}
 			self._trigger( "beforeopen" );
@@ -255,18 +255,18 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._fixedToolbar.removeClass( o.classes.contentFixedToolbarClosed );
 			self._fixedToolbar.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
 			self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
-			if( this._modal ) {
+			if ( this._modal ) {
 				self._modal.addClass( self._modalOpenClasses );
 			}
 			self._open = true;
 		}
 	},
 
-	close: function( immediate ){
-		if( this._open ){
+	close: function( immediate ) {
+		if ( this._open ) {
 			var o = this.options,
 				self = this,
-				complete = function(){
+				complete = function() {
 					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents , complete );
 					self.element.addClass( o.classes.panelClosed );
 					self._wrapper.removeClass( self._contentWrapOpenClasses );
@@ -278,7 +278,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._unbindFixListener();
 					self._trigger( "close" );
 				};
-			if( this.element.closest( ".ui-page-active" ).length < 0 ){
+			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
 				immediate = true;
 			}
 			self._trigger( "beforeclose" );
@@ -290,7 +290,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 
 			self.element.removeClass( o.classes.panelOpen + " " + o.classes.openComplete );
-			if( this._modal ) {
+			if ( this._modal ) {
 				self._modal.removeClass( self._modalOpenClasses );
 			}
 			self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
@@ -300,18 +300,18 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 	},
 
-	toggle: function( options ){
+	toggle: function( options ) {
 		this[ this._open ? "close" : "open" ]();
 	},
 
 	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
 
-	_destroy: function(){
+	_destroy: function() {
 		var classes = this.options.classes,
 			hasOtherSiblingPanels = this.element.siblings( "." + classes.panel ).length;
 
 		// create
-		if( !hasOtherSiblingPanels ) {
+		if ( !hasOtherSiblingPanels ) {
 			this._wrapper.children().unwrap();
 			this._page.find( "a" ).unbind( "panelopen panelclose" );
 		} else if ( this._open ) {
@@ -327,7 +327,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 		this._closeLink.off( "click.panel" );
 
-		if( this._modal ) {
+		if ( this._modal ) {
 			this._modal.remove();
 		}
 
@@ -338,7 +338,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	}
 });
 
-
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.panel.prototype.enhanceWithin( e.target );
@@ -348,4 +347,3 @@ $( document ).bind( "pagecreate create", function( e ) {
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");
-
