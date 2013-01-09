@@ -2,13 +2,29 @@
 .ui-panel {
 	min-height: 100%;
 	border-width:0;
+	position: absolute;
 	top: 0;
 	display: block;
 	width: 17em;
 }
+.ui-panel.ui-panel-animate {
+	position: fixed;
+}
+.ui-panel.ui-panel-unfixed {
+	position: absolute;
+}
 .ui-panel-closed {
 	width: 0;
 	overflow: hidden;
+}
+.ui-panel-display-overlay {
+	z-index: 1001; /* fixed toolbars have z-index 1000 */
+}
+.ui-panel-display-reveal {
+	z-index: 0;
+}
+.ui-panel-display-push {
+	z-index: 1;
 }
 
 /* content-wrap */
@@ -17,6 +33,12 @@
 	background: inherit;
 	left: 0;
 	min-height: inherit;
+	z-index: 999;
+}
+.ui-panel-content-wrap-display-overlay,
+.ui-panel-animate.ui-panel-content-wrap > .ui-header, /* ios4 fix */
+.ui-panel-content-wrap-closed {
+	position: static;
 }
 
 /* dismiss */
@@ -26,6 +48,7 @@
 	left:0;
 	height: 100%;
 	width: 100%;
+	z-index: 1002;
 	display: none;
 }
 .ui-panel-dismiss-open {
@@ -44,59 +67,6 @@
 .ui-panel-animate.ui-panel-content-wrap,
 .ui-panel-animate.ui-panel-content-fixed-toolbar {
 	-webkit-backface-visibility: hidden;
-}
-
-/* z stacking */
-.ui-panel-display-overlay {
-	z-index: 1001;
-}
-.ui-panel-display-reveal {
-	z-index: 0;
-}
-.ui-panel-display-push {
-	z-index: 1;
-}
-.ui-panel-content-wrap {
-	z-index: 1000;
-}
-.ui-panel-content-wrap-display-overlay {
-	z-index: 1000;
-}
-.ui-panel-content-wrap-display-reveal {
-	z-index: 1000;
-}
-.ui-panel-content-wrap-display-push {
-	z-index: 1000;
-}
-.ui-panel-content-fixed-toolbar {
-	z-index: 1000;
-}
-.ui-panel-content-fixed-toolbar-display-overlay {
-	z-index: 1000;
-}
-.ui-panel-content-fixed-toolbar-display-reveal {
-	z-index: 1000;
-}
-.ui-panel-content-fixed-toolbar-display-push {
-	z-index: 1000;
-}
-.ui-panel-dismiss {
-	z-index: 1002;
-}
-
-.ui-panel {
-	position: absolute;
-}
-.ui-panel.ui-panel-animate {
-	position: fixed;
-}
-.ui-panel.ui-panel-unfixed {
-	position: absolute;
-}
-.ui-panel-content-wrap-display-overlay,
-.ui-panel-animate.ui-panel-content-wrap > .ui-header, /* ios4 fix */
-.ui-panel-content-wrap-closed {
-	position: static;
 }
 
 /* non-3d positioning: panel */
