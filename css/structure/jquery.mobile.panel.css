@@ -54,13 +54,13 @@
 
 /* z stacking */
 .ui-panel-display-overlay {
-	z-index: 99999;
+	z-index: 1001;
 }
 .ui-panel-display-reveal {
 	z-index: 0;
 }
 .ui-panel-display-push {
-	z-index: 99999;
+	z-index: 1;
 }
 .ui-panel-content-wrap {
 	z-index: 1;
@@ -78,16 +78,16 @@
 	z-index: 1000;
 }
 .ui-panel-content-fixed-toolbar-display-overlay {
-	z-index: 99999;
+	z-index: 1000;
 }
 .ui-panel-content-fixed-toolbar-display-reveal {
-	z-index: 99999;
+	z-index: 1000;
 }
 .ui-panel-content-fixed-toolbar-display-push {
-	z-index: 99999;
+	z-index: 1000;
 }
 .ui-panel-dismiss {
-	z-index: 99999;
+	z-index: 1002;
 }
 
 .ui-panel {
