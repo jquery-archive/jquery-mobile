@@ -40,9 +40,9 @@
 }
 
 /* a bit of hardware acceleration for iOS 6 blinking */
-.ui-panel-3dtransforms.ui-panel,
-.ui-panel-3dtransforms.ui-panel-content-wrap,
-.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar {
+.ui-panel-animate.ui-panel,
+.ui-panel-animate.ui-panel-content-wrap,
+.ui-panel-animate.ui-panel-content-fixed-toolbar {
 	-webkit-backface-visibility: hidden;
 }
 
@@ -87,14 +87,14 @@
 .ui-panel {
 	position: absolute;
 }
-.ui-panel.ui-panel-3dtransforms {
+.ui-panel.ui-panel-animate {
 	position: fixed;
 }
 .ui-panel.ui-panel-unfixed {
 	position: absolute;
 }
 .ui-panel-content-wrap-display-overlay,
-.ui-panel-3dtransforms.ui-panel-content-wrap > .ui-header, /* ios4 fix */
+.ui-panel-animate.ui-panel-content-wrap > .ui-header, /* ios4 fix */
 .ui-panel-content-wrap-closed {
 	position: static;
 }
@@ -145,31 +145,31 @@
 
 /* 3d positioning: panel (overlay and push) */
 /* left closed */
-.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-display-overlay,
-.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-display-push {
+.ui-panel-animate.ui-panel-position-left.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-position-left.ui-panel-display-push {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	transform: translateX(-17em);
 	left: 0;
 }
 /* left open */
-.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-open.ui-panel-display-overlay,
-.ui-panel-3dtransforms.ui-panel-position-left.ui-panel-open.ui-panel-display-push {
+.ui-panel-animate.ui-panel-position-left.ui-panel-open.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-position-left.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translateX(0);
 	-moz-transform: translateX(0);
 	transform: translateX(0);
 }
 /* right closed */
-.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-display-overlay,
-.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-display-push {
+.ui-panel-animate.ui-panel-position-right.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-position-right.ui-panel-display-push {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	transform: translateX(17em);
 	right: 0;
 }
 /* right open */
-.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-open.ui-panel-display-overlay,
-.ui-panel-3dtransforms.ui-panel-position-right.ui-panel-open.ui-panel-display-push {
+.ui-panel-animate.ui-panel-position-right.ui-panel-open.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-position-right.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translateX(0);
 	-moz-transform: translateX(0);
 	transform: translateX(0);
@@ -177,20 +177,20 @@
 
 /* 3d positioning: content wrap and fixed toolbars (reveal and push) */
 /* panel left open */
-.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal,
-.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-.ui-panel-3dtransforms.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
-.ui-panel-3dtransforms.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal,
+.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
+.ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
+.ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(17em);
 	-moz-transform: translateX(17em);
 	transform: translateX(17em);
 	left: 0;
 }
 /* panel right open */
-.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal, 
-.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-.ui-panel-3dtransforms.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
-.ui-panel-3dtransforms.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+.ui-panel-animate.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal, 
+.ui-panel-animate.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
+.ui-panel-animate.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
+.ui-panel-animate.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(-17em);
 	-moz-transform: translateX(-17em);
 	transform: translateX(-17em);
