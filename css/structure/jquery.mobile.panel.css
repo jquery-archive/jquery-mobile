@@ -15,13 +15,12 @@
 .ui-panel-content-wrap {
 	position: relative;
 	background: inherit;
-	z-index: 1;
 	left: 0;
 	min-height: inherit;
 }
 
 /* dismiss */
-.ui-panel-dismiss{
+.ui-panel-dismiss {
 	position: absolute;
 	top: 0;
 	left:0;
@@ -49,19 +48,46 @@
 /* a bit of hardware acceleration for iOS 6 blinking */
 .ui-panel-3dtransforms.ui-panel,
 .ui-panel-3dtransforms.ui-panel-content-wrap,
-.ui-panel-3dtransforms.ui-panel-content-wrap > .ui-header-fixed {
+.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar {
 	-webkit-backface-visibility: hidden;
 }
 
 /* z stacking */
-.ui-panel-display-overlay,
-.ui-panel-display-push,
-.ui-panel-content-wrap,
-.ui-panel-dismiss {
+.ui-panel-display-overlay {
 	z-index: 99999;
 }
 .ui-panel-display-reveal {
 	z-index: 0;
+}
+.ui-panel-display-push {
+	z-index: 99999;
+}
+.ui-panel-content-wrap {
+	z-index: 1;
+}
+.ui-panel-content-wrap-display-overlay {
+	z-index: 1;
+}
+.ui-panel-content-wrap-display-reveal {
+	z-index: 1;
+}
+.ui-panel-content-wrap-display-push {
+	z-index: 1;
+}
+.ui-panel-content-fixed-toolbar {
+	z-index: 1000;
+}
+.ui-panel-content-fixed-toolbar-display-overlay {
+	z-index: 99999;
+}
+.ui-panel-content-fixed-toolbar-display-reveal {
+	z-index: 99999;
+}
+.ui-panel-content-fixed-toolbar-display-push {
+	z-index: 99999;
+}
+.ui-panel-dismiss {
+	z-index: 99999;
 }
 
 .ui-panel {
@@ -74,7 +100,7 @@
 	position: absolute;
 }
 .ui-panel-content-wrap-display-overlay,
-.ui-panel-3dtransforms.ui-panel-content-wrap .ui-header:not(.ui-header-fixed), /* ios4 fix */
+.ui-panel-3dtransforms.ui-panel-content-wrap > .ui-header, /* ios4 fix */
 .ui-panel-content-wrap-closed {
 	position: static;
 }
@@ -105,18 +131,23 @@
 	right: 0;
 }
 
-/* non-3d positioning: content wrap and dismiss */
+/* non-3d positioning: content wrap, fixed toolbars and dismiss */
 /* panel left open */
+.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open,
 .ui-panel-content-wrap-position-left.ui-panel-content-wrap-open,
 .ui-panel-dismiss-position-left.ui-panel-dismiss-open {
 	left: 17em;
 }
 /* panel right open */
+.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open,
 .ui-panel-content-wrap-position-right.ui-panel-content-wrap-open,
 .ui-panel-dismiss-position-right.ui-panel-dismiss-open {
 	left: -17em;
 }
-/* .ui-panel-content-wrap-display-overlay has position static and ignores the left offset */
+.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-overlay,
+.ui-panel-content-wrap-open.ui-panel-content-wrap-display-overlay {
+	left: 0;
+}
 
 /* 3d positioning: panel (overlay and push) */
 /* left closed */
@@ -150,8 +181,10 @@
 	transform: translateX(0);
 }
 
-/* 3d positioning: content wrap (reveal and push) */
+/* 3d positioning: content wrap and fixed toolbars (reveal and push) */
 /* panel left open */
+.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal,
+.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
 .ui-panel-3dtransforms.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
 .ui-panel-3dtransforms.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(17em);
@@ -160,6 +193,8 @@
 	left: 0;
 }
 /* panel right open */
+.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal, 
+.ui-panel-3dtransforms.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
 .ui-panel-3dtransforms.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
 .ui-panel-3dtransforms.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
 	-webkit-transform: translateX(-17em);
@@ -167,6 +202,9 @@
 	transform: translateX(-17em);
 	left: 0;
 }
+
+/* fixed toolbars */
+
 
 /* while open, page x overflow is disabled */
 .ui-page-active.ui-panel-page-block {

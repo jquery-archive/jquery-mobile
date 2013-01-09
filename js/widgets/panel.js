@@ -25,7 +25,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
 			pagePanel: "ui-page-panel",
-			cssTransform3d: "ui-panel-3dtransforms"
+			cssTransform3d: "ui-panel-3dtransforms",
+			contentFixedToolbar: "ui-panel-content-fixed-toolbar",
+			contentFixedToolbarOpen: "ui-panel-content-fixed-toolbar-open",
+			contentFixedToolbarClosed: "ui-panel-content-fixed-toolbar-closed",
+			contentFixedToolbarOpenComplete: "ui-panel-content-fixed-toolbar-open-complete"
 		},
 		animate: true,
 		theme: null,
@@ -41,19 +45,30 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_page: null,
 	_modal: null,
 	_wrapper: null,
+	_fixedToolbar: null,
 
 	_create: function() {
 		var self = this,
 			$el = self.element,
-			_getWrapper = function(){
+			_getWrapper = function() {
 				var $wrapper = self._page.find( "." + self.options.classes.contentWrap );
-				if( $wrapper.length === 0 ){
-					$wrapper = self._page.find( ".ui-header, .ui-content, .ui-footer" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
+				if( $wrapper.length === 0 ) {
+					$wrapper = self._page.find( ".ui-header:not(.ui-header-fixed), .ui-content, .ui-footer:not(.ui-footer-fixed)" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
 					if( $.support.cssTransform3d ) {
 						$wrapper.addClass( self.options.classes.cssTransform3d );
 					}
 				}
 				return $wrapper;
+			},
+			_getFixedToolbar = function() {
+				var $fixedToolbar = self._page.find( "." + self.options.classes.contentFixedToolbar );
+				if( $fixedToolbar.length === 0 ) {
+					$fixedToolbar = self._page.find( ".ui-header-fixed, .ui-footer-fixed" ).addClass( self.options.classes.contentFixedToolbar );
+					if( $.support.cssTransform3d ) {
+						$fixedToolbar.addClass( self.options.classes.cssTransform3d );
+					}
+				}
+				return $fixedToolbar;
 			};
 
 		// expose some private props to other methods
@@ -61,12 +76,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._closeLink = $el.find( ":jqmData(rel='close')" );
 		self._page = $el.closest( ":jqmData(role='page')" );
 		self._wrapper = _getWrapper();
+		self._fixedToolbar = _getFixedToolbar();
 		self._addPanelClasses();
 		self._wrapper.addClass( this.options.classes.contentWrapClosed );
+		self._fixedToolbar.addClass( this.options.classes.contentFixedToolbarClosed );
 
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && self.options.animate ) {
-			this.element.add( self._wrapper ).addClass( "ui-panel-animate" );
+			this.element.add( self._wrapper ).add( self._fixedToolbar ).addClass( "ui-panel-animate" );
 		}
 
 		self._bindCloseEvents();
@@ -210,9 +227,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var self = this,
 				o = self.options,
 				complete = function(){
-					self.element.add( self._wrapper ).unbind( self._transitionEndEvents, complete );
+					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.openComplete );
 					self._wrapper.addClass( o.classes.contentWrapOpenComplete );
+					self._fixedToolbar.addClass( o.classes.contentFixedToolbarOpenComplete );
 					self._page.addClass( o.classes.pageBlock );
 					self._positionPanel();
 					self._bindFixListener();
@@ -225,7 +243,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._trigger( "beforeopen" );
 
 			if ( !immediate && $.support.cssTransform3d && o.animate ) {
-				self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
+				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents , complete );
 			} else{
 				setTimeout( complete , 0 );
 			}
@@ -234,6 +252,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
 			self._wrapper.removeClass( o.classes.contentWrapClosed );
 			self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
+			self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentFixedToolbar );
+			self._fixedToolbar.removeClass( o.classes.contentFixedToolbarClosed );
+			self._fixedToolbar.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
 			self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
 			if( this._modal ) {
 				self._modal.addClass( self._modalOpenClasses );
@@ -247,10 +268,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var o = this.options,
 				self = this,
 				complete = function(){
-					self.element.add( self._wrapper ).off( self._transitionEndEvents , complete );
+					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents , complete );
 					self.element.addClass( o.classes.panelClosed );
 					self._wrapper.removeClass( self._contentWrapOpenClasses );
 					self._wrapper.addClass( o.classes.contentWrapClosed );
+					self._fixedToolbar.removeClass( self._fixedToolbarOpenClasses );
+					self._fixedToolbar.addClass( o.classes.contentFixedToolbarClosed );
 					self._page.removeClass( o.classes.pageBlock );
 					self._fixPanel();
 					self._unbindFixListener();
@@ -262,7 +285,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._trigger( "beforeclose" );
 
 			if ( !immediate && $.support.cssTransform3d && o.animate ) {
-				self.element.add( self._wrapper ).on( self._transitionEndEvents , complete );
+				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents , complete );
 			} else{
 				setTimeout( complete , 0 );
 			}
@@ -272,6 +295,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				self._modal.removeClass( self._modalOpenClasses );
 			}
 			self._wrapper.removeClass( o.classes.contentWrapOpen + " " + o.classes.contentWrapOpenComplete );
+			self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen + " " + o.classes.contentFixedToolbarOpenComplete );
 
 			self._open = false;
 		}
@@ -291,8 +315,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if( !hasOtherSiblingPanels ) {
 			this._wrapper.children().unwrap();
 			this._page.find( "a" ).unbind( "panelopen panelclose" );
-		} else if( this._open ) {
+		} else if ( this._open ) {
 			this._wrapper.removeClass( [ classes.contentWrapOpen, classes.contentWrapOpenComplete ].join( " " ) );
+			this._fixedToolbar.removeClass( [ classes.contentFixedToolbarOpen, classes.contentFixedToolbarOpenComplete ].join( " " ) );
 		}
 
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
