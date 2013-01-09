@@ -24,7 +24,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelUnfixed: "ui-panel-unfixed",
 			contentWrapOpenComplete: "ui-panel-content-wrap-open-complete",
 			pageBlock: "ui-panel-page-block",
-			pagePanel: "ui-page-panel",
 			cssTransform3d: "ui-panel-3dtransforms",
 			contentFixedToolbar: "ui-panel-content-fixed-toolbar",
 			contentFixedToolbarOpen: "ui-panel-content-fixed-toolbar-open",
