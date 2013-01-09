@@ -57,16 +57,16 @@
 	z-index: 1;
 }
 .ui-panel-content-wrap {
-	z-index: 1;
+	z-index: 1000;
 }
 .ui-panel-content-wrap-display-overlay {
-	z-index: 1;
+	z-index: 1000;
 }
 .ui-panel-content-wrap-display-reveal {
-	z-index: 1;
+	z-index: 1000;
 }
 .ui-panel-content-wrap-display-push {
-	z-index: 1;
+	z-index: 1000;
 }
 .ui-panel-content-fixed-toolbar {
 	z-index: 1000;
