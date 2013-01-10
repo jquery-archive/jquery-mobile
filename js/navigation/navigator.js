@@ -2,12 +2,16 @@
 //>>description: Navigation Manager
 //>>label: AJAX Navigation System
 //>>group: Navigation
-define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) {
+define(["jquery",
+				"./../jquery.mobile.ns",
+				"../events/navigate",
+				"./path",
+				"./history" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var path = $.mobile.path;
 
-	$.Navigator = function( history ) {
+	$.mobile.Navigator = function( history ) {
 		this.history = history;
 		this.ignoreInitialHashChange = true;
 
@@ -23,7 +27,7 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 		});
 	};
 
-	$.extend($.Navigator.prototype, {
+	$.extend($.mobile.Navigator.prototype, {
 		squash: function( url, data ) {
 			var state, href, hash = path.isPath(url) ? path.stripHash(url) : url;
 
@@ -196,7 +200,7 @@ define([ "jquery", "../events/navigate", "./path", "./history" ], function( $ ) 
 			//      when the hash is adjacent to the active history entry
 			if( !event.originalEvent.state ) {
 				hash = path.parseLocation().hash;
-				state = $.navigate.navigator.squash( hash );
+				state = this.squash( hash );
 
 				// record the new hash as an additional history entry
 				// to match the browser's treatment of hash assignment

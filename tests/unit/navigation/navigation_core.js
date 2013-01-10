@@ -18,8 +18,8 @@ $.testHelper.delayStart();
 
 	module('jquery.mobile.navigation.js', {
 		setup: function() {
-			$.navigate.history.stack = [];
-			$.navigate.history.activeIndex = 0;
+			$.mobile.navigate.history.stack = [];
+			$.mobile.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( homeWithSearch );
 		},
 
@@ -375,7 +375,7 @@ $.testHelper.delayStart();
 	});
 
 	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
-		var stackLength = $.navigate.history.stack.length;
+		var stackLength = $.mobile.navigate.history.stack.length;
 
 		$.testHelper.pageSequence([
 			function(){ $.testHelper.openPage("#dup-history-first"); },

@@ -122,14 +122,19 @@
 		},
 
 		reloadLib: function(libName){
+			var reload;
+
 			if(this.reloads[libName] === undefined) {
 				this.reloads[libName] = {
-					lib: $("script[src$='" + libName + "']"),
+					lib: $( "script[src$='" + libName + "']" ),
+					dataSrcLib: $( "script[data-src$='" + libName + "']"),
 					count: 0
 				};
 			}
 
-			var src = this.reloads[libName].lib.attr('src') + "?" + this.reloads[libName].count++;
+			reload = this.reloads[libName];
+
+			var src = reload.lib.attr('src') || reload.dataSrcLib.attr( "data-src" ) + "?" + this.reloads[libName].count++;
 			$.ajax( { url: src, dataType: "script", async: false } );
 		},
 

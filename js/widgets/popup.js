@@ -816,7 +816,7 @@ define( [
 			});
 
 			this.urlAltered = true;
-			$.navigate( url, {role: "dialog"} );
+			$.mobile.navigate( url, {role: "dialog"} );
 		},
 
 		close: function() {

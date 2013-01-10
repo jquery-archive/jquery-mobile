@@ -5,14 +5,14 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
+define( [ "jquery", "./jquery.mobile.ns", "text!../version.txt" ], function( $, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 	var nsNormalizeDict = {};
 
 	// jQuery.mobile configurable options
-	$.mobile = $.extend( {}, {
+	$.mobile = $.extend($.mobile, {
 
 		// Version of the jQuery Mobile Framework
 		version: __version__,

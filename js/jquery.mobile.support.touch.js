@@ -3,14 +3,13 @@
 //>>label: Touch support test
 //>>group: Core
 
-define( [ "jquery" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 	(function( $, undefined ) {
 		var support = {
 			touch: "ontouchend" in document
 		};
 
-		$.mobile = $.mobile || {};
 		$.mobile.support = $.mobile.support || {};
 		$.extend( $.support, support );
 		$.extend( $.mobile.support, support );

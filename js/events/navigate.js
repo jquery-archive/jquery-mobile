@@ -4,7 +4,7 @@
 //>>group: Navigation
 
 // TODO break out pushstate support test so we don't depend on the whole thing
-define([ "jquery", "./../jquery.mobile.support" ], function( $ ) {
+define([ "jquery", "./../jquery.mobile.ns", "./../jquery.mobile.support" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {

@@ -8,10 +8,13 @@
 				$.support.mediaquery = value;
 				$.mobile.browser.ie = version;
 			},
-			extendFn = $.extend;
+			extendFn = $.extend,
+			ns = $.mobile.ns;
 
 	module(libName, {
 		setup: function(){
+			$.mobile.ns = ns;
+
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
 

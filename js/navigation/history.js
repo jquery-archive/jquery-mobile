@@ -2,18 +2,18 @@
 //>>description: History Manager
 //>>label: AJAX Navigation System
 //>>group: Navigation
-define([ "jquery", "./path" ], function( $ ) {
+define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {
 	var path = $.mobile.path;
 
-	$.History = function( stack, index ) {
+	$.mobile.History = function( stack, index ) {
 		this.stack = stack || [];
 		this.activeIndex = index || 0;
 	};
 
-	$.extend($.History.prototype, {
+	$.extend($.mobile.History.prototype, {
 		getActive: function() {
 			return this.stack[ this.activeIndex ];
 		},

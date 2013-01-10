@@ -107,7 +107,7 @@ define([
 				// make sure to set initial popstate state if it exists
 				// so that navigation back to the initial page works properly
 				if( $.event.special.navigate.isPushStateEnabled() ) {
-					$.navigate.navigator.squash( path.parseLocation().href );
+					$.mobile.navigate.navigator.squash( path.parseLocation().href );
 				}
 
 				$.mobile.changePage( $.mobile.firstPage, {
@@ -124,8 +124,8 @@ define([
 				} else {
 					// TODO figure out how to simplify this interaction with the initial history entry
 					// at the bottom js/navigate/navigate.js
-					$.navigate.history.stack = [];
-					$.navigate( $.mobile.path.isPath( location.hash ) ? location.hash : location.href );
+					$.mobile.navigate.history.stack = [];
+					$.mobile.navigate( $.mobile.path.isPath( location.hash ) ? location.hash : location.href );
 				}
 			}
 		}

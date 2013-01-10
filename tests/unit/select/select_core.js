@@ -72,8 +72,8 @@
 
 	module(libName, {
 		setup: function() {
-			$.navigate.history.stack = [];
-			$.navigate.history.activeIndex = 0;
+			$.mobile.navigate.history.stack = [];
+			$.mobile.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( homeWithSearch );
 		},
 

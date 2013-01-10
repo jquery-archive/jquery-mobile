@@ -4,7 +4,7 @@
 //>>group: Navigation
 define([
 	"jquery",
-	"./../jquery.mobile.core" ], function( $ ) {
+	"./../jquery.mobile.ns" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 
 		var path, documentBase, $base, dialogHashKey = "&ui-state=dialog";
@@ -198,12 +198,6 @@ define([
 				return path.stripHash( newPath ).replace( /[^\/]*\.[^\/*]+$/, '' );
 			},
 
-			//return the substring of a filepath before the sub-page key, for making a server request
-			getFilePath: function( path ) {
-				var splitkey = '&' + $.mobile.subPageUrlKey;
-				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
-			},
-
 			//set location hash to path
 			set: function( path ) {
 				location.hash = path;
@@ -249,26 +243,6 @@ define([
 				return ( /^(:?\w+:)/ ).test( url );
 			},
 
-			//check if the specified url refers to the first page in the main application document.
-			isFirstPageUrl: function( url ) {
-				// We only deal with absolute paths.
-				var u = path.parseUrl( path.makeUrlAbsolute( url, this.documentBase ) ),
-
-					// Does the url have the same path as the document?
-					samePath = u.hrefNoHash === this.documentUrl.hrefNoHash || ( this.documentBaseDiffers && u.hrefNoHash === this.documentBase.hrefNoHash ),
-
-					// Get the first page element.
-					fp = $.mobile.firstPage,
-
-					// Get the id of the first page element if it has one.
-					fpId = fp && fp[0] ? fp[0].id : undefined;
-
-				// The url refers to the first page if the path matches the document and
-				// it either has no hash value, or the hash is exactly equal to the id of the
-				// first page element.
-				return samePath && ( !u.hash || u.hash === "#" || ( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
-			},
-
 			isEmbeddedPage: function( url ) {
 				var u = path.parseUrl( url );
 
@@ -281,19 +255,6 @@ define([
 					return ( !this.isPath(u.hash) && u.hash && ( u.hrefNoHash === this.documentUrl.hrefNoHash || ( this.documentBaseDiffers && u.hrefNoHash === this.documentBase.hrefNoHash ) ) );
 				}
 				return ( /^#/ ).test( u.href );
-			},
-
-
-			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
-			// requests if the document doing the request was loaded via the file:// protocol.
-			// This is usually to allow the application to "phone home" and fetch app specific
-			// data. We normally let the browser handle external/cross-domain urls, but if the
-			// allowCrossDomainPages option is true, we will allow cross-domain http/https
-			// requests to go through our page loading logic.
-			isPermittedCrossDomainRequest: function( docUrl, reqUrl ) {
-				return $.mobile.allowCrossDomainPages &&
-					docUrl.protocol === "file:" &&
-					reqUrl.search( /^https?:/ ) !== -1;
 			},
 
 			squash: function( url, resolutionUrl ) {
