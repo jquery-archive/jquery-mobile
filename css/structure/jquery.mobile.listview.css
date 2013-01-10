@@ -1,8 +1,8 @@
 .ui-listview { margin: 0; }
 ol.ui-listview, ol.ui-listview .ui-li-divider { counter-reset: listnumbering; }
-.ui-content .ui-listview { margin: -15px; }
+.ui-content .ui-listview, .ui-pannel-inner > .ui-listview { margin: -15px; }
 .ui-collapsible-content > .ui-listview { margin: -10px -15px; }
-.ui-content .ui-listview-inset { margin: 1em 0; }
+.ui-content .ui-listview-inset, .ui-pannel-inner .ui-listview-inset { margin: 1em 0; }
 .ui-collapsible-content .ui-listview-inset { margin: .5em 0; }
 .ui-listview, .ui-li { list-style: none; padding: 0; }
 .ui-li, .ui-li.ui-field-contain { display: block; margin: 0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px; }
