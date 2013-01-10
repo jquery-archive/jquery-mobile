@@ -157,7 +157,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var self = this;
 
 		this._page.on( "click.panel" , "a", function( e ) {
-			if( this.href.split( "#" )[ 1 ] === self._panelID ){
+			if( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ){
 				e.preventDefault();
 				var $link = $( this );
 				$link.addClass( $.mobile.activeBtnClass );
