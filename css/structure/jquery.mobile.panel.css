@@ -23,6 +23,9 @@
 .ui-panel-display-push {
 	z-index: 1;
 }
+.ui-panel-inner {
+	padding: 15px;
+}
 
 /* content-wrap */
 .ui-panel-content-wrap {
