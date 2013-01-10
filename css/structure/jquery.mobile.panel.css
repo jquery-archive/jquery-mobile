@@ -65,17 +65,19 @@
 }
 
 /* a bit of hardware acceleration to prevent blinking */
+/* for iOS6 */
 .ui-panel-animate.ui-panel,
 .ui-panel-animate.ui-panel-content-wrap,
 .ui-panel-animate.ui-panel-content-fixed-toolbar {
 	-webkit-backface-visibility: hidden;
 }
+/* for Android */
 .ui-panel-animate.ui-panel,
 .ui-panel-animate .ui-panel-inner,
 .ui-panel-animate .ui-panel-inner > *:not(.ui-btn),
 .ui-panel-animate .ui-panel-inner > *:not(.ui-btn) > *:not(.ui-btn),
 .ui-panel-content-wrap > *:not(.ui-btn) {
-	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-transform: translate3d(0,0,0);
 }
 
 /* non-3d positioning: panel */
