@@ -13,6 +13,8 @@
 }
 .ui-panel-fixed {
 	position: fixed;
+	bottom: -1px; /* fixes gap on Chrome on Android */
+	padding-bottom: 1px;
 }
 .ui-panel-display-overlay {
 	z-index: 1001; /* fixed toolbars have z-index 1000 */
