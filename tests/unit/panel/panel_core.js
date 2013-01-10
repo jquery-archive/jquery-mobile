@@ -35,10 +35,8 @@
 		ok( $panel.hasClass( "ui-panel-display-" + defaults.display ), "display class is added per the default" );
 		ok( $panel.hasClass( "ui-panel-position-" + defaults.position ), "position class is added per the default" );
 
-		equal( $panel.hasClass( "ui-panel-animate" ), $.support.cssTransform3d, "animate class is present by default when supported" );
-		equal( $page.hasClass( defaults.classes.pageChildAnimations ), $.support.cssTransform3d, "animation wrapper class added to page" );
+		equal( $panel.hasClass( defaults.classes.animate ), $.support.cssTransform3d, "animate class is present by default when supported" );
 		ok( $panel.hasClass( defaults.classes.panelClosed ), "panel is closed by default" );
-		equal( $panel.hasClass( defaults.classes.cssTransform3d ), $.support.cssTransform3d, "transforms class added to page" );
 	});
 
 	asyncTest( "expected open, close events", function() {
@@ -60,7 +58,7 @@
 	});
 
 	asyncTest( "classes modified by open", function() {
-		expect( 14 );
+		expect( 12 );
 
 		var $panel = $( "#panel-test-open" ),
 			$page = getPageFromPanel( $panel ),
@@ -71,7 +69,6 @@
 		$panel.one( "panelopen", function( event ) {
 			ok( !$openButton.hasClass( $.mobile.activeBtnClass ), "button doesn't have active class" );
 
-			ok( $page.hasClass( defaults.classes.pageBlock ), "page block class added to page" );
 			ok( !$panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
 			ok( $panel.hasClass( defaults.classes.panelOpen ), "open class added" );
 
@@ -90,8 +87,7 @@
 			ok( $modal.hasClass( prefix + "-display-overlay" ), "modal display type class" );
 
 			// complete
-			ok( $panel.hasClass( defaults.classes.openComplete ), "open complete class" );
-			ok( $wrapper.hasClass( defaults.classes.contentWrapOpenComplete ), "wrapper open complete class" );
+			ok( $page.hasClass( defaults.classes.pagePanelOpen ), "page panel open class added to page" );
 
 			// TODO test positioning when panel height > screen height
 			// TODO test rebind resize after complete
