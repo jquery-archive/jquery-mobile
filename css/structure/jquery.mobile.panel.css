@@ -7,15 +7,12 @@
 	display: block;
 	width: 17em;
 }
-.ui-panel.ui-panel-animate {
-	position: fixed;
-}
-.ui-panel.ui-panel-unfixed {
-	position: absolute;
-}
 .ui-panel-closed {
 	width: 0;
 	overflow: hidden;
+}
+.ui-panel-fixed {
+	position: fixed;
 }
 .ui-panel-display-overlay {
 	z-index: 1001; /* fixed toolbars have z-index 1000 */
@@ -69,8 +66,9 @@
 	-webkit-backface-visibility: hidden;
 }
 .ui-panel-animate.ui-panel,
-.ui-panel-animate.ui-panel > *,
-.ui-panel-animate.ui-panel > * > *,
+.ui-panel-animate .ui-panel-inner,
+.ui-panel-animate .ui-panel-inner > *,
+.ui-panel-animate .ui-panel-inner > * > *,
 .ui-panel-content-wrap > * {
 	-webkit-transform: translate3d(0, 0, 0);
 } 

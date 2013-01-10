@@ -15,7 +15,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panel: "ui-panel",
 			panelOpen: "ui-panel-open",
 			panelClosed: "ui-panel-closed",
-			panelUnfixed: "ui-panel-unfixed",
+			panelFixed: "ui-panel-fixed",
+			panelInner: "ui-panel-inner",
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
 			pagePanelOpen: "ui-page-panel-open",
@@ -33,7 +34,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		dismissible: true,
 		display: "overlay", //accepts reveal, push, overlay
 		initSelector: ":jqmData(role='panel')",
-		swipeClose: true
+		swipeClose: true,
+		positionFixed: false
 	},
 
 	_panelID: null,
@@ -46,6 +48,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_create: function() {
 		var self = this,
 			$el = self.element,
+			_getPanelInner = function() {
+				var $pannelInner = $el.find( "." + self.options.classes.panelInner );
+				if ( $pannelInner.length === 0 ) {
+					$pannelInner = $el.children().wrapAll( '<div class="' + self.options.classes.panelInner + '" />' ).parent();
+				}
+				return $pannelInner;
+			},
 			_getWrapper = function() {
 				var $wrapper = self._page.find( "." + self.options.classes.contentWrap );
 				if ( $wrapper.length === 0 ) {
@@ -71,12 +80,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._panelID = $el.attr( "id" );
 		self._closeLink = $el.find( ":jqmData(rel='close')" );
 		self._page = $el.closest( ":jqmData(role='page')" );
+		self._pannelInner = _getPanelInner();
 		self._wrapper = _getWrapper();
 		self._fixedToolbar = _getFixedToolbar();
 		self._addPanelClasses();
 		self._wrapper.addClass( this.options.classes.contentWrapClosed );
 		self._fixedToolbar.addClass( this.options.classes.contentFixedToolbarClosed );
-
+		
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!self.options.animate ) {
 			this.element.addClass( self.options.classes.animate );
@@ -107,11 +117,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_getPanelClasses: function() {
 		var panelClasses = this.options.classes.panel +
-						" " + this._getPosDisplayClasses( this.options.classes.panel ) +
-						" " + this.options.classes.panelClosed;
+			" " + this._getPosDisplayClasses( this.options.classes.panel ) +
+			" " + this.options.classes.panelClosed;
 
 		if ( this.options.theme ) {
 			panelClasses += " ui-body-" + this.options.theme;
+		}
+		if ( !!this.options.positionFixed ) {
+			panelClasses += " " + this.options.classes.panelFixed;
 		}
 		return panelClasses;
 	},
@@ -130,19 +143,21 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_positionPanel: function() {
-		if ( this.element.height() > $.mobile.getScreenHeight() ) {
+		var self = this,
+			pannelInnerHeight = self._pannelInner.height();
+		
+		if ( ( pannelInnerHeight > $.mobile.getScreenHeight() ) || !this.options.positionFixed ) {
 			this._unfixPanel();
-			this._scrollIntoView();
-		}
-		else {
+			this._scrollIntoView( pannelInnerHeight );
+		} else {
 			this._fixPanel();
 		}
 	},
 
-	_scrollIntoView: function() {
-		if ( $(window).scrollTop() > $.mobile.getScreenHeight() ) {
-			window.scrollTo( 0, 0);
-		}
+	_scrollIntoView: function( pannelInnerHeight ) {
+		if ( pannelInnerHeight < $( window ).scrollTop() ) {
+			window.scrollTo( 0, 0 );
+		}	
 	},
 
 	_bindFixListener: function() {
@@ -154,11 +169,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_unfixPanel: function() {
-		this.element.addClass( this.options.classes.panelUnfixed );
+		this.element.removeClass( this.options.classes.panelFixed );
 	},
 
 	_fixPanel: function() {
-		this.element.removeClass( this.options.classes.panelUnfixed );
+		if ( !!this.options.positionFixed ) {
+			this.element.addClass( this.options.classes.panelFixed );
+		}
 	},
 
 	_bindLinkListeners: function() {
@@ -180,6 +197,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_bindPageEvents: function() {
 		var self = this;
+		
 		if ( this.option.swipeClose ) {
 			self.element
 				// on swipe, close the panel (should swipe open too?)
@@ -231,10 +249,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 			self._trigger( "beforeopen" );
 
-			if ( !immediate && $.support.cssTransform3d && o.animate ) {
-				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents , complete );
-			} else{
-				setTimeout( complete , 0 );
+			if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
+				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents, complete );
+			} else {
+				setTimeout( complete, 0 );
 			}
 			self.element.removeClass( o.classes.panelClosed );
 			self.element.addClass( o.classes.panelOpen );
@@ -257,7 +275,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var o = this.options,
 				self = this,
 				complete = function() {
-					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents , complete );
+					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.panelClosed );
 					self._wrapper.removeClass( self._contentWrapOpenClasses );
 					self._wrapper.addClass( o.classes.contentWrapClosed );
@@ -273,10 +291,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 			self._trigger( "beforeclose" );
 
-			if ( !immediate && $.support.cssTransform3d && o.animate ) {
-				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents , complete );
+			if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
+				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents, complete );
 			} else{
-				setTimeout( complete , 0 );
+				setTimeout( complete, 0 );
 			}
 
 			self.element.removeClass( o.classes.panelOpen );
@@ -308,6 +326,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			this._wrapper.removeClass( classes.contentWrapOpen );
 			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
 		}
+		
+		this._pannelInner.children().unwrap();
 
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
 			.off( "swipe.panel" )
