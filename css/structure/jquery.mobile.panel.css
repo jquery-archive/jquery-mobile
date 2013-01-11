@@ -71,12 +71,11 @@
 .ui-panel-animate.ui-panel-content-fixed-toolbar {
 	-webkit-backface-visibility: hidden;
 }
-/* for Android and iOS*/
+/* for Android and older iOS*/
 .ui-panel-animate.ui-panel,
-.ui-panel-animate > div,
-.ui-panel-animate > div > *:not(.ui-btn),
-.ui-panel-animate > div > *:not(.ui-btn) > *:not(.ui-btn),
-.ui-panel-animate.ui-panel-content-wrap > *:not(.ui-btn) {
+.ui-panel-animate.ui-panel > div,
+.ui-panel-animate.ui-panel > div > *:not(.ui-btn),
+.ui-panel-animate.ui-panel > div > *:not(.ui-btn) > *:not(.ui-btn) {
 	-webkit-transform: translate3d(0,0,0);
 }
 
