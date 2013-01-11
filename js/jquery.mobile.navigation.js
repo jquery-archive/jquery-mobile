@@ -414,7 +414,13 @@ define( [
 		// Check to see if the page already exists in the DOM.
 		// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
 		//      are a valid url char and it breaks on the first occurence
-		page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url='" + dataUrl + "']" );
+		if (dataUrl.indexOf("'") === -1) {
+			// No single quote detected in URL, use single quote delimiter to handle double quotes in search:
+			page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url='" + dataUrl + "']" );
+		} else {
+			// Single quote was detected in URL, use double quote delimiter to handle single quotes in search:
+			page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url=\"" + dataUrl + "\"]" )
+		}
 
 		// If we failed to find the page, check to see if the url is a
 		// reference to an embedded page. If so, it may have been dynamically
@@ -520,11 +526,16 @@ define( [
 
 					// data-url must be provided for the base tag so resource requests can be directed to the
 					// correct url. loading into a temprorary element makes these requests immediately
-					if ( pageElemRegex.test( html ) &&
-							RegExp.$1 &&
-							dataUrlRegex.test( RegExp.$1 ) &&
-							RegExp.$1 ) {
-						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
+                    if (pageElemRegex.test(html) &&	RegExp.$1) {
+						var pageElement = RegExp.$1;
+						if (dataUrlRegex.test(pageElement) && RegExp.$1) {
+							// The data-url attribute exists, properly extract data-url attribute value
+							// regardless of which attribute delimiters (' or ") are used;
+							// whether the attributes contain embedded ' or " characters or what order they occur in:
+							var baseTagAttributes = $(pageElement)[0].attributes;
+							var dataUrl = baseTagAttributes.getNamedItem("data-" + $.mobile.ns + "url").nodeValue;
+							url = fileUrl = path.getFilePath(dataUrl);
+						}
 					}
 
 					if ( base ) {
