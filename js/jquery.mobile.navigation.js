@@ -533,8 +533,7 @@ define( [
 							// regardless of which attribute delimiters (' or ") are used;
 							// whether the attributes contain embedded ' or " characters or what order they occur in:
 							var baseTagAttributes = $(pageElement)[0].attributes;
-							var dataUrl = baseTagAttributes.getNamedItem("data-" + $.mobile.ns + "url").nodeValue;
-							url = fileUrl = path.getFilePath(dataUrl);
+							url = fileUrl = path.getFilePath(baseTagAttributes.getNamedItem("data-" + $.mobile.ns + "url").nodeValue);
 						}
 					}
 
