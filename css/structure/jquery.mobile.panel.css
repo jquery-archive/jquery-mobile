@@ -22,6 +22,9 @@
 .ui-panel-display-reveal {
 	z-index: 0;
 }
+.ui-panel-display-reveal > div {
+	z-index: 0; /* fixes issue on iOS5 */
+}
 .ui-panel-display-push {
 	z-index: 1;
 }
