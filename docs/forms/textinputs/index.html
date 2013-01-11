@@ -63,6 +63,21 @@
 	         <label for="mini">Text Input:</label>
 	         <input type="text" name="name" id="mini" value="" data-mini="true" />
 
+
+
+			<h2>Clear button option</h2>
+
+			<p>To add a clear button to any input (like the search input), add the <code>data-clear-btn="true"</code> attribute. The text for this clear button can be customized via the <code>data-clear-btn-text="clear input"</code> attribute. Search buttons have the clear button by default but can be controlled by this option. Note that this is available for all the input types below except for <code>textareas</code>.</p>
+
+		<pre><code>	
+&lt;label for=&quot;clear-demo&quot;&gt;Text Input:&lt;/label&gt;
+&lt;input type=&quot;text&quot; name=&quot;clear&quot; id=&quot;clear-demo&quot; value=&quot;&quot; <strong>data-clear-btn=&quot;true&quot;</strong> /&gt;
+		</code></pre>
+
+					<p>This will produce an input that is not as tall as the standard version and has a smaller text size.</p>
+			         <label for="clear-demo">Text Input:</label>
+			         <input type="text" name="clear-demo" id="clear-demo" value="" data-clear-btn="true" />
+			
 			<h2>Field containers</h2>
 
 			<p>Optionally wrap the text input in a container with the <code> data-role="fieldcontain"</code> attribute to help visually group it in a longer form.</p>
@@ -86,69 +101,71 @@
 			
 			<p>One major advantage of using these more specific input types if that on mobile devices, specialized keyboards or pickers that speed data entry are offered in place of the standard text keyboard. Support for each input type will vary greatly across platforms, but these generally fall back to a basic text input if not understood.</p>
 			
+			<p>Each of these inputs has the optional clear button, but browsers may not show the buttons in certain types.</p>
+			
 			<div data-role="fieldcontain">
 	         <label for="password">Password:</label>
-	         <input type="password" name="password" id="password" value="" />
+	         <input type="password" name="password" id="password" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="number">Number:</label>
-	         <input type="number" name="number" id="number" value="" />
+	         <input type="number" name="number" id="number" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="number-pattern">Number + pattern:</label>
-	         <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="" placeholder="Pattern attribute [0-9]* for a numeric keypad" />
+	         <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="" data-clear-btn="true" placeholder="Pattern attribute [0-9]* for a numeric keypad" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="email">Email:</label>
-	         <input type="email" name="email" id="email" value="" />
+	         <input type="email" name="email" id="email" data-clear-btn="true" value="" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="url">Url:</label>
-	         <input type="url" name="url" id="url" value="" />
+	         <input type="url" name="url" id="url" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="tel">Tel:</label>
-	         <input type="tel" name="tel" id="tel" value="" />
+	         <input type="tel" name="tel" id="tel" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="time">Time:</label>
-	         <input type="time" name="time" id="time" value="" />
+	         <input type="time" name="time" id="time" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="date">Date:</label>
-	         <input type="date" name="date" id="date" value="" />
+	         <input type="date" name="date" id="date" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="month">Month:</label>
-	         <input type="month" name="month" id="month" value="" />
+	         <input type="month" name="month" id="month" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="week">Week:</label>
-	         <input type="week" name="week" id="week" value="" />
+	         <input type="week" name="week" id="week" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="datetime">Datetime:</label>
-	         <input type="datetime" name="datetime" id="datetime" value="" />
+	         <input type="datetime" name="datetime" id="datetime" data-clear-btn="true" value="" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="datetime-l">Datetime local:</label>
-	         <input type="datetime-local" name="datetime-l" id="datetime-l" value="" />
+	         <input type="datetime-local" name="datetime-l" id="datetime-l" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="color">Color:</label>
-	         <input type="color" name="color" id="color" value="" />
+	         <input type="color" name="color" id="color" value="" data-clear-btn="true" />
 			</div>
 			
 
@@ -158,7 +175,7 @@
 			
 			<div data-role="fieldcontain">
 	         <label for="file">File:</label>
-	         <input type="file" name="file" id="file" value="" />
+	         <input type="file" name="file" id="file" value="" data-clear-btn="true" />
 			</div>
 			
 			

@@ -38,6 +38,20 @@
 			<p>The text input plugin has the following options:</p>
 
 		<dl>
+			<dt><code>clearBtn</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">default: false</p>
+				<p>Adds a clear button to the input (not available for textareas). This option is also exposed as a data attribute: <code>data-clear-btn=&quot;true&quot;</code></p>		
+				<pre><code>$('.selector').textinput(<strong>{ clearBtn: true }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>clearBtnText</code> <em>string</em></dt>
+			<dd>
+				<p class="default">default: "clear text"</p>
+				<p>The text description for the optional clear button, useful for assistive technologies like screen readers. This option is also exposed as a data attribute: <code>data-clear-btn-text=&quot;Clear input&quot;</code></p>		
+				<pre><code>$('.selector').textinput(<strong>{ clearBtnText: "Clear value" }</strong>);</code></pre>
+			</dd>
+			
 			<dt><code>disabled</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">default: false</p>
