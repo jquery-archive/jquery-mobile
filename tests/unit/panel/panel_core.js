@@ -79,12 +79,12 @@
 
 			var prefix = defaults.classes.contentWrap;
 			ok( $wrapper.hasClass( prefix + "-position-left" ), "wrapper position class" );
-			ok( $wrapper.hasClass( prefix + "-display-overlay" ), "wrapper display type class" );
+			ok( $wrapper.hasClass( prefix + "-display-reveal" ), "wrapper display type class" );
 
 			ok( $modal.hasClass( defaults.classes.modalOpen ), "modal open class" );
 			prefix = defaults.classes.modal;
 			ok( $modal.hasClass( prefix + "-position-left" ), "modal position class" );
-			ok( $modal.hasClass( prefix + "-display-overlay" ), "modal display type class" );
+			ok( $modal.hasClass( prefix + "-display-reveal" ), "modal display type class" );
 
 			// complete
 			ok( $page.hasClass( defaults.classes.pagePanelOpen ), "page panel open class added to page" );
