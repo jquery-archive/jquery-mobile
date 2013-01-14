@@ -150,7 +150,7 @@ $.mobile.browser.oldIE = (function() {
 	return v > 4 ? v : !v;
 })();
 
-function fixedBlacklist() {
+function fixedPosition() {
 	var w = window,
 		ua = navigator.userAgent,
 		platform = navigator.platform,

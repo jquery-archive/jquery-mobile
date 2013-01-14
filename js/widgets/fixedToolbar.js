@@ -29,7 +29,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			// The following function serves to rule out some popular browsers with known fixed-positioning issues
 			// This is a plugin option like any other, so feel free to improve or overwrite it
 			supportBlacklist: function() {
-				return !$.support.fixedPositionBlacklist;
+				return !$.support.fixedPosition;
 			},
 			initSelector: ":jqmData(position='fixed')"
 		},
