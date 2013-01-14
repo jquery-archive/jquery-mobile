@@ -163,8 +163,8 @@
 	left: 0;
 }
 
-/* while open, page x overflow is disabled */
-.ui-page-active.ui-page-panel-open {
+/* always disable overflow-x to prevent zoom issue on Android */
+.ui-page-active.ui-page-panel {
 	overflow-x: hidden;
 }
 

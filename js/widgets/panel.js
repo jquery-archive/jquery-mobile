@@ -19,6 +19,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			panelInner: "ui-panel-inner",
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
+			pagePanel: "ui-page-panel",
 			pagePanelOpen: "ui-page-panel-open",
 			contentWrap: "ui-panel-content-wrap",
 			contentWrapOpen: "ui-panel-content-wrap-open",
@@ -92,6 +93,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._addPanelClasses();
 		self._wrapper.addClass( this.options.classes.contentWrapClosed );
 		self._fixedToolbar.addClass( this.options.classes.contentFixedToolbarClosed );
+		
+		// add class to page so we can set "overflow-x: hidden;" for it to fix Android zoom issue
+		self._page.addClass( self.options.classes.pagePanel );
 		
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!self.options.animate ) {
