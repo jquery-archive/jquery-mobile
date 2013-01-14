@@ -31,10 +31,21 @@
 					<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Events</a></li>
 				</ul>
 		
-
 				<dl>
+					<dt><code>beforeclose</code> Type: panelbeforeclose</dt>
+					<dd>Triggered at the start of the process of closing a panel.</dd>
+                    
+					<dt><code>beforeopen</code> Type: panelbeforeopen</dt>
+					<dd>Triggered at the start of the process of opening a panel.</dd>
+                    
 					<dt><code>create</code> Type: panelcreate</dt>
 					<dd>Triggered when the panel is created.</dd>
+                    
+					<dt><code>close</code> Type: panelclose</dt>
+					<dd>Triggered when the process of closing a panel is finished. However, the slide animation might still be running.</dd>
+                    
+					<dt><code>open</code> Type: panelopen</dt>
+					<dd>Triggered when the process of opening a panel is finished. However, the slide animation might still be running.</dd>
 				</dl>
 			</div><!-- /content -->
 
