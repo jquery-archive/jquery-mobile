@@ -64,7 +64,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			_getWrapper = function() {
 				var $wrapper = self._page.find( "." + self.options.classes.contentWrap );
 				if ( $wrapper.length === 0 ) {
-					$wrapper = self._page.children( ".ui-header:not(.ui-header-fixed), .ui-content:not(.ui-popup), .ui-footer:not(.ui-footer-fixed)" ).wrapAll( '<div class="' + self.options.classes.contentWrap + ' ' + _getPageTheme() + '" />' ).parent();
+					$wrapper = self._page.children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(.ui-popup), .ui-footer:not(:jqmData(position='fixed'))" ).wrapAll( '<div class="' + self.options.classes.contentWrap + ' ' + _getPageTheme() + '" />' ).parent();
 					if ( $.support.cssTransform3d && !!self.options.animate ) {
 						$wrapper.addClass( self.options.classes.animate );
 					}
@@ -74,7 +74,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			_getFixedToolbar = function() {
 				var $fixedToolbar = self._page.find( "." + self.options.classes.contentFixedToolbar );
 				if ( $fixedToolbar.length === 0 ) {
-					$fixedToolbar = self._page.find( ".ui-header-fixed, .ui-footer-fixed" ).addClass( self.options.classes.contentFixedToolbar );
+					$fixedToolbar = self._page.find( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ).addClass( self.options.classes.contentFixedToolbar );
 					if ( $.support.cssTransform3d && !!self.options.animate ) {
 						$fixedToolbar.addClass( self.options.classes.animate );
 					}
