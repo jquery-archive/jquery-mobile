@@ -50,7 +50,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var self = this,
 			$el = self.element,
 			_getPageTheme = function() {
-				var $theme = $.data( self._page[0], "mobilePage" ).options.theme;
+				var $theme = $.data( self._page[0], "mobilePage" ).options.theme,
+				$pageThemeClass = "ui-body-" + $theme;
 				return $pageThemeClass;
 			}
 			_getPanelInner = function() {
