@@ -333,15 +333,27 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_destroy: function() {
 		var classes = this.options.classes,
+			theme = this.options.theme,
 			hasOtherSiblingPanels = this.element.siblings( "." + classes.panel ).length;
 
 		// create
 		if ( !hasOtherSiblingPanels ) {
 			this._wrapper.children().unwrap();
 			this._page.find( "a" ).unbind( "panelopen panelclose" );
+			this._page.removeClass( classes.pagePanel );
+			if ( this._open ) {
+				this._page.removeClass( classes.pagePanelOpen );
+				if ( theme ) {
+					self._page.removeClass( "ui-body-" + theme ).addClass( self._pageTheme );
+				}
+			}
 		} else if ( this._open ) {
 			this._wrapper.removeClass( classes.contentWrapOpen );
 			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
+			this._page.removeClass( classes.pagePanelOpen );
+			if ( theme ) {
+				self._page.removeClass( "ui-body-" + theme ).addClass( self._pageTheme );
+			}
 		}
 		
 		this._pannelInner.children().unwrap();
@@ -361,7 +373,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		// open and close
 		this.element.off( this._transitionEndEvents )
 			.removeClass( [ classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
-		this._page.removeClass( classes.pagePanelOpen );
 	}
 });
 
