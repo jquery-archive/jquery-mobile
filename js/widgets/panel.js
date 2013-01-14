@@ -344,7 +344,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			if ( this._open ) {
 				this._page.removeClass( classes.pagePanelOpen );
 				if ( theme ) {
-					self._page.removeClass( "ui-body-" + theme ).addClass( self._pageTheme );
+					this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
 				}
 			}
 		} else if ( this._open ) {
@@ -352,7 +352,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
 			this._page.removeClass( classes.pagePanelOpen );
 			if ( theme ) {
-				self._page.removeClass( "ui-body-" + theme ).addClass( self._pageTheme );
+				this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
 			}
 		}
 		

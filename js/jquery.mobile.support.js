@@ -176,10 +176,10 @@ function fixedBlacklist() {
 		( "palmGetResource" in window && wkversion && wkversion < 534 )	||
 		// MeeGo
 		( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 ) ) {
-		return true;
+		return false;
 	}
 
-	return false;
+	return true;
 }
 
 $.extend( $.support, {
@@ -200,7 +200,7 @@ $.extend( $.support, {
 	touchOverflow: !!propExists( "overflowScrolling" ),
 	cssTransform3d: transform3dTest(),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
-	fixedPositionBlacklist: fixedBlacklist(),
+	fixedPosition: fixedPosition(),
 	scrollTop: ("pageXOffset" in window ||
 		"scrollTop" in document.documentElement ||
 		"scrollTop" in fakeBody[ 0 ]) && !webos && !operamini,
