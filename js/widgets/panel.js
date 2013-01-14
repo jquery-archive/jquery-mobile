@@ -48,6 +48,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_create: function() {
 		var self = this,
 			$el = self.element,
+			_getPageTheme = function() {
+				var $theme = self._page.jqmData( "theme" ),
+					$pageThemeClass = "ui-body-" + ( $theme ? $theme : "c" );
+				return $pageThemeClass;
+			}
 			_getPanelInner = function() {
 				var $pannelInner = $el.find( "." + self.options.classes.panelInner );
 				if ( $pannelInner.length === 0 ) {
@@ -58,7 +63,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			_getWrapper = function() {
 				var $wrapper = self._page.find( "." + self.options.classes.contentWrap );
 				if ( $wrapper.length === 0 ) {
-					$wrapper = self._page.children( ".ui-header:not(.ui-header-fixed), .ui-content:not(.ui-popup), .ui-footer:not(.ui-footer-fixed)" ).wrapAll( '<div class="' + self.options.classes.contentWrap + '" />' ).parent();
+					$wrapper = self._page.children( ".ui-header:not(.ui-header-fixed), .ui-content:not(.ui-popup), .ui-footer:not(.ui-footer-fixed)" ).wrapAll( '<div class="' + self.options.classes.contentWrap + ' ' + _getPageTheme() + '" />' ).parent();
 					if ( $.support.cssTransform3d && !!self.options.animate ) {
 						$wrapper.addClass( self.options.classes.animate );
 					}
@@ -80,6 +85,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._panelID = $el.attr( "id" );
 		self._closeLink = $el.find( ":jqmData(rel='close')" );
 		self._page = $el.closest( ":jqmData(role='page')" );
+		self._pageTheme = _getPageTheme();
 		self._pannelInner = _getPanelInner();
 		self._wrapper = _getWrapper();
 		self._fixedToolbar = _getFixedToolbar();
@@ -169,7 +175,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_unfixPanel: function() {
-		this.element.removeClass( this.options.classes.panelFixed );
+		if ( !!this.options.positionFixed ) {
+			this.element.removeClass( this.options.classes.panelFixed );
+		}
 	},
 
 	_fixPanel: function() {
@@ -254,6 +262,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			} else {
 				setTimeout( complete, 0 );
 			}
+			if ( self.options.theme ) {
+				self._page.removeClass( self._pageTheme ).addClass( "ui-body-" + self.options.theme );
+			}
 			self.element.removeClass( o.classes.panelClosed );
 			self.element.addClass( o.classes.panelOpen );
 			self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
@@ -275,6 +286,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var o = this.options,
 				self = this,
 				complete = function() {
+					if ( self.options.theme ) {
+						self._page.removeClass( "ui-body-" + self.options.theme ).addClass( self._pageTheme );
+					}
 					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.panelClosed );
 					self._wrapper.removeClass( self._contentWrapOpenClasses );
