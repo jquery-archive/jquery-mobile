@@ -33,7 +33,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		theme: null,
 		position: "left",
 		dismissible: true,
-		display: "overlay", //accepts reveal, push, overlay
+		display: "reveal", //accepts reveal, push, overlay
 		initSelector: ":jqmData(role='panel')",
 		swipeClose: true,
 		positionFixed: false
