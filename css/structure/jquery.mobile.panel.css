@@ -1,4 +1,5 @@
 /* panel */
+
 .ui-panel {
 	width: 17em;
 	min-height: 100%;
@@ -192,16 +193,14 @@
 	border-right-width: 1px;
 	margin-right: -1px;
 }
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-.ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push {
 	margin-left: 1px;
 }
 .ui-panel-display-push.ui-panel-open.ui-panel-position-right {
 	border-left-width: 1px;
 	margin-left: -1px;
 }
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-.ui-panel-animate.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+.ui-panel-animate.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push {
 	margin-right: 1px;
 }
 
