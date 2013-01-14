@@ -60,6 +60,50 @@
 			  	<li><code>$.event.special.swipe.horizontalDistanceThreshold</code> (default: 30px) – Swipe horizontal displacement must be more than this.</li>
 			  	<li><code>$.event.special.swipe.verticalDistanceThreshold</code> (default: 75px) – Swipe vertical displacement must be less than this.</li>
 			  	</ul>
+			  	<p>The swipe event can also be extend to add your own logic or functionality. The following methods can be extended:</p>
+			  	<ul>
+			  		<li>$.event.special.swipe.start Default:
+			  			<pre><code>
+function( event ) {
+	var data = event.originalEvent.touches ?
+			event.originalEvent.touches[ 0 ] : event;
+	return {
+			time: ( new Date() ).getTime(),
+			coords: [ data.pageX, data.pageY ],
+			origin: $( event.target )
+		};
+}
+			  			</pre></code>
+			  			<p>This method recieves a touchstart event and returns an object of data about the starting location.</p>
+			  		</li>
+			  		<li>$.event.special.swipe.stop Default:
+			  			<pre><code>
+function( event ) {
+	var data = event.originalEvent.touches ?
+			event.originalEvent.touches[ 0 ] : event;
+	return {
+			time: ( new Date() ).getTime(),
+			coords: [ data.pageX, data.pageY ]
+		};
+}
+			  			</pre></code>
+			  			<p>This method recieves a touchend event and returns an object of data about the ending location.</p>
+			  		</li>
+			  		<li>$.event.special.swipe.handleSwipe Default:
+			  			<pre><code>
+function( start, stop ) {
+	if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
+		Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
+		Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+
+		start.origin.trigger( "swipe" )
+			.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
+	}
+}
+			  			</pre></code>
+			  			<p>This method recieves the start and stop objects and handles the logic for and triggering for the swipe events.</p>
+			  		</li>
+			  	</ul>
 			</dd>
 
 			<dt><code>swipeleft</code></dt>
@@ -67,6 +111,9 @@
 
 			<dt><code>swiperight</code></dt>
 			<dd>Triggers when a swipe event occurred moving in the right direction.</dd>
+			<div class="ui-body ui-body-e">
+				<h4 style="margin:.5em 0">Important: Drifting to the left or right while scrolling will trigger a swipe event on iOS</h4>
+		   <p>On iOS no vertical distance takes place in the touch events while scrolling. This means that the verticalDistanceThreshold specified for the swipe event is ignored. The only way we have found to work around this is to calculate scrollTop on every touchstart / touchend which is very expensive. It is for this reason we have made the swipe event extendable so you can add this in if the performance is acceptable for your use.</p></div>
 			</dl>
 
 			<h2>Virtual mouse events</h2>
