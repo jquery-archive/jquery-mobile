@@ -30,8 +30,6 @@
 					<li><a href="events.html" data-role="button" data-transition="fade">Events</a></li>
 				</ul>
 				
-				
-
 				<dl>
 
 					<dt><code>animate</code> default: true</dt>
@@ -49,12 +47,11 @@
 					<dt><code>position</code> default: "left"</dt>
 					<dd>The side of the screen the panel appears on. Values can be "left" or "right". Also available via the <code>data-position</code> attribute on the link that opens the panel.</dd>
 					
-					<dt><code>positionFixed</code> default: "true"</dt>
-					<dd>Sets whether the panel has fixed positioning so the contents are in view even if the page is scrolled down. This also allows the page to scroll while the panel stays fixed. If set to true, the fixed positioning is only applied if a feature test passes and will fallback to static positioning so the panel will scroll with the document. We recommend disabling this feature when panels are used withing Android apps because of poor performance and display issues. Also available via the <code>data-position-fixed</code> attribute on the panel.</dd>
+					<dt><code>positionFixed</code> default: "false"</dt>
+					<dd>Sets whether the panel has fixed positioning so the contents are in view even if the page is scrolled down. This also allows the page to scroll while the panel stays fixed. We recommend not to enable this feature when panels are used withing Android apps because of poor performance and display issues. Also available via the <code>data-position-fixed</code> attribute on the panel.</dd>
 					<dt><code>swipeClose</code> default: "true"</dt>
 					<dd>Sets whether the panel can be closed by swiping left or right over the panel. Also available via the <code>data-swipe-close</code> attribute on the panel.</dd>
 					
-
 					<dt><code>theme</code> default: null</dt>
 					<dd>Theme swatch for the panel. Can be any valid swatch letter in your theme (a-z). Also available via the <code>data-theme</code> attribute on the panel container.</dd>
 
@@ -63,11 +60,9 @@
 				<h3>Classes Option</h3>
 				<p>The <code>classes</code> option define the structural classnames that the plugin uses. This is only configurable via JavaScript because it expects an object literal value.</p>
 
-			
-
-			
 				
 				<dl>
+                
 					<dt><code>classes.panel</code> default: "ui-panel"</dt>
 					<dd>Class added to the panel.</dd>
 
@@ -77,8 +72,11 @@
 					<dt><code>classes.panelClosed</code> default: "ui-panel-closed"</dt>
 					<dd>Class added to the panel when closed.</dd>
 					
-					<dt><code>classes.panelUnfixed</code> default: "ui-panel-unfixed"</dt>
-					<dd>Class added to the panel when fixed positioning is not applied.</dd>
+					<dt><code>classes.panelFixed</code> default: "ui-panel-fixed"</dt>
+					<dd>Class added to the panel when fixed positioning is applied.</dd>
+					
+					<dt><code>classes.panelInner</code> default: "ui-panel-inner"</dt>
+					<dd>Class added to the panel contents wrapper div.</dd>
 					
 					<dt><code>classes.modal</code> default: "ui-panel-dismiss"</dt>
 					<dd>Class added to the overlay on the page to dismiss the panel when hidden.</dd>
@@ -86,29 +84,32 @@
 					<dt><code>classes.modalOpen</code> default: "ui-panel-dismiss-open"</dt>
 					<dd>Class added to the invisible overlay over the page when the panel is open. Used to dismiss the panel.</dd>
 
-					<dt><code>classes.openComplete</code> default: "ui-panel-open-complete"</dt>
-					<dd>Class added to the page when the panel animation is complete.</dd>
-
-					<dt><code>classes.contentWrap</code> default: "ui-panel-content-wrap"</dt>
-					<dd>Class added to the wrapper injected around the page contents (header, content, footer), needed for positioning of the panel.</dd>
-
-					<dt><code>classes.contentWrapOpen</code> default: "ui-panel-content-wrap-open"</dt>
-					<dd>Class added to the wrapper injected around the page contents (header, content, footer) when the panel is opening. Used for targeting hardware acceleration only during transitions.</dd>
-
-					<dt><code>classes.wrapOpenComplete</code> default: "ui-panel-content-wrap-open-complete"</dt>
-					<dd>Class added to the page contents wrapper after the open animation is complete.</dd>
-					
-					<dt><code>classes.wrapOpenClosed</code> default: "ui-panel-content-wrap-closed"</dt>
-					<dd>Class added to the page contents wrapper after the close animation is complete.</dd>
-
-					<dt><code>classes.pageBlock</code> default: "ui-panel-page-block"</dt>
-					<dd>Class added to the page container to suppress scrolling horizontally</dd>
-					
 					<dt><code>classes.pagePanel</code> default: "ui-page-panel"</dt>
 					<dd>Class added to the page container when a panel widget is present.</dd>
+
+					<dt><code>classes.pagePanelOpen</code> default: "ui-page-panel-open"</dt>
+					<dd>Class added to the page when a panel is open.</dd>
+
+					<dt><code>classes.contentWrap</code> default: "ui-panel-content-wrap"</dt>
+					<dd>Class added to the wrapper injected around the page contents (header, content, footer), needed for transitioning the page contents. Fixed toolbars are not wrapped.</dd>
+
+					<dt><code>classes.contentWrapOpen</code> default: "ui-panel-content-wrap-open"</dt>
+					<dd>Class added to the page contents wrapper when the panel is opening.</dd>
+
+					<dt><code>classes.contentWrapClosed</code> default: "ui-panel-content-wrap-closed"</dt>
+					<dd>Class added to the page contents wrapper after the close animation is complete.</dd>
+
+                    <dt><code>classes.contentFixedToolbar</code> default: "ui-panel-fixed-toolbar-wrap"</dt>
+					<dd>Class added to fixed header and footer, needed for transitioning fixed toolbars.</dd>
+
+					<dt><code>classes.contentFixedToolbarOpen</code> default: "ui-panel-content-fixed-toolbar-open"</dt>
+					<dd>Class added to fixed toolbars when the panel is opening.</dd>
+
+					<dt><code>classes.contentFixedToolbarClosed</code> default: "ui-panel-content-fixed-toolbar-closed"</dt>
+					<dd>Class added to fixed toolbars after the close animation is complete.</dd>
 					
-					<dt><code>classes.cssTransform3d</code> default: "ui-panel-3dtransforms"</dt>
-					<dd>Class added to the page container when the 3D transform feature test is true.</dd>
+					<dt><code>classes.animate</code> default: "ui-panel-animate"</dt>
+					<dd>Class added to the panel, page contents wrapper and fixed toolbars when option <code>animate</code> is <code>true</code> and the 3D transform feature test returns <code>true</code>.</dd>
 				</dl>
 
 

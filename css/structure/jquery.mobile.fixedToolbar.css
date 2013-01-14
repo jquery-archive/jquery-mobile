@@ -53,16 +53,3 @@
 .ui-android-2x-fixed .ui-li-has-thumb {
 	-webkit-transform: translate3d(0,0,0);
 }
-.ui-panel-content-wrap.ui-panel-content-wrap-display-push .ui-header-fixed,
-.ui-panel-content-wrap.ui-panel-content-wrap-display-reveal .ui-header-fixed {
-	-webkit-transform: translateY(-100%);
-	-moz-transform: translateY(-100%);
-	-o-transform: translateY(-100%);
-	-ms-transform: translateY(-100%);
-	transform: translateY(-100%);
-	position: absolute;
-	top: 0;
-}
-.ui-panel-content-wrap-closed .ui-header-fixed {
-	-webkit-transform: none;
-}
