@@ -53,7 +53,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				var $theme = $.data( self._page[0], "mobilePage" ).options.theme,
 				$pageThemeClass = "ui-body-" + $theme;
 				return $pageThemeClass;
-			}
+			},
 			_getPanelInner = function() {
 				var $pannelInner = $el.find( "." + self.options.classes.panelInner );
 				if ( $pannelInner.length === 0 ) {
