@@ -20,7 +20,7 @@ textarea.ui-mini { height: 45px; }
 .ui-input-search .ui-input-clear-hidden, .ui-input-text .ui-input-clear-hidden { display: none; }
 
 /* Resolves issue #5166: Added to support issue introduced in Firefox 15. We can likely remove this in the future. */
-input:-moz-placeholder { color: #aaa; }
+input::-moz-placeholder, textarea::-moz-placeholder { color: #aaa; }
 
 /* Resolves issue #5131: Width of textinput depends on its type, for Android 4.1 */
 input[type=number]::-webkit-outer-spin-button { margin: 0; }

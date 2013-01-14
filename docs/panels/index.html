@@ -157,13 +157,13 @@ $( "#idofpanel" )
 
 			<h2>Panel positioning</h2>
 
-			<p>The panel will be displayed with the <code>position: absolute</code> CSS property, meaning it will scroll with the page. When a panel is a opened the framework checks to see if the bottom of the panel contents is in view and, if not, scrolls to the top of the page.</p>
+			<p>The panel will be displayed with the <code>position:absolute</code> CSS property, meaning it will scroll with the page. When a panel is a opened the framework checks to see if the bottom of the panel contents is in view and, if not, scrolls to the top of the page.</p>
             
-            <p>You can set a panel to <code>position: fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and using <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without absolute positioning.</p>
+            <p>You can set a panel to <code>position:fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and using <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without absolute positioning.</p>
 
 			<p>In general, we recommend that you place the buttons that open the panel at the very top of the screen which is the most common UI pattern for panels.  This will avoid the need to scroll and also makes the transitions a bit smoother.</p>
 	
-			<p>Note that there are issues with fixed positioning within Android WebView applications (not the browser) that can cause layout issues, especially when hardware acceleration isn't enabled. We recommend not to use the fixed position panel option if deploying to an Android app. Also, although the framework supports the combination of panels and fixed toolbars, fixed toolbars don't transition together with the page content. You can use the following custom CSS to hide fixed toolbars when a panel is opened.</p>
+			<p>Note that there are issues with fixed positioning within Android WebView applications (not the browser) that can cause layout issues, especially when hardware acceleration isn't enabled. We recommend not to use the fixed position panel option if deploying to an Android app. Also, although the framework supports the combination of panels and fixed toolbars, fixed toolbars don't transition together with the page content.</p>
 
 
 			<h2>Styling panels</h2>
