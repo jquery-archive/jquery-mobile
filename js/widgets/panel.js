@@ -179,13 +179,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_unfixPanel: function() {
-		if ( !!this.options.positionFixed ) {
+		if ( !!this.options.positionFixed && $.support.positionFixed ) {
 			this.element.removeClass( this.options.classes.panelFixed );
 		}
 	},
 
 	_fixPanel: function() {
-		if ( !!this.options.positionFixed ) {
+		if ( !!this.options.positionFixed && $.support.positionFixed ) {
 			this.element.addClass( this.options.classes.panelFixed );
 		}
 	},
