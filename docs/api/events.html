@@ -60,10 +60,10 @@
 			  	<li><code>$.event.special.swipe.horizontalDistanceThreshold</code> (default: 30px) – Swipe horizontal displacement must be more than this.</li>
 			  	<li><code>$.event.special.swipe.verticalDistanceThreshold</code> (default: 75px) – Swipe vertical displacement must be less than this.</li>
 			  	</ul>
-			  	<p>The swipe event can also be extend to add your own logic or functionality. The following methods can be extended:</p>
-			  	<ul>
-			  		<li>$.event.special.swipe.start Default:
-			  			<pre><code>
+			  <p>The swipe event can also be extend to add your own logic or functionality. The following methods can be extended:</p>
+			  <ul>
+			  	<li><code>$.event.special.swipe.start</code> Default:
+			  	<pre><code>
 function( event ) {
 	var data = event.originalEvent.touches ?
 			event.originalEvent.touches[ 0 ] : event;
@@ -73,11 +73,11 @@ function( event ) {
 			origin: $( event.target )
 		};
 }
-			  			</code></pre>
-			  			<p>This method recieves a touchstart event and returns an object of data about the starting location.</p>
-			  		</li>
-			  		<li>$.event.special.swipe.stop Default:
-			  			<pre><code>
+			  	</code></pre>
+			  	<p>This method recieves a touchstart event and returns an object of data about the starting location.</p>
+			  	</li>
+			  	<li><code>$.event.special.swipe.stop</code> Default:
+			  	<pre><code>
 function( event ) {
 	var data = event.originalEvent.touches ?
 			event.originalEvent.touches[ 0 ] : event;
@@ -86,11 +86,11 @@ function( event ) {
 			coords: [ data.pageX, data.pageY ]
 		};
 }
-			  			</code></pre>
-			  			<p>This method recieves a touchend event and returns an object of data about the ending location.</p>
-			  		</li>
-			  		<li>$.event.special.swipe.handleSwipe Default:
-			  			<pre><code>
+			  	</code></pre>
+			  	<p>This method recieves a touchend event and returns an object of data about the ending location.</p>
+			  	</li>
+			  	<li><code>$.event.special.swipe.handleSwipe</code> Default:
+			  	<pre><code>
 function( start, stop ) {
 	if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
 		Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
@@ -100,10 +100,10 @@ function( start, stop ) {
 			.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
 	}
 }
-			  			</code></pre>
-			  			<p>This method recieves the start and stop objects and handles the logic for and triggering for the swipe events.</p>
-			  		</li>
-			  	</ul>
+			  	</code></pre>
+			  	<p>This method recieves the start and stop objects and handles the logic for and triggering for the swipe events.</p>
+			  	</li>
+			  </ul>
 			</dd>
 
 			<dt><code>swipeleft</code></dt>
