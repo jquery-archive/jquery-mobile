@@ -6,8 +6,9 @@ define(["jquery",
 	"./../jquery.mobile.ns",
 	"../events/navigate",
 	"./path",
-	"./history" ], function( $ ) {
+	"./history" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
+
 (function( $, undefined ) {
 	var path = $.mobile.path;
 

@@ -2,7 +2,7 @@
 //>>description: A wrapper for the primary Navigator and History objects in jQuery Mobile
 //>>label: Navigate Method
 //>>group: Navigation
-define([ "jquery", "./path", "./history", "./navigator" ], function( $ ) {
+define([ "jquery", "./path", "./history", "./navigator" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {

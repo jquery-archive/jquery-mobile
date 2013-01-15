@@ -4,9 +4,10 @@
 //>>group: Navigation
 define([
 	"jquery",
-	"./../jquery.mobile.ns" ], function( $ ) {
+	"./../jquery.mobile.ns" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
+(function( $, undefined ) {
 		var path, documentBase, $base, dialogHashKey = "&ui-state=dialog";
 
 		$.mobile.path = path = {
@@ -348,6 +349,7 @@ define([
 		path.getDocumentBase = function( asParsedObject ) {
 			return asParsedObject ? $.extend( {}, path.documentBase ) : path.documentBase.href;
 		};
+})( jQuery );
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
