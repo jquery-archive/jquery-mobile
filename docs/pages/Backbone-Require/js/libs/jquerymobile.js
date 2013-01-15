@@ -2,7 +2,7 @@
 * jQuery Mobile Framework Git Build: SHA1: 6862b191d01826bbece890d51afbbcb4ced3540e <> Date: Mon Jan 14 15:57:50 2013 -0800
 * http://jquerymobile.com
 *
-* Copyright 2012 jQuery Foundation and other contributors
+* Copyright 2010, 2013 jQuery Foundation and other contributors
 * Released under the MIT license.
 * http://jquery.org/license
 *
@@ -362,7 +362,7 @@
  * jQuery UI Widget v1.10.0pre - 2012-11-13 (ff055a0c353c3c8ce6e5bfa07ad7cb03e8885bc5)
  * http://jqueryui.com
  *
- * Copyright 2012 jQuery Foundation and other contributors
+ * Copyright 2010, 2013 jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  *
