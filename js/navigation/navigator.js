@@ -3,10 +3,10 @@
 //>>label: Navigation Manager
 //>>group: Navigation
 define(["jquery",
-				"./../jquery.mobile.ns",
-				"../events/navigate",
-				"./path",
-				"./history" ], function( $ ) {
+	"./../jquery.mobile.ns",
+	"../events/navigate",
+	"./path",
+	"./history" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var path = $.mobile.path;
@@ -198,8 +198,10 @@ define(["jquery",
 			// matches an existing history entry
 			// TODO it might be better to only add to the history stack
 			//      when the hash is adjacent to the active history entry
-			if( !event.originalEvent.state ) {
-				hash = path.parseLocation().hash;
+			hash = path.parseLocation().hash;
+			if( !event.originalEvent.state && hash ) {
+				// squash the hash that's been assigned on the URL with replaceState
+				// also grab the resulting state object for storage
 				state = this.squash( hash );
 
 				// record the new hash as an additional history entry
