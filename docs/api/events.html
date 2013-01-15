@@ -73,7 +73,7 @@ function( event ) {
 			origin: $( event.target )
 		};
 }
-			  			</pre></code>
+			  			</code></pre>
 			  			<p>This method recieves a touchstart event and returns an object of data about the starting location.</p>
 			  		</li>
 			  		<li>$.event.special.swipe.stop Default:
@@ -86,7 +86,7 @@ function( event ) {
 			coords: [ data.pageX, data.pageY ]
 		};
 }
-			  			</pre></code>
+			  			</code></pre>
 			  			<p>This method recieves a touchend event and returns an object of data about the ending location.</p>
 			  		</li>
 			  		<li>$.event.special.swipe.handleSwipe Default:
@@ -100,7 +100,7 @@ function( start, stop ) {
 			.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
 	}
 }
-			  			</pre></code>
+			  			</code></pre>
 			  			<p>This method recieves the start and stop objects and handles the logic for and triggering for the swipe events.</p>
 			  		</li>
 			  	</ul>
