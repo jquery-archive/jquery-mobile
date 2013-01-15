@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Provides a wrapper around hashchange and popstate
-//>>label: Navigate Event
+//>>label: Navigate
 //>>group: Events
 
 // TODO break out pushstate support test so we don't depend on the whole thing

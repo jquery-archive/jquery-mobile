@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: The core namespace for the mobile library
+//>>description: The mobile namespace on the jQuery object
 //>>label: Namespace
 //>>group: Core
 define([ "jquery" ], function( $ ) {

@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Touch events including: touchstart, touchmove, touchend, tap, taphold, swipe, swipeleft, swiperight, scrollstart, scrollstop
-//>>label: Touch Events
+//>>label: Touch
 //>>group: Events
 
 define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" ], function( $ ) {
