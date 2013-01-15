@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Path parsing and manipulation helpers
-//>>label: AJAX Navigation System
+//>>label: Path Helpers
 //>>group: Navigation
 define([
 	"jquery",

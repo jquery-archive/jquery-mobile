@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Navigate jQuery Method
-//>>label: AJAX Navigation System
+//>>description: A wrapper for the primary Navigator and History objects in jQuery Mobile
+//>>label: Navigate Method
 //>>group: Navigation
 define([ "jquery", "./path", "./history", "./navigator" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

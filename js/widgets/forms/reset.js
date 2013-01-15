@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Make a widget react to a form's reset.
-//>>label: formReset
+//>>description: A behavioral mixin that forces a widget to react to a form reset
+//>>label: Form Reset
 //>>group: Forms
 
 define( [ "jquery", "../../jquery.mobile.core" ], function( $ ) {

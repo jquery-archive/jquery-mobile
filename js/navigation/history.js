@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: History Manager
-//>>label: AJAX Navigation System
+//>>description: Manages a stack of history entries. Used exclusively by the Navigation Manager
+//>>label: History Manager
 //>>group: Navigation
 define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

@@ -1,7 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: placeholder
-//>>label: AJAX Navigation System
-//>>group: Navigation
+//>>description: Provides a wrapper around hashchange and popstate
+//>>label: Navigate Event
+//>>group: Events
 
 // TODO break out pushstate support test so we don't depend on the whole thing
 define([ "jquery", "./../jquery.mobile.ns", "./../jquery.mobile.support" ], function( $ ) {

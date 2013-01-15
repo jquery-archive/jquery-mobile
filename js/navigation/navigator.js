@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Navigation Manager
-//>>label: AJAX Navigation System
+//>>description: Manages URL history and information in conjunction with the navigate event
+//>>label: Navigation Manager
 //>>group: Navigation
 define(["jquery",
 				"./../jquery.mobile.ns",

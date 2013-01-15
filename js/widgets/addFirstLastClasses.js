@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Mark first and last visible item with classes ui-first-child resp. ui-last-child.
-//>>label: addFirstLastClasses
+//>>description: Behavior mixing to mark first and last visible item with special classes.
+//>>label: First & Last Classes
 //>>group: Widgets
 
 define( [ "jquery", "../jquery.mobile.core" ], function( $ ) {

@@ -1,7 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: packaged loading message functionality
-//>>label: loading message
-//>>group: Navigation
+//>>description: Loading message for page transitions
+//>>label: Loading Message
+//>>group: Widgets
 
 define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");

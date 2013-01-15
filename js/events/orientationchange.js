@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Orientation change event
-//>>label: orientationchange
+//>>description: Provides a wrapper around the inconsistent browser implementations of orientationchange
+//>>label: Orientation Change
 //>>group: Events
 
 define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" ], function( jQuery ) {
