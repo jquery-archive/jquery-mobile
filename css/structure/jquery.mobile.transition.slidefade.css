@@ -42,9 +42,9 @@
 	-webkit-animation-name: fadein;
 	-webkit-animation-duration: 200ms;
 	-moz-transform: translateX(0);
-	-moz-animation-name: fadein
+	-moz-animation-name: fadein;
 	-moz-animation-duration: 200ms;
 	transform: translateX(0);
-	animation-name: fadein
+	animation-name: fadein;
 	animation-duration: 200ms;
 }
