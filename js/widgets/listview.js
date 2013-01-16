@@ -35,7 +35,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			listviewClasses = "";
 
 		listviewClasses += t.options.inset ? " ui-listview-inset" : "";
-		
+
 		if ( !!t.options.inset ) {
 			listviewClasses += t.options.corners ? " ui-corner-all" : "";
 			listviewClasses += t.options.shadow ? " ui-shadow" : "";
@@ -123,14 +123,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			// Check if a start attribute has been set while taking a value of 0 into account
 			if ( start || start === 0 ) {
 				if ( !jsCount ) {
-					startCount = parseFloat( start ) - 1;
+					startCount = parseInt( start , 10 ) - 1;
 					$list.css( "counter-reset", "listnumbering " + startCount );
 				} else {
-					counter = parseFloat( start );
+					counter = parseInt( start , 10 );
 				}
 			} else if ( jsCount ) {
 					counter = 1;
-			}	
+			}
 		}
 
 		if ( !o.theme ) {
@@ -200,20 +200,20 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					itemClass += " ui-li-divider ui-bar-" + ( item.jqmData( "theme" ) || dividertheme );
 					item.attr( "role", "heading" );
 
-					if ( ol ) {	
+					if ( ol ) {
 						//reset counter when a divider heading is encountered
 						if ( start || start === 0 ) {
 							if ( !jsCount ) {
-								newStartCount = parseFloat( start ) - 1;
+								newStartCount = parseInt( start , 10 ) - 1;
 								item.css( "counter-reset", "listnumbering " + newStartCount );
 							} else {
-								counter = parseFloat( start );
+								counter = parseInt( start , 10 );
 							}
 						} else if ( jsCount ) {
 								counter = 1;
-						}	
+						}
 					}
-				
+
 				} else {
 					itemClass += " ui-li-static ui-btn-up-" + itemTheme;
 				}
@@ -278,7 +278,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 		this._addThumbClasses( li );
 		this._addThumbClasses( $list.find( ".ui-link-inherit" ) );
-		
+
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh
 		this._trigger( "afterrefresh" );
