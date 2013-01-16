@@ -148,7 +148,7 @@
 
 	// absolute tests
 	// NOTE does not test root path or non nested references
-	module("abolute paths");
+	module("absolute paths");
 
  	asyncTest( "file reference no nesting", function(){
 		testPageLoad("#absolute-test-one", "doc rel test one");
