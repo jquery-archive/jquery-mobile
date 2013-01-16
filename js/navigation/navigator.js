@@ -239,11 +239,12 @@ define(["jquery",
 		// TODO add a check here that `hashchange.navigate` is bound already otherwise it's
 		//      broken (exception?)
 		hashchange: function( event ) {
-			var history = this.history, hash = path.parseLocation().hash;
+			var history, hash;
 
-			// If pushstate is supported the state will be included in the popstate event
-			// data and appended to the navigate event. Late check here for late settings (eg tests)
-			if( $.event.special.navigate.isPushStateEnabled() ) {
+			// If hashchange listening is explicitly disabled or pushstate is supported
+			// avoid making use of the hashchange handler.
+			if(!$.event.special.navigate.isHashChangeEnabled() ||
+				$.event.special.navigate.isPushStateEnabled() ) {
 				return;
 			}
 
@@ -254,6 +255,9 @@ define(["jquery",
 				event.stopImmediatePropagation();
 				return;
 			}
+
+			history = this.history;
+			hash = path.parseLocation().hash;
 
 			// If this is a hashchange caused by the back or forward button
 			// make sure to set the state of our history stack properly
