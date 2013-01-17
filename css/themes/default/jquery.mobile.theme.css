@@ -833,7 +833,6 @@ a.ui-link-inherit {
 	background: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
 	background-image: url(images/icons-18-white.png) /*{global-icon-set}*/;
 	background-repeat: no-repeat;
-	-moz-border-radius: 				9px;
 	-webkit-border-radius: 				9px;
 	border-radius: 						9px;
 }
@@ -960,7 +959,6 @@ a.ui-link-inherit {
 /* checks,radios */
 .ui-checkbox .ui-icon,
 .ui-selectmenu-list .ui-icon {
-	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
