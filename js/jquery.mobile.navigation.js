@@ -286,13 +286,14 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	$.mobile.resetActivePageHeight = function resetActivePageHeight( height ) {
-		var height = typeof height !== "undefined" ? height : getScreenHeight(),
-			aPage = $( "." + $.mobile.activePageClass ),
+		var aPage = $( "." + $.mobile.activePageClass ),
 			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) ),
 			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
 
+		height = typeof height !== "undefined" ? height : getScreenHeight();
+			
 		aPage.css( "min-height", height - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
 	}
 
