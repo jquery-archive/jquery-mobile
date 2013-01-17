@@ -11,6 +11,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
+		prefix = "data-" + $.mobile.ns,
 		mapToDataAttr = function( key, value ) {
 			e.setAttribute( "data-" + $.mobile.ns + key, value );
 			el.jqmData( key, value );
@@ -22,14 +23,14 @@ $.fn.buttonMarkup = function( options ) {
 		var el = $workingSet.eq( i ),
 			e = el[ 0 ],
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
-				icon:       options.icon       !== undefined ? options.icon       : el.jqmData( "icon" ),
-				iconpos:    options.iconpos    !== undefined ? options.iconpos    : el.jqmData( "iconpos" ),
-				theme:      options.theme      !== undefined ? options.theme      : el.jqmData( "theme" ) || $.mobile.getInheritedTheme( el, "c" ),
-				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
-				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
-				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
-				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" ),
-				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" )
+				icon:       options.icon       !== undefined ? options.icon       : ( e.getAttribute( prefix + "icon" ) || undefined ),
+				iconpos:    options.iconpos    !== undefined ? options.iconpos    : ( e.getAttribute( prefix + "iconpos" ) || undefined ),
+				theme:      options.theme      !== undefined ? options.theme      : e.getAttribute( prefix + "theme" ) || $.mobile.getInheritedTheme( el, "c" ),
+				inline:     options.inline     !== undefined ? options.inline     : /^true$/i.test( e.getAttribute( prefix + "inline" ) ),
+				shadow:     options.shadow     !== undefined ? options.shadow     : !/^false$/i.test( e.getAttribute( prefix + "shadow" ) ),
+				corners:    options.corners    !== undefined ? options.corners    : !/^false$/i.test( e.getAttribute( prefix + "corners" ) ),
+				iconshadow: options.iconshadow !== undefined ? options.iconshadow : !/^false$/i.test( e.getAttribute( prefix + "iconshadow" ) ),
+				mini:       options.mini       !== undefined ? options.mini       : /^true$/i.test( e.getAttribute( prefix + "mini" ) )
 			}, options ),
 
 			// Classes Defined
@@ -46,7 +47,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		$.each( o, mapToDataAttr );
 
-		if ( el.jqmData( "rel" ) === "popup" && el.attr( "href" ) ) {
+		if ( e.getAttribute( prefix + "rel" ) === "popup" && el.attr( "href" ) ) {
 			e.setAttribute( "aria-haspopup", true );
 			e.setAttribute( "aria-owns", e.getAttribute( "href" ) );
 		}
