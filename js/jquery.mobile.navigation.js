@@ -292,8 +292,8 @@ define( [
 			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
 
-		height = typeof height !== "undefined" ? height : getScreenHeight();
-			
+		height = ( typeof height === "number" )? height : getScreenHeight();
+		console.log(height);	
 		aPage.css( "min-height", height - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
 	};
 
