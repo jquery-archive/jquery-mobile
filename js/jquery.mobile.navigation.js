@@ -295,7 +295,7 @@ define( [
 		height = typeof height !== "undefined" ? height : getScreenHeight();
 			
 		aPage.css( "min-height", height - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
-	}
+	};
 
 	//shared page enhancements
 	function enhancePage( $page, role ) {
