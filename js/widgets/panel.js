@@ -112,7 +112,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if ( self.options.dismissible ) {
 			self._createModal();
 		}
-
 	},
 
 	_createModal: function( options ) {
@@ -157,13 +156,17 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_positionPanel: function() {
 		var self = this,
-			pannelInnerHeight = self._pannelInner.height();
-		
-		if ( ( pannelInnerHeight > $.mobile.getScreenHeight() ) || !this.options.positionFixed ) {
-			this._unfixPanel();
-			this._scrollIntoView( pannelInnerHeight );
+			pannelInnerHeight = self._pannelInner.outerHeight(),
+			expand = pannelInnerHeight > $.mobile.getScreenHeight();
+			
+		if ( expand || !self.options.positionFixed ) {
+			if ( expand ) {
+				self._unfixPanel();
+				$.mobile.resetActivePageHeight( pannelInnerHeight );
+			}
+			self._scrollIntoView( pannelInnerHeight );
 		} else {
-			this._fixPanel();
+			self._fixPanel();
 		}
 	},
 
@@ -244,6 +247,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_open: false,
 
 	_contentWrapOpenClasses: null,
+	_fixedToolbarOpenClasses: null,
 	_modalOpenClasses: null,
 
 	open: function( immediate ) {
@@ -304,6 +308,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._page.removeClass( o.classes.pagePanelOpen );
 					self._fixPanel();
 					self._unbindFixListener();
+					$.mobile.resetActivePageHeight();
 					self._trigger( "close" );
 				};
 			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
@@ -349,6 +354,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				if ( theme ) {
 					this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
 				}
+				$.mobile.resetActivePageHeight();
 			}
 		} else if ( this._open ) {
 			this._wrapper.removeClass( classes.contentWrapOpen );
