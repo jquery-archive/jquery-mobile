@@ -1,26 +1,35 @@
 {
-  "name": "jquery-mobile-build",
-  "description": "dependencies for the grunt based build",
-  "version": "0.0.1",
-  "scripts": {
-    "lint" : "grunt"
-  },
-  "main": "grunt.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jquery/jquery-mobile.git"
-  },
-  "dependencies": {
-    "grunt":  "0.3.x",
-    "grunt-css": "0.2.0",
-    "grunt-junit": "0.1.4",
-    "grunt-git-authors": "1.0.0",
-    "requirejs": "1.0.8",
-    "glob-whatev": "~0.1.4",
-    "rimraf": "2.0.1",
-    "testswarm": "0.2.3"
-  },
-  "engine": {
-    "node": ">=6.0"
-  }
+	"name": "jquery-mobile",
+    "title": "jQuery Mobile",
+	"description": "Touch-Optimized Web Framework for Smartphones & Tablets",
+	"version": "1.4.0pre",
+    "homepage": "http://jquerymobile.com",
+	"author": {
+		"name": "jQuery Foundation Inc. and other contributors",
+		"url": "https://github.com/jquery/jquery-mobile/blob/master/AUTHORS.txt"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/jquery/jquery-mobile.git"
+	},
+	"bugs": "https://github.com/jquery/jquery-mobile/issues",
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/jquery/jquery-mobile/blob/master/MIT-LICENSE.txt"
+		}
+	],
+    "scripts": {
+        "test": "./node_modules/.bin/grunt"
+    },
+	"dependencies": {},
+	"devDependencies": {
+		"grunt": "0.4.x",
+		"grunt-contrib-jshint": "0.1.x",
+		"grunt-contrib-uglify": "0.1.x",
+		"grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
+		"grunt-contrib-requirejs": "0.3.4",
+		"grunt-git-authors": "1.1.0-beta.1",
+	},
+    "keywords": []
 }
