@@ -154,10 +154,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
-		} else {
-			$el = this.element;
 		}
-		$el.addClass( "ui-disabled" );
 		return this._setOption( "disabled", true );
 	},
 

@@ -89,7 +89,9 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
 			this._on( this._thisPage, {
 				"pagebeforeshow": "_handlePageBeforeShow",
-				"webkitAnimationStart animationstart updatelayout": "_handleAnimationStart",
+				"webkitAnimationStart":"_handleAnimationStart",
+				"animationstart":"_handleAnimationStart",
+				"updatelayout": "_handleAnimationStart",
 				"pageshow": "_handlePageShow",
 				"pagebeforehide": "_handlePageBeforeHide"
 			});
