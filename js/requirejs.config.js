@@ -5,5 +5,4 @@ requirejs.config({
 		"depend": "../external/requirejs/plugins/depend",
 		"json": "../external/requirejs/plugins/json"
 	}
-
 });
