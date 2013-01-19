@@ -230,7 +230,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				}
 			})
 			// clean up open panels after page hide
-			.on(  "pagebeforehide", function( e ) {
+			.on(  "pagehide", function( e ) {
 				if ( self._open ) {
 					self.close( true );
 				}
