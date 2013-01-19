@@ -1,3 +1,53 @@
+
+$(function(){
+  //this is to allow deeplinks to id's from external pages and from same page links
+  //this will not currently work for multi-page documents if this is needed in the 
+  //future it can be added at that time.
+  $.widget( "mobile.scrollto", $.mobile.widget, {
+    options: {
+      initSelector: ":jqmData(scrollto='true')"
+    },
+    _create: function(){
+      this.element.attr('data-ajax',false);
+      this._on({
+        "click":function(event){
+          var id = this.element.attr('href'),
+            pos = (id === "top")? this.element.closest(".ui-page-active").offset().top:$(id).offset().top;
+          $.mobile.silentScroll( pos );
+          return false;
+        }
+      });
+    },
+    _destroy:function(){
+      this.element.removeAttr("data-ajax");
+    }
+  });
+
+  //auto self-init widget
+  $( document ).bind( "pagecreate create", function( e ) {
+    $.mobile.scrollto.prototype.enhanceWithin( e.target );
+  });
+  $( document ).bind( "pageshow", function(){
+      var match, pos,
+        urlParams = {},
+          pl     = /\+/g,  // Regex for replacing addition symbol with a space
+          search = /([^&=]+)=?([^&]*)/g,
+          decode = function (s) { return decodeURIComponent(s.replace( pl, " " )); },
+          query  = window.location.search.substring(1);
+          
+      while (match = search.exec(query)){
+          urlParams[decode(match[1])] = decode(match[2]);
+        }
+
+        if( typeof urlParams.scrollto !== "undefined" ){
+
+          pos = $("#"+urlParams.scrollto).offset().top;
+          setTimeout( function() {
+            $.mobile.silentScroll( pos );
+          }, 0);
+        }
+  });
+});
 // display the version of jQM
 $(document).on( "pageinit", function() {
 	var version = $.mobile.version || "dev",
