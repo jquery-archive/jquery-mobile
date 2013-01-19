@@ -285,15 +285,17 @@ define( [
 	}
 
 	//simply set the active page's minimum height to screen height, depending on orientation
-	function resetActivePageHeight() {
+	$.mobile.resetActivePageHeight = function resetActivePageHeight( height ) {
 		var aPage = $( "." + $.mobile.activePageClass ),
 			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) ),
 			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
 
-		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
-	}
+		height = ( typeof height === "number" )? height : getScreenHeight();
+		
+		aPage.css( "min-height", height - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
+	};
 
 	//shared page enhancements
 	function enhancePage( $page, role ) {
@@ -1312,8 +1314,8 @@ define( [
 		});
 
 		//set page min-heights to be device specific
-		$.mobile.document.bind( "pageshow", resetActivePageHeight );
-		$.mobile.window.bind( "throttledresize", resetActivePageHeight );
+		$.mobile.document.bind( "pageshow", $.mobile.resetActivePageHeight );
+		$.mobile.window.bind( "throttledresize", $.mobile.resetActivePageHeight );
 
 	};//navreadyDeferred done callback
 

@@ -17,8 +17,17 @@ define([ "jquery", "./../jquery.mobile.ns", "./../jquery.mobile.support" ], func
 
 		originalEventName: undefined,
 
+		// If pushstate support is present and push state support is defined to
+		// be true on the mobile namespace.
 		isPushStateEnabled: function() {
-			return $.support.pushState && $.mobile && $.mobile.pushStateEnabled;
+			return $.support.pushState &&
+				$.mobile.pushStateEnabled === true &&
+				this.isHashChangeEnabled();
+		},
+
+		// !! assumes mobile namespace is present
+		isHashChangeEnabled: function() {
+			return $.mobile.hashListeningEnabled === true;
 		},
 
 		// TODO a lot of duplication between popstate and hashchange
@@ -92,7 +101,7 @@ define([ "jquery", "./../jquery.mobile.ns", "./../jquery.mobile.support" ], func
 			if( self.isPushStateEnabled() ) {
 				self.originalEventName = "popstate";
 				$win.bind( "popstate.navigate", self.popstate );
-			} else {
+			} else if ( self.isHashChangeEnabled() ){
 				self.originalEventName = "hashchange";
 				$win.bind( "hashchange.navigate", self.hashchange );
 			}
