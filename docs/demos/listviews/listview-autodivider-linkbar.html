@@ -19,6 +19,7 @@
 	<script id="myScript">
 	$.mobile.document.on( "pageshow", "#listviewDividerLinkDemo", function(){
 		var head = $('.ui-page-active [data-role="header"]'),
+			foot = $('.ui-page-active .jqm-footer'),
 			headerheight = head.outerHeight();
 		$.mobile.window.on("throttledresize", function(){
 			$('#sorter').height($.mobile.window.height()-headerheight-20).css("top",headerheight+18);
@@ -26,11 +27,26 @@
 		$('#sorter').height($.mobile.window.height()-headerheight-20).css("top",headerheight+18);
 		$.mobile.window.scroll(function(e){
 			var headTop = $(window).scrollTop();
-
 			if( headTop < headerheight && headTop > 0){
-				$('#sorter').css('top',headerheight+15-headTop);
-			} else if (headTop >= headerheight && headTop > 0){
-				$('#sorter').css('top',"15px");
+				$('#sorter').css({
+					'top':headerheight+15-headTop,
+					'height':$.mobile.window.height()-headerheight-20
+				});
+			} else if (headTop >= headerheight && headTop > 0 && parseInt(headTop+$.mobile.window.height()) < parseInt(foot.offset().top)){
+				$('#sorter').css({
+					'top':"15px",
+					'height':$.mobile.window.height()
+				});
+				$('#sorter li').height('3.7%');
+			} else if( parseInt(headTop+$.mobile.window.height()) >= parseInt(foot.offset().top) && parseInt(headTop+$.mobile.window.height()) <= parseInt(foot.offset().top)+foot.height()){
+				$('#sorter').css({
+					'top':"15px",
+					'height':$.mobile.window.height()-(parseInt(headTop+$.mobile.window.height()) - parseInt(foot.offset().top)+8)
+				});
+			} else if( parseInt(headTop+$.mobile.window.height()) >= parseInt(foot.offset().top) ){
+				$('#sorter').css({
+					'top':"15px"
+				});
 			} else {
 				$('#sorter').css("top",headerheight+15);
 			}
@@ -58,7 +74,7 @@
 	</style>
 	<style id="myStyle">
 		#sorter .ui-li.ui-li-static.ui-btn-up-c {
-			height: 3.65%;
+			height: 3.8%;
 			padding: 0;
 			font-size:8px;
 			padding-left:5px;
@@ -75,7 +91,7 @@
 			height:100%;
 		}
 		#sortedList{
-			padding-right:30px;
+			padding-right:35px;
 		}
 	</style>
 </head>
