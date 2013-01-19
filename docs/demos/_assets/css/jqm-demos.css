@@ -128,7 +128,8 @@ div.jqm-demo-link {
 .ui-bar-f select, 
 .ui-bar-f textarea, 
 .ui-bar-f button {
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
 }
 
 .ui-bar-f,
@@ -137,8 +138,11 @@ div.jqm-demo-link {
 }
 .ui-bar-f .ui-link {
 	color: 					#fff;
-	font-weight: bold;
 }
+.ui-bar-f h1.ui-title {
+	font-weight: 300;
+}
+
 .ui-btn-up-f {
 	border: 1px solid 		#3B6F07;
 	background: 			#56A00E;
@@ -317,12 +321,15 @@ div.jqm-demo-link {
 
 .demos .api-link {
 	float:right;
-	margin-top:.2em;
+	margin-top:.3em;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 }
 
-
+.jqm-demo-link .ui-btn-text {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;	
+}
 
 .demos .ui-content  {
 	background-color:#fefefe;
