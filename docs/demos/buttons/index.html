@@ -6,12 +6,14 @@
 	<title>Buttons - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	
 	<script src="../../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../../js/"></script>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" class="demos">
 
 	<div data-role="header" data-theme="f">
 		<h1>Buttons</h1>
@@ -25,7 +27,7 @@
 			<h1>Buttons <a href="http://api.jquerymobile.com/button/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="forward" data-iconpos="right" class="api-link">API docs</a></h1>
 
 		
-			<p>Buttons are core widgets in jQuery Mobile, and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons.</p>
+			<p class="demo-intro">Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons.</p>
 			
 			
 
@@ -151,15 +153,15 @@
 			<p>Mini horizontal grouped buttons, icon only:</p>
 			<div data-demo-html="true">	
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-					<a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext">Up</a>
-					<a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext">Down</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>
+				    <a href="#" data-role="button" data-icon="plus" data-theme="b">Add</a>
+				    <a href="#" data-role="button" data-icon="delete" data-theme="b">Delete</a>
+				    <a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>
 				</div>
 			</div><!--/demo-html -->
 			
 			<h2>Corners & shadows</h2>
 			
-			There are options for controlling the rounded corners (<code>data-corners</code>), drop shadow (<code>data-shadow</code>), and icon  shadow for the highlight under the icon disc (<code>data-iconshadow</code>).
+			<p>There are options for controlling the rounded corners (<code>data-corners</code>), drop shadow (<code>data-shadow</code>), and icon  shadow for the highlight under the icon disc (<code>data-iconshadow</code>).</p>
 			
 			<div data-demo-html="true">			
 				<a href="#" data-role="button" data-icon="gear" data-theme="b">Default</a>

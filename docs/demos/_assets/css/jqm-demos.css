@@ -315,8 +315,48 @@ div.jqm-demo-link {
 	border-bottom-right-radius: 5px;
 }
 
-.api-link {
+.demos .api-link {
 	float:right;
+	margin-top:.2em;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400; 
+}
+
+
+
+.demos .ui-content  {
+	background-color:#fefefe;
+}
+
+.demos .ui-content h1 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight:300;
+	font-size:2.4em;
+	color: #555;
+}
+
+.demos .ui-content h2 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size:1.6em;
+	color: #74b042;
+	padding-top:1em;
+}
+
+.demos .ui-content p {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400; 
+	font-size:0.95em;
+}
+
+.demos p.demo-intro {
+	font-size:120%;
+	font-weight: 300;
+	line-height:135%;
+	margin-top:-.5em;
+	padding-bottom:1.5em;
+	color:#777;
+	border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
 /**
