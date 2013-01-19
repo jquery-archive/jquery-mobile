@@ -12,8 +12,10 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
 		mapToDataAttr = function( key, value ) {
-			e.setAttribute( "data-" + $.mobile.ns + key, value );
-			el.jqmData( key, value );
+			var nsKey = $.mobile.ns + key;
+
+			e.setAttribute( "data-" + nsKey, value );
+			$.removeData( e, nsKey );
 		};
 
 	// Enforce options to be of type string
