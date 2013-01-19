@@ -33,9 +33,7 @@
 			
 			<h2>Markup</h2>
 			
-			<p>Buttons are coded with standard HTML anchor and input elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.  Use anchor links (<code>a</code> elements) to mark up navigation buttons, and <code>input</code> or <code>button</code> elements for form submission.</p>
-			
-			<p>By default, all buttons in the body content are styled as block-level elements so they fill the width of the screen:</p>
+			<p>Use anchor links (<code>a</code> elements) to mark up navigation buttons, and <code>input</code> or <code>button</code> elements for form submission. By default, all buttons in the body content are styled as block-level elements so they fill the width of the screen:</p>
 			
 			<div data-demo-html="true">			
 				<a href="#" data-role="button">Anchor</a>
@@ -50,7 +48,7 @@
 			
 			<h2>Inline</h2>
 			
-			<p>If you have multiple buttons that should sit side-by-side on the same line, add the <code> data-inline="true"</code> attribute to each button. This will style the buttons to be the width of their content and have the buttons sit on the same line. </p>
+			<p>If you have multiple buttons that should sit side-by-side on the same line, add the <code>data-inline="true"</code> attribute to each button. This will style the buttons to be the width of their content so the buttons sit on the same line. </p>
 				
 			<div data-demo-html="true">	
 				<p>
@@ -159,18 +157,20 @@
 				</div>
 			</div><!--/demo-html -->
 			
-			<h2>Corners & Shadow</h2>
+			<h2>Corners & shadows</h2>
+			
+			There are options for controlling the rounded corners (<code>data-corners</code>), drop shadow (<code>data-shadow</code>), and icon  shadow for the highlight under the icon disc (<code>data-iconshadow</code>).
 			
 			<div data-demo-html="true">			
-				<a href="#" data-role="button" data-icon="delete">Default</a>
-				<a href="#" data-role="button" data-icon="delete" data-corners="false">No rounded corners</a>
-				<a href="#" data-role="button" data-icon="delete" data-shadow="false">No shadow</a>
-				<a href="#" data-role="button" data-icon="delete" data-corners="false" data-shadow="false">No rounded corners, No shadow</a>
+				<a href="#" data-role="button" data-icon="gear" data-theme="b">Default</a>
+				<a href="#" data-role="button" data-icon="gear" data-corners="false" data-theme="b">No rounded corners</a>
+				<a href="#" data-role="button" data-icon="gear" data-shadow="false" data-theme="b">No button shadow</a>
+				<a href="#" data-role="button" data-icon="gear" data-iconshadow="false" data-theme="b">No icon disc shadow</a>
 			</div><!--/demo-html -->
 			
 			
 			
-			<h2>Disabling</h2>
+			<h2>Disabled</h2>
 			
 			<p>Form input or buttons can be disabled via the <code>disabled</code> attribute. Links styled like buttons have all the same visual options as true form-based buttons, but aren't part of the <code>button</code> plugin so the form button methods (enable, disable, refresh) aren't supported. If you need to disable a link-based button (or any element), apply the disabled class ui-disabled yourself with JavaScript to achieve the same effect.</p>
 			
