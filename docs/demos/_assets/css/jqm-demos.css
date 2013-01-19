@@ -315,6 +315,10 @@ div.jqm-demo-link {
 	border-bottom-right-radius: 5px;
 }
 
+.api-link {
+	float:right;
+}
+
 /**
  * SyntaxHighlighter
  * http://alexgorbatchev.com/SyntaxHighlighter
