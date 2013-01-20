@@ -211,6 +211,9 @@ div.jqm-demo-link {
 	width: 90%;
 	max-width: 1500px;
 }
+.jqm-demo .ui-header .ui-title, .ui-footer .ui-title {
+	margin: .6em 150% .8em;
+}
 .jqm-demo .ui-collapsible-set {
 	margin: 0;
 }
@@ -255,14 +258,14 @@ div.jqm-demo-link {
 	background-color:#fefefe;
 }
 
-.demos .content-primary > h1 {
+.demos .ui-content > h1 {
 	font-family: 'Open Sans', sans-serif;
 	font-weight:300;
 	font-size:2.4em;
 	color: #555;
 }
 
-.demos .content-primary > h2 {
+.demos .ui-content > h2 {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size:1.6em;
@@ -270,7 +273,7 @@ div.jqm-demo-link {
 	padding-top:1em;
 }
 
-.demos .content-primary > p {
+.demos .ui-content > p {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 	font-size:0.95em;
@@ -298,7 +301,7 @@ div.jqm-demo-link {
 	background-image:none;
 }
 
-.ui-body-c, .ui-body-c input, .ui-body-c select, .ui-body-c textarea, .ui-body-c button, .ui-li-divider {
+.demo-nav .ui-li-divider {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 }
