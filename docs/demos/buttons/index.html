@@ -25,13 +25,27 @@
 			<h1>Buttons <a href="http://api.jquerymobile.com/button/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="forward" data-iconpos="right" class="api-link">API docs</a></h1>
 
 		
-			<p class="demo-intro">Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons.</p>
+			<p class="demo-intro">Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons. <a href="#button-sections" data-rel="popup" class="demo-section-link">Jump to section </a></p>
 			
 			
-
+			<div data-role="popup" id="button-sections" class="demo-sections">
+				
+				<ul data-role="listview" data-inset="false" data-theme="c" data-divider-theme="d" class="demo-nav ui-corner-all">
+					<li data-role="list-divider">Sections</li>
+		            <li><a href="#button-markup" data-ajax="false">Markup</a></li>
+		            <li><a href="#button-inline" data-ajax="false">Inline</a></li>
+		            <li><a href="#button-mini" data-ajax="false">Mini</a></li>
+		            <li><a href="#button-theme" data-ajax="false">Theme</a></li>
+					<li><a href="#button-icons" data-ajax="false">Icons</a></li>
+					<li><a href="#button-icon-position" data-ajax="false">Icon position</a></li>
+					<li><a href="#button-vertical-group" data-ajax="false">Vertical group</a></li>
+					<li><a href="#button-horizontal-group" data-ajax="false">Horizontal group</a></li>
+					<li><a href="#button-corners-shadows" data-ajax="false">Corners &amp; shadows</a></li>
+		        </ul>
+			</div>
 			
 			
-			<h2>Markup</h2>
+			<h2 id="button-markup">Markup</h2>
 			
 			<p>Use anchor links (<code>a</code> elements) to mark up navigation buttons, and <code>input</code> or <code>button</code> elements for form submission. By default, all buttons in the body content are styled as block-level elements so they fill the width of the screen:</p>
 			
@@ -46,7 +60,7 @@
 			</div><!--/demo-html -->
 			
 			
-			<h2>Inline</h2>
+			<h2 id="button-inline">Inline</h2>
 			
 			<p>If you have multiple buttons that should sit side-by-side on the same line, add the <code>data-inline="true"</code> attribute to each button. This will style the buttons to be the width of their content so the buttons sit on the same line. </p>
 				
@@ -57,7 +71,7 @@
 				</p>
 			</div><!--/demo-html -->
 			
-			<h2>Mini</h2>		  
+			<h2 id="button-mini">Mini</h2>		  
 			
 			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the button to create a mini version</a>. </p> 
 			 
@@ -69,7 +83,7 @@
 			</div><!--/demo-html -->
 			
 			
-			<h2>Theme</h2>
+			<h2 id="button-theme">Theme</h2>
 			
 			<p>Buttons can be manually assigned any of the button color swatches from the theme to add visual contrast with the container they sit inside by adding the <code> data-theme</code> attribute on the button markup and specifying a swatch letter. When a link is added to a container, it is automatically assigned a theme swatch letter that matches its parent bar or content box to visually integrate the button into the parent container, like a chameleon.</p>
 			
@@ -86,7 +100,7 @@
 			
 			
 				  
-			<h2>Icon</h2>
+			<h2 id="button-icons">Icons</h2>
 			
 			<p>An icon can be added to a button by adding a <code> data-icon</code> attribute on the anchor specifying the icon to display.</p> 
 			
@@ -111,7 +125,7 @@
 			
 
 			
-			<h2>Icon position</h2>
+			<h2 id="button-icon-position">Icon position</h2>
 			
 			<p>By default, all icons in buttons are placed to the left of the button text. This default may be overridden using the <code> data-iconpos</code> attribute to set the icon to the right, above (top) or below (bottom) the text. You can also create an icon-only button, by setting the <code> data-iconpos</code> attribute to <code>notext</code>. The button plugin will hide the text on-screen, but add it as a <code>title</code> attribute on the link to provide context for screen readers and devices that support tooltips.</p>
 			
@@ -124,7 +138,7 @@
 					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Icon only</a>
 			</div><!--/demo-html -->
 			
-			<h2>Vertical button group</h2>
+			<h2 id="button-vertical-group">Vertical group</h2>
 			
 			<p>To visually group a set of buttons to form a single block, wrap a set of buttons in a container with the <code> data-role="controlgroup"</code> attribute &mdash; the framework will create a vertical button group, remove all margins and drop shadows between the buttons, and only round the first and last buttons of the set to create the effect that they are grouped together. </p>
 			
@@ -136,7 +150,7 @@
 				</div>
 			</div><!--/demo-html -->
 			
-			<h2>Horizontal button group</h2>
+			<h2 id="button-horizontal-group">Horizontal group</h2>
 			
 			<p>By adding the <code>data-type="horizontal"</code> attribute to the <code>controlgroup</code> container, you can swap to a horizontal-style group that floats the buttons side-by-side and sets the width to only be large enough to fit the content.</p>
 			
@@ -157,7 +171,7 @@
 				</div>
 			</div><!--/demo-html -->
 			
-			<h2>Corners & shadows</h2>
+			<h2 id="button-corners-shadows">Corners & shadows</h2>
 			
 			<p>There are options for controlling the rounded corners (<code>data-corners</code>), drop shadow (<code>data-shadow</code>), and icon  shadow for the highlight under the icon disc (<code>data-iconshadow</code>).</p>
 			

@@ -148,6 +148,13 @@ img { max-width: 100%; }
 	margin: 0;
 }
 
+.demos a.demo-section-link {
+	font-weight:300;
+}
+/* Min width for section popup */
+.demos .demo-sections {
+	min-width:13em;
+}
 
 /* Nav menu */
 .demo-nav .ui-btn-up-c, 
