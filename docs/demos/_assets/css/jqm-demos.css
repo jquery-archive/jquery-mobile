@@ -120,7 +120,7 @@ img { max-width: 100%; }
 }
 .demos .api-link .ui-btn-text {
 	padding-left:.3em;
-	padding-right:.1em;
+	padding-right:.2em;
 }
 .demos .ui-content > p {
 	font-family: 'Open Sans', sans-serif;
@@ -156,6 +156,11 @@ img { max-width: 100%; }
 }
 
 /* Section nav */
+
+.demos .ui-panel {
+	margin-top:10px;
+}
+
 .demos a.demo-section-link {
 	font-weight:300;
 	display:block;
@@ -181,6 +186,24 @@ img { max-width: 100%; }
 }
 
 /* Nav menu */
+
+.demos .ui-panel-inner .ui-bar-c {
+	background-image:none;
+	background-color:#eee;
+}
+
+.demos .ui-panel-inner .ui-body-c {
+	border:none;
+}
+
+.demos .ui-panel-inner .ui-input-text {
+	padding-top:.3em;
+	padding-bottom:.3em;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size:1em;
+}
+
 .demo-nav .ui-btn-up-c, 
 .demo-nav .ui-btn-hover-c, 
 .demo-nav .ui-btn-down-c {
@@ -195,6 +218,10 @@ img { max-width: 100%; }
 .demo-nav .ui-li-divider {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
+	font-size:.8em;
+	padding: .5em 15px;
+	border-top:none;
+	border-bottom:none;
 }
 .demo-nav .ui-icon {
 	display:none;
