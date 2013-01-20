@@ -129,8 +129,9 @@ img { max-width: 100%; }
 	color: #777;
 	border-bottom: 1px solid rgba(0,0,0,.1);
 }
-.demos .faq-question {
+.demos h1.faq-question {
 	margin-top:-.4em;
+	font-size:1.8em;
 }
 
 .demos div[data-demo-html] {
