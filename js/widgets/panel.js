@@ -290,7 +290,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			} else {
 				setTimeout( complete, 0 );
 			}
-			if ( self.options.theme ) {
+			if ( self.options.theme && self.options.display !== "overlay" ) {
 				self._page.removeClass( self._pageTheme ).addClass( "ui-body-" + self.options.theme );
 			}
 			self.element.removeClass( o.classes.panelClosed );
@@ -314,7 +314,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var o = this.options,
 				self = this,
 				complete = function() {
-					if ( self.options.theme ) {
+					if ( self.options.theme && self.options.display !== "overlay" ) {
 						self._page.removeClass( "ui-body-" + self.options.theme ).addClass( self._pageTheme );
 					}
 					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents, complete );
