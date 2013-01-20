@@ -112,10 +112,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if ( self.options.dismissible ) {
 			self._createModal();
 		}
+
+		self._bindSwipeEvents();
 	},
 
 	_createModal: function( options ) {
 		var self = this;
+		
 		self._modal = $( "<div class='" + self.options.classes.modal + "' data-panelid='" + self._panelID + "'></div>" )
 			.on( "mousedown" , function() {
 				self.close();
@@ -212,16 +215,28 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		});
 	},
+	
+	_bindSwipeEvents: function() {
+		var self = this,
+			area = self._modal ? self.element.add( self._modal ) : self.element;
+		
+		// on swipe, close the panel
+		if( !!self.options.swipeClose ) {
+			if ( self.options.position === "left" ) {
+				area.on( "swipeleft.panel", function( e ) {
+					self.close();
+				});
+			} else {
+				area.on( "swiperight.panel", function( e ) {
+					self.close();
+				});
+			}
+		}
+	},
 
 	_bindPageEvents: function() {
 		var self = this;
-		if( !!this.options.swipeClose ){
-			self.element
-				// on swipe, close the panel (should swipe open too?)
-				.on( "swipe.panel" , function( e ){
-					self.close( );
-				});
-		}
+			
 		self._page
 			// Close immediately if another panel on the page opens
 			.on( "panelbeforeopen", function( e ) {
@@ -368,7 +383,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		this._pannelInner.children().unwrap();
 
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
-			.off( "swipe.panel" )
+			.off( "swipeleft.panel swiperight.panel" )
 			.off( "panelbeforeopen" )
 			.off( "panelbeforehide" )
 			.off( "keyup.panel" );
