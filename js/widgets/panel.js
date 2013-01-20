@@ -43,6 +43,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_closeLink: null,
 	_page: null,
 	_modal: null,
+	_pannelInner: null,
 	_wrapper: null,
 	_fixedToolbar: null,
 
@@ -65,7 +66,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			_getWrapper = function() {
 				var $wrapper = page.find( "." + self.options.classes.contentWrap );
 				if ( $wrapper.length === 0 ) {
-					$wrapper = page.children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(.ui-popup), .ui-footer:not(:jqmData(position='fixed'))" ).wrapAll( '<div class="' + self.options.classes.contentWrap + ' ' + _getPageTheme() + '" />' ).parent();
+					$wrapper = page.children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" ).wrapAll( '<div class="' + self.options.classes.contentWrap + ' ' + _getPageTheme() + '" />' ).parent();
 					if ( $.support.cssTransform3d && !!self.options.animate ) {
 						$wrapper.addClass( self.options.classes.animate );
 					}
@@ -109,7 +110,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._bindLinkListeners();
 		self._bindPageEvents();
 
-		if ( self.options.dismissible ) {
+		if ( !!self.options.dismissible ) {
 			self._createModal();
 		}
 
@@ -120,7 +121,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var self = this;
 		
 		self._modal = $( "<div class='" + self.options.classes.modal + "' data-panelid='" + self._panelID + "'></div>" )
-			.on( "mousedown" , function() {
+			.on( "mousedown", function() {
 				self.close();
 			})
 			.appendTo( this._page );
@@ -245,15 +246,15 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				}
 			})
 			// clean up open panels after page hide
-			.on(  "pagehide", function( e ) {
+			.on( "pagehide", function( e ) {
 				if ( self._open ) {
 					self.close( true );
 				}
 			})
 			// on escape, close? might need to have a target check too...
 			.on( "keyup.panel", function( e ) {
-				if( e.keyCode === 27 && self._open ){
-					self.close( );
+				if ( e.keyCode === 27 && self._open ) {
+					self.close();
 				}
 			});
 	},
@@ -333,7 +334,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 			if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
 				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents, complete );
-			} else{
+			} else {
 				setTimeout( complete, 0 );
 			}
 
@@ -385,7 +386,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
 			.off( "swipeleft.panel swiperight.panel" )
 			.off( "panelbeforeopen" )
-			.off( "panelbeforehide" )
+			.off( "panelhide" )
 			.off( "keyup.panel" );
 
 		this._closeLink.off( "click.panel" );
