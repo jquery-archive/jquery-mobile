@@ -151,11 +151,15 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_bindCloseEvents: function() {
 		var self = this;
+		
 		self._closeLink.on( "click.panel" , function( e ) {
 			e.preventDefault();
 			self.close();
 			return false;
 		});
+		self.element.on( "click.panel" , "a:jqmData(ajax='false')", function( e ) {
+			self.close();
+		});		
 	},
 
 	_positionPanel: function() {
@@ -203,7 +207,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_bindLinkListeners: function() {
 		var self = this;
 
-		this._page.on( "click.panel" , "a", function( e ) {
+		self._page.on( "click.panel" , "a", function( e ) {
 			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
 				e.preventDefault();
 				var $link = $( this );
