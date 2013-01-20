@@ -151,6 +151,11 @@ img { max-width: 100%; }
 /* Section nav */
 .demos a.demo-section-link {
 	font-weight:300;
+	display:block;
+	font-size:0.8em;
+	margin-top:.4em;
+	text-decoration: none;
+	whitespace:nowrap;
 }
 
 .demos .demo-nav-header {
