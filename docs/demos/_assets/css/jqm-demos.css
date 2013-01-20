@@ -115,6 +115,13 @@ img { max-width: 100%; }
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 }
+.demos .api-link .ui-icon {
+	opacity:.6;
+}
+.demos .api-link .ui-btn-text {
+	padding-left:.3em;
+	padding-right:.1em;
+}
 .demos .ui-content > p {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
