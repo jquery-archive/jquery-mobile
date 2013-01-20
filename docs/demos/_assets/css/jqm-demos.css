@@ -148,12 +148,14 @@ img { max-width: 100%; }
 	margin: 0;
 }
 
+/* Section nav */
 .demos a.demo-section-link {
 	font-weight:300;
 }
-/* Min width for section popup */
-.demos .demo-sections {
-	min-width:13em;
+
+.demos .demo-nav-header {
+	color: #74b042;
+	font-weight:300;
 }
 
 /* Nav menu */
