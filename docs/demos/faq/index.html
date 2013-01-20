@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Buttons - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="page" class="demos">
+
+	<div data-role="header" data-theme="f">
+		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+	</div><!-- /header -->
+	
+	<div data-role="content" data-theme="c">
+			
+			<h2 class="faq-breakcrumb">Question:</h2>			
+			<h1 class="faq-question">Why won't my CSS styles apply correctly to a widget? </h1>
+
+		
+		
+			
+			<h2>Answer:</h2>
+			<p class="demo-intro">This is probably because the element you see in the markup (button, form element, etc.) isn't the same after enhancements have been applied. In order to style elements and add behavior, jQuery Mobile modifies the original markup with additional classes and elements which could impact your CSS selectors. Use a web inspector to view the post-enhancement markup to find the right selectors to use.</p>
+			
+			<p>Let's look at an example to illustrate the enhancements. Here is the starting markup for a button:</p>	
+			<pre><code>
+<strong>// Button before enhancement
+</strong>&#60;button&#62;Button element&#60;/button&#62;				
+			</code></pre>
+			
+			<p>After enhancement, the button markup has been modified by the framework to add classes and wrap the contents for styling:</p>	
+			<pre><code>
+<strong>// Button after enhancement
+</strong>&#60;div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="null" data-iconpos="null" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" aria-disabled="false"&#62;
+	&#60;span class="ui-btn-inner ui-btn-corner-all"&#62;
+		&#60;span class="ui-btn-text">Button element&#60;/span&#62;
+	&#60;/span&#62;
+	&#60;button class="ui-btn-hidden" aria-disabled="false">Button element&#60;/button&#62;
+&#60;/div&#62;					
+			</code></pre>
+
+			<p>As you can see from the code snippet above the markup has significantly changed after enhancement. The original button you added has ben wrapped in a div and had several spans added. The original button you added is now also hidden. To change the visual styling of the button you must target the new enhanced markup not the button you added.</p>
+			
+			<a href="faq/" class="demo-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			
+	
+	</div><!-- /content -->
+	
+	
+	<div data-role="panel" id="panel-nav" data-position="left" data-display="overlay" data-theme="c">
+	 <ul data-role="listview" data-inset="false" data-filter="true" data-theme="c" data-filter-placeholder="Search..." class="demo-nav">
+		<li><a href="../">Home</a></li>
+		<li><a href="../">Guides</a></li>
+		<li><a href="../">Demos</a></li>
+		<li><a href="../">Q&A</a></li>
+		<li data-role="list-divider" data-theme="c">Widget reference</li>
+		<li><a href="accordion/">Accordion</a></li>
+		<li><a href="ajax-nav/">AJAX Navigation</a></li>
+		<li><a href="autocomplete/">Autocomplete</a></li>
+		<li><a href="buttons/">Button</a></li>
+		<li><a href="checkbox/">Checkboxes</a></li>
+		<li><a href="collapsible/">Collapsible</a></li>
+		<li><a href="controlgroup/">Controlgroup</a></li>
+		<li><a href="dialog/">Dialog</a></li>
+		<li><a href="flip-switch/">Flip switch toggle</a></li>
+		<li><a href="footer/">Footer toolbar</a></li>
+		<li><a href="forms/">Form elements</a></li>
+		<li><a href="grid/">Grid</a></li>
+		<li><a href="header/">Header toolbar</a></li>
+		<li><a href="icon/">Icon</a></li>
+		<li><a href="../listviews/">Listview</a></li>
+		<li><a href="link/">Link</a></li>
+		<li><a href="loader/">Loader overlay</a></li>
+		<li><a href="navbar/">Navbar</a></li>
+		<li><a href="page/">Page</a></li>
+		<li><a href="panel/">Panel <span class="ui-li-count">New</span></a></li>
+		<li><a href="popup/">Popup</a></li>
+		<li><a href="radiobutton/">Radiobutton</a></li>
+		<li><a href="search/">Search input</a></li>
+		<li><a href="select/">Select</a></li>
+		<li><a href="slider/">Slider, single</a></li>
+		<li><a href="rangeslider/">Slider, dual range <span class="ui-li-count">New</span></a></li>
+		<li><a href="table-column-toggle/">Table, column toggle <span class="ui-li-count">New</span></a></li>
+		<li><a href="table-reflow/">Table, reflow <span class="ui-li-count">New</span></a></li>
+		<li><a href="text-inputs/">Text inputs & textarea</a></li>
+		<li><a href="transitions/">Transitions</a></li>
+	</ul>
+	
+	</div><!-- /panel -->
+	
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

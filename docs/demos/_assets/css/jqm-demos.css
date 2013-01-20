@@ -242,6 +242,12 @@ div.jqm-demo-link {
 	border-bottom-right-radius: 5px;
 }
 
+
+.demos .demo-button {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400; 
+}
+
 .demos .api-link {
 	float:right;
 	margin-top:.3em;
@@ -273,6 +279,14 @@ div.jqm-demo-link {
 	padding-top:1em;
 }
 
+.demos .ui-content > h4 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size:1.6em;
+	color: #74b042;
+	padding-top:1em;
+}
+
 .demos .ui-content > p {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
@@ -287,6 +301,10 @@ div.jqm-demo-link {
 	padding-bottom:1.5em;
 	color:#777;
 	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.demos .faq-question {
+	margin-top:-.4em;
 }
 
 .demo-nav .ui-btn-up-c, 
