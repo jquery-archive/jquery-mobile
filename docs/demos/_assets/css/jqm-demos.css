@@ -63,6 +63,7 @@ img { max-width: 100%; }
 }
 .jqm-footer p {
 	font-size: .9em;
+	font-weight: normal;
 	margin: .7em 15px;	
 }
 .jqm-footer p.jqm-version {
