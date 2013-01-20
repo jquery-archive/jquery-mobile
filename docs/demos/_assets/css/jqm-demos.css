@@ -153,9 +153,18 @@ img { max-width: 100%; }
 	font-weight:300;
 	display:block;
 	font-size:0.8em;
-	margin-top:.4em;
+	margin-top:.6em;
 	text-decoration: none;
 	whitespace:nowrap;
+}
+
+.demos a.demo-section-link span {
+	width:18px;
+	display:inline-block;
+	margin-top:4px;
+	margin-right:10px;
+	float:left;
+	opacity:.5;
 }
 
 .demos .demo-nav-header {
