@@ -117,6 +117,9 @@ img { max-width: 100%; }
 	font-weight: 400; 
 	font-size: 0.95em;
 }
+.demos .ui-content code {
+	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;	
+}
 .demos p.demo-intro {
 	font-size: 120%;
 	font-weight: 300;
