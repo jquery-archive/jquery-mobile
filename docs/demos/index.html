@@ -6,24 +6,27 @@
 	<title>jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	
 	<script src="../../js/jquery.js"></script>
 	<script src="_assets/js/"></script>
 	<script src="../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos-home">
+<div data-role="page" class="jqm-demos-home demos">
 
 	<div class="jqm-header">
 		<h1 id="jqm-logo"><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
-		<h2>Demos</h2>
 		<p class="jqm-version"></p>
 	</div><!-- /jqm-header -->
 
 	<div data-role="content">
+		
+		<h1>Demos</h1>
 
-		<div class="content-primary">
+			<p class="demo-intro">Welcome. This is an in-progress re-design of the jQuery Mobile demos site. Please pardon the mess as we build this out.</p>
 
-			<ul data-role="listview" data-inset="true">
+			<ul data-role="listview" data-inset="true" data-filter="true" data-theme="c"  data-divider-theme="c" class="demo-nav">
 				<li data-role="list-divider">Forms</li>
 				<li><a href="forms/index.html" data-ajax="false">Form reference</a></li>
 				<li><a href="forms/form.html" data-ajax="false">Form</a></li>
@@ -79,9 +82,11 @@
 				<li data-role="list-divider">Events</li>
 				<li><a href="swipe/swipe-page.html" data-ajax="false">Swipe page</a></li>
 				<li><a href="swipe/swipe-list.html" data-ajax="false">Swipe list</a></li>
+				<li data-role="list-divider">Questions &amp; Answers</li>
+				<li><a href="faq/" data-ajax="false">Questions &amp; Answers list</a></li>
+				<li><a href="faq/question-template.html" data-ajax="false">Question template</a></li>
 			</ul>
 
-		</div><!--/content-primary -->
 
 	</div><!-- /content -->
 	
