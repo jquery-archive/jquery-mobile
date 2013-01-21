@@ -4,9 +4,6 @@ strong { font-weight: bold; }
 img { max-width: 100%; }
 
 /* Header */
-.jqm-demos-home .jqm-header {
-	text-align: center;
-}
 .jqm-demos-home h1#jqm-logo {
 	font-size: 1em;
 	margin: .5em 15px 0;
@@ -16,11 +13,15 @@ img { max-width: 100%; }
 	height: 51px;
 }
 .jqm-demos-home .jqm-header p.jqm-version {
-	display: none;
+	margin: .5em 15px;
+	text-align: right;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:300;
+	font-size:1em;
+	color: #74b042;
 }
 @media all and (min-width:650px) {
 	.jqm-demos-home .jqm-header {
-		text-align: left;
 		overflow: hidden;
 	}
 	.jqm-demos-home h1#jqm-logo {
@@ -32,14 +33,10 @@ img { max-width: 100%; }
 		height: 78px;
 	}
 	.jqm-demos-home .jqm-header p.jqm-version {
-		display: block;
 		float: right;
 		clear: right;
 		margin: 1em 15px;
-		font-family: 'Open Sans', sans-serif;
-		font-weight:300;
 		font-size:1.7em;
-		color: #74b042;
 	}
 }
 
