@@ -169,9 +169,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		var $el,
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
-			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
+			parentNeedsEnabled = this.element.attr( "disabled", false )	&& ( inputNeedsWrap || isSearch );
 
-		if ( parentNeedsDisabled ) {
+		if ( parentNeedsEnabled ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
