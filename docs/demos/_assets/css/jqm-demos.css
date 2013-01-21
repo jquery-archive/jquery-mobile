@@ -127,7 +127,7 @@ img { max-width: 100%; }
 	font-weight: 300;
 	line-height: 135%;
 	margin-top: -.5em;
-	margin-bottom: 0;
+	margin-bottom: .5em;
 	padding-bottom: 1.5em;
 	color: #777;
 	border-bottom-width: 1px;
@@ -216,12 +216,11 @@ img { max-width: 100%; }
 .demo-nav li .ui-li-heading  {
 	font-weight: 300; 
 	font-size: 1.1em;
-	color: #74b042;
 }
 .demo-nav li .ui-li-desc  {
 	font-weight: 300; 
 	font-size: .8em;
-	color: #666;
+	opacity:.6
 }
 
 .demo-nav .ui-btn-up-d, 
@@ -238,13 +237,13 @@ img { max-width: 100%; }
 .demo-nav .ui-btn-up-d.ui-btn-active, 
 .demo-nav .ui-btn-hover-d.ui-btn-active, 
 .demo-nav .ui-btn-down-d.ui-btn-active {
-	background-color: #e9f3fa;
+	background-color: #51BEEE;
 	background-image:none;
-	color: #2489CE;
-	text-shadow: 0 1px 0 white;	
+	color: #fff;
+	text-shadow: 0 1px 0 #369;	
 }
 .demo-nav .ui-btn-active a.ui-link-inherit {
-	color: #2489CE;
+	color: #fff;
 }
 .demo-nav .ui-bar-d {
 	font-family: 'Open Sans', sans-serif;
@@ -252,9 +251,10 @@ img { max-width: 100%; }
 	font-size:.8em;
 	padding: .5em 15px;
 	background-image: none;
-	background-color: #eee;
-	border-color: #eee;
+	background-color: #e4e4e4;
+	border-color: #e4e4e4;
 }
+
 
 .demo-nav .ui-icon {
 	display:none;
@@ -265,17 +265,12 @@ img { max-width: 100%; }
 
 /* Swatch F - bar & buttons */
 .ui-bar-f {
-	border: 1px solid #56A00E;
-	background: 			#74b042;
+	border: 1px solid #86D641;
+	background: 			#6ABA2F;
 	color: 					#fff;
-	font-weight: bold;
+	font-weight: 400;
 	text-shadow: 0 1px 1px #335413;	
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#74b042), to(#56A00E)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(#74b042, #56A00E); /* Chrome 10+, Saf5.1+ */
-	background-image:    -moz-linear-gradient(#74b042, #56A00E); /* FF3.6 */
-	background-image:     -ms-linear-gradient(#74b042, #56A00E); /* IE10 */
-	background-image:      -o-linear-gradient(#74b042, #56A00E); /* Opera 11.10+ */
-	background-image:         linear-gradient(#74b042, #56A00E);		
+
 }
 .ui-bar-f, 
 .ui-bar-f input, 
