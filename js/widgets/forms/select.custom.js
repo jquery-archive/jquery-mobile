@@ -106,7 +106,7 @@ define( [
 
 				if ( self._origTabIndex === undefined ) {
 					
-					var t = self.select[0].getAttribute("tabindex") == null ? true : false;
+					var t = self.select[0].getAttribute("tabindex") == null ? false : true;
 					self._origTabIndex = undefined;
 					if(t){
                                           self._origTabIndex = self.select.attr( "tabindex" );
@@ -472,7 +472,7 @@ define( [
 						// If we have identified a placeholder, record the fact that it was
 						// us who have added the placeholder to the option and mark it
 						// retroactively in the select as well
-						var t = option.getAttribute(dataPlaceholderAttr) == null ? true : false;
+						var t = option.getAttribute(dataPlaceholderAttr) == null ? false : true;
 						if ( !t) {
 						  this._removePlaceholderAttr = true;
 						}
