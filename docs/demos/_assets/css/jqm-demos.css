@@ -6,37 +6,26 @@ img { max-width: 100%; }
 /* Header */
 .jqm-demos-home h1#jqm-logo {
 	font-size: 1em;
-	margin: .5em 15px 0;
+	margin: 1em 15px;
 }
 .jqm-demos-home #jqm-logo img {
-	width: 180px;
-	height: 51px;
+	width: 270px;
 }
-.jqm-demos-home .jqm-header p.jqm-version {
-	margin: .5em 15px;
+.jqm-demos-home p.jqm-version {
+	margin: .2em 15px;
 	text-align: right;
 	font-family: 'Open Sans', sans-serif;
 	font-weight:300;
-	font-size:1em;
-	color: #74b042;
+	font-size:.9em;
+	color: #fff;
 }
 @media all and (min-width:650px) {
-	.jqm-demos-home .jqm-header {
-		overflow: hidden;
-	}
-	.jqm-demos-home h1#jqm-logo {
-		float: left;
-		margin: 1em 15px;
-	}
 	.jqm-demos-home #jqm-logo img {
 		width: 275px;
-		height: 78px;
 	}
 	.jqm-demos-home .jqm-header p.jqm-version {
-		float: right;
-		clear: right;
 		margin: 1em 15px;
-		font-size:1.7em;
+		font-size:1em;
 	}
 }
 
@@ -72,6 +61,22 @@ img { max-width: 100%; }
 		display: none;
 	}
 }
+
+/* Home */
+.demos p.home-intro {
+	font-size: 100%;
+	font-weight: 300;
+	line-height: 135%;
+	margin-top: .5em;
+	padding-bottom: .5em;
+	margin-left:.8em;
+	margin-right:.8em;
+	color: #777;
+}
+.demos .home-widget {
+	margin-left:.6em;
+}
+
 
 /* Content */
 .demos .ui-content  {
@@ -130,6 +135,7 @@ img { max-width: 100%; }
 	border-bottom-color: #ddd;
 	border-bottom-color: rgba(0,0,0,.1);
 }
+
 .demos h1.faq-question {
 	margin-top:-.4em;
 	font-size:1.8em;
@@ -189,6 +195,12 @@ img { max-width: 100%; }
 	font-weight:300;
 }
 
+.wrap-text .ui-li .ui-btn-text a.ui-link-inherit {
+	text-overflow: visible;
+	overflow: visible;
+	white-space: normal;
+}
+
 /* Nav menu */
 
 .demos .ui-panel-inner .ui-input-search {
@@ -200,6 +212,16 @@ img { max-width: 100%; }
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size:1em;
+}
+.demo-nav li .ui-li-heading  {
+	font-weight: 300; 
+	font-size: 1.1em;
+	color: #74b042;
+}
+.demo-nav li .ui-li-desc  {
+	font-weight: 300; 
+	font-size: .8em;
+	color: #666;
 }
 
 .demo-nav .ui-btn-up-d, 
