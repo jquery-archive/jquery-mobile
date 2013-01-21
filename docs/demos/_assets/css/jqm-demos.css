@@ -15,13 +15,6 @@ img { max-width: 100%; }
 	width: 180px;
 	height: 51px;
 }
-.jqm-demos-home .jqm-header h2 {
-	margin: 0 15px .3em;
-	font-size: 1.3em;
-	line-height: 1.25em;
-	border-top: 1px solid rgba(0,0,0,.08);
-	border-bottom: 1px solid rgba(0,0,0,.08);
-}
 .jqm-demos-home .jqm-header p.jqm-version {
 	display: none;
 }
@@ -38,19 +31,14 @@ img { max-width: 100%; }
 		width: 275px;
 		height: 78px;
 	}
-	.jqm-demos-home .jqm-header h2 {
-		float: right;
-		font-size: 1.5em;
-		margin: 1em 15px 0;
-		border: none;
-	}
 	.jqm-demos-home .jqm-header p.jqm-version {
 		display: block;
 		float: right;
 		clear: right;
-		margin: 0 15px;
-		font-size: .8em;
-		text-transform: uppercase;
+		margin: 1em 15px;
+		font-family: 'Open Sans', sans-serif;
+		font-weight:300;
+		font-size:1.7em;
 		color: #74b042;
 	}
 }
@@ -58,8 +46,10 @@ img { max-width: 100%; }
 /* Footer */
 .jqm-footer {
 	background: none;
-	border-top: 1px solid #B3B3B3;
-	color: #808080;
+	border-bottom-width: 1px;
+	border-color: #ddd;
+	border-color: rgba(0, 0, 0, .1);
+	color: #777;
 }
 .jqm-footer p {
 	font-size: .9em;
@@ -132,9 +122,13 @@ img { max-width: 100%; }
 	font-weight: 300;
 	line-height: 135%;
 	margin-top: -.5em;
+	margin-bottom: 0;
 	padding-bottom: 1.5em;
 	color: #777;
-	border-bottom: 1px solid rgba(0,0,0,.1);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #ddd;
+	border-bottom-color: rgba(0,0,0,.1);
 }
 .demos h1.faq-question {
 	margin-top:-.4em;
@@ -156,6 +150,14 @@ img { max-width: 100%; }
 }
 
 /* Section nav */
+.jqm-demos-home .ui-listview-filter {
+	margin-top: 1em;
+	margin-bottom: -.5em;
+}
+.jqm-demos-home .ui-input-search {
+	border-color: #ddd;
+	border-color: rgba(0, 0, 0, .1);
+}
 
 .demos .ui-panel {
 	margin-top: 10px;
