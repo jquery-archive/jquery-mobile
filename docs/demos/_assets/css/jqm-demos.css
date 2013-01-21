@@ -136,6 +136,10 @@ img { max-width: 100%; }
 	border-bottom-color: rgba(0,0,0,.1);
 }
 
+.demos p.demo-intro.demo-section {
+	border:0;
+}
+
 .demos h1.faq-question {
 	margin-top:-.4em;
 	font-size:1.8em;
@@ -251,8 +255,8 @@ img { max-width: 100%; }
 	font-size:.8em;
 	padding: .5em 15px;
 	background-image: none;
-	background-color: #e4e4e4;
-	border-color: #e4e4e4;
+	background-color: #e0e0e0;
+	border-color: #e0e0e0;
 }
 
 
