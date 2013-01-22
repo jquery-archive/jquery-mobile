@@ -113,22 +113,25 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 	// Close method goes back in history
 	close: function() {
-		var dst;
+		var idx, dst, hist = $.mobile.navigate.history;
 
 		if ( this._isCloseable ) {
 			this._isCloseable = false;
 			// If the hash listening is enabled and there is at least one preceding history
 			// entry it's ok to go back. Initial pages with the dialog hash state are an example
 			// where the stack check is necessary
-			if ( $.mobile.hashListeningEnabled && $.mobile.urlHistory.activeIndex > 0 ) {
+			if ( $.mobile.hashListeningEnabled && hist.activeIndex > 0 ) {
 				$.mobile.back();
 			} else {
-				dst = $.mobile.urlHistory.getActive().url;
+				idx = Math.max( 0, hist.activeIndex - 1 );
+				dst = hist.stack[ idx ].pageUrl || hist.stack[ idx ].url;
+				hist.previousIndex = hist.activeIndex;
+				hist.activeIndex = idx;
 				if ( !$.mobile.path.isPath( dst ) ) {
 					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
 				}
 
-				$.mobile.changePage( dst, { changeHash: false, fromHashChange: true } );
+				$.mobile.changePage( dst, { direction: "back", changeHash: false, fromHashChange: true } );
 			}
 		}
 	}
