@@ -9,6 +9,38 @@ define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMar
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+var attached = false;
+function attachEvents() {
+	if (attached) return;
+	$.mobile.document.on("focus", "button, [type='button'], [type='submit'], [type='reset']", function() {
+		$(this).addClass( $.mobile.focusClass );
+	});
+
+	$.mobile.document.on("blur", "button, [type='button'], [type='submit'], [type='reset']", function() {
+		$(this).removeClass( $.mobile.focusClass );
+	});
+
+	$.mobile.document.on("vclick", "[type='submit']", function() {
+		// Add hidden input during submit if input type="submit" has a name.
+		if (this.name) {
+			// Add hidden input if it doesn't already exist.
+			var $buttonPlaceholder = $(this).prev("input[type='hidden'][name='" + this.name + "']");
+			if ( !$buttonPlaceholder.length ) {
+				$buttonPlaceholder = $( "<input>", {
+					type: "hidden",
+					name: this.name,
+					value: this.value
+				}).insertBefore( this );
+				// Bind to doc to remove after submit handling
+				$.mobile.document.one( "submit", function() {
+					$buttonPlaceholder.remove();
+				});
+			}
+		}
+	});
+	attached = true;
+}
+
 $.widget( "mobile.button", $.mobile.widget, {
 	options: {
 		theme: null,
@@ -23,7 +55,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 	_create: function() {
 		var $el = this.element,
-			$button,
 			// create a copy of this.options we can pass to buttonMarkup
 			o = ( function( tdo ) {
 				var key, ret = {};
@@ -80,43 +111,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 			.addClass( classes )
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
-        $button = this.button;
-		type = $el.attr( "type" );
-		name = $el.attr( "name" );
-
-		// Add hidden input during submit if input type="submit" has a name.
-		if ( type !== "button" && type !== "reset" && name ) {
-				$el.bind( "vclick", function() {
-					// Add hidden input if it doesn't already exist.
-					if ( $buttonPlaceholder === undefined ) {
-						$buttonPlaceholder = $( "<input>", {
-							type: "hidden",
-							name: $el.attr( "name" ),
-							value: $el.attr( "value" )
-						}).insertBefore( $el );
-
-						// Bind to doc to remove after submit handling
-						$.mobile.document.one( "submit", function() {
-							$buttonPlaceholder.remove();
-
-							// reset the local var so that the hidden input
-							// will be re-added on subsequent clicks
-							$buttonPlaceholder = undefined;
-						});
-					}
-				});
-		}
-
-		$el.bind({
-			focus: function() {
-				$button.addClass( $.mobile.focusClass );
-			},
-
-			blur: function() {
-				$button.removeClass( $.mobile.focusClass );
-			}
-		});
-
+		attachEvents();
 		this.refresh();
 	},
 
