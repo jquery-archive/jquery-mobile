@@ -771,11 +771,7 @@ define( [
 				self.element
 					.delegate( opts.closeLinkSelector, opts.closeLinkEvents, function( e ) {
 						self.close();
-
-						// NOTE prevent the browser and navigation handlers from
-						// working with the link's rel=back. This may cause
-						// issues for developers expecting the event to bubble
-						return false;
+						e.preventDefault();
 					});
 
 				return;
