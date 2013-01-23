@@ -428,16 +428,20 @@
 			$label = $select.parent().siblings( "label" ),
 			$button = $select.siblings( "a" );
 
-		$.testHelper.pageSequence([
+		$.testHelper.detailedEventCascade([
 			function() {
 				$label.text( "foo" );
 				$button.click();
 			},
 
+			{ pagechange: { src: $.mobile.pageContainer, event: "pagechange.dialogSizeSelectTitleMod1" } },
+
 			function() {
 				deepEqual($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
 				window.history.back();
 			},
+
+			{ pagechange: { src: $.mobile.pageContainer, event: "pagechange.dialogSizeSelectTitleMod2" } },
 
 			start
 		]);
