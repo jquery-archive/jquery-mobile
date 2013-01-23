@@ -105,7 +105,13 @@ define( [
 				self.refresh();
 
 				if ( self._origTabIndex === undefined ) {
-					self._origTabIndex = self.select[ 0 ].hasAttribute( "tabindex" ) ? self.select.attr( "tabindex" ) : undefined;
+					
+					var t = self.select[0].getAttribute("tabindex") == null ? false : true;
+					self._origTabIndex = undefined;
+					if(t){
+                                          self._origTabIndex = self.select.attr( "tabindex" );
+					}
+					
 					// Map undefined to false, because self._origTabIndex === undefined
 					// indicates that we have not yet checked whether the select has
 					// originally had a tabindex attribute, whereas false indicates that
@@ -466,9 +472,11 @@ define( [
 						// If we have identified a placeholder, record the fact that it was
 						// us who have added the placeholder to the option and mark it
 						// retroactively in the select as well
-						if ( !option.hasAttribute( dataPlaceholderAttr ) ) {
-							this._removePlaceholderAttr = true;
+						var t = option.getAttribute(dataPlaceholderAttr) == null ? false : true;
+						if ( !t) {
+						  this._removePlaceholderAttr = true;
 						}
+						
 						option.setAttribute( dataPlaceholderAttr, true );
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
