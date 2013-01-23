@@ -105,7 +105,7 @@ define( [
 				self.refresh();
 
 				if ( self._origTabIndex === undefined ) {
-					self._origTabIndex = self.select[ 0 ].hasAttribute( "tabindex" ) ? self.select.attr( "tabindex" ) : undefined;
+					self._origTabIndex = ( self.select[ 0 ].getAttribute( "tabindex" ) === null ) ? undefined : self.select.attr( "tabindex" );
 					// Map undefined to false, because self._origTabIndex === undefined
 					// indicates that we have not yet checked whether the select has
 					// originally had a tabindex attribute, whereas false indicates that
@@ -466,7 +466,7 @@ define( [
 						// If we have identified a placeholder, record the fact that it was
 						// us who have added the placeholder to the option and mark it
 						// retroactively in the select as well
-						if ( !option.hasAttribute( dataPlaceholderAttr ) ) {
+						if ( null === option.getAttribute( dataPlaceholderAttr ) ) {
 							this._removePlaceholderAttr = true;
 						}
 						option.setAttribute( dataPlaceholderAttr, true );
