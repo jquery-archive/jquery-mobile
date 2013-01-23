@@ -105,15 +105,12 @@ define( [
 				self.refresh();
 
 				if ( self._origTabIndex === undefined ) {
-					self._origTabIndex = ( self.select[ 0 ].getAttribute( "tabindex" ) === null ) ? undefined : self.select.attr( "tabindex" );
 					// Map undefined to false, because self._origTabIndex === undefined
 					// indicates that we have not yet checked whether the select has
 					// originally had a tabindex attribute, whereas false indicates that
 					// we have checked the select for such an attribute, and have found
 					// none present.
-					if ( self._origTabIndex === undefined ) {
-						self._origTabIndex = false;
-					}
+					self._origTabIndex = ( self.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : self.select.attr( "tabindex" );
 				}
 				self.select.attr( "tabindex", "-1" ).focus(function() {
 					$( this ).blur();
