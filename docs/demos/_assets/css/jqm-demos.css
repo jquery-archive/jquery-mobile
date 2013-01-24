@@ -93,6 +93,9 @@ img { max-width: 100%; }
 	font-size:2.4em;
 	color: #555;
 }
+
+
+
 .demos .ui-content > h2,
 .demos .ui-content > h3,
 .demos .ui-content > h4 {
@@ -102,6 +105,12 @@ img { max-width: 100%; }
 	color: #74b042;
 	padding-top: .8em;
 }
+.demos .ui-content > h4 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size: 1.2em;
+}
+
 .demos .api-link {
 	float:right;
 	margin-top: .3em;
