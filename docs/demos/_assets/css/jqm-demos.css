@@ -163,11 +163,11 @@ img { max-width: 100%; }
 }
 
 /* Section nav */
-.jqm-demos-home .ui-listview-filter {
-	margin-top: 1em;
+.demos .ui-content .ui-listview-filter {
+	margin-top: 0;
 	margin-bottom: -.5em;
 }
-.jqm-demos-home .ui-input-search {
+.demos .ui-content .ui-input-search {
 	border-color: #ddd;
 	border-color: rgba(0, 0, 0, .1);
 }
