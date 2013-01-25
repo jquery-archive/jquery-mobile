@@ -49,6 +49,9 @@ define( [ "jquery", "./jquery.mobile.ns", "text!../version.txt" ], function( $, 
 		// Set maximum window width for transitions to apply - 'false' for no limit
 		maxTransitionWidth: false,
 
+		// Set maximum window width for resetActivePageHeight - 'false' for no limit
+		maxAutoHeightAdjustmentWidth: false,
+
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 250,
 
