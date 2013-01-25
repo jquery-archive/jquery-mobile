@@ -10,8 +10,9 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script>
-		// Configure options defaults
 		// Bind to "mobileinit" before you load jquery.mobile.js
+		
+		// Configure options defaults
 	</script>
 	<script src="../../../js/"></script>
 	<script>
@@ -28,10 +29,11 @@
 	</style>
 </head>
 <body>
-<div data-role="page" id="myMarkup">
+<div data-role="page" class="demos" id="myMarkup">
 
 	<div data-role="header" data-theme="f">
 		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
 	
@@ -43,14 +45,14 @@
             <p>This is a div with...</p>
             <p>data-demo-html="true" to include the markup in this div in the source code view.</p>
             <p>data-demo-js="true" to include all scripts from the head in the source code view.</p>
-            <p>data-demo-css="true" to include all style from the head in the source code view.</p>
+            <p>data-demo-css="true" to include all styles from the head in the source code view.</p>
         </div><!--/demo-html -->
         
         <h3>Specify which markup, script or style to show</h3>
         
         <div data-demo-html="#myMarkup" data-demo-js="#myScript" data-demo-css="#myStyle" data-demo-php="source.php">
             <p>This is a div with...</p>
-            <p>data-demo-html="#myMarkup" to include specific markup in the source code view.</p>
+            <p>data-demo-html="#myMarkup" to include specific markup in the source code view (in this example the whole page).</p>
             <p>data-demo-js="#myScript" to include a specific script from the head in the source code view.</p>
             <p>data-demo-css="#myStyle" to include a specific style from the head in the source code view.</p>
             <p>data-demo-php="source.php" to include PHP script from source.php, which is the plain text version of file-name.php, in the source code view (see files in this folder).</p> 
