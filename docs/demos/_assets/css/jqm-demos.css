@@ -181,6 +181,11 @@ img { max-width: 100%; }
 	margin-top: 10px;
 	min-height: auto;
 	bottom: 0;
+	overflow: hidden;
+}
+.demos .ui-panel-inner {
+	margin-bottom: -10px;
+	padding-bottom: 25px;
 }
 
 .demos a.demo-section-link {
