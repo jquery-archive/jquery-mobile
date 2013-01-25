@@ -292,11 +292,11 @@ define( [
 			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
 
-                // configurable option to avoid automatically resizing page on large screens
-                if (typeof height !== "number" && $.mobile.maxAutoHeightAdjustmentWidth !== false && $.mobile.window.width() > $.mobile.maxAutoHeightAdjustmentWidth) {
-                        aPage.css( "min-height", "");
-                        return;
-                }
+		// configurable option to avoid automatically resizing page on large screens
+		if (typeof height !== "number" && $.mobile.maxAutoHeightAdjustmentWidth !== false && $.mobile.window.width() > $.mobile.maxAutoHeightAdjustmentWidth) {
+			aPage.css( "min-height", "");
+			return;
+		}
 
 		height = ( typeof height === "number" )? height : getScreenHeight();
 		
