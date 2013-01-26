@@ -19,9 +19,13 @@ module.exports = function( grunt ) {
 
 	grunt.registerMultiTask( 'cssbuild', 'Resolve CSS @imports and concat files', function() {
 		var done = this.async(),
-			options = this.options({
+			_ = grunt.util._,
+			options = _.clone( this.options({
 				banner: ''
-			});
+			})),
+			banner = options.banner;
+
+		delete options.banner;
 
 		async.forEach( this.files,
 			function( file, callback ) {
@@ -33,22 +37,19 @@ module.exports = function( grunt ) {
 				async.series([
 					function( next ) {
 						// pull the includes together using require js
-						requirejs.optimize({
-							baseUrl: '.',
-
-							optimizeCss: 'standard.keepComments.keepLines',
-
-							cssIn: src,
-
-							out: dest
-						}, function( response ) {
+						requirejs.optimize(
+							_.extend({
+								cssIn: src,
+								out: dest
+							}, options
+						), function( response ) {
 							next();
 						});
 					},
 					function( next ) {
 						var contents = grunt.file.read( dest );
-						if ( options.banner ) {
-							contents = options.banner + contents;
+						if ( banner ) {
+							contents = banner + contents;
 						}
 						grunt.file.write( dest, contents );
 						grunt.log.writeln( "File '" + dest + "' written." );
