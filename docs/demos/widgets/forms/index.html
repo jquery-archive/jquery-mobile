@@ -4,28 +4,38 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Form reference - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+		<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
+		<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 
-	<script src="../../../../js/jquery.js"></script>
-	<script src="../../_assets/js/"></script>
-	<script src="../../../../js/"></script>
-</head>
-<body>
-<div data-role="page">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+		<script src="../../../../js/jquery.js"></script>
+		<script src="../../_assets/js/"></script>
+		<script src="../../../../js/"></script>
+	</head>
+	<body>
+	<div data-role="page" class="demos">
 
-	<div data-role="header" data-theme="f">
-		<h1>Form reference</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
-	</div><!-- /header -->
-	
-	<div data-role="content">
-	
-		<div class="content-primary">
+		<div data-role="panel" id="collapsible-sections" data-position="right" data-display="overlay" data-theme="c" class="demo-sections">
+			<p>To be generated via JS.</p>
+		</div>
+
+		<div data-role="header" data-theme="f">
+			<h1>jQuery Mobile</h1>
+			<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
+			<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+		</div><!-- /header -->
+
+		<div data-role="content" data-theme="c">
+
+				<h1>Forms</h1>
+
+
+				<p class="demo-intro">All form widgets begin with native form elements with rich HTML semantics that are enhanced to make them more attractive and finger-friendly.
+					<a href="#collapsible-sections" class="demo-section-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
+				</p>
 	
 			<h2>Buttons</h2>
 			
-			<h3>Basic buttons</h3>
 			<div data-demo-html="true">
 				<a href="#" data-role="button">Link button</a>
 				<input type="button" value="Button element" data-icon="delete" data-theme="b" />
@@ -39,7 +49,7 @@
 				<a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="notext" data-theme="e" data-mini="true">icon only button</a>
 			</div><!-- /demo-html -->
 			
-			<h3>Mini horizontal grouped buttons with icons and theme</h3>
+			<h3>Horizontal grouped buttons</h3>
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
 					<a href="#" data-role="button" data-icon="plus" data-theme="b">Add</a>
@@ -48,7 +58,7 @@
 				</div>
 			</div><!-- /demo-html -->
 	
-			<h2>Switches & Sliders</h2>
+			<h2>Sliders</h2>
 			
 			<div data-demo-html="true">
 				<label for="slider">Slider:</label>
@@ -65,6 +75,7 @@
 				<input type="range" name="slider-fill-mini" id="slider-fill-mini" value="40" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d" />
 			</div><!-- /demo-html -->
 	
+			<h2>Flip switch</h2>
 			<div data-demo-html="true">
 				<label for="slider2">Flip switch:</label>
 				<select name="slider2" id="slider2" data-role="slider">
@@ -221,7 +232,6 @@
 				 <input type="password" name="password" id="password" value="" autocomplete="off" />
 			</div><!-- /demo-html -->
 	   
-		</div><!--/content-primary -->
 	
 	</div><!-- /content -->
 	
@@ -229,6 +239,8 @@
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
+	
+	<?php include( '../../nav.html' ); ?>
 	
 </div><!-- /page -->
 </body>

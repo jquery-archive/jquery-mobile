@@ -7,205 +7,158 @@
 	<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
-    <style id="grid-style">
-		@media all and (max-width: 28em){
-			.ui-grid-a .ui-block-a,
-			.ui-grid-a .ui-block-b {
-				width: 100%;
-				clear: left;
-			}
-		}
-	</style>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" class="demos">
+
+	<div data-role="panel" id="collapsible-sections" data-position="right" data-display="overlay" data-theme="c" class="demo-sections">
+		<p>To be generated via JS.</p>
+	</div>
 
 	<div data-role="header" data-theme="f">
-		<h1>Slider widget</h1>
+		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
-	
-	<div data-role="content">
-	
-		<div class="content-primary">
+
+	<div data-role="content" data-theme="c">
+
+			<h1>Slider <a href="http://api.jquerymobile.com/slider/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="api-link">API</a></h1>
+
+
+			<p class="demo-intro">Sliders are used to enter numeric values along a continuum and can also be dual handle range sliders or flip switches.
+				<a href="#collapsible-sections" class="demo-section-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
+			</p>
         
-        	<form>
-            
-                <h2>Slider and Flip Toggle Switch</h2>
-                
-                <h3>Default</h3>
+        	
+                            
+                <h2>Basic slider</h2>
                 
                 <div data-demo-html="true">
+				<form>
                     <label for="slider-1">Slider:</label>
                     <input type="range" name="slider-1" id="slider-1" min="0" max="100" value="50">
+				</form>
                 </div><!-- /demo-html -->
-                
-                <div data-demo-html="true">
-                    <label for="flip-1">Flip toggle switch:</label>
-                    <select name="flip-1" id="flip-1" data-role="slider">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select> 
-                </div><!-- /demo-html -->
+               
 
-                <h3>Step attribute</h3>
+                <h2>Step attribute</h2>
                 
                 <div data-demo-html="true">
+				<form>
                     <label for="slider-10">Slider:</label>
                     <input type="range" name="slider-10" id="slider-10" min="0" max="10" step=".1" value="5">
+				</form>
                 </div><!-- /demo-html -->
                 
-                <h3>Highlight</h3>
+                <h2>Highlight</h2>
                 
                 <div data-demo-html="true">
+				<form>
                     <label for="slider-2">Slider (default is "false"):</label>
                     <input type="range" name="slider-2" id="slider-2" data-highlight="true" min="0" max="100" value="50">
+				</form>
                 </div><!-- /demo-html -->
 
-                <h3>Theming</h3>
+                <h2>Theme</h2>
                 
                 <div data-demo-html="true">
+				<form>
                     <label for="slider-3">Slider:</label>
                     <input type="range" name="slider-3" id="slider-3" data-track-theme="d" data-theme="b" min="0" max="100" value="50">
+				</form>
                 </div><!-- /demo-html -->
 
-                <div data-demo-html="true">
-                    <label for="flip-2">Flip toggle switch:</label>
-                    <select name="flip-2" id="flip-2" data-role="slider" data-track-theme="a" data-theme="a">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select> 
-                </div><!-- /demo-html -->
               
-                <h3>Mini sized</h3>
+                <h2>Mini sized</h2>
                 
                 <div data-demo-html="true">
+				<form>
                     <label for="slider-4">Slider:</label>
                     <input type="range" name="slider-4" id="slider-4" data-mini="true" min="0" max="100" value="50">
+				</form>
                 </div><!-- /demo-html -->
-                
-                <div data-demo-html="true">
-                    <label for="flip-3">Flip toggle switch:</label>
-                    <select name="flip-3" id="flip-3" data-role="slider" data-mini="true">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select> 
-                </div><!-- /demo-html -->
+
               
-                <h3>Disabled</h3>
+                <h2>Disabled</h2>
                 
                 <div data-demo-html="true">
+				<form>
                     <label for="slider-5">Slider:</label>
                     <input type="range" name="slider-5" id="slider-5" disabled="disabled" min="0" max="100" value="50">
-                </div><!-- /demo-html -->
-                
-                <div data-demo-html="true">
-                    <label for="flip-4">Flip toggle switch:</label>
-                    <select name="flip-4" id="flip-4" data-role="slider" disabled="disabled">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select> 
+				</form>
                 </div><!-- /demo-html -->
 
-                <h3>Label hidden</h3>
+
+                <h2>Label hidden</h2>
                 
                 <div data-demo-html="true">
+				<form>
                     <label for="slider-6" class="ui-hidden-accessible">Slider:</label>
                     <input type="range" name="slider-6" id="slider-6" min="0" max="100" value="50">
-                </div><!-- /demo-html -->
-                
-                <div data-demo-html="true">
-                    <label for="flip-5" class="ui-hidden-accessible">Flip toggle switch:</label>
-                    <select name="flip-5" id="flip-5" data-role="slider">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select> 
+				</form>
                 </div><!-- /demo-html -->
 
-                <h3>Fieldcontain</h3>
+
+                <h2>Fieldcontain</h2>
                 
                 <div data-demo-html="true">
+				<form>
 					<div data-role="fieldcontain">
                         <label for="slider-7">Slider:</label>
                         <input type="range" name="slider-7" id="slider-7" min="0" max="100" value="50">
 					</div>
+				</form>
                 </div><!-- /demo-html -->
                 
-                <div data-demo-html="true">
-					<div data-role="fieldcontain">
-                        <label for="flip-6">Flip toggle switch:</label>
-                        <select name="flip-6" id="flip-6" data-role="slider">
-                            <option value="off">Off</option>
-                            <option value="on">On</option>
-                        </select>
-					</div>
-                </div><!-- /demo-html -->
+   
 
-                <h3>Fieldcontain, mini sized</h3>
+                <h2>Fieldcontain, mini sized</h2>
                 
                 <div data-demo-html="true">
+				<form>
 					<div data-role="fieldcontain">
                         <label for="slider-8">Slider:</label>
                         <input type="range" name="slider-8" id="slider-8" data-mini="true" min="0" max="100" value="50">
 					</div>
-                </div><!-- /demo-html -->
-                
-                <div data-demo-html="true">
-					<div data-role="fieldcontain">
-                        <label for="flip-7">Flip toggle switch:</label>
-                        <select name="flip-7" id="flip-7" data-role="slider" data-mini="true">
-                            <option value="off">Off</option>
-                            <option value="on">On</option>
-                        </select>
-					</div>
+				</form>
                 </div><!-- /demo-html -->
 
-                <h3>Fieldcontain, hide label</h3>
+
+                <h2>Fieldcontain, hide label</h2>
                 
                 <div data-demo-html="true">
+				<form>
 					<div data-role="fieldcontain" class="ui-hide-label">
                         <label for="slider-9">Slider:</label>
                         <input type="range" name="slider-9" id="slider-9" min="0" max="100" value="50">
 					</div>
-                </div><!-- /demo-html -->
-                
-                <div data-demo-html="true">
-					<div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="flip-8">Flip toggle switch:</label>
-                        <select name="flip-8" id="flip-8" data-role="slider">
-                            <option value="off">Off</option>
-                            <option value="on">On</option>
-                        </select>
-					</div>
+				</form>
                 </div><!-- /demo-html -->
 
-                <h3>Fieldcontain, hide label, mini sized</h3>
+
+                <h2>Fieldcontain, hide label, mini sized</h2>
                 
                 <div data-demo-html="true">
+				<form>
 					<div data-role="fieldcontain" class="ui-hide-label">
                         <label for="slider-11">Slider:</label>
                         <input type="range" name="slider-11" id="slider-11" data-mini="true" min="0" max="100" value="50">
 					</div>
-                </div><!-- /demo-html -->
-                
-                <div data-demo-html="true">
-					<div data-role="fieldcontain" class="ui-hide-label">
-                        <label for="flip-9">Flip toggle switch:</label>
-                        <select name="flip-9" id="flip-9" data-role="slider" data-mini="true">
-                            <option value="off">Off</option>
-                            <option value="on">On</option>
-                        </select>
-					</div>
+				</form>
                 </div><!-- /demo-html -->
 
-                <h3>Grid</h3>
+
+                <h2>Grid</h2>
                 
                 <p>We make the grid blocks 100% width below 28em with custom CSS.</p>
                 
                 <div data-demo-html="true" data-demo-css="#grid-style">
+				<form>
                 	<div class="ui-grid-a">
                     	<div class="ui-block-a">
                             <label for="slider-12">Slider:</label>
@@ -230,11 +183,11 @@
                             </select>
         				</div><!-- /ui-block -->
                 	</div><!-- /ui-grid -->
+				</form>
                 </div><!-- /demo-html -->
                 
-			</form>
+	
 
-		</div><!--/content-primary -->
 	
 	</div><!-- /content -->
 	
@@ -242,6 +195,9 @@
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
+	
+	<?php include( '../../nav.html' ); ?>
+	
 	
 </div><!-- /page -->
 </body>
