@@ -13,7 +13,7 @@ module.exports = function( grunt ) {
 		banner = {
 			normal: [
 				"/*",
-				"* jQuery Mobile v<%= pkg.version %>",
+				"* jQuery Mobile <%= version %>",
 				"* http://jquerymobile.com",
 				"*",
 				"* Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors",
@@ -24,7 +24,7 @@ module.exports = function( grunt ) {
 				"",
 				"",
 				"" ].join( grunt.util.linefeed ),
-			minified: "/*! jQuery Mobile v<%= pkg.version %> | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */"
+			minified: "/*! jQuery Mobile <%= version %> | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */"
 		};
 
 	// grunt plugins
@@ -44,6 +44,8 @@ module.exports = function( grunt ) {
 	// Project configuration.
 	grunt.config.init({
 		pkg: grunt.file.readJSON( "package.json" ),
+
+		version: "v<%= pkg.version %>",
 
 		jshint: {
 			js: {
@@ -104,13 +106,23 @@ module.exports = function( grunt ) {
 					//line build, the current directory.
 					wrap: {
 						startFile: "build/wrap.start",
-						endFile:   "build/wrap.end"
+						endFile: "build/wrap.end"
 					},
 
 					onBuildWrite: function (moduleName, path, contents) {
-						return contents.replace(/__version__/g, grunt.config.process( "\"<%= pkg.version %>\"" ) );
+						return contents.replace(/__version__/g, grunt.config.process( "\"<%= version %>\"" ) );
 					}
 				}
+			}
+		},
+
+		concat: {
+			options: {
+				banner: banner.normal
+			},
+			js: {
+				src: [ dist + name + ".js" ],
+				dest: dist + name + ".js"
 			}
 		},
 
@@ -233,10 +245,13 @@ module.exports = function( grunt ) {
 
 	});
 
-	grunt.registerTask( "js",  [ "requirejs", "uglify" ] );
+	grunt.registerTask( "js",  [ "requirejs", "concat:js", "uglify" ] );
 	grunt.registerTask( "css", [ "cssbuild", "cssmin" ] );
 
+	grunt.registerTask( "dist", [ "config:dev", "js", "css" ] );
+	grunt.registerTask( "dist:release", [ "js", "css" ] );
+
 	// Default grunt
-	grunt.registerTask( "default", [ "js", "css" ] );
+	grunt.registerTask( "default", [ "dist" ] );
 
 };
