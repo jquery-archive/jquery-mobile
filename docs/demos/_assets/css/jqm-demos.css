@@ -80,9 +80,15 @@ body  {
 }
 
 /* Content */
+
+/* ### TEMPORARY ### */
 .demo-nav .ui-li-static {
 	opacity:.4;
 }
+.demo-nav .ui-li-static.demo-nav-header {
+	opacity: 1;
+}
+/* ### END ### */
 
 .demos .ui-content > h1 {
 	font-family: 'Open Sans', sans-serif;
@@ -130,7 +136,9 @@ body  {
 }
 
 .demos .ui-content code {
-	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;	
+	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+	background-color: #e5e5e5;
+	padding: 0 2px;
 }
 
 .demos .api-link,
