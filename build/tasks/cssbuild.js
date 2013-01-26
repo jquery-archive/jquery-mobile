@@ -1,6 +1,6 @@
 module.exports = function( grunt ) {
 	var requirejs = require( 'requirejs' ),
-		async = require( 'async' );
+		async = grunt.util.async;
 
 	requirejs.define('node/print', [], function() {
 		return function print(msg) {
