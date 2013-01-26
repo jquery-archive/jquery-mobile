@@ -80,6 +80,10 @@ body  {
 }
 
 /* Content */
+.demos .ui-li-static {
+	opacity:.4;
+}
+
 .demos .ui-content > h1 {
 	font-family: 'Open Sans', sans-serif;
 	font-weight:300;
