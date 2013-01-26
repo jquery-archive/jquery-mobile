@@ -22,6 +22,7 @@ module.exports = function( grunt ) {
 				"*",
 				"*/",
 				"",
+				"",
 				"" ].join( grunt.util.linefeed ),
 			minified: "/*! jQuery Mobile v<%= pkg.version %> | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */"
 		};
@@ -37,19 +38,8 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-git-authors" );
 	grunt.loadNpmTasks( "grunt-junit" );
 
-
-	function resolveCSSImports( filePath ) {
-		var dir = path.dirname( filePath ),
-			content = grunt.file.read( filePath ).toString(),
-			files = [];
-
-		content.replace(/@import\s+.*?['"]([^'"]+)/gim, function(match, location, a) {
-			grunt.log.debug( "importing: " + path.join( dir, location ));
-			files.push( path.resolve( path.join( dir, location )) );
-		});
-
-		return files;
-	}
+	// load the project's default tasks
+	grunt.loadTasks( 'build/tasks');
 
 	// Project configuration.
 	grunt.config.init({
@@ -141,14 +131,15 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		concat: {
+		cssbuild: {
 			options: {
 				banner: banner.normal
 			},
-			css: {
+			all: {
 				files: {
-					"dist/jquery.mobile.structure.css": resolveCSSImports( "css/structure/jquery.mobile.structure.css" ),
-					"dist/jquery.mobile.theme.css": [ "css/themes/default/jquery.mobile.theme.css" ]
+					"dist/jquery.mobile.structure.css": "css/structure/jquery.mobile.structure.css",
+					"dist/jquery.mobile.theme.css": "css/themes/default/jquery.mobile.theme.css",
+					"dist/jquery.mobile.css": "css/themes/default/jquery.mobile.css"
 				}
 			}
 		},
@@ -165,6 +156,11 @@ module.exports = function( grunt ) {
 			theme: {
 				files: {
 					"dist/jquery.mobile.theme.min.css": [ "dist/jquery.mobile.theme.css" ]
+				}
+			},
+			bundle: {
+				files: {
+					"dist/jquery.mobile.min.css": [ "dist/jquery.mobile.css" ]
 				}
 			}
 		},
@@ -220,7 +216,7 @@ module.exports = function( grunt ) {
 	});
 
 	grunt.registerTask( "js",  [ "requirejs", "uglify" ] );
-	grunt.registerTask( "css", [ "concat", "cssmin" ] );
+	grunt.registerTask( "css", [ "cssbuild", "cssmin" ] );
 
 	// Default grunt
 	grunt.registerTask( "default", [ "js", "css" ] );
