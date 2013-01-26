@@ -97,8 +97,8 @@ module.exports = function( grunt ) {
 					exclude: [
 						"jquery",
 						"depend",
-						"text",
-						"text!../version.txt"
+						"json",
+						"json!../package.json"
 					],
 
 					out: path.join( dist, name ) + ".js",
@@ -115,7 +115,7 @@ module.exports = function( grunt ) {
 					},
 
 					onBuildWrite: function (moduleName, path, contents) {
-						return contents.replace(/__version__/g, grunt.config.process( "\"<%= version %>\"" ) );
+						return contents.replace(/__version__/g, grunt.config.process( "\"<%= pkg.version %>\"" ) );
 					}
 				}
 			}
