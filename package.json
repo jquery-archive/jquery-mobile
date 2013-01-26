@@ -30,7 +30,9 @@
     "grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
     "grunt-contrib-requirejs": "0.3.4",
     "grunt-git-authors": "1.1.0-beta.1",
-    "grunt-contrib-qunit": "git://github.com/gruntjs/grunt-contrib-qunit.git"
+    "grunt-contrib-qunit": "git://github.com/gruntjs/grunt-contrib-qunit.git",
+    "grunt-contrib-connect": "git://github.com/gruntjs/grunt-contrib-connect.git",
+	"grunt-css": "git://github.com/jzaefferer/grunt-css.git"
   },
   "keywords": []
 }

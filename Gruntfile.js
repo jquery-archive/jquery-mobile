@@ -1,22 +1,55 @@
 module.exports = function( grunt ) {
 	"use strict";
 
-	var distpaths = [
-		"dist/jquery.mobile.js",
-		"dist/jquery.mobile.min.map",
-		"dist/jquery.mobile.min.js"
-	];
+	var path = require( "path" ),
+		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
+		name = "jquery.mobile",
+		dist = "dist/",
+		distpaths = [
+			dist + name + ".js",
+			dist + name + ".min.map",
+			dist + name + ".min.js"
+		],
+		banner = {
+			normal: [
+				"/*",
+				"* jQuery Mobile v<%= pkg.version %>",
+				"* http://jquerymobile.com",
+				"*",
+				"* Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors",
+				"* Released under the MIT license.",
+				"* http://jquery.org/license",
+				"*",
+				"*/",
+				"",
+				"" ].join( grunt.util.linefeed ),
+			minified: "/*! jQuery Mobile v<%= pkg.version %> | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */"
+		};
 
 	// grunt plugins
 	grunt.loadNpmTasks( "grunt-contrib-jshint" );
 	grunt.loadNpmTasks( "grunt-contrib-uglify" );
 	grunt.loadNpmTasks( "grunt-contrib-concat" );
+	grunt.loadNpmTasks( "grunt-contrib-connect" );
 	grunt.loadNpmTasks( "grunt-contrib-qunit" );
 	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
 	grunt.loadNpmTasks( "grunt-css" );
 	grunt.loadNpmTasks( "grunt-git-authors" );
 	grunt.loadNpmTasks( "grunt-junit" );
 
+
+	function resolveCSSImports( filePath ) {
+		var dir = path.dirname( filePath ),
+			content = grunt.file.read( filePath ).toString(),
+			files = [];
+
+		content.replace(/@import\s+.*?['"]([^'"]+)/gim, function(match, location, a) {
+			grunt.log.debug( "importing: " + path.join( dir, location ));
+			files.push( path.resolve( path.join( dir, location )) );
+		});
+
+		return files;
+	}
 
 	// Project configuration.
 	grunt.config.init({
@@ -42,10 +75,10 @@ module.exports = function( grunt ) {
 		},
 
 		requirejs: {
-			compile: {
+			js: {
 				options: {
 					baseUrl: "js",
-					dir: "dist",
+
 					optimize: "none",
 
 					//Finds require() dependencies inside a require() or define call.
@@ -62,13 +95,16 @@ module.exports = function( grunt ) {
 
 					mainConfigFile: "js/requirejs.config.js",
 
-					name: "jquery.mobile",
+					name: name,
+
 					exclude: [
 						"jquery",
 						"depend",
 						"text",
 						"text!../version.txt"
 					],
+
+					out: dist + name + ".js",
 
 					pragmasOnSave: {
 						jqmBuildExclude: true
@@ -81,22 +117,65 @@ module.exports = function( grunt ) {
 						endFile:   "build/wrap.end"
 					},
 
-					dirExclusionRegExp: /^\.|^build|^compiled|^tmp/
+					onBuildWrite: function (moduleName, path, contents) {
+						//Always return a value.
+						//This is just a contrived example.
+						return contents.replace(/__version__/g, grunt.config.process( "\"<%= pkg.version %>\"" ) );
+					}
 				}
 			}
 		},
 
 		uglify: {
 			all: {
-				files: {
-					"dist/jquery.mobile.min.js": [ "dist/jquery.mobile.js" ]
-				},
 				options: {
-					banner: "/*! jQuery Mobile v<%= pkg.version %> | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */",
-					sourceMap: "dist/jquery.mobile.min.map",
+					banner: banner.minified,
+					sourceMapRoot: "dist",
+					sourceMapPrefix: 1,
+					sourceMap: dist + name + ".min.map",
 					beautify: {
 						ascii_only: true
 					}
+				},
+				files: {
+					"dist/jquery.mobile.min.js": [ dist + name + ".js" ]
+				}
+			}
+		},
+
+		concat: {
+			options: {
+				banner: banner.normal
+			},
+			css: {
+				files: {
+					"dist/jquery.mobile.structure.css": resolveCSSImports( "css/structure/jquery.mobile.structure.css" ),
+					"dist/jquery.mobile.theme.css": [ "css/themes/default/jquery.mobile.theme.css" ]
+				}
+			}
+		},
+
+		cssmin: {
+			options: {
+				banner: banner.minified
+			},
+			structure: {
+				files: {
+					"dist/jquery.mobile.structure.min.css": [ "dist/jquery.mobile.structure.css" ]
+				}
+			},
+			theme: {
+				files: {
+					"dist/jquery.mobile.theme.min.css": [ "dist/jquery.mobile.theme.css" ]
+				}
+			}
+		},
+
+		connect: {
+			server: {
+				options: {
+					port: httpPort,
+					base: '.'
 				}
 			}
 		},
@@ -105,29 +184,47 @@ module.exports = function( grunt ) {
 			options: {
 				timeout: 10000
 			},
-			all: [
-				"tests/unit/**/*.html",
-				"!tests/unit/checkboxradio/form-result.html",
+			files: [
+				"tests/unit/**/index.html",
 				"!tests/unit/core/index.html",
-				"!tests/unit/dialog/dialog-no-hash.html",
 				"!tests/unit/dialog/index.html",
 				"!tests/unit/event/index.html",
 				"!tests/unit/kitchensink/index.html",
 				"!tests/unit/init/**",
 				"!tests/unit/listview/cache-tests/*",
-				"!tests/unit/listview/push-state-disabled-tests.html",
 				"!tests/unit/loader/**",
 				"!tests/unit/navigation/**",
-				"!tests/unit/popup/back-two.html",
-				"!tests/unit/popup/other.html",
-				"!tests/unit/popup/popup-sequence-test-dialog.html",
 				"!tests/unit/select/cached*"
-			]
+			],
+			http: {
+				options: {
+					urls: [
+						"http://localhost:9001/tests/unit/core/index.html",
+						"http://localhost:9001/tests/unit/dialog/index.html",
+						"http://localhost:9001/tests/unit/event/index.html"
+//				"!tests/unit/kitchensink/index.html",
+//				"!tests/unit/init/**",
+//				"!tests/unit/listview/cache-tests/*",
+//				"!tests/unit/listview/push-state-disabled-tests.html",
+//				"!tests/unit/loader/**",
+//				"!tests/unit/navigation/**",
+//				"!tests/unit/popup/back-two.html",
+//				"!tests/unit/popup/other.html",
+//				"!tests/unit/popup/popup-sequence-test-dialog.html",
+//				"!tests/unit/select/cached*"
+
+					]
+				}
+
+			}
 		}
 
 	});
 
+	grunt.registerTask( "js",  [ "requirejs", "uglify" ] );
+	grunt.registerTask( "css", [ "concat", "cssmin" ] );
+
 	// Default grunt
-	grunt.registerTask( "default", [ "requirejs", "uglify" ] );
+	grunt.registerTask( "default", [ "js", "css" ] );
 
 };
