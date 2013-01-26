@@ -105,7 +105,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if ( $.support.cssTransform3d && !!self.options.animate ) {
 			this.element.addClass( self.options.classes.animate );
 		}
-
+		
+		self._bindUpdateLayout();
 		self._bindCloseEvents();
 		self._bindLinkListeners();
 		self._bindPageEvents();
@@ -166,7 +167,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var self = this,
 			pannelInnerHeight = self._pannelInner.outerHeight(),
 			expand = pannelInnerHeight > $.mobile.getScreenHeight();
-			
+
 		if ( expand || !self.options.positionFixed ) {
 			if ( expand ) {
 				self._unfixPanel();
@@ -202,6 +203,16 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if ( !!this.options.positionFixed && $.support.fixedPosition ) {
 			this.element.addClass( this.options.classes.panelFixed );
 		}
+	},
+	
+	_bindUpdateLayout: function() {
+		var self = this;
+		
+		self.element.on( "updatelayout", function( e ) {
+			if ( self._open ) {
+				self._positionPanel();
+			}
+		});
 	},
 
 	_bindLinkListeners: function() {
@@ -393,7 +404,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.off( "swipeleft.panel swiperight.panel" )
 			.off( "panelbeforeopen" )
 			.off( "panelhide" )
-			.off( "keyup.panel" );
+			.off( "keyup.panel" )
+			.off( "updatelayout" );
 
 		this._closeLink.off( "click.panel" );
 
