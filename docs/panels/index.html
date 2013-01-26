@@ -77,6 +77,8 @@
 			</code></pre>
 
 			<p>Alternately, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want to page content to read for people experiencing the page in a C-grade device (HTML only) or for a screen reader.</p>
+            
+            <p>If a page contains a panel the framework wraps the header, content and footer sections in a <code>div</code>. When opening a panel with display mode "reveal" or "push" the transition is applied to this wrapper. An exception is fixed headers and footers. Those are not included in the wrapper, but will transition in sync with it. Be aware of the fact that all your visible page content should live inside those page sections.</p>
 
 
 			<h2>Panel markup conventions</h2>
