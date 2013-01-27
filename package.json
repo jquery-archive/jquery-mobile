@@ -33,6 +33,7 @@
 		"grunt-contrib-qunit": "git://github.com/gruntjs/grunt-contrib-qunit.git",
 		"grunt-contrib-connect": "git://github.com/gruntjs/grunt-contrib-connect.git",
 		"grunt-css": "git://github.com/jzaefferer/grunt-css.git",
+		"grunt-zip": "git://github.com/gseguin/grunt-zip.git",
 		"requirejs": "2.1.x"
 	},
 	"main": "Gruntfile.js",

@@ -37,6 +37,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-css" );
 	grunt.loadNpmTasks( "grunt-git-authors" );
 	grunt.loadNpmTasks( "grunt-junit" );
+	grunt.loadNpmTasks( "grunt-zip" );
 
 	// load the project's default tasks
 	grunt.loadTasks( 'build/tasks');
@@ -192,6 +193,20 @@ module.exports = function( grunt ) {
 				files: {
 					"dist/jquery.mobile.min.css": "dist/jquery.mobile.css"
 				}
+			}
+		},
+
+		zip: {
+			dist: {
+				options: {
+					baseDir: dist
+				},
+				
+				// Files to zip together
+				src: [ dist + "/*.js", dist + "/*.css" ],
+
+				// Destination of zip file
+				dest: path.join( dist, name ) + ".zip"
 			}
 		},
 
