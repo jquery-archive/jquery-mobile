@@ -4,11 +4,11 @@ module.exports = function( grunt ) {
 	var path = require( "path" ),
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
 		name = "jquery.mobile",
-		dist = "dist/",
+		dist = "dist",
 		distpaths = [
-			dist + name + ".js",
-			dist + name + ".min.map",
-			dist + name + ".min.js"
+			path.join( dist, name ) + ".js",
+			path.join( dist, name ) + ".min.map",
+			path.join( dist, name ) + ".min.js"
 		],
 		banner = {
 			normal: [
@@ -96,7 +96,7 @@ module.exports = function( grunt ) {
 						"json!../package.json"
 					],
 
-					out: dist + name + ".js",
+					out: path.join( dist, name ) + ".js",
 
 					pragmasOnSave: {
 						jqmBuildExclude: true
@@ -121,8 +121,8 @@ module.exports = function( grunt ) {
 				banner: banner.normal
 			},
 			js: {
-				src: [ dist + name + ".js" ],
-				dest: dist + name + ".js"
+				src: [ path.join( dist, name ) + ".js" ],
+				dest: path.join( dist, name ) + ".js"
 			}
 		},
 
@@ -130,15 +130,15 @@ module.exports = function( grunt ) {
 			all: {
 				options: {
 					banner: banner.minified,
-					sourceMapRoot: "dist",
+					sourceMapRoot: dist,
 					sourceMapPrefix: 1,
-					sourceMap: dist + name + ".min.map",
+					sourceMap: path.join( dist, name ) + ".min.map",
 					beautify: {
 						ascii_only: true
 					}
 				},
 				files: {
-					"dist/jquery.mobile.min.js": [ dist + name + ".js" ]
+					"dist/jquery.mobile.min.js": [ path.join( dist, name ) + ".js" ]
 				}
 			}
 		},
@@ -180,17 +180,17 @@ module.exports = function( grunt ) {
 			},
 			structure: {
 				files: {
-					"dist/jquery.mobile.structure.min.css": [ "dist/jquery.mobile.structure.css" ]
+					"dist/jquery.mobile.structure.min.css": "dist/jquery.mobile.structure.css"
 				}
 			},
 			theme: {
 				files: {
-					"dist/jquery.mobile.theme.min.css": [ "dist/jquery.mobile.theme.css" ]
+					"dist/jquery.mobile.theme.min.css": "dist/jquery.mobile.theme.css"
 				}
 			},
 			bundle: {
 				files: {
-					"dist/jquery.mobile.min.css": [ "dist/jquery.mobile.css" ]
+					"dist/jquery.mobile.min.css": "dist/jquery.mobile.css"
 				}
 			}
 		},
@@ -247,11 +247,13 @@ module.exports = function( grunt ) {
 
 	});
 
-	grunt.registerTask( "js",  [ "requirejs", "concat:js", "uglify" ] );
-	grunt.registerTask( "css", [ "cssbuild", "cssmin" ] );
+	grunt.registerTask( "js",  [ "config:dev", "requirejs", "concat:js", "uglify" ] );
+	grunt.registerTask( "js:release",  [ "config:dev", "requirejs", "concat:js", "uglify" ] );
+	grunt.registerTask( "css", [ "config:dev", "cssbuild", "cssmin" ] );
+	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
 
-	grunt.registerTask( "dist", [ "config:dev", "js", "css" ] );
-	grunt.registerTask( "dist:release", [ "js", "css" ] );
+	grunt.registerTask( "dist", [ "js", "css" ] );
+	grunt.registerTask( "dist:release", [ "js:release", "css:release" ] );
 
 	grunt.registerTask( "test", [ "qunit:files", "connect", "qunit:http" ] );
 
