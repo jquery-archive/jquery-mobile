@@ -16,7 +16,7 @@
 <body>
 <div data-role="page" class="demos">
 
-	<div data-role="panel" id="button-sections" data-position="right" data-display="overlay" data-theme="c" class="demo-sections">
+	<div data-role="panel" id="header-sections" data-position="right" data-display="overlay" data-theme="c" class="demo-sections">
 		
 		<ul data-role="listview" data-inset="false" data-theme="d" data-divider-theme="d" class="demo-nav">
 			
@@ -31,11 +31,11 @@
 	
 	<div data-role="content" data-theme="c">
 				
-			<h1>Header toolbars <a href="http://api.jquerymobile.com/header/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="api-link">API</a></h1>
+			<h1>Headers <a href="http://api.jquerymobile.com/header/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="api-link">API</a></h1>
 
 		
 			<p class="demo-intro">The header is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the left and/or right of the title for navigation or actions.
-				<a href="#button-sections" class="demo-section-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
+				<a href="#header-sections" class="demo-section-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
 			</p>
 	
             
@@ -50,6 +50,19 @@
 				</div>
 			</div><!-- /demo-html --> 
 
+
+			<h2>Fixed position</h2>
+			
+			<p>The header can be set to fixed position by adding the <code>data-position="fixed"</code> to the header.</p>
+			
+			<a href="bars-fixed.html" data-role="button" data-inline="true">Fixed toolbars</a>
+			
+			<h2>Fullscreen position</h2>
+			
+			<p>The header can be set to fullscreen fixed position that overlays the toolbars over the content by adding the <code>data-fullscreen="true"</code> to a fixed header.</p>
+			
+			<a href="bars-fullscreen.html" data-role="button" data-inline="true">Fullscreen toolbars</a>
+			
 			<h2>Theme</h2>
 			<p>The <code>header</code> toolbar is themed with the "a" swatch by default (black in the default theme) but you can easily <a href="bars-themes.html">set the theme swatch color</a>.</p> 
 
@@ -62,6 +75,9 @@
 			<p> Headers can optionally be positioned as <a href="bars-fixed.html">fixed</a> so they remain at the top of the screen at all times instead of scrolling with the page.</p> 
 
 	
+			
+			
+			
 			<h2>Buttons</h2>
 			
 			<p>The header plugin looks for immediate children of the header container, and automatically sets the first link in the left button slot and the second link in the right. In this example, the 'Cancel' button will appear in the left slot and 'Save' will appear in the right slot based on their sequence in the source order. </p> 
@@ -76,7 +92,7 @@
 			
 			
 			
-			<h3>Making buttons visually stand out</h3>
+			<h2>Making buttons visually stand out</h2>
 			
 			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. To make a button visually stand out add a <code> data-theme</code> attribute to set the button swatch for contrast.</p>
 			
@@ -90,7 +106,7 @@
 			
 			
 	
-			<h3>Button position classes</h3>
+			<h2>Button position classes</h2>
 	
 			<p>The button position can also be controlled by adding classes to the button anchors, rather than relying on source order. This is especially useful if you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
 
@@ -104,7 +120,7 @@
 			
 			
 			
-			<h3>Buttons in toolbars without a heading</h3>
+			<h2>Buttons in toolbars without a heading</h2>
 	
 			<p>The heading in the header bar has some margin that will give the bar its height. If you choose not to use a heading, you will need to add an element with <code>class="ui-title"</code> so that the bar can get the height and display correctly.</p> 
 
