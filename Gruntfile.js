@@ -218,14 +218,16 @@ module.exports = function( grunt ) {
 				"!tests/unit/listview/cache-tests/*",
 				"!tests/unit/loader/**",
 				"!tests/unit/navigation/**",
-				"!tests/unit/select/cached*"
+				"!tests/unit/select/cached*",
+				"!tests/unit/support/index.html"
 			],
 			http: {
 				options: {
 					urls: [
-						"http://localhost:9001/tests/unit/core/index.html",
-						"http://localhost:9001/tests/unit/dialog/index.html",
-						"http://localhost:9001/tests/unit/event/index.html"
+//						"http://localhost:<%= connect.server.options.port %>/tests/unit/core/index.html",
+						"http://localhost:<%= connect.server.options.port %>/tests/unit/dialog/index.html",
+						"http://localhost:<%= connect.server.options.port %>/tests/unit/event/index.html",
+						"http://localhost:<%= connect.server.options.port %>/tests/unit/support/index.html"
 //				"!tests/unit/kitchensink/index.html",
 //				"!tests/unit/init/**",
 //				"!tests/unit/listview/cache-tests/*",
@@ -250,6 +252,8 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "dist", [ "config:dev", "js", "css" ] );
 	grunt.registerTask( "dist:release", [ "js", "css" ] );
+
+	grunt.registerTask( "test", [ "qunit:files", "connect", "qunit:http" ] );
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );
