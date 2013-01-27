@@ -79,7 +79,14 @@
 			<p>Alternately, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want to page content to read for people experiencing the page in a C-grade device (HTML only) or for a screen reader.</p>
             
             <p>If a page contains a panel the framework wraps the header, content and footer sections in a <code>div</code>. When opening a panel with display mode "reveal" or "push" the transition is applied to this wrapper. An exception is fixed headers and footers. Those are not included in the wrapper, but will transition in sync with it. Be aware of the fact that all your visible page content should live inside those page sections.</p>
+            
+            <h4>CSS column-count &amp; forms</h4>
+            
+            <p>To avoid blinks when opening a panel, we force hardware acceleration on WebKit browsers. The CSS that is used to do this can cause issues with form elements on the page if you use <code>column-count</code> to layout the form. To resolve this you have to set the following rule for the <code>div</code> that contains the form or the field container of each form element: 
 
+			<pre><code>
+-webkit-transform: translate3d(0,0,0);
+			</code></pre>
 
 			<h2>Panel markup conventions</h2>
 			

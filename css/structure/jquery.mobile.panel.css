@@ -72,10 +72,6 @@
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translate3d(0,0,0);
 }
-/* for Chrome desktop/Android/iOS */
-.ui-panel-animate.ui-panel-animate.ui-panel-content-wrap div {
-	-webkit-transform: translate3d(0,0,0);
-}
 
 /* positioning: panel */
 /* panel left  */
