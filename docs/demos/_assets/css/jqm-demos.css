@@ -208,12 +208,6 @@ body, .jqm-demos  {
 	font-size: .8em;
 	opacity: .6
 }
-.jqm-list .ui-li-has-arrow.ui-li-has-count .ui-li-count {
-	right: 15px;
-}
-.jqm-list .ui-icon {
-	display: none;
-}
 
 /* List dividers */
 .jqm-list .ui-bar-d {
@@ -256,9 +250,14 @@ body, .jqm-demos  {
 	white-space: normal;
 }
 
-/* ### TEMPORARY disabled ### */
+/* ### TEMPORARY ### */
+/* disabled */
 .jqm-content .jqm-list .ui-li-static {
 	opacity: .4;
+}
+/* ui-li-count position: count bubble position when icon is false needs to be fixed in the framework CSS */
+.jqm-list .ui-li-count {
+	right: 10px !important;
 }
 /* ### END ### */
 
