@@ -29,11 +29,12 @@ module.exports = function( grunt ) {
 
 	// grunt plugins
 	grunt.loadNpmTasks( "grunt-contrib-jshint" );
-	grunt.loadNpmTasks( "grunt-contrib-uglify" );
+	grunt.loadNpmTasks( "grunt-contrib-copy" );
 	grunt.loadNpmTasks( "grunt-contrib-concat" );
 	grunt.loadNpmTasks( "grunt-contrib-connect" );
 	grunt.loadNpmTasks( "grunt-contrib-qunit" );
 	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
+	grunt.loadNpmTasks( "grunt-contrib-uglify" );
 	grunt.loadNpmTasks( "grunt-css" );
 	grunt.loadNpmTasks( "grunt-git-authors" );
 	grunt.loadNpmTasks( "grunt-junit" );
@@ -196,14 +197,23 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		copy: {
+			images: {
+				src: "css/themes/default/images",
+				dest: path.join( dist, "images" ),
+			}
+		},
+
 		zip: {
 			dist: {
 				options: {
 					baseDir: dist
 				},
-				
 				// Files to zip together
-				src: [ dist + "/*.js", dist + "/*.css" ],
+				src: [
+					path.join( dist, "**" ),
+					"!<%= zip.dist.dest %>"
+				],
 
 				// Destination of zip file
 				dest: path.join( dist, name ) + ".zip"
@@ -267,8 +277,10 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "css", [ "config:dev", "cssbuild", "cssmin" ] );
 	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
 
-	grunt.registerTask( "dist", [ "js", "css" ] );
-	grunt.registerTask( "dist:release", [ "js:release", "css:release" ] );
+	grunt.registerTask( "dist:common", [ "copy:images", "zip:dist" ] );
+
+	grunt.registerTask( "dist", [ "js", "css", "dist:common" ] );
+	grunt.registerTask( "dist:release", [ "js:release", "css:release", "dist:common" ] );
 
 	grunt.registerTask( "test", [ "qunit:files", "connect", "qunit:http" ] );
 
