@@ -861,11 +861,10 @@ a.ui-link-inherit {
 	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-bars, .ui-icon-edit, .ui-icon-search, .ui-icon-searchfield:after, 
 	.ui-icon-checkbox-off, .ui-icon-checkbox-on, .ui-icon-radio-off, .ui-icon-radio-on {
 		background-image: url(images/icons-36-white.png);
-		/* Set the background size 2px larger to avoid rounding errors in chrome */
-		-moz-background-size: 840px 18px;
-		-o-background-size: 840px 18px;
-		-webkit-background-size: 840px 18px;
-		background-size: 840px 18px;
+		-moz-background-size: 864px 18px;
+		-o-background-size: 864px 18px;
+		-webkit-background-size: 864px 18px;
+		background-size: 864px 18px;
 	}
 	.ui-icon-alt {
 		background-image: url(images/icons-36-black.png);
@@ -874,87 +873,162 @@ a.ui-link-inherit {
 
 /* plus minus */
 .ui-icon-plus {
-	background-position: 	-0 50%;
+	background-position: 	-1px -1px;
 }
 .ui-icon-minus {
-	background-position: 	-36px 50%;
+	background-position: 	-37px -1px;
 }
-
 /* delete/close */
 .ui-icon-delete {
-	background-position: 	-72px 50%;
+	background-position: 	-73px -1px;
 }
-
 /* arrows */
 .ui-icon-arrow-r {
-	background-position: 	-108px 50%;
+	background-position: 	-109px -1px;
 }
 .ui-icon-arrow-l {
-	background-position: 	-144px 50%;
+	background-position: 	-144px -1px;
 }
 .ui-icon-arrow-u {
-	background-position: 	-180px 50%;
+	background-position: 	-180px -1px;
 }
 .ui-icon-arrow-d {
-	background-position: 	-216px 50%;
+	background-position: 	-216px -1px;
 }
-
 /* misc */
 .ui-icon-check {
-	background-position: 	-252px 50%;
+	background-position: 	-252px -1px;
 }
 .ui-icon-gear {
-	background-position: 	-288px 50%;
+	background-position: 	-288px -1px;
 }
 .ui-icon-refresh {
-	background-position: 	-324px 50%;
+	background-position: 	-323px -1px;
 }
 .ui-icon-forward {
-	background-position: 	-360px 50%;
+	background-position: 	-360px -1px;
 }
 .ui-icon-back {
-	background-position: 	-396px 50%;
+	background-position: 	-396px -1px;
 }
 .ui-icon-grid {
-	background-position: 	-432px 50%;
+	background-position: 	-432px -1px;
 }
 .ui-icon-star {
-	background-position: 	-468px 50%;
+	background-position: 	-467px -1px;
 }
 .ui-icon-alert {
-	background-position: 	-504px 50%;
+	background-position: 	-503px -1px;
 }
 .ui-icon-info {
-	background-position: 	-540px 50%;
+	background-position: 	-539px -1px;
 }
 .ui-icon-home {
-	background-position: 	-576px 50%;
+	background-position: 	-575px -1px;
 }
-.ui-icon-bars {
-	background-position: 	-785px 50%;
-
-}.ui-icon-edit {
-	background-position: 	-824px 50%;
-}
-
-
+/* search */
 .ui-icon-search,
 .ui-icon-searchfield:after {
-	background-position: 	-612px 50%;
+	background-position: 	-611px -1px;
+}
+/* checkbox radio */
+.ui-icon-checkbox-on {
+	background-position: 	-647px -1px;
 }
 .ui-icon-checkbox-off {
-	background-position: 	-684px 50%;
-}
-.ui-icon-checkbox-on {
-	background-position: 	-648px 50%;
-}
-.ui-icon-radio-off {
-	background-position: 	-756px 50%;
+	background-position: 	-683px -1px;
 }
 .ui-icon-radio-on {
-	background-position: 	-720px 50%;
+	background-position: 	-718px -1px;
+}
+.ui-icon-radio-off {
+	background-position: 	-754px -1px;
+}
+/* menu edit */
+.ui-icon-bars {
+	background-position: 	-788px -1px;
+
+}.ui-icon-edit {
+	background-position: 	-824px -1px;
 }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+       only screen and (min--moz-device-pixel-ratio: 1.3),
+       only screen and (min-resolution: 200dpi) {
+	.ui-icon-plus {
+		background-position: 	0px 50%;
+	}
+	.ui-icon-minus {
+		background-position: 	-36px 50%;
+	}
+	.ui-icon-delete {
+		background-position: 	-72px 50%;
+	}
+	.ui-icon-arrow-r {
+		background-position: 	-108px 50%;
+	}
+	.ui-icon-arrow-l {
+		background-position: 	-144px 50%;
+	}
+	.ui-icon-arrow-u {
+		background-position: 	-179px 50%;
+	}
+	.ui-icon-arrow-d {
+		background-position: 	-215px 50%;
+	}
+	.ui-icon-check {
+		background-position: 	-252px 50%;
+	}
+	.ui-icon-gear {
+		background-position: 	-287px 50%;
+	}
+	.ui-icon-refresh {
+		background-position: 	-323px 50%;
+	}
+	.ui-icon-forward {
+		background-position: 	-360px 50%;
+	}
+	.ui-icon-back {
+		background-position: 	-395px 50%;
+	}
+	.ui-icon-grid {
+		background-position: 	-431px 50%;
+	}
+	.ui-icon-star {
+		background-position: 	-467px 50%;
+	}
+	.ui-icon-alert {
+		background-position: 	-503px 50%;
+	}
+	.ui-icon-info {
+		background-position: 	-538px 50%;
+	}
+	.ui-icon-home {
+		background-position: 	-575px 50%;
+	}
+	.ui-icon-search,
+	.ui-icon-searchfield:after {
+		background-position: 	-611px 50%;
+	}
+	.ui-icon-checkbox-on {
+		background-position: 	-647px 50%;
+	}
+	.ui-icon-checkbox-off {
+		background-position: 	-683px 50%;
+	}
+	.ui-icon-radio-on {
+		background-position: 	-718px 50%;
+	}
+	.ui-icon-radio-off {
+		background-position: 	-754px 50%;
+	}
+	.ui-icon-bars {
+		background-position: 	-788px 50%;
+	
+	}.ui-icon-edit {
+		background-position: 	-824px 50%;
+	}
+}
 
 /* checks,radios */
 .ui-checkbox .ui-icon,
