@@ -7,33 +7,33 @@
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="_assets/favicon.ico">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
-	
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
 	<script src="../../js/jquery.js"></script>
 	<script src="_assets/js/"></script>
 	<script src="../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos-home demos">
+<div data-role="page" class="jqm-demos jqm-demos-home">
 
-	<div data-role="header" data-theme="f">
+	<div data-role="header" class="jqm-header" data-theme="f">
 		<p class="jqm-version"></p>
 	</div><!-- /header -->
 	
-	<div data-role="content">
+	<div data-role="content" class="jqm-content">
 		
 		<h1 id="jqm-logo"><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
         
-		<p class="home-intro">Welcome. This is an in-progress re-design of the jQuery Mobile demos site.</p>
+		<p class="jqm-intro">Welcome. This is an in-progress re-design of the jQuery Mobile demos site.</p>
 
-		<ul data-role="listview" data-inset="true" data-theme="d" data-filter-placeholder="Search..." class="demo-nav wrap-text">
+		<ul data-role="listview" data-inset="true" data-theme="d" data-filter-placeholder="Search..." class="jqm-list wrap-text">
             <li><a href="guides/"><h2>Guides</h2><p>Helpful articles and tutorials to get you up to speed.</p></a></li>
             <li><a href="demos/"><h2>Demos</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
             <li><a href="faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
 		</ul>
 		
-		<h2 class="home-widget">Widget showcase</h2>
-		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-filter-placeholder="Search..." class="demo-nav wrap-text">
+		<h2>Widget showcase</h2>
+        
+		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-filter-placeholder="Search..." class="jqm-list">
             <li data-role="list-divider">Widget reference</li>
             <li><a href="widgets/accordions/">Accordion</a></li>
             <li><a href="widgets/ajax-nav/">AJAX Navigation</a></li>
@@ -70,7 +70,7 @@
 
 	</div><!-- /content -->
 	
-	<div class="jqm-footer">
+	<div data-role="footer" class="jqm-footer" data-theme="c">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->

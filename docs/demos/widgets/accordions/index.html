@@ -7,19 +7,18 @@
 	<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
-
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="demos">
+<div data-role="page" class="jqm-demos">
 
-	<div data-role="panel" id="accordion-sections" data-position="right" data-display="overlay" data-theme="c" class="demo-sections">
+	<div data-role="panel" id="accordion-sections" class="jqm-nav-panel" data-position="right" data-display="overlay" data-theme="c">
 		
-		<ul data-role="listview" data-inset="false" data-theme="d" data-divider-theme="d" class="demo-nav">
-			<li class="demo-nav-header">Jump to section</li>
+		<ul data-role="listview" data-inset="false" data-theme="d" data-divider-theme="d" class="jqm-list">
+			<li class="jqm-list-header">Jump to section</li>
             <li><a href="#accordion-markup" data-ajax="false">Markup</a></li>
             <li><a href="#accordion-inline" data-ajax="false">Inline</a></li>
             <li><a href="#accordion-mini" data-ajax="false">Mini</a></li>
@@ -30,19 +29,19 @@
         </ul>
 	</div>
 
-	<div data-role="header" data-theme="f">
+	<div data-role="header" class="jqm-header" data-theme="f">
 		<h1>jQuery Mobile</h1>
 		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
 	
-	<div data-role="content" data-theme="c">
+	<div data-role="content" class="jqm-content">
 				
-			<h1>Accordions <a href="http://api.jquerymobile.com/collapsible-set/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="api-link">API</a></h1>
+			<h1>Accordions <a href="http://api.jquerymobile.com/collapsible-set/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 		
-			<p class="demo-intro">An accordion is created in jQuery Mobile by grouping a series of individual collapsibles into set.
-				<a href="#accordion-sections" class="demo-section-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
+			<p class="jqm-intro">An accordion is created in jQuery Mobile by grouping a series of individual collapsibles into set.
+				<a href="#accordion-sections" class="jqm-sections-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
 			</p>
 			
 		
@@ -253,7 +252,7 @@
 			
 	</div><!-- /content -->
 	
-	<div data-role="footer" data-theme="c" class="jqm-footer">
+	<div data-role="footer" class="jqm-footer" data-theme="c">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
