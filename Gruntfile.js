@@ -131,8 +131,8 @@ module.exports = function( grunt ) {
 		uglify: {
 			all: {
 				options: {
+					cwd: dist,
 					banner: banner.minified,
-					sourceMapRoot: dist,
 					sourceMapPrefix: 1,
 					sourceMap: path.join( dist, name ) + ".min.map",
 					beautify: {
@@ -140,7 +140,8 @@ module.exports = function( grunt ) {
 					}
 				},
 				files: {
-					"dist/jquery.mobile.min.js": [ path.join( dist, name ) + ".js" ]
+					src: path.join( dist, name ) + ".js",
+					dest: path.join( dist, name ) + "min.js"
 				}
 			}
 		},
