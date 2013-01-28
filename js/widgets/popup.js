@@ -161,17 +161,34 @@ define( [
 			}
 		},
 
-		// When the popup is open, attempting to focus on an element that is not a child of the popup will redirect focus to the popup
+		// When the popup is open, attempting to focus on an element that is not a
+		// child of the popup will redirect focus to the popup
 		_handleDocumentFocusIn: function( e ) {
-			if ( this._isOpen &&
-				e.target !== this._ui.container[ 0 ] &&
-				0 === $( e.target ).parents().filter( this._ui.container[ 0 ] ).length ) {
+			var tgt = e.target, $tgt, ui = this._ui;
 
-				this._ui.container.focus();
-				e.preventDefault();
-				e.stopImmediatePropagation();
-				return false;
+			if ( !this._isOpen ) {
+				return;
 			}
+
+			if ( tgt !== ui.container[ 0 ] ) {
+				$tgt = $( e.target );
+				if ( 0 === $tgt.parents().filter( ui.container[ 0 ] ).length ) {
+					$( document.activeElement ).one( "focus", function( e ) {
+						$tgt.blur();
+					});
+					ui.focusElement.focus();
+					e.preventDefault();
+					e.stopImmediatePropagation();
+					return false;
+				} else if ( ui.focusElement[ 0 ] === ui.container[ 0 ] ) {
+					ui.focusElement = $tgt;
+				}
+			} else if ( ui.focusElement && ui.focusElement[ 0 ] !== ui.container[ 0 ] ) {
+				ui.container.blur();
+				ui.focusElement.focus();
+			}
+
+			this._expectResizeEvent();
 		},
 
 		_create: function() {
@@ -208,6 +225,7 @@ define( [
 				ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
 			}
 			ui.container.append( this.element );
+			ui.focusElement = ui.container;
 
 			// Add class to popup element
 			this.element.addClass( "ui-popup" );
