@@ -140,8 +140,7 @@ module.exports = function( grunt ) {
 					}
 				},
 				files: {
-					src: path.join( dist, name ) + ".js",
-					dest: path.join( dist, name ) + "min.js"
+					"dist/jquery.mobile.min.js": path.join( dist, name ) + ".js",
 				}
 			}
 		},
