@@ -11,6 +11,14 @@
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
+    <script id="icon-color-demo">
+		$( document ).on( "pagecreate", function() {
+			$( ".other-icon-color .ui-icon" ).addClass( "ui-icon-alt" );
+		});
+	</script>
+    <style id="icon-bg-demo">
+		.no-disc .ui-icon { background-color: transparent; }	
+	</style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos">
@@ -106,16 +114,29 @@
         </div><!--/demo-html -->
         
         
+        <h2>Removing the disc and shadow</h2>
+        
+        <p>There is dark semi-opaque disc behind each icon to ensure good contrast when placed on any background color. If you prefer to not have this disc, it can be removed with a bit of custom CSS. Set <code>data-iconshadow="false"</code> to disable the icon shadow.<p>
+			
+        <div data-demo-html="true" data-demo-css="#icon-bg-demo">	
+            <a href="index.html" class="no-disc" data-role="button" data-theme="b" data-icon="minus" data-iconpos="notext" data-inline="true">Minus</a>
+            <a href="index.html" data-role="button" data-theme="b" data-icon="plus" data-iconpos="notext" data-inline="true">Plus</a>
+            <br>
+            <a href="index.html" class="no-disc" data-role="button" data-iconshadow="false" data-theme="b" data-icon="arrow-u" data-iconpos="notext" data-inline="true">Up</a>
+            <a href="index.html" data-role="button" data-iconshadow="false" data-theme="b" data-icon="arrow-d" data-iconpos="notext" data-inline="true">Down</a>
+        </div><!--/demo-html -->
+			
+        
         <h2>Black vs. white icon sets</h2>
         
-        <p>The white vs. black icon sprite is set at the theme level but you can override which is used.<p>
+        <p>The white vs. black icon sprite is set at the theme level but you can override which is used by adding the <code>ui-icon-alt</code> class. This also changes the color that is used for the dics.<p>
+        
+        <div data-demo-html="true" data-demo-js="#icon-color-demo">	
+            <a href="index.html" class="other-icon-color" data-role="button" data-theme="b" data-icon="minus" data-iconpos="notext" data-inline="true">Minus</a>
+            <a href="index.html" data-role="button" data-theme="b" data-icon="plus" data-iconpos="notext" data-inline="true">Plus</a>
+        </div><!--/demo-html -->
         
         
-        <h2>Removing the disc</h2>
-        
-        <p>There is dark semi-opaque disc behind each icon to ensure good contrast when placed on any background color. If you prefer to not have this disc, it can be removed with a bit of custom CSS<p>
-			
-			
         <h2>Custom Icons</h2>
         
         <p>To use custom icons, specify a <code>data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code> data-icon</code> value and apply it to the button: <code>ui-icon-myapp-email</code>.</p>
