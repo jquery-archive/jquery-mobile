@@ -31,13 +31,13 @@
 			<p class="jqm-intro">This is probably because the element you see in the markup (button, form element, etc.) isn't the same after enhancements have been applied. In order to style elements and add behavior, jQuery Mobile modifies the original markup with additional classes and elements which could impact your CSS selectors. Use a web inspector to view the post-enhancement markup to find the right selectors to use.</p>
 			
 			<p>Let's look at an example to illustrate the enhancements. Here is the starting markup for a button:</p>	
-<pre class="brush: html">
+<pre class="brush: html"><code>
 // Button before enhancement
 &#60;button&#62;Button element&#60;/button&#62;				
-</pre>
+</code></pre>
 			
 			<p>After enhancement, the button markup has been modified by the framework to add classes and wrap the contents for styling:</p>	
-<pre class="brush: html">
+<pre class="brush: html"><code>
 // Button after enhancement
 &#60;div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="null" data-iconpos="null" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" aria-disabled="false"&#62;
 	&#60;span class="ui-btn-inner ui-btn-corner-all"&#62;
@@ -45,7 +45,7 @@
 	&#60;/span&#62;
 	&#60;button class="ui-btn-hidden" aria-disabled="false"&#62;Button element&#60;/button&#62;
 &#60;/div&#62;					
-</pre>
+</code></pre>
 
 			<p>As you can see from the code snippet above the markup has significantly changed after enhancement. The original button you added has ben wrapped in a div and had several spans added. The original button you added is now also hidden. To change the visual styling of the button you must target the new enhanced markup not the button you added.</p>
 			

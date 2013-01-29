@@ -154,7 +154,8 @@
 
 		  <p>Alternatively, you can prefetch a page programmatically using <code>$.mobile.loadPage()</code>:</p>
 
-<pre><code>$.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
+<pre><code>
+$.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
 </code></pre>
 
 
@@ -170,14 +171,16 @@
 
     	<p>If you prefer, you can tell jQuery Mobile to keep previously-visited pages in the DOM instead of removing them. This lets you cache pages so that they're available instantly if the user returns to them.</p>
 
- <pre><code>$.mobile.page.prototype.options.domCache = true;
+<pre><code>
+$.mobile.page.prototype.options.domCache = true;
 </code></pre>
 
 		<p>Alternatively, to cache just a particular page, you can add the <code>data-dom-cache="true"</code> attribute to the page's container. </p>
 
 		<p>To keep all previously-visited pages in the DOM, set the <code>domCache</code> option on the page plugin to <code>true</code>, like this:</p>
 
-<pre><code><var>pageContainerElement</var>.page({ domCache: true });
+<pre><code>
+<var>pageContainerElement</var>.page({ domCache: true });
 </code></pre>
 
 		<p>Note that the contents of the first page isn't removed from the DOM, only pages loaded in via AJAX. Pages inside a multi-page template aren't affected by this feature at all - jQuery Mobile only removes pages loaded via Ajax.</p>
@@ -257,8 +260,7 @@
 
 			<p>When using the application cache with jQuery Mobile there is at least one important issue to consider. Some browsers, when making requests to the cache will report an http status of 0 on success. This causes jQuery Core's <code>$.ajax</code> to trigger error handlers. The suggested workaround for users leveraging the application cache is to use a jQuery Ajax pre-filter. Something like the following (credit to <a href="https://github.com/jquery/jquery-mobile/issues/1579#issuecomment-1209338" rel="external">jammus</a> for the snippet):</p>
 
-			<pre><code>
-
+<pre><code>
 $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 	if ( applicationCache &&
 		 applicationCache.status != applicationCache.UNCACHED &&
@@ -267,8 +269,7 @@ $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 		 options.isLocal = true;
 	}
 });
-
-			</code></pre>
+</code></pre>
 
 			<p>Setting <code>isLocal</code> to true for your Ajax requests will alert jQuery Core that it should handle the 0 return values differently. Local requests exhibit similar behavior (ie 0 statuses), and Core will then fall back to determining success based on the presence of content in the xhr <code>responseText</code> attribute.</p>
 

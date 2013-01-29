@@ -73,8 +73,11 @@
 			<li><strong>To override framework styles only for smaller screens, use a <code>max-width</code> breakpoint instead.</strong>  This allows you to constrain your style overrides to only apply below a certain screen width. Above this width, all the normal styles will apply so this is good for certain types of overrides.</li>
 		</ul>
       
+      
 		<h2>Putting it together</h2>
+        
 		<p>Here is a simple skeleton of a mobile-first stylesheet that starts with mobile-first styles, then builds up a responsive layout by adding two breakpoints:</p>
+        
 <pre><code>
 <strong>/* Start with core styles outside of a media query that apply to mobile and up */
 /* Global typography and design elements, stacked containers */
@@ -104,7 +107,6 @@ a:link { color:purple; }
 	/* You can also tweak any other styles in a breakpoint */
 	H1 { color: blue; font-size:1.2em }
 }
-
 </code></pre>
 		
 		

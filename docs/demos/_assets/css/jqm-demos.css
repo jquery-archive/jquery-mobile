@@ -136,11 +136,12 @@ body, .jqm-demos  {
 	padding: 0 2px;
 }
 .jqm-content pre {
-	padding: 0 1em;
+	padding: 0 1em 1.2em;
 	white-space: pre-wrap;	
 }
 .jqm-content pre > code {
-	background: none;	
+	padding: 0;	
+	background: none;
 }
 
 /* Buttons */
