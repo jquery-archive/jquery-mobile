@@ -829,8 +829,8 @@ a.ui-link-inherit {
 
 .ui-icon,
 .ui-icon-searchfield:after {
-	background: 						#666 /*{global-icon-color}*/;
-	background: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
+	background-color: 						#666 /*{global-icon-color}*/;
+	background-color: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
 	background-image: url(images/icons-18-white.png) /*{global-icon-set}*/;
 	background-repeat: no-repeat;
 	-webkit-border-radius: 				9px;
@@ -843,8 +843,8 @@ a.ui-link-inherit {
 
 .ui-icon-alt .ui-icon,
 .ui-icon-alt .ui-icon-searchfield:after {
-	background: 						#fff;
-	background: 						rgba(255,255,255,.3);
+	background-color: 						#fff;
+	background-color: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
 	background-repeat: no-repeat;
 }
