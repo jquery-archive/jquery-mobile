@@ -1,9 +1,5 @@
-var fs = require( 'fs' ),
-	path = require( 'path' ),
-	child_process = require( 'child_process' ),
-	glob = require( 'glob-whatev' );
-
 module.exports = function( grunt ) {
+	"use strict";
 	grunt.registerTask( 'config:dev', 'Retrieve git hashes for output headers', function() {
 		var done = this.async();
 
