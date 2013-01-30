@@ -295,10 +295,6 @@ define([
 
 				// TODO all this crap is terrible, clean it up
 				if ( isPath ) {
-					// Get a hash where possible and, as long as it's not a path
-					// preserve it on the current url
-					preservedHash = (uri.hash || path.parseLocation().hash);
-
 					// reject the hash if it's a path or it's just a dialog key
 					if( path.isPath( preservedHash ) || preservedHash.replace("#", "").indexOf( this.uiStateKey ) === 0) {
 						preservedHash = "";

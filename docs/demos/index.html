@@ -6,81 +6,70 @@
 	<title>jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	
 	<script src="../../js/jquery.js"></script>
 	<script src="_assets/js/"></script>
 	<script src="../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos-home">
+<div data-role="page" class="jqm-demos-home demos">
 
-	<div class="jqm-header">
-		<h1 id="jqm-logo"><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
-		<h2>Demos</h2>
+	<div data-role="header" data-theme="f">
 		<p class="jqm-version"></p>
+	</div><!-- /header -->
+	
+	<div class="jqm-header">
+		
+		
 	</div><!-- /jqm-header -->
 
 	<div data-role="content">
+		
+		<h1 id="jqm-logo"><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
+		<p class="home-intro">Welcome. This is an in-progress re-design of the jQuery Mobile demos site.</p>
 
-		<div class="content-primary">
+		<ul data-role="listview" data-inset="true" data-theme="d" data-filter-placeholder="Search..." class="demo-nav wrap-text">
+            <li><a href="guides/"><h2>Guides</h2><p>Helpful articles and tutorials to get you up to speed.</p></a></li>
+            <li><a href="demos/"><h2>Demos</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
+            <li><a href="faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
+		</ul>
+		
+		<h2 class="home-widget">Widget showcase</h2>
+		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-filter-placeholder="Search..." class="demo-nav wrap-text">
+            <li data-role="list-divider" data-theme="c">Widget reference</li>
+            <li><a href="widgets/accordions/">Accordion</a></li>
+            <li><a href="widgets/ajax-nav/">AJAX Navigation</a></li>
+            <li><a href="widgets/autocomplete/">Autocomplete</a></li>
+            <li><a href="widgets/buttons/">Button</a></li>
+            <li><a href="widgets/checkbox/">Checkboxes</a></li>
+            <li><a href="widgets/collapsibles/">Collapsibles</a></li>
+            <li><a href="widgets/controlgroups/">Controlgroup</a></li>
+            <li>Dialog</li>
+            <li><a href="widgets/sliders/switch.html">Flip switch toggle</a></li>
+            <li>Footer toolbar</li>
+            <li><a href="widgets/forms/">Form elements</a></li>
+            <li>Grid</li>
+            <li>Header toolbar</li>
+            <li>Icon</li>
+            <li><a href="widgets/listviews/">Listview</a></li>
+            <li>Link</li>
+            <li>Loader overlay</a></li>
+            <li>Navbar</li>
+            <li>Page</li>
+            <li>Panel <span class="ui-li-count">New</span></li>
+            <li>Popup</li>
+            <li><a href="widgets/radiobuttons/">Radiobutton</a></li>
+            <li>Search input</li>
+            <li><a href="widgets/selects/">Select</a></li>
+            <li><a href="widgets/sliders/">Slider, single</a></li>
+            <li><a href="widgets/sliders/rangeslider.html">Slider, dual range <span class="ui-li-count">New</span></a></li>
+            <li>Table, column toggle <span class="ui-li-count">New</span></li>
+            <li>Table, reflow <span class="ui-li-count">New</span></li>
+            <li><a href="widgets/textinputs/">Text inputs & textarea</a></li>
+            <li>Transitions</li>
+        </ul>
 
-			<ul data-role="listview" data-inset="true">
-				<li data-role="list-divider">Forms</li>
-				<li><a href="forms/index.html" data-ajax="false">Form reference</a></li>
-				<li><a href="forms/form.html" data-ajax="false">Form</a></li>
-				<li><a href="forms/form-fieldcontain.html" data-ajax="false">Form field containers</a></li>
-				<li><a href="forms/form-label-hidden.html" data-ajax="false">Form label/legend ui-hidden-accessible</a></li>
-				<li><a href="forms/form-hide-label.html" data-ajax="false">Form field containers ui-hide-label</a></li>
-				<li><a href="forms/form-disabled.html" data-ajax="false">Form disabled</a></li>
-				<li data-role="list-divider">Buttons</li>
-				<li><a href="buttons/buttons.html" data-ajax="false">Buttons</a></li>
-				<li><a href="buttons/buttons-grids.html" data-ajax="false">Buttons in grids</a></li>
-				<li data-role="list-divider">Controlgroups</li>
-				<li><a href="controlgroups/controlgroups.html" data-ajax="false">Controlgroups</a></li>
-			  	<li data-role="list-divider">Checkbox &amp; Radio buttons</li>
-				<li><a href="checkboxradio/checkboxradio.html" data-ajax="false">Checkbox &amp; Radio buttons</a></li>
-			  	<li data-role="list-divider">Selects</li>
-				<li><a href="selects/selects.html" data-ajax="false">Native selects</a></li>
-				<li><a href="selects/custom-selects.html" data-ajax="false">Custom selects</a></li>
-				<li data-role="list-divider">Sliders</li>
-				<li><a href="sliders/slider.html" data-ajax="false">Slider and Flip Toggle Switch</a></li>
-				<li><a href="sliders/rangeslider.html" data-ajax="false">Rangeslider</a></li>
-			  	<li data-role="list-divider">Textinput</li>
-				<li><a href="textinput/textinput.html" data-ajax="false">Textinput</a></li>
-				<li data-role="list-divider">Collapsibles</li>
-				<li><a href="collapsibles/collapsible.html" data-ajax="false">Collapsible</a></li>
-				<li><a href="collapsibles/collapsible-set.html" data-ajax="false">Collapsible Set</a></li>
-				<li data-role="list-divider">Listviews</li>
-				<li><a href="listviews/listview.html" data-ajax="false">Listviews</a></li>
-				<li><a href="listviews/listview-filter-autodividers.html" data-ajax="false">Listview Autodividers</a></li>
-                <li><a href="listviews/listview-filter-reveal.html" data-ajax="false">Autocomplete listview from a local source</a></li>
-				<li><a href="listviews/listview-filter-autocomplete.html" data-ajax="false">Autocomplete listview from a remote source</a></li>
-				<li><a href="listviews/listview-forms.html" data-ajax="false">Forms in listviews</a></li>
-				<li><a href="listviews/collapsible-listview.html" data-ajax="false">Collapsible listviews</a></li>
-				<li data-role="list-divider">Grids</li>
-				<li><a href="grids/rwd-basics.html" data-ajax="false">Responsive (RWD) basics</a></li>
-				<li><a href="grids/grid-stack.html" data-ajax="false">Responsive grids, stack at mobile</a></li>
-				<li><a href="grids/grid-custom.html" data-ajax="false">Custom responsive grid</a></li>
-				<li data-role="list-divider">Panels</li>
-				<li><a href="panels/panel-nav-form.html" data-ajax="false">Panel with nav and form</a></li>
-				<li><a href="panels/panel-nav-form-fixed.html" data-ajax="false">Panel fixed position toolbar and panels</a></li>
-				<li data-role="list-divider">Popups</li>
-				<li><a href="popups/dynamic-popup.html" data-ajax="false">Dynamic popup</a></li>
-				<li data-role="list-divider">Responsive Tables</li>
-				<li><a href="tables/reflow-basic.html" data-ajax="false">Reflow: Basic</a></li>
-				<li><a href="tables/movie-list.html" data-ajax="false">Reflow: Movie</a></li>
-				<li><a href="tables/financial-grouped-reflow.html" data-ajax="false">Reflow: Financial w/heading groups</a></li>
-				<li><a href="tables/column-basic.html" data-ajax="false">Column toggle: Basic</a></li>
-				<li><a href="tables/movie-list-toggle-options.html" data-ajax="false">Column toggle: Movies</a></li>
-				<li><a href="tables/phone-compare.html" data-ajax="false">Column toggle: Phone comparison</a></li>
-				<li><a href="tables/financial-grouped-columns.html" data-ajax="false">Column toggle: Financial w/heading groups</a></li>
-				<li data-role="list-divider">Navigation</li>
-				<li><a href="redirect/index.html" data-ajax="false">Redirection with server-side support</a></li>
-				<li data-role="list-divider">Events</li>
-				<li><a href="swipe/swipe-page.html" data-ajax="false">Swipe page</a></li>
-				<li><a href="swipe/swipe-list.html" data-ajax="false">Swipe list</a></li>
-			</ul>
-
-		</div><!--/content-primary -->
 
 	</div><!-- /content -->
 	

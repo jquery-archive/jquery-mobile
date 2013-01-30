@@ -67,14 +67,14 @@
 
 			<h2>Clear button option</h2>
 
-			<p>To add a clear button to any input (like the search input), add the <code>data-clear-btn="true"</code> attribute. The text for this clear button can be customized via the <code>data-clear-btn-text="clear input"</code> attribute. Search buttons have the clear button by default but can be controlled by this option. Note that this is available for all the input types below except for <code>textareas</code>.</p>
+			<p>To add a clear button to any input (like the search input), add the <code>data-clear-btn="true"</code> attribute. The text for this clear button can be customized via the <code>data-clear-btn-text="clear input"</code> attribute. Search buttons have the clear button by default and cannot be controlled by this option. Note that this is available for all the input types below except for <code>textareas</code>.</p>
 
 		<pre><code>	
 &lt;label for=&quot;clear-demo&quot;&gt;Text Input:&lt;/label&gt;
 &lt;input type=&quot;text&quot; name=&quot;clear&quot; id=&quot;clear-demo&quot; value=&quot;&quot; <strong>data-clear-btn=&quot;true&quot;</strong> /&gt;
 		</code></pre>
 
-					<p>This will produce an input that is not as tall as the standard version and has a smaller text size.</p>
+					<p>This markup creates a text input with a clear button that becomes visible as soon as a character has been entered.</p>
 			         <label for="clear-demo">Text Input:</label>
 			         <input type="text" name="clear-demo" id="clear-demo" value="" data-clear-btn="true" />
 			

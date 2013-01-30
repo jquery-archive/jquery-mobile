@@ -16,7 +16,7 @@ $(document).bind("pagecreate", function() {
 		$("[data-setter]").each(function() {
 			var self = $(this),
 			    val = ($(this).is("[type='checkbox']") ? $(this).is(":checked") : $(this).val()),
-			    key = $(this).parent().find("label").text().match(/(^[a-z]*)/)[1],
+			    key = $("label[for='" + self.attr( "id" ) + "']" ).text().match(/(^[a-z]*)/)[1],
 			    apply = $("#button-" + key + "-apply").is(":checked");
 
 			if (apply) {

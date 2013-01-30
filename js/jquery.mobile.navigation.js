@@ -884,7 +884,9 @@ define( [
 		}
 
 		// Set the location hash.
-		if ( settings.changeHash !== false && url ) {
+		if ( url && !settings.fromHashChange ) {
+			var params;
+
 			// rebuilding the hash here since we loose it earlier on
 			// TODO preserve the originally passed in path
 			if( !path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
@@ -892,12 +894,18 @@ define( [
 			}
 
 			// TODO the property names here are just silly
-			$.mobile.navigate( url, {
+			params = {
 				transition: settings.transition,
 				title: pageTitle,
 				pageUrl: pageUrl,
 				role: settings.role
-			}, true);
+			};
+
+			if ( settings.changeHash !== false && $.mobile.hashListeningEnabled ) {
+				$.mobile.navigate( url, params, true);
+			} else if ( toPage[ 0 ] !== $.mobile.firstPage[ 0 ] ) {
+				$.mobile.navigate.history.add( url, params );
+			}
 		}
 
 		//set page title
@@ -1111,7 +1119,7 @@ define( [
 
 		// click routing - direct to HTTP or Ajax, accordingly
 		$.mobile.document.bind( "click", function( event ) {
-			if ( !$.mobile.linkBindingEnabled ) {
+			if ( !$.mobile.linkBindingEnabled || event.isDefaultPrevented() ) {
 				return;
 			}
 

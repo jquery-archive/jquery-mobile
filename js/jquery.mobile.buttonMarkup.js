@@ -9,12 +9,19 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+// This function calls getAttribute, which should be safe for data-* attributes
+var getAttrFixed = function( e, key ) {
+	var value = e.getAttribute( key );
+
+	return value === "true" ? true :
+		value === "false" ? false :
+		value === null ? undefined : value;
+};
+
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
-		mapToDataAttr = function( key, value ) {
-			e.setAttribute( "data-" + $.mobile.ns + key, value );
-			el.jqmData( key, value );
-		};
+		nsKey = "data-" + $.mobile.ns,
+		key;
 
 	// Enforce options to be of type string
 	options = ( options && ( $.type( options ) === "object" ) )? options : {};
@@ -22,14 +29,14 @@ $.fn.buttonMarkup = function( options ) {
 		var el = $workingSet.eq( i ),
 			e = el[ 0 ],
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
-				icon:       options.icon       !== undefined ? options.icon       : el.jqmData( "icon" ),
-				iconpos:    options.iconpos    !== undefined ? options.iconpos    : el.jqmData( "iconpos" ),
-				theme:      options.theme      !== undefined ? options.theme      : el.jqmData( "theme" ) || $.mobile.getInheritedTheme( el, "c" ),
-				inline:     options.inline     !== undefined ? options.inline     : el.jqmData( "inline" ),
-				shadow:     options.shadow     !== undefined ? options.shadow     : el.jqmData( "shadow" ),
-				corners:    options.corners    !== undefined ? options.corners    : el.jqmData( "corners" ),
-				iconshadow: options.iconshadow !== undefined ? options.iconshadow : el.jqmData( "iconshadow" ),
-				mini:       options.mini       !== undefined ? options.mini       : el.jqmData( "mini" )
+				icon:       options.icon       !== undefined ? options.icon       : getAttrFixed( e, nsKey + "icon" ),
+				iconpos:    options.iconpos    !== undefined ? options.iconpos    : getAttrFixed( e, nsKey + "iconpos" ),
+				theme:      options.theme      !== undefined ? options.theme      : getAttrFixed( e, nsKey + "theme" ) || $.mobile.getInheritedTheme( el, "c" ),
+				inline:     options.inline     !== undefined ? options.inline     : getAttrFixed( e, nsKey + "inline" ),
+				shadow:     options.shadow     !== undefined ? options.shadow     : getAttrFixed( e, nsKey + "shadow" ),
+				corners:    options.corners    !== undefined ? options.corners    : getAttrFixed( e, nsKey + "corners" ),
+				iconshadow: options.iconshadow !== undefined ? options.iconshadow : getAttrFixed( e, nsKey + "iconshadow" ),
+				mini:       options.mini       !== undefined ? options.mini       : getAttrFixed( e, nsKey + "mini" )
 			}, options ),
 
 			// Classes Defined
@@ -44,11 +51,13 @@ $.fn.buttonMarkup = function( options ) {
 			buttonIcon,
 			buttonElements;
 
-		$.each( o, mapToDataAttr );
+		for ( key in o ) {
+			e.setAttribute( nsKey + key, o[ key ] );
+		}
 
-		if ( el.jqmData( "rel" ) === "popup" && el.attr( "href" ) ) {
+		if ( getAttrFixed( e, nsKey + "rel" ) === "popup" && el.attr( "href" ) ) {
 			e.setAttribute( "aria-haspopup", true );
-			e.setAttribute( "aria-owns", e.getAttribute( "href" ) );
+			e.setAttribute( "aria-owns", el.attr( "href" ) );
 		}
 
 		// Check if this element is already enhanced

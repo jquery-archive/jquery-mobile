@@ -103,7 +103,7 @@ $.fn.viewSourceCode = function() {
 					data = "// Failed to retrieve PHP source code";
 				});
 
-			sources.push( { title: "PHP", theme: "g", brush: "php", data: fixData( data ) } );
+			sources.push( { title: "PHP", theme: "d", brush: "php", data: fixData( data ) } );
 		}
 
 		if ( self.is( "[data-demo-js]" ) ) {

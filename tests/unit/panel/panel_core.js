@@ -201,7 +201,13 @@
 		$panel.panel();
 	});
 
-	module( "dismissable panel" );
+	module( "dismissable panel", {
+		setup: function(){
+			$.Event.prototype.originalEvent = {
+				touches: [{ 'pageX' : 0 }, { 'pageY' : 0 }]
+			};
+		}
+	});
 
 	test( "dismissable", function() {
 		var $panel = $( "#panel-test-dismiss" );
@@ -211,13 +217,35 @@
 	asyncTest( "click on dismissable modal closes panel", function() {
 
 		expect( 1 );
-
+		
 		var $panel = $( "#panel-test-dismiss" ),
 			$modal = getModalFromPanel( $panel );
 
 		$panel.one( "panelopen", function() {
 
 			$modal.trigger( "mousedown" );
+
+		}).one( "panelclose", function() {
+
+			ok( true, "modal is closed" );
+			start();
+
+		});
+
+		$panel.panel( "open" );
+
+	});
+
+	asyncTest( "swipe on dismissable modal closes panel", function() {
+
+		expect( 1 );
+
+		var $panel = $( "#panel-test-dismiss" ),
+			$modal = getModalFromPanel( $panel );
+
+		$panel.one( "panelopen", function() {
+
+			$modal.trigger( "swipeleft" );
 
 		}).one( "panelclose", function() {
 

@@ -42,7 +42,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
 			label.prependTo( $el );
-			firstHandle.prependTo(_sliderLast);
+			firstHandle.prependTo( _sliderLast );
 
 			$.extend( this, {
 				_inputFirst: _inputFirst,
@@ -69,7 +69,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 		},
 
-		_dragFirstHandle: function() {
+		_dragFirstHandle: function( event ) {
 			//if the first handle is dragged send the event to the first slider
 			$.data( this._inputFirst.get(0), "mobileSlider" ).dragging = true;
 			$.data( this._inputFirst.get(0), "mobileSlider" ).refresh( event );

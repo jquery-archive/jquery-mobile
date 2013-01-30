@@ -862,10 +862,10 @@ a.ui-link-inherit {
 	.ui-icon-checkbox-off, .ui-icon-checkbox-on, .ui-icon-radio-off, .ui-icon-radio-on {
 		background-image: url(images/icons-36-white.png);
 		/* Set the background size 2px larger to avoid rounding errors in chrome */
-		-moz-background-size: 842px 18px;
-		-o-background-size: 842px 18px;
-		-webkit-background-size: 842px 18px;
-		background-size: 842px 18px;
+		-moz-background-size: 840px 18px;
+		-o-background-size: 840px 18px;
+		-webkit-background-size: 840px 18px;
+		background-size: 840px 18px;
 	}
 	.ui-icon-alt {
 		background-image: url(images/icons-36-black.png);

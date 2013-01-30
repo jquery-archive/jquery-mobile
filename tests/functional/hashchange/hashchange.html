@@ -21,6 +21,11 @@
 		if ( !!~location.search.indexOf( "popup-transition" ) ) {
 			$.mobile.popup.prototype.options.transition = "fade";
 		}
+		if ( !!~location.search.indexOf( "no-history" ) ) {
+			$.mobile.pushStateEnabled = false;
+			$.mobile.hashListeningEnabled = false;
+			$.mobile.changePage.defaults.changeHash = false;
+		}
 	});
 })( jQuery );
 	</script>

@@ -374,7 +374,7 @@ $.testHelper.delayStart();
 		testDataUrlHash( "#reverse-attr-data-url a", {hashOrPush: home + url } );
 	});
 
-	asyncTest( "last entry choosen amongst multiple identical url history stack entries on hash change", function(){
+	asyncTest( "last entry chosen amongst multiple identical url history stack entries on hash change", function(){
 		var stackLength = $.mobile.navigate.history.stack.length;
 
 		$.testHelper.pageSequence([

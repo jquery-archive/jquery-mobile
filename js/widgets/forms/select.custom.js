@@ -105,15 +105,12 @@ define( [
 				self.refresh();
 
 				if ( self._origTabIndex === undefined ) {
-					self._origTabIndex = self.select[ 0 ].hasAttribute( "tabindex" ) ? self.select.attr( "tabindex" ) : undefined;
 					// Map undefined to false, because self._origTabIndex === undefined
 					// indicates that we have not yet checked whether the select has
 					// originally had a tabindex attribute, whereas false indicates that
 					// we have checked the select for such an attribute, and have found
 					// none present.
-					if ( self._origTabIndex === undefined ) {
-						self._origTabIndex = false;
-					}
+					self._origTabIndex = ( self.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : self.select.attr( "tabindex" );
 				}
 				self.select.attr( "tabindex", "-1" ).focus(function() {
 					$( this ).blur();
@@ -466,7 +463,7 @@ define( [
 						// If we have identified a placeholder, record the fact that it was
 						// us who have added the placeholder to the option and mark it
 						// retroactively in the select as well
-						if ( !option.hasAttribute( dataPlaceholderAttr ) ) {
+						if ( null === option.getAttribute( dataPlaceholderAttr ) ) {
 							this._removePlaceholderAttr = true;
 						}
 						option.setAttribute( dataPlaceholderAttr, true );

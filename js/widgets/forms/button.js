@@ -17,16 +17,27 @@ $.widget( "mobile.button", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
+		inline: null,
+		mini: null,
 		initSelector: "button, [type='button'], [type='submit'], [type='reset']"
 	},
 	_create: function() {
 		var $el = this.element,
 			$button,
-			o = this.options,
+			// create a copy of this.options we can pass to buttonMarkup
+			o = ( function( tdo ) {
+				var key, ret = {};
+
+				for ( key in tdo ) {
+					if ( tdo[ key ] !== null && key !== "initSelector" ) {
+						ret[ key ] = tdo[ key ];
+					}
+				}
+
+				return ret;
+			} )( this.options ),
 			type,
 			name,
-			inline = o.inline || $el.jqmData( "inline" ),
-			mini = o.mini || $el.jqmData( "mini" ),
 			classes = "",
 			$buttonPlaceholder;
 
@@ -35,7 +46,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 			if ( !$el.hasClass( "ui-btn" ) ) {
 				$el.buttonMarkup();
 			}
-
 			return;
 		}
 
@@ -66,16 +76,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		this.button = $( "<div></div>" )
 			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )
 			.insertBefore( $el )
-			.buttonMarkup({
-				theme: o.theme,
-				icon: o.icon,
-				iconpos: o.iconpos,
-				inline: inline,
-				corners: o.corners,
-				shadow: o.shadow,
-				iconshadow: o.iconshadow,
-				mini: mini
-			})
+			.buttonMarkup( o )
 			.addClass( classes )
 			.append( $el.addClass( "ui-btn-hidden" ) );
 
