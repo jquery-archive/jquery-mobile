@@ -986,6 +986,25 @@ define( [
 		return path.makeUrlAbsolute( url, base);
 	}
 
+	function maybeCreateHiddenInput( $el ) {
+		var type = $el.attr( "type" ),
+			name = $el.attr( "name" );
+
+		if ( type !== "button" && type !== "reset" && name ) {
+			// Add hidden input so the value of the clicked button will be recorded
+			// in the submitted form data, but remove the hidden input from the form
+			// after the value has been recorded so as to avoid multiple copies of it
+			// preceding the original button.
+			$.mobile.document.one( "submit",
+				$.proxy( function() { this.remove(); },
+					$( "<input>", {
+						type: "hidden",
+						name: $el.attr( "name" ),
+						value: $el.attr( "value" )
+					}).insertBefore( $el ) ) );
+		}
+	}
+
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following deferred is resolved in the init file
 	$.mobile.navreadyDeferred = $.Deferred();
@@ -1062,6 +1081,11 @@ define( [
 			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
 				return;
 			}
+
+			// If this is a vclick on a button, we must make sure its value will be
+			// recorded in the resulting form data by adding a hidden input that
+			// carries the button's value
+			maybeCreateHiddenInput( $( target ) );
 
 			// Try to find a target element to which the active class will be applied
 			if ( $.data( target, "mobile-button" ) ) {
