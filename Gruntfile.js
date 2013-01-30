@@ -37,7 +37,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-contrib-uglify" );
 	grunt.loadNpmTasks( "grunt-css" );
 	grunt.loadNpmTasks( "grunt-git-authors" );
-	grunt.loadNpmTasks( "grunt-junit" );
+	grunt.loadNpmTasks( "grunt-qunit-junit" );
 	grunt.loadNpmTasks( "grunt-zip" );
 
 	// load the project's default tasks
@@ -229,23 +229,31 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		qunit_junit: {
+			options: {
+				dest: "build/test-results"
+			}
+		},
+
 		qunit: {
 			options: {
 				timeout: 10000
 			},
-			files: [
-				"tests/unit/**/index.html",
-				"!tests/unit/core/index.html",
-				"!tests/unit/dialog/index.html",
-				"!tests/unit/event/index.html",
-				"!tests/unit/kitchensink/index.html",
-				"!tests/unit/init/**",
-				"!tests/unit/listview/cache-tests/*",
-				"!tests/unit/loader/**",
-				"!tests/unit/navigation/**",
-				"!tests/unit/select/cached*",
-				"!tests/unit/support/index.html"
-			],
+			files: {
+				src: [
+					"tests/unit/**/index.html",
+					"!tests/unit/core/index.html",
+					"!tests/unit/dialog/index.html",
+					"!tests/unit/event/index.html",
+					"!tests/unit/kitchensink/index.html",
+					"!tests/unit/init/**",
+					"!tests/unit/listview/cache-tests/*",
+					"!tests/unit/loader/**",
+					"!tests/unit/navigation/**",
+					"!tests/unit/select/cached*",
+					"!tests/unit/support/index.html"
+				]
+			},
 			http: {
 				options: {
 					urls: [
@@ -283,6 +291,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "dist:release", [ "js:release", "css:release", "dist:common" ] );
 
 	grunt.registerTask( "test", [ "qunit:files", "connect", "qunit:http" ] );
+	grunt.registerTask( "test:ci", [ "qunit_junit", "qunit:files", "connect", "qunit:http" ] );
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );

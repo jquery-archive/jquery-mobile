@@ -22,7 +22,9 @@
 	"scripts": {
 		"test": "./node_modules/.bin/grunt"
 	},
-	"dependencies": {},
+	"dependencies": {
+		"jquery": ">=1.7.3"
+	},
 	"devDependencies": {
 		"grunt": "0.4.x",
 		"grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
@@ -34,6 +36,7 @@
 		"grunt-contrib-uglify": "0.1.1rc5",
 		"grunt-css": "git://github.com/jzaefferer/grunt-css.git",
 		"grunt-git-authors": "1.1.0-beta.1",
+		"grunt-qunit-junit": "latest",
 		"grunt-zip": "git://github.com/gseguin/grunt-zip.git#grunt-0.4",
 		"requirejs": "2.1.x"
 	},
