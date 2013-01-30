@@ -130,6 +130,7 @@ define( [
 						// effectively rapid-open the popup while leaving the screen intact
 						this._ui.container.removeClass( "ui-popup-hidden" );
 						this.reposition( { positionTo: "window" } );
+						this._ignoreResizeEvents();
 					}
 
 					this._resizeScreen();
@@ -142,8 +143,17 @@ define( [
 			}
 		},
 
+		_ignoreResizeEvents: function() {
+			var self = this;
+
+			if ( this._ignoreResizeTo ) {
+				clearTimeout( this._ignoreResizeTo );
+			}
+			this._ignoreResizeTo = setTimeout( function() { self._ignoreResizeTo = 0; }, 1000 );
+		},
+
 		_handleWindowResize: function( e ) {
-			if ( this._isOpen ) {
+			if ( this._isOpen && this._ignoreResizeTo === 0 ) {
 				if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
 					!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 					// effectively rapid-close the popup while leaving the screen intact
@@ -155,7 +165,7 @@ define( [
 		},
 
 		_handleWindowOrientationchange: function( e ) {
-			if ( !this._orientationchangeInProgress && this._isOpen ) {
+			if ( !this._orientationchangeInProgress && this._isOpen && this._ignoreResizeTo === 0 ) {
 				this._expectResizeEvent();
 				this._orientationchangeInProgress = true;
 			}
@@ -188,7 +198,7 @@ define( [
 				ui.focusElement.focus();
 			}
 
-			this._expectResizeEvent();
+			this._ignoreResizeEvents();
 		},
 
 		_create: function() {
@@ -241,6 +251,7 @@ define( [
 				_isOpen: false,
 				_tolerance: null,
 				_resizeData: null,
+				_ignoreResizeTo: 0,
 				_orientationchangeInProgress: false
 			});
 
@@ -572,7 +583,7 @@ define( [
 			this._isOpen = true;
 			this._resizeScreen();
 			this._ui.container.attr( "tabindex", "0" ).focus();
-			this._expectResizeEvent();
+			this._ignoreResizeEvents();
 			this._trigger( "afteropen" );
 		},
 
