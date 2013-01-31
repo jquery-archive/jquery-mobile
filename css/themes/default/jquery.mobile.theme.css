@@ -848,7 +848,7 @@ a.ui-link-inherit {
 	background-repeat: no-repeat;
 }
 
-/* No discs
+/* No disc
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon-nodisc .ui-icon,
@@ -858,28 +858,8 @@ a.ui-link-inherit {
 	background-color: transparent;
 }
 
-/* HD/"retina" sprite
+/* Icon sprite
 -----------------------------------------------------------------------------------------------------------*/
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.3),
-       only screen and (min--moz-device-pixel-ratio: 1.3),
-       only screen and (min-resolution: 200dpi) {
-	
-	.ui-icon-plus, .ui-icon-minus, .ui-icon-delete, .ui-icon-arrow-r,
-	.ui-icon-arrow-l, .ui-icon-arrow-u, .ui-icon-arrow-d, .ui-icon-check,
-	.ui-icon-gear, .ui-icon-refresh, .ui-icon-forward, .ui-icon-back,
-	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-bars, .ui-icon-edit, .ui-icon-search, .ui-icon-searchfield:after, 
-	.ui-icon-checkbox-off, .ui-icon-checkbox-on, .ui-icon-radio-off, .ui-icon-radio-on {
-		background-image: url(images/icons-36-white.png);
-		-moz-background-size: 864px 18px;
-		-o-background-size: 864px 18px;
-		-webkit-background-size: 864px 18px;
-		background-size: 864px 18px;
-	}
-	.ui-icon-alt .ui-icon {
-		background-image: url(images/icons-36-black.png);
-	}
-}
 
 /* plus minus */
 .ui-icon-plus {
@@ -958,13 +938,35 @@ a.ui-link-inherit {
 .ui-icon-bars {
 	background-position: 	-788px -1px;
 
-}.ui-icon-edit {
+}
+.ui-icon-edit {
 	background-position: 	-824px -1px;
 }
+
+/* HD/"retina" sprite
+-----------------------------------------------------------------------------------------------------------*/
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
        only screen and (min--moz-device-pixel-ratio: 1.3),
        only screen and (min-resolution: 200dpi) {
+	
+	.ui-icon-plus, .ui-icon-minus, .ui-icon-delete, .ui-icon-arrow-r,
+	.ui-icon-arrow-l, .ui-icon-arrow-u, .ui-icon-arrow-d, .ui-icon-check,
+	.ui-icon-gear, .ui-icon-refresh, .ui-icon-forward, .ui-icon-back,
+	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-bars, .ui-icon-edit,
+	.ui-icon-search, .ui-icon-searchfield:after, 
+	.ui-icon-checkbox-off, .ui-icon-checkbox-on, .ui-icon-radio-off, .ui-icon-radio-on {
+		background-image: url(images/icons-36-white.png);
+		-moz-background-size: 864px 18px;
+		-o-background-size: 864px 18px;
+		-webkit-background-size: 864px 18px;
+		background-size: 864px 18px;
+	}
+
+	.ui-icon-alt .ui-icon {
+		background-image: url(images/icons-36-black.png);
+	}
+
 	.ui-icon-plus {
 		background-position: 	0px 50%;
 	}
@@ -1061,8 +1063,7 @@ a.ui-link-inherit {
 	background-size: 46px 46px;
 }
 
-
-/* Button corner classes
+/* Button corner class
 -----------------------------------------------------------------------------------------------------------*/
 .ui-btn-corner-all {
 	-webkit-border-radius: 				1em /*{global-radii-buttons}*/;
