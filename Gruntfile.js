@@ -249,7 +249,11 @@ module.exports = function( grunt ) {
 
 		qunit_junit: {
 			options: {
-				dest: "build/test-results"
+				dest: "build/test-results",
+				namer: function (url) {
+					var match = url.match(/tests\/([^\/]*)\/(.*)$/);
+					return match[2].replace(/\//g, '.').replace(/\.html/, '' ).replace(/\?/, "-");
+				}
 			}
 		},
 
@@ -277,10 +281,8 @@ module.exports = function( grunt ) {
 						} else {
 							patterns = [ "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
 						}
-						grunt.log.writeln( JSON.stringify(patterns));
 
 						paths = grunt.file.expand( patterns ).sort();
-						grunt.log.writeln( JSON.stringify(paths));
 
 						if ( jQueries.length ) {
 							paths.forEach( function( path ) {
