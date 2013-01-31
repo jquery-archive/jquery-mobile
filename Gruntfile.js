@@ -224,7 +224,25 @@ module.exports = function( grunt ) {
 			server: {
 				options: {
 					port: httpPort,
-					base: '.'
+					base: '.',
+					middleware: function(connect, options) {
+						return [
+							function(req, res, next){
+								var bundle = grunt.config.process( "<%= requirejs.js.options.out %>" );
+								if (req.url === "/js/") {
+									grunt.log.debug( req.url + " requested, serving: " + bundle );
+									res.end( grunt.file.read( bundle ) );
+								} else {
+									next();
+								}
+							},
+
+							// Serve static files.
+							connect.static(options.base),
+							// Make empty directories browsable.
+							connect.directory(options.base)
+						];
+					}
 				}
 			}
 		},
@@ -239,42 +257,37 @@ module.exports = function( grunt ) {
 			options: {
 				timeout: 10000
 			},
-			files: {
-				src: [
-					"tests/unit/**/index.html",
-					"!tests/unit/core/index.html",
-					"!tests/unit/dialog/index.html",
-					"!tests/unit/event/index.html",
-					"!tests/unit/kitchensink/index.html",
-					"!tests/unit/init/**",
-					"!tests/unit/listview/cache-tests/*",
-					"!tests/unit/loader/**",
-					"!tests/unit/navigation/**",
-					"!tests/unit/select/cached*",
-					"!tests/unit/support/index.html"
-				]
-			},
+
+			files: {},
+
 			http: {
 				options: {
-					urls: [
-//						"http://localhost:<%= connect.server.options.port %>/tests/unit/core/index.html",
-						"http://localhost:<%= connect.server.options.port %>/tests/unit/dialog/index.html",
-						"http://localhost:<%= connect.server.options.port %>/tests/unit/event/index.html",
-						"http://localhost:<%= connect.server.options.port %>/tests/unit/support/index.html"
-//				"!tests/unit/kitchensink/index.html",
-//				"!tests/unit/init/**",
-//				"!tests/unit/listview/cache-tests/*",
-//				"!tests/unit/listview/push-state-disabled-tests.html",
-//				"!tests/unit/loader/**",
-//				"!tests/unit/navigation/**",
-//				"!tests/unit/popup/back-two.html",
-//				"!tests/unit/popup/other.html",
-//				"!tests/unit/popup/popup-sequence-test-dialog.html",
-//				"!tests/unit/select/cached*"
+					urls: (function() {
+						// Find the test files
+						var paths = grunt.file.expand( "tests/unit/*/*/index.html" )
+								.concat( grunt.file.expand( "tests/unit/**/*-tests.html" ) )
+								.sort(),
+							versionedPaths = [],
+							jQueries = ( grunt.option( "jquery" ) || "" ).split( "," );
 
-					]
+						grunt.log.writeln( "jQueries: " + JSON.stringify( jQueries ) );
+						if ( jQueries.length ) {
+							paths.forEach( function( path ) {
+								versionedPaths = versionedPaths.concat( jQueries.map( function( jQVersion ) {
+									return path + "?jquery=" + jQVersion;
+								}) );
+							})
+						}
+
+						if ( versionedPaths.length ) {
+							paths = versionedPaths;
+						}
+
+						return paths.map( function( path ) {
+							return "http://localhost:<%= connect.server.options.port %>/" + path
+						});
+					}())
 				}
-
 			}
 		}
 
@@ -290,8 +303,8 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "dist", [ "js", "css", "dist:common" ] );
 	grunt.registerTask( "dist:release", [ "js:release", "css:release", "dist:common" ] );
 
-	grunt.registerTask( "test", [ "qunit:files", "connect", "qunit:http" ] );
-	grunt.registerTask( "test:ci", [ "qunit_junit", "qunit:files", "connect", "qunit:http" ] );
+	grunt.registerTask( "test", [ "config:dev", "requirejs", "connect", "qunit:http" ] );
+	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );
