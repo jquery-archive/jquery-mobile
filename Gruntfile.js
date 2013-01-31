@@ -268,14 +268,14 @@ module.exports = function( grunt ) {
 				options: {
 					urls: (function() {
 						// Find the test files
-						var units = grunt.util._.without( ( grunt.option( "units" ) || "" ).split( "," ), "" ),
+						var suites = grunt.util._.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
 							patterns, paths,
 							versionedPaths = [],
 							jQueries = grunt.util._.without( ( grunt.option( "jquery" ) || "" ).split( "," ), "" );
 
-						if ( units.length ) {
+						if ( suites.length ) {
 							patterns = [];
-							units.forEach( function( unit ) {
+							suites.forEach( function( unit ) {
 								patterns = patterns.concat( [ "tests/unit/" + unit + "/index.html", "tests/unit/" + unit + "/*/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
 							});
 						} else {
