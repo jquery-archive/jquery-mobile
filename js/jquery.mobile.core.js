@@ -9,7 +9,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-	var __version__ = pkg.version;
+	var __version__ = ( pkg && pkg.version ) || "dev";
 //>>excludeEnd("jqmBuildExclude");
 	var nsNormalizeDict = {};
 
