@@ -255,7 +255,7 @@ module.exports = function( grunt ) {
 
 		qunit: {
 			options: {
-				timeout: 10000
+				timeout: 30000
 			},
 
 			files: {},
@@ -264,13 +264,24 @@ module.exports = function( grunt ) {
 				options: {
 					urls: (function() {
 						// Find the test files
-						var paths = grunt.file.expand( "tests/unit/*/*/index.html" )
-								.concat( grunt.file.expand( "tests/unit/**/*-tests.html" ) )
-								.sort(),
+						var units = grunt.util._.without( ( grunt.option( "units" ) || "" ).split( "," ), "" ),
+							patterns, paths,
 							versionedPaths = [],
-							jQueries = ( grunt.option( "jquery" ) || "" ).split( "," );
+							jQueries = grunt.util._.without( ( grunt.option( "jquery" ) || "" ).split( "," ), "" );
 
-						grunt.log.writeln( "jQueries: " + JSON.stringify( jQueries ) );
+						if ( units.length ) {
+							patterns = [];
+							units.forEach( function( unit ) {
+								patterns = patterns.concat( [ "tests/unit/" + unit + "/**/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
+							});
+						} else {
+							patterns = [ "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
+						}
+						grunt.log.writeln( JSON.stringify(patterns));
+
+						paths = grunt.file.expand( patterns ).sort();
+						grunt.log.writeln( JSON.stringify(paths));
+
 						if ( jQueries.length ) {
 							paths.forEach( function( path ) {
 								versionedPaths = versionedPaths.concat( jQueries.map( function( jQVersion ) {
