@@ -276,7 +276,7 @@ module.exports = function( grunt ) {
 						if ( units.length ) {
 							patterns = [];
 							units.forEach( function( unit ) {
-								patterns = patterns.concat( [ "tests/unit/" + unit + "/**/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
+								patterns = patterns.concat( [ "tests/unit/" + unit + "/index.html", "tests/unit/" + unit + "/*/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
 							});
 						} else {
 							patterns = [ "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
