@@ -837,7 +837,6 @@ a.ui-link-inherit {
 	border-radius: 						9px;
 }
 
-
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -847,6 +846,16 @@ a.ui-link-inherit {
 	background-color: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
 	background-repeat: no-repeat;
+}
+
+/* No discs
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-icon-nodisc .ui-icon,
+.ui-icon-nodisc .ui-icon-searchfield:after,
+.ui-icon-nodisc .ui-icon-alt .ui-icon,
+.ui-icon-nodisc .ui-icon-alt .ui-icon-searchfield:after {
+	background-color: transparent;
 }
 
 /* HD/"retina" sprite
