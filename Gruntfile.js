@@ -271,7 +271,7 @@ module.exports = function( grunt ) {
 						var suites = grunt.util._.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
 							patterns, paths,
 							versionedPaths = [],
-							jQueries = grunt.util._.without( ( grunt.option( "jquery" ) || "" ).split( "," ), "" );
+							jQueries = grunt.util._.without( ( grunt.option( "jqueries" ) || "" ).split( "," ), "" );
 
 						if ( suites.length ) {
 							patterns = [];
