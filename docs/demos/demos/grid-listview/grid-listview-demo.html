@@ -3,37 +3,253 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Title</title>
-	<link rel="stylesheet"  href="../../../../../css/themes/default/jquery.mobile.css">
+	<title>News</title>
+	<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
-	<script src="../../../../../js/jquery.js"></script>
+	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
-	<script src="../../../../../js/"></script>
+	<script src="../../../../js/"></script>
 	<style>
-		h1 {
-			font-family: 'Open Sans', sans-serif;
-			font-weight:300;
-			font-size:2.4em;
+		/* A bit custom styling */
+		.my-page {
+			background: #222;
 		}
+		/* Link to the Google webfont is in the head */
+		.my-page .ui-title, .my-page .ui-li-aside {
+			font-family: 'Open Sans', sans-serif;
+			font-weight: 400;
+		}
+		.my-page .ui-header {
+			color: #990099;
+		}
+		.my-page .ui-footer {
+			color: #666;
+		}
+		.my-page .ui-li-desc {
+			color: #c0c0c0;
+		}
+		.my-page .ui-li-aside {
+			color: #990099;
+		}
+		.my-page .ui-listview .ui-li.ui-btn {
+			background-image: none;
+			border-color: #222;
+		}
+
+		/* First breakpoint is 768px. 3 column layout. */
+		@media all and (min-width: 768px){
+			.my-page .ui-content {
+				padding: 9px; /* 768px - 2 x 9px padding = 750px */
+			}
+			.my-page .ui-listview .ui-li.ui-btn {
+				float: left;
+				width: 30.9333%; /* 33.333% incl. 2 x 1.2% margin */
+				height: 232px; /* 250px incl. 2 x 9px margin */
+				margin: 9px 1.2%;
+				border-width: 0;
+			}
+			/* Set the border on .ui-btn-inner instead of .ui-btn */
+			.my-page .ui-listview .ui-li.ui-btn-inner {
+				border: inherit;
+				border-width: 1px;
+				margin: -1px;
+			}
+			.my-page .ui-listview .ui-btn-inner,
+			.my-page .ui-listview .ui-btn-text,
+			.my-page .ui-listview .ui-link-inherit,
+			.my-page .ui-listview .ui-li-thumb {
+				width: 100%;
+				height: 100%;
+				display: block;
+				overflow: hidden;
+			}
+			.my-page .ui-listview .ui-link-inherit {
+				padding: 0 !important;
+				position: relative;
+			}
+			/* Inherit the border-radius from the UL that has class .ui-corner-all). */
+			.my-page .ui-listview .ui-li,
+			.my-page .ui-listview .ui-btn-text,
+			.my-page .ui-listview .ui-link-inherit,
+			.my-page .ui-listview .ui-li-thumb {
+				-webkit-border-radius: inherit;
+				border-radius: inherit;
+			}
+			.my-page .ui-listview .ui-li-thumb {
+				height: auto; /* To keep aspect ratio. */
+				max-width: 100%;
+				max-height: none;
+				margin: 0;
+				left: 0;
+				z-index: -1;
+			}
+			/* Hide the icon */
+			.my-page .ui-listview .ui-icon {
+				display: none;
+			}
+			/* Overrides to make text wrap of the thumb. */
+			.my-page .ui-listview .ui-li-heading,
+			.my-page .ui-listview .ui-li-desc {
+				white-space: normal;
+				overflow: visible;
+				position: absolute;
+				left: 0;
+				right: 0;
+			}
+			/* Text positioning */
+			.my-page .ui-listview .ui-li-heading {
+				margin: 0;
+				padding: 20px;
+				bottom: 50%;
+			}
+			.my-page .ui-listview .ui-li-desc {
+				margin: 0;
+				padding: 0 20px;
+				min-height: 50%;
+				bottom: 0;
+				line-height: 1.5;
+			}
+			/* Semi transparent background and different position if there is a thumb */
+			.ui-listview .ui-li-has-thumb .ui-li-heading,
+			.ui-listview .ui-li-has-thumb .ui-li-desc {
+				background: #111;
+				background: rgba(0,0,0,.8);
+				-webkit-background-clip: padding;
+				background-clip: padding-box;
+			}
+			.ui-listview .ui-li-has-thumb .ui-li-heading {
+				padding: 10px;
+				bottom: 20%;
+			}
+			.ui-listview .ui-li-has-thumb .ui-li-desc {
+				padding: 0 10px;
+				min-height: 20%;
+			}
+			/* ui-li-aside has class .ui-li-desc as well so we have to override some things. */
+			.my-page .ui-listview .ui-li-desc.ui-li-aside {
+				padding: .1em 10px;
+				width: auto;
+				min-height: 0;
+				top: 0;
+				left: auto;
+				bottom: auto;
+				/* Custom styling */
+				color: #c0c0c0;
+				background: #990099;
+				background: rgba(153,0,153,.85);
+				-webkit-border-top-right-radius: inherit;
+				border-top-right-radius: inherit;
+				-webkit-border-bottom-left-radius: inherit;
+				border-bottom-left-radius: inherit;
+			}
+			/* Add some shadow, but don't kill the focus style. */ 
+			.my-page .ui-listview .ui-li.ui-btn:not(.ui-focus) {
+				-moz-box-shadow: 0px 0px 9px #111;
+				-webkit-box-shadow: 0px 0px 9px #111;
+				box-shadow: 0px 0px 9px #111;
+			}
+			/* Show the focus style on hover as well. */
+			.my-page .ui-listview .ui-li.ui-btn:hover {
+				-moz-box-shadow: 0px 0px 9px #387bbe;
+				-webkit-box-shadow: 0px 0px 9px #387bbe;
+				box-shadow: 0px 0px 9px #387bbe;
+			}
+			/* Animate focus and hover style, and resizing. */ 
+			.my-page .ui-listview .ui-li.ui-btn {
+				-webkit-transition: all 500ms ease;
+				-moz-transition: all 500ms ease;
+				-o-transition: all 500ms ease;
+				-ms-transition: all 500ms ease;
+				transition: all 500ms ease;	
+			}
+		}
+		/* Second breakpoint. 4 column layout. */
+		@media all and (min-width: 1020px){
+			.my-page .ui-content {
+				padding: 10px; /* 1020px - 2 x 10px padding = 1000px */
+			}
+			.my-page .ui-listview {
+				margin: 0 auto;
+				max-width: 1000px;
+			}
+			/* We could use pixel width here because 1000px is also the max-width, but let's stick to percentages. */
+			.my-page .ui-listview .ui-li.ui-btn {
+				width: 23%; /* 25% incl. 2 x 1% margin */
+				height: 230px; /* 250px incl. 2 x 10px margin */
+				margin: 10px 1%;
+			}
+		}
+		
+		/* For this demo we used images with a size of 334x334 pixels: 1019px - 18px padding = 1001px x 33.3% = ~334px */
 	</style>
 </head>
 <body>
-<div data-role="page" data-theme="a">
+<div data-role="page" data-theme="a" id="demo-page" class="my-page">
 
-	<div data-role="header" data-theme="f">
-		<h1>Title</h1>
-		<a href="index.html" data-icon="arrow-l" data-iconpos="notext" data-ajax="false">Home</a>
+	<div data-role="header">
+		<h1>News</h1>
+		<a href="index.html" data-shadow="false" data-iconshadow="false" data-icon="arrow-l" data-iconpos="notext" data-rel="back" data-ajax="false">Back</a>
 	</div><!-- /header -->
 	
 	<div data-role="content">
 	
-        <h1>Grid Listview</h1>
-        
-        
+        <ul data-role="listview" data-inset="true">
+        	<li><a href="#">
+            	<img src="../../_assets/img/apple.png">
+            	<h2>iOS 6.1</h2>
+                <p>Apple released iOS 6.1</p>
+                <p class="ui-li-aside">iOS</p>
+            </a></li>
+        	<li><a href="#">
+            	<img src="../../_assets/img/blackberry_10.png">
+            	<h2>BlackBerry 10</h2>
+                <p>BlackBerry launched the Z10 and Q10 with the new BB10 OS</p>
+                <p class="ui-li-aside">BlackBerry</p>
+            </a></li>
+        	<li><a href="#">
+            	<img src="../../_assets/img/lumia_800.png">
+            	<h2>WP 7.8</h2>
+                <p>Nokia rolls out WP 7.8 to Lumia 800</p>
+                <p class="ui-li-aside">Windows Phone</p>
+            </a></li>
+        	<li><a href="#">
+            	<img src="../../_assets/img/galaxy_express.png">
+            	<h2>Galaxy</h2>
+                <p>New Samsung Galaxy Express</p>
+                <p class="ui-li-aside">Samsung</p>
+            </a></li>
+        	<li><a href="#">
+            	<img src="../../_assets/img/nexus_7.png">
+            	<h2>Nexus 7</h2>
+                <p>Rumours about new full HD Nexus 7</p>
+                <p class="ui-li-aside">Android</p>
+            </a></li>
+        	<li><a href="#">
+            	<img src="../../_assets/img/firefox_os.png">
+            	<h2>Firefox OS</h2>
+                <p>ZTE to launch Firefox OS smartphone at MWC</p>
+                <p class="ui-li-aside">Firefox</p>
+            </a></li>
+        	<li><a href="#">
+            	<img src="../../_assets/img/tizen.png">
+            	<h2>Tizen</h2>
+                <p>First Samsung phones with Tizen can be expected in 2013</p>
+                <p class="ui-li-aside">Tizen</p>
+            </a></li>
+        	<li><a href="#">
+            	<h2>Symbian</h2>
+                <p>Nokia confirms the end of Symbian</p>
+                <p class="ui-li-aside">Symbian</p>
+            </a></li>
+        </ul>
                 
 	</div><!-- /content -->
+    
+    <div data-role="footer" data-theme="none">
+    	<h3>January 2013</h3>
+	</div>
 	
 </div><!-- /page -->
 </body>

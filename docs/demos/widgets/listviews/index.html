@@ -6,19 +6,26 @@
 	<title>Listview - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-
+	<link rel="shortcut icon" href="../../_assets/favicon.ico">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
+	<style id="custom-icon">
+        .ui-icon-custom {
+			background-image: url("../../_assets/img/glyphish-icons/21-skull.png");
+			background-position: 3px 3px;
+			background-size: 70%;
+		}
+    </style>
 </head>
 <body>
-<div data-role="page" class="demos">
+<div data-role="page" class="jqm-demos">
 
-	<div data-role="panel" id="list-sections" data-position="right" data-display="overlay" data-theme="c" class="demo-sections">
+	<div data-role="panel" id="list-sections" class="jqm-nav-panel" data-position="right" data-display="overlay" data-theme="c">
 		
-		<ul data-role="listview" data-inset="false" data-theme="d" data-divider-theme="d" class="demo-nav">
-			<li class="demo-nav-header">Jump to section</li>
+		<ul data-role="listview" data-inset="false" data-theme="d" data-divider-theme="d" class="jqm-list">
+			<li class="jqm-list-header">Jump to section</li>
             <li><a href="#list-ul" data-ajax="false">Read-only, unordered</a></li>
             <li><a href="#list-ol" data-ajax="false">Read-only, ordered</a></li>
             <li><a href="#list-linked" data-ajax="false">Linked</a></li>
@@ -42,21 +49,21 @@
 	</div>
 
 
-	<div data-role="header" data-theme="f">
+	<div data-role="header" class="jqm-header" data-theme="f">
 		<h1>jQuery Mobile</h1>
 		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
 	
-	<div data-role="content" data-theme="c">
+	<div data-role="content" class="jqm-content">
 	
 			
-			<h1>Listviews <a href="http://api.jquerymobile.com/listview/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="api-link">API</a></h1>
+			<h1>Listviews <a href="http://api.jquerymobile.com/listview/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 		
-			<p class="demo-intro">A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
+			<p class="jqm-intro">A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
 
-			<a href="#list-sections" class="demo-section-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
+			<a href="#list-sections" class="jqm-sections-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
 			</p>
 			
 			
@@ -182,32 +189,25 @@
 		
 			<p>The default icon for each list item containing a link is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styles it's also possible to use third party icons.</p>
 
-			<div data-demo-html="true" data-demo-css="true">
-			<style>
-				.ui-icon-custom {
-				background-image: url("../_assets/img/glyphish-icons/21-skull.png");
-				background-position: 3px 3px;
-				background-size: 70%; }
-			</style>
-
-			<ul data-role="listview" data-inset="true" data-theme="c">
-				<li data-icon="custom" id="skull"><a href="#">custom-icon</a></li>
-				<li data-icon="delete"><a href="#">data-icon="delete"</a></li>
-				<li data-icon="gear"><a href="#">data-icon="gear"</a></li>
-				<li data-icon="info"><a href="#">data-icon="info"</a></li>
-				<li data-icon="false"><a href="#">data-icon="false"</a></li>
-			</ul>
+			<div data-demo-html="true" data-demo-css="#custom-icon">
+                <ul data-role="listview" data-inset="true" data-theme="c">
+                    <li data-icon="custom" id="skull"><a href="#">custom-icon</a></li>
+                    <li data-icon="delete"><a href="#">data-icon="delete"</a></li>
+                    <li data-icon="gear"><a href="#">data-icon="gear"</a></li>
+                    <li data-icon="info"><a href="#">data-icon="info"</a></li>
+                    <li data-icon="false"><a href="#">data-icon="false"</a></li>
+                </ul>
 			</div><!--/demo-html -->
 
 			<h2 id="list-16">Icons: 16x16</h2>
 			<p>To use standard 16x16 pixel icons in list items, add the class of <code>ui-li-icon</code> to the image element and insert 16x16 icons as <code>img</code> tage inside the list items.</p>
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true">
-					<li><a href="../../_assets/img/gf.png" alt="France" class="ui-li-icon ui-corner-none">France</a></li>
-					<li><a href="../../_assets/img/de.png" alt="Germany" class="ui-li-icon">Germany</a></li>
-					<li><a href="../../_assets/img/gb.png" alt="Great Britain" class="ui-li-icon">Great Britain</a></li>
-					<li><a href="../../_assets/img/fi.png" alt="Finland" class="ui-li-icon">Finland</a></li>
-					<li><a href="../../_assets/img/us.png" alt="United States" class="ui-li-icon ui-corner-none">United States</a></li>
+					<li><a href="#"><img src="../../_assets/img/gf.png" alt="France" class="ui-li-icon ui-corner-none">France</a></li>
+					<li><a href="#"><img src="../../_assets/img/de.png" alt="Germany" class="ui-li-icon">Germany</a></li>
+					<li><a href="#"><img src="../../_assets/img/gb.png" alt="Great Britain" class="ui-li-icon">Great Britain</a></li>
+					<li><a href="#"><img src="../../_assets/img/fi.png" alt="Finland" class="ui-li-icon">Finland</a></li>
+					<li><a href="#"><img src="../../_assets/img/us.png" alt="United States" class="ui-li-icon ui-corner-none">United States</a></li>
 				</ul>
 			</div><!--/demo-html -->
 
@@ -266,7 +266,6 @@
 			</div><!--/demo-html -->
 			
 			
-			
 			<h2 id="list-formatted">Formatted content</h2>
 			
 			<p>To add text hierarchy, use headings to increase font emphasis and use paragraphs to reduce emphasis. Supplemental information can be added to the right of each list item by wrapping content in an element with a class of <code>ui-li-aside</code></p>
@@ -323,6 +322,17 @@
 						<h2>Phoenix</h2>
 						<a href="#purchase" data-theme="e" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 					</li>
+				</ul>
+			</div><!--/demo-html -->
+			
+			<p>The white icon sprite is used by default in the theme. Adding the <code>ui-icon-alt</code> class to the list switches to the black sprite and gets rid of the dark disc.</p>
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true" class="ui-icon-alt">
+					<li><a href="#">Acura</a></li>
+					<li><a href="#">Audi</a></li>
+					<li><a href="#">BMW</a></li>
+					<li><a href="#">Cadillac</a></li>
+					<li><a href="#">Ferrari</a></li>
 				</ul>
 			</div><!--/demo-html -->
 			
@@ -584,7 +594,7 @@
 			
 	</div><!-- /content -->
     
-	<div data-role="footer" data-theme="c" class="jqm-footer">
+	<div data-role="footer" class="jqm-footer" data-theme="c">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->

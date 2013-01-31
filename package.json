@@ -19,9 +19,6 @@
 			"url": "https://github.com/jquery/jquery-mobile/blob/master/MIT-LICENSE.txt"
 		}
 	],
-	"scripts": {
-		"test": "./node_modules/.bin/grunt"
-	},
 	"dependencies": {
 		"jquery": ">=1.7.3"
 	},
@@ -45,7 +42,8 @@
 		"node": ">= 0.8.0"
 	},
 	"scripts": {
-		"test": "grunt test"
+		"test": "grunt test",
+		"lint": "grunt jshint"
 	},
 	"keywords": []
 }
