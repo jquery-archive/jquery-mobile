@@ -55,7 +55,12 @@ module.exports = function( grunt ) {
 					jshintrc: "js/.jshintrc"
 				},
 				files: {
-					src: "js/**/*.js"
+					src: [
+						"js/**/*.js",
+						"!js/jquery.hashchange.js",
+						"!js/jquery.js",
+						"!js/jquery.ui.widget.js"
+					]
 				}
 			},
 			grunt: {
@@ -363,17 +368,18 @@ module.exports = function( grunt ) {
 
 	});
 
-	grunt.registerTask( "js", "Builds jquery.mobile.js", [ "config:dev", "requirejs", "concat:js", "uglify" ] );
 	grunt.registerTask( "js:release",  [ "requirejs", "concat:js", "uglify" ] );
-	grunt.registerTask( "css", [ "config:dev", "cssbuild", "cssmin" ] );
+	grunt.registerTask( "js", [ "config:dev", "js:release" ] );
+
+
 	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
+	grunt.registerTask( "css", [ "config:dev", "css:release" ] );
 
 	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.processed", "copy:demos.unprocessed" ] );
 
-	grunt.registerTask( "dist:common", [ "copy:images", "demos", "zip:dist" ] );
+	grunt.registerTask( "dist:release", [ "js:release", "css:release", "copy:images", "demos", "zip:dist" ] );
+	grunt.registerTask( "dist", [ "config:dev", "dist:release" ] );
 
-	grunt.registerTask( "dist", [ "js", "css", "dist:common" ] );
-	grunt.registerTask( "dist:release", [ "js:release", "css:release", "dist:common" ] );
 
 	grunt.registerTask( "test", [ "config:dev", "requirejs", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
