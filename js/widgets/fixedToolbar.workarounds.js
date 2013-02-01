@@ -31,8 +31,8 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 					return;
 				}
 				//check os version if it dosent match one with workarounds return
-				if( os === "ios" && wkversion && wkversion > 533 && wkversion < 536 ) {
-					//iOS 5 run all workarounds for iOS 5
+				if( os === "ios" ) {
+					//iOS  workarounds
 					self._bindScrollWorkaround();
 				} else if( os === "android" && wkversion && wkversion < 534 ) {
 					//Android 2.3 run all Android 2.3 workaround
