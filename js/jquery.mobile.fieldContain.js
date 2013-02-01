@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.fieldcontain.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery" ], function( $ ) {
+define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

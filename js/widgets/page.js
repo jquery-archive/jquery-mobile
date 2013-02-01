@@ -3,7 +3,7 @@
 //>>label: Page Creation
 //>>group: Core
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
