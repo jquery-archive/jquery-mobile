@@ -1,0 +1,14 @@
+.ui-slider .ui-btn-inner {
+    padding: 4px 0 0 0 !important;
+}
+
+.ui-slider-popup {
+    position: absolute !important;
+    width: 64px;
+    height: 64px;
+    text-align: center;
+    font-size: 40px;
+    padding-top: 12px;
+    z-index: 100;
+    opacity: 0.8;
+}
