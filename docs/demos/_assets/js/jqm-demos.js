@@ -28,16 +28,22 @@ $(function(){
 });
 // display the version of jQM
 $(document).on( "pageinit", function() {
-	var version = $.mobile.version || "dev",
-		words = version.split( "-" ),
-		ver = words[0],
-		str = (words[1] || "Final"),
+	var rversion = /^(\d)\.(\d+)\.(\d)(-(?:alpha|beta|rc)\.\d|pre)?$/,
+		version = ( $.mobile.version || "dev" ).toLowerCase().match( rversion ) || {},
+		major = version[1],
+		minor = version[2],
+		patch = version[3],
+		xbeta = version[4],
+		str = "",
+		ver = $.mobile.version,
 		html = "Version " + ver;
 
-	if( str.indexOf( "rc" ) == -1 ){
-		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
-	} else {
-		str = str.toUpperCase().replace(".", "");
+	if ( ver != "dev" ) {
+		if ( !xbeta ) {
+			str = "Final";
+		} else if ( xbeta == "rc"){
+			str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+		}
 	}
 
 	if ( $.mobile.version && str ) {
