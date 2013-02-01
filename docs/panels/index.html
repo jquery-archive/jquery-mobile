@@ -15,7 +15,7 @@
 	<div data-role="page" class="ui-responsive-panel">
 	
 		<!-- defaultpanel  -->
-		<div data-role="panel" id="defaultpanel" data-theme="b">
+		<div data-role="panel" id="defaultpanel">
 			
             <h3>Default panel options</h3>
             <p>This panel has all the default options: positioned on the left with the reveal display mode. The panel markup is <em>before</em> the header, content and footer in the source order.</p>
@@ -180,11 +180,9 @@ $( "#mypanel" ).trigger( "updatelayout" );
             
 			<p>Panels have a fixed width of 17em (272 pixels) which is narrow enough to still show some of the page contents when open to make clicking out to close easy, and still looks good on wider tablet or desktop screens. The styles to set widths on panels are fairly complex but these can be overridden with CSS as needed.</p>
 
-			<p>Other than the width and 100% height styles, panels have very little styling on their own. You can set a theme on the panel by add a <code>data-theme</code> to the panel container or add your own classes to style it as needed.</p>
+			<p>Other than the theme background, width and 100% height styles, panels have very little styling on their own. The default theme for panels is "c". You can set a different theme for the panel by adding a <code>data-theme</code> to the panel container, or set <code>data-theme="none"</code> and add your own classes to style it as needed.</p>
 			
-			<p>Note that adding padding, borders, or margins directly to the panel container will alter the overall dimensions and could cause the positioning and animation to be affected.</p>
-
-			<p>To add padding to a panel, we recommend adding a container inside the panel and applying styles to that to avoid any issues. All the examples on this page follow this pattern.</p>
+			<p>Note that adding padding, borders, or margins directly to the panel container will alter the overall dimensions and could cause the positioning and animation to be affected. To avoid this, apply styles to the panel content wrapper (<code>.ui-pannel-inner</code>).</p>
 
 
 			<h2>Making the panel responsive</h2>
