@@ -38,7 +38,7 @@ $(document).on( "pageinit", function() {
 		ver = $.mobile.version,
 		html = "Version " + ver;
 
-	if ( ver != "dev" ) {
+	if ( !$.isEmptyObject( version ) && ver != "dev" ) {
 		if ( !xbeta ) {
 			str = "Final";
 		} else if ( xbeta == "rc"){
