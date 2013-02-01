@@ -82,7 +82,7 @@
             
             <h4>CSS column-count &amp; forms</h4>
             
-            <p>To avoid blinks when opening a panel, we force hardware acceleration on WebKit browsers. The CSS that is used to do this can cause issues with form elements on the page if you use <code>column-count</code> to layout the form. To resolve this you have to set the following rule for the <code>div</code> that contains the form or the field container of each form element: 
+            <p>To avoid blinks when opening a panel, we force hardware acceleration on WebKit browsers. The CSS that is used to do this can cause issues with form elements on the page if you use <code>column-count</code> to layout the form. To resolve this you have to set the following rule for the <code>div</code> that contains the form or the field container of each form element:</p>
 
 			<pre><code>
 -webkit-transform: translate3d(0,0,0);
@@ -194,19 +194,23 @@ $( "#mypanel" ).trigger( "updatelayout" );
 			<p>Here is an example of these rules wrapped in a media query to only apply this behavior above 35em (560px):</p>
 			
 			<pre><code>
-/* wrap push on wide viewports once open */
-@media (min-width: 35em){
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal {
+/* wrap on wide viewports once open */
+@media (min-width:55em){
+	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-left,
+	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-left {
+		right: 17em;
+	}
+	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-left,
+	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-left {
 		margin-right: 17em;
 	}
 	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-right,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-right,
+	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-right {
+		left: 17em;
+	}
 	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right,
 	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right {
-		margin: 0 0 0 17em;
+		margin-left: 17em;
 	}
 	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
 	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal {
@@ -214,7 +218,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	}
 	.ui-responsive-panel .ui-panel-dismiss-display-push {
 		display: none;
-	}
+	}	
 }
 			</code></pre>
 			
@@ -232,7 +236,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		<!-- Here are a bunch of panels at the end, just before the close page tag  -->
 
 		<!-- leftpanel1  -->
-		<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-dismissible="true" data-theme="a">
+		<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
 			
             <h3>Left Panel: Reveal</h3>
             <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -243,7 +247,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- leftpanel2  -->
-		<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-dismissible="true" data-theme="a">
+		<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-theme="a">
 			
             <h3>Left Panel: Push</h3>
             <p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -254,7 +258,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- leftpanel3  -->
-		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="a">
+		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
 			
             <h3>Left Panel: Overlay</h3>
             <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -265,7 +269,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- rightpanel1  -->
-		<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-dismissible="true" data-theme="b">
+		<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
 			
             <h3>Right Panel: Reveal</h3>
             <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -276,7 +280,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- rightpanel2  -->
-		<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-dismissible="true" data-theme="b">
+		<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-theme="b">
 			
             <h3>Right Panel: Push</h3>
             <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -287,7 +291,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- rightpanel3  -->
-		<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-dismissible="true" data-theme="b">
+		<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-theme="b">
 			
             <h3>Right Panel: Overlay</h3>
             <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>

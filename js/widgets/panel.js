@@ -256,10 +256,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		var self = this;
 			
 		self._page
-			// Close immediately if another panel on the page opens
+			// Close the panel if another panel on the page opens
 			.on( "panelbeforeopen", function( e ) {
 				if ( self._open && e.target !== self.element[ 0 ] ) {
-					self.close( true );
+					self.close();
 				}
 			})
 			// clean up open panels after page hide
@@ -287,39 +287,64 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if ( !this._open ) {
 			var self = this,
 				o = self.options,
+				_openPanel = function() {
+					self._page.off( "panelclose" );
+					self._page.jqmData( "panel", "open" );
+					
+					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
+						self.element.add( self._wrapper ).on( self._transitionEndEvents, complete );
+					} else {
+						setTimeout( complete, 0 );
+					}
+					
+					if ( self.options.theme && self.options.display !== "overlay" ) {
+						self._page
+							.removeClass( self._pageTheme )
+							.addClass( "ui-body-" + self.options.theme );
+					}
+					
+					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen );
+					
+					self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
+					self._wrapper
+						.removeClass( o.classes.contentWrapClosed )
+						.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
+						
+					self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentFixedToolbar );
+					self._fixedToolbar
+						.removeClass( o.classes.contentFixedToolbarClosed )
+						.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
+						
+					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
+					if ( this._modal ) {
+						self._modal.addClass( self._modalOpenClasses );
+					}
+				},
 				complete = function() {
-					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents, complete );
+					self.element.add( self._wrapper ).off( self._transitionEndEvents, complete );
+
 					self._page.addClass( o.classes.pagePanelOpen );
+					
 					self._positionPanel();
 					self._bindFixListener();
+					
 					self._trigger( "open" );
 				};
 
 			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
 				immediate = true;
 			}
+			
 			self._trigger( "beforeopen" );
-
-			if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents, complete );
+			
+			if ( self._page.jqmData('panel') === "open" ) {
+				self._page.on( "panelclose", function() {
+					_openPanel();
+				});
 			} else {
-				setTimeout( complete, 0 );
+				_openPanel();
 			}
-			if ( self.options.theme && self.options.display !== "overlay" ) {
-				self._page.removeClass( self._pageTheme ).addClass( "ui-body-" + self.options.theme );
-			}
-			self.element.removeClass( o.classes.panelClosed );
-			self.element.addClass( o.classes.panelOpen );
-			self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
-			self._wrapper.removeClass( o.classes.contentWrapClosed );
-			self._wrapper.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
-			self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentFixedToolbar );
-			self._fixedToolbar.removeClass( o.classes.contentFixedToolbarClosed );
-			self._fixedToolbar.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
-			self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
-			if ( this._modal ) {
-				self._modal.addClass( self._modalOpenClasses );
-			}
+			
 			self._open = true;
 		}
 	},
@@ -328,39 +353,51 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		if ( this._open ) {
 			var o = this.options,
 				self = this,
+				_closePanel = function() {
+					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
+						self.element.add( self._wrapper ).on( self._transitionEndEvents, complete );
+					} else {
+						setTimeout( complete, 0 );
+					}
+					
+					self._page.removeClass( o.classes.pagePanelOpen );
+					self.element.removeClass( o.classes.panelOpen );
+					self._wrapper.removeClass( o.classes.contentWrapOpen );
+					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
+					
+					if ( this._modal ) {
+						self._modal.removeClass( self._modalOpenClasses );
+					}
+				},
 				complete = function() {
 					if ( self.options.theme && self.options.display !== "overlay" ) {
 						self._page.removeClass( "ui-body-" + self.options.theme ).addClass( self._pageTheme );
 					}
-					self.element.add( self._wrapper ).add( self._fixedToolbar ).off( self._transitionEndEvents, complete );
+					self.element.add( self._wrapper ).off( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.panelClosed );
-					self._wrapper.removeClass( self._contentWrapOpenClasses );
-					self._wrapper.addClass( o.classes.contentWrapClosed );
-					self._fixedToolbar.removeClass( self._fixedToolbarOpenClasses );
-					self._fixedToolbar.addClass( o.classes.contentFixedToolbarClosed );
-					self._page.removeClass( o.classes.pagePanelOpen );
+					
+					self._wrapper
+						.removeClass( self._contentWrapOpenClasses )
+						.addClass( o.classes.contentWrapClosed );
+						
+					self._fixedToolbar
+						.removeClass( self._fixedToolbarOpenClasses )
+						.addClass( o.classes.contentFixedToolbarClosed );
+						
 					self._fixPanel();
 					self._unbindFixListener();
 					$.mobile.resetActivePageHeight();
+					
+					self._page.jqmRemoveData( "panel" );
 					self._trigger( "close" );
 				};
+				
 			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
 				immediate = true;
 			}
 			self._trigger( "beforeclose" );
 
-			if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-				self.element.add( self._wrapper ).add( self._fixedToolbar ).on( self._transitionEndEvents, complete );
-			} else {
-				setTimeout( complete, 0 );
-			}
-
-			self.element.removeClass( o.classes.panelOpen );
-			if ( this._modal ) {
-				self._modal.removeClass( self._modalOpenClasses );
-			}
-			self._wrapper.removeClass( o.classes.contentWrapOpen );
-			self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
+			_closePanel();
 
 			self._open = false;
 		}
@@ -383,6 +420,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			this._page.find( "a" ).unbind( "panelopen panelclose" );
 			this._page.removeClass( classes.pagePanel );
 			if ( this._open ) {
+				this._page.jqmRemoveData( "panel" );
 				this._page.removeClass( classes.pagePanelOpen );
 				if ( theme ) {
 					this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
@@ -392,6 +430,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		} else if ( this._open ) {
 			this._wrapper.removeClass( classes.contentWrapOpen );
 			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
+			this._page.jqmRemoveData( "panel" );
 			this._page.removeClass( classes.pagePanelOpen );
 			if ( theme ) {
 				this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
