@@ -316,7 +316,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 						.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
 						
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
-					if ( this._modal ) {
+					if ( self._modal ) {
 						self._modal.addClass( self._modalOpenClasses );
 					}
 				},
@@ -365,7 +365,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._wrapper.removeClass( o.classes.contentWrapOpen );
 					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
 					
-					if ( this._modal ) {
+					if ( self._modal ) {
 						self._modal.removeClass( self._modalOpenClasses );
 					}
 				},
