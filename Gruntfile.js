@@ -47,7 +47,7 @@ module.exports = function( grunt ) {
 	grunt.config.init({
 		pkg: grunt.file.readJSON( "package.json" ),
 
-		version: "v<%= pkg.version %>",
+		version: "<%= pkg.version %>",
 
 		jshint: {
 			js: {
@@ -119,12 +119,17 @@ module.exports = function( grunt ) {
 		},
 
 		concat: {
-			options: {
-				banner: banner.normal
-			},
 			js: {
+				options: {
+					banner: banner.normal
+				},
+
 				src: [ path.join( dist, name ) + ".js" ],
 				dest: path.join( dist, name ) + ".js"
+			},
+			demos: {
+				src: [ "docs/demos/_assets/js/*.js" ],
+				dest: path.join( dist, "demos/_assets/js/demos.js" )
 			}
 		},
 
@@ -199,8 +204,60 @@ module.exports = function( grunt ) {
 
 		copy: {
 			images: {
-				src: "css/themes/default/images",
-				dest: path.join( dist, "images" ),
+				expand: true,
+				cwd: "css/themes/default/images",
+				src: "*",
+				dest: path.join( dist, "images/" ),
+			},
+			"demos.processed": {
+				options: {
+					processContentExclude: [ "**/*.png", "**/*.gif" ],
+					processContent: function( content, srcPath ) {
+						if ( srcPath === "docs/demos/nav.html" ) {
+							return false;
+						}
+						content = content.replace( /_assets\/js\/">/gi, "_assets/js/demos.js\">" );
+						content = content.replace( /\.\.\/\.\.\/js\/">/gi, "js/" + name + ".min.js\">" );
+						content = content.replace( /\.\.\/\.\.\/css\//gi, "css/" );
+						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
+							function( match, includePath, offset, string ) {
+								var fileToInclude = path.resolve( path.join( path.dirname( srcPath ), includePath ) );
+								return grunt.file.read( fileToInclude );
+							}
+						);
+						return content;
+					}
+				},
+				files: [
+					{
+						expand: true,
+						cwd: "docs/demos",
+						src: [ "**" ],
+						dest: path.join( dist, "demos/" )
+					}
+				]
+			},
+			"demos.unprocessed": {
+				files: [
+					{
+						expand: true,
+						cwd: dist,
+						src: [ "*.js", "*.map" ],
+						dest: path.join( dist, "demos/js/" )
+					},
+					{
+						expand: true,
+						cwd: dist,
+						src: [ name + ".css", "images/*" ],
+						dest: path.join( dist, "demos/css/themes/default/" )
+					},
+					{
+						expand: true,
+						cwd: dist,
+						src: "images/*",
+						dest: path.join( dist, "demos/" )
+					},
+				]
 			}
 		},
 
@@ -306,12 +363,14 @@ module.exports = function( grunt ) {
 
 	});
 
-	grunt.registerTask( "js",  [ "config:dev", "requirejs", "concat:js", "uglify" ] );
-	grunt.registerTask( "js:release",  [ "config:dev", "requirejs", "concat:js", "uglify" ] );
+	grunt.registerTask( "js", "Builds jquery.mobile.js", [ "config:dev", "requirejs", "concat:js", "uglify" ] );
+	grunt.registerTask( "js:release",  [ "requirejs", "concat:js", "uglify" ] );
 	grunt.registerTask( "css", [ "config:dev", "cssbuild", "cssmin" ] );
 	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
 
-	grunt.registerTask( "dist:common", [ "copy:images", "zip:dist" ] );
+	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.processed", "copy:demos.unprocessed" ] );
+
+	grunt.registerTask( "dist:common", [ "copy:images", "demos", "zip:dist" ] );
 
 	grunt.registerTask( "dist", [ "js", "css", "dist:common" ] );
 	grunt.registerTask( "dist:release", [ "js:release", "css:release", "dist:common" ] );
