@@ -2,7 +2,7 @@
 //>>description: Generates dividers for listview items
 //>>label: Listview Autodividers
 //>>group: Widgets
-define( [ "jquery", "./listview" ], function( $ ) {
+define( [ "jquery", "./listview" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

@@ -19,7 +19,7 @@
 //>>label: Virtual Mouse (vmouse) Bindings
 //>>group: Core
 
-define( [ "jquery" ], function( $ ) {
+define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, document, undefined ) {
 

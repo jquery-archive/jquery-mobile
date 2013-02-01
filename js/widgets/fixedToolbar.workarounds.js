@@ -3,7 +3,7 @@
 //>>label: Toolbars: Fixed: Workarounds
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom", "./fixedToolbar" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom", "./fixedToolbar" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	$.widget( "mobile.fixedtoolbar", $.mobile.fixedtoolbar, {

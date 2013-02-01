@@ -3,7 +3,7 @@
 //>>label: Events
 //>>group: Events
 
-define( [ "jquery", "./events/navigate", "./events/touch", "./events/orientationchange" ], function( $ ) {
+define( [ "jquery", "./events/navigate", "./events/touch", "./events/orientationchange" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

@@ -6,7 +6,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.transition.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
