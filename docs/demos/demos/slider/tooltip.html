@@ -5,14 +5,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Tooltip Extension - Slider - jQuery Mobile Demos</title>
 	<link rel="stylesheet" href="../../../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../../_assets/css/jquery.mobile.forms.slider.tooltip.css">
+	<link rel="stylesheet" href="../../_assets/css/jquery.mobile.forms.slider.tooltip.css" id="tooltipStyle">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
 
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
-	<script src="../../_assets/js/slider.tooltip.js"></script>
+	<script src="../../_assets/js/slider.tooltip.js" id="tooltipCode"></script>
 </head>
 <body>
 <div data-role="page">
@@ -25,7 +25,7 @@
 	
 		<div class="content-primary">
 			<h2>Slider tooltip extension</h2>
-      <div data-demo-html="true">
+      <div data-demo-html="true" data-demo-js="#tooltipCode" data-demo-css="#tooltipStyle">
         <form>
           <label for="slider-1">Slider with tooltip:</label>
           <input type="range" name="slider-1" id="slider-1" min="0" max="100" value="50" data-popup-enabled="true">
