@@ -110,7 +110,7 @@ body, .jqm-demos  {
 	margin-top: -.5em;
 	margin-bottom: .5em;
 	padding-bottom: 1.5em;
-	color: #777;
+	color: #555;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #e5e5e5;
@@ -121,7 +121,7 @@ body, .jqm-demos  {
 	margin: .5em .8em 1em .8em;
 	padding-bottom: .5em;
 	border: none;
-	color: #777;
+	color: #555;
 }
 .jqm-demos-index .jqm-content p.jqm-intro {
 	border: none;
@@ -223,11 +223,12 @@ body, .jqm-demos  {
 .jqm-list li .ui-li-heading  {
 	font-weight: 300; 
 	font-size: 1.1em;
+	color:#74b042;
 }
 .jqm-list li .ui-li-desc  {
 	font-weight: 300; 
-	font-size: .8em;
-	opacity: .6
+	font-size: .9em;
+	color:#777;
 }
 
 /* List dividers */
