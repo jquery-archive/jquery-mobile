@@ -7,7 +7,7 @@
 	<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
-
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
@@ -55,30 +55,32 @@
 	</script>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" class="jqm-demos">
 
 	<div data-role="header" class="jqm-header" data-theme="f">
-		<h1>Redirect: Source Page</h1>
+		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
 	
-	<div data-role="content">
+	<div data-role="content" class="jqm-content">
 	
-		<div class="content-primary">
-            
-			<div data-demo-html="true" data-demo-js="#redirectCode" data-demo-php="source.php">
-				<a href="redirect.php?to=redirect-target.html" data-role="button" data-inline="true">Redirect</a>
-			</div><!--/demo-html -->
+         <h1>Redirect: Source Page</h1>
+         
+        <div data-demo-html="true" data-demo-js="#redirectCode" data-demo-php="source.php">
+            <a href="redirect.php?to=redirect-target.html" data-role="button" data-inline="true">Redirect</a>
+        </div><!--/demo-html -->
 
-		</div><!--/content-primary -->
-	
+
 	</div><!-- /content -->
 	
 	<div data-role="footer" class="jqm-footer" data-theme="c">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
-	
+
+<?php include( '../../nav.html' ); ?>
+
 </div><!-- /page -->
 </body>
 </html>

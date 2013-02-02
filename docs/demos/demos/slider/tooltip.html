@@ -5,10 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Slider Tooltip Extension - jQuery Mobile Demos</title>
 	<link rel="stylesheet" href="../../../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="slider.tooltip.css" id="tooltipStyle">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="slider.tooltip.css" id="tooltipStyle">
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
@@ -17,13 +17,14 @@
 <body>
 <div data-role="page" class="jqm-demos">
 	<div data-role="header" class="jqm-header" data-theme="f">
-		<h1>Slider Tooltip Extension</h1>
+		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
 	
 	<div data-role="content" class="jqm-content">
 	
-		<h2>Slider tooltip extension</h2>
+		<h1>Slider tooltip extension</h1>
         
         <div data-demo-html="true" data-demo-js="#tooltipCode" data-demo-css="#tooltipStyle">
             <form>
@@ -42,7 +43,9 @@
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
-	
+
+<?php include( '../../nav.html' ); ?>
+
 </div><!-- /page -->
 </body>
 </html>

@@ -7,7 +7,7 @@
 	<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
-
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
@@ -68,33 +68,32 @@
 	</style>
 </head>
 <body>
-<div data-role="page" id="demo-intro">
+<div data-role="page" id="demo-intro" class="jqm-demos">
 
 	<div data-role="header" class="jqm-header" data-theme="f">
-		<h1>Dynamic popup</h1>
+		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
 	</div><!-- /header -->
 	
-	<div data-role="content">
+	<div data-role="content" class="jqm-content">
 	
-        <div class="content-primary">
+        <h2>Dynamic popup</h2>
         
-            <h2>Dynamically creating a popup</h2>
+        <div data-demo-html="#demo-page" data-demo-js="true">
+            <p>This demo shows how you can dynamically create a popup. The popup contains images which means we have to set the image width and height to make sure the popup gets the right size and position. At client side we can only get the size when the image has been loaded in the DOM. In this demo we use the <code>load</code> event, but with a fallback because it has some caveats (see <a href="http://api.jquery.com/load-event/" rel="external">.load() - jQuery API</a>).</p>
             
-            <div data-demo-html="#demo-page" data-demo-js="true">
-            	<p>This demo shows how you can dynamically create a popup. The popup contains images which means we have to set the image width and height to make sure the popup gets the right size and position. At client side we can only get the size when the image has been loaded in the DOM. In this demo we use the <code>load</code> event, but with a fallback because it has some caveats (see <a href="http://api.jquery.com/load-event/" rel="external">.load() - jQuery API</a>).</p>
-                
-                <p><a href="#demo-page" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open dynamic popup demo</a></p>
-            </div><!--/demo-html -->
-                
-        </div><!--/content-primary -->
-	
+            <p><a href="#demo-page" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open dynamic popup demo</a></p>
+        </div><!--/demo-html -->
+
 	</div><!-- /content -->
 	
 	<div data-role="footer" class="jqm-footer" data-theme="c">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
+
+<?php include( '../../nav.html' ); ?>
 	
 </div><!-- /page -->
 
@@ -116,6 +115,5 @@
     </div><!-- /content -->
 
 </div><!-- /page -->
-
 </body>
 </html>
