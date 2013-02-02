@@ -9,7 +9,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 	_create: function() {
 		var o = this.options,
 			popup = $( "<div></div>", {
-				class: "ui-slider-popup ui-shadow ui-body-" + ( o.theme ? o.theme : $.mobile.getInheritedTheme( this.element, "c" ) )
+				class: "ui-slider-popup ui-shadow ui-corner-all ui-body-" + ( o.theme ? o.theme : $.mobile.getInheritedTheme( this.element, "c" ) )
 			});
 
 		this._super();
