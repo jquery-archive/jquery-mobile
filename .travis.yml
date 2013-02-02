@@ -1,8 +1,0 @@
-language: node_js
-node_js:
-  - 0.8
-before_script: 
-  - npm install -g grunt-cli
-branches:
-  only:
-	    - grunt-0.4
