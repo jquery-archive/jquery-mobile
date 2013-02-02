@@ -36,8 +36,8 @@ function getHeadSnippet( type, selector ) {
 		if ( el.length === 0 && type === "style" ) {
 			el = $( "head" ).find( "link[rel='stylesheet']" + selector );
 		}
-		text = el.contents().clone();
-		if ( !text.html() ) {
+		text = $( "<div></div>" ).append( el.contents().clone() ).html();
+		if ( !text ) {
 			text = "";
 			selector = el.attr( "href" ) || el.attr( "src" ) || "";
 		}
@@ -49,18 +49,18 @@ function getHeadSnippet( type, selector ) {
 		hash = $.mobile.path.parseUrl( absUrl ).hash;
 
 		// selector is a path to SJAX in
-		$.ajax( absUrl, { async: false } )
+		$.ajax( absUrl, { async: false, dataType: "text" } )
 			.success( function( data, textStatus, jqXHR ) {
 				text = data;
 				// If there's a hash we assume this is an HTML document that has a tag
 				// inside whose ID is the hash
 				if ( hash ) {
-					text = $( data ).find( hash ).contents().clone();
+					text = $( "<div></div>" ).append( $( data ).find( hash ).contents().clone() ).html();
 				}
 			});
 	}
 
-	return $( "<div></div>" ).append( text ).html();
+	return text;
 }
 
 $( document ).bind( "pagebeforechange", function( e, data ) {
