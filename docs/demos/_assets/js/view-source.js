@@ -7,7 +7,7 @@ function attachPopupHandler( popup, sources ) {
 			collapsible, pre;
 
 		$.each( sources, function( idx, options ) {
-			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-content-theme='a'>" +
+			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-collapsed-icon='arrow-l' data-expanded-icon='arrow-d' data-content-theme='a'>" +
 					"<h1>" + options.title + "</h1>" +
 					"<pre class='brush: " + options.brush + ";'></pre>" +
 				"</div>" );
