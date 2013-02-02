@@ -23,10 +23,44 @@ function attachPopupHandler( popup, sources ) {
 }
 
 function getHeadSnippet( type, selector ) {
+	var text = "", el, absUrl, hash;
+
 	if ( selector === "true" ) {
 		selector = "";
 	}
-	return $( "<div></div>" ).append( $( "head" ).find( type + selector ).contents().clone() ).html();
+
+	// First, try to grab a tag in this document
+	if ( !$.mobile.path.isPath( selector ) ) {
+		el = $( "head" ).find( type + selector );
+		// If this is not an embedded style, try a stylesheet reference
+		if ( el.length === 0 && type === "style" ) {
+			el = $( "head" ).find( "link[rel='stylesheet']" + selector );
+		}
+		text = el.contents().clone();
+		if ( !text.html() ) {
+			text = "";
+			selector = el.attr( "href" ) || el.attr( "src" ) || "";
+		}
+	}
+
+	// If not, try to SJAX in the document referred to by the selector
+	if ( !text && selector ) {
+		absUrl = $.mobile.path.makeUrlAbsolute( selector );
+		hash = $.mobile.path.parseUrl( absUrl ).hash;
+
+		// selector is a path to SJAX in
+		$.ajax( absUrl, { async: false } )
+			.success( function( data, textStatus, jqXHR ) {
+				text = data;
+				// If there's a hash we assume this is an HTML document that has a tag
+				// inside whose ID is the hash
+				if ( hash ) {
+					text = $( data ).find( hash ).contents().clone();
+				}
+			});
+	}
+
+	return $( "<div></div>" ).append( text ).html();
 }
 
 $( document ).bind( "pagebeforechange", function( e, data ) {
