@@ -4,7 +4,7 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "./widgets/page" ], function( $ ) {
+define( [ "jquery", "./widgets/page" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

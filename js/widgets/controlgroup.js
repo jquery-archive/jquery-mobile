@@ -8,7 +8,7 @@
 define( [ "jquery",
 	"../jquery.mobile.buttonMarkup",
 	"./addFirstLastClasses",
-	"../jquery.mobile.widget" ], function( $ ) {
+	"../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

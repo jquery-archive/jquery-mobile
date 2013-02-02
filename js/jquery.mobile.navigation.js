@@ -14,7 +14,7 @@ define( [
 	"./jquery.mobile.support",
 	"depend!./jquery.hashchange[jquery]",
 	"./widgets/page",
-	"./jquery.mobile.transition" ], function( $ ) {
+	"./jquery.mobile.transition" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

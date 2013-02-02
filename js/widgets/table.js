@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.table.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

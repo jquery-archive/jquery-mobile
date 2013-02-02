@@ -14,7 +14,7 @@ define([
 	"./jquery.mobile.navigation",
 	"./widgets/loader",
 	"./jquery.mobile.vmouse",
-	"depend!./jquery.hashchange[jquery]" ], function( $ ) {
+	"depend!./jquery.hashchange[jquery]" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),

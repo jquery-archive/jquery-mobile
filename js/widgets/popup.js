@@ -21,7 +21,7 @@ define( [
 	"../navigation/navigator",
 	"../navigation/method",
 	"../jquery.mobile.navigation",
-	"depend!../jquery.hashchange[jquery]" ], function( $ ) {
+	"depend!../jquery.hashchange[jquery]" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
