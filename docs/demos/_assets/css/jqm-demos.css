@@ -127,6 +127,16 @@ body, .jqm-demos  {
 	border: none;
 }
 
+.jqm-content > p a.ui-link,
+.jqm-content p.jqm-intro a.ui-link {
+	font-weight: 400; 
+	text-decoration:none;
+}
+.jqm-content > p a.ui-link:hover,
+.jqm-content p.jqm-intro a.ui-link:hover {
+	text-decoration:underline;
+}
+
 /* Code */
 .jqm-content pre,
 .jqm-content code {
