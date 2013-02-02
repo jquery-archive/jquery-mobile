@@ -439,6 +439,9 @@ body, .jqm-demos  {
 	border-width: 12px 2px 12px 0;
 	border-bottom-right-radius: 5px;
 }
+.jqm-view-source .ui-collapsible-content td.code .container > textarea {
+	resize: none;
+}
 
 /**
  * SyntaxHighlighter
