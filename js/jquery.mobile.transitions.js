@@ -12,7 +12,7 @@ define( [
 	"./transitions/slidefade",
 	"./transitions/slideup",
 	"./transitions/turn"
-], function( $ ) {
+], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

@@ -8,7 +8,7 @@
 //>>group: Transitions
 //>>css.structure: ../css/structure/jquery.mobile.transition.pop.css
 
-define( [ "jquery", "../jquery.mobile.transition" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.transition" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
