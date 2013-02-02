@@ -33,7 +33,7 @@
 			<h1>Popup <a href="http://api.jquerymobile.com/popup/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 		
-			<p class="jqm-intro">jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar. 
+			<p class="jqm-intro">The popup widget can be used for various types of popups. From a small tooltip popup to a large photo lightbox. 
 				<a href="#popup-sections" class="jqm-sections-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
 			</p>
 
@@ -52,8 +52,8 @@
 
 			<h2>Tooltip</h2>
 			<p>A tooltip can be created by adding a theme swatch and padding via the <code>ui-content</code> class a basic popup.</p>
-			<div data-demo-html="true" class="ui-body-d" style="padding:1.5em">	
-				<p>A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup"  data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-theme="e" data-iconpos="notext">Learn more</a></p>
+			<div data-demo-html="true">	
+				<p class="ui-body-d" style="padding:2em;">A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup"  data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-theme="e" data-iconpos="notext">Learn more</a></p>
 
 				<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
 		          <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
@@ -68,13 +68,13 @@
 				<a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/newyork.jpg" alt="New York, USA" style="width:30%"></a>
 				
 				<div data-role="popup" id="popupParis" data-overlay-theme="a" data-theme="d" data-corners="false">
-					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/paris.jpg" alt="Paris, France">
+					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
 				</div>
 				<div data-role="popup" id="popupSydney" data-overlay-theme="a" data-theme="d" data-corners="false">
-					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/sydney.jpg" alt="Sydney, Australia">
+					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/sydney.jpg" style="max-height:512px;" alt="Sydney, Australia">
 				</div>
 				<div data-role="popup" id="popupNYC" data-overlay-theme="a" data-theme="d" data-corners="false">
-					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/newyork.jpg" alt="New York, USA">
+					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/newyork.jpg" style="max-height:512px;" alt="New York, USA">
 				</div>
 			</div><!--/demo-html -->
 			
@@ -224,9 +224,6 @@
 			</div><!--/demo-html -->
 
 
-			
-			
-
 
 
 			<h2 id="position-header">Position</h2>
@@ -274,7 +271,7 @@
 			
 				<h2>Theme</h2>
 
-				<p>The popup has two theme-related options: <code>data-theme</code> and <code>data-overlay-theme</code>. The <code>data-theme</code> option refers to the theme of the popup itself, whereas <code>data-overlay-theme</code> controls the semi-opaque layer behind the popup. The theme is inherited from the page; specify <code>data-theme=&quot;none&quot;</code>for a popup with a transparent background.</p>
+				<p>The popup has two theme-related options: <code>data-theme</code> and <code>data-overlay-theme</code>. The <code>data-theme</code> option refers to the theme of the popup itself, whereas <code>data-overlay-theme</code> controls the semi-opaque layer behind the popup. The theme is inherited from the page; specify <code>data-theme=&quot;none&quot;</code> for a popup with a transparent background.</p>
 				
 
 				<div data-demo-html="true">	
@@ -304,24 +301,9 @@
 
 			<h2>Advanced techniques</h2>
 			<p>Learn how to customize and extend popups by working with the API, custom scripts, and styles.</p>
-			<a href="popup-images.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Scaling images</a>
-			<a href="popup-iframes.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Map + video iframes</a>
+			<a href="popup-images.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Scaling images</a>
+			<a href="popup-iframes.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Map + video iframes</a>
 			
-
-			
-
-			
-			
-
-
-
-
-
-			
-
-
-
-		
 
 
 		</div><!-- /content -->
