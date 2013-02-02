@@ -42,7 +42,7 @@
 			<p>To create a popup, add the <code>data-role="popup"</code> attribute to a div with the popup contents. Then create a link with the <code>href</code> set to the <code>id</code> of the popup div, and add the attribute <code>data-rel="popup"</code> to tell the framework to open the popup when the link is tapped. A popup div has to be nested inside the same page as the link.</p>
 
 			<div data-demo-html="true">	
-				<a href="#popupBasic" data-rel="popup" data-role="button" data-inline="true" data-transition="pop">Open Popup</a>
+				<a href="#popupBasic" data-rel="popup" data-role="button" data-inline="true" data-transition="pop">Basic Popup</a>
 
 				<div data-role="popup" id="popupBasic">
 					<p>This is a completely basic popup, no options set.</p>
@@ -53,7 +53,7 @@
 			<h2>Tooltip</h2>
 			<p>A tooltip can be created by adding a theme swatch and padding via the <code>ui-content</code> class a basic popup.</p>
 			<div data-demo-html="true" class="ui-body-d" style="padding:1.5em">	
-				<p>A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup"  data-role="button" class="ui-icon-alt" data-inline="true" data-transition="fade" data-icon="info" data-theme="e" data-iconpos="notext">Learn more</a></p>
+				<p>A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup"  data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-theme="e" data-iconpos="notext">Learn more</a></p>
 
 				<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
 		          <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
@@ -82,7 +82,7 @@
 			<h2>Menu</h2>
 			<p>A menu can be created by adding a <a href="../listviews">listview</a> inside a popup.</p>
 			<div data-demo-html="true">	
-				<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="turn" data-icon="gear" data-theme="e">Actions...</a>
+				<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup" data-icon="gear" data-theme="e">Actions...</a>
 
 				<div data-role="popup" id="popupMenu" data-theme="d">
 						<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
@@ -98,7 +98,7 @@
 			<h2>Nested menu</h2>
 			<p>A menu can be created by placing <a href="../listviews">listviews</a> into an <a href="../accordions">accordion</a> inside a popup.</p>
 			<div data-demo-html="true">	
-				<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b">Choose a creature...</a>
+				<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Choose a creature...</a>
 
 				<div data-role="popup" id="popupNested" data-theme="none">
 					<div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
@@ -146,7 +146,7 @@
 			<h2>Form</h2>
 			<p>A menu can be created by adding a <a href="../listviews">listview</a> inside a popup.</p>
 			<div data-demo-html="true">	
-				<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="a">Sign in</a>
+				<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="a" data-transition="flip">Sign in</a>
 
 				<div data-role="popup" id="popupMenu" data-theme="a">
 					<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
