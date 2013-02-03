@@ -195,29 +195,21 @@ body, .jqm-demos  {
 }
 
 /* Demo view source */
-.jqm-content div.jqm-view-source-link {
-	float: left;
-	clear: left;
-	margin: 0 0 2.4em;
-}
-.jqm-content div[data-demo-html] {
-	clear: left;
-}
 .jqm-content div[data-demo-html="true"] {
 	border-top: 1px solid rgba(0,0,0,.08);
 	margin: 0;
 	padding: 1.2em 0;
 }
-.jqm-content div[data-demo-html="true"] + div.jqm-view-source-link {
-	float: none;
+.jqm-content div.jqm-view-source-link {
 	border-top: 1px solid rgba(0,0,0,.08);
 	padding: .6em 0 0;
+	margin: 2.4em 0;
 }
-.jqm-content div[data-demo-html="true"] +  .jqm-content .jqm-view-source-link .ui-btn.ui-mini {
+.jqm-content div[data-demo-html="true"] + div.jqm-view-source-link {
+	margin: 0 0 2.4em;
+}
+.jqm-content .jqm-view-source-link .ui-btn.ui-mini {
 	margin: 0;
-}
-.jqm-content div.jqm-view-source-link + .jqm-button {
-	float: right;
 }
 
 /* Lists */
