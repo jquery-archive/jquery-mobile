@@ -1,0 +1,43 @@
+.ui-popup > .arrow-guide {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	pointer-events: none;
+}
+
+.arrow-container {
+	position: absolute; /* clip doesn't work otherwise */
+}
+
+.arrow {
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: relative;
+	overflow: hidden;
+	background: none;
+}
+
+.arrow-background {
+	position: absolute;
+	border: none;
+}
+
+.arrow-background.t, .arrow-background.b {
+	/* Undo rotation and reflect in x axis */
+	-webkit-transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
+	-moz-transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
+	-ms-transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
+	transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
+}
+
+.arrow-background.l, .arrow-background.r {
+	/* Undo rotation and reflect in y axis */
+	-webkit-transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
+	-moz-transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
+	-ms-transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
+	transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
+}
