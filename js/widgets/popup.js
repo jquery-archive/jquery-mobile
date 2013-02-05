@@ -412,11 +412,10 @@ define( [
 			}
 		},
 
-		// Try and center the overlay over the given coordinates
-		_placementCoords: function( desired ) {
-			// rectangle within which the popup must fit
-			var
+		_clampPopupWidth: function( infoOnly ) {
+			var menuSize,
 				winCoords = windowCoords(),
+				// rectangle within which the popup must fit
 				rc = {
 					x: this._tolerance.l,
 					y: winCoords.y + this._tolerance.t,
@@ -425,12 +424,23 @@ define( [
 				},
 				menuSize, ret;
 
-			// Clamp the width of the menu before grabbing its size
-			this._ui.container.css( "max-width", rc.cx );
+			if ( !infoOnly ) {
+				// Clamp the width of the menu before grabbing its size
+				this._ui.container.css( "max-width", rc.cx );
+			}
+
 			menuSize = {
 				cx: this._ui.container.outerWidth( true ),
 				cy: this._ui.container.outerHeight( true )
 			};
+
+			return { rc: rc, menuSize: menuSize };
+		},
+
+		_calculateFinalLocation: function( desired, clampInfo ) {
+			var ret,
+				rc = clampInfo.rc,
+				menuSize = clampInfo.menuSize;
 
 			// Center the menu over the desired coordinates, while not going outside
 			// the window tolerances. This will center wrt. the window if the popup is too large.
@@ -452,6 +462,11 @@ define( [
 			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - docHeight ) );
 
 			return { left: ret.x, top: ret.y };
+		},
+
+		// Try and center the overlay over the given coordinates
+		_placementCoords: function( desired ) {
+			return this._calculateFinalLocation( desired, this._clampPopupWidth() );
 		},
 
 		_createPrereqs: function( screenPrereq, containerPrereq, whenDone ) {
