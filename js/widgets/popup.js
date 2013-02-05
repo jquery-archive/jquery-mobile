@@ -412,26 +412,21 @@ define( [
 			}
 		},
 
-		_clampPopupWidth: function() {
-			var winCoords = windowCoords(),
-				// rectangle within which the popup must fit
+		// Try and center the overlay over the given coordinates
+		_placementCoords: function( desired ) {
+			// rectangle within which the popup must fit
+			var
+				winCoords = windowCoords(),
 				rc = {
 					x: this._tolerance.l,
 					y: winCoords.y + this._tolerance.t,
 					cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
 					cy: winCoords.cy - this._tolerance.t - this._tolerance.b
-				};
+				},
+				menuSize, ret;
 
 			// Clamp the width of the menu before grabbing its size
 			this._ui.container.css( "max-width", rc.cx );
-			return rc;
-		},
-
-		// Try and center the overlay over the given coordinates
-		_placementCoords: function( desired ) {
-			var rc, menuSize, ret;
-
-			rc = this._clampPopupWidth();
 			menuSize = {
 				cx: this._ui.container.outerWidth( true ),
 				cy: this._ui.container.outerHeight( true )
