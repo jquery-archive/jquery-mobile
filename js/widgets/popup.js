@@ -25,6 +25,20 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+	function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
+		var ret = desired;
+
+		if ( winSize < segSize ) {
+			// Center segment if it's bigger than the window
+			ret = offset + ( winSize - segSize ) / 2;
+		} else {
+			// Otherwise center it at the desired coordinate while keeping it completely inside the window
+			ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
+		}
+
+		return ret;
+	}
+
 	function windowCoords() {
 		var $win = $.mobile.window;
 
@@ -58,20 +72,6 @@ define( [
 			//
 			// NOTE this option is modified in _create!
 			history: !$.mobile.browser.oldIE
-		},
-
-		_fitSegmentInsideSegment: function( winSize, segSize, offset, desired ) {
-			var ret = desired;
-
-			if ( winSize < segSize ) {
-				// Center segment if it's bigger than the window
-				ret = offset + ( winSize - segSize ) / 2;
-			} else {
-				// Otherwise center it at the desired coordinate while keeping it completely inside the window
-				ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
-			}
-
-			return ret;
 		},
 
 		_eatEventAndClose: function( e ) {
@@ -440,8 +440,8 @@ define( [
 			// Center the menu over the desired coordinates, while not going outside
 			// the window tolerances. This will center wrt. the window if the popup is too large.
 			ret = {
-				x: this._fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
-				y: this._fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
 			};
 
 			// Make sure the top of the menu is visible
