@@ -738,8 +738,7 @@ define( [
 					newPage.data( 'absUrl', triggerData.absUrl );
 					$.mobile.changePage( newPage, options );
 				})
-				.fail(function( url, options ) {
-					isPageTransitioning = false;
+				.fail(function( url, options ){
 
 					//clear out the active button state
 					removeActiveLinkClass( true );
