@@ -34,20 +34,6 @@
 		deepEqual( textValueButton.siblings().text(), "bar" );
 	});
 
-	// Issue 2877
-	test( "verify the button placeholder is added many times", function() {
-		var $form =	$( "#hidden-element-addition-form" ), count = 3;
-		expect( count * 2 );
-
-		for( var x = 0; x < count; x++ ) {
-			$( "#hidden-element-addition" ).trigger( "vclick" );
-			deepEqual( $form.find( "input[type='hidden']" ).length, 1, "hidden form input should be added" );
-
-			$form.trigger( "submit" );
-			deepEqual( $form.find( "[type='hidden']" ).length, 0, "hidden form input is removed" );
-		}
-	});
-
 	test( "theme should be inherited", function() {
 		var $inherited = $( "#theme-check" ),
 		    $explicit = $( "#theme-check-explicit" );
