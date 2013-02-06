@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Slide Panel</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
-	
+
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
@@ -15,7 +15,7 @@
 	<div data-role="page" class="ui-responsive-panel">
 	
 		<!-- defaultpanel  -->
-		<div data-role="panel" id="defaultpanel" data-theme="b">
+		<div data-role="panel" id="defaultpanel">
 			
             <h3>Default panel options</h3>
             <p>This panel has all the default options: positioned on the left with the reveal display mode. The panel markup is <em>before</em> the header, content and footer in the source order.</p>
@@ -82,7 +82,7 @@
             
             <h4>CSS column-count &amp; forms</h4>
             
-            <p>To avoid blinks when opening a panel, we force hardware acceleration on WebKit browsers. The CSS that is used to do this can cause issues with form elements on the page if you use <code>column-count</code> to layout the form. To resolve this you have to set the following rule for the <code>div</code> that contains the form or the field container of each form element: 
+            <p>To avoid blinks when opening a panel, we force hardware acceleration on WebKit browsers. The CSS that is used to do this can cause issues with form elements on the page if you use <code>column-count</code> to layout the form. To resolve this you have to set the following rule for the <code>div</code> that contains the form or the field container of each form element:</p>
 
 			<pre><code>
 -webkit-transform: translate3d(0,0,0);
@@ -180,11 +180,9 @@ $( "#mypanel" ).trigger( "updatelayout" );
             
 			<p>Panels have a fixed width of 17em (272 pixels) which is narrow enough to still show some of the page contents when open to make clicking out to close easy, and still looks good on wider tablet or desktop screens. The styles to set widths on panels are fairly complex but these can be overridden with CSS as needed.</p>
 
-			<p>Other than the width and 100% height styles, panels have very little styling on their own. You can set a theme on the panel by add a <code>data-theme</code> to the panel container or add your own classes to style it as needed.</p>
+			<p>Other than the theme background, width and 100% height styles, panels have very little styling on their own. The default theme for panels is "c". You can set a different theme for the panel by adding a <code>data-theme</code> to the panel container, or set <code>data-theme="none"</code> and add your own classes to style it as needed.</p>
 			
-			<p>Note that adding padding, borders, or margins directly to the panel container will alter the overall dimensions and could cause the positioning and animation to be affected.</p>
-
-			<p>To add padding to a panel, we recommend adding a container inside the panel and applying styles to that to avoid any issues. All the examples on this page follow this pattern.</p>
+			<p>Note that adding padding, borders, or margins directly to the panel container will alter the overall dimensions and could cause the positioning and animation to be affected. To avoid this, apply styles to the panel content wrapper (<code>.ui-pannel-inner</code>).</p>
 
 
 			<h2>Making the panel responsive</h2>
@@ -194,27 +192,32 @@ $( "#mypanel" ).trigger( "updatelayout" );
 			<p>Here is an example of these rules wrapped in a media query to only apply this behavior above 35em (560px):</p>
 			
 			<pre><code>
-/* wrap push on wide viewports once open */
-@media (min-width: 35em){
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal {
-		margin-right: 17em;
-	}
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-right,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-right,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right {
-		margin: 0 0 0 17em;
-	}
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal {
-		width: auto;	
-	}
-	.ui-responsive-panel .ui-panel-dismiss-display-push {
-		display: none;
-	}
+@media (min-width:35em){
+
+/* wrap on wide viewports once open */
+
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-left,
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-left,
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-left,
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-left {
+    margin-right: 17em;
+}
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-right,
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-right,
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right,
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right {
+    margin-left: 17em;
+}
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push,
+.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal {
+    width: auto;	
+}
+
+/* disable "dismiss" on wide viewports */
+.ui-responsive-panel .ui-panel-dismiss-display-push {
+    display: none;
+}
+    	
 }
 			</code></pre>
 			
@@ -232,7 +235,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		<!-- Here are a bunch of panels at the end, just before the close page tag  -->
 
 		<!-- leftpanel1  -->
-		<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-dismissible="true" data-theme="a">
+		<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
 			
             <h3>Left Panel: Reveal</h3>
             <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -243,7 +246,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- leftpanel2  -->
-		<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-dismissible="true" data-theme="a">
+		<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-theme="a">
 			
             <h3>Left Panel: Push</h3>
             <p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -254,7 +257,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- leftpanel3  -->
-		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-dismissible="true" data-theme="a">
+		<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
 			
             <h3>Left Panel: Overlay</h3>
             <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -265,7 +268,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- rightpanel1  -->
-		<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-dismissible="true" data-theme="b">
+		<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
 			
             <h3>Right Panel: Reveal</h3>
             <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -276,7 +279,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- rightpanel2  -->
-		<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-dismissible="true" data-theme="b">
+		<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-theme="b">
 			
             <h3>Right Panel: Push</h3>
             <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -287,7 +290,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 
 		<!-- rightpanel3  -->
-		<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-dismissible="true" data-theme="b">
+		<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-theme="b">
 			
             <h3>Right Panel: Overlay</h3>
             <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>

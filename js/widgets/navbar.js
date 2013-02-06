@@ -41,6 +41,11 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			if ( !$(event.target).hasClass( "ui-disabled" ) ) {
 				$navbtns.removeClass( $.mobile.activeBtnClass );
 				$( this ).addClass( $.mobile.activeBtnClass );
+				// The code below is a workaround to fix #1181. We have to see why removeActiveLinkClass() doesn't take care of it.
+				var activeNavbtn = $( this );
+				$( document ).one( "pagechange", function( event ) {
+					activeNavbtn.removeClass( $.mobile.activeBtnClass );
+				});
 			}
 		});
 

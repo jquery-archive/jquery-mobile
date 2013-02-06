@@ -7,7 +7,7 @@ function attachPopupHandler( popup, sources ) {
 			collapsible, pre;
 
 		$.each( sources, function( idx, options ) {
-			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-content-theme='a'>" +
+			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-collapsed-icon='arrow-l' data-expanded-icon='arrow-d' data-content-theme='a'>" +
 					"<h1>" + options.title + "</h1>" +
 					"<pre class='brush: " + options.brush + ";'></pre>" +
 				"</div>" );
@@ -23,10 +23,44 @@ function attachPopupHandler( popup, sources ) {
 }
 
 function getHeadSnippet( type, selector ) {
+	var text = "", el, absUrl, hash;
+
 	if ( selector === "true" ) {
 		selector = "";
 	}
-	return $( "<div></div>" ).append( $( "head" ).find( type + selector ).contents().clone() ).html();
+
+	// First, try to grab a tag in this document
+	if ( !$.mobile.path.isPath( selector ) ) {
+		el = $( "head" ).find( type + selector );
+		// If this is not an embedded style, try a stylesheet reference
+		if ( el.length === 0 && type === "style" ) {
+			el = $( "head" ).find( "link[rel='stylesheet']" + selector );
+		}
+		text = $( "<div></div>" ).append( el.contents().clone() ).html();
+		if ( !text ) {
+			text = "";
+			selector = el.attr( "href" ) || el.attr( "src" ) || "";
+		}
+	}
+
+	// If not, try to SJAX in the document referred to by the selector
+	if ( !text && selector ) {
+		absUrl = $.mobile.path.makeUrlAbsolute( selector );
+		hash = $.mobile.path.parseUrl( absUrl ).hash;
+
+		// selector is a path to SJAX in
+		$.ajax( absUrl, { async: false, dataType: "text" } )
+			.success( function( data, textStatus, jqXHR ) {
+				text = data;
+				// If there's a hash we assume this is an HTML document that has a tag
+				// inside whose ID is the hash
+				if ( hash ) {
+					text = $( "<div></div>" ).append( $( data ).find( hash ).contents().clone() ).html();
+				}
+			});
+	}
+
+	return text;
 }
 
 $( document ).bind( "pagebeforechange", function( e, data ) {

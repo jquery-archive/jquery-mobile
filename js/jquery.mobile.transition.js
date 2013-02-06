@@ -1,4 +1,3 @@
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Animated page change core logic and sequence handlers
 //>>label: Transition Core
