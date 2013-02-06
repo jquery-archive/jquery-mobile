@@ -222,7 +222,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
 				e.preventDefault();
 				var $link = $( this );
-				if ( $link.is( ":jqmData(role='button')" ) ) {
+				if ( ! $link.hasClass( "ui-link" ) ) {
 					$link.addClass( $.mobile.activeBtnClass );
 					self.element.one( "panelopen panelclose", function() {
 						$link.removeClass( $.mobile.activeBtnClass );
