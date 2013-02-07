@@ -199,6 +199,51 @@
 	If scripts are present in the body, the browser ends up loading them twice. 
 	We therefore strongly recommend that jQuery Mobile documents with scripts in their body also contain a <code>div</code> with <code>data-role="page"</code>.
 	</p>
+	
+	
+
+	<h2 id="nav-prefetch">Prefetching pages</h2>
+
+	<p>When using single-page templates, you can prefetch pages into the DOM so that they're available instantly when the user visits them. To prefetch a page, add the <code>data-prefetch</code> attribute to a link that points to the page. jQuery Mobile then loads the target page in the background after the primary page has loaded and the <code>pagecreate</code> event has triggered.
+
+	<div data-demo-html="true">			
+
+		<a href="transitions-dialog.html" data-prefetch="true" data-rel="dialog">This link will prefetch the page</a>
+
+	</div><!--/demo-html -->
+
+  <p>Alternatively, you can prefetch a page programmatically using <code>$.mobile.loadPage()</code>:</p>
+
+<pre><code>
+$.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
+</code></pre>
+
+
+
+
+
+
+		<h2 id="nav-cache">DOM Cache</h2>
+
+		<p>Keeping lots of pages in the DOM quickly fills the browser's memory, and can cause some mobile browsers to slow down or even crash. jQuery Mobile has a simple mechanism to keep the DOM tidy. </p>
+		<p>Whenever it loads a page via AJAX, it flags the page to be removed from the DOM when you navigate away from it later (technically, on the <code>pagehide</code> event). If you revisit a removed page, the browser may be able to retrieve the page's HTML file from its cache. If not, it re-fetches the file from the server. (In the case of nested listviews, jQuery Mobile removes all the pages that make up the nested list once you navigate to a page that's not part of the list.)</p>
+
+
+		<p>If you prefer, you can tell jQuery Mobile to keep previously-visited pages in the DOM instead of removing them. This lets you cache pages so that they're available instantly if the user returns to them.</p>
+
+		<pre><code>
+		$.mobile.page.prototype.options.domCache = true;
+		</code></pre>
+
+		<p>Alternatively, to cache just a particular page, you can add the <code>data-dom-cache="true"</code> attribute to the page's container. </p>
+
+		<p>To keep all previously-visited pages in the DOM, set the <code>domCache</code> option on the page plugin to <code>true</code>, like this:</p>
+
+		<pre><code>
+		<var>pageContainerElement</var>.page({ domCache: true });
+		</code></pre>
+
+		<p>Note that the contents of the first page isn't removed from the DOM, only pages loaded in via AJAX. Pages inside a multi-page template aren't affected by this feature at all - jQuery Mobile only removes pages loaded via Ajax.</p>
 			
 
 	</div><!-- /content -->

@@ -98,7 +98,9 @@ body, .jqm-demos  {
 }
 
 /* Paragraphs */
-.jqm-content > p {
+.jqm-content > p,
+.jqm-list
+ {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 	font-size: 0.95em;
