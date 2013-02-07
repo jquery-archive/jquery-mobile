@@ -98,7 +98,9 @@ body, .jqm-demos  {
 }
 
 /* Paragraphs */
-.jqm-content > p {
+.jqm-content > p,
+.jqm-list
+ {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 	font-size: 0.95em;
@@ -215,7 +217,7 @@ body, .jqm-demos  {
 /* Lists */
 .jqm-list .ui-li-heading  {
 	font-weight: 300; 
-	font-size: 1.1em;
+	font-size: 1.2em;
 	color: #74b042;
 }
 .jqm-list .ui-li-desc  {

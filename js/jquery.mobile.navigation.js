@@ -66,6 +66,9 @@ define( [
 			}
 		}),
 
+		// used to track last vclicked element to make sure its value is added to form data
+		$lastVClicked = null,
+
 		//will be defined when a link is clicked and given an active class
 		$activeClickedLink = null,
 
@@ -986,31 +989,12 @@ define( [
 		return path.makeUrlAbsolute( url, base);
 	}
 
-	function maybeCreateHiddenInput( $el ) {
-		var type = $el.attr( "type" ),
-			name = $el.attr( "name" );
-
-		if ( type !== "button" && type !== "reset" && name ) {
-			// Add hidden input so the value of the clicked button will be recorded
-			// in the submitted form data, but remove the hidden input from the form
-			// after the value has been recorded so as to avoid multiple copies of it
-			// preceding the original button.
-			$.mobile.document.one( "submit",
-				$.proxy( function() { this.remove(); },
-					$( "<input>", {
-						type: "hidden",
-						name: $el.attr( "name" ),
-						value: $el.attr( "value" )
-					}).insertBefore( $el ) ) );
-		}
-	}
-
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following deferred is resolved in the init file
 	$.mobile.navreadyDeferred = $.Deferred();
 	$.mobile._registerInternalEvents = function() {
 		var getAjaxFormData = function( $form, calculateOnly ) {
-			var type, target, url, ret = true;
+			var type, target, url, ret = true, formData, vclickedName;
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
 					$form.is( ":jqmData(ajax='false')" ) ||
@@ -1048,11 +1032,30 @@ define( [
 
 			if ( !calculateOnly ) {
 				type = $form.attr( "method" );
+				formData = $form.serializeArray();
+
+				if ( $lastVClicked && $lastVClicked[ 0 ].form === $form[ 0 ] ) {
+					vclickedName = $lastVClicked.attr( "name" );
+					if ( vclickedName ) {
+						// Make sure the last clicked element is included in the form
+						$.each( formData, function( key, value ) {
+							if ( value.name === vclickedName ) {
+								// Unset vclickedName - we've found it in the serialized data already
+								vclickedName = "";
+								return false;
+							}
+						});
+						if ( vclickedName ) {
+							formData.push( { name: vclickedName, value: $lastVClicked.attr( "value" ) } );
+						}
+					}
+				}
+
 				ret = {
 					url: url,
 					options: {
 						type:		type && type.length && type.toLowerCase() || "get",
-						data:		$form.serialize(),
+						data:		$.param( formData ),
 						transition:	$form.jqmData( "transition" ),
 						reverse:	$form.jqmData( "direction" ) === "reverse",
 						reloadPage:	true
@@ -1082,10 +1085,9 @@ define( [
 				return;
 			}
 
-			// If this is a vclick on a button, we must make sure its value will be
-			// recorded in the resulting form data by adding a hidden input that
-			// carries the button's value
-			maybeCreateHiddenInput( $( target ) );
+			// Record that this element was clicked, in case we need it for correct
+			// form submission during the "submit" handler above
+			$lastVClicked = $( target );
 
 			// Try to find a target element to which the active class will be applied
 			if ( $.data( target, "mobile-button" ) ) {
