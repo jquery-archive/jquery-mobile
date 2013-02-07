@@ -26,7 +26,8 @@
 	border: none;
 }
 
-.arrow-background.t, .arrow-background.b {
+.arrow-container.t .arrow-background,
+.arrow-container.b .arrow-background {
 	/* Undo rotation and reflect in x axis */
 	-webkit-transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
 	-moz-transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
@@ -34,7 +35,8 @@
 	transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
 }
 
-.arrow-background.l, .arrow-background.r {
+.arrow-container.l .arrow-background,
+.arrow-container.r .arrow-background {
 	/* Undo rotation and reflect in y axis */
 	-webkit-transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
 	-moz-transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);

@@ -50,14 +50,13 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	_updateArrow: function( direction ) {
 		var ar = this._ui.arrow,
 			oldTheme = ar.ct.jqmData( "oldTheme" ),
-			theme = this.options.theme || $.mobile.getInheritedTheme( this.element, "c" );
+			theme = "ui-body-" + ( this.options.theme || $.mobile.getInheritedTheme( this.element, "c" ) );
 
 		// Remove old direction and theme
 		ar.ct.removeClass( "l t r b" );
-		ar.bg.removeClass( "l t r b" );
 		if ( oldTheme ) {
-			ar.ar.removeClass( "ui-body-" + oldTheme );
-			ar.bg.removeClass( "ui-body-" + oldTheme );
+			ar.ar.removeClass( oldTheme );
+			ar.bg.removeClass( oldTheme );
 		}
 
 		ar.ar.toggleClass( "ui-overlay-shadow", this.options.shadow );
@@ -65,8 +64,8 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		// Set new direction and theme
 		ar.ct.jqmData( "oldTheme", theme );
 		ar.ct.addClass( direction );
-		ar.ar.addClass( "ui-body-" + theme );
-		ar.bg.addClass( direction + " ui-body-" + theme );
+		ar.ar.addClass( theme );
+		ar.bg.addClass( theme );
 	},
 
 	// Pretend to show an arrow described by @p and @dir and calculate the
