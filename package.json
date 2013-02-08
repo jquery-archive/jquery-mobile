@@ -23,6 +23,7 @@
 		"jquery": ">=1.7.3"
 	},
 	"devDependencies": {
+		"async": "latest",
 		"grunt": "0.4.x",
 		"grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
 		"grunt-contrib-connect": "git://github.com/gruntjs/grunt-contrib-connect.git",
