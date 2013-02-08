@@ -1,0 +1,11 @@
+#results div {
+  font-size: 2em;
+}
+
+#fixtures {
+  display: none;
+}
+
+#run {
+  min-width: 100px;
+}
