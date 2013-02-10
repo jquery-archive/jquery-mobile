@@ -13,13 +13,15 @@ function( jQuery ) {
 ( function( $, undefined ) {
 
 var uiTemplate = $(
-	'<div class="arrow-guide"></div>' +
-	'<div class="arrow-container">' +
-		'<div class="arrow">' +
-			'<div class="arrow-background"><div>' +
-		'</div>' +
-	'</div>'
-);
+		'<div class="arrow-guide"></div>' +
+		'<div class="arrow-container">' +
+			'<div class="arrow">' +
+				'<div class="arrow-background"></div>' +
+			'</div>' +
+		'</div>'
+	),
+	// Needed for transforming coordinates from screen to arrow background
+	txFactor = Math.sqrt( 2 ) / 2;
 
 function getArrow() {
 	var clone = uiTemplate.clone(),
@@ -113,9 +115,9 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	},
 
 	_placementCoords: function( desired ) {
-		var state, menuFull, best,
-			ar = this._ui.arrow,
-			params;
+		var state, menuFull, best, params, bgOffset, diff,
+			bgRef = {},
+			ar = this._ui.arrow ;
 
 		if ( !this.options.arrow ) {
 			return this._super( desired );
@@ -142,8 +144,17 @@ $.widget( "mobile.popup", $.mobile.popup, {
 			}, this ) );
 
 		// Move the arrow into place
-		ar.ct.removeAttr( "style" ).css( best.posProp, best.posVal );
+		ar.ct.removeAttr( "style" ).show().css( best.posProp, best.posVal );
 		this._updateArrow( best.dir );
+
+		bgRef[ params[ best.dir ].fst ] = ar.ct.offset();
+		bgRef[ params[ best.dir ].snd ] = this.element.offset();
+		ar.bg.removeAttr( "style" ).css( { left: 0, top: 0 } );
+		ar.bg.css( ( "cx" === params[ best.dir ].dimKey ? "width" : "height" ), menuFull[ params[ best.dir ].dimKey ] );
+		bgOffset = ar.bg.offset();
+		diff = { dx: bgRef.x.left - bgOffset.left, dy: bgRef.y.top - bgOffset.top };
+		ar.bg.css( { left: txFactor * diff.dy + txFactor * diff.dx, top: txFactor * diff.dy - txFactor * diff.dx } );
+
 		return best.result;
 	},
 
