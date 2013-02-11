@@ -268,7 +268,12 @@ body, .jqm-demos  {
 	overflow: visible;
 	white-space: normal;
 }
-
+/*quicklinks*/
+.jqm-content a.jqm-top-link{
+	font-size: 120%;
+	font-weight: 300;
+	line-height: 135%;
+}
 /* ### TEMPORARY ### */
 /* ui-li-count position: count bubble position when icon is false needs to be fixed in the framework CSS */
 .jqm-list .ui-li-count {
