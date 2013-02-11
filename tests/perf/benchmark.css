@@ -2,7 +2,7 @@ body {
   font-family: sans-serif;
 }
 
-#results {
+#results, #suite-name {
   width: 90%;
   font-size: 2em;
 }
@@ -20,8 +20,14 @@ body {
   width: 80%;
 }
 
-#run, #results, #suite-name {
+#results, #suite-name {
   margin: 20px;
+}
+
+#run {
+  width: 20%;
+  float: right;
+  font-size: 0.7em;
 }
 
 #fixtures {

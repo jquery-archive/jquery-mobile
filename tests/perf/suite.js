@@ -2,12 +2,14 @@
 define( ["jquery"], function( $ ) {
 	var fixtures = $( "#fixtures" ), fixturesMarkup = fixtures.html();
 
+	console.log( fixturesMarkup );
+
 	// instantiate the suite with the basics including the reset on start
 	// and the result display at the end
 	var suite = new Benchmark.Suite({
 		onStart: function() {
 			fixtures.reset();
-			$( "#run" ).text( "Run!" );
+			$( "#run" ).text( "Run" );
 		},
 
 		onComplete: function() {
@@ -37,19 +39,19 @@ define( ["jquery"], function( $ ) {
 		suite.name = suite.name || $( "title" ).text();
 
 		// add the run, title, and results table
-		$( "<button>", {id: "run"} ).text( "Run!" ).appendTo( "body" );
 		$( "<h1>", {id: "suite-name"} ).text( suite.name ).appendTo( "body" );
+		$( "<button>", {id: "run"} ).text( "Run" ).appendTo( "#suite-name" );
 		$( "<table>", {id: "results"} ).appendTo( "body" );
 		$( "<th>", {'class': "name"} ).text( "name" ).appendTo( "#results" );
 		$( "<th>", {'class': "hz"} ).text( "ops/sec" ).appendTo( "#results" );
 
 		$( "#run" ).click(function() {
-			$(this).text( "Running!" );
+			$( this ).text( "Running" );
 
 			// let the dom ready callback unwind before starting the test suite
 			setTimeout(function() {
 				suite.run();
-			});
+			}, 500);
 		});
 	});
 
