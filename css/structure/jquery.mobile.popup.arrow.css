@@ -24,6 +24,8 @@
 .arrow-background {
 	position: absolute;
 	border: none;
+	left: 0px;
+	top: 0px;
 }
 
 .arrow-container.t .arrow-background,

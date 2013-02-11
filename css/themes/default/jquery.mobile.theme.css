@@ -1245,10 +1245,6 @@ a.ui-link-inherit {
 
 .arrow-background {
 	/* desired triangle height is used here */
-	/* ( (2*desired triangle height) - (arrow width) ) / 2 */
-	left: -2.928932188px;
-	/* ( (2*desired triangle height) - (arrow height) ) / 2 */
-	top: -2.928932188px;
 	width: 20px;
 	height: 20px;
 }

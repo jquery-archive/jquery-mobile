@@ -149,9 +149,10 @@ $.widget( "mobile.popup", $.mobile.popup, {
 
 		bgRef[ params[ best.dir ].fst ] = ar.ct.offset();
 		bgRef[ params[ best.dir ].snd ] = this.element.offset();
-		ar.bg.removeAttr( "style" ).css( { left: 0, top: 0 } );
-		ar.bg.css( ( "cx" === params[ best.dir ].dimKey ? "width" : "height" ), menuFull[ params[ best.dir ].dimKey ] );
-		bgOffset = ar.bg.offset();
+		bgOffset = ar.bg
+			.removeAttr( "style" )
+			.css( ( "cx" === params[ best.dir ].dimKey ? "width" : "height" ), menuFull[ params[ best.dir ].dimKey ] )
+			.offset();
 		diff = { dx: bgRef.x.left - bgOffset.left, dy: bgRef.y.top - bgOffset.top };
 		ar.bg.css( { left: txFactor * diff.dy + txFactor * diff.dx, top: txFactor * diff.dy - txFactor * diff.dx } );
 
