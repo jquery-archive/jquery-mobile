@@ -99,8 +99,7 @@ body, .jqm-demos  {
 
 /* Paragraphs */
 .jqm-content > p,
-.jqm-list
- {
+.jqm-list {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 	font-size: 0.95em;
@@ -180,20 +179,30 @@ body, .jqm-demos  {
 
 /* Sections link */
 .jqm-content a.jqm-sections-link {
+	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	display: block;
+	text-align: right;
 	font-size: 0.8em;
 	margin-top: .8em;
 	margin-bottom: -1em;
 	text-decoration: none;
 }
+.jqm-content p.jqm-intro + a.jqm-sections-link {
+	text-align: left;
+}
 .jqm-content a.jqm-sections-link span {
 	width: 18px;
 	display: inline-block;
-	margin-top: 4px;
-	margin-right: 10px;
-	float: left;
+	margin-top: 1px;
+	margin-left: 10px;
+	float: right;
 	opacity: .5;
+}
+.jqm-content p.jqm-intro + a.jqm-sections-link span {
+	float: left;
+	margin-left: 0;
+	margin-right: 10px;
 }
 
 /* Demo view source */
@@ -268,12 +277,7 @@ body, .jqm-demos  {
 	overflow: visible;
 	white-space: normal;
 }
-/*quicklinks*/
-.jqm-content a.jqm-top-link{
-	font-size: 120%;
-	font-weight: 300;
-	line-height: 135%;
-}
+
 /* ### TEMPORARY ### */
 /* ui-li-count position: count bubble position when icon is false needs to be fixed in the framework CSS */
 .jqm-list .ui-li-count {
