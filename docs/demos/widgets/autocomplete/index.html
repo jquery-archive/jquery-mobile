@@ -11,19 +11,10 @@
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
+	<script src="../../_assets/js/h2widget.js"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos">
-
-	<div data-role="panel" id="autocomplete-sections" class="jqm-nav-panel" data-position="right" data-display="overlay" data-theme="c">
-		
-		<ul data-role="listview" data-inset="false" data-theme="d" data-divider-theme="d" class="jqm-list">
-			<li class="jqm-list-header">Jump to section</li>
-            <li><a href="#autocomplete-remote" data-ajax="false">Remote data</a></li>
-            <li><a href="#autocomplete-local" data-ajax="false">Local data</a></li>
-            <li><a href="#autocomplete-filtertext" data-ajax="false">Providing richer content</a></li>
-        </ul>
-	</div>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header" data-theme="f">
 		<h1>jQuery Mobile</h1>
@@ -37,7 +28,6 @@
 
 		
 			<p class="jqm-intro">An autocomplete widget backed by either local or remote data can be created by leveraging the listview filter feature.
-				<a href="#autocomplete-sections" class="jqm-sections-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
 			</p>
 			
 		

@@ -46,7 +46,7 @@
 					this.element.find(".jqm-quicklink-panel").panel().find("ul").listview();
 				}
 				$.each(h2dictionary,function(id,text){
-					self.element.find(".jqm-quicklink-panel ul").append("<li><a href='"+id+"'>"+text+"</a></li>");
+					self.element.find(".jqm-quicklink-panel ul").append("<li><a href='#"+id+"'>"+text+"</a></li>");
 				});
 				self.element.find(".jqm-quicklink-panel ul").listview("refresh");
 
