@@ -1269,20 +1269,20 @@ a.ui-link-inherit {
 
 .arrow-container.t .arrow-background {
 	/* 0px triangle height */
-	background-position: 0px 10px;
+	background-position: 0 10px;
 }
 
 .arrow-container.l .arrow-background {
 	/* triangle height 0px */
-	background-position: 10px 0px;
+	background-position: 10px 0;
 }
 
 /* For some reason (probably because of all the decimal places) there's a
    rounding error in the background position, so push it over by one */
 .arrow-container.b .arrow-background {
-	background-position: 0px 11px;
+	background-position: 0 11px;
 }
 
 .arrow-container.r .arrow-background {
-	background-position: 11px 0px;
+	background-position: 11px 0;
 }

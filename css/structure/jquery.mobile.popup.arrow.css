@@ -1,9 +1,9 @@
 .ui-popup > .arrow-guide {
 	position: absolute;
-	left: 0px;
-	right: 0px;
-	top: 0px;
-	bottom: 0px;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
 	pointer-events: none;
 }
 
@@ -24,8 +24,6 @@
 .arrow-background {
 	position: absolute;
 	border: none;
-	left: 0px;
-	top: 0px;
 }
 
 .arrow-container.t .arrow-background,
