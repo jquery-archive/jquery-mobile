@@ -1234,6 +1234,24 @@ a.ui-link-inherit {
 	clip: rect(11px,2000px,1000px,-1000px);
 }
 
+/**
+ * The arrow needs to be centred inside the arrow container such that, when
+ * rotated 45 degrees, its corners touch, but do not break through, the sides
+ * of the arrow container:
+ *
+ * +----------+
+ * |    /\    |
+ * |   /  \  <------ arrow container
+ * |  /    \  |
+ * | /      \ |
+ * |/  arrow \|
+ * |\        /|
+ * | \      / |
+ * |  \    /  |
+ * |   \  /   |
+ * |    \/    |
+ * +----------+
+ **/
 .arrow {
 	/* (2*desired triangle height)/sqrt(2) - does not account for border - centred within the outer rectangle */
 	width: 14.142135624px;
