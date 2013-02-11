@@ -1,4 +1,4 @@
-// TODO add file dependency on benchmar
+// TODO add file dependency on benchmark.js
 define( ["jquery"], function( $ ) {
 	var fixtures = $( "#fixtures" ), fixturesMarkup = fixtures.html();
 
@@ -7,12 +7,17 @@ define( ["jquery"], function( $ ) {
 	var suite = new Benchmark.Suite({
 		onStart: function() {
 			fixtures.reset();
+			$( "#run" ).text( "Run!" );
 		},
 
 		onComplete: function() {
 			$.each(this, function(i, e) {
-				$( "<div> name: " + e.name + ", hz: " + Math.round(e.hz) + "</div>" )
-					.appendTo( "#results" );
+				var $li = $( "<tr>" ).appendTo( "#results" )
+					.append( "<td class='name'>" )
+					.append( "<td class='hz'>" );
+
+				$li.find( ".name" ).text( e.name );
+				$li.find( ".hz" ).text( Math.round(e.hz) );
 			});
 		}
 	});
@@ -28,12 +33,20 @@ define( ["jquery"], function( $ ) {
 
 	// setup the DOM for displaying/running the results
 	$(function() {
-		$( "body" ).append( "<div id='results'></div>" );
-		$( "body" ).append( "<button id='run'>Run!</button>" );
+		// default the suite title if it's not provided
+		suite.name = suite.name || $( "title" ).text();
+
+		// add the run, title, and results table
+		$( "<button>", {id: "run"} ).text( "Run!" ).appendTo( "body" );
+		$( "<h1>", {id: "suite-name"} ).text( suite.name ).appendTo( "body" );
+		$( "<table>", {id: "results"} ).appendTo( "body" );
+		$( "<th>", {'class': "name"} ).text( "name" ).appendTo( "#results" );
+		$( "<th>", {'class': "hz"} ).text( "ops/sec" ).appendTo( "#results" );
 
 		$( "#run" ).click(function() {
 			$(this).text( "Running!" );
 
+			// let the dom ready callback unwind before starting the test suite
 			setTimeout(function() {
 				suite.run();
 			});

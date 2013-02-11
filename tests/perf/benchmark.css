@@ -1,5 +1,27 @@
-#results div {
+body {
+  font-family: sans-serif;
+}
+
+#results {
+  width: 90%;
   font-size: 2em;
+}
+
+#results td, #results th {
+  padding: 10px;
+  background: #EEE;
+}
+
+#results th {
+  text-align: left;
+}
+
+#results .name {
+  width: 80%;
+}
+
+#run, #results, #suite-name {
+  margin: 20px;
 }
 
 #fixtures {
