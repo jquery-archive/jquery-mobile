@@ -6,7 +6,7 @@
 // TODO break out pushstate support test so we don't depend on the whole thing
 define([
 	"jquery",
-	"../jquery.hashchange.js",
+	"depend!../jquery.hashchange[jquery]",
 	"./../jquery.mobile.ns",
 	"./../jquery.mobile.support" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
