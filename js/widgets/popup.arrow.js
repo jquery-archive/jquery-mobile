@@ -21,10 +21,12 @@ var uiTemplate = $(
 		'</div>'
 	),
 	// Needed for transforming coordinates from screen to arrow background
-	txFactor = Math.sqrt( 2 ) / 2;
+	txFactor = Math.sqrt( 2 ) / 2,
+	ieHack = false;
 
 $( document ).on( "mobileinit", function() {
-	if ( $.mobile.browser.oldIE ) {
+	ieHack = ( $.mobile.browser.oldIE && $( "html" ).hasClass( "ui-mobile-nosupport-boxshadow" ) );
+	if ( ieHack ) {
 		// Add class "ie" to the container
 		uiTemplate.eq( 1 ).addClass( "ie" );
 	}
@@ -155,7 +157,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		this._updateArrow( best.dir );
 
 		// Do not move/size the background div on IE, because we use the arrow div for background as well.
-		if ( !$.mobile.browser.oldIE ) {
+		if ( !ieHack ) {
 			bgRef[ params[ best.dir ].fst ] = ar.ct.offset();
 			bgRef[ params[ best.dir ].snd ] = this.element.offset();
 			bgOffset = ar.bg
