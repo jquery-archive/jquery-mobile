@@ -25,7 +25,7 @@ var uiTemplate = $(
 	ieHack = false;
 
 $( document ).on( "mobileinit", function() {
-	ieHack = ( $.mobile.browser.oldIE && $( "html" ).hasClass( "ui-mobile-nosupport-boxshadow" ) );
+	ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 );
 	if ( ieHack ) {
 		// Add class "ie" to the container
 		uiTemplate.eq( 1 ).addClass( "ie" );
