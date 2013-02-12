@@ -16,9 +16,19 @@
 	-moz-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')";
+	filter: progid:DXImageTransform.Microsoft.Matrix(
+	      	M11=0.7071067811865474,
+        	M12=-0.7071067811865477,
+        	M21=0.7071067811865477,
+        	M22=0.7071067811865474,
+        	SizingMethod='auto expand');
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
 	position: relative;
 	overflow: hidden;
-	background: none;
 }
 
 .arrow-background {
@@ -26,9 +36,20 @@
 	border: none;
 }
 
+.arrow-container.ie .arrow-background {
+	background: none;
+}
+
 .arrow-container.t .arrow-background,
 .arrow-container.b .arrow-background {
 	/* Undo rotation and reflect in x axis */
+   -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865483, M12=-0.7071067811865467, M21=-0.7071067811865467, M22=-0.7071067811865483, SizingMethod='auto expand')";
+   filter: progid:DXImageTransform.Microsoft.Matrix(
+            M11=0.7071067811865483,
+            M12=-0.7071067811865467,
+            M21=-0.7071067811865467,
+            M22=-0.7071067811865483,
+            SizingMethod='auto expand');
 	-webkit-transform: rotate(-45deg) scale(1, -1);
 	-moz-transform: rotate(-45deg) scale(1, -1);
 	-ms-transform: rotate(-45deg) scale(1, -1);
@@ -38,6 +59,13 @@
 .arrow-container.l .arrow-background,
 .arrow-container.r .arrow-background {
 	/* Undo rotation and reflect in y axis */
+   -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-0.7071067811865483, M12=0.7071067811865467, M21=0.7071067811865467, M22=0.7071067811865483, SizingMethod='auto expand')";
+   filter: progid:DXImageTransform.Microsoft.Matrix(
+            M11=-0.7071067811865483,
+            M12=0.7071067811865467,
+            M21=0.7071067811865467,
+            M22=0.7071067811865483,
+            SizingMethod='auto expand');
 	-webkit-transform: rotate(-45deg) scale(-1, 1);
 	-moz-transform: rotate(-45deg) scale(-1, 1);
 	-ms-transform: rotate(-45deg) scale(-1, 1);

@@ -1217,9 +1217,17 @@ a.ui-link-inherit {
 	clip: rect(-1000px,10px,2000px,-1000px);
 }
 
+.arrow-container.ie.l {
+	clip: rect(-1000px 10px 2000px -1000px);
+}
+
 .arrow-container.t {
 	top: -10px;
 	clip: rect(-1000px,2000px,10px,-1000px);
+}
+
+.arrow-container.ie.t {
+	clip: rect(-1000px 2000px 10px -1000px);
 }
 
 /* Due to some rounding errors, these have to be off-by-one. See also
@@ -1232,6 +1240,17 @@ a.ui-link-inherit {
 .arrow-container.b {
 	bottom: -9px;
 	clip: rect(11px,2000px,1000px,-1000px);
+}
+
+/* IE doesn't seem to need the off-by-one adjustment */
+.arrow-container.ie.r {
+	right: -10px;
+	clip: rect(-1000px 2000px 2000px 10px);
+}
+
+.arrow-container.ie.b {
+	bottom: -10px;
+	clip: rect(10px 2000px 1000px -1000px);
 }
 
 /**
@@ -1259,6 +1278,12 @@ a.ui-link-inherit {
 	/* ( (2*desired triangle height) - (above width/height) ) / 2 */
 	left: 2.928932188px;
 	top: 2.928932188px;
+}
+
+.arrow-container.ie .arrow {
+	/* Fix rotation center  - see http://www.useragentman.com/IETransformsTranslator/ */
+	margin-left: -3px;
+	margin-top: -3px;
 }
 
 .arrow-background {

@@ -23,6 +23,13 @@ var uiTemplate = $(
 	// Needed for transforming coordinates from screen to arrow background
 	txFactor = Math.sqrt( 2 ) / 2;
 
+$( document ).on( "mobileinit", function() {
+	if ( $.mobile.browser.oldIE ) {
+		// Add class "ie" to the container
+		uiTemplate.eq( 1 ).addClass( "ie" );
+	}
+});
+
 function getArrow() {
 	var clone = uiTemplate.clone(),
 		gd = clone.eq( 0 ),
@@ -147,14 +154,17 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		ar.ct.removeAttr( "style" ).show().css( best.posProp, best.posVal );
 		this._updateArrow( best.dir );
 
-		bgRef[ params[ best.dir ].fst ] = ar.ct.offset();
-		bgRef[ params[ best.dir ].snd ] = this.element.offset();
-		bgOffset = ar.bg
-			.removeAttr( "style" )
-			.css( ( "cx" === params[ best.dir ].dimKey ? "width" : "height" ), menuFull[ params[ best.dir ].dimKey ] )
-			.offset();
-		diff = { dx: bgRef.x.left - bgOffset.left, dy: bgRef.y.top - bgOffset.top };
-		ar.bg.css( { left: txFactor * diff.dy + txFactor * diff.dx, top: txFactor * diff.dy - txFactor * diff.dx } );
+		// Do not move/size the background div on IE, because we use the arrow div for background as well.
+		if ( !$.mobile.browser.oldIE ) {
+			bgRef[ params[ best.dir ].fst ] = ar.ct.offset();
+			bgRef[ params[ best.dir ].snd ] = this.element.offset();
+			bgOffset = ar.bg
+				.removeAttr( "style" )
+				.css( ( "cx" === params[ best.dir ].dimKey ? "width" : "height" ), menuFull[ params[ best.dir ].dimKey ] )
+				.offset();
+			diff = { dx: bgRef.x.left - bgOffset.left, dy: bgRef.y.top - bgOffset.top };
+			ar.bg.css( { left: txFactor * diff.dy + txFactor * diff.dx, top: txFactor * diff.dy - txFactor * diff.dx } );
+		}
 
 		return best.result;
 	},
