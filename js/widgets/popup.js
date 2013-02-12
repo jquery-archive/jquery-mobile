@@ -422,7 +422,7 @@ define( [
 					cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
 					cy: winCoords.cy - this._tolerance.t - this._tolerance.b
 				},
-				menuSize, ret;
+				ret;
 
 			if ( !infoOnly ) {
 				// Clamp the width of the menu before grabbing its size
