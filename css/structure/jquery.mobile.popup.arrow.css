@@ -29,17 +29,17 @@
 .arrow-container.t .arrow-background,
 .arrow-container.b .arrow-background {
 	/* Undo rotation and reflect in x axis */
-	-webkit-transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
-	-moz-transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
-	-ms-transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
-	transform: matrix(0.707106781,-0.707106781,-0.707106781,-0.707106781,0,0);
+	-webkit-transform: rotate(-45deg) scale(1, -1);
+	-moz-transform: rotate(-45deg) scale(1, -1);
+	-ms-transform: rotate(-45deg) scale(1, -1);
+	transform: rotate(-45deg) scale(1, -1);
 }
 
 .arrow-container.l .arrow-background,
 .arrow-container.r .arrow-background {
 	/* Undo rotation and reflect in y axis */
-	-webkit-transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
-	-moz-transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
-	-ms-transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
-	transform: matrix(-0.707106781,0.707106781,0.707106781,0.707106781,0,0);
+	-webkit-transform: rotate(-45deg) scale(-1, 1);
+	-moz-transform: rotate(-45deg) scale(-1, 1);
+	-ms-transform: rotate(-45deg) scale(-1, 1);
+	transform: rotate(-45deg) scale(-1, 1);
 }
