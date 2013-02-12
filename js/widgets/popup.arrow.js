@@ -85,6 +85,12 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	_tryAnArrow: function( p, dir, desired, s, best ) {
 		var result, r, diff, desiredForArrow = {}, tip = {};
 
+		// If the arrow has no wiggle room along the edge of the popup, it cannot
+		// be displayed along the requested edge without it sticking out.
+		if ( s.arFull[ p.dimKey ] > s.guideDims[ p.dimKey ] ) {
+			return best;
+		}
+
 		desiredForArrow[ p.fst ] = desired[ p.fst ] + ( s.arHalf[ p.oDimKey ] + s.menuHalf[ p.oDimKey ] ) * p.offsetFactor;
 		desiredForArrow[ p.snd ] = desired[ p.snd ];
 
@@ -151,6 +157,13 @@ $.widget( "mobile.popup", $.mobile.popup, {
 			$.proxy( function( key, value ) {
 				best = this._tryAnArrow( params[ value ], value, desired, state, best );
 			}, this ) );
+
+		// Could not place the arrow along any of the edges - behave as if showing
+		// the arrow was turned off.
+		if ( !best ) {
+			ar.arEls.hide();
+			return this._super( desired );
+		}
 
 		// Move the arrow into place
 		ar.ct.removeAttr( "style" ).show().css( best.posProp, best.posVal );
