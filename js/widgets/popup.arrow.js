@@ -102,7 +102,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 				clampInfo: this._clampPopupWidth( !clamp ),
 				arFull: { cx: ar.ct.width(), cy: ar.ct.height() },
 				guideDims: { cx: ar.gd.width(), cy: ar.gd.height() },
-				guideOffset: ar.gd.offset(),
+				guideOffset: ar.gd.offset()
 			};
 
 		offset = this.element.offset();
