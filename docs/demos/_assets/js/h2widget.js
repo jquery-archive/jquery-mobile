@@ -5,7 +5,7 @@
 	$( document ).on( "click", "a", function( e ) {
 		href = $( this ).attr( "href" );
 		var hash = $.mobile.path.parseUrl( href );
-		if( typeof href !== "undefined" && hash !== "" && href !== href.replace( hash,"" ) && hash.search( "/" ) === -1 ){
+		if( typeof href !== "undefined" && hash !== "" && href !== href.replace( hash,"" ) && hash.search( "/" ) !== -1 ){
 			//remove the hash from the link to allow normal loading of the page.
 			var newHref = href.replace( hash,"" );
 			$( this ).attr( "href", newHref );
@@ -17,12 +17,12 @@
 	});
 	$( document ).on("pagebeforechange", function( e,f ){
 		var hash = $.mobile.path.parseUrl(f.toPage).hash;
-		if( typeof hash !== "undefined" && hash.search( "/" ) === -1 && hash !== "" && $( hash ).length > 0 && !$( ".ui-page-active " + hash ).hasClass( "ui-page" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
+		if( typeof hash !== "undefined" && hash.search( "/" ) === -1 && hash !== "" && $( hash ).length > 0 && !$( hash ).hasClass( "ui-page" ) && $(hash).data('role') !== "page" && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
 			//scroll to the id
 			var pos = $( hash ).offset().top;
 			$.mobile.silentScroll( pos );
 			return false;
-		} else if( $.mobile.path.parseUrl( f.originalHref ).hash !== "" ){
+		} else if( typeof f.toPage !== "object" && hash !== "" && $.mobile.path.parseUrl( f.originalHref ).hash !== "" && !$( hash ).hasClass( "ui-page" ) && $(hash).attr('data-role') !== "page" && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
 			$( ele ).attr( href, f.originalHref );
 			$.mobile.document.one( "pagechange", function(){
 				hash = $.mobile.path.parseUrl(f.originalHref).hash;
@@ -84,9 +84,10 @@
 							return false;
 						}
 					});
-					this._on(".jqm-quicklink-panel", {
-						"vclick": function(){
+					this._on( document, {
+						"pagebeforechange": function(){
 							this.element.find(".jqm-quicklink-panel").panel("close");
+							this.element.find(".jqm-quicklink-panel .ui-btn-active").removeClass("ui-btn-active");
 						}
 					});
 					if( $(h2dictionary).length > 0 ){
