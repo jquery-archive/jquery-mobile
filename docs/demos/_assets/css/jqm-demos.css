@@ -97,9 +97,8 @@ body, .jqm-demos  {
 	font-size: 1.2em;
 }
 
-/* Paragraphs */
-.jqm-content > p,
-.jqm-list {
+/* Text */
+.jqm-content > p {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 	font-size: 0.95em;
@@ -126,6 +125,17 @@ body, .jqm-demos  {
 }
 .jqm-demos-index .jqm-content p.jqm-intro {
 	border: none;
+}
+.jqm-content ul:not(.ui-listview),
+.jqm-content ul:not(.ui-listview) li {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400; 
+	font-size: 0.95em;
+	line-height: 1.7;
+}
+.jqm-content ul:not(.ui-listview) {
+	margin: 1em 0;
+	padding-left: 1.3em;
 }
 
 /* Links */
@@ -224,6 +234,11 @@ body, .jqm-demos  {
 }
 
 /* Lists */
+.jqm-list {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400; 
+	font-size: 0.95em;
+}
 .jqm-list .ui-li-heading  {
 	font-weight: 300; 
 	font-size: 1.2em;
