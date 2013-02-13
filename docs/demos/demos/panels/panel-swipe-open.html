@@ -29,27 +29,34 @@
 		});
     </script>
 	<style>
-		.nav-search .ui-btn-up-a {
-			background-image:none;
-			background-color:#333333;
+		/* Swipe works with mouse as well but often causes text selection. */
+		#demo-page * {
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			-o-user-select: none;
+			user-select: none;
 		}
-		.nav-search .ui-btn-inner {
-			border-top: 1px solid #888;
-			border-color: rgba(255,255,255,.1);
+		/* Arrow only buttons in the header. */
+		#demo-page .ui-header .ui-btn {
+			background: none;
+			border: none;
+			top: 9px;
 		}
-		.nav-search .ui-btn.ui-first-child {
-			border-top-width: 0;
-			background: #111;
+		#demo-page .ui-header .ui-btn-inner {
+			border: none;
 		}
-		.userform { padding:.8em 1.2em; }
-		.userform h2 { color:#555; margin:0.3em 0 .8em 0; padding-bottom:.5em; border-bottom:1px solid rgba(0,0,0,.1); }
-		.userform label { display:block; margin-top:1.2em; }
-		.switch .ui-slider-switch { width: 6.5em !important }
-		.ui-grid-a { margin-top:1em; padding-top:.8em; margin-top:1.4em; border-top:1px solid rgba(0,0,0,.1); }
+		/* Content styling. */
+		dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
+		dt { font-size: 2em; font-weight: bold; }
+		dt span { font-size: .5em; color: #777; margin-left: .5em; }
+		dd { font-size: 1.25em;	margin: 1em 0 0; padding-bottom: 1em; border-bottom: 1px solid #eee; }
+		.back-btn { float: right; margin: 0 2em 1em 0; }
 	</style>
 </head>
 <body>
-<div data-role="page" class="jqm-demos ui-responsive-panel" id="demo-page">
+
+<div data-role="page" class="jqm-demos" id="demo-intro">
 
     <div data-role="header" class="jqm-header" data-theme="f">
         <h1>jQuery Mobile</h1>
@@ -61,100 +68,58 @@
     
         <h1>Open panel on swipe</h1>
 
-        <p>By default panels can be closed with a swipe on the page. In this demo we show how you can also open a panel with a swipe. This not part of the framework, because in case of multiple panels we wouldn't know which one to open.</p>
+        <p>By default panels can be closed by swiping in the direction of the open panel. In this demo we show how you can also open a panel with swipe. This is not part of the framework, because in case of multiple panels we wouldn't know which one to open.</p>
         
-        <p>This page has two reveal menus, one at each side. Both can be opened with swipe.</p>
+        <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
         
-        <p><a href="#left-panel" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">left panel</a>
-        <a href="#right-panel" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">right panel</a></p>
-        
-        <div data-demo-js="true"></div><!--/demo-html -->
+        <a href="#demo-page" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
+
+        <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
         
     </div><!-- /content -->
 
+	<div data-role="footer" class="jqm-footer" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /jqm-footer -->
 
-    <div data-role="panel" id="left-panel" data-theme="a">
-    
-        <ul data-role="listview" data-theme="a" class="nav-search">
-            <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
-            <li><a href="#demo-landing-page">Accessibility</a></li>
-            <li><a href="#demo-landing-page">Accordions</a></li>
-            <li><a href="#demo-landing-page">Ajax navigation model</a></li>
-            <li><a href="#demo-landing-page">Anatomy of a page</a></li>
-            <li><a href="#demo-landing-page">Animation events</a></li>
-            <li><a href="#demo-landing-page">Automatic listview dividers</a></li>
-            <li><a href="#demo-landing-page">Buttons</a></li>
-            <li><a href="#demo-landing-page">Button icons</a></li>
-            <li><a href="#demo-landing-page">Caching pages</a></li>
-            <li><a href="#demo-landing-page">Checkbox</a></li>
-            <li><a href="#demo-landing-page">Collapsible content</a></li>
-            <li><a href="#demo-landing-page">Collapsible lists</a></li>
-            <li><a href="#demo-landing-page">Data attribute reference</a></li>
-            <li><a href="#demo-landing-page">Dialogs</a></li>
-            <li><a href="#demo-landing-page">Disabling form elements</a></li>
-            <li><a href="#demo-landing-page">Dynamically injecting pages</a></li>
-            <li><a href="#demo-landing-page">Events API</a></li>
-            <li><a href="#demo-landing-page">Flip switch</a></li>
-            <li><a href="#demo-landing-page">Features overview</a></li>
-            <li><a href="#demo-landing-page">Fixed toolbars</a></li>
-            <li><a href="#demo-landing-page">Forms intro</a></li>
-            <li><a href="#demo-landing-page">Form element gallery</a></li>
-            <li><a href="#demo-landing-page">Fullscreen toolbars</a></li>
-            <li><a href="#demo-landing-page">Footer toolbars</a></li>
-            <li><a href="#demo-landing-page">Global options (mobileinit)</a></li>
-            <li><a href="#demo-landing-page">Grouped buttons</a></li>
-            <li><a href="#demo-landing-page">Header toolbars</a></li>
-            <li><a href="#demo-landing-page">Hiding elements accessibly</a></li>
-            <li><a href="#demo-landing-page">HTML formatting</a></li>
-        </ul>
-    
-    </div><!-- /panel -->
-
-
-    <div data-role="panel" data-position="right" id="right-panel" data-theme="b">
-
-        <form class="userform">
-            <h2>Create new user</h2>
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
-
-            <label for="email">Email</label>
-            <input type="email" name="email" id="status" value="" data-clear-btn="true" data-mini="true">
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
-
-            <div class="switch">
-            <label for="status">Status</label>
-            <select name="status" id="slider" data-role="slider" data-mini="true">
-                <option value="off">Inactive</option>
-                <option value="on">Active</option>
-            </select>
-            </div>
-
-            <div class="ui-grid-a">
-                <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Cancel</a></div>
-                <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Save</a></div>
-            </div>
-        </form>
-
-    </div><!-- /panel -->
-        
+<?php include( '../../nav.html' ); ?>
         
 </div><!-- /page -->
 
-<div data-role="page" id="demo-landing-page">
+<div data-role="page" id="demo-page" data-theme="d">
 
-    <div data-role="header" class="jqm-header" data-theme="f">
-        <h1>Landing page</h1>
+    <div data-role="header" data-theme="b">
+        <h1>Swipe left or right</h1>
+		<a href="#left-panel" data-theme="d" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+		<a href="#right-panel" data-theme="d" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
     </div><!-- /header -->
     
     <div data-role="content">
-        <p>This is just a landing page.</p>
-        
-        <a href="#demo-page" data-rel="back" data-role="button" data-inline="true" data-mini="true" data-icon="back" data-iconpos="left">Back</a>
+    
+    	<dl>
+            <dt>Swipe <span>verb</span></dt>
+            <dd><b>1.</b> to strike or move with a sweeping motion</dd>
+        </dl>
+    
+		<a href="#demo-intro" data-rel="back" class="back-btn" data-role="button" data-mini="true" data-inline="true" data-icon="back" data-iconpos="right">Back to demo intro</a>
+
     </div><!-- /content -->
         
+    <div data-role="panel" id="left-panel" data-theme="b">
+    
+    	<p>Left reveal panel.</p>
+		<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
+        
+    </div><!-- /panel -->
+      
+    <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="c">
+    
+    	<p>Right push panel.</p>
+		<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
+        
+    </div><!-- /panel -->
+      
 </div><!-- /page -->
 </body>
 </html>
