@@ -25,16 +25,18 @@
 		} else if( typeof f.toPage !== "object" && hash !== "" && $.mobile.path.parseUrl( f.originalHref ).hash !== "" && !$( hash ).hasClass( "ui-page" ) && $(hash).attr('data-role') !== "page" && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
 			$( ele ).attr( href, f.originalHref );
 			$.mobile.document.one( "pagechange", function(){
-				hash = $.mobile.path.parseUrl(f.originalHref).hash;
-				var pos = $( ".ui-page-active " + hash) .offset().top;
-				$.mobile.silentScroll( pos );
+				if( typeof hash !== "undefined" && hash.search( "/" ) === -1 && hash !== "" && $( hash ).length > 0 && !$( hash ).hasClass( "ui-page" ) && $(hash).data('role') !== "page" && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
+					hash = $.mobile.path.parseUrl(f.originalHref).hash;
+					var pos = $( ".ui-page-active " + hash) .offset().top;
+					$.mobile.silentScroll( pos );
+				}
 			} );
 		}
 	});
 	$( document ).on( "mobileinit", function(){
 		hash = window.location.hash;
 		$.mobile.document.one( "pageshow", function(){
-			if( hash !== "" && !$( ".ui-page-active " + hash ).hasClass( "ui-page" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" ) && !$( hash ).is( "body" ) ){
+			if( hash !== "" && $(hash).attr('data-role') !== "page" && !$( hash ).hasClass( "ui-page" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" ) && !$( hash ).is( "body" ) ){
 				var pos = $( ".ui-page-active " + hash ).offset().top;
 				setTimeout( function(){
 					$.mobile.silentScroll( pos );
