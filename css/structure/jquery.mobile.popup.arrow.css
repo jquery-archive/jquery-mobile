@@ -8,7 +8,7 @@
 }
 
 .arrow-container {
-	position: absolute; /* clip doesn't work otherwise */
+	position: absolute;
 }
 
 .arrow {
@@ -16,8 +16,9 @@
 	-moz-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
-	position: relative;
+	position: absolute;
 	overflow: hidden;
+	box-sizing: border-box;
 }
 
 .arrow-container.ie .arrow {

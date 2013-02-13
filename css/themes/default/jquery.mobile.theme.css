@@ -1230,26 +1230,21 @@ a.ui-link-inherit {
 	clip: rect(-1000px 2000px 10px -1000px);
 }
 
-/* Due to some rounding errors, these have to be off-by-one. See also
-   .arrow-background.b and .arrow-background.r below. */
 .arrow-container.r {
-	right: -9px;
-	clip: rect(-1000px,2000px,2000px,11px);
-}
-
-.arrow-container.b {
-	bottom: -9px;
-	clip: rect(11px,2000px,1000px,-1000px);
-}
-
-/* IE doesn't seem to need the off-by-one adjustment */
-.arrow-container.ie.r {
 	right: -10px;
+	clip: rect(-1000px,2000px,2000px,10px);
+}
+
+.arrow-container.ie.r {
 	clip: rect(-1000px 2000px 2000px 10px);
 }
 
-.arrow-container.ie.b {
+.arrow-container.b {
 	bottom: -10px;
+	clip: rect(10px,2000px,1000px,-1000px);
+}
+
+.arrow-container.ie.b {
 	clip: rect(10px 2000px 1000px -1000px);
 }
 
