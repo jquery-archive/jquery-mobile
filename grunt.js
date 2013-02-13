@@ -94,7 +94,8 @@ module.exports = function( grunt ) {
 				src: [
 					path.join( 'docs', 'demos', '_assets', 'js', 'jqm-demos.js' ),
 					path.join( 'docs', 'demos', '_assets', 'js', 'view-source.js' ),
-					path.join( 'docs', 'demos', '_assets', 'js', 'h2widget.js')
+					path.join( 'docs', 'demos', '_assets', 'js', 'h2widget.js'),
+					path.join( 'docs', 'demos', '_assets', 'js', 'globalnav-panel.js')
 				],
 				dest: demosjsFile + '.js'
 			},
