@@ -206,7 +206,31 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
-
+		csslint: {
+			all: {
+				src: "css/**/*.css",
+					rules: {
+					"import": false,
+					"important": false,
+					"compatible-vendor-prefixes": false,
+					"vendor-prefix": false,
+					"adjoining-classes": false,
+					"unique-headings": false,
+					"qualified-headings": false,
+					"duplicate-properties": false,
+					"box-sizing": false,
+					"zero-units": false,
+					"outline-none": false,
+					"known-properties": false,
+					"box-model": false,
+					"text-indent": false,
+					"unqualified-attributes": false,
+					"universal-selector": false,
+					"display-property-grouping": false,
+					"overqualified-elements": false
+				}
+			}
+		},
 		copy: {
 			images: {
 				expand: true,

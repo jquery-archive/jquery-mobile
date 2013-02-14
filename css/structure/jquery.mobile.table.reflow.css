@@ -46,7 +46,7 @@
 
 
 /* Breakpoint to show as a standard table at 560px (35em x 16px) or wider */ 
-@media ( min-width: 35em ) {
+@media (min-width: 35em) {
 
 	/* Fixes table rendering when switching between breakpoints in Safari <= 5. See https://github.com/jquery/jquery-mobile/issues/5380 */
 	.ui-table-reflow.ui-responsive {
@@ -74,7 +74,7 @@
 
 /* Hack to make IE9 and WP7.5 treat cells like block level elements, scoped to ui-responsive class */ 
 /* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this*/ 
-@media ( max-width: 35em ) {
+@media (max-width: 35em) {
 	.ui-table-reflow.ui-responsive td,
 	.ui-table-reflow.ui-responsive th {
 		width: 100%;
