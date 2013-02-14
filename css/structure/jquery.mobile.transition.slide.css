@@ -3,44 +3,58 @@
 
 .slide.out, .slide.in {
 	-webkit-animation-timing-function: ease-out;
-	-webkit-animation-duration: 350ms;
 	-moz-animation-timing-function: ease-out;
-	-moz-animation-duration: 350ms;
+	-o-animation-timing-function: ease-out;
 	animation-timing-function: ease-out;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-duration: 350ms;
+	-o-animation-duration: 350ms;
 	animation-duration: 350ms;
 }
 .slide.out {
 	-webkit-transform: translateX(-100%);
-	-webkit-animation-name: slideouttoleft;
 	-moz-transform: translateX(-100%);
-	-moz-animation-name: slideouttoleft;
+	-ms-transform: translateX(-100%);
+	-o-transform: translateX(-100%);
 	transform: translateX(-100%);
+	-webkit-animation-name: slideouttoleft;
+	-moz-animation-name: slideouttoleft;
+	-o-animation-name: slideouttoleft;
 	animation-name: slideouttoleft;
 }
 
 .slide.in {
 	-webkit-transform: translateX(0);
-	-webkit-animation-name: slideinfromright;
 	-moz-transform: translateX(0);
-	-moz-animation-name: slideinfromright;
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
 	transform: translateX(0);
+	-webkit-animation-name: slideinfromright;
+	-moz-animation-name: slideinfromright;
+	-o-animation-name: slideinfromright;
 	animation-name: slideinfromright;
 }
 
 .slide.out.reverse {
 	-webkit-transform: translateX(100%);
-	-webkit-animation-name: slideouttoright;
 	-moz-transform: translateX(100%);
-	-moz-animation-name: slideouttoright;
+	-ms-transform: translateX(100%);
+	-o-transform: translateX(100%);
 	transform: translateX(100%);
+	-webkit-animation-name: slideouttoright;
+	-moz-animation-name: slideouttoright;
+	-o-animation-name: slideouttoright;
 	animation-name: slideouttoright;
 }
 
 .slide.in.reverse {
 	-webkit-transform: translateX(0);
-	-webkit-animation-name: slideinfromleft;
 	-moz-transform: translateX(0);
-	-moz-animation-name: slideinfromleft;
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
 	transform: translateX(0);
+	-webkit-animation-name: slideinfromleft;
+	-moz-animation-name: slideinfromleft;
+	-o-animation-name: slideinfromleft;
 	animation-name: slideinfromleft;
 }
