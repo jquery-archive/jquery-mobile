@@ -21,7 +21,7 @@
 			//scroll to the id
 			var pos = $( hash ).offset().top;
 			$.mobile.silentScroll( pos );
-			$.mobile.navigate( hash,'',true );
+			$.mobile.navigate( hash, '', true );
 		} else if( typeof f.toPage !== "object" && hash !== "" && $.mobile.path.parseUrl( f.originalHref ).hash !== "" && !$( hash ).hasClass( "ui-page" ) && $(hash).attr('data-role') !== "page" && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
 			$( ele ).attr( href, f.originalHref );
 			$.mobile.document.one( "pagechange", function(){
@@ -66,7 +66,7 @@
 						var id, text = $(this).text();
 						
 						if(typeof $(this).attr("id") === "undefined"){
-							id = text.replace(/[^\.a-z0-9:_-]+/i,"");
+							id = text.replace(/[^\.a-z0-9:_-]+/gi,"");
 							$(this).attr( "id", id );
 						} else {
 							id = $(this).attr("id");
