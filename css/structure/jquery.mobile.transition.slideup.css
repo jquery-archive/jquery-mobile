@@ -1,43 +1,55 @@
 /* slide up */
 .slideup.out {
 	-webkit-animation-name: fadeout;
-	-webkit-animation-duration: 100ms;
 	-moz-animation-name: fadeout;
-	-moz-animation-duration: 100ms;
+	-o-animation-name: fadeout;
 	animation-name: fadeout;
+	-webkit-animation-duration: 100ms;
+	-moz-animation-duration: 100ms;
+	-o-animation-duration: 100ms;
 	animation-duration: 100ms;
 }
 
 .slideup.in {
 	-webkit-transform: translateY(0);
-	-webkit-animation-name: slideinfrombottom;
-	-webkit-animation-duration: 250ms;
 	-moz-transform: translateY(0);
-	-moz-animation-name: slideinfrombottom;
-	-moz-animation-duration: 250ms;
+	-ms-transform: translateY(0);
+	-o-transform: translateY(0);
 	transform: translateY(0);
+	-webkit-animation-name: slideinfrombottom;
+	-moz-animation-name: slideinfrombottom;
+	-o-animation-name: slideinfrombottom;
 	animation-name: slideinfrombottom;
+	-webkit-animation-duration: 250ms;
+	-moz-animation-duration: 250ms;
+	-o-animation-duration: 250ms;
 	animation-duration: 250ms;
 }
 
 .slideup.in.reverse {
 	-webkit-animation-name: fadein;
-	-webkit-animation-duration: 150ms;
 	-moz-animation-name: fadein;
-	-moz-animation-duration: 150ms;
+	-o-animation-name: fadein;
 	animation-name: fadein;
+	-webkit-animation-duration: 150ms;
+	-moz-animation-duration: 150ms;
+	-o-animation-duration: 150ms;
 	animation-duration: 150ms;
 }
 
 .slideup.out.reverse {
 	-webkit-transform: translateY(100%);
-	-webkit-animation-name: slideouttobottom;
-	-webkit-animation-duration: 200ms;
 	-moz-transform: translateY(100%);
-	-moz-animation-name: slideouttobottom;
-	-moz-animation-duration: 200ms;
+	-ms-transform: translateY(100%);
+	-o-transform: translateY(100%);
 	transform: translateY(100%);
+	-webkit-animation-name: slideouttobottom;
+	-moz-animation-name: slideouttobottom;
+	-o-animation-name: slideouttobottom;
 	animation-name: slideouttobottom;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
+	-o-animation-duration: 200ms;
 	animation-duration: 200ms;
 }
 

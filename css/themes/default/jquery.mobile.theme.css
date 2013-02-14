@@ -800,6 +800,7 @@ a.ui-link-inherit {
 
 .ui-corner-all {
 	-webkit-border-radius: 				.6em /*{global-radii-blocks}*/;
+	-moz-border-radius: 				.6em /*{global-radii-blocks}*/;
 	border-radius: 						.6em /*{global-radii-blocks}*/;
 }
 
@@ -834,6 +835,7 @@ a.ui-link-inherit {
 	background-image: url(images/icons-18-white.png) /*{global-icon-set}*/;
 	background-repeat: no-repeat;
 	-webkit-border-radius: 				9px;
+	-moz-border-radius: 				9px;
 	border-radius: 						9px;
 }
 
@@ -1046,6 +1048,7 @@ a.ui-link-inherit {
 .ui-checkbox .ui-icon,
 .ui-selectmenu-list .ui-icon {
 	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
 	border-radius: 3px;
 }
 .ui-icon-checkbox-off,
@@ -1067,6 +1070,7 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 .ui-btn-corner-all {
 	-webkit-border-radius: 				1em /*{global-radii-buttons}*/;
+	-moz-border-radius: 				1em /*{global-radii-buttons}*/;
 	border-radius: 						1em /*{global-radii-buttons}*/;
 }
 

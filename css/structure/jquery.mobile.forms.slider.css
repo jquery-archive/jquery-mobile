@@ -136,6 +136,8 @@ div.ui-slider-switch.ui-mini {
 .ui-slider-handle-snapping {
 	-webkit-transition: left 70ms linear;
 	-moz-transition: left 70ms linear;
+	-o-transition: left 70ms linear;
+	transition: left 70ms linear;
 }
 .ui-slider-switch.ui-mini .ui-slider-handle .ui-btn-inner {
 	height: 30px;
