@@ -37,6 +37,7 @@
 
 .ui-controlgroup .ui-btn-corner-all {
 	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
 	border-radius: 0;
 }
 .ui-controlgroup .ui-controlgroup-controls,
@@ -45,6 +46,7 @@
 .ui-controlgroup .ui-select,
 .ui-controlgroup li {
 	-webkit-border-radius: inherit;
+	-moz-border-radius: inherit;
 	border-radius: inherit;
 }
 .ui-controlgroup-vertical .ui-btn.ui-first-child {
