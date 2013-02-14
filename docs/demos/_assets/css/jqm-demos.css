@@ -76,6 +76,7 @@ body, .jqm-demos  {
 	font-weight: 300;
 	font-size: 2.4em;
 	color: #555;
+	clear:both;
 }
 .jqm-content > h1.jqm-faq-question {
 	margin-top: -.4em;
@@ -89,6 +90,7 @@ body, .jqm-demos  {
 	font-size: 1.6em;
 	color: #74b042;
 	padding-top: .8em;
+	clear:both;
 }
 .jqm-demos-home .jqm-content > h2 {
 	margin-left: .6em;
@@ -109,7 +111,7 @@ body, .jqm-demos  {
 	line-height: 135%;
 	margin-top: -.5em;
 	margin-bottom: .5em;
-	padding-bottom: 1.5em;
+	padding-bottom: 2.2em;
 	color: #555;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -195,8 +197,9 @@ body, .jqm-demos  {
 	text-align: right;
 	font-size: 0.8em;
 	margin-top: .8em;
-	margin-bottom: -1em;
+	margin-bottom: 1em;
 	text-decoration: none;
+	float:right;
 }
 .jqm-content p.jqm-intro + a.jqm-sections-link {
 	text-align: left;
@@ -210,10 +213,13 @@ body, .jqm-demos  {
 	opacity: .5;
 }
 .jqm-content p.jqm-intro + a.jqm-sections-link span {
-	float: left;
-	margin-left: 0;
-	margin-right: 10px;
+	float: right;
+	margin-left: 10px;
 }
+.jqm-content a.jqm-open-quicklink-panel {
+	margin-top:-3.2em;
+}
+
 
 /* Demo view source */
 .jqm-content div[data-demo-html="true"] {
