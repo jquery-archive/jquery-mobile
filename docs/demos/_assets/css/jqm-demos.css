@@ -68,6 +68,9 @@ body, .jqm-demos  {
 	.jqm-demos .jqm-content {
 		padding: 15px 15%;
 	}
+	.jqm-demos .jqm-content.jqm-fullwidth {
+		padding: 15px;
+	}
 }
 
 /* Headings */
