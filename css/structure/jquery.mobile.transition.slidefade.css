@@ -3,48 +3,64 @@
 
 .slidefade.out {
 	-webkit-transform: translateX(-100%);
-	-webkit-animation-name: slideouttoleft;
-	-webkit-animation-duration: 225ms;
 	-moz-transform: translateX(-100%);
-	-moz-animation-name: slideouttoleft;
-	-moz-animation-duration: 225ms;
+	-ms-transform: translateX(-100%);
+	-o-transform: translateX(-100%);
 	transform: translateX(-100%);
+	-webkit-animation-name: slideouttoleft;
+	-moz-animation-name: slideouttoleft;
+	-o-animation-name: slideouttoleft;
 	animation-name: slideouttoleft;
+	-webkit-animation-duration: 225ms;
+	-moz-animation-duration: 225ms;
+	-o-animation-duration: 225ms;
 	animation-duration: 225ms;
 }
 
 .slidefade.in {
 	-webkit-transform: translateX(0);
-	-webkit-animation-name: fadein;
-	-webkit-animation-duration: 200ms;
 	-moz-transform: translateX(0);
-	-moz-animation-name: fadein;
-	-moz-animation-duration: 200ms;
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
 	transform: translateX(0);
+	-webkit-animation-name: fadein;
+	-moz-animation-name: fadein;
+	-o-animation-name: fadein;
 	animation-name: fadein;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
+	-o-animation-duration: 200ms;
 	animation-duration: 200ms;
 }
 
 .slidefade.out.reverse {
 	-webkit-transform: translateX(100%);
-	-webkit-animation-name: slideouttoright;
-	-webkit-animation-duration: 200ms;
 	-moz-transform: translateX(100%);
-	-moz-animation-name: slideouttoright;
-	-moz-animation-duration: 200ms;
+	-ms-transform: translateX(100%);
+	-o-transform: translateX(100%);
 	transform: translateX(100%);
+	-webkit-animation-name: slideouttoright;
+	-moz-animation-name: slideouttoright;
+	-o-animation-name: slideouttoright;
 	animation-name: slideouttoright;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
+	-o-animation-duration: 200ms;
 	animation-duration: 200ms;
 }
 
 .slidefade.in.reverse {
 	-webkit-transform: translateX(0);
-	-webkit-animation-name: fadein;
-	-webkit-animation-duration: 200ms;
 	-moz-transform: translateX(0);
-	-moz-animation-name: fadein;
-	-moz-animation-duration: 200ms;
+	-ms-transform: translateX(0);
+	-o-transform: translateX(0);
 	transform: translateX(0);
+	-webkit-animation-name: fadein;
+	-moz-animation-name: fadein;
+	-o-animation-name: fadein;
 	animation-name: fadein;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
+	-o-animation-duration: 200ms;
 	animation-duration: 200ms;
 }
