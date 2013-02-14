@@ -249,25 +249,26 @@ body, .jqm-demos  {
 	font-size: 0.95em;
 }
 .jqm-list .ui-li-heading  {
-	font-weight: 300; 
-	font-size: 1.2em;
+	font-weight: 700; 
+	font-size: .9em;
 	color: #74b042;
 }
 .jqm-list .ui-li-desc  {
 	font-weight: 300; 
-	font-size: .9em;
+	font-size: .8em;
 	color: #777;
 }
 
 /* List dividers */
 .jqm-list .ui-bar-d {
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
-	font-size: .8em;
+	font-weight: 700;
+	font-size: .85em;
 	padding: .5em 15px;
 	background-image: none;
 	background-color: #e0e0e0;
 	border-color: #e0e0e0;
+	color:#777;
 }
 
 /* List buttons */
