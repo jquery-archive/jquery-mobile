@@ -111,7 +111,7 @@ body, .jqm-demos  {
 	line-height: 135%;
 	margin-top: -.5em;
 	margin-bottom: .5em;
-	padding-bottom: 2.2em;
+	padding-bottom: 2.6em;
 	color: #555;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
@@ -166,6 +166,7 @@ body, .jqm-demos  {
 .jqm-content pre > code {
 	padding: 0;	
 	background: none;
+	font-size:.8em;
 }
 
 /* Buttons */
@@ -198,6 +199,7 @@ body, .jqm-demos  {
 	font-size: 0.8em;
 	margin-top: .8em;
 	margin-bottom: 1em;
+	margin-right:.6em;
 	text-decoration: none;
 	float:right;
 }
@@ -217,8 +219,9 @@ body, .jqm-demos  {
 	margin-left: 10px;
 }
 .jqm-content a.jqm-open-quicklink-panel {
-	margin-top:-3.2em;
+	margin-top:-3.3em;
 }
+
 
 
 /* Demo view source */
