@@ -7,13 +7,13 @@
 	<link rel="stylesheet"  href="../../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
 	<script src="../../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos">
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header" data-theme="f">
 		<h1>Grids</h1>
@@ -24,8 +24,10 @@
 	
 		
 
-      	<h2>Introduction to Responsive Web Design</h2>
-      	<p>Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase.</p>
+      	<h1>Responsive Web Design</h1>
+      	<p class="jqm-intro">Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase.</p>
+
+		<h2>RWD Basics</h2>
       	<p>RWD has three key elements:<p>
       	<ul>
       		<li><strong>CSS media queries</strong>, used to target styles to specific device characteristics such as screen width breakpoint or resolution.</li>
@@ -39,11 +41,11 @@
 
       	<p>Since the content inside each container is designed to re-flow to fit it's parent, the media queries can focus just on the rules for making the columns stack or float, and to override or add styles only needed at wider widths.</p>
 
-		<h2>Responsive and progressive enhancement</h2>
+		<h2>Progressive Enhancement</h2>
 
       	<p>In addition to these three core RWD principles, we advocate following progressive enhancement (PE) practices. This means always starting with semantic HTML which will work on any device, then unobtrusively layering in advanced CSS and JS only for capable browsers. This provides a solid foundation for the device-level optimizations that RWD provides and is how the jQuery Mobile library is built.</p>
 
-		<h2>Responsive and responsible</h2>
+		<h2>Responsive &amp; Responsible</h2>
 
       	<p>When working with RWD, it's very important to consider performance to ensure that you're not simply taking a heavy desktop site and shrinking it down to mobile screens. We recommend following a "mobile-first" approach  to keep development focused on reducing bandwidth, server requests and optimizing source order.</p>
 
@@ -58,7 +60,7 @@
       	<p>Always look for ways to limit the number of server requests on a page by concatenating files into a single request and always use minification and compression (gzip). </p>
 
 		
-		<h2>Working responsively in jQuery Mobile</h2>
+		<h2>Responsive in jQuery Mobile</h2>
 
 		<p>jQuery Mobile has always been designed to work within a responsive context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
 
