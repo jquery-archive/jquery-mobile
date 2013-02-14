@@ -31,11 +31,13 @@
 
 .ui-collapsible-set > .ui-collapsible.ui-corner-all {
 	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
 	border-radius: 0;
 }
 .ui-collapsible-heading,
 .ui-collapsible-heading > .ui-btn {
 	-webkit-border-radius: inherit;	
+	-moz-border-radius: inherit;	
 	border-radius: inherit;	
 }
 .ui-collapsible-set .ui-collapsible.ui-first-child {
