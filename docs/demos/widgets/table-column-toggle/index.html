@@ -13,7 +13,7 @@
 	<script src="../../../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos">
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="panel" id="link-sections" class="jqm-nav-panel" data-position="right" data-display="overlay" data-theme="c">
 		
@@ -34,7 +34,6 @@
 
 		
 			<p class="jqm-intro">The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row.
-				<a href="#link-sections" class="jqm-sections-link">Jump to section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
 			</p>
 			
 			<h2>Column toggle basics</h2>
@@ -131,7 +130,7 @@
 
 
 
-	      <h3>Applying column chooser mode to a table</h3>
+	      <h2>Applying column chooser mode to a table</h2>
 
 	      <p>The column chooser mode requires a <code>table</code> element with two attributes: <code>data-role=&quot;table&quot;</code> and <code>data-mode=&quot;columntoggle&quot;</code>. An <code>ID</code> attribute is also required on the table to associate it with the column chooser popup menu.</p>
 
@@ -141,7 +140,7 @@
 
 	   
 
-	      <h3>Setting column priority</h3>
+	      <h2>Setting column priority</h2>
 
 	      <p>The table works by hiding and showing columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to each of the table headers of columns you want to responsively display and assign a priority (1 = highest, 6 = lowest). Any table header given a priority will be available in the column picker menu. </p>
 	      <p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. This will make the column visible at all widths and won't be available in the column chooser menu.</p>
@@ -252,7 +251,7 @@
 	            </div><!-- /data-demo -->
 
 
-	    <h3>Making the table responsive</h3>
+	    <h2>Making the table responsive</h2>
 
 	    <p>The styles for the all priority columns (1-6) start as <code>display:none</code> in the structure stylesheet since we're taking a mobile-first approach to our styles. This means that only columns that should be persistent are visible in the styles to start.</p>
 
@@ -298,7 +297,7 @@
 	   display: table-cell;
 	}
 	</code></pre>
-	      <h3>Applying a preset breakpoint</h3>
+	      <h2>Applying a preset breakpoint</h2>
 	      <p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a set of pre-configured breakpoints for each of the six priority levels that you can use if they happen work well for your content. </p>
 	      <p>These breakpoints can applied by adding a <code>class="ui-responsive"</code> to the table element. Here is an example of a table with this class added:</p>
 
@@ -320,7 +319,7 @@
 	
 		
 
-	      <h3>Working with grouped column headers</h3>
+	      <h2>Grouped column headers</h2>
 	      <p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser. </p>
 
 			
