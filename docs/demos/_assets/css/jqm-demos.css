@@ -193,8 +193,8 @@ body, .jqm-demos  {
 	opacity: .6;
 }
 
-/* Sections link */
-.jqm-content a.jqm-sections-link {
+/* Deeplinks */
+.jqm-content a.jqm-deeplink {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	display: block;
@@ -206,10 +206,10 @@ body, .jqm-demos  {
 	text-decoration: none;
 	float:right;
 }
-.jqm-content p.jqm-intro + a.jqm-sections-link {
+.jqm-content p.jqm-intro + a.jqm-deeplink {
 	text-align: left;
 }
-.jqm-content a.jqm-sections-link span {
+.jqm-content a.jqm-deeplink span {
 	width: 18px;
 	display: inline-block;
 	margin-top: 1px;
@@ -217,14 +217,13 @@ body, .jqm-demos  {
 	float: right;
 	opacity: .5;
 }
-.jqm-content p.jqm-intro + a.jqm-sections-link span {
+.jqm-content p.jqm-intro + a.jqm-deeplink span {
 	float: right;
 	margin-left: 10px;
 }
 .jqm-content a.jqm-open-quicklink-panel {
 	margin-top:-3.3em;
 }
-
 
 
 /* Demo view source */
