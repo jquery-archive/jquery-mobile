@@ -62,7 +62,7 @@
 					} else {
 						bodyid =  $("body").attr("id");
 					}
-					this.element.find("h2").each(function(){
+					this.element.find("div.jqm-content>h2").each(function(){
 						var id, text = $(this).text();
 						
 						if(typeof $(this).attr("id") === "undefined"){
