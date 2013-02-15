@@ -30,7 +30,7 @@ small {
 	color: #666;
 }
 /* Prevent text selection while swiping with mouse */
-demo-page .ui-header, .ui-title, .control .ui-btn, .trivia-btn {
+.demo-page .ui-header, .ui-title, .control .ui-btn, .trivia-btn {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
