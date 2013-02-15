@@ -92,7 +92,7 @@ function makeButton() {
 
 	d.className = "jqm-view-source-link";
 
-	a.setAttribute( "href", "./" );
+	a.setAttribute( "href", "#demoPopup" );
 	a.setAttribute( "data-rel", "popup" );
 	a.setAttribute( "data-role", "button" );
 	a.setAttribute( "data-icon", "arrow-u" );
