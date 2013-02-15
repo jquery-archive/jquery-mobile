@@ -26,47 +26,60 @@
 			<h1>Questions &amp; Answers</h1>
 
 			<p class="jqm-intro">Things do always work like they do in the docs, so we've collected common questions and solutions to help get you up to speed and solve tricky issues when working with jQuery Mobile.</p>
-				<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" class="jqm-list">
-								<li data-role="list-divider">Forms</li>
-									<li><a href="question-template.html">Why won't my CSS styles apply correctly to a widget?</a></li>
-									<li><a href="updating-the-value-of-enhanced-form-elements-does-not-work.html">Updating the value of enhanced form elements does not work.</a></li>
-									<li><a href="my-html-5-inputs-look-different-in-browsers.html">My HTML 5 inputs (date / color / number ) look different in different browsers.</a></li>
-									<li><a href="my-range-search-input-type-is-being-changed.html">My range / search input type is being change to number / text.</a></li>
-									<li><a href="sometimes-custom-select-shows-as-dialog-popup.html">Sometimes my custom select shows as a popup other times its a dialog.</a></li>
-									<li><a href="disabling-a-button-does-not-work.html">Disabling a button does not work.</a></li>
-									<li><a href="controls-in-header-footer.html">Controls in my fixed header or footer are not responding or behave erratically.</a></li>
+				<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" class="jqm-list"  data-filter-placeholder="Search questions...">
+					<li data-role="list-divider">Forms</li>
+					<li><a href="question-template.html">Why won't my CSS styles apply correctly to a widget?</a></li>
+					<li><a href="updating-the-value-of-enhanced-form-elements-does-not-work.html">Updating the value of enhanced form elements does not work.</a></li>
+					<li><a href="my-html-5-inputs-look-different-in-browsers.html">My HTML 5 inputs look different across devices and browsers.</a></li>
+					<li><a href="my-range-search-input-type-is-being-changed.html">My range or search inputs are being change to number/text.</a></li>
+					<li><a href="sometimes-custom-select-shows-as-dialog-popup.html">Sometimes my custom select shows as a popup other times its a dialog.</a></li>
+					<li><a href="disabling-a-button-does-not-work.html">Disabling a button does not work.</a></li>
+					<li><a href="controls-in-header-footer.html">Controls in my fixed header or footer are not responding or behave erratically.</a></li>
 
-								<li data-role="list-divider">Pages</li>
-									<li><a href="why-is-only-the-first-page-loaded.html">Why is only the first page of my multi page document loaded?</a></li>
-									<li><a href="pass-query-params-to-page.html">I'm trying to pass query params to a page but it's not working?</a></li>
-									<li><a href="pass-via-the-hash-to-page.html">I'm trying to pass information via the hash but it's not working?</a></li>
-									<li><a href="the-application-cache-is-not-working.html">I'm trying to the application cache but it's not working?</a></li>
-									<li><a href="injected-content-is-not-enhanced.html">Content injected into a page is not enhanced.</a></li>
-									<li><a href="triggering-create-on-injected-content-does-not-work.html">Triggering create on injected HTML does not work.</a></li>
-									<li><a href="how-can-i-stop-auto-enhancement-of-elements.html">How can i stop JQM from enhancing and element.</a></li>
-									<li><a href="how-can-i-stop-auto-enhancement-of-a-block-of-elements.html">How can i stop JQM from enhancing a block of elements.</a></li>
+				<li data-role="list-divider">Pages</li>
+					<li><a href="scripts-and-styles-not-loading.html">Why aren't my scripts and styles loading?</a></li>
+					<li><a href="dom-ready-not-working.html">Why isn't DOM ready working for my scripts?</a></li>
+					<li><a href="how-do-i-load-a-page.html">How do I load a page?</a></li>
+					<li><a href="why-is-only-the-first-page-loaded.html">Why is only the first page of my multi page document loaded?</a></li>
+					<li><a href="pass-query-params-to-page.html">I'm trying to pass query params to a page but it's not working?</a></li>
+					<li><a href="pass-via-the-hash-to-page.html">I'm trying to pass information via the hash but it's not working?</a></li>
+					<li><a href="the-application-cache-is-not-working.html">I'm trying to use the application cache but it's not working?</a></li>
+					<li><a href="injected-content-is-not-enhanced.html">Content injected into a page is not enhanced.</a></li>
+					<li><a href="triggering-create-on-injected-content-does-not-work.html">Triggering create on injected HTML does not work.</a></li>
+					<li><a href="how-can-i-stop-auto-enhancement-of-elements.html">How can I stop JQM from auto-enhancing an element?</a></li>
+					<li><a href="how-can-i-stop-auto-enhancement-of-a-block-of-elements.html">How can I stop JQM from enhancing a block of elements?</a></li>
+					<li><a href="how-do-i-control-page-titles.html">How do I control page titles?</a></li>
+					<li><a href="how-do-i-load-a-page.html">How do I load a page?</a></li>
+					<li data-role="list-divider">Events</li>
+					<li><a href="how-do-i-use-touch-mouse-events.html">How do I use touch and mouse events?</a></li>
+					<li data-role="list-divider">Apps</li>
+					<li><a href="how-configure-phonegap-cordova.html">How do I need to configure PhoneGap/Cordova?</a></li>
+					
+					
 
-								<li data-role="list-divider">Navigation</li>
-									<li><a href="nav-is-acting-erraticly.html">The nav is acting erratically!</a></li>
-									<li><a href="deep-links-dont-work.html">Following a deep link ( a link to scroll to and id ) does not work.</a></li>
-									<li><a href="scripts-css-only-works-on-first-page-or-refresh.html">My script / css only works on first page or on refresh.</a></li>	
+				<!--
+				<li data-role="list-divider">Navigation</li>
+					<li><a href="nav-is-acting-erraticly.html">The nav is acting erratically!</a></li>
+					<li><a href="deep-links-dont-work.html">Following a deep link ( a link to scroll to and id ) does not work.</a></li>
+					<li><a href="scripts-css-only-works-on-first-page-or-refresh.html">My script / css only works on first page or on refresh.</a></li>	
 
-								<li data-role="list-divider">Widgets</li>
-									<li><a href="cloned-content-double-enhanced.html">Cloning a widget or enhanced for element and enhancing causes "double" enhancement</a></li>
-									<li><a href="cloned-content-does-not-update.html">Cloned widget or enhanced element does not update</a></li>
-									<li><a href="data-enhance-false-does-not-work.html">Setting data-enhance="false" does not work.</a></li>
+				<li data-role="list-divider">Widgets</li>
+					<li><a href="cloned-content-double-enhanced.html">Cloning a widget or enhanced for element and enhancing causes "double" enhancement</a></li>
+					<li><a href="cloned-content-does-not-update.html">Cloned widget or enhanced element does not update</a></li>
+					<li><a href="data-enhance-false-does-not-work.html">Setting data-enhance="false" does not work.</a></li>
 
-								<li data-role="list-divider">General</li>
-									<li><a href="selecting-element-by-id-not-working.html">Selecting elements by id only works sometimes or on first page!</a></li>
-									<li><a href="global-config-settings-ignored.html">The global configuration settings i set are being ignored.</a></li>
-									<li><a href="custom-css-is-ignored.html">My custom css is ignored.</a></li>
-								<li data-role="list-divider">Events</li>
-									<li><a href="swipe-triggered-when-scrolling.html">Swipe triggered when scrolling.</a></li>
-									<li><a href="document-ready-not-working.html">Document ready ignored after first page.</a></li>
-								<li data-role="list-divider">Theming &amp; custom styles</li>
-									<li><a href="#">How do I add custom icons?</a></li>
-									<li><a href="#">How do I add remove the circle behind the icons?</a></li>
-							</ul>
+				<li data-role="list-divider">General</li>
+					<li><a href="selecting-element-by-id-not-working.html">Selecting elements by id only works sometimes or on first page!</a></li>
+					<li><a href="global-config-settings-ignored.html">The global configuration settings i set are being ignored.</a></li>
+					<li><a href="custom-css-is-ignored.html">My custom css is ignored.</a></li>
+				<li data-role="list-divider">Events</li>
+					<li><a href="swipe-triggered-when-scrolling.html">Swipe triggered when scrolling.</a></li>
+					<li><a href="document-ready-not-working.html">Document ready ignored after first page.</a></li>
+				<li data-role="list-divider">Theming &amp; custom styles</li>
+					<li><a href="#">How do I add custom icons?</a></li>
+					<li><a href="#">How do I add remove the circle behind the icons?</a></li>
+				-->
+			</ul>
 			
 			
 			
