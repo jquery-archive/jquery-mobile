@@ -29,11 +29,7 @@ body, .jqm-demos  {
 /* Footer */
 .jqm-footer {
 	background: none;
-	border-top-width: 1px;
-	border-bottom-width: 0;
-	border-style: solid;
-	border-color: #e5e5e5;
-	border-color: rgba(0, 0, 0, .1);
+	border: none;
 	color: #777;
 }
 .jqm-footer p {
@@ -48,13 +44,17 @@ body, .jqm-demos  {
 }
 @media all and (min-width:40em) {
 	.jqm-footer {
-		overflow: hidden;		
+		overflow: hidden;
+		position: absolute;
+		bottom: 0;
+		width: 100%;		
 	}
 	.jqm-footer p {
-		margin: 1.5em 15px;
+		margin: 1.5em 0 1.5em 15%;
 		float: left;		
 	}
 	.jqm-footer p.jqm-version {
+		margin: 1.5em 15% 1.5em 0;
 		float: right;
 		font-weight: normal;
 	}
@@ -66,7 +66,8 @@ body, .jqm-demos  {
 /* Content */
 @media all and (min-width:40em) {
 	.jqm-demos .jqm-content {
-		padding: 15px 15%;
+		/* padding bottom is because of footer position absolute */
+		padding: 15px 15% 4.5em;
 	}
 	.jqm-demos .jqm-content.jqm-fullwidth {
 		padding: 15px;
