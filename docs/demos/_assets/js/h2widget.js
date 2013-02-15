@@ -19,11 +19,11 @@
 			var pos = $( hash ).offset().top;
 			$.mobile.silentScroll( pos );
 			$.mobile.navigate( hash, '', true );
-		} else if( typeof f.toPage !== "object" && hash !== "" && $.mobile.path.parseUrl( f.originalHref ).hash !== "" && !$( hash ).hasClass( "ui-page" ) && $(hash).attr('data-role') !== "page" && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
-			$( ele ).attr( "href", f.originalHref );
+		} else if( typeof f.toPage !== "object" && hash !== "" && $.mobile.path.parseUrl( href ).hash !== "" && !$( hash ).hasClass( "ui-page" ) && $(hash).attr('data-role') !== "page" && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
+			$( ele ).attr( "href", href );
 			$.mobile.document.one( "pagechange", function(){
 				if( typeof hash !== "undefined" && hash.search( "/" ) === -1 && hash !== "" && $( hash ).length > 0 && !$( hash ).hasClass( "ui-page" ) && $(hash).data('role') !== "page" && !$( ".ui-page-active " + hash ).hasClass( "ui-panel" ) && !$( ".ui-page-active " + hash ).hasClass( "ui-popup" )){
-					hash = $.mobile.path.parseUrl(f.originalHref).hash;
+					hash = $.mobile.path.parseUrl( href ).hash;
 					var pos = $( ".ui-page-active " + hash) .offset().top;
 					$.mobile.silentScroll( pos );
 				}
