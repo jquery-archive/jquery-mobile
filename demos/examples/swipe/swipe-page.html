@@ -72,9 +72,10 @@
 			background-repeat: no-repeat;
 		}
 		/* Transparent footer */
-		.ui-footer {
+		.demo-page .ui-footer {
 			background: none;
 			border: none;
+			bottom: 0;
 		}
 		/* The footer won't have a height because there are only two absolute positioned elements in it.
 		So we position the buttons from the bottom. */
@@ -89,7 +90,7 @@
 			color: #666;
 		}
 		/* Prevent text selection while swiping with mouse */
-		.ui-header, .ui-title, .control .ui-btn, .trivia-btn {
+		demo-page .ui-header, .ui-title, .control .ui-btn, .trivia-btn {
 			-webkit-user-select: none;
 			-moz-user-select: none;
 			-ms-user-select: none;
@@ -120,9 +121,18 @@
             
 	</div><!-- /content -->
 
+	<div data-role="footer" class="jqm-footer" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+
 <?php include( '../../nav.html' ); ?>
 
 </div><!-- /page -->
+
+
+<!-- The markup below is a copy of the actual demo pages just so we can show the markup in the "view source" -->
+
 
 <div data-role="page" id="city" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="prevCity" data-next="nextCity">
 
