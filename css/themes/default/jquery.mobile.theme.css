@@ -1200,10 +1200,10 @@ a.ui-link-inherit {
  **/
 
 .ui-popup.ui-corner-all > .arrow-guide {
-	left: 10px;
-	right: 10px;
-	top: 10px;
-	bottom: 10px;
+	left: .6em /*{global-radii-blocks}*/;
+	right: .6em /*{global-radii-blocks}*/;
+	top: .6em /*{global-radii-blocks}*/;
+	bottom: .6em /*{global-radii-blocks}*/;
 }
 
 .arrow-container {
