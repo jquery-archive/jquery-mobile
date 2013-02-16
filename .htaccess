@@ -1,3 +1,5 @@
+# This is for the docs/demos so we can use PHP in html files to include menus
+
 RemoveHandler .html
 AddType application/x-httpd-php .htm .html
 AddHandler x-httpd-php .htm .html
