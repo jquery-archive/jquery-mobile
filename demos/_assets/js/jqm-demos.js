@@ -71,7 +71,7 @@ $( document ).on( "pagecreate", ".jqm-demos-home, .jqm-demos-index", function() 
 	var base = $( "base" ).attr( "href" ).split('demos')[0],
 		base = base.split('next.html')[0] + "demos/";
 	
-	$( this ).find( ".jqm-content .jqm-list a" ).each(function() {
+	$( this ).find( ".jqm-content .jqm-list.jqm-include a" ).each(function() {
 		var href = base + $( this ).attr( "href" );
 		$( this ).attr( "href", href );
 	});
