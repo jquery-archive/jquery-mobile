@@ -66,13 +66,20 @@ $( document ).on( "pageinit", function() {
 });
 
 
-// replace path by full links
-$( document ).on( "pagecreate", ".jqm-demos-home, .jqm-demos-index", function() {
-	var base = $( "base" ).attr( "href" ).split('demos')[0],
-		base = base.split('next.html')[0] + "demos/";
-	
-	$( this ).find( ".jqm-content .jqm-list.jqm-include a" ).each(function() {
-		var href = base + $( this ).attr( "href" );
-		$( this ).attr( "href", href );
-	});
+// global search
+$( document ).on( "pageinit", ".jqm-demos", function() {
+	$( this ).find( ".jqm-search ul" ).listview({
+		globalNav: "demos",
+		inset: true,
+		theme: "d",
+		dividerTheme: "d",
+		icon: false,
+		filter: true,
+		filterReveal: true,
+		filterPlaceholder: "Search...",
+		autodividers: true,
+		autodividersSelector: function ( li ) {
+    		return "";
+  		}
+	});	
 });

@@ -299,8 +299,7 @@ body, .jqm-demos  {
 .jqm-list .ui-btn-active .ui-li-desc {
 	color: #fff;
 }
-.jqm-demos-home .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
-.jqm-demos-index .jqm-list .ui-li .ui-btn-text a.ui-link-inherit {
+.jqm-demos .jqm-list .ui-li .ui-btn-text a.ui-link-inherit {
 	text-overflow: clip;
 	overflow: visible;
 	white-space: normal;
@@ -320,9 +319,32 @@ body, .jqm-demos  {
 	margin-bottom: -.5em;
 }
 .jqm-demos-home .jqm-content > .ui-listview-filter .ui-input-search,
-.jqm-demos-index .jqm-content > .ui-listview-filter .ui-input-search {
+.jqm-demos-index .jqm-content > .ui-listview-filter .ui-input-search,
+.jqm-demos .jqm-search > .ui-listview-filter .ui-input-search {
 	border-color: #e5e5e5;
 	border-color: rgba(0, 0, 0, .1);
+}
+
+/* Search */
+.jqm-search {
+	position: absolute;
+	top: 2.5em;
+	right: 0;
+	left: auto;
+	width: 300px;
+	max-width: 100%;
+	margin-bottom: 1em;
+	z-index: 999;
+}
+.jqm-search	> .ui-listview-filter {
+	margin: 0;
+}
+.jqm-demos .jqm-search > .ui-listview-filter .ui-input-search {
+}
+.jqm-demos .jqm-search > .ui-listview-filter .ui-input-search.ui-focus {
+	-webkit-box-shadow: inset 0px 1px 4px rgba(0, 0, 0, .2);
+	-moz-box-shadow: inset 0px 1px 4px rgba(0, 0, 0, .2);
+	box-shadow: inset 0px 1px 4px rgba(0, 0, 0, .2);
 }
 
 /* Nav panels */

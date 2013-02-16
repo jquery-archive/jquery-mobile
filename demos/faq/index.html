@@ -19,6 +19,7 @@
 		<h1>jQuery Mobile</h1>
 		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+		<?php include( '../search.html' ); ?>
 	</div><!-- /header -->
 	
 	<div data-role="content" class="jqm-content">
@@ -27,7 +28,7 @@
         
         <p class="jqm-intro">Things do always work like they do in the docs, so we've collected common questions and solutions to help get you up to speed and solve tricky issues when working with jQuery Mobile.</p>
         
-        <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" class="jqm-list jqm-include"  data-filter-placeholder="Search questions...">
+        <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search questions..." data-global-nav="demos" class="jqm-list">
         	<?php include( '../nav-faq.html' ); ?>
         </ul>
 	
@@ -38,7 +39,7 @@
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 	
-<?php include( '../nav.html' ); ?>
+<?php include( '../global-nav.html' ); ?>
 	
 </div><!-- /page -->
 </body>
