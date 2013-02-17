@@ -16,7 +16,7 @@
 	<script>
 $( document ).on( "click", function( e ) {
 	if ( $( e.target ).parents( "#arrow-popup-demo-content" ) ) {
-		$( ".click-tracker" ).offset( { left: e.pageX, top: e.pageY } );
+		$( ".click-tracker" ).css( { left: e.pageX, top: e.pageY } );
 		$( "#arrow-popup" ).popup( "open", { x: e.pageX, y: e.pageY } );
 	}
 });
@@ -29,9 +29,12 @@ $( document ).on( "click", function( e ) {
 			position: absolute;
 			width: 1px;
 			height: 1px;
-			background: blue;
+			background: yellow;
 			left: -9999px;
 			top: -9999px;
+			border: 1px solid black;
+			margin-left: -1px;
+			margin-top: -1px;
 		}
 	</style>
 </head>
@@ -50,6 +53,7 @@ $( document ).on( "click", function( e ) {
 		<h1>Popup with arrow</h1>
 		<div data-demo-html="true" data-demo-js="#arrowSrc" data-demo-css="#arrowStyle">
 			<h3>Click anywhere in the square below to show the arrowed popup.</h3>
+			<p>A dot will appear to show you where you have clicked.</p>
 			<div data-role="popup" data-arrow="true" id="arrow-popup">
 				<p>This is a popup containing several paragraphs of text.</p>
 				<p>The first paragraph is the one above. This is the second.</p>
