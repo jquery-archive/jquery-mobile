@@ -22,7 +22,7 @@
 				}
 			},
 			_globalnav: function(){
-				var base = $( "base" ).attr( "href" ).split('demos')[0],
+				var base = $( "base" ).attr( "href" ).split('docs')[0],
 					base = base.split('index.html')[0] + this.options.globalNav + "/";
 					
 				this.element.find( "a" ).each(function() {
