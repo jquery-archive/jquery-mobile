@@ -14,6 +14,7 @@
 	<script>
 $( document ).on( "click", function( e ) {
 	if ( $( e.target ).parents( "#arrow-popup-demo-content" ) ) {
+		$( ".click-tracker" ).offset( { left: e.pageX, top: e.pageY } );
 		$( "#arrow-popup" ).popup( "open", { x: e.pageX, y: e.pageY } );
 	}
 });
@@ -21,6 +22,14 @@ $( document ).on( "click", function( e ) {
 	<style>
 		.really-tall {
 			height: 5000px;
+		}
+		.click-tracker {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			background: blue;
+			left: -9999px;
+			top: -9999px;
 		}
 	</style>
 </head>
@@ -34,7 +43,7 @@ $( document ).on( "click", function( e ) {
 	</div><!-- /header -->
 	
 	<div data-role="content" class="jqm-content" id="arrow-popup-demo-content">
-
+		<div class="click-tracker"></div>
 		<h2>Popup with arrow</h2>
 		<div data-demo-html="true">
 			<h3>Click anywhere in the square below to show the arrowed popup.</h3>
