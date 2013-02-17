@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     
     <!-- Need to get a proper redirect hooked up. Blech. -->
-    <meta http-equiv="refresh" content="0;url=../index.html">
+    <meta http-equiv="refresh" content="0;url=../">
     <meta name="robots" content="noindex, follow">
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,7 @@
 
 	<div data-role="content" class="jqm-content">
 		
-        <p>Nothing to see here folks. <a href="../index.html">View the documentation home page &rarr;</a></p>
+        <p>Nothing to see here folks. <a href="../">View the documentation home page &rarr;</a></p>
         
 	</div><!-- /content -->
 	
