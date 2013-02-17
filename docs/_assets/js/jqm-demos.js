@@ -69,7 +69,7 @@ $( document ).on( "pageinit", function() {
 // global search
 $( document ).on( "pageinit", ".jqm-demos", function() {
 	$( this ).find( ".jqm-search ul" ).listview({
-		globalNav: "demos",
+		globalNav: "docs",
 		inset: true,
 		theme: "d",
 		dividerTheme: "d",
