@@ -138,16 +138,17 @@ body, .jqm-demos  {
 
 @media all and (min-width:40em) {
 	.jqm-header h1.jqm-logo {
-		margin: .8em 3.4em;
+		text-align:left;
+		margin: .8em 3.4em .8em 15%;
 	}
 	.jqm-header .jqm-logo img {
-		width: 180px;
+		width: 200px;
 	}
 	.jqm-header > .ui-btn {
 		top: 1.65em;
 	}
 	.jqm-header > .ui-btn-left {
-		left: 15%;
+		left: 40%;
 	}
 	.jqm-header > .jqm-search-link {
 		right: 15%;
