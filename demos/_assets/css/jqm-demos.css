@@ -21,10 +21,10 @@ body, .jqm-demos  {
 }
 .jqm-header h1.jqm-logo {
 	font-size: 1em;
-	margin: .7em 54px;
+	margin: .6em 3.4em;
 }
 .jqm-header .jqm-logo img {
-	width: 220px;
+	width: 144px;
 	height: auto;
 }
 .jqm-demos-home .jqm-header p.jqm-version {
@@ -65,9 +65,11 @@ body, .jqm-demos  {
 	border-top: none;
 	max-height: 0;
 	overflow: hidden;
-	-webkit-transition: max-height 350ms ease;
-	-moz-transition: max-height 350ms ease;
-	transition: max-height 350ms ease;
+	padding-left:.7em;
+	padding-right:.7em;
+	-webkit-transition: max-height 450ms ease;
+	-moz-transition: max-height 450ms ease;
+	transition: max-height 450ms ease;
 }
 .jqm-search	> .ui-listview-filter {
 	margin: 0 -5px;
@@ -87,6 +89,7 @@ body, .jqm-demos  {
 	-webkit-box-shadow: 0 0 5px rgba(0,0,0,.15);
 	-moz-box-shadow: 0 0 5px rgba(0,0,0,.15);
 	box-shadow: 0 0 5px rgba(0,0,0,.15);
+	min-width:96%;
 }
 @media all and (min-width:40em) {
 	.jqm-search {
@@ -154,6 +157,26 @@ body, .jqm-demos  {
 	}
 	.jqm-demos .jqm-content.jqm-fullwidth {
 		padding: 15px;
+	}
+	.jqm-header h1.jqm-logo {
+		font-size: 1em;
+		margin: .8em 3.4em;
+	}
+	.jqm-header .jqm-logo img {
+		width: 180px;
+		height: auto;
+	}
+	.jqm-demos .jqm-header > .ui-btn-left {
+		left: 15%;
+	}
+	.jqm-demos .jqm-header > .ui-btn-right {
+		right: 15%;
+	}
+	.jqm-header > .ui-btn {
+		margin-top:.5em;
+	}
+	.jqm-search > .jqm-list {
+		min-width:70%;
 	}
 }
 
@@ -408,8 +431,19 @@ body, .jqm-demos  {
 }
 
 /* Nav panels */
+
+/* Reveal menu shadow on top of the list items */
+.ui-panel-display-reveal {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.ui-panel-content-wrap-position-left {
+	-webkit-box-shadow: -5px 0px 5px rgba(0,0,0,.10);
+	-moz-box-shadow: -5px 0px 5px rgba(0,0,0,.10);
+	box-shadow: -5px 0px 5px rgba(0,0,0,.10);
+}
 .jqm-demos .jqm-nav-panel {
-	margin-top: 10px;
 	min-height: auto;
 	bottom: 0;
 	overflow: hidden;
