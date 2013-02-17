@@ -27,7 +27,7 @@ module.exports = function( grunt ) {
 		return path.join( dirs.output, name );
 	}
 
-	demosjsFile = path.join( dirs.output, "demos", "docs", "demos", "_assets", "js", names.demosjs );
+	demosjsFile = path.join( dirs.output, "demos", "docs", "_assets", "js", names.demosjs );
 	rootFile = outputPath( names.root );
 	structureFile = outputPath( names.structure );
 	themeFile = outputPath( names.theme );
