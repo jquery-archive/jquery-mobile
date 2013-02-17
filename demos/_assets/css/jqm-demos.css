@@ -25,7 +25,7 @@ body, .jqm-demos  {
 	margin: .6em 3.375em;
 }
 .jqm-header .jqm-logo img {
-	width: 144px;
+	width: 140px;
 	height: auto;
 }
 
@@ -39,7 +39,7 @@ body, .jqm-demos  {
 }
 
 .jqm-header > .ui-btn {
-	top: 1.3125em;
+	top: 1.1em;
 	width: 31px;
 	height: 31px;
 	-webkit-border-radius: 0;
@@ -144,7 +144,7 @@ body, .jqm-demos  {
 		width: 180px;
 	}
 	.jqm-header > .ui-btn {
-		top: 1.425em;
+		top: 1.65em;
 	}
 	.jqm-header > .ui-btn-left {
 		left: 15%;
