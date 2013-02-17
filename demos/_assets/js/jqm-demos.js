@@ -81,5 +81,9 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		autodividersSelector: function ( li ) {
     		return "";
   		}
-	});	
+	});
+	
+	$( this ).find( ".jqm-header .jqm-search-link" ).on( "click", function() {
+		$( this ).parent( ".jqm-header" ).toggleClass( "jqm-search-toggle" );
+	});
 });

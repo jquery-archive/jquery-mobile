@@ -15,18 +15,16 @@
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	<div data-role="header" data-position="fixed" data-theme="f">
-		<h1>jQuery Mobile</h1>
-		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
-		<a href="../../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
-		<?php include( '../../search.html' ); ?>
-	</div>
-	
-	<div data-role="content" class="jqm-content">
-				<h1>Fixed toolbars</h1>
-				
-			   
-				
+    <div data-role="header" data-position="fixed" data-theme="f">
+        <h1>jQuery Mobile</h1>
+        <a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+        <?php include( '../../search.html' ); ?>
+    </div>
+    
+    <div data-role="content" class="jqm-content">
+    
+    	<h1>Fixed toolbars</h1>
 		
 		<p>In browsers that support CSS <code>position: fixed</code> (most desktop browsers, iOS5+, Android 2.2+, BlackBerry 6, and others), toolbars that use the "fixedtoolbar" plugin will be fixed to the top or bottom of the viewport, while the page content scrolls freely in between. In browsers that don't support fixed positioning, the toolbars will remain positioned in flow, at the top or bottom of the page. </p>
 		

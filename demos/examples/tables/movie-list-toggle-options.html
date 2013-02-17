@@ -15,15 +15,16 @@
 <body> 
 <div data-role="page" class="jqm-demos">
 
-    <div data-role="header" class="jqm-header" data-theme="f">
-        <h1>Responsive Tables</h1>
+    <div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
         <a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="../../../" data-icon="home" data-iconpos="notext" data-ajax="false">Home</a>
+        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+		<?php include( '../../search.html' ); ?>
     </div><!-- /header -->
 
 	<div data-role="content" class="jqm-content jqm-fullwidth">
     
-        <h1>Column toggle: Customization options</h1>
+        <h1>Table Column toggle: Customization options</h1>
         
         <p>This table illustrates the standard customization options for a column toggle table. The table has a custom theme and label text for the column chooser button, and a theme set on the popup.</p>
         
@@ -122,7 +123,7 @@
 
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer" data-theme="c">
+	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
