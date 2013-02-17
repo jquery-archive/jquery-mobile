@@ -3,76 +3,50 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile: Demos and Documentation</title>
-	<link rel="stylesheet"  href="css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="docs/_assets/css/jqm-docs.css" />
+	<title>jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="docs/_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="docs/_assets/favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="js/jquery.js"></script>
-	<script src="docs/_assets/js/jqm-docs.js"></script>
+	<script src="docs/_assets/js/"></script>
 	<script src="js/"></script>
-	
 </head>
 <body>
-<div data-role="page" class="type-home">
-	<div data-role="content">
+<div data-role="page" class="jqm-demos jqm-demos-home">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><img src="docs/_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
 		<p class="jqm-version"></p>
+		<a href="#" class="jqm-search-link ui-btn-right" data-icon="search" data-iconpos="notext">Search</a>
+        <?php include( 'docs/search.html' ); ?>
+	</div><!-- /header -->
+	
+	<div data-role="content" class="jqm-content">
+		
+		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework built with jQuery and is the easiest way to build sites and apps that are accessible on all popular smartphone, tablet and desktop devices. Welcome to the demo center.</p>
 
-		<div class="content-secondary">
-
-			<div id="jqm-homeheader">
-				<h1 id="jqm-logo"><img src="docs/_assets/images/jquery-logo.png" alt="jQuery Mobile Framework" /></h1>
-				<p>A Touch-Optimized UI Framework built with jQuery and HTML5.</p>
-			</div>
-
-
-			<p class="intro"><strong>Welcome.</strong> jQuery Mobile is the easiest way to build sites and apps that are accessible on all popular smartphone, tablet and desktop devices. For jQuery 1.7.0 to 1.9.0.</p>
-
-			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Overview</li>
-				<li><a href="docs/about/intro.html">Intro to jQuery Mobile</a></li>
-				<li><a href="docs/about/getting-started.html">Quick start guide</a></li>
-				<li><a href="docs/about/features.html">Features</a></li>
-				<li><a href="docs/about/accessibility.html">Accessibility</a></li>
-				<li><a href="docs/about/platforms.html">Supported platforms</a></li>
-			</ul>
-
-		</div><!--/content-primary-->
-
-		<div class="content-primary">
-			<nav>
+		<ul data-role="listview" data-inset="true" data-theme="d" data-icon="false" data-filter-placeholder="Search..." class="jqm-list">
+            <li><a href="docs/intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
+            <li><a href="docs/examples/"><h2>Demo Showcase</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
+            <li><a href="docs/faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
+			<li><a href="http://api.jquerymobile.com"><h2>API documentation</h2><p>Visit the API site for full technical info.</p></a></li>
+		</ul>
+		
+		<h2>Widget reference</h2>
+        
+		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list">
+        	<?php include( 'docs/nav-widgets.html' ); ?>
+        </ul>
 
 
-				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
-					<li data-role="list-divider">Components</li>
-					<li><a href="docs/pages/index.html">Pages &amp; dialogs</a></li>
-					<li><a href="docs/toolbars/index.html">Toolbars</a></li>
-					<li><a href="docs/buttons/index.html">Buttons</a></li>
-					<li><a href="docs/content/index.html">Content formatting</a></li>
-					<li><a href="docs/forms/index.html">Form elements</a></li>
-					<li><a href="docs/lists/index.html">Listviews</a></li>
-					<li><a href="docs/panels/index.html">Panels</a></li>
-					<li><a href="docs/tables/index.html">Tables</a></li>
-
-					<li data-role="list-divider">API</li>
-					<li><a href="docs/api/globalconfig.html">Configuring defaults</a></li>
-					<li><a href="docs/api/events.html">Events</a></li>
-					<li><a href="docs/api/methods.html">Methods &amp; Utilities</a></li>
-					<li><a href="docs/api/data-attributes.html">Data attribute reference</a></li>
-					<li><a href="docs/api/themes.html">Theme framework</a></li>
-
-
-				</ul>
-			</nav>
-		</div>
-
-
-
-	</div>
-
-	<div data-role="footer" class="footer-docs" data-theme="c">
-            <p class="jqm-version"></p>
-			<p>Copyright 2013 The jQuery Foundation</p>
-	</div>
-
-</div>
+	</div><!-- /content -->
+	
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
 </body>
 </html>
