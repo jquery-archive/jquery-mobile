@@ -19,7 +19,6 @@ body, .jqm-demos  {
 	-moz-box-shadow: 0 0 5px rgba(0,0,0,.15);
 	box-shadow: 0 0 5px rgba(0,0,0,.15);
 }
-
 .jqm-header h1.jqm-logo {
 	font-size: 1em;
 	margin: .6em 3.375em;
@@ -45,10 +44,10 @@ body, .jqm-demos  {
 	-webkit-border-radius: 0;
 	border-radius: 0;
 }
-.jqm-header > .jqm-navmenu-link {
+.jqm-header .jqm-navmenu-link {
 	left: 15px;
 }
-.jqm-header > .jqm-search-link {
+.jqm-header .jqm-search-link {
 	right: 15px;
 }
 .jqm-header > .ui-btn,
@@ -75,9 +74,13 @@ body, .jqm-demos  {
 .jqm-header .jqm-search-link .ui-icon {
 	background-position: -100px 50%;
 }
-.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header .jqm-navmenu-link .ui-icon,
 .jqm-search-toggle .jqm-search-link .ui-icon {
 	background-position: -51px 50%;
+}
+@media all and (max-width:39.9375em) {
+	.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header .jqm-navmenu-link .ui-icon {
+		background-position: -51px 50%;
+	}
 }
 @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
        only screen and (min--moz-device-pixel-ratio: 1.3),
@@ -89,28 +92,17 @@ body, .jqm-demos  {
 		-o-background-size: 131px 31px;
 		background-size: 131px 31px;
 	}
-	.jqm-header .jqm-navmenu-link .ui-icon {
-		background-position: -3px 50%;
-	}
-	.jqm-header .jqm-search-link .ui-icon {
-		background-position: -100px 50%;
-	}
-	.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header .jqm-navmenu-link .ui-icon,
-	.jqm-search-toggle .jqm-search-link .ui-icon {
-		background-position: -51px 50%;
-	}
 }
 
 .jqm-search {
-	background: #eee;
-	border-top: none;
-	overflow: hidden;
-	padding: 0 .7em;
 	display: none;
+	background: #eee;
+	border-top: 1px solid transparent;
+	padding: 0 .7em;
 }
 .jqm-search-toggle .jqm-search {
-	border-top: 1px solid #e0e0e0;
 	display: block;
+	border-top: 1px solid #e0e0e0;
 }
 .jqm-search	> .ui-listview-filter {
 	margin: 0 -5px;
@@ -136,7 +128,7 @@ body, .jqm-demos  {
 @media all and (min-width:40em) {
 	.jqm-header h1.jqm-logo {
 		text-align:left;
-		margin: .8em 3.4em .8em 15%;
+		margin: .8em 0 .8em 15%;
 	}
 	.jqm-header .jqm-logo img {
 		width: 200px;
@@ -144,14 +136,26 @@ body, .jqm-demos  {
 	.jqm-header > .ui-btn {
 		top: 1.65em;
 	}
-	.jqm-header > .ui-btn-left {
-		left: 40%;
+	.jqm-header .jqm-navmenu-link {
+		left: 15%;
+		margin-left: 215px;
 	}
-	.jqm-header > .jqm-search-link {
-		right: 15%;
+	.jqm-header .jqm-search-link {
+		display: none;
+	}
+	.ui-panel-animate.ui-panel-content-wrap > .ui-header.jqm-header {
+		position: relative;
 	}
 	.jqm-search {
-		padding: 0 15%;
+		display: block;
+		position: absolute;
+		top: 1.58125em;
+		right: 15%;
+		background: none;
+		border: none;
+	}
+	.jqm-demos .jqm-search > .ui-listview-filter .ui-input-search {
+		margin: 0;	
 	}
 	.jqm-search > .jqm-list {
 		min-width: 70%;
