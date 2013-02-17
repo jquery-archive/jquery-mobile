@@ -19,7 +19,7 @@
 		<h1 class="jqm-logo"><img src="docs/_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
 		<p class="jqm-version"></p>
 		<a href="#" class="jqm-search-link ui-btn-right" data-icon="search" data-iconpos="notext">Search</a>
-        <?php include( 'docs/search.html' ); ?>
+        <?php include( 'docs/search.php' ); ?>
 	</div><!-- /header -->
 	
 	<div data-role="content" class="jqm-content">
@@ -36,7 +36,7 @@
 		<h2>Widget reference</h2>
         
 		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="docs" class="jqm-list">
-        	<?php include( 'docs/nav-widgets.html' ); ?>
+        	<?php include( 'docs/nav-widgets.php' ); ?>
         </ul>
 
 

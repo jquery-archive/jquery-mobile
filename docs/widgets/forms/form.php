@@ -18,7 +18,7 @@
 	<div data-role="header" class="jqm-header">
 		<h1>Form</h1>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
-		<?php include( '../../search.html' ); ?>
+		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
 	
 	<div data-role="content" class="jqm-content">

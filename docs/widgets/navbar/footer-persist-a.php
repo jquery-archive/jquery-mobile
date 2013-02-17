@@ -19,7 +19,7 @@
 		<h1 class="jqm-logo"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
         <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
-        <?php include( '../../search.html' ); ?>
+        <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
     
     <div data-role="content" class="jqm-content">
@@ -66,7 +66,7 @@
 		</div><!-- /footer -->
 
 
-	<?php include( '../../global-nav.html' ); ?>
+	<?php include( '../../global-nav.php' ); ?>
 
 
 	</div><!-- /page -->

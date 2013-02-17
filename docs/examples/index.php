@@ -19,7 +19,7 @@
 		<h1 class="jqm-logo"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
 		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
-        <?php include( '../search.html' ); ?>
+        <?php include( '../search.php' ); ?>
 	</div><!-- /header -->
 	
 	<div data-role="content" class="jqm-content">
@@ -29,7 +29,7 @@
 		<p class="jqm-intro">This section explores how you can customize, extend, re-style and take full advantage of jQuery Mobile.</p>
             
 		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search demos..." data-global-nav="docs" class="jqm-list">
-        	<?php include( '../nav-examples.html' ); ?>
+        	<?php include( '../nav-examples.php' ); ?>
 		</ul>
 			
             
@@ -40,7 +40,7 @@
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 	
-<?php include( '../global-nav.html' ); ?>
+<?php include( '../global-nav.php' ); ?>
 	
 </div><!-- /page -->
 </body>
