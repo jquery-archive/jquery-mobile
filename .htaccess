@@ -3,3 +3,11 @@
 RemoveHandler .html
 AddType application/x-httpd-php .htm .html
 AddHandler x-httpd-php .htm .html
+
+# TEMP REWRITE
+Options +FollowSymlinks
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ http://jquerymobile.com/branches/old-docs/index.html [R=302,L]
