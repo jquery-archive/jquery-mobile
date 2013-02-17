@@ -104,16 +104,13 @@ body, .jqm-demos  {
 .jqm-search {
 	background: #eee;
 	border-top: none;
-	max-height: 0;
 	overflow: hidden;
 	padding: 0 .7em;
-	-webkit-transition: max-height 450ms ease;
-	-moz-transition: max-height 450ms ease;
-	transition: max-height 450ms ease;
+	display: none;
 }
 .jqm-search-toggle .jqm-search {
-	max-height: 60px;
 	border-top: 1px solid #e0e0e0;
+	display: block;
 }
 .jqm-search	> .ui-listview-filter {
 	margin: 0 -5px;
@@ -160,7 +157,6 @@ body, .jqm-demos  {
 		min-width: 70%;
 	}
 }
-
 
 /* Footer */
 .jqm-footer {
