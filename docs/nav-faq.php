@@ -20,7 +20,7 @@
 
 <li data-section="Questions & Answers" data-filtertext="Why isn't DOM ready working for my scripts?"><a href="faq/dom-ready-not-working.php">Why isn't DOM ready working for my scripts?</a></li>
 
-<li data-section="Questions & Answers" data-filtertext=How do I load a page?""><a href="faq/how-do-i-load-a-page.php">How do I load a page?</a></li>
+<li data-section="Questions & Answers" data-filtertext="How do I load a page?"><a href="faq/how-do-i-load-a-page.php">How do I load a page?</a></li>
 
 <li data-section="Questions & Answers" data-filtertext="Why is only the first page of my multi page document loaded?"><a href="faq/why-is-only-the-first-page-loaded.php">Why is only the first page of my multi page document loaded?</a></li>
 
