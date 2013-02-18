@@ -110,11 +110,19 @@ body, .jqm-demos  {
 .jqm-demos .jqm-search > .ui-listview-filter .ui-input-search {
 	border-color: #e5e5e5;
 	border-color: rgba(0, 0, 0, .1);
+	background-color:#fbfbfb;
+	-webkit-box-shadow: inset 0px 0 5px rgba(0, 0, 0, .1);
+	-moz-box-shadow: inset 0px 0 5px rgba(0, 0, 0, .1);
+	box-shadow: inset 0px 0 5px rgba(0, 0, 0, .1);
 }
+.jqm-demos .jqm-search > .ui-listview-filter .ui-input-text {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size:.95em;
+}
+
 .jqm-demos .jqm-search > .ui-listview-filter .ui-input-search.ui-focus {
-	-webkit-box-shadow: inset 0px 1px 4px rgba(0, 0, 0, .2);
-	-moz-box-shadow: inset 0px 1px 4px rgba(0, 0, 0, .2);
-	box-shadow: inset 0px 1px 4px rgba(0, 0, 0, .2);
+	background-color:#fff;
 }
 .jqm-search > .jqm-list {
 	position: absolute;
