@@ -83,7 +83,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		}
 	});
 	
-	$( this ).find( ".jqm-header .jqm-search-link" ).on( "click", function() {
+	$( this ).find( ".jqm-header .jqm-search-link" ).on( "tap", function() {
 		$( this ).parent( ".jqm-header" ).toggleClass( "jqm-search-toggle" );
 		
 		var type = $( this ).parent( ".jqm-header" ).hasClass( "jqm-search-toggle" ) ? "searchshow" : "searchhide";
