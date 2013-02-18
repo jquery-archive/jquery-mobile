@@ -118,8 +118,8 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		$( ".jqm-search form" ).children( ".ui-btn" ).addClass( "ui-hidden-accessible" );
 		
 		$( ".ui-page-active .jqm-search form" ).on( "submit", function() {
-			if ( $( ".ui-page-active .jqm-search li.ui-btn-up-b" ).length !== 0 ) {
-				$( ".ui-page-active .jqm-search li.ui-btn-up-b a" ).click();
+			if ( $( ".ui-page-active .jqm-search li.ui-btn-active" ).length !== 0 ) {
+				$( ".ui-page-active .jqm-search li.ui-btn-active a" ).click();
 				return false;
 			}
 			var url, base = $( "base" ).attr( "href" ).split('docs')[0];
