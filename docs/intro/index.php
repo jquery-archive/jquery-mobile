@@ -32,7 +32,7 @@
 		
 			<h2 id="nav-intro">Introduction</h2>
 			
-			<p>jQuery's mobile is a user interface framework based on jQuery that works across all popular phones, tablet, e-reader, and desktop platforms. Built with accessibility and universal access in mind, we follow progressive enhancement and <a href="rwd.php">responsive web design (RWD)</a> principles. HTML5 Markup-driven configuration makes it easy to learn, but a powerful <a href="api.jquerymobile.com">API</a> makes it easy to deeply customize the library.</p>
+			<p>jQuery Mobile is a user interface framework based on jQuery that works across all popular phones, tablet, e-reader, and desktop platforms. Built with accessibility and universal access in mind, we follow progressive enhancement and <a href="rwd.php">responsive web design (RWD)</a> principles. HTML5 Markup-driven configuration makes it easy to learn, but a powerful <a href="api.jquerymobile.com">API</a> makes it easy to deeply customize the library.</p>
 			
 
 			
