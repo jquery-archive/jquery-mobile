@@ -42,6 +42,10 @@
 
 <li data-section="Demo Showcase" data-filtertext="swipe to delete list item listviews lists ul ol"><a href="examples/swipe/swipe-list.php" data-ajax="false">Swipe to delete list item</a></li>
 
-<li data-role="list-divider">Slider extension</li>
+<li data-role="list-divider">Sliders</li>
 
 <li data-section="Demo Showcase" data-filtertext="slider tooltip extension input range sliders forms"><a href="examples/slider/tooltip.php" data-ajax="false">Tooltip extension</a></li>
+
+<li data-role="list-divider">Collapsibles</li>
+
+<li data-section="Demo Showcase" data-filtertext="slider tooltip extension input range sliders forms"><a href="examples/collapsible/dynamic-collapsible.php" data-ajax="false">Dynamic collapsible</a></li>
