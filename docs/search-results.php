@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../js/jquery.js"></script>
 	<script src="_assets/js/"></script>
-	<script>
-	
-	</script>
 	<script src="../js/"></script>
 
 </head>
