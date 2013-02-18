@@ -125,7 +125,7 @@
 		
 			<p>A single HTML document can contain multiple "pages" that are loaded together by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. Each "page" block needs a unique id (<code>id="foo"</code>) that will be used to link internally between "pages" (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal "page" with the id and transition it into view.</p> 
 						
-			<p>Here is an example of a two "page" site built with two jQuery Mobile divs navigated by linking to an id placed on each page wrapper. Note that the id's on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look inside the <code>body</code> element.</p>  
+			<p>Here is an example of a two "page" site built with two jQuery Mobile divs navigated by linking to an id placed on each page wrapper. Note that the ids on the page wrappers are only needed to support the internal page linking, and are optional if each page is a separate HTML document. Here is what two pages look like inside the <code>body</code> element.</p>  
 
 <pre><code>
 &lt;body&gt; 
@@ -235,7 +235,7 @@ $.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
 		<var>pageContainerElement</var>.page({ domCache: true });
 		</code></pre>
 
-		<p>Note that the contents of the first page isn't removed from the DOM, only pages loaded in via AJAX. Pages inside a multi-page template aren't affected by this feature at all - jQuery Mobile only removes pages loaded via Ajax.</p>
+		<p>Note that the contents of the first page isn't removed from the DOM, only pages loaded in via AJAX. Pages inside a multi-page template aren't affected by this feature at all - jQuery Mobile only removes pages loaded via AJAX.</p>
 			
 
 	</div><!-- /content -->
