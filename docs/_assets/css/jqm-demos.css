@@ -164,6 +164,11 @@ body, .jqm-demos  {
 	.jqm-header .jqm-logo img,
 	.jqm-demos-home .jqm-header .jqm-logo img {
 		display: block;
+		width: 200px;
+		height: auto;
+	}
+	.jqm-demos-home .jqm-header .jqm-logo img {
+		display: block;
 		width: 240px;
 		height: auto;
 		padding-left:.7em;
