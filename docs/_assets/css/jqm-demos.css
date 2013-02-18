@@ -34,20 +34,15 @@ body, .jqm-demos  {
 	width: 140px;
 	height: auto;
 }
-
-.jqm-demos-home .jqm-version {
-	font-weight: 700;
-	white-space:nowrap;
-	color:#666;
-	font-size:.9em;
-}
-
 .jqm-header > .ui-btn {
-	top: 1.1em;
 	width: 31px;
 	height: 31px;
 	-webkit-border-radius: 0;
 	border-radius: 0;
+}
+.jqm-header > .ui-btn,
+.jqm-header.ui-header-fixed.ui-fixed-hidden > .ui-btn-icon-notext {
+	top: 1.1em;
 }
 .jqm-header .jqm-navmenu-link {
 	left: 15px;
@@ -148,7 +143,7 @@ body, .jqm-demos  {
 		width: 200px;
 	}
 	.jqm-header > .ui-btn,
-	.jqm-header.ui-header-fixed.ui-fixed-hidden > .ui-btn-icon-notext  {
+	.jqm-header.ui-header-fixed.ui-fixed-hidden > .ui-btn-icon-notext {
 		top: 1.65em;
 	}
 	.jqm-header .jqm-navmenu-link {
@@ -194,10 +189,10 @@ body, .jqm-demos  {
 		background-size: 85px 20px;
 	}
 }
-
 @media only screen and (min-width:46em) and (-webkit-min-device-pixel-ratio: 1.3),
        only screen and (min-width:46em) and (min--moz-device-pixel-ratio: 1.3),
        only screen and (min-width:46em) and (min-resolution: 200dpi) {
+	/* global nav panel close button */
 	.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header::after {
 		background-image: url(jqm_demo-icons-hd.png);
 	}
