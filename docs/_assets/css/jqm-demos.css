@@ -408,11 +408,13 @@ body, .jqm-demos  {
 	font-weight: 700; 
 	font-size: .9em;
 	color: #74b042;
+	margin-top:.1em;
 }
 .jqm-list .ui-li-desc  {
 	font-weight: 300; 
 	font-size: .8em;
 	color: #777;
+	margin-bottom:.1em;
 }
 
 /* List dividers */
