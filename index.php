@@ -23,7 +23,8 @@
 	
 	<div data-role="content" class="jqm-content">
 		
-		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework built with jQuery and is the easiest way to build sites and apps that are accessible on all popular smartphone, tablet and desktop devices.</p>
+		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework built with jQuery and is the easiest way to build sites and apps that are accessible on all popular smartphone, tablet and desktop devices. <span class="jqm-version"></span></p>
+		
 		
 
 		<ul data-role="listview" data-inset="true" data-theme="d" data-icon="false" data-filter-placeholder="Search..." class="jqm-list">

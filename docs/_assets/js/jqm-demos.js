@@ -62,7 +62,7 @@ $( document ).on( "pageinit", function() {
 		html += " " + str;
 	}
 
-	$( "p.jqm-version" ).html( html );
+	$( ".jqm-version" ).html( html );
 });
 
 

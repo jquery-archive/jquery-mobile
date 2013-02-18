@@ -28,13 +28,11 @@ body, .jqm-demos  {
 	height: auto;
 }
 
-.jqm-demos-home .jqm-header p.jqm-version {
-	position: absolute;
-	top: 1em;
-	left: 15px;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 300;
-	font-size: .9em;
+.jqm-demos-home .jqm-version {
+	font-weight: 700;
+	white-space:nowrap;
+	color:#666;
+	font-size:.9em;
 }
 
 .jqm-header > .ui-btn {
@@ -186,8 +184,11 @@ body, .jqm-demos  {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 }
-.jqm-footer p.jqm-version {
-	font-weight: bold;
+.jqm-footer .jqm-version {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	font-size:.9em;
+	margin-left:1.1em;
 }
 @media all and (min-width:46em) {
 	.jqm-footer {
@@ -200,10 +201,10 @@ body, .jqm-demos  {
 		margin: 1.5em 0 1.5em 15%;
 		float: left;		
 	}
-	.jqm-footer p.jqm-version {
+	.jqm-footer .jqm-version {
 		margin: 1.5em 15% 1.5em 0;
 		float: right;
-		font-weight: normal;
+		font-weight: 700;
 	}
 	.jqm-demos-home .jqm-footer p.jqm-version {
 		display: none;
