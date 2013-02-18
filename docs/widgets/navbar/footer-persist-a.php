@@ -15,7 +15,7 @@
 <body>
 <div data-role="page" class="jqm-demos">
 
-    <div data-role="header" class="jqm-header">
+    <div data-role="header" class="jqm-header" data-position="fixed">
 		<h1 class="jqm-logo"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
         <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
@@ -57,10 +57,10 @@
 		<div data-role="footer" data-id="foo1" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="footer-persist-a.html" data-prefetch="true" data-transition="none" class="ui-btn-active ui-state-persist">Info</a></li>
-					<li><a href="footer-persist-b.html" data-prefetch="true" data-transition="none">Friends</a></li>
-					<li><a href="footer-persist-c.html" data-prefetch="true" data-transition="none">Albums</a></li>
-					<li><a href="footer-persist-d.html" data-prefetch="true" data-transition="none">Emails</a></li>
+					<li><a href="footer-persist-a.php" data-prefetch="true" data-transition="none" class="ui-btn-active ui-state-persist">Info</a></li>
+					<li><a href="footer-persist-b.php" data-prefetch="true" data-transition="none">Friends</a></li>
+					<li><a href="footer-persist-c.php" data-prefetch="true" data-transition="none">Albums</a></li>
+					<li><a href="footer-persist-d.php" data-prefetch="true" data-transition="none">Emails</a></li>
 				</ul>
 			</div><!-- /navbar -->
 		</div><!-- /footer -->
