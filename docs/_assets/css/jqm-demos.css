@@ -145,6 +145,7 @@ body, .jqm-demos  {
 }
 .jqm-search > .jqm-list {
 	position: absolute;
+	margin-top: 5px;
 	margin-right: .7em;
 	z-index: 999;
 	-webkit-box-shadow: 0 0 5px rgba(0,0,0,.15);
