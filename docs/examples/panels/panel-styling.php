@@ -85,6 +85,9 @@
 			margin: 0 0 1em;
 			line-height: 1.5;
 		}
+		.article p img {
+			max-width: 100%;
+		}
 		.article p:first-child {
 			text-align: center;
 		}
