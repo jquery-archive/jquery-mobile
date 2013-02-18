@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Redirect: Source Page - jQuery Mobile Demos</title>
+	<title>Redirection Example - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
@@ -66,7 +66,8 @@
 	
 	<div data-role="content" class="jqm-content">
 	
-         <h1>Redirect: Source Page</h1>
+         <h1>Redirection example: Source Page</h1>
+				 <p>Clicking the link below will cause a page to be loaded from the server which contains a special instruction that is captured in the sample code to load the final redirection target page.</p>
          
         <div data-demo-html="true" data-demo-js="#redirectCode" data-demo-php="source.php">
             <a href="redirect.php?to=redirect-target.html" data-role="button" data-inline="true">Redirect</a>
