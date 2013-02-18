@@ -32,7 +32,7 @@
 		
 			<h2 id="nav-intro">Introduction</h2>
 			
-			<p>jQuery's mobile is a user interface framework based on jQuery that works across all popular phones, tablet, e-reader, and desktop platforms. Built with accessibility and universal access in mind, we follow progressive enhancement and <a href="../widgets/grids/rwd.html">responsive web design (RWD)</a> principles. HTML5 Markup-driven configuration makes it easy to learn, but a powerful <a href="api.jquerymobile.com">API</a> makes it easy to deeply customize the library.</p>
+			<p>jQuery's mobile is a user interface framework based on jQuery that works across all popular phones, tablet, e-reader, and desktop platforms. Built with accessibility and universal access in mind, we follow progressive enhancement and <a href="rwd.php">responsive web design (RWD)</a> principles. HTML5 Markup-driven configuration makes it easy to learn, but a powerful <a href="api.jquerymobile.com">API</a> makes it easy to deeply customize the library.</p>
 			
 
 			
@@ -54,14 +54,14 @@
 			<p>When the requested page loads, the jQuery Mobile parses the document for an element with the <code> data-role="page"</code> attribute and inserts that code into the DOM of the original page. Next, any widgets in the incoming page are enhanced to apply all the styles and behavior. The rest of the incoming page is discarded so any scripts, stylesheets or other information in the <code></code> will not be included. The framework will also note the title of the incoming page to update the title when the new page is transitioned into view.</p>
 
 
-			<p>Now that the requested page is now in the DOM and enhanced, it is animated into view with a <a href="../transitions/">transition</a>. By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
+			<p>Now that the requested page is now in the DOM and enhanced, it is animated into view with a <a href="../widgets/transitions/">transition</a>. By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
 			
 			
 			<h2>Content & Widgets</h2>
 			
 			<p>Inside your content container, you can add any standard HTML elements - headings, lists, paragraphs, etc. You can write your own custom styles to create custom layouts by adding an additional stylesheet to the <code>head</code> after the jQuery Mobile stylesheet.</p> 
 			
-			<p>jQuery Mobile includes a wide range of touch-friendly UI widgets: <a  href="../widgets/buttons/index.html">buttons</a>, <a href="../widgets/forms/index.html">form elements</a>, <a href="../widgets/collapsibles/index.html">collapsibles</a>, <a  href="../widgets/accordions/index.html">accordions</a> and much more. For best performance, use the <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> to pick the components you need.</p>
+			<p>jQuery Mobile includes a wide range of touch-friendly UI widgets: <a  href="../widgets/buttons/">buttons</a>, <a href="../widgets/forms/">form elements</a>, <a href="../widgets/collapsibles/">collapsibles</a>, <a href="../widgets/accordions/">accordions</a>, <a href="../widgets/popups/">popups</a>, <a href="../widgets/dialog/">dialogs</a>, <a href="../widgets/table-column-toggle">responsive tables</a>, and much more. For best performance, use the <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> to pick the components you need.</p>
 			
 				<h2>Buttons</h2>
 				<p>There are a few ways to make <a href="../widgets/buttons" title="buttons-types">buttons</a>, but lets turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to it.  You can add an <a href="../icons">icon</a> with the <code>data-icon</code> attribute and optionally set its position with the <code>data-iconpos</code> attribute.</p>
@@ -112,9 +112,9 @@
 
 			<h2>Responsive Design</h2>
 
-			<p>jQuery Mobile has always been designed to work within a <a href="../widgets/grids/rwd.html">responsive web design (RWD)</a> context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
+			<p>jQuery Mobile has always been designed to work within a <a href="rwd.php">responsive web design (RWD)</a> context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
 
-			<p>The library also includes a number of responsive widgets such as <a href="../widgets/grids/">responsive grids</a>, two different ways to make tabular data responsive: <a href="../widgets/tables/reflow-basic.html">reflow</a> and <a href="../widgets/tables/column-basic.html">column chooser</a> modes, and <a href="../widgets/panels/">sliding panels</a>.</p>
+			<p>The library also includes a number of responsive widgets like <a href="../widgets/grids/">responsive grids</a>, <a href="../widgets/table-reflow/">reflow tables</a> and <a href="../widgets/table-column-toggle/">column chooser tables</a>, and <a href="../widgets/panels/">sliding panels</a>.</p>
 			
 
 

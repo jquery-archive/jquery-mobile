@@ -26,7 +26,7 @@
 			
         <h1>Questions &amp; Answers</h1>
         
-        <p class="jqm-intro">Things do always work like they do in the docs, so we've collected common questions and solutions to help get you up to speed and solve tricky issues when working with jQuery Mobile.</p>
+        <p class="jqm-intro">We've collected common questions and solutions to help get you up to speed and solve tricky issues when working with jQuery Mobile.</p>
         
         <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search questions..." data-global-nav="docs" class="jqm-list">
         	<?php include( '../nav-faq.php' ); ?>

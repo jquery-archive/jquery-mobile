@@ -22,7 +22,7 @@
 
 <li data-section="Widgets" data-filtertext="form elements inputs forms fieldcontains field containers"><a href="widgets/forms/">Form elements</a></li>
 
-<li data-section="Widgets" data-filtertext="grids grid blocks content formatting"><a href="widgets/grids/">Grids</a></li>
+<li data-section="Widgets" data-filtertext="grids grid blocks content formatting rwd responsive"><a href="widgets/grids/">Grids</a></li>
 
 <li data-section="Widgets" data-filtertext="header toolbars headers sections"><a href="widgets/headers/">Header toolbar</a></li>
 
@@ -40,7 +40,7 @@
 
 <li data-section="Widgets" data-filtertext="pages single page templates multipage templates multi-page templates"><a href="widgets/pages/">Pages</a></li>
 
-<li data-section="Widgets" data-filtertext="panels slide panels sliding panels"><a href="widgets/panels/">Panels <span class="ui-li-count">New</span></a></li>
+<li data-section="Widgets" data-filtertext="panels slide panels sliding panels rwd responsive"><a href="widgets/panels/">Panels <span class="ui-li-count">New</span></a></li>
 
 <li data-section="Widgets" data-filtertext="popup dialog modal"><a href="widgets/popup/">Popup</a></li>
 
@@ -52,9 +52,9 @@
 
 <li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms"><a href="widgets/sliders/rangeslider.php" data-ajax="false">Slider, dual range <span class="ui-li-count">New</span></a></li>
 
-<li data-section="Widgets" data-filtertext="table, column toggle tables responsive tables"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">New</span></a></li>
+<li data-section="Widgets" data-filtertext="table, column toggle tables responsive tables rwd responsive"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">New</span></a></li>
 
-<li data-section="Widgets" data-filtertext="table, reflow tables responsive tables"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">New</span></a></li>
+<li data-section="Widgets" data-filtertext="table, reflow tables responsive tables rwd responsive"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">New</span></a></li>
 
 <li data-section="Widgets" data-filtertext="text inputs & textarea textinputs forms"><a href="widgets/textinputs/">Text inputs & textarea</a></li>
 
