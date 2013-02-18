@@ -9,6 +9,7 @@ body, .jqm-demos  {
 }
 
 /* Page */
+
 .jqm-demos.ui-page-active {
 	overflow-x: visible;	
 }
@@ -463,7 +464,7 @@ body, .jqm-demos  {
 .jqm-list .ui-li-heading  {
 	font-weight: 700; 
 	font-size: .9em;
-	color: #74b042;
+	color: #07ade0;
 	margin-top:.1em;
 }
 .jqm-list .ui-li-desc  {
@@ -476,13 +477,14 @@ body, .jqm-demos  {
 /* List dividers */
 .jqm-list .ui-bar-d {
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 400;
-	font-size: .85em;
+	font-weight: 700;
+	font-size: .95em;
 	padding: .7em 15px;
 	background-image: none;
-	background-color: #f6f6f6;
-	border-color: #e0e0e0;
-	color:#666;
+	background-color: #f8f8f8;
+	border-color: #e8e8e8;
+	color:#74b042;
+	text-shadow:none;
 }
 
 /* List buttons */
@@ -492,6 +494,13 @@ body, .jqm-demos  {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300; 
 	border-color: #eee;
+}
+.jqm-list .ui-btn-hover-d {
+	background-color:#f8f8f8;
+	-webkit-background-image:none;
+	-moz-background-image:none;
+	-o-background-image:none;
+	background-image:none;
 }
 .jqm-list .ui-btn-up-d {
 	background-color: #fff;
@@ -505,6 +514,7 @@ body, .jqm-demos  {
 	color: #fff;
 	text-shadow: 0 1px 0 #369;	
 }
+
 .jqm-list .ui-btn-active a.ui-link-inherit,
 .jqm-list .ui-btn-active .ui-li-heading,
 .jqm-list .ui-btn-active .ui-li-desc {

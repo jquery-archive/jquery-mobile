@@ -37,7 +37,7 @@
 		
 		<h2>Widget reference</h2>
 		
-		<p class="jqm-intro">Quick access to all the widgets in the library, ready to copy and paste.</p>
+		<p class="jqm-intro">Test drive every component in the library, and easily build pages by coping and pasting the markup configuration you need.</p>
         
 		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="docs" class="jqm-list">
         	<?php include( 'docs/nav-widgets.php' ); ?>
