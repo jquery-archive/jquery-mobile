@@ -148,7 +148,7 @@ body, .jqm-demos  {
 	.jqm-header .jqm-logo img {
 		width: 200px;
 	}
-	.jqm-header > .ui-btn {
+	.jqm-header.ui-header-fixed.ui-fixed-hidden > .ui-btn-icon-notext {
 		top: 1.65em;
 	}
 	.jqm-header .jqm-navmenu-link {
