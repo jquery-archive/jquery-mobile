@@ -115,11 +115,14 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 				.parent()
 				.trigger("create");
 			
-		$( ".jqm-search form" ).children( ".ui-btn" ).addClass( "ui-hidden-accessible" );
-		
-		$( ".ui-page-active .jqm-search form" ).on( "submit", function() {
+		$( ".ui-page-active .jqm-search form" ).children( ".ui-btn" ).addClass( "ui-hidden-accessible" );
+		$( ".ui-page-active .jqm-search form" ).on( "submit", function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			e.stopImmediatePropagation();
 			if ( $( ".ui-page-active .jqm-search li.ui-btn-active" ).length !== 0 ) {
-				$( ".ui-page-active .jqm-search li.ui-btn-active a" ).click();
+				var href = $( ".ui-page-active .jqm-search li.ui-btn-active a" ).attr('href');
+				$.mobile.changePage(href);
 				return false;
 			}
 			var url, base = $( "base" ).attr( "href" ).split('docs')[0];
@@ -131,13 +134,13 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	});
 });
 
-$( document ).on( "change", ".jqm-search input", function( e ) {
+$( document ).on( "change", ".ui-page-active .jqm-search input", function( e ) {
 	if ( typeof e.which !== "undefined" ) {
 		$( ".ui-page-active .jqm-search li.ui-btn-active" ).removeClass( "ui-btn-active" );
 	}
 });
 
-$( document ).on( "keyup", ".jqm-search input", function( e ) {
+$( document ).on( "keyup", ".ui-page-active .jqm-search input", function( e ) {
 			if ( e.which === $.mobile.keyCode.DOWN ) {
 				if ( $( ".ui-page-active .jqm-search li.ui-btn-active" ).length == 0 ) {
 					$( ".ui-page-active .jqm-search li:first" ).toggleClass( "ui-btn-active" );
