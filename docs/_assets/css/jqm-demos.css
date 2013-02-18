@@ -121,8 +121,7 @@ body, .jqm-demos  {
 	box-shadow: inset 0px 0 5px rgba(0, 0, 0, .1);
 }
 .jqm-demos .jqm-search > .ui-listview-filter .ui-input-text,
-.jqm-demos .jqm-intro + .ui-listview-filter .ui-input-text
- {
+.jqm-demos .jqm-intro + .ui-listview-filter .ui-input-text {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size:.95em;
@@ -177,7 +176,33 @@ body, .jqm-demos  {
 	.jqm-search > .jqm-list {
 		min-width: 70%;
 	}
+	/* global nav panel close button */
+	.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header::after {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		background-image: url(jqm_demo-icons-sd.png);
+		background-position: -33px 50%;
+		-webkit-background-size: 85px 20px;
+		-moz-background-size: 85px 20px;
+		-o-background-size: 85px 20px;
+		background-size: 85px 20px;
+	}
 }
+
+@media only screen and (min-width:46em) and (-webkit-min-device-pixel-ratio: 1.3),
+       only screen and (min-width:46em) and (min--moz-device-pixel-ratio: 1.3),
+       only screen and (min-width:46em) and (min-resolution: 200dpi) {
+	.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header::after {
+		background-image: url(jqm_demo-icons-hd.png);
+	}
+}
+
 
 /* Footer */
 .jqm-footer {
