@@ -189,7 +189,7 @@ body, .jqm-demos  {
 .jqm-footer p.jqm-version {
 	font-weight: bold;
 }
-@media all and (min-width:40em) {
+@media all and (min-width:46em) {
 	.jqm-footer {
 		overflow: hidden;
 		position: absolute;
@@ -210,16 +210,6 @@ body, .jqm-demos  {
 	}
 }
 
-/* Content */
-@media all and (min-width:46em) {
-	.jqm-demos .jqm-content {
-		/* padding bottom is because of footer position absolute */
-		padding: 15px 15% 4.5em;
-	}
-	.jqm-demos .jqm-content.jqm-fullwidth {
-		padding: 15px;
-	}
-}
 
 /* Headings */
 .jqm-content > h1 {
@@ -270,7 +260,7 @@ body, .jqm-demos  {
 	border-bottom-color: rgba(0,0,0,.1);
 }
 .jqm-demos-home .jqm-content p.jqm-intro {
-	font-size: 100%;
+	font-size: .9em;
 	margin: .5em .8em 1em .8em;
 	padding-bottom: .5em;
 	border: none;
@@ -301,6 +291,21 @@ body, .jqm-demos  {
 .jqm-content p.jqm-intro a.ui-link:hover {
 	text-decoration: underline;
 }
+
+/* Content */
+@media all and (min-width:46em) {
+	.jqm-demos .jqm-content {
+		/* padding bottom is because of footer position absolute */
+		padding: 15px 15% 4.5em;
+	}
+	.jqm-demos .jqm-content.jqm-fullwidth {
+		padding: 15px;
+	}
+	.jqm-demos-home .jqm-content p.jqm-intro {
+		font-size: 1.1em;
+	}
+}
+
 
 /* Code */
 .jqm-content pre,

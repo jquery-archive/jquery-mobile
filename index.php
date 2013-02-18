@@ -17,14 +17,14 @@
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><img src="docs/_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
-		<p class="jqm-version"></p>
 		<a href="#" class="jqm-search-link ui-btn-right" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( 'docs/search.php' ); ?>
 	</div><!-- /header -->
 	
 	<div data-role="content" class="jqm-content">
 		
-		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework built with jQuery and is the easiest way to build sites and apps that are accessible on all popular smartphone, tablet and desktop devices. Welcome to the demo center.</p>
+		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework built with jQuery and is the easiest way to build sites and apps that are accessible on all popular smartphone, tablet and desktop devices.</p>
+		
 
 		<ul data-role="listview" data-inset="true" data-theme="d" data-icon="false" data-filter-placeholder="Search..." class="jqm-list">
             <li><a href="docs/intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
@@ -34,6 +34,8 @@
 		</ul>
 		
 		<h2>Widget reference</h2>
+		
+		<p class="jqm-intro">Quick access to all the widgets in the library, ready to copy and paste.</p>
         
 		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="docs" class="jqm-list">
         	<?php include( 'docs/nav-widgets.php' ); ?>
