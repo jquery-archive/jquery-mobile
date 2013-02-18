@@ -62,7 +62,7 @@
 			
 			<h2 id="button-theme">Theme</h2>
 			
-			<p>Buttons can be manually assigned any of the button color swatches from the theme to add visual contrast with the container they sit inside by adding the <code> data-theme</code> attribute on the button markup and specifying a swatch letter. When a link is added to a container, it is automatically assigned a theme swatch letter that matches its parent bar or content box to visually integrate the button into the parent container, like a chameleon.</p>
+			<p>Buttons can be manually assigned any of the button color swatches from the theme to add visual contrast with their container by adding the <code> data-theme</code> attribute on the button markup and specifying a swatch letter. When a link is added to a container, it is automatically assigned a theme swatch letter that matches its parent bar or content box to visually integrate the button into the parent container, like a chameleon.</p>
 			
 			<div data-demo-html="true">	
 				<p>
@@ -156,12 +156,12 @@
 				</div>
 			</div><!--/demo-html -->
 			  
-			<p>Mini horizontal grouped buttons, icon only:</p>
+			<p>Mini horizontal grouped buttons, icon-only:</p>
 			<div data-demo-html="true">	
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-				    <a href="#" data-role="button" data-icon="plus" data-theme="b">Add</a>
-				    <a href="#" data-role="button" data-icon="delete" data-theme="b">Delete</a>
-				    <a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>
+				    <a href="#" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b">Add</a>
+				    <a href="#" data-role="button" data-iconpos="notext" data-icon="delete" data-theme="b">Delete</a>
+				    <a href="#" data-role="button" data-iconpos="notext" data-icon="grid" data-theme="b">More</a>
 				</div>
 			</div><!--/demo-html -->
 			

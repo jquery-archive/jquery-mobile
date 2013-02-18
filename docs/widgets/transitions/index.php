@@ -34,13 +34,12 @@
 				
 			<h1>Transitions</h1>
 
-		
-			<p class="jqm-intro">The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation.
+			<p class="jqm-intro">The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with AJAX navigation.
 			</p>
-			
+
 			<h2>Page transitions</h2>
 
-	
+
 			<div data-demo-html="true" data-demo-css="true">
 			<table margin="0">
 				<tr>
@@ -99,8 +98,8 @@
 	            <p><strong>Important:</strong> Some platforms currently have issues with transitions.
 	                We are working on a solution to solve the problem for everyone.
 	                If you are experiencing flickers and flashes during or at the end of a transition we suggest the following workaround.
-	                Please note that this workaround should be throughly tested on the target platform before deployment.
-	                This workaround is known to cause performance issues, and browser crashes on some platforms especially Android.
+	                Please note that this workaround should be thoroughly tested on the target platform before deployment.
+	                This workaround is known to cause performance issues and browser crashes on some platforms, especially Android.
 	                Add the following code to your custom css.
 	            </p>
 	            <code>

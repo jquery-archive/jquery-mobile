@@ -61,7 +61,7 @@
 			<h2>Closing dialogs</h2>
 			<p>When any link is clicked within a dialog, the framework will automatically close the dialog and transition to the requested page, just as if the dialog were a normal page. Nevertheless, dialogs can also be chained, as explained below under <strong>"Chaining Dialogs"</strong>. Similarly, a link that opens a popup will also leave the dialog in place.</p>
 
-            <p>If the dialog has a header the framework will add a close button at the left side of the header. You can change the position by adding <code>data-close-btn="right"</code> to the dialog container. If you don't want a close button in the header or add a custom close button, you can use <code>data-close-btn="none"</code>.</p>
+            <p>If the dialog has a header the framework will add a close button at the left side of the header. You can change the position by adding <code>data-close-btn="right"</code> to the dialog container. If you don't want a close button in the header or if you want to add a custom close button, you can use <code>data-close-btn="none"</code>.</p>
 			<a href="dialog-rightclosebtn.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Right close button</a>
 			<a href="dialog-noclosebtn.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">No close button</a>
              
