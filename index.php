@@ -23,19 +23,22 @@
 	
 	<div data-role="content" class="jqm-content">
 		
-		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework designed to make sites and apps that are accessible on all popular smartphone, tablet and desktop devices. <span class="jqm-version"></span></p>
+		<div class="jqm-home-welcome">
+		<h2>Demo center</h2>
 		
+		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework designed to make sites and apps that are accessible on all popular smartphone, tablet and desktop devices. <span class="jqm-version"></span></p>
+		<a href="http://api.jquerymobile.com" class="jqm-button ui-icon-alt" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">jQuery Mobile API Site</a>
+		</div>
 		
 
-		<ul data-role="listview" data-inset="true" data-theme="d" data-icon="false" data-filter-placeholder="Search..." class="jqm-list">
+		<ul data-role="listview" data-inset="true" data-theme="d" data-icon="false" data-filter-placeholder="Search..." class="jqm-list jqm-home-list">
             <li><a href="docs/intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
             <li><a href="docs/examples/"><h2>Demo Showcase</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
             <li><a href="docs/faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
 			<li data-section="Widgets" data-filtertext="responsive web design rwd adaptive PE accessible mobile breakpoints media query"><a href="docs/intro/rwd.php"><h2>Going Responsive</h2><p>How use RWD with jQuery Mobile</p></a></li>
-			<li><a href="http://api.jquerymobile.com"><h2>API documentation</h2><p>Visit the API site for full technical info.</p></a></li>
 		</ul>
 		
-		<h2>Widget reference</h2>
+		<h2 class="jqm-home-widget">Widget reference</h2>
 		
 		<p class="jqm-intro">Test drive every component in the library, and easily build pages by coping and pasting the markup configuration you need.</p>
         

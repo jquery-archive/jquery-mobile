@@ -164,9 +164,28 @@ body, .jqm-demos  {
 	.jqm-header .jqm-logo img,
 	.jqm-demos-home .jqm-header .jqm-logo img {
 		display: block;
-		width: 200px;
+		width: 240px;
 		height: auto;
+		padding-left:.7em;
+		margin-top:.5em;
+		margin-bottom:.6em;
 	}
+
+	.jqm-demos-home .jqm-home-welcome {
+		float: left;
+		width: 48%;
+		padding-right:6%;
+		margin-top:.4em;
+	}
+	.jqm-demos-home .jqm-home-list {
+		float: left;
+		width: 45%;
+	}
+	.jqm-demos-home h2.jqm-home-widget {
+		clear:left;
+		padding-top:2em;
+	}
+	
 	.jqm-header > .ui-btn,
 	.jqm-header.ui-header-fixed.ui-fixed-hidden > .ui-btn-icon-notext {
 		top: 1.65em;
@@ -284,16 +303,27 @@ body, .jqm-demos  {
 }
 .jqm-content > h2,
 .jqm-content > h3,
-.jqm-content > h4 {
+.jqm-content > h4,
+.jqm-home-welcome h2 {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size: 1.6em;
 	color: #74b042;
-	padding-top: .8em;
+	padding-top: .6em;
 	clear:both;
 }
-.jqm-demos-home .jqm-content > h2 {
-	margin-left: .6em;
+.jqm-home-welcome h2 {
+	font-size:1.5em;
+	margin-left:.5em;
+	margin-top:-.2em;
+}
+.jqm-home-welcome .jqm-button {
+	margin-left:.8em;
+	margin-top:-.4em;
+}
+h2.jqm-home-widget {
+	font-size:1.5em;
+	margin-left:.6em;
 }
 .jqm-content > h4 {
 	font-size: 1.2em;
@@ -305,8 +335,9 @@ body, .jqm-demos  {
 	font-weight: 400; 
 	font-size: 0.95em;
 }
-.jqm-content p.jqm-intro {
+.jqm-content .jqm-intro {
 	font-size: 120%;
+	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	line-height: 135%;
 	margin-top: -.5em;
@@ -318,7 +349,9 @@ body, .jqm-demos  {
 	border-bottom-color: #e5e5e5;
 	border-bottom-color: rgba(0,0,0,.1);
 }
-.jqm-demos-home .jqm-content p.jqm-intro {
+.jqm-demos-home .jqm-content .jqm-intro {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
 	font-size: .9em;
 	margin: .5em .8em 1em .8em;
 	padding-bottom: .5em;
