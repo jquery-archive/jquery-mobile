@@ -32,7 +32,7 @@
             
 			<p class="jqm-intro">These inputs are degraded to type text or number to allow for consistent look and enhancement by jQuery Mobile. For example, we parse the min, max, value, and step attributes of a <code>range</code> input to configure the JavaScript-based slider we generate to give us full control of the features and appearance. We then 'degrade' the input type of the original <code>range</code> input (which is a native slider) to <code>number</code> in order provide the numeric field next to the slider.</p>
 			
-			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 			
 	
 	</div><!-- /content -->

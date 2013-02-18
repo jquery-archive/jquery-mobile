@@ -33,7 +33,7 @@
 				<p>Our solution is to create a set of virtual events that normalize mouse and touch events. This allows the developer to register listeners for the basic mouse events, such as mousedown, mousemove, mouseup, and click, and the plugin will take care of registering the correct listeners behind the scenes to invoke the listener at the fastest possible time for that device. This still retains the order of event firing in the traditional mouse environment, should multiple handlers be registered on the same element for different events. The virtual mouse system exposes the following virtual events to jQuery bind methods: <code>vmouseover</code>, <code>vmousedown</code>, <code>vmousemove</code>, <code>vmouseup</code>, <code>vclick</code>, and <code>vmousecancel</code>.</p>
 			
 			
-			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 			
 	
 	</div><!-- /content -->

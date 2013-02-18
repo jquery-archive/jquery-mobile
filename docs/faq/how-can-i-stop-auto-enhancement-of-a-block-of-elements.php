@@ -39,7 +39,7 @@ $(document).bind("mobileinit", function(){
 
 			<p>An important note about setting <code>ignoreContentEnabled</code> to true is this has a substantial negative impact on performance. This is because now every time an element is to be enhanced jQuery Mobile must now traverse up the entire DOM tree to make sure the the element does not have a parent with data-enhance false set on it.</p>
 			
-			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 			
 	
 	</div><!-- /content -->

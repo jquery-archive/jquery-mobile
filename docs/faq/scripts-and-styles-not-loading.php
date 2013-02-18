@@ -39,7 +39,7 @@
 
 				<p>Another approach for page-specific scripting would be to include scripts at the end of the <code>body</code> element when no <code>data-role=page</code> element is defined, or inside the first <code>data-role=page</code> element. If you include your custom scripting this way, be aware that these scripts will execute when that page is loaded via Ajax or regular HTTP, so if these scripts are the same on every page, you'll likely run into problems. If you're including scripts this way, we'd recommend enclosing your page content in a <code>data-role="page"</code> element, and placing scripts that are referenced on every page outside of that element. Scripts that are unique to that page can be placed in that element, to ensure that they execute when the page is fetched via Ajax.</p>
 			
-			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 			
 	
 	</div><!-- /content -->

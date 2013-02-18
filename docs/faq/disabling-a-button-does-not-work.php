@@ -32,7 +32,7 @@
             
 			<p class="jqm-intro">Buttons that are created from a link cannot be disabled because these aren't form elements and aren't designed to be disabled. This is the reason why the HTML spec does not provide for a disabled attribute on links. To disable a link-based button, you can add the <code>.ui-disabled</code> class via JavaScript and prevent interaction to give it a disabled appearance.</p>
 			
-			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 			
 	
 	</div><!-- /content -->

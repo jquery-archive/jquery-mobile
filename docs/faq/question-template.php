@@ -50,7 +50,7 @@
 
 			<p>As you can see from the code snippet above the markup has significantly changed after enhancement. The original button you added has ben wrapped in a div and had several spans added. The original button you added is now also hidden. To change the visual styling of the button you must target the new enhanced markup not the button you added.</p>
 			
-			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 			
 	
 	</div><!-- /content -->

@@ -32,7 +32,7 @@
             
 			<p class="jqm-intro">Whether a custom select shows as a dialog or popup is based on the number of options and the amount of available space on the screen for maximum usability across devices. By default, the framework will use a small popup if all the options fit on-screen without scrolling. Longer selects open in a dialog to avoid awkward scrolling within a popup.</p>
 			
-			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 			
 	
 	</div><!-- /content -->

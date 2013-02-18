@@ -32,7 +32,7 @@
 			<p class="jqm-intro">jQuery Mobile does not currently support passing information via the hash to pages. This is because jQuery Mobile uses the hash for history tracking and navigation. Any alterations to the hash or attempting to set or pass a hash will interfere with this process and result in unexpected behavior. There is currently no workaround except to disable jQuery mobile's hash and history handling altogether. There are, however, plans to support this in some form in future releases</p>
 
 			
-			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
+			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 			
 	
 	</div><!-- /content -->
