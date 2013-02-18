@@ -3,6 +3,13 @@
 .jqm-demos strong { font-weight: bold; }
 .jqm-demos img { max-width: 100%; }
 
+.jqm-demos.ui-page-active {
+	overflow-x: visible;	
+}
+.jqm-demos.ui-page-active.ui-page-panel-open {
+	overflow-x: hidden;	
+}
+
 /* C-grade styling */
 body, .jqm-demos  {
 	background-color: #fefefe;
