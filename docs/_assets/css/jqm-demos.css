@@ -326,6 +326,9 @@ body, .jqm-demos  {
 	margin-left:.8em;
 	margin-top:-.4em;
 }
+.jqm-home-welcome .jqm-button .ui-btn-text {
+	font-size:1.1em;
+}
 h2.jqm-home-widget {
 	font-size:1.5em;
 	margin-left:.6em;

@@ -24,10 +24,10 @@
 	<div data-role="content" class="jqm-content">
 		
 		<div class="jqm-home-welcome">
-		<h2>Demo center</h2>
+		<h2>Demo center: <span class="jqm-version"></span></h2>
 		
-		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework designed to make sites and apps that are accessible on all popular smartphone, tablet and desktop devices. <span class="jqm-version"></span></p>
-		<a href="http://api.jquerymobile.com" class="jqm-button ui-icon-alt" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">jQuery Mobile API Site</a>
+		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework designed to make sites and apps that are accessible on all popular smartphone, tablet and desktop devices. For technical info,&nbsp;visit:</p>
+		<a href="http://api.jquerymobile.com" class="jqm-button ui-icon-alt" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">jQuery Mobile API Site </a> 
 		</div>
 		
 
