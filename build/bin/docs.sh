@@ -6,7 +6,7 @@ mkdir -p tmp/demos/css/themes/$THEME
 cp compiled/*.js tmp/demos/js
 cp js/jquery.js tmp/demos/js
 # ... Copy html files
-cp index.html tmp/demos
+cp index.php tmp/demos
 cp -r docs tmp/demos
 # ... Copy css and images
 cp compiled/*.css tmp/demos/css/themes/$THEME
