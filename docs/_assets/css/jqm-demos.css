@@ -331,6 +331,7 @@ body, .jqm-demos  {
 }
 .jqm-home-welcome .jqm-button .ui-btn-text {
 	font-size:1.1em;
+	font-weight:300;
 }
 h2.jqm-home-widget {
 	font-size:1.5em;
