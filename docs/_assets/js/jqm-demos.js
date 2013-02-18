@@ -83,7 +83,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		}
 	});
 	
-	$( this ).find( ".jqm-header .jqm-search-link" ).on( "tap", function() {
+	$( this ).find( ".jqm-header .jqm-search-link" ).on( "click", function() {
 		$( this ).parent( ".jqm-header" ).toggleClass( "jqm-search-toggle" );
 		
 		var type = $( this ).parent( ".jqm-header" ).hasClass( "jqm-search-toggle" ) ? "searchshow" : "searchhide";
@@ -92,71 +92,91 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	});
 	
 	$( this ).find( ".jqm-header .jqm-search" )
-		.on( "searchshow searchhide pagehide", function( event ) {
+		.on( "searchshow searchhide", function( event ) {
 			if ( event.type === "searchshow" ) {
 				$( this ).find( ".ui-input-text" ).focus();
 			} else {
 				$( this )
-					.find( ".ui-input-clear" ).trigger( "click" );
+					.find( ".ui-input-clear" ).trigger( "click" )
+					.end()
+					.find( ".ui-input-text" ).blur();
 			}
 		});
-});
-$( document ).on( "pageinit", ".jqm-demos", function(){
-	$( document ).one( "pageshow", ".jqm-demos", function(){
-		$(".ui-page-active .jqm-search form").attr("method", "get").attr("action","search-results.php").append("<button type='submit' data-icon='arrow-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>").parent().trigger("create");
-		$(".jqm-search form").children(".ui-btn").addClass("ui-hidden-accessible");
-		$(".ui-page-active .jqm-search form").on("submit", function(){
-			if($( ".ui-page-active .jqm-search li.ui-btn-up-b").length !== 0){
-				$( ".ui-page-active .jqm-search li.ui-btn-up-b a").click();
+		
+	$( this ).on( "pagehide", function() {
+		$( this ).find( ".ui-input-clear" ).trigger( "click" );
+	});
+
+	$( document ).one( "pageshow", ".jqm-demos", function() {
+		$( ".ui-page-active .jqm-search form" )
+			.attr( "method", "get" )
+			.attr( "action", "search-results.php" )
+			.append("<button type='submit' data-icon='arrow-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>")
+				.parent()
+				.trigger("create");
+			
+		$( ".jqm-search form" ).children( ".ui-btn" ).addClass( "ui-hidden-accessible" );
+		
+		$( ".ui-page-active .jqm-search form" ).on( "submit", function() {
+			if ( $( ".ui-page-active .jqm-search li.ui-btn-up-b" ).length !== 0 ) {
+				$( ".ui-page-active .jqm-search li.ui-btn-up-b a" ).click();
 				return false;
 			}
 			var url, base = $( "base" ).attr( "href" ).split('docs')[0];
 				base = base.split('index.html')[0] + "docs" + "/";
-				url = base+$(this).attr("action")+"?search="+$(this).find("input").val();
-			$.mobile.changePage(url); 
+				url = base +$( this ).attr( "action" ) + "?search=" + $( this ).find( "input" ).val();
+			
+			$.mobile.changePage( url ); 
 		});
-		
 	});
-
-	
 });
-$( document ).on("change", ".jqm-search input", function(e){
-	if(typeof e.which !== "undefined"){
-		$( ".ui-page-active .jqm-search li.ui-btn-active").removeClass("ui-btn-active");
+
+$( document ).on( "change", ".jqm-search input", function( e ) {
+	if ( typeof e.which !== "undefined" ) {
+		$( ".ui-page-active .jqm-search li.ui-btn-active" ).removeClass( "ui-btn-active" );
 	}
 });
-$( document ).on("keyup", ".jqm-search input", function(e){
-			if(e.which === $.mobile.keyCode.DOWN){
-				if($( ".ui-page-active .jqm-search li.ui-btn-active").length == 0){
-					$( ".ui-page-active .jqm-search li:first" ).toggleClass("ui-btn-active");
+
+$( document ).on( "keyup", ".jqm-search input", function( e ) {
+			if ( e.which === $.mobile.keyCode.DOWN ) {
+				if ( $( ".ui-page-active .jqm-search li.ui-btn-active" ).length == 0 ) {
+					$( ".ui-page-active .jqm-search li:first" ).toggleClass( "ui-btn-active" );
 				} else {
-					$( ".ui-page-active .jqm-search li.ui-btn-active").toggleClass("ui-btn-active").next().toggleClass("ui-btn-active");
+					$( ".ui-page-active .jqm-search li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass("ui-btn-active" );
 				}
+				
 				highlight();
-				function highlight(){
-					if($( ".ui-page-active .jqm-search li.ui-btn-active").hasClass("ui-screen-hidden")){
-						$( ".ui-page-active .jqm-search li.ui-btn-active").toggleClass("ui-btn-active").next().toggleClass("ui-btn-active");
+				
+				function highlight() {
+					if ( $( ".ui-page-active .jqm-search li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
+						$( ".ui-page-active .jqm-search li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" );
+						
 						highlight();
 					}
 					return;
 				}
 			}
-			if(e.which === $.mobile.keyCode.UP){
-				if($( ".ui-page-active .jqm-search li.ui-btn-active").length !== 0){
-					$( ".ui-page-active .jqm-search li.ui-btn-active").toggleClass("ui-btn-active").prev().toggleClass("ui-btn-active");
+			
+			if( e.which === $.mobile.keyCode.UP ) {
+				if( $( ".ui-page-active .jqm-search li.ui-btn-active" ).length !== 0 ) {
+					$( ".ui-page-active .jqm-search li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass("ui-btn-active" );
+					
 					highlightup();
 				} else {
-					$( ".ui-page-active .jqm-search li:last" ).toggleClass("ui-btn-up-d").toggleClass("ui-btn-active");
+					$( ".ui-page-active .jqm-search li:last" ).toggleClass( "ui-btn-up-d" ).toggleClass( "ui-btn-active" );
 				}
-				function highlightup(){
-					if($( ".ui-page-active .jqm-search li.ui-btn-active").hasClass("ui-screen-hidden")){
-						$( ".ui-page-active .jqm-search li.ui-btn-active").toggleClass("ui-btn-active").prev().toggleClass("ui-btn-active");
+				
+				function highlightup() {
+					if( $( ".ui-page-active .jqm-search li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
+						$( ".ui-page-active .jqm-search li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass("ui-btn-active" );
+						
 						highlightup();
 					}
 					return;
 				}
 			}
 		});
+		
 $( document ).on( "pageinit", ".jqm-demos-search-results", function() {
 	$( this ).find( ".jqm-search-results ul" ).listview({
 		globalNav: "docs",
@@ -173,6 +193,7 @@ $( document ).on( "pageinit", ".jqm-demos-search-results", function() {
   		}
 	});
 });
+
 $( document ).on( "pageshow", ".jqm-demos-search-results", function(){
-	$(".jqm-search-results input").val($.mobile.path.parseUrl(window.location.href).search.split("=")[1]).trigger('change');
+	$(".jqm-search-results input").val( $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1] ).trigger( "change" );
 });
