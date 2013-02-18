@@ -178,7 +178,7 @@ $( document ).on( "keyup", ".jqm-search input", function( e ) {
 		});
 		
 $( document ).on( "pageinit", ".jqm-demos-search-results", function() {
-	$( this ).find( ".jqm-search-results ul" ).listview({
+	$( this ).find( ".jqm-content ul" ).listview({
 		globalNav: "docs",
 		inset: true,
 		theme: "d",
@@ -195,5 +195,5 @@ $( document ).on( "pageinit", ".jqm-demos-search-results", function() {
 });
 
 $( document ).on( "pageshow", ".jqm-demos-search-results", function(){
-	$(".jqm-search-results input").val( $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1] ).trigger( "change" );
+	$( this ).find( ".jqm-content input").val( $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1] ).trigger( "change" );
 });

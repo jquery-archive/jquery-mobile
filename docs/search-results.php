@@ -14,7 +14,7 @@
 
 </head>
 <body>
-<div data-role="page" class="jqm-demos jqm-demos-search-results">
+<div data-role="page" class="jqm-demos jqm-demos-index jqm-demos-search-results">
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../"><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
@@ -26,13 +26,12 @@
 	<div data-role="content" class="jqm-content">
 		
 		<h2>Search Results</h2>
-		<div class="jqm-search-results">
-			<ul>
-	        	<?php include( 'nav-widgets.php' );
-	        	include( 'nav-examples.php' );
-	       		include( 'nav-faq.php' ); ?>
-	    	</ul>
-	    </div>
+        
+        <ul class="jqm-list">
+            <?php include( 'nav-widgets.php' );
+            include( 'nav-examples.php' );
+            include( 'nav-faq.php' ); ?>
+        </ul>
 
 	</div><!-- /content -->
 	
