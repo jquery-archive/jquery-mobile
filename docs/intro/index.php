@@ -59,7 +59,7 @@
 			
 			<h2>Content & Widgets</h2>
 			
-			<p>Inside your content container, you can add any standard HTML elements - headings, lists, paragraphs, etc. You can write your own custom styles to create custom layouts by adding an additional stylesheet to the <code>head</code> after the jQuery Mobile stylesheet.</p> 
+			<p>Inside your content container, you can add any standard HTML elements - headings, lists, paragraphs, etc. You can write your own custom styles to create custom layouts by adding an additional stylesheet to the <code>head</code> after the jQuery Mobile stylesheet.</p>
 			
 			<p>jQuery Mobile includes a wide range of touch-friendly UI widgets: <a  href="../widgets/buttons/">buttons</a>, <a href="../widgets/forms/">form elements</a>, <a href="../widgets/collapsibles/">collapsibles</a>, <a href="../widgets/accordions/">accordions</a>, <a href="../widgets/popup/">popups</a>, <a href="../widgets/dialog/">dialogs</a>, <a href="../widgets/table-column-toggle">responsive tables</a>, and much more. For best performance, use the <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> to pick the components you need.</p>
 			
@@ -67,11 +67,9 @@
 				<p>There are a few ways to make <a href="../widgets/buttons" title="buttons-types">buttons</a>, but let's turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to it.  You can add an <a href="../icons">icon</a> with the <code>data-icon</code> attribute and optionally set its position with the <code>data-iconpos</code> attribute.</p>
 
 
-				<div data-demo-html="true">	
+				<div data-demo-html="true">
 				<a href="#" data-role="button" data-icon="star">Star button</a>
 				</div><!--/demo-html -->
-				
-				
 
 			<h4>Listviews</h4>
 			<p>jQuery Mobile includes a diverse set of common <a href="../widgets/listviews" title="docs-lists">listviews</a> that are coded as lists with a <code>data-role="listview"</code> added. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> attribute and we add a dynamic search filter with <code>data-filter="true"</code>.</p>
