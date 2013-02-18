@@ -85,9 +85,19 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	
 	$( this ).find( ".jqm-header .jqm-search-link" ).on( "click", function() {
 		$( this ).parent( ".jqm-header" ).toggleClass( "jqm-search-toggle" );
+		
+		var type = $( this ).parent( ".jqm-header" ).hasClass( "jqm-search-toggle" ) ? "searchshow" : "searchhide";
+		
+		$( this ).parent( ".jqm-header" ).find( ".jqm-search" ).trigger( type );
 	});
 	
-	$( this ).find( ".jqm-header:not(.jqm-search-toggle) .jqm-search-link" ).on( "click", function() {
-		$( this ).parent( ".jqm-header" ).find( ".jqm-search .ui-input-text" ).focus();
-	});
+	$( this ).find( ".jqm-header .jqm-search" )
+		.on( "searchshow searchhide", function( event ) {
+			if ( event.type === "searchshow" ) {
+				$( this ).find( ".ui-input-text" ).focus();
+			} else {
+				$( this )
+					.find( ".ui-input-clear" ).trigger( "click" );
+			}
+		});
 });
