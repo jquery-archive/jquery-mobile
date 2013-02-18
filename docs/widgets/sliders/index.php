@@ -36,7 +36,7 @@
 			<h1>Slider <a href="http://api.jquerymobile.com/slider/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 
-			<p class="jqm-intro">Sliders are used to enter numeric values along a continuum and can also be dual handle range sliders or flip switches.
+			<p class="jqm-intro">Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="rangeslider.php">range sliders</a> or <a href="switch.php">flip switches</a>.
 			</p>
         
         	
