@@ -99,8 +99,8 @@
 			<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 				<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
-				<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
-				<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+				<a href="#" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
+				<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
 			</div>
 
 

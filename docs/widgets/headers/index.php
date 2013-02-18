@@ -47,13 +47,13 @@
 			
 			<p>The header can be set to fixed position by adding the <code>data-position="fixed"</code> to the header.</p>
 			
-			<a href="bars-fixed.html" data-role="button" data-inline="true">Fixed toolbars</a>
+			<a href="bars-fixed.php" data-role="button" data-inline="true">Fixed toolbars</a>
 			
 			<h2>Fullscreen position</h2>
 			
 			<p>The header can be set to fullscreen fixed position that overlays the toolbars over the content by adding the <code>data-fullscreen="true"</code> to a fixed header.</p>
 			
-			<a href="bars-fullscreen.html" data-role="button" data-inline="true">Fullscreen toolbars</a>
+			<a href="bars-fullscreen.php" data-role="button" data-inline="true">Fullscreen toolbars</a>
 			
 			<h2>Theme</h2>
 			<p>The <code>header</code> toolbar is themed with the "a" swatch by default (black in the default theme) but you can easily set the theme swatch color.</p> 
@@ -64,7 +64,7 @@
 				</div>
 			</div><!-- /demo-html -->
 			
-			<p> Headers can optionally be positioned as <a href="bars-fixed.html">fixed</a> so they remain at the top of the screen at all times instead of scrolling with the page.</p> 
+			<p> Headers can optionally be positioned as <a href="bars-fixed.php">fixed</a> so they remain at the top of the screen at all times instead of scrolling with the page.</p> 
 
 	
 			
@@ -105,7 +105,7 @@
 			<div data-demo-html="true">		
 				<div data-role="header" >
 					<h1>Page Title</h1>
-					<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+					<a href="#" data-icon="gear" class="ui-btn-right">Options</a>
 				</div>
 			</div><!-- /demo-html -->
 
@@ -119,7 +119,7 @@
 	
 			<div data-demo-html="true">	
 				<div data-role="header" >
-					<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+					<a href="#" data-icon="gear" class="ui-btn-right">Options</a>
 					<span class="ui-title"></span>
 				</div>
 			</div><!-- /demo-html -->

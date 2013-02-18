@@ -79,28 +79,7 @@
 				</a></li>
 		</ul>
 
-					
-
-			<div class="content-secondary">
-
-				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
-
-						<h3>More in this section</h3>
-
-						<ul data-role="listview" data-theme="c" data-dividertheme="d">
-
-							<li data-role="list-divider">Toolbars</li>
-							<li><a href="docs-bars.html">Toolbar basics</a></li>
-							<li><a href="docs-headers.html">Header bars</a></li>
-							<li><a href="docs-footers.html">Footer bars</a></li>
-							<li><a href="docs-navbar.html">Navbars</a></li>
-							<li><a href="bars-fixed.html">Fixed positioning</a></li>
-							<li data-theme="a"><a href="footer-persist-a.html">Persistent toolbars</a></li>
-							<li><a href="bars-themes.html">Theming toolbars</a></li>
-
-						</ul>
-				</div>
-			</div>		
+						
 
 		</div><!-- /content -->
 

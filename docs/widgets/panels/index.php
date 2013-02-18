@@ -136,7 +136,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
         
         <p>You can set a panel to <code>position:fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and using <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without absolute positioning.</p>
 
-        <a href="panel-fixed.html" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Panel fixed positioning example</a>
+        <a href="panel-fixed.php" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Panel fixed positioning example</a>
 
 		<h2 id="panel-styling">Styling panels</h2>
 
@@ -189,7 +189,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		
 		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the <em>page wrapper</em> (not the panel).</p>
         
-        <a href="panel-fixed.html" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Panel responsive example</a>
+        <a href="panel-fixed.php" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Panel responsive example</a>
 		
 		
 		

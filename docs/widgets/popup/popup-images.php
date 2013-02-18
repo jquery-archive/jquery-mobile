@@ -28,7 +28,7 @@
     
     <div data-role="content" class="jqm-content">
 			
-			<a href="index.html" data-role="button" data-transition="fade" data-icon="arrow-l" data-inline="true" data-mini="true">Back to Popups</a>
+			<a href="index.php" data-role="button" data-transition="fade" data-icon="arrow-l" data-inline="true" data-mini="true">Back to Popups</a>
 			<h1>Scaling images</h1>
 			
 			<p>The framework CSS contains rules that make images that are immediate children of the popup scale to fit the screen. Because of the absolute positioning of the popup container and screen, the height is not adjusted to screen height on all browsers. You can prevent vertical scrolling with a simple script that sets the <code>max-height</code> of the image.</p>

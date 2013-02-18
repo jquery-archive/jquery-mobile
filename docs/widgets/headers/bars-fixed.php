@@ -49,7 +49,7 @@
 </code></pre>
 		
 		<h2>Fullscreen Toolbars</h2>
-		<p><a href="bars-fullscreen.html">Fullscreen</a> fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled. Instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions.</p>
+		<p><a href="bars-fullscreen.php">Fullscreen</a> fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled. Instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions.</p>
 		
 				<p>To enable this option on a fixed header or footer, add the <code>data-fullscreen</code> attribute to the element.</p>
 		
@@ -96,15 +96,7 @@
 			
 		<p>While we will continue to try to find ways to mitigate these bugs as best we can, we currently advise against implementing fixed toolbars containing complicated user styles and form elements without extensive testing in all versions of Android's native browser.</p>
 		
-		<p>The following pages are designed to test fixed toolbars and form elements: 
-					<a href="bars-fixed-forms-a.html">demo app</a>,
-					<a href="bars-fixed-forms-b.html">text inputs</a>, 
-					<a href="bars-fixed-forms-c.html">search inputs</a>, 
-					<a href="bars-fixed-forms-d.html">radio toggles</a>, 
-					<a href="bars-fixed-forms-e.html">checkbox toggles</a>,
-					<a href="bars-fixed-forms-f.html">slider</a>, 
-					<a href="bars-fixed-forms-g.html">select</a>, and  
-					<a href="bars-fixed-forms-h.html">buttons</a>.</p>
+	
 		
 		
 <div class="ui-body ui-body-e">		

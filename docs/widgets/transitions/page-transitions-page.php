@@ -55,7 +55,7 @@
 						
 			</form>
 			
-			<a href="docs-transitions.html" data-role="button" data-theme="b" data-rel="back" data-inline="true">Take me back</a>   
+			<a href="index.php" data-role="button" data-theme="b" data-rel="back" data-inline="true">Take me back</a>   
 		</div>
 		
 		<div data-role="footer" data-theme="d">

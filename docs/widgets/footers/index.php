@@ -38,9 +38,9 @@
 			
 			<div data-demo-html="true">
 				<div data-role="footer" class="ui-bar">
-					<a href="index.html" data-icon="plus">Add</a>
-					<a href="index.html" data-icon="arrow-u">Up</a>
-					<a href="index.html" data-icon="arrow-d">Down</a>
+					<a href="#" data-icon="plus">Add</a>
+					<a href="#" data-icon="arrow-u">Up</a>
+					<a href="#" data-icon="arrow-d">Down</a>
 				</div>
 			</div><!-- /demo-html -->
 			
@@ -69,9 +69,9 @@
 			<div data-role="footer" class="ui-bar">
 				<div data-role="footer" class="ui-bar">
 					<div data-role="controlgroup" data-type="horizontal">
-						<a href="index.html" data-icon="plus">Add</a>
-						<a href="index.html" data-icon="arrow-u">Up</a>
-						<a href="index.html" data-icon="arrow-d">Down</a>
+						<a href="#" data-icon="plus">Add</a>
+						<a href="#" data-icon="arrow-u">Up</a>
+						<a href="#" data-icon="arrow-d">Down</a>
 					</div>
 				</div>
 			</div>

@@ -60,7 +60,7 @@
 			<p>These settings do not disable the user's ability to zoom the pages, which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed in a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
 			
 			<h2>Inside the body: Pages</h2>
-			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute. View the <a href="../api/data-attributes.html">data- attribute reference</a> to see all the possible attributes you can add to pages.</p> 
+			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute. </p> 
 
 <div class="highlight"> 
 <pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
@@ -166,7 +166,7 @@
 &lt;/body&gt;
 </code></pre>	
 
-		<a href="multipage-template.html" data-inline="true" data-theme="b" data-role="button" rel="external">View multi-page template</a>
+		<a href="multipage-template.php" data-inline="true" data-theme="b" data-role="button" rel="external">View multi-page template</a>
 
 		<p> </p>
 		
@@ -199,7 +199,7 @@
 
 	<div data-demo-html="true">			
 
-		<a href="transitions-dialog.html" data-prefetch="true" data-rel="dialog">This link will prefetch the page</a>
+		<a href="../dialog/dialog-alt.html" data-prefetch="true" data-rel="dialog">This link will prefetch the page</a>
 
 	</div><!--/demo-html -->
 

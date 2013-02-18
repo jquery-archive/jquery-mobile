@@ -54,7 +54,7 @@
 			</div><!--/demo-html -->
 			
 			<h2>Photo lightbox</h2>
-			<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="a"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="popup-images.html" data-ajax="false">scaling images in popups</a>.</p>
+			<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="a"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="popup-images.php" data-ajax="false">scaling images in popups</a>.</p>
 			<div data-demo-html="true">	
 				<a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/paris.jpg" alt="Paris, France" style="width:30%"></a>
 				<a href="#popupSydney" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/sydney.jpg" alt="Sydney, Australia" style="width:30%"></a>
@@ -98,37 +98,37 @@
 						<div data-role="collapsible" data-inset="false">
 							<h2>Farm animals</h2>
 							<ul data-role="listview">
-								<li><a href="../dialog.html" data-rel="dialog">Chicken</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Cow</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Duck</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Sheep</a></li>
+								<li><a href="#" data-rel="dialog">Chicken</a></li>
+								<li><a href="#" data-rel="dialog">Cow</a></li>
+								<li><a href="#" data-rel="dialog">Duck</a></li>
+								<li><a href="#" data-rel="dialog">Sheep</a></li>
 							</ul>
 						</div><!-- /collapsible -->
 						<div data-role="collapsible" data-inset="false">
 							<h2>Pets</h2>
 							<ul data-role="listview">
-								<li><a href="../dialog.html" data-rel="dialog">Cat</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Dog</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Iguana</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Mouse</a></li>
+								<li><a href="#" data-rel="dialog">Cat</a></li>
+								<li><a href="#" data-rel="dialog">Dog</a></li>
+								<li><a href="#" data-rel="dialog">Iguana</a></li>
+								<li><a href="#" data-rel="dialog">Mouse</a></li>
 							</ul>
 						</div><!-- /collapsible -->
 						<div data-role="collapsible" data-inset="false">
 							<h2>Ocean Creatures</h2>
 							<ul data-role="listview">
-								<li><a href="../dialog.html" data-rel="dialog">Fish</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Octopus</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Shark</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Starfish</a></li>
+								<li><a href="#" data-rel="dialog">Fish</a></li>
+								<li><a href="#" data-rel="dialog">Octopus</a></li>
+								<li><a href="#" data-rel="dialog">Shark</a></li>
+								<li><a href="#" data-rel="dialog">Starfish</a></li>
 							</ul>
 						</div><!-- /collapsible -->
 						<div data-role="collapsible" data-inset="false">
 							<h2>Wild Animals</h2>
 							<ul data-role="listview">
-								<li><a href="../dialog.html" data-rel="dialog">Lion</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Monkey</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Tiger</a></li>
-								<li><a href="../dialog.html" data-rel="dialog">Zebra</a></li>
+								<li><a href="#" data-rel="dialog">Lion</a></li>
+								<li><a href="#" data-rel="dialog">Monkey</a></li>
+								<li><a href="#" data-rel="dialog">Tiger</a></li>
+								<li><a href="#" data-rel="dialog">Zebra</a></li>
 							</ul>
 						</div><!-- /collapsible -->
 					</div><!-- /collapsible set -->

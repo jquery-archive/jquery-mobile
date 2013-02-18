@@ -27,7 +27,7 @@
 		
 			<h2>Local autocomplete with listview filter reveal</h2>
 			<p>The filter reveal feature makes is easy to build a simple autocomplete with local data. When a filterable list has the <code>data-filter-reveal="true"</code>, it will auto-hide all the list items when the search field is blank. The <code>data-filter-placeholder</code> attribute can be added to specify the placeholder text for the filter.</p>
-			<p>Any listview filter with more than 100-200 items may be slow to perform on a mobile device so we recommend using this feature for  autocomplete situations with a relatively small number of items. If you need to search against a longer list of values, we provide a way to create a filter with a <a href="listview-filter-autocomplete.html" data-ajax="false">remote data source</a>.</p>
+			<p>Any listview filter with more than 100-200 items may be slow to perform on a mobile device so we recommend using this feature for  autocomplete situations with a relatively small number of items. If you need to search against a longer list of values, we provide a way to create a filter with a <a href="listview-filter-autocomplete.jsp" data-ajax="false">remote data source</a>.</p>
 
 			<h3>Filter reveal</h3>
 			

@@ -28,7 +28,7 @@
     
     <div data-role="content" class="jqm-content">
 			
-			<a href="index.html" data-role="button" data-transition="fade" data-icon="arrow-l" data-inline="true" data-mini="true">Back to Popups</a>
+			<a href="index.php" data-role="button" data-transition="fade" data-icon="arrow-l" data-inline="true" data-mini="true">Back to Popups</a>
 			<h1>iframes in popups</h1>
 			
 			<p>You may need to embed an iframe into a popup to use a 3rd party widget. Here, we'll walk through a few real-world examples of working with iframes: videos and maps.</p>
