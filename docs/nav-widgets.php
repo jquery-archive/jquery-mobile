@@ -14,9 +14,9 @@
 
 <li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Dialogs</a></li>
 
-<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections"><a href="widgets/headers/bars-fixed.php">Fixed toolbars</a></li>
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections"><a href="widgets/headers/bars-fixed.html">Fixed toolbars</a></li>
 
-<li data-section="Widgets" data-filtertext="flip toggle switch flip switch toggle slider selects forms"><a href="widgets/sliders/switch.php" data-ajax="false">Flip switch toggle</a></li>
+<li data-section="Widgets" data-filtertext="flip toggle switch flip switch toggle slider selects forms"><a href="widgets/sliders/switch.html" data-ajax="false">Flip switch toggle</a></li>
 
 <li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Footer toolbar</a></li>
 
@@ -36,7 +36,7 @@
 
 <li data-section="Widgets" data-filtertext="navbars navmenu toolbars"><a href="widgets/navbar/" data-ajax="false">Navbar</a></li>
 
-<li data-section="Widgets" data-filtertext="navbar, persistent navbars persistent header persistent footer persistent navmenu"><a href="widgets/navbar/footer-persist-a.php">Navbar, persistent</a></li>
+<li data-section="Widgets" data-filtertext="navbar, persistent navbars persistent header persistent footer persistent navmenu"><a href="widgets/navbar/footer-persist-a.html">Navbar, persistent</a></li>
 
 <li data-section="Widgets" data-filtertext="pages single page templates multipage templates multi-page templates"><a href="widgets/pages/">Pages</a></li>
 
@@ -50,7 +50,7 @@
 
 <li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms"><a href="widgets/sliders/" data-ajax="false">Slider, single</a></li>
 
-<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms"><a href="widgets/sliders/rangeslider.php" data-ajax="false">Slider, dual range <span class="ui-li-count">New</span></a></li>
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Slider, dual range <span class="ui-li-count">New</span></a></li>
 
 <li data-section="Widgets" data-filtertext="table, column toggle tables responsive tables"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">New</span></a></li>
 
