@@ -27,28 +27,32 @@
 	<div data-role="content" class="jqm-content">
 			
       <h1>jQuery Mobile, Backbone.js and Require.js</h1>
-      <p>jQuery Mobile provides an <strong>HTML5-based user interface for all popular mobile device platforms</strong>, but it does not influence how you organize and structure your app's JavaScript.  Many jQuery Mobile users turn to a variety of other popular third-party libraries, including MV* frameworks and dependency management tools, to help structure their code.
+      <p class="jqm-intro">jQuery Mobile provides an <strong>HTML5-based user interface for all popular mobile device platforms</strong>, but it does not influence how you organize and structure your app's JavaScript.  Many jQuery Mobile users turn to a variety of other popular third-party libraries, including MV* frameworks and dependency management tools, to help structure their code.
       </p>
+	
+	  <h2>Backbone and Require.js</h2>
       <p><strong>Backbone.js</strong> and <strong>Require.js</strong> are two of the most popular third-party libraries that are used with jQuery Mobile to provide a rich JavaScript tech stack for developers.
       </p>
       <p><strong>Backbone.js</strong> is a great client-side MV* JavaScript framework that provides structure to JavaScript applications by providing View, Model, Collection, Router, and Event class objects.
       </p>
       <p><strong>Require.js</strong> serves a few different purposes than Backbone.js. Require.js is an AMD (Asynchronous Module Definition) script loader that asynchronously loads your JavaScript to improve page load performance, while also helping with script dependency managagement and allowing you to organize your JavaScript into self contained modules (files).
       </p>
-      <p>Although there is a high amount of developer interest with using jQuery Mobile, Backbone.js, and Require.js together, there is a high barrier of entry.  Many users are confused about how to use the Backbone.js Router class object with the jQuery Mobile routing system.
+      <p>Although there is a high amount of developer interest with using jQuery Mobile, Backbone.js, and Require.js together, there is a high barrier of entry.  Many users are confused about how to use the Backbone.js Router class object with the jQuery Mobile routing system.</p>
+	
+	<a href="backbone-require.html" rel="external" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">View example page</a>
 
-      <br /><br />
+      <h2>jQuery Mobile configuration</h2>
 
-      The technique used in this <a href="backbone-require.html" rel="external"> working sample</a> is by no means the only technique available, but it is one of the most elegant.  The Backbone.js router is used exclusively to handle all hashchange events, and the jQuery Mobile <code>$.mobile.changePage()</code> method is used to programatically change the page.
+      <p>The technique used in this <a href="backbone-require.html" rel="external">example page</a> is by no means the only technique available, but it is one of the most elegant.  The Backbone.js router is used exclusively to handle all hashchange events, and the jQuery Mobile <code>$.mobile.changePage()</code> method is used to programmatically change the page.</p>
 
-      <br /><br />
+      
 
-      Below are two internal jQuery Mobile properties that are turned off to allow this to happen:
+      <p>Below are two internal jQuery Mobile properties that are turned off to allow this to happen:</p>
 
       <ul>
         <li><code>$.mobile.linkBindingEnabled</code>
           <ul>
-            <li>jQuery Mobile will automatically bind the clicks on anchor tags in your document. Setting this option to false will prevent all anchor click handling including the addition of active button state and alternate link bluring. This should only be used when attempting to delegate the click management to another library or custom code.</li>
+            <li>jQuery Mobile will automatically bind the clicks on anchor tags in your document. Setting this option to false will prevent all anchor click handling including the addition of active button state and alternate link blurring. This should only be used when attempting to delegate the click management to another library or custom code.</li>
             </ul>
         </li>
         <li><code>$.mobile.hashListeningEnabled</code>
@@ -58,7 +62,9 @@
         </li>
       </ul>
       </p>
-      <p>To illustrate how the above internal jQuery Mobile properties are turned off, let's examine our <a href="Backbone-Require/index.html" rel="external"> working sample</a> code.</p>
+
+	  <h2>Example page code</h2>
+      <p>To illustrate how the above internal jQuery Mobile properties are turned off, let's examine our example page code.</p>
 
       <p>Inside of the <em>head</em> section of our <strong>index.html</strong> page, we first include the Require.js JavaScript library and set the <strong>data-main</strong> attribute of our script tag to the JavaScript file that we want Require.js to include on the page first (this file will contain all of our Require.js configurations).  In this example, we are telling Require.js to look inside of the js folder and then load <strong>mobile.js</strong>.
       </p>
@@ -137,7 +143,7 @@
 </code>
 </pre>
 <p>
-The <a href="backbone-require.php" rel="external"> working sample</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously.  Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.
+The <a href="backbone-require.html" rel="external">example page</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously.  Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.
 </p>
       
 
