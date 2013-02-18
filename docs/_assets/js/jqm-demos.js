@@ -92,7 +92,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	});
 	
 	$( this ).find( ".jqm-header .jqm-search" )
-		.on( "searchshow searchhide", function( event ) {
+		.on( "searchshow searchhide pagehide", function( event ) {
 			if ( event.type === "searchshow" ) {
 				$( this ).find( ".ui-input-text" ).focus();
 			} else {
