@@ -102,7 +102,7 @@ a:link { color:purple; }
 
 
 <strong>/* Second breakpoint at 800px */	
-/* Adjusts column proportions, tweak base H1 */	
+/* Adjusts column proportions, tweaks base H1 */	
 </strong>@media all and (min-width: 50em){
 	.main { width:70%; }
 	.sidebar { width:30%; }
