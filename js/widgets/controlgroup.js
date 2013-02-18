@@ -24,17 +24,14 @@ define( [ "jquery",
 
 		_create: function() {
 			var $el = this.element,
-				ui = {
-					inner: $( "<div class='ui-controlgroup-controls'></div>" ),
-					legend: $( "<div role='heading' class='ui-controlgroup-label'></div>" )
-				},
+				inner = $( "<div class='ui-controlgroup-controls'></div>" ),
 				grouplegend = $el.children( "legend" ),
 				self = this;
 
 			// Apply the proto
-			$el.wrapInner( ui.inner );
+			$el.wrapInner( inner );
 			if ( grouplegend.length ) {
-				ui.legend.append( grouplegend ).insertBefore( $el.children( 0 ) );
+				$( "<div role='heading' class='ui-controlgroup-label'></div>" ).append( grouplegend ).insertBefore( $el.children( 0 ) );
 			}
 			$el.addClass( "ui-corner-all ui-controlgroup" );
 
@@ -69,7 +66,9 @@ define( [ "jquery",
 			this.element
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
 				.addClass( "ui-controlgroup-" + value );
-			this.refresh();
+			if (!this._initialRefresh) {
+				this.refresh();
+			}
 		},
 
 		_setCorners: function( value ) {
