@@ -21,15 +21,15 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1 class="jqm-faq-question">How do I control page titles?</h1>
 
 			<h2>Answer:</h2>
-            
-			<p class="jqm-intro">When you load the first page of a jQuery Mobile based site, then click a link or submit a form, Ajax is used to pull in the content of the requested page. Having both pages in the DOM is essential to enable the animated page transitions, but one downside of this approach is that the page title is always that of the first page, not the subsequent page you're viewing. To remedy this, jQuery Mobile automatically parses the <code>title</code> of the page pulled via Ajax and changes the <code>title</code> attribute of the parent document to match.</p>		
+
+			<p class="jqm-intro">When you load the first page of a jQuery Mobile based site, then click a link or submit a form, AJAX is used to pull in the content of the requested page. Having both pages in the DOM is essential to enable the animated page transitions, but one downside of this approach is that the page title is always that of the first page, not the subsequent page you're viewing. To remedy this, jQuery Mobile automatically parses the <code>title</code> of the page pulled via AJAX and changes the <code>title</code> attribute of the parent document to match.</p>
 
 			<h2>Titles in multi-page templates</h2>
 

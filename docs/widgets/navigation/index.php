@@ -53,7 +53,7 @@ $( "a" ).on( "click", function( event ){
   });
 
   // Hypothetical content alteration based on the url. E.g, make
-  // an ajax request for JSON data and render a template into the page.
+  // an AJAX request for JSON data and render a template into the page.
   alterContent( this.attr("href") );
 });</code></pre>
 

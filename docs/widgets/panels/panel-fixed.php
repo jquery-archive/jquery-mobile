@@ -89,7 +89,7 @@
             <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
             <li><a href="#panel-fixed-page2">Accessibility</a></li>
             <li><a href="#panel-fixed-page2">Accordions</a></li>
-            <li><a href="#panel-fixed-page2">Ajax navigation model</a></li>
+            <li><a href="#panel-fixed-page2">AJAX navigation model</a></li>
             <li><a href="#panel-fixed-page2">Anatomy of a page</a></li>
             <li><a href="#panel-fixed-page2">Animation events</a></li>
             <li><a href="#panel-fixed-page2">Automatic listview dividers</a></li>

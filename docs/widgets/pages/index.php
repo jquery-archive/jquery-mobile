@@ -171,7 +171,7 @@
 
 		<p> </p>
 		
-		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax "pages", it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a "page" with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
+		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the AJAX "pages", it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a "page" with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
 		
 		<p>The <code>id</code> attribute of all your elements must be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time. This also applies when using a multi-page template, since all "pages" on the template are loaded at once.</p>
 		
@@ -181,7 +181,7 @@
 	<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure. 
 	The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure. 
 	The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all. 
-	For a web page with a custom layout, all of these structural elements can be omitted and the Ajax navigation and all widgets will work just like they do in the boilerplate structure. 
+	For a web page with a custom layout, all of these structural elements can be omitted and the AJAX navigation and all widgets will work just like they do in the boilerplate structure. 
 	Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it's needed for managing pages, but the starting markup can now be extremely simple. </p>
 
 	<p><strong>Note:</strong> In a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>

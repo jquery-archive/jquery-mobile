@@ -79,8 +79,8 @@
         </div><!-- /demo-html -->
         
         <h2>Range slider</h2>
-                        
-		<p>Range slider offer two handles to set a min and max value along a numeric continuum. Learn more about <a href="../sliders/rangeslider.php" data-ajax="false">range sliders</a>.</p>
+
+		<p>Range sliders offer two handles to set a min and max value along a numeric continuum. Learn more about <a href="../sliders/rangeslider.php" data-ajax="false">range sliders</a>.</p>
 		
         <div data-demo-html="true">
         <form>
@@ -343,7 +343,7 @@
 			<h2>Initializing groups of dynamically-injected form elements</h2>
 			<p>If you should generate new markup client-side or load in content via AJAX and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page div itself), saving you the task of manually initializing each plugin (see below).</p>
 
-			<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the create event to automatically transform all the widgets it contains (inputs and buttons in this case) into the enhanced versions. The code for this scenario would be:</p>
+			<p>For example, if a block of HTML markup (say a login form) was loaded in through AJAX, trigger the create event to automatically transform all the widgets it contains (inputs and buttons in this case) into the enhanced versions. The code for this scenario would be:</p>
 
 			<code>
 			$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
@@ -407,7 +407,7 @@ $(document).bind('mobileinit',function(){
 
 
 			<h2>File Inputs + AJAX</h2>
-			<p>Using a multipart form with a file input is not supported by ajax. In this case you should decorate the parent form with <code>data-ajax="false"</code> to ensure the form is submitted properly to the server.</p>
+			<p>Using a multipart form with a file input is not supported by AJAX. In this case you should decorate the parent form with <code>data-ajax="false"</code> to ensure the form is submitted properly to the server.</p>
 	
 	</div><!-- /content -->
 	
