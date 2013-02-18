@@ -27,10 +27,11 @@
 			<h1>Pages <a href="http://api.jquerymobile.com/header/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 		
-			<p class="jqm-intro">The header is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the left and/or right of the title for navigation or actions.
+			<p class="jqm-intro">
+				The page is the primary unit of interaction in jQuery Mobile. It contains all text, images, and widgets.
 			</p>
 
-			<h2>Mobile page structure</h2> 
+			<h2>Mobile page structure</h2>
 
 			<p>A jQuery Mobile site must start with an HTML5 <code>doctype</code> to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) </p>
 			<p>In the <code>head</code>, references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.3.0 works with versions of jQuery core from 1.7.0 to 1.9.1. The easiest way to get started is to link to files hosted on the jQuery CDN or for best performance, <a href="http://jquerymobile.com/download-builder/" rel="external">build a custom bundle</a>:</p>
