@@ -152,6 +152,9 @@ body, .jqm-demos  {
 	-moz-box-shadow: 0 0 5px rgba(0,0,0,.15);
 	box-shadow: 0 0 5px rgba(0,0,0,.15);
 }
+.jqm-search > .jqm-list .ui-li-count {
+	display: none;
+}
 
 @media all and (min-width:46em) {
 	.jqm-header h1.jqm-logo {
@@ -292,7 +295,6 @@ body, .jqm-demos  {
 		display: none;
 	}
 }
-
 
 /* Headings */
 .jqm-content > h1 {
@@ -498,15 +500,14 @@ h2.jqm-home-widget {
 }
 
 /* Lists */
+.jqm-search .jqm-list {
+	font-weight: 400; 
+	font-size: 0.88em;
+}
 .jqm-list .ui-btn-inner {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300; 
 	font-size: 0.95em;
-}
-
-.jqm-search .jqm-list {
-		font-weight: 400; 
-		font-size: 0.88em;
 }
 .jqm-list .ui-li-heading  {
 	font-weight: 700; 
