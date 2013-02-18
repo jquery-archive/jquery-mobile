@@ -47,14 +47,14 @@
 			
 			<h2 id="nav-intro">AJAX Navigation & Transitions</h2>
 
-			<p>jQuery Mobile includes a <a href="../widgets/navigation/">AJAX navigation system</a> to support a rich set of animated page <a href="../widgets/transitions/">transitions</a> by automatically 'hijacking' standard links and form submissions and turning them as an AJAX request. The back button is fully supported and there are features to prefetch &amp; cache, dynamically inject, and script pages for advanced use cases.</p>
+			<p>jQuery Mobile includes a <a href="../widgets/navigation/">AJAX navigation system</a> to support a rich set of animated page <a href="../widgets/transitions/" data-ajax="false">transitions</a> by automatically 'hijacking' standard links and form submissions and turning them as an AJAX request. The back button is fully supported and there are features to prefetch &amp; cache, dynamically inject, and script pages for advanced use cases.</p>
 			
 			<p>Whenever a link is clicked or a form is submitted, that event is automatically intercepted by the AJAX nav system and is used to issue a AJAX request based on the <code>href</code> or form action instead of reloading the page. While the framework waits for the AJAX response, a loader overlay is displayed.</p>
 
 			<p>When the requested page loads, the jQuery Mobile parses the document for an element with the <code> data-role="page"</code> attribute and inserts that code into the DOM of the original page. Next, any widgets in the incoming page are enhanced to apply all the styles and behavior. The rest of the incoming page is discarded so any scripts, stylesheets or other information in the <code></code> will not be included. The framework will also note the title of the incoming page to update the title when the new page is transitioned into view.</p>
 
 
-			<p>Now that the requested page is now in the DOM and enhanced, it is animated into view with a <a href="../widgets/transitions/">transition</a>. By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
+			<p>Now that the requested page is now in the DOM and enhanced, it is animated into view with a <a href="../widgets/transitions/" data-ajax="false">transition</a>. By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
 			
 			
 			<h2>Content & Widgets</h2>

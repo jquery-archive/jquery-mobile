@@ -11,19 +11,17 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
-</head>
-<body>
-<div data-role="page" class="jqm-demos" data-quicklinks="true">
-
-
 	<style>
-        table { width:100%; border-bottom:1px solid #ccc; border-spacing: 0; }
+        table { width:100%; border-spacing: 0; }
         th { text-align:left; }
-        th h3 { margin:.6em 0; }
-        th, td { vertical-align:top; border-top:1px solid #ccc; padding: 1px 3px; }
+        th h3 { margin:.6em 0 .6em .5em; }
+        th, td { vertical-align:top; border-top:1px solid #eee; padding: 1px 3px; background-color:#fcfcfc; }
         td .ui-btn { margin:.4em 0 .5em 0; }
         td .ui-btn-inner { padding: .4em 15px; }
     </style>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>

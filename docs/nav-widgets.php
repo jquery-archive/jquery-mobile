@@ -58,4 +58,4 @@
 
 <li data-section="Widgets" data-filtertext="text inputs & textarea textinputs forms"><a href="widgets/textinputs/">Text inputs & textarea</a></li>
 
-<li data-section="Widgets" data-filtertext="page transitions pages navigation"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+<li data-section="Widgets" data-filtertext="page transitions pages navigation" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
