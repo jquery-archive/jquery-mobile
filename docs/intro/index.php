@@ -47,14 +47,14 @@
 			
 			<h2 id="nav-intro">AJAX Navigation & Transitions</h2>
 
-			<p>jQuery Mobile includes a <a href="../widgets/navigation/">AJAX navigation system</a> to support a rich set of animated page <a href="../widgets/transitions/" data-ajax="false">transitions</a> by automatically 'hijacking' standard links and form submissions and turning them as an AJAX request. The back button is fully supported and there are features to prefetch &amp; cache, dynamically inject, and script pages for advanced use cases.</p>
+			<p>jQuery Mobile includes an <a href="../widgets/navigation/">AJAX navigation system</a> to support a rich set of animated page <a href="../widgets/transitions/" data-ajax="false">transitions</a> by automatically 'hijacking' standard links and form submissions and turning them into an AJAX request. The back button is fully supported and there are features to prefetch &amp; cache, dynamically inject, and script pages for advanced use cases.</p>
 			
-			<p>Whenever a link is clicked or a form is submitted, that event is automatically intercepted by the AJAX nav system and is used to issue a AJAX request based on the <code>href</code> or form action instead of reloading the page. While the framework waits for the AJAX response, a loader overlay is displayed.</p>
+			<p>Whenever a link is clicked or a form is submitted, that event is automatically intercepted by the AJAX nav system and is used to issue an AJAX request based on the <code>href</code> or form action instead of reloading the page. While the framework waits for the AJAX response, a loader overlay is displayed.</p>
 
-			<p>When the requested page loads, the jQuery Mobile parses the document for an element with the <code> data-role="page"</code> attribute and inserts that code into the DOM of the original page. Next, any widgets in the incoming page are enhanced to apply all the styles and behavior. The rest of the incoming page is discarded so any scripts, stylesheets or other information in the <code></code> will not be included. The framework will also note the title of the incoming page to update the title when the new page is transitioned into view.</p>
+			<p>When the requested page loads, jQuery Mobile parses the document for an element with the <code> data-role="page"</code> attribute and inserts that code into the DOM of the original page. Next, any widgets in the incoming page are enhanced to apply all the styles and behavior. The rest of the incoming page is discarded so any scripts, stylesheets or other information will not be included. The framework will also note the title of the incoming page to update the title when the new page is transitioned into view.</p>
 
 
-			<p>Now that the requested page is now in the DOM and enhanced, it is animated into view with a <a href="../widgets/transitions/" data-ajax="false">transition</a>. By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
+			<p>Now that the requested page is in the DOM and enhanced, it is animated into view with a <a href="../widgets/transitions/" data-ajax="false">transition</a>. By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
 			
 			
 			<h2>Content & Widgets</h2>
@@ -64,7 +64,7 @@
 			<p>jQuery Mobile includes a wide range of touch-friendly UI widgets: <a  href="../widgets/buttons/">buttons</a>, <a href="../widgets/forms/">form elements</a>, <a href="../widgets/collapsibles/">collapsibles</a>, <a href="../widgets/accordions/">accordions</a>, <a href="../widgets/popups/">popups</a>, <a href="../widgets/dialog/">dialogs</a>, <a href="../widgets/table-column-toggle">responsive tables</a>, and much more. For best performance, use the <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> to pick the components you need.</p>
 			
 				<h2>Buttons</h2>
-				<p>There are a few ways to make <a href="../widgets/buttons" title="buttons-types">buttons</a>, but lets turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to it.  You can add an <a href="../icons">icon</a> with the <code>data-icon</code> attribute and optionally set its position with the <code>data-iconpos</code> attribute.</p>
+				<p>There are a few ways to make <a href="../widgets/buttons" title="buttons-types">buttons</a>, but let's turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to it.  You can add an <a href="../icons">icon</a> with the <code>data-icon</code> attribute and optionally set its position with the <code>data-iconpos</code> attribute.</p>
 
 
 				<div data-demo-html="true">	
@@ -74,7 +74,7 @@
 				
 
 			<h2>Listviews</h2>
-			<p>jQuery Mobile includes a diverse set of common <a href="../widgets/listviews" title="docs-lists">listviews</a> that are coded as lists with a <code>data-role="listview"</code> added. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> and add a dynamic search filter with the <code>data-filter="true"</code> attributes.</p>
+			<p>jQuery Mobile includes a diverse set of common <a href="../widgets/listviews" title="docs-lists">listviews</a> that are coded as lists with a <code>data-role="listview"</code> added. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> attribute and we add a dynamic search filter with <code>data-filter="true"</code>.</p>
 
 			<div data-demo-html="true">	
 			<ul data-role="listview" data-inset="true" data-filter="true">
@@ -89,9 +89,9 @@
 
 
 			<h2>Form elements</h2>
-			<p>The framework contains a full set of <a href="../widgets/forms">form elements</a> that automatically are enhanced into touch-friendly styled widgets. Here's a slider made with the new HTML5 input type of range, no <code>data-role</code> needed. Be sure to wrap these in a <code>form</code> element and always properly associate a <code>label</code> to every form element.</p> 
+			<p>The framework contains a full set of <a href="../widgets/forms">form elements</a> that are automatically enhanced into touch-friendly styled widgets. Here's a slider made with the new HTML5 input type of range, no <code>data-role</code> needed. Be sure to wrap these in a <code>form</code> element and always properly associate a <code>label</code> with every form element.</p>
 
-			<div data-demo-html="true">	
+			<div data-demo-html="true">
 			<form>
 				<label for="textinput-s">Text Input:</label>
 				<input type="text" name="textinput-s" id="textinput-s" placeholder="Text input" value="" data-clear-btn="true">
@@ -119,7 +119,7 @@
 
 
 			<h2>Theming</h2>
-			<p>jQuery Mobile has a robust theme framework that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="e"</code> attribute to any of the widgets on this page: page, header, list, input for the slider, or button to turn it yellow. Try different swatch letters in default theme from a-e to mix and match swatches. </p>
+			<p>jQuery Mobile has a robust theme framework that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="e"</code> attribute to any of the widgets on this page: page, header, list, input for the slider, or button to turn it yellow. Try different swatch letters from "a" to "e" in the default theme to mix and match swatches.</p>
 			<p>Cool party trick: add the theme swatch to the page and see how all the widgets inside the content will automatically inherit the theme (headers and footers don't inherit, they default to swatch "a").</p>
 
 
