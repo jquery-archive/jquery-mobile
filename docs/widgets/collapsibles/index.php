@@ -11,7 +11,7 @@
     <script src="../../../js/jquery.js"></script>
     <script src="../../_assets/js/"></script>
     <script src="../../../js/"></script>
-    <style>
+    <style id="negateDoubleBorder">
         #demo-borders .ui-collapsible .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }
     </style>
 </head>
@@ -89,7 +89,7 @@
         
             <h2>Icons</h2>
 
-            <p>The default icons of collapsible headings can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes. In the example below, <code>data-collapsed-icon="arrow-r"</code> and <code>data-expanded-icon="arrow-d"</code>.</p>
+            <p>The default icons of collapsible headings can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes. In the example below, <code>data-collapsed-icon="arrow-d"</code> and <code>data-expanded-icon="arrow-u"</code>.</p>
 
             <div data-demo-html="true">
                 <div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
@@ -189,7 +189,7 @@
 
         <p>To avoid "double" borders the framework removes the top border of collapsibles that are immediately preceded by another collapsible. Here we show how to negate this with custom CSS.</p>
         
-        <div data-demo-html="true" data-demo-css="true">
+        <div data-demo-html="true" data-demo-css="#negateDoubleBorder">
             <div id="demo-borders">
                 <div data-role="collapsible" data-theme="e" data-content-theme="d" data-inset="false">
                     <h3>Pets</h3>
