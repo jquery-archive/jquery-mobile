@@ -125,7 +125,7 @@ body, .jqm-demos  {
 	min-width: 96%;
 }
 
-@media all and (min-width:40em) {
+@media all and (min-width:46em) {
 	.jqm-header h1.jqm-logo {
 		text-align:left;
 		margin: .8em 0 .8em 15%;
@@ -201,7 +201,7 @@ body, .jqm-demos  {
 }
 
 /* Content */
-@media all and (min-width:40em) {
+@media all and (min-width:46em) {
 	.jqm-demos .jqm-content {
 		/* padding bottom is because of footer position absolute */
 		padding: 15px 15% 4.5em;
