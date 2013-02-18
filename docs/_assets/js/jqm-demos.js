@@ -86,4 +86,8 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	$( this ).find( ".jqm-header .jqm-search-link" ).on( "click", function() {
 		$( this ).parent( ".jqm-header" ).toggleClass( "jqm-search-toggle" );
 	});
+	
+	$( this ).find( ".jqm-header:not(.jqm-search-toggle) .jqm-search-link" ).on( "click", function() {
+		$( this ).parent( ".jqm-header" ).find( ".jqm-search .ui-input-text" ).focus();
+	});
 });
