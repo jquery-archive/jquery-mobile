@@ -4,23 +4,23 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Form reference - jQuery Mobile Demos</title>
-    <link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
-    <link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-    <link rel="shortcut icon" href="../../_assets/favicon.ico">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-    <script src="../../../js/jquery.js"></script>
-    <script src="../../_assets/js/"></script>
-    <script src="../../../js/"></script>
-</head>
-<body>
-<div data-role="page" class="jqm-demos" data-quicklinks="true">
+		<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+		<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+		<link rel="shortcut icon" href="../../_assets/favicon.ico">
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+		<script src="../../../js/jquery.js"></script>
+		<script src="../../_assets/js/"></script>
+		<script src="../../../js/"></script>
+	</head>
+	<body>
+	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-    <div data-role="header" class="jqm-header">
-        <h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
-        <?php include( '../../search.php' ); ?>
-    </div><!-- /header -->
+		<div data-role="header" class="jqm-header">
+			<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
+			<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+			<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+	        <?php include( '../../search.php' ); ?>
+		</div><!-- /header -->
     
     <div data-role="content" class="jqm-content">
     

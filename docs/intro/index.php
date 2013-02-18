@@ -63,7 +63,7 @@
 			
 			<p>jQuery Mobile includes a wide range of touch-friendly UI widgets: <a  href="../widgets/buttons/">buttons</a>, <a href="../widgets/forms/">form elements</a>, <a href="../widgets/collapsibles/">collapsibles</a>, <a href="../widgets/accordions/">accordions</a>, <a href="../widgets/popup/">popups</a>, <a href="../widgets/dialog/">dialogs</a>, <a href="../widgets/table-column-toggle">responsive tables</a>, and much more. For best performance, use the <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> to pick the components you need.</p>
 			
-				<h2>Buttons</h2>
+				<h4>Buttons</h4>
 				<p>There are a few ways to make <a href="../widgets/buttons" title="buttons-types">buttons</a>, but let's turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to it.  You can add an <a href="../icons">icon</a> with the <code>data-icon</code> attribute and optionally set its position with the <code>data-iconpos</code> attribute.</p>
 
 
@@ -73,7 +73,7 @@
 				
 				
 
-			<h2>Listviews</h2>
+			<h4>Listviews</h4>
 			<p>jQuery Mobile includes a diverse set of common <a href="../widgets/listviews" title="docs-lists">listviews</a> that are coded as lists with a <code>data-role="listview"</code> added. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> attribute and we add a dynamic search filter with <code>data-filter="true"</code>.</p>
 
 			<div data-demo-html="true">	
@@ -88,8 +88,8 @@
 
 
 
-			<h2>Form elements</h2>
-			<p>The framework contains a full set of <a href="../widgets/forms">form elements</a> that are automatically enhanced into touch-friendly styled widgets. Here's a slider made with the new HTML5 input type of range, no <code>data-role</code> needed. Be sure to wrap these in a <code>form</code> element and always properly associate a <code>label</code> with every form element.</p>
+			<h4>Form elements</h4>
+			<p>The framework contains a full set of <a href="../widgets/forms/">form elements</a> that are automatically enhanced into touch-friendly styled widgets. Here's a slider made with the new HTML5 input type of range, no <code>data-role</code> needed. Be sure to wrap these in a <code>form</code> element and always properly associate a <code>label</code> with every form element.</p>
 
 			<div data-demo-html="true">
 			<form>
