@@ -115,7 +115,9 @@ body, .jqm-demos  {
 	-moz-box-shadow: inset 0px 0 5px rgba(0, 0, 0, .1);
 	box-shadow: inset 0px 0 5px rgba(0, 0, 0, .1);
 }
-.jqm-demos .jqm-search > .ui-listview-filter .ui-input-text {
+.jqm-demos .jqm-search > .ui-listview-filter .ui-input-text,
+.jqm-demos .jqm-intro + .ui-listview-filter .ui-input-text
+ {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size:.95em;
