@@ -15,18 +15,18 @@
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-    <div data-role="header" data-position="fixed" data-theme="f">
-        <h1>jQuery Mobile</h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
-        <?php include( '../../search.php' ); ?>
-    </div>
+    <div data-role="header" data-position="fixed" class="jqm-header">
+        <h1 class="jqm-logo"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
+		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+		<?php include( '../../search.php' ); ?>
+	</div><!-- /header -->
     
     <div data-role="content" class="jqm-content">
     
     	<h1>Fixed toolbars</h1>
 		
-		<p>In browsers that support CSS <code>position: fixed</code> (most desktop browsers, iOS5+, Android 2.2+, BlackBerry 6, and others), toolbars that use the "fixedtoolbar" plugin will be fixed to the top or bottom of the viewport, while the page content scrolls freely in between. In browsers that don't support fixed positioning, the toolbars will remain positioned in flow, at the top or bottom of the page. </p>
+		<p class="jqm-intro">In browsers that support CSS <code>position: fixed</code> (most desktop browsers, iOS5+, Android 2.2+, BlackBerry 6, and others), toolbars that use the "fixedtoolbar" plugin will be fixed to the top or bottom of the viewport, while the page content scrolls freely in between. In browsers that don't support fixed positioning, the toolbars will remain positioned in flow, at the top or bottom of the page. </p>
 		
 		
 		<h2>Fixed basics</h2>
@@ -115,7 +115,7 @@
 		<hr />
 	
 		
-		<h2>The rest of the page is just sample content to make the page very long</h2>
+		<h3>The rest of the page is just sample content to make the page very long</h3>
 		
 			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
 			
@@ -195,7 +195,7 @@
 
 			</div><!-- /content -->
 
-			<div data-role="footer" data-theme="a" data-position="fixed">
+			<div data-role="footer" data-theme="f" data-position="fixed">
 					<h1>Fixed Footer</h1>
 			</div>
 
