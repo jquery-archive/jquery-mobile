@@ -52,7 +52,11 @@ $.fn.buttonMarkup = function( options ) {
 			buttonElements;
 
 		for ( key in o ) {
-			e.setAttribute( nsKey + key, o[ key ] );
+			if ( o[ key ] === undefined || o[ key ] === null ) {
+				el.removeAttr( nsKey + key );
+			} else {
+				e.setAttribute( nsKey + key, o[ key ] );
+			}
 		}
 
 		if ( getAttrFixed( e, nsKey + "rel" ) === "popup" && el.attr( "href" ) ) {
