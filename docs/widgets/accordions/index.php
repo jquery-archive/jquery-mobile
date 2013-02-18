@@ -123,7 +123,7 @@
 				  
 			<h2 id="accordion-icons">Icons</h2>
 			
-			<p>Collapsible headings&rsquo; default icons can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes, either at the <code>collapsible-set</code> level or on an individual collapsible basis.</p>
+			<p>The default icons of collapsible headings can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes, either at the <code>collapsible-set</code> level or on any of its collapsibles individually.</p>
 			
 			<div data-demo-html="true">			
 				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
@@ -147,7 +147,7 @@
 			
 			<h2 id="accordion-icon-position">Icon position</h2>
 			
-			<p>Collapsible headings&rsquo; default icon positioning can be overridden by using the <code>data-iconpos</code> attribute, either at the <code>collapsible-set</code> level or on an individual collapsible basis.</p>
+			<p>The default icon positioning of collapsible headings can be overridden by using the <code>data-iconpos</code> attribute, either at the <code>collapsible-set</code> level or on any of its collapsibles individually.</p>
 			
 			<div data-demo-html="true">	
 				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-iconpos="right">
@@ -173,7 +173,7 @@
 
 
 			<h2 id="accordion-corners">Corners</h2>
-			<p>Add the <code>data-corners="false"</code> attribute to have an inset collapsible set without rounded corners.</p>
+			<p>Add the <code>data-corners="false"</code> attribute to get an inset collapsible set without rounded corners.</p>
 
 
 			<div data-demo-html="true">	
@@ -197,7 +197,7 @@
 
 			<h2 id="accordion-theme">Theme</h2>
 			
-			<p>Add a <code>data-theme</code> attribute to the set to select the color of each collapsible header in a set. Add the <code>data-content-theme</code> attribute to specify the color of the collapsible content. </p>
+			<p>Add a <code>data-theme</code> attribute to the set to set the color of each collapsible header in a set. Add the <code>data-content-theme</code> attribute to specify the color of the collapsible content. </p>
 			
 			<div data-demo-html="true">	
 				<div data-role="collapsible-set" data-theme="a" data-content-theme="a">
