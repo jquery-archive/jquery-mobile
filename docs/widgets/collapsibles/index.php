@@ -74,7 +74,7 @@
 
         <h2>Mini sized</h2>
         
-        <p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a <a href="../forms/forms-all-mini.html">mini version</a>. </p>
+        <p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a mini version. </p>
 
         <div data-demo-html="true">
             <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="a">

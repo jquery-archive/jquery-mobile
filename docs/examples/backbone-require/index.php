@@ -137,7 +137,7 @@
 </code>
 </pre>
 <p>
-The <a href="backbone-require.html" rel="external"> working sample</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously.  Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.
+The <a href="backbone-require.php" rel="external"> working sample</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously.  Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.
 </p>
       
 

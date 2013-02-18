@@ -44,28 +44,28 @@
 			
 			<div data-demo-html="true">
 				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
-					<li><a href="index.html">Acura</a></li>
-					<li><a href="index.html">Audi</a></li>
-					<li><a href="index.html">BMW</a></li>
-					<li><a href="index.html">Cadillac</a></li>
-					<li><a href="index.html">Chrysler</a></li>
-					<li><a href="index.html">Dodge</a></li>
-					<li><a href="index.html">Ferrari</a></li>
-					<li><a href="index.html">Ford</a></li>
-					<li><a href="index.html">GMC</a></li>
-					<li><a href="index.html">Honda</a></li>
-					<li><a href="index.html">Hyundai</a></li>
-					<li><a href="index.html">Infiniti</a></li>
-					<li><a href="index.html">Jeep</a></li>
-					<li><a href="index.html">Kia</a></li>
-					<li><a href="index.html">Lexus</a></li>
-					<li><a href="index.html">Mini</a></li>
-					<li><a href="index.html">Nissan</a></li>
-					<li><a href="index.html">Porsche</a></li>
-					<li><a href="index.html">Subaru</a></li>
-					<li><a href="index.html">Toyota</a></li>
-					<li><a href="index.html">Volkswagon</a></li>
-					<li><a href="index.html">Volvo</a></li>
+					<li><a href="#">Acura</a></li>
+					<li><a href="#">Audi</a></li>
+					<li><a href="#">BMW</a></li>
+					<li><a href="#">Cadillac</a></li>
+					<li><a href="#">Chrysler</a></li>
+					<li><a href="#">Dodge</a></li>
+					<li><a href="#">Ferrari</a></li>
+					<li><a href="#">Ford</a></li>
+					<li><a href="#">GMC</a></li>
+					<li><a href="#">Honda</a></li>
+					<li><a href="#">Hyundai</a></li>
+					<li><a href="#">Infiniti</a></li>
+					<li><a href="#">Jeep</a></li>
+					<li><a href="#">Kia</a></li>
+					<li><a href="#">Lexus</a></li>
+					<li><a href="#">Mini</a></li>
+					<li><a href="#">Nissan</a></li>
+					<li><a href="#">Porsche</a></li>
+					<li><a href="#">Subaru</a></li>
+					<li><a href="#">Toyota</a></li>
+					<li><a href="#">Volkswagon</a></li>
+					<li><a href="#">Volvo</a></li>
 				</ul>
 			</div><!--/demo-html -->
 
@@ -74,28 +74,28 @@
 			<h4>Inset listiew</h4>			
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
-					<li><a href="index.html">Acura</a></li>
-					<li><a href="index.html">Audi</a></li>
-					<li><a href="index.html">BMW</a></li>
-					<li><a href="index.html">Cadillac</a></li>
-					<li><a href="index.html">Chrysler</a></li>
-					<li><a href="index.html">Dodge</a></li>
-					<li><a href="index.html">Ferrari</a></li>
-					<li><a href="index.html">Ford</a></li>
-					<li><a href="index.html">GMC</a></li>
-					<li><a href="index.html">Honda</a></li>
-					<li><a href="index.html">Hyundai</a></li>
-					<li><a href="index.html">Infiniti</a></li>
-					<li><a href="index.html">Jeep</a></li>
-					<li><a href="index.html">Kia</a></li>
-					<li><a href="index.html">Lexus</a></li>
-					<li><a href="index.html">Mini</a></li>
-					<li><a href="index.html">Nissan</a></li>
-					<li><a href="index.html">Porsche</a></li>
-					<li><a href="index.html">Subaru</a></li>
-					<li><a href="index.html">Toyota</a></li>
-					<li><a href="index.html">Volkswagon</a></li>
-					<li><a href="index.html">Volvo</a></li>
+					<li><a href="#">Acura</a></li>
+					<li><a href="#">Audi</a></li>
+					<li><a href="#">BMW</a></li>
+					<li><a href="#">Cadillac</a></li>
+					<li><a href="#">Chrysler</a></li>
+					<li><a href="#">Dodge</a></li>
+					<li><a href="#">Ferrari</a></li>
+					<li><a href="#">Ford</a></li>
+					<li><a href="#">GMC</a></li>
+					<li><a href="#">Honda</a></li>
+					<li><a href="#">Hyundai</a></li>
+					<li><a href="#">Infiniti</a></li>
+					<li><a href="#">Jeep</a></li>
+					<li><a href="#">Kia</a></li>
+					<li><a href="#">Lexus</a></li>
+					<li><a href="#">Mini</a></li>
+					<li><a href="#">Nissan</a></li>
+					<li><a href="#">Porsche</a></li>
+					<li><a href="#">Subaru</a></li>
+					<li><a href="#">Toyota</a></li>
+					<li><a href="#">Volkswagon</a></li>
+					<li><a href="#">Volvo</a></li>
 				</ul>
 			</div><!--/demo-html -->
 
@@ -116,7 +116,7 @@
 				<li data-filtertext="NASDAQ:AMZNL Amazon.com, Inc."><a href="#">Amazon</a></li>
 				<li data-filtertext="NASDAQ:AAPL Apple Inc."><a href="#">Apple</a></li>
 				<li data-filtertext="NASDAQ:GOOG Google Inc."><a href="#">Google</a></li>
-				<li data-filtertext="NYSE:IBM Intl. International Business Machines Corp."><a href="index.html">IBM</a></li>
+				<li data-filtertext="NYSE:IBM Intl. International Business Machines Corp."><a href="#">IBM</a></li>
 				<li data-filtertext="NASDAQ:MSFT Microsoft Corporation"><a href="#">Microsoft</a></li>
 				<li data-filtertext="NASDAQ:YHOO Yahoo! Inc."><a href="#">Yahoo</a></li>
 				<li data-filtertext="USA U.S.A. United States of America"><a href="#">United States</a></li>

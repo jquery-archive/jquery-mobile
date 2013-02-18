@@ -30,7 +30,7 @@
 
 		<p>This demo shows the linkbar extension that adds a fixed positioned bar on the right of the screen that makes it easy to anchor down to a specific part of a listview. View the source to see how it works.</p>
 		
-		<a href="autodividers-linkbar-demo.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
+		<a href="autodividers-linkbar-demo.php" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
 		
 		<div data-demo-html="#demo-page" data-demo-js="#demo-script" data-demo-css="#demo-style"></div><!--/demo-html -->
                 
