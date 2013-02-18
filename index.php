@@ -26,8 +26,10 @@
 		<div class="jqm-home-welcome">
 		<h2>Demo center: <span class="jqm-version"></span></h2>
 		
-		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework designed to make sites and apps that are accessible on all popular smartphone, tablet and desktop devices. For technical info,&nbsp;visit:</p>
-		<a href="http://api.jquerymobile.com" class="jqm-button ui-icon-alt" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">jQuery Mobile API Site </a> 
+		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework designed to make sites and apps that are accessible on all popular smartphone, tablet and desktop devices.</p>
+        
+        <p class="jqm-intro"><small>For technical info,&nbsp;visit the API documentation.</small></p>
+		<a href="http://api.jquerymobile.com" class="jqm-button ui-icon-alt" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">jQuery Mobile API Site </a> 
 		</div>
 		
 
@@ -35,7 +37,7 @@
             <li><a href="docs/intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
             <li><a href="docs/examples/"><h2>Demo Showcase</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
             <li><a href="docs/faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
-			<li data-section="Widgets" data-filtertext="responsive web design rwd adaptive PE accessible mobile breakpoints media query"><a href="docs/intro/rwd.php"><h2>Going Responsive</h2><p>How use RWD with jQuery Mobile</p></a></li>
+			<li data-section="Widgets" data-filtertext="responsive web design rwd adaptive PE accessible mobile breakpoints media query"><a href="docs/intro/rwd.php"><h2>Going Responsive</h2><p>How to use RWD with jQuery Mobile</p></a></li>
 		</ul>
 		
 		<h2 class="jqm-home-widget">Widget reference</h2>
