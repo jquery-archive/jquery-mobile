@@ -26,7 +26,7 @@
 	
       	<h1>Responsive Web Design</h1>
         
-      	<p class="jqm-intro">Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase. The framework has a number of responsive widgets: <a href="../widgets/grids/">responsive grids</a>, <a href="../widgets/table-reflow/">reflow tables</a> and <a href="../widgets/table-column-toggle/">column chooser tables</a>, and <a href="../widgets/panels/">sliding panels</a></p>
+      	<p class="jqm-intro">Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase. The framework has a number of responsive widgets: <a href="../widgets/grids/">responsive grids</a>, <a href="../widgets/table-reflow/">reflow tables</a> and <a href="../widgets/table-column-toggle/">column chooser tables</a>, and <a href="../widgets/panels/">sliding panels</a>.</p>
 
 		<h2>RWD Basics</h2>
       	<p>RWD has three key elements:<p>
@@ -38,9 +38,9 @@
 
       	<p>By creating all screen elements to be fluid and flexible, it allows the media queries to focus primarily on controlling layout rules for containers; the modules inside simply re-size to fit their containers.</p>
 
-      	<p>A simple responsive example may be two stacked containers, each with flexible content or widgets inside. At wider widths, media queries are used to float both containers to create a two column layout to take better advantage of the wider screen width. </p>
+      	<p>A simple responsive example may be two stacked containers, each with flexible content or widgets inside. At greater widths, media queries are used to float both containers to create a two column layout to take better advantage of the wider screen.</p>
 
-      	<p>Since the content inside each container is designed to re-flow to fit it's parent, the media queries can focus just on the rules for making the columns stack or float, and to override or add styles only needed at wider widths.</p>
+      	<p>Since the content inside each container is designed to re-flow to fit its parent, the media queries can focus just on the rules for making the columns stack or float, and to override or add styles only needed at greater widths.</p>
 
 		<h2>Progressive Enhancement</h2>
 
@@ -52,7 +52,7 @@
 
       	<p>When building a page, start by creating the lightest and most semantic HTML possible. Think about how the source order of the markup would work if you didn't have CSS or JS. Do not include code that is only needed for larger viewports and hide it at smaller widths. Instead, use AJAX to conditionally load these assets when larger screens are detected via JS.</p>
 
-      	<p>When writing CSS for a responsive site or app, it's usually most efficient to write all the core typography and basic style elements outside of a media query to form the styles for the smallest devices, such as phones. This is a good approach because the majority of these core styles are usually also shared at wider widths, albeit in a different layout and it leverages the cascading power of CSS. Build up breakpoints using multiple <code>min-width</code> media queries to layer in additional style rules that should only apply above a certain screen width.</p>
+      	<p>When writing CSS for a responsive site or app, it's usually most efficient to write all the core typography and basic style elements outside of a media query to form the styles for the smallest devices, such as phones. This is a good approach because the majority of these core styles are usually also shared at greater widths, albeit in a different layout and it leverages the cascading power of CSS. Build up breakpoints using multiple <code>min-width</code> media queries to layer in additional style rules that should only apply above a certain screen width.</p>
 
       	<p>For images in your pages, we recommend starting with images sized for mobile screens in the markup. It doesn't make sense to serve a 1,000 pixel wide photo to a smartphone with a 480 pixel max resolution because this is a waste of bandwidth and memory. Instead, include an image targeted for a mobile size. Add a <code>width: 100%;</code> style rule to make images scale to the page or container, but not larger because this would look blurry. </p>
 
@@ -70,7 +70,7 @@
 		<ul>
 			<li><strong>Create a style override stylesheet and include it after the jQuery Mobile framework stylesheet.</strong> This will hold all your custom styles, tweaks to the default widgets and media queries.</li>
 			<li><strong>Start by writing the styles you want to see at the narrowest screen width (i.e. "mobile first").</strong> These should be outside a media query. This mobile-first approach is efficient because you can lay down the core typography, colors and styles for mobile knowing that these tend to also be used for wider breakpoints.</li>
-			<li><strong>Choose the breakpoints based on your content, not a specific device.</strong> Since there are devices of every imaginable width, it's smarter to choose breakpoints based on how your <em>content</em> looks in your design system. As you re-size the window to wider widths, identify where your content hits a point where it could adapt to take advantage of a wider width.</li>
+			<li><strong>Choose the breakpoints based on your content, not a specific device.</strong> Since there are devices of every imaginable width, it's smarter to choose breakpoints based on how your <em>content</em> looks in your design system. As you re-size the window to greater widths, identify where your content hits a point where it could adapt to take advantage of a wider width.</li>
 			<li><strong>Write media queries' widths in ems, not pixels.</strong> This ensures the layout will adapt to font size changes in addition to screen widths. To calculate the width in ems, divide the target breakpoint in pixels (320px) by 16px (the default font size) to get the em-based width (20em). </li>
 			<li><strong>Use <code>min-width</code> breakpoints that build on top of the mobile styles.</strong> The first breakpoint applies layout adjustments on top of the standard mobile styles so these can be fairly lightweight. Additional <code>min-width</code> breakpoints can be added for even wider screens that each build on the previous breakpoint styles.</li>
 			<li><strong>To override framework styles only for smaller screens, use a <code>max-width</code> breakpoint instead.</strong>  This allows you to constrain your style overrides to only apply below a certain screen width. Above this width, all the normal styles will apply so this is good for certain types of overrides.</li>
