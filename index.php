@@ -31,7 +31,7 @@
             <li><a href="docs/intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
             <li><a href="docs/examples/"><h2>Demo Showcase</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
             <li><a href="docs/faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
-			<li data-section="Widgets" data-filtertext="responsive web design rwd adaptive PE accessible mobile breakpoints media query"><a href="docs/intro/rwd.php"><h2>Responsive Web Design</h2><p>How use RWD with jQuery Mobile</p></a></li>
+			<li data-section="Widgets" data-filtertext="responsive web design rwd adaptive PE accessible mobile breakpoints media query"><a href="docs/intro/rwd.php"><h2>Going Responsive</h2><p>How use RWD with jQuery Mobile</p></a></li>
 			<li><a href="http://api.jquerymobile.com"><h2>API documentation</h2><p>Visit the API site for full technical info.</p></a></li>
 		</ul>
 		

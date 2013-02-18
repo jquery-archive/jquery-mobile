@@ -24,7 +24,7 @@
 	
 	<div data-role="content" class="jqm-content">
 	
-      	<h1>Responsive Web Design</h1>
+      	<h1>Going Responsive</h1>
         
       	<p class="jqm-intro">Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase. The framework has a number of responsive widgets: <a href="../widgets/grids/">responsive grids</a>, <a href="../widgets/table-reflow/">reflow tables</a> and <a href="../widgets/table-column-toggle/">column chooser tables</a>, and <a href="../widgets/panels/">sliding panels</a>.</p>
 
@@ -115,12 +115,14 @@ a:link { color:purple; }
 		
 
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
+<?php include( '../global-nav.php' ); ?>
+
 </div><!-- /page -->
 </body>
 </html>
