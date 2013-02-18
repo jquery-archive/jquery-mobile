@@ -456,10 +456,15 @@ body, .jqm-demos  {
 }
 
 /* Lists */
-.jqm-list {
+.jqm-list .ui-btn-inner {
 	font-family: 'Open Sans', sans-serif;
-	font-weight: 400; 
+	font-weight: 300; 
 	font-size: 0.95em;
+}
+
+.jqm-search .jqm-list {
+		font-weight: 400; 
+		font-size: 0.88em;
 }
 .jqm-list .ui-li-heading  {
 	font-weight: 700; 
