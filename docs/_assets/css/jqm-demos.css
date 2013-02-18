@@ -121,9 +121,11 @@ body, .jqm-demos  {
 	border-top: 1px solid #e0e0e0;
 }
 .jqm-search	> .ui-listview-filter {
-	margin: 0 -5px;
+	margin: 0 -.3125em;
+	padding: 1px 0; /* to resolve Chrome rendering issue (border-bottom not visible */
 }
 .jqm-demos .jqm-search > .ui-listview-filter .ui-input-search {
+	margin: 4px .3125em;
 	border-color: #e5e5e5;
 	border-color: rgba(0, 0, 0, .1);
 	background-color:#fbfbfb;
@@ -135,19 +137,18 @@ body, .jqm-demos  {
 .jqm-demos .jqm-intro + .ui-listview-filter .ui-input-text {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-	font-size:.95em;
+	font-size: .95em;
 }
-
 .jqm-demos .jqm-search > .ui-listview-filter .ui-input-search.ui-focus {
-	background-color:#fff;
+	background-color: #fff;
 }
 .jqm-search > .jqm-list {
 	position: absolute;
+	margin-right: .7em;
 	z-index: 999;
 	-webkit-box-shadow: 0 0 5px rgba(0,0,0,.15);
 	-moz-box-shadow: 0 0 5px rgba(0,0,0,.15);
 	box-shadow: 0 0 5px rgba(0,0,0,.15);
-	min-width: 96%;
 }
 
 @media all and (min-width:46em) {
@@ -191,7 +192,9 @@ body, .jqm-demos  {
 		margin: 0;	
 	}
 	.jqm-search > .jqm-list {
-		min-width: 70%;
+		right: .3875em;
+		margin-right: 0;
+		min-width: 21em;
 	}
 	/* global nav panel close button */
 	.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.jqm-header::after,
@@ -514,9 +517,15 @@ body, .jqm-demos  {
 }
 
 /* ### TEMPORARY ### */
-/* ui-li-count position: count bubble position when icon is false needs to be fixed in the framework CSS */
+/* padding count bubble position when icon is false needs to be fixed in the framework CSS (some classes shouldn't be added) */
 .jqm-list .ui-li-count {
 	right: 10px !important;
+}
+.jqm-demos .jqm-list .ui-btn-icon-right .ui-btn-inner {
+	padding-right: 0;
+}
+.jqm-demos .jqm-list .ui-li-has-arrow .ui-btn-inner a.ui-link-inherit {
+	padding-right: 15px;
 }
 /* ### END ### */
 
@@ -540,6 +549,7 @@ body, .jqm-demos  {
 	-moz-box-shadow: none;
 	box-shadow: none;
 }
+.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open,
 .ui-panel-content-wrap-position-left.ui-panel-content-wrap-open {
 	-webkit-box-shadow: -5px 0px 5px rgba(0,0,0,.10);
 	-moz-box-shadow: -5px 0px 5px rgba(0,0,0,.10);
