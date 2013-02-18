@@ -15,7 +15,7 @@
 	<script id="arrowSrc" src="popup.arrow.js"></script>
 	<script>
 $( document ).on( "click", function( e ) {
-	if ( $( e.target ).parents( "#arrow-popup-demo-content" ) ) {
+	if ( $( e.target ).parents( "#arrow-popup-demo-content" ).length > 0 ) {
 		$( ".click-tracker" ).css( { left: e.pageX, top: e.pageY } );
 		$( "#arrow-popup" ).popup( "open", { x: e.pageX, y: e.pageY } );
 	}
