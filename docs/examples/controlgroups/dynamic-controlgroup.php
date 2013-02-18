@@ -120,7 +120,9 @@
 					</form>
 				</div><!-- /block-a -->
 				<div class="ui-block-b">
-					<div data-role="controlgroup" id="controlgroup"></div>
+                	<form>
+						<div data-role="controlgroup" id="controlgroup"></div>
+                    </form>
 				</div><!-- /block-b -->
 			</div><!-- /grid -->
         </div><!--/demo-html -->
