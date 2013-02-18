@@ -75,7 +75,7 @@ body, .jqm-demos  {
 .jqm-search-toggle .jqm-search-link .ui-icon {
 	background-position: -51px 50%;
 }
-@media all and (max-width:39.9375em) {
+@media all and (max-width:45.9375em) {
 	.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header .jqm-navmenu-link .ui-icon {
 		background-position: -51px 50%;
 	}
@@ -154,7 +154,8 @@ body, .jqm-demos  {
 	.ui-panel-animate.ui-panel-content-wrap > .ui-header.jqm-header {
 		position: relative;
 	}
-	.jqm-search {
+	.jqm-search,
+	.jqm-search-toggle .jqm-search {
 		display: block;
 		position: absolute;
 		top: 1.58125em;
