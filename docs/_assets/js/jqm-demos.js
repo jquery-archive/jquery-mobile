@@ -103,17 +103,60 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 });
 $( document ).on( "pageinit", ".jqm-demos", function(){
 	$( document ).one( "pageshow", ".jqm-demos", function(){
-		$(".ui-page-active .jqm-search form").attr("method", "get").attr("action","search-results.php").append("<button type='submit' data-icon='arrow-r' data-inline='true' data-iconpos='notext'>Submit</button>").parent().trigger("create");
+		$(".ui-page-active .jqm-search form").attr("method", "get").attr("action","search-results.php").append("<button type='submit' data-icon='arrow-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>").parent().trigger("create");
+		$(".jqm-search form").children(".ui-btn").addClass("ui-hidden-accessible");
 		$(".ui-page-active .jqm-search form").on("submit", function(){
+			if($( ".ui-page-active .jqm-search li.ui-btn-up-b").length !== 0){
+				$( ".ui-page-active .jqm-search li.ui-btn-up-b a").click();
+				return false;
+			}
 			var url, base = $( "base" ).attr( "href" ).split('docs')[0];
 				base = base.split('index.html')[0] + "docs" + "/";
 				url = base+$(this).attr("action")+"?search="+$(this).find("input").val();
 			$.mobile.changePage(url); 
 		});
+		
 	});
+
 	
 });
-
+$( document ).on("change", ".jqm-search input", function(e){
+	if(typeof e.which !== "undefined"){
+		$( ".ui-page-active .jqm-search li.ui-btn-up-b").removeClass("ui-btn-up-b");
+	}
+});
+$( document ).on("keyup", ".jqm-search input", function(e){
+			if(e.which === $.mobile.keyCode.DOWN){
+				if($( ".ui-page-active .jqm-search li.ui-btn-up-b").length == 0){
+					$( ".ui-page-active .jqm-search li:first" ).toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b");
+				} else {
+					$( ".ui-page-active .jqm-search li.ui-btn-up-b").toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b").next().toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b");
+				}
+				highlight();
+				function highlight(){
+					if($( ".ui-page-active .jqm-search li.ui-btn-up-b").hasClass("ui-screen-hidden")){
+						$( ".ui-page-active .jqm-search li.ui-btn-up-b").toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b").next().toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b");
+						highlight();
+					}
+					return;
+				}
+			}
+			if(e.which === $.mobile.keyCode.UP){
+				if($( ".ui-page-active .jqm-search li.ui-btn-up-b").length !== 0){
+					$( ".ui-page-active .jqm-search li.ui-btn-up-b").toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b").prev().toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b");
+					highlightup();
+				} else {
+					$( ".ui-page-active .jqm-search li:last" ).toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b");
+				}
+				function highlightup(){
+					if($( ".ui-page-active .jqm-search li.ui-btn-up-b").hasClass("ui-screen-hidden")){
+						$( ".ui-page-active .jqm-search li.ui-btn-up-b").toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b").prev().toggleClass("ui-btn-up-d").toggleClass("ui-btn-up-b");
+						highlightup();
+					}
+					return;
+				}
+			}
+		});
 $( document ).on( "pageinit", ".jqm-demos-search-results", function() {
 	$( this ).find( ".jqm-search-results ul" ).listview({
 		globalNav: "docs",
