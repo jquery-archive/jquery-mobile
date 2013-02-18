@@ -1,7 +1,10 @@
 <li data-role="list-divider">Collapsibles</li>
 
-<li data-section="Demo Showcase" data-filtertext="slider tooltip extension input range sliders forms"><a href="examples/collapsible/dynamic-collapsible.php" data-ajax="false">Dynamic collapsible</a></li>
+<li data-section="Demo Showcase" data-filtertext="dyncamic collapsible set accordion"><a href="examples/collapsibles/dynamic-collapsible.php" data-ajax="false">Dynamic collapsible</a></li>
 
+<li data-role="list-divider">Controlgroups</li>
+
+<li data-section="Demo Showcase" data-filtertext="dynamic controlgroup buttons selects checkboxes"><a href="examples/controlgroups/dynamic-controlgroup.php" data-ajax="false">Dynamic controlgroup</a></li>
 
 <li data-role="list-divider">Listviews</li>
 
