@@ -518,11 +518,11 @@ h2.jqm-home-widget {
 	border-color: #eee;
 }
 .jqm-list .ui-btn-hover-d {
-	background-color:#f8f8f8;
-	-webkit-background-image:none;
-	-moz-background-image:none;
-	-o-background-image:none;
-	background-image:none;
+	background-color: #f8f8f8;
+	-webkit-background-image: none;
+	-moz-background-image: none;
+	-o-background-image: none;
+	background-image: none;
 }
 .jqm-list .ui-btn-up-d {
 	background-color: #fff;
@@ -530,7 +530,10 @@ h2.jqm-home-widget {
 }
 .jqm-list .ui-btn-up-d.ui-btn-active, 
 .jqm-list .ui-btn-hover-d.ui-btn-active, 
-.jqm-list .ui-btn-down-d.ui-btn-active {
+.jqm-list .ui-btn-down-d.ui-btn-active,
+.jqm-list .ui-btn-up-d.ui-focus, 
+.jqm-list .ui-btn-hover-d.ui-focus, 
+.jqm-list .ui-btn-down-d.ui-focus {
 	border-color: #34bae8;
 	background-color: #34bae8;
 	background-image: none;
@@ -540,11 +543,6 @@ h2.jqm-home-widget {
 .jqm-list .ui-btn-up-d.ui-focus, 
 .jqm-list .ui-btn-hover-d.ui-focus, 
 .jqm-list .ui-btn-down-d.ui-focus {
-	border-color: #34bae8;
-	background-color: #34bae8;
-	background-image: none;
-	color: #fff;
-	text-shadow: 0 1px 0 #369;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
@@ -601,11 +599,11 @@ h2.jqm-home-widget {
 .jqm-demos-index .jqm-content > .ui-listview-filter .ui-input-search.ui-focus,
 .jqm-demos-index .jqm-search-results-wrap > .ui-listview-filter .ui-input-search.ui-focus {
 	background-color: #fff;
-	border-color: #41aEdE;
-	border-color: rgba(65,174,222,.2);
-	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 0 9px rgba(65,174,222,.3);
-	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 0 9px rgba(65,174,222,.2);
-	box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 0 9px rgba(65,174,222,.2);
+	border-color: #34bae8;
+	border-color: rgba(52,186,232,.2);
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 0 9px rgba(52,186,232,.3);
+	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 0 9px rgba(52,186,232,.2);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 0 9px rgba(52,186,232,.2);
 }
 .jqm-demos .jqm-search .ui-listview-filter .ui-input-search.ui-focus {
 	background-color: #fff;
@@ -629,9 +627,14 @@ h2.jqm-home-widget {
 	background: #fff;
 }
 .jqm-search-results-highlight {
+	color: #07ade0;
+	font-weight: 400;
 	text-shadow: none;
-	color:#07ade0;
-	font-weight:400;
+}
+.ui-btn-active .jqm-search-results-highlight,
+.ui-focus .jqm-search-results-highlight {
+	color: #fff;
+	text-shadow: 0 1px 0 #369;	
 }
 .jqm-search .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
 .jqm-search-results-wrap .jqm-list .ui-li .ui-btn-text a.ui-link-inherit {
@@ -642,14 +645,19 @@ h2.jqm-home-widget {
 	padding: 8px 15px 9px;
 	font-size: .85em;
 	font-weight: 300;
-	color:#999;
+	color: #999;
 }
 .jqm-search-results-keywords .jqm-keyword-hash {
 	margin-right: .2em;
 	margin-left: .2em;
 	font-weight: 400;
-	color:#777;
+	color: #777;
 }
+.ui-btn-active .jqm-search-results-keywords .jqm-keyword-hash,
+.ui-focus .jqm-search-results-keywords .jqm-keyword-hash {
+	color: #fff;
+}
+
 .jqm-search .jqm-list .ui-li-count,
 .jqm-search-results-wrap .jqm-list .ui-li-count {
 	display: none;
