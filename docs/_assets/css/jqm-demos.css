@@ -531,8 +531,8 @@ h2.jqm-home-widget {
 .jqm-list .ui-btn-up-d.ui-btn-active, 
 .jqm-list .ui-btn-hover-d.ui-btn-active, 
 .jqm-list .ui-btn-down-d.ui-btn-active {
-	border-color: #41aEdE;
-	background-color: #41aEdE;
+	border-color: #34bae8;
+	background-color: #34bae8;
 	background-image: none;
 	color: #fff;
 	text-shadow: 0 1px 0 #369;	
@@ -540,8 +540,8 @@ h2.jqm-home-widget {
 .jqm-list .ui-btn-up-d.ui-focus, 
 .jqm-list .ui-btn-hover-d.ui-focus, 
 .jqm-list .ui-btn-down-d.ui-focus {
-	border-color: #41aEdE;
-	background-color: #41aEdE;
+	border-color: #34bae8;
+	background-color: #34bae8;
 	background-image: none;
 	color: #fff;
 	text-shadow: 0 1px 0 #369;
