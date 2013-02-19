@@ -23,8 +23,6 @@
 
 	<div data-role="content" class="jqm-content">
 
-
-
 			<h2>Non-inset</h2>
 
 			<div data-demo-html="true">
@@ -340,8 +338,6 @@
 					</ul>
 				</form>
 			</div><!--/demo-html -->
-
-
 
 	</div><!-- /content -->
 

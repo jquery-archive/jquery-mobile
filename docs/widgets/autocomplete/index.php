@@ -26,10 +26,8 @@
 
 			<h1>Autocomplete <a href="http://api.jquerymobile.com/listview/#option-filter" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">An autocomplete widget backed by either local or remote data can be created by leveraging the listview filter feature.
 			</p>
-
 
 			<h2>Remote data</h2>
 
@@ -69,8 +67,6 @@
 				</ul>
 			</div><!--/demo-html -->
 
-
-
 			<h4>Inset listiew</h4>
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
@@ -99,9 +95,6 @@
 				</ul>
 			</div><!--/demo-html -->
 
-
-
-
 		<h2 id="autocomplete-filtertext">Providing richer search content</h2>
 			<p>By default, the listview filter simply searches against the contents of each list item. If you want the filter to search against different content, add the <code>data-filtertext</code>	attribute to the item and populate it with one or many keywords and phrases that should be used to match against. Note that if this attribute is added, the contents of the list item are ignored.</p>
 			<p>This attribute is useful for dealing with allowing for ticker symbols and full company names to be searched, or for covering common spellings and abbreviations for countries.</p>
@@ -121,7 +114,6 @@
 				<li data-filtertext="NASDAQ:YHOO Yahoo! Inc."><a href="#">Yahoo</a></li>
 				<li data-filtertext="USA U.S.A. United States of America"><a href="#">United States</a></li>
 			</ul>
-
 
 	</div><!-- /content -->
 

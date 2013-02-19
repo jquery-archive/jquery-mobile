@@ -24,8 +24,6 @@
 
 	    <div data-role="content" class="jqm-content">
 
-
-
 			<h2>Field containers</h2>
 
 			<form action="#" method="get">
@@ -485,7 +483,6 @@
 				</div><!--/demo-html -->
 
 			</form>
-
 
 			</div><!-- /content -->
 

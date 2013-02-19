@@ -29,7 +29,6 @@
 
         <p class="jqm-intro">A regular listview on smartphones, but grid tiles on tablets and larger screens? This demo shows you how you can accomplish this with custom CSS.</p>
 
-
         <h2>Starting points</h2>
 
         <p>Create a listview from an unordered list. For this demo we used an inset listview to show you how you can apply the corner styling to the tiles as well.</p>
@@ -53,9 +52,7 @@
 
 </div><!-- /page -->
 
-
 <!-- The markup below is a copy of the actual demo page just so we can show the markup in the "view source" -->
-
 
 <div data-role="page" data-theme="a" id="demo-page" class="my-page">
 

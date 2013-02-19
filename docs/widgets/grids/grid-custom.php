@@ -98,8 +98,6 @@
 
 	<div data-role="content" class="jqm-content">
 
-
-
 			<h2>Custom responsive grid</h2>
 
 			<p>It's easy to extend the basic grid styles into a custom responsive layout by using CSS media queries to adjust the layout and design across various screen width breakpoints.	</p>
@@ -138,8 +136,6 @@
 				</div><!-- /rwd-example -->
 
 			</div><!-- /data-demo -->
-
-
 
 			</div><!-- /content -->
 

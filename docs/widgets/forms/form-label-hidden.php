@@ -24,8 +24,6 @@
 
 	    <div data-role="content" class="jqm-content">
 
-
-
 			<h2>Hide label/legend</h2>
 
 			<form action="#" method="get">
@@ -413,7 +411,6 @@
 				</div><!--/demo-html -->
 
 			</form>
-
 
 			</div><!-- /content -->
 

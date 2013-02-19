@@ -51,7 +51,6 @@
 		<h3>A note about transitions</h3>
 		<p>The slide, slideup, slidedown, fade or none page transitions all work great with persistent fixed toolbars. However, intensive 3D transitions like flip, turn, and flow can cause positioning and animation performance issues with this technique so we don't recommend using them.</p>
 
-
 		</div><!-- /content -->
 
 		<div data-role="footer" data-id="foo1" data-position="fixed">
@@ -65,9 +64,7 @@
 			</div><!-- /navbar -->
 		</div><!-- /footer -->
 
-
 	<?php include( '../../global-nav.php' ); ?>
-
 
 	</div><!-- /page -->
 	</body>

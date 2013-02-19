@@ -24,8 +24,6 @@
 
 	    <div data-role="content" class="jqm-content">
 
-
-
 			<h2>Disabled form elements</h2>
 
 			<form action="#" method="get">
@@ -495,8 +493,6 @@
 			<div data-demo-html="true">
                 <a href="#" data-role="button" class="ui-disabled" data-icon="arrow-r" data-iconpos="right" data-mini="true">Link button</a>
 			</div><!--/demo-html -->
-
-
 
 			</div><!-- /content -->
 

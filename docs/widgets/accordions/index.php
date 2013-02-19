@@ -26,12 +26,8 @@
 
 			<h1>Accordions <a href="http://api.jquerymobile.com/collapsible-set/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">An accordion is created in jQuery Mobile by grouping a series of individual collapsibles into set.
 			</p>
-
-
-
 
 			<h2 id="accordion-markup">Markup</h2>
 
@@ -54,7 +50,6 @@
 					</div>
 				</div>
 			</div><!--/demo-html -->
-
 
 			<h2 id="accordion-inline">Inset vs. full width</h2>
 
@@ -92,10 +87,6 @@
 				</div>
 			</div><!--/demo-html -->
 
-
-
-
-
 			<h2 id="accordion-mini">Mini</h2>
 
 			<p>For a more compact version that is useful in tight spaces, add the <code>data-mini="true"</code> attribute to the set. </p>
@@ -118,9 +109,6 @@
 				</div>
 			</div><!--/demo-html -->
 
-
-
-
 			<h2 id="accordion-icons">Icons</h2>
 
 			<p>The default icons of collapsible headings can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes, either at the <code>collapsible-set</code> level or on any of its collapsibles individually.</p>
@@ -141,9 +129,6 @@
 					</div>
 				</div>
 			</div><!--/demo-html -->
-
-
-
 
 			<h2 id="accordion-icon-position">Icon position</h2>
 
@@ -170,11 +155,8 @@
 				</div>
 			</div><!--/demo-html -->
 
-
-
 			<h2 id="accordion-corners">Corners</h2>
 			<p>Add the <code>data-corners="false"</code> attribute to get an inset collapsible set without rounded corners.</p>
-
 
 			<div data-demo-html="true">
 				<div data-role="collapsible-set" data-corners="false" data-theme="c" data-content-theme="d">
@@ -194,7 +176,6 @@
 				</div>
 			</div><!--/demo-html -->
 
-
 			<h2 id="accordion-theme">Theme</h2>
 
 			<p>Add a <code>data-theme</code> attribute to the set to set the color of each collapsible header in a set. Add the <code>data-content-theme</code> attribute to specify the color of the collapsible content. </p>
@@ -211,8 +192,6 @@
 					</div>
 				</div>
 			</div><!--/demo-html -->
-
-
 
 			<p>To have individual sections in a group styled differently, add <code>data-theme</code> and <code>data-content-theme</code> attributes to specific collapsibles.</p>
 
@@ -232,9 +211,6 @@
 					</div>
 				</div>
 		</div><!--/demo-html -->
-
-
-
 
 	</div><!-- /content -->
 

@@ -18,7 +18,6 @@
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-
     <div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
         <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
@@ -29,7 +28,6 @@
     <div data-role="content" class="jqm-content">
 
             <h1>Collapsibles <a href="http://api.jquerymobile.com/collapsible/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
-
 
             <p class="jqm-intro">Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.
             </p>
@@ -70,7 +68,6 @@
                 </ul>
             </div>
         </div><!--/demo-html -->
-
 
         <h2>Mini sized</h2>
 
@@ -144,8 +141,6 @@
             </div>
         </div><!--/demo-html -->
 
-
-
         <h2>Set of individual collapsibles</h2>
 
         <p>This is an example of a series of individual collapsibles. The difference with a "Collapsible Set" is that multiple collapsible rows can be open at once.</p>
@@ -216,7 +211,6 @@
             </div>
         </div><!--/demo-html -->
 
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -225,7 +219,6 @@
 	</div><!-- /footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-
 
 </div><!-- /page -->
 </body>

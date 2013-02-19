@@ -96,10 +96,6 @@
 			</a></li>
 		</ul>
 
-
-
-
-
 			<div class="content-secondary">
 
 				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">

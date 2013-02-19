@@ -23,8 +23,6 @@
 
 	<div data-role="content" class="jqm-content">
 
-
-
         	<form>
 
                 <div data-demo-html="true">
@@ -196,7 +194,6 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-
 
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
@@ -374,8 +371,6 @@
                 </div><!--/demo-html -->
 
 			</form>
-
-
 
 	</div><!-- /content -->
 

@@ -176,8 +176,6 @@
 
 		</div><!-- /data-demo -->
 
-
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">

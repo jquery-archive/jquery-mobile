@@ -26,13 +26,10 @@
 
 			<h1>Headers <a href="http://api.jquerymobile.com/header/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">The header is a toolbar at the top of the page that usually contains the page title text and optional buttons positioned to the left and/or right of the title for navigation or actions.
 			</p>
 
-
 			<h2>Header markup</h2>
-
 
 			<p>The title text is normally an H1 heading element but it's possible to use any heading level (H1-H6) to allow for semantic flexibility. All heading levels are styled identically by default to maintain visual consistency.</p>
 
@@ -41,7 +38,6 @@
 					<h1>Page Title</h1>
 				</div>
 			</div><!-- /demo-html -->
-
 
 			<h2>Fixed position</h2>
 
@@ -66,10 +62,6 @@
 
 			<p> Headers can optionally be positioned as <a href="bars-fixed.php">fixed</a> so they remain at the top of the screen at all times instead of scrolling with the page.</p>
 
-
-
-
-
 			<h2>Buttons</h2>
 
 			<p>The header plugin looks for immediate children of the header container, and automatically sets the first link in the left button slot and the second link in the right. In this example, the 'Cancel' button will appear in the left slot and 'Save' will appear in the right slot based on their sequence in the source order. </p>
@@ -81,8 +73,6 @@
 					<a href="#" data-icon="bars">Menu</a>
 				</div>
 			</div><!-- /demo-html -->
-
-
 
 			<h2>Making buttons visually stand out</h2>
 
@@ -96,8 +86,6 @@
 				</div>
 			</div><!-- /demo-html -->
 
-
-
 			<h2>Button position classes</h2>
 
 			<p>The button position can also be controlled by adding classes to the button anchors, rather than relying on source order. This is especially useful if you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p>
@@ -109,13 +97,9 @@
 				</div>
 			</div><!-- /demo-html -->
 
-
-
-
 			<h2>Buttons in toolbars without a heading</h2>
 
 			<p>The heading in the header bar has some margin that will give the bar its height. If you choose not to use a heading, you will need to add an element with <code>class="ui-title"</code> so that the bar can get the height and display correctly.</p>
-
 
 			<div data-demo-html="true">
 				<div data-role="header" >
@@ -123,7 +107,6 @@
 					<span class="ui-title"></span>
 				</div>
 			</div><!-- /demo-html -->
-
 
 		<h2>Adding Back buttons</h2>
 
@@ -145,13 +128,11 @@
 
 			<p>It's also possible to create custom bars without using the header data-role at all. For example, start with any container and add the <code>ui-bar</code> class to apply standard bar padding and add the <code>ui-bar-b</code> class to assign the bar swatch styles from your theme. (The "b" can be any swatch letter.)</p>
 
-
 			<div data-demo-html="true">
 				<div class="ui-bar ui-bar-b">
 					<h3>I'm just a div with bar classes and a mini inline <a href="#" data-role="button" data-inline="true" data-mini="true">Button</a></h3>
 				</div>
 			</div><!-- /demo-html -->
-
 
 				<p>Note that <code>.ui-bar</code> should not be added to header or footer bars that span the full width of the page, as the additional padding will cause a full-width element to break out of its parent container. To add padding inside of a full-width toolbar, wrap the toolbar's contents in an element and apply the padding to that element instead.</p>
 

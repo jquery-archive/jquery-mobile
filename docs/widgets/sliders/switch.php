@@ -35,12 +35,8 @@
 
 			<h1>Flip switch <a href="http://api.jquerymobile.com/slider/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element.
 			</p>
-
-
-
 
 				<h2>Basic switch</h2>
                 <div data-demo-html="true">
@@ -52,7 +48,6 @@
                     </select>
 				</form>
                 </div><!-- /demo-html -->
-
 
 				<h2>Theme</h2>
                 <div data-demo-html="true">
@@ -131,7 +126,6 @@
 
                 <h2>Fieldcontain, hidden label</h2>
 
-
                 <div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
                         <label for="flip-8">Flip toggle switch:</label>
@@ -144,7 +138,6 @@
                 </div><!-- /demo-html -->
 
                 <h2>Fieldcontain, hidden label, mini</h2>
-
 
                 <div data-demo-html="true">
 				<form>
@@ -191,9 +184,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
-
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -202,7 +192,6 @@
 	</div><!-- /footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-
 
 </div><!-- /page -->
 </body>

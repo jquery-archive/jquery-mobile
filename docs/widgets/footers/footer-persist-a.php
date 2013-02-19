@@ -51,8 +51,6 @@
 		<h3>A note about transitions</h3>
 		<p>The slide, slideup, slidedown, fade or none <a href="../pages/page-transitions.html">page transitions</a> all work great with persistent fixed toolbars. However, intensive 3D transitions like flip, turn, and flow can cause positioning and animation performance issues with this technique so we don't recommend using them.</p>
 
-
-
 		<div class="content-secondary">
 
 				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">

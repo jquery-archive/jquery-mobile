@@ -26,11 +26,8 @@
 
 			<h1>Footers <a href="http://api.jquerymobile.com/footer/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">The footer is a toolbar at the bottom of the page that can contain a wide range of content, from for elements to navbars.
 			</p>
-
-
 
 			<h2>Footer markup</h2>
 
@@ -44,17 +41,11 @@
 				</div>
 			</div><!-- /demo-html -->
 
-
-
 			<p>The page footer is very similar to the header in terms of options and configuration. The primary difference is that the footer is designed to be less structured than the header to allow more flexibility, so the framework doesn't automatically reserve slots for buttons to the left or right as it does in headers. Since footers do not have the same prescriptive markup conventions as headers, we recommend using layout <a href="../grids/">grids</a> or writing custom styles to achieve the design you want.</p>
-
-
 
 				<p>Any link or valid <a href="../buttons/">button markup</a> added to the footer will automatically be turned into a button. To save space, buttons in toolbars are automatically set to inline styling so the button is only as wide as the text and icons it contains.  </p>
 
 				<p>By default, toolbars don't have any padding to accommodate nav bars and other widgets. To include padding on the bar, add a <code>class="ui-bar"</code> to the footer.</p>
-
-
 
 			</p>Note that <code>.ui-bar</code> should not be added to header or footer bars that span the full width of the page, as the additional padding will cause a full-width element to break out of its parent container. To add padding inside of a full-width toolbar, wrap the toolbar's contents in an element and apply the padding to that element.</p>
 
@@ -76,14 +67,9 @@
 				</div>
 			</div>
 
-
-
-
-
 			<h2>Adding form elements</h2>
 
 			<p><a href="../forms/">Form</a> elements and other content can also be added to toolbars. Here is an example of a <a href="../selects/">select</a> menu inside a footer bar. We recommend using mini-sized form elements in toolbars by adding the <code>data-mini="true"</code> attribute:</p>
-
 
 			<div data-role="footer" class="ui-bar">
 				<label for="select-choice-1">Shipping:</label>
@@ -94,11 +80,6 @@
 					<option value="overnight">Overnight</option>
 				</select>
 			</div>
-
-
-
-
-
 
 					<h2>Fixed &amp; Persistent footers</h2>
 					<p>In situations where the footer is a global navigation element, you may want it to appear <a href="../headers/bars-fixed.html">fixed</a> so it doesn't scroll out of view. It's also possible to make a fixed toolbar <a href="footer-persist-a.html">persistent</a> so it appears to not move between <a href="../transitions/" data-ajax="false">page transitions</a>. This can be accomplished by using the persistent footer feature included in jQuery Mobile.</p>

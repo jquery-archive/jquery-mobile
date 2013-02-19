@@ -45,8 +45,6 @@
 
       <p>The technique used in this <a href="backbone-require.html" rel="external">example page</a> is by no means the only technique available, but it is one of the most elegant.  The Backbone.js router is used exclusively to handle all hashchange events, and the jQuery Mobile <code>$.mobile.changePage()</code> method is used to programmatically change the page.</p>
 
-
-
       <p>Below are two internal jQuery Mobile properties that are turned off to allow this to happen:</p>
 
       <ul>
@@ -145,7 +143,6 @@
 <p>
 The <a href="backbone-require.html" rel="external">example page</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously.  Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.
 </p>
-
 
 	</div><!-- /content -->
 

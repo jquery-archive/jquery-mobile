@@ -23,8 +23,6 @@
 
 	<div data-role="content" class="jqm-content">
 
-
-
 			<h2>Non-inset listviews</h2>
 
 			<h3>Read-only</h3>
@@ -416,8 +414,6 @@
 					</li>
 				</ul>
 			</div><!--/demo-html -->
-
-
 
 	</div><!-- /content -->
 

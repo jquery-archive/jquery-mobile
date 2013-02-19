@@ -18,7 +18,6 @@
 	<body>
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-
 	    <div data-role="header" class="jqm-header">
 			<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
 	        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
@@ -29,7 +28,6 @@
 	    <div data-role="content" class="jqm-content">
 
         <h1>Controlgroups <a href="http://api.jquerymobile.com/controlgroup/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
-
 
         <p class="jqm-intro">Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.
         </p>
@@ -129,8 +127,6 @@
 					</fieldset>
 				</form>
 			</div><!--/demo-html -->
-
-
 
 				<h2>Radio button</h2>
 

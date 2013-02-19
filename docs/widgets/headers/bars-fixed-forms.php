@@ -103,9 +103,6 @@
 				<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
 			</div>
 
-
-
-
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">

@@ -31,8 +31,6 @@
 
 			<p class="jqm-intro">jQuery Mobile has no way to know when you have injected content into a page. To let jQuery Mobile know you have injected content that must be enhanced, you need to either make sure the plugins are called to enhance the new elements or <code>trigger("create")</code> on the parent container so you don't have to call each plugin manually.</p>
 
-
-
 			<p>The page plugin dispatches a <code>pageInit</code> event, which most widgets use to auto-initialize themselves. As long as a widget plugin script is referenced, it will automatically enhance any instances of the widgets it finds on the page.</p>
 			<p>However, if you generate new markup client-side or load in content via AJAX and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page <code>div</code> itself), saving you the task of manually initializing each plugin (listview button, select, etc.).</p>
 
@@ -59,10 +57,7 @@ $("#submitButton").trigger("create");
 
 			<p>For example, if you had a page where you dynamically appended a new unordered list with <code>data-role=listview</code> attribute after page creation, triggering <code>create</code> on a parent element of that list would transform it into a listview styled widget. If more list items were then programmatically added, calling the listview&#8217;s <code>refresh</code> method would update just those new list items to the enhanced state and leave the existing list items untouched.</p>
 
-
-
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-
 
 	</div><!-- /content -->
 

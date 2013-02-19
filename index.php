@@ -48,7 +48,6 @@
         	<?php include( 'docs/nav-widgets.php' ); ?>
         </ul>
 
-
 	</div><!-- /content -->
 	
 	<div data-role="footer" class="jqm-footer">

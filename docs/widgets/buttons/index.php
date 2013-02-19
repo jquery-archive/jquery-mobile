@@ -26,12 +26,8 @@
 
 			<h1>Buttons <a href="http://api.jquerymobile.com/button/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons.
 			</p>
-
-
-
 
 			<h2 id="button-markup">Basic markup</h2>
 
@@ -47,7 +43,6 @@
 				</form>
 			</div><!--/demo-html -->
 
-
 			<h2 id="button-inline">Inline</h2>
 
 			<p>If you have multiple buttons that should sit side-by-side on the same line, add the <code>data-inline="true"</code> attribute to each button. This will style the buttons to be the width of their content so the buttons sit on the same line. </p>
@@ -58,7 +53,6 @@
 					<a href="#" data-role="button" data-inline="true">False</a>
 				</p>
 			</div><!--/demo-html -->
-
 
 			<h2 id="button-theme">Theme</h2>
 
@@ -74,7 +68,6 @@
 				</p>
 			</div><!--/demo-html -->
 
-
 			<h2 id="button-mini">Mini</h2>
 
 			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the button to create a mini version</a>. </p>
@@ -85,9 +78,6 @@
 					<a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Place order</a>
 				</p>
 			</div><!--/demo-html -->
-
-
-
 
 			<h2 id="button-icons">Icons</h2>
 
@@ -115,9 +105,6 @@
 				<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="c" data-inline="true">Bars</a>
 				<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="c" data-inline="true">Edit</a>
 			</div><!--/demo-html -->
-
-
-
 
 			<h2 id="button-icon-position">Icon position</h2>
 
@@ -175,8 +162,6 @@
 				<a href="#" data-role="button" data-icon="gear" data-shadow="false" data-theme="b">No button shadow</a>
 				<a href="#" data-role="button" data-icon="gear" data-iconshadow="false" data-theme="b">No icon disc shadow</a>
 			</div><!--/demo-html -->
-
-
 
 			<h2>Disabled</h2>
 

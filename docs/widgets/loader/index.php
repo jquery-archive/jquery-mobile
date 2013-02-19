@@ -46,10 +46,8 @@
 
 			<h1>Loader <a href="http://api.jquerymobile.com/page-loading/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">A small loading overlay displayed when jQuery Mobile loads in content via AJAX, or for use in custom notifications.
 			</p>
-
 
 			<h2>Standard loader</h2>
 			<p>The loader overlay can be icon only, text only or both. These demos rely on a custom JavaScript, view the source to see how it works.</p>
@@ -81,17 +79,9 @@
 				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
 			</div><!--/demo-html -->
 
-
-
-
-
-
-
-
 		<div data-demo-html="true">
 
       	</div><!-- /data-demo -->
-
 
 		</div><!-- /content -->
 
@@ -101,7 +91,6 @@
 		</div><!-- /footer -->
 
 	<?php include( '../../global-nav.php' ); ?>
-
 
 	</div><!-- /page -->
 	</body>

@@ -32,7 +32,6 @@
         	<?php include( '../nav-examples.php' ); ?>
 		</ul>
 
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">

@@ -46,9 +46,7 @@
 
 </div><!-- /page -->
 
-
 <!-- The markup below is a copy of the actual demo pages just so we can show the markup in the "view source" -->
-
 
 <div data-role="page" id="city" class="demo-page" data-dom-cache="true" data-theme="a" data-prev="prevCity" data-next="nextCity">
 

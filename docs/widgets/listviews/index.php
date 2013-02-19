@@ -31,13 +31,10 @@
 
 	<div data-role="content" class="jqm-content">
 
-
 			<h1>Listviews <a href="http://api.jquerymobile.com/listview/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
-
 
 			<p class="jqm-intro">A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
 			</p>
-
 
 			<h2 id="list-ul">Read-only, unordered</h2>
 			<p>A listview is a simple unordered list containing linked list items with a <code> data-role="listview"</code> attribute.</p>
@@ -100,7 +97,6 @@
 				</ul>
 			</div><!--/demo-html -->
 
-
 			<h2 id="list-reveal">Filter reveal</h2>
 			<p>The filter reveal feature makes is easy to build a simple autocomplete with local data. When a filterable list has the <code>data-filter-reveal="true"</code> attribute, it will auto-hide all the list items when the search field is blank. The <code>data-filter-placeholder</code> attribute can be added to specify the placeholder text for the filter. If you need to search against a long list of values, we provide a way to create a filter with a <a href="listview-filter-autocomplete.php" data-ajax="false">remote data source</a>.</p>
 			<div data-demo-html="true">
@@ -141,8 +137,6 @@
 					<li><a href="index.html">Culver James</a></li>
 				</ul>
 			</div><!--/demo-html -->
-
-
 
 			<h2 id="list-count">Count bubbles</h2>
 			<p>To add a count indicator to the right of the list item, wrap the number in an element with a class of <code>ui-li-count</code>. The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list and specifying a swatch letter. </p>
@@ -237,7 +231,6 @@
 				</div>
 			</div><!--/demo-html -->
 
-
 			<h2 id="list-formatted">Formatted content</h2>
 
 			<p>To add text hierarchy, use headings to increase font emphasis and use paragraphs to reduce emphasis. Supplemental information can be added to the right of each list item by wrapping content in an element with a class of <code>ui-li-aside</code></p>
@@ -266,7 +259,6 @@
 					</a></li>
 				</ul>
 			</div><!--/demo-html -->
-
 
 			<h2 id="list-theme">Theme</h2>
 
@@ -307,7 +299,6 @@
 					<li><a href="#">Ferrari</a></li>
 				</ul>
 			</div><!--/demo-html -->
-
 
 			<h2 id="list-forms">Forms</h2>
 
@@ -354,7 +345,6 @@
 					</ul>
 				</form>
 			</div><!--/demo-html -->
-
 
 			<h2 id="list-collapse">Collapsible listview</h2>
 
@@ -438,7 +428,6 @@
 				</div>
 			</div><!--/demo-html -->
 
-
 			<h2 id="list-full">Full width collapsible listview</h2>
 
 			<p>Setting <code>data-inset="false"</code> on a collapsible or a collapsible set makes the collapsible full width (non-inset), like a full width listview.</p>
@@ -501,9 +490,6 @@
 					</div>
 				</div>
 			</div><!--/demo-html -->
-
-
-
 
 			<h2 id="list-nested">Nested</h2>
 

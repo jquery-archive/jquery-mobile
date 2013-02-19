@@ -26,11 +26,8 @@
 
 			<h1>Grids <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">The jQuery Mobile framework provides a simple way to build CSS-based columns that can also be responsive.
 			</p>
-
-
 
 			<h2>Grid basics</h2>
 
@@ -55,13 +52,6 @@
 				</fieldset>
 			</div><!--/demo-html -->
 
-
-
-
-
-
-
-
 			<h2>Three-column grids</h2>
 			<p>The other grid layout configuration uses <code>class=ui-grid-b</code> on the parent, and 3 child container elements, each with its respective <code>ui-block-a/b/c</code> class, to create a three-column layout (33/33/33%). </p>
 
@@ -73,8 +63,6 @@
 				</div><!-- /grid-b -->
 			</div><!--/demo-html -->
 
-
-
 			<p>And an example of a 3 column grid with buttons inside:</p>
 
 			<div data-demo-html="true">
@@ -84,8 +72,6 @@
 					<div class="ui-block-c"><button type="submit" data-theme="b">Yes</button></div>
 				</fieldset>
 			</div><!--/demo-html -->
-
-
 
 			<h2>Four-column grids</h2>
 
@@ -99,8 +85,6 @@
 					<div class="ui-block-d"><div class="ui-bar ui-bar-e" style="height:60px">D</div></div>
 				</div><!-- /grid-c -->
 			</div><!--/demo-html -->
-
-
 
 			<h2>Five-column grids</h2>
 			<p>A five-column, 20/20/20/20/20% grid is created by specifying <code>class=ui-grid-d</code> on the parent and adding a fifth block. </p>
@@ -133,7 +117,6 @@
 			</div><!-- /grid-c -->
 			</div><!--/demo-html -->
 
-
 			<h2>Grid solo class</h2>
 			<p>Please note that the framework adds left and right margin to buttons in a grid. For a single button you can use a container with class <code>ui-grid-solo</code> and wrap the button in a div with class <code>ui-block-a</code> like the example below. This way the button will get the same margin.</p>
 
@@ -147,7 +130,6 @@
 					<div class="ui-block-a"><button type="button" data-theme="b">More</button></div>
 				</div>
 			</div><!--/demo-html -->
-
 
 			<h2>Responsive grids</h2>
 
@@ -169,7 +151,6 @@
 <strong>}</strong>
 </code></pre>
 
-
 		<h2>Breakpoint preset</h2>
 
 		<p>To apply a preset breakpoint to stack grids below 35em (560px), add the <code>.ui-responsive</code> class to the grid container.</p>
@@ -184,7 +165,6 @@
 			<div class="ui-block-b"><div class="ui-body ui-body-d">Block B</div></div>
 		</div><!-- /grid-a -->
 
-
 		<h3>Grid B (33/33/33)</h3>
 
 		<div class="ui-grid-b ui-responsive">
@@ -192,7 +172,6 @@
 			<div class="ui-block-b"><div class="ui-body ui-body-d">Block B</div></div>
 			<div class="ui-block-c"><div class="ui-body ui-body-d">Block C</div></div>
 		</div><!-- /grid-b -->
-
 
 		<h3>Grid C (25/25/25/25)</h3>
 
@@ -202,7 +181,6 @@
 			<div class="ui-block-c"><div class="ui-body ui-body-d">C</div></div>
 			<div class="ui-block-d"><div class="ui-body ui-body-d">D</div></div>
 		</div><!-- /grid-c -->
-
 
 		<h3>Grid D (20/20/20/20/20)</h3>
 
@@ -214,9 +192,7 @@
 			<div class="ui-block-e"><div class="ui-body ui-body-d">E</div></div>
 		</div><!-- /grid-d -->
 
-
       	</div><!-- /data-demo -->
-
 
 	</div><!-- /content -->
 

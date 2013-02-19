@@ -14,8 +14,6 @@
 </head>
 <body>
 
-
-
 	<div data-role="page" id="page-success" data-dom-cache="true"><!-- page-->
 		<div data-role="header" data-theme="a">
 			<h1>Page</h1>

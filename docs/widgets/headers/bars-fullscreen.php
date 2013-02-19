@@ -38,10 +38,7 @@
 					<h1>Fullscreen Fixed Footer</h1>
 			</div>
 
-
 		<?php include( '../../global-nav.php' ); ?>
-
-
 
 			</div><!-- /page -->
 

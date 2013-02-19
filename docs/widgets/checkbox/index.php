@@ -14,7 +14,6 @@
 </head>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
 		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
@@ -28,9 +27,6 @@
 
 			<p class="jqm-intro">Checkboxes are used to provide a list of options where more than one can be selected.
 			</p>
-
-
-
 
 			<h2 id="check-markup">Basic markup</h2>
 
@@ -55,7 +51,6 @@
             	</form>
 			</div><!--/demo-html -->
 
-
 			<h2 id="check-vert">Vertical group</h2>
 
 			<p>Typically, there are multiple checkboxes listed under a question title. To visually integrate multiple checkboxes into a grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the <code>fieldset</code>.</p>
@@ -73,7 +68,6 @@
 					</fieldset>
             	</form>
 			</div><!--/demo-html -->
-
 
 			<h2 id="check-horiz">Horizontal group</h2>
 
@@ -93,11 +87,9 @@
             	</form>
 			</div><!--/demo-html -->
 
-
 			<h2 id="check-iconpos">Icon position</h2>
 
 			<p>To swap the position of the check icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the fieldset to create a mini version. </p>
-
 
 				<div data-demo-html="true">
 					<form>
@@ -112,8 +104,6 @@
 					</fieldset>
 				</form>
 				</div><!--/demo-html -->
-
-
 
 			<h2 id="check-theme">Theme</h2>
 
@@ -134,7 +124,6 @@
 			</div><!--/demo-html -->
 
 			</form>
-
 
 	</div><!-- /content -->
 

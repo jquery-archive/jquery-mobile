@@ -63,8 +63,6 @@
 					<li><a href="#">Sawyer Wakefield</a></li>
 				</ul>
 
-
-
 	</div><!-- /content -->
 
 	<div data-role="footer" data-id="foo1" data-position="fixed">
@@ -79,7 +77,6 @@
 	</div><!-- /footer -->
 
 	<?php include( '../../global-nav.php' ); ?>
-
 
 	</div><!-- /page -->
 	</body>

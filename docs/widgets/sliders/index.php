@@ -35,11 +35,8 @@
 
 			<h1>Slider <a href="http://api.jquerymobile.com/slider/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="rangeslider.php">range sliders</a> or <a href="switch.php">flip switches</a>.
 			</p>
-
-
 
                 <h2>Basic slider</h2>
 
@@ -49,7 +46,6 @@
                     <input type="range" name="slider-1" id="slider-1" min="0" max="100" value="50">
 				</form>
                 </div><!-- /demo-html -->
-
 
                 <h2>Step attribute</h2>
 
@@ -78,7 +74,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
                 <h2>Mini sized</h2>
 
                 <div data-demo-html="true">
@@ -87,7 +82,6 @@
                     <input type="range" name="slider-4" id="slider-4" data-mini="true" min="0" max="100" value="50">
 				</form>
                 </div><!-- /demo-html -->
-
 
                 <h2>Disabled</h2>
 
@@ -98,7 +92,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
                 <h2>Label hidden</h2>
 
                 <div data-demo-html="true">
@@ -107,7 +100,6 @@
                     <input type="range" name="slider-6" id="slider-6" min="0" max="100" value="50">
 				</form>
                 </div><!-- /demo-html -->
-
 
                 <h2>Fieldcontain</h2>
 
@@ -120,8 +112,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
-
                 <h2>Fieldcontain, mini sized</h2>
 
                 <div data-demo-html="true">
@@ -132,7 +122,6 @@
 					</div>
 				</form>
                 </div><!-- /demo-html -->
-
 
                 <h2>Fieldcontain, hide label</h2>
 
@@ -145,7 +134,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
                 <h2>Fieldcontain, hide label, mini sized</h2>
 
                 <div data-demo-html="true">
@@ -156,7 +144,6 @@
 					</div>
 				</form>
                 </div><!-- /demo-html -->
-
 
                 <h2>Grid</h2>
 
@@ -191,9 +178,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
-
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -202,7 +186,6 @@
 	</div><!-- /footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-
 
 </div><!-- /page -->
 </body>

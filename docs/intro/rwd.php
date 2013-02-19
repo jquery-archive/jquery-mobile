@@ -60,7 +60,6 @@
 
       	<p>Always look for ways to limit the number of server requests on a page by concatenating files into a single request and always use minification and compression (gzip). </p>
 
-
 		<h2>Responsive in jQuery Mobile</h2>
 
 		<p>jQuery Mobile has always been designed to work within a responsive context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
@@ -75,7 +74,6 @@
 			<li><strong>Use <code>min-width</code> breakpoints that build on top of the mobile styles.</strong> The first breakpoint applies layout adjustments on top of the standard mobile styles so these can be fairly lightweight. Additional <code>min-width</code> breakpoints can be added for even wider screens that each build on the previous breakpoint styles.</li>
 			<li><strong>To override framework styles only for smaller screens, use a <code>max-width</code> breakpoint instead.</strong>  This allows you to constrain your style overrides to only apply below a certain screen width. Above this width, all the normal styles will apply so this is good for certain types of overrides.</li>
 		</ul>
-
 
 		<h2>Putting it together</h2>
 
@@ -92,14 +90,12 @@ a:link { color:purple; }
 .main,
 .sidebar { display:block; width:100%; }
 
-
 <strong>/* First breakpoint at 576px */
 /* Inherits mobile styles, but floats containers to make columns */
 </strong>@media all and (min-width: 36em){
 	.main { float: left; width:60%; }
 	.sidebar { float: left; width:40%; }
 }
-
 
 <strong>/* Second breakpoint at 800px */
 /* Adjusts column proportions, tweaks base H1 */
@@ -111,8 +107,6 @@ a:link { color:purple; }
 	H1 { color: blue; font-size:1.2em }
 }
 </code></pre>
-
-
 
 	</div><!-- /content -->
 

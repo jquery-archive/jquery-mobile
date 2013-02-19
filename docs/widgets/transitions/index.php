@@ -39,7 +39,6 @@
 
 			<h2>Page transitions</h2>
 
-
 			<div data-demo-html="true" data-demo-css="true">
 			<table margin="0">
 				<tr>
@@ -106,7 +105,6 @@
 	                .ui-page { -webkit-backface-visibility: hidden; }
 	            </code>
 
-
 	<p><strong>Only seeing fade transitions?</strong> To view all transition types, you must be on a browser that supports 3D transforms. By default, devices that lack 3D support (such as Android 2.x) will fallback to "fade" for all transition types. This behavior is configurable (see below).</p>
 
 	<p><strong>Transitions were originally inspired by <a href="http://www.jqtouch.com/">jQtouch</a></strong> They've since been rebuilt, but props to David Kaneda and Jonathan Stark for the initial guidance.</p>
@@ -123,7 +121,6 @@
 			<h2>Global configuration</h2>
 
 			<p>Set the <code>defaultPageTransition</code> global option if you'd prefer a different default transition. Dialogs have a different option called <code>defaultDialogTransition</code> that can also be configured.</p>
-
 
 			<h2>Browser support</h2>
 			<p>All transitions are built with CSS keyframe animations and include <code>-webkit</code> vendor prefixed rules for iOS, Blackberry, Android, Safari and Chrome browsers, <code>-moz</code> rules for Firefox browsers, and unprefixed rules for Windows Phone 8 and IE10. Support for keyframe animations and transition smoothness is determined by the browser version and hardware and will safely fall back to no transition if animations aren't supported. To proactively exclude transition in situations with poor performance, we exclude browsers that lack 3D transforms and provide a fallback transition and apply a max width for when transitions are applied.</p>
@@ -149,10 +146,6 @@
 			<h2>Creating custom transitions</h2>
 			<p>jQuery Mobile allows for the addition of custom transitions to the <code>$.mobile.transitionHandlers</code> dictionary so you can expand the selection of transitions on your site or app.
 
-
-
-
-
 		</div><!-- /content -->
 
 		<div data-role="footer" class="jqm-footer">
@@ -161,7 +154,6 @@
 		</div><!-- /footer -->
 
 	<?php include( '../../global-nav.php' ); ?>
-
 
 	</div><!-- /page -->
 	</body>

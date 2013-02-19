@@ -34,7 +34,6 @@
 
 		<div data-demo-html="#demo-page" data-demo-js="#demo-script" data-demo-css="#demo-style"></div><!--/demo-html -->
 
-
     </div><!-- /content -->
 
     <div data-role="footer" class="jqm-footer">
@@ -46,9 +45,7 @@
 
 </div><!-- /page -->
 
-
 <!-- The markup below is a copy of the actual demo page just so we can show the markup in the "view source" -->
-
 
 <div data-role="page" id="demo-page">
 

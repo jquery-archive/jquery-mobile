@@ -26,8 +26,6 @@
 
 	<div data-role="content" class="jqm-content">
 
-
-
 			<h2>Inset, individual collapsible</h2>
 
 			<div data-demo-html="true">
@@ -248,8 +246,6 @@
 					</div><!-- /collapsible -->
 				</div>
 			</div><!--/demo-html -->
-
-
 
 	</div><!-- /content -->
 

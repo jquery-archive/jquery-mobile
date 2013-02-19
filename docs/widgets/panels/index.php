@@ -27,7 +27,6 @@
 
 	<!-- Note: all other panels are at the end of the page, scroll down  -->
 
-
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
 		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
@@ -39,14 +38,9 @@
 
 		<h1>Panels <a href="http://api.jquerymobile.com/panel/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 		<p class="jqm-intro">Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
 
-
-
-
 		<h2 id="panel-examples">Panel examples</h2>
-
 
 		<p><strong>Left</strong> panel examples</p>
 		<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true">Overlay</a>
@@ -58,14 +52,11 @@
 		<a href="#rightpanel1" data-role="button" data-inline="true" data-mini="true">Reveal</a>
 		<a href="#rightpanel2" data-role="button" data-inline="true" data-mini="true">Push</a>
 
-
 		<p>The <strong>position</strong> of the panel on the screen is set by the <code>data-position</code> attribute. The defaults to <code>left</code>, meaning it will appear from the left edge of the screen. Specify <code>data-position="right"</code> for it to appear from the right edge instead.</p>
 
 		<p>The <strong>display mode</strong> of the panel is set by the <code>data-display</code> attribute. The defaults to <code>reveal</code>, meaning the panel will sit under the page and reveal as the page slides away. Specify <code>data-display="overlay"</code> for the panel to appear on top of the page contents. A third mode, <code>data-display="push"</code> animates both the panel and page at the same time.</p>
 
-
 		<h2 id="panel-markup">Where panel markup goes in the markup</h2>
-
 
 		<p>A panel must be a sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>before</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
 
@@ -87,9 +78,6 @@
 
 		<p>Alternately, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want to page content to read for people experiencing the page in a C-grade device (HTML only) or for a screen reader.</p>
 
-
-
-
 		<h2 id="panel-dynamic">Dynamic content</h2>
 
 		<p>When you dynamically add content to a panel or make hidden content visible while the panel is open, you have to trigger the <code>updatelayout</code> event on the panel.</p>
@@ -102,12 +90,9 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<h2 id="panel-open">Opening a panel</h2>
 
-
 		<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above). This instructs the framework to bind the link to the panel. This link will toggle the visibility of the panel so tapping it will open the panel, and tapping it again will close it.</p>
 
-
 		<a href="#defaultpanel" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
-
 
 		<h2 id="panel-close">Closing a panel</h2>
 
@@ -115,20 +100,17 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>By default, panels can also be closed clicking outside the panel onto the page contents. To prevent this behavior, add the <code>data-dismissible="false"</code> attribute to the panel. It's possible to have the panel and page sit side-by-side at wider screen widths and prevent the click-out-to-close behavior only above a certain screen width by applying a media query. See the responsive section below for details. </p>
 
-
 		<p>It's common to also add a close button inside the panel. To add the link that will close the panel, add the <code>data-rel="close"</code> attribute to tell the framework to close that panel when clicked. It's important to ensure that this link also makes sense if JavaScript isn't available, so we recommend that the <code>href</code> points to the ID of the page where the user should jump to when closing. For example, if the button to open the panel is in the header bar that has and ID of <code>my-header</code>, the close link in the panel should be:</p>
 
 <pre><code>
 &lt;a href=&quot;#my-header&quot; <strong>data-rel=&quot;close&quot;</strong>&gt;Close panel&lt;/a&gt;
 </code></pre>
 
-
 		<h2 id="panel-animate">Panel animations</h2>
 
 		<p>Panels will animate if the browser supports 3D transforms, the same criteria for CSS animation support we use for page transitions. Panel animations use <code>translate3d(x,y,z)</code> CSS transforms to ensure they are hardware accelerated and smooth.</p>
 
 		<p>The <code>animate</code> option allows you to turn off panel animations for all devices. To turn off animations via markup, add the  <code>data-animate="false"</code> attribute to the panel container.</p>
-
 
 		<h2 id="panel-positioning">Panel positioning</h2>
 
@@ -147,7 +129,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		<p>Other than the theme background, width and 100% height styles, panels have very little styling on their own. The default theme for panels is "c". You can set a different theme for the panel by adding a <code>data-theme</code> to the panel container, or set <code>data-theme="none"</code> and add your own classes to style it as needed.</p>
 
 		<p>Note that adding padding, borders, or margins directly to the panel container will alter the overall dimensions and could cause the positioning and animation to be affected. To avoid this, apply styles to the panel content wrapper (<code>.ui-pannel-inner</code>).</p>
-
 
 		<h2 id="panel-responsive">Making the panel responsive</h2>
 
@@ -191,16 +172,12 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
         <a href="panel-fixed.php" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Panel responsive example</a>
 
-
-
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-
 
 	<!-- Here are a bunch of panels at the end, just before the close page tag  -->
 
@@ -214,7 +191,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 	</div><!-- /leftpanel1 -->
 
-
 	<!-- leftpanel2  -->
 	<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-theme="a">
 
@@ -224,7 +200,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /leftpanel2 -->
-
 
 	<!-- leftpanel3  -->
 	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
@@ -236,7 +211,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 	</div><!-- /leftpanel3 -->
 
-
 	<!-- rightpanel1  -->
 	<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
 
@@ -246,7 +220,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /rightpanel1 -->
-
 
 	<!-- rightpanel2  -->
 	<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-theme="b">
@@ -258,7 +231,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 	</div><!-- /rightpanel2 -->
 
-
 	<!-- rightpanel3  -->
 	<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-theme="b">
 
@@ -269,10 +241,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 	</div><!-- /rightpanel3 -->
 
-
-
 <?php include( '../../global-nav.php' ); ?>
-
 
 </div><!-- /page -->
 </body>

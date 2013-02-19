@@ -28,9 +28,6 @@
 			<p class="jqm-intro">Radio buttons are used to provide a list of options where only a single option can be selected.
 			</p>
 
-
-
-
 			<h2 id="radio-markup">Basic markup</h2>
 
 			<p>To create a set of radio buttons, add an <code>input</code> with a <code>type="radio"</code> attribute and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the <code>id</code> of the <code>input</code> so they are semantically associated.</p>
@@ -45,8 +42,6 @@
                     <input type="radio" name="radio-choice-0" id="radio-choice-0b" class="custom" />
             	</form>
 			</div><!--/demo-html -->
-
-
 
 			<h2 id="radio-vert">Vertical group</h2>
 
@@ -66,7 +61,6 @@
             	</form>
 			</div><!--/demo-html -->
 
-
 			<h2 id="radio-horiz">Horizontal group</h2>
 
 			<p>Radio buttons can also be used for grouped button sets where more than one button can be selected at once, such as the bold, italic and underline button group seen in word processors. To make a horizontal button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
@@ -84,7 +78,6 @@
 					</fieldset>
             	</form>
 			</div><!--/demo-html -->
-
 
 		<h2 id="radio-mini">Mini size</h2>
 
@@ -104,8 +97,6 @@
             	</form>
 			</div><!--/demo-html -->
 
-
-
 			<h2 id="radio-iconpos">Icon position</h2>
 
 			<p>To swap the position of the radio icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the fieldset to create a mini version. </p>
@@ -123,8 +114,6 @@
 					</fieldset>
             	</form>
 			</div><!--/demo-html -->
-
-
 
 			<h2 id="radio-theme">Theme</h2>
 
@@ -144,10 +133,6 @@
             	</form>
 			</div><!--/demo-html -->
 
-
-
-
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -156,7 +141,6 @@
 	</div><!-- /footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-
 
 </div><!-- /page -->
 </body>

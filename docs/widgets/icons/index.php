@@ -29,7 +29,6 @@
         <p class="jqm-intro">A set of built-in icons in jQuery Mobile can be applied to buttons, collapsibles, lists and more.
         </p>
 
-
         <h2>Icon set</h2>
 
         <p>The following <code> data-icon</code> attributes can be referenced to create the icons shown below:</p>
@@ -77,7 +76,6 @@
             <a href="index.html" data-role="button" data-icon="search">My button</a>
         </div><!--/demo-html -->
 
-
 		<h2>Icon positioning</h2>
 
 		<p>By default, all icons in buttons are placed to the left of the button text. This default may be overridden using the <code> data-iconpos</code> attribute to set the icon to the right, above (top) or below (bottom) the text. </p>
@@ -89,7 +87,6 @@
 			<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="bottom">Bottom</a>
 		</div><!--/demo-html -->
 
-
 		<h2>Icon-only positioning</h2>
 
 		<p>You can also create an icon-only button, by setting the <code> data-iconpos</code> attribute to <code>notext</code>. The button plugin will hide the text on-screen, but add it as a <code>title</code> attribute on the link to provide context for screen readers and devices that support tooltips.</p>
@@ -97,7 +94,6 @@
         <div data-demo-html="true">
             <a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Delete</a>
         </div><!--/demo-html -->
-
 
         <h2>Removing the disc and shadow</h2>
 
@@ -134,7 +130,6 @@
 			<a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Search</a>
 		</div>
 		</div><!--/demo-html -->
-
 
         <h2>Black vs. white icon sets</h2>
 
@@ -191,7 +186,6 @@
             </div>
         </div><!--/demo-html -->
 
-
         <h2>Custom Icons</h2>
 
         <p>To use custom icons, specify a <code>data-icon</code> value that has a unique name like <code>myapp-email</code> and the button plugin will generate a class by prefixing <code>ui-icon-</code> to the <code> data-icon</code> value and apply it to the button: <code>ui-icon-myapp-email</code>.</p>
@@ -217,7 +211,6 @@
 	...more HD icon rules go here...
 }
 </code></pre>
-
 
 		<h2>Icons and themes</h2>
 
@@ -347,7 +340,6 @@
 			<a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="e" data-inline="true">Home</a>
 			<a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="e" data-inline="true">Search</a>
 		</div><!--/demo-html -->
-
 
 	</div><!-- /content -->
 

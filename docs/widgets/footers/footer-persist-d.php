@@ -79,8 +79,6 @@
 				</a></li>
 		</ul>
 
-
-
 		</div><!-- /content -->
 
 		<div data-role="footer" data-id="foo1" data-position="fixed">

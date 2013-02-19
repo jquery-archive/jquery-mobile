@@ -26,7 +26,6 @@
 
 			<h1>Links <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">jQuery Mobile is designed to work with standard page link conventions and layers the AJAX navigation on top for maximum compatibility.
 			</p>
 
@@ -50,7 +49,6 @@
 					<a href="../../index.html">Demo home</a>
 			</div><!--/demo-html -->
 
-
 			<h2>Linking without AJAX</h2>
 
 		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with AJAX. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via AJAX. Because of security restrictions, the framework always opts links to external domains out of the AJAX behavior.</p>
@@ -73,8 +71,6 @@
 
 		<p>Note: When building a jQuery Mobile application where the AJAX navigation system is disabled globally or frequently disabled on individual links, we recommend disabling the <code>$.mobile.pushStateEnabled</code> global configuration option to avoid inconsistent navigation behavior in some browsers.</p>
 
-
-
 		<h2>Linking within a multi-page document</h2>
 
 			<p>A single HTML document can contain one or many "page" containers simply by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first "page" it finds in the source order when the page loads.</p>
@@ -87,25 +83,17 @@
 
 			<code>&lt;a href=&quot;multipage.html&quot; rel=&quot;external&quot;&gt;Multi-page link&lt;/a&gt;</code>
 
-
-
 		<h2>"Back" button links</h2>
 		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default <code>href</code>. This is particularly useful when generating "back" buttons with JavaScript, such as a button to close a dialog. </p>
 		<p>When using this feature in your source markup, although browsers that support this feature will not use the specified <code>href</code> attribute, be sure to still provide a meaningful value that actually points to the URL of the referring page to allow the feature to work for users in C-Grade browsers. If users can reach this page from more than one referring pages, specify a sensible <code>href</code> so that the navigation remains logical for all users. </p>
 		<p>Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.
 		Note: <code>data-direction="reverse"</code> is meant to simply run the backwards version of the transition that will run on that page change, while <code>data-rel="back"</code> makes the link functionally equivalent to the browser's back button and all the standard back button logic applies. Adding <code>data-direction="reverse"</code> to a link with <code>data-rel="back"</code> <b>will not</b> reverse the reversed page transition and produce the "normal" version of the transition. </p>
 
-
 		<h2>Redirects and linking to directories</h2>
 
 		<p>When linking to directory indexes (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a url is a filename, and it will remove that section when creating base urls from which future pages will be referenced.</p>
 
 		<p>However, you can work around this issue by returning your page div with a <code>data-url</code> attribute already specified. When you do this, jQuery Mobile will use that attribute's value for updating the URL, instead of the url used to request that page. This also allows you to return urls that change as the result of a redirect, for example, you might post a form to "/login.html" but return a page from the url "/account" after a successful submission. This tool allows you to take control of the jQuery Mobile history stack in these situations. </p>
-
-
-
-
-
 
 			<h2>Link notes</h2>
 
@@ -122,8 +110,6 @@
 			<li><p>Some external applications (notably Facebook's OAuth implementation) modify their response URL in such a way that interferes with jQuery Mobile. In particular, Facebook appends <code>#_=_</code> to the end of the callback. Currently the best solution for this is to remove it from the location hash before jQuery Mobile loads using something like: <code>if (window.location.hash == "#_=_") window.location.hash = ""; </code>. jQuery Mobile can then process &amp; enhance the page properly.</p></li>
 			</ul>
 
-
-
 		</div><!-- /content -->
 
 		<div data-role="footer" class="jqm-footer">
@@ -132,7 +118,6 @@
 		</div><!-- /footer -->
 
 	<?php include( '../../global-nav.php' ); ?>
-
 
 	</div><!-- /page -->
 	</body>

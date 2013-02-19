@@ -26,7 +26,6 @@
 
 			<h1>Pages <a href="http://api.jquerymobile.com/page/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">
 				The page is the primary unit of interaction in jQuery Mobile and is used to group content into logical views that can be animated in and out of view with page transitions. A HTML document may start with a single "page" and the AJAX navigation system will load additional pages on demand into the DOM as users navigate around. Alternatively, a HTML document can be built with multiple "pages" inside it and the framework will transition between these local views with no need to request content from the server.
 			</p>
@@ -81,7 +80,6 @@
 </pre>
 </div>
 
-
 <h2>Putting it together: Basic single page template</h2>
 
 <p>Putting it all together, this is the standard boilerplate page template you should start with on a project: </p>
@@ -119,8 +117,6 @@
 &lt;/html&gt;
 </code></pre>
 
-
-
 		<h2>Multi-page template structure</h2>
 
 			<p>A single HTML document can contain multiple "pages" that are loaded together by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. Each "page" block needs a unique id (<code>id="foo"</code>) that will be used to link internally between "pages" (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal "page" with the id and transition it into view.</p>
@@ -146,7 +142,6 @@
 		&lt;h4&gt;Page Footer&lt;/h4&gt;
 	&lt;/div&gt;&lt;!-- /footer --&gt;
 &lt;/div&gt;&lt;!-- /page --&gt;
-
 
 &lt;!-- Start of second page --&gt;
 &lt;div data-role=&quot;page&quot; id=&quot;bar&quot;&gt;
@@ -175,7 +170,6 @@
 
 		<p>The <code>id</code> attribute of all your elements must be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time. This also applies when using a multi-page template, since all "pages" on the template are loaded at once.</p>
 
-
 	<h2>Conventions, not requirements</h2>
 
 	<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure.
@@ -191,8 +185,6 @@
 	If scripts are present in the body, the browser ends up loading them twice.
 	We therefore strongly recommend that jQuery Mobile documents with scripts in their body also contain a <code>div</code> with <code>data-role="page"</code>.
 	</p>
-
-
 
 	<h2 id="nav-prefetch">Prefetching pages</h2>
 
@@ -210,16 +202,10 @@
 $.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
 </code></pre>
 
-
-
-
-
-
 		<h2 id="nav-cache">DOM Cache</h2>
 
 		<p>Keeping lots of pages in the DOM quickly fills the browser's memory, and can cause some mobile browsers to slow down or even crash. jQuery Mobile has a simple mechanism to keep the DOM tidy. </p>
 		<p>Whenever it loads a page via AJAX, it flags the page to be removed from the DOM when you navigate away from it later (technically, on the <code>pagehide</code> event). If you revisit a removed page, the browser may be able to retrieve the page's HTML file from its cache. If not, it re-fetches the file from the server. (In the case of nested listviews, jQuery Mobile removes all the pages that make up the nested list once you navigate to a page that's not part of the list.)</p>
-
 
 		<p>If you prefer, you can tell jQuery Mobile to keep previously-visited pages in the DOM instead of removing them. This lets you cache pages so that they're available instantly if the user returns to them.</p>
 
@@ -236,7 +222,6 @@ $.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
 		</code></pre>
 
 		<p>Note that the contents of the first page isn't removed from the DOM, only pages loaded in via AJAX. Pages inside a multi-page template aren't affected by this feature at all - jQuery Mobile only removes pages loaded via AJAX.</p>
-
 
 	</div><!-- /content -->
 

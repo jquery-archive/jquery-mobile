@@ -28,8 +28,6 @@
 
 	<div data-role="content" class="jqm-content">
 
-
-
 			<h2>Grid D</h2>
 
 			<div data-demo-html="true">
@@ -157,8 +155,6 @@
 				</div>
 				<a href="#" data-role="button">Without grid</a>
 			</div><!--/demo-html -->
-
-
 
 	</div><!-- /content -->
 

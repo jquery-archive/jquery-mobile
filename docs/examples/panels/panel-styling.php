@@ -188,7 +188,6 @@
 
     </div><!-- /content -->
 
-
     <div data-role="panel" id="left-panel" data-theme="c">
 
         <ul data-role="listview" data-theme="d">

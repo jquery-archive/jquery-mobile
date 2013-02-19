@@ -14,7 +14,6 @@
 	<script src="../../../js/"></script>
 </head>
 
-
 <body>
 
 <!-- Start of first page: #one -->
@@ -43,7 +42,6 @@
 	</div><!-- /footer -->
 </div><!-- /page one -->
 
-
 <!-- Start of second page: #two -->
 <div data-role="page" id="two" data-theme="a">
 
@@ -63,7 +61,6 @@
 		<h4>Page Footer</h4>
 	</div><!-- /footer -->
 </div><!-- /page two -->
-
 
 <!-- Start of third page: #popup -->
 <div data-role="page" id="popup">

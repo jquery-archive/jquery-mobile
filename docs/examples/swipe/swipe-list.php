@@ -177,7 +177,6 @@
 
 </div><!-- /page -->
 
-
 <div data-role="page" id="demo-page" data-title="Inbox" data-theme="d">
 <!--
 NOTE: If you modify this page make sure you copy your modifications over to
@@ -498,7 +497,6 @@ code view
 
 </div><!-- /page -->
 
-
 <div data-role="page" id="demo-mail" data-title="Demo" data-theme="d">
 
     <div data-role="header" data-position="fixed" data-theme="b">
@@ -511,7 +509,6 @@ code view
     	<p>This is just a landing page for demo purposes.</p>
 
         <p><a href="#demo-page" data-rel="back" data-role="button" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back</a></p>
-
 
     </div><!-- /content -->
 

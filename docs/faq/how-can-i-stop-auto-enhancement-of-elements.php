@@ -31,7 +31,6 @@
 
 			<p class="jqm-intro">To prevent jQuery Mobile form enhancing an element simply add <code>data-role="none"</code> to the element. Here is a select that is the normal, native element instead of the custom jQuery Mobile styled version that normally is seen:</p>
 
-
             <div data-demo-html="true">
 				<form>
                 <div data-role="fieldcontain">
@@ -47,7 +46,6 @@
             </div><!--/demo-html -->
 
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-
 
 	</div><!-- /content -->
 

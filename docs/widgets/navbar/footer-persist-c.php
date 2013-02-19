@@ -101,7 +101,6 @@
 				<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
 			</div>
 
-
 		</div><!-- /content -->
 
 		<div data-role="footer" data-id="foo1" data-position="fixed">
@@ -116,7 +115,6 @@
 		</div><!-- /footer -->
 
 		<?php include( '../../global-nav.php' ); ?>
-
 
 		</div><!-- /page -->
 		</body>

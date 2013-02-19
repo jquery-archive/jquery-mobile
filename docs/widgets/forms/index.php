@@ -26,7 +26,6 @@
 
         <h1>Forms</h1>
 
-
         <p class="jqm-intro">All form widgets begin with native form elements with rich HTML semantics that are enhanced to make them more attractive and finger-friendly.
         </p>
 
@@ -336,7 +335,6 @@
 			</div>
 		</div><!--/demo-html -->
 
-
    		<h2>Auto-initialization of form elements</h2>
 			<p>By default, jQuery Mobile will automatically enhance certain native form controls into rich touch-friendly components. This is handled internally by finding form elements by tag name and running a plugin method on them. For instance, a <code>select</code> element will be found and initialized with the "selectmenu" plugin, while an <code>input</code> element with a <code>type="checkbox"</code> will be enhanced with the "checkboxradio" plugin. Once initialized, you can address these enhanced components programmatically through their jQuery UI widget API methods. See options, methods, and events listed on each form plugin's documentation page for details. </p>
 
@@ -393,7 +391,6 @@ myswitch.slider("refresh");
 	&lt;option value="c"&gt;C&lt;/option&gt;
 &lt;/select&gt;</code></pre>
 
-
 			<p>If you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>[data-role="none"]</code>). Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
 				<pre><code>
 $(document).bind('mobileinit',function(){
@@ -404,7 +401,6 @@ $(document).bind('mobileinit',function(){
 		  	<p>Alternately you can use the <code>data-enhance="false"</code> data attribute on a parent element with <code>$.mobile.ignoreContentEnabled</code> set to true. Beware though, this will incur a performance penalty for each and every element in the page that would otherwise be enhanced as jQuery Mobile must traverse the set of parents to look for those elements.</p>
 
 		<p>One special case is that of selects. The above sample will prevent any and all augmentation from taking place on select elements in the page if <code>select</code> is included. If you wish to retain the native performance and appearance of the menu itself and benefit from the visual augmentation of the select button by jQuery Mobile, you can set <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> to true in a <code>mobileinit</code> callback as a global setting or use <code>data-native-menu="true"</code> on a case by case basis.</p>
-
 
 			<h2>File Inputs + AJAX</h2>
 			<p>Using a multipart form with a file input is not supported by AJAX. In this case you should decorate the parent form with <code>data-ajax="false"</code> to ensure the form is submitted properly to the server.</p>

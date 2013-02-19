@@ -23,8 +23,6 @@
 
 	<div data-role="content" class="jqm-content">
 
-
-
 			<h2>Auto-divider listviews</h2>
 			<p>The auto-divider option is a convenient way to automatically add dividers for each letter by adding the <code> data-autodividers="true"</code> attribute. This is designed to work in conjunction with the listview filter feature so as items are filtered away, dividers that don't have any visible items will also be hidden.</p>
 
@@ -58,8 +56,6 @@
 				</ul>
 			</div><!--/demo-html -->
 
-
-
 			<h3>Inset filter, Autodividers</h3>
 
 			<div data-demo-html="true">
@@ -89,10 +85,6 @@
 					<li><a href="index.html">Sawyer Wakefield</a></li>
 				</ul>
 			</div><!--/demo-html -->
-
-
-
-
 
 	</div><!-- /content -->
 

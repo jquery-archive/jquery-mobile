@@ -26,7 +26,6 @@
 
         <h1>Text inputs <a href="http://api.jquerymobile.com/textinput/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
         <p class="jqm-intro">Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.
         </p>
 
@@ -180,7 +179,6 @@
         </form>
         </div><!-- /demo-html -->
 
-
         <h2>Password</h3>
 
         <div data-demo-html="true">
@@ -228,7 +226,6 @@
         <form>
              <label for="text-4">Text input:</label>
              <input type="text" data-mini="true" name="text-4" id="text-4" value="">
-
 
              <label for="text-5">Text input: data-clear-btn="true"</label>
              <input type="text" data-clear-btn="true" data-mini="true" name="text-5" id="text-5" value="">
@@ -390,7 +387,6 @@
             </div>
         </form>
         </div><!-- /demo-html -->
-
 
 	</div><!-- /content -->
 

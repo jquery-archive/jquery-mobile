@@ -74,7 +74,6 @@
 
         <a href="panel-fixed.php" data-rel="back" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Panels</a>
 
-
 		<div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div><!--/demo-html -->
 
 	</div><!-- /content -->
@@ -119,7 +118,6 @@
 		</ul>
 
 	</div><!-- /panel -->
-
 
 	<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
 

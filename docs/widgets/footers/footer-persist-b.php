@@ -24,8 +24,6 @@
 
 	<div data-role="content" class="jqm-content">
 
-
-
 				<ul data-role="listview" data-theme="d" data-dividertheme="e" data-filter="true" data-filter-theme="d"data-filter-placeholder="Search friends...">
 					<li data-role="list-divider">A</li>
 					<li><a href="#">Adam Kinkaid</a></li>
@@ -64,15 +62,6 @@
 					<li data-role="list-divider">S</li>
 					<li><a href="#">Sawyer Wakefield</a></li>
 				</ul>
-
-
-
-
-
-
-
-
-
 
 		<div class="content-secondary">
 

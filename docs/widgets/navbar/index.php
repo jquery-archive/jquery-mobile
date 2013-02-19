@@ -26,10 +26,8 @@
 
 			<h1>Navbar <a href="http://api.jquerymobile.com/navbar/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar.
 			</p>
-
 
 			<h2>Navbar basics</h2>
 
@@ -118,9 +116,6 @@
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
 
-
-
-
 			<h2>Navbars in headers</h2>
 
 			<p>If you want to add a navbar to the top of the page, you can still have a page title and buttons. Just add the navbar container inside the header block, right after the title and buttons in the source order.</p>
@@ -159,7 +154,6 @@
 			<h2>Persistent</h2>
 
 			The <a href="footer-persist-a.php">persistent navbar</a> variation is designed to work more like a tab bar that stays fixed as you navigate across pages. To set an item to the active state upon initialization of the navbar, add <code>class="ui-btn-active"</code> to the corresponding anchor in your markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.
-
 
 			<h2>Icons</h2>
 
@@ -226,7 +220,6 @@
 
 			<p>You can add any of the popular icon libraries like <a href="http://glyphish.com/">Glyphish</a> to achieve the iOS style tab that has large icons stacked on top of text labels. All that is required is a bit of custom styles to link to the icons and position them in the navbar. Here is an example using Glyphish icons and custom styles (view page source for styles) in our navbar:</p>
 
-
 			<style>
 				.nav-glyphish-example .ui-btn .ui-btn-inner { padding-top: 40px !important; }
 				.nav-glyphish-example .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
@@ -253,7 +246,6 @@
 			</div><!--/demo-html -->
 
 			<p>Icons by Joseph Wain / <a href="http://glyphish.com/">glyphish.com</a>. Licensed under the <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
-
 
 			<h2>Themes</h2>
 
@@ -306,8 +298,6 @@
 			</div><!-- /footer -->
 			</div><!--/demo-html -->
 
-
-
 		</div><!-- /content -->
 
 		<div data-role="footer" class="jqm-footer">
@@ -316,7 +306,6 @@
 		</div><!-- /footer -->
 
 	<?php include( '../../global-nav.php' ); ?>
-
 
 	</div><!-- /page -->
 	</body>

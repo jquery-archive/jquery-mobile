@@ -29,21 +29,15 @@
 			<p class="jqm-intro">jQuery Mobile is a touch-friendly UI framework built on jQuery Core that works across all popular mobile, tablet and desktop platforms.
 			</p>
 
-
 			<h2 id="nav-intro">Introduction</h2>
 
 			<p>jQuery Mobile is a user interface framework based on jQuery that works across all popular phones, tablet, e-reader, and desktop platforms. Built with accessibility and universal access in mind, we follow progressive enhancement and <a href="rwd.php">responsive web design (RWD)</a> principles. HTML5 Markup-driven configuration makes it easy to learn, but a powerful <a href="http://api.jquerymobile.com/">API</a> makes it easy to deeply customize the library.</p>
-
-
-
 
 			<h2 id="nav-intro">Pages & Dialogs</h2>
 
 			<p>A <a href="../widgets/pages/">page</a> in jQuery Mobile consists of an element with a <code> data-role="page"</code> attribute. Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>. The baseline requirement for a page is only the page wrapper to support the navigation system, the rest is optional. </p>
 
 			<p>A page can be styled as a <a href="../widgets/dialog/">dialog</a> that makes the page look like it's a modal style overlay. To give a standard page the appearance of a modal dialog, add the <strong>data-rel="dialog"</strong> attribute to the link. Transitions can also be set on dialog links.</p>
-
-
 
 			<h2 id="nav-intro">AJAX Navigation & Transitions</h2>
 
@@ -53,9 +47,7 @@
 
 			<p>When the requested page loads, jQuery Mobile parses the document for an element with the <code> data-role="page"</code> attribute and inserts that code into the DOM of the original page. Next, any widgets in the incoming page are enhanced to apply all the styles and behavior. The rest of the incoming page is discarded so any scripts, stylesheets or other information will not be included. The framework will also note the title of the incoming page to update the title when the new page is transitioned into view.</p>
 
-
 			<p>Now that the requested page is in the DOM and enhanced, it is animated into view with a <a href="../widgets/transitions/" data-ajax="false">transition</a>. By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
-
 
 			<h2>Content & Widgets</h2>
 
@@ -65,7 +57,6 @@
 
 				<h4>Buttons</h4>
 				<p>There are a few ways to make <a href="../widgets/buttons/" title="buttons-types">buttons</a>, but let's turn a link into a button so it's easy to click. Just start with a link and add a <code>data-role="button"</code> attribute to it.  You can add an <a href="../widgets/icons/">icon</a> with the <code>data-icon</code> attribute and optionally set its position with the <code>data-iconpos</code> attribute.</p>
-
 
 				<div data-demo-html="true">
 				<a href="#" data-role="button" data-icon="star">Star button</a>
@@ -83,8 +74,6 @@
 				<li><a href="#">Ferrari</a></li>
 			</ul>
 			</div><!--/demo-html -->
-
-
 
 			<h4>Form elements</h4>
 			<p>The framework contains a full set of <a href="../widgets/forms/">form elements</a> that are automatically enhanced into touch-friendly styled widgets. Here's a slider made with the new HTML5 input type of range, no <code>data-role</code> needed. Be sure to wrap these in a <code>form</code> element and always properly associate a <code>label</code> with every form element.</p>
@@ -107,19 +96,15 @@
 
 			</div><!--/demo-html -->
 
-
 			<h2>Responsive Design</h2>
 
 			<p>jQuery Mobile has always been designed to work within a <a href="rwd.php">responsive web design (RWD)</a> context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
 
 			<p>The library also includes a number of responsive widgets like <a href="../widgets/grids/">responsive grids</a>, <a href="../widgets/table-reflow/">reflow tables</a> and <a href="../widgets/table-column-toggle/">column chooser tables</a>, and <a href="../widgets/panels/">sliding panels</a>.</p>
 
-
-
 			<h2>Theming</h2>
 			<p>jQuery Mobile has a robust theme framework that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="e"</code> attribute to any of the widgets on this page: page, header, list, input for the slider, or button to turn it yellow. Try different swatch letters from "a" to "e" in the default theme to mix and match swatches.</p>
 			<p>Cool party trick: add the theme swatch to the page and see how all the widgets inside the content will automatically inherit the theme (headers and footers don't inherit, they default to swatch "a").</p>
-
 
 			<div data-demo-html="true">
 			<a href="#" data-role="button" data-icon="star" data-theme="a">data-theme="a"</a>
@@ -130,10 +115,6 @@
 			</div><!--/demo-html -->
 
 		<p>When you're ready to build a custom theme, use <a href="http://www.jquerymobile.com/themeroller" rel="external">ThemeRoller</a> to drag and drop, then download a custom theme.</p>
-
-
-
-
 
 			</div><!-- /content -->
 

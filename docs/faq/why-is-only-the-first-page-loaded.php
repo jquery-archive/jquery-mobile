@@ -31,10 +31,7 @@
 
 			<p class="jqm-intro">jQuery Mobile currently only supports loading of single page documents via AJAX. To navigate to a multi page document you must disable ajax on the link by adding the <code>data-ajax="false"</code> attribute. There is also a widget to allow for supporting sub-pages by Todd Thompson available at <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget">https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget</a></p>
 
-
-
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-
 
 	</div><!-- /content -->
 

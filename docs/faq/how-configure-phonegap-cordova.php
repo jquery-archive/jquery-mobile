@@ -63,7 +63,6 @@
 
 			<p>On Android PhoneGap has as special navigation helper in place to work around issues with Honeycomb <code>navigator.app.backHistory</code> that replaces <code>window.history.back</code>. For most jQuery Mobile applications it's unecessary to have knowledge or make use of this helper because the vanilla history object works fine for hashchange and replace state alterations of the embedded browser history. <b>If and only if</b> your PhoneGap application uses a full page refresh (eg, for form validation) and you wish to support the Android platform, please make sure to set <code>$.mobile.phonegapNavigationEnabled = true</code> either in a <code>mobileinit</code> call back or anywhere before user interaction take place with the page. This will replace calls to <code>window.history.back</code> with calls to PhoneGap's helper method thereby alleviating history navigation issues associated with full page refreshes on Android devices.</p>
 
-
 			<h2>PhoneGap White Listing</h2>
 
 			<p>PhoneGap 1.0 introduced the idea of white-listing servers to which its internal webview is allowed to make cross-domain requests. You can find info about it here on the <a href="http://wiki.phonegap.com/w/page/40796976/Install%20the%20latest%20%28trunk%29%20source%20of%20iOS%20PhoneGap">PhoneGap wiki</a>.</p>
@@ -96,9 +95,7 @@
     [webView loadRequest:requestObj];
 }</code></pre>
 
-
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-
 
 	</div><!-- /content -->
 

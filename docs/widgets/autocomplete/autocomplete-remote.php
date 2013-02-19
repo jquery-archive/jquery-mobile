@@ -60,23 +60,18 @@
 
 	<div data-role="content" class="jqm-content">
 
-
   			<h1>Remote autocomplete</h1>
-
 
   			<p class="jqm-intro">To use the listview filter as an autocomplete that taps into remote data sources, you can use the <code>listviewbeforefilter</code> event to dynamically populate a listview as a user types a search query.</p>
 
 			 <p>This is useful when you have a very large data set like cities, zip codes, or products that can't be loaded up-front locally. Use the view source button to see the JavaScript that powers this demo.</p>
 			<p>If you have a small list of items, you can use the listview <a href="../listviews/">filter reveal option</a> to make an autocomplete with local listview data.</p>
 
-
-
 			<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
 				<h3>Cities worldwide</h3>
             	<p>After you enter <strong>at least three characters</strong> the autocomplete function will show all possible matches.</p>
 				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a city..." data-filter-theme="d"></ul>
 			</div><!--/demo-html -->
-
 
             <a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">Back to autocomplete</a>
 

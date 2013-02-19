@@ -60,10 +60,6 @@ $( document ).on( "pageinit", function() {
 
 </code></pre>
 
-
-
-
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -72,7 +68,6 @@ $( document ).on( "pageinit", function() {
 	</div><!-- /footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-
 
 </div><!-- /page -->
 </body>

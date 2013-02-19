@@ -35,10 +35,8 @@
 
 			<h1>Range slider <a href="http://api.jquerymobile.com/slider/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">Range slider offer two handles to set a min and max value along a numeric continuum.
 			</p>
-
 
                 <h2>Basic range slider</h2>
 
@@ -234,7 +232,6 @@
                 	</div><!-- /ui-grid -->
 				</form>
                 </div><!-- /demo-html -->
-
 
 	</div><!-- /content -->
 
