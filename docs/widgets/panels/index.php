@@ -52,9 +52,9 @@
 		<a href="#rightpanel1" data-role="button" data-inline="true" data-mini="true">Reveal</a>
 		<a href="#rightpanel2" data-role="button" data-inline="true" data-mini="true">Push</a>
 
-		<p>The <strong>position</strong> of the panel on the screen is set by the <code>data-position</code> attribute. The defaults to <code>left</code>, meaning it will appear from the left edge of the screen. Specify <code>data-position="right"</code> for it to appear from the right edge instead.</p>
+		<p>The <strong>position</strong> of the panel on the screen is set by the <code>data-position</code> attribute. The default value of the attribute is <code>left</code>, meaning it will appear from the left edge of the screen. Specify <code>data-position="right"</code> for it to appear from the right edge instead.</p>
 
-		<p>The <strong>display mode</strong> of the panel is set by the <code>data-display</code> attribute. The defaults to <code>reveal</code>, meaning the panel will sit under the page and reveal as the page slides away. Specify <code>data-display="overlay"</code> for the panel to appear on top of the page contents. A third mode, <code>data-display="push"</code> animates both the panel and page at the same time.</p>
+		<p>The <strong>display mode</strong> of the panel is set by the <code>data-display</code> attribute. The value of the attribute defaults to <code>reveal</code>, meaning the panel will sit under the page and reveal as the page slides away. Specify <code>data-display="overlay"</code> for the panel to appear on top of the page contents. A third mode, <code>data-display="push"</code> animates both the panel and page at the same time.</p>
 
 		<h2 id="panel-markup">Where panel markup goes in the markup</h2>
 
@@ -76,7 +76,7 @@
 &lt;/div&gt;&lt;!-- page --&gt;
 </code></pre>
 
-		<p>Alternately, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want to page content to read for people experiencing the page in a C-grade device (HTML only) or for a screen reader.</p>
+		<p>Alternatively, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want the page content to read for people experiencing the page on a C-grade device (HTML only) or for a screen reader.</p>
 
 		<h2 id="panel-dynamic">Dynamic content</h2>
 
@@ -86,21 +86,21 @@
 $( "#mypanel" ).trigger( "updatelayout" );
 </code></pre>
 
-		<p>The framework will check the new height of the panel contents and, in case this exceeds the screen height, set the page <code>min-height</code> to this height and unfix panels with <code>data-position-fixed="true"</code>. See also <strong>Panel positioning</strong>.</p>
+		<p>The framework will then check the new height of the panel contents. If it exceeds the screen height, it will set the page <code>min-height</code> to this height and unfix panels with <code>data-position-fixed="true"</code>. See also <strong>Panel positioning</strong>.</p>
 
 		<h2 id="panel-open">Opening a panel</h2>
 
-		<p>To control a panel from a link, point the <code>href</code> to references the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above). This instructs the framework to bind the link to the panel. This link will toggle the visibility of the panel so tapping it will open the panel, and tapping it again will close it.</p>
+		<p>To control a panel from a link, set the <code>href</code> to the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above). This instructs the framework to bind the link to the panel. This link will toggle the visibility of the panel so tapping it will open the panel, and tapping it again will close it.</p>
 
 		<a href="#defaultpanel" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
 
 		<h2 id="panel-close">Closing a panel</h2>
 
-		<p>Clicking the link that opened the panel, swiping left or right, or tapping the Esc key will close the panel. To turn off the swipe to close behavior, add the <code>data-swipe-close="false"</code> attribute to the panel.</p>
+		<p>Clicking the link that opened the panel, swiping left or right, or tapping the Esc key will close the panel. To turn off the swipe-to-close behavior, add the <code>data-swipe-close="false"</code> attribute to the panel.</p>
 
-		<p>By default, panels can also be closed clicking outside the panel onto the page contents. To prevent this behavior, add the <code>data-dismissible="false"</code> attribute to the panel. It's possible to have the panel and page sit side-by-side at wider screen widths and prevent the click-out-to-close behavior only above a certain screen width by applying a media query. See the responsive section below for details. </p>
+		<p>By default, panels can also be closed by clicking outside the panel onto the page contents. To prevent this behavior, add the <code>data-dismissible="false"</code> attribute to the panel. It's possible to have the panel and page sit side-by-side at wider screen widths and prevent the click-out-to-close behavior only above a certain screen width by applying a media query. See the responsive section below for details. </p>
 
-		<p>It's common to also add a close button inside the panel. To add the link that will close the panel, add the <code>data-rel="close"</code> attribute to tell the framework to close that panel when clicked. It's important to ensure that this link also makes sense if JavaScript isn't available, so we recommend that the <code>href</code> points to the ID of the page where the user should jump to when closing. For example, if the button to open the panel is in the header bar that has and ID of <code>my-header</code>, the close link in the panel should be:</p>
+		<p>It's common to also add a close button inside the panel. To add the link that will close the panel, add the <code>data-rel="close"</code> attribute to tell the framework to close that panel when clicked. It's important to ensure that this link also makes sense if JavaScript isn't available, so we recommend that the <code>href</code> point to the ID of the page to which the user should jump when closing. For example, if the button to open the panel is in the header bar that has and ID of <code>my-header</code>, the close link in the panel should be:</p>
 
 <pre><code>
 &lt;a href=&quot;#my-header&quot; <strong>data-rel=&quot;close&quot;</strong>&gt;Close panel&lt;/a&gt;
@@ -108,13 +108,13 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<h2 id="panel-animate">Panel animations</h2>
 
-		<p>Panels will animate if the browser supports 3D transforms, the same criteria for CSS animation support we use for page transitions. Panel animations use <code>translate3d(x,y,z)</code> CSS transforms to ensure they are hardware accelerated and smooth.</p>
+		<p>Panels will animate if the browser supports 3D transforms &mdash; the same criteria for CSS animation support we use for page transitions. Panel animations use <code>translate3d(x,y,z)</code> CSS transforms to ensure they are hardware accelerated and smooth.</p>
 
-		<p>The <code>animate</code> option allows you to turn off panel animations for all devices. To turn off animations via markup, add the  <code>data-animate="false"</code> attribute to the panel container.</p>
+		<p>The <code>animate</code> option allows you to turn off panel animations for all devices. To turn off animations via markup, add the <code>data-animate="false"</code> attribute to the panel container.</p>
 
 		<h2 id="panel-positioning">Panel positioning</h2>
 
-		<p>The panel will be displayed with the <code>position:absolute</code> CSS property, meaning it will scroll with the page. When a panel is a opened the framework checks to see if the bottom of the panel contents is in view and, if not, scrolls to the top of the page.</p>
+		<p>The panel will be displayed with the <code>position:absolute</code> CSS property, meaning it will scroll with the page. When a panel is opened the framework checks to see if the bottom of the panel contents is in view. If not, it scrolls to the top of the page.</p>
 
         <p>You can set a panel to <code>position:fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and using <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without absolute positioning.</p>
 
@@ -122,18 +122,18 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<h2 id="panel-styling">Styling panels</h2>
 
-		<p>By default, panels have very simple styles to let you customize them as needed. Panels are essentially just simple blocks with no margins that sit on either side of the page content. The framework wraps the panel content in a <code>div</code> with class <code>ui-pannel-inner</code> which has a padding of 15 pixels. If needed you can override this with custom CSS or use option <code>classes.panelInner</code> to set a different class name for the <code>div</code></p>
+		<p>By default, panels have very simple styles to let you customize them as needed. Panels are essentially just simple blocks with no margins that sit on either side of the page content. The framework wraps the panel content in a <code>div</code> with class <code>ui-pannel-inner</code> which has a padding of 15 pixels. If needed you can override this with custom CSS or use option <code>classes.panelInner</code> to set a different class name for the <code>div</code>.</p>
 
-		<p>Panels have a fixed width of 17em (272 pixels) which is narrow enough to still show some of the page contents when open to make clicking out to close easy, and still looks good on wider tablet or desktop screens. The styles to set widths on panels are fairly complex but these can be overridden with CSS as needed.</p>
+		<p>Panels have a fixed width of 17em (272 pixels) which is narrow enough to still show some of the page contents when open to make clicking out to close easy, while still looking good on wider tablet or desktop screens. The styles to set widths on panels are fairly complex but these can be overridden with CSS as needed.</p>
 
-		<p>Other than the theme background, width and 100% height styles, panels have very little styling on their own. The default theme for panels is "c". You can set a different theme for the panel by adding a <code>data-theme</code> to the panel container, or set <code>data-theme="none"</code> and add your own classes to style it as needed.</p>
+		<p>Other than the theme background, width and 100% height styles, panels have very little styling on their own. The default theme for panels is "c". You can set a different theme for the panel by adding a <code>data-theme</code> attribute to the panel container, or you can set <code>data-theme="none"</code> and add your own classes to style it as needed.</p>
 
 		<p>Note that adding padding, borders, or margins directly to the panel container will alter the overall dimensions and could cause the positioning and animation to be affected. To avoid this, apply styles to the panel content wrapper (<code>.ui-pannel-inner</code>).</p>
 
 		<h2 id="panel-responsive">Making the panel responsive</h2>
 
-		<p>When the push or reveal display is used, a panel pushes the page aside when it opens. Since some of the page is pushed offscreen, the panel is modal and must be closed to interact with the page content again. On larger screens, you may want to have the panel work more like a collapsible column that can be opened and used alongside the page to take better use of the screen real estate. </p>
-		<p>To make the page work alongside the open panel, it needs to re-flow to a narrower width so it will fit next to the panel. This can be done purely with CSS by adding a left or right margin equal to the panel width (17em) to the page contents to force a re-flow. Second, the invisible layer placed over the page for the click out to dismiss behavior is hidden with CSS so you can click on the page and not close the menu. </p>
+		<p>When the push or reveal display is used, a panel pushes the page aside when it opens. Since some of the page is pushed offscreen, the panel is modal and must be closed to interact with the page content again. On larger screens, you may want to have the panel work more like a collapsible column that can be opened and used alongside the page to make better use of the screen real estate. </p>
+		<p>To make the page work alongside the open panel, it needs to re-flow to a narrower width so it will fit next to the panel. This can be done purely with CSS by adding a left or right margin equal to the panel width (17em) to the page contents to force a re-flow. Second, the invisible layer placed over the page for the click-out-to-dismiss behavior is hidden with CSS so you can click on the page and not close the menu. </p>
 		<p>Here is an example of these rules wrapped in a media query to only apply this behavior above 35em (560px):</p>
 
 <pre><code>
