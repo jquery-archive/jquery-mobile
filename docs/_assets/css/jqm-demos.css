@@ -645,13 +645,17 @@ h2.jqm-home-widget {
 	margin-right: .2em;
 	margin-left: .2em;
 	font-weight: 400;
-	color: #bb;
+	color: #bbb;
 	font-size: .75em;
-	text-transform:uppercase;
+	text-transform: uppercase;
 }
+.ui-btn-active .jqm-search-results-keywords,
+.ui-focus .jqm-search-results-keywords,
 .ui-btn-active .jqm-search-results-keywords .jqm-keyword-hash,
 .ui-focus .jqm-search-results-keywords .jqm-keyword-hash {
 	color: #fff;
+	text-shadow: 0 1px 0 #369;
+	font-weight: 400;
 }
 
 .jqm-search .jqm-list .ui-li-count,
