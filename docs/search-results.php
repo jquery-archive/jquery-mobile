@@ -28,9 +28,9 @@
 		<h2>Search Results</h2>
         <div class="jqm-search-results-wrap">
 	        <ul class="jqm-list jqm-search-results-list">
-	            <?php include( 'nav-widgets.php' );
-	            include( 'nav-examples.php' );
-	            include( 'nav-faq.php' ); ?>
+	            <?php include( 'nav-widgets.php' ); ?>
+	            <?php include( 'nav-examples.php' ); ?>
+	            <?php include( 'nav-faq.php' ); ?>
 	        </ul>
 	    </div>
 
