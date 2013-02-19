@@ -133,15 +133,13 @@ body, .jqm-demos  {
 }
 .jqm-search > .jqm-list {
 	position: absolute;
+	right: .7em;
+	left: .7em;
 	margin-top: 5px;
-	margin-right: .7em;
 	z-index: 999;
-	-webkit-box-shadow: 0 0 5px rgba(0,0,0,.15);
-	-moz-box-shadow: 0 0 5px rgba(0,0,0,.15);
-	box-shadow: 0 0 5px rgba(0,0,0,.15);
-}
-.jqm-search > .jqm-list .ui-li-count {
-	display: none;
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,.3);
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,.3);
+	box-shadow: 0 0 5px rgba(0,0,0,.3);
 }
 
 /* Footer */
@@ -237,8 +235,8 @@ body, .jqm-demos  {
 	}
 	.jqm-search > .jqm-list {
 		right: .3875em;
-		margin-right: 0;
-		min-width: 21em;
+		left: auto;
+		width: 28em;
 	}
 	
 	/* Footer */
@@ -470,7 +468,7 @@ h2.jqm-home-widget {
 	margin-left: 10px;
 }
 .jqm-content a.jqm-open-quicklink-panel {
-	margin-top:-3.3em;
+	margin-top: -3.3em;
 }
 
 /* Lists */
@@ -482,13 +480,13 @@ h2.jqm-home-widget {
 	font-weight: 700; 
 	font-size: .9em;
 	color: #07ade0;
-	margin-top:.1em;
+	margin-top: .1em;
 }
 .jqm-list .ui-li-desc  {
 	font-weight: 300; 
 	font-size: .8em;
 	color: #777;
-	margin-bottom:.1em;
+	margin-bottom: .1em;
 }
 /* List dividers */
 .jqm-list .ui-bar-d {
@@ -499,14 +497,15 @@ h2.jqm-home-widget {
 	background-image: none;
 	background-color: #f8f8f8;
 	border-color: #e8e8e8;
-	color:#74b042;
-	text-shadow:none;
+	color: #74b042;
+	text-shadow: none;
 }
 /* List buttons */
 .jqm-list .ui-btn-inner {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300; 
 	font-size: 0.95em;
+	border-top: none;
 }
 .jqm-list .ui-btn-up-d, 
 .jqm-list .ui-btn-hover-d, 
@@ -529,19 +528,35 @@ h2.jqm-home-widget {
 .jqm-list .ui-btn-up-d.ui-btn-active, 
 .jqm-list .ui-btn-hover-d.ui-btn-active, 
 .jqm-list .ui-btn-down-d.ui-btn-active {
+	border-color: #41aEdE;
 	background-color: #41aEdE;
 	background-image: none;
 	color: #fff;
 	text-shadow: 0 1px 0 #369;	
 }
+.jqm-list .ui-btn-up-d.ui-focus, 
+.jqm-list .ui-btn-hover-d.ui-focus, 
+.jqm-list .ui-btn-down-d.ui-focus {
+	border-color: #41aEdE;
+	background-color: #41aEdE;
+	background-image: none;
+	color: #fff;
+	text-shadow: 0 1px 0 #369;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
 .jqm-list .ui-btn-active a.ui-link-inherit,
 .jqm-list .ui-btn-active .ui-li-heading,
-.jqm-list .ui-btn-active .ui-li-desc {
+.jqm-list .ui-btn-active .ui-li-desc,
+.jqm-list .ui-focus a.ui-link-inherit,
+.jqm-list .ui-focus .ui-li-heading,
+.jqm-list .ui-focus .ui-li-desc {
 	color: #fff;
 }
 .jqm-demos .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
-.jqm-demos .jqm-list .ui-li .jqm-search-results-keywords {
-	text-overflow: ellispse;
+.jqm-demos .jqm-list .ui-li .ui-li-desc {
+	text-overflow: clip;
 	overflow: visible;
 	white-space: normal;
 }
@@ -599,28 +614,42 @@ h2.jqm-home-widget {
 }
 .jqm-demos .jqm-search > .ui-listview-filter .ui-input-text,
 .jqm-demos-home .jqm-content > .ui-listview-filter .ui-input-text,
-.jqm-demos-index .jqm-content > .ui-listview-filter .ui-input-text {
+.jqm-demos-index .jqm-content > .ui-listview-filter .ui-input-text,
+.jqm-demos-index .jqm-search-results-wrap > .ui-listview-filter .ui-input-text {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size: .95em;
 }
 
 /* Search results */
+.jqm-search .jqm-list {
+	background: #fff;
+}
 .jqm-search-results-highlight {
-	background-color: rgba(65,174,222,.3);
+	background-color: #d9eff8;
+	background-color: rgba(65,174,222,.2);
+	text-shadow: none;
 }
-.jqm-search-results-keywords {
-	padding: 0 15px .4em;
+.jqm-search .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
+.jqm-search-results-wrap .jqm-list .ui-li .ui-btn-text a.ui-link-inherit {
+	padding: 6px 15px 0;
+	font-weight: 400;
 }
-.jqm-search .jqm-search-results-keywords {
-	margin-top:-1em;
-	margin-bottom:0;
-	line-height: 1.1em;
-	font-size: .7em;
+.jqm-list .jqm-search-results-keywords {
+	padding: 10px 15px 6px;
+	font-size: .8em;
+	font-weight: 300;
 }
-.jqm-search ul.ui-listview li div.ui-btn-inner div.ui-btn-text a{
-	padding-top:.4em;
+.jqm-search-results-keywords .jqm-keyword-hash {
+	margin-right: .2em;
+	margin-left: .2em;
+	font-weight: 400;
 }
+.jqm-search .jqm-list .ui-li-count,
+.jqm-search-results-wrap .jqm-list .ui-li-count {
+	display: none;
+}
+
 /* Nav panels */
 /* Reveal menu shadow on top of the list items */
 .ui-panel-display-reveal {
