@@ -18,7 +18,7 @@
 
 <li data-section="Demo Showcase" data-filtertext="backbone and require.js example navigation router"><a href="examples/backbone-require/index.php" data-ajax="false">Backbone and Require.js example</a></li>
 
-<li data-section="Demo Showcase" data-filtertext="server redirection with server-side support php"><a href="examples/redirect/index.php" data-ajax="false">Redirection with server-side support</a></li>
+<li data-section="Demo Showcase" data-filtertext="server redirection with server-side support php"><a href="examples/redirect/" data-ajax="false">Redirection with server-side support</a></li>
 
 <li data-role="list-divider">Panels</li>
 
