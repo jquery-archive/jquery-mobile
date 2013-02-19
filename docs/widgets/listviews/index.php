@@ -153,7 +153,7 @@
 
 			<h2 id="list-icons">Icons: Standard</h2>
 
-			<p>The default icon for each list item containing a link is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styles it's also possible to use third party icons.</p>
+			<p>The default icon for each list item containing a link is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../icons/">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styling it's also possible to use third party icons.</p>
 
 			<div data-demo-html="true" data-demo-css="#custom-icon">
                 <ul data-role="listview" data-inset="true" data-theme="c">
@@ -166,7 +166,7 @@
 			</div><!--/demo-html -->
 
 			<h2 id="list-16">Icons: 16x16</h2>
-			<p>To use standard 16x16 pixel icons in list items, add the class of <code>ui-li-icon</code> to the image element and insert 16x16 icons as <code>img</code> tage inside the list items.</p>
+			<p>To use standard 16x16 pixel icons in list items, add the class of <code>ui-li-icon</code> to the image element and insert 16x16 icons as <code>img</code> tags inside the list items.</p>
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true">
 					<li><a href="#"><img src="../../_assets/img/gf.png" alt="France" class="ui-li-icon ui-corner-none">France</a></li>
@@ -494,6 +494,8 @@
 			<h2 id="list-nested">Nested</h2>
 
 			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. To set the swatch color of the child listviews, set the <code>data-theme</code> attribute on each list inside.</p>
+
+			<p><strong>Warning: Nested listviews are deprecated as of 1.3.0 and will be removed in future versions.</strong></p>
 
 			<div data-demo-html="true">
 				<ul data-role="listview" data-header-theme="e">

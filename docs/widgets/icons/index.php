@@ -166,7 +166,7 @@
 		</div>
 		</div><!--/demo-html -->
 
-		<p>Class applied to the <code>UL</code> or <code>OL</code> to change to the black icons for each list item.</p>
+		<p>Example of the class applied to the <code>UL</code> or <code>OL</code> to change to the black icons for each list item.</p>
 		<div data-demo-html="true">
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt">
 				<li><a href="#">Acura</a></li>
