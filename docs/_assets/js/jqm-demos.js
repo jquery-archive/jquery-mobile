@@ -196,7 +196,6 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		}
 	});
 	$(this).find(".jqm-search-results-list li,.jqm-search li").each(function(){
-		console.log("keywords");
 		var text = $(this).attr("data-filtertext");
 		$(this).append("<p class='jqm-search-results-keywords ui-li-desc'>Keywords: "+text+"</p>");
 	});
@@ -206,29 +205,54 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 $( document ).on( "pageshow",  ".jqm-demos-search-results",function(){
 	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1];
 	$( this ).find( ".jqm-content .jqm-search-results-wrap input").val( search ).trigger( "change" );
-	
 });
 $( document ).on( "change keyup",".ui-page-active .jqm-search-results-wrap input" , function( event ) {
-	console.log("change")
-	$(".ui-page-active .jqm-search-results-list li a, .ui-page-active .jqm-search-results-list li p").each(function(){
-		$(this).html($(this).html().replace("<span class='jqm-search-results-highlight'>",""));
-		$(this).html($(this).html().replace("</span>",""));
-	});
 	var search = $(".ui-page-active .jqm-search-results-wrap input").val();
-	$(".ui-page-active .jqm-search-results-list li a, .ui-page-active .jqm-search-results-list li p").each(function(){
-		var text = $(this).text();
-		$(this).html(text.replace(eval("/"+search+"/i"),"<span class='jqm-search-results-highlight'>"+search+"</span>"));
+	$(".ui-page-active .jqm-search-results-list li").each(function(){
+		$(this).removeHighlight();
+		$(this).highlight(search);
 	});
 });
 $( document ).on( "change keyup",".ui-page-active .jqm-search input" , function( event ) {
-	console.log("change")
-	$(".ui-page-active .jqm-search li a, .ui-page-active .jqm-search li p").each(function(){
-		$(this).html($(this).html().replace("<span class='jqm-search-results-highlight'>",""));
-		$(this).html($(this).html().replace("</span>",""));
-	});
 	var search = $(".ui-page-active .jqm-search input").val();
-	$(".ui-page-active .jqm-search li a, .ui-page-active .jqm-search li p").each(function(){
-		var text = $(this).text();
-		$(this).html(text.replace(eval("/"+search+"/i"),"<span class='jqm-search-results-highlight'>"+search+"</span>"));
+	$(".ui-page-active .jqm-search li").each(function(){
+		$(this).removeHighlight();
+		$(this).highlight(search);
 	});
 });
+jQuery.fn.highlight = function(pat) {
+	function innerHighlight(node, pat) {
+		var skip = 0;
+		if (node.nodeType == 3) {
+			var pos = node.data.toUpperCase().indexOf(pat);
+			if (pos >= 0) {
+				var spannode = document.createElement('span');
+				spannode.className = 'jqm-search-results-highlight';
+				var middlebit = node.splitText(pos);
+				var endbit = middlebit.splitText(pat.length);
+				var middleclone = middlebit.cloneNode(true);
+				spannode.appendChild(middleclone);
+				middlebit.parentNode.replaceChild(spannode, middlebit);
+				skip = 1;
+			}
+		} else if (node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+			for (var i = 0; i < node.childNodes.length; ++i) {
+				i += innerHighlight(node.childNodes[i], pat);
+			}
+		}
+		return skip;
+	}
+	return this.length && pat && pat.length ? this.each(function() {
+		innerHighlight(this, pat.toUpperCase());
+	}) : this;
+};
+
+jQuery.fn.removeHighlight = function() {
+	return this.find("span.jqm-search-results-highlight").each(function() {
+		this.parentNode.firstChild.nodeName;
+		with (this.parentNode) {
+			replaceChild(this.firstChild, this);
+			normalize();
+		}
+	}).end();
+};
