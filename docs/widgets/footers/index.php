@@ -50,7 +50,7 @@
 
 			
 
-				<p>Any link or valid <a href="../buttons/index.html">button markup</a> added to the footer will automatically be turned into a button. To save space, buttons in toolbars are automatically set to inline styling so the button is only as wide as the text and icons it contains.  </p>
+				<p>Any link or valid <a href="../buttons/">button markup</a> added to the footer will automatically be turned into a button. To save space, buttons in toolbars are automatically set to inline styling so the button is only as wide as the text and icons it contains.  </p>
 
 				<p>By default, toolbars don't have any padding to accommodate nav bars and other widgets. To include padding on the bar, add a <code>class="ui-bar"</code> to the footer.</p>
 
@@ -82,7 +82,7 @@
 	
 			<h2>Adding form elements</h2>
 
-			<p><a href="../forms/index.html">Form</a> elements and other content can also be added to toolbars. Here is an example of a <a href="../selects/index.html">select</a> menu inside a footer bar. We recommend using mini-sized form elements in toolbars by adding the <code>data-mini="true"</code> attribute:</p>
+			<p><a href="../forms/">Form</a> elements and other content can also be added to toolbars. Here is an example of a <a href="../selects/">select</a> menu inside a footer bar. We recommend using mini-sized form elements in toolbars by adding the <code>data-mini="true"</code> attribute:</p>
 		
 
 			<div data-role="footer" class="ui-bar">
@@ -101,7 +101,7 @@
 
 					
 					<h2>Fixed &amp; Persistent footers</h2>
-					<p>In situations where the footer is a global navigation element, you may want it to appear <a href="../headers/bars-fixed.html">fixed</a> so it doesn't scroll out of view. It's also possible to make a fixed toolbar <a href="footer-persist-a.html">persistent</a> so it appears to not move between <a href="../transitions/index.html" data-ajax="false">page transitions</a>. This can be accomplished by using the persistent footer feature included in jQuery Mobile.</p> 
+					<p>In situations where the footer is a global navigation element, you may want it to appear <a href="../headers/bars-fixed.html">fixed</a> so it doesn't scroll out of view. It's also possible to make a fixed toolbar <a href="footer-persist-a.html">persistent</a> so it appears to not move between <a href="../transitions/" data-ajax="false">page transitions</a>. This can be accomplished by using the persistent footer feature included in jQuery Mobile.</p> 
 					
 					<p>To make a footer persistent between transitions, add the <code>data-id</code> attribute to the footer of all relevant pages and use the same <code>id</code> value for each. For example, by adding <code>data-id="myfooter"</code> to the current page and the target page, the framework will keep the footer anchors in the same spot during the page animation. <strong>This effect will only work correctly if the header and footer toolbars are set to <code>data-position="fixed"</code> so they are in view during the transition.</strong></p>
 

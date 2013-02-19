@@ -73,7 +73,7 @@
 
 
 			<h2>Menu</h2>
-			<p>A menu can be created by adding a <a href="../listviews">listview</a> inside a popup.</p>
+			<p>A menu can be created by adding a <a href="../listviews/">listview</a> inside a popup.</p>
 			<div data-demo-html="true">
 				<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup" data-icon="gear" data-theme="e">Actions...</a>
 
@@ -89,7 +89,7 @@
 			</div><!--/demo-html -->
 
 			<h2>Nested menu</h2>
-			<p>A nested menu can be created by placing <a href="../listviews">listviews</a> into an <a href="../accordions">accordion</a> inside a popup.</p>
+			<p>A nested menu can be created by placing <a href="../listviews/">listviews</a> into an <a href="../accordions/">accordion</a> inside a popup.</p>
 			<div data-demo-html="true">
 				<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Choose a creature...</a>
 

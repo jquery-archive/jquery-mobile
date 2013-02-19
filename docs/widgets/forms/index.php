@@ -61,7 +61,7 @@
 
         <h2>Sliders</h2>
 
-		<p>Sliders are used to enter numeric values along a numeric continuum by dragging a handle or entering in a value. Learn more about <a href="../sliders" data-ajax="false">sliders</a>.</p>
+		<p>Sliders are used to enter numeric values along a numeric continuum by dragging a handle or entering in a value. Learn more about <a href="../sliders/" data-ajax="false">sliders</a>.</p>
         
         <div data-demo-html="true">
             <label for="slider">Slider:</label>

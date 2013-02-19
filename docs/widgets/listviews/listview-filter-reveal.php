@@ -53,7 +53,7 @@
 					<li><a href="index.html">Porsche</a></li>
 					<li><a href="index.html">Subaru</a></li>
 					<li><a href="index.html">Toyota</a></li>
-					<li><a href="index.html">Volkswagon</a></li>
+					<li><a href="index.html">Volkswagen</a></li>
 					<li><a href="index.html">Volvo</a></li>
 				</ul>
 			</div><!--/demo-html -->
@@ -84,7 +84,7 @@
 					<li><a href="index.html">Porsche</a></li>
 					<li><a href="index.html">Subaru</a></li>
 					<li><a href="index.html">Toyota</a></li>
-					<li><a href="index.html">Volkswagon</a></li>
+					<li><a href="index.html">Volkswagen</a></li>
 					<li><a href="index.html">Volvo</a></li>
 				</ul>
 			</div><!--/demo-html -->
