@@ -425,6 +425,9 @@ h2.jqm-home-widget {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 }
+.jqm-home-welcome .jqm-button .ui-icon {
+	opacity: .6;
+}
 
 /* API link */
 .jqm-content .jqm-api-link {
