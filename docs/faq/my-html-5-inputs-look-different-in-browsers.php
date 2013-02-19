@@ -26,7 +26,7 @@
 			
 			<h2>Question:</h2>
             			
-			<h1 class="jqm-faq-question">My HTML 5 inputs look different across devices and browsers.</h1>
+			<h1>My HTML 5 inputs look different across devices and browsers.</h1>
 
 			<h2>Answer:</h2>
             

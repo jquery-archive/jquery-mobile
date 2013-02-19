@@ -26,7 +26,7 @@
 			
 			<h2>Question:</h2>
             			
-			<h1 class="jqm-faq-question">Sometimes my custom select shows as a popup other times its a dialog.</h1>
+			<h1>Sometimes my custom select shows as a popup other times its a dialog.</h1>
 
 			<h2>Answer:</h2>
             

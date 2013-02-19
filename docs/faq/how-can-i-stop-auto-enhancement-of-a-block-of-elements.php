@@ -25,7 +25,7 @@
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
             			
-			<h1 class="jqm-faq-question">How can I stop JQM from enhancing a block of elements?</h1>
+			<h1>How can I stop JQM from enhancing a block of elements?</h1>
 
 			<h2>Answer:</h2>
             

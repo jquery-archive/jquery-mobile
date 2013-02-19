@@ -25,7 +25,7 @@
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
             			
-			<h1 class="jqm-faq-question">Triggering create on injected HTML does not work.</h1>
+			<h1>Triggering create on injected HTML does not work.</h1>
 
 			<h2>Answer:</h2>
             

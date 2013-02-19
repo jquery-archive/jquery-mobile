@@ -26,7 +26,7 @@
 			
 			<h2>Question:</h2>
             			
-			<h1 class="jqm-faq-question">Disabling a button does not work.</h1>
+			<h1>Disabling a button does not work.</h1>
 
 			<h2>Answer:</h2>
             

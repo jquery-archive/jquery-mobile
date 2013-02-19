@@ -26,7 +26,7 @@
 			
 			<h2>Question:</h2>
             			
-			<h1 class="jqm-faq-question">My range or search inputs are being change to number/text.</h1>
+			<h1>My range or search inputs are being change to number/text.</h1>
 
 			<h2>Answer:</h2>
             

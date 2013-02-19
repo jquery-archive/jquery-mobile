@@ -25,7 +25,7 @@
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
 
-			<h1 class="jqm-faq-question">How do I control page titles?</h1>
+			<h1>How do I control page titles?</h1>
 
 			<h2>Answer:</h2>
 

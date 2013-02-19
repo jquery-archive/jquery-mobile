@@ -25,7 +25,7 @@
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
 
-			<h1 class="jqm-faq-question">Content injected into a page is not enhanced.</h1>
+			<h1>Content injected into a page is not enhanced.</h1>
 
 			<h2>Answer:</h2>
 

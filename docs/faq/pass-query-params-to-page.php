@@ -25,7 +25,7 @@
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
             			
-			<h1 class="jqm-faq-question">Why is only the first page of my multi page document loaded?</h1>
+			<h1>Why is only the first page of my multi page document loaded?</h1>
 
 			<h2>Answer:</h2>
             

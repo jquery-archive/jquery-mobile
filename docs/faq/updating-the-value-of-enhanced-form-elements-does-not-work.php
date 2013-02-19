@@ -25,7 +25,7 @@
 	<div data-role="content" class="jqm-content">
 			<h2>Problem:</h2>
             			
-			<h1 class="jqm-faq-question">Updating the value of enhanced form elements does not work</h1>
+			<h1>Updating the value of enhanced form elements does not work</h1>
 
 			<h2>Solution:</h2>
             

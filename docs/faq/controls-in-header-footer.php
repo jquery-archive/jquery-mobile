@@ -26,7 +26,7 @@
 			
 			<h2>Question:</h2>
             			
-			<h1 class="jqm-faq-question">Controls in my fixed header or footer are not responding or behave erratically.</h1>
+			<h1>Controls in my fixed header or footer are not responding or behave erratically.</h1>
 
 			<h2>Answer:</h2>
             
