@@ -139,7 +139,8 @@
 	      <p>The table works by hiding and showing columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to each of the table headers of columns you want to responsively display and assign a priority (1 = highest, 6 = lowest). Any table header given a priority will be available in the column picker menu. </p>
 	      <p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. This will make the column visible at all widths and won't be available in the column chooser menu.</p>
 
-	<pre><code>&lt;th&gt;I&#x27;m am critical and can&#x27;t be removed&lt;/th&gt;
+	<pre><code>
+	&lt;th&gt;I&#x27;m critical and can&#x27;t be removed&lt;/th&gt;
 	&lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m very important&lt;/th&gt;
 	&lt;th <strong>data-priority=&quot;3&quot;</strong>&gt;I&#x27;m somewhat&lt;/th&gt;
 	&lt;th <strong>data-priority=&quot;5&quot;</strong>&gt;I&#x27;m less important&lt;/th&gt;
@@ -147,7 +148,7 @@
 
 
 	    <p>You may use any priority naming convention and assign as many (or few) levels of priority for the columns. The plugin  simply generates class names based on the values in the <code>data-priority</code> attribute so even though we default to using a numeric system of 1-6, any naming convention is possible. </p>
-	    <p>For example, if a priority of <code>data-priority="critical"</code> is added to the heading, a class of <code>ui-table-priority-critial</code> will be applied to each cell in that column. If a priority is assigned, the column will be made available for the toggling in the column menu and adds the classes to each cell, the rest of the styling and media query creation is up to you write in your custom stylesheet. </p> 
+	    <p>For example, if a priority of <code>data-priority="critical"</code> is added to the heading, a class of <code>ui-table-priority-critial</code> will be applied to each cell in that column. If a priority is assigned, the column will be made available for toggling in the column menu and the class will be added to each cell. The rest of the styling and media query creation is up to you to write in your custom stylesheet.</p>
 
 
 		<h2>Theme & customization</h2>
@@ -247,11 +248,11 @@
 
 	    <h2>Making the table responsive</h2>
 
-	    <p>The styles for the all priority columns (1-6) start as <code>display:none</code> in the structure stylesheet since we're taking a mobile-first approach to our styles. This means that only columns that should be persistent are visible in the styles to start.</p>
+	    <p>The styles for all columns that have priorities assigned (1-6) start as <code>display:none</code> in the structure stylesheet since we're taking a mobile-first approach to our styles. This means that only columns that should be persistent are visible in the styles to start.</p>
 
 	    <p>The framework does not automatically include the the media queries to progressively display columns at wider widths. We do this to make it easier for developers to customize the media query widths for each priority level.</p>
 
-	    <p>Media queries add the responsive behavior to show and hide columns by priority. Each media query is written using <code>min-width</code> widths so they build on top of each other. The widths are set in ems so they respond to font size changes. To calculate a pixel withs in em's, divide the target width by 16 (pixels) - it's that easy.</p>
+	    <p>Media queries add the responsive behavior to show and hide columns by priority. Each media query is written using <code>min-width</code> widths so they build on top of each other. The widths are set in em units so they respond to font size changes. To calculate a pixel withs in em units, divide the target width by 16 (pixels) - it's that easy.</p>
 
 	    <p>Inside each media query, we override the <code>display:none</code> style properties set on all the priority columns in the basic styles to <code>display:table-cell</code> so they become visible again and act as a table.</p>
 
@@ -261,14 +262,14 @@
 
 
 	<pre><code>
-	<strong>/* Show priority 1 at 320px (20em x 16px) */</strong> 
+	<strong>/* Show priority 1 at 320px (20em x 16px) */</strong>
 	@media screen and (min-width: 20em) {
 	   .my-custom-class th.ui-table-priority-1,
 	   .my-custom-class td.ui-table-priority-1 {
 	     display: table-cell;
 	   }
 	}
-	<strong>/* Show priority 2 at 480px (30em x 16px) */</strong> 
+	<strong>/* Show priority 2 at 480px (30em x 16px) */</strong>
 	@media screen and (min-width: 30em) {
 	   .my-custom-class  th.ui-table-priority-2,
 	   .my-custom-class td.ui-table-priority-2 {
@@ -279,7 +280,7 @@
 	</code></pre>
 	<p>Due to CSS specificity, you will also need to include the class definitions for the hidden and visible states <em>after</em> the custom breakpoints in your custom stylesheet so be sure to include these as well:</p>
 	<pre><code>
-	/* Manually hidden */ 
+	/* Manually hidden */
 	.my-custom-class th.ui-table-cell-hidden,
 	.my-custom-class td.ui-table-cell-hidden {
 	  display: none;
@@ -292,12 +293,12 @@
 	}
 	</code></pre>
 	      <h2>Applying a preset breakpoint</h2>
-	      <p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a set of pre-configured breakpoints for each of the six priority levels that you can use if they happen work well for your content. </p>
-	      <p>These breakpoints can applied by adding a <code>class="ui-responsive"</code> to the table element. Here is an example of a table with this class added:</p>
+	      <p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a set of pre-configured breakpoints for each of the six priority levels that you can use if they happen work well for your content.</p>
+	      <p>These breakpoints can be applied by adding a <code>class="ui-responsive"</code> to the table element. Here is an example of a table with this class added:</p>
 
 	      <pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;ui-responsive&quot;</strong> data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;&gt;</code></pre>
 
-	      <p>The six preset breakpoints classes included in the column toggle stylesheet use regular increments of 10em (160 pixels). Here is a summary of the breakpoints assigned to each priority in the preset styles: </p>
+	      <p>The six preset breakpoint classes included in the column toggle stylesheet use regular increments of 10em (160 pixels). Here is a summary of the breakpoints assigned to each priority in the preset styles: </p>
 	      <dl>
 	        <dt><code>data-priority="1"</code></dt><dd> Displays the column at 320px (20em) </dd>
 	        <dt><code>data-priority="2"</code></dt><dd> Displays the column at 480px (30em) </dd>
@@ -310,13 +311,13 @@
 	      <p>If these preset breakpoints don't work for your content and layout needs, we recommend that you create custom breakpoints to fine tune the styles. </p>
 
 
-	
-		
+
+
 
 	      <h2>Grouped column headers</h2>
-	      <p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser. </p>
+	      <p>It's fairly common to need to logically group multiple columns under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser.</p>
 
-			
+
 
 
 		</div><!-- /content -->
