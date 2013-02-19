@@ -1,32 +1,32 @@
 <li data-role="list-divider">Forms</li>
 
-<li data-section="Questions & Answers" data-filtertext="Why won't my CSS styles apply correctly to a widget?"><a href="faq/question-template.php">Why won't my CSS styles apply correctly to a widget?</a></li>
+<li data-section="Questions & Answers" data-filtertext="CSS styles apply widget scope wrap"><a href="faq/question-template.php">Why won't my CSS styles apply correctly to a widget?</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="Updating the value of enhanced form elements does not work."><a href="faq/updating-the-value-of-enhanced-form-elements-does-not-work.php">Updating the value of enhanced form elements does not work.</a></li>
+<li data-section="Questions & Answers" data-filtertext="form update value enhance"><a href="faq/updating-the-value-of-enhanced-form-elements-does-not-work.php">Updating the value of enhanced form elements does not work.</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="My HTML 5 inputs look different across devices and browsers."><a href="faq/my-html-5-inputs-look-different-in-browsers.php">My HTML 5 inputs look different across devices and browsers.</a></li>
+<li data-section="Questions & Answers" data-filtertext="HTML 5 inputs appearance picker calendar date time slider"><a href="faq/my-html-5-inputs-look-different-in-browsers.php">My HTML 5 inputs look different across devices and browsers.</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="My range or search inputs are being change to number/text."><a href="faq/my-range-search-input-type-is-being-changed.php">My range or search inputs are being change to number/text.</a></li>
+<li data-section="Questions & Answers" data-filtertext="range search inputs slider number text degrade"><a href="faq/my-range-search-input-type-is-being-changed.php">My range or search inputs are being change to number/text.</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="Sometimes my custom select shows as a popup other times its a dialog."><a href="faq/sometimes-custom-select-shows-as-dialog-popup.php">Sometimes my custom select shows as a popup other times its a dialog.</a></li>
+<li data-section="Questions & Answers" data-filtertext="custom select popup dialog logic"><a href="faq/sometimes-custom-select-shows-as-dialog-popup.php">Sometimes my custom select shows as a popup other times its a dialog.</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="Disabling a button does not work."><a href="faq/disabling-a-button-does-not-work.php">Disabling a button does not work.</a></li>
+<li data-section="Questions & Answers" data-filtertext="disable button issue class method"><a href="faq/disabling-a-button-does-not-work.php">Disabling a button does not work.</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="Controls in my fixed header or footer are not responding or behave erratically."><a href="faq/controls-in-header-footer.php">Controls in my fixed header or footer are not responding or behave erratically.</a></li>
+<li data-section="Questions & Answers" data-filtertext="fixed header footer toolbar select input bug issue"><a href="faq/controls-in-header-footer.php">Controls in my fixed header or footer are not responding or behave erratically.</a></li>
 
 <li data-role="list-divider">Pages</li>
 
-<li data-section="Questions & Answers" data-filtertext="Why aren't my scripts and styles loading?"><a href="faq/scripts-and-styles-not-loading.php">Why aren't my scripts and styles loading?</a></li>
+<li data-section="Questions & Answers" data-filtertext="head load scripts styles issue ajax nav pages"><a href="faq/scripts-and-styles-not-loading.php">Why aren't my scripts and styles loading?</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="Why isn't DOM ready working for my scripts?"><a href="faq/dom-ready-not-working.php">Why isn't DOM ready working for my scripts?</a></li>
+<li data-section="Questions & Answers" data-filtertext="document.ready onload paginit DOM ready on ready scripts "><a href="faq/dom-ready-not-working.php">Why isn't DOM ready working for my scripts?</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="How do I load a page?"><a href="faq/how-do-i-load-a-page.php">How do I load a page?</a></li>
+<li data-section="Questions & Answers" data-filtertext="ajax nav load page mobile.loadpage"><a href="faq/how-do-i-load-a-page.php">How do I load a page?</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="Why is only the first page of my multi page document loaded?"><a href="faq/why-is-only-the-first-page-loaded.php">Why is only the first page of my multi page document loaded?</a></li>
+<li data-section="Questions & Answers" data-filtertext="ajax nav multi page document load"><a href="faq/why-is-only-the-first-page-loaded.php">Why is only the first page of my multi page document loaded?</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="I'm trying to pass query params to a page but it's not working?"><a href="faq/pass-query-params-to-page.php">I'm trying to pass query params to a page but it's not working?</a></li>
+<li data-section="Questions & Answers" data-filtertext="pass url query params"><a href="faq/pass-query-params-to-page.php">I'm trying to pass query params to a page but it's not working?</a></li>
 
-<li data-section="Questions & Answers" data-filtertext="I'm trying to pass information via the hash but it's not working?"><a href="faq/pass-via-the-hash-to-page.php">I'm trying to pass information via the hash but it's not working?</a></li>
+<li data-section="Questions & Answers" data-filtertext="hash pass information parameters ajax nav"><a href="faq/pass-via-the-hash-to-page.php">I'm trying to pass information via the hash but it's not working?</a></li>
 
 <li data-section="Questions & Answers" data-filtertext="I'm trying to use the application cache but it's not working?"><a href="faq/the-application-cache-is-not-working.php">I'm trying to use the application cache but it's not working?</a></li>
 
@@ -48,7 +48,7 @@
 
 <li data-role="list-divider">Apps</li>
 
-<li data-section="Questions & Answers" data-filtertext="How do I need to configure PhoneGap/Cordova?"><a href="faq/how-configure-phonegap-cordova.php">How do I need to configure PhoneGap/Cordova?</a></li>
+<li data-section="Questions & Answers" data-filtertext="How do I need to configure PhoneGap Cordova?"><a href="faq/how-configure-phonegap-cordova.php">How do I need to configure PhoneGap/Cordova?</a></li>
 <!--
 <li data-role="list-divider">Navigation</li>
 
