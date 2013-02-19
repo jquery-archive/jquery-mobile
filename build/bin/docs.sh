@@ -12,13 +12,62 @@ cp -r docs tmp/demos
 cp compiled/*.css tmp/demos/css/themes/$THEME
 cp -r compiled/images tmp/demos/css/themes/$THEME
 # ... replace "js/" with "js/jquery.mobile.js"
+
 # NOTE the deletion here is required by gnu/bsd sed differences
+# reset the docs specific js reference
 find tmp/demos \( -name '*.html' -o -name '*.php' \) -exec sed -i${SED_INPLACE_EXT} -e "s@_assets/js/\"@_assets/js/$DEMOSNAME.js\"@" {} \;
 find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
+
+# reset the javascript references
 find tmp/demos \( -name '*.html' -o -name '*.php' \) -exec sed -i${SED_INPLACE_EXT} -e "s@js/\"@js/$NAME.js\"@" {} \;
 find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
+
 # make sure the docs reference the right css file names (for deploy)
 find tmp/demos \( -name '*.html' -o -name '*.php' \) -exec sed -i${SED_INPLACE_EXT} -e "s@$BASE_NAME.css\"@$NAME.css\"@" {} \;
+find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
+
+# make sure the docs reference the right css file names (for deploy)
+# ignore the redirect directory since it requires php
+find tmp/demos \( -name '*.php' ! -wholename "*redirect*" \)| while read file; do
+  rename=`echo $file | sed 's/php/html/'`
+  mv $file "$rename"
+done
+
+# fix the index of the redirect sample
+mv tmp/demos/docs/examples/redirect/index.php tmp/demos/docs/examples/redirect/index.html
+
+# find all the files with php includes
+for file in $(grep -lr "\?php include(" tmp/demos/); do
+  file_dir=$(echo $file | sed "s/\/[^\/]*.html$/\//")
+
+  # remove the php leaving only a list of relative html file paths
+  includes=$(grep -h "\?php include(" $file | sed "s/<?php include( '//" | sed "s/' ); ?>//g" | sed "s/\s*//")
+
+  # for each relative path resolve it and replac the corresponding php
+  # include in the file with the resolved files contents
+  for include_relative in $includes; do
+	# the html extension file include
+	html_include=$(echo $include_relative | sed "s/.php/.html/")
+
+	# the fully resolved path, NOTE readlink should be standard
+	full_file_path=$(readlink -m $file_dir$html_include)
+
+	# construct the include script replace, removing the path delimiters
+	# and the double dot refs to prevent sed from borking
+	include_string="<?php include( '.*$(echo $include_relative | sed "s@\([a-zA-Z\-\0-9.]*/\)*@@g")' ); ?>"
+
+	# replace the include string with the resolved file contents
+    sed -i$SED_INPLACE_EXT "/$include_string/{
+      s/$include_string//g
+      r $full_file_path
+    }" $file
+
+    find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
+  done
+done
+
+# replace link references from php with references to html
+find tmp/demos \( -name '*.html' \) -exec sed -i${SED_INPLACE_EXT} -e "s@.php\"@.html\"@" {} \;
 find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
 
 # clear out old zip files
