@@ -6,12 +6,6 @@
 body, .jqm-demos  {
 	background-color: #fefefe;
 }
-.jqm-demos.ui-page-active {
-	overflow-x: visible;	
-}
-.jqm-demos.ui-page-active.ui-page-panel-open {
-	overflow-x: hidden;	
-}
 
 /* Header */
 .jqm-header {

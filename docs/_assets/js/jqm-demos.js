@@ -202,6 +202,18 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 
 });
 
+$( document ).on( "pageshow",  ".jqm-demos:not(.ui-page-header-fixed)", function() {
+	var page = $( this ), 
+		panelInnerHeight = page.find( ".jqm-nav-panel.ui-panel-position-left" ).outerHeight() + 30,
+		minPageHeight = $.mobile.getScreenHeight();
+
+	if ( panelInnerHeight > minPageHeight ) {
+		setTimeout(function() {
+			page.css( "min-height", panelInnerHeight );
+		}, 50 );
+	}
+});
+
 $( document ).on( "pageshow",  ".jqm-demos", function() {
 	$( this ).find( ".jqm-search input").attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
 });
