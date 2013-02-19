@@ -541,7 +541,7 @@ h2.jqm-home-widget {
 }
 .jqm-demos .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
 .jqm-demos .jqm-list .ui-li .jqm-search-results-keywords {
-	text-overflow: clip;
+	text-overflow: ellispse;
 	overflow: visible;
 	white-space: normal;
 }
@@ -612,7 +612,15 @@ h2.jqm-home-widget {
 .jqm-search-results-keywords {
 	padding: 0 15px .4em;
 }
-
+.jqm-search .jqm-search-results-keywords {
+	margin-top:-1em;
+	margin-bottom:0;
+	line-height: 1.1em;
+	font-size: .7em;
+}
+.jqm-search ul.ui-listview li div.ui-btn-inner div.ui-btn-text a{
+	padding-top:.4em;
+}
 /* Nav panels */
 /* Reveal menu shadow on top of the list items */
 .ui-panel-display-reveal {
