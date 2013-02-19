@@ -21,33 +21,33 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>How do I load a page?</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">To load an external page, enhance its content, and insert it into the DOM, use the <code>loadPage</code> method. There are a lot of methods and properties that you can set when loading pages, but here is a simple example:</p>
 <pre><code>
 //load the "about us" page into the DOM
 $.mobile.loadPage( "about/us.html" );
 </code></pre>
-			
-			
+
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

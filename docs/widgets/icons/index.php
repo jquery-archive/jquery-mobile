@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Icons - jQuery Mobile Demos</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Icons - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
@@ -21,7 +21,7 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 
         <h1>Icons</h1>
@@ -80,7 +80,7 @@
 
 		<h2>Icon positioning</h2>
 
-		<p>By default, all icons in buttons are placed to the left of the button text. This default may be overridden using the <code> data-iconpos</code> attribute to set the icon to the right, above (top) or below (bottom) the text. </p> 
+		<p>By default, all icons in buttons are placed to the left of the button text. This default may be overridden using the <code> data-iconpos</code> attribute to set the icon to the right, above (top) or below (bottom) the text. </p>
 
 		<div data-demo-html="true">
 			<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="left">Left</a>
@@ -103,7 +103,7 @@
 
         <p>There is dark semi-opaque disc behind each icon to ensure good contrast when placed on any background color. If you prefer to not have this disc, it can be removed by adding the class <code>ui-icon-nodisc</code> to the element or its container. Set <code>data-iconshadow="false"</code> to disable the icon shadow.<p>
 
-        <div data-demo-html="true" data-demo-css="#icon-bg-demo">	
+        <div data-demo-html="true" data-demo-css="#icon-bg-demo">
             <a href="index.html" class="ui-icon-nodisc" data-role="button" data-iconshadow="false" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">No disc or shadow</a>
 			<a href="index.html" class="ui-icon-nodisc" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">No disc</a>
 			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Standard</a>
@@ -226,7 +226,7 @@
 		<!-- A themed -->
 		<p><strong>Swatch "a"</strong> themed buttons</p>
 
-		<div data-demo-html="true">	
+		<div data-demo-html="true">
 			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="a" data-inline="true">Bars</a>
 			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="a" data-inline="true">Edit</a>
 			<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="a" data-inline="true">Arrow left</a>
@@ -251,7 +251,7 @@
 		<!-- B themed -->
 		<p><strong>Swatch "b"</strong> themed buttons</p>
 
-		<div data-demo-html="true">	
+		<div data-demo-html="true">
 			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b" data-inline="true">Bars</a>
 			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="b" data-inline="true">Edit</a>
 			<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="b" data-inline="true">Arrow left</a>
@@ -276,7 +276,7 @@
 		<!-- C themed -->
 		<p><strong>Swatch "c"</strong> themed buttons</p>
 
-		<div data-demo-html="true">	
+		<div data-demo-html="true">
 			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="c" data-inline="true">Bars</a>
 			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="c" data-inline="true">Edit</a>
 			<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true">Arrow left</a>
@@ -301,7 +301,7 @@
 		<!-- D themed -->
 		<p><strong>Swatch "d"</strong> themed buttons</p>
 
-		<div data-demo-html="true">	
+		<div data-demo-html="true">
 			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="d" data-inline="true">Bars</a>
 			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="d" data-inline="true">Edit</a>
 			<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="d" data-inline="true">Arrow left</a>
@@ -326,7 +326,7 @@
 		<!-- E themed -->
 		<p><strong>Swatch "e"</strong> themed buttons</p>
 
-		<div data-demo-html="true">	
+		<div data-demo-html="true">
 			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="e" data-inline="true">Bars</a>
 			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="e" data-inline="true">Edit</a>
 			<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="e" data-inline="true">Arrow left</a>
@@ -355,7 +355,7 @@
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
 
 </div><!-- /page -->

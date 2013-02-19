@@ -20,13 +20,13 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-		
-        
+
+
+
         	<form>
-		
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-1">Basic:</label>
@@ -96,7 +96,7 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-    
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-2">Mini sized:</label>
@@ -108,7 +108,7 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-    
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-3">Icon left:</label>
@@ -120,7 +120,7 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-    
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-21">Data-placeholder:</label>
@@ -133,7 +133,7 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-    
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-22">Option w/o value:</label>
@@ -146,7 +146,7 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-    
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-23">Empty option w/o value:</label>
@@ -159,7 +159,7 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-      
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-17">1 option selected:</label>
@@ -171,7 +171,7 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-    
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-18">1 option disabled:</label>
@@ -197,7 +197,7 @@
                     </div>
                 </div><!--/demo-html -->
 
-    
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-24">Multiple, icon left, long list:</label>
@@ -256,7 +256,7 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-                    
+
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-4">Optgroup:</label>
@@ -276,8 +276,8 @@
                         </select>
                     </div>
                 </div><!--/demo-html -->
-    
-                <div data-demo-html="true">					
+
+                <div data-demo-html="true">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup:</legend>
                         <label for="select-custom-5">Select A</label>
@@ -300,8 +300,8 @@
                         </select>
                     </fieldset>
                 </div><!--/demo-html -->
-                
-                <div data-demo-html="true">					
+
+                <div data-demo-html="true">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, icon left, mini sized:</legend>
                         <label for="select-custom-8">Select A</label>
@@ -324,8 +324,8 @@
                         </select>
                     </fieldset>
                 </div><!--/demo-html -->
-                
-                <div data-demo-html="true">					
+
+                <div data-demo-html="true">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup:</legend>
                         <label for="select-custom-11">Select A</label>
@@ -348,8 +348,8 @@
                         </select>
                     </fieldset>
                 </div><!--/demo-html -->
-                
-                <div data-demo-html="true">					
+
+                <div data-demo-html="true">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, mini sized:</legend>
                         <label for="select-custom-14">Select A</label>
@@ -372,18 +372,18 @@
                         </select>
                     </fieldset>
                 </div><!--/demo-html -->
-                
+
 			</form>
 
-		
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 </body>
 </html>

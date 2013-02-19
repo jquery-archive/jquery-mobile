@@ -47,7 +47,7 @@ $( document ).on( "click", function( e ) {
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content" id="arrow-popup-demo-content">
 		<div class="click-tracker"></div>
 		<h1>Popup with arrow</h1>
@@ -61,16 +61,16 @@ $( document ).on( "click", function( e ) {
 			</div>
 		</div>
 		<a href="#"><div class="ui-body-c really-tall"></div></a>
-	
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

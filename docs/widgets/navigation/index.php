@@ -22,9 +22,9 @@
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
-    
+
     <div data-role="content" class="jqm-content">
-    
+
 		<h1>AJAX Navigation</h1>
 
 		<p class="jqm-intro">The <code>$.mobile.navigate</code> method and the <code>navigate</code> event form the foundation of jQuery Mobile's navigation infrastructure. As such, they can function outside the confines of jQuery Mobile as a clean and intuitive navigation/history API.
@@ -33,7 +33,7 @@
 		<h2 id="nav-intro">Introduction</h2>
 
 		<p>jQuery Mobile includes a navigation system to load pages into the DOM via AJAX, enhance the new content, then display <a href="../pages/">pages</a> with a rich set of animated <a href="../transitions/"  data-ajax="false">transitions</a>. The navigation system uses progressive enhancement to automatically 'hijack' standard <a href="../links/">links</a> and form submissions and route them as an AJAX request.</p>
-		
+
 		<p>One of jQuery Mobile's core features is the ability to load and view content from disparate pages into the initial document with support for standard navigation methods like anchors and the back button. To accomplish this the library has progressive support for <code>hashchange</code> and <code>popstate</code> coupled with internal history tracking which can be used à la carte.</p>
 
     <p>An example use case would be something like Twitter's web client. The first step is to hijack link clicks on the page and use the URL that represents that UI state to track history with <code>$.mobile.navigate</code>. It's at this point that any additional information about the UI necessary for operation on return using the back button would be stored (see, <code>foo</code> property of the object argument to the navigate method).</p>
@@ -129,14 +129,14 @@ $( "#method-example" ).click(function( event ) {
 
     <a href="#" id="method-example" data-role="button">Method Example</a>
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-    
+
 </div><!-- /page -->
 </body>
 </html>

@@ -28,17 +28,17 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-			
+
+
 			<h1>Listviews <a href="http://api.jquerymobile.com/listview/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-		
+
 			<p class="jqm-intro">A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
 			</p>
-			
-			
+
+
 			<h2 id="list-ul">Read-only, unordered</h2>
 			<p>A listview is a simple unordered list containing linked list items with a <code> data-role="listview"</code> attribute.</p>
 			<div data-demo-html="true">
@@ -86,7 +86,7 @@
 					<li><a href="#">Ferrari</a></li>
 				</ul>
 			</div><!--/demo-html -->
-			
+
 			<h2 id="list-filter">Filter</h2>
 			<p>To make a list filterable, simply add the <code>data-filter="true"</code> attribute to the list. The framework will then append a search box above the list and add the behavior to filter out list items that don't contain the current search string as the user types. The input's placeholder text defaults to "Filter items...". To configure the placeholder text in the search input, use the <code>data-filter-placeholder</code> attribute. By default the search box will inherit its theme from its parent. The search box theme can be configured using the data attribute <code>data-filter-theme</code> on your listview.</p>
 			<div data-demo-html="true">
@@ -99,8 +99,8 @@
 					<li><a href="#">Orange</a></li>
 				</ul>
 			</div><!--/demo-html -->
-			
-			
+
+
 			<h2 id="list-reveal">Filter reveal</h2>
 			<p>The filter reveal feature makes is easy to build a simple autocomplete with local data. When a filterable list has the <code>data-filter-reveal="true"</code> attribute, it will auto-hide all the list items when the search field is blank. The <code>data-filter-placeholder</code> attribute can be added to specify the placeholder text for the filter. If you need to search against a long list of values, we provide a way to create a filter with a <a href="listview-filter-autocomplete.php" data-ajax="false">remote data source</a>.</p>
 			<div data-demo-html="true">
@@ -113,10 +113,10 @@
 					<li><a href="#">Orange</a></li>
 				</ul>
 			</div><!--/demo-html -->
-			
+
 			<h2 id="list-dividers">List dividers</h2>
 			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the bar swatch "b" by default (blue in the default theme) but you can specify a theme for dividers by adding the <code>data-divider-theme</code> attribute to the list element (<code>ul</code> or <code>ol</code>) and specifying a theme swatch letter. You can override the divider-theme for a specific divider by adding the <code>data-theme</code> attribute to the list item.</p>
-			
+
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true" data-divider-theme="d">
 					<li data-role="list-divider">Mail</li>
@@ -127,7 +127,7 @@
 					<li><a href="#">Work</a></li>
 				</ul>
 			</div><!--/demo-html -->
-			
+
 			<h2 id="list-autodividers">Autodividers</h2>
 			<p><p>A listview can be configured to automatically generate dividers for its items by adding a <code>data-autodividers="true"</code> attribute to any listview. By default, the text used to create dividers is the uppercased first letter of the item's text. Alternatively you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. This feature is designed to work seamlessly with the filter.</p>
 			<div data-demo-html="true">
@@ -141,9 +141,9 @@
 					<li><a href="index.html">Culver James</a></li>
 				</ul>
 			</div><!--/demo-html -->
-			
-			
-			
+
+
+
 			<h2 id="list-count">Count bubbles</h2>
 			<p>To add a count indicator to the right of the list item, wrap the number in an element with a class of <code>ui-li-count</code>. The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list and specifying a swatch letter. </p>
 
@@ -158,7 +158,7 @@
 			</div><!--/demo-html -->
 
 			<h2 id="list-icons">Icons: Standard</h2>
-		
+
 			<p>The default icon for each list item containing a link is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../buttons/buttons-icons.html">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styles it's also possible to use third party icons.</p>
 
 			<div data-demo-html="true" data-demo-css="#custom-icon">
@@ -204,7 +204,7 @@
 					</li>
 				</ul>
 			</div><!--/demo-html -->
-			
+
 			<h2 id="list-split">Split buttons</h2>
 			<p>To make a split list item, simply add a second link inside the <code>li</code>. To adjust the split button icon, add the <code>data-split-icon</code> attribute to the listview . Add the <code>data-icon</code> attribute to individual list items for more control. The theme swatch color of the split button defaults to "b" (blue in the default theme) but can be set by specifying a swatch letter with the <code>data-split-theme</code> attribute at the listview level or for individual splits with the <code>data-theme</code> attribute at the link level.</p>
 			<div data-demo-html="true">
@@ -233,13 +233,13 @@
 					<h3>Purchase Album?</h3>
 					<p>Your download will begin immediately on your mobile device when you purchase.</p>
 					<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
-					<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+					<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
 				</div>
 			</div><!--/demo-html -->
-			
-			
+
+
 			<h2 id="list-formatted">Formatted content</h2>
-			
+
 			<p>To add text hierarchy, use headings to increase font emphasis and use paragraphs to reduce emphasis. Supplemental information can be added to the right of each list item by wrapping content in an element with a class of <code>ui-li-aside</code></p>
 
 			<div data-demo-html="true">
@@ -266,7 +266,7 @@
 					</a></li>
 				</ul>
 			</div><!--/demo-html -->
-			
+
 
 			<h2 id="list-theme">Theme</h2>
 
@@ -296,7 +296,7 @@
 					</li>
 				</ul>
 			</div><!--/demo-html -->
-			
+
 			<p>The white icon sprite is used by default in the theme. Adding the <code>ui-icon-alt</code> class to the list switches to the black sprite and gets rid of the dark disc.</p>
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true" class="ui-icon-alt">
@@ -307,10 +307,10 @@
 					<li><a href="#">Ferrari</a></li>
 				</ul>
 			</div><!--/demo-html -->
-			
-			
+
+
 			<h2 id="list-forms">Forms</h2>
-			
+
 			<p>Any form element can be placed inside a listview for a grouped presentation.</p>
 
 			<div data-demo-html="true">
@@ -335,7 +335,7 @@
                             <label for="slider2">Slider:</label>
                             <input type="range" name="slider2" id="slider2" value="0" min="0" max="100" data-highlight="true">
                         </li>
-                        
+
                         <li data-role="fieldcontain">
                             <label for="select-choice-1" class="select">Choose shipping method:</label>
                             <select name="select-choice-1" id="select-choice-1">
@@ -359,7 +359,7 @@
 			<h2 id="list-collapse">Collapsible listview</h2>
 
 			<p>This is an example of a listview wrapped in a container with <code>data-role="collapsible"</code>.</p>
-			
+
 			<div data-demo-html="true">
 				<div data-role="collapsible" data-theme="b" data-content-theme="c">
 					<h2>Choose a car model...</h2>
@@ -377,11 +377,11 @@
 					</ul>
 				</div>
 			</div><!--/demo-html -->
-			
+
 			<h2 id="list-grouped">Grouped collapsible with listviews</h2>
 
-			<p>You can also use listviews inside a <a href="../content/content-collapsible-set.html">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once.</p>		
-				
+			<p>You can also use listviews inside a <a href="../content/content-collapsible-set.html">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once.</p>
+
 			<div data-demo-html="true">
 				<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
 					<div data-role="collapsible">
@@ -432,17 +432,17 @@
 								<h3>Wolfgang Amadeus Phoenix</h3>
 								<p>Phoenix</p>
 								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
-							</a></li>	
+							</a></li>
 						</ul>
 					</div>
 				</div>
 			</div><!--/demo-html -->
-		
-			
+
+
 			<h2 id="list-full">Full width collapsible listview</h2>
 
 			<p>Setting <code>data-inset="false"</code> on a collapsible or a collapsible set makes the collapsible full width (non-inset), like a full width listview.</p>
-			
+
 			<div data-demo-html="true">
 				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-inset="false">
 					<div data-role="collapsible">
@@ -496,17 +496,17 @@
 							<li><a href="index.html">Bob Cabot</a></li>
 							<li><a href="index.html">Caleb Booth</a></li>
 							<li><a href="index.html">Christopher Adams</a></li>
-							<li><a href="index.html">Culver James</a></li>	
+							<li><a href="index.html">Culver James</a></li>
 						</ul>
 					</div>
 				</div>
 			</div><!--/demo-html -->
 
 
-			
+
 
 			<h2 id="list-nested">Nested</h2>
-			
+
 			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. To set the swatch color of the child listviews, set the <code>data-theme</code> attribute on each list inside.</p>
 
 			<div data-demo-html="true">
@@ -563,9 +563,9 @@
 					</li>
 				</ul>
 			</div><!--/demo-html -->
-			
+
 	</div><!-- /content -->
-    
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>

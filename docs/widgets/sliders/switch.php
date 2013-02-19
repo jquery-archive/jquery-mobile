@@ -38,10 +38,10 @@
 
 			<p class="jqm-intro">Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element.
 			</p>
-        
-        	
-                           
-                
+
+
+
+
 				<h2>Basic switch</h2>
                 <div data-demo-html="true">
 				<form>
@@ -49,11 +49,11 @@
                     <select name="flip-1" id="flip-1" data-role="slider">
                         <option value="off">Off</option>
                         <option value="on">On</option>
-                    </select> 
+                    </select>
 				</form>
                 </div><!-- /demo-html -->
 
-                
+
 				<h2>Theme</h2>
                 <div data-demo-html="true">
 				<form>
@@ -61,48 +61,48 @@
                     <select name="flip-2" id="flip-2" data-role="slider" data-track-theme="a" data-theme="a">
                         <option value="off">Off</option>
                         <option value="on">On</option>
-                    </select> 
+                    </select>
 				</form>
                 </div><!-- /demo-html -->
-              
+
                 <h2>Mini</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="flip-3">Flip toggle switch:</label>
                     <select name="flip-3" id="flip-3" data-role="slider" data-mini="true">
                         <option value="off">Off</option>
                         <option value="on">On</option>
-                    </select> 
+                    </select>
 				</form>
                 </div><!-- /demo-html -->
-              
+
                 <h2>Disabled</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="flip-4">Flip toggle switch:</label>
                     <select name="flip-4" id="flip-4" data-role="slider" disabled="disabled">
                         <option value="off">Off</option>
                         <option value="on">On</option>
-                    </select> 
+                    </select>
 				</form>
                 </div><!-- /demo-html -->
 
                 <h2>Label hidden</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="flip-5" class="ui-hidden-accessible">Flip toggle switch:</label>
                     <select name="flip-5" id="flip-5" data-role="slider">
                         <option value="off">Off</option>
                         <option value="on">On</option>
-                    </select> 
+                    </select>
 				</form>
                 </div><!-- /demo-html -->
 
                 <h2>Fieldcontain</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain">
@@ -116,7 +116,7 @@
                 </div><!-- /demo-html -->
 
                 <h2>Fieldcontain, mini</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain">
@@ -131,7 +131,7 @@
 
                 <h2>Fieldcontain, hidden label</h2>
 
-                
+
                 <div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
                         <label for="flip-8">Flip toggle switch:</label>
@@ -145,7 +145,7 @@
 
                 <h2>Fieldcontain, hidden label, mini</h2>
 
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain" class="ui-hide-label">
@@ -159,9 +159,9 @@
                 </div><!-- /demo-html -->
 
                 <h2>Grid</h2>
-                
+
                 <p>We make the grid blocks 100% width below 28em with custom CSS.</p>
-                
+
                 <div data-demo-html="true" data-demo-css="#grid-style">
 				<form>
                 	<div class="ui-grid-a">
@@ -190,20 +190,20 @@
                 	</div><!-- /ui-grid -->
 				</form>
                 </div><!-- /demo-html -->
-                
-	
 
-	
+
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-	
-	
+
+
 </div><!-- /page -->
 </body>
 </html>

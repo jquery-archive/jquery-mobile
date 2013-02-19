@@ -53,12 +53,12 @@
 		#left-panel .ui-collapsible-heading .ui-btn-inner { padding: .7em 40px .7em 15px; }
 		/* Give the other collapsible headings the same padding and font-size as the list divider. */
 		#left-panel .ui-collapsible-set .ui-collapsible-heading .ui-btn-inner { padding: .5em 40px .5em 15px; font-size: 14px; }
-		
+
 		/* Styling of the close button in both panels. */
 		#demo-page .ui-panel-inner > .ui-listview .ui-first-child {
 			background: #eee;
 		}
-		
+
 		/* Reveal menu shadow on top of the list items */
 		#demo-page .ui-panel-display-reveal {
 			-webkit-box-shadow: none;
@@ -70,7 +70,7 @@
 			-moz-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
 			box-shadow: -5px 0px 5px rgba(0,0,0,.15);
 		}
-		
+
 		/* Use the ui-body class of your page theme to set a background image.
 		The page theme will be set for the content wrapper,
 		while the page get the panel them before opening the panel. */
@@ -79,7 +79,7 @@
 			background-repeat: repeat-x;
 			background-position: left bottom;
 		}
-		
+
 		/* Styling of the page contents */
 		.article p {
 			margin: 0 0 1em;
@@ -134,13 +134,13 @@
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
-    
+
     <div data-role="content" class="jqm-content">
-    
+
         <h1>Panel styling</h1>
 
         <p>In this demo we show you how to:</p>
-        
+
         <ul>
             <li>Change the width of a panel.</li>
             <li>Create a panel navmenu with listviews and collapsibles.</li>
@@ -148,11 +148,11 @@
         	<li>Set a background image for a page that contains a panel.</li>
             <li>Give the page a responsive layout with CSS columns.</li>
         </ul>
-        
+
         <a href="#demo-page" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-css="true"></div><!--/demo-html -->
-        
+
     </div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -161,7 +161,7 @@
 	</div><!-- /footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-        
+
 </div><!-- /page -->
 
 <div data-role="page" id="demo-page" data-theme="d">
@@ -170,85 +170,85 @@
         <h1>Bikes</h1>
         <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
     </div><!-- /header -->
-    
+
     <div data-role="content">
-    
+
     	<div class="article">
     		<p><img src="../../_assets/img/bike.jpg" alt="Fixed Gear bike"></p>
-            
+
             <h2>Fixed Gear</h2>
-            
+
             <p>A fixed-gear or fixed-wheel bicycle, commonly known as a fixie, is a bicycle that has a drivetrain with no freewheel mechanism. The freewheel was developed early in the history of bicycle design but the fixed-gear bicycle remained the standard track racing design. More recently the 'fixie' has become a popular alternative among mainly urban cyclists, offering the advantages of simplicity compared with the standard multi-geared bicycle.</p>
-            
+
             <p><small>Source: Wikipedia</small></p>
-            
+
             <p><a href="#right-panel" data-role="button" data-theme="b" data-inline="true" data-mini="true" data-shadow="false">Share</a></p>
 
 		</div><!-- /article -->
 
     </div><!-- /content -->
-        
-        
+
+
     <div data-role="panel" id="left-panel" data-theme="c">
-    
+
         <ul data-role="listview" data-theme="d">
         	<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
         	<li data-role="list-divider">Menu</li>
         	<li data-icon="back"><a href="#demo-intro" data-rel="back">Demo intro</a></li>
         </ul>
-        
+
         <div data-role="collapsible" data-inset="false" data-iconpos="right" data-theme="d" data-content-theme="d">
-          
+
           <h3>Categories</h3>
-          
+
           <div data-role="collapsible-set" data-inset="false" data-iconpos="right" data-theme="b" data-content-theme="d">
-          
+
             <div data-role="collapsible">
-              
+
               <h3>Bikes</h3>
-              
+
               <ul data-role="listview">
                 <li><a href="#">Road</a></li>
                 <li><a href="#">ATB</a></li>
                 <li><a href="#">Fixed Gear</a></li>
                 <li><a href="#">Cruiser</a></li>
               </ul>
-              
+
             </div><!-- /collapsible -->
-            
+
             <div data-role="collapsible">
-              
+
               <h3>Cars</h3>
-              
+
               <ul data-role="listview">
                 <li><a href="#">SUV</a></li>
                 <li><a href="#">Sport</a></li>
                 <li><a href="#">Convertible</a></li>
               </ul>
-              
+
             </div><!-- /collapsible -->
-            
+
             <div data-role="collapsible">
-              
+
               <h3>Boats</h3>
-              
+
               <ul data-role="listview">
                 <li><a href="#">Runabout</a></li>
                 <li><a href="#">Motorboat</a></li>
                 <li><a href="#">Sailboat</a></li>
                 </li>
               </ul>
-              
+
             </div><!-- /collapsible -->
-            
+
 		  </div><!-- /collapsible-set -->
-          
+
   		</div><!-- /collapsible -->
 
     </div><!-- /panel -->
 
     <div data-role="panel" id="right-panel" data-display="overlay" data-position="right" data-theme="c">
-    
+
         <ul data-role="listview" data-theme="d" data-icon="false">
         	<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
         	<li data-role="list-divider">Share this page</li>
@@ -259,7 +259,7 @@
         </ul>
 
     </div><!-- /panel -->
-     
+
 </div><!-- /page -->
 </body>
 </html>

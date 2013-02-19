@@ -21,17 +21,17 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>Why is only the first page of my multi page document loaded?</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">If you are trying to pass query parameters to an internal or embedded page this is not supported. This has to do with limitations in how jQuery mobile sets the data-url for pages. The data-url is set only once when the page is initialized.</p>
-			
-			<p>There are also currently three different plugins available for jQuery Mobile to support passing of query params to internal pages. </p>	
+
+			<p>There are also currently three different plugins available for jQuery Mobile to support passing of query params to internal pages. </p>
 
 			<ul>
 				<li><a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params">A lightweight page params plugin</a></li>
@@ -39,19 +39,19 @@
 				<li><a href="https://github.com/1Marc/jquery-mobile-routerlite">A very simple Routerlite plugin</a>
 			</li>
 			</ul>
-			
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

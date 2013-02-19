@@ -25,14 +25,14 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-		
-		
+
+
+
 			<h2>Grid D</h2>
 
-			<div data-demo-html="true">				
+			<div data-demo-html="true">
 				<div class="ui-grid-d">
 					<div class="ui-block-a"><button data-icon="home" data-iconpos="notext">Button</button></div>
 					<div class="ui-block-b"><button data-icon="arrow-l" data-iconpos="notext">Button</button></div>
@@ -41,12 +41,12 @@
 					<div class="ui-block-e"><button data-icon="gear" data-iconpos="notext">Button</button></div>
 				</div>
 			</div><!--/demo-html -->
-			
+
 			<h2>Grid C</h2>
-			
+
 			<h3>Inline, centered</h3>
-			
-			<div data-demo-html="true" data-demo-css="true">				
+
+			<div data-demo-html="true" data-demo-css="true">
 				<div class="ui-grid-c mygrid">
 					<div class="ui-block-a"><button data-icon="home" data-iconpos="notext" data-inline="true">Button</button></div>
 					<div class="ui-block-b"><button data-icon="arrow-l" data-iconpos="notext" data-inline="true">Button</button></div>
@@ -54,12 +54,12 @@
 					<div class="ui-block-e"><button data-icon="gear" data-iconpos="notext" data-inline="true">Button</button></div>
 				</div>
 			</div><!--/demo-html -->
-			
+
 			<h2>Grid B</h2>
-			
+
 			<h3>Mini sized</h3>
-			
-			<div data-demo-html="true">				
+
+			<div data-demo-html="true">
 				<div class="ui-grid-b">
 					<div class="ui-block-a"><a href="#" data-role="button" data-mini="true">Anchor</a></div>
 					<div class="ui-block-b"><button data-mini="true">Button</button></div>
@@ -69,7 +69,7 @@
 
 			<h2>Grid A</h2>
 
-			<div data-demo-html="true">				
+			<div data-demo-html="true">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<label for="grid-select-1" class="ui-hidden-accessible">Grid select 1</label>
@@ -84,10 +84,10 @@
 					<div class="ui-block-b"><a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Button</a></div>
 				</div>
 			</div><!--/demo-html -->
-			
+
 			<h3>Mini sized</h3>
 
-			<div data-demo-html="true">				
+			<div data-demo-html="true">
 				<div class="ui-grid-a">
 					<div class="ui-block-a">
 						<label for="grid-select-2" class="ui-hidden-accessible">Grid select 2</label>
@@ -102,10 +102,10 @@
 					<div class="ui-block-b"><a href="#" data-role="button" data-mini="true" data-icon="arrow-r" data-iconpos="right">Button mini</a></div>
 				</div>
 			</div><!--/demo-html -->
-			
+
 			<h3>Without ui-block</h3>
 
-			<div data-demo-html="true">				
+			<div data-demo-html="true">
 				<div class="ui-grid-a">
 					<label for="grid-select-3" class="ui-hidden-accessible">Grid select 3</label>
 					<select id="grid-select-3" name="grid-select-3" multiple="multiple" data-native-menu="false">
@@ -117,10 +117,10 @@
 					</select>
 				</div>
 			</div><!--/demo-html -->
-			
-			<h2>Grid Solo</h2> 
-			
-			<div data-demo-html="true">	
+
+			<h2>Grid Solo</h2>
+
+			<div data-demo-html="true">
 				<div class="ui-grid-solo">
 					<div class="ui-block-a">
 						<a href="#" data-role="button">Button</a>
@@ -128,20 +128,20 @@
 					<div class="ui-block-a">
 				   		<a href="#" data-role="button" data-mini="true">Button, mini sized</a>
 					</div>
-				</div>	
+				</div>
 			</div><!--/demo-html -->
-			
+
 			<h3>Without ui-block</h3>
 
-			<div data-demo-html="true">	
+			<div data-demo-html="true">
 				<div class="ui-grid-solo">
 					<a href="#" data-role="button">Button</a>
 					<a href="#" data-role="button" data-mini="true">Button, mini sized</a>
-				</div>	
+				</div>
 			</div><!--/demo-html -->
-			
+
 			<h2>Alignment</h2>
-			
+
 			<div data-demo-html="true">
 				<div class="ui-grid-b">
 					<div class="ui-block-a"><a href="#" data-role="button">Grid B</a></div>
@@ -154,19 +154,19 @@
 				</div>
 				<div class="ui-grid-solo">
 					<a href="#" data-role="button">Grid Solo</a>
-				</div>			
+				</div>
 				<a href="#" data-role="button">Without grid</a>
-			</div><!--/demo-html --> 
-							
-		
-	
+			</div><!--/demo-html -->
+
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 </body>
 </html>

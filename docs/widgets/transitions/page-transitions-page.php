@@ -14,8 +14,8 @@
 </head>
 <body>
 
-	
-	
+
+
 	<div data-role="page" id="page-success" data-dom-cache="true"><!-- page-->
 		<div data-role="header" data-theme="a">
 			<h1>Page</h1>
@@ -24,7 +24,7 @@
 		<div data-role="content" data-theme="d">
 			<p>That was an animated page transition effect to a page that we added with a <code>data-transition</code> attribute on the link. This uses a different background theme swatch to see how that looks with the transitions.</p>
 			<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
-				
+
 			<form action="#" method="get">
 				<h2>Here's a few form elements</h2>
 
@@ -52,12 +52,12 @@
 					<label for="slider">Slider:</label>
 				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" />
 				</div>
-						
+
 			</form>
-			
-			<a href="index.php" data-role="button" data-theme="b" data-rel="back" data-inline="true">Take me back</a>   
+
+			<a href="index.php" data-role="button" data-theme="b" data-rel="back" data-inline="true">Take me back</a>
 		</div>
-		
+
 		<div data-role="footer" data-theme="d">
 			<div style="margin:5px 10px;"><!-- To add a bit of spacing -->
 			<label for="search" class="ui-hidden-accessible">Search:</label>

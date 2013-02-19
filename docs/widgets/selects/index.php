@@ -21,7 +21,7 @@
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
-    
+
     <div data-role="content" class="jqm-content">
 
         <h1>Select menu <a href="http://api.jquerymobile.com/select/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
@@ -135,8 +135,8 @@
 
         <h2>Vertical group</h2>
 
-        <div data-demo-html="true">	
-            <form>				
+        <div data-demo-html="true">
+            <form>
             <fieldset data-role="controlgroup">
                 <legend>Vertical controlgroup:</legend>
                 <label for="select-native-5">Select A</label>
@@ -160,11 +160,11 @@
             </fieldset>
             </form>
         </div><!--/demo-html -->
-        
+
         <h2>Vertical group, mini</h2>
 
-        <div data-demo-html="true">		
-            <form>			
+        <div data-demo-html="true">
+            <form>
             <fieldset data-role="controlgroup" data-mini="true">
                 <legend>Vertical controlgroup, icon left, mini sized:</legend>
                 <label for="select-native-8">Select A</label>
@@ -188,12 +188,12 @@
             </fieldset>
             </form>
         </div><!--/demo-html -->
-        
+
 
         <h2>Horizontal group</h2>
 
-        <div data-demo-html="true">	
-            <form>				
+        <div data-demo-html="true">
+            <form>
             <fieldset data-role="controlgroup" data-type="horizontal">
                 <legend>Horizontal controlgroup:</legend>
                 <label for="select-native-11">Select A</label>
@@ -217,11 +217,11 @@
             </fieldset>
             </form>
         </div><!--/demo-html -->
-        
+
         <h2>Horizontal group, mini</h2>
-        
-        <div data-demo-html="true">			
-            <form>		
+
+        <div data-demo-html="true">
+            <form>
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                 <legend>Horizontal controlgroup, mini sized:</legend>
                 <label for="select-native-14">Select A</label>
@@ -245,16 +245,16 @@
             </fieldset>
             </form>
         </div><!--/demo-html -->
-        
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

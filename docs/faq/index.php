@@ -21,26 +21,26 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-			
+
         <h1>Questions &amp; Answers</h1>
-        
+
         <p class="jqm-intro">We've collected common questions and solutions to help get you up to speed and solve tricky issues when working with jQuery Mobile.</p>
-        
+
         <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search questions..." data-global-nav="docs" class="jqm-list">
         	<?php include( '../nav-faq.php' ); ?>
         </ul>
-	
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

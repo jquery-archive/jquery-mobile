@@ -29,14 +29,14 @@
 	    <div data-role="content" class="jqm-content">
 
         <h1>Controlgroups <a href="http://api.jquerymobile.com/controlgroup/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
-        
-        
+
+
         <p class="jqm-intro">Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.
         </p>
 
 		<h2>Controlgroup vertical</h2>
-			
-			<div data-demo-html="true">	
+
+			<div data-demo-html="true">
 				<div data-role="controlgroup">
 					<a href="#" data-role="button">No icon</a>
 					<a href="#" data-role="button" data-icon="delete" data-iconpos="left">Left</a>
@@ -46,12 +46,12 @@
 					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icon only</a>
 				</div>
 			</div><!--/demo-html -->
-			
+
 			<h3>Mini sized</h3>
-				
+
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-mini="true">
-					<a href="#" data-role="button" data-mini="true">No icon</a>				
+					<a href="#" data-role="button" data-mini="true">No icon</a>
 					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="left">Left</a>
 					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="right">Right</a>
 					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="top">Top</a>
@@ -59,7 +59,7 @@
 					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="notext">Icon only</a>
 				</div>
 			</div><!--/demo-html -->
-			
+
 			<h2>Controlgroup horizontal</h2>
 
 			<div data-demo-html="true">
@@ -130,12 +130,12 @@
 				</form>
 			</div><!--/demo-html -->
 
-			
-			
+
+
 				<h2>Radio button</h2>
-				
-				<div data-demo-html="true">		
-					<form>			
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup">
 						<legend>Vertical:</legend>
 						<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
@@ -147,9 +147,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-			  
-				<div data-demo-html="true">		
-					<form>			
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical, mini sized:</legend>
 						<input type="radio" name="radio-choice-v-6" id="radio-choice-v-6a" value="on" checked="checked">
@@ -161,9 +161,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-			
-				<div data-demo-html="true">	
-					<form>				
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal:</legend>
 						<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
@@ -175,9 +175,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-				
-				<div data-demo-html="true">		
-					<form>			
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal, mini sized:</legend>
 						<input type="radio" name="radio-choice-h-6" id="radio-choice-h-6a" value="on" checked="checked">
@@ -189,11 +189,11 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-				
+
 				<h2>Checkbox</h2>
-	
-				<div data-demo-html="true">			
-					<form>	   
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup">
 						<legend>Vertical:</legend>
 						<input type="checkbox" name="checkbox-v-2a" id="checkbox-v-2a">
@@ -205,9 +205,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-				
-				<div data-demo-html="true">	
-					<form>				
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical, mini sized:</legend>
 						<input type="checkbox" name="checkbox-v-6a" id="checkbox-v-6a">
@@ -219,9 +219,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-			
-				<div data-demo-html="true">		
-					<form>			
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal:</legend>
 						<input type="checkbox" name="checkbox-h-2a" id="checkbox-h-2a">
@@ -233,9 +233,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-				
-				<div data-demo-html="true">		
-					<form>			
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal, mini sized:</legend>
 						<input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
@@ -247,11 +247,11 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-	
+
 				<h2>Selects</h2>
-	
-				<div data-demo-html="true">		
-					<form>			
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup">
 						<legend>Vertical:</legend>
 						<label for="select-v-2a">Select A</label>
@@ -275,9 +275,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-				
-				<div data-demo-html="true">		
-					<form>			
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical, mini sized:</legend>
 						<label for="select-v-6a">Select A</label>
@@ -301,9 +301,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-				
-				<div data-demo-html="true">	
-					<form>				
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal:</legend>
 						<label for="select-h-2a">Select A</label>
@@ -327,9 +327,9 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-				
-				<div data-demo-html="true">	
-					<form>				
+
+				<div data-demo-html="true">
+					<form>
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal, mini sized:</legend>
 						<label for="select-h-6a">Select A</label>
@@ -353,16 +353,16 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
-				
+
 	</div><!-- /content -->
-	
+
     <div data-role="footer" class="jqm-footer">
         <p class="jqm-version"></p>
         <p>Copyright 2013 The jQuery Foundation</p>
     </div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

@@ -40,20 +40,20 @@
 
 	&lt;/div&gt;&lt;!-- /page --&gt;
 	</code></pre>
-			
-			
+
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

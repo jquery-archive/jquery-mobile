@@ -15,7 +15,7 @@
 		$( document ).on( "mobileinit", function() {
 			$.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
 				var text = $.trim( elt.text() ) || null;
-				
+
 				if ( !text ) {
 					return null;
 				}
@@ -39,13 +39,13 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
+
         <h1>Custom autodivider selector</h1>
-        
-        <p>By default the the autodividers plugin will use the first character of a list item as selector. The option <code>autodividersSelector</code> allows you to return a different string. In this example we show you how to set an autodividers selector of "0-9" for list items that contain numbers so you can group them.</p> 
-        
+
+        <p>By default the the autodividers plugin will use the first character of a list item as selector. The option <code>autodividersSelector</code> allows you to return a different string. In this example we show you how to set an autodividers selector of "0-9" for list items that contain numbers so you can group them.</p>
+
         <div data-demo-html="true" data-demo-js="true">
             <ul data-role="listview" data-autodividers="true" data-inset="true">
                 <li><a href="#">0203491</a></li>
@@ -66,7 +66,7 @@
                 <li><a href="#">Enid Voldon</a></li>
             </ul>
         </div><!--/demo-html -->
-        
+
 		</div><!-- /content -->
 
 		<div data-role="footer" class="jqm-footer">

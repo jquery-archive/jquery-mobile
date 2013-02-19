@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Framework - Fullscreen Fixed toolbars</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Framework - Fullscreen Fixed toolbars</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
@@ -14,24 +14,24 @@
 </head>
 <body>
 <div data-role="page" class="jqm-demos">
-	
+
     <div data-role="header" data-position="fixed" data-theme="f" data-fullscreen="true">
         <h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
         <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
     </div>
-    
+
     <div data-role="content" class="jqm-content">
-    
+
 		<img src="../../_assets/img/photo-run.jpeg"  alt="Photo Run">
-	
+
 		<p class="ui-body">This page demonstrates the "fullscreen" toolbar mode. This toolbar treatment is used in special cases where you want the content to fill the whole screen, and you want the header and footer toolbars to appear and disappear when the page is clicked responsively &mdash; a common scenario for photo, image or video viewers.</p>
-		
+
 		<p class="ui-body">To enable this toolbar feature type, you apply the <code>data-fullscreen="true"</code> attribute and the <code>data-position="fixed"</code> attribute to both the header and footer <code>div</code> elements, or whichever you want to be full-screen. </p>
-		
+
 		<p class="ui-body">Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content, so not all content will be accessible with the toolbars open, just as shown in this demo.</p>
-			       
+
 			</div><!-- /content -->
 
 			<div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true">
@@ -40,9 +40,9 @@
 
 
 		<?php include( '../../global-nav.php' ); ?>
-			
-			
-			
+
+
+
 			</div><!-- /page -->
 
 			</body>

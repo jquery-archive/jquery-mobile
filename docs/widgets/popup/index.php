@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
@@ -21,7 +21,7 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 
 			<h1>Popup <a href="http://api.jquerymobile.com/popup/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
@@ -55,11 +55,11 @@
 
 			<h2>Photo lightbox</h2>
 			<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="a"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="popup-images.php" data-ajax="false">scaling images in popups</a>.</p>
-			<div data-demo-html="true">	
+			<div data-demo-html="true">
 				<a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/paris.jpg" alt="Paris, France" style="width:30%"></a>
 				<a href="#popupSydney" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/sydney.jpg" alt="Sydney, Australia" style="width:30%"></a>
 				<a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/newyork.jpg" alt="New York, USA" style="width:30%"></a>
-				
+
 				<div data-role="popup" id="popupParis" data-overlay-theme="a" data-theme="d" data-corners="false">
 					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
 				</div>
@@ -161,7 +161,7 @@
 
 			<h2>Dialog</h2>
 			<p>Standard dialog markup can be placed into a popup. To create a modal style dialog, add the <code>data-dismissible="false"</code> attribute to the popup to prevent the click-outside-to-close behavior so people need to interact with popup buttons to close it.</p>
-			<div data-demo-html="true">	
+			<div data-demo-html="true">
 				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="delete" data-theme="b">Delete page...</a>
 
 				<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
@@ -194,7 +194,7 @@
 
 			<h2>Closing popups</h2>
 			<p>By default popups can be closed either by clicking outside the popup widget or by pressing the <code>Esc</code> key. To prevent this, the <code>data-dismissible="false"</code> attribute can be added to the popup. To add an explicit close button to a popup, add a link with the role of button into the popup container with a <code>data-rel="back"</code> attribute and position via a class.</p>
-			
+
 			<div data-demo-html="true">
 				<a href="#popupCloseRight" data-rel="popup" data-role="button" data-inline="true">Right close button</a>
 				<a href="#popupCloseLeft" data-rel="popup" data-role="button" data-inline="true">Left close button</a>
@@ -266,7 +266,7 @@
 				<p>The popup has two theme-related options: <code>data-theme</code> and <code>data-overlay-theme</code>. The <code>data-theme</code> option refers to the theme of the popup itself, whereas <code>data-overlay-theme</code> controls the semi-opaque layer behind the popup. The theme is inherited from the page; specify <code>data-theme=&quot;none&quot;</code> for a popup with a transparent background.</p>
 
 
-				<div data-demo-html="true">	
+				<div data-demo-html="true">
 					<a href="#theme" data-rel="popup" data-role="button" data-inline="true">Theme A</a>
 					<div id="theme" data-role="popup" data-theme="a" class="ui-content">
 					  <p>I have <code>data-theme="a"</code> set on me</p>

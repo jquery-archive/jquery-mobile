@@ -21,17 +21,17 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>Triggering create on injected HTML does not work.</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">It is important to remember that create must be triggered on the <strong>parent container</strong> and not on the individual element that needs to be enhanced.</p>
 <pre><code>
-//HTML 
+//HTML
 &#60;form id="formid"&#62;
 	&#60;input type="search" id="searchInput"/&#62;
 	&#60;button id="submitButton"&#62;Submit&#60;/button&#62;
@@ -42,19 +42,19 @@ $("#formid").trigger("create");
 $("#serchInput").trigger("create");
 $("#submitButton").trigger("create");
 </pre></code>
-			
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

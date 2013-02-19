@@ -38,10 +38,10 @@
 
 			<p class="jqm-intro">Range slider offer two handles to set a min and max value along a numeric continuum.
 			</p>
-	
-            
+
+
                 <h2>Basic range slider</h2>
-                                
+
                 <div data-demo-html="true">
 				<form>
                     <div data-role="rangeslider">
@@ -55,7 +55,7 @@
                 </div><!-- /demo-html -->
 
                 <h2>Step attribute</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 				<form>
@@ -67,9 +67,9 @@
                     </div>
 				</form>
                 </div><!-- /demo-html -->
-                
+
                 <h2>No highlight</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <div data-role="rangeslider" data-highlight="false">
@@ -82,7 +82,7 @@
                 </div><!-- /demo-html -->
 
                 <h2>Theme</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <div data-role="rangeslider" data-track-theme="b" data-theme="a">
@@ -93,9 +93,9 @@
                     </div>
 				</form>
                 </div><!-- /demo-html -->
-              
+
                 <h2>Mini</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <div data-role="rangeslider" data-mini="true">
@@ -106,9 +106,9 @@
                     </div>
 				</form>
                 </div><!-- /demo-html -->
-                
+
                 <h2>Disabled</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <div data-role="rangeslider">
@@ -121,7 +121,7 @@
                 </div><!-- /demo-html -->
 
                 <h2>Label hidden</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <div data-role="rangeslider">
@@ -132,9 +132,9 @@
                     </div>
 				</form>
                 </div><!-- /demo-html -->
-                
+
                 <h2>Fieldcontain</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain">
@@ -147,9 +147,9 @@
 					</div>
 				</form>
                 </div><!-- /demo-html -->
-                
+
                 <h2>Fieldcontain, mini</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain">
@@ -162,9 +162,9 @@
 					</div>
 				</form>
                 </div><!-- /demo-html -->
-                
+
                 <h2>Fieldcontain, hidden label</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain" class="ui-hide-label">
@@ -177,9 +177,9 @@
 					</div>
 				</form>
                 </div><!-- /demo-html -->
-                
+
                 <h2>Fieldcontain, hidden label, mini</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain" class="ui-hide-label">
@@ -194,9 +194,9 @@
                 </div><!-- /demo-html -->
 
                 <h2>Grid</h2>
-                
+
                 <p>We make the grid blocks 100% width below 28em with custom CSS.</p>
-                
+
                 <div data-demo-html="true" data-demo-css="#grid-style">
                 	<div class="ui-grid-a">
                     	<div class="ui-block-a">
@@ -207,13 +207,13 @@
                                     <label for="range-12b">Rangeslider:</label>
                                     <input type="range" name="range-12b" id="range-12b" min="0" max="100" value="100">
                                 </div>
-                        	</div><!-- /ui-bar -->      
+                        	</div><!-- /ui-bar -->
         				</div><!-- /ui-block -->
                     	<div class="ui-block-b">
                             <div class="ui-bar ui-bar-c">
                                 <label for="slider-12">Slider:</label>
                                 <input type="range" name="slider-12" id="slider-12" data-highlight="true" min="0" max="100" value="50">
-                        	</div><!-- /ui-bar -->      
+                        	</div><!-- /ui-bar -->
         				</div><!-- /ui-block -->
                     	<div class="ui-block-a">
                             <div class="ui-bar ui-bar-c">
@@ -223,28 +223,28 @@
                                     <label for="range-13b">Rangeslider:</label>
                                     <input type="range" name="range-13b" id="range-13b" min="0" max="100" value="100">
                                 </div>
-                        	</div><!-- /ui-bar -->      
+                        	</div><!-- /ui-bar -->
         				</div><!-- /ui-block -->
                     	<div class="ui-block-b">
                             <div class="ui-bar ui-bar-c">
                                 <label for="slider-13">Slider:</label>
                                 <input type="range" name="slider-13" id="slider-13" data-mini="true" data-highlight="true" min="0" max="100" value="50">
-                        	</div><!-- /ui-bar -->      
+                        	</div><!-- /ui-bar -->
         				</div><!-- /ui-block -->
                 	</div><!-- /ui-grid -->
 				</form>
                 </div><!-- /demo-html -->
-                
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

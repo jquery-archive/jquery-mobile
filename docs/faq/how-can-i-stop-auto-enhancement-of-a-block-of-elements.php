@@ -21,36 +21,36 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>How can I stop JQM from enhancing a block of elements?</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">To prevent jQuery Mobile from enhancing an entire block of content add data-enhance="false" to the parent container and nothing within the container will be enhanced.</p>
 			<p>To use data-enhance="false" you must also set $.mobile.ignoreContentEnabled to true prior to initialization</p>
 <pre><code>
 $(document).bind("mobileinit", function(){
   $.mobile.ignoreContentEnabled = true;
-});	
+});
 </code></pre>
 
 			<p>An important note about setting <code>ignoreContentEnabled</code> to true is this has a substantial negative impact on performance. This is because now every time an element is to be enhanced jQuery Mobile must now traverse up the entire DOM tree to make sure the the element does not have a parent with data-enhance false set on it.</p>
-			
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

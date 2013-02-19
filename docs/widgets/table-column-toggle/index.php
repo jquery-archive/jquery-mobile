@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
@@ -21,19 +21,19 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-				
+
 			<h1>Table: Column Toggle <a href="http://api.jquerymobile.com/table-columntoggle/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-		
+
 			<p class="jqm-intro">The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row.
 			</p>
-			
+
 			<h2>Column toggle basics</h2>
 			<p>This table mode automatically hides less important columns at narrower widths and surfaces a button to open a menu that allows the user to choose what columns they want to see. In this mode, the author attempts to define which columns are most important to show across various widths by assigning a priority to each column.</p>
 
-	        <p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column 
+	        <p>A user may choose to check as many columns as they want by tapping the "Columns..." button to open the column
 	        chooser popup. The popup contains a dynamically generated list of columns based on the table markup that can be checked and unchecked to adjust the visible columns. </p>
 
 			<div data-demo-html="true">
@@ -132,7 +132,7 @@
 
 
 
-	   
+
 
 	      <h2>Setting column priority</h2>
 

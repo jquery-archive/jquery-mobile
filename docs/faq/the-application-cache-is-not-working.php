@@ -21,14 +21,14 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>I'm trying to use the application cache but it's not working?</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">The issue here is not actually jQuery Mobile but the fact that some browsers return a status of zero. This causes the internal error handlers to be triggered in jQuery's AJAX function.</p>
 			<p>There is a simple workaround for this:</p>
 <pre><code>
@@ -42,19 +42,19 @@ $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 });
 </pre></code>
 <p>One important note on this workaround is that this sets is local to true for all AJAX requests weather or not they are in the manifest. This works currently because is local is only checked As long as the cache is valid and the status is 0 so it doesn't affect uncached results. This may  change in the future breaking applications using this workaround.</p>
-			
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

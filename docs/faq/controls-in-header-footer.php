@@ -21,29 +21,29 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-			
+
 			<h2>Question:</h2>
-            			
+
 			<h1>Controls in my fixed header or footer are not responding or behave erratically.</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">There are several well known bugs in mobile browsers regarding form elements inside <code>position: fixed</code> elements. Android 2.3 has a number of serious issues with fixed positioning and scrolling that can make select menus inoperable. See the device bugs project issue #1 <A href="https://github.com/scottjehl/Device-Bugs/issues/1">https://github.com/scottjehl/Device-Bugs/issues/1</a></p>
-			
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

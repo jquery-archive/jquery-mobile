@@ -51,7 +51,7 @@
 
 				$( "img.photo", this ).css( "max-height", maxHeight );
 			});
-			
+
 			// Remove the popup after it has been closed to manage DOM size
 			$( document ).on( "popupafterclose", ".ui-popup", function() {
 				$( this ).remove();
@@ -76,26 +76,26 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
+
         <h1>Dynamic popup</h1>
-        
+
         <div data-demo-html="#demo-page" data-demo-js="true">
             <p>This demo shows how you can dynamically create a popup. The popup contains images which means we have to set the image width and height to make sure the popup gets the right size and position. At client side we can only get the size when the image has been loaded in the DOM. In this demo we use the <code>load</code> event, but with a fallback because it has some caveats (see <a href="http://api.jquery.com/load-event/" rel="external">.load() - jQuery API</a>).</p>
-            
+
             <p><a href="#demo-page" data-transition="fade" data-role="button" data-inline="true" data-theme="c" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open dynamic popup demo</a></p>
         </div><!--/demo-html -->
 
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 
 <div data-role="page" id="demo-page" data-title="Cars">
@@ -106,7 +106,7 @@
     </div><!-- /header -->
 
     <div data-role="content">
-            
+
         <ul data-role="listview">
             <li><a href="#" class="cars" id="bmw"><img src="../../_assets/img/bmw-thumb.jpg" alt="BMW"><h2>BMW</h2><p>5 series</p></a></li>
             <li><a href="#" class="cars" id="landrover"><img src="../../_assets/img/landrover-thumb.jpg" alt="Land Rover"><h2>Land Rover</h2><p>Discovery 4</p></a></li>

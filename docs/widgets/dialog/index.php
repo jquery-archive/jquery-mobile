@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Dialogs - jQuery Mobile Demos</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Dialogs - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
@@ -21,16 +21,16 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-				
+
 			<h1>Dialogs <a href="http://api.jquerymobile.com/dialog/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-		
+
 			<p class="jqm-intro">Any page can be presented as a modal dialog that appears to be suspended above the page by adding an attribute to the link that leads to the dialog page.
 			</p>
-	
-            
+
+
 			<h2>Basics</h2>
 			<p>Any page can be presented as a modal dialog by adding the <code>data-rel="dialog"</code> attribute to the page anchor link. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page. By default the framework will also add a close button if the dialog has a header.</p>
 
@@ -39,7 +39,7 @@
 			&lt;a href=&quot;foo.html&quot; data-rel=&quot;dialog&quot;&gt;Open dialog&lt;/a&gt;
 			</code>
 			</p>
-	
+
 			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Open dialog</a>
 
 
@@ -64,12 +64,12 @@
             <p>If the dialog has a header the framework will add a close button at the left side of the header. You can change the position by adding <code>data-close-btn="right"</code> to the dialog container. If you don't want a close button in the header or if you want to add a custom close button, you can use <code>data-close-btn="none"</code>.</p>
 			<a href="dialog-rightclosebtn.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Right close button</a>
 			<a href="dialog-noclosebtn.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">No close button</a>
-             
+
 			<p>To create a "cancel" button in a dialog, just link to the page that triggered the dialog to open and add the <code>data-rel="back"</code> attribute to your link. This pattern of linking to the previous page is also usable in non-JS devices as well.</p>
 			<p>For JavaScript-generated links, you can simply set the href attribute to "#" and use the <code>data-rel="back"</code> attribute. You can also call the dialog's <code>close()</code> method to programmatically close dialogs, for example: <code>$('.ui-dialog').dialog('close')</code>. </p>
 
 			<h3>Setting the close button text</h3>
-			<p>Just like the page plugin, you can set a dialog's close button text through an option or data attribute. 
+			<p>Just like the page plugin, you can set a dialog's close button text through an option or data attribute.
 			This option is used to customize the text of the close button which is helpful for translating this into different languages. This is displayed as an icon-only button by default so the text isn't visible on-screen, but is read by screen readers so this is an important accessibility feature.
 			The option can be configured for all dialogs by binding to the <code>mobileinit</code> event and setting the <code>$.mobile.dialog.prototype.options.closeBtnText</code> property to a string of your choosing, or you can place the data attribute <code>data-close-btn-text</code> to configure the text from your markup.
 			</p>
@@ -109,14 +109,14 @@
 </code></pre>
 
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-    
+
 </div><!-- /page -->
 </body>
 </html>

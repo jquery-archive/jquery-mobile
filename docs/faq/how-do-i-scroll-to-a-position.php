@@ -21,14 +21,14 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>How do I scroll to a position on a page?</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">Since we use the URL hash to preserve Back button behavior, using page anchors to jump down to a position on the page isn't supported by using the traditional anchor link (#foo). This feature is slated for 1.4, but until then, you can use the <code>silentScroll</code> method to scroll to a particular Y position without triggering scroll event listeners. You can pass in a <code>yPos</code> argument to scroll to that Y location.</p>
 
 
@@ -38,20 +38,20 @@
 //scroll to Y 300px
 $.mobile.silentScroll(300);
 </code></pre>
-			
-			
+
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

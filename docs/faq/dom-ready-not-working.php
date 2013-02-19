@@ -21,14 +21,14 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>Why isn't DOM ready working for my scripts?</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">One of the first things people learn in jQuery is to use the <code>$(document).ready()</code> function for executing DOM-specific code as soon as the DOM is ready (which often occurs long before the <code>onload</code> event). However, in jQuery Mobile site and apps, pages are requested and injected into the same DOM as the user navigates, so the DOM ready event is not as useful, as it only executes for the first page. To execute code whenever a new page is loaded and created in jQuery Mobile, you can bind to the <code>pageinit</code> event. </p>
 
 			<p>The <code>pageinit</code> event is triggered on a page when it is initialized, right after initialization occurs. Most of jQuery Mobile's official widgets auto-initialize themselves based on this event, and you can set up your code to do the same.</p>
@@ -47,20 +47,20 @@ $( document ).delegate("#aboutPage", "pagebeforecreate", function() {
 </code></pre>
 
 
-	
-			
+
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

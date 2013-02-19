@@ -56,7 +56,7 @@
 
 <li data-section="Questions & Answers" data-filtertext=""><a href="faq/deep-links-dont-work.php">Following a deep link ( a link to scroll to and id ) does not work.</a></li>
 
-<li data-section="Questions & Answers" data-filtertext=""><a href="faq/scripts-css-only-works-on-first-page-or-refresh.php">My script / css only works on first page or on refresh.</a></li>	
+<li data-section="Questions & Answers" data-filtertext=""><a href="faq/scripts-css-only-works-on-first-page-or-refresh.php">My script / css only works on first page or on refresh.</a></li>
 <li data-role="list-divider">Widgets</li>
 
 <li data-section="Questions & Answers" data-filtertext=""><a href="faq/cloned-content-double-enhanced.php">Cloning a widget or enhanced for element and enhancing causes "double" enhancement</a></li>

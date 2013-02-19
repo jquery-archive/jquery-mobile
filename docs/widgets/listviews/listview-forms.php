@@ -20,11 +20,11 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-		
-		
+
+
+
 			<h2>Non-inset</h2>
 
 			<div data-demo-html="true">
@@ -341,15 +341,15 @@
 				</form>
 			</div><!--/demo-html -->
 
-		
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 </body>
 </html>

@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Transitions - jQuery Mobile Demos</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Transitions - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
@@ -29,9 +29,9 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-				
+
 			<h1>Transitions</h1>
 
 			<p class="jqm-intro">The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with AJAX navigation.
@@ -93,8 +93,8 @@
 					<td><a href="page-transitions-page.php" data-role="button" data-transition="none" data-inline="true">page</a></td>
 				</tr>
 			</table>
-			</div><!-- /demo-html -->  
-			
+			</div><!-- /demo-html -->
+
 	            <p><strong>Important:</strong> Some platforms currently have issues with transitions.
 	                We are working on a solution to solve the problem for everyone.
 	                If you are experiencing flickers and flashes during or at the end of a transition we suggest the following workaround.
@@ -105,7 +105,7 @@
 	            <code>
 	                .ui-page { -webkit-backface-visibility: hidden; }
 	            </code>
-	            
+
 
 	<p><strong>Only seeing fade transitions?</strong> To view all transition types, you must be on a browser that supports 3D transforms. By default, devices that lack 3D support (such as Android 2.x) will fallback to "fade" for all transition types. This behavior is configurable (see below).</p>
 
@@ -135,22 +135,22 @@
 			<code>$.mobile.transitionFallbacks.slideout = "none"</code>
 
 			<h2>Max scroll for transitions</h2>
-			<p>By default, transitions are disabled (set to "none") when you're either coming FROM or going TO a page where the scroll position is 3x the height of the device's screen. 
-			This feature was added because of the slow response times and the possibility of browser crashing when clicking on a list item (or any navigation element) far down a long page which leads to the 
-			browser trying to animate a really massively tall page from the scroll position to the top of the screen. The scroll position, not total screen height, is the determining factor for performance. 
+			<p>By default, transitions are disabled (set to "none") when you're either coming FROM or going TO a page where the scroll position is 3x the height of the device's screen.
+			This feature was added because of the slow response times and the possibility of browser crashing when clicking on a list item (or any navigation element) far down a long page which leads to the
+			browser trying to animate a really massively tall page from the scroll position to the top of the screen. The scroll position, not total screen height, is the determining factor for performance.
 			This scroll position breakpoint is configurable via the new <code>getMaxScrollForTransition</code> function.</p>
 
 			<h2>Max width for transitions</h2>
 			<p>By default, transitions can be disabled (set to "none") when the window width is greater than a certain pixel width. This feature is useful because transitions can be distracting or perform poorly on larger screens. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>false</code>. The option accepts any number representing a pixel width or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window is wider than the specified value.</p>
 
 			<h2>Same page transition</h2>
-			<p>Transitions to the current active page are ignored by default but can be enabled by using the <code>allowSamePageTransition</code> option of the <code>$.mobile.changePage</code> method. Note that not all transitions will work as expected and may end in an impractical result. </p> 
+			<p>Transitions to the current active page are ignored by default but can be enabled by using the <code>allowSamePageTransition</code> option of the <code>$.mobile.changePage</code> method. Note that not all transitions will work as expected and may end in an impractical result. </p>
 
 			<h2>Creating custom transitions</h2>
 			<p>jQuery Mobile allows for the addition of custom transitions to the <code>$.mobile.transitionHandlers</code> dictionary so you can expand the selection of transitions on your site or app.
-			
-			
-			
+
+
+
 
 
 		</div><!-- /content -->

@@ -1,18 +1,18 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Framework - Persistent footer A</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Framework - Persistent footer A</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../js/"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 	<div data-role="page" class="type-interior">
 
 	<div data-role="header" data-theme="f" data-position="fixed" data-id="foo">
@@ -20,16 +20,16 @@
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div>
-	
+
 	<div data-role="content" class="jqm-content">
-		
+
 		<h2>About persistent toolbars</h2>
 		<p>These pages are a demo of persistent toolbars. Click on any of the links in the footer, and you'll see the page content transition. Both the persistent header and footer on these pages remain in place during the animation to a new HTML page.</p>
 		<p>To tell the framework to apply the persistent behavior, add the same <code>data-id</code> attribute to the header and/or footer of all HTML pages in the navigation. It's that simple: If the page you're navigating to has a header or footer with the same <code>data-id</code> as the page you're navigating from, the toolbars will appear fixed outside of the transition. Each of the pages in this demo has a different transition to test out how this works.</p>
-		
+
 		<p>Typically, the persistent toolbar technique will be combined with fixed positioning. In this example, the footer also has a navbar, like this:</p>
-	
-<pre><code>	
+
+<pre><code>
 &lt;div data-role=&quot;footer&quot;<strong> data-id=&quot;foo1&quot; data-position=&quot;fixed&quot;</strong>&gt;
 	&lt;div data-role=&quot;navbar&quot;&gt;
 		&lt;ul&gt;
@@ -43,15 +43,15 @@
 </code></pre>
 
 		<p>To set the active state of an item in a persistent toolbar, add <code>class="ui-btn-active ui-state-persist"</code> to the corresponding anchor.</p>
-		
-<pre><code>	
+
+<pre><code>
 &lt;li&gt;&lt;a href=&quot;a.html&quot; <strong>class=&quot;ui-btn-active ui-state-persist&quot;</strong>&gt;Info&lt;/a&gt;&lt;/li&gt;
 </code></pre>
 
 		<h3>A note about transitions</h3>
 		<p>The slide, slideup, slidedown, fade or none <a href="../pages/page-transitions.html">page transitions</a> all work great with persistent fixed toolbars. However, intensive 3D transitions like flip, turn, and flow can cause positioning and animation performance issues with this technique so we don't recommend using them.</p>
-		
-				
+
+
 
 		<div class="content-secondary">
 
@@ -72,7 +72,7 @@
 
 						</ul>
 				</div>
-			</div>		
+			</div>
 
 		</div><!-- /content -->
 

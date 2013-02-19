@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Grids - jQuery Mobile Demos</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Grids - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../_assets/favicon.ico">
@@ -25,63 +25,63 @@
 	}
 
 	/* Stack all blocks to start */
-	.rwd-example .ui-block-a, 
-	.rwd-example .ui-block-b, 
-	.rwd-example .ui-block-c { 
-		width: 100%; 
-		float: none; 
+	.rwd-example .ui-block-a,
+	.rwd-example .ui-block-b,
+	.rwd-example .ui-block-c {
+		width: 100%;
+		float: none;
 	}
 
-    /* 1st breakpoint - Float B and C, leave A full width on top */ 
+    /* 1st breakpoint - Float B and C, leave A full width on top */
 	@media all and (min-width: 42em){
         .rwd-example div {
            min-height:14em;
         }
-		.rwd-example .ui-block-b, 
-		.rwd-example .ui-block-c { 
-		  float:left; 
-          width: 49.95%; 
+		.rwd-example .ui-block-b,
+		.rwd-example .ui-block-c {
+		  float:left;
+          width: 49.95%;
 		}
-        .rwd-example .ui-block-b p, 
-		.rwd-example .ui-block-c p { 
+        .rwd-example .ui-block-b p,
+		.rwd-example .ui-block-c p {
           font-size:.8em;
 
 		}
 	}
 
-    /* 2nd breakpoint - Float all, 50/25/25 */ 
+    /* 2nd breakpoint - Float all, 50/25/25 */
 	@media all and (min-width: 55em){
 
         .rwd-example div {
            min-height:17em;
         }
-        .rwd-example .ui-block-a, 
-		.rwd-example .ui-block-c { 
-		  float:left; 
-          width: 49.95%; 
+        .rwd-example .ui-block-a,
+		.rwd-example .ui-block-c {
+		  float:left;
+          width: 49.95%;
 		}
-		.rwd-example .ui-block-b, 
-		.rwd-example .ui-block-c { 
-		  float:left; 
-          width: 24.925%; 
+		.rwd-example .ui-block-b,
+		.rwd-example .ui-block-c {
+		  float:left;
+          width: 24.925%;
 		}
 	}
 
-    /* 3rd breakpoint - Bump up font size at very wide screens */ 
+    /* 3rd breakpoint - Bump up font size at very wide screens */
 	@media all and (min-width: 75em){
 
         .rwd-example {
           font-size:125%;
         }
-        .rwd-example .ui-block-a, 
-		.rwd-example .ui-block-c { 
-		  float:left; 
-          width: 49.95%; 
+        .rwd-example .ui-block-a,
+		.rwd-example .ui-block-c {
+		  float:left;
+          width: 49.95%;
 		}
-		.rwd-example .ui-block-b, 
-		.rwd-example .ui-block-c { 
-		  float:left; 
-          width: 24.925%; 
+		.rwd-example .ui-block-b,
+		.rwd-example .ui-block-c {
+		  float:left;
+          width: 24.925%;
 		}
 	}
 	</style>
@@ -95,11 +95,11 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
-	<div data-role="content" class="jqm-content">
-		
 
-		
+	<div data-role="content" class="jqm-content">
+
+
+
 			<h2>Custom responsive grid</h2>
 
 			<p>It's easy to extend the basic grid styles into a custom responsive layout by using CSS media queries to adjust the layout and design across various screen width breakpoints.	</p>
@@ -108,9 +108,9 @@
 
 			<!-- view source utilty wrapper -->
 			<div data-demo-html="true" data-demo-css="true">
-				
+
 				<div class="rwd-example">
-				
+
 					<!-- Lead story block -->
 					<div class="ui-block-a">
 		              <div class="ui-body ui-body-d">
@@ -118,7 +118,7 @@
 		                <p>One of the worst-kept secrets in tech has been confirmed: Apple will hold an event October 23 in San Jose, California, at which the company is widely expected to unveil a smaller, cheaper version of its popular iPad called "Mini".</p>
 		              </div>
 		            </div>
-	
+
 					<!-- secondary story block #1 -->
 					<div class="ui-block-b">
 		              <div class="ui-body ui-body-d">
@@ -126,7 +126,7 @@
 		                <p>The Microsoft Surface tablet picture has come into focus. The Redmond giant filled in the blanks on the new tablet's availability and specs.</p>
 		              </div>
 		             </div>
-	
+
 					<!-- secondary story block #2 -->
 					<div class="ui-block-c">
 		              <div class="ui-body ui-body-d">
@@ -136,11 +136,11 @@
 		             </div>
 
 				</div><!-- /rwd-example -->
-			
-			</div><!-- /data-demo -->
-	
 
-		
+			</div><!-- /data-demo -->
+
+
+
 			</div><!-- /content -->
 
 			<div data-role="footer" class="jqm-footer">
@@ -149,7 +149,7 @@
 			</div><!-- /footer -->
 
 		<?php include( '../../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

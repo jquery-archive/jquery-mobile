@@ -20,17 +20,17 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-		
-		
+
+
+
 			<h2>Local autocomplete with listview filter reveal</h2>
 			<p>The filter reveal feature makes is easy to build a simple autocomplete with local data. When a filterable list has the <code>data-filter-reveal="true"</code>, it will auto-hide all the list items when the search field is blank. The <code>data-filter-placeholder</code> attribute can be added to specify the placeholder text for the filter.</p>
 			<p>Any listview filter with more than 100-200 items may be slow to perform on a mobile device so we recommend using this feature for  autocomplete situations with a relatively small number of items. If you need to search against a longer list of values, we provide a way to create a filter with a <a href="listview-filter-autocomplete.jsp" data-ajax="false">remote data source</a>.</p>
 
 			<h3>Filter reveal</h3>
-			
+
 			<div data-demo-html="true">
 				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
 					<li><a href="index.html">Acura</a></li>
@@ -58,10 +58,10 @@
 				</ul>
 			</div><!--/demo-html -->
 
-			
+
 
 			<h3>Filter reveal, inset</h3>
-			
+
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
 					<li><a href="index.html">Acura</a></li>
@@ -89,15 +89,15 @@
 				</ul>
 			</div><!--/demo-html -->
 
-		
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 </body>
 </html>

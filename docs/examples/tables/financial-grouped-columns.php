@@ -12,59 +12,59 @@
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
 	<style>
-		.th-groups th { 
+		.th-groups th {
 			text-align: center;
 			background-color: rgba(0,0,0,.1);
 			border-right: 1px solid #fff;
 		}
-		.th-groups th.totals { 
+		.th-groups th.totals {
 			background-color: rgba(0,0,0,.5);
 			color: #fff;
 			text-shadow: none;
 		}
-		/* Show priority 1 at 320px (20em x 16px) */ 
+		/* Show priority 1 at 320px (20em x 16px) */
 		@media screen and (min-width: 20em) {
 			th.ui-table-priority-1,
 			td.ui-table-priority-1 {
 				display: table-cell;
 			}
 		}
-		/* Show priority 2 at 480px (30em x 16px) */ 
+		/* Show priority 2 at 480px (30em x 16px) */
 		@media screen and (min-width: 30em) {
 			th.ui-table-priority-2,
 			td.ui-table-priority-2 {
 				display: table-cell;
 			}
 		}
-		/* Show priority 3 at 640px (40em x 16px) */ 
+		/* Show priority 3 at 640px (40em x 16px) */
 		@media screen and (min-width: 40em) {
 			th.ui-table-priority-3,
 			td.ui-table-priority-3 {
 				display: table-cell;
 			}
 		}
-		/* Show priority 4 at 800px (50em x 16px) */ 
+		/* Show priority 4 at 800px (50em x 16px) */
 		@media screen and (min-width: 50em) {
 			th.ui-table-priority-4,
 			td.ui-table-priority-4 {
 				display: table-cell;
 			}
 		}
-		/* Show priority 5 at 960px (60em x 16px) */ 
+		/* Show priority 5 at 960px (60em x 16px) */
 		@media screen and (min-width: 60em) {
 			th.ui-table-priority-5,
 			td.ui-table-priority-5 {
 				display: table-cell;
 			}
 		}
-		/* Show priority 6 at 1200 (75em x 16px) */ 
+		/* Show priority 6 at 1200 (75em x 16px) */
 		@media screen and (min-width: 75em) {
 			th.ui-table-priority-6,
 			td.ui-table-priority-6 {
 				display: table-cell;
 			}
 		}
-		/* Manually hidden */ 
+		/* Manually hidden */
 		th.ui-table-cell-hidden,
 		td.ui-table-cell-hidden {
 			display: none;
@@ -75,8 +75,8 @@
 			display: table-cell;
 		}
 	</style>
-</head> 
-<body> 
+</head>
+<body>
 <div data-role="page" class="jqm-demos">
 
     <div data-role="header" class="jqm-header">
@@ -87,11 +87,11 @@
     </div><!-- /header -->
 
 	<div data-role="content" class="jqm-content jqm-fullwidth">
-    
+
         <h1>Table Column toggle: Heading groups</h1>
-        
+
         <p>The columns of data are shown and toggled as sets under each grouped heading for each financial quarter. In this example, the totals are shown at narrow widths, then more historical quarters are revealed at wider widths by assigning priorities to the columns.</p>
-        
+
         <div data-demo-html="true" data-demo-css="true">
 
          	<table data-role="table" id="financial-table" data-column-btn-theme="b" data-column-popup-theme="a" data-mode="columntoggle" class="table-stroke">
@@ -103,7 +103,7 @@
 						<th colspan="3" data-priority="4">Q3 2012</th>
 						<th colspan="3" data-priority="3">Q4 2012</th>
 						<th colspan="3" data-priority="1" class="totals">YTD Totals</th>
-					</tr> 
+					</tr>
 					<tr>
 						<th>Store</th>
 
@@ -202,7 +202,7 @@
 					</tr>
 				</tbody>
 			</table>
-			
+
 		</div><!-- /data-demo -->
 
 	</div><!-- /content -->

@@ -14,18 +14,18 @@
 	<script>
 		$(document).on("pageinit", function() {
 			var nextId = 1;
-			
+
 			$("#add").click(function() {
 				nextId++;
 				var content = "<div data-role='collapsible' id='set" + nextId + "'><h3>Section " + nextId + "</h3><p>I am the collapsible content in a set so this feels like an accordion. I am hidden by default because I have the 'collapsed' state; you need to expand the header to see me.</p></div>";
-				
+
 				$("#set").append( content ).collapsibleset('refresh');
 			});
-			
+
 			$("#expand").click(function() {
 				$("#set").children(":last").trigger( "expand" );
 			});
-			
+
 			$("#collapse").click(function() {
 				$("#set").children(":last").trigger( "collapse" );
 			});
@@ -41,27 +41,27 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
+
         <h1>Dynamic collapsible</h1>
-        
-        <p>This demo shows how you can dynamically add a collapsible to a collapsible set (accordion). It also shows how you can use the <code>expand</code> and <code>collapse</code> events to dynamically open or close a collapsible.</p> 
-        
+
+        <p>This demo shows how you can dynamically add a collapsible to a collapsible set (accordion). It also shows how you can use the <code>expand</code> and <code>collapse</code> events to dynamically open or close a collapsible.</p>
+
         <div data-demo-html="true" data-demo-js="true">
             <button type="button" data-icon="gear" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="add">Add</button>
             <button type="button" data-icon="plus" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="expand">Expand last</button>
             <button type="button" data-icon="minus" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="collapse">Collapse last</button>
-        
+
             <div data-role="collapsible-set" data-content-theme="d" id="set">
                 <div data-role="collapsible" id="set1" data-collapsed="true">
                     <h3>Section 1</h3>
                     <p>I'm the collapsible content.</p>
                 </div>
             </div>
-    
+
         </div><!--/demo-html -->
-        
+
 		</div><!-- /content -->
 
 		<div data-role="footer" class="jqm-footer">

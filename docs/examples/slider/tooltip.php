@@ -22,11 +22,11 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
+
 		<h1>Slider tooltip extension</h1>
-        
+
         <div data-demo-html="true" data-demo-js="#tooltipCode" data-demo-css="#tooltipStyle">
             <form>
               <label for="slider-1">Slider with tooltip:</label>
@@ -39,7 +39,7 @@
         </div><!-- /demo-html -->
 
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>

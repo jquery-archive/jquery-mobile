@@ -20,11 +20,11 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-		
-		
+
+
+
 			<h2>Non-inset listviews</h2>
 
 			<h3>Read-only</h3>
@@ -270,7 +270,7 @@
 					<li><a href="#">Schindler's List</a></li>
 				</ol>
 			</div><!--/demo-html -->
-			
+
 			<h3>Count bubbles</h3>
 
 			<div data-demo-html="true">
@@ -417,15 +417,15 @@
 				</ul>
 			</div><!--/demo-html -->
 
-		
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 </body>
 </html>

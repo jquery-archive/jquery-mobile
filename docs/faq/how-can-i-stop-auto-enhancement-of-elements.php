@@ -21,16 +21,16 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>How can I stop JQM from auto-enhancing an element?</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">To prevent jQuery Mobile form enhancing an element simply add <code>data-role="none"</code> to the element. Here is a select that is the normal, native element instead of the custom jQuery Mobile styled version that normally is seen:</p>
-			
+
 
             <div data-demo-html="true">
 				<form>
@@ -45,19 +45,19 @@
                 </div>
 				</form>
             </div><!--/demo-html -->
-			
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

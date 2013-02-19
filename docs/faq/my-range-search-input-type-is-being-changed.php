@@ -21,29 +21,29 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-			
+
 			<h2>Question:</h2>
-            			
+
 			<h1>My range or search inputs are being change to number/text.</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">These inputs are degraded to type text or number to allow for consistent look and enhancement by jQuery Mobile. For example, we parse the min, max, value, and step attributes of a <code>range</code> input to configure the JavaScript-based slider we generate to give us full control of the features and appearance. We then 'degrade' the input type of the original <code>range</code> input (which is a native slider) to <code>number</code> in order provide the numeric field next to the slider.</p>
-			
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

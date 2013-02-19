@@ -21,29 +21,29 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>I'm trying to pass information via the hash but it's not working?</h1>
 
 			<h2>Answer:</h2>
-            
+
 			<p class="jqm-intro">jQuery Mobile does not currently support passing information via the hash to pages. This is because jQuery Mobile uses the hash for history tracking and navigation. Any alterations to the hash or attempting to set or pass a hash will interfere with this process and result in unexpected behavior. There is currently no workaround except to disable jQuery mobile's hash and history handling altogether. There are, however, plans to support this in some form in future releases</p>
 
-			
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

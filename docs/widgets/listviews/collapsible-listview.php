@@ -23,13 +23,13 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-		
-		
+
+
+
 			<h2>Inset, individual collapsible</h2>
-			
+
 			<div data-demo-html="true">
 				<div data-role="collapsible" data-theme="b" data-content-theme="c">
 					<h2>Choose a car model...</h2>
@@ -59,9 +59,9 @@
 					</ul>
 				</div><!-- /collapsible -->
 			</div><!--/demo-html -->
-			
+
 			<h2>Inset, collapsible set</h2>
-			
+
 			<div data-demo-html="true">
 				<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
 					<div data-role="collapsible">
@@ -112,14 +112,14 @@
 								<h3>Wolfgang Amadeus Phoenix</h3>
 								<p>Phoenix</p>
 								</a><a href="#">Purchase album
-							</a></li>	
+							</a></li>
 						</ul>
 					</div><!-- /collapsible -->
 				</div><!-- /collapsible-set -->
 			</div><!--/demo-html -->
 
 			<h2>Non-inset, collapsible set</h2>
-			
+
 			<div data-demo-html="true">
 				<div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-inset="false">
 					<div data-role="collapsible">
@@ -173,14 +173,14 @@
 							<li><a href="#">Bob Cabot</a></li>
 							<li><a href="#">Caleb Booth</a></li>
 							<li><a href="#">Christopher Adams</a></li>
-							<li><a href="#">Culver James</a></li>	
+							<li><a href="#">Culver James</a></li>
 						</ul>
 					</div><!-- /collapsible -->
 				</div><!-- /collapsible-set -->
 			</div><!--/demo-html -->
 
 			<h2>Non-inset, individual collapsibles</h2>
-			
+
 			<p>This is an example of a series of individual collapsibles that are full width (non-inset) with listviews inside. Multiple collapsible rows can be open at once since each is an individual collapsible. Here, each collapsible also has a custom icon.</p>
 
 			<div data-demo-html="true">
@@ -221,7 +221,7 @@
 			</div><!--/demo-html -->
 
 			<p>To avoid "double" borders the framework removes the top border of collapsibles that are immediately preceded by another collapsible. Here we show how to negate this with custom CSS.</p>
-			
+
 			<div data-demo-html="true" data-demo-css="true">
 				<div id="demo-borders">
 					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
@@ -248,16 +248,16 @@
 					</div><!-- /collapsible -->
 				</div>
 			</div><!--/demo-html -->
-						
-		
-	
+
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 </body>
 </html>

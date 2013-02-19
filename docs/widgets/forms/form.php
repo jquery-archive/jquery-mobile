@@ -20,31 +20,31 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-		
+
+
 
 			<h2>Basic form</h2>
-			
+
 			<form action="#" method="get">
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="textinput-2">Text Input:</label>
 					<input type="text" name="textinput-2" id="textinput-2" placeholder="Text input" value="">
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">			  
+				<div data-demo-html="true">
 					<label for="search-2">Search Input:</label>
 					<input type="search" name="search-2" id="search-2" value="">
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="textarea-2">Textarea:</label>
 					<textarea cols="40" rows="8" name="textarea-2" id="textarea-2">Textarea</textarea>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="select-native-2">Native select:</label>
 					<select name="select-native-2" id="select-native-2">
 						<option value="small">One</option>
@@ -53,7 +53,7 @@
 					</select>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="select-multiple-2">Custom multiple select:</label>
 					<select multiple="multiple" data-native-menu="false" name="select-multiple-2" id="select-multiple-2">
 						<option value="">Choices:</option>
@@ -63,7 +63,7 @@
 					</select>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup">
 						<legend>Vertical controlgroup, buttons:</legend>
 						<button data-icon="home" data-iconpos="right">One</button>
@@ -72,7 +72,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal controlgroup, buttons:</legend>
 						<button data-icon="home" data-iconpos="right">One</button>
@@ -81,7 +81,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup">
 						<legend>Vertical controlgroup, select:</legend>
 						<label for="select-v-2a">Select A</label>
@@ -105,7 +105,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal controlgroup, select:</legend>
 						<label for="select-h-2a">Select A</label>
@@ -129,7 +129,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal controlgroup, mixed:</legend>
 						<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Link</a>
@@ -143,12 +143,12 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="slider-2">Slider:</label>
 					<input type="range" name="slider-2" id="slider-2" value="50" min="0" max="100" data-highlight="true">
 				</div><!--/demo-html -->
-				
-				<div data-demo-html="true">	
+
+				<div data-demo-html="true">
 				<div data-role="rangeslider">
                     <label for="range-1a">Rangeslider:</label>
                     <input type="range" name="range-1a" id="range-1a" min="0" max="100" value="40">
@@ -157,7 +157,7 @@
                 </div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="flip-2">Flip toggle:</label>
 					<select name="flip-2" id="flip-2" data-role="slider">
 						<option value="off">Off</option>
@@ -165,7 +165,7 @@
 					</select>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup">
 						<legend>Single checkbox:</legend>
 						<label for="checkbox-2">I agree</label>
@@ -173,7 +173,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup">
 						<legend>Vertical controlgroup, checkbox:</legend>
 						<input type="checkbox" name="checkbox-v-2a" id="checkbox-v-2a">
@@ -185,7 +185,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup">
 						<legend>Vertical controlgroup, radio:</legend>
 						<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
@@ -197,7 +197,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal controlgroup, checkbox:</legend>
 						<input type="checkbox" name="checkbox-h-2a" id="checkbox-h-2a">
@@ -209,7 +209,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal controlgroup, radio:</legend>
 						<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
@@ -221,33 +221,33 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="submit-2">Send:</label>
 					<button type="submit" id="submit-2">Submit</button>
 				</div><!--/demo-html -->
 
 			</form>
-	
+
 			<h3>Mini sized</h3>
-				
+
 			<form action="#" method="get">
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="textinput-6">Text Input:</label>
 					<input type="text" name="textinput-6" id="textinput-6" placeholder="Text input" value="" data-mini="true">
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="search-6">Search Input:</label>
 					<input type="search" name="search-6" id="search-6" value="" data-mini="true">
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="textarea-6">Textarea:</label>
 					<textarea cols="40" rows="8" name="textarea-6" id="textarea-6" data-mini="true">Textarea</textarea>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="select-native-6">Native select:</label>
 					<select name="select-native-6" id="select-native-6" data-mini="true">
 						<option value="small">One</option>
@@ -256,7 +256,7 @@
 					</select>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="select-multiple-6">Custom multiple select:</label>
 					<select multiple="multiple" data-native-menu="false" name="select-multiple-6" id="select-multiple-6" data-mini="true">
 						<option value="">Choices:</option>
@@ -266,7 +266,7 @@
 					</select>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical controlgroup, buttons:</legend>
 						<button data-icon="home" data-iconpos="right">One</button>
@@ -275,7 +275,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal controlgroup, buttons:</legend>
 						<button data-icon="home" data-iconpos="right">One</button>
@@ -284,7 +284,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical controlgroup, select:</legend>
 						<label for="select-v-6a">Select A</label>
@@ -308,7 +308,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal controlgroup, select:</legend>
 						<label for="select-h-6a">Select A</label>
@@ -332,7 +332,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal controlgroup, mixed:</legend>
 						<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Link</a>
@@ -346,12 +346,12 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="slider-6">Slider:</label>
 					<input type="range" name="slider-6" id="slider-6" value="50" min="0" max="100" data-highlight="true" data-mini="true">
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="flip-6">Flip toggle:</label>
 					<select name="flip-6" id="flip-6" data-role="slider" data-mini="true">
 						<option value="off">Off</option>
@@ -359,7 +359,7 @@
 					</select>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Single checkbox:</legend>
 						<label for="checkbox-6">I agree</label>
@@ -367,7 +367,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical controlgroup, checkbox:</legend>
 						<input type="checkbox" name="checkbox-v-6a" id="checkbox-v-6a">
@@ -379,7 +379,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical controlgroup, radio:</legend>
 						<input type="radio" name="radio-choice-v-6" id="radio-choice-v-6a" value="on" checked="checked">
@@ -391,7 +391,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal controlgroup, checkbox:</legend>
 						<input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
@@ -403,7 +403,7 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal controlgroup, radio:</legend>
 						<input type="radio" name="radio-choice-h-6" id="radio-choice-h-6a" value="on" checked="checked">
@@ -415,22 +415,22 @@
 					</fieldset>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<label for="submit-6">Send:</label>
 					<button type="submit" id="submit-6" data-mini="true">Submit</button>
 				</div><!--/demo-html -->
 
 			</form>
-		
-		
-	
+
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 </body>
 </html>

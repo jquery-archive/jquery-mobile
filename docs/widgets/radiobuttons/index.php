@@ -20,39 +20,39 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-				
+
 			<h1>Radio buttons <a href="http://api.jquerymobile.com/checkboxradio/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
-		
-			<p class="jqm-intro">Radio buttons are used to provide a list of options where only a single option can be selected. 
+
+			<p class="jqm-intro">Radio buttons are used to provide a list of options where only a single option can be selected.
 			</p>
-			
-		
-			
-			
+
+
+
+
 			<h2 id="radio-markup">Basic markup</h2>
-			
+
 			<p>To create a set of radio buttons, add an <code>input</code> with a <code>type="radio"</code> attribute and a corresponding <code>label</code>. Set the <code>for</code> attribute of the <code>label</code> to match the <code>id</code> of the <code>input</code> so they are semantically associated.</p>
-			
-			<div data-demo-html="true">                
+
+			<div data-demo-html="true">
                 <form>
 					<label>
 						<input type="radio" name="radio-choice-0" id="radio-choice-0a"/>One
 					</label>
-                    
+
                     <label for="radio-choice-0b">Two</label>
                     <input type="radio" name="radio-choice-0" id="radio-choice-0b" class="custom" />
             	</form>
 			</div><!--/demo-html -->
 
-		
+
 
 			<h2 id="radio-vert">Vertical group</h2>
-		
+
 			<p>To visually integrate multiple radio buttons into a vertically grouped button set, the framework will automatically remove all margins between buttons and round only the top and bottom corners of the set if there is a <code> data-role="controlgroup"</code> attribute on the container.</p>
-			
-			<div data-demo-html="true">                
+
+			<div data-demo-html="true">
                 <form>
                 		<fieldset data-role="controlgroup">
 						<legend>Vertical:</legend>
@@ -68,10 +68,10 @@
 
 
 			<h2 id="radio-horiz">Horizontal group</h2>
-			
+
 			<p>Radio buttons can also be used for grouped button sets where more than one button can be selected at once, such as the bold, italic and underline button group seen in word processors. To make a horizontal button set, add the <code> data-type="horizontal"</code> to the <code>fieldset</code>.</p>
-			
-			<div data-demo-html="true">                
+
+			<div data-demo-html="true">
                 <form>
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<legend>Horizontal:</legend>
@@ -84,13 +84,13 @@
 					</fieldset>
             	</form>
 			</div><!--/demo-html -->
-				
-	
+
+
 		<h2 id="radio-mini">Mini size</h2>
-			
+
 			<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a mini version. </p>
-			
-			<div data-demo-html="true">                
+
+			<div data-demo-html="true">
                 <form>
 					<fieldset data-role="controlgroup" data-mini="true">
 						<legend>Vertical, icon right, mini sized:</legend>
@@ -107,10 +107,10 @@
 
 
 			<h2 id="radio-iconpos">Icon position</h2>
-			
+
 			<p>To swap the position of the radio icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the fieldset to create a mini version. </p>
-			
-			<div data-demo-html="true">                
+
+			<div data-demo-html="true">
                 <form>
 					<fieldset data-role="controlgroup" data-iconpos="right">
 						<legend>Vertical, icon right, mini sized:</legend>
@@ -127,10 +127,10 @@
 
 
 			<h2 id="radio-theme">Theme</h2>
-			
+
 			<p>To set the theme, add the <code> data-theme</code> attribute each of the individual checkbox inputs.</p>
-			
-			<div data-demo-html="true">                
+
+			<div data-demo-html="true">
                 <form>
                 	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<legend>Horizontal, mini sized:</legend>
@@ -146,10 +146,10 @@
 
 
 
-            					
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
@@ -157,7 +157,7 @@
 
 <?php include( '../../global-nav.php' ); ?>
 
-	
+
 </div><!-- /page -->
 </body>
 </html>

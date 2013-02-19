@@ -13,7 +13,7 @@
 	<script src="../../../js/"></script>
 	<script>
 		$( document ).on( "pageinit", "#demo-page", function() {
-			
+
 			// Swipe to remove list item
 			$( document ).on( "swipeleft swiperight", "#list li.ui-li", function( event ) {
 				var listitem = $( this ),
@@ -21,20 +21,20 @@
 					dir = event.type === "swipeleft" ? "left" : "right",
 					// Check if the browser supports the transform (3D) CSS transition
 					transition = $.support.cssTransform3d ? dir : false;
-					
+
 					confirmAndDelete( listitem, transition );
 			});
 
 			// If it's not a touch device...
 			if ( ! $.mobile.support.touch ) {
-				
-				// Remove the class that is used to hide the delete button on touch devices				
+
+				// Remove the class that is used to hide the delete button on touch devices
 				$( "#list" ).removeClass( "touch" );
-				
+
 				// Click delete split-button to remove list item
 				$( ".delete" ).on( "click", function() {
 					var listitem = $( this ).parent( "li.ui-li" );
-					
+
 					confirmAndDelete( listitem );
 				});
 			}
@@ -51,7 +51,7 @@
 				$( "#confirm #yes" ).on( "click", function() {
 					// Remove with a transition
 					if ( transition ) {
-						
+
 						listitem
 							// Remove the highlight
 							.removeClass( "ui-btn-down-d" )
@@ -76,7 +76,7 @@
 				// Remove active state and unbind when the cancel button is clicked
 				$( "#confirm #cancel" ).on( "click", function() {
 					listitem.removeClass( "ui-btn-down-d" );
-					$( "#confirm #yes" ).off();	
+					$( "#confirm #yes" ).off();
 				});
 			}
 		});
@@ -95,7 +95,7 @@
 			border-top-width: 0; /* We switch to border bottom on previous list item */
 			border-right-width: 1px;
 		}
-		/* Right transition */		
+		/* Right transition */
 		li.ui-li.right {
 			-webkit-transition: -webkit-transform 250ms ease;
 			-webkit-transform: translateX(100%);
@@ -160,17 +160,17 @@
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
-    
+
     <div data-role="content" class="jqm-content">
 
         <h1>Swipe to delete list item</h1>
-    
+
         <div data-demo-html="#sample-page" data-demo-js="true" data-demo-css="true">
             <p>This demo shows how you can remove list items by swiping left or right. For devices without touchscreen there is a delete button. This demo also contains a custom styled confirmation popup.</p>
-            
+
             <p><a href="#demo-page" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open swipe list demo</a></p>
         </div>
-            
+
 	</div><!-- /content -->
 
 <?php include( '../../global-nav.php' ); ?>
@@ -189,9 +189,9 @@ code view
         <a href="#demo-intro" data-rel="back" data-icon="arrow-l" data-iconpos="notext">Back</a>
         <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
     </div><!-- /header -->
-  
+
     <div data-role="content">
-    
+
         <ul id="list" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-split-theme="d">
             <li>
                 <a href="#demo-mail">
@@ -322,20 +322,20 @@ code view
         </ul>
 
     </div><!-- /content -->
-    
+
     <div id="confirm" class="ui-content" data-role="popup" data-theme="none">
-        
+
         <p id="question">Are you sure you want to delete</p>
-        
+
         <div class="ui-grid-a">
             <div class="ui-block-a">
                 <a id="yes" data-role="button" data-mini="true" data-shadow="false" data-theme="b" data-rel="back">Yes</a>
             </div>
             <div class="ui-block-b">
-                <a id="cancel" data-role="button" data-mini="true" data-shadow="false" data-theme="b" data-rel="back">Cancel</a>                
+                <a id="cancel" data-role="button" data-mini="true" data-shadow="false" data-theme="b" data-rel="back">Cancel</a>
             </div>
         </div>
-        
+
 	</div><!-- /popup -->
 
 </div><!-- /page -->
@@ -347,9 +347,9 @@ code view
         <a href="#demo-intro" data-rel="back" data-icon="arrow-l" data-iconpos="notext">Back</a>
         <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
     </div><!-- /header -->
-  
+
     <div data-role="content">
-    
+
         <ul id="list" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-split-theme="d">
             <li>
                 <a href="#demo-mail">
@@ -480,20 +480,20 @@ code view
         </ul>
 
     </div><!-- /content -->
-    
+
     <div id="confirm" class="ui-content" data-role="popup" data-theme="none">
-        
+
         <p id="question">Are you sure you want to delete</p>
-        
+
         <div class="ui-grid-a">
             <div class="ui-block-a">
                 <a id="yes" data-role="button" data-mini="true" data-shadow="false" data-theme="b" data-rel="back">Yes</a>
             </div>
             <div class="ui-block-b">
-                <a id="cancel" data-role="button" data-mini="true" data-shadow="false" data-theme="b" data-rel="back">Cancel</a>                
+                <a id="cancel" data-role="button" data-mini="true" data-shadow="false" data-theme="b" data-rel="back">Cancel</a>
             </div>
         </div>
-        
+
 	</div><!-- /popup -->
 
 </div><!-- /page -->
@@ -505,13 +505,13 @@ code view
         <h1>Demo</h1>
         <a href="#demo-page" data-rel="back" data-icon="arrow-l" data-iconpos="notext">Back</a>
     </div><!-- /header -->
-  
+
     <div data-role="content">
-    
+
     	<p>This is just a landing page for demo purposes.</p>
-        
+
         <p><a href="#demo-page" data-rel="back" data-role="button" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back</a></p>
-    
+
 
     </div><!-- /content -->
 

@@ -21,30 +21,30 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
-            			
+
 			<h1>Why is only the first page of my multi page document loaded?</h1>
 
 			<h2>Answer:</h2>
-            
-			<p class="jqm-intro">jQuery Mobile currently only supports loading of single page documents via AJAX. To navigate to a multi page document you must disable ajax on the link by adding the <code>data-ajax="false"</code> attribute. There is also a widget to allow for supporting sub-pages by Todd Thompson available at <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget">https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget</a></p>	
 
-			
-			
+			<p class="jqm-intro">jQuery Mobile currently only supports loading of single page documents via AJAX. To navigate to a multi page document you must disable ajax on the link by adding the <code>data-ajax="false"</code> attribute. There is also a widget to allow for supporting sub-pages by Todd Thompson available at <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget">https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget</a></p>
+
+
+
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
-			
-	
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

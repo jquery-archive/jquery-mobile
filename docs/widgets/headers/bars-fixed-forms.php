@@ -1,9 +1,9 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Framework - Fixed Toolbars</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Framework - Fixed Toolbars</title>
     <link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
     <link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
     <link rel="shortcut icon" href="../../_assets/favicon.ico">
@@ -36,9 +36,9 @@
 		</div><!-- /search bar -->
 		</form>
 	</div>
-	
+
 	<div data-role="content" class="jqm-content">
-		
+
 			<ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="false">
 				<li><a href="#">
 					<img src="../../_assets/img/album-bb.jpg" />
@@ -100,11 +100,11 @@
 				<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
 				<a href="#" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
-				<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+				<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
 			</div>
 
 
-			
+
 
 			</div><!-- /content -->
 
@@ -115,7 +115,7 @@
 					 	<input type="range" name="slider" id="slider-2" value="50" min="0" max="100" data-highlight="true" data-mini="true"  class="ui-hidden-accessible" />
 					</div>
 				</form>
-				
+
 			</div>
 
 			</div><!-- /page -->

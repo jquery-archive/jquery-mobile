@@ -22,9 +22,9 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( 'search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-		
+
 		<h2>Search Results</h2>
         <div class="jqm-search-results-wrap">
 	        <ul class="jqm-list jqm-search-results-list">
@@ -35,12 +35,12 @@
 	    </div>
 
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
-<?php include( 'global-nav.php' ); ?>	
+<?php include( 'global-nav.php' ); ?>
 </div><!-- /page -->
 </body>
 </html>

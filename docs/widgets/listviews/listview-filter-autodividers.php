@@ -20,16 +20,16 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
-		
-			
+
+
+
 			<h2>Auto-divider listviews</h2>
 			<p>The auto-divider option is a convenient way to automatically add dividers for each letter by adding the <code> data-autodividers="true"</code> attribute. This is designed to work in conjunction with the listview filter feature so as items are filtered away, dividers that don't have any visible items will also be hidden.</p>
-			
+
 			<h3>Filter, Autodividers</h3>
-			
+
 			<div data-demo-html="true">
 				<ul data-role="listview" data-filter-theme="d" data-divider-theme="c" data-filter="true" data-autodividers="true">
 					<li><a href="index.html">Adam Kinkaid</a></li>
@@ -90,17 +90,17 @@
 				</ul>
 			</div><!--/demo-html -->
 
-			
 
-		
-	
+
+
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 </div><!-- /page -->
 </body>
 </html>
