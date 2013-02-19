@@ -5,7 +5,7 @@
             <li><a href="intro/">Introduction</a></li>
             <li><a href="examples/">Demo Showcase</a></li>
             <li><a href="faq/">Questions & Answers</a></li>
-			<li data-section="Widgets" data-filtertext="responsive web design rwd adaptive PE accessible mobile breakpoints media query"><a href="docs/intro/rwd.php">Going Responsive</a></li>
+			<li><a href="intro/rwd.php">Going Responsive</a></li>
             <li data-role="list-divider">Widget reference</li>
             <?php include( 'nav-widgets.php' ); ?>
         </ul>
