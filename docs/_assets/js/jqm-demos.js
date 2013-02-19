@@ -195,7 +195,7 @@ $( document ).on( "pageinit", ".jqm-demos-search-results", function() {
     		return "";
   		}
 	});
-	$(".jqm-search-results-list li").each(function(){
+	$(this).find(".jqm-search-results-list li").each(function(){
 		var text = $(this).attr("data-filtertext");
 		$(this).append("<p class='jqm-search-results-keywords ui-li-desc'>Keywords: "+text+"</p>");
 	});
@@ -207,13 +207,14 @@ $( document ).on( "pageshow",  ".jqm-demos-search-results",function(){
 	$( this ).find( ".jqm-content .jqm-search-results-wrap input").val( search ).trigger( "change" );
 	
 });
-$( document ).on( "change keyup",".jqm-search-results-wrap input" , function( event ) {
-	$(".jqm-search-results-list li a, .jqm-search-results-list li p").each(function(){
+$( document ).on( "change keyup",".ui-page-active .jqm-search-results-wrap input" , function( event ) {
+	console.log("change")
+	$(".ui-page-active .jqm-search-results-list li a, .ui-page-active .jqm-search-results-list li p").each(function(){
 		$(this).html($(this).html().replace("<span class='jqm-search-results-highlight'>",""));
 		$(this).html($(this).html().replace("</span>",""));
 	});
-	var search = $(".jqm-search-results-wrap input").val();
-	$(".jqm-search-results-list li a, .jqm-search-results-list li p").each(function(){
+	var search = $(".ui-page-active .jqm-search-results-wrap input").val();
+	$(".ui-page-active .jqm-search-results-list li a, .ui-page-active .jqm-search-results-list li p").each(function(){
 		var text = $(this).text();
 		$(this).html(text.replace(eval("/"+search+"/i"),"<span class='jqm-search-results-highlight'>"+search+"</span>"));
 	});
