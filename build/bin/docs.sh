@@ -37,6 +37,7 @@ done
 mv tmp/demos/docs/examples/redirect/index.php tmp/demos/docs/examples/redirect/index.html
 
 # find all the files with php includes
+# TODO sort out demos/search.php first
 for file in $(grep -lr "\?php include(" tmp/demos/); do
   file_dir=$(echo $file | sed "s/\/[^\/]*.html$/\//")
 
