@@ -26,12 +26,13 @@
 	<div data-role="content" class="jqm-content">
 		
 		<h2>Search Results</h2>
-        
-        <ul class="jqm-list">
-            <?php include( 'nav-widgets.php' );
-            include( 'nav-examples.php' );
-            include( 'nav-faq.php' ); ?>
-        </ul>
+        <div class="jqm-search-results-wrap">
+	        <ul class="jqm-list jqm-search-results-list">
+	            <?php include( 'nav-widgets.php' );
+	            include( 'nav-examples.php' );
+	            include( 'nav-faq.php' ); ?>
+	        </ul>
+	    </div>
 
 	</div><!-- /content -->
 	

@@ -195,19 +195,26 @@ $( document ).on( "pageinit", ".jqm-demos-search-results", function() {
     		return "";
   		}
 	});
-	$(".jqm-demos-search-results li").each(function(){
+	$(".jqm-search-results-list li").each(function(){
 		var text = $(this).attr("data-filtertext");
 		$(this).append("<p class='jqm-search-results-keywords ui-li-desc'>Keywords: "+text+"</p>");
 	});
 
 });
 
-$( document ).on( "pageshow", ".jqm-demos-search-results", function(){
+$( document ).on( "pageshow",  ".jqm-demos-search-results",function(){
 	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1];
-	$( this ).find( ".jqm-content input").val( search ).trigger( "change" );
-	$(".jqm-demos-search-results li a, .jqm-demos-search-results li p").each(function(){
+	$( this ).find( ".jqm-content .jqm-search-results-wrap input").val( search ).trigger( "change" );
+	
+});
+$( document ).on( "change keyup",".jqm-search-results-wrap input" , function( event ) {
+	$(".jqm-search-results-list li a, .jqm-search-results-list li p").each(function(){
+		$(this).html($(this).html().replace("<span class='jqm-search-results-highlight'>",""));
+		$(this).html($(this).html().replace("</span>",""));
+	});
+	var search = $(".jqm-search-results-wrap input").val();
+	$(".jqm-search-results-list li a, .jqm-search-results-list li p").each(function(){
 		var text = $(this).text();
 		$(this).html(text.replace(eval("/"+search+"/i"),"<span class='jqm-search-results-highlight'>"+search+"</span>"));
 	});
-
 });
