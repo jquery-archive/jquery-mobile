@@ -139,7 +139,7 @@
 			<h2>Form</h2>
 			<p>You can place a form inside a popup. When it opens, focus will be restricted to elements inside the popup.</p>
 			<div data-demo-html="true">
-				<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="a" data-transition="flip">Sign in</a>
+				<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="a" data-transition="pop">Sign in</a>
 
 				<div data-role="popup" id="popupMenu" data-theme="a">
 					<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
