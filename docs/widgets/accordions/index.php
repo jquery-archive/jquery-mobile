@@ -31,7 +31,7 @@
 
 			<h2 id="accordion-markup">Markup</h2>
 
-			<p>Collapsible sets start with the same markup as <a href="../collapsibles/">individual collapsibles</a> which has a heading followed by the collapsible content. By adding a parent wrapper with a <code>data-role="collapsible-set"</code> attribute the collapsibles, they will be visually grouped and  behave like an accordion so only one section can be open at a time.</p>
+			<p>Collapsible sets start with the same markup as <a href="../collapsibles/">individual collapsibles</a> which have a heading followed by the collapsible content. By adding a parent wrapper with a <code>data-role="collapsible-set"</code> attribute to the collapsibles they will be visually grouped and they will behave like an accordion so only one section can be open at a time.</p>
 
 			<div data-demo-html="true">
 				<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
@@ -46,7 +46,7 @@
 					</div>
 					<div data-role="collapsible">
 						<h3>Section 3</h3>
-						<p>I'm the collapsible content for section 1</p>
+						<p>I'm the collapsible content for section 3</p>
 					</div>
 				</div>
 			</div><!--/demo-html -->
@@ -99,7 +99,7 @@
 					</div>
 					<div data-role="collapsible">
 						<h3>I'm another mini</h3>
-						<p>Here's some sollapsible content.</p>
+						<p>Here's some collapsible content.</p>
 
 					</div>
 					<div data-role="collapsible">
@@ -125,7 +125,7 @@
 					</div>
 					<div data-role="collapsible" data-collapsed-icon="gear" data-expanded-icon="delete">
 						<h3>Icon set on this collapsible</h3>
-						<p>The icons here are in on this collapsible which overrides the set icons.</p>
+						<p>The icons here are applied to this collapsible specifically, thus overriding the set icons.</p>
 					</div>
 				</div>
 			</div><!--/demo-html -->
@@ -142,15 +142,15 @@
 					</div>
 					<div data-role="collapsible" data-iconpos="left">
 						<h3>Left</h3>
-						<p>Set via <code>data-iconpos="left"</code> attribute on the collspaible</p>
+						<p>Set via <code>data-iconpos="left"</code> attribute on the collapsible</p>
 					</div>
 					<div data-role="collapsible" data-iconpos="bottom">
 						<h3>Bottom</h3>
-						<p>Set via <code>data-iconpos="bottom"</code> attribute on the collspaible</p>
+						<p>Set via <code>data-iconpos="bottom"</code> attribute on the collapsible</p>
 					</div>
 					<div data-role="collapsible" data-iconpos="top">
 						<h3>Top</h3>
-						<p>Set via <code>data-iconpos="top"</code> attribute on the collspaible</p>
+						<p>Set via <code>data-iconpos="top"</code> attribute on the collapsible</p>
 					</div>
 				</div>
 			</div><!--/demo-html -->
