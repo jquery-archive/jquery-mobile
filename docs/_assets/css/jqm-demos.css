@@ -629,24 +629,26 @@ h2.jqm-home-widget {
 	background: #fff;
 }
 .jqm-search-results-highlight {
-	background-color: #d9eff8;
-	background-color: rgba(65,174,222,.2);
 	text-shadow: none;
+	color:#07ade0;
+	font-weight:400;
 }
 .jqm-search .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
 .jqm-search-results-wrap .jqm-list .ui-li .ui-btn-text a.ui-link-inherit {
-	padding: 6px 15px 0;
+	padding: 9px 15px 0;
 	font-weight: 400;
 }
 .jqm-list .jqm-search-results-keywords {
-	padding: 10px 15px 8px;
-	font-size: .8em;
+	padding: 8px 15px 9px;
+	font-size: .85em;
 	font-weight: 300;
+	color:#999;
 }
 .jqm-search-results-keywords .jqm-keyword-hash {
 	margin-right: .2em;
 	margin-left: .2em;
 	font-weight: 400;
+	color:#777;
 }
 .jqm-search .jqm-list .ui-li-count,
 .jqm-search-results-wrap .jqm-list .ui-li-count {
