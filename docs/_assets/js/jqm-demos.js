@@ -197,7 +197,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	});
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
 		var text = $( this ).attr( "data-filtertext" );
-		$( this ).append( "<p class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'>#</span> "+text+"</p>" );
+		$( this ).append( "<p class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'>//</span> "+text+"</p>" );
 	});
 
 });
