@@ -11,9 +11,9 @@ cp -r docs tmp/demos/
 # ... Copy css and images
 cp compiled/*.css tmp/demos/css/themes/$THEME
 cp -r compiled/images tmp/demos/css/themes/$THEME
+# ... replace "js/" with "js/jquery.mobile.js"
 
-# NOTE the deletions are required by gnu/bsd sed differences
-
+# NOTE the deletion here is required by gnu/bsd sed differences
 # reset the docs specific js reference
 find tmp/demos \( -name '*.html' -o -name '*.php' \) -exec sed -i${SED_INPLACE_EXT} -e "s@_assets/js/\"@_assets/js/$DEMOSNAME.js\"@" {} \;
 find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;

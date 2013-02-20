@@ -27,7 +27,7 @@ OUTPUT="compiled"
 
 # The name of the files
 NAME="jquery.mobile"
-DEMOSNAME="jqm-demos"
+DEMOSNAME="jquery.mobile.demos"
 BASE_NAME="jquery.mobile"
 THEME_FILENAME="jquery.mobile.theme"
 STRUCTURE="jquery.mobile.structure"
