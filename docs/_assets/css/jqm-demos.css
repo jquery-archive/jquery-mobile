@@ -310,6 +310,7 @@ h2.jqm-home-widget {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	padding:.5em .5em;
+	width:16em;
 }
 .home-pop .ui-btn-text {
 	font-family: 'Open Sans', sans-serif;

@@ -32,7 +32,7 @@
 		
 		</div>
 		
-		<div data-role="popup" id="api-popup" class="home-pop ui-content" data-theme="d" style="width:18em;" data-overlay-theme="b">
+		<div data-role="popup" id="api-popup" class="home-pop ui-content" data-theme="d" data-overlay-theme="b">
 			<p>The API docs are a separate site from the demos and cover the technical details of each jQuery Mobile plugin in depth.</p>
 			<a href="#" data-role="button" data-inline="true" data-rel="back"  data-mini="true" data-theme="c">Stay here</a>
 			<a href="http://api.jquerymobile.com" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" data-theme="f">Visit API Site </a>
