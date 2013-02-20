@@ -66,8 +66,15 @@ $( document ).on( "pageinit", function() {
 });
 
 
-// global search
 $( document ).on( "pageinit", ".jqm-demos", function() {
+	var page = $( this );
+
+	// global navmenu panel
+	$( ".jqm-navmenu-link" ).on( "click", function() {
+		page.find( ".jqm-navmenu-panel" ).panel( "open" );
+	});
+
+	// global search
 	$( this ).find( ".jqm-search ul" ).listview({
 		globalNav: "docs",
 		inset: true,
@@ -110,9 +117,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	$( this ).on( "pagehide", function() {
 		$( this ).find( ".ui-input-clear" ).trigger( "click" );
 	});
-});
-		
-$( document ).on( "pageinit", ".jqm-demos", function() {
+
 	$( this ).find( ".jqm-content ul.jqm-list " ).listview({
 		globalNav: "docs",
 		inset: true,
@@ -130,22 +135,11 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		enterToNav: true,
   		highlight: true
 	});
+
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
 		var text = $( this ).attr( "data-filtertext" );
 		$( this ).find( "a" ).append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'>//</span> " + text + "</span>" );
 	});
-
-});
-$( document ).on( "pageshow",  ".jqm-demos:not(.ui-page-header-fixed)", function() {
-	var page = $( this ), 
-		panelInnerHeight = page.find( ".jqm-nav-panel.ui-panel-position-left" ).outerHeight() + 30,
-		minPageHeight = $.mobile.getScreenHeight();
-
-	if ( panelInnerHeight > minPageHeight ) {
-		setTimeout(function() {
-			page.css( "min-height", panelInnerHeight );
-		}, 50 );
-	}
 });
 
 $( document ).on( "pageshow",  ".jqm-demos", function() {
@@ -197,6 +191,7 @@ jQuery.fn.removeHighlight = function() {
 		}
 	}).end();
 };
+
 $( document ).on("mobileinit", function(){
 	(function( $, undefined ) {
 
@@ -321,4 +316,16 @@ $( document ).on("mobileinit", function(){
 	});
 })( jQuery );
 
+});
+
+$( document ).on( "pageshow",  ".jqm-demos:not(.ui-page-header-fixed)", function() {
+	var page = $( this ), 
+		panelInnerHeight = page.find( ".jqm-nav-panel.ui-panel-position-left" ).outerHeight() + 30,
+		minPageHeight = $.mobile.getScreenHeight();
+
+	if ( panelInnerHeight > minPageHeight ) {
+		setTimeout(function() {
+			page.css( "min-height", panelInnerHeight );
+		}, 50 );
+	}
 });

@@ -1,4 +1,4 @@
-    <div data-role="panel" id="panel-nav" class="jqm-nav-panel" data-position="left" data-display="reveal" data-theme="c">
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
         <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="docs" class="jqm-list">
             <li data-role="list-divider">jQuery Mobile Demos</li>
 			<li><a href="../">Home</a></li>
