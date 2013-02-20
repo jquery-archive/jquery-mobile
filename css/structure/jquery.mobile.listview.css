@@ -78,7 +78,7 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px; }
 .ui-li-link-alt .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
 
-.ui-listview * .ui-btn-inner > .ui-btn > .ui-btn-inner { border-top: 0px; }
+.ui-listview * .ui-btn-inner > .ui-btn > .ui-btn-inner { border-top: 0; }
 
 .ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px; }
 .ui-collapsible-content .ui-listview-filter { margin: -10px -15px 10px -15px; border-bottom: inherit; }
