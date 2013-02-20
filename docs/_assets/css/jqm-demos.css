@@ -511,15 +511,17 @@ h2.jqm-home-widget {
 	font-weight: 300; 
 	border-color: #eee;
 }
+.jqm-list .ui-btn-up-d {
+	background-color: #fff;
+}
 .jqm-list .ui-btn-hover-d {
 	background-color: #f8f8f8;
+}
+.jqm-list .ui-btn-up-d,
+.jqm-list .ui-btn-hover-d {
 	-webkit-background-image: none;
 	-moz-background-image: none;
 	-o-background-image: none;
-	background-image: none;
-}
-.jqm-list .ui-btn-up-d {
-	background-color: #fff;
 	background-image: none;
 }
 .jqm-list .ui-btn-up-d.ui-btn-active, 
@@ -530,6 +532,9 @@ h2.jqm-home-widget {
 .jqm-list .ui-btn-down-d.ui-focus {
 	border-color: #34bae8;
 	background-color: #34bae8;
+	-webkit-background-image: none;
+	-moz-background-image: none;
+	-o-background-image: none;
 	background-image: none;
 	color: #fff;
 	text-shadow: 0 1px 0 #369;	
