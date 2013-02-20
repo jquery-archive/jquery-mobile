@@ -1,3 +1,15 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Arrow for popups
+//>>label: popuparrow
+//>>group: Widgets
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+//>>css.structure: ../css/structure/jquery.mobile.popup.arrow.css
+
+define( [ "jquery", "./popup" ],
+
+function( jQuery ) {
+//>>excludeEnd("jqmBuildExclude");
+
 ( function( $, undefined ) {
 
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
@@ -11,31 +23,6 @@ var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	),
 	// Needed for transforming coordinates from screen to arrow background
 	txFactor = Math.sqrt( 2 ) / 2;
-
-function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
-	var ret = desired;
-
-	if ( winSize < segSize ) {
-		// Center segment if it's bigger than the window
-		ret = offset + ( winSize - segSize ) / 2;
-	} else {
-		// Otherwise center it at the desired coordinate while keeping it completely inside the window
-		ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
-	}
-
-	return ret;
-}
-
-function windowCoords() {
-	var $win = $.mobile.window;
-
-	return {
-		x: $win.scrollLeft(),
-		y: $win.scrollTop(),
-		cx: ( window.innerWidth || $win.width() ),
-		cy: ( window.innerHeight || $win.height() )
-	};
-}
 
 function getArrow() {
 	var clone = uiTemplate.clone(),
@@ -82,58 +69,6 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		ar.ct.addClass( direction );
 		ar.ar.addClass( theme );
 		ar.bg.addClass( theme );
-	},
-
-	_clampPopupWidth: function( infoOnly ) {
-		var menuSize,
-			winCoords = windowCoords(),
-			// rectangle within which the popup must fit
-			rc = {
-				x: this._tolerance.l,
-				y: winCoords.y + this._tolerance.t,
-				cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
-				cy: winCoords.cy - this._tolerance.t - this._tolerance.b
-			},
-			ret;
-
-		if ( !infoOnly ) {
-			// Clamp the width of the menu before grabbing its size
-			this._ui.container.css( "max-width", rc.cx );
-		}
-
-		menuSize = {
-			cx: this._ui.container.outerWidth( true ),
-			cy: this._ui.container.outerHeight( true )
-		};
-
-		return { rc: rc, menuSize: menuSize };
-	},
-
-	_calculateFinalLocation: function( desired, clampInfo ) {
-		var ret,
-			rc = clampInfo.rc,
-			menuSize = clampInfo.menuSize;
-
-		// Center the menu over the desired coordinates, while not going outside
-		// the window tolerances. This will center wrt. the window if the popup is too large.
-		ret = {
-			x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
-			y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
-		};
-
-		// Make sure the top of the menu is visible
-		ret.y = Math.max( 0, ret.y );
-
-		// If the height of the menu is smaller than the height of the document
-		// align the bottom with the bottom of the document
-
-		// fix for $.mobile.document.height() bug in core 1.7.2.
-		var docEl = document.documentElement, docBody = document.body,
-			docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
-
-		ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - docHeight ) );
-
-		return { left: ret.x, top: ret.y };
 	},
 
 	// Pretend to show an arrow described by @p and @dir and calculate the
@@ -274,3 +209,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 });
 
 })( jQuery );
+
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
