@@ -182,15 +182,15 @@
 	-moz-box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
 	box-shadow: inset 5px 0 5px rgba(0,0,0,.15);
 }
+.ui-panel-display-overlay {
+	-webkit-box-shadow: 5px 0 5px rgba(0,0,0,.15);
+	-moz-box-shadow: 5px 0 5px rgba(0,0,0,.15);
+	box-shadow: 5px 0 5px rgba(0,0,0,.15);
+}
 .ui-panel-position-right.ui-panel-display-overlay {
 	-webkit-box-shadow: -5px 0 5px rgba(0,0,0,.15);
 	-moz-box-shadow: -5px 0 5px rgba(0,0,0,.15);
 	box-shadow: -5px 0 5px rgba(0,0,0,.15);
-}
-.ui-panel-position-left.ui-panel-display-overlay {
-	-webkit-box-shadow: 5px 0 5px rgba(0,0,0,.15);
-	-moz-box-shadow: 5px 0 5px rgba(0,0,0,.15);
-	box-shadow: 5px 0 5px rgba(0,0,0,.15);
 }
 .ui-panel-display-push.ui-panel-open.ui-panel-position-left {
 	border-right-width: 1px;
