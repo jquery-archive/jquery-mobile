@@ -39,32 +39,32 @@ mv tmp/demos/docs/examples/redirect/index.php tmp/demos/docs/examples/redirect/i
 
 function inline {
   for file in $1; do
-	file_dir=$(echo $file | sed "s/\/[^\/]*.html$/\//")
+    file_dir=$(echo $file | sed "s/\/[^\/]*.html$/\//")
 
-  # remove the php leaving only a list of relative html file paths
-	includes=$(grep -h "\?php include(" $file | sed "s/<?php include( '//" | sed "s/' ); ?>//g" | sed "s/\s*//")
+    # remove the php leaving only a list of relative html file paths
+    includes=$(grep -h "\?php include(" $file | sed "s/<?php include( '//" | sed "s/' ); ?>//g" | sed "s/\s*//")
 
-  # for each relative path resolve it and replac the corresponding php
-  # include in the file with the resolved files contents
-	for include_relative in $includes; do
-	# the html extension file include
-	  html_include=$(echo $include_relative | sed "s/.php/.html/")
+    # for each relative path resolve it and replac the corresponding php
+    # include in the file with the resolved files contents
+    for include_relative in $includes; do
+      # the html extension file include
+      html_include=$(echo $include_relative | sed "s/.php/.html/")
 
-	# the fully resolved path, NOTE readlink should be standard
-	  full_file_path=$(readlink -m $file_dir$html_include)
+      # the fully resolved path, NOTE readlink should be standard
+      full_file_path=$(readlink -m $file_dir$html_include)
 
-	# construct the include script replace, removing the path delimiters
-	# and the double dot refs to prevent sed from borking
-	  include_string="<?php include( '.*$(echo $include_relative | sed "s@\([a-zA-Z\-\0-9.]*/\)*@@g")' ); ?>"
+      # construct the include script replace, removing the path delimiters
+      # and the double dot refs to prevent sed from borking
+      include_string="<?php include( '.*$(echo $include_relative | sed "s@\([a-zA-Z\-\0-9.]*/\)*@@g")' ); ?>"
 
-	# replace the include string with the resolved file contents
+      # replace the include string with the resolved file contents
       sed -i$SED_INPLACE_EXT "/$include_string/{
       s/$include_string//g
       r $full_file_path
     }" $file
 
       find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
-	done
+    done
   done
 }
 
