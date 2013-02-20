@@ -130,6 +130,8 @@
 					<div class="ui-block-a"><button type="button" data-theme="b">More</button></div>
 				</div>
 			</div><!--/demo-html -->
+            
+        	<a href="../buttons/buttons-grids.php" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">More buttons in grids examples</a>
 
 			<h2>Responsive grids</h2>
 
