@@ -306,6 +306,15 @@ h2.jqm-home-widget {
 	font-size:1.5em;
 	margin-left:.6em;
 }
+.home-pop p {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	padding:.5em .5em;
+}
+.home-pop .ui-btn-text {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 400;
+}
 .jqm-content > h4 {
 	font-size: 1.2em;
 }

@@ -28,8 +28,14 @@
 		
 		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework designed to make sites and apps that are accessible on all popular smartphone, tablet and desktop devices.</p>
 
-        <p class="jqm-intro"><small>For technical info,&nbsp;visit the API documentation.</small></p>
-		<a href="http://api.jquerymobile.com" class="jqm-button ui-icon-alt" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">jQuery Mobile API Site </a> 
+        <p class="jqm-intro"><small>For technical info,&nbsp;visit the <a href="#api-popup" data-rel="popup" data-transition="slideup" data-position-to="window">API documentation</a>.</small></p>
+		
+		</div>
+		
+		<div data-role="popup" id="api-popup" class="home-pop ui-content" data-theme="d" style="width:18em;" data-overlay-theme="b">
+			<p>The API docs are a separate site from the demos and cover the technical details of each jQuery Mobile plugin in depth.</p>
+			<a href="#" data-role="button" data-inline="true" data-rel="back"  data-mini="true" data-theme="c">Stay here</a>
+			<a href="http://api.jquerymobile.com" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" data-theme="f">Visit API Site </a>
 		</div>
 
 		<ul data-role="listview" data-inset="true" data-theme="d" data-icon="false" data-filter-placeholder="Search..." class="jqm-list jqm-home-list">
