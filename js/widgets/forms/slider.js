@@ -466,7 +466,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				bPercent = percent === 100 ? 0 : Math.min( handlePercent + 100 - aPercent, 100 );
 
 			this._labels.each(function() {
-				var ab = $( this ).is( ".ui-slider-label-a" );
+				var ab = $( this ).hasClass( "ui-slider-label-a" );
 				$( this ).width( ( ab ? aPercent : bPercent  ) + "%" );
 			});
 		}

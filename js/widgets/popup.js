@@ -825,7 +825,7 @@ define( [
 			urlHistory = $.mobile.urlHistory;
 			hashkey = $.mobile.dialogHashKey;
 			activePage = $.mobile.activePage;
-			currentIsDialog = activePage.is( ".ui-dialog" );
+			currentIsDialog = activePage.hasClass( "ui-dialog" );
 			this._myUrl = url = urlHistory.getActive().url;
 			hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog && ( urlHistory.activeIndex > 0 );
 

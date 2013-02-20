@@ -75,7 +75,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			if ( tclass && tclass !== "none" ) {
 				// use appropriate slide for header or footer
 				if ( tclass === "slide" ) {
-					tclass = this.element.is( ".ui-header" ) ? "slidedown" : "slideup";
+					tclass = this.element.hasClass( "ui-header" ) ? "slidedown" : "slideup";
 				}
 
 				this.element.addClass( tclass );
@@ -153,7 +153,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		// This will set the content element's top or bottom padding equal to the toolbar's height
 		updatePagePadding: function( tbPage ) {
 			var $el = this.element,
-				header = $el.is( ".ui-header" ),
+				header = $el.hasClass( "ui-header" ),
 				pos = parseFloat( $el.css( header ? "top" : "bottom" ) );
 
 			// This behavior only applies to "fixed", not "fullscreen"
@@ -260,7 +260,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 		_destroy: function() {
 			var $el = this.element,
-				header = $el.is( ".ui-header" );
+				header = $el.hasClass( "ui-header" );
 
 			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), "" );
 			$el.removeClass( "ui-header-fixed ui-footer-fixed ui-header-fullscreen ui-footer-fullscreen in out fade slidedown slideup ui-fixed-hidden" );
