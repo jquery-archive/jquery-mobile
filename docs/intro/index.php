@@ -29,17 +29,17 @@
 			<p class="jqm-intro">jQuery Mobile is a touch-friendly UI framework built on jQuery Core that works across all popular mobile, tablet and desktop platforms.
 			</p>
 
-			<h2 id="nav-intro">Introduction</h2>
+			<h2>Introduction</h2>
 
 			<p>jQuery Mobile is a user interface framework based on jQuery that works across all popular phones, tablet, e-reader, and desktop platforms. Built with accessibility and universal access in mind, we follow progressive enhancement and <a href="rwd.php">responsive web design (RWD)</a> principles. HTML5 Markup-driven configuration makes it easy to learn, but a powerful <a href="http://api.jquerymobile.com/">API</a> makes it easy to deeply customize the library.</p>
 
-			<h2 id="nav-intro">Pages & Dialogs</h2>
+			<h2>Pages & Dialogs</h2>
 
 			<p>A <a href="../widgets/pages/">page</a> in jQuery Mobile consists of an element with a <code> data-role="page"</code> attribute. Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>. The baseline requirement for a page is only the page wrapper to support the navigation system, the rest is optional. </p>
 
 			<p>A page can be styled as a <a href="../widgets/dialog/">dialog</a> that makes the page look like it's a modal style overlay. To give a standard page the appearance of a modal dialog, add the <strong>data-rel="dialog"</strong> attribute to the link. Transitions can also be set on dialog links.</p>
 
-			<h2 id="nav-intro">AJAX Navigation & Transitions</h2>
+			<h2>AJAX Navigation & Transitions</h2>
 
 			<p>jQuery Mobile includes an <a href="../widgets/navigation/" data-ajax="false">AJAX navigation system</a> to support a rich set of animated page <a href="../widgets/transitions/" data-ajax="false">transitions</a> by automatically 'hijacking' standard links and form submissions and turning them into an AJAX request. The back button is fully supported and there are features to prefetch &amp; cache, dynamically inject, and script pages for advanced use cases.</p>
 
