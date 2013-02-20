@@ -46,6 +46,10 @@
 
 <li data-section="Questions & Answers" data-filtertext="touch mouse events vmouseover, vmousedown, vmousemove, vmouseup, vclick, vmousecancel"><a href="faq/how-do-i-use-touch-mouse-events.php">How do I use touch and mouse events?</a></li>
 
+<li data-role="list-divider">Theme and styling</li>
+
+<li data-section="Questions & Answers" data-filtertext="theme swatch css themeroller customize icons colors fonts style"><a href="faq/how-does-theming-work.php">How does theming work?</a></li>
+
 <li data-role="list-divider">Apps</li>
 
 <li data-section="Questions & Answers" data-filtertext="How do I need to configure PhoneGap Cordova?"><a href="faq/how-configure-phonegap-cordova.php">How do I need to configure PhoneGap/Cordova?</a></li>
