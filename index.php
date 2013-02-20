@@ -24,7 +24,7 @@
 	<div data-role="content" class="jqm-content">
 
 		<div class="jqm-home-welcome">
-		<h2>Demo center: <span class="jqm-version"></span></h2>
+		<h2>Demo center for 1.3.0</h2>
 		
 		<p class="jqm-intro">jQuery Mobile is a touch-optimized HTML5 UI framework designed to make sites and apps that are accessible on all popular smartphone, tablet and desktop devices.</p>
 
