@@ -16,7 +16,7 @@
 	</style>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header">
 		<h1>Collapsible listview</h1>
