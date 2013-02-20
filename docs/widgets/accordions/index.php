@@ -31,7 +31,7 @@
 
 			<h2 id="accordion-markup">Markup</h2>
 
-			<p>Collapsible sets start with the same markup as <a href="../collapsibles/">individual collapsibles</a> which have a heading followed by the collapsible content. By adding a parent wrapper with a <code>data-role="collapsible-set"</code> attribute to the collapsibles they will be visually grouped and they will behave like an accordion so only one section can be open at a time.</p>
+			<p>Collapsible sets start with the same markup as <a href="../collapsibles/" data-ajax="false">individual collapsibles</a> which have a heading followed by the collapsible content. By adding a parent wrapper with a <code>data-role="collapsible-set"</code> attribute to the collapsibles they will be visually grouped and they will behave like an accordion so only one section can be open at a time.</p>
 
 			<div data-demo-html="true">
 				<div data-role="collapsible-set" data-theme="c" data-content-theme="d">

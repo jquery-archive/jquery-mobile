@@ -41,7 +41,7 @@
 
 			<h2 id="nav-intro">AJAX Navigation & Transitions</h2>
 
-			<p>jQuery Mobile includes an <a href="../widgets/navigation/">AJAX navigation system</a> to support a rich set of animated page <a href="../widgets/transitions/" data-ajax="false">transitions</a> by automatically 'hijacking' standard links and form submissions and turning them into an AJAX request. The back button is fully supported and there are features to prefetch &amp; cache, dynamically inject, and script pages for advanced use cases.</p>
+			<p>jQuery Mobile includes an <a href="../widgets/navigation/" data-ajax="false">AJAX navigation system</a> to support a rich set of animated page <a href="../widgets/transitions/" data-ajax="false">transitions</a> by automatically 'hijacking' standard links and form submissions and turning them into an AJAX request. The back button is fully supported and there are features to prefetch &amp; cache, dynamically inject, and script pages for advanced use cases.</p>
 
 			<p>Whenever a link is clicked or a form is submitted, that event is automatically intercepted by the AJAX nav system and is used to issue an AJAX request based on the <code>href</code> or form action instead of reloading the page. While the framework waits for the AJAX response, a loader overlay is displayed.</p>
 
