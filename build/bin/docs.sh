@@ -58,9 +58,9 @@ function inline {
 
       # replace the include string with the resolved file contents
       sed -i$SED_INPLACE_EXT "/$include_string/{
-      s/$include_string//g
-      r $full_file_path
-    }" $file
+        s/$include_string//g
+        r $full_file_path
+      }" $file
 
       find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
     done
@@ -79,14 +79,14 @@ done
 find tmp/demos \( -name '*.html' \) -exec sed -i${SED_INPLACE_EXT} -e "s@.php\"@.html\"@" {} \;
 find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
 
+# clean out the compiled directory demos and cp the new output
+cp -R tmp/demos $OUTPUT
+
 # clear out old zip files
 clear_zip_files $OUTPUT
 
 # create the docs zip in the output directory using the demo files
-cd tmp/demos && zip -rq ../../$OUTPUT/$NAME.docs.zip * && cd -
-
-# clean out the compiled directory demos and cp the new output
-cp -R tmp/demos $OUTPUT
+cd compiled/demos && zip -rq ../../$OUTPUT/$NAME.docs.zip * && cd -
 
 # Finish by removing the temporary files
 rm -rf tmp
