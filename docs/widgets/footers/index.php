@@ -26,7 +26,7 @@
 
 			<h1>Footers <a href="http://api.jquerymobile.com/footer/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-			<p class="jqm-intro">The footer is a toolbar at the bottom of the page that can contain a wide range of content, from for elements to navbars.
+			<p class="jqm-intro">The footer is a toolbar at the bottom of the page that can contain a wide range of content, from form elements to navbars.
 			</p>
 
 			<h2>Footer markup</h2>
@@ -51,7 +51,7 @@
 
 			<h2>Grouped buttons</h2>
 
-			<p>To group buttons together into a button set, wrap the links in a wrapper with <code> data-role=&quot;controlgroup&quot;</code> and <code>data-type=&quot;horizontal&quot;</code> attributes.</p>
+			<p>To group buttons into a button set, wrap the links in an element with <code> data-role=&quot;controlgroup&quot;</code> and <code>data-type=&quot;horizontal&quot;</code> attributes.</p>
 
 <code>&lt;div data-role=&quot;controlgroup&quot; data-type=&quot;horizontal&quot;&gt;</code>
 
