@@ -691,11 +691,6 @@ h2.jqm-home-widget {
 	-moz-box-shadow: -5px 0 5px rgba(0,0,0,.10);
 	box-shadow: -5px 0 5px rgba(0,0,0,.10);
 }
-/* Section panel list header */
-.jqm-demos .jqm-nav-panel .jqm-list-header {
-	color: #74b042;
-	font-weight: 300;
-}
 
 /* View source */
 .jqm-content div[data-demo-html="true"] {
