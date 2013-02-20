@@ -632,20 +632,20 @@ h2.jqm-home-widget {
 }
 .jqm-search .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
 .jqm-search-results-wrap .jqm-list .ui-li .ui-btn-text a.ui-link-inherit {
-	padding: 9px 15px 0;
+	padding: .5626em 15px;
 	font-weight: 400;
 }
 .jqm-list .jqm-search-results-keywords {
-	padding: 6px 15px 9px;
-	font-size: .80em;
+	padding: 6px 0 0;
+	font-size: .8em;
 	font-weight: 300;
-	color: #aaa;
+	color: #999;
 }
 .jqm-search-results-keywords .jqm-keyword-hash {
 	margin-right: .2em;
 	margin-left: .2em;
 	font-weight: 400;
-	color: #bbb;
+	color: #aaa;
 	font-size: .75em;
 	text-transform: uppercase;
 }

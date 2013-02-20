@@ -130,9 +130,9 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		enterToNav: true,
   		highlight: true
 	});
-	$(this).find(".jqm-search-results-list li,.jqm-search li").each(function(){
-		var text = $(this).attr("data-filtertext");
-		$(this).append("<p class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'>//</span> "+text+"</p>");
+	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
+		var text = $( this ).attr( "data-filtertext" );
+		$( this ).find( "a" ).append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'>//</span> " + text + "</span>" );
 	});
 
 });
@@ -151,14 +151,16 @@ $( document ).on( "pageshow",  ".jqm-demos:not(.ui-page-header-fixed)", function
 $( document ).on( "pageshow",  ".jqm-demos", function() {
 	$( this ).find( ".jqm-search input").attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
 });
-$( document ).on( "pageshow",  ".jqm-demos-search-results",function(){
+
+$( document ).on( "pageshow", ".jqm-demos-search-results",function() {
 	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1], self = this;
-	setTimeout(function(){
-		e = $.Event("keyup");
+	setTimeout(function() {
+		e = $.Event( "keyup" );
 		e.which = 65;
-		$( self ).find( ".jqm-content .jqm-search-results-wrap input").val( search ).trigger(e).trigger("change");
-	},0);
+		$( self ).find( ".jqm-content .jqm-search-results-wrap input" ).val( search ).trigger(e).trigger( "change" );
+	}, 0 );
 });
+
 jQuery.fn.highlight = function(pat) {
 	function innerHighlight(node, pat) {
 		var skip = 0;
