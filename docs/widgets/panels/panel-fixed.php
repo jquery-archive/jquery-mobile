@@ -51,11 +51,10 @@
 <body>
 <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1">
 
-    <div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
-        <?php include( '../../search.php' ); ?>
+    <div data-role="header" data-theme="f" data-position="fixed">
+        <h1>Fixed header</h1>
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+        <a href="#add-form" data-icon="plus" data-iconpos="notext">Add</a>
     </div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
@@ -72,14 +71,14 @@
 
         <p>To make this responsive, the panel stays open and causes the page to re-flow at wider widths. This allows both the menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page.</p>
 
-        <a href="panel-fixed.php" data-rel="back" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Panels</a>
+        <a href="/" data-rel="back" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Panels</a>
 
 		<div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div><!--/demo-html -->
 
 	</div><!-- /content -->
 
-    <div data-role="footer" class="jqm-footer" data-position="fixed" data-theme="f">
-    	<h4>Footer</h4>
+    <div data-role="footer" data-position="fixed" data-theme="f">
+    	<h4>Fixed footer</h4>
     </div><!-- /footer -->
 
 	<div data-role="panel" data-position-fixed="true" data-theme="a" id="nav-panel">
@@ -154,9 +153,8 @@
 
 <div data-role="page" id="panel-fixed-page2">
 
-    <div data-role="header" class="jqm-header">
+    <div data-role="header" data-theme="f">
         <h1>Landing page</h1>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
     </div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
