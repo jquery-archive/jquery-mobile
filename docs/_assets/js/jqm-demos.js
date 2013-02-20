@@ -49,13 +49,13 @@ $( document ).on( "pageinit", function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
-		str = (words[1] || "Final"),
+		str = ( words[1] || "Final" ),
 		html = "Version " + ver;
 
-	if( str.indexOf( "rc" ) == -1 ){
+	if ( str.indexOf( "rc" ) == -1 ){
 		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
 	} else {
-		str = str.toUpperCase().replace(".", "");
+		str = str.toUpperCase().replace( ".", "" );
 	}
 
 	if ( $.mobile.version && str ) {
@@ -75,7 +75,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	});
 
 	// global search
-	$( this ).find( ".jqm-search ul" ).listview({
+	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
 		globalNav: "docs",
 		inset: true,
 		theme: "d",
@@ -115,7 +115,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		});
 		
 	$( this ).on( "pagehide", function() {
-		$( this ).find( ".ui-input-clear" ).trigger( "click" );
+		$( this ).find( ".jqm-search .ui-input-clear" ).trigger( "click" );
 	});
 
 	$( this ).find( ".jqm-content ul.jqm-list " ).listview({
@@ -127,10 +127,6 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		filter: true,
 		filterReveal: true,
 		filterPlaceholder: "Search...",
-		autodividers: true,
-		autodividersSelector: function ( li ) {
-    		return "";
-  		},
   		arrowKeyNav: true,
   		enterToNav: true,
   		highlight: true
@@ -143,10 +139,10 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 });
 
 $( document ).on( "pageshow",  ".jqm-demos", function() {
-	$( this ).find( ".jqm-search input").attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
+	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
 });
 
-$( document ).on( "pageshow", ".jqm-demos-search-results",function() {
+$( document ).on( "pageshow", ".jqm-demos-search-results", function() {
 	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1], self = this;
 	setTimeout(function() {
 		e = $.Event( "keyup" );
@@ -158,9 +154,9 @@ $( document ).on( "pageshow", ".jqm-demos-search-results",function() {
 jQuery.fn.highlight = function(pat) {
 	function innerHighlight(node, pat) {
 		var skip = 0;
-		if (node.nodeType == 3) {
+		if ( node.nodeType == 3 ) {
 			var pos = node.data.toUpperCase().indexOf(pat);
-			if (pos >= 0) {
+			if ( pos >= 0 ) {
 				var spannode = document.createElement('span');
 				spannode.className = 'jqm-search-results-highlight';
 				var middlebit = node.splitText(pos);
@@ -178,21 +174,21 @@ jQuery.fn.highlight = function(pat) {
 		return skip;
 	}
 	return this.length && pat && pat.length ? this.each(function() {
-		innerHighlight(this, pat.toUpperCase());
+		innerHighlight( this, pat.toUpperCase() );
 	}) : this;
 };
 
 jQuery.fn.removeHighlight = function() {
-	return this.find("span.jqm-search-results-highlight").each(function() {
+	return this.find( "span.jqm-search-results-highlight" ).each(function() {
 		this.parentNode.firstChild.nodeName;
-		with (this.parentNode) {
-			replaceChild(this.firstChild, this);
+		with ( this.parentNode ) {
+			replaceChild( this.firstChild, this );
 			normalize();
 		}
 	}).end();
 };
 
-$( document ).on("mobileinit", function(){
+$( document ).on( "mobileinit", function() {
 	(function( $, undefined ) {
 
 	$.widget( "mobile.listview", $.mobile.listview, {
@@ -214,17 +210,17 @@ $( document ).on("mobileinit", function(){
 			highlight: false,
 			submitTo:false
 		},
-		_create: function(){
+		_create: function() {
 			this._super();
-			if( this.options.arrowKeyNav ){
-				this._on( document, {"pageshow":"arrowKeyNav"});
+			if ( this.options.arrowKeyNav ){
+				this._on( document, { "pageshow":"arrowKeyNav" });
 			}
-			if( this.options.enterToNav ){
-				this._on( document, {"pageshow":"enterToNav"});
+			if ( this.options.enterToNav ){
+				this._on( document, { "pageshow":"enterToNav" });
 			}
 			
 		},
-		submitTo: function(){
+		submitTo: function() {
 			var form = this.element.parent().find( "form" )
 			form.attr( "method", "get" )
 			.attr( "action", this.options.submitTo );
@@ -234,21 +230,21 @@ $( document ).on("mobileinit", function(){
 			$.mobile.changePage( url ); 
 			
 		},
-		enterToNav: function(){
-			var form = this.element.parent().find('form');
-			form.append("<button type='submit' data-icon='arrow-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>")
+		enterToNav: function() {
+			var form = this.element.parent().find( "form" );
+			form.append( "<button type='submit' data-icon='arrow-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
 			.parent()
-			.trigger("create");
+			.trigger( "create" );
 			this.element.parent().find( "form" ).children( ".ui-btn" ).addClass( "ui-hidden-accessible" );
 			this._on( form, {
 				"submit": "submitHandler"
 			});
 		},
 		enhanced: false,
-		arrowKeyNav: function(){
-			var input = this.element.parent().find('input');
-			if( !this.enhanced ){
-				this._on( input , {
+		arrowKeyNav: function() {
+			var input = this.element.parent().find( "input" );
+			if ( !this.enhanced ) {
+				this._on( input, {
 					"keyup": "handleKeyUp"
 				});
 				this.enhanced = true;
@@ -256,18 +252,18 @@ $( document ).on("mobileinit", function(){
 			}
 		},
 		handleKeyUp: function( e ) {
-			var input = this.element.parent().find('input');
+			var input = this.element.parent().find( "input" );
 			if ( e.which === $.mobile.keyCode.DOWN ) {
 				if ( this.element.find( "li.ui-btn-active" ).length == 0 ) {
 					this.element.find( "li:first" ).toggleClass( "ui-btn-active" );
 				} else {
-					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass("ui-btn-active" );
+					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" );
 				}
 				
 				this.highlightDown();
-			} else if( e.which === $.mobile.keyCode.UP ) {
-				if( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
-					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass("ui-btn-active" );
+			} else if ( e.which === $.mobile.keyCode.UP ) {
+				if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
+					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" );
 					
 					this.highlightUp()
 				} else {
@@ -279,24 +275,24 @@ $( document ).on("mobileinit", function(){
 				this.element.find( "li.ui-btn-active" ).removeClass( "ui-btn-active" );
 				if ( this.options.highlight ) {
 					var search = input.val();
-					this.element.find( "li").each(function(){
-						$(this).removeHighlight();
-						$(this).highlight( search );
+					this.element.find( "li" ).each(function() {
+						$( this ).removeHighlight();
+						$( this ).highlight( search );
 					});
 				}
 			}
 		},
-		submitHandler: function(){
+		submitHandler: function() {
 			if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
-				var href = this.element.find( "li.ui-btn-active a" ).attr('href');
-				$.mobile.changePage(href);
+				var href = this.element.find( "li.ui-btn-active a" ).attr( "href" );
+				$.mobile.changePage( href );
 				return false;
 			}
-			if( this.options.submitTo ){
+			if ( this.options.submitTo ) {
 				this.submitTo();
 			}
 		},
-		highlightDown: function (){
+		highlightDown: function() {
 			if ( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
 				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" );
 				
@@ -304,9 +300,9 @@ $( document ).on("mobileinit", function(){
 			}
 			return;
 		},
-		highlightUp: function(){
-			if( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass("ui-btn-active" );
+		highlightUp: function() {
+			if ( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
+				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" );
 				
 				this.highlightUp();
 			}
@@ -318,7 +314,7 @@ $( document ).on("mobileinit", function(){
 
 });
 
-$( document ).on( "pageshow",  ".jqm-demos:not(.ui-page-header-fixed)", function() {
+$( document ).on( "pageshow", ".jqm-demos:not(.ui-page-header-fixed)", function() {
 	var page = $( this ), 
 		panelInnerHeight = page.find( ".jqm-nav-panel.ui-panel-position-left" ).outerHeight() + 30,
 		minPageHeight = $.mobile.getScreenHeight();
