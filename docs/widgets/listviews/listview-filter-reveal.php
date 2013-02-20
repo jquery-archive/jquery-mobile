@@ -85,13 +85,15 @@
 				</ul>
 			</div><!--/demo-html -->
 
-	</div><!-- /content -->
+			</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
-		<p>Copyright 2013 The jQuery Foundation</p>
-	</div><!-- /footer -->
+			<div data-role="footer" class="jqm-footer">
+				<p class="jqm-version"></p>
+				<p>Copyright 2013 The jQuery Foundation</p>
+			</div><!-- /footer -->
 
-</div><!-- /page -->
-</body>
-</html>
+		<?php include( '../../global-nav.php' ); ?>
+
+		</div><!-- /page -->
+		</body>
+		</html>

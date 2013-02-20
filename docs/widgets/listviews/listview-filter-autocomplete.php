@@ -71,14 +71,15 @@
 				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a city..." data-filter-theme="d"></ul>
 			</div><!--/demo-html -->
 
-	</div><!-- /content -->
+			</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
-		<p>Copyright 2013 The jQuery Foundation</p>
-	</div><!-- /footer -->
+			<div data-role="footer" class="jqm-footer">
+				<p class="jqm-version"></p>
+				<p>Copyright 2013 The jQuery Foundation</p>
+			</div><!-- /footer -->
 
-</div><!-- /page -->
+		<?php include( '../../global-nav.php' ); ?>
 
-</body>
-</html>
+		</div><!-- /page -->
+		</body>
+		</html>
