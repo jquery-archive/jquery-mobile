@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css">
 	<link id="arrowStyle" rel="stylesheet" href="jquery.mobile.popup.arrow.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../../favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
