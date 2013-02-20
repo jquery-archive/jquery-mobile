@@ -370,7 +370,7 @@
 
 			<h2 id="list-grouped">Grouped collapsible with listviews</h2>
 
-			<p>You can also use listviews inside a <a href="../content/content-collapsible-set.html">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once.</p>
+			<p>You can also use listviews inside a <a href="../accordions/">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once.</p>
 
 			<div data-demo-html="true">
 				<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
