@@ -12,7 +12,7 @@ module.exports = function( grunt ) {
 				env: 'IS_DEPLOY_TARGET=true'
 			},
 			docs: {
-				deps: [ 'init', 'js', 'css' ]
+				deps: []
 			},
 			init: {},
 			js: {

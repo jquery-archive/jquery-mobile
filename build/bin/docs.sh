@@ -11,11 +11,10 @@ cp -r docs tmp/demos/
 # ... Copy css and images
 cp compiled/*.css tmp/demos/css/themes/$THEME
 cp -r compiled/images tmp/demos/css/themes/$THEME
-# ... replace "js/" with "js/jquery.mobile.js"
 
 # NOTE the deletion here is required by gnu/bsd sed differences
 # reset the docs specific js reference
-find tmp/demos \( -name '*.html' -o -name '*.php' \) -exec sed -i${SED_INPLACE_EXT} -e "s@_assets/js/\"@_assets/js/$DEMOSNAME.js\"@" {} \;
+find tmp/demos \( -name '*.html' -o -name '*.php' \) -exec sed -i${SED_INPLACE_EXT} -e "s@_assets/js/.*\"@_assets/js/$DEMOSNAME.js\"@" {} \;
 find tmp/demos -name "*$SED_INPLACE_EXT" -exec rm {} \;
 
 # reset the javascript references
@@ -87,7 +86,7 @@ clear_zip_files $OUTPUT
 cd tmp/demos && zip -rq ../../$OUTPUT/$NAME.docs.zip * && cd -
 
 # clean out the compiled directory demos and cp the new output
-rm -rf $OUTPUT/demos && mv -f tmp/demos $OUTPUT
+cp -R tmp/demos $OUTPUT
 
 # Finish by removing the temporary files
 rm -rf tmp

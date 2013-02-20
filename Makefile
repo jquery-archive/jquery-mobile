@@ -34,8 +34,7 @@ js: init
 #
 # -------------------------------------------------
 docs: init js css
-	@@${ARGS} bash build/bin/docs.sh
-	@@${ARGS} node node_modules/.bin/grunt concat:demosjs
+	@@${ARGS} node node_modules/.bin/grunt docs
 
 # Output a message saying the process is complete
 notify: init
