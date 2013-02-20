@@ -43,7 +43,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_closeLink: null,
 	_page: null,
 	_modal: null,
-	_pannelInner: null,
+	_panelInner: null,
 	_wrapper: null,
 	_fixedToolbar: null,
 
@@ -57,11 +57,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				return $pageThemeClass;
 			},
 			_getPanelInner = function() {
-				var $pannelInner = $el.find( "." + self.options.classes.panelInner );
-				if ( $pannelInner.length === 0 ) {
-					$pannelInner = $el.children().wrapAll( '<div class="' + self.options.classes.panelInner + '" />' ).parent();
+				var $panelInner = $el.find( "." + self.options.classes.panelInner );
+				if ( $panelInner.length === 0 ) {
+					$panelInner = $el.children().wrapAll( '<div class="' + self.options.classes.panelInner + '" />' ).parent();
 				}
-				return $pannelInner;
+				return $panelInner;
 			},
 			_getWrapper = function() {
 				var $wrapper = page.find( "." + self.options.classes.contentWrap );
@@ -90,7 +90,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			_closeLink: $el.find( ":jqmData(rel='close')" ),
 			_page: $el.closest( ":jqmData(role='page')" ),
 			_pageTheme: _getPageTheme(),
-			_pannelInner: _getPanelInner(),
+			_panelInner: _getPanelInner(),
 			_wrapper: _getWrapper(),
 			_fixedToolbar: _getFixedToolbar()
 		});
@@ -165,22 +165,22 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_positionPanel: function() {
 		var self = this,
-			pannelInnerHeight = self._pannelInner.outerHeight(),
-			expand = pannelInnerHeight > $.mobile.getScreenHeight();
+			panelInnerHeight = self._panelInner.outerHeight(),
+			expand = panelInnerHeight > $.mobile.getScreenHeight();
 
 		if ( expand || !self.options.positionFixed ) {
 			if ( expand ) {
 				self._unfixPanel();
-				$.mobile.resetActivePageHeight( pannelInnerHeight );
+				$.mobile.resetActivePageHeight( panelInnerHeight );
 			}
-			self._scrollIntoView( pannelInnerHeight );
+			self._scrollIntoView( panelInnerHeight );
 		} else {
 			self._fixPanel();
 		}
 	},
 
-	_scrollIntoView: function( pannelInnerHeight ) {
-		if ( pannelInnerHeight < $( window ).scrollTop() ) {
+	_scrollIntoView: function( panelInnerHeight ) {
+		if ( panelInnerHeight < $( window ).scrollTop() ) {
 			window.scrollTo( 0, 0 );
 		}	
 	},
@@ -437,7 +437,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		}
 		
-		this._pannelInner.children().unwrap();
+		this._panelInner.children().unwrap();
 
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
 			.off( "swipeleft.panel swiperight.panel" )
