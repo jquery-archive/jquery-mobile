@@ -6,7 +6,7 @@
 	<title>Listview Autocomplete - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../../favicon.ico">
 
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
