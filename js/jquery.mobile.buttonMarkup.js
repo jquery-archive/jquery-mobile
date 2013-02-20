@@ -128,10 +128,6 @@ $.fn.buttonMarkup = function( options ) {
 			}
 		}
 
-		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
-			el.attr( "title", el.getEncodedText() );
-		}
-
 		if ( buttonElements ) {
 			el.removeClass( buttonElements.bcls || "" );
 		}
