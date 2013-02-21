@@ -8,11 +8,9 @@
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<link rel="stylesheet" href="slider.tooltip.css" id="tooltipStyle">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
-	<script src="slider.tooltip.js" id="tooltipCode"></script>
 </head>
 <body>
 <div data-role="page" class="jqm-demos">
@@ -27,7 +25,7 @@
 
 		<h1>Slider tooltip extension</h1>
 
-        <div data-demo-html="true" data-demo-js="#tooltipCode" data-demo-css="#tooltipStyle">
+        <div data-demo-html="true">
             <form>
               <label for="slider-1">Slider with tooltip:</label>
               <input type="range" name="slider-1" id="slider-1" min="0" max="100" value="50" data-popup-enabled="true">
