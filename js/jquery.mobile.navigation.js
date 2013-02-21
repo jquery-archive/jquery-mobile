@@ -532,8 +532,8 @@ define( [
 							// The data-url attribute exists, properly extract data-url attribute value
 							// regardless of which attribute delimiters (' or ") are used;
 							// whether the attributes contain embedded ' or " characters or what order they occur in:
-							var baseTagAttributes = $(pageElement)[0].attributes;
-							url = fileUrl = path.getFilePath(baseTagAttributes.getNamedItem("data-" + $.mobile.ns + "url").nodeValue);
+							url = fileUrl = path.getFilePath(
+                                    $(pageElement)[0].attributes.getNamedItem("data-" + $.mobile.ns + "url").nodeValue);
 						}
 					}
 
