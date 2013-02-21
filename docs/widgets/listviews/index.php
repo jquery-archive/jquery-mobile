@@ -85,7 +85,7 @@
 			</div><!--/demo-html -->
 
 			<h2 id="list-filter">Filter</h2>
-			<p>To make a list filterable, simply add the <code>data-filter="true"</code> attribute to the list. The framework will then append a search box above the list and add the behavior to filter out list items that don't contain the current search string as the user types. The input's placeholder text defaults to "Filter items...". To configure the placeholder text in the search input, use the <code>data-filter-placeholder</code> attribute. By default the search box will inherit its theme from its parent. The search box theme can be configured using the data attribute <code>data-filter-theme</code> on your listview.</p>
+			<p>To make a list filterable, simply add the <code>data-filter="true"</code> attribute to the list. The framework will then append a search box above the list and add the behavior to filter out list items that don't contain the current search string as the user types. The input's placeholder text defaults to "Filter items...". To configure the placeholder text in the search input, use the <code>data-filter-placeholder</code> attribute. By default the search box will inherit its theme from its parent. The search box theme can be configured using the data attribute <code>data-filter-theme</code> on your listview. To keep a list item visible, even if it does not match the filter criteria, add <code>data-persist="true"</code>.</p>
 			<div data-demo-html="true">
 				<ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
 					<li><a href="#">Apple</a></li>
@@ -125,7 +125,7 @@
 			</div><!--/demo-html -->
 
 			<h2 id="list-autodividers">Autodividers</h2>
-			<p><p>A listview can be configured to automatically generate dividers for its items by adding a <code>data-autodividers="true"</code> attribute to any listview. By default, the text used to create dividers is the uppercased first letter of the item's text. Alternatively you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. This feature is designed to work seamlessly with the filter.</p>
+			<p><p>A listview can be configured to automatically generate dividers for its items by adding a <code>data-autodividers="true"</code> attribute to any listview. By default, the text used to create dividers is the uppercased first letter of the item's text. Alternatively you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. Any existing dividers will be removed by default, prior to generating new dividers. To keep manually added dividers, add a <code>data-persist="true"</code> attribute. This feature is designed to work seamlessly with the filter.</p>
 			<div data-demo-html="true">
 				<ul data-role="listview" data-autodividers="true"  data-filter="true" data-inset="true">
 					<li><a href="index.html">Adam Kinkaid</a></li>
