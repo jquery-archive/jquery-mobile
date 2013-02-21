@@ -73,7 +73,7 @@ $.mobile.document.delegate( "ul, ol", "listviewcreate", function() {
 				listItems = list.children( ":not(.ui-screen-hidden)" );
 
 				if ( !listItems.not( persistentItems ).length && listview.options.filterReveal ) {
-					listItems = list.children( ".ui-screen-hidden" );
+					listItems = list.children();
 				}
 			}
 
