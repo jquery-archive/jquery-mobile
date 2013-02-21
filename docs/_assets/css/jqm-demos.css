@@ -5,6 +5,7 @@
 /* Page */
 body, .jqm-demos  {
 	background-color: #fefefe;
+	font-size: 1.05em;
 }
 
 /* Header */
@@ -271,7 +272,7 @@ body, .jqm-demos  {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size: 2.4em;
-	color: #555;
+	color: #333;
 	clear:both;
 }
 .jqm-faq .jqm-content > h1 {
@@ -285,7 +286,7 @@ body, .jqm-demos  {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size: 1.6em;
-	color: #74b042;
+	color: #60a725;
 	padding-top: .6em;
 	clear:both;
 }
@@ -334,7 +335,7 @@ h2.jqm-home-widget {
 	margin-top: -.5em;
 	margin-bottom: .5em;
 	padding-bottom: 2.6em;
-	color: #555;
+	color: #333;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #e5e5e5;
@@ -343,7 +344,7 @@ h2.jqm-home-widget {
 .jqm-demos-home .jqm-content .jqm-intro {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-	font-size: .9em;
+	line-height: 1.6;
 	margin: .5em .8em 1em .8em;
 	padding-bottom: .5em;
 	border: none;
@@ -382,6 +383,10 @@ h2.jqm-home-widget {
 	}
 	.jqm-demos .jqm-content.jqm-fullwidth {
 		padding: 15px;
+	}
+
+	.jqm-content p {
+		line-height: 1.5;
 	}
 	.jqm-demos-home .jqm-content p.jqm-intro {
 		font-size: 1.1em;
@@ -504,7 +509,7 @@ h2.jqm-home-widget {
 	background-image: none;
 	background-color: #f8f8f8;
 	border-color: #e8e8e8;
-	color: #74b042;
+	color: #60a725;
 	text-shadow: none;
 }
 /* List buttons */
@@ -845,7 +850,7 @@ h2.jqm-home-widget {
 	float: none;
 	left: auto;
 	height: auto;
-	line-height: 16px;
+	line-height: 18px;
 	margin: 0;
 	outline: 0;
 	overflow: visible;
@@ -860,7 +865,7 @@ h2.jqm-home-widget {
 	font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
 	font-weight: normal;
 	font-style: normal;
-	font-size: 13px;
+	font-size: 14px;
 	min-height: inherit;
 	min-height: auto;
 }
@@ -959,13 +964,13 @@ h2.jqm-home-widget {
 	color: #5ba1cf;
 }
 .syntaxhighlighter .string {
-	color: #9a6;
+	color: #98da31;
 }
 .syntaxhighlighter .string a {
 	color: #1dc116;
 }
 .syntaxhighlighter .keyword {
-	color: #c84;
+	color: #ffae00;
 }
 .syntaxhighlighter .preprocessor {
 	color: #8aa6c1;
