@@ -71,9 +71,9 @@
 			box-shadow: -5px 0px 5px rgba(0,0,0,.15);
 		}
 
-		/* Use the ui-body class of your page theme to set a background image.
-		The page theme will be set for the content wrapper,
-		while the page get the panel them before opening the panel. */
+		/* Use the ui-body class of your page theme (ui-body-d in this demo) to set a background image.
+		This class will be added to the content wrapper, while the page itself gets the same background
+		as the panel before opening the panel. */
 		#demo-page .ui-body-d {
 			background-image: url(../../_assets/img/bg-pattern.png);
 			background-repeat: repeat-x;
@@ -148,6 +148,8 @@
         	<li>Set a background image for a page that contains a panel.</li>
             <li>Give the page a responsive layout with CSS columns.</li>
         </ul>
+        
+        <p>Click the "view source" button to see the CSS and markup of this demo and open the demo to see the result.</p>
 
         <a href="#demo-page" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
 
