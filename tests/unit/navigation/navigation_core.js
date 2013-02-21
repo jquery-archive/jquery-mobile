@@ -368,6 +368,15 @@ $.testHelper.delayStart();
 		var url = "foo/bar/single.html";
 		testDataUrlHash( "#single-quotes-data-url a", {hashOrPush: home + url } );
 	});
+	test( "data url works for single quote in url", function(){
+		var url = "foo/bar/single.html?foo=o'bar&bar=foobar";
+		testDataUrlHash( "#single-quote-in-data-url a", {hashOrPush: home + url } );
+	});
+
+	test( "data url works for double quote in url", function(){
+		var url = "foo/bar/double.html?foo=o%22bar&bar=foobar";
+		testDataUrlHash( "#double-quote-in-data-url a", {hashOrPush: home + url } );
+	});	
 
 	test( "data url works when role and url are reversed on the page element", function(){
 		var url = "foo/bar/reverse.html";
