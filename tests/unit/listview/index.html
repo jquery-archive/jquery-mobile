@@ -245,6 +245,21 @@
 	</div>
 </div>
 
+<div data-nstest-role="page" id="autodividers-persist-test">
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1>Autodivider with Persistence Test</h1>
+	</div>
+	<div data-nstest-role="content">
+		<ul data-nstest-role="listview" data-nstest-autodividers="true">
+			<li data-nstest-role="list-divider" data-nstest-persist="true">SHOULD KEEP</li>
+			<li>a is for aquaman</li>
+			<li>b is for batman</li>
+			<li>c is for catwoman</li>
+			<li>d is for darkwing</li>
+		</ul>
+	</div>
+</div>
+
 <div data-nstest-role="page" id="autodividers-selector-test">
 	<div data-nstest-role="header" data-nstest-position="inline">
 		<h1>Autodivider Selector Test</h1>
@@ -281,6 +296,21 @@
 	</div>
 </div>
 
+<!-- Search bar filter with persistence -->
+<div data-nstest-role="page" id='search-persist-test'>
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1>Filter with Persistence</h1>
+	</div>
+	<div data-nstest-role="content">
+		<ul data-nstest-role="listview" data-nstest-filter="true">
+			<li>a is for aquaman</li>
+			<li data-nstest-persist="true">b is for batman</li>
+			<li>c is for catwoman</li>
+			<li>d is for darkwing</li>
+		</ul>
+	</div>
+</div>
+
 <!-- Search bar filter -->
 <div data-nstest-role="page" id='search-customfilter-test'>
 	<div data-nstest-role="header" data-nstest-position="inline">
@@ -307,6 +337,26 @@
 			<li>a is for aquaman</li>
 			<li data-nstest-role="list-divider">b</li>
 			<li>b is for batman</li>
+			<li data-nstest-role="list-divider">c</li>
+			<li>c is for catwoman</li>
+			<li data-nstest-role="list-divider">d</li>
+			<li>d is for darkwing</li>
+		</ul>
+	</div>
+</div>
+
+<!-- Search bar filter with list-dividers and persistence -->
+<div data-nstest-role="page" id='search-filter-with-dividers-persist-test'>
+	<div data-nstest-role="header" data-nstest-position="inline">
+		<h1>Filter with Dividers and Persist</h1>
+	</div>
+	<div data-nstest-role="content">
+		<ul data-nstest-role="listview" data-nstest-filter="true">
+			<li data-nstest-role="list-divider" data-nstest-persist="true">Superheros by Alpha</li>
+			<li data-nstest-role="list-divider">a</li>
+			<li>a is for aquaman</li>
+			<li data-nstest-role="list-divider">b</li>
+			<li data-nstest-persist="true">b is for batman</li>
 			<li data-nstest-role="list-divider">c</li>
 			<li>c is for catwoman</li>
 			<li data-nstest-role="list-divider">d</li>
@@ -362,6 +412,39 @@
         </ul>
     </div>
 </div>
+
+<!-- Search bar reveal filter with persistence -->
+<div data-nstest-role="page" id='search-filter-reveal-persist-test'>
+    <div data-nstest-role="header" data-nstest-position="inline">
+        <h1>Reveal Listview with Persistence</h1>
+    </div>
+    <div data-nstest-role="content">
+        <ul data-nstest-role="listview" data-nstest-filter="true" data-nstest-filter-reveal="true">
+            <li>Acura</a></li>
+            <li>Audi</li>
+            <li>BMW</li>
+            <li>Cadillac</li>
+            <li>Chrysler</li>
+            <li>Dodge</li>
+            <li>Ferrari</li>
+            <li data-nstest-persist="true">Ford</li>
+            <li>GMC</li>
+            <li>Honda</li>
+            <li>Hyundai</li>
+            <li>Infiniti</li>
+            <li>Jeep</li>
+            <li>Kia</li>
+            <li>Lexus</li>
+            <li>Mini</li>
+            <li>Nissan</li>
+            <li>Porsche</li>
+            <li>Subaru</li>
+            <li>Toyota</li>
+            <li>Volkswagon</li>
+            <li>Volvo</li>
+        </ul>
+    </div>
+</div><!-- /page -->
 
 <!-- Programmatically generated list items !-->
 <div data-nstest-role="page" id="programmatically-generated-list">
