@@ -26,7 +26,7 @@
 
 <li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Header toolbar</a></li>
 
-<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icon</a></li>
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icons</a></li>
 
 <li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Links</a></li>
 
