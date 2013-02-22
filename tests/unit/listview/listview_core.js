@@ -345,6 +345,23 @@
 		]);
 	});
 
+	module( "Autodividers with Persistence" );
+
+	asyncTest( "Adds Autodividers but keep existing dividers flagged persistent", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.testHelper.openPage( '#autodividers-persist-test' );
+			},
+
+			function() {
+				var $new_page = $( '#autodividers-persist-test' );
+				ok( $new_page.hasClass( 'ui-page-active' ) );
+				ok( $new_page.find( '.ui-li-divider' ).length === 5 );
+				start();
+			}
+		]);
+	});
+
 	module( "Autodividers Selector" );
 
 	asyncTest( "Adds right divider text.", function() {
@@ -504,6 +521,40 @@
 		ok(ul.find("#fiz img").hasClass("ui-li-thumb"));
 	});
 
+	asyncTest( "Keep persistent items when the user enters information", function() {
+		var $searchPage = $("#search-persist-test");
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#search-persist-test");
+			},
+
+			function() {
+				$searchPage.find('input').val('ar');
+				$searchPage.find('input').trigger('change');
+
+				deepEqual($searchPage.find('li.ui-screen-hidden').length, 2); // darkwing and batman (persist)
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "Keep persistent items when user changes values", function() {
+		var $searchPage = $("#search-persist-test");
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#search-persist-test");
+			},
+
+			function() {
+				$searchPage.find('input').val('a');
+				$searchPage.find('input').trigger('change');
+
+				deepEqual($searchPage.find("li[style^='display: none;']").length, 0);
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "Filter downs results and dividers when the user enters information", function() {
 		var	$searchPage = $("#search-filter-with-dividers-test");
 		$.testHelper.pageSequence([
@@ -559,6 +610,73 @@
 				var $page = $('.ui-page-active');
 
 				$page.find('input').val('at');
+				$page.find('input').trigger('change');
+
+				setTimeout(function() {
+					deepEqual($page.find('li:jqmData(role=list-divider):hidden').length, 2);
+					deepEqual($page.find('li:jqmData(role=list-divider):hidden + li:not(:jqmData(role=list-divider)):hidden').length, 2);
+					deepEqual($page.find('li:jqmData(role=list-divider):not(:hidden) + li:not(:jqmData(role=list-divider)):not(:hidden)').length, 2);
+					start();
+				}, 1000);
+			}
+		]);
+	});
+
+	asyncTest( "Keep persistent items and dividers when the user enters information", function() {
+		var	$searchPage = $("#search-filter-with-dividers-persist-test");
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#search-filter-with-dividers-persist-test");
+			},
+
+			// wait for the page to become active/enhanced
+			function(){
+				$searchPage.find('input').val('ar');
+				$searchPage.find('input').trigger('change');
+				setTimeout(function() {
+					//there should be four hidden list entries
+					deepEqual($searchPage.find('li.ui-screen-hidden').length, 4);
+
+					//there should be two list entries that are list dividers and hidden
+					deepEqual($searchPage.find('li.ui-screen-hidden:jqmData(role=list-divider)').length, 2);
+
+					//there should be two list entries that are not list dividers and hidden
+					deepEqual($searchPage.find('li.ui-screen-hidden:not(:jqmData(role=list-divider))').length, 2);
+					start();
+				}, 1000);
+			}
+		]);
+	});
+
+	asyncTest( "Keep persistent items and dividers when user removes values", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#search-filter-with-dividers-persist-test");
+			},
+
+			function() {
+				$('.ui-page-active input').val('a');
+				$('.ui-page-active input').trigger('change');
+
+				setTimeout(function() {
+					deepEqual($('.ui-page-active input').val(), 'a');
+					deepEqual($('.ui-page-active li[style^="display: none;"]').length, 0);
+					start();
+				}, 1000);
+			}
+		]);
+	});
+
+	asyncTest( "Dividers are hidden when preceding hidden rows and shown when preceding shown rows", function () {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#search-filter-with-dividers-persist-test");
+			},
+
+			function() {
+				var $page = $('.ui-page-active');
+
+				$page.find('input').val('ar');
 				$page.find('input').trigger('change');
 
 				setTimeout(function() {
@@ -736,6 +854,34 @@
 			}
 		]);
 	});
+
+	asyncTest( "Keep persistent items when the user enters information", 3, function() {
+		var $searchPage = $( "#search-filter-reveal-persist-test" );
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( $searchPage );
+			},
+
+			function() {
+				deepEqual( $searchPage.find( 'li.ui-screen-hidden' ).length, 21);
+			},
+
+			function() {
+				$searchPage.find( 'input' ).val( 'a' );
+				$searchPage.find( 'input' ).trigger('change');
+
+				deepEqual( $searchPage.find('li.ui-screen-hidden').length, 10);
+			},
+
+			function() {
+				$searchPage.find( 'input' ).val( '' );
+				$searchPage.find( 'input' ).trigger('change');
+
+				deepEqual( $searchPage.find('li.ui-screen-hidden').length, 21);
+				start();
+			}
+		]);
+	}); // commit fix
 
 	module( "Programmatically generated list items", {
 		setup: function(){

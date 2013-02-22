@@ -22,14 +22,17 @@ $.mobile.listview.prototype.options.filterCallback = defaultFilterCallback;
 $.mobile.document.delegate( "ul, ol", "listviewcreate", function() {
 
 	var list = $( this ),
-		listview = list.data( "mobile-listview" );
+		listview = list.data( "mobile-listview" ),
+		persistentItems = $( "li:jqmData(role='list-divider')" , this ).filter(function(){
+			return !!$( this ).nextUntil( "li:jqmData(role='list-divider')" , "li:jqmData(persist='true')").length;
+		}).add( "li:jqmData(persist='true')" );
 
 	if ( !listview.options.filter ) {
 		return;
 	}
 
 	if ( listview.options.filterReveal ) {
-		list.children().addClass( "ui-screen-hidden" );
+		list.children().not( persistentItems ).addClass( "ui-screen-hidden" );
 	}
 
 	var wrapper = $( "<form>", {
@@ -69,8 +72,8 @@ $.mobile.document.delegate( "ul, ol", "listviewcreate", function() {
 				// Only chars added, not removed, only use visible subset
 				listItems = list.children( ":not(.ui-screen-hidden)" );
 
-				if ( !listItems.length && listview.options.filterReveal ) {
-					listItems = list.children( ".ui-screen-hidden" );
+				if ( !listItems.not( persistentItems ).length && listview.options.filterReveal ) {
+					listItems = list.children();
 				}
 			}
 
@@ -83,7 +86,12 @@ $.mobile.document.delegate( "ul, ol", "listviewcreate", function() {
 					item = $( listItems[ i ] );
 					itemtext = item.jqmData( "filtertext" ) || item.text();
 
-					if ( item.is( "li:jqmData(role=list-divider)" ) ) {
+					if ( item.is( "li:jqmData(persist=true)" ) ) {
+
+						// Flag for divider inclusion, do not modify visibility
+						childItems = !item.is( "li:jqmData(role='list-divider')" );
+
+					} else if ( item.is( "li:jqmData(role=list-divider)" ) ) {
 
 						item.toggleClass( "ui-filter-hidequeue" , !childItems );
 
@@ -115,7 +123,7 @@ $.mobile.document.delegate( "ul, ol", "listviewcreate", function() {
 			} else {
 
 				//filtervalue is empty => show all
-				listItems.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
+				listItems.not( persistentItems ).toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
 			}
 			listview._addFirstLastClasses( li, listview._getVisibles( li, false ), false );
 		},

@@ -31,9 +31,9 @@ $.mobile.document.delegate( "ul,ol", "listviewcreate", function() {
 	}
 
 	var replaceDividers = function () {
-		list.find( "li:jqmData(role='list-divider')" ).remove();
+		list.find( "li:jqmData(role='list-divider')" ).not( "li:jqmData(persist='true')" ).remove();
 
-		var lis = list.find( 'li' ),
+		var lis = list.find( 'li' ).not( "li:jqmData(role='list-divider')" ),
 			lastDividerText = null, li, dividerText;
 
 		for ( var i = 0; i < lis.length ; i++ ) {
