@@ -13,8 +13,8 @@
     <script src="../../../js/"></script>
     <style>
         .nav-search .ui-btn-up-a {
-            background-image:none;
-            background-color:#333333;
+            background-image: none;
+            background-color: #333;
         }
         .nav-search .ui-btn-inner {
             border-top: 1px solid #888;
@@ -37,9 +37,6 @@
 			display: block;
 			margin-top: 1.2em;
 		}
-        .switch .ui-slider-switch {
-			width: 6.5em !important;
-		}
         .ui-grid-a {
 			margin-top: 1em;
 			padding-top: .8em;
@@ -54,22 +51,22 @@
     <div data-role="header" data-theme="f" data-position="fixed">
         <h1>Fixed header</h1>
         <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-        <a href="#add-form" data-icon="plus" data-iconpos="notext">Add</a>
+        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
     </div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
 
-    	<h1>Panel</h1>
+    	<h1>Panels</h1>
 
 		<h2>Fixed positioning</h2>
 
-        <p>This is a typical page that has two buttons in the header bar that open panels. The left button opens a left menu with the reveal display mode. The right button opens a form in a right overlay panel. We also set position fixed for the header and footer on this page.</p>
+        <p>This is a typical page that has two buttons in the header bar that open panels. The left panel has the reveal display mode. The right panel opens as overlay. For both panels we set <code>data-position-fixed="true"</code>. We also set position fixed for the header and footer on this page.</p>
 
-        <p>The left panel contains a long menu to demonstrate that the framework will check the panel contents height and unfixes the panel so its content can be scrolled.</p>
+        <p>The left panel contains a long menu to demonstrate that the framework will check the panel contents height and unfixes the panel so its content can be scrolled. In the right panel there is a short form that shows the fixed positioning.</p>
 
 		<h2>Responsive</h2>
 
-        <p>To make this responsive, the panel stays open and causes the page to re-flow at wider widths. This allows both the menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page.</p>
+        <p>To make this responsive, you can make the page re-flow at wider widths. This allows both the reveal panel menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page.</p>
 
         <a href="./" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Panels</a>
 
@@ -85,35 +82,37 @@
 
 		<ul data-role="listview" data-theme="a" class="nav-search">
             <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
-            <li><a href="#panel-fixed-page2">Accessibility</a></li>
-            <li><a href="#panel-fixed-page2">Accordions</a></li>
-            <li><a href="#panel-fixed-page2">AJAX navigation model</a></li>
-            <li><a href="#panel-fixed-page2">Anatomy of a page</a></li>
-            <li><a href="#panel-fixed-page2">Animation events</a></li>
-            <li><a href="#panel-fixed-page2">Automatic listview dividers</a></li>
-            <li><a href="#panel-fixed-page2">Buttons</a></li>
-            <li><a href="#panel-fixed-page2">Button icons</a></li>
-            <li><a href="#panel-fixed-page2">Caching pages</a></li>
-            <li><a href="#panel-fixed-page2">Checkbox</a></li>
-            <li><a href="#panel-fixed-page2">Collapsible content</a></li>
-            <li><a href="#panel-fixed-page2">Collapsible lists</a></li>
-            <li><a href="#panel-fixed-page2">Data attribute reference</a></li>
-            <li><a href="#panel-fixed-page2">Dialogs</a></li>
-            <li><a href="#panel-fixed-page2">Disabling form elements</a></li>
-            <li><a href="#panel-fixed-page2">Dynamically injecting pages</a></li>
-            <li><a href="#panel-fixed-page2">Events API</a></li>
-            <li><a href="#panel-fixed-page2">Flip switch</a></li>
-            <li><a href="#panel-fixed-page2">Features overview</a></li>
-            <li><a href="#panel-fixed-page2">Fixed toolbars</a></li>
-            <li><a href="#panel-fixed-page2">Forms intro</a></li>
-            <li><a href="#panel-fixed-page2">Form element gallery</a></li>
-            <li><a href="#panel-fixed-page2">Fullscreen toolbars</a></li>
-            <li><a href="#panel-fixed-page2">Footer toolbars</a></li>
-            <li><a href="#panel-fixed-page2">Global options (mobileinit)</a></li>
-            <li><a href="#panel-fixed-page2">Grouped buttons</a></li>
-            <li><a href="#panel-fixed-page2">Header toolbars</a></li>
-            <li><a href="#panel-fixed-page2">Hiding elements accessibly</a></li>
-            <li><a href="#panel-fixed-page2">HTML formatting</a></li>
+                <li><a href="#panel-fixed-page2">Accordion</a></li>
+                <li><a href="#panel-fixed-page2">AJAX Navigation</a></li>
+                <li><a href="#panel-fixed-page2">Autocomplete</a></li>
+                <li><a href="#panel-fixed-page2">Buttons</a></li>
+                <li><a href="#panel-fixed-page2">Checkboxes</a></li>
+                <li><a href="#panel-fixed-page2">Collapsibles</a></li>
+                <li><a href="#panel-fixed-page2">Controlgroup</a></li>
+                <li><a href="#panel-fixed-page2">Dialogs</a></li>
+                <li><a href="#panel-fixed-page2">Fixed toolbars</a></li>
+                <li><a href="#panel-fixed-page2">Flip switch toggle</a></li>
+                <li><a href="#panel-fixed-page2">Footer toolbar</a></li>
+                <li><a href="#panel-fixed-page2">Form elements</a></li>
+                <li><a href="#panel-fixed-page2">Grids</a></li>
+                <li><a href="#panel-fixed-page2">Header toolbar</a></li>
+                <li><a href="#panel-fixed-page2">Icons</a></li>
+                <li><a href="#panel-fixed-page2">Links</a></li>
+                <li><a href="#panel-fixed-page2">Listviews</a></li>
+                <li><a href="#panel-fixed-page2">Loader overlay</a></li>
+                <li><a href="#panel-fixed-page2">Navbar</a></li>
+                <li><a href="#panel-fixed-page2">Navbar, persistent</a></li>
+                <li><a href="#panel-fixed-page2">Pages</a></li>
+                <li><a href="#panel-fixed-page2">New</span></a></li>
+                <li><a href="#panel-fixed-page2">Popup</a></li>
+                <li><a href="#panel-fixed-page2">Radio buttons</a></li>
+                <li><a href="#panel-fixed-page2">Select</a></li>
+                <li><a href="#panel-fixed-page2">Slider, single</a></li>
+                <li><a href="#panel-fixed-page2">New</span></a></li>
+                <li><a href="#panel-fixed-page2">New</span></a></li>
+                <li><a href="#panel-fixed-page2">New</span></a></li>
+                <li><a href="#panel-fixed-page2">Text inputs & textarea</a></li>
+                <li><a href="#panel-fixed-page2">Transitions</a></li>
 		</ul>
 
 	</div><!-- /panel -->
@@ -122,24 +121,13 @@
 
         <form class="userform">
 
-        	<h2>Create new user</h2>
+        	<h2>Login</h2>
 
-            <label for="name">Name</label>
+            <label for="name">Username:</label>
             <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
-
-            <label for="email">Email</label>
-            <input type="email" name="email" id="status" value="" data-clear-btn="true" data-mini="true">
 
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
-
-            <div class="switch">
-                <label for="status">Status</label>
-                <select name="status" id="slider" data-role="slider" data-mini="true">
-                    <option value="off">Inactive</option>
-                    <option value="on">Active</option>
-                </select>
-            </div>
 
             <div class="ui-grid-a">
                 <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Cancel</a></div>
