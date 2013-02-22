@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Forms - jQuery Mobile Demos</title>
+	<title>Form elements - jQuery Mobile Demos</title>
 		<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 		<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 		<link rel="shortcut icon" href="../../favicon.ico">
@@ -24,7 +24,7 @@
 
     <div data-role="content" class="jqm-content">
 
-        <h1>Forms</h1>
+        <h1>Form elements</h1>
 
         <p class="jqm-intro">All form widgets begin with native form elements with rich HTML semantics that are enhanced to make them more attractive and finger-friendly.
         </p>
@@ -345,60 +345,70 @@
 
 			<p>For example, if a block of HTML markup (say a login form) was loaded in through AJAX, trigger the create event to automatically transform all the widgets it contains (inputs and buttons in this case) into the enhanced versions. The code for this scenario would be:</p>
 
-			<code>
-			$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
-			</code>
+<pre><code>
+$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
+</code></pre>
 
 			<h2>Refreshing form elements</h2>
 
 		    <p>In jQuery Mobile, some enhanced form controls are simply styled (inputs), but others are custom controls (selects, sliders) built from, and kept in sync with, the native control. To programmatically update a form control with JavaScript, first manipulate the native control, then use the <code>refresh</code> method to tell the enhanced control to update itself to match the new state. Here are some examples of how to update common form controls, then call the <code>refresh</code> method:</p>
+            
 			<h4>Checkboxes:</h4>
 
-		<code>
-		$("input[type='checkbox']").prop("checked",true).checkboxradio("refresh");
-		</code>
+<pre><code>
+$( "input[type='checkbox']" ).prop( "checked", true ).checkboxradio( "refresh" );
+</code></pre>
 
-		<p>Radios:</p>
-		<code>
-		$("input[type='radio']").prop("checked",true).checkboxradio("refresh");
-		</code>
+		<h4>Radios:</h4>
+        
+<pre><code>
+$( "input[type='radio']" ).prop( "checked", true ).checkboxradio( "refresh" );
+</code></pre>
 
-		<p>Selects:</p>
-		<code><pre>
-
-var myselect = $("#selectfoo");
+		<h4>Selects:</h4>
+        
+<pre><code>
+var myselect = $( "#selectfoo" );
 myselect[0].selectedIndex = 3;
-myselect.selectmenu("refresh");</pre></code>
+myselect.selectmenu( "refresh" );
+</code></pre>
 
-		<p>Sliders:</p>
-		<code>
-		$("input[type='range']").val(60).slider("refresh");
-		</code>
+		<h4>Sliders:</h4>
+        
+<pre><code>
+$( "input[type='range']" ).val( 60 ).slider( "refresh" );
+</code></pre>
 
-		<p>Flip switches (they use slider):</p>
+		<h4>Flip switches:</h4>
+        
+        <p>They use the slider widget.</p>
 
-		<code><pre>
-
-var myswitch = $("#selectbar");
-myswitch[0].selectedIndex = 1;
-myswitch.slider("refresh");
-		</pre></code>
+<pre><code>
+var myswitch = $( "#selectbar" );
+myswitch[ 0 ].selectedIndex = 1;
+myswitch.slider( "refresh" );
+</pre></code>
 
 			<h2>Preventing auto-initialization of form elements</h2>
+            
 			<p>If you'd prefer that a particular form control be left untouched by jQuery Mobile, simply give that element the attribute <code> data-role="none"</code>. For example:</p>
-			<pre><code>&lt;label for=&quot;foo&quot;&gt;
+            
+<pre><code>
+&lt;label for=&quot;foo&quot;&gt;
 &lt;select name=&quot;foo&quot; id=&quot;foo&quot; <strong>data-role=&quot;none&quot;</strong>&gt;
 	&lt;option value="a"&gt;A&lt;/option&gt;
 	&lt;option value="b"&gt;B&lt;/option&gt;
 	&lt;option value="c"&gt;C&lt;/option&gt;
-&lt;/select&gt;</code></pre>
+&lt;/select&gt;
+</code></pre>
 
 			<p>If you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>[data-role="none"]</code>). Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
-				<pre><code>
-$(document).bind('mobileinit',function(){
+            
+<pre><code>
+$( document ).bind( "mobileinit", function() {
 	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
 });
-				</code></pre>
+</code></pre>
 
 		  	<p>Alternately you can use the <code>data-enhance="false"</code> data attribute on a parent element with <code>$.mobile.ignoreContentEnabled</code> set to true. Beware though, this will incur a performance penalty for each and every element in the page that would otherwise be enhanced as jQuery Mobile must traverse the set of parents to look for those elements.</p>
 
