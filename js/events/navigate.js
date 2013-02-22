@@ -4,7 +4,11 @@
 //>>group: Events
 
 // TODO break out pushstate support test so we don't depend on the whole thing
-define([ "jquery", "./../jquery.mobile.ns", "./../jquery.mobile.support" ], function( jQuery ) {
+define([
+	"jquery",
+	"depend!../jquery.hashchange[jquery]",
+	"./../jquery.mobile.ns",
+	"./../jquery.mobile.support" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
