@@ -7,7 +7,7 @@
   <title>jQuery Mobile - Backbone.js and Require.js Apps</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
@@ -19,17 +19,17 @@
 
     <div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
-    
+
 	<div data-role="content" class="jqm-content">
-			
+
       <h1>jQuery Mobile, Backbone.js and Require.js</h1>
       <p class="jqm-intro">jQuery Mobile provides an <strong>HTML5-based user interface for all popular mobile device platforms</strong>, but it does not influence how you organize and structure your app's JavaScript.  Many jQuery Mobile users turn to a variety of other popular third-party libraries, including MV* frameworks and dependency management tools, to help structure their code.
       </p>
-	
+
 	  <h2>Backbone and Require.js</h2>
       <p><strong>Backbone.js</strong> and <strong>Require.js</strong> are two of the most popular third-party libraries that are used with jQuery Mobile to provide a rich JavaScript tech stack for developers.
       </p>
@@ -38,14 +38,12 @@
       <p><strong>Require.js</strong> serves a few different purposes than Backbone.js. Require.js is an AMD (Asynchronous Module Definition) script loader that asynchronously loads your JavaScript to improve page load performance, while also helping with script dependency managagement and allowing you to organize your JavaScript into self contained modules (files).
       </p>
       <p>Although there is a high amount of developer interest with using jQuery Mobile, Backbone.js, and Require.js together, there is a high barrier of entry.  Many users are confused about how to use the Backbone.js Router class object with the jQuery Mobile routing system.</p>
-	
+
 	<a href="backbone-require.html" rel="external" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">View example page</a>
 
       <h2>jQuery Mobile configuration</h2>
 
       <p>The technique used in this <a href="backbone-require.html" rel="external">example page</a> is by no means the only technique available, but it is one of the most elegant.  The Backbone.js router is used exclusively to handle all hashchange events, and the jQuery Mobile <code>$.mobile.changePage()</code> method is used to programmatically change the page.</p>
-
-      
 
       <p>Below are two internal jQuery Mobile properties that are turned off to allow this to happen:</p>
 
@@ -80,7 +78,7 @@
       <code>
       // Sets the require.js configuration for your application.
       require.config( {
-  
+
         // 3rd party script alias names (Easier to type "jquery" than "libs/jquery-1.8.3.min")
         paths: {
 
@@ -145,17 +143,16 @@
 <p>
 The <a href="backbone-require.html" rel="external">example page</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously.  Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.
 </p>
-      
 
 	</div><!-- /content -->
-	
+
     <div data-role="footer" class="jqm-footer">
         <p class="jqm-version"></p>
         <p>Copyright 2013 The jQuery Foundation</p>
     </div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-    
+
 </div><!-- /page -->
 </body>
 </html>

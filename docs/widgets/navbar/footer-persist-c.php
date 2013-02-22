@@ -1,12 +1,12 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Navbar - jQuery Mobile Demos</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Navbar - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
@@ -17,13 +17,13 @@
 
     <div data-role="header" class="jqm-header" data-position="fixed">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
-    
+
     <div data-role="content" class="jqm-content">
-    
+
 			<ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="false">
 				<li><a href="#">
 					<img src="../../_assets/img/album-bb.jpg" />
@@ -86,7 +86,7 @@
 					<p>Killers</p>
 					<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 				</a></li>
-				<li><a href="#">	
+				<li><a href="#">
 					<img src="../../_assets/img/album-af.jpg" />
 					<h3>The Suburbs</h3>
 					<p>Arcade Fire</p>
@@ -98,9 +98,8 @@
 				<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
 				<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
-				<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>	
+				<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
 			</div>
-
 
 		</div><!-- /content -->
 
@@ -116,7 +115,6 @@
 		</div><!-- /footer -->
 
 		<?php include( '../../global-nav.php' ); ?>
-
 
 		</div><!-- /page -->
 		</body>

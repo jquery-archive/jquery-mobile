@@ -6,7 +6,7 @@
 	<title>Table Reflow: Custom styles - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
@@ -16,24 +16,24 @@
 		/* Make the labels light gray all caps across the board */
 		.movie-list thead th,
 		.movie-list tbody th .ui-table-cell-label,
-		.movie-list tbody td .ui-table-cell-label { 
-			text-transform: uppercase; 
-			font-size: .7em; 
+		.movie-list tbody td .ui-table-cell-label {
+			text-transform: uppercase;
+			font-size: .7em;
 			color: rgba(0,0,0,0.5);
 			font-weight: normal;
 		}
 		/* White bg, large blue text for rank and title */
-		.movie-list tbody th { 
-			font-size: 1.2em; 
+		.movie-list tbody th {
+			font-size: 1.2em;
 			background-color: #fff;
 			color: #77bbff;
 			text-align: center;
 		}
 		/*  Add a bit of extra left padding for the title */
-		.movie-list tbody td.title { 
+		.movie-list tbody td.title {
 			padding-left: .8em;
 		}
-		
+
 		/*  Custom stacked styles for mobile sizes */
 		/*  Use a max-width media query so we don't have to undo these styles */
 		@media (max-width: 40em) {
@@ -44,9 +44,9 @@
 			}
 			/*  White bg, large blue text for rank and title */
 			.movie-list tbody th,
-			.movie-list tbody td.title { 
-				display: block; 
-				font-size: 1.2em; 
+			.movie-list tbody td.title {
+				display: block;
+				font-size: 1.2em;
 				line-height: 110%;
 				padding: .5em .5em;
 				background-color: #fff;
@@ -57,8 +57,8 @@
 			}
 			/*  Hide labels for rank and title */
 			.movie-list tbody th .ui-table-cell-label,
-			.movie-list tbody td.title .ui-table-cell-label { 
-				display: none; 
+			.movie-list tbody td.title .ui-table-cell-label {
+				display: none;
 			}
 			/*  Position the title next to the rank, pad to the left */
 			.movie-list tbody td.title {
@@ -68,19 +68,19 @@
 			}
 			/*  Make the data bold */
 			.movie-list th,
-			.movie-list td { 
+			.movie-list td {
 				font-weight: bold;
 			}
-			/* Make the label elements a percentage width */ 
+			/* Make the label elements a percentage width */
 			.movie-list td .ui-table-cell-label,
-			.movie-list th .ui-table-cell-label { 
-				min-width: 20%; 
+			.movie-list th .ui-table-cell-label {
+				min-width: 20%;
 			}
 		}
-		
-		/* Media query to show as a standard table at wider widths */ 
+
+		/* Media query to show as a standard table at wider widths */
 		@media ( min-width: 40em ) {
-			/* Show the table header rows */ 
+			/* Show the table header rows */
 			.movie-list td,
 			.movie-list th,
 			.movie-list tbody th,
@@ -90,14 +90,14 @@
 				display: table-cell;
 				margin: 0;
 			}
-			/* Hide the labels in each cell */ 
+			/* Hide the labels in each cell */
 			.movie-list td .ui-table-cell-label,
-			.movie-list th .ui-table-cell-label { 
+			.movie-list th .ui-table-cell-label {
 				display: none;
 			}
 		}
-		/* Hack to make IE9 and WP7.5 treat cells like block level elements */ 
-		/* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this */ 
+		/* Hack to make IE9 and WP7.5 treat cells like block level elements */
+		/* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this */
 		@media ( max-width: 40em ) {
 			.movie-list td,
 			.movie-list th {
@@ -110,27 +110,27 @@
 			}
 		}
     </style>
-</head> 
-<body> 
+</head>
+<body>
 <div data-role="page" class="jqm-demos">
 
     <div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
     </div><!-- /header -->
 
 	<div data-role="content" class="jqm-content jqm-fullwidth">
-    
+
 		<h1>Table Reflow: Custom styles</h1>
-        
+
 		<p>Custom styles for the reflow table at stacked widths.</p>
 
         <h3>Top Movies</h3>
-        
+
 		<div data-demo-html="true" data-demo-css="true">
-        
+
             <table data-role="table" id="movie-table-custom" data-mode="reflow" class="movie-list table-stroke">
               <thead>
                 <tr>

@@ -18,7 +18,7 @@ module.exports = function( grunt ) {
 		base: 'jquery.mobile' + suffix,
 		// this will change for the deploy target to include version information
 		root: 'jquery.mobile' + suffix,
-		demosjs: 'jquery.mobile.demos' + suffix,
+		demosjs: 'jquery.mobile.demos',
 		structure: 'jquery.mobile.structure' + suffix,
 		theme: 'jquery.mobile.theme' + suffix
 	};
@@ -212,7 +212,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask('test', 'config:test:pages config:test junit');
 
 	// Ease of use aliases for users who want the zip and docs
-	grunt.registerTask('docs', 'js css legacy_tasks:docs concat:demosjs');
+	grunt.registerTask('docs', 'clean js css concat:demosjs legacy_tasks:docs');
 	grunt.registerTask('zip', 'js css legacy_tasks:zip');
 
 	// load the project's default tasks

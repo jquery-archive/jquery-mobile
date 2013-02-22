@@ -6,7 +6,7 @@
 	<title>Redirection Example - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
@@ -59,7 +59,7 @@
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->

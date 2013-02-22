@@ -80,7 +80,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		var wrapper = this.element.parents( ".ui-select" );
 		if ( wrapper.length > 0 ) {
 			if ( wrapper.is( ".ui-btn-left, .ui-btn-right" ) ) {
-				this.element.addClass( wrapper.is( ".ui-btn-left" ) ? "ui-btn-left" : "ui-btn-right" );
+				this.element.addClass( wrapper.hasClass( "ui-btn-left" ) ? "ui-btn-left" : "ui-btn-right" );
 			}
 			this.element.insertAfter( wrapper );
 			wrapper.remove();

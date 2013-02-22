@@ -6,7 +6,7 @@
 	<title>Grid Listview - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="grid-listview.css" id="grid-listview-css">
 	<script src="../../../js/jquery.js"></script>
@@ -18,32 +18,31 @@
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
+
         <h1>Grid Listview</h1>
-        
+
         <p class="jqm-intro">A regular listview on smartphones, but grid tiles on tablets and larger screens? This demo shows you how you can accomplish this with custom CSS.</p>
-        
-        
+
         <h2>Starting points</h2>
-        
+
         <p>Create a listview from an unordered list. For this demo we used an inset listview to show you how you can apply the corner styling to the tiles as well.</p>
-        
+
         <p>In this demo there are two breakpoints. At the first breakpoint we swap from the regular stacked layout to a three column grid layout with tiles. At the second we swith from three to four columns.</p>
-        
+
         <p>The list items have a thumbail. In the grid layout those will get the same size as the tile. One list item doesn't hold an image to demonstrate how you can take advantage of class <code>ui-li-has-thumb</code> to adjust the style.</p>
-        
+
         <a href="grid-listview-demo.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
-        
+
         <div data-demo-html="#demo-page" data-demo-css="#grid-listview-css"></div>
-        
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
@@ -53,9 +52,7 @@
 
 </div><!-- /page -->
 
-
 <!-- The markup below is a copy of the actual demo page just so we can show the markup in the "view source" -->
-
 
 <div data-role="page" data-theme="a" id="demo-page" class="my-page">
 
@@ -63,9 +60,9 @@
 		<h1>News</h1>
 		<a href="grid-listview.html" data-shadow="false" data-iconshadow="false" data-icon="arrow-l" data-iconpos="notext" data-rel="back" data-ajax="false">Back</a>
 	</div><!-- /header -->
-	
+
 	<div data-role="content">
-	
+
         <ul data-role="listview" data-inset="true">
         	<li><a href="#">
             	<img src="../../_assets/img/apple.png">
@@ -115,7 +112,7 @@
                 <p class="ui-li-aside">Symbian</p>
             </a></li>
         </ul>
-                
+
 	</div><!-- /content -->
 
     <div data-role="footer" data-theme="none">

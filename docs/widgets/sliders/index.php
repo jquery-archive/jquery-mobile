@@ -6,7 +6,7 @@
 	<title>Slider - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
@@ -26,7 +26,7 @@
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
@@ -35,33 +35,29 @@
 
 			<h1>Slider <a href="http://api.jquerymobile.com/slider/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-
 			<p class="jqm-intro">Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="rangeslider.php">range sliders</a> or <a href="switch.php">flip switches</a>.
 			</p>
-        
-        	
-                            
+
                 <h2>Basic slider</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="slider-1">Slider:</label>
                     <input type="range" name="slider-1" id="slider-1" min="0" max="100" value="50">
 				</form>
                 </div><!-- /demo-html -->
-               
 
                 <h2>Step attribute</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="slider-10">Slider:</label>
                     <input type="range" name="slider-10" id="slider-10" min="0" max="10" step=".1" value="5">
 				</form>
                 </div><!-- /demo-html -->
-                
+
                 <h2>Highlight</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="slider-2">Slider (default is "false"):</label>
@@ -70,7 +66,7 @@
                 </div><!-- /demo-html -->
 
                 <h2>Theme</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="slider-3">Slider:</label>
@@ -78,9 +74,8 @@
 				</form>
                 </div><!-- /demo-html -->
 
-              
                 <h2>Mini sized</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="slider-4">Slider:</label>
@@ -88,9 +83,8 @@
 				</form>
                 </div><!-- /demo-html -->
 
-              
                 <h2>Disabled</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="slider-5">Slider:</label>
@@ -98,9 +92,8 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
                 <h2>Label hidden</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
                     <label for="slider-6" class="ui-hidden-accessible">Slider:</label>
@@ -108,9 +101,8 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
                 <h2>Fieldcontain</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain">
@@ -119,11 +111,9 @@
 					</div>
 				</form>
                 </div><!-- /demo-html -->
-                
-   
 
                 <h2>Fieldcontain, mini sized</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain">
@@ -133,9 +123,8 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
                 <h2>Fieldcontain, hide label</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain" class="ui-hide-label">
@@ -145,9 +134,8 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
                 <h2>Fieldcontain, hide label, mini sized</h2>
-                
+
                 <div data-demo-html="true">
 				<form>
 					<div data-role="fieldcontain" class="ui-hide-label">
@@ -157,11 +145,10 @@
 				</form>
                 </div><!-- /demo-html -->
 
-
                 <h2>Grid</h2>
-                
+
                 <p>We make the grid blocks 100% width below 28em with custom CSS.</p>
-                
+
                 <div data-demo-html="true" data-demo-css="#grid-style">
 				<form>
                 	<div class="ui-grid-a">
@@ -190,20 +177,16 @@
                 	</div><!-- /ui-grid -->
 				</form>
                 </div><!-- /demo-html -->
-                
-	
 
-	
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-	
-	
+
 </div><!-- /page -->
 </body>
 </html>

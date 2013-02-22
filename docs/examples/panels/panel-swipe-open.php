@@ -6,14 +6,14 @@
     <title>Open panel on swipe - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
 	<script>
 		$( document ).on( "pageinit", "#demo-page", function() {
-			
+
 			$( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
 				// We check if there is no open panel on the page because otherwise
 				// a swipe to close the left panel would also open the right panel (and v.v.).
@@ -60,23 +60,23 @@
 
     <div data-role="header" class="jqm-header">
         <h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
-    
+
     <div data-role="content" class="jqm-content">
-    
+
         <h1>Open panel on swipe</h1>
 
         <p>By default panels can be closed by swiping in the direction of the open panel. In this demo we show how you can also open a panel with swipe. This is not part of the framework, because in case of multiple panels we wouldn't know which one to open.</p>
-        
+
         <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
-        
+
         <a href="#demo-page" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
-        
+
     </div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -85,7 +85,7 @@
 	</div><!-- /footer -->
 
 <?php include( '../../global-nav.php' ); ?>
-        
+
 </div><!-- /page -->
 
 <div data-role="page" id="demo-page" data-theme="d">
@@ -95,32 +95,32 @@
 		<a href="#left-panel" data-theme="d" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
 		<a href="#right-panel" data-theme="d" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
     </div><!-- /header -->
-    
+
     <div data-role="content">
-    
+
     	<dl>
             <dt>Swipe <span>verb</span></dt>
             <dd><b>1.</b> to strike or move with a sweeping motion</dd>
         </dl>
-    
+
 		<a href="#demo-intro" data-rel="back" class="back-btn" data-role="button" data-mini="true" data-inline="true" data-icon="back" data-iconpos="right">Back to demo intro</a>
 
     </div><!-- /content -->
-        
+
     <div data-role="panel" id="left-panel" data-theme="b">
-    
+
     	<p>Left reveal panel.</p>
 		<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
-        
+
     </div><!-- /panel -->
-      
+
     <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="c">
-    
+
     	<p>Right push panel.</p>
 		<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
-        
+
     </div><!-- /panel -->
-      
+
 </div><!-- /page -->
 </body>
 </html>

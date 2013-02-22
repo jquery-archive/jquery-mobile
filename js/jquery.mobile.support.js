@@ -193,6 +193,8 @@ $.extend( $.support, {
 	// https://developers.google.com/chrome/mobile/docs/user-agent#chrome_for_ios_user-agent
 	pushState: "pushState" in history &&
 		"replaceState" in history &&
+		// When running inside a FF iframe, calling replaceState causes an error
+		!( window.navigator.userAgent.indexOf( "Firefox" ) >= 0 && window.top !== window ) &&
 		( window.navigator.userAgent.search(/CriOS/) === -1 ),
 
 	mediaquery: $.mobile.media( "only all" ),

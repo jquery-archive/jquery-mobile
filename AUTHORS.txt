@@ -186,7 +186,6 @@ Adria Jimenez <ajimix@gmail.com>
 Pavel Savara <pavel.savara@gmail.com>
 Alexander Casassovici <alex@ksso.net>
 Nicholas Hall <ngharo@gmail.com>
-Gabriel Schulhof <gabriel.schulhof@intel.com>
 Adrian Pike <adrian@pikeapps.com>
 Dirk Heider <dirk.00heider@gmail.com>
 Darío Javier Cravero <dario@q-innova.com.ar>
@@ -195,3 +194,23 @@ Corey Frang <gnarf@gnarf.net>
 Michael Ridland <rid00z@gmail.com>
 Brian Edgerton <bedgerton@appendto.com>
 Marcin Szczepanski <marcins@gmail.com>
+Robin Helgelin <robin@connectedtable.com>
+Elijah Manor <elijah.manor@gmail.com>
+Eric Caron <eric.caron@gmail.com>
+Jeroen Van Warmerdam <jeronevw@hotmail.com>
+Ryan McGeary <ryan@mcgeary.org>
+Jonah Schulte <jonah.schulte@dealer.com>
+Alexander Schmitz <arschmitz@gmail.com>
+Keith Pepin <kp_myrlyn@yahoo.com>
+Greg Franko <gregfranko5@gmail.com>
+Jeffrey Lembeck <jlembeck@gmail.com>
+Collin Forrester <collin.forrester@gmail.com>
+Timo Tijhof <krinklemail@gmail.com>
+Erwan MAS <erwan@mas.nom.fr>
+Jordan Harband <ljharb@gmail.com>
+Changsuk Ha <csha71@gmail.com>
+Oiva Eskola <oiva.eskola@gmail.com>
+Erik Yuzwa <erik@erikyuzwa.com>
+Jonathan Hogervorst <jonathan@hogervorst.info>
+Przemyslaw Ciezkowski <p.ciezkowski@samsung.com>
+Max Lynch <max@codiqa.com>

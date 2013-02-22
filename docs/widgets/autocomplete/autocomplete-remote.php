@@ -6,7 +6,7 @@
 	<title>Remote Autocomplete - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
@@ -53,30 +53,25 @@
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
-        
   			<h1>Remote autocomplete</h1>
-  			
-  			
+
   			<p class="jqm-intro">To use the listview filter as an autocomplete that taps into remote data sources, you can use the <code>listviewbeforefilter</code> event to dynamically populate a listview as a user types a search query.</p>
 
 			 <p>This is useful when you have a very large data set like cities, zip codes, or products that can't be loaded up-front locally. Use the view source button to see the JavaScript that powers this demo.</p>
 			<p>If you have a small list of items, you can use the listview <a href="../listviews/">filter reveal option</a> to make an autocomplete with local listview data.</p>
-			
-        	
 
 			<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
 				<h3>Cities worldwide</h3>
-            	<p>After you enter <strong>at least three characters</strong> the autocomplete function will show all possible matches.</p> 
+            	<p>After you enter <strong>at least three characters</strong> the autocomplete function will show all possible matches.</p>
 				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a city..." data-filter-theme="d"></ul>
 			</div><!--/demo-html -->
-
 
             <a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">Back to autocomplete</a>
 
@@ -86,9 +81,9 @@
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-    
+
 </div><!-- /page -->
 </body>
 </html>

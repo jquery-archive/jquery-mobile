@@ -1,18 +1,18 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Framework - Persistent footer B</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Framework - Persistent footer B</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../js/"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 	<div data-role="page" class="type-interior">
 
@@ -21,10 +21,8 @@
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div>
-	
+
 	<div data-role="content" class="jqm-content">
-		
-			
 
 				<ul data-role="listview" data-theme="d" data-dividertheme="e" data-filter="true" data-filter-theme="d"data-filter-placeholder="Search friends...">
 					<li data-role="list-divider">A</li>
@@ -64,15 +62,6 @@
 					<li data-role="list-divider">S</li>
 					<li><a href="#">Sawyer Wakefield</a></li>
 				</ul>
-	
-
-
-
-
-
-
-
-				
 
 		<div class="content-secondary">
 
@@ -93,7 +82,7 @@
 
 					</ul>
 			</div>
-		</div>		
+		</div>
 
 	</div><!-- /content -->
 

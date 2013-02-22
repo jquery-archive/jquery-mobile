@@ -6,7 +6,7 @@
 	<title>RWD Basics - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
@@ -17,15 +17,15 @@
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-	
+
       	<h1>Going Responsive</h1>
-        
+
       	<p class="jqm-intro">Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase. The framework has a number of responsive widgets: <a href="../widgets/grids/">responsive grids</a>, <a href="../widgets/table-reflow/">reflow tables</a> and <a href="../widgets/table-column-toggle/">column chooser tables</a>, and <a href="../widgets/panels/">sliding panels</a>.</p>
 
 		<h2>RWD Basics</h2>
@@ -60,13 +60,12 @@
 
       	<p>Always look for ways to limit the number of server requests on a page by concatenating files into a single request and always use minification and compression (gzip). </p>
 
-		
 		<h2>Responsive in jQuery Mobile</h2>
 
 		<p>jQuery Mobile has always been designed to work within a responsive context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
 
 		<p>Here is a checklist of RWD tips to keep in mind:</p>
-		
+
 		<ul>
 			<li><strong>Create a style override stylesheet and include it after the jQuery Mobile framework stylesheet.</strong> This will hold all your custom styles, tweaks to the default widgets and media queries.</li>
 			<li><strong>Start by writing the styles you want to see at the narrowest screen width (i.e. "mobile first").</strong> These should be outside a media query. This mobile-first approach is efficient because you can lay down the core typography, colors and styles for mobile knowing that these tend to also be used for wider breakpoints.</li>
@@ -75,12 +74,11 @@
 			<li><strong>Use <code>min-width</code> breakpoints that build on top of the mobile styles.</strong> The first breakpoint applies layout adjustments on top of the standard mobile styles so these can be fairly lightweight. Additional <code>min-width</code> breakpoints can be added for even wider screens that each build on the previous breakpoint styles.</li>
 			<li><strong>To override framework styles only for smaller screens, use a <code>max-width</code> breakpoint instead.</strong>  This allows you to constrain your style overrides to only apply below a certain screen width. Above this width, all the normal styles will apply so this is good for certain types of overrides.</li>
 		</ul>
-      
-      
+
 		<h2>Putting it together</h2>
-        
+
 		<p>Here is a simple skeleton of a mobile-first stylesheet that starts with mobile-first styles, then builds up a responsive layout by adding two breakpoints:</p>
-        
+
 <pre><code>
 <strong>/* Start with core styles outside of a media query that apply to mobile and up */
 /* Global typography and design elements, stacked containers */
@@ -92,17 +90,15 @@ a:link { color:purple; }
 .main,
 .sidebar { display:block; width:100%; }
 
-
-<strong>/* First breakpoint at 576px */	
-/* Inherits mobile styles, but floats containers to make columns */	
+<strong>/* First breakpoint at 576px */
+/* Inherits mobile styles, but floats containers to make columns */
 </strong>@media all and (min-width: 36em){
 	.main { float: left; width:60%; }
 	.sidebar { float: left; width:40%; }
 }
 
-
-<strong>/* Second breakpoint at 800px */	
-/* Adjusts column proportions, tweaks base H1 */	
+<strong>/* Second breakpoint at 800px */
+/* Adjusts column proportions, tweaks base H1 */
 </strong>@media all and (min-width: 50em){
 	.main { width:70%; }
 	.sidebar { width:30%; }
@@ -111,8 +107,6 @@ a:link { color:purple; }
 	H1 { color: blue; font-size:1.2em }
 }
 </code></pre>
-		
-		
 
 	</div><!-- /content -->
 

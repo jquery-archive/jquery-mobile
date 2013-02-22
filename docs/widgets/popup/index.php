@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
@@ -6,7 +6,7 @@
 	<title>Popup - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
@@ -17,15 +17,14 @@
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
 
 			<h1>Popup <a href="http://api.jquerymobile.com/popup/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
-
 
 			<p class="jqm-intro">The popup widget can be used for various types of popups. From a small tooltip popup to a large photo lightbox.
 			</p>
@@ -42,7 +41,6 @@
 				</div>
 			</div><!--/demo-html -->
 
-
 			<h2>Tooltip</h2>
 			<p>A tooltip can be created by adding a theme swatch to a basic popup and adding padding via the <code>ui-content</code> class.</p>
 			<div data-demo-html="true">
@@ -55,11 +53,11 @@
 
 			<h2>Photo lightbox</h2>
 			<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="a"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="popup-images.php" data-ajax="false">scaling images in popups</a>.</p>
-			<div data-demo-html="true">	
+			<div data-demo-html="true">
 				<a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/paris.jpg" alt="Paris, France" style="width:30%"></a>
 				<a href="#popupSydney" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/sydney.jpg" alt="Sydney, Australia" style="width:30%"></a>
 				<a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/newyork.jpg" alt="New York, USA" style="width:30%"></a>
-				
+
 				<div data-role="popup" id="popupParis" data-overlay-theme="a" data-theme="d" data-corners="false">
 					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
 				</div>
@@ -71,9 +69,8 @@
 				</div>
 			</div><!--/demo-html -->
 
-
 			<h2>Menu</h2>
-			<p>A menu can be created by adding a <a href="../listviews">listview</a> inside a popup.</p>
+			<p>A menu can be created by adding a <a href="../listviews/">listview</a> inside a popup.</p>
 			<div data-demo-html="true">
 				<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup" data-icon="gear" data-theme="e">Actions...</a>
 
@@ -89,7 +86,7 @@
 			</div><!--/demo-html -->
 
 			<h2>Nested menu</h2>
-			<p>A nested menu can be created by placing <a href="../listviews">listviews</a> into an <a href="../accordions">accordion</a> inside a popup.</p>
+			<p>A nested menu can be created by placing <a href="../listviews/">listviews</a> into an <a href="../accordions/">accordion</a> inside a popup.</p>
 			<div data-demo-html="true">
 				<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Choose a creature...</a>
 
@@ -135,7 +132,6 @@
 				</div><!-- /popup -->
 			</div><!--/demo-html -->
 
-
 			<h2>Form</h2>
 			<p>You can place a form inside a popup. When it opens, focus will be restricted to elements inside the popup.</p>
 			<div data-demo-html="true">
@@ -161,7 +157,7 @@
 
 			<h2>Dialog</h2>
 			<p>Standard dialog markup can be placed into a popup. To create a modal style dialog, add the <code>data-dismissible="false"</code> attribute to the popup to prevent the click-outside-to-close behavior so people need to interact with popup buttons to close it.</p>
-			<div data-demo-html="true">	
+			<div data-demo-html="true">
 				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="delete" data-theme="b">Delete page...</a>
 
 				<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
@@ -177,8 +173,6 @@
 				</div>
 			</div><!--/demo-html -->
 
-
-
 			<h2>Adding padding</h2>
 			<p>For popups with formatted text, padding is needed. The <code>ui-content</code> class can be added to the popup to add the standard 15px of padding. When padding is added, we apply a few style rules to negate the top margin for the first heading or paragraph in the popup and do the same for the last element's bottom margin.</p>
 			<div data-demo-html="true">
@@ -190,11 +184,9 @@
 
 			</div><!--/demo-html -->
 
-
-
 			<h2>Closing popups</h2>
 			<p>By default popups can be closed either by clicking outside the popup widget or by pressing the <code>Esc</code> key. To prevent this, the <code>data-dismissible="false"</code> attribute can be added to the popup. To add an explicit close button to a popup, add a link with the role of button into the popup container with a <code>data-rel="back"</code> attribute and position via a class.</p>
-			
+
 			<div data-demo-html="true">
 				<a href="#popupCloseRight" data-rel="popup" data-role="button" data-inline="true">Right close button</a>
 				<a href="#popupCloseLeft" data-rel="popup" data-role="button" data-inline="true">Left close button</a>
@@ -215,9 +207,6 @@
 					<p>I have the <code>data-dismissible</code> attribute set to <code>false</code>. I'm not closeable by clicking outside of me.</p>
 				</div>
 			</div><!--/demo-html -->
-
-
-
 
 			<h2 id="position-header">Position</h2>
 			<p>By default, popups open centered vertically and horizontally over the element you clicked (the origin) which is good for popups used as tooltips or menus. If a popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the <strong>link</strong> and specify a value of <code>window</code>. It's also possible to specify any valid selector as the value of <code>position-to</code> in addition to <code>origin</code> and <code>window</code>.</p>
@@ -260,13 +249,11 @@
 				</div>
 			</div><!--/demo-html -->
 
-
 				<h2>Theme</h2>
 
 				<p>The popup has two theme-related options: <code>data-theme</code> and <code>data-overlay-theme</code>. The <code>data-theme</code> option refers to the theme of the popup itself, whereas <code>data-overlay-theme</code> controls the semi-opaque layer behind the popup. The theme is inherited from the page; specify <code>data-theme=&quot;none&quot;</code> for a popup with a transparent background.</p>
 
-
-				<div data-demo-html="true">	
+				<div data-demo-html="true">
 					<a href="#theme" data-rel="popup" data-role="button" data-inline="true">Theme A</a>
 					<div id="theme" data-role="popup" data-theme="a" class="ui-content">
 					  <p>I have <code>data-theme="a"</code> set on me</p>
@@ -289,14 +276,10 @@
 					</div>
 				</div><!--/demo-html -->
 
-
-
 			<h2>Advanced techniques</h2>
 			<p>Learn how to customize and extend popups by working with the API, custom scripts, and styles.</p>
 			<a href="popup-images.php" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Scaling images</a>
 			<a href="popup-iframes.php" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Map + video iframes</a>
-
-
 
 		</div><!-- /content -->
 
@@ -306,7 +289,6 @@
 		</div><!-- /footer -->
 
 	<?php include( '../../global-nav.php' ); ?>
-
 
 	</div><!-- /page -->
 	</body>

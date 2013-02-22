@@ -6,7 +6,7 @@
 	<title>Listview Autodivider Linkbar - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="autodividers-linkbar.css" id="demo-style">
 	<script src="../../../js/jquery.js"></script>
@@ -19,22 +19,21 @@
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-		<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
         <?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content" class="jqm-content">
-    
+
 		<h1>Listview Autodivider Linkbar</h1>
 
 		<p>This demo shows the linkbar extension that adds a fixed positioned bar on the right of the screen that makes it easy to anchor down to a specific part of a listview. View the source to see how it works.</p>
-		
+
 		<a href="autodividers-linkbar-demo.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
-		
+
 		<div data-demo-html="#demo-page" data-demo-js="#demo-script" data-demo-css="#demo-style"></div><!--/demo-html -->
-                
-        
+
     </div><!-- /content -->
 
     <div data-role="footer" class="jqm-footer">
@@ -46,9 +45,7 @@
 
 </div><!-- /page -->
 
-
 <!-- The markup below is a copy of the actual demo page just so we can show the markup in the "view source" -->
-
 
 <div data-role="page" id="demo-page">
 
@@ -57,11 +54,11 @@
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
 	</div><!-- /header -->
-	
+
 	<div data-role="content">
-    
+
         <div id="sorter">
-        
+
             <ul data-role="listview">
                 <li><span>A</span></li>
                 <li><span>B</span></li>
@@ -182,7 +179,7 @@
             <li><a href="#">Zachary</a></li>
             <li><a href="#">Zoe</a></li>
         </ul><!-- /listview -->
-            
+
     </div><!-- /content -->
 
     <div data-role="footer">

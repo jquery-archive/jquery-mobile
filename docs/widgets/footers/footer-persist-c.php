@@ -1,18 +1,18 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Framework - Persistent footer C</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Framework - Persistent footer C</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../js/"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 	<div data-role="page" class="type-interior">
 
@@ -21,9 +21,9 @@
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
 		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
 	</div>
-	
+
 	<div data-role="content" class="jqm-content">
-		
+
 			<ul data-role="listview" data-theme="d" data-dividertheme="e" data-filter="true" data-filter-theme="d" data-filter-placeholder="Search albums..." data-split-icon="gear" data-split-theme="c">
 			<li><a href="#">
 				<img src="../lists/images/album-bb.jpg" />
@@ -32,11 +32,11 @@
 				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
 			</a></li>
 			<li><a href="#">
-				
+
 				<img src="../lists/images/album-hc.jpg" />
 				<h3>Warning</h3>
 				<p>Hot Chip</p>
-				
+
 			</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
 			</a></li>
 			<li><a href="#">
@@ -81,24 +81,20 @@
 				<p>A Sunny Day in Glasgow</p>
 				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
 			</a></li>
-			
+
 			<li><a href="index.html">
 				<img src="../lists/images/album-k.jpg" />
 				<h3>Hot Fuss</h3>
 				<p>Killers</p>
 				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
 			</a></li>
-			<li><a href="#">	
+			<li><a href="#">
 				<img src="../lists/images/album-af.jpg" />
 				<h3>The Suburbs</h3>
 				<p>Arcade Fire</p>
 				</a><a href="../lists/lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
 			</a></li>
 		</ul>
-		
-
-
-					
 
 			<div class="content-secondary">
 
@@ -119,7 +115,7 @@
 
 						</ul>
 				</div>
-			</div>		
+			</div>
 
 		</div><!-- /content -->
 

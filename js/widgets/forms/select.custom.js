@@ -196,7 +196,7 @@ define( [
 						case 38:
 							prev = li.prev().not( ".ui-selectmenu-placeholder" );
 
-							if ( prev.is( ".ui-li-divider" ) ) {
+							if ( prev.hasClass( "ui-li-divider" ) ) {
 								prev = prev.prev();
 							}
 
@@ -214,7 +214,7 @@ define( [
 						case 40:
 							next = li.next();
 
-							if ( next.is( ".ui-li-divider" ) ) {
+							if ( next.hasClass( "ui-li-divider" ) ) {
 								next = next.next();
 							}
 
@@ -319,7 +319,7 @@ define( [
 							if ( self.isMultiple ) {
 								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
-								if ( item.is( ".ui-selectmenu-placeholder" ) ) {
+								if ( item.hasClass( "ui-selectmenu-placeholder" ) ) {
 									item.next().addClass( $.mobile.activeBtnClass );
 								} else {
 									item.addClass( $.mobile.activeBtnClass );

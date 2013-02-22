@@ -6,7 +6,7 @@
 	<title>Table Column toggle demo: Phone comparison - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
@@ -44,28 +44,28 @@
 		a[href="#phone-table-popup"] {
 			margin-bottom: 1.2em;
 		}
-		/* Show priority 1 at 320px (20em x 16px) */ 
+		/* Show priority 1 at 320px (20em x 16px) */
 		@media screen and (min-width: 20em) {
 			.phone-compare th.ui-table-priority-1,
 			.phone-compare td.ui-table-priority-1 {
 				display: table-cell;
 			}
 		}
-		/* Show priority 2 at 560px (35em x 16px) */ 
+		/* Show priority 2 at 560px (35em x 16px) */
 		@media screen and (min-width: 35em) {
 			.phone-compare th.ui-table-priority-2,
 			.phone-compare td.ui-table-priority-2 {
 				display: table-cell;
 			}
 		}
-		/* Show priority 3 at 720px (45em x 16px) */ 
+		/* Show priority 3 at 720px (45em x 16px) */
 		@media screen and (min-width: 45em) {
 			.phone-compare th.ui-table-priority-3,
 			.phone-compare td.ui-table-priority-3 {
 				display: table-cell;
 			}
 		}
-		/* Manually hidden */ 
+		/* Manually hidden */
 		.phone-compare th.ui-table-cell-hidden,
 		.phone-compare td.ui-table-cell-hidden {
 			display: none;
@@ -76,13 +76,13 @@
 			display: table-cell;
 		}
 	</style>
-</head> 
-<body> 
+</head>
+<body>
 <div data-role="page" class="jqm-demos">
 
     <div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
     </div><!-- /header -->
@@ -90,9 +90,9 @@
 	<div data-role="content" class="jqm-content jqm-fullwidth">
 
         <h1>Popular Phones</h1>
-		
+
 		<p>This is an example of how to use the column toggle table to create a comparison view where products can be shown or hidden.</p>
-			
+
 		<div data-demo-html="true" data-demo-css="true">
 
 			<table data-role="table" id="phone-table" data-mode="columntoggle" data-column-btn-text="Compare..." data-column-btn-theme="a" class="phone-compare ui-shadow table-stroke">
@@ -175,8 +175,6 @@
 			</div>
 
 		</div><!-- /data-demo -->
-		
-
 
 	</div><!-- /content -->
 

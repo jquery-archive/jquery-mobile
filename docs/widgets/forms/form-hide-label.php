@@ -6,7 +6,7 @@
 	<title>Form field containers ui-hide-label - jQuery Mobile Demos</title>
 	    <link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	    <link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	    <link rel="shortcut icon" href="../../_assets/favicon.ico">
+	    <link rel="shortcut icon" href="../../favicon.ico">
 	    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	    <script src="../../../js/jquery.js"></script>
 	    <script src="../../_assets/js/"></script>
@@ -17,41 +17,39 @@
 
 	    <div data-role="header" class="jqm-header">
 	        <h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-	        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+	        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 	        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 	        <?php include( '../../search.php' ); ?>
 	    </div><!-- /header -->
 
 	    <div data-role="content" class="jqm-content">
-	
-		
-		
+
 			<h2>Field containers, hide label/legend</h2>
-		
+
 			<form action="#" method="get">
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="textinput-3">Text Input:</label>
 						<input type="text" name="textinput-3" id="textinput-3" placeholder="Text input" value="">
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="search-3">Search Input:</label>
 						<input type="search" name="search-3" id="search-3" value="">
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="textarea-3">Textarea:</label>
 						<textarea cols="40" rows="8" name="textarea-3" id="textarea-3">Textarea</textarea>
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="select-native-3">Native select:</label>
 						<select name="select-native-3" id="select-native-3">
@@ -62,7 +60,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="select-multiple-3">Custom multiple select:</label>
 						<select multiple="multiple" data-native-menu="false" name="select-multiple-3" id="select-multiple-3">
@@ -74,7 +72,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup">
 							<legend>Vertical controlgroup, buttons:</legend>
@@ -85,7 +83,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal">
 							<legend>Horizontal controlgroup, buttons:</legend>
@@ -96,7 +94,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup">
 							<legend>Vertical controlgroup, select:</legend>
@@ -122,7 +120,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal">
 							<legend>Horizontal controlgroup, select:</legend>
@@ -148,7 +146,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal">
 							<legend>Horizontal controlgroup, mixed:</legend>
@@ -164,14 +162,14 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="slider-3">Slider:</label>
 						<input type="range" name="slider-3" id="slider-3" value="50" min="0" max="100" data-highlight="true">
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="flip-3">Flip toggle:</label>
 						<select name="flip-3" id="flip-3" data-role="slider">
@@ -181,7 +179,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup">
 							<legend>Single checkbox:</legend>
@@ -191,7 +189,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup">
 							<legend>Vertical controlgroup, checkbox:</legend>
@@ -205,7 +203,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup">
 							<legend>Vertical controlgroup, radio:</legend>
@@ -219,7 +217,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal">
 							<legend>Horizontal controlgroup, checkbox:</legend>
@@ -233,7 +231,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal">
 							<legend>Horizontal controlgroup, radio:</legend>
@@ -247,41 +245,41 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="submit-3">Send:</label>
 						<button type="submit" id="submit-3">Submit</button>
 					</div>
 				</div><!--/demo-html -->
-				
+
 			</form>
 
 			<h3>Mini sized</h3>
-			
+
 			<form action="#" method="get">
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="textinput-7">Text Input:</label>
 						<input type="text" name="textinput-7" id="textinput-7" placeholder="Text input" value="" data-mini="true">
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="search-7">Search Input:</label>
 						<input type="search" name="search-7" id="search-7" value="" data-mini="true">
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="textarea-7">Textarea:</label>
 						<textarea cols="40" rows="8" name="textarea-7" id="textarea-7" data-mini="true">Textarea</textarea>
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="select-native-7">Native select:</label>
 						<select name="select-native-7" id="select-native-7" data-mini="true">
@@ -292,7 +290,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="select-multiple-7">Custom multiple select:</label>
 						<select multiple="multiple" data-native-menu="false" name="select-multiple-7" id="select-multiple-7" data-mini="true">
@@ -304,7 +302,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-mini="true">
 							<legend>Vertical controlgroup, buttons:</legend>
@@ -315,7 +313,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 							<legend>Horizontal controlgroup, buttons:</legend>
@@ -326,7 +324,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-mini="true">
 							<legend>Vertical controlgroup, select:</legend>
@@ -352,7 +350,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 							<legend>Horizontal controlgroup, select:</legend>
@@ -378,7 +376,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 							<legend>Horizontal controlgroup, mixed:</legend>
@@ -394,14 +392,14 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="slider-7">Slider:</label>
 						<input type="range" name="slider-7" id="slider-7" value="50" min="0" max="100" data-highlight="true" data-mini="true">
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="flip-7">Flip toggle:</label>
 						<select name="flip-7" id="flip-7" data-role="slider" data-mini="true">
@@ -411,7 +409,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-mini="true">
 							<legend>Single checkbox:</legend>
@@ -421,7 +419,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-mini="true">
 							<legend>Vertical controlgroup, checkbox:</legend>
@@ -435,7 +433,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-mini="true">
 							<legend>Vertical controlgroup, radio:</legend>
@@ -449,7 +447,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 							<legend>Horizontal controlgroup, checkbox:</legend>
@@ -463,7 +461,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 							<legend>Horizontal controlgroup, radio:</legend>
@@ -477,7 +475,7 @@
 					</div>
 				</div><!--/demo-html -->
 
-				<div data-demo-html="true">					
+				<div data-demo-html="true">
 					<div data-role="fieldcontain" class="ui-hide-label">
 						<label for="submit-7">Send:</label>
 						<button type="submit" id="submit-7" data-mini="true">Submit</button>
@@ -485,8 +483,7 @@
 				</div><!--/demo-html -->
 
 			</form>
-		
-		
+
 			</div><!-- /content -->
 
 			<div data-role="footer" class="jqm-footer">

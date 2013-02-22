@@ -46,7 +46,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			//Utility class for checking header and footer positions relative to viewport
 			_viewportOffset: function() {
 				var $el = this.element,
-					header = $el.is( ".ui-header" ),
+					header = $el.hasClass( "ui-header" ),
 					offset = Math.abs($el.offset().top - $.mobile.window.scrollTop());
 				if( !header ) {
 					offset = Math.round(offset - $.mobile.window.height() + $el.outerHeight())-60;

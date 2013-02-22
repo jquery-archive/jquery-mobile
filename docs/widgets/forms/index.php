@@ -6,7 +6,7 @@
 	<title>Form reference - jQuery Mobile Demos</title>
 		<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 		<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-		<link rel="shortcut icon" href="../../_assets/favicon.ico">
+		<link rel="shortcut icon" href="../../favicon.ico">
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 		<script src="../../../js/jquery.js"></script>
 		<script src="../../_assets/js/"></script>
@@ -17,39 +17,38 @@
 
 		<div data-role="header" class="jqm-header">
 			<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-			<a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+			<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 			<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 	        <?php include( '../../search.php' ); ?>
 		</div><!-- /header -->
-    
+
     <div data-role="content" class="jqm-content">
-    
+
         <h1>Forms</h1>
-        
-        
+
         <p class="jqm-intro">All form widgets begin with native form elements with rich HTML semantics that are enhanced to make them more attractive and finger-friendly.
         </p>
 
 		<h2>Markup conventions</h2>
-		
+
 		<p>When constructing forms to be used in jQuery Mobile, most of the standard guidelines used to create forms that submit via ordinary HTTP POST or GET still apply. Additionally, the <code>id</code> attributes of form controls need to be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time. You must be careful to use unique <code>id</code> attributes so there will be only one of each in the DOM. Be sure to pair them properly with <code>label</code> elements via the <code>for</code> attribute.</p>
-        
+
         <h2>Buttons</h2>
-			
+
 		<p>Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons. Learn more about <a href="../buttons/">buttons</a>.</p>
         <div data-demo-html="true">
             <a href="#" data-role="button">Link button</a>
             <input type="button" value="Button element" data-icon="delete" data-theme="b" />
             <input type="submit" value="Submit button, mini" data-icon="grid" data-iconpos="right" data-mini="true"  data-theme="e" />
         </div><!-- /demo-html -->
-        
+
         <p>Inline buttons</p>
         <div data-demo-html="true">
             <a href="#" data-role="button" data-inline="true" data-icon="star">Inline + icon</a>
             <a href="#" data-role="button" data-inline="true" data-theme="b" data-mini="true">Mini + theme</a>
             <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="notext" data-theme="e" data-mini="true">icon only button</a>
         </div><!-- /demo-html -->
-        
+
         <p>Horizontal grouped buttons</p>
         <div data-demo-html="true">
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -61,8 +60,8 @@
 
         <h2>Sliders</h2>
 
-		<p>Sliders are used to enter numeric values along a numeric continuum by dragging a handle or entering in a value. Learn more about <a href="../sliders" data-ajax="false">sliders</a>.</p>
-        
+		<p>Sliders are used to enter numeric values along a numeric continuum by dragging a handle or entering in a value. Learn more about <a href="../sliders/" data-ajax="false">sliders</a>.</p>
+
         <div data-demo-html="true">
             <label for="slider">Slider:</label>
             <input type="range" name="slider" id="slider" value="50" min="0" max="100" />
@@ -77,11 +76,11 @@
             <label for="slider-fill-mini">Slider with fill, mini, track theme:</label>
             <input type="range" name="slider-fill-mini" id="slider-fill-mini" value="40" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d" />
         </div><!-- /demo-html -->
-        
+
         <h2>Range slider</h2>
 
 		<p>Range sliders offer two handles to set a min and max value along a numeric continuum. Learn more about <a href="../sliders/rangeslider.php" data-ajax="false">range sliders</a>.</p>
-		
+
         <div data-demo-html="true">
         <form>
             <div data-role="rangeslider">
@@ -109,7 +108,7 @@
         <h2>Flip switch</h2>
 
 		<p>Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element. Learn more about <a href="../sliders/switch.php" data-ajax="false">flip switches</a>.</p>
-		
+
         <div data-demo-html="true">
             <label for="slider2">Flip switch:</label>
             <select name="slider2" id="slider2" data-role="slider">
@@ -129,7 +128,7 @@
         <h2>Checkboxes</h2>
 
 		<p>Checkboxes are used to provide a list of options where more than one can be selected. Learn more about <a href="../checkbox/">checkboxes</a>.</p>
-        
+
         <div data-demo-html="true">
             <fieldset data-role="controlgroup">
                 <legend>Checkboxes, vertical controlgroup:</legend>
@@ -164,7 +163,7 @@
         <h2>Radio buttons</h2>
 
 		<p>Radio buttons are used to provide a list of options where only a single option can be selected. Learn more about <a href="../radiobuttons/">radiobuttons</a>.</p>
-        
+
         <div data-demo-html="true">
                 <fieldset data-role="controlgroup">
                     <legend>Radio buttons, vertical controlgroup:</legend>
@@ -197,7 +196,7 @@
         <h2>Selects</h2>
 
 		<p>The select menu is used to offer a list of options in a compact picker. Ours is based on a native select element, which is hidden from view and replaced with a custom-styled select button. Tapping it opens the native menu or a custom styled version. Learn more about <a href="../selects/">selects</a>.</p>
-        
+
         <div data-demo-html="true">
             <label for="select-choice-1" class="select">Select, native menu</label>
             <select name="select-choice-1" id="select-choice-1">
@@ -232,7 +231,7 @@
         <div data-demo-html="true">
             <label for="select-choice-8" class="select">Multi-select with optgroups, custom icon and position:</label>
             <select name="select-choice-8" id="select-choice-8" multiple="multiple" data-native-menu="false" data-icon="grid" data-iconpos="left">
-                
+
                 <option>Choose a few options:</option>
                 <optgroup label="USPS">
                     <option value="standard" selected>Standard: 7 day</option>
@@ -251,11 +250,11 @@
         <h2>Text inputs & Textareas</h2>
 
 		<p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device. Learn more about <a href="../textinputs/">text inputs and textareas</a>.</p>
-        
+
         <div data-demo-html="true">
              <label for="text-basic">Text input:</label>
              <input type="text" name="text-basic" id="text-basic" value=""  />
-        </div><!-- /demo-html -->	
+        </div><!-- /demo-html -->
 
         <div data-demo-html="true">
             <label for="textarea">Textarea:</label>
@@ -293,31 +292,31 @@
         </div><!-- /demo-html -->
 
 		<h2>Accessibly hidden labels</h2>
-		
+
 		<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies &mdash; for example, when letting an element's <code>placeholder</code> attribute serve as a label &mdash; apply the helper class <code>ui-hidden-accessible</code> to the label. View more examples of <a href="form-hide-label.php">accessibly hidden labels</a>.</p>
-		
-		<div data-demo-html="true">					
+
+		<div data-demo-html="true">
 			<label for="textinput-hide" class="ui-hidden-accessible">Text Input:</label>
 			<input type="text" name="textinput-hide" id="textinput-hide" placeholder="Text input" value="">
 		</div><!--/demo-html -->
-		
+
 		<h2>Disabling form elements</h2>
-		
+
 		<p>All jQuery Mobile widgets can be disabled in the markup by adding the standard <code>disabled</code> attribute to the element, just like you would with native controls. Each form widget also has standard <code>disable</code> and <code>enable</code> methods that are documented with each form widget. View more examples of <a href="form-disabled.php" >disabled form elements</a>.</p>
-		
+
 		<div data-demo-html="true">
 			<div data-role="fieldcontain">
 				<label for="textinput-disabled">Text Input:</label>
 				<input disabled="disabled" type="text" name="textinput-disabled" id="textinput-disabled" placeholder="Text input" value="">
 			</div>
 		</div><!--/demo-html -->
-		
+
 		<p>Note that you can disable buttons created from <code>button</code> or <code>input</code>-based markup, but not links with a role of button. Links don't have a parallel disabled feature in HTML, but if you need to disable a link-based button (or any element), it's possible to apply the disabled class <code>ui-disabled</code> yourself with JavaScript to achieve the same effect. </p>
-			
+
 		<h2>Fieldcontainer groupings</h2>
-		
+
 		<p>To improve the styling of labels and form elements on wider screens, wrap a <code>div</code> or <code>fieldset </code>with the <code> data-role="fieldcontain"</code> attribute around each label/form element. This framework aligns the input and associated label side-by-side, and breaks to stacked block-level elements below ~480px. The framework will also add a thin bottom border to act as a field separator. See more examples of <a href="form-fieldcontain.php">fieldcontainer groupings</a>.</p>
-		
+
 		<div data-demo-html="true">
 			<div data-role="fieldcontain">
 				<label for="textinput-fc">Text Input:</label>
@@ -325,7 +324,7 @@
 			</div>
 		</div><!--/demo-html -->
 
-		<div data-demo-html="true">					
+		<div data-demo-html="true">
 			<div data-role="fieldcontain">
 				<label for="select-native-fc">Native select:</label>
 				<select name="select-native-fc" id="select-native-fc">
@@ -335,8 +334,7 @@
 				</select>
 			</div>
 		</div><!--/demo-html -->
-		
-		
+
    		<h2>Auto-initialization of form elements</h2>
 			<p>By default, jQuery Mobile will automatically enhance certain native form controls into rich touch-friendly components. This is handled internally by finding form elements by tag name and running a plugin method on them. For instance, a <code>select</code> element will be found and initialized with the "selectmenu" plugin, while an <code>input</code> element with a <code>type="checkbox"</code> will be enhanced with the "checkboxradio" plugin. Once initialized, you can address these enhanced components programmatically through their jQuery UI widget API methods. See options, methods, and events listed on each form plugin's documentation page for details. </p>
 
@@ -365,7 +363,7 @@
 
 		<p>Selects:</p>
 		<code><pre>
-			
+
 var myselect = $("#selectfoo");
 myselect[0].selectedIndex = 3;
 myselect.selectmenu("refresh");</pre></code>
@@ -378,7 +376,7 @@ myselect.selectmenu("refresh");</pre></code>
 		<p>Flip switches (they use slider):</p>
 
 		<code><pre>
-			
+
 var myswitch = $("#selectbar");
 myswitch[0].selectedIndex = 1;
 myswitch.slider("refresh");
@@ -393,7 +391,6 @@ myswitch.slider("refresh");
 	&lt;option value="c"&gt;C&lt;/option&gt;
 &lt;/select&gt;</code></pre>
 
-
 			<p>If you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>[data-role="none"]</code>). Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
 				<pre><code>
 $(document).bind('mobileinit',function(){
@@ -405,19 +402,18 @@ $(document).bind('mobileinit',function(){
 
 		<p>One special case is that of selects. The above sample will prevent any and all augmentation from taking place on select elements in the page if <code>select</code> is included. If you wish to retain the native performance and appearance of the menu itself and benefit from the visual augmentation of the select button by jQuery Mobile, you can set <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> to true in a <code>mobileinit</code> callback as a global setting or use <code>data-native-menu="true"</code> on a case by case basis.</p>
 
-
 			<h2>File Inputs + AJAX</h2>
 			<p>Using a multipart form with a file input is not supported by AJAX. In this case you should decorate the parent form with <code>data-ajax="false"</code> to ensure the form is submitted properly to the server.</p>
-	
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
-	
+
 <?php include( '../../global-nav.php' ); ?>
-	
+
 </div><!-- /page -->
 </body>
 </html>

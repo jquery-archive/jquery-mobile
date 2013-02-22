@@ -6,36 +6,36 @@
 	<title>Table Column toggle: Customization options - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../_assets/favicon.ico">
+	<link rel="shortcut icon" href="../../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
-</head> 
-<body> 
+</head>
+<body>
 <div data-role="page" class="jqm-demos">
 
     <div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
-        <a href="#panel-nav" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
         <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../../search.php' ); ?>
     </div><!-- /header -->
 
 	<div data-role="content" class="jqm-content jqm-fullwidth">
-    
+
         <h1>Table Column toggle: Customization options</h1>
-        
+
         <p>This table illustrates the standard customization options for a column toggle table. The table has a custom theme and label text for the column chooser button, and a theme set on the popup.</p>
-        
+
         <p>The table background is themed by adding <code>class="ui-body-d"</code> to the table element. The table header is given a themed appearance by adding the <code>class="ui-bar-d"</code> to the header row. The striped rows are created by adding the <code>table-stripe</code> class to the table element.</p>
-        
+
         <h3>Top Movies</h3>
 
 		<div data-demo-html="true">
 
 			<table data-role="table" id="table-custom-2" data-mode="columntoggle" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-column-btn-text="Columns to display..." data-column-popup-theme="a">
-        
+
                 <thead>
                   <tr class="ui-bar-d">
                     <th data-priority="2">Rank</th>
@@ -118,7 +118,7 @@
                   </tr>
                 </tbody>
               </table>
-		
+
 		</div><!-- /data-demo -->
 
 	</div><!-- /content -->
