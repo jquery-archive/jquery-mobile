@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Form reference - jQuery Mobile Demos</title>
+	<title>Forms - jQuery Mobile Demos</title>
 		<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 		<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 		<link rel="shortcut icon" href="../../favicon.ico">
@@ -291,9 +291,11 @@
              <input type="password" name="password" id="password" value="" autocomplete="off" />
         </div><!-- /demo-html -->
 
+		<p>See the <a href="form-gallery.php">form gallery</a> for more form element examples.</p>
+
 		<h2>Accessibly hidden labels</h2>
 
-		<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies &mdash; for example, when letting an element's <code>placeholder</code> attribute serve as a label &mdash; apply the helper class <code>ui-hidden-accessible</code> to the label. View more examples of <a href="form-hide-label.php">accessibly hidden labels</a>.</p>
+		<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies &mdash; for example, when letting an element's <code>placeholder</code> attribute serve as a label &mdash; apply the helper class <code>ui-hidden-accessible</code> to the label. View more examples of <a href="form-label-hidden.php">accessibly hidden labels</a>. In case you use a field container you can use class <code>ui-hide-label</code> on the element with <code>data-role="fieldcontain"</code> to <a href="form-hide-label.php">hide the label or legend</a>.</p>
 
 		<div data-demo-html="true">
 			<label for="textinput-hide" class="ui-hidden-accessible">Text Input:</label>
@@ -315,7 +317,7 @@
 
 		<h2>Fieldcontainer groupings</h2>
 
-		<p>To improve the styling of labels and form elements on wider screens, wrap a <code>div</code> or <code>fieldset </code>with the <code> data-role="fieldcontain"</code> attribute around each label/form element. This framework aligns the input and associated label side-by-side, and breaks to stacked block-level elements below ~480px. The framework will also add a thin bottom border to act as a field separator. See more examples of <a href="form-fieldcontain.php">fieldcontainer groupings</a>.</p>
+		<p>To improve the styling of labels and form elements on wider screens, wrap a <code>div</code> or <code>fieldset </code>with the <code> data-role="fieldcontain"</code> attribute around each label/form element. This framework aligns the input and associated label side-by-side, and breaks to stacked block-level elements below ~448px. The framework will also add a thin bottom border to act as a field separator. See more examples of <a href="form-fieldcontain.php">fieldcontainer groupings</a>.</p>
 
 		<div data-demo-html="true">
 			<div data-role="fieldcontain">
