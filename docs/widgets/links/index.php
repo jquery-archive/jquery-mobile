@@ -24,38 +24,40 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Links <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+        <h1>Links <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-			<p class="jqm-intro">jQuery Mobile is designed to work with standard page link conventions and layers the AJAX navigation on top for maximum compatibility.
-			</p>
+        <p class="jqm-intro">jQuery Mobile is designed to work with standard page link conventions and layers the AJAX navigation on top for maximum compatibility.
+        </p>
 
-			<h2>Linking pages</h2>
+        <h2>Linking pages</h2>
 
-			<p>You can link pages and assets as you normally would, and jQuery Mobile will automatically handle page requests in a single-page model, using AJAX when possible. When AJAX isn't possible (such as a non-same-domain url, or if specified using certain attributes on the link), a normal http request is used instead.</p>
+        <p>You can link pages and assets as you normally would, and jQuery Mobile will automatically handle page requests in a single-page model, using AJAX when possible. When AJAX isn't possible (such as a non-same-domain url, or if specified using certain attributes on the link), a normal http request is used instead.</p>
 
-			<p>The goal of this nav model is to allow developers to create websites using best practices &mdash; where ordinary links will "just work" without any special configuration &mdash; while creating a rich, native-like experience that can't be achieved with standard HTTP requests.</p>
+        <p>The goal of this nav model is to allow developers to create websites using best practices &mdash; where ordinary links will "just work" without any special configuration &mdash; while creating a rich, native-like experience that can't be achieved with standard HTTP requests.</p>
 
-			<h2>Default link behavior: AJAX</h2>
+        <h2>Default link behavior: AJAX</h2>
 
-			<p>To enable animated page transitions, all links that point to an external page (ex. products.html) will be loaded via AJAX. To do this unobtrusively, the framework parses the link's <code>href</code> to formulate an AJAX request (Hijax) and displays the loading spinner. All this is done automatically by jQuery Mobile.</p>
+        <p>To enable animated page transitions, all links that point to an external page (ex. products.html) will be loaded via AJAX. To do this unobtrusively, the framework parses the link's <code>href</code> to formulate an AJAX request (Hijax) and displays the loading spinner. All this is done automatically by jQuery Mobile.</p>
 
-			<p>If the AJAX request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
+        <p>If the AJAX request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
 
-			<p>If the AJAX request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
+        <p>If the AJAX request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
 
-			<p><strong>Note:</strong> You cannot link <strong>to</strong> a multipage document with AJAX navigation active because the framework will only load the first page it finds, not the full set of internal pages. In these cases, you must link without AJAX (see next section) for a full page refresh to prevent potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multi-page documents.</p>
+        <p><strong>Note:</strong> You cannot link <strong>to</strong> a multipage document with AJAX navigation active because the framework will only load the first page it finds, not the full set of internal pages. In these cases, you must link without AJAX (see next section) for a full page refresh to prevent potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multi-page documents.</p>
 
-			<div data-demo-html="true">
-					<a href="../../index.html">Demo home</a>
-			</div><!--/demo-html -->
+        <div data-demo-html="true">
+            <p>Example:</p>
+            <a href="../../../">To the homepage, with AJAX</a>
+        </div><!--/demo-html -->
 
-			<h2>Linking without AJAX</h2>
+        <h2>Linking without AJAX</h2>
 
 		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with AJAX. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via AJAX. Because of security restrictions, the framework always opts links to external domains out of the AJAX behavior.</p>
 
 		<div data-demo-html="true">
-				<p><a href="../../index.html" data-ajax="false">Demo home, no AJAX</a></p>
-				<p><a href="http://www.google.com" rel="external">Google</a></p>
+            <p>Examples:</p>
+            <p><a href="../../../" data-ajax="false">To the homepage, no AJAX</a></p>
+            <p><a href="http://www.google.com" rel="external">Google</a></p>
 		</div><!--/demo-html -->
 
 		<p>In version 1.1, we added support for using <code>data-ajax="false"</code> on a parent container which allows you to exclude a large number of links from the AJAX navigation system. This avoids the need to add this attribute to every link in a container. To activate this functionality, <code>$.mobile.ignoreContentEnabled</code> must be set to <code>true</code> because this feature adds overhead we don't want to enable by default.</p>
