@@ -125,7 +125,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					input.height( scrollHeight + extraLineHeight );
+					var paddingHeight = parseFloat( input.css( "padding-top" ) ) + parseFloat( input.css( "padding-top" ) );
+					input.height( scrollHeight - paddingHeight + ( this.options.disabled ? 0 : extraLineHeight ) );
 				}
 			};
 
