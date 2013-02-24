@@ -125,7 +125,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					input.height( scrollHeight + extraLineHeight );
+					if ( this.options.disabled ) {
+						input.height( scrollHeight );
+					} else {
+						input.height( scrollHeight + extraLineHeight );
+					}
 				}
 			};
 
