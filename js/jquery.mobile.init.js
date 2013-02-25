@@ -68,7 +68,7 @@ define([
 				var $this = $( this );
 
 				// unless the data url is already set set it to the pathname
-				if ( !$this.jqmData( "url" ) ) {
+				if ( !$this[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" ) ) {
 					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) || location.pathname + location.search );
 				}
 			});
