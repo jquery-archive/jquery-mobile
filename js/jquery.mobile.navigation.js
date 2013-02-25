@@ -726,6 +726,7 @@ define( [
 				.attr( "data-" + $.mobile.ns + "url", dataUrl );
 		}
 
+		
 		// If we failed to find a page in the DOM, check the URL to see if it
 		// refers to the first page in the application. If it isn't a reference
 		// to the first page and refers to non-existent embedded page, error out.
@@ -747,7 +748,7 @@ define( [
 				return deferred.promise();
 			}
 		}
-
+		
 		// If the page we are interested in is already in the DOM,
 		// and the caller did not indicate that we should force a
 		// reload of the file, we are done. Otherwise, track the
@@ -756,11 +757,14 @@ define( [
 			if ( !settings.reloadPage ) {
 				enhancePage( page, settings.role );
 				deferred.resolve( absUrl, options, page );
+				//if we are reloading the page make sure we update the base if its not a prefetch 
+				if( base && !options.prefetch ){
+					base.set(url);
+				}
 				return deferred.promise();
 			}
 			dupCachedPage = page;
 		}
-
 		var mpc = settings.pageContainer,
 			pblEvent = new $.Event( "pagebeforeload" ),
 			triggerData = { url: url, absUrl: absUrl, dataUrl: dataUrl, deferred: deferred, options: settings };
@@ -790,9 +794,9 @@ define( [
 					$.mobile.hidePageLoadingMsg();
 				};
 		}
-
 		// Reset base to the default document base.
-		if ( base ) {
+		// only reset if we are not prefetching 
+		if ( base && typeof options.prefetch === "undefined" ) {
 			base.reset();
 		}
 
@@ -826,8 +830,8 @@ define( [
 							&& RegExp.$1 ) {
 						url = fileUrl = path.getFilePath( RegExp.$1 );
 					}
-
-					if ( base ) {
+					//dont update the base tag if we are prefetching
+					if ( base && typeof options.prefetch === "undefined") {
 						base.set( fileUrl );
 					}
 
@@ -1430,7 +1434,7 @@ define( [
 				if ( url && $.inArray( url, urls ) === -1 ) {
 					urls.push( url );
 
-					$.mobile.loadPage( url, {role: $link.attr("data-" + $.mobile.ns + "rel")} );
+					$.mobile.loadPage( url, { role: $link.attr( "data-" + $.mobile.ns + "rel" ),prefetch: true } );
 				}
 			});
 		});
