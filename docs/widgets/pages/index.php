@@ -53,32 +53,37 @@
 </code></pre>
 
 			<h2>Viewport meta tag</h2>
+            
 			<p>Note above that there is a meta <code>viewport</code> tag in the <code>head</code> to specify how the browser should display the page zoom level and dimensions. If this isn't set, many mobile browsers will use a "virtual" page width around 900 pixels to make it work well with existing desktop sites but the screens may look zoomed out and too wide. By setting the viewport attributes to <code>content=&quot;width=device-width, initial-scale=1&quot;</code>, the width will be set to the pixel width of the device screen. </p>
 
-			<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt; </code></pre>
+<pre><code>
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+</code></pre>
 
 			<p>These settings do not disable the user's ability to zoom the pages, which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed in a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
 
+
 			<h2>Inside the body: Pages</h2>
+            
 			<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute. </p>
 
-<div class="highlight">
-<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span>
+<pre><code>
+&lt;div data-role="page"&gt;
 	...
-<span class="nt">&lt;/div&gt;</span>
-</pre>
-</div>
+&lt;/div&gt;
+</code></pre>
 
 			<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p>
 
-<div class="highlight">
-<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"content"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
-	<span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"footer"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span>
-</pre>
-</div>
+
+<pre><code>
+&lt;div data-role="page"&gt;
+	&lt;div data-role="header"&gt;...&lt;/div&gt;
+	&lt;div data-role="content"&gt;...&lt;/div&gt;
+	&lt;div data-role="footer"&gt;...&lt;/div&gt;
+&lt;/div&gt;</span>
+</code></pre>
+
 
 <h2>Putting it together: Basic single page template</h2>
 
@@ -162,8 +167,7 @@
 &lt;/body&gt;
 </code></pre>
 
-		<a href="multipage-template.php" data-inline="true" data-theme="b" data-role="button" rel="external">View multi-page template</a>
-
+		<a href="multipage-template.php" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">View multi-page template</a>
 		<p> </p>
 
 		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the AJAX "pages", it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a "page" with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
@@ -209,17 +213,17 @@ $.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
 
 		<p>If you prefer, you can tell jQuery Mobile to keep previously-visited pages in the DOM instead of removing them. This lets you cache pages so that they're available instantly if the user returns to them.</p>
 
-		<pre><code>
-		$.mobile.page.prototype.options.domCache = true;
-		</code></pre>
+<pre><code>
+$.mobile.page.prototype.options.domCache = true;
+</code></pre>
 
 		<p>Alternatively, to cache just a particular page, you can add the <code>data-dom-cache="true"</code> attribute to the page's container. </p>
 
 		<p>To keep all previously-visited pages in the DOM, set the <code>domCache</code> option on the page plugin to <code>true</code>, like this:</p>
 
-		<pre><code>
-		<var>pageContainerElement</var>.page({ domCache: true });
-		</code></pre>
+<pre><code>
+<var>pageContainerElement</var>.page({ domCache: true });
+</code></pre>
 
 		<p>Note that the contents of the first page isn't removed from the DOM, only pages loaded in via AJAX. Pages inside a multi-page template aren't affected by this feature at all - jQuery Mobile only removes pages loaded via AJAX.</p>
 
