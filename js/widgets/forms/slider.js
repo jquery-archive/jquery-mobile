@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.slider", $.mobile.widget, {
+$.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	widgetEventPrefix: "slide",
 
 	options: {
@@ -168,9 +168,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		this.handle.bind( "vclick", false );
 
-		if ( this._handleFormReset ) {
-			this._handleFormReset();
-		}
+		this._handleFormReset();
 
 		this.refresh( undefined, undefined, true );
 	},
@@ -503,9 +501,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		return this._setOption( "disabled", true );
 	}
 
-});
-
-$.widget( "mobile.slider", $.mobile.slider, $.mobile.behaviors.formReset );
+}, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
