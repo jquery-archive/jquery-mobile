@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastC
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.collapsibleset", $.mobile.widget, {
+$.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 	options: {
 		initSelector: ":jqmData(role='collapsible-set')"
 	},
@@ -78,9 +78,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	refresh: function() {
 		this._refresh( false );
 	}
-});
-
-$.widget( "mobile.collapsibleset", $.mobile.collapsibleset, $.mobile.behaviors.addFirstLastClasses );
+}, $.mobile.behaviors.addFirstLastClasses ) );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {

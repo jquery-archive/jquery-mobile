@@ -12,7 +12,7 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-	$.widget( "mobile.controlgroup", $.mobile.widget, {
+	$.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 		options: {
 			shadow: false,
 			corners: true,
@@ -97,9 +97,7 @@ define( [ "jquery",
 			this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
 			this._initialRefresh = false;
 		}
-	});
-
-	$.widget( "mobile.controlgroup", $.mobile.controlgroup, $.mobile.behaviors.addFirstLastClasses );
+	}, $.mobile.behaviors.addFirstLastClasses ) );
 
 	// TODO: Implement a mechanism to allow widgets to become enhanced in the
 	// correct order when their correct enhancement depends on other widgets in
