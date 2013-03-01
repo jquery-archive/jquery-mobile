@@ -57,13 +57,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
 
-		label.buttonMarkup({
+		//save buttonMarkup options to use them in refresh
+		this._labelButtonMarkupOptions = {
 			theme: o.theme,
-			icon: uncheckedState,
 			shadow: false,
 			mini: mini,
 			iconpos: iconpos
-		});
+		};
 
 		// Wrap the input + label in a div
 		var wrapper = document.createElement('div');
@@ -138,6 +138,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 
 		this._handleFormReset();
 		this.refresh();
+		this._labelButtonMarkupOptions = null;
 	},
 
 	_cacheVals: function() {
@@ -177,12 +178,15 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		var input = this.element[ 0 ],
 			active = " " + $.mobile.activeBtnClass,
 			checkedClass = this.checkedClass + ( this.element.parents( ".ui-controlgroup-horizontal" ).length ? active : "" ),
-			label = this.label;
+			label = this.label,
+			options = this._labelButtonMarkupOptions || {};
 
 		if ( input.checked ) {
-			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass ).buttonMarkup( { icon: this.checkedicon } );
+			options.icon = this.checkedicon;
+			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass ).buttonMarkup( options );
 		} else {
-			label.removeClass( checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( { icon: this.uncheckedicon } );
+			options.icon = this.uncheckedicon;
+			label.removeClass( checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( options );
 		}
 
 		if ( input.disabled ) {

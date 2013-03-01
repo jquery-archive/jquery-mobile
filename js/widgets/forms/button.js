@@ -24,20 +24,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 	_create: function() {
 		var $el = this.element,
 			$button,
-			// create a copy of this.options we can pass to buttonMarkup
-			o = ( function( tdo ) {
-				var key, ret = {};
-
-				for ( key in tdo ) {
-					if ( tdo[ key ] !== null && key !== "initSelector" ) {
-						ret[ key ] = tdo[ key ];
-					}
-				}
-
-				return ret;
-			} )( this.options ),
-			classes = "",
-			$buttonPlaceholder;
+			o,
+			classes = "";
 
 		// if this is a link, check if it's been enhanced and, if not, use the right function
 		if ( $el[ 0 ].tagName === "A" ) {
@@ -46,6 +34,18 @@ $.widget( "mobile.button", $.mobile.widget, {
 			}
 			return;
 		}
+		// create a copy of this.options we can pass to buttonMarkup
+		o = ( function( tdo ) {
+			var key, ret = {};
+
+			for ( key in tdo ) {
+				if ( tdo[ key ] !== null && key !== "initSelector" ) {
+					ret[ key ] = tdo[ key ];
+				}
+			}
+
+			return ret;
+		} )( this.options );
 
 		// get the inherited theme
 		// TODO centralize for all widgets
@@ -70,6 +70,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
 
+		o.disabled = $el.prop("disabled");
 		// Add ARIA role
 		this.button = $( "<div></div>" )
 			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )
@@ -90,7 +91,9 @@ $.widget( "mobile.button", $.mobile.widget, {
 			}
 		});
 
+		this._initialRefresh = true;
 		this.refresh();
+		this._initialRefresh = false;
 	},
 
 	_setOption: function( key, value ) {
@@ -98,7 +101,10 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 		op[ key ] = value;
 		if ( key !== "initSelector" ) {
-			this.button.buttonMarkup( op );
+			if (!this._initialRefresh) {
+				//make sure buttonMarkup is called only once on create
+				this.button.buttonMarkup( op );
+			}
 			// Record the option change in the options and in the DOM data-* attributes
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 		}
