@@ -21,7 +21,8 @@ $.mobile.page.prototype.options.contentTheme = null;
 $.mobile.document.bind( "pagecreate", function( e ) {
 	var $page = $( e.target ),
 		o = $page.data( "mobile-page" ).options,
-		pageRole = $page.jqmData( "role" ),
+		attrPrefix = "data-" + $.mobile.ns,
+		pageRole = $page[ 0 ].getAttribute( attrPrefix + "role" ) || undefined,
 		pageTheme = o.theme;
 
 	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", $page )
@@ -29,8 +30,8 @@ $.mobile.document.bind( "pagecreate", function( e ) {
 		.each(function() {
 
 		var $this = $( this ),
-			role = $this.jqmData( "role" ),
-			theme = $this.jqmData( "theme" ),
+			role = $this[ 0 ].getAttribute( attrPrefix + "role" ) || undefined,
+			theme = $this[ 0 ].getAttribute( attrPrefix + "theme" ) || undefined,
 			contentTheme = theme || o.contentTheme || ( pageRole === "dialog" && pageTheme ),
 			$headeranchors,
 			leftbtn,
@@ -65,7 +66,7 @@ $.mobile.document.bind( "pagecreate", function( e ) {
 			if ( o.addBackBtn &&
 				role === "header" &&
 				$( ".ui-page" ).length > 1 &&
-				$page.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+				$page[ 0 ].getAttribute( attrPrefix + "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 				!leftbtn ) {
 
 				backBtn = $( "<a href='javascript:void(0);' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" )

@@ -13,7 +13,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.checkboxradio", $.mobile.widget, {
+$.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
 		mini: false,
@@ -136,9 +136,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				}
 			});
 
-		if ( this._handleFormReset ) {
-			this._handleFormReset();
-		}
+		this._handleFormReset();
 		this.refresh();
 	},
 
@@ -201,9 +199,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	enable: function() {
 		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
 	}
-});
-
-$.widget( "mobile.checkboxradio", $.mobile.checkboxradio, $.mobile.behaviors.formReset );
+}, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {

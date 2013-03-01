@@ -193,9 +193,6 @@ define( [
 				} else if ( ui.focusElement[ 0 ] === ui.container[ 0 ] ) {
 					ui.focusElement = $tgt;
 				}
-			} else if ( ui.focusElement && ui.focusElement[ 0 ] !== ui.container[ 0 ] ) {
-				ui.container.blur();
-				ui.focusElement.focus();
 			}
 
 			this._ignoreResizeEvents();

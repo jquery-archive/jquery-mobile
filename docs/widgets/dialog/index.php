@@ -11,6 +11,11 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
+    <style>
+		.ui-dialog.dialog-actionsheet .ui-dialog-contain {
+			margin-top: 0;
+		}
+	</style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
