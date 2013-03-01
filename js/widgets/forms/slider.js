@@ -58,8 +58,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
-		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
-				.attr({
+		handle.attr({
 					"role": "slider",
 					"aria-valuemin": min,
 					"aria-valuemax": max,
