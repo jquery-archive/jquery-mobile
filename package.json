@@ -25,7 +25,7 @@
 	"devDependencies": {
 		"async": "latest",
 		"grunt": "0.4.x",
-		"grunt-contrib-compress": "~0.4.1"
+		"grunt-contrib-compress": "~0.4.1",
 		"grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
 		"grunt-contrib-connect": "git://github.com/gruntjs/grunt-contrib-connect.git",
 		"grunt-contrib-copy": "git://github.com/gruntjs/grunt-contrib-copy.git",
@@ -36,7 +36,7 @@
 		"grunt-css": "git://github.com/jzaefferer/grunt-css.git",
 		"grunt-git-authors": "1.1.0-beta.1",
 		"grunt-qunit-junit": "latest",
-		"requirejs": "2.1.x",
+		"requirejs": "2.1.x"
 	},
 	"main": "Gruntfile.js",
 	"engines": {
