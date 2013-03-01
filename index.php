@@ -5,20 +5,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="docs/_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="docs/favicon.ico">
+	<link rel="stylesheet" href="demos/_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="demos/favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="js/jquery.js"></script>
-	<script src="docs/_assets/js/"></script>
+	<script src="demos/_assets/js/"></script>
 	<script src="js/"></script>
 </head>
 <body>
 <div data-role="page" class="jqm-demos jqm-demos-home">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><img src="docs/_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
+		<h1 class="jqm-logo"><img src="demos/_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></h1>
 		<a href="#" class="jqm-search-link ui-btn-right" data-icon="search" data-iconpos="notext">Search</a>
-        <?php include( 'docs/search.php' ); ?>
+        <?php include( 'demos/search.php' ); ?>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -39,10 +39,10 @@
 		</div>
 
 		<ul data-role="listview" data-inset="true" data-theme="d" data-icon="false" data-filter-placeholder="Search..." class="jqm-list jqm-home-list">
-            <li><a href="docs/intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
-            <li><a href="docs/examples/"><h2>Demo Showcase</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
-            <li><a href="docs/faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
-			<li data-section="Widgets" data-filtertext="responsive web design rwd adaptive PE accessible mobile breakpoints media query"><a href="docs/intro/rwd.php"><h2>Going Responsive</h2><p>How to use RWD with jQuery Mobile</p></a></li>
+            <li><a href="demos/intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
+            <li><a href="demos/examples/"><h2>Demo Showcase</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
+            <li><a href="demos/faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
+			<li data-section="Widgets" data-filtertext="responsive web design rwd adaptive PE accessible mobile breakpoints media query"><a href="demos/intro/rwd.php"><h2>Going Responsive</h2><p>How to use RWD with jQuery Mobile</p></a></li>
 		</ul>
 
 		<h2 class="jqm-home-widget">Widget reference</h2>
@@ -50,7 +50,7 @@
 		<p class="jqm-intro">Test drive every component in the library, and easily build pages by copying and pasting the markup configuration you need.</p>
 
 		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="docs" class="jqm-list">
-        	<?php include( 'docs/nav-widgets.php' ); ?>
+        	<?php include( 'demos/nav-widgets.php' ); ?>
         </ul>
 
 	</div><!-- /content -->
