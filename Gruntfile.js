@@ -30,6 +30,7 @@ module.exports = function( grunt ) {
 	// grunt plugins
 	grunt.loadNpmTasks( "grunt-contrib-jshint" );
 	grunt.loadNpmTasks( "grunt-contrib-copy" );
+	grunt.loadNpmTasks( "grunt-contrib-compress" );
 	grunt.loadNpmTasks( "grunt-contrib-concat" );
 	grunt.loadNpmTasks( "grunt-contrib-connect" );
 	grunt.loadNpmTasks( "grunt-contrib-qunit" );
@@ -38,7 +39,6 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-css" );
 	grunt.loadNpmTasks( "grunt-git-authors" );
 	grunt.loadNpmTasks( "grunt-qunit-junit" );
-	grunt.loadNpmTasks( "grunt-zip" );
 
 	// load the project's default tasks
 	grunt.loadTasks( 'build/tasks');
@@ -266,19 +266,14 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		zip: {
+		compress: {
 			dist: {
 				options: {
-					baseDir: dist
+					archive: path.join( dist, name ) + ".zip"
 				},
-				// Files to zip together
-				src: [
-					path.join( dist, "**" ),
-					"!<%= zip.dist.dest %>"
-				],
-
-				// Destination of zip file
-				dest: path.join( dist, name ) + ".zip"
+				files: [
+					{ expand: true, cwd: dist, src: [ "**", "!" + name + ".zip" ] }
+				]
 			}
 		},
 
@@ -423,7 +418,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.processed", "copy:demos.unprocessed" ] );
 
-	grunt.registerTask( "dist:release", [ "js:release", "css:release", "copy:images", "demos", "zip:dist" ] );
+	grunt.registerTask( "dist:release", [ "js:release", "css:release", "copy:images", "demos", "compress:dist" ] );
 	grunt.registerTask( "dist", [ "config:dev", "dist:release" ] );
 
 
