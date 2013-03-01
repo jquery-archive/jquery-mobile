@@ -52,37 +52,42 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "release:set-version", function( newVersion ) {
 		var done = this.async(),
-			pkg = grunt.file.read( "package.json" ),
-			newVersion = newVersion || releaseVersion;
+			pkg = grunt.file.readJSON( "package.json" ),
+			newVersion = newVersion || releaseVersion,
+			gitArgs = [ "commit", "-m", "'Changed version to: "+ newVersion+"'", "package.json" ],
+			child;
 
 		console.log( "Setting version to: " + newVersion );
 
-		if ( !isDryRun ) {
-			var file = pkg.replace(/['|"]version['|"][ ]*:[ ]*['|"].*['|"]/i, function(match, attr) {
-				return '"version": "' + newVersion + '"';
-			});
-		}
+		pkg.version = newVersion;
 
-		grunt.file.write( "package.json", pkg );
+		grunt.file.write( "package.json", JSON.stringify( pkg, null, "\t" ) );
+
+		grunt.log.writeln( "`git " + gitArgs.join( " " ) + "`" );
 
 		if ( !isDryRun ) {
-			grunt.util.spawn(
+			// No point even running git in dry-run because there is nothing to commit
+			child = grunt.util.spawn(
 				{
 					cmd: "git",
-					args: [ "commit", "package.json", "-m Bumped version to: "+ newVersion ]
+					args: gitArgs
 				},
 				function ( err, result ) {
 					if ( err ) {
-						grunt.log.error( err );
+						grunt.log.error( result.stderr );
 						return done( false );
 					}
 
+					grunt.log.ok( "Version bumped to " + newVersion );
 					done();
 				}
 			);
-		}
 
-		grunt.log.ok( "Version bumped to " + newVersion );
+			child.stdout.setEncoding( "utf8" );
+			child.stdout.on( "data", function( data ) {
+				grunt.log.write( data );
+			});
+		}
 	});
 
 	grunt.registerTask( "release:set-next-version", function() {
