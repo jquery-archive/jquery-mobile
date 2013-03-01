@@ -364,6 +364,52 @@ module.exports = function( grunt ) {
 					}())
 				}
 			}
+		},
+
+		rsync: {
+			options: {
+				user: "ghislain.seguin",
+				host: "localhost",
+//				user: "jqadmin",
+//				host: "code.origin.jquery.com",
+				remoteBase: "/var/www/html/code.jquery.com/mobile/",
+				cwd: "dist" //removes the dist directory from the destination
+			},
+			release: {
+				files: {
+					"jquery.mobile-<%= pkg.version %>.js": path.join( dist, "jquery.mobile.js" ),
+					"jquery.mobile-<%= pkg.version %>.min.js": path.join( dist, "jquery.mobile.min.js" ),
+					"jquery.mobile-<%= pkg.version %>.min.map": path.join( dist, "jquery.mobile.min.map" ),
+					"jquery.mobile-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.css" ),
+					"jquery.mobile-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.min.css" ),
+					"jquery.mobile.structure-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.structure.css" ),
+					"jquery.mobile.structure-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.structure.min.css" ),
+					"jquery.mobile.structure-<%= pkg.version %>.zip": path.join( dist, "jquery.mobile.structure.min.css" )
+		}
+			},
+			latest: {
+				files: {
+					"latest/": path.join( dist, "jquery.mobile.*" )
+				}
+			}
+		},
+
+		curl: {
+			options: {
+				baseUrl: "http://code.origin.jquery.com/mobile/",
+				cwd: dist
+			},
+			latest: {
+				files: {
+					"latest/": path.join( dist, "jquery.mobile.*" )
+				}
+			}
+		},
+
+		release: {
+			options: {
+				versionRegExp: /^(\d)\.(\d+)\.(\d)(-(?:alpha|beta|rc)\.\d|pre)?$/
+			}
 		}
 
 	});
@@ -383,6 +429,10 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "test", [ "config:dev", "requirejs", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
+
+	grunt.registerTask( "deploy:latest", [ "release:init", "release:git:status", "dist:release", "rsync:latest", "curl:latest" ] );
+	grunt.registerTask( "deploy:release", ["release:init", "release:git:status", "release:set-version", "recurse:_deploy", "release:set-next-version" ] );
+	grunt.registerTask( "_deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );
