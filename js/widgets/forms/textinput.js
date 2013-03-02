@@ -112,7 +112,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.enable( true );
 				}				
-			})
+			});
 
 		// Autogrow
 		if ( input.is( "textarea" ) ) {

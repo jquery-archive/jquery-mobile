@@ -1,3 +1,12 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Slider tooltip extension
+//>>label: Slidertooltip
+//>>group: Forms
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+//>>css.structure: ../css/structure/jquery.mobile.slider.tooltip.css
+
+define( [ "jquery", "./slider" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.slider, {
