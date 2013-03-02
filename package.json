@@ -25,6 +25,7 @@
 	"devDependencies": {
 		"async": "latest",
 		"grunt": "0.4.x",
+		"grunt-contrib-clean": "~0.4.0",
 		"grunt-contrib-compress": "~0.4.1",
 		"grunt-contrib-concat": "git://github.com/gruntjs/grunt-contrib-concat.git",
 		"grunt-contrib-connect": "git://github.com/gruntjs/grunt-contrib-connect.git",
