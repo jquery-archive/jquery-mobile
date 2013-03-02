@@ -430,9 +430,10 @@ module.exports = function( grunt ) {
 		clean: [ dist ]
 	});
 
+	grunt.registerTask( "lint", [ "jshint" ] );
+
 	grunt.registerTask( "js:release",  [ "requirejs", "concat:js", "uglify" ] );
 	grunt.registerTask( "js", [ "config:dev", "js:release" ] );
-
 
 	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
 	grunt.registerTask( "css", [ "config:dev", "css:release" ] );
