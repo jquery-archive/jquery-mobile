@@ -29,6 +29,7 @@ module.exports = function( grunt ) {
 
 	// grunt plugins
 	grunt.loadNpmTasks( "grunt-contrib-jshint" );
+	grunt.loadNpmTasks( "grunt-contrib-clean" );
 	grunt.loadNpmTasks( "grunt-contrib-copy" );
 	grunt.loadNpmTasks( "grunt-contrib-compress" );
 	grunt.loadNpmTasks( "grunt-contrib-concat" );
@@ -133,18 +134,17 @@ module.exports = function( grunt ) {
 				dest: path.join( dist, name ) + ".js"
 			},
 			demos: {
-				src: [ "docs/demos/_assets/js/*.js" ],
-				dest: path.join( dist, "demos/_assets/js/demos.js" )
+				src: [ "demos/_assets/js/*.js" ],
+				dest: path.join( dist, "demos/_assets/js/index.js" )
 			}
 		},
 
 		uglify: {
 			all: {
 				options: {
-					cwd: dist,
 					banner: banner.minified,
-					sourceMapPrefix: 1,
 					sourceMap: path.join( dist, name ) + ".min.map",
+					sourceMappingURL: "./" + name + ".min.map",
 					beautify: {
 						ascii_only: true
 					}
@@ -214,36 +214,56 @@ module.exports = function( grunt ) {
 				src: "*",
 				dest: path.join( dist, "images/" ),
 			},
-			"demos.processed": {
+			"demos.firstpass": {
 				options: {
-					processContentExclude: [ "**/*.png", "**/*.gif" ],
 					processContent: function( content, srcPath ) {
-						if ( srcPath === "docs/demos/nav.html" ) {
-							return false;
-						}
-						content = content.replace( /_assets\/js\/">/gi, "_assets/js/demos.js\">" );
-						content = content.replace( /\.\.\/\.\.\/js\/">/gi, "js/" + name + ".min.js\">" );
-						content = content.replace( /\.\.\/\.\.\/css\//gi, "css/" );
+						content = content.replace( /_assets\/js\/">/gi, "_assets/js/index.js\">" );
+						content = content.replace( /\.\.\/js\//gi, "js/" );
+						content = content.replace( /js\/"/gi, "js/" + name + ".min.js\"" );
+						content = content.replace( /\.\.\/css\//gi, "css/" );
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
 							function( match, includePath, offset, string ) {
 								var fileToInclude = path.resolve( path.join( path.dirname( srcPath ), includePath ) );
 								return grunt.file.read( fileToInclude );
 							}
 						);
+						content = content.replace( /\.php/gi, ".html" );
 						return content;
 					}
 				},
 				files: [
 					{
 						expand: true,
-						cwd: "docs/demos",
-						src: [ "**" ],
-						dest: path.join( dist, "demos/" )
+						src: [ "*.php", "demos/**/*.php" ],
+						dest: dist,
+						ext: ".html"
+					}
+				]
+			},
+			"demos.secondpass": {
+				options: {
+					processContentExclude: [ "**/*.png", "**/*.gif" ],
+					processContent: function( content, srcPath ) {
+						content = content.replace( /\.php/gi, ".html" );
+						return content;
+					}
+				},
+				files: [
+					{
+						expand: true,
+						src: [ "demos/**", "!**/*.php" ],
+						dest: dist
 					}
 				]
 			},
 			"demos.unprocessed": {
 				files: [
+					{
+						expand: true,
+						cwd: "js",
+						src: [ "jquery.js" ],
+						dest: path.join( dist, "demos/js/" )
+					},
 					{
 						expand: true,
 						cwd: dist,
@@ -405,8 +425,9 @@ module.exports = function( grunt ) {
 			options: {
 				versionRegExp: /^(\d)\.(\d+)\.(\d)(-(?:alpha|beta|rc)\.\d|pre)?$/
 			}
-		}
+		},
 
+		clean: [ dist ]
 	});
 
 	grunt.registerTask( "js:release",  [ "requirejs", "concat:js", "uglify" ] );
@@ -416,7 +437,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
 	grunt.registerTask( "css", [ "config:dev", "css:release" ] );
 
-	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.processed", "copy:demos.unprocessed" ] );
+	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.firstpass", "copy:demos.secondpass", "copy:demos.unprocessed" ] );
 
 	grunt.registerTask( "dist:release", [ "js:release", "css:release", "copy:images", "demos", "compress:dist" ] );
 	grunt.registerTask( "dist", [ "config:dev", "dist:release" ] );
@@ -426,7 +447,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
 	grunt.registerTask( "deploy:latest", [ "release:init", "release:git:status", "dist:release", "rsync:latest", "curl:latest" ] );
-	grunt.registerTask( "deploy:release", ["release:init", "release:git:status", "release:set-version", "recurse:_deploy", "release:set-next-version" ] );
+	grunt.registerTask( "deploy:release", [ "release:init", "release:git:status", "release:set-version", "recurse:_deploy", "release:set-next-version" ] );
 	grunt.registerTask( "_deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
 
 	// Default grunt
