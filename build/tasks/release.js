@@ -100,7 +100,7 @@ module.exports = function( grunt ) {
 		grunt.task.run( "release:set-version:" + nextVersion );
 	});
 
-	grunt.registerTask( 'release:git:status', 'Retrieve git status and ensures the workspace is clean', function() {
+	grunt.registerTask( 'release:check-git-status', 'Retrieve git status and ensures the workspace is clean', function() {
 		var done = this.async();
 
 		grunt.util.spawn(
@@ -130,6 +130,37 @@ module.exports = function( grunt ) {
 			}
 		);
 	});
+
+	grunt.registerTask( 'release:tag', 'Tag the repo with the current release', function() {
+		var done = this.async(),
+			gitArgs = [ "tag", releaseVersion ],
+			child;
+
+		grunt.log.writeln( "`git " + gitArgs.join( " " ) + "`" );
+
+		if ( !isDryRun ) {
+			child = grunt.util.spawn(
+				{
+					cmd: "git",
+					args: gitArgs
+				},
+				function ( err, result ) {
+					if ( err ) {
+						grunt.log.error( result.stderr );
+						return done( false );
+					}
+
+					grunt.log.ok( "Version bumped to " + newVersion );
+					done();
+				}
+			);
+
+			child.stdout.setEncoding( "utf8" );
+			child.stdout.on( "data", function( data ) {
+				grunt.log.write( data );
+			});
+		}
+	})
 
 	grunt.registerTask( 'release', [ "release:init", "release:git:status" ]);
 };
