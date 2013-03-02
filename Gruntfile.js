@@ -24,7 +24,7 @@ module.exports = function( grunt ) {
 				"",
 				"",
 				"" ].join( grunt.util.linefeed ),
-			minified: "/*! jQuery Mobile <%= version %> | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */"
+			minified: "/*! jQuery Mobile <%= version %> | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */\n"
 		};
 
 	// grunt plugins
@@ -144,13 +144,13 @@ module.exports = function( grunt ) {
 				options: {
 					banner: banner.minified,
 					sourceMap: path.join( dist, name ) + ".min.map",
-					sourceMappingURL: "./" + name + ".min.map",
+					sourceMappingURL: name + ".min.map",
 					beautify: {
 						ascii_only: true
 					}
 				},
 				files: {
-					"dist/jquery.mobile.min.js": path.join( dist, name ) + ".js",
+					"dist/jquery.mobile.min.js": path.join( dist, name ) + ".js"
 				}
 			}
 		},
@@ -175,7 +175,7 @@ module.exports = function( grunt ) {
 				//inlining. The value of this option should be a string of comma separated
 				//CSS file names to ignore (like 'a.css,b.css'. The file names should match
 				//whatever strings are used in the @import calls.
-				cssImportIgnore: null,
+				cssImportIgnore: null
 			},
 			all: {
 				files: {
@@ -282,6 +282,21 @@ module.exports = function( grunt ) {
 						src: "images/*",
 						dest: path.join( dist, "demos/" )
 					},
+				]
+			},
+			sourcemap: {
+				// Processes the sourceMap to fix issue: https://github.com/mishoo/UglifyJS2/issues/47
+				options: {
+					processContent: function( content, srcPath ) {
+						content = content.replace( /"dist\//g, "\"" );
+						return content;
+					}
+				},
+				files: [
+					{
+						src: "<%= uglify.all.options.sourceMap %>",
+						dest: "<%= uglify.all.options.sourceMap %>"
+					}
 				]
 			}
 		},
@@ -400,7 +415,7 @@ module.exports = function( grunt ) {
 					"jquery.mobile.structure-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.structure.css" ),
 					"jquery.mobile.structure-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.structure.min.css" ),
 					"jquery.mobile.structure-<%= pkg.version %>.zip": path.join( dist, "jquery.mobile.structure.min.css" )
-		}
+				}
 			},
 			latest: {
 				files: {
@@ -432,7 +447,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "lint", [ "jshint" ] );
 
-	grunt.registerTask( "js:release",  [ "requirejs", "concat:js", "uglify" ] );
+	grunt.registerTask( "js:release",  [ "requirejs", "concat:js", "uglify", "copy:sourcemap" ] );
 	grunt.registerTask( "js", [ "config:dev", "js:release" ] );
 
 	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
@@ -442,7 +457,6 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "dist:release", [ "js:release", "css:release", "copy:images", "demos", "compress:dist" ] );
 	grunt.registerTask( "dist", [ "config:dev", "dist:release" ] );
-
 
 	grunt.registerTask( "test", [ "config:dev", "requirejs", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
