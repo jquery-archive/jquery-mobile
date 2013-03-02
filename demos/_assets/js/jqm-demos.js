@@ -49,7 +49,7 @@ $( document ).on( "pageinit", function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
-		str = version === "dev" ? "" : ( words[1] || "Final" ),
+		str = words[1] || "",
 		text = ver;
 
 	if ( str.indexOf( "rc" ) == -1 ) {
