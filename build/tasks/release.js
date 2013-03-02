@@ -150,7 +150,7 @@ module.exports = function( grunt ) {
 						return done( false );
 					}
 
-					grunt.log.ok( "Version bumped to " + newVersion );
+					grunt.log.ok( "Created tag: " + releaseVersion );
 					done();
 				}
 			);
