@@ -5,7 +5,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 //>>css.structure: ../css/structure/jquery.mobile.slider.tooltip.css
 
-define( [ "jquery", "./slider" ], function( $ ) {
+define( [ "jquery", "./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

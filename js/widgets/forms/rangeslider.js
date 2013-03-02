@@ -129,7 +129,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_change: function( event ) {
-			if ( event.type == "keyup" ) {
+			if ( event.type === "keyup" ) {
 				this._updateHighlight();
 				return false;
 			}
