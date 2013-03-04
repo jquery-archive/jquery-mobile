@@ -5,4 +5,4 @@ before_script:
   - npm install -g grunt-cli
 branches:
   only:
-	    - grunt-0.4
+	    - master
