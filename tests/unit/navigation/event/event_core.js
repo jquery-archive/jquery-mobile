@@ -68,6 +68,23 @@ $.testHelper.setPushState();
 		location.hash = "bar";
 	});
 
+	asyncTest( "beforenavigate should carry the original navigation function", function() {
+
+		$( window ).one( "beforenavigate", function(event) {
+			var type = event.originalEvent.type;
+
+			if( $.support.pushState ) {
+				equal( type, "popstate", "the original event type is popstate" );
+			} else {
+				equal( type, "hashchange", "the original event type is hashchange" );
+			}
+
+			start();
+		});
+
+		location.hash = "beforenavigate";
+	});
+
 	if( $.support.pushState ) {
 		asyncTest( "popstate navigation events contain pushed state", function() {
 			$.testHelper.eventTarget = $( window );
