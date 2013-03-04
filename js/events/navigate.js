@@ -41,6 +41,7 @@ define([
 				state = event.originalEvent.state || {},
 				href = location.href;
 
+			beforeNavigate.originalEvent = event;
 			$win.trigger( beforeNavigate );
 
 			if( beforeNavigate.isDefaultPrevented() ){
@@ -70,6 +71,7 @@ define([
 			var newEvent = new $.Event( "navigate" ),
 				beforeNavigate = new $.Event( "beforenavigate" );
 
+			beforeNavigate.originalEvent = event;
 			$win.trigger( beforeNavigate );
 
 			if( beforeNavigate.isDefaultPrevented() ){

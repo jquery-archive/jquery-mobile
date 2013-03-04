@@ -89,12 +89,11 @@ $.testHelper.setPushState();
 			]);
 		});
 	} else {
-		// Make sure the binding happends before any of the navigate bindings
-		$( window ).bind( "hashchange", function( event ) {
-			event.hashchangeState = { foo: "bar" };
-		});
-
 		asyncTest( "hashchange navigation provides for data added in a later binding", function() {
+			$( window ).one( "beforenavigate", function( event, data ) {
+				event.originalEvent.hashchangeState = { foo: "bar" };
+			});
+
 			$( window ).one( "navigate", function( event, data ) {
 				equal( event.originalEvent.type, "hashchange", "event triggered by a hashchange" );
 				equal( data.state.foo, "bar", "state provided properly" );
