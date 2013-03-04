@@ -52,6 +52,10 @@
 		setPushState: function() {
 			if( $.support.pushState && location.search.indexOf( "push-state" ) >= 0 ) {
 				$.support.pushState = false;
+				$.mobile.window.unbind( "popstate.navigate" );
+				$.mobile.window.unbind( "popstate.hashchange" );
+				$.event.special.navigate.bound = false;
+				$.event.special.navigate.setup();
 			}
 		},
 
