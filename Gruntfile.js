@@ -319,6 +319,8 @@ module.exports = function( grunt ) {
 					base: '.',
 					middleware: function(connect, options) {
 						return [
+							// For requests to "[...]/js/" return the built jquery.mobile.js
+							// as opposed to the php combined version
 							function(req, res, next){
 								var bundle = grunt.config.process( "<%= requirejs.js.options.out %>" );
 								if (req.url === "/js/") {
@@ -371,10 +373,15 @@ module.exports = function( grunt ) {
 								patterns = patterns.concat( [ "tests/unit/" + unit + "/index.html", "tests/unit/" + unit + "/*/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
 							});
 						} else {
-							patterns = [ "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
+							patterns = [ "tests/unit/**/index.html", "tests/unit/**/*-tests.html" ];
 						}
 
-						paths = grunt.file.expand( patterns ).sort();
+						paths = grunt.file.expand( patterns )
+							.sort()
+							.map( function( path ) {
+								// Some of our tests (ie. navigation) don't like having the index.html too much
+								return path.replace( /\/\index.html$/, "/" );
+							});
 
 						if ( jQueries.length ) {
 							paths.forEach( function( path ) {
