@@ -75,7 +75,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 
 		if ( $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
-			classes ? classes += " ui-submit" : classes = "ui-submit";
+			if ( classes ) {
+				classes += " ui-submit";
+			} else {
+				classes = "ui-submit";
+			}
 		}
 		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
 

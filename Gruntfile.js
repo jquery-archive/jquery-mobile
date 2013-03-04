@@ -5,11 +5,6 @@ module.exports = function( grunt ) {
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
 		name = "jquery.mobile",
 		dist = "dist",
-		distpaths = [
-			path.join( dist, name ) + ".js",
-			path.join( dist, name ) + ".min.map",
-			path.join( dist, name ) + ".min.js"
-		],
 		banner = {
 			normal: [
 				"/*",
@@ -212,7 +207,7 @@ module.exports = function( grunt ) {
 				expand: true,
 				cwd: "css/themes/default/images",
 				src: "*",
-				dest: path.join( dist, "images/" ),
+				dest: path.join( dist, "images/" )
 			},
 			"demos.firstpass": {
 				options: {
@@ -222,7 +217,7 @@ module.exports = function( grunt ) {
 						content = content.replace( /js\/"/gi, "js/" + name + ".min.js\"" );
 						content = content.replace( /\.\.\/css\//gi, "css/" );
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
-							function( match, includePath, offset, string ) {
+							function( match, includePath /*, offset, string */ ) {
 								var fileToInclude = path.resolve( path.join( path.dirname( srcPath ), includePath ) );
 								return grunt.file.read( fileToInclude );
 							}
@@ -243,7 +238,7 @@ module.exports = function( grunt ) {
 			"demos.secondpass": {
 				options: {
 					processContentExclude: [ "**/*.png", "**/*.gif" ],
-					processContent: function( content, srcPath ) {
+					processContent: function( content /*, srcPath*/ ) {
 						content = content.replace( /\.php/gi, ".html" );
 						return content;
 					}
@@ -281,13 +276,13 @@ module.exports = function( grunt ) {
 						cwd: dist,
 						src: "images/*",
 						dest: path.join( dist, "demos/" )
-					},
+					}
 				]
 			},
 			sourcemap: {
 				// Processes the sourceMap to fix issue: https://github.com/mishoo/UglifyJS2/issues/47
 				options: {
-					processContent: function( content, srcPath ) {
+					processContent: function( content /*, srcPath*/ ) {
 						content = content.replace( /"dist\//g, "\"" );
 						return content;
 					}
@@ -317,7 +312,8 @@ module.exports = function( grunt ) {
 				options: {
 					port: httpPort,
 					base: '.',
-					middleware: function(connect, options) {
+					middleware: function( connect, options ) {
+						/*jshint */
 						return [
 							// For requests to "[...]/js/" return the built jquery.mobile.js
 							// as opposed to the php combined version
@@ -332,7 +328,7 @@ module.exports = function( grunt ) {
 							},
 
 							// Serve static files.
-							connect.static(options.base),
+							connect[ "static" ](options.base),
 							// Make empty directories browsable.
 							connect.directory(options.base)
 						];
@@ -388,7 +384,7 @@ module.exports = function( grunt ) {
 								versionedPaths = versionedPaths.concat( jQueries.map( function( jQVersion ) {
 									return path + "?jquery=" + jQVersion;
 								}) );
-							})
+							});
 						}
 
 						if ( versionedPaths.length ) {
@@ -396,7 +392,7 @@ module.exports = function( grunt ) {
 						}
 
 						return paths.map( function( path ) {
-							return "http://localhost:<%= connect.server.options.port %>/" + path
+							return "http://localhost:<%= connect.server.options.port %>/" + path;
 						});
 					}())
 				}
