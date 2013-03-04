@@ -70,7 +70,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
 
-		o.disabled = $el.prop("disabled");
 		// Add ARIA role
 		this.button = $( "<div></div>" )
 			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )
@@ -91,9 +90,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 			}
 		});
 
-		this._initialRefresh = true;
 		this.refresh();
-		this._initialRefresh = false;
 	},
 
 	_setOption: function( key, value ) {
@@ -101,10 +98,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 		op[ key ] = value;
 		if ( key !== "initSelector" ) {
-			if (!this._initialRefresh) {
-				//make sure buttonMarkup is called only once on create
-				this.button.buttonMarkup( op );
-			}
+			this.button.buttonMarkup( op );
 			// Record the option change in the options and in the DOM data-* attributes
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 		}
