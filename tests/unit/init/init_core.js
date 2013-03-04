@@ -77,18 +77,6 @@
 			ok($("html").hasClass("ui-mobile"), "html elem has class mobile");
 		});
 
-		asyncTest( "useFastClick is configurable via mobileinit", function(){
-			$(document).one( "mobileinit", function(){
-				$.mobile.useFastClick = false;
-				start();
-			});
-
-			$.testHelper.reloadLib(libName);
-
-			deepEqual( $.mobile.useFastClick, false , "fast click is set to false after init" );
-			$.mobile.useFastClick = true;
-		});
-
 		var findFirstPage = function() {
 			return $(":jqmData(role='page')").first();
 		};

@@ -52,6 +52,10 @@
 		setPushState: function() {
 			if( $.support.pushState && location.search.indexOf( "push-state" ) >= 0 ) {
 				$.support.pushState = false;
+				$.mobile.window.unbind( "popstate.navigate" );
+				$.mobile.window.unbind( "popstate.hashchange" );
+				$.event.special.navigate.bound = false;
+				$.event.special.navigate.setup();
 			}
 		},
 
@@ -86,8 +90,7 @@
 		reloads: {},
 
 		reloadModule: function(libName){
-			var deferred = $.Deferred(),
-				context;
+			var deferred = $.Deferred();
 
 			// where a module loader isn't defined use the old way
 			if( !window.require ) {
@@ -103,11 +106,7 @@
 			}
 
 			//Clear internal cache of module inside of require
-			context = require.s.contexts._;
-			delete context.defined[libName];
-			delete context.specified[libName];
-			delete context.loaded[libName];
-			delete context.urlFetched[require.toUrl(libName + '.js')];
+			requirejs.undef( libName );
 
 			require(
 				{

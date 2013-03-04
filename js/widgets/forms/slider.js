@@ -50,7 +50,8 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-btn-corner-all";
 				return $( bg ).prependTo( slider );
 			})() : false,
-			options;
+			options,
+			wrapper;
 			
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
@@ -84,7 +85,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		});
 
 		if ( this.isToggleSwitch ) {
-			var wrapper = document.createElement( "div" );
+			wrapper = document.createElement( "div" );
 			wrapper.className = "ui-slider-inneroffset";
 
 			for ( var j = 0, length = domSlider.childNodes.length; j < length; j++ ) {
@@ -140,7 +141,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		// wrap in a div for styling purposes
 		if ( !this.isToggleSwitch && !isRangeslider ) {
-			var wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
+			wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
 			
 			control.add( slider ).wrapAll( wrapper );
 		}
@@ -210,42 +211,42 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		// In all cases prevent the default and mark the handle as active
 		switch ( event.keyCode ) {
-		 case $.mobile.keyCode.HOME:
-		 case $.mobile.keyCode.END:
-		 case $.mobile.keyCode.PAGE_UP:
-		 case $.mobile.keyCode.PAGE_DOWN:
-		 case $.mobile.keyCode.UP:
-		 case $.mobile.keyCode.RIGHT:
-		 case $.mobile.keyCode.DOWN:
-		 case $.mobile.keyCode.LEFT:
-			event.preventDefault();
+			case $.mobile.keyCode.HOME:
+			case $.mobile.keyCode.END:
+			case $.mobile.keyCode.PAGE_UP:
+			case $.mobile.keyCode.PAGE_DOWN:
+			case $.mobile.keyCode.UP:
+			case $.mobile.keyCode.RIGHT:
+			case $.mobile.keyCode.DOWN:
+			case $.mobile.keyCode.LEFT:
+				event.preventDefault();
 
-			if ( !this._keySliding ) {
-				this._keySliding = true;
-				this.handle.addClass( "ui-state-active" );
-			}
+				if ( !this._keySliding ) {
+					this._keySliding = true;
+					this.handle.addClass( "ui-state-active" );
+				}
 
-			break;
+				break;
 		}
 
 		// move the slider according to the keypress
 		switch ( event.keyCode ) {
-		 case $.mobile.keyCode.HOME:
-			this.refresh( this.min );
-			break;
-		 case $.mobile.keyCode.END:
-			this.refresh( this.max );
-			break;
-		 case $.mobile.keyCode.PAGE_UP:
-		 case $.mobile.keyCode.UP:
-		 case $.mobile.keyCode.RIGHT:
-			this.refresh( index + this.step );
-			break;
-		 case $.mobile.keyCode.PAGE_DOWN:
-		 case $.mobile.keyCode.DOWN:
-		 case $.mobile.keyCode.LEFT:
-			this.refresh( index - this.step );
-			break;
+			case $.mobile.keyCode.HOME:
+				this.refresh( this.min );
+				break;
+			case $.mobile.keyCode.END:
+				this.refresh( this.max );
+				break;
+			case $.mobile.keyCode.PAGE_UP:
+			case $.mobile.keyCode.UP:
+			case $.mobile.keyCode.RIGHT:
+				this.refresh( index + this.step );
+				break;
+			case $.mobile.keyCode.PAGE_DOWN:
+			case $.mobile.keyCode.DOWN:
+			case $.mobile.keyCode.LEFT:
+				this.refresh( index - this.step );
+				break;
 		}
 	}, // remove active mark
 
@@ -275,7 +276,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		
 		this.refresh( event );
- 		this._trigger( "start" );
+		this._trigger( "start" );
 		return false;
 	},
 
@@ -331,7 +332,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		},
 
 	_checkedRefresh: function() {
-		if ( this.value != this._value() ) {
+		if ( this.value !== this._value() ) {
 			this.refresh( this._value() );
 		}
 	},
@@ -352,7 +353,8 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		var self = this,
 			parentTheme = $.mobile.getInheritedTheme( this.element, "c" ),
 			theme = this.options.theme || parentTheme,
-			trackTheme = this.options.trackTheme || parentTheme;
+			trackTheme = this.options.trackTheme || parentTheme,
+			left, width, data, tol;
 
 		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.attr( "disabled" ) ) {
@@ -379,9 +381,9 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			step = ( isInput && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 			
 		if ( typeof val === "object" ) {
-			var left, width, data = val,
-				// a slight tolerance helped get to the ends of the slider
-				tol = 8;
+			data = val;
+			// a slight tolerance helped get to the ends of the slider
+			tol = 8;
 
 			left = this.slider.offset().left;
 			width = this.slider.width();
