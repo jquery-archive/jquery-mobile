@@ -42,8 +42,20 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			return;
 		}
 
+		// If there's no selected theme check the data attr
+		if ( !o.theme ) {
+			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
+		}
+
 		// Expose for other methods
 		$.extend( this, {
+			//save buttonMarkup options to use them in refresh
+			buttonMarkupOptions: {
+				theme: o.theme,
+				shadow: false,
+				mini: mini,
+				iconpos: iconpos
+			},
 			label: label,
 			inputtype: inputtype,
 			checkedClass: checkedClass,
@@ -51,19 +63,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			checkedicon: checkedState,
 			uncheckedicon: uncheckedState
 		});
-
-		// If there's no selected theme check the data attr
-		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
-		}
-
-		//save buttonMarkup options to use them in refresh
-		this._labelButtonMarkupOptions = {
-			theme: o.theme,
-			shadow: false,
-			mini: mini,
-			iconpos: iconpos
-		};
 
 		// Wrap the input + label in a div
 		var wrapper = document.createElement('div');
@@ -179,7 +178,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			active = " " + $.mobile.activeBtnClass,
 			checkedClass = this.checkedClass + ( this.element.parents( ".ui-controlgroup-horizontal" ).length ? active : "" ),
 			label = this.label,
-			options = this._labelButtonMarkupOptions || {};
+			options = this.buttonMarkupOptions;
 
 		if ( input.checked ) {
 			options.icon = this.checkedicon;
@@ -188,6 +187,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			options.icon = this.uncheckedicon;
 			label.removeClass( checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( options );
 		}
+
+		this.buttonMarkupOptions = {};
 
 		if ( input.disabled ) {
 			this.disable();
