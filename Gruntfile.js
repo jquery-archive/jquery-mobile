@@ -373,7 +373,7 @@ module.exports = function( grunt ) {
 								patterns = patterns.concat( [ "tests/unit/" + unit + "/index.html", "tests/unit/" + unit + "/*/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
 							});
 						} else {
-							patterns = [ "tests/unit/**/index.html", "tests/unit/**/*-tests.html" ];
+							patterns = [ "tests/unit/*/index.html", "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
 						}
 
 						paths = grunt.file.expand( patterns )
