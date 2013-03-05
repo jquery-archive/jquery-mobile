@@ -415,7 +415,7 @@ module.exports = function( grunt ) {
 					"jquery.mobile-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.min.css" ),
 					"jquery.mobile.structure-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.structure.css" ),
 					"jquery.mobile.structure-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.structure.min.css" ),
-					"jquery.mobile.structure-<%= pkg.version %>.zip": path.join( dist, "jquery.mobile.structure.min.css" )
+					"jquery.mobile.structure-<%= pkg.version %>.zip": path.join( dist, "jquery.mobile.zip" )
 				}
 			},
 			latest: {
