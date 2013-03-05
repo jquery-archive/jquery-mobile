@@ -9,4 +9,4 @@ branches:
 notifications:
   irc:
     channels:
-      - "irc.freenode.org#jquery-mobile"
+      - "irc.freenode.org#jquerymobile-dev"
