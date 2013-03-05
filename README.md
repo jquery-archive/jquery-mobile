@@ -1,5 +1,7 @@
 # jQuery Mobile
 
+[![Build Status](https://travis-ci.org/jquery/jquery-mobile.png?branch=master)](https://travis-ci.org/jquery/jquery-mobile)
+
 This is the main repository for the jQuery Mobile project. From the [official website](http://jquerymobile.com):
 
 > A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.
