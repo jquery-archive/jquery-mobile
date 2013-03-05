@@ -401,10 +401,8 @@ module.exports = function( grunt ) {
 
 		rsync: {
 			options: {
-				user: "ghislain.seguin",
-				host: "localhost",
-//				user: "jqadmin",
-//				host: "code.origin.jquery.com",
+				user: "jqadmin",
+				host: "code.origin.jquery.com",
 				remoteBase: "/var/www/html/code.jquery.com/mobile/",
 				cwd: "dist" //removes the dist directory from the destination
 			},
