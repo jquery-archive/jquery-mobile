@@ -6,3 +6,7 @@ before_script:
 branches:
   only:
     - master
+notifications:
+  irc:
+    channels:
+      - "irc.freenode.org#jquery-mobile"
