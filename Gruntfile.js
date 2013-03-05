@@ -90,7 +90,7 @@ module.exports = function( grunt ) {
 
 					mainConfigFile: "js/requirejs.config.js",
 
-					name: name,
+					include: ( grunt.option( "modules" ) || name ).split( "," ),
 
 					exclude: [
 						"jquery",
