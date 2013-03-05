@@ -33,7 +33,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleHeading = $el.children( o.heading ).first(),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
-			collapsibleClasses = "";
+			collapsibleClasses = "",
+			attrPrefix = "data-" + $.mobile.ns;
 
 		// Replace collapsibleHeading if it's a legend
 		if ( collapsibleHeading.is( "legend" ) ) {
@@ -45,25 +46,26 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		if ( collapsibleSet.length ) {
 			// Inherit the theme from collapsible-set
 			if ( !o.theme ) {
-				o.theme = collapsibleSet.jqmData( "theme" ) || $.mobile.getInheritedTheme( collapsibleSet, "c" );
+				o.theme = collapsibleSet[ 0 ].getAttribute( attrPrefix + "theme" ) || $.mobile.getInheritedTheme( collapsibleSet, "c" );
 			}
 			// Inherit the content-theme from collapsible-set
 			if ( !o.contentTheme ) {
-				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
+				o.contentTheme = collapsibleSet[ 0 ].getAttribute( attrPrefix + "content-theme" );
 			}
 
 			// Get the preference for collapsed icon in the set, but override with data- attribute on the individual collapsible
-			o.collapsedIcon = $el.jqmData( "collapsed-icon" ) || collapsibleSet.jqmData( "collapsed-icon" ) || o.collapsedIcon;
+			o.collapsedIcon = $el[ 0 ].getAttribute( attrPrefix + "collapsed-icon" ) || collapsibleSet[ 0 ].getAttribute( attrPrefix + "collapsed-icon" ) || o.collapsedIcon;
 
 			// Get the preference for expanded icon in the set, but override with data- attribute on the individual collapsible
-			o.expandedIcon = $el.jqmData( "expanded-icon" ) || collapsibleSet.jqmData( "expanded-icon" ) || o.expandedIcon;
+			o.expandedIcon = $el[ 0 ].getAttribute( attrPrefix + "expanded-icon" ) || collapsibleSet[ 0 ].getAttribute( attrPrefix + "expanded-icon" ) || o.expandedIcon;
 
 			// Gets the preference icon position in the set, but override with data- attribute on the individual collapsible
-			o.iconpos = $el.jqmData( "iconpos" ) || collapsibleSet.jqmData( "iconpos" ) || o.iconpos;
-
+			o.iconpos = $el[ 0 ].getAttribute( attrPrefix + "iconpos" ) || collapsibleSet[ 0 ].getAttribute( attrPrefix + "iconpos" ) || o.iconpos;			
+	
 			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
-			if ( collapsibleSet.jqmData( "inset" ) !== undefined ) {
-				o.inset = collapsibleSet.jqmData( "inset" );
+			_inset = collapsibleSet[ 0 ].getAttribute( attrPrefix + "inset" ) || undefined;
+			if ( _inset !== undefined ) {
+				o.inset = _inset;
 			} else {
 				o.inset = true;
 			}
@@ -71,7 +73,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			o.corners = false;
 			// Gets the preference for mini in the set
 			if ( !o.mini ) {
-				o.mini = collapsibleSet.jqmData( "mini" );
+				o.mini = collapsibleSet[ 0 ].getAttribute( attrPrefix + "mini" ) || undefined;
 			}
 		} else {
 			// get inherited theme if not a set and no theme has been set

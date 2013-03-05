@@ -52,7 +52,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			var $target = $( event.target ).closest( event.type === "vclick" ? "a" : "form" ),
 				active;
 
-			if ( $target.length && !$target.jqmData( "transition" ) ) {
+			if ( $target.length && !$target[ 0 ].getAttribute( "data-" + $.mobile.ns + "transition" ) ) {
 
 				active = $.mobile.urlHistory.getActive() || {};
 

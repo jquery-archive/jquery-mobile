@@ -632,6 +632,7 @@ define( [
 
 			if ( !this.options.theme ) {
 				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
+				this._setTheme( this._page[ 0 ].getAttribute( "data-" + $.mobile.ns + "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
 			}
 
 			this._ui.screen.removeClass( "ui-screen-hidden" );
@@ -757,7 +758,7 @@ define( [
 				if ( typeof data.toPage === "string" ) {
 					parsedDst = data.toPage;
 				} else {
-					parsedDst = data.toPage.jqmData( "url" );
+					parsedDst = data.toPage[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" );
 				}
 				parsedDst = $.mobile.path.parseUrl( parsedDst );
 				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
@@ -889,8 +890,8 @@ define( [
 			popup.popup( "open", {
 				x: offset.left + $link.outerWidth() / 2,
 				y: offset.top + $link.outerHeight() / 2,
-				transition: $link.jqmData( "transition" ),
-				positionTo: $link.jqmData( "position-to" )
+				transition: $link[ 0 ].getAttribute( "data-" + $.mobile.ns + "transition" ),
+				positionTo: $link[ 0 ].getAttribute( "data-" + $.mobile.ns + "position-to" )
 			});
 		}
 
