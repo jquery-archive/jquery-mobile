@@ -26,25 +26,26 @@ define( [ "jquery",
 			var $el = this.element,
 				inner = $( "<div class='ui-controlgroup-controls'></div>" ),
 				grouplegend = $el.children( "legend" ),
-				self = this;
+				o = this.options;
 
 			// Apply the proto
 			$el.wrapInner( inner );
 			if ( grouplegend.length ) {
 				$( "<div role='heading' class='ui-controlgroup-label'></div>" ).append( grouplegend ).insertBefore( $el.children( 0 ) );
 			}
-			$el.addClass( "ui-corner-all ui-controlgroup" );
+			$el.addClass( "ui-controlgroup" );
 
 			$.extend( this, {
 				_initialRefresh: true
 			});
 
-			$.each( this.options, function( key, value ) {
-				// Cause initial options to be applied by their handler by temporarily setting the option to undefined
-				// - the handler then sets it to the initial value
-				self.options[ key ] = undefined;
-				self._setOption( key, value, true );
-			});
+			// This duplicates the code from the various setters below for better
+			// performance. It must be kept in sync with those setters.
+			$el
+				.addClass( "ui-controlgroup-" + o.type )
+				.toggleClass( "ui-corner-all", o.corners )
+				.toggleClass( "ui-shadow", o.shadow )
+				.toggleClass( "ui-mini", o.mini );
 		},
 
 		_init: function() {
@@ -66,9 +67,7 @@ define( [ "jquery",
 			this.element
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
 				.addClass( "ui-controlgroup-" + value );
-			if (!this._initialRefresh) {
-				this.refresh();
-			}
+			this.refresh();
 		},
 
 		_setCorners: function( value ) {
