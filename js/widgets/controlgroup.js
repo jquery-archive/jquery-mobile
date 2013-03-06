@@ -101,14 +101,10 @@ define( [ "jquery",
 	// correct order when their correct enhancement depends on other widgets in
 	// the page being correctly enhanced already.
 	//
-	// For now, we wait until dom-ready to attach the controlgroup's enhancement
-	// hook, because by that time, all the other widgets' enhancement hooks should
-	// already be in place, ensuring that all widgets that need to be grouped will
-	// already have been enhanced by the time the controlgroup is created.
-	$( function() {
-		$.mobile.document.bind( "pagecreate create", function( e )  {
-			$.mobile.controlgroup.prototype.enhanceWithin( e.target, true );
-		});
+	// Dom ready was insufficient for preventing timing issues, use the page init
+	// event to run this widget after all else. Widget registry incoming.
+	$.mobile.document.bind( "pageinit create", function( e )  {
+		$.mobile.controlgroup.prototype.enhanceWithin( e.target, true );
 	});
 })(jQuery);
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
