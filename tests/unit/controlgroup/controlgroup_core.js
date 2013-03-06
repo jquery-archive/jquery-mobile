@@ -1,6 +1,10 @@
 /*
- * mobile checkboxradio unit tests
+ * mobile controlgroup unit tests
  */
+
+// delay the start to prevent the tests running before enhancement has completed
+$.testHelper.delayStart();
+
 (function($){
 	module( 'vertical controlgroup, no refresh' , {
 		setup: function() {
@@ -10,7 +14,9 @@
 
 	test( "vertical controlgroup classes", function() {
 		var buttons = this.vcontrolgroup.find( ".ui-btn" ),
-			middlebuttons = buttons.filter(function(index) { return index > 0 && index < (length-1)}),
+			middlebuttons = buttons.filter(function(index) {
+				return index > 0 && index < (length-1);
+			}),
 			length = buttons.length;
 
 		ok( buttons.first().hasClass( "ui-first-child" ), "first button should have class 'ui-first-child'" );
