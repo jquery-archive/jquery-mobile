@@ -3,7 +3,7 @@
 //>>label: Page Sections
 //>>group: Core
 
-define( [ "jquery", "./page", "../jquery.mobile.core" ], function( jQuery ) {
+define( [ "jquery", "./page", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -18,7 +18,12 @@ $.mobile.page.prototype.options.contentTheme = null;
 //      which expects .ui-footer top be applied in its gigantic selector
 // TODO remove the buttonMarkup giant selector and move it to the various modules
 //      on which it depends
-$.mobile.document.bind( "pagecreate", function( e ) {
+$.mobile.addEnhancementHook( "mobile-pageSections", {}, function( e ) {
+
+	if ( e.type !== "pagecreate" ) {
+		return;
+	}
+
 	var $page = $( e.target ),
 		o = $page.data( "mobile-page" ).options,
 		attrPrefix = "data-" + $.mobile.ns,
