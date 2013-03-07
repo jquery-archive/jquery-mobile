@@ -10,14 +10,6 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 var cbs = [],
 	deps = {},
 	doc = $( document ),
-	bindOne = function( fullName, cb ) {
-//		console.log( "<Binding " + fullName + ">" );
-//		doc.bind( "pagecreate create", function() {
-		cbs.push( function() {
-//			console.log( "<Running " + fullName + ">" );
-			cb.apply( this, arguments );
-		});
-	},
 	addWidget = function( fullName ) {
 		var idx,
 			depinfo = deps[ fullName ];
@@ -27,7 +19,7 @@ var cbs = [],
 				addWidget( depinfo.deps[ idx ] );
 			}
 			if ( depinfo.cb ) {
-				bindOne( fullName, depinfo.cb );
+				cbs.push( depinfo.cb );
 				depinfo.cb = undefined;
 			}
 		}
@@ -56,7 +48,6 @@ doc.bind( "pagecreate create", function() {
 doc.on( "mobileinit", function() {
 	var idx;
 
-//	console.log( "" );
 	for ( idx in deps ) {
 		addWidget( idx );
 	}
