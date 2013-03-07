@@ -49,8 +49,8 @@ $( document ).on( "pageinit", function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
-		str = ( words[1] || "Final" ),
-		html = "Version " + ver;
+		str = words[1] || "",
+		text = ver;
 
 	if ( str.indexOf( "rc" ) == -1 ) {
 		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
@@ -59,10 +59,11 @@ $( document ).on( "pageinit", function() {
 	}
 
 	if ( $.mobile.version && str ) {
-		html += " " + str;
+		text += " " + str;
 	}
 
-	$( ".jqm-version" ).html( html );
+	$( ".jqm-version" ).html( "Version " + text );
+	$( ".jqm-version-number" ).html( text );
 });
 
 
