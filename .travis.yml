@@ -6,6 +6,7 @@ before_script:
 branches:
   only:
     - master
+    - enhancement-order
 notifications:
   irc:
     channels:
