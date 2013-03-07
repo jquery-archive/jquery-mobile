@@ -6,6 +6,7 @@ before_script:
 branches:
   only:
     - master
+    - 1.3-stable
 notifications:
   irc:
     channels:
