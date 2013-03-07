@@ -270,7 +270,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 	});
 
 	//auto self-init widgets
-	$.mobile.addEnhancementHook( "mobile-fixedtoolbar", {}, function( e ) {
+	$.mobile.addEnhancementHook( "mobile-fixedtoolbar", { mobile: [ "pageSections" ] }, function( e ) {
 
 			// DEPRECATED in 1.1: support for data-fullscreen=true|false on the page element.
 			// This line ensures it still works, but we recommend moving the attribute to the toolbars themselves.
