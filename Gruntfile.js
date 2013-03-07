@@ -462,8 +462,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test", [ "config:dev", "requirejs", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
-	grunt.registerTask( "deploy:latest", [ "release:init", "release:check-git-status", "dist:release", "rsync:latest", "curl:latest" ] );
-	grunt.registerTask( "deploy:release", [ "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:_deploy", "release:set-next-version" ] );
+	grunt.registerTask( "release", [ "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:_deploy", "release:set-next-version" ] );
 	grunt.registerTask( "_deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
 
 	// Default grunt
