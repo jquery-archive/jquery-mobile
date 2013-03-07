@@ -8,9 +8,16 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 (function( $, undefined ) {
 
 var cbs = [],
-	widgetOrder = [],
 	deps = {},
 	doc = $( document ),
+	bindOne = function( fullName, cb ) {
+//		console.log( "<Binding " + fullName + ">" );
+//		doc.bind( "pagecreate create", function() {
+		cbs.push( function() {
+//			console.log( "<Running " + fullName + ">" );
+			cb.apply( this, arguments );
+		});
+	},
 	addWidget = function( fullName ) {
 		var idx,
 			depinfo = deps[ fullName ];
@@ -20,20 +27,11 @@ var cbs = [],
 				addWidget( depinfo.deps[ idx ] );
 			}
 			if ( depinfo.cb ) {
-				cbs.push( depinfo.cb );
-				widgetOrder.push( fullName );
+				bindOne( fullName, depinfo.cb );
 				depinfo.cb = undefined;
 			}
 		}
 	}
-
-doc.on( "pagecreate create", function() {
-	var idx;
-
-	for ( idx = 0 ; idx < cbs.length ; idx++ ) {
-		cbs[ idx ].apply( this, arguments );
-	}
-});
 
 $.mobile.addEnhancementHook = function( widget, widgetDeps, cb ) {
 	var flatDeps = [], ns, idx, prefix;
@@ -48,7 +46,17 @@ $.mobile.addEnhancementHook = function( widget, widgetDeps, cb ) {
 	deps[ widget ] = { deps: flatDeps, cb: cb };
 }
 
+doc.bind( "pagecreate create", function() {
+	var idx;
+	for ( idx = 0 ; idx < cbs.length ; idx++ ) {
+		cbs[ idx ].apply( this, arguments );
+	}
+});
+
 doc.on( "mobileinit", function() {
+	var idx;
+
+//	console.log( "" );
 	for ( idx in deps ) {
 		addWidget( idx );
 	}
