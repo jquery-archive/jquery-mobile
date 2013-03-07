@@ -4,11 +4,11 @@
 //>>group: Utilities
 
 
-define( [ "jquery" ], function( jQuery ) {
+define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.addEnhancementHook( "mobile-links", {}, function( e ) {
 
 	//links within content areas, tests included with page
 	$( e.target )

@@ -9,7 +9,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "./reset" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -207,7 +207,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 }, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
+$.mobile.addEnhancementHook( "mobile-checkboxradio", {}, function( e ) {
 	$.mobile.checkboxradio.prototype.enhanceWithin( e.target, true );
 });
 

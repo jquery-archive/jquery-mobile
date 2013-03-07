@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.panel.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -459,7 +459,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.addEnhancementHook( "mobile-panel", {}, function( e ) {
 	$.mobile.panel.prototype.enhanceWithin( e.target );
 });
 

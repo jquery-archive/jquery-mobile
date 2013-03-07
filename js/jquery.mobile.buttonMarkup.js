@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse", "./jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -275,7 +275,7 @@ var attachEvents = function() {
 
 //links in bars, or those with  data-role become buttons
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
+$.mobile.addEnhancementHook( "mobile-buttonMarkup", {}, function( e ) {
 
 	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
 		.jqmEnhanceable()

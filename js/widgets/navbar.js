@@ -6,7 +6,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.grid" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.grid", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -57,7 +57,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
+$.mobile.addEnhancementHook( "mobile-navbar", {}, function( e ) {
 	$.mobile.navbar.prototype.enhanceWithin( e.target );
 });
 

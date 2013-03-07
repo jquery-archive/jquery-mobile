@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup"  ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.registry"  ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -157,7 +157,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
+$.mobile.addEnhancementHook( "mobile-button", {}, function( e ) {
 	$.mobile.button.prototype.enhanceWithin( e.target, true );
 });
 

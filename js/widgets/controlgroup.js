@@ -8,6 +8,7 @@
 define( [ "jquery",
 	"../jquery.mobile.buttonMarkup",
 	"./addFirstLastClasses",
+	"../jquery.mobile.registry",
 	"../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -97,13 +98,9 @@ define( [ "jquery",
 		}
 	}, $.mobile.behaviors.addFirstLastClasses ) );
 
-	// TODO: Implement a mechanism to allow widgets to become enhanced in the
-	// correct order when their correct enhancement depends on other widgets in
-	// the page being correctly enhanced already.
-	//
-	// Dom ready was insufficient for preventing timing issues, use the page init
-	// event to run this widget after all else. Widget registry incoming.
-	$.mobile.document.bind( "pageinit create", function( e )  {
+	$.mobile.addEnhancementHook( "mobile-controlgroup", {
+		mobile: [ "selectmenu", "button", "buttonMarkup", "checkboxradio" ]
+	}, function( e ) {
 		$.mobile.controlgroup.prototype.enhanceWithin( e.target, true );
 	});
 })(jQuery);

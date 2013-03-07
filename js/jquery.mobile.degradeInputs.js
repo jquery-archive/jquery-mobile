@@ -4,7 +4,7 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "./widgets/page" ], function( jQuery ) {
+define( [ "jquery", "./widgets/page", "./jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -24,9 +24,8 @@ $.mobile.page.prototype.options.degradeInputs = {
 	week: false
 };
 
-
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
+$.mobile.addEnhancementHook( "mobile-degradeInputs", {}, function( e ) {
 
 	var page = $.mobile.closestPageData( $( e.target ) ), options;
 
