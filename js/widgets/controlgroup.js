@@ -39,8 +39,8 @@ define( [ "jquery",
 				_initialRefresh: true
 			});
 
-			// This duplicates the code from the various setters below for better
-			// performance. It must be kept in sync with those setters.
+			// This duplicates the code from the various option setters below for
+			// better performance. It must be kept in sync with those setters.
 			$el
 				.addClass( "ui-controlgroup-" + o.type )
 				.toggleClass( "ui-corner-all", o.corners )
