@@ -11,6 +11,10 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
 	<script>
 		$(document).on("click", ".show-page-loading-msg", function() {
 			var $this = $( this ),
@@ -31,9 +35,6 @@
 			$.mobile.loading( 'hide' );
 		});
 	</script>
-</head>
-<body>
-<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
