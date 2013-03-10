@@ -219,7 +219,7 @@ define( [
 
 			// define the container for navigation event bindings
 			// TODO this would be nice at the the mobile widget level
-			this.options.container = this.options.container || $.mobile.pageContainer;
+			this.options.container = this.options.container || $.mobile.pageContainer || thisPage;
 
 			// Apply the proto
 			thisPage.append( ui.screen );
@@ -846,7 +846,7 @@ define( [
 			}
 
 			// swallow the the initial navigation event, and bind for the next
-			$(window).one( "beforenavigate", function( e ) {
+			$.mobile.window.one( "beforenavigate", function( e ) {
 				e.preventDefault();
 				self._open( options );
 				self._bindContainerClose();
