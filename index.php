@@ -18,21 +18,9 @@
     <script src="js/"></script>
     <script>
 		$( document ).on( "pageshow", function(){
-			$( "p.message" ).addClass( "show" );
+			$( "p.message" ).hide().delay( 1500 ).show( "fast" );
 		});
 	</script>
-    <style>
-		p.message {
-			opacity: 0;
-			-webkit-transition: opacity 250ms ease 2s;
-			-moz-transition: opacity 250ms ease 2s;
-			-o-transition: opacity 250ms ease 2s;
-			transition: opacity 250ms ease 2s;
-		}
-		p.message.show {
-			opacity: 1;
-		}
-	</style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos">
