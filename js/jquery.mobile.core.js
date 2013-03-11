@@ -308,7 +308,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	};
 
 	// note that this helper doesn't attempt to handle the callback
-	// or setting of an html elements text, its only purpose is
+	// or setting of an html element's text, its only purpose is
 	// to return the html encoded version of the text in all cases. (thus the name)
 	$.fn.getEncodedText = function() {
 		return $( "<div/>" ).text( $( this ).text() ).html();
