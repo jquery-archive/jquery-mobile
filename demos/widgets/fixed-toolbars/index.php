@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Framework - Fixed Toolbars</title>
+	<title>Fixed Toolbars - jQuery Mobile Framework</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../favicon.ico">
@@ -48,9 +48,10 @@
 </code></pre>
 
 		<h2>Fullscreen Toolbars</h2>
+        
 		<p><a href="bars-fullscreen.php">Fullscreen</a> fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled. Instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions.</p>
 
-				<p>To enable this option on a fixed header or footer, add the <code>data-fullscreen</code> attribute to the element.</p>
+		<p>To enable this option on a fixed header or footer, add the <code>data-fullscreen</code> attribute to the element.</p>
 
 <pre><code>
 &lt;div data-role=&quot;header&quot; data-position=&quot;fixed&quot; data-fullscreen=&quot;true&quot;&gt;
@@ -93,92 +94,20 @@
 
 		<p>While we will continue to try to find ways to mitigate these bugs as best we can, we currently advise against implementing fixed toolbars containing complicated user styles and form elements without extensive testing in all versions of Android's native browser.</p>
 
-<div class="ui-body ui-body-e">
 		<h2>No longer supported: touchOverflowEnabled</h2>
 
 		<p>Prior to jQuery Mobile 1.1, true fixed toolbar support was contingent on native browser support for the CSS property <code>overflow-scrolling: touch</code>, which is currently only supported in iOS5. As of version 1.1, jQuery Mobile no longer uses this CSS property at all. We've removed all internal usage of this property in the framework, but we've left it defined globally on the $.mobile object to reduce the risk that its removal will cause trouble with existing applications. This property is flagged for removal, so please update your code to no longer use it. The support test for this property, however, remains defined under <code>$.support</code> and we have no plans to remove that test at this time. </p>
-</div>
-		<hr />
 
-		<h3>The rest of the page is just sample content to make the page very long</h3>
 
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+    </div><!-- /content -->
+    
+    <div data-role="footer" data-theme="f" data-position="fixed">
+    	<h1>Fixed Footer</h1>
+    </div>
 
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
+<?php include( '../../global-nav.php' ); ?>
 
-			<h3>And an inset list</h3>
+</div><!-- /page -->
 
-					<ul data-role="listview" data-inset="true">
-						<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
-						<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
-						<li><a href="index.html">Drafts <span class="ui-li-count">4</span></a></li>
-						<li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
-						<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
-					</ul>
-
-			<br />
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
-
-			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
-
-			<h3>Embedded form</h3>
-
-			<form action="#" method="get">
-
-				<div data-role="fieldcontain">
-		         <label for="name">Text Input:</label>
-		         <input type="text" name="name" id="name" value=""  />
-				</div>
-
-				<div data-role="fieldcontain">
-				<label for="textarea">Textarea:</label>
-				<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
-				</div>
-
-				<div data-role="fieldcontain">
-					<label for="slider2">Flip switch:</label>
-					<select name="slider2" id="slider2" data-role="slider">
-						<option value="off">Off</option>
-						<option value="on">On</option>
-					</select>
-				</div>
-
-				<div data-role="fieldcontain">
-					<label for="slider">Slider:</label>
-				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
-				</div>
-
-				<div data-role="fieldcontain">
-					<label for="select-choice-1" class="select">Choose shipping method:</label>
-					<select name="select-choice-1" id="select-choice-1">
-						<option value="standard">Standard: 7 day</option>
-						<option value="rush">Rush: 3 days</option>
-						<option value="express">Express: next day</option>
-						<option value="overnight">Overnight</option>
-					</select>
-				</div>
-
-			<div class="ui-body ui-body-b">
-			<fieldset class="ui-grid-a">
-					<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
-					<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>
-		    </fieldset>
-			</div>
-		</form>
-
-		<h3>A bit more text</h3>
-
-		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.Donec non enim in turpis pulvinar facilisis. Ut felis.</p>
-
-			</div><!-- /content -->
-
-			<div data-role="footer" data-theme="f" data-position="fixed">
-					<h1>Fixed Footer</h1>
-			</div>
-
-		<?php include( '../../global-nav.php' ); ?>
-
-			</div><!-- /page -->
-
-			</body>
-			</html>
+</body>
+</html>

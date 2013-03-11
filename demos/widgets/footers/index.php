@@ -82,7 +82,7 @@
 			</div>
 
 					<h2>Fixed &amp; Persistent footers</h2>
-					<p>In situations where the footer is a global navigation element, you may want it to appear <a href="../headers/bars-fixed.html">fixed</a> so it doesn't scroll out of view. It's also possible to make a fixed toolbar <a href="footer-persist-a.html">persistent</a> so it appears to not move between <a href="../transitions/" data-ajax="false">page transitions</a>. This can be accomplished by using the persistent footer feature included in jQuery Mobile.</p>
+					<p>In situations where the footer is a global navigation element, you may want it to appear <a href="../fixed-toolbars/">fixed</a> so it doesn't scroll out of view. It's also possible to make a fixed toolbar <a href="../fixed-toolbars/footer-persist-a.php">persistent</a> so it appears to not move between <a href="../transitions/" data-ajax="false">page transitions</a>. This can be accomplished by using the persistent footer feature included in jQuery Mobile.</p>
 
 					<p>To make a footer persistent between transitions, add the <code>data-id</code> attribute to the footer of all relevant pages and use the same <code>id</code> value for each. For example, by adding <code>data-id="myfooter"</code> to the current page and the target page, the framework will keep the footer anchors in the same spot during the page animation. <strong>This effect will only work correctly if the header and footer toolbars are set to <code>data-position="fixed"</code> so they are in view during the transition.</strong></p>
 

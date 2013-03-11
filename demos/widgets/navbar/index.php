@@ -121,7 +121,7 @@
 			<p>If you want to add a navbar to the top of the page, you can still have a page title and buttons. Just add the navbar container inside the header block, right after the title and buttons in the source order.</p>
 
 			<div data-demo-html="true">
-				<div data-role="header">
+				<div data-role="header" style="overflow:hidden;">
 					<h1>I'm a header</h1>
 					<a href="#" data-icon="gear" class="ui-btn-right">Options</a>
 					<div data-role="navbar">
@@ -139,7 +139,8 @@
 			<p>If you want to add a navbar to the bottom of the page so it acts more like a tab bar, simply wrap the navbar in a container with a <code>data-role="footer"</code></p>
 
 			<div data-demo-html="true">
-				<div data-role="footer">
+				<div data-role="footer" style="overflow:hidden;">
+					<h4 style="text-align:center;">I'm the footer</h4>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#">One</a></li>
@@ -147,13 +148,12 @@
 							<li><a href="#">Three</a></li>
 						</ul>
 					</div><!-- /navbar -->
-					<p style="text-align:center;">I'm the footer</p>
 				</div><!-- /footer -->
 			</div><!--/demo-html -->
 
 			<h2>Persistent</h2>
 
-			The <a href="footer-persist-a.php">persistent navbar</a> variation is designed to work more like a tab bar that stays fixed as you navigate across pages. To set an item to the active state upon initialization of the navbar, add <code>class="ui-btn-active"</code> to the corresponding anchor in your markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.
+			<p>The <a href="../fixed-toolbars/footer-persist-a.php">persistent navbar</a> variation is designed to work more like a tab bar that stays fixed as you navigate across pages. To set an item to the active state upon initialization of the navbar, add <code>class="ui-btn-active"</code> to the corresponding anchor in your markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.</p>
 
 			<h2>Icons</h2>
 

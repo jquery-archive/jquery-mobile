@@ -22,7 +22,7 @@
         <?php include( '../../search.php' ); ?>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div data-role="content" class="jqm-content jqm-fullwidth">
 
 			<ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="false">
 				<li><a href="#">
