@@ -270,10 +270,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 	});
 
 	//auto self-init widgets
-	// NOTE: The implementation via $.mobile.enhancer removes support for
+	// NOTE: The implementation via $.mobile._enhancer removes support for
 	// data-fullscreen=true|false on the page element. This support was
 	// DEPRECATED in 1.1.
-	$.mobile.enhancer.add( "mobile.fixedtoolbar", { dependencies: [ "mobile.pagesections" ] } );
+	$.mobile._enhancer.add( "mobile.fixedtoolbar", { dependencies: [ "mobile.pagesections" ] } );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

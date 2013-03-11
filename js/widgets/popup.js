@@ -915,7 +915,7 @@ define( [
 	});
 
 	//auto self-init widgets
-	$.mobile.enhancer.add( "mobile.popup" );
+	$.mobile._enhancer.add( "mobile.popup" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

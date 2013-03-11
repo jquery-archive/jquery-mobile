@@ -275,7 +275,7 @@ var attachEvents = function() {
 
 //links in bars, or those with data-role become buttons
 //auto self-init widgets
-$.mobile.enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
+$.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
 
 	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", target )
 		.jqmEnhanceable()

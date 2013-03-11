@@ -8,7 +8,7 @@ define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile.enhancer.add( "mobile.links", undefined, function( target ) {
+$.mobile._enhancer.add( "mobile.links", undefined, function( target ) {
 
 	//links within content areas, tests included with page
 	$( target )

@@ -30,7 +30,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		});
 
 		// enhance the page
-		$.mobile.enhancer.enhance( this.element[ 0 ] );
+		$.mobile._enhancer.enhance( this.element[ 0 ] );
 	},
 
 	_handlePageBeforeShow: function( e ) {

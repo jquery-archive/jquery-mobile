@@ -90,11 +90,11 @@ $.extend( Enhancer.prototype, {
 	}
 });
 
-$.mobile.enhancer = new Enhancer();
+$.mobile._enhancer = new Enhancer();
 
 // Support triggering "create" on an element
 doc.bind( "create", function( e ) {
-	$.mobile.enhancer.enhance( e.target );
+	$.mobile._enhancer.enhance( e.target );
 });
 
 })( jQuery );

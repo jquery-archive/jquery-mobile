@@ -98,7 +98,7 @@ define( [ "jquery",
 		}
 	}, $.mobile.behaviors.addFirstLastClasses ) );
 
-	$.mobile.enhancer.add( "mobile.controlgroup", {
+	$.mobile._enhancer.add( "mobile.controlgroup", {
 		dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.buttonmarkup", "mobile.checkboxradio" ]
 	});
 })(jQuery);

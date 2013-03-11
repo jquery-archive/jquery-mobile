@@ -25,7 +25,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 };
 
 //auto self-init widgets
-$.mobile.enhancer.add( "mobile.degradeinputs", undefined, function( target ) {
+$.mobile._enhancer.add( "mobile.degradeinputs", undefined, function( target ) {
 
 	var $target = $( target ),
 		page = $.mobile.closestPageData( $target ), options;
