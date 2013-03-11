@@ -32,7 +32,7 @@
 
 <li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listviews</a></li>
 
-<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/">Loader overlay</a></li>
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Loader overlay</a></li>
 
 <li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Navbar</a></li>
 
