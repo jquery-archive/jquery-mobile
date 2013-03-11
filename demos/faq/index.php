@@ -16,7 +16,7 @@
 <div data-role="page" class="jqm-demos jqm-demos-index">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
+		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
 		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>
@@ -28,7 +28,7 @@
 
         <p class="jqm-intro">We've collected common questions and solutions to help get you up to speed and solve tricky issues when working with jQuery Mobile.</p>
 
-        <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search questions..." data-global-nav="docs" class="jqm-list">
+        <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search questions..." data-global-nav="demos" class="jqm-list">
         	<?php include( '../nav-faq.php' ); ?>
         </ul>
 

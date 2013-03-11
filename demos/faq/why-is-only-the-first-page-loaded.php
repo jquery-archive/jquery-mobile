@@ -16,7 +16,7 @@
 <div data-role="page" class="jqm-demos jqm-faq">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
+		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
 		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
 		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
 		<?php include( '../search.php' ); ?>

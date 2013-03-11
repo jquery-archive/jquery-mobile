@@ -49,7 +49,7 @@
 
 		<p class="jqm-intro">Test drive every component in the library, and easily build pages by copying and pasting the markup configuration you need.</p>
 
-		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="" class="jqm-list">
+		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list">
         	<?php include( 'nav-widgets.php' ); ?>
         </ul>
 
