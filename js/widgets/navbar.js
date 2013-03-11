@@ -57,9 +57,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-navbar", {}, function( e ) {
-	$.mobile.navbar.prototype.enhanceWithin( e.target );
-});
+$.mobile.enhancer.add( "mobile.navbar" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

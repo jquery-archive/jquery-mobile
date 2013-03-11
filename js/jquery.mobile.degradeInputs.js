@@ -25,9 +25,10 @@ $.mobile.page.prototype.options.degradeInputs = {
 };
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-degradeInputs", {}, function( e ) {
+$.mobile.enhancer.add( "mobile.degradeinputs", undefined, function( target ) {
 
-	var page = $.mobile.closestPageData( $( e.target ) ), options;
+	var $target = $( target ),
+		page = $.mobile.closestPageData( $target ), options;
 
 	if ( !page ) {
 		return;
@@ -36,7 +37,7 @@ $.mobile.addEnhancementHook( "mobile-degradeInputs", {}, function( e ) {
 	options = page.options;
 
 	// degrade inputs to avoid poorly implemented native functionality
-	$( e.target ).find( "input" ).not( page.keepNativeSelector() ).each(function() {
+	$target.find( "input" ).not( page.keepNativeSelector() ).each(function() {
 		var $this = $( this ),
 			type = this.getAttribute( "type" ),
 			optType = options.degradeInputs[ type ] || "text";

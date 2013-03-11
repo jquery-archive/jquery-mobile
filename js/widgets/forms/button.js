@@ -157,9 +157,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-button", {}, function( e ) {
-	$.mobile.button.prototype.enhanceWithin( e.target, true );
-});
+$.mobile.enhancer.add( "mobile.button" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -198,9 +198,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 $.widget( "mobile.rangeslider", $.mobile.rangeslider, $.mobile.behaviors.formReset );
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-rangeslider", {}, function( e ) {
-	$.mobile.rangeslider.prototype.enhanceWithin( e.target, true );
-});
+$.mobile.enhancer.add( "mobile.rangeslider", { dependencies: [ "mobile.slider" ] } );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

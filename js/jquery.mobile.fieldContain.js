@@ -19,8 +19,8 @@ $.fn.fieldcontain = function( options ) {
 };
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-fieldContain", {}, function( e ) {
-	$( ":jqmData(role='fieldcontain')", e.target ).jqmEnhanceable().fieldcontain();
+$.mobile.enhancer.add( "mobile.fieldcontain", undefined, function( target ) {
+	$( ":jqmData(role='fieldcontain')", target ).jqmEnhanceable().fieldcontain();
 });
 
 })( jQuery );

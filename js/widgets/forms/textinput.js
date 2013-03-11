@@ -182,9 +182,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-textinput", {}, function( e ) {
-	$.mobile.textinput.prototype.enhanceWithin( e.target, true );
-});
+$.mobile.enhancer.add( "mobile.textinput" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

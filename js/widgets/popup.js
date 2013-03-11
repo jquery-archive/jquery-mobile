@@ -914,10 +914,8 @@ define( [
 		}
 	});
 
-	$.mobile.addEnhancementHook( "mobile-popup", {}, function( e )  {
-		$.mobile.popup.prototype.enhanceWithin( e.target, true );
-	});
-
+	//auto self-init widgets
+	$.mobile.enhancer.add( "mobile.popup" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

@@ -459,9 +459,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-panel", {}, function( e ) {
-	$.mobile.panel.prototype.enhanceWithin( e.target );
-});
+$.mobile.enhancer.add( "mobile.panel" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

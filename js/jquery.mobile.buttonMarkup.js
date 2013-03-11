@@ -273,11 +273,11 @@ var attachEvents = function() {
 	attachEvents = null;
 };
 
-//links in bars, or those with  data-role become buttons
+//links in bars, or those with data-role become buttons
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-buttonMarkup", {}, function( e ) {
+$.mobile.enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
 
-	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
+	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", target )
 		.jqmEnhanceable()
 		.not( "button, input, .ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.buttonMarkup();

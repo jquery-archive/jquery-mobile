@@ -98,10 +98,8 @@ define( [ "jquery",
 		}
 	}, $.mobile.behaviors.addFirstLastClasses ) );
 
-	$.mobile.addEnhancementHook( "mobile-controlgroup", {
-		mobile: [ "selectmenu", "button", "buttonMarkup", "checkboxradio" ]
-	}, function( e ) {
-		$.mobile.controlgroup.prototype.enhanceWithin( e.target, true );
+	$.mobile.enhancer.add( "mobile.controlgroup", {
+		dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.buttonmarkup", "mobile.checkboxradio" ]
 	});
 })(jQuery);
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

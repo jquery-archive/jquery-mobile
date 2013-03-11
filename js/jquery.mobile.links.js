@@ -8,10 +8,10 @@ define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile.addEnhancementHook( "mobile-links", {}, function( e ) {
+$.mobile.enhancer.add( "mobile.links", undefined, function( target ) {
 
 	//links within content areas, tests included with page
-	$( e.target )
+	$( target )
 		.find( "a" )
 		.jqmEnhanceable()
 		.not( ".ui-btn, .ui-link-inherit, :jqmData(role='none'), :jqmData(role='nojs')" )

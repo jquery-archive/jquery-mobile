@@ -505,9 +505,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 }, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-slider", {}, function( e ) {
-	$.mobile.slider.prototype.enhanceWithin( e.target, true );
-});
+$.mobile.enhancer.add( "mobile.slider" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

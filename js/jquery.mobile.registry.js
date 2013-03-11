@@ -7,54 +7,97 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var cbs = [],
-	deps = {},
-	doc = $( document ),
-	addWidget = function( fullName ) {
-		var idx,
-			depinfo = deps[ fullName ];
+var doc = $( document );
 
-		if ( depinfo ) {
-			for ( idx in depinfo.deps ) {
-				addWidget( depinfo.deps[ idx ] );
-			}
-			if ( depinfo.cb ) {
-				cbs.push( depinfo.cb );
-				depinfo.cb = undefined;
-			}
-		}
-	}
-
-$.mobile.addEnhancementHook = function( widget, widgetDeps, cb ) {
-	var flatDeps = [], ns, idx, prefix;
-
-	for ( ns in widgetDeps ) {
-		prefix = ns + "-";
-		for ( idx in widgetDeps[ ns ] ) {
-			flatDeps.push( prefix + widgetDeps[ ns ][ idx ] );
-		}
-	}
-
-	deps[ widget ] = { deps: flatDeps, cb: cb };
+function Enhancer() {
+	this._callbacks = [],
+	this._dependencies = {},
+	this._document = doc;
 }
+/*
+function callbackWrapper( widget, callback ) {
+	var ret = function( target ) {
+		console.log( "<Running " + widget + ">" );
+		callback( target );
+	}
 
-doc.bind( "pagecreate create", function() {
-	var idx;
-	for ( idx = 0 ; idx < cbs.length ; idx++ ) {
-		cbs[ idx ].apply( this, arguments );
+	return ret;
+}
+*/
+$.extend( Enhancer.prototype, {
+	_addWidget: function( fullName ) {
+		var idx,
+			depinfo = this._dependencies[ fullName ];
+
+		if ( depinfo && !depinfo.added ) {
+			for ( idx in depinfo.deps ) {
+				this._addWidget( depinfo.deps[ idx ] );
+			}
+			this._callbacks.push( depinfo.callback );
+			depinfo.added = true;
+		}
+	},
+
+	_defaultCallback: function( widget ) {
+		var parts = widget.split( "." ),
+			ns = parts[ 0 ],
+			name = parts[ 1 ],
+			ret = function( targetEl ) {
+				$[ ns ][ name ].prototype.enhanceWithin( targetEl, true );
+			};
+
+		return ret;
+	},
+
+	add: function( widget, widgetDeps, callback ) {
+		if ( !widgetDeps ) {
+			widgetDeps = { dependencies: [] };
+		}
+
+		if ( !callback ) {
+			callback = this._defaultCallback( widget );
+		}
+
+//		callback = callbackWrapper( widget, callback );
+
+//		console.log( "<Binding " + widget + ">" );
+
+		this._dependencies[ widget ] = {
+			deps: widgetDeps.dependencies,
+			callback: callback
+		};
+
+		return this;
+	},
+
+	enhance: function( targetEl ) {
+		var idx,
+			deps = this._dependencies,
+			cbs = this._callbacks;
+
+		if ( deps ) {
+			for ( idx in deps ) {
+				this._addWidget( idx );
+			}
+			this._dependencies = null;
+		}
+
+		for ( idx in cbs ) {
+			cbs[ idx ]( targetEl );
+		}
+
+		return this;
 	}
 });
 
-doc.on( "mobileinit", function() {
-	var idx;
+$.mobile.enhancer = new Enhancer();
 
-	for ( idx in deps ) {
-		addWidget( idx );
-	}
+// Support triggering "create" on an element
+doc.bind( "create", function( e ) {
+	$.mobile.enhancer.enhance( e.target );
 });
 
 })( jQuery );
-
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
 //>>excludeEnd("jqmBuildExclude");

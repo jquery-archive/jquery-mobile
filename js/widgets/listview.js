@@ -381,9 +381,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-listview", {}, function( e ) {
-	$.mobile.listview.prototype.enhanceWithin( e.target );
-});
+$.mobile.enhancer.add( "mobile.listview" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -66,9 +66,7 @@ $.widget( "mobile.table", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-table", {}, function( e ) {
-	$.mobile.table.prototype.enhanceWithin( e.target );
-});
+$.mobile.enhancer.add( "mobile.table" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

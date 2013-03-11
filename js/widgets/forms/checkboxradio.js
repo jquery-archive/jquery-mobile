@@ -207,9 +207,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 }, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-checkboxradio", {}, function( e ) {
-	$.mobile.checkboxradio.prototype.enhanceWithin( e.target, true );
-});
+$.mobile.enhancer.add( "mobile.checkboxradio" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

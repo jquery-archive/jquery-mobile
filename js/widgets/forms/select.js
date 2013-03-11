@@ -287,9 +287,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 }, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-selectmenu", {}, function( e ) {
-	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
-});
+$.mobile.enhancer.add( "mobile.selectmenu" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

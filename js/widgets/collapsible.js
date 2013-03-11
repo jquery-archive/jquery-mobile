@@ -158,9 +158,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.addEnhancementHook( "mobile-collapsible", {}, function( e ) {
-	$.mobile.collapsible.prototype.enhanceWithin( e.target );
-});
+$.mobile.enhancer.add( "mobile.collapsible" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
