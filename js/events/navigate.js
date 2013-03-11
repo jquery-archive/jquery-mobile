@@ -24,7 +24,7 @@ define([
 		teardown: function() {
 			$win.off( "navigate", dummyFnToInitNavigate );
 		}
-	}
+	};
 
 	$.event.special.navigate = self = {
 		bound: false,
