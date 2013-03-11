@@ -122,6 +122,8 @@
 &lt;/html&gt;
 </code></pre>
 
+		<a href="page-template.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">View page template</a>
+
 		<h2>Multi-page template structure</h2>
 
 			<p>A single HTML document can contain multiple "pages" that are loaded together by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. Each "page" block needs a unique id (<code>id="foo"</code>) that will be used to link internally between "pages" (<code>href="#foo"</code>). When a link is clicked, the framework will look for an internal "page" with the id and transition it into view.</p>
@@ -167,8 +169,7 @@
 &lt;/body&gt;
 </code></pre>
 
-		<a href="multipage-template.php" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">View multi-page template</a>
-		<p> </p>
+		<a href="multipage-template.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">View multi-page template</a>
 
 		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the AJAX "pages", it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a "page" with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
 
