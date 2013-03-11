@@ -368,7 +368,7 @@ module.exports = function( grunt ) {
 						if ( suites.length ) {
 							patterns = [];
 							suites.forEach( function( unit ) {
-								patterns = patterns.concat( [ "tests/unit/" + unit + "/index.html", "tests/unit/" + unit + "/*/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
+								patterns = patterns.concat( [ "tests/unit/" + unit, "tests/unit/" + unit + "/index.html", "tests/unit/" + unit + "/*/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
 							});
 						} else {
 							patterns = [ "tests/unit/*/index.html", "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
