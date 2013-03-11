@@ -353,14 +353,14 @@ h2.jqm-home-widget {
 .jqm-demos-index .jqm-content p.jqm-intro {
 	border: none;
 }
-.jqm-content ul:not(.ui-listview),
-.jqm-content ul:not(.ui-listview) li {
+.jqm-content > ul:not(.ui-listview),
+.jqm-content > ul:not(.ui-listview) li {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400; 
 	font-size: 0.95em;
 	line-height: 1.7;
 }
-.jqm-content ul:not(.ui-listview) {
+.jqm-content > ul:not(.ui-listview) {
 	margin: 1em 0;
 	padding-left: 1.3em;
 }
@@ -385,7 +385,7 @@ h2.jqm-home-widget {
 		padding: 15px;
 	}
 
-	.jqm-content p {
+	.jqm-content > p {
 		line-height: 1.5;
 	}
 	.jqm-demos-home .jqm-content p.jqm-intro {

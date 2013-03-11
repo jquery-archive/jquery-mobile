@@ -3,26 +3,26 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Framework - Persistent footer D</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css"/>
-
-	<script src="../js/jquery.js"></script>
-	<script src="../_assets/js/jqm-demos.js"></script>
-	<script src="../js/"></script>
-
+	<title>Navbar - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../_assets/js/"></script>
+	<script src="../../../js/"></script>
 </head>
 <body>
+<div data-role="page" class="jqm-demos">
 
-	<div data-role="page" class="type-interior">
+    <div data-role="header" class="jqm-header" data-position="fixed">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+        <?php include( '../../search.php' ); ?>
+    </div><!-- /header -->
 
-		<div data-role="header" data-theme="f" data-position="fixed" data-id="foo">
-		<h1>Inbox</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
-		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
-	</div>
-
-	<div data-role="content" class="jqm-content">
+    <div data-role="content" class="jqm-content jqm-fullwidth">
 
 		<ul data-role="listview" data-theme="d" data-dividertheme="e" data-filter="true" data-filter-theme="d" data-filter-placeholder="Search messages...">
 			<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
@@ -84,15 +84,16 @@
 		<div data-role="footer" data-id="foo1" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="footer-persist-a.html" data-prefetch="true" data-transition="slideup">Info</a></li>
-					<li><a href="footer-persist-b.html" data-prefetch="true">Friends</a></li>
-					<li><a href="footer-persist-c.html" data-prefetch="true">Albums</a></li>
-					<li><a href="footer-persist-d.html" data-prefetch="true" class="ui-btn-active ui-state-persist">Emails</a></li>
+					<li><a href="footer-persist-a.php" data-prefetch="true" data-transition="none">Info</a></li>
+					<li><a href="footer-persist-b.php" data-prefetch="true" data-transition="none">Friends</a></li>
+					<li><a href="footer-persist-c.php" data-prefetch="true" data-transition="none">Albums</a></li>
+					<li><a href="footer-persist-d.php" data-prefetch="true" data-transition="none" class="ui-btn-active ui-state-persist">Emails</a></li>
 				</ul>
 			</div><!-- /navbar -->
 		</div><!-- /footer -->
 
-		</div><!-- /page -->
+		<?php include( '../../global-nav.php' ); ?>
 
+		</div><!-- /page -->
 		</body>
 		</html>
