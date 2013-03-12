@@ -17,8 +17,8 @@
 
 	var keypressTest = function(opts){
 		var slider = $(opts.selector),
-		    val = window.parseFloat(slider.val()),
-				handle = slider.siblings('.ui-slider-track').find('.ui-slider-handle');
+			val = window.parseFloat(slider.val()),
+			handle = slider.siblings('.ui-slider-track').find('.ui-slider-handle');
 
 		expect( opts.keyCodes.length );
 
@@ -374,24 +374,45 @@
 		], 500);
 	});
 
-	test( "drag should start only when clicked with left button", function(){
-		expect(1);
+	asyncTest( "drag should start only when clicked with left button", function(){
+		expect( 3 );
+
 		var control = $( "#mousedown-which-events" ),
 			widget = control.data( "mobile-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
-			startFunc = function() {
-				ok( true, "drag started" );
-			},
+			eventNs = ".dragShouldStartOnlyWhenClickedWithLeftButton",
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
-		control.bind( 'slidestart', startFunc);
-		event.which = 1; //left button
-		slider.trigger(event);
-		event.which = 2; //middle button
-		slider.trigger(event);
-		event.which = 3; //right button
-		slider.trigger(event);
-		control.unbind( 'start', startFunc);
+
+		$.testHelper.detailedEventCascade( [
+			function() {
+				event.which = 1;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "0" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon left button press" );
+				event.which = 2;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "1" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon middle button press" );
+				event.which = 3;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "2" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon right button press" );
+				start();
+			}
+		]);
 	});
 
 	asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events", function() {
