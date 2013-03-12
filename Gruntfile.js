@@ -363,7 +363,7 @@ module.exports = function( grunt ) {
 							onePath = "",
 							uniquePaths = [],
 							versionedPaths = [],
-							jQueries = grunt.util._.without( ( grunt.option( "jqueries" ) || "" ).split( "," ), "" );
+							jQueries = grunt.util._.without( ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ), "" );
 
 						if ( suites.length ) {
 							patterns = [];
