@@ -106,11 +106,8 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	_setOption: function( key, value ) {
 		if ( key === "closeBtn" ) {
 			this._setCloseBtn( value );
-			this._super( key, value );
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "close-btn", value );
-		} else {
-			this._super( key, value );
 		}
+		this._super( key, value );
 	},
 
 	// Close method goes back in history
