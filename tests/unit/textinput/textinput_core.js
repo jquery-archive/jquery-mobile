@@ -108,7 +108,7 @@
 		// If the pseudo-element exists, our height should be much larger
 		d = e.height() > h;
 
-		ok( !d, "native clear button is still visible" + d );
+		ok( !d, "native clear button is still visible" );
 	});
 
 })(jQuery);
