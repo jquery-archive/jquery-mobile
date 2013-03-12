@@ -361,7 +361,7 @@ module.exports = function( grunt ) {
 					urls: (function() {
 						// Find the test files
 						var suites = grunt.util._.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
-							patterns, paths,
+							patterns, paths, idx, onePath = "", uniquePaths = [],
 							versionedPaths = [],
 							jQueries = grunt.util._.without( ( grunt.option( "jqueries" ) || "" ).split( "," ), "" );
 
@@ -374,12 +374,18 @@ module.exports = function( grunt ) {
 							patterns = [ "tests/unit/*/index.html", "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
 						}
 
-						paths = grunt.file.expand( patterns )
-							.sort()
-							.map( function( path ) {
-								// Some of our tests (ie. navigation) don't like having the index.html too much
-								return path.replace( /\/\index.html$/, "/" );
-							});
+						paths = grunt.file.expand( patterns ).sort();
+						for ( idx in paths ) {
+							if ( onePath !== paths[ idx ] ) {
+								onePath = paths[ idx ];
+								uniquePaths.push( onePath );
+							}
+						}
+
+						uniquePaths.map( function( path ) {
+							// Some of our tests (ie. navigation) don't like having the index.html too much
+							return path.replace( /\/\index.html$/, "/" );
+						});
 
 						if ( jQueries.length ) {
 							paths.forEach( function( path ) {
