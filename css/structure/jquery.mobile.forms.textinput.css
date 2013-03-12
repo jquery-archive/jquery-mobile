@@ -26,6 +26,9 @@ input::-moz-placeholder, textarea::-moz-placeholder { color: #aaa; }
 /* Resolves issue #5131: Width of textinput depends on its type, for Android 4.1 */
 input[type=number]::-webkit-outer-spin-button { margin: 0; }
 
+/* Resolves issue #5756: Textinput in IE10 has a default clear icon */
+input[data-clear-btn=true]::-ms-clear { display: none; }
+
 @media all and (min-width: 28em){
 	.ui-field-contain label.ui-input-text { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
 	.ui-field-contain input.ui-input-text,
