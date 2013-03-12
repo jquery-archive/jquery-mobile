@@ -7,6 +7,11 @@ branches:
   only:
     - master
     - 1.3-stable
+env:
+  - JQUERIES=1.7.2
+  - JQUERIES=1.8.3
+  - JQUERIES=1.9.1
+  - JQUERIES=git
 notifications:
   irc:
     channels:
