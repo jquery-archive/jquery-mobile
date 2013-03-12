@@ -108,6 +108,8 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			this._setCloseBtn( value );
 			this._super( key, value );
 			this.element.attr( "data-" + ( $.mobile.ns || "" ) + "close-btn", value );
+		} else {
+			this._super( key, value );
 		}
 	},
 
