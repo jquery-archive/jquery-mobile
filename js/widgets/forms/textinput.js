@@ -178,6 +178,15 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 		$el.removeClass( "ui-disabled" );
 		return this._setOption( "disabled", false );
+	},
+	
+	refresh: function() {
+		var $el = this.element,
+			clearbtn = $el.parent().find(".ui-input-clear");
+		
+		setTimeout(function () {
+			clearbtn.toggleClass("ui-input-clear-hidden", !$el.val());
+		}, 0);
 	}
 });
 
