@@ -22,10 +22,17 @@
 	});
 
 	asyncTest( "The page should be enhanced correctly", function(){
-		setTimeout(function() {
-			ok($('#basic-linked-test .ui-li').length, ".ui-li classes added to li elements");
-			start();
-		}, 800);
+		expect( 1 );
+		$.testHelper.pageSequence([
+			function(){
+				$.mobile.changePage("#basic-linked-test");
+			},
+
+			function() {
+				ok($('#basic-linked-test .ui-li').length, ".ui-li classes added to li elements");
+				start();
+			}
+		]);
 	});
 
 	asyncTest( "Slides to the listview page when the li a is clicked", function() {
