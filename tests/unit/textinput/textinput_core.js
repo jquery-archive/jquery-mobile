@@ -89,5 +89,26 @@
 	test( "data-clear-btn does not add clear button to textarea", function() {
 		ok( ! $( "#textarea-clear-btn" ).next().is( "a.ui-input-clear" ), "data-clear-btn does not add clear button to textarea" );
 	});
-	
+
+	test( "data-clear-btn does not add native clear button to input button (IE10)", function() {
+		// Get an input element, initial height, and reserve d for height difference
+		var e = $( "input[data-clear-btn='true']" ),
+				h = e.height(), d;
+
+		e.addClass("msClear");
+		e.val("some text").focus();e.val("some text").focus();
+		// Avoid syntax errors
+		try {
+			document.styleSheets[0].addRule(".msClear::-ms-clear", "height: 100px");
+		} catch (o) {
+			ok( true, "browser does not have the native feature for a test");
+			return true;
+		}
+
+		// If the pseudo-element exists, our height should be much larger
+		d = e.height() > h;
+
+		ok( !d, "native clear button is still visible" );
+	});
+
 })(jQuery);
