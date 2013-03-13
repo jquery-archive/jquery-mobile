@@ -178,6 +178,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 		$el.removeClass( "ui-disabled" );
 		return this._setOption( "disabled", false );
+	},
+	
+	refresh: function() {
+		this.element.trigger("change"); 
 	}
 });
 
