@@ -90,7 +90,6 @@
                 <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="80">
             </div>
         </form>
-        </form>
         </div><!-- /demo-html -->
 
 		<div data-demo-html="true">
