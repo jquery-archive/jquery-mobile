@@ -748,6 +748,10 @@ define( [
 		_closePopup: function( e, data ) {
 			var parsedDst, toUrl, o = this.options, immediate = false;
 
+			if ( e && e.isDefaultPrevented() ) {
+				return;
+			}
+
 			// restore location on screen
 			window.scrollTo( 0, this._scrollTop );
 
@@ -771,7 +775,7 @@ define( [
 			}
 
 			// remove nav bindings
-			o.container.unbind( o.closeEvents );
+			$.mobile.window.off( o.closeEvents );
 			// unbind click handlers added when history is disabled
 			this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
 
@@ -782,8 +786,8 @@ define( [
 		// NOTE the pagebeforechange is bound to catch navigation events that don't
 		//      alter the url (eg, dialogs from popups)
 		_bindContainerClose: function() {
-			this.options.container
-				.one( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
+			$.mobile.window
+				.on( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
 		},
 
 		// TODO no clear deliniation of what should be here and
@@ -822,7 +826,7 @@ define( [
 			urlHistory = $.mobile.urlHistory;
 			hashkey = $.mobile.dialogHashKey;
 			activePage = $.mobile.activePage;
-			currentIsDialog = activePage.hasClass( "ui-dialog" );
+			currentIsDialog = ( activePage ? activePage.hasClass( "ui-dialog" ) : false );
 			this._myUrl = url = urlHistory.getActive().url;
 			hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog && ( urlHistory.activeIndex > 0 );
 
