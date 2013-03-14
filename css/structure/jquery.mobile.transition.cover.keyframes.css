@@ -1,0 +1,16 @@
+/* keyframes for coverstay from cover */
+@-webkit-keyframes coverstay {
+    from { -webkit-transform: translateX(0); }
+    to { -webkit-transform: translateX(0); }
+}
+
+@-moz-keyframes coverstay {
+    from { -moz-transform: translateX(0); }
+    to { -moz-transform: translateX(0); }
+}
+@keyframes coverstay {
+    from { transform: translateX(0); }
+    to { transform: translateX(0); }
+}
+
+
