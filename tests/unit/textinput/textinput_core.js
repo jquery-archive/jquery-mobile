@@ -96,7 +96,7 @@
 				h = e.height(), d;
 
 		e.addClass("msClear");
-		e.val("some text").focus();e.val("some text").focus();
+		e.val("some text").focus();
 		// Avoid syntax errors
 		try {
 			document.styleSheets[0].addRule(".msClear::-ms-clear", "height: 100px");
