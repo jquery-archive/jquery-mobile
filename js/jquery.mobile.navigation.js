@@ -997,7 +997,7 @@ define( [
 	$.mobile.navreadyDeferred = $.Deferred();
 	$.mobile._registerInternalEvents = function() {
 		var getAjaxFormData = function( $form, calculateOnly ) {
-			var type, target, url, ret = true, formData, vclickedName;
+			var type, target, url, ret = true, formData, vclickedName, method;
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
 					$form.is( ":jqmData(ajax='false')" ) ||
@@ -1009,6 +1009,11 @@ define( [
 
 			target = $form.attr( "target" );
 			url = $form.attr( "action" );
+			method = ( $form.attr( "method" ) || "get" ).toLowerCase();
+
+			if ( target ) {
+				return false;
+			}
 
 			// If no action is specified, browsers default to using the
 			// URL of the document containing the form. Since we dynamically
@@ -1018,6 +1023,13 @@ define( [
 			if ( !url ) {
 				// Get the @data-url for the page containing the form.
 				url = getClosestBaseUrl( $form );
+
+				// NOTE: If the method is "get", we need to strip off the query string
+				// because it will get replaced with the new form data. See issue #5710.
+				if ( method === "get" ) {
+					url = path.parseUrl( url ).hrefNoSearch;
+				}
+
 				if ( url === documentBase.hrefNoHash ) {
 					// The url we got back matches the document base,
 					// which means the page must be an internal/embedded page,
@@ -1029,7 +1041,7 @@ define( [
 
 			url = path.makeUrlAbsolute(  url, getClosestBaseUrl( $form ) );
 
-			if ( ( path.isExternal( url ) && !path.isPermittedCrossDomainRequest( documentUrl, url ) ) || target ) {
+			if ( ( path.isExternal( url ) && !path.isPermittedCrossDomainRequest( documentUrl, url ) ) ) {
 				return false;
 			}
 
