@@ -1,0 +1,4 @@
+branches:
+  only:
+    - master
+    - 1.3-stable
