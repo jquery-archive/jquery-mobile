@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
-	<script src="../../../js/"></script>
+	<script src="../../../js/"></script> 
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -52,6 +52,10 @@
 		<a href="#rightpanel1" data-role="button" data-inline="true" data-mini="true">Reveal</a>
 		<a href="#rightpanel2" data-role="button" data-inline="true" data-mini="true">Push</a>
 
+		<p><strong>Top</strong> panel examples</p>
+		<a href="#toppanel1" data-role="button" data-inline="true" data-mini="true">Overlay</a>
+		<a href="#toppanel2" data-role="button" data-inline="true" data-mini="true">Push</a>
+	
 		<p>The <strong>position</strong> of the panel on the screen is set by the <code>data-position</code> attribute. The default value of the attribute is <code>left</code>, meaning it will appear from the left edge of the screen. Specify <code>data-position="right"</code> for it to appear from the right edge instead.</p>
 
 		<p>The <strong>display mode</strong> of the panel is set by the <code>data-display</code> attribute. The value of the attribute defaults to <code>reveal</code>, meaning the panel will sit under the page and reveal as the page slides away. Specify <code>data-display="overlay"</code> for the panel to appear on top of the page contents. A third mode, <code>data-display="push"</code> animates both the panel and page at the same time.</p>
@@ -236,6 +240,21 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /rightpanel3 -->
+	
+	
+	<!-- toppanel1  -->
+	<div data-role="panel" id="toppanel1" data-position="top" data-display="overlay" data-theme="a">
+
+        <h3>Top Panel: Overlay</h3>
+
+	</div><!-- /toppanel1 -->
+
+	<!-- toppanel2  -->
+	<div data-role="panel" id="toppanel2" data-position="top" data-display="push" data-theme="a" data-dark-modal="true">
+
+        <h3>Top Panel: Push</h3>
+
+	</div><!-- /toppanel2 -->	
 
 <?php include( '../../global-nav.php' ); ?>
 

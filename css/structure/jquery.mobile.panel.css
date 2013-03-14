@@ -229,3 +229,128 @@
 		display: none;
 	}	
 }
+
+
+/* panel top */
+
+/* position of the top panel */
+.ui-panel-position-top{
+	width:100%;
+	min-height: 0;
+	min-width: 100%;
+	height: 5em;
+	display:block;
+	overflow: hidden;
+	z-index:1003;
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+}
+
+/* top panel when closed */
+.ui-panel-position-top.ui-panel-closed{
+	height: 0;
+}
+
+.ui-page-active.ui-page-panel{
+	overflow-y:hidden;
+}
+
+.ui-panel-display-push.ui-panel-open.ui-panel-position-top {
+	border-bottom-width: 1px;
+	margin-bottom: 1px;
+}
+
+.ui-panel-position-top.ui-panel-fixed{
+	bottom:0;
+	padding-bottom:0;	
+}
+
+/* main panel when top panel is open */
+.ui-header.ui-panel-animate.ui-panel-content-fixed-toolbar-position-top.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal, 
+.ui-header.ui-panel-animate.ui-panel-content-fixed-toolbar-position-top.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push, 
+.ui-panel-animate.ui-panel-content-wrap-position-top.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
+.ui-panel-animate.ui-panel-content-wrap-position-top.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+	left: 0;
+	right: 0;
+	top: 0;
+	-webkit-transform: translate3d(0,5em,0);
+	-moz-transform: translate3d(0,5em,0);
+	transform: translate3d(0,5em,0);
+}
+
+/* modal panel when top panel is open */
+.ui-panel-dismiss-position-top.ui-panel-dismiss-open {
+	bottom: -5em;
+	top:0;
+	position: absolute;
+}
+
+.ui-panel-dismiss{
+	display:block;
+	visibility:hidden;
+	background-color: #000;
+	opacity: 0;
+}
+
+.ui-panel-dismiss-open {
+	visibility:visible;
+}
+
+.ui-panel-content-wrap-position-top.ui-panel-content-wrap-open{
+	top: 5em;
+	bottom: -5em;
+}
+
+
+/* top panel when opened */
+.ui-panel-animate.ui-panel-position-top.ui-panel-open.ui-panel-display-overlay, 
+.ui-panel-animate.ui-panel-position-top.ui-panel-open.ui-panel-display-push{
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+
+
+/* top panel when closed */
+.ui-panel-animate.ui-panel-position-top.ui-panel-display-overlay, 
+.ui-panel-animate.ui-panel-position-top.ui-panel-display-push{
+	-webkit-transform: translate3d(0,-5em,0);
+	-moz-transform: translate3d(0,-5em,0);
+	transform: translate3d(0,-5em,0);
+}
+
+.ui-panel-position-top.ui-panel-display-overlay {
+	-webkit-box-shadow: 0px 5px 5px rgba(0,0,0,.15);
+	-moz-box-shadow: 0px 5px 5px rgba(0,0,0,.15);
+	box-shadow: 0px 5px 5px rgba(0,0,0,.15);
+}
+
+/* panel top - fixed toolbar */
+
+.ui-panel-animate.ui-panel-content-fixed-toolbar-position-top.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push {
+	margin-top: 1px;
+}
+
+.ui-footer.ui-panel-content-fixed-toolbar-position-top.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push{
+	bottom:0;
+	-webkit-transform: translate3d(0,5em,0);
+	-moz-transform: translate3d(0,5em,0);
+	transform: translate3d(0,5em,0);
+}
+
+/* styling to make the modal dark with opacity */
+.background-opaque{
+	opacity: 0.5;
+	transition: opacity 350ms ease;
+	-webkit-transition: opacity 350ms ease;
+	-moz-transition: opacity 350ms ease;
+}
+
+.background-bright{
+	transition: opacity 350ms ease, visibility 0s 350ms;
+	-webkit-transition: opacity 350ms ease, visibility 0s 350ms;
+	-moz-transition: opacity 350ms ease, visibility 0s 350ms;
+}

@@ -27,7 +27,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			contentFixedToolbar: "ui-panel-content-fixed-toolbar",
 			contentFixedToolbarOpen: "ui-panel-content-fixed-toolbar-open",
 			contentFixedToolbarClosed: "ui-panel-content-fixed-toolbar-closed",
-			animate: "ui-panel-animate"
+			animate: "ui-panel-animate",
+			modalOpaque: "background-opaque",
+			modalBright: "background-bright"
 		},
 		animate: true,
 		theme: "c",
@@ -36,7 +38,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		display: "reveal", //accepts reveal, push, overlay
 		initSelector: ":jqmData(role='panel')",
 		swipeClose: true,
-		positionFixed: false
+		positionFixed: false,
+		darkModal: false
 	},
 
 	_panelID: null,
@@ -106,6 +109,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			this.element.addClass( self.options.classes.animate );
 		}
 		
+		//set fixed position if panel is on top
+		if ( self.options.position == 'top' ){
+			self.options.positionFixed = 'true';
+		}
+
 		self._bindUpdateLayout();
 		self._bindCloseEvents();
 		self._bindLinkListeners();
@@ -244,6 +252,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				area.on( "swipeleft.panel", function( e ) {
 					self.close();
 				});
+			} else if( self.options.position === "top" ){
+				self._modal.on( "scrollstart.panel", function( e ){
+					e.preventDefault();		//prevent scrolling
+					self.close();
+				});
 			} else {
 				area.on( "swiperight.panel", function( e ) {
 					self.close();
@@ -316,8 +329,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 						.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
 						
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
+					
 					if ( self._modal ) {
 						self._modal.addClass( self._modalOpenClasses );
+						if( self.options.darkModal ){
+							 //add an opacity transition		
+							self._modal.removeClass( o.classes.modalBright ).addClass( o.classes.modalOpaque );
+						}
 					}
 				},
 				complete = function() {
@@ -366,7 +384,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
 					
 					if ( self._modal ) {
-						self._modal.removeClass( self._modalOpenClasses );
+						if( self.options.darkModal ){
+							//remove opacity transition
+							self._modal.removeClass( o.classes.modalOpaque );
+						}
+							self._modal.removeClass( self._modalOpenClasses ).addClass( o.classes.modalBright );
 					}
 				},
 				complete = function() {
