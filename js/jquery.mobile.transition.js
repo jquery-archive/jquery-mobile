@@ -160,7 +160,7 @@ $.mobile.transitionHandlers = {
 $.mobile.transitionFallbacks = {};
 
 // If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
-$.mobile._maybeDegradeTransition = function( transition ) {
+$.mobile._private.maybeDegradeTransition = function( transition ) {
 		if ( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ) {
 			transition = $.mobile.transitionFallbacks[ transition ];
 		}

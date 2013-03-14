@@ -250,7 +250,7 @@ define( [
 	$window.bind( "scrollstop", delayedSetLastScroll );
 
 	// No-op implementation of transition degradation
-	$.mobile._maybeDegradeTransition = $.mobile._maybeDegradeTransition || function( transition ) {
+	$.mobile._private.maybeDegradeTransition = $.mobile._private.maybeDegradeTransition || function( transition ) {
 		return transition;
 	};
 
@@ -266,7 +266,7 @@ define( [
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
 
-		transition = $.mobile._maybeDegradeTransition( transition );
+		transition = $.mobile._private.maybeDegradeTransition( transition );
 
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
@@ -346,7 +346,7 @@ define( [
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
 
-	$.mobile._bindPageRemove = function() {
+	$.mobile._private.bindPageRemove = function() {
 		var page = $( this );
 
 		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
@@ -584,7 +584,7 @@ define( [
 						.appendTo( settings.pageContainer );
 
 					// wait for page creation to leverage options defined on widget
-					page.one( 'pagecreate', $.mobile._bindPageRemove );
+					page.one( 'pagecreate', $.mobile._private.bindPageRemove );
 
 					enhancePage( page, settings.role );
 
@@ -995,7 +995,7 @@ define( [
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following deferred is resolved in the init file
 	$.mobile.navreadyDeferred = $.Deferred();
-	$.mobile._registerInternalEvents = function() {
+	$.mobile._private.registerInternalEvents = function() {
 		var getAjaxFormData = function( $form, calculateOnly ) {
 			var type, target, url, ret = true, formData, vclickedName;
 			if ( !$.mobile.ajaxEnabled ||
@@ -1259,7 +1259,7 @@ define( [
 			});
 		});
 
-		$.mobile._handleHashChange = function( url, data ) {
+		$.mobile._private.handleHashChange = function( url, data ) {
 			//find first page via hash
 			var to = path.stripHash(url),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
@@ -1347,7 +1347,7 @@ define( [
 				url = location.href;
 			}
 
-			$.mobile._handleHashChange( url, data.state );
+			$.mobile._private.handleHashChange( url, data.state );
 		});
 
 		//set page min-heights to be device specific
@@ -1358,7 +1358,7 @@ define( [
 
 	$( function() { domreadyDeferred.resolve(); } );
 
-	$.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() { $.mobile._registerInternalEvents(); } );
+	$.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() { $.mobile._private.registerInternalEvents(); } );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

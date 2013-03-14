@@ -320,7 +320,7 @@ define( [
 		_applyTransition: function( value ) {
 			this._ui.container.removeClass( this._fallbackTransition );
 			if ( value && value !== "none" ) {
-				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
+				this._fallbackTransition = $.mobile._private.maybeDegradeTransition( value );
 				if ( this._fallbackTransition === "none" ) {
 					this._fallbackTransition = "";
 				}

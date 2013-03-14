@@ -16,6 +16,10 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	// jQuery.mobile configurable options
 	$.mobile = $.extend($.mobile, {
 
+		// Functions internal to the library, which need to be shared across modules
+		// should be defined here
+		_private: {},
+
 		// Version of the jQuery Mobile Framework
 		version: __version__,
 
