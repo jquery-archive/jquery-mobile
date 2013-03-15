@@ -8,7 +8,7 @@
 define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset", "./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-	$.widget( "mobile.rangeslider", $.mobile.widget, {
+	$.widget( "mobile.rangeslider", $.mobile.widget, $.extend( {
 
 		options: {
 			theme: null,
@@ -193,9 +193,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
 		}
 
-	});
-
-$.widget( "mobile.rangeslider", $.mobile.rangeslider, $.mobile.behaviors.formReset );
+	}, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
