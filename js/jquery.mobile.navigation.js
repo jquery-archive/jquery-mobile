@@ -997,23 +997,19 @@ define( [
 	$.mobile.navreadyDeferred = $.Deferred();
 	$.mobile._registerInternalEvents = function() {
 		var getAjaxFormData = function( $form, calculateOnly ) {
-			var type, target, url, ret = true, formData, vclickedName, method;
+			var url, ret = true, formData, vclickedName, method;
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
 					$form.is( ":jqmData(ajax='false')" ) ||
 					// test that $.mobile.ignoreContentEnabled is set and
 					// the form or one of it's parents is ajax=false
-					!$form.jqmHijackable().length ) {
+					!$form.jqmHijackable().length ||
+					$form.attr( "target" ) ) {
 				return false;
 			}
 
-			target = $form.attr( "target" );
 			url = $form.attr( "action" );
 			method = ( $form.attr( "method" ) || "get" ).toLowerCase();
-
-			if ( target ) {
-				return false;
-			}
 
 			// If no action is specified, browsers default to using the
 			// URL of the document containing the form. Since we dynamically
@@ -1046,7 +1042,6 @@ define( [
 			}
 
 			if ( !calculateOnly ) {
-				type = $form.attr( "method" );
 				formData = $form.serializeArray();
 
 				if ( $lastVClicked && $lastVClicked[ 0 ].form === $form[ 0 ] ) {
@@ -1069,7 +1064,7 @@ define( [
 				ret = {
 					url: url,
 					options: {
-						type:		type && type.length && type.toLowerCase() || "get",
+						type:		method,
 						data:		$.param( formData ),
 						transition:	$form.jqmData( "transition" ),
 						reverse:	$form.jqmData( "direction" ) === "reverse",
