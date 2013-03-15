@@ -14,16 +14,7 @@ function Enhancer() {
 	this._dependencies = {},
 	this._document = doc;
 }
-/*
-function callbackWrapper( widget, callback ) {
-	var ret = function( target ) {
-		console.log( "<Running " + widget + ">" );
-		callback( target );
-	}
 
-	return ret;
-}
-*/
 $.extend( Enhancer.prototype, {
 	_addWidget: function( fullName ) {
 		var idx,
@@ -57,10 +48,6 @@ $.extend( Enhancer.prototype, {
 		if ( !callback ) {
 			callback = this._defaultCallback( widget );
 		}
-
-//		callback = callbackWrapper( widget, callback );
-
-//		console.log( "<Binding " + widget + ">" );
 
 		this._dependencies[ widget ] = {
 			deps: widgetDeps.dependencies,
