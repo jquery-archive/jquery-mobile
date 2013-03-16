@@ -29,8 +29,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	},
 
 	_create: function() {
-		var self = this,
-			$el = this.element,
+		var $el = this.element,
 			cornerClass = !!this.options.corners ? " ui-corner-all" : "",
 			dialogWrap = $( "<div/>", {
 					"role" : "dialog",
@@ -72,6 +71,25 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		this._setCloseBtn( this.options.closeBtn );
 	},
 
+	_setCorners: function( value ) {
+		this.element.children().toggleClass( "ui-corner-all", value );
+	},
+
+	_setOverlayTheme: function( value ) {
+		this.element
+			.removeClass( "ui-overlay-" + this.options.overlayTheme )
+			.addClass( "ui-overlay-" + value );
+		if ( $.mobile.activePage[ 0 ] === this.element[ 0 ] ) {
+			this.options.overlayTheme = value;
+			this._handlePageBeforeShow();
+		}
+	},
+
+	_setCloseBtnText: function( value ) {
+		this.options.closeBtnText = value;
+		this._setCloseBtn( this.options.closeBtn );
+	},
+
 	_setCloseBtn: function( value ) {
 		var self = this, btn, location;
 
@@ -104,9 +122,12 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	},
 
 	_setOption: function( key, value ) {
-		if ( key === "closeBtn" ) {
-			this._setCloseBtn( value );
+		var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
+
+		if ( this[ setter ] !== undefined ) {
+			this[ setter ]( value );
 		}
+
 		this._super( key, value );
 	},
 
