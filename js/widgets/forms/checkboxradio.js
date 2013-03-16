@@ -20,8 +20,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		initSelector: "input[type='checkbox'],input[type='radio']"
 	},
 	_create: function() {
-		var self = this,
-			input = this.element,
+		var input = this.element,
 			o = this.options,
 			inheritAttr = function( input, dataAttr ) {
 				return input.jqmData( dataAttr ) || input.closest( "form, fieldset" ).jqmData( dataAttr );
@@ -70,78 +69,81 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 
 		input.add( label ).wrapAll( wrapper );
 
-		label.bind({
-			vmouseover: function( event ) {
-				if ( $( this ).parent().hasClass( "ui-disabled" ) ) {
-					event.stopPropagation();
-				}
-			},
-
-			vclick: function( event ) {
-				if ( input.is( ":disabled" ) ) {
-					event.preventDefault();
-					return;
-				}
-
-				self._cacheVals();
-
-				input.prop( "checked", inputtype === "radio" && true || !input.prop( "checked" ) );
-
-				// trigger click handler's bound directly to the input as a substitute for
-				// how label clicks behave normally in the browsers
-				// TODO: it would be nice to let the browser's handle the clicks and pass them
-				//       through to the associate input. we can swallow that click at the parent
-				//       wrapper element level
-				input.triggerHandler( 'click' );
-
-				// Input set for common radio buttons will contain all the radio
-				// buttons, but will not for checkboxes. clearing the checked status
-				// of other radios ensures the active button state is applied properly
-				self._getInputSet().not( input ).prop( "checked", false );
-
-				self._updateAll();
-				return false;
-			}
+		this._on( label, {
+			vmouseover: "_handleLabelVMouseOver",
+			vclick: "_handleLabelVClick"
 		});
 
-		input
-			.bind({
-				vmousedown: function() {
-					self._cacheVals();
-				},
-
-				vclick: function() {
-					var $this = $( this );
-
-					// Adds checked attribute to checked input when keyboard is used
-					if ( $this.is( ":checked" ) ) {
-
-						$this.prop( "checked", true);
-						self._getInputSet().not( $this ).prop( "checked", false );
-					} else {
-
-						$this.prop( "checked", false );
-					}
-
-					self._updateAll();
-				},
-
-				focus: function() {
-					label.addClass( $.mobile.focusClass );
-				},
-
-				blur: function() {
-					label.removeClass( $.mobile.focusClass );
-				}
-			});
+		this._on( input, {
+			vmousedown: "_cacheVals",
+			vclick: "_handleInputVClick",
+			focus: "_handleInputFocus",
+			blur: "_handleInputBlur"
+		});
 
 		this._handleFormReset();
 		this.refresh();
-		this._labelButtonMarkupOptions = null;
+	},
+
+	_handleInputFocus: function() {
+		this.label.addClass( $.mobile.focusClass );
+	},
+
+	_handleInputBlur: function() {
+		this.label.removeClass( $.mobile.focusClass );
+	},
+
+	_handleInputVClick: function() {
+		var $this = this.element;
+
+		// Adds checked attribute to checked input when keyboard is used
+		if ( $this.is( ":checked" ) ) {
+
+			$this.prop( "checked", true);
+			this._getInputSet().not( $this ).prop( "checked", false );
+		} else {
+			$this.prop( "checked", false );
+		}
+
+		this._updateAll();
+	},
+
+	_handleLabelVMouseOver: function( event ) {
+		if ( this.label.parent().hasClass( "ui-disabled" ) ) {
+			event.stopPropagation();
+		}
+	},
+
+	_handleLabelVClick: function( event ) {
+		var input = this.element;
+
+		if ( input.is( ":disabled" ) ) {
+			event.preventDefault();
+			return;
+		}
+
+		this._cacheVals();
+
+		input.prop( "checked", this.inputtype === "radio" && true || !input.prop( "checked" ) );
+
+		// trigger click handler's bound directly to the input as a substitute for
+		// how label clicks behave normally in the browsers
+		// TODO: it would be nice to let the browser's handle the clicks and pass them
+		//       through to the associate input. we can swallow that click at the parent
+		//       wrapper element level
+		input.triggerHandler( 'click' );
+
+		// Input set for common radio buttons will contain all the radio
+		// buttons, but will not for checkboxes. clearing the checked status
+		// of other radios ensures the active button state is applied properly
+		this._getInputSet().not( input ).prop( "checked", false );
+
+		this._updateAll();
+		return false;
 	},
 
 	_cacheVals: function() {
-		this._getInputSet().each(function() {
+		this._getInputSet().each( function() {
 			$( this ).jqmData( "cacheVal", this.checked );
 		});
 	},
@@ -153,13 +155,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		}
 
 		return this.element.closest( "form, :jqmData(role='page'), :jqmData(role='dialog')" )
-			.find( "input[name='" + this.element[0].name + "'][type='" + this.inputtype + "']" );
+			.find( "input[name='" + this.element[ 0 ].name + "'][type='" + this.inputtype + "']" );
 	},
 
 	_updateAll: function() {
 		var self = this;
 
-		this._getInputSet().each(function() {
+		this._getInputSet().each( function() {
 			var $this = $( this );
 
 			if ( this.checked || self.inputtype === "checkbox" ) {
