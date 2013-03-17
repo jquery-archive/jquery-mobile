@@ -53,8 +53,6 @@ module.exports = function( grunt ) {
 				files: {
 					src: [
 						"js/**/*.js",
-						"!js/text.js",
-						"!js/json.js",
 						"!js/jquery.hashchange.js",
 						"!js/jquery.js",
 						"!js/jquery.ui.widget.js"
@@ -90,7 +88,7 @@ module.exports = function( grunt ) {
 					//together.
 					skipModuleInsertion: true,
 
-					inlineText: true,
+					mainConfigFile: "js/requirejs.config.js",
 
 					include: ( grunt.option( "modules" ) || name ).split( "," ),
 
@@ -115,7 +113,7 @@ module.exports = function( grunt ) {
 					},
 
 					onBuildWrite: function (moduleName, path, contents) {
-						return contents.replace(/__version__/g, grunt.config.process( "\"<%= pkg.version %>\"" ) );
+						return contents.replace(/__version__/g, grunt.config.process( "\"<%= version %>\"" ) );
 					}
 				}
 			}
