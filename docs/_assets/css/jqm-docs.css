@@ -49,7 +49,7 @@ dt { font-weight: bold; margin: 2em 0 .5em; }
 dt code, dd code { font-size:1.3em; line-height:150%; }
 pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
 
-#jqm-homeheader img { width: 235px; }
+#jqm-homeheader img { width: 275px; height: 78px; margin-top:-20px; }
 img { max-width: 100%; }
 
 /* fluid images moved from jquery.mobile.core.css*/
