@@ -512,6 +512,7 @@ define( [
 				url: fileUrl,
 				type: settings.type,
 				data: settings.data,
+				contentType: settings.contentType,
 				dataType: "html",
 				success: function( html, textStatus, xhr ) {
 					//pre-parse html to check for a data-url,
