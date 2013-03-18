@@ -53,6 +53,11 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		arrowSides: "t,b,l,r"
 	},
 
+	_create: function() {
+		this._super();
+		this._setArrow( this.options.arrow );
+	},
+
 	_unenhance: function() {
 		var ar = this._ui.arrow;
 
@@ -204,7 +209,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	_placementCoords: function( desired ) {
 		var state, best, params, bgOffset, elOffset, diff,
 			bgRef = {},
-			ar = this._ui.arrow ;
+			ar = this._ui.arrow;
 
 		if ( !this.options.arrow ) {
 			return this._super( desired );
