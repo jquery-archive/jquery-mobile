@@ -210,7 +210,7 @@ deploy: clean init css js docs zip
 	@@find tmp/${VER_OFFICIAL} -type f \
 		\( -name '*.html' -o -name '*.php' \) \
 		-exec perl -pi -e \
-		's|src="(.*)${BASE_NAME}.js"|src="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.js"|g;s|href="(.*)${BASE_NAME}.css"|href="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.css"|g;s|src="(.*)jquery.js"|src="//code.jquery.com/jquery-1.7.1.min.js"|g' {} \;
+		's|src="(.*)${BASE_NAME}.js"|src="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.js"|g;s|href="(.*)${BASE_NAME}.css"|href="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.css"|g;s|src="(.*)jquery.js"|src="//code.jquery.com/jquery-1.7.2.min.js"|g' {} \;
 	# ... So they can be copied to jquerymobile.com
 	@@scp -qr tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/
 	# Do some cleanup to wrap it up
