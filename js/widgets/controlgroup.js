@@ -11,7 +11,10 @@ define( [ "jquery",
 	"../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "controlgroup",
+	selector = ":jqmData(role='controlgroup')";
 
+var widgetRegister = function () {
 	$.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 		options: {
 			shadow: false,
@@ -96,6 +99,9 @@ define( [ "jquery",
 			this._initialRefresh = false;
 		}
 	}, $.mobile.behaviors.addFirstLastClasses ) );
+};
+
+	$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 	// TODO: Implement a mechanism to allow widgets to become enhanced in the
 	// correct order when their correct enhancement depends on other widgets in
@@ -104,7 +110,7 @@ define( [ "jquery",
 	// Dom ready was insufficient for preventing timing issues, use the page init
 	// event to run this widget after all else. Widget registry incoming.
 	$.mobile.document.bind( "pageinit create", function( e )  {
-		$.mobile.controlgroup.prototype.enhanceWithin( e.target, true );
+		$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName, false );
 	});
 })(jQuery);
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

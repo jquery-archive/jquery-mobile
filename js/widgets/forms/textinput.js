@@ -8,7 +8,10 @@
 define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom"  ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "textinput",
+	selector = "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']";
 
+var widgetRegister = function () {
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
@@ -180,10 +183,13 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		return this._setOption( "disabled", false );
 	}
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.textinput.prototype.enhanceWithin( e.target, true );
+	$.mobile.widget.prototype.enhanceWithin( e.target, true, selector, widgetName, false );
 });
 
 })( jQuery );

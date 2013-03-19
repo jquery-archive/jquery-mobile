@@ -13,7 +13,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", 
 //This allows support for multiple nested list in the same page
 //https://github.com/jquery/jquery-mobile/issues/1617
 var listCountPerPage = {};
+var selector = ":jqmData(role='listview')",
+	widgetName = "listview";
 
+var widgetRegister = function () {
 $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 	options: {
@@ -379,10 +382,13 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		return $( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey + "')" );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.listview.prototype.enhanceWithin( e.target );
+	$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName );
 });
 
 })( jQuery );

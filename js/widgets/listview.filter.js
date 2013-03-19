@@ -7,7 +7,7 @@
 define( [ "jquery", "./listview", "./forms/textinput" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-
+var widgetRegister = function () {
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
@@ -18,6 +18,9 @@ var defaultFilterCallback = function( text, searchValue, item ) {
 	};
 
 $.mobile.listview.prototype.options.filterCallback = defaultFilterCallback;
+};
+
+$.mobile.addWidgetRegister( 'listview', widgetRegister );
 
 $.mobile.document.delegate( "ul, ol", "listviewcreate", function() {
 	var list = $( this ),

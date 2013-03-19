@@ -6,6 +6,9 @@
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom", "./fixedToolbar" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = 'fixedtoolbar';
+
+var	widgetRegister = function() {
 	$.widget( "mobile.fixedtoolbar", $.mobile.fixedtoolbar, {
 
 			_create: function() {
@@ -97,6 +100,9 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				this.element.closest(".ui-page-active").removeClass( "ui-android-2x-fix" );
 			}
 	});
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 	})( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

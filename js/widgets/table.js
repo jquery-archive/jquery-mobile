@@ -8,7 +8,10 @@
 define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "table",
+	selector = ":jqmData(role='table')";
 
+var widgetRegister = function () {
 $.widget( "mobile.table", $.mobile.widget, {
 
 		options: {
@@ -64,10 +67,13 @@ $.widget( "mobile.table", $.mobile.widget, {
 	}
 
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.table.prototype.enhanceWithin( e.target );
+	$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName, false );
 });
 
 })( jQuery );

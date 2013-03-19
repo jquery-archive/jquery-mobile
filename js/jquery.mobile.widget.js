@@ -39,8 +39,20 @@ $.widget( "mobile.widget", {
 		return options;
 	},
 
-	enhanceWithin: function( target, useKeepNative ) {
-		this.enhance( $( this.options.initSelector, $( target )), useKeepNative );
+	enhanceWithin: function( target, useKeepNative, selector, widgetName, istarget ) {
+
+		// check what widgets are needed on a Web App. page.
+		// "istarget" is true in case of dialog widget.
+		var $targets = istarget ? $( target ) :  $( selector, $( target ));
+		if ( $targets.length ) {
+
+			// If the widget havn't been used, add the widget to $.mobile[] object
+			// to check whether the widget is loaded or not.
+			if ( !$.mobile[ widgetName ] ) {
+				$.mobile.registeWidget( widgetName );
+			}
+			$.mobile[ widgetName ].prototype.enhance( $targets, useKeepNative );
+		}
 	},
 
 	enhance: function( targets, useKeepNative ) {

@@ -8,7 +8,10 @@
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
+var widgetName = "dialog",
+	selector = ":jqmData(role='dialog')";
 
+var widgetRegister = function () {
 $.widget( "mobile.dialog", $.mobile.widget, {
 	options: {
 		closeBtn: "left",
@@ -156,10 +159,13 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		}
 	}
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
-$.mobile.document.delegate( $.mobile.dialog.prototype.options.initSelector, "pagecreate", function() {
-	$.mobile.dialog.prototype.enhance( this );
+$.mobile.document.delegate( selector, "pagecreate", function() {
+	$.mobile.widget.prototype.enhanceWithin( this, false, selector, widgetName, true );
 });
 
 })( jQuery, this );

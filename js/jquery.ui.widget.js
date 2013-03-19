@@ -208,6 +208,47 @@ $.widget.bridge = function( name, object ) {
 	};
 };
 
+// To store variables of $.widget() methods - "$.widget( "widget name", ..., { ... });"
+$.mobile.widgetReigsters = {};
+
+// Add a variable for $.widget() method call into $.mobile.widgetReigsters[] object
+// to store the variable and check dependencies of widgets.
+// Each widget's IIFE calls $.mobile.addWidgetRegister() method.
+$.mobile.addWidgetRegister = function ( widgetName, register, dependencies ) {
+	var index,
+		length = dependencies ? dependencies.length : 0;
+	if ( !$.mobile.widgetReigsters[ widgetName ] ) {
+		$.mobile.widgetReigsters[ widgetName ] = {
+			widgetmethods : [],
+			dependencies : []
+		};
+	}
+	if ( register ) {
+		$.mobile.widgetReigsters[ widgetName ].widgetmethods.push( register );
+	}
+	for ( index = 0 ; index < length ; index++ ) {
+		$.mobile.widgetReigsters[ widgetName ].dependencies.push( dependencies[ index ] );
+	}
+};
+
+// Check dependencies and call $.widget() methods
+$.mobile.registeWidget = function ( widgetName ) {
+	var $registers = $.mobile.widgetReigsters[ widgetName ],
+		widgetReigsters = $registers ? $registers.widgetmethods : [],
+		dependencies = $registers ? $registers.dependencies : [],
+		index;
+
+	for ( index = 0 ; index < dependencies.length ; index++ ) {
+		if ( !$.mobile[ dependencies[ index ] ] ) {
+			$.mobile.registeWidget( dependencies[ index ] );
+		}
+	}
+
+	for ( index = 0 ; index < widgetReigsters.length ; index++ ) {
+		widgetReigsters[ index ]();
+	}
+};
+
 $.Widget = function( /* options, element */ ) {};
 $.Widget._childConstructors = [];
 
