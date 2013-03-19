@@ -25,7 +25,7 @@
 	<div data-role="content">
 		<div class="content-primary">
 
-		<p>jQuery Mobile offers several custom events that build upon native events to create useful hooks for development. Note that these events employ various touch, mouse, and window events, depending on event existence, so you can bind to them for use in both handheld and desktop environments. You can bind to these events like you would with other jQuery events, using <code>live()</code> or <code>bind()</code>.</p>
+		<p>jQuery Mobile offers several custom events that build upon native events to create useful hooks for development. Note that these events employ various touch, mouse, and window events, depending on event existence, so you can bind to them for use in both handheld and desktop environments. You can bind to these events like you would with other jQuery events, using <code>on()</code> or <code>bind()</code>.</p>
 
 			<div class="ui-body ui-body-e">
 		<h4 style="margin:.5em 0">Important: Use <code>$(document).bind('pageinit')</code>, not <code>$(document).ready()</code></h4>
@@ -419,11 +419,11 @@ $( document ).bind( &quot;pageloadfailed&quot;, function( event, data ){
 
 		<p>You can access the <code>prevPage</code> or <code>nextPage</code> properties via the second argument of a bound callback function. For example: </p>
 <pre><code>
-$( 'div' ).live( 'pageshow',function(event, ui){
+$( 'div' ).on( 'pageshow',function(event, ui){
   alert( 'This page was just hidden: '+ ui.prevPage);
 });
 
-$( 'div' ).live( 'pagehide',function(event, ui){
+$( 'div' ).on( 'pagehide',function(event, ui){
   alert( 'This page was just shown: '+ ui.nextPage);
 });
 </code></pre>
@@ -439,14 +439,14 @@ $( 'div' ).live( 'pagehide',function(event, ui){
 			<dd>
 				<p>Triggered on the page being initialized, before most plugin auto-initialization occurs.</p>
 <pre><code>
-$( '#aboutPage' ).live( 'pagebeforecreate',function(event){
+$( '#aboutPage' ).on( 'pagebeforecreate',function(event){
   alert( 'This page was just inserted into the dom!' );
 });
 </code></pre>
 				<p>Note that by binding to <code>pagebeforecreate</code>, you can manipulate markup before jQuery Mobile's default widgets are auto-initialized. For example, say you want to add data attributes via JavaScript instead of in the HTML source, this is the event you'd use.</p>
 
 <pre><code>
-$( '#aboutPage' ).live( 'pagebeforecreate',function(event){
+$( '#aboutPage' ).on( 'pagebeforecreate',function(event){
   // manipulate this page before its widgets are auto-initialized
 });
 </code></pre>
@@ -456,7 +456,7 @@ $( '#aboutPage' ).live( 'pagebeforecreate',function(event){
 			<dd>
 				<p>Triggered when the page has been created in the DOM (via ajax or other) but before all widgets have had an opportunity to enhance the contained markup. This event is most useful for user's wishing to create their own custom widgets for child markup enhancement as the jquery mobile widgets do.</p>
 <pre><code>
-$( '#aboutPage' ).live( 'pagecreate',function(event){
+$( '#aboutPage' ).on( 'pagecreate',function(event){
   ( ":jqmData(role='sweet-plugin')" ).sweetPlugin();
 });
 </code></pre>
@@ -466,7 +466,7 @@ $( '#aboutPage' ).live( 'pagecreate',function(event){
 			<dd>
 				<p>Triggered on the page being initialized, after initialization occurs. We recommend binding to this event instead of DOM ready() because this will work regardless of whether the page is loaded directly or if the content is pulled into another page as part of the Ajax navigation system.</p>
 <pre><code>
-$( '#aboutPage' ).live( 'pageinit',function(event){
+$( '#aboutPage' ).on( 'pageinit',function(event){
   alert( 'This page was just enhanced by jQuery Mobile!' );
 });
 </code></pre>
