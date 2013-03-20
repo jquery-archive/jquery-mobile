@@ -264,7 +264,7 @@ define( [
 		toPage.data( "mobile-page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
-		$.mobile.hidePageLoadingMsg();
+		$.mobile.loading( "hide" );
 
 		transition = $.mobile._maybeDegradeTransition( transition );
 
@@ -485,7 +485,7 @@ define( [
 
 			// This configurable timeout allows cached pages a brief delay to load without showing a message
 			var loadMsgDelay = setTimeout(function() {
-					$.mobile.showPageLoadingMsg();
+					$.mobile.loading( "show" );
 				}, settings.loadMsgDelay ),
 
 				// Shared logic for clearing timeout and removing message.
@@ -495,7 +495,7 @@ define( [
 					clearTimeout( loadMsgDelay );
 
 					// Hide loading message
-					$.mobile.hidePageLoadingMsg();
+					$.mobile.loading( "hide" );
 				};
 		}
 		// Reset base to the default document base.
@@ -645,7 +645,7 @@ define( [
 						$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
 
 						// hide after delay
-						setTimeout( $.mobile.hidePageLoadingMsg, 1500 );
+						setTimeout( function() { $.mobile.loading( "hide" ); }, 1500 );
 					}
 
 					deferred.reject( absUrl, options );
