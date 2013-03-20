@@ -1,3 +1,10 @@
+## Contribution Guides
+
+In the spirit of open source software development, jQuery always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly:
+
+1. [Getting Involved](http://docs.jquery.com/Getting_Involved)
+2. [Code Style Guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
+
 ## Issues
 
 If you encounter a bug in the framework you can report it on the issue tracker here on Github. Questions about how to use the framework or problems with your custom code can be posted on the [forum](https://forum.jquery.com/jquery-mobile).
