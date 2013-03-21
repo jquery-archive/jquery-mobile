@@ -47,7 +47,6 @@ $.widget( "mobile.table", $.mobile.widget, {
 
 					var span = parseInt( $( this ).attr( "colspan" ), 10 ),
 						sel = ":nth-child(" + ( coltally + 1 ) + ")";
-
 					$( this )
 						.jqmData( "colstart", coltally + 1 );
 
@@ -58,21 +57,22 @@ $.widget( "mobile.table", $.mobile.widget, {
 						}
 					}
 
-					if (create === undefined) {
-						$(this).jqmData("cells","");
+					if ( create === undefined ) {
+						$(this).jqmData("cells", "");
 					}
 					// Store "cells" data on header as a reference to all cells in the same column as this TH
 					$( this )
 						.jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).not( this ).children( sel ) );
 
 					coltally++;
+
 				});
 
 			});
 
 			// update table modes
-			if (create === undefined) {
-				this.element.trigger('tableupdate');
+			if ( create === undefined ) {
+				this.element.trigger( 'tableupdate' );
 			}
 	}
 

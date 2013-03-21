@@ -27,7 +27,7 @@ $.mobile.table.prototype.options.classes = $.extend(
 	}
 );
 
-$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate", function(e) {
+$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate", function( e ) {
 
 	var $table = $( this ),
 		event = e.type,
@@ -40,7 +40,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 		return;
 	}
 
-	if ( event !== "tableupdate") {
+	if ( event !== "tableupdate" ) {
 		self.element.addClass( o.classes.columnToggleTable );
 
 		var $menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-" + ns + "rel='popup' data-" + ns + "mini='true'>" + o.columnBtnText + "</a>" ),
@@ -49,7 +49,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 	}
 
 	// create the hide/show toggles
-	self.headers.not( "td" ).each(function(i){
+	self.headers.not( "td" ).each(function( i ){
 
 		var priority = $( this ).jqmData( "priority" ),
 			$cells = $( this ).add( $( this ).jqmData( "cells" ) );
@@ -58,7 +58,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 
 			$cells.addClass( o.classes.priorityPrefix + priority );
 
-			if (event !== "tableupdate") {
+			if ( event !== "tableupdate" ) {
 				$("<label><input type='checkbox' checked />" + $( this ).text() + "</label>" )
 					.appendTo( $menu )
 					.children( 0 )
@@ -67,17 +67,17 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 						theme: o.columnPopupTheme
 					});
 			} else {
-				$('#'+id+ ' fieldset div:eq('+i+')').find('input').jqmData("cells", $cells)
+				$('#' + id + ' fieldset div:eq(' + i +')').find('input').jqmData("cells", $cells)
 			}
 		}
 	});
-	if (event !== "tableupdate") {
+	if ( event !== "tableupdate" ) {
 		$menu.appendTo( $popup );
 	}
 
 	// bind change event listeners to inputs - TODO: move to a private method?
-	if ($menu === undefined) { 
-		$switchboard = $('#'+id+' fieldset');
+	if ( $menu === undefined ) {
+		$switchboard = $('#' + id + ' fieldset');
 	} else {
 		$switchboard = $menu;
 	}
