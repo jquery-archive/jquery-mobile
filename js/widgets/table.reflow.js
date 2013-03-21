@@ -19,9 +19,10 @@ $.mobile.table.prototype.options.classes = $.extend(
 	}
 );
 
-$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate", function() {
+$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate", function(e) {
 
 	var $table = $( this ),
+		event = e.type,
 		self = $table.data( "mobile-table" ),
 		o = self.options;
 
@@ -30,7 +31,9 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate", function() 
 		return;
 	}
 
-	self.element.addClass( o.classes.reflowTable );
+	if (event !== "tableupdate") {
+		self.element.addClass( o.classes.reflowTable );
+	}
 
 	// get headers in reverse order so that top-level headers are appended last
 	var reverseHeaders =  $( self.allHeaders.get().reverse() );
@@ -41,13 +44,10 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate", function() 
 			colstart = $( this ).jqmData( "colstart" ),
 			hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
 			text = $(this).text();
-
 			if( text !== ""  ){
-
 				if( hierarchyClass ){
 					var iteration = parseInt( $( this ).attr( "colspan" ), 10 ),
 						filter = "";
-
 					if( iteration ){
 						filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 					}
@@ -56,10 +56,8 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate", function() 
 				else {
 					$cells.prepend( "<b class='" + o.classes.cellLabels + "'>" + text + "</b>"  );
 				}
-
 			}
 	});
-
 });
 
 })( jQuery );
