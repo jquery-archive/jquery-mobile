@@ -40,15 +40,29 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 	// also handles scrollstop
 	$.event.special.scrollstart = {
-
+		
 		enabled: true,
 
-		setup: function() {
+		mobileScrollHandler: function( event ) {
 
+			if ( !$.event.special.scrollstart.enabled ) {
+				return;
+			}
+
+			if ( !scrolling ) {
+				trigger( event, true );
+			}
+
+			clearTimeout( $.event.special.scrollstart.timer );
+			$.event.special.scrollstart.timer = setTimeout( function() {
+				trigger( event, false );
+			}, 50 );
+		},
+
+		setup: function() {
 			var thisObject = this,
 				$this = $( thisObject ),
-				scrolling,
-				timer;
+				scrolling;			
 
 			function trigger( event, state ) {
 				scrolling = state;
@@ -56,21 +70,12 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 			}
 
 			// iPhone triggers scroll after a small delay; use touchmove instead
-			$this.bind( scrollEvent, function( event ) {
+			$this.bind( scrollEvent, $.event.special.scrollstart.mobileScrollHandler );
+		},
 
-				if ( !$.event.special.scrollstart.enabled ) {
-					return;
-				}
-
-				if ( !scrolling ) {
-					trigger( event, true );
-				}
-
-				clearTimeout( timer );
-				timer = setTimeout( function() {
-					trigger( event, false );
-				}, 50 );
-			});
+		teardown: function() {
+			$(this).unbind( scrollEvent , $.event.special.scrollstart.mobileScrollHandler );
+			return false;
 		}
 	};
 
@@ -89,11 +94,10 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				}
 
 				var origTarget = event.target,
-					origEvent = event.originalEvent,
-					timer;
+					origEvent = event.originalEvent;
 
 				function clearTapTimer() {
-					clearTimeout( timer );
+					clearTimeout( $.event.special.tap.timer );
 				}
 
 				function clearTapHandlers() {
@@ -118,7 +122,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					.bind( "vclick", clickHandler );
 				$document.bind( "vmousecancel", clearTapHandlers );
 
-				timer = setTimeout( function() {
+				$.event.special.tap.timer = setTimeout( function() {
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 				}, $.event.special.tap.tapholdThreshold );
 			});
