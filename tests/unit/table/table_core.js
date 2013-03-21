@@ -155,6 +155,7 @@
 					equal($second_input.jqmData("cells").eq(0).jqmData("test"), "abc",
 						"cell reference in popup is to cell currently in table");
 					equal($visibleCells.length, $visibleHeaders.length, "same number of headers and rows visible");
+					start();
 			});
 		}, 1200);
 	});
