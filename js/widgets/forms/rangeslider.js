@@ -81,7 +81,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				otherSlider = ( first ) ? this._inputLast : this._inputFirst;
 
 			this._sliderTarget = false;
-			//if the drag was initaed on an extream and the other handle is focused send the events to
+			//if the drag was initiated on an extreme and the other handle is focused send the events to
 			//the closest handle
 			if ( ( this._proxy === "first" && first ) || ( this._proxy === "last" && !first ) ) {
 				$.data( otherSlider.get(0), "mobileSlider" ).dragging = true;
@@ -145,7 +145,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				thisSlider.val( first ? max: min ).slider( "refresh" );
 				this._trigger( "normalize" );
 			} else if ( min > max ) {
-				//this makes it so clicks on the target on either extream go to the closest handle
+				//this makes it so clicks on the target on either extreme go to the closest handle
 				thisSlider.val( this._targetVal ).slider( "refresh" );
 				
 				var self = this;
