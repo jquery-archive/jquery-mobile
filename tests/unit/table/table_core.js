@@ -61,6 +61,7 @@
 					"cell stored is a refreshed cell (currently in the table");
 				equal($cellLookUp, $firstHeaderCell.jqmData('cells').eq(0).jqmData("test"),
 					"referenced cell is in the correct column");
+				start();
 		}, 1200);
 	});
 	module( "Reflow Mode", {
@@ -105,6 +106,7 @@
 			labels = $tds.find( "b.ui-table-cell-label" );
 		ok( $table.length, "table still enhanced");
 		ok( labels = $tds.find( "b.ui-table-cell-label" ), "Labels still there");
+		start();
 		}, 1200);
 	});
 	module( "Column toggle table Mode", {
