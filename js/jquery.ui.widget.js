@@ -23,6 +23,22 @@ $.cleanData = function( elems ) {
 	_cleanData( elems );
 };
 
+function defineAccessor( where, propName, namespace, widgetName ) {
+	var value;
+
+	where.__defineGetter__( propName, function() {
+		var widgetClass = $[ namespace ][ widgetName ];
+		if ( $.type( widgetClass ) === "object" ) {
+			widgetClass.define();
+		}
+		return value;
+	});
+
+	where.__defineSetter__( propName, function( v ) {
+		value = v;
+	});
+}
+
 $.widget = function( name, base, prototype ) {
 	var fullName, existingConstructor, constructor, basePrototype,
 		// proxiedPrototype allows the provided prototype to remain unmodified
