@@ -54,11 +54,6 @@ $.widget = function( name, base, prototype ) {
 		base = $.Widget;
 	}
 
-	// create selector for plugin
-	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
-		return !!$.data( elem, fullName );
-	};
-
 	$[ namespace ] = $[ namespace ] || {};
 	existingConstructor = $[ namespace ][ name ];
 	constructor = $[ namespace ][ name ] = function( options, element ) {
@@ -73,6 +68,12 @@ $.widget = function( name, base, prototype ) {
 			this._createWidget( options, element );
 		}
 	};
+
+	// create selector for plugin
+	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
+		return !!$.data( elem, fullName );
+	};
+
 	// extend with the existing constructor to carry over any static properties
 	$.extend( constructor, existingConstructor, {
 		version: prototype.version,
