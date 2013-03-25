@@ -8,7 +8,10 @@
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "collapsible",
+	selector = ":jqmData(role='collapsible')";
 
+var widgetRegister = function () {
 $.widget( "mobile.collapsible", $.mobile.widget, {
 	options: {
 		expandCueText: " click to expand contents",
@@ -156,10 +159,13 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			});
 	}
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.collapsible.prototype.enhanceWithin( e.target );
+	$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName, false );
 });
 
 })( jQuery );

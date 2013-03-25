@@ -11,7 +11,9 @@ function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 ( function( $, undefined ) {
+var widgetName = "popup";
 
+var widgetRegister = function () {
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
 		'<div class="arrow-guide"></div>' +
@@ -212,6 +214,9 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		}
 	}
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 })( jQuery );
 

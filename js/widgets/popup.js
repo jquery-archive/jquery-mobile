@@ -24,7 +24,10 @@ define( [
 	"depend!../jquery.hashchange[jquery]" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "popup",
+	selector = ":jqmData(role='popup')";
 
+var widgetRegister = function () {
 	function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
 		var ret = desired;
 
@@ -897,6 +900,9 @@ define( [
 			$link.removeClass( $.mobile.activeBtnClass );
 		}, 300 );
 	};
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 	// TODO move inside _create
 	$.mobile.document.bind( "pagebeforechange", function( e, data ) {
@@ -907,7 +913,7 @@ define( [
 	});
 
 	$.mobile.document.bind( "pagecreate create", function( e )  {
-		$.mobile.popup.prototype.enhanceWithin( e.target, true );
+		$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName, false );
 	});
 
 })( jQuery );

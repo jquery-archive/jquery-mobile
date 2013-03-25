@@ -8,6 +8,10 @@
 define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset", "./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "rangeslider",
+	selector = ":jqmData(role='rangeslider')";
+
+var widgetRegister = function () {
 	$.widget( "mobile.rangeslider", $.mobile.widget, $.extend( {
 
 		options: {
@@ -194,10 +198,13 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		}
 
 	}, $.mobile.behaviors.formReset ) );
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
-	$.mobile.rangeslider.prototype.enhanceWithin( e.target, true );
+	$.mobile.widget.prototype.enhanceWithin( e.target, true, selector, widgetName, false );
 });
 
 })( jQuery );

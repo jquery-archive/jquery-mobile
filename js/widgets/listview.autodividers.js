@@ -5,7 +5,7 @@
 define( [ "jquery", "./listview" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-
+var widgetRegister = function () {
 $.mobile.listview.prototype.options.autodividers = false;
 $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
 	// look for the text in the given element
@@ -20,6 +20,9 @@ $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
 
 	return text;
 };
+};
+
+$.mobile.addWidgetRegister( 'listview', widgetRegister );
 
 $.mobile.document.delegate( "ul,ol", "listviewcreate", function() {
 

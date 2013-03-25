@@ -8,7 +8,10 @@
 define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "slider",
+	selector = "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')";
 
+var widgetRegister = function () {
 $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	widgetEventPrefix: "slide",
 
@@ -503,10 +506,13 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	}
 
 }, $.mobile.behaviors.formReset ) );
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.slider.prototype.enhanceWithin( e.target, true );
+	$.mobile.widget.prototype.enhanceWithin( e.target, true, selector, widgetName, false );
 });
 
 })( jQuery );

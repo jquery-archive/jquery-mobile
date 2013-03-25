@@ -8,7 +8,7 @@
 define( [ "jquery", "./table" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-
+var widgetRegister = function () {
 $.mobile.table.prototype.options.mode = "reflow";
 
 $.mobile.table.prototype.options.classes = $.extend(
@@ -18,6 +18,9 @@ $.mobile.table.prototype.options.classes = $.extend(
 		cellLabels: "ui-table-cell-label"
 	}
 );
+};
+
+$.mobile.addWidgetRegister( 'table', widgetRegister );
 
 $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate", function() {
 

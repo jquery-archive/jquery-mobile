@@ -544,6 +544,8 @@ define( [
 		});
 	};
 
+	$.mobile.addWidgetRegister( 'selectmenu', undefined, [ 'popup', 'listview' ] );
+
 	// issue #3894 - core doesn't trigger events on disabled delegates
 	$.mobile.document.bind( "selectmenubeforecreate", function( event ) {
 		var selectmenuWidget = $( event.target ).data( "mobile-selectmenu" );

@@ -8,7 +8,9 @@
 define( [ "jquery", "./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "slider";
 
+var widgetRegister = function () {
 $.widget( "mobile.slider", $.mobile.slider, {
 	options: {
 		popupEnabled: false,
@@ -116,6 +118,9 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		}
 	}
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -8,7 +8,10 @@
 define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "panel",
+	selector = ":jqmData(role='panel')";
 
+var widgetRegister = function () {
 $.widget( "mobile.panel", $.mobile.widget, {
 	options: {
 		classes: {
@@ -457,10 +460,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.removeClass( [ classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
 	}
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
-	$.mobile.panel.prototype.enhanceWithin( e.target );
+	$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName, false );
 });
 
 })( jQuery );

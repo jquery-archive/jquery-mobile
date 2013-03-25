@@ -8,7 +8,7 @@
 define( [ "jquery", "./table", "../jquery.mobile.buttonMarkup", "./popup", "../jquery.mobile.fieldContain", "widgets/controlgroup", "widgets/forms/checkboxradio" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-
+var widgetRegister = function () {
 $.mobile.table.prototype.options.mode = "columntoggle";
 
 $.mobile.table.prototype.options.columnBtnTheme = null;
@@ -26,6 +26,9 @@ $.mobile.table.prototype.options.classes = $.extend(
 		columnToggleTable: "ui-table-columntoggle"
 	}
 );
+};
+
+$.mobile.addWidgetRegister( 'table', widgetRegister, [ 'popup', 'controlgroup', 'checkboxradio' ] );
 
 $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate", function() {
 

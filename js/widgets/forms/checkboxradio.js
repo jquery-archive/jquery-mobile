@@ -12,7 +12,10 @@
 define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "checkboxradio",
+	selector = "input[type='checkbox'],input[type='radio']";
 
+var widgetRegister = function () {
 $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
@@ -207,10 +210,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
 	}
 }, $.mobile.behaviors.formReset ) );
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.checkboxradio.prototype.enhanceWithin( e.target, true );
+	$.mobile.widget.prototype.enhanceWithin( e.target, true, selector, widgetName, false );
 });
 
 })( jQuery );

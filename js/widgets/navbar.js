@@ -9,7 +9,10 @@
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.grid" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "navbar",
+	selector = ":jqmData(role='navbar')";
 
+var widgetRegister = function () {
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
 		iconpos: "top",
@@ -55,10 +58,13 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		});
 	}
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.navbar.prototype.enhanceWithin( e.target );
+	$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName, false );
 });
 
 })( jQuery );

@@ -8,7 +8,10 @@
 define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "selectmenu",
+	selector = "select:not( :jqmData(role='slider') )";
 
+var widgetRegister = function () {
 $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
@@ -285,10 +288,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		this.button.removeClass( "ui-disabled" );
 	}
 }, $.mobile.behaviors.formReset ) );
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
+	$.mobile.widget.prototype.enhanceWithin( e.target, true, selector, widgetName, false );
 });
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

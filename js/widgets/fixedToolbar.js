@@ -8,8 +8,10 @@
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var selector = ":jqmData(position='fixed')",
+	widgetName = "fixedtoolbar";
 
-
+var widgetRegister = function () {
 	$.widget( "mobile.fixedtoolbar", $.mobile.widget, {
 		options: {
 			visibleOnPageShow: true,
@@ -268,6 +270,9 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		}
 
 	});
+};
+
+	$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 	//auto self-init widgets
 	$.mobile.document
@@ -279,7 +284,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				$( $.mobile.fixedtoolbar.prototype.options.initSelector, e.target ).not( ":jqmData(fullscreen)" ).jqmData( "fullscreen", true );
 			}
 
-			$.mobile.fixedtoolbar.prototype.enhanceWithin( e.target );
+			$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName );
 		});
 
 })( jQuery );

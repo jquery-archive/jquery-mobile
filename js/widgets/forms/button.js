@@ -8,7 +8,10 @@
 define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup"  ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "button",
+	selector = "button, [type='button'], [type='submit'], [type='reset']";
 
+var widgetRegister = function () {
 function splitOptions( o ) {
 	var key, ret = { btn: {}, widget: {} };
 
@@ -155,10 +158,13 @@ $.widget( "mobile.button", $.mobile.widget, {
 		$( this.button.data( 'buttonElements' ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
 	}
 });
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.button.prototype.enhanceWithin( e.target, true );
+	$.mobile.widget.prototype.enhanceWithin( e.target, true, selector, widgetName, false );
 });
 
 })( jQuery );

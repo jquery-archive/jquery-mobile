@@ -8,7 +8,10 @@
 define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastClasses" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+var widgetName = "collapsibleset",
+	selector = ":jqmData(role='collapsible-set')";
 
+var widgetRegister = function () {
 $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 	options: {
 		initSelector: ":jqmData(role='collapsible-set')"
@@ -79,10 +82,13 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 		this._refresh( false );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
+};
+
+$.mobile.addWidgetRegister( widgetName, widgetRegister );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.collapsibleset.prototype.enhanceWithin( e.target );
+	$.mobile.widget.prototype.enhanceWithin( e.target, false, selector, widgetName, false );
 });
 
 })( jQuery );
