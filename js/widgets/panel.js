@@ -109,8 +109,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			this.element.addClass( self.options.classes.animate );
 		}
 		
-		//set fixed position if panel is on top
-		if ( self.options.position == 'top' ){
+		//set fixed position if panel is on top or bottom
+		if ( self.options.position == 'top' || self.options.position == 'bottom' ){
 			self.options.positionFixed = 'true';
 		}
 
@@ -252,10 +252,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				area.on( "swipeleft.panel", function( e ) {
 					self.close();
 				});
-			} else if( self.options.position === "top" ){
+			} else if( self.options.position === "top" || self.options.position === 'bottom' ){
 				self._modal.on( "scrollstart.panel", function( e ){
 					e.preventDefault();		//prevent scrolling
 					self.close();
+				});
+				self.element.on( "scrollstart.panel", function( e ){
+					e.preventDefault();
 				});
 			} else {
 				area.on( "swiperight.panel", function( e ) {

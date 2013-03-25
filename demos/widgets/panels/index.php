@@ -55,6 +55,10 @@
 		<p><strong>Top</strong> panel examples</p>
 		<a href="#toppanel1" data-role="button" data-inline="true" data-mini="true">Overlay</a>
 		<a href="#toppanel2" data-role="button" data-inline="true" data-mini="true">Push</a>
+		
+		<p><strong>Bottom</strong> panel examples</p>
+		<a href="#bottompanel1" data-role="button" data-inline="true" data-mini="true">Overlay</a>
+		<a href="#bottompanel2" data-role="button" data-inline="true" data-mini="true">Push</a>
 	
 		<p>The <strong>position</strong> of the panel on the screen is set by the <code>data-position</code> attribute. The default value of the attribute is <code>left</code>, meaning it will appear from the left edge of the screen. Specify <code>data-position="right"</code> for it to appear from the right edge instead.</p>
 
@@ -255,6 +259,20 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Top Panel: Push</h3>
 
 	</div><!-- /toppanel2 -->	
+	
+	<!-- bottompanel1  -->
+	<div data-role="panel" id="bottompanel1" data-position="bottom" data-display="overlay" data-theme="a">
+
+        <h3>Top Panel: Overlay</h3>
+
+	</div><!-- /bottompanel1 -->
+
+	<!-- bottompanel2  -->
+	<div data-role="panel" id="bottompanel2" data-position="bottom" data-display="push" data-theme="a" data-dark-modal="true">
+
+        <h3>Top Panel: Push</h3>
+
+	</div><!-- /bottompanel2 -->
 
 <?php include( '../../global-nav.php' ); ?>
 
