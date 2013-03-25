@@ -1345,7 +1345,13 @@ define( [
 
 		// TODO roll the logic here into the handleHashChange method
 		$window.bind( "navigate", function( e, data ) {
-			var url = $.event.special.navigate.originalEventName.indexOf( "hashchange" ) > -1 ? data.state.hash : data.state.url;
+			var url;
+
+			if ( e.originalEvent && e.originalEvent.isDefaultPrevented() ) {
+				return;
+			}
+
+			url = $.event.special.navigate.originalEventName.indexOf( "hashchange" ) > -1 ? data.state.hash : data.state.url;
 
 			if( !url ) {
 				url = $.mobile.path.parseLocation().hash;
