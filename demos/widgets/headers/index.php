@@ -66,9 +66,9 @@
 
 			<div data-demo-html="true">
 				<div data-role="header">
-					<a href="#" data-icon="home">Home</a>
+					<a href="#" data-icon="delete">Cancel</a>
 					<h1>My App</h1>
-					<a href="#" data-icon="bars">Menu</a>
+					<a href="#" data-icon="check">Save</a>
 				</div>
 			</div><!-- /demo-html -->
 

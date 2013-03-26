@@ -190,6 +190,7 @@ define(["jquery",
 				this.ignoreInitialHashChange ) {
 				this.ignoreInitialHashChange = false;
 
+				event.preventDefault();
 				return;
 			}
 

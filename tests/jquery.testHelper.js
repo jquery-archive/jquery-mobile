@@ -429,6 +429,13 @@
 					start();
 				});
 
+				// If the popstate resulting from the hash assignment below happens
+				// early enough during initial page load, the initial popstate emitted
+				// by webkit browsers (which needs to be ignored) will actually coincide
+				// with the popstate event caused by the assignment below. If that is
+				// the case, then we must ensure that the navigator does not treat the
+				// popstate event as the initial popstate event, thereby ignoring it.
+				$.mobile.navigate.navigator.ignoreInitialHashChange = false;
 				location.hash = location.hash.replace("#", "") === hash ? "" : "#" + hash;
 			};
 
