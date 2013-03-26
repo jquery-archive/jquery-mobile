@@ -84,20 +84,20 @@ $.widget = function( name, base, prototype ) {
 				// If we have an existing constructor, make sure it is defined. We
 				// assume that defining the existing constructor will eventually cause
 				// the base to also be defined, so we do not define the base here.
+				// We simply proceed with the constructor for the base.
 				if ( $.type( existingConstructor ) === "object" ) {
 					existingConstructor.define();
 					existingConstructor = existingConstructor.constructor;
-					if ( $.type( base ) === "object" ) {
-						base = base.constructor;
-					}
 				}
-			} else {
-
-				// If we do not have an existing constructor, we define the base.
 				if ( $.type( base ) === "object" ) {
-					base.define();
 					base = base.constructor;
 				}
+			}
+
+			// If the base is not defined, we define it.
+			if ( $.type( base ) === "object" ) {
+				base.define();
+				base = base.constructor;
 			}
 
 			actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
