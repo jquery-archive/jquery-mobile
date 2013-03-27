@@ -6,12 +6,12 @@ module.exports = function( grunt ) {
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
 		name = "jquery.mobile<%= versionSuffix %>",
 		dist = "dist",
-		buildId = "<%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss TT Z" ),
+		buildId = "<%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss Z" ),
 		banner = {
 			normal: [
 				"/*",
 				"* jQuery Mobile <%= version %>",
-				"* <%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss TT Z" ),
+				"* <%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss Z" ),
 				"* http://jquerymobile.com",
 				"*",
 				"* Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors",
