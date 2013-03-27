@@ -80,6 +80,10 @@ module.exports = function ( grunt ) {
 			}
 		};
 
+		if ( dry ) {
+			grunt.log.writeln( "Running in dry mode" );
+		}
+
 		async.forEach(
 			this.files,
 			function( filePair, nextFilePair ) {
@@ -96,13 +100,14 @@ module.exports = function ( grunt ) {
 							dest = path.relative( options.cwd, filePair.dest );
 						}
 
-						grunt.log.writeln( "Copying '" + src + "' to '" + path.join( url, dest ) + "'" );
+						dest = url + dest;
+						grunt.log.writeln( "Copying '" + src + "' to '" + dest + "'" );
 						grunt.util.spawn(
 							{
 								cmd: "rsync",
 								args: args.concat([
 									src,
-									path.join( url, dest )
+									dest
 								])
 							},
 							next
