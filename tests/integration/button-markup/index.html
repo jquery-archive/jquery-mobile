@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Button Markup Test Suite</title>
+	<!-- meta viewport left out on purpose for test append -->
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../../external/qunit.js"></script>
+	<script src="../../jquery.testHelper.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"jquery.mobile.buttonMarkup",
+				"widgets/controlgroup",
+				"widgets/fixedToolbar",
+				"widgets/forms/button",
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"buttonMarkup_core.js"
+			]
+		]);
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Button Markup Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div data-nstest-role="page" id="default">
+  <div data-nstest-role="header" id="page-header">
+    <a id="header-button-1" data-role="button" href="index.html">Header button 1</a>
+    <a id="header-button-2" data-role="button" href="index.html">Header button 2</a>
+  </div>
+  <div data-nstest-role="content" id="control-group-content">
+    <input type="submit" data-nstest-role="button" value="Double Enhanced?" id="double-enhanced" />
+    <a href="index.html" data-nstest-role="button" data-nstest-shadow="false">No shadow</a>
+    <a href="index.html" data-nstest-role="button" data-nstest-corners="false">No corners</a>
+    <a href="index.html" data-nstest-role="button" data-nstest-shadow="false" data-nstest-corners="false">No shadow or corners</a>
+    <a href="index.html" data-nstest-role="button" data-nstest-icon="delete" data-nstest-iconshadow="false">No iconshadow</a>
+    <button data-nstest-shadow="false" data-nstest-corners="false" data-nstest-icon="delete" data-nstest-iconshadow="false">None of the above</button>
+    <svg id="embedded-svg" width="120" height="120" viewPort="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="10" width="100" height="100"/>
+    </svg>
+
+	<a href="docs-bars.html" data-nstest-role="button" id="full">Fullsize</a>
+	<a href="docs-bars.html" data-nstest-role="button" data-nstest-mini="true" id="mini">Mini</a>
+
+	<div data-nstest-role="controlgroup" data-nstest-mini="true" id="mini-control">
+		<a href="index.html" data-nstest-role="button">Yes</a>
+	</div>
+
+	<a id="iconpos1" data-nstest-role="button" href="index.html" data-nstest-icon="check">Default iconpos</a>
+	<a id="iconpos2" data-nstest-role="button" href="index.html" data-nstest-icon="check" data-nstest-iconpos="left">Left iconpos</a>
+	<a id="iconpos3" data-nstest-role="button" href="index.html" data-nstest-icon="check" data-nstest-iconpos="right">Right iconpos</a>
+	<a id="hover-delay" data-nstest-role="button" href="index.html"></a>
+  </div>
+	<div data-nstest-role="footer" id="control-group-footer" class="ui-bar" data-nstest-position="inline">
+		<div data-nstest-role="controlgroup" data-nstest-type="horizontal">
+			<a href="index.html" data-nstest-icon="delete">Remove</a>
+			<a href="index.html" data-nstest-icon="plus">Add</a>
+			<a href="index.html" data-nstest-icon="arrow-u">Up</a>
+			<a href="index.html" data-nstest-icon="arrow-d">Down</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>

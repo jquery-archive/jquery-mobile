@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jQuery Mobile Checkboxradio Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/forms/checkboxradio",
+				"widgets/page" // Needed by the test suite
+			],
+			[
+				"checkboxradio_core.js"
+			],
+			[ "jquery.mobile.init" ]
+		]);
+	</script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+
+	<script src="../swarminject.js"></script>
+</head>
+<body>
+
+<h1 id="qunit-header">jQuery Mobile Checkbockradio Test Suite</h1>
+<h2 id="qunit-banner"></h2>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests">
+</ol>
+
+<div data-nstest-role="page" data-nstest-theme="a">
+	<div data-nstest-role="content">
+
+		<div data-nstest-role="fieldcontain">
+			<fieldset data-nstest-role="controlgroup">
+				<legend>Agree to the terms:</legend>
+				<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom"/>
+				<label for="checkbox-1">I agree</label>
+			</fieldset>
+		</div>
+
+		<div data-nstest-role="fieldcontain">
+			<fieldset data-nstest-role="controlgroup">
+				<legend>Agree to the terms:</legend>
+				<input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom"/>
+				<label for="checkbox-2">I agree</label>
+			</fieldset>
+		</div>
+
+        <div data-nstest-role="fieldcontain" data-nstest-role="controlgroup">
+            <div>
+                <legend>Agree to the terms 3.1:</legend>
+                <input type="checkbox" name="checkbox-3" id="checkbox-31" class="custom"/>
+                <label for="checkbox-31">I agree 3.1</label>
+            </div>
+            <div>
+                <legend>Agree to the terms 3.2:</legend>
+                <input type="checkbox" name="checkbox-3" id="checkbox-32" class="custom"/>
+                <label for="checkbox-32">I agree 3.2</label>
+            </div>
+        </div>
+	</div>
+
+<div data-role="fieldcontain" id="radio-active-btn-test">
+	<fieldset data-role="controlgroup">
+	  <legend>Choose a pet:</legend>
+	  <input type="radio" name="radio-pet-active-btn" id="radio-pet-1" value="choice-1" checked="checked"  />
+	  <label for="radio-pet-1">Cat</label>
+
+	  <input type="radio" name="radio-pet-active-btn" id="radio-pet-2" value="choice-2"  />
+	  <label for="radio-pet-2">Dog</label>
+
+	  <input type="radio" name="radio-pet-active-btn" id="radio-pet-3" value="choice-3"  />
+	  <label for="radio-pet-3">Hamster</label>
+
+	  <input type="radio" name="radio-pet-active-btn" id="radio-pet-4" value="choice-4"  />
+	  <label for="radio-pet-4">Lizard</label>
+	</fieldset>
+</div>
+
+<div data-role="fieldcontain">
+	<input type="radio" name="radio-full" value="choice-3" id="radio-full" />
+	<label for="radio-full">Hamster</label>
+
+	<input type="radio" name="radio-mini" value="choice-3" id="radio-mini" data-nstest-mini="true" />
+	<label for="radio-mini">Hamster</label>
+
+	<div data-nstest-role="controlgroup" data-nstest-mini="true" id="mini-control">
+		<input type="radio" name="radio-mini" value="choice-3" id="mini-ctrl" />
+		<label for="mini-ctrl">Hamster</label>
+		<input type="radio" name="full-ctrl" value="choice-3" id="full-ctrl" />
+		<label for="full-ctrl">Hamster</label>
+	</div>
+</div>
+
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="should-be-native" />
+		<label for="checkbox-1">I agree</label>
+	</fieldset>
+</div>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-click-triggered" id="checkbox-click-triggered"/>
+		<label for="checkbox-click-triggered">click triggered</label>
+		<input type="checkbox" name="checkbox-click-triggered" id="checkbox-click-triggered-2"/>
+		<label for="checkbox-click-triggered-2">click triggered</label>
+
+		<input type="radio" name="checkbox-change-triggered" id="checkbox-change-triggered"/>
+		<label for="checkbox-change-triggered">click triggered</label>
+		<input type="radio" name="checkbox-change-triggered" id="checkbox-change-triggered-2"/>
+		<label for="checkbox-change-triggered-2">click triggered</label>
+	</fieldset>
+</div>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-inherit-theme" id="checkbox-inherit-theme"/>
+		<label for="checkbox-inherit-theme">foo</label>
+	</fieldset>
+
+	<fieldset data-role="controlgroup">
+		<legend>Agree to the terms:</legend>
+		<input type="checkbox" name="checkbox-explicit-theme" id="checkbox-explicit-theme" data-nstest-theme="b"/>
+		<label for="checkbox-explicit-theme">foo</label>
+	</fieldset>
+</div>
+		
+<div data-nstest-role="fieldcontain">
+	<fieldset data-nstest-role="controlgroup">
+		<input type="checkbox" name="topicon" id="topicon" class="custom" data-nstest-iconpos="top" />
+		<label for="topicon">I agree</label>
+
+		<input type="checkbox" name="bottomicon" id="bottomicon" class="custom" />
+		<label for="bottomicon" data-nstest-iconpos="bottom">I agree</label>
+	</fieldset>
+</div>
+
+<form id="radio-form" method="get" action="form-result.html">
+	<fieldset data-role="controlgroup" data-type="horizontal">
+		<legend>Check one:</legend>
+		<input type="radio" id="radio1" name="radio1" value="1" />
+		<label for="radio1">Radio1</label>
+	</fieldset>
+</form>
+
+
+<form id="check-form" method="get" action="form-result.html">
+	<div data-role="fieldcontain">
+		<fieldset data-role="controlgroup" data-type="horizontal">
+			<legend>Font styling:</legend>
+			<input type="checkbox" name="checkbox-form" id="checkbox-form" class="custom" />
+			<label for="checkbox-form">b</label>
+
+			<input type="checkbox" name="checkbox-form-2" id="checkbox-form-2" class="custom" />
+			<label for="checkbox-form-2"><em>i</em></label>
+		</fieldset>
+	</div>
+</form>
+
+</div>
+
+<div id="enhancetest">
+	<input type="checkbox" name="checkbox-332" id="checkbox-332" class="custom"/>
+	<label for="checkbox-332">I agree 3.2</label>
+</div>
+
+<div id="exception-test">
+	<form>
+		<input type="checkbox" name="checkbox-exception" id="checkbox-exception" class="custom"/>
+	</form>
+</div>
+
+<div id="nested-label-test">
+	<form>
+		<label for="checkbox-nested-label">
+			<input type="checkbox" name="checkbox-nested-label" id="checkbox-nested-label" class="custom"/>
+		</label>
+	</form>
+</div>
+
+<div id="nested-label-no-for-test">
+  <form>
+    <label>
+      <input type="checkbox" name="checkbox-nested-label-no-for" id="checkbox-nested-label-no-for" class="custom"/>
+    </label>
+  </form>
+</div>
+</body>
+</html>
