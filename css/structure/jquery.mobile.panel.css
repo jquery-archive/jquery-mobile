@@ -239,7 +239,7 @@
 	width:100%;
 	min-height: 0;
 	min-width: 100%;
-	height: 5em;
+	max-height: 14em;
 	display:block;
 	overflow: hidden;
 	z-index:1003;
@@ -268,19 +268,6 @@
 	padding-bottom:auto;	
 }
 
-/* main panel when top panel is open */
-.ui-header.ui-panel-animate.ui-panel-content-fixed-toolbar-position-top.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal, 
-.ui-header.ui-panel-animate.ui-panel-content-fixed-toolbar-position-top.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push, 
-.ui-panel-animate.ui-panel-content-wrap-position-top.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
-.ui-panel-animate.ui-panel-content-wrap-position-top.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
-	left: 0;
-	right: 0;
-	top: 0;
-	-webkit-transform: translate3d(0,5em,0);
-	-moz-transform: translate3d(0,5em,0);
-	transform: translate3d(0,5em,0);
-}
-
 /* modal panel when top panel is open */
 .ui-panel-dismiss-position-top.ui-panel-dismiss-open {
 	bottom: -5em;
@@ -298,17 +285,6 @@
 .ui-panel-dismiss-open {
 	visibility:visible;
 }
-
-/* top or bottom panel when opened */
-.ui-panel-animate.ui-panel-position-bottom.ui-panel-open.ui-panel-display-overlay, 
-.ui-panel-animate.ui-panel-position-bottom.ui-panel-open.ui-panel-display-push,
-.ui-panel-animate.ui-panel-position-top.ui-panel-open.ui-panel-display-overlay, 
-.ui-panel-animate.ui-panel-position-top.ui-panel-open.ui-panel-display-push{
-	-webkit-transform: translate3d(0,0,0);
-	-moz-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
-}
-
 
 /* top panel when closed */
 .ui-panel-animate.ui-panel-position-top.ui-panel-display-overlay, 
@@ -363,16 +339,6 @@
 .ui-panel-display-push.ui-panel-open.ui-panel-position-bottom {
 	border-top-width: 1px;
 	margin-top: 1px;
-}
-
-/* main panel when bottom panel is open */
-.ui-footer.ui-panel-animate.ui-panel-content-fixed-toolbar-position-bottom.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push, 
-.ui-panel-animate.ui-panel-content-wrap-position-bottom.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
-	left: 0;
-	right: 0;
-	-webkit-transform: translate3d(0,-5em,0);
-	-moz-transform: translate3d(0,-5em,0);
-	transform: translate3d(0,-5em,0);
 }
 
 /* modal panel when bottom panel is open */

@@ -263,14 +263,14 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	<!-- bottompanel1  -->
 	<div data-role="panel" id="bottompanel1" data-position="bottom" data-display="overlay" data-theme="a">
 
-        <h3>Top Panel: Overlay</h3>
+        <h3>Bottom Panel: Overlay</h3>
 
 	</div><!-- /bottompanel1 -->
 
 	<!-- bottompanel2  -->
 	<div data-role="panel" id="bottompanel2" data-position="bottom" data-display="push" data-theme="a" data-dark-modal="true">
 
-        <h3>Top Panel: Push</h3>
+        <h3>Bottom Panel: Push</h3>
 
 	</div><!-- /bottompanel2 -->
 

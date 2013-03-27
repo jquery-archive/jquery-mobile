@@ -124,6 +124,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 
 		self._bindSwipeEvents();
+
 	},
 
 	_createModal: function( options ) {
@@ -298,6 +299,26 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_contentWrapOpenClasses: null,
 	_fixedToolbarOpenClasses: null,
 	_modalOpenClasses: null,
+	
+	_setVerticalCssTransform: function( element, distance ) {
+		element.css(
+			{
+				'-webkit-transform': 'translate3d(0,' + distance  +'px,0)',
+				'-moz-transform':'translate3d(0,' + distance + 'px,0)',
+				'transform':'translate3d(0,' + distance + 'px,0)'
+			}
+		);
+	},
+	
+	_resetCssTransform: function( element ){
+		element.css(
+			{
+				'-webkit-transform': '',
+				'-moz-transform':'',
+				'transform':''
+			}
+		);
+	},
 
 	open: function( immediate ) {
 		if ( !this._open ) {
@@ -318,9 +339,24 @@ $.widget( "mobile.panel", $.mobile.widget, {
 							.removeClass( self._pageTheme )
 							.addClass( "ui-body-" + self.options.theme );
 					}
-					
-					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen );
-					
+
+					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen )
+
+					//css transform to open top and bottom panels
+					if( self.options.position === 'top' || self.options.position === 'bottom'){
+						self._setVerticalCssTransform( self.element, 0);  
+					}
+
+					var panelHeight = self.element.height();
+					//css transform for page content when top panel opens in push mode
+					if( self.options.position === 'top' && self.options.display ==="push"  ){
+						self._setVerticalCssTransform( self._wrapper , panelHeight );
+						self._setVerticalCssTransform( self._fixedToolbar , panelHeight );
+					}else if( self.options.position === 'bottom' && self.options.display === "push" ){
+						self._setVerticalCssTransform( self._wrapper , -panelHeight );
+						self._setVerticalCssTransform( self._fixedToolbar , -panelHeight );						
+					}
+
 					self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
 					self._wrapper
 						.removeClass( o.classes.contentWrapClosed )
@@ -383,7 +419,27 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					
 					self._page.removeClass( o.classes.pagePanelOpen );
 					self.element.removeClass( o.classes.panelOpen );
+
+					var panelHeight = self.element.height();
+
+					//css transform for top and bottom panels when closed
+					if( self.options.position === 'top' ){
+						self._setVerticalCssTransform( self.element , -panelHeight );
+					}else if ( self.options.position === 'bottom' ){
+	
+						self._setVerticalCssTransform( self.element , panelHeight );
+					}
+
 					self._wrapper.removeClass( o.classes.contentWrapOpen );
+					
+					//css transform for page content when top or bottom panel close in push mode
+					if( self.options.position === 'top' || self.options.position === 'bottom' ){
+						if( self.options.display === "push" ){
+							self._resetCssTransform( self._wrapper );
+							self._resetCssTransform( self._fixedToolbar );
+						}
+					}
+
 					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
 					
 					if ( self._modal ) {
@@ -391,7 +447,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 							//remove opacity transition
 							self._modal.removeClass( o.classes.modalOpaque );
 						}
-							self._modal.removeClass( self._modalOpenClasses ).addClass( o.classes.modalBright );
+							self._modal.removeClass( self._modalOpenClasses ).addClass( o.classes.modalBright );	
 					}
 				},
 				complete = function() {
