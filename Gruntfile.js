@@ -415,9 +415,8 @@ module.exports = function( grunt ) {
 
 		rsync: {
 			options: {
-				//user: "ghislain.seguin"
-				//user: "jqadmin",
-				//host: "code.origin.jquery.com",
+				user: "jqadmin",
+				host: "code.origin.jquery.com",
 				remoteBase: "/var/www/html/code.jquery.com/mobile/",
 				cwd: dist
 			},
