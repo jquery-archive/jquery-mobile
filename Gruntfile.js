@@ -1,7 +1,8 @@
 module.exports = function( grunt ) {
 	"use strict";
 
-	var path = require( "path" ),
+	var _ = grunt.util._,
+		path = require( "path" ),
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
 		name = "jquery.mobile<%= versionSuffix %>",
 		dist = "dist",
@@ -362,13 +363,13 @@ module.exports = function( grunt ) {
 				options: {
 					urls: (function() {
 						// Find the test files
-						var suites = grunt.util._.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
-							types = grunt.util._.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ),
+						var suites = _.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
+							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ),
 							patterns, paths, idx, prefixes = ["tests/unit/", "tests/integration/"],
 							onePath = "",
 							uniquePaths = [],
 							versionedPaths = [],
-							jQueries = grunt.util._.without( ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ), "" );
+							jQueries = _.without( ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ), "" );
 
 						if( types.length ){
 							prefixes = [];
