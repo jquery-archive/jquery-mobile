@@ -47,7 +47,7 @@ module.exports = function ( grunt ) {
 						if ( detectDestType( filePair.dest ) === 'directory') {
 							dest = ( isExpandedPair ) ? filePair.dest : unixifyPath( path.join( filePair.dest, path.relative( options.cwd, src ) ));
 						} else {
-							dest = path.relative( options.cwd, filePair.dest );
+							dest = filePair.dest;
 						}
 
 						url += dest + options.querystring;

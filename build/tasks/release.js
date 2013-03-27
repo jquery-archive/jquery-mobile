@@ -42,6 +42,7 @@ module.exports = function( grunt ) {
 		}
 
 		grunt.config.set( "version", releaseVersion );
+		grunt.config.set( "versionSuffix", "-" + releaseVersion );
 	});
 
 	grunt.registerTask( "release:fail-if-pre", function() {
