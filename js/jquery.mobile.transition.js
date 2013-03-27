@@ -9,14 +9,18 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-var createHandler = function( sequential ) {
+	$.mobile.TransitionHandler = function( sequential ) {
+		// Default to sequential
+		if ( sequential === undefined ) {
+			sequential = true;
+		}
+		
+		this.sequential = sequential;
+	};
 
-	// Default to sequential
-	if ( sequential === undefined ) {
-		sequential = true;
-	}
-
-	return function( name, reverse, $to, $from ) {
+	$.mobile.TransitionHandler.prototype.transition = function( name, reverse, $to, $from ) {
+		// TODO temporary
+		var self = this;
 
 		var deferred = new $.Deferred(),
 			reverseClass = reverse ? " reverse" : "",
@@ -48,7 +52,7 @@ var createHandler = function( sequential ) {
 			},
 			startOut = function() {
 				// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
-				if ( !sequential ) {
+				if ( !self.sequential ) {
 					doneOut();
 				}
 				else {
@@ -64,7 +68,7 @@ var createHandler = function( sequential ) {
 
 			doneOut = function() {
 
-				if ( $from && sequential ) {
+				if ( $from && self.sequential ) {
 					cleanFrom();
 				}
 
@@ -105,7 +109,7 @@ var createHandler = function( sequential ) {
 
 			doneIn = function() {
 
-				if ( !sequential ) {
+				if ( !self.sequential ) {
 
 					if ( $from ) {
 						cleanFrom();
@@ -138,11 +142,12 @@ var createHandler = function( sequential ) {
 
 		return deferred.promise();
 	};
-};
+
+
 
 // generate the handlers from the above
-var sequentialHandler = createHandler(),
-	simultaneousHandler = createHandler( false ),
+var sequentialHandler = new $.mobile.TransitionHandler(),
+	simultaneousHandler = new $.mobile.TransitionHandler( false ),
 	defaultGetMaxScrollForTransition = function() {
 		return $.mobile.getScreenHeight() * 3;
 	};
