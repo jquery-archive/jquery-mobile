@@ -25,6 +25,30 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				.height( "" );
 		},
 
+		doneIn: function( $from, $to, name, reverse, toScroll, deferred ) {
+				if ( !this.sequential ) {
+
+					if ( $from ) {
+						this.cleanFrom( $from, name );
+					}
+				}
+
+				$to
+					.removeClass( "out in reverse " + name )
+					.height( "" );
+
+				this.toggleViewportClass( name );
+
+				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
+				// This ensures we jump to that spot after the fact, if we aren't there already.
+				if ( $.mobile.window.scrollTop() !== toScroll ) {
+					this.scrollPage( toScroll );
+				}
+
+			deferred.resolve( name, reverse, $to, $from, true );
+		},
+
+
 		scrollPage: function( toScroll ) {
 			// By using scrollTo instead of silentScroll, we can keep things better in order
 			// Just to be precautios, disable scrollstart listening like silentScroll would
@@ -99,7 +123,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				$to.css( "z-index", "" );
 
 				if ( !none ) {
-					$to.animationComplete( doneIn );
+					$to.animationComplete( function() {
+						self.doneIn( $from, $to, name, reverse, toScroll, deferred );
+					});
 				}
 
 				$to
@@ -107,33 +133,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 					.addClass( name + " in" + reverseClass );
 
 				if ( none ) {
-					doneIn();
+					self.doneIn( $from, $to, name, reverse, toScroll, deferred );
 				}
 
-			};
-
-			var doneIn = function() {
-
-				if ( !self.sequential ) {
-
-					if ( $from ) {
-						self.cleanFrom( $from, name );
-					}
-				}
-
-				$to
-					.removeClass( "out in reverse " + name )
-					.height( "" );
-
-				self.toggleViewportClass( name );
-
-				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
-				// This ensures we jump to that spot after the fact, if we aren't there already.
-				if ( $.mobile.window.scrollTop() !== toScroll ) {
-					self.scrollPage( toScroll );
-				}
-
-				deferred.resolve( name, reverse, $to, $from, true );
 			};
 
 			self.toggleViewportClass( name );
