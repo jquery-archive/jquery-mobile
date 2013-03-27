@@ -13,8 +13,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", 
 $.widget( "mobile.navbar", $.mobile.widget, {
 	options: {
 		iconpos: "top",
-		grid: null,
-		initSelector: ":jqmData(role='navbar')"
+		grid: null
 	},
 
 	_create: function() {
@@ -55,6 +54,8 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		});
 	}
 });
+
+$.mobile.navbar.initSelector = ":jqmData(role='navbar')";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.navbar" );

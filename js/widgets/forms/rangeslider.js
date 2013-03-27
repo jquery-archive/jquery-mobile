@@ -14,7 +14,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			theme: null,
 			trackTheme: null,
 			disabled: false,
-			initSelector: ":jqmData(role='rangeslider')",
 			mini: false,
 			highlight: true
 		},
@@ -194,6 +193,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		}
 
 	}, $.mobile.behaviors.formReset ) );
+
+$.mobile.rangeslider.initSelector = ":jqmData(role='rangeslider')";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.rangeslider", { dependencies: [ "mobile.slider" ] } );

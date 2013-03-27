@@ -19,8 +19,7 @@ define( [ "jquery",
 			corners: true,
 			excludeInvisible: true,
 			type: "vertical",
-			mini: false,
-			initSelector: ":jqmData(role='controlgroup')"
+			mini: false
 		},
 
 		_create: function() {
@@ -97,6 +96,8 @@ define( [ "jquery",
 			this._initialRefresh = false;
 		}
 	}, $.mobile.behaviors.addFirstLastClasses ) );
+
+	$.mobile.controlgroup.initSelector = ":jqmData(role='controlgroup')";
 
 	$.mobile._enhancer.add( "mobile.controlgroup", {
 		dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.buttonmarkup", "mobile.checkboxradio" ]

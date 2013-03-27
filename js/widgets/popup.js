@@ -60,7 +60,6 @@ define( [
 			transition: "none",
 			positionTo: "origin",
 			tolerance: null,
-			initSelector: ":jqmData(role='popup')",
 			closeLinkSelector: "a:jqmData(rel='back')",
 			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
@@ -868,6 +867,7 @@ define( [
 		}
 	});
 
+	$.mobile.popup.initSelector = ":jqmData(role='popup')";
 
 	// TODO this can be moved inside the widget
 	$.mobile.popup.handleLink = function( $link ) {

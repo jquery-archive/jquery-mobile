@@ -26,8 +26,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		splitTheme: "b",
 		corners: true,
 		shadow: true,
-		inset: false,
-		initSelector: ":jqmData(role='listview')"
+		inset: false
 	},
 
 	_create: function() {
@@ -379,6 +378,8 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		return $( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey + "')" );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
+
+$.mobile.listview.initSelector = ":jqmData(role='listview')";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.listview" );

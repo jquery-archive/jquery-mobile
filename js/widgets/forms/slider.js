@@ -16,7 +16,6 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		theme: null,
 		trackTheme: null,
 		disabled: false,
-		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
 		mini: false,
 		highlight: false
 	},
@@ -503,6 +502,8 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	}
 
 }, $.mobile.behaviors.formReset ) );
+
+$.mobile.slider.initSelector = "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.slider" );

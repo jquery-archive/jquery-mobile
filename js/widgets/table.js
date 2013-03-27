@@ -15,8 +15,7 @@ var tableClasses = {
 
 $.widget( "mobile.table", $.mobile.widget, {
 	options: {
-		classes: tableClasses,
-		initSelector: ":jqmData(role='table')"
+		classes: tableClasses
 	},
 
 	_create: function() {
@@ -66,6 +65,7 @@ $.widget( "mobile.table", $.mobile.widget, {
 });
 
 $.mobile.table.classes = tableClasses;
+$.mobile.table.initSelector = ":jqmData(role='table')";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.table" );

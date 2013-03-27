@@ -26,7 +26,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "select:not( :jqmData(role='slider') )",
 		mini: false
 	},
 
@@ -285,6 +284,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		this.button.removeClass( "ui-disabled" );
 	}
 }, $.mobile.behaviors.formReset ) );
+
+$.mobile.selectmenu.initSelector = "select:not( :jqmData(role='slider') )";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.selectmenu" );

@@ -16,8 +16,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
-		mini: false,
-		initSelector: "input[type='checkbox'],input[type='radio']"
+		mini: false
 	},
 	_create: function() {
 		var input = this.element,
@@ -207,6 +206,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
 	}
 }, $.mobile.behaviors.formReset ) );
+
+$.mobile.checkboxradio.initSelector = "input[type='checkbox'],input[type='radio']";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.checkboxradio" );

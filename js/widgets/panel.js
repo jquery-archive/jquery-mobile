@@ -34,7 +34,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		position: "left",
 		dismissible: true,
 		display: "reveal", //accepts reveal, push, overlay
-		initSelector: ":jqmData(role='panel')",
 		swipeClose: true,
 		positionFixed: false
 	},
@@ -457,6 +456,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.removeClass( [ classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
 	}
 });
+
+$.mobile.panel.initSelector = ":jqmData(role='panel')";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.panel" );

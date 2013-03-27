@@ -22,8 +22,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		contentTheme: null,
 		inset: true,
 		corners: true,
-		mini: false,
-		initSelector: ":jqmData(role='collapsible')"
+		mini: false
 	},
 	_create: function() {
 
@@ -156,6 +155,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			});
 	}
 });
+
+$.mobile.collapsible.initSelector = ":jqmData(role='collapsible')";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.collapsible" );

@@ -10,9 +10,6 @@ define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastC
 (function( $, undefined ) {
 
 $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
-	options: {
-		initSelector: ":jqmData(role='collapsible-set')"
-	},
 	_create: function() {
 		var $el = this.element.addClass( "ui-collapsible-set" ),
 			o = this.options;
@@ -79,6 +76,8 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 		this._refresh( false );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
+
+$.mobile.collapsibleset.initSelector = ":jqmData(role='collapsible-set')";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.collapsibleset" );

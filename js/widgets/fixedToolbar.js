@@ -30,8 +30,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			// This is a plugin option like any other, so feel free to improve or overwrite it
 			supportBlacklist: function() {
 				return !$.support.fixedPosition;
-			},
-			initSelector: ":jqmData(position='fixed')"
+			}
 		},
 
 		_create: function() {
@@ -268,6 +267,8 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		}
 
 	});
+
+	$.mobile.fixedtoolbar.initSelector = ":jqmData(position='fixed')";
 
 	//auto self-init widgets
 	// NOTE: The implementation via $.mobile._enhancer removes support for

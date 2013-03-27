@@ -36,8 +36,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		shadow: true,
 		iconshadow: true,
 		inline: null,
-		mini: null,
-		initSelector: "button, [type='button'], [type='submit'], [type='reset']"
+		mini: null
 	},
 
 	_create: function() {
@@ -155,6 +154,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 		$( this.button.data( 'buttonElements' ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
 	}
 });
+
+$.mobile.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.button" );

@@ -14,8 +14,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		closeBtn: "left",
 		closeBtnText: "Close",
 		overlayTheme: "a",
-		corners: true,
-		initSelector: ":jqmData(role='dialog')"
+		corners: true
 	},
 
 	// Override the theme set by the page plugin on pageshow
@@ -157,8 +156,9 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	}
 });
 
+$.mobile.dialog.initSelector = ":jqmData(role='dialog')";
 //auto self-init widgets
-$.mobile.document.delegate( $.mobile.dialog.prototype.options.initSelector, "pagecreate", function() {
+$.mobile.document.delegate( $.mobile.dialog.initSelector, "pagecreate", function() {
 	$.mobile.dialog.prototype.enhance( this );
 });
 
