@@ -33,9 +33,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 					}
 				}
 
-				$to
-					.removeClass( "out in reverse " + name )
-					.height( "" );
+				$to.removeClass( "out in reverse " + name ).height( "" );
 
 				this.toggleViewportClass( name );
 
@@ -48,6 +46,14 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			deferred.resolve( name, reverse, $to, $from, true );
 		},
 
+		doneOut: function( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+
+			if ( $from && this.sequential ) {
+				this.cleanFrom( $from, name );
+			}
+
+			this.startIn( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+		},
 
 		scrollPage: function( toScroll ) {
 			// By using scrollTo instead of silentScroll, we can keep things better in order
@@ -60,6 +66,41 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			setTimeout( function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
+		},
+
+		startIn: function( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+
+
+			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
+			$to.css( "z-index", -10 );
+
+			$to.addClass( $.mobile.activePageClass + toPreClass );
+
+			// Send focus to page as it is now display: block
+			$.mobile.focusPage( $to );
+
+			// Set to page height
+			$to.height( screenHeight + toScroll );
+
+			this.scrollPage( toScroll );
+
+			// Restores visibility of the new page: added together with $to.css( "z-index", -10 );
+			$to.css( "z-index", "" );
+
+			if ( !none ) {
+				$to.animationComplete( $.proxy(function() {
+					this.doneIn( $from, $to, name, reverse, toScroll, deferred );
+				}, this));
+			}
+
+			$to
+				.removeClass( toPreClass )
+				.addClass( name + " in" + reverseClass );
+
+			if ( none ) {
+				this.doneIn( $from, $to, name, reverse, toScroll, deferred );
+			}
+
 		},
 
 		toggleViewportClass: function( name ) {
@@ -79,71 +120,32 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 				toPreClass = " ui-page-pre-in";
 
-			var startOut = function() {
-				// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
-				if ( !self.sequential ) {
-					doneOut();
-				}
-				else {
-					$from.animationComplete( doneOut );
-				}
-
-				// Set the from page's height and start it transitioning out
-				// Note: setting an explicit height helps eliminate tiling in the transitions
-				$from
-					.height( screenHeight + $.mobile.window.scrollTop() )
-					.addClass( name + " out" + reverseClass );
-			};
-
-			var doneOut = function() {
-
-				if ( $from && self.sequential ) {
-					self.cleanFrom( $from, name );
-				}
-
-				startIn();
-			};
-
-			var startIn = function() {
-
-				// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
-				$to.css( "z-index", -10 );
-
-				$to.addClass( $.mobile.activePageClass + toPreClass );
-
-				// Send focus to page as it is now display: block
-				$.mobile.focusPage( $to );
-
-				// Set to page height
-				$to.height( screenHeight + toScroll );
-
-				self.scrollPage( toScroll );
-
-				// Restores visibility of the new page: added together with $to.css( "z-index", -10 );
-				$to.css( "z-index", "" );
-
-				if ( !none ) {
-					$to.animationComplete( function() {
-						self.doneIn( $from, $to, name, reverse, toScroll, deferred );
+            var startOut = function() {
+                // if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
+                if ( !self.sequential ) {
+                    self.doneOut($from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+                }
+                else {
+                    $from.animationComplete(function() {
+						self.doneOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 					});
-				}
+                }
 
-				$to
-					.removeClass( toPreClass )
-					.addClass( name + " in" + reverseClass );
+                // Set the from page's height and start it transitioning out
+                // Note: setting an explicit height helps eliminate tiling in the transitions
+                $from
+                    .height( screenHeight + $.mobile.window.scrollTop() )
+                    .addClass( name + " out" + reverseClass );
+            };
 
-				if ( none ) {
-					self.doneIn( $from, $to, name, reverse, toScroll, deferred );
-				}
 
-			};
 
 			self.toggleViewportClass( name );
 
 			if ( $from && !none ) {
 				startOut();
 			} else {
-				doneOut();
+				self.doneOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			}
 
 			return deferred.promise();
