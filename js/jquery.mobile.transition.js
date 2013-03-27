@@ -103,9 +103,28 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 		},
 
+		startOut: function( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+            // if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
+            if ( !this.sequential ) {
+                this.doneOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+            } else {
+                $from.animationComplete($.proxy(function() {
+					this.doneOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				}, this));
+            }
+
+            // Set the from page's height and start it transitioning out
+            // Note: setting an explicit height helps eliminate tiling in the transitions
+            $from
+                .height( screenHeight + $.mobile.window.scrollTop() )
+                .addClass( name + " out" + reverseClass );
+        },
+
+
 		toggleViewportClass: function( name ) {
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
 		},
+
 
 		transition: function( name, reverse, $to, $from ) {
 			// TODO temporary
@@ -120,30 +139,11 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 				toPreClass = " ui-page-pre-in";
 
-            var startOut = function() {
-                // if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
-                if ( !self.sequential ) {
-                    self.doneOut($from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
-                }
-                else {
-                    $from.animationComplete(function() {
-						self.doneOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
-					});
-                }
-
-                // Set the from page's height and start it transitioning out
-                // Note: setting an explicit height helps eliminate tiling in the transitions
-                $from
-                    .height( screenHeight + $.mobile.window.scrollTop() )
-                    .addClass( name + " out" + reverseClass );
-            };
-
-
 
 			self.toggleViewportClass( name );
 
 			if ( $from && !none ) {
-				startOut();
+				self.startOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			} else {
 				self.doneOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			}
