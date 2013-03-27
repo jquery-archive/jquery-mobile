@@ -34,7 +34,15 @@ $.extend( Enhancer.prototype, {
 			ns = parts[ 0 ],
 			name = parts[ 1 ],
 			ret = function( targetEl ) {
-				$[ ns ][ name ].prototype.enhanceWithin( targetEl, true );
+				// First try to grab the initSelector from the namespace, to avoid
+				// triggering the widget class's definition, but, failing that, look
+				// for the initSelector also in the prototype's options.
+				var targets = $( $[ ns ][ name ].initSelector ||
+					$[ ns ][ name ].prototype.options.initSelector, targetEl );
+
+				if ( targets.length ) {
+					$[ ns ][ name ].prototype.enhance( targets, true );
+				}
 			};
 
 		return ret;
