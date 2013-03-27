@@ -23,6 +23,12 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
 		},
 
+		cleanFrom: function( $from, name ) {
+			$from
+				.removeClass( $.mobile.activePageClass + " out in reverse " + name )
+				.height( "" );
+		},
+
 		transition: function( name, reverse, $to, $from ) {
 			// TODO temporary
 			var self = this;
@@ -48,12 +54,6 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				}, 150 );
 			};
 
-			var cleanFrom = function() {
-				$from
-					.removeClass( $.mobile.activePageClass + " out in reverse " + name )
-					.height( "" );
-			};
-
 			var startOut = function() {
 				// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
 				if ( !self.sequential ) {
@@ -73,7 +73,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			var doneOut = function() {
 
 				if ( $from && self.sequential ) {
-					cleanFrom();
+					self.cleanFrom( $from, name );
 				}
 
 				startIn();
@@ -116,7 +116,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				if ( !self.sequential ) {
 
 					if ( $from ) {
-						cleanFrom();
+						self.cleanFrom( $from, name );
 					}
 				}
 
