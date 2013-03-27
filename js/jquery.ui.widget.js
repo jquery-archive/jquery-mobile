@@ -23,24 +23,24 @@ $.cleanData = function( elems ) {
 	_cleanData( elems );
 };
 
-function defineAccessor( where, propName, namespace, widgetName ) {
-	var value;
+function defineAccessor( where, propName, defineCb ) {
+	var value, needsInit = true;
 
 	where.__defineGetter__( propName, function() {
-		var widgetClass = $[ namespace ][ widgetName ];
-		if ( $.type( widgetClass ) === "object" ) {
-			widgetClass.define();
+		if ( needsInit ) {
+			defineCb();
 		}
 		return value;
 	});
 
 	where.__defineSetter__( propName, function( v ) {
+		needsInit = false;
 		value = v;
 	});
 }
 
 $.widget = function( name, base, prototype ) {
-	var existingConstructor, constructor,
+	var existingConstructor, constructor, defineParams, defineCb,
 		classPlaceholder,
 		fullName = name,
 		parts = name.split( "." ),
@@ -69,51 +69,70 @@ $.widget = function( name, base, prototype ) {
 	};
 
 	if ( !!( {}.__defineGetter__ ) && !!( {}.__defineSetter__ ) ) {
-		if ( !existingConstructor ) {
-			defineAccessor( $.fn, name, namespace, name );
-			defineAccessor( $.expr[ ":" ], fullName, namespace, name );
+		if ( existingConstructor && $.type( existingConstructor ) === "object" ) {
+
+			defineParams = existingConstructor._defineParams;
+			existingConstructor._defineParams = {
+				idx: defineParams.idx + 1,
+				namespace: namespace,
+				name: name,
+				define: function() {
+					var baseNS, baseName;
+
+					defineParams.define();
+
+					if ( $.type( base ) === "object" ) {
+						baseNS = base._defineParams.namespace;
+						baseName = base._defineParams.name;
+						base = $[ baseNS ][ baseName ];
+					}
+
+					actuallyDefineWidget( fullName, constructor, base, base, prototype );
+				}
+			};
+
+			// We're extending a lazy definition. This means that the
+			// existingConstructor is not defined. In this case, we need to replace
+			// the defineParams inside the existing constructor with our own
+			// defineParams.
+			return;
 		}
 
-		$[ namespace ][ name ] = classPlaceholder = {
-			constructor: constructor,
-			define: function() {
-				var key;
+		// Define a placeholder for a given namespace.name. If there's an existing
+		// constructor, transfer the namespaced functions declared on it to the
+		// placeholder.
+		classPlaceholder = $[ namespace ][ name ] = $.extend( {}, existingConstructor, {
+			_defineParams: {
+				idx: 0,
+				namespace: namespace,
+				name: name,
+				define: function() {
+					var baseNS, baseName;
 
-				// Establish related classes
-				if ( existingConstructor ) {
-
-					// If we have an existing constructor, make sure it is defined. We
-					// assume that defining the existing constructor will eventually cause
-					// the base to also be defined, so we do not define the base here.
-					// We simply proceed with the constructor for the base.
-					if ( $.type( existingConstructor ) === "object" ) {
-						existingConstructor.define();
-						existingConstructor = existingConstructor.constructor;
-					}
 					if ( $.type( base ) === "object" ) {
-						base = base.constructor;
+						baseNS = base._defineParams.namespace;
+						baseName = base._defineParams.name;
+						base._defineParams.define();
+						base = $[ baseNS ][ baseName ];
 					}
+
+					actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
 				}
-
-				// If the base is not defined, we define it.
-				if ( $.type( base ) === "object" ) {
-					base.define();
-					base = base.constructor;
-				}
-
-				actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
-
-				// Transfer things declared on the placeholder to the actual constructor
-				for ( key in classPlaceholder ) {
-					if ( !( key === "prototype" || key === "define" || key === "constructor" ) ) {
-						constructor[ key ] = classPlaceholder[ key ];
-					}
-				}
-
-				return constructor.prototype;
 			}
+		});
+
+		defineCb = function() {
+			classPlaceholder = $[ namespace ][ name ];
+			classPlaceholder._defineParams.define();
+			constructor = $[ namespace ][ name ];
+			delete classPlaceholder._defineParams;
+			delete classPlaceholder.prototype;
+			$.extend( constructor, classPlaceholder );
+			return constructor.prototype;
 		};
-		classPlaceholder.__defineGetter__( "prototype", classPlaceholder.define );
+		defineAccessor( $.fn, name, defineCb );
+		defineAccessor( $.expr[ ":" ], namespace + "-" + name, defineCb );
+		classPlaceholder.__defineGetter__( "prototype", defineCb );
 	} else {
 		actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
 	}
