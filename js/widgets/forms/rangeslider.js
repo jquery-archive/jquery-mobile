@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.rangeslider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset", "./slider" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset", "./slider", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	$.widget( "mobile.rangeslider", $.mobile.widget, $.extend( {
@@ -196,9 +196,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 	}, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
-	$.mobile.rangeslider.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.rangeslider", { dependencies: [ "mobile.slider" ] } );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

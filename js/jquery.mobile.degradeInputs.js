@@ -4,7 +4,7 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "./widgets/page" ], function( jQuery ) {
+define( [ "jquery", "./widgets/page", "./jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -24,11 +24,11 @@ $.mobile.page.prototype.options.degradeInputs = {
 	week: false
 };
 
-
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
+$.mobile._enhancer.add( "mobile.degradeinputs", undefined, function( target ) {
 
-	var page = $.mobile.closestPageData( $( e.target ) ), options;
+	var $target = $( target ),
+		page = $.mobile.closestPageData( $target ), options;
 
 	if ( !page ) {
 		return;
@@ -37,7 +37,7 @@ $.mobile.document.bind( "pagecreate create", function( e ) {
 	options = page.options;
 
 	// degrade inputs to avoid poorly implemented native functionality
-	$( e.target ).find( "input" ).not( page.keepNativeSelector() ).each(function() {
+	$target.find( "input" ).not( page.keepNativeSelector() ).each(function() {
 		var $this = $( this ),
 			type = this.getAttribute( "type" ),
 			optType = options.degradeInputs[ type ] || "text";

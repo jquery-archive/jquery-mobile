@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom"  ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -182,9 +182,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.textinput.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.textinput" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

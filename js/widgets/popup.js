@@ -21,6 +21,7 @@ define( [
 	"../navigation/navigator",
 	"../navigation/method",
 	"../jquery.mobile.navigation",
+	"../jquery.mobile.registry",
 	"depend!../jquery.hashchange[jquery]" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -906,10 +907,8 @@ define( [
 		}
 	});
 
-	$.mobile.document.bind( "pagecreate create", function( e )  {
-		$.mobile.popup.prototype.enhanceWithin( e.target, true );
-	});
-
+	//auto self-init widgets
+	$.mobile._enhancer.add( "mobile.popup" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "./reset" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -287,9 +287,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 }, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.selectmenu" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

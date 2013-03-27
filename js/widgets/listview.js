@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "./page", "./page.sections", "./addFirstLastClasses" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "./page", "./page.sections", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -381,9 +381,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.listview.prototype.enhanceWithin( e.target );
-});
+$.mobile._enhancer.add( "mobile.listview" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

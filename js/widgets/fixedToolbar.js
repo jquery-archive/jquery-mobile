@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -270,18 +270,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 	});
 
 	//auto self-init widgets
-	$.mobile.document
-		.bind( "pagecreate create", function( e ) {
-
-			// DEPRECATED in 1.1: support for data-fullscreen=true|false on the page element.
-			// This line ensures it still works, but we recommend moving the attribute to the toolbars themselves.
-			if ( $( e.target ).jqmData( "fullscreen" ) ) {
-				$( $.mobile.fixedtoolbar.prototype.options.initSelector, e.target ).not( ":jqmData(fullscreen)" ).jqmData( "fullscreen", true );
-			}
-
-			$.mobile.fixedtoolbar.prototype.enhanceWithin( e.target );
-		});
-
+	// NOTE: The implementation via $.mobile._enhancer removes support for
+	// data-fullscreen=true|false on the page element. This support was
+	// DEPRECATED in 1.1.
+	$.mobile._enhancer.add( "mobile.fixedtoolbar", { dependencies: [ "mobile.pagesections" ] } );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

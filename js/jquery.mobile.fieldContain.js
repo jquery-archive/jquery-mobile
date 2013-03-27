@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.fieldcontain.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery" ], function( jQuery ) {
+define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -19,8 +19,8 @@ $.fn.fieldcontain = function( options ) {
 };
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
-	$( ":jqmData(role='fieldcontain')", e.target ).jqmEnhanceable().fieldcontain();
+$.mobile._enhancer.add( "mobile.fieldcontain", undefined, function( target ) {
+	$( ":jqmData(role='fieldcontain')", target ).jqmEnhanceable().fieldcontain();
 });
 
 })( jQuery );
