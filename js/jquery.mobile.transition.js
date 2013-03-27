@@ -19,14 +19,27 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 	};
 
 	$.extend($.mobile.TransitionHandler.prototype, {
-		toggleViewportClass: function( name ) {
-				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
-		},
-
 		cleanFrom: function( $from, name ) {
 			$from
 				.removeClass( $.mobile.activePageClass + " out in reverse " + name )
 				.height( "" );
+		},
+
+		scrollPage: function( toScroll ) {
+			// By using scrollTo instead of silentScroll, we can keep things better in order
+			// Just to be precautios, disable scrollstart listening like silentScroll would
+			$.event.special.scrollstart.enabled = false;
+
+			window.scrollTo( 0, toScroll );
+
+			// reenable scrollstart listening like silentScroll would
+			setTimeout( function() {
+				$.event.special.scrollstart.enabled = true;
+			}, 150 );
+		},
+
+		toggleViewportClass: function( name ) {
+				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
 		},
 
 		transition: function( name, reverse, $to, $from ) {
@@ -41,18 +54,6 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
 				none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 				toPreClass = " ui-page-pre-in";
-			var scrollPage = function() {
-				// By using scrollTo instead of silentScroll, we can keep things better in order
-				// Just to be precautios, disable scrollstart listening like silentScroll would
-				$.event.special.scrollstart.enabled = false;
-
-				window.scrollTo( 0, toScroll );
-
-				// reenable scrollstart listening like silentScroll would
-				setTimeout( function() {
-					$.event.special.scrollstart.enabled = true;
-				}, 150 );
-			};
 
 			var startOut = function() {
 				// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
@@ -92,7 +93,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				// Set to page height
 				$to.height( screenHeight + toScroll );
 
-				scrollPage();
+				self.scrollPage( toScroll );
 
 				// Restores visibility of the new page: added together with $to.css( "z-index", -10 );
 				$to.css( "z-index", "" );
@@ -129,7 +130,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
 				// This ensures we jump to that spot after the fact, if we aren't there already.
 				if ( $.mobile.window.scrollTop() !== toScroll ) {
-					scrollPage();
+					self.scrollPage( toScroll );
 				}
 
 				deferred.resolve( name, reverse, $to, $from, true );
