@@ -432,11 +432,6 @@ module.exports = function( grunt ) {
 					"<%= pkg.version %>/demos/": path.join( dist, "demos/" ),
 					"<%= pkg.version %>/images/": path.join( dist, "images/" )
 				}
-			},
-			git: {
-				files: {
-					"git/": path.join( dist, "jquery.mobile.*" )
-				}
 			}
 		},
 
@@ -445,11 +440,6 @@ module.exports = function( grunt ) {
 				baseUrl: "http://code.origin.jquery.com/mobile/",
 				querystring: "?reload",
 				cwd: dist
-			},
-			git: {
-				files: {
-					"git/": path.join( dist, "jquery.mobile.*" )
-				}
 			},
 			release: {
 				files: {
@@ -491,7 +481,6 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
 	grunt.registerTask( "deploy", [ "release:fail-if-pre", "dist:release", "rsync:release" ] );
-	grunt.registerTask( "deploy:git", [ "dist", "rsync:git", "curl:git" ] );
 	grunt.registerTask( "release", [ "clean", "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
 
 	// Default grunt
