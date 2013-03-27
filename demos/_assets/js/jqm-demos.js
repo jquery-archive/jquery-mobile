@@ -323,15 +323,3 @@ $( document ).on( "mobileinit", function() {
 })( jQuery );
 
 });
-
-$( document ).on( "pageshow", ".jqm-demos:not(.ui-page-header-fixed)", function() {
-	var page = $( this ), 
-		panelInnerHeight = page.find( ".jqm-nav-panel.ui-panel-position-left" ).outerHeight() + 30,
-		minPageHeight = $.mobile.getScreenHeight();
-
-	if ( panelInnerHeight > minPageHeight ) {
-		setTimeout(function() {
-			page.css( "min-height", panelInnerHeight );
-		}, 50 );
-	}
-});
