@@ -5,10 +5,12 @@ module.exports = function( grunt ) {
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
 		name = "jquery.mobile<%= versionSuffix %>",
 		dist = "dist",
+		buildId = "<%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss TT Z" ),
 		banner = {
 			normal: [
 				"/*",
 				"* jQuery Mobile <%= version %>",
+				"* <%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss TT Z" ),
 				"* http://jquerymobile.com",
 				"*",
 				"* Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors",
@@ -19,7 +21,7 @@ module.exports = function( grunt ) {
 				"",
 				"",
 				"" ].join( grunt.util.linefeed ),
-			minified: "/*! jQuery Mobile <%= version %> | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */\n"
+			minified: "/*! jQuery Mobile <%= version %> | <%if ( headShortHash ) {%>Git HEAD hash: <%= headShortHash %> <> <% } %>Date: " + grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss TT Z" ) + " | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */\n"
 		};
 
 	// grunt plugins
@@ -46,6 +48,10 @@ module.exports = function( grunt ) {
 		version: "<%= pkg.version %>",
 
 		versionSuffix: "",
+
+		headHash: "",
+
+		headShortHash: "",
 
 		jshint: {
 			js: {
@@ -473,9 +479,8 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.firstpass", "copy:demos.secondpass", "copy:demos.unprocessed" ] );
 
-	grunt.registerTask( "dist:common", [ "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
-	grunt.registerTask( "dist:release", [ "release:init", "dist:common"] );
-	grunt.registerTask( "dist", [ "config:dev", "dist:common" ] );
+	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
+	grunt.registerTask( "dist:release", [ "release:init", "dist" ] );
 
 	grunt.registerTask( "test", [ "config:dev", "requirejs", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
