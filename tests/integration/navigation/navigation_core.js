@@ -41,7 +41,7 @@ $.testHelper.delayStart();
 			function(){
 				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation to internal page." );
 
-				$.testHelper.openPage("#/tests/unit/navigation/external.html");
+				$.testHelper.openPage("#/tests/integration/navigation/external.html");
 			},
 
 			function() {

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Sequence Test Suite</title>
+	<title>jQuery Mobile Multipage Test Suite</title>
 	<script src="../../../../external/requirejs/require.js"></script>
     <script src="../../../../js/requirejs.config.js"></script>
 	<script src="../../../../js/jquery.tag.inserter.js"></script>
@@ -13,20 +13,18 @@
 			$.mobile.page.prototype.options.contentTheme = "d";
 		});
 	</script>
-	<script src="../../jquery.setNameSpace.js"></script>
+	<script src="../../../jquery.setNameSpace.js"></script>
 	<script src="../../../jquery.testHelper.js"></script>
 	<script src="../../../../external/qunit.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"widgets/dialog",
 				"widgets/page",
-				"widgets/page.sections",
-				"widgets/popup"
+				"widgets/page.sections"
 			],
 			[ "jquery.mobile.init" ],
 			[
-				"sequence_core.js"
+				"multipage_core.js"
 			]
 		], "../../../../js");
 	</script>
@@ -34,8 +32,7 @@
 
 	<link rel="stylesheet" href="../../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../../external/qunit.css"/>
-
-	<script src="../../swarminject.js"></script>
+	<script src="../../../swarminject.js"></script>
 </head>
 <body>
 
@@ -45,14 +42,29 @@
 <ol id="qunit-tests">
 </ol>
 
-<div data-nstest-role="page" id="sequenceRedirect"></div>
+<div id="page1" data-nstest-role="page">
+	<div data-nstest-role="content">
+		<a href="#page1">Page 1</a>
+		<a href="#page2">Page 2</a>
+		<a href="#page3">Page 3</a>
+	</div>
+</div>
 
-<!--
-This test page is used when testing initial URLs of the form
-http://domain/path/to/page1.html#/path/to/page2.html. It really only works if
-you load sequence-tests.html via the hash, i.e.,
-http://domain/path/to/sequence/index.html#/path/to/sequence-redirect.html
--->
+<div id="page2" data-nstest-role="page">
+	<div data-nstest-role="content">
+		<a href="#page1">Page 1</a>
+		<a href="#page2">Page 2</a>
+		<a href="#page3">Page 3</a>
+	</div>
+</div>
+
+<div id="page3" data-nstest-role="page">
+	<div data-nstest-role="content">
+		<a href="#page1">Page 1</a>
+		<a href="#page2">Page 2</a>
+		<a href="#page3">Page 3</a>
+	</div>
+</div>
 
 </body>
 </html>
