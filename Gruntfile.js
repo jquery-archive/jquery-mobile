@@ -359,19 +359,41 @@ module.exports = function( grunt ) {
 					urls: (function() {
 						// Find the test files
 						var suites = grunt.util._.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
-							patterns, paths, idx,
+							types = grunt.util._.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ),
+							patterns, paths, idx, prefixes = ["tests/unit/", "tests/integration/"],
 							onePath = "",
 							uniquePaths = [],
 							versionedPaths = [],
 							jQueries = grunt.util._.without( ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ), "" );
 
+						if( types.length ){
+							prefixes = [];
+							types.forEach(function( type ) {
+								prefixes.push( "tests/" + type +"/" );
+							});
+						}
+
+						patterns = [];
+
 						if ( suites.length ) {
-							patterns = [];
 							suites.forEach( function( unit ) {
-								patterns = patterns.concat( [ "tests/unit/" + unit, "tests/unit/" + unit + "/index.html", "tests/unit/" + unit + "/*/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
+								prefixes.forEach( function( prefix ) {
+									patterns = patterns.concat([
+										prefix + unit + "/",
+										prefix + unit + "/index.html",
+										prefix + unit + "/*/index.html",
+										prefix + unit + "/**/*-tests.html"
+									]);
+								});
 							});
 						} else {
-							patterns = [ "tests/unit/*/index.html", "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
+							prefixes.forEach( function( prefix ) {
+								patterns = patterns.concat([
+									prefix + "*/index.html",
+									prefix + "*/*/index.html",
+									prefix + "**/*-tests.html"
+								]);
+							});
 						}
 
 						paths = grunt.file.expand( patterns )
