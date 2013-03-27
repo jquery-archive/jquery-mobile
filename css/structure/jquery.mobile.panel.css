@@ -10,6 +10,7 @@
 .ui-panel-closed {
 	width: 0;
 	overflow: hidden;
+	visibility: hidden;
 }
 .ui-panel-fixed {
 	position: fixed;
