@@ -46,7 +46,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "release:fail-if-pre", function() {
 		if ( xbeta === "pre" ) {
-			grunt.fatal( "Cannot release a '"+xbeta+"' version!" );
+			grunt.fatal( "Cannot release/deploy a '"+xbeta+"' version!" );
 		}
 	});
 

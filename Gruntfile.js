@@ -367,8 +367,8 @@ module.exports = function( grunt ) {
 
 						if ( suites.length ) {
 							patterns = [];
-							suites.forEach( function( unit ) {
-								patterns = patterns.concat( [ "tests/unit/" + unit, "tests/unit/" + unit + "/index.html", "tests/unit/" + unit + "/*/index.html", "tests/unit/" + unit + "/**/*-tests.html" ] );
+							suites.forEach( function( suite ) {
+								patterns = patterns.concat( [ "tests/unit/" + suite + "/index.html", "tests/unit/" + suite + "/*/index.html", "tests/unit/" + suite + "/**/*-tests.html" ] );
 							});
 						} else {
 							patterns = [ "tests/unit/*/index.html", "tests/unit/*/*/index.html", "tests/unit/**/*-tests.html" ];
@@ -414,18 +414,18 @@ module.exports = function( grunt ) {
 				user: "jqadmin",
 				host: "code.origin.jquery.com",
 				remoteBase: "/var/www/html/code.jquery.com/mobile/",
-				cwd: "dist" //removes the dist directory from the destination
+//				cwd: dist //removes the dist directory from the destination
 			},
 			release: {
 				files: {
-					"jquery.mobile-<%= pkg.version %>.js": path.join( dist, "jquery.mobile.js" ),
-					"jquery.mobile-<%= pkg.version %>.min.js": path.join( dist, "jquery.mobile.min.js" ),
-					"jquery.mobile-<%= pkg.version %>.min.map": path.join( dist, "jquery.mobile.min.map" ),
-					"jquery.mobile-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.css" ),
-					"jquery.mobile-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.min.css" ),
-					"jquery.mobile.structure-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.structure.css" ),
-					"jquery.mobile.structure-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.structure.min.css" ),
-					"jquery.mobile.structure-<%= pkg.version %>.zip": path.join( dist, "jquery.mobile.zip" )
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.js": path.join( dist, "jquery.mobile.js" ),
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.min.js": path.join( dist, "jquery.mobile.min.js" ),
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.min.map": path.join( dist, "jquery.mobile.min.map" ),
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.css" ),
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.min.css" ),
+					"<%= pkg.version %>/jquery.mobile.structure-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.structure.css" ),
+					"<%= pkg.version %>/jquery.mobile.structure-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.structure.min.css" ),
+					"<%= pkg.version %>/jquery.mobile.structure-<%= pkg.version %>.zip": path.join( dist, "jquery.mobile.zip" )
 				}
 			},
 			latest: {
@@ -438,11 +438,24 @@ module.exports = function( grunt ) {
 		curl: {
 			options: {
 				baseUrl: "http://code.origin.jquery.com/mobile/",
+				querystring: "?reload",
 				cwd: dist
 			},
 			latest: {
 				files: {
 					"latest/": path.join( dist, "jquery.mobile.*" )
+				}
+			},
+			release: {
+				files: {
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.js": path.join( dist, "jquery.mobile.js" ),
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.min.js": path.join( dist, "jquery.mobile.min.js" ),
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.min.map": path.join( dist, "jquery.mobile.min.map" ),
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.css" ),
+					"<%= pkg.version %>/jquery.mobile-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.min.css" ),
+					"<%= pkg.version %>/jquery.mobile.structure-<%= pkg.version %>.css": path.join( dist, "jquery.mobile.structure.css" ),
+					"<%= pkg.version %>/jquery.mobile.structure-<%= pkg.version %>.min.css": path.join( dist, "jquery.mobile.structure.min.css" ),
+					"<%= pkg.version %>/jquery.mobile.structure-<%= pkg.version %>.zip": path.join( dist, "jquery.mobile.zip" )
 				}
 			}
 		},
@@ -472,8 +485,8 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test", [ "config:dev", "requirejs", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
-	grunt.registerTask( "release", [ "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:_deploy", "release:set-next-version" ] );
-	grunt.registerTask( "_deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
+	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
+	grunt.registerTask( "release", [ "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );
