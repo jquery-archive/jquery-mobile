@@ -14,26 +14,28 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		if ( sequential === undefined ) {
 			sequential = true;
 		}
-		
+
 		this.sequential = sequential;
 	};
 
-	$.mobile.TransitionHandler.prototype.transition = function( name, reverse, $to, $from ) {
-		// TODO temporary
-		var self = this;
-
-		var deferred = new $.Deferred(),
-			reverseClass = reverse ? " reverse" : "",
-			active	= $.mobile.urlHistory.getActive(),
-			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
-			screenHeight = $.mobile.getScreenHeight(),
-			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
-			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
-			toPreClass = " ui-page-pre-in",
-			toggleViewportClass = function() {
+	$.extend($.mobile.TransitionHandler.prototype, {
+		toggleViewportClass: function( name ) {
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
-			},
-			scrollPage = function() {
+		},
+
+		transition: function( name, reverse, $to, $from ) {
+			// TODO temporary
+			var self = this;
+
+			var deferred = new $.Deferred(),
+				reverseClass = reverse ? " reverse" : "",
+				active	= $.mobile.urlHistory.getActive(),
+				toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
+				screenHeight = $.mobile.getScreenHeight(),
+				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
+				none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
+				toPreClass = " ui-page-pre-in";
+			var scrollPage = function() {
 				// By using scrollTo instead of silentScroll, we can keep things better in order
 				// Just to be precautios, disable scrollstart listening like silentScroll would
 				$.event.special.scrollstart.enabled = false;
@@ -44,13 +46,15 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				setTimeout( function() {
 					$.event.special.scrollstart.enabled = true;
 				}, 150 );
-			},
-			cleanFrom = function() {
+			};
+
+			var cleanFrom = function() {
 				$from
 					.removeClass( $.mobile.activePageClass + " out in reverse " + name )
 					.height( "" );
-			},
-			startOut = function() {
+			};
+
+			var startOut = function() {
 				// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
 				if ( !self.sequential ) {
 					doneOut();
@@ -64,18 +68,18 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				$from
 					.height( screenHeight + $.mobile.window.scrollTop() )
 					.addClass( name + " out" + reverseClass );
-			},
+			};
 
-			doneOut = function() {
+			var doneOut = function() {
 
 				if ( $from && self.sequential ) {
 					cleanFrom();
 				}
 
 				startIn();
-			},
+			};
 
-			startIn = function() {
+			var startIn = function() {
 
 				// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
 				$to.css( "z-index", -10 );
@@ -105,9 +109,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 					doneIn();
 				}
 
-			},
+			};
 
-			doneIn = function() {
+			var doneIn = function() {
 
 				if ( !self.sequential ) {
 
@@ -120,7 +124,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 					.removeClass( "out in reverse " + name )
 					.height( "" );
 
-				toggleViewportClass();
+				self.toggleViewportClass( name );
 
 				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
 				// This ensures we jump to that spot after the fact, if we aren't there already.
@@ -131,17 +135,17 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				deferred.resolve( name, reverse, $to, $from, true );
 			};
 
-		toggleViewportClass();
+			self.toggleViewportClass( name );
 
-		if ( $from && !none ) {
-			startOut();
-		}
-		else {
-			doneOut();
-		}
+			if ( $from && !none ) {
+				startOut();
+			} else {
+				doneOut();
+			}
 
-		return deferred.promise();
-	};
+			return deferred.promise();
+		}
+	});
 
 
 
