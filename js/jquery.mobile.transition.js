@@ -14,6 +14,8 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 	};
 
 	$.extend($.mobile.Transition.prototype, {
+		toPreClass: " ui-page-pre-in",
+
 		init: function( name, reverse, $to, $from ) {
 			$.extend(this, {
 				name: name,
@@ -56,7 +58,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				this.cleanFrom( this.$from );
 			}
 
-			this.startIn( toScroll, toPreClass, screenHeight, reverseClass, none );
+			this.startIn( toScroll, this.toPreClass, screenHeight, reverseClass, none );
 		},
 
 		scrollPage: function( toScroll ) {
@@ -78,7 +80,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
 			this.$to.css( "z-index", -10 );
 
-			this.$to.addClass( $.mobile.activePageClass + toPreClass );
+			this.$to.addClass( $.mobile.activePageClass + this.toPreClass );
 
 			// Send focus to page as it is now display: block
 			$.mobile.focusPage( this.$to );
@@ -98,7 +100,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			}
 
 			this.$to
-				.removeClass( toPreClass )
+				.removeClass( this.toPreClass )
 				.addClass( this.name + " in" + reverseClass );
 
 			if ( none ) {
@@ -110,10 +112,10 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		startOut: function( toScroll, toPreClass, screenHeight, reverseClass, none ) {
 			// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
 			if ( !this.sequential ) {
-				this.doneOut( toScroll, toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( toScroll, this.toPreClass, screenHeight, reverseClass, none );
 			} else {
 				this.$from.animationComplete($.proxy(function() {
-					this.doneOut( toScroll, toPreClass, screenHeight, reverseClass, none );
+					this.doneOut( toScroll, this.toPreClass, screenHeight, reverseClass, none );
 				}, this));
 			}
 
@@ -138,17 +140,17 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 				screenHeight = $.mobile.getScreenHeight(),
 				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
-				none = !$.support.cssTransitions || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
-				toPreClass = " ui-page-pre-in";
+				none = !$.support.cssTransitions || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition();
+
 
 			this.deferred = new $.Deferred();
 
 			this.toggleViewportClass();
 
 			if ( this.$from && !none ) {
-				this.startOut( toScroll, toPreClass, screenHeight, reverseClass, none );
+				this.startOut( toScroll, this.toPreClass, screenHeight, reverseClass, none );
 			} else {
-				this.doneOut( toScroll, toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( toScroll, this.toPreClass, screenHeight, reverseClass, none );
 			}
 
 			return this.deferred.promise();
