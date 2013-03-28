@@ -162,6 +162,4 @@ module.exports = function( grunt ) {
 			});
 		}
 	})
-
-	grunt.registerTask( 'release', [ "release:init", "release:git:status" ]);
 };
