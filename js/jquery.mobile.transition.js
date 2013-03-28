@@ -160,11 +160,11 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		sequential: true
 	});
 
-	$.mobile.ConcurentTransition = function(){
+	$.mobile.ConcurrentTransition = function(){
 		this.init.apply(this, arguments);
 	};
 
-	$.extend($.mobile.ConcurentTransition.prototype, $.mobile.Transition.prototype, {
+	$.extend($.mobile.ConcurrentTransition.prototype, $.mobile.Transition.prototype, {
 		sequential: false
 	});
 
@@ -172,7 +172,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 // generate the handlers from the above
 var sequentialHandler = $.mobile.SerialTransition,
-	simultaneousHandler = $.mobile.ConcurentTransition,
+	simultaneousHandler = $.mobile.ConcurrentTransition,
 	defaultGetMaxScrollForTransition = function() {
 		return $.mobile.getScreenHeight() * 3;
 	};
