@@ -8,7 +8,7 @@
 //>>group: Transitions
 //>>css.structure: ../css/structure/jquery.mobile.transition.slide.css
 
-define( [ "jquery", "../jquery.mobile.transition" ], function( jQuery ) {
+define( [ "jquery", "../handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
