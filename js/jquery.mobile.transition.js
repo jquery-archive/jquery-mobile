@@ -22,7 +22,8 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				reverse: reverse,
 				$to: $to,
 				$from: $from,
-				deferred: new $.Deferred()
+				deferred: new $.Deferred(),
+				toScroll: $.mobile.urlHistory.getActive().lastScroll || $.mobile.defaultHomeScroll
 			});
 		},
 
@@ -46,8 +47,8 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
 				// This ensures we jump to that spot after the fact, if we aren't there already.
-				if ( $.mobile.window.scrollTop() !== toScroll ) {
-					this.scrollPage( toScroll );
+				if ( $.mobile.window.scrollTop() !== this.toScroll ) {
+					this.scrollPage( this.toScroll );
 				}
 
 			this.deferred.resolve( this.name, this.reverse, this.$to, this.$from, true );
@@ -59,7 +60,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				this.cleanFrom( this.$from );
 			}
 
-			this.startIn( toScroll, screenHeight, reverseClass, none );
+			this.startIn( this.toScroll, screenHeight, reverseClass, none );
 		},
 
 		scrollPage: function( toScroll ) {
@@ -67,7 +68,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			// Just to be precautios, disable scrollstart listening like silentScroll would
 			$.event.special.scrollstart.enabled = false;
 
-			window.scrollTo( 0, toScroll );
+			window.scrollTo( 0, this.toScroll );
 
 			// reenable scrollstart listening like silentScroll would
 			setTimeout( function() {
@@ -87,9 +88,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			$.mobile.focusPage( this.$to );
 
 			// Set to page height
-			this.$to.height( screenHeight + toScroll );
+			this.$to.height( screenHeight + this.toScroll );
 
-			this.scrollPage( toScroll );
+			this.scrollPage( this.toScroll );
 
 			// Restores visibility of the new page: added together with this.$to.css( "z-index", -10 );
 			this.$to.css( "z-index", "" );
@@ -105,7 +106,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				.addClass( this.name + " in" + reverseClass );
 
 			if ( none ) {
-				this.doneIn( toScroll );
+				this.doneIn( this.toScroll );
 			}
 
 		},
@@ -113,10 +114,10 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		startOut: function( toScroll, screenHeight, reverseClass, none ) {
 			// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
 			if ( !this.sequential ) {
-				this.doneOut( toScroll, screenHeight, reverseClass, none );
+				this.doneOut( this.toScroll, screenHeight, reverseClass, none );
 			} else {
 				this.$from.animationComplete($.proxy(function() {
-					this.doneOut( toScroll, screenHeight, reverseClass, none );
+					this.doneOut( this.toScroll, screenHeight, reverseClass, none );
 				}, this));
 			}
 
@@ -134,18 +135,16 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 		transition: function() {
 			var reverseClass = this.reverse ? " reverse" : "",
-				active	= $.mobile.urlHistory.getActive(),
-				toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 				screenHeight = $.mobile.getScreenHeight(),
 				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
-				none = !$.support.cssTransitions || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition();
+				none = !$.support.cssTransitions || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), this.toScroll ) > $.mobile.getMaxScrollForTransition();
 
 			this.toggleViewportClass();
 
 			if ( this.$from && !none ) {
-				this.startOut( toScroll, screenHeight, reverseClass, none );
+				this.startOut( this.toScroll, screenHeight, reverseClass, none );
 			} else {
-				this.doneOut( toScroll, screenHeight, reverseClass, none );
+				this.doneOut( this.toScroll, screenHeight, reverseClass, none );
 			}
 
 			return this.deferred.promise();
