@@ -131,10 +131,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + this.name );
 		},
 
-		transition: function( $to ) {
-			// TODO temporary
-			var self = this;
-
+		transition: function() {
 			var reverseClass = this.reverse ? " reverse" : "",
 				active	= $.mobile.urlHistory.getActive(),
 				toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
