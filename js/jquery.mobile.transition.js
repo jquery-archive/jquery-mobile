@@ -108,20 +108,20 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		},
 
 		startOut: function( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
-            // if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
-            if ( !this.sequential ) {
-                this.doneOut( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
-            } else {
-                $from.animationComplete($.proxy(function() {
+			// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
+			if ( !this.sequential ) {
+				this.doneOut( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+			} else {
+				$from.animationComplete($.proxy(function() {
 					this.doneOut( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 				}, this));
-            }
+			}
 
-            // Set the from page's height and start it transitioning out
-            // Note: setting an explicit height helps eliminate tiling in the transitions
-            $from
-                .height( screenHeight + $.mobile.window.scrollTop() )
-                .addClass( this.name + " out" + reverseClass );
+			// Set the from page's height and start it transitioning out
+			// Note: setting an explicit height helps eliminate tiling in the transitions
+			$from
+				.height( screenHeight + $.mobile.window.scrollTop() )
+				.addClass( this.name + " out" + reverseClass );
 		},
 
 
