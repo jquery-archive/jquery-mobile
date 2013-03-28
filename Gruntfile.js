@@ -433,10 +433,10 @@ module.exports = function( grunt ) {
 						path.join( dist, name + ".min.map" ),
 						path.join( dist, name + "*.css" ),
 						path.join( dist, "jquery.mobile.structure<%= versionSuffix %>*.css" ),
-						path.join( dist, name + ".zip" )
-					],
-					"<%= pkg.version %>/demos/": path.join( dist, "demos/" ),
-					"<%= pkg.version %>/images/": path.join( dist, "images/" )
+						path.join( dist, name + ".zip" ),
+						path.join( dist, "demos" ),
+						path.join( dist, "images" )
+					]
 				}
 			}
 		},
