@@ -6,7 +6,6 @@ module.exports = function( grunt ) {
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
 		name = "jquery.mobile<%= versionSuffix %>",
 		dist = "dist",
-		buildId = "<%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss Z" ),
 		banner = {
 			normal: [
 				"/*",
