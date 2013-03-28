@@ -34,13 +34,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		},
 
 		// NOTE overridden by child object prototypes
-		beforeDoneIn: function() {
-			if ( !this.sequential ) {
-				if ( this.$from ) {
-					this.cleanFrom();
-				}
-			}
-		},
+		beforeDoneIn: function() {},
 
 		beforeDoneOut: function() {
 			if ( this.$from && this.sequential ) {
@@ -174,6 +168,12 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 		beforeStartOut: function( screenHeight, reverseClass, none ) {
 			this.doneOut( screenHeight, reverseClass, none );
+		},
+
+		beforeDoneIn: function() {
+			if ( this.$from ) {
+				this.cleanFrom();
+			}
 		}
 	});
 
