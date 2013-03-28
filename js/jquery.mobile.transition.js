@@ -47,7 +47,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 					this.scrollPage( toScroll );
 				}
 
-			deferred.resolve( this.name, reverse, $to, $from, true );
+			deferred.resolve( this.name, this.reverse, $to, $from, true );
 		},
 
 		doneOut: function( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
@@ -56,7 +56,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				this.cleanFrom( $from );
 			}
 
-			this.startIn( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+			this.startIn( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 		},
 
 		scrollPage: function( toScroll ) {
@@ -93,7 +93,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 			if ( !none ) {
 				$to.animationComplete( $.proxy(function() {
-					this.doneIn( $from, $to, reverse, toScroll, deferred );
+					this.doneIn( $from, $to, this.reverse, toScroll, deferred );
 				}, this));
 			}
 
@@ -102,7 +102,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				.addClass( this.name + " in" + reverseClass );
 
 			if ( none ) {
-				this.doneIn( $from, $to, reverse, toScroll, deferred );
+				this.doneIn( $from, $to, this.reverse, toScroll, deferred );
 			}
 
 		},
@@ -110,10 +110,10 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		startOut: function( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
             // if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
             if ( !this.sequential ) {
-                this.doneOut( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+                this.doneOut( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
             } else {
                 $from.animationComplete($.proxy(function() {
-					this.doneOut( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+					this.doneOut( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 				}, this));
             }
 
@@ -122,7 +122,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
             $from
                 .height( screenHeight + $.mobile.window.scrollTop() )
                 .addClass( this.name + " out" + reverseClass );
-        },
+		},
 
 
 		toggleViewportClass: function() {
@@ -134,7 +134,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			var self = this;
 
 			var deferred = new $.Deferred(),
-				reverseClass = reverse ? " reverse" : "",
+				reverseClass = this.reverse ? " reverse" : "",
 				active	= $.mobile.urlHistory.getActive(),
 				toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 				screenHeight = $.mobile.getScreenHeight(),
@@ -146,9 +146,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			this.toggleViewportClass();
 
 			if ( $from && !none ) {
-				this.startOut( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.startOut( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			} else {
-				this.doneOut( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			}
 
 			return deferred.promise();
