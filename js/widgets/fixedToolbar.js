@@ -224,9 +224,11 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		},
 
 		_bindToggleHandlers: function() {
-			var self = this, delay,
+			var self = this,
 				o = self.options,
-				$el = self.element;
+				$el = self.element,
+				delayShow, delayHide,
+				isVisible = true;
 
 			// tap toggle
 			$el.closest( ".ui-page" )
@@ -243,16 +245,24 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 					//and issue #4410 Footer navbar moves up when clicking on a textbox in an Android environment
 					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ) {
 						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system 
-						//controls causes fixed position, tap-toggle false Header to reveal itself 
-						if ( e.type === "focusout" && !self._visible ) {
+						//controls causes fixed position, tap-toggle false Header to reveal itself
+						// isVisible instead of self._visible because the focusin and focusout events fire twice at the same time
+						// Also use a delay for hiding the toolbars because on Android native browser focusin is direclty followed
+						// by a focusout when a native selects opens and the other way around when it closes.
+						if ( e.type === "focusout" && !isVisible ) {
+							isVisible = true;
 							//wait for the stack to unwind and see if we have jumped to another input
-							delay = setTimeout( function() {
+							clearTimeout( delayHide );
+							delayShow = setTimeout( function() {
 								self.show();
 							}, 0 ); 
-						} else if ( e.type === "focusin" && self._visible ) {
+						} else if ( e.type === "focusin" && !!isVisible ) {
 							//if we have jumped to another input clear the time out to cancel the show.
-							clearTimeout( delay );
-							self.hide();
+							clearTimeout( delayShow );
+							isVisible = false;
+							delayHide = setTimeout( function() {
+								self.hide();
+							}, 0 ); 
 						}
 					}
 				});
