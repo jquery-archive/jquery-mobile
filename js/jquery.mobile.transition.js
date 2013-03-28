@@ -29,7 +29,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				.height( "" );
 		},
 
-		doneIn: function( $from, $to, reverse, toScroll, deferred ) {
+		doneIn: function( $from, $to, toScroll, deferred ) {
 				if ( !this.sequential ) {
 
 					if ( $from ) {
@@ -50,13 +50,13 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			deferred.resolve( this.name, this.reverse, $to, $from, true );
 		},
 
-		doneOut: function( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+		doneOut: function( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
 
 			if ( $from && this.sequential ) {
 				this.cleanFrom( $from );
 			}
 
-			this.startIn( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+			this.startIn( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 		},
 
 		scrollPage: function( toScroll ) {
@@ -72,7 +72,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			}, 150 );
 		},
 
-		startIn: function( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+		startIn: function( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
 
 
 			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
@@ -93,7 +93,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 			if ( !none ) {
 				$to.animationComplete( $.proxy(function() {
-					this.doneIn( $from, $to, this.reverse, toScroll, deferred );
+					this.doneIn( $from, $to, toScroll, deferred );
 				}, this));
 			}
 
@@ -102,18 +102,18 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				.addClass( this.name + " in" + reverseClass );
 
 			if ( none ) {
-				this.doneIn( $from, $to, this.reverse, toScroll, deferred );
+				this.doneIn( $from, $to, toScroll, deferred );
 			}
 
 		},
 
-		startOut: function( $from, $to, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+		startOut: function( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
             // if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
             if ( !this.sequential ) {
-                this.doneOut( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+                this.doneOut( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
             } else {
                 $from.animationComplete($.proxy(function() {
-					this.doneOut( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+					this.doneOut( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 				}, this));
             }
 
@@ -129,7 +129,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + this.name );
 		},
 
-		transition: function( reverse, $to, $from ) {
+		transition: function( $to, $from ) {
 			// TODO temporary
 			var self = this;
 
@@ -146,9 +146,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			this.toggleViewportClass();
 
 			if ( $from && !none ) {
-				this.startOut( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.startOut( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			} else {
-				this.doneOut( $from, $to, this.reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( $from, $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			}
 
 			return deferred.promise();
