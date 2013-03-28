@@ -29,7 +29,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				.height( "" );
 		},
 
-		doneIn: function( $to, toScroll, deferred ) {
+		doneIn: function( toScroll, deferred ) {
 				if ( !this.sequential ) {
 
 					if ( this.$from ) {
@@ -37,7 +37,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 					}
 				}
 
-				$to.removeClass( "out in reverse " + this.name ).height( "" );
+				this.$to.removeClass( "out in reverse " + this.name ).height( "" );
 
 				this.toggleViewportClass();
 
@@ -47,16 +47,16 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 					this.scrollPage( toScroll );
 				}
 
-			deferred.resolve( this.name, this.reverse, $to, this.$from, true );
+			deferred.resolve( this.name, this.reverse, this.$to, this.$from, true );
 		},
 
-		doneOut: function( $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+		doneOut: function( toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
 
 			if ( this.$from && this.sequential ) {
 				this.cleanFrom( this.$from );
 			}
 
-			this.startIn( $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+			this.startIn( toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 		},
 
 		scrollPage: function( toScroll ) {
@@ -72,48 +72,48 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			}, 150 );
 		},
 
-		startIn: function( $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+		startIn: function( toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
 
 
 			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
-			$to.css( "z-index", -10 );
+			this.$to.css( "z-index", -10 );
 
-			$to.addClass( $.mobile.activePageClass + toPreClass );
+			this.$to.addClass( $.mobile.activePageClass + toPreClass );
 
 			// Send focus to page as it is now display: block
-			$.mobile.focusPage( $to );
+			$.mobile.focusPage( this.$to );
 
 			// Set to page height
-			$to.height( screenHeight + toScroll );
+			this.$to.height( screenHeight + toScroll );
 
 			this.scrollPage( toScroll );
 
-			// Restores visibility of the new page: added together with $to.css( "z-index", -10 );
-			$to.css( "z-index", "" );
+			// Restores visibility of the new page: added together with this.$to.css( "z-index", -10 );
+			this.$to.css( "z-index", "" );
 
 			if ( !none ) {
-				$to.animationComplete( $.proxy(function() {
-					this.doneIn( $to, toScroll, deferred );
+				this.$to.animationComplete( $.proxy(function() {
+					this.doneIn( toScroll, deferred );
 				}, this));
 			}
 
-			$to
+			this.$to
 				.removeClass( toPreClass )
 				.addClass( this.name + " in" + reverseClass );
 
 			if ( none ) {
-				this.doneIn( $to, toScroll, deferred );
+				this.doneIn( toScroll, deferred );
 			}
 
 		},
 
-		startOut: function( $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
+		startOut: function( toScroll, deferred, toPreClass, screenHeight, reverseClass, none ) {
 			// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
 			if ( !this.sequential ) {
-				this.doneOut( $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			} else {
 				this.$from.animationComplete($.proxy(function() {
-					this.doneOut( $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+					this.doneOut( toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 				}, this));
 			}
 
@@ -146,9 +146,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			this.toggleViewportClass();
 
 			if ( this.$from && !none ) {
-				this.startOut( $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.startOut( toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			} else {
-				this.doneOut( $to, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			}
 
 			return deferred.promise();
