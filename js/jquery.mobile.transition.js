@@ -33,33 +33,51 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				.height( "" );
 		},
 
+		// NOTE overriden by child object prototypes
+		beforeDoneIn: function() {
+			if ( !this.sequential ) {
+				if ( this.$from ) {
+					this.cleanFrom();
+				}
+			}
+		},
+
+		beforeDoneOut: function() {
+			if ( this.$from && this.sequential ) {
+				this.cleanFrom();
+			}
+		},
+
+		beforeStartOut: function( screenHeight, reverseClass, none ) {
+			// if it's not sequential, call the doneOut transition to start the
+			// TO page animating in simultaneously
+			if ( !this.sequential ) {
+				this.doneOut( screenHeight, reverseClass, none );
+			} else {
+				this.$from.animationComplete($.proxy(function() {
+					this.doneOut( screenHeight, reverseClass, none );
+				}, this));
+			}
+		},
+
 		doneIn: function() {
-				if ( !this.sequential ) {
+			this.beforeDoneIn();
 
-					if ( this.$from ) {
-						this.cleanFrom();
-					}
-				}
+			this.$to.removeClass( "out in reverse " + this.name ).height( "" );
 
-				this.$to.removeClass( "out in reverse " + this.name ).height( "" );
+			this.toggleViewportClass();
 
-				this.toggleViewportClass();
-
-				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
-				// This ensures we jump to that spot after the fact, if we aren't there already.
-				if ( $.mobile.window.scrollTop() !== this.toScroll ) {
-					this.scrollPage();
-				}
+			// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
+			// This ensures we jump to that spot after the fact, if we aren't there already.
+			if ( $.mobile.window.scrollTop() !== this.toScroll ) {
+				this.scrollPage();
+			}
 
 			this.deferred.resolve( this.name, this.reverse, this.$to, this.$from, true );
 		},
 
 		doneOut: function( screenHeight, reverseClass, none ) {
-
-			if ( this.$from && this.sequential ) {
-				this.cleanFrom();
-			}
-
+			this.beforeDoneOut();
 			this.startIn( screenHeight, reverseClass, none );
 		},
 
@@ -77,8 +95,6 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		},
 
 		startIn: function( screenHeight, reverseClass, none ) {
-
-
 			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
 			this.$to.css( "z-index", -10 );
 
@@ -112,14 +128,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		},
 
 		startOut: function( screenHeight, reverseClass, none ) {
-			// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
-			if ( !this.sequential ) {
-				this.doneOut( screenHeight, reverseClass, none );
-			} else {
-				this.$from.animationComplete($.proxy(function() {
-					this.doneOut( screenHeight, reverseClass, none );
-				}, this));
-			}
+			this.beforeStartOut( screenHeight, reverseClass, none );
 
 			// Set the from page's height and start it transitioning out
 			// Note: setting an explicit height helps eliminate tiling in the transitions
