@@ -160,8 +160,8 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 
 // generate the handlers from the above
-var sequentialHandler = new $.mobile.SerialTransition(),
-	simultaneousHandler = new $.mobile.ConcurentTransition(),
+var sequentialHandler = $.mobile.SerialTransition,
+	simultaneousHandler = $.mobile.ConcurentTransition,
 	defaultGetMaxScrollForTransition = function() {
 		return $.mobile.getScreenHeight() * 3;
 	};
