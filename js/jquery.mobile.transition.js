@@ -37,7 +37,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				if ( !this.sequential ) {
 
 					if ( this.$from ) {
-						this.cleanFrom( this.$from );
+						this.cleanFrom();
 					}
 				}
 
@@ -57,7 +57,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		doneOut: function( screenHeight, reverseClass, none ) {
 
 			if ( this.$from && this.sequential ) {
-				this.cleanFrom( this.$from );
+				this.cleanFrom();
 			}
 
 			this.startIn( screenHeight, reverseClass, none );
