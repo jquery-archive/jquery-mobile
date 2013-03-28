@@ -125,7 +125,6 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
 		},
 
-
 		transition: function( name, reverse, $to, $from ) {
 			// TODO temporary
 			var self = this;
@@ -140,12 +139,12 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				toPreClass = " ui-page-pre-in";
 
 
-			self.toggleViewportClass( name );
+			this.toggleViewportClass( name );
 
 			if ( $from && !none ) {
-				self.startOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.startOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			} else {
-				self.doneOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( $from, $to, name, reverse, toScroll, deferred, toPreClass, screenHeight, reverseClass, none );
 			}
 
 			return deferred.promise();
