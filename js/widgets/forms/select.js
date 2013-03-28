@@ -151,7 +151,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		this.select.change(function() {
 			self.refresh();
 			
-			if ( options.nativeMenu ) {
+			if ( !!options.nativeMenu ) {
 				this.blur();
 			}
 		});
