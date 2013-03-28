@@ -485,7 +485,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test", [ "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
-	grunt.registerTask( "deploy", [ "release:fail-if-pre", "dist:release", "rsync:release" ] );
+	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
 	grunt.registerTask( "release", [ "clean", "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
 
 	// Default grunt
