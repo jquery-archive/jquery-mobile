@@ -9,16 +9,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-	$.mobile.TransitionHandler = function( sequential ) {
-		// Default to sequential
-		if ( sequential === undefined ) {
-			sequential = true;
-		}
+	$.mobile.Transition = function() {};
 
-		this.sequential = sequential;
-	};
-
-	$.extend($.mobile.TransitionHandler.prototype, {
+	$.extend($.mobile.Transition.prototype, {
 		cleanFrom: function( $from, name ) {
 			$from
 				.removeClass( $.mobile.activePageClass + " out in reverse " + name )
@@ -152,10 +145,23 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 	});
 
 
+	$.mobile.SerialTransition = function(){};
+
+	$.extend($.mobile.SerialTransition.prototype, $.mobile.Transition.prototype, {
+		sequential: true
+	});
+
+	$.mobile.ConcurentTransition = function(){};
+
+	$.extend($.mobile.ConcurentTransition.prototype, $.mobile.Transition.prototype, {
+		sequential: false
+	});
+
+
 
 // generate the handlers from the above
-var sequentialHandler = new $.mobile.TransitionHandler(),
-	simultaneousHandler = new $.mobile.TransitionHandler( false ),
+var sequentialHandler = new $.mobile.SerialTransition(),
+	simultaneousHandler = new $.mobile.ConcurentTransition(),
 	defaultGetMaxScrollForTransition = function() {
 		return $.mobile.getScreenHeight() * 3;
 	};
