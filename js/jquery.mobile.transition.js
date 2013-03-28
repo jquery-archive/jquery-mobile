@@ -21,7 +21,8 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				name: name,
 				reverse: reverse,
 				$to: $to,
-				$from: $from
+				$from: $from,
+				deferred: new $.Deferred()
 			});
 		},
 
@@ -138,9 +139,6 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				screenHeight = $.mobile.getScreenHeight(),
 				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
 				none = !$.support.cssTransitions || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition();
-
-
-			this.deferred = new $.Deferred();
 
 			this.toggleViewportClass();
 
