@@ -33,7 +33,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				.height( "" );
 		},
 
-		// NOTE overriden by child object prototypes
+		// NOTE overridden by child object prototypes
 		beforeDoneIn: function() {
 			if ( !this.sequential ) {
 				if ( this.$from ) {
@@ -48,17 +48,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			}
 		},
 
-		beforeStartOut: function( screenHeight, reverseClass, none ) {
-			// if it's not sequential, call the doneOut transition to start the
-			// TO page animating in simultaneously
-			if ( !this.sequential ) {
-				this.doneOut( screenHeight, reverseClass, none );
-			} else {
-				this.$from.animationComplete($.proxy(function() {
-					this.doneOut( screenHeight, reverseClass, none );
-				}, this));
-			}
-		},
+		beforeStartOut: function() {},
 
 		doneIn: function() {
 			this.beforeDoneIn();
@@ -166,7 +156,13 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 	};
 
 	$.extend($.mobile.SerialTransition.prototype, $.mobile.Transition.prototype, {
-		sequential: true
+		sequential: true,
+
+		beforeStartOut: function( screenHeight, reverseClass, none ) {
+			this.$from.animationComplete($.proxy(function() {
+				this.doneOut( screenHeight, reverseClass, none );
+			}, this));
+		}
 	});
 
 	$.mobile.ConcurrentTransition = function(){
@@ -174,7 +170,11 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 	};
 
 	$.extend($.mobile.ConcurrentTransition.prototype, $.mobile.Transition.prototype, {
-		sequential: false
+		sequential: false,
+
+		beforeStartOut: function( screenHeight, reverseClass, none ) {
+			this.doneOut( screenHeight, reverseClass, none );
+		}
 	});
 
 
