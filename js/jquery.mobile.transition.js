@@ -52,13 +52,13 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			this.deferred.resolve( this.name, this.reverse, this.$to, this.$from, true );
 		},
 
-		doneOut: function( toScroll, toPreClass, screenHeight, reverseClass, none ) {
+		doneOut: function( toScroll, screenHeight, reverseClass, none ) {
 
 			if ( this.$from && this.sequential ) {
 				this.cleanFrom( this.$from );
 			}
 
-			this.startIn( toScroll, this.toPreClass, screenHeight, reverseClass, none );
+			this.startIn( toScroll, screenHeight, reverseClass, none );
 		},
 
 		scrollPage: function( toScroll ) {
@@ -74,7 +74,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			}, 150 );
 		},
 
-		startIn: function( toScroll, toPreClass, screenHeight, reverseClass, none ) {
+		startIn: function( toScroll, screenHeight, reverseClass, none ) {
 
 
 			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
@@ -109,13 +109,13 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 		},
 
-		startOut: function( toScroll, toPreClass, screenHeight, reverseClass, none ) {
+		startOut: function( toScroll, screenHeight, reverseClass, none ) {
 			// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
 			if ( !this.sequential ) {
-				this.doneOut( toScroll, this.toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( toScroll, screenHeight, reverseClass, none );
 			} else {
 				this.$from.animationComplete($.proxy(function() {
-					this.doneOut( toScroll, this.toPreClass, screenHeight, reverseClass, none );
+					this.doneOut( toScroll, screenHeight, reverseClass, none );
 				}, this));
 			}
 
@@ -148,9 +148,9 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 			this.toggleViewportClass();
 
 			if ( this.$from && !none ) {
-				this.startOut( toScroll, this.toPreClass, screenHeight, reverseClass, none );
+				this.startOut( toScroll, screenHeight, reverseClass, none );
 			} else {
-				this.doneOut( toScroll, this.toPreClass, screenHeight, reverseClass, none );
+				this.doneOut( toScroll, screenHeight, reverseClass, none );
 			}
 
 			return this.deferred.promise();
