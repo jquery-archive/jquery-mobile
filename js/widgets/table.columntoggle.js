@@ -5,7 +5,14 @@
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
 
-define( [ "jquery", "./table", "../jquery.mobile.buttonMarkup", "./popup", "../jquery.mobile.fieldContain", "widgets/controlgroup", "widgets/forms/checkboxradio" ], function( jQuery ) {
+define( [
+	"jquery",
+	"./table",
+	"../jquery.mobile.buttonMarkup",
+	"./popup",
+	"../jquery.mobile.fieldContain",
+	"./controlgroup",
+	"./forms/checkboxradio" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
