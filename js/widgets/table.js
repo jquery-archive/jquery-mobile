@@ -10,72 +10,57 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], fu
 (function( $, undefined ) {
 
 $.widget( "mobile.table", $.mobile.widget, {
-
-		options: {
-			classes: {
-				table: "ui-table"
-			},
-			initSelector: ":jqmData(role='table')"
+	options: {
+		classes: {
+			table: "ui-table"
 		},
+		initSelector: ":jqmData(role='table')"
+	},
 
-		_create: function() {
-			var self = this;
-			self.refresh( true );
-		},
+	_create: function() {
+		var $el = this.element,
+			trs = this.element.find( "thead tr" ),
+			headers = this.element.find( "tr:eq(0)" ).children(),
+			allHeaders = headers.add( trs.children() );
 
-		refresh: function (create) {
+		this.element.addClass( this.options.classes.table );
 
-			var self = this,
-				trs = this.element.find( "thead tr" );
-
-			if ( create ) {
-				this.element.addClass( this.options.classes.table );
-			}
+		$.extend( this, {
 
 			// Expose headers and allHeaders properties on the widget
 			// headers references the THs within the first TR in the table
-			self.headers = this.element.find( "tr:eq(0)" ).children();
+			headers: headers,
 
 			// allHeaders references headers, plus all THs in the thead, which may include several rows, or not
-			self.allHeaders = self.headers.add( trs.children() );
+			allHeaders: allHeaders
+		});
 
-			trs.each(function(){
+		trs.each( function() {
+			var coltally = 0,
+				$this = $( this );
 
-				var coltally = 0;
+			$this.children().each( function( i ) {
+				var $this = $( this ),
+					span = parseInt( $this.attr( "colspan" ), 10 ),
+					sel = ":nth-child(" + ( coltally + 1 ) + ")";
 
-				$( this ).children().each(function( i ){
+				$this.jqmData( "colstart", coltally + 1 );
 
-					var span = parseInt( $( this ).attr( "colspan" ), 10 ),
-						sel = ":nth-child(" + ( coltally + 1 ) + ")";
-					$( this )
-						.jqmData( "colstart", coltally + 1 );
-
-					if( span ){
-						for( var j = 0; j < span - 1; j++ ){
-							coltally++;
-							sel += ", :nth-child(" + ( coltally + 1 ) + ")";
-						}
+				if( span ) {
+					for( var j = 0; j < span - 1; j++ ) {
+						coltally++;
+						sel += ", :nth-child(" + ( coltally + 1 ) + ")";
 					}
+				}
 
-					if ( create === undefined ) {
-						$(this).jqmData("cells", "");
-					}
-					// Store "cells" data on header as a reference to all cells in the same column as this TH
-					$( this )
-						.jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).not( this ).children( sel ) );
+				// Store "cells" data on header as a reference to all cells in the same column as this TH
+				$this
+					.jqmData( "cells", $el.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( sel ) );
 
-					coltally++;
-
-				});
-
+				coltally++;
 			});
-
-			// update table modes
-			if ( create === undefined ) {
-				this.element.trigger( 'tableupdate' );
-			}
+		});
 	}
-
 });
 
 //auto self-init widgets

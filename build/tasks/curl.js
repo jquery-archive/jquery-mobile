@@ -25,10 +25,14 @@ module.exports = function ( grunt ) {
 		var done = this.async(),
 			options = _.clone( this.options({
 				baseUrl: "http://localhost/",
-				querystring: "?reload",
+				querystring: "",
 				cwd: "."
 			})),
-			dry = grunt.option( "no-write" ) || grunt.option( "dry-run" );
+			dry = grunt.option( "no-write" );
+
+		if ( dry ) {
+			grunt.log.writeln( "Running in dry mode" );
+		}
 
 		async.forEach(
 			this.files,
@@ -39,11 +43,11 @@ module.exports = function ( grunt ) {
 					filePair.src,
 					function( src, next ) {
 						var dest,
-							url = options.baseUrl + "/";
+							url = options.baseUrl;
 						if ( detectDestType( filePair.dest ) === 'directory') {
 							dest = ( isExpandedPair ) ? filePair.dest : unixifyPath( path.join( filePair.dest, path.relative( options.cwd, src ) ));
 						} else {
-							dest = path.relative( options.cwd, filePair.dest );
+							dest = filePair.dest;
 						}
 
 						url += dest + options.querystring;

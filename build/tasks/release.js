@@ -42,11 +42,12 @@ module.exports = function( grunt ) {
 		}
 
 		grunt.config.set( "version", releaseVersion );
+		grunt.config.set( "versionSuffix", "-" + releaseVersion );
 	});
 
 	grunt.registerTask( "release:fail-if-pre", function() {
 		if ( xbeta === "pre" ) {
-			grunt.fatal( "Cannot release a '"+xbeta+"' version!" );
+			grunt.fatal( "Cannot release/deploy a '"+xbeta+"' version!" );
 		}
 	});
 
@@ -161,6 +162,4 @@ module.exports = function( grunt ) {
 			});
 		}
 	})
-
-	grunt.registerTask( 'release', [ "release:init", "release:git:status" ]);
 };
