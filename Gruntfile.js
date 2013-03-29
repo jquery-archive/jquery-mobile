@@ -407,13 +407,7 @@ module.exports = function( grunt ) {
 								return path.replace( /\/\index.html$/, "/" );
 							});
 
-						for ( idx in paths ) {
-							if ( onePath !== paths[ idx ] ) {
-								onePath = paths[ idx ];
-								uniquePaths.push( onePath );
-							}
-						}
-						paths = uniquePaths;
+						paths = grunt.util._.uniq( paths );
 
 						if ( jQueries.length ) {
 							paths.forEach( function( path ) {
