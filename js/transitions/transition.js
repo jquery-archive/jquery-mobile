@@ -25,8 +25,7 @@ define( [ "jquery", "../jquery.mobile.core" ], function( jQuery ) {
 				reverse: reverse,
 				$to: $to,
 				$from: $from,
-				deferred: new $.Deferred(),
-				toScroll: $.mobile.urlHistory.getActive().lastScroll || $.mobile.defaultHomeScroll
+				deferred: new $.Deferred()
 			});
 		},
 
@@ -36,7 +35,7 @@ define( [ "jquery", "../jquery.mobile.core" ], function( jQuery ) {
 				.height( "" );
 		},
 
-		// NOTE overridden by child object prototypes
+		// NOTE overridden by child object prototypes, noop'd here as defaults
 		beforeDoneIn: function() {},
 		beforeDoneOut: function() {},
 		beforeStartOut: function() {},
@@ -134,6 +133,7 @@ define( [ "jquery", "../jquery.mobile.core" ], function( jQuery ) {
 				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
 				none = !$.support.cssTransitions || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), this.toScroll ) > $.mobile.getMaxScrollForTransition();
 
+			this.toScroll = $.mobile.urlHistory.getActive().lastScroll || $.mobile.defaultHomeScroll;
 			this.toggleViewportClass();
 
 			if ( this.$from && !none ) {
