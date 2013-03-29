@@ -10,6 +10,8 @@ define( [ "jquery", "../jquery.mobile.core" ], function( jQuery ) {
 
 (function( $, window, undefined ) {
 
+	// TODO remove direct references to $.mobile and properties, we should
+	//      favor injection with params to the constructor
 	$.mobile.Transition = function() {
 		this.init.apply(this, arguments);
 	};

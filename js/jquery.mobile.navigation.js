@@ -271,8 +271,8 @@ define( [
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
-		var Transition = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler,
-			promise = (new Transition( transition, reverse, toPage, fromPage )).transition();
+		var th = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler,
+			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
 			//trigger show/hide events

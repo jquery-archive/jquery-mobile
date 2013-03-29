@@ -9,21 +9,25 @@ define( ["jquery", "../jquery.mobile.core", "./serial", "./concurrent"], functio
 (function( $ ) {
 
 	// generate the handlers from the above
-	var sequentialHandler = $.mobile.SerialTransition,
-	  simultaneousHandler = $.mobile.ConcurrentTransition,
-	  defaultGetMaxScrollForTransition = function() {
-		  return $.mobile.getScreenHeight() * 3;
-	  };
-
-	// Make our transition handler the public default.
-	$.mobile.defaultTransitionHandler = sequentialHandler;
+	var defaultGetMaxScrollForTransition = function() {
+		return $.mobile.getScreenHeight() * 3;
+	};
 
 	//transition handler dictionary for 3rd party transitions
 	$.mobile.transitionHandlers = {
 		"default": $.mobile.defaultTransitionHandler,
-		"sequential": sequentialHandler,
-		"simultaneous": simultaneousHandler
+		"sequential": function( name, reverse, to, from ) {
+			return (new $.mobile.SerialTransition( name, reverse, to, from )).transition();
+		},
+
+		"simultaneous": function( name, reverse, to, from ) {
+			return (new $.mobile.ConcurrentTransition( name, reverse, to, from )).transition();
+		}
 	};
+
+	// Make our transition handler the public default.
+	$.mobile.defaultTransitionHandler = $.mobile.transitionHandlers.sequential;
+	$.mobile.transitionHandlers.default = $.mobile.defaultTransitionHandler;
 
 	$.mobile.transitionFallbacks = {};
 
