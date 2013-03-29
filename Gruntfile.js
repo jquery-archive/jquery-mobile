@@ -5,6 +5,7 @@ module.exports = function( grunt ) {
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
 		name = "jquery.mobile<%= versionSuffix %>",
 		dist = "dist",
+		copyrightYear = grunt.template.today( "UTC:yyyy" ),
 		banner = {
 			normal: [
 				"/*",
@@ -12,7 +13,7 @@ module.exports = function( grunt ) {
 				"* <%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss Z" ),
 				"* http://jquerymobile.com",
 				"*",
-				"* Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors",
+				"* Copyright 2010, " + copyrightYear + " jQuery Foundation, Inc. and other contributors",
 				"* Released under the MIT license.",
 				"* http://jquery.org/license",
 				"*",
@@ -20,7 +21,7 @@ module.exports = function( grunt ) {
 				"",
 				"",
 				"" ].join( grunt.util.linefeed ),
-			minified: "/*! jQuery Mobile <%= version %> | <%if ( headShortHash ) {%>Git HEAD hash: <%= headShortHash %> <> <% } %>Date: " + grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss TT Z" ) + " | (c) 2010, 2013 jQuery Foundation, Inc. | jquery.org/license */\n"
+			minified: "/*! jQuery Mobile <%= version %> | <%if ( headShortHash ) {%>Git HEAD hash: <%= headShortHash %> <> <% } %>" + grunt.template.today( "UTC:yyyy-mm-dd" ) + "T" + grunt.template.today( "UTC:HH:MM:ss" ) + "Z | (c) 2010, " + copyrightYear + " jQuery Foundation, Inc. | jquery.org/license */\n"
 		};
 
 	// grunt plugins
