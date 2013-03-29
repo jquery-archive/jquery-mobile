@@ -844,7 +844,7 @@ a.ui-link-inherit {
 .ui-icon-alt .ui-icon-searchfield:after {
 	background-color: 						#fff;
 	background-color: 						rgba(255,255,255,.3);
-	background-image: url(images/icons-18-black.png);
+	background-image: url(images/icons-18-black.png) /*{global-icon-alt-set}*/;
 	background-repeat: no-repeat;
 }
 
@@ -956,7 +956,7 @@ a.ui-link-inherit {
 	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-bars, .ui-icon-edit,
 	.ui-icon-search, .ui-icon-searchfield:after, 
 	.ui-icon-checkbox-off, .ui-icon-checkbox-on, .ui-icon-radio-off, .ui-icon-radio-on {
-		background-image: url(images/icons-36-white.png);
+		background-image: url(images/icons-36-white.png) /*{global-large-icon-set}*/;
 		-moz-background-size: 864px 18px;
 		-o-background-size: 864px 18px;
 		-webkit-background-size: 864px 18px;
@@ -964,7 +964,7 @@ a.ui-link-inherit {
 	}
 
 	.ui-icon-alt .ui-icon {
-		background-image: url(images/icons-36-black.png);
+		background-image: url(images/icons-36-black.png) /*{global-large-icon-alt-set}*/;
 	}
 
 	.ui-icon-plus {
