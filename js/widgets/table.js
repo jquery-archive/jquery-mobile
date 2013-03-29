@@ -14,16 +14,24 @@ $.widget( "mobile.table", $.mobile.widget, {
 		classes: {
 			table: "ui-table"
 		},
+		set: true,
 		initSelector: ":jqmData(role='table')"
 	},
 
-	_create: function() {
+	_create: function () {
+		this.refresh();
+	},
+
+	refresh: function () {
 		var $el = this.element,
+			o = this.options,
 			trs = this.element.find( "thead tr" ),
 			headers = this.element.find( "tr:eq(0)" ).children(),
 			allHeaders = headers.add( trs.children() );
 
-		this.element.addClass( this.options.classes.table );
+		if ( o.set ) {
+			this.element.addClass( this.options.classes.table );
+		}
 
 		$.extend( this, {
 
@@ -52,7 +60,9 @@ $.widget( "mobile.table", $.mobile.widget, {
 						sel += ", :nth-child(" + ( coltally + 1 ) + ")";
 					}
 				}
-
+				if ( !o.set ) {
+					$(this).jqmData("cells", "");
+				}
 				// Store "cells" data on header as a reference to all cells in the same column as this TH
 				$this
 					.jqmData( "cells", $el.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( sel ) );
