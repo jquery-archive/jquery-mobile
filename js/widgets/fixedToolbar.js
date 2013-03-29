@@ -63,7 +63,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			$.extend( this, {
 				_thisPage: null
 			});
-
+ 
 			self._addTransitionClass();
 			self._bindPageEvents();
 			self._bindToggleHandlers();
@@ -159,7 +159,8 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			// This behavior only applies to "fixed", not "fullscreen"
 			if ( this.options.fullscreen ) { return; }
 
-			tbPage = tbPage || this._thisPage || $el.closest( ".ui-page" );
+			// tbPage argument can be a Page object or an event, if coming from throttled resize. 
+			tbPage = ( tbPage && tbPage.type === undefined && tbPage ) || this._thisPage || $el.closest( ".ui-page" );
 			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() + pos );
 		},
 
