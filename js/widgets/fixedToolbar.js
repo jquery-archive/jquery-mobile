@@ -191,7 +191,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 					.removeClass( "out " + hideClass )
 					.addClass( "in" )
 					.animationComplete(function () {
-						$el.removeClass('in');
+						$el.removeClass( "in" );
 					});
 			}
 			else {
@@ -206,7 +206,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
-			if( this._useTransition( notransition ) ) {
+			if ( this._useTransition( notransition ) ) {
 				$el
 					.addClass( outclass )
 					.removeClass( "in" )
