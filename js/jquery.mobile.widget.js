@@ -56,9 +56,10 @@ $.widget( "mobile.widget", {
 			// TODO remove dependency on the page widget for the keepNative.
 			// Currently the keepNative value is defined on the page prototype so
 			// the method is as well
-			if ( typeof $pagetCtx !== 'undefined' && $pagetCtx.data( "mobile-page" ) ) {
+			if ( typeof $pagetCtx !== 'undefined' ) {
 				page = $pagetCtx.data( "mobile-page" );
-			} else {
+			}
+			if ( !page) {
 				page = $.mobile.closestPageData( $widgetElements );
 			}
 			keepNative = ( page && page.keepNativeSelector()) || "";
