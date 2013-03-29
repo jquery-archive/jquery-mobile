@@ -2,7 +2,7 @@
  * Transitions unit tests
  */
 (function( $ ){
-	var instance, proto;
+	var instance, proto, $to, $from;
 
 	module( "Transition cleanFrom" );
 
@@ -42,8 +42,12 @@
 		equal( $.event.special.scrollstart.enabled, false, "scrollstart is disabled" );
 	});
 
+
 	module( "Transition doneIn", {
 		setup: function() {
+			$to = $("<div>");
+			instance = new $.mobile.Transition( "foo", "reverse", $to, "from");
+
 			proto = $.extend({}, $.mobile.Transition.prototype);
 			$.mobile.Transition.prototype.toggleViewportClass = $.noop;
 		},
@@ -53,16 +57,40 @@
 		}
 	});
 
-	test( "doneIn removes classes from the destination 'page'", function() {
-		var $to = $("<div>"),
-			transition = new $.mobile.Transition( "foo", false, $to, $());
-
+	test( "removes classes from the destination 'page'", function() {
 		$to.addClass( "out in reverse foo" );
-		transition.doneIn();
+		instance.doneIn();
 		ok( !$to.hasClass("out") );
 		ok( !$to.hasClass("in") );
 		ok( !$to.hasClass("reverse") );
 		ok( !$to.hasClass("foo") );
 	});
 
+	test( "scrolls the page", function() {
+		expect( 1 );
+
+		// ensure the two values are different to trigger the method call
+		window.scrollTo( 0 );
+		instance.toScroll = 100;
+
+		// stub to capture call
+		instance.scrollPage = function() {
+			ok(true, "scrollPage called" );
+		};
+
+		instance.doneIn();
+	});
+
+	test( "resolves the transition deferred with the requisite data", function() {
+		expect( 4 );
+
+		$.when( instance.deferred ).then(function( name, reverse, to, from ) {
+			equal( name, "foo" );
+			equal( reverse, "reverse" );
+			equal( to, $to );
+			equal( from, "from" );
+		});
+
+		instance.doneIn();
+	});
 })( jQuery );
