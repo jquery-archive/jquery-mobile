@@ -47,13 +47,7 @@
 		setup: function() {
 			$to = $("<div>");
 			instance = new $.mobile.Transition( "foo", "reverse", $to, "from");
-
-			proto = $.extend({}, $.mobile.Transition.prototype);
-			$.mobile.Transition.prototype.toggleViewportClass = $.noop;
-		},
-
-		teardown: function() {
-			$.mobile.Transition.prototype = proto;
+			instance.toggleViewportClass = $.noop;
 		}
 	});
 
