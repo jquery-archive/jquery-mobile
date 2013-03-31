@@ -72,6 +72,7 @@ $.widget = function( name, base, prototype ) {
 		if ( existingConstructor && $.type( existingConstructor ) === "object" ) {
 			classPlaceholder = existingConstructor;
 			defineParams = existingConstructor._defineParams;
+			existingConstructor = defineParams.constructor;
 		} else {
 			classPlaceholder = $[ namespace ][ name ] = {};
 		}
@@ -79,6 +80,7 @@ $.widget = function( name, base, prototype ) {
 		classPlaceholder._defineParams = {
 			namespace: namespace,
 			name: name,
+			constructor: constructor,
 			define: function() {
 				var baseNS, baseName;
 
@@ -95,7 +97,7 @@ $.widget = function( name, base, prototype ) {
 					base = $[ baseNS ][ baseName ];
 				}
 
-				actuallyDefineWidget( fullName, constructor, defineParams ? base : undefined, base, prototype );
+				actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
 			}
 		};
 
