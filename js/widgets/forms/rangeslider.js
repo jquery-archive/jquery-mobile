@@ -64,6 +64,9 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				"blur": "_change",
 				"keyup": "_change"
 			});
+			this._on({
+				"mousedown":"_change"
+			});
 			this._on( firstHandle, {
 				"vmousedown": "_dragFirstHandle"
 			});
@@ -134,12 +137,19 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				return false;
 			}
 
-			var min = parseFloat( this._inputFirst.val(), 10 ),
+			var self = this,
+				min = parseFloat( this._inputFirst.val(), 10 ),
 				max = parseFloat( this._inputLast.val(), 10 ),
 				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
 				thisSlider = first ? this._inputFirst : this._inputLast,
 				otherSlider = first ? this._inputLast : this._inputFirst;
-				
+			
+			
+			if( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
+				thisSlider.blur();
+			} else if( event.type === "mousedown" ){
+				return;
+			}
 			if ( min > max && !this._sliderTarget ) {
 				//this prevents min from being greater then max
 				thisSlider.val( first ? max: min ).slider( "refresh" );
@@ -147,8 +157,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			} else if ( min > max ) {
 				//this makes it so clicks on the target on either extreme go to the closest handle
 				thisSlider.val( this._targetVal ).slider( "refresh" );
-				
-				var self = this;
+
 				//You must wait for the stack to unwind so first slider is updated before updating second
 				setTimeout( function() {
 					otherSlider.val( first ? min: max ).slider( "refresh" );
