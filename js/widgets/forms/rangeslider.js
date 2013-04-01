@@ -67,9 +67,19 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this._on({
 				"mousedown":"_change"
 			});
+			this._on( this.element.closest( "form" ), {
+				"reset":"_handleReset"
+			});
 			this._on( firstHandle, {
 				"vmousedown": "_dragFirstHandle"
 			});
+		},
+		_handleReset: function(){
+			var self = this;
+			//we must wait for the stack to unwind before updateing other wise sliders will not have updated yet
+			setTimeout( function(){
+				self._updateHighlight();
+			},0);
 		},
 
 		_dragFirstHandle: function( event ) {
