@@ -115,9 +115,27 @@
 		}
 	});
 
-	test( "active page class is added to the to dom element", function() {
+	test( "sets active page class on the dom element", function() {
 		ok( !$to.hasClass($.mobile.activePageClass) );
 		instance.startIn();
 		ok( $to.hasClass($.mobile.activePageClass) );
+	});
+
+	test( "sets the height", function() {
+		$to.height( 10 );
+		equal( $to.height(), 10 );
+		instance.toScroll = 5;
+		instance.startIn( 10 );
+		equal( $to.height(), 15, "height is toScroll + screenheight" );
+	});
+
+	test( "adds the reverse class and the transition name", function() {
+		ok( !$to.hasClass("foo") );
+
+		instance.name = "bar";
+		instance.startIn( 0, "foo" );
+
+		ok( $to.hasClass("foo"), "has class 'foo'" );
+		ok( $to.hasClass("bar"), "has class 'bar'" );
 	});
 })( jQuery );

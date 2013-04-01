@@ -109,7 +109,7 @@ define( [ "jquery",
 
 			this.$to
 				.removeClass( this.toPreClass )
-				.addClass( this.name + " in" + reverseClass );
+				.addClass( this.name + " in " + reverseClass );
 
 			if ( none ) {
 				this.doneIn();
