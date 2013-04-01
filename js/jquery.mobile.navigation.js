@@ -1113,9 +1113,6 @@ define( [
 				}
 			} else {
 				target = findClosestLink( target );
-				if ( !( target && path.parseUrl( target.getAttribute( "href" ) || "#" ).hash !== "#" ) ) {
-					return;
-				}
 
 				// TODO teach $.mobile.hijackable to operate on raw dom elements so the
 				// link wrapping can be avoided
