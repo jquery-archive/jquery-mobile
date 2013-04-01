@@ -157,7 +157,7 @@
 			this.doneOut.apply(this, arguments);
 		};
 
-		// when the transition is anything but "non" the animation is waited for
+		// when the transition is anything but "none" the animation is waited for
 		// to fire the last step. stub and fire here
 		$to.animationComplete = function( callback ) {
 			callback();
