@@ -1,18 +1,18 @@
 /*
-* fallback transition for slidedown in non-3D supporting browsers (which tend to handle complex transitions poorly in general
+* fallback transition for turn in non-3D supporting browsers (which tend to handle complex transitions poorly in general
 */
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Animation styles and fallback transitions definition for non-3D supporting browsers
-//>>label: Slidedown Transition
+//>>label: Turn Transition
 //>>group: Transitions
-//>>css.structure: ../css/structure/jquery.mobile.transition.slidedown.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.turn.css
 
-define( [ "jquery", "../jquery.mobile.transition" ], function( jQuery ) {
+define( [ "jquery", "../handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-$.mobile.transitionFallbacks.slidedown = "fade";
+$.mobile.transitionFallbacks.turn = "fade";
 
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

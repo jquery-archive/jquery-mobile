@@ -14,7 +14,7 @@ define( [
 	"./jquery.mobile.support",
 	"depend!./jquery.hashchange[jquery]",
 	"./widgets/page",
-	"./jquery.mobile.transition" ], function( jQuery ) {
+	"./transitions/handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -296,7 +296,7 @@ define( [
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
 
 		height = ( typeof height === "number" )? height : getScreenHeight();
-		
+
 		aPage.css( "min-height", height - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
 	};
 
@@ -430,7 +430,7 @@ define( [
 				.jqmData( "url", dataUrl );
 		}
 
-		
+
 		// If we failed to find a page in the DOM, check the URL to see if it
 		// refers to the first page in the application. If it isn't a reference
 		// to the first page and refers to non-existent embedded page, error out.
@@ -452,7 +452,7 @@ define( [
 				return deferred.promise();
 			}
 		}
-		
+
 		// If the page we are interested in is already in the DOM,
 		// and the caller did not indicate that we should force a
 		// reload of the file, we are done. Otherwise, track the
@@ -461,7 +461,7 @@ define( [
 			if ( !settings.reloadPage ) {
 				enhancePage( page, settings.role );
 				deferred.resolve( absUrl, options, page );
-				//if we are reloading the page make sure we update the base if its not a prefetch 
+				//if we are reloading the page make sure we update the base if its not a prefetch
 				if( base && !options.prefetch ){
 					base.set(url);
 				}
@@ -499,7 +499,7 @@ define( [
 				};
 		}
 		// Reset base to the default document base.
-		// only reset if we are not prefetching 
+		// only reset if we are not prefetching
 		if ( base && typeof options.prefetch === "undefined" ) {
 			base.reset();
 		}

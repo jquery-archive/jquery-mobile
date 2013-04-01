@@ -1,17 +1,17 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: All the stock transitions
+//>>description: All the stock transitions and associated CSS
 //>>label: All Transitions
 //>>group: Transitions
 
 define( [
-	"./transitions/flip",
-	"./transitions/flow",
-	"./transitions/pop",
-	"./transitions/slide",
-	"./transitions/slidedown",
-	"./transitions/slidefade",
-	"./transitions/slideup",
-	"./transitions/turn"
+	"./visuals/flip",
+	"./visuals/flow",
+	"./visuals/pop",
+	"./visuals/slide",
+	"./visuals/slidedown",
+	"./visuals/slidefade",
+	"./visuals/slideup",
+	"./visuals/turn"
 ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

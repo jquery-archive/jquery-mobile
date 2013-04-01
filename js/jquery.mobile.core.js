@@ -86,6 +86,9 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 			hoverDelay: 200
 		},
 
+		// default the property to remove dependency on assignment in init module
+		pageContainer: $(),
+
 		// define the window and the document objects
 		window: $( window ),
 		document: $( document ),
