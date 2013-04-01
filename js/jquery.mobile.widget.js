@@ -40,11 +40,12 @@ $.widget( "mobile.widget", {
 	},
 
 	enhanceWithin: function( target, useKeepNative ) {
-		this.enhance( $( this.options.initSelector, $( target )), useKeepNative );
+		var $target = $( target );
+		this.enhance( $( this.options.initSelector, $target), useKeepNative, $target );
 	},
 
-	enhance: function( targets, useKeepNative ) {
-		var page, keepNative, $widgetElements = $( targets ), self = this;
+	enhance: function( targets, useKeepNative, /*INTERNAL*/ $pagetCtx ) {
+		var page, keepNative, $widgetElements = $( targets );
 
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a
@@ -55,7 +56,12 @@ $.widget( "mobile.widget", {
 			// TODO remove dependency on the page widget for the keepNative.
 			// Currently the keepNative value is defined on the page prototype so
 			// the method is as well
-			page = $.mobile.closestPageData( $widgetElements );
+			if ( typeof $pagetCtx !== 'undefined' ) {
+				page = $pagetCtx.data( "mobile-page" );
+			}
+			if ( !page) {
+				page = $.mobile.closestPageData( $widgetElements );
+			}
 			keepNative = ( page && page.keepNativeSelector()) || "";
 
 			$widgetElements = $widgetElements.not( keepNative );
