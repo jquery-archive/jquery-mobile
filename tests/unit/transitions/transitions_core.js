@@ -87,4 +87,23 @@
 
 		instance.doneIn();
 	});
+
+	module( "Transition hideIn", {
+		setup: function() {
+			$to = $("<div>");
+			instance = new $.mobile.Transition( "foo", "reverse", $to, "from");
+			instance.toggleViewportClass = $.noop;
+		}
+	});
+
+	test( "sets the z-index on the to element to prevent flickering in phonegap", function() {
+		expect( 3 );
+		equal( $to.css( "z-index" ), "" );
+
+		instance.hideIn(function() {
+			equal( $to.css( "z-index" ), "-10" );
+		});
+
+		equal( $to.css( "z-index" ), "" );
+	});
 })( jQuery );

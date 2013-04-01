@@ -61,6 +61,13 @@ define( [ "jquery", "../jquery.mobile.core", "../events/touch" ], function( jQue
 			this.startIn( screenHeight, reverseClass, none );
 		},
 
+		hideIn: function( callback ) {
+			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
+			this.$to.css( "z-index", -10 );
+			callback.call(this);
+			this.$to.css( "z-index", "" );
+		},
+
 		scrollPage: function() {
 			// By using scrollTo instead of silentScroll, we can keep things better in order
 			// Just to be precautios, disable scrollstart listening like silentScroll would
@@ -75,21 +82,17 @@ define( [ "jquery", "../jquery.mobile.core", "../events/touch" ], function( jQue
 		},
 
 		startIn: function( screenHeight, reverseClass, none ) {
-			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
-			this.$to.css( "z-index", -10 );
+			this.hideIn(function() {
+				this.$to.addClass( $.mobile.activePageClass + this.toPreClass );
 
-			this.$to.addClass( $.mobile.activePageClass + this.toPreClass );
+				// Send focus to page as it is now display: block
+				$.mobile.focusPage( this.$to );
 
-			// Send focus to page as it is now display: block
-			$.mobile.focusPage( this.$to );
+				// Set to page height
+				this.$to.height( screenHeight + this.toScroll );
 
-			// Set to page height
-			this.$to.height( screenHeight + this.toScroll );
-
-			this.scrollPage();
-
-			// Restores visibility of the new page: added together with this.$to.css( "z-index", -10 );
-			this.$to.css( "z-index", "" );
+				this.scrollPage();
+			});
 
 			if ( !none ) {
 				this.$to.animationComplete( $.proxy(function() {
