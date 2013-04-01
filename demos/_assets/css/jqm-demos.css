@@ -90,7 +90,7 @@ body, .jqm-demos  {
 	background-position: -51px -2px;
 }
 /* Toggle menu bars / close icon on small screens */
-@media all and (max-width:45.9375em) {
+@media (max-width:45.9375em) {
 	.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open .jqm-header .jqm-navmenu-link .ui-icon {
 		background-position: -51px 50%;
 	}
@@ -550,7 +550,7 @@ h2.jqm-home-widget {
 }
 
 /* Responsive */
-@media all and (min-width:46em) {
+@media (min-width:46em) {
 	/* Header logo */
 	.jqm-header h1.jqm-logo {
 		text-align: left;
@@ -677,7 +677,7 @@ h2.jqm-home-widget {
 	}
 }
 
-@media all and (min-width:60em) {
+@media (min-width:60em) {
 	/* Header */
 	.jqm-header h1.jqm-logo {
 		margin-left: 15%;
