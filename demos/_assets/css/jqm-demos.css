@@ -24,7 +24,7 @@ body, .jqm-demos  {
 	padding-top: 0;
 }
 
-/* Logo */
+/* Header logo */
 .jqm-header h1.jqm-logo {
 	font-size: 1em;
 	margin: .6em 3.375em;
@@ -551,10 +551,10 @@ h2.jqm-home-widget {
 
 /* Responsive */
 @media all and (min-width:46em) {
-	/* Logo */
+	/* Header logo */
 	.jqm-header h1.jqm-logo {
 		text-align: left;
-		margin: .8em 0 .8em 15%;
+		margin: .8em 0 .8em 5%;
 	}
 	.jqm-header .jqm-logo a {
 		min-height: 57px;
@@ -578,7 +578,7 @@ h2.jqm-home-widget {
 		top: 1.4em;
 	}
 	.jqm-header .jqm-navmenu-link {
-		left: 15%;
+		left: 5%;
 		margin-left: 215px;
 	}
 	.jqm-header .jqm-search-link {
@@ -611,8 +611,8 @@ h2.jqm-home-widget {
 	.jqm-search-toggle .jqm-search {
 		display: block;
 		position: absolute;
-		top: 1.58125em;
-		right: 15%;
+		top: 1.0875em;
+		right: 5%;
 		background: none;
 		border: none;
 	}
@@ -637,7 +637,7 @@ h2.jqm-home-widget {
 		float: left;		
 	}
 	.jqm-footer .jqm-version {
-		margin: 1.5em 15% 1.5em 0;
+		margin: 1.5em 5% 1.5em 0;
 		float: right;
 		font-weight: 700;
 	}
@@ -647,7 +647,7 @@ h2.jqm-home-widget {
 	
 	/* Content */
 	.jqm-demos .jqm-content {
-		padding: 15px 15% 4.5em; /* padding bottom is because of footer position absolute */
+		padding: 15px 5% 4.5em; /* padding bottom is because of footer position absolute */
 	}
 	.jqm-demos .jqm-content.jqm-fullwidth {
 		padding: 15px;
@@ -674,6 +674,30 @@ h2.jqm-home-widget {
 	.jqm-demos-home h2.jqm-home-widget {
 		clear:left;
 		padding-top:2em;
+	}
+}
+
+@media all and (min-width:60em) {
+	/* Header */
+	.jqm-header h1.jqm-logo {
+		margin-left: 15%;
+	}
+	.jqm-header .jqm-navmenu-link {
+		left: 15%;
+	}
+	.jqm-search,
+	.jqm-search-toggle .jqm-search {
+		right: 5%;
+	}
+	/* Footer */
+	.jqm-footer .jqm-version {
+		margin-right: 15%;
+		margin-left: 15%;
+	}
+	/* Content */
+	.jqm-demos .jqm-content {
+		padding-right: 15%;
+		padding-left: 15%;
 	}
 }
 
