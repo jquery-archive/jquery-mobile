@@ -43,7 +43,14 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			
 			if ( !target.is( ".ui-disabled, .ui-btn-active" ) ) {
 				$navbtns.removeClass( $.mobile.activeBtnClass );
-				target.addClass( $.mobile.activeBtnClass );
+				$( this ).addClass( $.mobile.activeBtnClass );
+				
+				// The code below is a workaround to fix #1181
+				var activeBtn = $( this );
+				
+				$( document ).one( "pagehide", function() {
+					activeBtn.removeClass( $.mobile.activeBtnClass );
+				});
 			}
 		});
 
