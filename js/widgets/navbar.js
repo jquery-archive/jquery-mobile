@@ -37,23 +37,6 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			iconpos:	iconpos
 		});
 
-		$navbar.delegate( "a", "vclick", function( event ) {
-			// ui-btn-inner is returned as target
-			var target = $( event.target ).is( "a" ) ? $( this ) : $( this ).parent( "a" );
-			
-			if ( !target.is( ".ui-disabled, .ui-btn-active" ) ) {
-				$navbtns.removeClass( $.mobile.activeBtnClass );
-				$( this ).addClass( $.mobile.activeBtnClass );
-				
-				// The code below is a workaround to fix #1181
-				var activeBtn = $( this );
-				
-				$( document ).one( "pagehide", function() {
-					activeBtn.removeClass( $.mobile.activeBtnClass );
-				});
-			}
-		});
-
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
 			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
