@@ -106,4 +106,18 @@
 
 		equal( $to.css( "z-index" ), "" );
 	});
+
+	module( "Transition startIn", {
+		setup: function() {
+			$to = $("<div>");
+			instance = new $.mobile.Transition( "foo", "reverse", $to, "from");
+			instance.toggleViewportClass = $.noop;
+		}
+	});
+
+	test( "active page class is added to the to dom element", function() {
+		ok( !$to.hasClass($.mobile.activePageClass) );
+		instance.startIn();
+		ok( $to.hasClass($.mobile.activePageClass) );
+	});
 })( jQuery );
