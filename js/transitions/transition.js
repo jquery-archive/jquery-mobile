@@ -129,7 +129,7 @@ define( [ "jquery",
 
 
 		toggleViewportClass: function() {
-				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + this.name );
+			$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + this.name );
 		},
 
 		transition: function() {

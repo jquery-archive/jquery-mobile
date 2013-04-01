@@ -111,7 +111,6 @@
 		setup: function() {
 			$to = $("<div>");
 			instance = new $.mobile.Transition( "foo", "reverse", $to, "from");
-			instance.toggleViewportClass = $.noop;
 		}
 	});
 
@@ -137,5 +136,62 @@
 
 		ok( $to.hasClass("foo"), "has class 'foo'" );
 		ok( $to.hasClass("bar"), "has class 'bar'" );
+	});
+
+	module( "Transition transition", {
+		setup: function() {
+			$to = $from = $("<div>");
+			instance = new $.mobile.Transition( "foo", "reverse", $to, $from );
+		}
+	});
+
+	asyncTest( "runs in and out methods in order", function() {
+		expect( 4 );
+
+		var counter = 0, defaults;
+
+		defaults = $.extend({}, $.mobile.Transition.prototype);
+
+		// transition child classes generally set this up
+		instance.beforeStartOut = function() {
+			this.doneOut.apply(this, arguments);
+		};
+
+		// when the transition is anything but "non" the animation is waited for
+		// to fire the last step. stub and fire here
+		$to.animationComplete = function( callback ) {
+			callback();
+		};
+
+		instance.startOut = function() {
+			equal( counter, 0, "startOut is first" );
+			counter++;
+
+			defaults.startOut.apply(this, arguments);
+		};
+
+		instance.doneOut = function() {
+			equal( counter, 1, "doneOut is second" );
+			counter++;
+
+			defaults.doneOut.apply(this, arguments);
+		};
+
+		instance.startIn = function() {
+			equal( counter, 2, "startIn is first" );
+			counter++;
+
+			defaults.startIn.apply(this, arguments);
+		};
+
+		instance.doneIn = function() {
+			equal( counter, 3, "doneIn is fourth" );
+			counter++;
+
+			defaults.doneIn.apply(this, arguments);
+			start();
+		};
+
+		instance.transition();
 	});
 })( jQuery );
