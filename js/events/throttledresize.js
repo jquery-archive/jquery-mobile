@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Throttled resize event
-//>>label: throttledresize
+//>>description: Fires a resize event with a slight delay to prevent excessive callback invocation
+//>>label: Throttled Resize
 //>>group: Events
 
 define( [ "jquery" ], function( jQuery ) {

@@ -5,14 +5,16 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
+define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
-
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	var __version__ = ( pkg && pkg.version ) || "dev";
+//>>excludeEnd("jqmBuildExclude");
 	var nsNormalizeDict = {};
 
 	// jQuery.mobile configurable options
-	$.mobile = $.extend( {}, {
+	$.mobile = $.extend($.mobile, {
 
 		// Version of the jQuery Mobile Framework
 		version: __version__,
@@ -64,6 +66,10 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		// For error messages, which theme does the box uses?
 		pageLoadErrorMessageTheme: "e",
 
+		// replace calls to window.history.back with phonegaps navigation helper
+		// where it is provided on the window object
+		phonegapNavigationEnabled: false,
+
 		//automatically initialize the DOM when it's ready
 		autoInitializePage: true,
 
@@ -83,6 +89,13 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		// disable the alteration of the dynamic base tag or links in the case
 		// that a dynamic base tag isn't supported
 		dynamicBaseEnabled: true,
+
+		// default the property to remove dependency on assignment in init module
+		pageContainer: $(),
+
+		// define the window and the document objects
+		window: $( window ),
+		document: $( document ),
 
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
@@ -120,6 +133,9 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 			WINDOWS: 91 // COMMAND
 		},
 
+		// Place to store various widget extensions
+		behaviors: {},
+
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			if ( $.type( ypos ) !== "number" ) {
@@ -131,7 +147,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 
 			setTimeout( function() {
 				window.scrollTo( 0, ypos );
-				$( document ).trigger( "silentscroll", { x: 0, y: ypos });
+				$.mobile.document.trigger( "silentscroll", { x: 0, y: ypos });
 			}, 20 );
 
 			setTimeout( function() {
@@ -190,7 +206,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		closestPageData: function( $target ) {
 			return $target
 				.closest( ':jqmData(role="page"), :jqmData(role="dialog")' )
-				.data( "page" );
+				.data( "mobile-page" );
 		},
 
 		enhanceable: function( $set ) {
@@ -237,7 +253,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 		getScreenHeight: function() {
 			// Native innerHeight returns more accurate value for this across platforms,
 			// jQuery version is here as a normalized fallback for platforms like Symbian
-			return window.innerHeight || $( window ).height();
+			return window.innerHeight || $.mobile.window.height();
 		}
 	}, $.mobile );
 
@@ -299,7 +315,7 @@ define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 	};
 
 	// note that this helper doesn't attempt to handle the callback
-	// or setting of an html elements text, its only purpose is
+	// or setting of an html element's text, its only purpose is
 	// to return the html encoded version of the text in all cases. (thus the name)
 	$.fn.getEncodedText = function() {
 		return $( "<div/>" ).text( $( this ).text() ).html();

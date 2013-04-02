@@ -8,7 +8,7 @@
 	// and with the advent of the widget _on method we are actually testing the
 	// widget from UI which has it's own test suite for these sorts of things
 	// ie, don't test your dependencies / framework
-	if( !( $.fn.jquery.match(/^1.8/) )){
+	if( $.testHelper.versionTest( $.fn.jquery, function( l, r ) { return ( l < r ); }, "1.8" ) ){
 		test( "input is cleaned up on destroy", function(){
 			var input = $( "#destroycorrectly" ),
 			win = $( window ),
@@ -81,4 +81,34 @@
 	test( "'clear text' button for search inputs should use configured text", function(){
 		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
 	});
+
+	test( "data-clear-btn adds clear button to text inputs", function() {
+		ok( $( '#text-input-clear-btn' ).next().is( 'a.ui-input-clear' ), "data-clear-btn adds clear button to text inputs" );
+	});
+
+	test( "data-clear-btn does not add clear button to textarea", function() {
+		ok( ! $( "#textarea-clear-btn" ).next().is( "a.ui-input-clear" ), "data-clear-btn does not add clear button to textarea" );
+	});
+
+	test( "data-clear-btn does not add native clear button to input button (IE10)", function() {
+		// Get an input element, initial height, and reserve d for height difference
+		var e = $( "input[data-clear-btn='true']" ),
+				h = e.height(), d;
+
+		e.addClass("msClear");
+		e.val("some text").focus();
+		// Avoid syntax errors
+		try {
+			document.styleSheets[0].addRule(".msClear::-ms-clear", "height: 100px");
+		} catch (o) {
+			ok( true, "browser does not have the native feature for a test");
+			return true;
+		}
+
+		// If the pseudo-element exists, our height should be much larger
+		d = e.height() > h;
+
+		ok( !d, "native clear button is still visible" );
+	});
+
 })(jQuery);

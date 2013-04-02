@@ -13,40 +13,48 @@ define( [
 	"jquery",
 	"../../jquery.mobile.buttonMarkup",
 	"../../jquery.mobile.core",
+	"../../jquery.mobile.navigation",
 	"../dialog",
 	"./select",
 	"../listview",
 	"../page",
 	"../popup",
 	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
-	"../page.sections" ], function( $ ) {
+	"../page.sections" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var extendSelect = function( widget ) {
 
 		var select = widget.select,
+			origDestroy = widget._destroy,
 			selectID  = widget.selectID,
+			prefix = ( selectID ? selectID : ( ( $.mobile.ns || "" ) + "uuid-" + widget.uuid ) ),
+			popupID = prefix + "-listbox",
+			dialogID = prefix + "-dialog",
 			label = widget.label,
 			thisPage = widget.select.closest( ".ui-page" ),
 			selectOptions = widget._selectOptions(),
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
-			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' data-" +$.mobile.ns + "theme='"+ widget.options.theme +"' data-" +$.mobile.ns + "overlay-theme='"+ widget.options.overlayTheme +"'>" +
+			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' id='" + dialogID + "' data-" +$.mobile.ns + "theme='"+ widget.options.theme +"' data-" +$.mobile.ns + "overlay-theme='"+ widget.options.overlayTheme +"'>" +
 				"<div data-" + $.mobile.ns + "role='header'>" +
 				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ),
 
-			listbox =  $( "<div>", { "class": "ui-selectmenu" } ).insertAfter( widget.select ).popup( { theme: "a" } ),
+			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup( { theme: widget.options.overlayTheme } ),
 
 			list = $( "<ul>", {
 				"class": "ui-selectmenu-list",
 				"id": menuId,
 				"role": "listbox",
 				"aria-labelledby": buttonId
-			}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme ).appendTo( listbox ),
+				}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme )
+					.attr( "data-" + $.mobile.ns + "divider-theme", widget.options.dividerTheme )
+					.appendTo( listbox ),
+
 
 			header = $( "<div>", {
 				"class": "ui-header ui-bar-" + widget.options.theme
@@ -73,6 +81,8 @@ define( [
 			selectID: selectID,
 			buttonId: buttonId,
 			menuId: menuId,
+			popupID: popupID,
+			dialogID: dialogID,
 			thisPage: thisPage,
 			menuPage: menuPage,
 			label: label,
@@ -94,6 +104,14 @@ define( [
 				// Create list from select, update state
 				self.refresh();
 
+				if ( self._origTabIndex === undefined ) {
+					// Map undefined to false, because self._origTabIndex === undefined
+					// indicates that we have not yet checked whether the select has
+					// originally had a tabindex attribute, whereas false indicates that
+					// we have checked the select for such an attribute, and have found
+					// none present.
+					self._origTabIndex = ( self.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : self.select.attr( "tabindex" );
+				}
 				self.select.attr( "tabindex", "-1" ).focus(function() {
 					$( this ).blur();
 					self.button.focus();
@@ -101,12 +119,22 @@ define( [
 
 				// Button events
 				self.button.bind( "vclick keydown" , function( event ) {
+					if ( self.options.disabled || self.isOpen ) {
+						return;
+					}
+
 					if (event.type === "vclick" ||
 							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
 																event.keyCode === $.mobile.keyCode.SPACE)) {
 
-						self.open();
-						event.preventDefault();
+						self._decideFormat();
+						if ( self.menuType === "overlay" ) {
+							self.button.attr( "href", "#" + self.popupID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+						} else {
+							self.button.attr( "href", "#" + self.dialogID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+						}
+						self.isOpen = true;
+						// Do not prevent default, so the navigation may have a chance to actually open the chosen format
 					}
 				});
 
@@ -168,7 +196,7 @@ define( [
 						case 38:
 							prev = li.prev().not( ".ui-selectmenu-placeholder" );
 
-							if ( prev.is( ".ui-li-divider" ) ) {
+							if ( prev.hasClass( "ui-li-divider" ) ) {
 								prev = prev.prev();
 							}
 
@@ -186,7 +214,7 @@ define( [
 						case 40:
 							next = li.next();
 
-							if ( next.is( ".ui-li-divider" ) ) {
+							if ( next.hasClass( "ui-li-divider" ) ) {
 								next = next.next();
 							}
 
@@ -212,9 +240,6 @@ define( [
 				// button refocus ensures proper height calculation
 				// by removing the inline style and ensuring page inclusion
 				self.menuPage.bind( "pagehide", function() {
-					self.list.appendTo( self.listbox );
-					self._focusButton();
-
 					// TODO centralize page removal binding / handling in the page plugin.
 					// Suggestion from @jblas to do refcounting
 					//
@@ -294,7 +319,7 @@ define( [
 							if ( self.isMultiple ) {
 								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
-								if ( item.is( ".ui-selectmenu-placeholder" ) ) {
+								if ( item.hasClass( "ui-selectmenu-placeholder" ) ) {
 									item.next().addClass( $.mobile.activeBtnClass );
 								} else {
 									item.addClass( $.mobile.activeBtnClass );
@@ -312,27 +337,24 @@ define( [
 				var self = this;
 
 				if ( self.menuType === "page" ) {
-					// doesn't solve the possible issue with calling change page
-					// where the objects don't define data urls which prevents dialog key
-					// stripping - changePage has incoming refactor
-					window.history.back();
+					self.menuPage.dialog( "close" );
+					self.list.appendTo( self.listbox );
 				} else {
 					self.listbox.popup( "close" );
-					self.list.appendTo( self.listbox );
-					self._focusButton();
 				}
 
+				self._focusButton();
 				// allow the dialog to be closed again
 				self.isOpen = false;
 			},
 
 			open: function() {
-				if ( this.options.disabled ) {
-					return;
-				}
+				this.button.click();
+			},
 
+			_decideFormat: function() {
 				var self = this,
-					$window = $( window ),
+					$window = $.mobile.window,
 					selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
 					menuWidth = selfListParent.outerWidth(),
@@ -341,14 +363,6 @@ define( [
 					btnOffset = self.button.offset().top,
 					screenHeight = $window.height(),
 					screenWidth = $window.width();
-
-				//add active class to button
-				self.button.addClass( $.mobile.activeBtnClass );
-
-				//remove after delay
-				setTimeout( function() {
-					self.button.removeClass( $.mobile.activeBtnClass );
-				}, 300);
 
 				function focusMenuItem() {
 					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
@@ -376,29 +390,21 @@ define( [
 						});
 					}
 
-					self.menuPage.one( "pageshow", function() {
-						focusMenuItem();
-						self.isOpen = true;
-					});
+					self.menuPage
+						.one( "pageshow", function() {
+							focusMenuItem();
+						})
+						.one( "pagehide", function() {
+							self.close();
+						});
 
 					self.menuType = "page";
 					self.menuPageContent.append( self.list );
 					self.menuPage.find("div .ui-title").text(self.label.text());
-					$.mobile.changePage( self.menuPage, {
-						transition: $.mobile.defaultDialogTransition
-					});
 				} else {
 					self.menuType = "overlay";
 
-					self.listbox
-						.one( "popupafteropen", focusMenuItem )
-						.popup( "open", {
-							x: self.button.offset().left + self.button.outerWidth() / 2,
-							y: self.button.offset().top + self.button.outerHeight() / 2
-						});
-
-					// duplicate with value set in page show for dialog sized selects
-					self.isOpen = true;
+					self.listbox.one( "popupafteropen", focusMenuItem );
 				}
 			},
 
@@ -454,12 +460,17 @@ define( [
 						needPlaceholder = false;
 						isPlaceholderItem = true;
 
-						// If we have identified a placeholder, mark it retroactively in the select as well
+						// If we have identified a placeholder, record the fact that it was
+						// us who have added the placeholder to the option and mark it
+						// retroactively in the select as well
+						if ( null === option.getAttribute( dataPlaceholderAttr ) ) {
+							this._removePlaceholderAttr = true;
+						}
 						option.setAttribute( dataPlaceholderAttr, true );
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
 						}
-						if (!placeholder) {
+						if ( placeholder !== text ) {
 							placeholder = self.placeholder = text;
 						}
 					}
@@ -505,13 +516,37 @@ define( [
 					// TODO value is undefined at creation
 					"aria-owns": this.menuId
 				});
+			},
+
+			_destroy: function() {
+				this.close();
+
+				// Restore the tabindex attribute to its original value
+				if ( this._origTabIndex !== undefined ) {
+					if ( this._origTabIndex !== false ) {
+						this.select.attr( "tabindex", this._origTabIndex );
+					} else {
+						this.select.removeAttr( "tabindex" );
+					}
+				}
+
+				// Remove the placeholder attribute if we were the ones to add it
+				if ( this._removePlaceholderAttr ) {
+					this._selectOptions().removeAttr( "data-" + $.mobile.ns + "placeholder" );
+				}
+
+				// Remove the popup
+				this.listbox.remove();
+
+				// Chain up
+				origDestroy.apply( this, arguments );
 			}
 		});
 	};
 
 	// issue #3894 - core doesn't trigger events on disabled delegates
-	$( document ).bind( "selectmenubeforecreate", function( event ) {
-		var selectmenuWidget = $( event.target ).data( "selectmenu" );
+	$.mobile.document.bind( "selectmenubeforecreate", function( event ) {
+		var selectmenuWidget = $( event.target ).data( "mobile-selectmenu" );
 
 		if ( !selectmenuWidget.options.nativeMenu &&
 				selectmenuWidget.element.parents( ":jqmData(role='popup')" ).length === 0 ) {

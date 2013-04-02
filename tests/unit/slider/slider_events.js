@@ -17,8 +17,8 @@
 
 	var keypressTest = function(opts){
 		var slider = $(opts.selector),
-		    val = window.parseFloat(slider.val()),
-				handle = slider.siblings('.ui-slider').find('.ui-slider-handle');
+			val = window.parseFloat(slider.val()),
+			handle = slider.siblings('.ui-slider-track').find('.ui-slider-handle');
 
 		expect( opts.keyCodes.length );
 
@@ -113,7 +113,7 @@
 	// generic switch test function
 	var sliderSwitchTest = function(opts){
 		var slider = $("#slider-switch"),
-			  handle = slider.siblings('.ui-slider').find('a'),
+			  handle = slider.siblings('.ui-slider-switch').find('a'),
 		    switchValues = {
 					'off' : 0,
 					'on' : 1
@@ -163,8 +163,8 @@
 	});
 
 	test( "slider controls will create when inside a container that receives a 'create' event", function(){
-		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider").length, "did not have enhancements applied" );
-		ok( $("#enhancetest").trigger("create").find(".ui-slider").length, "enhancements applied" );
+		ok( !$("#enhancetest").appendTo(".ui-page-active").find(".ui-slider-track").length, "did not have enhancements applied" );
+		ok( $("#enhancetest").trigger("create").find(".ui-slider-track").length, "enhancements applied" );
 	});
 
 	var createEvent = function( name, target, x, y ) {
@@ -177,7 +177,7 @@
 
 	test( "toggle switch should fire one change event when clicked", function(){
 		var control = $( "#slider-switch" ),
-			widget = control.data( "slider" ),
+			widget = control.data( "mobile-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			changeCount = 0,
@@ -226,7 +226,7 @@
 
 	asyncTest( "toggle switch handle should snap in the old position if dragged less than half of the slider width, in the new position if dragged more than half of the slider width", function() {
 		var control = $( "#slider-switch" ),
-			widget = control.data( "slider" ),
+			widget = control.data( "mobile-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			width = handle.width(),
@@ -291,7 +291,7 @@
 
 	asyncTest( "toggle switch handle should not move if user is dragging and value is changed", function() {
 		var control = $( "#slider-switch" ),
-			widget = control.data( "slider" ),
+			widget = control.data( "mobile-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			width = handle.width(),
@@ -339,7 +339,7 @@
 
 	asyncTest( "toggle switch should refresh when disabled", function() {
 		var control = $( "#slider-switch" ),
-			handle = control.data( "slider" ).handle;
+			handle = control.data( "mobile-slider" ).handle;
 
 		$.testHelper.sequence([
 			function() {
@@ -374,9 +374,62 @@
 		], 500);
 	});
 
+	asyncTest( "drag should start only when clicked with left button", function(){
+		expect( 4 );
+
+		var control = $( "#mousedown-which-events" ),
+			widget = control.data( "mobile-slider" ),
+			slider = widget.slider,
+			handle = widget.handle,
+			eventNs = ".dragShouldStartOnlyWhenClickedWithLeftButton",
+			event;
+
+		$.testHelper.detailedEventCascade( [
+			function() {
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = 0;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "0" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon 0 button press" );
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = 1;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "1" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon left button press" );
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = 2;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "2" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon middle button press" );
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = 3;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "3" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon right button press" );
+				start();
+			}
+		]);
+	});
+
 	asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events", function() {
 		var control = $( "#start-stop-events" ),
-			widget = control.data( "slider" ),
+			widget = control.data( "mobile-slider" ),
 			slider = widget.slider;
 
 		$.testHelper.eventCascade([
@@ -401,7 +454,7 @@
 	// and with the advent of the widget _on method we are actually testing the
 	// widget from UI which has it's own test suite for these sorts of things
 	// ie, don't test your dependencies / framework
-	if( !( $.fn.jquery.match(/^1.8/) )){
+	if( $.testHelper.versionTest( $.fn.jquery, function( l, r ) { return ( l < r ); }, "1.8" ) ){
 		test( "slider should detach event", function() {
 			var slider = $( "#remove-events-slider" ),
 			doc = $( document ),

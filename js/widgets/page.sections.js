@@ -3,7 +3,7 @@
 //>>label: Page Sections
 //>>group: Core
 
-define( [ "jquery", "./page", "../jquery.mobile.core" ], function( $ ) {
+define( [ "jquery", "./page", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -18,10 +18,11 @@ $.mobile.page.prototype.options.contentTheme = null;
 //      which expects .ui-footer top be applied in its gigantic selector
 // TODO remove the buttonMarkup giant selector and move it to the various modules
 //      on which it depends
-$( document ).bind( "pagecreate", function( e ) {
+$.mobile.document.bind( "pagecreate", function( e ) {
 	var $page = $( e.target ),
-		o = $page.data( "page" ).options,
-		pageRole = $page.jqmData( "role" ),
+		o = $page.data( "mobile-page" ).options,
+		attrPrefix = "data-" + $.mobile.ns,
+		pageRole = $page[ 0 ].getAttribute( attrPrefix + "role" ) || undefined,
 		pageTheme = o.theme;
 
 	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", $page )
@@ -29,8 +30,8 @@ $( document ).bind( "pagecreate", function( e ) {
 		.each(function() {
 
 		var $this = $( this ),
-			role = $this.jqmData( "role" ),
-			theme = $this.jqmData( "theme" ),
+			role = $this[ 0 ].getAttribute( attrPrefix + "role" ) || undefined,
+			theme = $this[ 0 ].getAttribute( attrPrefix + "theme" ) || undefined,
 			contentTheme = theme || o.contentTheme || ( pageRole === "dialog" && pageTheme ),
 			$headeranchors,
 			leftbtn,
@@ -65,7 +66,7 @@ $( document ).bind( "pagecreate", function( e ) {
 			if ( o.addBackBtn &&
 				role === "header" &&
 				$( ".ui-page" ).length > 1 &&
-				$page.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+				$page[ 0 ].getAttribute( attrPrefix + "url" ) !== $.mobile.path.stripHash( location.hash ) &&
 				!leftbtn ) {
 
 				backBtn = $( "<a href='javascript:void(0);' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" )

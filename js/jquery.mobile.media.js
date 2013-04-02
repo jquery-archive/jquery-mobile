@@ -4,47 +4,48 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
+define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var $window = $( window ),
-	$html = $( "html" );
+	/*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas. Dual MIT/BSD license */
+	window.matchMedia = window.matchMedia || (function( doc, undefined ) {
 
-/* $.mobile.media method: pass a CSS media type or query and get a bool return
-	note: this feature relies on actual media query support for media queries, though types will work most anywhere
-	examples:
-		$.mobile.media('screen') // tests for screen media type
-		$.mobile.media('screen and (min-width: 480px)') // tests for screen media type with window width > 480px
-		$.mobile.media('@media screen and (-webkit-min-device-pixel-ratio: 2)') // tests for webkit 2x pixel ratio (iPhone 4)
-*/
-$.mobile.media = (function() {
-	// TODO: use window.matchMedia once at least one UA implements it
-	var cache = {},
-		testDiv = $( "<div id='jquery-mediatest'></div>" ),
-		fakeBody = $( "<body>" ).append( testDiv );
+		"use strict";
 
-	return function( query ) {
-		if ( !( query in cache ) ) {
-			var styleBlock = document.createElement( "style" ),
-				cssrule = "@media " + query + " { #jquery-mediatest { position:absolute; } }";
+		var bool,
+			docElem = doc.documentElement,
+			refNode = docElem.firstElementChild || docElem.firstChild,
+			// fakeBody required for <FF4 when executed in <head>
+			fakeBody = doc.createElement( "body" ),
+			div = doc.createElement( "div" );
 
-			//must set type for IE!
-			styleBlock.type = "text/css";
+		div.id = "mq-test-1";
+		div.style.cssText = "position:absolute;top:-100em";
+		fakeBody.style.background = "none";
+		fakeBody.appendChild(div);
 
-			if ( styleBlock.styleSheet ) {
-				styleBlock.styleSheet.cssText = cssrule;
-			} else {
-				styleBlock.appendChild( document.createTextNode(cssrule) );
-			}
+		return function(q){
 
-			$html.prepend( fakeBody ).prepend( styleBlock );
-			cache[ query ] = testDiv.css( "position" ) === "absolute";
-			fakeBody.add( styleBlock ).remove();
-		}
-		return cache[ query ];
+			div.innerHTML = "&shy;<style media=\"" + q + "\"> #mq-test-1 { width: 42px; }</style>";
+
+			docElem.insertBefore( fakeBody, refNode );
+			bool = div.offsetWidth === 42;
+			docElem.removeChild( fakeBody );
+
+			return {
+				matches: bool,
+				media: q
+			};
+
+		};
+
+	}( document ));
+
+	// $.mobile.media uses matchMedia to return a boolean.
+	$.mobile.media = function( q ) {
+		return window.matchMedia( q ).matches;
 	};
-})();
 
 })(jQuery);
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

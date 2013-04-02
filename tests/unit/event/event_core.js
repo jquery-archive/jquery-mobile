@@ -15,7 +15,7 @@
 		setup: function(){
 
 			// ensure bindings are removed
-			$.each(events + "vmouseup vmousedown".split(" "), function(i, name){
+			$.each( events.concat( "vmouseup vmousedown".split(" ") ), function(i, name){
 				$("#qunit-fixture").unbind();
 			});
 
@@ -36,7 +36,7 @@
 		test( "new events defined on the jquery object", function(){
 			$.each(events, function( i, name ) {
 				delete $.fn[name];
-				deepEqual($.fn[name], undefined);
+				deepEqual($.fn[name], undefined, "After deleting it, $.fn[ '" + name + "' ] is indeed undefined" );
 			});
 
 			$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
@@ -132,6 +132,7 @@
 
 	var forceTouchSupport = function(){
 		document.ontouchend = function() {};
+		$.testHelper.reloadLib( "jquery.mobile.support.touch.js" );
 		$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
 
 		//mock originalEvent information
@@ -312,7 +313,7 @@
 
 	asyncTest( "stopImmediatePropagation() prevents tap propagation and execution of 2nd handler", function(){
 		var tap = 0,
-			$cf = $( "#qunit-fixture" );
+			$cf = $( "#qunit-fixture" ),
 			$doc = $( document ),
 			docTapCB = function(){
 				ok(false, "tap should NOT be triggered on document");

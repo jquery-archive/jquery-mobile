@@ -1,0 +1,93 @@
+/*
+ Styles for the table columntoggle mode
+*/
+
+.ui-table-columntoggle-btn {
+	float: right;
+	margin-bottom:.8em;
+}
+/* Remove top/bottom margins around the fieldcontain on check list */
+.ui-table-columntoggle-popup fieldset {
+	margin:0;
+}
+
+/* Hide all prioritized columns by default */
+@media only all {
+	th.ui-table-priority-6,
+	td.ui-table-priority-6,
+	th.ui-table-priority-5,
+	td.ui-table-priority-5,
+	th.ui-table-priority-4,
+	td.ui-table-priority-4,
+	th.ui-table-priority-3,
+	td.ui-table-priority-3,
+	th.ui-table-priority-2,
+	td.ui-table-priority-2,
+	th.ui-table-priority-1,
+	td.ui-table-priority-1 {
+		display: none;
+	}
+}
+
+
+/* Preset breakpoints if ".ui-responsive" class added to table */
+
+/* Show priority 1 at 320px (20em x 16px) */
+@media screen and (min-width: 20em) {
+	.ui-table-columntoggle.ui-responsive th.ui-table-priority-1,
+	.ui-table-columntoggle.ui-responsive td.ui-table-priority-1 {
+		display: table-cell;
+	}
+}
+/* Show priority 2 at 480px (30em x 16px) */
+@media screen and (min-width: 30em) {
+	.ui-table-columntoggle.ui-responsive th.ui-table-priority-2,
+	.ui-table-columntoggle.ui-responsive td.ui-table-priority-2 {
+		display: table-cell;
+	}
+}
+/* Show priority 3 at 640px (40em x 16px) */
+@media screen and (min-width: 40em) {
+	.ui-table-columntoggle.ui-responsive th.ui-table-priority-3,
+	.ui-table-columntoggle.ui-responsive td.ui-table-priority-3 {
+		display: table-cell;
+	}
+}
+/* Show priority 4 at 800px (50em x 16px) */
+@media screen and (min-width: 50em) {
+	.ui-table-columntoggle.ui-responsive th.ui-table-priority-4,
+	.ui-table-columntoggle.ui-responsive td.ui-table-priority-4 {
+		display: table-cell;
+	}
+}
+/* Show priority 5 at 960px (60em x 16px) */
+@media screen and (min-width: 60em) {
+	.ui-table-columntoggle.ui-responsive th.ui-table-priority-5,
+	.ui-table-columntoggle.ui-responsive td.ui-table-priority-5 {
+		display: table-cell;
+	}
+}
+/* Show priority 6 at 1,120px (70em x 16px) */
+@media screen and (min-width: 70em) {
+	.ui-table-columntoggle.ui-responsive th.ui-table-priority-6,
+	.ui-table-columntoggle.ui-responsive td.ui-table-priority-6 {
+		display: table-cell;
+	}
+}
+
+
+/* Unchecked manually: Always hide */
+.ui-table-columntoggle th.ui-table-cell-hidden,
+.ui-table-columntoggle td.ui-table-cell-hidden,
+.ui-table-columntoggle.ui-responsive th.ui-table-cell-hidden,
+.ui-table-columntoggle.ui-responsive td.ui-table-cell-hidden {
+	display: none;
+}
+
+/* Checked manually: Always show */
+.ui-table-columntoggle th.ui-table-cell-visible,
+.ui-table-columntoggle td.ui-table-cell-visible,
+.ui-table-columntoggle.ui-responsive th.ui-table-cell-visible,
+.ui-table-columntoggle.ui-responsive td.ui-table-cell-visible {
+	display: table-cell;
+}

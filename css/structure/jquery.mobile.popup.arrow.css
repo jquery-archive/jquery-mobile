@@ -1,0 +1,81 @@
+.ui-popup > .arrow-guide {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	pointer-events: none;
+}
+
+.arrow-container {
+	position: absolute;
+}
+
+.arrow {
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+	position: absolute;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+
+.arrow-container.ie .arrow {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')";
+	filter: progid:DXImageTransform.Microsoft.Matrix(
+	      	M11=0.7071067811865474,
+        	M12=-0.7071067811865477,
+        	M21=0.7071067811865477,
+        	M22=0.7071067811865474,
+        	SizingMethod='auto expand');
+}
+
+.arrow-background {
+	position: absolute;
+	border: none;
+}
+
+.arrow-container.ie .arrow-background {
+	background: none;
+}
+
+.arrow-container.t .arrow-background,
+.arrow-container.b .arrow-background {
+	/* Undo rotation and reflect in x axis */
+	-webkit-transform: rotate(-45deg) scale(1, -1);
+	-moz-transform: rotate(-45deg) scale(1, -1);
+	-ms-transform: rotate(-45deg) scale(1, -1);
+	transform: rotate(-45deg) scale(1, -1);
+}
+
+.arrow-container.t.ie .arrow-background,
+.arrow-container.b.ie .arrow-background {
+   -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865483, M12=-0.7071067811865467, M21=-0.7071067811865467, M22=-0.7071067811865483, SizingMethod='auto expand')";
+   filter: progid:DXImageTransform.Microsoft.Matrix(
+            M11=0.7071067811865483,
+            M12=-0.7071067811865467,
+            M21=-0.7071067811865467,
+            M22=-0.7071067811865483,
+            SizingMethod='auto expand');
+}
+
+.arrow-container.l .arrow-background,
+.arrow-container.r .arrow-background {
+	/* Undo rotation and reflect in y axis */
+	-webkit-transform: rotate(-45deg) scale(-1, 1);
+	-moz-transform: rotate(-45deg) scale(-1, 1);
+	-ms-transform: rotate(-45deg) scale(-1, 1);
+	transform: rotate(-45deg) scale(-1, 1);
+}
+
+.arrow-container.l.ie .arrow-background,
+.arrow-container.r.ie .arrow-background {
+   -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-0.7071067811865483, M12=0.7071067811865467, M21=0.7071067811865467, M22=0.7071067811865483, SizingMethod='auto expand')";
+   filter: progid:DXImageTransform.Microsoft.Matrix(
+            M11=-0.7071067811865483,
+            M12=0.7071067811865467,
+            M21=0.7071067811865467,
+            M22=0.7071067811865483,
+            SizingMethod='auto expand');
+}

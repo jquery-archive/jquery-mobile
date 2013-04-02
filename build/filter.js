@@ -4,6 +4,7 @@
 
 var fs = require( 'fs' ),
 	path = require( 'path' ),
+	pkg = require('./package.json' ),
 	buildDir = __dirname,
 	copyrightVersionRegExp = /@VERSION/g,
 	apiVersionRegExp = /__version__/g,
@@ -12,31 +13,22 @@ var fs = require( 'fs' ),
 	copyrightMinFile = copyrightBaseName + ".min.txt";
 
 module.exports = function ( contents, ext, callback ) {
-	fs.readFile( path.join( buildDir, "../version.txt" ), "utf8",
-		function( err, version ) {
-			var copyrightFile;
+	var version = pkg.version.trim();
+
+	if ( /^\.min/.test( ext ) ) {
+		copyrightFile = copyrightMinFile;
+	} else {
+		copyrightFile = copyrightRegFile;
+	}
+	fs.readFile( path.join( buildDir, copyrightFile ), "utf8",
+		function( err, copyright ) {
 			if ( err ) {
 				callback( err );
 			} else {
-				version = version.trim();
+				contents = copyright.replace( copyrightVersionRegExp, version ) + "\n" + contents;
+				contents = contents.replace( apiVersionRegExp, '"' + version + '"' );
 
-				if ( /^\.min/.test( ext ) ) {
-					copyrightFile = copyrightMinFile;
-				} else {
-					copyrightFile = copyrightRegFile;
-				}
-				fs.readFile( path.join( buildDir, copyrightFile ), "utf8",
-					function( err, copyright ) {
-						if ( err ) {
-							callback( err );
-						} else {
-							contents = copyright.replace( copyrightVersionRegExp, version ) + "\n" + contents;
-							contents = contents.replace( apiVersionRegExp, '"' + version + '"' );
-
-							callback( null, contents );
-						}
-					}
-				)
+				callback( null, contents );
 			}
 		}
 	)

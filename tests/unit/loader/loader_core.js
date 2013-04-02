@@ -1,3 +1,5 @@
+$.testHelper.delayStart();
+
 /*
  * mobile init tests
  */

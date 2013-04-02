@@ -8,10 +8,13 @@
 				$.support.mediaquery = value;
 				$.mobile.browser.ie = version;
 			},
-			extendFn = $.extend;
+			extendFn = $.extend,
+			ns = $.mobile.ns;
 
 	module(libName, {
 		setup: function(){
+			$.mobile.ns = ns;
+
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
 
@@ -162,14 +165,14 @@
 	test( "closestPageData returns the parent's page data", function() {
 		var pageChild = $( "#page-child" );
 
-		$( "#parent-page" ).data( "page", { foo: "bar" } );
+		$( "#parent-page" ).data( "mobile-page", { foo: "bar" } );
 		deepEqual( $.mobile.closestPageData( pageChild ).foo, "bar" );
 	});
 
 	test( "closestPageData returns the parent dialog's page data", function() {
 		var dialogChild = $( "#dialog-child" );
 
-		$( "#parent-dialog" ).data( "page", { foo: "bar" } );
+		$( "#parent-dialog" ).data( "mobile-page", { foo: "bar" } );
 		deepEqual( $.mobile.closestPageData(dialogChild).foo, "bar" );
 	});
 

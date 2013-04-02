@@ -2,20 +2,22 @@
  * mobile init tests
  */
 (function($){
-	var loader, mobilePage = undefined,
-			libName = 'jquery.mobile.init.js',
-			coreLib = 'jquery.mobile.core.js',
-			extendFn = $.extend,
-			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
-			reloadCoreNSandInit = function(){
-				$.testHelper.reloadLib(coreLib);
-				$.testHelper.reloadLib("jquery.setNamespace.js");
-				$.testHelper.reloadLib(libName);
-			};
+	var loader, ns,
+		mobilePage = undefined,
+		libName = 'jquery.mobile.init.js',
+		coreLib = 'jquery.mobile.core.js',
+		extendFn = $.extend,
+		setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
+		reloadCoreNSandInit = function(){
+			$.testHelper.reloadLib(coreLib);
+			$.testHelper.reloadLib("jquery.setNameSpace.js");
+			$.testHelper.reloadLib(libName);
+		};
 
 
 	module(libName, {
 		setup: function(){
+			$.mobile.ns = ns;
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
 		},
@@ -31,6 +33,7 @@
 	// NOTE important to use $.fn.one here to make sure library reloads don't fire
 	//      the event before the test check below
 	$(document).one( "mobileinit", function(){
+		ns = $.mobile.ns;
 		mobilePage = $.mobile.page;
 
 		$.mobile.loader.prototype.options.text = "mobileinit";
@@ -74,18 +77,6 @@
 			ok($("html").hasClass("ui-mobile"), "html elem has class mobile");
 		});
 
-		asyncTest( "useFastClick is configurable via mobileinit", function(){
-			$(document).one( "mobileinit", function(){
-				$.mobile.useFastClick = false;
-				start();
-			});
-
-			$.testHelper.reloadLib(libName);
-
-			deepEqual( $.mobile.useFastClick, false , "fast click is set to false after init" );
-			$.mobile.useFastClick = true;
-		});
-
 		var findFirstPage = function() {
 			return $(":jqmData(role='page')").first();
 		};
@@ -113,26 +104,6 @@
 			var firstPage = findFirstPage();
 
 			deepEqual($.mobile.pageContainer[0], firstPage.parent()[0]);
-		});
-
-		asyncTest( "hashchange triggered on document ready with single argument: true", function(){
-			$.testHelper.sequence([
-				function(){
-					location.hash = "#foo";
-				},
-
-				// delay the bind until the first hashchange
-				function(){
-					$(window).one("hashchange", function(ev, arg){
-						deepEqual(arg, true);
-						start();
-					});
-				},
-
-				function(){
-					$.testHelper.reloadLib(libName);
-				}
-			], 1000);
 		});
 
 		test( "pages without a data-url attribute have it set to their id", function(){

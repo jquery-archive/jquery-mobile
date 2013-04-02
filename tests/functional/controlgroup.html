@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Button Markup Tester</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<script src="../../js/jquery.tag.inserter.js"></script>
+	<script src="../../js"></script>
+	<script>
+( function( $, undefined ) {
+	var counter = 0;
+	$( document ).bind( "pageinit", function( e ) {
+		$( "#prepend,#append", e.target ).bind( "click", function( e ) {
+			counter++;
+			var widgetType = $( "[name='radio-widget']:checked" ).attr( "id" ),
+				grp = $( "#controlgroup" ), $el,
+				action = function() {
+					var op = $( "[name='radio-op']:checked" ).attr( "id" );
+					$el[ op ](); grp.controlgroup( "refresh" );
+				};
+
+			if ( widgetType === "link" ) {
+				$el = $( "<a href='#'>Remove " + counter + "</a>" ).bind( "click", action );
+				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
+				$el.buttonMarkup();
+			} else if ( widgetType === "select" ) {
+				$el = $( "<label for='widget" + counter + "'>Select " + counter + "</label><select id='widget" + counter + "'><option id='widget" + counter + "' value='default'>Select " + counter + "</option><option value='remove'>Remove</option></select>" );
+				$( $el[ 1 ] ).bind( "change", action);
+				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
+				$( $el[ 1 ] ).selectmenu();
+			} else {
+				$el = $( "<label for='widget" + counter + "'>Remove " + counter + "</label><input type='checkbox' id='widget" + counter + "'></input>" );
+				$( $el[ 1 ] ).bind( "change", action );
+				$( "#controlgroup" ).controlgroup( "container" )[ $( this ).attr( "id" ) ]( $el );
+				$( $el[ 1 ] ).checkboxradio();
+			}
+
+			grp.controlgroup( "refresh" );
+		});
+		$( "#isHorizontal" ).bind( "change", function( e ) {
+			$( "#controlgroup" ).controlgroup( "option", "type", ( $( "#isHorizontal" ).is( ":checked" ) ? "horizontal" : "vertical" ) );
+		});
+	});
+})( jQuery );
+	</script>
+</head>
+
+<body>
+	<div data-role="page">
+		<div data-role="header">
+			<h1>Controlroup Dynamic Modification</h1>
+		</div>
+		<div data-role="contents">
+			<div class="ui-grid-a">
+				<div class="ui-block-a">
+					<div data-role="controlgroup" id="controlgroup">
+					</div>
+				</div>
+				<div class="ui-block-b">
+					<a href="#" id="prepend" data-role="button" data-corners="true" data-inline="true">Prepend</a>
+					<a href="#" id="append" data-role="button" data-corners="true" data-inline="true">Append</a>
+					<form action="#" method="get">
+	  				<fieldset data-role="controlgroup" data-type="horizontal">
+	    				<legend>Widget type</legend>
+	        				<input type="radio" name="radio-widget" id="link" value="link" checked="checked"  />
+	        				<label for="link">Link</label>
+
+	        				<input type="radio" name="radio-widget" id="select" value="select"  />
+	        				<label for="select">Select</label>
+
+	        				<input type="radio" name="radio-widget" id="checkbox" value="checkbox"  />
+	        				<label for="checkbox">Checkbox</label>
+	  				</fieldset>
+	  				<fieldset data-role="controlgroup" data-type="horizontal">
+	    				<legend>Operation</legend>
+	        				<input type="radio" name="radio-op" id="remove" value="remove" checked="checked"  />
+	        				<label for="remove">Remove</label>
+
+	        				<input type="radio" name="radio-op" id="hide" value="hide"  />
+	        				<label for="hide">Hide</label>
+
+	        				<input type="radio" name="radio-op" id="width" value="width"  />
+	        				<label for="width">Nothing</label>
+	  				</fieldset>
+					<div data-role="fieldcontain">
+						<input id="isHorizontal" data-inline="true" type="checkbox"></input>
+						<label for="isHorizontal">Horizontal</label>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

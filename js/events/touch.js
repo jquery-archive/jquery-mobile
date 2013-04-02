@@ -1,12 +1,14 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Touch events: touchstart, touchmove, touchend, tap, taphold, swipe, swipeleft, swiperight, scrollstart, scrollstop
-//>>label: touch
+//>>description: Touch events including: touchstart, touchmove, touchend, tap, taphold, swipe, swipeleft, swiperight, scrollstart, scrollstop
+//>>label: Touch
 //>>group: Events
 
-define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {
+	var $document = $( document );
+
 	// add new event shortcuts
 	$.each( ( "touchstart touchmove touchend " +
 		"tap taphold " +
@@ -32,7 +34,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	function triggerCustomEvent( obj, eventType, event ) {
 		var originalType = event.type;
 		event.type = eventType;
-		$.event.handle.call( obj, event );
+		$.event.dispatch.call( obj, event );
 		event.type = originalType;
 	}
 
@@ -99,7 +101,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 					$this.unbind( "vclick", clickHandler )
 						.unbind( "vmouseup", clearTapTimer );
-					$( document ).unbind( "vmousecancel", clearTapHandlers );
+					$document.unbind( "vmousecancel", clearTapHandlers );
 				}
 
 				function clickHandler( event ) {
@@ -114,7 +116,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 				$this.bind( "vmouseup", clearTapTimer )
 					.bind( "vclick", clickHandler );
-				$( document ).bind( "vmousecancel", clearTapHandlers );
+				$document.bind( "vmousecancel", clearTapHandlers );
 
 				timer = setTimeout( function() {
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
@@ -133,33 +135,49 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 		verticalDistanceThreshold: 75,  // Swipe vertical displacement must be less than this.
 
+		start: function( event ) {
+			var data = event.originalEvent.touches ?
+					event.originalEvent.touches[ 0 ] : event;
+			return {
+						time: ( new Date() ).getTime(),
+						coords: [ data.pageX, data.pageY ],
+						origin: $( event.target )
+					};
+		},
+
+		stop: function( event ) {
+			var data = event.originalEvent.touches ?
+					event.originalEvent.touches[ 0 ] : event;
+			return {
+						time: ( new Date() ).getTime(),
+						coords: [ data.pageX, data.pageY ]
+					};
+		},
+
+		handleSwipe: function( start, stop ) {
+			if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
+				Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
+				Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+
+				start.origin.trigger( "swipe" )
+					.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
+			}
+		},
+
 		setup: function() {
 			var thisObject = this,
 				$this = $( thisObject );
 
 			$this.bind( touchStartEvent, function( event ) {
-				var data = event.originalEvent.touches ?
-						event.originalEvent.touches[ 0 ] : event,
-					start = {
-						time: ( new Date() ).getTime(),
-						coords: [ data.pageX, data.pageY ],
-						origin: $( event.target )
-					},
+				var start = $.event.special.swipe.start( event ),
 					stop;
 
 				function moveHandler( event ) {
-
 					if ( !start ) {
 						return;
 					}
 
-					var data = event.originalEvent.touches ?
-						event.originalEvent.touches[ 0 ] : event;
-
-					stop = {
-						time: ( new Date() ).getTime(),
-						coords: [ data.pageX, data.pageY ]
-					};
+					stop = $.event.special.swipe.stop( event );
 
 					// prevent scrolling
 					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
@@ -168,17 +186,11 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				}
 
 				$this.bind( touchMoveEvent, moveHandler )
-					.one( touchStopEvent, function( event ) {
+					.one( touchStopEvent, function() {
 						$this.unbind( touchMoveEvent, moveHandler );
 
 						if ( start && stop ) {
-							if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
-								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
-								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
-
-								start.origin.trigger( "swipe" )
-									.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
-							}
+							$.event.special.swipe.handleSwipe( start, stop );
 						}
 						start = stop = undefined;
 					});

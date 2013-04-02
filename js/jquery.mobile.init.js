@@ -4,13 +4,22 @@
 //>>group: Core
 
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
-	"./jquery.mobile.navigation.pushstate", "./widgets/loader", "./jquery.mobile.vmouse", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
+define([
+	"jquery",
+	"./jquery.mobile.core",
+	"./jquery.mobile.support",
+	'./events/navigate',
+	'./navigation/path',
+	'./navigation/method',
+	"./jquery.mobile.navigation",
+	"./widgets/loader",
+	"./jquery.mobile.vmouse",
+	"depend!./jquery.hashchange[jquery]" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
-			$window = $( window );
+			$window = $.mobile.window;
 
 	//remove initial build class (only present on first pageshow)
 	function hideRenderingClass() {
@@ -44,7 +53,10 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" );
+			var path = $.mobile.path,
+				$pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
+				hash = path.stripHash( path.stripQueryParams(path.parseLocation().hash) ),
+				hashPage = document.getElementById( hash );
 
 			// if no pages are found, create one with body's inner html
 			if ( !$pages.length ) {
@@ -56,7 +68,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 				var $this = $( this );
 
 				// unless the data url is already set set it to the pathname
-				if ( !$this.jqmData( "url" ) ) {
+				if ( !$this[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" ) ) {
 					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) || location.pathname + location.search );
 				}
 			});
@@ -65,7 +77,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			$.mobile.firstPage = $pages.first();
 
 			// define page container
-			$.mobile.pageContainer = $pages.first().parent().addClass( "ui-mobile-viewport" );
+			$.mobile.pageContainer = $.mobile.firstPage.parent().addClass( "ui-mobile-viewport" );
 
 			// alert listeners that the pagecontainer has been determined for binding
 			// to events triggered on it
@@ -83,18 +95,38 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			// Remember, however, that the hash can also be a path!
 			if ( ! ( $.mobile.hashListeningEnabled &&
 				$.mobile.path.isHashValid( location.hash ) &&
-				( $( location.hash + ':jqmData(role="page")' ).length ||
-					$.mobile.path.isPath( location.hash ) ) ) ) {
+				( $( hashPage ).is( ':jqmData(role="page")' ) ||
+					$.mobile.path.isPath( hash ) ||
+					hash === $.mobile.dialogHashKey ) ) ) {
 
 				// Store the initial destination
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
-					$.mobile.urlHistory.initialDst = $.mobile.path.parseLocation().hash.replace( "#", "" );
+					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
 				}
-				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
-			}
-			// otherwise, trigger a hashchange to load a deeplink
-			else {
-				$window.trigger( "hashchange", [ true ] );
+
+				// make sure to set initial popstate state if it exists
+				// so that navigation back to the initial page works properly
+				if( $.event.special.navigate.isPushStateEnabled() ) {
+					$.mobile.navigate.navigator.squash( path.parseLocation().href );
+				}
+
+				$.mobile.changePage( $.mobile.firstPage, {
+					transition: "none",
+					reverse: true,
+					changeHash: false,
+					fromHashChange: true
+				});
+			} else {
+				// trigger hashchange or navigate to squash and record the correct
+				// history entry for an initial hash path
+				if( !$.event.special.navigate.isPushStateEnabled() ) {
+					$window.trigger( "hashchange", [true] );
+				} else {
+					// TODO figure out how to simplify this interaction with the initial history entry
+					// at the bottom js/navigate/navigate.js
+					$.mobile.navigate.history.stack = [];
+					$.mobile.navigate( $.mobile.path.isPath( location.hash ) ? location.hash : location.href );
+				}
 			}
 		}
 	});
@@ -111,18 +143,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 		// if defaultHomeScroll hasn't been set yet, see if scrollTop is 1
 		// it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
 		// so if it's 1, use 0 from now on
-		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $( window ).scrollTop() === 1 ) ? 0 : 1;
-
-
-		// TODO: Implement a proper registration mechanism with dependency handling in order to not have exceptions like the one below
-		//auto self-init widgets for those widgets that have a soft dependency on others
-		if ( $.fn.controlgroup ) {
-			$( document ).bind( "pagecreate create", function( e ) {
-				$( ":jqmData(role='controlgroup')", e.target )
-					.jqmEnhanceable()
-					.controlgroup({ excludeInvisible: false });
-			});
-		}
+		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $.mobile.window.scrollTop() === 1 ) ? 0 : 1;
 
 		//dom-ready inits
 		if ( $.mobile.autoInitializePage ) {
@@ -138,7 +159,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			// by adding the 'ui-disabled' class to them. Using a JavaScript workaround for those browser.
 			// https://github.com/jquery/jquery-mobile/issues/3558
 
-			$( document ).delegate( ".ui-disabled", "vclick",
+			$.mobile.document.delegate( ".ui-disabled", "vclick",
 				function( e ) {
 					e.preventDefault();
 					e.stopImmediatePropagation();

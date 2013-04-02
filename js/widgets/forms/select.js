@@ -5,11 +5,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom" ], function( $ ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.selectmenu", $.mobile.widget, {
+$.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
 		disabled: false,
@@ -20,6 +20,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		shadow: true,
 		iconshadow: true,
 		overlayTheme: "a",
+		dividerTheme: "b",
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
@@ -59,19 +60,30 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			classes = $el[0].className;
 		} */
 		if ( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
-			classes =  " ui-btn-left";
+			classes = " ui-btn-left";
 		}
 
 		if (  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = " ui-btn-right";
 		}
 
-		this.select = this.element.wrap( "<div class='ui-select" + classes + "'>" );
+		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
 		if ( !this.options.theme ) {
 			this.options.theme = $.mobile.getInheritedTheme( this.select, "c" );
+		}
+	},
+
+	_destroy: function() {
+		var wrapper = this.element.parents( ".ui-select" );
+		if ( wrapper.length > 0 ) {
+			if ( wrapper.is( ".ui-btn-left, .ui-btn-right" ) ) {
+				this.element.addClass( wrapper.hasClass( "ui-btn-left" ) ? "ui-btn-left" : "ui-btn-right" );
+			}
+			this.element.insertAfter( wrapper );
+			wrapper.remove();
 		}
 	},
 
@@ -138,7 +150,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// Events on native select
 		this.select.change(function() {
 			self.refresh();
+			
+			if ( !!options.nativeMenu ) {
+				this.blur();
+			}
 		});
+
+		this._handleFormReset();
 
 		this.build();
 	},
@@ -176,13 +194,32 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
 		self.button.bind( "vmousedown", function() {
 			if ( self.options.preventFocusZoom ) {
-				$.mobile.zoom.disable( true );
+					$.mobile.zoom.disable( true );
 			}
-		}).bind( "mouseup", function() {
+		});
+		self.label.bind( "click focus", function() {
 			if ( self.options.preventFocusZoom ) {
+					$.mobile.zoom.disable( true );
+			}
+		});
+		self.select.bind( "focus", function() {
+			if ( self.options.preventFocusZoom ) {
+					$.mobile.zoom.disable( true );
+			}
+		});
+		self.button.bind( "mouseup", function() {
+			if ( self.options.preventFocusZoom ) {				
+				setTimeout(function() {
+					$.mobile.zoom.enable( true );
+				}, 0 );
+			}
+		});
+		self.select.bind( "blur", function() {
+			if ( self.options.preventFocusZoom ) {				
 				$.mobile.zoom.enable( true );
 			}
 		});
+
 	},
 
 	selected: function() {
@@ -228,6 +265,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 	},
 
+	_reset: function() {
+		this.refresh();
+	},
+
 	refresh: function() {
 		this.setButtonText();
 		this.setButtonCount();
@@ -247,10 +288,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		this._setDisabled( false );
 		this.button.removeClass( "ui-disabled" );
 	}
-});
+}, $.mobile.behaviors.formReset ) );
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
 });
 })( jQuery );

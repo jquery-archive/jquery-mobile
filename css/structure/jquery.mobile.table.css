@@ -1,0 +1,51 @@
+.ui-table {
+   border: 0;
+   border-collapse: collapse;
+   padding: 0;
+   width: 100%;
+}
+.ui-table th,
+.ui-table td {
+  line-height: 1.5em;
+  text-align: left;
+  padding: .4em .5em;
+  vertical-align:top;
+}
+.ui-table th .ui-btn,
+.ui-table td .ui-btn {
+	line-height: normal;
+}
+.ui-table th {
+  font-weight: bold;
+}
+.ui-table caption {
+  text-align:left;
+  margin-bottom:1.4em;
+  opacity: .5;
+}
+
+/* Add strokes between each row */
+.table-stroke thead th {
+  border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback */
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+.table-stroke tbody th,
+.table-stroke tbody td {
+  border-bottom: 1px solid #e6e6e6; /* non-RGBA fallback  */
+  border-bottom: 1px solid rgba(0, 0, 0, .05);
+}
+
+
+/* Add alternating row stripes */
+.table-stripe tbody tr:nth-child(odd) td,
+.table-stripe tbody tr:nth-child(odd) th {
+  background-color: #eeeeee; /* non-RGBA fallback  */
+  background-color: rgba(0,0,0,0.04);
+}
+/* Add stroke to the header and last item */
+.table-stripe thead th,
+.table-stripe tbody tr:last-child {
+  border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback  */
+  border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+

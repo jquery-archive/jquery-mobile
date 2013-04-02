@@ -5,17 +5,20 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom"  ], function( $ ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom"  ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
+		mini: false,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type])",
-		clearSearchButtonText: "clear text",
+		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
+		clearBtn: false,
+		clearSearchButtonText: null, //deprecating for 1.3...
+		clearBtnText: "clear text",
 		disabled: false
 	},
 
@@ -26,9 +29,14 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			o = this.options,
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
-			mini = input.jqmData( "mini" ) === true,
-			miniclass = mini ? " ui-mini" : "",
-			focusedEl, clearbtn;
+			miniclass = o.mini ? " ui-mini" : "",
+			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
+			focusedEl,
+			clearbtn,
+			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
+			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
+			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist,
+			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" );
 
 		function toggleClear() {
 			setTimeout( function() {
@@ -38,7 +46,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
 
-		focusedEl = input.addClass("ui-input-text ui-body-"+ theme );
+		focusedEl = input.addClass( "ui-input-text ui-body-"+ theme );
 
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
@@ -54,13 +62,16 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input[0].setAttribute( "autocomplete", "off" );
 		}
 
-
-		//"search" input widget
-		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
-
+		//"search" and "text" input widgets
+		if ( isSearch ) {
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearSearchButtonText + "'>" + o.clearSearchButtonText + "</a>" )
-				.bind('click', function( event ) {
+		} else if ( inputNeedsWrap ) {
+			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
+		}
+
+		if( inputNeedsClearBtn || isSearch ) {
+			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>" )
+				.bind( "click", function( event ) {
 					input
 						.val( "" )
 						.focus()
@@ -74,33 +85,33 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					iconpos: "notext",
 					corners: true,
 					shadow: true,
-					mini: mini
+					mini: o.mini
 				});
+				
+			if ( !isSearch ) {
+				focusedEl.addClass( "ui-input-has-clear" );
+			}
 
 			toggleClear();
 
-			input.bind( 'paste cut keyup focus change blur', toggleClear );
-
-		} else {
+			input.bind( "paste cut keyup input focus change blur", toggleClear );
+		}
+		else if ( !inputNeedsWrap && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
 		input.focus(function() {
+				// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
+				if ( o.preventFocusZoom ) {
+					$.mobile.zoom.disable( true );
+				}			
 				focusedEl.addClass( $.mobile.focusClass );
 			})
 			.blur(function() {
 				focusedEl.removeClass( $.mobile.focusClass );
-			})
-			// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
-			.bind( "focus", function() {
-				if ( o.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
-				}
-			})
-			.bind( "blur", function() {
 				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.enable( true );
-				}
+				}				
 			});
 
 		// Autogrow
@@ -114,24 +125,24 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					input.height(scrollHeight + extraLineHeight);
+					input.height( scrollHeight + extraLineHeight );
 				}
 			};
 
-			input.keyup(function() {
+			input.on( "keyup change input paste", function() {
 				clearTimeout( keyupTimeout );
 				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
 			});
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			this._on( $(document), {"pagechange": "_keyup" });
+			this._on( $.mobile.document, { "pagechange": "_keyup" });
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				this._on( $(window), {"load": "_keyup"});
+				this._on( $.mobile.window, {"load": "_keyup"});
 			}
 		}
 		if ( input.attr( "disabled" ) ) {
@@ -140,8 +151,12 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	},
 
 	disable: function() {
-		var $el;
-		if ( this.element.attr( "disabled", true ).is( "[type='search'], :jqmData(type='search')" ) ) {
+		var $el,
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
+			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
+			
+		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
@@ -151,10 +166,12 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	},
 
 	enable: function() {
-		var $el;
+		var $el,
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
+			parentNeedsEnabled = this.element.attr( "disabled", false )	&& ( inputNeedsWrap || isSearch );
 
-		// TODO using more than one line of code is acceptable ;)
-		if ( this.element.attr( "disabled", false ).is( "[type='search'], :jqmData(type='search')" ) ) {
+		if ( parentNeedsEnabled ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
@@ -165,7 +182,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.textinput.prototype.enhanceWithin( e.target, true );
 });
 

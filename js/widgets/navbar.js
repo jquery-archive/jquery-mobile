@@ -6,7 +6,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.grid" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.grid" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -37,30 +37,13 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			iconpos:	iconpos
 		});
 
-		$navbar.delegate( "li", "vclick", function( event ) {
-
-			// if the vclick was triggered on an anchor or the child
-			// of an anchor (eg, ui-btn), grab the parent link
-			var $link = $(event.target).closest( "a" );
-
-			// if there isn't a parent link find the child link and trigger a click
-			// this addresses Issue #4663 where the events are being triggered
-			// on the parent element in fixed position navbars
-			if( !$link.length ){
-				$link = $( this ).children( "a" ).first();
-				setTimeout(function() {
-					$link.trigger( "click" );
-				});
-
-				return false;
-			}
-
-			// clear existing active button states
-			$navbtns.removeClass( $.mobile.activeBtnClass );
-
-			// if the target button isn't disabled
-			if ( !$link.hasClass( "ui-disabled" ) ) {
-				$link.addClass( $.mobile.activeBtnClass );
+		$navbar.delegate( "a", "vclick", function( event ) {
+			// ui-btn-inner is returned as target
+			var target = $( event.target ).is( "a" ) ? $( this ) : $( this ).parent( "a" );
+			
+			if ( !target.is( ".ui-disabled, .ui-btn-active" ) ) {
+				$navbtns.removeClass( $.mobile.activeBtnClass );
+				target.addClass( $.mobile.activeBtnClass );
 			}
 		});
 
@@ -72,7 +55,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 });
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
+$.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.navbar.prototype.enhanceWithin( e.target );
 });
 

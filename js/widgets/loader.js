@@ -1,9 +1,9 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: packaged loading message functionality
-//>>label: loading message
-//>>group: Navigation
+//>>description: Loading message for page transitions
+//>>label: Loading Message
+//>>group: Widgets
 
-define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], function( $ ) {
+define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window ) {
@@ -38,7 +38,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 	});
 
 	// TODO move loader class down into the widget settings
-	var loaderClass = "ui-loader", $html = $( "html" ), $window = $( window );
+	var loaderClass = "ui-loader", $html = $( "html" ), $window = $.mobile.window;
 
 	$.widget( "mobile.loader", {
 		// NOTE if the global config settings are defined they will override these
@@ -85,7 +85,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				this.fakeFixLoader();
 				$window
 					.unbind( "scroll", this.checkLoaderPosition )
-					.bind( "scroll", this.fakeFixLoader );
+					.bind( "scroll", $.proxy( this.fakeFixLoader, this ) );
 			}
 		},
 
@@ -170,8 +170,8 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$( window ).unbind( "scroll", $.proxy( this.fakeFixLoader, this) );
-			$( window ).unbind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
+			$.mobile.window.unbind( "scroll", this.fakeFixLoader );
+			$.mobile.window.unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 

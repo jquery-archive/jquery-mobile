@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Button Markup Tester</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="../../docs/_assets/css/jqm-docs.css" />
 	<script src="../../js/jquery.tag.inserter.js"></script>
 	<script src="../../js"></script>
 <script>
@@ -16,7 +15,7 @@ $(document).bind("pagecreate", function() {
 		$("[data-setter]").each(function() {
 			var self = $(this),
 			    val = ($(this).is("[type='checkbox']") ? $(this).is(":checked") : $(this).val()),
-			    key = $(this).parent().find("label").text(),
+			    key = $("label[for='" + self.attr( "id" ) + "']" ).text().match(/(^[a-z]*)/)[1],
 			    apply = $("#button-" + key + "-apply").is(":checked");
 
 			if (apply) {
@@ -26,7 +25,8 @@ $(document).bind("pagecreate", function() {
 		});
 		if (!options.empty) {
 			delete options.empty;
-			$("#sample-link,#sample-input-button,#sample-button").buttonMarkup(options);
+			$("#sample-link").buttonMarkup(options);
+			$("#sample-input-button,#sample-button" ).button( "option", options );
 		}
 	});
 });
@@ -55,7 +55,7 @@ $(document).bind("pagecreate", function() {
 						<label for="button-icon">icon</label>
 						<input data-setter="true" type="text" id="button-icon"></input>
 					</div>
-                    		</td><td>
+          </td><td>
 					<div data-role="fieldcontain">
 						<label for="button-icon-apply">Apply</label>
 						<input data-apply="true" type="checkbox" id="button-icon-apply"></input>
@@ -103,7 +103,7 @@ $(document).bind("pagecreate", function() {
 				</td></tr><tr><td>
 					<div data-role="fieldcontain">
 						<label for="button-corners">corners</label>
-						<input data-setter="true" type="checkbox" id="button-corners"></input>
+						<input data-setter="true" type="text" id="button-corners"></input>
 					</div>
 				</td><td>
 					<div data-role="fieldcontain">

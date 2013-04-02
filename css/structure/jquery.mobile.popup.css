@@ -1,52 +1,26 @@
+.ui-popup-open .ui-header-fixed,
+.ui-popup-open .ui-footer-fixed {
+	position: absolute !important; 	/* See line #553 of popup.js */
+}
 .ui-popup-screen {
+	background-image: url(data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==); /* Necessary to set some form of background to ensure element is clickable in IE6/7. While legacy IE won't understand the data-URI'd image, it ensures no additional requests occur in all other browsers with little overhead. */
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
-	border: 0;
+	right: 0;
+	bottom: 1px;
 	position: absolute;
-	filter: Alpha(Opacity=50);
+	filter: Alpha(Opacity=0);
 	opacity: 0;
 	z-index: 1099;
 }
-
-.ui-popup-screen-background-hack {
-	background-color: black;
+.ui-popup-screen.in {
+	opacity: 0.5;
+	filter: Alpha(Opacity=50);
+}
+.ui-popup-screen.out {
+	opacity: 0;
 	filter: Alpha(Opacity=0);
 }
-
-@-webkit-keyframes popup-fadein {
-    from { opacity: 0; }
-    to { opacity: 0.5; }
-}
-
-@-moz-keyframes popup-fadein {
-    from { opacity: 0; }
-    to { opacity: 0.5; }
-}
-
-@-webkit-keyframes popup-fadeout {
-    from { opacity: 0.5; }
-    to { opacity: 0; }
-}
-
-@-moz-keyframes popup-fadeout {
-    from { opacity: 0.5; }
-    to { opacity: 0; }
-}
-
-.ui-popup-screen.fade.in {
-	opacity: 0.5;
-	-webkit-animation-name: popup-fadein;
-	-moz-animation-name: popup-fadein;
-}
-
-.ui-popup-screen.fade.out {
-	opacity: 0;
-	-webkit-animation-name: popup-fadeout;
-	-moz-animation-name: popup-fadeout;
-}
-
 .ui-popup-container {
 	z-index: 1100;
 	display: inline-block;
@@ -54,12 +28,13 @@
 	padding: 0;
 	outline: 0;
 }
-
+.ui-popup {
+	position: relative;
+}
 .ui-popup.ui-content,
 .ui-popup .ui-content {
 	overflow: visible;
 }
-
 .ui-popup > p,
 .ui-popup > h1,
 .ui-popup > h2,
@@ -109,7 +84,6 @@
 .ui-popup-container .ui-content > h6:last-child {
 	margin-bottom: 0;
 }
-
 .ui-popup > img {
 	width: auto;
 	height: auto;
@@ -117,11 +91,17 @@
 	max-height: 100%;
 	vertical-align: middle;
 }
+.ui-popup:not(.ui-content) > img:only-child,
+.ui-popup:not(.ui-content) > .ui-btn-left:first-child + img:last-child,
+.ui-popup:not(.ui-content) > .ui-btn-right:first-child + img:last-child {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
 .ui-popup iframe {
 	vertical-align: middle;
 }
 
-@media all and (min-width: 450px){
+@media all and (min-width: 28em){
 	.ui-popup .ui-field-contain label.ui-submit,
 	.ui-popup .ui-field-contain .ui-controlgroup-label,
 	.ui-popup .ui-field-contain label.ui-select,
@@ -137,7 +117,6 @@
 		width: 100%; display: block;
 	}
 }
-
 .ui-popup > .ui-btn-left,
 .ui-popup > .ui-btn-right {
 	position: absolute; 
@@ -147,3 +126,4 @@
 }
 .ui-popup > .ui-btn-left { left: -9px; }
 .ui-popup > .ui-btn-right { right: -9px; }
+.ui-popup-hidden { top: -99999px; left: -9999px; }

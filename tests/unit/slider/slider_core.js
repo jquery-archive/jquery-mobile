@@ -3,12 +3,12 @@
  */
 (function($){
 	$.mobile.page.prototype.options.keepNative = "input.should-be-native";
-
+	
 	module( "jquery.mobile.slider.js core" );
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "slider elements in the keepNative set shouldn't be enhanced", function() {
-		deepEqual( $("input.should-be-native").siblings("div.ui-slider").length, 0 );
+		deepEqual( $("input.should-be-native").siblings(".ui-slider-track").length, 0 );
 	});
 
 	test( "refresh should force val to nearest step", function() {
@@ -33,7 +33,7 @@
 	test( "flip toggle switch title should be current selected value attr", function() {
 		var slider = $( "#slider-switch" );
 
-		deepEqual(slider.siblings(".ui-slider").find("a").attr('title'),
+		deepEqual(slider.siblings(".ui-slider-switch").find("a").attr('title'),
 				 $(slider.find("option")[slider[0].selectedIndex]).text(),
 				 "verify that the link title is set to the selected option text");
 	});
@@ -41,9 +41,9 @@
 	test( "data-highlight works properly", function() {
 		var $highlighted = $("#background-slider"), $unhighlighted = $("#no-background-slider");
 
-		deepEqual( $highlighted.siblings( ".ui-slider" ).find( ".ui-slider-bg" ).length, 1,
+		deepEqual( $highlighted.siblings( ".ui-slider-track" ).find( ".ui-slider-bg" ).length, 1,
 					"highlighted slider should have a div for the track bg" );
-		deepEqual( $unhighlighted.siblings( ".ui-slider" ).find( ".ui-slider-bg" ).length, 0,
+		deepEqual( $unhighlighted.siblings( ".ui-slider-track" ).find( ".ui-slider-bg" ).length, 0,
 					"unhighlighted slider _not_ should have a div for the track bg" );
 	});
 
@@ -58,6 +58,15 @@
 		equal(label.attr( "id" ), slider.attr( "id" ) + "-label", "the label id is based off the slider id" );
 	});
 
+	// NOTE init binding to alter the setting is in settings.js
+	test( "slider input does not get clear button", function() {
+		deepEqual( $( ".textinput-test" ).find( ".ui-input-clear" ).length, 0, "slider input does not get clear button" );
+	});
+	
+	test( "slider input is not wrapped in div.ui-input-text", function() {
+		ok( ! $( "#textinput-test" ).parents().is( "div.ui-input-text" ), "slider input is not wrapped in div.ui-input-text" );
+	});
+	
 	test( "refresh is triggered on mouseup", function() {
 		expect( 1 );
 		var slider = $( "#mouseup-refresh" );
