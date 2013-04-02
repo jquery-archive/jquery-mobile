@@ -290,7 +290,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				_openPanel = function() {
 					self._page.off( "panelclose" );
 					self._page.jqmData( "panel", "open" );
-					self._positionPanel();
 					
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
 						self.element.add( self._wrapper ).on( self._transitionEndEvents, complete );
@@ -305,6 +304,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					}
 					
 					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen );
+					
+					self._positionPanel();
 					
 					self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
 					self._wrapper
