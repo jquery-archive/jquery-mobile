@@ -2,6 +2,7 @@
 .ui-panel {
 	width: 17em;
 	min-height: 100%;
+	max-height: none;
 	border-width: 0;
 	position: absolute;
 	top: 0;
@@ -9,6 +10,7 @@
 }
 .ui-panel-closed {
 	width: 0;
+	max-height: 100%;
 	overflow: hidden;
 	visibility: hidden;
 }
