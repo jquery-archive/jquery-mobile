@@ -8,7 +8,7 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
 	<script src="../../../external/qunit.js"></script>
 	<script type="text/javascript">
@@ -32,19 +32,19 @@
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
-	<script src="../swarminject.js"></script>
-
-  <script type="text/javascript">
-  // basic
-  $(window).on('refresh_test_table', function (e, data) {
-    var tb = $(data).find('tbody'),
-				newRow = '<tr><th data-test="abc">1</th><td>2</td><td>3</td><td data-col="3">4</td><td>5</td></tr>';
-    tb.empty()
-      .append(newRow)
-      .closest('table')
-      .table('refresh');
-  });
-</script>
+	<script src="../../swarminject.js"></script>
+	
+	<script type="text/javascript">
+		// basic
+		$(window).on('refresh_test_table', function (e, data) {
+			var tb = $(data).find('tbody'),
+					newRow = '<tr><th data-test="abc">1</th><td>2</td><td>3</td><td data-col="3">4</td><td>5</td></tr>';
+			tb.empty()
+				.append(newRow)
+				.closest('table')
+				.table('refresh');
+		});
+	</script>
 
 </head>
 <body>

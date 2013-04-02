@@ -122,7 +122,6 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 	self.update();
 
 });
-
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
