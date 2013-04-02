@@ -27,7 +27,7 @@ define( ["jquery", "../jquery.mobile.core", "./serial", "./concurrent"], functio
 
 	// Make our transition handler the public default.
 	$.mobile.defaultTransitionHandler = $.mobile.transitionHandlers.sequential;
-	$.mobile.transitionHandlers.default = $.mobile.defaultTransitionHandler;
+	$.mobile.transitionHandlers["default"] = $.mobile.defaultTransitionHandler;
 
 	$.mobile.transitionFallbacks = {};
 
