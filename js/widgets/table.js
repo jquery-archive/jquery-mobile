@@ -82,7 +82,6 @@ $.widget( "mobile.table", $.mobile.widget, {
 $.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.table.prototype.enhanceWithin( e.target );
 });
-
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

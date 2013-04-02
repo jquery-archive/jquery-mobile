@@ -1,4 +1,3 @@
-
 /*
  * mobile table unit tests
  */
