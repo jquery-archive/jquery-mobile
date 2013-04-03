@@ -8,16 +8,16 @@
 .ui-controlgroup-controls label.ui-submit { position: absolute; left: -9999px; }
 .ui-controlgroup li { list-style: none; }
 
-.ui-controlgroup .ui-btn { margin: 0; }
-.ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
-.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
-.ui-controlgroup-horizontal .ui-btn-icon-notext .ui-btn-inner { width: 18px; }
-.ui-controlgroup.ui-mini .ui-btn-icon-notext .ui-btn-inner,
-.ui-header .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner,
-.ui-footer .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 16px; padding: .55em 11px .5em 11px; }
-.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; right: 50%; margin: -9px -9px 0 0; }
-.ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
-.ui-controlgroup-horizontal.ui-mini .ui-btn-inner { height: 16px; line-height: 16px; }
+.ui-controlgroup-controls .ui-btn { margin: 0; }
+.ui-controlgroup-controls .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
+.ui-controlgroup-controls .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn-icon-notext .ui-btn-inner { width: 18px; }
+.ui-controlgroup.ui-mini .ui-controlgroup-controls .ui-btn-icon-notext .ui-btn-inner,
+.ui-header .ui-controlgroup .ui-controlgroup-controls .ui-btn-icon-notext .ui-btn-inner,
+.ui-footer .ui-controlgroup .ui-controlgroup-controls .ui-btn-icon-notext .ui-btn-inner { height: 16px; padding: .55em 11px .5em 11px; }
+.ui-controlgroup-controls .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; right: 50%; margin: -9px -9px 0 0; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn-inner { text-align: center; }
+.ui-controlgroup-horizontal.ui-mini .ui-controlgroup-controls .ui-btn-inner { height: 16px; line-height: 16px; }
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px; }
 
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
@@ -30,12 +30,12 @@
 /* On IE7 the floating selects will be displayed as block if .ui-btn-text has width 100% */
 .ui-controlgroup-horizontal .ui-select .ui-btn-text { width: auto; }
 
-.ui-controlgroup-vertical .ui-btn {	border-bottom-width: 0; }
-.ui-controlgroup-vertical .ui-btn.ui-last-child { border-bottom-width: 1px; }
-.ui-controlgroup-horizontal .ui-btn { border-right-width: 0; }
-.ui-controlgroup-horizontal .ui-btn.ui-last-child {	border-right-width: 1px; }
+.ui-controlgroup-vertical .ui-controlgroup-controls .ui-btn {	border-bottom-width: 0; }
+.ui-controlgroup-vertical .ui-controlgroup-controls .ui-btn.ui-last-child { border-bottom-width: 1px; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn { border-right-width: 0; }
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn.ui-last-child {	border-right-width: 1px; }
 
-.ui-controlgroup .ui-btn-corner-all {
+.ui-controlgroup-controls .ui-btn-corner-all {
 	-webkit-border-radius: 0;
 	border-radius: 0;
 }
@@ -47,32 +47,32 @@
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
-.ui-controlgroup-vertical .ui-btn.ui-first-child {
+.ui-controlgroup-vertical .ui-controlgroup-controls .ui-btn.ui-first-child {
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 }
-.ui-controlgroup-vertical .ui-btn.ui-last-child {
+.ui-controlgroup-vertical .ui-controlgroup-controls .ui-btn.ui-last-child {
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
-.ui-controlgroup-horizontal .ui-btn.ui-first-child {
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn.ui-first-child {
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 }
-.ui-controlgroup-horizontal .ui-btn.ui-last-child {
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn.ui-last-child {
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
 
-.ui-controlgroup .ui-shadow:not(.ui-focus) {
+.ui-controlgroup-controls .ui-shadow:not(.ui-focus) {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
