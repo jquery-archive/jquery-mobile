@@ -37,7 +37,7 @@ input.ui-input-text.ui-slider-input {
 	height: 22px;
 	line-height: 22px;
 	font-size: 14px;
-	border: none;
+	border-width: 0;
 	background-image: none;
 	font-weight: bold;
 	text-align: center;
