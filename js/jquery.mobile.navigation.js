@@ -1152,7 +1152,7 @@ define( [
 			// requests to go through our page loading logic.
 			isPermittedCrossDomainRequest: function( docUrl, reqUrl ) {
 				return $.mobile.allowCrossDomainPages &&
-					docUrl.protocol === "file:" &&
+					(docUrl.protocol === "file:" || docUrl.protocol === "content:") &&
 					reqUrl.search( /^https?:/ ) !== -1;
 			}
 		}),
