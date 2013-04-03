@@ -125,8 +125,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					var paddingTop = parseFloat( input.css( "padding-top" ) ) || 0,
-						paddingBottom = parseFloat( input.css( "padding-bottom" ) ) || 0,
+					var paddingTop = parseFloat( input.css( "padding-top" ) ),
+						paddingBottom = parseFloat( input.css( "padding-bottom" ) ),
 						paddingHeight = paddingTop + paddingBottom;
 					
 					input.height( scrollHeight - paddingHeight + extraLineHeight );
