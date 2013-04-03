@@ -51,8 +51,7 @@ div.ui-btn-text { width: auto; }
 .ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 30px; }
 
 /* Corner styling inheritance */
-.ui-btn-inner,
-.ui-btn-text {
+.ui-btn-inner {
 	-webkit-border-radius: inherit;	
 	border-radius: inherit;
 }
