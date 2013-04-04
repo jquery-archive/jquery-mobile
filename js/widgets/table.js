@@ -19,11 +19,17 @@ $.widget( "mobile.table", $.mobile.widget, {
 		},
 
 		_create: function() {
+			var self = this;
+			self.refresh( true );
+		},
 
+		refresh: function (create) {
 			var self = this,
 				trs = this.element.find( "thead tr" );
 
-			this.element.addClass( this.options.classes.table );
+			if ( create ) {
+				this.element.addClass( this.options.classes.table );
+			}
 
 			// Expose headers and allHeaders properties on the widget
 			// headers references the THs within the first TR in the table
@@ -40,7 +46,6 @@ $.widget( "mobile.table", $.mobile.widget, {
 
 					var span = parseInt( $( this ).attr( "colspan" ), 10 ),
 						sel = ":nth-child(" + ( coltally + 1 ) + ")";
-					
 					$( this )
 						.jqmData( "colstart", coltally + 1 );
 
@@ -51,6 +56,9 @@ $.widget( "mobile.table", $.mobile.widget, {
 						}
 					}
 
+					if ( create === undefined ) {
+						$(this).jqmData("cells", "");
+					}
 					// Store "cells" data on header as a reference to all cells in the same column as this TH
 					$( this )
 						.jqmData( "cells", self.element.find( "tr" ).not( trs.eq(0) ).not( this ).children( sel ) );
@@ -61,6 +69,10 @@ $.widget( "mobile.table", $.mobile.widget, {
 
 			});
 
+			// update table modes
+			if ( create === undefined ) {
+				this.element.trigger( 'refresh' );
+			}
 	}
 
 });

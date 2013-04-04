@@ -33,6 +33,18 @@
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
 	<script src="../swarminject.js"></script>
+	
+	<script type="text/javascript">
+		$(window).on('refresh_test_table', function (e, data) {
+			var tb = $(data).find('tbody'),
+					newRow = '<tr><th data-test="abc">1</th><td>2</td><td>3</td><td data-col="3">4</td><td>5</td></tr>';
+			tb.empty()
+				.append(newRow)
+				.closest('table')
+				.table('refresh');
+		});
+	</script>
+
 </head>
 <body>
 
@@ -51,11 +63,11 @@
 		<table data-nstest-role="table" id="movie-table">
 			<thead>
 				<tr>
-					<th data-priority="1">Rank</th>
-					<th data-priority="persist">Movie Title</th>
-					<th data-priority="2">Year</th>
-					<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-					<th data-priority="4">Reviews</th>
+					<th data-nstest-priority="1">Rank</th>
+					<th data-nstest-priority="persist">Movie Title</th>
+					<th data-nstest-priority="2">Year</th>
+					<th data-nstest-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+					<th data-nstest-priority="4">Reviews</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -78,11 +90,11 @@
 		<table data-nstest-role="table" data-nstest-mode="reflow" id="movie-table-reflow">
 			<thead>
 				<tr>
-					<th data-priority="1">Rank</th>
-					<th data-priority="persist">Movie Title</th>
-					<th data-priority="2">Year</th>
-					<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-					<th data-priority="4">Reviews</th>
+					<th data-nstest-priority="1">Rank</th>
+					<th data-nstest-priority="persist">Movie Title</th>
+					<th data-nstest-priority="2">Year</th>
+					<th data-nstest-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+					<th data-nstest-priority="4">Reviews</th>
 				</tr>
 			</thead>
 			<tbody>
