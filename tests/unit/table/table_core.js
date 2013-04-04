@@ -137,7 +137,6 @@
 			start();
 		}, 800);
 	});
-
 	asyncTest( "Column toggle table refresh" , function(){
 		setTimeout(function () {
 			// hide one column and refresh
