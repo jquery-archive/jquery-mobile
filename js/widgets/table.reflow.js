@@ -19,7 +19,7 @@ $.mobile.table.prototype.options.classes = $.extend(
 	}
 );
 
-$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate", function( e ) {
+$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", function( e ) {
 
 	var $table = $( this ),
 		event = e.type,
@@ -31,7 +31,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 		return;
 	}
 
-	if ( event !== "tableupdate" ) {
+	if ( event !== "refresh" ) {
 		self.element.addClass( o.classes.reflowTable );
 	}
 
@@ -64,6 +64,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 	});
 
 });
+
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
