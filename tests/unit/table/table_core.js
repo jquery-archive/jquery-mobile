@@ -186,13 +186,8 @@
 					equal( $table.find('tbody tr:first')
 						.find("th, td").eq(2).hasClass('ui-table-cell-hidden'), true, "random cell in hidden column has ui-table-cell-hidden class");
 					ok( $input.is( ":checked" ), false, "input is still not checked after refresh");
-					
 					equal( $first_input.jqmData("cells").eq(1).data("test"), "abc",
 						"cell reference in popup is to cell currently in table");
-						
-						var test = $first_input.jqmData("cells").eq(1);
-						console.log(test);
-						
 					equal( $visibleCells.length, $visibleHeaders.length, "same number of headers and rows visible" );
 				}, 800);
 			},
