@@ -136,6 +136,10 @@ body, .jqm-demos  {
 	-moz-box-shadow: 0 0 5px rgba(0,0,0,.3);
 	box-shadow: 0 0 5px rgba(0,0,0,.3);
 }
+.ui-panel-animate.ui-panel-content-wrap:not(.ui-panel-content-wrap-closed) .jqm-search > .jqm-list {
+	display: none;
+}
+
 
 /* Footer */
 .jqm-footer {
