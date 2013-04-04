@@ -24,7 +24,6 @@ $.widget( "mobile.table", $.mobile.widget, {
 		},
 
 		refresh: function (create) {
-
 			var self = this,
 				trs = this.element.find( "thead tr" );
 
@@ -72,7 +71,7 @@ $.widget( "mobile.table", $.mobile.widget, {
 
 			// update table modes
 			if ( create === undefined ) {
-				this.element.trigger( 'tableupdate' );
+				this.element.trigger( 'refresh' );
 			}
 	}
 
@@ -82,6 +81,7 @@ $.widget( "mobile.table", $.mobile.widget, {
 $.mobile.document.bind( "pagecreate create", function( e ) {
 	$.mobile.table.prototype.enhanceWithin( e.target );
 });
+
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

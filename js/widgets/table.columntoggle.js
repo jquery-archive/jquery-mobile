@@ -34,11 +34,11 @@ $.mobile.table.prototype.options.classes = $.extend(
 	}
 );
 
-$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate", function( e ) {
-
+$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", function( e ) {
+	
 	var $table = $( this ),
-		event = e.type,
 		self = $table.data( "mobile-table" ),
+		event = e.type,
 		o = self.options,
 		ns = $.mobile.ns,
 		id = ( $table.attr( "id" ) || o.classes.popup ) + "-popup"; //TODO BETTER FALLBACK ID HERE
@@ -47,7 +47,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 		return;
 	}
 
-	if ( event !== "tableupdate" ) {
+	if ( event !== "refresh" ) {
 		self.element.addClass( o.classes.columnToggleTable );
 
 		var $menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-" + ns + "rel='popup' data-" + ns + "mini='true'>" + o.columnBtnText + "</a>" ),
@@ -65,7 +65,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 
 			$cells.addClass( o.classes.priorityPrefix + priority );
 
-			if ( event !== "tableupdate" ) {
+			if ( event !== "refresh" ) {
 				$("<label><input type='checkbox' checked />" + $( this ).text() + "</label>" )
 					.appendTo( $menu )
 					.children( 0 )
@@ -78,7 +78,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 			}
 		}
 	});
-	if ( event !== "tableupdate" ) {
+	if ( event !== "refresh" ) {
 		$menu.appendTo( $popup );
 	}
 
@@ -89,7 +89,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 		$switchboard = $menu;
 	}
 
-	if (event !== "tableupdate") {
+	if (event !== "refresh") {
 		$switchboard.on( "change", "input", function( e ){
 			if( this.checked ){
 				$( this ).jqmData( "cells" ).removeClass( "ui-table-cell-hidden" ).addClass( "ui-table-cell-visible" );
@@ -114,7 +114,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 		$switchboard.find( "input" ).each( function(){
 			if (this.checked) {
 				this.checked = $( this ).jqmData( "cells" ).eq(0).css( "display" ) === "table-cell";
-				if (event === "tableupdate") {
+				if (event === "refresh") {
 					$( this ).jqmData( "cells" ).addClass('ui-table-cell-visible');
 				}
 			} else {
@@ -129,6 +129,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate tableupdate",
 	self.update();
 
 });
+
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
