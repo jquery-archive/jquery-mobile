@@ -56,7 +56,7 @@
 				ok($firstHeaderCell.jqmData("cells").length,
 					"column cells still assigned to header cell");
 				equal($firstHeaderCell.jqmData('cells').eq(0).closest("table").attr('id'),
-					"basic-table-test",
+					"movie-table",
 					"cell stored is a refreshed cell (currently in the table");
 				equal($cellLookUp, $firstHeaderCell.jqmData('cells').eq(0).jqmData("test"),
 					"referenced cell is in the correct column");
