@@ -102,6 +102,7 @@
 		// refresh table
 		$(window).trigger("refresh_test_table", ["#reflow-table-test"]);
 		var $table = $('#reflow-table-test .ui-table'),
+			$tds = $table.find( "td" ),
 			labels = $tds.find( "b.ui-table-cell-label" );
 		ok( $table.length, "table still enhanced");
 		ok( labels = $tds.find( "b.ui-table-cell-label" ), "Labels still there");
