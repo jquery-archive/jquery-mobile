@@ -22,46 +22,57 @@
 		}
 	});
 	asyncTest( "The page should be enhanced correctly" , function(){
+		expect( 1 );
+		
 		setTimeout(function() {
 			var $table = $('#basic-table-test .ui-table');
+			
 			ok( $table.length, ".ui-table class added to table element" );
 			start();
 		}, 800);
 	});
 	asyncTest( "Has data object attributed to table" , function(){
+		expect( 1 );
+		
 		setTimeout(function(){
 			var $table = $('#basic-table-test .ui-table'),
 				self = $table.data( "mobile-table" );
+				
 			ok( self , "Data object is available" );
 			start();
 		}, 800);
 	});
 	asyncTest( "Has headers option" , function(){
+		expect( 2 );
+		
 		setTimeout(function() {
 			var $table = $('#basic-table-test .ui-table'),
 				self = $table.data( "mobile-table" );
+				
 			ok( self.headers.length , "Header array is not empty");
 			equal( 5 , self.headers.length , "Number of headers is correct");
 			start();
 		}, 800);
 	});
-	asyncTest("Refresh updates table headers correctly",
-		function () {
-			setTimeout(function () {
-				$(window).trigger("refresh_test_table", ["#basic-table-test"]);
-				var $table = $('#basic-table-test .ui-table'),
-					$firstHeaderCell = $table.find('thead tr th').eq(0),
-					$cellLookUp = $table.find('tbody tr').eq(0).find('th td').eq(0).jqmData("test");
-				ok($table.length, "table still enhanced");
-				ok($firstHeaderCell.jqmData("cells").length,
-					"column cells still assigned to header cell");
-				equal($firstHeaderCell.jqmData('cells').eq(0).closest("table").attr('id'),
-					"movie-table",
-					"cell stored is a refreshed cell (currently in the table");
-				equal($cellLookUp, $firstHeaderCell.jqmData('cells').eq(0).jqmData("test"),
-					"referenced cell is in the correct column");
-				start();
-		}, 1200);
+	asyncTest("Refresh updates table headers correctly", function () {
+		expect( 4 );
+		
+		setTimeout(function () {
+			$(window).trigger("refresh_test_table", ["#basic-table-test"]);
+			var $table = $('#basic-table-test .ui-table'),
+				$firstHeaderCell = $table.find('thead tr th').eq(0),
+				$cellLookUp = $table.find('tbody tr').eq(0).find('th td').eq(0).jqmData("test");
+				
+			ok($table.length, "table still enhanced");
+			ok($firstHeaderCell.jqmData("cells").length,
+				"column cells still assigned to header cell");
+			equal($firstHeaderCell.jqmData('cells').eq(0).closest("table").attr('id'),
+				"movie-table",
+				"cell stored is a refreshed cell (currently in the table");
+			equal($cellLookUp, $firstHeaderCell.jqmData('cells').eq(0).jqmData("test"),
+				"referenced cell is in the correct column");
+			start();
+		}, 800);
 	});
 	module( "Reflow Mode", {
 		setup: function(){
@@ -81,33 +92,41 @@
 		}
 	});
 	asyncTest( "The page should be enhanced correctly" , function(){
+		expect( 1 );
+		
 		setTimeout(function() {
 			ok($('#reflow-table-test .ui-table-reflow').length, ".ui-table-reflow class added to table element");
 			start();
 		}, 800);
 	});
 	asyncTest( "The appropriate label is added" , function(){
+		expect( 2 );
+		
 		setTimeout(function(){
 			var $table = $( "#reflow-table-test table" ),
 				$body = $table.find( "tbody" ),
 				$tds = $body.find( "td" ),
 				labels = $tds.find( "b.ui-table-cell-label" );
+				
 			ok( labels , "Appropriate label placed" );
 			equal( $( labels[0] ).text(), "Movie Title" , "Appropriate label placed" );
 			start();
 		}, 800);
 	});
 	asyncTest( "Reflow table refresh" , function(){
+		expect( 2 );
+		
 		setTimeout(function () {
-		// refresh table
-		$(window).trigger("refresh_test_table", ["#reflow-table-test"]);
-		var $table = $('#reflow-table-test .ui-table'),
-			$tds = $table.find( "td" ),
-			labels = $tds.find( "b.ui-table-cell-label" );
-		ok( $table.length, "table still enhanced");
-		ok( labels = $tds.find( "b.ui-table-cell-label" ), "Labels still there");
-		start();
-		}, 1200);
+			// refresh table
+			$(window).trigger("refresh_test_table", ["#reflow-table-test"]);
+			var $table = $('#reflow-table-test .ui-table'),
+				$tds = $table.find( "td" ),
+				labels = $tds.find( "b.ui-table-cell-label" );
+				
+			ok( $table.length, "table still enhanced");
+			ok( labels = $tds.find( "b.ui-table-cell-label" ), "Labels still there");
+			start();
+		}, 800);
 	});
 	module( "Column toggle table Mode", {
 		setup: function(){
@@ -127,8 +146,11 @@
 		}
 	});
 	asyncTest( "The page should be enhanced correctly" , function(){
+		expect( 6 );
+		
 		setTimeout(function() {
 			var $popup = $('#column-table-test #movie-table-column-popup-popup');
+			
 			ok($('#column-table-test .ui-table-columntoggle').length, ".ui-table-columntoggle class added to table element");
 			ok($('#column-table-test .ui-table-columntoggle-btn').length, ".ui-table-columntoggle-btn button added");
 			equal($('#column-table-test .ui-table-columntoggle-btn').text(), "Columns...",  "Column toggle button has correct text");
@@ -139,26 +161,45 @@
 		}, 800);
 	});
 	asyncTest( "Column toggle table refresh" , function(){
-		setTimeout(function () {
-			// hide one column and refresh
-			var $input = $( ".ui-popup-container" ).find( "input" ).eq(2);
-			$input.trigger('click', function(){
-				$(window).trigger("refresh_test_table", ["#column-table-test"]);
+		expect( 5 );
+		
+		var $input;
+		
+		$.testHelper.pageSequence([
+			function() {
+				$( ".ui-table-columntoggle-btn" ).click();
+			},
+			function() {
+				$input = $( "#movie-table-column-popup-popup" ).find( "input" ).eq(0);
+				$input.click();
+			},
+			function(){
+				setTimeout(function () {
+					$(window).trigger("refresh_test_table", ["#column-table-test"]);
+					
 					var $table = $('#column-table-test .ui-table'),
-						$second_input = $( ".ui-popup-container" ).find( "input" ).eq(0),
-						$visibleCells = $table.find("tbody tr").eq(1).find("th, td").not('.ui-table-cell-hidden'),
-						$visibleHeaders = $table.find("tbody tr").eq(0).find("th, td").not('.ui-table-cell-hidden');
+						$first_input = $( "#movie-table-column-popup-popup" ).find( "input" ).eq(0),
+						$visibleCells = $table.find("tbody tr:first").find("th, td").not('.ui-table-cell-hidden'),
+						$visibleHeaders = $table.find("thead tr:first").find("th, td").not('.ui-table-cell-hidden');
+						
 					ok( $table.length, "table still enhanced");
-					equal( $table.find('tbody tr').eq(1)
-									.find("th, td").eq(2).hasClass('ui-table-cell-hidden'), true, 
-									 "random cell on hidden column has ui-table-cell-hidden, class");
+					equal( $table.find('tbody tr:first')
+						.find("th, td").eq(2).hasClass('ui-table-cell-hidden'), true, "random cell in hidden column has ui-table-cell-hidden class");
 					ok( $input.is( ":checked" ), false, "input is still not checked after refresh");
-					equal($second_input.jqmData("cells").eq(0).jqmData("test"), "abc",
+					
+					equal( $first_input.jqmData("cells").eq(1).data("test"), "abc",
 						"cell reference in popup is to cell currently in table");
-					equal($visibleCells.length, $visibleHeaders.length, "same number of headers and rows visible");
-					start();
-			});
-		}, 1200);
+						
+						var test = $first_input.jqmData("cells").eq(1);
+						console.log(test);
+						
+					equal( $visibleCells.length, $visibleHeaders.length, "same number of headers and rows visible" );
+				}, 800);
+			},
+			function() {
+				start();
+			}
+		]);
 	});
 	asyncTest( "The dialog should become visible when button is clicked" , function(){
 		expect( 2 );
