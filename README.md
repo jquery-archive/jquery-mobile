@@ -107,7 +107,7 @@ Once you have your web server setup you can point it at the project directory.
 
 Automated testing forms the backbone of the jQuery Mobile project's QA activities. As a contributor or patch submitter you will be expected to run the test suite for the code your patches affect. Our continuous integration server will address the remainder of the test suite.
 
-You can run the all the test suites by running:
+You can run all the test suites by running the following command:
 
     grunt test
 
