@@ -241,9 +241,10 @@ h2.jqm-home-widget {
 .jqm-demos-home .jqm-content .jqm-intro {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
-	line-height: 1.6;
-	margin: .5em .8em 1em .8em;
-	padding-bottom: .5em;
+	font-size:.9em;
+	line-height: 1.4;
+	margin: -.8em .8em .5em .8em;
+	padding-bottom: .6em;
 	border: none;
 	color: #555;
 }
@@ -576,6 +577,13 @@ h2.jqm-home-widget {
 		margin-top:.5em;
 		margin-bottom:.6em;
 	}
+	
+	.jqm-demos-home .jqm-content .jqm-intro {
+		line-height: 1.45;
+		margin: -.2em .8em .4em .8em;
+
+	}
+	
 	/* Header buttons */
 	.jqm-header > .ui-btn,
 	.jqm-header.ui-header-fixed.ui-fixed-hidden > .ui-btn-icon-notext {
