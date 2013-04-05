@@ -16,11 +16,11 @@
 			$( document ).one( "click", "#add_and_refresh", function () {
 				var newRows = "<tr><th>6</th><td><a href=\"http://en.wikipedia.org/wiki/Dr._Strangelove\" data-rel=\"external\">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td><td>1964</td><td>92%</td><td>74</td></tr><tr><th>7</th><td><a href=\"http://en.wikipedia.org/wiki/The_Graduate\" data-rel=\"external\">The Graduate</a></td><td>1967</td><td>91%</td><td>122</td></tr><tr><th>8</th><td><a href=\"http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)\" data-rel=\"external\">The Wizard of Oz</a></td><td>1939</td><td>90%</td><td>72</td></tr><tr><th>9</th><td><a href=\"http://en.wikipedia.org/wiki/Singin%27_in_the_Rain' data-rel=\"external\">Singin\" in the Rain</a></td><td>1952</td><td>89%</td><td>85</td></tr><tr><th>10</th><td class=\"title\"><a href=\"http://en.wikipedia.org/wiki/Inception\" data-rel=\"external\">Inception</a></td><td>2010</td><td>84%</td><td>78</td></tr>";
 				
-				$( "table#table-column-toggle tbody" )
+				$( "table#table-reflow tbody" )
 					// Append the new rows to the body
 					.append( newRows )
 					// Call the refresh method
-					.closest( "table#table-column-toggle" )
+					.closest( "table#table-reflow" )
 					.table( "refresh" )
 					// Trigger if the new injected markup contain links or buttons that need to be enhanced
 					.trigger( "create" );
@@ -46,7 +46,7 @@
 
 		<div data-demo-html="true" data-demo-js="true">
 
-			<table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
+			<table data-role="table" id="table-reflow" class="ui-responsive table-stroke">
 			  <thead>
 				<tr>
 				  <th data-priority="2">Rank</th>
