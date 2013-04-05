@@ -30,7 +30,7 @@
 	$.mobile = $.extend($.mobile, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.3.0",
+		version: "1.3.1",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",

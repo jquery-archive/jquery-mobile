@@ -495,7 +495,7 @@
 
 			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. To set the swatch color of the child listviews, set the <code>data-theme</code> attribute on each list inside.</p>
 
-			<p><strong>Warning: Nested listviews are deprecated as of 1.3.0 and will be removed in future versions.</strong></p>
+			<p><strong>Warning: Nested listviews are deprecated as of 1.3.1 and will be removed in future versions.</strong></p>
 
 			<div data-demo-html="true">
 				<ul data-role="listview" data-header-theme="e">
