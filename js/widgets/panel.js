@@ -328,33 +328,42 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self._page.off( "panelclose" );
 					self._page.jqmData( "panel", "open" );
 					
+					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen );
+					var panelHeight = self.element.height();
+
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
 						self.element.add( self._wrapper ).on( self._transitionEndEvents, complete );
+
+						//css transform to open top and bottom panels
+						if( self.options.position === 'top' || self.options.position === 'bottom'){
+							self._setVerticalCssTransform( self.element, 0);  
+						}
+
+						//css transform for page content when top panel opens in push mode
+						if( self.options.position === 'top' && self.options.display ==="push"  ){
+							self._setVerticalCssTransform( self._wrapper , panelHeight );
+							self._setVerticalCssTransform( self._fixedToolbar , panelHeight );
+						}else if( self.options.position === 'bottom' && self.options.display === "push" ){
+							self._setVerticalCssTransform( self._wrapper , -panelHeight );
+							self._setVerticalCssTransform( self._fixedToolbar , -panelHeight );						
+						}
 					} else {
 						setTimeout( complete, 0 );
+
+						//move the main content up or down when display mode is push
+						if( self.options.display === 'push'){
+							if( self.options.position === 'top' ){
+								self._wrapper.css('top', panelHeight+"px"); 
+							}else if( self.options.position === 'bottom' ){
+								self._wrapper.css('bottom', panelHeight+"px"); 
+							}
+						}
 					}
 					
 					if ( self.options.theme && self.options.display !== "overlay" ) {
 						self._page
 							.removeClass( self._pageTheme )
 							.addClass( "ui-body-" + self.options.theme );
-					}
-
-					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen )
-
-					//css transform to open top and bottom panels
-					if( self.options.position === 'top' || self.options.position === 'bottom'){
-						self._setVerticalCssTransform( self.element, 0);  
-					}
-
-					var panelHeight = self.element.height();
-					//css transform for page content when top panel opens in push mode
-					if( self.options.position === 'top' && self.options.display ==="push"  ){
-						self._setVerticalCssTransform( self._wrapper , panelHeight );
-						self._setVerticalCssTransform( self._fixedToolbar , panelHeight );
-					}else if( self.options.position === 'bottom' && self.options.display === "push" ){
-						self._setVerticalCssTransform( self._wrapper , -panelHeight );
-						self._setVerticalCssTransform( self._fixedToolbar , -panelHeight );						
 					}
 
 					self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
@@ -411,34 +420,43 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			var o = this.options,
 				self = this,
 				_closePanel = function() {
-					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						self.element.add( self._wrapper ).on( self._transitionEndEvents, complete );
-					} else {
-						setTimeout( complete, 0 );
-					}
-					
-					self._page.removeClass( o.classes.pagePanelOpen );
+
 					self.element.removeClass( o.classes.panelOpen );
 
 					var panelHeight = self.element.height();
 
-					//css transform for top and bottom panels when closed
-					if( self.options.position === 'top' ){
-						self._setVerticalCssTransform( self.element , -panelHeight );
-					}else if ( self.options.position === 'bottom' ){
-	
-						self._setVerticalCssTransform( self.element , panelHeight );
-					}
+					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
+						self.element.add( self._wrapper ).on( self._transitionEndEvents, complete );
+						//css transform for top and bottom panels when closed
+						if( self.options.position === 'top' ){
+							self._setVerticalCssTransform( self.element , -panelHeight );
+						}else if ( self.options.position === 'bottom' ){
 
-					self._wrapper.removeClass( o.classes.contentWrapOpen );
-					
-					//css transform for page content when top or bottom panel close in push mode
-					if( self.options.position === 'top' || self.options.position === 'bottom' ){
-						if( self.options.display === "push" ){
-							self._resetCssTransform( self._wrapper );
-							self._resetCssTransform( self._fixedToolbar );
+							self._setVerticalCssTransform( self.element , panelHeight );
 						}
+
+						self._wrapper.removeClass( o.classes.contentWrapOpen );
+
+						//css transform for page content when top or bottom panel close in push mode
+						if( self.options.position === 'top' || self.options.position === 'bottom' ){
+							if( self.options.display === "push" ){
+								self._resetCssTransform( self._wrapper );
+								self._resetCssTransform( self._fixedToolbar );
+							}
+						}
+					} else {
+						setTimeout( complete, 0 );
+						if( self.options.position === 'top' ){
+							self._wrapper.css('top', ""); 
+						}else if( self.options.position === 'bottom' ){
+							self._wrapper.css('bottom', ""); 
+						} 
 					}
+					
+					self._page.removeClass( o.classes.pagePanelOpen );
+					
+
+					
 
 					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
 					
