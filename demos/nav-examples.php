@@ -38,9 +38,13 @@
 
 <li data-section="Demo Showcase" data-filtertext="responsive tables reflow heading groups rwd breakpoint"><a href="examples/tables/financial-grouped-reflow.php" data-ajax="false">Reflow: Heading groups</a></li>
 
+<li data-section="Demo Showcase" data-filtertext="responsive tables reflow refresh method dynamically inject data"><a href="examples/tables/reflow-refresh.php" data-ajax="false">Reflow: Refresh method</a></li>
+
 <li data-section="Demo Showcase" data-filtertext="responsive tables column toggle hide rwd breakpoint customization options"><a href="examples/tables/movie-list-toggle-options.php" data-ajax="false">Column toggle: Customization options</a></li>
 
 <li data-section="Demo Showcase" data-filtertext="responsive tables column toggle heading groups rwd breakpoint"><a href="examples/tables/financial-grouped-columns.php" data-ajax="false">Column toggle: Heading groups</a></li>
+
+<li data-section="Demo Showcase" data-filtertext="responsive tables column toggle refresh method dynamically inject data"><a href="examples/tables/columntoggle-refresh.php" data-ajax="false">Column toggle: Refresh method</a></li>
 
 <li data-section="Demo Showcase" data-filtertext="responsive tables table column toggle phone comparison rwd breakpoint"><a href="examples/tables/phone-compare.php" data-ajax="false">Column toggle demo: Phone comparison</a></li>
 
