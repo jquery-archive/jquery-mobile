@@ -14,6 +14,12 @@
 
 <li data-section="Demo Showcase" data-filtertext="listviews autodividers selector autodividersselector lists ul ol"><a href="examples/listviews/autodividers-selector.php" data-ajax="false">Autodividers Selector</a></li>
 
+<li data-role="list-divider">Maps</li>
+
+<li data-section="Demo Showcase" data-filtertext="google maps geolocation"><a href="examples/maps/geolocation.php" data-ajax="false">Google Maps & Geolocation</a></li>
+
+<li data-section="Demo Showcase" data-filtertext="google maps hybrid"><a href="examples/maps/list-toggle.php" data-ajax="false">Google Maps with List toggle</a></li>
+
 <li data-role="list-divider">Navigation</li>
 
 <li data-section="Demo Showcase" data-filtertext="backbone and require.js example navigation router"><a href="examples/backbone-require/index.php" data-ajax="false">Backbone and Require.js example</a></li>
