@@ -19,6 +19,10 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
+		this.refresh();
+	},
+
+	refresh: function() {
 		var o = this.options;
 
 		this._super();
@@ -28,7 +32,9 @@ $.widget( "mobile.table", $.mobile.table, {
 			return;
 		}
 
-		this.element.addClass( o.classes.reflowTable );
+		if( o.set ) { 
+			this.element.addClass( o.classes.reflowTable );
+		}
 
 		// get headers in reverse order so that top-level headers are appended last
 		$( this.allHeaders.get().reverse() ).each( function( i ) {
@@ -55,6 +61,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 				}
 		});
+		o.set = false;
 	}
 });
 
