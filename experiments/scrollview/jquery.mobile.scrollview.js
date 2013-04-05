@@ -339,7 +339,7 @@ jQuery.widget( "mobile.scrollview", jQuery.mobile.widget, {
 		// XXX: We should test if this has an effect on links! - kin
 
 		if (this.options.eventType == "mouse" || this.options.delayedClickEnabled)
-			e.preventDefault();
+			//e.preventDefault();
 		e.stopPropagation();
 	},
 
