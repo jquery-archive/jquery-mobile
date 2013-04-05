@@ -24,6 +24,9 @@
 					.table( "refresh" )
 					// Trigger if the new injected markup contain links or buttons that need to be enhanced
 					.trigger( "create" );
+					
+				// We disable the button to make clear that in this demo we have only one set of rows to inject	
+				$( "#add_and_refresh" ).button( "disable" );
 			});
 		});
 	</script>
