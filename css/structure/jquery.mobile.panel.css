@@ -102,8 +102,8 @@
 .ui-panel-animate.ui-panel-position-left.ui-panel-open.ui-panel-display-overlay,
 .ui-panel-animate.ui-panel-position-left.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translate3d(0,0,0);
-	-moz-transform: none;
 	transform: translate3d(0,0,0);
+	-moz-transform: none;
 }
 /* panel right */
 .ui-panel-position-right {
@@ -126,8 +126,8 @@
 .ui-panel-animate.ui-panel-position-right.ui-panel-open.ui-panel-display-overlay,
 .ui-panel-animate.ui-panel-position-right.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translate3d(0,0,0);
-	-moz-transform: none;
 	transform: translate3d(0,0,0);
+	-moz-transform: none;
 }
 
 /* positioning: content wrap, fixed toolbars and dismiss */
