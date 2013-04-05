@@ -72,9 +72,6 @@
 .ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) > div,
 .ui-panel-animate.ui-panel-closed.ui-panel-display-reveal > div,
 .ui-panel-animate.ui-panel-content-wrap,
-.ui-panel-animate.ui-panel-content-wrap:not(.ui-panel-content-wrap-closed) > .ui-header,
-.ui-panel-animate.ui-panel-content-wrap:not(.ui-panel-content-wrap-closed) > .ui-content,
-.ui-panel-animate.ui-panel-content-wrap:not(.ui-panel-content-wrap-closed) > .ui-footer,
 .ui-panel-animate.ui-panel-content-fixed-toolbar {
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translate3d(0,0,0);
