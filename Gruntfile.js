@@ -217,6 +217,31 @@ module.exports = function( grunt ) {
 				src: "*",
 				dest: path.join( dist, "images/" )
 			},
+			"demos.nested-includes": {
+				options: {
+					// TODO duplicated in demos.firstpass
+					processContent: function( content, srcPath ) {
+						var processedName = grunt.config.process( name );
+						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
+							function( match, includePath /*, offset, string */ ) {
+
+								var fileToInclude = path.resolve( path.join( path.dirname( srcPath ), includePath ) );
+								return grunt.file.read( fileToInclude );
+							}
+						);
+						return content;
+					}
+				},
+				files: [
+					{
+						expand: true,
+						src: [ "demos/global-nav.php", "demos/search.php" ],
+						dest: dist,
+						ext: ".html"
+					}
+				]
+
+			},
 			"demos.firstpass": {
 				options: {
 					processContent: function( content, srcPath ) {
@@ -228,7 +253,17 @@ module.exports = function( grunt ) {
 						content = content.replace( /jquery\.mobile\.css/gi, processedName + ".min.css" );
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
 							function( match, includePath /*, offset, string */ ) {
-								var fileToInclude = path.resolve( path.join( path.dirname( srcPath ), includePath ) );
+								var fileToInclude, newSrcPath = srcPath;
+
+								// If we've already handled the nested includes use the version
+								// that was copied to the dist folder
+								// TODO use the config from copy:demos.nested.files
+								if( includePath.match(/search.php|global\-nav.php/) ) {
+									newSrcPath = "dist/" + newSrcPath;
+								}
+
+								fileToInclude = path.resolve( path.join(path.dirname(newSrcPath), includePath) );
+
 								return grunt.file.read( fileToInclude );
 							}
 						);
@@ -477,7 +512,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
 	grunt.registerTask( "css", [ "config:dev", "css:release" ] );
 
-	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.firstpass", "copy:demos.secondpass", "copy:demos.unprocessed" ] );
+	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.firstpass", "copy:demos.secondpass", "copy:demos.unprocessed" ] );
 
 	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
 	grunt.registerTask( "dist:release", [ "release:init", "dist" ] );
