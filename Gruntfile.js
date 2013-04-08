@@ -274,7 +274,7 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "index.php", "demos/**/*.php!demos/examples/redirect" ],
+						src: [ "index.php", "demos/**/*.php", "!demos/examples/redirect/**" ],
 						dest: dist,
 						ext: ".html"
 					}
@@ -291,7 +291,7 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "demos/**!demos/examples/redirect", "!**/*.php" ],
+						src: [ "demos/**", "!**/*.php", "!demos/examples/redirect/**" ],
 						dest: dist
 					}
 				]
