@@ -40,6 +40,7 @@ $files = array(
 	'transitions/visuals/flow.js',
 	'transitions/visuals/turn.js',
 	'jquery.mobile.degradeInputs.js',
+	'widgets/optionDemultiplexer.js',
 	'widgets/dialog.js',
 	'widgets/page.sections.js',
 	'widgets/collapsible.js',

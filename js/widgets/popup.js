@@ -21,6 +21,7 @@ define( [
 	"../navigation/navigator",
 	"../navigation/method",
 	"../jquery.mobile.navigation",
+	"./optionDemultiplexer",
 	"depend!../jquery.hashchange[jquery]" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -50,7 +51,7 @@ define( [
 		};
 	}
 
-	$.widget( "mobile.popup", $.mobile.widget, {
+	$.widget( "mobile.popup", $.mobile.widget, $.extend( {
 		options: {
 			theme: null,
 			overlayTheme: null,
@@ -386,16 +387,6 @@ define( [
 			}
 
 			this._tolerance = tol;
-		},
-
-		_setOption: function( key, value ) {
-			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
-
-			if ( this[ setter ] !== undefined ) {
-				this[ setter ]( value );
-			}
-
-			this._super( key, value );
 		},
 
 		_clampPopupWidth: function( infoOnly ) {
@@ -865,7 +856,7 @@ define( [
 				this._closePopup();
 			}
 		}
-	});
+	}, $.mobile.behaviors.optionDemultiplexer ) );
 
 
 	// TODO this can be moved inside the widget

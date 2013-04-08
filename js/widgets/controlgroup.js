@@ -8,6 +8,7 @@
 define( [ "jquery",
 	"../jquery.mobile.buttonMarkup",
 	"./addFirstLastClasses",
+	"./optionDemultiplexer",
 	"../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -52,17 +53,6 @@ define( [ "jquery",
 			this.refresh();
 		},
 
-		_setOption: function( key, value ) {
-			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
-
-			if ( this[ setter ] !== undefined ) {
-				this[ setter ]( value );
-			}
-
-			this._super( key, value );
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
-		},
-
 		_setType: function( value ) {
 			this.element
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
@@ -95,7 +85,7 @@ define( [ "jquery",
 			this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
 			this._initialRefresh = false;
 		}
-	}, $.mobile.behaviors.addFirstLastClasses ) );
+	}, $.mobile.behaviors.addFirstLastClasses, $.mobile.behaviors.optionDemultiplexer ) );
 
 	// TODO: Implement a mechanism to allow widgets to become enhanced in the
 	// correct order when their correct enhancement depends on other widgets in
