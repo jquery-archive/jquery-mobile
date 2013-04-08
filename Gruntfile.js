@@ -238,7 +238,7 @@ module.exports = function( grunt ) {
 						expand: true,
 						src: [ "demos/global-nav.php", "demos/search.php" ],
 						dest: dist,
-						ext: ".html"
+						ext: ".php"
 					}
 				]
 
