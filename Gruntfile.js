@@ -496,7 +496,7 @@ module.exports = function( grunt ) {
 		curl: {
 			options: {
 				baseUrl: "http://code.origin.jquery.com/mobile/",
-				querystring: "?reload",
+				querystring: "?reload=1",
 				cwd: dist
 			},
 			release: {
