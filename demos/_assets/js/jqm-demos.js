@@ -6,7 +6,9 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 	// Start with links with only the trailing slash and that aren't external links
 	var fixLinks = function() {
 		$( "a[href$='/'], a[href='.'], a[href='..']" ).not( "[rel='external']" ).each( function() {
-			this.href = $( this ).attr( "href" ).replace( /\/$/, "" ) + "/index.html";
+			if( !$( this ).attr( "href" ).match("http") ){
+				this.href = $( this ).attr( "href" ).replace( /\/$/, "" ) + "/index.html";
+			}
 		});
 	};
 
