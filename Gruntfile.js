@@ -282,7 +282,7 @@ module.exports = function( grunt ) {
 			},
 			"demos.secondpass": {
 				options: {
-					processContentExclude: [ "**/*.png", "**/*.gif" ],
+					processContentExclude: [ "**/*.png", "**/*.gif", "**/*.ico" ],
 					processContent: function( content /*, srcPath*/ ) {
 						content = content.replace( /\.php/gi, ".html" );
 						return content;
