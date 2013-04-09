@@ -1154,19 +1154,3 @@ a.ui-link-inherit {
 	outline-width: 1px;
 	outline-style: auto;
 }
-
-/* slider tooltip
------------------------------------------------------------------------------------------------------------*/
-
-.ui-slider .ui-btn-inner {
-	padding: 5px 0 0 0 !important;
-	font-size:.8em;
-}
-
-.ui-slider-popup {
-	width: 64px;
-	height: 64px;
-	font-size: 36px;
-	padding-top: 14px;
-	opacity: 0.8;
-}
