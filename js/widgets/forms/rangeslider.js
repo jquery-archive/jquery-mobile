@@ -5,7 +5,14 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.rangeslider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset", "./slider" ], function( jQuery ) {
+define( [ "jquery",
+	"../../jquery.mobile.core",
+	"../../jquery.mobile.widget",
+	"./textinput",
+	"../../jquery.mobile.buttonMarkup",
+	"./reset",
+	"../optionDemultiplexer",
+	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	$.widget( "mobile.rangeslider", $.mobile.widget, $.extend( {
@@ -13,7 +20,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		options: {
 			theme: null,
 			trackTheme: null,
-			disabled: false,
 			initSelector: ":jqmData(role='rangeslider')",
 			mini: false,
 			highlight: true
@@ -29,7 +35,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			_sliderFirst = $.data( _inputFirst.get(0), "mobileSlider" ).slider,
 			_sliderLast = $.data( _inputLast.get(0), "mobileSlider" ).slider,
 			firstHandle = $.data( _inputFirst.get(0), "mobileSlider" ).handle,
-			_sliders = $( "<div class=\"ui-rangeslider-sliders\" />" ).appendTo( $el );
+			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
 			
 			if ( $el.find( "label" ).length > 1 ) {
 				secondLabel = $el.find( "label" ).last().hide();
@@ -204,6 +210,27 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 		},
 
+		_setTheme: function( value ) {
+			this._inputFirst.slider( "option", "theme", value );
+			this._inputLast.slider( "option", "theme", value );
+		},
+
+		_setTrackTheme: function( value ) {
+			this._inputFirst.slider( "option", "trackTheme", value );
+			this._inputLast.slider( "option", "trackTheme", value );
+		},
+
+		_setMini: function( value ) {
+			this._inputFirst.slider( "option", "mini", value );
+			this._inputLast.slider( "option", "mini", value );
+			this.element.toggleClass( "ui-mini", !!value );
+		},
+
+		_setHighlight: function( value ) {
+			this._inputFirst.slider( "option", "highlight", value );
+			this._inputLast.slider( "option", "highlight", value );
+		},
+
 		_destroy: function() {
 			this.element.removeClass( "ui-rangeslider ui-mini" ).find( "label" ).show();
 			this._inputFirst.after( this._sliderFirst );
@@ -212,7 +239,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
 		}
 
-	}, $.mobile.behaviors.formReset ) );
+	}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
