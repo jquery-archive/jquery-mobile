@@ -237,8 +237,7 @@ module.exports = function( grunt ) {
 					{
 						expand: true,
 						src: [ "demos/global-nav.php", "demos/search.php" ],
-						dest: dist,
-						ext: ".php"
+						dest: dist
 					}
 				]
 
@@ -283,7 +282,6 @@ module.exports = function( grunt ) {
 			},
 			"demos.secondpass": {
 				options: {
-					processContentExclude: [ "**/*.png", "**/*.gif", "**/*.ico" ],
 					processContent: function( content /*, srcPath*/ ) {
 						content = content.replace( /\.php/gi, ".html" );
 						return content;
@@ -292,7 +290,7 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "demos/**", "!**/*.php", "!demos/examples/redirect/**" ],
+						src: [ "demos/**/*.html", "!**/*.php", "!demos/examples/redirect/**" ],
 						dest: dist
 					}
 				]
@@ -319,9 +317,8 @@ module.exports = function( grunt ) {
 					},
 					{
 						expand: true,
-						cwd: dist,
-						src: "images/*",
-						dest: path.join( dist, "demos/" )
+						src: [ "demos/**/*", "!**/*.php", "!**/*.html" ],
+						dest: dist
 					}
 				]
 			},
