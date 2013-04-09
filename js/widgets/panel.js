@@ -30,7 +30,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			animate: "ui-panel-animate"
 		},
 		animate: true,
-		theme: "c",
+		theme: "a",
 		position: "left",
 		dismissible: true,
 		display: "reveal", //accepts reveal, push, overlay

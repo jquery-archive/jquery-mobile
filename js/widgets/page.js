@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], functi
 
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
-		theme: "c",
+		theme: "a",
 		domCache: false,
 		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')"
 	},

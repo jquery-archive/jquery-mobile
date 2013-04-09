@@ -17,7 +17,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 	options: {
 		filter: false,
 		filterPlaceholder: "Filter items...",
-		filterTheme: "c",
+		filterTheme: "a",
 		filterReveal: false,
 		filterCallback: defaultFilterCallback
 	},

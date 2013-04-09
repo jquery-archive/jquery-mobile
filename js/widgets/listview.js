@@ -18,12 +18,12 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 	options: {
 		theme: null,
-		countTheme: "c",
-		headerTheme: "b",
-		dividerTheme: "b",
+		countTheme: "a",
+		headerTheme: "a",
+		dividerTheme: "a",
 		icon: "arrow-r",
 		splitIcon: "arrow-r",
-		splitTheme: "b",
+		splitTheme: "a",
 		corners: true,
 		shadow: true,
 		inset: false,
