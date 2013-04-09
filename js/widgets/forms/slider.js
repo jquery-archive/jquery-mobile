@@ -5,7 +5,13 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.slider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset" ], function( jQuery ) {
+define( [ "jquery",
+	"../../jquery.mobile.core",
+	"../../jquery.mobile.widget",
+	"./textinput",
+	"../../jquery.mobile.buttonMarkup",
+	"../optionDemultiplexer",
+	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -15,7 +21,6 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
 		trackTheme: null,
-		disabled: false,
 		initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
 		mini: false,
 		highlight: false
@@ -357,7 +362,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			left, width, data, tol;
 
 		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-btn-down-" + trackTheme,' ui-btn-corner-all', ( this.options.mini ) ? " ui-mini":""].join( "" );
-		if ( this.options.disabled || this.element.attr( "disabled" ) ) {
+		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
 
@@ -490,19 +495,43 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		}
 	},
 
-	enable: function() {
-		this.element.attr( "disabled", false );
-		this.slider.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
-		return this._setOption( "disabled", false );
+	_setHighlight: function( value ) {
+		value = !!value;
+		if ( value ) {
+			this.options.highlight = !!value;
+			this.refresh();
+		} else if ( this.valuebg ) {
+			this.valuebg.remove();
+			this.valuebg = false;
+		}
 	},
 
-	disable: function() {
-		this.element.attr( "disabled", true );
-		this.slider.addClass( "ui-disabled" ).attr( "aria-disabled", true );
-		return this._setOption( "disabled", true );
-	}
+	_setMini: function( value ) {
+		value = !!value;
+		if ( !this.isToggleSwitch && !this.isRangeslider ) {
+			this.slider.parent().toggleClass( "ui-mini", value );
+			this.element.toggleClass( "ui-mini", value );
+		}
+		this.slider.toggleClass( "ui-mini", value );
+	},
 
-}, $.mobile.behaviors.formReset ) );
+	_setTheme: function( value ) {
+		this.handle.buttonMarkup( { theme: value } );
+	},
+
+	_setTrackTheme: function( value ) {
+		this.slider
+			.removeClass( "ui-btn-down-" + this.options.trackTheme )
+			.addClass( "ui-btn-down-" + value );
+	},
+
+	_setDisabled: function( value ) {
+		value = !!value;
+		this.element.prop( "disabled", value );
+		this.slider.toggleClass( "ui-disabled", value ).attr( "aria-disabled", value );
+	},
+
+}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
 //auto self-init widgets
 $.mobile.document.bind( "pagecreate create", function( e ) {
