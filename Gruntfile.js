@@ -4,7 +4,7 @@ module.exports = function( grunt ) {
 	var _ = grunt.util._,
 		path = require( "path" ),
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
-		name = "jquery.mobile<%= versionSuffix %>",
+		name = "jquery.mobile",
 		dist = "dist",
 		copyrightYear = grunt.template.today( "UTC:yyyy" ),
 		banner = {
@@ -108,7 +108,7 @@ module.exports = function( grunt ) {
 						"json!../package.json"
 					],
 
-					out: path.join( dist, name ) + ".js",
+					out: path.join( dist, name ) + "<%= versionSuffix %>.js",
 
 					pragmasOnSave: {
 						jqmBuildExclude: true
@@ -134,8 +134,8 @@ module.exports = function( grunt ) {
 					banner: banner.normal
 				},
 
-				src: [ path.join( dist, name ) + ".js" ],
-				dest: path.join( dist, name ) + ".js"
+				src: [ path.join( dist, name ) + "<%= versionSuffix %>.js" ],
+				dest: path.join( dist, name ) + "<%= versionSuffix %>.js"
 			},
 			demos: {
 				src: [ "demos/_assets/js/*.js" ],
@@ -147,14 +147,14 @@ module.exports = function( grunt ) {
 			all: {
 				options: {
 					banner: banner.minified,
-					sourceMap: path.join( dist, name ) + ".min.map",
-					sourceMappingURL: name + ".min.map",
+					sourceMap: path.join( dist, name ) + "<%= versionSuffix %>.min.map",
+					sourceMappingURL: name + "<%= versionSuffix %>.min.map",
 					beautify: {
 						ascii_only: true
 					}
 				},
 				files: {
-					"dist/jquery.mobile<%= versionSuffix %>.min.js": path.join( dist, name ) + ".js"
+					"dist/jquery.mobile<%= versionSuffix %>.min.js": path.join( dist, name ) + "<%= versionSuffix %>.js"
 				}
 			}
 		},
@@ -345,10 +345,10 @@ module.exports = function( grunt ) {
 		compress: {
 			dist: {
 				options: {
-					archive: path.join( dist, name ) + ".zip"
+					archive: path.join( dist, name ) + "<%= versionSuffix %>.zip"
 				},
 				files: [
-					{ expand: true, cwd: dist, src: [ "**", "!" + name + ".zip" ] }
+					{ expand: true, cwd: dist, src: [ "**", "!" + name + "<%= versionSuffix %>.zip" ] }
 				]
 			}
 		},
@@ -484,7 +484,6 @@ module.exports = function( grunt ) {
 						path.join( dist, name + "*.js" ),
 						path.join( dist, name + ".min.map" ),
 						path.join( dist, name + "*.css" ),
-						path.join( dist, "jquery.mobile.structure<%= versionSuffix %>*.css" ),
 						path.join( dist, name + ".zip" ),
 						path.join( dist, "demos" ),
 						path.join( dist, "images" )
@@ -505,7 +504,6 @@ module.exports = function( grunt ) {
 						path.join( dist, name + "*.js" ),
 						path.join( dist, name + ".min.map" ),
 						path.join( dist, name + "*.css" ),
-						path.join( dist, "jquery.mobile.structure<%= versionSuffix %>*.css" ),
 						path.join( dist, name + ".zip" )
 					]
 				}
