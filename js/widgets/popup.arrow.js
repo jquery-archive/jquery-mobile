@@ -58,7 +58,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	_updateArrow: function( direction ) {
 		var ar = this._ui.arrow,
 			oldTheme = ar.ct.jqmData( "oldTheme" ),
-			theme = "ui-body-" + ( this.options.theme || $.mobile.getInheritedTheme( this.element, "c" ) );
+			theme = "ui-body-" + ( this.options.theme || $.mobile.getInheritedTheme( this.element, "a" ) );
 
 		// Remove old direction and theme
 		ar.ct.removeClass( "l t r b" );

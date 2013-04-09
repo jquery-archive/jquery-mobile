@@ -57,7 +57,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		// get the inherited theme
 		// TODO centralize for all widgets
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( $el, "c" );
+			o.theme = $.mobile.getInheritedTheme( $el, "a" );
 		}
 		o.disabled = $el.prop( "disabled" );
 		o = splitOptions( o );

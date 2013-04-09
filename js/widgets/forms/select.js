@@ -72,7 +72,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
 		if ( !this.options.theme ) {
-			this.options.theme = $.mobile.getInheritedTheme( this.select, "c" );
+			this.options.theme = $.mobile.getInheritedTheme( this.select, "a" );
 		}
 	},
 

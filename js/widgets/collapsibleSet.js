@@ -19,7 +19,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 
 		// Inherit the theme from collapsible-set
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( $el, "c" );
+			o.theme = $.mobile.getInheritedTheme( $el, "a" );
 		}
 		// Inherit the content-theme from collapsible-set
 		if ( !o.contentTheme ) {

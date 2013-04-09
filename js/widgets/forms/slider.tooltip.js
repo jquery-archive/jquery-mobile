@@ -65,7 +65,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		} else if ( key === "popupEnabled" ) {
 			if ( value && !this._popup ) {
 				this._popup = getPopup()
-					.addClass( "ui-body-" + ( this.options.theme || $.mobile.getInheritedTheme( this.element, "c" ) ) )
+					.addClass( "ui-body-" + ( this.options.theme || $.mobile.getInheritedTheme( this.element, "a" ) ) )
 					.insertBefore( this.element );
 			}
 		}

@@ -31,7 +31,7 @@ $.fn.buttonMarkup = function( options ) {
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
 				icon:       options.icon       !== undefined ? options.icon       : getAttrFixed( e, nsKey + "icon" ),
 				iconpos:    options.iconpos    !== undefined ? options.iconpos    : getAttrFixed( e, nsKey + "iconpos" ),
-				theme:      options.theme      !== undefined ? options.theme      : getAttrFixed( e, nsKey + "theme" ) || $.mobile.getInheritedTheme( el, "c" ),
+				theme:      options.theme      !== undefined ? options.theme      : getAttrFixed( e, nsKey + "theme" ) || $.mobile.getInheritedTheme( el, "a" ),
 				inline:     options.inline     !== undefined ? options.inline     : getAttrFixed( e, nsKey + "inline" ),
 				shadow:     options.shadow     !== undefined ? options.shadow     : getAttrFixed( e, nsKey + "shadow" ),
 				corners:    options.corners    !== undefined ? options.corners    : getAttrFixed( e, nsKey + "corners" ),
@@ -90,7 +90,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		// if not, try to find closest theme container
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( el, "c" );
+			o.theme = $.mobile.getInheritedTheme( el, "a" );
 		}
 
 		buttonClass = "ui-btn ";

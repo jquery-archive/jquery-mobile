@@ -134,7 +134,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		}
 
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
+			o.theme = $.mobile.getInheritedTheme( this.element, "a" );
 		}
 
 		for ( var pos = 0, numli = li.length; pos < numli; pos++ ) {

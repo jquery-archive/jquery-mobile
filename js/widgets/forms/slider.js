@@ -31,7 +31,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		// TODO: Each of these should have comments explain what they're for
 		var self = this,
 			control = this.element,
-			parentTheme = $.mobile.getInheritedTheme( control, "c" ),
+			parentTheme = $.mobile.getInheritedTheme( control, "a" ),
 			theme = this.options.theme || parentTheme,
 			trackTheme = this.options.trackTheme || parentTheme,
 			cType = control[ 0 ].nodeName.toLowerCase(),
@@ -356,7 +356,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		//       alteration of the input value, which should still update the slider
 		
 		var self = this,
-			parentTheme = $.mobile.getInheritedTheme( this.element, "c" ),
+			parentTheme = $.mobile.getInheritedTheme( this.element, "a" ),
 			theme = this.options.theme || parentTheme,
 			trackTheme = this.options.trackTheme || parentTheme,
 			left, width, data, tol;
