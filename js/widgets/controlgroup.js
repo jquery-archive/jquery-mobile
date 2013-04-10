@@ -44,7 +44,7 @@ define( [ "jquery",
 			// better performance. It must be kept in sync with those setters.
 			$el
 				.addClass( "ui-controlgroup-" + o.type )
-				.toggleClass( "ui-corner-all", o.corners )
+				.toggleClass( "ui-btn-corner-all", o.corners )
 				.toggleClass( "ui-shadow", o.shadow )
 				.toggleClass( "ui-mini", o.mini );
 		},
