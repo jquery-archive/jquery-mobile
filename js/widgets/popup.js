@@ -21,7 +21,6 @@ define( [
 	"../navigation/navigator",
 	"../navigation/method",
 	"../jquery.mobile.navigation",
-	"./optionDemultiplexer",
 	"depend!../jquery.hashchange[jquery]" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -51,7 +50,7 @@ function windowCoords() {
 	};
 }
 
-$.widget( "mobile.popup", $.mobile.widget, $.extend( {
+$.widget( "mobile.popup", $.mobile.widget, {
 	options: {
 		theme: null,
 		overlayTheme: null,
@@ -219,10 +218,6 @@ $.widget( "mobile.popup", $.mobile.widget, $.extend( {
 			thisPage = $( "body" );
 		}
 
-		// define the container for navigation event bindings
-		// TODO this would be nice at the the mobile widget level
-		o.container = o.container || $.mobile.pageContainer || thisPage;
-
 		// Apply the proto
 		thisPage.append( ui.screen );
 		ui.container.insertAfter( ui.screen );
@@ -233,11 +228,10 @@ $.widget( "mobile.popup", $.mobile.widget, $.extend( {
 			ui.container.attr( "id", myId + "-popup" );
 			ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
 		}
-		ui.container.append( this.element );
+		this.element
+			.addClass( "ui-popup" )
+			.appendTo( ui.container );
 		ui.focusElement = ui.container;
-
-		// Add class to popup element
-		this.element.addClass( "ui-popup" );
 
 		// Define instance variables
 		$.extend( this, {
@@ -254,18 +248,10 @@ $.widget( "mobile.popup", $.mobile.widget, $.extend( {
 			_orientationchangeInProgress: false
 		});
 
-		// This duplicates the code from the various option setters below for
-		// better performance. It must be kept in sync with those setters.
-		this._applyTheme( this.element, o.theme, "body" );
-		this._applyTheme( this._ui.screen, o.overlayTheme, "overlay" );
-		this._applyTransition( o.transition );
-		this.element
-			.toggleClass( "ui-overlay-shadow", o.shadow )
-			.toggleClass( "ui-corner-all", o.corners );
-		this._setTolerance( o.tolerance );
+		this._setOptions( this.options );
 
+		// Event handlers
 		ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
-
 		this._on( $.mobile.window, {
 			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 			resize: $.proxy( this, "_handleWindowResize" ),
@@ -302,26 +288,6 @@ $.widget( "mobile.popup", $.mobile.widget, $.extend( {
 		}
 	},
 
-	_setTheme: function( value ) {
-		this._applyTheme( this.element, value, "body" );
-	},
-
-	_setOverlayTheme: function( value ) {
-		this._applyTheme( this._ui.screen, value, "overlay" );
-
-		if ( this._isOpen ) {
-			this._ui.screen.addClass( "in" );
-		}
-	},
-
-	_setShadow: function( value ) {
-		this.element.toggleClass( "ui-overlay-shadow", value );
-	},
-
-	_setCorners: function( value ) {
-		this.element.toggleClass( "ui-corner-all", value );
-	},
-
 	_applyTransition: function( value ) {
 		this._ui.container.removeClass( this._fallbackTransition );
 		if ( value && value !== "none" ) {
@@ -333,10 +299,38 @@ $.widget( "mobile.popup", $.mobile.widget, $.extend( {
 		}
 	},
 
-	_setTransition: function( value ) {
-		if ( !this._currentTransition ) {
-			this._applyTransition( value );
+	_setOptions: function( o ) {
+		if ( o.theme !== undefined ) {
+			this._applyTheme( this.element, o.theme, "body" );
 		}
+
+		if ( o.overlayTheme !== undefined ) {
+			this._applyTheme( this._ui.screen, o.overlayTheme, "overlay" );
+
+			if ( this._isOpen ) {
+				this._ui.screen.addClass( "in" );
+			}
+		}
+
+		if ( o.shadow !== undefined ) {
+			this.element.toggleClass( "ui-overlay-shadow", o.shadow );
+		}
+
+		if ( o.corners !== undefined ) {
+			this.element.toggleClass( "ui-corner-all", o.corners );
+		}
+
+		if ( o.transition !== undefined ) {
+			if ( !this._currentTransition ) {
+				this._applyTransition( o.transition );
+			}
+		}
+
+		if ( o.tolerance !== undefined ) {
+			this._setTolerance( o.tolerance );
+		}
+
+		this._super( o );
 	},
 
 	_setTolerance: function( value ) {
@@ -611,7 +605,7 @@ $.widget( "mobile.popup", $.mobile.widget, $.extend( {
 		this._applyTransition( o.transition );
 
 		if ( !this.options.theme ) {
-			this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
+			this._setOptions( { theme: this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) } );
 		}
 
 		this._ui.screen.removeClass( "ui-screen-hidden" );
@@ -700,7 +694,7 @@ $.widget( "mobile.popup", $.mobile.widget, $.extend( {
 
 	_unenhance: function() {
 		// Put the element back to where the placeholder was and remove the "ui-popup" class
-		this._setTheme( "none" );
+		this._setOptions( { theme: $.mobile.popup.prototype.options.theme } );
 		this.element
 			// Cannot directly insertAfter() - we need to detach() first, because
 			// insertAfter() will do nothing if the payload div was not attached
@@ -856,7 +850,7 @@ $.widget( "mobile.popup", $.mobile.widget, $.extend( {
 			this._closePopup();
 		}
 	}
-}, $.mobile.behaviors.optionDemultiplexer ) );
+});
 
 
 // TODO this can be moved inside the widget
