@@ -42,6 +42,50 @@ a.ui-link-inherit {
 	box-shadow: none !important;
 }
 
+/* Shadow
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-shadow {
+	-moz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 			rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	-webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.2) /*{global-box-shadow-color}*/
+}
+.ui-shadow-inset {
+	-moz-box-shadow: inset 0 1px 4px 		rgba(0,0,0,.2);
+	-webkit-box-shadow: inset 0 1px 4px 	rgba(0,0,0,.2);
+	box-shadow: inset 0 1px 4px 			rgba(0,0,0,.2);
+}
+.ui-icon-shadow {
+	-moz-box-shadow: 0 1px 0 				rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+	box-shadow: 0 1px 0 					rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+}
+
+/* Corner rounding classes
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-corner-all {
+	-webkit-border-radius: 				.6em /*{global-radii-blocks}*/;
+	border-radius: 						.6em /*{global-radii-blocks}*/;
+}
+
+.ui-btn-corner-all {
+	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
+	border-radius: 						.3125em /*{global-radii-buttons}*/;
+}
+
+.ui-btn-icon-notext.ui-btn-corner-all {
+	-webkit-border-radius: 				1em /*{global-radii-icononly}*/;
+	border-radius: 						1em /*{global-radii-icononly}*/;
+}
+
+/* radius clip workaround for cleaning up corner trapping */
+.ui-corner-all,
+.ui-btn-corner-all {
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
+}
+
 /* Swatches */
 
 /* A
@@ -351,46 +395,6 @@ a.ui-link-inherit {
 	text-shadow: none;
 }
 
-/* Structure */
-
-/* Corner rounding classes
------------------------------------------------------------------------------------------------------------*/
-
-.ui-corner-all {
-	-webkit-border-radius: 				.6em /*{global-radii-blocks}*/;
-	border-radius: 						.6em /*{global-radii-blocks}*/;
-}
-
-.ui-btn-corner-all {
-	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
-	border-radius: 						.3125em /*{global-radii-buttons}*/;
-}
-
-.ui-btn-icon-notext.ui-btn-corner-all {
-	-webkit-border-radius: 				1em /*{global-radii-icononly}*/;
-	border-radius: 						1em /*{global-radii-icononly}*/;
-}
-
-/* radius clip workaround for cleaning up corner trapping */
-.ui-corner-all,
-.ui-btn-corner-all {
-	-webkit-background-clip: padding;
-	background-clip: padding-box;
-}
-
-/* Interaction cues
------------------------------------------------------------------------------------------------------------*/
-.ui-disabled {
-	filter: Alpha(Opacity=30);
-	opacity: .3;
-	zoom: 1;
-}
-.ui-disabled,
-.ui-disabled a {
-	cursor: default !important;
-	pointer-events: none;
-}
-
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -646,20 +650,18 @@ a.ui-link-inherit {
 	-webkit-box-shadow: 0 0 12px 		rgba(0,0,0,.6);
 	box-shadow: 0 0 12px 				rgba(0,0,0,.6);
 }
-.ui-shadow {
-	-moz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 			rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
-	-webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
-	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.2) /*{global-box-shadow-color}*/
+
+/* Interaction cues
+-----------------------------------------------------------------------------------------------------------*/
+.ui-disabled {
+	filter: Alpha(Opacity=30);
+	opacity: .3;
+	zoom: 1;
 }
-.ui-shadow-inset {
-	-moz-box-shadow: inset 0 1px 4px 		rgba(0,0,0,.2);
-	-webkit-box-shadow: inset 0 1px 4px 	rgba(0,0,0,.2);
-	box-shadow: inset 0 1px 4px 			rgba(0,0,0,.2);
-}
-.ui-icon-shadow {
-	-moz-box-shadow: 0 1px 0 				rgba(255,255,255,.4) /*{global-icon-shadow}*/;
-	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.4) /*{global-icon-shadow}*/;
-	box-shadow: 0 1px 0 					rgba(255,255,255,.4) /*{global-icon-shadow}*/;
+.ui-disabled,
+.ui-disabled a {
+	cursor: default !important;
+	pointer-events: none;
 }
 
 /* Outline focus style when no box-shadow
