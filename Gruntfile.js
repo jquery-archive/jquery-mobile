@@ -302,9 +302,8 @@ module.exports = function( grunt ) {
 					},
 					{
 						expand: true,
-						cwd: dist,
-						src: "images/*",
-						dest: path.join( dist, "demos/" )
+						src: [ "demos/**/*", "!**/*.php", "!**/*.html" ],
+						dest: dist
 					}
 				]
 			},
