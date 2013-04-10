@@ -7,7 +7,12 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {
-	var $document = $( document );
+	var $document = $( document ),
+		supportTouch = $.mobile.support.touch,
+		scrollEvent = "touchmove scroll",
+		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+		touchStopEvent = supportTouch ? "touchend" : "mouseup",
+		touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
 
 	// add new event shortcuts
 	$.each( ( "touchstart touchmove touchend " +
@@ -24,12 +29,6 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 			$.attrFn[ name ] = true;
 		}
 	});
-
-	var supportTouch = $.mobile.support.touch,
-		scrollEvent = "touchmove scroll",
-		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
-		touchStopEvent = supportTouch ? "touchend" : "mouseup",
-		touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
 
 	function triggerCustomEvent( obj, eventType, event ) {
 		var originalType = event.type;
@@ -89,7 +88,6 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				}
 
 				var origTarget = event.target,
-					origEvent = event.originalEvent,
 					timer;
 
 				function clearTapTimer() {
