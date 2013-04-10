@@ -1,3 +1,20 @@
+/* Globals */
+
+/* Focus state
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-btn:focus, .ui-link-inherit:focus {
+	outline: 0;
+}
+.ui-btn.ui-focus {
+	z-index: 1;
+}
+.ui-mobile-nosupport-boxshadow * {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
 /* Swatches */
 
 /* A
@@ -117,6 +134,47 @@
 .ui-btn-down-a {
 	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 	text-decoration: none;
+}
+
+.ui-btn-up-a.ui-btn-active,
+.ui-btn-hover-a.ui-btn-active,
+.ui-btn-down-a.ui-btn-active {
+	border: 1px solid 		#2373a5 /*{a-bactive-border}*/;
+	background: 			#5393c5 /*{a-bactive-background-color}*/;
+	font-weight: bold;
+	color: 					#fff /*{a-bactive-color}*/;
+	cursor: pointer;
+	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3373a5 /*{a-bactive-shadow-color}*/;
+	text-decoration: none;
+	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+}
+.ui-btn-up-a.ui-btn-active:visited,
+.ui-btn-hover-a.ui-btn-active:visited,
+.ui-btn-down-a.ui-btn-active:visited,
+.ui-btn-up-a.ui-btn-active:hover,
+.ui-btn-hover-a.ui-btn-active:hover,
+.ui-btn-down-a.ui-btn-active:hover,
+.ui-btn-up-a.ui-btn-active a.ui-link-inherit,
+.ui-btn-hover-a.ui-btn-active a.ui-link-inherit,
+.ui-btn-down-a.ui-btn-active a.ui-link-inherit {
+	color: 					#fff /*{a-bactive-color}*/;
+}
+
+.ui-btn-up-a.ui-focus,
+.ui-btn-hover-a.ui-focus,
+.ui-btn-down-a.ui-focus,
+.ui-btn-up-a:focus,
+.ui-btn-hover-a:focus,
+.ui-btn-down-a:focus {
+	-moz-box-shadow: inset 0 0 3px 		#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
+	-webkit-box-shadow: inset 0 0 3px 	#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
+	box-shadow: inset 0 0 3px 			#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
+}
+.ui-body-a.ui-input-text.ui-focus,
+.ui-body-a.ui-input-search.ui-focus {
+	-moz-box-shadow: 0 0 12px 			#387bbe /*{a-bactive-background-color}*/;
+	-webkit-box-shadow: 0 0 12px 		#387bbe /*{a-bactive-background-color}*/;
+	box-shadow: 0 0 12px 				#387bbe /*{a-bactive-background-color}*/;	
 }
 
 /* B
@@ -239,6 +297,48 @@
 	text-decoration: none;
 }
 
+.ui-btn-up-b.ui-btn-active,
+.ui-btn-hover-b.ui-btn-active,
+.ui-btn-down-b.ui-btn-active {
+	border: 1px solid 		#2373a5 /*{b-bactive-border}*/;
+	background: 			#5393c5 /*{b-bactive-background-color}*/;
+	font-weight: bold;
+	color: 					#fff /*{b-bactive-color}*/;
+	cursor: pointer;
+	text-shadow: 0 /*{b-bactive-shadow-x}*/ 1px /*{b-bactive-shadow-y}*/ 0 /*{b-bactive-shadow-radius}*/ #3373a5 /*{b-bactive-shadow-color}*/;
+	text-decoration: none;
+	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
+}
+.ui-btn-up-b.ui-btn-active:visited,
+.ui-btn-hover-b.ui-btn-active:visited,
+.ui-btn-down-b.ui-btn-active:visited,
+.ui-btn-up-b.ui-btn-active:hover,
+.ui-btn-hover-b.ui-btn-active:hover,
+.ui-btn-down-b.ui-btn-active:hover,
+.ui-btn-up-b.ui-btn-active a.ui-link-inherit,
+.ui-btn-hover-b.ui-btn-active a.ui-link-inherit,
+.ui-btn-down-b.ui-btn-active a.ui-link-inherit {
+	color: 					#fff /*{b-bactive-color}*/;
+}
+
+.ui-btn-up-b.ui-focus,
+.ui-btn-hover-b.ui-focus,
+.ui-btn-down-b.ui-focus,
+.ui-btn-up-b:focus,
+.ui-btn-hover-b:focus,
+.ui-btn-down-b:focus {
+	-moz-box-shadow: inset 0 0 3px 		#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
+	-webkit-box-shadow: inset 0 0 3px 	#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
+	box-shadow: inset 0 0 3px 			#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
+}
+.ui-body-b.ui-input-text.ui-focus,
+.ui-body-b.ui-input-search.ui-focus {
+	-moz-box-shadow: 0 0 12px 			#387bbe /*{b-bactive-background-color}*/;
+	-webkit-box-shadow: 0 0 12px 		#387bbe /*{b-bactive-background-color}*/;
+	box-shadow: 0 0 12px 				#387bbe /*{b-bactive-background-color}*/;	
+}
+
+
 /* Structure */
 
 /* links within "buttons" 
@@ -246,25 +346,6 @@
 
 a.ui-link-inherit {
 	text-decoration: none !important;
-}
-
-
-/* Active class used as the "on" state across all themes
------------------------------------------------------------------------------------------------------------*/
-.ui-btn-active {
-	border: 1px solid 		#2373a5 /*{global-active-border}*/;
-	background: 			#5393c5 /*{global-active-background-color}*/;
-	font-weight: bold;
-	color: 					#fff /*{global-active-color}*/;
-	cursor: pointer;
-	text-shadow: 0 /*{global-active-shadow-x}*/ 1px /*{global-active-shadow-y}*/ 0 /*{global-active-shadow-radius}*/ #3373a5 /*{global-active-shadow-color}*/;
-	text-decoration: none;
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
-}
-.ui-btn-active:visited,
-.ui-btn-active:hover,
-.ui-btn-active a.ui-link-inherit {
-	color: 					#fff /*{global-active-color}*/;
 }
 
 /* corner rounding classes
@@ -588,38 +669,9 @@ a.ui-link-inherit {
 	box-shadow: 0 1px 0 					rgba(255,255,255,.4) /*{global-icon-shadow}*/;
 }
 
-/* Focus state - set here for specificity (note: these classes are added by JavaScript)
+/* Outline focus style when no bo-shadow
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn:focus, .ui-link-inherit:focus {
-	outline: 0;
-}
-.ui-btn.ui-focus {
-	z-index: 1;
-}
-.ui-focus,
-.ui-btn:focus {
-	-moz-box-shadow: inset 0 0 3px 		#387bbe /*{global-active-background-color}*/, 0 0 9px 		#387bbe /*{global-active-background-color}*/;
-	-webkit-box-shadow: inset 0 0 3px 	#387bbe /*{global-active-background-color}*/, 0 0 9px 		#387bbe /*{global-active-background-color}*/;
-	box-shadow: inset 0 0 3px 			#387bbe /*{global-active-background-color}*/, 0 0 9px 		#387bbe /*{global-active-background-color}*/;
-}
-.ui-input-text.ui-focus,
-.ui-input-search.ui-focus {
-	-moz-box-shadow: 0 0 12px 			#387bbe /*{global-active-background-color}*/;
-	-webkit-box-shadow: 0 0 12px 		#387bbe /*{global-active-background-color}*/;
-	box-shadow: 0 0 12px 					#387bbe /*{global-active-background-color}*/;	
-}
-
-/* unset box shadow in browsers that don't do it right
------------------------------------------------------------------------------------------------------------*/
-
-.ui-mobile-nosupport-boxshadow * {
-	-moz-box-shadow: none !important;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
-}
-
-/* ...and bring back focus */
 .ui-mobile-nosupport-boxshadow .ui-focus,
 .ui-mobile-nosupport-boxshadow .ui-btn:focus,
 .ui-mobile-nosupport-boxshadow .ui-link-inherit:focus {
