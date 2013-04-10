@@ -52,6 +52,19 @@
 		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list">
         	<?php include( 'nav-widgets.php' ); ?>
         </ul>
+		
+		<h2>Test Suite</h2>
+		
+		<ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="d" data-icon="false" class="jqm-list">
+        	<li><a href="test/buttons/" data-ajax="false">Buttons</a></li>
+        	<li><a href="test/forms/" data-ajax="false">Forms 1</a></li>
+        	<li><a href="test/forms/form.php" data-ajax="false">Forms 2</a></li>
+        	<li><a href="test/forms/form-fieldcontain.php" data-ajax="false">Form fieldcontain</a></li>
+        	<li><a href="test/forms/form-hide-label.php" data-ajax="false">Form ui-hide-label</a></li>
+        	<li><a href="test/forms/form-label-hidden.php" data-ajax="false">Form ui-hidden-accessible</a></li>
+        	<li><a href="test/forms/form-disabled.php" data-ajax="false">Form disabled</a></li>
+        	<li><a href="test/listviews/" data-ajax="false">Listviews</a></li>
+        </ul>
 
 	</div><!-- /content -->
 
