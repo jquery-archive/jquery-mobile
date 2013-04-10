@@ -93,61 +93,48 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-a {
-	border: 1px solid 		#333 /*{a-bar-border}*/;
-	background: 			#111 /*{a-bar-background-color}*/;
-	color: 					#fff /*{a-bar-color}*/;
+	border: 1px solid 		#b3b3b3 /*{a-bar-border}*/;
+	background: 			#eee /*{a-bar-background-color}*/;
+	color: 					#3e3e3e /*{a-bar-color}*/;
 	font-weight: bold;
-	text-shadow: 0 /*{a-bar-shadow-x}*/ -1px /*{a-bar-shadow-y}*/ 0 /*{a-bar-shadow-radius}*/ #000 /*{a-bar-shadow-color}*/;
-}
-.ui-bar-a .ui-link-inherit {
-	color: #fff /*{a-bar-color}*/;
+	text-shadow: 0 /*{a-bar-shadow-x}*/ 1px /*{a-bar-shadow-y}*/ 0 /*{a-bar-shadow-radius}*/ #fff /*{a-bar-shadow-color}*/;
 }
 
 .ui-bar-a a.ui-link {
-	color: #7cc4e7 /*{a-bar-link-color}*/;
+	color: #2489ce /*{a-bar-link-color}*/;
 	font-weight: bold;
 }
-
 .ui-bar-a a.ui-link:visited {
     color: #2489ce /*{a-bar-link-visited}*/;
 }
-
 .ui-bar-a a.ui-link:hover {
 	color: #2489ce /*{a-bar-link-hover}*/;
 }
-
 .ui-bar-a a.ui-link:active {
 	color: #2489ce /*{a-bar-link-active}*/;
 }
 
 .ui-body-a,
 .ui-overlay-a {
-	border: 1px solid 		#aaa /*{a-body-border}*/;
+	border: 1px solid 		#ccc /*{a-body-border}*/;
 	color: 					#333 /*{a-body-color}*/;
 	text-shadow: 0 /*{a-body-shadow-x}*/ 1px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ #fff /*{a-body-shadow-color}*/;
-	background: 			#f9f9f9 /*{a-body-background-color}*/;
+	background: 			#f5f5f5 /*{a-body-background-color}*/;
 }
 .ui-overlay-a {
-	background-image: none;
 	border-width: 0;
-}
-.ui-body-a .ui-link-inherit {
-	color: 	#333 /*{a-body-color}*/;
 }
 
 .ui-body-a .ui-link {
 	color: #2489ce /*{a-body-link-color}*/;
 	font-weight: bold;
 }
-
 .ui-body-a .ui-link:visited {
     color: #2489ce /*{a-body-link-visited}*/;
 }
-
 .ui-body-a .ui-link:hover {
 	color: #2489ce /*{a-body-link-hover}*/;
 }
-
 .ui-body-a .ui-link:active {
 	color: #2489ce /*{a-body-link-active}*/;
 }
@@ -226,68 +213,55 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-b {
-	border: 1px solid 		#b3b3b3 /*{b-bar-border}*/;
-	background: 			#eee /*{b-bar-background-color}*/;
-	color: 					#3e3e3e /*{b-bar-color}*/;
+	border: 1px solid 		#333 /*{b-bar-border}*/;
+	background: 			#111 /*{b-bar-background-color}*/;
+	color: 					#fff /*{b-bar-color}*/;
 	font-weight: bold;
-	text-shadow: 0 /*{b-bar-shadow-x}*/ 1px /*{b-bar-shadow-y}*/ 0 /*{b-bar-shadow-radius}*/ 	#fff /*{b-bar-shadow-color}*/;
-}
-.ui-bar-b .ui-link-inherit {
-	color: 	#3e3e3e /*{b-bar-color}*/;
+	text-shadow: 0 /*{b-bar-shadow-x}*/ -1px /*{b-bar-shadow-y}*/ 0 /*{b-bar-shadow-radius}*/ 	#000 /*{b-bar-shadow-color}*/;
 }
 
 .ui-bar-b a.ui-link {
-	color: #7cc4e7 /*{b-bar-link-color}*/;
+	color: #2489ce /*{b-bar-link-color}*/;
 	font-weight: bold;
 }
-
 .ui-bar-b a.ui-link:visited {
     color: #2489ce /*{b-bar-link-visited}*/;
 }
-
 .ui-bar-b a.ui-link:hover {
 	color: #2489ce /*{b-bar-link-hover}*/;
 }
-
 .ui-bar-b a.ui-link:active {
 	color: #2489ce /*{b-bar-link-active}*/;
 }
 
 .ui-body-b,
 .ui-overlay-b {
-	border: 1px solid 		#bbb /*{b-body-border}*/;
-	color: 					#333 /*{b-body-color}*/;
+	border: 1px solid 		#444 /*{b-body-border}*/;
+	color: 					#fff /*{b-body-color}*/;
 	text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ 	#fff /*{b-body-shadow-color}*/;
-	background: 			#fff /*{b-body-background-color}*/;
+	background: 			#222 /*{b-body-background-color}*/;
 }
 .ui-overlay-b {
-	background-image: none;
 	border-width: 0;
-}
-.ui-body-b .ui-link-inherit {
-	color: 	#333 /*{b-body-color}*/;
 }
 
 .ui-body-b .ui-link {
 	color: #2489ce /*{b-body-link-color}*/;
 	font-weight: bold;
 }
-
 .ui-body-b .ui-link:visited {
     color: #2489ce /*{b-body-link-visited}*/;
 }
-
 .ui-body-b .ui-link:hover {
 	color: #2489ce /*{b-body-link-hover}*/;
 }
-
 .ui-body-b .ui-link:active {
 	color: #2489ce /*{b-body-link-active}*/;
 }
 
 .ui-body-b .ui-field-contain:after {
-	border-color: #eee /*{b-br-border-color}*/;	
-	box-shadow: 0 1px #fff /*{b-br-shadow}*/;	
+	border-color: #333 /*{b-br-border-color}*/;	
+	box-shadow: 0 1px #111 /*{b-br-shadow}*/;	
 }
 
 .ui-btn-b {
