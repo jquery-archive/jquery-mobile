@@ -107,23 +107,51 @@ define( [
 		getScreenHeight = $.mobile.getScreenHeight;
 
 		//base element management, defined depending on dynamic base tag support
-		var base = $.support.dynamicBaseTag ? {
-
+		var base = {
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
 			element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
 
+			linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
+
 			//set the generated BASE element's href attribute to a new page's base path
 			set: function( href ) {
-				href = path.parseUrl(href).hrefNoHash;
-				base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
+				// we should do nothing if the user wants to manage their url base manually
+				if ( !$.mobile.dynamicBaseEnabled ){
+					return;
+				}
+
+				// we should use the base tag if we can manipulate it dynamically
+				if ( $.support.dynamicBaseTag ){
+					base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
+				}
+			},
+
+			rewrite: function( href, page ) {
+				// otherwise rewrite src and href attrs to use a base url
+				if ( $.mobile.dynamicBaseEnabled && !$.support.dynamicBaseTag && page ) {
+					var newPath = path.get( href );
+
+					page.find( base.linkSelector ).each(function( i, link ) {
+						var thisAttr = $( link ).is( '[href]' ) ? 'href' : $( link ).is( '[src]' ) ? 'src' : 'action',
+						thisUrl = $( link ).attr( thisAttr );
+
+						// XXX_jblas: We need to fix this so that it removes the document
+						//            base URL, and then prepends with the new page URL.
+						//if full path exists and is same, chop it - helps IE out
+						thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
+
+						if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
+							$( link ).attr( thisAttr, newPath + thisUrl );
+						}
+					});
+				}
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
-			reset: function() {
+			reset: function( href ) {
 				base.element.attr( "href", documentBase.hrefNoSearch );
 			}
-
-		} : undefined;
+		};
 
 
 	//return the original document url
@@ -451,6 +479,9 @@ define( [
 			}
 		}
 
+		// Reset base to the default document base.
+		base.reset();
+
 		// If the page we are interested in is already in the DOM,
 		// and the caller did not indicate that we should force a
 		// reload of the file, we are done. Otherwise, track the
@@ -533,6 +564,7 @@ define( [
 							RegExp.$1 ) {
 						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
 					}
+
 					//dont update the base tag if we are prefetching
 					if ( base && typeof options.prefetch === "undefined") {
 						base.set( fileUrl );
@@ -554,24 +586,7 @@ define( [
 						page.jqmData( "title", newPageTitle );
 					}
 
-					//rewrite src and href attrs to use a base url
-					if ( !$.support.dynamicBaseTag ) {
-						var newPath = path.get( fileUrl );
-						page.find( "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]" ).each(function() {
-							var thisAttr = $( this ).is( '[href]' ) ? 'href' :
-									$( this ).is( '[src]' ) ? 'src' : 'action',
-								thisUrl = $( this ).attr( thisAttr );
-
-							// XXX_jblas: We need to fix this so that it removes the document
-							//            base URL, and then prepends with the new page URL.
-							//if full path exists and is same, chop it - helps IE out
-							thisUrl = thisUrl.replace( location.protocol + '//' + location.host + location.pathname, '' );
-
-							if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-								$( this ).attr( thisAttr, newPath + thisUrl );
-							}
-						});
-					}
+					base.rewrite( fileUrl, page );
 
 					//append to page and enhance
 					// TODO taging a page with external to make sure that embedded pages aren't removed
@@ -611,9 +626,7 @@ define( [
 				},
 				error: function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
-					if ( base ) {
-						base.set( path.get() );
-					}
+					base.set( path.get() );
 
 					// Add error info to our triggerData.
 					triggerData.xhr = xhr;
@@ -958,9 +971,8 @@ define( [
 		allowSamePageTransition: false
 	};
 
-/* Event Bindings - hashchange, submit, and click */
-	function findClosestLink( ele )
-	{
+	/* Event Bindings - hashchange, submit, and click */
+	function findClosestLink( ele )	{
 		while ( ele ) {
 			// Look for the closest element with a nodeName of "a".
 			// Note that we are checking if we have a valid nodeName
@@ -978,17 +990,16 @@ define( [
 	}
 
 	// The base URL for any given element depends on the page it resides in.
-	function getClosestBaseUrl( ele )
-	{
+	function getClosestBaseUrl( ele )	{
 		// Find the closest page and extract out its url.
 		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 			base = documentBase.hrefNoHash;
 
-		if ( !url || !path.isPath( url ) ) {
+		if ( !$.mobile.dynamicBaseEnabled || !url || !path.isPath( url ) ) {
 			url = base;
 		}
 
-		return path.makeUrlAbsolute( url, base);
+		return path.makeUrlAbsolute( url, base );
 	}
 
 	//The following event bindings should be bound after mobileinit has been triggered

@@ -4,7 +4,9 @@
 (function($){
 	var baseDir = $.mobile.path.parseUrl($("base").attr("href")).directory,
 		contentDir = $.mobile.path.makePathAbsolute("../content/", baseDir),
-		home = location.pathname + location.search;
+		home = location.pathname + location.search,
+		baseTagEnabled = $.mobile.dynamicBaseTagEnabled,
+		baseTagSupported = $.support.dynamicBaseTag;
 
 	module('jquery.mobile.navigation.js - base tag', {
 		setup: function(){
@@ -197,6 +199,69 @@
 				});
 
 				start();
-			}]);
+			}
+		]);
+	});
+
+	var testBaseTagAlteration = function( assertions ) {
+		$.testHelper.pageSequence([
+			function(){
+				$.mobile.changePage( "../../base-change.html" );
+			},
+
+			function(){
+				assertions();
+				window.history.back();
+			},
+
+			function() {
+				start();
+			}
+		]);
+
+	};
+
+	asyncTest( "disabling base tag changes should prevent base href value changes", function() {
+		var baseHref = $( "base" ).attr( "href" );
+		$.mobile.dynamicBaseEnabled = false;
+
+		testBaseTagAlteration(function() {
+				if ( $.support.dynamicBaseTag ) {
+					equal( baseHref, $( "base" ).attr( "href" ), "the base href value should be unchanged" );
+				} else {
+					equal( $.mobile.activePage.find( "#base-change-link" ).attr( "href" ), "foo", "the link href's remain unchanged" );
+				}
+		});
+	});
+
+	asyncTest( "enabling base tag changes should enable base href value changes", function() {
+		var baseHref = $( "base" ).attr( "href" );
+		$.mobile.dynamicBaseEnabled = true;
+		$.support.dynamicBaseTag = true;
+
+		testBaseTagAlteration(function() {
+			ok( baseHref !== $( "base" ).attr( "href" ), "the base href value should be changed" );
+		});
+	});
+
+	asyncTest( "enabling base tag changes when a dynamic base isn't supported should alter links", function() {
+		$.mobile.dynamicBaseEnabled = true;
+		$.support.dynamicBaseTag = false;
+
+		testBaseTagAlteration(function() {
+			var linkHref = $.mobile.activePage.find( "#base-change-link" ).attr( "href" );
+
+			if ( $.support.pushState ) {
+				equal( linkHref,
+					$.mobile.path.get( location.href ) + "foo",
+					"the link's href is changed" );
+			} else {
+				// compare the pathname of the links href with the directory of the current
+				// location + foo
+				equal( $.mobile.path.parseUrl( linkHref ).pathname,
+					$.mobile.path.parseUrl( location.href ).directory + "foo",
+					"the link's href is changed" );
+			}
+		});
 	});
 })(jQuery);

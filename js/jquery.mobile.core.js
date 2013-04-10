@@ -86,6 +86,10 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 			hoverDelay: 200
 		},
 
+		// disable the alteration of the dynamic base tag or links in the case
+		// that a dynamic base tag isn't supported
+		dynamicBaseEnabled: true,
+
 		// default the property to remove dependency on assignment in init module
 		pageContainer: $(),
 
