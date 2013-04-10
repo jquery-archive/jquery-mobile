@@ -267,16 +267,6 @@ a.ui-link-inherit {
 	color: 					#fff /*{global-active-color}*/;
 }
 
-
-/* button inner top highlight
------------------------------------------------------------------------------------------------------------*/
-
-.ui-btn-inner {
-	border-top: 1px solid 	#fff;
-	border-color: 			rgba(255,255,255,.3);
-}
-
-
 /* corner rounding classes
 -----------------------------------------------------------------------------------------------------------*/
 
