@@ -1,5 +1,32 @@
 /* Globals */
 
+/* Font
+-----------------------------------------------------------------------------------------------------------*/
+
+html {
+	font-size: 100%;
+}
+body,
+input,
+select,
+textarea,
+button,
+.ui-btn {
+	font-size: 1em;
+	line-height: 1.3;
+	font-family: sans-serif /*{global-font-family}*/;
+}
+
+/* Links
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-btn {
+	text-decoration: none;	
+}
+a.ui-link-inherit {
+	text-decoration: none !important;
+}
+
 /* Focus state
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -26,13 +53,6 @@
 	color: 					#fff /*{a-bar-color}*/;
 	font-weight: bold;
 	text-shadow: 0 /*{a-bar-shadow-x}*/ -1px /*{a-bar-shadow-y}*/ 0 /*{a-bar-shadow-radius}*/ #000 /*{a-bar-shadow-color}*/;
-}
-.ui-bar-a,
-.ui-bar-a input,
-.ui-bar-a select,
-.ui-bar-a textarea,
-.ui-bar-a button {
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-bar-a .ui-link-inherit {
 	color: #fff /*{a-bar-color}*/;
@@ -65,13 +85,6 @@
 .ui-overlay-a {
 	background-image: none;
 	border-width: 0;
-}
-.ui-body-a,
-.ui-body-a input,
-.ui-body-a select,
-.ui-body-a textarea,
-.ui-body-a button {
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-a .ui-link-inherit {
 	color: 	#333 /*{a-body-color}*/;
@@ -132,7 +145,6 @@
 .ui-btn-up-a,
 .ui-btn-hover-a,
 .ui-btn-down-a {
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 	text-decoration: none;
 }
 
@@ -145,8 +157,6 @@
 	color: 					#fff /*{a-bactive-color}*/;
 	cursor: pointer;
 	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3373a5 /*{a-bactive-shadow-color}*/;
-	text-decoration: none;
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-btn-up-a.ui-btn-active:visited,
 .ui-btn-hover-a.ui-btn-active:visited,
@@ -208,13 +218,6 @@
 	color: #2489ce /*{b-bar-link-active}*/;
 }
 
-.ui-bar-b,
-.ui-bar-b input,
-.ui-bar-b select,
-.ui-bar-b textarea,
-.ui-bar-b button {
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
-}
 
 .ui-body-b,
 .ui-overlay-b {
@@ -226,13 +229,6 @@
 .ui-overlay-b {
 	background-image: none;
 	border-width: 0;
-}
-.ui-body-b,
-.ui-body-b input,
-.ui-body-b select,
-.ui-body-b textarea,
-.ui-body-b button {
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-body-b .ui-link-inherit {
 	color: 	#333 /*{b-body-color}*/;
@@ -290,12 +286,6 @@
 .ui-btn-down-b a.ui-link-inherit {
 	color: 					#fff /*{b-bdown-color}*/;
 }
-.ui-btn-up-b,
-.ui-btn-hover-b,
-.ui-btn-down-b {
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
-	text-decoration: none;
-}
 
 .ui-btn-up-b.ui-btn-active,
 .ui-btn-hover-b.ui-btn-active,
@@ -306,8 +296,6 @@
 	color: 					#fff /*{b-bactive-color}*/;
 	cursor: pointer;
 	text-shadow: 0 /*{b-bactive-shadow-x}*/ 1px /*{b-bactive-shadow-y}*/ 0 /*{b-bactive-shadow-radius}*/ #3373a5 /*{b-bactive-shadow-color}*/;
-	text-decoration: none;
-	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;
 }
 .ui-btn-up-b.ui-btn-active:visited,
 .ui-btn-hover-b.ui-btn-active:visited,
@@ -340,13 +328,6 @@
 
 
 /* Structure */
-
-/* links within "buttons" 
------------------------------------------------------------------------------------------------------------*/
-
-a.ui-link-inherit {
-	text-decoration: none !important;
-}
 
 /* corner rounding classes
 -----------------------------------------------------------------------------------------------------------*/
@@ -669,7 +650,7 @@ a.ui-link-inherit {
 	box-shadow: 0 1px 0 					rgba(255,255,255,.4) /*{global-icon-shadow}*/;
 }
 
-/* Outline focus style when no bo-shadow
+/* Outline focus style when no box-shadow
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-mobile-nosupport-boxshadow .ui-focus,
