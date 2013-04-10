@@ -329,12 +329,30 @@ a.ui-link-inherit {
 
 /* Structure */
 
-/* corner rounding classes
+/* Corner rounding classes
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-corner-all {
 	-webkit-border-radius: 				.6em /*{global-radii-blocks}*/;
 	border-radius: 						.6em /*{global-radii-blocks}*/;
+}
+
+.ui-btn-corner-all {
+	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
+	border-radius: 						.3125em /*{global-radii-buttons}*/;
+}
+
+.ui-btn-icon-notext.ui-btn-corner-all {
+	-webkit-border-radius: 				1em /*{global-radii-icononly}*/;
+	border-radius: 						1em /*{global-radii-icononly}*/;
+}
+
+
+/* radius clip workaround for cleaning up corner trapping */
+.ui-corner-all,
+.ui-btn-corner-all {
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
 }
 
 /* Form field separator
@@ -595,20 +613,6 @@ a.ui-link-inherit {
 .ui-icon-loading {
 	background: url(images/ajax-loader.gif);
 	background-size: 46px 46px;
-}
-
-/* Button corner class
------------------------------------------------------------------------------------------------------------*/
-.ui-btn-corner-all {
-	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
-	border-radius: 						.3125em /*{global-radii-buttons}*/;
-}
-
-/* radius clip workaround for cleaning up corner trapping */
-.ui-corner-all,
-.ui-btn-corner-all {
-	-webkit-background-clip: padding;
-	background-clip: padding-box;
 }
 
 /* Overlay / modal
