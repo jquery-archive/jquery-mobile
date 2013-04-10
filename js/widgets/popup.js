@@ -300,24 +300,27 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_setOptions: function( o ) {
+		var el = this.element,
+			screen = this._ui.screen;
+
 		if ( o.theme !== undefined ) {
-			this._applyTheme( this.element, o.theme, "body" );
+			this._applyTheme( el, o.theme, "body" );
 		}
 
 		if ( o.overlayTheme !== undefined ) {
-			this._applyTheme( this._ui.screen, o.overlayTheme, "overlay" );
+			this._applyTheme( screen, o.overlayTheme, "overlay" );
 
 			if ( this._isOpen ) {
-				this._ui.screen.addClass( "in" );
+				screen.addClass( "in" );
 			}
 		}
 
 		if ( o.shadow !== undefined ) {
-			this.element.toggleClass( "ui-overlay-shadow", o.shadow );
+			el.toggleClass( "ui-overlay-shadow", o.shadow );
 		}
 
 		if ( o.corners !== undefined ) {
-			this.element.toggleClass( "ui-corner-all", o.corners );
+			el.toggleClass( "ui-corner-all", o.corners );
 		}
 
 		if ( o.transition !== undefined ) {
