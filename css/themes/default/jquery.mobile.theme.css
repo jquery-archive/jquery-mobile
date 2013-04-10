@@ -20,7 +20,8 @@ button,
 /* Links
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn {
+.ui-btn,
+.ui-btn:link {
 	text-decoration: none;	
 }
 a.ui-link-inherit {
@@ -156,81 +157,58 @@ a.ui-link-inherit {
 	box-shadow: 0 1px #fff /*{a-br-shadow}*/;	
 }
 
-.ui-btn-up-a {
+.ui-btn-a {
 	border: 1px solid 		#ccc /*{a-bup-border}*/;
 	background: 			#eee /*{a-bup-background-color}*/;
 	font-weight: bold;
-	color: 					#222 /*{a-bup-color}*/;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #fff /*{a-bup-shadow-color}*/;
 }
-.ui-btn-up-a:visited,
-.ui-btn-up-a a.ui-link-inherit {
-	color: 					#2f3e46 /*{a-bup-color}*/;
+.ui-btn-a,
+.ui-btn-a:link,
+.ui-btn-a:visited,
+.ui-btn-a a.ui-link-inherit {
+	color: 					#222 /*{a-bup-color}*/;
 }
-.ui-btn-hover-a {
+.ui-btn-a:hover {
 	border: 1px solid 		#bbb /*{a-bhover-border}*/;
 	background: 			#dfdfdf /*{a-bhover-background-color}*/;
 	font-weight: bold;
-	color: 					#222 /*{a-bhover-color}*/;
 	text-shadow: 0 /*{a-bhover-shadow-x}*/ 1px /*{a-bhover-shadow-y}*/ 0 /*{a-bhover-shadow-radius}*/ #fff /*{a-bhover-shadow-color}*/;
 }
-.ui-btn-hover-a:visited,
-.ui-btn-hover-a:hover,
-.ui-btn-hover-a a.ui-link-inherit {
-	color: 					#2f3e46 /*{a-bhover-color}*/;
+.ui-btn-a:hover,
+.ui-btn-a:hover a.ui-link-inherit {
+	color: 					#222 /*{a-bhover-color}*/;
 }
-.ui-btn-down-a {
+.ui-btn-a:active {
 	border: 1px solid 		#bbb /*{a-bdown-border}*/;
 	background: 			#d6d6d6 /*{a-bdown-background-color}*/;
 	font-weight: bold;
-	color: 					#222 /*{a-bdown-color}*/;
 	text-shadow: 0 /*{a-bdown-shadow-x}*/ 1px /*{a-bdown-shadow-y}*/ 0 /*{a-bdown-shadow-radius}*/ #fff /*{a-bdown-shadow-color}*/;
 }
-.ui-btn-down-a:visited,
-.ui-btn-down-a:hover,
-.ui-btn-down-a a.ui-link-inherit {
-	color: 					#2f3e46 /*{a-bdown-color}*/;
-}
-.ui-btn-up-a,
-.ui-btn-hover-a,
-.ui-btn-down-a {
-	text-decoration: none;
+.ui-btn-a:active,
+.ui-btn-a:active a.ui-link-inherit {
+	color: 					#222 /*{a-bdown-color}*/;
 }
 
-.ui-btn-up-a.ui-btn-active,
-.ui-btn-hover-a.ui-btn-active,
-.ui-btn-down-a.ui-btn-active {
+.ui-btn-a.ui-btn-active {
 	border: 1px solid 		#2373a5 /*{a-bactive-border}*/;
 	background: 			#5393c5 /*{a-bactive-background-color}*/;
 	font-weight: bold;
-	color: 					#fff /*{a-bactive-color}*/;
 	cursor: pointer;
 	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3373a5 /*{a-bactive-shadow-color}*/;
 }
-.ui-btn-up-a.ui-btn-active:visited,
-.ui-btn-hover-a.ui-btn-active:visited,
-.ui-btn-down-a.ui-btn-active:visited,
-.ui-btn-up-a.ui-btn-active:hover,
-.ui-btn-hover-a.ui-btn-active:hover,
-.ui-btn-down-a.ui-btn-active:hover,
-.ui-btn-up-a.ui-btn-active a.ui-link-inherit,
-.ui-btn-hover-a.ui-btn-active a.ui-link-inherit,
-.ui-btn-down-a.ui-btn-active a.ui-link-inherit {
+.ui-btn-a.ui-btn-active,
+.ui-btn-a.ui-btn-active a.ui-link-inherit {
 	color: 					#fff /*{a-bactive-color}*/;
 }
 
-.ui-btn-up-a.ui-focus,
-.ui-btn-hover-a.ui-focus,
-.ui-btn-down-a.ui-focus,
-.ui-btn-up-a:focus,
-.ui-btn-hover-a:focus,
-.ui-btn-down-a:focus {
+.ui-btn-a:focus {
 	-moz-box-shadow: inset 0 0 3px 		#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
 	-webkit-box-shadow: inset 0 0 3px 	#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
 	box-shadow: inset 0 0 3px 			#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
 }
-.ui-body-a.ui-input-text.ui-focus,
-.ui-body-a.ui-input-search.ui-focus {
+.ui-body-a.ui-input-text:focus,
+.ui-body-a.ui-input-search:focus {
 	-moz-box-shadow: 0 0 12px 			#387bbe /*{a-bactive-background-color}*/;
 	-webkit-box-shadow: 0 0 12px 		#387bbe /*{a-bactive-background-color}*/;
 	box-shadow: 0 0 12px 				#387bbe /*{a-bactive-background-color}*/;	
@@ -312,76 +290,58 @@ a.ui-link-inherit {
 	box-shadow: 0 1px #fff /*{b-br-shadow}*/;	
 }
 
-.ui-btn-up-b {
+.ui-btn-b {
 	border: 1px solid 		#044062 /*{b-bup-border}*/;
 	background: 			#396b9e /*{b-bup-background-color}*/;
 	font-weight: bold;
-	color: 					#fff /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #194b7e /*{b-bup-shadow-color}*/;
 }
-.ui-btn-up-b:visited,
-.ui-btn-up-b a.ui-link-inherit {
+.ui-btn-b,
+.ui-btn-b:link,
+.ui-btn-b:visited,
+.ui-btn-b a.ui-link-inherit {
 	color: 					#fff /*{b-bup-color}*/;
 }
-.ui-btn-hover-b {
+.ui-btn-b:hover {
 	border: 1px solid 		#00415e /*{b-bhover-border}*/;
 	background: 			#4b88b6 /*{b-bhover-background-color}*/;
 	font-weight: bold;
-	color: 					#fff /*{b-bhover-color}*/;
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #194b7e /*{b-bhover-shadow-color}*/;
 }
-.ui-btn-hover-b:visited,
-.ui-btn-hover-b:hover,
-.ui-btn-hover-b a.ui-link-inherit {
+.ui-btn-b:hover,
+.ui-btn-b:hover a.ui-link-inherit {
 	color: 					#fff /*{b-bhover-color}*/;
 }
-.ui-btn-down-b {
+.ui-btn-b:active {
 	border: 1px solid 		#225377 /*{b-bdown-border}*/;
 	background: 			#4e89c5 /*{b-bdown-background-color}*/;
 	font-weight: bold;
-	color: 					#fff /*{b-bdown-color}*/;
 	text-shadow: 0 /*{b-bdown-shadow-x}*/ 1px /*{b-bdown-shadow-y}*/ 0 /*{b-bdown-shadow-radius}*/ #194b7e /*{b-bdown-shadow-color}*/;
 }
-.ui-btn-down-b:visited,
-.ui-btn-down-b:hover,
-.ui-btn-down-b a.ui-link-inherit {
+.ui-btn-b:active,
+.ui-btn-b:active a.ui-link-inherit {
 	color: 					#fff /*{b-bdown-color}*/;
 }
 
-.ui-btn-up-b.ui-btn-active,
-.ui-btn-hover-b.ui-btn-active,
-.ui-btn-down-b.ui-btn-active {
+.ui-btn-b.ui-btn-active {
 	border: 1px solid 		#2373a5 /*{b-bactive-border}*/;
 	background: 			#5393c5 /*{b-bactive-background-color}*/;
 	font-weight: bold;
-	color: 					#fff /*{b-bactive-color}*/;
 	cursor: pointer;
 	text-shadow: 0 /*{b-bactive-shadow-x}*/ 1px /*{b-bactive-shadow-y}*/ 0 /*{b-bactive-shadow-radius}*/ #3373a5 /*{b-bactive-shadow-color}*/;
 }
-.ui-btn-up-b.ui-btn-active:visited,
-.ui-btn-hover-b.ui-btn-active:visited,
-.ui-btn-down-b.ui-btn-active:visited,
-.ui-btn-up-b.ui-btn-active:hover,
-.ui-btn-hover-b.ui-btn-active:hover,
-.ui-btn-down-b.ui-btn-active:hover,
-.ui-btn-up-b.ui-btn-active a.ui-link-inherit,
-.ui-btn-hover-b.ui-btn-active a.ui-link-inherit,
-.ui-btn-down-b.ui-btn-active a.ui-link-inherit {
+.ui-btn-b.ui-btn-active,
+.ui-btn-b.ui-btn-active a.ui-link-inherit {
 	color: 					#fff /*{b-bactive-color}*/;
 }
 
-.ui-btn-up-b.ui-focus,
-.ui-btn-hover-b.ui-focus,
-.ui-btn-down-b.ui-focus,
-.ui-btn-up-b:focus,
-.ui-btn-hover-b:focus,
-.ui-btn-down-b:focus {
+.ui-btn-a:focus {
 	-moz-box-shadow: inset 0 0 3px 		#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
 	-webkit-box-shadow: inset 0 0 3px 	#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
 	box-shadow: inset 0 0 3px 			#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
 }
-.ui-body-b.ui-input-text.ui-focus,
-.ui-body-b.ui-input-search.ui-focus {
+.ui-body-b.ui-input-text:focus,
+.ui-body-b.ui-input-search:focus {
 	-moz-box-shadow: 0 0 12px 			#387bbe /*{b-bactive-background-color}*/;
 	-webkit-box-shadow: 0 0 12px 		#387bbe /*{b-bactive-background-color}*/;
 	box-shadow: 0 0 12px 				#387bbe /*{b-bactive-background-color}*/;	

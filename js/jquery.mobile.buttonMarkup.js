@@ -93,7 +93,7 @@ $.fn.buttonMarkup = function( options ) {
 			o.theme = $.mobile.getInheritedTheme( el, "a" );
 		}
 
-		buttonClass = "ui-btn ";
+		buttonClass = "ui-btn ui-btn-" + o.theme;
 		buttonClass += ( hover ? "ui-btn-hover-" + o.theme : "" );
 		buttonClass += ( state ? " ui-btn-" + state + "-" + o.theme : "" );
 		buttonClass += o.shadow ? " ui-shadow" : "";
