@@ -192,6 +192,14 @@ a.ui-link-inherit {
 	box-shadow: 0 0 12px 				#387bbe /*{a-bactive-background-color}*/;	
 }
 
+.ui-body-a ::-webkit-selection,
+.ui-body-a ::-moz-selection,
+.ui-body-a ::selection {
+	background-color:		#387bbe /*{a-bactive-background-color}*/
+	color: 					#fff /*{a-bactive-color}*/;
+	text-shadow: none;
+}
+
 /* B
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -335,6 +343,13 @@ a.ui-link-inherit {
 	box-shadow: 0 0 12px 				#387bbe /*{b-bactive-background-color}*/;	
 }
 
+.ui-body-b ::-webkit-selection,
+.ui-body-b ::-moz-selection,
+.ui-body-b ::selection {
+	background-color:		#387bbe /*{b-bactive-background-color}*/
+	color: 					#fff /*{b-bactive-color}*/;
+	text-shadow: none;
+}
 
 /* Structure */
 
