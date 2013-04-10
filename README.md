@@ -30,7 +30,7 @@ The easiest way to obtain a custom build is to use the [download builder](http:/
 ### Requirements
 
 * [Node.js](http://nodejs.org/) ~0.8.22
-* [Grunt](http://gruntjs.com/) >=0.4.0 
+* [Grunt](http://gruntjs.com/) >=0.4.0
 
 ### Commands
 
@@ -112,14 +112,21 @@ You can run all the test suites by running the following command:
     grunt test
 
 You can choose to run only a subset of the tests by adding the `--suites` option like:
-    
+
     grunt test --suites=button,slider
-    
-will only run the tests under `tests/unit/button/` and `tests/unit/slider/`. 
+
+will only run the tests under `tests/unit/button/` and `tests/unit/slider/`.
 
 You can also specify which versions of jQuery you want to test jQuery Mobile with by using the `--jqueries` option:
 
     grunt test --jqueries=1.8.2,git
+
+Additionally, jQuery Mobile's test suite is split between integration and unit tests. Where the unit tests are meant to focus on a single piece of the library (eg, a widget) and the integration tests require multiple pieces of the library to function. You can target either type by including the `--types` option when testing:
+
+    grunt test --types=unit
+    grunt test --types=integration
+    grunt test --types=unit,integration # default, equivalent to 'grunt test'
+
 
 ### Rebasing
 
