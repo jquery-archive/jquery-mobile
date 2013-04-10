@@ -94,7 +94,7 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		buttonClass = "ui-btn ui-btn-" + o.theme;
-		buttonClass += ( hover ? "ui-btn-hover-" + o.theme : "" );
+		buttonClass += ( hover ? " ui-btn-hover-" + o.theme : "" );
 		buttonClass += ( state ? " ui-btn-" + state + "-" + o.theme : "" );
 		buttonClass += o.shadow ? " ui-shadow" : "";
 		buttonClass += o.corners ? " ui-btn-corner-all" : "";
