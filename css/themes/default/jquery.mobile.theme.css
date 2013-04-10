@@ -107,6 +107,11 @@ a.ui-link-inherit {
 	color: #2489ce /*{a-body-link-active}*/;
 }
 
+.ui-body-a .ui-field-contain:after {
+	border-color: #eee /*{a-br-border-color}*/;	
+	box-shadow: 0 1px #fff /*{a-br-shadow}*/;	
+}
+
 .ui-btn-up-a {
 	border: 1px solid 		#ccc /*{a-bup-border}*/;
 	background: 			#eee /*{a-bup-background-color}*/;
@@ -218,7 +223,6 @@ a.ui-link-inherit {
 	color: #2489ce /*{b-bar-link-active}*/;
 }
 
-
 .ui-body-b,
 .ui-overlay-b {
 	border: 1px solid 		#bbb /*{b-body-border}*/;
@@ -249,6 +253,11 @@ a.ui-link-inherit {
 
 .ui-body-b .ui-link:active {
 	color: #2489ce /*{b-body-link-active}*/;
+}
+
+.ui-body-b .ui-field-contain:after {
+	border-color: #eee /*{b-br-border-color}*/;	
+	box-shadow: 0 1px #fff /*{b-br-shadow}*/;	
 }
 
 .ui-btn-up-b {
@@ -353,14 +362,6 @@ a.ui-link-inherit {
 .ui-btn-corner-all {
 	-webkit-background-clip: padding;
 	background-clip: padding-box;
-}
-
-/* Form field separator
------------------------------------------------------------------------------------------------------------*/
-.ui-br {
-	border-color: rgb(130,130,130);
-	border-color: rgba(130,130,130,.3);
-	border-style: solid;
 }
 
 /* Interaction cues
