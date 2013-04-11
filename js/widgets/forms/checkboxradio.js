@@ -40,7 +40,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			uncheckedState = inputtype + "-off",
 			iconpos = inheritAttr( input, "iconpos" ),
 			checkedClass = "ui-" + checkedState,
-			uncheckedClass = "ui-" + uncheckedState;
+			uncheckedClass = "ui-" + uncheckedState,
+			wrapper;
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
 			return;
@@ -69,8 +70,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		});
 
 		// Wrap the input + label in a div
-		var wrapper = document.createElement('div');
-		wrapper.className = 'ui-' + inputtype;
+		wrapper = document.createElement( "div" );
+		wrapper.className = "ui-" + inputtype;
 
 		input.add( label ).wrapAll( wrapper );
 
@@ -136,7 +137,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		// TODO: it would be nice to let the browser's handle the clicks and pass them
 		//       through to the associate input. we can swallow that click at the parent
 		//       wrapper element level
-		input.triggerHandler( 'click' );
+		input.triggerHandler( "click" );
 
 		// Input set for common radio buttons will contain all the radio
 		// buttons, but will not for checkboxes. clearing the checked status
