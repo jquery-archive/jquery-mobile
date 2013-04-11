@@ -36,7 +36,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
 			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
 			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist,
-			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" );
+			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" ),
+			extraLineHeight = 15,
+			keyupTimeoutBuffer = 100,
+			keyupTimeout;
 
 		function toggleClear() {
 			setTimeout( function() {
@@ -95,8 +98,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			toggleClear();
 
 			input.bind( "paste cut keyup input focus change blur", toggleClear );
-		}
-		else if ( !inputNeedsWrap && !isSearch ) {
+		} else if ( !inputNeedsWrap && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
@@ -104,30 +106,28 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
 				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.disable( true );
-				}			
+				}
 				focusedEl.addClass( $.mobile.focusClass );
 			})
 			.blur(function() {
 				focusedEl.removeClass( $.mobile.focusClass );
 				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.enable( true );
-				}				
+				}
 			});
 
 		// Autogrow
 		if ( input.is( "textarea" ) ) {
-			var extraLineHeight = 15,
-				keyupTimeoutBuffer = 100,
-				keyupTimeout;
-
 			this._keyup = function() {
 				var scrollHeight = input[ 0 ].scrollHeight,
-					clientHeight = input[ 0 ].clientHeight;
+					clientHeight = input[ 0 ].clientHeight,
+					paddingTop, paddingBottom, paddingHeight;
+
 
 				if ( clientHeight < scrollHeight ) {
-					var paddingTop = parseFloat( input.css( "padding-top" ) ),
-						paddingBottom = parseFloat( input.css( "padding-bottom" ) ),
-						paddingHeight = paddingTop + paddingBottom;
+					paddingTop = parseFloat( input.css( "padding-top" ) );
+					paddingBottom = parseFloat( input.css( "padding-bottom" ) );
+					paddingHeight = paddingTop + paddingBottom;
 					
 					input.height( scrollHeight - paddingHeight + extraLineHeight );
 				}
