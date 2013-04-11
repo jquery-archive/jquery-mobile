@@ -31,18 +31,19 @@ $.widget( "mobile.table", $.mobile.table, {
 		this.element.addClass( o.classes.reflowTable );
 
 		// get headers in reverse order so that top-level headers are appended last
-		$( this.allHeaders.get().reverse() ).each( function( i ) {
+		$( this.allHeaders.get().reverse() ).each( function() {
 			// create the hide/show toggles
 			var $cells = $( this ).jqmData( "cells" ),
 				colstart = $( this ).jqmData( "colstart" ),
 				hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
-				text = $(this).text();
+				text = $(this).text(),
+				iteration, filter;
 
 				if( text !== ""  ) {
 
 					if( hierarchyClass ) {
-						var iteration = parseInt( $( this ).attr( "colspan" ), 10 ),
-							filter = "";
+						iteration = parseInt( $( this ).attr( "colspan" ), 10 );
+						filter = "";
 
 						if( iteration ){
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
