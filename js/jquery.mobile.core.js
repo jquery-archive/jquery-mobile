@@ -136,6 +136,15 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// Place to store various widget extensions
 		behaviors: {},
 
+		// Retrieve an attribute from an element and perform some massaging of the value
+		getAttribute: function( e, key ) {
+			var value = e.getAttribute( key );
+
+			return value === "true" ? true :
+				value === "false" ? false :
+				value === null ? undefined : value;
+		},
+
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			if ( $.type( ypos ) !== "number" ) {
