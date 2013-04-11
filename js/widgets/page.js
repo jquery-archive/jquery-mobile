@@ -30,7 +30,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		});
 	},
 
-	_handlePageBeforeShow: function( e ) {
+	_handlePageBeforeShow: function(/* e */) {
 		this.setContainerBackground();
 	},
 
