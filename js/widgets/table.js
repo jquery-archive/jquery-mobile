@@ -39,15 +39,16 @@ $.widget( "mobile.table", $.mobile.widget, {
 			var coltally = 0,
 				$this = $( this );
 
-			$this.children().each( function( i ) {
+			$this.children().each( function() {
 				var $this = $( this ),
 					span = parseInt( $this.attr( "colspan" ), 10 ),
-					sel = ":nth-child(" + ( coltally + 1 ) + ")";
+					sel = ":nth-child(" + ( coltally + 1 ) + ")",
+					j;
 
 				$this.jqmData( "colstart", coltally + 1 );
 
 				if( span ) {
-					for( var j = 0; j < span - 1; j++ ) {
+					for( j = 0; j < span - 1; j++ ) {
 						coltally++;
 						sel += ", :nth-child(" + ( coltally + 1 ) + ")";
 					}
