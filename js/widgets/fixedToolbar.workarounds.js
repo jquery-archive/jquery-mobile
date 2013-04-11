@@ -54,7 +54,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			return offset;
 		},
 
-		//bind events for _triggerRedraw() function 
+		//bind events for _triggerRedraw() function
 		_bindScrollWorkaround: function() {
 			var self = this;
 			//bind to scrollstop and check if the toolbars are correctly positioned
@@ -79,7 +79,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		//and device bugs project issue #1 Form elements can lose click hit area in position: fixed containers.
 		//this also addresses not on fixed toolbars page in docs
 		//adding 1px of padding to the bottom then removing it causes a "redraw"
-		//which positions the toolbars correctly (they will always be visually correct) 
+		//which positions the toolbars correctly (they will always be visually correct)
 		_triggerRedraw: function() {
 			var paddingBottom = parseFloat( $( ".ui-page-active" ).css( "padding-bottom" ) );
 			//trigger page redraw to fix incorrectly positioned fixed elements
@@ -93,7 +93,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 		destroy: function() {
 			this._super();
-			//Remove the class we added to the page previously in android 2.x 
+			//Remove the class we added to the page previously in android 2.x
 			this.element.closest( ".ui-page-active" ).removeClass( "ui-android-2x-fix" );
 		}
 	});
