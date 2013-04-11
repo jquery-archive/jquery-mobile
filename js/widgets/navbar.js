@@ -39,14 +39,15 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 
 		$navbar.delegate( "a", "vclick", function( event ) {
 			// ui-btn-inner is returned as target
-			var target = $( event.target ).is( "a" ) ? $( this ) : $( this ).parent( "a" );
+			var target = $( event.target ).is( "a" ) ? $( this ) : $( this ).parent( "a" ),
+				activeBtn;
 			
 			if ( !target.is( ".ui-disabled, .ui-btn-active" ) ) {
 				$navbtns.removeClass( $.mobile.activeBtnClass );
 				$( this ).addClass( $.mobile.activeBtnClass );
 				
 				// The code below is a workaround to fix #1181
-				var activeBtn = $( this );
+				activeBtn = $( this );
 				
 				$( document ).one( "pagehide", function() {
 					activeBtn.removeClass( $.mobile.activeBtnClass );
