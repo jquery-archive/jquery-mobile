@@ -34,21 +34,22 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			parentTheme = $.mobile.getInheritedTheme( control, "c" ),
 			trackTheme = this.options.trackTheme || parentTheme,
 			cType = control[ 0 ].nodeName.toLowerCase(),
+			isToggleSwitch = ( cType === "select" ),
 			isRangeslider = control.parent().is( ":jqmData(role='rangeslider')" ),
-			selectClass = ( this.isToggleSwitch ) ? "ui-slider-switch" : "",
+			selectClass = ( isToggleSwitch ) ? "ui-slider-switch" : "",
 			controlID = control.attr( "id" ),
 			$label = $( "[for='" + controlID + "']" ),
 			labelID = $label.attr( "id" ) || controlID + "-label",
 			label = $label.attr( "id", labelID ),
-			min = !this.isToggleSwitch ? parseFloat( control.attr( "min" ) ) : 0,
-			max =  !this.isToggleSwitch ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
+			min = !isToggleSwitch ? parseFloat( control.attr( "min" ) ) : 0,
+			max =  !isToggleSwitch ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
 			domHandle = document.createElement( "a" ),
 			handle = $( domHandle ),
 			domSlider = document.createElement( "div" ),
 			slider = $( domSlider ),
-			valuebg = this.options.highlight && !this.isToggleSwitch ? (function() {
+			valuebg = this.options.highlight && !isToggleSwitch ? (function() {
 				var bg = document.createElement( "div" );
 				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-btn-corner-all";
 				return $( bg ).prependTo( slider );
@@ -59,7 +60,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			i, optionsCount,
 			side, sliderTheme, sliderLabel, sliderImg;
 
-		this.isToggleSwitch = cType === "select";
+		this.isToggleSwitch = isToggleSwitch;
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
@@ -92,7 +93,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			mouseMoved: false
 		});
 
-		if ( this.isToggleSwitch ) {
+		if ( isToggleSwitch ) {
 			wrapper = document.createElement( "div" );
 			wrapper.className = "ui-slider-inneroffset";
 
@@ -128,7 +129,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		label.addClass( "ui-slider" );
 		
 		// monitor the input for updated values
-		control.addClass( this.isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
+		control.addClass( isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
 
 		this._on( control, {
 			"change": "_controlChange",
@@ -148,14 +149,14 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		slider.insertAfter( control );
 
 		// wrap in a div for styling purposes
-		if ( !this.isToggleSwitch && !isRangeslider ) {
+		if ( !isToggleSwitch && !isRangeslider ) {
 			wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
 			
 			control.add( slider ).wrapAll( wrapper );
 		}
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
-		if ( this.isToggleSwitch ) {
+		if ( isToggleSwitch ) {
 			this.handle.bind({
 				focus: function() {
 					slider.addClass( $.mobile.focusClass );
@@ -357,7 +358,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 		// NOTE: we don't return here because we want to support programmatic
 		//       alteration of the input value, which should still update the slider
-		
+
 		var self = this,
 			parentTheme = $.mobile.getInheritedTheme( this.element, "c" ),
 			theme = this.options.theme || parentTheme,
@@ -367,7 +368,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			control, isInput, optionElements, min, max, step,
 			newval, valModStep, alignValue, percentPerStep,
 			handlePercent, aPercent, bPercent,
-			valueChanged = false;
+			valueChanged;
 
 		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-btn-down-" + trackTheme," ui-btn-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
@@ -483,6 +484,8 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		}
 
 		if ( !preventInputUpdate ) {
+			valueChanged = false;
+
 			// update control"s value
 			if ( isInput ) {
 				valueChanged = control.val() !== newval;
