@@ -113,7 +113,7 @@ define( [ "jquery",
 			var first = $( event.target ).is( this._inputFirst );
 			
 			this._proxy = false;
-			//this stops dragging of the handle and brings the active track to the front 
+			//this stops dragging of the handle and brings the active track to the front
 			//this makes clicks on the track go the the last handle used
 			this.element.find( "input" ).trigger( "vmouseup" );
 			this._sliderFirst.css( "z-index", first ? 1 : "" );
