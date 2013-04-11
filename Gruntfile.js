@@ -40,7 +40,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-qunit-junit" );
 
 	// load the project's default tasks
-	grunt.loadTasks( 'build/tasks');
+	grunt.loadTasks( "build/tasks");
 
 	// Project configuration.
 	grunt.config.init({
@@ -222,7 +222,6 @@ module.exports = function( grunt ) {
 				options: {
 					// TODO duplicated in demos.firstpass
 					processContent: function( content, srcPath ) {
-						var processedName = grunt.config.process( name );
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
 							function( match, includePath /*, offset, string */ ) {
 
@@ -339,7 +338,7 @@ module.exports = function( grunt ) {
 			server: {
 				options: {
 					port: httpPort,
-					base: '.',
+					base: ".",
 					middleware: function( connect, options ) {
 						/*jshint */
 						return [
@@ -370,7 +369,7 @@ module.exports = function( grunt ) {
 				dest: "build/test-results",
 				namer: function (url) {
 					var match = url.match(/tests\/([^\/]*)\/(.*)$/);
-					return match[2].replace(/\//g, '.').replace(/\.html/, '' ).replace(/\?/, "-");
+					return match[2].replace(/\//g, ".").replace(/\.html/, "" ).replace(/\?/, "-");
 				}
 			}
 		},
@@ -388,9 +387,8 @@ module.exports = function( grunt ) {
 						// Find the test files
 						var suites = _.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
 							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ),
-							patterns, paths, idx, prefixes = ["tests/unit/", "tests/integration/"],
-							onePath = "",
-							uniquePaths = [],
+							patterns, paths,
+							prefixes = ["tests/unit/", "tests/integration/"],
 							versionedPaths = [],
 							jQueries = _.without( ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ), "" );
 
