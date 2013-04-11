@@ -152,7 +152,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		this._setOption( "disabled", $el.prop( "disabled" ) );
 
 		// Grab the button's text element from its implementation-independent data item
-		$( this.button.data( 'buttonElements' ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
+		$( this.button.data( "buttonElements" ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
 	}
 });
 
