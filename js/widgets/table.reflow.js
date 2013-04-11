@@ -12,7 +12,7 @@ define( [ "jquery", "./table" ], function( jQuery ) {
 $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		mode: "reflow",
-		classes: $.extend( $.mobile.table.classes, {
+		classes: $.extend( $.mobile.table.prototype.options.classes, {
 			reflowTable: "ui-table-reflow",
 			cellLabels: "ui-table-cell-label"
 		})

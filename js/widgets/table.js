@@ -9,13 +9,11 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections", "../
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var tableClasses = {
-	table: "ui-table"
-};
-
 $.widget( "mobile.table", $.mobile.widget, {
 	options: {
-		classes: tableClasses
+		classes: {
+			table: "ui-table"
+		},
 	},
 
 	_create: function() {
@@ -64,7 +62,6 @@ $.widget( "mobile.table", $.mobile.widget, {
 	}
 });
 
-$.mobile.table.classes = tableClasses;
 $.mobile.table.initSelector = ":jqmData(role='table')";
 
 //auto self-init widgets
