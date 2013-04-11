@@ -121,7 +121,9 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		},
 
 		_handlePageBeforeHide: function( e, ui ) {
-			var o = this.options;
+			var o = this.options,
+				thisFooter, thisHeader, nextFooter, nextHeader;
+
 
 			if ( o.disablePageZoom ) {
 				$.mobile.zoom.enable( true );
@@ -131,10 +133,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			}
 
 			if ( o.trackPersistentToolbars ) {
-				var thisFooter = $( ".ui-footer-fixed:jqmData(id)", this._thisPage ),
-					thisHeader = $( ".ui-header-fixed:jqmData(id)", this._thisPage ),
-					nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ) || $(),
-					nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage ) || $();
+				thisFooter = $( ".ui-footer-fixed:jqmData(id)", this._thisPage );
+				thisHeader = $( ".ui-header-fixed:jqmData(id)", this._thisPage );
+				nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ) || $();
+				nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage ) || $();
 
 				if ( nextFooter.length || nextHeader.length ) {
 
@@ -159,7 +161,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			// This behavior only applies to "fixed", not "fullscreen"
 			if ( this.options.fullscreen ) { return; }
 
-			// tbPage argument can be a Page object or an event, if coming from throttled resize. 
+			// tbPage argument can be a Page object or an event, if coming from throttled resize.
 			tbPage = ( tbPage && tbPage.type === undefined && tbPage ) || this._thisPage || $el.closest( ".ui-page" );
 			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() + pos );
 		},
@@ -239,13 +241,13 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 					}
 				})
 				.bind( "focusin focusout", function( e ) {
-					//this hides the toolbars on a keyboard pop to give more screen room and prevent ios bug which 
+					//this hides the toolbars on a keyboard pop to give more screen room and prevent ios bug which
 					//positions fixed toolbars in the middle of the screen on pop if the input is near the top or
 					//bottom of the screen addresses issues #4410 Footer navbar moves up when clicking on a textbox in an Android environment
 					//and issue #4113 Header and footer change their position after keyboard popup - iOS
 					//and issue #4410 Footer navbar moves up when clicking on a textbox in an Android environment
 					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ) {
-						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system 
+						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system
 						//controls causes fixed position, tap-toggle false Header to reveal itself
 						// isVisible instead of self._visible because the focusin and focusout events fire twice at the same time
 						// Also use a delay for hiding the toolbars because on Android native browser focusin is direclty followed
@@ -256,14 +258,14 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 							clearTimeout( delayHide );
 							delayShow = setTimeout( function() {
 								self.show();
-							}, 0 ); 
+							}, 0 );
 						} else if ( e.type === "focusin" && !!isVisible ) {
 							//if we have jumped to another input clear the time out to cancel the show.
 							clearTimeout( delayShow );
 							isVisible = false;
 							delayHide = setTimeout( function() {
 								self.hide();
-							}, 0 ); 
+							}, 0 );
 						}
 					}
 				});
