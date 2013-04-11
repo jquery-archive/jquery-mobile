@@ -56,7 +56,7 @@ $.widget = function( name, base, prototype ) {
 
 	$[ namespace ] = $[ namespace ] || {};
 	existingConstructor = $[ namespace ][ name ];
-	constructor = function( options, element ) {
+	constructor = $[ namespace ][ name ] = function( options, element ) {
 		// allow instantiation without "new" keyword
 		if ( !this._createWidget ) {
 			return new constructor( options, element );
