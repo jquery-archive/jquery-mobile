@@ -102,7 +102,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 		var o = this.options,
 			$list = this.element,
-			self = this,
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
@@ -113,7 +112,8 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			start = $list.attr( "start" ),
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, imgParents, img, linkIcon;
+			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, linkIcon,
+			pos, numli, isDivider;
 
 		if ( ol && jsCount ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -137,7 +137,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
 
-		for ( var pos = 0, numli = li.length; pos < numli; pos++ ) {
+		for ( pos = 0, numli = li.length; pos < numli; pos++ ) {
 			item = li.eq( pos );
 			itemClass = "ui-li";
 
@@ -145,7 +145,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			if ( create || !item.hasClass( "ui-li" ) ) {
 				itemTheme = item.jqmData( "theme" ) || o.theme;
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
-				var isDivider = ( item.jqmData( "role" ) === "list-divider" );
+				isDivider = ( item.jqmData( "role" ) === "list-divider" );
 
 				if ( a.length && !isDivider ) {
 					icon = item.jqmData( "icon" );
@@ -286,7 +286,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 	//create a string for ID/subpage url creation
 	_idStringEscape: function( str ) {
-		return str.replace(/[^a-zA-Z0-9]/g, '-');
+		return str.replace(/[^a-zA-Z0-9]/g, "-");
 	},
 
 	_createSubPages: function() {
@@ -299,7 +299,22 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			dns = "data-" + $.mobile.ns,
 			self = this,
 			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" ),
-			hasSubPages;
+			hasSubPages,
+			newRemove = function( e, ui ) {
+				var nextPage = ui.nextPage, npURL,
+					prEvent = new $.Event( "pageremove" );
+
+				if ( ui.nextPage ) {
+					npURL = nextPage.jqmData( "url" );
+					if ( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ) {
+						self.childPages().remove();
+						parentPage.trigger( prEvent );
+						if ( !prEvent.isDefaultPrevented() ) {
+							parentPage.removeWithDependents();
+						}
+					}
+				}
+			};
 
 		if ( typeof listCountPerPage[ parentId ] === "undefined" ) {
 			listCountPerPage[ parentId ] = -1;
@@ -308,8 +323,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		parentListId = parentListId || ++listCountPerPage[ parentId ];
 
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
-			var self = this,
-				list = $( this ),
+			var list = $( this ),
 				listId = list.attr( "id" ) || parentListId + "-" + i,
 				parent = list.parent(),
 				nodeElsFull = $( list.prevAll().toArray().reverse() ),
@@ -333,7 +347,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 			newPage.page();
 
-			anchor = parent.find( 'a:first' );
+			anchor = parent.find( "a:first" );
 
 			if ( !anchor.length ) {
 				anchor = $( "<a/>" ).html( nodeEls || title ).prependTo( parent.empty() );
@@ -348,22 +362,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		if ( hasSubPages &&
 			parentPage.is( ":jqmData(external-page='true')" ) &&
 			parentPage.data( "mobile-page" ).options.domCache === false ) {
-
-			var newRemove = function( e, ui ) {
-				var nextPage = ui.nextPage, npURL,
-					prEvent = new $.Event( "pageremove" );
-
-				if ( ui.nextPage ) {
-					npURL = nextPage.jqmData( "url" );
-					if ( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ) {
-						self.childPages().remove();
-						parentPage.trigger( prEvent );
-						if ( !prEvent.isDefaultPrevented() ) {
-							parentPage.removeWithDependents();
-						}
-					}
-				}
-			};
 
 			// unbind the original page remove and replace with our specialized version
 			parentPage
