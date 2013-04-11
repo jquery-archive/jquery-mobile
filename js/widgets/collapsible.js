@@ -142,7 +142,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.trigger( o.collapsed ? "collapse" : "expand" );
 
 		collapsibleHeading
-			.bind( "tap", function( event ) {
+			.bind( "tap", function(/* event */) {
 				collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
 			})
 			.bind( "click", function( event ) {
