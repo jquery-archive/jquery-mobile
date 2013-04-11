@@ -26,9 +26,9 @@ $.widget( "mobile.widget", {
 
 		$.each( this.options, function( option ) {
 
-			var value = elem.jqmData( option.replace( /[A-Z]/g, function( c ) {
+			var value = $.mobile.getAttribute( elem[ 0 ], "data-" + $.mobile.ns + ( option.replace( /[A-Z]/g, function( c ) {
 							return "-" + c.toLowerCase();
-						})
+						}))
 					);
 
 			if ( value !== undefined ) {
