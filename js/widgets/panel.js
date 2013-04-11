@@ -59,14 +59,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			_getPanelInner = function() {
 				var $panelInner = $el.find( "." + self.options.classes.panelInner );
 				if ( $panelInner.length === 0 ) {
-					$panelInner = $el.children().wrapAll( '<div class="' + self.options.classes.panelInner + '" />' ).parent();
+					$panelInner = $el.children().wrapAll( "<div class='" + self.options.classes.panelInner + "' />" ).parent();
 				}
 				return $panelInner;
 			},
 			_getWrapper = function() {
 				var $wrapper = page.find( "." + self.options.classes.contentWrap );
 				if ( $wrapper.length === 0 ) {
-					$wrapper = page.children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" ).wrapAll( '<div class="' + self.options.classes.contentWrap + ' ' + _getPageTheme() + '" />' ).parent();
+					$wrapper = page.children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" ).wrapAll( "<div class='" + self.options.classes.contentWrap + " " + _getPageTheme() + "' />" ).parent();
 					if ( $.support.cssTransform3d && !!self.options.animate ) {
 						$wrapper.addClass( self.options.classes.animate );
 					}
@@ -118,7 +118,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._bindSwipeEvents();
 	},
 
-	_createModal: function( options ) {
+	_createModal: function() {
 		var self = this;
 		
 		self._modal = $( "<div class='" + self.options.classes.modal + "' data-panelid='" + self._panelID + "'></div>" )
@@ -158,9 +158,9 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self.close();
 			return false;
 		});
-		self.element.on( "click.panel" , "a:jqmData(ajax='false')", function( e ) {
+		self.element.on( "click.panel" , "a:jqmData(ajax='false')", function(/* e */) {
 			self.close();
-		});		
+		});
 	},
 
 	_positionPanel: function() {
@@ -182,7 +182,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_scrollIntoView: function( panelInnerHeight ) {
 		if ( panelInnerHeight < $( window ).scrollTop() ) {
 			window.scrollTo( 0, 0 );
-		}	
+		}
 	},
 
 	_bindFixListener: function() {
@@ -208,7 +208,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_bindUpdateLayout: function() {
 		var self = this;
 		
-		self.element.on( "updatelayout", function( e ) {
+		self.element.on( "updatelayout", function(/* e */) {
 			if ( self._open ) {
 				self._positionPanel();
 			}
@@ -241,11 +241,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		// on swipe, close the panel
 		if( !!self.options.swipeClose ) {
 			if ( self.options.position === "left" ) {
-				area.on( "swipeleft.panel", function( e ) {
+				area.on( "swipeleft.panel", function(/* e */) {
 					self.close();
 				});
 			} else {
-				area.on( "swiperight.panel", function( e ) {
+				area.on( "swiperight.panel", function(/* e */) {
 					self.close();
 				});
 			}
@@ -263,7 +263,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				}
 			})
 			// clean up open panels after page hide
-			.on( "pagehide", function( e ) {
+			.on( "pagehide", function(/* e */) {
 				if ( self._open ) {
 					self.close( true );
 				}
@@ -343,7 +343,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			
 			self._trigger( "beforeopen" );
 			
-			if ( self._page.jqmData('panel') === "open" ) {
+			if ( self._page.jqmData( "panel" ) === "open" ) {
 				self._page.on( "panelclose", function() {
 					_openPanel();
 				});
@@ -411,7 +411,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		}
 	},
 	
-	toggle: function( options ) {
+	toggle: function() {
 		this[ this._open ? "close" : "open" ]();
 	},
 
