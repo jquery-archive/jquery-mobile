@@ -40,12 +40,14 @@ function defineAccessor( where, propName, namespace, widgetName ) {
 }
 
 $.widget = function( name, base, prototype ) {
-	var existingConstructor, constructor,
-		fullName = name,
-		parts = name.split( "." ),
-		namespace = parts[ 0 ];
+	var fullName, existingConstructor, constructor, basePrototype,
+		// proxiedPrototype allows the provided prototype to remain unmodified
+		// so that it can be used as a mixin for multiple widgets (#8876)
+		proxiedPrototype = {},
+		namespace = name.split( "." )[ 0 ];
 
-	name = parts[ 1 ];
+	name = name.split( "." )[ 1 ];
+	fullName = namespace + "-" + name;
 
 	if ( !prototype ) {
 		prototype = base;
@@ -66,21 +68,6 @@ $.widget = function( name, base, prototype ) {
 			this._createWidget( options, element );
 		}
 	};
-
-	actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
-};
-
-function actuallyDefineWidget( name, constructor, existingConstructor, base, prototype ) {
-	var basePrototype, fullName,
-		parts = name.split( "." ),
-		namespace = parts[ 0 ],
-		// proxiedPrototype allows the provided prototype to remain unmodified
-		// so that it can be used as a mixin for multiple widgets (#8876)
-		proxiedPrototype = {};
-
-	name = parts[ 1 ];
-	fullName = namespace + "-" + name;
-	$[ namespace ][ name ] = constructor;
 
 	// create selector for plugin
 	$.expr[ ":" ][ fullName.toLowerCase() ] = function( elem ) {
@@ -164,7 +151,7 @@ function actuallyDefineWidget( name, constructor, existingConstructor, base, pro
 	}
 
 	$.widget.bridge( name, constructor );
-}
+};
 
 $.widget.extend = function( target ) {
 	var input = slice.call( arguments, 1 ),
