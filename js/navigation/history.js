@@ -6,8 +6,6 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-	var path = $.mobile.path;
-
 	$.mobile.History = function( stack, index ) {
 		this.stack = stack || [];
 		this.activeIndex = index || 0;
@@ -115,9 +113,9 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 			//
 			// TODO this is also convoluted and confusing
 			if ( newActiveIndex < a ) {
-				( opts.present || opts.back || $.noop )( this.getActive(), 'back' );
+				( opts.present || opts.back || $.noop )( this.getActive(), "back" );
 			} else if ( newActiveIndex > a ) {
-				( opts.present || opts.forward || $.noop )( this.getActive(), 'forward' );
+				( opts.present || opts.forward || $.noop )( this.getActive(), "forward" );
 			} else if ( newActiveIndex === undefined && opts.missing ){
 				opts.missing( this.getActive() );
 			}
