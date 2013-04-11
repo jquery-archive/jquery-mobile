@@ -6,7 +6,9 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 	// Start with links with only the trailing slash and that aren't external links
 	var fixLinks = function() {
 		$( "a[href$='/'], a[href='.'], a[href='..']" ).not( "[rel='external']" ).each( function() {
-			this.href = $( this ).attr( "href" ).replace( /\/$/, "" ) + "/index.html";
+			if( !$( this ).attr( "href" ).match("http") ){
+				this.href = $( this ).attr( "href" ).replace( /\/$/, "" ) + "/index.html";
+			}
 		});
 	};
 
@@ -77,7 +79,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 
 	// global search
 	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
-		globalNav: "docs",
+		globalNav: "demos",
 		inset: true,
 		theme: "d",
 		dividerTheme: "d",
@@ -120,7 +122,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	});
 
 	$( this ).find( ".jqm-content ul.jqm-list " ).listview({
-		globalNav: "docs",
+		globalNav: "demos",
 		inset: true,
 		theme: "d",
 		dividerTheme: "d",
@@ -228,8 +230,8 @@ $( document ).on( "mobileinit", function() {
 			form.attr( "method", "get" )
 				.attr( "action", this.options.submitTo );
 				
-			var base = $( "base" ).attr( "href" ).split( "docs" )[0];
-				base = base.split( "index.html" )[0] + "docs" + "/";
+			var base = $( "base" ).attr( "href" ).split( "demos" )[0];
+				base = base.split( "index.html" )[0] + "demos" + "/";
 				url = base + this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
 			
 			$.mobile.changePage( url ); 
@@ -322,16 +324,4 @@ $( document ).on( "mobileinit", function() {
 	});
 })( jQuery );
 
-});
-
-$( document ).on( "pageshow", ".jqm-demos:not(.ui-page-header-fixed)", function() {
-	var page = $( this ), 
-		panelInnerHeight = page.find( ".jqm-nav-panel.ui-panel-position-left" ).outerHeight() + 30,
-		minPageHeight = $.mobile.getScreenHeight();
-
-	if ( panelInnerHeight > minPageHeight ) {
-		setTimeout(function() {
-			page.css( "min-height", panelInnerHeight );
-		}, 50 );
-	}
 });

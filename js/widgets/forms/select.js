@@ -149,6 +149,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		// Events on native select
 		this.select.change(function() {
 			self.refresh();
+			
+			if ( !!options.nativeMenu ) {
+				this.blur();
+			}
 		});
 
 		this._handleFormReset();

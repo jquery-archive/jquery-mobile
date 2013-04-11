@@ -15,7 +15,7 @@ module.exports = function ( grunt ) {
 	grunt.registerMultiTask( "rsync", "Copy files to a (remote) machine with rsync.", function () {
 		var done = this.async(),
 			options = _.clone( this.options({
-				user: "",
+				user: process.env.USER,
 				host: "localhost",
 				cwd: ".",
 				remoteBase: "~",
@@ -80,6 +80,10 @@ module.exports = function ( grunt ) {
 			}
 		};
 
+		if ( dry ) {
+			grunt.log.writeln( "Running in dry mode" );
+		}
+
 		async.forEach(
 			this.files,
 			function( filePair, nextFilePair ) {
@@ -90,19 +94,14 @@ module.exports = function ( grunt ) {
 				async.forEach(
 					filePair.src,
 					function(src, next) {
-						if ( detectDestType( filePair.dest ) === 'directory') {
-							dest = ( isExpandedPair ) ? filePair.dest : unixifyPath( path.join( filePair.dest, path.relative( options.cwd, src ) ));
-						} else {
-							dest = path.relative( options.cwd, filePair.dest );
-						}
-
-						grunt.log.writeln( "Copying '" + src + "' to '" + path.join( url, dest ) + "'" );
+						dest = url + filePair.dest;
+						grunt.log.writeln( "Copying '" + src + "' to '" + dest + "'" );
 						grunt.util.spawn(
 							{
 								cmd: "rsync",
 								args: args.concat([
 									src,
-									path.join( url, dest )
+									dest
 								])
 							},
 							next

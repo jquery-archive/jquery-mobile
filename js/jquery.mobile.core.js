@@ -86,6 +86,13 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 			hoverDelay: 200
 		},
 
+		// disable the alteration of the dynamic base tag or links in the case
+		// that a dynamic base tag isn't supported
+		dynamicBaseEnabled: true,
+
+		// default the property to remove dependency on assignment in init module
+		pageContainer: $(),
+
 		// define the window and the document objects
 		window: $( window ),
 		document: $( document ),
@@ -128,6 +135,15 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 
 		// Place to store various widget extensions
 		behaviors: {},
+
+		// Retrieve an attribute from an element and perform some massaging of the value
+		getAttribute: function( e, key ) {
+			var value = e.getAttribute( key );
+
+			return value === "true" ? true :
+				value === "false" ? false :
+				value === null ? undefined : value;
+		},
 
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {

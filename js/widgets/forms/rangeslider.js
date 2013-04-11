@@ -5,7 +5,14 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.rangeslider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset", "./slider", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery",
+	"../../jquery.mobile.core",
+	"../../jquery.mobile.widget",
+	"./textinput",
+	"../../jquery.mobile.buttonMarkup",
+	"./reset",
+	"../optionDemultiplexer",
+	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	$.widget( "mobile.rangeslider", $.mobile.widget, $.extend( {
@@ -13,7 +20,6 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		options: {
 			theme: null,
 			trackTheme: null,
-			disabled: false,
 			mini: false,
 			highlight: true
 		},
@@ -28,7 +34,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			_sliderFirst = $.data( _inputFirst.get(0), "mobileSlider" ).slider,
 			_sliderLast = $.data( _inputLast.get(0), "mobileSlider" ).slider,
 			firstHandle = $.data( _inputFirst.get(0), "mobileSlider" ).handle,
-			_sliders = $( "<div class=\"ui-rangeslider-sliders\" />" ).appendTo( $el );
+			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
 			
 			if ( $el.find( "label" ).length > 1 ) {
 				secondLabel = $el.find( "label" ).last().hide();
@@ -63,9 +69,22 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				"blur": "_change",
 				"keyup": "_change"
 			});
+			this._on({
+				"mousedown":"_change"
+			});
+			this._on( this.element.closest( "form" ), {
+				"reset":"_handleReset"
+			});
 			this._on( firstHandle, {
 				"vmousedown": "_dragFirstHandle"
 			});
+		},
+		_handleReset: function(){
+			var self = this;
+			//we must wait for the stack to unwind before updateing other wise sliders will not have updated yet
+			setTimeout( function(){
+				self._updateHighlight();
+			},0);
 		},
 
 		_dragFirstHandle: function( event ) {
@@ -133,12 +152,19 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				return false;
 			}
 
-			var min = parseFloat( this._inputFirst.val(), 10 ),
+			var self = this,
+				min = parseFloat( this._inputFirst.val(), 10 ),
 				max = parseFloat( this._inputLast.val(), 10 ),
 				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
 				thisSlider = first ? this._inputFirst : this._inputLast,
 				otherSlider = first ? this._inputLast : this._inputFirst;
-				
+			
+			
+			if( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
+				thisSlider.blur();
+			} else if( event.type === "mousedown" ){
+				return;
+			}
 			if ( min > max && !this._sliderTarget ) {
 				//this prevents min from being greater then max
 				thisSlider.val( first ? max: min ).slider( "refresh" );
@@ -146,8 +172,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			} else if ( min > max ) {
 				//this makes it so clicks on the target on either extreme go to the closest handle
 				thisSlider.val( this._targetVal ).slider( "refresh" );
-				
-				var self = this;
+
 				//You must wait for the stack to unwind so first slider is updated before updating second
 				setTimeout( function() {
 					otherSlider.val( first ? min: max ).slider( "refresh" );
@@ -184,6 +209,27 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 		},
 
+		_setTheme: function( value ) {
+			this._inputFirst.slider( "option", "theme", value );
+			this._inputLast.slider( "option", "theme", value );
+		},
+
+		_setTrackTheme: function( value ) {
+			this._inputFirst.slider( "option", "trackTheme", value );
+			this._inputLast.slider( "option", "trackTheme", value );
+		},
+
+		_setMini: function( value ) {
+			this._inputFirst.slider( "option", "mini", value );
+			this._inputLast.slider( "option", "mini", value );
+			this.element.toggleClass( "ui-mini", !!value );
+		},
+
+		_setHighlight: function( value ) {
+			this._inputFirst.slider( "option", "highlight", value );
+			this._inputLast.slider( "option", "highlight", value );
+		},
+
 		_destroy: function() {
 			this.element.removeClass( "ui-rangeslider ui-mini" ).find( "label" ).show();
 			this._inputFirst.after( this._sliderFirst );
@@ -192,7 +238,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
 		}
 
-	}, $.mobile.behaviors.formReset ) );
+	}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
 $.mobile.rangeslider.initSelector = ":jqmData(role='rangeslider')";
 

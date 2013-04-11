@@ -304,6 +304,13 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					
 					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen );
 					
+					self._positionPanel();
+					
+					// Fix for IE7 min-height bug
+					if ( self.options.theme && self.options.display !== "overlay" ) {
+						self._wrapper.css( "min-height", self._page.css( "min-height" ) );
+					}
+					
 					self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
 					self._wrapper
 						.removeClass( o.classes.contentWrapClosed )
@@ -324,7 +331,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 					self._page.addClass( o.classes.pagePanelOpen );
 					
-					self._positionPanel();
 					self._bindFixListener();
 					
 					self._trigger( "open" );
@@ -371,6 +377,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				complete = function() {
 					if ( self.options.theme && self.options.display !== "overlay" ) {
 						self._page.removeClass( "ui-body-" + self.options.theme ).addClass( self._pageTheme );
+						// reset fix for IE7 min-height bug
+						self._wrapper.css( "min-height", "" );
 					}
 					self.element.add( self._wrapper ).off( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.panelClosed );
@@ -401,7 +409,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._open = false;
 		}
 	},
-
+	
 	toggle: function( options ) {
 		this[ this._open ? "close" : "open" ]();
 	},

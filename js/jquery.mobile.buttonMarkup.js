@@ -10,13 +10,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse", "./jquery.
 (function( $, undefined ) {
 
 // This function calls getAttribute, which should be safe for data-* attributes
-var getAttrFixed = function( e, key ) {
-	var value = e.getAttribute( key );
-
-	return value === "true" ? true :
-		value === "false" ? false :
-		value === null ? undefined : value;
-};
+var getAttrFixed = $.mobile.getAttribute;
 
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,

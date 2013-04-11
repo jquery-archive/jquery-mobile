@@ -10,17 +10,12 @@ define(["jquery",
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-	var path = $.mobile.path;
+	var path = $.mobile.path,
+		initialHref = location.href;
 
 	$.mobile.Navigator = function( history ) {
 		this.history = history;
 		this.ignoreInitialHashChange = true;
-
-		// This ensures that browsers which don't fire the initial popstate
-		// like opera don't have further hash assignment popstates blocked
-		setTimeout($.proxy(function() {
-			this.ignoreInitialHashChange = false;
-		}, this), 200);
 
 		$.mobile.window.bind({
 			"popstate.history": $.proxy( this.popstate, this ),
@@ -184,14 +179,18 @@ define(["jquery",
 
 			// If there is no state, and the history stack length is one were
 			// probably getting the page load popstate fired by browsers like chrome
-			// avoid it and set the one time flag to false
+			// avoid it and set the one time flag to false.
+			// TODO: Do we really need all these conditions? Comparing location hrefs
+			// should be sufficient.
 			if( !event.originalEvent.state &&
 				this.history.stack.length === 1 &&
 				this.ignoreInitialHashChange ) {
 				this.ignoreInitialHashChange = false;
 
-				event.preventDefault();
-				return;
+				if ( location.href === initialHref ) {
+					event.preventDefault();
+					return;
+				}
 			}
 
 			// account for direct manipulation of the hash. That is, we will receive a popstate

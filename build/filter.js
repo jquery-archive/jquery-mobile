@@ -4,7 +4,7 @@
 
 var fs = require( 'fs' ),
 	path = require( 'path' ),
-	pkg = require('./package.json' ),
+	pkg = require('../package.json' ),
 	buildDir = __dirname,
 	copyrightVersionRegExp = /@VERSION/g,
 	apiVersionRegExp = /__version__/g,

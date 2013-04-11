@@ -5,11 +5,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.navigation" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.navigation", "./optionDemultiplexer" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-$.widget( "mobile.dialog", $.mobile.widget, {
+$.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 	options: {
 		closeBtn: "left",
 		closeBtnText: "Close",
@@ -120,16 +120,6 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		}
 	},
 
-	_setOption: function( key, value ) {
-		var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
-
-		if ( this[ setter ] !== undefined ) {
-			this[ setter ]( value );
-		}
-
-		this._super( key, value );
-	},
-
 	// Close method goes back in history
 	close: function() {
 		var idx, dst, hist = $.mobile.navigate.history;
@@ -154,7 +144,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			}
 		}
 	}
-});
+}, $.mobile.behaviors.optionDemultiplexer ) );
 
 $.mobile.dialog.initSelector = ":jqmData(role='dialog')";
 //auto self-init widgets

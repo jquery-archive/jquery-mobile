@@ -9,7 +9,12 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery",
+	"../../jquery.mobile.core",
+	"../../jquery.mobile.widget",
+	"../../jquery.mobile.buttonMarkup",
+	"../optionDemultiplexer",
+	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -198,14 +203,19 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		}
 	},
 
-	disable: function() {
-		this.element.prop( "disabled", true ).parent().addClass( "ui-disabled" );
+	_setTheme: function( value ) {
+		this.label.buttonMarkup( { theme: value } );
 	},
 
-	enable: function() {
-		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
+	_setMini: function( value ) {
+		this.label.buttonMarkup( { mini: !!value } );
+	},
+
+	_setDisabled: function( value ) {
+		value = !!value;
+		this.element.prop( "disabled", value ).parent().toggleClass( "ui-disabled", value );
 	}
-}, $.mobile.behaviors.formReset ) );
+}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
 $.mobile.checkboxradio.initSelector = "input[type='checkbox'],input[type='radio']";
 
