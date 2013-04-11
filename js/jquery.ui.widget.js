@@ -68,55 +68,51 @@ $.widget = function( name, base, prototype ) {
 		}
 	};
 
-	if ( !!( {}.__defineGetter__ ) && !!( {}.__defineSetter__ ) ) {
-		if ( !existingConstructor ) {
-			defineAccessor( $.fn, name, namespace, name );
-			defineAccessor( $.expr[ ":" ], fullName, namespace, name );
-		}
+	if ( !existingConstructor ) {
+		defineAccessor( $.fn, name, namespace, name );
+		defineAccessor( $.expr[ ":" ], fullName, namespace, name );
+	}
 
-		$[ namespace ][ name ] = classPlaceholder = {
-			constructor: constructor,
-			define: function() {
-				var key;
+	$[ namespace ][ name ] = classPlaceholder = {
+		constructor: constructor,
+		define: function() {
+			var key;
 
-				// Establish related classes
-				if ( existingConstructor ) {
+			// Establish related classes
+			if ( existingConstructor ) {
 
-					// If we have an existing constructor, make sure it is defined. We
-					// assume that defining the existing constructor will eventually cause
-					// the base to also be defined, so we do not define the base here.
-					// We simply proceed with the constructor for the base.
-					if ( $.type( existingConstructor ) === "object" ) {
-						existingConstructor.define();
-						existingConstructor = existingConstructor.constructor;
-					}
-					if ( $.type( base ) === "object" ) {
-						base = base.constructor;
-					}
+				// If we have an existing constructor, make sure it is defined. We
+				// assume that defining the existing constructor will eventually cause
+				// the base to also be defined, so we do not define the base here.
+				// We simply proceed with the constructor for the base.
+				if ( $.type( existingConstructor ) === "object" ) {
+					existingConstructor.define();
+					existingConstructor = existingConstructor.constructor;
 				}
-
-				// If the base is not defined, we define it.
 				if ( $.type( base ) === "object" ) {
-					base.define();
 					base = base.constructor;
 				}
-
-				actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
-
-				// Transfer things declared on the placeholder to the actual constructor
-				for ( key in classPlaceholder ) {
-					if ( !( key === "prototype" || key === "define" || key === "constructor" ) ) {
-						constructor[ key ] = classPlaceholder[ key ];
-					}
-				}
-
-				return constructor.prototype;
 			}
-		};
-		classPlaceholder.__defineGetter__( "prototype", classPlaceholder.define );
-	} else {
-		actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
-	}
+
+			// If the base is not defined, we define it.
+			if ( $.type( base ) === "object" ) {
+				base.define();
+				base = base.constructor;
+			}
+
+			actuallyDefineWidget( fullName, constructor, existingConstructor, base, prototype );
+
+			// Transfer things declared on the placeholder to the actual constructor
+			for ( key in classPlaceholder ) {
+				if ( !( key === "prototype" || key === "define" || key === "constructor" ) ) {
+					constructor[ key ] = classPlaceholder[ key ];
+				}
+			}
+
+			return constructor.prototype;
+		}
+	};
+	classPlaceholder.__defineGetter__( "prototype", classPlaceholder.define );
 };
 
 function actuallyDefineWidget( name, constructor, existingConstructor, base, prototype ) {
