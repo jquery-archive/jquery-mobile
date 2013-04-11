@@ -149,6 +149,7 @@ a.ui-link-inherit {
 	background: 			#eee /*{a-bup-background-color}*/;
 	font-weight: bold;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #fff /*{a-bup-shadow-color}*/;
+	
 }
 .ui-btn-a,
 .ui-btn-a:link,
@@ -309,7 +310,7 @@ a.ui-link-inherit {
 	color: 					#fff /*{b-bactive-color}*/;
 }
 
-.ui-btn-a:focus {
+.ui-btn-b:focus {
 	-moz-box-shadow: inset 0 0 3px 		#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
 	-webkit-box-shadow: inset 0 0 3px 	#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
 	box-shadow: inset 0 0 3px 			#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
