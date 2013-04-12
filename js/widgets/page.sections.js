@@ -44,14 +44,15 @@ $.mobile._enhancer.add( "mobile.pagesections", undefined, function( target ) {
 			$headeranchors,
 			leftbtn,
 			rightbtn,
-			backBtn;
+			backBtn,
+			thisTheme;
 
 		$this.addClass( "ui-" + role );
 
 		//apply theming and markup modifications to page,header,content,footer
 		if ( role === "header" || role === "footer" ) {
 
-			var thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
+			thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
 
 			$this
 				//add theme class

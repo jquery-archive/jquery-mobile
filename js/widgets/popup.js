@@ -153,7 +153,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		this._ignoreResizeTo = setTimeout( function() { self._ignoreResizeTo = 0; }, 1000 );
 	},
 
-	_handleWindowResize: function( e ) {
+	_handleWindowResize: function(/* e */) {
 		if ( this._isOpen && this._ignoreResizeTo === 0 ) {
 			if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
 				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
@@ -165,7 +165,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		}
 	},
 
-	_handleWindowOrientationchange: function( e ) {
+	_handleWindowOrientationchange: function(/* e */) {
 		if ( !this._orientationchangeInProgress && this._isOpen && this._ignoreResizeTo === 0 ) {
 			this._expectResizeEvent();
 			this._orientationchangeInProgress = true;
@@ -184,7 +184,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		if ( tgt !== ui.container[ 0 ] ) {
 			$tgt = $( e.target );
 			if ( 0 === $tgt.parents().filter( ui.container[ 0 ] ).length ) {
-				$( document.activeElement ).one( "focus", function( e ) {
+				$( document.activeElement ).one( "focus", function(/* e */) {
 					$tgt.blur();
 				});
 				ui.focusElement.focus();
@@ -207,8 +207,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			},
 			thisPage = this.element.closest( ".ui-page" ),
 			myId = this.element.attr( "id" ),
-			o = this.options,
-			key, value;
+			o = this.options;
 
 		// We need to adjust the history option to be false if there's no AJAX nav.
 		// We can't do it in the option declarations because those are run before
@@ -265,7 +264,6 @@ $.widget( "mobile.popup", $.mobile.widget, {
 
 	_applyTheme: function( dst, theme, prefix ) {
 		var classes = ( dst.attr( "class" ) || "").split( " " ),
-			alreadyAdded = true,
 			currentTheme = null,
 			matches,
 			themeStr = String( theme );
@@ -338,10 +336,11 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_setTolerance: function( value ) {
-		var tol = { t: 30, r: 15, b: 30, l: 15 };
+		var tol = { t: 30, r: 15, b: 30, l: 15 },
+			ar;
 
 		if ( value !== undefined ) {
-			var ar = String( value ).split( "," );
+			ar = String( value ).split( "," );
 
 			$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
 
@@ -396,8 +395,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 				y: winCoords.y + this._tolerance.t,
 				cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
 				cy: winCoords.cy - this._tolerance.t - this._tolerance.b
-			},
-			ret;
+			};
 
 		if ( !infoOnly ) {
 			// Clamp the width of the menu before grabbing its size
@@ -415,7 +413,12 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	_calculateFinalLocation: function( desired, clampInfo ) {
 		var ret,
 			rc = clampInfo.rc,
-			menuSize = clampInfo.menuSize;
+			menuSize = clampInfo.menuSize,
+			// fix for $.mobile.document.height() bug in core 1.7.2.
+			docEl = document.documentElement,
+			docBody = document.body,
+			docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
+
 
 		// Center the menu over the desired coordinates, while not going outside
 		// the window tolerances. This will center wrt. the window if the popup is too large.
@@ -429,10 +432,6 @@ $.widget( "mobile.popup", $.mobile.widget, {
 
 		// If the height of the menu is smaller than the height of the document
 		// align the bottom with the bottom of the document
-
-		// fix for $.mobile.document.height() bug in core 1.7.2.
-		var docEl = document.documentElement, docBody = document.body,
-			docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
 
 		ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - docHeight ) );
 
@@ -581,8 +580,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		var o = $.extend( {}, this.options, options ),
 			// TODO move blacklist to private method
 			androidBlacklist = ( function() {
-				var w = window,
-					ua = navigator.userAgent,
+				var ua = navigator.userAgent,
 					// Rendering engine is Webkit, and capture major version
 					wkmatch = ua.match( /AppleWebKit\/([0-9\.]+)/ ),
 					wkversion = !!wkmatch && wkmatch[ 1 ],
@@ -660,8 +658,6 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_closePrereqsDone: function() {
-		var opts = this.options;
-
 		this._ui.container.removeAttr( "tabindex" );
 
 		// remove the global mutex for popups

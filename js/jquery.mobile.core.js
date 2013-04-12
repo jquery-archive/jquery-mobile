@@ -5,13 +5,16 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg ) {
+define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-	var __version__ = ( pkg && pkg.version ) || "dev";
+	__version__ = ( pkg && pkg.version ) || "dev";
 //>>excludeEnd("jqmBuildExclude");
-	var nsNormalizeDict = {};
+	var nsNormalizeDict = {},
+		// Monkey-patching Sizzle to filter the :jqmData selector
+		oldFind = $.find,
+		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
 	// jQuery.mobile configurable options
 	$.mobile = $.extend($.mobile, {
@@ -214,7 +217,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// doing a similar parent node traversal to the one found in the inherited theme code above
 		closestPageData: function( $target ) {
 			return $target
-				.closest( ':jqmData(role="page"), :jqmData(role="dialog")' )
+				.closest( ":jqmData(role='page'), :jqmData(role='dialog')" )
 				.data( "mobile-page" );
 		},
 
@@ -233,15 +236,16 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 
 			var count = $set.length,
 				$newSet = $(),
-				e, $element, excluded;
+				e, $element, excluded,
+				i, c;
 
-			for ( var i = 0; i < count; i++ ) {
+			for ( i = 0; i < count; i++ ) {
 				$element = $set.eq( i );
 				excluded = false;
 				e = $set[ i ];
 
 				while ( e ) {
-					var c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
+					c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
 
 					if ( c === "false" ) {
 						excluded = true;
@@ -309,7 +313,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	$.removeWithDependents = function( elem ) {
 		var $elem = $( elem );
 
-		( $elem.jqmData( 'dependents' ) || $() ).remove();
+		( $elem.jqmData( "dependents" ) || $() ).remove();
 		$elem.remove();
 	};
 
@@ -318,9 +322,9 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	};
 
 	$.addDependents = function( elem, newDependents ) {
-		var dependents = $( elem ).jqmData( 'dependents' ) || $();
+		var dependents = $( elem ).jqmData( "dependents" ) || $();
 
-		$( elem ).jqmData( 'dependents', $.merge( dependents, newDependents ) );
+		$( elem ).jqmData( "dependents", $.merge( dependents, newDependents ) );
 	};
 
 	// note that this helper doesn't attempt to handle the callback
@@ -338,10 +342,6 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	$.fn.jqmHijackable = function() {
 		return $.mobile.hijackable( this );
 	};
-
-	// Monkey-patching Sizzle to filter the :jqmData selector
-	var oldFind = $.find,
-		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
 	$.find = function( selector, context, ret, extra ) {
 		selector = selector.replace( jqmDataRE, "[data-" + ( $.mobile.ns || "" ) + "$1]" );

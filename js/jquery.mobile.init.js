@@ -8,9 +8,9 @@ define([
 	"jquery",
 	"./jquery.mobile.core",
 	"./jquery.mobile.support",
-	'./events/navigate',
-	'./navigation/path',
-	'./navigation/method',
+	"./events/navigate",
+	"./navigation/path",
+	"./navigation/method",
 	"./jquery.mobile.navigation",
 	"./widgets/loader",
 	"./jquery.mobile.vmouse",
@@ -18,8 +18,7 @@ define([
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),
-			$head = $( "head" ),
-			$window = $.mobile.window;
+		$window = $.mobile.window;
 
 	//remove initial build class (only present on first pageshow)
 	function hideRenderingClass() {
@@ -95,7 +94,7 @@ define([
 			// Remember, however, that the hash can also be a path!
 			if ( ! ( $.mobile.hashListeningEnabled &&
 				$.mobile.path.isHashValid( location.hash ) &&
-				( $( hashPage ).is( ':jqmData(role="page")' ) ||
+				( $( hashPage ).is( ":jqmData(role='page')" ) ||
 					$.mobile.path.isPath( hash ) ||
 					hash === $.mobile.dialogHashKey ) ) ) {
 

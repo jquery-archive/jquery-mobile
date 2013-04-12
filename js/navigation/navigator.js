@@ -52,7 +52,7 @@ define(["jquery",
 		},
 
 		hash: function( url, href ) {
-			var parsed, loc, hash;
+			var parsed, loc, hash, resolved;
 
 			// Grab the hash for recording. If the passed url is a path
 			// we used the parsed version of the squashed url to reconstruct,
@@ -66,7 +66,7 @@ define(["jquery",
 				// eg, url = "/foo/bar?baz#bang", location.href = "http://example.com/foo/bar?baz"
 				hash = parsed.hash ? parsed.hash : parsed.pathname + parsed.search;
 			} else if ( path.isPath(url) ) {
-				var resolved = path.parseUrl( href );
+				resolved = path.parseUrl( href );
 				// If the passed url is a path, make it domain relative and remove any trailing hash
 				hash = resolved.pathname + resolved.search + (path.isPreservableHash( resolved.hash )? resolved.hash.replace( "#", "" ) : "");
 			} else {
@@ -154,7 +154,7 @@ define(["jquery",
 		// TODO grab the original event here and use it for the synthetic event in the
 		//      second half of the navigate execution that will follow this binding
 		popstate: function( event ) {
-			var active, hash, state, closestIndex;
+			var hash, state;
 
 			// Partly to support our test suite which manually alters the support
 			// value to test hashchange. Partly to prevent all around weirdness

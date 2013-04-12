@@ -16,7 +16,7 @@ $.widget( "mobile.widget", {
 	// in the original _createWidget
 	_createWidget: function() {
 		$.Widget.prototype._createWidget.apply( this, arguments );
-		this._trigger( 'init' );
+		this._trigger( "init" );
 	},
 
 	_getCreateOptions: function() {
@@ -44,7 +44,7 @@ $.widget( "mobile.widget", {
 	},
 
 	enhance: function( targets, useKeepNative ) {
-		var page, keepNative, $widgetElements = $( targets ), self = this;
+		var page, keepNative, $widgetElements = $( targets );
 
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a

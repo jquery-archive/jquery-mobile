@@ -12,7 +12,7 @@ define( [
 	"./visuals/slidefade",
 	"./visuals/slideup",
 	"./visuals/turn"
-], function( jQuery ) {
+], function() {
 //>>excludeEnd("jqmBuildExclude");
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

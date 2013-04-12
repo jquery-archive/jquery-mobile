@@ -9,7 +9,7 @@ define( [ "jquery", "./listview", "./forms/textinput" ], function( jQuery ) {
 (function( $, undefined ) {
 
 // TODO rename callback/deprecate and default to the item itself as the first argument
-var defaultFilterCallback = function( text, searchValue, item ) {
+var defaultFilterCallback = function( text, searchValue /*, item */) {
 	return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 };
 
@@ -22,7 +22,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 		filterCallback: defaultFilterCallback
 	},
 
-	_onKeyUp: function( e ) {
+	_onKeyUp: function(/* e */) {
 		var search = this._search,
 			o = this.options,
 			list = this.element,
@@ -32,7 +32,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 			lastval = search.jqmData( "lastval" ) + "",
 			childItems = false,
 			itemtext = "",
-			item,
+			item, i,
 			// Check if a custom filter callback applies
 			isCustomFilterCallback = o.filterCallback !== defaultFilterCallback;
 
@@ -64,7 +64,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 			// This handles hiding regular rows without the text we search for
 			// and any list dividers without regular rows shown under it
 
-			for ( var i = listItems.length - 1; i >= 0; i-- ) {
+			for ( i = listItems.length - 1; i >= 0; i-- ) {
 				item = $( listItems[ i ] );
 				itemtext = item.jqmData( "filtertext" ) || item.text();
 
@@ -106,7 +106,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 	},
 
 	_create: function() {
-		var list, wrapper, onKeyUp, search,
+		var list, wrapper, search,
 			o = this.options;
 
 		this._super();
@@ -124,7 +124,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 		wrapper = $( "<form>", {
 			"class": "ui-listview-filter ui-bar-" + o.filterTheme,
 			"role": "search"
-		}).submit( function( e ) {
+		}).submit( function(/* e */) {
 			search.blur();
 			return false;
 		});

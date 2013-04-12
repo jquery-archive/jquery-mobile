@@ -35,7 +35,7 @@ $.widget( "mobile.table", $.mobile.table, {
 			$table = this.element,
 			o = this.options,
 			ns = $.mobile.ns,
-			menuInputChange = function( e ) {
+			menuInputChange = function(/* e */) {
 				var checked = this.checked;
 				$( this ).jqmData( "cells" )
 					.toggleClass( "ui-table-cell-hidden", !checked )

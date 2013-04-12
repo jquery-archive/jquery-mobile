@@ -104,11 +104,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			mini = options.mini || this.select.jqmData( "mini" ),
 			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
-			// IE throws an exception at options.item() function when
-			// there is no selected item
-			// select first in this case
-			selectedIndex = this.select[ 0 ].selectedIndex === -1 ? 0 : this.select[ 0 ].selectedIndex,
-
 			// TODO values buttonId and menuId are undefined here
 			button = this.button
 				.insertBefore( this.select )
@@ -138,11 +133,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			this.buttonCount = $( "<span>" )
 				.addClass( "ui-li-count ui-btn-up-c ui-btn-corner-all" )
 				.hide()
-				.appendTo( button.addClass('ui-li-has-count') );
+				.appendTo( button.addClass( "ui-li-has-count" ) );
 		}
 
 		// Disable if specified
-		if ( options.disabled || this.element.attr('disabled')) {
+		if ( options.disabled || this.element.attr( "disabled" )) {
 			this.disable();
 		}
 
@@ -207,14 +202,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			}
 		});
 		self.button.bind( "mouseup", function() {
-			if ( self.options.preventFocusZoom ) {				
+			if ( self.options.preventFocusZoom ) {
 				setTimeout(function() {
 					$.mobile.zoom.enable( true );
 				}, 0 );
 			}
 		});
 		self.select.bind( "blur", function() {
-			if ( self.options.preventFocusZoom ) {				
+			if ( self.options.preventFocusZoom ) {
 				$.mobile.zoom.enable( true );
 			}
 		});

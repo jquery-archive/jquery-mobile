@@ -33,7 +33,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 		$.mobile._enhancer.enhance( this.element[ 0 ] );
 	},
 
-	_handlePageBeforeShow: function( e ) {
+	_handlePageBeforeShow: function(/* e */) {
 		this.setContainerBackground();
 	},
 
