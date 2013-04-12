@@ -13,7 +13,7 @@ $.widget( "mobile.table", $.mobile.widget, {
 	options: {
 		classes: {
 			table: "ui-table"
-		},
+		}
 	},
 
 	_create: function() {
