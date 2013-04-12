@@ -10,35 +10,21 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 var doc = $( document );
 
 function Enhancer() {
-	this._callbacks = [],
-	this._dependencies = {},
-	this._document = doc;
+	this._dependencies = {};
+	this._enhanceCount = 0;
 }
 
 $.extend( Enhancer.prototype, {
-	_addWidget: function( fullName ) {
-		var idx,
-			depinfo = this._dependencies[ fullName ];
-
-		if ( depinfo && !depinfo.added ) {
-			for ( idx in depinfo.deps ) {
-				this._addWidget( depinfo.deps[ idx ] );
-			}
-			this._callbacks.push( depinfo.callback );
-			depinfo.added = true;
-		}
-	},
 
 	_defaultCallback: function( widget ) {
 		var parts = widget.split( "." ),
 			ns = parts[ 0 ],
 			name = parts[ 1 ],
 			ret = function( targetEl ) {
-				// First try to grab the initSelector from the namespace, to avoid
-				// triggering the widget class's definition, but, failing that, look
-				// for the initSelector also in the prototype's options.
-				var targets = $( $[ ns ][ name ].initSelector ||
-					$[ ns ][ name ].prototype.options.initSelector, targetEl );
+				// First try to grab the initSelector from the old location in case
+				// some legacy code modified it. If not, grab it from the new location.
+				var targets = $( $[ ns ][ name ].prototype.options.initSelector ||
+					$[ ns ][ name ].initSelector, targetEl );
 
 				if ( targets.length ) {
 					$[ ns ][ name ].prototype.enhance( targets, true );
@@ -61,30 +47,35 @@ $.extend( Enhancer.prototype, {
 
 		deps[ widget ] = {
 			deps: widgetDeps.dependencies,
-			callback: callback
+			callback: callback,
+			enhanceCount: this._enhanceCount
 		};
-
-		if ( deps.processed ) {
-			this._addWidget( widget );
-		}
 
 		return this;
 	},
 
+	_enhance: function( el, idx ) {
+		var depIdx,
+			enhanceCount = this._enhanceCount,
+			dep = this._dependencies[ idx ];
+
+		if ( dep && dep.enhanceCount !== enhanceCount ) {
+			for ( depIdx in dep.deps ) {
+				this._enhance( el, dep.deps[ depIdx ] );
+			}
+			dep.callback( el );
+			dep.enhanceCount = enhanceCount;
+		}
+	},
+
 	enhance: function( targetEl ) {
 		var idx,
-			deps = this._dependencies,
-			cbs = this._callbacks;
+			deps = this._dependencies;
 
-		if ( !deps.processed ) {
-			for ( idx in deps ) {
-				this._addWidget( idx );
-			}
-			deps.processed = true;
-		}
+		this._enhanceCount++;
 
-		for ( idx in cbs ) {
-			cbs[ idx ]( targetEl );
+		for ( idx in deps ) {
+			this._enhance( targetEl, idx );
 		}
 
 		return this;
