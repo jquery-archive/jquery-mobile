@@ -49,6 +49,8 @@ $.extend( Enhancer.prototype, {
 	},
 
 	add: function( widget, widgetDeps, callback ) {
+		var deps = this._dependencies;
+
 		if ( !widgetDeps ) {
 			widgetDeps = { dependencies: [] };
 		}
@@ -57,10 +59,14 @@ $.extend( Enhancer.prototype, {
 			callback = this._defaultCallback( widget );
 		}
 
-		this._dependencies[ widget ] = {
+		deps[ widget ] = {
 			deps: widgetDeps.dependencies,
 			callback: callback
 		};
+
+		if ( deps.processed ) {
+			this._addWidget( widget );
+		}
 
 		return this;
 	},
@@ -70,11 +76,11 @@ $.extend( Enhancer.prototype, {
 			deps = this._dependencies,
 			cbs = this._callbacks;
 
-		if ( deps ) {
+		if ( !deps.processed ) {
 			for ( idx in deps ) {
 				this._addWidget( idx );
 			}
-			this._dependencies = null;
+			deps.processed = true;
 		}
 
 		for ( idx in cbs ) {
