@@ -261,8 +261,8 @@ a.ui-link-inherit {
 }
 
 .ui-body-b .ui-field-contain:after {
-	border-color: #333 /*{b-br-border-color}*/;	
-	box-shadow: 0 1px #111 /*{b-br-shadow}*/;	
+	border-color: #121212 /*{b-br-border-color}*/;	
+	box-shadow: 0 1px #2A2A2A /*{b-br-shadow}*/;	
 }
 
 .ui-btn-b {
