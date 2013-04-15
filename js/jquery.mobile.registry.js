@@ -9,12 +9,12 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 
 var doc = $( document );
 
-function Enhancer() {
+$.mobile._Enhancer = function() {
 	this._dependencies = {};
 	this._enhanceCount = 0;
-}
+};
 
-$.extend( Enhancer.prototype, {
+$.extend( $.mobile._Enhancer.prototype, {
 
 	_defaultCallback: function( widget ) {
 		var parts = widget.split( "." ),
@@ -82,7 +82,7 @@ $.extend( Enhancer.prototype, {
 	}
 });
 
-$.mobile._enhancer = new Enhancer();
+$.mobile._enhancer = new $.mobile._Enhancer();
 
 // Support triggering "create" on an element
 doc.bind( "create", function( e ) {
