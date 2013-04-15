@@ -51,26 +51,26 @@
 			</div><!--/container -->
 
 			<div class="container">
-				<a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="a" data-inline="true">Plus</a>
-				<a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="a" data-inline="true">Minus</a>
-				<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="a" data-inline="true">Delete</a>
-				<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="a" data-inline="true">Arrow left</a>
-				<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="a" data-inline="true">Arrow right</a>
-				<a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="a" data-inline="true">Arrow up</a>
-				<a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="a" data-inline="true">Arrow down</a>
-				<a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="a" data-inline="true">Check</a>
-				<a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="a" data-inline="true">Gear</a>
-				<a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a" data-inline="true">Refresh</a>
-				<a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="a" data-inline="true">Forward</a>
-				<a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="a" data-inline="true">Back</a>
-				<a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="a" data-inline="true">Grid</a>
-				<a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-theme="a" data-inline="true">Star</a>
-				<a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="a" data-inline="true">Alert</a>
-				<a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="a" data-inline="true">Info</a>
-		        <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="a" data-inline="true">Home</a>
-		        <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="a" data-inline="true">Search</a>
-				<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="a" data-inline="true">Bars</a>
-				<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="a" data-inline="true">Edit</a>
+				<a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-inline="true">Plus</a>
+				<a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-inline="true">Minus</a>
+				<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+				<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-inline="true">Arrow left</a>
+				<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Arrow right</a>
+				<a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-inline="true">Arrow up</a>
+				<a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-inline="true">Arrow down</a>
+				<a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-inline="true">Check</a>
+				<a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-inline="true">Gear</a>
+				<a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-inline="true">Refresh</a>
+				<a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-inline="true">Forward</a>
+				<a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-inline="true">Back</a>
+				<a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">Grid</a>
+				<a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-inline="true">Star</a>
+				<a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-inline="true">Alert</a>
+				<a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-inline="true">Info</a>
+		        <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-inline="true">Home</a>
+		        <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Search</a>
+				<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-inline="true">Bars</a>
+				<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-inline="true">Edit</a>
 			</div><!--/container -->
 
 			<div class="container">

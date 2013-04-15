@@ -19,7 +19,7 @@
 <body>
 <div data-role="page">
 
-	<div data-role="header">
+	<div data-role="header" data-theme="b">
 		<h1>Listview test</h1>
 		<a href="../../" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
 	</div><!-- /header -->
@@ -481,7 +481,7 @@
 
 	</div><!-- /content -->
 
-	<div data-role="footer">
+	<div data-role="footer" data-theme="b">
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
