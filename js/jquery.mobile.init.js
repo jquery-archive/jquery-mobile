@@ -79,6 +79,10 @@ define([
 			// define page container
 			$.mobile.pageContainer = $.mobile.firstPage.parent().addClass( "ui-mobile-viewport" );
 
+			// initialize navigation events now, after mobileinit has occurred and the page container
+			// has been created but before the rest of the library is alerted to that fact
+			$.mobile.navreadyDeferred.resolve();
+
 			// alert listeners that the pagecontainer has been determined for binding
 			// to events triggered on it
 			$window.trigger( "pagecontainercreate" );
@@ -130,9 +134,6 @@ define([
 			}
 		}
 	});
-
-	// initialize events now, after mobileinit has occurred
-	$.mobile.navreadyDeferred.resolve();
 
 	// check which scrollTop value should be used by scrolling to 1 immediately at domready
 	// then check what the scroll top is. Android will report 0... others 1
