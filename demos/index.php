@@ -73,6 +73,8 @@
         	<li><a href="test/forms-b/form-label-hidden.php" data-ajax="false">Form ui-hidden-accessible</a></li>
         	<li><a href="test/forms-b/form-disabled.php" data-ajax="false">Form disabled</a></li>
         	<li><a href="test/listviews-b/" data-ajax="false">Listviews</a></li>
+			<li data-role="list-divider">Icons</li>
+			<li><a href="test/icons/font-icons.php" data-ajax="false">Font icons</a></li>
         </ul>
 
 	</div><!-- /content -->
