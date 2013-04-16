@@ -191,9 +191,9 @@ a.ui-link-inherit {
 }
 
 .ui-btn-a:focus {
-	-moz-box-shadow: inset 0 0 3px 		#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
-	-webkit-box-shadow: inset 0 0 3px 	#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
-	box-shadow: inset 0 0 3px 			#387bbe /*{a-bactive-background-color}*/, 0 0 9px 		#387bbe /*{a-bactive-background-color}*/;
+	-moz-box-shadow: 0 0 12px 		#387bbe /*{a-bactive-background-color}*/;
+	-webkit-box-shadow: 0 0 12px 	#387bbe /*{a-bactive-background-color}*/;
+	box-shadow: 0 0 12px 			#387bbe /*{a-bactive-background-color}*/;
 }
 .ui-body-a.ui-input-text:focus,
 .ui-body-a.ui-input-search:focus {
@@ -311,9 +311,9 @@ a.ui-link-inherit {
 }
 
 .ui-btn-b:focus {
-	-moz-box-shadow: inset 0 0 3px 		#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
-	-webkit-box-shadow: inset 0 0 3px 	#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
-	box-shadow: inset 0 0 3px 			#387bbe /*{b-bactive-background-color}*/, 0 0 9px 		#387bbe /*{b-bactive-background-color}*/;
+	-moz-box-shadow: 0 0 12px 		#387bbe /*{b-bactive-background-color}*/;
+	-webkit-box-shadow: 0 0 12px 	#387bbe /*{b-bactive-background-color}*/;
+	box-shadow: 0 0 12px 			#387bbe /*{b-bactive-background-color}*/;
 }
 .ui-body-b.ui-input-text:focus,
 .ui-body-b.ui-input-search:focus {

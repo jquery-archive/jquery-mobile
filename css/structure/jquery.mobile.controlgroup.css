@@ -35,6 +35,10 @@
 .ui-controlgroup-horizontal .ui-btn { border-right-width: 0; }
 .ui-controlgroup-horizontal .ui-btn.ui-last-child {	border-right-width: 1px; }
 
+.ui-controlgroup .ui-btn:focus {
+	z-index: 1;
+}
+
 .ui-controlgroup .ui-btn-corner-all {
 	-webkit-border-radius: 0;
 	border-radius: 0;
