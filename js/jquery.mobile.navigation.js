@@ -12,7 +12,7 @@ define( [
 	"./navigation/method",
 	"./jquery.mobile.events",
 	"./jquery.mobile.support",
-	"depend!./jquery.hashchange[jquery]",
+	"jquery.hashchange",
 	"./widgets/page",
 	"./transitions/handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");

@@ -103,7 +103,6 @@ module.exports = function( grunt ) {
 
 					exclude: [
 						"jquery",
-						"depend",
 						"json",
 						"json!../package.json"
 					],
