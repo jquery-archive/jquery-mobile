@@ -89,14 +89,14 @@ $.fn.buttonMarkup = function( options ) {
 		el = $workingSet.eq( i );
 		e = el[ 0 ];
 		o = $.extend( {}, $.fn.buttonMarkup.defaults, {
-			icon:       options.icon       !== undefined ? options.icon       : getAttrFixed( e, nsKey + "icon" ),
-			iconpos:    options.iconpos    !== undefined ? options.iconpos    : getAttrFixed( e, nsKey + "iconpos" ),
-			theme:      options.theme      !== undefined ? options.theme      : getAttrFixed( e, nsKey + "theme" ) || $.mobile.getInheritedTheme( el, "c" ),
-			inline:     options.inline     !== undefined ? options.inline     : getAttrFixed( e, nsKey + "inline" ),
-			shadow:     options.shadow     !== undefined ? options.shadow     : getAttrFixed( e, nsKey + "shadow" ),
-			corners:    options.corners    !== undefined ? options.corners    : getAttrFixed( e, nsKey + "corners" ),
-			iconshadow: options.iconshadow !== undefined ? options.iconshadow : getAttrFixed( e, nsKey + "iconshadow" ),
-			mini:       options.mini       !== undefined ? options.mini       : getAttrFixed( e, nsKey + "mini" )
+			icon:       options.icon       !== undefined ? options.icon       : getAttrFixed( e, "icon", true ),
+			iconpos:    options.iconpos    !== undefined ? options.iconpos    : getAttrFixed( e, "iconpos", true ),
+			theme:      options.theme      !== undefined ? options.theme      : getAttrFixed( e, "theme", true ) || $.mobile.getInheritedTheme( el, "c" ),
+			inline:     options.inline     !== undefined ? options.inline     : getAttrFixed( e, "inline", true ),
+			shadow:     options.shadow     !== undefined ? options.shadow     : getAttrFixed( e, "shadow", true ),
+			corners:    options.corners    !== undefined ? options.corners    : getAttrFixed( e, "corners", true ),
+			iconshadow: options.iconshadow !== undefined ? options.iconshadow : getAttrFixed( e, "iconshadow", true ),
+			mini:       options.mini       !== undefined ? options.mini       : getAttrFixed( e, "mini", true )
 		}, options );
 
 		innerClass = "ui-btn-inner";
@@ -112,7 +112,7 @@ $.fn.buttonMarkup = function( options ) {
 			}
 		}
 
-		if ( getAttrFixed( e, nsKey + "rel" ) === "popup" && el.attr( "href" ) ) {
+		if ( getAttrFixed( e, "rel", true ) === "popup" && el.attr( "href" ) ) {
 			e.setAttribute( "aria-haspopup", true );
 			e.setAttribute( "aria-owns", el.attr( "href" ) );
 		}
