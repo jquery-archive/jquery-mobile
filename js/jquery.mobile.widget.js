@@ -16,10 +16,9 @@ $.widget( "mobile.widget", {
 
 		$.each( this.options, function( option ) {
 
-			var value = $.mobile.getAttribute( elem[ 0 ], "data-" + $.mobile.ns + ( option.replace( /[A-Z]/g, function( c ) {
+			var value = $.mobile.getAttribute( elem[ 0 ], option.replace( /[A-Z]/g, function( c ) {
 							return "-" + c.toLowerCase();
-						}))
-					);
+						}), true );
 
 			if ( value !== undefined ) {
 				options[ option ] = value;
