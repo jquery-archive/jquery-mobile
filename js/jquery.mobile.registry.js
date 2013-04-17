@@ -11,7 +11,6 @@ var doc = $( document );
 
 $.mobile._Enhancer = function() {
 	this._dependencies = {};
-	this._enhanceCount = 0;
 };
 
 $.extend( $.mobile._Enhancer.prototype, {
@@ -47,35 +46,32 @@ $.extend( $.mobile._Enhancer.prototype, {
 
 		deps[ widget ] = {
 			deps: widgetDeps.dependencies,
-			callback: callback,
-			enhanceCount: this._enhanceCount
+			callback: callback
 		};
 
 		return this;
 	},
 
-	_enhance: function( el, idx ) {
+	_enhance: function( el, idx, visited ) {
 		var depIdx,
-			enhanceCount = this._enhanceCount,
 			dep = this._dependencies[ idx ];
 
-		if ( dep && dep.enhanceCount !== enhanceCount ) {
+		if ( dep && !visited[ idx ] ) {
 			for ( depIdx in dep.deps ) {
-				this._enhance( el, dep.deps[ depIdx ] );
+				this._enhance( el, dep.deps[ depIdx ], visited );
 			}
 			dep.callback( el );
-			dep.enhanceCount = enhanceCount;
+			visited[ idx ] = true;
 		}
 	},
 
 	enhance: function( targetEl ) {
 		var idx,
+			visited = {},
 			deps = this._dependencies;
 
-		this._enhanceCount++;
-
 		for ( idx in deps ) {
-			this._enhance( targetEl, idx );
+			this._enhance( targetEl, idx, visited );
 		}
 
 		return this;

@@ -14,6 +14,13 @@ $.widget( "mobile.page", $.mobile.widget, {
 		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')"
 	},
 
+	// DEPRECATED for > 1.4
+	// TODO remove at 1.5
+	_createWidget: function() {
+		$.Widget.prototype._createWidget.apply( this, arguments );
+		this._trigger( "init" );
+	},
+
 	_create: function() {
 		// if false is returned by the callbacks do not create the page
 		if ( this._trigger( "beforecreate" ) === false ) {
