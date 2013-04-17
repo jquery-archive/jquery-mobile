@@ -156,7 +156,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
     width: auto;
 }
 
-/* disable "dismiss" on wide viewports */
+/* disable "dismiss" on wide viewports for "push" panels */
 .ui-responsive-panel .ui-panel-dismiss-display-push {
     display: none;
 }
