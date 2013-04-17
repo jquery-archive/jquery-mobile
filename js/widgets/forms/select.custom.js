@@ -352,11 +352,16 @@ define( [
 			_decideFormat: function() {
 				var self = this,
 					$window = $.mobile.window,
+					// Show popup container so that menuHeight will be reported correctly
+					popupContainer = self.listbox.parent().show(),
 					selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
 					scrollTop = $window.scrollTop(),
 					btnOffset = self.button.offset().top,
 					screenHeight = $window.height();
+
+				// Restore popup container's hidden state
+				popupContainer.hide();
 
 				function focusMenuItem() {
 					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
