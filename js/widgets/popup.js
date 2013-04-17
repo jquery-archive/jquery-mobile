@@ -233,6 +233,7 @@ define( [
 			}
 			ui.container.append( this.element );
 			ui.focusElement = ui.container;
+			ui.container.hide();
 
 			// Add class to popup element
 			this.element.addClass( "ui-popup" );
@@ -604,6 +605,8 @@ define( [
 					return false;
 				}());
 
+			this._ui.container.show();
+
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
@@ -670,6 +673,7 @@ define( [
 			var opts = this.options;
 
 			this._ui.container.removeAttr( "tabindex" );
+			this._ui.container.hide();
 
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
