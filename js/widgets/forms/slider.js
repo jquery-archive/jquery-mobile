@@ -126,7 +126,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		}
 
 		label.addClass( "ui-slider" );
-		
+
 		// monitor the input for updated values
 		control.addClass( isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
 
@@ -150,7 +150,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		// wrap in a div for styling purposes
 		if ( !isToggleSwitch && !isRangeslider ) {
 			wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
-			
+
 			control.add( slider ).wrapAll( wrapper );
 		}
 
@@ -282,7 +282,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			this.beforeStart = this.element[0].selectedIndex;
 		}
 
-		
+
 		this.refresh( event );
 		this._trigger( "start" );
 		return false;
@@ -322,7 +322,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 				return false;
 			}
 			if ( this.dragging && !this.options.disabled ) {
-				
+
 				// this.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				this.mouseMoved = true;
 
@@ -330,7 +330,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 					// make the handle move in sync with the mouse
 					this.handle.removeClass( "ui-slider-handle-snapping" );
 				}
-				
+
 				this.refresh( event );
 
 				// only after refresh() you can calculate this.userModified

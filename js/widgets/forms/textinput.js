@@ -89,7 +89,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					shadow: true,
 					mini: o.mini
 				});
-				
+
 			if ( !isSearch ) {
 				focusedEl.addClass( "ui-input-has-clear" );
 			}
@@ -127,7 +127,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					paddingTop = parseFloat( input.css( "padding-top" ) );
 					paddingBottom = parseFloat( input.css( "padding-bottom" ) );
 					paddingHeight = paddingTop + paddingBottom;
-					
+
 					input.height( scrollHeight - paddingHeight + extraLineHeight );
 				}
 			};
@@ -158,7 +158,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
 			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
-			
+
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {

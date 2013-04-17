@@ -340,7 +340,6 @@ module.exports = function( grunt ) {
 					port: httpPort,
 					base: ".",
 					middleware: function( connect, options ) {
-						/*jshint */
 						return [
 							// For requests to "[...]/js/" return the built jquery.mobile.js
 							// as opposed to the php combined version

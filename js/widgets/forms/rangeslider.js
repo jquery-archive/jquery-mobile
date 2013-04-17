@@ -35,7 +35,7 @@ define( [ "jquery",
 			_sliderLast = $.data( _inputLast.get(0), "mobileSlider" ).slider,
 			firstHandle = $.data( _inputFirst.get(0), "mobileSlider" ).handle,
 			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
-			
+
 			if ( $el.find( "label" ).length > 1 ) {
 				secondLabel = $el.find( "label" ).last().hide();
 			}
@@ -43,7 +43,7 @@ define( [ "jquery",
 			_inputFirst.addClass( "ui-rangeslider-first" );
 			_inputLast.addClass( "ui-rangeslider-last" );
 			$el.addClass( elClass );
-			
+
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
 			label.prependTo( $el );
@@ -59,7 +59,7 @@ define( [ "jquery",
 				_sliders: _sliders,
 				_proxy: false
 			});
-			
+
 			this.refresh();
 			this._on( this.element.find( "input.ui-slider-input" ), {
 				"slidebeforestart": "_slidebeforestart",
@@ -110,7 +110,7 @@ define( [ "jquery",
 
 		_slidestop: function( event ) {
 			var first = $( event.target ).is( this._inputFirst );
-			
+
 			this._proxy = false;
 			//this stops dragging of the handle and brings the active track to the front
 			//this makes clicks on the track go the the last handle used
@@ -158,8 +158,8 @@ define( [ "jquery",
 				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
 				thisSlider = first ? this._inputFirst : this._inputLast,
 				otherSlider = first ? this._inputLast : this._inputFirst;
-			
-			
+
+
 			if( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
 				thisSlider.blur();
 			} else if( event.type === "mousedown" ){
@@ -190,9 +190,9 @@ define( [ "jquery",
 				$.data( otherSlider.get(0), "mobileSlider" ).handle.css( "z-index", "" );
 				$.data( thisSlider.get(0), "mobileSlider" ).handle.css( "z-index", "" );
 			}
-			
+
 			this._updateHighlight();
-			
+
 			if ( min >= max ) {
 				return false;
 			}

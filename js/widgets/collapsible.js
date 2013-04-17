@@ -92,7 +92,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		if ( collapsibleClasses !== "" ) {
 			collapsible.addClass( collapsibleClasses );
 		}
-		
+
 		collapsibleHeading
 			//drop heading in before content
 			.insertBefore( collapsibleContent )

@@ -26,13 +26,13 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 		if ( !o.corners ) {
 			o.corners = $el.jqmData( "corners" );
 		}
-		
+
 		if ( $el.jqmData( "inset" ) !== undefined ) {
 			o.inset = $el.jqmData( "inset" );
 		}
 		o.inset = o.inset !== undefined ? o.inset : true;
 		o.corners = o.corners !== undefined ? o.corners : true;
-		
+
 		if ( !!o.corners && !!o.inset ) {
 			$el.addClass( "ui-corner-all" );
 		}

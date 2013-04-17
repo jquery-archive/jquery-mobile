@@ -93,18 +93,18 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			_wrapper: _getWrapper(),
 			_fixedToolbar: _getFixedToolbar()
 		});
-		
+
 		self._addPanelClasses();
 		self._wrapper.addClass( this.options.classes.contentWrapClosed );
 		self._fixedToolbar.addClass( this.options.classes.contentFixedToolbarClosed );
 		// add class to page so we can set "overflow-x: hidden;" for it to fix Android zoom issue
 		self._page.addClass( self.options.classes.pagePanel );
-		
+
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!self.options.animate ) {
 			this.element.addClass( self.options.classes.animate );
 		}
-		
+
 		self._bindUpdateLayout();
 		self._bindCloseEvents();
 		self._bindLinkListeners();
@@ -119,7 +119,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_createModal: function() {
 		var self = this;
-		
+
 		self._modal = $( "<div class='" + self.options.classes.modal + "' data-panelid='" + self._panelID + "'></div>" )
 			.on( "mousedown", function() {
 				self.close();
@@ -151,7 +151,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_bindCloseEvents: function() {
 		var self = this;
-		
+
 		self._closeLink.on( "click.panel" , function( e ) {
 			e.preventDefault();
 			self.close();
@@ -203,10 +203,10 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			this.element.addClass( this.options.classes.panelFixed );
 		}
 	},
-	
+
 	_bindUpdateLayout: function() {
 		var self = this;
-		
+
 		self.element.on( "updatelayout", function(/* e */) {
 			if ( self._open ) {
 				self._positionPanel();
@@ -232,11 +232,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			}
 		});
 	},
-	
+
 	_bindSwipeEvents: function() {
 		var self = this,
 			area = self._modal ? self.element.add( self._modal ) : self.element;
-		
+
 		// on swipe, close the panel
 		if( !!self.options.swipeClose ) {
 			if ( self.options.position === "left" ) {
@@ -253,7 +253,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 
 	_bindPageEvents: function() {
 		var self = this;
-			
+
 		self._page
 			// Close the panel if another panel on the page opens
 			.on( "panelbeforeopen", function( e ) {
@@ -289,38 +289,38 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				_openPanel = function() {
 					self._page.off( "panelclose" );
 					self._page.jqmData( "panel", "open" );
-					
+
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
 						self.element.add( self._wrapper ).on( self._transitionEndEvents, complete );
 					} else {
 						setTimeout( complete, 0 );
 					}
-					
+
 					if ( self.options.theme && self.options.display !== "overlay" ) {
 						self._page
 							.removeClass( self._pageTheme )
 							.addClass( "ui-body-" + self.options.theme );
 					}
-					
+
 					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen );
-					
+
 					self._positionPanel();
-					
+
 					// Fix for IE7 min-height bug
 					if ( self.options.theme && self.options.display !== "overlay" ) {
 						self._wrapper.css( "min-height", self._page.css( "min-height" ) );
 					}
-					
+
 					self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
 					self._wrapper
 						.removeClass( o.classes.contentWrapClosed )
 						.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
-						
+
 					self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentFixedToolbar );
 					self._fixedToolbar
 						.removeClass( o.classes.contentFixedToolbarClosed )
 						.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
-						
+
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
 					if ( self._modal ) {
 						self._modal.addClass( self._modalOpenClasses );
@@ -330,18 +330,18 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					self.element.add( self._wrapper ).off( self._transitionEndEvents, complete );
 
 					self._page.addClass( o.classes.pagePanelOpen );
-					
+
 					self._bindFixListener();
-					
+
 					self._trigger( "open" );
 				};
 
 			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
 				immediate = true;
 			}
-			
+
 			self._trigger( "beforeopen" );
-			
+
 			if ( self._page.jqmData( "panel" ) === "open" ) {
 				self._page.on( "panelclose", function() {
 					_openPanel();
@@ -349,7 +349,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			} else {
 				_openPanel();
 			}
-			
+
 			self._open = true;
 		}
 	},
@@ -364,12 +364,12 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					} else {
 						setTimeout( complete, 0 );
 					}
-					
+
 					self._page.removeClass( o.classes.pagePanelOpen );
 					self.element.removeClass( o.classes.panelOpen );
 					self._wrapper.removeClass( o.classes.contentWrapOpen );
 					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
-					
+
 					if ( self._modal ) {
 						self._modal.removeClass( self._modalOpenClasses );
 					}
@@ -382,23 +382,23 @@ $.widget( "mobile.panel", $.mobile.widget, {
 					}
 					self.element.add( self._wrapper ).off( self._transitionEndEvents, complete );
 					self.element.addClass( o.classes.panelClosed );
-					
+
 					self._wrapper
 						.removeClass( self._contentWrapOpenClasses )
 						.addClass( o.classes.contentWrapClosed );
-						
+
 					self._fixedToolbar
 						.removeClass( self._fixedToolbarOpenClasses )
 						.addClass( o.classes.contentFixedToolbarClosed );
-						
+
 					self._fixPanel();
 					self._unbindFixListener();
 					$.mobile.resetActivePageHeight();
-					
+
 					self._page.jqmRemoveData( "panel" );
 					self._trigger( "close" );
 				};
-				
+
 			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
 				immediate = true;
 			}
@@ -409,7 +409,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			self._open = false;
 		}
 	},
-	
+
 	toggle: function() {
 		this[ this._open ? "close" : "open" ]();
 	},
@@ -443,7 +443,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
 			}
 		}
-		
+
 		this._panelInner.children().unwrap();
 
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )

@@ -101,7 +101,7 @@ define( [
 				var self = this,
 					escapeId = function( id ) {
 						return id.replace( /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1" );
-					}
+					};
 
 				// Create list from select, update state
 				self.refresh();
