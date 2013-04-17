@@ -221,7 +221,6 @@ module.exports = function( grunt ) {
 				options: {
 					// TODO duplicated in demos.firstpass
 					processContent: function( content, srcPath ) {
-						var processedName = grunt.config.process( name );
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
 							function( match, includePath /*, offset, string */ ) {
 
@@ -341,7 +340,6 @@ module.exports = function( grunt ) {
 					port: httpPort,
 					base: '.',
 					middleware: function( connect, options ) {
-						/*jshint */
 						return [
 							// For requests to "[...]/js/" return the built jquery.mobile.js
 							// as opposed to the php combined version

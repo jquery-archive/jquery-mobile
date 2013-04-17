@@ -63,7 +63,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			$.extend( this, {
 				_thisPage: null
 			});
- 
+
 			self._addTransitionClass();
 			self._bindPageEvents();
 			self._bindToggleHandlers();
