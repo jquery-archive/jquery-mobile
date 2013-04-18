@@ -13,6 +13,7 @@
 
 define( [
 	"jquery",
+	"../jquery.mobile.links",
 	"../jquery.mobile.widget",
 	"../jquery.mobile.support",
 	"../events/navigate",
