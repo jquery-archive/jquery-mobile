@@ -82,9 +82,6 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// data-ignored
 		ignoreContentEnabled: false,
 
-		// turn of binding to the native orientationchange due to android orientation behavior
-		orientationChangeEnabled: true,
-
 		buttonMarkup: {
 			hoverDelay: 200
 		},
