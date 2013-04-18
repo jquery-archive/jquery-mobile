@@ -14,6 +14,24 @@ $( document ).bind( "pagecreate create", function( e ) {
 	$( e.target )
 		.find( "a" )
 		.jqmEnhanceable()
+		.filter( ":jqmData(rel='popup')[href][href!='']" )
+		.each( function() {
+			// Accessibility info for popups
+			var e = this,
+				href = $( this ).attr( "href" );
+
+			e.setAttribute( "aria-haspopup", true );
+			e.setAttribute( "aria-owns", href );
+			e.setAttribute( "aria-expanded", false );
+			$( document )
+				.on( "popupafteropen", href, function() {
+					e.setAttribute( "aria-expanded", true );
+				})
+				.on( "popupafterclose", href, function() {
+					e.setAttribute( "aria-expanded", false );
+				});
+		})
+		.end()
 		.not( ".ui-btn, .ui-link-inherit, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.addClass( "ui-link" );
 
