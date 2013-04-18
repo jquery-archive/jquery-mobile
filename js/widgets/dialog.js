@@ -63,10 +63,6 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 			pagebeforeshow: "_handlePageBeforeShow"
 		});
 
-		$.extend( this, {
-			_createComplete: false
-		});
-
 		this._setCloseBtn( this.options.closeBtn );
 	},
 
@@ -101,10 +97,9 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 			location = ( value === "left" ? "left" : "right" );
 			btn = $( "<a href='#' class='ui-btn-" + location + "' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
 			this.element.children().find( ":jqmData(role='header')" ).first().prepend( btn );
-			if ( this._createComplete && $.fn.buttonMarkup ) {
+			if ( $.fn.buttonMarkup ) {
 				btn.buttonMarkup();
 			}
-			this._createComplete = true;
 
 			// this must be an anonymous function so that select menu dialogs can replace
 			// the close method. This is a change from previously just defining data-rel=back
