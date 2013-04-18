@@ -107,23 +107,36 @@
 	});
 
 	asyncTest( "firing a click at least 400 ms later on the select screen overlay does close it", function(){
-		$.testHelper.sequence([
+		expect( 3 );
+
+		var prefix = ".firingAClick";
+		$.testHelper.detailedEventCascade([
 			function(){
 				// bring up the smaller choice menu
 				ok($("#select-choice-few-container a").length > 0, "there is in fact a button in the page");
 				$("#select-choice-few-container a").trigger("click");
 			},
 
-			function(){
+			{
+				popupafteropen: { src: $( "#select-choice-few\\.dotTest-listbox" ), event: "popupafteropen" + prefix },
+				timeout: { length: 1000 }
+			},
+
+			function( result ){
+				deepEqual( result.popupafteropen.timedOut, false, "Did receive 'popupafteropen'" );
 				//select the first menu item
-				$("#select-choice-few-menu a:first").click();
+				$("#select-choice-few\\.dotTest-menu a:first").click();
+			},
+
+			{
+				timeout: { length: 1000 }
 			},
 
 			function(){
-				deepEqual($("#select-choice-few-menu").parent().parent(".ui-popup-hidden").length, 1);
+				deepEqual($("#select-choice-few\\.dotTest-menu").parent().parent(".ui-popup-hidden").length, 1);
 				start();
 			}
-		], 1000);
+		]);
 	});
 
 	asyncTest( "a large select menu should use the default dialog transition", function(){
@@ -301,11 +314,11 @@
 			},
 
 			function(){
-				var firstMenuChoice = $("#select-choice-few-menu li:first");
+				var firstMenuChoice = $("#select-choice-few\\.dotTest-menu li:first");
 				ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
 						"default menu choice has the active button class" );
 
-				$("#select-choice-few-menu a:last").click();
+				$("#select-choice-few\\.dotTest-menu a:last").click();
 			},
 
 			function(){
@@ -314,7 +327,7 @@
 			},
 
 			function(){
-				var lastMenuChoice = $("#select-choice-few-menu li:last");
+				var lastMenuChoice = $("#select-choice-few\\.dotTest-menu li:last");
 				ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
 						"previously slected item has the active button class" );
 
@@ -405,7 +418,7 @@
 	});
 
 	asyncTest( "dialog size select title should match the label", function() {
-		var $select = $( "#select-choice-many-1" ),
+		var $select = $( "#select-choice-many-1\\.dotTest" ),
 			$label = $select.parent().siblings( "label" ),
 			$button = $select.siblings( "a" );
 
@@ -424,7 +437,7 @@
 	});
 
 	asyncTest( "dialog size select title should match the label when changed after the dialog markup is added to the DOM", function() {
-		var $select = $( "#select-choice-many-1" ),
+		var $select = $( "#select-choice-many-1\\.dotTest" ),
 			$label = $select.parent().siblings( "label" ),
 			$button = $select.siblings( "a" );
 
