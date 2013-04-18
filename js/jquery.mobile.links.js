@@ -4,7 +4,7 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "jquery.mobile.core", "jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
