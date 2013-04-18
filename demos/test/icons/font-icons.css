@@ -39,6 +39,7 @@ button.test-btn {
 .test-btn-inline,
 .test-btn-icon-notext {
 	display: inline-block;
+	vertical-align: middle;
 	margin-right: 1em;
 }
 button.test-btn-inline,
