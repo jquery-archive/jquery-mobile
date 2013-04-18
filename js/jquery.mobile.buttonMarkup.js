@@ -112,11 +112,6 @@ $.fn.buttonMarkup = function( options ) {
 			}
 		}
 
-		if ( getAttrFixed( e, "rel", true ) === "popup" && el.attr( "href" ) ) {
-			e.setAttribute( "aria-haspopup", true );
-			e.setAttribute( "aria-owns", el.attr( "href" ) );
-		}
-
 		// Check if this element is already enhanced
 		buttonElements = $.data( ( ( e.tagName === "INPUT" || e.tagName === "BUTTON" ) ? e.parentNode : e ), "buttonElements" );
 
