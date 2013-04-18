@@ -375,7 +375,7 @@
 	});
 
 	asyncTest( "drag should start only when clicked with left button", function(){
-		expect( 4 );
+		expect( 5 );
 
 		var control = $( "#mousedown-which-events" ),
 			widget = control.data( "mobile-slider" ),
@@ -404,6 +404,15 @@
 			},
 			function( result ) {
 				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon left button press" );
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = undefined;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "1" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon undefined button press" );
 				event = $.Event( "mousedown", { target: handle[ 0 ] } );
 				event.which = 2;
 				slider.trigger( event );

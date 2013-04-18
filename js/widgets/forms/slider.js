@@ -268,7 +268,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	_sliderVMouseDown: function( event ) {
 		// NOTE: we don't do this in refresh because we still want to
 		//       support programmatic alteration of disabled inputs
-		if ( this.options.disabled || !( event.which === 1 || event.which === 0 ) ) {
+		if ( this.options.disabled || !( event.which === 1 || event.which === 0 || event.which === undefined ) ) {
 			return false;
 		}
 		if ( this._trigger( "beforestart", event ) === false ) {
