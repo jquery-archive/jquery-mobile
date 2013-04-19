@@ -51,7 +51,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el = self.element,
 			page = $el.closest( ":jqmData(role='page')" ),
 			_getPageTheme = function() {
-				var $theme = $.data( page[0], "mobilePage" ).options.theme,
+				var $theme = $.data( page[0], "mobile-page" ).options.theme,
 				$pageThemeClass = "ui-body-" + $theme;
 				return $pageThemeClass;
 			},

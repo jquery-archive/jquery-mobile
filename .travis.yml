@@ -11,6 +11,7 @@ env:
   - JQUERIES=1.7.2
   - JQUERIES=1.8.3
   - JQUERIES=1.9.1
+  - JQUERIES=2.0.0
   - JQUERIES=git
 notifications:
   irc:
