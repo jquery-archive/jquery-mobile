@@ -81,8 +81,8 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
-		theme: "d",
-		dividerTheme: "d",
+		theme: "a",
+		dividerTheme: "a",
 		icon: false,
 		filter: true,
 		filterReveal: true,
