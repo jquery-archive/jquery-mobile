@@ -32,31 +32,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsibleHeading = $el.children( o.heading ).first(),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
-			collapsibleClasses = "",
-			handleExpandCollapse = function( event ) {
-				if ( !event.isDefaultPrevented() ) {
-					var isCollapse = ( event.type === "collapse" );
-
-					event.preventDefault();
-
-					collapsibleHeading
-						.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
-						.find( ".ui-collapsible-heading-status" )
-						.text( isCollapse ? o.expandCueText : o.collapseCueText )
-						.end()
-						.find( ".ui-icon" )
-						.toggleClass( "ui-icon-" + o.expandedIcon, !isCollapse )
-						// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
-						.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
-						.end()
-						.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
-
-					collapsible.toggleClass( "ui-collapsible-collapsed", isCollapse );
-					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
-
-					collapsibleContent.trigger( "updatelayout" );
-				}
-			};
+			collapsibleClasses = "";
 
 		// Replace collapsibleHeading if it's a legend
 		if ( collapsibleHeading.is( "legend" ) ) {
@@ -135,10 +111,15 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					theme: o.theme
 				});
 
+		$.extend( this, {
+			_collapsibleHeading: collapsibleHeading,
+			_collapsibleContent: collapsibleContent
+		});
+
 		//events
 		this._on({
-			"expand": handleExpandCollapse,
-			"collapse": handleExpandCollapse
+			"expand": "_handleExpandCollapse",
+			"collapse": "_handleExpandCollapse"
 		});
 
 		this._on( collapsibleHeading, {
@@ -158,6 +139,35 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		});
 
 		this._setOptions( this.options );
+	},
+
+	_handleExpandCollapse: function( event ) {
+		var isCollapse,
+			o = this.options;
+
+		if ( !event.isDefaultPrevented() ) {
+			isCollapse = ( event.type === "collapse" );
+
+			event.preventDefault();
+
+			this._collapsibleHeading
+				.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
+				.find( ".ui-collapsible-heading-status" )
+				.text( isCollapse ? o.expandCueText : o.collapseCueText )
+				.end()
+				.find( ".ui-icon" )
+				.toggleClass( "ui-icon-" + o.expandedIcon, !isCollapse )
+				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
+				.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
+				.end()
+				.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+
+			this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
+			this._collapsibleContent
+				.toggleClass( "ui-collapsible-content-collapsed", isCollapse )
+				.attr( "aria-hidden", isCollapse )
+				.trigger( "updatelayout" );
+		}
 	},
 
 	_setOptions: function( o ) {
