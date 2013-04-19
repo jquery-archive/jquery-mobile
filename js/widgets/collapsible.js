@@ -31,7 +31,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.children( o.heading ).first(),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
-			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
+			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set'), :mobile-collapsibleset" ).addClass( "ui-collapsible-set" ),
 			collapsibleClasses = "";
 
 		// Replace collapsibleHeading if it's a legend
