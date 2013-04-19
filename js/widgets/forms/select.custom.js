@@ -25,8 +25,7 @@ define( [
 (function( $, undefined ) {
 	var extendSelect = function( widget ) {
 
-		var select = widget.select,
-			origDestroy = widget._destroy,
+		var origDestroy = widget._destroy,
 			selectID  = widget.selectID,
 			prefix = ( selectID ? selectID : ( ( $.mobile.ns || "" ) + "uuid-" + widget.uuid ) ),
 			popupID = prefix + "-listbox",
@@ -99,7 +98,10 @@ define( [
 			placeholder: "",
 
 			build: function() {
-				var self = this;
+				var self = this,
+					escapeId = function( id ) {
+						return id.replace( /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1" );
+					};
 
 				// Create list from select, update state
 				self.refresh();
@@ -129,9 +131,9 @@ define( [
 
 						self._decideFormat();
 						if ( self.menuType === "overlay" ) {
-							self.button.attr( "href", "#" + self.popupID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+							self.button.attr( "href", "#" + escapeId( self.popupID ) ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
 						} else {
-							self.button.attr( "href", "#" + self.dialogID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+							self.button.attr( "href", "#" + escapeId( self.dialogID ) ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
 						}
 						self.isOpen = true;
 						// Do not prevent default, so the navigation may have a chance to actually open the chosen format
@@ -256,7 +258,7 @@ define( [
 				});
 
 				// Events on the popup
-				self.listbox.bind( "popupafterclose", function( event ) {
+				self.listbox.bind( "popupafterclose", function(/* event */) {
 					self.close();
 				});
 
@@ -289,17 +291,15 @@ define( [
 				return this._selectOptions().filter( ":selected:not( :jqmData(placeholder='true') )" );
 			},
 
-			refresh: function( forceRebuild , foo ) {
+			refresh: function( force ) {
 				var self = this,
-				select = this.element,
-				isMultiple = this.isMultiple,
-				indicies;
+				indices;
 
-				if (  forceRebuild || this._isRebuildRequired() ) {
+				if ( force || this._isRebuildRequired() ) {
 					self._buildList();
 				}
 
-				indicies = this.selectedIndices();
+				indices = this.selectedIndices();
 
 				self.setButtonText();
 				self.setButtonCount();
@@ -309,7 +309,7 @@ define( [
 					.attr( "aria-selected", false )
 					.each(function( i ) {
 
-						if ( $.inArray( i, indicies ) > -1 ) {
+						if ( $.inArray( i, indices ) > -1 ) {
 							var item = $( this );
 
 							// Aria selected attr
@@ -355,14 +355,16 @@ define( [
 			_decideFormat: function() {
 				var self = this,
 					$window = $.mobile.window,
+					// Show popup container so that menuHeight will be reported correctly
+					popupContainer = self.listbox.parent().show(),
 					selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
-					menuWidth = selfListParent.outerWidth(),
-					activePage = $( "." + $.mobile.activePageClass ),
 					scrollTop = $window.scrollTop(),
 					btnOffset = self.button.offset().top,
-					screenHeight = $window.height(),
-					screenWidth = $window.width();
+					screenHeight = $window.height();
+
+				// Restore popup container's hidden state
+				popupContainer.hide();
 
 				function focusMenuItem() {
 					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
@@ -413,43 +415,44 @@ define( [
 					o = this.options,
 					placeholder = this.placeholder,
 					needPlaceholder = true,
-					optgroups = [],
-					lis = [],
-					dataIcon = self.isMultiple ? "checkbox-off" : "false";
-
-				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
-
-				var $options = self.select.find( "option" ),
-					numOptions = $options.length,
-					select = this.select[ 0 ],
-					dataPrefix = 'data-' + $.mobile.ns,
-					dataIndexAttr = dataPrefix + 'option-index',
-					dataIconAttr = dataPrefix + 'icon',
-					dataRoleAttr = dataPrefix + 'role',
-					dataPlaceholderAttr = dataPrefix + 'placeholder',
+					dataIcon = this.isMultiple ? "checkbox-off" : "false",
+					$options, numOptions, select,
+					dataPrefix = "data-" + $.mobile.ns,
+					dataIndexAttr = dataPrefix + "option-index",
+					dataIconAttr = dataPrefix + "icon",
+					dataRoleAttr = dataPrefix + "role",
+					dataPlaceholderAttr = dataPrefix + "placeholder",
 					fragment = document.createDocumentFragment(),
 					isPlaceholderItem = false,
-					optGroup;
+					optGroup,
+					i,
+					option, $option, parent, text, anchor, classes,
+					optLabel, divider, item;
 
-				for (var i = 0; i < numOptions;i++, isPlaceholderItem = false) {
-					var option = $options[i],
-						$option = $( option ),
-						parent = option.parentNode,
-						text = $option.text(),
-						anchor  = document.createElement( 'a' ),
-						classes = [];
+				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
+				$options = this.select.find( "option" );
+				numOptions = $options.length;
+				select = this.select[ 0 ];
 
-					anchor.setAttribute( 'href', '#' );
+				for ( i = 0; i < numOptions;i++, isPlaceholderItem = false) {
+					option = $options[i];
+					$option = $( option );
+					parent = option.parentNode;
+					text = $option.text();
+					anchor  = document.createElement( "a" );
+					classes = [];
+
+					anchor.setAttribute( "href", "#" );
 					anchor.appendChild( document.createTextNode( text ) );
 
 					// Are we inside an optgroup?
 					if ( parent !== select && parent.nodeName.toLowerCase() === "optgroup" ) {
-						var optLabel = parent.getAttribute( 'label' );
+						optLabel = parent.getAttribute( "label" );
 						if ( optLabel !== optGroup ) {
-							var divider = document.createElement( 'li' );
-							divider.setAttribute( dataRoleAttr, 'list-divider' );
-							divider.setAttribute( 'role', 'option' );
-							divider.setAttribute( 'tabindex', '-1' );
+							divider = document.createElement( "li" );
+							divider.setAttribute( dataRoleAttr, "list-divider" );
+							divider.setAttribute( "role", "option" );
+							divider.setAttribute( "tabindex", "-1" );
 							divider.appendChild( document.createTextNode( optLabel ) );
 							fragment.appendChild( divider );
 							optGroup = optLabel;
@@ -475,19 +478,19 @@ define( [
 						}
 					}
 
-					var item = document.createElement('li');
+					item = document.createElement( "li" );
 					if ( option.disabled ) {
 						classes.push( "ui-disabled" );
-						item.setAttribute('aria-disabled',true);
+						item.setAttribute( "aria-disabled", true );
 					}
-					item.setAttribute( dataIndexAttr,i );
+					item.setAttribute( dataIndexAttr, i );
 					item.setAttribute( dataIconAttr, dataIcon );
 					if ( isPlaceholderItem ) {
 						item.setAttribute( dataPlaceholderAttr, true );
 					}
 					item.className = classes.join( " " );
-					item.setAttribute( 'role', 'option' );
-					anchor.setAttribute( 'tabindex', '-1' );
+					item.setAttribute( "role", "option" );
+					anchor.setAttribute( "tabindex", "-1" );
 					item.appendChild( anchor );
 					fragment.appendChild( item );
 				}

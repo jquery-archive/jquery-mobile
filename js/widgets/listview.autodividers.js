@@ -37,20 +37,21 @@ $.widget( "mobile.listview", $.mobile.listview, {
 	_replaceDividers: function() {
 		var i, lis, li, dividerText,
 			lastDividerText = null,
-			list = this.element;
+			list = this.element,
+			divider;
 
 		list.find( "li:jqmData(role='list-divider')" ).remove();
 
-		lis = list.find( 'li' );
+		lis = list.find( "li" );
 
 		for ( i = 0; i < lis.length ; i++ ) {
 			li = lis[ i ];
 			dividerText = this.options.autodividersSelector( $( li ) );
 
 			if ( dividerText && lastDividerText !== dividerText ) {
-				var divider = document.createElement( 'li' );
+				divider = document.createElement( "li" );
 				divider.appendChild( document.createTextNode( dividerText ) );
-				divider.setAttribute( 'data-' + $.mobile.ns + 'role', 'list-divider' );
+				divider.setAttribute( "data-" + $.mobile.ns + "role", "list-divider" );
 				li.parentNode.insertBefore( divider, li );
 			}
 

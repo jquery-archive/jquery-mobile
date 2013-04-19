@@ -6,13 +6,13 @@
 // TODO break out pushstate support test so we don't depend on the whole thing
 define([
 	"jquery",
-	"depend!../jquery.hashchange[jquery]",
+	"jquery.hashchange",
 	"./../jquery.mobile.ns",
 	"./../jquery.mobile.support" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-	var $win = $.mobile.window, self, history,
+	var $win = $.mobile.window, self,
 		dummyFnToInitNavigate = function() {
 		};
 
@@ -50,8 +50,7 @@ define([
 		popstate: function( event ) {
 			var newEvent = new $.Event( "navigate" ),
 				beforeNavigate = new $.Event( "beforenavigate" ),
-				state = event.originalEvent.state || {},
-				href = location.href;
+				state = event.originalEvent.state || {};
 
 			beforeNavigate.originalEvent = event;
 			$win.trigger( beforeNavigate );
@@ -79,7 +78,7 @@ define([
 			}, 0);
 		},
 
-		hashchange: function( event, data ) {
+		hashchange: function( event /*, data */ ) {
 			var newEvent = new $.Event( "navigate" ),
 				beforeNavigate = new $.Event( "beforenavigate" );
 
@@ -109,7 +108,7 @@ define([
 		// TODO We really only want to set this up once
 		//      but I'm not clear if there's a beter way to achieve
 		//      this with the jQuery special event structure
-		setup: function( data, namespaces ) {
+		setup: function( /* data, namespaces */ ) {
 			if( self.bound ) {
 				return;
 			}

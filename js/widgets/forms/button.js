@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup"  ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.registry"  ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -36,8 +36,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		shadow: true,
 		iconshadow: true,
 		inline: null,
-		mini: null,
-		initSelector: "button, [type='button'], [type='submit'], [type='reset']"
+		mini: null
 	},
 
 	_create: function() {
@@ -152,14 +151,14 @@ $.widget( "mobile.button", $.mobile.widget, {
 		this._setOption( "disabled", $el.prop( "disabled" ) );
 
 		// Grab the button's text element from its implementation-independent data item
-		$( this.button.data( 'buttonElements' ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
+		$( this.button.data( "buttonElements" ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
 	}
 });
 
+$.mobile.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
+
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.button.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.button" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

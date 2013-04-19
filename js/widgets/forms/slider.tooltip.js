@@ -85,7 +85,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 			// responsible for the annoying tooltip); NB we have
 			// to do it here as the jqm slider sets it every time
 			// the slider's value changes :(
-			this.handle.removeAttr( 'title' );
+			this.handle.removeAttr( "title" );
 		}
 
 		newValue = this._value();

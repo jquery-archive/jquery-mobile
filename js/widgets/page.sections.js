@@ -3,7 +3,7 @@
 //>>label: Page Sections
 //>>group: Core
 
-define( [ "jquery", "./page", "../jquery.mobile.core" ], function( jQuery ) {
+define( [ "jquery", "./page", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -18,8 +18,16 @@ $.mobile.page.prototype.options.contentTheme = null;
 //      which expects .ui-footer top be applied in its gigantic selector
 // TODO remove the buttonMarkup giant selector and move it to the various modules
 //      on which it depends
-$.mobile.document.bind( "pagecreate", function( e ) {
-	var $page = $( e.target ),
+$.mobile._enhancer.add( "mobile.pagesections", undefined, function( target ) {
+	var o, attrPrefix, pageRole, pageTheme,
+		$page = $( target ),
+		pageWidget = $page.data( "mobile-page" );
+
+		// We can only deal with page widgets
+		if ( !pageWidget ) {
+			return;
+		}
+
 		o = $page.data( "mobile-page" ).options,
 		attrPrefix = "data-" + $.mobile.ns,
 		pageRole = $page[ 0 ].getAttribute( attrPrefix + "role" ) || undefined,
@@ -36,14 +44,15 @@ $.mobile.document.bind( "pagecreate", function( e ) {
 			$headeranchors,
 			leftbtn,
 			rightbtn,
-			backBtn;
+			backBtn,
+			thisTheme;
 
 		$this.addClass( "ui-" + role );
 
 		//apply theming and markup modifications to page,header,content,footer
 		if ( role === "header" || role === "footer" ) {
 
-			var thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
+			thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
 
 			$this
 				//add theme class

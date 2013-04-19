@@ -14,12 +14,12 @@ function( jQuery ) {
 
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
-		'<div class="arrow-guide"></div>' +
-		'<div class="arrow-container' + ( ieHack ? ' ie' : '' ) + '">' +
-			'<div class="arrow">' +
-				'<div class="arrow-background"></div>' +
-			'</div>' +
-		'</div>'
+		"<div class='arrow-guide'></div>" +
+		"<div class='arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
+			"<div class='arrow'>" +
+				"<div class='arrow-background'></div>" +
+			"</div>" +
+		"</div>"
 	),
 	// Needed for transforming coordinates from screen to arrow background
 	txFactor = Math.sqrt( 2 ) / 2;

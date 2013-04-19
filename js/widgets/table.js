@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.table.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -13,8 +13,7 @@ $.widget( "mobile.table", $.mobile.widget, {
 	options: {
 		classes: {
 			table: "ui-table"
-		},
-		initSelector: ":jqmData(role='table')"
+		}
 	},
 
 	_create: function() {
@@ -39,15 +38,16 @@ $.widget( "mobile.table", $.mobile.widget, {
 			var coltally = 0,
 				$this = $( this );
 
-			$this.children().each( function( i ) {
+			$this.children().each( function() {
 				var $this = $( this ),
 					span = parseInt( $this.attr( "colspan" ), 10 ),
-					sel = ":nth-child(" + ( coltally + 1 ) + ")";
+					sel = ":nth-child(" + ( coltally + 1 ) + ")",
+					j;
 
 				$this.jqmData( "colstart", coltally + 1 );
 
 				if( span ) {
-					for( var j = 0; j < span - 1; j++ ) {
+					for( j = 0; j < span - 1; j++ ) {
 						coltally++;
 						sel += ", :nth-child(" + ( coltally + 1 ) + ")";
 					}
@@ -63,10 +63,10 @@ $.widget( "mobile.table", $.mobile.widget, {
 	}
 });
 
+$.mobile.table.initSelector = ":jqmData(role='table')";
+
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.table.prototype.enhanceWithin( e.target );
-});
+$.mobile._enhancer.add( "mobile.table" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -40,7 +40,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-qunit-junit" );
 
 	// load the project's default tasks
-	grunt.loadTasks( 'build/tasks');
+	grunt.loadTasks( "build/tasks");
 
 	// Project configuration.
 	grunt.config.init({
@@ -103,7 +103,6 @@ module.exports = function( grunt ) {
 
 					exclude: [
 						"jquery",
-						"depend",
 						"json",
 						"json!../package.json"
 					],
@@ -222,7 +221,6 @@ module.exports = function( grunt ) {
 				options: {
 					// TODO duplicated in demos.firstpass
 					processContent: function( content, srcPath ) {
-						var processedName = grunt.config.process( name );
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
 							function( match, includePath /*, offset, string */ ) {
 
@@ -242,10 +240,10 @@ module.exports = function( grunt ) {
 				]
 
 			},
-			"demos.firstpass": {
+			"demos.processed": {
 				options: {
 					processContent: function( content, srcPath ) {
-						var processedName = grunt.config.process( name );
+						var processedName = grunt.config.process( name + "<%= versionSuffix %>" );
 						content = content.replace( /_assets\/js\/">/gi, "_assets/js/index.js\">" );
 						content = content.replace( /\.\.\/js\//gi, "js/" );
 						content = content.replace( /js\/"/gi, "js/" + processedName + ".min.js\"" );
@@ -274,24 +272,9 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "index.php", "demos/**/*.php", "!demos/examples/redirect/**" ],
+						src: [ "index.php", "demos/**/*.php", "demos/**/*.html", "!demos/examples/redirect/**" ],
 						dest: dist,
 						ext: ".html"
-					}
-				]
-			},
-			"demos.secondpass": {
-				options: {
-					processContent: function( content /*, srcPath*/ ) {
-						content = content.replace( /\.php/gi, ".html" );
-						return content;
-					}
-				},
-				files: [
-					{
-						expand: true,
-						src: [ "demos/**/*.html", "!**/*.php", "!demos/examples/redirect/**" ],
-						dest: dist
 					}
 				]
 			},
@@ -354,9 +337,8 @@ module.exports = function( grunt ) {
 			server: {
 				options: {
 					port: httpPort,
-					base: '.',
+					base: ".",
 					middleware: function( connect, options ) {
-						/*jshint */
 						return [
 							// For requests to "[...]/js/" return the built jquery.mobile.js
 							// as opposed to the php combined version
@@ -385,7 +367,7 @@ module.exports = function( grunt ) {
 				dest: "build/test-results",
 				namer: function (url) {
 					var match = url.match(/tests\/([^\/]*)\/(.*)$/);
-					return match[2].replace(/\//g, '.').replace(/\.html/, '' ).replace(/\?/, "-");
+					return match[2].replace(/\//g, ".").replace(/\.html/, "" ).replace(/\?/, "-");
 				}
 			}
 		},
@@ -403,9 +385,8 @@ module.exports = function( grunt ) {
 						// Find the test files
 						var suites = _.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
 							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ),
-							patterns, paths, idx, prefixes = ["tests/unit/", "tests/integration/"],
-							onePath = "",
-							uniquePaths = [],
+							patterns, paths,
+							prefixes = ["tests/unit/", "tests/integration/"],
 							versionedPaths = [],
 							jQueries = _.without( ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ), "" );
 
@@ -524,12 +505,12 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
 	grunt.registerTask( "css", [ "config:dev", "css:release" ] );
 
-	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.firstpass", "copy:demos.secondpass", "copy:demos.unprocessed" ] );
+	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed" ] );
 
 	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
 	grunt.registerTask( "dist:release", [ "release:init", "dist" ] );
 
-	grunt.registerTask( "test", [ "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
+	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
 	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );

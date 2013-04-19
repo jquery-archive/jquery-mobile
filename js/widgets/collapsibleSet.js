@@ -5,14 +5,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastClasses" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
-	options: {
-		initSelector: ":jqmData(role='collapsible-set')"
-	},
 	_create: function() {
 		var $el = this.element.addClass( "ui-collapsible-set" ),
 			o = this.options;
@@ -29,13 +26,13 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 		if ( !o.corners ) {
 			o.corners = $el.jqmData( "corners" );
 		}
-		
+
 		if ( $el.jqmData( "inset" ) !== undefined ) {
 			o.inset = $el.jqmData( "inset" );
 		}
 		o.inset = o.inset !== undefined ? o.inset : true;
 		o.corners = o.corners !== undefined ? o.corners : true;
-		
+
 		if ( !!o.corners && !!o.inset ) {
 			$el.addClass( "ui-corner-all" );
 		}
@@ -80,10 +77,10 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
+$.mobile.collapsibleset.initSelector = ":jqmData(role='collapsible-set')";
+
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.collapsibleset.prototype.enhanceWithin( e.target );
-});
+$.mobile._enhancer.add( "mobile.collapsibleset" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

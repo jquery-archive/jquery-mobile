@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom"  ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -15,7 +15,6 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		mini: false,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
 		clearBtn: false,
 		clearSearchButtonText: null, //deprecating for 1.3...
 		clearBtnText: "clear text",
@@ -36,7 +35,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
 			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
 			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist,
-			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" );
+			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" ),
+			extraLineHeight = 15,
+			keyupTimeoutBuffer = 100,
+			keyupTimeout;
 
 		function toggleClear() {
 			setTimeout( function() {
@@ -87,7 +89,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					shadow: true,
 					mini: o.mini
 				});
-				
+
 			if ( !isSearch ) {
 				focusedEl.addClass( "ui-input-has-clear" );
 			}
@@ -95,8 +97,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			toggleClear();
 
 			input.bind( "paste cut keyup input focus change blur", toggleClear );
-		}
-		else if ( !inputNeedsWrap && !isSearch ) {
+		} else if ( !inputNeedsWrap && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
 		}
 
@@ -104,31 +105,29 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
 				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.disable( true );
-				}			
+				}
 				focusedEl.addClass( $.mobile.focusClass );
 			})
 			.blur(function() {
 				focusedEl.removeClass( $.mobile.focusClass );
 				if ( o.preventFocusZoom ) {
 					$.mobile.zoom.enable( true );
-				}				
+				}
 			});
 
 		// Autogrow
 		if ( input.is( "textarea" ) ) {
-			var extraLineHeight = 15,
-				keyupTimeoutBuffer = 100,
-				keyupTimeout;
-
 			this._keyup = function() {
 				var scrollHeight = input[ 0 ].scrollHeight,
-					clientHeight = input[ 0 ].clientHeight;
+					clientHeight = input[ 0 ].clientHeight,
+					paddingTop, paddingBottom, paddingHeight;
+
 
 				if ( clientHeight < scrollHeight ) {
-					var paddingTop = parseFloat( input.css( "padding-top" ) ),
-						paddingBottom = parseFloat( input.css( "padding-bottom" ) ),
-						paddingHeight = paddingTop + paddingBottom;
-					
+					paddingTop = parseFloat( input.css( "padding-top" ) );
+					paddingBottom = parseFloat( input.css( "padding-bottom" ) );
+					paddingHeight = paddingTop + paddingBottom;
+
 					input.height( scrollHeight - paddingHeight + extraLineHeight );
 				}
 			};
@@ -159,7 +158,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
 			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
-			
+
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
@@ -185,10 +184,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	}
 });
 
+$.mobile.textinput.initSelector = "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']";
+
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.textinput.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.textinput" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

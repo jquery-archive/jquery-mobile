@@ -3,7 +3,7 @@
 //>>label: Page Creation
 //>>group: Core
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -12,6 +12,13 @@ $.widget( "mobile.page", $.mobile.widget, {
 		theme: "a",
 		domCache: false,
 		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')"
+	},
+
+	// DEPRECATED for > 1.4
+	// TODO remove at 1.5
+	_createWidget: function() {
+		$.Widget.prototype._createWidget.apply( this, arguments );
+		this._trigger( "init" );
 	},
 
 	_create: function() {
@@ -28,9 +35,12 @@ $.widget( "mobile.page", $.mobile.widget, {
 			pagebeforehide: "removeContainerBackground",
 			pagebeforeshow: "_handlePageBeforeShow"
 		});
+
+		// enhance the page
+		$.mobile._enhancer.enhance( this.element[ 0 ] );
 	},
 
-	_handlePageBeforeShow: function( e ) {
+	_handlePageBeforeShow: function(/* e */) {
 		this.setContainerBackground();
 	},
 

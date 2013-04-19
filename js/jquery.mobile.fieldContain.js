@@ -5,12 +5,12 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.fieldcontain.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery" ], function( jQuery ) {
+define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 // filter function removes whitespace between label and form element so we can use inline-block (nodeType 3 = text)
-$.fn.fieldcontain = function( options ) {
+$.fn.fieldcontain = function(/* options */) {
 	return this
 		.addClass( "ui-field-contain ui-body" )
 		.contents().filter( function() {
@@ -19,8 +19,8 @@ $.fn.fieldcontain = function( options ) {
 };
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
-	$( ":jqmData(role='fieldcontain')", e.target ).jqmEnhanceable().fieldcontain();
+$.mobile._enhancer.add( "mobile.fieldcontain", undefined, function( target ) {
+	$( ":jqmData(role='fieldcontain')", target ).jqmEnhanceable().fieldcontain();
 });
 
 })( jQuery );

@@ -122,11 +122,17 @@
 	});
 
 	asyncTest( "Popup opens and closes", function() {
-		var $popup = $( "#test-popup" );
-		expect( 9 );
+		var $popup = $( "#test-popup" ),
+			link = $( "a#open-test-popup" )[ 0 ];
+
+		expect( 17 );
 
 		$.testHelper.detailedEventCascade([
 			function() {
+				deepEqual( $( "#test-popup-popup:visible" ).length, 0, "Test popup is not initially :visible" );
+				deepEqual( $.mobile.getAttribute( link, "aria-haspopup" ), true, "'aria-haspopup' attribute is set to true on link that opens the popup" );
+				deepEqual( $.mobile.getAttribute( link, "aria-owns" ), "#test-popup", "'aria-owns' attribute is set to the ID of the owned popup ('#test-popup')" );
+				deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), false, "'aria-expanded' attribute is set to false when the popup is not open" );
 				$popup.popup( "open" );
 			},
 
@@ -137,6 +143,9 @@
 
 			function( result ) {
 				var theOffset = $( "#test-popup p" ).offset();
+
+				deepEqual( $( "#test-popup-popup:visible" ).length, 1, "Test popup is :visible when open" );
+				deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), true, "'aria-expanded' attribute is set to true when the popup is open" );
 				ok( !$popup.parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
 				ok( $popup.attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
 				ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
@@ -155,6 +164,8 @@
 			},
 
 			function( result) {
+				deepEqual( $( "#test-popup-popup:visible" ).length, 0, "Test popup is not :visible after it is closed" );
+				deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), false, "'aria-expanded' attribute is set to false when the popup is not open" );
 				ok( !$popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
 				ok( $popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
 				ok( !$popup.parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );

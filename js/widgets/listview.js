@@ -5,14 +5,15 @@
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "./page", "./page.sections", "./addFirstLastClasses" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "./page", "./page.sections", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 //Keeps track of the number of lists per page UID
 //This allows support for multiple nested list in the same page
 //https://github.com/jquery/jquery-mobile/issues/1617
-var listCountPerPage = {};
+var listCountPerPage = {},
+	getAttr = $.mobile.getAttribute;
 
 $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
@@ -26,8 +27,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		splitTheme: "a",
 		corners: true,
 		shadow: true,
-		inset: false,
-		initSelector: ":jqmData(role='listview')"
+		inset: false
 	},
 
 	_create: function() {
@@ -102,18 +102,18 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 		var o = this.options,
 			$list = this.element,
-			self = this,
-			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
-			listsplittheme = $list.jqmData( "splittheme" ),
-			listspliticon = $list.jqmData( "spliticon" ),
-			listicon = $list.jqmData( "icon" ),
+			dividertheme = getAttr( $list[ 0 ], "dividertheme", true ) || o.dividerTheme,
+			listsplittheme = getAttr( $list[ 0 ], "splittheme", true ),
+			listspliticon = getAttr( $list[ 0 ], "spliticon", true ),
+			listicon = getAttr( $list[ 0 ], "icon", true ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
 			jsCount = !$.support.cssPseudoElement,
 			start = $list.attr( "start" ),
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, imgParents, img, linkIcon;
+			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, linkIcon,
+			pos, numli, isDivider;
 
 		if ( ol && jsCount ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -137,18 +137,18 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			o.theme = $.mobile.getInheritedTheme( this.element, "a" );
 		}
 
-		for ( var pos = 0, numli = li.length; pos < numli; pos++ ) {
+		for ( pos = 0, numli = li.length; pos < numli; pos++ ) {
 			item = li.eq( pos );
 			itemClass = "ui-li";
 
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
-				itemTheme = item.jqmData( "theme" ) || o.theme;
+				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
-				var isDivider = ( item.jqmData( "role" ) === "list-divider" );
+				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
 
 				if ( a.length && !isDivider ) {
-					icon = item.jqmData( "icon" );
+					icon = getAttr( item[ 0 ], "icon", true );
 
 					item.buttonMarkup({
 						wrapperEls: "div",
@@ -169,8 +169,8 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						itemClass += " ui-li-has-alt";
 
 						last = a.last();
-						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
-						linkIcon = last.jqmData( "icon" );
+						splittheme = listsplittheme || getAttr( last[ 0 ], "theme", true ) || o.splitTheme;
+						linkIcon = getAttr( last[ 0 ], "icon", true );
 
 						last.appendTo( item )
 							.attr( "title", $.trim(last.getEncodedText()) )
@@ -197,7 +197,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					}
 				} else if ( isDivider ) {
 
-					itemClass += " ui-li-divider ui-bar-" + ( item.jqmData( "theme" ) || dividertheme );
+					itemClass += " ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || dividertheme );
 					item.attr( "role", "heading" );
 
 					if ( ol ) {
@@ -262,7 +262,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 			.find( ".ui-li-count" ).each(function() {
 					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-				}).addClass( "ui-btn-up-" + ( $list.jqmData( "counttheme" ) || this.options.countTheme) + " ui-btn-corner-all" );
+				}).addClass( "ui-btn-up-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-btn-corner-all" );
 
 		// The idea here is to look at the first image in the list item
 		// itself, and any .ui-link-inherit element it may contain, so we
@@ -286,20 +286,36 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 	//create a string for ID/subpage url creation
 	_idStringEscape: function( str ) {
-		return str.replace(/[^a-zA-Z0-9]/g, '-');
+		return str.replace(/[^a-zA-Z0-9]/g, "-");
 	},
 
 	_createSubPages: function() {
 		var parentList = this.element,
 			parentPage = parentList.closest( ".ui-page" ),
-			parentUrl = parentPage.jqmData( "url" ),
+			parentUrl = getAttr( parentPage[ 0 ], "url", true ),
 			parentId = parentUrl || parentPage[ 0 ][ $.expando ],
 			parentListId = parentList.attr( "id" ),
 			o = this.options,
 			dns = "data-" + $.mobile.ns,
 			self = this,
-			persistentFooterID = parentPage.find( ":jqmData(role='footer')" ).jqmData( "id" ),
-			hasSubPages;
+			persistentFooter = parentPage.find( ":jqmData(role='footer')" ),
+			persistentFooterID = ( persistentFooter.length > 0 ? getAttr( persistentFooter[ 0 ], "id", true ) : undefined ),
+			hasSubPages,
+			newRemove = function( e, ui ) {
+				var nextPage = ui.nextPage, npURL,
+					prEvent = new $.Event( "pageremove" );
+
+				if ( ui.nextPage ) {
+					npURL = getAttr( nextPage[ 0 ], "url", true );
+					if ( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ) {
+						self.childPages().remove();
+						parentPage.trigger( prEvent );
+						if ( !prEvent.isDefaultPrevented() ) {
+							parentPage.removeWithDependents();
+						}
+					}
+				}
+			};
 
 		if ( typeof listCountPerPage[ parentId ] === "undefined" ) {
 			listCountPerPage[ parentId ] = -1;
@@ -308,16 +324,15 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		parentListId = parentListId || ++listCountPerPage[ parentId ];
 
 		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
-			var self = this,
-				list = $( this ),
+			var list = $( this ),
 				listId = list.attr( "id" ) || parentListId + "-" + i,
 				parent = list.parent(),
 				nodeElsFull = $( list.prevAll().toArray().reverse() ),
 				nodeEls = nodeElsFull.length ? nodeElsFull : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
 				title = nodeEls.first().getEncodedText(),//url limits to first 30 chars of text
 				id = ( parentUrl || "" ) + "&" + $.mobile.subPageUrlKey + "=" + listId,
-				theme = list.jqmData( "theme" ) || o.theme,
-				countTheme = list.jqmData( "counttheme" ) || parentList.jqmData( "counttheme" ) || o.countTheme,
+				theme = getAttr( list[ 0 ], "theme", true ) || o.theme,
+				countTheme = getAttr( list[ 0 ], "counttheme", true ) || getAttr( parentList[ 0 ], "counttheme", true ) || o.countTheme,
 				newPage, anchor;
 
 			//define hasSubPages for use in later removal
@@ -333,7 +348,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 			newPage.page();
 
-			anchor = parent.find( 'a:first' );
+			anchor = parent.find( "a:first" );
 
 			if ( !anchor.length ) {
 				anchor = $( "<a/>" ).html( nodeEls || title ).prependTo( parent.empty() );
@@ -348,22 +363,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		if ( hasSubPages &&
 			parentPage.is( ":jqmData(external-page='true')" ) &&
 			parentPage.data( "mobile-page" ).options.domCache === false ) {
-
-			var newRemove = function( e, ui ) {
-				var nextPage = ui.nextPage, npURL,
-					prEvent = new $.Event( "pageremove" );
-
-				if ( ui.nextPage ) {
-					npURL = nextPage.jqmData( "url" );
-					if ( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ) {
-						self.childPages().remove();
-						parentPage.trigger( prEvent );
-						if ( !prEvent.isDefaultPrevented() ) {
-							parentPage.removeWithDependents();
-						}
-					}
-				}
-			};
 
 			// unbind the original page remove and replace with our specialized version
 			parentPage
@@ -380,10 +379,10 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
+$.mobile.listview.initSelector = ":jqmData(role='listview')";
+
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.listview.prototype.enhanceWithin( e.target );
-});
+$.mobile._enhancer.add( "mobile.listview" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
