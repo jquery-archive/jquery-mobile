@@ -770,6 +770,7 @@ define( [
 		// internal state and then trigger a transition to the page.
 		var fromPage = settings.fromPage,
 			url = ( settings.dataUrl && path.convertUrlToDataUrl( settings.dataUrl ) ) || toPage.jqmData( "url" ),
+			urlParameters = ( settings.dataUrl && settings.dataUrl.replace(/^[^?]*/, "") ) || "",
 			// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
 			pageUrl = url,
 			fileUrl = path.getFilePath( url ),
@@ -909,7 +910,7 @@ define( [
 			};
 
 			if ( settings.changeHash !== false && $.mobile.hashListeningEnabled ) {
-				$.mobile.navigate( url, params, true);
+				$.mobile.navigate( url + urlParameters, params, true);
 			} else if ( toPage[ 0 ] !== $.mobile.firstPage[ 0 ] ) {
 				$.mobile.navigate.history.add( url, params );
 			}
