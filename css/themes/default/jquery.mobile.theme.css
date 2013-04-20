@@ -223,7 +223,7 @@ button,
 .ui-overlay-b {
 	border: 1px solid 		#444 /*{b-body-border}*/;
 	color: 					#fff /*{b-body-color}*/;
-	text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ 	#fff /*{b-body-shadow-color}*/;
+	text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ 	#111 /*{b-body-shadow-color}*/;
 	background: 			#222 /*{b-body-background-color}*/;
 }
 .ui-overlay-b {
