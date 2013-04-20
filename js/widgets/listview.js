@@ -221,7 +221,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					}
 
 				} else {
-					itemClass += " ui-li-static ui-btn-up-" + itemTheme;
+					itemClass += " ui-li-static ui-body-" + itemTheme;
 				}
 			}
 
