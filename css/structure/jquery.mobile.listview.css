@@ -260,22 +260,22 @@ ol.ui-listview .ui-li-desc:not(.ui-li-aside) {
 	overflow: hidden;
 	margin: -15px -15px 15px -15px;
 }
-.ui-collapsible-content .ui-listview-filter {
-	margin: -10px -15px 10px -15px;
-	border-bottom: inherit;
-}
 .ui-listview-filter-inset {
 	margin: 1em -5px -1em;
 	background: transparent;
+}
+.ui-collapsible-content .ui-listview-filter {
+	margin: -10px -15px 10px -15px;
+	border-bottom: inherit;
 }
 .ui-collapsible-content .ui-listview-filter-inset {
 	margin: -5px;
 	border-bottom-width: 0;
 }
 .ui-listview-filter .ui-input-search {
-	margin: 5px
-	 width: auto;
-	 display: block;
+	margin: 5px;
+	width: auto;
+	display: block;
 }
 .ui-li.ui-screen-hidden {
 	display:none;
