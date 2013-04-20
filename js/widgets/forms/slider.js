@@ -63,7 +63,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = [this.isToggleSwitch ? "ui-slider " : "ui-slider-track ",selectClass," ui-btn-down-",trackTheme," ui-btn-corner-all", miniClass].join( "" );
+		domSlider.className = [this.isToggleSwitch ? "ui-slider " : "ui-slider-track ",selectClass," ui-body-",trackTheme," ui-btn-corner-all", miniClass].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -111,7 +111,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 			for ( i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
 				side = !i ? "b" : "a";
-				sliderTheme = !i ? " ui-btn-down-" + trackTheme : ( " " + $.mobile.activeBtnClass );
+				sliderTheme = !i ? " ui-body-" + trackTheme : ( " " + $.mobile.activeBtnClass );
 				sliderLabel = document.createElement( "div" );
 				sliderImg = document.createElement( "span" );
 
@@ -369,7 +369,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-btn-down-" + trackTheme," ui-btn-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
+		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-body-" + trackTheme," ui-btn-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
@@ -528,8 +528,8 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 	_setTrackTheme: function( value ) {
 		this.slider
-			.removeClass( "ui-btn-down-" + this.options.trackTheme )
-			.addClass( "ui-btn-down-" + value );
+			.removeClass( "ui-body-" + this.options.trackTheme )
+			.addClass( "ui-body-" + value );
 	},
 
 	_setDisabled: function( value ) {
