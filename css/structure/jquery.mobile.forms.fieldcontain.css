@@ -4,9 +4,6 @@ fieldset.ui-field-contain {
 	margin: 0;
 	overflow: visible;
 }
-.ui-field-contain {
-	max-width: 100%; /* This prevents horizontal scrollbar in IE7 */
-}
 .ui-field-contain:after {
 	content: "";
 	display: block;
