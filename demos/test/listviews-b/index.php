@@ -55,6 +55,16 @@
 				<li><a href="#">Ferrari</a></li>
 			</ul>
 		</div><!--/container -->
+		
+		<div class="container">
+			<ol data-role="listview">
+				<li><a href="#">Acura</a></li>
+				<li><a href="#">Audi</a></li>
+				<li><a href="#">BMW</a></li>
+				<li><a href="#">Cadillac</a></li>
+				<li><a href="#">Ferrari</a></li>
+			</ol>
+		</div><!--/container -->
 
 		<div class="container">
 			<ul data-role="listview" data-inset="true">
@@ -78,7 +88,7 @@
 		</div><!--/container -->
 
 		<div class="container">
-			<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search fruits..." data-inset="true">
+			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits...">
 				<li><a href="#">Apple</a></li>
 				<li><a href="#">Banana</a></li>
 				<li><a href="#">Cherry</a></li>
@@ -100,14 +110,13 @@
 		</div><!--/container -->
 
 		<div class="container">
-			<ul data-role="listview" data-autodividers="true" data-filter="true" data-inset="true">
-				<li><a href="index.html">Adam Kinkaid</a></li>
-				<li><a href="index.html">Alex Wickerham</a></li>
-				<li><a href="index.html">Avery Johnson</a></li>
-				<li><a href="index.html">Bob Cabot</a></li>
-				<li><a href="index.html">Caleb Booth</a></li>
-				<li><a href="index.html">Christopher Adams</a></li>
-				<li><a href="index.html">Culver James</a></li>
+			<ul data-role="listview" data-divider-theme="a">
+				<li data-role="list-divider">Mail</li>
+				<li><a href="#">Inbox</a></li>
+				<li><a href="#">Outbox</a></li>
+				<li data-role="list-divider">Contacts</li>
+				<li><a href="#">Friends</a></li>
+				<li><a href="#">Work</a></li>
 			</ul>
 		</div><!--/container -->
 
@@ -163,6 +172,27 @@
 
 		<div class="container">
 			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
+				<li><a href="#">
+					<img src="../../_assets/img/album-bb.jpg" />
+					<h2>Broken Bells</h2>
+					<p>Broken Bells</p></a>
+					<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+				</li>
+				<li><a href="#">
+					<img src="../../_assets/img/album-hc.jpg" />
+					<h2>Warning</h2>
+					<p>Hot Chip</p></a>
+					<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+				</li>
+				<li><a href="#">
+					<img src="../../_assets/img/album-p.jpg" />
+					<h2>Wolfgang Amadeus Phoenix</h2>
+					<p>Phoenix</p></a>
+					<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+				</li>
+			</ul>
+			
+			<ul data-role="listview" data-split-icon="gear" data-split-theme="a">
 				<li><a href="#">
 					<img src="../../_assets/img/album-bb.jpg" />
 					<h2>Broken Bells</h2>
