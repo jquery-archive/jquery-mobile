@@ -113,7 +113,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			itemClassDict = {},
 			item, itemClass, itemTheme,
 			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, linkIcon,
-			pos, numli, isDivider;
+			pos, numli, isDivider, buttonClass;
 
 		if ( ol && jsCount ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -134,7 +134,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		}
 
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( this.element, "a" );
+			o.theme = "a";
 		}
 
 		for ( pos = 0, numli = li.length; pos < numli; pos++ ) {
@@ -150,20 +150,26 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				if ( a.length && !isDivider ) {
 					icon = getAttr( item[ 0 ], "icon", true );
 
-					item.buttonMarkup({
+					/* item.buttonMarkup({
 						wrapperEls: "div",
 						shadow: false,
 						corners: false,
 						iconpos: "right",
 						icon: a.length > 1 || icon === false ? false : icon || listicon || o.icon,
 						theme: itemTheme
-					});
-
+					}); */
+					
 					if ( ( icon !== false ) && ( a.length === 1 ) ) {
 						item.addClass( "ui-li-has-arrow" );
 					}
+					
+					buttonClass = "ui-btn";
+					
+					if ( itemTheme ) {
+						buttonClass += " ui-btn-" + itemTheme;
+					}
 
-					a.first().removeClass( "ui-link" ).addClass( "ui-link-inherit" );
+					a.first().removeClass( "ui-link" ).addClass( buttonClass );
 
 					if ( a.length > 1 ) {
 						itemClass += " ui-li-has-alt";
@@ -277,7 +283,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		// opposed to 30 seconds.
 
 		this._addThumbClasses( li );
-		this._addThumbClasses( $list.find( ".ui-link-inherit" ) );
+		this._addThumbClasses( $list.find( ".ui-btn" ) );
 
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh
