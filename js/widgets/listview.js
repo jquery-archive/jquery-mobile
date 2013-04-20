@@ -108,29 +108,16 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			listicon = getAttr( $list[ 0 ], "icon", true ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
-			jsCount = !$.support.cssPseudoElement,
 			start = $list.attr( "start" ),
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, linkIcon,
+			a, last, splittheme, startCount, newStartCount, value, countParent, icon, linkIcon,
 			pos, numli, isDivider, buttonClass;
 
-		if ( ol && jsCount ) {
-			$list.find( ".ui-li-dec" ).remove();
-		}
-
-		if ( ol ) {
-			// Check if a start attribute has been set while taking a value of 0 into account
-			if ( start || start === 0 ) {
-				if ( !jsCount ) {
-					startCount = parseInt( start , 10 ) - 1;
-					$list.css( "counter-reset", "listnumbering " + startCount );
-				} else {
-					counter = parseInt( start , 10 );
-				}
-			} else if ( jsCount ) {
-					counter = 1;
-			}
+		// Check if a start attribute has been set while taking a value of 0 into account
+		if ( ol && ( start || start === 0 ) ) {
+			startCount = parseInt( start, 10 ) - 1;
+			$list.css( "counter-reset", "listnumbering " + startCount );
 		}
 
 		if ( !o.theme ) {
@@ -145,6 +132,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			if ( create || !item.hasClass( "ui-li" ) ) {
 				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
+				value = item.attr( "value" );
 				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
 
 				if ( a.length && !isDivider ) {
@@ -170,6 +158,11 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					}
 
 					a.first().removeClass( "ui-link" ).addClass( buttonClass );
+					
+					if ( ol && value ) {
+						newStartCount = parseInt( value , 10 ) - 1;
+						a.css( "counter-reset", "listnumbering " + newStartCount );
+					}
 
 					if ( a.length > 1 ) {
 						itemClass += " ui-li-has-alt";
@@ -206,30 +199,19 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					itemClass += " ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || dividertheme );
 					item.attr( "role", "heading" );
 
-					if ( ol ) {
-						//reset counter when a divider heading is encountered
-						if ( start || start === 0 ) {
-							if ( !jsCount ) {
-								newStartCount = parseInt( start , 10 ) - 1;
-								item.css( "counter-reset", "listnumbering " + newStartCount );
-							} else {
-								counter = parseInt( start , 10 );
-							}
-						} else if ( jsCount ) {
-								counter = 1;
-						}
+					if ( ol && ( start || start === 0 ) ) {
+						newStartCount = parseInt( start , 10 ) - 1;
+						item.css( "counter-reset", "listnumbering " + newStartCount );
 					}
 
 				} else {
 					itemClass += " ui-li-static ui-body-" + itemTheme;
+					
+					if ( ol && value ) {
+						newStartCount = parseInt( value , 10 ) - 1;
+						item.css( "counter-reset", "listnumbering " + newStartCount );
+					}
 				}
-			}
-
-			if ( ol && jsCount && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-				countParent = itemClass.indexOf( "ui-li-static" ) > 0 ? item : item.find( ".ui-link-inherit" );
-
-				countParent.addClass( "ui-li-jsnumbering" )
-					.prepend( "<span class='ui-li-dec'>" + ( counter++ ) + ". </span>" );
 			}
 
 			// Instead of setting item class directly on the list item and its
