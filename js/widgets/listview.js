@@ -268,7 +268,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 			.find( ".ui-li-count" ).each(function() {
 					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-				}).addClass( "ui-btn-up-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-btn-corner-all" );
+				}).addClass( "ui-body-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-corner-all" );
 
 		// The idea here is to look at the first image in the list item
 		// itself, and any .ui-link-inherit element it may contain, so we
