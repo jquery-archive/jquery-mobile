@@ -23,13 +23,13 @@
             <a href="#" data-role="button">Link button</a>
             <input type="button" value="Button element" data-icon="delete" data-theme="b" />
             <input type="submit" value="Submit button, mini" data-icon="grid" data-iconpos="right" data-mini="true"  data-theme="a" />
-        </div><!-- /container -->
+        
 
         
             <a href="#" data-role="button" data-inline="true" data-icon="star">Inline + icon</a>
             <a href="#" data-role="button" data-inline="true" data-theme="b" data-mini="true">Mini + theme</a>
             <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="notext" data-theme="a" data-mini="true">icon only button</a>
-        </div><!-- /container -->
+        
 
         
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -37,22 +37,22 @@
                 <a href="#" data-role="button" data-icon="delete" data-theme="b">Delete</a>
                 <a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>
             </div>
-        </div><!-- /container -->
+        
 
         
             <label for="slider">Slider:</label>
             <input type="range" name="slider" id="slider" value="50" min="0" max="100" />
-        </div><!-- /container -->
+        
 
         
             <label for="slider-fill">Slider with fill and step of 50:</label>
             <input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="1000" step="50" data-highlight="true" />
-        </div><!-- /container -->
+        
 
         
             <label for="slider-fill-mini">Slider with fill, mini, track theme:</label>
             <input type="range" name="slider-fill-mini" id="slider-fill-mini" value="40" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="a" />
-        </div><!-- /container -->
+        
 
         
         <form>
@@ -63,7 +63,7 @@
                 <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="80">
             </div>
         </form>
-        </div><!-- /container -->
+        
 
 		
         <form>
@@ -75,7 +75,7 @@
             </div>
         </form>
         </form>
-        </div><!-- /container -->
+        
 
         
             <label for="slider2">Flip switch:</label>
@@ -83,7 +83,7 @@
                 <option value="off">Off</option>
                 <option value="on">On</option>
             </select>
-        </div><!-- /container -->
+        
 
         
             <label for="slider-flip-m">Mini flip switch:</label>
@@ -91,7 +91,7 @@
                 <option value="off">No</option>
                 <option value="on" selected>Yes</option>
             </select>
-        </div><!-- /container -->
+        
 
         
             <fieldset data-role="controlgroup">
@@ -108,7 +108,7 @@
                 <input type="checkbox" name="checkbox-4a" id="checkbox-4a" />
                 <label for="checkbox-4a">Sun Chips</label>
             </fieldset>
-        </div><!-- /container -->
+        
 
         
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -122,7 +122,7 @@
                 <input type="checkbox" name="checkbox-8" id="checkbox-8" />
                 <label for="checkbox-8">u</label>
             </fieldset>
-        </div><!-- /container -->
+        
 
         
                 <fieldset data-role="controlgroup">
@@ -139,7 +139,7 @@
                         <input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4"  />
                         <label for="radio-choice-4">Lizard</label>
                 </fieldset>
-        </div><!-- /container -->
+        
 
         
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -151,7 +151,7 @@
                         <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery" />
                         <label for="radio-choice-e">Gallery</label>
                 </fieldset>
-        </div><!-- /container -->
+        
 
         
             <label for="select-choice-1" class="select">Select, native menu</label>
@@ -161,7 +161,7 @@
                 <option value="express">Express: next day</option>
                 <option value="overnight">Overnight</option>
             </select>
-        </div><!-- /container -->
+        
 
 		
             <label for="select-choice-mini" class="select">Mini select, inline</label>
@@ -171,7 +171,7 @@
                 <option value="express">Express: next day</option>
                 <option value="overnight">Overnight</option>
             </select>
-        </div><!-- /container -->
+        
 
         
             <label for="select-choice-a" class="select">Custom select menu:</label>
@@ -182,7 +182,7 @@
                 <option value="express">Express: next day</option>
                 <option value="overnight">Overnight</option>
             </select>
-        </div><!-- /container -->
+        
 
         
             <label for="select-choice-8" class="select">Multi-select with optgroups, custom icon and position:</label>
@@ -201,47 +201,47 @@
                     <option value="ground">Ground</option>
                 </optgroup>
             </select>
-        </div><!-- /container -->
+        
 
         
              <label for="text-basic">Text input:</label>
              <input type="text" name="text-basic" id="text-basic" value=""  />
-        </div><!-- /container -->
+        
 
         
             <label for="textarea">Textarea:</label>
             <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
-        </div><!-- /container -->
+        
 
         
              <label for="number-pattern">Number + [0-9]* pattern:</label>
              <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="" />
-        </div><!-- /container -->
+        
 
         
              <label for="date">Date:</label>
              <input type="date" name="date" id="date" value="" />
-        </div><!-- /container -->
+        
 
         
              <label for="tel">Tel:</label>
              <input type="tel" name="tel" id="tel" value="" />
-        </div><!-- /container -->
+        
 
         
              <label for="search">Search Input:</label>
              <input type="search" name="password" id="search" value="" placeholder="Placeholder text..." />
-        </div><!-- /container -->
+        
 
         
              <label for="file">File:</label>
              <input type="file" name="file" id="file" value="" />
-        </div><!-- /container -->
+        
 
         
              <label for="password">Password:</label>
              <input type="password" name="password" id="password" value="" autocomplete="off" />
-        </div><!-- /container -->
+        
 
 		
 			<label for="textinput-hide" class="ui-hidden-accessible">Text Input:</label>
