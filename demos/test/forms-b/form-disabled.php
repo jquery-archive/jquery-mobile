@@ -21,28 +21,28 @@
     
         <form action="#" method="get">
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="textinput-1">Text Input:</label>
                     <input disabled="disabled" type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="search-1">Search Input:</label>
                     <input disabled="disabled" type="search" name="search-1" id="search-1" value="">
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="textarea-1">Textarea:</label>
                     <textarea disabled="disabled" cols="40" rows="8" name="textarea-1" id="textarea-1">Textarea</textarea>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="select-native-1">Native select:</label>
                     <select disabled="disabled" name="select-native-1" id="select-native-1">
@@ -51,9 +51,9 @@
                         <option value="large">Three</option>
                     </select>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="select-multiple-1">Custom multiple select:</label>
                     <select disabled="disabled" multiple="multiple" data-native-menu="false" name="select-multiple-1" id="select-multiple-1">
@@ -63,9 +63,9 @@
                         <option value="large">Three</option>
                     </select>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, buttons:</legend>
@@ -74,9 +74,9 @@
                         <a class="ui-disabled" href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, buttons:</legend>
@@ -85,9 +85,9 @@
                         <a class="ui-disabled" href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, select:</legend>
@@ -111,9 +111,9 @@
                         </select>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, select:</legend>
@@ -137,9 +137,9 @@
                         </select>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, mixed:</legend>
@@ -153,16 +153,16 @@
                         </select>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="slider-1">Slider:</label>
                     <input disabled="disabled" type="range" name="slider-1" id="slider-1" value="50" min="0" max="100" data-highlight="true">
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="flip-1">Flip toggle:</label>
                     <select disabled="disabled" name="flip-1" id="flip-1" data-role="slider">
@@ -170,9 +170,9 @@
                         <option value="on">On</option>
                     </select>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
                         <legend>Single checkbox:</legend>
@@ -180,9 +180,9 @@
                         <input disabled="disabled" type="checkbox" name="checkbox-1" id="checkbox-1">
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, checkbox:</legend>
@@ -194,9 +194,9 @@
                         <label for="checkbox-v-1c">Three</label>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, radio:</legend>
@@ -208,9 +208,9 @@
                         <label for="radio-choice-v-1c">Three</label>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, checkbox:</legend>
@@ -222,9 +222,9 @@
                         <label for="checkbox-h-1c">Three</label>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, radio:</legend>
@@ -236,14 +236,14 @@
                         <label for="radio-choice-h-1c">Three</label>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="submit-1">Send:</label>
                     <button disabled="disabled" type="submit" id="submit-1">Submit</button>
                 </div>
-            </div><!--/container -->
+            
     
         </form>
     
@@ -251,28 +251,28 @@
     
         <form action="#" method="get">
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="textinput-5">Text Input:</label>
                     <input disabled="disabled" type="text" name="textinput-5" id="textinput-5" placeholder="Text input" value="" data-mini="true">
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="search-5">Search Input:</label>
                     <input disabled="disabled" type="search" name="search-5" id="search-5" value="" data-mini="true">
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="textarea-5">Textarea:</label>
                     <textarea disabled="disabled" cols="40" rows="8" name="textarea-5" id="textarea-5" data-mini="true">Textarea</textarea>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="select-native-5">Native select:</label>
                     <select disabled="disabled" name="select-native-5" id="select-native-5" data-mini="true">
@@ -281,9 +281,9 @@
                         <option value="large">Three</option>
                     </select>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="select-multiple-5">Custom multiple select:</label>
                     <select disabled="disabled" multiple="multiple" data-native-menu="false" name="select-multiple-5" id="select-multiple-5" data-mini="true">
@@ -293,9 +293,9 @@
                         <option value="large">Three</option>
                     </select>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, buttons:</legend>
@@ -304,9 +304,9 @@
                         <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, buttons:</legend>
@@ -315,9 +315,9 @@
                         <a class="ui-disabled" href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, select:</legend>
@@ -341,9 +341,9 @@
                         </select>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, select:</legend>
@@ -367,9 +367,9 @@
                         </select>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, mixed:</legend>
@@ -383,16 +383,16 @@
                         </select>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="slider-5">Slider:</label>
                     <input disabled="disabled" type="range" name="slider-5" id="slider-5" value="50" min="0" max="100" data-highlight="true" data-mini="true">
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="flip-5">Flip toggle:</label>
                     <select disabled="disabled" name="flip-5" id="flip-5" data-role="slider" data-mini="true">
@@ -400,9 +400,9 @@
                         <option value="on">On</option>
                     </select>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Single checkbox:</legend>
@@ -410,9 +410,9 @@
                         <input disabled="disabled" type="checkbox" name="checkbox-5" id="checkbox-5">
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, checkbox:</legend>
@@ -424,9 +424,9 @@
                         <label for="checkbox-v-5c">Three</label>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, radio:</legend>
@@ -438,9 +438,9 @@
                         <label for="radio-choice-v-5c">Three</label>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, checkbox:</legend>
@@ -452,9 +452,9 @@
                         <label for="checkbox-h-5c">Three</label>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, radio:</legend>
@@ -466,26 +466,26 @@
                         <label for="radio-choice-h-5c">Three</label>
                     </fieldset>
                 </div>
-            </div><!--/container -->
+            
     
-            <div class="container">
+            
                 <div data-role="fieldcontain">
                     <label for="submit-5">Send:</label>
                     <button disabled="disabled" type="submit" id="submit-5" data-mini="true">Submit</button>
                 </div>
-            </div><!--/container -->
+            
     
         </form>
     
         <h2>Class ui-disabled</h2>
     
-        <div class="container">
+        
             <a href="#" data-role="button" class="ui-disabled" data-icon="arrow-r" data-iconpos="right">Link button</a>
-        </div><!--/container -->
+        
     
-        <div class="container">
+        
             <a href="#" data-role="button" class="ui-disabled" data-icon="arrow-r" data-iconpos="right" data-mini="true">Link button</a>
-        </div><!--/container -->
+        
         
     </div><!-- /content -->
 

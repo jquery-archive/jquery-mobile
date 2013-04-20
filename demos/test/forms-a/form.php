@@ -21,31 +21,31 @@
     
         <form action="#" method="get">
         
-            <div class="container">
+            
                 <label for="textinput-2">Text Input:</label>
                 <input type="text" name="textinput-2" id="textinput-2" placeholder="Text input" value="">
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="search-2">Search Input:</label>
                 <input type="search" name="search-2" id="search-2" value="">
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="textarea-2">Textarea:</label>
                 <textarea cols="40" rows="8" name="textarea-2" id="textarea-2">Textarea</textarea>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="select-native-2">Native select:</label>
                 <select name="select-native-2" id="select-native-2">
                     <option value="small">One</option>
                     <option value="medium">Two</option>
                     <option value="large">Three</option>
                 </select>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="select-multiple-2">Custom multiple select:</label>
                 <select multiple="multiple" data-native-menu="false" name="select-multiple-2" id="select-multiple-2">
                     <option value="">Choices:</option>
@@ -53,27 +53,27 @@
                     <option value="medium">Two</option>
                     <option value="large">Three</option>
                 </select>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup">
                     <legend>Vertical controlgroup, buttons:</legend>
                     <button data-icon="home" data-iconpos="right">One</button>
                     <input type="button" data-icon="back" data-iconpos="right" value="Two">
                     <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, buttons:</legend>
                     <button data-icon="home" data-iconpos="right">One</button>
                     <input type="button" data-icon="back" data-iconpos="right" value="Two">
                     <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup">
                     <legend>Vertical controlgroup, select:</legend>
                     <label for="select-v-2a">Select A</label>
@@ -95,9 +95,9 @@
                         <option value="#">Three</option>
                     </select>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, select:</legend>
                     <label for="select-h-2a">Select A</label>
@@ -119,9 +119,9 @@
                         <option value="#">Three</option>
                     </select>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, mixed:</legend>
                     <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Link</a>
@@ -133,39 +133,39 @@
                         <option value="#">Three</option>
                     </select>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="slider-2">Slider:</label>
                 <input type="range" name="slider-2" id="slider-2" value="50" min="0" max="100" data-highlight="true">
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
             <div data-role="rangeslider">
                 <label for="range-1a">Rangeslider:</label>
                 <input type="range" name="range-1a" id="range-1a" min="0" max="100" value="40">
                 <label for="range-1b">Rangeslider:</label>
                 <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="80">
             </div>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="flip-2">Flip toggle:</label>
                 <select name="flip-2" id="flip-2" data-role="slider">
                     <option value="off">Off</option>
                     <option value="on">On</option>
                 </select>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup">
                     <legend>Single checkbox:</legend>
                     <label for="checkbox-2">I agree</label>
                     <input type="checkbox" name="checkbox-2" id="checkbox-2">
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup">
                     <legend>Vertical controlgroup, checkbox:</legend>
                     <input type="checkbox" name="checkbox-v-2a" id="checkbox-v-2a">
@@ -175,9 +175,9 @@
                     <input type="checkbox" name="checkbox-v-2c" id="checkbox-v-2c">
                     <label for="checkbox-v-2c">Three</label>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup">
                     <legend>Vertical controlgroup, radio:</legend>
                     <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
@@ -187,9 +187,9 @@
                     <input type="radio" name="radio-choice-v-2" id="radio-choice-v-2c" value="other">
                     <label for="radio-choice-v-2c">Three</label>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, checkbox:</legend>
                     <input type="checkbox" name="checkbox-h-2a" id="checkbox-h-2a">
@@ -199,9 +199,9 @@
                     <input type="checkbox" name="checkbox-h-2c" id="checkbox-h-2c">
                     <label for="checkbox-h-2c">Three</label>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, radio:</legend>
                     <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
@@ -211,12 +211,12 @@
                     <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
                     <label for="radio-choice-h-2c">Three</label>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="submit-2">Send:</label>
                 <button type="submit" id="submit-2">Submit</button>
-            </div><!--/container -->
+            
         
         </form>
         
@@ -224,31 +224,31 @@
         
         <form action="#" method="get">
         
-            <div class="container">
+            
                 <label for="textinput-6">Text Input:</label>
                 <input type="text" name="textinput-6" id="textinput-6" placeholder="Text input" value="" data-mini="true">
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="search-6">Search Input:</label>
                 <input type="search" name="search-6" id="search-6" value="" data-mini="true">
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="textarea-6">Textarea:</label>
                 <textarea cols="40" rows="8" name="textarea-6" id="textarea-6" data-mini="true">Textarea</textarea>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="select-native-6">Native select:</label>
                 <select name="select-native-6" id="select-native-6" data-mini="true">
                     <option value="small">One</option>
                     <option value="medium">Two</option>
                     <option value="large">Three</option>
                 </select>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="select-multiple-6">Custom multiple select:</label>
                 <select multiple="multiple" data-native-menu="false" name="select-multiple-6" id="select-multiple-6" data-mini="true">
                     <option value="">Choices:</option>
@@ -256,27 +256,27 @@
                     <option value="medium">Two</option>
                     <option value="large">Three</option>
                 </select>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Vertical controlgroup, buttons:</legend>
                     <button data-icon="home" data-iconpos="right">One</button>
                     <input type="button" data-icon="back" data-iconpos="right" value="Two">
                     <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, buttons:</legend>
                     <button data-icon="home" data-iconpos="right">One</button>
                     <input type="button" data-icon="back" data-iconpos="right" value="Two">
                     <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Vertical controlgroup, select:</legend>
                     <label for="select-v-6a">Select A</label>
@@ -298,9 +298,9 @@
                         <option value="#">Three</option>
                     </select>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, select:</legend>
                     <label for="select-h-6a">Select A</label>
@@ -322,9 +322,9 @@
                         <option value="#">Three</option>
                     </select>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, mixed:</legend>
                     <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Link</a>
@@ -336,30 +336,30 @@
                         <option value="#">Three</option>
                     </select>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="slider-6">Slider:</label>
                 <input type="range" name="slider-6" id="slider-6" value="50" min="0" max="100" data-highlight="true" data-mini="true">
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="flip-6">Flip toggle:</label>
                 <select name="flip-6" id="flip-6" data-role="slider" data-mini="true">
                     <option value="off">Off</option>
                     <option value="on">On</option>
                 </select>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Single checkbox:</legend>
                     <label for="checkbox-6">I agree</label>
                     <input type="checkbox" name="checkbox-6" id="checkbox-6">
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Vertical controlgroup, checkbox:</legend>
                     <input type="checkbox" name="checkbox-v-6a" id="checkbox-v-6a">
@@ -369,9 +369,9 @@
                     <input type="checkbox" name="checkbox-v-6c" id="checkbox-v-6c">
                     <label for="checkbox-v-6c">Three</label>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Vertical controlgroup, radio:</legend>
                     <input type="radio" name="radio-choice-v-6" id="radio-choice-v-6a" value="on" checked="checked">
@@ -381,9 +381,9 @@
                     <input type="radio" name="radio-choice-v-6" id="radio-choice-v-6c" value="other">
                     <label for="radio-choice-v-6c">Three</label>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, checkbox:</legend>
                     <input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
@@ -393,9 +393,9 @@
                     <input type="checkbox" name="checkbox-h-6c" id="checkbox-h-6c">
                     <label for="checkbox-h-6c">Three</label>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, radio:</legend>
                     <input type="radio" name="radio-choice-h-6" id="radio-choice-h-6a" value="on" checked="checked">
@@ -405,12 +405,12 @@
                     <input type="radio" name="radio-choice-h-6" id="radio-choice-h-6c" value="other">
                     <label for="radio-choice-h-6c">Three</label>
                 </fieldset>
-            </div><!--/container -->
+            
         
-            <div class="container">
+            
                 <label for="submit-6">Send:</label>
                 <button type="submit" id="submit-6" data-mini="true">Submit</button>
-            </div><!--/container -->
+            
         
         </form>
 

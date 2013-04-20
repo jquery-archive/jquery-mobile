@@ -19,19 +19,19 @@
 
 	<div data-role="content">
 
-        <div class="container">
+        
             <a href="#" data-role="button">Link button</a>
             <input type="button" value="Button element" data-icon="delete" data-theme="b" />
             <input type="submit" value="Submit button, mini" data-icon="grid" data-iconpos="right" data-mini="true"  data-theme="a" />
         </div><!-- /container -->
 
-        <div class="container">
+        
             <a href="#" data-role="button" data-inline="true" data-icon="star">Inline + icon</a>
             <a href="#" data-role="button" data-inline="true" data-theme="b" data-mini="true">Mini + theme</a>
             <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="notext" data-theme="a" data-mini="true">icon only button</a>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
                 <a href="#" data-role="button" data-icon="plus" data-theme="b">Add</a>
                 <a href="#" data-role="button" data-icon="delete" data-theme="b">Delete</a>
@@ -39,22 +39,22 @@
             </div>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="slider">Slider:</label>
             <input type="range" name="slider" id="slider" value="50" min="0" max="100" />
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="slider-fill">Slider with fill and step of 50:</label>
             <input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="1000" step="50" data-highlight="true" />
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="slider-fill-mini">Slider with fill, mini, track theme:</label>
             <input type="range" name="slider-fill-mini" id="slider-fill-mini" value="40" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="a" />
         </div><!-- /container -->
 
-        <div class="container">
+        
         <form>
             <div data-role="rangeslider">
                 <label for="range-1a">Rangeslider:</label>
@@ -65,7 +65,7 @@
         </form>
         </div><!-- /container -->
 
-		<div class="container">
+		
         <form>
             <div data-role="rangeslider" data-mini="true">
                 <label for="range-2a">Mini rangeslider:</label>
@@ -77,7 +77,7 @@
         </form>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="slider2">Flip switch:</label>
             <select name="slider2" id="slider2" data-role="slider">
                 <option value="off">Off</option>
@@ -85,7 +85,7 @@
             </select>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="slider-flip-m">Mini flip switch:</label>
             <select name="slider-flip-m" id="slider-flip-m" data-role="slider" data-mini="true">
                 <option value="off">No</option>
@@ -93,7 +93,7 @@
             </select>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <fieldset data-role="controlgroup">
                 <legend>Checkboxes, vertical controlgroup:</legend>
                 <input type="checkbox" name="checkbox-1a" id="checkbox-1a" checked  />
@@ -110,7 +110,7 @@
             </fieldset>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                 <legend>Checkboxes, mini, horizontal controlgroup:</legend>
                 <input type="checkbox" name="checkbox-6" id="checkbox-6" />
@@ -124,7 +124,7 @@
             </fieldset>
         </div><!-- /container -->
 
-        <div class="container">
+        
                 <fieldset data-role="controlgroup">
                     <legend>Radio buttons, vertical controlgroup:</legend>
                         <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
@@ -141,7 +141,7 @@
                 </fieldset>
         </div><!-- /container -->
 
-        <div class="container">
+        
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Radio buttons, mini, horizontal controlgroup:</legend>
                         <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked" />
@@ -153,7 +153,7 @@
                 </fieldset>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="select-choice-1" class="select">Select, native menu</label>
             <select name="select-choice-1" id="select-choice-1">
                 <option value="standard">Standard: 7 day</option>
@@ -163,7 +163,7 @@
             </select>
         </div><!-- /container -->
 
-		<div class="container">
+		
             <label for="select-choice-mini" class="select">Mini select, inline</label>
             <select name="select-choice-mini" id="select-choice-mini" data-mini="true" data-inline="true">
                 <option value="standard">Standard: 7 day</option>
@@ -173,7 +173,7 @@
             </select>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="select-choice-a" class="select">Custom select menu:</label>
             <select name="select-choice-a" id="select-choice-a" data-native-menu="false">
                 <option>Custom menu example</option>
@@ -184,7 +184,7 @@
             </select>
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="select-choice-8" class="select">Multi-select with optgroups, custom icon and position:</label>
             <select name="select-choice-8" id="select-choice-8" multiple="multiple" data-native-menu="false" data-icon="grid" data-iconpos="left">
 
@@ -203,66 +203,66 @@
             </select>
         </div><!-- /container -->
 
-        <div class="container">
+        
              <label for="text-basic">Text input:</label>
              <input type="text" name="text-basic" id="text-basic" value=""  />
         </div><!-- /container -->
 
-        <div class="container">
+        
             <label for="textarea">Textarea:</label>
             <textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
         </div><!-- /container -->
 
-        <div class="container">
+        
              <label for="number-pattern">Number + [0-9]* pattern:</label>
              <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="" />
         </div><!-- /container -->
 
-        <div class="container">
+        
              <label for="date">Date:</label>
              <input type="date" name="date" id="date" value="" />
         </div><!-- /container -->
 
-        <div class="container">
+        
              <label for="tel">Tel:</label>
              <input type="tel" name="tel" id="tel" value="" />
         </div><!-- /container -->
 
-        <div class="container">
+        
              <label for="search">Search Input:</label>
              <input type="search" name="password" id="search" value="" placeholder="Placeholder text..." />
         </div><!-- /container -->
 
-        <div class="container">
+        
              <label for="file">File:</label>
              <input type="file" name="file" id="file" value="" />
         </div><!-- /container -->
 
-        <div class="container">
+        
              <label for="password">Password:</label>
              <input type="password" name="password" id="password" value="" autocomplete="off" />
         </div><!-- /container -->
 
-		<div class="container">
+		
 			<label for="textinput-hide" class="ui-hidden-accessible">Text Input:</label>
 			<input type="text" name="textinput-hide" id="textinput-hide" placeholder="Text input" value="">
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<div data-role="fieldcontain">
 				<label for="textinput-disabled">Text Input:</label>
 				<input disabled="disabled" type="text" name="textinput-disabled" id="textinput-disabled" placeholder="Text input" value="">
 			</div>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<div data-role="fieldcontain">
 				<label for="textinput-fc">Text Input:</label>
 				<input type="text" name="textinput-fc" id="textinput-fc" placeholder="Text input" value="">
 			</div>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<div data-role="fieldcontain">
 				<label for="select-native-fc">Native select:</label>
 				<select name="select-native-fc" id="select-native-fc">
@@ -271,7 +271,7 @@
 					<option value="large">Three</option>
 				</select>
 			</div>
-		</div><!--/container -->
+		
 
 	</div><!-- /content -->
 

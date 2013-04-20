@@ -19,7 +19,7 @@
 
 	<div data-role="content">
 
-			<div class="container">
+			
 				<a href="#" data-role="button">Anchor</a>
 				<form>
 					<button>Button</button>
@@ -27,30 +27,30 @@
 					<input type="submit" value="Submit">
 					<input type="reset" value="Reset">
 				</form>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<p>
 					<a href="#" data-role="button" data-inline="true">True</a>
 					<a href="#" data-role="button" data-inline="true">False</a>
 				</p>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<p>
 					<a href="#" data-role="button" data-theme="a" data-inline="true">A</a>
 					<a href="#" data-role="button" data-theme="b" data-inline="true">B</a>
 				</p>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<p>
 					<a href="#" data-role="button" data-mini="true" data-inline="true">Cancel</a>
 					<a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Place order</a>
 				</p>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-inline="true">Plus</a>
 				<a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-inline="true">Minus</a>
 				<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
@@ -71,55 +71,55 @@
 		        <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Search</a>
 				<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-inline="true">Bars</a>
 				<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-inline="true">Edit</a>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 					<a href="#" data-role="button" data-inline="true">Text only</a>
 					<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">Left</a>
 					<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Right</a>
 					<a href="#" data-role="button" data-icon="arrow-u" data-iconpos="top" data-inline="true">Top</a>
 					<a href="#" data-role="button" data-icon="arrow-d" data-iconpos="bottom" data-inline="true">Bottom</a>
 					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Icon only</a>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<div data-role="controlgroup">
 					<a href="#" data-role="button">Timeline</a>
 					<a href="#" data-role="button">Mentions</a>
 					<a href="#" data-role="button">Retweets</a>
 				</div>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<div data-role="controlgroup" data-type="horizontal">
 					<a href="#" data-role="button">Yes</a>
 					<a href="#" data-role="button">No</a>
 					<a href="#" data-role="button">Maybe</a>
 				</div>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
 				    <a href="#" data-role="button" data-iconpos="notext" data-icon="plus" data-theme="b">Add</a>
 				    <a href="#" data-role="button" data-iconpos="notext" data-icon="delete" data-theme="b">Delete</a>
 				    <a href="#" data-role="button" data-iconpos="notext" data-icon="grid" data-theme="b">More</a>
 				</div>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<a href="#" data-role="button" data-icon="gear" data-theme="b">Default</a>
 				<a href="#" data-role="button" data-icon="gear" data-corners="false" data-theme="b">No rounded corners</a>
 				<a href="#" data-role="button" data-icon="gear" data-shadow="false" data-theme="b">No button shadow</a>
 				<a href="#" data-role="button" data-icon="gear" data-iconshadow="false" data-theme="b">No icon disc shadow</a>
-			</div><!--/container -->
+			
 
-			<div class="container">
+			
 				<a href="#" data-role="button" class="ui-disabled">Disabled anchor via class</a>
 				<form>
 					<button disabled>Button with disabled attribute</button>
 					<input type="button" value="Input with disabled attribute" disabled>
 				</form>
-			</div><!--/container -->
+			
 
 	</div><!-- /content -->
 

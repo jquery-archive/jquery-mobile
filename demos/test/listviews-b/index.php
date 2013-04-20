@@ -26,7 +26,7 @@
 
 	<div data-role="content">
 
-		<div class="container">
+		
 			<ul data-role="listview">
 				<li>Acura</li>
 				<li>Audi</li>
@@ -34,9 +34,9 @@
 				<li>Cadillac</li>
 				<li>Ferrari</li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ol data-role="listview" data-inset="true">
 				<li>Acura</li>
 				<li>Audi</li>
@@ -44,9 +44,9 @@
 				<li>Cadillac</li>
 				<li>Ferrari</li>
 			</ol>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview">
 				<li><a href="#">Acura</a></li>
 				<li><a href="#">Audi</a></li>
@@ -54,9 +54,9 @@
 				<li><a href="#">Cadillac</a></li>
 				<li><a href="#">Ferrari</a></li>
 			</ul>
-		</div><!--/container -->
 		
-		<div class="container">
+		
+		
 			<ol data-role="listview">
 				<li><a href="#">Acura</a></li>
 				<li><a href="#">Audi</a></li>
@@ -64,9 +64,9 @@
 				<li><a href="#">Cadillac</a></li>
 				<li><a href="#">Ferrari</a></li>
 			</ol>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-inset="true">
 				<li><a href="#">Acura</a></li>
 				<li><a href="#">Audi</a></li>
@@ -74,9 +74,9 @@
 				<li><a href="#">Cadillac</a></li>
 				<li><a href="#">Ferrari</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
 				<li><a href="#">Apple</a></li>
 				<li><a href="#">Banana</a></li>
@@ -85,9 +85,9 @@
 				<li><a href="#">Grape</a></li>
 				<li><a href="#">Orange</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits...">
 				<li><a href="#">Apple</a></li>
 				<li><a href="#">Banana</a></li>
@@ -96,9 +96,9 @@
 				<li><a href="#">Grape</a></li>
 				<li><a href="#">Orange</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-inset="true" data-divider-theme="a">
 				<li data-role="list-divider">Mail</li>
 				<li><a href="#">Inbox</a></li>
@@ -107,9 +107,9 @@
 				<li><a href="#">Friends</a></li>
 				<li><a href="#">Work</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-divider-theme="a">
 				<li data-role="list-divider">Mail</li>
 				<li><a href="#">Inbox</a></li>
@@ -118,9 +118,9 @@
 				<li><a href="#">Friends</a></li>
 				<li><a href="#">Work</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-count-theme="a" data-inset="true">
 				<li><a href="#">Inbox <span class="ui-li-count">12</span></a></li>
 				<li><a href="#">Outbox <span class="ui-li-count">0</span></a></li>
@@ -128,9 +128,8 @@
 				<li><a href="#">Sent <span class="ui-li-count">328</span></a></li>
 				<li><a href="#">Trash <span class="ui-li-count">62</span></a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div data-demo-html="true" data-demo-css="#custom-icon">
 			<ul data-role="listview" data-inset="true" data-theme="a">
 				<li data-icon="custom" id="skull"><a href="#">custom-icon</a></li>
 				<li data-icon="delete"><a href="#">data-icon="delete"</a></li>
@@ -138,9 +137,9 @@
 				<li data-icon="info"><a href="#">data-icon="info"</a></li>
 				<li data-icon="false"><a href="#">data-icon="false"</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-inset="true">
 				<li><a href="#"><img src="../../_assets/img/gf.png" alt="France" class="ui-li-icon ui-corner-none">France</a></li>
 				<li><a href="#"><img src="../../_assets/img/de.png" alt="Germany" class="ui-li-icon">Germany</a></li>
@@ -148,9 +147,9 @@
 				<li><a href="#"><img src="../../_assets/img/fi.png" alt="Finland" class="ui-li-icon">Finland</a></li>
 				<li><a href="#"><img src="../../_assets/img/us.png" alt="United States" class="ui-li-icon ui-corner-none">United States</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-inset="true">
 				<li><a href="#">
 					<img src="../../_assets/img/album-bb.jpg" />
@@ -168,9 +167,9 @@
 					<p>Phoenix</p></a>
 				</li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
 				<li><a href="#">
 					<img src="../../_assets/img/album-bb.jpg" />
@@ -219,9 +218,9 @@
 				<a href="index.html" data-role="button" data-rel="back" data-theme="a" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
 				<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
 			</div>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-inset="true">
 				<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
 				<li><a href="index.html">
@@ -244,9 +243,9 @@
 					<p class="ui-li-aside"><strong>4:48</strong>PM</p>
 				</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 
 			<ul data-role="listview" data-inset="true" data-theme="a" data-divider-theme="a" data-count-theme="a">
 				<li data-role="list-divider">Divider</li>
@@ -254,9 +253,9 @@
 				<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
 				<li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-split-icon="plus" data-theme="a" data-split-theme="a" data-split-icon="plus" data-inset="true">
 				<li><a href="#">
 					<h2>Broken Bells</h2>
@@ -267,9 +266,9 @@
 					<a href="#purchase" data-theme="a" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 				</li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-inset="true" class="ui-icon-alt">
 				<li><a href="#">Acura</a></li>
 				<li><a href="#">Audi</a></li>
@@ -277,9 +276,9 @@
 				<li><a href="#">Cadillac</a></li>
 				<li><a href="#">Ferrari</a></li>
 			</ul>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<form>
 				<ul data-role="listview" data-inset="true">
 					<li data-role="fieldcontain">
@@ -319,9 +318,9 @@
 					</li>
 				</ul>
 			</form>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<div data-role="collapsible" data-theme="a" data-content-theme="a">
 				<h2>Choose a car model...</h2>
 				<ul data-role="listview" data-filter="true">
@@ -337,9 +336,9 @@
 					<li><a href="index.html">Honda</a></li>
 				</ul>
 			</div>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<div data-role="collapsible-set" data-theme="a" data-content-theme="a">
 				<div data-role="collapsible">
 					<h2>Filtered list</h2>
@@ -393,9 +392,9 @@
 					</ul>
 				</div>
 			</div>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-inset="false">
 				<div data-role="collapsible">
 					<h2>Mailbox</h2>
@@ -452,9 +451,9 @@
 					</ul>
 				</div>
 			</div>
-		</div><!--/container -->
+		
 
-		<div class="container">
+		
 			<ul data-role="listview" data-header-theme="a">
 				<li>Animals
 					<ul>
@@ -507,7 +506,7 @@
 					</ul>
 				</li>
 			</ul>
-		</div><!--/container -->
+		
 
 	</div><!-- /content -->
 
