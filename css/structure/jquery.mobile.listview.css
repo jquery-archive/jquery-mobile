@@ -192,7 +192,7 @@
 	text-align: right;
 	margin: .3em 0;
 }
-@media all and (min-width: 28em) {
+@media (min-width: 28em) {
 	 .ui-li-aside { width: 45%; }
 }	 
 ol.ui-listview,

@@ -14,7 +14,7 @@ fieldset.ui-field-contain {
 .ui-li.ui-field-contain:after {
 	content: none;
 }
-@media all and (min-width: 28em){
+@media (min-width: 28em) {
 	.ui-field-contain,
 	.ui-mobile fieldset.ui-field-contain {
 		border-width: 0;

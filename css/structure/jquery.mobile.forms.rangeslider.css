@@ -65,7 +65,7 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 	height: 12px;
 }
 
-@media all and (min-width: 28em){
+@media (min-width: 28em) {
 	.ui-field-contain .ui-rangeslider label.ui-slider {
 		float: left;
 	}

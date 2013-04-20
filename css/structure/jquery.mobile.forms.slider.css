@@ -176,7 +176,7 @@ div.ui-slider-switch.ui-mini {
 	text-indent: 1.5em;
 }
 
-@media all and (min-width: 28em){
+@media (min-width: 28em) {
 	.ui-field-contain label.ui-slider {
 		vertical-align: top;
 		display: inline-block;
