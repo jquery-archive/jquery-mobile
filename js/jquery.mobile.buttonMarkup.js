@@ -7,64 +7,66 @@
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse", "./jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
+
 (function( $, undefined ) {
 
-// This function calls getAttribute, which should be safe for data-* attributes
-var getAttrFixed = $.mobile.getAttribute,
-	attachEvents = function() {
-		var hoverDelay = $.mobile.buttonMarkup.hoverDelay, hov, foc;
-
-		$.mobile.document.bind( {
-			"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
-				var theme,
-					$btn = $( closestEnabledButton( event.target ) ),
-					isTouchEvent = event.originalEvent && /^touch/.test( event.originalEvent.type ),
-					evt = event.type;
-
-				if ( $btn.length ) {
-					theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-
-					if ( evt === "vmousedown" ) {
-						if ( isTouchEvent ) {
-							// Use a short delay to determine if the user is scrolling before highlighting
-							hov = setTimeout( function() {
+	// This function calls getAttribute, which should be safe for data-* attributes
+	var getAttrFixed = $.mobile.getAttribute/*,
+		attachEvents = function() {
+			
+			var hoverDelay = $.mobile.buttonMarkup.hoverDelay, hov, foc;
+	
+			$.mobile.document.bind({
+				"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
+					var theme,
+						$btn = $( closestEnabledButton( event.target ) ),
+						isTouchEvent = event.originalEvent && /^touch/.test( event.originalEvent.type ),
+						evt = event.type;
+	
+					if ( $btn.length ) {
+						theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
+	
+						if ( evt === "vmousedown" ) {
+							if ( isTouchEvent ) {
+								// Use a short delay to determine if the user is scrolling before highlighting
+								hov = setTimeout( function() {
+									updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-down-" + theme, undefined, "down" );
+								}, hoverDelay );
+							} else {
 								updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-down-" + theme, undefined, "down" );
-							}, hoverDelay );
-						} else {
-							updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-down-" + theme, undefined, "down" );
-						}
-					} else if ( evt === "vmousecancel" || evt === "vmouseup" ) {
-						updateButtonClass( $btn, "ui-btn-down-" + theme, "ui-btn-up-" + theme, undefined, "up" );
-					} else if ( evt === "vmouseover" || evt === "focus" ) {
-						if ( isTouchEvent ) {
-							// Use a short delay to determine if the user is scrolling before highlighting
-							foc = setTimeout( function() {
+							}
+						} else if ( evt === "vmousecancel" || evt === "vmouseup" ) {
+							updateButtonClass( $btn, "ui-btn-down-" + theme, "ui-btn-up-" + theme, undefined, "up" );
+						} else if ( evt === "vmouseover" || evt === "focus" ) {
+							if ( isTouchEvent ) {
+								// Use a short delay to determine if the user is scrolling before highlighting
+								foc = setTimeout( function() {
+									updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-hover-" + theme, true, "" );
+								}, hoverDelay );
+							} else {
 								updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-hover-" + theme, true, "" );
-							}, hoverDelay );
-						} else {
-							updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-hover-" + theme, true, "" );
-						}
-					} else if ( evt === "vmouseout" || evt === "blur" || evt === "scrollstart" ) {
-						updateButtonClass( $btn, "ui-btn-hover-" + theme  + " ui-btn-down-" + theme, "ui-btn-up-" + theme, false, "up" );
-						if ( hov ) {
-							clearTimeout( hov );
-						}
-						if ( foc ) {
-							clearTimeout( foc );
+							}
+						} else if ( evt === "vmouseout" || evt === "blur" || evt === "scrollstart" ) {
+							updateButtonClass( $btn, "ui-btn-hover-" + theme  + " ui-btn-down-" + theme, "ui-btn-up-" + theme, false, "up" );
+							if ( hov ) {
+								clearTimeout( hov );
+							}
+							if ( foc ) {
+								clearTimeout( foc );
+							}
 						}
 					}
+				},
+				"focusin focus": function( event ) {
+					$( closestEnabledButton( event.target ) ).addClass( $.mobile.focusClass );
+				},
+				"focusout blur": function( event ) {
+					$( closestEnabledButton( event.target ) ).removeClass( $.mobile.focusClass );
 				}
-			},
-			"focusin focus": function( event ) {
-				$( closestEnabledButton( event.target ) ).addClass( $.mobile.focusClass );
-			},
-			"focusout blur": function( event ) {
-				$( closestEnabledButton( event.target ) ).removeClass( $.mobile.focusClass );
-			}
-		});
+			});
 
-		attachEvents = null;
-	};
+			attachEvents = null;
+		}*/;
 
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
@@ -133,9 +135,9 @@ $.fn.buttonMarkup = function( options ) {
 		}
 		buttonIcon = o.icon ? document.createElement( "span" ) : null;
 
-		if ( attachEvents && !buttonElements ) {
+		/*if ( attachEvents && !buttonElements ) {
 			attachEvents();
-		}
+		}*/
 
 		// if not, try to find closest theme container
 		if ( !o.theme ) {
@@ -252,7 +254,7 @@ function closestEnabledButton( element ) {
     return element;
 }
 
-function updateButtonClass( $btn, classToRemove, classToAdd, hover, state ) {
+/*function updateButtonClass( $btn, classToRemove, classToAdd, hover, state ) {
 	var buttonElements = $.data( $btn[ 0 ], "buttonElements" );
 	$btn.removeClass( classToRemove ).addClass( classToAdd );
 	if ( buttonElements ) {
@@ -265,7 +267,7 @@ function updateButtonClass( $btn, classToRemove, classToAdd, hover, state ) {
 		}
 		buttonElements.state = state;
 	}
-}
+}*/
 
 //links in bars, or those with  data-role become buttons
 //auto self-init widgets
