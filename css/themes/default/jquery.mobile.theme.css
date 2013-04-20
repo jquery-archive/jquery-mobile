@@ -89,25 +89,25 @@ button,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-a {
-	border: 1px solid 		#b3b3b3 /*{a-bar-border}*/;
-	background: 			#eee /*{a-bar-background-color}*/;
-	color: 					#3e3e3e /*{a-bar-color}*/;
+	border: 1px solid 		#456f9a /*{a-bar-border}*/;
+	background: 			#5e87b0 /*{a-bar-background-color}*/;
+	color: 					#fff /*{a-bar-color}*/;
 	font-weight: bold;
-	text-shadow: 0 /*{a-bar-shadow-x}*/ 1px /*{a-bar-shadow-y}*/ 0 /*{a-bar-shadow-radius}*/ #fff /*{a-bar-shadow-color}*/;
+	text-shadow: 0 /*{a-bar-shadow-x}*/ 1px /*{a-bar-shadow-y}*/ 0 /*{a-bar-shadow-radius}*/ #3e6790 /*{a-bar-shadow-color}*/;
 }
 
 .ui-bar-a a.ui-link {
-	color: #2489ce /*{a-bar-link-color}*/;
+	color: #ddf0f8 /*{a-bar-link-color}*/;
 	font-weight: bold;
 }
 .ui-bar-a a.ui-link:visited {
-    color: #2489ce /*{a-bar-link-visited}*/;
+    color: #ddf0f8 /*{a-bar-link-visited}*/;
 }
 .ui-bar-a a.ui-link:hover {
-	color: #2489ce /*{a-bar-link-hover}*/;
+	color: #ddf0f8 /*{a-bar-link-hover}*/;
 }
 .ui-bar-a a.ui-link:active {
-	color: #2489ce /*{a-bar-link-active}*/;
+	color: #ddf0f8 /*{a-bar-link-active}*/;
 }
 
 .ui-body-a,
