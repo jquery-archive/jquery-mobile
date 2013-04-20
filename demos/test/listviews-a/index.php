@@ -37,7 +37,7 @@
 		</div><!--/container -->
 
 		<div class="container">
-			<ol data-role="listview">
+			<ol data-role="listview" data-inset="true">
 				<li>Acura</li>
 				<li>Audi</li>
 				<li>BMW</li>
