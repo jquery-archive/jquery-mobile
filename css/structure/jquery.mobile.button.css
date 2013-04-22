@@ -1,15 +1,35 @@
-.ui-btn { display: block; text-align: center; cursor:pointer; position: relative; margin: .5em 0; padding: 0; }
+.ui-btn {
+	display: block;
+	text-align: center;
+	cursor:pointer;
+	position: relative;
+	margin: .5em 0;
+	padding: .7em 15px;
+}
+button.ui-btn {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 100%;
+}
+input.ui-btn-hidden {
+	padding: 0;
+}
+.ui-btn-icon-notext {
+	padding: 0;
+	text-indent: -9999px;
+	white-space: nowrap;
+}
+
 .ui-mini { margin-top: .25em; margin-bottom: .25em; }
 .ui-btn-left, .ui-btn-right, .ui-input-clear, .ui-btn-inline,
 .ui-grid-a .ui-btn, .ui-grid-b .ui-btn, .ui-grid-c .ui-btn, .ui-grid-d .ui-btn, .ui-grid-e .ui-btn, .ui-grid-solo .ui-btn { margin-right: 5px; margin-left: 5px; }
-.ui-btn-inner { font-size: 16px; padding: .6em 20px; min-width: .75em; display: block; position: relative; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; zoom: 1; }
-.ui-btn input, .ui-btn button { z-index: 2; }
+.ui-btn-inner { font-size: 16px; padding: 0; min-width: .75em; display: block; position: relative; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; zoom: 1; }
+.ui-btn input { z-index: 2; }
 .ui-btn-left, .ui-btn-right, .ui-btn-inline { display: inline-block; vertical-align: middle; }
 .ui-mobile .ui-btn-left, .ui-mobile .ui-btn-right, .ui-btn-left > .ui-btn, .ui-btn-right > .ui-btn { margin: 0; } /* .ui-mobile to increase specificity level */
 .ui-btn-block { display: block; }
-.ui-btn.ui-focus {
-	z-index: 1;
-}
+
 .ui-header > .ui-btn,
 .ui-footer > .ui-btn { display: inline-block; margin: 0; }
 .ui-header .ui-btn-block,
@@ -87,8 +107,8 @@ div.ui-btn-text { width: auto; }
 /*hiding native button,inputs */
 .ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: none; cursor: pointer; background: #fff; background: rgba(255,255,255,0); filter: Alpha(Opacity=0); opacity: .1; font-size: 1px; border: none; text-indent: -9999px; }
 /* Fixes IE/WP filter alpha opacity bugs */
-.ui-disabled .ui-btn-hidden { display: none; }
-.ui-disabled { z-index: 1; }
+.ui-state-disabled .ui-btn-hidden { display: none; }
+.ui-state-disabled { z-index: 1; }
 
 .ui-field-contain .ui-btn.ui-submit { margin: 0; }
 label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; display: block; }

@@ -890,13 +890,14 @@ button,
 
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
-.ui-disabled {
+.ui-disabled,
+.ui-state-disabled {
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 	zoom: 1;
 }
 .ui-disabled,
-.ui-disabled a {
+.ui-state-disabled {
 	cursor: default !important;
 	pointer-events: none;
 }
