@@ -32,9 +32,9 @@ $.widget( "mobile.button", $.mobile.widget, {
 		theme: null,
 		icon: null,
 		iconpos: null,
+		iconshadow: true,
 		corners: true,
 		shadow: true,
-		iconshadow: true,
 		inline: null,
 		mini: null
 	},
@@ -43,65 +43,84 @@ $.widget( "mobile.button", $.mobile.widget, {
 		var $button,
 			o = this.options,
 			$el = this.element,
-			classes = "";
+			classes = "ui-btn";
 
-		// if this is a link, check if it's been enhanced and, if not, use the right function
-		if ( $el[ 0 ].tagName === "A" ) {
-			if ( !$el.hasClass( "ui-btn" ) ) {
-				$el.buttonMarkup();
-			}
-			return;
-		}
-
-		// get the inherited theme
-		// TODO centralize for all widgets
-		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( $el, "a" );
-		}
 		o.disabled = $el.prop( "disabled" );
 		o = splitOptions( o );
-
-		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-		/* if ( $el[0].className.length ) {
-			classes = $el[0].className;
-		} */
-		if ( !!~$el[ 0 ].className.indexOf( "ui-btn-left" ) ) {
-			classes = "ui-btn-left";
+		
+		if ( !o.theme ) {
+			 o.theme = "a";
 		}
-
-		if ( !!~$el[ 0 ].className.indexOf( "ui-btn-right" ) ) {
-			classes = "ui-btn-right";
+		
+		classes += " ui-btn-" + o.theme;
+		if ( o.corners ) {
+			classes += " ui-btn-corner-all";
 		}
-
-		if ( $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
-			if ( classes ) {
-				classes += " ui-submit";
-			} else {
-				classes = "ui-submit";
+		if ( o.shadow ) {
+			classes += " ui-shadow";
+		}
+		if ( o.inline ) {
+			classes += " ui-btn-inline";
+		}
+		if ( o.mini ) {
+			classes += " ui-mini";
+		}
+		
+		if ( o.icon ) {
+			if ( !o.iconpos ) {
+				 o.iconpos = "left";
+			}
+			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
+			if ( o.iconshadow ) {
+				classes += " ui-shadow-icon";
 			}
 		}
-		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
+		
+		if ( $el[ 0 ].tagName.toLowerCase() === "input" ) {
+			var input = true;
+		}
+		
+		if ( input ) {
+			// TODO: Wwe have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+			/* if ( $el[0].className.length ) {
+				classes = $el[0].className;
+			} */
+			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-left" ) ) {
+				classes += " ui-btn-left";
+			}
+	
+			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-right" ) ) {
+				classes += " ui-btn-right";
+			}
+	
+			if ( $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
+				classes += " ui-submit";
+			}
+			$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
 
-		// Add ARIA role
-		this.button = $( "<div></div>" )
-			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )
-			.insertBefore( $el )
-			.buttonMarkup( o.btn )
-			.addClass( classes )
-			.append( $el.addClass( "ui-btn-hidden" ) );
+			this.button = $( "<div></div>" )
+				[ "text" ]( $el.val() )
+				.insertBefore( $el )
+				.addClass( classes )
+				.append( $el.addClass( "ui-btn-hidden" ) );
+				
+			$button = this.button;
+			
+			this._on( $el, {
+				focus: function() {
+					$button.addClass( $.mobile.focusClass );
+				},
+	
+				blur: function() {
+					$button.removeClass( $.mobile.focusClass );
+				}
+			});
+		} else {
+			this.button = $el.addClass( classes );
+		}
+			
 		this._setOption( "disabled", o.widget.disabled );
 
-		$button = this.button;
-
-		this._on( $el, {
-			focus: function() {
-				$button.addClass( $.mobile.focusClass );
-			},
-
-			blur: function() {
-				$button.removeClass( $.mobile.focusClass );
-			}
-		});
 	},
 
 	widget: function() {
@@ -155,7 +174,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 	}
 });
 
-$.mobile.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
+$.mobile.button.initSelector = "a:jqmData(role='button'), button, [type='button'], [type='submit'], [type='reset']";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.button" );
