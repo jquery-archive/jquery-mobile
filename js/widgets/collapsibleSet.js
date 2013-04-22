@@ -46,7 +46,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 						.closest( ".ui-collapsible" );
 					if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
 						closestCollapsible
-							.siblings( ".ui-collapsible" )
+							.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
 							.trigger( "collapse" );
 					}
 				});
