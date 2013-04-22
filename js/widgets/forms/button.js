@@ -66,6 +66,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.button = $el.addClass( classes );
 		}
 		
+		$.extend( this, {
+			buttonClasses: classes,
+			styleClasses: ""
+		});
+		
 		this.refresh( true );
 	},
 	
@@ -80,7 +85,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.element.insertBefore( $button );
 			$button.remove();
 		} else {
-			var removeClasses = $.data( $el, "buttonClasses" );
+			var removeClasses = this.buttonClasses + " " + this.styleClasses;
+			
 			this.button.removeClass( removeClasses );
 		}
 	},
@@ -96,43 +102,43 @@ $.widget( "mobile.button", $.mobile.widget, {
 	refresh: function( create ) {
 		var o = this.options,
 			$el = this.element,
-			classes = "";
+			newClasses = "";
 
 		if ( !o.theme ) {
 			 o.theme = "a";
 		}
-		classes += "ui-btn-" + o.theme;
+		newClasses += "ui-btn-" + o.theme;
 
 		if ( o.corners ) {
-			classes += " ui-btn-corner-all";
+			newClasses += " ui-btn-corner-all";
 		}
 		if ( o.shadow ) {
-			classes += " ui-shadow";
+			newClasses += " ui-shadow";
 		}
 		if ( o.inline ) {
-			classes += " ui-btn-inline";
+			newClasses += " ui-btn-inline";
 		}
 		if ( o.mini ) {
-			classes += " ui-mini";
+			newClasses += " ui-mini";
 		}
 		
 		if ( o.icon ) {
 			if ( !o.iconpos ) {
 				 o.iconpos = "left";
 			}
-			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
+			newClasses += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
 			if ( o.iconshadow ) {
-				classes += " ui-shadow-icon";
+				newClasses += " ui-shadow-icon";
 			}
 		}
 
 		if ( !create ) {
-			var removeClasses = $.data( $el, "buttonClasses" );
-			this.button.removeClass( removeClasses );
+			this.button.removeClass( this.styleClasses );
 		}
-		$.data( $el, "buttonClasses", classes );
 
-		this.button.addClass( classes );
+		this.styleClasses = newClasses;
+		
+		this.button.addClass( newClasses );
 		
 		if ( $el[ 0 ].tagName === "INPUT" && !create ) {
 			$( this.button )[ "text" ]( $el.val() ).append( $el );
