@@ -80,9 +80,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		$menuButton
 			.insertBefore( $table )
-			.buttonMarkup( {
-				theme: o.columnBtnTheme
-			});
+			.addClass( "ui-btn ui-btn-" + ( o.columnBtnTheme || $.mobile.getInheritedTheme( this.element, "a" ) ) + " ui-corner-all ui-shadow ui-mini" );
 
 		$popup
 			.insertBefore( $table )
