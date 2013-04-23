@@ -113,7 +113,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		classes += "ui-btn-" + o.theme;
 
 		if ( o.corners ) {
-			classes += " ui-btn-corner-all";
+			classes += " ui-corner-all";
 		}
 		if ( o.shadow ) {
 			classes += " ui-shadow";
