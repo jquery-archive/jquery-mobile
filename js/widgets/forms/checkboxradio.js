@@ -12,7 +12,6 @@
 define( [ "jquery",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.widget",
-	"../../jquery.mobile.buttonMarkup",
 	"../optionDemultiplexer",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -37,7 +36,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			mini = inheritAttr( input, "mini" ) || o.mini,
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
-			iconpos = inheritAttr( input, "iconpos" ),
+			iconpos = inheritAttr( input, "iconpos" ) || "left",
 			checkedClass = "ui-" + checkedState,
 			uncheckedClass = "ui-" + uncheckedState,
 			wrapper;
@@ -46,20 +45,16 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			return;
 		}
 
+		// Establish options
 		// If there's no selected theme check the data attr
 		if ( !o.theme ) {
 			o.theme = $.mobile.getInheritedTheme( this.element, "a" );
 		}
+		o.mini = inheritAttr( input, "mini" ) || o.mini;
 
 		// Expose for other methods
 		$.extend( this, {
-			//save buttonMarkup options to use them in refresh
-			buttonMarkupOptions: {
-				theme: o.theme,
-				shadow: false,
-				mini: mini,
-				iconpos: iconpos
-			},
+			iconpos: iconpos,
 			label: label,
 			inputtype: inputtype,
 			checkedClass: checkedClass,
@@ -71,8 +66,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		// Wrap the input + label in a div
 		wrapper = document.createElement( "div" );
 		wrapper.className = "ui-" + inputtype;
-
 		input.add( label ).wrapAll( wrapper );
+		label.addClass( "ui-btn ui-btn-corner-all ui-btn-icon-" + iconpos );
 
 		this._on( label, {
 			vmouseover: "_handleLabelVMouseOver",
@@ -87,6 +82,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		});
 
 		this._handleFormReset();
+		this._setOptions( o );
 		this.refresh();
 	},
 
@@ -183,19 +179,20 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	refresh: function() {
 		var input = this.element[ 0 ],
 			active = " " + $.mobile.activeBtnClass,
-			checkedClass = this.checkedClass + ( this.element.parents( ".ui-controlgroup-horizontal" ).length ? active : "" ),
-			label = this.label,
-			options = this.buttonMarkupOptions;
+			hasIcon = ( this.element.parents( ".ui-controlgroup-horizontal" ).length === 0 ),
+			checkedClass = this.checkedClass + ( hasIcon ? "" : active ),
+			label = this.label;
 
+		label
+			.toggleClass( "ui-btn-icon-" + this.iconpos, hasIcon )
+			.toggleClass( "ui-icon", hasIcon )
+			.toggleClass( "ui-icon-" + this.checkedicon, input.checked )
+			.toggleClass( "ui-icon-" + this.uncheckedicon, !input.checked );
 		if ( input.checked ) {
-			options.icon = this.checkedicon;
-			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass ).buttonMarkup( options );
+			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass );
 		} else {
-			options.icon = this.uncheckedicon;
-			label.removeClass( checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( options );
+			label.removeClass( checkedClass ).addClass( this.uncheckedClass );
 		}
-
-		this.buttonMarkupOptions = {};
 
 		if ( input.disabled ) {
 			this.disable();
@@ -205,11 +202,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	},
 
 	_setTheme: function( value ) {
-		this.label.buttonMarkup( { theme: value } );
+		this.label.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + value );
 	},
 
 	_setMini: function( value ) {
-		this.label.buttonMarkup( { mini: !!value } );
+		this.label.toggleClass( "ui-mini", !!value );
 	},
 
 	_setDisabled: function( value ) {

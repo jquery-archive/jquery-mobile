@@ -849,10 +849,7 @@ button,
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
-.ui-icon-checkbox-off,
-.ui-icon-radio-off {
-	background-color: transparent;	
-}
+
 .ui-checkbox-on .ui-icon,
 .ui-radio-on .ui-icon {
 	background-color: #4596ce /*{global-active-background-color}*/; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
