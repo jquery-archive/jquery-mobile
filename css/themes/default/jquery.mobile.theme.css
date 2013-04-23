@@ -844,14 +844,14 @@ button,
 }
 
 /* checks,radios */
-.ui-checkbox .ui-icon,
-.ui-selectmenu-list .ui-icon {
+.ui-checkbox .ui-icon:after,
+.ui-selectmenu-list .ui-icon:after {
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
 
-.ui-checkbox-on .ui-icon,
-.ui-radio-on .ui-icon {
+.ui-checkbox-on:after,
+.ui-radio-on:after {
 	background-color: #4596ce /*{global-active-background-color}*/; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
 }
 
