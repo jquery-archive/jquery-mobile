@@ -18,6 +18,48 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+	$.widget( "mobile.content", $.mobile.widget, {
+		// element should be the $.mobile.pageContainer
+
+		_create: function() {
+			// TODO roll the logic here into the handleHashChange method
+			this._on( $window, { navigate: 'filterNavigateEvents' });
+
+			// navigate binding using _on
+		},
+
+		filterNavigateEvents: function( e, data ) {
+			var url;
+
+			if ( e.originalEvent && e.originalEvent.isDefaultPrevented() ) {
+				return;
+			}
+
+			url = $.event.special.navigate.originalEventName.indexOf( "hashchange" ) > -1 ? data.state.hash : data.state.url;
+
+			if( !url ) {
+				url = $.mobile.path.parseLocation().hash;
+			}
+
+			if( !url || url === "#" || url.indexOf( "#" + $.mobile.path.uiStateKey ) === 0 ){
+				url = location.href;
+			}
+
+			$.mobile._handleHashChange( url, data.state );
+		}
+
+		// handle hashchange
+		// focus page
+		// scroll position
+		// transitionPages
+		// resetActivePageHeight
+		// enhancePage
+		// _bindPageRemove
+		// enhancePage
+		// loadPage
+		// changePage
+	});
+
 	//define vars for interal use
 	var $window = $.mobile.window,
 		$head = $( "head" ),
@@ -1360,27 +1402,6 @@ define( [
 				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
 			}
 		};
-
-		// TODO roll the logic here into the handleHashChange method
-		$window.bind( "navigate", function( e, data ) {
-			var url;
-
-			if ( e.originalEvent && e.originalEvent.isDefaultPrevented() ) {
-				return;
-			}
-
-			url = $.event.special.navigate.originalEventName.indexOf( "hashchange" ) > -1 ? data.state.hash : data.state.url;
-
-			if( !url ) {
-				url = $.mobile.path.parseLocation().hash;
-			}
-
-			if( !url || url === "#" || url.indexOf( "#" + $.mobile.path.uiStateKey ) === 0 ){
-				url = location.href;
-			}
-
-			$.mobile._handleHashChange( url, data.state );
-		});
 
 		//set page min-heights to be device specific
 		$.mobile.document.bind( "pageshow", $.mobile.resetActivePageHeight );
