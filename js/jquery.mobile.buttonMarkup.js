@@ -273,10 +273,6 @@ function closestEnabledButton( element ) {
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
 
-	$( ".ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", target )
-		.jqmEnhanceable()
-		.not( "button, input, .ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
-		.buttonMarkup();
 });
 
 })( jQuery );

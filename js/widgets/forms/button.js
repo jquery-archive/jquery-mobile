@@ -67,6 +67,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.button = $el.addClass( classes );
 		}
 		
+		if ( $el.is( ".ui-header > a, .ui-footer > a" ) ) {
+			this.options.mini ? false : this._setOption( "mini", true );
+			this.options.inline ? false : this._setOption( "inline", true );
+		}
+		
 		$.extend( this, {
 			isInput: isInput,
 			buttonClasses: classes,
@@ -159,7 +164,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 	}
 });
 
-$.mobile.button.initSelector = "a:jqmData(role='button'), button, [type='button'], [type='submit'], [type='reset']";
+$.mobile.button.initSelector = "a:jqmData(role='button'), .ui-header > a, .ui-footer > a, .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button, [type='button'], [type='submit'], [type='reset']";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.button" );

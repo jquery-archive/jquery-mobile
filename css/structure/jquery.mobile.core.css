@@ -87,9 +87,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 
 /* icons */
-.ui-icon {
-	position: relative !important;
-}
 .ui-icon:after {
 	content: "";
 	position: absolute;
@@ -122,6 +119,18 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-btn-icon-bottom:after {
 	top: auto;
 	bottom: 10px;
+}
+.ui-mini.ui-btn-icon-left:after {
+	left: 5px;
+}
+.ui-mini.ui-btn-icon-right:after {
+	right: 5px;
+}
+.ui-mini.ui-btn-icon-top:after {
+	top: 5px;
+}
+.ui-mini.ui-btn-icon-bottom:after {
+	bottom: 5px;
 }
 
 /* non-js content hiding */
