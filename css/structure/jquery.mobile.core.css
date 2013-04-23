@@ -87,6 +87,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 
 /* icons */
+.ui-icon {
+	position: relative !important;
+}
 .ui-icon:after {
 	content: "";
 	position: absolute;
