@@ -66,13 +66,9 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.button = $el.addClass( classes );
 		}
 		
-		if ( $el[ 0 ].tagName === "A" ) {
-			$el.removeClass( "ui-link" );
-			
-			if ( $el.is( ".ui-header > a, .ui-footer > a" ) ) {
-				this.options.mini ? false : this._setOption( "mini", true );
-				this.options.inline ? false : this._setOption( "inline", true );
-			}
+		if ( $el.is( ".ui-header > a, .ui-footer > a" ) ) {
+			this.options.mini ? false : this._setOption( "mini", true );
+			this.options.inline ? false : this._setOption( "inline", true );
 		}
 		
 		$.extend( this, {

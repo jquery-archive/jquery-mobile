@@ -146,7 +146,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						buttonClass += " ui-icon ui-btn-icon-right ui-icon-" + icon;
 					}
 					
-					a.first().removeClass( "ui-link" ).addClass( buttonClass );
+					a.first().addClass( buttonClass );
 					
 					if ( ol && value ) {
 						newStartCount = parseInt( value , 10 ) - 1;
