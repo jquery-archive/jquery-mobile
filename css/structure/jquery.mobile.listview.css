@@ -247,7 +247,6 @@ ol.ui-listview .ui-li-desc:not(.ui-li-aside) {
 	left: 7px;
 	top: 50%;
 	margin-top: -13px;
-	z-index: -1;
 }
 .ui-listview-filter {
 	border-width: 0;
