@@ -112,7 +112,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			itemClassDict = {},
 			item, itemClass, itemTheme,
 			a, last, splittheme, startCount, newStartCount, value, countParent, icon, linkIcon,
-			pos, numli, isDivider, buttonClass;
+			pos, numli, isDivider, buttonClass, buttonIcon;
 
 		// Check if a start attribute has been set while taking a value of 0 into account
 		if ( ol && ( start || start === 0 ) ) {
@@ -147,16 +147,20 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						theme: itemTheme
 					}); */
 					
+					buttonClass = "ui-btn";
+					
 					if ( ( icon !== false ) && ( a.length === 1 ) ) {
 						item.addClass( "ui-li-has-arrow" );
+						
+						buttonIcon = a.length > 1 || icon === false ? false : icon || listicon || o.icon;
+						
+						buttonClass += " ui-icon ui-btn-icon-right ui-icon-" + buttonIcon;
 					}
-					
-					buttonClass = "ui-btn";
 					
 					if ( itemTheme ) {
 						buttonClass += " ui-btn-" + itemTheme;
 					}
-
+					
 					a.first().removeClass( "ui-link" ).addClass( buttonClass );
 					
 					if ( ol && value ) {
