@@ -97,6 +97,32 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	width: 18px;
 	height: 18px;
 }
+.ui-btn-icon-notext:after {
+	top: 3px;
+	left: 3px;
+}
+.ui-btn-icon-left:after,
+.ui-btn-icon-right:after {
+	top: 50%; margin-top: -9px;
+}
+.ui-btn-icon-left:after {
+	left: 10px;
+}
+.ui-btn-icon-right:after {
+	right: 10px;
+}
+.ui-btn-icon-top:after,
+.ui-btn-icon-bottom:after {
+	left: 50%;
+	margin-left: -9px;
+}
+.ui-btn-icon-top:after {
+	top: 10px;
+}
+.ui-btn-icon-bottom:after {
+	top: auto;
+	bottom: 10px;
+}
 
 /* non-js content hiding */
 .ui-nojs { position: absolute; left: -9999px; }

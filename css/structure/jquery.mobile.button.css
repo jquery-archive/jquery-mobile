@@ -39,34 +39,6 @@ button.ui-btn {
 	padding-bottom: 40px;
 }
 
-.ui-btn-icon-notext:after {
-	top: 3px;
-	left: 3px;
-}
-.ui-btn-icon-left:after,
-.ui-btn-icon-right:after {
-	top: 50%; margin-top: -9px;
-}
-.ui-btn-icon-left:after {
-	left: 10px;
-}
-.ui-btn-icon-right:after {
-	right: 10px;
-}
-.ui-btn-icon-top:after,
-.ui-btn-icon-bottom:after {
-	left: 50%;
-	margin-left: -9px;
-}
-.ui-btn-icon-top:after {
-	top: 10px;
-}
-.ui-btn-icon-bottom:after {
-	top: auto;
-	bottom: 10px;
-}
-
-
 
 .ui-mini { margin-top: .25em; margin-bottom: .25em; }
 .ui-btn-left, .ui-btn-right, .ui-input-clear, .ui-btn-inline,
