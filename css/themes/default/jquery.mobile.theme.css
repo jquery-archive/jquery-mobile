@@ -188,7 +188,7 @@ button,
 .ui-body-a ::-webkit-selection,
 .ui-body-a ::-moz-selection,
 .ui-body-a ::selection {
-	background-color:		#387bbe /*{a-bactive-background-color}*/
+	background-color:		#387bbe /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: none;
 }
@@ -297,7 +297,7 @@ button,
 .ui-body-b ::-webkit-selection,
 .ui-body-b ::-moz-selection,
 .ui-body-b ::selection {
-	background-color:		#387bbe /*{b-bactive-background-color}*/
+	background-color:		#387bbe /*{b-bactive-background-color}*/;
 	color: 					#fff /*{b-bactive-color}*/;
 	text-shadow: none;
 }
@@ -407,7 +407,7 @@ button,
 .ui-body-c ::-webkit-selection,
 .ui-body-c ::-moz-selection,
 .ui-body-c ::selection {
-	background-color:		#387bbe /*{a-bactive-background-color}*/
+	background-color:		#387bbe /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: none;
 }
@@ -517,7 +517,7 @@ button,
 .ui-body-d ::-webkit-selection,
 .ui-body-d ::-moz-selection,
 .ui-body-d ::selection {
-	background-color:		#387bbe /*{a-bactive-background-color}*/
+	background-color:		#387bbe /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: none;
 }
@@ -627,7 +627,7 @@ button,
 .ui-body-e ::-webkit-selection,
 .ui-body-e ::-moz-selection,
 .ui-body-e ::selection {
-	background-color:		#387bbe /*{a-bactive-background-color}*/
+	background-color:		#387bbe /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: none;
 }
@@ -635,7 +635,7 @@ button,
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon,
+.ui-icon:after,
 .ui-icon-searchfield:after {
 	background-color: 						#666 /*{global-icon-color}*/;
 	background-color: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
@@ -648,7 +648,7 @@ button,
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-alt .ui-icon,
+.ui-icon-alt .ui-icon:after,
 .ui-icon-alt .ui-icon-searchfield:after {
 	background-color: 						#fff;
 	background-color: 						rgba(255,255,255,.3);
@@ -659,9 +659,9 @@ button,
 /* No disc
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-nodisc .ui-icon,
+.ui-icon-nodisc .ui-icon:after,
 .ui-icon-nodisc .ui-icon-searchfield:after,
-.ui-icon-nodisc .ui-icon-alt .ui-icon,
+.ui-icon-nodisc .ui-icon-alt .ui-icon:after,
 .ui-icon-nodisc .ui-icon-alt .ui-icon-searchfield:after {
 	background-color: transparent;
 }
@@ -669,86 +669,80 @@ button,
 /* Icon sprite
 -----------------------------------------------------------------------------------------------------------*/
 
-/* plus minus */
-.ui-icon-plus {
+.ui-icon-plus:after {
 	background-position: 	-1px -1px;
 }
-.ui-icon-minus {
+.ui-icon-minus:after {
 	background-position: 	-37px -1px;
 }
-/* delete/close */
-.ui-icon-delete {
+.ui-icon-delete:after {
 	background-position: 	-73px -1px;
 }
-/* arrows */
-.ui-icon-arrow-r {
+.ui-icon-arrow-r:after {
 	background-position: 	-108px -1px;
 }
-.ui-icon-arrow-l {
+.ui-icon-arrow-l:after {
 	background-position: 	-144px -1px;
 }
-.ui-icon-arrow-u {
+.ui-icon-arrow-u:after {
 	background-position: 	-180px -1px;
 }
-.ui-icon-arrow-d {
+.ui-icon-arrow-d:after {
 	background-position: 	-216px -1px;
 }
-/* misc */
-.ui-icon-check {
+.ui-icon-check:after {
 	background-position: 	-252px -1px;
 }
-.ui-icon-gear {
+.ui-icon-gear:after {
 	background-position: 	-288px -1px;
 }
-.ui-icon-refresh {
+.ui-icon-refresh:after {
 	background-position: 	-323px -1px;
 }
-.ui-icon-forward {
+.ui-icon-forward:after {
 	background-position: 	-360px -1px;
 }
-.ui-icon-back {
+.ui-icon-back:after {
 	background-position: 	-396px -1px;
 }
-.ui-icon-grid {
+.ui-icon-grid:after {
 	background-position: 	-432px -1px;
 }
-.ui-icon-star {
+.ui-icon-star:after {
 	background-position: 	-467px -1px;
 }
-.ui-icon-alert {
+.ui-icon-alert:after {
 	background-position: 	-503px -1px;
 }
-.ui-icon-info {
+.ui-icon-info:after {
 	background-position: 	-539px -1px;
 }
-.ui-icon-home {
+.ui-icon-home:after {
 	background-position: 	-575px -1px;
 }
-/* search */
-.ui-icon-search,
+.ui-icon-search:after,
 .ui-icon-searchfield:after {
 	background-position: 	-611px -1px;
 }
+.ui-icon-bars:after {
+	background-position: 	-788px -1px;
+}
+.ui-icon-edit:after {
+	background-position: 	-824px -1px;
+}
+
 /* checkbox radio */
-.ui-icon-checkbox-on {
+.ui-icon-checkbox-on:after {
 	background-position: 	-647px -1px;
 }
-.ui-icon-checkbox-off {
+.ui-icon-checkbox-off:after {
 	background-position: 	-683px -1px;
 }
-.ui-icon-radio-on {
+.ui-icon-radio-on:after {
 	background-position: 	-718px -1px;
 }
-.ui-icon-radio-off {
+.ui-icon-radio-off:after {
 	background-position: 	-754px -1px;
-}
-/* menu edit */
-.ui-icon-bars {
-	background-position: 	-788px -1px;
-
-}
-.ui-icon-edit {
-	background-position: 	-824px -1px;
 }
 
 /* HD/"retina" sprite
@@ -758,95 +752,92 @@ button,
        only screen and (min--moz-device-pixel-ratio: 1.3),
        only screen and (min-resolution: 200dpi) {
 	
-	.ui-icon-plus, .ui-icon-minus, .ui-icon-delete, .ui-icon-arrow-r,
-	.ui-icon-arrow-l, .ui-icon-arrow-u, .ui-icon-arrow-d, .ui-icon-check,
-	.ui-icon-gear, .ui-icon-refresh, .ui-icon-forward, .ui-icon-back,
-	.ui-icon-grid, .ui-icon-star, .ui-icon-alert, .ui-icon-info, .ui-icon-home, .ui-icon-bars, .ui-icon-edit,
-	.ui-icon-search, .ui-icon-searchfield:after, 
-	.ui-icon-checkbox-off, .ui-icon-checkbox-on, .ui-icon-radio-off, .ui-icon-radio-on {
+	.ui-icon:after,
+	.ui-icon-searchfield:after {
 		background-image: url(images/icons-36-white.png);
 		-moz-background-size: 864px 18px;
 		-o-background-size: 864px 18px;
 		-webkit-background-size: 864px 18px;
 		background-size: 864px 18px;
 	}
-
-	.ui-icon-alt .ui-icon {
+	.ui-icon-alt .ui-icon:after,
+	.ui-icon-alt .ui-icon-searchfield:after {
 		background-image: url(images/icons-36-black.png);
 	}
 
-	.ui-icon-plus {
+	.ui-icon-plus:after {
 		background-position: 	0 50%;
 	}
-	.ui-icon-minus {
+	.ui-icon-minus:after {
 		background-position: 	-36px 50%;
 	}
-	.ui-icon-delete {
+	.ui-icon-delete:after {
 		background-position: 	-72px 50%;
 	}
-	.ui-icon-arrow-r {
+	.ui-icon-arrow-r:after {
 		background-position: 	-108px 50%;
 	}
-	.ui-icon-arrow-l {
+	.ui-icon-arrow-l:after {
 		background-position: 	-144px 50%;
 	}
-	.ui-icon-arrow-u {
+	.ui-icon-arrow-u:after {
 		background-position: 	-179px 50%;
 	}
-	.ui-icon-arrow-d {
+	.ui-icon-arrow-d:after {
 		background-position: 	-215px 50%;
 	}
-	.ui-icon-check {
+	.ui-icon-check:after {
 		background-position: 	-252px 50%;
 	}
-	.ui-icon-gear {
+	.ui-icon-gear:after {
 		background-position: 	-287px 50%;
 	}
-	.ui-icon-refresh {
+	.ui-icon-refresh:after {
 		background-position: 	-323px 50%;
 	}
-	.ui-icon-forward {
+	.ui-icon-forward:after {
 		background-position: 	-360px 50%;
 	}
-	.ui-icon-back {
+	.ui-icon-back:after {
 		background-position: 	-395px 50%;
 	}
-	.ui-icon-grid {
+	.ui-icon-grid:after {
 		background-position: 	-431px 50%;
 	}
-	.ui-icon-star {
+	.ui-icon-star:after {
 		background-position: 	-467px 50%;
 	}
-	.ui-icon-alert {
+	.ui-icon-alert:after {
 		background-position: 	-503px 50%;
 	}
-	.ui-icon-info {
+	.ui-icon-info:after {
 		background-position: 	-538px 50%;
 	}
-	.ui-icon-home {
+	.ui-icon-home:after {
 		background-position: 	-575px 50%;
 	}
-	.ui-icon-search,
+	.ui-icon-search:after,
 	.ui-icon-searchfield:after {
 		background-position: 	-611px 50%;
 	}
-	.ui-icon-checkbox-on {
-		background-position: 	-647px 50%;
-	}
-	.ui-icon-checkbox-off {
-		background-position: 	-683px 50%;
-	}
-	.ui-icon-radio-on {
-		background-position: 	-718px 50%;
-	}
-	.ui-icon-radio-off {
-		background-position: 	-754px 50%;
-	}
-	.ui-icon-bars {
+	.ui-icon-bars:after {
 		background-position: 	-788px 50%;
 	
-	}.ui-icon-edit {
+	}.ui-icon-edit:after {
 		background-position: 	-824px 50%;
+	}
+	
+	.ui-icon-checkbox-on:after {
+		background-position: 	-647px 50%;
+	}
+	.ui-icon-checkbox-off:after {
+		background-position: 	-683px 50%;
+	}
+	.ui-icon-radio-on:after {
+		background-position: 	-718px 50%;
+	}
+	.ui-icon-radio-off:after {
+		background-position: 	-754px 50%;
 	}
 }
 

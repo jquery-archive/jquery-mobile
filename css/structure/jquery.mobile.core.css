@@ -86,8 +86,14 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	border-bottom-right-radius: inherit;
 }
 
-/* icons sizing */
-.ui-icon { width: 18px; height: 18px; }
+/* icons */
+.ui-icon:after {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 18px;
+	height: 18px;
+}
 
 /* non-js content hiding */
 .ui-nojs { position: absolute; left: -9999px; }
