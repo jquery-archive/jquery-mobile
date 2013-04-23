@@ -141,7 +141,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					buttonClass = "ui-btn";
 					
 					if ( ( icon !== false ) && ( a.length === 1 ) ) {
-						item.addClass( "ui-li-has-arrow" );
+						itemClass += " ui-li-has-arrow";
 						
 						buttonIcon = a.length > 1 || icon === false ? false : icon || listicon || o.icon;
 						
@@ -152,7 +152,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						buttonClass += " ui-btn-" + itemTheme;
 					}
 					
-					a.first().removeClass( "ui-link" ).addClass( buttonClass );
+					a.first().addClass( buttonClass );
 					
 					if ( ol && value ) {
 						newStartCount = parseInt( value , 10 ) - 1;
