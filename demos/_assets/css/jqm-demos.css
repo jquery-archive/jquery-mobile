@@ -432,18 +432,6 @@ h2.jqm-home-widget {
 	overflow: visible;
 	white-space: normal;
 }
-/* ### TEMPORARY ### */
-/* padding count bubble position when icon is false needs to be fixed in the framework CSS (some classes shouldn't be added) */
-.jqm-list .ui-li-count {
-	right: 10px !important;
-}
-.jqm-demos .jqm-list .ui-btn-icon-right .ui-btn-inner {
-	padding-right: 0;
-}
-.jqm-demos .jqm-list .ui-li-has-arrow .ui-btn-inner a.ui-link-inherit {
-	padding-right: 15px;
-}
-/* ### END ### */
 
 /* List filter */
 .jqm-demos-home .jqm-content > .ui-listview-filter,
