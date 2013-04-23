@@ -102,33 +102,33 @@ $.widget( "mobile.button", $.mobile.widget, {
 	refresh: function( create ) {
 		var o = this.options,
 			$el = this.element,
-			newClasses = "";
+			classes = "";
 
 		if ( !o.theme ) {
 			 o.theme = "a";
 		}
-		newClasses += "ui-btn-" + o.theme;
+		classes += "ui-btn-" + o.theme;
 
 		if ( o.corners ) {
-			newClasses += " ui-btn-corner-all";
+			classes += " ui-btn-corner-all";
 		}
 		if ( o.shadow ) {
-			newClasses += " ui-shadow";
+			classes += " ui-shadow";
 		}
 		if ( o.inline ) {
-			newClasses += " ui-btn-inline";
+			classes += " ui-btn-inline";
 		}
 		if ( o.mini ) {
-			newClasses += " ui-mini";
+			classes += " ui-mini";
 		}
 		
 		if ( o.icon ) {
 			if ( !o.iconpos ) {
 				 o.iconpos = "left";
 			}
-			newClasses += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
+			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
 			if ( o.iconshadow ) {
-				newClasses += " ui-shadow-icon";
+				classes += " ui-shadow-icon";
 			}
 		}
 
@@ -136,9 +136,9 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.button.removeClass( this.styleClasses );
 		}
 
-		this.styleClasses = newClasses;
+		this.styleClasses = classes;
 		
-		this.button.addClass( newClasses );
+		this.button.addClass( classes );
 		
 		if ( $el[ 0 ].tagName === "INPUT" && !create ) {
 			$( this.button )[ "text" ]( $el.val() ).append( $el );
