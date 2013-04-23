@@ -883,7 +883,7 @@ button,
 
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
-.ui-disabled,
+.ui-disabled, /* TODO: deprecate ui-disabled */
 .ui-state-disabled {
 	filter: Alpha(Opacity=30);
 	opacity: .3;
