@@ -25,9 +25,10 @@ $.widget( "mobile.button", $.mobile.widget, {
 	_create: function() {
 		var $button,
 			$el = this.element,
+			isInput = $el[ 0 ].tagName === "INPUT",
 			classes = "ui-btn";
 			
-		if ( $el[ 0 ].tagName === "INPUT" ) {
+		if ( isInput ) {
 			// TODO: When we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
 			/* if ( $el[0].className.length ) {
 				classes = $el[0].className;
@@ -67,6 +68,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 		
 		$.extend( this, {
+			isInput: isInput,
 			buttonClasses: classes,
 			styleClasses: ""
 		});
@@ -79,10 +81,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 	},
 	
 	_destroy: function() {
-		var $button = this.button;
-		
-		if ( $el[ 0 ].tagName === "INPUT" ) {
+		if ( this.isInput ) {
+			var $button = this.button;
+			
 			this.element.insertBefore( $button );
+			
 			$button.remove();
 		} else {
 			var removeClasses = this.buttonClasses + " " + this.styleClasses;
@@ -130,11 +133,9 @@ $.widget( "mobile.button", $.mobile.widget, {
 			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
 			
 			if ( o.iconpos === "notext" && !$el.attr( "title" ) ) {
-				if ( $el[ 0 ].tagName === "INPUT" ) {
-					$el.attr( "title", $el.val() );
-				} else {
-					$el.attr( "title", $el.getEncodedText() );
-				}
+				var text = this.isInput ? $el.val() : $el.getEncodedText();
+				
+				$el.attr( "title", text );
 			}
 			
 			if ( o.iconshadow ) {
@@ -150,7 +151,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		
 		this.button.addClass( classes );
 		
-		if ( $el[ 0 ].tagName === "INPUT" && !create ) {
+		if ( this.isInput && !create ) {
 			$( this.button )[ "text" ]( $el.val() ).append( $el );
 		}
 		
