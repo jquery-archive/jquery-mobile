@@ -23,12 +23,12 @@ define( [
 
 		_create: function() {
 			// TODO roll the logic here into the handleHashChange method
-			this._on( $window, { navigate: 'filterNavigateEvents' });
+			this._on( $window, { navigate: '_filterNavigateEvents' });
 
 			// navigate binding using _on
 		},
 
-		filterNavigateEvents: function( e, data ) {
+		_filterNavigateEvents: function( e, data ) {
 			var url;
 
 			if ( e.originalEvent && e.originalEvent.isDefaultPrevented() ) {
@@ -45,7 +45,11 @@ define( [
 				url = location.href;
 			}
 
-			$.mobile._handleHashChange( url, data.state );
+			this._handleHashChange( url, data.state );
+		},
+
+		_handleHashChange: function( url, state ) {
+			$.mobile._handleHashChange( url, state );
 		}
 
 		// handle hashchange
@@ -1402,6 +1406,9 @@ define( [
 				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
 			}
 		};
+
+		// TODO ensure that the navigate binding in the content widget happens at the right time
+		$.mobile.pageContainer.content();
 
 		//set page min-heights to be device specific
 		$.mobile.document.bind( "pageshow", $.mobile.resetActivePageHeight );
