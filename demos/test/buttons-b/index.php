@@ -28,7 +28,13 @@
 					<input type="reset" value="Reset">
 				</form>
 			
-
+				<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-inline="true">Anchor</a>
+				<form>
+					<button data-icon="gear" data-iconpos="notext" data-inline="true">Button</button>
+					<input type="button" value="Input" data-icon="arrow-u" data-iconpos="notext" data-inline="true">
+					<input type="submit" value="Submit" data-icon="arrow-d" data-iconpos="notext" data-inline="true">
+					<input type="reset" value="Reset" data-icon="check" data-iconpos="notext" data-inline="true">
+				</form>
 			
 				<p>
 					<a href="#" data-role="button" data-inline="true">True</a>
