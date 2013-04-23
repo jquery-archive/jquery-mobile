@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "./page", "./page.sections", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -112,7 +112,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			itemClassDict = {},
 			item, itemClass, itemTheme,
 			a, last, splittheme, startCount, newStartCount, value, countParent, icon, linkIcon,
-			pos, numli, isDivider, buttonClass, buttonIcon;
+			pos, numli, isDivider, buttonClass, buttonIcon, splitButtonClass, splitButtonIcon;
 
 		// Check if a start attribute has been set while taking a value of 0 into account
 		if ( ol && ( start || start === 0 ) ) {
@@ -138,15 +138,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				if ( a.length && !isDivider ) {
 					icon = getAttr( item[ 0 ], "icon", true );
 
-					/* item.buttonMarkup({
-						wrapperEls: "div",
-						shadow: false,
-						corners: false,
-						iconpos: "right",
-						icon: a.length > 1 || icon === false ? false : icon || listicon || o.icon,
-						theme: itemTheme
-					}); */
-					
 					buttonClass = "ui-btn";
 					
 					if ( ( icon !== false ) && ( a.length === 1 ) ) {
@@ -174,29 +165,19 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						last = a.last();
 						splittheme = listsplittheme || getAttr( last[ 0 ], "theme", true ) || o.splitTheme;
 						linkIcon = getAttr( last[ 0 ], "icon", true );
-
+						
+						// link icon overrides list item icon overrides ul element overrides options
+						splitButtonIcon = linkIcon || icon || listspliticon || o.splitIcon;
+						splitButtonClass = "ui-btn ui-btn-" + splittheme + " ui-icon ui-icon-" + splitButtonIcon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-icon-shadow";
+						
 						last.appendTo( item )
-							.attr( "title", $.trim(last.getEncodedText()) )
-							.addClass( "ui-li-link-alt" )
+							.attr( "title", $.trim( last.getEncodedText() ) )
+							.addClass( "ui-li-link-alt ui-btn ui-btn-" + itemTheme )
 							.empty()
-							.buttonMarkup({
-								shadow: false,
-								corners: false,
-								theme: itemTheme,
-								icon: false,
-								iconpos: "notext"
-							})
-							.find( ".ui-btn-inner" )
-								.append(
-									$( document.createElement( "span" ) ).buttonMarkup({
-										shadow: true,
-										corners: true,
-										theme: splittheme,
-										iconpos: "notext",
-										// link icon overrides list item icon overrides ul element overrides options
-										icon: linkIcon || icon || listspliticon || o.splitIcon
-									})
-								);
+							.append(
+								$( document.createElement( "div" ) )
+									.addClass( splitButtonClass )
+							);
 					}
 				} else if ( isDivider ) {
 
