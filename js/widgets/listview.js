@@ -71,6 +71,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		}
 		return null;
 	},
+	
 	_getChildrenByTagName: function( ele, lcName, ucName ) {
 		var results = [],
 			dict = {};
@@ -102,17 +103,14 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 		var o = this.options,
 			$list = this.element,
-			dividertheme = getAttr( $list[ 0 ], "dividertheme", true ) || o.dividerTheme,
-			listsplittheme = getAttr( $list[ 0 ], "splittheme", true ),
-			listspliticon = getAttr( $list[ 0 ], "spliticon", true ),
-			listicon = getAttr( $list[ 0 ], "icon", true ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
+			pos, numli,
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
 			start = $list.attr( "start" ),
+			startCount, newStartCount, value,
 			itemClassDict = {},
-			item, itemClass, itemTheme,
-			a, last, splittheme, startCount, newStartCount, value, countParent, icon, linkIcon,
-			pos, numli, isDivider, buttonClass, buttonIcon, splitButtonClass, splitButtonIcon;
+			item, itemClass, itemTheme, itemIcon, icon,
+			a, isDivider;
 
 		// Check if a start attribute has been set while taking a value of 0 into account
 		if ( ol && ( start || start === 0 ) ) {
@@ -130,26 +128,22 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
-				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
-				value = item.attr( "value" );
 				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
+				value = item.attr( "value" );
+				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
+
 
 				if ( a.length && !isDivider ) {
-					icon = getAttr( item[ 0 ], "icon", true );
+					itemIcon = getAttr( item[ 0 ], "icon", true );
+					icon = itemIcon === false ? false : ( itemIcon || o.icon );
 
-					buttonClass = "ui-btn";
+					var buttonClass = "ui-btn ui-btn-" + itemTheme;
 					
-					if ( ( icon !== false ) && ( a.length === 1 ) ) {
+					if ( icon && ( a.length === 1 ) ) {
 						itemClass += " ui-li-has-arrow";
 						
-						buttonIcon = a.length > 1 || icon === false ? false : icon || listicon || o.icon;
-						
-						buttonClass += " ui-icon ui-btn-icon-right ui-icon-" + buttonIcon;
-					}
-					
-					if ( itemTheme ) {
-						buttonClass += " ui-btn-" + itemTheme;
+						buttonClass += " ui-icon ui-btn-icon-right ui-icon-" + icon;
 					}
 					
 					a.first().removeClass( "ui-link" ).addClass( buttonClass );
@@ -161,14 +155,11 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 					if ( a.length > 1 ) {
 						itemClass += " ui-li-has-alt";
-
-						last = a.last();
-						splittheme = listsplittheme || getAttr( last[ 0 ], "theme", true ) || o.splitTheme;
-						linkIcon = getAttr( last[ 0 ], "icon", true );
 						
-						// link icon overrides list item icon overrides ul element overrides options
-						splitButtonIcon = linkIcon || icon || listspliticon || o.splitIcon;
-						splitButtonClass = "ui-btn ui-btn-" + splittheme + " ui-icon ui-icon-" + splitButtonIcon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-icon-shadow";
+						var last = a.last(),
+							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
+							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon || getAttr( item[ 0 ], "icon", true ) || o.icon,
+							splitButtonClass = "ui-btn ui-btn-" + splittheme + " ui-icon ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-icon-shadow";
 						
 						last.appendTo( item )
 							.attr( "title", $.trim( last.getEncodedText() ) )
@@ -180,15 +171,14 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 							);
 					}
 				} else if ( isDivider ) {
-
-					itemClass += " ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || dividertheme );
+					itemClass += " ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme );
+					
 					item.attr( "role", "heading" );
 
 					if ( ol && ( start || start === 0 ) ) {
 						newStartCount = parseInt( start , 10 ) - 1;
 						item.css( "counter-reset", "listnumbering " + newStartCount );
 					}
-
 				} else {
 					itemClass += " ui-li-static ui-body-" + itemTheme;
 					
