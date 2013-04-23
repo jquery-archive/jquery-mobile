@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.zoom", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -82,13 +82,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					event.preventDefault();
 				})
 				.appendTo( focusedEl )
-				.buttonMarkup({
-					icon: "delete",
-					iconpos: "notext",
-					corners: true,
-					shadow: true,
-					mini: o.mini
-				});
+				.addClass(
+					"ui-btn ui-btn-" + theme +
+					" ui-icon ui-icon-delete ui-btn-icon-notext" +
+					" ui-corner-all ui-shadow " + ( o.mini ? "ui-mini" : "" ) );
 
 			if ( !isSearch ) {
 				focusedEl.addClass( "ui-input-has-clear" );
