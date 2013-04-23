@@ -126,7 +126,17 @@ $.widget( "mobile.button", $.mobile.widget, {
 			if ( !o.iconpos ) {
 				 o.iconpos = "left";
 			}
+			
 			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
+			
+			if ( o.iconpos === "notext" && !$el.attr( "title" ) ) {
+				if ( $el[ 0 ].tagName === "INPUT" ) {
+					$el.attr( "title", $el.val() );
+				} else {
+					$el.attr( "title", $el.getEncodedText() );
+				}
+			}
+			
 			if ( o.iconshadow ) {
 				classes += " ui-shadow-icon";
 			}
