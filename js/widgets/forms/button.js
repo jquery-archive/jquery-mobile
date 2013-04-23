@@ -18,8 +18,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		inline: null,
-		mini: null,
-		disabled: false
+		mini: null
 	},
 
 	_create: function() {
@@ -97,14 +96,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 			
 			this.button.removeClass( removeClasses );
 		}
-	},
-
-	disable: function() {
-		return this._setOption( "disabled", true );
-	},
-	
-	enable: function() {
-		return this._setOption( "disabled", false );
 	},
 
 	refresh: function( create ) {
