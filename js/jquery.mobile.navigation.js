@@ -38,7 +38,7 @@ define( [
 			url = e.originalEvent.type.indexOf( "hashchange" ) > -1 ? data.state.hash : data.state.url;
 
 			if( !url ) {
-				url = $.mobile.path.parseLocation().hash;
+				url = this._getHash();
 			}
 
 			if( !url || url === "#" || url.indexOf( "#" + $.mobile.path.uiStateKey ) === 0 ){
@@ -50,6 +50,10 @@ define( [
 
 		_handleHashChange: function( url, state ) {
 			$.mobile._handleHashChange( url, state );
+		},
+
+		_getHash: function() {
+			return $.mobile.path.parseLocation().hash;
 		}
 
 		// handle hashchange
