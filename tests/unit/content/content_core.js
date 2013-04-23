@@ -36,4 +36,17 @@
 
 		$.mobile.content.prototype._filterNavigateEvents( mockEvent, { state: { hash: "foo" }} );
 	});
+
+	test( "uses the url in the state when the original event is NOT a hashchange", function() {
+		expect( 2 );
+
+		mockEvent.originalEvent = $.Event( "other" );
+
+		$.mobile.content.prototype._handleHashChange = function( url, state ) {
+			equal( url, "bar", "the url is the url stored in the state: " + url );
+			equal( state.url, url, "url stored in the state is used as the url: " + state.url );
+		};
+
+		$.mobile.content.prototype._filterNavigateEvents( mockEvent, { state: { url: "bar" }} );
+	});
 })(jQuery);
