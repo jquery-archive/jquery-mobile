@@ -48,8 +48,81 @@ define( [
 			this._handleHashChange( url, data.state );
 		},
 
-		_handleHashChange: function( url, state ) {
-			$.mobile._handleHashChange( url, state );
+		_handleHashChange: function( url, data ) {
+			//find first page via hash
+			var to = path.stripHash(url),
+				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
+				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
+
+				// default options for the changPage calls made after examining the current state
+				// of the page and the hash, NOTE that the transition is derived from the previous
+				// history entry
+				changePageOptions = {
+					changeHash: false,
+					fromHashChange: true,
+					reverse: data.direction === "back"
+				},
+				active;
+
+			$.extend( changePageOptions, data, {
+				transition: (urlHistory.getLast() || {}).transition || transition
+			});
+
+			// special case for dialogs
+			if ( urlHistory.activeIndex > 0 && to.indexOf( dialogHashKey ) > -1 && urlHistory.initialDst !== to ) {
+
+				// If current active page is not a dialog skip the dialog and continue
+				// in the same direction
+				if ( $.mobile.activePage && !$.mobile.activePage.hasClass( "ui-dialog" ) ) {
+					//determine if we're heading forward or backward and continue accordingly past
+					//the current dialog
+					if( data.direction === "back" ) {
+						$.mobile.back();
+					} else {
+						window.history.forward();
+					}
+
+					// prevent changePage call
+					return;
+				} else {
+					// if the current active page is a dialog and we're navigating
+					// to a dialog use the dialog objected saved in the stack
+					to = data.pageUrl;
+					active = $.mobile.urlHistory.getActive();
+
+					// make sure to set the role, transition and reversal
+					// as most of this is lost by the domCache cleaning
+					$.extend( changePageOptions, {
+						role: active.role,
+						transition: active.transition,
+						reverse: data.direction === "back"
+					});
+				}
+			}
+
+			//if to is defined, load it
+			if ( to ) {
+				// At this point, 'to' can be one of 3 things, a cached page element from
+				// a history stack entry, an id, or site-relative/absolute URL. If 'to' is
+				// an id, we need to resolve it against the documentBase, not the location.href,
+				// since the hashchange could've been the result of a forward/backward navigation
+				// that crosses from an external page/dialog to an internal page/dialog.
+				to = !path.isPath( to ) ? ( path.makeUrlAbsolute( "#" + to, documentBase ) ) : to;
+
+				// If we"re about to go to an initial URL that contains a reference to a non-existent
+				// internal page, go to the first page instead. We know that the initial hash refers to a
+				// non-existent page, because the initial hash did not end up in the initial urlHistory entry
+				if ( to === path.makeUrlAbsolute( "#" + urlHistory.initialDst, documentBase ) &&
+					urlHistory.stack.length && urlHistory.stack[0].url !== urlHistory.initialDst.replace( dialogHashKey, "" ) ) {
+					to = $.mobile.firstPage;
+				}
+
+				$.mobile.changePage( to, changePageOptions );
+			}	else {
+
+				//there's no hash, go to the first page in the dom
+				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
+			}
 		},
 
 		_getHash: function() {
@@ -1333,83 +1406,6 @@ define( [
 				}
 			});
 		});
-
-		$.mobile._handleHashChange = function( url, data ) {
-			//find first page via hash
-			var to = path.stripHash(url),
-				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
-				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
-
-				// default options for the changPage calls made after examining the current state
-				// of the page and the hash, NOTE that the transition is derived from the previous
-				// history entry
-				changePageOptions = {
-					changeHash: false,
-					fromHashChange: true,
-					reverse: data.direction === "back"
-				},
-				active;
-
-			$.extend( changePageOptions, data, {
-				transition: (urlHistory.getLast() || {}).transition || transition
-			});
-
-			// special case for dialogs
-			if ( urlHistory.activeIndex > 0 && to.indexOf( dialogHashKey ) > -1 && urlHistory.initialDst !== to ) {
-
-				// If current active page is not a dialog skip the dialog and continue
-				// in the same direction
-				if ( $.mobile.activePage && !$.mobile.activePage.hasClass( "ui-dialog" ) ) {
-					//determine if we're heading forward or backward and continue accordingly past
-					//the current dialog
-					if( data.direction === "back" ) {
-						$.mobile.back();
-					} else {
-						window.history.forward();
-					}
-
-					// prevent changePage call
-					return;
-				} else {
-					// if the current active page is a dialog and we're navigating
-					// to a dialog use the dialog objected saved in the stack
-					to = data.pageUrl;
-					active = $.mobile.urlHistory.getActive();
-
-					// make sure to set the role, transition and reversal
-					// as most of this is lost by the domCache cleaning
-					$.extend( changePageOptions, {
-						role: active.role,
-						transition: active.transition,
-						reverse: data.direction === "back"
-					});
-				}
-			}
-
-			//if to is defined, load it
-			if ( to ) {
-				// At this point, 'to' can be one of 3 things, a cached page element from
-				// a history stack entry, an id, or site-relative/absolute URL. If 'to' is
-				// an id, we need to resolve it against the documentBase, not the location.href,
-				// since the hashchange could've been the result of a forward/backward navigation
-				// that crosses from an external page/dialog to an internal page/dialog.
-				to = !path.isPath( to ) ? ( path.makeUrlAbsolute( "#" + to, documentBase ) ) : to;
-
-				// If we"re about to go to an initial URL that contains a reference to a non-existent
-				// internal page, go to the first page instead. We know that the initial hash refers to a
-				// non-existent page, because the initial hash did not end up in the initial urlHistory entry
-				if ( to === path.makeUrlAbsolute( "#" + urlHistory.initialDst, documentBase ) &&
-					urlHistory.stack.length && urlHistory.stack[0].url !== urlHistory.initialDst.replace( dialogHashKey, "" ) ) {
-					to = $.mobile.firstPage;
-				}
-
-				$.mobile.changePage( to, changePageOptions );
-			}	else {
-
-				//there's no hash, go to the first page in the dom
-				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
-			}
-		};
 
 		// TODO ensure that the navigate binding in the content widget happens at the right time
 		$.mobile.pageContainer.content();
