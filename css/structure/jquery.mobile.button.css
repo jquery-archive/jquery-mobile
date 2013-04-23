@@ -7,6 +7,10 @@
 	overflow: hidden;
 	white-space: nowrap;
 	cursor:pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	margin: .5em 0;
 	padding: .7em 15px;
 }
