@@ -86,7 +86,7 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 	},
 
 	_setCloseBtn: function( value ) {
-		var self = this, btn, location;
+		var self = this, btn, location, dst;
 
 		if ( this._headerCloseButton ) {
 			this._headerCloseButton.remove();
@@ -95,21 +95,24 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 		if ( value !== "none" ) {
 			// Sanitize value
 			location = ( value === "left" ? "left" : "right" );
-			btn = $( "<a href='#' class='ui-btn-" + location + "' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
-			this.element.children().find( ":jqmData(role='header')" ).first().prepend( btn );
-			if ( $.fn.buttonMarkup ) {
-				btn.buttonMarkup();
-			}
-
-			// this must be an anonymous function so that select menu dialogs can replace
-			// the close method. This is a change from previously just defining data-rel=back
-			// on the button and letting nav handle it
-			//
-			// Use click rather than vclick in order to prevent the possibility of unintentionally
-			// reopening the dialog if the dialog opening item was directly under the close button.
-			btn.bind( "click", function() {
-				self.close();
-			});
+			dst = this.element.children().find( ":jqmData(role='header')" ).first();
+			btn = $( "<a></a>", {
+				"href": "#",
+				"class": "ui-btn ui-btn-" + location +
+					" ui-btn-" + $.mobile.getInheritedTheme( dst, "a" ) +
+					" ui-icon ui-icon-shadow ui-icon-delete ui-btn-icon-notext"
+				})
+				.text( this.options.closeBtnText )
+				.prependTo( dst )
+				// this must be an anonymous function so that select menu dialogs can replace
+				// the close method. This is a change from previously just defining data-rel=back
+				// on the button and letting nav handle it
+				//
+				// Use click rather than vclick in order to prevent the possibility of unintentionally
+				// reopening the dialog if the dialog opening item was directly under the close button.
+				.bind( "click", function() {
+					self.close();
+				});
 
 			this._headerCloseButton = btn;
 		}
