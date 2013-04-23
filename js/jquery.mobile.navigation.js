@@ -770,7 +770,7 @@ define( [
 		// internal state and then trigger a transition to the page.
 		var fromPage = settings.fromPage,
 			url = ( settings.dataUrl && path.convertUrlToDataUrl( settings.dataUrl ) ) || toPage.jqmData( "url" ),
-			urlParameters = ( settings.dataUrl && settings.dataUrl.replace(/^[^?]*/, "") ) || "",
+			urlParameters = ( (url.indexOf("?")==-1) && settings.dataUrl && settings.dataUrl.replace(/^[^?]*/, "") ) || "",
 			// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
 			pageUrl = url,
 			fileUrl = path.getFilePath( url ),
