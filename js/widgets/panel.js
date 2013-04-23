@@ -39,7 +39,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	},
 
 	_panelID: null,
-	_closeLink: null,
 	_page: null,
 	_modal: null,
 	_panelInner: null,
@@ -86,7 +85,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		// expose some private props to other methods
 		$.extend( this, {
 			_panelID: $el.attr( "id" ),
-			_closeLink: $el.find( ":jqmData(rel='close')" ),
 			_page: $el.closest( ":jqmData(role='page')" ),
 			_pageTheme: _getPageTheme(),
 			_panelInner: _getPanelInner(),
@@ -152,7 +150,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 	_bindCloseEvents: function() {
 		var self = this;
 
-		self._closeLink.on( "click.panel" , function( e ) {
+		self.element.on( "click.panel" , ":jqmData(rel='close')" , function ( e ) {
 			e.preventDefault();
 			self.close();
 			return false;
@@ -452,8 +450,6 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			.off( "panelhide" )
 			.off( "keyup.panel" )
 			.off( "updatelayout" );
-
-		this._closeLink.off( "click.panel" );
 
 		if ( this._modal ) {
 			this._modal.remove();
