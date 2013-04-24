@@ -78,4 +78,64 @@
 
 		proto._filterNavigateEvents( mockEvent, { state: {}} );
 	});
+
+	module("Content Widget _handleDialog", {
+		setup: function() {
+			proto = $.mobile.content.prototype;
+		}
+	});
+
+	test( "continues backward when the active content isn't a dialog", function() {
+		expect( 2 );
+
+		proto._getActiveContent = function() {
+			return $( "<div>" );
+		};
+
+		proto._back = function(){
+			ok( true, "back called" );
+		};
+
+		ok( !proto._handleDialog( {}, {direction: "back"} ), "returns false to prevent action" );
+	});
+
+	test( "continues forward when the active content isn't a dialog", function() {
+		expect( 2 );
+
+		proto._getActiveContent = function() {
+			return $( "<div>" );
+		};
+
+		proto._forward = function(){
+			ok( true, "forward called" );
+		};
+
+		ok( !proto._handleDialog( {}, {direction: "forward"} ), "returns false to prevent action" );
+	});
+
+	test( "extends changePageOptions when current content is a dialog", function() {
+		var result, opts = {};
+
+		proto._getActiveContent = function() {
+			return $( "<div>", {"class": "ui-dialog"} );
+		};
+
+		proto._getActiveHistory = function() {
+			return {
+				role: "foo",
+				transition: "bar"
+			};
+		};
+
+		equal( opts.role, undefined );
+		equal( opts.transition, undefined );
+		equal( opts.reverse, undefined );
+
+		// the pageUrl is returned for use as the target url when the active content is a dialog
+		equal( proto._handleDialog( opts, {direction: "back", pageUrl: "baz" } ), "baz" );
+
+		equal( opts.role, "foo" );
+		equal( opts.transition, "bar" );
+		equal( opts.reverse, true );
+	});
 })(jQuery);

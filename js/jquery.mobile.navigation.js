@@ -23,7 +23,7 @@ define( [
 
 		_create: function() {
 			// TODO roll the logic here into the handleHashChange method
-			this._on( $window, { navigate: '_filterNavigateEvents' });
+			this._on( $window, { navigate: "_filterNavigateEvents" });
 
 			// navigate binding using _on
 		},
@@ -48,6 +48,61 @@ define( [
 			this._handleHashChange( url, data.state );
 		},
 
+		_getHash: function() {
+			return $.mobile.path.parseLocation().hash;
+		},
+
+		_getActiveContent: function() {
+			return $.mobile.activePage;
+		},
+
+		_getActiveHistory: function() {
+			return $.mobile.urlHistory.getActive();
+		},
+
+		_back: function() {
+			$.mobile.back();
+		},
+
+		_forward: function() {
+			window.history.forward();
+		},
+
+		_handleDialog: function( changePageOptions, data ) {
+			var to, active, activeContent = this._getActiveContent();
+
+			// If current active page is not a dialog skip the dialog and continue
+			// in the same direction
+			if ( activeContent && !activeContent.hasClass( "ui-dialog" ) ) {
+				//determine if we're heading forward or backward and continue accordingly past
+				//the current dialog
+
+				if( data.direction === "back" ) {
+					this._back();
+				} else {
+					this._forward();
+				}
+
+				// prevent changePage call
+				return false;
+			} else {
+				// if the current active page is a dialog and we're navigating
+				// to a dialog use the dialog objected saved in the stack
+				to = data.pageUrl;
+				active = this._getActiveHistory();
+
+				// make sure to set the role, transition and reversal
+				// as most of this is lost by the domCache cleaning
+				$.extend( changePageOptions, {
+					role: active.role,
+					transition: active.transition,
+					reverse: data.direction === "back"
+				});
+			}
+
+			return to;
+		},
+
 		_handleHashChange: function( url, data ) {
 			//find first page via hash
 			var to = path.stripHash(url),
@@ -61,42 +116,22 @@ define( [
 					changeHash: false,
 					fromHashChange: true,
 					reverse: data.direction === "back"
-				},
-				active;
+				};
 
 			$.extend( changePageOptions, data, {
 				transition: (urlHistory.getLast() || {}).transition || transition
 			});
 
-			// special case for dialogs
-			if ( urlHistory.activeIndex > 0 && to.indexOf( dialogHashKey ) > -1 && urlHistory.initialDst !== to ) {
+			// If this isn't the first page, if the current url is a dialog hash key, and the initial
+			// destination isn't equal to the current target page, use the special dialog handling
+			if ( urlHistory.activeIndex > 0 &&
+					to.indexOf( dialogHashKey ) > -1 &&
+					urlHistory.initialDst !== to ) {
 
-				// If current active page is not a dialog skip the dialog and continue
-				// in the same direction
-				if ( $.mobile.activePage && !$.mobile.activePage.hasClass( "ui-dialog" ) ) {
-					//determine if we're heading forward or backward and continue accordingly past
-					//the current dialog
-					if( data.direction === "back" ) {
-						$.mobile.back();
-					} else {
-						window.history.forward();
-					}
+				to = this._handleDialog( changePageOptions, data );
 
-					// prevent changePage call
+				if ( to === false ) {
 					return;
-				} else {
-					// if the current active page is a dialog and we're navigating
-					// to a dialog use the dialog objected saved in the stack
-					to = data.pageUrl;
-					active = $.mobile.urlHistory.getActive();
-
-					// make sure to set the role, transition and reversal
-					// as most of this is lost by the domCache cleaning
-					$.extend( changePageOptions, {
-						role: active.role,
-						transition: active.transition,
-						reverse: data.direction === "back"
-					});
 				}
 			}
 
@@ -123,10 +158,6 @@ define( [
 				//there's no hash, go to the first page in the dom
 				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
 			}
-		},
-
-		_getHash: function() {
-			return $.mobile.path.parseLocation().hash;
 		}
 
 		// handle hashchange
