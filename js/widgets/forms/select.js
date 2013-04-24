@@ -107,16 +107,16 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			// TODO values buttonId and menuId are undefined here
 			button = this.button
 				.insertBefore( this.select )
-				.buttonMarkup( {
-					theme: options.theme,
-					icon: options.icon,
-					iconpos: iconpos,
-					inline: inline,
-					corners: options.corners,
-					shadow: options.shadow,
-					iconshadow: options.iconshadow,
-					mini: mini
-				});
+				.addClass( "ui-btn ui-btn-" + ( options.theme || $.mobile.getInheritedTheme( this.element, "a" ) ) +
+					( options.icon ?
+						( " ui-icon ui-icon-" + options.icon + " ui-btn-icon-" + iconpos + ( options.iconshadow ?
+							" ui-shadow-icon" :
+								"" ) ) :
+						"" ) +
+					( inline ? " ui-btn-inline" : "" ) +
+					( options.corners ? " ui-corner-all" : "" ) +
+					( options.shadow ? " ui-shadow" : "" ) +
+					( mini ? " ui-mini" : "" ) );
 
 		this.setButtonText();
 
@@ -234,7 +234,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			text = this.placeholder,
 			span = $( document.createElement( "span" ) );
 
-		this.button.find( ".ui-btn-text" ).html(function() {
+		this.button.children().not( this.element ).remove().end().end().append( (function() {
 			if ( selected.length ) {
 				text = selected.map(function() {
 					return $( this ).text();
@@ -247,7 +247,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			return span.text( text )
 				.addClass( self.select.attr( "class" ) )
 				.addClass( selected.attr( "class" ) );
-		});
+		})());
 	},
 
 	setButtonCount: function() {
