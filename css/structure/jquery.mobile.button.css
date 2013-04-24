@@ -26,6 +26,7 @@ button.ui-btn {
 	width: 24px;
 	height: 24px;
 	text-indent: -9999px;
+	white-space: nowrap !important;
 }
 button.ui-btn-icon-notext {
 	-webkit-box-sizing: content-box;
@@ -72,6 +73,13 @@ button.ui-btn-icon-notext {
 .ui-mini.ui-btn-icon-bottom {
 	padding-bottom: 30px;
 }
+.ui-header .ui-btn-icon-top,
+.ui-footer .ui-btn-icon-top,
+.ui-header .ui-btn-icon-bottom,
+.ui-footer .ui-btn-icon-bottom {
+	padding-left: 3px;
+	padding-right: 3px;
+}
 .ui-input-clear,
 .ui-grid-a .ui-btn,
 .ui-grid-b .ui-btn,
@@ -82,24 +90,16 @@ button.ui-btn-icon-notext {
 	margin-right: 5px;
 	margin-left: 5px;
 }
-.ui-header .ui-btn-icon-top,
-.ui-footer .ui-btn-icon-top,
-.ui-header .ui-btn-icon-bottom,
-.ui-footer .ui-btn-icon-bottom {
-	padding-left: 3px;
-	padding-right: 3px;
-}
-
-.ui-btn-left,
-.ui-btn-right {
-	position: absolute;
-	top: 3px;
-}
 .ui-btn-left,
 .ui-btn-right,
 .ui-btn-left > .ui-btn,
 .ui-btn-right > .ui-btn {
 	margin: 0;
+}
+.ui-btn-left,
+.ui-btn-right {
+	position: absolute;
+	top: 3px;
 }
 .ui-btn-left {
 	left: 5px;
@@ -120,7 +120,7 @@ button.ui-btn-icon-notext {
 	top: 7px;
 }
 
-/*hiding native inputs */
+/* Hiding native inputs */
 .ui-btn-hidden {
 	position: absolute;
 	top: 0;
