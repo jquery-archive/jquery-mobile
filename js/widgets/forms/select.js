@@ -243,8 +243,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 				text = self.placeholder;
 			}
 
+			if ( text ) {
+				span.text( text );
+			} else {
+				span.html( "&nbsp;" );
+			}
+
 			// TODO possibly aggregate multiple select option classes
-			return span.text( text )
+			return span
 				.addClass( self.select.attr( "class" ) )
 				.addClass( selected.attr( "class" ) );
 		})());
