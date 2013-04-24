@@ -383,7 +383,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 				return $( bg ).prependTo( self.slider );
 			})();
 		}
-		this.handle.buttonMarkup({ corners: true, theme: theme, shadow: true });
+		this.handle.addClass( "ui-btn ui-btn-" + theme + " ui-corner-all ui-shadow" );
 
 		control = this.element;
 		isInput = !this.isToggleSwitch;
@@ -523,7 +523,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	},
 
 	_setTheme: function( value ) {
-		this.handle.buttonMarkup( { theme: value } );
+		this.handle.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + value );
 	},
 
 	_setTrackTheme: function( value ) {
