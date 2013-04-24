@@ -67,7 +67,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		wrapper = document.createElement( "div" );
 		wrapper.className = "ui-" + inputtype;
 		input.add( label ).wrapAll( wrapper );
-		label.addClass( "ui-btn ui-btn-corner-all ui-btn-icon-" + iconpos );
+		label.addClass( "ui-btn ui-corner-all ui-btn-icon-" + iconpos );
 
 		this._on( label, {
 			vmouseover: "_handleLabelVMouseOver",
