@@ -42,9 +42,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		}
 
 		// create listview markup
-		t.element.addClass(function( i, orig ) {
-			return orig + " ui-listview" + listviewClasses;
-		});
+		t.element.addClass( " ui-listview" + listviewClasses );
 
 		t.refresh( true );
 	},
