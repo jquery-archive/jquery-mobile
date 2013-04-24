@@ -159,13 +159,13 @@ define( [
 					history.stack.length && history.stack[0].url !== history.initialDst.replace( dialogHashKey, "" ) ) {
 					to = $.mobile.firstPage;
 				}
-
-				$.mobile.changePage( to, changePageOptions );
-			}	else {
-
-				//there's no hash, go to the first page in the dom
-				$.mobile.changePage( $.mobile.firstPage, changePageOptions );
 			}
+
+			this._changeContent( to || $.mobile.firstPage, changePageOptions );
+		},
+
+		_changeContent: function( to, opts ) {
+			$.mobile.changePage( to, opts );
 		}
 
 		// handle hashchange
