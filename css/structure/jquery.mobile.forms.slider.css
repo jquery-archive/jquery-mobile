@@ -64,6 +64,7 @@ input.ui-input-text.ui-slider-input {
 .ui-slider-track.ui-mini {
 	height: 12px;
 	top: 8px;
+	padding: 0;
 }
 .ui-slider-bg {
 	border: none;
