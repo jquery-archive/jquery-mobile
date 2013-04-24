@@ -84,8 +84,14 @@ define( [
 			window.history.forward();
 		},
 
+		// TODO rename _handleDestination
 		_handleUrl: function( to ) {
 			var history, documentBase;
+
+			// clean the hash for comparison if it's a url
+			if( $.type(to) === "string" ) {
+				to = path.stripHash(to);
+			}
 
 			if ( to ) {
 				history = this._getHistory(),
@@ -96,13 +102,18 @@ define( [
 				// an id, we need to resolve it against the documentBase, not the location.href,
 				// since the hashchange could've been the result of a forward/backward navigation
 				// that crosses from an external page/dialog to an internal page/dialog.
+				// TODO move check to history object or path object?
 				to = !path.isPath( to ) ? ( path.makeUrlAbsolute( "#" + to, documentBase ) ) : to;
 
-				// If we"re about to go to an initial URL that contains a reference to a non-existent
-				// internal page, go to the first page instead. We know that the initial hash refers to a
-				// non-existent page, because the initial hash did not end up in the initial history entry
+				// If we're about to go to an initial URL that contains a
+				// reference to a non-existent internal page, go to the first
+				// page instead. We know that the initial hash refers to a
+				// non-existent page, because the initial hash did not end
+				// up in the initial history entry
+				// TODO move check to history object?
 				if ( to === path.makeUrlAbsolute( "#" + history.initialDst, documentBase ) &&
-					history.stack.length && history.stack[0].url !== history.initialDst.replace( dialogHashKey, "" ) ) {
+					history.stack.length &&
+					history.stack[0].url !== history.initialDst.replace( dialogHashKey, "" ) ) {
 					to = this._getInitialContent();
 				}
 			}
@@ -147,8 +158,8 @@ define( [
 
 		_handleNavigate: function( url, data ) {
 			//find first page via hash
-			var to = path.stripHash(url),
-				history = this._getHistory(),
+			// TODO striping the hash twice with handleUrl
+			var to = path.stripHash(url), history = this._getHistory(),
 
 				// transition is false if it's the first page, undefined
 				// otherwise (and may be overridden by default)

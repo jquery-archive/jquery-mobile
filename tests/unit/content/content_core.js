@@ -139,14 +139,33 @@
 		equal( opts.reverse, true );
 	});
 
+	var base = "http://example.com/";
 
 	module("Content Widget _handleUrl", {
 		setup: function() {
 			proto = $.mobile.content.prototype;
+			proto._getHistory = function() {
+				return {
+					initialDst: "foo",
+					stack: []
+				};
+			};
+
+			proto._getDocumentBase = function() {
+				return base;
+			};
 		}
 	});
 
 	test( "skips manipulation if to is undefined", function() {
 		equal( "", proto._handleUrl( "" ), "avoids manip" );
+	});
+
+	test( "returns an absolute url when the argument is just a hash", function() {
+		equal( base + "#foo", proto._handleUrl( "#foo" ) );
+	});
+
+	test( "returns the hashless value when the argument is a path", function() {
+		equal( "foo/bar", proto._handleUrl( "#foo/bar" ) );
 	});
 })(jQuery);
