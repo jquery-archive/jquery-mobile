@@ -46,6 +46,7 @@ button.ui-btn-icon-notext {
 .ui-btn-inline {
 	display: inline-block;
 	vertical-align: middle;
+	margin-right: 10px;
 }
 .ui-btn-icon-left {
 	padding-left: 40px;
@@ -72,7 +73,6 @@ button.ui-btn-icon-notext {
 	padding-bottom: 30px;
 }
 .ui-input-clear,
-.ui-btn-inline,
 .ui-grid-a .ui-btn,
 .ui-grid-b .ui-btn,
 .ui-grid-c .ui-btn,
