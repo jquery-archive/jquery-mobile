@@ -39,7 +39,8 @@
 	z-index: 1;
 }
 
-.ui-controlgroup .ui-btn-corner-all {
+.ui-controlgroup .ui-btn-corner-all,
+.ui-controlgroup .ui-btn.ui-corner-all {
 	-webkit-border-radius: 0;
 	border-radius: 0;
 }
