@@ -50,7 +50,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			slider = $( domSlider ),
 			valuebg = this.options.highlight && !isToggleSwitch ? (function() {
 				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-btn-corner-all";
+				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-corner-all";
 				return $( bg ).prependTo( slider );
 			})() : false,
 			options,
@@ -63,7 +63,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = [this.isToggleSwitch ? "ui-slider " : "ui-slider-track ",selectClass," ui-body-",trackTheme," ui-btn-corner-all", miniClass].join( "" );
+		domSlider.className = [this.isToggleSwitch ? "ui-slider " : "ui-slider-track ",selectClass," ui-body-",trackTheme," ui-corner-all", miniClass].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -115,7 +115,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 				sliderLabel = document.createElement( "div" );
 				sliderImg = document.createElement( "span" );
 
-				sliderImg.className = ["ui-slider-label ui-slider-label-", side, sliderTheme, " ui-btn-corner-all"].join( "" );
+				sliderImg.className = ["ui-slider-label ui-slider-label-", side, sliderTheme, " ui-corner-all"].join( "" );
 				sliderImg.setAttribute( "role", "img" );
 				sliderImg.appendChild( document.createTextNode( options[i].innerHTML ) );
 				$( sliderImg ).prependTo( slider );
@@ -369,7 +369,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-body-" + trackTheme," ui-btn-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
+		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-body-" + trackTheme," ui-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
@@ -379,7 +379,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		if ( this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
 			this.valuebg = (function() {
 				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-btn-corner-all";
+				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + " ui-corner-all";
 				return $( bg ).prependTo( self.slider );
 			})();
 		}
