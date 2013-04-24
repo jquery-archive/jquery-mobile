@@ -20,7 +20,7 @@
 			return true;
 		};
 
-		proto._handleHashChange = function() {
+		proto._handleNavigate = function() {
 			throw "should not be called when the original event's default is prevented";
 		};
 
@@ -30,7 +30,7 @@
 	test( "uses the hash in the state when the original event is a hashchange", function() {
 		expect( 2 );
 
-		proto._handleHashChange = function( url, state ) {
+		proto._handleNavigate = function( url, state ) {
 			equal( url, "foo", "the url is the hash stored in the state" );
 			equal( state.hash, url, "hash stored in the state is used as the url" );
 		};
@@ -43,7 +43,7 @@
 
 		mockEvent.originalEvent = $.Event( "other" );
 
-		proto._handleHashChange = function( url, state ) {
+		proto._handleNavigate = function( url, state ) {
 			equal( url, "bar", "the url is the url stored in the state: " + url );
 			equal( state.url, url, "url stored in the state is used as the url: " + state.url );
 		};
@@ -54,7 +54,7 @@
 	test( "uses the current hash when no url or hash is present", function() {
 		expect( 1 );
 
-		proto._handleHashChange = function( url, state ) {
+		proto._handleNavigate = function( url, state ) {
 			equal( url, "baz", "the url is the hash stored in the state" );
 		};
 
@@ -68,7 +68,7 @@
 	test( "uses the current url when no hash is present", function() {
 		expect( 1 );
 
-		proto._handleHashChange = function( url, state ) {
+		proto._handleNavigate = function( url, state ) {
 			equal( url, location.href, "the url is the hash stored in the state" );
 		};
 

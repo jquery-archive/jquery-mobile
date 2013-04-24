@@ -43,7 +43,7 @@ define( [
 				url = location.href;
 			}
 
-			this._handleHashChange( url, data.state );
+			this._handleNavigate( url, data.state );
 		},
 
 		_getHash: function() {
@@ -145,7 +145,7 @@ define( [
 			return to;
 		},
 
-		_handleHashChange: function( url, data ) {
+		_handleNavigate: function( url, data ) {
 			//find first page via hash
 			var to = path.stripHash(url),
 				history = this._getHistory(),
