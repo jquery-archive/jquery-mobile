@@ -11,7 +11,6 @@
 
 define( [
 	"jquery",
-	"../../jquery.mobile.buttonMarkup",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.navigation",
 	"../dialog",

@@ -6,7 +6,6 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
-	"../jquery.mobile.buttonMarkup",
 	"./addFirstLastClasses",
 	"../jquery.mobile.registry",
 	"../jquery.mobile.widget" ], function( jQuery ) {
@@ -90,7 +89,7 @@ $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 $.mobile.controlgroup.initSelector = ":jqmData(role='controlgroup')";
 
 $.mobile._enhancer.add( "mobile.controlgroup", {
-	dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.buttonmarkup", "mobile.checkboxradio" ]
+	dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.checkboxradio" ]
 });
 
 })(jQuery);

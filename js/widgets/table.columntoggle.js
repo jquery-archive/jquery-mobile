@@ -8,7 +8,6 @@
 define( [
 	"jquery",
 	"./table",
-	"../jquery.mobile.buttonMarkup",
 	"./popup",
 	"../jquery.mobile.fieldContain",
 	"./controlgroup",

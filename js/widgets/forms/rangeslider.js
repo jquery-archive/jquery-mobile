@@ -9,7 +9,6 @@ define( [ "jquery",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.widget",
 	"./textinput",
-	"../../jquery.mobile.buttonMarkup",
 	"./reset",
 	"../optionDemultiplexer",
 	"./slider" ], function( jQuery ) {
