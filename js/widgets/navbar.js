@@ -6,7 +6,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.grid", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -29,12 +29,16 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			.jqmEnhanceable()
 			.grid({ grid: this.options.grid });
 
-		$navbtns.buttonMarkup({
-			corners:	false,
-			shadow:		false,
-			inline:     true,
-			iconpos:	iconpos
-		});
+
+		$navbtns
+			.addClass( "ui-btn ui-btn-" + $.mobile.getInheritedTheme( $navbar, "a" ) + " ui-btn-inline" )
+			.each( function() {
+				var icon = $.mobile.getAttribute( this, "icon", true );
+
+				if ( icon ) {
+					$( this ).addClass( "ui-icon ui-icon-" + icon + " ui-btn-icon-" + iconpos );
+				}
+			});
 
 		$navbar.delegate( "a", "vclick", function( event ) {
 			// ui-btn-inner is returned as target
