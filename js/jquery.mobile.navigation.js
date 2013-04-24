@@ -72,6 +72,27 @@ define( [
 			window.history.forward();
 		},
 
+		_handleUrl: function( to ) {
+			if ( to ) {
+				// At this point, 'to' can be one of 3 things, a cached page element from
+				// a history stack entry, an id, or site-relative/absolute URL. If 'to' is
+				// an id, we need to resolve it against the documentBase, not the location.href,
+				// since the hashchange could've been the result of a forward/backward navigation
+				// that crosses from an external page/dialog to an internal page/dialog.
+				to = !path.isPath( to ) ? ( path.makeUrlAbsolute( "#" + to, documentBase ) ) : to;
+
+				// If we"re about to go to an initial URL that contains a reference to a non-existent
+				// internal page, go to the first page instead. We know that the initial hash refers to a
+				// non-existent page, because the initial hash did not end up in the initial history entry
+				if ( to === path.makeUrlAbsolute( "#" + history.initialDst, documentBase ) &&
+					history.stack.length && history.stack[0].url !== history.initialDst.replace( dialogHashKey, "" ) ) {
+					to = $.mobile.firstPage;
+				}
+			}
+
+			return to;
+		},
+
 		_handleDialog: function( changePageOptions, data ) {
 			var to, active, activeContent = this._getActiveContent();
 
@@ -143,25 +164,7 @@ define( [
 				}
 			}
 
-			//if to is defined, load it
-			if ( to ) {
-				// At this point, 'to' can be one of 3 things, a cached page element from
-				// a history stack entry, an id, or site-relative/absolute URL. If 'to' is
-				// an id, we need to resolve it against the documentBase, not the location.href,
-				// since the hashchange could've been the result of a forward/backward navigation
-				// that crosses from an external page/dialog to an internal page/dialog.
-				to = !path.isPath( to ) ? ( path.makeUrlAbsolute( "#" + to, documentBase ) ) : to;
-
-				// If we"re about to go to an initial URL that contains a reference to a non-existent
-				// internal page, go to the first page instead. We know that the initial hash refers to a
-				// non-existent page, because the initial hash did not end up in the initial history entry
-				if ( to === path.makeUrlAbsolute( "#" + history.initialDst, documentBase ) &&
-					history.stack.length && history.stack[0].url !== history.initialDst.replace( dialogHashKey, "" ) ) {
-					to = $.mobile.firstPage;
-				}
-			}
-
-			this._changeContent( to || $.mobile.firstPage, changePageOptions );
+			this._changeContent( this._handleUrl( to ) || $.mobile.firstPage, changePageOptions );
 		},
 
 		_changeContent: function( to, opts ) {
