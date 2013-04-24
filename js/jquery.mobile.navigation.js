@@ -85,7 +85,7 @@ define( [
 		},
 
 		// TODO rename _handleDestination
-		_handleUrl: function( to ) {
+		_handleDestination: function( to ) {
 			var history, documentBase;
 
 			// clean the hash for comparison if it's a url
@@ -192,7 +192,7 @@ define( [
 				}
 			}
 
-			this._changeContent( this._handleUrl( to ) || $.mobile.firstPage, changePageOptions );
+			this._changeContent( this._handleDestination( to ) || $.mobile.firstPage, changePageOptions );
 		},
 
 		_changeContent: function( to, opts ) {

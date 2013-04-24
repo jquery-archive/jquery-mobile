@@ -141,7 +141,7 @@
 
 	var base = "http://example.com/";
 
-	module("Content Widget _handleUrl", {
+	module("Content Widget _handleDestination", {
 		setup: function() {
 			proto = $.mobile.content.prototype;
 			proto._getHistory = function() {
@@ -158,15 +158,15 @@
 	});
 
 	test( "skips manipulation if to is undefined", function() {
-		equal( "", proto._handleUrl( "" ), "avoids manip" );
+		equal( "", proto._handleDestination( "" ), "avoids manip" );
 	});
 
 	test( "returns an absolute url when the argument is just a hash", function() {
-		equal( base + "#foo", proto._handleUrl( "#foo" ) );
+		equal( base + "#foo", proto._handleDestination( "#foo" ) );
 	});
 
 	test( "returns the hashless value when the argument is a path", function() {
-		equal( "foo/bar", proto._handleUrl( "#foo/bar" ) );
+		equal( "foo/bar", proto._handleDestination( "#foo/bar" ) );
 	});
 
 	test( "returns initial content when the url is base plus initial destination", function() {
@@ -183,6 +183,6 @@
 			return initialContent;
 		};
 
-		equal( initialContent, proto._handleUrl(base + "#" + proto._getHistory().initialDst) );
+		equal( initialContent, proto._handleDestination(base + "#" + proto._getHistory().initialDst) );
 	});
 })(jQuery);
