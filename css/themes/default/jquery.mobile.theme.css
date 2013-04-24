@@ -69,9 +69,7 @@ button,
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }
 .ui-btn-icon-notext.ui-btn-corner-all,
-.ui-btn-icon-notext.ui-corner-all,
-.ui-slider-handle.ui-btn-corner-all,
-.ui-slider-handle.ui-corner-all {
+.ui-btn-icon-notext.ui-corner-all {
 	-webkit-border-radius: 				1em /*{global-radii-icononly}*/;
 	border-radius: 						1em /*{global-radii-icononly}*/;
 }
