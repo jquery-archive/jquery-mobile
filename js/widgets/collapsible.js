@@ -102,14 +102,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
 			.find( "a" )
 				.first()
-				.buttonMarkup({
-					shadow: false,
-					corners: false,
-					iconpos: o.iconpos,
-					icon: o.collapsedIcon,
-					mini: o.mini,
-					theme: o.theme
-				});
+				.addClass( "ui-btn ui-btn-" + o.theme +
+					" ui-icon ui-icon-" + o.collapsedIcon + " ui-btn-icon-" + o.iconpos +
+					( o.mini ? " ui-mini" : "" ) );
 
 		$.extend( this, {
 			_collapsibleHeading: collapsibleHeading,
