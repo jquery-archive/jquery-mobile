@@ -56,6 +56,10 @@ define( [
 			return $.mobile.activePage;
 		},
 
+		_getHistory: function() {
+			return urlHistory;
+		},
+
 		_getActiveHistory: function() {
 			return $.mobile.urlHistory.getActive();
 		},
@@ -106,8 +110,11 @@ define( [
 		_handleHashChange: function( url, data ) {
 			//find first page via hash
 			var to = path.stripHash(url),
-				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
-				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
+				history = this._getHistory(),
+
+				// transition is false if it's the first page, undefined
+				// otherwise (and may be overridden by default)
+				transition = history.stack.length === 0 ? "none" : undefined,
 
 				// default options for the changPage calls made after examining the current state
 				// of the page and the hash, NOTE that the transition is derived from the previous
@@ -119,14 +126,15 @@ define( [
 				};
 
 			$.extend( changePageOptions, data, {
-				transition: (urlHistory.getLast() || {}).transition || transition
+				transition: (history.getLast() || {}).transition || transition
 			});
 
-			// If this isn't the first page, if the current url is a dialog hash key, and the initial
-			// destination isn't equal to the current target page, use the special dialog handling
-			if ( urlHistory.activeIndex > 0 &&
-					to.indexOf( dialogHashKey ) > -1 &&
-					urlHistory.initialDst !== to ) {
+			// If this isn't the first page, if the current url is a dialog hash key,
+			// and the initial destination isn't equal to the current target page,
+			// use the special dialog handling
+			if ( history.activeIndex > 0 &&
+				to.indexOf( dialogHashKey ) > -1 &&
+				history.initialDst !== to ) {
 
 				to = this._handleDialog( changePageOptions, data );
 
@@ -146,9 +154,9 @@ define( [
 
 				// If we"re about to go to an initial URL that contains a reference to a non-existent
 				// internal page, go to the first page instead. We know that the initial hash refers to a
-				// non-existent page, because the initial hash did not end up in the initial urlHistory entry
-				if ( to === path.makeUrlAbsolute( "#" + urlHistory.initialDst, documentBase ) &&
-					urlHistory.stack.length && urlHistory.stack[0].url !== urlHistory.initialDst.replace( dialogHashKey, "" ) ) {
+				// non-existent page, because the initial hash did not end up in the initial history entry
+				if ( to === path.makeUrlAbsolute( "#" + history.initialDst, documentBase ) &&
+					history.stack.length && history.stack[0].url !== history.initialDst.replace( dialogHashKey, "" ) ) {
 					to = $.mobile.firstPage;
 				}
 
