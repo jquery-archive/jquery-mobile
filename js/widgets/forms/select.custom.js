@@ -70,8 +70,8 @@ define( [
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
-				"class": "ui-btn-left"
-			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup();
+				"class": "ui-btn ui-btn-a ui-btn-left ui-btn-icon-notext ui-icon ui-icon-delete"
+			}).appendTo( header );
 		}
 
 		$.extend( widget, {
