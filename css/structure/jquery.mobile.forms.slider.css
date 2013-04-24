@@ -117,6 +117,7 @@ div.ui-slider-switch.ui-mini {
 	height: 29px;
 	margin: .25em 0;
 	top: 0;
+	padding: 0;
 }
 .ui-field-contain .ui-slider-switch,
 .ui-field-contain .ui-slider-switch.ui-mini {
