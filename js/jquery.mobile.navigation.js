@@ -22,8 +22,6 @@ define( [
 		_create: function() {
 			// TODO roll the logic here into the handleHashChange method
 			this._on( $window, { navigate: "_filterNavigateEvents" });
-
-			// navigate binding using _on
 		},
 
 		_filterNavigateEvents: function( e, data ) {
@@ -192,14 +190,14 @@ define( [
 				}
 			}
 
-			this._changeContent( this._handleDestination( to ) || $.mobile.firstPage, changePageOptions );
+			to = this._handleDestination( to ) || this._getInitialContent();
+			this._changeContent( to, changePageOptions );
 		},
 
 		_changeContent: function( to, opts ) {
 			$.mobile.changePage( to, opts );
 		}
 
-		// handle hashchange
 		// focus page
 		// scroll position
 		// transitionPages
