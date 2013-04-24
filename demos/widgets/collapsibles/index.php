@@ -12,7 +12,7 @@
     <script src="../../_assets/js/"></script>
     <script src="../../../js/"></script>
     <style id="negateDoubleBorder">
-        #demo-borders .ui-collapsible .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }
+        #demo-borders .ui-collapsible .ui-collapsible-heading { border-top-width: 1px !important; }
     </style>
 </head>
 <body>
