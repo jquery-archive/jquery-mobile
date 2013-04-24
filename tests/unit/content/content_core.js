@@ -138,4 +138,15 @@
 		equal( opts.transition, "bar" );
 		equal( opts.reverse, true );
 	});
+
+
+	module("Content Widget _handleUrl", {
+		setup: function() {
+			proto = $.mobile.content.prototype;
+		}
+	});
+
+	test( "skips manipulation if to is undefined", function() {
+		equal( "", proto._handleUrl( "" ), "avoids manip" );
+	});
 })(jQuery);

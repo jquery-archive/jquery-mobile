@@ -19,8 +19,6 @@ define( [
 (function( $, undefined ) {
 
 	$.widget( "mobile.content", $.mobile.widget, {
-		// element should be the $.mobile.pageContainer
-
 		_create: function() {
 			// TODO roll the logic here into the handleHashChange method
 			this._on( $window, { navigate: "_filterNavigateEvents" });
@@ -52,16 +50,30 @@ define( [
 			return $.mobile.path.parseLocation().hash;
 		},
 
+		// TODO active page should be managed by the container (ie, it should be a property)
 		_getActiveContent: function() {
 			return $.mobile.activePage;
 		},
 
+		// TODO the first page should be a property set during creat using the logic
+		//      that currently resides in init
+		_getInitialContent: function() {
+			return $.mobile.firstPage;
+		},
+
+		// TODO each content container should have a history object
 		_getHistory: function() {
 			return urlHistory;
 		},
 
+		// TODO use _getHistory
 		_getActiveHistory: function() {
 			return $.mobile.urlHistory.getActive();
+		},
+
+		// TODO the document base should be determined at creation
+		_getDocumentBase: function() {
+			return documentBase;
 		},
 
 		_back: function() {
@@ -73,7 +85,12 @@ define( [
 		},
 
 		_handleUrl: function( to ) {
+			var history, documentBase;
+
 			if ( to ) {
+				history = this._getHistory(),
+				documentBase = this._getDocumentBase();
+
 				// At this point, 'to' can be one of 3 things, a cached page element from
 				// a history stack entry, an id, or site-relative/absolute URL. If 'to' is
 				// an id, we need to resolve it against the documentBase, not the location.href,
@@ -86,7 +103,7 @@ define( [
 				// non-existent page, because the initial hash did not end up in the initial history entry
 				if ( to === path.makeUrlAbsolute( "#" + history.initialDst, documentBase ) &&
 					history.stack.length && history.stack[0].url !== history.initialDst.replace( dialogHashKey, "" ) ) {
-					to = $.mobile.firstPage;
+					to = this._getInitialContent();
 				}
 			}
 
