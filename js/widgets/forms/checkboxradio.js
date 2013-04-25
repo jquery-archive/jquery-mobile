@@ -48,7 +48,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		// Establish options
 		// If there's no selected theme check the data attr
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( this.element, "a" );
+			o.theme = "a";
 		}
 		o.mini = inheritAttr( input, "mini" ) || o.mini;
 

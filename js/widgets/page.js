@@ -45,7 +45,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	removeContainerBackground: function() {
-		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element.parent() ) );
+		var parent = this.element.parent(),
+			theme = $.mobile.getAttribute( parent[ 0 ], "theme", true );
+		$.mobile.pageContainer.removeClass( "ui-overlay-" + theme );
 	},
 
 	// set the page container background to the page theme

@@ -184,6 +184,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
 		},
 
+		// DEPRECATED in 1.4
 		// Find the closest parent with a theme class on it. Note that
 		// we are not using $.fn.closest() on purpose here because this
 		// method gets called quite a bit and we need it to be as fast

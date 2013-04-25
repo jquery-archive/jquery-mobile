@@ -26,7 +26,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		var self = this,
 			input = this.element,
 			o = this.options,
-			theme = o.theme || $.mobile.getInheritedTheme( this.element, "a" ),
+			theme = o.theme || "a",
 			themeclass  = " ui-body-" + theme,
 			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),

@@ -79,7 +79,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		$menuButton
 			.insertBefore( $table )
-			.addClass( "ui-btn ui-btn-" + ( o.columnBtnTheme || $.mobile.getInheritedTheme( this.element, "a" ) ) + " ui-corner-all ui-shadow ui-mini" );
+			.addClass( "ui-btn ui-btn-" + ( o.columnBtnTheme || "a" ) + " ui-corner-all ui-shadow ui-mini" );
 
 		$popup
 			.insertBefore( $table )

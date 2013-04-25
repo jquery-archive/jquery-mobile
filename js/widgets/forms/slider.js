@@ -29,7 +29,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		// TODO: Each of these should have comments explain what they're for
 		var self = this,
 			control = this.element,
-			parentTheme = $.mobile.getInheritedTheme( control, "a" ),
+			parentTheme = $.mobile.getAttribute( control[ 0 ], "theme", true ) || "a",
 			trackTheme = this.options.trackTheme || parentTheme,
 			cType = control[ 0 ].nodeName.toLowerCase(),
 			isToggleSwitch = ( cType === "select" ),
@@ -358,7 +358,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		//       alteration of the input value, which should still update the slider
 
 		var self = this,
-			parentTheme = $.mobile.getInheritedTheme( this.element, "a" ),
+			parentTheme = $.mobile.getAttribute( this.element[ 0 ], "theme", true ) || "a",
 			theme = this.options.theme || parentTheme,
 			trackTheme = this.options.trackTheme || parentTheme,
 			left, width, data, tol,

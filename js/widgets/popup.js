@@ -611,7 +611,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		this._applyTransition( o.transition );
 
 		if ( !this.options.theme ) {
-			this._setOptions( { theme: this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) } );
+			this._setOptions( { theme: this._page.jqmData( "theme" ) || "a" } );
 		}
 
 		this._ui.screen.removeClass( "ui-screen-hidden" );
