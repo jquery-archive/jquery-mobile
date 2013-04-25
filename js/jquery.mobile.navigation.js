@@ -20,6 +20,8 @@ define( [
 
 	$.widget( "mobile.content", $.mobile.widget, {
 		_create: function() {
+			var $window = $( window );
+
 			this.setLastScrollEnabled = true;
 
 			this._on( $window, { navigate: "_filterNavigateEvents" });
@@ -34,21 +36,8 @@ define( [
 				scrollstop: "_delayedRecordScroll"
 			});
 
-			// once the page has changed, re-enable the scroll recording
-			this._on({
-				pagechange: function() {
-					this.setLastScrollEnabled = true;
-
-					// remove any binding that previously existed on the get scroll
-					// which may or may not be different than the scroll element determined for
-					// this page previously
-					this._off( $window, "scrollstop" );
-
-					// determine and bind to the current scoll element which may be the window
-					// or in the case of touch overflow the element with touch overflow
-					this._on( $window, { scrollstop: "_delayedRecordScroll" });
-				}
-			});
+			// TODO move from page* events to content* events
+			this._on({ pagechange: "_afterContentChange" });
 
 			// handle initial hashchange from chrome :(
 			$window.one( "navigate", $.proxy(function() {
@@ -58,6 +47,21 @@ define( [
 
 		_disableRecordScroll: function() {
 			this.setLastScrollEnabled = false;
+		},
+
+		// TODO consider the name here, since it's purpose specific
+		_afterContentChange:  function() {
+			// once the page has changed, re-enable the scroll recording
+			this.setLastScrollEnabled = true;
+
+			// remove any binding that previously existed on the get scroll
+			// which may or may not be different than the scroll element determined for
+			// this page previously
+			this._off( $window, "scrollstop" );
+
+			// determine and bind to the current scoll element which may be the window
+			// or in the case of touch overflow the element with touch overflow
+			this._on( $window, { scrollstop: "_delayedRecordScroll" });
 		},
 
 		_recordScroll: function() {
