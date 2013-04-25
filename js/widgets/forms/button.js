@@ -155,7 +155,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 	}
 });
 
-$.mobile.button.initSelector = "a:jqmData(role='button'), .ui-header > a, .ui-footer > a, .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button, [type='button'], [type='submit'], [type='reset']";
+$.mobile.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.button" );
