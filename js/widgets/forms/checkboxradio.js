@@ -110,7 +110,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	},
 
 	_handleLabelVMouseOver: function( event ) {
-		if ( this.label.parent().hasClass( "ui-disabled" ) ) {
+		if ( this.label.parent().hasClass( "ui-state-disabled" ) ) {
 			event.stopPropagation();
 		}
 	},
@@ -209,9 +209,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		this.label.toggleClass( "ui-mini", !!value );
 	},
 
-	_setDisabled: function( value ) {
-		value = !!value;
-		this.element.prop( "disabled", value ).parent().toggleClass( "ui-disabled", value );
+	widget: function() {
+		return this.label;
 	}
 }, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
