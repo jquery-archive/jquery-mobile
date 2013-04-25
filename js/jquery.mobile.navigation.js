@@ -280,11 +280,8 @@ define( [
 		}
 
 		// focus page
-		// scroll position
 		// transitionPages
 		// resetActivePageHeight
-		// enhancePage
-		// _bindPageRemove
 		// enhancePage
 		// loadPage
 		// changePage
