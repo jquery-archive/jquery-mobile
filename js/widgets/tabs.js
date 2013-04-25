@@ -21,7 +21,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core","../jquer
 
 	$.widget("mobile.tabs", $.mobile.widget, $.ui.tabs.prototype);
 
-	$.mobile.tabs.initSelector = ":jqmData(role='tabs'), :jqmData()";
+	$.mobile.tabs.initSelector = ":jqmData(role='tabs'), :jqmData(content='tabs')";
 
 	$.mobile._enhancer.add( "mobile.tabs" );
 })( jQuery );

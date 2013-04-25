@@ -13,17 +13,15 @@
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
-	<div data-role="header" data-position="fixed">
+		<div data-role="tabs">
 			<div data-role="navbar">
 				<ul>
-			      <li><a href="#one" data-ajax="false">one</a></li>
-			      <li><a href="#two" data-ajax="false">two</a></li>
-			      <li><a href="ajax-content.php" data-ajax="false">three</a></li>
+			      <li><a href="#one" data-theme="a" data-ajax="false">one</a></li>
+			      <li><a href="#two"  data-theme="a" data-ajax="false">two</a></li>
+			      <li><a href="ajax-content.php"  data-theme="a" data-ajax="false">three</a></li>
 			    </ul>
 			</div>
-		</div>
-	<div data-role="tabs">
-		<ul></ul>
+		
 		<div id="one" class="ui-content">
 			<h1>First tab contents</h1>
 		</div>
@@ -36,8 +34,7 @@
 			    <li><a href="#">Ferrari</a></li>
 			</ul>      
 		</div>
-	</div><!-- /content -->
-
+</div>
 		<div data-role="footer" class="jqm-footer">
 			<p class="jqm-version"></p>
 			<p>Copyright 2013 The jQuery Foundation</p>
