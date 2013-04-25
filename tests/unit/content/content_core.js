@@ -157,8 +157,12 @@
 		}
 	});
 
-	test( "skips manipulation if to is undefined", function() {
-		equal( "", proto._handleDestination( "" ), "avoids manip" );
+	test( "skips manipulation and returns the initial content if two is falsey", function() {
+		proto._getInitialContent = function() {
+			return "initial content";
+		};
+
+		equal( "initial content", proto._handleDestination( "" ), "avoids manip" );
 	});
 
 	test( "returns an absolute url when the argument is just a hash", function() {

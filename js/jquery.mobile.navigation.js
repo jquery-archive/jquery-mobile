@@ -116,7 +116,7 @@ define( [
 				}
 			}
 
-			return to;
+			return to || this._getInitialContent();
 		},
 
 		_handleDialog: function( changePageOptions, data ) {
@@ -190,8 +190,7 @@ define( [
 				}
 			}
 
-			to = this._handleDestination( to ) || this._getInitialContent();
-			this._changeContent( to, changePageOptions );
+			this._changeContent( this._handleDestination(to), changePageOptions );
 		},
 
 		_changeContent: function( to, opts ) {
