@@ -8,7 +8,13 @@
 .ui-controlgroup-controls label.ui-submit { position: absolute; left: -9999px; }
 .ui-controlgroup li { list-style: none; }
 
-.ui-controlgroup .ui-btn { margin: 0; }
+.ui-controlgroup .ui-btn {
+	margin: 0;
+}
+.ui-controlgroup button.ui-btn {
+	width: auto;
+}
+
 .ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
 .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
 .ui-controlgroup-horizontal .ui-btn-icon-notext .ui-btn-inner { width: 18px; }
