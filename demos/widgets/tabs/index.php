@@ -73,7 +73,6 @@
 		    <h2>Tabbed page content</h2>
 		    <p>You can also use tabs to swap out an enitre pages content <a href="tabbed-content.php">Tabbed Content Pages</a></p>
 
-
 		</div><!-- /content -->
 
 		<div data-role="footer" class="jqm-footer">

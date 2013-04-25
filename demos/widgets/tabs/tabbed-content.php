@@ -13,8 +13,7 @@
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
-	<div data-role="tabs">
-		<div data-role="header">
+	<div data-role="header" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
 			      <li><a href="#one" data-ajax="false">one</a></li>
@@ -23,11 +22,13 @@
 			    </ul>
 			</div>
 		</div>
+	<div data-role="tabs">
+		<ul></ul>
 		<div id="one" class="ui-content">
 			<h1>First tab contents</h1>
 		</div>
 		<div id="two" class="ui-content">
-			<ul data-role="listview" data-inset="true">
+			<ul data-role="listview">
 			    <li><a href="#">Acura</a></li>
 			    <li><a href="#">Audi</a></li>
 			    <li><a href="#">BMW</a></li>
