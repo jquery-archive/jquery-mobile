@@ -66,11 +66,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.button = $el.addClass( classes );
 		}
 		
-		if ( $el.is( ".ui-header > a, .ui-footer > a" ) ) {
-			this.options.mini ? false : this._setOption( "mini", true );
-			this.options.inline ? false : this._setOption( "inline", true );
-		}
-		
 		$.extend( this, {
 			isInput: isInput,
 			buttonClasses: classes,
