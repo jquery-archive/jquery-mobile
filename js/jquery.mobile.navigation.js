@@ -50,11 +50,16 @@ define( [
 				setTimeout( setLastScroll, 100 );
 			};
 
-			// disable an scroll setting when a hashchange has been fired, this only works
-			// because the recording of the scroll position is delayed for 100ms after
-			// the browser might have changed the position because of the hashchange
-			$window.bind( "navigate", function() {
-				setLastScrollEnabled = false;
+			this._on( $window, {
+				// disable an scroll setting when a hashchange has been fired, this only works
+				// because the recording of the scroll position is delayed for 100ms after
+				// the browser might have changed the position because of the hashchange
+				navigate: function() {
+					setLastScrollEnabled = false;
+				},
+
+				// bind to scrollstop for the first page, "pagechange" won't be fired in that case
+				scrollstop: delayedSetLastScroll
 			});
 
 			// handle initial hashchange from chrome :(
@@ -63,21 +68,20 @@ define( [
 			});
 
 			// once the page has changed, re-enable the scroll recording
-			this.element.bind( "pagechange", function() {
-				setLastScrollEnabled = true;
+			this._on({
+				pagechange: function() {
+					setLastScrollEnabled = true;
 
-				// remove any binding that previously existed on the get scroll
-				// which may or may not be different than the scroll element determined for
-				// this page previously
-				$window.unbind( "scrollstop", delayedSetLastScroll );
+					// remove any binding that previously existed on the get scroll
+					// which may or may not be different than the scroll element determined for
+					// this page previously
+					this._off( $window, "scrollstop" );
 
-				// determine and bind to the current scoll element which may be the window
-				// or in the case of touch overflow the element with touch overflow
-				$window.bind( "scrollstop", delayedSetLastScroll );
+					// determine and bind to the current scoll element which may be the window
+					// or in the case of touch overflow the element with touch overflow
+					this._on( $window, { scrollstop: delayedSetLastScroll });
+				}
 			});
-
-			// bind to scrollstop for the first page as "pagechange" won't be fired in that case
-			$window.bind( "scrollstop", delayedSetLastScroll );
 		},
 
 		_filterNavigateEvents: function( e, data ) {
