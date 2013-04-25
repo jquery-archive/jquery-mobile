@@ -216,9 +216,9 @@
 				setTimeout(function(){
 					var headers = $( "#column-table-test table tr" ).find( "th:first" );
 					if( $input.is( ":checked" ) ){
-						ok( headers.is( ":hidden" )  );
+						ok( headers.is( ":visible" )  );
 					} else {
-						ok( headers.is( ":visible" ) );
+						ok( headers.is( ":hidden" ) );
 					}
 				}, 800);
 			},
