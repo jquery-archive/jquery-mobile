@@ -189,4 +189,70 @@
 
 		equal( initialContent, proto._handleDestination(base + "#" + proto._getHistory().initialDst) );
 	});
+
+	module( "Content Widget _recordScroll" );
+
+	test( "does not record scroll position when disabled", function() {
+		expect( 0 );
+
+		proto._getActiveHistory = function() {
+			ok( false, "_getActiveHistory should never be called" );
+		};
+
+		proto._disableRecordScroll();
+		proto._recordScroll();
+	});
+
+	test( "prefers last scroll when it's larger than the minimum scroll", function() {
+		expect( 1 );
+
+		var active = {};
+
+		proto._getActiveHistory = function() {
+			return active;
+		};
+
+		proto._getMinScroll = function() {
+			return 50;
+		};
+
+		proto._getScroll = function() {
+			return 100;
+		};
+
+		proto._enableRecordScroll();
+		proto._recordScroll();
+
+		equal( active.lastScroll, 100, "should be equal to _getScroll value" );
+	});
+
+	test( "prefers default scroll when current scroll < default scroll", function() {
+		expect( 1 );
+
+		var active = {};
+
+		proto._getActiveHistory = function() {
+			return active;
+		};
+
+		// min scroll
+		proto._getMinScroll = function() {
+			return 50;
+		};
+
+		// current scroll
+		proto._getScroll = function() {
+			return 25;
+		};
+
+		// default scroll
+		proto._getDefaultScroll = function() {
+			return 1;
+		};
+
+		proto._enableRecordScroll();
+		proto._recordScroll();
+
+		equal( active.lastScroll, 1, "should be equal to _getScroll value" );
+	});
 })(jQuery);

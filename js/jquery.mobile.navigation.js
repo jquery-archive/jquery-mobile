@@ -49,6 +49,10 @@ define( [
 			this.setLastScrollEnabled = false;
 		},
 
+		_enableRecordScroll: function() {
+			this.setLastScrollEnabled = true;
+		},
+
 		// TODO consider the name here, since it's purpose specific
 		_afterContentChange:  function() {
 			// once the page has changed, re-enable the scroll recording
@@ -71,17 +75,17 @@ define( [
 				return;
 			}
 
-			var active = this._getHistory().getActive(),
-				lastScroll, minScroll, defaultScroll;
+			var active = this._getActiveHistory(),
+				currentScroll, minScroll, defaultScroll;
 
 			if ( active ) {
-				lastScroll = this._getScroll();
+				currentScroll = this._getScroll();
 				minScroll = this._getMinScroll();
 				defaultScroll = this._getDefaultScroll();
 
 				// Set active page's lastScroll prop.
 				// If the location we're scrolling to is less than minScrollBack, let it go.
-				active.lastScroll = lastScroll < minScroll ? defaultScroll : lastScroll;
+				active.lastScroll = currentScroll < minScroll ? defaultScroll : currentScroll;
 			}
 		},
 
