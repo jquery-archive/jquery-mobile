@@ -22,6 +22,62 @@ define( [
 		_create: function() {
 			// TODO roll the logic here into the handleHashChange method
 			this._on( $window, { navigate: "_filterNavigateEvents" });
+
+			var delayedSetLastScroll, setLastScrollEnabled = true, setLastScroll = function() {
+				// this barrier prevents setting the scroll value based on the browser
+				// scrolling the window based on a hashchange
+				if ( !setLastScrollEnabled ) {
+					return;
+				}
+
+				var active = $.mobile.urlHistory.getActive(),
+					lastScroll;
+
+				if ( active ) {
+					lastScroll = $window.scrollTop();
+
+					// Set active page's lastScroll prop.
+					// If the location we're scrolling to is less than minScrollBack, let it go.
+					active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
+				}
+			};
+
+			// bind to scrollstop to gather scroll position. The delay allows for the hashchange
+			// event to fire and disable scroll recording in the case where the browser scrolls
+			// to the hash targets location (sometimes the top of the page). once pagechange fires
+			// getLastScroll is again permitted to operate
+			delayedSetLastScroll = function() {
+				setTimeout( setLastScroll, 100 );
+			};
+
+			// disable an scroll setting when a hashchange has been fired, this only works
+			// because the recording of the scroll position is delayed for 100ms after
+			// the browser might have changed the position because of the hashchange
+			$window.bind( $.support.pushState ? "popstate" : "hashchange", function() {
+				setLastScrollEnabled = false;
+			});
+
+			// handle initial hashchange from chrome :(
+			$window.one( $.support.pushState ? "popstate" : "hashchange", function() {
+				setLastScrollEnabled = true;
+			});
+
+			// once the page has changed, re-enable the scroll recording
+			this.element.bind( "pagechange", function() {
+				setLastScrollEnabled = true;
+
+				// remove any binding that previously existed on the get scroll
+				// which may or may not be different than the scroll element determined for
+				// this page previously
+				$window.unbind( "scrollstop", delayedSetLastScroll );
+
+				// determine and bind to the current scoll element which may be the window
+				// or in the case of touch overflow the element with touch overflow
+				$window.bind( "scrollstop", delayedSetLastScroll );
+			});
+
+			// bind to scrollstop for the first page as "pagechange" won't be fired in that case
+			$window.bind( "scrollstop", delayedSetLastScroll );
 		},
 
 		_filterNavigateEvents: function( e, data ) {
@@ -176,6 +232,7 @@ define( [
 				transition: (history.getLast() || {}).transition || transition
 			});
 
+			// TODO move to _handleDestination ?
 			// If this isn't the first page, if the current url is a dialog hash key,
 			// and the initial destination isn't equal to the current target page,
 			// use the special dialog handling
@@ -334,10 +391,7 @@ define( [
 			reset: function(/* href */) {
 				base.element.attr( "href", documentBase.hrefNoSearch );
 			}
-		},
-		setLastScrollEnabled = true, // Save the last scroll distance per page, before it is hidden
-		setLastScroll, delayedSetLastScroll;
-
+		};
 
 	//return the original document url
 	$.mobile.getDocumentUrl = path.getDocumentUrl;
@@ -398,66 +452,6 @@ define( [
 			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
 		}
 	}
-
-	setLastScroll = function() {
-		// this barrier prevents setting the scroll value based on the browser
-		// scrolling the window based on a hashchange
-		if ( !setLastScrollEnabled ) {
-			return;
-		}
-
-		var active = $.mobile.urlHistory.getActive(),
-			lastScroll;
-
-		if ( active ) {
-			lastScroll = $window.scrollTop();
-
-			// Set active page's lastScroll prop.
-			// If the location we're scrolling to is less than minScrollBack, let it go.
-			active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
-		}
-	};
-
-	// bind to scrollstop to gather scroll position. The delay allows for the hashchange
-	// event to fire and disable scroll recording in the case where the browser scrolls
-	// to the hash targets location (sometimes the top of the page). once pagechange fires
-	// getLastScroll is again permitted to operate
-	delayedSetLastScroll = function() {
-		setTimeout( setLastScroll, 100 );
-	};
-
-	// disable an scroll setting when a hashchange has been fired, this only works
-	// because the recording of the scroll position is delayed for 100ms after
-	// the browser might have changed the position because of the hashchange
-	$window.bind( $.support.pushState ? "popstate" : "hashchange", function() {
-		setLastScrollEnabled = false;
-	});
-
-	// handle initial hashchange from chrome :(
-	$window.one( $.support.pushState ? "popstate" : "hashchange", function() {
-		setLastScrollEnabled = true;
-	});
-
-	// wait until the mobile page container has been determined to bind to pagechange
-	$window.one( "pagecontainercreate", function() {
-		// once the page has changed, re-enable the scroll recording
-		$.mobile.pageContainer.bind( "pagechange", function() {
-
-			setLastScrollEnabled = true;
-
-			// remove any binding that previously existed on the get scroll
-			// which may or may not be different than the scroll element determined for
-			// this page previously
-			$window.unbind( "scrollstop", delayedSetLastScroll );
-
-			// determine and bind to the current scoll element which may be the window
-			// or in the case of touch overflow the element with touch overflow
-			$window.bind( "scrollstop", delayedSetLastScroll );
-		});
-	});
-
-	// bind to scrollstop for the first page as "pagechange" won't be fired in that case
-	$window.bind( "scrollstop", delayedSetLastScroll );
 
 	// No-op implementation of transition degradation
 	$.mobile._maybeDegradeTransition = $.mobile._maybeDegradeTransition || function( transition ) {
