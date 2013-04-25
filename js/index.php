@@ -74,6 +74,8 @@ $files = array(
 	'widgets/table.js',
 	'widgets/table.columntoggle.js',
 	'widgets/table.reflow.js',
+	'widgets/jquery.ui.tabs.js',
+	'widgets/tabs.js',
 	'jquery.mobile.zoom.js',
 	'jquery.mobile.zoom.iosorientationfix.js',
 	'jquery.mobile.init.js'

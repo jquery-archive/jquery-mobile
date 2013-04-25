@@ -553,7 +553,17 @@ h2.jqm-home-widget {
 	-moz-box-shadow: -5px 0 5px rgba(0,0,0,.10);
 	box-shadow: -5px 0 5px rgba(0,0,0,.10);
 }
-
+/* tabs */
+.tabs-list-left{
+	width:25%;
+	float:left;
+	vertical-align:top;
+}
+.tabs-list-content{
+	width:73%;
+	float:right;
+	margin:1em 0;
+}
 /* Responsive */
 @media (min-width:46em) {
 	/* Header logo */

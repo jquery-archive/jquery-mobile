@@ -41,6 +41,8 @@ define([
 	"./widgets/table",
 	"./widgets/table.columntoggle",
 	"./widgets/table.reflow",
+	"./widgets/jquery.ui.tabs",
+	"./widgets/tabs",
 	"./jquery.mobile.zoom",
 	"./jquery.mobile.zoom.iosorientationfix"
 ], function( require ) {
