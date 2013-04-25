@@ -53,12 +53,12 @@ define( [
 			// disable an scroll setting when a hashchange has been fired, this only works
 			// because the recording of the scroll position is delayed for 100ms after
 			// the browser might have changed the position because of the hashchange
-			$window.bind( $.support.pushState ? "popstate" : "hashchange", function() {
+			$window.bind( "navigate", function() {
 				setLastScrollEnabled = false;
 			});
 
 			// handle initial hashchange from chrome :(
-			$window.one( $.support.pushState ? "popstate" : "hashchange", function() {
+			$window.one( "navigate", function() {
 				setLastScrollEnabled = true;
 			});
 
