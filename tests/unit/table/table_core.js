@@ -179,12 +179,12 @@
 					
 					var $table = $('#column-table-test .ui-table'),
 						$first_input = $( "#movie-table-column-popup-popup" ).find( "input" ).eq(0),
-						$visibleCells = $table.find("tbody tr:first").find("th, td").not('.ui-table-cell-hidden'),
-						$visibleHeaders = $table.find("thead tr:first").find("th, td").not('.ui-table-cell-hidden');
+						$visibleCells = $table.find("tbody tr:first").find("th, td").filter( ":visible" ),
+						$visibleHeaders = $table.find("thead tr:first").find("th, td").filter( ":visible" );
 						
 					ok( $table.length, "table still enhanced");
 					equal( $table.find('tbody tr:first')
-						.find("th, td").eq(2).hasClass('ui-table-cell-hidden'), true, "random cell in hidden column has ui-table-cell-hidden class");
+						.find("th, td").eq(2).is(":visible"), false, "random cell in hidden column is not visible");
 					ok( $input.is( ":checked" ), false, "input is still not checked after refresh");
 					equal( $first_input.jqmData("cells").eq(1).data("test"), "abc",
 						"cell reference in popup is to cell currently in table");
@@ -216,9 +216,9 @@
 				setTimeout(function(){
 					var headers = $( "#column-table-test table tr" ).find( "th:first" );
 					if( $input.is( ":checked" ) ){
-						ok( headers.not( ".ui-table-cell-hidden" ) );
+						ok( headers.is( ":hidden" )  );
 					} else {
-						ok( headers.is( ".ui-table-cell-hidden" ) );
+						ok( headers.is( ":visible" ) );
 					}
 				}, 800);
 			},
