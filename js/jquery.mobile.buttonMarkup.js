@@ -115,7 +115,8 @@ function enhanceWithButtonMarkup() {
 // "alreadyEnhanced": A boolean indicating whether the ui-btn class was among
 // those found to be present
 function classesToOptions( el ) {
-	var idx, map, classRecognized, alreadyEnhanced = false,
+	var idx, map, classRecognized,
+		alreadyEnhanced = false,
 		noIcon = true,
 		o = {
 			icon: "",
@@ -136,21 +137,34 @@ function classesToOptions( el ) {
 		if ( map !== undefined ) {
 			classRecognized = true;
 			o[ map ] = true;
+
+		// Recognize the presence of an icon
 		} else if ( classes[ idx ] === "ui-icon" ) {
 			classRecognized = true;
 			noIcon = false;
+
+		// Establish the icon position
 		} else if (classes[ idx ].indexOf( "ui-btn-icon-" ) === 0 ) {
 			classRecognized = true;
 			o.iconpos = classes[ idx ].substring( 12 );
+
+		// Establish which icon is present
 		} else if ( classes[ idx ].indexOf( "ui-icon-" ) === 0 ) {
 			classRecognized = true;
 			o.icon = classes[ idx ].substring( 8 );
+
+		// Establish the theme - this recognizes one-letter theme swatch names
 		} else if ( classes[ idx ].indexOf( "ui-btn-" ) === 0 && classes[ idx ].length === 8 ) {
 			classRecognized = true;
 			o.theme = classes[ idx ].substring( 7 );
+
+		// Recognize that this element has already been buttonMarkup-enhanced
 		} else if ( classes[ idx ] === "ui-btn" ) {
+			classRecognized = true;
 			alreadyEnhanced = true;
 		}
+
+		// If this class has been recognized, add it to the list
 		if ( classRecognized ) {
 			classesFound.push( classes[ idx ] );
 		}
@@ -169,18 +183,22 @@ function classesToOptions( el ) {
 }
 
 // jQuery plugin for adding buttonMarkup
-$.fn.buttonMarkup = function( options ) {
+$.fn.buttonMarkup = function( options, firstCall ) {
 	var idx, data;
 
 	for ( idx = 0 ; idx < this.length ; idx++ ) {
-		// Analyze existing classes to establish existing options
-		data = classesToOptions( this[ idx ] );
+		if ( !firstCall ) {
+			// Analyze existing classes to establish existing options
+			data = classesToOptions( this[ idx ] );
 
-		// Assign this element to the jQuery object we're reusing
-		$el[ 0 ] = this[ idx ];
+			// Assign this element to the jQuery object we're reusing
+			$el[ 0 ] = this[ idx ];
 
-		// Remove the buttonMarkup-related classes found to be present
-		$el.removeClass( data.classes );
+			// Remove the buttonMarkup-related classes found to be present
+			$el.removeClass( data.classes );
+		} else {
+			data = { alreadyEnhanced: false };
+		}
 
 		// Merge all the options and apply them as classes
 		addButtonMarkup( this[ idx ], $.extend( {},
