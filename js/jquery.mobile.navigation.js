@@ -20,57 +20,24 @@ define( [
 
 	$.widget( "mobile.content", $.mobile.widget, {
 		_create: function() {
-			// TODO roll the logic here into the handleHashChange method
+			this.setLastScrollEnabled = true;
+
 			this._on( $window, { navigate: "_filterNavigateEvents" });
-
-			var delayedSetLastScroll, setLastScrollEnabled = true, setLastScroll = function() {
-				// this barrier prevents setting the scroll value based on the browser
-				// scrolling the window based on a hashchange
-				if ( !setLastScrollEnabled ) {
-					return;
-				}
-
-				var active = $.mobile.urlHistory.getActive(),
-					lastScroll;
-
-				if ( active ) {
-					lastScroll = $window.scrollTop();
-
-					// Set active page's lastScroll prop.
-					// If the location we're scrolling to is less than minScrollBack, let it go.
-					active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
-				}
-			};
-
-			// bind to scrollstop to gather scroll position. The delay allows for the hashchange
-			// event to fire and disable scroll recording in the case where the browser scrolls
-			// to the hash targets location (sometimes the top of the page). once pagechange fires
-			// getLastScroll is again permitted to operate
-			delayedSetLastScroll = function() {
-				setTimeout( setLastScroll, 100 );
-			};
 
 			this._on( $window, {
 				// disable an scroll setting when a hashchange has been fired, this only works
 				// because the recording of the scroll position is delayed for 100ms after
 				// the browser might have changed the position because of the hashchange
-				navigate: function() {
-					setLastScrollEnabled = false;
-				},
+				navigate: "_disableRecordScroll",
 
 				// bind to scrollstop for the first page, "pagechange" won't be fired in that case
-				scrollstop: delayedSetLastScroll
-			});
-
-			// handle initial hashchange from chrome :(
-			$window.one( "navigate", function() {
-				setLastScrollEnabled = true;
+				scrollstop: "_delayedRecordScroll"
 			});
 
 			// once the page has changed, re-enable the scroll recording
 			this._on({
 				pagechange: function() {
-					setLastScrollEnabled = true;
+					this.setLastScrollEnabled = true;
 
 					// remove any binding that previously existed on the get scroll
 					// which may or may not be different than the scroll element determined for
@@ -79,9 +46,41 @@ define( [
 
 					// determine and bind to the current scoll element which may be the window
 					// or in the case of touch overflow the element with touch overflow
-					this._on( $window, { scrollstop: delayedSetLastScroll });
+					this._on( $window, { scrollstop: "_delayedRecordScroll" });
 				}
 			});
+
+			// handle initial hashchange from chrome :(
+			$window.one( "navigate", $.proxy(function() {
+				this.setLastScrollEnabled = true;
+			}, this));
+		},
+
+		_disableRecordScroll: function() {
+			this.setLastScrollEnabled = false;
+		},
+
+		_recordScroll: function() {
+			// this barrier prevents setting the scroll value based on the browser
+			// scrolling the window based on a hashchange
+			if ( !this.setLastScrollEnabled ) {
+				return;
+			}
+
+			var active = $.mobile.urlHistory.getActive(),
+				lastScroll;
+
+			if ( active ) {
+				lastScroll = $window.scrollTop();
+
+				// Set active page's lastScroll prop.
+				// If the location we're scrolling to is less than minScrollBack, let it go.
+				active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
+			}
+		},
+
+		_delayedRecordScroll: function() {
+			setTimeout( $.proxy(this, "_recordScroll"), 100 );
 		},
 
 		_filterNavigateEvents: function( e, data ) {
