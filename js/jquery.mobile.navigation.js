@@ -67,20 +67,34 @@ define( [
 				return;
 			}
 
-			var active = $.mobile.urlHistory.getActive(),
-				lastScroll;
+			var active = this._getHistory().getActive(),
+				lastScroll, minScroll, defaultScroll;
 
 			if ( active ) {
-				lastScroll = $window.scrollTop();
+				lastScroll = this._getScroll();
+				minScroll = this._getMinScroll();
+				defaultScroll = this._getDefaultScroll();
 
 				// Set active page's lastScroll prop.
 				// If the location we're scrolling to is less than minScrollBack, let it go.
-				active.lastScroll = lastScroll < $.mobile.minScrollBack ? $.mobile.defaultHomeScroll : lastScroll;
+				active.lastScroll = lastScroll < minScroll ? defaultScroll : lastScroll;
 			}
 		},
 
 		_delayedRecordScroll: function() {
 			setTimeout( $.proxy(this, "_recordScroll"), 100 );
+		},
+
+		_getScroll: function() {
+			return $window.scrollTop();
+		},
+
+		_getMinScroll: function() {
+			return $.mobile.minScrollBack;
+		},
+
+		_getDefaultScroll: function() {
+			return $.mobile.defaultHomeScroll;
 		},
 
 		_filterNavigateEvents: function( e, data ) {
