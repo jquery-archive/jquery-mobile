@@ -5,274 +5,217 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse", "./jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
 
-	// This function calls getAttribute, which should be safe for data-* attributes
-	var getAttrFixed = $.mobile.getAttribute/*,
-		attachEvents = function() {
-			
-			var hoverDelay = $.mobile.buttonMarkup.hoverDelay, hov, foc;
-	
-			$.mobile.document.bind({
-				"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
-					var theme,
-						$btn = $( closestEnabledButton( event.target ) ),
-						isTouchEvent = event.originalEvent && /^touch/.test( event.originalEvent.type ),
-						evt = event.type;
-	
-					if ( $btn.length ) {
-						theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-	
-						if ( evt === "vmousedown" ) {
-							if ( isTouchEvent ) {
-								// Use a short delay to determine if the user is scrolling before highlighting
-								hov = setTimeout( function() {
-									updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-down-" + theme, undefined, "down" );
-								}, hoverDelay );
-							} else {
-								updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-down-" + theme, undefined, "down" );
-							}
-						} else if ( evt === "vmousecancel" || evt === "vmouseup" ) {
-							updateButtonClass( $btn, "ui-btn-down-" + theme, "ui-btn-up-" + theme, undefined, "up" );
-						} else if ( evt === "vmouseover" || evt === "focus" ) {
-							if ( isTouchEvent ) {
-								// Use a short delay to determine if the user is scrolling before highlighting
-								foc = setTimeout( function() {
-									updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-hover-" + theme, true, "" );
-								}, hoverDelay );
-							} else {
-								updateButtonClass( $btn, "ui-btn-up-" + theme, "ui-btn-hover-" + theme, true, "" );
-							}
-						} else if ( evt === "vmouseout" || evt === "blur" || evt === "scrollstart" ) {
-							updateButtonClass( $btn, "ui-btn-hover-" + theme  + " ui-btn-down-" + theme, "ui-btn-up-" + theme, false, "up" );
-							if ( hov ) {
-								clearTimeout( hov );
-							}
-							if ( foc ) {
-								clearTimeout( foc );
-							}
-						}
-					}
-				},
-				"focusin focus": function( event ) {
-					$( closestEnabledButton( event.target ) ).addClass( $.mobile.focusClass );
-				},
-				"focusout blur": function( event ) {
-					$( closestEnabledButton( event.target ) ).removeClass( $.mobile.focusClass );
-				}
-			});
+// General policy: Do not access data-* attributes except during enhancement.
+// Otherwise determine the state of the button exclusively from its className.
+// That's why addButtonMarkup expects a full complement of options, and the
+// jQuery plugin completes the set of options from the default values.
 
-			attachEvents = null;
-		}*/;
+// The variable $el below is used in $.fn.buttonMarkup. The single element
+// inside is replaced with the one passed into the function, to avoid repeated
+// calls to the jQuery constructor.
+var $el = $( "<a></a>" ),
+	// Map classes to buttonMarkup boolean options
+	reverseBoolOptionMap = {
+		"ui-shadow" : "shadow",
+		"ui-corner-all" : "corners",
+		"ui-btn-inline" : "inline",
+		"ui-shadow-icon" : "iconshadow",
+		"ui-mini" : "mini"
+	};
 
+// addButtonMarkup:
+// @el: The element to manipulate
+// @options: A complete set of options for this element.
+//
+// Use $.fn.buttonMarkup.defaults to get a complete set and use $.extend to
+// override your choice of options from that set.
+function addButtonMarkup( el, options ) {
+	var classes = [];
+
+	// Add classes to the array - first ui-btn and the theme
+	classes = classes.concat( [ "ui-btn", "ui-btn-" + options.theme ] );
+
+	// If there's an icon, add the icon-related classes
+	if ( options.icon ) {
+		classes = classes.concat( [ "ui-icon",
+			"ui-icon-" + options.icon,
+			"ui-btn-icon-" + options.iconpos
+		]);
+		if ( options.iconshadow ) {
+			classes.push( "ui-shadow-icon" );
+		}
+	}
+
+	// Add the appropriate class for each boolean option
+	if ( options.inline ) {
+		classes.push( "ui-btn-inline" );
+	}
+	if ( options.shadow ) {
+		classes.push( "ui-shadow" );
+	}
+	if ( options.corners ) {
+		classes.push( "ui-corner-all" );
+	}
+	if ( options.mini ) {
+		classes.push( "ui-mini" );
+	}
+
+	// Create a string from the array, removing duplicate spaces, and assign it
+	// back to the element's className
+	el.className = classes.join( " " );
+}
+
+// enhanceWithButtonMarkup:
+// @el: Element to enhance
+//
+// Harvest an element's buttonMarkup-related data attributes and use their value
+// to override defaults. Take into account that buttons inside headers and
+// footers are mini and inline by default. Pass the element to addButtonMarkup
+// with the calculated options.
+//
+// This function is only defined so that it can be called from the enhancer
+// without having to write it inline and may be moved into the enhancer in the
+// future.
+function enhanceWithButtonMarkup() {
+	var idx,
+		el = this,
+		getAttrFixed = $.mobile.getAttribute;
+
+	addButtonMarkup( el, $.extend( {},
+		$.fn.buttonMarkup.defaults, {
+			icon      : getAttrFixed( el, "icon",       true ),
+			iconpos   : getAttrFixed( el, "iconpos",    true ),
+			theme     : getAttrFixed( el, "theme",      true ),
+			inline    : getAttrFixed( el, "inline",     true ),
+			shadow    : getAttrFixed( el, "shadow",     true ),
+			corners   : getAttrFixed( el, "corners",    true ),
+			iconshadow: getAttrFixed( el, "iconshadow", true ),
+			mini      : getAttrFixed( el, "mini",       true )
+		}));
+}
+
+// classesToOptions:
+// @el: The element whose classes are to be analyzed
+//
+// Loops over the element's classes and records those that are recognized as
+// buttonMarkup-related both in an string and as an option.
+//
+// Returns: An object containing the following items:
+//
+// "options": buttonMarkup options found to be present because of the
+// presence/absence corresponding classes
+//
+// "classes": a string containing all the buttonMarkup-related classes found
+//
+// "alreadyEnhanced": A boolean indicating whether the ui-btn class was among
+// those found to be present
+function classesToOptions( el ) {
+	var idx, map, classRecognized, alreadyEnhanced = false,
+		noIcon = true,
+		o = {
+			icon: "",
+			inline: false,
+			shadow: false,
+			corners: false,
+			iconshadow: false,
+			mini: false
+		},
+		classes = el.className.split( " " ),
+		classesFound = [];
+
+	for ( idx = 0 ; idx < classes.length ; idx++ ) {
+		addClass = false;
+		map = reverseBoolOptionMap[ classes[ idx ] ];
+
+		// Recognize boolean options from the presence of classes
+		if ( map !== undefined ) {
+			classRecognized = true;
+			o[ map ] = true;
+		} else if ( classes[ idx ] === "ui-icon" ) {
+			classRecognized = true;
+			noIcon = false;
+		} else if (classes[ idx ].indexOf( "ui-btn-icon-" ) === 0 ) {
+			classRecognized = true;
+			o.iconpos = classes[ idx ].substring( 12 );
+		} else if ( classes[ idx ].indexOf( "ui-icon-" ) === 0 ) {
+			classRecognized = true;
+			o.icon = classes[ idx ].substring( 8 );
+		} else if ( classes[ idx ].indexOf( "ui-btn-" ) === 0 && classes[ idx ].length === 8 ) {
+			classRecognized = true;
+			o.theme = classes[ idx ].substring( 7 );
+		} else if ( classes[ idx ] === "ui-btn" ) {
+			alreadyEnhanced = true;
+		}
+		if ( classRecognized ) {
+			classesFound.push( classes[ idx ] );
+		}
+	}
+
+	// If the class ui-icon is absent there cannot be an icon
+	if ( noIcon ) {
+		o.icon = "";
+	}
+
+	return {
+		options: o,
+		classes: classesFound.join( " " ),
+		alreadyEnhanced: alreadyEnhanced
+	};
+}
+
+// jQuery plugin for adding buttonMarkup
 $.fn.buttonMarkup = function( options ) {
-	var $workingSet = this,
-		nsKey = "data-" + $.mobile.ns,
-		key,
-		i, el, e, o,
-		// Classes Defined
-		innerClass = "ui-btn-inner",
-		textClass = "ui-btn-text",
-		buttonClass, iconClass,
-		hover = false,
-		state = "up",
-		// Button inner markup
-		buttonInner,
-		buttonText,
-		buttonIcon,
-		buttonElements;
+	var idx, data;
 
-	// Enforce options to be of type string
-	options = ( options && ( $.type( options ) === "object" ) )? options : {};
+	for ( idx = 0 ; idx < this.length ; idx++ ) {
+		// Analyze existing classes to establish existing options
+		data = classesToOptions( this[ idx ] );
 
-	for ( i = 0; i < $workingSet.length; i++ ) {
-		el = $workingSet.eq( i );
-		e = el[ 0 ];
-		o = $.extend( {}, $.fn.buttonMarkup.defaults, {
-			icon:       options.icon       !== undefined ? options.icon       : getAttrFixed( e, "icon", true ),
-			iconpos:    options.iconpos    !== undefined ? options.iconpos    : getAttrFixed( e, "iconpos", true ),
-			theme:      options.theme      !== undefined ? options.theme      : getAttrFixed( e, "theme", true ) || "a",
-			inline:     options.inline     !== undefined ? options.inline     : getAttrFixed( e, "inline", true ),
-			shadow:     options.shadow     !== undefined ? options.shadow     : getAttrFixed( e, "shadow", true ),
-			corners:    options.corners    !== undefined ? options.corners    : getAttrFixed( e, "corners", true ),
-			iconshadow: options.iconshadow !== undefined ? options.iconshadow : getAttrFixed( e, "iconshadow", true ),
-			mini:       options.mini       !== undefined ? options.mini       : getAttrFixed( e, "mini", true )
-		}, options );
+		// Assign this element to the jQuery object we're reusing
+		$el[ 0 ] = this[ idx ];
 
-		innerClass = "ui-btn-inner";
-		textClass = "ui-btn-text";
-		hover = false;
-		state = "up";
+		// Remove the buttonMarkup-related classes found to be present
+		$el.removeClass( data.classes );
 
-		for ( key in o ) {
-			if ( o[ key ] === undefined || o[ key ] === null ) {
-				el.removeAttr( nsKey + key );
-			} else {
-				e.setAttribute( nsKey + key, o[ key ] );
-			}
-		}
+		// Merge all the options and apply them as classes
+		addButtonMarkup( this[ idx ], $.extend( {},
+			// The defaults form the basis
+			$.fn.buttonMarkup.defaults,
 
-		// Check if this element is already enhanced
-		buttonElements = $.data( ( ( e.tagName === "INPUT" || e.tagName === "BUTTON" ) ? e.parentNode : e ), "buttonElements" );
+			// If the element already has the class ui-btn, then we assume that
+			// it has passed through buttonMarkup before - otherwise, the options
+			// returned by classesToOptions do not reflect the state of the element
+			( data.alreadyEnhanced ? data.options : {} ),
 
-		if ( buttonElements ) {
-			e = buttonElements.outer;
-			el = $( e );
-			buttonInner = buttonElements.inner;
-			buttonText = buttonElements.text;
-			// We will recreate this icon below
-			$( buttonElements.icon ).remove();
-			buttonElements.icon = null;
-			hover = buttonElements.hover;
-			state = buttonElements.state;
-		}
-		else {
-			buttonInner = document.createElement( o.wrapperEls );
-			buttonText = document.createElement( o.wrapperEls );
-		}
-		buttonIcon = o.icon ? document.createElement( "span" ) : null;
-
-		/*if ( attachEvents && !buttonElements ) {
-			attachEvents();
-		}*/
-
-		// if not, try to find closest theme container
-		if ( !o.theme ) {
-			o.theme = "a";
-		}
-
-		buttonClass = "ui-btn ui-btn-" + o.theme;
-		buttonClass += ( hover ? " ui-btn-hover-" + o.theme : "" );
-		buttonClass += ( state ? " ui-btn-" + state + "-" + o.theme : "" );
-		buttonClass += o.shadow ? " ui-shadow" : "";
-		buttonClass += o.corners ? " ui-btn-corner-all" : "";
-
-		if ( o.mini !== undefined ) {
-			// Used to control styling in headers/footers, where buttons default to `mini` style.
-			buttonClass += o.mini === true ? " ui-mini" : " ui-fullsize";
-		}
-
-		if ( o.inline !== undefined ) {
-			// Used to control styling in headers/footers, where buttons default to `inline` style.
-			buttonClass += o.inline === true ? " ui-btn-inline" : " ui-btn-block";
-		}
-
-		if ( o.icon ) {
-			o.icon = "ui-icon-" + o.icon;
-			o.iconpos = o.iconpos || "left";
-
-			iconClass = "ui-icon " + o.icon;
-
-			if ( o.iconshadow ) {
-				iconClass += " ui-icon-shadow";
-			}
-		}
-
-		if ( o.iconpos ) {
-			buttonClass += " ui-btn-icon-" + o.iconpos;
-
-			if ( o.iconpos === "notext" && !el.attr( "title" ) ) {
-				el.attr( "title", el.getEncodedText() );
-			}
-		}
-
-		if ( buttonElements ) {
-			el.removeClass( buttonElements.bcls || "" );
-		}
-		el.removeClass( "ui-link" ).addClass( buttonClass );
-
-		buttonInner.className = innerClass;
-		buttonText.className = textClass;
-		if ( !buttonElements ) {
-			buttonInner.appendChild( buttonText );
-		}
-		if ( buttonIcon ) {
-			buttonIcon.className = iconClass;
-			if ( !( buttonElements && buttonElements.icon ) ) {
-				buttonIcon.innerHTML = "&#160;";
-				buttonInner.appendChild( buttonIcon );
-			}
-		}
-
-		while ( e.firstChild && !buttonElements ) {
-			buttonText.appendChild( e.firstChild );
-		}
-
-		if ( !buttonElements ) {
-			e.appendChild( buttonInner );
-		}
-
-		// Assign a structure containing the elements of this button to the elements of this button. This
-		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
-		buttonElements = {
-			hover : hover,
-			state : state,
-			bcls  : buttonClass,
-			outer : e,
-			inner : buttonInner,
-			text  : buttonText,
-			icon  : buttonIcon
-		};
-
-		$.data( e,           "buttonElements", buttonElements );
-		$.data( buttonInner, "buttonElements", buttonElements );
-		$.data( buttonText,  "buttonElements", buttonElements );
-		if ( buttonIcon ) {
-			$.data( buttonIcon, "buttonElements", buttonElements );
-		}
+			// Finally, apply the options passed int
+			options ) );
 	}
 
 	return this;
 };
 
+// buttonMarkup defaults. This must be a complete set, i.e., a value must be
+// given here for all recognized options
 $.fn.buttonMarkup.defaults = {
-	corners: true,
+	icon: "",
+	iconpos: "right",
+	theme: "a",
+	inline: false,
 	shadow: true,
+	corners: true,
 	iconshadow: true,
-	wrapperEls: "span"
+	mini: false
 };
 
-function closestEnabledButton( element ) {
-    var cname;
-
-    while ( element ) {
-		// Note that we check for typeof className below because the element we
-		// handed could be in an SVG DOM where className on SVG elements is defined to
-		// be of a different type (SVGAnimatedString). We only operate on HTML DOM
-		// elements, so we look for plain "string".
-        cname = ( typeof element.className === "string" ) && ( element.className + " " );
-        if ( cname && cname.indexOf( "ui-btn " ) > -1 && cname.indexOf( "ui-disabled " ) < 0 ) {
-            break;
-        }
-
-        element = element.parentNode;
-    }
-
-    return element;
-}
-
-/*function updateButtonClass( $btn, classToRemove, classToAdd, hover, state ) {
-	var buttonElements = $.data( $btn[ 0 ], "buttonElements" );
-	$btn.removeClass( classToRemove ).addClass( classToAdd );
-	if ( buttonElements ) {
-		buttonElements.bcls = $( document.createElement( "div" ) )
-			.addClass( buttonElements.bcls + " " + classToAdd )
-			.removeClass( classToRemove )
-			.attr( "class" );
-		if ( hover !== undefined ) {
-			buttonElements.hover = hover;
-		}
-		buttonElements.state = state;
-	}
-}*/
-
-//links in bars, or those with  data-role become buttons
+//links in bars, or those with data-role become buttons
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
-
+	$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a", target ).each( enhanceWithButtonMarkup );
 });
 
 })( jQuery );
