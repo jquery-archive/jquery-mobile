@@ -66,6 +66,7 @@ $files = array(
 	'jquery.mobile.buttonMarkup.js',
 	'widgets/controlgroup.js',
 	'jquery.mobile.links.js',
+	'widgets/toolbar.js',
 	'widgets/fixedToolbar.js',
 	'widgets/fixedToolbar.workarounds.js',
 	'widgets/panel.js',

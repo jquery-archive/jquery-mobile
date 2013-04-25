@@ -34,6 +34,7 @@ define([
 	"./jquery.mobile.buttonMarkup",
 	"./widgets/controlgroup",
 	"./jquery.mobile.links",
+	"./widgets/toolbar",
 	"./widgets/fixedToolbar",
 	"./widgets/fixedToolbar.workarounds",
 	"./widgets/popup",

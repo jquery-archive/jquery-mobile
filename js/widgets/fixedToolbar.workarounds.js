@@ -6,7 +6,7 @@
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom", "./fixedToolbar" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-	$.widget( "mobile.fixedtoolbar", $.mobile.fixedtoolbar, {
+	$.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 		_create: function() {
 			this._super();
