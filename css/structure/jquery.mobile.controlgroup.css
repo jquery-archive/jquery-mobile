@@ -1,50 +1,114 @@
-.ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: .5em 0; zoom: 1; }
-.ui-controlgroup.ui-mini, fieldset.ui-controlgroup.ui-mini { margin: .25em 0; }
-.ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup { margin: 0; }
-.ui-bar .ui-controlgroup { margin: 0 5px; }
-
-.ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
-.ui-controlgroup-controls label.ui-select,
-.ui-controlgroup-controls label.ui-submit { position: absolute; left: -9999px; }
-.ui-controlgroup li { list-style: none; }
-
+.ui-controlgroup,
+fieldset.ui-controlgroup {
+	padding: 0;
+	margin: .5em 0;
+	zoom: 1;
+}
+.ui-controlgroup.ui-mini,
+fieldset.ui-controlgroup.ui-mini {
+	margin-top: .25em;
+	margin-bottom: .25em;
+	padding: 0;
+}
+.ui-field-contain .ui-controlgroup,
+.ui-field-contain fieldset.ui-controlgroup {
+	margin: 0;
+}
+.ui-bar .ui-controlgroup {
+	margin: 0 5px;
+}
+.ui-controlgroup-horizontal .ui-controlgroup-controls:before,
+.ui-controlgroup-horizontal .ui-controlgroup-controls:after {
+	content: "";
+	display: table;
+}
+.ui-controlgroup-horizontal .ui-controlgroup-controls:after {
+	clear: both;
+}
+.ui-controlgroup-horizontal .ui-controlgroup-controls {
+	display: inline-block;
+	vertical-align: middle;
+	zoom: 1;
+}
+.ui-controlgroup-horizontal .ui-controlgroup-controls > .ui-btn,
+.ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-btn,
+.ui-controlgroup-horizontal .ui-checkbox,
+.ui-controlgroup-horizontal .ui-radio,
+.ui-controlgroup-horizontal .ui-select {
+	float: left;
+	clear: none;
+	margin: 0;
+}
 .ui-controlgroup .ui-btn {
 	margin: 0;
 }
-.ui-controlgroup button.ui-btn {
-	width: auto;
-}
-
-.ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
-.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
-.ui-controlgroup-horizontal .ui-btn-icon-notext .ui-btn-inner { width: 18px; }
-.ui-controlgroup.ui-mini .ui-btn-icon-notext .ui-btn-inner,
-.ui-header .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner,
-.ui-footer .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 16px; padding: .55em 11px .5em 11px; }
-.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; right: 50%; margin: -9px -9px 0 0; }
-.ui-controlgroup-horizontal .ui-btn-inner { text-align: center; }
-.ui-controlgroup-horizontal.ui-mini .ui-btn-inner { height: 16px; line-height: 16px; }
-.ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px; }
-
-.ui-controlgroup-horizontal .ui-controlgroup-controls:before,
-.ui-controlgroup-horizontal .ui-controlgroup-controls:after { content: ""; display: table; }
-.ui-controlgroup-horizontal .ui-controlgroup-controls:after { clear: both; }
-.ui-controlgroup-horizontal .ui-controlgroup-controls { display: inline-block; vertical-align: middle; zoom: 1; }
-.ui-controlgroup-horizontal .ui-controlgroup-controls > .ui-btn, .ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-btn,
-.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio,
-.ui-controlgroup-horizontal .ui-select { float: left; clear: none; margin: 0; }
-/* On IE7 the floating selects will be displayed as block if .ui-btn-text has width 100% */
-.ui-controlgroup-horizontal .ui-select .ui-btn-text { width: auto; }
-
-.ui-controlgroup-vertical .ui-btn {	border-bottom-width: 0; }
-.ui-controlgroup-vertical .ui-btn.ui-last-child { border-bottom-width: 1px; }
-.ui-controlgroup-horizontal .ui-btn { border-right-width: 0; }
-.ui-controlgroup-horizontal .ui-btn.ui-last-child {	border-right-width: 1px; }
-
 .ui-controlgroup .ui-btn:focus {
 	z-index: 1;
 }
-
+.ui-controlgroup.ui-mini .ui-btn {
+	margin: 0;
+	font-size: 12.5px;
+	padding: .55em 11px .5em;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-left {
+	padding-left: 30px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-right {
+	padding-right: 30px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-top {
+	padding-top: 30px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-bottom {
+	padding-bottom: 30px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-left:after {
+	left: 5px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-right:after {
+	right: 5px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-top:after {
+	top: 5px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-bottom:after {
+	bottom: 5px;
+}
+.ui-controlgroup li {
+	list-style: none;
+}
+.ui-controlgroup-horizontal button.ui-btn,
+.ui-controlgroup .ui-btn-icon-notext {
+	width: auto;
+}
+.ui-controlgroup-horizontal .ui-btn-icon-notext,
+.ui-controlgroup-horizontal button.ui-btn-icon-notext {
+	width: 24px;
+}
+.ui-controlgroup .ui-btn-icon-notext {
+	height: auto;
+	padding: .7em 15px;
+}
+.ui-controlgroup .ui-btn-icon-notext:after {
+	top: 50%;
+	left: 50%;
+	margin: -9px 0 0 -9px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-notext {
+	padding: .55em 11px .5em 11px;
+}
+.ui-controlgroup-vertical .ui-btn {
+	border-bottom-width: 0;
+}
+.ui-controlgroup-vertical .ui-btn.ui-last-child {
+	border-bottom-width: 1px;
+}
+.ui-controlgroup-horizontal .ui-btn {
+	border-right-width: 0;
+}
+.ui-controlgroup-horizontal .ui-btn.ui-last-child {
+	border-right-width: 1px;
+}
 .ui-controlgroup .ui-btn-corner-all,
 .ui-controlgroup .ui-btn.ui-corner-all {
 	-webkit-border-radius: 0;
@@ -82,11 +146,25 @@
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
-
 .ui-controlgroup .ui-shadow:not(.ui-focus) {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
+}
+.ui-controlgroup-label {
+	font-size: 16px;
+	line-height: 1.4;
+	font-weight: normal;
+	margin: 0 0 .4em;
+}
+.ui-controlgroup .ui-checkbox label,
+.ui-controlgroup .ui-radio label {
+	font-size: 16px;
+}
+.ui-controlgroup-controls label.ui-select,
+.ui-controlgroup-controls label.ui-submit {
+	position: absolute;
+	left: -9999px;
 }
 
 @media (min-width: 28em) {
