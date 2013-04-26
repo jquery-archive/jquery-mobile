@@ -255,21 +255,41 @@
 		equal( active.lastScroll, 1, "should be equal to _getScroll value" );
 	});
 
-	module( "Content Widget _getExistingPage" );
+	module( "Content Widget _getExistingPage", {
+		setup: function() {
+			proto._getNs = function() {
+				return "foo-";
+			};
+		}
+	});
 
 	test( "returns the page container child matching the dataUrl first", function() {
 		var settings = {
 			pageContainer: $( "<div><div data-foo-url='bar'></div></div>" )
 		};
 
-		proto._getNs = function() {
-			return "foo-";
-		};
-
 		equal(
-			settings.pageContainer.children()[0],
 			proto._getExistingPage( settings, "bar" )[0],
+			settings.pageContainer.children()[0],
 			"returns the first child of the page container"
 		);
+	});
+
+	test( "returns the child with the dataUrl id and corrects the data-url attr", function() {
+		var result, settings = {
+			pageContainer: $( "<div><div id='bar'></div></div>" )
+		};
+
+		equal( settings.pageContainer.children().first().attr( "data-foo-url" ), undefined );
+
+		result = proto._getExistingPage( settings, "bar" ),
+
+		equal(
+			result[0],
+			settings.pageContainer.children()[0],
+			"returns the first child of the page container"
+		);
+
+		equal( result.attr( "data-foo-url"), "bar" );
 	});
 })(jQuery);
