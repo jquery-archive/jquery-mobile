@@ -301,7 +301,7 @@ define( [
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
 			//      are a valid url char and it breaks on the first occurence
-			page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url='" + dataUrl + "']" );
+			page = settings.pageContainer.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
 
 			// If we failed to find the page, check to see if the url is a
 			// reference to an embedded page. If so, it may have been dynamically
@@ -309,7 +309,7 @@ define( [
 			// attribute and in need of enhancement.
 			if ( page.length === 0 && dataUrl && !path.isPath( dataUrl ) ) {
 				page = settings.pageContainer.children( "#" + dataUrl )
-					.attr( "data-" + $.mobile.ns + "url", dataUrl )
+					.attr( "data-" + this._getNs() + "url", dataUrl )
 					.jqmData( "url", dataUrl );
 			}
 
@@ -490,8 +490,8 @@ define( [
 							newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
 
 							// TODO handle dialogs again
-							pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + $.mobile.ns + "role=[\"']?page[\"']?[^>]*>)" ),
-							dataUrlRegex = new RegExp( "\\bdata-" + $.mobile.ns + "url=[\"']?([^\"'>]*)[\"']?" );
+							pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + this._getNs() + "role=[\"']?page[\"']?[^>]*>)" ),
+							dataUrlRegex = new RegExp( "\\bdata-" + this._getNs() + "url=[\"']?([^\"'>]*)[\"']?" );
 
 
 						// data-url must be provided for the base tag so resource requests can be directed to the
@@ -514,7 +514,7 @@ define( [
 
 						//if page elem couldn't be found, create one and insert the body element's contents
 						if ( !page.length ) {
-							page = $( "<div data-" + $.mobile.ns + "role='page'>" + ( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) + "</div>" );
+							page = $( "<div data-" + this._getNs() + "role='page'>" + ( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) + "</div>" );
 						}
 
 						if ( newPageTitle && !page.jqmData( "title" ) ) {
@@ -531,8 +531,8 @@ define( [
 						//      by the various page handling code is bad. Having page handling code in many
 						//      places is bad. Solutions post 1.0
 						page
-							.attr( "data-" + $.mobile.ns + "url", path.convertUrlToDataUrl( fileUrl ) )
-							.attr( "data-" + $.mobile.ns + "external-page", true )
+							.attr( "data-" + this._getNs() + "url", path.convertUrlToDataUrl( fileUrl ) )
+							.attr( "data-" + this._getNs() + "external-page", true )
 							.appendTo( settings.pageContainer );
 
 						// wait for page creation to leverage options defined on widget
@@ -544,7 +544,7 @@ define( [
 						// into the DOM. If the original absUrl refers to a sub-page, that is the
 						// real page we are interested in.
 						if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-							page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url='" + dataUrl + "']" );
+							page = settings.pageContainer.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
 						}
 
 						// Remove loading message.
