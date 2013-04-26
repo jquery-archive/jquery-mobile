@@ -295,7 +295,7 @@ define( [
 			return enhancePage( content, role );
 		},
 
-		_getPage: function( settings, url, dataUrl, fileUrl, absUrl, options, deferred ) {
+		_getPage: function( settings, dataUrl, fileUrl ) {
 			var page, initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
@@ -330,9 +330,6 @@ define( [
 					if ( initialContent.parent().length ) {
 						page = $( initialContent );
 					}
-				} else if ( path.isEmbeddedPage( fileUrl )  ) {
-					deferred.reject( absUrl, options );
-					return deferred.promise().done(options.done).fail(options.fail);
 				}
 			}
 
@@ -392,7 +389,14 @@ define( [
 			// Make sure we have a pageContainer to work with.
 			settings.pageContainer = settings.pageContainer || this.element;
 
-			page = this._getPage( settings, url, dataUrl, fileUrl, absUrl, options, deferred );
+			page = this._getPage( settings, dataUrl, fileUrl );
+
+			if ( page.length === 0 &&
+				path.isEmbeddedPage(fileUrl) &&
+				!path.isFirstPageUrl(fileUrl) ) {
+				deferred.reject( absUrl, options );
+				return deferred.promise().done(options.done).fail(options.fail);
+			}
 
 			// Reset base to the default document base
 			this._getBase().reset();
