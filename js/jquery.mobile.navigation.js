@@ -279,8 +279,16 @@ define( [
 			$.mobile.changePage( to, opts );
 		},
 
+		_getBase: function() {
+			return base;
+		},
+
 		_getBaseWithDefault: function() {
 			return findBaseWithDefault();
+		},
+
+		_enhanceContent: function( content, role ) {
+			return enhancePage( content, role );
 		},
 
 		_loadContentDefaults: {
@@ -310,6 +318,8 @@ define( [
 				// so that it can be removed after the new version of the
 				// page is loaded off the network.
 				dupCachedPage = null,
+
+				initialContent = this._getInitialContent(),
 
 				// The absolute version of the URL passed into the function. This
 				// version of the URL may contain dialog/subpage params in it.
@@ -342,7 +352,7 @@ define( [
 			dataUrl = path.convertUrlToDataUrl( absUrl );
 
 			// Make sure we have a pageContainer to work with.
-			settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
+			settings.pageContainer = settings.pageContainer || this.element;
 
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
@@ -364,7 +374,7 @@ define( [
 			// refers to the first page in the application. If it isn't a reference
 			// to the first page and refers to non-existent embedded page, error out.
 			if ( page.length === 0 ) {
-				if ( $.mobile.firstPage && path.isFirstPageUrl( fileUrl ) ) {
+				if ( initialContent && path.isFirstPageUrl( fileUrl ) ) {
 					// Check to make sure our cached-first-page is actually
 					// in the DOM. Some user deployed apps are pruning the first
 					// page from the DOM for various reasons, we check for this
@@ -373,8 +383,8 @@ define( [
 					// case. If the first-page is not in the DOM, then we let
 					// things fall through to the ajax loading code below so
 					// that it gets reloaded.
-					if ( $.mobile.firstPage.parent().length ) {
-						page = $( $.mobile.firstPage );
+					if ( initialContent.parent().length ) {
+						page = $( initialContent );
 					}
 				} else if ( path.isEmbeddedPage( fileUrl )  ) {
 					deferred.reject( absUrl, options );
@@ -382,8 +392,8 @@ define( [
 				}
 			}
 
-			// Reset base to the default document base.
-			base.reset();
+			// Reset base to the default document base
+			this._getBase().reset();
 
 			// If the page we are interested in is already in the DOM,
 			// and the caller did not indicate that we should force a
@@ -391,11 +401,11 @@ define( [
 			// existing page as a duplicated.
 			if ( page.length ) {
 				if ( !settings.reloadPage ) {
-					enhancePage( page, settings.role );
+					this._enhanceContent( page, settings.role );
 					deferred.resolve( absUrl, options, page );
 					//if we are reloading the page make sure we update the base if its not a prefetch
-					if( base && !options.prefetch ){
-						base.set(url);
+					if( this._getBase() && !options.prefetch ){
+						this._getBase().set(url);
 					}
 					return deferred.promise().done(options.done).fail(options.fail);
 				}
@@ -406,6 +416,8 @@ define( [
 			pblEvent = new $.Event( "pagebeforeload" );
 			triggerData = { url: url, absUrl: absUrl, dataUrl: dataUrl, deferred: deferred, options: settings };
 
+			// TODO move to _trigger (requires sorting out why we allow designation of container)
+			// TODO deprecate page* events
 			// Let listeners know we're about to load a page.
 			mpc.trigger( pblEvent, triggerData );
 
@@ -434,7 +446,7 @@ define( [
 			// Reset base to the default document base.
 			// only reset if we are not prefetching
 			if ( base && typeof options.prefetch === "undefined" ) {
-				base.reset();
+				this._getBase().reset();
 			}
 
 			if ( !( $.mobile.allowCrossDomainPages || path.isSameDomain( documentUrl, absUrl ) ) ) {
@@ -447,7 +459,7 @@ define( [
 					data: settings.data,
 					contentType: settings.contentType,
 					dataType: "html",
-					success: function( html, textStatus, xhr ) {
+					success: $.proxy(function( html, textStatus, xhr ) {
 						//pre-parse html to check for a data-url,
 						//use it as the new fileUrl, base path, etc
 						var all = $( "<div></div>" ),
@@ -471,7 +483,7 @@ define( [
 
 						//dont update the base tag if we are prefetching
 						if ( base && typeof options.prefetch === "undefined") {
-							base.set( fileUrl );
+							this._getBase().set( fileUrl );
 						}
 
 						//workaround to allow scripts to execute when included in page divs
@@ -490,7 +502,7 @@ define( [
 							page.jqmData( "title", newPageTitle );
 						}
 
-						base.rewrite( fileUrl, page );
+						this._getBase().rewrite( fileUrl, page );
 
 						//append to page and enhance
 						// TODO taging a page with external to make sure that embedded pages aren't removed
@@ -527,10 +539,10 @@ define( [
 						settings.pageContainer.trigger( "pageload", triggerData );
 
 						deferred.resolve( absUrl, options, page, dupCachedPage );
-					},
-					error: function( xhr, textStatus, errorThrown ) {
+					}, this),
+					error: $.proxy(function( xhr, textStatus, errorThrown ) {
 						//set base back to current path
-						base.set( path.get() );
+						this._getBase().set( path.get() );
 
 						// Add error info to our triggerData.
 						triggerData.xhr = xhr;
@@ -564,7 +576,7 @@ define( [
 						}
 
 						deferred.reject( absUrl, options );
-					}
+					}, this)
 				});
 			}
 
