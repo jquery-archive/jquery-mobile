@@ -279,6 +279,10 @@ define( [
 			$.mobile.changePage( to, opts );
 		},
 
+		_getBaseWithDefault: function() {
+			return findBaseWithDefault();
+		},
+
 		_loadContentDefaults: {
 			type: "get",
 			data: undefined,
@@ -309,7 +313,7 @@ define( [
 
 				// The absolute version of the URL passed into the function. This
 				// version of the URL may contain dialog/subpage params in it.
-				absUrl = path.makeUrlAbsolute( url, findBaseWithDefault() ),
+				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
 				fileUrl, dataUrl,
 				mpc, pblEvent, triggerData,
 				loadMsgDelay, hideMsg;
