@@ -70,7 +70,7 @@ define( [
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
-				"class": "ui-btn ui-btn-a ui-btn-left ui-btn-icon-notext ui-icon ui-icon-delete"
+				"class": "ui-btn ui-btn-a ui-icon ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
 			}).appendTo( header );
 		}
 
