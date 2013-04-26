@@ -34,9 +34,6 @@
 .ui-select .ui-state-disabled select {
 	display: none;
 }
-.ui-select .ui-state-disabled {
-	opacity: .3;
-}
 /* Because we add all classes of the select and option elements to the span... */ 
 .ui-select span.ui-state-disabled {
 	filter: Alpha(Opacity=100);

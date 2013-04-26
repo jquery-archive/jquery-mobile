@@ -878,14 +878,13 @@ button,
 
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
-.ui-disabled, /* TODO: deprecate ui-disabled */
-.ui-state-disabled {
+
+.ui-disabled, /* Deprecated in 1.4 */
+.ui-state-disabled,
+.ui-select .ui-btn.ui-state-disabled {
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 	zoom: 1;
-}
-.ui-disabled,
-.ui-state-disabled {
 	cursor: default !important;
 	pointer-events: none;
 }
