@@ -315,22 +315,16 @@ define( [
 
 
 			// If we failed to find a page in the DOM, check the URL to see if it
-			// refers to the first page in the application. If it isn't a reference
-			// to the first page and refers to non-existent embedded page, error out.
-			if ( page.length === 0 ) {
-				if ( initialContent && path.isFirstPageUrl( fileUrl ) ) {
-					// Check to make sure our cached-first-page is actually
-					// in the DOM. Some user deployed apps are pruning the first
-					// page from the DOM for various reasons, we check for this
-					// case here because we don't want a first-page with an id
-					// falling through to the non-existent embedded page error
-					// case. If the first-page is not in the DOM, then we let
-					// things fall through to the ajax loading code below so
-					// that it gets reloaded.
-					if ( initialContent.parent().length ) {
-						page = $( initialContent );
-					}
-				}
+			// refers to the first page in the application. Also Check to make sure
+			// our cached-first-page is actually in the DOM. Some user deployed
+			// apps are pruning the first page from the DOM for various reasons,
+			// we check for this case here because we don't want a first-page with
+			// an id falling through to the non-existent embedded page error case.
+			if ( page.length === 0 &&
+				path.isFirstPageUrl(fileUrl) &&
+				initialContent &&
+				initialContent.parent().length ) {
+				page = $( initialContent );
 			}
 
 			return page;
@@ -391,6 +385,7 @@ define( [
 
 			page = this._getPage( settings, dataUrl, fileUrl );
 
+			// If it isn't a reference to the first page and refers to missing embedded page
 			if ( page.length === 0 &&
 				path.isEmbeddedPage(fileUrl) &&
 				!path.isFirstPageUrl(fileUrl) ) {
@@ -405,19 +400,17 @@ define( [
 			// and the caller did not indicate that we should force a
 			// reload of the file, we are done. Otherwise, track the
 			// existing page as a duplicated.
-			if ( page.length ) {
-				if ( !settings.reloadPage ) {
-					this._enhanceContent( page, settings.role );
-					deferred.resolve( absUrl, options, page );
+			if ( page.length && !settings.reloadPage ) {
+				this._enhanceContent( page, settings.role );
+				deferred.resolve( absUrl, options, page );
 
-					//if we are reloading the page make sure we update
-					// the base if its not a prefetch
-					if( this._getBase() && !options.prefetch ){
-						this._getBase().set(url);
-					}
-
-					return deferred.promise().done(options.done).fail(options.fail);
+				//if we are reloading the page make sure we update
+				// the base if its not a prefetch
+				if( this._getBase() && !options.prefetch ){
+					this._getBase().set(url);
 				}
+
+				return deferred.promise().done(options.done).fail(options.fail);
 			}
 
 			// return early if it's a promise, temporary
