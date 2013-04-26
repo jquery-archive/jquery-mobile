@@ -23,6 +23,13 @@
 .ui-select .ui-btn-icon-right.ui-li-has-count .ui-li-count { right: 45px; }
 .ui-select .ui-mini.ui-btn-icon-right.ui-li-has-count .ui-li-count { right: 32px; }
 
+.ui-select .ui-btn > span:not(.ui-li-count) {
+	display: block;
+	text-overflow: ellipsis;
+	overflow: hidden !important;
+	white-space: nowrap;
+}
+
 /* labels */
 label.ui-select { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; display: block; }
 
