@@ -361,12 +361,6 @@ define( [
 				// The DOM element for the page after it has been loaded.
 				page = null,
 
-				// If the reloadPage option is true, and the page is already
-				// in the DOM, dupCachedPage will be set to the page element
-				// so that it can be removed after the new version of the
-				// page is loaded off the network.
-				dupCachedPage = null,
-
 				// The absolute version of the URL passed into the function. This
 				// version of the URL may contain dialog/subpage params in it.
 				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
@@ -420,8 +414,6 @@ define( [
 
 					return deferred.promise().done(options.done).fail(options.fail);
 				}
-
-				dupCachedPage = page;
 			}
 
 			// return early if it's a promise, temporary
@@ -555,7 +547,7 @@ define( [
 						// Let listeners know the page loaded successfully.
 						settings.pageContainer.trigger( "pageload", triggerData );
 
-						deferred.resolve( absUrl, options, page, dupCachedPage );
+						deferred.resolve( absUrl, options, page );
 					}, this),
 					error: $.proxy(function( xhr, textStatus, errorThrown ) {
 						//set base back to current path
@@ -993,9 +985,8 @@ define( [
 			settings.target = toPage;
 
 			$.mobile.loadPage( toPage, $.extend(settings, {
-				done: function( url, options, newPage, dupCachedPage ) {
+				done: function( url, options, newPage ) {
 					isPageTransitioning = false;
-					options.duplicateCachedPage = dupCachedPage;
 
 					// store the original absolute url so that it can be provided
 					// to events in the triggerData of the subsequent changePage call
