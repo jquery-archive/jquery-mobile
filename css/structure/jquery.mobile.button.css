@@ -20,6 +20,9 @@ button.ui-btn {
 	box-sizing: border-box;
 	width: 100%;
 }
+button.ui-btn::-moz-focus-inner {
+	border: 0;
+}
 .ui-btn-icon-notext {
 	position: relative;
 	padding: 0;
