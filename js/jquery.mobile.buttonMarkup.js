@@ -34,8 +34,8 @@ var $el = $( "<a></a>" ),
 //
 // Use $.fn.buttonMarkup.defaults to get a complete set and use $.extend to
 // override your choice of options from that set.
-function addButtonMarkup( el, options ) {
-	var classes = [];
+function addButtonMarkup( el, options, existingClasses ) {
+	var classes = existingClasses ? existingClasses : [];
 
 	// Add classes to the array - first ui-btn and the theme
 	classes = classes.concat( [ "ui-btn", "ui-btn-" + options.theme ] );
@@ -74,9 +74,8 @@ function addButtonMarkup( el, options ) {
 // @el: Element to enhance
 //
 // Harvest an element's buttonMarkup-related data attributes and use their value
-// to override defaults. Take into account that buttons inside headers and
-// footers are mini and inline by default. Pass the element to addButtonMarkup
-// with the calculated options.
+// to override defaults. Pass the element to addButtonMarkup with the calculated
+// options.
 //
 // This function is only defined so that it can be called from the enhancer
 // without having to write it inline and may be moved into the enhancer in the
@@ -96,7 +95,7 @@ function enhanceWithButtonMarkup() {
 			corners   : getAttrFixed( el, "corners",    true ),
 			iconshadow: getAttrFixed( el, "iconshadow", true ),
 			mini      : getAttrFixed( el, "mini",       true )
-		}));
+		}), el.className.split( " " ) );
 }
 
 // classesToOptions:
@@ -211,7 +210,7 @@ $.fn.buttonMarkup = function( options, firstCall ) {
 			( data.alreadyEnhanced ? data.options : {} ),
 
 			// Finally, apply the options passed int
-			options ) );
+			options ), this[ idx ].className.split( " " ) );
 	}
 
 	return this;
