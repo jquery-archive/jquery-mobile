@@ -2,13 +2,12 @@
  * Content Widget Tests
  */
 (function($){
-	var mockEvent, proto;
+	var mockEvent, proto = $.mobile.content.prototype;
 
 	module("Content Widget _filterNavigateEvents", {
 		setup: function() {
 			mockEvent = $.Event( "mock" );
 			mockEvent.originalEvent = $.Event( "hashchange" );
-			proto = $.mobile.content.prototype;
 		}
 	});
 
@@ -254,5 +253,23 @@
 		proto._recordScroll();
 
 		equal( active.lastScroll, 1, "should be equal to _getScroll value" );
+	});
+
+	module( "Content Widget _getExistingPage" );
+
+	test( "returns the page container child matching the dataUrl first", function() {
+		var settings = {
+			pageContainer: $( "<div><div data-foo-url='bar'></div></div>" )
+		};
+
+		proto._getNs = function() {
+			return "foo-";
+		};
+
+		equal(
+			settings.pageContainer.children()[0],
+			proto._getExistingPage( settings, "bar" )[0],
+			"returns the first child of the page container"
+		);
 	});
 })(jQuery);
