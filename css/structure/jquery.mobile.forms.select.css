@@ -5,7 +5,6 @@
 .ui-select select {
 	position: absolute;
 	left: -9999px;
-	top: -9999px;
 }
 .ui-select .ui-btn {
 	opacity: 1; /* Fixes #2588: When Windows Phone 7.5 (Mango) tries to calculate a numeric opacity for a select (including "inherit") without explicitly specifying an opacity on the parent to give it context, a bug appears where clicking elsewhere on the page after opening the select will open the select again. */
@@ -93,26 +92,24 @@
 	padding: 6px;
 	min-width: 160px;
 }
-.ui-selectmenu .ui-listview {
-	margin: 0;
-}
 .ui-selectmenu .ui-header {
 	margin: 0;
 	padding: 0;
+}
+.ui-selectmenu.ui-popup .ui-header {
+	-webkit-border-radius: 0;
+	border-radius: 0;
 }
 /* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
 .ui-selectmenu .ui-header h1:after {
 	content: '.';
 	visibility: hidden;
 }
-.ui-selectmenu.ui-popup .ui-header {
-	-webkit-border-top-left-radius: 0;
-	border-top-left-radius: 0;
-	-webkit-border-top-right-radius: 0;
-	border-top-right-radius: 0;
-}
 .ui-selectmenu .ui-header .ui-title {
 	margin: 0.6em 46px 0.8em;
+}
+.ui-selectmenu .ui-selectmenu-list {
+	margin: 0;
 }
 .ui-selectmenu .ui-btn.ui-li-divider {
 	cursor: default;
