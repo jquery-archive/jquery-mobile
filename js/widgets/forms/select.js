@@ -281,12 +281,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 	disable: function() {
 		this._setDisabled( true );
-		this.button.addClass( "ui-disabled" );
+		this.button.addClass( "ui-state-disabled" );
 	},
 
 	enable: function() {
 		this._setDisabled( false );
-		this.button.removeClass( "ui-disabled" );
+		this.button.removeClass( "ui-state-disabled" );
 	}
 }, $.mobile.behaviors.formReset ) );
 
