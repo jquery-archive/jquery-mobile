@@ -330,7 +330,7 @@ define( [
 			return page;
 		},
 
-		_loadContentDefaults: {
+		_loadDefaults: {
 			type: "get",
 			data: undefined,
 			reloadPage: false,
@@ -340,14 +340,15 @@ define( [
 			loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
 		},
 
-		loadContent: function( url, options ) {
+		load: function( url, options ) {
 			// This function uses deferred notifications to let callers
 			// know when the page is done loading, or if an error has occurred.
 			var deferred = $.Deferred(),
+				promise = deferred.promise(),
 
 				// The default loadPage options with overrides specified by
 				// the caller.
-				settings = $.extend( {}, this._loadContentDefaults, options ),
+				settings = $.extend( {}, this._loadDefaults, options ),
 
 				// The DOM element for the page after it has been loaded.
 				page = null,
@@ -356,6 +357,14 @@ define( [
 				// version of the URL may contain dialog/subpage params in it.
 				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
 				fileUrl, dataUrl, mpc, pblEvent, triggerData, loadMsgDelay, hideMsg;
+
+			if ( settings.done ) {
+			  promise.done(settings.done);
+			}
+
+			if ( settings.fail ) {
+			  promise.fail( settings.fail );
+			}
 
 			// If the caller provided data, and we're using "get" request,
 			// append the data to the URL.
@@ -390,7 +399,7 @@ define( [
 				path.isEmbeddedPage(fileUrl) &&
 				!path.isFirstPageUrl(fileUrl) ) {
 				deferred.reject( absUrl, options );
-				return deferred.promise().done(options.done).fail(options.fail);
+				return promise;
 			}
 
 			// Reset base to the default document base
@@ -410,12 +419,18 @@ define( [
 					this._getBase().set(url);
 				}
 
-				return deferred.promise().done(options.done).fail(options.fail);
+				return promise;
 			}
 
 			mpc = settings.pageContainer;
 			pblEvent = new $.Event( "pagebeforeload" );
-			triggerData = { url: url, absUrl: absUrl, dataUrl: dataUrl, deferred: deferred, options: settings };
+			triggerData = {
+				url: url,
+				absUrl: absUrl,
+				dataUrl: dataUrl,
+				deferred: deferred,
+				options: settings
+			};
 
 			// TODO move to _trigger (requires sorting out why we allow designation of container)
 			// TODO deprecate page* events
@@ -424,7 +439,7 @@ define( [
 
 			// If the default behavior is prevented, stop here!
 			if ( pblEvent.isDefaultPrevented() ) {
-				return deferred.promise().done(options.done).fail(options.fail);
+				return promise;
 			}
 
 			if ( settings.showLoadMsg ) {
@@ -446,11 +461,12 @@ define( [
 			}
 			// Reset base to the default document base.
 			// only reset if we are not prefetching
-			if ( typeof options.prefetch === "undefined" ) {
+			if ( settings.prefetch === undefined ) {
 				this._getBase().reset();
 			}
 
-			if ( !( $.mobile.allowCrossDomainPages || path.isSameDomain( documentUrl, absUrl ) ) ) {
+			if ( !($.mobile.allowCrossDomainPages ||
+				path.isSameDomain(documentUrl, absUrl)) ) {
 				deferred.reject( absUrl, options );
 			} else {
 				// Load the new page.
@@ -581,7 +597,7 @@ define( [
 				});
 			}
 
-			return deferred.promise().done(options.done).fail(options.fail);
+			return promise;
 		}
 
 		// transitionPages
@@ -592,7 +608,7 @@ define( [
 	});
 
 	$.mobile.loadPage = function( url, opts ) {
-		$.mobile.pageContainer.content( "loadContent", url, opts );
+		$.mobile.pageContainer.content( "load", url, opts );
 	};
 
 	//define vars for interal use
