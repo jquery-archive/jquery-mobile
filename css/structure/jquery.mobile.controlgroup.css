@@ -146,7 +146,7 @@ fieldset.ui-controlgroup.ui-mini {
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
-.ui-controlgroup .ui-shadow:not(.ui-focus) {
+.ui-controlgroup .ui-btn.ui-shadow:not(.ui-focus) {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;

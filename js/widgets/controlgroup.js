@@ -60,7 +60,7 @@ $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 		}
 
 		if ( o.shadow !== undefined ) {
-			$el.toggleClass( "ui-shadow", o.shadow );
+			$el.find( ".ui-controlgroup-controls" ).toggleClass( "ui-shadow", o.shadow );
 		}
 
 		if ( o.mini !== undefined ) {
