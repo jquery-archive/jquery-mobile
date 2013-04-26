@@ -234,7 +234,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			text = this.placeholder,
 			span = $( document.createElement( "span" ) );
 
-		this.button.children().not( this.element ).remove().end().end().append( (function() {
+		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( (function() {
 			if ( selected.length ) {
 				text = selected.map(function() {
 					return $( this ).text();
