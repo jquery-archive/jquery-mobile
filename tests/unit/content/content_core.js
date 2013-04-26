@@ -2,6 +2,8 @@
  * Content Widget Tests
  */
 (function($){
+	// TODO !! reset the prototype after every test
+
 	var mockEvent, proto = $.mobile.content.prototype;
 
 	module("Content Widget _filterNavigateEvents", {
@@ -291,5 +293,18 @@
 		);
 
 		equal( result.attr( "data-foo-url"), "bar" );
+	});
+
+	test( "returns the child with the dataUrl id and corrects the data-url attr", function() {
+		var settings = {
+			pageContainer: $( "<div></div>" )
+		};
+
+		proto._getInitialContent = function() {
+			return $( "<div><div id='initial'></div></div>" ).children().first();
+		};
+
+		// using location.href as the fileUrl param ensures that path.isFirstPageUrl returns true
+		ok( proto._getExistingPage(settings, "bar", location.href ).is("#initial") );
 	});
 })(jQuery);
