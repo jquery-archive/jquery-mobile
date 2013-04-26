@@ -9,32 +9,31 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], functi
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
+"use strict";
 
 // General policy: Do not access data-* attributes except during enhancement.
 // Otherwise determine the state of the button exclusively from its className.
-// That's why addButtonMarkup expects a full complement of options, and the
+// That's why optionsToClassName expects a full complement of options, and the
 // jQuery plugin completes the set of options from the default values.
 
-// The variable $el below is used in $.fn.buttonMarkup. The single element
-// inside is replaced with the one passed into the function, to avoid repeated
-// calls to the jQuery constructor.
-var $el = $( "<a></a>" ),
-	// Map classes to buttonMarkup boolean options
-	reverseBoolOptionMap = {
-		"ui-shadow" : "shadow",
-		"ui-corner-all" : "corners",
-		"ui-btn-inline" : "inline",
-		"ui-shadow-icon" : "iconshadow",
-		"ui-mini" : "mini"
-	};
+// Map classes to buttonMarkup boolean options - used in classNameToOptions()
+var reverseBoolOptionMap = {
+	"ui-shadow" : "shadow",
+	"ui-corner-all" : "corners",
+	"ui-btn-inline" : "inline",
+	"ui-shadow-icon" : "iconshadow",
+	"ui-mini" : "mini"
+};
 
-// addButtonMarkup:
-// @el: The element to manipulate
-// @options: A complete set of options for this element.
+// optionsToClassName:
+// @options: A complete set of options to convert to class names.
+// @existingClasses: extra classes to add to the result
 //
-// Use $.fn.buttonMarkup.defaults to get a complete set and use $.extend to
-// override your choice of options from that set.
-function addButtonMarkup( el, options, existingClasses ) {
+// Converts @options to buttonMarkup classes and returns the result as a string
+// that can be used as an element's className. All possible options must be set
+// inside @options. Use $.fn.buttonMarkup.defaults to get a complete set and use
+// $.extend to override your choice of options from that set.
+function optionsToClassName( options, existingClasses ) {
 	var classes = existingClasses ? existingClasses : [];
 
 	// Add classes to the array - first ui-btn and the theme
@@ -65,56 +64,29 @@ function addButtonMarkup( el, options, existingClasses ) {
 		classes.push( "ui-mini" );
 	}
 
-	// Create a string from the array, removing duplicate spaces, and assign it
-	// back to the element's className
-	el.className = classes.join( " " );
+	// Create a string from the array and return it
+	return classes.join( " " );
 }
 
-// enhanceWithButtonMarkup:
-// @el: Element to enhance
+// classNameToOptions:
+// @classes: A string containing a .className-style space-separated class list
 //
-// Harvest an element's buttonMarkup-related data attributes and use their value
-// to override defaults. Pass the element to addButtonMarkup with the calculated
-// options.
-//
-// This function is only defined so that it can be called from the enhancer
-// without having to write it inline and may be moved into the enhancer in the
-// future.
-function enhanceWithButtonMarkup() {
-	var idx,
-		el = this,
-		getAttrFixed = $.mobile.getAttribute;
-
-	addButtonMarkup( el, $.extend( {},
-		$.fn.buttonMarkup.defaults, {
-			icon      : getAttrFixed( el, "icon",       true ),
-			iconpos   : getAttrFixed( el, "iconpos",    true ),
-			theme     : getAttrFixed( el, "theme",      true ),
-			inline    : getAttrFixed( el, "inline",     true ),
-			shadow    : getAttrFixed( el, "shadow",     true ),
-			corners   : getAttrFixed( el, "corners",    true ),
-			iconshadow: getAttrFixed( el, "iconshadow", true ),
-			mini      : getAttrFixed( el, "mini",       true )
-		}), el.className.split( " " ) );
-}
-
-// classesToOptions:
-// @el: The element whose classes are to be analyzed
-//
-// Loops over the element's classes and records those that are recognized as
-// buttonMarkup-related both in an string and as an option.
+// Loops over @classes and calculates an options object based on the
+// buttonMarkup-related classes it finds. It records unrecognized classes in an
+// array.
 //
 // Returns: An object containing the following items:
 //
 // "options": buttonMarkup options found to be present because of the
-// presence/absence corresponding classes
+// presence/absence of corresponding classes
 //
-// "classes": a string containing all the buttonMarkup-related classes found
+// "unknownClasses": a string containing all the non-buttonMarkup-related
+// classes found in @classes
 //
 // "alreadyEnhanced": A boolean indicating whether the ui-btn class was among
 // those found to be present
-function classesToOptions( el ) {
-	var idx, map, classRecognized,
+function classNameToOptions( classes ) {
+	var idx, map, unknownClass,
 		alreadyEnhanced = false,
 		noIcon = true,
 		o = {
@@ -125,47 +97,47 @@ function classesToOptions( el ) {
 			iconshadow: false,
 			mini: false
 		},
-		classes = el.className.split( " " ),
-		classesFound = [];
+		classes = classes.split( " " ),
+		unknownClasses = [];
 
 	for ( idx = 0 ; idx < classes.length ; idx++ ) {
-		addClass = false;
+		unknownClass = true;
 		map = reverseBoolOptionMap[ classes[ idx ] ];
 
 		// Recognize boolean options from the presence of classes
 		if ( map !== undefined ) {
-			classRecognized = true;
+			unknownClass = false;
 			o[ map ] = true;
 
 		// Recognize the presence of an icon
 		} else if ( classes[ idx ] === "ui-icon" ) {
-			classRecognized = true;
+			unknownClass = false;
 			noIcon = false;
 
 		// Establish the icon position
 		} else if (classes[ idx ].indexOf( "ui-btn-icon-" ) === 0 ) {
-			classRecognized = true;
+			unknownClass = false;
 			o.iconpos = classes[ idx ].substring( 12 );
 
 		// Establish which icon is present
 		} else if ( classes[ idx ].indexOf( "ui-icon-" ) === 0 ) {
-			classRecognized = true;
+			unknownClass = false;
 			o.icon = classes[ idx ].substring( 8 );
 
 		// Establish the theme - this recognizes one-letter theme swatch names
 		} else if ( classes[ idx ].indexOf( "ui-btn-" ) === 0 && classes[ idx ].length === 8 ) {
-			classRecognized = true;
+			unknownClass = false;
 			o.theme = classes[ idx ].substring( 7 );
 
 		// Recognize that this element has already been buttonMarkup-enhanced
 		} else if ( classes[ idx ] === "ui-btn" ) {
-			classRecognized = true;
+			unknownClass = false;
 			alreadyEnhanced = true;
 		}
 
 		// If this class has been recognized, add it to the list
-		if ( classRecognized ) {
-			classesFound.push( classes[ idx ] );
+		if ( unknownClass ) {
+			unknownClasses.push( classes[ idx ] );
 		}
 	}
 
@@ -176,41 +148,53 @@ function classesToOptions( el ) {
 
 	return {
 		options: o,
-		classes: classesFound.join( " " ),
+		unknownClasses: unknownClasses,
 		alreadyEnhanced: alreadyEnhanced
 	};
 }
 
-// jQuery plugin for adding buttonMarkup
-$.fn.buttonMarkup = function( options, firstCall ) {
-	var idx, data;
+// $.fn.buttonMarkup:
+// DOM: gets/sets .className
+//
+// @options: options to apply to the elements in the jQuery object
+// @overwriteClasses: boolean indicating whether to honour existing classes
+//
+// Calculates the classes to apply to the elements in the jQuery object based on
+// the options passed in. If @overwriteClasses is true, it sets the className
+// property of each element in the jQuery object to the buttonMarkup classes
+// it calculates based on the options passed in.
+//
+// If you wish to preserve any classes that are already present on the elements
+// inside the jQuery object, including buttonMarkup-related classes that were
+// added by a previous call to $.fn.buttonMarkup() or during page enhancement
+// then you should omit @overwriteClasses or set it to false.
+$.fn.buttonMarkup = function( options, overwriteClasses ) {
+	var idx, data, el;
 
 	for ( idx = 0 ; idx < this.length ; idx++ ) {
-		if ( !firstCall ) {
-			// Analyze existing classes to establish existing options
-			data = classesToOptions( this[ idx ] );
+		el = this[ idx ];
+		data = overwriteClasses ?
+			// Assume this element is not enhanced and ignore its classes
+			{ alreadyEnhanced: false, unknownClasses: [] } :
+			// Analyze existing classes to establish existing options and classes
+			classNameToOptions( el.className );
 
-			// Assign this element to the jQuery object we're reusing
-			$el[ 0 ] = this[ idx ];
+		el.className = optionsToClassName(
+			// Merge all the options and apply them as classes
+			$.extend( {},
+				// The defaults form the basis
+				$.fn.buttonMarkup.defaults,
 
-			// Remove the buttonMarkup-related classes found to be present
-			$el.removeClass( data.classes );
-		} else {
-			data = { alreadyEnhanced: false };
-		}
+				// If the element already has the class ui-btn, then we assume that
+				// it has passed through buttonMarkup before - otherwise, the options
+				// returned by classNameToOptions do not correctly reflect the state of
+				// the element
+				( data.alreadyEnhanced ? data.options : {} ),
 
-		// Merge all the options and apply them as classes
-		addButtonMarkup( this[ idx ], $.extend( {},
-			// The defaults form the basis
-			$.fn.buttonMarkup.defaults,
-
-			// If the element already has the class ui-btn, then we assume that
-			// it has passed through buttonMarkup before - otherwise, the options
-			// returned by classesToOptions do not reflect the state of the element
-			( data.alreadyEnhanced ? data.options : {} ),
-
-			// Finally, apply the options passed int
-			options ), this[ idx ].className.split( " " ) );
+				// Finally, apply the options passed in
+				options ),
+			// ... and re-apply any unrecognized classes that were found
+			data.unknownClasses );
 	}
 
 	return this;
@@ -228,6 +212,37 @@ $.fn.buttonMarkup.defaults = {
 	iconshadow: true,
 	mini: false
 };
+
+// enhanceWithButtonMarkup:
+// DOM: gets/sets .className
+//
+// this: Element to enhance
+//
+// Harvest an element's buttonMarkup-related data attributes from the DOM and
+// use their value to override defaults. Use optionsToClassName() to establish a
+// new className for the element from the calculated options and any existing
+// classes.
+//
+// This function is only defined so that it can be called from the enhancer
+// without having to write it inline and may be moved into the enhancer in the
+// future.
+function enhanceWithButtonMarkup() {
+	var idx,
+		el = this,
+		getAttrFixed = $.mobile.getAttribute;
+
+	el.className = optionsToClassName( $.extend( {},
+		$.fn.buttonMarkup.defaults, {
+			icon      : getAttrFixed( el, "icon",       true ),
+			iconpos   : getAttrFixed( el, "iconpos",    true ),
+			theme     : getAttrFixed( el, "theme",      true ),
+			inline    : getAttrFixed( el, "inline",     true ),
+			shadow    : getAttrFixed( el, "shadow",     true ),
+			corners   : getAttrFixed( el, "corners",    true ),
+			iconshadow: getAttrFixed( el, "iconshadow", true ),
+			mini      : getAttrFixed( el, "mini",       true )
+		}), el.className.split( " " ) );
+}
 
 //links in bars, or those with data-role become buttons
 //auto self-init widgets
