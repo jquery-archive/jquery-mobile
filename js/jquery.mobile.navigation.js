@@ -413,11 +413,6 @@ define( [
 				return deferred.promise().done(options.done).fail(options.fail);
 			}
 
-			// return early if it's a promise, temporary
-			if( page.done ) {
-				return page;
-			}
-
 			mpc = settings.pageContainer;
 			pblEvent = new $.Event( "pagebeforeload" );
 			triggerData = { url: url, absUrl: absUrl, dataUrl: dataUrl, deferred: deferred, options: settings };
