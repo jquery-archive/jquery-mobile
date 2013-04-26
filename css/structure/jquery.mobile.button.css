@@ -90,10 +90,10 @@ button.ui-btn-icon-notext {
 	margin-right: 5px;
 	margin-left: 5px;
 }
-.ui-btn-left,
-.ui-btn-right,
-.ui-btn-left > .ui-btn,
-.ui-btn-right > .ui-btn {
+.ui-mobile .ui-btn-left,
+.ui-mobile .ui-btn-right,
+.ui-mobile .ui-btn-left > .ui-btn,
+.ui-mobile .ui-btn-right > .ui-btn {
 	margin: 0;
 }
 .ui-btn-left,
