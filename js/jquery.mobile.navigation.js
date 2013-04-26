@@ -279,6 +279,16 @@ define( [
 			$.mobile.changePage( to, opts );
 		},
 
+		_loadContentDefaults: {
+			type: "get",
+			data: undefined,
+			reloadPage: false,
+			role: undefined, // By default we rely on the role defined by the @data-role attribute.
+			showLoadMsg: false,
+			pageContainer: undefined,
+			loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
+		},
+
 		loadContent: function( url, options ) {
 			// This function uses deferred notifications to let callers
 			// know when the page is done loading, or if an error has occurred.
@@ -286,7 +296,7 @@ define( [
 
 				// The default loadPage options with overrides specified by
 				// the caller.
-				settings = $.extend( {}, $.mobile.loadPage.defaults, options ),
+				settings = $.extend( {}, this._loadContentDefaults, options ),
 
 				// The DOM element for the page after it has been loaded.
 				page = null,
@@ -869,16 +879,6 @@ define( [
 				}
 			});
 		}
-	};
-
-	$.mobile.loadPage.defaults = {
-		type: "get",
-		data: undefined,
-		reloadPage: false,
-		role: undefined, // By default we rely on the role defined by the @data-role attribute.
-		showLoadMsg: false,
-		pageContainer: undefined,
-		loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
 	};
 
 	// Show a specific page in the page container.
