@@ -287,72 +287,16 @@ define( [
 			return findBaseWithDefault();
 		},
 
+		_getNs: function() {
+			return $.mobile.ns;
+		},
+
 		_enhanceContent: function( content, role ) {
 			return enhancePage( content, role );
 		},
 
-		_loadContentDefaults: {
-			type: "get",
-			data: undefined,
-			reloadPage: false,
-			role: undefined, // By default we rely on the role defined by the @data-role attribute.
-			showLoadMsg: false,
-			pageContainer: undefined,
-			loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
-		},
-
-		loadContent: function( url, options ) {
-			// This function uses deferred notifications to let callers
-			// know when the page is done loading, or if an error has occurred.
-			var deferred = $.Deferred(),
-
-				// The default loadPage options with overrides specified by
-				// the caller.
-				settings = $.extend( {}, this._loadContentDefaults, options ),
-
-				// The DOM element for the page after it has been loaded.
-				page = null,
-
-				// If the reloadPage option is true, and the page is already
-				// in the DOM, dupCachedPage will be set to the page element
-				// so that it can be removed after the new version of the
-				// page is loaded off the network.
-				dupCachedPage = null,
-
-				initialContent = this._getInitialContent(),
-
-				// The absolute version of the URL passed into the function. This
-				// version of the URL may contain dialog/subpage params in it.
-				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
-				fileUrl, dataUrl,
-				mpc, pblEvent, triggerData,
-				loadMsgDelay, hideMsg;
-
-			// If the caller provided data, and we're using "get" request,
-			// append the data to the URL.
-			if ( settings.data && settings.type === "get" ) {
-				absUrl = path.addSearchParams( absUrl, settings.data );
-				settings.data = undefined;
-			}
-
-			// If the caller is using a "post" request, reloadPage must be true
-			if ( settings.data && settings.type === "post" ) {
-				settings.reloadPage = true;
-			}
-
-			// The absolute version of the URL minus any dialog/subpage params.
-			// In otherwords the real URL of the page to be loaded.
-			fileUrl = path.getFilePath( absUrl );
-
-			// The version of the Url actually stored in the data-url attribute of
-			// the page. For embedded pages, it is just the id of the page. For pages
-			// within the same domain as the document base, it is the site relative
-			// path. For cross-domain pages (Phone Gap only) the entire absolute Url
-			// used to load the page.
-			dataUrl = path.convertUrlToDataUrl( absUrl );
-
-			// Make sure we have a pageContainer to work with.
-			settings.pageContainer = settings.pageContainer || this.element;
+		_getPage: function( settings, url, dataUrl, fileUrl, absUrl, options, deferred ) {
+			var page, dupCachedPage, initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
@@ -403,13 +347,91 @@ define( [
 				if ( !settings.reloadPage ) {
 					this._enhanceContent( page, settings.role );
 					deferred.resolve( absUrl, options, page );
-					//if we are reloading the page make sure we update the base if its not a prefetch
+
+					//if we are reloading the page make sure we update
+					// the base if its not a prefetch
 					if( this._getBase() && !options.prefetch ){
 						this._getBase().set(url);
 					}
+
 					return deferred.promise().done(options.done).fail(options.fail);
 				}
+
 				dupCachedPage = page;
+			}
+
+			return { page: page, dupCachedPage: dupCachedPage };
+		},
+
+		_loadContentDefaults: {
+			type: "get",
+			data: undefined,
+			reloadPage: false,
+			role: undefined, // By default we rely on the role defined by the @data-role attribute.
+			showLoadMsg: false,
+			pageContainer: undefined,
+			loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
+		},
+
+		loadContent: function( url, options ) {
+			// This function uses deferred notifications to let callers
+			// know when the page is done loading, or if an error has occurred.
+			var deferred = $.Deferred(),
+
+				// The default loadPage options with overrides specified by
+				// the caller.
+				settings = $.extend( {}, this._loadContentDefaults, options ),
+
+				// The DOM element for the page after it has been loaded.
+				page = null,
+
+				// If the reloadPage option is true, and the page is already
+				// in the DOM, dupCachedPage will be set to the page element
+				// so that it can be removed after the new version of the
+				// page is loaded off the network.
+				dupCachedPage = null,
+
+				// The absolute version of the URL passed into the function. This
+				// version of the URL may contain dialog/subpage params in it.
+				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
+				fileUrl, dataUrl, mpc, pblEvent, triggerData, loadMsgDelay, hideMsg,
+				getPageResult;
+
+			// If the caller provided data, and we're using "get" request,
+			// append the data to the URL.
+			if ( settings.data && settings.type === "get" ) {
+				absUrl = path.addSearchParams( absUrl, settings.data );
+				settings.data = undefined;
+			}
+
+			// If the caller is using a "post" request, reloadPage must be true
+			if ( settings.data && settings.type === "post" ) {
+				settings.reloadPage = true;
+			}
+
+			// The absolute version of the URL minus any dialog/subpage params.
+			// In otherwords the real URL of the page to be loaded.
+			fileUrl = path.getFilePath( absUrl );
+
+			// The version of the Url actually stored in the data-url attribute of
+			// the page. For embedded pages, it is just the id of the page. For pages
+			// within the same domain as the document base, it is the site relative
+			// path. For cross-domain pages (Phone Gap only) the entire absolute Url
+			// used to load the page.
+			dataUrl = path.convertUrlToDataUrl( absUrl );
+
+			// Make sure we have a pageContainer to work with.
+			settings.pageContainer = settings.pageContainer || this.element;
+
+			getPageResult = this._getPage( settings, url, dataUrl, fileUrl, absUrl, options, deferred );
+
+			// setting up the early return for promises
+			// TODO sort this crap out
+			if( getPageResult.page ) {
+				page = getPageResult.page;
+				dupCachedPage = getPageResult.dupCachedPage;
+			} else {
+				return getPageResult;
 			}
 
 			mpc = settings.pageContainer;
