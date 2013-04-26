@@ -395,6 +395,7 @@ define( [
 			page = this._getExistingPage( settings, dataUrl, fileUrl );
 
 			// If it isn't a reference to the first page and refers to missing embedded page
+			// reject the deferred and return the promise for folks to bind to fail
 			if ( page.length === 0 &&
 				path.isEmbeddedPage(fileUrl) &&
 				!path.isFirstPageUrl(fileUrl) ) {
@@ -403,12 +404,13 @@ define( [
 			}
 
 			// Reset base to the default document base
+			// TODO figure out why we doe this
 			this._getBase().reset();
 
 			// If the page we are interested in is already in the DOM,
 			// and the caller did not indicate that we should force a
-			// reload of the file, we are done. Otherwise, track the
-			// existing page as a duplicated.
+			// reload of the file, we are done. Resolve the deferrred so that
+			// users can bind to .done on the promise
 			if ( page.length && !settings.reloadPage ) {
 				this._enhanceContent( page, settings.role );
 				deferred.resolve( absUrl, options, page );
