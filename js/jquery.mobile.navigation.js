@@ -295,7 +295,7 @@ define( [
 			return enhancePage( content, role );
 		},
 
-		_getPage: function( settings, dataUrl, fileUrl ) {
+		_getExistingPage: function( settings, dataUrl, fileUrl ) {
 			var page, initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
@@ -392,7 +392,7 @@ define( [
 			// Make sure we have a pageContainer to work with.
 			settings.pageContainer = settings.pageContainer || this.element;
 
-			page = this._getPage( settings, dataUrl, fileUrl );
+			page = this._getExistingPage( settings, dataUrl, fileUrl );
 
 			// If it isn't a reference to the first page and refers to missing embedded page
 			if ( page.length === 0 &&
