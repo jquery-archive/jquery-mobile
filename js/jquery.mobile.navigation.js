@@ -406,7 +406,7 @@ define( [
 
 				//if we are reloading the page make sure we update
 				// the base if its not a prefetch
-				if( this._getBase() && !options.prefetch ){
+				if( !options.prefetch ){
 					this._getBase().set(url);
 				}
 
@@ -451,7 +451,7 @@ define( [
 			}
 			// Reset base to the default document base.
 			// only reset if we are not prefetching
-			if ( base && typeof options.prefetch === "undefined" ) {
+			if ( typeof options.prefetch === "undefined" ) {
 				this._getBase().reset();
 			}
 
@@ -488,7 +488,7 @@ define( [
 						}
 
 						//dont update the base tag if we are prefetching
-						if ( base && typeof options.prefetch === "undefined") {
+						if ( typeof options.prefetch === "undefined") {
 							this._getBase().set( fileUrl );
 						}
 
