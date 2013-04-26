@@ -296,7 +296,7 @@ define( [
 		},
 
 		_getPage: function( settings, url, dataUrl, fileUrl, absUrl, options, deferred ) {
-			var page, dupCachedPage, initialContent = this._getInitialContent();
+			var page, initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
@@ -336,31 +336,7 @@ define( [
 				}
 			}
 
-			// Reset base to the default document base
-			this._getBase().reset();
-
-			// If the page we are interested in is already in the DOM,
-			// and the caller did not indicate that we should force a
-			// reload of the file, we are done. Otherwise, track the
-			// existing page as a duplicated.
-			if ( page.length ) {
-				if ( !settings.reloadPage ) {
-					this._enhanceContent( page, settings.role );
-					deferred.resolve( absUrl, options, page );
-
-					//if we are reloading the page make sure we update
-					// the base if its not a prefetch
-					if( this._getBase() && !options.prefetch ){
-						this._getBase().set(url);
-					}
-
-					return deferred.promise().done(options.done).fail(options.fail);
-				}
-
-				dupCachedPage = page;
-			}
-
-			return { page: page, dupCachedPage: dupCachedPage };
+			return page;
 		},
 
 		_loadContentDefaults: {
@@ -394,8 +370,7 @@ define( [
 				// The absolute version of the URL passed into the function. This
 				// version of the URL may contain dialog/subpage params in it.
 				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
-				fileUrl, dataUrl, mpc, pblEvent, triggerData, loadMsgDelay, hideMsg,
-				getPageResult;
+				fileUrl, dataUrl, mpc, pblEvent, triggerData, loadMsgDelay, hideMsg;
 
 			// If the caller provided data, and we're using "get" request,
 			// append the data to the URL.
@@ -423,15 +398,35 @@ define( [
 			// Make sure we have a pageContainer to work with.
 			settings.pageContainer = settings.pageContainer || this.element;
 
-			getPageResult = this._getPage( settings, url, dataUrl, fileUrl, absUrl, options, deferred );
+			page = this._getPage( settings, url, dataUrl, fileUrl, absUrl, options, deferred );
 
-			// setting up the early return for promises
-			// TODO sort this crap out
-			if( getPageResult.page ) {
-				page = getPageResult.page;
-				dupCachedPage = getPageResult.dupCachedPage;
-			} else {
-				return getPageResult;
+			// Reset base to the default document base
+			this._getBase().reset();
+
+			// If the page we are interested in is already in the DOM,
+			// and the caller did not indicate that we should force a
+			// reload of the file, we are done. Otherwise, track the
+			// existing page as a duplicated.
+			if ( page.length ) {
+				if ( !settings.reloadPage ) {
+					this._enhanceContent( page, settings.role );
+					deferred.resolve( absUrl, options, page );
+
+					//if we are reloading the page make sure we update
+					// the base if its not a prefetch
+					if( this._getBase() && !options.prefetch ){
+						this._getBase().set(url);
+					}
+
+					return deferred.promise().done(options.done).fail(options.fail);
+				}
+
+				dupCachedPage = page;
+			}
+
+			// return early if it's a promise, temporary
+			if( page.done ) {
+				return page;
 			}
 
 			mpc = settings.pageContainer;
