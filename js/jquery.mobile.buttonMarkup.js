@@ -12,9 +12,10 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], functi
 "use strict";
 
 // General policy: Do not access data-* attributes except during enhancement.
-// Otherwise determine the state of the button exclusively from its className.
-// That's why optionsToClassName expects a full complement of options, and the
-// jQuery plugin completes the set of options from the default values.
+// In all other cases we determine the state of the button exclusively from its
+// className. That's why optionsToClassName expects a full complement of
+// options, and the jQuery plugin completes the set of options from the default
+// values.
 
 // Map classes to buttonMarkup boolean options - used in classNameToOptions()
 var reverseBoolOptionMap = {
@@ -97,14 +98,18 @@ function classNameToOptions( classes ) {
 			iconshadow: false,
 			mini: false
 		},
-		classes = classes.split( " " ),
 		unknownClasses = [];
 
+	classes = classes.split( " " );
+
+	// Loop over the classes
 	for ( idx = 0 ; idx < classes.length ; idx++ ) {
+
+		// Assume it's an unrecognized class
 		unknownClass = true;
-		map = reverseBoolOptionMap[ classes[ idx ] ];
 
 		// Recognize boolean options from the presence of classes
+		map = reverseBoolOptionMap[ classes[ idx ] ];
 		if ( map !== undefined ) {
 			unknownClass = false;
 			o[ map ] = true;
@@ -135,13 +140,13 @@ function classNameToOptions( classes ) {
 			alreadyEnhanced = true;
 		}
 
-		// If this class has been recognized, add it to the list
+		// If this class has not been recognized, add it to the list
 		if ( unknownClass ) {
 			unknownClasses.push( classes[ idx ] );
 		}
 	}
 
-	// If the class ui-icon is absent there cannot be an icon
+	// If the "ui-icon" class is absent there cannot be an icon
 	if ( noIcon ) {
 		o.icon = "";
 	}
@@ -174,14 +179,18 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 	for ( idx = 0 ; idx < this.length ; idx++ ) {
 		el = this[ idx ];
 		data = overwriteClasses ?
+
 			// Assume this element is not enhanced and ignore its classes
 			{ alreadyEnhanced: false, unknownClasses: [] } :
+
 			// Analyze existing classes to establish existing options and classes
 			classNameToOptions( el.className );
 
 		el.className = optionsToClassName(
+
 			// Merge all the options and apply them as classes
 			$.extend( {},
+
 				// The defaults form the basis
 				$.fn.buttonMarkup.defaults,
 
@@ -193,6 +202,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 
 				// Finally, apply the options passed in
 				options ),
+
 			// ... and re-apply any unrecognized classes that were found
 			data.unknownClasses );
 	}
@@ -226,10 +236,8 @@ $.fn.buttonMarkup.defaults = {
 // This function is only defined so that it can be called from the enhancer
 // without having to write it inline and may be moved into the enhancer in the
 // future.
-function enhanceWithButtonMarkup() {
-	var idx,
-		el = this,
-		getAttrFixed = $.mobile.getAttribute;
+function enhanceWithButtonMarkup( idx, el ) {
+	var getAttrFixed = $.mobile.getAttribute;
 
 	el.className = optionsToClassName( $.extend( {},
 		$.fn.buttonMarkup.defaults, {
