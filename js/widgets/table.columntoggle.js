@@ -110,29 +110,35 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 			.popup();
 	}
 
-  // toggle popup handler
+  // toggle handler
   self.update = function( pass, override ){
     var elems = pass === true ? $switchboard.find( "input" ) : pass;
 
     elems.each(function(){
-      var blocker;
+      var blocker, undo;
 
-      // manual toggling via popup "locks" columns
+			// manual toggle lock/unlock
       if ( override ) {
-        if (this.checked) {
-          this.setAttribute("locked", "show");
+        if (this.getAttribute("set")) {
+          undo = this.getAttribute("locked") === "show" ? "hide" : "show";
+          this.removeAttribute("set");
+          this.removeAttribute("locked");
         } else {
-          this.setAttribute("locked", "hide");
+					if (this.checked) {
+						blocker = "show";
+          } else {
+						blocker = "hide";
+          }
+          this.setAttribute("set",true);
+					this.setAttribute("locked", blocker);
         }
       }
 
-      blocker = this.getAttribute("locked");
-
       if (blocker) {
-        // override CSS and keep input as-is
         $( this ).jqmData( "cells" )[blocker]();
+      } else if (undo) {
+        $( this ).jqmData( "cells" ).removeAttr("style");
       } else {
-        // update input status based on responsive CSS
         this.checked = $(this).jqmData( "cells" ).eq(0).css( "display" ) !== "none";
         $( this ).checkboxradio( "refresh" );
       }
