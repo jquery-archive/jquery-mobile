@@ -1,33 +1,107 @@
-.ui-checkbox, .ui-radio { position: relative; clear: both; margin: 0; z-index: 1; }
-.ui-checkbox .ui-btn, .ui-radio .ui-btn { text-align: left; z-index: 2; }
-.ui-controlgroup .ui-checkbox .ui-btn, .ui-controlgroup .ui-radio .ui-btn { margin: 0; }
-.ui-checkbox .ui-btn-inner, .ui-radio .ui-btn-inner { white-space: normal; }
+.ui-checkbox,
+.ui-radio {
+	position: relative;
+	clear: both;
+	margin: 0;
+	z-index: 1;
+}
+.ui-checkbox .ui-btn,
+.ui-radio .ui-btn {
+	text-align: left;
+	z-index: 2;
+}
+.ui-controlgroup .ui-checkbox .ui-btn,
+.ui-controlgroup .ui-radio .ui-btn {
+	margin: 0;
+}
+.ui-checkbox,
+.ui-radio {
+	white-space: normal;
+}
+.ui-checkbox .ui-btn-icon-left,
+.ui-radio .ui-btn-icon-left {
+	padding-left: 45px;
+}
+.ui-checkbox .ui-mini.ui-btn-icon-left,
+.ui-radio .ui-mini.ui-btn-icon-left {
+	padding-left: 36px;
+}
+.ui-checkbox .ui-btn-icon-right,
+.ui-radio .ui-btn-icon-right {
+	padding-right: 45px;
+}
+.ui-checkbox .ui-mini.ui-btn-icon-right,
+.ui-radio .ui-mini.ui-btn-icon-right {
+	padding-right: 36px;
+}
+.ui-checkbox .ui-btn-icon-top,
+.ui-radio .ui-btn-icon-top {
+	padding-right: 0;
+	padding-left: 0;
+	text-align: center;
+}
+.ui-checkbox .ui-btn-icon-bottom,
+.ui-radio .ui-btn-icon-bottom {
+	padding-right: 0;
+	padding-left: 0;
+	text-align: center;
+}
+.ui-checkbox .ui-btn-icon-left:after,
+.ui-radio .ui-btn-icon-left:after {
+	left: 15px;
+}
+.ui-checkbox .ui-mini.ui-btn-icon-left:after,
+.ui-radio .ui-mini.ui-btn-icon-left:after {
+	left: 9px;
+}
+.ui-checkbox .ui-btn-icon-right:after,
+.ui-radio .ui-btn-icon-right:after {
+	right: 15px;
+}
+.ui-checkbox .ui-mini.ui-btn-icon-right:after,
+.ui-radio .ui-mini.ui-btn-icon-right:after {
+	right: 9px;
+}
+.ui-checkbox .ui-btn-icon-top:after,
+.ui-radio .ui-btn-icon-top:after {
+	top: 10px;
+}
+.ui-checkbox .ui-btn-icon-bottom:after,
+.ui-radio .ui-btn-icon-bottom:after {
+	top: auto;
+	bottom: 10px;
+}
+.ui-checkbox .ui-btn-icon-right:after,
+.ui-radio .ui-btn-icon-right:after {
+	right: 15px;
+}
+.ui-checkbox .ui-mini.ui-btn-icon-right:after,
+.ui-radio .ui-mini.ui-btn-icon-right:after {
+	right: 9px; }
 
-.ui-checkbox .ui-btn-icon-left .ui-btn-inner,.ui-radio .ui-btn-icon-left .ui-btn-inner { padding-left: 45px; }
-.ui-checkbox .ui-mini.ui-btn-icon-left .ui-btn-inner,.ui-radio .ui-mini.ui-btn-icon-left .ui-btn-inner { padding-left: 36px; }
-.ui-checkbox .ui-btn-icon-right .ui-btn-inner, .ui-radio .ui-btn-icon-right .ui-btn-inner { padding-right: 45px; }
-.ui-checkbox .ui-mini.ui-btn-icon-right .ui-btn-inner, .ui-radio .ui-mini.ui-btn-icon-right .ui-btn-inner { padding-right: 36px; }
-.ui-checkbox .ui-btn-icon-top .ui-btn-inner, .ui-radio .ui-btn-icon-top .ui-btn-inner { padding-right: 0; padding-left: 0; text-align: center; }
-.ui-checkbox .ui-btn-icon-bottom .ui-btn-inner, .ui-radio .ui-btn-icon-bottom .ui-btn-inner { padding-right: 0; padding-left: 0; text-align: center; }
-.ui-checkbox .ui-btn-icon-left .ui-icon, .ui-radio .ui-btn-icon-left .ui-icon { left: 15px; }
-.ui-checkbox .ui-mini.ui-btn-icon-left .ui-icon, .ui-radio .ui-mini.ui-btn-icon-left .ui-icon { left: 9px; }
-.ui-checkbox .ui-btn-icon-right .ui-icon, .ui-radio .ui-btn-icon-right .ui-icon { right: 15px; }
-.ui-checkbox .ui-mini.ui-btn-icon-right .ui-icon, .ui-radio .ui-mini.ui-btn-icon-right .ui-icon { right: 9px; }
-.ui-checkbox .ui-btn-icon-top .ui-icon, .ui-radio .ui-btn-icon-top .ui-icon { top: 10px; }
-.ui-checkbox .ui-btn-icon-bottom .ui-icon, .ui-radio .ui-btn-icon-bottom .ui-icon { top: auto; bottom: 10px; }
-.ui-checkbox .ui-btn-icon-right .ui-icon, .ui-radio .ui-btn-icon-right .ui-icon { right: 15px; }
-.ui-checkbox .ui-mini.ui-btn-icon-right .ui-icon, .ui-radio .ui-mini.ui-btn-icon-right .ui-icon { right: 9px; }
-
-.ui-controlgroup-horizontal .ui-checkbox .ui-icon,
-.ui-controlgroup-horizontal .ui-radio .ui-icon { display: none; }
-.ui-controlgroup-horizontal .ui-checkbox .ui-btn-inner,
-.ui-controlgroup-horizontal .ui-radio .ui-btn-inner { padding: .6em 20px; }
-.ui-controlgroup-horizontal .ui-checkbox .ui-mini .ui-btn-inner,
-.ui-controlgroup-horizontal .ui-radio .ui-mini .ui-btn-inner { padding: .55em 11px .5em; }
-
+.ui-controlgroup-horizontal .ui-checkbox:after,
+.ui-controlgroup-horizontal .ui-radio:after {
+	display: none;
+}
+.ui-controlgroup-horizontal .ui-checkbox .ui-btn,
+.ui-controlgroup-horizontal .ui-radio .ui-btn {
+	padding: .6em 20px;
+}
+.ui-controlgroup-horizontal .ui-checkbox .ui-mini,
+.ui-controlgroup-horizontal .ui-radio .ui-mini {
+	padding: .55em 11px .5em;
+}
 /* input, label positioning */
-.ui-checkbox input,.ui-radio input { position:absolute; left:20px; top:50%; width: 10px; height: 10px; margin:-5px 0 0 0; outline: 0 !important; z-index: 1; }
-
+.ui-checkbox input,.ui-radio input {
+	position:absolute;
+	left:20px;
+	top:50%;
+	width: 10px;
+	height: 10px;
+	margin:-5px 0 0 0;
+	outline: 0 !important;
+	z-index: 1;
+}
 .ui-checkbox input:disabled,
 .ui-radio input:disabled {
 	visibility: hidden;
