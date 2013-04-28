@@ -6,7 +6,7 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	cursor:pointer;
+	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -84,12 +84,7 @@ button.ui-btn-icon-notext {
 	padding-right: 3px;
 }
 .ui-input-clear,
-.ui-grid-a .ui-btn,
-.ui-grid-b .ui-btn,
-.ui-grid-c .ui-btn,
-.ui-grid-d .ui-btn,
-.ui-grid-e .ui-btn,
-.ui-grid-solo .ui-btn {
+[class*="ui-grid-"] .ui-btn {
 	margin-right: 5px;
 	margin-left: 5px;
 }
