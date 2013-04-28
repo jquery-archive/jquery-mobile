@@ -185,7 +185,7 @@
 					ok( $table.length, "table still enhanced");
 					equal( $table.find('tbody tr:first')
 						.find("th, td").eq(2).is(":visible"), false, "random cell in hidden column is not visible");
-					ok( $input.is( ":checked" ), false, "input is still not checked after refresh");
+					equal( $input.is( ":checked" ), false, "input is still not checked after refresh");
 					equal( $first_input.jqmData("cells").eq(1).data("test"), "abc",
 						"cell reference in popup is to cell currently in table");
 					equal( $visibleCells.length, $visibleHeaders.length, "same number of headers and rows visible" );
@@ -216,9 +216,9 @@
 				setTimeout(function(){
 					var headers = $( "#column-table-test table tr" ).find( "th:first" );
 					if( $input.is( ":checked" ) ){
-						ok( headers.is( ":visible" )  );
+						ok( headers.is( ":hidden" )  );
 					} else {
-						ok( headers.is( ":hidden" ) );
+						ok( headers.is( ":visible" ) );
 					}
 				}, 800);
 			},

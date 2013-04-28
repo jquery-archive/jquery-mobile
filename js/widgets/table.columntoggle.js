@@ -110,44 +110,45 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 			.popup();
 	}
 
-  // toggle handler
-  self.update = function( pass, override ){
-    var elems = pass === true ? $switchboard.find( "input" ) : pass;
+	// toggle handler
+	self.update = function( pass, override ){
+		var elems = pass === true ? $switchboard.find( "input" ) : pass;
 
-    elems.each(function(){
-      var blocker, undo;
-
+		elems.each(function(){
+			var blocker, undo;
 			// manual toggle lock/unlock
-      if ( override ) {
-        if (this.getAttribute("set")) {
-          undo = this.getAttribute("locked") === "show" ? "hide" : "show";
-          this.removeAttribute("set");
-          this.removeAttribute("locked");
-        } else {
-					if (this.checked) {
-						blocker = "show";
-          } else {
-						blocker = "hide";
-          }
-          this.setAttribute("set",true);
+			if ( override ) {
+				if (this.getAttribute("set")) {
+					undo = this.getAttribute("locked");
+					this.removeAttribute("set");
+					this.removeAttribute("locked");
+				} else {
+					blocker = this.checked ? "show" : "hide";
+					this.setAttribute("set",true);
 					this.setAttribute("locked", blocker);
-        }
-      }
+				}
+			}
 
-      if (blocker) {
-        $( this ).jqmData( "cells" )[blocker]();
-      } else if (undo) {
-        $( this ).jqmData( "cells" ).removeAttr("style");
-      } else {
-        this.checked = $(this).jqmData( "cells" ).eq(0).css( "display" ) !== "none";
-        $( this ).checkboxradio( "refresh" );
-      }
-    });
-  };
+			if (event === "refresh") {
+				if (this.getAttribute("set")) {
+					blocker = this.checked ? "show" : "hide";
+				}
+			}
 
-  $.mobile.window.on( "throttledresize", function () { self.update(true) });
+			if (blocker) {
+				$( this ).jqmData( "cells" )[blocker]();
+			} else if (undo) {
+				$( this ).jqmData( "cells" ).removeAttr("style");
+			} else {
+				this.checked = $(this).jqmData( "cells" ).eq(0).css( "display" ) !== "none";
+				$( this ).checkboxradio( "refresh" );
+			}
+		});
+	};
 
-  self.update(true);
+	$.mobile.window.on( "throttledresize", function () { self.update(true) });
+
+	self.update(true);
 
 });
 
