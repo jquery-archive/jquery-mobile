@@ -15,8 +15,8 @@ div.ui-slider {
 	zoom: 1;
 }
 div.ui-slider.ui-mini {
-	margin-left: .25em;
-	margin-right: .25em;
+	margin-top: .25em;
+	margin-bottom: .25em;
 	padding: 0;
 	font-size: 16px;
 }
@@ -115,10 +115,6 @@ div.ui-slider-switch.ui-mini {
 	width: 5em;
 	height: 29px;
 	top: 0;
-}
-.ui-field-contain .ui-slider-switch,
-.ui-field-contain .ui-slider-switch.ui-mini {
-	margin: 0;
 }
 .ui-slider-inneroffset {
 	margin: 0 16px;
