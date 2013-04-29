@@ -58,7 +58,7 @@
 
 /* preset breakpoint to switch to stacked grid styles below 35em (560px) */
 @media (max-width: 35em) {
-	.ui-responsive [class*="ui-block-"] { 
+	[class*="ui-grid-"].ui-responsive > [class*="ui-block-"] { 
 		width: 100%; 
 		float: none; 
 	}
