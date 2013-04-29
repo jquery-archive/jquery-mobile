@@ -12,6 +12,13 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+ul[class*="ui-grid-"],
+[class*="ui-grid-"] > li[class*="ui-block-"] {
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0;
+	list-style: none;
+}
 /* Lower percentages for older browsers (i.e. IE7) to prevent wrapping.
 :nth-child(n) to override for modern browsers.
 -.5px to fix BB5 wrap issue. */
