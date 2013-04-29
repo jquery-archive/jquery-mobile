@@ -110,7 +110,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 			for ( i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
 				side = !i ? "b" : "a";
-				sliderTheme = !i ? " ui-body-" + trackTheme : ( " " + $.mobile.activeBtnClass );
+				sliderTheme = !i ? " ui-body-" + trackTheme : ( " ui-btn-" + trackTheme + " " + $.mobile.activeBtnClass );
 				sliderLabel = document.createElement( "div" );
 				sliderImg = document.createElement( "span" );
 
