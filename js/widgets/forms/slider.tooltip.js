@@ -33,7 +33,6 @@ $.widget( "mobile.slider", $.mobile.slider, {
 			_currentValue: null,
 			_popup: null,
 			_popupVisible: false,
-			_handleText: this.handle.find( ".ui-btn-text" )
 		});
 
 		this._setOption( "popupEnabled", this.options.popupEnabled );
@@ -57,11 +56,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		this._super( key, value );
 
 		if ( key === "showValue" ) {
-			if ( value ) {
-				this._handleText.html( this._value() ).show();
-			} else {
-				this._handleText.hide();
-			}
+			this.handle.html( value && !this.options.mini ? this._value() : "" );
 		} else if ( key === "popupEnabled" ) {
 			if ( value && !this._popup ) {
 				this._popup = getPopup()
@@ -97,16 +92,14 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		if ( o.popupEnabled && this._popup ) {
 			this._positionPopup();
 			this._popup.html( newValue );
-		}
-
-		if ( o.showValue && this._handleText ) {
-			this._handleText.html( newValue );
+		} else if ( o.showValue && !this.options.mini ) {
+			this.handle.html( newValue );
 		}
 	},
 
 	_showPopup: function() {
 		if ( this.options.popupEnabled && !this._popupVisible ) {
-			this._handleText.hide();
+			this.handle.html( "" );
 			this._popup.show();
 			this._positionPopup();
 			this._popupVisible = true;
@@ -114,8 +107,12 @@ $.widget( "mobile.slider", $.mobile.slider, {
 	},
 
 	_hidePopup: function() {
-		if ( this.options.popupEnabled && this._popupVisible ) {
-			this._handleText.show();
+		var o = this.options;
+
+		if ( o.popupEnabled && this._popupVisible ) {
+			if ( o.showValue && !o.mini ) {
+				this.handle.html( this._value() );
+			}
 			this._popup.hide();
 			this._popupVisible = false;
 		}
