@@ -125,7 +125,9 @@ button.ui-btn-icon-notext {
 }
 
 /* Hiding native inputs */
-.ui-btn-hidden {
+.ui-btn > input[type="button"],
+.ui-btn > input[type="submit"],
+.ui-btn > input[type="reset"] {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -133,6 +135,7 @@ button.ui-btn-icon-notext {
 	height: 100%;
 	padding: 0;
 	-webkit-appearance: none;
+	-moz-appearance: none;
 	cursor: pointer;
 	background: #fff;
 	background: rgba(255,255,255,0);

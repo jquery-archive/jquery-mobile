@@ -49,7 +49,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 				[ "text" ]( $el.val() )
 				.insertBefore( $el )
 				.addClass( classes )
-				.append( $el.addClass( "ui-btn-hidden" ) );
+				.append( $el );
 				
 			$button = this.button;
 			
