@@ -62,7 +62,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = [this.isToggleSwitch ? "ui-slider ui-btn " : "ui-slider-track ",selectClass," ui-body-",trackTheme," ui-corner-all", miniClass].join( "" );
+		domSlider.className = [this.isToggleSwitch ? "ui-slider ui-btn " : "ui-slider-track ",selectClass," ui-fill-",trackTheme," ui-corner-all", miniClass].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -110,7 +110,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 			for ( i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
 				side = !i ? "b" : "a";
-				sliderTheme = !i ? " ui-body-" + trackTheme : ( " ui-btn-" + trackTheme + " " + $.mobile.activeBtnClass );
+				sliderTheme = !i ? " ui-fill-" + trackTheme : ( " ui-btn-" + trackTheme + " " + $.mobile.activeBtnClass );
 				sliderLabel = document.createElement( "div" );
 				sliderImg = document.createElement( "span" );
 
@@ -368,7 +368,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch ui-btn" : "ui-slider-track"," ui-body-" + trackTheme," ui-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
+		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch ui-btn" : "ui-slider-track"," ui-fill-" + trackTheme," ui-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
@@ -527,8 +527,8 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 	_setTrackTheme: function( value ) {
 		this.slider
-			.removeClass( "ui-body-" + this.options.trackTheme )
-			.addClass( "ui-body-" + value );
+			.removeClass( "ui-fill-" + this.options.trackTheme )
+			.addClass( "ui-fill-" + value );
 	},
 
 	_setDisabled: function( value ) {

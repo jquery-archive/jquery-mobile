@@ -138,6 +138,14 @@ button,
 	box-shadow: 0 1px #fff /*{a-br-shadow}*/;	
 }
 
+.ui-fill-a {
+	border: 1px solid		#bbb /*{a-fill-border}*/;
+	background:				#e1e1e1 /*{a-fill-background-color}*/;
+	color:					#222 /*{a-fill-color}*/;
+	font-weight: bold;
+	text-shadow: 0 /*{a-fill-shadow-x}*/ 1px /*{a-fill-shadow-y}*/ 0 /*{a-fill-shadow-radius}*/ #fff /*{a-fill-shadow-color}*/;
+}
+
 .ui-btn-a,
 .ui-btn-a:link,
 .ui-btn-a:visited {
@@ -146,7 +154,6 @@ button,
 	color: 					#222 /*{a-bup-color}*/;
 	font-weight: bold;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #fff /*{a-bup-shadow-color}*/;
-	
 }
 .ui-btn-a:hover {
 	border: 1px solid 		#bbb /*{a-bhover-border}*/;
@@ -246,6 +253,14 @@ button,
 .ui-body-b .ui-field-contain:after {
 	border-color: #121212 /*{b-br-border-color}*/;	
 	box-shadow: 0 1px #2A2A2A /*{b-br-shadow}*/;	
+}
+
+.ui-fill-b {
+	border: 1px solid		#111 /*{b-fill-border}*/;
+	background:				#333 /*{b-fill-background-color}*/;
+	color:					#fff /*{b-fill-color}*/;
+	font-weight: bold;
+	text-shadow: 0 /*{b-fill-shadow-x}*/ 1px /*{b-fill-shadow-y}*/ 0 /*{b-fill-shadow-radius}*/ #000 /*{b-fill-shadow-color}*/;
 }
 
 .ui-btn-b,
@@ -357,6 +372,14 @@ button,
 	box-shadow: 0 1px #fff /*{a-br-shadow}*/;	
 }
 
+.ui-fill-c {
+	border: 1px solid		#bbb /*{a-fill-border}*/;
+	background:				#e1e1e1 /*{a-fill-background-color}*/;
+	color:					#222 /*{a-fill-color}*/;
+	font-weight: bold;
+	text-shadow: 0 /*{a-fill-shadow-x}*/ 1px /*{a-fill-shadow-y}*/ 0 /*{a-fill-shadow-radius}*/ #fff /*{a-fill-shadow-color}*/;
+}
+
 .ui-btn-c,
 .ui-btn-c:link,
 .ui-btn-c:visited {
@@ -365,7 +388,6 @@ button,
 	color: 					#222 /*{a-bup-color}*/;
 	font-weight: bold;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #fff /*{a-bup-shadow-color}*/;
-	
 }
 .ui-btn-c:hover {
 	border: 1px solid 		#bbb /*{a-bhover-border}*/;
@@ -467,6 +489,14 @@ button,
 	box-shadow: 0 1px #fff /*{a-br-shadow}*/;	
 }
 
+.ui-fill-d {
+	border: 1px solid		#bbb /*{a-fill-border}*/;
+	background:				#e1e1e1 /*{a-fill-background-color}*/;
+	color:					#222 /*{a-fill-color}*/;
+	font-weight: bold;
+	text-shadow: 0 /*{a-fill-shadow-x}*/ 1px /*{a-fill-shadow-y}*/ 0 /*{a-fill-shadow-radius}*/ #fff /*{a-fill-shadow-color}*/;
+}
+
 .ui-btn-d,
 .ui-btn-d:link,
 .ui-btn-d:visited {
@@ -475,7 +505,6 @@ button,
 	color: 					#222 /*{a-bup-color}*/;
 	font-weight: bold;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #fff /*{a-bup-shadow-color}*/;
-	
 }
 .ui-btn-d:hover {
 	border: 1px solid 		#bbb /*{a-bhover-border}*/;
@@ -577,6 +606,14 @@ button,
 	box-shadow: 0 1px #fff /*{a-br-shadow}*/;	
 }
 
+.ui-fill-e {
+	border: 1px solid		#bbb /*{a-fill-border}*/;
+	background:				#e1e1e1 /*{a-fill-background-color}*/;
+	color:					#222 /*{a-fill-color}*/;
+	font-weight: bold;
+	text-shadow: 0 /*{a-fill-shadow-x}*/ 1px /*{a-fill-shadow-y}*/ 0 /*{a-fill-shadow-radius}*/ #fff /*{a-fill-shadow-color}*/;
+}
+
 .ui-btn-e,
 .ui-btn-e:link,
 .ui-btn-e:visited {
@@ -585,7 +622,6 @@ button,
 	color: 					#222 /*{a-bup-color}*/;
 	font-weight: bold;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #fff /*{a-bup-shadow-color}*/;
-	
 }
 .ui-btn-e:hover {
 	border: 1px solid 		#bbb /*{a-bhover-border}*/;
