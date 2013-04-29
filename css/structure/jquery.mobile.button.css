@@ -84,15 +84,17 @@ button.ui-btn-icon-notext {
 	padding-left: 3px;
 	padding-right: 3px;
 }
-.ui-input-clear,
-[class*="ui-grid-"] .ui-btn {
-	margin-right: 5px;
-	margin-left: 5px;
-}
-/* unset margin for button elements until we can use max-width: fill-available; */
+/* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
 [class*="ui-grid-"] button.ui-btn {
 	margin-right: 0;
 	margin-left: 0;
+}
+.ui-input-clear,
+[class*="ui-grid-"] .ui-btn,
+[class*="ui-grid-"] button.ui-btn-inline,
+[class*="ui-grid-"] button.ui-btn-icon-notext {
+	margin-right: 5px;
+	margin-left: 5px;
 }
 .ui-mobile .ui-btn-left,
 .ui-mobile .ui-btn-right,
