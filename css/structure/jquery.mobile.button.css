@@ -18,13 +18,14 @@ button.ui-btn {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 	width: 100%;
 }
 button.ui-btn::-moz-focus-inner {
 	border: 0;
 }
 .ui-btn-icon-notext {
-	position: relative;
 	padding: 0;
 	width: 24px;
 	height: 24px;
@@ -87,6 +88,11 @@ button.ui-btn-icon-notext {
 [class*="ui-grid-"] .ui-btn {
 	margin-right: 5px;
 	margin-left: 5px;
+}
+/* unset margin for button elements until we can use max-width: fill-available; */
+[class*="ui-grid-"] button.ui-btn {
+	margin-right: 0;
+	margin-left: 0;
 }
 .ui-mobile .ui-btn-left,
 .ui-mobile .ui-btn-right,
