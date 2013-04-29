@@ -19,3 +19,7 @@
 	text-align: center;
 	z-index: 100;
 }
+
+.ui-slider-track .ui-btn.ui-slider-handle {
+	line-height: 1.8em;
+}
