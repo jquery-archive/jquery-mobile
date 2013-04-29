@@ -11,16 +11,21 @@ label.ui-slider {
 div.ui-slider {
 	height: 30px;
 	margin: .5em 0;
+	padding: 0;
 	zoom: 1;
 }
 div.ui-slider.ui-mini {
-	margin: .25em 0;
+	margin-left: .25em;
+	margin-right: .25em;
+	padding: 0;
+	font-size: 16px;
 }
 .ui-field-contain div.ui-slider,
 .ui-field-contain div.ui-slider.ui-mini {
 	margin: 0;
 }
-div.ui-slider:before, div.ui-slider:after {
+div.ui-slider:before,
+div.ui-slider:after {
 	content: "";
 	display: table;
 }
@@ -66,9 +71,13 @@ input.ui-input-text.ui-slider-input {
 	top: 8px;
 	padding: 0;
 }
-.ui-slider-bg {
+.ui-slider-track .ui-slider-bg {
 	border: none;
 	height: 100%;
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
 }
 /* High level of specificity to override button margins in grids */
 .ui-slider-track .ui-btn.ui-slider-handle,
@@ -85,18 +94,7 @@ input.ui-input-text.ui-slider-input {
 .ui-slider-track.ui-mini .ui-slider-handle {
 	height: 14px;
 	width: 14px;
-	margin: -8px 0 0 -7px;
-}
-.ui-slider-handle .ui-btn-inner {
-	padding: 0;
-	height: 100%;
-}
-.ui-slider-track.ui-mini .ui-slider-handle .ui-btn-inner {
-	height: 30px;
-	width: 30px;
-	padding: 0;
-	margin: -9px 0 0 -9px;
-	border-top: none;
+	margin: -8px 0 0 -8px;
 }
 select.ui-slider-switch {
 	display: none;
@@ -105,20 +103,18 @@ div.ui-slider-switch {
 	display: inline-block;
 	height: 32px;
 	width: 5.8em;
-	margin: .5em 0;
 	top: 0;
 }
 /* reset the clearfix */
-div.ui-slider-switch:before, div.ui-slider-switch:after {
+div.ui-slider-switch:before,
+div.ui-slider-switch:after {
 	display: none;
 	clear: none;
 }
 div.ui-slider-switch.ui-mini {
 	width: 5em;
 	height: 29px;
-	margin: .25em 0;
 	top: 0;
-	padding: 0;
 }
 .ui-field-contain .ui-slider-switch,
 .ui-field-contain .ui-slider-switch.ui-mini {
@@ -145,13 +141,6 @@ div.ui-slider-switch.ui-mini {
 	-webkit-transition: left 70ms linear;
 	-moz-transition: left 70ms linear;
 }
-.ui-slider-switch.ui-mini .ui-slider-handle .ui-btn-inner {
-	height: 30px;
-	width: 30px;
-	padding: 0;
-	margin: 0;
-	border-top: none;
-}
 .ui-slider-switch .ui-slider-label {
 	position: absolute;
 	text-align: center;
@@ -164,6 +153,10 @@ div.ui-slider-switch.ui-mini {
 	border-width: 0;
 	white-space: nowrap;
 	cursor: pointer;
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
 }
 .ui-slider-switch.ui-mini .ui-slider-label {
 	font-size: 14px;
