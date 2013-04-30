@@ -857,10 +857,11 @@ $.widget( "mobile.popup", $.mobile.widget, {
 // TODO this can be moved inside the widget
 $.mobile.popup.handleLink = function( $link ) {
 	var closestPage = $link.closest( ":jqmData(role='page')" ),
+		path = $.mobile.path,
 		scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
-		// NOTE make sure to get only the hash, ie7 (wp7) return the absolute href
+		// NOTE make sure to get only the hash, ie7 (wp7) returns the absolute href
 		//      in this case ruining the element selection
-		popup = $( $.mobile.path.parseUrl($link.attr( "href" )).hash, scope[0] ),
+		popup = $( path.hashToSelector( path.parseUrl( $link.attr( "href" ) ).hash ), scope[0] ),
 		offset;
 
 	if ( popup.data( "mobile-popup" ) ) {
