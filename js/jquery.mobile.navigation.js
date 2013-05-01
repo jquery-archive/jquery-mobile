@@ -525,7 +525,7 @@ define( [
 		}
 		// Reset base to the default document base.
 		// only reset if we are not prefetching
-		if ( base && typeof options.prefetch === "undefined" ) {
+		if ( base && ( typeof options === "undefined" || typeof options.prefetch === "undefined" ) ) {
 			base.reset();
 		}
 
@@ -562,7 +562,7 @@ define( [
 					}
 
 					//dont update the base tag if we are prefetching
-					if ( base && typeof options.prefetch === "undefined") {
+					if ( base && ( typeof options === "undefined" || typeof options.prefetch === "undefined" )) {
 						base.set( fileUrl );
 					}
 
