@@ -83,7 +83,7 @@ function transform3dTest() {
 	for ( t in transforms ) {
 		if( el.style[ t ] !== undefined ){
 			el.style[ t ] = "translate3d( 100px, 1px, 1px )";
-			ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
+			ret = window.getComputedStyle( el, null ).getPropertyValue( transforms[ t ] );
 		}
 	}
 	return ( !!ret && ret !== "none" );
