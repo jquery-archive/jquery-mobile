@@ -28,6 +28,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		}
 	},
 
+	_handlePageBeforeHide: function() {
+		this._isCloseable = false;
+	},
+
 	_create: function() {
 		var self = this,
 			$el = this.element,
@@ -62,7 +66,8 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		});
 
 		this._on( $el, {
-			pagebeforeshow: "_handlePageBeforeShow"
+			pagebeforeshow: "_handlePageBeforeShow",
+			pagebeforehide: "_handlePageBeforeHide"
 		});
 
 		$.extend( this, {
