@@ -22,6 +22,7 @@ button.ui-btn {
 	-moz-appearance: none;
 	width: 100%;
 }
+/* Firefox adds a 1px border in a button element. We negate this to make sure they have the same height as other buttons in controlgroups. */
 button.ui-btn::-moz-focus-inner {
 	border: 0;
 }
