@@ -1,11 +1,6 @@
 /* slider tooltip
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-slider .ui-btn-inner {
-	padding: 5px 0 0 0 !important;
-	font-size:.8em;
-}
-
 .ui-slider-popup {
 	width: 64px;
 	height: 64px;
@@ -21,5 +16,6 @@
 }
 
 .ui-slider-track .ui-btn.ui-slider-handle {
-	line-height: 1.8em;
+	font-size: .9em;
+	line-height: 30px;
 }
