@@ -206,7 +206,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		// can give us a significant boost on platforms like WP7.5.
 
 		for ( itemClass in itemClassDict ) {
-			$( itemClassDict[ itemClass ] ).addClass( itemClass ).children( ".ui-btn-inner" ).addClass( itemClass );
+			$( itemClassDict[ itemClass ] ).addClass( itemClass );
 		}
 
 		$list.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" )
