@@ -43,11 +43,9 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			});
 
 		$navbar.delegate( "a", "vclick", function( event ) {
-			// ui-btn-inner is returned as target
-			var target = $( event.target ).is( "a" ) ? $( this ) : $( this ).parent( "a" ),
-				activeBtn;
+			var activeBtn;
 
-			if ( !target.is( ".ui-disabled, .ui-btn-active" ) ) {
+			if ( !$( this ).is( ".ui-disabled, .ui-btn-active" ) ) {
 				$navbtns.removeClass( $.mobile.activeBtnClass );
 				$( this ).addClass( $.mobile.activeBtnClass );
 
