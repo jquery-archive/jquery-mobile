@@ -546,6 +546,9 @@ define( [
 				// Remove the popup
 				this.listbox.remove();
 
+				// Remove the dialog
+				this.menuPage.remove();
+
 				// Chain up
 				origDestroy.apply( this, arguments );
 			}
