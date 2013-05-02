@@ -501,27 +501,97 @@
 	});
 
 	asyncTest( "destroying a custom select menu leaves no traces", function() {
-		$.testHelper.pageSequence( [
-			function() { $.mobile.changePage( "#destroyTestCustom" ); },
-			function() {
-				var unenhancedSelect = $(
-						"<select data-" + ( $.mobile.ns || "" ) + "native-menu='false'>" +
-						"<option>Title</option>" +
-						"<option value='option1'>Option 1</option>" +
-						"<option value='option2'>Option 2</option>" +
-						"</select>"),
-					unenhancedSelectClone = unenhancedSelect.clone();
+		expect( 7 );
 
-				$( "#destroyTestCustom" ).append( unenhancedSelectClone );
+		var unenhancedSelectClone,
+			prefix = ".destroyingASelectMenuLeavesNoTraces",
+			id = "select-" + Math.round( Math.random() * 1177 ),
+			unenhancedSelect = $(
+				"<select id='" + id + "' data-" + ( $.mobile.ns || "" ) + "native-menu='false'>" +
+				"<option>Title</option>" +
+				"<option value='option1'>Option 1</option>" +
+				"<option value='option2'>Option 2</option>" +
+				"</select>");
+		$.testHelper.detailedEventCascade( [
+			function() {
+				$.mobile.changePage( "#destroyTest" );
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "0" }
+			},
+
+			function() {
+				unenhancedSelectClone = unenhancedSelect.clone();
+
+				$( "#destroyTest" ).append( unenhancedSelectClone );
 				unenhancedSelectClone.selectmenu();
+				$( "#" + id + "-button" ).click();
+			},
+
+			{
+				popupafteropen: { src: $.mobile.document, event: "popupafteropen" + prefix + "1" }
+			},
+
+			function( result ) {
+				deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
+				$( "#" + id + "-listbox" ).popup( "close" );
+			},
+
+			{
+				popupafterclose: { src: $.mobile.document, event: "popupafterclose" + prefix + "2" }
+			},
+
+			function( result ) {
+				var idx;
+
+				deepEqual( result.popupafterclose.timedOut, false, "Popup did close" );
+
 				unenhancedSelectClone.selectmenu( "destroy" );
 				unenhancedSelectClone.remove();
 
-				deepEqual( $( "#destroyTestCustom" ).children().length, 0, "After adding, enhancing, destroying, and removing the select menu, the page is empty" );
+				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the popup-sized select menu, the page is empty" );
 				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+
+				// Add a bunch of options to make sure the menu ends up larger than
+				// the screen, thus requiring a dialog
+				for ( idx = 3 ; idx < 60 ; idx++ ) {
+					unenhancedSelect.append( "<option value='option" + idx + "'>Option " + idx + "</option>" );
+				}
+				unenhancedSelectClone = unenhancedSelect.clone();
+				$( "#destroyTest" ).append( unenhancedSelectClone );
+				unenhancedSelectClone.selectmenu();
+				$( "#" + id + "-button" ).click();
 			},
-			function() { $.mobile.back(); },
-			function() { start(); }
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "3" }
+			},
+
+			function() {
+				// Close the dialog
+				$.mobile.activePage.find( "a:first" ).click();
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "4" }
+			},
+
+			function() {
+				unenhancedSelectClone.selectmenu( "destroy" );
+				unenhancedSelectClone.remove();
+
+				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, the page is empty" );
+				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+				deepEqual( $( "#" + id + "-dialog" ).length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, no dialog page is left behind" );
+				$.mobile.back();
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "5" }
+			},
+
+			start
 		]);
 	});
 
