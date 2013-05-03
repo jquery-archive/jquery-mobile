@@ -47,7 +47,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 		$menu,
 		$switchboard;
 
-	if ( o.mode !== "columntoggle" ) {
+	if ( $table.jqmData("mode") !== "columntoggle" ) {
 		return;
 	}
 
@@ -95,9 +95,11 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 	}
 
 	if ( event !== "refresh" ) {
-    $switchboard.on( "change", "input", function( e ){
-      self.update( $(this), true );
-    });
+		$switchboard.on( "change", "input", function( e ){
+			if (e.bubbles === undefined) {
+				self.update( $(this), true );
+			}
+		});
 
 		$menuButton
 			.insertBefore( $table )
@@ -137,10 +139,12 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 
 			if (blocker) {
 				$( this ).jqmData( "cells" )[blocker]();
-			} else if (undo) {
-				$( this ).jqmData( "cells" ).removeAttr("style");
 			} else {
-				this.checked = $(this).jqmData( "cells" ).eq(0).css( "display" ) !== "none";
+				if (undo) {
+					$( this ).jqmData( "cells" ).removeAttr("style");
+				} else {
+					this.checked = $(this).jqmData( "cells" ).eq(0).css( "display" ) !== "none";
+				}
 				$( this ).checkboxradio( "refresh" );
 			}
 		});
