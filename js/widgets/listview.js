@@ -139,8 +139,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					var buttonClass = "ui-btn ui-btn-" + itemTheme;
 					
 					if ( icon && ( a.length === 1 ) ) {
-						itemClass += " ui-li-has-arrow";
-						
 						buttonClass += " ui-icon ui-btn-icon-right ui-icon-" + icon;
 					}
 					

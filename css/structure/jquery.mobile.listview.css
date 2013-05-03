@@ -120,7 +120,7 @@
 .ui-li-divider.ui-li-has-count {
 	padding-right: 45px;
 }
-.ui-li-has-arrow.ui-li-has-count > .ui-btn {
+.ui-li-has-count > .ui-btn-icon-right {
 	padding-right: 75px;
 }
 .ui-li-has-thumb > .ui-btn,
@@ -142,7 +142,7 @@
 	top: 50%;
 	margin-top: -.9em;
 }
-.ui-li-has-arrow.ui-li-has-count .ui-li-count {
+.ui-btn-icon-right .ui-li-count {
 	right: 40px;
 }
 .ui-li-has-alt.ui-li-has-count .ui-li-count {
