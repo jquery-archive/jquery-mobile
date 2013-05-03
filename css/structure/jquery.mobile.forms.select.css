@@ -50,31 +50,6 @@
 	display: block;
 }
 
-.ui-select .ui-btn-icon-right,
-.ui-select .ui-li-has-count {
-	padding-right: 45px;
-}
-.ui-select .ui-mini.ui-btn-icon-right {
-	padding-right: 32px;
-}
-.ui-select .ui-btn-icon-right.ui-li-has-count {
-	padding-right: 80px;
-}
-.ui-select .ui-mini.ui-btn-icon-right.ui-li-has-count {
-	padding-right: 67px;
-}
-.ui-select .ui-btn-icon-right:after {
-	right: 15px;
-}
-.ui-select .ui-mini.ui-btn-icon-right:after {
-	right: 7px;
-}
-.ui-select .ui-btn-icon-right.ui-li-has-count .ui-li-count {
-	right: 45px;
-}
-.ui-select .ui-mini.ui-btn-icon-right.ui-li-has-count .ui-li-count {
-	right: 32px;
-}
 /* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */
 .ui-select .ui-btn > span:not(.ui-li-count) {
 	display: block;
