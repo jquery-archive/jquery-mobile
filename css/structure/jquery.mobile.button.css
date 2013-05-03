@@ -1,19 +1,3 @@
-.ui-btn {
-	display: block;
-	position: relative;
-	font-size: 16px;
-	text-align: center;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	margin: .5em 0;
-	padding: .7em 15px;
-}
 button.ui-btn {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -26,105 +10,16 @@ button.ui-btn {
 button.ui-btn::-moz-focus-inner {
 	border: 0;
 }
-.ui-btn-icon-notext {
-	padding: 0;
-	width: 24px;
-	height: 24px;
-	text-indent: -9999px;
-	white-space: nowrap !important;
-}
 button.ui-btn-icon-notext {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	width: 24px;
 }
-.ui-mini {
-	margin-top: .25em;
-	margin-bottom: .25em;
-	font-size: 12.5px;
-	padding: .55em 11px .5em;
-}
-.ui-mini.ui-btn-icon-notext {
-	padding: 0;
-	font-size: 16px;	
-}
-.ui-btn-inline {
-	display: inline-block;
-	vertical-align: middle;
-	margin-right: 10px;
-}
-.ui-btn-icon-left {
-	padding-left: 40px;
-}
-.ui-btn-icon-right {
-	padding-right: 40px;
-}
-.ui-btn-icon-top {
-	padding-top: 40px;
-}
-.ui-btn-icon-bottom {
-	padding-bottom: 40px;
-}
-.ui-mini.ui-btn-icon-left {
-	padding-left: 30px;
-}
-.ui-mini.ui-btn-icon-right {
-	padding-right: 30px;
-}
-.ui-mini.ui-btn-icon-top {
-	padding-top: 30px;
-}
-.ui-mini.ui-btn-icon-bottom {
-	padding-bottom: 30px;
-}
-.ui-header .ui-btn-icon-top,
-.ui-footer .ui-btn-icon-top,
-.ui-header .ui-btn-icon-bottom,
-.ui-footer .ui-btn-icon-bottom {
-	padding-left: 3px;
-	padding-right: 3px;
-}
 /* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
 [class*="ui-grid-"] button.ui-btn {
 	margin-right: 0;
 	margin-left: 0;
-}
-.ui-input-clear,
-[class*="ui-grid-"] .ui-btn,
-[class*="ui-grid-"] button.ui-btn-inline,
-[class*="ui-grid-"] button.ui-btn-icon-notext {
-	margin-right: 5px;
-	margin-left: 5px;
-}
-.ui-mobile .ui-btn-left,
-.ui-mobile .ui-btn-right,
-.ui-mobile .ui-btn-left > .ui-btn,
-.ui-mobile .ui-btn-right > .ui-btn {
-	margin: 0;
-}
-.ui-btn-left,
-.ui-btn-right {
-	position: absolute;
-	top: 3px;
-}
-.ui-btn-left {
-	left: 5px;
-}
-.ui-btn-right {
-	right: 5px;
-}
-.ui-btn-left.ui-btn-icon-notext,
-.ui-btn-right.ui-btn-icon-notext {
-	top: 6px;
-}
-.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-left,
-.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-right {
-	top: 4px;
-}
-.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-left.ui-btn-icon-notext,
-.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-right.ui-btn-icon-notext {
-	top: 7px;
 }
 
 /* Hiding native inputs */

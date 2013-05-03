@@ -71,7 +71,71 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	border-bottom-right-radius: inherit;
 }
 
-/* icons */
+/* Buttons and icons */
+.ui-btn {
+	display: block;
+	position: relative;
+	font-size: 16px;
+	text-align: center;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	margin: .5em 0;
+	padding: .7em 15px;
+}
+.ui-btn-icon-notext {
+	padding: 0;
+	width: 24px;
+	height: 24px;
+	text-indent: -9999px;
+	white-space: nowrap !important;
+}
+.ui-mini {
+	margin-top: .25em;
+	margin-bottom: .25em;
+}
+.ui-mini.ui-btn {
+	font-size: 12.5px;
+	padding: .55em 11px .5em;
+}
+.ui-mini.ui-btn-icon-notext {
+	padding: 0;
+	font-size: 16px;	
+}
+.ui-btn-inline {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+.ui-btn-icon-left {
+	padding-left: 40px;
+}
+.ui-btn-icon-right {
+	padding-right: 40px;
+}
+.ui-btn-icon-top {
+	padding-top: 40px;
+}
+.ui-btn-icon-bottom {
+	padding-bottom: 40px;
+}
+.ui-mini.ui-btn-icon-left {
+	padding-left: 30px;
+}
+.ui-mini.ui-btn-icon-right {
+	padding-right: 30px;
+}
+.ui-mini.ui-btn-icon-top {
+	padding-top: 30px;
+}
+.ui-mini.ui-btn-icon-bottom {
+	padding-bottom: 30px;
+}
 .ui-icon:after {
 	content: "";
 	position: absolute;
@@ -119,6 +183,49 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-mini.ui-btn-icon-bottom:after {
 	bottom: 5px;
+}
+.ui-input-clear,
+[class*="ui-grid-"] .ui-btn,
+[class*="ui-grid-"] button.ui-btn-inline,
+[class*="ui-grid-"] button.ui-btn-icon-notext {
+	margin-right: 5px;
+	margin-left: 5px;
+}
+.ui-mobile .ui-btn-left,
+.ui-mobile .ui-btn-right,
+.ui-mobile .ui-btn-left > .ui-btn,
+.ui-mobile .ui-btn-right > .ui-btn {
+	margin: 0;
+}
+.ui-btn-left,
+.ui-btn-right {
+	position: absolute;
+	top: 3px;
+}
+.ui-btn-left {
+	left: 5px;
+}
+.ui-btn-right {
+	right: 5px;
+}
+.ui-btn-left.ui-btn-icon-notext,
+.ui-btn-right.ui-btn-icon-notext {
+	top: 6px;
+}
+.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-left,
+.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-right {
+	top: 4px;
+}
+.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-left.ui-btn-icon-notext,
+.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-right.ui-btn-icon-notext {
+	top: 7px;
+}
+.ui-header .ui-btn-icon-top,
+.ui-footer .ui-btn-icon-top,
+.ui-header .ui-btn-icon-bottom,
+.ui-footer .ui-btn-icon-bottom {
+	padding-left: 3px;
+	padding-right: 3px;
 }
 
 /* non-js content hiding */
