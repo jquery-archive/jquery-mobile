@@ -876,11 +876,6 @@ $.mobile.popup.handleLink = function( $link ) {
 
 	//remove after delay
 	setTimeout( function() {
-		// Check if we are in a listview
-		var $parent = $link.parent().parent();
-		if ($parent.hasClass("ui-li")) {
-			$link = $parent.parent();
-		}
 		$link.removeClass( $.mobile.activeBtnClass );
 	}, 300 );
 };
