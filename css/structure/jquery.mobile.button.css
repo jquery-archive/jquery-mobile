@@ -22,7 +22,7 @@ button.ui-btn-icon-notext {
 	margin-left: 0;
 }
 
-/* Hiding native inputs */
+/* Hide the native input element */
 .ui-btn > input[type="button"],
 .ui-btn > input[type="submit"],
 .ui-btn > input[type="reset"] {
@@ -32,6 +32,9 @@ button.ui-btn-icon-notext {
 	width: 100%;
 	height: 100%;
 	padding: 0;
+	border: none;
+	-webkit-border-radius: inherit;
+	border-bottom-radius: inherit;	
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	cursor: pointer;
@@ -40,16 +43,14 @@ button.ui-btn-icon-notext {
 	filter: Alpha(Opacity=0);
 	opacity: .1;
 	font-size: 1px;
-	border: none;
 	text-indent: -9999px;
 	z-index: 2;
 }
 /* Fixes IE/WP filter alpha opacity bugs */
-.ui-state-disabled .ui-btn-hidden {
+.ui-state-disabled input[type="button"],
+.ui-state-disabled input[type="submit"],
+.ui-state-disabled input[type="reset"] {
 	display: none;
-}
-.ui-state-disabled {
-	z-index: 1;
 }
 
 .ui-field-contain .ui-btn.ui-submit { margin: 0; }
