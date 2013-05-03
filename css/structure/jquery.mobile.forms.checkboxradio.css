@@ -8,15 +8,12 @@
 .ui-checkbox .ui-btn,
 .ui-radio .ui-btn {
 	text-align: left;
+	white-space: normal; /* Nowrap + ellipsis doesn't work on label. Issue #1419. */
 	z-index: 2;
 }
 .ui-controlgroup .ui-checkbox .ui-btn,
 .ui-controlgroup .ui-radio .ui-btn {
 	margin: 0;
-}
-.ui-checkbox,
-.ui-radio {
-	white-space: normal;
 }
 .ui-checkbox .ui-btn-icon-left,
 .ui-radio .ui-btn-icon-left {
