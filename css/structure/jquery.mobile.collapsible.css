@@ -17,6 +17,10 @@
 	border-left-width: 0;
 	border-right-width: 0;
 }
+.ui-collapsible-heading .ui-btn-icon-top,
+.ui-collapsible-heading .ui-btn-icon-bottom {
+	text-align: center;
+}
 .ui-collapsible-inset .ui-collapsible-heading .ui-btn {
 	border-right-width: 1px;
 	border-left-width: 1px;
@@ -26,44 +30,6 @@
 }
 .ui-collapsible-set .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn {
 	border-top-width: 1px;
-}
-.ui-collapsible-heading .ui-btn {
-	padding-left: 12px;
-	padding-right: 12px;
-}
-.ui-collapsible-heading .ui-btn-icon-left {
-	padding-left: 40px;
-}
-.ui-collapsible-heading .ui-btn-icon-right {
-	padding-right: 40px;
-}
-.ui-collapsible-heading .ui-btn-icon-top,
-.ui-collapsible-heading .ui-btn-icon-bottom {
-	text-align: center;
-}
-.ui-collapsible-heading .ui-btn-icon-left.ui-mini {
-	padding-left: 30px;
-}
-.ui-collapsible-heading .ui-btn-icon-right.ui-mini {
-	padding-right: 30px;
-}
-
-.ui-collapsible-heading .ui-btn span.ui-btn {
-	position: absolute;
-	left: 6px;
-	top: 50%;
-	margin: -12px 0 0 0;
-	width: 20px;
-	height: 20px;
-	padding: 1px 0 1px 2px;
-	text-indent: -9999px;
-}
-.ui-collapsible-heading .ui-btn span.ui-btn {
-	padding: 10px 0;
-}
-.ui-collapsible-heading .ui-btn span.ui-btn:after {
-	left: 0;
-	margin-top: -10px;
 }
 .ui-collapsible-heading-status {
 	position: absolute;
@@ -77,9 +43,7 @@
 	border-left-width: 0;
 	border-right-width: 0;
 	border-top: none;
-	     /* Overrides ui-body-* */
 	background-image: none;
-	/* Overrides ui-body-* */
 }
 .ui-collapsible-inset .ui-collapsible-content {
 	margin: 0;
@@ -89,7 +53,6 @@
 .ui-collapsible-content-collapsed {
 	display: none;
 }
-
 .ui-collapsible-set > .ui-collapsible.ui-corner-all {
 	-webkit-border-radius: 0;
 	border-radius: 0;
@@ -112,14 +75,12 @@
 	-webkit-border-bottom-left-radius: inherit;	
 	border-bottom-left-radius: inherit;		
 }
-
 .ui-collapsible-themed-content:not(.ui-collapsible-collapsed) > .ui-collapsible-heading {
 	-webkit-border-bottom-right-radius: 0;	
 	border-bottom-right-radius: 0;
 	-webkit-border-bottom-left-radius: 0;	
 	border-bottom-left-radius: 0;		
 }
-
 .ui-collapsible-set {
 	margin: .5em 0;
 }
