@@ -27,6 +27,10 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 		}
 	},
 
+	_handlePageBeforeHide: function() {
+		this._isCloseable = false;
+	},
+
 	_create: function() {
 		var $el = this.element,
 			cornerClass = !!this.options.corners ? " ui-corner-all" : "",
@@ -60,7 +64,8 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 		});
 
 		this._on( $el, {
-			pagebeforeshow: "_handlePageBeforeShow"
+			pagebeforeshow: "_handlePageBeforeShow",
+			pagebeforehide: "_handlePageBeforeHide"
 		});
 
 		this._setCloseBtn( this.options.closeBtn );

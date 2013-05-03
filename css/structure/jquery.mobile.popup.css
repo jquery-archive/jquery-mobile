@@ -126,4 +126,4 @@
 }
 .ui-popup > .ui-btn-left { left: -9px; }
 .ui-popup > .ui-btn-right { right: -9px; }
-.ui-popup-hidden { top: -99999px; left: -9999px; }
+.ui-popup-hidden { top: -99999px; left: -9999px; visibility: hidden; }

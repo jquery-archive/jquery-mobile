@@ -97,10 +97,7 @@ define( [
 			placeholder: "",
 
 			build: function() {
-				var self = this,
-					escapeId = function( id ) {
-						return id.replace( /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1" );
-					};
+				var self = this;
 
 				// Create list from select, update state
 				self.refresh();
@@ -130,9 +127,9 @@ define( [
 
 						self._decideFormat();
 						if ( self.menuType === "overlay" ) {
-							self.button.attr( "href", "#" + escapeId( self.popupID ) ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+							self.button.attr( "href", "#" + self.popupID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
 						} else {
-							self.button.attr( "href", "#" + escapeId( self.dialogID ) ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+							self.button.attr( "href", "#" + self.dialogID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
 						}
 						self.isOpen = true;
 						// Do not prevent default, so the navigation may have a chance to actually open the chosen format
@@ -354,16 +351,11 @@ define( [
 			_decideFormat: function() {
 				var self = this,
 					$window = $.mobile.window,
-					// Show popup container so that menuHeight will be reported correctly
-					popupContainer = self.listbox.parent().show(),
 					selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
 					scrollTop = $window.scrollTop(),
 					btnOffset = self.button.offset().top,
 					screenHeight = $window.height();
-
-				// Restore popup container's hidden state
-				popupContainer.hide();
 
 				function focusMenuItem() {
 					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
@@ -539,6 +531,9 @@ define( [
 
 				// Remove the popup
 				this.listbox.remove();
+
+				// Remove the dialog
+				this.menuPage.remove();
 
 				// Chain up
 				origDestroy.apply( this, arguments );
