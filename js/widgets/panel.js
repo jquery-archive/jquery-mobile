@@ -223,6 +223,11 @@ $.widget( "mobile.panel", $.mobile.widget, {
 				e.preventDefault();
 				var $link = $( this );
 				if ( ! $link.hasClass( "ui-link" ) ) {
+					// Check if we are in a listview
+					var $parent = $link.parent().parent();
+					if ( $parent.hasClass( "ui-li" ) ) {
+						$link = $parent.parent();
+					}
 					$link.addClass( $.mobile.activeBtnClass );
 					self.element.one( "panelopen panelclose", function() {
 						$link.removeClass( $.mobile.activeBtnClass );
