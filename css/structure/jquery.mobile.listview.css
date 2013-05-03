@@ -106,7 +106,7 @@
 	-webkit-border-radius: inherit;
 	border-bottom-radius: inherit;	
 }
-.ui-li-static.ui-li {
+.ui-li-static {
 	padding: .7em 15px;
 }
 .ui-li-divider {
