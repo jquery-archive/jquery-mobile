@@ -28,6 +28,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 			classes = "ui-btn";
 			
 		if ( isInput ) {
+			classes += " ui-input-btn";
+			
 			// TODO: When we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
 			/* if ( $el[0].className.length ) {
 				classes = $el[0].className;
@@ -40,11 +42,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 				classes += " ui-btn-right";
 			}
 	
-			if ( $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
-				classes += " ui-submit";
-			}
-			$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
-
 			this.button = $( "<div></div>" )
 				[ "text" ]( $el.val() )
 				.insertBefore( $el )
@@ -65,6 +62,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 		} else {
 			this.button = $el.addClass( classes );
 		}
+		
+		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-input-btn" );
 		
 		$.extend( this, {
 			isInput: isInput,

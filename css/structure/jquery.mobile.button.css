@@ -1,3 +1,4 @@
+/* TODO: This file only contains CSS for the button widget and should be renamed to jquery.mobile.forms.button.css */
 button.ui-btn {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -21,7 +22,6 @@ button.ui-btn-icon-notext {
 	margin-right: 0;
 	margin-left: 0;
 }
-
 /* Hide the native input element */
 .ui-btn > input[type="button"],
 .ui-btn > input[type="submit"],
@@ -52,11 +52,39 @@ button.ui-btn-icon-notext {
 .ui-state-disabled input[type="reset"] {
 	display: none;
 }
-
-.ui-field-contain .ui-btn.ui-submit { margin: 0; }
-label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; display: block; }
+label.ui-input-btn {
+	font-size: 16px;
+	line-height: 1.4;
+	font-weight: normal;
+	margin: 0 0 .3em;
+	display: block;
+}
+.ui-field-contain > .ui-input-btn,
+.ui-field-contain > button.ui-btn {
+	margin: 0;
+}
 @media (min-width: 28em) {
-	.ui-field-contain label.ui-submit { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
-	.ui-field-contain .ui-btn.ui-submit { width: 78%; display: inline-block; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
-	.ui-hide-label .ui-btn.ui-submit { width: auto; display: block; }
+	.ui-field-contain label.ui-input-btn {
+		vertical-align: top;
+		display: inline-block;
+		width: 20%;
+		margin: 0 2% 0 0;
+	}
+	.ui-field-contain > .ui-input-btn,
+	.ui-field-contain > button.ui-btn {
+		width: 78%;
+		display: inline-block;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	.ui-hide-label > .ui-input-btn {
+		width: auto;
+		display: block;
+	}
+	.ui-hide-label > button.ui-btn {
+		width: 100%;
+		display: block;
+	}
 }
