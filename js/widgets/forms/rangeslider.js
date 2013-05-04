@@ -35,10 +35,6 @@ define( [ "jquery",
 			firstHandle = $.data( _inputFirst.get(0), "mobile-slider" ).handle,
 			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
 
-			if ( $el.find( "label" ).length > 1 ) {
-				secondLabel = $el.find( "label" ).last().hide();
-			}
-
 			_inputFirst.addClass( "ui-rangeslider-first" );
 			_inputLast.addClass( "ui-rangeslider-last" );
 			$el.addClass( elClass );

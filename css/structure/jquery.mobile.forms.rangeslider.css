@@ -68,6 +68,12 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 div.ui-rangeslider label {
 	margin: 0;
 }
+div.ui-rangeslider label ~ label {
+	position: absolute !important;
+	left: -9999px;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px,1px,1px,1px);
+}
 .ui-field-contain .ui-rangeslider label {
 	margin-bottom: .4em;
 }
