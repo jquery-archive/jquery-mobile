@@ -46,8 +46,6 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}, 0 );
 		}
 
-		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
-
 		focusedEl = input.addClass( "ui-input-text ui-body-"+ theme );
 
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).

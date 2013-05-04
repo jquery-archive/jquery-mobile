@@ -1,9 +1,3 @@
-label.ui-slider {
-	margin: 0;
-}
-.ui-field-contain label.ui-slider {
-	margin-bottom: .4em;
-}
 div.ui-slider {
 	height: 30px;
 	margin: .5em 0;
@@ -165,12 +159,6 @@ div.ui-slider-switch.ui-mini {
 }
 
 @media (min-width: 28em) {
-	.ui-field-contain label.ui-slider {
-		vertical-align: top;
-		display: inline-block;
-		width: 20%;
-		margin: 0 2% 0 0;
-	}
 	.ui-field-contain div.ui-slider {
 		display: inline-block;
 		width: 78%;

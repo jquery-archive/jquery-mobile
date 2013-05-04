@@ -321,6 +321,7 @@ label {
 .ui-hide-label > label,
 .ui-hide-label > form > label,
 .ui-hide-label .ui-controlgroup-label,
+.ui-hide-label .ui-rangeslider label,
 .ui-hidden-accessible {
 	position: absolute !important;
 	left: -9999px;

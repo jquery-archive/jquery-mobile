@@ -15,6 +15,15 @@ fieldset.ui-field-contain {
 	content: none;
 }
 @media (min-width: 28em) {
+	.ui-field-contain > label,
+	.ui-field-contain > form > label,
+	.ui-field-contain .ui-controlgroup-label,
+	.ui-field-contain > .ui-rangeslider > label {
+		vertical-align: top;
+		display: inline-block;
+		width: 20%;
+		margin: 0 2% 0 0;
+	}
 	.ui-field-contain,
 	.ui-mobile fieldset.ui-field-contain {
 		border-width: 0;

@@ -58,12 +58,6 @@ button.ui-btn-icon-notext {
 	margin: 0;
 }
 @media (min-width: 28em) {
-	.ui-field-contain label.ui-input-btn {
-		vertical-align: top;
-		display: inline-block;
-		width: 20%;
-		margin: 0 2% 0 0;
-	}
 	.ui-field-contain > .ui-input-btn,
 	.ui-field-contain > button.ui-btn {
 		width: 78%;

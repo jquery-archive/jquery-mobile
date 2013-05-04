@@ -63,8 +63,6 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.button = $el.addClass( classes );
 		}
 		
-		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-input-btn" );
-		
 		$.extend( this, {
 			isInput: isInput,
 			buttonClasses: classes,

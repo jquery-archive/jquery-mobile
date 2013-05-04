@@ -92,12 +92,6 @@
 }
 
 @media (min-width: 28em) {
-	.ui-field-contain label.ui-select {
-		vertical-align: top;
-		display: inline-block;
-		width: 20%;
-		margin: 0 2% 0 0;
-	}
 	.ui-field-contain .ui-select {
 		width: 78%;
 		display: inline-block;

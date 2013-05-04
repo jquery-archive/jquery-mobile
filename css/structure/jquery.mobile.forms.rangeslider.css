@@ -65,8 +65,15 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 	height: 12px;
 }
 
+div.ui-rangeslider label {
+	margin: 0;
+}
+.ui-field-contain .ui-rangeslider label {
+	margin-bottom: .4em;
+}
+
 @media (min-width: 28em) {
-	.ui-field-contain .ui-rangeslider label.ui-slider {
+	.ui-field-contain .ui-rangeslider label {
 		float: left;
 	}
 	.ui-field-contain .ui-rangeslider input.ui-slider-input {

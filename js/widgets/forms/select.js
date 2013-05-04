@@ -68,7 +68,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
-		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
+		this.label = $( "label[for='"+ this.selectID +"']" );
 		this.isMultiple = this.select[ 0 ].multiple;
 		if ( !this.options.theme ) {
 			this.options.theme = "a";

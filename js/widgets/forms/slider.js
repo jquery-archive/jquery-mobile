@@ -124,8 +124,6 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		}
 
-		label.addClass( "ui-slider" );
-
 		// monitor the input for updated values
 		control.addClass( isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
 
