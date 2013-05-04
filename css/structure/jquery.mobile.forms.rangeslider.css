@@ -88,7 +88,7 @@ div.ui-rangeslider label ~ label {
 	}
 	.ui-field-contain .ui-rangeslider input.ui-slider-input.ui-rangeslider-first,
 	.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input.ui-rangeslider-first {
-		margin-right: 17px;
+		margin-right: 20px;
 	}
 	.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders,
 	.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
