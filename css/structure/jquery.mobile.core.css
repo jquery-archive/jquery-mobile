@@ -84,7 +84,7 @@ div.ui-mobile-viewport {
 	padding: .4em 15px;
 	overflow: hidden;
 	display: block;
-	clear:both;
+	clear: both;
 }
 .ui-bar {
 	font-size: 16px;
@@ -316,10 +316,8 @@ label {
 	display: block;
 	margin: 0 0 .3em;
 }
-
 /* Accessible content hiding */
 .ui-hide-label > label,
-.ui-hide-label > form > label,
 .ui-hide-label .ui-controlgroup-label,
 .ui-hide-label .ui-rangeslider label,
 .ui-hidden-accessible {

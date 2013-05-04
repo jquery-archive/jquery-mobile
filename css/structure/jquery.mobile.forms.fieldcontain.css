@@ -4,7 +4,6 @@
 	padding: .8em 0;
 }
 .ui-field-contain > label + *,
-.ui-field-contain > form > label + *,
 .ui-field-contain .ui-controlgroup-controls {
 	margin: 0;
 }
@@ -27,7 +26,6 @@
 		content: none;
 	}
 	.ui-field-contain > label,
-	.ui-field-contain > form > label,
 	.ui-field-contain .ui-controlgroup-label,
 	.ui-field-contain > .ui-rangeslider > label {
 		display: inline-block;
@@ -36,7 +34,6 @@
 		margin: 0 2% 0 0;
 	}
 	.ui-popup .ui-field-contain > label,
-	.ui-popup .ui-field-contain > form > label,
 	.ui-popup .ui-field-contain .ui-controlgroup-label,
 	.ui-popup .ui-field-contain > .ui-rangeslider > label {
 		display: block;
@@ -44,7 +41,6 @@
 		margin: 0 0 .3em;
 	}
 	.ui-field-contain > label + *,
-	.ui-field-contain > form > label + *,
 	.ui-field-contain .ui-controlgroup-controls {
 		display: inline-block;
 		width: 78%;
@@ -54,10 +50,8 @@
 		box-sizing: border-box;
 	}
 	.ui-hide-label > label + *,
-	.ui-hide-label > form > label + *,
 	.ui-hide-label .ui-controlgroup-controls,
 	.ui-popup .ui-field-contain > label + *,
-	.ui-popup .ui-field-contain > form > label + *,
 	.ui-popup .ui-field-contain .ui-controlgroup-controls {
 		display: block;
 		width: 100%;
