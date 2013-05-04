@@ -1,39 +1,11 @@
-input.ui-input-text,
-textarea.ui-input-text {
-	background-image: none;
-	padding: .4em;
-	margin: .5em 0;
-	min-height: 1.4em;
-	line-height: 1.4em;
-	font-size: 16px;
-	display: block;
-	width: 100%;
-	outline: 0;
-}
-input.ui-mini,
-.ui-mini input,
-textarea.ui-mini {
-	font-size: 14px;
-}
-div.ui-input-text input.ui-input-text,
-div.ui-input-text textarea.ui-input-text,
-.ui-input-search input.ui-input-text {
-	border: none;
-	width: 100%;
-	padding: .4em 0;
-	margin: 0;
-	display: block;
-	background: transparent none;
-	outline: 0 !important;
-}
-.ui-input-search,
-div.ui-input-text {
-	margin: .5em 0;
-	background-image: none;
-	position: relative;
-}
+.ui-input-text,
 .ui-input-search {
-	padding: 0 30px;
+	margin: .5em 0;
+	background-image: none;
+}
+.ui-input-text.ui-mini,
+.ui-input-search.ui-mini {
+	margin: .25em 0;
 }
 div.ui-input-text {
 	padding: 0 .4em;
@@ -41,23 +13,16 @@ div.ui-input-text {
 div.ui-input-has-clear {
 	padding: 0 30px 0 .4em;
 }
-input.ui-input-text.ui-mini,
-textarea.ui-input-text.ui-mini,
-.ui-input-search.ui-mini,
-div.ui-input-text.ui-mini {
-	margin: .25em 0;
+.ui-input-search {
+	padding: 0 30px;
 }
 textarea.ui-input-text {
+	padding: .4em;
+	height: 50px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
-}
-input.ui-input-text {
-	-webkit-appearance: none;
-}
-textarea.ui-input-text {
-	height: 50px;
 	-webkit-transition: height 200ms linear;
 	-moz-transition: height 200ms linear;
 	-o-transition: height 200ms linear;
@@ -65,6 +30,34 @@ textarea.ui-input-text {
 }
 textarea.ui-mini {
 	height: 45px;
+}
+.ui-input-text input,
+.ui-input-search input,
+textarea.ui-input-text {
+	min-height: 1.4em;
+	line-height: 1.4em;
+	font-size: 16px;
+	display: block;
+	width: 100%;
+	outline: 0 !important;
+}
+.ui-input-text.ui-mini input,
+.ui-input-search.ui-mini input,
+textarea.ui-mini {
+	font-size: 14px;
+}
+.ui-input-text input,
+.ui-input-search input {
+	display: block;
+	padding: .4em 0;
+	margin: 0;
+	border: none;
+	background: transparent none;
+	-webkit-appearance: none;
+}
+div.ui-input-text,
+.ui-input-search {
+	position: relative;
 }
 .ui-icon-searchfield:after {
 	position: absolute;
@@ -104,7 +97,8 @@ input[type=number]::-webkit-outer-spin-button {
 input[data-clear-btn=true]::-ms-clear {
 	display: none;
 }
-input.ui-input-text:focus {
+.ui-input-text input:focus,
+.ui-input-search input:focus {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;

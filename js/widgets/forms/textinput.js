@@ -30,7 +30,9 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			themeclass  = " ui-body-" + theme,
 			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
+			isTextarea = input[ 0 ].tagName === "TEXTAREA",
 			focusedEl,
+			classes,
 			clearbtn,
 			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
 			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
@@ -46,7 +48,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}, 0 );
 		}
 
-		focusedEl = input.addClass( "ui-input-text ui-body-"+ theme );
+		focusedEl = isTextarea ? input.addClass( "ui-input-text ui-body-" + theme ) : input;
 
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
@@ -63,11 +65,12 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 
 		//"search" and "text" input widgets
-		if ( isSearch ) {
-			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-		} else if ( inputNeedsWrap ) {
-			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
+		if ( isSearch || inputNeedsWrap ) {
+			classes = isSearch ? "ui-input-search ui-icon-searchfield" : "ui-input-text";
+			
+			focusedEl = input.wrap( "<div class='" + classes + themeclass + miniclass + " ui-shadow-inset ui-corner-all ui-btn-shadow'></div>" ).parent();
 		}
+
 
 		if( inputNeedsClearBtn || isSearch ) {
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>" )
@@ -111,7 +114,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			});
 
 		// Autogrow
-		if ( input.is( "textarea" ) ) {
+		if ( isTextarea ) {
 			this._keyup = function() {
 				var scrollHeight = input[ 0 ].scrollHeight,
 					clientHeight = input[ 0 ].clientHeight,
