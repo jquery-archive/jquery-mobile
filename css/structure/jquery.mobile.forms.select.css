@@ -86,17 +86,3 @@
 .ui-selectmenu .ui-btn.ui-li-divider {
 	cursor: default;
 }
-
-.ui-field-contain .ui-select .ui-btn {
-	margin: 0;
-}
-
-@media (min-width: 28em) {
-	.ui-field-contain .ui-select {
-		width: 78%;
-		display: inline-block;
-	}
-	.ui-hide-label .ui-select {
-		width: 100%;
-	} 
-}

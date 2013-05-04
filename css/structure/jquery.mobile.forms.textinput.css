@@ -47,12 +47,6 @@ textarea.ui-input-text.ui-mini,
 div.ui-input-text.ui-mini {
 	margin: .25em 0;
 }
-.ui-field-contain input.ui-input-text,
-.ui-field-contain textarea.ui-input-text,
-.ui-field-contain .ui-input-search,
-.ui-field-contain div.ui-input-text {
-	margin: 0;
-}
 textarea.ui-input-text {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -114,28 +108,4 @@ input.ui-input-text:focus {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
-}
-@media (min-width: 28em) {
-	.ui-field-contain input.ui-input-text,
-	.ui-field-contain textarea.ui-input-text,
-	.ui-field-contain .ui-input-search,
-	.ui-field-contain div.ui-input-text {
-		width: 78%;
-		display: inline-block;
-	}
-	.ui-field-contain .ui-input-search,
-	.ui-field-contain div.ui-input-text {
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-ms-box-sizing: border-box;
-		box-sizing: border-box;
-	}
-	.ui-hide-label input.ui-input-text,
-	.ui-hide-label textarea.ui-input-text,
-	.ui-hide-label .ui-input-search,
-	.ui-hide-label div.ui-input-text,
-	.ui-input-search input.ui-input-text,
-	div.ui-input-text input.ui-input-text {
-		width: 100%;
-	}
 }

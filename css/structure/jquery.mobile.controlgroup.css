@@ -168,10 +168,3 @@ fieldset.ui-controlgroup.ui-mini {
 	position: absolute;
 	left: -9999px;
 }
-
-@media (min-width: 28em) {
-	.ui-field-contain .ui-controlgroup-controls { width: 78%; display: inline-block; }
-	.ui-field-contain .ui-controlgroup .ui-select { width: 100%; display: block; } 
-	.ui-field-contain .ui-controlgroup-horizontal .ui-select { width: auto; }
-	.ui-hide-label .ui-controlgroup-controls { width: 100%; }
-}	

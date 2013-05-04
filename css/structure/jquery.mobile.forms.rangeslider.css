@@ -29,13 +29,6 @@
 .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
 	margin: .25em 68px;
 }
-.ui-field-contain .ui-rangeslider input.ui-slider-input,
-.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input,
-.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders,
-.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-	margin-top: 0;
-	margin-bottom: 0;
-}
 .ui-rangeslider .ui-rangeslider-sliders .ui-slider-track {
 	position: absolute;
 	top: 6px;

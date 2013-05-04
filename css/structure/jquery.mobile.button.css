@@ -52,27 +52,3 @@ button.ui-btn-icon-notext {
 .ui-state-disabled input[type="reset"] {
 	display: none;
 }
-
-.ui-field-contain > .ui-input-btn,
-.ui-field-contain > button.ui-btn {
-	margin: 0;
-}
-@media (min-width: 28em) {
-	.ui-field-contain > .ui-input-btn,
-	.ui-field-contain > button.ui-btn {
-		width: 78%;
-		display: inline-block;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-ms-box-sizing: border-box;
-		box-sizing: border-box;
-	}
-	.ui-hide-label > .ui-input-btn {
-		width: auto;
-		display: block;
-	}
-	.ui-hide-label > button.ui-btn {
-		width: 100%;
-		display: block;
-	}
-}

@@ -10,10 +10,6 @@ div.ui-slider.ui-mini {
 	padding: 0;
 	font-size: 16px;
 }
-.ui-field-contain div.ui-slider,
-.ui-field-contain div.ui-slider.ui-mini {
-	margin: 0;
-}
 div.ui-slider:before,
 div.ui-slider:after {
 	content: "";
@@ -159,14 +155,6 @@ div.ui-slider-switch.ui-mini {
 }
 
 @media (min-width: 28em) {
-	.ui-field-contain div.ui-slider {
-		display: inline-block;
-		width: 78%;
-	}
-	.ui-field-contain.ui-hide-label div.ui-slider {
-		display: block;
-		width: auto;
-	}
 	.ui-field-contain div.ui-slider-switch,
 	.ui-field-contain.ui-hide-label div.ui-slider-switch {
 		display: inline-block;
