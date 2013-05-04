@@ -11,13 +11,13 @@
 	clear: both;
 }
 /* Margin-top/bottom: .5em * 16px/14px to make it equal to ui-rangeslider-sliders margin (input font-size is 14px) */
-.ui-rangeslider input.ui-input-text.ui-slider-input {
+.ui-rangeslider .ui-slider-input {
 	margin: .57143em 0;
 }
-.ui-rangeslider.ui-mini input.ui-slider-input {
+.ui-rangeslider.ui-mini .ui-slider-input {
 	margin: .28571em 0;
 }
-.ui-rangeslider input.ui-slider-input.ui-rangeslider-last {
+.ui-rangeslider .ui-slider-input.ui-rangeslider-last {
 	float: right;
 }
 .ui-rangeslider .ui-rangeslider-sliders {
@@ -70,17 +70,24 @@ div.ui-rangeslider label ~ label {
 .ui-field-contain .ui-rangeslider label {
 	margin-bottom: .4em;
 }
+.ui-field-contain .ui-rangeslider input.ui-slider-input,
+.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input,
+.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders,
+.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
+	margin-top: 0;
+	margin-bottom: 0;
+}
 
 @media (min-width: 28em) {
 	.ui-field-contain .ui-rangeslider label {
 		float: left;
 	}
-	.ui-field-contain .ui-rangeslider input.ui-slider-input {
+	.ui-field-contain .ui-rangeslider .ui-slider-input {
 		position: relative;
 		z-index: 1;
 	}
-	.ui-field-contain .ui-rangeslider input.ui-slider-input.ui-rangeslider-first,
-	.ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input.ui-rangeslider-first {
+	.ui-field-contain .ui-rangeslider .ui-slider-input.ui-rangeslider-first,
+	.ui-field-contain .ui-rangeslider.ui-mini .ui-slider-input.ui-rangeslider-first {
 		margin-right: 20px;
 	}
 	.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders,
@@ -94,7 +101,7 @@ div.ui-rangeslider label ~ label {
 		right: 68px;
 		left: 68px;
 	}
-	.ui-field-contain.ui-hide-label .ui-rangeslider input.ui-slider-input.ui-rangeslider-first {
+	.ui-field-contain.ui-hide-label .ui-rangeslider .ui-slider-input.ui-rangeslider-first {
 		margin: 0;
 	}
 	.ui-field-contain.ui-hide-label .ui-rangeslider .ui-rangeslider-sliders,

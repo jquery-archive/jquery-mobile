@@ -18,8 +18,7 @@ div.ui-slider:after {
 div.ui-slider:after {
 	clear: both;
 }
-/* High level of specificity to override Textinput CSS. */
-input.ui-input-text.ui-slider-input {
+input.ui-slider-input {
 	display: block;
 	float: left;
 	margin: 0;
