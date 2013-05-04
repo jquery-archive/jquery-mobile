@@ -49,7 +49,6 @@
 	text-indent: 0;
 	display: block;
 }
-
 /* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */
 .ui-select .ui-btn > span:not(.ui-li-count) {
 	display: block;
@@ -57,7 +56,6 @@
 	overflow: hidden !important;
 	white-space: nowrap;
 }
-
 .ui-screen-hidden,
 .ui-li.ui-selectmenu-placeholder {
 	display: none;
@@ -87,15 +85,6 @@
 }
 .ui-selectmenu .ui-btn.ui-li-divider {
 	cursor: default;
-}
-
-/* labels */
-label.ui-select {
-	font-size: 16px;
-	line-height: 1.4;
-	font-weight: normal;
-	margin: 0 0 .3em;
-	display: block;
 }
 
 .ui-field-contain .ui-select .ui-btn {

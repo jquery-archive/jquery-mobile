@@ -1,9 +1,5 @@
 label.ui-slider {
-	font-size: 16px;
-	line-height: 1.4;
-	font-weight: normal;
 	margin: 0;
-	display: block;
 }
 .ui-field-contain label.ui-slider {
 	margin-bottom: .4em;

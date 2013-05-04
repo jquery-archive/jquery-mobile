@@ -52,13 +52,7 @@ button.ui-btn-icon-notext {
 .ui-state-disabled input[type="reset"] {
 	display: none;
 }
-label.ui-input-btn {
-	font-size: 16px;
-	line-height: 1.4;
-	font-weight: normal;
-	margin: 0 0 .3em;
-	display: block;
-}
+
 .ui-field-contain > .ui-input-btn,
 .ui-field-contain > button.ui-btn {
 	margin: 0;

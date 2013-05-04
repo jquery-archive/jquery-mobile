@@ -308,6 +308,15 @@ div.ui-mobile-viewport {
 	padding-right: 3px;
 }
 
+/* Form labels */
+label {
+	font-size: 1em;
+	line-height: 1.4;
+	font-weight: normal;
+	display: block;
+	margin: 0 0 .3em;
+}
+
 /* Accessible content hiding */
 .ui-hide-label > label,
 .ui-hide-label > form > label,
