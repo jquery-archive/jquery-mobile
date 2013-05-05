@@ -322,13 +322,6 @@ div.ui-mobile-viewport {
 .ui-mini.ui-btn-icon-bottom:after {
 	bottom: .4em;
 }
-.ui-input-clear,
-[class*="ui-grid-"] .ui-btn,
-[class*="ui-grid-"] button.ui-btn-inline,
-[class*="ui-grid-"] button.ui-btn-icon-notext {
-	margin-right: .3125em;
-	margin-left: .3125em;
-}
 .ui-mobile .ui-btn-left,
 .ui-mobile .ui-btn-right,
 .ui-mobile .ui-btn-left > .ui-btn,

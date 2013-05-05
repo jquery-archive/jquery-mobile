@@ -19,6 +19,12 @@ ul[class*="ui-grid-"],
 	padding: 0;
 	list-style: none;
 }
+[class*="ui-grid-"] .ui-btn,
+[class*="ui-grid-"] button.ui-btn-inline,
+[class*="ui-grid-"] button.ui-btn-icon-notext {
+	margin-right: .3125em;
+	margin-left: .3125em;
+}
 /* Lower percentages for older browsers (i.e. IE7) to prevent wrapping.
 :nth-child(n) to override for modern browsers.
 -.5px to fix BB5 wrap issue. */

@@ -74,7 +74,7 @@ div.ui-input-text,
 	position: absolute;
 	right: 0;
 	top: 50%;
-	margin-top: -13px;
+	margin: -13px .3125em 0;
 }
 .ui-mini .ui-input-clear {
 	right: -3px;
