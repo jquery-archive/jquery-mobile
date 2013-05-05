@@ -4,7 +4,7 @@
 
 .ui-table-columntoggle-btn {
 	float: right;
-	margin-bottom:.8em;
+	margin-bottom: .8em;
 }
 /* Remove top/bottom margins around the fieldcontain on check list */
 .ui-table-columntoggle-popup fieldset {
@@ -28,7 +28,6 @@
 		display: none;
 	}
 }
-
 
 /* Preset breakpoints if ".ui-responsive" class added to table */
 
@@ -74,7 +73,6 @@
 		display: table-cell;
 	}
 }
-
 
 /* Unchecked manually: Always hide */
 .ui-table-columntoggle th.ui-table-cell-hidden,
