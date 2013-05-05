@@ -61,8 +61,8 @@
 	display: none;
 }
 .ui-selectmenu {
-	padding: 6px;
-	min-width: 160px;
+	padding: .375em;
+	min-width: 10em;
 }
 .ui-selectmenu .ui-header {
 	margin: 0;
@@ -78,7 +78,7 @@
 	visibility: hidden;
 }
 .ui-selectmenu .ui-header .ui-title {
-	margin: 0.6em 46px 0.8em;
+	margin: 0.7em 2.875em;
 }
 .ui-selectmenu .ui-selectmenu-list {
 	margin: 0;

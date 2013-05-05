@@ -42,11 +42,11 @@
 .ui-popup > h4,
 .ui-popup > h5,
 .ui-popup > h6 {
-	margin: .5em 7px;
+	margin: .5em .4375em;
 }
 .ui-popup > span {
 	display: block;
-	margin: .5em 7px;
+	margin: .5em .4375em;
 }
 .ui-popup .ui-title {
 	font-size: 16px;

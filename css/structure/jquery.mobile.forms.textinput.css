@@ -18,7 +18,7 @@ div.ui-input-has-clear {
 }
 textarea.ui-input-text {
 	padding: .4em;
-	height: 50px;
+	height: 3.125em;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
@@ -29,7 +29,7 @@ textarea.ui-input-text {
 	transition: height 200ms linear;
 }
 textarea.ui-mini {
-	height: 45px;
+	/* height: 45px; */
 }
 .ui-input-text input,
 .ui-input-search input,

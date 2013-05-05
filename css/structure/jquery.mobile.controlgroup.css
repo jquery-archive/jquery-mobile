@@ -49,31 +49,31 @@ fieldset.ui-controlgroup.ui-mini {
 .ui-controlgroup.ui-mini .ui-btn {
 	margin: 0;
 	font-size: 12.5px;
-	padding: .55em 11px .5em;
+	padding: .6em .88em;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-left {
-	padding-left: 30px;
+	padding-left: 2.4em;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-right {
-	padding-right: 30px;
+	padding-right: 2.4em;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-top {
-	padding-top: 30px;
+	padding-top: 2.4em;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-bottom {
-	padding-bottom: 30px;
+	padding-bottom: 2.4em;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-left:after {
-	left: 5px;
+	left: .4em;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-right:after {
-	right: 5px;
+	right: .4em;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-top:after {
-	top: 5px;
+	top: .4em;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-bottom:after {
-	bottom: 5px;
+	bottom: .4em;
 }
 .ui-controlgroup li {
 	list-style: none;
@@ -88,7 +88,7 @@ fieldset.ui-controlgroup.ui-mini {
 }
 .ui-controlgroup .ui-btn-icon-notext {
 	height: auto;
-	padding: .7em 15px;
+	padding: .7em 1em;
 }
 .ui-controlgroup .ui-btn-icon-notext:after {
 	top: 50%;
@@ -96,7 +96,7 @@ fieldset.ui-controlgroup.ui-mini {
 	margin: -9px 0 0 -9px;
 }
 .ui-controlgroup.ui-mini .ui-btn-icon-notext {
-	padding: .55em 11px .5em 11px;
+	padding: .6em .88em;
 }
 .ui-controlgroup-vertical .ui-btn {
 	border-bottom-width: 0;

@@ -29,7 +29,7 @@
 	z-index: 999;
 }
 .ui-panel-inner {
-	padding: 15px;
+	padding: 1em;
 }
 
 /* content-wrap */
@@ -50,7 +50,7 @@
 .ui-panel-dismiss {
 	position: absolute;
 	top: 0;
-	left:0;
+	left: 0;
 	height: 100%;
 	width: 100%;
 	z-index: 1002;

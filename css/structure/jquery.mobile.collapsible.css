@@ -1,10 +1,11 @@
-.ui-collapsible-inset {
+.ui-collapsible-inset,
+.ui-collapsible-set {
 	margin: .5em 0;
 }
 .ui-collapsible-heading {
 	font-size: 16px;
 	display: block;
-	margin: 0 -15px;
+	margin: 0 -1em;
 	padding: 0;
 	position: relative;
 }
@@ -38,8 +39,8 @@
 }
 .ui-collapsible-content {
 	display: block;
-	margin: 0 -15px;	
-	padding: 10px 15px;
+	margin: 0 -1em;	
+	padding: .625em 1em;
 	border-left-width: 0;
 	border-right-width: 0;
 	border-top: none;
@@ -80,9 +81,6 @@
 	border-bottom-right-radius: 0;
 	-webkit-border-bottom-left-radius: 0;	
 	border-bottom-left-radius: 0;		
-}
-.ui-collapsible-set {
-	margin: .5em 0;
 }
 .ui-collapsible-set .ui-collapsible {
 	margin: -1px 0 0;

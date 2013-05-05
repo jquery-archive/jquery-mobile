@@ -29,7 +29,7 @@
 .ui-checkbox input,
 .ui-radio input {
 	position: absolute;
-	left: 15px;
+	left: 1em;
 	top: 50%;
 	width: 10px;
 	height: 10px;

@@ -34,13 +34,13 @@
 	font-size: 12.5px;
 }
 .ui-navbar li .ui-btn-icon-top {
-	padding-top: 30px;
+	padding-top: 2.4em;
 }
 .ui-navbar li .ui-btn-icon-bottom {
-	padding-bottom: 30px;
+	padding-bottom: 2.4em;
 }
 .ui-navbar li .ui-btn-icon-right:after {
-	right: 6px;
+	right: .48em; /* 6px font-size: 12.5px */
 }
 /* add border if not in header/footer (full width) */
 .ui-navbar li:last-child .ui-btn,

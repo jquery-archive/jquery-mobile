@@ -63,25 +63,82 @@ div.ui-mobile-viewport {
 }
 
 /* Loading screen */
-.ui-loading .ui-loader { display: block; }
-.ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; left: 50%; border:0; }
-.ui-loader-default { background: none; filter: Alpha(Opacity=18); opacity: .18; width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
-.ui-loader-verbose { width: 200px; filter: Alpha(Opacity=88); opacity: .88; box-shadow: 0 1px 1px -1px #fff; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
-.ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
-.ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
-.ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; border-radius: 36px; }
-.ui-loader-verbose .ui-icon { margin: 0 auto 10px; filter: Alpha(Opacity=75); opacity: .75; }
-.ui-loader-textonly { padding: 15px; margin-left: -115px; }
-.ui-loader-textonly .ui-icon { display: none; }
-.ui-loader-fakefix { position: absolute; }
+.ui-loading .ui-loader {
+	display: block;
+}
+.ui-loader {
+	display: none;
+	z-index: 9999999;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	border:0;
+}
+.ui-loader-default {
+	background: none;
+	filter: Alpha(Opacity=18);
+	opacity: .18;
+	width: 2.875em;
+	height: 2.875em;
+	margin-left: -1.4375em;
+	margin-top: -1.4375em;
+}
+.ui-loader-verbose {
+	width: 12.5em;
+	filter: Alpha(Opacity=88);
+	opacity: .88;
+	box-shadow: 0 1px 1px -1px #fff;
+	height: auto;
+	margin-left: -6.875em;
+	margin-top: -2.6875em;
+	padding: .625em;
+}
+.ui-loader-default h1 {
+	font-size: 0;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+.ui-loader-verbose h1 {
+	font-size: 16px;
+	margin: 0;
+	text-align: center;
+}
+.ui-loader .ui-icon {
+	background-color: #000;
+	display: block;
+	margin: 0;
+	width: 2.75em;
+	height: 2.75em;
+	padding: .0625em;
+	-webkit-border-radius: 2.25em;
+	border-radius: 2.25em;
+}
+.ui-loader-verbose .ui-icon {
+	margin: 0 auto .625em;
+	filter: Alpha(Opacity=75);
+	opacity: .75;
+}
+.ui-loader-textonly {
+	padding: .9375em;
+	margin-left: -7.1875em;
+}
+.ui-loader-textonly .ui-icon {
+	display: none;
+}
+.ui-loader-fakefix {
+	position: absolute;
+}
 /*fouc*/
-.ui-mobile-rendering > * { visibility: hidden; }
+.ui-mobile-rendering > * {
+	visibility: hidden;
+}
 
 /* Headers, content panels */
 .ui-bar,
 .ui-body {
 	position: relative;
-	padding: .4em 15px;
+	padding: .4em 1em;
 	overflow: hidden;
 	display: block;
 	clear: both;
@@ -117,7 +174,7 @@ div.ui-mobile-viewport {
 	text-align: center;
 	font-size: 16px;
 	display: block;
-	margin: .6em 30% .8em;
+	margin: .7em 30%;
 	padding: 0;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -125,13 +182,13 @@ div.ui-mobile-viewport {
 	outline: 0 !important;
 }
 .ui-footer .ui-title {
-	margin: .6em 15px .8em;
+	margin: .7em 1em;
 }
 .ui-content {
 	border-width: 0;
 	overflow: visible;
 	overflow-x: hidden;
-	padding: 15px;
+	padding: 1em;
 }
 /* Corner styling for dialogs and popups */
 .ui-corner-all > .ui-header:first-child,
@@ -166,7 +223,7 @@ div.ui-mobile-viewport {
 	-ms-user-select: none;
 	user-select: none;
 	margin: .5em 0;
-	padding: .7em 15px;
+	padding: .7em 1em;
 }
 .ui-btn-icon-notext {
 	padding: 0;
@@ -181,7 +238,7 @@ div.ui-mobile-viewport {
 }
 .ui-mini.ui-btn {
 	font-size: 12.5px;
-	padding: .55em 11px .5em;
+	padding: .6em .88em;
 }
 .ui-mini.ui-btn-icon-notext {
 	padding: 0;
@@ -190,31 +247,31 @@ div.ui-mobile-viewport {
 .ui-btn-inline {
 	display: inline-block;
 	vertical-align: middle;
-	margin-right: 10px;
+	margin-right: .625em;
 }
 .ui-btn-icon-left {
-	padding-left: 40px;
+	padding-left: 2.5em;
 }
 .ui-btn-icon-right {
-	padding-right: 40px;
+	padding-right: 2.5em;
 }
 .ui-btn-icon-top {
-	padding-top: 40px;
+	padding-top: 2.5em;
 }
 .ui-btn-icon-bottom {
-	padding-bottom: 40px;
+	padding-bottom: 2.5em;
 }
 .ui-mini.ui-btn-icon-left {
-	padding-left: 30px;
+	padding-left: 2.4em;
 }
 .ui-mini.ui-btn-icon-right {
-	padding-right: 30px;
+	padding-right: 2.4em;
 }
 .ui-mini.ui-btn-icon-top {
-	padding-top: 30px;
+	padding-top: 2.4em;
 }
 .ui-mini.ui-btn-icon-bottom {
-	padding-bottom: 30px;
+	padding-bottom: 2.4em;
 }
 .ui-icon:after {
 	content: "";
@@ -232,13 +289,14 @@ div.ui-mobile-viewport {
 }
 .ui-btn-icon-left:after,
 .ui-btn-icon-right:after {
-	top: 50%; margin-top: -9px;
+	top: 50%;
+	margin-top: -9px;
 }
 .ui-btn-icon-left:after {
-	left: 10px;
+	left: .625em;
 }
 .ui-btn-icon-right:after {
-	right: 10px;
+	right: .625em;
 }
 .ui-btn-icon-top:after,
 .ui-btn-icon-bottom:after {
@@ -246,30 +304,30 @@ div.ui-mobile-viewport {
 	margin-left: -9px;
 }
 .ui-btn-icon-top:after {
-	top: 10px;
+	top: .625em;
 }
 .ui-btn-icon-bottom:after {
 	top: auto;
-	bottom: 10px;
+	bottom: .625em;
 }
 .ui-mini.ui-btn-icon-left:after {
-	left: 5px;
+	left: .4em;
 }
 .ui-mini.ui-btn-icon-right:after {
-	right: 5px;
+	right: .4em;
 }
 .ui-mini.ui-btn-icon-top:after {
-	top: 5px;
+	top: .4em;
 }
 .ui-mini.ui-btn-icon-bottom:after {
-	bottom: 5px;
+	bottom: .4em;
 }
 .ui-input-clear,
 [class*="ui-grid-"] .ui-btn,
 [class*="ui-grid-"] button.ui-btn-inline,
 [class*="ui-grid-"] button.ui-btn-icon-notext {
-	margin-right: 5px;
-	margin-left: 5px;
+	margin-right: .3125em;
+	margin-left: .3125em;
 }
 .ui-mobile .ui-btn-left,
 .ui-mobile .ui-btn-right,
@@ -280,37 +338,37 @@ div.ui-mobile-viewport {
 .ui-btn-left,
 .ui-btn-right {
 	position: absolute;
-	top: 3px;
+	top: .24em; /* 3px font-size: 12.5px */
 }
 .ui-btn-left {
-	left: 5px;
+	left: .25em;
 }
 .ui-btn-right {
-	right: 5px;
+	right: .25em;
 }
 .ui-btn-left.ui-btn-icon-notext,
 .ui-btn-right.ui-btn-icon-notext {
-	top: 6px;
+	top: .48em; /* 6px font-size: 12.5px */
 }
 .ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-left,
 .ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-right {
-	top: 4px;
+	top: .32em; /* 4px font-size: 12.5px */
 }
 .ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-left.ui-btn-icon-notext,
 .ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-right.ui-btn-icon-notext {
-	top: 7px;
+	top: .56em; /* 7px font-size: 12.5px */
 }
 .ui-header .ui-btn-icon-top,
 .ui-footer .ui-btn-icon-top,
 .ui-header .ui-btn-icon-bottom,
 .ui-footer .ui-btn-icon-bottom {
-	padding-left: 3px;
-	padding-right: 3px;
+	padding-left: .24em; /* 3px font-size: 12.5px */
+	padding-right: .24em; /* 3px font-size: 12.5px */
 }
 
 /* Form labels */
 label {
-	font-size: 1em;
+	font-size: 16px;
 	line-height: 1.4;
 	font-weight: normal;
 	display: block;
