@@ -82,7 +82,8 @@ input.ui-slider-input {
 	margin: -8px 0 0 -8px;
 }
 select.ui-slider-switch {
-	display: none !important;
+	position: absolute;
+	left: -9999px;
 }
 div.ui-slider-switch {
 	display: inline-block;
