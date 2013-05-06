@@ -330,13 +330,16 @@ define( [
 			return page;
 		},
 
+		_getLoader: function() {
+			return $.mobile.loaderWidget;
+		},
+
 		_showLoading: function( delay, theme, msg, textonly ) {
 			// This configurable timeout allows cached pages a brief
 			// delay to load without showing a message
-			this._loadMsg = setTimeout(function() {
-				$.mobile.showPageLoadingMsg( theme, msg, textonly );
-			}, delay );
-
+			this._loadMsg = setTimeout($.proxy(function() {
+				this._getLoader().loader( "show", theme, msg, textonly );
+			}, this), delay );
 		},
 
 		_hideLoading: function() {
@@ -344,7 +347,7 @@ define( [
 			clearTimeout( this._loadMsg );
 
 			// Hide loading message
-			$.mobile.hidePageLoadingMsg();
+			this._getLoader().loader( "hide" );
 		},
 
 		_showError: function() {
@@ -827,6 +830,7 @@ define( [
 		toPage.data( "mobile-page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
 
 		//clear page loader
+		// TODO use conent loader ref
 		$.mobile.hidePageLoadingMsg();
 
 		transition = $.mobile._maybeDegradeTransition( transition );
