@@ -347,6 +347,18 @@ define( [
 			$.mobile.hidePageLoadingMsg();
 		},
 
+		_showError: function() {
+			// make sure to remove the current loading message
+			this._hideLoading();
+
+			// show the error message
+			this._showLoading( 0, $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
+
+			// hide the error message after a delay
+			// TODO configuration
+			setTimeout( $.proxy(this, "_hideLoading"), 1500 );
+		},
+
 		_loadDefaults: {
 			type: "get",
 			data: undefined,
@@ -589,16 +601,7 @@ define( [
 
 						// Remove loading message.
 						if ( settings.showLoadMsg ) {
-
-							// make sure to remove the current loading message
-							this._hideLoading();
-
-							// show the error message
-							this._showLoading( 0, $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
-
-							// hide the error message after a delay
-							// TODO configuration
-							setTimeout( $.proxy(this, "_hideLoading"), 1500 );
+							this._showError();
 						}
 
 						deferred.reject( absUrl, options );
