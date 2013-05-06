@@ -330,6 +330,23 @@ define( [
 			return page;
 		},
 
+		_showLoading: function( delay ) {
+			// This configurable timeout allows cached pages a brief
+			// delay to load without showing a message
+			this._loadMsg = setTimeout(function() {
+				$.mobile.showPageLoadingMsg();
+			}, delay );
+
+		},
+
+		_hideLoading: function() {
+			// Stop message show timer
+			clearTimeout( this._loadMsg );
+
+			// Hide loading message
+			$.mobile.hidePageLoadingMsg();
+		},
+
 		_loadDefaults: {
 			type: "get",
 			data: undefined,
@@ -356,7 +373,7 @@ define( [
 				// The absolute version of the URL passed into the function. This
 				// version of the URL may contain dialog/subpage params in it.
 				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
-				fileUrl, dataUrl, mpc, pblEvent, triggerData, loadMsgDelay, hideMsg;
+				fileUrl, dataUrl, mpc, pblEvent, triggerData;
 
 			if ( settings.done ) {
 			  promise.done(settings.done);
@@ -445,22 +462,9 @@ define( [
 			}
 
 			if ( settings.showLoadMsg ) {
-
-				// This configurable timeout allows cached pages a brief delay to load without showing a message
-				loadMsgDelay = setTimeout(function() {
-					$.mobile.showPageLoadingMsg();
-				}, settings.loadMsgDelay ),
-
-				// Shared logic for clearing timeout and removing message.
-				hideMsg = function() {
-
-					// Stop message show timer
-					clearTimeout( loadMsgDelay );
-
-					// Hide loading message
-					$.mobile.hidePageLoadingMsg();
-				};
+				this._showLoading( settings.loadMsgDelay );
 			}
+
 			// Reset base to the default document base.
 			// only reset if we are not prefetching
 			if ( settings.prefetch === undefined ||
@@ -548,7 +552,7 @@ define( [
 
 						// Remove loading message.
 						if ( settings.showLoadMsg ) {
-							hideMsg();
+							this._hideLoading();
 						}
 
 						// Add the page reference and xhr to our triggerData.
@@ -587,7 +591,7 @@ define( [
 						if ( settings.showLoadMsg ) {
 
 							// Remove loading message.
-							hideMsg();
+							this._hideLoading();
 
 							// show error message
 							$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
