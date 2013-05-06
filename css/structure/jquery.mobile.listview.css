@@ -14,7 +14,7 @@
 .ui-content .ui-listview-inset,
 .ui-panel-inner > .ui-listview-inset,
 .ui-collapsible-content > .ui-listview-inset {
-	margin: .5em 0;
+	margin: 1em 0;
 }
 .ui-li {
 	display: block;
@@ -235,12 +235,12 @@ ol.ui-listview .ui-li-desc:not(.ui-li-aside) {
 .ui-li-link-alt .ui-btn {
 	left: .4375em;
 	top: 50%;
-	margin-top: -13px;
+	margin-top: -.8125em;
 }
 .ui-listview-filter {
 	border-width: 0;
 	overflow: hidden;
-	margin: -15px -15px 15px -15px;
+	margin: -1em -1em 1em -1em;
 }
 .ui-listview-filter-inset {
 	margin: 1em -.3125em -1em;
