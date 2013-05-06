@@ -864,8 +864,8 @@ button,
 	border-radius: 3px;
 }
 
-.ui-checkbox-on:after,
-.ui-radio-on:after {
+.ui-checkbox .ui-checkbox-on:after,
+.ui-radio .ui-radio-on:after {
 	background-color: #4596ce /*{global-active-background-color}*/; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
 }
 
