@@ -175,7 +175,7 @@ define( [
 						// We need to grab the clicked item the hard way, because the list may have been rebuilt
 						if ( self.isMultiple ) {
 							self.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
-								.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
+								.find( "a" ).first().focus();
 						}
 						else {
 							self.close();
@@ -204,7 +204,7 @@ define( [
 									.blur()
 									.attr( "tabindex", "-1" );
 
-								prev.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
+								prev.find( "a" ).first().focus();
 							}
 
 							return false;
@@ -222,7 +222,7 @@ define( [
 									.blur()
 									.attr( "tabindex", "-1" );
 
-								next.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
+								next.find( "a" ).first().focus();
 							}
 
 							return false;
@@ -362,7 +362,7 @@ define( [
 					if ( selector.length === 0 ) {
 						selector = self.list.find( "li.ui-btn:not( :jqmData(placeholder='true') ) a" );
 					}
-					selector.first().focus().closest( "li" ).addClass( "ui-btn-down-" + widget.options.theme );
+					selector.first().focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
