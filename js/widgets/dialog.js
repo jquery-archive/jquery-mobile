@@ -106,7 +106,7 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 				"href": "#",
 				"class": "ui-btn ui-btn-" + location +
 					" ui-btn-" + theme +
-					" ui-icon ui-icon-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext"
+					" ui-icon-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext"
 				})
 				.text( this.options.closeBtnText )
 				.prependTo( dst )

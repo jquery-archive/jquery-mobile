@@ -38,7 +38,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 				$( this ).addClass( "ui-btn-" + theme );
 				
 				if ( icon ) {
-					$( this ).addClass( "ui-icon ui-icon-" + icon + " ui-btn-icon-" + iconpos );
+					$( this ).addClass( "ui-icon-" + icon + " ui-btn-icon-" + iconpos );
 				}
 			});
 

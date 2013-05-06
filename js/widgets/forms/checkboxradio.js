@@ -185,7 +185,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 
 		label
 			.toggleClass( "ui-btn-icon-" + this.iconpos, hasIcon )
-			.toggleClass( "ui-icon", hasIcon )
 			.toggleClass( "ui-icon-" + this.checkedicon, input.checked )
 			.toggleClass( "ui-icon-" + this.uncheckedicon, !input.checked );
 		if ( input.checked ) {

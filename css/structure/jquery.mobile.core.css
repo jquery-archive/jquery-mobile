@@ -273,7 +273,7 @@ div.ui-mobile-viewport {
 .ui-mini.ui-btn-icon-bottom {
 	padding-bottom: 2.4em;
 }
-.ui-icon:after {
+.ui-btn[class*="ui-icon-"]:after {
 	content: "";
 	position: absolute;
 	display: block;

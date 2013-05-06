@@ -109,7 +109,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 				.insertBefore( this.select )
 				.addClass( "ui-btn ui-btn-" + ( options.theme || "a" ) +
 					( options.icon ?
-						( " ui-icon ui-icon-" + options.icon + " ui-btn-icon-" + iconpos + ( options.iconshadow ?
+						( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos + ( options.iconshadow ?
 							" ui-shadow-icon" :
 								"" ) ) :
 						"" ) +

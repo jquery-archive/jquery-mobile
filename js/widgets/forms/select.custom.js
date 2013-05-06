@@ -70,7 +70,7 @@ define( [
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
-				"class": "ui-btn ui-btn-a ui-icon ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
+				"class": "ui-btn ui-btn-a ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
 			}).appendTo( header );
 		}
 
@@ -161,7 +161,7 @@ define( [
 
 						// toggle checkbox class for multiple selects
 						if ( self.isMultiple ) {
-							$( this ).find( ".ui-icon" )
+							$( this ).find( "a" )
 								.toggleClass( "ui-icon-checkbox-on", option.selected )
 								.toggleClass( "ui-icon-checkbox-off", !option.selected );
 						}
@@ -313,7 +313,7 @@ define( [
 
 							// Multiple selects: add the "on" checkbox state to the icon
 							if ( self.isMultiple ) {
-								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
+								item.find( "a" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
 								if ( item.hasClass( "ui-selectmenu-placeholder" ) ) {
 									item.next().addClass( $.mobile.activeBtnClass );

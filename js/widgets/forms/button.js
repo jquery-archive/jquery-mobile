@@ -118,7 +118,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 				 o.iconpos = "left";
 			}
 			
-			classes += " ui-icon ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
+			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
 			
 			if ( o.iconpos === "notext" && !$el.attr( "title" ) ) {
 				var text = this.isInput ? $el.val() : $el.getEncodedText();

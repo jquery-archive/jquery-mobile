@@ -106,7 +106,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.find( "a" )
 				.first()
 				.addClass( "ui-btn ui-btn-" + o.theme +
-					" ui-icon ui-icon-" + o.collapsedIcon + " ui-btn-icon-" + o.iconpos +
+					" ui-icon-" + o.collapsedIcon + " ui-btn-icon-" + o.iconpos +
 					( o.mini ? " ui-mini" : "" ) );
 
 		$.extend( this, {
@@ -153,12 +153,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.find( ".ui-collapsible-heading-status" )
 				.text( isCollapse ? o.expandCueText : o.collapseCueText )
 				.end()
-				.find( ".ui-icon" )
+				.find( "a" ).first()
 				.toggleClass( "ui-icon-" + o.expandedIcon, !isCollapse )
 				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
 				.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
-				.end()
-				.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+				.removeClass( $.mobile.activeBtnClass );
 
 			this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
 			this._collapsibleContent

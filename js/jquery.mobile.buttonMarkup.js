@@ -42,7 +42,7 @@ function optionsToClassName( options, existingClasses ) {
 
 	// If there's an icon, add the icon-related classes
 	if ( options.icon ) {
-		classes = classes.concat( [ "ui-icon",
+		classes = classes.concat([
 			"ui-icon-" + options.icon,
 			"ui-btn-icon-" + options.iconpos
 		]);
@@ -114,14 +114,10 @@ function classNameToOptions( classes ) {
 			unknownClass = false;
 			o[ map ] = true;
 
-		// Recognize the presence of an icon
-		} else if ( classes[ idx ] === "ui-icon" ) {
+		// Recognize the presence of an icon and establish the icon position
+		} else if ( classes[ idx ].indexOf( "ui-btn-icon-" ) === 0 ) {
 			unknownClass = false;
 			noIcon = false;
-
-		// Establish the icon position
-		} else if (classes[ idx ].indexOf( "ui-btn-icon-" ) === 0 ) {
-			unknownClass = false;
 			o.iconpos = classes[ idx ].substring( 12 );
 
 		// Establish which icon is present

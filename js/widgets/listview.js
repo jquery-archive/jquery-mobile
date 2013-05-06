@@ -139,7 +139,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					var buttonClass = "ui-btn ui-btn-" + itemTheme;
 					
 					if ( icon && ( a.length === 1 ) ) {
-						buttonClass += " ui-icon ui-btn-icon-right ui-icon-" + icon;
+						buttonClass += " ui-btn-icon-right ui-icon-" + icon;
 					}
 					
 					a.first().addClass( buttonClass );
@@ -155,7 +155,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						var last = a.last(),
 							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
 							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon || getAttr( item[ 0 ], "icon", true ) || o.icon,
-							splitButtonClass = "ui-btn ui-btn-" + splittheme + " ui-icon ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-icon-shadow";
+							splitButtonClass = "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-icon-shadow";
 						
 						last.appendTo( item )
 							.attr( "title", $.trim( last.getEncodedText() ) )

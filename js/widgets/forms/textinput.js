@@ -85,7 +85,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				.appendTo( focusedEl )
 				.addClass(
 					"ui-btn ui-btn-" + theme +
-					" ui-icon ui-icon-delete ui-btn-icon-notext" +
+					" ui-icon-delete ui-btn-icon-notext" +
 					" ui-corner-all ui-shadow " + ( o.mini ? "ui-mini" : "" ) );
 
 			if ( !isSearch ) {
