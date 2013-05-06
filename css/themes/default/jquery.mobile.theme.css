@@ -652,7 +652,7 @@ button,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-searchfield:after {
+.ui-input-search:after {
 	background-color: 						#666 /*{global-icon-color}*/;
 	background-color: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
 	background-image: url(images/icons-18-white.png) /*{global-icon-set}*/;
@@ -666,7 +666,7 @@ button,
 
 .ui-icon-alt[class*="ui-icon-"]:after,
 .ui-icon-alt .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-alt .ui-icon-searchfield:after {
+.ui-icon-alt .ui-input-search:after {
 	background-color: 						#fff;
 	background-color: 						rgba(255,255,255,.3);
 	background-image: url(images/icons-18-black.png);
@@ -678,7 +678,7 @@ button,
 
 .ui-icon-nodisc[class*="ui-icon-"]:after,
 .ui-icon-nodisc .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-nodisc .ui-icon-searchfield:after {
+.ui-icon-nodisc .ui-input-search:after {
 	background-color: transparent;
 }
 
@@ -737,7 +737,7 @@ button,
 	background-position: 	-575px -1px;
 }
 .ui-icon-search:after,
-.ui-icon-searchfield:after {
+.ui-input-search:after {
 	background-position: 	-611px -1px;
 }
 .ui-icon-bars:after {
@@ -769,7 +769,7 @@ button,
        only screen and (min-resolution: 200dpi) {
 	
 	.ui-btn[class*="ui-icon-"]:after,
-	.ui-icon-searchfield:after {
+	.ui-input-search:after {
 		background-image: url(images/icons-36-white.png);
 		-moz-background-size: 864px 18px;
 		-o-background-size: 864px 18px;
@@ -777,7 +777,7 @@ button,
 		background-size: 864px 18px;
 	}
 	.ui-icon-alt .ui-btn[class*="ui-icon-"]:after,
-	.ui-icon-alt .ui-icon-searchfield:after {
+	.ui-icon-alt .ui-input-search:after {
 		background-image: url(images/icons-36-black.png);
 	}
 
@@ -833,7 +833,7 @@ button,
 		background-position: 	-575px 50%;
 	}
 	.ui-icon-search:after,
-	.ui-icon-searchfield:after {
+	.ui-input-search:after {
 		background-position: 	-611px 50%;
 	}
 	.ui-icon-bars:after {

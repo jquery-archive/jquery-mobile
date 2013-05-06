@@ -59,7 +59,7 @@ div.ui-input-text,
 .ui-input-search {
 	position: relative;
 }
-.ui-icon-searchfield:after {
+.ui-input-search:after {
 	position: absolute;
 	left: 7px;
 	top: 50%;

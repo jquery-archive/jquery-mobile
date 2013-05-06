@@ -66,7 +66,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 		//"search" and "text" input widgets
 		if ( isSearch || inputNeedsWrap ) {
-			classes = isSearch ? "ui-input-search ui-icon-searchfield" : "ui-input-text";
+			classes = isSearch ? "ui-input-search" : "ui-input-text";
 			
 			focusedEl = input.wrap( "<div class='" + classes + themeclass + miniclass + " ui-shadow-inset ui-corner-all ui-btn-shadow'></div>" ).parent();
 		}
