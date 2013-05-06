@@ -664,6 +664,7 @@ button,
 /* Alt icon color
 -----------------------------------------------------------------------------------------------------------*/
 
+.ui-icon-alt[class*="ui-icon-"]:after,
 .ui-icon-alt .ui-btn[class*="ui-icon-"]:after,
 .ui-icon-alt .ui-icon-searchfield:after {
 	background-color: 						#fff;
@@ -675,10 +676,9 @@ button,
 /* No disc
 -----------------------------------------------------------------------------------------------------------*/
 
+.ui-icon-nodisc[class*="ui-icon-"]:after,
 .ui-icon-nodisc .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-nodisc .ui-icon-searchfield:after,
-.ui-icon-nodisc .ui-icon-alt .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-nodisc .ui-icon-alt .ui-icon-searchfield:after {
+.ui-icon-nodisc .ui-icon-searchfield:after {
 	background-color: transparent;
 }
 
