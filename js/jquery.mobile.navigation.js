@@ -330,11 +330,11 @@ define( [
 			return page;
 		},
 
-		_showLoading: function( delay ) {
+		_showLoading: function( delay, theme, msg, textonly ) {
 			// This configurable timeout allows cached pages a brief
 			// delay to load without showing a message
 			this._loadMsg = setTimeout(function() {
-				$.mobile.showPageLoadingMsg();
+				$.mobile.showPageLoadingMsg( theme, msg, textonly );
 			}, delay );
 
 		},
@@ -590,14 +590,15 @@ define( [
 						// Remove loading message.
 						if ( settings.showLoadMsg ) {
 
-							// Remove loading message.
+							// make sure to remove the current loading message
 							this._hideLoading();
 
-							// show error message
-							$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
+							// show the error message
+							this._showLoading( 0, $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
 
-							// hide after delay
-							setTimeout( $.mobile.hidePageLoadingMsg, 1500 );
+							// hide the error message after a delay
+							// TODO configuration
+							setTimeout( $.proxy(this, "_hideLoading"), 1500 );
 						}
 
 						deferred.reject( absUrl, options );
