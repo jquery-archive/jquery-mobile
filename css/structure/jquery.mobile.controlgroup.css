@@ -84,7 +84,7 @@ fieldset.ui-controlgroup.ui-mini {
 }
 .ui-controlgroup-horizontal .ui-btn-icon-notext,
 .ui-controlgroup-horizontal button.ui-btn-icon-notext {
-	width: 24px;
+	width: 1.5em;
 }
 .ui-controlgroup .ui-btn-icon-notext {
 	height: auto;

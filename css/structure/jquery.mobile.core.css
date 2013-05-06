@@ -227,8 +227,8 @@ div.ui-mobile-viewport {
 }
 .ui-btn-icon-notext {
 	padding: 0;
-	width: 24px;
-	height: 24px;
+	width: 1.5em;
+	height: 1.5em;
 	text-indent: -9999px;
 	white-space: nowrap !important;
 }
@@ -283,10 +283,7 @@ div.ui-mobile-viewport {
 .ui-icon-loading:after {
 	content: none;
 }
-.ui-btn-icon-notext:after {
-	top: 3px;
-	left: 3px;
-}
+.ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
 .ui-btn-icon-right:after {
 	top: 50%;
@@ -298,6 +295,7 @@ div.ui-mobile-viewport {
 .ui-btn-icon-right:after {
 	right: .625em;
 }
+.ui-btn-icon-notext:after,
 .ui-btn-icon-top:after,
 .ui-btn-icon-bottom:after {
 	left: 50%;
