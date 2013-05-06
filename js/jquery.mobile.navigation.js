@@ -487,127 +487,128 @@ define( [
 			if ( !($.mobile.allowCrossDomainPages ||
 				path.isSameDomain(documentUrl, absUrl)) ) {
 				deferred.reject( absUrl, options );
-			} else {
-				// Load the new page.
-				$.ajax({
-					url: fileUrl,
-					type: settings.type,
-					data: settings.data,
-					contentType: settings.contentType,
-					dataType: "html",
-					success: $.proxy(function( html, textStatus, xhr ) {
-						//pre-parse html to check for a data-url,
-						//use it as the new fileUrl, base path, etc
-						var all = $( "<div></div>" ),
-
-							//page title regexp
-							newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
-
-							// TODO handle dialogs again
-							pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + this._getNs() + "role=[\"']?page[\"']?[^>]*>)" ),
-							dataUrlRegex = new RegExp( "\\bdata-" + this._getNs() + "url=[\"']?([^\"'>]*)[\"']?" );
-
-
-						// data-url must be provided for the base tag so resource requests can be directed to the
-						// correct url. loading into a temprorary element makes these requests immediately
-						if ( pageElemRegex.test( html ) &&
-							 RegExp.$1 &&
-							 dataUrlRegex.test( RegExp.$1 ) &&
-							 RegExp.$1 ) {
-							url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
-						}
-
-						//dont update the base tag if we are prefetching
-						if ( typeof options.prefetch === "undefined" ||
-							typeof options.prefetch === "undefined" ) {
-							this._getBase().set( fileUrl );
-						}
-
-						//workaround to allow scripts to execute when included in page divs
-						all.get( 0 ).innerHTML = html;
-						page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
-
-						//if page elem couldn't be found, create one and insert the body element's contents
-						if ( !page.length ) {
-							page = $( "<div data-" + this._getNs() + "role='page'>" + ( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) + "</div>" );
-						}
-
-						if ( newPageTitle && !page.jqmData( "title" ) ) {
-							if ( ~newPageTitle.indexOf( "&" ) ) {
-								newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
-							}
-							page.jqmData( "title", newPageTitle );
-						}
-
-						this._getBase().rewrite( fileUrl, page );
-
-						//append to page and enhance
-						// TODO taging a page with external to make sure that embedded pages aren't removed
-						//      by the various page handling code is bad. Having page handling code in many
-						//      places is bad. Solutions post 1.0
-						page
-							.attr( "data-" + this._getNs() + "url", path.convertUrlToDataUrl( fileUrl ) )
-							.attr( "data-" + this._getNs() + "external-page", true )
-							.appendTo( settings.pageContainer );
-
-						// wait for page creation to leverage options defined on widget
-						page.one( "pagecreate", $.mobile._bindPageRemove );
-
-						enhancePage( page, settings.role );
-
-						// Enhancing the page may result in new dialogs/sub pages being inserted
-						// into the DOM. If the original absUrl refers to a sub-page, that is the
-						// real page we are interested in.
-						if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-							page = settings.pageContainer.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
-						}
-
-						// Remove loading message.
-						if ( settings.showLoadMsg ) {
-							this._hideLoading();
-						}
-
-						// Add the page reference and xhr to our triggerData.
-						triggerData.xhr = xhr;
-						triggerData.textStatus = textStatus;
-						triggerData.page = page;
-
-						// Let listeners know the page loaded successfully.
-						settings.pageContainer.trigger( "pageload", triggerData );
-
-						deferred.resolve( absUrl, options, page );
-					}, this),
-					error: $.proxy(function( xhr, textStatus, errorThrown ) {
-						//set base back to current path
-						this._getBase().set( path.get() );
-
-						// Add error info to our triggerData.
-						triggerData.xhr = xhr;
-						triggerData.textStatus = textStatus;
-						triggerData.errorThrown = errorThrown;
-
-						var plfEvent = new $.Event( "pageloadfailed" );
-
-						// Let listeners know the page load failed.
-						settings.pageContainer.trigger( plfEvent, triggerData );
-
-						// If the default behavior is prevented, stop here!
-						// Note that it is the responsibility of the listener/handler
-						// that called preventDefault(), to resolve/reject the
-						// deferred object within the triggerData.
-						if ( plfEvent.isDefaultPrevented() ) {
-							return;
-						}
-
-						// Remove loading message.
-						if ( settings.showLoadMsg ) {
-							this._showError();
-						}
-
-						deferred.reject( absUrl, options );
-					}, this)
-				});
+				return promise;
 			}
+
+			// Load the new page.
+			$.ajax({
+				url: fileUrl,
+				type: settings.type,
+				data: settings.data,
+				contentType: settings.contentType,
+				dataType: "html",
+				success: $.proxy(function( html, textStatus, xhr ) {
+					//pre-parse html to check for a data-url,
+					//use it as the new fileUrl, base path, etc
+					var all = $( "<div></div>" ),
+
+					//page title regexp
+					newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
+
+					// TODO handle dialogs again
+					pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + this._getNs() + "role=[\"']?page[\"']?[^>]*>)" ),
+					dataUrlRegex = new RegExp( "\\bdata-" + this._getNs() + "url=[\"']?([^\"'>]*)[\"']?" );
+
+
+					// data-url must be provided for the base tag so resource requests can be directed to the
+					// correct url. loading into a temprorary element makes these requests immediately
+					if ( pageElemRegex.test( html ) &&
+						 RegExp.$1 &&
+						 dataUrlRegex.test( RegExp.$1 ) &&
+						 RegExp.$1 ) {
+						url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
+					}
+
+					//dont update the base tag if we are prefetching
+					if ( typeof options.prefetch === "undefined" ||
+						typeof options.prefetch === "undefined" ) {
+						this._getBase().set( fileUrl );
+					}
+
+					//workaround to allow scripts to execute when included in page divs
+					all.get( 0 ).innerHTML = html;
+					page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
+
+					//if page elem couldn't be found, create one and insert the body element's contents
+					if ( !page.length ) {
+						page = $( "<div data-" + this._getNs() + "role='page'>" + ( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) + "</div>" );
+					}
+
+					if ( newPageTitle && !page.jqmData( "title" ) ) {
+						if ( ~newPageTitle.indexOf( "&" ) ) {
+							newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
+						}
+						page.jqmData( "title", newPageTitle );
+					}
+
+					this._getBase().rewrite( fileUrl, page );
+
+					//append to page and enhance
+					// TODO taging a page with external to make sure that embedded pages aren't removed
+					//      by the various page handling code is bad. Having page handling code in many
+					//      places is bad. Solutions post 1.0
+					page
+						.attr( "data-" + this._getNs() + "url", path.convertUrlToDataUrl( fileUrl ) )
+						.attr( "data-" + this._getNs() + "external-page", true )
+						.appendTo( settings.pageContainer );
+
+					// wait for page creation to leverage options defined on widget
+					page.one( "pagecreate", $.mobile._bindPageRemove );
+
+					enhancePage( page, settings.role );
+
+					// Enhancing the page may result in new dialogs/sub pages being inserted
+					// into the DOM. If the original absUrl refers to a sub-page, that is the
+					// real page we are interested in.
+					if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
+						page = settings.pageContainer.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
+					}
+
+					// Remove loading message.
+					if ( settings.showLoadMsg ) {
+						this._hideLoading();
+					}
+
+					// Add the page reference and xhr to our triggerData.
+					triggerData.xhr = xhr;
+					triggerData.textStatus = textStatus;
+					triggerData.page = page;
+
+					// Let listeners know the page loaded successfully.
+					settings.pageContainer.trigger( "pageload", triggerData );
+
+					deferred.resolve( absUrl, options, page );
+				}, this),
+				error: $.proxy(function( xhr, textStatus, errorThrown ) {
+					//set base back to current path
+					this._getBase().set( path.get() );
+
+					// Add error info to our triggerData.
+					triggerData.xhr = xhr;
+					triggerData.textStatus = textStatus;
+					triggerData.errorThrown = errorThrown;
+
+					var plfEvent = new $.Event( "pageloadfailed" );
+
+					// Let listeners know the page load failed.
+					settings.pageContainer.trigger( plfEvent, triggerData );
+
+					// If the default behavior is prevented, stop here!
+					// Note that it is the responsibility of the listener/handler
+					// that called preventDefault(), to resolve/reject the
+					// deferred object within the triggerData.
+					if ( plfEvent.isDefaultPrevented() ) {
+						return;
+					}
+
+					// Remove loading message.
+					if ( settings.showLoadMsg ) {
+						this._showError();
+					}
+
+					deferred.reject( absUrl, options );
+				}, this)
+			});
 
 			return promise;
 		}
