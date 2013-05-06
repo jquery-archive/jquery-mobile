@@ -62,7 +62,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = [this.isToggleSwitch ? "ui-slider ui-btn " : "ui-slider-track ",selectClass," ui-fill-",trackTheme," ui-corner-all", miniClass].join( "" );
+		domSlider.className = [this.isToggleSwitch ? "ui-slider " : "ui-slider-track ",selectClass," ui-fill-",trackTheme," ui-corner-all", miniClass].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -366,7 +366,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch ui-btn" : "ui-slider-track"," ui-fill-" + trackTheme," ui-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
+		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track"," ui-fill-" + trackTheme," ui-corner-all", ( this.options.mini ) ? " ui-mini":""].join( "" );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
