@@ -56,6 +56,11 @@ div.ui-mobile-viewport {
 	}
 }
 
+/* Fouc */
+.ui-mobile-rendering > * {
+	visibility: hidden;
+}
+
 /* Non-js content hiding */
 .ui-nojs {
 	position: absolute;
@@ -104,7 +109,7 @@ div.ui-mobile-viewport {
 	margin: 0;
 	text-align: center;
 }
-.ui-loader .ui-icon {
+.ui-loader .ui-icon-loading {
 	background-color: #000;
 	display: block;
 	margin: 0;
@@ -114,7 +119,7 @@ div.ui-mobile-viewport {
 	-webkit-border-radius: 2.25em;
 	border-radius: 2.25em;
 }
-.ui-loader-verbose .ui-icon {
+.ui-loader-verbose .ui-icon-loading {
 	margin: 0 auto .625em;
 	filter: Alpha(Opacity=75);
 	opacity: .75;
@@ -123,15 +128,11 @@ div.ui-mobile-viewport {
 	padding: .9375em;
 	margin-left: -7.1875em;
 }
-.ui-loader-textonly .ui-icon {
+.ui-loader-textonly .ui-icon-loading {
 	display: none;
 }
 .ui-loader-fakefix {
 	position: absolute;
-}
-/*fouc*/
-.ui-mobile-rendering > * {
-	visibility: hidden;
 }
 
 /* Headers, content panels */

@@ -863,7 +863,6 @@ button,
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
-
 .ui-checkbox .ui-checkbox-on:after,
 .ui-radio .ui-radio-on:after {
 	background-color: #4596ce /*{global-active-background-color}*/; /* NOTE: this hex should match the active state color. It's repeated here for cascade */
@@ -872,7 +871,7 @@ button,
 /* loading icon */
 .ui-icon-loading {
 	background: url(images/ajax-loader.gif);
-	background-size: 46px 46px;
+	background-size: 2.875em 2.875em;
 }
 
 /* Overlay / modal
