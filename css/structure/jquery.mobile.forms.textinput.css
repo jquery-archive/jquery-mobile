@@ -11,10 +11,10 @@ div.ui-input-text {
 	padding: 0 .4em;
 }
 div.ui-input-has-clear {
-	padding: 0 30px 0 .4em;
+	padding: 0 1.875em 0 .4em;
 }
 .ui-input-search {
-	padding: 0 30px;
+	padding: 0 1.875em;
 }
 textarea.ui-input-text {
 	padding: .4em;
@@ -61,7 +61,7 @@ div.ui-input-text,
 }
 .ui-input-search:after {
 	position: absolute;
-	left: 7px;
+	left: .375em;
 	top: 50%;
 	margin-top: -9px;
 	content: "";
