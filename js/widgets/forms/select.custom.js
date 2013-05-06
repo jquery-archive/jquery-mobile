@@ -98,10 +98,7 @@ define( [
 			placeholder: "",
 
 			build: function() {
-				var self = this,
-					escapeId = function( id ) {
-						return id.replace( /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1" );
-					};
+				var self = this;
 
 				// Create list from select, update state
 				self.refresh();
@@ -131,9 +128,9 @@ define( [
 
 						self._decideFormat();
 						if ( self.menuType === "overlay" ) {
-							self.button.attr( "href", "#" + escapeId( self.popupID ) ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+							self.button.attr( "href", "#" + self.popupID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
 						} else {
-							self.button.attr( "href", "#" + escapeId( self.dialogID ) ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+							self.button.attr( "href", "#" + self.dialogID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
 						}
 						self.isOpen = true;
 						// Do not prevent default, so the navigation may have a chance to actually open the chosen format
@@ -535,6 +532,9 @@ define( [
 
 				// Remove the popup
 				this.listbox.remove();
+
+				// Remove the dialog
+				this.menuPage.remove();
 
 				// Chain up
 				origDestroy.apply( this, arguments );

@@ -16,7 +16,6 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		clearBtn: false,
-		clearSearchButtonText: null, //deprecating for 1.3...
 		clearBtnText: "clear text",
 		disabled: false
 	},
@@ -32,7 +31,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
 			focusedEl,
 			clearbtn,
-			clearBtnText = o.clearSearchButtonText || o.clearBtnText,
+			clearBtnText = o.clearBtnText,
 			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
 			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist,
 			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" ),

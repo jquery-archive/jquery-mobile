@@ -308,7 +308,7 @@ define( [
 			// injected by a developer, in which case it would be lacking a data-url
 			// attribute and in need of enhancement.
 			if ( page.length === 0 && dataUrl && !path.isPath( dataUrl ) ) {
-				page = settings.pageContainer.children( "#" + dataUrl )
+				page = settings.pageContainer.children( path.hashToSelector("#" + dataUrl) )
 					.attr( "data-" + this._getNs() + "url", dataUrl )
 					.jqmData( "url", dataUrl );
 			}
@@ -463,7 +463,8 @@ define( [
 			}
 			// Reset base to the default document base.
 			// only reset if we are not prefetching
-			if ( settings.prefetch === undefined ) {
+			if ( settings.prefetch === undefined ||
+				typeof options.prefetch === "undefined" ) {
 				this._getBase().reset();
 			}
 
@@ -501,7 +502,8 @@ define( [
 						}
 
 						//dont update the base tag if we are prefetching
-						if ( typeof options.prefetch === "undefined") {
+						if ( typeof options.prefetch === "undefined" ||
+							typeof options.prefetch === "undefined" ) {
 							this._getBase().set( fileUrl );
 						}
 

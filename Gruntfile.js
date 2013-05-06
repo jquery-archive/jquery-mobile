@@ -38,6 +38,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-css" );
 	grunt.loadNpmTasks( "grunt-git-authors" );
 	grunt.loadNpmTasks( "grunt-qunit-junit" );
+	grunt.loadNpmTasks( "grunt-md5-manifest" );
 
 	// load the project's default tasks
 	grunt.loadTasks( "build/tasks");
@@ -53,6 +54,10 @@ module.exports = function( grunt ) {
 		headHash: "",
 
 		headShortHash: "",
+
+		files: {
+			cdn: path.join( dist, name + "-cdn" )
+		},
 
 		jshint: {
 			js: {
@@ -319,6 +324,30 @@ module.exports = function( grunt ) {
 						dest: "<%= uglify.all.options.sourceMap %>"
 					}
 				]
+			},
+			cdn: {
+				files: [
+					{
+						expand: true,
+						cwd: dist,
+						src: [
+							name + "*<%= versionSuffix %>.*",
+							"images/*",
+							"!*.zip"
+						],
+						dest: "<%= files.cdn %>"
+					}
+				]
+			}
+		},
+
+		"md5-manifest": {
+			cdn: {
+				options: {
+					cwd: "<%= files.cdn %>"
+				},
+				src: [ "**/*" ],
+				dest: "MANIFEST"
 			}
 		},
 
@@ -328,7 +357,19 @@ module.exports = function( grunt ) {
 					archive: path.join( dist, name ) + "<%= versionSuffix %>.zip"
 				},
 				files: [
-					{ expand: true, cwd: dist, src: [ "**", "!" + name + "<%= versionSuffix %>.zip" ] }
+					{ expand: true, cwd: dist, src: [ "**", "!*.zip" ] }
+				]
+			},
+			cdn: {
+				options: {
+					archive: "<%= files.cdn %>.zip"
+				},
+				files: [
+					{
+						expand: true,
+						cwd: "<%= files.cdn %>",
+						src: [ "**/*" ]
+					}
 				]
 			}
 		},
@@ -494,7 +535,10 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		clean: [ dist ]
+		clean: {
+			dist: [ dist ],
+			cdn: [ "<%= files.cdn %>" ]
+		}
 	});
 
 	grunt.registerTask( "lint", [ "jshint" ] );
@@ -507,8 +551,10 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed" ] );
 
+	grunt.registerTask( "cdn", [ "release:init", "clean:cdn", "copy:cdn", "md5-manifest:cdn", "compress:cdn" ] );
+
 	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
-	grunt.registerTask( "dist:release", [ "release:init", "dist" ] );
+	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
 
 	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );

@@ -220,8 +220,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._page.on( "click.panel" , "a", function( e ) {
 			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
 				e.preventDefault();
-				var $link = $( this );
+				var $link = $( this ),
+					$parent;
 				if ( ! $link.hasClass( "ui-link" ) ) {
+					// Check if we are in a listview
+					$parent = $link.parent().parent();
+					if ( $parent.hasClass( "ui-li" ) ) {
+						$link = $parent.parent();
+					}
 					$link.addClass( $.mobile.activeBtnClass );
 					self.element.one( "panelopen panelclose", function() {
 						$link.removeClass( $.mobile.activeBtnClass );
