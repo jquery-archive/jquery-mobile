@@ -656,12 +656,15 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_closePrereqsDone: function() {
-		var opts = this.options;
+		var container = this._ui.container;
 
-		this._ui.container.removeAttr( "tabindex" );
+		container.removeAttr( "tabindex" );
 
 		// remove the global mutex for popups
 		$.mobile.popup.active = undefined;
+
+		// Blur elements inside the container, including the container
+		$( ":focus", container[ 0 ] ).add( container[ 0 ] ).blur();
 
 		// alert users that the popup is closed
 		this._trigger( "afterclose" );
