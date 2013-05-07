@@ -11,7 +11,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.navigation", ".
 
 $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 	options: {
-		closeBtn: "left",
+		closeBtn: "left", /* Accepts left, right and none */
 		closeBtnText: "Close",
 		overlayTheme: "a",
 		corners: true
@@ -101,7 +101,7 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 			// Sanitize value
 			location = ( value === "left" ? "left" : "right" );
 			dst = this.element.children().find( ":jqmData(role='header')" ).first();
-			theme = $.mobile.getAttribute( dst[ 0 ], "theme", true ) || "a";
+			theme = dst[ 0 ] ? $.mobile.getAttribute( dst[ 0 ], "theme", true ) || "a" : "a";
 			btn = $( "<a></a>", {
 				"href": "#",
 				"class": "ui-btn ui-btn-" + location +
