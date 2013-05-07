@@ -21,8 +21,8 @@
 .ui-radio .ui-btn-icon-bottom {
 	text-align: center;
 }
-.ui-controlgroup-horizontal .ui-checkbox:after,
-.ui-controlgroup-horizontal .ui-radio:after {
+.ui-controlgroup-horizontal .ui-checkbox .ui-btn:after,
+.ui-controlgroup-horizontal .ui-radio .ui-btn:after {
 	content: none;
 }
 /* Native input positioning */
