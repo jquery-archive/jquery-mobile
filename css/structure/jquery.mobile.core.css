@@ -339,7 +339,8 @@ div.ui-mobile-viewport {
 }
 
 /* Form labels */
-label {
+label,
+.ui-controlgroup-label {
 	font-size: 16px;
 	line-height: 1.4;
 	font-weight: normal;
