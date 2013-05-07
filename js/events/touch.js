@@ -14,7 +14,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",
 		touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
 
-	// add new event shortcuts
+	// setup new event shortcuts
 	$.each( ( "touchstart touchmove touchend " +
 		"tap taphold " +
 		"swipe swipeleft swiperight " +
@@ -41,7 +41,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	$.event.special.scrollstart = {
 
 		enabled: true,
-		add: function() {
+		setup: function() {
 
 			var thisObject = this,
 				$this = $( thisObject ),
@@ -70,7 +70,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				}, 50 );
 			});
 		},
-		remove: function() {
+		teardown: function() {git
 			$( this ).unbind( scrollEvent );
 		}
 	};
@@ -79,7 +79,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	$.event.special.tap = {
 		tapholdThreshold: 750,
 
-		add: function() {
+		setup: function() {
 			var thisObject = this,
 				$this = $( thisObject );
 
@@ -123,7 +123,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				}, $.event.special.tap.tapholdThreshold );
 			});
 		},
-		remove: function() {
+		teardown: function() {
 			$( this ).unbind( "vmousedown" ).unbind( "vclick" ).unbind( "vmouseup" );
 			$document.unbind( "vmousecancel" );
 		}
@@ -168,7 +168,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 			}
 		},
 
-		add: function() {
+		setup: function() {
 			var thisObject = this,
 				$this = $( thisObject );
 
@@ -201,7 +201,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 			});
 		},
 
-		remove: function() {
+		teardown: function() {
 			$( this ).unbind( touchStartEvent ).unbind( touchMoveEvent ).unbind( touchStopEvent );
 		}
 	};
@@ -215,6 +215,9 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 		$.event.special[ event ] = {
 			setup: function() {
 				$( this ).bind( sourceEvent, $.noop );
+			},
+			teardown: function() {
+				$( this ).unbind( sourceEvent );
 			}
 		};
 	});
