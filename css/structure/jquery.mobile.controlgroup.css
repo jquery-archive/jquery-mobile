@@ -4,18 +4,17 @@ fieldset.ui-controlgroup {
 	margin: .5em 0;
 	zoom: 1;
 }
-.ui-controlgroup.ui-mini,
-fieldset.ui-controlgroup.ui-mini {
-	margin-top: .25em;
-	margin-bottom: .25em;
-	padding: 0;
-}
 .ui-field-contain .ui-controlgroup,
 .ui-field-contain fieldset.ui-controlgroup {
 	margin: 0;
 }
 .ui-bar .ui-controlgroup {
 	margin: 0 5px;
+}
+.ui-controlgroup-horizontal .ui-controlgroup-controls {
+	display: inline-block;
+	vertical-align: middle;
+	zoom: 1;
 }
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after {
@@ -24,11 +23,6 @@ fieldset.ui-controlgroup.ui-mini {
 }
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after {
 	clear: both;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls {
-	display: inline-block;
-	vertical-align: middle;
-	zoom: 1;
 }
 .ui-controlgroup-horizontal .ui-controlgroup-controls > .ui-btn,
 .ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-btn,
@@ -46,35 +40,6 @@ fieldset.ui-controlgroup.ui-mini {
 .ui-controlgroup .ui-btn.ui-focus {
 	z-index: 1;
 }
-.ui-controlgroup.ui-mini .ui-btn {
-	margin: 0;
-	font-size: 12.5px;
-	padding: .6em .88em;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-left {
-	padding-left: 2.4em;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-right {
-	padding-right: 2.4em;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-top {
-	padding-top: 2.4em;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-bottom {
-	padding-bottom: 2.4em;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-left:after {
-	left: .4em;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-right:after {
-	right: .4em;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-top:after {
-	top: .4em;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-bottom:after {
-	bottom: .4em;
-}
 .ui-controlgroup li {
 	list-style: none;
 }
@@ -89,14 +54,6 @@ fieldset.ui-controlgroup.ui-mini {
 .ui-controlgroup .ui-btn-icon-notext {
 	height: auto;
 	padding: .7em 1em;
-}
-.ui-controlgroup .ui-btn-icon-notext:after {
-	top: 50%;
-	left: 50%;
-	margin: -9px 0 0 -9px;
-}
-.ui-controlgroup.ui-mini .ui-btn-icon-notext {
-	padding: .6em .88em;
 }
 .ui-controlgroup-vertical .ui-btn {
 	border-bottom-width: 0;

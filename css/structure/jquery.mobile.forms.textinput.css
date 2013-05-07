@@ -3,10 +3,6 @@
 	margin: .5em 0;
 	background-image: none;
 }
-.ui-input-text.ui-mini,
-.ui-input-search.ui-mini {
-	margin: .25em 0;
-}
 div.ui-input-text {
 	padding: 0 .4em;
 }
@@ -27,9 +23,6 @@ textarea.ui-input-text {
 	-moz-transition: height 200ms linear;
 	-o-transition: height 200ms linear;
 	transition: height 200ms linear;
-}
-textarea.ui-mini {
-	/* height: 45px; */
 }
 .ui-input-text input,
 .ui-input-search input,
@@ -75,9 +68,6 @@ div.ui-input-text,
 	right: 0;
 	top: 50%;
 	margin: -13px .3125em 0;
-}
-.ui-mini .ui-input-clear {
-	right: -3px;
 }
 .ui-input-search .ui-input-clear-hidden,
 .ui-input-text .ui-input-clear-hidden {
