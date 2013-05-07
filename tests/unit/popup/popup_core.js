@@ -553,4 +553,43 @@
 			}
 		]);
 	});
+
+	asyncTest( "Elements inside the popup lose focus when the popup is closed", function() {
+
+		expect( 5 );
+
+		var $popup = $( "#popupLogin" ),
+			$popupContainer = $( "#popupLogin-popup" ),
+			$textBox = $( "#textBox" ),
+			eventSuffix = ".ElementsInsideThePopupLoseFocus";
+
+		$.testHelper.detailedEventCascade( [
+			function() {
+				$popup.popup( "open" );
+			},
+			{
+				popupafteropen: { src: $popup, event: "popupafteropen" + eventSuffix + "1" }
+			},
+			function( result ) {
+				deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
+				$textBox.focus();
+			},
+			{
+				focusevent: { src: $textBox, event: "focus" + eventSuffix + "2" }
+			},
+			function( result ) {
+				deepEqual( result.focusevent.timedOut, false, "Text box did experience focus event" );
+				$popup.popup( "close" );
+			},
+			{
+				popupafterclose: { src: $popup, event: "popupafterclose" + eventSuffix + "3" }
+			},
+			function( result ) {
+				deepEqual( result.popupafterclose.timedOut, false, "Popup did close" );
+				deepEqual( $popupContainer.is( ":focus" ), false, "The popup container is not focused" );
+				deepEqual( $popupContainer.find( ":focus" ).length, 0, "The popup container contains no focused elements" );
+				start();
+			}
+		]);
+	});
 })( jQuery );
