@@ -41,8 +41,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	$.event.special.scrollstart = {
 
 		enabled: true,
-
-		setup: function() {
+		add: function() {
 
 			var thisObject = this,
 				$this = $( thisObject ),
@@ -70,6 +69,9 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					trigger( event, false );
 				}, 50 );
 			});
+		},
+		remove: function() {
+			$( this ).unbind( scrollEvent );
 		}
 	};
 
@@ -77,7 +79,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	$.event.special.tap = {
 		tapholdThreshold: 750,
 
-		setup: function() {
+		add: function() {
 			var thisObject = this,
 				$this = $( thisObject );
 
@@ -120,6 +122,10 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 				}, $.event.special.tap.tapholdThreshold );
 			});
+		},
+		remove: function() {
+			$( this ).unbind( "vmousedown" ).unbind( "vclick" ).unbind( "vmouseup" );
+			$document.unbind( "vmousecancel" );
 		}
 	};
 
@@ -162,7 +168,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 			}
 		},
 
-		setup: function() {
+		add: function() {
 			var thisObject = this,
 				$this = $( thisObject );
 
@@ -193,6 +199,10 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 						start = stop = undefined;
 					});
 			});
+		},
+
+		remove: function() {
+			$( this ).unbind( touchStartEvent ).unbind( touchMoveEvent ).unbind( touchStopEvent );
 		}
 	};
 	$.each({
