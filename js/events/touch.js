@@ -70,7 +70,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				}, 50 );
 			});
 		},
-		teardown: function() {git
+		teardown: function() {
 			$( this ).unbind( scrollEvent );
 		}
 	};
@@ -189,15 +189,15 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					}
 				}
 
-				$this.bind( touchMoveEvent, moveHandler )
-					.one( touchStopEvent, function() {
-						$this.unbind( touchMoveEvent, moveHandler );
+				$this.bind( touchMoveEvent, moveHandler );
+				$document.one( touchStopEvent, function() {
+					$this.unbind( touchMoveEvent, moveHandler );
 
-						if ( start && stop ) {
-							$.event.special.swipe.handleSwipe( start, stop );
-						}
-						start = stop = undefined;
-					});
+					if ( start && stop ) {
+						$.event.special.swipe.handleSwipe( start, stop );
+					}
+					start = stop = undefined;
+				});
 			});
 		},
 
