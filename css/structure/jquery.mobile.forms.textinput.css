@@ -3,23 +3,15 @@
 	margin: .5em 0;
 	background-image: none;
 }
-div.ui-input-text {
-	padding: 0 .4em;
-}
-div.ui-input-has-clear {
-	padding: 0 1.875em 0 .4em;
+.ui-input-has-clear {
+	padding-right: 1.875em;
 }
 .ui-input-search {
-	padding: 0 1.875em;
+	padding: 0 1.875em 0 1.5em;
 }
 textarea.ui-input-text {
-	padding: .4em;
 	height: 3.125em;
 	resize: vertical;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-ms-box-sizing: border-box;
-	box-sizing: border-box;
 	-webkit-transition: height 200ms linear;
 	-moz-transition: height 200ms linear;
 	-o-transition: height 200ms linear;
@@ -28,13 +20,20 @@ textarea.ui-input-text {
 .ui-input-text input,
 .ui-input-search input,
 textarea.ui-input-text {
+	padding: .4em;
 	min-height: 1.4em;
 	line-height: 1.4em;
 	font-size: 16px;
 	display: block;
 	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 	outline: 0;
 }
+.ui-input-text.ui-mini,
+.ui-input-search.ui-mini,
 .ui-input-text.ui-mini input,
 .ui-input-search.ui-mini input,
 textarea.ui-mini {
@@ -43,7 +42,6 @@ textarea.ui-mini {
 .ui-input-text input,
 .ui-input-search input {
 	display: block;
-	padding: .4em 0;
 	margin: 0;
 	border: none;
 	background: transparent none;
