@@ -618,14 +618,8 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		this._reposition( o );
 
 		if ( this.options.overlayTheme && androidBlacklist ) {
-			/* TODO:
-			The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed
-			above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain
-			types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser:
-			https://github.com/scottjehl/Device-Bugs/issues/3
-
+			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
 			This fix closes the following bugs ( I use "closes" with reluctance, and stress that this issue should be revisited as soon as possible ):
-
 			https://github.com/jquery/jquery-mobile/issues/4816
 			https://github.com/jquery/jquery-mobile/issues/4844
 			https://github.com/jquery/jquery-mobile/issues/4874
