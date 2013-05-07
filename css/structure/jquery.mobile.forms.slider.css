@@ -56,10 +56,6 @@ input.ui-slider-input {
 .ui-slider-track .ui-slider-bg {
 	border: none;
 	height: 100%;
-	-webkit-border-radius: inherit;
-	border-radius: inherit;
-	-webkit-background-clip: padding;
-	background-clip: padding-box;
 }
 /* High level of specificity to override button margins in grids */
 .ui-slider-track .ui-btn.ui-slider-handle,
@@ -132,10 +128,6 @@ div.ui-slider-switch.ui-mini {
 	border-width: 0;
 	white-space: nowrap;
 	cursor: pointer;
-	-webkit-border-radius: inherit;
-	border-radius: inherit;
-	-webkit-background-clip: padding;
-	background-clip: padding-box;
 }
 .ui-slider-switch.ui-mini .ui-slider-label {
 	font-size: 14px;
@@ -149,6 +141,16 @@ div.ui-slider-switch.ui-mini {
 	z-index: 0;
 	right: 0;
 	text-indent: 1.5em;
+}
+/* The corner radii for ui-slider-switch/track can be specified in theme CSS. The bg and handle inherits. */
+.ui-slider-track .ui-slider-bg,
+.ui-slider-switch .ui-slider-label,
+.ui-slider-switch .ui-slider-inneroffset,
+.ui-slider .ui-slider-handle {
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+	-webkit-background-clip: padding;
+	background-clip: padding-box;
 }
 
 @media (min-width: 28em) {
