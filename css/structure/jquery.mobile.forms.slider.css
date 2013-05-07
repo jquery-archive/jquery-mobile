@@ -7,8 +7,6 @@ div.ui-slider {
 div.ui-slider.ui-mini {
 	margin-top: .25em;
 	margin-bottom: .25em;
-	padding: 0;
-	font-size: 16px;
 }
 div.ui-slider:before,
 div.ui-slider:after {
@@ -54,7 +52,6 @@ input.ui-slider-input {
 .ui-slider-track.ui-mini {
 	height: 12px;
 	top: 8px;
-	padding: 0;
 }
 .ui-slider-track .ui-slider-bg {
 	border: none;

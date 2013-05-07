@@ -234,11 +234,11 @@ div.ui-mobile-viewport {
 	white-space: nowrap !important;
 }
 .ui-mini {
-	margin-top: .25em;
-	margin-bottom: .25em;
+	font-size: 12.5px;
 }
 .ui-mini.ui-btn {
-	font-size: 12.5px;
+	margin-top: .25em;
+	margin-bottom: .25em;
 	padding: .6em .88em;
 }
 .ui-mini.ui-btn-icon-notext {
