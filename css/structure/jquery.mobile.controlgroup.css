@@ -8,9 +8,6 @@ fieldset.ui-controlgroup {
 .ui-field-contain fieldset.ui-controlgroup {
 	margin: 0;
 }
-.ui-bar .ui-controlgroup {
-	margin: 0 5px;
-}
 .ui-controlgroup-horizontal .ui-controlgroup-controls {
 	display: inline-block;
 	vertical-align: middle;
