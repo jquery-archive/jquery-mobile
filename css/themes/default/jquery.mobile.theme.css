@@ -64,7 +64,7 @@ button,
 	border-radius: 						.6em /*{global-radii-blocks}*/;
 }
 .ui-btn-corner-all, /* Deprecated in 1.4 */
-.ui-btn.ui-corner-all
+.ui-btn.ui-corner-all,
 .ui-slider-switch.ui-corner-all,
 .ui-slider-track.ui-corner-all {
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
