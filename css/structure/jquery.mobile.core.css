@@ -63,8 +63,14 @@ div.ui-mobile-viewport {
 
 /* Non-js content hiding */
 .ui-nojs {
-	position: absolute;
+	position: absolute !important;
+	top: -9999px;
 	left: -9999px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px,1px,1px,1px);
 }
 
 /* Loading screen */
@@ -372,7 +378,11 @@ label {
 .ui-hide-label .ui-rangeslider label,
 .ui-hidden-accessible {
 	position: absolute !important;
+	top: -9999px;
 	left: -9999px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
 	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }

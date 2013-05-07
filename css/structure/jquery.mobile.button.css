@@ -50,6 +50,12 @@ button.ui-btn-icon-notext {
 .ui-state-disabled input[type="button"],
 .ui-state-disabled input[type="submit"],
 .ui-state-disabled input[type="reset"] {
-	position: absolute;
+	position: absolute !important;
+	top: -9999px;
 	left: -9999px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px,1px,1px,1px);
 }

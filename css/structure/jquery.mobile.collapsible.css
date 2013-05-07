@@ -33,9 +33,14 @@
 	border-top-width: 1px;
 }
 .ui-collapsible-heading-status {
-	position: absolute;
+	position: absolute !important;
 	top: -9999px;
-	left: 0;
+	left: -9999px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px,1px,1px,1px);
 }
 .ui-collapsible-content {
 	display: block;
