@@ -1,6 +1,9 @@
 .ui-rangeslider {
+	margin: .5em 0;
 	zoom: 1;
-	margin: 0;
+}
+.ui-rangeslider.ui-mini {
+	margin: .25em 0;
 }
 .ui-rangeslider:before,
 .ui-rangeslider:after {
@@ -10,13 +13,6 @@
 .ui-rangeslider:after {
 	clear: both;
 }
-/* Margin-top/bottom: .5em * 16px/14px to make it equal to ui-rangeslider-sliders margin (input font-size is 14px) */
-.ui-rangeslider .ui-slider-input {
-	margin: .57143em 0;
-}
-.ui-rangeslider.ui-mini .ui-slider-input {
-	margin: .28571em 0;
-}
 .ui-rangeslider .ui-slider-input.ui-rangeslider-last {
 	float: right;
 }
@@ -24,10 +20,7 @@
 	position: relative;
 	overflow: visible;
 	height: 30px;
-	margin: .5em 68px;
-}
-.ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-	margin: .25em 68px;
+	margin: 0 68px;
 }
 .ui-rangeslider .ui-rangeslider-sliders .ui-slider-track {
 	position: absolute;
@@ -58,17 +51,12 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 	height: 12px;
 }
 
+/* Hide the second label (the first is moved outside the div) */
 div.ui-rangeslider label {
-	margin: 0;
-}
-div.ui-rangeslider label ~ label {
 	position: absolute !important;
 	left: -9999px;
 	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
-}
-.ui-field-contain .ui-rangeslider label {
-	margin-bottom: .4em;
 }
 .ui-field-contain .ui-rangeslider input.ui-slider-input,
 .ui-field-contain .ui-rangeslider.ui-mini input.ui-slider-input,
@@ -76,43 +64,4 @@ div.ui-rangeslider label ~ label {
 .ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
 	margin-top: 0;
 	margin-bottom: 0;
-}
-
-@media (min-width: 28em) {
-	.ui-field-contain .ui-rangeslider label {
-		float: left;
-	}
-	.ui-field-contain .ui-rangeslider .ui-slider-input {
-		position: relative;
-		z-index: 1;
-	}
-	.ui-field-contain .ui-rangeslider .ui-slider-input.ui-rangeslider-first,
-	.ui-field-contain .ui-rangeslider.ui-mini .ui-slider-input.ui-rangeslider-first {
-		margin-right: 20px;
-	}
-	.ui-field-contain .ui-rangeslider .ui-rangeslider-sliders,
-	.ui-field-contain .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-		float: left;
-		width: 78%;
-		margin: 0 -68px;
-	}
-	.ui-field-contain .ui-rangeslider .ui-slider-track,
-	.ui-field-contain .ui-rangeslider.ui-mini .ui-slider-track {
-		right: 68px;
-		left: 68px;
-	}
-	.ui-field-contain.ui-hide-label .ui-rangeslider .ui-slider-input.ui-rangeslider-first {
-		margin: 0;
-	}
-	.ui-field-contain.ui-hide-label .ui-rangeslider .ui-rangeslider-sliders,
-	.ui-field-contain.ui-hide-label .ui-rangeslider.ui-mini .ui-rangeslider-sliders {
-		width: auto;
-		float: none;
-		margin: 0 68px;
-	}
-	.ui-field-contain.ui-hide-label .ui-rangeslider .ui-slider-track,
-	.ui-field-contain.ui-hide-label .ui-rangeslider.ui-mini .ui-slider-track {
-		right: 0;
-		left: 0;
-	}
 }
