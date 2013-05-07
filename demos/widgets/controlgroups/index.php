@@ -49,12 +49,12 @@
 
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-mini="true">
-					<a href="#" data-role="button" data-mini="true">No icon</a>
-					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="left">Left</a>
-					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="right">Right</a>
-					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="top">Top</a>
-					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="bottom">Bottom</a>
-					<a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="notext">Icon only</a>
+					<a href="#" data-role="button">No icon</a>
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="left">Left</a>
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="right">Right</a>
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Top</a>
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bottom</a>
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icon only</a>
 				</div>
 			</div><!--/demo-html -->
 
