@@ -33,6 +33,9 @@
 	padding-bottom: .8em;
 	font-size: 12.5px;
 }
+.ui-navbar .ui-btn:focus {
+	z-index: 1;
+}
 .ui-navbar li .ui-btn-icon-top {
 	padding-top: 2.4em;
 }
