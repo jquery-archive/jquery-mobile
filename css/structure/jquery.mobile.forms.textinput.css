@@ -32,7 +32,7 @@ textarea.ui-input-text {
 	font-size: 16px;
 	display: block;
 	width: 100%;
-	outline: 0 !important;
+	outline: 0;
 }
 .ui-input-text.ui-mini input,
 .ui-input-search.ui-mini input,

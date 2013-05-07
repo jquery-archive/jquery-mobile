@@ -33,6 +33,7 @@ button.ui-btn-icon-notext {
 	height: 100%;
 	padding: 0;
 	border: none;
+	outline: 0;
 	-webkit-border-radius: inherit;
 	border-bottom-radius: inherit;	
 	-webkit-appearance: none;

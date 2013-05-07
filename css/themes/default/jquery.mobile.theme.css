@@ -24,19 +24,6 @@ button,
 	text-decoration: none;	
 }
 
-/* Focus state
------------------------------------------------------------------------------------------------------------*/
-
-.ui-btn:focus,
-.ui-btn.ui-focus {
-	outline: 0;
-}
-.ui-mobile-nosupport-boxshadow * {
-	-moz-box-shadow: none !important;
-	-webkit-box-shadow: none !important;
-	box-shadow: none !important;
-}
-
 /* Shadow
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -183,8 +170,7 @@ button,
 
 .ui-btn-a:focus,
 .ui-btn-a.ui-focus,
-.ui-body-a.ui-input-text.ui-focus,
-.ui-body-a.ui-input-search.ui-focus {
+.ui-body-a.ui-focus {
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{a-bactive-background-color}*/;
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{a-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#387bbe /*{a-bactive-background-color}*/;
@@ -295,9 +281,8 @@ button,
 }
 
 .ui-btn-b:focus,
-.ui-btn-b.ui-focus
-.ui-body-b.ui-input-text.ui-focus,
-.ui-body-b.ui-input-search.ui-focus {
+.ui-btn-b.ui-focus,
+.ui-body-b.ui-focus {
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{b-bactive-background-color}*/;
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{b-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#387bbe /*{b-bactive-background-color}*/;
@@ -409,8 +394,7 @@ button,
 
 .ui-btn-c:focus,
 .ui-btn-c.ui-focus,
-.ui-body-c.ui-input-text.ui-focus,
-.ui-body-c.ui-input-search.ui-focus {
+.ui-body-c.ui-focus {
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{a-bactive-background-color}*/;
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{a-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#387bbe /*{a-bactive-background-color}*/;
@@ -522,8 +506,7 @@ button,
 
 .ui-btn-d:focus,
 .ui-btn-d.ui-focus,
-.ui-body-d.ui-input-text.ui-focus,
-.ui-body-d.ui-input-search.ui-focus {
+.ui-body-d.ui-focus {
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{a-bactive-background-color}*/;
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{a-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#387bbe /*{a-bactive-background-color}*/;
@@ -635,8 +618,7 @@ button,
 
 .ui-btn-e:focus,
 .ui-btn-e.ui-focus,
-.ui-body-e.ui-input-text.ui-focus,
-.ui-body-e.ui-input-search.ui-focus {
+.ui-body-e.ui-focus {
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{a-bactive-background-color}*/;
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{a-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#387bbe /*{a-bactive-background-color}*/;
@@ -906,12 +888,21 @@ button,
 	pointer-events: none;
 }
 
-/* Outline focus style when no box-shadow
+/* Focus state outline
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-mobile-nosupport-boxshadow .ui-focus,
+.ui-btn:focus,
+.ui-btn.ui-focus {
+	outline: 0;
+}
+/* Unset box-shadow in browsers that don't do it right */
+.ui-mobile-nosupport-boxshadow * {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
 .ui-mobile-nosupport-boxshadow .ui-btn:focus,
-.ui-mobile-nosupport-boxshadow .ui-link-inherit:focus {
+.ui-mobile-nosupport-boxshadow .ui-focus {
 	outline-width: 1px;
 	outline-style: auto;
 }
