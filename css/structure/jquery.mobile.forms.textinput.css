@@ -15,6 +15,7 @@ div.ui-input-has-clear {
 textarea.ui-input-text {
 	padding: .4em;
 	height: 3.125em;
+	resize: vertical;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-ms-box-sizing: border-box;
