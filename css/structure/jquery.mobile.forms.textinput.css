@@ -73,17 +73,19 @@ div.ui-input-text,
 	display: none;
 }
 /* Resolves issue #5166: Added to support issue introduced in Firefox 15. We can likely remove this in the future. */
-input::-moz-placeholder,
-textarea::-moz-placeholder {
+.ui-input-text input::-moz-placeholder,
+.ui-input-search input::-moz-placeholder,
+textarea.ui-input-text::-moz-placeholder {
 	color: #aaa;
 }
 /* Resolves issue #5131: Width of textinput depends on its type,
 for Android 4.1 */
-input[type=number]::-webkit-outer-spin-button {
+.ui-input-text input[type=number]::-webkit-outer-spin-button {
 	margin: 0;
 }
-/* Resolves issue #5756: Textinput in IE10 has a default clear icon */
-input[data-clear-btn=true]::-ms-clear {
+/* Resolves issue #5756: Textinput in IE10 has a default clear button */
+.ui-input-text input::-ms-clear,
+.ui-input-search input::-ms-clear {
 	display: none;
 }
 .ui-input-text input:focus,
