@@ -19,7 +19,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 	_create: function() {
 
 		var $navbar = this.element,
-			$navbtns = $navbar.find( "a" ),
+			$navbtns = $navbar.find( "a" ).not( ":jqmData(role='none')" ),
 			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ?
 									this.options.iconpos : undefined;
 
