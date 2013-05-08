@@ -3,12 +3,6 @@
 	margin: .5em 0;
 	background-image: none;
 }
-.ui-input-has-clear {
-	padding-right: 1.875em;
-}
-.ui-input-search {
-	padding: 0 1.875em 0 1.5em;
-}
 textarea.ui-input-text {
 	height: 3.125em;
 	resize: vertical;
@@ -21,7 +15,7 @@ textarea.ui-input-text {
 .ui-input-search input,
 textarea.ui-input-text {
 	padding: .4em;
-	min-height: 1.4em;
+	min-height: 2.2em;
 	line-height: 1.4em;
 	font-size: 16px;
 	display: block;
@@ -41,19 +35,37 @@ textarea.ui-mini {
 }
 .ui-input-text input,
 .ui-input-search input {
-	display: block;
 	margin: 0;
+	text-align: left; /* Opera aligns type="date" right by default */
 	border: none;
 	background: transparent none;
 	-webkit-appearance: none;
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
 }
-div.ui-input-text,
+.ui-input-has-clear,
 .ui-input-search {
 	position: relative;
 }
+/* Padding on the div instead of input because of browser spinners etc. */
+.ui-input-has-clear {
+	padding-right: 2.25em;
+}
+.ui-input-has-clear input {
+	padding-right: 0;
+	/* Autofill on Chrome has bg color so we unset corners right as well. */
+	-webkit-border-top-right-radius: 0;
+	border-top-right-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.ui-input-search input {
+	padding-left: 1.75em;
+	padding-right: 2.25em;
+}
 .ui-input-search:after {
 	position: absolute;
-	left: .375em;
+	left: .3125em;
 	top: 50%;
 	margin-top: -9px;
 	content: "";
