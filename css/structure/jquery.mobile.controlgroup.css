@@ -8,6 +8,19 @@ fieldset.ui-controlgroup {
 .ui-field-contain fieldset.ui-controlgroup {
 	margin: 0;
 }
+.ui-controlgroup .ui-btn,
+.ui-controlgroup .ui-checkbox,
+.ui-controlgroup .ui-radio,
+.ui-controlgroup .ui-select {
+	margin: 0;
+}
+.ui-controlgroup .ui-btn:focus,
+.ui-controlgroup .ui-btn.ui-focus {
+	z-index: 1;
+}
+.ui-controlgroup li {
+	list-style: none;
+}
 .ui-controlgroup-horizontal .ui-controlgroup-controls {
 	display: inline-block;
 	vertical-align: middle;
@@ -28,17 +41,6 @@ fieldset.ui-controlgroup {
 .ui-controlgroup-horizontal .ui-select {
 	float: left;
 	clear: none;
-	margin: 0;
-}
-.ui-controlgroup .ui-btn {
-	margin: 0;
-}
-.ui-controlgroup .ui-btn:focus,
-.ui-controlgroup .ui-btn.ui-focus {
-	z-index: 1;
-}
-.ui-controlgroup li {
-	list-style: none;
 }
 .ui-controlgroup-horizontal button.ui-btn,
 .ui-controlgroup .ui-btn-icon-notext {

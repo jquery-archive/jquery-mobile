@@ -53,7 +53,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function() {
-		var classes = "";
+		var inline = this.options.inline || this.element.jqmData( "inline" ),
+			mini = this.options.mini || this.element.jqmData( "mini" ),
+			classes = "";
 		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
 		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
@@ -64,6 +66,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 		if (  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = " ui-btn-right";
+		}
+
+		if ( inline ) {
+			classes += " ui-btn-inline";
+		}
+		if ( mini ) {
+			classes += " ui-mini";
 		}
 
 		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
@@ -100,8 +109,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 			options = this.options,
 
-			inline = options.inline || this.select.jqmData( "inline" ),
-			mini = options.mini || this.select.jqmData( "mini" ),
 			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
 			// TODO values buttonId and menuId are undefined here
@@ -113,10 +120,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 							" ui-shadow-icon" :
 								"" ) ) :
 						"" ) +
-					( inline ? " ui-btn-inline" : "" ) +
 					( options.corners ? " ui-corner-all" : "" ) +
-					( options.shadow ? " ui-shadow" : "" ) +
-					( mini ? " ui-mini" : "" ) );
+					( options.shadow ? " ui-shadow" : "" ) );
 
 		this.setButtonText();
 
