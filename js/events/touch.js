@@ -158,13 +158,14 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					};
 		},
 
-		handleSwipe: function( start, stop ) {
+		handleSwipe: function( start, stop, thisObject, origTarget ) {
 			if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
 				Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
 				Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+				var direction = start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight";
 
-				start.origin.trigger( "swipe" )
-					.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
+				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget }) );
+				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget } ) );
 			}
 		},
 
@@ -173,8 +174,9 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				$this = $( thisObject );
 
 			$this.bind( touchStartEvent, function( event ) {
-				var start = $.event.special.swipe.start( event ),
-					stop;
+				var stop,
+					start = $.event.special.swipe.start( event ),
+					origTarget = event.target;
 
 				function moveHandler( event ) {
 					if ( !start ) {
@@ -189,14 +191,14 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					}
 				}
 
-				$this.bind( touchMoveEvent, moveHandler );
-				$document.one( touchStopEvent, function() {
-					$this.unbind( touchMoveEvent, moveHandler );
+				$this.bind( touchMoveEvent, moveHandler )
+					.one( touchStopEvent, function() {
+						$this.unbind( touchMoveEvent, moveHandler );
 
-					if ( start && stop ) {
-						$.event.special.swipe.handleSwipe( start, stop );
-					}
-					start = stop = undefined;
+						if ( start && stop ) {
+							$.event.special.swipe.handleSwipe( start, stop, thisObject, origTarget );
+						}
+						start = stop = undefined;
 				});
 			});
 		},
