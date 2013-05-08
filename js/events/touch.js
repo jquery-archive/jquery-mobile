@@ -76,13 +76,14 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	// also handles taphold
 	$.event.special.tap = {
 		tapholdThreshold: 750,
-
+		emitTapOnTaphold: true,
 		setup: function() {
 			var thisObject = this,
-				$this = $( thisObject );
+				$this = $( thisObject ),
+				isTaphold = false;
 
 			$this.bind( "vmousedown", function( event ) {
-
+				isTaphold = false;
 				if ( event.which && event.which !== 1 ) {
 					return false;
 				}
@@ -107,7 +108,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 					// ONLY trigger a 'tap' event if the start target is
 					// the same as the stop target.
-					if ( origTarget === event.target ) {
+					if ( $.event.special.tap.emitTapOnTaphold && !isTaphold && origTarget === event.target ) {
 						triggerCustomEvent( thisObject, "tap", event );
 					}
 				}
@@ -117,6 +118,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				$document.bind( "vmousecancel", clearTapHandlers );
 
 				timer = setTimeout( function() {
+					isTaphold = true;
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 				}, $.event.special.tap.tapholdThreshold );
 			});
