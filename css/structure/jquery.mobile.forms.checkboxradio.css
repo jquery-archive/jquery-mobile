@@ -1,19 +1,16 @@
 .ui-checkbox,
 .ui-radio {
+	margin: .5em 0;
 	position: relative;
 	clear: both;
-	margin: 0;
 	z-index: 1;
 }
 .ui-checkbox .ui-btn,
 .ui-radio .ui-btn {
+	margin: 0;
 	text-align: left;
 	white-space: normal; /* Nowrap + ellipsis doesn't work on label. Issue #1419. */
 	z-index: 2;
-}
-.ui-controlgroup .ui-checkbox .ui-btn,
-.ui-controlgroup .ui-radio .ui-btn {
-	margin: 0;
 }
 .ui-checkbox .ui-btn-icon-top,
 .ui-radio .ui-btn-icon-top,
@@ -32,16 +29,16 @@
 	position: absolute;
 	left: .625em;
 	top: 50%;
-	width: 10px;
-	height: 10px;
-	margin: -5px 0 0 0;
+	width: 18px;
+	height: 18px;
+	margin: -9px 0 0 0;
 	outline: 0 !important;
 	z-index: 1;
 }
 .ui-controlgroup-horizontal .ui-checkbox input,
 .ui-controlgroup-horizontal .ui-radio input {
 	left: 50%;
-	margin-left: -5px;
+	margin-left: -9px;
 }
 .ui-checkbox input:disabled,
 .ui-radio input:disabled {

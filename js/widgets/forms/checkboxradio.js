@@ -205,7 +205,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	},
 
 	_setMini: function( value ) {
-		this.label.toggleClass( "ui-mini", !!value );
+		/* TODO: expose the wrapper in _create */
+		this.label.parent().toggleClass( "ui-mini", !!value );
 	},
 
 	widget: function() {
