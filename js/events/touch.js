@@ -79,9 +79,11 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 		setup: function() {
 			var thisObject = this,
-				$this = $( thisObject );
+				$this = $( thisObject ),
+				isTapHold = false;
 
 			$this.bind( "vmousedown", function( event ) {
+				isTapHold = false;
 
 				if ( event.which && event.which !== 1 ) {
 					return false;
@@ -107,7 +109,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 					// ONLY trigger a 'tap' event if the start target is
 					// the same as the stop target.
-					if ( origTarget === event.target ) {
+					if ( !isTapHold && origTarget === event.target ) {
 						triggerCustomEvent( thisObject, "tap", event );
 					}
 				}
@@ -117,6 +119,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				$document.bind( "vmousecancel", clearTapHandlers );
 
 				timer = setTimeout( function() {
+					isTapHold = true;
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 				}, $.event.special.tap.tapholdThreshold );
 			});
