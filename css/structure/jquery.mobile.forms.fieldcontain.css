@@ -31,7 +31,7 @@
 		display: inline-block;
 		vertical-align: top;
 		width: 20%;
-		margin: 0 2% 0 0;
+		margin: .6em 2% 0 0;
 	}
 	.ui-popup .ui-field-contain > label,
 	.ui-popup .ui-field-contain .ui-controlgroup-label,

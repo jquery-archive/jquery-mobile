@@ -339,13 +339,11 @@ div.ui-mobile-viewport {
 }
 
 /* Form labels */
-label,
+.ui-mobile label,
 .ui-controlgroup-label {
-	font-size: 16px;
-	line-height: 1.4;
-	font-weight: normal;
 	display: block;
-	margin: 0 0 .3em;
+	font-size: 16px;
+	margin: 0 0 .4em;
 }
 /* Accessible content hiding */
 .ui-hide-label > label,
