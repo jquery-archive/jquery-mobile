@@ -24,18 +24,24 @@
 .ui-controlgroup-horizontal .ui-checkbox .ui-btn:after,
 .ui-controlgroup-horizontal .ui-radio .ui-btn:after {
 	content: none;
+	display: none;
 }
 /* Native input positioning */
 .ui-checkbox input,
 .ui-radio input {
 	position: absolute;
-	left: 1em;
+	left: .625em;
 	top: 50%;
 	width: 10px;
 	height: 10px;
 	margin: -5px 0 0 0;
 	outline: 0 !important;
 	z-index: 1;
+}
+.ui-controlgroup-horizontal .ui-checkbox input,
+.ui-controlgroup-horizontal .ui-radio input {
+	left: 50%;
+	margin-left: -5px;
 }
 .ui-checkbox input:disabled,
 .ui-radio input:disabled {
