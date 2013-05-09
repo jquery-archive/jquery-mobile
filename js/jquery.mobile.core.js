@@ -318,7 +318,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	// or setting of an html element's text, its only purpose is
 	// to return the html encoded version of the text in all cases. (thus the name)
 	$.fn.getEncodedText = function() {
-		return $( "<div/>" ).text( $( this ).text() ).html();
+		return $( "<a>" ).text( $( this ).text() ).html();
 	};
 
 	// fluent helper function for the mobile namespaced equivalent
