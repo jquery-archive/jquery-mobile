@@ -108,7 +108,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 					// ONLY trigger a 'tap' event if the start target is
 					// the same as the stop target.
-					if ( $.event.special.tap.emitTapOnTaphold && !isTaphold && origTarget === event.target ) {
+					if ( !isTaphold && origTarget === event.target ) {
 						triggerCustomEvent( thisObject, "tap", event );
 					}
 				}
@@ -118,7 +118,9 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				$document.bind( "vmousecancel", clearTapHandlers );
 
 				timer = setTimeout( function() {
-					isTaphold = true;
+					if ( !$.event.special.tap.emitTapOnTaphold ) {
+						isTaphold = true;
+					}
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
 				}, $.event.special.tap.tapholdThreshold );
 			});
