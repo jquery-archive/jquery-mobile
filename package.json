@@ -38,7 +38,7 @@
     "grunt-git-authors": "1.1.0-beta.1",
     "grunt-qunit-junit": "latest",
     "requirejs": "2.1.x",
-    "grunt-md5-manifest": "~0.4.0"
+    "grunt-hash-manifest": "~0.4.0"
   },
   "main": "Gruntfile.js",
   "engines": {

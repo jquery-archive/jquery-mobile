@@ -17,7 +17,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
 	// jQuery.mobile configurable options
-	$.mobile = $.extend($.mobile, {
+	$.extend($.mobile, {
 
 		// Version of the jQuery Mobile Framework
 		version: __version__,
@@ -97,40 +97,23 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		window: $( window ),
 		document: $( document ),
 
-		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
-			ALT: 18,
 			BACKSPACE: 8,
-			CAPS_LOCK: 20,
 			COMMA: 188,
-			COMMAND: 91,
-			COMMAND_LEFT: 91, // COMMAND
-			COMMAND_RIGHT: 93,
-			CONTROL: 17,
 			DELETE: 46,
 			DOWN: 40,
 			END: 35,
 			ENTER: 13,
 			ESCAPE: 27,
 			HOME: 36,
-			INSERT: 45,
 			LEFT: 37,
-			MENU: 93, // COMMAND_RIGHT
-			NUMPAD_ADD: 107,
-			NUMPAD_DECIMAL: 110,
-			NUMPAD_DIVIDE: 111,
-			NUMPAD_ENTER: 108,
-			NUMPAD_MULTIPLY: 106,
-			NUMPAD_SUBTRACT: 109,
 			PAGE_DOWN: 34,
 			PAGE_UP: 33,
 			PERIOD: 190,
 			RIGHT: 39,
-			SHIFT: 16,
 			SPACE: 32,
 			TAB: 9,
-			UP: 38,
-			WINDOWS: 91 // COMMAND
+			UP: 38
 		},
 
 		// Place to store various widget extensions
@@ -177,10 +160,6 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// and then camel case the attribute string. Add the result
 		// to our nsNormalizeDict so we don't have to do this again.
 		nsNormalize: function( prop ) {
-			if ( !prop ) {
-				return;
-			}
-
 			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
 		},
 
@@ -272,7 +251,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 			// jQuery version is here as a normalized fallback for platforms like Symbian
 			return window.innerHeight || $.mobile.window.height();
 		}
-	}, $.mobile );
+	});
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
@@ -322,20 +301,21 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	};
 
 	$.fn.addDependents = function( newDependents ) {
-		$.addDependents( $( this ), newDependents );
+		$.addDependents( this , newDependents );
 	};
 
 	$.addDependents = function( elem, newDependents ) {
-		var dependents = $( elem ).jqmData( "dependents" ) || $();
+		var $elem = $( elem ),
+			dependents = $elem.jqmData( "dependents" ) || $();
 
-		$( elem ).jqmData( "dependents", $.merge( dependents, newDependents ) );
+		$elem.jqmData( "dependents", $( dependents ).add( newDependents ) );
 	};
 
 	// note that this helper doesn't attempt to handle the callback
 	// or setting of an html element's text, its only purpose is
 	// to return the html encoded version of the text in all cases. (thus the name)
 	$.fn.getEncodedText = function() {
-		return $( "<div/>" ).text( $( this ).text() ).html();
+		return $( "<a>" ).text( $( this ).text() ).html();
 	};
 
 	// fluent helper function for the mobile namespaced equivalent

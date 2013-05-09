@@ -38,7 +38,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-css" );
 	grunt.loadNpmTasks( "grunt-git-authors" );
 	grunt.loadNpmTasks( "grunt-qunit-junit" );
-	grunt.loadNpmTasks( "grunt-md5-manifest" );
+	grunt.loadNpmTasks( "grunt-hash-manifest" );
 
 	// load the project's default tasks
 	grunt.loadTasks( "build/tasks");
@@ -341,9 +341,10 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		"md5-manifest": {
+		"hash-manifest": {
 			cdn: {
 				options: {
+					algo: "md5",
 					cwd: "<%= files.cdn %>"
 				},
 				src: [ "**/*" ],
@@ -551,7 +552,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed" ] );
 
-	grunt.registerTask( "cdn", [ "release:init", "clean:cdn", "copy:cdn", "md5-manifest:cdn", "compress:cdn" ] );
+	grunt.registerTask( "cdn", [ "release:init", "clean:cdn", "copy:cdn", "hash-manifest:cdn", "compress:cdn", "clean:cdn" ] );
 
 	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
