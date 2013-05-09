@@ -3,21 +3,12 @@
 	margin: .5em 0;
 	background-image: none;
 }
-textarea.ui-input-text {
-	height: 3.125em;
-	resize: vertical;
-	-webkit-transition: height 200ms linear;
-	-moz-transition: height 200ms linear;
-	-o-transition: height 200ms linear;
-	transition: height 200ms linear;
-}
 .ui-input-text input,
 .ui-input-search input,
 textarea.ui-input-text {
 	padding: .4em;
 	min-height: 2.2em;
 	line-height: 1.4em;
-	font-size: 16px;
 	display: block;
 	width: 100%;
 	-webkit-box-sizing: border-box;
@@ -25,13 +16,6 @@ textarea.ui-input-text {
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 	outline: 0;
-}
-.ui-input-text.ui-mini,
-.ui-input-search.ui-mini,
-.ui-input-text.ui-mini input,
-.ui-input-search.ui-mini input,
-textarea.ui-mini {
-	font-size: 14px;
 }
 .ui-input-text input,
 .ui-input-search input {
@@ -42,6 +26,27 @@ textarea.ui-mini {
 	-webkit-appearance: none;
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
+}
+textarea.ui-input-text {
+	height: 3.125em;
+	resize: vertical;
+	-webkit-transition: height 200ms linear;
+	-moz-transition: height 200ms linear;
+	-o-transition: height 200ms linear;
+	transition: height 200ms linear;
+}
+.ui-mini .ui-input-text input,
+.ui-mini .ui-input-search input,
+.ui-input-text.ui-mini input,
+.ui-input-search.ui-mini input,
+.ui-mini textarea.ui-input-text,
+textarea.ui-mini {
+	font-size: 14px;
+}
+/* Same margin for mini textareas as other mini sized widgets (12.5/14 * 0.5em) */
+.ui-mini textarea.ui-input-text,
+textarea.ui-mini {
+	margin: .446em 0;
 }
 .ui-input-has-clear,
 .ui-input-search {
