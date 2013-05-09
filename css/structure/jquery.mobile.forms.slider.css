@@ -159,7 +159,9 @@ div.ui-slider-switch.ui-mini {
 	-webkit-background-clip: padding;
 	background-clip: padding-box;
 }
-
+.ui-field-contain div.ui-slider-switch {
+	margin: 0;
+}
 @media (min-width: 28em) {
 	.ui-field-contain div.ui-slider-switch,
 	.ui-field-contain.ui-hide-label div.ui-slider-switch {
