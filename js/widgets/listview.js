@@ -12,8 +12,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", 
 //Keeps track of the number of lists per page UID
 //This allows support for multiple nested list in the same page
 //https://github.com/jquery/jquery-mobile/issues/1617
-var listCountPerPage = {},
-	getAttr = $.mobile.getAttribute;
+var getAttr = $.mobile.getAttribute;
 
 $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
@@ -98,7 +97,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 	refresh: function( create ) {
 		this.parentPage = this.element.closest( ".ui-page" );
-		this._createSubPages();
 
 		var o = this.options,
 			$list = this.element,
@@ -287,95 +285,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 	//create a string for ID/subpage url creation
 	_idStringEscape: function( str ) {
 		return str.replace(/[^a-zA-Z0-9]/g, "-");
-	},
-
-	_createSubPages: function() {
-		var parentList = this.element,
-			parentPage = parentList.closest( ".ui-page" ),
-			parentUrl = getAttr( parentPage[ 0 ], "url", true ),
-			parentId = parentUrl || parentPage[ 0 ][ $.expando ],
-			parentListId = parentList.attr( "id" ),
-			o = this.options,
-			dns = "data-" + $.mobile.ns,
-			self = this,
-			persistentFooter = parentPage.find( ":jqmData(role='footer')" ),
-			persistentFooterID = ( persistentFooter.length > 0 ? getAttr( persistentFooter[ 0 ], "id", true ) : undefined ),
-			hasSubPages,
-			newRemove = function( e, ui ) {
-				var nextPage = ui.nextPage, npURL,
-					prEvent = new $.Event( "pageremove" );
-
-				if ( ui.nextPage ) {
-					npURL = getAttr( nextPage[ 0 ], "url", true );
-					if ( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ) {
-						self.childPages().remove();
-						parentPage.trigger( prEvent );
-						if ( !prEvent.isDefaultPrevented() ) {
-							parentPage.removeWithDependents();
-						}
-					}
-				}
-			};
-
-		if ( typeof listCountPerPage[ parentId ] === "undefined" ) {
-			listCountPerPage[ parentId ] = -1;
-		}
-
-		parentListId = parentListId || ++listCountPerPage[ parentId ];
-
-		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
-			var list = $( this ),
-				listId = list.attr( "id" ) || parentListId + "-" + i,
-				parent = list.parent(),
-				nodeElsFull = $( list.prevAll().toArray().reverse() ),
-				nodeEls = nodeElsFull.length ? nodeElsFull : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
-				title = nodeEls.first().getEncodedText(),//url limits to first 30 chars of text
-				id = ( parentUrl || "" ) + "&" + $.mobile.subPageUrlKey + "=" + listId,
-				theme = getAttr( list[ 0 ], "theme", true ) || o.theme,
-				countTheme = getAttr( list[ 0 ], "counttheme", true ) || getAttr( parentList[ 0 ], "counttheme", true ) || o.countTheme,
-				newPage, anchor;
-
-			//define hasSubPages for use in later removal
-			hasSubPages = true;
-
-			newPage = list.detach()
-						.wrap( "<div " + dns + "role='page' " + dns + "url='" + id + "' " + dns + "theme='" + theme + "' " + dns + "count-theme='" + countTheme + "'><div " + dns + "role='content'></div></div>" )
-						.parent()
-							.before( "<div " + dns + "role='header' " + dns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
-							.after( persistentFooterID ? $( "<div " + dns + "role='footer' " + dns + "id='"+ persistentFooterID +"'>" ) : "" )
-							.parent()
-								.appendTo( $.mobile.pageContainer );
-
-			newPage.page();
-
-			anchor = parent.find( "a:first" );
-
-			if ( !anchor.length ) {
-				anchor = $( "<a/>" ).html( nodeEls || title ).prependTo( parent.empty() );
-			}
-
-			anchor.attr( "href", "#" + id );
-
-		}).listview();
-
-		// on pagehide, remove any nested pages along with the parent page, as long as they aren't active
-		// and aren't embedded
-		if ( hasSubPages &&
-			parentPage.is( ":jqmData(external-page='true')" ) &&
-			parentPage.data( "mobile-page" ).options.domCache === false ) {
-
-			// unbind the original page remove and replace with our specialized version
-			parentPage
-				.unbind( "pagehide.remove" )
-				.bind( "pagehide.remove", newRemove);
-		}
-	},
-
-	// TODO sort out a better way to track sub pages of the listview this is brittle
-	childPages: function() {
-		var parentUrl = this.parentPage.jqmData( "url" );
-
-		return $( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey + "')" );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
