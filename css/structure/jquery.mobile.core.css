@@ -241,9 +241,23 @@ div.ui-mobile-viewport {
 .ui-mini .ui-btn {
 	font-size: inherit;
 }
-.ui-mini.ui-btn-icon-notext {
-	padding: 0;
+/* Make buttons in toolbars default to mini and inline. */
+.ui-header .ui-btn,
+.ui-footer .ui-btn {
+	font-size: 12.5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+/* To ensure same top and left/right position when ui-btn-left/right are added to something other than buttons. */
+.ui-header .ui-btn-left,
+.ui-header .ui-btn-right {
+	font-size: 12.5px;
+}
+.ui-mini.ui-btn-icon-notext,
+.ui-header .ui-btn-icon-notext,
+.ui-footer .ui-btn-icon-notext {
 	font-size: 16px;	
+	padding: 0;
 }
 .ui-btn-inline {
 	display: inline-block;
@@ -261,6 +275,13 @@ div.ui-mobile-viewport {
 }
 .ui-btn-icon-bottom {
 	padding-bottom: 2.5em;
+}
+.ui-header .ui-btn-icon-top,
+.ui-footer .ui-btn-icon-top,
+.ui-header .ui-btn-icon-bottom,
+.ui-footer .ui-btn-icon-bottom {
+	padding-left: .3125em;
+	padding-right: .3125em;
 }
 .ui-btn[class*="ui-icon-"]:after {
 	content: "";
@@ -297,41 +318,31 @@ div.ui-mobile-viewport {
 	top: auto;
 	bottom: .625em;
 }
-.ui-mobile .ui-btn-left,
-.ui-mobile .ui-btn-right,
-.ui-mobile .ui-btn-left > .ui-btn,
-.ui-mobile .ui-btn-right > .ui-btn {
+/* Buttons in header position classes */
+.ui-header .ui-btn-left,
+.ui-header .ui-btn-right,
+.ui-btn-left > [class*="ui-"],
+.ui-btn-right > [class*="ui-"] {
 	margin: 0;
 }
 .ui-btn-left,
 .ui-btn-right {
 	position: absolute;
-	top: .24em; /* 3px font-size: 12.5px */
+	top: .24em;
 }
 .ui-btn-left {
-	left: .25em;
+	left: .4em;
 }
 .ui-btn-right {
-	right: .25em;
+	right: .4em;
 }
-.ui-btn-left.ui-btn-icon-notext,
-.ui-btn-right.ui-btn-icon-notext {
-	top: .48em; /* 6px font-size: 12.5px */
+.ui-btn-icon-notext.ui-btn-left {
+	top: .375em;
+	left: .3125em;
 }
-.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-left,
-.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-right {
-	top: .32em; /* 4px font-size: 12.5px */
-}
-.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-left.ui-btn-icon-notext,
-.ui-header-fixed:not(.ui-fixed-hidden) .ui-btn-right.ui-btn-icon-notext {
-	top: .56em; /* 7px font-size: 12.5px */
-}
-.ui-header .ui-btn-icon-top,
-.ui-footer .ui-btn-icon-top,
-.ui-header .ui-btn-icon-bottom,
-.ui-footer .ui-btn-icon-bottom {
-	padding-left: .24em; /* 3px font-size: 12.5px */
-	padding-right: .24em; /* 3px font-size: 12.5px */
+.ui-btn-icon-notext.ui-btn-right {
+	top: .375em;
+	right: .3125em;
 }
 
 /* Form labels */
