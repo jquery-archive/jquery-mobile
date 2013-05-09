@@ -290,9 +290,6 @@ div.ui-mobile-viewport {
 	width: 18px;
 	height: 18px;
 }
-.ui-icon-loading:after {
-	content: none;
-}
 .ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
 .ui-btn-icon-right:after {
