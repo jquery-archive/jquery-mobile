@@ -304,13 +304,14 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	};
 
 	$.fn.addDependents = function( newDependents ) {
-		$.addDependents( $( this ), newDependents );
+		$.addDependents( this , newDependents );
 	};
 
 	$.addDependents = function( elem, newDependents ) {
-		var dependents = $( elem ).jqmData( "dependents" ) || $();
+		var $elem = $( elem ),
+			dependents = $elem.jqmData( "dependents" ) || $();
 
-		$( elem ).jqmData( "dependents", $.merge( dependents, newDependents ) );
+		$elem.jqsmData( "dependents", $.add( dependents, newDependents ) );
 	};
 
 	// note that this helper doesn't attempt to handle the callback
