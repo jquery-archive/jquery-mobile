@@ -23,9 +23,7 @@ button.ui-btn-icon-notext {
 	margin-left: 0;
 }
 /* Hide the native input element */
-.ui-btn > input[type="button"],
-.ui-btn > input[type="submit"],
-.ui-btn > input[type="reset"] {
+.ui-input-btn input {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -48,9 +46,7 @@ button.ui-btn-icon-notext {
 	z-index: 2;
 }
 /* Fixes IE/WP filter alpha opacity bugs */
-.ui-state-disabled input[type="button"],
-.ui-state-disabled input[type="submit"],
-.ui-state-disabled input[type="reset"] {
+.ui-input-btn.ui-state-disabled input {
 	position: absolute !important;
 	top: -9999px;
 	left: -9999px;
