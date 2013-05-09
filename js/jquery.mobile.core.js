@@ -17,7 +17,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
 	// jQuery.mobile configurable options
-	$.mobile = $.extend($.mobile, {
+	$.extend($.mobile, {
 
 		// Version of the jQuery Mobile Framework
 		version: __version__,
@@ -254,7 +254,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 			// jQuery version is here as a normalized fallback for platforms like Symbian
 			return window.innerHeight || $.mobile.window.height();
 		}
-	}, $.mobile );
+	});
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
