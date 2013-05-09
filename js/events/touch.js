@@ -112,6 +112,8 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					// the same as the stop target.
 					if ( !isTaphold && origTarget === event.target ) {
 						triggerCustomEvent( thisObject, "tap", event );
+					} else if ( isTaphold ) {
+						event.stopPropagation();
 					}
 				}
 
