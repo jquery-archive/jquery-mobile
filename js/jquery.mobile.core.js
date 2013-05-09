@@ -307,7 +307,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		var $elem = $( elem ),
 			dependents = $elem.jqmData( "dependents" ) || $();
 
-		$elem.jqsmData( "dependents", $.add( dependents, newDependents ) );
+		$elem.jqmData( "dependents", $( dependents ).add( newDependents ) );
 	};
 
 	// note that this helper doesn't attempt to handle the callback
