@@ -1,13 +1,9 @@
 .ui-navbar {
 	max-width: 100%;
 }
-.ui-navbar.ui-mini {
-	margin: 0;
-	padding: 0;
-}
 .ui-navbar ul:before,
 .ui-navbar ul:after {
-	content: " ";
+	content: "";
 	display: table;
 }
 .ui-navbar ul:after {
@@ -25,25 +21,17 @@
 	zoom: 1;
 }
 .ui-navbar li .ui-btn {
+	font-size: 12.5px;
 	display: block;
-	text-align: center;
 	margin: 0 -1px 0 0;
 	border-right-width: 0;
-	padding-top: .7em;
-	padding-bottom: .8em;
-	font-size: 12.5px;
 }
 .ui-navbar .ui-btn:focus {
 	z-index: 1;
 }
-.ui-navbar li .ui-btn-icon-top {
-	padding-top: 2.4em;
-}
-.ui-navbar li .ui-btn-icon-bottom {
-	padding-bottom: 2.4em;
-}
-.ui-navbar li .ui-btn-icon-right:after {
-	right: .48em; /* 6px font-size: 12.5px */
+.ui-header .ui-navbar li .ui-btn-icon-right:after,
+.ui-footer .ui-navbar li .ui-btn-icon-right:after {
+	margin-right: 1px;
 }
 /* add border if not in header/footer (full width) */
 .ui-navbar li:last-child .ui-btn,

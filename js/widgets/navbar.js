@@ -22,7 +22,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			$navbtns = $navbar.find( "a" ),
 			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
 
-		$navbar.addClass( "ui-navbar ui-mini" )
+		$navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable()
