@@ -160,10 +160,6 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// and then camel case the attribute string. Add the result
 		// to our nsNormalizeDict so we don't have to do this again.
 		nsNormalize: function( prop ) {
-			if ( !prop ) {
-				return;
-			}
-
 			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
 		},
 
