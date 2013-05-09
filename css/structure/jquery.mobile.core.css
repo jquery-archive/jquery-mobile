@@ -111,7 +111,7 @@ div.ui-mobile-viewport {
 	overflow: hidden;
 }
 .ui-loader-verbose h1 {
-	font-size: 16px;
+	font-size: 1em;
 	margin: 0;
 	text-align: center;
 }
@@ -150,10 +150,6 @@ div.ui-mobile-viewport {
 	display: block;
 	clear: both;
 }
-.ui-bar {
-	font-size: 16px;
-	margin: 0;
-}
 .ui-bar h1,
 .ui-bar h2,
 .ui-bar h3,
@@ -162,7 +158,7 @@ div.ui-mobile-viewport {
 .ui-bar h6 {
 	margin: 0;
 	padding: 0;
-	font-size: 16px;
+	font-size: 1em;
 	display: inline-block;
 }
 .ui-header,
@@ -177,9 +173,9 @@ div.ui-mobile-viewport {
 }
 .ui-header .ui-title,
 .ui-footer .ui-title {
+	font-size: 1em;
 	min-height: 1.1em;
 	text-align: center;
-	font-size: 16px;
 	display: block;
 	margin: .7em 30%;
 	padding: 0;
@@ -217,9 +213,11 @@ div.ui-mobile-viewport {
 
 /* Buttons and icons */
 .ui-btn {
+	font-size: 16px;
+	margin: .5em 0;
+	padding: .7em 1em;
 	display: block;
 	position: relative;
-	font-size: 16px;
 	text-align: center;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -229,8 +227,6 @@ div.ui-mobile-viewport {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-	margin: .5em 0;
-	padding: .7em 1em;
 }
 .ui-btn-icon-notext {
 	padding: 0;
@@ -342,8 +338,11 @@ div.ui-mobile-viewport {
 .ui-mobile label,
 .ui-controlgroup-label {
 	display: block;
-	font-size: 16px;
 	margin: 0 0 .4em;
+}
+.ui-mini label,
+.ui-mini .ui-controlgroup-label {
+	font-size: 16px;
 }
 /* Accessible content hiding */
 .ui-hide-label > label,
