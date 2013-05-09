@@ -328,6 +328,15 @@ define([
 
 			isPreservableHash: function( hash ) {
 				return hash.replace( "#", "" ).indexOf( this.uiStateKey ) === 0;
+			},
+
+			// Escape weird characters in the hash if it is to be used as a selector
+			hashToSelector: function( hash ) {
+				var hasHash = ( hash.substring( 0, 1 ) === "#" );
+				if ( hasHash ) {
+					hash = hash.substring( 1 );
+				}
+				return ( hasHash ? "#" : "" ) + hash.replace( /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1" );
 			}
 		};
 

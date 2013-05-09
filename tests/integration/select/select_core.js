@@ -107,23 +107,36 @@
 	});
 
 	asyncTest( "firing a click at least 400 ms later on the select screen overlay does close it", function(){
-		$.testHelper.sequence([
+		expect( 3 );
+
+		var prefix = ".firingAClick";
+		$.testHelper.detailedEventCascade([
 			function(){
 				// bring up the smaller choice menu
 				ok($("#select-choice-few-container a").length > 0, "there is in fact a button in the page");
 				$("#select-choice-few-container a").trigger("click");
 			},
 
-			function(){
+			{
+				popupafteropen: { src: $( "#select-choice-few\\.dotTest-listbox" ), event: "popupafteropen" + prefix },
+				timeout: { length: 1000 }
+			},
+
+			function( result ){
+				deepEqual( result.popupafteropen.timedOut, false, "Did receive 'popupafteropen'" );
 				//select the first menu item
-				$("#select-choice-few-menu a:first").click();
+				$("#select-choice-few\\.dotTest-menu a:first").click();
+			},
+
+			{
+				timeout: { length: 1000 }
 			},
 
 			function(){
-				deepEqual($("#select-choice-few-menu").parent().parent(".ui-popup-hidden").length, 1);
+				deepEqual($("#select-choice-few\\.dotTest-menu").parent().parent(".ui-popup-hidden").length, 1);
 				start();
 			}
-		], 1000);
+		]);
 	});
 
 	asyncTest( "a large select menu should use the default dialog transition", function(){
@@ -301,11 +314,11 @@
 			},
 
 			function(){
-				var firstMenuChoice = $("#select-choice-few-menu li:first");
+				var firstMenuChoice = $("#select-choice-few\\.dotTest-menu li:first");
 				ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
 						"default menu choice has the active button class" );
 
-				$("#select-choice-few-menu a:last").click();
+				$("#select-choice-few\\.dotTest-menu a:last").click();
 			},
 
 			function(){
@@ -314,7 +327,7 @@
 			},
 
 			function(){
-				var lastMenuChoice = $("#select-choice-few-menu li:last");
+				var lastMenuChoice = $("#select-choice-few\\.dotTest-menu li:last");
 				ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
 						"previously slected item has the active button class" );
 
@@ -405,7 +418,7 @@
 	});
 
 	asyncTest( "dialog size select title should match the label", function() {
-		var $select = $( "#select-choice-many-1" ),
+		var $select = $( "#select-choice-many-1\\.dotTest" ),
 			$label = $select.parent().siblings( "label" ),
 			$button = $select.siblings( "a" );
 
@@ -424,7 +437,7 @@
 	});
 
 	asyncTest( "dialog size select title should match the label when changed after the dialog markup is added to the DOM", function() {
-		var $select = $( "#select-choice-many-1" ),
+		var $select = $( "#select-choice-many-1\\.dotTest" ),
 			$label = $select.parent().siblings( "label" ),
 			$button = $select.siblings( "a" );
 
@@ -496,32 +509,103 @@
 				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
 			},
 			function() { $.mobile.back(); },
-			function() { start(); }
+
+			start
 		]);
 	});
 
 	asyncTest( "destroying a custom select menu leaves no traces", function() {
-		$.testHelper.pageSequence( [
-			function() { $.mobile.changePage( "#destroyTestCustom" ); },
-			function() {
-				var unenhancedSelect = $(
-						"<select data-" + ( $.mobile.ns || "" ) + "native-menu='false'>" +
-						"<option>Title</option>" +
-						"<option value='option1'>Option 1</option>" +
-						"<option value='option2'>Option 2</option>" +
-						"</select>"),
-					unenhancedSelectClone = unenhancedSelect.clone();
+		expect( 7 );
 
-				$( "#destroyTestCustom" ).append( unenhancedSelectClone );
+		var unenhancedSelectClone,
+			prefix = ".destroyingASelectMenuLeavesNoTraces",
+			id = "select-" + Math.round( Math.random() * 1177 ),
+			unenhancedSelect = $(
+				"<select id='" + id + "' data-" + ( $.mobile.ns || "" ) + "native-menu='false'>" +
+				"<option>Title</option>" +
+				"<option value='option1'>Option 1</option>" +
+				"<option value='option2'>Option 2</option>" +
+				"</select>");
+		$.testHelper.detailedEventCascade( [
+			function() {
+				$.mobile.changePage( "#destroyTest" );
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "0" }
+			},
+
+			function() {
+				unenhancedSelectClone = unenhancedSelect.clone();
+
+				$( "#destroyTest" ).append( unenhancedSelectClone );
 				unenhancedSelectClone.selectmenu();
+				$( "#" + id + "-button" ).click();
+			},
+
+			{
+				popupafteropen: { src: $.mobile.document, event: "popupafteropen" + prefix + "1" }
+			},
+
+			function( result ) {
+				deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
+				$( "#" + id + "-listbox" ).popup( "close" );
+			},
+
+			{
+				popupafterclose: { src: $.mobile.document, event: "popupafterclose" + prefix + "2" }
+			},
+
+			function( result ) {
+				var idx;
+
+				deepEqual( result.popupafterclose.timedOut, false, "Popup did close" );
+
 				unenhancedSelectClone.selectmenu( "destroy" );
 				unenhancedSelectClone.remove();
 
-				deepEqual( $( "#destroyTestCustom" ).children().length, 0, "After adding, enhancing, destroying, and removing the select menu, the page is empty" );
+				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the popup-sized select menu, the page is empty" );
 				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+
+				// Add a bunch of options to make sure the menu ends up larger than
+				// the screen, thus requiring a dialog
+				for ( idx = 3 ; idx < 60 ; idx++ ) {
+					unenhancedSelect.append( "<option value='option" + idx + "'>Option " + idx + "</option>" );
+				}
+				unenhancedSelectClone = unenhancedSelect.clone();
+				$( "#destroyTest" ).append( unenhancedSelectClone );
+				unenhancedSelectClone.selectmenu();
+				$( "#" + id + "-button" ).click();
 			},
-			function() { $.mobile.back(); },
-			function() { start(); }
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "3" }
+			},
+
+			function() {
+				// Close the dialog
+				$.mobile.activePage.find( "a:first" ).click();
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "4" }
+			},
+
+			function() {
+				unenhancedSelectClone.selectmenu( "destroy" );
+				unenhancedSelectClone.remove();
+
+				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, the page is empty" );
+				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+				deepEqual( $( "#" + id + "-dialog" ).length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, no dialog page is left behind" );
+				$.mobile.back();
+			},
+
+			{
+				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "5" }
+			},
+
+			start
 		]);
 	});
 

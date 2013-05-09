@@ -51,7 +51,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			$el = self.element,
 			page = $el.closest( ":jqmData(role='page')" ),
 			_getPageTheme = function() {
-				var $theme = $.data( page[0], "mobilePage" ).options.theme,
+				var $theme = $.data( page[0], "mobile-page" ).options.theme,
 				$pageThemeClass = "ui-body-" + $theme;
 				return $pageThemeClass;
 			},
@@ -220,8 +220,14 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._page.on( "click.panel" , "a", function( e ) {
 			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
 				e.preventDefault();
-				var $link = $( this );
+				var $link = $( this ),
+					$parent;
 				if ( ! $link.hasClass( "ui-link" ) ) {
+					// Check if we are in a listview
+					$parent = $link.parent().parent();
+					if ( $parent.hasClass( "ui-li" ) ) {
+						$link = $parent.parent();
+					}
 					$link.addClass( $.mobile.activeBtnClass );
 					self.element.one( "panelopen panelclose", function() {
 						$link.removeClass( $.mobile.activeBtnClass );

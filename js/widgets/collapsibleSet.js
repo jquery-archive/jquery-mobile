@@ -44,9 +44,9 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 				.bind( "expand", function( event ) {
 					var closestCollapsible = $( event.target )
 						.closest( ".ui-collapsible" );
-					if ( closestCollapsible.parent().is( ":jqmData(role='collapsible-set')" ) ) {
+					if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
 						closestCollapsible
-							.siblings( ".ui-collapsible" )
+							.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
 							.trigger( "collapse" );
 					}
 				});
@@ -55,7 +55,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 
 	_init: function() {
 		var $el = this.element,
-			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" ),
+			collapsiblesInSet = $el.children( ":mobile-collapsible, :jqmData(role='collapsible')" ),
 			expanded = collapsiblesInSet.filter( ":jqmData(collapsed='false')" );
 		this._refresh( "true" );
 
@@ -65,7 +65,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 	},
 
 	_refresh: function( create ) {
-		var collapsiblesInSet = this.element.children( ":jqmData(role='collapsible')" );
+		var collapsiblesInSet = this.element.children( ":mobile-collapsible, :jqmData(role='collapsible')" );
 
 		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
