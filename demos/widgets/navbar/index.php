@@ -13,7 +13,7 @@
 	<script src="../../../js/"></script>
 	<style>
 		.nav-glyphish-example .ui-btn { padding-top: 40px !important; }
-		.nav-glyphish-example .ui-icon:after { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+		.nav-glyphish-example .ui-btn:after { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
 		#chat:after { background:  url(../../_assets/img/glyphish-icons/09-chat2.png) 50% 50% no-repeat; background-size: 24px 22px; }
 		#email:after { background:  url(../../_assets/img/glyphish-icons/18-envelope.png) 50% 50% no-repeat; background-size: 24px 16px;  }
 		#login:after { background:  url(../../_assets/img/glyphish-icons/30-key.png) 50% 50% no-repeat;  background-size: 12px 26px; }
