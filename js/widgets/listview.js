@@ -136,11 +136,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					
 					a.first().addClass( buttonClass );
 					
-					if ( ol && value ) {
-						newStartCount = parseInt( value , 10 ) - 1;
-						a.css( "counter-reset", "listnumbering " + newStartCount );
-					}
-
 					if ( a.length > 1 ) {
 						itemClass += " ui-li-has-alt";
 						
@@ -162,18 +157,13 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					itemClass += " ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme );
 					
 					item.attr( "role", "heading" );
-
-					if ( ol && ( start || start === 0 ) ) {
-						newStartCount = parseInt( start , 10 ) - 1;
-						item.css( "counter-reset", "listnumbering " + newStartCount );
-					}
 				} else {
 					itemClass += " ui-li-static ui-fill-" + itemTheme;
-					
-					if ( ol && value ) {
-						newStartCount = parseInt( value , 10 ) - 1;
-						item.css( "counter-reset", "listnumbering " + newStartCount );
-					}
+				}
+				if ( ol && value ) {
+					var elem = ( a.length && !isDivider ) ? a : item;
+					newStartCount = parseInt( value , 10 ) - 1;
+					elem.css( "counter-reset", "listnumbering " + newStartCount );
 				}
 			}
 
