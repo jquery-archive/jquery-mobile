@@ -362,43 +362,55 @@ define( [
 			setTimeout( $.proxy(this, "_hideLoading"), 1500 );
 		},
 
-		_loadSuccess: function( url, absUrl, dataUrl, fileUrl, page, triggerData, settings, deferred ) {
+		_findLoaded: function( html ) {
+			var page, all = $( "<div></div>" );
+
+			//workaround to allow scripts to execute when included in page divs
+			all.get( 0 ).innerHTML = html;
+
+			page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
+
+			//if page elem couldn't be found, create one and insert the body element's contents
+			if ( !page.length ) {
+				page = $( "<div data-" + this._getNs() + "role='page'>" +
+					( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) +
+					"</div>" );
+			}
+
+			return page;
+		},
+
+		_loadSuccess: function( url, absUrl, dataUrl, fileUrl, triggerData, settings, deferred ) {
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
 				//use it as the new fileUrl, base path, etc
-				var all = $( "<div></div>" ),
+				var page,
 
-				//page title regexp
-				newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
+					//page title regexp
+					newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
 
-				// TODO handle dialogs again
-				pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + this._getNs() + "role=[\"']?page[\"']?[^>]*>)" ),
-				dataUrlRegex = new RegExp( "\\bdata-" + this._getNs() + "url=[\"']?([^\"'>]*)[\"']?" );
+					// TODO handle dialogs again
+					pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + this._getNs() + "role=[\"']?page[\"']?[^>]*>)" ),
+
+					dataUrlRegex = new RegExp( "\\bdata-" + this._getNs() + "url=[\"']?([^\"'>]*)[\"']?" );
 
 
-				// data-url must be provided for the base tag so resource requests can be directed to the
-				// correct url. loading into a temprorary element makes these requests immediately
+				// data-url must be provided for the base tag so resource requests
+				// can be directed to the correct url. loading into a temprorary
+				// element makes these requests immediately
 				if ( pageElemRegex.test( html ) &&
-					 RegExp.$1 &&
-					 dataUrlRegex.test( RegExp.$1 ) &&
-					 RegExp.$1 ) {
-					url = fileUrl = path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
+					RegExp.$1 &&
+					dataUrlRegex.test( RegExp.$1 ) &&
+					RegExp.$1 ) {
+					url = fileUrl = path.getFilePath( $("<div>" + RegExp.$1 + "</div>").text() );
 				}
 
 				//dont update the base tag if we are prefetching
-				if ( typeof settings.prefetch === "undefined" ||
-					 typeof settings.prefetch === "undefined" ) {
+				if ( typeof settings.prefetch === "undefined" ){
 					this._getBase().set( fileUrl );
 				}
 
-				//workaround to allow scripts to execute when included in page divs
-				all.get( 0 ).innerHTML = html;
-				page = all.find( ":jqmData(role='page'), :jqmData(role='dialog')" ).first();
-
-				//if page elem couldn't be found, create one and insert the body element's contents
-				if ( !page.length ) {
-					page = $( "<div data-" + this._getNs() + "role='page'>" + ( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) + "</div>" );
-				}
+				page = this._findLoaded( html );
 
 				if ( newPageTitle && !page.jqmData( "title" ) ) {
 					if ( ~newPageTitle.indexOf( "&" ) ) {
@@ -409,10 +421,10 @@ define( [
 
 				this._getBase().rewrite( fileUrl, page );
 
-				//append to page and enhance
-				// TODO taging a page with external to make sure that embedded pages aren't removed
-				//      by the various page handling code is bad. Having page handling code in many
-				//      places is bad. Solutions post 1.0
+				// append to page and enhance
+				// TODO taging a page with external to make sure that embedded pages aren't
+				// removed by the various page handling code is bad. Having page handling code
+				// in many places is bad. Solutions post 1.0
 				page
 					.attr( "data-" + this._getNs() + "url", path.convertUrlToDataUrl( fileUrl ) )
 					.attr( "data-" + this._getNs() + "external-page", true )
@@ -585,7 +597,7 @@ define( [
 				data: settings.data,
 				contentType: settings.contentType,
 				dataType: "html",
-				success: this._loadSuccess( url, absUrl, dataUrl, fileUrl, page, triggerData, settings, deferred ),
+				success: this._loadSuccess( url, absUrl, dataUrl, fileUrl, triggerData, settings, deferred ),
 				error: $.proxy(function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
 					this._getBase().set( path.get() );
