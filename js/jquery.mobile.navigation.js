@@ -516,7 +516,7 @@ define( [
 			if ( page.length === 0 &&
 				path.isEmbeddedPage(fileUrl) &&
 				!path.isFirstPageUrl(fileUrl) ) {
-				deferred.reject( absUrl, options );
+				deferred.reject( absUrl, settings );
 				return promise;
 			}
 
@@ -530,11 +530,11 @@ define( [
 			// users can bind to .done on the promise
 			if ( page.length && !settings.reloadPage ) {
 				this._enhanceContent( page, settings.role );
-				deferred.resolve( absUrl, options, page );
+				deferred.resolve( absUrl, settings, page );
 
 				//if we are reloading the page make sure we update
 				// the base if its not a prefetch
-				if( !options.prefetch ){
+				if( !settings.prefetch ){
 					this._getBase().set(url);
 				}
 
@@ -568,13 +568,13 @@ define( [
 			// Reset base to the default document base.
 			// only reset if we are not prefetching
 			if ( settings.prefetch === undefined ||
-				typeof options.prefetch === "undefined" ) {
+				typeof settings.prefetch === "undefined" ) {
 				this._getBase().reset();
 			}
 
 			if ( !($.mobile.allowCrossDomainPages ||
 				path.isSameDomain(documentUrl, absUrl)) ) {
-				deferred.reject( absUrl, options );
+				deferred.reject( absUrl, settings );
 				return promise;
 			}
 
@@ -613,7 +613,7 @@ define( [
 						this._showError();
 					}
 
-					deferred.reject( absUrl, options );
+					deferred.reject( absUrl, settings );
 				}, this)
 			});
 
