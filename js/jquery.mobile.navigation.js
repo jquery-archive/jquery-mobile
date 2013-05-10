@@ -362,7 +362,7 @@ define( [
 			setTimeout( $.proxy(this, "_hideLoading"), 1500 );
 		},
 
-		_findLoaded: function( html ) {
+		_findLoaded: function( html, fileUrl ) {
 			var page, all = $( "<div></div>" );
 
 			//workaround to allow scripts to execute when included in page divs
@@ -376,6 +376,12 @@ define( [
 					( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) +
 					"</div>" );
 			}
+
+			// TODO taging a page with external to make sure that embedded pages aren't
+			// removed by the various page handling code is bad. Having page handling code
+			// in many places is bad. Solutions post 1.0
+			page.attr( "data-" + this._getNs() + "url", path.convertUrlToDataUrl(fileUrl) )
+				.attr( "data-" + this._getNs() + "external-page", true );
 
 			return page;
 		},
@@ -420,23 +426,17 @@ define( [
 					this._getBase().set( fileUrl );
 				}
 
+				page = this._findLoaded( html, fileUrl );
+
+				this._setLoadedTitle( page, html );
+
 				// rewrite src and href attrs to use a base url if the base tag won't work
 				if ( this._isRewritableBaseTag() && page ) {
 					this._getBase().rewrite( fileUrl, page );
 				}
 
-				page = this._findLoaded( html );
-
-				this._setLoadedTitle( page, html );
-
 				// append to page and enhance
-				// TODO taging a page with external to make sure that embedded pages aren't
-				// removed by the various page handling code is bad. Having page handling code
-				// in many places is bad. Solutions post 1.0
-				page
-					.attr( "data-" + this._getNs() + "url", path.convertUrlToDataUrl(fileUrl) )
-					.attr( "data-" + this._getNs() + "external-page", true )
-					.appendTo( settings.pageContainer );
+				page.appendTo( settings.pageContainer );
 
 				// wait for page creation to leverage options defined on widget
 				page.one( "pagecreate", $.mobile._bindPageRemove );
