@@ -405,10 +405,6 @@ define( [
 
 					dataUrlRegex = new RegExp( "\\bdata-" + this._getNs() + "url=[\"']?([^\"'>]*)[\"']?" );
 
-				page = this._findLoaded( html );
-
-				this._setLoadedTitle( page, html );
-
 				// data-url must be provided for the base tag so resource requests
 				// can be directed to the correct url. loading into a temprorary
 				// element makes these requests immediately
@@ -428,6 +424,10 @@ define( [
 				if ( this._isRewritableBaseTag() && page ) {
 					this._getBase().rewrite( fileUrl, page );
 				}
+
+				page = this._findLoaded( html );
+
+				this._setLoadedTitle( page, html );
 
 				// append to page and enhance
 				// TODO taging a page with external to make sure that embedded pages aren't
