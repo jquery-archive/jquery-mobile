@@ -212,7 +212,8 @@ div.ui-mobile-viewport {
 }
 
 /* Buttons and icons */
-.ui-btn {
+.ui-btn,
+.ui-listview > li > a {
 	font-size: 16px;
 	margin: .5em 0;
 	padding: .7em 1em;

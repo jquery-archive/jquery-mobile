@@ -114,7 +114,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 		for ( pos = 0, numli = li.length; pos < numli; pos++ ) {
 			item = li.eq( pos );
-			itemClass = "ui-li";
+			itemClass = "";
 
 			// If we're creating the element, we update it regardless
 			if ( create || !item.hasClass( "ui-li" ) ) {
@@ -128,7 +128,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					itemIcon = getAttr( item[ 0 ], "icon", true );
 					icon = itemIcon === false ? false : ( itemIcon || o.icon );
 
-					var buttonClass = "ui-btn ui-btn-" + itemTheme;
+					var buttonClass = "ui-btn-" + itemTheme;
 					
 					if ( icon && ( a.length === 1 ) ) {
 						buttonClass += " ui-btn-icon-right ui-icon-" + icon;
@@ -137,7 +137,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					a.first().addClass( buttonClass );
 					
 					if ( a.length > 1 ) {
-						itemClass += " ui-li-has-alt";
+						itemClass += "ui-li-has-alt";
 						
 						var last = a.last(),
 							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
@@ -146,16 +146,16 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						
 						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
-							.addClass( "ui-btn ui-btn-" + itemTheme )
+							.addClass( "ui-btn-" + itemTheme )
 							.empty()
 							.append( splitbutton );
 					}
 				} else if ( isDivider ) {
-					itemClass += " ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme );
+					itemClass += "ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme );
 					
 					item.attr( "role", "heading" );
 				} else {
-					itemClass += " ui-li-static ui-fill-" + itemTheme;
+					itemClass += "ui-li-static ui-fill-" + itemTheme;
 				}
 				if ( ol && value ) {
 					var elem = ( a.length && !isDivider ) ? a : item;
@@ -209,7 +209,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		// opposed to 30 seconds.
 
 		this._addThumbClasses( li );
-		this._addThumbClasses( $list.find( ".ui-btn" ) );
+		this._addThumbClasses( $list.find( "li > a" ) );
 
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh
