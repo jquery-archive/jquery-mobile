@@ -1,15 +1,15 @@
+.ui-collapsible {
+	margin: .5em -1em;
+}
 .ui-collapsible-inset,
 .ui-collapsible-set {
 	margin: .5em 0;
 }
 .ui-collapsible-heading {
 	display: block;
-	margin: 0 -1em;
+	margin: 0;
 	padding: 0;
 	position: relative;
-}
-.ui-collapsible-inset .ui-collapsible-heading {
-	margin: 0;
 }
 .ui-collapsible-heading .ui-btn {
 	text-align: left;
@@ -43,7 +43,7 @@
 }
 .ui-collapsible-content {
 	display: block;
-	margin: 0 -1em;	
+	margin: 0;	
 	padding: .625em 1em;
 	border-left-width: 0;
 	border-right-width: 0;
@@ -87,6 +87,9 @@
 	border-bottom-left-radius: 0;		
 }
 .ui-collapsible-set .ui-collapsible {
+	margin: -1px -1em 0;
+}
+.ui-collapsible-set .ui-collapsible-inset {
 	margin: -1px 0 0;
 }
 .ui-collapsible-set .ui-collapsible.ui-first-child {
