@@ -401,6 +401,11 @@ define( [
 
 					dataUrlRegex = new RegExp( "\\bdata-" + this._getNs() + "url=[\"']?([^\"'>]*)[\"']?" );
 
+				page = this._findLoaded( html );
+
+				this._setLoadedTitle( page, html );
+
+
 
 				// data-url must be provided for the base tag so resource requests
 				// can be directed to the correct url. loading into a temprorary
@@ -417,10 +422,6 @@ define( [
 					this._getBase().set( fileUrl );
 				}
 
-				page = this._findLoaded( html );
-
-				this._setLoadedTitle( page, html );
-
 				this._getBase().rewrite( fileUrl, page );
 
 				// append to page and enhance
@@ -428,7 +429,7 @@ define( [
 				// removed by the various page handling code is bad. Having page handling code
 				// in many places is bad. Solutions post 1.0
 				page
-					.attr( "data-" + this._getNs() + "url", path.convertUrlToDataUrl( fileUrl ) )
+					.attr( "data-" + this._getNs() + "url", path.convertUrlToDataUrl(fileUrl) )
 					.attr( "data-" + this._getNs() + "external-page", true )
 					.appendTo( settings.pageContainer );
 
