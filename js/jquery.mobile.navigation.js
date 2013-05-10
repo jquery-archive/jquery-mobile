@@ -384,11 +384,8 @@ define( [
 			//page title regexp
 			var newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1;
 
-			if ( newPageTitle && !page.jqmData( "title" ) ) {
-				if ( ~newPageTitle.indexOf( "&" ) ) {
-					newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
-				}
-
+			if ( newPageTitle && !page.jqmData("title") ) {
+				newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
 				page.jqmData( "title", newPageTitle );
 			}
 		},

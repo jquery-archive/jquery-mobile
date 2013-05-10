@@ -257,7 +257,7 @@
 		equal( active.lastScroll, 1, "should be equal to _getScroll value" );
 	});
 
-	module( "Content Widget _getExistingPage", {
+	module( "Content Widget _findExistingPage", {
 		setup: function() {
 			proto._getNs = function() {
 				return "foo-";
@@ -271,7 +271,7 @@
 		};
 
 		equal(
-			proto._getExistingPage( settings, "bar" )[0],
+			proto._findExistingPage( settings, "bar" )[0],
 			settings.pageContainer.children()[0],
 			"returns the first child of the page container"
 		);
@@ -284,7 +284,7 @@
 
 		equal( settings.pageContainer.children().first().attr( "data-foo-url" ), undefined );
 
-		result = proto._getExistingPage( settings, "bar" ),
+		result = proto._findExistingPage( settings, "bar" ),
 
 		equal(
 			result[0],
@@ -305,6 +305,87 @@
 		};
 
 		// using location.href as the fileUrl param ensures that path.isFirstPageUrl returns true
-		ok( proto._getExistingPage(settings, "bar", location.href ).is("#initial") );
+		ok( proto._findExistingPage(settings, "bar", location.href ).is("#initial") );
+	});
+
+	module( "Content Widget _findLoaded", {
+		setup: function() {
+			$.mobile.ns = "foo-";
+		}
+	});
+
+	// TODO test that scripts are run when included in the HTML
+
+	test( "returns first page with data role page", function() {
+		var html;
+
+		html = "<div data-foo-role='page' id='first'></div>" +
+			"<div data-foo-role='dialog' id='second'></div>";
+		equal( proto._findLoaded( html ).attr("id"), "first" );
+	});
+
+	test( "returns first page with data role dialog", function() {
+		var html, page;
+
+		html = "<div data-foo-role='dialog' id='first'></div>" +
+			"<div data-foo-role='page' id='second'></div>";
+
+		page = proto._findLoaded( html );
+
+		equal( page.attr("id"), "first" );
+		equal( page.attr( "data-foo-role" ), "dialog" );
+	});
+
+	test( "returns the body of the html wrapped in a page when no page exists", function() {
+		var html, page;
+
+		html = "<body>foo</body>";
+
+		page = proto._findLoaded( html );
+
+		equal( page.attr("data-foo-role"), "page" );
+		equal( page.text(), "foo" );
+	});
+
+	module( "Content Widget _setLoadedTitle", {
+		setup: function() {
+			$.mobile.ns = "foo-";
+		}
+	});
+
+	test( "does nothing where the title is alread defined for the page", function() {
+		var html, page, pageHtml;
+
+		pageHtml = "<div data-foo-role='page' data-foo-title='bar'></div>";
+		page = $( pageHtml );
+		html = "<title>baz</title>" + pageHtml;
+
+		proto._setLoadedTitle( page, html );
+
+		equal( page.jqmData("title"), "bar" );
+	});
+
+	test( "adds the title to the page from the html", function() {
+		var html, page, pageHtml;
+
+		pageHtml = "<div data-foo-role='page'></div>";
+		page = $( pageHtml );
+		html = "<title>baz</title>" + pageHtml;
+
+		proto._setLoadedTitle( page, html );
+
+		equal( page.jqmData("title"), "baz" );
+	});
+
+	test( "prevents injection", function() {
+		var html, page, pageHtml;
+
+		pageHtml = "<div data-foo-role='page'></div>";
+		page = $( pageHtml );
+		html = "<title><script>foo</script></title>";
+
+		proto._setLoadedTitle( page, html );
+
+		equal( page.jqmData("title"), undefined );
 	});
 })(jQuery);
