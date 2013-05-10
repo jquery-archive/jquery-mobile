@@ -143,21 +143,27 @@
 .ui-btn-icon-right .ui-li-count {
 	right: 3.636em;
 }
-.ui-li-thumb {
+.ui-li-static > img:first-child,
+.ui-li > .ui-btn > img:first-child {
 	position: absolute;
 	left: 0;
 	top: 0;
 	max-height: 5em;
 	max-width: 5em;
 }
-.ui-li-icon {
-	position: absolute;
+.ui-li-static > img.ui-li-icon,
+.ui-li > .ui-btn > img.ui-li-icon {
 	left: .625em;
 	top: .9em;
 	max-height: 1em;
 	max-width: 1em;
 }
-.ui-li-heading {
+.ui-li h1,
+.ui-li h2,
+.ui-li h3,
+.ui-li h4,
+.ui-li h5,
+.ui-li h6 {
 	font-size: 1em;
 	font-weight: bold;
 	display: block;
@@ -166,7 +172,7 @@
 	overflow: hidden;
 	white-space: nowrap;
 }
-.ui-li-desc {
+.ui-li p {
 	font-size: 12px;
 	font-weight: normal;
 	display: block;

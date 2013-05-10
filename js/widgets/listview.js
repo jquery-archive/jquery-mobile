@@ -85,7 +85,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		for ( i = 0; i < len; i++ ) {
 			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
 			if ( img.length ) {
-				img.addClass( "ui-li-thumb" );
 				$( this._findFirstElementByTagName( img[ 0 ].parentNode, "parentNode", "li", "LI" ) ).addClass( img.hasClass( "ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
 			}
 		}
@@ -178,8 +177,8 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				}
 			}
 
-			// Instead of setting item class directly on the list item and its
-			// btn-inner at this point in time, push the item into a dictionary
+			// Instead of setting item class directly on the list item
+			// at this point in time, push the item into a dictionary
 			// that tells us what class to set on it so we can do this after this
 			// processing loop is finished.
 
@@ -190,8 +189,8 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			itemClassDict[ itemClass ].push( item[ 0 ] );
 		}
 
-		// Set the appropriate listview item classes on each list item
-		// and their btn-inner elements. The main reason we didn't do this
+		// Set the appropriate listview item classes on each list item.
+		// The main reason we didn't do this
 		// in the for-loop above is because we can eliminate per-item function overhead
 		// by calling addClass() and children() once or twice afterwards. This
 		// can give us a significant boost on platforms like WP7.5.
@@ -200,18 +199,12 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			$( itemClassDict[ itemClass ] ).addClass( itemClass );
 		}
 
-		$list.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" )
-			.end()
-
-			.find( "p, dl" ).addClass( "ui-li-desc" )
-			.end()
-
+		$list
 			.find( ".ui-li-aside" ).each(function() {
 					var $this = $( this );
 					$this.prependTo( $this.parent() ); //shift aside to front for css float
 				})
 			.end()
-
 			.find( ".ui-li-count" ).each(function() {
 					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
 				}).addClass( "ui-fill-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-corner-all" );
