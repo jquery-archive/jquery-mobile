@@ -9,9 +9,6 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "./page.sections", "./a
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-//Keeps track of the number of lists per page UID
-//This allows support for multiple nested list in the same page
-//https://github.com/jquery/jquery-mobile/issues/1617
 var getAttr = $.mobile.getAttribute;
 
 $.widget( "mobile.listview", $.mobile.widget, $.extend( {
@@ -95,8 +92,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 	},
 
 	refresh: function( create ) {
-		this.parentPage = this.element.closest( ".ui-page" );
-
 		var o = this.options,
 			$list = this.element,
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
@@ -239,13 +234,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh
 		this._trigger( "afterrefresh" );
-	},
-
-	//create a string for ID/subpage url creation
-	_idStringEscape: function( str ) {
-		return str.replace(/[^a-zA-Z0-9]/g, "-");
-	}
-}, $.mobile.behaviors.addFirstLastClasses ) );
+	}}, $.mobile.behaviors.addFirstLastClasses ) );
 
 $.mobile.listview.initSelector = ":jqmData(role='listview')";
 
