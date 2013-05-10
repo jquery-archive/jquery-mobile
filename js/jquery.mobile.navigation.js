@@ -380,14 +380,24 @@ define( [
 			return page;
 		},
 
+		_setLoadedTitle: function( page, html ) {
+			//page title regexp
+			var newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1;
+
+			if ( newPageTitle && !page.jqmData( "title" ) ) {
+				if ( ~newPageTitle.indexOf( "&" ) ) {
+					newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
+				}
+
+				page.jqmData( "title", newPageTitle );
+			}
+		},
+
 		_loadSuccess: function( url, absUrl, dataUrl, fileUrl, triggerData, settings, deferred ) {
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
 				//use it as the new fileUrl, base path, etc
 				var page,
-
-					//page title regexp
-					newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1,
 
 					// TODO handle dialogs again
 					pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + this._getNs() + "role=[\"']?page[\"']?[^>]*>)" ),
@@ -412,12 +422,7 @@ define( [
 
 				page = this._findLoaded( html );
 
-				if ( newPageTitle && !page.jqmData( "title" ) ) {
-					if ( ~newPageTitle.indexOf( "&" ) ) {
-						newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
-					}
-					page.jqmData( "title", newPageTitle );
-				}
+				this._setLoadedTitle( page, html );
 
 				this._getBase().rewrite( fileUrl, page );
 
