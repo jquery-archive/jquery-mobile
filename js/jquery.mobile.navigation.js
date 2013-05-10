@@ -390,6 +390,10 @@ define( [
 			}
 		},
 
+		_isRewritableBaseTag: function() {
+			return $.mobile.dynamicBaseEnabled && !$.support.dynamicBaseTag;
+		},
+
 		_loadSuccess: function( url, absUrl, dataUrl, fileUrl, triggerData, settings, deferred ) {
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
@@ -405,8 +409,6 @@ define( [
 
 				this._setLoadedTitle( page, html );
 
-
-
 				// data-url must be provided for the base tag so resource requests
 				// can be directed to the correct url. loading into a temprorary
 				// element makes these requests immediately
@@ -414,7 +416,7 @@ define( [
 					RegExp.$1 &&
 					dataUrlRegex.test( RegExp.$1 ) &&
 					RegExp.$1 ) {
-					url = fileUrl = path.getFilePath( $("<div>" + RegExp.$1 + "</div>").text() );
+					fileUrl = path.getFilePath( $("<div>" + RegExp.$1 + "</div>").text() );
 				}
 
 				//dont update the base tag if we are prefetching
@@ -422,7 +424,10 @@ define( [
 					this._getBase().set( fileUrl );
 				}
 
-				this._getBase().rewrite( fileUrl, page );
+				// rewrite src and href attrs to use a base url if the base tag won't work
+				if ( this._isRewritableBaseTag() && page ) {
+					this._getBase().rewrite( fileUrl, page );
+				}
 
 				// append to page and enhance
 				// TODO taging a page with external to make sure that embedded pages aren't
@@ -726,7 +731,8 @@ define( [
 
 		getScreenHeight = $.mobile.getScreenHeight,
 
-		//base element management, defined depending on dynamic base tag support
+		// base element management, defined depending on dynamic base tag support
+		// TODO move to external widget
 		base = {
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
 			element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
@@ -747,24 +753,21 @@ define( [
 			},
 
 			rewrite: function( href, page ) {
-				// otherwise rewrite src and href attrs to use a base url
-				if ( $.mobile.dynamicBaseEnabled && !$.support.dynamicBaseTag && page ) {
-					var newPath = path.get( href );
+				var newPath = path.get( href );
 
-					page.find( base.linkSelector ).each(function( i, link ) {
-						var thisAttr = $( link ).is( "[href]" ) ? "href" : $( link ).is( "[src]" ) ? "src" : "action",
-						thisUrl = $( link ).attr( thisAttr );
+				page.find( base.linkSelector ).each(function( i, link ) {
+					var thisAttr = $( link ).is( "[href]" ) ? "href" : $( link ).is( "[src]" ) ? "src" : "action",
+					thisUrl = $( link ).attr( thisAttr );
 
-						// XXX_jblas: We need to fix this so that it removes the document
-						//            base URL, and then prepends with the new page URL.
-						//if full path exists and is same, chop it - helps IE out
-						thisUrl = thisUrl.replace( location.protocol + "//" + location.host + location.pathname, "" );
+					// XXX_jblas: We need to fix this so that it removes the document
+					//            base URL, and then prepends with the new page URL.
+					//if full path exists and is same, chop it - helps IE out
+					thisUrl = thisUrl.replace( location.protocol + "//" + location.host + location.pathname, "" );
 
-						if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-							$( link ).attr( thisAttr, newPath + thisUrl );
-						}
-					});
-				}
+					if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
+						$( link ).attr( thisAttr, newPath + thisUrl );
+					}
+				});
 			},
 
 			//set the generated BASE element's href attribute to a new page's base path
