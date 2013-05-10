@@ -142,16 +142,13 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						var last = a.last(),
 							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
 							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon || getAttr( item[ 0 ], "icon", true ) || o.icon,
-							splitButtonClass = "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-icon-shadow";
+							splitbutton = $( "<div class='ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-icon-shadow'></div>" );
 						
-						last.appendTo( item )
+						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
-							.addClass( "ui-li-link-alt ui-btn ui-btn-" + itemTheme )
+							.addClass( "ui-btn ui-btn-" + itemTheme )
 							.empty()
-							.append(
-								$( document.createElement( "div" ) )
-									.addClass( splitButtonClass )
-							);
+							.append( splitbutton );
 					}
 				} else if ( isDivider ) {
 					itemClass += " ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme );
