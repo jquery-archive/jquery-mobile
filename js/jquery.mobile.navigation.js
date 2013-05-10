@@ -362,7 +362,7 @@ define( [
 			setTimeout( $.proxy(this, "_hideLoading"), 1500 );
 		},
 
-		_loadSuccess: function( url, absUrl, dataUrl, fileUrl, page, triggerData, options, settings, deferred ) {
+		_loadSuccess: function( url, absUrl, dataUrl, fileUrl, page, triggerData, settings, deferred ) {
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
 				//use it as the new fileUrl, base path, etc
@@ -386,8 +386,8 @@ define( [
 				}
 
 				//dont update the base tag if we are prefetching
-				if ( typeof options.prefetch === "undefined" ||
-					 typeof options.prefetch === "undefined" ) {
+				if ( typeof settings.prefetch === "undefined" ||
+					 typeof settings.prefetch === "undefined" ) {
 					this._getBase().set( fileUrl );
 				}
 
@@ -443,7 +443,7 @@ define( [
 				// Let listeners know the page loaded successfully.
 				settings.pageContainer.trigger( "pageload", triggerData );
 
-				deferred.resolve( absUrl, options, page );
+				deferred.resolve( absUrl, settings, page );
 			}, this);
 		},
 
@@ -585,7 +585,7 @@ define( [
 				data: settings.data,
 				contentType: settings.contentType,
 				dataType: "html",
-				success: this._loadSuccess( url, absUrl, dataUrl, fileUrl, page, triggerData, options, settings, deferred ),
+				success: this._loadSuccess( url, absUrl, dataUrl, fileUrl, page, triggerData, settings, deferred ),
 				error: $.proxy(function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
 					this._getBase().set( path.get() );
