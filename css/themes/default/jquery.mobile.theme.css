@@ -893,7 +893,8 @@ button,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-btn:focus,
-.ui-btn.ui-focus {
+.ui-btn.ui-focus,
+.ui-listview > li > a:focus {
 	outline: 0;
 }
 /* Unset box-shadow in browsers that don't do it right */
@@ -903,6 +904,7 @@ button,
 	box-shadow: none !important;
 }
 .ui-mobile-nosupport-boxshadow .ui-btn:focus,
+.ui-mobile-nosupport-boxshadow .ui-listview > li > a:focus,
 .ui-mobile-nosupport-boxshadow .ui-focus {
 	outline-width: 1px;
 	outline-style: auto;
