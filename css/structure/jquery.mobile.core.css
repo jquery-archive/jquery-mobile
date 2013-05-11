@@ -284,7 +284,7 @@ div.ui-mobile-viewport {
 	padding-left: .3125em;
 	padding-right: .3125em;
 }
-.ui-btn[class*="ui-icon-"]:after {
+[class*="ui-icon-"]:after {
 	content: "";
 	position: absolute;
 	display: block;

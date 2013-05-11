@@ -636,7 +636,7 @@ button,
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn[class*="ui-icon-"]:after,
+[class*="ui-icon-"]:after,
 .ui-input-search:after {
 	background-color: 						#666 /*{global-icon-color}*/;
 	background-color: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
@@ -650,7 +650,7 @@ button,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon-alt[class*="ui-icon-"]:after,
-.ui-icon-alt .ui-btn[class*="ui-icon-"]:after,
+.ui-icon-alt [class*="ui-icon-"]:after,
 .ui-icon-alt .ui-input-search:after {
 	background-color: 						#fff;
 	background-color: 						rgba(255,255,255,.3);
@@ -662,7 +662,7 @@ button,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-icon-nodisc[class*="ui-icon-"]:after,
-.ui-icon-nodisc .ui-btn[class*="ui-icon-"]:after,
+.ui-icon-nodisc [class*="ui-icon-"]:after,
 .ui-icon-nodisc .ui-input-search:after {
 	background-color: transparent;
 }
@@ -753,7 +753,7 @@ button,
        only screen and (min--moz-device-pixel-ratio: 1.3),
        only screen and (min-resolution: 200dpi) {
 	
-	.ui-btn[class*="ui-icon-"]:after,
+	[class*="ui-icon-"]:after,
 	.ui-input-search:after {
 		background-image: url(images/icons-36-white.png);
 		-moz-background-size: 864px 18px;
@@ -761,7 +761,7 @@ button,
 		-webkit-background-size: 864px 18px;
 		background-size: 864px 18px;
 	}
-	.ui-icon-alt .ui-btn[class*="ui-icon-"]:after,
+	.ui-icon-alt [class*="ui-icon-"]:after,
 	.ui-icon-alt .ui-input-search:after {
 		background-image: url(images/icons-36-black.png);
 	}
@@ -843,8 +843,8 @@ button,
 }
 
 /* checks,radios */
-.ui-checkbox .ui-btn[class*="ui-icon-"]:after,
-.ui-selectmenu-list .ui-btn[class*="ui-icon-"]:after {
+.ui-checkbox [class*="ui-icon-"]:after,
+.ui-selectmenu-list [class*="ui-icon-"]:after {
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
