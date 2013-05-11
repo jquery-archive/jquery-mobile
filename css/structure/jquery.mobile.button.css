@@ -11,6 +11,9 @@ button.ui-btn {
 button.ui-btn::-moz-focus-inner {
 	border: 0;
 }
+button.ui-btn-inline {
+	width: auto;
+}
 button.ui-btn-icon-notext {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
