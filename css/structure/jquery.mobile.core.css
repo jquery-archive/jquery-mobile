@@ -268,7 +268,8 @@ div.ui-mobile-viewport {
 .ui-btn-icon-left {
 	padding-left: 2.5em;
 }
-.ui-btn-icon-right {
+.ui-btn-icon-right,
+.ui-listview > li > a[class*="ui-icon-"] {
 	padding-right: 2.5em;
 }
 .ui-btn-icon-top {
@@ -294,14 +295,16 @@ a[class*="ui-icon-"]:after {
 }
 .ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
-.ui-btn-icon-right:after {
+.ui-btn-icon-right:after,
+.ui-listview > li > a[class*="ui-icon-"]:after {
 	top: 50%;
 	margin-top: -9px;
 }
 .ui-btn-icon-left:after {
 	left: .625em;
 }
-.ui-btn-icon-right:after {
+.ui-btn-icon-right:after,
+.ui-listview > li > a[class*="ui-icon-"]:after {
 	right: .625em;
 }
 .ui-btn-icon-notext:after,

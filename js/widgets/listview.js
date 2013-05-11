@@ -123,18 +123,11 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				value = item.attr( "value" );
 				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
 
-
 				if ( a.length && !isDivider ) {
 					itemIcon = getAttr( item[ 0 ], "icon", true );
-					icon = itemIcon === false ? false : ( itemIcon || o.icon );
+					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
 					var buttonClass = "ui-btn-" + itemTheme;
-					
-					if ( icon && ( a.length === 1 ) ) {
-						buttonClass += " ui-btn-icon-right ui-icon-" + icon;
-					}
-					
-					a.first().addClass( buttonClass );
 					
 					if ( a.length > 1 ) {
 						itemClass += "ui-li-has-alt";
@@ -149,7 +142,11 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 							.addClass( "ui-btn-" + itemTheme )
 							.empty()
 							.append( splitbutton );
+					} else if ( icon ) {
+						buttonClass += " ui-icon-" + icon;
 					}
+					
+					a.first().addClass( buttonClass );
 				} else if ( isDivider ) {
 					itemClass += "ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme );
 					
