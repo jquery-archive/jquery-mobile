@@ -212,8 +212,7 @@ div.ui-mobile-viewport {
 }
 
 /* Buttons and icons */
-.ui-btn,
-.ui-listview > li > a {
+.ui-btn {
 	font-size: 16px;
 	margin: .5em 0;
 	padding: .7em 1em;
@@ -269,7 +268,7 @@ div.ui-mobile-viewport {
 	padding-left: 2.5em;
 }
 .ui-btn-icon-right,
-.ui-listview > li > a[class*="ui-icon-"] {
+.ui-listview > li > .ui-btn[class*="ui-icon-"] {
 	padding-right: 2.5em;
 }
 .ui-btn-icon-top {
@@ -285,8 +284,7 @@ div.ui-mobile-viewport {
 	padding-left: .3125em;
 	padding-right: .3125em;
 }
-.ui-btn[class*="ui-icon-"]:after,
-a[class*="ui-icon-"]:after {
+.ui-btn[class*="ui-icon-"]:after {
 	content: "";
 	position: absolute;
 	display: block;
@@ -296,7 +294,7 @@ a[class*="ui-icon-"]:after {
 .ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
 .ui-btn-icon-right:after,
-.ui-listview > li > a[class*="ui-icon-"]:after {
+.ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
 	top: 50%;
 	margin-top: -9px;
 }
@@ -304,7 +302,7 @@ a[class*="ui-icon-"]:after {
 	left: .625em;
 }
 .ui-btn-icon-right:after,
-.ui-listview > li > a[class*="ui-icon-"]:after {
+.ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
 	right: .625em;
 }
 .ui-btn-icon-notext:after,

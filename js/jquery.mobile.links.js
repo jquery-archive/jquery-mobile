@@ -32,7 +32,7 @@ $.mobile._enhancer.add( "mobile.links", undefined, function( target ) {
 				});
 		})
 		.end()
-		.not( ".ui-btn, .ui-listview > li > a, :jqmData(role='none'), :jqmData(role='nojs')" )
+		.not( ".ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.addClass( "ui-link" );
 
 });

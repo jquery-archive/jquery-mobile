@@ -127,7 +127,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					itemIcon = getAttr( item[ 0 ], "icon", true );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
-					var buttonClass = "ui-btn-" + itemTheme;
+					var buttonClass = "ui-btn ui-btn-" + itemTheme;
 					
 					if ( a.length > 1 ) {
 						itemClass += "ui-li-has-alt";
@@ -139,7 +139,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						
 						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
-							.addClass( "ui-btn-" + itemTheme )
+							.addClass( "ui-btn ui-btn-" + itemTheme )
 							.empty()
 							.append( splitbutton );
 					} else if ( icon ) {

@@ -20,8 +20,7 @@ button,
 /* Links
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn,
-.ui-listview > li > a {
+.ui-btn {
 	text-decoration: none;	
 }
 
@@ -636,7 +635,7 @@ button,
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-[class*="ui-icon-"]:after,
+.ui-btn[class*="ui-icon-"]:after,
 .ui-input-search:after {
 	background-color: 						#666 /*{global-icon-color}*/;
 	background-color: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
@@ -650,7 +649,6 @@ button,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-btn.ui-icon-alt:after,
-a.ui-icon-alt:after,
 .ui-icon-alt [class*="ui-icon-"]:after,
 .ui-icon-alt .ui-input-search:after {
 	background-color: 						#fff;
@@ -663,7 +661,6 @@ a.ui-icon-alt:after,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-btn.ui-icon-nodisc:after,
-a.ui-icon-nodisc:after,
 .ui-icon-nodisc [class*="ui-icon-"]:after,
 .ui-icon-nodisc .ui-input-search:after {
 	background-color: transparent;
@@ -755,7 +752,7 @@ a.ui-icon-nodisc:after,
        only screen and (min--moz-device-pixel-ratio: 1.3),
        only screen and (min-resolution: 200dpi) {
 	
-	[class*="ui-icon-"]:after,
+	.ui-btn[class*="ui-icon-"]:after,
 	.ui-input-search:after {
 		background-image: url(images/icons-36-white.png);
 		-moz-background-size: 864px 18px;
@@ -763,6 +760,7 @@ a.ui-icon-nodisc:after,
 		-webkit-background-size: 864px 18px;
 		background-size: 864px 18px;
 	}
+	.ui-btn.ui-icon-alt:after,
 	.ui-icon-alt [class*="ui-icon-"]:after,
 	.ui-icon-alt .ui-input-search:after {
 		background-image: url(images/icons-36-black.png);
@@ -895,8 +893,7 @@ a.ui-icon-nodisc:after,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-btn:focus,
-.ui-btn.ui-focus,
-.ui-listview > li > a:focus {
+.ui-btn.ui-focus {
 	outline: 0;
 }
 /* Unset box-shadow in browsers that don't do it right */
@@ -906,7 +903,6 @@ a.ui-icon-nodisc:after,
 	box-shadow: none !important;
 }
 .ui-mobile-nosupport-boxshadow .ui-btn:focus,
-.ui-mobile-nosupport-boxshadow .ui-listview > li > a:focus,
 .ui-mobile-nosupport-boxshadow .ui-focus {
 	outline-width: 1px;
 	outline-style: auto;
