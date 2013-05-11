@@ -13,8 +13,10 @@
 	margin-top: 1em;
 	border-bottom: 1px solid;
 }
+.ui-listview li.ui-field-contain:after,
 .ui-field-contain:last-child:after {
 	content: none;
+	display: none;
 }
 @media (min-width: 28em) {
 	.ui-field-contain,
@@ -24,6 +26,7 @@
 	}
 	.ui-field-contain:after {
 		content: none;
+		display: none;
 	}
 	.ui-field-contain > label,
 	.ui-field-contain .ui-controlgroup-label,
