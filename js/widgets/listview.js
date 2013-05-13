@@ -184,11 +184,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		}
 
 		$list
-			.find( ".ui-li-aside" ).each(function() {
-					var $this = $( this );
-					$this.prependTo( $this.parent() ); //shift aside to front for css float
-				})
-			.end()
 			.find( ".ui-li-count" ).each(function() {
 					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
 				}).addClass( "ui-fill-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-corner-all" );

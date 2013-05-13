@@ -180,14 +180,12 @@
 	overflow: hidden;
 	white-space: nowrap;
 }
-.ui-li-aside {
-	float: right;
-	width: 50%;
+.ui-listview .ui-li-aside {
+	position: absolute;
+	top: 1em;
+	right: 3.333em;
+	margin: 0;
 	text-align: right;
-	margin: .3em 0;
-}
-@media (min-width: 28em) {
-	 .ui-li-aside { width: 45%; }
 }
 .ui-listview > li.ui-li-has-alt > .ui-btn {
 	margin-right: 2.5em;
