@@ -917,12 +917,6 @@ define( [
 		aPage.css( "min-height", height - ( aPageOuterHeight - aPageHeight ) );
 	};
 
-	//shared page enhancements
-	function enhancePage( $page, role ) {
-		//run page plugin
-		$page.page({ role: role });
-	}
-
 	// determine the current base url
 	function findBaseWithDefault() {
 		var closestBase = ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) );
@@ -1121,7 +1115,7 @@ define( [
 		}
 
 		// We need to make sure the page we are given has already been enhanced.
-		enhancePage( toPage, settings.role );
+		toPage.page({ role: settings.role });
 
 		// If the changePage request was sent from a hashChange event, check to see if the
 		// page is already within the urlHistory stack. If so, we'll assume the user hit
