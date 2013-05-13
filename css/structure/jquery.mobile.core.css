@@ -216,6 +216,7 @@ div.ui-mobile-viewport {
 	font-size: 16px;
 	margin: .5em 0;
 	padding: .7em 1em;
+	border: 1px solid;
 	display: block;
 	position: relative;
 	text-align: center;
