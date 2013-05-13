@@ -6,6 +6,8 @@
 
 	var mockEvent, proto = $.mobile.content.prototype;
 
+	proto.element = $( "<div>" );
+
 	module("Content Widget _filterNavigateEvents", {
 		setup: function() {
 			mockEvent = $.Event( "mock" );
@@ -262,33 +264,33 @@
 			proto._getNs = function() {
 				return "foo-";
 			};
+
+			proto.element = $( "<div>" );
 		}
 	});
 
 	test( "returns the page container child matching the dataUrl first", function() {
-		var settings = {
-			pageContainer: $( "<div><div data-foo-url='bar'></div></div>" )
-		};
+		this.element = $( "<div><div data-foo-url='bar'></div></div>" );
 
 		equal(
-			proto._findExistingPage( settings, "bar" )[0],
-			settings.pageContainer.children()[0],
+			proto._findExistingPage( {}, "bar" )[0],
+			proto.element.children()[0],
 			"returns the first child of the page container"
 		);
 	});
 
 	test( "returns the child with the dataUrl id and corrects the data-url attr", function() {
-		var result, settings = {
-			pageContainer: $( "<div><div id='bar'></div></div>" )
-		};
+		var result;
 
-		equal( settings.pageContainer.children().first().attr( "data-foo-url" ), undefined );
+		proto.element = $( "<div><div id='bar'></div></div>" );
 
-		result = proto._findExistingPage( settings, "bar" ),
+		equal( proto.element.children().first().attr( "data-foo-url" ), undefined );
+
+		result = proto._findExistingPage( {}, "bar" ),
 
 		equal(
 			result[0],
-			settings.pageContainer.children()[0],
+			proto.element.children()[0],
 			"returns the first child of the page container"
 		);
 
@@ -296,16 +298,12 @@
 	});
 
 	test( "returns the child with the dataUrl id and corrects the data-url attr", function() {
-		var settings = {
-			pageContainer: $( "<div></div>" )
-		};
-
 		proto._getInitialContent = function() {
 			return $( "<div><div id='initial'></div></div>" ).children().first();
 		};
 
 		// using location.href as the fileUrl param ensures that path.isFirstPageUrl returns true
-		ok( proto._findExistingPage(settings, "bar", location.href ).is("#initial") );
+		ok( proto._findExistingPage({}, "bar", location.href ).is("#initial") );
 	});
 
 	module( "Content Widget _findLoaded", {
@@ -387,5 +385,23 @@
 		proto._setLoadedTitle( page, html );
 
 		equal( page.jqmData("title"), undefined );
+	});
+
+	module( "Content Widget _triggerWithDeprecated" );
+
+	test( "triggers both content* and page* events and includes data", function() {
+		expect( 4 );
+
+		proto.element.bind( "pagefoo", function( event, data ) {
+			ok( true, "page event trigger" );
+			equal( data.bar, "baz", "data is passed through" );
+		});
+
+		proto.element.bind( "contentfoo", function( event, data ) {
+			ok( true, "content event trigger" );
+			equal( data.bar, "baz", "data is passed through" );
+		});
+
+		proto._triggerWithDeprecated( "foo", { bar: "baz" } );
 	});
 })(jQuery);
