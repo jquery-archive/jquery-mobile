@@ -664,10 +664,9 @@ define( [
 			}, this);
 		}
 
-		// transitionPages
-		// resetActivePageHeight
-		// enhancePage
-		// changePage
+		// TODO transitionPages
+		// TODO resetActivePageHeight
+		// TODO changePage
 	});
 
 	$.mobile.loadPage = function( url, opts ) {
