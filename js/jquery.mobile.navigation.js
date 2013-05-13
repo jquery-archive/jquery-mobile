@@ -291,8 +291,19 @@ define( [
 			return $.mobile.ns;
 		},
 
-		_enhanceContent: function( content, role ) {
+		_enhance: function( content, role ) {
 			return content.page({ role: role });
+		},
+
+		_include: function( page, settings ) {
+			// append to page and enhance
+			page.appendTo( this.element );
+
+			// use the page widget to enhance
+			this._enhance( page, settings.role );
+
+			// remove page on hide
+			page.page( "bindRemove" );
 		},
 
 		_findExistingPage: function( dataUrl, fileUrl ) {
@@ -465,13 +476,7 @@ define( [
 					this._getBase().rewrite( fileUrl, page );
 				}
 
-				// append to page and enhance
-				page.appendTo( this.element );
-
-				this._enhanceContent( page, settings.role );
-
-				// wait for page creation to leverage options defined on widget
-				page.page( "bindRemove" );
+				this._include( page, settings );
 
 				// Enhancing the page may result in new dialogs/sub pages being inserted
 				// into the DOM. If the original absUrl refers to a sub-page, that is the
@@ -568,7 +573,7 @@ define( [
 			// reload of the file, we are done. Resolve the deferrred so that
 			// users can bind to .done on the promise
 			if ( page.length && !settings.reloadPage ) {
-				this._enhanceContent( page, settings.role );
+				this._enhance( page, settings.role );
 				deferred.resolve( absUrl, settings, page );
 
 				//if we are reloading the page make sure we update
