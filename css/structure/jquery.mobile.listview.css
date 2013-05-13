@@ -4,10 +4,6 @@
 	padding: 0;
 	list-style: none;
 }
-.ui-listview {
-	background: none;
-	border: none;
-}
 .ui-content .ui-listview,
 .ui-panel-inner > .ui-listview {
 	margin: -1em;
