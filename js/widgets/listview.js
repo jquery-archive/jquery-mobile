@@ -16,7 +16,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
 		countTheme: "a",
-		headerTheme: "a",
 		dividerTheme: "a",
 		icon: "arrow-r",
 		splitIcon: "arrow-r",
