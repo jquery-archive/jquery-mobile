@@ -27,6 +27,10 @@ $.widget( "mobile.page", $.mobile.widget, {
 			return false;
 		}
 
+		if ( this.options.role ) {
+			this.element.attr( "data-" + $.mobile.ns + "role", this.options.role );
+		}
+
 		this.element
 			.attr( "tabindex", "0" )
 			.addClass( "ui-page ui-body-" + this.options.theme );
