@@ -378,7 +378,7 @@ html .ui-btn.ui-btn-a:active {
 	color: 					#fff /*{a-bdown-color}*/;
 	text-shadow: 0 /*{a-bdown-shadow-x}*/ 1px /*{a-bdown-shadow-y}*/ 0 /*{a-bdown-shadow-radius}*/ #000 /*{a-bdown-shadow-color}*/;
 }
-.ui-body-a .ui-btn.ui-btn-active
+.ui-body-a .ui-btn.ui-btn-active,
 html .ui-btn.ui-btn-a.ui-btn-active {
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	border-color:	 		#3399cc /*{a-bactive-border}*/;
@@ -501,7 +501,7 @@ html .ui-btn.ui-btn-b:hover {
 	color: 					#333 /*{b-bdown-color}*/;
 	text-shadow: 0 /*{b-bdown-shadow-x}*/ 1px /*{b-bdown-shadow-y}*/ 0 /*{b-bdown-shadow-radius}*/ #fff /*{b-bdown-shadow-color}*/;
 }
-.ui-body-b .ui-btn.ui-btn-active
+.ui-body-b .ui-btn.ui-btn-active,
 html .ui-btn.ui-btn-b.ui-btn-active {
 	background: 			#ff0066 /*{b-bactive-background-color}*/;
 	border-color:	 		#cc0066 /*{b-bactive-border}*/;
