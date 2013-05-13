@@ -19,7 +19,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		dividerTheme: "a",
 		icon: "arrow-r",
 		splitIcon: "arrow-r",
-		splitTheme: "a",
+		splitTheme: null,
 		corners: true,
 		shadow: true,
 		inset: false
@@ -137,12 +137,14 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						
 						var last = a.last(),
 							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
+							splitthemeclass = splittheme ? " ui-btn-" + splittheme : "",
 							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon,
-							splitbutton = $( "<div class='ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-shadow-icon'></div>" );
+							splitbutton = $( "<div class='ui-btn" + splitthemeclass + " ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-shadow-icon'></div>" ),
+							altButtonClass = itemTheme ? "ui-btn ui-btn-" + itemTheme : "ui-btn";
 						
 						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
-							.addClass( "ui-btn ui-btn-" + itemTheme )
+							.addClass( altButtonClass )
 							.empty()
 							.append( splitbutton );
 					} else if ( icon ) {
