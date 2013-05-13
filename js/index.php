@@ -43,7 +43,6 @@ $files = array(
 	'jquery.mobile.degradeInputs.js',
 	'widgets/optionDemultiplexer.js',
 	'widgets/dialog.js',
-	'widgets/page.sections.js',
 	'widgets/collapsible.js',
 	'widgets/addFirstLastClasses.js',
 	'widgets/collapsibleSet.js',

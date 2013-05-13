@@ -14,8 +14,8 @@
 	<script src="../../../js/"></script>
 	<script>
 		$(function(){
-			$("[data-role='header'], [data-role='footer']").toolbar();
 			$("[data-role='navbar']").navbar();
+			$("[data-role='header'], [data-role='footer']").toolbar();
 		});
 	</script>
 </head>

@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page", "./page.sections", "../jquery.mobile.zoom", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.navigation", "./page","../jquery.mobile.zoom", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -37,7 +37,6 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_create: function() {
 			this._super();
 			if( this.options.position === "fixed" && !this.options.supportBlacklist() ){
-				
 				this.element.addClass( "ui-"+ this.role +"-fixed" );
 				this.updatePagePadding();
 				this._addTransitionClass();
@@ -90,7 +89,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			});
 		},
 
-		_handlePageBeforeShow: function( e ) {
+		_handlePageBeforeShow: function( ) {
 			var o = this.options;
 			if ( o.disablePageZoom ) {
 				$.mobile.zoom.disable( true );
@@ -153,12 +152,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 			// This behavior only applies to "fixed", not "fullscreen"
 			if ( this.options.fullscreen ) { return; }
-			console.log(header);
 			// tbPage argument can be a Page object or an event, if coming from throttled resize.
 			tbPage = ( tbPage && tbPage.type === undefined && tbPage ) || this.page || $el.closest( ".ui-page" );
-			tbPage = ( !!this.page )? this.page: ".ui-page-active"
+			tbPage = ( !!this.page )? this.page: ".ui-page-active";
 			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() + pos );
-			console.log( $el.outerHeight() );
 		},
 
 		_useTransition: function( notransition ) {
@@ -223,7 +220,6 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_bindToggleHandlers: function() {
 			var self = this,
 				o = self.options,
-				$el = self.element,
 				delayShow, delayHide,
 				isVisible = true,
 				page = ( !!this.page )? this.page: $(".ui-page");

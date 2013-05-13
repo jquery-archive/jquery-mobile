@@ -270,7 +270,7 @@ function updateButtonClass( $btn, classToRemove, classToAdd, hover, state ) {
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
 
-	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", target )
+	$( ":jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a", target )
 		.jqmEnhanceable()
 		.not( "button, input, .ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.buttonMarkup();

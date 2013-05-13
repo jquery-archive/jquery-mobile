@@ -22,7 +22,6 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			var leftbtn, rightbtn, backBtn,
 				role =  this.element.is( ":jqmData(role='header')" ) ? "header" : "footer",
 				page = this.element.closest(".ui-page");
-			
 			if( page.length === 0 ){
 				page = false;
 				this._on($.mobile.document, {
@@ -32,20 +31,22 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			}
 			$.extend( this, {
 				role:role,
-				page:page
-			})
+				page:page,
+				leftbtn: leftbtn,
+				rightbtn: rightbtn,
+				backBtn: backBtn
+			});
 			this.element.attr( "role", role === "header" ? "banner" : "contentinfo" ).addClass("ui-"+role);
-			
-			this._setOptions( this.options );
 			this.refresh();
+			this._setOptions( this.options );
 		},
 		_setOptions:function( o ){
 			if( o.addBackBtn !== undefined){
 				if( this.options.addBackBtn &&
 					this.role === "header" &&
 					$( ".ui-page" ).length > 1 &&
-					this.page[ 0 ].getAttribute( attrPrefix + "url" ) !== $.mobile.path.stripHash( location.hash ) &&
-					!leftbtn){
+					this.page[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+					!this.leftbtn){
 						this._addBackButton();
 				} else {
 					this.element.find(".ui-toolbar-back-btn").remove();
@@ -69,7 +70,6 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			}
 			if( !this.page ){
 				$("[data-role='page']").css({"position":"relative"});
-				//this.element.css({"position":"relative"});
 				if( this.role === "footer" ){
 					this.element.appendTo("body");
 				}
@@ -82,15 +82,16 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		},
 		_addHeaderButtonClasses:function(){
 			var $headeranchors	= this.element.children( "a, button" );
-			leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
-			rightbtn = $headeranchors.hasClass( "ui-btn-right" );
+			this.leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
+			this.rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 
-			leftbtn = leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
+			this.leftbtn = this.leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
 
-			rightbtn = rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+			this.rightbtn = this.rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+
 		},
 		_addBackButton:function(){
-			backBtn = $( "<a href='javascript:void(0);' class='ui-btn-left ui-toolbar-back-btn' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ this.options.backBtnText +"</a>" )
+			this.backBtn = $( "<a href='javascript:void(0);' class='ui-btn-left ui-toolbar-back-btn' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ this.options.backBtnText +"</a>" )
 					// If theme is provided, override default inheritance
 					.attr( "data-"+ $.mobile.ns +"theme", this.options.backBtnTheme || this.options.theme )
 					.prependTo( this.element );

@@ -187,7 +187,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 $.mobile.collapsible.initSelector = ":jqmData(role='collapsible')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.collapsible" );
+$.mobile._enhancer.add( "mobile.collapsible", { dependencies: [ "mobile.page","mobile.toolbar" ] });
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

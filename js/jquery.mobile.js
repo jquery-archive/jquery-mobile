@@ -14,7 +14,6 @@ define([
 	"./jquery.mobile.navigation",
 	"./jquery.mobile.degradeInputs",
 	"./widgets/dialog",
-	"./widgets/page.sections",
 	"./widgets/collapsible",
 	"./widgets/collapsibleSet",
 	"./jquery.mobile.fieldContain",

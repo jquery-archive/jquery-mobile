@@ -12,7 +12,7 @@
 		window.scrollTo(0,0);
 	}
 
-	module("jquery.mobile.fixedToolbar.js", {setup: function() {
+	module("jquery.mobile.toolbar.js", {setup: function() {
 		var startTimeout;
 
 		// swallow the inital page change
@@ -29,13 +29,13 @@
 
 		$.testHelper.sequence([
 			function(){
-				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).fixedtoolbar( "hide" );
+				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).toolbar( "hide" );
 				scrollDown();
 			},
 
 			function(){
 				//show first
-				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).fixedtoolbar( "show" );
+				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).toolbar( "show" );
 			},
 
 			function() {
@@ -62,19 +62,19 @@
 
 		$.testHelper.sequence([
 			function(){
-				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				$( '#classes-test-g' ).toolbar( "show" );
 				scrollDown();
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "hide" );
+				$( '#classes-test-g' ).toolbar( "hide" );
 
 				ok( $( '#classes-test-g' ).hasClass('out'), 'The out class should be applied when hide is called');
 			},
 
 			function() {
 				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar has the ui-fixed-hidden class applied after hide');
-				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				$( '#classes-test-g' ).toolbar( "show" );
 
 			},
 
@@ -96,11 +96,11 @@
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "hide" );
+				$( '#classes-test-g' ).toolbar( "hide" );
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				$( '#classes-test-g' ).toolbar( "show" );
 
 				ok( $( '#classes-test-g' ).hasClass('in'), 'The in class should be applied when show is called');
 			},
@@ -127,7 +127,7 @@
 			},
 
 			function(){
-				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				$( '#classes-test-g' ).toolbar( "show" );
 			},
 
 			function() {
@@ -135,7 +135,7 @@
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "toggle" );
+				$( '#classes-test-g' ).toolbar( "toggle" );
 			},
 
 			function() {
@@ -143,7 +143,7 @@
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "toggle" );
+				$( '#classes-test-g' ).toolbar( "toggle" );
 			},
 
 			function() {
