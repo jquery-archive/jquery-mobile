@@ -251,7 +251,7 @@ define( [
 					// of a dialog sized custom select
 					//
 					// doing this here provides for the back button on the custom select dialog
-					$.mobile._bindPageRemove.call( self.thisPage );
+					self.thisPage.page( "bindRemove" );
 				});
 
 				// Events on the popup

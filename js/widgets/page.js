@@ -44,6 +44,27 @@ $.widget( "mobile.page", $.mobile.widget, {
 		$.mobile._enhancer.enhance( this.element[ 0 ] );
 	},
 
+	bindRemove: function() {
+		var page = this.element;
+
+		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
+		if ( !page.data( "mobile-page" ).options.domCache &&
+			page.is( ":jqmData(external-page='true')" ) ) {
+
+			page.bind( "pagehide.remove", function(/* e */) {
+				var $this = $( this ),
+					prEvent = new $.Event( "pageremove" );
+
+				$this.trigger( prEvent );
+
+				if ( !prEvent.isDefaultPrevented() ) {
+					$this.removeWithDependents();
+				}
+			});
+		}
+	},
+
+
 	_handlePageBeforeShow: function(/* e */) {
 		this.setContainerBackground();
 	},

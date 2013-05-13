@@ -468,11 +468,10 @@ define( [
 				// append to page and enhance
 				page.appendTo( this.element );
 
-				// wait for page creation to leverage options defined on widget
-				// TODO move to page widget
-				page.one( "pagecreate", $.mobile._bindPageRemove );
-
 				this._enhanceContent( page, settings.role );
+
+				// wait for page creation to leverage options defined on widget
+				page.page( "bindRemove" );
 
 				// Enhancing the page may result in new dialogs/sub pages being inserted
 				// into the DOM. If the original absUrl refers to a sub-page, that is the
