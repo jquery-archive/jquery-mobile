@@ -400,7 +400,7 @@ define( [
 			return $.mobile.dynamicBaseEnabled && !$.support.dynamicBaseTag;
 		},
 
-		_loadSuccess: function( url, absUrl, dataUrl, fileUrl, triggerData, settings, deferred ) {
+		_loadSuccess: function( absUrl, dataUrl, fileUrl, triggerData, settings, deferred ) {
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
 				//use it as the new fileUrl, base path, etc
@@ -439,6 +439,7 @@ define( [
 				page.appendTo( settings.pageContainer );
 
 				// wait for page creation to leverage options defined on widget
+				// TODO move to page widget
 				page.one( "pagecreate", $.mobile._bindPageRemove );
 
 				enhancePage( page, settings.role );
@@ -605,7 +606,7 @@ define( [
 				data: settings.data,
 				contentType: settings.contentType,
 				dataType: "html",
-				success: this._loadSuccess( url, absUrl, dataUrl, fileUrl, triggerData, settings, deferred ),
+				success: this._loadSuccess( absUrl, dataUrl, fileUrl, triggerData, settings, deferred ),
 				error: $.proxy(function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
 					this._getBase().set( path.get() );
