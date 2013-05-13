@@ -108,8 +108,8 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			$list.css( "counter-reset", "listnumbering " + startCount );
 		}
 
-		if ( !o.theme ) {
-			o.theme = "a";
+		if ( o.theme ) {
+			$list.addClass( "ui-body-" + o.theme );
 		}
 
 		for ( pos = 0, numli = li.length; pos < numli; pos++ ) {
@@ -121,13 +121,17 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
 				value = item.attr( "value" );
-				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
+				itemTheme = getAttr( item[ 0 ], "theme", true );
 
 				if ( a.length && !isDivider ) {
 					itemIcon = getAttr( item[ 0 ], "icon", true );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
 					var buttonClass = "ui-btn ui-btn-" + itemTheme;
+					
+					if ( itemTheme ) {
+						buttonClass += " ui-btn-" + itemTheme;
+					}
 					
 					if ( a.length > 1 ) {
 						itemClass += "ui-li-has-alt";
