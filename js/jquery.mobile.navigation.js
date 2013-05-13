@@ -292,7 +292,7 @@ define( [
 		},
 
 		_enhanceContent: function( content, role ) {
-			return enhancePage( content, role );
+			return content.page({ role: role });
 		},
 
 		_findExistingPage: function( dataUrl, fileUrl ) {
@@ -472,7 +472,7 @@ define( [
 				// TODO move to page widget
 				page.one( "pagecreate", $.mobile._bindPageRemove );
 
-				enhancePage( page, settings.role );
+				this._enhanceContent( page, settings.role );
 
 				// Enhancing the page may result in new dialogs/sub pages being inserted
 				// into the DOM. If the original absUrl refers to a sub-page, that is the
