@@ -23,7 +23,7 @@
 }
 .ui-listview .ui-li-static,
 .ui-listview .ui-li-divider,
-.ui-listview > li > .ui-btn {
+.ui-listview > li > a.ui-btn {
 	margin: 0;
 	display: block;
 	position: relative;
@@ -37,55 +37,55 @@
 }
 .ui-listview .ui-li-static,
 .ui-listview .ui-li-divider,
-.ui-listview > li > .ui-btn {
+.ui-listview > li > a.ui-btn {
 	border-width: 1px 0 0 0;
 }
 .ui-listview-inset .ui-li-static,
 .ui-listview-inset .ui-li-divider,
-.ui-listview-inset > li > .ui-btn {
+.ui-listview-inset > li > a.ui-btn {
 	border-right-width: 1px;
 	border-left-width: 1px;
 }
 .ui-listview .ui-li-static.ui-last-child,
 .ui-listview .ui-li-divider.ui-last-child,
-.ui-listview > li.ui-last-child > .ui-btn {
+.ui-listview > li.ui-last-child > a.ui-btn {
 	border-bottom-width: 1px;
 }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) > li.ui-first-child,
-.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) > li.ui-first-child > .ui-btn {
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) > li.ui-first-child > a.ui-btn {
 	border-top-width: 0;
 }
 .ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset) > li.ui-last-child,
-.ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset) > li.ui-last-child > .ui-btn {
+.ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset) > li.ui-last-child > a.ui-btn {
 	border-bottom-width: 0;
 }
 .ui-listview > li.ui-first-child,
-.ui-listview > li.ui-first-child > .ui-btn {
+.ui-listview > li.ui-first-child > a.ui-btn {
 	-webkit-border-top-right-radius: inherit;	
 	border-top-right-radius: inherit;
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 }
 .ui-listview > li.ui-last-child,
-.ui-listview > li.ui-last-child > .ui-btn {
+.ui-listview > li.ui-last-child > a.ui-btn {
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 }
-.ui-listview > li.ui-li-has-alt > .ui-btn {
+.ui-listview > li.ui-li-has-alt > a.ui-btn {
 	-webkit-border-top-right-radius: 0;
 	border-bottom-top-radius: 0;
 	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
-.ui-listview > li.ui-first-child > .ui-btn + .ui-btn {
+.ui-listview > li.ui-first-child > a.ui-btn + a.ui-btn {
 	-webkit-border-top-left-radius: 0;	
 	border-top-left-radius: 0;
 	-webkit-border-top-right-radius: inherit;
 	border-bottom-top-radius: inherit;
 }
-.ui-listview > li.ui-last-child > .ui-btn + .ui-btn {
+.ui-listview > li.ui-last-child > a.ui-btn + a.ui-btn {
 	-webkit-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
 	-webkit-border-bottom-right-radius: inherit;
