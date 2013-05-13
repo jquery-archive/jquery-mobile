@@ -301,14 +301,14 @@ define( [
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
 			//      are a valid url char and it breaks on the first occurence
-			page = settings.pageContainer.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
+			page = this.element.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
 
 			// If we failed to find the page, check to see if the url is a
 			// reference to an embedded page. If so, it may have been dynamically
 			// injected by a developer, in which case it would be lacking a data-url
 			// attribute and in need of enhancement.
 			if ( page.length === 0 && dataUrl && !path.isPath( dataUrl ) ) {
-				page = settings.pageContainer.children( path.hashToSelector("#" + dataUrl) )
+				page = this.element.children( path.hashToSelector("#" + dataUrl) )
 					.attr( "data-" + this._getNs() + "url", dataUrl )
 					.jqmData( "url", dataUrl );
 			}
@@ -447,7 +447,7 @@ define( [
 				}
 
 				// append to page and enhance
-				page.appendTo( settings.pageContainer );
+				page.appendTo( this.element );
 
 				// wait for page creation to leverage options defined on widget
 				// TODO move to page widget
@@ -459,7 +459,7 @@ define( [
 				// into the DOM. If the original absUrl refers to a sub-page, that is the
 				// real page we are interested in.
 				if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-					page = settings.pageContainer.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
+					page = this.element.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
 				}
 
 				// Remove loading message.
@@ -473,7 +473,7 @@ define( [
 				triggerData.page = page;
 
 				// Let listeners know the page loaded successfully.
-				settings.pageContainer.trigger( "pageload", triggerData );
+				this.element.trigger( "pageload", triggerData );
 
 				deferred.resolve( absUrl, settings, page );
 			}, this);
@@ -508,7 +508,7 @@ define( [
 				fileUrl, dataUrl, mpc, pblEvent, triggerData;
 
 			if ( settings.done ) {
-			  promise.done(settings.done);
+			  promise.done( settings.done );
 			}
 
 			if ( settings.fail ) {
@@ -537,9 +537,6 @@ define( [
 			// path. For cross-domain pages (Phone Gap only) the entire absolute Url
 			// used to load the page.
 			dataUrl = this._createDataUrl( absUrl );
-
-			// Make sure we have a pageContainer to work with.
-			settings.pageContainer = settings.pageContainer || this.element;
 
 			page = this._findExistingPage( settings, dataUrl, fileUrl );
 
@@ -573,7 +570,7 @@ define( [
 				return promise;
 			}
 
-			mpc = settings.pageContainer;
+			mpc = this.element;
 			pblEvent = new $.Event( "pagebeforeload" );
 			triggerData = {
 				url: url,
@@ -630,7 +627,7 @@ define( [
 					var plfEvent = new $.Event( "pageloadfailed" );
 
 					// Let listeners know the page load failed.
-					settings.pageContainer.trigger( plfEvent, triggerData );
+					this.element.trigger( plfEvent, triggerData );
 
 					// If the default behavior is prevented, stop here!
 					// Note that it is the responsibility of the listener/handler
