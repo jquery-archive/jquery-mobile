@@ -76,6 +76,8 @@
         	<li><a href="test/listviews-b/" data-ajax="false">Listviews</a></li>
 			<li data-role="list-divider">Icons</li>
 			<li><a href="test/icons/font-icons.php" data-ajax="false">Font icons</a></li>
+			<li data-role="list-divider">Theming</li>
+			<li><a href="test/theming/" data-ajax="false">Theme inheritance</a></li>
         </ul>
 
 	</div><!-- /content -->
