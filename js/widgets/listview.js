@@ -116,8 +116,8 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			item = li.eq( pos );
 			itemClass = "";
 
-			// If we're creating the element, we update it regardless
-			if ( create || !item.hasClass( "ui-li" ) ) {
+			// TODO: Better way than !item.is( ".ui-listview > li" ) to prevent re-enhancemeent.
+			if ( create || !item.is( ".ui-listview > li" ) ) {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
 				value = item.attr( "value" );
@@ -183,10 +183,9 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			$( itemClassDict[ itemClass ] ).addClass( itemClass );
 		}
 
-		$list
-			.find( ".ui-li-count" ).each(function() {
-					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-				}).addClass( "ui-fill-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-corner-all" );
+		$list.find( ".ui-li-count" ).each(function() {
+				$( this ).closest( "li" ).addClass( "ui-li-has-count" );
+			}).addClass( "ui-fill-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-corner-all" );
 
 		// The idea here is to look at the first image in the list item
 		// itself, and any .ui-link-inherit element it may contain, so we
@@ -201,7 +200,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		// opposed to 30 seconds.
 
 		this._addThumbClasses( li );
-		this._addThumbClasses( $list.find( "li > a" ) );
+		this._addThumbClasses( $list.find( "li > .ui-btn" ) );
 
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh
