@@ -273,7 +273,7 @@
 		this.element = $( "<div><div data-foo-url='bar'></div></div>" );
 
 		equal(
-			proto._findExistingPage( {}, "bar" )[0],
+			proto._findExistingPage( "bar" )[0],
 			proto.element.children()[0],
 			"returns the first child of the page container"
 		);
@@ -286,7 +286,7 @@
 
 		equal( proto.element.children().first().attr( "data-foo-url" ), undefined );
 
-		result = proto._findExistingPage( {}, "bar" ),
+		result = proto._findExistingPage( "bar" ),
 
 		equal(
 			result[0],
@@ -303,7 +303,7 @@
 		};
 
 		// using location.href as the fileUrl param ensures that path.isFirstPageUrl returns true
-		ok( proto._findExistingPage({}, "bar", location.href ).is("#initial") );
+		ok( proto._findExistingPage("bar", location.href ).is("#initial") );
 	});
 
 	module( "Content Widget _findLoaded", {

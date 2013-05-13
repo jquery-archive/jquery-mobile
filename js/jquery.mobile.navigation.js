@@ -295,7 +295,7 @@ define( [
 			return enhancePage( content, role );
 		},
 
-		_findExistingPage: function( settings, dataUrl, fileUrl ) {
+		_findExistingPage: function( dataUrl, fileUrl ) {
 			var page, initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
@@ -554,7 +554,7 @@ define( [
 			// used to load the page.
 			dataUrl = this._createDataUrl( absUrl );
 
-			page = this._findExistingPage( settings, dataUrl, fileUrl );
+			page = this._findExistingPage( dataUrl, fileUrl );
 
 			// If it isn't a reference to the first page and refers to missing embedded page
 			// reject the deferred and return the promise for folks to bind to fail
