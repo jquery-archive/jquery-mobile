@@ -659,7 +659,11 @@ define( [
 	});
 
 	$.mobile.loadPage = function( url, opts ) {
-		$.mobile.pageContainer.content( "load", url, opts );
+		var container = (opts.pageContainer || $.mobile.pageContainer);
+
+		// Preferring to allow exceptions for uninitialized opts.pageContainer
+		// widgets so we know if we need to force init here for users
+		container.content( "load", url, opts );
 	};
 
 	//define vars for interal use
