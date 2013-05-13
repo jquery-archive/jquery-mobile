@@ -408,6 +408,22 @@ define( [
 			return path.getFilePath( absoluteUrl );
 		},
 
+		_triggerWithDeprecated: function( name, data ) {
+			var deprecatedEvent = $.Event( "page" + name ),
+				newEvent = $.Event( this.widgetName + name );
+
+			// trigger the old deprecated event
+			this.element.trigger( deprecatedEvent, data );
+
+			// use the widget trigger method for the new content* event
+			this.element.trigger( newEvent, data );
+
+			return {
+				deprecatedEvent: deprecatedEvent,
+				event: newEvent
+			};
+		},
+
 		_loadSuccess: function( absUrl, triggerData, settings, deferred ) {
 			var fileUrl = this._createFileUrl( absUrl ),
 				dataUrl = this._createDataUrl( absUrl );
@@ -473,7 +489,7 @@ define( [
 				triggerData.page = page;
 
 				// Let listeners know the page loaded successfully.
-				this.element.trigger( "pageload", triggerData );
+				this._triggerWithDeprecated( "load", triggerData );
 
 				deferred.resolve( absUrl, settings, page );
 			}, this);
@@ -505,7 +521,7 @@ define( [
 				// The absolute version of the URL passed into the function. This
 				// version of the URL may contain dialog/subpage params in it.
 				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
-				fileUrl, dataUrl, mpc, pblEvent, triggerData;
+				fileUrl, dataUrl, pblEvent, triggerData;
 
 			if ( settings.done ) {
 			  promise.done( settings.done );
@@ -570,8 +586,6 @@ define( [
 				return promise;
 			}
 
-			mpc = this.element;
-			pblEvent = new $.Event( "pagebeforeload" );
 			triggerData = {
 				url: url,
 				absUrl: absUrl,
@@ -580,13 +594,12 @@ define( [
 				options: settings
 			};
 
-			// TODO move to _trigger (requires sorting out why we allow designation of container)
-			// TODO deprecate page* events
 			// Let listeners know we're about to load a page.
-			mpc.trigger( pblEvent, triggerData );
+			pblEvent = this._triggerWithDeprecated( "beforeload", triggerData );
 
 			// If the default behavior is prevented, stop here!
-			if ( pblEvent.isDefaultPrevented() ) {
+			if ( pblEvent.deprecatedEvent.isDefaultPrevented() ||
+				 pblEvent.event.isDefaultPrevented() ) {
 				return promise;
 			}
 
@@ -624,16 +637,15 @@ define( [
 					triggerData.textStatus = textStatus;
 					triggerData.errorThrown = errorThrown;
 
-					var plfEvent = new $.Event( "pageloadfailed" );
-
 					// Let listeners know the page load failed.
-					this.element.trigger( plfEvent, triggerData );
+					var plfEvent = this._triggerWithDeprecated( "loadfailed", triggerData );
 
 					// If the default behavior is prevented, stop here!
 					// Note that it is the responsibility of the listener/handler
 					// that called preventDefault(), to resolve/reject the
 					// deferred object within the triggerData.
-					if ( plfEvent.isDefaultPrevented() ) {
+					if ( plfEvent.deprecatedEvent.isDefaultPrevented() ||
+						plfEvent.event.isDefaultPrevented() ) {
 						return;
 					}
 
