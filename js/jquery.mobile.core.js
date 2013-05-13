@@ -14,6 +14,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	var nsNormalizeDict = {},
 		// Monkey-patching Sizzle to filter the :jqmData selector
 		oldFind = $.find,
+		jqmSelector = ":jqmData",
 		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
 	// jQuery.mobile configurable options
@@ -327,7 +328,9 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	};
 
 	$.find = function( selector, context, ret, extra ) {
-		selector = selector.replace( jqmDataRE, "[data-" + ( $.mobile.ns || "" ) + "$1]" );
+		if ( selector.indexOf( jqmSelector ) > -1 ) {
+			selector = selector.replace( jqmDataRE, "[data-" + ( $.mobile.ns || "" ) + "$1]" );
+		}
 
 		return oldFind.call( this, selector, context, ret, extra );
 	};
