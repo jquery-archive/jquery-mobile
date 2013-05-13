@@ -424,6 +424,9 @@ define( [
 			};
 		},
 
+		// TODO it would be nice to split this up more but everything appears to be "one off"
+		//      or require ordering such that other bits are sprinkled in between parts that
+		//      could be abstracted out as a group
 		_loadSuccess: function( absUrl, triggerData, settings, deferred ) {
 			var fileUrl = this._createFileUrl( absUrl ),
 				dataUrl = this._createDataUrl( absUrl );
