@@ -950,26 +950,6 @@ define( [
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
 
-	$.mobile._bindPageRemove = function() {
-		var page = $( this );
-
-		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
-		if ( !page.data( "mobile-page" ).options.domCache &&
-			page.is( ":jqmData(external-page='true')" ) ) {
-
-			page.bind( "pagehide.remove", function(/* e */) {
-				var $this = $( this ),
-					prEvent = new $.Event( "pageremove" );
-
-				$this.trigger( prEvent );
-
-				if ( !prEvent.isDefaultPrevented() ) {
-					$this.removeWithDependents();
-				}
-			});
-		}
-	};
-
 	// Show a specific page in the page container.
 	$.mobile.changePage = function( toPage, options ) {
 		// If we are in the midst of a transition, queue the current request.

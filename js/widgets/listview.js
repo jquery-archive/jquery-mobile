@@ -367,7 +367,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			// unbind the original page remove and replace with our specialized version
 			parentPage
 				.unbind( "pagehide.remove" )
-				.bind( "pagehide.remove", newRemove);
+				.page( "bindRemove", newRemove );
 		}
 	},
 
