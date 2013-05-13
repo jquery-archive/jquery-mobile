@@ -404,4 +404,30 @@
 
 		proto._triggerWithDeprecated( "foo", { bar: "baz" } );
 	});
+
+	module( "Content Widget _include" );
+
+	test( "include appends to the element", function() {
+		var page = $( "<div>" );
+
+		page.page = $.noop;
+		proto.element = $( "<div>" );
+
+		equal( proto.element.children().length, 0, "no children" );
+		proto._include( page, {} );
+		equal( proto.element.children().length, 1, "one child" );
+	});
+
+	test( "invokes the page method on the element with a role", function() {
+		expect( 1 );
+		var page = $( "<div>" );
+
+		page.page = function( opts ){
+			if( opts.role ){
+				equal( opts.role, "foo" );
+			}
+		};
+
+		proto._include( page, {role: "foo"} );
+	});
 })(jQuery);
