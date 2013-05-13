@@ -166,16 +166,16 @@
 	font-size: 1em;
 	font-weight: bold;
 	display: block;
-	margin: .6em 0;
+	margin: .45em 0;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 }
 .ui-listview > li p {
-	font-size: 12px;
+	font-size: .75em;
 	font-weight: normal;
 	display: block;
-	margin: -.5em 0 .6em;
+	margin: .6em 0;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
