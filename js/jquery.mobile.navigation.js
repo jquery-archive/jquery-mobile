@@ -631,37 +631,41 @@ define( [
 				contentType: settings.contentType,
 				dataType: "html",
 				success: this._loadSuccess( absUrl, triggerData, settings, deferred ),
-				error: $.proxy(function( xhr, textStatus, errorThrown ) {
-					//set base back to current path
-					this._getBase().set( path.get() );
-
-					// Add error info to our triggerData.
-					triggerData.xhr = xhr;
-					triggerData.textStatus = textStatus;
-					triggerData.errorThrown = errorThrown;
-
-					// Let listeners know the page load failed.
-					var plfEvent = this._triggerWithDeprecated( "loadfailed", triggerData );
-
-					// If the default behavior is prevented, stop here!
-					// Note that it is the responsibility of the listener/handler
-					// that called preventDefault(), to resolve/reject the
-					// deferred object within the triggerData.
-					if ( plfEvent.deprecatedEvent.isDefaultPrevented() ||
-						plfEvent.event.isDefaultPrevented() ) {
-						return;
-					}
-
-					// Remove loading message.
-					if ( settings.showLoadMsg ) {
-						this._showError();
-					}
-
-					deferred.reject( absUrl, settings );
-				}, this)
+				error: this._loadError( absUrl, triggerData, settings, deferred )
 			});
 
 			return promise;
+		},
+
+		_loadError: function( absUrl, triggerData, settings, deferred ) {
+			return $.proxy(function( xhr, textStatus, errorThrown ) {
+				//set base back to current path
+				this._getBase().set( path.get() );
+
+				// Add error info to our triggerData.
+				triggerData.xhr = xhr;
+				triggerData.textStatus = textStatus;
+				triggerData.errorThrown = errorThrown;
+
+				// Let listeners know the page load failed.
+				var plfEvent = this._triggerWithDeprecated( "loadfailed", triggerData );
+
+				// If the default behavior is prevented, stop here!
+				// Note that it is the responsibility of the listener/handler
+				// that called preventDefault(), to resolve/reject the
+				// deferred object within the triggerData.
+				if ( plfEvent.deprecatedEvent.isDefaultPrevented() ||
+					 plfEvent.event.isDefaultPrevented() ) {
+					return;
+				}
+
+				// Remove loading message.
+				if ( settings.showLoadMsg ) {
+					this._showError();
+				}
+
+				deferred.reject( absUrl, settings );
+			}, this);
 		}
 
 		// transitionPages
