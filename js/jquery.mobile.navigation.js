@@ -511,7 +511,7 @@ define( [
 		load: function( url, options ) {
 			// This function uses deferred notifications to let callers
 			// know when the page is done loading, or if an error has occurred.
-			var deferred = $.Deferred(),
+			var deferred = options.deferred || $.Deferred(),
 				promise = deferred.promise(),
 
 				// The default loadPage options with overrides specified by
@@ -525,14 +525,6 @@ define( [
 				// version of the URL may contain dialog/subpage params in it.
 				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
 				fileUrl, dataUrl, pblEvent, triggerData;
-
-			if ( settings.done ) {
-			  promise.done( settings.done );
-			}
-
-			if ( settings.fail ) {
-			  promise.fail( settings.fail );
-			}
 
 			// If the caller provided data, and we're using "get" request,
 			// append the data to the URL.
@@ -677,9 +669,16 @@ define( [
 	$.mobile.loadPage = function( url, opts ) {
 		var container = (opts.pageContainer || $.mobile.pageContainer);
 
+		// create the deferred that will be supplied to loadPage callers
+		// and resolved by the content widget's load method
+		opts.deferred = $.Deferred();
+
 		// Preferring to allow exceptions for uninitialized opts.pageContainer
 		// widgets so we know if we need to force init here for users
 		container.content( "load", url, opts );
+
+		// provide the deferred
+		return opts.deferred;
 	};
 
 	//define vars for interal use
@@ -1062,25 +1061,23 @@ define( [
 			// in the event bindings for the page life cycle See issue #5085
 			settings.target = toPage;
 
-			$.mobile.loadPage( toPage, $.extend(settings, {
-				done: function( url, options, newPage ) {
+			$.mobile.loadPage( toPage, settings)
+				.done(function( url, options, newPage ) {
 					isPageTransitioning = false;
 
 					// store the original absolute url so that it can be provided
 					// to events in the triggerData of the subsequent changePage call
 					newPage.data( "absUrl", triggerData.absUrl );
 					$.mobile.changePage( newPage, options );
-				},
-
-				fail: function(/* url, options */) {
+				})
+				.fail(function(/* url, options */) {
 					//clear out the active button state
 					removeActiveLinkClass( true );
 
 					//release transition lock so navigation is free again
 					releasePageTransitionLock();
 					settings.pageContainer.trigger( "pagechangefailed", triggerData );
-				}
-			}));
+				});
 
 			return;
 		}
