@@ -23,29 +23,35 @@
 	.ui-mobile fieldset.ui-field-contain {
 		padding: 0;
 		margin: 1em 0;
+		zoom: 1;
+	}
+	.ui-field-contain:before {
+		content: "";
+		display: table;
 	}
 	.ui-field-contain:after {
-		content: none;
-		display: none;
+		display: table;
+		clear: both;
+		border: none;
+		box-shadow: none;
 	}
 	.ui-field-contain > label,
 	.ui-field-contain .ui-controlgroup-label,
 	.ui-field-contain > .ui-rangeslider > label {
-		display: inline-block;
-		vertical-align: top;
+		float: left;
 		width: 20%;
 		margin: .6em 2% 0 0;
 	}
 	.ui-popup .ui-field-contain > label,
 	.ui-popup .ui-field-contain .ui-controlgroup-label,
 	.ui-popup .ui-field-contain > .ui-rangeslider > label {
-		display: block;
+		float: none;
 		width: auto;
 		margin: 0 0 .4em;
 	}
 	.ui-field-contain > label + [class*="ui-"],
 	.ui-field-contain .ui-controlgroup-controls {
-		display: inline-block;
+		float: left;
 		width: 78%;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
@@ -56,7 +62,7 @@
 	.ui-hide-label .ui-controlgroup-controls,
 	.ui-popup .ui-field-contain > label + [class*="ui-"],
 	.ui-popup .ui-field-contain .ui-controlgroup-controls {
-		display: block;
+		float: none;
 		width: 100%;
 	}
 }
