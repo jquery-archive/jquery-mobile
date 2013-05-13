@@ -37,6 +37,10 @@ input.ui-slider-input {
 	-ms-box-sizing: content-box;
 	box-sizing: content-box;
 }
+.ui-mobile-nosupport-boxshadow input.ui-slider-input {
+	border-width: 1px;
+	margin: -1px;
+}
 .ui-slider-input::-webkit-outer-spin-button,
 .ui-slider-input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
