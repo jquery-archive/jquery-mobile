@@ -137,7 +137,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						
 						var last = a.last(),
 							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
-							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon || getAttr( item[ 0 ], "icon", true ) || o.icon,
+							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon,
 							splitbutton = $( "<div class='ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-shadow-icon'></div>" );
 						
 						last
