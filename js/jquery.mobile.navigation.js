@@ -400,7 +400,18 @@ define( [
 			return $.mobile.dynamicBaseEnabled && !$.support.dynamicBaseTag;
 		},
 
-		_loadSuccess: function( absUrl, dataUrl, fileUrl, triggerData, settings, deferred ) {
+		_createDataUrl: function( absoluteUrl ) {
+			return path.convertUrlToDataUrl( absoluteUrl );
+		},
+
+		_createFileUrl: function( absoluteUrl ) {
+			return path.getFilePath( absoluteUrl );
+		},
+
+		_loadSuccess: function( absUrl, triggerData, settings, deferred ) {
+			var fileUrl = this._createFileUrl( absUrl ),
+				dataUrl = this._createDataUrl( absUrl );
+
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
 				//use it as the new fileUrl, base path, etc
@@ -518,14 +529,14 @@ define( [
 
 			// The absolute version of the URL minus any dialog/subpage params.
 			// In otherwords the real URL of the page to be loaded.
-			fileUrl = path.getFilePath( absUrl );
+			fileUrl = this._createFileUrl( absUrl );
 
 			// The version of the Url actually stored in the data-url attribute of
 			// the page. For embedded pages, it is just the id of the page. For pages
 			// within the same domain as the document base, it is the site relative
 			// path. For cross-domain pages (Phone Gap only) the entire absolute Url
 			// used to load the page.
-			dataUrl = path.convertUrlToDataUrl( absUrl );
+			dataUrl = this._createDataUrl( absUrl );
 
 			// Make sure we have a pageContainer to work with.
 			settings.pageContainer = settings.pageContainer || this.element;
@@ -606,7 +617,7 @@ define( [
 				data: settings.data,
 				contentType: settings.contentType,
 				dataType: "html",
-				success: this._loadSuccess( absUrl, dataUrl, fileUrl, triggerData, settings, deferred ),
+				success: this._loadSuccess( absUrl, triggerData, settings, deferred ),
 				error: $.proxy(function( xhr, textStatus, errorThrown ) {
 					//set base back to current path
 					this._getBase().set( path.get() );
