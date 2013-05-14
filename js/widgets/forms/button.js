@@ -95,10 +95,9 @@ $.widget( "mobile.button", $.mobile.widget, {
 			$el = this.element,
 			classes = "";
 
-		if ( !o.theme ) {
-			 o.theme = "a";
+		if ( o.theme ) {
+			 classes += "ui-btn-" + o.theme;
 		}
-		classes += "ui-btn-" + o.theme;
 
 		if ( o.corners ) {
 			classes += " ui-corner-all";
