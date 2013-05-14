@@ -702,6 +702,7 @@ define( [
 
 			this._triggerWithDeprecated( "beforeshow", {prevPage: fromPage || $( "" )}, toPage );
 
+			// TODO maybe put this in a binding to events above?
 			this._hideLoading();
 
 			transition = $.mobile._maybeDegradeTransition( transition );
