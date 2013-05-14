@@ -69,7 +69,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				this._addHeaderButtonClasses();
 			}
 			if( !this.page ){
-				$("[data-role='page']").css({"position":"relative"});
+				$("[data-"+ $.mobile.ns +"role='page']").css({"position":"relative"});
 				if( this.role === "footer" ){
 					this.element.appendTo("body");
 				}

@@ -21,7 +21,9 @@
 			clearTimeout(startTimeout);
 		});
 
-		startTimeout = setTimeout(start, 1000);
+		startTimeout = setTimeout( function(){
+			start();
+		}, 1000);
 	}});
 
 	asyncTest( "Fixed header and footer transition classes are applied correctly", function(){
@@ -55,6 +57,7 @@
 		], 1000);
 
 	});
+
 
 	asyncTest( "The hide method is working properly", function() {
 
@@ -156,6 +159,26 @@
 				start();
 			}
 
+		], 500);
+	});
+
+	asyncTest( "Fullscreen toolbars add classes to page", function() {
+		expect( 2 );
+
+		$.testHelper.sequence([
+			function(){
+				$.mobile.changePage( "#fullscreen-test-a" );
+			},
+
+			function(){	
+				ok( $('#classes-test-l').closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
+				ok( $('#classes-test-m').closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
+			},
+
+			function(){
+				scrollUp();
+				start();
+			}
 		], 500);
 	});
 
