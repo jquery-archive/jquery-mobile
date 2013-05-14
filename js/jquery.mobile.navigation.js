@@ -24,6 +24,9 @@ define( [
 
 			this.setLastScrollEnabled = true;
 
+			// TODO consider moving the navigation handler OUT of widget into
+			//      some other object as glue between the navigate event and the
+			//      content widget load and change methods
 			this._on( $window, { navigate: "_filterNavigateEvents" });
 
 			this._on( $window, {
