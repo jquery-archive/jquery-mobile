@@ -685,6 +685,10 @@ define( [
 			}, this);
 		},
 
+		_getTransitionHandler: function( transition ) {
+			return $.mobile.transitionHandlers[ transition ] || $.mobile.defaultTransitionHandler;
+		},
+
 		// TODO make private once change has been defined in the widget1
 		transition: function( toPage, fromPage, options ) {
 			var transition = options.transition,
@@ -711,10 +715,10 @@ define( [
 			//find the transition handler for the specified transition. If there
 			//isn't one in our transitionHandlers dictionary, use the default one.
 			//call the handler immediately to kick-off the transition.
-			TransitionHandler = $.mobile.transitionHandlers[ transition || "default" ] ||
-				$.mobile.defaultTransitionHandler;
+			TransitionHandler = this._getTransitionHandler( transition );
 
-			promise = (new TransitionHandler( transition, reverse, toPage, fromPage )).transition();
+			promise = (new TransitionHandler( transition, reverse, toPage, fromPage ))
+				.transition();
 
 			// TODO temporary accomodation of argument deferred
 			promise.done(function() {

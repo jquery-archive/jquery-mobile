@@ -22,8 +22,6 @@ define( ["jquery", "../jquery.mobile.core", "./serial", "./concurrent"], functio
 	// Make our transition handler the public default.
 	$.mobile.defaultTransitionHandler = $.mobile.transitionHandlers.sequential;
 
-	$.mobile.transitionHandlers[ "default" ] = $.mobile.defaultTransitionHandler;
-
 	$.mobile.transitionFallbacks = {};
 
 	// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
