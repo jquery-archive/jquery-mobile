@@ -694,6 +694,7 @@ define( [
 				transitionHandler,
 				promise;
 
+			// TODO decide if these events should in fact be triggered on the container
 			if ( fromPage ) {
 				//trigger before show/hide events
 				this._triggerWithDeprecated( "beforehide", {nextPage: toPage}, fromPage );
@@ -701,9 +702,7 @@ define( [
 
 			this._triggerWithDeprecated( "beforeshow", {prevPage: fromPage || $( "" )}, toPage );
 
-			//clear page loader
-			// TODO use conent loader ref
-			$.mobile.hidePageLoadingMsg();
+			this._hideLoading();
 
 			transition = $.mobile._maybeDegradeTransition( transition );
 
