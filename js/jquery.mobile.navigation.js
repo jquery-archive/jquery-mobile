@@ -378,7 +378,8 @@ define( [
 			setTimeout( $.proxy(this, "_hideLoading"), 1500 );
 		},
 
-		_findLoaded: function( html, fileUrl ) {
+		_parse: function( html, fileUrl ) {
+			// TODO consider allowing customization of this method. It's very JQM specific
 			var page, all = $( "<div></div>" );
 
 			//workaround to allow scripts to execute when included in page divs
@@ -428,6 +429,7 @@ define( [
 			var deprecatedEvent = $.Event( "page" + name ),
 				newEvent = $.Event( this.widgetName + name );
 
+			// DEPRECATED
 			// trigger the old deprecated event
 			this.element.trigger( deprecatedEvent, data );
 
@@ -472,7 +474,7 @@ define( [
 					this._getBase().set( fileUrl );
 				}
 
-				page = this._findLoaded( html, fileUrl );
+				page = this._parse( html, fileUrl );
 
 				this._setLoadedTitle( page, html );
 
@@ -510,27 +512,34 @@ define( [
 		_loadDefaults: {
 			type: "get",
 			data: undefined,
+
+			// DEPRECATED
 			reloadPage: false,
-			role: undefined, // By default we rely on the role defined by the @data-role attribute.
+
+			// By default we rely on the role defined by the @data-role attribute.
+			role: undefined,
+
 			showLoadMsg: false,
 			pageContainer: undefined,
-			loadMsgDelay: 50 // This delay allows loads that pull from browser cache to occur without showing the loading message.
+
+			// This delay allows loads that pull from browser cache to
+			// occur without showing the loading message.
+			loadMsgDelay: 50
 		},
 
 		load: function( url, options ) {
 			// This function uses deferred notifications to let callers
-			// know when the page is done loading, or if an error has occurred.
+			// know when the content is done loading, or if an error has occurred.
 			var deferred = options.deferred || $.Deferred(),
 
-				// The default loadPage options with overrides specified by
-				// the caller.
+				// The default load options with overrides specified by the caller.
 				settings = $.extend( {}, this._loadDefaults, options ),
 
-				// The DOM element for the page after it has been loaded.
-				page = null,
+				// The DOM element for the content after it has been loaded.
+				content = null,
 
 				// The absolute version of the URL passed into the function. This
-				// version of the URL may contain dialog/subpage params in it.
+				// version of the URL may contain dialog/subcontent params in it.
 				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
 				fileUrl, dataUrl, pblEvent, triggerData;
 
@@ -546,22 +555,22 @@ define( [
 				settings.reloadPage = true;
 			}
 
-			// The absolute version of the URL minus any dialog/subpage params.
-			// In otherwords the real URL of the page to be loaded.
+			// The absolute version of the URL minus any dialog/subcontent params.
+			// In otherwords the real URL of the content to be loaded.
 			fileUrl = this._createFileUrl( absUrl );
 
 			// The version of the Url actually stored in the data-url attribute of
-			// the page. For embedded pages, it is just the id of the page. For pages
+			// the content. For embedded content, it is just the id of the page. For content
 			// within the same domain as the document base, it is the site relative
-			// path. For cross-domain pages (Phone Gap only) the entire absolute Url
-			// used to load the page.
+			// path. For cross-domain content (Phone Gap only) the entire absolute Url
+			// used to load the content.
 			dataUrl = this._createDataUrl( absUrl );
 
-			page = this._find( absUrl );
+			content = this._find( absUrl );
 
-			// If it isn't a reference to the first page and refers to missing embedded page
+			// If it isn't a reference to the first content and refers to missing embedded content
 			// reject the deferred and return
-			if ( page.length === 0 &&
+			if ( content.length === 0 &&
 				path.isEmbeddedPage(fileUrl) &&
 				!path.isFirstPageUrl(fileUrl) ) {
 				deferred.reject( absUrl, settings );
@@ -572,15 +581,15 @@ define( [
 			// TODO figure out why we doe this
 			this._getBase().reset();
 
-			// If the page we are interested in is already in the DOM,
+			// If the content we are interested in is already in the DOM,
 			// and the caller did not indicate that we should force a
 			// reload of the file, we are done. Resolve the deferrred so that
 			// users can bind to .done on the promise
-			if ( page.length && !settings.reloadPage ) {
-				this._enhance( page, settings.role );
-				deferred.resolve( absUrl, settings, page );
+			if ( content.length && !settings.reloadPage ) {
+				this._enhance( content, settings.role );
+				deferred.resolve( absUrl, settings, content );
 
-				//if we are reloading the page make sure we update
+				//if we are reloading the content make sure we update
 				// the base if its not a prefetch
 				if( !settings.prefetch ){
 					this._getBase().set(url);
@@ -597,7 +606,7 @@ define( [
 				options: settings
 			};
 
-			// Let listeners know we're about to load a page.
+			// Let listeners know we're about to load a content.
 			pblEvent = this._triggerWithDeprecated( "beforeload", triggerData );
 
 			// If the default behavior is prevented, stop here!
@@ -622,7 +631,7 @@ define( [
 				return;
 			}
 
-			// Load the new page.
+			// Load the new content.
 			$.ajax({
 				url: fileUrl,
 				type: settings.type,

@@ -306,7 +306,7 @@
 		ok( proto._find(location.href).is("#initial"), "matches the first page" );
 	});
 
-	module( "Content Widget _findLoaded", {
+	module( "Content Widget _parse", {
 		setup: function() {
 			$.mobile.ns = "foo-";
 		}
@@ -319,7 +319,7 @@
 
 		html = "<div data-foo-role='page' id='first'></div>" +
 			"<div data-foo-role='dialog' id='second'></div>";
-		equal( proto._findLoaded( html ).attr("id"), "first" );
+		equal( proto._parse( html ).attr("id"), "first" );
 	});
 
 	test( "returns first page with data role dialog", function() {
@@ -328,7 +328,7 @@
 		html = "<div data-foo-role='dialog' id='first'></div>" +
 			"<div data-foo-role='page' id='second'></div>";
 
-		page = proto._findLoaded( html );
+		page = proto._parse( html );
 
 		equal( page.attr("id"), "first" );
 		equal( page.attr( "data-foo-role" ), "dialog" );
@@ -339,7 +339,7 @@
 
 		html = "<body>foo</body>";
 
-		page = proto._findLoaded( html );
+		page = proto._parse( html );
 
 		equal( page.attr("data-foo-role"), "page" );
 		equal( page.text(), "foo" );
