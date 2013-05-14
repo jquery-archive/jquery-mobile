@@ -46,10 +46,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		}
 
 		// Establish options
-		// If there's no selected theme check the data attr
-		if ( !o.theme ) {
-			o.theme = "a";
-		}
 		o.mini = inheritAttr( input, "mini" ) || o.mini;
 
 		// Expose for other methods
@@ -201,7 +197,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	},
 
 	_setTheme: function( value ) {
-		this.label.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + value );
+		if ( value ) {
+			this.label.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + value );
+		}
 	},
 
 	_setMini: function( value ) {
