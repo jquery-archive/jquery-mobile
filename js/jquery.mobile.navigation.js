@@ -452,7 +452,7 @@ define( [
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
 				//use it as the new fileUrl, base path, etc
-				var page,
+				var content,
 
 					// TODO handle dialogs again
 					pageElemRegex = new RegExp( "(<[^>]+\\bdata-" + this._getNs() + "role=[\"']?page[\"']?[^>]*>)" ),
@@ -474,22 +474,22 @@ define( [
 					this._getBase().set( fileUrl );
 				}
 
-				page = this._parse( html, fileUrl );
+				content = this._parse( html, fileUrl );
 
-				this._setLoadedTitle( page, html );
+				this._setLoadedTitle( content, html );
 
 				// rewrite src and href attrs to use a base url if the base tag won't work
-				if ( this._isRewritableBaseTag() && page ) {
-					this._getBase().rewrite( fileUrl, page );
+				if ( this._isRewritableBaseTag() && content ) {
+					this._getBase().rewrite( fileUrl, content );
 				}
 
-				this._include( page, settings );
+				this._include( content, settings );
 
-				// Enhancing the page may result in new dialogs/sub pages being inserted
-				// into the DOM. If the original absUrl refers to a sub-page, that is the
-				// real page we are interested in.
+				// Enhancing the content may result in new dialogs/sub content being inserted
+				// into the DOM. If the original absUrl refers to a sub-content, that is the
+				// real content we are interested in.
 				if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-					page = this.element.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
+					content = this.element.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
 				}
 
 				// Remove loading message.
@@ -497,15 +497,19 @@ define( [
 					this._hideLoading();
 				}
 
-				// Add the page reference and xhr to our triggerData.
+				// Add the content reference and xhr to our triggerData.
 				triggerData.xhr = xhr;
 				triggerData.textStatus = textStatus;
-				triggerData.page = page;
 
-				// Let listeners know the page loaded successfully.
+				// DEPRECATED
+				triggerData.page = content;
+
+				triggerData.content = content;
+
+				// Let listeners know the content loaded successfully.
 				this._triggerWithDeprecated( "load", triggerData );
 
-				deferred.resolve( absUrl, settings, page );
+				deferred.resolve( absUrl, settings, content );
 			}, this);
 		},
 
