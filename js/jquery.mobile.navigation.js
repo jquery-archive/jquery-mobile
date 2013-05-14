@@ -696,12 +696,10 @@ define( [
 
 			if ( fromPage ) {
 				//trigger before show/hide events
-				fromPage.data( "mobile-page" )
-					._trigger( "beforehide", null, { nextPage: toPage } );
+				this._triggerWithDeprecated( "beforehide", {nextPage: toPage}, fromPage );
 			}
 
-			toPage.data( "mobile-page" )
-				._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
+			this._triggerWithDeprecated( "beforeshow", {prevPage: fromPage || $( "" )}, toPage );
 
 			//clear page loader
 			// TODO use conent loader ref
