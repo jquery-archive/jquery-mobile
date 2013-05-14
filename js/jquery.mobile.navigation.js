@@ -686,10 +686,30 @@ define( [
 		},
 
 		_getTransitionHandler: function( transition ) {
+			transition = $.mobile._maybeDegradeTransition( transition );
+
+			//find the transition handler for the specified transition. If there
+			//isn't one in our transitionHandlers dictionary, use the default one.
+			//call the handler immediately to kick-off the transition.
 			return $.mobile.transitionHandlers[ transition ] || $.mobile.defaultTransitionHandler;
 		},
 
-		// TODO make private once change has been defined in the widget1
+		// TODO move into transition handlers?
+		_triggerTransitionEvents: function( to, from, prefix ) {
+			prefix = prefix || "";
+
+			// TODO decide if these events should in fact be triggered on the container
+			if ( from ) {
+				//trigger before show/hide events
+				// TODO deprecate nextPage in favor of next
+				this._triggerWithDeprecated( prefix + "hide", {nextPage: to}, from );
+			}
+
+			// TODO deprecate prevPage in favor of previous
+			this._triggerWithDeprecated( prefix + "show", {prevPage: from || $( "" )}, to );
+		},
+
+		// TODO make private once change has been defined in the widget
 		transition: function( toPage, fromPage, options ) {
 			var transition = options.transition,
 				reverse = options.reverse,
@@ -697,24 +717,11 @@ define( [
 				TransitionHandler,
 				promise;
 
-			// TODO decide if these events should in fact be triggered on the container
-			if ( fromPage ) {
-				//trigger before show/hide events
-				// TODO deprecate nextPage in favor of next
-				this._triggerWithDeprecated( "beforehide", {nextPage: toPage}, fromPage );
-			}
-
-			// TODO deprecate prevPage in favor of previous
-			this._triggerWithDeprecated( "beforeshow", {prevPage: fromPage || $( "" )}, toPage );
+			this._triggerTransitionEvents( toPage, fromPage, "before" );
 
 			// TODO maybe put this in a binding to events above *outside* the widget
 			this._hideLoading();
 
-			transition = $.mobile._maybeDegradeTransition( transition );
-
-			//find the transition handler for the specified transition. If there
-			//isn't one in our transitionHandlers dictionary, use the default one.
-			//call the handler immediately to kick-off the transition.
 			TransitionHandler = this._getTransitionHandler( transition );
 
 			promise = (new TransitionHandler( transition, reverse, toPage, fromPage ))
@@ -726,15 +733,7 @@ define( [
 			});
 
 			promise.done($.proxy(function() {
-				//trigger show/hide events
-				if ( fromPage ) {
-					// TODO deprecate nextPage in favor of next
-					this._triggerWithDeprecated( "hide", {nextPage: toPage}, fromPage );
-				}
-
-				// TODO deprecate prevPage in favor of previous
-				//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
-				this._triggerWithDeprecated( "show", {prevPage: fromPage || $( "" )}, toPage );
+				this._triggerTransitionEvents( toPage, fromPage );
 			}, this));
 		}
 
