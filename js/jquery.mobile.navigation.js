@@ -520,6 +520,8 @@ define( [
 			// DEPRECATED
 			reloadPage: false,
 
+			reloadContent: false,
+
 			// By default we rely on the role defined by the @data-role attribute.
 			role: undefined,
 
@@ -547,6 +549,9 @@ define( [
 				absUrl = path.makeUrlAbsolute( url, this._getBaseWithDefault() ),
 				fileUrl, dataUrl, pblEvent, triggerData;
 
+			// DEPRECATED reloadPage
+			settings.reloadContent = settings.reloadPage;
+
 			// If the caller provided data, and we're using "get" request,
 			// append the data to the URL.
 			if ( settings.data && settings.type === "get" ) {
@@ -554,9 +559,9 @@ define( [
 				settings.data = undefined;
 			}
 
-			// If the caller is using a "post" request, reloadPage must be true
+			// If the caller is using a "post" request, reloadContent must be true
 			if ( settings.data && settings.type === "post" ) {
-				settings.reloadPage = true;
+				settings.reloadContent = true;
 			}
 
 			// The absolute version of the URL minus any dialog/subcontent params.
@@ -589,7 +594,7 @@ define( [
 			// and the caller did not indicate that we should force a
 			// reload of the file, we are done. Resolve the deferrred so that
 			// users can bind to .done on the promise
-			if ( content.length && !settings.reloadPage ) {
+			if ( content.length && !settings.reloadContent ) {
 				this._enhance( content, settings.role );
 				deferred.resolve( absUrl, settings, content );
 
@@ -722,6 +727,8 @@ define( [
 
 					// Get the first page element.
 					fp = $.mobile.firstPage,
+
+
 
 					// Get the id of the first page element if it has one.
 					fpId = fp && fp[0] ? fp[0].id : undefined;
