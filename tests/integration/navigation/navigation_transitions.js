@@ -55,9 +55,9 @@
 
 	if( !$.support.cssTransform3d  ) {
 		perspective = "viewport-fade";
-  } else {
-    perspective = "viewport-flip";
-  }
+	} else {
+		perspective = "viewport-flip";
+	}
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
@@ -82,7 +82,7 @@
 			resetQueues();
 			clearUrlHistory();
 
-      if ( location.hash !== "#harmless-default-page" ) {
+			if ( location.hash !== "#harmless-default-page" ) {
 				stop();
 
 				$(document).one("pagechange", function() {
