@@ -79,9 +79,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		this.selectID  = this.select.attr( "id" );
 		this.label = $( "label[for='"+ this.selectID +"']" );
 		this.isMultiple = this.select[ 0 ].multiple;
-		if ( !this.options.theme ) {
-			this.options.theme = "a";
-		}
 	},
 
 	_destroy: function() {
@@ -114,12 +111,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			// TODO values buttonId and menuId are undefined here
 			button = this.button
 				.insertBefore( this.select )
-				.addClass( "ui-btn ui-btn-" + ( options.theme || "a" ) +
+				.addClass( "ui-btn" +
 					( options.icon ?
 						( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos + ( options.iconshadow ?
 							" ui-shadow-icon" :
 								"" ) ) :
 						"" ) +
+					( options.theme ? " ui-btn-" + options.theme : "" ) +
 					( options.corners ? " ui-corner-all" : "" ) +
 					( options.shadow ? " ui-shadow" : "" ) );
 
