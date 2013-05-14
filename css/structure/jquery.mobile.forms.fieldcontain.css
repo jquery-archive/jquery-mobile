@@ -18,8 +18,8 @@
 }
 .ui-listview li.ui-field-contain:after,
 .ui-field-contain:last-child:after {
-	content: none;
-	display: none;
+	border: none;
+	box-shadow: none;
 }
 @media (min-width: 28em) {
 	.ui-field-contain,
