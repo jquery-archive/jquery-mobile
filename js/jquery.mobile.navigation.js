@@ -463,7 +463,7 @@ define( [
 				}
 
 				//dont update the base tag if we are prefetching
-				if ( typeof settings.prefetch === "undefined" ){
+				if ( settings.prefetch === undefined ){
 					this._getBase().set( fileUrl );
 				}
 
@@ -608,8 +608,7 @@ define( [
 
 			// Reset base to the default document base.
 			// only reset if we are not prefetching
-			if ( settings.prefetch === undefined ||
-				typeof settings.prefetch === "undefined" ) {
+			if ( settings.prefetch === undefined ) {
 				this._getBase().reset();
 			}
 
