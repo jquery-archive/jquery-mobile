@@ -61,7 +61,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			if( o.theme !== undefined ){
 				this.element.removeClass("ui-bar-" + this.options.theme ).addClass( "ui-bar-" + o.theme );
 			}
-			this._superApply( o );
+			this._super( o );
 
 		},
 		refresh: function(){
