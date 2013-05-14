@@ -685,7 +685,7 @@ define( [
 			}, this);
 		},
 
-		// TODO make private once change has been defined in the widget
+		// TODO make private once change has been defined in the widget1
 		transition: function( toPage, fromPage, options ) {
 			var transition = options.transition,
 				reverse = options.reverse,
@@ -696,9 +696,11 @@ define( [
 			// TODO decide if these events should in fact be triggered on the container
 			if ( fromPage ) {
 				//trigger before show/hide events
+				// TODO deprecate nextPage in favor of next
 				this._triggerWithDeprecated( "beforehide", {nextPage: toPage}, fromPage );
 			}
 
+			// TODO deprecate prevPage in favor of previous
 			this._triggerWithDeprecated( "beforeshow", {prevPage: fromPage || $( "" )}, toPage );
 
 			// TODO maybe put this in a binding to events above *outside* the widget
@@ -714,19 +716,21 @@ define( [
 			promise = transitionHandler( transition, reverse, toPage, fromPage );
 
 			// TODO temporary accomodation of argument deferred
-			$.when( promise ).done(function() {
+			promise.done(function() {
 				deferred.resolve.apply(deferred, arguments);
 			});
 
-			promise.done(function() {
+			promise.done($.proxy(function() {
 				//trigger show/hide events
 				if ( fromPage ) {
-					fromPage.data( "mobile-page" )._trigger( "hide", null, { nextPage: toPage } );
+					// TODO deprecate nextPage in favor of next
+					this._triggerWithDeprecated( "hide", {nextPage: toPage}, fromPage );
 				}
 
+				// TODO deprecate prevPage in favor of previous
 				//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
-				toPage.data( "mobile-page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
-			});
+				this._triggerWithDeprecated( "show", {prevPage: fromPage || $( "" )}, toPage );
+			}, this));
 		}
 
 
