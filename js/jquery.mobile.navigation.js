@@ -292,6 +292,8 @@ define( [
 		},
 
 		_enhance: function( content, role ) {
+			// TODO consider supporting a custom callback, and passing in the settings
+			//      which includes the role
 			return content.page({ role: role });
 		},
 
@@ -307,6 +309,7 @@ define( [
 		},
 
 		_find: function( absUrl ) {
+			// TODO consider supporting a custom callback
 			var fileUrl = this._createFileUrl( absUrl ),
 				dataUrl = this._createDataUrl( absUrl ),
 				page, initialContent = this._getInitialContent();
