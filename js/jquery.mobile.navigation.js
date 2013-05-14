@@ -710,22 +710,21 @@ define( [
 		},
 
 		// TODO make private once change has been defined in the widget
-		transition: function( toPage, fromPage, options ) {
+		transition: function( to, from, options ) {
 			var transition = options.transition,
 				reverse = options.reverse,
 				deferred = options.deferred,
 				TransitionHandler,
 				promise;
 
-			this._triggerTransitionEvents( toPage, fromPage, "before" );
+			this._triggerTransitionEvents( to, from, "before" );
 
-			// TODO maybe put this in a binding to events above *outside* the widget
+			// TODO put this in a binding to events *outside* the widget
 			this._hideLoading();
 
 			TransitionHandler = this._getTransitionHandler( transition );
 
-			promise = (new TransitionHandler( transition, reverse, toPage, fromPage ))
-				.transition();
+			promise = (new TransitionHandler( transition, reverse, to, from )).transition();
 
 			// TODO temporary accomodation of argument deferred
 			promise.done(function() {
@@ -733,12 +732,10 @@ define( [
 			});
 
 			promise.done($.proxy(function() {
-				this._triggerTransitionEvents( toPage, fromPage );
+				this._triggerTransitionEvents( to, from );
 			}, this));
 		}
 
-
-		// TODO transitionPages
 		// TODO resetActivePageHeight
 		// TODO changePage
 	});
