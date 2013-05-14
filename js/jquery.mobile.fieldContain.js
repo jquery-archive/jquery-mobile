@@ -9,8 +9,9 @@ define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+// Deprecated in 1.4
 $.fn.fieldcontain = function(/* options */) {
-	return this.addClass( "ui-field-contain ui-body" );
+	return this.addClass( "ui-field-contain" );
 };
 
 //auto self-init widgets

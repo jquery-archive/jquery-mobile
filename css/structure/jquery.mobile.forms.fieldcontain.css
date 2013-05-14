@@ -1,6 +1,9 @@
 .ui-field-contain,
 .ui-mobile fieldset.ui-field-contain {
+	display: block;
+	position: relative;
 	overflow: visible;
+	clear: both;
 	padding: .8em 0;
 }
 .ui-field-contain > label + [class*="ui-"],
