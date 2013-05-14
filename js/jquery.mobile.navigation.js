@@ -428,7 +428,7 @@ define( [
 			return path.getFilePath( absoluteUrl );
 		},
 
-		_triggerWithDeprecated: function( name, data ) {
+		_triggerWithDeprecated: function( name, data, page ) {
 			var deprecatedEvent = $.Event( "page" + name ),
 				newEvent = $.Event( this.widgetName + name );
 
@@ -687,7 +687,13 @@ define( [
 
 
 		//function for transitioning between two existing pages
-		transition: function( toPage, fromPage, transition, reverse, deferred ) {
+		transition: function( toPage, fromPage, options ) {
+			var transition = options.transition,
+				reverse = options.reverse,
+				deferred = options.deferred,
+				transitionHandler,
+				promise;
+
 			if ( fromPage ) {
 				//trigger before show/hide events
 				fromPage.data( "mobile-page" )
@@ -706,8 +712,9 @@ define( [
 			//find the transition handler for the specified transition. If there
 			//isn't one in our transitionHandlers dictionary, use the default one.
 			//call the handler immediately to kick-off the transition.
-			var th = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler,
-			promise = th( transition, reverse, toPage, fromPage );
+			transitionHandler = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler;
+
+			promise = transitionHandler( transition, reverse, toPage, fromPage );
 
 			// TODO temporary accomodation of argument deferred
 			$.when( promise ).done(function() {
@@ -1251,7 +1258,11 @@ define( [
 
 		transitionDeferred = $.Deferred();
 
-		settings.pageContainer.content( "transition", toPage, fromPage, settings.transition, settings.reverse, transitionDeferred );
+		settings.pageContainer.content( "transition", toPage, fromPage, {
+			transition: settings.transition,
+			reverse: settings.reverse,
+			deferred: transitionDeferred
+		});
 
 		transitionDeferred.done(function( name, reverse, $to, $from, alreadyFocused ) {
 			removeActiveLinkClass();
