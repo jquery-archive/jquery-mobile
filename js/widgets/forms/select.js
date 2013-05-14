@@ -183,9 +183,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			.bind( "change blur vmouseout", function() {
 				self.button.trigger( "vmouseout" )
 					.removeClass( $.mobile.activeBtnClass );
-			})
-			.bind( "change blur", function() {
-				self.button.removeClass( "ui-btn-down-" + self.options.theme );
 			});
 
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
