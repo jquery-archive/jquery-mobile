@@ -516,7 +516,6 @@ define( [
 			// This function uses deferred notifications to let callers
 			// know when the page is done loading, or if an error has occurred.
 			var deferred = options.deferred || $.Deferred(),
-				promise = deferred.promise(),
 
 				// The default loadPage options with overrides specified by
 				// the caller.
@@ -678,7 +677,7 @@ define( [
 		container.content( "load", url, opts );
 
 		// provide the deferred
-		return opts.deferred;
+		return opts.deferred.promise();
 	};
 
 	//define vars for interal use
