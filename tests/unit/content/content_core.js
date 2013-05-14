@@ -297,13 +297,13 @@
 		equal( result.attr( "data-foo-url"), "bar" );
 	});
 
-	test( "returns the child with the dataUrl id and corrects the data-url attr", function() {
+	test( "returns the first page when nothing matches", function() {
 		proto._getInitialContent = function() {
 			return $( "<div><div id='initial'></div></div>" ).children().first();
 		};
 
 		// using location.href as the fileUrl param ensures that path.isFirstPageUrl returns true
-		ok( proto._find("bar", location.href ).is("#initial") );
+		ok( proto._find(location.href).is("#initial"), "matches the first page" );
 	});
 
 	module( "Content Widget _findLoaded", {

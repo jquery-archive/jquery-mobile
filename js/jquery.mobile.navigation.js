@@ -306,8 +306,10 @@ define( [
 			page.page( "bindRemove" );
 		},
 
-		_find: function( dataUrl, fileUrl ) {
-			var page, initialContent = this._getInitialContent();
+		_find: function( absUrl ) {
+			var fileUrl = this._createFileUrl( absUrl ),
+				dataUrl = this._createDataUrl( absUrl ),
+				page, initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
@@ -552,7 +554,7 @@ define( [
 			// used to load the page.
 			dataUrl = this._createDataUrl( absUrl );
 
-			page = this._find( dataUrl, fileUrl );
+			page = this._find( absUrl );
 
 			// If it isn't a reference to the first page and refers to missing embedded page
 			// reject the deferred and return
