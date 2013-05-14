@@ -259,7 +259,7 @@
 		equal( active.lastScroll, 1, "should be equal to _getScroll value" );
 	});
 
-	module( "Content Widget _findExistingPage", {
+	module( "Content Widget _find", {
 		setup: function() {
 			proto._getNs = function() {
 				return "foo-";
@@ -273,7 +273,7 @@
 		this.element = $( "<div><div data-foo-url='bar'></div></div>" );
 
 		equal(
-			proto._findExistingPage( "bar" )[0],
+			proto._find( "bar" )[0],
 			proto.element.children()[0],
 			"returns the first child of the page container"
 		);
@@ -286,7 +286,7 @@
 
 		equal( proto.element.children().first().attr( "data-foo-url" ), undefined );
 
-		result = proto._findExistingPage( "bar" ),
+		result = proto._find( "bar" ),
 
 		equal(
 			result[0],
@@ -303,7 +303,7 @@
 		};
 
 		// using location.href as the fileUrl param ensures that path.isFirstPageUrl returns true
-		ok( proto._findExistingPage("bar", location.href ).is("#initial") );
+		ok( proto._find("bar", location.href ).is("#initial") );
 	});
 
 	module( "Content Widget _findLoaded", {

@@ -306,7 +306,7 @@ define( [
 			page.page( "bindRemove" );
 		},
 
-		_findExistingPage: function( dataUrl, fileUrl ) {
+		_find: function( dataUrl, fileUrl ) {
 			var page, initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
@@ -552,7 +552,7 @@ define( [
 			// used to load the page.
 			dataUrl = this._createDataUrl( absUrl );
 
-			page = this._findExistingPage( dataUrl, fileUrl );
+			page = this._find( dataUrl, fileUrl );
 
 			// If it isn't a reference to the first page and refers to missing embedded page
 			// reject the deferred and return
@@ -647,7 +647,7 @@ define( [
 				// that called preventDefault(), to resolve/reject the
 				// deferred object within the triggerData.
 				if ( plfEvent.deprecatedEvent.isDefaultPrevented() ||
-					 plfEvent.event.isDefaultPrevented() ) {
+					plfEvent.event.isDefaultPrevented() ) {
 					return;
 				}
 
