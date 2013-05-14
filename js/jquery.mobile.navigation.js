@@ -526,7 +526,6 @@ define( [
 			role: undefined,
 
 			showLoadMsg: false,
-			pageContainer: undefined,
 
 			// This delay allows loads that pull from browser cache to
 			// occur without showing the loading message.
