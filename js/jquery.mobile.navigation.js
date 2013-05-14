@@ -685,8 +685,7 @@ define( [
 			}, this);
 		},
 
-
-		//function for transitioning between two existing pages
+		// TODO make private once change has been defined in the widget
 		transition: function( toPage, fromPage, options ) {
 			var transition = options.transition,
 				reverse = options.reverse,
@@ -702,7 +701,7 @@ define( [
 
 			this._triggerWithDeprecated( "beforeshow", {prevPage: fromPage || $( "" )}, toPage );
 
-			// TODO maybe put this in a binding to events above?
+			// TODO maybe put this in a binding to events above *outside* the widget
 			this._hideLoading();
 
 			transition = $.mobile._maybeDegradeTransition( transition );
