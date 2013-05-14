@@ -433,8 +433,8 @@ define( [
 				newEvent = $.Event( this.widgetName + name );
 
 			// DEPRECATED
-			// trigger the old deprecated event
-			this.element.trigger( deprecatedEvent, data );
+			// trigger the old deprecated event on the page if it's provided
+			(page || this.element).trigger( deprecatedEvent, data );
 
 			// use the widget trigger method for the new content* event
 			this.element.trigger( newEvent, data );
