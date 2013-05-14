@@ -291,7 +291,8 @@ button,
 
 /* A
 -----------------------------------------------------------------------------------------------------------*/
-
+.ui-body-a .ui-li-divider,
+html .ui-li-divider.ui-bar-a,
 .ui-bar-a {
 	background: 			#1d1d1d /*{a-bar-background-color}*/;
 	border: 1px solid 		#1b1b1b /*{a-bar-border}*/;
@@ -415,6 +416,8 @@ html .ui-btn-a.ui-icon-radio-on:after {
 /* B
 -----------------------------------------------------------------------------------------------------------*/
 
+.ui-body-b .ui-li-divider,
+html .ui-li-divider.ui-bar-b,
 .ui-bar-b {
 	background: 			#e5e5e5 /*{b-bar-background-color}*/;
 	border: 1px solid 		#ddd /*{b-bar-border}*/;

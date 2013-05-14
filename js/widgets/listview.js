@@ -16,7 +16,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
 		countTheme: "a",
-		dividerTheme: "a",
+		dividerTheme: null,
 		icon: "arrow-r",
 		splitIcon: "arrow-r",
 		splitTheme: null,
@@ -149,7 +149,9 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					
 					a.first().addClass( buttonClass );
 				} else if ( isDivider ) {
-					itemClass += "ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme );
+					var dividerTheme = ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme || o.theme );
+					
+					itemClass += dividerTheme ? "ui-li-divider ui-bar-" + dividerTheme : "ui-li-divider";
 					
 					item.attr( "role", "heading" );
 				} else {
