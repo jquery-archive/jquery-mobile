@@ -556,12 +556,12 @@ define( [
 			page = this._findExistingPage( dataUrl, fileUrl );
 
 			// If it isn't a reference to the first page and refers to missing embedded page
-			// reject the deferred and return the promise for folks to bind to fail
+			// reject the deferred and return
 			if ( page.length === 0 &&
 				path.isEmbeddedPage(fileUrl) &&
 				!path.isFirstPageUrl(fileUrl) ) {
 				deferred.reject( absUrl, settings );
-				return promise;
+				return;
 			}
 
 			// Reset base to the default document base
@@ -582,7 +582,7 @@ define( [
 					this._getBase().set(url);
 				}
 
-				return promise;
+				return;
 			}
 
 			triggerData = {
@@ -599,7 +599,7 @@ define( [
 			// If the default behavior is prevented, stop here!
 			if ( pblEvent.deprecatedEvent.isDefaultPrevented() ||
 				 pblEvent.event.isDefaultPrevented() ) {
-				return promise;
+				return;
 			}
 
 			if ( settings.showLoadMsg ) {
@@ -615,7 +615,7 @@ define( [
 			if ( !($.mobile.allowCrossDomainPages ||
 				path.isSameDomain(documentUrl, absUrl)) ) {
 				deferred.reject( absUrl, settings );
-				return promise;
+				return;
 			}
 
 			// Load the new page.
@@ -628,8 +628,6 @@ define( [
 				success: this._loadSuccess( absUrl, triggerData, settings, deferred ),
 				error: this._loadError( absUrl, triggerData, settings, deferred )
 			});
-
-			return promise;
 		},
 
 		_loadError: function( absUrl, triggerData, settings, deferred ) {
