@@ -683,7 +683,48 @@ define( [
 
 				deferred.reject( absUrl, settings );
 			}, this);
+		},
+
+
+		//function for transitioning between two existing pages
+		transition: function( toPage, fromPage, transition, reverse, deferred ) {
+			if ( fromPage ) {
+				//trigger before show/hide events
+				fromPage.data( "mobile-page" )
+					._trigger( "beforehide", null, { nextPage: toPage } );
+			}
+
+			toPage.data( "mobile-page" )
+				._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
+
+			//clear page loader
+			// TODO use conent loader ref
+			$.mobile.hidePageLoadingMsg();
+
+			transition = $.mobile._maybeDegradeTransition( transition );
+
+			//find the transition handler for the specified transition. If there
+			//isn't one in our transitionHandlers dictionary, use the default one.
+			//call the handler immediately to kick-off the transition.
+			var th = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler,
+			promise = th( transition, reverse, toPage, fromPage );
+
+			// TODO temporary accomodation of argument deferred
+			$.when( promise ).done(function() {
+				deferred.resolve.apply(deferred, arguments);
+			});
+
+			promise.done(function() {
+				//trigger show/hide events
+				if ( fromPage ) {
+					fromPage.data( "mobile-page" )._trigger( "hide", null, { nextPage: toPage } );
+				}
+
+				//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
+				toPage.data( "mobile-page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
+			});
 		}
+
 
 		// TODO transitionPages
 		// TODO resetActivePageHeight
@@ -898,40 +939,6 @@ define( [
 		return transition;
 	};
 
-	//function for transitioning between two existing pages
-	function transitionPages( toPage, fromPage, transition, reverse ) {
-		if ( fromPage ) {
-			//trigger before show/hide events
-			fromPage.data( "mobile-page" )._trigger( "beforehide", null, { nextPage: toPage } );
-		}
-
-		toPage.data( "mobile-page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
-
-		//clear page loader
-		// TODO use conent loader ref
-		$.mobile.hidePageLoadingMsg();
-
-		transition = $.mobile._maybeDegradeTransition( transition );
-
-		//find the transition handler for the specified transition. If there
-		//isn't one in our transitionHandlers dictionary, use the default one.
-		//call the handler immediately to kick-off the transition.
-		var th = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler,
-			promise = th( transition, reverse, toPage, fromPage );
-
-		promise.done(function() {
-			//trigger show/hide events
-			if ( fromPage ) {
-				fromPage.data( "mobile-page" )._trigger( "hide", null, { nextPage: toPage } );
-			}
-
-			//trigger pageshow, define prevPage as either fromPage or empty jQuery obj
-			toPage.data( "mobile-page" )._trigger( "show", null, { prevPage: fromPage || $( "" ) } );
-		});
-
-		return promise;
-	}
-
 	//simply set the active page's minimum height to screen height, depending on orientation
 	$.mobile.resetActivePageHeight = function resetActivePageHeight( height ) {
 		var aPage = $( "." + $.mobile.activePageClass ),
@@ -995,7 +1002,8 @@ define( [
 			historyDir, pageTitle, isDialog,
 			alreadyThere,
 			newPageTitle,
-			params;
+			params,
+			transitionDeferred;
 
 		// Make sure we have a pageContainer to work with.
 		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
@@ -1241,26 +1249,29 @@ define( [
 		// If we're navigating back in the URL history, set reverse accordingly.
 		settings.reverse = settings.reverse || historyDir < 0;
 
-		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
-			.done(function( name, reverse, $to, $from, alreadyFocused ) {
-				removeActiveLinkClass();
+		transitionDeferred = $.Deferred();
 
-				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
-				if ( settings.duplicateCachedPage ) {
-					settings.duplicateCachedPage.remove();
-				}
+		settings.pageContainer.content( "transition", toPage, fromPage, settings.transition, settings.reverse, transitionDeferred );
 
-				// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
-				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
-				// despite visibility: hidden addresses issue #2965
-				// https://github.com/jquery/jquery-mobile/issues/2965
-				if ( !alreadyFocused ) {
-					$.mobile.focusPage( toPage );
-				}
+		transitionDeferred.done(function( name, reverse, $to, $from, alreadyFocused ) {
+			removeActiveLinkClass();
 
-				releasePageTransitionLock();
-				mpc.trigger( "pagechange", triggerData );
-			});
+			//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
+			if ( settings.duplicateCachedPage ) {
+				settings.duplicateCachedPage.remove();
+			}
+
+			// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
+			// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
+			// despite visibility: hidden addresses issue #2965
+			// https://github.com/jquery/jquery-mobile/issues/2965
+			if ( !alreadyFocused ) {
+				$.mobile.focusPage( toPage );
+			}
+
+			releasePageTransitionLock();
+			mpc.trigger( "pagechange", triggerData );
+		});
 	};
 
 	$.mobile.changePage.defaults = {
