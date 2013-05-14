@@ -690,7 +690,7 @@ define( [
 			var transition = options.transition,
 				reverse = options.reverse,
 				deferred = options.deferred,
-				transitionHandler,
+				TransitionHandler,
 				promise;
 
 			// TODO decide if these events should in fact be triggered on the container
@@ -711,9 +711,10 @@ define( [
 			//find the transition handler for the specified transition. If there
 			//isn't one in our transitionHandlers dictionary, use the default one.
 			//call the handler immediately to kick-off the transition.
-			transitionHandler = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler;
+			TransitionHandler = $.mobile.transitionHandlers[ transition || "default" ] ||
+				$.mobile.defaultTransitionHandler;
 
-			promise = transitionHandler( transition, reverse, toPage, fromPage );
+			promise = (new TransitionHandler( transition, reverse, toPage, fromPage )).transition();
 
 			// TODO temporary accomodation of argument deferred
 			promise.done(function() {
