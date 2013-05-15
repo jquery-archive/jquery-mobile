@@ -37,27 +37,30 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_create: function() {
 			this._super();
 			if( this.options.position === "fixed" && !this.options.supportBlacklist() ){
+				alert();
 				this.element.addClass( "ui-"+ this.role +"-fixed" );
 				this.updatePagePadding();
 				this._addTransitionClass();
 				this._bindPageEvents();
 				this._bindToggleHandlers();
-			}
-			this._setOptions( this.options );
+				this._setOptions( this.options );
+			}	
 		},
 
 		_setOptions: function( o ){
-			var $page = ( !!this.page )? this.page: ( $(".ui-page-active").length > 0 )? $(".ui-page-active"): $(".ui-page").eq(0);
+			if( this.options.position === "fixed" && !this.options.supportBlacklist() ){
+				var $page = ( !!this.page )? this.page: ( $(".ui-page-active").length > 0 )? $(".ui-page-active"): $(".ui-page").eq(0);
 
-			if( o.fullscreen !== undefined){
-				if ( o.fullscreen ) {
-					this.element.addClass( "ui-"+ this.role +"-fullscreen" );
-					$page.addClass( "ui-page-" + this.role + "-fullscreen" );
-				}
-				// If not fullscreen, add class to page to set top or bottom padding
-				else {
-					this.element.removeClass( "ui-"+ this.role +"-fullscreen" );
-					$page.removeClass( "ui-page-" + this.role + "-fullscreen" ).addClass( "ui-page-" + this.role+ "-fixed" );
+				if( o.fullscreen !== undefined){
+					if ( o.fullscreen ) {
+						this.element.addClass( "ui-"+ this.role +"-fullscreen" );
+						$page.addClass( "ui-page-" + this.role + "-fullscreen" );
+					}
+					// If not fullscreen, add class to page to set top or bottom padding
+					else {
+						this.element.removeClass( "ui-"+ this.role +"-fullscreen" );
+						$page.removeClass( "ui-page-" + this.role + "-fullscreen" ).addClass( "ui-page-" + this.role+ "-fixed" );
+					}
 				}
 			}
 			this._super(o);
