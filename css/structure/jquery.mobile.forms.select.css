@@ -58,6 +58,13 @@
 	text-indent: 0;
 	display: block;
 }
+/* ui-li-count is styled in the listview CSS. We set padding and offset here because select supports icon position while listview doesn't. */
+.ui-select .ui-li-has-count.ui-btn-icon-right {
+	padding-right: 4.6875em;
+}
+.ui-select .ui-btn-icon-right .ui-li-count {
+	right: 3.636em;
+}
 /* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */
 .ui-select .ui-btn > span:not(.ui-li-count) {
 	display: block;
