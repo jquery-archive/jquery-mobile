@@ -37,7 +37,6 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_create: function() {
 			this._super();
 			if( this.options.position === "fixed" && !this.options.supportBlacklist() ){
-				alert();
 				this.element.addClass( "ui-"+ this.role +"-fixed" );
 				this.updatePagePadding();
 				this._addTransitionClass();
