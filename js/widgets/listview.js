@@ -119,7 +119,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					}
 					
 					if ( a.length > 1 ) {
-						itemClass += "ui-li-has-alt";
+						itemClass = "ui-li-has-alt";
 						
 						var last = a.last(),
 							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
@@ -141,11 +141,11 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				} else if ( isDivider ) {
 					var dividerTheme = ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme || o.theme );
 					
-					itemClass += dividerTheme ? "ui-li-divider ui-bar-" + dividerTheme : "ui-li-divider";
+					itemClass = dividerTheme ? "ui-li-divider ui-bar-" + dividerTheme : "ui-li-divider";
 					
 					item.attr( "role", "heading" );
 				} else {
-					itemClass += "ui-li-static ui-body-" + itemTheme;
+					itemClass = "ui-li-static ui-body-" + itemTheme;
 				}
 				if ( ol && value ) {
 					var elem = ( a.length && !isDivider ) ? a : item;
