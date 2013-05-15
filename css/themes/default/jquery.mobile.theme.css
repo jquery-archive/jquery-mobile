@@ -297,11 +297,11 @@ button,
 /* A
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-body-a .ui-li-header,
-.ui-body-a .ui-li-footer,
+.ui-body-a .ui-header,
+.ui-body-a .ui-footer,
 .ui-body-a .ui-li-divider,
-html .ui-li-header.ui-bar-a,
-html .ui-li-footer.ui-bar-a,
+html .ui-header.ui-bar-a,
+html .ui-footer.ui-bar-a,
 html .ui-li-divider.ui-bar-a,
 .ui-bar-a {
 	background: 			#1d1d1d /*{a-bar-background-color}*/;
@@ -435,11 +435,11 @@ html .ui-bar-a .ui-icon-radio-on:after,
 /* B
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-body-b .ui-li-header,
-.ui-body-b .ui-li-footer,
+.ui-body-b .ui-header,
+.ui-body-b .ui-footer,
 .ui-body-b .ui-li-divider,
-html .ui-li-header.ui-bar-b,
-html .ui-li-footer.ui-bar-b,
+html .ui-header.ui-bar-b,
+html .ui-footer.ui-bar-b,
 html .ui-li-divider.ui-bar-b,
 .ui-bar-b {
 	background: 			#e5e5e5 /*{b-bar-background-color}*/;
