@@ -112,7 +112,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					itemIcon = getAttr( item[ 0 ], "icon", true );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
-					var buttonClass = "ui-btn ui-btn-" + itemTheme;
+					var buttonClass = "ui-btn";
 					
 					if ( itemTheme ) {
 						buttonClass += " ui-btn-" + itemTheme;
