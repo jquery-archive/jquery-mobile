@@ -43,7 +43,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				this._bindPageEvents();
 				this._bindToggleHandlers();
 				this._setOptions( this.options );
-			}	
+			}
 		},
 
 		_setOptions: function( o ){
