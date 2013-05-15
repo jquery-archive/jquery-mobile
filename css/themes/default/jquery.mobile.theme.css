@@ -47,6 +47,11 @@ button,
 	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	box-shadow: 0 1px 0 					rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 }
+.ui-overlay-shadow {
+	-webkit-box-shadow: 0 0 12px 		rgba(0,0,0,.6);
+	-moz-box-shadow: 0 0 12px 			rgba(0,0,0,.6);
+	box-shadow: 0 0 12px 				rgba(0,0,0,.6);
+}
 
 /* Corner rounding
 -----------------------------------------------------------------------------------------------------------*/
@@ -563,23 +568,6 @@ html .ui-bar-b .ui-icon-radio-on:after,
 	background-color:		#ff0066 /*{b-bactive-background-color}*/;
 	color: 					#fff /*{b-bactive-color}*/;
 	text-shadow: none;
-}
-
-/* Overlay / modal
------------------------------------------------------------------------------------------------------------*/
-
-.ui-overlay {
-	background: #666;
-	filter: Alpha(Opacity=50);
-	opacity: .5;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-}
-.ui-overlay-shadow {
-	-webkit-box-shadow: 0 0 12px 		rgba(0,0,0,.6);
-	-moz-box-shadow: 0 0 12px 			rgba(0,0,0,.6);
-	box-shadow: 0 0 12px 				rgba(0,0,0,.6);
 }
 
 /* Disabled
