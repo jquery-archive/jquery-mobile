@@ -7,7 +7,7 @@
 
 	module( "jquery.mobile.dialog.js", {
 		setup: function() {
-			$.mobile.page.prototype.options.contentTheme = "c";
+			$.mobile.page.prototype.options.contentTheme = "d";
 			$.testHelper.navReset( homeWithSearch );
 		}
 	});
@@ -179,7 +179,6 @@
 
 			function() {
 				var dialog = $( "#dialog-c" );
-
 				// Assert dialog theme inheritance (issue 1375):
 				ok( dialog.hasClass( "ui-body-e" ), "Expected explicit theme ui-body-e" );
 				ok( dialog.hasClass( "ui-overlay-b" ), "Expected explicit theme ui-overlay-b" );

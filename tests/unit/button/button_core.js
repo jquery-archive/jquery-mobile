@@ -38,7 +38,7 @@
 		var $inherited = $( "#theme-check" ),
 		    $explicit = $( "#theme-check-explicit" );
 
-		ok( $inherited.closest("div").hasClass( "ui-btn-up-a" ), "should inherit from page" );
+		ok( $inherited.closest("div").hasClass( "ui-btn-up-p" ), "should inherit from content" );
 		ok( $explicit.closest("div").hasClass( "ui-btn-up-b" ), "should not inherit" );
 	});
 

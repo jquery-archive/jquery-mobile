@@ -39,8 +39,9 @@ $.widget( "mobile.page", $.mobile.widget, {
 			pagebeforeshow: "_handlePageBeforeShow"
 		});
 		this.element.find("["+attrPrefix+"role='content']").each( function(){
-			var $this = $( this );
-				self.options.contentTheme = self.options.theme || self.options.contentTheme || ( self.element.jqmData("role") === "dialog" &&  self.options.theme );
+			var $this = $( this ),
+				theme = this.getAttribute( attrPrefix + "theme" ) || undefined;
+				self.options.contentTheme = theme || self.options.contentTheme || ( self.element.jqmData("role") === "dialog" &&  self.options.theme );
 				$this.addClass("ui-content");
 				if ( self.options.contentTheme ) {
 					$this.addClass( "ui-body-" + ( self.options.contentTheme ) );
