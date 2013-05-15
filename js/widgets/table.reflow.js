@@ -40,7 +40,7 @@ $.mobile.document.delegate( ":jqmData(role='table')", "tablecreate refresh", fun
 
 	// create the hide/show toggles
 	reverseHeaders.each(function( i ){
-		var $cells = $( this ).jqmData( "cells" ),
+		var $cells = $( this ).jqmData( "cells" ).filter( ":not(:has(b." + o.classes.cellLabels + "))" ),
 			colstart = $( this ).jqmData( "colstart" ),
 			hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
 			text = $(this).text();

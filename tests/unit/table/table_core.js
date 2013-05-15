@@ -100,7 +100,7 @@
 		}, 800);
 	});
 	asyncTest( "The appropriate label is added" , function(){
-		expect( 2 );
+		expect( 3 );
 		
 		setTimeout(function(){
 			var $table = $( "#reflow-table-test table" ),
@@ -110,11 +110,12 @@
 				
 			ok( labels , "Appropriate label placed" );
 			equal( $( labels[0] ).text(), "Movie Title" , "Appropriate label placed" );
+			equal( labels.length, 4, "Appropriate label placed");
 			start();
 		}, 800);
 	});
 	asyncTest( "Reflow table refresh" , function(){
-		expect( 2 );
+		expect( 3 );
 		
 		setTimeout(function () {
 			// refresh table
@@ -122,9 +123,10 @@
 			var $table = $('#reflow-table-test .ui-table'),
 				$tds = $table.find( "td" ),
 				labels = $tds.find( "b.ui-table-cell-label" );
-				
+
 			ok( $table.length, "table still enhanced");
 			ok( labels = $tds.find( "b.ui-table-cell-label" ), "Labels still there");
+			equal( labels.length, 8, "Labels doesn't duplicate");
 			start();
 		}, 800);
 	});
@@ -186,7 +188,7 @@
 					equal( $table.find('tbody tr:first')
 						.find("th, td").eq(2).hasClass('ui-table-cell-hidden'), true, "random cell in hidden column has ui-table-cell-hidden class");
 					ok( $input.is( ":checked" ), false, "input is still not checked after refresh");
-					equal( $first_input.jqmData("cells").eq(1).data("test"), "abc",
+					equal( $first_input.jqmData("cells").last().data("test"), "abc",
 						"cell reference in popup is to cell currently in table");
 					equal( $visibleCells.length, $visibleHeaders.length, "same number of headers and rows visible" );
 				}, 800);
