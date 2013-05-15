@@ -42,17 +42,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		t.refresh( true );
 	},
 
-	// This is a generic utility method for finding the first
-	// node with a given nodeName. It uses basic DOM traversal
-	// to be fast and is meant to be a substitute for simple
-	// $.fn.closest() and $.fn.children() calls on a single
-	// element. Note that callers must pass both the lowerCase
-	// and upperCase version of the nodeName they are looking for.
-	// The main reason for this is that this function will be
-	// called many times and we want to avoid having to lowercase
-	// the nodeName from the element every time to ensure we have
-	// a match. Note that this function lives here for now, but may
-	// be moved into $.mobile if other components need a similar method.
+	// TODO: Remove in 1.5
 	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName ) {
 		var dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
@@ -63,6 +53,16 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			ele = ele[ nextProp ];
 		}
 		return null;
+	},
+	// TODO: Remove in 1.5
+	_addThumbClasses: function( containers ) {
+		var i, img, len = containers.length;
+		for ( i = 0; i < len; i++ ) {
+			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
+			if ( img.length ) {
+				$( this._findFirstElementByTagName( img[ 0 ].parentNode, "parentNode", "li", "LI" ) ).addClass( img.hasClass( "ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+			}
+		}
 	},
 	
 	_getChildrenByTagName: function( ele, lcName, ucName ) {
@@ -77,16 +77,6 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			ele = ele.nextSibling;
 		}
 		return $( results );
-	},
-
-	_addThumbClasses: function( containers ) {
-		var i, img, len = containers.length;
-		for ( i = 0; i < len; i++ ) {
-			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
-			if ( img.length ) {
-				$( this._findFirstElementByTagName( img[ 0 ].parentNode, "parentNode", "li", "LI" ) ).addClass( img.hasClass( "ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-			}
-		}
 	},
 
 	refresh: function( create ) {
@@ -190,20 +180,9 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				$( this ).closest( "li" ).addClass( "ui-li-has-count" );
 			}).addClass( "ui-fill-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-corner-all" );
 
-		// The idea here is to look at the first image in the list item
-		// itself, and any .ui-link-inherit element it may contain, so we
-		// can place the appropriate classes on the image and list item.
-		// Note that we used to use something like:
-		//
-		//    li.find(">img:eq(0), .ui-link-inherit>img:eq(0)").each( ... );
-		//
-		// But executing a find() like that on Windows Phone 7.5 took a
-		// really long time. Walking things manually with the code below
-		// allows the 400 listview item page to load in about 3 seconds as
-		// opposed to 30 seconds.
-
+		// Deprecated in 1.4. From 1.5 you have to add class ui-li-has-thumb or ui-li-has-icon to the LI.
 		this._addThumbClasses( li );
-		this._addThumbClasses( $list.find( "li > .ui-btn" ) );
+		this._addThumbClasses( li.find( ".ui-btn" ) );
 
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh

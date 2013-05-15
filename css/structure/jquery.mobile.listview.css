@@ -143,16 +143,17 @@
 .ui-listview .ui-btn[class*="ui-icon-"] .ui-li-count {
 	right: 3.636em;
 }
-.ui-listview .ui-li-static > img:first-child,
-.ui-listview > li > .ui-btn > img:first-child {
+.ui-listview .ui-li-has-thumb > img:first-child,
+.ui-listview .ui-li-has-thumb > .ui-btn > img:first-child {
 	position: absolute;
 	left: 0;
 	top: 0;
 	max-height: 5em;
 	max-width: 5em;
 }
-.ui-listview .ui-li-static > img.ui-li-icon,
-.ui-listview > li > .ui-btn > img.ui-li-icon {
+.ui-listview .ui-li-has-icon > img:first-child,
+.ui-listview .ui-li-has-icon > .ui-btn > img:first-child {
+	position: absolute;
 	left: .625em;
 	top: .9em;
 	max-height: 1em;
