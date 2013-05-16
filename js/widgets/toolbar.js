@@ -76,8 +76,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			this._addHeadingClasses();
 			this._btnMarkup();
 		},
+		// Deprecated in 1.4. As from 1.5 data-role="button" has to be present in the markup.
 		_btnMarkup: function() {
-			this.element.children( "a" ).buttonMarkup();
+			this.element.children( "a" ).attr( "data-" + $.mobile.ns + "role", "button" );
+			this.element.trigger( "create" );
 		},
 		_addHeaderButtonClasses: function() {
 			var $headeranchors = this.element.children( "a, button" );
