@@ -38,16 +38,16 @@ $.widget( "mobile.page", $.mobile.widget, {
 			pagebeforehide: "removeContainerBackground",
 			pagebeforeshow: "_handlePageBeforeShow"
 		});
-		this.element.find("["+attrPrefix+"role='content']").each( function(){
+		this.element.find( "[" + attrPrefix + "role='content']" ).each( function() {
 			var $this = $( this ),
 				theme = this.getAttribute( attrPrefix + "theme" ) || undefined;
 				self.options.contentTheme = theme || self.options.contentTheme || ( self.element.jqmData("role") === "dialog" &&  self.options.theme );
-				$this.addClass("ui-content");
+				$this.addClass( "ui-content" );
 				if ( self.options.contentTheme ) {
 					$this.addClass( "ui-body-" + ( self.options.contentTheme ) );
 				}
 				// Add ARIA role
-				$this.attr( "role", "main" ).addClass("ui-content");
+				$this.attr( "role", "main" ).addClass( "ui-content" );
 		});
 
 		// enhance the page
