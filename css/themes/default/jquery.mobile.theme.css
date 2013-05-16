@@ -297,13 +297,13 @@ button,
 /* A
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-body-a .ui-header,
-.ui-body-a .ui-footer,
-.ui-body-a .ui-li-divider,
-html .ui-header.ui-bar-a,
-html .ui-footer.ui-bar-a,
-html .ui-li-divider.ui-bar-a,
-.ui-bar-a {
+.ui-bar-a, /* no JQM page, has theme: 010 */
+.ui-page.ui-body-a .ui-header, /* inherit from page: 030 */
+.ui-page.ui-body-a .ui-footer, /* inherit from page: 030 */
+.ui-page.ui-body-a .ui-li-divider, /* inherit from page: 030 */
+.ui-mobile body .ui-header.ui-bar-a, /* has theme: 031 */
+.ui-mobile body .ui-footer.ui-bar-a, /* has theme: 031 */
+.ui-mobile body .ui-li-divider.ui-bar-a { /* has theme: 031 */
 	background: 			#1d1d1d /*{a-bar-background-color}*/;
 	border: 1px solid 		#1b1b1b /*{a-bar-border}*/;
 	color: 					#fff /*{a-bar-color}*/;
@@ -365,62 +365,78 @@ li.ui-li-static.ui-body-a,
 	font-weight: bold;
 }
 
-.ui-body-a .ui-btn,
-.ui-body-a .ui-btn:visited,
-html .ui-bar-a .ui-btn,
-html .ui-bar-a .ui-btn:visited,
-.ui-mobile .ui-btn.ui-btn-a,
-.ui-mobile .ui-btn.ui-btn-a:visited {
+.ui-btn-a, /* no JQM page, has theme: 010 */
+.ui-page.ui-body-a .ui-btn, /* inherit from page: 030 */
+.ui-mobile body .ui-bar-a .ui-btn, /* inherit from bar: 031 */
+html.ui-mobile body .ui-btn.ui-btn-a, /* has theme: 032 */
+/* Visited */
+.ui-btn-a:visited, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-a .ui-btn:visited, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-a .ui-btn:visited, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-a:visited { /* has theme: 042 */
 	background: 			#2a2a2a /*{a-bup-background-color}*/;
 	border-color: 			#1b1b1b /*{a-bup-border}*/;
 	color: 					#fff /*{a-bup-color}*/;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #000 /*{a-bup-shadow-color}*/;
 	font-weight: bold;
 }
-.ui-body-a .ui-btn:hover,
-html .ui-bar-a .ui-btn:hover,
-.ui-mobile .ui-btn.ui-btn-a:hover {
+/* Hover */
+.ui-btn-a:hover, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-a .ui-btn:hover, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-a .ui-btn:hover, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-a:hover { /* has theme: 042 */
 	background: 			#333 /*{a-bhover-background-color}*/;
 	border-color:	 		#222 /*{a-bhover-border}*/;
 	color: 					#fff /*{a-bhover-color}*/;
 	text-shadow: 0 /*{a-bhover-shadow-x}*/ 1px /*{a-bhover-shadow-y}*/ 0 /*{a-bhover-shadow-radius}*/ #000 /*{a-bhover-shadow-color}*/;
 }
-.ui-body-a .ui-btn:active,
-html .ui-bar-a .ui-btn:active,
-.ui-mobile .ui-btn.ui-btn-a:active {
+/* Down */
+.ui-btn-a:active, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-a .ui-btn:active, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-a .ui-btn:active, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-a:active { /* has theme: 042 */
 	background: 			#2d2d2d /*{a-bdown-background-color}*/;
 	border-color:	 		#222 /*{a-bdown-border}*/;
 	color: 					#fff /*{a-bdown-color}*/;
 	text-shadow: 0 /*{a-bdown-shadow-x}*/ 1px /*{a-bdown-shadow-y}*/ 0 /*{a-bdown-shadow-radius}*/ #000 /*{a-bdown-shadow-color}*/;
 }
-.ui-body-a .ui-btn.ui-btn-active,
-html .ui-bar-a .ui-btn.ui-btn-active,
-.ui-mobile .ui-btn.ui-btn-a.ui-btn-active {
+/* Active */
+.ui-btn-a.ui-btn-active, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-a .ui-btn.ui-btn-active, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-a .ui-btn.ui-btn-active, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-a.ui-btn-active { /* has theme: 042 */
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	border-color:	 		#3399cc /*{a-bactive-border}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3399cc /*{a-bactive-shadow-color}*/;
 	cursor: pointer;
 }
-
-.ui-body-a .ui-btn:focus,
-.ui-body-a .ui-focus,
-html .ui-bar-a .ui-btn:focus,
-html .ui-bar-a .ui-focus,
-.ui-mobile .ui-btn-a:focus,
-.ui-mobile .ui-btn-a.ui-focus,
-.ui-mobile .ui-body-a.ui-focus {
+/* Focus */
+.ui-btn-a:focus, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-a .ui-btn:focus, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-a .ui-btn:focus, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-a:focus, /* has theme: 042 */
+/* Buttons and text inputs with div wrap */
+.ui-btn-a.ui-focus, /* no JQM page, has theme: 020 */
+.ui-body-a.ui-focus, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-a .ui-focus, /* inherit from page: 030 */
+.ui-mobile body .ui-bar-a .ui-focus, /* inherit from bar: 031 */
+html.ui-mobile body .ui-btn-a.ui-focus, /* has theme: 032 */
+html.ui-mobile body .ui-body-a.ui-focus { /* has theme: 032 */
 	-webkit-box-shadow: 0 0 12px 	#34bae8 /*{a-bactive-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#34bae8 /*{a-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#34bae8 /*{a-bactive-background-color}*/;
 }
-
-.ui-body-a .ui-icon-checkbox-on:after,
-.ui-body-a .ui-icon-radio-on:after,
-html .ui-bar-a .ui-icon-checkbox-on:after,
-html .ui-bar-a .ui-icon-radio-on:after,
-.ui-mobile .ui-btn-a.ui-icon-checkbox-on:after,
-.ui-mobile .ui-btn-a.ui-icon-radio-on:after {
+/* Checkbox active */
+.ui-btn-a.ui-icon-checkbox-on:after, /* no JQM page, has theme: 030 */
+.ui-page.ui-body-a .ui-icon-checkbox-on:after, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-a .ui-icon-checkbox-on:after, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn-a.ui-icon-checkbox-on:after, /* has theme: 042 */
+/* Radio button active */
+.ui-btn-a.ui-icon-radio-on:after, /* no JQM page, has theme: 030 */
+.ui-page.ui-body-a .ui-icon-radio-on:after, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-a .ui-icon-radio-on:after, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 	background-color: #34bae8 /*{a-bactive-background-color}*/;
 }
 
@@ -435,13 +451,13 @@ html .ui-bar-a .ui-icon-radio-on:after,
 /* B
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-body-b .ui-header,
-.ui-body-b .ui-footer,
-.ui-body-b .ui-li-divider,
-html .ui-header.ui-bar-b,
-html .ui-footer.ui-bar-b,
-html .ui-li-divider.ui-bar-b,
-.ui-bar-b {
+.ui-bar-b, /* no JQM page, has theme: 010 */
+.ui-page.ui-body-b .ui-header, /* inherit from page: 030 */
+.ui-page.ui-body-b .ui-footer, /* inherit from page: 030 */
+.ui-page.ui-body-b .ui-li-divider, /* inherit from page: 030 */
+.ui-mobile body .ui-header.ui-bar-b, /* has theme: 031 */
+.ui-mobile body .ui-footer.ui-bar-b, /* has theme: 031 */
+.ui-mobile body .ui-li-divider.ui-bar-b { /* has theme: 031 */
 	background: 			#e5e5e5 /*{b-bar-background-color}*/;
 	border: 1px solid 		#ddd /*{b-bar-border}*/;
 	color: 					#333 /*{b-bar-color}*/;
@@ -503,37 +519,46 @@ li.ui-li-static.ui-body-b,
 	font-weight: bold;
 }
 
-.ui-body-b .ui-btn,
-.ui-body-b .ui-btn:visited,
-html .ui-bar-b .ui-btn,
-html .ui-bar-b .ui-btn:visited,
-.ui-mobile .ui-btn.ui-btn-b,
-.ui-mobile .ui-btn.ui-btn-b:visited {
+.ui-btn-b, /* no JQM page, has theme: 010 */
+.ui-page.ui-body-b .ui-btn, /* inherit from page: 030 */
+.ui-mobile body .ui-bar-b .ui-btn, /* inherit from bar: 031 */
+html.ui-mobile body .ui-btn.ui-btn-b, /* has theme: 032 */
+/* Visited */
+.ui-btn-b:visited, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-b .ui-btn:visited, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-b .ui-btn:visited, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-b:visited { /* has theme: 042 */
 	background: 			#efefef /*{b-bup-background-color}*/;
 	border-color:	 		#ddd /*{b-bup-border}*/;
 	color: 					#333 /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #fff /*{b-bup-shadow-color}*/;
 	font-weight: bold;
 }
-.ui-body-b .ui-btn:hover,
-html .ui-bar-b .ui-btn:hover,
-.ui-mobile .ui-btn.ui-btn-b:hover {
+/* Hover */
+.ui-btn-b:hover, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-b .ui-btn:hover, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-b .ui-btn:hover, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-b:hover { /* has theme: 042 */
 	background: 			#e9e9e9 /*{b-bhover-background-color}*/;
 	border-color:	 		#d5d5d5 /*{b-bhover-border}*/;
 	color: 					#333 /*{b-bhover-color}*/;
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #fff /*{b-bhover-shadow-color}*/;
 }
-.ui-body-b .ui-btn:hover,
-html .ui-bar-b .ui-btn:hover,
-.ui-mobile .ui-btn.ui-btn-b:hover {
+/* Down */
+.ui-btn-b:active, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-b .ui-btn:active, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-b .ui-btn:active, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-b:active { /* has theme: 042 */
 	background: 			#e3e3e3 /*{b-bdown-background-color}*/;
 	border-color:	 		#d5d5d5 /*{b-bdown-border}*/;
 	color: 					#333 /*{b-bdown-color}*/;
 	text-shadow: 0 /*{b-bdown-shadow-x}*/ 1px /*{b-bdown-shadow-y}*/ 0 /*{b-bdown-shadow-radius}*/ #fff /*{b-bdown-shadow-color}*/;
 }
-.ui-body-b .ui-btn.ui-btn-active,
-htm .ui-bar-b .ui-btn.ui-btn-active,
-.ui-mobile .ui-btn.ui-btn-b.ui-btn-active {
+/* Active */
+.ui-btn-b.ui-btn-bctive, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-b .ui-btn.ui-btn-bctive, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-b .ui-btn.ui-btn-bctive, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-b.ui-btn-bctive { /* has theme: 042 */
 	background: 			#ff0066 /*{b-bactive-background-color}*/;
 	border-color:	 		#cc0066 /*{b-bactive-border}*/;
 	color: 					#fff /*{b-bactive-color}*/;
@@ -541,24 +566,33 @@ htm .ui-bar-b .ui-btn.ui-btn-active,
 	cursor: pointer;
 }
 
-.ui-body-b .ui-btn:focus,
-.ui-body-b .ui-focus,
-html .ui-bar-b .ui-btn:focus,
-html .ui-bar-b .ui-focus,
-.ui-mobile .ui-btn-b:focus,
-.ui-mobile .ui-btn-b.ui-focus,
-.ui-mobile .ui-body-b.ui-focus {
+/* Focus */
+.ui-btn-b:focus, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-b .ui-btn:focus, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-b .ui-btn:focus, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn.ui-btn-b:focus, /* has theme: 042 */
+/* Buttons and text inputs with div wrap */
+.ui-btn-b.ui-focus, /* no JQM page, has theme: 020 */
+.ui-body-b.ui-focus, /* no JQM page, has theme: 020 */
+.ui-page.ui-body-b .ui-focus, /* inherit from page: 030 */
+.ui-mobile body .ui-bar-b .ui-focus, /* inherit from bar: 031 */
+html.ui-mobile body .ui-btn-b.ui-focus, /* has theme: 032 */
+html.ui-mobile body .ui-body-b.ui-focus { /* has theme: 032 */
 	-webkit-box-shadow: 0 0 12px 	#ff0066 /*{b-bactive-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#ff0066 /*{b-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#ff0066 /*{b-bactive-background-color}*/;
 }
 
-.ui-body-b .ui-icon-checkbox-on:after,
-.ui-body-b .ui-icon-radio-on:after,
-html .ui-bar-b .ui-icon-checkbox-on:after,
-html .ui-bar-b .ui-icon-radio-on:after,
-.ui-mobile .ui-btn-b.ui-icon-checkbox-on:after,
-.ui-mobile .ui-btn-b.ui-icon-radio-on:after {
+/* Checkbox active */
+.ui-btn-b.ui-icon-checkbox-on:after, /* no JQM page, has theme: 030 */
+.ui-page.ui-body-b .ui-icon-checkbox-on:after, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-b .ui-icon-checkbox-on:after, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn-b.ui-icon-checkbox-on:after, /* has theme: 042 */
+/* Radio button active */
+.ui-btn-b.ui-icon-radio-on:after, /* no JQM page, has theme: 030 */
+.ui-page.ui-body-b .ui-icon-radio-on:after, /* inherit from page: 040 */
+.ui-mobile body .ui-bar-b .ui-icon-radio-on:after, /* inherit from bar: 041 */
+html.ui-mobile body .ui-btn-b.ui-icon-radio-on:after { /* has theme: 042 */
 	background-color: #ff0066 /*{b-bactive-background-color}*/;
 }
 
