@@ -13,9 +13,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], functi
 
 // General policy: Do not access data-* attributes except during enhancement.
 // In all other cases we determine the state of the button exclusively from its
-// className. That's why optionsToClassName expects a full complement of
-// options, and the jQuery plugin completes the set of options from the default
-// values.
+// className. That's why optionsToClasses expects a full complement of options,
+// and the jQuery plugin completes the set of options from the default values.
 
 // Map classes to buttonMarkup boolean options - used in classNameToOptions()
 var reverseBoolOptionMap = {
@@ -26,15 +25,16 @@ var reverseBoolOptionMap = {
 	"ui-mini" : "mini"
 };
 
-// optionsToClassName:
+// optionsToClasses:
 // @options: A complete set of options to convert to class names.
 // @existingClasses: extra classes to add to the result
 //
-// Converts @options to buttonMarkup classes and returns the result as a string
-// that can be used as an element's className. All possible options must be set
-// inside @options. Use $.fn.buttonMarkup.defaults to get a complete set and use
-// $.extend to override your choice of options from that set.
-function optionsToClassName( options, existingClasses ) {
+// Converts @options to buttonMarkup classes and returns the result as an array
+// that can be converted to an element's className with .join( " " ). All
+// possible options must be set inside @options. Use $.fn.buttonMarkup.defaults
+// to get a complete set and use $.extend to override your choice of options
+// from that set.
+function optionsToClasses( options, existingClasses ) {
 	var classes = existingClasses ? existingClasses : [];
 
 	// Add classes to the array - first ui-btn
@@ -71,7 +71,7 @@ function optionsToClassName( options, existingClasses ) {
 	}
 
 	// Create a string from the array and return it
-	return classes.join( " " );
+	return classes;
 }
 
 // classNameToOptions:
@@ -187,7 +187,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 			// Analyze existing classes to establish existing options and classes
 			classNameToOptions( el.className );
 
-		el.className = optionsToClassName(
+		el.className = optionsToClasses(
 
 			// Merge all the options and apply them as classes
 			$.extend( {},
@@ -205,7 +205,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 				options ),
 
 			// ... and re-apply any unrecognized classes that were found
-			data.unknownClasses );
+			data.unknownClasses ).join( " " );
 	}
 
 	return this;
@@ -230,7 +230,7 @@ $.fn.buttonMarkup.defaults = {
 // this: Element to enhance
 //
 // Harvest an element's buttonMarkup-related data attributes from the DOM and
-// use their value to override defaults. Use optionsToClassName() to establish a
+// use their value to override defaults. Use optionsToClasses() to establish a
 // new className for the element from the calculated options and any existing
 // classes.
 //
@@ -238,9 +238,10 @@ $.fn.buttonMarkup.defaults = {
 // without having to write it inline and may be moved into the enhancer in the
 // future.
 function enhanceWithButtonMarkup( idx, el ) {
-	var getAttrFixed = $.mobile.getAttribute;
+	var classes,
+		getAttrFixed = $.mobile.getAttribute;
 
-	el.className = optionsToClassName( $.extend( {},
+	classes = optionsToClasses( $.extend( {},
 		$.fn.buttonMarkup.defaults, {
 			icon      : getAttrFixed( el, "icon",       true ),
 			iconpos   : getAttrFixed( el, "iconpos",    true ),
@@ -250,7 +251,11 @@ function enhanceWithButtonMarkup( idx, el ) {
 			corners   : getAttrFixed( el, "corners",    true ),
 			iconshadow: getAttrFixed( el, "iconshadow", true ),
 			mini      : getAttrFixed( el, "mini",       true )
-		}), el.className.split( " " ) );
+		}), el.className.split( " " ) ).sort();
+
+	el.className = $.grep( classes, function( el, idx ) {
+			return !( idx > 0 && classes[ idx - 1 ] === el );
+		}).join( " " );
 }
 
 //links in bars, or those with data-role become buttons
