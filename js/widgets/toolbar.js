@@ -30,8 +30,8 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				});
 			}
 			$.extend( this, {
-				role:role,
-				page:page,
+				role: role,
+				page: page,
 				leftbtn: leftbtn,
 				rightbtn: rightbtn,
 				backBtn: backBtn
@@ -40,7 +40,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			this.refresh();
 			this._setOptions( this.options );
 		},
-		_setOptions:function( o ) {
+		_setOptions: function( o ) {
 			if ( o.addBackBtn !== undefined ) {
 				if ( this.options.addBackBtn &&
 					this.role === "header" &&
@@ -61,11 +61,12 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			if ( o.theme ) {
 				this.element.removeClass( "ui-bar-" + this.options.theme ).addClass( "ui-bar-" + o.theme );
 			}
+			this.element.find( ".ui-toolbar-back-btn" ).buttonMarkup();
 			this._super( o );
 
 		},
 		refresh: function() {
-			if ( this.role === "header") {
+			if ( this.role === "header" ) {
 				this._addHeaderButtonClasses();
 			}
 			if ( !this.page ) {
