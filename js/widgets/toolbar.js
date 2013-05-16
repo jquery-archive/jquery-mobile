@@ -53,7 +53,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				}
 			}
 			if( o.backBtnTheme !== undefined){
-				this.element.find(".ui-toolbar-back-btn").attr( "data-"+ $.mobile.ns +"theme", o.theme).buttonMarkup();
+				this.element.find(".ui-toolbar-back-btn").attr( "data-"+ $.mobile.ns +"theme", o.backBtnTheme).buttonMarkup({ theme:o.backBtnTheme});
 			}
 			if( o.backBtnText !== undefined){
 				this.element.find(".ui-toolbar-back-btn .ui-btn-text").text( o.backBtnText );
@@ -78,7 +78,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			this._btnMarkup();
 		},
 		_btnMarkup: function(){
-			this.element.children("a").buttonMarkup({ theme:this.options.theme});
+			this.element.children("a").buttonMarkup();
 		},
 		_addHeaderButtonClasses:function(){
 			var $headeranchors	= this.element.children( "a, button" );
