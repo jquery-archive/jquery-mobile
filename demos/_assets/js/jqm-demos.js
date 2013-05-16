@@ -197,12 +197,11 @@ $( document ).on( "mobileinit", function() {
 	$.widget( "mobile.listview", $.mobile.listview, {
 		options: {
 			theme: null,
-			countTheme: "c",
-			headerTheme: "b",
-			dividerTheme: "b",
+			countTheme: "a",
+			dividerTheme: null,
 			icon: "arrow-r",
 			splitIcon: "arrow-r",
-			splitTheme: "b",
+			splitTheme: null,
 			corners: true,
 			shadow: true,
 			inset: false,
