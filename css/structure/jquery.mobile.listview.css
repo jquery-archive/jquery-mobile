@@ -111,6 +111,7 @@
 	font-size: 14px;
 	font-weight: bold;
 	cursor: default;
+	outline: 0; /* Dividers in custom selectmenus have tabindex */
 }
 .ui-listview .ui-li-has-count > .ui-btn,
 .ui-listview .ui-li-static.ui-li-has-count,
