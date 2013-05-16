@@ -12,7 +12,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 	$.widget( "mobile.toolbar", $.mobile.widget, {
 		options: {
-			theme: "a",
+			theme: null,
 			addBackBtn: false,
 			backBtnTheme: null,
 			backBtnText: "Back"
@@ -58,7 +58,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			if ( o.backBtnText !== undefined ) {
 				this.element.find( ".ui-toolbar-back-btn .ui-btn-text" ).text( o.backBtnText );
 			}
-			if ( o.theme !== undefined ) {
+			if ( o.theme ) {
 				this.element.removeClass( "ui-bar-" + this.options.theme ).addClass( "ui-bar-" + o.theme );
 			}
 			this._super( o );
