@@ -2,7 +2,6 @@
 .ui-radio {
 	margin: .5em 0;
 	position: relative;
-	clear: both;
 }
 .ui-checkbox .ui-btn,
 .ui-radio .ui-btn {
