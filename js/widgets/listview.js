@@ -101,14 +101,13 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			item = li.eq( pos );
 			itemClass = "";
 
-			// TODO: Better way than !item.is( ".ui-listview > li" ) to prevent re-enhancemeent.
-			if ( create || !item.is( ".ui-listview > li" ) ) {
+			if ( create || item[ 0 ].className.search( /\bui-li-/ ) < 0 ) {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
 				value = item.attr( "value" );
 				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
 
-				if ( a.length && !isDivider ) {
+				if ( a.length && a[ 0 ].className.search( /\bui-btn\b/ ) < 0 && !isDivider ) {
 					itemIcon = getAttr( item[ 0 ], "icon", true );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
