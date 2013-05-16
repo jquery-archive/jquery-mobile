@@ -44,18 +44,19 @@ define( [
 
 			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup( { theme: widget.options.overlayTheme } ),
 
-			list = $( "<ul>", {
-				"class": "ui-selectmenu-list",
-				"id": menuId,
-				"role": "listbox",
-				"aria-labelledby": buttonId
-				}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme )
-					.attr( "data-" + $.mobile.ns + "divider-theme", widget.options.dividerTheme )
-					.appendTo( listbox ),
+			listThemeAttr = ( widget.options.theme ) ? " data-" + $.mobile.ns + "theme='" + widget.options.theme + "'" : "",
 
+			dividerThemeAttr = ( widget.options.dividerTheme && isMultiple ) ? " data-" + $.mobile.ns + "divider-theme='" + widget.options.dividerTheme + "'" : "",
+			
+			list = $( "<ul" + listThemeAttr + dividerThemeAttr + ">", {
+					"class": "ui-selectmenu-list",
+					"id": menuId,
+					"role": "listbox",
+					"aria-labelledby": buttonId
+				}).appendTo( listbox ),
 
 			header = $( "<div>", {
-				"class": "ui-header ui-bar-" + widget.options.theme
+				"class": "ui-header"
 			}).prependTo( listbox ),
 
 			headerTitle = $( "<h1>", {
@@ -70,7 +71,7 @@ define( [
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
-				"class": "ui-btn ui-btn-a ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
+				"class": "ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
 			}).appendTo( header );
 		}
 
