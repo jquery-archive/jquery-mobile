@@ -37,8 +37,13 @@ var reverseBoolOptionMap = {
 function optionsToClassName( options, existingClasses ) {
 	var classes = existingClasses ? existingClasses : [];
 
-	// Add classes to the array - first ui-btn and the theme
-	classes = classes.concat( [ "ui-btn", "ui-btn-" + options.theme ] );
+	// Add classes to the array - first ui-btn
+	classes.push( "ui-btn" );
+
+	// If there is a theme
+	if ( options.theme ) {
+		classes.push( "ui-btn-" + options.theme );
+	}
 
 	// If there's an icon, add the icon-related classes
 	if ( options.icon ) {
