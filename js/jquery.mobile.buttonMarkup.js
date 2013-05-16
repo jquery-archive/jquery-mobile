@@ -147,7 +147,7 @@ function classNameToOptions( classes ) {
 		}
 	}
 
-	// If the "ui-icon" class is absent there cannot be an icon
+	// If a "ui-btn-icon-*" icon position class is absent there cannot be an icon
 	if ( noIcon ) {
 		o.icon = "";
 	}
