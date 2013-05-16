@@ -173,7 +173,6 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 				ltr = "",
 				re = /ui-(bar|body|overlay)-([a-z])\b/,
 				c, m;
-
 			while ( e ) {
 				c = e.className || "";
 				if ( c && ( m = re.exec( c ) ) && ( ltr = m[ 2 ] ) ) {
@@ -184,10 +183,8 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 
 				e = e.parentNode;
 			}
-
 			// Return the theme letter we found, if none, return the
 			// specified default.
-
 			return ltr || defaultTheme || "a";
 		},
 

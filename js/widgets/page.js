@@ -11,7 +11,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 	options: {
 		theme: "a",
 		domCache: false,
-		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')"
+		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')",
+		contentTheme: null
 	},
 
 	// DEPRECATED for > 1.4
@@ -22,6 +23,8 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_create: function() {
+		var attrPrefix = "data-" + $.mobile.ns,
+			self = this;
 		// if false is returned by the callbacks do not create the page
 		if ( this._trigger( "beforecreate" ) === false ) {
 			return false;
@@ -34,6 +37,17 @@ $.widget( "mobile.page", $.mobile.widget, {
 		this._on( this.element, {
 			pagebeforehide: "removeContainerBackground",
 			pagebeforeshow: "_handlePageBeforeShow"
+		});
+		this.element.find("["+attrPrefix+"role='content']").each( function(){
+			var $this = $( this ),
+				theme = this.getAttribute( attrPrefix + "theme" ) || undefined;
+				self.options.contentTheme = theme || self.options.contentTheme || ( self.element.jqmData("role") === "dialog" &&  self.options.theme );
+				$this.addClass("ui-content");
+				if ( self.options.contentTheme ) {
+					$this.addClass( "ui-body-" + ( self.options.contentTheme ) );
+				}
+				// Add ARIA role
+				$this.attr( "role", "main" ).addClass("ui-content");
 		});
 
 		// enhance the page

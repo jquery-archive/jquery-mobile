@@ -28,7 +28,6 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			.jqmEnhanceable()
 			.grid({ grid: this.options.grid });
 
-
 		$navbtns
 			.addClass( "ui-btn ui-btn-inline" )
 			.each( function() {
