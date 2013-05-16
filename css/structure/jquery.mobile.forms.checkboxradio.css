@@ -3,7 +3,6 @@
 	margin: .5em 0;
 	position: relative;
 	clear: both;
-	z-index: 1;
 }
 .ui-checkbox .ui-btn,
 .ui-radio .ui-btn {
@@ -11,6 +10,10 @@
 	text-align: left;
 	white-space: normal; /* Nowrap + ellipsis doesn't work on label. Issue #1419. */
 	z-index: 2;
+}
+.ui-controlgroup .ui-checkbox .ui-btn.ui-focus,
+.ui-controlgroup .ui-radio .ui-btn.ui-focus {
+	z-index: 3;
 }
 .ui-checkbox .ui-btn-icon-top,
 .ui-radio .ui-btn-icon-top,
