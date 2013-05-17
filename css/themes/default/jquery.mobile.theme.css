@@ -473,14 +473,6 @@ html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 	background-color: #34bae8 /*{a-bactive-background-color}*/;
 }
 
-.ui-body-a ::-webkit-selection,
-.ui-body-a ::-moz-selection,
-.ui-body-a ::selection {
-	background-color:		#34bae8 /*{a-bactive-background-color}*/;
-	color: 					#fff /*{a-bactive-color}*/;
-	text-shadow: none;
-}
-
 /* B
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -655,14 +647,6 @@ html.ui-mobile body .ui-btn-b.ui-icon-checkbox-on:after, /* has theme: 042 */
 .ui-mobile body .ui-bar-b .ui-icon-radio-on:after, /* inherit from bar: 041 */
 html.ui-mobile body .ui-btn-b.ui-icon-radio-on:after { /* has theme: 042 */
 	background-color: #ff0066 /*{b-bactive-background-color}*/;
-}
-
-.ui-body-b ::-webkit-selection,
-.ui-body-b ::-moz-selection,
-.ui-body-b ::selection {
-	background-color:		#ff0066 /*{b-bactive-background-color}*/;
-	color: 					#fff /*{b-bactive-color}*/;
-	text-shadow: none;
 }
 
 /* Disabled
