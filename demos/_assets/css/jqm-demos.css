@@ -569,7 +569,6 @@ h2.jqm-home-widget {
 	.jqm-demos-home .jqm-content .jqm-intro {
 		line-height: 1.45;
 		margin: -.2em .8em .4em .8em;
-
 	}
 	
 	/* Header buttons */
@@ -626,8 +625,9 @@ h2.jqm-home-widget {
 	}
 	
 	/* Footer */
-	.ui-page .jqm-footer{
-		position:absolute;
+	.ui-page .jqm-footer {
+		position: absolute;
+		bottom: 0;
 	}
 	.jqm-footer {
 		overflow: hidden;
