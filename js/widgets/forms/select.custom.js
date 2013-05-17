@@ -33,14 +33,14 @@ define( [
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
-			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' id='" + dialogID + "' data-" +$.mobile.ns + "theme='"+ widget.options.theme +"' data-" +$.mobile.ns + "overlay-theme='"+ widget.options.overlayTheme +"'>" +
+			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' id='" + dialogID + "' data-" + $.mobile.ns + "theme='" + widget.options.theme + "' data-" + $.mobile.ns + "overlay-theme='" + widget.options.overlayTheme + "'>" +
 				"<div data-" + $.mobile.ns + "role='header'>" +
 				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ),
 
-			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup( { theme: widget.options.overlayTheme } ),
+			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup({ theme: widget.options.overlayTheme }),
 
 			listThemeAttr = ( widget.options.theme ) ? " data-" + $.mobile.ns + "theme='" + widget.options.theme + "'" : "",
 
@@ -121,8 +121,7 @@ define( [
 					}
 
 					if (event.type === "vclick" ||
-							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
-																event.keyCode === $.mobile.keyCode.SPACE)) {
+							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE)) {
 
 						self._decideFormat();
 						if ( self.menuType === "overlay" ) {
@@ -392,7 +391,7 @@ define( [
 
 					self.menuType = "page";
 					self.menuPageContent.append( self.list );
-					self.menuPage.find("div .ui-title").text(self.label.text());
+					self.menuPage.find( "div .ui-title" ).text( self.label.text() );
 				} else {
 					self.menuType = "overlay";
 
