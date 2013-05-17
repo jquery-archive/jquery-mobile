@@ -311,7 +311,8 @@ button,
 	font-weight: bold;
 }
 .ui-bar-a {
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 }
 
 .ui-bar-a a.ui-link {
@@ -345,7 +346,8 @@ html.ui-mobile body .ui-input-search.ui-body-a, /* has theme: 032 */
 	text-shadow: 0 /*{a-body-shadow-x}*/ 1px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ #000 /*{a-body-shadow-color}*/;
 }
 .ui-body-a {
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 }
 
 .ui-body-a .ui-link {
@@ -475,7 +477,8 @@ html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 	font-weight: bold;
 }
 .ui-bar-b {
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 }
 
 .ui-bar-b a.ui-link {
@@ -509,7 +512,8 @@ html.ui-mobile body .ui-input-search.ui-body-b, /* has theme: 032 */
 	text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ 	#fff /*{b-body-shadow-color}*/;
 }
 .ui-body-b {
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 }
 
 .ui-body-b .ui-link {
