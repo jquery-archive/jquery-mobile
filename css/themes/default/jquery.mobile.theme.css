@@ -419,7 +419,7 @@ html.ui-mobile body .ui-btn.ui-btn-a:visited { /* has theme: 042 */
 .ui-mobile body .ui-bar-a .ui-btn:hover, /* inherit from bar: 041 */
 html.ui-mobile body .ui-btn.ui-btn-a:hover { /* has theme: 042 */
 	background: 			#333 /*{a-bhover-background-color}*/;
-	border-color:	 		#222 /*{a-bhover-border}*/;
+	border-color:	 		#1d1d1d /*{a-bhover-border}*/;
 	color: 					#fff /*{a-bhover-color}*/;
 	text-shadow: 0 /*{a-bhover-shadow-x}*/ 1px /*{a-bhover-shadow-y}*/ 0 /*{a-bhover-shadow-radius}*/ #000 /*{a-bhover-shadow-color}*/;
 }
@@ -429,7 +429,7 @@ html.ui-mobile body .ui-btn.ui-btn-a:hover { /* has theme: 042 */
 .ui-mobile body .ui-bar-a .ui-btn:active, /* inherit from bar: 041 */
 html.ui-mobile body .ui-btn.ui-btn-a:active { /* has theme: 042 */
 	background: 			#2d2d2d /*{a-bdown-background-color}*/;
-	border-color:	 		#222 /*{a-bdown-border}*/;
+	border-color:	 		#1d1d1d /*{a-bdown-border}*/;
 	color: 					#fff /*{a-bdown-color}*/;
 	text-shadow: 0 /*{a-bdown-shadow-x}*/ 1px /*{a-bdown-shadow-y}*/ 0 /*{a-bdown-shadow-radius}*/ #000 /*{a-bdown-shadow-color}*/;
 }
