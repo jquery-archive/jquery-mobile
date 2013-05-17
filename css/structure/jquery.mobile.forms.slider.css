@@ -155,7 +155,7 @@ div.ui-slider-switch.ui-mini {
 .ui-slider-track .ui-slider-bg,
 .ui-slider-switch .ui-slider-label,
 .ui-slider-switch .ui-slider-inneroffset,
-.ui-slider .ui-slider-handle {
+.ui-slider-handle {
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }

@@ -392,8 +392,11 @@ html.ui-mobile body .ui-slider-track.ui-fill-a { /* has theme: 032 */
 }
 .ui-fill-a.ui-btn-active, /* no JQM page, has theme: 020 */
 .ui-page.ui-body-a .ui-slider .ui-btn-active, /* inherit from page: 040 */
+.ui-page.ui-body-a .ui-rangeslider .ui-btn-active, /* inherit from page: 040 */
 .ui-mobile body .ui-bar-a .ui-slider .ui-btn-active, /* inherit from bar: 041 */
-html.ui-mobile body .ui-slider .ui-fill-a.ui-btn-active { /* has theme: 042 */
+.ui-mobile body .ui-bar-a .ui-rangeslider .ui-btn-active, /* inherit from bar: 041 */
+html.ui-mobile body .ui-slider .ui-fill-a.ui-btn-active,
+html.ui-mobile body .ui-rangeslider .ui-fill-a.ui-btn-active { /* has theme: 042 */
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3399cc /*{a-bactive-shadow-color}*/;
