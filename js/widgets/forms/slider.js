@@ -55,7 +55,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			options,
 			wrapper,
 			j, length,
-			i, optionsCount,
+			i, optionsCount, origTabIndex,
 			side, sliderTheme, sliderLabel, sliderImg;
 
 		this.isToggleSwitch = isToggleSwitch;
@@ -91,7 +91,18 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			mouseMoved: false
 		});
 
+
 		if ( isToggleSwitch ) {
+			// TODO: restore original tabindex (if any) in a destroy method
+			origTabIndex = control.attr( "tabindex" );
+			if ( origTabIndex ) {
+				handle.attr( "tabindex", origTabIndex );
+			}
+			control.attr( "tabindex", "-1" ).focus(function() {
+				$( this ).blur();
+				handle.focus();
+			});
+			
 			wrapper = document.createElement( "div" );
 			wrapper.className = "ui-slider-inneroffset";
 
