@@ -68,6 +68,7 @@ button,
 /* Buttons */
 .ui-btn-corner-all, /* Deprecated in 1.4 */
 .ui-btn.ui-corner-all,
+.ui-li-count.ui-corner-all,
 .ui-slider-switch.ui-corner-all,
 .ui-slider-track.ui-corner-all {
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
@@ -377,6 +378,13 @@ html.ui-mobile body .ui-slider-input.ui-body-a, /* has theme: 032 */
 	box-shadow: 0 1px #2a2a2a /*{a-br-shadow}*/;	
 }
 
+/* Count bubble */
+.ui-page.ui-body-a .ui-li-count, /* inherit from page: 030 */
+html .ui-btn.ui-btn-a > .ui-li-count, /* inherit from select or list button (also when no JQM page): 031 */
+html .ui-li-static.ui-body-a > .ui-li-count, /* inherit from static list item (also when no JQM page): 031 */
+html .ui-li-divider.ui-bar-a > .ui-li-count, /* inherit from divider (also when no JQM page): 031 */
+html .ui-listview li .ui-li-count.ui-fill-a, /* has theme (only themeable in listview): 032 */
+/* Slider */
 .ui-fill-a, /* no JQM page, has theme: 010 */
 .ui-page.ui-body-a .ui-slider-switch, /* inherit from page: 030 */
 .ui-page.ui-body-a .ui-slider-track, /* inherit from page: 030 */
@@ -554,6 +562,13 @@ html.ui-mobile body .ui-slider-input.ui-body-b, /* has theme: 032 */
 	box-shadow: 0 1px #fff /*{b-br-shadow}*/;	
 }
 
+/* Count bubble */
+.ui-page.ui-body-b .ui-li-count, /* inherit from page: 030 */
+html .ui-btn.ui-btn-b > .ui-li-count, /* inherit from select or list button (also when no JQM page): 031 */
+html .ui-li-static.ui-body-b > .ui-li-count, /* inherit from static list item (also when no JQM page): 031 */
+html .ui-li-divider.ui-bar-b > .ui-li-count, /* inherit from divider (also when no JQM page): 031 */
+html .ui-listview li .ui-li-count.ui-fill-b, /* has theme (only themeable in listview): 032 */
+/* Slider */
 .ui-fill-b, /* no JQM page, has theme: 010 */
 .ui-page.ui-body-b .ui-slider-switch, /* inherit from page: 030 */
 .ui-page.ui-body-b .ui-slider-track, /* inherit from page: 030 */

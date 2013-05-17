@@ -15,7 +15,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 	options: {
 		theme: null,
-		countTheme: "a",
+		countTheme: null,
 		dividerTheme: null,
 		icon: "arrow-r",
 		splitIcon: "arrow-r",
@@ -89,7 +89,8 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			startCount, newStartCount, value,
 			itemClassDict = {},
 			item, itemClass, itemTheme, itemIcon, icon,
-			a, isDivider;
+			a, isDivider,
+			countTheme = getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme;
 
 		// Check if a start attribute has been set while taking a value of 0 into account
 		if ( ol && ( start || start === 0 ) ) {
@@ -177,7 +178,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 		$list.find( ".ui-li-count" ).each(function() {
 				$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-			}).addClass( "ui-fill-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-corner-all" );
+			}).addClass( "ui-corner-all" + ( countTheme ? " ui-fill-" + countTheme : "" ) );
 
 		// Deprecated in 1.4. From 1.5 you have to add class ui-li-has-thumb or ui-li-has-icon to the LI.
 		this._addThumbClasses( li );
