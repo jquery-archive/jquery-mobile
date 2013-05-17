@@ -228,7 +228,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 				if ( !this._keySliding ) {
 					this._keySliding = true;
-					this.handle.addClass( "ui-state-active" );
+					this.handle.addClass( "ui-state-active" ); /* TODO: We don't use this class for styling. Do we need to add it? */
 				}
 
 				break;
@@ -258,7 +258,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	_handleKeyup: function(/* event */) {
 		if ( this._keySliding ) {
 			this._keySliding = false;
-			this.handle.removeClass( "ui-state-active" );
+			this.handle.removeClass( "ui-state-active" ); /* See comment above. */
 		}
 	},
 
