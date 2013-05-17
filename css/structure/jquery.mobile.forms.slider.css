@@ -19,27 +19,25 @@ div.ui-slider:after {
 input.ui-slider-input {
 	display: block;
 	float: left;
+	font-size: 14px;
+	font-weight: bold;
 	margin: 0;
 	padding: 4px;
 	width: 40px;
-	height: 22px;
-	line-height: 22px;
-	font-size: 14px;
-	border-width: 0;
+	height: 20px;
+	line-height: 20px;
 	background-image: none;
-	font-weight: bold;
+	border: 1px solid;
+	outline: 0;
 	text-align: center;
 	vertical-align: text-bottom;
-	outline: 0;
 	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	-ms-box-sizing: content-box;
 	box-sizing: content-box;
-}
-.ui-mobile-nosupport-boxshadow input.ui-slider-input {
-	border-width: 1px;
-	margin: -1px;
 }
 .ui-slider-input::-webkit-outer-spin-button,
 .ui-slider-input::-webkit-inner-spin-button {
@@ -59,7 +57,7 @@ input.ui-slider-input {
 	top: 8px;
 }
 .ui-slider-track .ui-slider-bg {
-	border: none;
+	border-width: 0;
 	height: 100%;
 }
 /* High level of specificity to override button margins in grids */
@@ -160,8 +158,6 @@ div.ui-slider-switch.ui-mini {
 .ui-slider .ui-slider-handle {
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
-	-webkit-background-clip: padding;
-	background-clip: padding-box;
 }
 .ui-field-contain div.ui-slider-switch {
 	margin: 0;
