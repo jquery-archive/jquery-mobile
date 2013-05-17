@@ -25,8 +25,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		var self = this,
 			input = this.element,
 			o = this.options,
-			theme = o.theme || "a",
-			themeclass  = " ui-body-" + theme,
+			themeclass  = o.theme ? " ui-body-" + o.theme : "",
 			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = input[ 0 ].tagName === "TEXTAREA",
@@ -47,7 +46,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}, 0 );
 		}
 
-		focusedEl = isTextarea ? input.addClass( "ui-input-text ui-body-" + theme ) : input;
+		focusedEl = isTextarea ? input.addClass( "ui-input-text" + themeclass ) : input;
 
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
@@ -83,9 +82,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				})
 				.appendTo( focusedEl )
 				.addClass(
-					"ui-btn ui-btn-" + theme +
-					" ui-icon-delete ui-btn-icon-notext" +
-					" ui-corner-all ui-shadow " + ( o.mini ? "ui-mini" : "" ) );
+					"ui-btn ui-icon-delete ui-btn-icon-notext" +
+					" ui-corner-all ui-shadow " +
+					( o.theme ? "ui-btn-" + o.theme : "" ) +
+					( o.mini ? "ui-mini" : "" ) );
 
 			if ( !isSearch ) {
 				focusedEl.addClass( "ui-input-has-clear" );

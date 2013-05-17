@@ -330,8 +330,14 @@ button,
 
 .ui-body-a, /* page, content, popup, panel, etc. or .ui-body, has theme: 010 */
 .ui-page.ui-body-a .ui-li-static, /* inherit from page: 030 */
+.ui-page.ui-body-a .ui-input-text, /* inherit from page: 030 */
+.ui-page.ui-body-a .ui-input-search, /* inherit from page: 030 */
 .ui-mobile body .ui-bar-a .ui-li-static, /* inherit from bar: 031 */
+.ui-mobile body .ui-bar-a .ui-input-text, /* inherit from bar: 031 */
+.ui-mobile body .ui-bar-a .ui-input-search, /* inherit from bar: 031 */
 html.ui-mobile body .ui-li-static.ui-body-a, /* has theme: 032 */
+html.ui-mobile body .ui-input-text.ui-body-a, /* has theme: 032 */
+html.ui-mobile body .ui-input-search.ui-body-a, /* has theme: 032 */
 .ui-overlay-a {
 	background: 			#222 /*{a-body-background-color}*/;
 	border-color:	 		#1b1b1b /*{a-body-border}*/;
@@ -488,8 +494,14 @@ html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 
 .ui-body-b, /* page, content, popup, panel, etc. or .ui-body, has theme: 010 */
 .ui-page.ui-body-b .ui-li-static, /* inherit from page: 030 */
+.ui-page.ui-body-b .ui-input-text, /* inherit from page: 030 */
+.ui-page.ui-body-b .ui-input-search, /* inherit from page: 030 */
 .ui-mobile body .ui-bar-b .ui-li-static, /* inherit from bar: 031 */
+.ui-mobile body .ui-bar-b .ui-input-text, /* inherit from bar: 031 */
+.ui-mobile body .ui-bar-b .ui-input-search, /* inherit from bar: 031 */
 html.ui-mobile body .ui-li-static.ui-body-b, /* has theme: 032 */
+html.ui-mobile body .ui-input-text.ui-body-b, /* has theme: 032 */
+html.ui-mobile body .ui-input-search.ui-body-b, /* has theme: 032 */
 .ui-overlay-b {
 	background: 			#f5f5f5 /*{b-body-background-color}*/;
 	border-color:	 		#ddd /*{b-body-border}*/;

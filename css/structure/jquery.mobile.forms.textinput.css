@@ -2,6 +2,7 @@
 .ui-input-search {
 	margin: .5em 0;
 	background-image: none;
+	border: 1px solid;
 }
 .ui-input-text input,
 .ui-input-search input,
