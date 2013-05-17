@@ -151,19 +151,6 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			control.add( slider ).wrapAll( wrapper );
 		}
 
-		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
-		if ( isToggleSwitch ) {
-			this.handle.bind({
-				focus: function() {
-					slider.addClass( $.mobile.focusClass );
-				},
-
-				blur: function() {
-					slider.removeClass( $.mobile.focusClass );
-				}
-			});
-		}
-
 		// bind the handle event callbacks and set the context to the widget instance
 		this._on( this.handle, {
 			"vmousedown": "_handleVMouseDown",
