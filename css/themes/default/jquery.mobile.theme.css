@@ -22,10 +22,15 @@ button,
 	text-shadow: inherit;
 }
 
-/* Links
+/* Buttons
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-btn {
+	font-weight: bold;
+	border-width: 1px;
+	border-style: solid;
+}
+.ui-btn:link {
 	text-decoration: none;	
 }
 
@@ -390,7 +395,6 @@ html.ui-mobile body .ui-btn.ui-btn-a:visited { /* has theme: 042 */
 	border-color: 			#1b1b1b /*{a-bup-border}*/;
 	color: 					#fff /*{a-bup-color}*/;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #000 /*{a-bup-shadow-color}*/;
-	font-weight: bold;
 }
 /* Hover */
 .ui-btn-a:hover, /* no JQM page, has theme: 020 */
@@ -556,7 +560,6 @@ html.ui-mobile body .ui-btn.ui-btn-b:visited { /* has theme: 042 */
 	border-color:	 		#ddd /*{b-bup-border}*/;
 	color: 					#333 /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #fff /*{b-bup-shadow-color}*/;
-	font-weight: bold;
 }
 /* Hover */
 .ui-btn-b:hover, /* no JQM page, has theme: 020 */
