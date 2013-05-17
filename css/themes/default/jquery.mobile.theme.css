@@ -297,7 +297,7 @@ button,
 /* A
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-bar-a, /* no JQM page, has theme: 010 */
+.ui-bar-a, /* .ui-bar.ui-bar-a or no JQM page, has theme: 010 */
 .ui-page.ui-body-a .ui-header, /* inherit from page: 030 */
 .ui-page.ui-body-a .ui-footer, /* inherit from page: 030 */
 .ui-page.ui-body-a .ui-li-divider, /* inherit from page: 030 */
@@ -305,10 +305,13 @@ button,
 .ui-mobile body .ui-footer.ui-bar-a, /* has theme: 031 */
 .ui-mobile body .ui-li-divider.ui-bar-a { /* has theme: 031 */
 	background: 			#1d1d1d /*{a-bar-background-color}*/;
-	border: 1px solid 		#1b1b1b /*{a-bar-border}*/;
+	border-color:	 		#1b1b1b /*{a-bar-border}*/;
 	color: 					#fff /*{a-bar-color}*/;
 	text-shadow: 0 /*{a-bar-shadow-x}*/ 1px /*{a-bar-shadow-y}*/ 0 /*{a-bar-shadow-radius}*/ #000 /*{a-bar-shadow-color}*/;
 	font-weight: bold;
+}
+.ui-bar-a {
+	border: 1px solid;
 }
 
 .ui-bar-a a.ui-link {
@@ -325,17 +328,18 @@ button,
 	color: #34bae8 /*{a-bar-link-active}*/;
 }
 
-.ui-body-a,
-.ui-body-a .ui-li-static,
-li.ui-li-static.ui-body-a,
+.ui-body-a, /* page, content, popup, panel, etc. or .ui-body, has theme: 010 */
+.ui-page.ui-body-a .ui-li-static, /* inherit from page: 030 */
+.ui-mobile body .ui-bar-a .ui-li-static, /* inherit from bar: 031 */
+html.ui-mobile body .ui-li-static.ui-body-a, /* has theme: 032 */
 .ui-overlay-a {
 	background: 			#222 /*{a-body-background-color}*/;
-	border: 1px solid 		#1b1b1b /*{a-body-border}*/;
+	border-color:	 		#1b1b1b /*{a-body-border}*/;
 	color: 					#fff /*{a-body-color}*/;
 	text-shadow: 0 /*{a-body-shadow-x}*/ 1px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ #000 /*{a-body-shadow-color}*/;
 }
-.ui-overlay-a {
-	border-width: 0;
+.ui-body-a {
+	border: 1px solid;
 }
 
 .ui-body-a .ui-link {
@@ -451,7 +455,7 @@ html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 /* B
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-bar-b, /* no JQM page, has theme: 010 */
+.ui-bar-b, /* .ui-bar.ui-bar-b or no JQM page, has theme: 010 */
 .ui-page.ui-body-b .ui-header, /* inherit from page: 030 */
 .ui-page.ui-body-b .ui-footer, /* inherit from page: 030 */
 .ui-page.ui-body-b .ui-li-divider, /* inherit from page: 030 */
@@ -459,10 +463,13 @@ html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 .ui-mobile body .ui-footer.ui-bar-b, /* has theme: 031 */
 .ui-mobile body .ui-li-divider.ui-bar-b { /* has theme: 031 */
 	background: 			#e5e5e5 /*{b-bar-background-color}*/;
-	border: 1px solid 		#ddd /*{b-bar-border}*/;
+	border-color:	 		#ddd /*{b-bar-border}*/;
 	color: 					#333 /*{b-bar-color}*/;
 	text-shadow: 0 /*{b-bar-shadow-x}*/ 1px /*{b-bar-shadow-y}*/ 0 /*{b-bar-shadow-radius}*/ 	#fff /*{b-bar-shadow-color}*/;
 	font-weight: bold;
+}
+.ui-bar-b {
+	border: 1px solid;
 }
 
 .ui-bar-b a.ui-link {
@@ -479,17 +486,18 @@ html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 	color: #ff0066 /*{b-bar-link-active}*/;
 }
 
-.ui-body-b,
-.ui-body-b .ui-li-static,
-li.ui-li-static.ui-body-b,
+.ui-body-b, /* page, content, popup, panel, etc. or .ui-body, has theme: 010 */
+.ui-page.ui-body-b .ui-li-static, /* inherit from page: 030 */
+.ui-mobile body .ui-bar-b .ui-li-static, /* inherit from bar: 031 */
+html.ui-mobile body .ui-li-static.ui-body-b, /* has theme: 032 */
 .ui-overlay-b {
 	background: 			#f5f5f5 /*{b-body-background-color}*/;
-	border: 1px solid 		#ddd /*{b-body-border}*/;
+	border-color:	 		#ddd /*{b-body-border}*/;
 	color: 					#333 /*{b-body-color}*/;
 	text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ 	#fff /*{b-body-shadow-color}*/;
 }
-.ui-overlay-b {
-	border-width: 0;
+.ui-body-b {
+	border: 1px solid;
 }
 
 .ui-body-b .ui-link {

@@ -39,6 +39,7 @@
 .ui-listview .ui-li-divider,
 .ui-listview > li > a.ui-btn {
 	border-width: 1px 0 0 0;
+	border-style: solid;
 }
 .ui-listview-inset .ui-li-static,
 .ui-listview-inset .ui-li-divider,
