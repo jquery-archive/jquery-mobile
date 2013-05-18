@@ -147,7 +147,8 @@ button,
 .ui-icon-arrow-d:after {
 	background-position: 	-216px -1px;
 }
-.ui-icon-check:after {
+.ui-icon-check:after,
+.ui-icon-checkbox-on:after {
 	background-position: 	-252px -1px;
 }
 .ui-icon-gear:after {
@@ -186,20 +187,6 @@ button,
 }
 .ui-icon-edit:after {
 	background-position: 	-824px -1px;
-}
-
-.ui-btn.ui-icon-checkbox-off:after,
-.ui-btn.ui-icon-radio-off:after {
-	background-image: none;
-	filter: Alpha(Opacity=30);
-	opacity: .3;
-}
-.ui-icon-checkbox-on:after {
-	/* background-position:	-647px 1px; use check (no bg) */
-	background-position: 	-252px -1px;
-}
-.ui-icon-radio-on:after {
-	background-position: 	-718px -1px;
 }
 
 /* HD/"retina" sprite */
@@ -242,7 +229,8 @@ button,
 	.ui-icon-arrow-d:after {
 		background-position: 	-215px 50%;
 	}
-	.ui-icon-check:after {
+	.ui-icon-check:after,
+	.ui-icon-checkbox-on:after {
 		background-position: 	-252px 50%;
 	}
 	.ui-icon-gear:after {
@@ -282,14 +270,21 @@ button,
 	}.ui-icon-edit:after {
 		background-position: 	-824px 50%;
 	}
-	
-	.ui-icon-checkbox-on:after {
-		/* background-position: -647px 50%; use check (no bg) */
-		background-position: 	-252px 50%;
-	}
-	.ui-icon-radio-on:after {
-		background-position: 	-718px 50%;
-	}
+}
+
+/* Checkbox and radio */
+.ui-btn.ui-icon-checkbox-off:after,
+.ui-btn.ui-icon-radio-off:after {
+	background-image: none;
+	filter: Alpha(Opacity=30);
+	opacity: .3;
+}
+.ui-radio .ui-btn.ui-icon-radio-on:after {
+	background-image: none;
+	width: 8px;
+	height: 8px;
+	border-width: 5px;
+	border-style: solid; 
 }
 
 /* Loading icon */
@@ -475,13 +470,16 @@ html.ui-mobile body .ui-body-a.ui-focus { /* has theme: 032 */
 .ui-btn-a.ui-icon-checkbox-on:after, /* no JQM page, has theme: 030 */
 .ui-page.ui-body-a .ui-icon-checkbox-on:after, /* inherit from page: 040 */
 .ui-mobile body .ui-bar-a .ui-icon-checkbox-on:after, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn-a.ui-icon-checkbox-on:after, /* has theme: 042 */
+html.ui-mobile body .ui-btn-a.ui-icon-checkbox-on:after { /* has theme: 042 */
+	background-color: #34bae8 /*{a-bactive-background-color}*/;
+}
 /* Radio button active */
 .ui-btn-a.ui-icon-radio-on:after, /* no JQM page, has theme: 030 */
 .ui-page.ui-body-a .ui-icon-radio-on:after, /* inherit from page: 040 */
 .ui-mobile body .ui-bar-a .ui-icon-radio-on:after, /* inherit from bar: 041 */
 html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
-	background-color: #34bae8 /*{a-bactive-background-color}*/;
+	background-color: #fff;
+	border-color: #34bae8 /*{a-bactive-background-color}*/;
 }
 
 /* B
@@ -658,13 +656,16 @@ html.ui-mobile body .ui-body-b.ui-focus { /* has theme: 032 */
 .ui-btn-b.ui-icon-checkbox-on:after, /* no JQM page, has theme: 030 */
 .ui-page.ui-body-b .ui-icon-checkbox-on:after, /* inherit from page: 040 */
 .ui-mobile body .ui-bar-b .ui-icon-checkbox-on:after, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn-b.ui-icon-checkbox-on:after, /* has theme: 042 */
+html.ui-mobile body .ui-btn-b.ui-icon-checkbox-on:after { /* has theme: 042 */
+	background-color: #ff6600 /*{b-bactive-background-color}*/;
+}
 /* Radio button active */
 .ui-btn-b.ui-icon-radio-on:after, /* no JQM page, has theme: 030 */
 .ui-page.ui-body-b .ui-icon-radio-on:after, /* inherit from page: 040 */
 .ui-mobile body .ui-bar-b .ui-icon-radio-on:after, /* inherit from bar: 041 */
 html.ui-mobile body .ui-btn-b.ui-icon-radio-on:after { /* has theme: 042 */
-	background-color: #ff6600 /*{b-bactive-background-color}*/;
+	background-color: #fff;
+	border-color: #ff6600 /*{b-bactive-background-color}*/;
 }
 
 /* Disabled
