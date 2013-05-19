@@ -96,6 +96,13 @@ textarea.ui-mini {
 textarea.ui-input-text::-moz-placeholder {
 	color: #aaa;
 }
+/* Same for IE10 (because it's a pseudo class we need to take specificity into account) */
+.ui-input-text input:-ms-input-placeholder,
+.ui-input-search input:-ms-input-placeholder,
+.ui-mobile textarea.ui-input-text:-ms-input-placeholder {
+	color: #aaa;
+}
+
 /* Resolves issue #5131: Width of textinput depends on its type,
 for Android 4.1 */
 .ui-input-text input[type=number]::-webkit-outer-spin-button {
