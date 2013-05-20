@@ -31,6 +31,10 @@
 .ui-popup {
 	position: relative;
 }
+.ui-popup.ui-body-inherit {
+	border-width: 1px;
+	border-style: solid;
+}
 .ui-popup-hidden {
 	position: absolute !important;
 	top: -9999px;

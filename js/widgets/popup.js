@@ -264,14 +264,15 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_applyTheme: function( dst, theme, prefix ) {
-		var classes = ( dst.attr( "class" ) || "").split( " " ),
+		var classes = ( dst.attr( "class" ) || "" ).split( " " ),
 			currentTheme = null,
 			matches,
+			inheritTheme = ( theme === null && prefix === "body" ),
 			themeStr = String( theme );
 
 		while ( classes.length > 0 ) {
 			currentTheme = classes.pop();
-			matches = ( new RegExp( "^ui-" + prefix + "-([a-z])$" ) ).exec( currentTheme );
+			matches = ( new RegExp( "^ui-" + prefix + "-([a-z]|/inherit/)$" ) ).exec( currentTheme );
 			if ( matches && matches.length > 1 ) {
 				currentTheme = matches[ 1 ];
 				break;
@@ -280,9 +281,12 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			}
 		}
 
-		if ( theme !== currentTheme ) {
+		if ( theme !== currentTheme || inheritTheme ) {
 			dst.removeClass( "ui-" + prefix + "-" + currentTheme );
-			if ( ! ( theme === null || theme === "none" ) ) {
+			if ( theme !== "none" ) {
+				if ( inheritTheme ) {
+					themeStr = "inherit";
+				}
 				dst.addClass( "ui-" + prefix + "-" + themeStr );
 			}
 		}
@@ -606,10 +610,6 @@ $.widget( "mobile.popup", $.mobile.widget, {
 
 		this._currentTransition = o.transition;
 		this._applyTransition( o.transition );
-
-		if ( !this.options.theme ) {
-			this._setOptions( { theme: this._page.jqmData( "theme" ) || "a" } );
-		}
 
 		this._ui.screen.removeClass( "ui-screen-hidden" );
 		this._ui.container.removeClass( "ui-popup-hidden" );
