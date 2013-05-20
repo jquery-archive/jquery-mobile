@@ -260,7 +260,7 @@
 					<a href="#transparent" data-rel="popup" data-role="button" data-inline="true">Theme "none", no shadow</a>
 					<div id="transparent" data-role="popup" data-theme="none" data-shadow="false">
 						<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-					  <img src="../../_assets/img/firefox-logo.png" class="popphoto" alt="firefox logo on a transparent popup">
+					  <img src="../../_assets/img/firefox-logo.png" class="popphoto" alt="firefox logo on a transparent popup" height="300" width="300">
 					</div>
 
 					<a href="#overlay" data-rel="popup" data-role="button" data-inline="true">Overlay theme A</a>
