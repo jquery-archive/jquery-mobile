@@ -30,7 +30,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		var self = this,
 			control = this.element,
 			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme", true ),
-			trackThemeClass = trackTheme ? " ui-fill-" + trackTheme : "",
+			trackThemeClass = " ui-fill-" + ( trackTheme ? trackTheme : "inherit" ),
 			cType = control[ 0 ].nodeName.toLowerCase(),
 			isToggleSwitch = ( cType === "select" ),
 			isRangeslider = control.parent().is( ":jqmData(role='rangeslider')" ),
@@ -357,7 +357,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			theme = this.options.theme || parentTheme,
 			themeClass =  " ui-btn-" + theme,
 			trackTheme = this.options.trackTheme || parentTheme,
-			trackThemeClass = trackTheme ? " ui-fill-" + trackTheme : "",
+			trackThemeClass = " ui-fill-" + ( trackTheme ? trackTheme : "inherit" ),
 			left, width, data, tol,
 			pxStep, percent,
 			control, isInput, optionElements, min, max, step,
@@ -523,9 +523,12 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	},
 
 	_setTrackTheme: function( value ) {
+		var currentTheme = this.options.trackTheme ? this.options.trackTheme : "inherit",
+			newTheme = value ? value : "inherit";
+			
 		this.slider
-			.removeClass( "ui-fill-" + this.options.trackTheme )
-			.addClass( "ui-fill-" + value );
+			.removeClass( "ui-fill-" + currentTheme )
+			.addClass( "ui-fill-" + newTheme );
 	},
 
 	_setDisabled: function( value ) {
