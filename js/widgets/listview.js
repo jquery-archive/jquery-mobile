@@ -102,7 +102,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			item = li.eq( pos );
 			itemClass = "";
 
-			if ( create || item[ 0 ].className.search( /\bui-li-/ ) < 0 ) {
+			if ( create || item[ 0 ].className.search( /\bui-li-static\b|\bui-li-divider\b/ ) < 0 ) {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
 				value = item.attr( "value" );
@@ -145,14 +145,16 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					var dividerTheme = ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme || o.theme );
 					
 					itemClass = dividerTheme ? "ui-li-divider ui-bar-" + dividerTheme : "ui-li-divider";
-					
+
 					item.attr( "role", "heading" );
-				} else {
+				} else if ( a.length <= 0 ) {
 					itemClass = "ui-li-static ui-body-" + itemTheme;
 				}
 				if ( ol && value ) {
 					var elem = ( a.length && !isDivider ) ? a : item;
+					
 					newStartCount = parseInt( value , 10 ) - 1;
+					
 					elem.css( "counter-reset", "listnumbering " + newStartCount );
 				}
 			}
