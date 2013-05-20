@@ -112,6 +112,9 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					itemIcon = getAttr( item[ 0 ], "icon", true );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
+					// TODO: Remove in 1.5 together with links.js (links.js / .ui-link deprecated in 1.4)
+					a.removeClass( "ui-link" );
+
 					var buttonClass = "ui-btn";
 					
 					if ( itemTheme ) {
