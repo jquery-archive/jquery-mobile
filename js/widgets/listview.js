@@ -148,7 +148,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 
 					item.attr( "role", "heading" );
 				} else if ( a.length <= 0 ) {
-					itemClass = "ui-li-static ui-body-" + itemTheme;
+					itemClass = "ui-li-static ui-body-" + ( itemTheme ? itemTheme : "inherit" );
 				}
 				if ( ol && value ) {
 					var elem = ( a.length && !isDivider ) ? a : item;

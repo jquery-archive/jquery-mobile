@@ -331,20 +331,10 @@ html .ui-li-divider.ui-bar-a { /* has theme: 021 */
 	color: #34bae8 /*{a-bar-link-active}*/;
 }
 
-.ui-body-a, /* content, popup, panel, etc. or .ui-body.ui-body-a, has theme: 010 */
+.ui-body-a, /* has theme: 010 */
 .ui-page-theme-a, /* page: 010 */
-.ui-page-theme-a .ui-li-static, /* inherit from page: 020 */
-.ui-page-theme-a .ui-input-text, /* inherit from page: 020 */
-.ui-page-theme-a .ui-input-search, /* inherit from page: 020 */
-.ui-page-theme-a .ui-slider-input, /* inherit from page: 020 */
-html .ui-bar-a .ui-li-static, /* inherit from bar: 021 */
-html .ui-bar-a .ui-input-text, /* inherit from bar: 021 */
-html .ui-bar-a .ui-input-search, /* inherit from bar: 021 */
-html .ui-bar-a .ui-slider-input, /* inherit from bar: 021 */
-html body .ui-li-static.ui-body-a, /* has theme: 022 */
-html body .ui-input-text.ui-body-a, /* has theme: 022 */
-html body .ui-input-search.ui-body-a, /* has theme: 022 */
-html body .ui-slider-input.ui-body-a, /* has theme: 022 */
+.ui-page-theme-a .ui-body-inherit, /* inherit from page: 020 */
+html .ui-bar-a .ui-body-inherit, /* inherit from bar: 021 */
 .ui-overlay-a {
 	background: 			#222 /*{a-body-background-color}*/;
 	border-color:	 		#1b1b1b /*{a-body-border}*/;
@@ -514,20 +504,10 @@ html .ui-li-divider.ui-bar-b { /* has theme: 021 */
 	color: #ff6600 /*{b-bar-link-active}*/;
 }
 
-.ui-body-b, /* content, popup, panel, etc. or .ui-body.ui-body-b, has theme: 010 */
+.ui-body-b, /* has theme: 010 */
 .ui-page-theme-b, /* page: 010 */
-.ui-page-theme-b .ui-li-static, /* inherit from page: 020 */
-.ui-page-theme-b .ui-input-text, /* inherit from page: 020 */
-.ui-page-theme-b .ui-input-search, /* inherit from page: 020 */
-.ui-page-theme-b .ui-slider-input, /* inherit from page: 020 */
-html .ui-bar-b .ui-li-static, /* inherit from bar: 021 */
-html .ui-bar-b .ui-input-text, /* inherit from bar: 021 */
-html .ui-bar-b .ui-input-search, /* inherit from bar: 021 */
-html .ui-bar-b .ui-slider-input, /* inherit from bar: 021 */
-html body .ui-li-static.ui-body-b, /* has theme: 022 */
-html body .ui-input-text.ui-body-b, /* has theme: 022 */
-html body .ui-input-search.ui-body-b, /* has theme: 022 */
-html body .ui-slider-input.ui-body-b, /* has theme: 022 */
+.ui-page-theme-b .ui-body-inherit, /* inherit from page: 020 */
+html .ui-bar-b .ui-body-inherit, /* inherit from bar: 021 */
 .ui-overlay-b {
 	background: 			#f5f5f5 /*{b-body-background-color}*/;
 	border-color:	 		#ddd /*{b-body-border}*/;

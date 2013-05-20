@@ -25,7 +25,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		var self = this,
 			input = this.element,
 			o = this.options,
-			themeclass  = o.theme ? " ui-body-" + o.theme : "",
+			themeclass  = " ui-body-" + ( o.theme ?  o.theme : "inherit" ),
 			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = input[ 0 ].tagName === "TEXTAREA",
