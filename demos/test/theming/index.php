@@ -147,8 +147,8 @@
 		</form>
 		
 		<div data-role="collapsible" data-content-theme="b">
-		    <h4>Heading</h4>
-		    <p>I'm the collapsible content with a themed content block set to "d".</p>
+			<h4>Heading</h4>
+			<p>I'm the collapsible content with a themed content block set to "d".</p>
 		</div>
 		
 		<div data-role="collapsible-set" data-content-theme="b">
