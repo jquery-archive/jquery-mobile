@@ -76,7 +76,7 @@
 
 				<div data-role="popup" id="popupMenu" data-theme="d">
 						<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
-							<li data-role="divider" data-theme="e">Choose an action</li>
+							<li data-role="list-divider" data-theme="e">Choose an action</li>
 							<li><a href="#">View details</a></li>
 							<li><a href="#">Edit</a></li>
 							<li><a href="#">Disable</a></li>
