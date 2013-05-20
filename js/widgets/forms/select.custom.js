@@ -190,7 +190,7 @@ define( [
 						switch ( event.keyCode ) {
 							// up or left arrow keys
 						case 38:
-							prev = li.prev().not( ".ui-selectmenu-placeholder" );
+							prev = li.prev().not( ".ui-screen-hidden" );
 
 							if ( prev.hasClass( "ui-li-divider" ) ) {
 								prev = prev.prev();
@@ -313,7 +313,7 @@ define( [
 							if ( self.isMultiple ) {
 								item.find( "a" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
-								if ( item.hasClass( "ui-selectmenu-placeholder" ) ) {
+								if ( item.hasClass( "ui-screen-hidden" ) ) {
 									item.next().addClass( $.mobile.activeBtnClass );
 								} else {
 									item.addClass( $.mobile.activeBtnClass );
@@ -460,7 +460,7 @@ define( [
 						}
 						option.setAttribute( dataPlaceholderAttr, true );
 						if ( o.hidePlaceholderMenuItems ) {
-							classes.push( "ui-selectmenu-placeholder" );
+							classes.push( "ui-screen-hidden" );
 						}
 						if ( placeholder !== text ) {
 							placeholder = self.placeholder = text;
@@ -488,7 +488,7 @@ define( [
 
 				// Hide header if it's not a multiselect and there's no placeholder
 				if ( !this.isMultiple && !placeholder.length ) {
-					this.header.hide();
+					this.header.addClass( "ui-screen-hidden" );
 				} else {
 					this.headerTitle.text( this.placeholder );
 				}
