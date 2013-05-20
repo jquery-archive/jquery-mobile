@@ -52,13 +52,16 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				}
 			}
 			if ( o.backBtnTheme !== undefined ) {
-				this.element.find( ".ui-toolbar-back-btn" ).attr( "data-" + $.mobile.ns + "theme", o.backBtnTheme ).buttonMarkup({ theme:o.backBtnTheme});
+				this.element.find( ".ui-toolbar-back-btn" ).attr( "data-" + $.mobile.ns + "theme", o.backBtnTheme ).buttonMarkup({ theme: o.backBtnTheme });
 			}
 			if ( o.backBtnText !== undefined ) {
 				this.element.find( ".ui-toolbar-back-btn .ui-btn-text" ).text( o.backBtnText );
 			}
-			if ( o.theme ) {
-				this.element.removeClass( "ui-bar-" + this.options.theme ).addClass( "ui-bar-" + o.theme );
+			if ( o.backBtnTheme !== undefined ) {
+				var currentTheme = this.options.theme ? this.options.theme : "inherit",
+					newTheme = o.theme ? o.theme : "inherit";
+					
+				this.element.removeClass( "ui-bar-" + currentTheme ).addClass( "ui-bar-" + newTheme );
 			}
 			
 			this._super( o );

@@ -144,7 +144,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				} else if ( isDivider ) {
 					var dividerTheme = ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme || o.theme );
 					
-					itemClass = dividerTheme ? "ui-li-divider ui-bar-" + dividerTheme : "ui-li-divider";
+					itemClass = "ui-li-divider ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
 
 					item.attr( "role", "heading" );
 				} else if ( a.length <= 0 ) {

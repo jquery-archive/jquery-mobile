@@ -299,13 +299,8 @@ legend,
 /* A
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-bar-a, /* .ui-bar.ui-bar-a or no JQM page, has theme: 010 */
-.ui-page-theme-a .ui-header, /* inherit from page: 020 */
-.ui-page-theme-a .ui-footer, /* inherit from page: 020 */
-.ui-page-theme-a .ui-li-divider, /* inherit from page: 020 */
-html .ui-header.ui-bar-a, /* has theme: 021 */
-html .ui-footer.ui-bar-a, /* has theme: 021 */
-html .ui-li-divider.ui-bar-a { /* has theme: 021 */
+.ui-bar-a,
+.ui-page-theme-a .ui-bar-inherit {
 	background: 			#1d1d1d /*{a-bar-background-color}*/;
 	border-color:	 		#1b1b1b /*{a-bar-border}*/;
 	color: 					#fff /*{a-bar-color}*/;
@@ -472,13 +467,8 @@ html body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 032 */
 /* B
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-bar-b, /* .ui-bar.ui-bar-b or no JQM page, has theme: 010 */
-.ui-page-theme-b .ui-header, /* inherit from page: 020 */
-.ui-page-theme-b .ui-footer, /* inherit from page: 020 */
-.ui-page-theme-b .ui-li-divider, /* inherit from page: 020 */
-html .ui-header.ui-bar-b, /* has theme: 021 */
-html .ui-footer.ui-bar-b, /* has theme: 021 */
-html .ui-li-divider.ui-bar-b { /* has theme: 021 */
+.ui-bar-b,
+.ui-page-theme-b .ui-bar-inherit {
 	background: 			#e5e5e5 /*{b-bar-background-color}*/;
 	border-color:	 		#ddd /*{b-bar-border}*/;
 	color: 					#111 /*{b-bar-color}*/;
