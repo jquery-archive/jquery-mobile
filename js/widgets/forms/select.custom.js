@@ -54,7 +54,7 @@ define( [
 				}).appendTo( listbox ),
 
 			header = $( "<div>", {
-				"class": "ui-header"
+				"class": "ui-header ui-bar-inherit"
 			}).prependTo( listbox ),
 
 			headerTitle = $( "<h1>", {
