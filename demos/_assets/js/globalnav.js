@@ -3,7 +3,7 @@
 		$.widget( "mobile.listview", $.mobile.listview, {
 			options: {
 				theme: null,
-				countTheme: "a",
+				countTheme: null,
 				dividerTheme: null,
 				icon: "arrow-r",
 				splitIcon: "arrow-r",
