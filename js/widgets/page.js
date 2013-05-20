@@ -32,7 +32,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		this.element
 			.attr( "tabindex", "0" )
-			.addClass( "ui-page ui-body-" + this.options.theme );
+			.addClass( "ui-page ui-page-theme-" + this.options.theme );
 
 		this._on( this.element, {
 			pagebeforehide: "removeContainerBackground",

@@ -300,12 +300,12 @@ legend,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-a, /* .ui-bar.ui-bar-a or no JQM page, has theme: 010 */
-.ui-page.ui-body-a .ui-header, /* inherit from page: 030 */
-.ui-page.ui-body-a .ui-footer, /* inherit from page: 030 */
-.ui-page.ui-body-a .ui-li-divider, /* inherit from page: 030 */
-.ui-mobile body .ui-header.ui-bar-a, /* has theme: 031 */
-.ui-mobile body .ui-footer.ui-bar-a, /* has theme: 031 */
-.ui-mobile body .ui-li-divider.ui-bar-a { /* has theme: 031 */
+.ui-page-theme-a .ui-header, /* inherit from page: 020 */
+.ui-page-theme-a .ui-footer, /* inherit from page: 020 */
+.ui-page-theme-a .ui-li-divider, /* inherit from page: 020 */
+html .ui-header.ui-bar-a, /* has theme: 021 */
+html .ui-footer.ui-bar-a, /* has theme: 021 */
+html .ui-li-divider.ui-bar-a { /* has theme: 021 */
 	background: 			#1d1d1d /*{a-bar-background-color}*/;
 	border-color:	 		#1b1b1b /*{a-bar-border}*/;
 	color: 					#fff /*{a-bar-color}*/;
@@ -331,19 +331,20 @@ legend,
 	color: #34bae8 /*{a-bar-link-active}*/;
 }
 
-.ui-body-a, /* page, content, popup, panel, etc. or .ui-body.ui-body-a, has theme: 010 */
-.ui-page.ui-body-a .ui-li-static, /* inherit from page: 030 */
-.ui-page.ui-body-a .ui-input-text, /* inherit from page: 030 */
-.ui-page.ui-body-a .ui-input-search, /* inherit from page: 030 */
-.ui-page.ui-body-a .ui-slider-input, /* inherit from page: 030 */
-.ui-mobile body .ui-bar-a .ui-li-static, /* inherit from bar: 031 */
-.ui-mobile body .ui-bar-a .ui-input-text, /* inherit from bar: 031 */
-.ui-mobile body .ui-bar-a .ui-input-search, /* inherit from bar: 031 */
-.ui-mobile body .ui-bar-a .ui-slider-input, /* inherit from bar: 031 */
-html.ui-mobile body .ui-li-static.ui-body-a, /* has theme: 032 */
-html.ui-mobile body .ui-input-text.ui-body-a, /* has theme: 032 */
-html.ui-mobile body .ui-input-search.ui-body-a, /* has theme: 032 */
-html.ui-mobile body .ui-slider-input.ui-body-a, /* has theme: 032 */
+.ui-body-a, /* content, popup, panel, etc. or .ui-body.ui-body-a, has theme: 010 */
+.ui-page-theme-a, /* page: 010 */
+.ui-page-theme-a .ui-li-static, /* inherit from page: 020 */
+.ui-page-theme-a .ui-input-text, /* inherit from page: 020 */
+.ui-page-theme-a .ui-input-search, /* inherit from page: 020 */
+.ui-page-theme-a .ui-slider-input, /* inherit from page: 020 */
+html .ui-bar-a .ui-li-static, /* inherit from bar: 021 */
+html .ui-bar-a .ui-input-text, /* inherit from bar: 021 */
+html .ui-bar-a .ui-input-search, /* inherit from bar: 021 */
+html .ui-bar-a .ui-slider-input, /* inherit from bar: 021 */
+html body .ui-li-static.ui-body-a, /* has theme: 022 */
+html body .ui-input-text.ui-body-a, /* has theme: 022 */
+html body .ui-input-search.ui-body-a, /* has theme: 022 */
+html body .ui-slider-input.ui-body-a, /* has theme: 022 */
 .ui-overlay-a {
 	background: 			#222 /*{a-body-background-color}*/;
 	border-color:	 		#1b1b1b /*{a-body-border}*/;
@@ -375,19 +376,19 @@ html.ui-mobile body .ui-slider-input.ui-body-a, /* has theme: 032 */
 }
 
 /* Count bubble */
-.ui-page.ui-body-a .ui-li-count, /* inherit from page: 030 */
-html .ui-btn.ui-btn-a > .ui-li-count, /* inherit from select or list button (also when no JQM page): 031 */
-html .ui-li-static.ui-body-a > .ui-li-count, /* inherit from static list item (also when no JQM page): 031 */
-html .ui-li-divider.ui-bar-a > .ui-li-count, /* inherit from divider (also when no JQM page): 031 */
-html .ui-listview li .ui-li-count.ui-fill-a, /* has theme (only themeable in listview): 032 */
+.ui-page-theme-a .ui-li-count, /* inherit from page: 020 */
+html .ui-btn-a > .ui-li-count, /* inherit from select or list button (also when no JQM page): 021 */
+html .ui-body-a > .ui-li-count, /* inherit from static list item (also when no JQM page): 021 */
+html .ui-bar-a > .ui-li-count, /* inherit from divider (also when no JQM page): 021 */
+html body .ui-li-count.ui-fill-a, /* has theme (only themeable in listview): 022 */
 /* Slider */
 .ui-fill-a, /* no JQM page, has theme: 010 */
-.ui-page.ui-body-a .ui-slider-switch, /* inherit from page: 030 */
-.ui-page.ui-body-a .ui-slider-track, /* inherit from page: 030 */
-.ui-mobile body .ui-bar-a .ui-slider-switch, /* inherit from bar: 031 */
-.ui-mobile body .ui-bar-a .ui-slider-track, /* inherit from bar: 031 */
-html.ui-mobile body .ui-slider-switch.ui-fill-a, /* has theme: 032 */
-html.ui-mobile body .ui-slider-track.ui-fill-a { /* has theme: 032 */
+.ui-page-theme-a .ui-slider-switch, /* inherit from page: 020 */
+.ui-page-theme-a .ui-slider-track, /* inherit from page: 020 */
+html .ui-bar-a .ui-slider-switch, /* inherit from bar: 021 */
+html .ui-bar-a .ui-slider-track, /* inherit from bar: 021 */
+html body .ui-slider-switch.ui-fill-a, /* has theme: 022 */
+html body .ui-slider-track.ui-fill-a { /* has theme: 022 */
 	background:				#1b1b1b /*{a-fill-background-color}*/;
 	border: 1px solid		#111 /*{a-fill-border}*/;
 	color:					#fff /*{a-fill-color}*/;
@@ -395,26 +396,26 @@ html.ui-mobile body .ui-slider-track.ui-fill-a { /* has theme: 032 */
 	font-weight: bold;
 }
 .ui-fill-a.ui-btn-active, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-a .ui-slider .ui-btn-active, /* inherit from page: 040 */
-.ui-page.ui-body-a .ui-rangeslider .ui-btn-active, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-a .ui-slider .ui-btn-active, /* inherit from bar: 041 */
-.ui-mobile body .ui-bar-a .ui-rangeslider .ui-btn-active, /* inherit from bar: 041 */
-html.ui-mobile body .ui-slider .ui-fill-a.ui-btn-active,
-html.ui-mobile body .ui-rangeslider .ui-fill-a.ui-btn-active { /* has theme: 042 */
+.ui-page-theme-a .ui-slider .ui-btn-active, /* inherit from page: 030 */
+.ui-page-theme-a .ui-rangeslider .ui-btn-active, /* inherit from page: 030 */
+html .ui-bar-a .ui-slider .ui-btn-active, /* inherit from bar: 031 */
+html .ui-bar-a .ui-rangeslider .ui-btn-active, /* inherit from bar: 031 */
+html body .ui-slider .ui-fill-a.ui-btn-active,
+html body .ui-rangeslider .ui-fill-a.ui-btn-active { /* has theme: 032 */
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3399cc /*{a-bactive-shadow-color}*/;
 }
 
 .ui-btn-a, /* no JQM page, has theme: 010 */
-.ui-page.ui-body-a .ui-btn, /* inherit from page: 030 */
-.ui-mobile body .ui-bar-a .ui-btn, /* inherit from bar: 031 */
-html.ui-mobile body .ui-btn.ui-btn-a, /* has theme: 032 */
+.ui-page-theme-a .ui-btn, /* inherit from page: 020 */
+html .ui-bar-a .ui-btn, /* inherit from bar: 021 */
+html body .ui-btn.ui-btn-a, /* has theme: 022 */
 /* Visited */
 .ui-btn-a:visited, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-a .ui-btn:visited, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-a .ui-btn:visited, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-a:visited { /* has theme: 042 */
+.ui-page-theme-a .ui-btn:visited, /* inherit from page: 030 */
+html .ui-bar-a .ui-btn:visited, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-a:visited { /* has theme: 032 */
 	background: 			#2a2a2a /*{a-bup-background-color}*/;
 	border-color: 			#1b1b1b /*{a-bup-border}*/;
 	color: 					#fff /*{a-bup-color}*/;
@@ -422,9 +423,9 @@ html.ui-mobile body .ui-btn.ui-btn-a:visited { /* has theme: 042 */
 }
 /* Hover */
 .ui-btn-a:hover, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-a .ui-btn:hover, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-a .ui-btn:hover, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-a:hover { /* has theme: 042 */
+.ui-page-theme-a .ui-btn:hover, /* inherit from page: 030 */
+html .ui-bar-a .ui-btn:hover, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-a:hover { /* has theme: 032 */
 	background: 			#333 /*{a-bhover-background-color}*/;
 	border-color:	 		#1d1d1d /*{a-bhover-border}*/;
 	color: 					#fff /*{a-bhover-color}*/;
@@ -432,9 +433,9 @@ html.ui-mobile body .ui-btn.ui-btn-a:hover { /* has theme: 042 */
 }
 /* Down */
 .ui-btn-a:active, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-a .ui-btn:active, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-a .ui-btn:active, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-a:active { /* has theme: 042 */
+.ui-page-theme-a .ui-btn:active, /* inherit from page: 030 */
+html .ui-bar-a .ui-btn:active, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-a:active { /* has theme: 032 */
 	background: 			#2d2d2d /*{a-bdown-background-color}*/;
 	border-color:	 		#1d1d1d /*{a-bdown-border}*/;
 	color: 					#fff /*{a-bdown-color}*/;
@@ -442,9 +443,9 @@ html.ui-mobile body .ui-btn.ui-btn-a:active { /* has theme: 042 */
 }
 /* Active */
 .ui-btn-a.ui-btn-active, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-a .ui-btn.ui-btn-active, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-a .ui-btn.ui-btn-active, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-a.ui-btn-active { /* has theme: 042 */
+.ui-page-theme-a .ui-btn.ui-btn-active, /* inherit from page: 030 */
+html .ui-bar-a .ui-btn.ui-btn-active, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-a.ui-btn-active { /* has theme: 032 */
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	border-color:	 		#3399cc /*{a-bactive-border}*/;
 	color: 					#fff /*{a-bactive-color}*/;
@@ -452,33 +453,28 @@ html.ui-mobile body .ui-btn.ui-btn-a.ui-btn-active { /* has theme: 042 */
 	cursor: pointer;
 }
 /* Focus */
-.ui-btn-a:focus, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-a .ui-btn:focus, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-a .ui-btn:focus, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-a:focus, /* has theme: 042 */
+.ui-page-theme-a .ui-btn:focus, /* inherit from page: 030 */
+html .ui-bar-a .ui-btn:focus, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-a:focus, /* has theme: 032 */
 /* Buttons and text inputs with div wrap */
-.ui-btn-a.ui-focus, /* no JQM page, has theme: 020 */
-.ui-body-a.ui-focus, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-a .ui-focus, /* inherit from page: 030 */
-.ui-mobile body .ui-bar-a .ui-focus, /* inherit from bar: 031 */
-html.ui-mobile body .ui-btn-a.ui-focus, /* has theme: 032 */
-html.ui-mobile body .ui-body-a.ui-focus { /* has theme: 032 */
+.ui-page-theme-a .ui-focus, /* inherit from page: 020 */
+html .ui-bar-a .ui-focus, /* inherit from bar: 021 */
+html body .ui-btn-a.ui-focus, /* has theme: 022 */
+html body .ui-body-a.ui-focus { /* has theme: 022 */
 	-webkit-box-shadow: 0 0 12px 	#34bae8 /*{a-bactive-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#34bae8 /*{a-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#34bae8 /*{a-bactive-background-color}*/;
 }
 /* Checkbox active */
-.ui-btn-a.ui-icon-checkbox-on:after, /* no JQM page, has theme: 030 */
-.ui-page.ui-body-a .ui-icon-checkbox-on:after, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-a .ui-icon-checkbox-on:after, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn-a.ui-icon-checkbox-on:after { /* has theme: 042 */
+.ui-page-theme-a .ui-icon-checkbox-on:after, /* inherit from page: 030 */
+html .ui-bar-a .ui-icon-checkbox-on:after, /* inherit from bar: 031 */
+html body .ui-btn-a.ui-icon-checkbox-on:after { /* has theme: 032 */
 	background-color: #34bae8 /*{a-bactive-background-color}*/;
 }
 /* Radio button active */
-.ui-btn-a.ui-icon-radio-on:after, /* no JQM page, has theme: 030 */
-.ui-page.ui-body-a .ui-icon-radio-on:after, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-a .ui-icon-radio-on:after, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
+.ui-page-theme-a .ui-icon-radio-on:after, /* inherit from page: 030 */
+html .ui-bar-a .ui-icon-radio-on:after, /* inherit from bar: 031 */
+html body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 032 */
 	background-color: #fff;
 	border-color: #34bae8 /*{a-bactive-background-color}*/;
 }
@@ -487,12 +483,12 @@ html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-b, /* .ui-bar.ui-bar-b or no JQM page, has theme: 010 */
-.ui-page.ui-body-b .ui-header, /* inherit from page: 030 */
-.ui-page.ui-body-b .ui-footer, /* inherit from page: 030 */
-.ui-page.ui-body-b .ui-li-divider, /* inherit from page: 030 */
-.ui-mobile body .ui-header.ui-bar-b, /* has theme: 031 */
-.ui-mobile body .ui-footer.ui-bar-b, /* has theme: 031 */
-.ui-mobile body .ui-li-divider.ui-bar-b { /* has theme: 031 */
+.ui-page-theme-b .ui-header, /* inherit from page: 020 */
+.ui-page-theme-b .ui-footer, /* inherit from page: 020 */
+.ui-page-theme-b .ui-li-divider, /* inherit from page: 020 */
+html .ui-header.ui-bar-b, /* has theme: 021 */
+html .ui-footer.ui-bar-b, /* has theme: 021 */
+html .ui-li-divider.ui-bar-b { /* has theme: 021 */
 	background: 			#e5e5e5 /*{b-bar-background-color}*/;
 	border-color:	 		#ddd /*{b-bar-border}*/;
 	color: 					#111 /*{b-bar-color}*/;
@@ -518,19 +514,20 @@ html.ui-mobile body .ui-btn-a.ui-icon-radio-on:after { /* has theme: 042 */
 	color: #ff6600 /*{b-bar-link-active}*/;
 }
 
-.ui-body-b, /* page, content, popup, panel, etc. or .ui-body.ui-body-b, has theme: 010 */
-.ui-page.ui-body-b .ui-li-static, /* inherit from page: 030 */
-.ui-page.ui-body-b .ui-input-text, /* inherit from page: 030 */
-.ui-page.ui-body-b .ui-input-search, /* inherit from page: 030 */
-.ui-page.ui-body-b .ui-slider-input, /* inherit from page: 030 */
-.ui-mobile body .ui-bar-b .ui-li-static, /* inherit from bar: 031 */
-.ui-mobile body .ui-bar-b .ui-input-text, /* inherit from bar: 031 */
-.ui-mobile body .ui-bar-b .ui-input-search, /* inherit from bar: 031 */
-.ui-mobile body .ui-bar-b .ui-slider-input, /* inherit from bar: 031 */
-html.ui-mobile body .ui-li-static.ui-body-b, /* has theme: 032 */
-html.ui-mobile body .ui-input-text.ui-body-b, /* has theme: 032 */
-html.ui-mobile body .ui-input-search.ui-body-b, /* has theme: 032 */
-html.ui-mobile body .ui-slider-input.ui-body-b, /* has theme: 032 */
+.ui-body-b, /* content, popup, panel, etc. or .ui-body.ui-body-b, has theme: 010 */
+.ui-page-theme-b, /* page: 010 */
+.ui-page-theme-b .ui-li-static, /* inherit from page: 020 */
+.ui-page-theme-b .ui-input-text, /* inherit from page: 020 */
+.ui-page-theme-b .ui-input-search, /* inherit from page: 020 */
+.ui-page-theme-b .ui-slider-input, /* inherit from page: 020 */
+html .ui-bar-b .ui-li-static, /* inherit from bar: 021 */
+html .ui-bar-b .ui-input-text, /* inherit from bar: 021 */
+html .ui-bar-b .ui-input-search, /* inherit from bar: 021 */
+html .ui-bar-b .ui-slider-input, /* inherit from bar: 021 */
+html body .ui-li-static.ui-body-b, /* has theme: 022 */
+html body .ui-input-text.ui-body-b, /* has theme: 022 */
+html body .ui-input-search.ui-body-b, /* has theme: 022 */
+html body .ui-slider-input.ui-body-b, /* has theme: 022 */
 .ui-overlay-b {
 	background: 			#f5f5f5 /*{b-body-background-color}*/;
 	border-color:	 		#ddd /*{b-body-border}*/;
@@ -562,19 +559,19 @@ html.ui-mobile body .ui-slider-input.ui-body-b, /* has theme: 032 */
 }
 
 /* Count bubble */
-.ui-page.ui-body-b .ui-li-count, /* inherit from page: 030 */
-html .ui-btn.ui-btn-b > .ui-li-count, /* inherit from select or list button (also when no JQM page): 031 */
-html .ui-li-static.ui-body-b > .ui-li-count, /* inherit from static list item (also when no JQM page): 031 */
-html .ui-li-divider.ui-bar-b > .ui-li-count, /* inherit from divider (also when no JQM page): 031 */
-html .ui-listview li .ui-li-count.ui-fill-b, /* has theme (only themeable in listview): 032 */
+.ui-page-theme-b .ui-li-count, /* inherit from page: 020 */
+html .ui-btn-b > .ui-li-count, /* inherit from select or list button (also when no JQM page): 021 */
+html .ui-body-b > .ui-li-count, /* inherit from static list item (also when no JQM page): 021 */
+html .ui-bar-b > .ui-li-count, /* inherit from divider (also when no JQM page): 021 */
+html body .ui-li-count.ui-fill-b, /* has theme (only themeable in listview): 022 */
 /* Slider */
 .ui-fill-b, /* no JQM page, has theme: 010 */
-.ui-page.ui-body-b .ui-slider-switch, /* inherit from page: 030 */
-.ui-page.ui-body-b .ui-slider-track, /* inherit from page: 030 */
-.ui-mobile body .ui-bar-b .ui-slider-switch, /* inherit from bar: 031 */
-.ui-mobile body .ui-bar-b .ui-slider-track, /* inherit from bar: 031 */
-html.ui-mobile body .ui-slider-switch.ui-fill-b, /* has theme: 032 */
-html.ui-mobile body .ui-slider-track.ui-fill-b { /* has theme: 032 */
+.ui-page-theme-b .ui-slider-switch, /* inherit from page: 020 */
+.ui-page-theme-b .ui-slider-track, /* inherit from page: 020 */
+html .ui-bar-b .ui-slider-switch, /* inherit from bar: 021 */
+html .ui-bar-b .ui-slider-track, /* inherit from bar: 021 */
+html body .ui-slider-switch.ui-fill-b, /* has theme: 022 */
+html body .ui-slider-track.ui-fill-b { /* has theme: 022 */
 	background:				#ececec /*{b-fill-background-color}*/;
 	border: 1px solid		#cfcfcf /*{b-fill-border}*/;
 	color:					#333 /*{b-fill-color}*/;
@@ -582,23 +579,26 @@ html.ui-mobile body .ui-slider-track.ui-fill-b { /* has theme: 032 */
 	font-weight: bold;
 }
 .ui-fill-b.ui-btn-active, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-b .ui-slider .ui-btn-active, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-b .ui-slider .ui-btn-active, /* inherit from bar: 041 */
-html.ui-mobile body .ui-slider .ui-fill-b.ui-btn-active { /* has theme: 042 */
+.ui-page-theme-b .ui-slider .ui-btn-active, /* inherit from page: 030 */
+.ui-page-theme-b .ui-rangeslider .ui-btn-active, /* inherit from page: 030 */
+html .ui-bar-b .ui-slider .ui-btn-active, /* inherit from bar: 031 */
+html .ui-bar-b .ui-rangeslider .ui-btn-active, /* inherit from bar: 031 */
+html body .ui-slider .ui-fill-b.ui-btn-active,
+html body .ui-rangeslider .ui-fill-b.ui-btn-active { /* has theme: 032 */
 	background: 			#ff6600 /*{b-bactive-background-color}*/;
 	color: 					#fff /*{b-bactive-color}*/;
 	text-shadow: 0 /*{b-bactive-shadow-x}*/ 1px /*{b-bactive-shadow-y}*/ 0 /*{b-bactive-shadow-radius}*/ #ff3300 /*{b-bactive-shadow-color}*/;
 }
 
 .ui-btn-b, /* no JQM page, has theme: 010 */
-.ui-page.ui-body-b .ui-btn, /* inherit from page: 030 */
-.ui-mobile body .ui-bar-b .ui-btn, /* inherit from bar: 031 */
-html.ui-mobile body .ui-btn.ui-btn-b, /* has theme: 032 */
+.ui-page-theme-b .ui-btn, /* inherit from page: 020 */
+html .ui-bar-b .ui-btn, /* inherit from bar: 021 */
+html body .ui-btn.ui-btn-b, /* has theme: 022 */
 /* Visited */
 .ui-btn-b:visited, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-b .ui-btn:visited, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-b .ui-btn:visited, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-b:visited { /* has theme: 042 */
+.ui-page-theme-b .ui-btn:visited, /* inherit from page: 030 */
+html .ui-bar-b .ui-btn:visited, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-b:visited { /* has theme: 032 */
 	background: 			#efefef /*{b-bup-background-color}*/;
 	border-color:	 		#ddd /*{b-bup-border}*/;
 	color: 					#333 /*{b-bup-color}*/;
@@ -606,9 +606,9 @@ html.ui-mobile body .ui-btn.ui-btn-b:visited { /* has theme: 042 */
 }
 /* Hover */
 .ui-btn-b:hover, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-b .ui-btn:hover, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-b .ui-btn:hover, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-b:hover { /* has theme: 042 */
+.ui-page-theme-b .ui-btn:hover, /* inherit from page: 030 */
+html .ui-bar-b .ui-btn:hover, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-b:hover { /* has theme: 032 */
 	background: 			#e9e9e9 /*{b-bhover-background-color}*/;
 	border-color:	 		#d5d5d5 /*{b-bhover-border}*/;
 	color: 					#333 /*{b-bhover-color}*/;
@@ -616,9 +616,9 @@ html.ui-mobile body .ui-btn.ui-btn-b:hover { /* has theme: 042 */
 }
 /* Down */
 .ui-btn-b:active, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-b .ui-btn:active, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-b .ui-btn:active, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-b:active { /* has theme: 042 */
+.ui-page-theme-b .ui-btn:active, /* inherit from page: 030 */
+html .ui-bar-b .ui-btn:active, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-b:active { /* has theme: 032 */
 	background: 			#e3e3e3 /*{b-bdown-background-color}*/;
 	border-color:	 		#d5d5d5 /*{b-bdown-border}*/;
 	color: 					#333 /*{b-bdown-color}*/;
@@ -626,9 +626,9 @@ html.ui-mobile body .ui-btn.ui-btn-b:active { /* has theme: 042 */
 }
 /* Active */
 .ui-btn-b.ui-btn-active, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-b .ui-btn.ui-btn-active, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-b .ui-btn.ui-btn-active, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-b.ui-btn-active { /* has theme: 042 */
+.ui-page-theme-b .ui-btn.ui-btn-active, /* inherit from page: 030 */
+html .ui-bar-b .ui-btn.ui-btn-active, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-b.ui-btn-active { /* has theme: 032 */
 	background: 			#ff6600 /*{b-bactive-background-color}*/;
 	border-color:	 		#ff3300 /*{b-bactive-border}*/;
 	color: 					#fff /*{b-bactive-color}*/;
@@ -637,34 +637,29 @@ html.ui-mobile body .ui-btn.ui-btn-b.ui-btn-active { /* has theme: 042 */
 }
 
 /* Focus */
-.ui-btn-b:focus, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-b .ui-btn:focus, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-b .ui-btn:focus, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn.ui-btn-b:focus, /* has theme: 042 */
+.ui-page-theme-b .ui-btn:focus, /* inherit from page: 030 */
+html .ui-bar-b .ui-btn:focus, /* inherit from bar: 031 */
+html body .ui-btn.ui-btn-b:focus, /* has theme: 032 */
 /* Buttons and text inputs with div wrap */
-.ui-btn-b.ui-focus, /* no JQM page, has theme: 020 */
-.ui-body-b.ui-focus, /* no JQM page, has theme: 020 */
-.ui-page.ui-body-b .ui-focus, /* inherit from page: 030 */
-.ui-mobile body .ui-bar-b .ui-focus, /* inherit from bar: 031 */
-html.ui-mobile body .ui-btn-b.ui-focus, /* has theme: 032 */
-html.ui-mobile body .ui-body-b.ui-focus { /* has theme: 032 */
+.ui-page-theme-b .ui-focus, /* inherit from page: 020 */
+html .ui-bar-b .ui-focus, /* inherit from bar: 021 */
+html body .ui-btn-b.ui-focus, /* has theme: 022 */
+html body .ui-body-b.ui-focus { /* has theme: 022 */
 	-webkit-box-shadow: 0 0 12px 	#ff6600 /*{b-bactive-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#ff6600 /*{b-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#ff6600 /*{b-bactive-background-color}*/;
 }
 
 /* Checkbox active */
-.ui-btn-b.ui-icon-checkbox-on:after, /* no JQM page, has theme: 030 */
-.ui-page.ui-body-b .ui-icon-checkbox-on:after, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-b .ui-icon-checkbox-on:after, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn-b.ui-icon-checkbox-on:after { /* has theme: 042 */
+.ui-page-theme-b .ui-icon-checkbox-on:after, /* inherit from page: 030 */
+html .ui-bar-b .ui-icon-checkbox-on:after, /* inherit from bar: 031 */
+html body .ui-btn-b.ui-icon-checkbox-on:after { /* has theme: 032 */
 	background-color: #ff6600 /*{b-bactive-background-color}*/;
 }
 /* Radio button active */
-.ui-btn-b.ui-icon-radio-on:after, /* no JQM page, has theme: 030 */
-.ui-page.ui-body-b .ui-icon-radio-on:after, /* inherit from page: 040 */
-.ui-mobile body .ui-bar-b .ui-icon-radio-on:after, /* inherit from bar: 041 */
-html.ui-mobile body .ui-btn-b.ui-icon-radio-on:after { /* has theme: 042 */
+.ui-page-theme-b .ui-icon-radio-on:after, /* inherit from page: 030 */
+html .ui-bar-b .ui-icon-radio-on:after, /* inherit from bar: 031 */
+html body .ui-btn-b.ui-icon-radio-on:after { /* has theme: 032 */
 	background-color: #fff;
 	border-color: #ff6600 /*{b-bactive-background-color}*/;
 }
