@@ -47,7 +47,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		if ( collapsibleSet.length ) {
 			// Inherit the theme from collapsible-set
 			if ( !o.theme ) {
-				o.theme = collapsibleSet.jqmData( "theme" ) || "a";
+				o.theme = collapsibleSet.jqmData( "theme" );
 			}
 			// Inherit the content-theme from collapsible-set
 			if ( !o.contentTheme ) {
@@ -75,11 +75,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.mini ) {
 				o.mini = getAttr( collapsibleSet[ 0 ], "mini", true );
 			}
-		} else {
-			// get inherited theme if not a set and no theme has been set
-			if ( !o.theme ) {
-				o.theme = "a";
-			}
 		}
 
 		if ( !!o.inset ) {
@@ -105,8 +100,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
 			.find( "a" )
 				.first()
-				.addClass( "ui-btn ui-btn-" + o.theme +
-					" ui-icon-" + o.collapsedIcon + " ui-btn-icon-" + o.iconpos +
+				.addClass( "ui-btn ui-icon-" + o.collapsedIcon + " ui-btn-icon-" + o.iconpos +
+					( o.theme ? " ui-btn-" + o.theme : "" ) +
 					( o.mini ? " ui-mini" : "" ) );
 
 		$.extend( this, {

@@ -14,10 +14,6 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 		var $el = this.element.addClass( "ui-collapsible-set" ),
 			o = this.options;
 
-		// Inherit the theme from collapsible-set
-		if ( !o.theme ) {
-			o.theme = "a";
-		}
 		// Inherit the content-theme from collapsible-set
 		if ( !o.contentTheme ) {
 			o.contentTheme = $el.jqmData( "content-theme" );
