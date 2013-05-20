@@ -146,6 +146,26 @@
 			</div>
 		</form>
 		
+		<div data-role="collapsible" data-content-theme="b">
+		    <h4>Heading</h4>
+		    <p>I'm the collapsible content with a themed content block set to "d".</p>
+		</div>
+		
+		<div data-role="collapsible-set" data-content-theme="b">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>I'm the collapsible content for section 1</p>
+			</div>
+			<div data-role="collapsible" data-theme="a">
+				<h3>Section 2</h3>
+				<p>I'm the collapsible content for section 2</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>I'm the collapsible content for section 3</p>
+			</div>
+		</div>
+		
 	</div><!-- /content -->
 
 </div><!-- /page -->
