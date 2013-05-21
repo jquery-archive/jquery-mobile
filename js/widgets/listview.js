@@ -92,6 +92,10 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			a, isDivider,
 			countThemeClass = "ui-fill-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme || "inherit" );
 
+		if ( o.theme ) {
+			$list.addClass( "ui-group-theme-" + o.theme );
+		}
+		
 		// Check if a start attribute has been set while taking a value of 0 into account
 		if ( ol && ( start || start === 0 ) ) {
 			startCount = parseInt( start, 10 ) - 1;
@@ -106,7 +110,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
 				value = item.attr( "value" );
-				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
+				itemTheme = getAttr( item[ 0 ], "theme", true );
 
 				if ( a.length && a[ 0 ].className.search( /\bui-btn\b/ ) < 0 && !isDivider ) {
 					itemIcon = getAttr( item[ 0 ], "icon", true );
@@ -125,7 +129,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						itemClass = "ui-li-has-alt";
 						
 						var last = a.last(),
-							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
+							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ),
 							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon,
 							altButtonClass = splittheme ? "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon : "ui-btn ui-icon-" + spliticon;
 						
