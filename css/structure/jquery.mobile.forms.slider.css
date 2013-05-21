@@ -57,7 +57,6 @@ input.ui-slider-input {
 	top: 8px;
 }
 .ui-slider-track .ui-slider-bg {
-	border-width: 0;
 	height: 100%;
 }
 /* High level of specificity to override button margins in grids */
@@ -134,7 +133,6 @@ div.ui-slider-switch.ui-mini {
 	top: 0;
 	line-height: 2;
 	min-height: 100%;
-	border-width: 0;
 	white-space: nowrap;
 	cursor: pointer;
 }

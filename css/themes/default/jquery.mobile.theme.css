@@ -387,10 +387,10 @@ html body .ui-group-theme-a .ui-fill-inherit,
 	font-weight: bold;
 }
 /* Slider track/switch active */
-.ui-fill-a.ui-btn-active,
-.ui-page-theme-a .ui-fill-inherit.ui-btn-active,
-html .ui-bar-a .ui-fill-inherit.ui-btn-active,
-html body .ui-group-theme-a .ui-fill-inherit.ui-btn-active {
+.ui-fill-a .ui-btn-active,
+.ui-page-theme-a .ui-fill-inherit .ui-btn-active,
+html .ui-bar-a .ui-fill-inherit .ui-btn-active,
+html body .ui-group-theme-a .ui-fill-inherit .ui-btn-active {
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3399cc /*{a-bactive-shadow-color}*/;
@@ -562,10 +562,10 @@ html body .ui-group-theme-b .ui-fill-inherit,
 	font-weight: bold;
 }
 /* Slider track/switch active */
-.ui-fill-b.ui-btn-active,
-.ui-page-theme-b .ui-fill-inherit.ui-btn-active,
-html .ui-bar-b .ui-fill-inherit.ui-btn-active,
-html body .ui-group-theme-b .ui-fill-inherit.ui-btn-active {
+.ui-fill-b .ui-btn-active,
+.ui-page-theme-b .ui-fill-inherit .ui-btn-active,
+html .ui-bar-b .ui-fill-inherit .ui-btn-active,
+html body .ui-group-theme-b .ui-fill-inherit .ui-btn-active {
 	background: 			#ff6600 /*{b-bactive-background-color}*/;
 	color: 					#fff /*{b-bactive-color}*/;
 	text-shadow: 0 /*{b-bactive-shadow-x}*/ 1px /*{b-bactive-shadow-y}*/ 0 /*{b-bactive-shadow-radius}*/ #ff3300 /*{b-bactive-shadow-color}*/;

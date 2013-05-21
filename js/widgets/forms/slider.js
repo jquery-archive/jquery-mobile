@@ -49,14 +49,14 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			slider = $( domSlider ),
 			valuebg = this.options.highlight && !isToggleSwitch ? (function() {
 				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass + trackThemeClass;
+				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
 				return $( bg ).prependTo( slider );
 			})() : false,
 			options,
 			wrapper,
 			j, length,
 			i, optionsCount, origTabIndex,
-			side, sliderTheme, sliderLabel, sliderImg;
+			side, activeClass, sliderLabel, sliderImg;
 
 		this.isToggleSwitch = isToggleSwitch;
 
@@ -121,11 +121,11 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 			for ( i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
 				side = !i ? "b" : "a";
-				sliderTheme = trackThemeClass + ( !i ? "" : " " + $.mobile.activeBtnClass );
+				activeClass = !i ? "" : " " + $.mobile.activeBtnClass;
 				sliderLabel = document.createElement( "div" );
 				sliderImg = document.createElement( "span" );
 
-				sliderImg.className = ["ui-slider-label ui-slider-label-", side, sliderTheme].join( "" );
+				sliderImg.className = [ "ui-slider-label ui-slider-label-", side, activeClass ].join( "" );
 				sliderImg.setAttribute( "role", "img" );
 				sliderImg.appendChild( document.createTextNode( options[i].innerHTML ) );
 				$( sliderImg ).prependTo( slider );
@@ -375,7 +375,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		if ( this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
 			this.valuebg = (function() {
 				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg" + trackThemeClass + " " + $.mobile.activeBtnClass;
+				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
 				return $( bg ).prependTo( self.slider );
 			})();
 		}
