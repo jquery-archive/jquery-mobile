@@ -94,10 +94,10 @@ legend,
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-plus:after, .ui-icon-minus:after, .ui-icon-delete:after, .ui-icon-arrow-r:after, .ui-icon-arrow-l:after,
-.ui-icon-arrow-u:after, .ui-icon-arrow-d:after, .ui-icon-check:after, .ui-icon-checkbox-on:after,
-.ui-icon-gear:after, .ui-icon-refresh:after, .ui-icon-forward:after, .ui-icon-back:after, .ui-icon-grid:after,
-.ui-icon-star:after, .ui-icon-alert:after, .ui-icon-info:after, .ui-icon-home:after,
+.ui-icon-delete:after, .ui-icon-arrow-r:after, .ui-icon-arrow-l:after, .ui-icon-arrow-u:after, .ui-icon-arrow-d:after,
+.ui-icon-check:after, .ui-icon-checkbox-off:after, .ui-icon-checkbox-on:after, .ui-icon-radio-off:after, .ui-icon-radio-on:after,
+.ui-icon-gear:after, .ui-icon-grid:after, .ui-icon-refresh:after, .ui-icon-forward:after, .ui-icon-back:after,
+.ui-icon-star:after, .ui-icon-alert:after, .ui-icon-info:after, .ui-icon-home:after, .ui-icon-plus:after, .ui-icon-minus:after,
 .ui-icon-search:after, .ui-input-search:after, .ui-icon-bars:after, .ui-icon-edit:after {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.4) /*{global-icon-disc}*/;
@@ -201,10 +201,10 @@ legend,
        only screen and (min--moz-device-pixel-ratio: 1.3),
        only screen and (min-resolution: 200dpi) {
 	
-	.ui-icon-plus:after, .ui-icon-minus:after, .ui-icon-delete:after, .ui-icon-arrow-r:after, .ui-icon-arrow-l:after,
-	.ui-icon-arrow-u:after, .ui-icon-arrow-d:after, .ui-icon-check:after, .ui-icon-checkbox-on:after,
-	.ui-icon-gear:after, .ui-icon-refresh:after, .ui-icon-forward:after, .ui-icon-back:after, .ui-icon-grid:after,
-	.ui-icon-star:after, .ui-icon-alert:after, .ui-icon-info:after, .ui-icon-home:after,
+	.ui-icon-delete:after, .ui-icon-arrow-r:after, .ui-icon-arrow-l:after, .ui-icon-arrow-u:after, .ui-icon-arrow-d:after,
+	.ui-icon-check:after, .ui-icon-checkbox-off:after, .ui-icon-checkbox-on:after, .ui-icon-radio-off:after, .ui-icon-radio-on:after,
+	.ui-icon-gear:after, .ui-icon-grid:after, .ui-icon-refresh:after, .ui-icon-forward:after, .ui-icon-back:after,
+	.ui-icon-star:after, .ui-icon-alert:after, .ui-icon-info:after, .ui-icon-home:after, .ui-icon-plus:after, .ui-icon-minus:after,
 	.ui-icon-search:after, .ui-input-search:after, .ui-icon-bars:after, .ui-icon-edit:after {
 		background-image: url(images/icons-36-white.png);
 		-moz-background-size: 864px 18px;
