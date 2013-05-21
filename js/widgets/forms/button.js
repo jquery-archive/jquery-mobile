@@ -14,7 +14,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		theme: null,
 		icon: null,
 		iconpos: null,
-		iconshadow: true,
+		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
 		corners: true,
 		shadow: true,
 		inline: null,
@@ -30,14 +30,10 @@ $.widget( "mobile.button", $.mobile.widget, {
 		if ( isInput ) {
 			classes += " ui-input-btn";
 			
-			// TODO: When we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-			/* if ( $el[0].className.length ) {
-				classes = $el[0].className;
-			} */
+			// TODO: data-class and data-id options. See https://github.com/jquery/jquery-mobile/issues/3577
 			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-left" ) ) {
 				classes += " ui-btn-left";
 			}
-	
 			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-right" ) ) {
 				classes += " ui-btn-right";
 			}
@@ -125,6 +121,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 				$el.attr( "title", text );
 			}
 			
+			 /* TODO: Remove in 1.5. */
 			if ( o.iconshadow ) {
 				classes += " ui-shadow-icon";
 			}

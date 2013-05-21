@@ -21,7 +21,7 @@ var reverseBoolOptionMap = {
 	"ui-shadow" : "shadow",
 	"ui-corner-all" : "corners",
 	"ui-btn-inline" : "inline",
-	"ui-shadow-icon" : "iconshadow",
+	"ui-shadow-icon" : "iconshadow", /* TODO: Remove in 1.5 */
 	"ui-mini" : "mini"
 };
 
@@ -52,7 +52,7 @@ function optionsToClasses( options, existingClasses ) {
 			"ui-btn-icon-" + options.iconpos
 		]);
 		if ( options.iconshadow ) {
-			classes.push( "ui-shadow-icon" );
+			classes.push( "ui-shadow-icon" ); /* TODO: Remove in 1.5 */
 		}
 	}
 
@@ -220,7 +220,7 @@ $.fn.buttonMarkup.defaults = {
 	inline: false,
 	shadow: true,
 	corners: true,
-	iconshadow: true,
+	iconshadow: false, /* TODO: Remove in 1.5. Option deprecated in 1.4. */
 	mini: false
 };
 
@@ -249,7 +249,7 @@ function enhanceWithButtonMarkup( idx, el ) {
 			inline    : getAttrFixed( el, "inline",     true ),
 			shadow    : getAttrFixed( el, "shadow",     true ),
 			corners   : getAttrFixed( el, "corners",    true ),
-			iconshadow: getAttrFixed( el, "iconshadow", true ),
+			iconshadow: getAttrFixed( el, "iconshadow", true ), /* TODO: Remove in 1.5 */
 			mini      : getAttrFixed( el, "mini",       true )
 		}), el.className.split( " " ) ).sort();
 
