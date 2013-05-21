@@ -362,7 +362,10 @@
 		decorate: function(opts){
 			var thisVal = opts.self || window;
 
+			console.log( "decorate called" );
+
 			return function(){
+				console.log( "decorated function called" );
 				var returnVal;
 				opts.before && opts.before.apply(thisVal, arguments);
 				returnVal = opts.fn.apply(thisVal, arguments);
