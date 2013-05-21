@@ -188,22 +188,6 @@
 		});
 	});
 
-	asyncTest( "default transition is pop for a dialog", function(){
-		var defaultTransition = "pop";
-
-		if( !$.support.cssTransform3d ){
-			defaultTransition = "fade";
-		}
-
-		expect( 1 );
-		onToComplete(function(){
-			ok( $("#no-trans-dialog").hasClass(defaultTransition), "has pop class" );
-			start();
-		});
-
-		$("#default-trans-dialog > a").click();
-	});
-
 	test( "animationComplete return value", function(){
 		$.fn.animationComplete = animationCompleteFn;
 		equal($("#foo").animationComplete(function(){})[0], $("#foo")[0]);
