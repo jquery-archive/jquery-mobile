@@ -764,7 +764,7 @@ define( [
 
 		isToPageString = (typeof toPage === "string");
 
-		mpc = settings.pageContainer;
+		mpc = this.element;
 		pbcEvent = new $.Event( "pagebeforechange" );
 		triggerData = { toPage: toPage, options: settings };
 
@@ -823,14 +823,14 @@ define( [
 					newPage.data( "absUrl", triggerData.absUrl );
 					$.mobile.changePage( newPage, options );
 				})
-				.fail(function(/* url, options */) {
+				.fail($.proxy(function(/* url, options */) {
 					//clear out the active button state
 					removeActiveLinkClass( true );
 
 					//release transition lock so navigation is free again
 					releasePageTransitionLock();
-					settings.pageContainer.trigger( "pagechangefailed", triggerData );
-				});
+					this.element.trigger( "pagechangefailed", triggerData );
+				}, this));
 
 			return;
 		}
@@ -1002,11 +1002,11 @@ define( [
 
 		transitionDeferred = $.Deferred();
 
-		settings.pageContainer.content( "transition", toPage, fromPage, {
-			transition: settings.transition,
-			reverse: settings.reverse,
-			deferred: transitionDeferred
-		});
+			this.transition(toPage, fromPage, {
+				transition: settings.transition,
+				reverse: settings.reverse,
+				deferred: transitionDeferred
+			});
 
 		transitionDeferred.done(function( name, reverse, $to, $from, alreadyFocused ) {
 			removeActiveLinkClass();
