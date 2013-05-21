@@ -2,8 +2,7 @@
  * mobile navigation unit tests
  */
 (function($){
-	var perspective,
-			transitioning = "ui-mobile-viewport-transitioning",
+	var transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
 			defaultMaxTrans = $.mobile.maxTransitionWidth,
 
@@ -51,13 +50,6 @@
 				$.mobile.urlHistory.stack = [];
 				$.mobile.urlHistory.activeIndex = 0;
 			};
-
-
-	if( !$.support.cssTransform3d  ) {
-		perspective = "viewport-fade";
-	} else {
-		perspective = "viewport-flip";
-	}
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
@@ -115,7 +107,7 @@
 
 			function() {
 				onToComplete( function( el ) {
-					ok($("body").hasClass(perspective), "has viewport-flip or viewport-fade based on 3d transform");
+					ok($("body").hasClass("viewport-flip") || $("body").hasClass("viewport-fade"), "has viewport-flip or viewport-fade");
 					start();
 				});
 
@@ -163,7 +155,7 @@
 		onToComplete(function(){
 			ok($("#no-trans").hasClass("fade"), "has fade class");
 			start();
-		})
+		});
 
 		$("#default-trans > a").click();
 	});
