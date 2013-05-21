@@ -14,6 +14,7 @@ define( [ "jquery",
 
 $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 	options: {
+		theme: null,
 		shadow: false,
 		corners: true,
 		excludeInvisible: true,
@@ -53,6 +54,12 @@ $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
 				.addClass( "ui-controlgroup-" + o.type );
 			this.refresh();
+		}
+
+		if ( o.theme !== undefined ) {
+			$el
+				.removeClass( "ui-group-theme-" + this.options.theme )
+				.addClass( "ui-group-theme-" + o.theme );
 		}
 
 		if ( o.corners !== undefined ) {
