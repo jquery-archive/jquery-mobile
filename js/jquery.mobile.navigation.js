@@ -734,267 +734,9 @@ define( [
 			promise.done($.proxy(function() {
 				this._triggerTransitionEvents( to, from );
 			}, this));
-		}
+		},
 
-		// TODO resetActivePageHeight
-		// TODO changePage
-	});
-
-	$.mobile.loadPage = function( url, opts ) {
-		var container = (opts.pageContainer || $.mobile.pageContainer);
-
-		// create the deferred that will be supplied to loadPage callers
-		// and resolved by the content widget's load method
-		opts.deferred = $.Deferred();
-
-		// Preferring to allow exceptions for uninitialized opts.pageContainer
-		// widgets so we know if we need to force init here for users
-		container.content( "load", url, opts );
-
-		// provide the deferred
-		return opts.deferred.promise();
-	};
-
-	//define vars for interal use
-	var $window = $.mobile.window,
-		$head = $( "head" ),
-
-		// NOTE: path extensions dependent on core attributes. Moved here to remove deps from
-		//       $.mobile.path definition
-		path = $.extend($.mobile.path, {
-
-			//return the substring of a filepath before the sub-page key, for making a server request
-			getFilePath: function( path ) {
-				var splitkey = "&" + $.mobile.subPageUrlKey;
-				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
-			},
-
-			//check if the specified url refers to the first page in the main application document.
-			isFirstPageUrl: function( url ) {
-				// We only deal with absolute paths.
-				var u = path.parseUrl( path.makeUrlAbsolute( url, this.documentBase ) ),
-
-					// Does the url have the same path as the document?
-					samePath = u.hrefNoHash === this.documentUrl.hrefNoHash || ( this.documentBaseDiffers && u.hrefNoHash === this.documentBase.hrefNoHash ),
-
-					// Get the first page element.
-					fp = $.mobile.firstPage,
-
-
-
-					// Get the id of the first page element if it has one.
-					fpId = fp && fp[0] ? fp[0].id : undefined;
-
-				// The url refers to the first page if the path matches the document and
-				// it either has no hash value, or the hash is exactly equal to the id of the
-				// first page element.
-				return samePath && ( !u.hash || u.hash === "#" || ( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
-			},
-
-			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
-			// requests if the document doing the request was loaded via the file:// protocol.
-			// This is usually to allow the application to "phone home" and fetch app specific
-			// data. We normally let the browser handle external/cross-domain urls, but if the
-			// allowCrossDomainPages option is true, we will allow cross-domain http/https
-			// requests to go through our page loading logic.
-			isPermittedCrossDomainRequest: function( docUrl, reqUrl ) {
-				return $.mobile.allowCrossDomainPages &&
-					docUrl.protocol === "file:" &&
-					reqUrl.search( /^https?:/ ) !== -1;
-			}
-		}),
-
-		// used to track last vclicked element to make sure its value is added to form data
-		$lastVClicked = null,
-
-		//will be defined when a link is clicked and given an active class
-		$activeClickedLink = null,
-
-		// resolved on domready
-		domreadyDeferred = $.Deferred(),
-
-		//urlHistory is purely here to make guesses at whether the back or forward button was clicked
-		//and provide an appropriate transition
-		urlHistory = $.mobile.navigate.history,
-
-		//queue to hold simultanious page transitions
-		pageTransitionQueue = [],
-
-		//indicates whether or not page is in process of transitioning
-		isPageTransitioning = false,
-
-		//nonsense hash change key for dialogs, so they create a history entry
-		dialogHashKey = "&ui-state=dialog",
-
-		//existing base tag?
-		$base = $head.children( "base" ),
-
-		//tuck away the original document URL minus any fragment.
-		documentUrl = path.documentUrl,
-
-		//if the document has an embedded base tag, documentBase is set to its
-		//initial value. If a base tag does not exist, then we default to the documentUrl.
-		documentBase = path.documentBase,
-
-		getScreenHeight = $.mobile.getScreenHeight,
-
-		// base element management, defined depending on dynamic base tag support
-		// TODO move to external widget
-		base = {
-			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
-			element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
-
-			linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
-
-			//set the generated BASE element's href attribute to a new page's base path
-			set: function( href ) {
-				// we should do nothing if the user wants to manage their url base manually
-				if ( !$.mobile.dynamicBaseEnabled ){
-					return;
-				}
-
-				// we should use the base tag if we can manipulate it dynamically
-				if ( $.support.dynamicBaseTag ){
-					base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
-				}
-			},
-
-			rewrite: function( href, page ) {
-				var newPath = path.get( href );
-
-				page.find( base.linkSelector ).each(function( i, link ) {
-					var thisAttr = $( link ).is( "[href]" ) ? "href" : $( link ).is( "[src]" ) ? "src" : "action",
-					thisUrl = $( link ).attr( thisAttr );
-
-					// XXX_jblas: We need to fix this so that it removes the document
-					//            base URL, and then prepends with the new page URL.
-					//if full path exists and is same, chop it - helps IE out
-					thisUrl = thisUrl.replace( location.protocol + "//" + location.host + location.pathname, "" );
-
-					if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-						$( link ).attr( thisAttr, newPath + thisUrl );
-					}
-				});
-			},
-
-			//set the generated BASE element's href attribute to a new page's base path
-			reset: function(/* href */) {
-				base.element.attr( "href", documentBase.hrefNoSearch );
-			}
-		};
-
-	//return the original document url
-	$.mobile.getDocumentUrl = path.getDocumentUrl;
-
-	//return the original document base url
-	$.mobile.getDocumentBase = path.getDocumentBase;
-
-	/* internal utility functions */
-
-	// NOTE Issue #4950 Android phonegap doesn't navigate back properly
-	//      when a full page refresh has taken place. It appears that hashchange
-	//      and replacestate history alterations work fine but we need to support
-	//      both forms of history traversal in our code that uses backward history
-	//      movement
-	$.mobile.back = function() {
-		var nav = window.navigator;
-
-		// if the setting is on and the navigator object is
-		// available use the phonegap navigation capability
-		if( this.phonegapNavigationEnabled &&
-			nav &&
-			nav.app &&
-			nav.app.backHistory ){
-			nav.app.backHistory();
-		} else {
-			window.history.back();
-		}
-	};
-
-	//direct focus to the page title, or otherwise first focusable element
-	$.mobile.focusPage = function ( page ) {
-		var autofocus = page.find( "[autofocus]" ),
-			pageTitle = page.find( ".ui-title:eq(0)" );
-
-		if ( autofocus.length ) {
-			autofocus.focus();
-			return;
-		}
-
-		if ( pageTitle.length ) {
-			pageTitle.focus();
-		} else{
-			page.focus();
-		}
-	};
-
-	//remove active classes after page transition or error
-	function removeActiveLinkClass( forceRemoval ) {
-		if ( !!$activeClickedLink && ( !$activeClickedLink.closest( "." + $.mobile.activePageClass ).length || forceRemoval ) ) {
-			$activeClickedLink.removeClass( $.mobile.activeBtnClass );
-		}
-		$activeClickedLink = null;
-	}
-
-	function releasePageTransitionLock() {
-		isPageTransitioning = false;
-		if ( pageTransitionQueue.length > 0 ) {
-			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
-		}
-	}
-
-	// No-op implementation of transition degradation
-	$.mobile._maybeDegradeTransition = $.mobile._maybeDegradeTransition || function( transition ) {
-		return transition;
-	};
-
-	//simply set the active page's minimum height to screen height, depending on orientation
-	$.mobile.resetActivePageHeight = function resetActivePageHeight( height ) {
-		var aPage = $( "." + $.mobile.activePageClass ),
-			aPageHeight = aPage.height(),
-			aPageOuterHeight = aPage.outerHeight( true );
-
-		height = ( typeof height === "number" ) ? height : getScreenHeight();
-
-		aPage.css( "min-height", height - ( aPageOuterHeight - aPageHeight ) );
-	};
-
-	// determine the current base url
-	function findBaseWithDefault() {
-		var closestBase = ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) );
-		return closestBase || documentBase.hrefNoHash;
-	}
-
-	/* exposed $.mobile methods */
-
-	//animation complete callback
-	$.fn.animationComplete = function( callback ) {
-		if ( $.support.cssTransitions ) {
-			return $( this ).one( "webkitAnimationEnd animationend", callback );
-		}
-		else{
-			// defer execution for consistency between webkit/non webkit
-			setTimeout( callback, 0 );
-			return $( this );
-		}
-	};
-
-	//expose path object on $.mobile
-	$.mobile.path = path;
-
-	//expose base object on $.mobile
-	$.mobile.base = base;
-
-	//history stack
-	$.mobile.urlHistory = urlHistory;
-
-	$.mobile.dialogHashKey = dialogHashKey;
-
-	//enable cross-domain page support
-	$.mobile.allowCrossDomainPages = false;
-
-	// Show a specific page in the page container.
-	$.mobile.changePage = function( toPage, options ) {
+		change: function( toPage, options ) {
 		// If we are in the midst of a transition, queue the current request.
 		// We'll call changePage() once we're done with the current transition to
 		// service the request.
@@ -1285,6 +1027,268 @@ define( [
 			releasePageTransitionLock();
 			mpc.trigger( "pagechange", triggerData );
 		});
+
+		}
+
+		// TODO resetActivePageHeight
+		// TODO changePage
+	});
+
+	$.mobile.loadPage = function( url, opts ) {
+		var container = (opts.pageContainer || $.mobile.pageContainer);
+
+		// create the deferred that will be supplied to loadPage callers
+		// and resolved by the content widget's load method
+		opts.deferred = $.Deferred();
+
+		// Preferring to allow exceptions for uninitialized opts.pageContainer
+		// widgets so we know if we need to force init here for users
+		container.content( "load", url, opts );
+
+		// provide the deferred
+		return opts.deferred.promise();
+	};
+
+	//define vars for interal use
+	var $window = $.mobile.window,
+		$head = $( "head" ),
+
+		// NOTE: path extensions dependent on core attributes. Moved here to remove deps from
+		//       $.mobile.path definition
+		path = $.extend($.mobile.path, {
+
+			//return the substring of a filepath before the sub-page key, for making a server request
+			getFilePath: function( path ) {
+				var splitkey = "&" + $.mobile.subPageUrlKey;
+				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
+			},
+
+			//check if the specified url refers to the first page in the main application document.
+			isFirstPageUrl: function( url ) {
+				// We only deal with absolute paths.
+				var u = path.parseUrl( path.makeUrlAbsolute( url, this.documentBase ) ),
+
+					// Does the url have the same path as the document?
+					samePath = u.hrefNoHash === this.documentUrl.hrefNoHash || ( this.documentBaseDiffers && u.hrefNoHash === this.documentBase.hrefNoHash ),
+
+					// Get the first page element.
+					fp = $.mobile.firstPage,
+
+
+
+					// Get the id of the first page element if it has one.
+					fpId = fp && fp[0] ? fp[0].id : undefined;
+
+				// The url refers to the first page if the path matches the document and
+				// it either has no hash value, or the hash is exactly equal to the id of the
+				// first page element.
+				return samePath && ( !u.hash || u.hash === "#" || ( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
+			},
+
+			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
+			// requests if the document doing the request was loaded via the file:// protocol.
+			// This is usually to allow the application to "phone home" and fetch app specific
+			// data. We normally let the browser handle external/cross-domain urls, but if the
+			// allowCrossDomainPages option is true, we will allow cross-domain http/https
+			// requests to go through our page loading logic.
+			isPermittedCrossDomainRequest: function( docUrl, reqUrl ) {
+				return $.mobile.allowCrossDomainPages &&
+					docUrl.protocol === "file:" &&
+					reqUrl.search( /^https?:/ ) !== -1;
+			}
+		}),
+
+		// used to track last vclicked element to make sure its value is added to form data
+		$lastVClicked = null,
+
+		//will be defined when a link is clicked and given an active class
+		$activeClickedLink = null,
+
+		// resolved on domready
+		domreadyDeferred = $.Deferred(),
+
+		//urlHistory is purely here to make guesses at whether the back or forward button was clicked
+		//and provide an appropriate transition
+		urlHistory = $.mobile.navigate.history,
+
+		//queue to hold simultanious page transitions
+		pageTransitionQueue = [],
+
+		//indicates whether or not page is in process of transitioning
+		isPageTransitioning = false,
+
+		//nonsense hash change key for dialogs, so they create a history entry
+		dialogHashKey = "&ui-state=dialog",
+
+		//existing base tag?
+		$base = $head.children( "base" ),
+
+		//tuck away the original document URL minus any fragment.
+		documentUrl = path.documentUrl,
+
+		//if the document has an embedded base tag, documentBase is set to its
+		//initial value. If a base tag does not exist, then we default to the documentUrl.
+		documentBase = path.documentBase,
+
+		getScreenHeight = $.mobile.getScreenHeight,
+
+		// base element management, defined depending on dynamic base tag support
+		// TODO move to external widget
+		base = {
+			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
+			element: ( $base.length ? $base : $( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
+
+			linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
+
+			//set the generated BASE element's href attribute to a new page's base path
+			set: function( href ) {
+				// we should do nothing if the user wants to manage their url base manually
+				if ( !$.mobile.dynamicBaseEnabled ){
+					return;
+				}
+
+				// we should use the base tag if we can manipulate it dynamically
+				if ( $.support.dynamicBaseTag ){
+					base.element.attr( "href", path.makeUrlAbsolute( href, documentBase ) );
+				}
+			},
+
+			rewrite: function( href, page ) {
+				var newPath = path.get( href );
+
+				page.find( base.linkSelector ).each(function( i, link ) {
+					var thisAttr = $( link ).is( "[href]" ) ? "href" : $( link ).is( "[src]" ) ? "src" : "action",
+					thisUrl = $( link ).attr( thisAttr );
+
+					// XXX_jblas: We need to fix this so that it removes the document
+					//            base URL, and then prepends with the new page URL.
+					//if full path exists and is same, chop it - helps IE out
+					thisUrl = thisUrl.replace( location.protocol + "//" + location.host + location.pathname, "" );
+
+					if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
+						$( link ).attr( thisAttr, newPath + thisUrl );
+					}
+				});
+			},
+
+			//set the generated BASE element's href attribute to a new page's base path
+			reset: function(/* href */) {
+				base.element.attr( "href", documentBase.hrefNoSearch );
+			}
+		};
+
+	//return the original document url
+	$.mobile.getDocumentUrl = path.getDocumentUrl;
+
+	//return the original document base url
+	$.mobile.getDocumentBase = path.getDocumentBase;
+
+	/* internal utility functions */
+
+	// NOTE Issue #4950 Android phonegap doesn't navigate back properly
+	//      when a full page refresh has taken place. It appears that hashchange
+	//      and replacestate history alterations work fine but we need to support
+	//      both forms of history traversal in our code that uses backward history
+	//      movement
+	$.mobile.back = function() {
+		var nav = window.navigator;
+
+		// if the setting is on and the navigator object is
+		// available use the phonegap navigation capability
+		if( this.phonegapNavigationEnabled &&
+			nav &&
+			nav.app &&
+			nav.app.backHistory ){
+			nav.app.backHistory();
+		} else {
+			window.history.back();
+		}
+	};
+
+	//direct focus to the page title, or otherwise first focusable element
+	$.mobile.focusPage = function ( page ) {
+		var autofocus = page.find( "[autofocus]" ),
+			pageTitle = page.find( ".ui-title:eq(0)" );
+
+		if ( autofocus.length ) {
+			autofocus.focus();
+			return;
+		}
+
+		if ( pageTitle.length ) {
+			pageTitle.focus();
+		} else{
+			page.focus();
+		}
+	};
+
+	//remove active classes after page transition or error
+	function removeActiveLinkClass( forceRemoval ) {
+		if ( !!$activeClickedLink && ( !$activeClickedLink.closest( "." + $.mobile.activePageClass ).length || forceRemoval ) ) {
+			$activeClickedLink.removeClass( $.mobile.activeBtnClass );
+		}
+		$activeClickedLink = null;
+	}
+
+	function releasePageTransitionLock() {
+		isPageTransitioning = false;
+		if ( pageTransitionQueue.length > 0 ) {
+			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
+		}
+	}
+
+	// No-op implementation of transition degradation
+	$.mobile._maybeDegradeTransition = $.mobile._maybeDegradeTransition || function( transition ) {
+		return transition;
+	};
+
+	//simply set the active page's minimum height to screen height, depending on orientation
+	$.mobile.resetActivePageHeight = function resetActivePageHeight( height ) {
+		var aPage = $( "." + $.mobile.activePageClass ),
+			aPageHeight = aPage.height(),
+			aPageOuterHeight = aPage.outerHeight( true );
+
+		height = ( typeof height === "number" ) ? height : getScreenHeight();
+
+		aPage.css( "min-height", height - ( aPageOuterHeight - aPageHeight ) );
+	};
+
+	// determine the current base url
+	function findBaseWithDefault() {
+		var closestBase = ( $.mobile.activePage && getClosestBaseUrl( $.mobile.activePage ) );
+		return closestBase || documentBase.hrefNoHash;
+	}
+
+	/* exposed $.mobile methods */
+
+	//animation complete callback
+	$.fn.animationComplete = function( callback ) {
+		if ( $.support.cssTransitions ) {
+			return $( this ).one( "webkitAnimationEnd animationend", callback );
+		}
+		else{
+			// defer execution for consistency between webkit/non webkit
+			setTimeout( callback, 0 );
+			return $( this );
+		}
+	};
+
+	//expose path object on $.mobile
+	$.mobile.path = path;
+
+	//expose base object on $.mobile
+	$.mobile.base = base;
+
+	//history stack
+	$.mobile.urlHistory = urlHistory;
+
+	$.mobile.dialogHashKey = dialogHashKey;
+
+	//enable cross-domain page support
+	$.mobile.allowCrossDomainPages = false;
+
+	$.mobile.changePage = function( to, options ) {
+		$.mobile.pageContainer.content( "change", to, options );
 	};
 
 	$.mobile.changePage.defaults = {
