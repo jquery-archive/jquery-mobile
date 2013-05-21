@@ -309,7 +309,9 @@ legend,
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-a,
-.ui-page-theme-a .ui-bar-inherit {
+.ui-page-theme-a .ui-bar-inherit,
+html .ui-bar-a .ui-bar-inherit,
+html body .ui-group-theme-a .ui-bar-inherit {
 	background: 			#1d1d1d /*{a-bar-background-color}*/;
 	border-color:	 		#1b1b1b /*{a-bar-border}*/;
 	color: 					#fff /*{a-bar-color}*/;
@@ -339,6 +341,7 @@ legend,
 .ui-page-theme-a,
 .ui-page-theme-a .ui-body-inherit,
 html .ui-bar-a .ui-body-inherit,
+html body .ui-group-theme-a .ui-body-inherit,
 .ui-overlay-a {
 	background: 			#222 /*{a-body-background-color}*/;
 	border-color:	 		#1b1b1b /*{a-body-border}*/;
@@ -373,9 +376,10 @@ html .ui-bar-a .ui-body-inherit,
 .ui-fill-a,
 .ui-page-theme-a .ui-fill-inherit,
 html .ui-bar-a .ui-fill-inherit,
-html a.ui-btn-a > .ui-fill-inherit,
-html li.ui-body-a > .ui-li-count.ui-fill-inherit,
-html li.ui-bar-a > .ui-fill-inherit {
+html body .ui-group-theme-a .ui-fill-inherit,
+.ui-btn-a > .ui-li-count.ui-fill-inherit,
+.ui-body-a > .ui-li-count.ui-fill-inherit,
+.ui-bar-a > .ui-li-count.ui-fill-inherit {
 	background:				#1b1b1b /*{a-fill-background-color}*/;
 	border: 1px solid		#111 /*{a-fill-border}*/;
 	color:					#fff /*{a-fill-color}*/;
@@ -385,47 +389,58 @@ html li.ui-bar-a > .ui-fill-inherit {
 /* Slider track/switch active */
 .ui-fill-a.ui-btn-active,
 .ui-page-theme-a .ui-fill-inherit.ui-btn-active,
-html .ui-bar-a .ui-fill-inherit.ui-btn-active {
+html .ui-bar-a .ui-fill-inherit.ui-btn-active,
+html body .ui-group-theme-a .ui-fill-inherit.ui-btn-active {
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3399cc /*{a-bactive-shadow-color}*/;
 }
 
 /* Buttons */
+.ui-btn-a,
 .ui-page-theme-a .ui-btn,
 html .ui-bar-a .ui-btn,
-html body .ui-btn.ui-btn-a,
+html body .ui-group-theme-a .ui-btn,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-a,
 /* Visited */
+.ui-btn-a:visited,
 .ui-page-theme-a .ui-btn:visited,
 html .ui-bar-a .ui-btn:visited,
-html body .ui-btn.ui-btn-a:visited {
+html body .ui-group-theme-a .ui-btn:visited,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-a:visited {
 	background: 			#2a2a2a /*{a-bup-background-color}*/;
 	border-color: 			#1b1b1b /*{a-bup-border}*/;
 	color: 					#fff /*{a-bup-color}*/;
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #000 /*{a-bup-shadow-color}*/;
 }
 /* Hover */
+.ui-btn-a:hover,
 .ui-page-theme-a .ui-btn:hover,
 html .ui-bar-a .ui-btn:hover,
-html body .ui-btn.ui-btn-a:hover {
+html body .ui-group-theme-a .ui-btn:hover,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-a:hover {
 	background: 			#333 /*{a-bhover-background-color}*/;
 	border-color:	 		#1d1d1d /*{a-bhover-border}*/;
 	color: 					#fff /*{a-bhover-color}*/;
 	text-shadow: 0 /*{a-bhover-shadow-x}*/ 1px /*{a-bhover-shadow-y}*/ 0 /*{a-bhover-shadow-radius}*/ #000 /*{a-bhover-shadow-color}*/;
 }
 /* Down */
+.ui-btn-a:active,
 .ui-page-theme-a .ui-btn:active,
 html .ui-bar-a .ui-btn:active,
-html body .ui-btn.ui-btn-a:active {
+html body .ui-group-theme-a .ui-btn:active,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-a:active {
 	background: 			#2d2d2d /*{a-bdown-background-color}*/;
 	border-color:	 		#1d1d1d /*{a-bdown-border}*/;
 	color: 					#fff /*{a-bdown-color}*/;
 	text-shadow: 0 /*{a-bdown-shadow-x}*/ 1px /*{a-bdown-shadow-y}*/ 0 /*{a-bdown-shadow-radius}*/ #000 /*{a-bdown-shadow-color}*/;
 }
 /* Active */
+.ui-btn-a.ui-btn-active,
 .ui-page-theme-a .ui-btn.ui-btn-active,
 html .ui-bar-a .ui-btn.ui-btn-active,
-html body .ui-btn.ui-btn-a.ui-btn-active {
+html body .ui-group-theme-a .ui-btn.ui-btn-active,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-a.ui-btn-active {
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	border-color:	 		#3399cc /*{a-bactive-border}*/;
 	color: 					#fff /*{a-bactive-color}*/;
@@ -433,14 +448,18 @@ html body .ui-btn.ui-btn-a.ui-btn-active {
 	cursor: pointer;
 }
 /* Focus */
+.ui-btn-a:focus,
 .ui-page-theme-a .ui-btn:focus,
 html .ui-bar-a .ui-btn:focus,
-html body .ui-btn.ui-btn-a:focus,
+html body .ui-group-theme-a .ui-btn:focus,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-a:focus,
 /* Buttons and text inputs with div wrap */
+.ui-focus,
 .ui-page-theme-a .ui-focus,
 html .ui-bar-a .ui-focus,
-html body .ui-btn-a.ui-focus,
-html body .ui-body-a.ui-focus {
+html body .ui-group-theme-a .ui-focus,
+html body [class*="ui-group-theme-"] .ui-btn-a.ui-focus,
+html body [class*="ui-group-theme-"] .ui-body-a.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#34bae8 /*{a-bactive-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#34bae8 /*{a-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#34bae8 /*{a-bactive-background-color}*/;
@@ -448,13 +467,15 @@ html body .ui-body-a.ui-focus {
 /* Checkbox active */
 .ui-page-theme-a .ui-icon-checkbox-on:after,
 html .ui-bar-a .ui-icon-checkbox-on:after,
-html body .ui-btn-a.ui-icon-checkbox-on:after {
+html body .ui-group-theme-a .ui-icon-checkbox-on:after,
+.ui-btn.ui-btn-a.ui-icon-checkbox-on:after {
 	background-color: #34bae8 /*{a-bactive-background-color}*/;
 }
 /* Radio button active */
 .ui-page-theme-a .ui-icon-radio-on:after,
 html .ui-bar-a .ui-icon-radio-on:after,
-html body .ui-btn-a.ui-icon-radio-on:after {
+html body .ui-group-theme-a .ui-icon-radio-on:after,
+.ui-btn.ui-btn-a.ui-icon-radio-on:after {
 	background-color: #fff;
 	border-color: #34bae8 /*{a-bactive-background-color}*/;
 }
@@ -463,7 +484,9 @@ html body .ui-btn-a.ui-icon-radio-on:after {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-bar-b,
-.ui-page-theme-b .ui-bar-inherit {
+.ui-page-theme-b .ui-bar-inherit,
+html .ui-bar-b .ui-bar-inherit,
+html body .ui-group-theme-b .ui-bar-inherit {
 	background: 			#e5e5e5 /*{b-bar-background-color}*/;
 	border-color:	 		#ddd /*{b-bar-border}*/;
 	color: 					#111 /*{b-bar-color}*/;
@@ -493,6 +516,7 @@ html body .ui-btn-a.ui-icon-radio-on:after {
 .ui-page-theme-b,
 .ui-page-theme-b .ui-body-inherit,
 html .ui-bar-b .ui-body-inherit,
+html body .ui-group-theme-b .ui-body-inherit,
 .ui-overlay-b {
 	background: 			#f5f5f5 /*{b-body-background-color}*/;
 	border-color:	 		#ddd /*{b-body-border}*/;
@@ -527,9 +551,10 @@ html .ui-bar-b .ui-body-inherit,
 .ui-fill-b,
 .ui-page-theme-b .ui-fill-inherit,
 html .ui-bar-b .ui-fill-inherit,
-html a.ui-btn-b > .ui-fill-inherit,
-html li.ui-body-b > .ui-li-count.ui-fill-inherit,
-html li.ui-bar-b > .ui-fill-inherit {
+html body .ui-group-theme-b .ui-fill-inherit,
+.ui-btn-b > .ui-li-count.ui-fill-inherit,
+.ui-body-b > .ui-li-count.ui-fill-inherit,
+.ui-bar-b > .ui-li-count.ui-fill-inherit {
 	background:				#ececec /*{b-fill-background-color}*/;
 	border: 1px solid		#cfcfcf /*{b-fill-border}*/;
 	color:					#333 /*{b-fill-color}*/;
@@ -539,47 +564,58 @@ html li.ui-bar-b > .ui-fill-inherit {
 /* Slider track/switch active */
 .ui-fill-b.ui-btn-active,
 .ui-page-theme-b .ui-fill-inherit.ui-btn-active,
-html .ui-bar-b .ui-fill-inherit.ui-btn-active {
+html .ui-bar-b .ui-fill-inherit.ui-btn-active,
+html body .ui-group-theme-b .ui-fill-inherit.ui-btn-active {
 	background: 			#ff6600 /*{b-bactive-background-color}*/;
 	color: 					#fff /*{b-bactive-color}*/;
 	text-shadow: 0 /*{b-bactive-shadow-x}*/ 1px /*{b-bactive-shadow-y}*/ 0 /*{b-bactive-shadow-radius}*/ #ff3300 /*{b-bactive-shadow-color}*/;
 }
 
 /* Buttons */
+.ui-btn-b,
 .ui-page-theme-b .ui-btn,
 html .ui-bar-b .ui-btn,
-html body .ui-btn.ui-btn-b,
+html body .ui-group-theme-b .ui-btn,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-b,
 /* Visited */
+.ui-btn-b:visited,
 .ui-page-theme-b .ui-btn:visited,
 html .ui-bar-b .ui-btn:visited,
-html body .ui-btn.ui-btn-b:visited {
+html body .ui-group-theme-b .ui-btn:visited,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-b:visited {
 	background: 			#efefef /*{b-bup-background-color}*/;
 	border-color:	 		#ddd /*{b-bup-border}*/;
 	color: 					#333 /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #fff /*{b-bup-shadow-color}*/;
 }
 /* Hover */
+.ui-btn-b:hover,
 .ui-page-theme-b .ui-btn:hover,
 html .ui-bar-b .ui-btn:hover,
-html body .ui-btn.ui-btn-b:hover {
+html body .ui-group-theme-b .ui-btn:hover,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-b:hover {
 	background: 			#e9e9e9 /*{b-bhover-background-color}*/;
 	border-color:	 		#d5d5d5 /*{b-bhover-border}*/;
 	color: 					#333 /*{b-bhover-color}*/;
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #fff /*{b-bhover-shadow-color}*/;
 }
 /* Down */
+.ui-btn-b:active,
 .ui-page-theme-b .ui-btn:active,
 html .ui-bar-b .ui-btn:active,
-html body .ui-btn.ui-btn-b:active {
+html body .ui-group-theme-b .ui-btn:active,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-b:active {
 	background: 			#e3e3e3 /*{b-bdown-background-color}*/;
 	border-color:	 		#d5d5d5 /*{b-bdown-border}*/;
 	color: 					#333 /*{b-bdown-color}*/;
 	text-shadow: 0 /*{b-bdown-shadow-x}*/ 1px /*{b-bdown-shadow-y}*/ 0 /*{b-bdown-shadow-radius}*/ #fff /*{b-bdown-shadow-color}*/;
 }
 /* Active */
+.ui-btn-b.ui-btn-active,
 .ui-page-theme-b .ui-btn.ui-btn-active,
 html .ui-bar-b .ui-btn.ui-btn-active,
-html body .ui-btn.ui-btn-b.ui-btn-active {
+html body .ui-group-theme-b .ui-btn.ui-btn-active,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-b.ui-btn-active {
 	background: 			#ff6600 /*{b-bactive-background-color}*/;
 	border-color:	 		#ff3300 /*{b-bactive-border}*/;
 	color: 					#fff /*{b-bactive-color}*/;
@@ -588,14 +624,18 @@ html body .ui-btn.ui-btn-b.ui-btn-active {
 }
 
 /* Focus */
+.ui-btn-b:focus,
 .ui-page-theme-b .ui-btn:focus,
 html .ui-bar-b .ui-btn:focus,
-html body .ui-btn.ui-btn-b:focus,
+html body .ui-group-theme-b .ui-btn:focus,
+[class*="ui-group-theme-"] .ui-btn.ui-btn-b:focus,
 /* Buttons and text inputs with div wrap */
+.ui-focus,
 .ui-page-theme-b .ui-focus,
 html .ui-bar-b .ui-focus,
-html body .ui-btn-b.ui-focus,
-html body .ui-body-b.ui-focus {
+html body .ui-group-theme-b .ui-focus,
+html body [class*="ui-group-theme-"] .ui-btn-b.ui-focus,
+html body [class*="ui-group-theme-"] .ui-body-b.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#ff6600 /*{b-bactive-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#ff6600 /*{b-bactive-background-color}*/;
 	box-shadow: 0 0 12px 			#ff6600 /*{b-bactive-background-color}*/;
@@ -604,13 +644,15 @@ html body .ui-body-b.ui-focus {
 /* Checkbox active */
 .ui-page-theme-b .ui-icon-checkbox-on:after,
 html .ui-bar-b .ui-icon-checkbox-on:after,
-html body .ui-btn-b.ui-icon-checkbox-on:after {
+html body .ui-group-theme-b .ui-icon-checkbox-on:after,
+.ui-btn.ui-btn-b.ui-icon-checkbox-on:after {
 	background-color: #ff6600 /*{b-bactive-background-color}*/;
 }
 /* Radio button active */
 .ui-page-theme-b .ui-icon-radio-on:after,
 html .ui-bar-b .ui-icon-radio-on:after,
-html body .ui-btn-b.ui-icon-radio-on:after {
+html body .ui-group-theme-b .ui-icon-radio-on:after,
+.ui-btn.ui-btn-b.ui-icon-radio-on:after {
 	background-color: #fff;
 	border-color: #ff6600 /*{b-bactive-background-color}*/;
 }
