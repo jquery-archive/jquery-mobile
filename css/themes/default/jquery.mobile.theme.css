@@ -368,7 +368,7 @@ html .ui-bar-a .ui-body-inherit,
 .ui-page-theme-a .ui-fill-inherit,
 html .ui-bar-a .ui-fill-inherit,
 html a.ui-btn-a > .ui-fill-inherit,
-html li.ui-body-a > .ui-fill-inherit,
+html li.ui-body-a > .ui-li-count.ui-fill-inherit,
 html li.ui-bar-a > .ui-fill-inherit {
 	background:				#1b1b1b /*{a-fill-background-color}*/;
 	border: 1px solid		#111 /*{a-fill-border}*/;
@@ -522,7 +522,7 @@ html .ui-bar-b .ui-body-inherit,
 .ui-page-theme-b .ui-fill-inherit,
 html .ui-bar-b .ui-fill-inherit,
 html a.ui-btn-b > .ui-fill-inherit,
-html li.ui-body-b > .ui-fill-inherit,
+html li.ui-body-b > .ui-li-count.ui-fill-inherit,
 html li.ui-bar-b > .ui-fill-inherit {
 	background:				#ececec /*{b-fill-background-color}*/;
 	border: 1px solid		#cfcfcf /*{b-fill-border}*/;
