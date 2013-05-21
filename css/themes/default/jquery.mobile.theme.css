@@ -37,13 +37,14 @@ legend,
 
 /* Corner rounding
 -----------------------------------------------------------------------------------------------------------*/
+/* Class ui-btn-corner-all deprecated in 1.4 */
 
 .ui-corner-all {
 	-webkit-border-radius: 				.6em /*{global-radii-blocks}*/;
 	border-radius: 						.6em /*{global-radii-blocks}*/;
 }
 /* Buttons */
-.ui-btn-corner-all, /* Deprecated in 1.4 */
+.ui-btn-corner-all,
 .ui-btn.ui-corner-all,
 .ui-li-count.ui-corner-all,
 .ui-slider-switch.ui-corner-all,
@@ -52,12 +53,12 @@ legend,
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }
 /* Icon-only buttons */
-.ui-btn-icon-notext.ui-btn-corner-all, /* Deprecated in 1.4 */
+.ui-btn-icon-notext.ui-btn-corner-all,
 .ui-btn-icon-notext.ui-corner-all {
 	-webkit-border-radius: 				1em /*{global-radii-icononly}*/;
 	border-radius: 						1em /*{global-radii-icononly}*/;
 }
-/* Checkbox and radio icon */
+/* Checkbox icon */
 .ui-checkbox .ui-btn.ui-corner-all:after,
 .ui-corner-all .ui-selectmenu-list .ui-btn:after {
 	-webkit-border-radius: .1875em;
@@ -65,7 +66,7 @@ legend,
 }
 
 /* Radius clip workaround for cleaning up corner trapping */
-.ui-btn-corner-all, /* Deprecated in 1.4 */
+.ui-btn-corner-all,
 .ui-corner-all {
 	-webkit-background-clip: padding;
 	background-clip: padding-box;
@@ -93,8 +94,11 @@ legend,
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn[class*="ui-icon-"]:after,
-.ui-input-search:after {
+.ui-icon-plus:after, .ui-icon-minus:after, .ui-icon-delete:after, .ui-icon-arrow-r:after, .ui-icon-arrow-l:after,
+.ui-icon-arrow-u:after, .ui-icon-arrow-d:after, .ui-icon-check:after, .ui-icon-checkbox-on:after,
+.ui-icon-gear:after, .ui-icon-refresh:after, .ui-icon-forward:after, .ui-icon-back:after, .ui-icon-grid:after,
+.ui-icon-star:after, .ui-icon-alert:after, .ui-icon-info:after, .ui-icon-home:after,
+.ui-icon-search:after, .ui-input-search:after, .ui-icon-bars:after, .ui-icon-edit:after {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.4) /*{global-icon-disc}*/;
 	background-image: url(images/icons-18-white.png) /*{global-icon-set}*/;
@@ -129,7 +133,6 @@ legend,
 }
 
 /* Icon sprite */
-
 .ui-icon-plus:after {
 	background-position: 	-1px -1px;
 }
@@ -198,8 +201,11 @@ legend,
        only screen and (min--moz-device-pixel-ratio: 1.3),
        only screen and (min-resolution: 200dpi) {
 	
-	.ui-btn[class*="ui-icon-"]:after,
-	.ui-input-search:after {
+	.ui-icon-plus:after, .ui-icon-minus:after, .ui-icon-delete:after, .ui-icon-arrow-r:after, .ui-icon-arrow-l:after,
+	.ui-icon-arrow-u:after, .ui-icon-arrow-d:after, .ui-icon-check:after, .ui-icon-checkbox-on:after,
+	.ui-icon-gear:after, .ui-icon-refresh:after, .ui-icon-forward:after, .ui-icon-back:after, .ui-icon-grid:after,
+	.ui-icon-star:after, .ui-icon-alert:after, .ui-icon-info:after, .ui-icon-home:after,
+	.ui-icon-search:after, .ui-input-search:after, .ui-icon-bars:after, .ui-icon-edit:after {
 		background-image: url(images/icons-36-white.png);
 		-moz-background-size: 864px 18px;
 		-o-background-size: 864px 18px;
@@ -611,8 +617,9 @@ html body .ui-btn-b.ui-icon-radio-on:after {
 
 /* Disabled
 -----------------------------------------------------------------------------------------------------------*/
+/* Class ui-disabled deprecated in 1.4 */
 
-.ui-disabled, /* Deprecated in 1.4 */
+.ui-disabled,
 .ui-state-disabled,
 .ui-select .ui-btn.ui-state-disabled {
 	filter: Alpha(Opacity=30);
