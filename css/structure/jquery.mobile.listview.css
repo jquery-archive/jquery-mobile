@@ -216,11 +216,6 @@
 .ui-listview > li.ui-li-has-alt > .ui-btn + .ui-btn:focus {
 	z-index: 3;
 }
-.ui-listview > li.ui-li-has-alt > .ui-btn + .ui-btn .ui-btn {
-	left: .4375em;
-	top: 50%;
-	margin-top: -.8125em;
-}
 ol.ui-listview,
 ol.ui-listview .ui-listview .ui-li-divider {
 	counter-reset: listnumbering;

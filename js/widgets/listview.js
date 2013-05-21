@@ -126,16 +126,13 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						
 						var last = a.last(),
 							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ) || o.theme,
-							splitthemeclass = splittheme ? " ui-btn-" + splittheme : "",
 							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon,
-							splitbutton = $( "<div class='ui-btn" + splitthemeclass + " ui-icon-" + spliticon + " ui-btn-icon-notext ui-corner-all ui-shadow ui-shadow-icon'></div>" ),
-							altButtonClass = itemTheme ? "ui-btn ui-btn-" + itemTheme : "ui-btn";
+							altButtonClass = splittheme ? "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon : "ui-btn ui-icon-" + spliticon;
 						
 						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
 							.addClass( altButtonClass )
-							.empty()
-							.append( splitbutton );
+							.empty();
 					} else if ( icon ) {
 						buttonClass += " ui-icon-" + icon;
 					}
