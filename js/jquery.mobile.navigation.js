@@ -737,270 +737,267 @@ define( [
 		},
 
 		change: function( toPage, options ) {
-		// If we are in the midst of a transition, queue the current request.
-		// We'll call changePage() once we're done with the current transition to
-		// service the request.
-		if ( isPageTransitioning ) {
-			pageTransitionQueue.unshift( arguments );
-			return;
-		}
+			// If we are in the midst of a transition, queue the current request.
+			// We'll call changePage() once we're done with the current transition to
+			// service the request.
+			if ( isPageTransitioning ) {
+				pageTransitionQueue.unshift( arguments );
+				return;
+			}
 
-		var settings = $.extend( {}, $.mobile.changePage.defaults, options ),
-			isToPageString,
-			mpc, pbcEvent, triggerData,
-			fromPage, url, pageUrl, fileUrl,
-			active, activeIsInitialPage,
-			historyDir, pageTitle, isDialog,
-			alreadyThere,
-			newPageTitle,
-			params,
-			transitionDeferred;
+			var settings = $.extend( {}, $.mobile.changePage.defaults, options ),
+			  isToPageString,
+			  mpc, pbcEvent, triggerData,
+			  fromPage, url, pageUrl, fileUrl,
+			  active, activeIsInitialPage,
+			  historyDir, pageTitle, isDialog,
+			  alreadyThere,
+			  newPageTitle,
+			  params,
+			  transitionDeferred;
 
-		// Make sure we have a pageContainer to work with.
-		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
+			// Make sure we have a fromPage.
+			settings.fromPage = settings.fromPage || $.mobile.activePage;
 
-		// Make sure we have a fromPage.
-		settings.fromPage = settings.fromPage || $.mobile.activePage;
+			isToPageString = (typeof toPage === "string");
 
-		isToPageString = (typeof toPage === "string");
+			mpc = this.element;
+			pbcEvent = new $.Event( "pagebeforechange" );
+			triggerData = { toPage: toPage, options: settings };
 
-		mpc = this.element;
-		pbcEvent = new $.Event( "pagebeforechange" );
-		triggerData = { toPage: toPage, options: settings };
+			// NOTE: preserve the original target as the dataUrl value will be simplified
+			//       eg, removing ui-state, and removing query params from the hash
+			//       this is so that users who want to use query params have access to them
+			//       in the event bindings for the page life cycle See issue #5085
+			if ( isToPageString ) {
+				// if the toPage is a string simply convert it
+				triggerData.absUrl = path.makeUrlAbsolute( toPage, findBaseWithDefault() );
+			} else {
+				// if the toPage is a jQuery object grab the absolute url stored
+				// in the loadPage callback where it exists
+				triggerData.absUrl = toPage.data( "absUrl" );
+			}
 
-		// NOTE: preserve the original target as the dataUrl value will be simplified
-		//       eg, removing ui-state, and removing query params from the hash
-		//       this is so that users who want to use query params have access to them
-		//       in the event bindings for the page life cycle See issue #5085
-		if ( isToPageString ) {
-			// if the toPage is a string simply convert it
-			triggerData.absUrl = path.makeUrlAbsolute( toPage, findBaseWithDefault() );
-		} else {
-			// if the toPage is a jQuery object grab the absolute url stored
-			// in the loadPage callback where it exists
-			triggerData.absUrl = toPage.data( "absUrl" );
-		}
+			// Let listeners know we're about to change the current page.
+			mpc.trigger( pbcEvent, triggerData );
 
-		// Let listeners know we're about to change the current page.
-		mpc.trigger( pbcEvent, triggerData );
+			// If the default behavior is prevented, stop here!
+			if ( pbcEvent.isDefaultPrevented() ) {
+				return;
+			}
 
-		// If the default behavior is prevented, stop here!
-		if ( pbcEvent.isDefaultPrevented() ) {
-			return;
-		}
+			// We allow "pagebeforechange" observers to modify the toPage in the trigger
+			// data to allow for redirects. Make sure our toPage is updated.
+			//
+			// We also need to re-evaluate whether it is a string, because an object can
+			// also be replaced by a string
 
-		// We allow "pagebeforechange" observers to modify the toPage in the trigger
-		// data to allow for redirects. Make sure our toPage is updated.
-		//
-		// We also need to re-evaluate whether it is a string, because an object can
-		// also be replaced by a string
+			toPage = triggerData.toPage;
+			isToPageString = ( typeof toPage === "string" );
 
-		toPage = triggerData.toPage;
-		isToPageString = ( typeof toPage === "string" );
+			// Set the isPageTransitioning flag to prevent any requests from
+			// entering this method while we are in the midst of loading a page
+			// or transitioning.
+			isPageTransitioning = true;
 
-		// Set the isPageTransitioning flag to prevent any requests from
-		// entering this method while we are in the midst of loading a page
-		// or transitioning.
-		isPageTransitioning = true;
+			// If the caller passed us a url, call loadPage()
+			// to make sure it is loaded into the DOM. We'll listen
+			// to the promise object it returns so we know when
+			// it is done loading or if an error ocurred.
+			if ( isToPageString ) {
+				// preserve the original target as the dataUrl value will be simplified
+				// eg, removing ui-state, and removing query params from the hash
+				// this is so that users who want to use query params have access to them
+				// in the event bindings for the page life cycle See issue #5085
+				settings.target = toPage;
 
-		// If the caller passed us a url, call loadPage()
-		// to make sure it is loaded into the DOM. We'll listen
-		// to the promise object it returns so we know when
-		// it is done loading or if an error ocurred.
-		if ( isToPageString ) {
-			// preserve the original target as the dataUrl value will be simplified
-			// eg, removing ui-state, and removing query params from the hash
-			// this is so that users who want to use query params have access to them
-			// in the event bindings for the page life cycle See issue #5085
-			settings.target = toPage;
+				$.mobile.loadPage( toPage, settings)
+					.done(function( url, options, newPage ) {
+						isPageTransitioning = false;
 
-			$.mobile.loadPage( toPage, settings)
-				.done(function( url, options, newPage ) {
-					isPageTransitioning = false;
+						// store the original absolute url so that it can be provided
+						// to events in the triggerData of the subsequent changePage call
+						newPage.data( "absUrl", triggerData.absUrl );
+						$.mobile.changePage( newPage, options );
+					})
+					.fail($.proxy(function(/* url, options */) {
+						//clear out the active button state
+						removeActiveLinkClass( true );
 
-					// store the original absolute url so that it can be provided
-					// to events in the triggerData of the subsequent changePage call
-					newPage.data( "absUrl", triggerData.absUrl );
-					$.mobile.changePage( newPage, options );
-				})
-				.fail($.proxy(function(/* url, options */) {
-					//clear out the active button state
-					removeActiveLinkClass( true );
+						//release transition lock so navigation is free again
+						releasePageTransitionLock();
+						this.element.trigger( "pagechangefailed", triggerData );
+					}, this));
 
-					//release transition lock so navigation is free again
-					releasePageTransitionLock();
-					this.element.trigger( "pagechangefailed", triggerData );
-				}, this));
+				return;
+			}
 
-			return;
-		}
+			// If we are going to the first-page of the application, we need to make
+			// sure settings.dataUrl is set to the application document url. This allows
+			// us to avoid generating a document url with an id hash in the case where the
+			// first-page of the document has an id attribute specified.
+			if ( toPage[ 0 ] === $.mobile.firstPage[ 0 ] && !settings.dataUrl ) {
+				settings.dataUrl = documentUrl.hrefNoHash;
+			}
 
-		// If we are going to the first-page of the application, we need to make
-		// sure settings.dataUrl is set to the application document url. This allows
-		// us to avoid generating a document url with an id hash in the case where the
-		// first-page of the document has an id attribute specified.
-		if ( toPage[ 0 ] === $.mobile.firstPage[ 0 ] && !settings.dataUrl ) {
-			settings.dataUrl = documentUrl.hrefNoHash;
-		}
-
-		// The caller passed us a real page DOM element. Update our
-		// internal state and then trigger a transition to the page.
-		fromPage = settings.fromPage;
-		url = ( settings.dataUrl && path.convertUrlToDataUrl( settings.dataUrl ) ) || toPage.jqmData( "url" );
-		// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
-		pageUrl = url;
-		fileUrl = path.getFilePath( url );
-		active = urlHistory.getActive();
-		activeIsInitialPage = urlHistory.activeIndex === 0;
-		historyDir = 0;
-		pageTitle = document.title;
-		isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
+			// The caller passed us a real page DOM element. Update our
+			// internal state and then trigger a transition to the page.
+			fromPage = settings.fromPage;
+			url = ( settings.dataUrl && path.convertUrlToDataUrl( settings.dataUrl ) ) || toPage.jqmData( "url" );
+			// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
+			pageUrl = url;
+			fileUrl = path.getFilePath( url );
+			active = urlHistory.getActive();
+			activeIsInitialPage = urlHistory.activeIndex === 0;
+			historyDir = 0;
+			pageTitle = document.title;
+			isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
 
 
-		// By default, we prevent changePage requests when the fromPage and toPage
-		// are the same element, but folks that generate content manually/dynamically
-		// and reuse pages want to be able to transition to the same page. To allow
-		// this, they will need to change the default value of allowSamePageTransition
-		// to true, *OR*, pass it in as an option when they manually call changePage().
-		// It should be noted that our default transition animations assume that the
-		// formPage and toPage are different elements, so they may behave unexpectedly.
-		// It is up to the developer that turns on the allowSamePageTransitiona option
-		// to either turn off transition animations, or make sure that an appropriate
-		// animation transition is used.
-		if ( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
-			isPageTransitioning = false;
-			mpc.trigger( "pagechange", triggerData );
+			// By default, we prevent changePage requests when the fromPage and toPage
+			// are the same element, but folks that generate content manually/dynamically
+			// and reuse pages want to be able to transition to the same page. To allow
+			// this, they will need to change the default value of allowSamePageTransition
+			// to true, *OR*, pass it in as an option when they manually call changePage().
+			// It should be noted that our default transition animations assume that the
+			// formPage and toPage are different elements, so they may behave unexpectedly.
+			// It is up to the developer that turns on the allowSamePageTransitiona option
+			// to either turn off transition animations, or make sure that an appropriate
+			// animation transition is used.
+			if ( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
+				isPageTransitioning = false;
+				mpc.trigger( "pagechange", triggerData );
 
-			// Even if there is no page change to be done, we should keep the urlHistory in sync with the hash changes
+				// Even if there is no page change to be done, we should keep the urlHistory in sync with the hash changes
+				if ( settings.fromHashChange ) {
+					urlHistory.direct({ url: url });
+				}
+
+				return;
+			}
+
+			// We need to make sure the page we are given has already been enhanced.
+			toPage.page({ role: settings.role });
+
+			// If the changePage request was sent from a hashChange event, check to see if the
+			// page is already within the urlHistory stack. If so, we'll assume the user hit
+			// the forward/back button and will try to match the transition accordingly.
 			if ( settings.fromHashChange ) {
-				urlHistory.direct({ url: url });
+				historyDir = options.direction === "back" ? -1 : 1;
 			}
 
-			return;
-		}
+			// Kill the keyboard.
+			// XXX_jblas: We need to stop crawling the entire document to kill focus. Instead,
+			//            we should be tracking focus with a delegate() handler so we already have
+			//            the element in hand at this point.
+			// Wrap this in a try/catch block since IE9 throw "Unspecified error" if document.activeElement
+			// is undefined when we are in an IFrame.
+			try {
+				if ( document.activeElement && document.activeElement.nodeName.toLowerCase() !== "body" ) {
+					$( document.activeElement ).blur();
+				} else {
+					$( "input:focus, textarea:focus, select:focus" ).blur();
+				}
+			} catch( e ) {}
 
-		// We need to make sure the page we are given has already been enhanced.
-		toPage.page({ role: settings.role });
+			// Record whether we are at a place in history where a dialog used to be - if so, do not add a new history entry and do not change the hash either
+			alreadyThere = false;
 
-		// If the changePage request was sent from a hashChange event, check to see if the
-		// page is already within the urlHistory stack. If so, we'll assume the user hit
-		// the forward/back button and will try to match the transition accordingly.
-		if ( settings.fromHashChange ) {
-			historyDir = options.direction === "back" ? -1 : 1;
-		}
+			// If we're displaying the page as a dialog, we don't want the url
+			// for the dialog content to be used in the hash. Instead, we want
+			// to append the dialogHashKey to the url of the current page.
+			if ( isDialog && active ) {
+				// on the initial page load active.url is undefined and in that case should
+				// be an empty string. Moving the undefined -> empty string back into
+				// urlHistory.addNew seemed imprudent given undefined better represents
+				// the url state
 
-		// Kill the keyboard.
-		// XXX_jblas: We need to stop crawling the entire document to kill focus. Instead,
-		//            we should be tracking focus with a delegate() handler so we already have
-		//            the element in hand at this point.
-		// Wrap this in a try/catch block since IE9 throw "Unspecified error" if document.activeElement
-		// is undefined when we are in an IFrame.
-		try {
-			if ( document.activeElement && document.activeElement.nodeName.toLowerCase() !== "body" ) {
-				$( document.activeElement ).blur();
-			} else {
-				$( "input:focus, textarea:focus, select:focus" ).blur();
-			}
-		} catch( e ) {}
+				// If we are at a place in history that once belonged to a dialog, reuse
+				// this state without adding to urlHistory and without modifying the hash.
+				// However, if a dialog is already displayed at this point, and we're
+				// about to display another dialog, then we must add another hash and
+				// history entry on top so that one may navigate back to the original dialog
+				if ( active.url &&
+					 active.url.indexOf( dialogHashKey ) > -1 &&
+					 $.mobile.activePage &&
+					 !$.mobile.activePage.hasClass( "ui-dialog" ) &&
+					 urlHistory.activeIndex > 0 ) {
+					settings.changeHash = false;
+					alreadyThere = true;
+				}
 
-		// Record whether we are at a place in history where a dialog used to be - if so, do not add a new history entry and do not change the hash either
-		alreadyThere = false;
+				// Normally, we tack on a dialog hash key, but if this is the location of a stale dialog,
+				// we reuse the URL from the entry
+				url = ( active.url || "" );
 
-		// If we're displaying the page as a dialog, we don't want the url
-		// for the dialog content to be used in the hash. Instead, we want
-		// to append the dialogHashKey to the url of the current page.
-		if ( isDialog && active ) {
-			// on the initial page load active.url is undefined and in that case should
-			// be an empty string. Moving the undefined -> empty string back into
-			// urlHistory.addNew seemed imprudent given undefined better represents
-			// the url state
+				// account for absolute urls instead of just relative urls use as hashes
+				if( !alreadyThere && url.indexOf("#") > -1 ) {
+					url += dialogHashKey;
+				} else {
+					url += "#" + dialogHashKey;
+				}
 
-			// If we are at a place in history that once belonged to a dialog, reuse
-			// this state without adding to urlHistory and without modifying the hash.
-			// However, if a dialog is already displayed at this point, and we're
-			// about to display another dialog, then we must add another hash and
-			// history entry on top so that one may navigate back to the original dialog
-			if ( active.url &&
-				active.url.indexOf( dialogHashKey ) > -1 &&
-				$.mobile.activePage &&
-				!$.mobile.activePage.hasClass( "ui-dialog" ) &&
-				urlHistory.activeIndex > 0 ) {
-				settings.changeHash = false;
-				alreadyThere = true;
-			}
-
-			// Normally, we tack on a dialog hash key, but if this is the location of a stale dialog,
-			// we reuse the URL from the entry
-			url = ( active.url || "" );
-
-			// account for absolute urls instead of just relative urls use as hashes
-			if( !alreadyThere && url.indexOf("#") > -1 ) {
-				url += dialogHashKey;
-			} else {
-				url += "#" + dialogHashKey;
+				// tack on another dialogHashKey if this is the same as the initial hash
+				// this makes sure that a history entry is created for this dialog
+				if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
+					url += dialogHashKey;
+				}
 			}
 
-			// tack on another dialogHashKey if this is the same as the initial hash
-			// this makes sure that a history entry is created for this dialog
-			if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
-				url += dialogHashKey;
+			// if title element wasn't found, try the page div data attr too
+			// If this is a deep-link or a reload ( active === undefined ) then just use pageTitle
+			newPageTitle = ( !active )? pageTitle : toPage.jqmData( "title" ) || toPage.children( ":jqmData(role='header')" ).find( ".ui-title" ).text();
+			if ( !!newPageTitle && pageTitle === document.title ) {
+				pageTitle = newPageTitle;
 			}
-		}
-
-		// if title element wasn't found, try the page div data attr too
-		// If this is a deep-link or a reload ( active === undefined ) then just use pageTitle
-		newPageTitle = ( !active )? pageTitle : toPage.jqmData( "title" ) || toPage.children( ":jqmData(role='header')" ).find( ".ui-title" ).text();
-		if ( !!newPageTitle && pageTitle === document.title ) {
-			pageTitle = newPageTitle;
-		}
-		if ( !toPage.jqmData( "title" ) ) {
-			toPage.jqmData( "title", pageTitle );
-		}
-
-		// Make sure we have a transition defined.
-		settings.transition = settings.transition ||
-			( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined ) ||
-			( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
-
-		//add page to history stack if it's not back or forward
-		if ( !historyDir && alreadyThere ) {
-			urlHistory.getActive().pageUrl = pageUrl;
-		}
-
-		// Set the location hash.
-		if ( url && !settings.fromHashChange ) {
-
-			// rebuilding the hash here since we loose it earlier on
-			// TODO preserve the originally passed in path
-			if( !path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
-				url = "#" + url;
+			if ( !toPage.jqmData( "title" ) ) {
+				toPage.jqmData( "title", pageTitle );
 			}
 
-			// TODO the property names here are just silly
-			params = {
-				transition: settings.transition,
-				title: pageTitle,
-				pageUrl: pageUrl,
-				role: settings.role
-			};
+			// Make sure we have a transition defined.
+			settings.transition = settings.transition ||
+				( ( historyDir && !activeIsInitialPage ) ? active.transition : undefined ) ||
+				( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
-			if ( settings.changeHash !== false && $.mobile.hashListeningEnabled ) {
-				$.mobile.navigate( url, params, true);
-			} else if ( toPage[ 0 ] !== $.mobile.firstPage[ 0 ] ) {
-				$.mobile.navigate.history.add( url, params );
+			//add page to history stack if it's not back or forward
+			if ( !historyDir && alreadyThere ) {
+				urlHistory.getActive().pageUrl = pageUrl;
 			}
-		}
 
-		//set page title
-		document.title = pageTitle;
+			// Set the location hash.
+			if ( url && !settings.fromHashChange ) {
 
-		//set "toPage" as activePage
-		$.mobile.activePage = toPage;
+				// rebuilding the hash here since we loose it earlier on
+				// TODO preserve the originally passed in path
+				if( !path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
+					url = "#" + url;
+				}
 
-		// If we're navigating back in the URL history, set reverse accordingly.
-		settings.reverse = settings.reverse || historyDir < 0;
+				// TODO the property names here are just silly
+				params = {
+					transition: settings.transition,
+					title: pageTitle,
+					pageUrl: pageUrl,
+					role: settings.role
+				};
 
-		transitionDeferred = $.Deferred();
+				if ( settings.changeHash !== false && $.mobile.hashListeningEnabled ) {
+					$.mobile.navigate( url, params, true);
+				} else if ( toPage[ 0 ] !== $.mobile.firstPage[ 0 ] ) {
+					$.mobile.navigate.history.add( url, params );
+				}
+			}
+
+			//set page title
+			document.title = pageTitle;
+
+			//set "toPage" as activePage
+			$.mobile.activePage = toPage;
+
+			// If we're navigating back in the URL history, set reverse accordingly.
+			settings.reverse = settings.reverse || historyDir < 0;
+
+			transitionDeferred = $.Deferred();
 
 			this.transition(toPage, fromPage, {
 				transition: settings.transition,
@@ -1008,25 +1005,25 @@ define( [
 				deferred: transitionDeferred
 			});
 
-		transitionDeferred.done(function( name, reverse, $to, $from, alreadyFocused ) {
-			removeActiveLinkClass();
+			transitionDeferred.done(function( name, reverse, $to, $from, alreadyFocused ) {
+				removeActiveLinkClass();
 
-			//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
-			if ( settings.duplicateCachedPage ) {
-				settings.duplicateCachedPage.remove();
-			}
+				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
+				if ( settings.duplicateCachedPage ) {
+					settings.duplicateCachedPage.remove();
+				}
 
-			// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
-			// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
-			// despite visibility: hidden addresses issue #2965
-			// https://github.com/jquery/jquery-mobile/issues/2965
-			if ( !alreadyFocused ) {
-				$.mobile.focusPage( toPage );
-			}
+				// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
+				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
+				// despite visibility: hidden addresses issue #2965
+				// https://github.com/jquery/jquery-mobile/issues/2965
+				if ( !alreadyFocused ) {
+					$.mobile.focusPage( toPage );
+				}
 
-			releasePageTransitionLock();
-			mpc.trigger( "pagechange", triggerData );
-		});
+				releasePageTransitionLock();
+				mpc.trigger( "pagechange", triggerData );
+			});
 
 		}
 
