@@ -82,7 +82,7 @@ $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 	},
 
 	refresh: function() {
-		var $el = this.element,
+		var $el = this.container(),
 			els = $el.find( ".ui-btn" ).not( ".ui-slider-handle" ),
 			create = this._initialRefresh;
 		if ( $.mobile.checkboxradio ) {
