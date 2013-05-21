@@ -26,28 +26,36 @@
 		<button data-inline="true" data-icon="arrow-r" data-iconpos="right">are</button>
 		<input type="button" value="buttons" data-inline="true" data-icon="arrow-r" data-iconpos="right">
 
-		<ul data-role="listview" data-inset="true">
+		<ul data-role="listview" data-inset="true" data-theme="a">
 			<li>I</li>
 			<li data-role="list-divider">Divider<span class="ui-li-count">3</span></li>
 			<li>am</li>
 			<li>static<span class="ui-li-count">6</span></li>
+			<li data-theme="b">I</li>
+			<li data-role="list-divider" data-theme="b">Divider<span class="ui-li-count">3</span></li>
+			<li data-theme="b">am</li>
+			<li data-theme="b">static<span class="ui-li-count">6</span></li>
 		</ul>
 
-		<ul data-role="listview" data-inset="true">
+		<ul data-role="listview" data-inset="true" data-theme="a">
 			<li><a href="#">We</a></li>
 			<li data-role="list-divider">Divider</li>
 			<li><a href="#">have<span class="ui-li-count">12</span></a></li>
 			<li><a href="#">links</a></li>
+			<li data-theme="b"><a href="#">We</a></li>
+			<li data-role="list-divider" data-theme="b">Divider</li>
+			<li data-theme="b"><a href="#">have<span class="ui-li-count">12</span></a></li>
+			<li data-theme="b"><a href="#">links</a></li>
 		</ul>
 		
-		<ul data-role="listview" data-split-icon="gear" data-inset="true">
+		<ul data-role="listview" data-split-icon="gear" data-inset="true" data-theme="a">
 			<li><a href="#">
 				<img src="../../_assets/img/album-bb.jpg" />
 				<h2>Broken Bells</h2>
 				<p>Broken Bells</p></a>
 				<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 			</li>
-			<li><a href="#">
+			<li data-theme="b"><a href="#">
 				<img src="../../_assets/img/album-hc.jpg" />
 				<h2>Warning</h2>
 				<p>Hot Chip</p></a>
@@ -57,12 +65,12 @@
 				<img src="../../_assets/img/album-p.jpg" />
 				<h2>Wolfgang Amadeus Phoenix</h2>
 				<p>Phoenix</p></a>
-				<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+				<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop" data-theme="b">Purchase album</a>
 			</li>
 		</ul>
 		
 		<form>
-			<ul data-role="listview" data-inset="true">
+			<ul data-role="listview" data-inset="true" data-theme="a">
 				<li data-role="fieldcontain">
 					<label for="name2">Text Input:</label>
 					<input type="text" name="name2" id="name2" value="" data-clear-btn="true">
@@ -109,10 +117,10 @@
 			</ul>
 		</form>
 		
-		<fieldset data-role="controlgroup">
+		<fieldset data-role="controlgroup" data-theme="a">
 			<legend>Controlgroup:</legend>
 			<button data-icon="home" data-iconpos="right">One</button>
-			<input type="button" data-icon="back" data-iconpos="right" value="Two">
+			<input type="button" data-icon="back" data-iconpos="right" value="Two" data-theme="b">
 			<a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
 			<label for="select-v-1e">Select</label>
 			<select name="select-v-1e" id="select-v-1e">
@@ -156,7 +164,7 @@
 				<h3>Section 1</h3>
 				<p>I'm the collapsible content for section 1</p>
 			</div>
-			<div data-role="collapsible" data-theme="a">
+			<div data-role="collapsible">
 				<h3>Section 2</h3>
 				<p>I'm the collapsible content for section 2</p>
 			</div>
