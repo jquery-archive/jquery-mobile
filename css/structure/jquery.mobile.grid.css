@@ -1,8 +1,15 @@
 /* content configurations. */
-[class*="ui-grid-"] {
+.ui-grid-a,
+.ui-grid-b,
+.ui-grid-c,
+.ui-grid-d {
 	overflow: hidden;
 }
-[class*="ui-grid-"] [class*="ui-block-"] {
+.ui-block-a,
+.ui-block-b,
+.ui-block-c,
+.ui-block-d,
+.ui-block-e {
 	margin: 0;
 	padding: 0;
 	border: 0;
