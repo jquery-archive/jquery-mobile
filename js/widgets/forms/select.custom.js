@@ -18,9 +18,7 @@ define( [
 	"./select",
 	"../listview",
 	"../page",
-	"../popup",
-	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
-	"../page.sections" ], function( jQuery ) {
+	"../popup" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var extendSelect = function( widget ) {

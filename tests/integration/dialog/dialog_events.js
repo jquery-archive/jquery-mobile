@@ -124,9 +124,9 @@
 
 				// Assert dialog theme inheritance (issue 1375):
 				ok( dialog.hasClass( "ui-body-c" ), "Expected explicit theme ui-body-c" );
-				ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-" + $.mobile.page.prototype.options.footerTheme ), "Expected header to inherit from $.mobile.page.prototype.options.headerTheme" );
+				ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-" + $.mobile.toolbar.prototype.options.theme ), "Expected header to inherit from $.mobile.toolbar.prototype.options.theme" );
 				ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-" + $.mobile.page.prototype.options.contentTheme ), "Expect content to inherit from $.mobile.page.prototype.options.contentTheme" );
-				ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-" + $.mobile.page.prototype.options.footerTheme ), "Expected footer to inherit from $.mobile.page.prototype.options.footerTheme" );
+				ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-" + $.mobile.toolbar.prototype.options.theme ), "Expected footer to inherit from $.mobile.toolbar.prototype.options.theme" );
 
 				start();
 			}
@@ -155,9 +155,9 @@
 				// Assert dialog theme inheritance (issue 1375):
 				ok( dialog.hasClass( "ui-body-e" ), "Expected explicit theme ui-body-e" );
 				ok( !dialog.hasClass( "ui-overlay-b" ), "Expected no theme ui-overlay-b" );
-				ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-" + $.mobile.page.prototype.options.footerTheme ), "Expected header to inherit from $.mobile.page.prototype.options.headerTheme" );
+				ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-" + $.mobile.toolbar.prototype.options.theme ), "Expected header to inherit from $.mobile.page.prototype.options.headerTheme" );
 				ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-e" ), "Expect content to inherit from data-theme" );
-				ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-" + $.mobile.page.prototype.options.footerTheme ), "Expected footer to inherit from $.mobile.page.prototype.options.footerTheme" );
+				ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-" + $.mobile.toolbar.prototype.options.theme ), "Expected footer to inherit from $.mobile.page.prototype.options.footerTheme" );
 
 				start();
 			}
@@ -179,13 +179,12 @@
 
 			function() {
 				var dialog = $( "#dialog-c" );
-
 				// Assert dialog theme inheritance (issue 1375):
 				ok( dialog.hasClass( "ui-body-e" ), "Expected explicit theme ui-body-e" );
 				ok( dialog.hasClass( "ui-overlay-b" ), "Expected explicit theme ui-overlay-b" );
-				ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-" + $.mobile.page.prototype.options.footerTheme ), "Expected header to inherit from $.mobile.page.prototype.options.headerTheme" );
+				ok( dialog.find( ":jqmData(role=header)" ).hasClass( "ui-bar-" + $.mobile.toolbar.prototype.options.theme ), "Expected header to inherit from $.mobile.page.prototype.options.headerTheme" );
 				ok( dialog.find( ":jqmData(role=content)" ).hasClass( "ui-body-" + $.mobile.page.prototype.options.contentTheme ), "Expect content to inherit from $.mobile.page.prototype.options.contentTheme" );
-				ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-" + $.mobile.page.prototype.options.footerTheme ), "Expected footer to inherit from $.mobile.page.prototype.options.footerTheme" );
+				ok( dialog.find( ":jqmData(role=footer)" ).hasClass( "ui-bar-" + $.mobile.toolbar.prototype.options.theme ), "Expected footer to inherit from $.mobile.page.prototype.options.footerTheme" );
 
 				start();
 			}

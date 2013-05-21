@@ -137,21 +137,19 @@
 			<div data-demo-html="true">
 				<a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-icon="check" data-theme="a" data-transition="pop">Sign in</a>
 
-				<div data-role="popup" id="popupMenu" data-theme="a">
-					<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
-						<form>
-							<div style="padding:10px 20px;">
-							  <h3>Please sign in</h3>
-					          <label for="un" class="ui-hidden-accessible">Username:</label>
-					          <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a" />
+				<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+					<form>
+						<div style="padding:10px 20px;">
+							<h3>Please sign in</h3>
+					        <label for="un" class="ui-hidden-accessible">Username:</label>
+					        <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a" />
 
-					          <label for="pw" class="ui-hidden-accessible">Password:</label>
-					          <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a" />
+					        <label for="pw" class="ui-hidden-accessible">Password:</label>
+					        <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a" />
 
-					    	  <button type="submit" data-theme="b" data-icon="check">Sign in</button>
-							</div>
-						</form>
-					</div>
+					    	<button type="submit" data-theme="b" data-icon="check">Sign in</button>
+						</div>
+					</form>
 				</div>
 			</div><!--/demo-html -->
 

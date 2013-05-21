@@ -33,7 +33,8 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			corners:	false,
 			shadow:		false,
 			inline:     true,
-			iconpos:	iconpos
+			iconpos:	iconpos,
+			theme: "a"
 		});
 
 		$navbar.delegate( "a", "vclick", function( event ) {

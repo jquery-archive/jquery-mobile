@@ -638,10 +638,11 @@ h2.jqm-home-widget {
 	}
 	
 	/* Footer */
+	.ui-page .jqm-footer{
+		position:absolute;
+	}
 	.jqm-footer {
 		overflow: hidden;
-		position: absolute;
-		bottom: 0;
 		width: 100%;		
 	}
 	.jqm-footer p {
