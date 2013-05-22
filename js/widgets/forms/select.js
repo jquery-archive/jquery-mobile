@@ -53,7 +53,13 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function() {
-		var classes = "";
+		var classes = "",
+			root = this.element.closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" );
+
+		if( root.length === 0 ) {
+			root = this.element.parents().last();
+		}
+
 		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
 		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
@@ -68,7 +74,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
-		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
+		this.label = root.find( "label[for='" + this.selectID + "']" ).addClass( "ui-select" );
 		this.isMultiple = this.select[ 0 ].multiple;
 		if ( !this.options.theme ) {
 			this.options.theme = $.mobile.getInheritedTheme( this.select, "c" );

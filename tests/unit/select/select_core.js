@@ -201,6 +201,20 @@
 		ok( $( "#native-select-choice-few-container label" ).hasClass( "ui-select" ), "created label has ui-select class" );
 	});
 
+	test( "make sure the label for the select gets the ui-select class when independent from browser DOM", function(){
+		var unenhancedSelect = $(
+				"<div>" +
+				"  <label for='sample'>Sample</label>" +
+				"  <select id='sample'>" +
+				"    <option>Test</option>" +
+				"  </select>" +
+				"</div>");
+
+		unenhancedSelect.find("select").selectmenu();
+
+		ok( unenhancedSelect.find("label").hasClass( "ui-select" ), "created label has ui-select class" );
+	});
+
 	module("Non native menus", {
 		setup: function() {
 			$.mobile.selectmenu.prototype.options.nativeMenu = false;
