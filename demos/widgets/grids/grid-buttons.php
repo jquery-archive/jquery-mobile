@@ -82,7 +82,7 @@
                         <select id="grid-select-1" name="grid-select-1" data-shadow="false">
                             <option>Select</option>
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
