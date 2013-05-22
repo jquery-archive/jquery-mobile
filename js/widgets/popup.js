@@ -267,12 +267,12 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		var classes = ( dst.attr( "class" ) || "" ).split( " " ),
 			currentTheme = null,
 			matches,
-			inheritTheme = ( theme === null && prefix === "body" ),
+			theme = ( theme === null && prefix === "body" ) ? "inherit" : theme,
 			themeStr = String( theme );
 
 		while ( classes.length > 0 ) {
 			currentTheme = classes.pop();
-			matches = ( new RegExp( "^ui-" + prefix + "-([a-z]|/inherit/)$" ) ).exec( currentTheme );
+			matches = ( new RegExp( "^ui-" + prefix + "-([a-z]|inherit)$" ) ).exec( currentTheme );
 			if ( matches && matches.length > 1 ) {
 				currentTheme = matches[ 1 ];
 				break;
@@ -281,12 +281,9 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			}
 		}
 
-		if ( theme !== currentTheme || inheritTheme ) {
+		if ( theme !== currentTheme ) {
 			dst.removeClass( "ui-" + prefix + "-" + currentTheme );
-			if ( theme !== "none" ) {
-				if ( inheritTheme ) {
-					themeStr = "inherit";
-				}
+			if ( ! ( theme === null || theme === "none" ) ) {
 				dst.addClass( "ui-" + prefix + "-" + themeStr );
 			}
 		}
