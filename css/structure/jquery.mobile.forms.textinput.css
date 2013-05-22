@@ -2,7 +2,8 @@
 .ui-input-search {
 	margin: .5em 0;
 	background-image: none;
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 }
 .ui-input-text input,
 .ui-input-search input,
@@ -22,7 +23,7 @@ textarea.ui-input-text {
 .ui-input-search input {
 	margin: 0;
 	text-align: left; /* Opera aligns type="date" right by default */
-	border: none;
+	border: 0;
 	background: transparent none;
 	-webkit-appearance: none;
 	-webkit-border-radius: inherit;

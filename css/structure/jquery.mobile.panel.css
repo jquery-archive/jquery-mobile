@@ -37,7 +37,7 @@
 	position: relative;
 	left: 0;
 	min-height: inherit;
-	border: none;
+	border: 0;
 	z-index: 999;
 }
 .ui-panel-content-wrap-display-overlay,

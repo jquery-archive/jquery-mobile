@@ -27,7 +27,8 @@ input.ui-slider-input {
 	height: 20px;
 	line-height: 20px;
 	background-image: none;
-	border: 1px solid;
+	border-width: 1px;
+	border-style: solid;
 	outline: 0;
 	text-align: center;
 	vertical-align: text-bottom;

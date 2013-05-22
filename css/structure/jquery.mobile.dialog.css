@@ -18,7 +18,7 @@
 	margin: 0;
 }
 .ui-dialog-contain > .ui-header {
-	border: none;
+	border: 0;
 	overflow: hidden;
 	z-index: 10; 
 	padding: 0;

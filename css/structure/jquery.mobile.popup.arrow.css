@@ -185,7 +185,7 @@
 
 .arrow-background {
 	position: absolute;
-	border: none;
+	border: 0;
 }
 
 .arrow-container.ie .arrow-background {

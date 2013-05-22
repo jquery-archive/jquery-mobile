@@ -14,11 +14,12 @@
 	content: "";
 	display: block;
 	margin-top: 1em;
-	border-bottom: 1px solid;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
 }
 .ui-listview li.ui-field-contain:after,
 .ui-field-contain:last-child:after {
-	border: none;
+	border: 0;
 	box-shadow: none;
 }
 @media (min-width: 28em) {
@@ -35,7 +36,7 @@
 	.ui-field-contain:after {
 		display: table;
 		clear: both;
-		border: none;
+		border: 0;
 		box-shadow: none;
 	}
 	.ui-field-contain > label,
