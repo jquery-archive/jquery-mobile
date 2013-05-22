@@ -30,7 +30,7 @@
                         <label for="select-custom-1">Basic:</label>
                         <select name="select-custom-1" id="select-custom-1" data-native-menu="false">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -100,7 +100,7 @@
                         <label for="select-custom-2">Mini sized:</label>
                         <select name="select-custom-2" id="select-custom-2" data-native-menu="false" data-mini="true">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -112,7 +112,7 @@
                         <label for="select-custom-3">Icon left:</label>
                         <select name="select-custom-3" id="select-custom-3" data-native-menu="false" data-iconpos="left">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -125,7 +125,7 @@
                         <select name="select-custom-21" id="select-custom-21" data-native-menu="false">
                             <option value="choose-one" data-placeholder="true">Choose one...</option>
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -138,7 +138,7 @@
                         <select name="select-custom-22" id="select-custom-22" data-native-menu="false">
                             <option>Choose one...</option>
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -151,7 +151,7 @@
                         <select name="select-custom-23" id="select-custom-23" data-native-menu="false">
                             <option></option>
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -163,7 +163,7 @@
                         <label for="select-custom-17">1 option selected:</label>
                         <select name="select-custom-17" id="select-custom-17" data-native-menu="false">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3" selected="selected">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -175,7 +175,7 @@
                         <label for="select-custom-18">1 option disabled:</label>
                         <select name="select-custom-18" id="select-custom-18" data-native-menu="false">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3" disabled="disabled">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -188,7 +188,7 @@
                         <select name="select-custom-19" id="select-custom-19" multiple="multiple" data-native-menu="false">
                             <option>Choose options</option>
                             <option value="1">The 1st Option</option>
-                            <option value="2" selected="selected">The 2nt Option</option>
+                            <option value="2" selected="selected">The 2nd Option</option>
                             <option value="3" selected="selected">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -261,7 +261,7 @@
                             <option>Choose...</option>
                             <optgroup label="Group 1">
                                 <option value="1">The 1st Option</option>
-                                <option value="2">The 2nt Option</option>
+                                <option value="2">The 2nd Option</option>
                                 <option value="3">The 3rd Option</option>
                                 <option value="4">The 4th Option</option>
                             </optgroup>
