@@ -815,24 +815,27 @@ define( [
 				// params have access to them in the event bindings for the page
 				// life cycle See issue #5085
 				settings.target = toPage;
+				settings.deferred = $.Deferred();
 
-				$.mobile.loadPage( toPage, settings)
-					.done(function( url, options, newPage ) {
-						isPageTransitioning = false;
+				this.load( toPage, settings );
 
-						// store the original absolute url so that it can be provided
-						// to events in the triggerData of the subsequent changePage call
-						newPage.data( "absUrl", triggerData.absUrl );
-						$.mobile.changePage( newPage, options );
-					})
-					.fail($.proxy(function(/* url, options */) {
-						//clear out the active button state
-						removeActiveLinkClass( true );
+				settings.deferred.done(function( url, options, newPage ) {
+					isPageTransitioning = false;
 
-						//release transition lock so navigation is free again
-						releasePageTransitionLock();
-						this.element.trigger( "pagechangefailed", triggerData );
-					}, this));
+					// store the original absolute url so that it can be provided
+					// to events in the triggerData of the subsequent changePage call
+					newPage.data( "absUrl", triggerData.absUrl );
+					$.mobile.changePage( newPage, options );
+				});
+
+				settings.deferred.fail($.proxy(function(/* url, options */) {
+					//clear out the active button state
+					removeActiveLinkClass( true );
+
+					//release transition lock so navigation is free again
+					releasePageTransitionLock();
+					this.element.trigger( "pagechangefailed", triggerData );
+				}, this));
 
 				return;
 			}
