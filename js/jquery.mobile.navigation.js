@@ -767,7 +767,7 @@ define( [
 
 					//release transition lock so navigation is free again
 					releasePageTransitionLock();
-					this.element.trigger( "pagechangefailed", triggerData );
+					this._triggerWithDeprecated( "changefailed", triggerData );
 				}, this));
 
 		},
