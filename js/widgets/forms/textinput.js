@@ -12,6 +12,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 $.widget( "mobile.textinput", $.mobile.widget, {
 	options: {
 		theme: null,
+		corners: true,
 		mini: false,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
@@ -26,6 +27,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			input = this.element,
 			o = this.options,
 			themeclass  = " ui-body-" + ( o.theme ?  o.theme : "inherit" ),
+			cornerclass = o.corners ? " ui-corner-all" : "",
 			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = input[ 0 ].tagName === "TEXTAREA",
@@ -66,7 +68,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		if ( isSearch || inputNeedsWrap ) {
 			classes = isSearch ? "ui-input-search" : "ui-input-text";
 			
-			focusedEl = input.wrap( "<div class='" + classes + themeclass + miniclass + " ui-shadow-inset ui-corner-all ui-btn-shadow'></div>" ).parent();
+			focusedEl = input.wrap( "<div class='" + classes + themeclass + miniclass + cornerclass + " ui-shadow-inset'></div>" ).parent();
 		}
 
 
@@ -95,7 +97,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			input.bind( "paste cut keyup input focus change blur", toggleClear );
 		} else if ( !inputNeedsWrap && !isSearch ) {
-			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
+			input.addClass( "ui-shadow-inset" + themeclass + miniclass + cornerclass );
 		}
 
 		input.focus(function() {
