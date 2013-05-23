@@ -20,6 +20,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	options: {
 		theme: null,
 		trackTheme: null,
+		corners: true,
 		mini: false,
 		highlight: false
 	},
@@ -31,6 +32,8 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			control = this.element,
 			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme", true ),
 			trackThemeClass = trackTheme ? " ui-body-" + trackTheme : "",
+			cornerClass = ( this.options.corners || control.jqmData( "corners" ) ) ? " ui-corner-all" : "",
+			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
 			cType = control[ 0 ].nodeName.toLowerCase(),
 			isToggleSwitch = ( cType === "select" ),
 			isRangeslider = control.parent().is( ":jqmData(role='rangeslider')" ),
@@ -42,7 +45,6 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			min = !isToggleSwitch ? parseFloat( control.attr( "min" ) ) : 0,
 			max =  !isToggleSwitch ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
-			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
 			domHandle = document.createElement( "a" ),
 			handle = $( domHandle ),
 			domSlider = document.createElement( "div" ),
@@ -62,7 +64,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = [ this.isToggleSwitch ? "ui-slider ui-slider-track ui-shadow-inset " : "ui-slider-track ui-shadow-inset ", selectClass, trackThemeClass, " ui-corner-all", miniClass ].join( "" );
+		domSlider.className = [ this.isToggleSwitch ? "ui-slider ui-slider-track ui-shadow-inset " : "ui-slider-track ui-shadow-inset ", selectClass, trackThemeClass, cornerClass, miniClass ].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -79,6 +81,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		$.extend( this, {
 			slider: slider,
 			handle: handle,
+			control: control,
 			type: cType,
 			step: step,
 			max: max,
@@ -357,6 +360,8 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			themeClass =  theme ? " ui-btn-" + theme : "",
 			trackTheme = this.options.trackTheme || parentTheme,
 			trackThemeClass = trackTheme ? " ui-body-" + trackTheme : "",
+			cornerClass = this.options.corners ? " ui-corner-all" : "",
+			miniClass = this.options.mini ? " ui-mini" : "",
 			left, width, data, tol,
 			pxStep, percent,
 			control, isInput, optionElements, min, max, step,
@@ -364,7 +369,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch ui-slider-track ui-shadow-inset" : "ui-slider-track ui-shadow-inset", trackThemeClass, " ui-corner-all", ( this.options.mini ) ? " ui-mini" : "" ].join( "" );
+		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch ui-slider-track ui-shadow-inset" : "ui-slider-track ui-shadow-inset", trackThemeClass, cornerClass, miniClass ].join( "" );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
@@ -508,6 +513,28 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		}
 	},
 
+	_setTheme: function( value ) {
+		this.handle
+			.removeClass( "ui-btn-" + this.options.theme )
+			.addClass( "ui-btn-" + value );
+
+		var currentTheme = this.options.theme ? this.options.theme : "inherit",
+			newTheme = value ? value : "inherit";
+			
+		this.control
+			.removeClass( "ui-body-" + currentTheme )
+			.addClass( "ui-body-" + newTheme );
+	},
+
+	_setTrackTheme: function( value ) {
+		var currentTrackTheme = this.options.trackTheme ? this.options.trackTheme : "inherit",
+			newTrackTheme = value ? value : "inherit";
+			
+		this.slider
+			.removeClass( "ui-body-" + currentTrackTheme )
+			.addClass( "ui-body-" + newTrackTheme );
+	},
+	
 	_setMini: function( value ) {
 		value = !!value;
 		if ( !this.isToggleSwitch && !this.isRangeslider ) {
@@ -516,18 +543,13 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		}
 		this.slider.toggleClass( "ui-mini", value );
 	},
-
-	_setTheme: function( value ) {
-		this.handle.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + value );
-	},
-
-	_setTrackTheme: function( value ) {
-		var currentTheme = this.options.trackTheme ? this.options.trackTheme : "inherit",
-			newTheme = value ? value : "inherit";
-			
-		this.slider
-			.removeClass( "ui-fill-" + currentTheme )
-			.addClass( "ui-fill-" + newTheme );
+	
+	_setCorners: function( value ) {
+		this.slider.toggleClass( "ui-corner-all", value );
+		
+		if ( !this.isToggleSwitch ) {
+			this.control.toggleClass( "ui-corner-all", value );
+		}
 	},
 
 	_setDisabled: function( value ) {

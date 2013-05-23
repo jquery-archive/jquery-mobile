@@ -19,6 +19,7 @@ define( [ "jquery",
 		options: {
 			theme: null,
 			trackTheme: null,
+			corners: true,
 			mini: false,
 			highlight: true
 		},
@@ -135,6 +136,7 @@ define( [ "jquery",
 				theme: o.theme,
 				trackTheme: o.trackTheme,
 				disabled: o.disabled,
+				corners: o.corners,
 				mini: o.mini,
 				highlight: o.highlight
 			}).slider( "refresh" );
