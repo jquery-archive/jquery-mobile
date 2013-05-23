@@ -31,6 +31,7 @@ textarea.ui-input-text {
 }
 textarea.ui-input-text {
 	height: 3.125em;
+	overflow: auto;
 	resize: vertical;
 	-webkit-transition: height 200ms linear;
 	-moz-transition: height 200ms linear;
@@ -97,10 +98,10 @@ textarea.ui-mini {
 textarea.ui-input-text::-moz-placeholder {
 	color: #aaa;
 }
-/* Same for IE10 (because it's a pseudo class we need to take specificity into account) */
+/* Same for IE10 */
 .ui-input-text input:-ms-input-placeholder,
 .ui-input-search input:-ms-input-placeholder,
-.ui-mobile textarea.ui-input-text:-ms-input-placeholder {
+textarea.ui-input-text:-ms-input-placeholder {
 	color: #aaa;
 }
 
