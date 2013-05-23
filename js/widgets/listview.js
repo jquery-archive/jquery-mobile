@@ -154,11 +154,9 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					itemClass = "ui-li-static ui-body-" + ( itemTheme ? itemTheme : "inherit" );
 				}
 				if ( ol && value ) {
-					var elem = ( a.length && !isDivider ) ? a : item;
-					
 					newStartCount = parseInt( value , 10 ) - 1;
 					
-					elem.css( "counter-reset", "listnumbering " + newStartCount );
+					item.css( "counter-reset", "listnumbering " + newStartCount );
 				}
 			}
 
