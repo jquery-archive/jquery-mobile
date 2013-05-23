@@ -92,11 +92,11 @@
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
-.ui-listview > li.ui-first-child .ui-li-thumb:not(.ui-li-icon) {
+.ui-listview > li.ui-first-child img:first-child:not(.ui-li-icon) {
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;	
 }
-.ui-listview > li.ui-last-child .ui-li-thumb:not(.ui-li-icon) {
+.ui-listview > li.ui-last-child img:first-child:not(.ui-li-icon) {
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;	
 }
