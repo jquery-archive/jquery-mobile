@@ -4,7 +4,7 @@
 (function($){
 	// TODO !! reset the prototype after every test
 
-	var mockEvent, proto = $.mobile.content.prototype;
+	var mockEvent, proto = $.mobile.content.prototype, reset = $.extend( {}, proto );
 
 	proto.element = $( "<div>" );
 
@@ -429,5 +429,82 @@
 		};
 
 		proto._include( page, {role: "foo"} );
+	});
+
+	module( "Content Widget _loadUrl", {
+		setup: function() {
+			proto = reset;
+			proto.element = $( "<div>" );
+			reset = $.extend( {}, proto );
+		}
+	});
+
+	test( "should call change method on success", function() {
+		expect( 3 );
+
+		proto.load = function( to, settings ) {
+			ok( true, "load called" );
+
+			// resolve with a url, options, and new content
+			settings.deferred.resolve( "foo", {}, $( "<div id='newcontent'>" ) );
+		};
+
+		proto.change = function( content ) {
+			ok( content.is( "#newcontent" ), "new content is passed through" );
+			ok( true, "change called" );
+		};
+
+		proto._loadUrl( "foo", {}, {} );
+	});
+
+	test( "should trigger contentchangefailed on failure", function() {
+		expect( 2 );
+
+		proto.load = function( to, settings ) {
+			ok( true, "load called" );
+
+			// reject with a url, options, and new content
+			settings.deferred.reject( "foo", {} );
+		};
+
+		proto.element.bind( "contentchangefailed", function() {
+			ok( true, "contentchangefailed was triggered" );
+		});
+
+		proto._loadUrl( "foo", {}, {} );
+	});
+
+	test( "should release page transition lock on failure", function() {
+		expect( 2 );
+
+		proto._releaseTransitionLock = function() {
+			ok( true, "release lock called" );
+		};
+
+		proto.load = function( to, settings ) {
+			ok( true, "load called" );
+
+			// reject with a url, options, and new content
+			settings.deferred.reject( "foo", {} );
+		};
+
+		proto._loadUrl( "foo", {}, {} );
+	});
+
+	test( "should remove active link class on failure", function() {
+		expect( 2 );
+
+		proto._removeActiveLinkClass = function() {
+			ok( true, "remove active link called" );
+		};
+
+		proto.load = function( to, settings ) {
+			ok( true, "load called" );
+
+			// reject with a url, options, and new content
+			settings.deferred.reject( "foo", {} );
+		};
+
+		proto._loadUrl( "foo", {}, {} );
 	});
 })(jQuery);

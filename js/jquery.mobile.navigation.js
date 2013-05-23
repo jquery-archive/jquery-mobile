@@ -741,6 +741,16 @@ define( [
 			}, this));
 		},
 
+		_releaseTransitionLock: function() {
+			//release transition lock so navigation is free again
+			releasePageTransitionLock();
+		},
+
+		_removeActiveLinkClass: function( force ) {
+			//clear out the active button state
+			removeActiveLinkClass( force );
+		},
+
 		_loadUrl: function( toPage, triggerData, settings ) {
 				// preserve the original target as the dataUrl value will be
 				// simplified eg, removing ui-state, and removing query params
@@ -762,11 +772,8 @@ define( [
 				}, this));
 
 				settings.deferred.fail($.proxy(function(/* url, options */) {
-					//clear out the active button state
-					removeActiveLinkClass( true );
-
-					//release transition lock so navigation is free again
-					releasePageTransitionLock();
+					this._removeActiveLinkClass( true );
+					this._releaseTransitionLock();
 					this._triggerWithDeprecated( "changefailed", triggerData );
 				}, this));
 
