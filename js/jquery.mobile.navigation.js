@@ -767,7 +767,8 @@ define( [
 
 				// store the original absolute url so that it can be provided
 				// to events in the triggerData of the subsequent changePage call
-				content.data( "absUrl", triggerData.absUrl );
+				options.absUrl = triggerData.absUrl;
+
 				this.change( content, options );
 			}, this));
 
@@ -809,7 +810,7 @@ define( [
 			} else {
 				// if the toPage is a jQuery object grab the absolute url stored
 				// in the loadPage callback where it exists
-				triggerData.absUrl = toPage.data( "absUrl" );
+				triggerData.absUrl = settings.absUrl;
 			}
 
 			// Let listeners know we're about to change the current page.
