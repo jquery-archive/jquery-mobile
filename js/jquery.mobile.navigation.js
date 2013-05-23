@@ -788,22 +788,13 @@ define( [
 			}
 
 			var settings = $.extend( {}, $.mobile.changePage.defaults, options ),
-			  isToPageString,
-			  mpc, pbcEvent, triggerData,
-			  fromPage, url, pageUrl, fileUrl,
-			  active, activeIsInitialPage,
-			  historyDir, pageTitle, isDialog,
-			  alreadyThere,
-			  newPageTitle,
-			  params,
-			  cssTransitionDeferred;
+			  isToPageString, triggerData, pbcEvent;
 
 			// Make sure we have a fromPage.
 			settings.fromPage = settings.fromPage || $.mobile.activePage;
 
 			isToPageString = (typeof toPage === "string");
 
-			mpc = this.element;
 			pbcEvent = new $.Event( "pagebeforechange" );
 			triggerData = { toPage: toPage, options: settings };
 
@@ -822,7 +813,7 @@ define( [
 			}
 
 			// Let listeners know we're about to change the current page.
-			mpc.trigger( pbcEvent, triggerData );
+			this.element.trigger( pbcEvent, triggerData );
 
 			// If the default behavior is prevented, stop here!
 			if ( pbcEvent.isDefaultPrevented() ) {
@@ -848,7 +839,19 @@ define( [
 			if ( isToPageString ) {
 				this._loadUrl( toPage, triggerData, settings );
 				return;
+			} else {
+				this.transition( toPage, triggerData, settings );
 			}
+		},
+
+		transition: function( toPage, triggerData, settings ) {
+			var fromPage, url, pageUrl, fileUrl,
+			  active, activeIsInitialPage,
+			  historyDir, pageTitle, isDialog,
+			  alreadyThere,
+			  newPageTitle,
+			  params,
+			  cssTransitionDeferred;
 
 			// If we are going to the first-page of the application, we need to make
 			// sure settings.dataUrl is set to the application document url. This allows
@@ -884,7 +887,7 @@ define( [
 			// animation transition is used.
 			if ( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
 				isPageTransitioning = false;
-				mpc.trigger( "pagechange", triggerData );
+				this.element.trigger( "pagechange", triggerData );
 
 				// Even if there is no page change to be done, we should keep the urlHistory
 				// in sync with the hash changes
@@ -902,7 +905,7 @@ define( [
 			// page is already within the urlHistory stack. If so, we'll assume the user hit
 			// the forward/back button and will try to match the transition accordingly.
 			if ( settings.fromHashChange ) {
-				historyDir = options.direction === "back" ? -1 : 1;
+				historyDir = settings.direction === "back" ? -1 : 1;
 			}
 
 			// Kill the keyboard.
@@ -1024,7 +1027,7 @@ define( [
 				deferred: cssTransitionDeferred
 			});
 
-			cssTransitionDeferred.done(function( name, reverse, $to, $from, alreadyFocused ) {
+			cssTransitionDeferred.done($.proxy(function( name, reverse, $to, $from, alreadyFocused ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -1041,8 +1044,8 @@ define( [
 				}
 
 				releasePageTransitionLock();
-				mpc.trigger( "pagechange", triggerData );
-			});
+				this.element.trigger( "pagechange", triggerData );
+			}, this));
 
 		}
 
