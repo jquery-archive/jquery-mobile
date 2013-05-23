@@ -90,7 +90,9 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			itemClassDict = {},
 			item, itemClass, itemTheme, itemIcon, icon,
 			a, isDivider,
-			countThemeClass = "ui-fill-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme || "inherit" );
+			countBubbles = $list.find( ".ui-li-count" ),
+			countTheme = getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme,
+			countThemeClass = countTheme ? "ui-body-" + countTheme : false;
 
 		if ( o.theme ) {
 			$list.addClass( "ui-group-theme-" + o.theme );
@@ -182,9 +184,12 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			$( itemClassDict[ itemClass ] ).addClass( itemClass );
 		}
 
-		$list.find( ".ui-li-count" ).each(function() {
-				$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-			}).addClass( "ui-corner-all " + countThemeClass );
+		countBubbles.each(function() {
+			$( this ).closest( "li" ).addClass( "ui-li-has-count" );
+		})
+		if ( countThemeClass ) {
+			countBubbles.addClass( countThemeClass );
+		}
 
 		// Deprecated in 1.4. From 1.5 you have to add class ui-li-has-thumb or ui-li-has-icon to the LI.
 		this._addThumbClasses( li );

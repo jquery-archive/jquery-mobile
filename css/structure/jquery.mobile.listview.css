@@ -136,11 +136,14 @@
 .ui-li-count {
 	position: absolute;
 	font-size: 11px;
-	font-weight: bold;
-	padding: .2em .5em;
+	padding: 0 .5em;
+	line-height: 1.9;
+	min-height: 1.818em;
+	min-width: .818em;
 	right: .909em;
 	top: 50%;
-	margin-top: -.9em;
+	margin-top: -1em;
+	text-align: center;
 }
 .ui-listview .ui-btn[class*="ui-icon-"] .ui-li-count {
 	right: 3.636em;
