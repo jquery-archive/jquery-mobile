@@ -700,7 +700,7 @@ define( [
 		},
 
 		// TODO move into transition handlers?
-		_triggerTransitionEvents: function( to, from, prefix ) {
+		_triggerCssTransitionEvents: function( to, from, prefix ) {
 			prefix = prefix || "";
 
 			// TODO decide if these events should in fact be triggered on the container
@@ -715,14 +715,14 @@ define( [
 		},
 
 		// TODO make private once change has been defined in the widget
-		transition: function( to, from, options ) {
+		_cssTransition: function( to, from, options ) {
 			var transition = options.transition,
 				reverse = options.reverse,
 				deferred = options.deferred,
 				TransitionHandler,
 				promise;
 
-			this._triggerTransitionEvents( to, from, "before" );
+			this._triggerCssTransitionEvents( to, from, "before" );
 
 			// TODO put this in a binding to events *outside* the widget
 			this._hideLoading();
@@ -737,7 +737,7 @@ define( [
 			});
 
 			promise.done($.proxy(function() {
-				this._triggerTransitionEvents( to, from );
+				this._triggerCssTransitionEvents( to, from );
 			}, this));
 		},
 
@@ -796,7 +796,7 @@ define( [
 			  alreadyThere,
 			  newPageTitle,
 			  params,
-			  transitionDeferred;
+			  cssTransitionDeferred;
 
 			// Make sure we have a fromPage.
 			settings.fromPage = settings.fromPage || $.mobile.activePage;
@@ -1016,15 +1016,15 @@ define( [
 			// If we're navigating back in the URL history, set reverse accordingly.
 			settings.reverse = settings.reverse || historyDir < 0;
 
-			transitionDeferred = $.Deferred();
+			cssTransitionDeferred = $.Deferred();
 
-			this.transition(toPage, fromPage, {
+			this._cssTransition(toPage, fromPage, {
 				transition: settings.transition,
 				reverse: settings.reverse,
-				deferred: transitionDeferred
+				deferred: cssTransitionDeferred
 			});
 
-			transitionDeferred.done(function( name, reverse, $to, $from, alreadyFocused ) {
+			cssTransitionDeferred.done(function( name, reverse, $to, $from, alreadyFocused ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
