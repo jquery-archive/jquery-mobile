@@ -751,24 +751,24 @@ define( [
 			removeActiveLinkClass( force );
 		},
 
-		_loadUrl: function( toPage, triggerData, settings ) {
+		_loadUrl: function( to, triggerData, settings ) {
 			// preserve the original target as the dataUrl value will be
 			// simplified eg, removing ui-state, and removing query params
 			// from the hash this is so that users who want to use query
 			// params have access to them in the event bindings for the page
 			// life cycle See issue #5085
-			settings.target = toPage;
+			settings.target = to;
 			settings.deferred = $.Deferred();
 
-			this.load( toPage, settings );
+			this.load( to, settings );
 
-			settings.deferred.done($.proxy(function( url, options, newPage ) {
+			settings.deferred.done($.proxy(function( url, options, content ) {
 				isPageTransitioning = false;
 
 				// store the original absolute url so that it can be provided
 				// to events in the triggerData of the subsequent changePage call
-				newPage.data( "absUrl", triggerData.absUrl );
-				this.change( newPage, options );
+				content.data( "absUrl", triggerData.absUrl );
+				this.change( content, options );
 			}, this));
 
 			settings.deferred.fail($.proxy(function(/* url, options */) {
