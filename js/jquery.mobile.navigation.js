@@ -752,31 +752,30 @@ define( [
 		},
 
 		_loadUrl: function( toPage, triggerData, settings ) {
-				// preserve the original target as the dataUrl value will be
-				// simplified eg, removing ui-state, and removing query params
-				// from the hash this is so that users who want to use query
-				// params have access to them in the event bindings for the page
-				// life cycle See issue #5085
-				settings.target = toPage;
-				settings.deferred = $.Deferred();
+			// preserve the original target as the dataUrl value will be
+			// simplified eg, removing ui-state, and removing query params
+			// from the hash this is so that users who want to use query
+			// params have access to them in the event bindings for the page
+			// life cycle See issue #5085
+			settings.target = toPage;
+			settings.deferred = $.Deferred();
 
-				this.load( toPage, settings );
+			this.load( toPage, settings );
 
-				settings.deferred.done($.proxy(function( url, options, newPage ) {
-					isPageTransitioning = false;
+			settings.deferred.done($.proxy(function( url, options, newPage ) {
+				isPageTransitioning = false;
 
-					// store the original absolute url so that it can be provided
-					// to events in the triggerData of the subsequent changePage call
-					newPage.data( "absUrl", triggerData.absUrl );
-					this.change( newPage, options );
-				}, this));
+				// store the original absolute url so that it can be provided
+				// to events in the triggerData of the subsequent changePage call
+				newPage.data( "absUrl", triggerData.absUrl );
+				this.change( newPage, options );
+			}, this));
 
-				settings.deferred.fail($.proxy(function(/* url, options */) {
-					this._removeActiveLinkClass( true );
-					this._releaseTransitionLock();
-					this._triggerWithDeprecated( "changefailed", triggerData );
-				}, this));
-
+			settings.deferred.fail($.proxy(function(/* url, options */) {
+				this._removeActiveLinkClass( true );
+				this._releaseTransitionLock();
+				this._triggerWithDeprecated( "changefailed", triggerData );
+			}, this));
 		},
 
 		change: function( toPage, options ) {
@@ -887,7 +886,8 @@ define( [
 				isPageTransitioning = false;
 				mpc.trigger( "pagechange", triggerData );
 
-				// Even if there is no page change to be done, we should keep the urlHistory in sync with the hash changes
+				// Even if there is no page change to be done, we should keep the urlHistory
+				// in sync with the hash changes
 				if ( settings.fromHashChange ) {
 					urlHistory.direct({ url: url });
 				}
