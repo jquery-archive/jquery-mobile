@@ -752,14 +752,14 @@ define( [
 
 				this.load( toPage, settings );
 
-				settings.deferred.done(function( url, options, newPage ) {
+				settings.deferred.done($.proxy(function( url, options, newPage ) {
 					isPageTransitioning = false;
 
 					// store the original absolute url so that it can be provided
 					// to events in the triggerData of the subsequent changePage call
 					newPage.data( "absUrl", triggerData.absUrl );
-					$.mobile.changePage( newPage, options );
-				});
+					this.change( newPage, options );
+				}, this));
 
 				settings.deferred.fail($.proxy(function(/* url, options */) {
 					//clear out the active button state
