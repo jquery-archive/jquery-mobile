@@ -838,7 +838,6 @@ define( [
 			// it is done loading or if an error ocurred.
 			if ( isToPageString ) {
 				this._loadUrl( toPage, triggerData, settings );
-				return;
 			} else {
 				this.transition( toPage, triggerData, settings );
 			}
