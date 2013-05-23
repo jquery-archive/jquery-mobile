@@ -30,12 +30,14 @@ define( [
 			this._on( $window, { navigate: "_filterNavigateEvents" });
 
 			this._on( $window, {
-				// disable an scroll setting when a hashchange has been fired, this only works
-				// because the recording of the scroll position is delayed for 100ms after
-				// the browser might have changed the position because of the hashchange
+				// disable an scroll setting when a hashchange has been fired,
+				// this only works because the recording of the scroll position
+				// is delayed for 100ms after the browser might have changed the
+				// position because of the hashchange
 				navigate: "_disableRecordScroll",
 
-				// bind to scrollstop for the first page, "pagechange" won't be fired in that case
+				// bind to scrollstop for the first page, "pagechange" won't be
+				// fired in that case
 				scrollstop: "_delayedRecordScroll"
 			});
 
@@ -62,18 +64,18 @@ define( [
 			this.setLastScrollEnabled = true;
 
 			// remove any binding that previously existed on the get scroll
-			// which may or may not be different than the scroll element determined for
-			// this page previously
+			// which may or may not be different than the scroll element
+			// determined for this page previously
 			this._off( $window, "scrollstop" );
 
-			// determine and bind to the current scoll element which may be the window
-			// or in the case of touch overflow the element with touch overflow
+			// determine and bind to the current scoll element which may be the
+			// window or in the case of touch overflow the element touch overflow
 			this._on( $window, { scrollstop: "_delayedRecordScroll" });
 		},
 
 		_recordScroll: function() {
-			// this barrier prevents setting the scroll value based on the browser
-			// scrolling the window based on a hashchange
+			// this barrier prevents setting the scroll value based on
+			// the browser scrolling the window based on a hashchange
 			if ( !this.setLastScrollEnabled ) {
 				return;
 			}
@@ -86,8 +88,8 @@ define( [
 				minScroll = this._getMinScroll();
 				defaultScroll = this._getDefaultScroll();
 
-				// Set active page's lastScroll prop.
-				// If the location we're scrolling to is less than minScrollBack, let it go.
+				// Set active page's lastScroll prop. If the location we're
+				// scrolling to is less than minScrollBack, let it go.
 				active.lastScroll = currentScroll < minScroll ? defaultScroll : currentScroll;
 			}
 		},
@@ -179,11 +181,14 @@ define( [
 				history = this._getHistory(),
 				documentBase = this._getDocumentBase();
 
-				// At this point, 'to' can be one of 3 things, a cached page element from
-				// a history stack entry, an id, or site-relative/absolute URL. If 'to' is
-				// an id, we need to resolve it against the documentBase, not the location.href,
-				// since the hashchange could've been the result of a forward/backward navigation
-				// that crosses from an external page/dialog to an internal page/dialog.
+				// At this point, 'to' can be one of 3 things, a cached page
+				// element from a history stack entry, an id, or site-relative /
+				// absolute URL. If 'to' is an id, we need to resolve it against
+				// the documentBase, not the location.href, since the hashchange
+				// could've been the result of a forward/backward navigation
+				// that crosses from an external page/dialog to an internal
+				// page/dialog.
+				//
 				// TODO move check to history object or path object?
 				to = !path.isPath( to ) ? ( path.makeUrlAbsolute( "#" + to, documentBase ) ) : to;
 
@@ -209,9 +214,8 @@ define( [
 			// If current active page is not a dialog skip the dialog and continue
 			// in the same direction
 			if ( activeContent && !activeContent.hasClass( "ui-dialog" ) ) {
-				//determine if we're heading forward or backward and continue accordingly past
-				//the current dialog
-
+				// determine if we're heading forward or backward and continue
+				// accordingly past the current dialog
 				if( data.direction === "back" ) {
 					this._back();
 				} else {
@@ -247,9 +251,9 @@ define( [
 				// otherwise (and may be overridden by default)
 				transition = history.stack.length === 0 ? "none" : undefined,
 
-				// default options for the changPage calls made after examining the current state
-				// of the page and the hash, NOTE that the transition is derived from the previous
-				// history entry
+				// default options for the changPage calls made after examining
+				// the current state of the page and the hash, NOTE that the
+				// transition is derived from the previous history entry
 				changePageOptions = {
 					changeHash: false,
 					fromHashChange: true,
@@ -261,9 +265,9 @@ define( [
 			});
 
 			// TODO move to _handleDestination ?
-			// If this isn't the first page, if the current url is a dialog hash key,
-			// and the initial destination isn't equal to the current target page,
-			// use the special dialog handling
+			// If this isn't the first page, if the current url is a dialog hash
+			// key, and the initial destination isn't equal to the current target
+			// page, use the special dialog handling
 			if ( history.activeIndex > 0 &&
 				to.indexOf( dialogHashKey ) > -1 &&
 				history.initialDst !== to ) {
@@ -295,8 +299,8 @@ define( [
 		},
 
 		_enhance: function( content, role ) {
-			// TODO consider supporting a custom callback, and passing in the settings
-			//      which includes the role
+			// TODO consider supporting a custom callback, and passing in
+			// the settings which includes the role
 			return content.page({ role: role });
 		},
 
@@ -320,12 +324,13 @@ define( [
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
 			//      are a valid url char and it breaks on the first occurence
-			page = this.element.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
+			page = this.element
+				.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
 
 			// If we failed to find the page, check to see if the url is a
 			// reference to an embedded page. If so, it may have been dynamically
-			// injected by a developer, in which case it would be lacking a data-url
-			// attribute and in need of enhancement.
+			// injected by a developer, in which case it would be lacking a
+			// data-url attribute and in need of enhancement.
 			if ( page.length === 0 && dataUrl && !path.isPath( dataUrl ) ) {
 				page = this.element.children( path.hashToSelector("#" + dataUrl) )
 					.attr( "data-" + this._getNs() + "url", dataUrl )
@@ -738,8 +743,8 @@ define( [
 
 		change: function( toPage, options ) {
 			// If we are in the midst of a transition, queue the current request.
-			// We'll call changePage() once we're done with the current transition to
-			// service the request.
+			// We'll call changePage() once we're done with the current transition
+			// to service the request.
 			if ( isPageTransitioning ) {
 				pageTransitionQueue.unshift( arguments );
 				return;
@@ -765,10 +770,11 @@ define( [
 			pbcEvent = new $.Event( "pagebeforechange" );
 			triggerData = { toPage: toPage, options: settings };
 
-			// NOTE: preserve the original target as the dataUrl value will be simplified
-			//       eg, removing ui-state, and removing query params from the hash
-			//       this is so that users who want to use query params have access to them
-			//       in the event bindings for the page life cycle See issue #5085
+			// NOTE: preserve the original target as the dataUrl value will be
+			// simplified eg, removing ui-state, and removing query params from
+			// the hash this is so that users who want to use query params have
+			// access to them in the event bindings for the page life cycle
+			// See issue #5085
 			if ( isToPageString ) {
 				// if the toPage is a string simply convert it
 				triggerData.absUrl = path.makeUrlAbsolute( toPage, findBaseWithDefault() );
@@ -786,12 +792,10 @@ define( [
 				return;
 			}
 
-			// We allow "pagebeforechange" observers to modify the toPage in the trigger
-			// data to allow for redirects. Make sure our toPage is updated.
-			//
-			// We also need to re-evaluate whether it is a string, because an object can
-			// also be replaced by a string
-
+			// We allow "pagebeforechange" observers to modify the toPage in
+			// the trigger data to allow for redirects. Make sure our toPage is
+			// updated. We also need to re-evaluate whether it is a string,
+			// because an object can also be replaced by a string
 			toPage = triggerData.toPage;
 			isToPageString = ( typeof toPage === "string" );
 
@@ -805,10 +809,11 @@ define( [
 			// to the promise object it returns so we know when
 			// it is done loading or if an error ocurred.
 			if ( isToPageString ) {
-				// preserve the original target as the dataUrl value will be simplified
-				// eg, removing ui-state, and removing query params from the hash
-				// this is so that users who want to use query params have access to them
-				// in the event bindings for the page life cycle See issue #5085
+				// preserve the original target as the dataUrl value will be
+				// simplified eg, removing ui-state, and removing query params
+				// from the hash this is so that users who want to use query
+				// params have access to them in the event bindings for the page
+				// life cycle See issue #5085
 				settings.target = toPage;
 
 				$.mobile.loadPage( toPage, settings)
