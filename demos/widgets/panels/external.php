@@ -11,6 +11,11 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
+	<script>
+		$(function(){
+			$("body>[data-role='panel']").panel();
+		});
+	</script>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -36,11 +41,17 @@
 
 	<div data-role="content" class="jqm-content">
 
-		<h1>Panels <a href="http://api.jquerymobile.com/panel/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+		<h1>External Panels <a href="http://api.jquerymobile.com/panel/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 		<p class="jqm-intro">Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
 
-		<h2 id="panel-examples">Panel examples</h2>
+		<h2 id="panel-examples">External Panels</h2>
+
+		<p>The panels below are all located outside the page. Panels outside of a page must be initalized manually and will not be handled by auto init</p>
+		<p>Panels outside of pages will remain in the dom unless manually removed and can be opened or closed from any page</p>
+		<p>Navigate to page to below to see this behivor. This page has no panels in it</p>
+
+		<p><a href="external-2.php">Navigate to page 2</a></p>
 
 		<p><strong>Left</strong> panel examples</p>
 		<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true">Overlay</a>
@@ -172,9 +183,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the <em>page wrapper</em> (not the panel). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
 
-		<h2 id="external-panels">Panels outside pages</h2>
-
-		<p>As of 1.4 it is now possible to use panels outside of a page <a href="external.php">External Panels</a></p>
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -185,7 +193,12 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	<!-- Here are a bunch of panels at the end, just before the close page tag  -->
 
 	<!-- leftpanel1  -->
-	<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
+	
+
+<?php include( '../../global-nav.php' ); ?>
+
+</div><!-- /page -->
+<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
 
         <h3>Left Panel: Reveal</h3>
         <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -205,7 +218,14 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	</div><!-- /leftpanel2 -->
 
 	<!-- leftpanel3  -->
-	
+	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
+
+        <h3>Left Panel: Overlay</h3>
+        <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+        <a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">Close panel</a>
+
+	</div><!-- /leftpanel3 -->
 
 	<!-- rightpanel1  -->
 	<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
@@ -236,17 +256,5 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /rightpanel3 -->
-
-<?php include( '../../global-nav.php' ); ?>
-
-</div><!-- /page -->
-<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
-
-        <h3>Left Panel: Overlay</h3>
-        <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">Close panel</a>
-
-	</div><!-- /leftpanel3 -->
 </body>
 </html>
