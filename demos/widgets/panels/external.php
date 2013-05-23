@@ -49,7 +49,7 @@
 
 		<p>The panels below are all located outside the page. Panels outside of a page must be initalized manually and will not be handled by auto init</p>
 		<p>Panels outside of pages will remain in the dom unless manually removed and can be opened or closed from any page</p>
-		<p>Navigate to page to below to see this behivor. This page has no panels in it</p>
+		<p>Navigate to page 2 below to see this behavior. This page doesn't contain panels.</p>
 
 		<p><a href="external-2.php">Navigate to page 2</a></p>
 
