@@ -76,7 +76,7 @@
 }
 .ui-listview > li.ui-li-has-alt > a.ui-btn {
 	-webkit-border-top-right-radius: 0;
-	border-bottom-top-radius: 0;
+	border-top-right-radius: 0;
 	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
@@ -84,7 +84,7 @@
 	-webkit-border-top-left-radius: 0;	
 	border-top-left-radius: 0;
 	-webkit-border-top-right-radius: inherit;
-	border-bottom-top-radius: inherit;
+	border-top-right-radius: inherit;
 }
 .ui-listview > li.ui-last-child > a.ui-btn + a.ui-btn {
 	-webkit-border-bottom-left-radius: 0;
