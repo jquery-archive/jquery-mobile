@@ -30,7 +30,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		var self = this,
 			control = this.element,
 			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme", true ),
-			trackThemeClass = " ui-shadow-inset ui-fill-" + ( trackTheme ? trackTheme : "inherit" ),
+			trackThemeClass = trackTheme ? " ui-body-" + trackTheme : "",
 			cType = control[ 0 ].nodeName.toLowerCase(),
 			isToggleSwitch = ( cType === "select" ),
 			isRangeslider = control.parent().is( ":jqmData(role='rangeslider')" ),
@@ -62,7 +62,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		domHandle.setAttribute( "href", "#" );
 		domSlider.setAttribute( "role", "application" );
-		domSlider.className = [ this.isToggleSwitch ? "ui-slider " : "ui-slider-track ", selectClass, trackThemeClass, " ui-corner-all", miniClass ].join( "" );
+		domSlider.className = [ this.isToggleSwitch ? "ui-slider ui-slider-track ui-shadow-inset " : "ui-slider-track ui-shadow-inset ", selectClass, trackThemeClass, " ui-corner-all", miniClass ].join( "" );
 		domHandle.className = "ui-slider-handle";
 		domSlider.appendChild( domHandle );
 
@@ -90,7 +90,6 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			userModified: false,
 			mouseMoved: false
 		});
-
 
 		if ( isToggleSwitch ) {
 			// TODO: restore original tabindex (if any) in a destroy method
@@ -355,9 +354,9 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		var self = this,
 			parentTheme = $.mobile.getAttribute( this.element[ 0 ], "theme", true ),
 			theme = this.options.theme || parentTheme,
-			themeClass =  " ui-btn-" + theme,
+			themeClass =  theme ? " ui-btn-" + theme : "",
 			trackTheme = this.options.trackTheme || parentTheme,
-			trackThemeClass = " ui-shadow-inset ui-fill-" + ( trackTheme ? trackTheme : "inherit" ),
+			trackThemeClass = trackTheme ? " ui-body-" + trackTheme : "",
 			left, width, data, tol,
 			pxStep, percent,
 			control, isInput, optionElements, min, max, step,
@@ -365,7 +364,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			handlePercent, aPercent, bPercent,
 			valueChanged;
 
-		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch" : "ui-slider-track", trackThemeClass, " ui-corner-all", ( this.options.mini ) ? " ui-mini" : "" ].join( "" );
+		self.slider[0].className = [ this.isToggleSwitch ? "ui-slider ui-slider-switch ui-slider-track ui-shadow-inset" : "ui-slider-track ui-shadow-inset", trackThemeClass, " ui-corner-all", ( this.options.mini ) ? " ui-mini" : "" ].join( "" );
 		if ( this.options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}

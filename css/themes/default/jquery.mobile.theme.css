@@ -47,7 +47,6 @@ legend,
 .ui-btn-corner-all,
 .ui-btn.ui-corner-all,
 /* Slider track */
-.ui-slider-switch.ui-corner-all,
 .ui-slider-track.ui-corner-all {
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
@@ -389,6 +388,18 @@ html body .ui-group-theme-a .ui-li-count,
 	font-weight: bold;
 }
 
+/* Slider track */
+.ui-page-theme-a .ui-slider-track,
+html .ui-bar-a .ui-slider-track,
+html body .ui-group-theme-a .ui-slider-track,
+html body div.ui-slider-track.ui-body-a {
+	background:				#1b1b1b /*{a-fill-background-color}*/;
+	border: 1px solid		#111 /*{a-fill-border}*/;
+	color:					#fff /*{a-fill-color}*/;
+	text-shadow: 0 /*{a-fill-shadow-x}*/ 1px /*{a-fill-shadow-y}*/ 0 /*{a-fill-shadow-radius}*/ #000 /*{a-fill-shadow-color}*/;
+	font-weight: bold;
+}
+
 /* Buttons */
 .ui-page-theme-a .ui-btn,
 html .ui-bar-a .ui-btn,
@@ -457,23 +468,11 @@ html body .ui-group-theme-a .ui-icon-radio-on:after,
 	background-color: #fff;
 	border-color: #34bae8 /*{a-bactive-background-color}*/;
 }
-
-/* Slider track */
-.ui-fill-a,
-.ui-page-theme-a .ui-fill-inherit,
-html .ui-bar-a .ui-fill-inherit,
-html body .ui-group-theme-a .ui-fill-inherit {
-	background:				#1b1b1b /*{a-fill-background-color}*/;
-	border: 1px solid		#111 /*{a-fill-border}*/;
-	color:					#fff /*{a-fill-color}*/;
-	text-shadow: 0 /*{a-fill-shadow-x}*/ 1px /*{a-fill-shadow-y}*/ 0 /*{a-fill-shadow-radius}*/ #000 /*{a-fill-shadow-color}*/;
-	font-weight: bold;
-}
 /* Slider track active */
-.ui-fill-a .ui-btn-active,
-.ui-page-theme-a .ui-fill-inherit .ui-btn-active,
-html .ui-bar-a .ui-fill-inherit .ui-btn-active,
-html body .ui-group-theme-a .ui-fill-inherit .ui-btn-active {
+.ui-page-theme-a .ui-slider-track .ui-btn-active,
+html .ui-bar-a .ui-slider-track .ui-btn-active,
+html body .ui-group-theme-a .ui-slider-track .ui-btn-active,
+html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	background: 			#34bae8 /*{a-bactive-background-color}*/;
 	color: 					#fff /*{a-bactive-color}*/;
 	text-shadow: 0 /*{a-bactive-shadow-x}*/ 1px /*{a-bactive-shadow-y}*/ 0 /*{a-bactive-shadow-radius}*/ #3399cc /*{a-bactive-shadow-color}*/;
@@ -580,6 +579,18 @@ html body .ui-group-theme-b .ui-li-count,
 	font-weight: bold;
 }
 
+/* Slider track */
+.ui-page-theme-b .ui-slider-track,
+html .ui-bar-b .ui-slider-track,
+html body .ui-group-theme-b .ui-slider-track,
+html body div.ui-slider-track.ui-body-b {
+	background:				#ececec /*{b-fill-background-color}*/;
+	border: 1px solid		#cfcfcf /*{b-fill-border}*/;
+	color:					#333 /*{b-fill-color}*/;
+	text-shadow: 0 /*{b-fill-shadow-x}*/ 1px /*{b-fill-shadow-y}*/ 0 /*{b-fill-shadow-radius}*/ #fff /*{b-fill-shadow-color}*/;
+	font-weight: bold;
+}
+
 /* Buttons */
 .ui-page-theme-b .ui-btn,
 html .ui-bar-b .ui-btn,
@@ -648,27 +659,16 @@ html body .ui-group-theme-b .ui-icon-radio-on:after,
 	background-color: #fff;
 	border-color: #ff6600 /*{b-bactive-background-color}*/;
 }
-
-/* Slider track */
-.ui-fill-b,
-.ui-page-theme-b .ui-fill-inherit,
-html .ui-bar-b .ui-fill-inherit,
-html body .ui-group-theme-b .ui-fill-inherit {
-	background:				#ececec /*{b-fill-background-color}*/;
-	border: 1px solid		#cfcfcf /*{b-fill-border}*/;
-	color:					#333 /*{b-fill-color}*/;
-	text-shadow: 0 /*{b-fill-shadow-x}*/ 1px /*{b-fill-shadow-y}*/ 0 /*{b-fill-shadow-radius}*/ #fff /*{b-fill-shadow-color}*/;
-	font-weight: bold;
-}
 /* Slider track active */
-.ui-fill-b .ui-btn-active,
-.ui-page-theme-b .ui-fill-inherit .ui-btn-active,
-html .ui-bar-b .ui-fill-inherit .ui-btn-active,
-html body .ui-group-theme-b .ui-fill-inherit .ui-btn-active {
+.ui-page-theme-b .ui-slider-track .ui-btn-active,
+html .ui-bar-b .ui-slider-track .ui-btn-active,
+html body .ui-group-theme-b .ui-slider-track .ui-btn-active,
+html body div.ui-slider-track.ui-body-b .ui-btn-active {
 	background: 			#ff6600 /*{b-bactive-background-color}*/;
 	color: 					#fff /*{b-bactive-color}*/;
 	text-shadow: 0 /*{b-bactive-shadow-x}*/ 1px /*{b-bactive-shadow-y}*/ 0 /*{b-bactive-shadow-radius}*/ #ff3300 /*{b-bactive-shadow-color}*/;
 }
+
 
 /* Focus */
 .ui-page-theme-b .ui-btn:focus,

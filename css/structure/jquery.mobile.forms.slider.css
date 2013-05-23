@@ -45,8 +45,7 @@ input.ui-slider-input {
 	-webkit-appearance: none;
 	margin: 0;
 }
-.ui-slider-track,
-.ui-slider-switch {
+.ui-slider-track {
 	position: relative;
 	overflow: visible;
 	height: 15px;
@@ -61,8 +60,7 @@ input.ui-slider-input {
 	height: 100%;
 }
 /* High level of specificity to override button margins in grids */
-.ui-slider-track .ui-btn.ui-slider-handle,
-.ui-slider-switch .ui-btn.ui-slider-handle {
+.ui-slider-track .ui-btn.ui-slider-handle {
 	position: absolute;
 	z-index: 1;
 	top: 50%;
