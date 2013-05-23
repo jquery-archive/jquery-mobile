@@ -741,6 +741,37 @@ define( [
 			}, this));
 		},
 
+		_loadUrl: function( toPage, triggerData, settings ) {
+				// preserve the original target as the dataUrl value will be
+				// simplified eg, removing ui-state, and removing query params
+				// from the hash this is so that users who want to use query
+				// params have access to them in the event bindings for the page
+				// life cycle See issue #5085
+				settings.target = toPage;
+				settings.deferred = $.Deferred();
+
+				this.load( toPage, settings );
+
+				settings.deferred.done(function( url, options, newPage ) {
+					isPageTransitioning = false;
+
+					// store the original absolute url so that it can be provided
+					// to events in the triggerData of the subsequent changePage call
+					newPage.data( "absUrl", triggerData.absUrl );
+					$.mobile.changePage( newPage, options );
+				});
+
+				settings.deferred.fail($.proxy(function(/* url, options */) {
+					//clear out the active button state
+					removeActiveLinkClass( true );
+
+					//release transition lock so navigation is free again
+					releasePageTransitionLock();
+					this.element.trigger( "pagechangefailed", triggerData );
+				}, this));
+
+		},
+
 		change: function( toPage, options ) {
 			// If we are in the midst of a transition, queue the current request.
 			// We'll call changePage() once we're done with the current transition
@@ -809,34 +840,7 @@ define( [
 			// to the promise object it returns so we know when
 			// it is done loading or if an error ocurred.
 			if ( isToPageString ) {
-				// preserve the original target as the dataUrl value will be
-				// simplified eg, removing ui-state, and removing query params
-				// from the hash this is so that users who want to use query
-				// params have access to them in the event bindings for the page
-				// life cycle See issue #5085
-				settings.target = toPage;
-				settings.deferred = $.Deferred();
-
-				this.load( toPage, settings );
-
-				settings.deferred.done(function( url, options, newPage ) {
-					isPageTransitioning = false;
-
-					// store the original absolute url so that it can be provided
-					// to events in the triggerData of the subsequent changePage call
-					newPage.data( "absUrl", triggerData.absUrl );
-					$.mobile.changePage( newPage, options );
-				});
-
-				settings.deferred.fail($.proxy(function(/* url, options */) {
-					//clear out the active button state
-					removeActiveLinkClass( true );
-
-					//release transition lock so navigation is free again
-					releasePageTransitionLock();
-					this.element.trigger( "pagechangefailed", triggerData );
-				}, this));
-
+				this._loadUrl( toPage, triggerData, settings );
 				return;
 			}
 
