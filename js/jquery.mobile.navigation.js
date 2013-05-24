@@ -779,34 +779,19 @@ define( [
 			}, this));
 		},
 
-		change: function( toPage, options ) {
-			// If we are in the midst of a transition, queue the current request.
-			// We'll call changePage() once we're done with the current transition
-			// to service the request.
-			if ( isPageTransitioning ) {
-				pageTransitionQueue.unshift( arguments );
-				return;
-			}
+		_triggerPageBeforeChange: function( to, triggerData, settings ) {
+			var pbcEvent = new $.Event( "pagebeforechange" );
 
-			var settings = $.extend( {}, $.mobile.changePage.defaults, options ),
-			  isToPageString, triggerData, pbcEvent;
-
-			// Make sure we have a fromPage.
-			settings.fromPage = settings.fromPage || $.mobile.activePage;
-
-			isToPageString = (typeof toPage === "string");
-
-			pbcEvent = new $.Event( "pagebeforechange" );
-			triggerData = { toPage: toPage, options: settings };
+			$.extend(triggerData, { toPage: to, options: settings });
 
 			// NOTE: preserve the original target as the dataUrl value will be
 			// simplified eg, removing ui-state, and removing query params from
 			// the hash this is so that users who want to use query params have
 			// access to them in the event bindings for the page life cycle
 			// See issue #5085
-			if ( isToPageString ) {
+			if ( $.type(to) === "string" ) {
 				// if the toPage is a string simply convert it
-				triggerData.absUrl = path.makeUrlAbsolute( toPage, findBaseWithDefault() );
+				triggerData.absUrl = path.makeUrlAbsolute( to, findBaseWithDefault() );
 			} else {
 				// if the toPage is a jQuery object grab the absolute url stored
 				// in the loadPage callback where it exists
@@ -818,6 +803,29 @@ define( [
 
 			// If the default behavior is prevented, stop here!
 			if ( pbcEvent.isDefaultPrevented() ) {
+				return false;
+			}
+
+			return true;
+		},
+
+		change: function( toPage, options ) {
+			// If we are in the midst of a transition, queue the current request.
+			// We'll call changePage() once we're done with the current transition
+			// to service the request.
+			if ( isPageTransitioning ) {
+				pageTransitionQueue.unshift( arguments );
+				return;
+			}
+
+			var settings = $.extend( {}, $.mobile.changePage.defaults, options ),
+				triggerData = {};
+
+			// Make sure we have a fromPage.
+			settings.fromPage = settings.fromPage || $.mobile.activePage;
+
+			// if the page beforechange default is prevented return early
+			if ( !this._triggerPageBeforeChange(toPage, triggerData, settings) ) {
 				return;
 			}
 
@@ -826,13 +834,12 @@ define( [
 			// updated. We also need to re-evaluate whether it is a string,
 			// because an object can also be replaced by a string
 			toPage = triggerData.toPage;
-			isToPageString = ( typeof toPage === "string" );
 
 			// If the caller passed us a url, call loadPage()
 			// to make sure it is loaded into the DOM. We'll listen
 			// to the promise object it returns so we know when
 			// it is done loading or if an error ocurred.
-			if ( isToPageString ) {
+			if ( $.type(toPage) === "string" ) {
 				// Set the isPageTransitioning flag to prevent any requests from
 				// entering this method while we are in the midst of loading a page
 				// or transitioning.
@@ -851,28 +858,21 @@ define( [
 			  alreadyThere,
 			  newPageTitle,
 			  params,
-			  cssTransitionDeferred, pbcEvent;
+			  cssTransitionDeferred;
 
 			// If we are in the midst of a transition, queue the current request.
 			// We'll call changePage() once we're done with the current transition
 			// to service the request.
 			if ( isPageTransitioning ) {
-				pageTransitionQueue.unshift( arguments );
+				// make sure to only queue the to and settings values so the arguments
+				// work with a call to the change method
+				pageTransitionQueue.unshift( [toPage, settings] );
 				return;
 			}
 
-			pbcEvent = new $.Event( "pagebeforechange" );
-			triggerData = {
-				toPage: toPage,
-				options: settings,
-				absUrl: settings.absUrl
-			};
-
-			// Let listeners know we're about to change the current page.
-			this.element.trigger( pbcEvent, triggerData );
-
-			// If the default behavior is prevented, stop here!
-			if ( pbcEvent.isDefaultPrevented() ) {
+			// DEPRECATED - this call only
+			// if the page beforechange default is prevented return early
+			if ( !this._triggerPageBeforeChange(toPage, triggerData, settings) ) {
 				return;
 			}
 
@@ -892,8 +892,11 @@ define( [
 			// The caller passed us a real page DOM element. Update our
 			// internal state and then trigger a transition to the page.
 			fromPage = settings.fromPage;
-			url = ( settings.dataUrl && path.convertUrlToDataUrl( settings.dataUrl ) ) || toPage.jqmData( "url" );
-			// The pageUrl var is usually the same as url, except when url is obscured as a dialog url. pageUrl always contains the file path
+			url = ( settings.dataUrl && path.convertUrlToDataUrl(settings.dataUrl) ) ||
+				toPage.jqmData( "url" );
+
+			// The pageUrl var is usually the same as url, except when url is obscured
+			// as a dialog url. pageUrl always contains the file path
 			pageUrl = url;
 			fileUrl = path.getFilePath( url );
 			active = urlHistory.getActive();
