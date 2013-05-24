@@ -1,11 +1,15 @@
-Vagrant::Config.run do |config|
+Vagrant.configure('2') do |config|
   config.vm.box = "digital_ocean"
-  config.vm.network(:hostonly, "33.33.33.10")
-  config.vm.forward_port(80, 8181)
+  config.ssh.private_key_path = "~/.ssh/vagrant"
+
+  config.vm.provider :digital_ocean do |provider|
+    provider.ca_path = "/etc/ssl/certs/ca-certificates.crt"
+  end
 
   # Configure to provision with local cookbooks
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
+    chef.add_recipe "apache2"
     chef.add_recipe "jquery-mobile"
     chef.json = {:vagrant => {:directory => "/vagrant" }}
   end
