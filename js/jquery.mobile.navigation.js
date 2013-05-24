@@ -779,11 +779,6 @@ define( [
 			}, this));
 		},
 
-		_changePreamble: function() {
-
-
-		},
-
 		change: function( toPage, options ) {
 			// If we are in the midst of a transition, queue the current request.
 			// We'll call changePage() once we're done with the current transition
