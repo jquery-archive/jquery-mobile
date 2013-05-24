@@ -439,7 +439,7 @@
 		}
 	});
 
-	test( "should call change method on success", function() {
+	test( "should call the transition method on success", function() {
 		expect( 3 );
 
 		proto.load = function( to, settings ) {
@@ -449,7 +449,7 @@
 			settings.deferred.resolve( "foo", {}, $( "<div id='newcontent'>" ) );
 		};
 
-		proto.change = function( content ) {
+		proto.transition = function( content ) {
 			ok( content.is( "#newcontent" ), "new content is passed through" );
 			ok( true, "change called" );
 		};

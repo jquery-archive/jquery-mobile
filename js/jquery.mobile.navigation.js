@@ -769,7 +769,7 @@ define( [
 				// to events in the triggerData of the subsequent changePage call
 				options.absUrl = triggerData.absUrl;
 
-				this.change( content, options );
+				this.transition( content, triggerData, options );
 			}, this));
 
 			settings.deferred.fail($.proxy(function(/* url, options */) {
@@ -777,6 +777,11 @@ define( [
 				this._releaseTransitionLock();
 				this._triggerWithDeprecated( "changefailed", triggerData );
 			}, this));
+		},
+
+		_changePreamble: function() {
+
+
 		},
 
 		change: function( toPage, options ) {
@@ -828,16 +833,16 @@ define( [
 			toPage = triggerData.toPage;
 			isToPageString = ( typeof toPage === "string" );
 
-			// Set the isPageTransitioning flag to prevent any requests from
-			// entering this method while we are in the midst of loading a page
-			// or transitioning.
-			isPageTransitioning = true;
-
 			// If the caller passed us a url, call loadPage()
 			// to make sure it is loaded into the DOM. We'll listen
 			// to the promise object it returns so we know when
 			// it is done loading or if an error ocurred.
 			if ( isToPageString ) {
+				// Set the isPageTransitioning flag to prevent any requests from
+				// entering this method while we are in the midst of loading a page
+				// or transitioning.
+				isPageTransitioning = true;
+
 				this._loadUrl( toPage, triggerData, settings );
 			} else {
 				this.transition( toPage, triggerData, settings );
@@ -851,7 +856,35 @@ define( [
 			  alreadyThere,
 			  newPageTitle,
 			  params,
-			  cssTransitionDeferred;
+			  cssTransitionDeferred, pbcEvent;
+
+			// If we are in the midst of a transition, queue the current request.
+			// We'll call changePage() once we're done with the current transition
+			// to service the request.
+			if ( isPageTransitioning ) {
+				pageTransitionQueue.unshift( arguments );
+				return;
+			}
+
+			pbcEvent = new $.Event( "pagebeforechange" );
+			triggerData = {
+				toPage: toPage,
+				options: settings,
+				absUrl: settings.absUrl
+			};
+
+			// Let listeners know we're about to change the current page.
+			this.element.trigger( pbcEvent, triggerData );
+
+			// If the default behavior is prevented, stop here!
+			if ( pbcEvent.isDefaultPrevented() ) {
+				return;
+			}
+
+			// Set the isPageTransitioning flag to prevent any requests from
+			// entering this method while we are in the midst of loading a page
+			// or transitioning.
+			isPageTransitioning = true;
 
 			// If we are going to the first-page of the application, we need to make
 			// sure settings.dataUrl is set to the application document url. This allows
