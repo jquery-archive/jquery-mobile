@@ -235,7 +235,7 @@ ol.ui-listview > li.ui-field-contain > .ui-controlgroup-label:before {
 	font-size: .9em;
 	font-weight: normal;
 	padding-right: .3em;
-	min-width: 1.3em;
+	min-width: 1.4em;
 	line-height: 1.5;
 	vertical-align: middle;
 	counter-increment: listnumbering;
@@ -265,7 +265,7 @@ ol.ui-listview > li h6:first-child ~ *,
 ol.ui-listview > li p:first-child ~ *,
 ol.ui-listview > li img:first-child + * ~ * {
 	margin-top: 0;
-	text-indent: 1.92em;
+	text-indent: 2.04em; /* (1.4em + .3em) * .9em / .75em */
 }
 .ui-listview-filter {
 	border-width: 0;
