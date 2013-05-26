@@ -10,34 +10,24 @@
 .ui-field-contain .ui-controlgroup-controls {
 	margin: 0;
 }
-.ui-field-contain:after {
-	content: "";
-	display: block;
-	margin-top: 1em;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
-}
-.ui-listview li.ui-field-contain:after,
-.ui-field-contain:last-child:after {
-	border: 0;
-	box-shadow: none;
+.ui-field-contain:last-child {
+	border-bottom-width: 0;
 }
 @media (min-width: 28em) {
 	.ui-field-contain,
 	.ui-mobile fieldset.ui-field-contain {
 		padding: 0;
 		margin: 1em 0;
+		border-bottom-width: 0;
 		zoom: 1;
 	}
-	.ui-field-contain:before {
+	.ui-field-contain:before,
+	.ui-field-contain:after {
 		content: "";
 		display: table;
 	}
 	.ui-field-contain:after {
-		display: table;
 		clear: both;
-		border: 0;
-		box-shadow: none;
 	}
 	.ui-field-contain > label,
 	.ui-field-contain .ui-controlgroup-label,

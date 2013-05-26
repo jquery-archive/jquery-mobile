@@ -23,6 +23,16 @@ legend,
 	text-shadow: inherit;
 }
 
+/* Field contain separator (< 28em)
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-field-contain {
+	border-bottom-color: #828282;
+	border-bottom-color: rgba(0,0,0,.15);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
 /* Buttons
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -368,11 +378,6 @@ html body .ui-group-theme-a .ui-body-inherit,
 	color: #34bae8 /*{a-body-link-active}*/;
 }
 
-.ui-body-a .ui-field-contain:after {
-	border-color: #121212 /*{a-br-border-color}*/;	
-	box-shadow: 0 1px #2a2a2a /*{a-br-shadow}*/;	
-}
-
 /* Count bubble (listviews and multiple select) */
 .ui-page-theme-a .ui-li-count,
 html .ui-bar-a .ui-li-count,
@@ -557,11 +562,6 @@ html body .ui-group-theme-b .ui-body-inherit,
 }
 .ui-body-b .ui-link:active {
 	color: #ff6600 /*{b-body-link-active}*/;
-}
-
-.ui-body-b .ui-field-contain:after {
-	border-color: #eee /*{b-br-border-color}*/;	
-	box-shadow: 0 1px #fff /*{b-br-shadow}*/;	
 }
 
 /* Count bubble (listviews and multiple select) */
