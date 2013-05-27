@@ -78,6 +78,7 @@
 .ui-selectmenu .ui-header {
 	margin: 0;
 	padding: 0;
+	border: 0;
 }
 .ui-selectmenu.ui-popup .ui-header {
 	-webkit-border-bottom-right-radius: 0;
@@ -91,7 +92,7 @@
 	visibility: hidden;
 }
 .ui-selectmenu .ui-header .ui-title {
-	margin: 0.7em 2.875em;
+	margin: 0 2.875em;
 }
 .ui-selectmenu .ui-selectmenu-list {
 	margin: 0;
@@ -103,6 +104,12 @@
 	border-top-right-radius: 0;
 	-webkit-border-top-left-radius: 0;
 	border-top-left-radius: 0;
+}
+.ui-header.ui-screen-hidden + .ui-selectmenu-list li.ui-first-child .ui-btn {
+	border-bottom-width: 0;
+}
+.ui-selectmenu .ui-selectmenu-list li.ui-last-child .ui-btn {
+	border-bottom-width: 0;
 }
 .ui-selectmenu .ui-btn.ui-li-divider {
 	cursor: default;
