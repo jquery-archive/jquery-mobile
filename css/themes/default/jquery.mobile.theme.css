@@ -698,7 +698,6 @@ html body .ui-group-theme-b .ui-focus,
 .ui-select .ui-btn.ui-state-disabled {
 	filter: Alpha(Opacity=30);
 	opacity: .3;
-	zoom: 1;
 	cursor: default !important;
 	pointer-events: none;
 }

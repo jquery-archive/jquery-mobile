@@ -2,7 +2,6 @@
 fieldset.ui-controlgroup {
 	padding: 0;
 	margin: .5em 0;
-	zoom: 1;
 }
 .ui-field-contain .ui-controlgroup,
 .ui-field-contain fieldset.ui-controlgroup {
@@ -24,7 +23,6 @@ fieldset.ui-controlgroup {
 .ui-controlgroup-horizontal .ui-controlgroup-controls {
 	display: inline-block;
 	vertical-align: middle;
-	zoom: 1;
 }
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after {

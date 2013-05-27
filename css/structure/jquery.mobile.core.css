@@ -166,7 +166,6 @@ div.ui-mobile-viewport {
 	border-width: 1px 0;
 	border-style: solid;
 	position: relative;
-	zoom: 1;
 }
 .ui-header .ui-title,
 .ui-footer .ui-title {

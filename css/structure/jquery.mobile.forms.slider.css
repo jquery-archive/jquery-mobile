@@ -2,7 +2,6 @@ div.ui-slider {
 	height: 30px;
 	margin: .5em 0;
 	padding: 0;
-	zoom: 1;
 }
 div.ui-slider.ui-mini {
 	margin-top: .25em;
