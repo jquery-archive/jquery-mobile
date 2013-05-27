@@ -173,15 +173,15 @@ div.ui-mobile-viewport {
 	min-height: 1.1em;
 	text-align: center;
 	display: block;
-	margin: .7em 30%;
-	padding: 0;
+	margin: 0 30%;
+	padding: .7em 0;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
 	outline: 0 !important;
 }
 .ui-footer .ui-title {
-	margin: .7em 1em;
+	margin: 0 1em;
 }
 .ui-content {
 	border-width: 0;
