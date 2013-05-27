@@ -289,7 +289,7 @@ define( [
 				self.setButtonCount();
 
 				self.list.find( "li:not(.ui-li-divider)" )
-					.removeClass( $.mobile.activeBtnClass )
+					.find( "a" ).removeClass( $.mobile.activeBtnClass ).end()
 					.attr( "aria-selected", false )
 					.each(function( i ) {
 
@@ -304,9 +304,9 @@ define( [
 								item.find( "a" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
 								if ( item.hasClass( "ui-screen-hidden" ) ) {
-									item.next().addClass( $.mobile.activeBtnClass );
+									item.next().find( "a" ).addClass( $.mobile.activeBtnClass );
 								} else {
-									item.addClass( $.mobile.activeBtnClass );
+									item.find( "a" ).addClass( $.mobile.activeBtnClass );
 								}
 							}
 						}
