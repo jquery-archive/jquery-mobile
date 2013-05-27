@@ -2,7 +2,8 @@
 .ui-grid-a,
 .ui-grid-b,
 .ui-grid-c,
-.ui-grid-d {
+.ui-grid-d,
+.ui-grid-solo {
 	overflow: hidden;
 }
 .ui-block-a,
@@ -19,8 +20,20 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-ul[class*="ui-grid-"],
-[class*="ui-grid-"] li[class*="ui-block-"] {
+/* force new row */
+.ui-block-a {
+	clear: left;
+}
+ul.ui-grid-a,
+ul.ui-grid-b,
+ul.ui-grid-c,
+ul.ui-grid-d,
+ul.ui-grid-solo,
+li.ui-block-a,
+li.ui-block-b,
+li.ui-block-c,
+li.ui-block-d,
+li.ui-block-e {
 	margin-left: 0;
 	margin-right: 0;
 	padding: 0;
@@ -32,53 +45,48 @@ ul[class*="ui-grid-"],
 	margin-right: .3125em;
 	margin-left: .3125em;
 }
-/* Lower percentages for older browsers (i.e. IE7) to prevent wrapping.
-:nth-child(n) to override for modern browsers.
--.5px to fix BB5 wrap issue. */
-/* grid a: 50/50 (ui-block-a, ui-block-b) */
-.ui-grid-a [class*="ui-block-"] {
-	width: 49.95%;
-}
-.ui-grid-a [class*="ui-block-"]:nth-child(n) {
+
+.ui-grid-a .ui-block-a,
+.ui-grid-a .ui-block-b {
+	/* width: 49.95%; IE7 */
+	/* margin-right: -.5px; BB5 */
 	width: 50%;
-	margin-right: -.5px;
 }
-/* grid b: 33/33/33 (ui-block-a, ui-block-b, ui-block-c) */
-.ui-grid-b [class*="ui-block-"] {
-	width: 33.25%;
-}
-.ui-grid-b [class*="ui-block-"]:nth-child(n) {
+.ui-grid-b .ui-block-a,
+.ui-grid-b .ui-block-b,
+.ui-grid-b .ui-block-c {
+	/* width: 33.25%; IE7 */
+	/* margin-right: -.5px; BB5 */
 	width: 33.333%;
-	margin-right: -.5px;
 }
-/* grid c: 25/25/25/25 (ui-block-a, ui-block-b, ui-block-c, ui-block-d) */
-.ui-grid-c [class*="ui-block-"] {
-	width: 24.925%;
-}
-.ui-grid-c [class*="ui-block-"]:nth-child(n) {
+.ui-grid-c .ui-block-a,
+.ui-grid-c .ui-block-b,
+.ui-grid-c .ui-block-c,
+.ui-grid-c .ui-block-d {
+	/* width: 24.925%; IE7 */
+	/* margin-right: -.5px; BB5 */
 	width: 25%;
-	margin-right: -.5px;
 }
-/* grid d: 20/20/20/20/20 (ui-block-a, ui-block-b, ui-block-c, ui-block-d, ui-block-e) */
-.ui-grid-d [class*="ui-block-"] {
-	width: 19.925%;
-}
-.ui-grid-d [class*="ui-block-"]:nth-child(n) {
+.ui-grid-d .ui-block-a,
+.ui-grid-d .ui-block-b,
+.ui-grid-d .ui-block-c,
+.ui-grid-d .ui-block-d,
+.ui-grid-d .ui-block-e {
+	/* width: 19.925%; IE7 */
 	width: 20%;
 }
-/* grid solo: 100 - single item fallback */
 .ui-grid-solo .ui-block-a {
-	display: block;
-	float: none;
-}
-/* force new row */
-[class*="ui-grid-"] .ui-block-a {
-	clear: left;
+	width: 100%;
+	float: none; 
 }
 
 /* preset breakpoint to switch to stacked grid styles below 35em (560px) */
 @media (max-width: 35em) {
-	[class*="ui-grid-"].ui-responsive [class*="ui-block-"] { 
+	.ui-responsive > .ui-block-a,
+	.ui-responsive > .ui-block-b,
+	.ui-responsive > .ui-block-c,
+	.ui-responsive > .ui-block-d,
+	.ui-responsive > .ui-block-e {
 		width: 100%; 
 		float: none; 
 	}
