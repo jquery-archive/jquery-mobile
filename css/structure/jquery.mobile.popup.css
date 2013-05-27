@@ -56,9 +56,6 @@
 .ui-popup > .ui-footer {
 	border-bottom-width: 0;
 }
-.ui-popup > .ui-content {
-	border-width: 0;
-}
 .ui-popup > p,
 .ui-popup > h1,
 .ui-popup > h2,
