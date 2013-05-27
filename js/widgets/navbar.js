@@ -20,7 +20,8 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 
 		var $navbar = this.element,
 			$navbtns = $navbar.find( "a" ),
-			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
+			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined,
+			classes = "ui-btn";
 
 		$navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
@@ -29,16 +30,17 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 			.grid({ grid: this.options.grid });
 
 		$navbtns
-			.addClass( "ui-btn ui-btn-inline" )
 			.each( function() {
 				var icon = $.mobile.getAttribute( this, "icon", true ),
-					theme = $.mobile.getAttribute( this, "theme", true ) || "a";
+					theme = $.mobile.getAttribute( this, "theme", true );
 
-				$( this ).addClass( "ui-btn-" + theme );
-				
-				if ( icon ) {
-					$( this ).addClass( "ui-icon-" + icon + " ui-btn-icon-" + iconpos );
+				if ( theme ) {
+					classes += " ui-btn-" + theme;
 				}
+				if ( icon ) {
+					classes += " ui-icon-" + icon + " ui-btn-icon-" + iconpos;
+				}
+				$( this ).addClass( classes );
 			});
 
 		$navbar.delegate( "a", "vclick", function( event ) {
