@@ -33,7 +33,10 @@ define( [
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
-			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' id='" + dialogID + "' data-" + $.mobile.ns + "theme='" + widget.options.theme + "' data-" + $.mobile.ns + "overlay-theme='" + widget.options.overlayTheme + "'>" +
+			themeAttr = widget.options.theme ? " data-" + $.mobile.ns + "theme='" + widget.options.theme + "'" : "",
+			overlayThemeAttr = widget.options.overlayTheme ? " data-" + $.mobile.ns + "theme='" + widget.options.overlayTheme + "'" : "",
+			dividerThemeAttr = ( widget.options.dividerTheme && isMultiple ) ? " data-" + $.mobile.ns + "divider-theme='" + widget.options.dividerTheme + "'" : "",
+			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogID + "'" + themeAttr + overlayThemeAttr + ">" +
 				"<div data-" + $.mobile.ns + "role='header'>" +
 				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
@@ -41,25 +44,12 @@ define( [
 				"</div>" ),
 
 			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup({ theme: widget.options.overlayTheme }),
-
-			listThemeAttr = ( widget.options.theme ) ? " data-" + $.mobile.ns + "theme='" + widget.options.theme + "'" : "",
-
-			dividerThemeAttr = ( widget.options.dividerTheme && isMultiple ) ? " data-" + $.mobile.ns + "divider-theme='" + widget.options.dividerTheme + "'" : "",
 			
-			list = $( "<ul" + listThemeAttr + dividerThemeAttr + ">", {
-					"class": "ui-selectmenu-list",
-					"id": menuId,
-					"role": "listbox",
-					"aria-labelledby": buttonId
-				}).appendTo( listbox ),
+			list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + buttonId + "'" + themeAttr + dividerThemeAttr + ">" ).appendTo( listbox ),
 
-			header = $( "<div>", {
-				"class": "ui-header ui-bar-inherit"
-			}).prependTo( listbox ),
+			header = $( "<div class='ui-header ui-bar-" + ( widget.options.theme ? widget.options.theme : "inherit" ) + "'>" ).prependTo( listbox ),
 
-			headerTitle = $( "<h1>", {
-				"class": "ui-title"
-			}).appendTo( header ),
+			headerTitle = $( "<h1 class='ui-title'>" ).appendTo( header ),
 
 			menuPageContent,
 			menuPageClose,
