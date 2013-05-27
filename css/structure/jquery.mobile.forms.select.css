@@ -59,6 +59,9 @@
 	display: block;
 }
 /* ui-li-count is styled in the listview CSS. We set padding and offset here because select supports icon position while listview doesn't. */
+.ui-select .ui-li-has-count.ui-btn {
+	padding-right: 2.8125em;
+}
 .ui-select .ui-li-has-count.ui-btn-icon-right {
 	padding-right: 4.6875em;
 }
