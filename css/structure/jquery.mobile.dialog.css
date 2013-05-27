@@ -18,12 +18,13 @@
 	margin: 0;
 }
 .ui-dialog-contain > .ui-header {
-	border: 0;
 	overflow: hidden;
 	z-index: 10; 
 	padding: 0;
+	border-top-width: 0;
 }
 .ui-dialog-contain > .ui-footer {
 	z-index: 10; 
 	padding: 0 1em; 
+	border-bottom-width: 0;
 }
