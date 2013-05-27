@@ -50,6 +50,15 @@
 .ui-popup .ui-content {
 	overflow: visible;
 }
+.ui-popup > .ui-header {
+	border-top-width: 0;
+}
+.ui-popup > .ui-footer {
+	border-bottom-width: 0;
+}
+.ui-popup > .ui-content {
+	border-width: 0;
+}
 .ui-popup > p,
 .ui-popup > h1,
 .ui-popup > h2,
@@ -62,10 +71,6 @@
 .ui-popup > span {
 	display: block;
 	margin: .5em .4375em;
-}
-.ui-popup .ui-title {
-	margin-top: .5em;
-	margin-bottom: .5em;
 }
 .ui-popup-container .ui-content > p,
 .ui-popup-container .ui-content > h1,
