@@ -59,9 +59,22 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	removeContainerBackground: function() {
-		var parent = this.element.parent(),
-			theme = $.mobile.getAttribute( parent[ 0 ], "theme", true );
-		$.mobile.pageContainer.removeClass( "ui-overlay-" + theme );
+		var classes = ( $.mobile.pageContainer.attr( "class" ) || "" ).split( " " ),
+			overlayTheme = null,
+			matches;
+
+		while ( classes.length > 0 ) {
+			overlayTheme = classes.pop();
+			matches = ( new RegExp( "^ui-overlay-([a-z])$" ) ).exec( overlayTheme );
+			if ( matches && matches.length > 1 ) {
+				overlayTheme = matches[ 1 ];
+				break;
+			} else {
+				overlayTheme = null;
+			}
+		}
+		
+		$.mobile.pageContainer.removeClass( "ui-overlay-" + overlayTheme );
 	},
 
 	// set the page container background to the page theme
