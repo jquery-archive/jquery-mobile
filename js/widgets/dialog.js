@@ -91,7 +91,7 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 	},
 
 	_setCloseBtn: function( value ) {
-		var self = this, btn, location, dst, theme;
+		var self = this, btn, location, dst;
 
 		if ( this._headerCloseButton ) {
 			this._headerCloseButton.remove();
@@ -101,12 +101,10 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 			// Sanitize value
 			location = ( value === "left" ? "left" : "right" );
 			dst = this.element.children().find( ":jqmData(role='header')" ).first();
-			theme = dst[ 0 ] ? $.mobile.getAttribute( dst[ 0 ], "theme", true ) || "a" : "a";
 			btn = $( "<a></a>", {
 				"href": "#",
 				"class": "ui-btn ui-btn-" + location +
-					" ui-btn-" + theme +
-					" ui-shadow-icon ui-corner-all ui-icon-delete ui-btn-icon-notext"
+					" ui-corner-all ui-icon-delete ui-btn-icon-notext"
 				})
 				.text( this.options.closeBtnText )
 				.prependTo( dst )
