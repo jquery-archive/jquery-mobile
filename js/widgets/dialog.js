@@ -39,7 +39,7 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 					"class" : "ui-dialog-contain ui-overlay-shadow" + cornerClass
 				});
 
-		$el.addClass( "ui-dialog ui-overlay-" + this.options.overlayTheme );
+		$el.addClass( "ui-dialog" );
 
 		// Class the markup for dialog styling
 		// Set aria role
@@ -76,9 +76,6 @@ $.widget( "mobile.dialog", $.mobile.widget, $.extend( {
 	},
 
 	_setOverlayTheme: function( value ) {
-		this.element
-			.removeClass( "ui-overlay-" + this.options.overlayTheme )
-			.addClass( "ui-overlay-" + value );
 		if ( $.mobile.activePage[ 0 ] === this.element[ 0 ] ) {
 			this.options.overlayTheme = value;
 			this._handlePageBeforeShow();
