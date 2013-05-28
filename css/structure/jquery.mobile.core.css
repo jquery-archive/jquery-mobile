@@ -345,6 +345,7 @@ div.ui-mobile-viewport {
 .ui-mobile label,
 .ui-controlgroup-label {
 	display: block;
+	font-weight: normal;
 	margin: 0 0 .4em;
 }
 .ui-mini label,
