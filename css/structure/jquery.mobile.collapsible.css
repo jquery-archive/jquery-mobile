@@ -47,7 +47,7 @@
 	padding: .625em 1em;
 	border-left-width: 0;
 	border-right-width: 0;
-	border-top: none;
+	border-top-width: 0;
 	background-image: none;
 }
 .ui-collapsible-inset .ui-collapsible-content {

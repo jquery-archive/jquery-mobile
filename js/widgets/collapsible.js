@@ -45,10 +45,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		// If we are in a collapsible set
 		if ( collapsibleSet.length ) {
-			// Inherit the theme from collapsible-set
-			if ( !o.theme ) {
-				o.theme = collapsibleSet.jqmData( "theme" );
-			}
+
 			// Inherit the content-theme from collapsible-set
 			if ( !o.contentTheme ) {
 				o.contentTheme = getAttr( collapsibleSet[ 0 ], "content-theme", true );
