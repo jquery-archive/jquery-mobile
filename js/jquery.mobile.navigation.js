@@ -809,7 +809,7 @@ define( [
 			return true;
 		},
 
-		change: function( toPage, options ) {
+		change: function( to, options ) {
 			// If we are in the midst of a transition, queue the current request.
 			// We'll call changePage() once we're done with the current transition
 			// to service the request.
@@ -825,29 +825,29 @@ define( [
 			settings.fromPage = settings.fromPage || $.mobile.activePage;
 
 			// if the page beforechange default is prevented return early
-			if ( !this._triggerPageBeforeChange(toPage, triggerData, settings) ) {
+			if ( !this._triggerPageBeforeChange(to, triggerData, settings) ) {
 				return;
 			}
 
-			// We allow "pagebeforechange" observers to modify the toPage in
-			// the trigger data to allow for redirects. Make sure our toPage is
+			// We allow "pagebeforechange" observers to modify the to in
+			// the trigger data to allow for redirects. Make sure our to is
 			// updated. We also need to re-evaluate whether it is a string,
 			// because an object can also be replaced by a string
-			toPage = triggerData.toPage;
+			to = triggerData.toPage;
 
 			// If the caller passed us a url, call loadPage()
 			// to make sure it is loaded into the DOM. We'll listen
 			// to the promise object it returns so we know when
 			// it is done loading or if an error ocurred.
-			if ( $.type(toPage) === "string" ) {
+			if ( $.type(to) === "string" ) {
 				// Set the isPageTransitioning flag to prevent any requests from
 				// entering this method while we are in the midst of loading a page
 				// or transitioning.
 				isPageTransitioning = true;
 
-				this._loadUrl( toPage, triggerData, settings );
+				this._loadUrl( to, triggerData, settings );
 			} else {
-				this.transition( toPage, triggerData, settings );
+				this.transition( to, triggerData, settings );
 			}
 		},
 
