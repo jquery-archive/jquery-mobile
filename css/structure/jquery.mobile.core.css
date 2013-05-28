@@ -237,6 +237,9 @@ div.ui-mobile-viewport {
 .ui-mini .ui-btn {
 	font-size: inherit;
 }
+.ui-mini .ui-controlgroup-label {
+	font-size: 16px;
+}
 /* Make buttons in toolbars default to mini and inline. */
 .ui-header .ui-btn,
 .ui-footer .ui-btn {
@@ -345,13 +348,9 @@ div.ui-mobile-viewport {
 .ui-mobile label,
 .ui-controlgroup-label {
 	display: block;
-	font-weight: normal;
 	margin: 0 0 .4em;
 }
-.ui-mini label,
-.ui-mini .ui-controlgroup-label {
-	font-size: 16px;
-}
+
 /* Accessible content hiding */
 .ui-hide-label > label,
 .ui-hide-label .ui-controlgroup-label,

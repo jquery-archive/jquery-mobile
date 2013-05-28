@@ -22,6 +22,11 @@ legend,
 	color: inherit;
 	text-shadow: inherit;
 }
+/* Form labels (overrides font-weight bold in bars) */
+.ui-mobile label,
+div.ui-controlgroup-label {
+	font-weight: normal;
+}
 
 /* Field contain separator (< 28em)
 -----------------------------------------------------------------------------------------------------------*/
@@ -36,7 +41,8 @@ legend,
 /* Buttons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn {
+.ui-btn,
+label.ui-btn {
 	font-weight: bold;
 	border-width: 1px;
 	border-style: solid;
