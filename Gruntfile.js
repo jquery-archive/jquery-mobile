@@ -426,7 +426,7 @@ module.exports = function( grunt ) {
 					urls: (function() {
 						// Find the test files
 						var suites = _.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
-							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ),
+							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ).sort().reverse(), // So that unit runs before integration
 							patterns, paths,
 							prefixes = ["tests/unit/", "tests/integration/"],
 							versionedPaths = [],
@@ -463,7 +463,6 @@ module.exports = function( grunt ) {
 						}
 
 						paths = grunt.file.expand( patterns )
-							.sort()
 							.map( function( path ) {
 								// Some of our tests (ie. navigation) don't like having the index.html too much
 								return path.replace( /\/\index.html$/, "/" );
