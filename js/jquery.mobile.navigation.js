@@ -924,8 +924,8 @@ define( [
 			// animation transition is used.
 			if ( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
 				isPageTransitioning = false;
-				this.element.trigger( "pagechange", triggerData );
 				this._triggerWithDeprecated( "transition", triggerData );
+				this.element.trigger( "pagechange", triggerData );
 
 				// Even if there is no page change to be done, we should keep the urlHistory
 				// in sync with the hash changes
