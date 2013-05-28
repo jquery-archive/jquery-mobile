@@ -853,12 +853,11 @@ define( [
 
 		transition: function( toPage, triggerData, settings ) {
 			var fromPage, url, pageUrl, fileUrl,
-			  active, activeIsInitialPage,
-			  historyDir, pageTitle, isDialog,
-			  alreadyThere,
-			  newPageTitle,
-			  params,
-			  cssTransitionDeferred;
+				active, activeIsInitialPage,
+				historyDir, pageTitle, isDialog,
+				alreadyThere, newPageTitle,
+				params,	cssTransitionDeferred,
+				beforeTransition;
 
 			// If we are in the midst of a transition, queue the current request.
 			// We'll call changePage() once we're done with the current transition
@@ -877,8 +876,10 @@ define( [
 			}
 
 			// if the (content|page)beforetransition default is prevented return early
-			if ( this._triggerWithDeprecated( "beforetransition", triggerData )
-				 .event.isdefaultPrevented() ) {
+			// Note, we have to check for both the deprecated and new events
+			beforeTransition = this._triggerWithDeprecated( "beforetransition", triggerData );
+			if (beforeTransition.deprecatedEvent.isDefaultPrevented() ||
+				beforeTransition.event.isDefaultPrevented() ) {
 				return;
 			}
 
@@ -1082,9 +1083,7 @@ define( [
 				this.element.trigger( "pagechange", triggerData );
 				this._triggerWithDeprecated( "transition", triggerData );
 			}, this));
-
 		}
-
 		// TODO resetActivePageHeight
 		// TODO changePage
 	});
