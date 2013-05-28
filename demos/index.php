@@ -53,31 +53,14 @@
         	<?php include( 'nav-widgets.php' ); ?>
         </ul>
 		
-		<h2>Test Suite</h2>
+		<h2>Tests</h2>
 		
 		<ul data-role="listview" data-inset="true" data-theme="a" data-divider-theme="a" data-icon="false" class="jqm-list">
-			<li data-role="list-divider">Swatch A</li>
-        	<li><a href="test/buttons-a/" data-ajax="false">Buttons</a></li>
-        	<li><a href="test/forms-a/" data-ajax="false">Forms 1</a></li>
-        	<li><a href="test/forms-a/form.php" data-ajax="false">Forms 2</a></li>
-        	<li><a href="test/forms-a/form-fieldcontain.php" data-ajax="false">Form fieldcontain</a></li>
-        	<li><a href="test/forms-a/form-hide-label.php" data-ajax="false">Form ui-hide-label</a></li>
-        	<li><a href="test/forms-a/form-label-hidden.php" data-ajax="false">Form ui-hidden-accessible</a></li>
-        	<li><a href="test/forms-a/form-disabled.php" data-ajax="false">Form disabled</a></li>
-        	<li><a href="test/listviews-a/" data-ajax="false">Listviews</a></li>
-			<li data-role="list-divider">Swatch B</li>
-        	<li><a href="test/buttons-b/" data-ajax="false">Buttons</a></li>
-        	<li><a href="test/forms-b/" data-ajax="false">Forms 1</a></li>
-        	<li><a href="test/forms-b/form.php" data-ajax="false">Forms 2</a></li>
-        	<li><a href="test/forms-b/form-fieldcontain.php" data-ajax="false">Form fieldcontain</a></li>
-        	<li><a href="test/forms-b/form-hide-label.php" data-ajax="false">Form ui-hide-label</a></li>
-        	<li><a href="test/forms-b/form-label-hidden.php" data-ajax="false">Form ui-hidden-accessible</a></li>
-        	<li><a href="test/forms-b/form-disabled.php" data-ajax="false">Form disabled</a></li>
-        	<li><a href="test/listviews-b/" data-ajax="false">Listviews</a></li>
+			<li data-role="list-divider">Theming</li>
+			<li><a href="test/theming/" data-ajax="false">Theme A (default)</a></li>
+			<li><a href="test/theming/theme-b.php" data-ajax="false">Theme B</a></li>
 			<li data-role="list-divider">Icons</li>
 			<li><a href="test/icons/font-icons.php" data-ajax="false">Font icons</a></li>
-			<li data-role="list-divider">Theming</li>
-			<li><a href="test/theming/" data-ajax="false">Theme inheritance</a></li>
         </ul>
 
 	</div><!-- /content -->

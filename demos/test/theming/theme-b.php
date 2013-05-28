@@ -10,25 +10,25 @@
 	<script src="../../../js/"></script>
 </head>
 <body>
-<div data-role="page" id="testpage">
+<div data-role="page" id="testpage" data-theme="b">
 
 	<div data-role="header">
-		<h1>Theme A</h1>
+		<h1>Theme B</h1>
 		<a href="../../" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
 		<a href="#" data-role="button" data-icon="gear">Button</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 
-		<div class="ui-body ui-body-a ui-body-inherit ui-corner-all">
-			<p>I am a div with classes ui-body, ui-body-a and ui-corner-all.</p>
+		<div class="ui-body ui-body-b ui-body-inherit ui-corner-all">
+			<p>I am a div with classes ui-body, ui-body-b and ui-corner-all.</p>
 			<p><a href="#">I am a link</a></p>
 		</div>
 		
-		<div class="ui-bar ui-bar-a ui-corner-all">
-			<p>I am a div with classes ui-bar, ui-bar-a and ui-corner-all. <a href="#">I am a link</a></p>
+		<div class="ui-bar ui-bar-b ui-corner-all">
+			<p>I am a div with classes ui-bar, ui-bar-b and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
-				
+		
 		<a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">We</a>
 		<button data-inline="true" data-icon="arrow-r" data-iconpos="right">are</button>
 		<input type="button" value="buttons" data-inline="true" data-icon="arrow-r" data-iconpos="right">
@@ -144,7 +144,7 @@
 				</li>
 			</ul>
 		</form>
-
+		
 		<div class="ui-bar ui-bar-inherit">
 			<p>Bar</p>
 			<div data-role="fieldcontain">
@@ -163,13 +163,13 @@
 				<input type="range" name="slider4" id="slider4" value="0" min="0" max="100" data-highlight="true">
 			</div>
 		</div>
-
-		<div data-role="collapsible" data-content-theme="a">
+		
+		<div data-role="collapsible" data-content-theme="b">
 			<h4>Heading</h4>
-			<p>I'm the collapsible content with a themed content block set to "a".</p>
+			<p>I'm the collapsible content with a themed content block set to "b".</p>
 		</div>
 		
-		<div data-role="collapsible-set" data-content-theme="a">
+		<div data-role="collapsible-set" data-content-theme="b">
 			<div data-role="collapsible">
 				<h3>Section 1</h3>
 				<p>I'm the collapsible content for section 1</p>
