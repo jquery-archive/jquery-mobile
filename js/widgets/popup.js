@@ -558,7 +558,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	_reposition: function( o ) {
 		// We only care about position-related parameters for repositioning
 		o = { x: o.x, y: o.y, positionTo: o.positionTo };
-		this._trigger( "beforeposition", o );
+		this._trigger( "beforeposition", undefined, o );
 		this._ui.container.offset( this._placementCoords( this._desiredCoords( o ) ) );
 	},
 
