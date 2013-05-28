@@ -15,15 +15,17 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 			o = this.options,
 			classes = "ui-collapsible-set";
 
-		// Inherit the content-theme from collapsible-set
+		if ( !o.theme ) {
+			o.theme = $el.jqmData( "theme" );
+		}		
+		if ( o.theme ) {
+			classes += " ui-group-theme-" + o.theme;
+		}		
+
 		if ( !o.contentTheme ) {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
-		if ( o.contentTheme ) {
-			classes += " ui-group-theme-" + o.contentTheme;
-		}		
 		
-		// Inherit the corner styling from collapsible-set
 		if ( !o.corners ) {
 			o.corners = $el.jqmData( "corners" );
 		}
