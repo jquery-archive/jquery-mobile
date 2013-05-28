@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom"  ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -15,18 +15,16 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		mini: false,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
 		clearBtn: false,
-		clearSearchButtonText: null, //deprecating for 1.3...
 		clearBtnText: "clear text",
 		disabled: false
 	},
 
 	_create: function() {
-		this._refresh(true);	
-	}, 
+		this._refresh(true);
+	},
 
-	_refresh: function(create) {
+	_refresh: function (create) {
 		var self = this,
 			input = this.element,
 			o = this.options,
@@ -36,97 +34,106 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			miniclass,
 			inputNeedsClearBtn,
 			theme,
+			themeclass,
 			isSearch = input.is("[type='search'], :jqmData(type='search')"),
 			clearBtnBlacklist = input.is("textarea, :jqmData(type='range')"),
-			inputNeedsWrap = input.is("input") && !input.is(":jqmData(type='range')");
-			
+			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" ),
+			extraLineHeight = 15,
+			keyupTimeoutBuffer = 100,
+			keyupTimeout;
+
 		function toggleClear() {
-			setTimeout(function () {
-				clearbtn.toggleClass("ui-input-clear-hidden", !input.val());
-			}, 0);
+			setTimeout( function() {
+				clearbtn.toggleClass( "ui-input-clear-hidden", !input.val() );
+			}, 0 );
 		}
-		
+
 		function buildClearBtn() {
-			clearbtn = $("<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>")
-				.bind("click", function (event) {
-					input.val("").focus().trigger("change");
-					clearbtn.addClass("ui-input-clear-hidden");
+			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>")
+				.bind( "click" , function( event ) {
+					input
+							.val("")
+							.focus()
+							.trigger( "change" );
+					clearbtn.addClass( "ui-input-clear-hidden" );
 					event.preventDefault();
-				}).appendTo(focusedEl).buttonMarkup({
-					icon: "delete",
-					iconpos: "notext",
-					corners: true,
-					shadow: true,
-					mini: o.mini
+				})
+				.appendTo(focusedEl)
+				.buttonMarkup({
+						icon: "delete",
+						iconpos: "notext",
+						corners: true,
+						shadow: true,
+						mini: o.mini
 				});
 
-			if (!isSearch) {
-				focusedEl.addClass("ui-input-has-clear");
+			if ( !isSearch ) {
+				focusedEl.addClass( "ui-input-has-clear" );
 			}
 
 			toggleClear();
 
-			input.bind("paste cut keyup input focus change blur", toggleClear);
+			input.bind( "paste cut keyup input focus change blur", toggleClear );
 		}
-		
-		if (!create) {
+
+		if ( !create ) {
 			var oldTheme, dataMini, refreshMini = false;
 
 			focusedEl = input;
-			oldTheme = o.theme || $.mobile.getInheritedTheme(input, "c");
-			theme = input.attr("data-" + $.mobile.ns + "theme") || (o.theme || $.mobile.getInheritedTheme(input, "c"));
-			o.clearBtn = input.attr("data-" + $.mobile.ns + "clear-btn") === 'true';
+			oldTheme = o.theme || $.mobile.getInheritedTheme( input , "c");
+			theme = input.attr( "data-" + $.mobile.ns + "theme" ) || ( o.theme || $.mobile.getInheritedTheme( input , "c" ) );
+			o.clearBtn = input.attr( "data-" + $.mobile.ns + "clear-btn" ) === 'true';
 			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist;
 
-			if (isSearch || inputNeedsWrap) {
+			if ( isSearch || inputNeedsWrap) {
 				focusedEl = input.parent();
-				focusedEl.removeClass("ui-body-" + oldTheme).addClass("ui-body-" + theme);
+				focusedEl.removeClass( "ui-body-" + oldTheme ).addClass( "ui-body-" + theme );
 			}
 
-			input.removeClass("ui-body-" + oldTheme).addClass("ui-body-" + theme);
+			input.removeClass( "ui-body-" + oldTheme ).addClass( "ui-body-" + theme );
 
 			o.theme = theme;
 
 			//is data-mini changed? 
-			dataMini = input.attr("data-" + $.mobile.ns + "mini") === 'true';
+			dataMini = input.attr( "data-" + $.mobile.ns + "mini" ) === 'true';
 
-			if (o.mini !== dataMini) {
+			if ( o.mini !== dataMini ) {
 				o.mini = dataMini;
 				refreshMini = true;
 				miniclass = o.mini ? "ui-mini" : "";
-				focusedEl.removeClass("ui-mini").addClass(miniclass);
+				focusedEl.removeClass( "ui-mini" ).addClass( miniclass );
 			}
 
 			//if textinput or search
-			if (inputNeedsClearBtn || isSearch) {
-				clearBtnText = input.attr("data-" + $.mobile.ns + "clear-btn-text");
+			if ( inputNeedsClearBtn || isSearch ) {
+				clearBtnText = input.attr( "data-" + $.mobile.ns + "clear-btn-text" );
 
 				//accept even an empty string
-				if (typeof clearBtnText === "undefined") {
-					clearBtnText = o.clearSearchButtonText || o.clearBtnText;
+				if ( typeof clearBtnText === "undefined") {
+					clearBtnText = o.clearBtnText;
 				}
 
-				clearbtn = focusedEl.find(".ui-input-clear");
+				clearbtn = focusedEl.find( ".ui-input-clear" );
 
-				if (!clearbtn.length) {
+				if ( !clearbtn.length ) {
 					buildClearBtn();
 				} else {
 					clearbtn[0].title = clearBtnText;
-					clearbtn.find(".ui-btn-text").text(clearBtnText);
+					clearbtn.find( ".ui-btn-text" ).text( clearBtnText );
 				}
 
-				clearbtn.removeClass("ui-btn-up-" + oldTheme).addClass("ui-btn-up-" + theme);
+				clearbtn.removeClass( "ui-btn-up-" + oldTheme ).addClass( "ui-btn-up-" + theme );
 
-				if (refreshMini) {
-					if (miniclass) {
-						clearbtn.removeClass("ui-fullsize").addClass(miniclass);
+				if ( refreshMini ) {
+					if ( miniclass ) {
+						clearbtn.removeClass( "ui-fullsize" ).addClass( miniclass );
 					} else {
-						clearbtn.removeClass("ui-mini").addClass("ui-fullsize");
+						clearbtn.removeClass( "ui-mini" ).addClass( "ui-fullsize" );
 					}
 				}
 
-				clearbtn.attr("data-theme", theme);
-				clearbtn.toggleClass("ui-input-clear-hidden", !input.val());
+				clearbtn.attr( "data-theme", theme );
+				clearbtn.toggleClass( "ui-input-clear-hidden" , !input.val() );
 
 			} else {
 				if (focusedEl.length) {
@@ -134,7 +141,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				}
 			}
 
-			if (input.attr("disabled")) {
+			if ( input.attr("disabled") ) {
 				this.disable();
 			} else {
 				this.enable();
@@ -144,11 +151,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			themeclass = " ui-body-" + theme;
 			miniclass = o.mini ? " ui-mini" : "";
 			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist;
-			clearBtnText = o.clearSearchButtonText || o.clearBtnText;
+			clearBtnText = o.clearBtnText;
 
-			$("label[for='" + input.attr("id") + "']").addClass("ui-input-text");
+			$( "label[for='" + input.attr("id") + "']" ).addClass( "ui-input-text" );
 
-			focusedEl = input.addClass("ui-input-text ui-body-" + theme);
+			focusedEl = input.addClass( "ui-input-text ui-body-" + theme );
 
 			// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 			//      Turn off autocorrect and autocomplete on non-iOS 5 devices
@@ -157,18 +164,18 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			//      the autocorrect property on the input element. We currently
 			//      have no test for iOS 5 or newer so we're temporarily using
 			//      the touchOverflow support flag for jQM 1.0. Yes, I feel dirty. - jblas
-			if (typeof input[0].autocorrect !== "undefined" && !$.support.touchOverflow) {
+			if ( typeof input[0].autocorrect !== "undefined" && !$.support.touchOverflow ) {
 				// Set the attribute instead of the property just in case there
 				// is code that attempts to make modifications via HTML.
-				input[0].setAttribute("autocorrect", "off");
-				input[0].setAttribute("autocomplete", "off");
+				input[0].setAttribute( "autocorrect" , "off" );
+				input[0].setAttribute( "autocomplete" , "off" );
 			}
 
 			//"search" and "text" input widgets
-			if (isSearch) {
-				focusedEl = input.wrap("<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>").parent();
+			if ( isSearch ) {
+				focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>"  ).parent();
 			} else if (inputNeedsWrap) {
-				focusedEl = input.wrap("<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>").parent();
+				focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
 			}
 
 			if (inputNeedsClearBtn || isSearch) {
@@ -177,66 +184,67 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				input.addClass("ui-corner-all ui-shadow-inset" + themeclass + miniclass);
 			}
 
-			input.focus(function () {
+			input.focus(function() {
 				// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
-				if (o.preventFocusZoom) {
-					$.mobile.zoom.disable(true);
+				if ( o.preventFocusZoom ) {
+					$.mobile.zoom.disable( true );
 				}
-				focusedEl.addClass($.mobile.focusClass);
-			}).blur(function () {
-				focusedEl.removeClass($.mobile.focusClass);
-				if (o.preventFocusZoom) {
-					$.mobile.zoom.enable(true);
+				focusedEl.addClass( $.mobile.focusClass );
+			}).blur(function() {
+				focusedEl.removeClass( $.mobile.focusClass );
+				if ( o.preventFocusZoom ) {
+					$.mobile.zoom.enable( true );
 				}
-			});
+			} );
 
 			// Autogrow
-			if (input.is("textarea")) {
-				var extraLineHeight = 15,
-					keyupTimeoutBuffer = 100,
-					keyupTimeout;
+			if ( input.is( "textarea" ) ) {
 
-				this._keyup = function () {
+				this._keyup = function() {
 					var scrollHeight = input[0].scrollHeight,
-							clientHeight = input[0].clientHeight;
+					clientHeight = input[0].clientHeight;
 
-					if (clientHeight < scrollHeight) {
-						input.height(scrollHeight + extraLineHeight);
+					if ( clientHeight < scrollHeight ) {
+						var paddingTop = parseFloat( input.css("padding-top") ),
+						paddingBottom = parseFloat( input.css("padding-bottom") ),
+						paddingHeight = paddingTop + paddingBottom;
+
+						input.height( scrollHeight - paddingHeight + extraLineHeight );
 					}
 				};
 
-				input.on("keyup change input paste", function () {
-					clearTimeout(keyupTimeout);
-					keyupTimeout = setTimeout(self._keyup, keyupTimeoutBuffer);
+				input.on( "keyup change input paste" , function() {
+					clearTimeout( keyupTimeout );
+					keyupTimeout = setTimeout( self._keyup , keyupTimeoutBuffer );
 				});
 
 				// binding to pagechange here ensures that for pages loaded via
 				// ajax the height is recalculated without user input
-				this._on($.mobile.document, { "pagechange": "_keyup" });
+				this._on( true , $.mobile.document , { "pagechange": "_keyup" });
 
 				// Issue 509: the browser is not providing scrollHeight properly until the styles load
-				if ($.trim(input.val())) {
+				if ( $.trim( input.val() ) ) {
 					// bind to the window load to make sure the height is calculated based on BOTH
 					// the DOM and CSS
-					this._on($.mobile.window, { "load": "_keyup" });
-				} 
+					this._on( true , $.mobile.window , { "load": "_keyup" } );
+				}
 			}
-			if (input.attr("disabled")) {
+			if ( input.attr( "disabled" ) ) {
 				this.disable();
 			}
 		}
 	},
-	
+
 	refresh: function() {
-		this._refresh(false);	
+		this._refresh( false );
 	},
-	
+
 	disable: function() {
 		var $el,
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
 			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
-			
+
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
@@ -262,10 +270,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 	}
 });
 
+$.mobile.textinput.initSelector = "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']";
+
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.textinput.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.textinput" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
