@@ -870,9 +870,15 @@ define( [
 				return;
 			}
 
-			// DEPRECATED - this call only
+			// DEPRECATED - this call only, in favor of the before transition
 			// if the page beforechange default is prevented return early
 			if ( !this._triggerPageBeforeChange(toPage, triggerData, settings) ) {
+				return;
+			}
+
+			// if the (content|page)beforetransition default is prevented return early
+			if ( this._triggerWithDeprecated( "beforetransition", triggerData )
+				 .event.isdefaultPrevented() ) {
 				return;
 			}
 
@@ -905,7 +911,6 @@ define( [
 			pageTitle = document.title;
 			isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
 
-
 			// By default, we prevent changePage requests when the fromPage and toPage
 			// are the same element, but folks that generate content manually/dynamically
 			// and reuse pages want to be able to transition to the same page. To allow
@@ -919,6 +924,7 @@ define( [
 			if ( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
 				isPageTransitioning = false;
 				this.element.trigger( "pagechange", triggerData );
+				this._triggerWithDeprecated( "transition", triggerData );
 
 				// Even if there is no page change to be done, we should keep the urlHistory
 				// in sync with the hash changes
@@ -1066,8 +1072,6 @@ define( [
 					settings.duplicateCachedPage.remove();
 				}
 
-				// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
-				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
 				if ( !alreadyFocused ) {
@@ -1076,6 +1080,7 @@ define( [
 
 				releasePageTransitionLock();
 				this.element.trigger( "pagechange", triggerData );
+				this._triggerWithDeprecated( "transition", triggerData );
 			}, this));
 
 		}
