@@ -47,6 +47,8 @@ input.ui-slider-input {
 .ui-slider-track {
 	position: relative;
 	overflow: visible;
+	border-width: 1px;
+	border-style: solid;
 	height: 15px;
 	margin: 0 15px 0 68px;
 	top: 6px;

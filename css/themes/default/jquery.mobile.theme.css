@@ -395,18 +395,6 @@ html body .ui-group-theme-a .ui-body-inherit,
 	color: #34bae8 /*{a-body-link-active}*/;
 }
 
-/* Slider track */
-.ui-page-theme-a .ui-slider-track,
-html .ui-bar-a .ui-slider-track,
-html body .ui-group-theme-a .ui-slider-track,
-html body div.ui-slider-track.ui-body-a {
-	background:				#1b1b1b /*{a-fill-background-color}*/;
-	border: 1px solid		#111 /*{a-fill-border}*/;
-	color:					#fff /*{a-fill-color}*/;
-	text-shadow: 0 /*{a-fill-shadow-x}*/ 1px /*{a-fill-shadow-y}*/ 0 /*{a-fill-shadow-radius}*/ #000 /*{a-fill-shadow-color}*/;
-	font-weight: bold;
-}
-
 /* Button up */
 .ui-page-theme-a .ui-btn,
 html .ui-bar-a .ui-btn,
@@ -573,18 +561,6 @@ html body .ui-group-theme-b .ui-body-inherit,
 }
 .ui-body-b .ui-link:active {
 	color: #0066ff /*{b-body-link-active}*/;
-}
-
-/* Slider track */
-.ui-page-theme-b .ui-slider-track,
-html .ui-bar-b .ui-slider-track,
-html body .ui-group-theme-b .ui-slider-track,
-html body div.ui-slider-track.ui-body-b {
-	background:				#ececec /*{b-fill-background-color}*/;
-	border: 1px solid		#cfcfcf /*{b-fill-border}*/;
-	color:					#333 /*{b-fill-color}*/;
-	text-shadow: 0 /*{b-fill-shadow-x}*/ 1px /*{b-fill-shadow-y}*/ 0 /*{b-fill-shadow-radius}*/ #fff /*{b-fill-shadow-color}*/;
-	font-weight: bold;
 }
 
 /* Button up */
