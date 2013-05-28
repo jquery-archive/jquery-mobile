@@ -1,9 +1,6 @@
 .ui-rangeslider {
 	margin: .5em 0;
 }
-.ui-rangeslider.ui-mini {
-	margin: .25em 0;
-}
 .ui-rangeslider:before,
 .ui-rangeslider:after {
 	content: "";

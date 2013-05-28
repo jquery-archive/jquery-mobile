@@ -3,10 +3,6 @@ div.ui-slider {
 	margin: .5em 0;
 	padding: 0;
 }
-div.ui-slider.ui-mini {
-	margin-top: .25em;
-	margin-bottom: .25em;
-}
 div.ui-slider:before,
 div.ui-slider:after {
 	content: "";
@@ -99,7 +95,6 @@ div.ui-slider-switch:after {
 	clear: none;
 }
 div.ui-slider-switch.ui-mini {
-	width: 5em;
 	height: 29px;
 	top: 0;
 }
@@ -165,8 +160,5 @@ div.ui-slider-switch.ui-mini {
 	.ui-field-contain.ui-hide-label div.ui-slider-switch {
 		display: inline-block;
 		width: 5.8em;
-	}
-	.ui-field-contain div.ui-slider-switch.ui-mini {
-		width: 5em;
 	}
 }	
