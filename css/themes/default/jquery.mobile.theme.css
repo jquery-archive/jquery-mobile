@@ -329,6 +329,7 @@ label.ui-btn {
 .ui-bar-a,
 .ui-page-theme-a .ui-bar-inherit,
 html .ui-bar-a .ui-bar-inherit,
+html .ui-body-a .ui-bar-inherit,
 html body .ui-group-theme-a .ui-bar-inherit {
 	background: 			#e3e3e3 /*{a-bar-background-color}*/;
 	border-color:	 		#d5d5d5 /*{a-bar-border}*/;
@@ -360,6 +361,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
 /* Count bubble */
 .ui-page-theme-a .ui-li-count,
 html .ui-bar-a .ui-li-count,
+html .ui-body-a .ui-li-count,
 html body .ui-group-theme-a .ui-li-count,
 .ui-btn.ui-btn-a > .ui-li-count,
 .ui-li-static.ui-body-a > .ui-li-count,
@@ -375,6 +377,7 @@ html body .ui-group-theme-a .ui-li-count,
 .ui-body-a,
 .ui-page-theme-a .ui-body-inherit,
 html .ui-bar-a .ui-body-inherit,
+html .ui-body-a .ui-body-inherit,
 html body .ui-group-theme-a .ui-body-inherit,
 .ui-overlay-a {
 	background: 			#fcfcfc /*{a-body-background-color}*/;
@@ -404,12 +407,14 @@ html body .ui-group-theme-a .ui-body-inherit,
 /* Button up */
 .ui-page-theme-a .ui-btn,
 html .ui-bar-a .ui-btn,
+html .ui-body-a .ui-btn,
 html body .ui-btn.ui-btn-a,
 html body .ui-group-theme-a .ui-btn,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-a,
 /* Button visited */
 .ui-page-theme-a .ui-btn:visited,
 html .ui-bar-a .ui-btn:visited,
+html .ui-body-a .ui-btn:visited,
 html body .ui-btn.ui-btn-a:visited,
 html body .ui-group-theme-a .ui-btn:visited,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-a:visited {
@@ -421,6 +426,7 @@ html body .ui-group-theme-a .ui-btn:visited,
 /* Button hover */
 .ui-page-theme-a .ui-btn:hover,
 html .ui-bar-a .ui-btn:hover,
+html .ui-body-a .ui-btn:hover,
 html body .ui-btn.ui-btn-a:hover,
 html body .ui-group-theme-a .ui-btn:hover,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-a:hover {
@@ -432,6 +438,7 @@ html body .ui-group-theme-a .ui-btn:hover,
 /* Button down */
 .ui-page-theme-a .ui-btn:active,
 html .ui-bar-a .ui-btn:active,
+html .ui-body-a .ui-btn:active,
 html body .ui-btn.ui-btn-a:active,
 html body .ui-group-theme-a .ui-btn:active,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-a:active {
@@ -444,17 +451,20 @@ html body .ui-group-theme-a .ui-btn:active,
 /* Active button */
 .ui-page-theme-a .ui-btn.ui-btn-active,
 html .ui-bar-a .ui-btn.ui-btn-active,
+html .ui-body-a .ui-btn.ui-btn-active,
 html body .ui-btn.ui-btn-a.ui-btn-active,
 html body .ui-group-theme-a .ui-btn.ui-btn-active,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-a.ui-btn-active,
 /* Active checkbox icon */
 .ui-page-theme-a .ui-icon-checkbox-on:after,
 html .ui-bar-a .ui-icon-checkbox-on:after,
+html .ui-body-a .ui-icon-checkbox-on:after,
 html body .ui-group-theme-a .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-a:after,
 /* Active slider track */
 .ui-page-theme-a .ui-slider-track .ui-btn-active,
 html .ui-bar-a .ui-slider-track .ui-btn-active,
+html .ui-body-a .ui-slider-track .ui-btn-active,
 html body .ui-group-theme-a .ui-slider-track .ui-btn-active,
 html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	background-color: 			#0066ff /*{a-bactive-background-color}*/;
@@ -466,6 +476,7 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 /* Active radio button icon */
 .ui-page-theme-a .ui-icon-radio-on:after,
 html .ui-bar-a .ui-icon-radio-on:after,
+html .ui-body-a .ui-icon-radio-on:after,
 html body .ui-group-theme-a .ui-icon-radio-on:after,
 .ui-btn.ui-icon-radio-on.ui-btn-a:after {
 	background-color: #fff /*{a-bactive-color}*/;
@@ -475,12 +486,14 @@ html body .ui-group-theme-a .ui-icon-radio-on:after,
 /* Focus */
 .ui-page-theme-a .ui-btn:focus,
 html .ui-bar-a .ui-btn:focus,
+html .ui-body-a .ui-btn:focus,
 html body .ui-btn.ui-btn-a:focus,
 html body .ui-group-theme-a .ui-btn:focus,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-a:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-a .ui-focus,
 html .ui-bar-a .ui-focus,
+html .ui-body-a .ui-focus,
 html body .ui-btn-a.ui-focus,
 html body .ui-body-a.ui-focus,
 html body .ui-group-theme-a .ui-focus,
@@ -498,6 +511,7 @@ html body .ui-group-theme-a .ui-focus,
 .ui-bar-b,
 .ui-page-theme-b .ui-bar-inherit,
 html .ui-bar-b .ui-bar-inherit,
+html .ui-body-b .ui-bar-inherit,
 html body .ui-group-theme-b .ui-bar-inherit {
 	background: 			#1c1c1c /*{b-bar-background-color}*/;
 	border-color:	 		#181818 /*{b-bar-border}*/;
@@ -529,6 +543,7 @@ html body .ui-group-theme-b .ui-bar-inherit {
 /* Count bubble */
 .ui-page-theme-b .ui-li-count,
 html .ui-bar-b .ui-li-count,
+html .ui-body-b .ui-li-count,
 html body .ui-group-theme-b .ui-li-count,
 .ui-btn.ui-btn-b > .ui-li-count,
 .ui-li-static.ui-body-b > .ui-li-count,
@@ -544,6 +559,7 @@ html body .ui-group-theme-b .ui-li-count,
 .ui-body-b,
 .ui-page-theme-b .ui-body-inherit,
 html .ui-bar-b .ui-body-inherit,
+html .ui-body-b .ui-body-inherit,
 html body .ui-group-theme-b .ui-body-inherit,
 .ui-overlay-b {
 	background: 			#252525 /*{b-body-background-color}*/;
@@ -573,6 +589,7 @@ html body .ui-group-theme-b .ui-body-inherit,
 /* Button up */
 .ui-page-theme-b .ui-btn,
 html .ui-bar-b .ui-btn,
+html .ui-body-b .ui-btn,
 html body .ui-btn.ui-btn-b,
 html body .ui-group-theme-b .ui-btn,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b,
@@ -590,6 +607,7 @@ html body .ui-group-theme-b .ui-btn:visited,
 /* Button hover */
 .ui-page-theme-b .ui-btn:hover,
 html .ui-bar-b .ui-btn:hover,
+html .ui-body-b .ui-btn:hover,
 html body .ui-btn.ui-btn-b:hover,
 html body .ui-group-theme-b .ui-btn:hover,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:hover {
@@ -601,6 +619,7 @@ html body .ui-group-theme-b .ui-btn:hover,
 /* Button down */
 .ui-page-theme-b .ui-btn:active,
 html .ui-bar-b .ui-btn:active,
+html .ui-body-b .ui-btn:active,
 html body .ui-btn.ui-btn-b:active,
 html body .ui-group-theme-b .ui-btn:active,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:active {
@@ -613,17 +632,20 @@ html body .ui-group-theme-b .ui-btn:active,
 /* Active button */
 .ui-page-theme-b .ui-btn.ui-btn-active,
 html .ui-bar-b .ui-btn.ui-btn-active,
+html .ui-body-b .ui-btn.ui-btn-active,
 html body .ui-btn.ui-btn-b.ui-btn-active,
 html body .ui-group-theme-b .ui-btn.ui-btn-active,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b.ui-btn-active,
 /* Active checkbox icon */
 .ui-page-theme-b .ui-icon-checkbox-on:after,
 html .ui-bar-b .ui-icon-checkbox-on:after,
+html .ui-body-b .ui-icon-checkbox-on:after,
 html body .ui-group-theme-b .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-b:after,
 /* Active slider track */
 .ui-page-theme-b .ui-slider-track .ui-btn-active,
 html .ui-bar-b .ui-slider-track .ui-btn-active,
+html .ui-body-b .ui-slider-track .ui-btn-active,
 html body .ui-group-theme-b .ui-slider-track .ui-btn-active,
 html body div.ui-slider-track.ui-body-b .ui-btn-active {
 	background-color: 			#34bae8 /*{b-bactive-background-color}*/;
@@ -634,6 +656,7 @@ html body div.ui-slider-track.ui-body-b .ui-btn-active {
 /* Active radio button icon */
 .ui-page-theme-b .ui-icon-radio-on:after,
 html .ui-bar-b .ui-icon-radio-on:after,
+html .ui-body-b .ui-icon-radio-on:after,
 html body .ui-group-theme-b .ui-icon-radio-on:after,
 .ui-btn.ui-icon-radio-on.ui-btn-b:after {
 	background-color: #fff /*{b-bactive-color}*/;
@@ -643,12 +666,14 @@ html body .ui-group-theme-b .ui-icon-radio-on:after,
 /* Focus */
 .ui-page-theme-b .ui-btn:focus,
 html .ui-bar-b .ui-btn:focus,
+html .ui-body-b .ui-btn:focus,
 html body .ui-btn.ui-btn-b:focus,
 html body .ui-group-theme-b .ui-btn:focus,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-b .ui-focus,
 html .ui-bar-b .ui-focus,
+html .ui-body-b .ui-focus,
 html body .ui-btn-b.ui-focus,
 html body .ui-body-b.ui-focus,
 html body .ui-group-theme-b .ui-focus,
