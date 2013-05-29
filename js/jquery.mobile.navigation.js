@@ -97,8 +97,6 @@ define( [
 		//initial value. If a base tag does not exist, then we default to the documentUrl.
 		documentBase = path.documentBase,
 
-		getScreenHeight = $.mobile.getScreenHeight,
-
 		//base element management, defined depending on dynamic base tag support
 		base = {
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
@@ -306,17 +304,6 @@ define( [
 
 		return promise;
 	}
-
-	//simply set the active page's minimum height to screen height, depending on orientation
-	$.mobile.resetActivePageHeight = function resetActivePageHeight( height ) {
-		var aPage = $( "." + $.mobile.activePageClass ),
-			aPageHeight = aPage.height(),
-			aPageOuterHeight = aPage.outerHeight( true );
-
-		height = ( typeof height === "number" ) ? height : getScreenHeight();
-
-		aPage.css( "min-height", height - ( aPageOuterHeight - aPageHeight ) );
-	};
 
 	//shared page enhancements
 	function enhancePage( $page, role ) {
