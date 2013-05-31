@@ -36,7 +36,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			mini = inheritAttr( input, "mini" ) || o.mini,
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
-			iconpos = inheritAttr( input, "iconpos" ) || "left",
+			iconpos = inheritAttr( input, "iconpos" ) || label.jqmData( "iconpos" ) || "left",
 			checkedClass = "ui-" + checkedState,
 			uncheckedClass = "ui-" + uncheckedState,
 			wrapper;
