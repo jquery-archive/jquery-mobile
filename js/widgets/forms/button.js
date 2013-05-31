@@ -135,6 +135,11 @@ $.widget( "mobile.button", $.mobile.widget, {
 		
 		this.button.addClass( classes );
 		
+		/* If the button element doesn't contain text we use the value if provided */
+		if ( !this.isInput && this.button.text() === "" && !!this.button.val() ) {
+			this.button.text( this.button.val() );
+		}				
+
 		if ( this.isInput && !create ) {
 			$( this.button )[ "text" ]( $el.val() ).append( $el );
 		}
