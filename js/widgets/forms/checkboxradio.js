@@ -51,6 +51,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		// Expose for other methods
 		$.extend( this, {
 			iconpos: iconpos,
+			input: input,
 			label: label,
 			inputtype: inputtype,
 			checkedClass: checkedClass,
@@ -208,8 +209,19 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	},
 
 	widget: function() {
-		return this.label;
-	}
+		return this.label.parent();
+	},
+	
+	disable: function() {
+		this._super();
+		this.input.prop( "disabled", true );
+	},
+	
+	enable: function() {
+		this._super();
+		this.input.prop( "disabled", false );
+	} 
+	
 }, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
 $.mobile.checkboxradio.initSelector = "input[type='checkbox'],input[type='radio']";
