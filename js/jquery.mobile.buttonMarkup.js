@@ -215,7 +215,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 // given here for all recognized options
 $.fn.buttonMarkup.defaults = {
 	icon: "",
-	iconpos: "right",
+	iconpos: "left",
 	theme: null,
 	inline: false,
 	shadow: true,
