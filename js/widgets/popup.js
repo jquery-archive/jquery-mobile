@@ -701,7 +701,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			// will cause an infinite recursion - #5244
 			.detach()
 			.insertAfter( this._ui.placeholder )
-			.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
+			.removeClass( "ui-popup ui-overlay-shadow ui-corner-all ui-body-inherit" );
 		this._ui.screen.remove();
 		this._ui.container.remove();
 		this._ui.placeholder.remove();
