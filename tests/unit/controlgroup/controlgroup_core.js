@@ -150,16 +150,16 @@ $.testHelper.delayStart();
 	});
 
 	test( "calling .controlgroup() again is the same as calling .controlgroup( 'refresh' )", function() {
-		var btn1 = $( "<a href='#' data-" + ( $.mobile.ns || "" ) + "role='button'>Option 3</a>" ).buttonMarkup(),
-			btn2 = $( "<a href='#' data-" + ( $.mobile.ns || "" ) + "role='button'>Option 4</a>" ).buttonMarkup(),
-			grp = $( "#test-reinstantiate" )
+		var btn1 = $( "<a href='#' data-nstest-role='button'>Option 3</a>" ),
+			btn2 = $( "<a href='#' data-nstest-role='button'>Option 4</a>" ),
+			grp = $( "#test-reinstantiate" );
 
 		grp
 			.controlgroup( "container" )
 				.prepend( btn1 )
 				.append( btn2 )
-		grp
-			.controlgroup();
+				.trigger( "create" )
+				.controlgroup();
 
 		ok( btn1.hasClass( "ui-first-child" ), "The prepended button has class ui-first-child" );
 		ok( btn2.hasClass( "ui-last-child" ), "The appended button has class ui-last-child" );
