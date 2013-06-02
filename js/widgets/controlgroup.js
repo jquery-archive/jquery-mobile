@@ -57,9 +57,11 @@ $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 		}
 
 		if ( o.theme !== undefined ) {
-			$el
-				.removeClass( "ui-group-theme-" + this.options.theme )
-				.addClass( "ui-group-theme-" + o.theme );
+			$el.removeClass( "ui-group-theme-" + this.options.theme );
+			
+			if ( o.theme ) {
+				$el.addClass( "ui-group-theme-" + o.theme );
+			}
 		}
 
 		if ( o.corners !== undefined ) {
