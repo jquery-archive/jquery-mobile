@@ -57,7 +57,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			if ( o.backBtnText !== undefined ) {
 				this.element.find( ".ui-toolbar-back-btn .ui-btn-text" ).text( o.backBtnText );
 			}
-			if ( o.backBtnTheme !== undefined ) {
+			if ( o.theme !== undefined ) {
 				var currentTheme = this.options.theme ? this.options.theme : "inherit",
 					newTheme = o.theme ? o.theme : "inherit";
 					
