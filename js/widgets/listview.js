@@ -132,7 +132,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 						
 						var last = a.last(),
 							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ),
-							spliticon = getAttr( last[ 0 ], "icon", true ) || o.splitIcon,
+							spliticon = getAttr( last[ 0 ], "icon", true ) || getAttr( item[ 0 ], "icon", true ) || o.splitIcon,
 							altButtonClass = splittheme ? "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon : "ui-btn ui-icon-" + spliticon;
 						
 						last
