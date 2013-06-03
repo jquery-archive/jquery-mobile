@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.navigation", "./optionDemultiplexer" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.navigation", "./optionDemultiplexer" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
