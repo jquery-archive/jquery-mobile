@@ -264,11 +264,12 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_applyTheme: function( dst, theme, prefix ) {
-		var classes = ( dst.attr( "class" ) || "" ).split( " " ),
-			currentTheme = null,
-			matches,
-			theme = ( theme === null && prefix === "body" ) ? "inherit" : theme,
-			themeStr = String( theme );
+		var themeStr, matches,
+			classes = ( dst.attr( "class" ) || "" ).split( " " ),
+			currentTheme = null;
+
+		theme = ( ( theme === null && prefix === "body" ) ? "inherit" : theme );
+		themeStr = String( theme );
 
 		while ( classes.length > 0 ) {
 			currentTheme = classes.pop();
