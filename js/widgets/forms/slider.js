@@ -41,7 +41,6 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			controlID = control.attr( "id" ),
 			$label = $( "[for='" + controlID + "']" ),
 			labelID = $label.attr( "id" ) || controlID + "-label",
-			label = $label.attr( "id", labelID ),
 			min = !isToggleSwitch ? parseFloat( control.attr( "min" ) ) : 0,
 			max =  !isToggleSwitch ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
@@ -60,6 +59,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 			i, optionsCount, origTabIndex,
 			side, activeClass, sliderLabel, sliderImg;
 
+		$label.attr( "id", labelID );
 		this.isToggleSwitch = isToggleSwitch;
 
 		domHandle.setAttribute( "href", "#" );
