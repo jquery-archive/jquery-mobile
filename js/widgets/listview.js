@@ -80,16 +80,15 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 	},
 
 	refresh: function( create ) {
-		var o = this.options,
+		var buttonClass, pos, numli, item, itemClass, itemTheme, itemIcon, icon, a,
+			isDivider, startCount, newStartCount, value, last, splittheme, spliticon,
+			altButtonClass, dividerTheme,
+			o = this.options,
 			$list = this.element,
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
-			pos, numli,
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
 			start = $list.attr( "start" ),
-			startCount, newStartCount, value,
 			itemClassDict = {},
-			item, itemClass, itemTheme, itemIcon, icon,
-			a, isDivider,
 			countBubbles = $list.find( ".ui-li-count" ),
 			countTheme = getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme,
 			countThemeClass = countTheme ? "ui-body-" + countTheme : false;
@@ -121,20 +120,20 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					// TODO: Remove in 1.5 together with links.js (links.js / .ui-link deprecated in 1.4)
 					a.removeClass( "ui-link" );
 
-					var buttonClass = "ui-btn";
-					
+					buttonClass = "ui-btn";
+
 					if ( itemTheme ) {
 						buttonClass += " ui-btn-" + itemTheme;
 					}
-					
+
 					if ( a.length > 1 ) {
 						itemClass = "ui-li-has-alt";
-						
-						var last = a.last(),
-							splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true ),
-							spliticon = getAttr( last[ 0 ], "icon", true ) || getAttr( item[ 0 ], "icon", true ) || o.splitIcon,
-							altButtonClass = splittheme ? "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon : "ui-btn ui-icon-" + spliticon;
-						
+
+						last = a.last();
+						splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
+						spliticon = getAttr( last[ 0 ], "icon", true ) || getAttr( item[ 0 ], "icon", true ) || o.splitIcon;
+						altButtonClass = splittheme ? "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon : "ui-btn ui-icon-" + spliticon;
+
 						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
 							.addClass( altButtonClass )
@@ -142,11 +141,11 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 					} else if ( icon ) {
 						buttonClass += " ui-icon-" + icon;
 					}
-					
+
 					a.first().addClass( buttonClass );
 				} else if ( isDivider ) {
-					var dividerTheme = ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme || o.theme );
-					
+					dividerTheme = ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme || o.theme );
+
 					itemClass = "ui-li-divider ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
 
 					item.attr( "role", "heading" );
