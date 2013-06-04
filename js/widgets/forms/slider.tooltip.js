@@ -32,7 +32,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		$.extend( this, {
 			_currentValue: null,
 			_popup: null,
-			_popupVisible: false,
+			_popupVisible: false
 		});
 
 		this._setOption( "popupEnabled", this.options.popupEnabled );

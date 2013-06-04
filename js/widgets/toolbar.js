@@ -60,10 +60,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			if ( o.theme !== undefined ) {
 				var currentTheme = this.options.theme ? this.options.theme : "inherit",
 					newTheme = o.theme ? o.theme : "inherit";
-					
+
 				this.element.removeClass( "ui-bar-" + currentTheme ).addClass( "ui-bar-" + newTheme );
 			}
-			
+
 			this._super( o );
 		},
 		refresh: function() {

@@ -64,7 +64,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			}
 		}
 	},
-	
+
 	_getChildrenByTagName: function( ele, lcName, ucName ) {
 		var results = [],
 			dict = {};
@@ -97,7 +97,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		if ( o.theme ) {
 			$list.addClass( "ui-group-theme-" + o.theme );
 		}
-		
+
 		// Check if a start attribute has been set while taking a value of 0 into account
 		if ( ol && ( start || start === 0 ) ) {
 			startCount = parseInt( start, 10 ) - 1;
@@ -155,7 +155,7 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 				}
 				if ( ol && value ) {
 					newStartCount = parseInt( value , 10 ) - 1;
-					
+
 					item.css( "counter-reset", "listnumbering " + newStartCount );
 				}
 			}
@@ -182,9 +182,9 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			$( itemClassDict[ itemClass ] ).addClass( itemClass );
 		}
 
-		countBubbles.each(function() {
+		countBubbles.each( function() {
 			$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-		})
+		});
 		if ( countThemeClass ) {
 			countBubbles.addClass( countThemeClass );
 		}

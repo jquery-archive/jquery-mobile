@@ -17,15 +17,15 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 
 		if ( !o.theme ) {
 			o.theme = $el.jqmData( "theme" );
-		}		
+		}
 		if ( o.theme ) {
 			classes += " ui-group-theme-" + o.theme;
-		}		
+		}
 
 		if ( !o.contentTheme ) {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
-		
+
 		if ( !o.corners ) {
 			o.corners = $el.jqmData( "corners" );
 		}
@@ -39,7 +39,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 		if ( !!o.corners && !!o.inset ) {
 			classes += " ui-corner-all";
 		}
-		
+
 		$el.addClass( classes );
 
 		// Initialize the collapsible set if it's not already initialized

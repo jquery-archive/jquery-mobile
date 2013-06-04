@@ -211,17 +211,17 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	widget: function() {
 		return this.label.parent();
 	},
-	
+
 	disable: function() {
 		this._super();
 		this.input.prop( "disabled", true );
 	},
-	
+
 	enable: function() {
 		this._super();
 		this.input.prop( "disabled", false );
-	} 
-	
+	}
+
 }, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
 $.mobile.checkboxradio.initSelector = "input[type='checkbox'],input[type='radio']";

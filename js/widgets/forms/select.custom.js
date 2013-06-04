@@ -44,7 +44,7 @@ define( [
 				"</div>" ),
 
 			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup({ theme: widget.options.overlayTheme }),
-			
+
 			list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + buttonId + "'" + themeAttr + dividerThemeAttr + ">" ).appendTo( listbox ),
 
 			header = $( "<div class='ui-header ui-bar-" + ( widget.options.theme ? widget.options.theme : "inherit" ) + "'>" ).prependTo( listbox ),

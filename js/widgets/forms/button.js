@@ -26,10 +26,10 @@ $.widget( "mobile.button", $.mobile.widget, {
 			$el = this.element,
 			isInput = $el[ 0 ].tagName === "INPUT",
 			classes = "ui-btn";
-			
+
 		if ( isInput ) {
 			classes += " ui-input-btn";
-			
+
 			// TODO: data-class and data-id options. See https://github.com/jquery/jquery-mobile/issues/3577
 			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-left" ) ) {
 				classes += " ui-btn-left";
@@ -37,20 +37,20 @@ $.widget( "mobile.button", $.mobile.widget, {
 			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-right" ) ) {
 				classes += " ui-btn-right";
 			}
-	
+
 			this.button = $( "<div></div>" )
 				[ "text" ]( $el.val() )
 				.insertBefore( $el )
 				.addClass( classes )
 				.append( $el );
-				
+
 			$button = this.button;
-			
+
 			this._on( $el, {
 				focus: function() {
 					$button.addClass( $.mobile.focusClass );
 				},
-	
+
 				blur: function() {
 					$button.removeClass( $.mobile.focusClass );
 				}
@@ -132,18 +132,18 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 
 		this.styleClasses = classes;
-		
+
 		this.button.addClass( classes );
-		
+
 		/* If the button element doesn't contain text we use the value if provided */
 		if ( !this.isInput && this.button.text() === "" && !!this.button.val() ) {
 			this.button.text( this.button.val() );
-		}				
+		}
 
 		if ( this.isInput && !create ) {
 			$( this.button )[ "text" ]( $el.val() ).append( $el );
 		}
-		
+
 		this._setOption( "disabled", $el.prop( "disabled" ) );
 	}
 });

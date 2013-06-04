@@ -73,7 +73,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 				overlayTheme = null;
 			}
 		}
-		
+
 		$.mobile.pageContainer.removeClass( "ui-overlay-" + overlayTheme );
 	},
 

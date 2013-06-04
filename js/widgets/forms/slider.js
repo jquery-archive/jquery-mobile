@@ -104,7 +104,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 				$( this ).blur();
 				handle.focus();
 			});
-			
+
 			wrapper = document.createElement( "div" );
 			wrapper.className = "ui-slider-inneroffset";
 
@@ -520,7 +520,7 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 
 		var currentTheme = this.options.theme ? this.options.theme : "inherit",
 			newTheme = value ? value : "inherit";
-			
+
 		this.control
 			.removeClass( "ui-body-" + currentTheme )
 			.addClass( "ui-body-" + newTheme );
@@ -529,12 +529,12 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 	_setTrackTheme: function( value ) {
 		var currentTrackTheme = this.options.trackTheme ? this.options.trackTheme : "inherit",
 			newTrackTheme = value ? value : "inherit";
-			
+
 		this.slider
 			.removeClass( "ui-body-" + currentTrackTheme )
 			.addClass( "ui-body-" + newTrackTheme );
 	},
-	
+
 	_setMini: function( value ) {
 		value = !!value;
 		if ( !this.isToggleSwitch && !this.isRangeslider ) {
@@ -543,10 +543,10 @@ $.widget( "mobile.slider", $.mobile.widget, $.extend( {
 		}
 		this.slider.toggleClass( "ui-mini", value );
 	},
-	
+
 	_setCorners: function( value ) {
 		this.slider.toggleClass( "ui-corner-all", value );
-		
+
 		if ( !this.isToggleSwitch ) {
 			this.control.toggleClass( "ui-corner-all", value );
 		}
