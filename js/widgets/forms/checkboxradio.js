@@ -33,7 +33,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			parentLabel = $( input ).closest( "label" ),
 			label = parentLabel.length ? parentLabel : $( input ).closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ).first(),
 			inputtype = input[0].type,
-			mini = inheritAttr( input, "mini" ) || o.mini,
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
 			iconpos = inheritAttr( input, "iconpos" ) || label.jqmData( "iconpos" ) || "left",
