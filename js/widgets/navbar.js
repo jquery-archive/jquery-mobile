@@ -43,7 +43,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 				$( this ).addClass( classes );
 			});
 
-		$navbar.delegate( "a", "vclick", function( event ) {
+		$navbar.delegate( "a", "vclick", function( /* event */ ) {
 			var activeBtn;
 
 			if ( !$( this ).is( ".ui-disabled, .ui-btn-active" ) ) {
