@@ -33,13 +33,13 @@
 
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
-						<label for="select-custom-1">Basic:</label>
-						<select name="select-custom-1" id="select-custom-1" data-native-menu="false">
-							<option value="1">The 1st Option</option>
-							<option value="2">The 2nd Option</option>
-							<option value="3">The 3rd Option</option>
-							<option value="4">The 4th Option</option>
-						</select>
+                        <label for="select-custom-1">Basic:</label>
+                        <select name="select-custom-1" id="select-custom-1" data-native-menu="false">
+                            <option value="1">The 1st Option</option>
+                            <option value="2">The 2nd Option</option>
+                            <option value="3">The 3rd Option</option>
+                            <option value="4">The 4th Option</option>
+                        </select>
                     </div>
                 </div><!--/demo-html -->
 

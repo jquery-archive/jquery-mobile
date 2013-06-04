@@ -21,9 +21,7 @@
 			clearTimeout(startTimeout);
 		});
 
-		startTimeout = setTimeout( function(){
-			start();
-		}, 1000);
+		startTimeout = setTimeout( start , 1000);
 	}});
 
 	asyncTest( "Fixed header and footer transition classes are applied correctly", function(){
