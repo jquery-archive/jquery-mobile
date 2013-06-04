@@ -58,30 +58,31 @@ $.widget( "mobile.button", $.mobile.widget, {
 		} else {
 			this.button = $el.addClass( classes );
 		}
-		
+
 		$.extend( this, {
 			isInput: isInput,
 			buttonClasses: classes,
 			styleClasses: ""
 		});
-		
+
 		this.refresh( true );
 	},
-	
+
 	widget: function() {
 		return this.button;
 	},
-	
+
 	_destroy: function() {
+		var $button, removeClasses;
 		if ( this.isInput ) {
-			var $button = this.button;
-			
+			$button = this.button;
+
 			this.element.insertBefore( $button );
-			
+
 			$button.remove();
 		} else {
-			var removeClasses = this.buttonClasses + " " + this.styleClasses;
-			
+			removeClasses = this.buttonClasses + " " + this.styleClasses;
+
 			this.button.removeClass( removeClasses );
 		}
 	},
@@ -107,21 +108,19 @@ $.widget( "mobile.button", $.mobile.widget, {
 		if ( o.mini ) {
 			classes += " ui-mini";
 		}
-		
+
 		if ( o.icon ) {
 			if ( !o.iconpos ) {
-				 o.iconpos = "left";
+				o.iconpos = "left";
 			}
-			
+
 			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
-			
+
 			if ( o.iconpos === "notext" && !$el.attr( "title" ) ) {
-				var text = this.isInput ? $el.val() : $el.getEncodedText();
-				
-				$el.attr( "title", text );
+				$el.attr( "title", ( this.isInput ? $el.val() : $el.getEncodedText() ) );
 			}
-			
-			 /* TODO: Remove in 1.5. */
+
+			/* TODO: Remove in 1.5. */
 			if ( o.iconshadow ) {
 				classes += " ui-shadow-icon";
 			}
