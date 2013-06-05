@@ -379,10 +379,10 @@
 		], 500);
 	});
 
-	test( "theme defined on select is used", function(){
-		var select = $("select#non-parent-themed");
+	test( "theme defined on select is used", function() {
+		var select = $( "select#non-parent-themed" );
 
-		ok( select.siblings( "a" ).hasClass("ui-btn-up-" + select.jqmData('theme')));
+		ok( select.siblings( "a" ).hasClass( "ui-btn-" + select.jqmData( 'theme' ) ) );
 	});
 
 	test( "select without theme defined inherits theme from parent", function() {
