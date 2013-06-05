@@ -236,20 +236,19 @@
 	});
 
 	asyncTest( "focus is transferred to a menu item when the menu is opened",function() {
-		var select, menu, button;
-
 		expect( 1 );
 
 		$.testHelper.sequence([
+			resetHash,
+
 			function() {
-				select = $( "#select-choice-menu-focus-test" );
-				menu = $( "#select-choice-menu-focus-test-menu" );
-				button = select.find( "a" );
-				button.trigger( "click" );
+				// bring up the dialog
+				$( "#select-choice-menu-focus-test a:first" ).trigger( "click" );
 			},
 
 			function() {
-				ok( $( document.activeElement ).parents( "#select-choice-menu-focus-test-menu" ).length > 0, "item in open select menu (" + menu.length + ") has focus" );
+				ok( $( document.activeElement ).parents( "#select-choice-menu-focus-test-menu" ).length > 0,
+					"item in open select menu (" + $( "#select-choice-menu-focus-test-menu" ).length + ") has focus" );
 				$(".ui-popup-screen:not(.ui-screen-hidden)").trigger( "click" );
 			},
 
