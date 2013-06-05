@@ -299,7 +299,7 @@
 			},
 
 			function(){
-				var firstMenuChoice = $("#select-choice-few-menu li:first");
+				var firstMenuChoice = $("#select-choice-few-menu li:first a");
 				ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
 						"default menu choice has the active button class" );
 
@@ -312,7 +312,7 @@
 			},
 
 			function(){
-				var lastMenuChoice = $("#select-choice-few-menu li:last");
+				var lastMenuChoice = $("#select-choice-few-menu li:last a");
 				ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
 						"previously slected item has the active button class" );
 
