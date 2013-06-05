@@ -23,14 +23,14 @@
 	// issue https://github.com/jquery/jquery-mobile/issues/2410
 	test( "adding options and refreshing a custom select defaults the text", function() {
 		var select = $( "#custom-refresh" ),
-			button = select.siblings( "a" ).find( ".ui-btn-inner" ),
+			button = function() { return select.siblings( "a" ).find( "span:first" ); },
 			text = "foo";
 
-		deepEqual($.trim(button.text()), "default");
+		deepEqual( $.trim( button().text() ), "default" );
 		select.find( "option" ).remove(); //remove the loading message
-		select.append('<option value="1">' + text + '</option>');
+		select.append( '<option value="1">' + text + '</option>' );
 		select.selectmenu( 'refresh' );
-		deepEqual($.trim(button.text()), text);
+		deepEqual( $.trim( button().text() ), text);
 	});
 
 	// issue 2424
