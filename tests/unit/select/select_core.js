@@ -344,10 +344,12 @@
 
 	asyncTest( "adding options and refreshing a custom select changes the options list", function(){
 		var select = $( "#custom-refresh-opts-list" ),
-      button = select.siblings( "a" ).find( ".ui-btn-inner" ),
+      button = select.siblings( "a" ),
       text = "foo";
 
 		$.testHelper.sequence([
+			resetHash,
+
 			// bring up the dialog
 			function() {
 				button.click();
@@ -355,7 +357,7 @@
 
 			function() {
 				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), "default" );
-				$( ".ui-popup-screen" ).click();
+				$( ".ui-popup-screen.in" ).click();
 			},
 
 			function() {
@@ -370,7 +372,7 @@
 
 			function() {
 				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), text );
-				$( ".ui-popup-screen" ).click();
+				$( ".ui-popup-screen.in" ).click();
 			},
 
 			start
