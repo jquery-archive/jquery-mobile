@@ -86,21 +86,21 @@
 		}
 	});
 
-	asyncTest( "placeholder correctly gets ui-selectmenu-placeholder class after rebuilding", function(){
-		$.testHelper.sequence([
-			function(){
+	asyncTest( "placeholder correctly gets ui-screen-hidden class after rebuilding", function() {
+		$.testHelper.sequence( [
+			function() {
 				// bring up the optgroup menu
-				ok($("#optgroup-and-placeholder-container a").length > 0, "there is in fact a button in the page");
-				$("#optgroup-and-placeholder-container a").trigger("click");
+				ok( $( "#optgroup-and-placeholder-container a" ).length > 0, "there is in fact a button in the page" );
+				$( "#optgroup-and-placeholder-container a" ).trigger( "click" );
 			},
 
-			function(){
+			function() {
 				//select the first menu item
-				$("#optgroup-and-placeholder-menu a:first").click();
+				$( "#optgroup-and-placeholder-menu li:not(.ui-screen-hidden) a:first" ).click();
 			},
 
-			function(){
-				ok($("#optgroup-and-placeholder-menu li:first").hasClass("ui-selectmenu-placeholder"), "the placeholder item has the ui-selectmenu-placeholder class");
+			function() {
+				ok( $( "#optgroup-and-placeholder-menu li:first" ).hasClass( "ui-screen-hidden" ), "the placeholder item has the ui-screen-hidden class" );
 				start();
 			}
 		], 1000);
