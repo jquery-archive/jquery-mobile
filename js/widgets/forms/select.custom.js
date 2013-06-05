@@ -173,46 +173,17 @@ define( [
 					})
 					.keydown(function( event ) {  //keyboard events for menu items
 						var target = $( event.target ),
-							li = target.closest( "li" ),
-							prev, next;
+							li = target.closest( "li" );
 
 						// switch logic based on which key was pressed
 						switch ( event.keyCode ) {
 							// up or left arrow keys
 						case 38:
-							prev = li.prev().not( ".ui-screen-hidden" );
-
-							if ( prev.hasClass( "ui-li-divider" ) ) {
-								prev = prev.prev();
-							}
-
-							// if there's a previous option, focus it
-							if ( prev.length ) {
-								target
-									.blur()
-									.attr( "tabindex", "-1" );
-
-								prev.find( "a" ).first().focus();
-							}
-
+							goToAdjacentItem( li, target, "prev" );
 							return false;
 							// down or right arrow keys
 						case 40:
-							next = li.next();
-
-							if ( next.hasClass( "ui-li-divider" ) ) {
-								next = next.next();
-							}
-
-							// if there's a next option, focus it
-							if ( next.length ) {
-								target
-									.blur()
-									.attr( "tabindex", "-1" );
-
-								next.find( "a" ).first().focus();
-							}
-
+							goToAdjacentItem( li, target, "next" );
 							return false;
 							// If enter or space is pressed, trigger click
 						case 13:
@@ -346,9 +317,9 @@ define( [
 					screenHeight = $window.height();
 
 				function focusMenuItem() {
-					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
+					var selector = self.list.find( "a." + $.mobile.activeBtnClass );
 					if ( selector.length === 0 ) {
-						selector = self.list.find( "li.ui-btn:not( :jqmData(placeholder='true') ) a" );
+						selector = self.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-btn" );
 					}
 					selector.first().focus();
 				}
@@ -527,6 +498,21 @@ define( [
 				origDestroy.apply( this, arguments );
 			}
 		});
+	},
+	unfocusableItemSelector = ".ui-disabled,.ui-li-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
+	goToAdjacentItem = function( item, target, direction ) {
+		var adjacent = item[ direction + "All" ]()
+			.not( unfocusableItemSelector )
+			.first();
+
+		// if there's a previous option, focus it
+		if ( adjacent.length ) {
+			target
+				.blur()
+				.attr( "tabindex", "-1" );
+
+			adjacent.find( "a" ).first().focus();
+		}
 	};
 
 	// issue #3894 - core doesn't trigger events on disabled delegates
