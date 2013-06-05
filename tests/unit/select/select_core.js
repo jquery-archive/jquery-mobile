@@ -214,23 +214,22 @@
 		ok( $( "#select-choice-inside-popup-menu" ).length === 0, "non-native select inside popup has no generated menu" );
 	});
 
-	asyncTest( "a large select option should not overflow", function(){
+	asyncTest( "a large select option should not overflow", function() {
 		// https://github.com/jquery/jquery-mobile/issues/1338
-		var menu, select;
+		var menu;
 
-		$.testHelper.sequence([
+		$.testHelper.sequence( [
 			resetHash,
 
-			function(){
-				select = $("#select-long-option-label");
+			function() {
 				// bring up the dialog
-				select.trigger("click");
+				$( "#select-long-option-label" ).siblings( "a" ).trigger( "click" );
 			},
 
 			function() {
-				menu = $(".ui-selectmenu-list");
+				menu = $( "#select-long-option-label-menu.ui-selectmenu-list" );
 
-				equal(menu.width(), menu.find("li:nth-child(2) .ui-btn-text").width(), "ui-btn-text element should not overflow");
+				equal( menu.outerWidth( true ), menu.find( "li:nth-child(2) a" ).outerWidth( true ), "a element should not overflow" );
 				start();
 			}
 		], 500);
