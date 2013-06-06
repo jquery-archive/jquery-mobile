@@ -222,43 +222,6 @@
 		deepEqual( select.selectmenu( 'option', 'disabled' ), false, "disabled option set" );
 	});
 
-	asyncTest( "adding options and refreshing a custom select changes the options list", function(){
-		var select = $( "#custom-refresh-opts-list" ),
-      button = select.siblings( "a" ),
-      text = "foo";
-
-		$.testHelper.sequence([
-			resetHash,
-
-			// bring up the dialog
-			function() {
-				button.click();
-			},
-
-			function() {
-				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), "default" );
-				$( ".ui-popup-screen.in" ).click();
-			},
-
-			function() {
-				select.find( "option" ).remove(); //remove the loading message
-				select.append('<option value="1">' + text + '</option>');
-				select.selectmenu( 'refresh' );
-			},
-
-			function() {
-				button.click();
-			},
-
-			function() {
-				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), text );
-				$( ".ui-popup-screen.in" ).click();
-			},
-
-			start
-		], 500);
-	});
-
 	test( "theme defined on select is used", function() {
 		var select = $( "select#non-parent-themed" );
 
