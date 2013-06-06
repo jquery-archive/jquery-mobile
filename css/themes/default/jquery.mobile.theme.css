@@ -64,7 +64,9 @@ label.ui-btn {
 .ui-btn-corner-all,
 .ui-btn.ui-corner-all,
 /* Slider track */
-.ui-slider-track.ui-corner-all {
+.ui-slider-track.ui-corner-all,
+/*flipswitch*/
+.ui-flipswitch.ui-corner-all {
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }

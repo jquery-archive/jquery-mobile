@@ -283,7 +283,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 	}
 }, $.mobile.behaviors.formReset ) );
 
-$.mobile.selectmenu.initSelector = "select:not( :jqmData(role='slider') )";
+$.mobile.selectmenu.initSelector = "select:not( :jqmData(role='slider')):not( :jqmData(role='flipswitch') )";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.selectmenu" );

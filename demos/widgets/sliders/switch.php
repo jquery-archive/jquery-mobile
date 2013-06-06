@@ -38,17 +38,23 @@
 			<p class="jqm-intro">Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element.
 			</p>
 
-				<h2>Basic switch</h2>
+				<h2>Basic checkbox switch</h2>
                 <div data-demo-html="true">
 				<form>
-                    <label for="flip-1">Flip toggle switch:</label>
-                    <select name="flip-1" id="flip-1" data-role="slider">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select>
+                    <label for="flip-1">Flip toggle switch checkbox:</label>
+                    <input type="checkbox" data-role="flipswitch" name="flip-1" id="flip-1"/>
 				</form>
                 </div><!-- /demo-html -->
-
+                <h2>Basic select switch</h2>
+                <div data-demo-html="true">
+                <form>
+                    <label for="flip-select">Flip toggle switch select:</label>
+                    <select id="flip-select" name="flip-select" data-role="flipswitch">
+                        <option>Foo</option>
+                        <option>Bar</option>
+                    </select>
+                </form>
+                </div><!-- /demo-html -->
 				<h2>Theme</h2>
                 <div data-demo-html="true">
 				<form>

@@ -1,0 +1,66 @@
+div.ui-flipswitch{
+	display: inline-block;
+    vertical-align: middle;
+    background-size: 100% 100%;
+    background-origin: border-box;
+    background-clip: border-box;
+    background-position:100% 0;
+    overflow: hidden;
+    height: 32px;
+    width: 5.8em;
+    padding-left:.15em;
+    margin:.5em 0;
+    transition-duration: .2s;
+    transition-property: padding, width, background-color, background-position, text-indent;
+    -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.ui-flipswitch-input{
+	position: absolute;
+    left:-1000px;
+    border:none;
+    opacity: 0;
+}
+.ui-flipswitch-input.ui-flipswitch-active + .ui-flipswitch{
+	padding-left: 4.1em;
+    background-position:0 0;
+    width: 1.85em;
+    background-color:#0066ff;
+}
+html .ui-bar-a .ui-btn.ui-btn-a.ui-flipswitch-on{
+	float: left;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    margin: .05em 0 0 -.1em;
+    text-align:inherit;
+    border: 1px solid #d5d5d5;
+    border-radius: inherit;
+    background: #ededed;
+    color: white;
+    overflow: visible;
+    text-shadow: 0 -1px 1px rgba(0,0,0,.3);
+    text-indent: -2.5em;
+}
+.ui-flipswitch-off{
+    float: left;
+    text-indent: .5em;
+    color: #333;
+    text-shadow: none;
+}
+/*ie8*/
+.ui-flipswitch-on,
+.ui-flipswitch-off{
+	font-size: 1em;
+    padding-top:5px;
+}
+/*everything else*/
+:root .ui-flipswitch-on,
+:root .ui-flipswitch-off{
+	padding-top: 2px;
+    font: bold 1em/1.9 sans-serif;
+}
