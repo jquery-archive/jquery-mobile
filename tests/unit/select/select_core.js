@@ -106,26 +106,6 @@
 		], 1000);
 	});
 
-	asyncTest( "firing a click at least 400 ms later on the select screen overlay does close it", function(){
-		$.testHelper.sequence([
-			function(){
-				// bring up the smaller choice menu
-				ok($("#select-choice-few-container a").length > 0, "there is in fact a button in the page");
-				$("#select-choice-few-container a").trigger("click");
-			},
-
-			function(){
-				//select the first menu item
-				$("#select-choice-few-menu a:first").click();
-			},
-
-			function(){
-				deepEqual($("#select-choice-few-menu").parent().parent(".ui-popup-hidden").length, 1);
-				start();
-			}
-		], 1000);
-	});
-
 	asyncTest( "a large select menu should use the default dialog transition", function(){
 		var select;
 
