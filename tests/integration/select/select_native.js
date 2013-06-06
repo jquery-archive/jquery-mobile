@@ -20,19 +20,6 @@
 		setAndCheck( 'standard' );
 	});
 
-	// issue https://github.com/jquery/jquery-mobile/issues/2410
-	test( "adding options and refreshing a custom select defaults the text", function() {
-		var select = $( "#custom-refresh" ),
-			button = select.siblings( "a" ).find( ".ui-btn-inner" ),
-			text = "foo";
-
-		deepEqual($.trim(button.text()), "default");
-		select.find( "option" ).remove(); //remove the loading message
-		select.append('<option value="1">' + text + '</option>');
-		select.selectmenu( 'refresh' );
-		deepEqual($.trim(button.text()), text);
-	});
-
 	// issue 2424
 	test( "native selects should provide open and close as a no-op", function() {
 		// exception will prevent test success if undef
