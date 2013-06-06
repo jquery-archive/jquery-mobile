@@ -227,9 +227,9 @@
 	test( "select without theme defined inherits theme from parent", function() {
 		var select = $("select#parent-themed");
 
-		ok( select
+		deepEqual( select
 			.siblings( "a" )
-			.hasClass("ui-btn-up-" + select.parents(":jqmData(role='page')").jqmData('theme')));
+			.css( "background-color" ), "rgb(44, 44, 44)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
 	});
 
 	// issue #2547
