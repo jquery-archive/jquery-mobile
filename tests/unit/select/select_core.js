@@ -458,20 +458,20 @@
 		var $select = $( "#select-preserve-option-class" ),
 			selectedOptionClasses = $select.find( "option:selected" ).attr( "class" );
 
-		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
+		deepEqual( $select.prev( "span" ).attr( "class" ), selectedOptionClasses );
 	});
 
 	test( "multiple select option classes are persisted from the first selected option to the button text", function() {
 		var $select = $( "#select-preserve-option-class-multiple" ),
 			selectedOptionClasses = $select.find( "option:selected" ).first().attr( "class" );
 
-		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
+		deepEqual( $select.prevAll( "span:not(.ui-li-count)" ).attr( "class" ), selectedOptionClasses );
 	});
 
 	test( "multiple select text values are aggregated in the button text", function() {
 		var $select = $( "#select-aggregate-option-text" );
 
-		deepEqual( "Standard: 7 day, Rush: 3 days", $select.parent().find( ".ui-btn-text" ).text() );
+		deepEqual( $select.prevAll( "span:not(.ui-li-count)" ).text(), "Standard: 7 day, Rush: 3 days" );
 	});
 
 	asyncTest( "destroying a select menu leaves no traces", function() {
@@ -529,7 +529,7 @@
 		var newText = "Updated placeholder";
 		$( "#test-placeholder-update option:first-child" ).text( newText );
 		$( "#test-placeholder-update" ).selectmenu( "refresh", true );
-		deepEqual ( $( "#test-placeholder-update-menu li:first-child .ui-btn-text" ).text(), newText, "Placeholder list item reflects new value after refresh( true )" );
+		deepEqual ( $( "#test-placeholder-update-menu li:first-child > a" ).text(), newText, "Placeholder list item reflects new value after refresh( true )" );
 	});
 
 })(jQuery);
