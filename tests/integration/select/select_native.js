@@ -13,7 +13,7 @@
 
 			select.val( key ).selectmenu( 'refresh' );
 			text = select.find( "option[value='" + key + "']" ).text();
-			deepEqual( select.parent().find(".ui-btn-text").text(), text );
+			deepEqual( select.prev( "span" ).text(), text );
 		};
 
 		setAndCheck( 'rush' );
