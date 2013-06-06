@@ -366,14 +366,6 @@
 		], 500);
 	});
 
-	test( "select without theme defined inherits theme from parent", function() {
-		var select = $("select#parent-themed");
-
-		ok( select
-			.siblings( "a" )
-			.hasClass("ui-btn-up-" + select.parents(":jqmData(role='page')").jqmData('theme')));
-	});
-
 	// issue #2547
 	test( "custom select list item links have encoded option text values", function() {
 		$( "#encoded-option" ).data( 'mobile-selectmenu' )._buildList();
