@@ -38,8 +38,8 @@
 		var $inherited = $( "#theme-check" ),
 		    $explicit = $( "#theme-check-explicit" );
 
-		deepEqual( $inherited.css( "background-color" ), "rgb(0, 0, 0)" );
-		ok( $explicit.hasClass( "ui-btn-b" ), "should not inherit" );
+		deepEqual( $inherited.css( "background-color" ), "rgb(44, 44, 44)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+		ok( $explicit.hasClass( "ui-btn-a" ), "should not inherit" );
 	});
 
 	test( "Enhanced button elements should allow for phrasing content.", function() {
