@@ -329,24 +329,6 @@
 		], 1000);
 	});
 
-	test( "enabling and disabling", function(){
-		var select = $( "select" ).first(), button;
-
-		button = select.siblings( "a" ).first();
-
-		select.selectmenu( 'disable' );
-		deepEqual( select.attr('disabled'), "disabled", "select is disabled" );
-		ok( button.hasClass("ui-disabled"), "disabled class added" );
-		deepEqual( button.attr('aria-disabled'), "true", "select is disabled" );
-		deepEqual( select.selectmenu( 'option', 'disabled' ), true, "disbaled option set" );
-
-		select.selectmenu( 'enable' );
-		deepEqual( select.attr('disabled'), undefined, "select is disabled" );
-		ok( !button.hasClass("ui-disabled"), "disabled class added" );
-		deepEqual( button.attr('aria-disabled'), "false", "select is disabled" );
-		deepEqual( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
-	});
-
 	asyncTest( "adding options and refreshing a custom select changes the options list", function(){
 		var select = $( "#custom-refresh-opts-list" ),
       button = select.siblings( "a" ).find( ".ui-btn-inner" ),
