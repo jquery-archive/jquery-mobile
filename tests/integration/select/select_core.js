@@ -420,33 +420,6 @@
 		]);
 	});
 
-	test( "a disabled custom select should still be enhanced as custom", function() {
-		$("#select-disabled-enhancetest").selectmenu("enable").selectmenu("open");
-
-		var menu = $(".ui-selectmenu").not( ".ui-popup-hidden" );
-		ok( menu.text().indexOf("disabled enhance test") > -1, "the right select is showing" );
-	});
-
-	test( "selected option classes are persisted to the button text", function() {
-		var $select = $( "#select-preserve-option-class" ),
-			selectedOptionClasses = $select.find( "option:selected" ).attr( "class" );
-
-		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
-	});
-
-	test( "multiple select option classes are persisted from the first selected option to the button text", function() {
-		var $select = $( "#select-preserve-option-class-multiple" ),
-			selectedOptionClasses = $select.find( "option:selected" ).first().attr( "class" );
-
-		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
-	});
-
-	test( "multiple select text values are aggregated in the button text", function() {
-		var $select = $( "#select-aggregate-option-text" );
-
-		deepEqual( "Standard: 7 day, Rush: 3 days", $select.parent().find( ".ui-btn-text" ).text() );
-	});
-
 	asyncTest( "destroying a select menu leaves no traces", function() {
 		$.testHelper.pageSequence( [
 			function() { $.mobile.changePage( "#destroyTest" ); },
