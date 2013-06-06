@@ -174,29 +174,6 @@
 		ok( $( "#select-choice-inside-popup-menu" ).length === 0, "non-native select inside popup has no generated menu" );
 	});
 
-	asyncTest( "focus is transferred to a menu item when the menu is opened",function() {
-		expect( 1 );
-
-		$.testHelper.sequence([
-			resetHash,
-
-			function() {
-				// bring up the dialog
-				$( "#select-choice-menu-focus-test a:first" ).trigger( "click" );
-			},
-
-			function() {
-				ok( $( document.activeElement ).parents( "#select-choice-menu-focus-test-menu" ).length > 0,
-					"item in open select menu (" + $( "#select-choice-menu-focus-test-menu" ).length + ") has focus" );
-				$(".ui-popup-screen:not(.ui-screen-hidden)").trigger( "click" );
-			},
-
-			function() {
-				start();
-			}
-		], 5000);
-	});
-
 	asyncTest( "using custom refocuses the button after close", function() {
 		var select, button, triggered = false;
 
