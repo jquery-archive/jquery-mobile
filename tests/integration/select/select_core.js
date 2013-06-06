@@ -304,7 +304,7 @@
 			},
 
 			function(){
-				var firstMenuChoice = $("#select-choice-few\\.dotTest-menu li:first");
+				var firstMenuChoice = $("#select-choice-few\\.dotTest-menu li:first a");
 				ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
 						"default menu choice has the active button class" );
 
@@ -317,12 +317,12 @@
 			},
 
 			function(){
-				var lastMenuChoice = $("#select-choice-few\\.dotTest-menu li:last");
+				var lastMenuChoice = $("#select-choice-few\\.dotTest-menu li:last a");
 				ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
-						"previously slected item has the active button class" );
+						"previously selected item has the active button class" );
 
 				// close the dialog
-				lastMenuChoice.find( "a" ).click();
+				lastMenuChoice.click();
 			},
 
 			start
