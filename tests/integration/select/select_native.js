@@ -52,10 +52,6 @@
 			.parent()
 			.trigger( "vmousedown" )
 			.trigger( "mouseup" );
-
-
-
-
 	});
 
 	asyncTest( "The preventFocusZoom option does not manipulate zoom when it is false", function() {
