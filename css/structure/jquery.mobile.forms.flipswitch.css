@@ -11,7 +11,7 @@ div.ui-flipswitch{
     padding-left:.15em;
     margin:.5em 0;
     transition-duration: .2s;
-    transition-property: padding, width, background-color, background-position, text-indent;
+    transition-property: padding, width, background-color, background-position;
     -webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -36,7 +36,7 @@ html .ui-bar-a .ui-btn.ui-btn-a.ui-flipswitch-on{
     width: 28px;
     height: 28px;
     padding: 0;
-    margin: .05em 0 0 -.1em;
+    margin: .08em 0 0 -.1em;
     text-align:inherit;
     border: 1px solid #d5d5d5;
     border-radius: inherit;

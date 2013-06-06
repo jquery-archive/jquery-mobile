@@ -50,8 +50,8 @@
                 <form>
                     <label for="flip-select">Flip toggle switch select:</label>
                     <select id="flip-select" name="flip-select" data-role="flipswitch">
-                        <option>Foo</option>
-                        <option>Bar</option>
+                        <option>On</option>
+                        <option>Off</option>
                     </select>
                 </form>
                 </div><!-- /demo-html -->

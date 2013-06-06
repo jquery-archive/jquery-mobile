@@ -21,7 +21,7 @@ $.widget( "mobile.flipswitch", $.mobile.widget, $.extend({
 			off = $("<span>"),
 			type = this.element.get(0).tagName,
 			onText = ( type === "INPUT")? this.options.onText:this.element.find("option").eq(0).text(),
-			offText = ( type === "INPUT")? this.options.onText:this.element.find("option").eq(1).text();
+			offText = ( type === "INPUT")? this.options.offText:this.element.find("option").eq(1).text();
 
 			on.addClass("ui-flipswitch-on ui-btn ui-shadow ui-btn-"+this.options.theme).text( onText );
 			off.addClass("ui-flipswitch-off").text( offText );
