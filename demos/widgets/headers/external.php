@@ -41,7 +41,7 @@
 
 			<h2>Auto Init</h2>
 
-			<p>Because these tolbars are not within the page they will not auto initalize. you must call the toolbar plugin yourself on document ready</p>
+			<p>Because these toolbars are not within the page they will not auto initalize. you must call the toolbar plugin yourself on document ready</p>
 
 			<h2>Ajax Navigation</h2>
 
