@@ -30,7 +30,7 @@
 
 			<h2>Answer:</h2>
 
-			<p class="jqm-intro">jQuery Mobile does not have control over the the UI for most of the newer HTML5 input elements like date, color and number. The keyboards and pickers provided are browser-dependent but will safely fall back to a standard input if it's not supported. We do apply basic border and color styles to inputs for these elements so there is some visual consistency. See the <a href="../widgets/textinputs/index.html">text input page</a> for examples of all the input types available</p>
+			<p class="jqm-intro">jQuery Mobile does not have control over the UI for most of the newer HTML5 input elements like date, color and number. The keyboards and pickers provided are browser-dependent but will safely fall back to a standard input if it's not supported. We do apply basic border and color styles to inputs for these elements so there is some visual consistency. See the <a href="../widgets/textinputs/index.html">text input page</a> for examples of all the input types available</p>
 
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 
