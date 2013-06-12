@@ -302,5 +302,27 @@
 			}
 		]);
 	});
+
+	asyncTest( "Collapsible vmousecancel", function(){
+		expect( 2 );
+		$.testHelper.pageSequence([
+			function(){
+				$.mobile.changePage( $( "#collapsible-vmousecancel" ) );
+			},
+
+			function() {
+				var collapsible = $.mobile.activePage.find( ".ui-collapsible" ),
+					collapsibleHeading = collapsible.find("h4"),
+					event = jQuery.Event("tap");
+				event = jQuery.Event("tap");
+				collapsibleHeading.trigger(event);
+				equal(collapsible.find("a.ui-btn-active").length, 1, "Heading is active after tap");
+				event = jQuery.Event("vmousecancel");
+				collapsibleHeading.trigger(event);
+				equal(collapsible.find("a.ui-btn-active").length, 0, "Heading is not active when collapse/expand is cancelled");
+				start();
+			}
+		]);
+	});
 	
 })( jQuery );
