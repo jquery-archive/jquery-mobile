@@ -121,13 +121,15 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 
 		// Retrieve an attribute from an element and perform some massaging of the value
 		getAttribute: function( e, key, dns ) {
-			var value;
+			var elem = e.get ? e[ 0 ] : e,
+				value;
 
-			if ( dns ) {
-				key = "data-" + $.mobile.ns + key;
+			if ( elem && elem.getAttribute ) {
+				if ( dns ) {
+					key = "data-" + $.mobile.ns + key;
+				}
+				value = e.getAttribute( key );
 			}
-
-			value = e.getAttribute( key );
 
 			return value === "true" ? true :
 				value === "false" ? false :
