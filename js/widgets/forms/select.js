@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -18,9 +18,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		inline: false,
 		corners: true,
 		shadow: true,
-		iconshadow: true,
-		overlayTheme: "a",
-		dividerTheme: "b",
+		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
+		overlayTheme: null,
+		dividerTheme: null,
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
@@ -53,7 +53,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function() {
-		var classes = "";
+		var inline = this.options.inline || this.element.jqmData( "inline" ),
+			mini = this.options.mini || this.element.jqmData( "mini" ),
+			classes = "";
 		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
 		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
@@ -66,13 +68,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			classes = " ui-btn-right";
 		}
 
+		if ( inline ) {
+			classes += " ui-btn-inline";
+		}
+		if ( mini ) {
+			classes += " ui-mini";
+		}
+
 		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
-		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
+		this.label = $( "label[for='"+ this.selectID +"']" );
 		this.isMultiple = this.select[ 0 ].multiple;
-		if ( !this.options.theme ) {
-			this.options.theme = $.mobile.getInheritedTheme( this.select, "c" );
-		}
 	},
 
 	_destroy: function() {
@@ -100,23 +106,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 			options = this.options,
 
-			inline = options.inline || this.select.jqmData( "inline" ),
-			mini = options.mini || this.select.jqmData( "mini" ),
 			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
 			// TODO values buttonId and menuId are undefined here
 			button = this.button
 				.insertBefore( this.select )
-				.buttonMarkup( {
-					theme: options.theme,
-					icon: options.icon,
-					iconpos: iconpos,
-					inline: inline,
-					corners: options.corners,
-					shadow: options.shadow,
-					iconshadow: options.iconshadow,
-					mini: mini
-				});
+				.addClass( "ui-btn" +
+					( options.icon ? ( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos +
+					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
+					( options.theme ? " ui-btn-" + options.theme : "" ) +
+					( options.corners ? " ui-corner-all" : "" ) +
+					( options.shadow ? " ui-shadow" : "" ) );
 
 		this.setButtonText();
 
@@ -131,7 +131,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 		// Add counter for multi selects
 		if ( this.isMultiple ) {
 			this.buttonCount = $( "<span>" )
-				.addClass( "ui-li-count ui-btn-up-c ui-btn-corner-all" )
+				.addClass( "ui-li-count" )
 				.hide()
 				.appendTo( button.addClass( "ui-li-has-count" ) );
 		}
@@ -180,9 +180,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			.bind( "change blur vmouseout", function() {
 				self.button.trigger( "vmouseout" )
 					.removeClass( $.mobile.activeBtnClass );
-			})
-			.bind( "change blur", function() {
-				self.button.removeClass( "ui-btn-down-" + self.options.theme );
 			});
 
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
@@ -234,7 +231,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 			text = this.placeholder,
 			span = $( document.createElement( "span" ) );
 
-		this.button.find( ".ui-btn-text" ).html(function() {
+		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( (function() {
 			if ( selected.length ) {
 				text = selected.map(function() {
 					return $( this ).text();
@@ -243,11 +240,17 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 				text = self.placeholder;
 			}
 
+			if ( text ) {
+				span.text( text );
+			} else {
+				span.html( "&nbsp;" );
+			}
+
 			// TODO possibly aggregate multiple select option classes
-			return span.text( text )
+			return span
 				.addClass( self.select.attr( "class" ) )
 				.addClass( selected.attr( "class" ) );
-		});
+		})());
 	},
 
 	setButtonCount: function() {
@@ -275,12 +278,12 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 	disable: function() {
 		this._setDisabled( true );
-		this.button.addClass( "ui-disabled" );
+		this.button.addClass( "ui-state-disabled" );
 	},
 
 	enable: function() {
 		this._setDisabled( false );
-		this.button.removeClass( "ui-disabled" );
+		this.button.removeClass( "ui-state-disabled" );
 	}
 }, $.mobile.behaviors.formReset ) );
 

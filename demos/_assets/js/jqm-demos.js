@@ -81,8 +81,8 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
-		theme: "d",
-		dividerTheme: "d",
+		theme: null,
+		dividerTheme: null,
 		icon: false,
 		filter: true,
 		filterReveal: true,
@@ -124,8 +124,8 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	$( this ).find( ".jqm-content ul.jqm-list " ).listview({
 		globalNav: "demos",
 		inset: true,
-		theme: "d",
-		dividerTheme: "d",
+		theme: null,
+		dividerTheme: null,
 		icon: false,
 		filter: true,
 		filterReveal: true,
@@ -197,12 +197,11 @@ $( document ).on( "mobileinit", function() {
 	$.widget( "mobile.listview", $.mobile.listview, {
 		options: {
 			theme: null,
-			countTheme: "c",
-			headerTheme: "b",
-			dividerTheme: "b",
+			countTheme: null,
+			dividerTheme: null,
 			icon: "arrow-r",
 			splitIcon: "arrow-r",
-			splitTheme: "b",
+			splitTheme: null,
 			corners: true,
 			shadow: true,
 			inset: false,

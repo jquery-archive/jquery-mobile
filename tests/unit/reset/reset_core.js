@@ -52,15 +52,12 @@ asyncTest( "Form resets correctly", function() {
 		var id = el.attr( "id" ),
 			button = el.parent(),
 			wrapper = button.parent(),
-			textEl = button.children().eq( 0 ).children().eq( 0 ),
-			anonySpan = textEl.children();
+			anonySpan = button.children().eq( 0 );
 
 		ok( button.length === 1, prefix + id + " has a parent" );
 		ok( wrapper.length === 1, prefix + id + " has a wrapper" );
 		ok( wrapper.hasClass( "ui-select" ), prefix + id + "'s wrapper has class ui-select" );
-		ok( textEl.length === 1, prefix + id + "'s text element is present" );
-		ok( textEl.hasClass( "ui-btn-text" ), prefix + id + "'s text element has class ui-btn-text" );
-		ok( anonySpan.length === 1, prefix + id + "'s text element contains a single span element" );
+		ok( anonySpan.length === 1, prefix + id + "'s wrapper contains a single span element as its first child" );
 		ok( anonySpan.text() === el.children("[value='" + el.val() + "']").text(), prefix + id + "'s text is identical to the text inside the selected <option> element" );
 	}
 
@@ -68,15 +65,12 @@ asyncTest( "Form resets correctly", function() {
 		var id = el.attr( "id" ),
 			label = el.parent().children( "label" ),
 			ctype = ( isRadio ? "radio" : "checkbox" ),
-			iconEl = label.children().eq( 0 ).children().eq( 1 ),
-			iconVisible = iconEl.is( ":visible" ),
+			iconVisible = ( label.hasClass( "ui-btn-icon-left" ) || label.hasClass( "ui-btn-icon-right" ) ),
 			iconValue = ( ctype + "-" + ( value ? "on" : "off" ) );
 
 		ok( label.is( "label[for='" + id + "']" ), prefix + id + "'s label is a label for it" );
 		ok( label.parent().is( ".ui-" + ctype ), prefix + id + "'s parent's label is a div with the correct class" );
-		ok( label.attr( "data-" + ( $.mobile.ns || "" ) + "icon" ) === iconValue, prefix + id + " has the correct data-icon attribute value" );
-		ok( iconEl.length === 1, prefix + id + " has exactly one icon element in the right spot" );
-		ok( iconEl.hasClass( "ui-icon-" + iconValue ), prefix + id + "'s icon has the right icon class" );
+		ok( label.hasClass( "ui-icon-" + iconValue ), prefix + id + "'s icon has the right icon class" );
 		ok( iconVisible === ( !isHoriz ), prefix + id + "'s icon is visible exactly when it's not part of a horizontal controlgroup" );
 		ok( label.hasClass( "ui-btn-active" ) === ( isHoriz && value ), prefix + id + "'s label has class ui-btn-active exactly when it's set and part of a horizontal controlgroup" );
 	}

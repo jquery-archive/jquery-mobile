@@ -28,7 +28,7 @@
 
         <p class="jqm-intro">This section is a reference for all widget options.</p>
 
-        <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list">
+        <ul data-role="listview" data-inset="true" data-filter="true" data-theme="a" data-divider-theme="a" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list">
             <li data-role="list-divider">Widget reference</li>
 			<?php include( '../nav-widgets.php' ); ?>
 		</ul>

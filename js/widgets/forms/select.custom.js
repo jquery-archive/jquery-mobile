@@ -11,7 +11,6 @@
 
 define( [
 	"jquery",
-	"../../jquery.mobile.buttonMarkup",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.navigation",
 	"../dialog",
@@ -34,32 +33,23 @@ define( [
 			isMultiple = widget.isMultiple = widget.select[ 0 ].multiple,
 			buttonId = selectID + "-button",
 			menuId = selectID + "-menu",
-			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' id='" + dialogID + "' data-" +$.mobile.ns + "theme='"+ widget.options.theme +"' data-" +$.mobile.ns + "overlay-theme='"+ widget.options.overlayTheme +"'>" +
+			themeAttr = widget.options.theme ? " data-" + $.mobile.ns + "theme='" + widget.options.theme + "'" : "",
+			overlayThemeAttr = widget.options.overlayTheme ? " data-" + $.mobile.ns + "theme='" + widget.options.overlayTheme + "'" : "",
+			dividerThemeAttr = ( widget.options.dividerTheme && isMultiple ) ? " data-" + $.mobile.ns + "divider-theme='" + widget.options.dividerTheme + "'" : "",
+			menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogID + "'" + themeAttr + overlayThemeAttr + ">" +
 				"<div data-" + $.mobile.ns + "role='header'>" +
 				"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 				"</div>"+
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ),
 
-			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup( { theme: widget.options.overlayTheme } ),
+			listbox =  $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( widget.select ).popup({ theme: widget.options.overlayTheme }),
 
-			list = $( "<ul>", {
-				"class": "ui-selectmenu-list",
-				"id": menuId,
-				"role": "listbox",
-				"aria-labelledby": buttonId
-				}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme )
-					.attr( "data-" + $.mobile.ns + "divider-theme", widget.options.dividerTheme )
-					.appendTo( listbox ),
+			list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + buttonId + "'" + themeAttr + dividerThemeAttr + ">" ).appendTo( listbox ),
 
+			header = $( "<div class='ui-header ui-bar-" + ( widget.options.theme ? widget.options.theme : "inherit" ) + "'>" ).prependTo( listbox ),
 
-			header = $( "<div>", {
-				"class": "ui-header ui-bar-" + widget.options.theme
-			}).prependTo( listbox ),
-
-			headerTitle = $( "<h1>", {
-				"class": "ui-title"
-			}).appendTo( header ),
+			headerTitle = $( "<h1 class='ui-title'>" ).appendTo( header ),
 
 			menuPageContent,
 			menuPageClose,
@@ -69,8 +59,8 @@ define( [
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
-				"class": "ui-btn-left"
-			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup();
+				"class": "ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
+			}).appendTo( header );
 		}
 
 		$.extend( widget, {
@@ -121,8 +111,7 @@ define( [
 					}
 
 					if (event.type === "vclick" ||
-							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
-																event.keyCode === $.mobile.keyCode.SPACE)) {
+							event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE)) {
 
 						self._decideFormat();
 						if ( self.menuType === "overlay" ) {
@@ -160,7 +149,7 @@ define( [
 
 						// toggle checkbox class for multiple selects
 						if ( self.isMultiple ) {
-							$( this ).find( ".ui-icon" )
+							$( this ).find( "a" )
 								.toggleClass( "ui-icon-checkbox-on", option.selected )
 								.toggleClass( "ui-icon-checkbox-off", !option.selected );
 						}
@@ -174,7 +163,7 @@ define( [
 						// We need to grab the clicked item the hard way, because the list may have been rebuilt
 						if ( self.isMultiple ) {
 							self.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
-								.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
+								.find( "a" ).first().focus();
 						}
 						else {
 							self.close();
@@ -184,46 +173,17 @@ define( [
 					})
 					.keydown(function( event ) {  //keyboard events for menu items
 						var target = $( event.target ),
-							li = target.closest( "li" ),
-							prev, next;
+							li = target.closest( "li" );
 
 						// switch logic based on which key was pressed
 						switch ( event.keyCode ) {
 							// up or left arrow keys
 						case 38:
-							prev = li.prev().not( ".ui-selectmenu-placeholder" );
-
-							if ( prev.hasClass( "ui-li-divider" ) ) {
-								prev = prev.prev();
-							}
-
-							// if there's a previous option, focus it
-							if ( prev.length ) {
-								target
-									.blur()
-									.attr( "tabindex", "-1" );
-
-								prev.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
-							}
-
+							goToAdjacentItem( li, target, "prev" );
 							return false;
 							// down or right arrow keys
 						case 40:
-							next = li.next();
-
-							if ( next.hasClass( "ui-li-divider" ) ) {
-								next = next.next();
-							}
-
-							// if there's a next option, focus it
-							if ( next.length ) {
-								target
-									.blur()
-									.attr( "tabindex", "-1" );
-
-								next.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
-							}
-
+							goToAdjacentItem( li, target, "next" );
 							return false;
 							// If enter or space is pressed, trigger click
 						case 13:
@@ -300,7 +260,7 @@ define( [
 				self.setButtonCount();
 
 				self.list.find( "li:not(.ui-li-divider)" )
-					.removeClass( $.mobile.activeBtnClass )
+					.find( "a" ).removeClass( $.mobile.activeBtnClass ).end()
 					.attr( "aria-selected", false )
 					.each(function( i ) {
 
@@ -312,12 +272,12 @@ define( [
 
 							// Multiple selects: add the "on" checkbox state to the icon
 							if ( self.isMultiple ) {
-								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
+								item.find( "a" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
-								if ( item.hasClass( "ui-selectmenu-placeholder" ) ) {
-									item.next().addClass( $.mobile.activeBtnClass );
+								if ( item.hasClass( "ui-screen-hidden" ) ) {
+									item.next().find( "a" ).addClass( $.mobile.activeBtnClass );
 								} else {
-									item.addClass( $.mobile.activeBtnClass );
+									item.find( "a" ).addClass( $.mobile.activeBtnClass );
 								}
 							}
 						}
@@ -357,11 +317,11 @@ define( [
 					screenHeight = $window.height();
 
 				function focusMenuItem() {
-					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
+					var selector = self.list.find( "a." + $.mobile.activeBtnClass );
 					if ( selector.length === 0 ) {
-						selector = self.list.find( "li.ui-btn:not( :jqmData(placeholder='true') ) a" );
+						selector = self.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-btn" );
 					}
-					selector.first().focus().closest( "li" ).addClass( "ui-btn-down-" + widget.options.theme );
+					selector.first().focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
@@ -392,7 +352,7 @@ define( [
 
 					self.menuType = "page";
 					self.menuPageContent.append( self.list );
-					self.menuPage.find("div .ui-title").text(self.label.text());
+					self.menuPage.find( "div .ui-title" ).text( self.label.text() );
 				} else {
 					self.menuType = "overlay";
 
@@ -461,7 +421,7 @@ define( [
 						}
 						option.setAttribute( dataPlaceholderAttr, true );
 						if ( o.hidePlaceholderMenuItems ) {
-							classes.push( "ui-selectmenu-placeholder" );
+							classes.push( "ui-screen-hidden" );
 						}
 						if ( placeholder !== text ) {
 							placeholder = self.placeholder = text;
@@ -489,7 +449,7 @@ define( [
 
 				// Hide header if it's not a multiselect and there's no placeholder
 				if ( !this.isMultiple && !placeholder.length ) {
-					this.header.hide();
+					this.header.addClass( "ui-screen-hidden" );
 				} else {
 					this.headerTitle.text( this.placeholder );
 				}
@@ -538,6 +498,21 @@ define( [
 				origDestroy.apply( this, arguments );
 			}
 		});
+	},
+	unfocusableItemSelector = ".ui-disabled,.ui-li-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
+	goToAdjacentItem = function( item, target, direction ) {
+		var adjacent = item[ direction + "All" ]()
+			.not( unfocusableItemSelector )
+			.first();
+
+		// if there's a previous option, focus it
+		if ( adjacent.length ) {
+			target
+				.blur()
+				.attr( "tabindex", "-1" );
+
+			adjacent.find( "a" ).first().focus();
+		}
 	};
 
 	// issue #3894 - core doesn't trigger events on disabled delegates

@@ -58,7 +58,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		},
 
 		defaultHtml: "<div class='" + loaderClass + "'>" +
-			"<span class='ui-icon ui-icon-loading'></span>" +
+			"<span class='ui-icon-loading'></span>" +
 			"<h1></h1>" +
 			"</div>",
 

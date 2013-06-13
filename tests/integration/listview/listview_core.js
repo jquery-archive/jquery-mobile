@@ -22,14 +22,16 @@
 	});
 
 	asyncTest( "The page should be enhanced correctly", function(){
-		expect( 1 );
+		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
 				$.mobile.changePage("#basic-linked-test");
 			},
 
 			function() {
-				ok($('#basic-linked-test .ui-li').length, ".ui-li classes added to li elements");
+				ok($('#basic-linked-test .ui-li-static').length, ".ui-li-static class added to read-only li elements");
+				ok($('#basic-linked-test .ui-li-divider').length, ".ui-li-divider class added to divider li elements");
+				ok($('#basic-linked-test li > .ui-btn').length, ".ui-btn classes added to anchors that are immediate child of li elements");
 				start();
 			}
 		]);
@@ -80,15 +82,18 @@
 					items = page.find( "li" );
 
 				ok(  items.eq( 0 ).hasClass( "ui-li-has-count"), "First LI should have ui-li-has-count class" );
-				ok(  items.eq( 0 ).hasClass( "ui-li-has-arrow"), "First LI should have ui-li-has-arrow class" );
+				ok(  items.eq( 0 ).find( "a" ).first().hasClass( "ui-icon-arrow-r"), "First LI A should have ui-icon-arrow-r class" );
 				ok( !items.eq( 1 ).hasClass( "ui-li-has-count"), "Second LI should NOT have ui-li-has-count class" );
-				ok(  items.eq( 1 ).hasClass( "ui-li-has-arrow"), "Second LI should have ui-li-has-arrow class" );
+				ok(  items.eq( 1 ).find( "a" ).first().hasClass( "ui-icon-arrow-r"), "Second LI A should have ui-icon-arrow-r class" );
 				ok( !items.eq( 2 ).hasClass( "ui-li-has-count"), "Third LI should NOT have ui-li-has-count class" );
-				ok( !items.eq( 2 ).hasClass( "ui-li-has-arrow"), "Third LI should NOT have ui-li-has-arrow class" );
+				ok( !items.eq( 2 ).find( "a" ).first().hasClass( "ui-icon-arrow-r"), "Third LI A should NOT have ui-icon-arrow-r class" );
 				ok(  items.eq( 3 ).hasClass( "ui-li-has-count"), "Fourth LI should have ui-li-has-count class" );
-				ok( !items.eq( 3 ).hasClass( "ui-li-has-arrow"), "Fourth LI should NOT have ui-li-has-arrow class" );
+				ok( !items.eq( 3 ).find( "a" ).first().hasClass( "ui-icon-arrow-r"), "Fourth LI A should NOT have ui-icon-arrow-r class" );
 				ok( !items.eq( 4 ).hasClass( "ui-li-has-count"), "Fifth LI should NOT have ui-li-has-count class" );
-				ok( !items.eq( 4 ).hasClass( "ui-li-has-arrow"), "Fifth LI should NOT have ui-li-has-arrow class" );
+				ok( !items.eq( 4 ).find( "a" ).first().hasClass( "ui-icon-arrow-r"), "Fifth LI A should NOT have ui-icon-arrow-r class" );
+				ok( items.eq( 5 ).hasClass( "ui-li-has-alt"), "Sixth LI should have ui-li-has-alt class" );
+				ok( items.eq( 6 ).hasClass( "ui-li-has-icon"), "Seventh LI should have ui-li-has-icon class" );
+				ok( items.eq( 7 ).hasClass( "ui-li-has-thumb"), "Eight LI should have ui-li-has-thumb class" );
 				start();
 			}
 		]);
@@ -106,7 +111,7 @@
 			function(){
 				var $new_page = $('#numbered-list-test');
 				ok($new_page.hasClass('ui-page-active'), "Makes the new page active when the hash is changed.");
-				ok($('.ui-link-inherit', $new_page).first().text() == "Number 1", "The text of the first LI should be Number 1");
+				ok($('.ui-btn', $new_page).first().text() == "Number 1", "The text of the first LI should be Number 1");
 				start();
 			}
 		]);
@@ -173,8 +178,8 @@
 
 			function(){
 				var $new_page = $('#split-list-test');
-				ok($('.ui-li-link-alt', $new_page).length == 3);
-				ok($('.ui-link-inherit', $new_page).length == 3);
+				ok($('.ui-li-has-alt', $new_page).length == 3);
+				ok($('li > .ui-btn', $new_page).length == 6);
 				start();
 			}
 		]);
@@ -187,7 +192,7 @@
 			},
 
 			function(){
-				$('.ui-page-active .ui-li a:eq(0)').click();
+				$('.ui-page-active li a:eq(0)').click();
 			},
 
 			function(){
@@ -225,7 +230,7 @@
 			},
 
 			function(){
-				$('.ui-page-active .ui-li-link-alt:eq(0)').click();
+				$('.ui-page-active .ui-li-has-alt > .ui-btn:eq(1)').click();
 			},
 
 			function(){
@@ -506,9 +511,9 @@
 		var ul = $('.ui-page-active ul');
 
 		ul.append("<li id='fiz'><img/></li>");
-		ok(!ul.find("#fiz img").hasClass("ui-li-thumb"));
+		ok(!ul.find("#fiz").hasClass("ui-li-has-thumb"));
 		ul.listview('refresh');
-		ok(ul.find("#fiz img").hasClass("ui-li-thumb"));
+		ok(ul.find("#fiz").hasClass("ui-li-has-thumb"));
 	});
 
 	asyncTest( "Filter downs results and dividers when the user enters information", function() {
@@ -864,7 +869,7 @@
 
 			function() {
 				var theme = $.mobile.activePage.jqmData('theme');
-				ok( $.mobile.activePage.find("ul > li").hasClass("ui-btn-up-b"), "theme matches the parent");
+				ok( $.mobile.activePage.find("ul > li").hasClass("ui-body-inherit"), "theme matches the parent");
 				window.history.back();
 			},
 
@@ -919,9 +924,9 @@
 			function() {
 				$.mobile.activePage.find("li").each(function(i, elem){
 					var $elem = $(elem),
-						order = [ "star", "plug", "delete", "plug" ];
+						order = [ "star", "plus", "delete", "grid" ];
 
-					deepEqual( $elem.find("span.ui-icon-" + order[i]).length, 1, "there should be one " + order[i] + " icon" );
+					ok( $elem.children(".ui-btn").last().hasClass("ui-icon-" + order[i]) );
 				});
 
 				window.history.back();
@@ -956,8 +961,8 @@
 			},
 
 			function() {
-				deepEqual($.mobile.activePage.find(".listitem").css("border-bottom-width"), "0px", "has no border bottom");
-				deepEqual($.mobile.activePage.find("#lastitem").css("border-bottom-width"), "1px", "has border bottom");
+				deepEqual($.mobile.activePage.find(".listitem > .ui-btn").css("border-bottom-width"), "0px", "has no border bottom");
+				deepEqual($.mobile.activePage.find("#lastitem > .ui-btn").css("border-bottom-width"), "1px", "has border bottom");
 
 				window.history.back();
 			},
@@ -973,8 +978,8 @@
 			},
 
 			function() {
-				deepEqual($.mobile.activePage.find("#noninsetlastli").css("border-bottom-width"), "0px", "last li non-inset list has no border bottom");
-				deepEqual($.mobile.activePage.find("#insetlastli").css("border-bottom-width"), "1px", "last li inset list has border bottom");
+				deepEqual($.mobile.activePage.find("#noninsetlastli > .ui-btn").css("border-bottom-width"), "0px", "last li non-inset list has no border bottom");
+				deepEqual($.mobile.activePage.find("#insetlastli > .ui-btn").css("border-bottom-width"), "1px", "last li inset list has border bottom");
 
 				window.history.back();
 			},

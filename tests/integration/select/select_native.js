@@ -13,49 +13,11 @@
 
 			select.val( key ).selectmenu( 'refresh' );
 			text = select.find( "option[value='" + key + "']" ).text();
-			deepEqual( select.parent().find(".ui-btn-text").text(), text );
+			deepEqual( select.prev( "span" ).text(), text );
 		};
 
 		setAndCheck( 'rush' );
 		setAndCheck( 'standard' );
-	});
-
-	asyncTest( "selecting a value removes the related buttons down state", function(){
-		var select = $( "#native-select-choice-few" );
-
-		$.testHelper.sequence([
-			function() {
-				// click the native menu parent button
-				select.parent().trigger( 'vmousedown' );
-			},
-
-			function() {
-				ok( select.parent().hasClass("ui-btn-down-c"), "button down class added" );
-			},
-
-			function() {
-				// trigger a change on the select
-				select.trigger( "change" );
-			},
-
-			function() {
-				ok( !select.parent().hasClass("ui-btn-down-c"), "button down class removed" );
-				start();
-			}
-		], 300);
-	});
-
-	// issue https://github.com/jquery/jquery-mobile/issues/2410
-	test( "adding options and refreshing a custom select defaults the text", function() {
-		var select = $( "#custom-refresh" ),
-			button = select.siblings( "a" ).find( ".ui-btn-inner" ),
-			text = "foo";
-
-		deepEqual($.trim(button.text()), "default");
-		select.find( "option" ).remove(); //remove the loading message
-		select.append('<option value="1">' + text + '</option>');
-		select.selectmenu( 'refresh' );
-		deepEqual($.trim(button.text()), text);
 	});
 
 	// issue 2424
@@ -90,10 +52,6 @@
 			.parent()
 			.trigger( "vmousedown" )
 			.trigger( "mouseup" );
-
-
-
-
 	});
 
 	asyncTest( "The preventFocusZoom option does not manipulate zoom when it is false", function() {
