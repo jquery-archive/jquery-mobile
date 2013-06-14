@@ -77,6 +77,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
+		this.buttonId = this.selectID + "-button";
 		this.label = $( "label[for='"+ this.selectID +"']" );
 		this.isMultiple = this.select[ 0 ].multiple;
 	},
@@ -95,11 +96,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 	_create: function() {
 		this._preExtension();
 
-		// Allows for extension of the native select for custom selects and other plugins
-		// see select.custom for example extension
-		// TODO explore plugin registration
-		this._trigger( "beforeCreate" );
-
 		this.button = this._button();
 
 		var self = this,
@@ -108,9 +104,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, $.extend( {
 
 			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
-			// TODO values buttonId and menuId are undefined here
 			button = this.button
 				.insertBefore( this.select )
+				.attr( "id", this.buttonId )
 				.addClass( "ui-btn" +
 					( options.icon ? ( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos +
 					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
