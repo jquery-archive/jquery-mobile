@@ -48,6 +48,11 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		return this._super();
 	},
 
+	_handleSelectFocus: function() {
+		this.element.blur();
+		this.button.focus();
+	},
+
 	build: function() {
 		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
 			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self,
@@ -119,10 +124,8 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			// none present.
 			this._origTabIndex = ( this.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : this.select.attr( "tabindex" );
 		}
-		this.select.attr( "tabindex", "-1" ).focus(function() {
-			$( this ).blur();
-			self.button.focus();
-		});
+		this.select.attr( "tabindex", "-1" );
+		this._on( this.select, { focus : "_handleSelectFocus" } );
 
 		// Button events
 		this.button.bind( "vclick keydown" , function( event ) {
