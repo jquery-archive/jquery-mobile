@@ -53,6 +53,25 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this.button.focus();
 	},
 
+	_handleButtonVclickKeydown: function( event ) {
+		if ( this.options.disabled || this.isOpen ) {
+			return;
+		}
+
+		if (event.type === "vclick" ||
+				event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE)) {
+
+			this._decideFormat();
+			if ( this.menuType === "overlay" ) {
+				this.button.attr( "href", "#" + this.popupId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+			} else {
+				this.button.attr( "href", "#" + this.dialogId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+			}
+			this.isOpen = true;
+			// Do not prevent default, so the navigation may have a chance to actually open the chosen format
+		}
+	},
+
 	build: function() {
 		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
 			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self,
@@ -128,23 +147,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this._on( this.select, { focus : "_handleSelectFocus" } );
 
 		// Button events
-		this.button.bind( "vclick keydown" , function( event ) {
-			if ( self.options.disabled || self.isOpen ) {
-				return;
-			}
-
-			if (event.type === "vclick" ||
-					event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE)) {
-
-				self._decideFormat();
-				if ( self.menuType === "overlay" ) {
-					self.button.attr( "href", "#" + self.popupId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
-				} else {
-					self.button.attr( "href", "#" + self.dialogId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
-				}
-				self.isOpen = true;
-				// Do not prevent default, so the navigation may have a chance to actually open the chosen format
-			}
+		this._on( this.button, {
+			vclick : "_handleButtonVclickKeydown",
+			keydown : "_handleButtonVclickKeydown"
 		});
 
 		// Events for list items
