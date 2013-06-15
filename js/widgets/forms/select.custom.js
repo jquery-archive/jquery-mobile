@@ -50,9 +50,10 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 	build: function() {
 		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
-			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self;
+			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self,
+			o = this.options;
 
-		if ( this.options.nativeMenu ) {
+		if ( o.nativeMenu ) {
 			return this._super();
 		}
 
@@ -65,23 +66,23 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		thisPage = this.element.closest( ".ui-page" );
 		isMultiple = this.element[ 0 ].multiple;
 		menuId = selectId + "-menu";
-		themeAttr = this.options.theme ? ( " data-" + $.mobile.ns + "theme='" + this.options.theme + "'" ) : "";
-		overlayThemeAttr = this.options.overlayTheme ? ( " data-" + $.mobile.ns + "theme='" + this.options.overlayTheme + "'" ) : "";
-		dividerThemeAttr = ( this.options.dividerTheme && isMultiple ) ? ( " data-" + $.mobile.ns + "divider-theme='" + this.options.dividerTheme + "'" ) : "";
+		themeAttr = o.theme ? ( " data-" + $.mobile.ns + "theme='" + o.theme + "'" ) : "";
+		overlayThemeAttr = o.overlayTheme ? ( " data-" + $.mobile.ns + "theme='" + o.overlayTheme + "'" ) : "";
+		dividerThemeAttr = ( o.dividerTheme && isMultiple ) ? ( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
 		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogId + "'" + themeAttr + overlayThemeAttr + ">" +
 			"<div data-" + $.mobile.ns + "role='header'>" +
 			"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 			"</div>"+
 			"<div data-" + $.mobile.ns + "role='content'></div>"+
 			"</div>" );
-		listbox = $( "<div id='" + popupId + "' class='ui-selectmenu'>" ).insertAfter( this.select ).popup({ theme: this.options.overlayTheme });
+		listbox = $( "<div id='" + popupId + "' class='ui-selectmenu'>" ).insertAfter( this.select ).popup({ theme: o.overlayTheme });
 		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + ">" ).appendTo( listbox );
-		header = $( "<div class='ui-header ui-bar-" + ( this.options.theme ? this.options.theme : "inherit" ) + "'>" ).prependTo( listbox );
+		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'>" ).prependTo( listbox );
 		headerTitle = $( "<h1 class='ui-title'>" ).appendTo( header );
 
 		if ( this.isMultiple ) {
 			headerClose = $( "<a>", {
-				"text": this.options.closeText,
+				"text": o.closeText,
 				"href": "#",
 				"class": "ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
 			}).appendTo( header );
@@ -96,7 +97,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			menuPage: menuPage,
 			label: label,
 			isMultiple: isMultiple,
-			theme: this.options.theme,
+			theme: o.theme,
 			listbox: listbox,
 			list: list,
 			header: header,
