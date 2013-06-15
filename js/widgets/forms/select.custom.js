@@ -49,7 +49,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	build: function() {
-		var selectID, prefix, popupID, dialogID, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
+		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
 			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self;
 
 		if ( this.options.nativeMenu ) {
@@ -57,24 +57,24 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 
 		self = this;
-		selectID = this.selectID;
-		prefix = ( selectID ? selectID : ( ( $.mobile.ns || "" ) + "uuid-" + this.uuid ) );
-		popupID = prefix + "-listbox";
-		dialogID = prefix + "-dialog";
+		selectId = this.selectId;
+		prefix = ( selectId ? selectId : ( ( $.mobile.ns || "" ) + "uuid-" + this.uuid ) );
+		popupId = prefix + "-listbox";
+		dialogId = prefix + "-dialog";
 		label = this.label;
 		thisPage = this.element.closest( ".ui-page" );
 		isMultiple = this.element[ 0 ].multiple;
-		menuId = selectID + "-menu";
+		menuId = selectId + "-menu";
 		themeAttr = this.options.theme ? ( " data-" + $.mobile.ns + "theme='" + this.options.theme + "'" ) : "";
 		overlayThemeAttr = this.options.overlayTheme ? ( " data-" + $.mobile.ns + "theme='" + this.options.overlayTheme + "'" ) : "";
 		dividerThemeAttr = ( this.options.dividerTheme && isMultiple ) ? ( " data-" + $.mobile.ns + "divider-theme='" + this.options.dividerTheme + "'" ) : "";
-		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogID + "'" + themeAttr + overlayThemeAttr + ">" +
+		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogId + "'" + themeAttr + overlayThemeAttr + ">" +
 			"<div data-" + $.mobile.ns + "role='header'>" +
 			"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 			"</div>"+
 			"<div data-" + $.mobile.ns + "role='content'></div>"+
 			"</div>" );
-		listbox = $( "<div id='" + popupID + "' class='ui-selectmenu'>" ).insertAfter( this.select ).popup({ theme: this.options.overlayTheme });
+		listbox = $( "<div id='" + popupId + "' class='ui-selectmenu'>" ).insertAfter( this.select ).popup({ theme: this.options.overlayTheme });
 		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + ">" ).appendTo( listbox );
 		header = $( "<div class='ui-header ui-bar-" + ( this.options.theme ? this.options.theme : "inherit" ) + "'>" ).prependTo( listbox );
 		headerTitle = $( "<h1 class='ui-title'>" ).appendTo( header );
@@ -88,10 +88,10 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 
 		$.extend( this, {
-			selectID: selectID,
+			selectId: selectId,
 			menuId: menuId,
-			popupID: popupID,
-			dialogID: dialogID,
+			popupId: popupId,
+			dialogId: dialogId,
 			thisPage: thisPage,
 			menuPage: menuPage,
 			label: label,
@@ -134,9 +134,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 				self._decideFormat();
 				if ( self.menuType === "overlay" ) {
-					self.button.attr( "href", "#" + self.popupID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+					self.button.attr( "href", "#" + self.popupId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
 				} else {
-					self.button.attr( "href", "#" + self.dialogID ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+					self.button.attr( "href", "#" + self.dialogId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
 				}
 				self.isOpen = true;
 				// Do not prevent default, so the navigation may have a chance to actually open the chosen format
