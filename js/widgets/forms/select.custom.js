@@ -82,6 +82,28 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			.trigger( params.event );
 	},
 
+	_handleListKeydown: function( event ) {
+		var target = $( event.target ),
+			li = target.closest( "li" );
+
+		// switch logic based on which key was pressed
+		switch ( event.keyCode ) {
+			// up or left arrow keys
+		case 38:
+			goToAdjacentItem( li, target, "prev" );
+			return false;
+			// down or right arrow keys
+		case 40:
+			goToAdjacentItem( li, target, "next" );
+			return false;
+			// If enter or space is pressed, trigger click
+		case 13:
+		case 32:
+			target.trigger( "click" );
+			return false;
+		}
+	},
+
 	build: function() {
 		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
 			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self,
@@ -166,14 +188,15 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this.list.attr( "role", "listbox" );
 		this._on( this.list, {
 			focusin : "_handleListFocus",
-			focusout : "_handleListFocus"
+			focusout : "_handleListFocus",
+			keydown: "_handleListKeydown"
 		});
 		this.list
 			.delegate( "li:not(.ui-disabled, .ui-li-divider)", "click", function( event ) {
 
 				// index of option tag to be selected
 				var oldIndex = self.select[ 0 ].selectedIndex,
-					newIndex = self.list.find( "li:not(.ui-li-divider)" ).index( this ),
+					newIndex = $.mobile.getAttribute( this, "option-index", true ),
 					option = self._selectOptions().eq( newIndex )[ 0 ];
 
 				// toggle selected status on the tag for multi selects
@@ -202,28 +225,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				}
 
 				event.preventDefault();
-			})
-			.keydown(function( event ) {  //keyboard events for menu items
-				var target = $( event.target ),
-					li = target.closest( "li" );
-
-				// switch logic based on which key was pressed
-				switch ( event.keyCode ) {
-					// up or left arrow keys
-				case 38:
-					goToAdjacentItem( li, target, "prev" );
-					return false;
-					// down or right arrow keys
-				case 40:
-					goToAdjacentItem( li, target, "next" );
-					return false;
-					// If enter or space is pressed, trigger click
-				case 13:
-				case 32:
-					target.trigger( "click" );
-
-					return false;
-				}
 			});
 
 		// button refocus ensures proper height calculation
