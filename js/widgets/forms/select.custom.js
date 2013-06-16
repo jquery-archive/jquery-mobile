@@ -72,6 +72,16 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 	},
 
+	_handleListFocus: function( e ) {
+		var params = ( e.type === "focusin" ) ?
+			{ tabindex: "0", event: "vmouseover" }:
+			{ tabindex: "-1", event: "vmouseout" };
+
+		$( e.target )
+			.attr( "tabindex", params.tabindex )
+			.trigger( params.event );
+	},
+
 	build: function() {
 		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
 			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self,
@@ -153,18 +163,12 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		});
 
 		// Events for list items
-		this.list.attr( "role", "listbox" )
-			.bind( "focusin", function( e ) {
-				$( e.target )
-					.attr( "tabindex", "0" )
-					.trigger( "vmouseover" );
-
-			})
-			.bind( "focusout", function( e ) {
-				$( e.target )
-					.attr( "tabindex", "-1" )
-					.trigger( "vmouseout" );
-			})
+		this.list.attr( "role", "listbox" );
+		this._on( this.list, {
+			focusin : "_handleListFocus",
+			focusout : "_handleListFocus"
+		});
+		this.list
 			.delegate( "li:not(.ui-disabled, .ui-li-divider)", "click", function( event ) {
 
 				// index of option tag to be selected
