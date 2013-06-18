@@ -104,6 +104,22 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 	},
 
+	_handleMenuPageHide: function() {
+		// TODO centralize page removal binding / handling in the page plugin.
+		// Suggestion from @jblas to do refcounting
+		//
+		// TODO extremely confusing dependency on the open method where the pagehide.remove
+		// bindings are stripped to prevent the parent page from disappearing. The way
+		// we're keeping pages in the DOM right now sucks
+		//
+		// rebind the page remove that was unbound in the open function
+		// to allow for the parent page removal from actions other than the use
+		// of a dialog sized custom select
+		//
+		// doing this here provides for the back button on the custom select dialog
+		$.mobile._bindPageRemove.call( this.thisPage );
+	},
+
 	build: function() {
 		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
 			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self,
@@ -229,21 +245,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// button refocus ensures proper height calculation
 		// by removing the inline style and ensuring page inclusion
-		this.menuPage.bind( "pagehide", function() {
-			// TODO centralize page removal binding / handling in the page plugin.
-			// Suggestion from @jblas to do refcounting
-			//
-			// TODO extremely confusing dependency on the open method where the pagehide.remove
-			// bindings are stripped to prevent the parent page from disappearing. The way
-			// we're keeping pages in the DOM right now sucks
-			//
-			// rebind the page remove that was unbound in the open function
-			// to allow for the parent page removal from actions other than the use
-			// of a dialog sized custom select
-			//
-			// doing this here provides for the back button on the custom select dialog
-			$.mobile._bindPageRemove.call( self.thisPage );
-		});
+		this._on( this.menuPage, { pagehide: "_handleMenuPageHide" } );
 
 		// Events on the popup
 		this.listbox.bind( "popupafterclose", function() {
