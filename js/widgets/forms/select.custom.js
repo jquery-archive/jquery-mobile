@@ -120,6 +120,13 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		$.mobile._bindPageRemove.call( this.thisPage );
 	},
 
+	_handleHeaderCloseClick: function() {
+		if ( this.menuType === "overlay" ) {
+			this.close();
+			return false;
+		}
+	},
+
 	build: function() {
 		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
 			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self,
@@ -252,12 +259,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// Close button on small overlays
 		if ( this.isMultiple ) {
-			this.headerClose.click(function() {
-				if ( self.menuType === "overlay" ) {
-					self.close();
-					return false;
-				}
-			});
+			this._on( this.headerClose, { click: "_handleHeaderCloseClick" } );
 		}
 
 		// track this dependency so that when the parent page
