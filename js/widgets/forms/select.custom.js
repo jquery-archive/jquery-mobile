@@ -248,9 +248,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this._on( this.menuPage, { pagehide: "_handleMenuPageHide" } );
 
 		// Events on the popup
-		this.listbox.bind( "popupafterclose", function() {
-			self.close();
-		});
+		this._on( this.listbox, { popupafterclose: "close" } );
 
 		// Close button on small overlays
 		if ( this.isMultiple ) {
