@@ -109,23 +109,23 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		});
 
 		// Create list from select, update state
-		self.refresh();
+		this.refresh();
 
-		if ( self._origTabIndex === undefined ) {
-			// Map undefined to false, because self._origTabIndex === undefined
+		if ( this._origTabIndex === undefined ) {
+			// Map undefined to false, because this._origTabIndex === undefined
 			// indicates that we have not yet checked whether the select has
 			// originally had a tabindex attribute, whereas false indicates that
 			// we have checked the select for such an attribute, and have found
 			// none present.
-			self._origTabIndex = ( self.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : self.select.attr( "tabindex" );
+			this._origTabIndex = ( this.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : this.select.attr( "tabindex" );
 		}
-		self.select.attr( "tabindex", "-1" ).focus(function() {
+		this.select.attr( "tabindex", "-1" ).focus(function() {
 			$( this ).blur();
 			self.button.focus();
 		});
 
 		// Button events
-		self.button.bind( "vclick keydown" , function( event ) {
+		this.button.bind( "vclick keydown" , function( event ) {
 			if ( self.options.disabled || self.isOpen ) {
 				return;
 			}
@@ -145,7 +145,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		});
 
 		// Events for list items
-		self.list.attr( "role", "listbox" )
+		this.list.attr( "role", "listbox" )
 			.bind( "focusin", function( e ) {
 				$( e.target )
 					.attr( "tabindex", "0" )
@@ -216,7 +216,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// button refocus ensures proper height calculation
 		// by removing the inline style and ensuring page inclusion
-		self.menuPage.bind( "pagehide", function() {
+		this.menuPage.bind( "pagehide", function() {
 			// TODO centralize page removal binding / handling in the page plugin.
 			// Suggestion from @jblas to do refcounting
 			//
@@ -233,13 +233,13 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		});
 
 		// Events on the popup
-		self.listbox.bind( "popupafterclose", function() {
+		this.listbox.bind( "popupafterclose", function() {
 			self.close();
 		});
 
 		// Close button on small overlays
-		if ( self.isMultiple ) {
-			self.headerClose.click(function() {
+		if ( this.isMultiple ) {
+			this.headerClose.click(function() {
 				if ( self.menuType === "overlay" ) {
 					self.close();
 					return false;
@@ -249,7 +249,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// track this dependency so that when the parent page
 		// is removed on pagehide it will also remove the menupage
-		self.thisPage.addDependents( this.menuPage );
+		this.thisPage.addDependents( this.menuPage );
 
 		return this;
 	},
