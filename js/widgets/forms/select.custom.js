@@ -262,10 +262,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			this._on( this.headerClose, { click: "_handleHeaderCloseClick" } );
 		}
 
-		// track this dependency so that when the parent page
-		// is removed on pagehide it will also remove the menupage
-		this.thisPage.addDependents( this.menuPage );
-
 		return this;
 	},
 
