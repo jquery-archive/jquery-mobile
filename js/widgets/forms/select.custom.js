@@ -344,6 +344,14 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this.button.click();
 	},
 
+	_focusMenuItem: function() {
+		var selector = this.list.find( "a." + $.mobile.activeBtnClass );
+		if ( selector.length === 0 ) {
+			selector = this.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-btn" );
+		}
+		selector.first().focus();
+	},
+
 	_decideFormat: function() {
 		var self = this,
 			$window = $.mobile.window,
@@ -352,14 +360,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			scrollTop = $window.scrollTop(),
 			btnOffset = self.button.offset().top,
 			screenHeight = $window.height();
-
-		function focusMenuItem() {
-			var selector = self.list.find( "a." + $.mobile.activeBtnClass );
-			if ( selector.length === 0 ) {
-				selector = self.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-btn" );
-			}
-			selector.first().focus();
-		}
 
 		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
 
@@ -379,13 +379,10 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				});
 			}
 
-			self.menuPage
-				.one( "pageshow", function() {
-					focusMenuItem();
-				})
-				.one( "pagehide", function() {
-					self.close();
-				});
+			self.menuPage.one( {
+				pageshow: $.proxy( this, "_focusMenuItem" ),
+				pagehide: $.proxy( this, "close" )
+			});
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
@@ -393,7 +390,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		} else {
 			self.menuType = "overlay";
 
-			self.listbox.one( "popupafteropen", focusMenuItem );
+			self.listbox.one( { popupafteropen: $.proxy( this, "_focusMenuItem" ) } );
 		}
 	},
 
