@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg, __version__ ) {
+define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var nsNormalizeDict = {},

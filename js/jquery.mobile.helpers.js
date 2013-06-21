@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg, __version__ ) {
+define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -36,7 +36,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		},
 
 		// Place to store various widget extensions
-		behaviors: {}
+		behaviors: {},
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			if ( $.type( ypos ) !== "number" ) {
