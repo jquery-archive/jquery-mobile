@@ -350,6 +350,26 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	$.find.matchesSelector = function( node, expr ) {
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
+	//Needed for ui widgets 
+	//TODO: Remove once ui core is pulled in
+	var uuid = 0,
+		runiqueId = /^ui-id-\d+$/;
+	$.fn.extend({
+		uniqueId: function() {
+			return this.each(function() {
+				if ( !this.id ) {
+					this.id = "ui-id-" + (++uuid);
+				}
+			});
+		},
+		removeUniqueId: function() {
+			return this.each(function() {
+				if ( runiqueId.test( this.id ) ) {
+					$( this ).removeAttr( "id" );
+				}
+			});
+		}
+	});
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
