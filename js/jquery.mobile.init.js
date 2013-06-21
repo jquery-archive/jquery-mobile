@@ -6,7 +6,9 @@
 
 define([
 	"jquery",
-	"./jquery.mobile.core",
+	"./jquery.mobile.defaults",
+	"./jquery.mobile.helpers",
+	"./jquery.mobile.data",
 	"./jquery.mobile.support",
 	"./events/navigate",
 	"./navigation/path",
