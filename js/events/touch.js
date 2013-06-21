@@ -141,7 +141,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 		durationThreshold: 1000, // More time than this, and it isn't a swipe.
 
-		horizontalDistanceThreshold: 30,  // Swipe horizontal displacement must be more than this.
+		horizontalDistanceThreshold: 10,  // Swipe horizontal displacement must be more than this.
 
 		verticalDistanceThreshold: 75,  // Swipe vertical displacement must be less than this.
 
@@ -172,7 +172,10 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget }) );
 				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget } ) );
+				return true;
 			}
+			return false;
+
 		},
 
 		setup: function() {
@@ -182,7 +185,8 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 			$this.bind( touchStartEvent, function( event ) {
 				var stop,
 					start = $.event.special.swipe.start( event ),
-					origTarget = event.target;
+					origTarget = event.target,
+					emitted = false;
 
 				function moveHandler( event ) {
 					if ( !start ) {
@@ -190,7 +194,9 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					}
 
 					stop = $.event.special.swipe.stop( event );
-
+					if( !emitted ){
+						emitted = $.event.special.swipe.handleSwipe( start, stop, thisObject, origTarget );
+					}
 					// prevent scrolling
 					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
 						event.preventDefault();
@@ -199,12 +205,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 				$this.bind( touchMoveEvent, moveHandler )
 					.one( touchStopEvent, function() {
-						$this.unbind( touchMoveEvent, moveHandler );
-
-						if ( start && stop ) {
-							$.event.special.swipe.handleSwipe( start, stop, thisObject, origTarget );
-						}
-						start = stop = undefined;
+						emitted = false;
 				});
 			});
 		},
