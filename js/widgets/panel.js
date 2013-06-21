@@ -30,7 +30,7 @@ $.widget( "mobile.panel", $.mobile.widget, {
 			animate: "ui-panel-animate"
 		},
 		animate: true,
-		theme: "c",
+		theme: "a",
 		position: "left",
 		dismissible: true,
 		display: "reveal", //accepts reveal, push, overlay
@@ -220,14 +220,8 @@ $.widget( "mobile.panel", $.mobile.widget, {
 		self._page.on( "click.panel" , "a", function( e ) {
 			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
 				e.preventDefault();
-				var $link = $( this ),
-					$parent;
+				var $link = $( this );
 				if ( ! $link.hasClass( "ui-link" ) ) {
-					// Check if we are in a listview
-					$parent = $link.parent().parent();
-					if ( $parent.hasClass( "ui-li" ) ) {
-						$link = $parent.parent();
-					}
 					$link.addClass( $.mobile.activeBtnClass );
 					self.element.one( "panelopen panelclose", function() {
 						$link.removeClass( $.mobile.activeBtnClass );

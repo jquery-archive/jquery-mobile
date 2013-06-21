@@ -338,6 +338,46 @@ module.exports = function( grunt ) {
 						dest: "<%= files.cdn %>"
 					}
 				]
+			},
+			git: {
+				files: [
+					{
+						src: "dist/jquery.mobile.js",
+						dest: "dist/git/jquery.mobile-git.js"
+					},
+					{
+						src: "dist/jquery.mobile.min.js",
+						dest: "dist/git/jquery.mobile-git.min.js"
+					},
+					{
+						src: "dist/jquery.mobile.css",
+						dest: "dist/git/jquery.mobile-git.css"
+					},
+					{
+						src: "dist/jquery.mobile.min.css",
+						dest: "dist/git/jquery.mobile-git.min.css"
+					},
+					{
+						src: "dist/jquery.mobile.structure.css",
+						dest: "dist/git/jquery.mobile.structure-git.css"
+					},
+					{
+						src: "dist/jquery.mobile.structure.min.css",
+						dest: "dist/git/jquery.mobile.structure-git.min.css"
+					},
+					{
+						src: "dist/jquery.mobile.zip",
+						dest: "dist/git/jquery.mobile-git.zip"
+					},
+					{
+						expand: true,
+						cwd: dist,
+						src: [
+							"images/*"
+						],
+						dest: "dist/git/"
+					}
+				]
 			}
 		},
 
@@ -426,7 +466,7 @@ module.exports = function( grunt ) {
 					urls: (function() {
 						// Find the test files
 						var suites = _.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
-							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ),
+							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ).sort().reverse(), // So that unit runs before integration
 							patterns, paths,
 							prefixes = ["tests/unit/", "tests/integration/"],
 							versionedPaths = [],
@@ -463,7 +503,6 @@ module.exports = function( grunt ) {
 						}
 
 						paths = grunt.file.expand( patterns )
-							.sort()
 							.map( function( path ) {
 								// Some of our tests (ie. navigation) don't like having the index.html too much
 								return path.replace( /\/\index.html$/, "/" );
@@ -556,6 +595,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
+	grunt.registerTask( "dist:git", ["dist", "copy:git"] );
 
 	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );

@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 $.widget( "mobile.page", $.mobile.widget, {
 	options: {
-		theme: "c",
+		theme: "a",
 		domCache: false,
 		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')",
 		contentTheme: null
@@ -32,22 +32,22 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 		this.element
 			.attr( "tabindex", "0" )
-			.addClass( "ui-page ui-body-" + this.options.theme );
+			.addClass( "ui-page ui-page-theme-" + this.options.theme );
 
 		this._on( this.element, {
 			pagebeforehide: "removeContainerBackground",
 			pagebeforeshow: "_handlePageBeforeShow"
 		});
-		this.element.find("["+attrPrefix+"role='content']").each( function(){
+		this.element.find( "[" + attrPrefix + "role='content']" ).each( function() {
 			var $this = $( this ),
 				theme = this.getAttribute( attrPrefix + "theme" ) || undefined;
 				self.options.contentTheme = theme || self.options.contentTheme || ( self.element.jqmData("role") === "dialog" &&  self.options.theme );
-				$this.addClass("ui-content");
+				$this.addClass( "ui-content" );
 				if ( self.options.contentTheme ) {
 					$this.addClass( "ui-body-" + ( self.options.contentTheme ) );
 				}
 				// Add ARIA role
-				$this.attr( "role", "main" ).addClass("ui-content");
+				$this.attr( "role", "main" ).addClass( "ui-content" );
 		});
 
 		// enhance the page
@@ -59,7 +59,22 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	removeContainerBackground: function() {
-		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element.parent() ) );
+		var classes = ( $.mobile.pageContainer.attr( "class" ) || "" ).split( " " ),
+			overlayTheme = null,
+			matches;
+
+		while ( classes.length > 0 ) {
+			overlayTheme = classes.pop();
+			matches = ( new RegExp( "^ui-overlay-([a-z])$" ) ).exec( overlayTheme );
+			if ( matches && matches.length > 1 ) {
+				overlayTheme = matches[ 1 ];
+				break;
+			} else {
+				overlayTheme = null;
+			}
+		}
+
+		$.mobile.pageContainer.removeClass( "ui-overlay-" + overlayTheme );
 	},
 
 	// set the page container background to the page theme

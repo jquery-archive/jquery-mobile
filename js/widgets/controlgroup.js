@@ -6,7 +6,6 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
-	"../jquery.mobile.buttonMarkup",
 	"./addFirstLastClasses",
 	"../jquery.mobile.registry",
 	"../jquery.mobile.widget" ], function( jQuery ) {
@@ -15,6 +14,7 @@ define( [ "jquery",
 
 $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 	options: {
+		theme: null,
 		shadow: false,
 		corners: true,
 		excludeInvisible: true,
@@ -56,12 +56,20 @@ $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 			this.refresh();
 		}
 
+		if ( o.theme !== undefined ) {
+			$el.removeClass( "ui-group-theme-" + this.options.theme );
+
+			if ( o.theme ) {
+				$el.addClass( "ui-group-theme-" + o.theme );
+			}
+		}
+
 		if ( o.corners !== undefined ) {
 			$el.toggleClass( "ui-corner-all", o.corners );
 		}
 
 		if ( o.shadow !== undefined ) {
-			$el.toggleClass( "ui-shadow", o.shadow );
+			$el.find( ".ui-controlgroup-controls" ).toggleClass( "ui-shadow", o.shadow );
 		}
 
 		if ( o.mini !== undefined ) {
@@ -76,7 +84,7 @@ $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 	},
 
 	refresh: function() {
-		var $el = this.element,
+		var $el = this.container(),
 			els = $el.find( ".ui-btn" ).not( ".ui-slider-handle" ),
 			create = this._initialRefresh;
 		if ( $.mobile.checkboxradio ) {
@@ -90,7 +98,7 @@ $.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
 $.mobile.controlgroup.initSelector = ":jqmData(role='controlgroup')";
 
 $.mobile._enhancer.add( "mobile.controlgroup", {
-	dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.buttonmarkup", "mobile.checkboxradio" ]
+	dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.checkboxradio" ]
 });
 
 })(jQuery);

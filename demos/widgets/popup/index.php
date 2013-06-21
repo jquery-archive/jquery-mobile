@@ -76,7 +76,7 @@
 
 				<div data-role="popup" id="popupMenu" data-theme="d">
 						<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
-							<li data-role="divider" data-theme="e">Choose an action</li>
+							<li data-role="list-divider" data-theme="e">Choose an action</li>
 							<li><a href="#">View details</a></li>
 							<li><a href="#">Edit</a></li>
 							<li><a href="#">Disable</a></li>
@@ -260,7 +260,7 @@
 					<a href="#transparent" data-rel="popup" data-role="button" data-inline="true">Theme "none", no shadow</a>
 					<div id="transparent" data-role="popup" data-theme="none" data-shadow="false">
 						<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-					  <img src="../../_assets/img/firefox-logo.png" class="popphoto" alt="firefox logo on a transparent popup">
+					  <img src="../../_assets/img/firefox-logo.png" class="popphoto" alt="firefox logo on a transparent popup" height="300" width="300">
 					</div>
 
 					<a href="#overlay" data-rel="popup" data-role="button" data-inline="true">Overlay theme A</a>

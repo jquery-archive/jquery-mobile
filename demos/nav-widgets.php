@@ -46,7 +46,9 @@
 
 <li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio buttons</a></li>
 
-<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Select</a></li>
+<li data-section="Widgets" data-filtertext="selectmenus native optgroup disabled forms"><a href="widgets/selects/">Select</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom multiple optgroup disabled forms"><a href="widgets/selects/custom-selects.php">Select, custom</a></li>
 
 <li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Slider, single</a></li>
 

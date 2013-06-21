@@ -79,7 +79,7 @@
 
 				deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), true, "'aria-expanded' attribute is set to true when the popup is open" );
 				ok( !$popup.parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
-				ok( $popup.attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
+				ok( $popup.attr( "class" ).match( /( |^)ui-body-([a-z]|inherit)( |$)/ ), "Open popup has a valid theme" );
 				ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
 
 				$popup.popup( "option", "overlayTheme", "a" );

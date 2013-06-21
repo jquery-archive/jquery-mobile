@@ -28,7 +28,7 @@
 
 		<p class="jqm-intro">This section explores how you can customize, extend, re-style and take full advantage of jQuery Mobile.</p>
 
-		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search demos..." data-global-nav="demos" class="jqm-list">
+		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="a" data-divider-theme="a" data-icon="false" data-filter-placeholder="Search demos..." data-global-nav="demos" class="jqm-list">
         	<?php include( '../nav-examples.php' ); ?>
 		</ul>
 

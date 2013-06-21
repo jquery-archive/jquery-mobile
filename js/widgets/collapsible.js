@@ -5,7 +5,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../jquery.mobile.core",
+	"../jquery.mobile.widget",
+	"../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -45,10 +49,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 
 		// If we are in a collapsible set
 		if ( collapsibleSet.length ) {
-			// Inherit the theme from collapsible-set
-			if ( !o.theme ) {
-				o.theme = getAttr( collapsibleSet[ 0 ], "theme", true ) || $.mobile.getInheritedTheme( collapsibleSet, "c" );
-			}
+
 			// Inherit the content-theme from collapsible-set
 			if ( !o.contentTheme ) {
 				o.contentTheme = getAttr( collapsibleSet[ 0 ], "content-theme", true );
@@ -75,11 +76,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.mini ) {
 				o.mini = getAttr( collapsibleSet[ 0 ], "mini", true );
 			}
-		} else {
-			// get inherited theme if not a set and no theme has been set
-			if ( !o.theme ) {
-				o.theme = $.mobile.getInheritedTheme( $el, "c" );
-			}
 		}
 
 		if ( !!o.inset ) {
@@ -105,14 +101,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
 			.find( "a" )
 				.first()
-				.buttonMarkup({
-					shadow: false,
-					corners: false,
-					iconpos: o.iconpos,
-					icon: o.collapsedIcon,
-					mini: o.mini,
-					theme: o.theme
-				});
+				.addClass( "ui-btn ui-icon-" + o.collapsedIcon + " ui-btn-icon-" + o.iconpos +
+					( o.theme ? " ui-btn-" + o.theme : "" ) +
+					( o.mini ? " ui-mini" : "" ) );
 
 		$.extend( this, {
 			_collapsibleHeading: collapsibleHeading,
@@ -158,12 +149,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.find( ".ui-collapsible-heading-status" )
 				.text( isCollapse ? o.expandCueText : o.collapseCueText )
 				.end()
-				.find( ".ui-icon" )
+				.find( "a" ).first()
 				.toggleClass( "ui-icon-" + o.expandedIcon, !isCollapse )
 				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
 				.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
-				.end()
-				.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+				.removeClass( $.mobile.activeBtnClass );
 
 			this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
 			this._collapsibleContent
