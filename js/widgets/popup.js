@@ -264,14 +264,16 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_applyTheme: function( dst, theme, prefix ) {
-		var classes = ( dst.attr( "class" ) || "").split( " " ),
-			currentTheme = null,
-			matches,
-			themeStr = String( theme );
+		var themeStr, matches,
+			classes = ( dst.attr( "class" ) || "" ).split( " " ),
+			currentTheme = null;
+
+		theme = ( ( theme === null && prefix === "body" ) ? "inherit" : theme );
+		themeStr = String( theme );
 
 		while ( classes.length > 0 ) {
 			currentTheme = classes.pop();
-			matches = ( new RegExp( "^ui-" + prefix + "-([a-z])$" ) ).exec( currentTheme );
+			matches = ( new RegExp( "^ui-" + prefix + "-([a-z]|inherit)$" ) ).exec( currentTheme );
 			if ( matches && matches.length > 1 ) {
 				currentTheme = matches[ 1 ];
 				break;
@@ -558,7 +560,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	_reposition: function( o ) {
 		// We only care about position-related parameters for repositioning
 		o = { x: o.x, y: o.y, positionTo: o.positionTo };
-		this._trigger( "beforeposition", o );
+		this._trigger( "beforeposition", undefined, o );
 		this._ui.container.offset( this._placementCoords( this._desiredCoords( o ) ) );
 	},
 
@@ -607,10 +609,6 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		this._currentTransition = o.transition;
 		this._applyTransition( o.transition );
 
-		if ( !this.options.theme ) {
-			this._setOptions( { theme: this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) } );
-		}
-
 		this._ui.screen.removeClass( "ui-screen-hidden" );
 		this._ui.container.removeClass( "ui-popup-hidden" );
 
@@ -618,14 +616,8 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		this._reposition( o );
 
 		if ( this.options.overlayTheme && androidBlacklist ) {
-			/* TODO:
-			The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed
-			above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain
-			types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser:
-			https://github.com/scottjehl/Device-Bugs/issues/3
-
+			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
 			This fix closes the following bugs ( I use "closes" with reluctance, and stress that this issue should be revisited as soon as possible ):
-
 			https://github.com/jquery/jquery-mobile/issues/4816
 			https://github.com/jquery/jquery-mobile/issues/4844
 			https://github.com/jquery/jquery-mobile/issues/4874
@@ -659,10 +651,15 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_closePrereqsDone: function() {
-		this._ui.container.removeAttr( "tabindex" );
+		var container = this._ui.container;
+
+		container.removeAttr( "tabindex" );
 
 		// remove the global mutex for popups
 		$.mobile.popup.active = undefined;
+
+		// Blur elements inside the container, including the container
+		$( ":focus", container[ 0 ] ).add( container[ 0 ] ).blur();
 
 		// alert users that the popup is closed
 		this._trigger( "afterclose" );
@@ -705,7 +702,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			// will cause an infinite recursion - #5244
 			.detach()
 			.insertAfter( this._ui.placeholder )
-			.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
+			.removeClass( "ui-popup ui-overlay-shadow ui-corner-all ui-body-inherit" );
 		this._ui.screen.remove();
 		this._ui.container.remove();
 		this._ui.placeholder.remove();
@@ -857,10 +854,11 @@ $.widget( "mobile.popup", $.mobile.widget, {
 // TODO this can be moved inside the widget
 $.mobile.popup.handleLink = function( $link ) {
 	var closestPage = $link.closest( ":jqmData(role='page')" ),
+		path = $.mobile.path,
 		scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
-		// NOTE make sure to get only the hash, ie7 (wp7) return the absolute href
+		// NOTE make sure to get only the hash, ie7 (wp7) returns the absolute href
 		//      in this case ruining the element selection
-		popup = $( $.mobile.path.parseUrl($link.attr( "href" )).hash, scope[0] ),
+		popup = $( path.hashToSelector( path.parseUrl( $link.attr( "href" ) ).hash ), scope[0] ),
 		offset;
 
 	if ( popup.data( "mobile-popup" ) ) {
@@ -875,11 +873,6 @@ $.mobile.popup.handleLink = function( $link ) {
 
 	//remove after delay
 	setTimeout( function() {
-		// Check if we are in a listview
-		var $parent = $link.parent().parent();
-		if ($parent.hasClass("ui-li")) {
-			$link = $parent.parent();
-		}
 		$link.removeClass( $.mobile.activeBtnClass );
 	}, 300 );
 };

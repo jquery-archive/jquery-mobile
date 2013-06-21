@@ -12,7 +12,7 @@
 		window.scrollTo(0,0);
 	}
 
-	module("jquery.mobile.fixedToolbar.js", {setup: function() {
+	module("jquery.mobile.toolbar.js", {setup: function() {
 		var startTimeout;
 
 		// swallow the inital page change
@@ -21,7 +21,7 @@
 			clearTimeout(startTimeout);
 		});
 
-		startTimeout = setTimeout(start, 1000);
+		startTimeout = setTimeout( start , 1000);
 	}});
 
 	asyncTest( "Fixed header and footer transition classes are applied correctly", function(){
@@ -29,13 +29,13 @@
 
 		$.testHelper.sequence([
 			function(){
-				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).fixedtoolbar( "hide" );
+				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).toolbar( "hide" );
 				scrollDown();
 			},
 
 			function(){
 				//show first
-				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).fixedtoolbar( "show" );
+				$( '#classes-test-b, #classes-test-g, #classes-test-e,#classes-test-h,#classes-test-i,#classes-test-j, #classes-test-k' ).toolbar( "show" );
 			},
 
 			function() {
@@ -56,25 +56,26 @@
 
 	});
 
+
 	asyncTest( "The hide method is working properly", function() {
 
 		expect( 2 );
 
 		$.testHelper.sequence([
 			function(){
-				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				$( '#classes-test-g' ).toolbar( "show" );
 				scrollDown();
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "hide" );
+				$( '#classes-test-g' ).toolbar( "hide" );
 
 				ok( $( '#classes-test-g' ).hasClass('out'), 'The out class should be applied when hide is called');
 			},
 
 			function() {
 				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar has the ui-fixed-hidden class applied after hide');
-				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				$( '#classes-test-g' ).toolbar( "show" );
 
 			},
 
@@ -96,11 +97,11 @@
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "hide" );
+				$( '#classes-test-g' ).toolbar( "hide" );
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				$( '#classes-test-g' ).toolbar( "show" );
 
 				ok( $( '#classes-test-g' ).hasClass('in'), 'The in class should be applied when show is called');
 			},
@@ -127,7 +128,7 @@
 			},
 
 			function(){
-				$( '#classes-test-g' ).fixedtoolbar( "show" );
+				$( '#classes-test-g' ).toolbar( "show" );
 			},
 
 			function() {
@@ -135,7 +136,7 @@
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "toggle" );
+				$( '#classes-test-g' ).toolbar( "toggle" );
 			},
 
 			function() {
@@ -143,7 +144,7 @@
 			},
 
 			function() {
-				$( '#classes-test-g' ).fixedtoolbar( "toggle" );
+				$( '#classes-test-g' ).toolbar( "toggle" );
 			},
 
 			function() {
@@ -156,6 +157,26 @@
 				start();
 			}
 
+		], 500);
+	});
+
+	asyncTest( "Fullscreen toolbars add classes to page", function() {
+		expect( 2 );
+
+		$.testHelper.sequence([
+			function(){
+				$.mobile.changePage( "#fullscreen-test-a" );
+			},
+
+			function(){	
+				ok( $('#classes-test-l').closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
+				ok( $('#classes-test-m').closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
+			},
+
+			function(){
+				scrollUp();
+				start();
+			}
 		], 500);
 	});
 

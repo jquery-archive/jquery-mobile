@@ -97,8 +97,6 @@ define( [
 		//initial value. If a base tag does not exist, then we default to the documentUrl.
 		documentBase = path.documentBase,
 
-		getScreenHeight = $.mobile.getScreenHeight,
-
 		//base element management, defined depending on dynamic base tag support
 		base = {
 			//define base element, for use in routing asset urls that are referenced in Ajax-requested markup
@@ -307,17 +305,6 @@ define( [
 		return promise;
 	}
 
-	//simply set the active page's minimum height to screen height, depending on orientation
-	$.mobile.resetActivePageHeight = function resetActivePageHeight( height ) {
-		var aPage = $( "." + $.mobile.activePageClass ),
-			aPageHeight = aPage.height(),
-			aPageOuterHeight = aPage.outerHeight( true );
-
-		height = ( typeof height === "number" ) ? height : getScreenHeight();
-
-		aPage.css( "min-height", height - ( aPageOuterHeight - aPageHeight ) );
-	};
-
 	//shared page enhancements
 	function enhancePage( $page, role ) {
 		// If a role was specified, make sure the data-role attribute
@@ -446,7 +433,7 @@ define( [
 		// injected by a developer, in which case it would be lacking a data-url
 		// attribute and in need of enhancement.
 		if ( page.length === 0 && dataUrl && !path.isPath( dataUrl ) ) {
-			page = settings.pageContainer.children( "#" + dataUrl )
+			page = settings.pageContainer.children( path.hashToSelector( "#" + dataUrl ) )
 				.attr( "data-" + $.mobile.ns + "url", dataUrl )
 				.jqmData( "url", dataUrl );
 		}
@@ -525,7 +512,7 @@ define( [
 		}
 		// Reset base to the default document base.
 		// only reset if we are not prefetching
-		if ( base && typeof options.prefetch === "undefined" ) {
+		if ( base && ( typeof options === "undefined" || typeof options.prefetch === "undefined" ) ) {
 			base.reset();
 		}
 
@@ -562,7 +549,7 @@ define( [
 					}
 
 					//dont update the base tag if we are prefetching
-					if ( base && typeof options.prefetch === "undefined") {
+					if ( base && ( typeof options === "undefined" || typeof options.prefetch === "undefined" )) {
 						base.set( fileUrl );
 					}
 
