@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup"  ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.registry"  ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -14,127 +14,143 @@ $.widget( "mobile.button", $.mobile.widget, {
 		theme: null,
 		icon: null,
 		iconpos: null,
+		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
 		corners: true,
 		shadow: true,
-		iconshadow: true,
 		inline: null,
-		mini: null,
-		initSelector: "button, [type='button'], [type='submit'], [type='reset']"
+		mini: null
 	},
+
 	_create: function() {
-		var $el = this.element,
-			$button,
-			// create a copy of this.options we can pass to buttonMarkup
-			o = ( function( tdo ) {
-				var key, ret = {};
+		var $button,
+			$el = this.element,
+			isInput = $el[ 0 ].tagName === "INPUT",
+			classes = "ui-btn";
 
-				for ( key in tdo ) {
-					if ( tdo[ key ] !== null && key !== "initSelector" ) {
-						ret[ key ] = tdo[ key ];
-					}
+		if ( isInput ) {
+			classes += " ui-input-btn";
+
+			// TODO: data-class and data-id options. See https://github.com/jquery/jquery-mobile/issues/3577
+			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-left" ) ) {
+				classes += " ui-btn-left";
+			}
+			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-right" ) ) {
+				classes += " ui-btn-right";
+			}
+
+			this.button = $( "<div></div>" )
+				[ "text" ]( $el.val() )
+				.insertBefore( $el )
+				.addClass( classes )
+				.append( $el );
+
+			$button = this.button;
+
+			this._on( $el, {
+				focus: function() {
+					$button.addClass( $.mobile.focusClass );
+				},
+
+				blur: function() {
+					$button.removeClass( $.mobile.focusClass );
 				}
-
-				return ret;
-			} )( this.options ),
-			classes = "",
-			$buttonPlaceholder;
-
-		// if this is a link, check if it's been enhanced and, if not, use the right function
-		if ( $el[ 0 ].tagName === "A" ) {
-			if ( !$el.hasClass( "ui-btn" ) ) {
-				$el.buttonMarkup();
-			}
-			return;
+			});
+		} else {
+			this.button = $el.addClass( classes );
 		}
 
-		// get the inherited theme
-		// TODO centralize for all widgets
-		if ( !this.options.theme ) {
-			this.options.theme = $.mobile.getInheritedTheme( this.element, "c" );
-		}
-
-		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-		/* if ( $el[0].className.length ) {
-			classes = $el[0].className;
-		} */
-		if ( !!~$el[0].className.indexOf( "ui-btn-left" ) ) {
-			classes = "ui-btn-left";
-		}
-
-		if (  !!~$el[0].className.indexOf( "ui-btn-right" ) ) {
-			classes = "ui-btn-right";
-		}
-
-		if (  $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
-			classes ? classes += " ui-submit" :  classes = "ui-submit";
-		}
-		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
-
-		// Add ARIA role
-		this.button = $( "<div></div>" )
-			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )
-			.insertBefore( $el )
-			.buttonMarkup( o )
-			.addClass( classes )
-			.append( $el.addClass( "ui-btn-hidden" ) );
-
-        $button = this.button;
-
-		$el.bind({
-			focus: function() {
-				$button.addClass( $.mobile.focusClass );
-			},
-
-			blur: function() {
-				$button.removeClass( $.mobile.focusClass );
-			}
+		$.extend( this, {
+			isInput: isInput,
+			buttonClasses: classes,
+			styleClasses: ""
 		});
 
-		this.refresh();
+		this.refresh( true );
 	},
 
-	_setOption: function( key, value ) {
-		var op = {};
-
-		op[ key ] = value;
-		if ( key !== "initSelector" ) {
-			this.button.buttonMarkup( op );
-			// Record the option change in the options and in the DOM data-* attributes
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
-		}
-		this._super( "_setOption", key, value );
+	widget: function() {
+		return this.button;
 	},
 
-	enable: function() {
-		this.element.attr( "disabled", false );
-		this.button.removeClass( "ui-disabled" ).attr( "aria-disabled", false );
-		return this._setOption( "disabled", false );
-	},
+	_destroy: function() {
+		var $button, removeClasses;
+		if ( this.isInput ) {
+			$button = this.button;
 
-	disable: function() {
-		this.element.attr( "disabled", true );
-		this.button.addClass( "ui-disabled" ).attr( "aria-disabled", true );
-		return this._setOption( "disabled", true );
-	},
+			this.element.insertBefore( $button );
 
-	refresh: function() {
-		var $el = this.element;
-
-		if ( $el.prop("disabled") ) {
-			this.disable();
+			$button.remove();
 		} else {
-			this.enable();
+			removeClasses = this.buttonClasses + " " + this.styleClasses;
+
+			this.button.removeClass( removeClasses );
+		}
+	},
+
+	refresh: function( create ) {
+		var o = this.options,
+			$el = this.element,
+			classes = "";
+
+		if ( o.theme ) {
+			 classes += "ui-btn-" + o.theme;
 		}
 
-		// Grab the button's text element from its implementation-independent data item
-		$( this.button.data( 'buttonElements' ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
+		if ( o.corners ) {
+			classes += " ui-corner-all";
+		}
+		if ( o.shadow ) {
+			classes += " ui-shadow";
+		}
+		if ( o.inline ) {
+			classes += " ui-btn-inline";
+		}
+		if ( o.mini ) {
+			classes += " ui-mini";
+		}
+
+		if ( o.icon ) {
+			if ( !o.iconpos ) {
+				o.iconpos = "left";
+			}
+
+			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
+
+			if ( o.iconpos === "notext" && !$el.attr( "title" ) ) {
+				$el.attr( "title", ( this.isInput ? $el.val() : $el.getEncodedText() ) );
+			}
+
+			/* TODO: Remove in 1.5. */
+			if ( o.iconshadow ) {
+				classes += " ui-shadow-icon";
+			}
+		}
+
+		if ( !create ) {
+			this.button.removeClass( this.styleClasses );
+		}
+
+		this.styleClasses = classes;
+
+		this.button.addClass( classes );
+
+		/* If the button element doesn't contain text we use the value if provided */
+		if ( !this.isInput && this.button.text() === "" && !!this.button.val() ) {
+			this.button.text( this.button.val() );
+		}
+
+		if ( this.isInput && !create ) {
+			$( this.button )[ "text" ]( $el.val() ).append( $el );
+		}
+
+		this._setOption( "disabled", $el.prop( "disabled" ) );
 	}
 });
 
+$.mobile.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
+
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.button.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.button" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

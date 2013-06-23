@@ -6,7 +6,7 @@
 define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
-(function( $, window ) {
+(function( $ ) {
 	// DEPRECATED
 	// NOTE global mobile object settings
 	$.extend( $.mobile, {
@@ -24,12 +24,12 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
-			$.mobile.loading( 'show', theme, msgText, textonly );
+			$.mobile.loading( "show", theme, msgText, textonly );
 		},
 
 		// DEPRECATED
 		hidePageLoadingMsg: function() {
-			$.mobile.loading( 'hide' );
+			$.mobile.loading( "hide" );
 		},
 
 		loading: function() {
@@ -58,7 +58,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		},
 
 		defaultHtml: "<div class='" + loaderClass + "'>" +
-			"<span class='ui-icon ui-icon-loading'></span>" +
+			"<span class='ui-icon-loading'></span>" +
 			"<h1></h1>" +
 			"</div>",
 
@@ -98,7 +98,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 		// TODO sweet jesus we need to break some of this out
 		show: function( theme, msgText, textonly ) {
-			var textVisible, message, $header, loadSettings;
+			var textVisible, message, loadSettings;
 
 			this.resetHtml();
 
@@ -175,7 +175,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		}
 	});
 
-	$window.bind( 'pagecontainercreate', function() {
+	$window.bind( "pagecontainercreate", function() {
 		$.mobile.loaderWidget = $.mobile.loaderWidget || $( $.mobile.loader.prototype.defaultHtml ).loader();
 	});
 })(jQuery, this);

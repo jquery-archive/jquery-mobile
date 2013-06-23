@@ -1,7 +1,14 @@
+## Contribution Guides
+
+In the spirit of open source software development, jQuery always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly:
+
+1. [Getting Involved](http://contribute.jquery.org/)
+2. [Code Style Guide](http://contribute.jquery.org/style-guide/)
+
 ## Issues
 
 If you encounter a bug in the framework you can report it on the issue tracker here on Github. Questions about how to use the framework or problems with your custom code can be posted on the [forum](https://forum.jquery.com/jquery-mobile).
-The jQuery Mobile [ThemeRoller](https://github.com/jquery/web-jquery-mobile-theme-roller) and [Download Builder](https://github.com/jquery/jquery-mobile-builder) have their own repo where you can report issues.
+The jQuery Mobile [API Documentation](https://github.com/jquery/api.jquerymobile.com), [ThemeRoller](https://github.com/jquery/web-jquery-mobile-theme-roller) and [Download Builder](https://github.com/jquery/jquery-mobile-builder) have their own repo where you can report issues.
 
 Before opening a new issue please check if the same or a similar issue already has been reported. Tip: Besides the search tool of the issue tracker you can filter issues by label.
 
@@ -26,7 +33,7 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
 
 * What? - Keep the test page as simple as possible. Only include markup/code that is required to reproduce the issue.
 
-* How? - Use our [JS Bin template](http://jsbin.com/onibuc/1/edit) which uses latest code on branch "master". Do not replace the links to the the framework CSS and JavaScript: always test with latest code!
+* How? - Use our [JS Bin template](http://jsbin.com/irenuk/1/edit) which uses latest code on branch "master". Do not replace the links to the the framework CSS and JavaScript: always test with latest code!
 
   * You will notice if the issue has been fixed already
   * It enables us to edit your code if necessary

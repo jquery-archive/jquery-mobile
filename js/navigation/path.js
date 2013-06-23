@@ -8,7 +8,7 @@ define([
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-		var path, documentBase, $base, dialogHashKey = "&ui-state=dialog";
+		var path, $base, dialogHashKey = "&ui-state=dialog";
 
 		$.mobile.path = path = {
 			uiStateKey: "&ui-state",
@@ -100,6 +100,10 @@ define([
 			//an optional absolute path which describes what
 			//relPath is relative to.
 			makePathAbsolute: function( relPath, absPath ) {
+				var absStack,
+					relStack,
+					i, d;
+
 				if ( relPath && relPath.charAt( 0 ) === "/" ) {
 					return relPath;
 				}
@@ -107,10 +111,11 @@ define([
 				relPath = relPath || "";
 				absPath = absPath ? absPath.replace( /^\/|(\/[^\/]*|[^\/]+)$/g, "" ) : "";
 
-				var absStack = absPath ? absPath.split( "/" ) : [],
-					relStack = relPath.split( "/" );
-				for ( var i = 0; i < relStack.length; i++ ) {
-					var d = relStack[ i ];
+				absStack = absPath ? absPath.split( "/" ) : [];
+				relStack = relPath.split( "/" );
+
+				for ( i = 0; i < relStack.length; i++ ) {
+					d = relStack[ i ];
 					switch ( d ) {
 						case ".":
 							break;
@@ -196,7 +201,7 @@ define([
 				if ( newPath === undefined ) {
 					newPath = path.parseLocation().hash;
 				}
-				return path.stripHash( newPath ).replace( /[^\/]*\.[^\/*]+$/, '' );
+				return path.stripHash( newPath ).replace( /[^\/]*\.[^\/*]+$/, "" );
 			},
 
 			//set location hash to path
@@ -259,7 +264,7 @@ define([
 			},
 
 			squash: function( url, resolutionUrl ) {
-				var state, href, cleanedUrl, search, stateIndex,
+				var href, cleanedUrl, search, stateIndex,
 					isPath = this.isPath( url ),
 					uri = this.parseUrl( url ),
 					preservedHash = uri.hash,
@@ -323,6 +328,15 @@ define([
 
 			isPreservableHash: function( hash ) {
 				return hash.replace( "#", "" ).indexOf( this.uiStateKey ) === 0;
+			},
+
+			// Escape weird characters in the hash if it is to be used as a selector
+			hashToSelector: function( hash ) {
+				var hasHash = ( hash.substring( 0, 1 ) === "#" );
+				if ( hasHash ) {
+					hash = hash.substring( 1 );
+				}
+				return ( hasHash ? "#" : "" ) + hash.replace( /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1" );
 			}
 		};
 

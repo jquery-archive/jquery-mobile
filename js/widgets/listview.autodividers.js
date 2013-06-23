@@ -6,8 +6,7 @@ define( [ "jquery", "./listview" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile.listview.prototype.options.autodividers = false;
-$.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
+function defaultAutodividersSelector( elt ) {
 	// look for the text in the given element
 	var text = $.trim( elt.text() ) || null;
 
@@ -19,46 +18,56 @@ $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
 	text = text.slice( 0, 1 ).toUpperCase();
 
 	return text;
-};
+}
 
-$.mobile.document.delegate( "ul,ol", "listviewcreate", function() {
+$.widget( "mobile.listview", $.mobile.listview, {
+	options: {
+		autodividers: false,
+		autodividersSelector: defaultAutodividersSelector
+	},
 
-	var list = $( this ),
-			listview = list.data( "mobile-listview" );
+	_afterListviewRefresh: function() {
+		var el = this.element;
+		this._off( el, "listviewafterrefresh" );
+		this._replaceDividers();
+		this.refresh();
+		this._on( el, { listviewafterrefresh: "_afterListviewRefresh" } );
+	},
 
-	if ( !listview || !listview.options.autodividers ) {
-		return;
-	}
+	_replaceDividers: function() {
+		var i, lis, li, dividerText,
+			lastDividerText = null,
+			list = this.element,
+			divider;
 
-	var replaceDividers = function () {
 		list.find( "li:jqmData(role='list-divider')" ).remove();
 
-		var lis = list.find( 'li' ),
-			lastDividerText = null, li, dividerText;
+		lis = list.find( "li" );
 
-		for ( var i = 0; i < lis.length ; i++ ) {
-			li = lis[i];
-			dividerText = listview.options.autodividersSelector( $( li ) );
+		for ( i = 0; i < lis.length ; i++ ) {
+			li = lis[ i ];
+			dividerText = this.options.autodividersSelector( $( li ) );
 
 			if ( dividerText && lastDividerText !== dividerText ) {
-				var divider = document.createElement( 'li' );
+				divider = document.createElement( "li" );
 				divider.appendChild( document.createTextNode( dividerText ) );
-				divider.setAttribute( 'data-' + $.mobile.ns + 'role', 'list-divider' );
+				divider.setAttribute( "data-" + $.mobile.ns + "role", "list-divider" );
 				li.parentNode.insertBefore( divider, li );
 			}
 
 			lastDividerText = dividerText;
 		}
-	};
+	},
 
-	var afterListviewRefresh = function () {
-		list.unbind( 'listviewafterrefresh', afterListviewRefresh );
-		replaceDividers();
-		listview.refresh();
-		list.bind( 'listviewafterrefresh', afterListviewRefresh );
-	};
+	_create: function() {
+		this._super();
 
-	afterListviewRefresh();
+		if ( !this.options.autodividers ) {
+			return;
+		}
+
+		this._afterListviewRefresh();
+	}
 });
 
 })( jQuery );

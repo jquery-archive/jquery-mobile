@@ -34,7 +34,7 @@
 				.append('<label for="unenhanced">Text Input:</label><input type="text" name="name" id="unenhanced" value="" data-'+$.mobile.ns+'role="none" />')
 				.trigger("create");
 
-		ok( !$("#unenhanced").hasClass( "ui-input-text" ), "doesn't have the ui input text class (unenhanced)");
+		ok( !$("#unenhanced").parent().hasClass( "ui-input-text" ), "doesn't have the ui input text class (unenhanced)");
 	});
 
 	test( "elements embedded in sub page elements are included on create when they don't match the keep native selector", function() {
@@ -44,6 +44,6 @@
 				.append('<label for="enhanced">Text Input:</label><input type="text" name="name" id="enhanced" value=""/>')
 				.trigger("create");
 
-		ok( $("#enhanced").hasClass( "ui-input-text" ), "has the ui input text class (unenhanced)");
+		ok( $("#enhanced").parent().hasClass( "ui-input-text" ), "has the ui input text class (unenhanced)");
 	});
 })(jQuery);
