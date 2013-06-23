@@ -101,7 +101,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	};
 
 	$.extend( $.find, oldFind );
-	
+
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
