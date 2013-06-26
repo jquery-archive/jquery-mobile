@@ -111,7 +111,7 @@ $.widget( "mobile.textinput", {
 	},
 
 	_setOptions: function ( o ) {
-		var themeclass, cornerclass, miniclass;
+		var themeclass;
 
 		if( o.theme !== undefined ) {
 			themeclass = "ui-body-" + (( o.theme === null ) ? "inherit": o.theme );
@@ -120,19 +120,15 @@ $.widget( "mobile.textinput", {
 		}
 
 		if( o.corners !== undefined ) {
-			cornerclass = o.corners ? " ui-corner-all": "";
-			this.widget().removeClass( this.cornerclass ).addClass( cornerclass );
-			this.cornerclass = cornerclass;
+			this.widget().removeClass( "ui-corner-all" ).addClass( o.corners ? "ui-corner-all": "" );
 		}
 
 		if( o.mini !== undefined ) {
-			miniclass = o.mini ? " ui-mini": "";
-			this.widget().removeClass( this.miniclass ).addClass( miniclass );
-			this.miniclass = miniclass;
+			this.widget().removeClass( "ui-mini" ).addClass( o.mini ? "ui-mini": "" );
 		}
 
 		if( o.disabled !== undefined ) {
-			this.element.attr( "disabled", !!o.disabled );
+			this.element.prop( "disabled", !!o.disabled );
 		}
 
 	},

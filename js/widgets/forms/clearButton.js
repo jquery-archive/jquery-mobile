@@ -93,10 +93,10 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this._off( this.element, "keyup, change, input, focus, blur, cut, paste" );
 		},
 
-		_setOptions:function( o ){
+		_setOptions:function( o ) {
 			this._super( o );
 
-			if( o.clearbtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ){
+			if( o.clearbtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ) {
 				if( !!o.clearBtn ){
 					this._addClearBtn();
 				} else {
@@ -104,7 +104,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				}
 			}
 
-			if( o.clearBtnText !== undefined && this._clearBtn !== undefined ){
+			if( o.clearBtnText !== undefined && this._clearBtn !== undefined ) {
 				this._clearBtn.text( o.clearBtnText );
 			}
 		},
@@ -116,12 +116,12 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			}, 0);
 		},
 
-		_destroyClear: function(){
+		_destroyClear: function() {
 			this.element.removeClass( "ui-input-has-clear" );
 			this._unbindClear()._clearBtn.remove();
 		},
 
-		_destroy: function(){
+		_destroy: function() {
 			this._super();
 			this._destroyClear();
 		}
