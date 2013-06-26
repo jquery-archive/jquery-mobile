@@ -54,6 +54,18 @@ $.widget( "mobile.page", $.mobile.widget, {
 		$.mobile._enhancer.enhance( this.element[ 0 ] );
 	},
 
+	_setOptions: function( o ) {
+		
+		if( o.theme !== undefined ) {
+			this.element.removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + o.theme );
+		}
+
+		if( o.contentTheme !== undefined ) {
+			this.element.find( "[data-" + $.mobile.ns + "='content']" ).removeClass( "ui-body-" + this.options.contentTheme )
+				.addClass( "ui-body-" + o.contentTheme );
+		}
+	},
+
 	_handlePageBeforeShow: function(/* e */) {
 		this.setContainerBackground();
 	},
