@@ -12,7 +12,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	__version__ = ( pkg && pkg.version ) || "dev";
 //>>excludeEnd("jqmBuildExclude");
 	$.extend($.mobile, {
-		
+
 		// Version of the jQuery Mobile Framework
 		version: __version__,
 

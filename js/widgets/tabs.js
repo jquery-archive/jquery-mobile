@@ -7,7 +7,7 @@
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core","./jquery.ui.tabs", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-	
+
 	$.widget("mobile.tabs", $.mobile.widget, $.ui.tabs.prototype);
 
 	$.mobile.tabs.initSelector = ":jqmData(role='tabs'), :jqmData(content='tabs')";
