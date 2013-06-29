@@ -117,8 +117,8 @@ label.ui-btn {
 	background-color: 					rgba(0,0,0,.4) /*{global-icon-disc}*/;
 	background-position: center center;
 	background-repeat: no-repeat;
-	-webkit-border-radius: 9px;
-	border-radius: 9px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
 }
 
 /* Alt icons */

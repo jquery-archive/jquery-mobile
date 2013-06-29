@@ -290,15 +290,15 @@ div.ui-mobile-viewport {
 	content: "";
 	position: absolute;
 	display: block;
-	width: 18px;
-	height: 18px;
+	width: 22px;
+	height: 22px;
 }
 .ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
 .ui-btn-icon-right:after,
 .ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
 	top: 50%;
-	margin-top: -9px;
+	margin-top: -11px;
 }
 .ui-btn-icon-left:after {
 	left: .625em;
@@ -311,7 +311,7 @@ div.ui-mobile-viewport {
 .ui-btn-icon-top:after,
 .ui-btn-icon-bottom:after {
 	left: 50%;
-	margin-left: -9px;
+	margin-left: -11px;
 }
 .ui-btn-icon-top:after {
 	top: .625em;
