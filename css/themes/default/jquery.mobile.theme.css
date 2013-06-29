@@ -112,33 +112,37 @@ label.ui-btn {
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-delete:after, .ui-icon-arrow-r:after, .ui-icon-arrow-l:after, .ui-icon-arrow-u:after, .ui-icon-arrow-d:after,
-.ui-icon-check:after, .ui-icon-checkbox-off:after, .ui-icon-checkbox-on:after, .ui-icon-radio-off:after, .ui-icon-radio-on:after,
-.ui-icon-gear:after, .ui-icon-grid:after, .ui-icon-refresh:after, .ui-icon-forward:after, .ui-icon-back:after,
-.ui-icon-star:after, .ui-icon-alert:after, .ui-icon-info:after, .ui-icon-home:after, .ui-icon-plus:after, .ui-icon-minus:after,
-.ui-icon-search:after, .ui-input-search:after, .ui-icon-bars:after, .ui-icon-edit:after {
+.ui-icon-action:after, .ui-icon-arrow-down-left:after, .ui-icon-arrow-down-right:after, .ui-icon-arrow-down:after, .ui-icon-arrow-left:after, .ui-icon-arrow-right:after, .ui-icon-arrow-up-left:after, .ui-icon-arrow-up-right:after, .ui-icon-arrow-up:after, .ui-icon-audio:after, .ui-icon-calendar:after, .ui-icon-camera:after, .ui-icon-carat-down:after, .ui-icon-carat-left:after, .ui-icon-carat-right:after, .ui-icon-carat-up:after, .ui-icon-check:after, .ui-icon-checkbox-on, .ui-icon-checkbox-off, .ui-icon-checkbox-on:after, .ui-icon-clock:after, .ui-icon-cloud:after, .ui-icon-dialpad:after, .ui-icon-envelope:after, .ui-icon-eye:after, .ui-icon-gear:after, .ui-icon-heart:after, .ui-icon-house:after, .ui-icon-info:after, .ui-icon-list-bulleted:after, .ui-icon-list:after, .ui-icon-location-arrow:after, .ui-icon-lock:after, .ui-icon-magnifying-glass:after, .ui-input-search:after, .ui-input-search:after, .ui-icon-map-marker:after, .ui-icon-minus:after, .ui-icon-no:after, .ui-icon-pencil:after, .ui-icon-person:after, .ui-icon-phone:after, .ui-icon-plus:after, .ui-icon-power:after, .ui-icon-re-cycle:after, .ui-icon-redo:after, .ui-icon-refresh:after, .ui-icon-shopping-bag:after, .ui-icon-speech-bubble:after, .ui-icon-star:after, .ui-icon-tag:after, .ui-icon-undo:after, .ui-icon-video:after, .ui-icon-warning:after, .ui-icon-x:after {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.4) /*{global-icon-disc}*/;
-	background-image: url(images/icons-18-white.png) /*{global-icon-set}*/;
+	background-position: center center;
 	background-repeat: no-repeat;
 	-webkit-border-radius: 9px;
 	border-radius: 9px;
 }
 
-/* Alt icon color */
+/* Alt icons */
 .ui-icon-alt.ui-btn:after,
 .ui-icon-alt .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-alt .ui-input-search:after {
+.ui-icon-alt.ui-input-search:after,
+.ui-icon-alt .ui-input-search:after,
+.ui-icon-alt.ui-icon-checkbox-on:after
+.ui-icon-alt .ui-icon-checkbox-on:after,
+.ui-icon-alt.ui-icon-checkbox-off:after
+.ui-icon-alt .ui-icon-checkbox-off:after {
 	background-color: 					#fff;
 	background-color: 					rgba(255,255,255,.4);
-	background-image: url(images/icons-18-black.png);
-	background-repeat: no-repeat;
 }
 
 /* No disc */
 .ui-icon-nodisc.ui-btn:after,
 .ui-icon-nodisc .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-nodisc .ui-input-search:after {
+.ui-icon-nodisc.ui-input-search:after,
+.ui-icon-nodisc .ui-input-search:after,
+.ui-icon-nodisc.ui-icon-checkbox-on:after
+.ui-icon-nodisc .ui-icon-checkbox-on:after,
+.ui-icon-nodisc.ui-icon-checkbox-off:after
+.ui-icon-nodisc .ui-icon-checkbox-off:after {
 	background-color: transparent;
 }
 
@@ -148,156 +152,6 @@ label.ui-btn {
 	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	-moz-box-shadow: 0 1px 0 				rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	box-shadow: 0 1px 0 					rgba(255,255,255,.3) /*{global-icon-shadow}*/;
-}
-
-/* Icon sprite */
-.ui-icon-plus:after {
-	background-position: 	-1px -1px;
-}
-.ui-icon-minus:after {
-	background-position: 	-37px -1px;
-}
-.ui-icon-delete:after {
-	background-position: 	-73px -1px;
-}
-.ui-icon-arrow-r:after {
-	background-position: 	-108px -1px;
-}
-.ui-icon-arrow-l:after {
-	background-position: 	-144px -1px;
-}
-.ui-icon-arrow-u:after {
-	background-position: 	-180px -1px;
-}
-.ui-icon-arrow-d:after {
-	background-position: 	-216px -1px;
-}
-.ui-icon-check:after,
-.ui-icon-checkbox-on:after {
-	background-position: 	-252px -1px;
-}
-.ui-icon-gear:after {
-	background-position: 	-288px -1px;
-}
-.ui-icon-refresh:after {
-	background-position: 	-323px -1px;
-}
-.ui-icon-forward:after {
-	background-position: 	-360px -1px;
-}
-.ui-icon-back:after {
-	background-position: 	-396px -1px;
-}
-.ui-icon-grid:after {
-	background-position: 	-432px -1px;
-}
-.ui-icon-star:after {
-	background-position: 	-467px -1px;
-}
-.ui-icon-alert:after {
-	background-position: 	-503px -1px;
-}
-.ui-icon-info:after {
-	background-position: 	-539px -1px;
-}
-.ui-icon-home:after {
-	background-position: 	-575px -1px;
-}
-.ui-icon-search:after,
-.ui-input-search:after {
-	background-position: 	-611px -1px;
-}
-.ui-icon-bars:after {
-	background-position: 	-788px -1px;
-}
-.ui-icon-edit:after {
-	background-position: 	-824px -1px;
-}
-
-/* HD/"retina" sprite */
-@media only screen and (-webkit-min-device-pixel-ratio: 1.3),
-       only screen and (min--moz-device-pixel-ratio: 1.3),
-       only screen and (min-resolution: 200dpi) {
-	
-	.ui-icon-delete:after, .ui-icon-arrow-r:after, .ui-icon-arrow-l:after, .ui-icon-arrow-u:after, .ui-icon-arrow-d:after,
-	.ui-icon-check:after, .ui-icon-checkbox-off:after, .ui-icon-checkbox-on:after, .ui-icon-radio-off:after, .ui-icon-radio-on:after,
-	.ui-icon-gear:after, .ui-icon-grid:after, .ui-icon-refresh:after, .ui-icon-forward:after, .ui-icon-back:after,
-	.ui-icon-star:after, .ui-icon-alert:after, .ui-icon-info:after, .ui-icon-home:after, .ui-icon-plus:after, .ui-icon-minus:after,
-	.ui-icon-search:after, .ui-input-search:after, .ui-icon-bars:after, .ui-icon-edit:after {
-		background-image: url(images/icons-36-white.png);
-		-moz-background-size: 864px 18px;
-		-o-background-size: 864px 18px;
-		-webkit-background-size: 864px 18px;
-		background-size: 864px 18px;
-	}
-	.ui-btn.ui-icon-alt:after,
-	.ui-icon-alt [class*="ui-icon-"]:after,
-	.ui-icon-alt .ui-input-search:after {
-		background-image: url(images/icons-36-black.png);
-	}
-
-	.ui-icon-plus:after {
-		background-position: 	0 50%;
-	}
-	.ui-icon-minus:after {
-		background-position: 	-36px 50%;
-	}
-	.ui-icon-delete:after {
-		background-position: 	-72px 50%;
-	}
-	.ui-icon-arrow-r:after {
-		background-position: 	-108px 50%;
-	}
-	.ui-icon-arrow-l:after {
-		background-position: 	-144px 50%;
-	}
-	.ui-icon-arrow-u:after {
-		background-position: 	-179px 50%;
-	}
-	.ui-icon-arrow-d:after {
-		background-position: 	-215px 50%;
-	}
-	.ui-icon-check:after,
-	.ui-icon-checkbox-on:after {
-		background-position: 	-252px 50%;
-	}
-	.ui-icon-gear:after {
-		background-position: 	-287px 50%;
-	}
-	.ui-icon-refresh:after {
-		background-position: 	-323px 50%;
-	}
-	.ui-icon-forward:after {
-		background-position: 	-360px 50%;
-	}
-	.ui-icon-back:after {
-		background-position: 	-395px 50%;
-	}
-	.ui-icon-grid:after {
-		background-position: 	-431px 50%;
-	}
-	.ui-icon-star:after {
-		background-position: 	-467px 50%;
-	}
-	.ui-icon-alert:after {
-		background-position: 	-503px 50%;
-	}
-	.ui-icon-info:after {
-		background-position: 	-538px 50%;
-	}
-	.ui-icon-home:after {
-		background-position: 	-575px 50%;
-	}
-	.ui-icon-search:after,
-	.ui-input-search:after {
-		background-position: 	-611px 50%;
-	}
-	.ui-icon-bars:after {
-		background-position: 	-788px 50%;
-	
-	}.ui-icon-edit:after {
-		background-position: 	-824px 50%;
-	}
 }
 
 /* Checkbox and radio */
@@ -315,7 +169,7 @@ label.ui-btn {
 	border-style: solid; 
 }
 
-/* Loading icon */
+/* Loader */
 .ui-icon-loading {
 	background: url(images/ajax-loader.gif);
 	background-size: 2.875em 2.875em;
