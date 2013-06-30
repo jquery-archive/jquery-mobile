@@ -1,127 +1,218 @@
 <!doctype HTML>
 <html>
 	<head>
-		<title>Icons Preview!</title>
+		<title>Icons</title>
 		<link rel="shortcut icon" href="../../favicon.ico">
 		<script>
-	/* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
-window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!!t.document.createElementNS&&!!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect,A=function(A){var o=t.document.createElement("link"),r=t.document.getElementsByTagName("script")[0];o.rel="stylesheet",o.href=e[A&&n?0:A?1:2],r.parentNode.insertBefore(o,r)},o=new t.Image;o.onerror=function(){A(!1)},o.onload=function(){A(1===o.width&&1===o.height)},o.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
-grunticon( [ "../../../css/themes/default/icons.data.svg.css", "../../../css/themes/default/icons.data.png.css", "../../../css/themes/default/icons.fallback.css" ] );
+			/* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
+			window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!!t.document.createElementNS&&!!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect,A=function(A){var o=t.document.createElement("link"),r=t.document.getElementsByTagName("script")[0];o.rel="stylesheet",o.href=e[A&&n?0:A?1:2],r.parentNode.insertBefore(o,r)},o=new t.Image;o.onerror=function(){A(!1)},o.onload=function(){A(1===o.width&&1===o.height)},o.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
+			grunticon( [ "../../../css/themes/default/jquery.mobile.css", "../../../css/themes/default/jquery.mobile.data.png.css", "../../../css/themes/default/jquery.mobile.fallback.css" ] );
 		</script>
-		<noscript><link href="icons.fallback.css" rel="stylesheet"></noscript>
-		<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+		<noscript><link href="../../../css/themes/default/jquery.mobile.fallback.css" rel="stylesheet"></noscript>
 		<script src="../../../js/jquery.js"></script>
 		<script src="../../../js/"></script>
+		<script>
+			$( document ).on( "pagecreate", function() {
+				$( "#settings input" ).on( "change", function( event ) {
+					if ( event.target.id === "opt-mini" ) { 
+						if ( $( "#opt-mini" ).prop( "checked" ) ) {
+							$( "#test" ).addClass( "ui-mini" );
+						} else {
+							$( "#test" ).removeClass( "ui-mini" );
+						}
+					}
+					if ( event.target.id === "opt-inline" ) { 
+						if ( $( "#opt-inline" ).prop( "checked" ) ) {
+							$( "#test button" ).addClass( "ui-btn-inline" );
+						} else {
+							$( "#test button" ).removeClass( "ui-btn-inline" );
+						}
+					}
+					if ( event.target.id === "opt-notext" ) { 
+						if ( $( "#opt-notext" ).prop( "checked" ) ) {
+							$( "#test button" ).button( "option", "iconpos", "notext" );
+						} else {
+							$( "#test button" ).button( "option", "iconpos", "left" );
+						}
+						$( "#test button" ).button( "refresh" );
+					}
+					if ( event.target.id === "opt-alt" ) { 
+						if ( $( "#opt-alt" ).prop( "checked" ) ) {
+							$( "#test" ).addClass( "ui-icon-alt" );
+						} else {
+							$( "#test" ).removeClass( "ui-icon-alt" );
+						}
+					}
+					if ( event.target.id === "opt-nodisc" ) {
+						if ( $( "#opt-nodisc" ).prop( "checked" ) ) {
+							$( "#test" ).addClass( "ui-icon-nodisc" );
+						} else {
+							$( "#test" ).removeClass( "ui-icon-nodisc" );
+						}
+					}
+					if ( event.target.id === "opt-iconshadow" ) {
+						if ( $( "#opt-iconshadow" ).prop( "checked" ) ) {
+							$( "#test" ).addClass( "ui-shadow-icon" );
+						} else {
+							$( "#test" ).removeClass( "ui-shadow-icon" );
+						}
+					}
+					if ( event.target.name === "theme" ) {
+						var themeClass = $( "#theme-setting input:checked" ).attr( "id" );
+						
+						$( "#icon-page" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( themeClass );
+					}
+				});
+			});
+		</script>
 	</head>
 	<body>
 	
-		<div data-role="page">
+		<div data-role="page" id="icon-page">
+			<div data-role="header">
+				<h1>Icons</h1>
+			</div>
 			<div data-role="content">
-		
-				<pre><code>action:</code></pre><button data-icon="action" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>arrow-d-l:</code></pre><button data-icon="arrow-d-l" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>arrow-d-r:</code></pre><button data-icon="arrow-d-r" data-role="button" data-iconpos="notext"></button>
-				<pre><code>arrow-d:</code></pre><button data-icon="arrow-d" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>arrow-l:</code></pre><button data-icon="arrow-l" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>arrow-r:</code></pre><button data-icon="arrow-r" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>arrow-u-l:</code></pre><button data-icon="arrow-u-l" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>arrow-u-r:</code></pre><button data-icon="arrow-u-r" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>arrow-u:</code></pre><button data-icon="arrow-u" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>audio:</code></pre><button data-icon="audio" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>calendar:</code></pre><button data-icon="calendar" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>camera:</code></pre><button data-icon="camera" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>carat-d:</code></pre><button data-icon="carat-d" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>carat-l:</code></pre><button data-icon="carat-l" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>carat-r:</code></pre><button data-icon="carat-r" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>carat-u:</code></pre><button data-icon="carat-u" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>check:</code></pre><button data-icon="check" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>clock:</code></pre><button data-icon="clock" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>cloud:</code></pre><button data-icon="cloud" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>grid:</code></pre><button data-icon="grid" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>mail:</code></pre><button data-icon="mail" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>eye:</code></pre><button data-icon="eye" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>gear:</code></pre><button data-icon="gear" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>heart:</code></pre><button data-icon="heart" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>home:</code></pre><button data-icon="home" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>info:</code></pre><button data-icon="info" data-role="button" data-iconpos="notext"></button>
-				<pre><code>bullets:</code></pre><button data-icon="bullets" data-role="button" data-iconpos="notext"></button>
-				<pre><code>bars:</code></pre><button data-icon="bars" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>navigation:</code></pre><button data-icon="navigation" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>lock:</code></pre><button data-icon="lock" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>search:</code></pre><button data-icon="search" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>location:</code></pre><button data-icon="location" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>minus:</code></pre><button data-icon="minus" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>forbidden:</code></pre><button data-icon="forbidden" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>edit:</code></pre><button data-icon="edit" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>user:</code></pre><button data-icon="user" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>phone:</code></pre><button data-icon="phone" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>plus:</code></pre><button data-icon="plus" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>power:</code></pre><button data-icon="power" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>recycle:</code></pre><button data-icon="recycle" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>forward:</code></pre><button data-icon="forward" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>refresh:</code></pre><button data-icon="refresh" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>shop:</code></pre><button data-icon="shop" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>comment:</code></pre><button data-icon="comment" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>star:</code></pre><button data-icon="star" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>tag:</code></pre><button data-icon="tag" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>back:</code></pre><button data-icon="back" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>video:</code></pre><button data-icon="video" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>alert:</code></pre><button data-icon="alert" data-role="button" data-iconpos="notext"></button>	
-				<pre><code>delete:</code></pre><button data-icon="delete" data-role="button" data-iconpos="notext"></button>
+			
+				<form id="settings" class="ui-mini">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal" id="theme-setting">
+							<legend>Theme:</legend>
+							<label for="ui-page-theme-a">A</label>
+							<input type="radio" name="theme" id="ui-page-theme-a" checked>
+							<label for="ui-page-theme-b">B</label>
+							<input type="radio" name="theme" id="ui-page-theme-b">
+						</fieldset>
+					</div>
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<legend>Style:</legend>
+							<label for="opt-mini">Mini</label>
+							<input type="checkbox" name="opt-mini" id="opt-mini">
+							<label for="opt-inline">Inline</label>
+							<input type="checkbox" name="opt-inline" id="opt-inline">
+							<label for="opt-notext">Icon-only</label>
+							<input type="checkbox" name="opt-notext" id="opt-notext">
+							<label for="opt-alt">Alt (black)</label>
+							<input type="checkbox" name="opt-alt" id="opt-alt">
+							<label for="opt-nodisc">No disc</label>
+							<input type="checkbox" name="opt-nodisc" id="opt-nodisc">
+							<label for="opt-iconshadow">Icon shadow</label>
+							<input type="checkbox" name="opt-iconshadow" id="opt-iconshadow">
+						</fieldset>
+					</div>
+				</form>
 				
-				<div class="ui-icon-alt">
-					<h2><code>ui-icon-alt</code></h2>
+				<hr>
+				
+				<div id="test">
+					<form>
+						<button data-icon="action">action</button>	
+						<button data-icon="arrow-d-l">arrow-d-l</button>	
+						<button data-icon="arrow-d-r">arrow-d-r</button>
+						<button data-icon="arrow-d">arrow-d</button>	
+						<button data-icon="arrow-l">arrow-l</button>	
+						<button data-icon="arrow-r">arrow-r</button>	
+						<button data-icon="arrow-u-l">arrow-u-l</button>	
+						<button data-icon="arrow-u-r">arrow-u-r</button>	
+						<button data-icon="arrow-u">arrow-u</button>	
+						<button data-icon="audio">audio</button>	
+						<button data-icon="calendar">calendar</button>	
+						<button data-icon="camera">camera</button>	
+						<button data-icon="carat-d">carat-d</button>	
+						<button data-icon="carat-l">carat-l</button>	
+						<button data-icon="carat-r">carat-r</button>	
+						<button data-icon="carat-u">carat-u</button>	
+						<button data-icon="check">check</button>	
+						<button data-icon="clock">clock</button>	
+						<button data-icon="cloud">cloud</button>	
+						<button data-icon="grid">grid</button>	
+						<button data-icon="mail">mail</button>	
+						<button data-icon="eye">eye</button>	
+						<button data-icon="gear">gear</button>	
+						<button data-icon="heart">heart</button>	
+						<button data-icon="home">home</button>	
+						<button data-icon="info">info</button>
+						<button data-icon="bullets">bullets</button>
+						<button data-icon="bars">bars</button>	
+						<button data-icon="navigation">navigation</button>	
+						<button data-icon="lock">lock</button>	
+						<button data-icon="search">search</button>	
+						<button data-icon="location">location</button>	
+						<button data-icon="minus">minus</button>	
+						<button data-icon="forbidden">forbidden</button>	
+						<button data-icon="edit">edit</button>	
+						<button data-icon="user">user</button>	
+						<button data-icon="phone">phone</button>	
+						<button data-icon="plus">plus</button>	
+						<button data-icon="power">power</button>	
+						<button data-icon="recycle">recycle</button>	
+						<button data-icon="forward">forward</button>	
+						<button data-icon="refresh">refresh</button>	
+						<button data-icon="shop">shop</button>	
+						<button data-icon="comment">comment</button>	
+						<button data-icon="star">star</button>	
+						<button data-icon="tag">tag</button>	
+						<button data-icon="back">back</button>	
+						<button data-icon="video">video</button>	
+						<button data-icon="alert">alert</button>	
+						<button data-icon="delete">delete</button>
+
+						<div data-role="fieldcontain">
+							<fieldset data-role="controlgroup">
+								<legend>Checkbox:</legend>
+								<label for="checkbox-v-1a">One</label>
+								<input type="checkbox" name="checkbox-v-1a" id="checkbox-v-1a">
+								<label for="checkbox-v-1b">Two</label>
+								<input type="checkbox" name="checkbox-v-1b" id="checkbox-v-1b">
+								<label for="checkbox-v-1c">Three</label>
+								<input type="checkbox" name="checkbox-v-1c" id="checkbox-v-1c">
+							</fieldset>
+						</div>
+						
+						<div data-role="fieldcontain"><fieldset data-role="controlgroup"><legend>Radio:</legend>
+								<label for="radio-choice-v-1a">One</label>
+								<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1a" value="one" checked="checked">
+								<label for="radio-choice-v-1b">Two</label>
+								<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1b" value="two">
+								<label for="radio-choice-v-1c">Three</label>
+								<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1c" value="three">
+							</fieldset>
+						</div>
+						
+						<div data-role="fieldcontain">
+							<label for="select-custom">Multiple select:</label>
+							<select name="select-custom" id="select-custom" multiple="multiple" data-native-menu="false">
+								<option>Choose options</option>
+								<option value="1">The 1st Option</option>
+								<option value="2" selected="selected">The 2nd Option</option>
+								<option value="3">The 3rd Option</option>
+								<option value="4" selected="selected">The 4th Option</option>
+							</select>
+						</div>
+						
+						<div data-role="fieldcontain">
+							<label for="search-1">Search:</label>
+							<input type="search" name="search-1" id="search-1" value="">
+						</div>
+					</form>
 					
-					<pre><code>action:</code></pre><button data-icon="action" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>arrow-d-l:</code></pre><button data-icon="arrow-d-l" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>arrow-d-r:</code></pre><button data-icon="arrow-d-r" data-role="button" data-iconpos="notext"></button>
-					<pre><code>arrow-d:</code></pre><button data-icon="arrow-d" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>arrow-l:</code></pre><button data-icon="arrow-l" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>arrow-r:</code></pre><button data-icon="arrow-r" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>arrow-u-l:</code></pre><button data-icon="arrow-u-l" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>arrow-u-r:</code></pre><button data-icon="arrow-u-r" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>arrow-u:</code></pre><button data-icon="arrow-u" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>audio:</code></pre><button data-icon="audio" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>calendar:</code></pre><button data-icon="calendar" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>camera:</code></pre><button data-icon="camera" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>carat-d:</code></pre><button data-icon="carat-d" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>carat-l:</code></pre><button data-icon="carat-l" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>carat-r:</code></pre><button data-icon="carat-r" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>carat-u:</code></pre><button data-icon="carat-u" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>check:</code></pre><button data-icon="check" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>clock:</code></pre><button data-icon="clock" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>cloud:</code></pre><button data-icon="cloud" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>grid:</code></pre><button data-icon="grid" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>mail:</code></pre><button data-icon="mail" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>eye:</code></pre><button data-icon="eye" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>gear:</code></pre><button data-icon="gear" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>heart:</code></pre><button data-icon="heart" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>home:</code></pre><button data-icon="home" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>info:</code></pre><button data-icon="info" data-role="button" data-iconpos="notext"></button>
-					<pre><code>bullets:</code></pre><button data-icon="bullets" data-role="button" data-iconpos="notext"></button>
-					<pre><code>bars:</code></pre><button data-icon="bars" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>navigation:</code></pre><button data-icon="navigation" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>lock:</code></pre><button data-icon="lock" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>search:</code></pre><button data-icon="search" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>location:</code></pre><button data-icon="location" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>minus:</code></pre><button data-icon="minus" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>forbidden:</code></pre><button data-icon="forbidden" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>edit:</code></pre><button data-icon="edit" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>user:</code></pre><button data-icon="user" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>phone:</code></pre><button data-icon="phone" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>plus:</code></pre><button data-icon="plus" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>power:</code></pre><button data-icon="power" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>recycle:</code></pre><button data-icon="recycle" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>forward:</code></pre><button data-icon="forward" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>refresh:</code></pre><button data-icon="refresh" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>shop:</code></pre><button data-icon="shop" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>comment:</code></pre><button data-icon="comment" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>star:</code></pre><button data-icon="star" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>tag:</code></pre><button data-icon="tag" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>back:</code></pre><button data-icon="back" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>video:</code></pre><button data-icon="video" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>alert:</code></pre><button data-icon="alert" data-role="button" data-iconpos="notext"></button>	
-					<pre><code>delete:</code></pre><button data-icon="delete" data-role="button" data-iconpos="notext"></button>
+					<div data-role="collapsible">
+						<h4>Collapsibe</h4>
+						<p>I'm the collapsible content.</p>
+					</div>	
+									
+					<ul data-role="listview" data-inset="true">
+						<li><a href="#">List item</a></li>
+						<li><a href="#">List item</a></li>
+						<li><a href="#">List item</a></li>
+					</ul>					
+
+					<a href="#popup" data-rel="popup" data-role="button">Popup</a>
+					<div data-role="popup" id="popup" style="max-width:280px">
+							<a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+							<p>I have a close button at the top right corner with simple HTML markup.</p>
+					</div>
 				</div>
 				
 			</div>
