@@ -95,7 +95,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 		},
 		_addBackButton:function() {
-			this.backBtn = $( "<a href='javascript:void(0);' class='ui-btn-left ui-toolbar-back-btn' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "icon='arrow-l'>" + this.options.backBtnText + "</a>" )
+			this.backBtn = $( "<a href='javascript:void(0);' class='ui-btn-left ui-toolbar-back-btn' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "icon='carat-l'>" + this.options.backBtnText + "</a>" )
 					// If theme is provided, override default inheritance
 					.attr( "data-" + $.mobile.ns + "theme", this.options.backBtnTheme || this.options.theme )
 					.prependTo( this.element );
