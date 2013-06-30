@@ -1,29 +1,29 @@
 .ui-icon-action:after {
 	background-image: url(png/action-white.png);
 }
-.ui-icon-arrow-down-left:after {
-	background-image: url(png/arrow-down-left-white.png);
+.ui-icon-arrow-d-l:after {
+	background-image: url(png/arrow-d-l-white.png);
 }
-.ui-icon-arrow-down-right:after {
-	background-image: url(png/arrow-down-right-white.png);
+.ui-icon-arrow-d-r:after {
+	background-image: url(png/arrow-d-r-white.png);
 }
-.ui-icon-arrow-down:after {
-	background-image: url(png/arrow-down-white.png);
+.ui-icon-arrow-d:after {
+	background-image: url(png/arrow-d-white.png);
 }
-.ui-icon-arrow-left:after {
-	background-image: url(png/arrow-left-white.png);
+.ui-icon-arrow-l:after {
+	background-image: url(png/arrow-l-white.png);
 }
-.ui-icon-arrow-right:after {
-	background-image: url(png/arrow-right-white.png);
+.ui-icon-arrow-r:after {
+	background-image: url(png/arrow-r-white.png);
 }
-.ui-icon-arrow-up-left:after {
-	background-image: url(png/arrow-up-left-white.png);
+.ui-icon-arrow-u-l:after {
+	background-image: url(png/arrow-u-l-white.png);
 }
-.ui-icon-arrow-up-right:after {
-	background-image: url(png/arrow-up-right-white.png);
+.ui-icon-arrow-u-r:after {
+	background-image: url(png/arrow-u-r-white.png);
 }
-.ui-icon-arrow-up:after {
-	background-image: url(png/arrow-up-white.png);
+.ui-icon-arrow-u:after {
+	background-image: url(png/arrow-u-white.png);
 }
 .ui-icon-audio:after {
 	background-image: url(png/audio-white.png);
@@ -34,17 +34,17 @@
 .ui-icon-camera:after {
 	background-image: url(png/camera-white.png);
 }
-.ui-icon-carat-down:after {
-	background-image: url(png/carat-down-white.png);
+.ui-icon-carat-d:after {
+	background-image: url(png/carat-d-white.png);
 }
-.ui-icon-carat-left:after {
-	background-image: url(png/carat-left-white.png);
+.ui-icon-carat-l:after {
+	background-image: url(png/carat-l-white.png);
 }
-.ui-icon-carat-right:after {
-	background-image: url(png/carat-right-white.png);
+.ui-icon-carat-r:after {
+	background-image: url(png/carat-r-white.png);
 }
-.ui-icon-carat-up:after {
-	background-image: url(png/carat-up-white.png);
+.ui-icon-carat-u:after {
+	background-image: url(png/carat-u-white.png);
 }
 .ui-icon-check:after,
 .ui-icon-checkbox-on:after {
@@ -56,11 +56,11 @@
 .ui-icon-cloud:after {
 	background-image: url(png/cloud-white.png);
 }
-.ui-icon-dialpad:after {
-	background-image: url(png/dialpad-white.png);
+.ui-icon-grid:after {
+	background-image: url(png/grid-white.png);
 }
-.ui-icon-envelope:after {
-	background-image: url(png/envelope-white.png);
+.ui-icon-mail:after {
+	background-image: url(png/mail-white.png);
 }
 .ui-icon-eye:after {
 	background-image: url(png/eye-white.png);
@@ -71,42 +71,42 @@
 .ui-icon-heart:after {
 	background-image: url(png/heart-white.png);
 }
-.ui-icon-house:after {
-	background-image: url(png/house-white.png);
+.ui-icon-home:after {
+	background-image: url(png/home-white.png);
 }
 .ui-icon-info:after {
 	background-image: url(png/info-white.png);
 }
-.ui-icon-list-bulleted:after {
-	background-image: url(png/list-bulleted-white.png);
+.ui-icon-bullets:after {
+	background-image: url(png/bullets-white.png);
 }
-.ui-icon-list:after {
-	background-image: url(png/list-white.png);
+.ui-icon-bars:after {
+	background-image: url(png/bars-white.png);
 }
-.ui-icon-location-arrow:after {
-	background-image: url(png/location-arrow-white.png);
+.ui-icon-navigation:after {
+	background-image: url(png/navigation-white.png);
 }
 .ui-icon-lock:after {
 	background-image: url(png/lock-white.png);
 }
-.ui-icon-magnifying-glass:after,
+.ui-icon-search:after,
 .ui-input-search:after {
-	background-image: url(png/magnifying-glass-white.png);
+	background-image: url(png/search-white.png);
 }
-.ui-icon-map-marker:after {
-	background-image: url(png/map-marker-white.png);
+.ui-icon-location:after {
+	background-image: url(png/location-white.png);
 }
 .ui-icon-minus:after {
 	background-image: url(png/minus-white.png);
 }
-.ui-icon-no:after {
-	background-image: url(png/no-white.png);
+.ui-icon-forbidden:after {
+	background-image: url(png/forbidden-white.png);
 }
-.ui-icon-pencil:after {
-	background-image: url(png/pencil-white.png);
+.ui-icon-edit:after {
+	background-image: url(png/edit-white.png);
 }
-.ui-icon-person:after {
-	background-image: url(png/person-white.png);
+.ui-icon-user:after {
+	background-image: url(png/user-white.png);
 }
 .ui-icon-phone:after {
 	background-image: url(png/phone-white.png);
@@ -117,20 +117,20 @@
 .ui-icon-power:after {
 	background-image: url(png/power-white.png);
 }
-.ui-icon-re-cycle:after {
-	background-image: url(png/re-cycle-white.png);
+.ui-icon-recycle:after {
+	background-image: url(png/recycle-white.png);
 }
-.ui-icon-redo:after {
-	background-image: url(png/redo-white.png);
+.ui-icon-forward:after {
+	background-image: url(png/forward-white.png);
 }
 .ui-icon-refresh:after {
 	background-image: url(png/refresh-white.png);
 }
-.ui-icon-shopping-bag:after {
-	background-image: url(png/shopping-bag-white.png);
+.ui-icon-shop:after {
+	background-image: url(png/shop-white.png);
 }
-.ui-icon-speech-bubble:after {
-	background-image: url(png/speech-bubble-white.png);
+.ui-icon-comment:after {
+	background-image: url(png/comment-white.png);
 }
 .ui-icon-star:after {
 	background-image: url(png/star-white.png);
@@ -138,16 +138,16 @@
 .ui-icon-tag:after {
 	background-image: url(png/tag-white.png);
 }
-.ui-icon-undo:after {
-	background-image: url(png/undo-white.png);
+.ui-icon-back:after {
+	background-image: url(png/back-white.png);
 }
 .ui-icon-video:after {
 	background-image: url(png/video-white.png);
 }
-.ui-icon-warning:after {
-	background-image: url(png/warning-white.png);
+.ui-icon-alert:after {
+	background-image: url(png/alert-white.png);
 }
-.ui-icon-x:after {
+.ui-icon-delete:after {
 	background-image: url(png/x-white.png);
 }
 
@@ -156,37 +156,37 @@
 .ui-icon-alt .ui-icon-action:after {
 	background-image: url(png/action-black.png);
 }
-.ui-icon-alt.ui-icon-arrow-down:after,
-.ui-icon-alt .ui-icon-arrow-down:after {
-	background-image: url(png/arrow-down-black.png);
+.ui-icon-alt.ui-icon-arrow-d:after,
+.ui-icon-alt .ui-icon-arrow-d:after {
+	background-image: url(png/arrow-d-black.png);
 }
-.ui-icon-alt.ui-icon-arrow-down-left:after,
-.ui-icon-alt .ui-icon-arrow-down-left:after {
-	background-image: url(png/arrow-down-left-black.png);
+.ui-icon-alt.ui-icon-arrow-d-l:after,
+.ui-icon-alt .ui-icon-arrow-d-l:after {
+	background-image: url(png/arrow-d-l-black.png);
 }
-.ui-icon-alt.ui-icon-arrow-down-right:after,
-.ui-icon-alt .ui-icon-arrow-down-right:after {
-	background-image: url(png/arrow-down-right-black.png);
+.ui-icon-alt.ui-icon-arrow-d-r:after,
+.ui-icon-alt .ui-icon-arrow-d-r:after {
+	background-image: url(png/arrow-d-r-black.png);
 }
-.ui-icon-alt.ui-icon-arrow-left:after,
-.ui-icon-alt .ui-icon-arrow-left:after {
-	background-image: url(png/arrow-left-black.png);
+.ui-icon-alt.ui-icon-arrow-l:after,
+.ui-icon-alt .ui-icon-arrow-l:after {
+	background-image: url(png/arrow-l-black.png);
 }
-.ui-icon-alt.ui-icon-arrow-right:after,
-.ui-icon-alt .ui-icon-arrow-right:after {
-	background-image: url(png/arrow-right-black.png);
+.ui-icon-alt.ui-icon-arrow-r:after,
+.ui-icon-alt .ui-icon-arrow-r:after {
+	background-image: url(png/arrow-r-black.png);
 }
-.ui-icon-alt.ui-icon-arrow-up:after,
-.ui-icon-alt .ui-icon-arrow-up:after {
-	background-image: url(png/arrow-up-black.png);
+.ui-icon-alt.ui-icon-arrow-u:after,
+.ui-icon-alt .ui-icon-arrow-u:after {
+	background-image: url(png/arrow-u-black.png);
 }
-.ui-icon-alt.ui-icon-arrow-up-left:after,
-.ui-icon-alt .ui-icon-arrow-up-left:after {
-	background-image: url(png/arrow-up-left-black.png);
+.ui-icon-alt.ui-icon-arrow-u-l:after,
+.ui-icon-alt .ui-icon-arrow-u-l:after {
+	background-image: url(png/arrow-u-l-black.png);
 }
-.ui-icon-alt.ui-icon-arrow-up-right:after,
-.ui-icon-alt .ui-icon-arrow-up-right:after {
-	background-image: url(png/arrow-up-right-black.png);
+.ui-icon-alt.ui-icon-arrow-u-r:after,
+.ui-icon-alt .ui-icon-arrow-u-r:after {
+	background-image: url(png/arrow-u-r-black.png);
 }
 .ui-icon-alt.ui-icon-audio:after,
 .ui-icon-alt .ui-icon-audio:after {
@@ -200,21 +200,21 @@
 .ui-icon-alt .ui-icon-camera:after {
 	background-image: url(png/camera-black.png);
 }
-.ui-icon-alt.ui-icon-carat-down:after,
-.ui-icon-alt .ui-icon-carat-down:after {
-	background-image: url(png/carat-down-black.png);
+.ui-icon-alt.ui-icon-carat-d:after,
+.ui-icon-alt .ui-icon-carat-d:after {
+	background-image: url(png/carat-d-black.png);
 }
-.ui-icon-alt.ui-icon-carat-left:after,
-.ui-icon-alt .ui-icon-carat-left:after {
-	background-image: url(png/carat-left-black.png);
+.ui-icon-alt.ui-icon-carat-l:after,
+.ui-icon-alt .ui-icon-carat-l:after {
+	background-image: url(png/carat-l-black.png);
 }
-.ui-icon-alt.ui-icon-carat-right:after,
-.ui-icon-alt .ui-icon-carat-right:after {
-	background-image: url(png/carat-right-black.png);
+.ui-icon-alt.ui-icon-carat-r:after,
+.ui-icon-alt .ui-icon-carat-r:after {
+	background-image: url(png/carat-r-black.png);
 }
-.ui-icon-alt.ui-icon-carat-up:after,
-.ui-icon-alt .ui-icon-carat-up:after {
-	background-image: url(png/carat-up-black.png);
+.ui-icon-alt.ui-icon-carat-u:after,
+.ui-icon-alt .ui-icon-carat-u:after {
+	background-image: url(png/carat-u-black.png);
 }
 .ui-icon-alt.ui-icon-check:after,
 .ui-icon-alt .ui-icon-check:after,
@@ -230,13 +230,13 @@
 .ui-icon-alt .ui-icon-cloud:after {
 	background-image: url(png/cloud-black.png);
 }
-.ui-icon-alt.ui-icon-dialpad:after,
-.ui-icon-alt .ui-icon-dialpad:after {
-	background-image: url(png/dialpad-black.png);
+.ui-icon-alt.ui-icon-grid:after,
+.ui-icon-alt .ui-icon-grid:after {
+	background-image: url(png/grid-black.png);
 }
-.ui-icon-alt.ui-icon-envelope:after,
-.ui-icon-alt .ui-icon-envelope:after {
-	background-image: url(png/envelope-black.png);
+.ui-icon-alt.ui-icon-mail:after,
+.ui-icon-alt .ui-icon-mail:after {
+	background-image: url(png/mail-black.png);
 }
 .ui-icon-alt.ui-icon-eye:after,
 .ui-icon-alt .ui-icon-eye:after {
@@ -250,55 +250,55 @@
 .ui-icon-alt .ui-icon-heart:after {
 	background-image: url(png/heart-black.png);
 }
-.ui-icon-alt.ui-icon-house:after,
-.ui-icon-alt .ui-icon-house:after {
-	background-image: url(png/house-black.png);
+.ui-icon-alt.ui-icon-home:after,
+.ui-icon-alt .ui-icon-home:after {
+	background-image: url(png/home-black.png);
 }
 .ui-icon-alt.ui-icon-info:after,
 .ui-icon-alt .ui-icon-info:after {
 	background-image: url(png/info-black.png);
 }
-.ui-icon-alt.ui-icon-list:after,
-.ui-icon-alt .ui-icon-list:after {
-	background-image: url(png/list-black.png);
+.ui-icon-alt.ui-icon-bars:after,
+.ui-icon-alt .ui-icon-bars:after {
+	background-image: url(png/bars-black.png);
 }
-.ui-icon-alt.ui-icon-list-bulleted:after,
-.ui-icon-alt .ui-icon-list-bulleted:after {
-	background-image: url(png/list-bulleted-black.png);
+.ui-icon-alt.ui-icon-bullets:after,
+.ui-icon-alt .ui-icon-bullets:after {
+	background-image: url(png/bullets-black.png);
 }
-.ui-icon-alt.ui-icon-location-arrow:after,
-.ui-icon-alt .ui-icon-location-arrow:after {
-	background-image: url(png/location-arrow-black.png);
+.ui-icon-alt.ui-icon-navigation:after,
+.ui-icon-alt .ui-icon-navigation:after {
+	background-image: url(png/navigation-black.png);
 }
 .ui-icon-alt.ui-icon-lock:after,
 .ui-icon-alt .ui-icon-lock:after {
 	background-image: url(png/lock-black.png);
 }
-.ui-icon-alt.ui-icon-magnifying-glass:after,
-.ui-icon-alt .ui-icon-magnifying-glass:after,
+.ui-icon-alt.ui-icon-search:after,
+.ui-icon-alt .ui-icon-search:after,
 .ui-icon-alt.ui-input-search:after,
 .ui-icon-alt .ui-input-search:after {
 	background-image: url();
 }
-.ui-icon-alt.ui-icon-map-marker:after,
-.ui-icon-alt .ui-icon-map-marker:after {
-	background-image: url(png/map-marker-black.png);
+.ui-icon-alt.ui-icon-location:after,
+.ui-icon-alt .ui-icon-location:after {
+	background-image: url(png/location-black.png);
 }
 .ui-icon-alt.ui-icon-minus:after,
 .ui-icon-alt .ui-icon-minus:after {
 	background-image: url(png/minus-black.png);
 }
-.ui-icon-alt.ui-icon-no:after,
-.ui-icon-alt .ui-icon-no:after {
-	background-image: url(png/no-black.png);
+.ui-icon-alt.ui-icon-forbidden:after,
+.ui-icon-alt .ui-icon-forbidden:after {
+	background-image: url(png/forbidden-black.png);
 }
-.ui-icon-alt.ui-icon-pencil:after,
-.ui-icon-alt .ui-icon-pencil:after {
-	background-image: url(png/pencil-black.png);
+.ui-icon-alt.ui-icon-edit:after,
+.ui-icon-alt .ui-icon-edit:after {
+	background-image: url(png/edit-black.png);
 }
-.ui-icon-alt.ui-icon-person:after,
-.ui-icon-alt .ui-icon-person:after {
-	background-image: url(png/person-black.png);
+.ui-icon-alt.ui-icon-user:after,
+.ui-icon-alt .ui-icon-user:after {
+	background-image: url(png/user-black.png);
 }
 .ui-icon-alt.ui-icon-phone:after,
 .ui-icon-alt .ui-icon-phone:after {
@@ -312,25 +312,25 @@
 .ui-icon-alt .ui-icon-power:after {
 	background-image: url(png/power-black.png);
 }
-.ui-icon-alt.ui-icon-re-cycle:after,
-.ui-icon-alt .ui-icon-re-cycle:after {
-	background-image: url(png/re-cycle-black.png);
+.ui-icon-alt.ui-icon-recycle:after,
+.ui-icon-alt .ui-icon-recycle:after {
+	background-image: url(png/recycle-black.png);
 }
-.ui-icon-alt.ui-icon-redo:after,
-.ui-icon-alt .ui-icon-redo:after {
-	background-image: url(png/redo-black.png);
+.ui-icon-alt.ui-icon-forward:after,
+.ui-icon-alt .ui-icon-forward:after {
+	background-image: url(png/forward-black.png);
 }
 .ui-icon-alt.ui-icon-refresh:after,
 .ui-icon-alt .ui-icon-refresh:after {
 	background-image: url(png/refresh-black.png);
 }
-.ui-icon-alt.ui-icon-shopping-bag:after,
-.ui-icon-alt .ui-icon-shopping-bag:after {
-	background-image: url(png/shopping-bag-black.png);
+.ui-icon-alt.ui-icon-shop:after,
+.ui-icon-alt .ui-icon-shop:after {
+	background-image: url(png/shop-black.png);
 }
-.ui-icon-alt.ui-icon-speech-bubble:after,
-.ui-icon-alt .ui-icon-speech-bubble:after {
-	background-image: url(png/speech-bubble-black.png);
+.ui-icon-alt.ui-icon-comment:after,
+.ui-icon-alt .ui-icon-comment:after {
+	background-image: url(png/comment-black.png);
 }
 .ui-icon-alt.ui-icon-star:after,
 .ui-icon-alt .ui-icon-star:after {
@@ -340,19 +340,19 @@
 .ui-icon-alt .ui-icon-tag:after {
 	background-image: url(png/tag-black.png);
 }
-.ui-icon-alt.ui-icon-undo:after,
-.ui-icon-alt .ui-icon-undo:after {
-	background-image: url(png/undo-black.png);
+.ui-icon-alt.ui-icon-back:after,
+.ui-icon-alt .ui-icon-back:after {
+	background-image: url(png/back-black.png);
 }
 .ui-icon-alt.ui-icon-video:after,
 .ui-icon-alt .ui-icon-video:after {
 	background-image: url(png/video-black.png);
 }
-.ui-icon-alt.ui-icon-warning:after,
-.ui-icon-alt .ui-icon-warning:after {
-	background-image: url(png/warning-black.png);
+.ui-icon-alt.ui-icon-alert:after,
+.ui-icon-alt .ui-icon-alert:after {
+	background-image: url(png/alert-black.png);
 }
-.ui-icon-alt.ui-icon-x:after,
-.ui-icon-alt .ui-icon-x:after {
+.ui-icon-alt.ui-icon-delete:after,
+.ui-icon-alt .ui-icon-delete:after {
 	background-image: url(png/x-black.png);
 }
