@@ -8,25 +8,48 @@
 	<link rel="shortcut icon" href="../../favicon.ico">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../js/"></script>
+	<script>
+		$( document ).on( "pagecreate", function() {
+			$( "#theme-selector input" ).on( "change", function( event ) {
+				var themeClass = $( "#theme-selector input:checked" ).attr( "id" );
+				
+				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b ui-page-theme-c" ).addClass( themeClass );
+			});
+		});
+	</script>
 </head>
 <body>
 <div data-role="page" id="testpage">
 
 	<div data-role="header">
-		<h1>Theme A</h1>
+		<h1>Theme inheritance</h1>
 		<a href="../../" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
 		<a href="#" data-role="button" data-icon="gear">Button</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 
-		<div class="ui-body ui-body-a ui-body-inherit ui-corner-all">
-			<p>I am a div with classes ui-body, ui-body-a and ui-corner-all.</p>
+		<form id="theme-selector" class="ui-mini">
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Theme:</legend>
+					<label for="ui-page-theme-a">A</label>
+					<input type="radio" name="theme" id="ui-page-theme-a" checked>
+					<label for="ui-page-theme-b">B</label>
+					<input type="radio" name="theme" id="ui-page-theme-b">
+					<label for="ui-page-theme-c">C</label>
+					<input type="radio" name="theme" id="ui-page-theme-c">
+				</fieldset>
+			</div>
+		</form>
+
+		<div class="ui-body ui-body-inherit ui-corner-all">
+			<p>I am a div with classes ui-body, ui-body-inherit and ui-corner-all.</p>
 			<p><a href="#">I am a link</a></p>
 		</div>
 		
-		<div class="ui-bar ui-bar-a ui-corner-all">
-			<p>I am a div with classes ui-bar, ui-bar-a and ui-corner-all. <a href="#">I am a link</a></p>
+		<div class="ui-bar ui-bar-inherit ui-corner-all">
+			<p>I am a div with classes ui-bar, ui-bar-inherit and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 				
 		<a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">We</a>

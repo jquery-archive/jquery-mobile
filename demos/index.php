@@ -57,8 +57,7 @@
 		
 		<ul data-role="listview" data-inset="true" data-theme="a" data-divider-theme="a" data-icon="false" class="jqm-list">
 			<li data-role="list-divider">Theming</li>
-			<li><a href="test/theming/" data-ajax="false">Theme A (default)</a></li>
-			<li><a href="test/theming/theme-b.php" data-ajax="false">Theme B</a></li>
+			<li><a href="test/theming/" data-ajax="false">Theme inheritance</a></li>
 			<li data-role="list-divider">Icons</li>
 			<li><a href="test/icons/font-icons.php" data-ajax="false">Font icons</a></li>
         </ul>
