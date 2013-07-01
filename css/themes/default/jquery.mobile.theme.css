@@ -155,10 +155,15 @@ label.ui-btn {
 }
 .ui-radio .ui-btn.ui-icon-radio-on:after {
 	background-image: none;
+	background-color: #fff;
 	width: 8px;
 	height: 8px;
 	border-width: 5px;
 	border-style: solid; 
+}
+.ui-icon-alt.ui-btn.ui-icon-radio-on:after,
+.ui-icon-alt .ui-btn.ui-icon-radio-on:after {
+	background-color: 					#000;
 }
 
 /* Loader */
@@ -325,7 +330,6 @@ html .ui-bar-a .ui-icon-radio-on:after,
 html .ui-body-a .ui-icon-radio-on:after,
 html body .ui-group-theme-a .ui-icon-radio-on:after,
 .ui-btn.ui-icon-radio-on.ui-btn-a:after {
-	background-color:		#fff /*{a-active-color}*/;
 	border-color:			#0066ff /*{a-active-background-color}*/;
 }
 
@@ -506,7 +510,6 @@ html .ui-bar-b .ui-icon-radio-on:after,
 html .ui-body-b .ui-icon-radio-on:after,
 html body .ui-group-theme-b .ui-icon-radio-on:after,
 .ui-btn.ui-icon-radio-on.ui-btn-b:after {
-	background-color:		#fff /*{b-active-color}*/;
 	border-color:			#999 /*{b-active-background-color}*/;
 }
 
@@ -685,7 +688,6 @@ html .ui-bar-c .ui-icon-radio-on:after,
 html .ui-body-c .ui-icon-radio-on:after,
 html body .ui-group-theme-c .ui-icon-radio-on:after,
 .ui-btn.ui-icon-radio-on.ui-btn-c:after {
-	background-color:		#fff /*{c-active-color}*/;
 	border-color:			#33ccff /*{c-active-background-color}*/;
 }
 
