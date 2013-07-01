@@ -85,12 +85,14 @@ textarea.ui-mini {
 	filter: Alpha(Opacity=50);
 	opacity: .5;
 }
-.ui-input-search .ui-input-clear,
-.ui-input-text .ui-input-clear {
+.ui-input-search .ui-btn.ui-input-clear,
+.ui-input-text .ui-btn.ui-input-clear {
 	position: absolute;
 	right: 0;
 	top: 50%;
-	margin: -13px .3125em 0;
+	margin: -15px .3125em 0;
+	border: 0;
+	background-color: transparent;
 }
 .ui-input-search .ui-input-clear-hidden,
 .ui-input-text .ui-input-clear-hidden {
