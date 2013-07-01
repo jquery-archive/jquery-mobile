@@ -75,10 +75,10 @@ textarea.ui-mini {
 	position: absolute;
 	left: .3125em;
 	top: 50%;
-	margin-top: -9px;
+	margin-top: -11px;
 	content: "";
-	width: 18px;
-	height: 18px;
+	width: 22px;
+	height: 22px;
 	opacity: .5;
 }
 .ui-input-search .ui-input-clear,

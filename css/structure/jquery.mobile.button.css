@@ -18,7 +18,7 @@ button.ui-btn-icon-notext {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
-	width: 1.5em;
+	width: 1.75em;
 }
 /* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
 [class*="ui-grid-"] button.ui-btn {

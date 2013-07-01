@@ -76,12 +76,6 @@ label.ui-btn {
 	-webkit-border-radius: 				1em /*{global-radii-icononly}*/;
 	border-radius: 						1em /*{global-radii-icononly}*/;
 }
-/* Checkbox icon */
-.ui-checkbox .ui-btn.ui-corner-all:after,
-.ui-corner-all .ui-selectmenu-list .ui-btn:after {
-	-webkit-border-radius: .1875em;
-	border-radius: .1875em;
-}
 
 /* Radius clip workaround for cleaning up corner trapping */
 .ui-btn-corner-all,
@@ -117,8 +111,8 @@ label.ui-btn {
 	background-color: 					rgba(0,0,0,.4) /*{global-icon-disc}*/;
 	background-position: center center;
 	background-repeat: no-repeat;
-	-webkit-border-radius: 9px;
-	border-radius: 9px;
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
 }
 
 /* Alt icons */
@@ -147,11 +141,24 @@ label.ui-btn {
 }
 
 /* Checkbox and radio */
+html .ui-btn.ui-icon-checkbox-off:after,
+html .ui-btn.ui-icon-checkbox-on:after,
+html .ui-btn.ui-icon-radio-off:after,
+html .ui-btn.ui-icon-radio-on:after {
+	width: 18px;
+	height: 18px;
+	margin: -9px 2px 0 2px;
+}
 .ui-btn.ui-icon-checkbox-off:after,
 .ui-btn.ui-icon-radio-off:after {
 	background-image: none;
 	filter: Alpha(Opacity=30);
 	opacity: .3;
+}
+.ui-btn.ui-icon-checkbox-off:after,
+.ui-btn.ui-icon-checkbox-on:after {
+	-webkit-border-radius: .1875em;
+	border-radius: .1875em;
 }
 .ui-radio .ui-btn.ui-icon-radio-on:after {
 	background-image: none;
@@ -163,7 +170,7 @@ label.ui-btn {
 }
 .ui-icon-alt.ui-btn.ui-icon-radio-on:after,
 .ui-icon-alt .ui-btn.ui-icon-radio-on:after {
-	background-color: 					#000;
+	background-color: #000;
 }
 
 /* Loader */
