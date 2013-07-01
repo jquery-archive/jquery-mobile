@@ -117,18 +117,14 @@ label.ui-btn {
 
 /* Alt icons */
 .ui-icon-alt.ui-btn:after,
-.ui-icon-alt .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-alt.ui-input-search:after,
-.ui-icon-alt .ui-input-search:after {
+.ui-icon-alt .ui-btn[class*="ui-icon-"]:after {
 	background-color: 					#999 /*{global-icon-color}*/;
 	background-color: 					rgba(255,255,255,.3) /*{global-icon-disc-alt}*/;
 }
 
 /* No disc */
 .ui-icon-nodisc.ui-btn:after,
-.ui-icon-nodisc .ui-btn[class*="ui-icon-"]:after,
-.ui-icon-nodisc.ui-input-search:after,
-.ui-icon-nodisc .ui-input-search:after {
+.ui-icon-nodisc .ui-btn[class*="ui-icon-"]:after {
 	background-color: transparent;
 }
 
