@@ -22,10 +22,11 @@ legend,
 	color: inherit;
 	text-shadow: inherit;
 }
-/* Form labels (overrides font-weight bold in bars) */
+/* Form labels (overrides font-weight bold in bars, and mini font-size) */
 .ui-mobile label,
 div.ui-controlgroup-label {
 	font-weight: normal;
+	font-size: 16px;
 }
 
 /* Field contain separator (< 28em)
