@@ -75,10 +75,12 @@ textarea.ui-mini {
 	position: absolute;
 	left: .3125em;
 	top: 50%;
-	margin-top: -11px;
+	margin-top: -7px;
 	content: "";
-	width: 22px;
-	height: 22px;
+	width: 14px;
+	height: 14px;
+	-webkit-border-radius: 0;
+	border-radius: 0;
 	background-color: transparent;
 	filter: Alpha(Opacity=50);
 	opacity: .5;
