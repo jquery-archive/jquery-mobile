@@ -89,8 +89,7 @@
 .ui-icon-lock:after {
 	background-image: url(images/icons-png/lock-white.png);
 }
-.ui-icon-search:after,
-.ui-input-search:after {
+.ui-icon-search:after {
 	background-image: url(images/icons-png/search-white.png);
 }
 .ui-icon-location:after {
@@ -276,8 +275,7 @@
 }
 .ui-icon-alt.ui-icon-search:after,
 .ui-icon-alt .ui-icon-search:after,
-.ui-icon-alt.ui-input-search:after,
-.ui-icon-alt .ui-input-search:after {
+.ui-input-search:after {
 	background-image: url(images/icons-png/search-black.png);
 }
 .ui-icon-alt.ui-icon-location:after,

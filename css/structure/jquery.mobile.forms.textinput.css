@@ -79,6 +79,8 @@ textarea.ui-mini {
 	content: "";
 	width: 22px;
 	height: 22px;
+	background-color: transparent;
+	filter: Alpha(Opacity=50);
 	opacity: .5;
 }
 .ui-input-search .ui-input-clear,
