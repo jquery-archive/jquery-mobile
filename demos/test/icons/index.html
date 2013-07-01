@@ -60,7 +60,7 @@
 					if ( event.target.name === "theme" ) {
 						var themeClass = $( "#theme-setting input:checked" ).attr( "id" );
 						
-						$( "#icon-page" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( themeClass );
+						$( "#icon-page" ).removeClass( "ui-page-theme-a ui-page-theme-b ui-page-theme-c" ).addClass( themeClass );
 					}
 				});
 			});
@@ -82,6 +82,8 @@
 							<input type="radio" name="theme" id="ui-page-theme-a" checked>
 							<label for="ui-page-theme-b">B</label>
 							<input type="radio" name="theme" id="ui-page-theme-b">
+							<label for="ui-page-theme-c">C</label>
+							<input type="radio" name="theme" id="ui-page-theme-c">
 						</fieldset>
 					</div>
 					<div data-role="fieldcontain">
@@ -102,8 +104,6 @@
 						</fieldset>
 					</div>
 				</form>
-				
-				<hr>
 				
 				<div id="test">
 					<form>
