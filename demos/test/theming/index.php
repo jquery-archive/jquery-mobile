@@ -13,10 +13,28 @@
 			$( "#theme-selector input" ).on( "change", function( event ) {
 				var themeClass = $( "#theme-selector input:checked" ).attr( "id" );
 				
-				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b ui-page-theme-c" ).addClass( themeClass );
+				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b ui-page-theme-c" ).addClass( "ui-page-theme-" + themeClass );
+				$( "#ui-body-test" ).removeClass( "ui-body-a ui-body-b ui-body-c" ).addClass( "ui-body-" + themeClass );
+				$( "#ui-bar-test, #ui-bar-form" ).removeClass( "ui-bar-a ui-bar-b ui-bar-c" ).addClass( "ui-bar-" + themeClass );
+				$( ".ui-collapsible-content" ).removeClass( "ui-body-a ui-body-b ui-body-c" ).addClass( "ui-body-" + themeClass );
+				$( ".theme" ).text( themeClass );
+			});
+			$( "#opt-shadow input" ).on( "change", function( event ) {
+				if ( $( "#on" ).prop( "checked" ) ) {
+					$( "#testpage" ).removeClass( "noshadow" );
+				} else if ( $( "#off" ).prop( "checked" ) ) {
+					$( "#testpage" ).addClass( "noshadow" );
+				}
 			});
 		});
 	</script>
+	<style>
+		.noshadow * {
+			-webkit-box-shadow: none !important;
+			-moz-box-shadow: none !important;
+			box-shadow: none !important;
+		}
+	</style>
 </head>
 <body>
 <div data-role="page" id="testpage">
@@ -29,27 +47,36 @@
 
 	<div data-role="content">
 
-		<form id="theme-selector" class="ui-mini">
-			<div data-role="fieldcontain">
+		<form class="ui-mini">
+			<div data-role="fieldcontain" id="theme-selector">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Theme:</legend>
-					<label for="ui-page-theme-a">A</label>
-					<input type="radio" name="theme" id="ui-page-theme-a" checked>
-					<label for="ui-page-theme-b">B</label>
-					<input type="radio" name="theme" id="ui-page-theme-b">
-					<label for="ui-page-theme-c">C</label>
-					<input type="radio" name="theme" id="ui-page-theme-c">
+					<label for="a">A</label>
+					<input type="radio" name="theme" id="a" checked>
+					<label for="b">B</label>
+					<input type="radio" name="theme" id="b">
+					<label for="c">C</label>
+					<input type="radio" name="theme" id="c">
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain" id="opt-shadow">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Shadow:</legend>
+					<label for="on">On</label>
+					<input type="radio" name="shadow" id="on" checked>
+					<label for="off">Off</label>
+					<input type="radio" name="shadow" id="off">
 				</fieldset>
 			</div>
 		</form>
-
-		<div class="ui-body ui-body-inherit ui-corner-all">
-			<p>I am a div with classes ui-body, ui-body-inherit and ui-corner-all.</p>
+		
+		<div id="ui-body-test" class="ui-body ui-body-a ui-corner-all" style="margin-bottom:1em;">
+			<p>I am a div with classes ui-body, ui-body-<span class="theme">a</span> and ui-corner-all.</p>
 			<p><a href="#">I am a link</a></p>
 		</div>
 		
-		<div class="ui-bar ui-bar-inherit ui-corner-all">
-			<p>I am a div with classes ui-bar, ui-bar-inherit and ui-corner-all. <a href="#">I am a link</a></p>
+		<div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
+			<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 				
 		<a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">We</a>
@@ -148,6 +175,8 @@
 		
 		<a href="#" data-role="button" data-icon="gear" class="ui-btn-active">Active button</a>
 		
+		<p>Form inside static list:</p>
+		
 		<form>
 			<ul data-role="listview" data-inset="true">
 				<li data-role="fieldcontain">
@@ -168,8 +197,8 @@
 			</ul>
 		</form>
 
-		<div class="ui-bar ui-bar-inherit">
-			<p>Bar</p>
+		<div id="ui-bar-form" class="ui-bar ui-bar-a">
+			<p>ui-bar-<span class="theme">a</span></p>
 			<div data-role="fieldcontain">
 				<label for="name4">Text Input:</label>
 				<input type="text" name="name4" id="name4" value="" data-clear-btn="true">
@@ -189,7 +218,7 @@
 
 		<div data-role="collapsible" data-content-theme="a">
 			<h4>Heading</h4>
-			<p>I'm the collapsible content with a themed content block set to "a".</p>
+			<p>I'm the collapsible content with a themed content block set to "<span class="theme">a</span>".</p>
 		</div>
 		
 		<div data-role="collapsible-set" data-content-theme="a">
