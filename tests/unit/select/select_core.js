@@ -229,7 +229,7 @@
 
 		deepEqual( select
 			.siblings( "a" )
-			.css( "background-color" ), "rgb(44, 44, 44)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+			.css( "background-color" ), "rgb(221, 221, 221)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
 	});
 
 	// issue #2547

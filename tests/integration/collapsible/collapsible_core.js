@@ -292,11 +292,11 @@
 				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-b" ), "Heading of second collapsible should have class ui-btn-b" );
 				ok( !collapsibles.eq(1).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-c,.ui-body-d" ), "Content of second collapsible should NOT have class ui-body-[a,c,d]" );
 				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-body-b" );
-				deepEqual( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(44, 44, 44)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+				deepEqual( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(221, 221, 221)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
 				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of third collapsible should NOT have class ui-body-[a,b,c]" );
 				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of third collapsible should have class ui-body-d" );
 				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-collapsible-content-collapsed" ), "Content of third collapsible should NOT have class ui-collapsible-content-collapsed" );
-				deepEqual( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(44, 44, 44)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+				deepEqual( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(221, 221, 221)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
 				ok( !collapsibles.eq(3).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of fourth collapsible should NOT have class ui-body-[a,b,c]" );
 				ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of fourth collapsible should have class ui-body-d" );
 				start();
