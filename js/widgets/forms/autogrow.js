@@ -60,18 +60,14 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_updateHeight:function(){
-			var paddingTop, paddingBottom, paddingHeight,
-				scrollHeight = this.element[ 0 ].scrollHeight,
-				clientHeight = this.element[ 0 ].clientHeight;
-
-
-			if ( clientHeight < scrollHeight ) {
-				paddingTop = parseFloat( this.element.css( "padding-top" ) );
-				paddingBottom = parseFloat( this.element.css( "padding-bottom" ) );
-				paddingHeight = paddingTop + paddingBottom;
-
-				this.element.height( scrollHeight - paddingHeight + 15 );
-			}
+			
+				this.element.css({
+					height: "auto"
+				});
+				this.element.css({
+					height: this.element[0].scrollHeight + 15 + "px"
+				});
+			
 		},
 		_setOptions: function( o ){
 			this._super( o );

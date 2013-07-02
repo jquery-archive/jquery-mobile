@@ -33,10 +33,6 @@ textarea.ui-input-text {
 	height: 3.125em;
 	overflow: auto;
 	resize: vertical;
-	-webkit-transition: height 200ms linear;
-	-moz-transition: height 200ms linear;
-	-o-transition: height 200ms linear;
-	transition: height 200ms linear;
 }
 .ui-mini .ui-input-text input,
 .ui-mini .ui-input-search input,
