@@ -2,6 +2,7 @@ div.ui-slider {
 	height: 30px;
 	margin: .5em 0;
 	padding: 0;
+	-ms-touch-action: pan-y pinch-zoom double-tap-zoom;
 }
 div.ui-slider:before,
 div.ui-slider:after {
