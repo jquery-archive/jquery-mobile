@@ -13,7 +13,7 @@ $.widget( "mobile.button", {
 	options: {
 		theme: null,
 		icon: null,
-		iconpos: null,
+		iconpos: "left",
 		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
 		corners: true,
 		shadow: true,
@@ -66,6 +66,7 @@ $.widget( "mobile.button", {
 		});
 
 		this.refresh( true );
+		this._setOptions( this.options );
 	},
 
 	widget: function() {
@@ -87,52 +88,44 @@ $.widget( "mobile.button", {
 		}
 	},
 
+	_setOptions: function( o ) {
+		if ( o.theme !== undefined ) {
+			this.widget().removeClass( this.options.theme ).addClass( "ui-btn-" + o.theme );
+		}
+		if ( o.corners !== undefined ) {
+			this.widget().toggleClass( "ui-corner-all", o.corners );
+		}
+		if ( o.shadow !== undefined ) {
+			this.widget().toggleClass( "ui-shadow", o.shadow );
+		}
+		if ( o.inline !== undefined ) {
+			this.widget().toggleClass( "ui-btn-inline", o.inline );
+		}
+		if ( o.mini !== undefined ) {
+			this.widget().toggleClass( "ui-mini", o.mini );
+		}
+		if( o.iconpos !== undefined ) {
+			this.widget().removeClass( "ui-btn-icon-" + o.iconpos );
+		}
+		if( o.icon !== undefined ) {
+			if( !this.options.iconpos && !o.iconpos ){
+				this.widget.toggleClass( "ui-btn-icon-left", o.icon );
+			}
+			this.widget().removeClass( "ui-icon-" + this.options.icon ).toggleClass( "ui-icon-" + o.icon, o.icon );
+		}
+	},
+
 	refresh: function( create ) {
 		var o = this.options,
-			$el = this.element,
-			classes = "";
+			$el = this.element;
 
-		if ( o.theme ) {
-			 classes += "ui-btn-" + o.theme;
-		}
-
-		if ( o.corners ) {
-			classes += " ui-corner-all";
-		}
-		if ( o.shadow ) {
-			classes += " ui-shadow";
-		}
-		if ( o.inline ) {
-			classes += " ui-btn-inline";
-		}
-		if ( o.mini ) {
-			classes += " ui-mini";
-		}
-
-		if ( o.icon ) {
-			if ( !o.iconpos ) {
-				o.iconpos = "left";
-			}
-
-			classes += " ui-icon-" + o.icon + " ui-btn-icon-" + o.iconpos;
-
-			if ( o.iconpos === "notext" && !$el.attr( "title" ) ) {
-				$el.attr( "title", ( this.isInput ? $el.val() : $el.getEncodedText() ) );
-			}
-
-			/* TODO: Remove in 1.5. */
-			if ( o.iconshadow ) {
-				classes += " ui-shadow-icon";
-			}
+		if ( o.icon && o.iconpos === "notext" && !$el.attr( "title" ) ) {
+			$el.attr( "title", ( this.isInput ? $el.val() : $el.getEncodedText() ) );
 		}
 
 		if ( !create ) {
 			this.button.removeClass( this.styleClasses );
 		}
-
-		this.styleClasses = classes;
-
-		this.button.addClass( classes );
 
 		/* If the button element doesn't contain text we use the value if provided */
 		if ( !this.isInput && this.button.text() === "" && !!this.button.val() ) {
@@ -142,8 +135,6 @@ $.widget( "mobile.button", {
 		if ( this.isInput && !create ) {
 			$( this.button )[ "text" ]( $el.val() ).append( $el );
 		}
-
-		this._setOption( "disabled", $el.prop( "disabled" ) );
 	}
 });
 
