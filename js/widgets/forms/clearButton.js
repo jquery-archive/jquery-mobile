@@ -27,10 +27,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 			var o = this.options;
 
-			return $( "<a href='#' class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext" +
-					" ui-corner-all ui-shadow " +
-					( o.theme ? "ui-btn-" + o.theme : "" ) +
-					( o.mini ? "ui-mini" : "" ) + "' title='" + o.clearBtnText + "'>" + o.clearBtnText + "</a>" );
+			return $( "<a href='#' class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" +
+    "' title='" + o.clearBtnText + "'>" + o.clearBtnText + "</a>" );
 
 		},
 
