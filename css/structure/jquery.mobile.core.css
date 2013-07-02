@@ -12,6 +12,9 @@
 .ui-mobile fieldset {
 	border-width: 0;
 }
+.ui-mobile fieldset {
+	min-width: 0;
+}
 /* Viewport */
 .ui-mobile-viewport {
 	margin: 0;
