@@ -120,6 +120,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			"tap": function(/* event */) {
 				collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
 			},
+			"vmousecancel": function(/* event */) {
+				collapsibleHeading.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+			},
 
 			"click": function( event ) {
 
