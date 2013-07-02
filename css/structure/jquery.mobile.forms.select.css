@@ -1,5 +1,6 @@
 .ui-select {
-	margin: .5em 0;
+	margin-top: .5em;
+	margin-bottom: .5em; /* no shorthand for margin because it would override margin-right for inline selects */
 	position: relative;
 }
 .ui-select > select {
