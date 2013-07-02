@@ -547,7 +547,7 @@ html body .ui-group-theme-b .ui-li-count,
 html .ui-bar-b .ui-body-inherit,
 html .ui-body-b .ui-body-inherit,
 html body .ui-group-theme-b .ui-body-inherit,
-.ui-overlay-a {
+.ui-overlay-b {
 	background: 			#f5f5f5 /*{b-body-background-color}*/;
 	border-color:	 		#ddd /*{b-body-border}*/;
 	color: 					#333 /*{b-body-color}*/;
@@ -728,7 +728,7 @@ html body .ui-group-theme-c .ui-li-count,
 html .ui-bar-c .ui-body-inherit,
 html .ui-body-c .ui-body-inherit,
 html body .ui-group-theme-c .ui-body-inherit,
-.ui-overlay-b {
+.ui-overlay-c {
 	background: 			#272727 /*{c-body-background-color}*/;
 	border-color:	 		#1c1c1c /*{c-body-border}*/;
 	color: 					#f5f5f5 /*{c-body-color}*/;
