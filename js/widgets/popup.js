@@ -54,6 +54,7 @@ function windowCoords() {
 
 $.widget( "mobile.popup", $.mobile.widget, {
 	options: {
+		class: null,
 		theme: null,
 		overlayTheme: null,
 		shadow: true,
@@ -236,6 +237,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 
 		// Define instance variables
 		$.extend( this, {
+			_containerClasses: "",
 			_scrollTop: 0,
 			_page: thisPage,
 			_ui: ui,
@@ -304,6 +306,13 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	_setOptions: function( o ) {
 		var el = this.element,
 			screen = this._ui.screen;
+
+		if ( o.class !== undefined ) {
+			this._ui.container
+				.removeClass( this._containerClasses )
+				.addClass( o.class );
+			this._containerClasses = o.class;
+		}
 
 		if ( o.theme !== undefined ) {
 			this._applyTheme( el, o.theme, "body" );
