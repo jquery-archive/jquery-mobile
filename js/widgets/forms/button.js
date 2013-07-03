@@ -22,51 +22,39 @@ $.widget( "mobile.button", {
 	},
 
 	_create: function() {
-		var $button,
-			$el = this.element,
-			isInput = $el[ 0 ].tagName === "INPUT",
-			classes = "ui-btn";
-
-		if ( isInput ) {
-			classes += " ui-input-btn";
-
-			// TODO: data-class and data-id options. See https://github.com/jquery/jquery-mobile/issues/3577
-			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-left" ) ) {
-				classes += " ui-btn-left";
-			}
-			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-right" ) ) {
-				classes += " ui-btn-right";
-			}
-
-			this.button = $( "<div></div>" )
-				[ "text" ]( $el.val() )
-				.insertBefore( $el )
-				.addClass( classes )
-				.append( $el );
-
-			$button = this.button;
-
-			this._on( $el, {
-				focus: function() {
-					$button.addClass( $.mobile.focusClass );
-				},
-
-				blur: function() {
-					$button.removeClass( $.mobile.focusClass );
-				}
-			});
-		} else {
-			this.button = $el.addClass( classes );
-		}
+		var isInput = $el[ 0 ].tagName === "INPUT";
 
 		$.extend( this, {
 			isInput: isInput,
-			buttonClasses: classes,
-			styleClasses: ""
+			button: null
 		});
 
 		this.refresh( true );
 		this._setOptions( this.options );
+	},
+
+	_enhance: function() {
+		if ( isInput ) {
+
+			this.element.wrap( this._button () );
+			this.button = this.element.parent();
+
+			this._on( {
+				focus: function() {
+					this.widget().addClass( $.mobile.focusClass );
+				},
+
+				blur: function() {
+					this.widget().removeClass( $.mobile.focusClass );
+				}
+			});
+		} else {
+			this.widget().addClass( classes );
+		}
+	},
+
+	_button: function() {
+		return $("<div class='ui-btn ui-input-btn" + this.options.class + "' id='" + this.options.id + "'>" + this.element.val() + "<div>");
 	},
 
 	widget: function() {
