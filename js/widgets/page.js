@@ -55,7 +55,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_setOptions: function( o ) {
-		
+
 		if( o.theme !== undefined ) {
 			this.element.removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + o.theme );
 		}
