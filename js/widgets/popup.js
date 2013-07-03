@@ -68,6 +68,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		navigateEvents: "navigate.popup",
 		closeEvents: "navigate.popup pagebeforechange.popup",
 		dismissible: true,
+		enhanced: false,
 
 		// NOTE Windows Phone 7 has a scroll position caching issue that
 		//      requires us to disable popup history management by default
@@ -202,13 +203,8 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_create: function() {
-		var ui = {
-				screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
-				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-				container: $( "<div class='ui-popup-container ui-popup-hidden'></div>" )
-			},
-			thisPage = this.element.closest( ".ui-page" ),
-			myId = this.element.attr( "id" ),
+		var e = this.element,
+			myId = e.attr( "id" ),
 			o = this.options;
 
 		// We need to adjust the history option to be false if there's no AJAX nav.
@@ -216,31 +212,12 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		// it is determined whether there shall be AJAX nav.
 		o.history = o.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
 
-		if ( thisPage.length === 0 ) {
-			thisPage = $( "body" );
-		}
-
-		// Apply the proto
-		thisPage.append( ui.screen );
-		ui.container.insertAfter( ui.screen );
-		// Leave a placeholder where the element used to be
-		ui.placeholder.insertAfter( this.element );
-		if ( myId ) {
-			ui.screen.attr( "id", myId + "-screen" );
-			ui.container.attr( "id", myId + "-popup" );
-			ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
-		}
-		this.element
-			.addClass( "ui-popup" )
-			.appendTo( ui.container );
-		ui.focusElement = ui.container;
-
 		// Define instance variables
 		$.extend( this, {
 			_containerClasses: "",
 			_scrollTop: 0,
-			_page: thisPage,
-			_ui: ui,
+			_page: e.closest( ".ui-page" ),
+			_ui: null,
 			_fallbackTransition: "",
 			_currentTransition: false,
 			_prereqs: null,
@@ -251,10 +228,23 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			_orientationchangeInProgress: false
 		});
 
-		this._setOptions( this.options );
+		if ( this._page.length === 0 ) {
+			this._page = $( "body" );
+		}
+
+		if ( o.enhanced ) {
+			this._ui = {
+				container: e.parent(),
+				screen: e.parent().prev(),
+				placeholder: $( document.getElementById( myId + "-placeholder" ) )
+			};
+		} else {
+			this._ui = this._enhance( e, myId );
+			this._setOptions( o );
+		}
 
 		// Event handlers
-		ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
+		this._ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
 		this._on( $.mobile.window, {
 			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 			resize: $.proxy( this, "_handleWindowResize" ),
@@ -263,6 +253,31 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		this._on( $.mobile.document, {
 			focusin: $.proxy( this, "_handleDocumentFocusIn" )
 		});
+	},
+
+	_enhance: function( e, myId ) {
+		var ui = {
+				screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
+				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
+				container: $( "<div class='ui-popup-container ui-popup-hidden'></div>" )
+			};
+
+		// Apply the proto
+		this._page.append( ui.screen );
+		ui.container.insertAfter( ui.screen );
+		// Leave a placeholder where the element used to be
+		ui.placeholder.insertAfter( e );
+		if ( myId ) {
+			ui.screen.attr( "id", myId + "-screen" );
+			ui.container.attr( "id", myId + "-popup" );
+			ui.placeholder
+				.attr( "id", myId + "-placeholder" )
+				.html( "<!-- placeholder for " + myId + " -->" );
+		}
+		e.addClass( "ui-popup" ).appendTo( ui.container );
+		ui.focusElement = ui.container;
+
+		return ui;
 	},
 
 	_applyTheme: function( dst, theme, prefix ) {
