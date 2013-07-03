@@ -762,6 +762,10 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			.on( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
 	},
 
+	widget: function() {
+		return this._ui.container;
+	},
+
 	// TODO no clear deliniation of what should be here and
 	// what should be in _open. Seems to be "visual" vs "history" for now
 	open: function( options ) {
