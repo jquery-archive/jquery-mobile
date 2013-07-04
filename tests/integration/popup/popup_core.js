@@ -14,7 +14,7 @@
 			$.testHelper.detailedEventCascade([
 				function() {
 					deepEqual( $.mobile.getAttribute( link, "aria-haspopup" ), true, popupId + ": 'aria-haspopup' attribute is set to true on link that opens the popup" );
-					deepEqual( $.mobile.getAttribute( link, "aria-owns" ), popupId, popupId + ": 'aria-owns' attribute is set to the ID of the owned popup ('#test-popup')" );
+					deepEqual( $.mobile.getAttribute( link, "aria-owns" ), popupId, popupId + ": 'aria-owns' attribute is set to the ID of the owned popup ('test-popup')" );
 					deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), false, popupId + ": 'aria-expanded' attribute is set to false when the popup is not open" );
 					$popup.popup( "open" );
 				},
@@ -108,6 +108,10 @@
 
 	asyncTest( "Popup opens and closes", function() {
 		opensAndCloses( ".opensandcloses", "test-popup", "a#open-test-popup", "#test-popup p" );
+	});
+
+	asyncTest( "Already-enhanced popup opens and closes", function() {
+		opensAndCloses( ".alreadyenhancedopensandcloses", "already-enhanced", "a#open-already-enhanced", "#already-enhanced p" );
 	});
 
 	asyncTest( "Link that launches popup is deactivated", function() {
