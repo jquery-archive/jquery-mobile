@@ -274,6 +274,12 @@
 					</div>
 				</div><!--/demo-html -->
 
+			<h2>Pre-enhanced markup</h2>
+			<p>You can supply pre-enhanced popup markup to save startup time. The example below illustrates the minimum required markup.</p>
+			<div data-demo-html="#pre-enhanced-page">
+				<a href="#pre-enhanced-page" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">Go to demo</a>
+			</div>
+
 			<h2>Advanced techniques</h2>
 			<p>Learn how to customize and extend popups by working with the API, custom scripts, and styles.</p>
 			<a href="popup-images.php" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Scaling images</a>
@@ -289,5 +295,20 @@
 	<?php include( '../../global-nav.php' ); ?>
 
 	</div><!-- /page -->
+	<div id="pre-enhanced-page">
+		<div data-role="header" data-add-back-btn="true">
+			<h1>Pre-enhanced popup demo</h1>
+		</div>
+		<div data-role="content">
+			<a href="#pre-enhanced" data-rel="popup" data-role="button" data-inline="true" aria-owns="pre-enhanced" aria-haspopup="true" aria-expanded="false">Open Popup</a>
+			<div style="display: none;"><!-- placeholder for pre-enhanced --></div>
+		</div>
+		<div id="pre-enhanced-screen" class="ui-popup-screen ui-screen-hidden"></div>
+		<div id="pre-enhanced-popup" class="ui-popup-container fade ui-popup-hidden ui-body-inherit ui-overlay-shadow ui-corner-all">
+			<div id="pre-enhanced" class="ui-popup" data-role="popup" data-transition="fade">
+				<p>This is the contents of the pre-enhanced popup</p>
+			</div>
+		</div>
+	</div>
 	</body>
 	</html>
