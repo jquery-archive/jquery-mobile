@@ -18,10 +18,11 @@ $( document ).bind( "pagecreate create", function( e ) {
 		.each( function() {
 			// Accessibility info for popups
 			var e = this,
-				href = $( this ).attr( "href" );
+				href = $( this ).attr( "href" ),
+				idref = href.substring( 1 );
 
 			e.setAttribute( "aria-haspopup", true );
-			e.setAttribute( "aria-owns", href );
+			e.setAttribute( "aria-owns", idref );
 			e.setAttribute( "aria-expanded", false );
 			$( document )
 				.on( "popupafteropen", href, function() {
