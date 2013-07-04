@@ -40,11 +40,6 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		arrowSides: "t,b,l,r"
 	},
 
-	_create: function() {
-		this._super();
-		this._setArrow( this.options.arrow );
-	},
-
 	_unenhance: function() {
 		var ar = this._ui.arrow;
 
@@ -142,9 +137,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	},
 
 	_placementCoords: function( desired ) {
-		var state, best, params, bgOffset, elOffset, diff,
-			bgRef = {},
-			ar = this._ui.arrow;
+		var state, best, params, bgOffset, elOffset, diff, bgRef, ar;
 
 		if ( !this.options.arrow ) {
 			return this._super( desired );
@@ -152,8 +145,9 @@ $.widget( "mobile.popup", $.mobile.popup, {
 
 		ar.arEls.show();
 
+		bgRef = {};
+		ar = this._ui.arrow;
 		state = this._getPlacementState( true );
-
 		params = {
 			"l": { fst: "x", snd: "y", prop: "top", dimKey: "cy", oDimKey: "cx", offsetFactor: 1, tipOffset:  -state.arHalf.cx, arrowOffsetFactor: 0 },
 			"r": { fst: "x", snd: "y", prop: "top", dimKey: "cy", oDimKey: "cx", offsetFactor: -1, tipOffset: state.arHalf.cx + state.contentBox.cx, arrowOffsetFactor: 1 },
@@ -199,17 +193,23 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		return best.result;
 	},
 
-	_setArrow: function( value ) {
-		var ar = this._ui.arrow;
+	_setOptions: function( o ) {
+		var ar;
 
-		if ( value ) {
-			if ( !ar ) {
-				ar = this._ui.arrow = getArrow();
+		if ( o.arrow !== undefined ) {
+			ar = this._ui.arrow;
+
+			if ( o.arrow ) {
+				if ( !ar ) {
+					ar = this._ui.arrow = getArrow();
+				}
+				ar.arEls.appendTo( this.element ).hide();
+			} else if ( ar ) {
+				ar.arEls.remove();
 			}
-			ar.arEls.appendTo( this.element ).hide();
-		} else if ( ar ) {
-			ar.arEls.remove();
 		}
+
+		return this._super( o );
 	}
 });
 
