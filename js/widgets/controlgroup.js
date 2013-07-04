@@ -12,7 +12,7 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.controlgroup", $.mobile.widget, $.extend( {
+$.widget( "mobile.controlgroup", $.extend( {
 	options: {
 		theme: null,
 		shadow: false,

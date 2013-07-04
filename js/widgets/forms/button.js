@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.registry"
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.button", $.mobile.widget, {
+$.widget( "mobile.button", {
 	options: {
 		theme: null,
 		icon: null,

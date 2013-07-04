@@ -8,7 +8,7 @@ define( [ "jquery", "./jquery.mobile.ns", "jquery.ui.widget" ], function( jQuery
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.widget", {
+$.extend( $.Widget.prototype, {
 	_getCreateOptions: function() {
 
 		var elem = this.element,
@@ -57,7 +57,7 @@ $.widget( "mobile.widget", {
 		throw "Widget [" + this.widgetName + "]: " + msg;
 	}
 });
-
+$.mobile.widget = $.Widget;
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

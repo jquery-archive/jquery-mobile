@@ -17,7 +17,7 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
+$.widget( "mobile.checkboxradio", $.extend( {
 	options: {
 		theme: null,
 		mini: false

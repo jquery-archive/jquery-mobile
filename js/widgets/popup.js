@@ -52,7 +52,7 @@ function windowCoords() {
 	};
 }
 
-$.widget( "mobile.popup", $.mobile.widget, {
+$.widget( "mobile.popup", {
 	options: {
 		theme: null,
 		overlayTheme: null,

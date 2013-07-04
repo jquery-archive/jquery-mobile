@@ -7,7 +7,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.page", $.mobile.widget, {
+$.widget( "mobile.page", {
 	options: {
 		theme: "a",
 		domCache: false,
@@ -55,7 +55,6 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_setOptions: function( o ) {
-		
 		if( o.theme !== undefined ) {
 			this.element.removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + o.theme );
 		}
