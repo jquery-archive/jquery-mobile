@@ -4,7 +4,10 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "jquery.mobile.core", "jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery",
+	"jquery.mobile.core",
+	"navigation/path",
+	"jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -19,16 +22,17 @@ $.mobile._enhancer.add( "mobile.links", undefined, function( target ) {
 			// Accessibility info for popups
 			var e = this,
 				href = $( this ).attr( "href" ),
+				sel = $.mobile.path.hashToSelector( href ),
 				idref = href.substring( 1 );
 
 			e.setAttribute( "aria-haspopup", true );
 			e.setAttribute( "aria-owns", idref );
 			e.setAttribute( "aria-expanded", false );
 			$( document )
-				.on( "popupafteropen", href, function() {
+				.on( "popupafteropen", sel, function() {
 					e.setAttribute( "aria-expanded", true );
 				})
-				.on( "popupafterclose", href, function() {
+				.on( "popupafterclose", sel, function() {
 					e.setAttribute( "aria-expanded", false );
 				});
 		})
