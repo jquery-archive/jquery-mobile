@@ -51,10 +51,6 @@ $.extend( $.Widget.prototype, {
 		}
 
 		$widgetElements[ this.widgetName ]();
-	},
-
-	raise: function( msg ) {
-		throw "Widget [" + this.widgetName + "]: " + msg;
 	}
 });
 $.mobile.widget = $.Widget;
