@@ -120,7 +120,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		}
 
 		this._resizeData = {
-			timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 200 ),
+			timeoutId: this._delay( "_resizeTimeout", 200 ),
 			winCoords: winCoords
 		};
 
@@ -147,13 +147,15 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		}
 	},
 
-	_ignoreResizeEvents: function() {
-		var self = this;
+	_stopIgnoringResizeEvents: function() {
+		this._ignoreResizeTo = 0;
+	},
 
+	_ignoreResizeEvents: function() {
 		if ( this._ignoreResizeTo ) {
 			clearTimeout( this._ignoreResizeTo );
 		}
-		this._ignoreResizeTo = setTimeout( function() { self._ignoreResizeTo = 0; }, 1000 );
+		this._ignoreResizeTo = this._delay( "_stopIgnoringResizeEvents", 1000 );
 	},
 
 	_handleWindowResize: function(/* evt */) {
