@@ -274,10 +274,10 @@
 					</div>
 				</div><!--/demo-html -->
 
-			<h2>Pre-enhanced markup</h2>
-			<p>You can supply pre-enhanced popup markup to save startup time. The example below illustrates the minimum required markup.</p>
-			<div data-demo-html="#pre-enhanced-page">
-				<a href="#pre-enhanced-page" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">Go to demo</a>
+			<h2>Pre-rendered markup</h2>
+			<p>You can supply pre-rendered popup markup to save startup time. The page in the example below contains a popup with pre-rendered markup supplied as part of the original page markup.</p>
+			<div data-demo-html="#pre-rendered-page">
+				<a href="#pre-rendered-page" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">Go to demo</a>
 			</div>
 
 			<h2>Advanced techniques</h2>
@@ -295,18 +295,18 @@
 	<?php include( '../../global-nav.php' ); ?>
 
 	</div><!-- /page -->
-	<div id="pre-enhanced-page">
+	<div id="pre-rendered-page">
 		<div data-role="header" data-add-back-btn="true">
 			<h1>Pre-enhanced popup demo</h1>
 		</div>
 		<div data-role="content">
-			<a href="#pre-enhanced" data-rel="popup" data-role="button" data-inline="true" aria-owns="pre-enhanced" aria-haspopup="true" aria-expanded="false">Open Popup</a>
-			<div style="display: none;"><!-- placeholder for pre-enhanced --></div>
+			<a href="#pre-rendered" data-rel="popup" data-role="button" data-inline="true" aria-owns="pre-rendered" aria-haspopup="true" aria-expanded="false">Open Popup</a>
+			<div style="display: none;"><!-- placeholder for pre-rendered --></div>
 		</div>
-		<div id="pre-enhanced-screen" class="ui-popup-screen ui-screen-hidden"></div>
-		<div id="pre-enhanced-popup" class="ui-popup-container fade ui-popup-hidden ui-body-inherit ui-overlay-shadow ui-corner-all">
-			<div id="pre-enhanced" class="ui-popup" data-role="popup" data-transition="fade">
-				<p>This is the contents of the pre-enhanced popup</p>
+		<div id="pre-rendered-screen" class="ui-popup-screen ui-screen-hidden"></div>
+		<div id="pre-rendered-popup" class="ui-popup-container fade ui-popup-hidden ui-body-inherit ui-overlay-shadow ui-corner-all">
+			<div id="pre-rendered" class="ui-popup" data-role="popup" data-transition="fade">
+				<p>This is the contents of the pre-rendered popup</p>
 			</div>
 		</div>
 	</div>
