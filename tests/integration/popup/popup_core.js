@@ -64,7 +64,7 @@
 		$.testHelper.detailedEventCascade([
 			function() {
 				deepEqual( $.mobile.getAttribute( link, "aria-haspopup" ), true, "'aria-haspopup' attribute is set to true on link that opens the popup" );
-				deepEqual( $.mobile.getAttribute( link, "aria-owns" ), "#test-popup", "'aria-owns' attribute is set to the ID of the owned popup ('#test-popup')" );
+				deepEqual( $.mobile.getAttribute( link, "aria-owns" ), "test-popup", "'aria-owns' attribute is set to the ID of the owned popup ('test-popup')" );
 				deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), false, "'aria-expanded' attribute is set to false when the popup is not open" );
 				$popup.popup( "open" );
 			},
