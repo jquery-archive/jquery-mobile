@@ -297,7 +297,7 @@
 	</div><!-- /page -->
 	<div id="pre-rendered-page" data-role="page">
 		<div data-role="header" data-add-back-btn="true">
-			<h1>Pre-enhanced popup demo</h1>
+			<h1>Pre-rendered popup demo</h1>
 		</div>
 		<div data-role="content">
 			<a href="#pre-rendered" data-rel="popup" data-role="button" data-inline="true" aria-owns="pre-rendered" aria-haspopup="true" aria-expanded="false">Open Popup</a>
