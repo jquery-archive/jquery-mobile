@@ -53,6 +53,7 @@ $.extend( $.Widget.prototype, {
 		$widgetElements[ this.widgetName ]();
 	}
 });
+//TODO: Remove in 1.5 for backcompat only
 $.mobile.widget = $.Widget;
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
