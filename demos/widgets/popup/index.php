@@ -295,7 +295,7 @@
 	<?php include( '../../global-nav.php' ); ?>
 
 	</div><!-- /page -->
-	<div id="pre-rendered-page">
+	<div id="pre-rendered-page" data-role="page">
 		<div data-role="header" data-add-back-btn="true">
 			<h1>Pre-enhanced popup demo</h1>
 		</div>
