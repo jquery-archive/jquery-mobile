@@ -78,9 +78,9 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		history: !$.mobile.browser.oldIE
 	},
 
-	_eatEventAndClose: function( e ) {
-		e.preventDefault();
-		e.stopImmediatePropagation();
+	_eatEventAndClose: function( evt ) {
+		evt.preventDefault();
+		evt.stopImmediatePropagation();
 		if ( this.options.dismissible ) {
 			this.close();
 		}
@@ -97,9 +97,9 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		}
 	},
 
-	_handleWindowKeyUp: function( e ) {
-		if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-			return this._eatEventAndClose( e );
+	_handleWindowKeyUp: function( evt ) {
+		if ( this._isOpen && evt.keyCode === $.mobile.keyCode.ESCAPE ) {
+			return this._eatEventAndClose( evt );
 		}
 	},
 
@@ -156,7 +156,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		this._ignoreResizeTo = setTimeout( function() { self._ignoreResizeTo = 0; }, 1000 );
 	},
 
-	_handleWindowResize: function(/* e */) {
+	_handleWindowResize: function(/* evt */) {
 		if ( this._isOpen && this._ignoreResizeTo === 0 ) {
 			if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
 				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
@@ -168,7 +168,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		}
 	},
 
-	_handleWindowOrientationchange: function(/* e */) {
+	_handleWindowOrientationchange: function(/* evt */) {
 		if ( !this._orientationchangeInProgress && this._isOpen && this._ignoreResizeTo === 0 ) {
 			this._expectResizeEvent();
 			this._orientationchangeInProgress = true;
@@ -177,22 +177,22 @@ $.widget( "mobile.popup", $.mobile.widget, {
 
 	// When the popup is open, attempting to focus on an element that is not a
 	// child of the popup will redirect focus to the popup
-	_handleDocumentFocusIn: function( e ) {
-		var tgt = e.target, $tgt, ui = this._ui;
+	_handleDocumentFocusIn: function( evt ) {
+		var tgt = evt.target, $tgt, ui = this._ui;
 
 		if ( !this._isOpen ) {
 			return;
 		}
 
 		if ( tgt !== ui.container[ 0 ] ) {
-			$tgt = $( e.target );
+			$tgt = $( evt.target );
 			if ( 0 === $tgt.parents().filter( ui.container[ 0 ] ).length ) {
-				$( document.activeElement ).one( "focus", function(/* e */) {
+				$( document.activeElement ).one( "focus", function(/* evt */) {
 					$tgt.blur();
 				});
 				ui.focusElement.focus();
-				e.preventDefault();
-				e.stopImmediatePropagation();
+				evt.preventDefault();
+				evt.stopImmediatePropagation();
 				return false;
 			} else if ( ui.focusElement[ 0 ] === ui.container[ 0 ] ) {
 				ui.focusElement = $tgt;
@@ -203,8 +203,8 @@ $.widget( "mobile.popup", $.mobile.widget, {
 	},
 
 	_create: function() {
-		var e = this.element,
-			myId = e.attr( "id" ),
+		var elem = this.element,
+			myId = elem.attr( "id" ),
 			o = this.options;
 
 		// We need to adjust the history option to be false if there's no AJAX nav.
@@ -216,7 +216,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		$.extend( this, {
 			_containerClasses: "",
 			_scrollTop: 0,
-			_page: e.closest( ".ui-page" ),
+			_page: elem.closest( ".ui-page" ),
 			_ui: null,
 			_fallbackTransition: "",
 			_currentTransition: false,
@@ -229,44 +229,42 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		});
 
 		if ( this._page.length === 0 ) {
-			this._page = $( "body" );
+			this._page = this.body;
 		}
 
 		if ( o.enhanced ) {
 			this._ui = {
-				container: e.parent(),
-				screen: e.parent().prev(),
-				placeholder: $( document.getElementById( myId + "-placeholder" ) )
+				container: elem.parent(),
+				screen: elem.parent().prev(),
+				placeholder: $( this.document[ 0 ].getElementById( myId + "-placeholder" ) )
 			};
 		} else {
-			this._ui = this._enhance( e, myId );
+			this._ui = this._enhance( elem, myId );
 			this._setOptions( o );
 		}
+		this._ui.focusElement = this._ui.container;
 
 		// Event handlers
-		this._ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
+		this._on( this._ui.screen, { "vclick": "_eatEventAndClose" } );
 		this._on( $.mobile.window, {
 			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 			resize: $.proxy( this, "_handleWindowResize" ),
 			keyup: $.proxy( this, "_handleWindowKeyUp" )
 		});
-		this._on( $.mobile.document, {
-			focusin: $.proxy( this, "_handleDocumentFocusIn" )
-		});
+		this._on( $.mobile.document, { "focusin": "_handleDocumentFocusIn" } );
 	},
 
-	_enhance: function( e, myId ) {
+	_enhance: function( elem, myId ) {
 		var ui = {
 				screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 				container: $( "<div class='ui-popup-container ui-popup-hidden'></div>" )
-			};
+			},
+			frag = this.document[ 0 ].createDocumentFragment();
 
-		// Apply the proto
-		this._page.append( ui.screen );
-		ui.container.insertAfter( ui.screen );
-		// Leave a placeholder where the element used to be
-		ui.placeholder.insertAfter( e );
+		frag.appendChild( ui.screen[ 0 ] );
+		frag.appendChild( ui.container[ 0 ] );
+
 		if ( myId ) {
 			ui.screen.attr( "id", myId + "-screen" );
 			ui.container.attr( "id", myId + "-popup" );
@@ -274,8 +272,12 @@ $.widget( "mobile.popup", $.mobile.widget, {
 				.attr( "id", myId + "-placeholder" )
 				.html( "<!-- placeholder for " + myId + " -->" );
 		}
-		e.addClass( "ui-popup" ).appendTo( ui.container );
-		ui.focusElement = ui.container;
+
+		// Apply the proto
+		this._page[ 0 ].appendChild( frag );
+		// Leave a placeholder where the element used to be
+		ui.placeholder.insertAfter( elem );
+		elem.addClass( "ui-popup" ).appendTo( ui.container );
 
 		return ui;
 	},
@@ -551,7 +553,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			} else {
 				try {
 					dst = $( pTo );
-				} catch( e ) {
+				} catch( err ) {
 					dst = null;
 				}
 				if ( dst ) {
@@ -741,17 +743,17 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		}
 	},
 
-	_closePopup: function( e, data ) {
+	_closePopup: function( evt, data ) {
 		var parsedDst, toUrl, o = this.options, immediate = false;
 
-		if ( e && e.isDefaultPrevented() ) {
+		if ( evt && evt.isDefaultPrevented() ) {
 			return;
 		}
 
 		// restore location on screen
 		window.scrollTo( 0, this._scrollTop );
 
-		if ( e && e.type === "pagebeforechange" && data ) {
+		if ( evt && evt.type === "pagebeforechange" && data ) {
 			// Determine whether we need to rapid-close the popup, or whether we can
 			// take the time to run the closing transition
 			if ( typeof data.toPage === "string" ) {
@@ -766,7 +768,7 @@ $.widget( "mobile.popup", $.mobile.widget, {
 				// Going to a different page - close immediately
 				immediate = true;
 			} else {
-				e.preventDefault();
+				evt.preventDefault();
 			}
 		}
 
@@ -814,9 +816,9 @@ $.widget( "mobile.popup", $.mobile.widget, {
 			// back link clicks so we can close the popup instead of
 			// relying on history to do it for us
 			self.element
-				.delegate( opts.closeLinkSelector, opts.closeLinkEvents, function( e ) {
+				.delegate( opts.closeLinkSelector, opts.closeLinkEvents, function( evt ) {
 					self.close();
-					e.preventDefault();
+					evt.preventDefault();
 				});
 
 			return;
@@ -850,8 +852,8 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		}
 
 		// swallow the the initial navigation event, and bind for the next
-		$.mobile.window.one( "beforenavigate", function( e ) {
-			e.preventDefault();
+		$.mobile.window.one( "beforenavigate", function( evt ) {
+			evt.preventDefault();
 			self._open( options );
 			self._bindContainerClose();
 		});
@@ -906,10 +908,10 @@ $.mobile.popup.handleLink = function( $link ) {
 };
 
 // TODO move inside _create
-$.mobile.document.bind( "pagebeforechange", function( e, data ) {
+$.mobile.document.bind( "pagebeforechange", function( evt, data ) {
 	if ( data.options.role === "popup" ) {
 		$.mobile.popup.handleLink( data.options.link );
-		e.preventDefault();
+		evt.preventDefault();
 	}
 });
 
