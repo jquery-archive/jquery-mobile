@@ -2,7 +2,16 @@
  * mobile widget unit tests
  */
 (function($){
-	module('jquery.mobile.widget.js');
+	var options = $.Widget.prototype.options,
+		element = $.Widget.prototype.element;
+
+	module('jquery.mobile.widget.js', {
+		teardown: function(){
+			$.Widget.prototype.options = options;
+			$.Widget.prototype.element = element;
+		}
+	});
+	
 
 	test( "getting data from creation options", function(){
 		var expected = "bizzle";
