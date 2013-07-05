@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.navig
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-$.widget( "mobile.dialog", $.mobile.widget, $.extend( {
+$.widget( "mobile.dialog", $.extend( {
 	options: {
 		closeBtn: "left", /* Accepts left, right and none */
 		closeBtnText: "Close",

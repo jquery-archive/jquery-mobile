@@ -15,7 +15,7 @@ define( [
 
 var getAttr = $.mobile.getAttribute;
 
-$.widget( "mobile.collapsible", $.mobile.widget, {
+$.widget( "mobile.collapsible", {
 	options: {
 		expandCueText: " click to expand contents",
 		collapseCueText: " click to collapse contents",

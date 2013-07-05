@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastC
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
+$.widget( "mobile.collapsibleset", $.extend( {
 	_create: function() {
 		var $el = this.element,
 			o = this.options,

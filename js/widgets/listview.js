@@ -11,7 +11,7 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "./addFirstLastClasses"
 
 var getAttr = $.mobile.getAttribute;
 
-$.widget( "mobile.listview", $.mobile.widget, $.extend( {
+$.widget( "mobile.listview", $.extend( {
 
 	options: {
 		theme: null,

@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.regis
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.panel", $.mobile.widget, {
+$.widget( "mobile.panel", {
 	options: {
 		classes: {
 			panel: "ui-panel",
