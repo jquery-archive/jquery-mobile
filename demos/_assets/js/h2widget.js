@@ -101,7 +101,7 @@
 	});
 	//h2 widget
 	$( document ).on( "mobileinit", function(){
-		$.widget( "mobile.h2linker", $.mobile.widget, {
+		$.widget( "mobile.h2linker", {
 			options:{
 				initSelector: ":jqmData(quicklinks='true')"
 			},

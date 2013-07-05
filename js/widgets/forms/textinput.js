@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.textinput", $.mobile.widget, {
+$.widget( "mobile.textinput", {
 	options: {
 		theme: null,
 		corners: true,

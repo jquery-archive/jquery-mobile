@@ -14,7 +14,7 @@ define( [ "jquery",
 	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-	$.widget( "mobile.rangeslider", $.mobile.widget, $.extend( {
+	$.widget( "mobile.rangeslider", $.extend( {
 
 		options: {
 			theme: null,

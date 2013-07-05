@@ -2,30 +2,39 @@
  * mobile widget unit tests
  */
 (function($){
-	module('jquery.mobile.widget.js');
+	var options = $.Widget.prototype.options,
+		element = $.Widget.prototype.element;
+
+	module('jquery.mobile.widget.js', {
+		teardown: function(){
+			$.Widget.prototype.options = options;
+			$.Widget.prototype.element = element;
+		}
+	});
+	
 
 	test( "getting data from creation options", function(){
 		var expected = "bizzle";
 
-		$.mobile.widget.prototype.options = { "fooBar" : true };
-		$.mobile.widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
-		deepEqual($.mobile.widget.prototype._getCreateOptions()["fooBar"], expected);
+		$.Widget.prototype.options = { "fooBar" : true };
+		$.Widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
+		deepEqual($.Widget.prototype._getCreateOptions()["fooBar"], expected);
 	});
 
 	test( "getting no data when the options are empty", function(){
 				var expected = {};
 
-		$.mobile.widget.prototype.options = {};
-		$.mobile.widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
-		deepEqual($.mobile.widget.prototype._getCreateOptions(), expected);
+		$.Widget.prototype.options = {};
+		$.Widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
+		deepEqual($.Widget.prototype._getCreateOptions(), expected);
 	});
 
 	test( "getting no data when the element has none", function(){
 		var expected = {};
 
-		$.mobile.widget.prototype.options = { "fooBar" : true };
-		$.mobile.widget.prototype.element = $("<div>");
-		deepEqual($.mobile.widget.prototype._getCreateOptions(), expected);
+		$.Widget.prototype.options = { "fooBar" : true };
+		$.Widget.prototype.element = $("<div>");
+		deepEqual($.Widget.prototype._getCreateOptions(), expected);
 	});
 
 	test( "elements embedded in sub page elements are excluded on create when they match the keep native selector", function() {

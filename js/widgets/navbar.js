@@ -10,7 +10,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid", "../jque
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.navbar", $.mobile.widget, {
+$.widget( "mobile.navbar", {
 	options: {
 		iconpos: "top",
 		grid: null

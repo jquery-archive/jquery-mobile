@@ -10,7 +10,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 (function( $, undefined ) {
 
 
-	$.widget( "mobile.toolbar", $.mobile.widget, {
+	$.widget( "mobile.toolbar", {
 		options: {
 			theme: null,
 			addBackBtn: false,

@@ -14,7 +14,7 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.slider", $.mobile.widget, $.extend( {
+$.widget( "mobile.slider", $.extend( {
 	widgetEventPrefix: "slide",
 
 	options: {
