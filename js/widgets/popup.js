@@ -54,7 +54,7 @@ function windowCoords() {
 
 $.widget( "mobile.popup", $.mobile.widget, {
 	options: {
-		class: null,
+		wrapperClass: null,
 		theme: null,
 		overlayTheme: null,
 		shadow: true,
@@ -324,11 +324,11 @@ $.widget( "mobile.popup", $.mobile.widget, {
 		var el = this.element,
 			screen = this._ui.screen;
 
-		if ( o.class !== undefined ) {
+		if ( o.wrapperClass !== undefined ) {
 			this._ui.container
 				.removeClass( this._containerClasses )
-				.addClass( o.class );
-			this._containerClasses = o.class;
+				.addClass( o.wrapperClass );
+			this._containerClasses = o.wrapperClass;
 		}
 
 		if ( o.theme !== undefined ) {
