@@ -69,19 +69,22 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				});
 			
 		},
-		_setOptions: function( o ){
-			this._super( o );
+
+		_setOptions: function( options ){
+
+			this._super( options );
 			
-			if( o.autogrow !== undefined && this.isTextarea ){
-				if( !!o.autogrow ){
+			if( options.autogrow !== undefined && this.isTextarea ){
+				if( options.autogrow ){
 					this._autogrow();
 				} else {
 					this._unbindAutogrow();
 				}
 			}
 		}
+
 	});
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");		
+//>>excludeEnd("jqmBuildExclude");

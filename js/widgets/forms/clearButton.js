@@ -25,10 +25,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		clearButton: function(){
 
-			var o = this.options;
-
 			return $( "<a href='#' class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" +
-    "' title='" + o.clearBtnText + "'>" + o.clearBtnText + "</a>" );
+    "' title='" + this.options.clearBtnText + "'>" + this.options.clearBtnText + "</a>" );
 
 		},
 
@@ -91,19 +89,19 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this._off( this.element, "keyup, change, input, focus, blur, cut, paste" );
 		},
 
-		_setOptions:function( o ) {
-			this._super( o );
+		_setOptions:function( options ) {
+			this._super( options );
 
-			if( o.clearbtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ) {
-				if( !!o.clearBtn ){
+			if( options.clearbtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ) {
+				if( options.clearBtn ){
 					this._addClearBtn();
 				} else {
 					this._destroyClear();
 				}
 			}
 
-			if( o.clearBtnText !== undefined && this._clearBtn !== undefined ) {
-				this._clearBtn.text( o.clearBtnText );
+			if( options.clearBtnText !== undefined && this._clearBtn !== undefined ) {
+				this._clearBtn.text( options.clearBtnText );
 			}
 		},
 
