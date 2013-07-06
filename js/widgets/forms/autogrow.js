@@ -63,8 +63,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			
 				this.element.css({
 					height: "auto"
-				});
-				this.element.css({
+				}).css({
 					height: this.element[0].scrollHeight + 15 + "px"
 				});
 			
