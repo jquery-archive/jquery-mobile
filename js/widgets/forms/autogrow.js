@@ -52,11 +52,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		keyupTimeout:null,
 
 		_timeout: function(){
-			var self = this;
 			clearTimeout( this.keyupTimeout );
-			this.keyupTimeout = setTimeout( function() {
-				self._updateHeight.apply( self );
-			}, self.options.keyupTimeoutBuffer );
+			this.keyupTimeout = this._delay( "_updateHeight", this.options.keyupTimeoutBuffer );
 		},
 
 		_updateHeight:function(){
