@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-	$.widget( "mobile.textinput", $.mobile.textinput, {
+	$.widget( "mobile.textinput", {
 		options: {
 			clearBtn: false,
 			clearBtnText: "clear text"
