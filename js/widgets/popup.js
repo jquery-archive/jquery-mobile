@@ -366,6 +366,18 @@ $.widget( "mobile.popup", {
 		this._super( opts );
 	},
 
+	// FIXME: Move this into _setOptions as soon as we're using a version of the
+	// factory that includes https://github.com/jquery/jquery-ui/pull/1024 ...
+	_setOption: function( key, value ) {
+		if ( key === "disabled" ) {
+			if ( value ) {
+				this.close();
+			}
+		}
+
+		return this._super( key, value );
+	},
+
 	_setTolerance: function( value ) {
 		var tol = { t: 30, r: 15, b: 30, l: 15 },
 			ar;
@@ -800,7 +812,7 @@ $.widget( "mobile.popup", {
 		var self = this, opts = this.options, url, hashkey, activePage, currentIsDialog, hasHash, urlHistory;
 
 		// make sure open is idempotent
-		if( $.mobile.popup.active ) {
+		if( $.mobile.popup.active || opts.disabled ) {
 			return;
 		}
 
