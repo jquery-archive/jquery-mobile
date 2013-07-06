@@ -540,4 +540,45 @@
 			}
 		]);
 	});
+
+	asyncTest( "A popup is closed when it becomes disabled, and cannot be opened while it is disabled", function() {
+		var $popup = $( "#disabled-popup" ),
+			$link = $( "a#open-disabled-popup" ),
+			eventNs = ".apopupisclosedwhendisabled";
+
+		expect( 3 );
+
+		$.testHelper.detailedEventCascade( [
+			function() {
+				$link.click();
+			},
+
+			{
+				popupafteropen: { src: $popup, event: "popupafteropen" + eventNs + "1" }
+			},
+
+			function( result ) {
+				deepEqual( result.popupafteropen.timedOut, false, "Received 'popupafteropen' event" );
+				$popup.popup( "disable" );
+			},
+
+			{
+				popupafterclose: { src: $popup, event: "popupafterclose" + eventNs + "2" }
+			},
+
+			function( result ) {
+				deepEqual( result.popupafterclose.timedOut, false, "Received 'popupafterclose' event after calling disable()" );
+				$link.click();
+			},
+
+			{
+				popupafteropen: { src: $popup, event: "popupafteropen" + eventNs + "3" }
+			},
+
+			function( result ) {
+				deepEqual( result.popupafteropen.timedOut, true, "Did not receive 'popupafteropen' when opening a disabled popup" );
+				start();
+			}
+		]);
+	});
 })( jQuery );
