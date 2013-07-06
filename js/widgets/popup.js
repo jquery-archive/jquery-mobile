@@ -363,7 +363,7 @@ $.widget( "mobile.popup", {
 			this._setTolerance( opts.tolerance );
 		}
 
-		this._super( opts );
+		return this._super( opts );
 	},
 
 	// FIXME: Move this into _setOptions as soon as we're using a version of the
@@ -755,6 +755,8 @@ $.widget( "mobile.popup", {
 		} else {
 			this._unenhance();
 		}
+
+		return this;
 	},
 
 	_closePopup: function( evt, data ) {
@@ -813,7 +815,7 @@ $.widget( "mobile.popup", {
 
 		// make sure open is idempotent
 		if( $.mobile.popup.active || opts.disabled ) {
-			return;
+			return this;
 		}
 
 		// set the global popup mutex
@@ -835,7 +837,7 @@ $.widget( "mobile.popup", {
 					evt.preventDefault();
 				});
 
-			return;
+			return this;
 		}
 
 		// cache some values for min/readability
@@ -849,7 +851,7 @@ $.widget( "mobile.popup", {
 		if ( hasHash ) {
 			self._open( options );
 			self._bindContainerClose();
-			return;
+			return this;
 		}
 
 		// if the current url has no dialog hash key proceed as normal
@@ -873,13 +875,15 @@ $.widget( "mobile.popup", {
 		});
 
 		this.urlAltered = true;
-		$.mobile.navigate( url, {role: "dialog"} );
+		$.mobile.navigate( url, { role: "dialog" } );
+
+		return this;
 	},
 
 	close: function() {
 		// make sure close is idempotent
 		if( $.mobile.popup.active !== this ) {
-			return;
+			return this;
 		}
 
 		this._scrollTop = $.mobile.window.scrollTop();
@@ -891,6 +895,8 @@ $.widget( "mobile.popup", {
 			// simulate the nav bindings having fired
 			this._closePopup();
 		}
+
+		return this;
 	}
 });
 
