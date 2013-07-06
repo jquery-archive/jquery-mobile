@@ -274,6 +274,12 @@
 					</div>
 				</div><!--/demo-html -->
 
+			<h2>Pre-rendered markup</h2>
+			<p>You can supply pre-rendered popup markup to save startup time. The page in the example below contains a popup with pre-rendered markup supplied as part of the original page markup.</p>
+			<div data-demo-html="#pre-rendered-page">
+				<a href="#pre-rendered-page" data-role="button" data-icon="arrow-r" data-iconpos="right" data-mini="true" data-inline="true">Go to demo</a>
+			</div>
+
 			<h2>Advanced techniques</h2>
 			<p>Learn how to customize and extend popups by working with the API, custom scripts, and styles.</p>
 			<a href="popup-images.php" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-r" data-iconpos="right">Scaling images</a>
@@ -289,5 +295,20 @@
 	<?php include( '../../global-nav.php' ); ?>
 
 	</div><!-- /page -->
+	<div id="pre-rendered-page" data-role="page">
+		<div data-role="header" data-add-back-btn="true">
+			<h1>Pre-rendered popup demo</h1>
+		</div>
+		<div data-role="content">
+			<a href="#pre-rendered" data-rel="popup" data-role="button" data-inline="true" aria-owns="pre-rendered" aria-haspopup="true" aria-expanded="false">Open Popup</a>
+			<div style="display: none;"><!-- placeholder for pre-rendered --></div>
+		</div>
+		<div id="pre-rendered-screen" class="ui-popup-screen ui-screen-hidden"></div>
+		<div id="pre-rendered-popup" class="ui-popup-container fade ui-popup-hidden ui-body-inherit ui-overlay-shadow ui-corner-all">
+			<div id="pre-rendered" class="ui-popup" data-role="popup" data-transition="fade">
+				<p>This is the contents of the pre-rendered popup</p>
+			</div>
+		</div>
+	</div>
 	</body>
 	</html>
