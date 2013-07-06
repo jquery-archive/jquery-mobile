@@ -18,7 +18,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		_create: function(){
 			this._super();
 
-			if( !!this.options.autogrow && this.isTextarea ) {
+			if( this.options.autogrow && this.isTextarea ) {
 				this._autogrow();
 			}
 		},
@@ -45,7 +45,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_unbindAutogrow: function() {
-			this._off( this.element, "keyup, change, input, paste" );
+			this._off( this.element, "keyup change input paste" );
 			this._off( $.mobile.window, "load, pagechange" );
 		},
 
