@@ -192,10 +192,10 @@
 
         <p>You can then write a CSS rule in your stylesheet that targets the <code>ui-icon-myapp-email</code> class to specify the icon background source. To maintain visual consistency with the rest of the icons, create a white icon 18x18 pixels saved as a PNG-8 with alpha transparency.</p>
 
-        <p> In this example, we're just pointing to a standalone icon image, but you could just as easily use an icon sprite and specify the positioning instead, just like the icon sprite we use in the framework.</p>
+        <p>In this example, we're just pointing to a standalone icon image, but you could just as easily use an icon sprite and specify the positioning instead, just like the icon sprite we use in the framework.</p>
 
 <pre><code>
-.ui-icon-myapp-email {
+.ui-btn.ui-icon-myapp-email {
 	background-image: url("app-icon-email.png");
 }
 </code></pre>
@@ -204,7 +204,7 @@
 
 <pre><code>
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
-	.ui-icon-myapp-email {
+	.ui-btn.ui-icon-myapp-email {
 		background-image: url("app-icon-email-highres.png");
 		background-size: 18px 18px;
 	}

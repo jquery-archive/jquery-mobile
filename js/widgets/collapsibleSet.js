@@ -9,20 +9,23 @@ define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastC
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
+$.widget( "mobile.collapsibleset", $.extend( {
 	_create: function() {
-		var $el = this.element.addClass( "ui-collapsible-set" ),
-			o = this.options;
+		var $el = this.element,
+			o = this.options,
+			classes = "ui-collapsible-set";
 
-		// Inherit the theme from collapsible-set
 		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( $el, "c" );
+			o.theme = $el.jqmData( "theme" );
 		}
-		// Inherit the content-theme from collapsible-set
+		if ( o.theme ) {
+			classes += " ui-group-theme-" + o.theme;
+		}
+
 		if ( !o.contentTheme ) {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
-		// Inherit the corner styling from collapsible-set
+
 		if ( !o.corners ) {
 			o.corners = $el.jqmData( "corners" );
 		}
@@ -34,8 +37,10 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, $.extend( {
 		o.corners = o.corners !== undefined ? o.corners : true;
 
 		if ( !!o.corners && !!o.inset ) {
-			$el.addClass( "ui-corner-all" );
+			classes += " ui-corner-all";
 		}
+
+		$el.addClass( classes );
 
 		// Initialize the collapsible set if it's not already initialized
 		if ( !$el.jqmData( "collapsiblebound" ) ) {

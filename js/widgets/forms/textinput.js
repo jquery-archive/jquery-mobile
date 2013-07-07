@@ -5,13 +5,14 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.zoom", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.zoom", "../../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.textinput", $.mobile.widget, {
+$.widget( "mobile.textinput", {
 	options: {
 		theme: null,
+		corners: true,
 		mini: false,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
@@ -25,11 +26,13 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		var self = this,
 			input = this.element,
 			o = this.options,
-			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
-			themeclass  = " ui-body-" + theme,
+			themeclass  = " ui-body-" + ( o.theme ?  o.theme : "inherit" ),
+			cornerclass = o.corners ? " ui-corner-all" : "",
 			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
+			isTextarea = input[ 0 ].tagName === "TEXTAREA",
 			focusedEl,
+			classes,
 			clearbtn,
 			clearBtnText = o.clearBtnText,
 			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
@@ -45,9 +48,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			}, 0 );
 		}
 
-		$( "label[for='" + input.attr( "id" ) + "']" ).addClass( "ui-input-text" );
-
-		focusedEl = input.addClass( "ui-input-text ui-body-"+ theme );
+		focusedEl = isTextarea ? input.addClass( "ui-input-text" + themeclass ) : input;
 
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
@@ -64,11 +65,12 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 
 		//"search" and "text" input widgets
-		if ( isSearch ) {
-			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-		} else if ( inputNeedsWrap ) {
-			focusedEl = input.wrap( "<div class='ui-input-text ui-shadow-inset ui-corner-all ui-btn-shadow" + themeclass + miniclass + "'></div>" ).parent();
+		if ( isSearch || inputNeedsWrap ) {
+			classes = isSearch ? "ui-input-search" : "ui-input-text";
+
+			focusedEl = input.wrap( "<div class='" + classes + themeclass + miniclass + cornerclass + " ui-shadow-inset'></div>" ).parent();
 		}
+
 
 		if( inputNeedsClearBtn || isSearch ) {
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>" )
@@ -81,13 +83,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					event.preventDefault();
 				})
 				.appendTo( focusedEl )
-				.buttonMarkup({
-					icon: "delete",
-					iconpos: "notext",
-					corners: true,
-					shadow: true,
-					mini: o.mini
-				});
+				.addClass(
+					"ui-btn ui-icon-delete ui-btn-icon-notext" +
+					" ui-corner-all ui-shadow " +
+					( o.theme ? "ui-btn-" + o.theme : "" ) +
+					( o.mini ? "ui-mini" : "" ) );
 
 			if ( !isSearch ) {
 				focusedEl.addClass( "ui-input-has-clear" );
@@ -97,7 +97,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			input.bind( "paste cut keyup input focus change blur", toggleClear );
 		} else if ( !inputNeedsWrap && !isSearch ) {
-			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
+			input.addClass( "ui-shadow-inset" + themeclass + miniclass + cornerclass );
 		}
 
 		input.focus(function() {
@@ -115,7 +115,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 			});
 
 		// Autogrow
-		if ( input.is( "textarea" ) ) {
+		if ( isTextarea ) {
 			this._keyup = function() {
 				var scrollHeight = input[ 0 ].scrollHeight,
 					clientHeight = input[ 0 ].clientHeight,

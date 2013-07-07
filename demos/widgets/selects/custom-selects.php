@@ -3,34 +3,40 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Custom select - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
-	<link rel="shortcut icon" href="../../favicon.ico">
+	<title>Custom selects - jQuery Mobile Demos</title>
+    <link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+    <link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+    <link rel="shortcut icon" href="../../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<script src="../../../js/jquery.js"></script>
-	<script src="../../_assets/js/"></script>
-	<script src="../../../js/"></script>
+    <script src="../../../js/jquery.js"></script>
+    <script src="../../_assets/js/"></script>
+    <script src="../../../js/"></script>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	<div data-role="header" class="jqm-header">
-		<h1>Custom select</h1>
-		<a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
-		<?php include( '../../search.php' ); ?>
-	</div><!-- /header -->
+    <div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
+        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+        <?php include( '../../search.php' ); ?>
+    </div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+    <div data-role="content" class="jqm-content">
 
-        	<form>
+        <h1>Custom select menu <a href="http://api.jquerymobile.com/select/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+
+        <p class="jqm-intro">The custom select uses a popup with a listview to display the menu. For long lists a dialog will be used.
+        </p>
+
+			<h2>Examples</h2>
 
                 <div data-demo-html="true">
                     <div data-role="fieldcontain">
                         <label for="select-custom-1">Basic:</label>
                         <select name="select-custom-1" id="select-custom-1" data-native-menu="false">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -100,7 +106,7 @@
                         <label for="select-custom-2">Mini sized:</label>
                         <select name="select-custom-2" id="select-custom-2" data-native-menu="false" data-mini="true">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -112,7 +118,7 @@
                         <label for="select-custom-3">Icon left:</label>
                         <select name="select-custom-3" id="select-custom-3" data-native-menu="false" data-iconpos="left">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -125,7 +131,7 @@
                         <select name="select-custom-21" id="select-custom-21" data-native-menu="false">
                             <option value="choose-one" data-placeholder="true">Choose one...</option>
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -138,7 +144,7 @@
                         <select name="select-custom-22" id="select-custom-22" data-native-menu="false">
                             <option>Choose one...</option>
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -151,7 +157,7 @@
                         <select name="select-custom-23" id="select-custom-23" data-native-menu="false">
                             <option></option>
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -163,7 +169,7 @@
                         <label for="select-custom-17">1 option selected:</label>
                         <select name="select-custom-17" id="select-custom-17" data-native-menu="false">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3" selected="selected">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -175,7 +181,7 @@
                         <label for="select-custom-18">1 option disabled:</label>
                         <select name="select-custom-18" id="select-custom-18" data-native-menu="false">
                             <option value="1">The 1st Option</option>
-                            <option value="2">The 2nt Option</option>
+                            <option value="2">The 2nd Option</option>
                             <option value="3" disabled="disabled">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -188,7 +194,7 @@
                         <select name="select-custom-19" id="select-custom-19" multiple="multiple" data-native-menu="false">
                             <option>Choose options</option>
                             <option value="1">The 1st Option</option>
-                            <option value="2" selected="selected">The 2nt Option</option>
+                            <option value="2" selected="selected">The 2nd Option</option>
                             <option value="3" selected="selected">The 3rd Option</option>
                             <option value="4">The 4th Option</option>
                         </select>
@@ -261,7 +267,7 @@
                             <option>Choose...</option>
                             <optgroup label="Group 1">
                                 <option value="1">The 1st Option</option>
-                                <option value="2">The 2nt Option</option>
+                                <option value="2">The 2nd Option</option>
                                 <option value="3">The 3rd Option</option>
                                 <option value="4">The 4th Option</option>
                             </optgroup>
@@ -370,14 +376,14 @@
                     </fieldset>
                 </div><!--/demo-html -->
 
-			</form>
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
+
+<?php include( '../../global-nav.php' ); ?>
 
 </div><!-- /page -->
 </body>

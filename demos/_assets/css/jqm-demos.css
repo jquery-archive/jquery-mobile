@@ -5,7 +5,7 @@
 /* Page */
 body, .jqm-demos  {
 	background-color: #fefefe;
-	font-size: 1.05em;
+	font-size: 1em;
 }
 
 /* Header */
@@ -366,7 +366,7 @@ h2.jqm-home-widget {
 	margin-bottom: .1em;
 }
 /* List dividers */
-.jqm-list .ui-bar-d {
+.jqm-list .ui-bar-a {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 700;
 	font-size: .9em;
@@ -384,36 +384,36 @@ h2.jqm-home-widget {
 	font-size: 0.95em;
 	border-top: none;
 }
-.jqm-list .ui-btn-up-d, 
-.jqm-list .ui-btn-hover-d, 
-.jqm-list .ui-btn-down-d {
+.jqm-list .ui-btn-up-a, 
+.jqm-list .ui-btn-hover-a, 
+.jqm-list .ui-btn-down-a {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300; 
 	border-color: #eee;
 }
-.jqm-list .ui-btn-up-d {
+.jqm-list .ui-btn-up-a {
 	background-color: #fff;
 	background-image: none;
 }
-.jqm-list .ui-btn-hover-d {
+.jqm-list .ui-btn-hover-a {
 	background-color: #f8f8f8;
 	background-image: none;
 }
-.jqm-list .ui-btn-up-d.ui-btn-active, 
-.jqm-list .ui-btn-hover-d.ui-btn-active, 
-.jqm-list .ui-btn-down-d.ui-btn-active,
-.jqm-list .ui-btn-up-d.ui-focus, 
-.jqm-list .ui-btn-hover-d.ui-focus, 
-.jqm-list .ui-btn-down-d.ui-focus {
+.jqm-list .ui-btn-up-a.ui-btn-active, 
+.jqm-list .ui-btn-hover-a.ui-btn-active, 
+.jqm-list .ui-btn-down-a.ui-btn-active,
+.jqm-list .ui-btn-up-a.ui-focus, 
+.jqm-list .ui-btn-hover-a.ui-focus, 
+.jqm-list .ui-btn-down-a.ui-focus {
 	border-color: #34bae8;
 	background-color: #34bae8;
 	background-image: none;
 	color: #fff;
 	text-shadow: 0 1px 0 #369;	
 }
-.jqm-list .ui-btn-up-d.ui-focus, 
-.jqm-list .ui-btn-hover-d.ui-focus, 
-.jqm-list .ui-btn-down-d.ui-focus {
+.jqm-list .ui-btn-up-a.ui-focus, 
+.jqm-list .ui-btn-hover-a.ui-focus, 
+.jqm-list .ui-btn-down-a.ui-focus {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
@@ -432,18 +432,6 @@ h2.jqm-home-widget {
 	overflow: visible;
 	white-space: normal;
 }
-/* ### TEMPORARY ### */
-/* padding count bubble position when icon is false needs to be fixed in the framework CSS (some classes shouldn't be added) */
-.jqm-list .ui-li-count {
-	right: 10px !important;
-}
-.jqm-demos .jqm-list .ui-btn-icon-right .ui-btn-inner {
-	padding-right: 0;
-}
-.jqm-demos .jqm-list .ui-li-has-arrow .ui-btn-inner a.ui-link-inherit {
-	padding-right: 15px;
-}
-/* ### END ### */
 
 /* List filter */
 .jqm-demos-home .jqm-content > .ui-listview-filter,
@@ -553,7 +541,17 @@ h2.jqm-home-widget {
 	-moz-box-shadow: -5px 0 5px rgba(0,0,0,.10);
 	box-shadow: -5px 0 5px rgba(0,0,0,.10);
 }
-
+/* tabs */
+.tabs-list-left{
+	width:25%;
+	float:left;
+	vertical-align:top;
+}
+.tabs-list-content{
+	width:73%;
+	float:right;
+	margin:1em 0;
+}
 /* Responsive */
 @media (min-width:46em) {
 	/* Header logo */
@@ -581,7 +579,6 @@ h2.jqm-home-widget {
 	.jqm-demos-home .jqm-content .jqm-intro {
 		line-height: 1.45;
 		margin: -.2em .8em .4em .8em;
-
 	}
 	
 	/* Header buttons */
@@ -639,7 +636,7 @@ h2.jqm-home-widget {
 	
 	/* Footer */
 	.ui-page .jqm-footer {
-		position:absolute;
+		position: absolute;
 		bottom: 0;
 	}
 	.jqm-footer {
