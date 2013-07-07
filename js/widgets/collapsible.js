@@ -32,13 +32,11 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_create: function() {
-		var $el = this.element,
+		var $el = this.element.addClass( "ui-collapsible" ),
 			opts = this.options,
-			collapsiblesetWidgetSelector = ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ),
-			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.children( opts.heading ).first(),
-			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
-			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" + collapsiblesetWidgetSelector ).addClass( "ui-collapsible-set" ),
+			collapsibleContent = $el.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
+			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" + ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) ).addClass( "ui-collapsible-set" ),
 			collapsibleClasses = "";
 
 		// Replace collapsibleHeading if it's a legend
@@ -89,7 +87,7 @@ $.widget( "mobile.collapsible", {
 			collapsibleContent.addClass( "ui-body-" + opts.contentTheme );
 		}
 		if ( collapsibleClasses !== "" ) {
-			collapsible.addClass( collapsibleClasses );
+			$el.addClass( collapsibleClasses );
 		}
 
 		collapsibleHeading
@@ -125,7 +123,7 @@ $.widget( "mobile.collapsible", {
 
 				var type = collapsibleHeading.hasClass( "ui-collapsible-heading-collapsed" ) ? "expand" : "collapse";
 
-				collapsible.trigger( type );
+				$el.trigger( type );
 
 				event.preventDefault();
 				event.stopPropagation();
