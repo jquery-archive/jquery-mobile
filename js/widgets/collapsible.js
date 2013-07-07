@@ -33,10 +33,10 @@ $.widget( "mobile.collapsible", {
 
 	_create: function() {
 		var $el = this.element,
-			o = this.options,
+			opts = this.options,
 			collapsiblesetWidgetSelector = ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ),
 			collapsible = $el.addClass( "ui-collapsible" ),
-			collapsibleHeading = $el.children( o.heading ).first(),
+			collapsibleHeading = $el.children( opts.heading ).first(),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" + collapsiblesetWidgetSelector ).addClass( "ui-collapsible-set" ),
 			collapsibleClasses = "";
@@ -51,42 +51,42 @@ $.widget( "mobile.collapsible", {
 		if ( collapsibleSet.length ) {
 
 			// Inherit the content-theme from collapsible-set
-			if ( !o.contentTheme ) {
-				o.contentTheme = getAttr( collapsibleSet[ 0 ], "content-theme", true );
+			if ( !opts.contentTheme ) {
+				opts.contentTheme = getAttr( collapsibleSet[ 0 ], "content-theme", true );
 			}
 
 			// Get the preference for collapsed icon in the set, but override with data- attribute on the individual collapsible
-			o.collapsedIcon = getAttr( $el[ 0 ], "collapsed-icon", true ) || getAttr( collapsibleSet[ 0 ], "collapsed-icon", true ) || o.collapsedIcon;
+			opts.collapsedIcon = getAttr( $el[ 0 ], "collapsed-icon", true ) || getAttr( collapsibleSet[ 0 ], "collapsed-icon", true ) || opts.collapsedIcon;
 
 			// Get the preference for expanded icon in the set, but override with data- attribute on the individual collapsible
-			o.expandedIcon = getAttr( $el[ 0 ], "expanded-icon", true ) || getAttr( collapsibleSet[ 0 ], "expanded-icon", true ) || o.expandedIcon;
+			opts.expandedIcon = getAttr( $el[ 0 ], "expanded-icon", true ) || getAttr( collapsibleSet[ 0 ], "expanded-icon", true ) || opts.expandedIcon;
 
 			// Gets the preference icon position in the set, but override with data- attribute on the individual collapsible
-			o.iconpos = getAttr( $el[ 0 ], "iconpos", true ) || getAttr( collapsibleSet[ 0 ], "iconpos", true ) || o.iconpos;
+			opts.iconpos = getAttr( $el[ 0 ], "iconpos", true ) || getAttr( collapsibleSet[ 0 ], "iconpos", true ) || opts.iconpos;
 
 			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
 			if ( getAttr( collapsibleSet[ 0 ], "inset", true ) !== undefined ) {
-				o.inset = getAttr( collapsibleSet[ 0 ], "inset", true );
+				opts.inset = getAttr( collapsibleSet[ 0 ], "inset", true );
 			} else {
-				o.inset = true;
+				opts.inset = true;
 			}
 			// Set corners for individual collapsibles to false when in a collapsible-set
-			o.corners = false;
+			opts.corners = false;
 			// Gets the preference for mini in the set
-			if ( !o.mini ) {
-				o.mini = getAttr( collapsibleSet[ 0 ], "mini", true );
+			if ( !opts.mini ) {
+				opts.mini = getAttr( collapsibleSet[ 0 ], "mini", true );
 			}
 		}
 
-		if ( !!o.inset ) {
+		if ( !!opts.inset ) {
 			collapsibleClasses += " ui-collapsible-inset";
-			if ( !!o.corners ) {
+			if ( !!opts.corners ) {
 				collapsibleClasses += " ui-corner-all" ;
 			}
 		}
-		if ( o.contentTheme ) {
+		if ( opts.contentTheme ) {
 			collapsibleClasses += " ui-collapsible-themed-content";
-			collapsibleContent.addClass( "ui-body-" + o.contentTheme );
+			collapsibleContent.addClass( "ui-body-" + opts.contentTheme );
 		}
 		if ( collapsibleClasses !== "" ) {
 			collapsible.addClass( collapsibleClasses );
@@ -101,9 +101,9 @@ $.widget( "mobile.collapsible", {
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
 			.find( "a" )
 				.first()
-				.addClass( "ui-btn ui-icon-" + o.collapsedIcon + " ui-btn-icon-" + o.iconpos +
-					( o.theme ? " ui-btn-" + o.theme : "" ) +
-					( o.mini ? " ui-mini" : "" ) );
+				.addClass( "ui-btn ui-icon-" + opts.collapsedIcon + " ui-btn-icon-" + opts.iconpos +
+					( opts.theme ? " ui-btn-" + opts.theme : "" ) +
+					( opts.mini ? " ui-mini" : "" ) );
 
 		$.extend( this, {
 			_collapsibleHeading: collapsibleHeading,
@@ -132,12 +132,12 @@ $.widget( "mobile.collapsible", {
 			}
 		});
 
-		this._setOptions( this.options );
+		this._setOptions( opts );
 	},
 
 	_handleExpandCollapse: function( event ) {
 		var isCollapse,
-			o = this.options;
+			opts = this.options;
 
 		if ( !event.isDefaultPrevented() ) {
 			isCollapse = ( event.type === "collapse" );
@@ -147,12 +147,12 @@ $.widget( "mobile.collapsible", {
 			this._collapsibleHeading
 				.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
 				.find( ".ui-collapsible-heading-status" )
-				.text( isCollapse ? o.expandCueText : o.collapseCueText )
+				.text( isCollapse ? opts.expandCueText : opts.collapseCueText )
 				.end()
 				.find( "a" ).first()
-				.toggleClass( "ui-icon-" + o.expandedIcon, !isCollapse )
+				.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
 				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
-				.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
+				.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
 				.removeClass( $.mobile.activeBtnClass );
 
 			this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
@@ -163,14 +163,14 @@ $.widget( "mobile.collapsible", {
 		}
 	},
 
-	_setOptions: function( o ) {
+	_setOptions: function( opts ) {
 		var $el = this.element;
 
-		if ( o.collapsed !== undefined ) {
-			$el.trigger( o.collapsed ? "collapse" : "expand" );
+		if ( opts.collapsed !== undefined ) {
+			$el.trigger( opts.collapsed ? "collapse" : "expand" );
 		}
 
-		return this._super( o );
+		return this._super( opts );
 	}
 });
 
