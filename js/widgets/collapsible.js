@@ -35,15 +35,10 @@ $.widget( "mobile.collapsible", {
 		var $el = this.element.addClass( "ui-collapsible" ),
 			opts = this.options,
 			heading = $el.children( opts.heading ).first(),
+			replacementHeading = heading,
 			content = $el.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
 			set = $el.closest( ":jqmData(role='collapsible-set')" + ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) ).addClass( "ui-collapsible-set" ),
 			classes = "";
-
-		// Replace collapsibleHeading if it's a legend
-		if ( heading.is( "legend" ) ) {
-			heading = $( "<div role='heading'>"+ heading.html() +"</div>" ).insertBefore( heading );
-			heading.next().remove();
-		}
 
 		// If we are in a collapsible set
 		if ( set.length ) {
@@ -90,9 +85,13 @@ $.widget( "mobile.collapsible", {
 			$el.addClass( classes );
 		}
 
-		heading
-			//drop heading in before content
-			.insertBefore( content )
+		// Replace collapsibleHeading if it's a legend
+		if ( heading.is( "legend" ) ) {
+			replacementHeading = $( "<div role='heading'>"+ heading.html() +"</div>" );
+			heading.remove();
+		}
+
+		replacementHeading
 			//modify markup & attributes
 			.addClass( "ui-collapsible-heading" )
 			.append( "<span class='ui-collapsible-heading-status'></span>" )
@@ -102,6 +101,9 @@ $.widget( "mobile.collapsible", {
 				.addClass( "ui-btn ui-icon-" + opts.collapsedIcon + " ui-btn-icon-" + opts.iconpos +
 					( opts.theme ? " ui-btn-" + opts.theme : "" ) +
 					( opts.mini ? " ui-mini" : "" ) );
+
+			//drop heading in before content
+			replacementHeading.insertBefore( content );
 
 		$.extend( this, {
 			_collapsibleHeading: heading,
