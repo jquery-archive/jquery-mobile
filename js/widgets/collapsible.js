@@ -13,77 +13,32 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var getAttr = $.mobile.getAttribute;
+var rInitialLetter = /([A-Z])/g;
 
 $.widget( "mobile.collapsible", {
 	options: {
-		expandCueText: " click to expand contents",
-		collapseCueText: " click to collapse contents",
+		expandCueText: null,
+		collapseCueText: null,
 		collapsed: true,
 		heading: "h1,h2,h3,h4,h5,h6,legend",
-		collapsedIcon: "plus",
-		expandedIcon: "minus",
-		iconpos: "left",
+		collapsedIcon: null,
+		expandedIcon: null,
+		iconpos: null,
 		theme: null,
 		contentTheme: null,
-		inset: true,
-		corners: true,
-		mini: false
+		inset: null,
+		corners: null,
+		mini: null
 	},
 
 	_create: function() {
-		var $el = this.element.addClass( "ui-collapsible" ),
+		var anchor,
+			$el = this.element.addClass( "ui-collapsible" ),
 			opts = this.options,
 			heading = $el.children( opts.heading ).first(),
 			replacementHeading = heading,
 			content = $el.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
-			set = $el.closest( ":jqmData(role='collapsible-set')" + ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) ).addClass( "ui-collapsible-set" ),
-			classes = "";
-
-		// If we are in a collapsible set
-		if ( set.length ) {
-
-			// Inherit the content-theme from collapsible-set
-			if ( !opts.contentTheme ) {
-				opts.contentTheme = getAttr( set[ 0 ], "content-theme", true );
-			}
-
-			// Get the preference for collapsed icon in the set, but override with data- attribute on the individual collapsible
-			opts.collapsedIcon = getAttr( $el[ 0 ], "collapsed-icon", true ) || getAttr( set[ 0 ], "collapsed-icon", true ) || opts.collapsedIcon;
-
-			// Get the preference for expanded icon in the set, but override with data- attribute on the individual collapsible
-			opts.expandedIcon = getAttr( $el[ 0 ], "expanded-icon", true ) || getAttr( set[ 0 ], "expanded-icon", true ) || opts.expandedIcon;
-
-			// Gets the preference icon position in the set, but override with data- attribute on the individual collapsible
-			opts.iconpos = getAttr( $el[ 0 ], "iconpos", true ) || getAttr( set[ 0 ], "iconpos", true ) || opts.iconpos;
-
-			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
-			if ( getAttr( set[ 0 ], "inset", true ) !== undefined ) {
-				opts.inset = getAttr( set[ 0 ], "inset", true );
-			} else {
-				opts.inset = true;
-			}
-			// Set corners for individual collapsibles to false when in a collapsible-set
-			opts.corners = false;
-			// Gets the preference for mini in the set
-			if ( !opts.mini ) {
-				opts.mini = getAttr( set[ 0 ], "mini", true );
-			}
-		}
-
-		if ( !!opts.inset ) {
-			classes += " ui-collapsible-inset";
-			if ( !!opts.corners ) {
-				classes += " ui-corner-all" ;
-			}
-		}
-		if ( opts.contentTheme ) {
-			classes += " ui-collapsible-themed-content";
-			content.addClass( "ui-body-" + opts.contentTheme );
-		}
-		if ( classes !== "" ) {
-			$el.addClass( classes );
-		}
+			accordion = $el.closest( ":jqmData(role='collapsible-set')" + ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) ).addClass( "ui-collapsible-set" );
 
 		// Replace collapsibleHeading if it's a legend
 		if ( heading.is( "legend" ) ) {
@@ -91,21 +46,26 @@ $.widget( "mobile.collapsible", {
 			heading.remove();
 		}
 
-		replacementHeading
+		anchor = replacementHeading
 			//modify markup & attributes
 			.addClass( "ui-collapsible-heading" )
 			.append( "<span class='ui-collapsible-heading-status'></span>" )
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
 			.find( "a" )
 				.first()
-				.addClass( "ui-btn ui-icon-" + opts.collapsedIcon + " ui-btn-icon-" + opts.iconpos +
-					( opts.theme ? " ui-btn-" + opts.theme : "" ) +
-					( opts.mini ? " ui-mini" : "" ) );
+				.addClass( "ui-btn" );
 
 			//drop heading in before content
 			replacementHeading.insertBefore( content );
 
 		$.extend( this, {
+			_accordion: accordion,
+			_accordionWidget: null,
+			_anchorClasses: "",
+			_elClasses: "",
+			_contentTheme: "",
+			_anchor: anchor,
+			_content: content,
 			_collapsibleHeading: heading,
 			_collapsibleContent: content
 		});
@@ -136,10 +96,16 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_handleExpandCollapse: function( event ) {
-		var isCollapse,
-			opts = this.options;
+		var isCollapse, key, opts;
 
 		if ( !event.isDefaultPrevented() ) {
+			opts = $.extend( {}, this.options );
+
+			// Adjust for inherited values.
+			for ( key in opts ) {
+				opts[ key ] = this._optionValue( opts, key );
+			}
+
 			isCollapse = ( event.type === "collapse" );
 
 			event.preventDefault();
@@ -151,6 +117,7 @@ $.widget( "mobile.collapsible", {
 				.end()
 				.find( "a" ).first()
 				.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
+
 				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
 				.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
 				.removeClass( $.mobile.activeBtnClass );
@@ -163,16 +130,118 @@ $.widget( "mobile.collapsible", {
 		}
 	},
 
-	_setOptions: function( opts ) {
-		var $el = this.element;
+	_toggleClasses: function( destination, varForOld, newClasses ) {
+		if ( this[ varForOld ] !== newClasses ) {
+			if ( this[ varForOld ] ) {
+				destination.removeClass( this[ varForOld ] );
+				this[ varForOld ] = "";
+			}
 
-		if ( opts.collapsed !== undefined ) {
-			$el.trigger( opts.collapsed ? "collapse" : "expand" );
+			if ( newClasses ) {
+				this[ varForOld ] = newClasses;
+				destination.addClass( this[ varForOld ] );
+			}
+		}
+		return this;
+	},
+
+	// Retrieve the option value first from the options object passed in and, if
+	// null, from the parent accordion or, if that's null too, or if there's no
+	// parent accordion, then from the defaults.
+	_optionValue: function( options, name ) {
+		var ret,
+			accordion = this._accordion,
+			accordionWidget = this._accordionWidget;
+
+		if ( accordion.length && !accordionWidget ) {
+			this._accordionWidget = accordionWidget = accordion.data( "mobile-collapsibleset" );
 		}
 
-		return this._super( opts );
+		ret =
+			( options[ name ] != null ) ? options[ name ] :
+			( accordionWidget ) ? accordionWidget.options[ name ] :
+			accordion.length ? $.mobile.getAttribute( accordion[ 0 ], name.replace( rInitialLetter, "-$1" ).toLowerCase(), true ):
+			null;
+
+		if ( null == ret ) {
+			ret = $.mobile.collapsible.defaults[ name ];
+		}
+
+		return ret;
+	},
+
+	_setOptions: function( options ) {
+		var key,
+			opts = $.extend( {}, this.options, options ),
+			$el = this.element,
+			classes = "",
+			anchorClasses = "";
+
+		// Override inheritable options from the accordion or from defaults if
+		// unset in this widget
+		for ( key in opts ) {
+			opts[ key ] = this._optionValue( opts, key );
+		}
+
+		// Set corners for individual collapsibles to false when in a collapsible-set
+		if ( this._accordion.length > 0 ) {
+			opts.corners = false;
+		}
+
+		if ( opts.contentTheme === "none" ) {
+			opts.contentTheme = "";
+		}
+
+		if ( options.collapsed !== undefined ) {
+			$el.trigger( options.collapsed ? "collapse" : "expand" );
+		}
+
+		// Establish classes for outermost element
+		if ( !!opts.inset ) {
+			classes += " ui-collapsible-inset";
+			if ( !!opts.corners ) {
+				classes += " ui-corner-all" ;
+			}
+		}
+		if ( opts.contentTheme ) {
+			classes += " ui-collapsible-themed-content";
+		}
+
+		// Establish classes for anchor
+		if ( $el.hasClass( "ui-collapsible-collapsed" ) ) {
+			anchorClasses += " ui-icon-" + opts.collapsedIcon;
+		} else {
+			anchorClasses += " ui-icon-" + opts.expandedIcon;
+		}
+		anchorClasses += " ui-btn-icon-" + opts.iconpos;
+		if ( opts.theme ) {
+			anchorClasses += " ui-btn-" + opts.theme;
+		}
+		if ( opts.mini ) {
+			anchorClasses += " ui-mini";
+		}
+
+		this
+			._toggleClasses( this._content, "_contentTheme", opts.contentTheme ? ( "ui-body-" + opts.contentTheme ) : "" )
+			._toggleClasses( $el, "_elClasses", classes )
+			._toggleClasses( this._anchor, "_anchorClasses", anchorClasses );
+
+		return this._super( options );
 	}
 });
+
+// Defaults to be used by all instances of collapsible if per-instance values
+// are unset or if nothing is specified by way of inheritance from an accordion.
+$.mobile.collapsible.defaults = {
+	expandCueText: " click to expand contents",
+	collapseCueText: " click to collapse contents",
+	collapsedIcon: "plus",
+	expandedIcon: "minus",
+	iconpos: "left",
+	inset: true,
+	corners: true,
+	mini: false
+};
 
 $.mobile.collapsible.initSelector = ":jqmData(role='collapsible')";
 
