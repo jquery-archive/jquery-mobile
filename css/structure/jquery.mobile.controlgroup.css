@@ -4,6 +4,8 @@
 .ui-bar .ui-controlgroup { margin: 0 5px; }
 
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
+/* Fixes legend not wrapping on IE10 */
+.ui-controlgroup-label legend {	max-width: 100%; }
 .ui-controlgroup-controls label.ui-select,
 .ui-controlgroup-controls label.ui-submit { position: absolute; left: -9999px; }
 .ui-controlgroup li { list-style: none; }
