@@ -5,11 +5,20 @@
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../jquery.mobile.widget",
+	"./collapsible",
+	"./addFirstLastClasses",
+	"../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+var childCollapsiblesSelector = ":mobile-collapsible, :jqmData(role='collapsible')";
+
 $.widget( "mobile.collapsibleset", $.extend( {
+	options: $.extend( {}, $.mobile.collapsible.defaults ),
+
 	_create: function() {
 		var $el = this.element,
 			o = this.options,
@@ -59,18 +68,24 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	},
 
 	_init: function() {
-		var $el = this.element,
-			collapsiblesInSet = $el.children( ":mobile-collapsible, :jqmData(role='collapsible')" ),
-			expanded = collapsiblesInSet.filter( ":jqmData(collapsed='false')" );
 		this._refresh( "true" );
 
 		// Because the corners are handled by the collapsible itself and the default state is collapsed
 		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
-		expanded.trigger( "expand" );
+		this.element
+			.children( childCollapsiblesSelector )
+			.filter( ":jqmData(collapsed='false')" )
+			.trigger( "expand" );
+	},
+
+	_setOptions: function( options ) {
+		var ret = this._super( options );
+		this.element.children( ":mobile-collapsible" ).collapsible( "refresh" );
+		return ret;
 	},
 
 	_refresh: function( create ) {
-		var collapsiblesInSet = this.element.children( ":mobile-collapsible, :jqmData(role='collapsible')" );
+		var collapsiblesInSet = this.element.children( childCollapsiblesSelector );
 
 		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
