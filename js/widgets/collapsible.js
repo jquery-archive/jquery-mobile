@@ -170,6 +170,10 @@ $.widget( "mobile.collapsible", {
 		return ret;
 	},
 
+	refresh: function() {
+		this._setOptions( {} );
+	},
+
 	_setOptions: function( options ) {
 		var key,
 			opts = $.extend( {}, this.options, options ),
