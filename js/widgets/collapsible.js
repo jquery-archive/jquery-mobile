@@ -82,11 +82,7 @@ $.widget( "mobile.collapsible", {
 			},
 
 			"click": function( event ) {
-
-				var type = heading.hasClass( "ui-collapsible-heading-collapsed" ) ? "expand" : "collapse";
-
-				$el.trigger( type );
-
+				this._handleExpandCollapse( !heading.hasClass( "ui-collapsible-heading-collapsed" ) );
 				event.preventDefault();
 				event.stopPropagation();
 			}
@@ -95,39 +91,34 @@ $.widget( "mobile.collapsible", {
 		this._setOptions( opts );
 	},
 
-	_handleExpandCollapse: function( event ) {
-		var isCollapse, key, opts;
-
-		if ( !event.isDefaultPrevented() ) {
+	_handleExpandCollapse: function( isCollapse ) {
+		var key,
 			opts = $.extend( {}, this.options );
 
-			// Adjust for inherited values.
-			for ( key in opts ) {
-				opts[ key ] = this._optionValue( opts, key );
-			}
-
-			isCollapse = ( event.type === "collapse" );
-
-			event.preventDefault();
-
-			this._collapsibleHeading
-				.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
-				.find( ".ui-collapsible-heading-status" )
-				.text( isCollapse ? opts.expandCueText : opts.collapseCueText )
-				.end()
-				.find( "a" ).first()
-				.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
-
-				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
-				.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
-				.removeClass( $.mobile.activeBtnClass );
-
-			this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
-			this._collapsibleContent
-				.toggleClass( "ui-collapsible-content-collapsed", isCollapse )
-				.attr( "aria-hidden", isCollapse )
-				.trigger( "updatelayout" );
+		// Adjust for inherited values.
+		for ( key in opts ) {
+			opts[ key ] = this._optionValue( opts, key );
 		}
+
+		this._collapsibleHeading
+			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
+			.find( ".ui-collapsible-heading-status" )
+			.text( isCollapse ? opts.expandCueText : opts.collapseCueText )
+			.end()
+			.find( "a" ).first()
+			.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
+
+			// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
+			.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
+			.removeClass( $.mobile.activeBtnClass );
+
+		this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
+		this._collapsibleContent
+			.toggleClass( "ui-collapsible-content-collapsed", isCollapse )
+			.attr( "aria-hidden", isCollapse )
+			.trigger( "updatelayout" );
+		this.options.collapsed = isCollapse;
+		this._trigger( isCollapse ? "collapse" : "expand" );
 	},
 
 	_toggleClasses: function( destination, varForOld, newClasses ) {
@@ -174,6 +165,14 @@ $.widget( "mobile.collapsible", {
 		this._setOptions( {} );
 	},
 
+	expand: function() {
+		this._handleExpandCollapse( false );
+	},
+
+	collapse: function() {
+		this._handleExpandCollapse( true );
+	},
+
 	_setOptions: function( options ) {
 		var key,
 			opts = $.extend( {}, this.options, options ),
@@ -197,7 +196,7 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( options.collapsed !== undefined ) {
-			$el.trigger( options.collapsed ? "collapse" : "expand" );
+			this._handleExpandCollapse( options.collapsed );
 		}
 
 		// Establish classes for outermost element
