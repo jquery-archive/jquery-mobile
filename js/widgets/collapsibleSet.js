@@ -55,13 +55,13 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		if ( !$el.jqmData( "collapsiblebound" ) ) {
 			$el
 				.jqmData( "collapsiblebound", true )
-				.bind( "expand", function( event ) {
-					var closestCollapsible = $( event.target )
-						.closest( ".ui-collapsible" );
+				.bind( "collapsibleexpand", function( event ) {
+					var closestCollapsible = $( event.target ).closest( ".ui-collapsible" );
+
 					if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
 						closestCollapsible
 							.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
-							.trigger( "collapse" );
+							.collapsible( "collapse" );
 					}
 				});
 		}
@@ -75,7 +75,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		this.element
 			.children( childCollapsiblesSelector )
 			.filter( ":jqmData(collapsed='false')" )
-			.trigger( "expand" );
+			.collapsible( "expand" );
 	},
 
 	_setOptions: function( options ) {
