@@ -108,6 +108,10 @@ fieldset.ui-controlgroup {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
+/* Fixes legend not wrapping on IE10 */
+.ui-controlgroup-label legend {
+	max-width: 100%;
+}
 .ui-controlgroup-controls > label {
 	position: absolute !important;
 	top: -9999px;
