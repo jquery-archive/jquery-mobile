@@ -236,6 +236,8 @@ $.widget( "mobile.collapsible", {
 
 // Defaults to be used by all instances of collapsible if per-instance values
 // are unset or if nothing is specified by way of inheritance from an accordion.
+// Note that this hash does not contain options "collapsed" or "heading",
+// because those are not inheritable.
 $.mobile.collapsible.defaults = {
 	expandCueText: " click to expand contents",
 	collapseCueText: " click to collapse contents",
