@@ -20,36 +20,13 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	options: $.extend( {}, $.mobile.collapsible.defaults ),
 
 	_create: function() {
-		var $el = this.element,
-			o = this.options,
-			classes = "ui-collapsible-set";
+		var $el = this.element.addClass( "ui-collapsible-set" );
 
-		if ( !o.theme ) {
-			o.theme = $el.jqmData( "theme" );
-		}
-		if ( o.theme ) {
-			classes += " ui-group-theme-" + o.theme;
-		}
+		$.extend( this, {
+			_classes: ""
+		});
 
-		if ( !o.contentTheme ) {
-			o.contentTheme = $el.jqmData( "content-theme" );
-		}
-
-		if ( !o.corners ) {
-			o.corners = $el.jqmData( "corners" );
-		}
-
-		if ( $el.jqmData( "inset" ) !== undefined ) {
-			o.inset = $el.jqmData( "inset" );
-		}
-		o.inset = o.inset !== undefined ? o.inset : true;
-		o.corners = o.corners !== undefined ? o.corners : true;
-
-		if ( !!o.corners && !!o.inset ) {
-			classes += " ui-corner-all";
-		}
-
-		$el.addClass( classes );
+		this._updateClasses( this.options );
 
 		// Initialize the collapsible set if it's not already initialized
 		if ( !$el.jqmData( "collapsiblebound" ) ) {
@@ -78,8 +55,29 @@ $.widget( "mobile.collapsibleset", $.extend( {
 			.collapsible( "expand" );
 	},
 
+	_updateClasses: function( options ) {
+		var opts = {
+				theme: options.theme || this.options.theme,
+				corners: options.corners || this.options.corners,
+				inset: options.inset || this.options.inset
+			},
+			classes = "";
+
+		if ( opts.theme && opts.theme !== "none" ) {
+			classes += " ui-group-theme-" + opts.theme;
+		}
+
+		if ( opts.corners && opts.inset ) {
+			classes += " ui-corner-all";
+		}
+
+		this._toggleClasses( this.element, "_classes", classes );
+	},
+
 	_setOptions: function( options ) {
 		var ret = this._super( options );
+
+		this._updateClasses( options );
 		this.element.children( ":mobile-collapsible" ).collapsible( "refresh" );
 		return ret;
 	},
