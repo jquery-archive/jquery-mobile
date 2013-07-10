@@ -64,10 +64,11 @@ $.widget( "mobile.collapsible", {
 			_anchorClasses: "",
 			_elClasses: "",
 			_contentTheme: "",
-			_anchor: anchor,
-			_content: content,
-			_collapsibleHeading: heading,
-			_collapsibleContent: content
+			_ui: {
+				anchor: anchor,
+				content: content,
+				heading: replacementHeading
+			}
 		});
 
 		//events
@@ -100,7 +101,7 @@ $.widget( "mobile.collapsible", {
 			opts[ key ] = this._optionValue( opts, key );
 		}
 
-		this._collapsibleHeading
+		this._ui.heading
 			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
 			.find( ".ui-collapsible-heading-status" )
 			.text( isCollapse ? opts.expandCueText : opts.collapseCueText )
@@ -113,7 +114,7 @@ $.widget( "mobile.collapsible", {
 			.removeClass( $.mobile.activeBtnClass );
 
 		this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
-		this._collapsibleContent
+		this._ui.content
 			.toggleClass( "ui-collapsible-content-collapsed", isCollapse )
 			.attr( "aria-hidden", isCollapse )
 			.trigger( "updatelayout" );
@@ -225,9 +226,9 @@ $.widget( "mobile.collapsible", {
 		}
 
 		this
-			._toggleClasses( this._content, "_contentTheme", opts.contentTheme ? ( "ui-body-" + opts.contentTheme ) : "" )
+			._toggleClasses( this._ui.content, "_contentTheme", opts.contentTheme ? ( "ui-body-" + opts.contentTheme ) : "" )
 			._toggleClasses( $el, "_elClasses", classes )
-			._toggleClasses( this._anchor, "_anchorClasses", anchorClasses );
+			._toggleClasses( this._ui.anchor, "_anchorClasses", anchorClasses );
 
 		return this._super( options );
 	}
