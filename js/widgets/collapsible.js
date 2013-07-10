@@ -48,6 +48,7 @@ $.widget( "mobile.collapsible", {
 		}
 
 		anchor = replacementHeading
+			.detach()
 			//modify markup & attributes
 			.addClass( "ui-collapsible-heading" )
 			.append( "<span class='ui-collapsible-heading-status'></span>" )
