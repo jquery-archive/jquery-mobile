@@ -14,7 +14,7 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var childCollapsiblesSelector = ":mobile-collapsible, :jqmData(role='collapsible')";
+var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
 
 $.widget( "mobile.collapsibleset", $.extend( {
 	options: $.extend( {}, $.mobile.collapsible.defaults ),
@@ -80,6 +80,16 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		this._updateClasses( options );
 		this.element.children( ":mobile-collapsible" ).collapsible( "refresh" );
 		return ret;
+	},
+
+	_destroy: function() {
+		var el = this.element;
+
+		this._removeFirstLastClasses( el.children( childCollapsiblesSelector ) );
+		el
+			.removeClass( "ui-collapsible-set " + this._classes )
+			.children( ":mobile-collapsible" )
+			.collapsible( "destroy" );
 	},
 
 	_refresh: function( create ) {
