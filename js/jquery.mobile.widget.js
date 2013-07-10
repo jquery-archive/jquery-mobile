@@ -28,6 +28,22 @@ $.extend( $.Widget.prototype, {
 		return options;
 	},
 
+	_toggleClasses: function( destination, varNameForOldClasses, newClasses ) {
+		if ( this[ varNameForOldClasses ] !== newClasses ) {
+			if ( this[ varNameForOldClasses ] ) {
+				destination.removeClass( this[ varNameForOldClasses ] );
+				this[ varNameForOldClasses ] = "";
+			}
+
+			if ( newClasses ) {
+				this[ varNameForOldClasses ] = newClasses;
+				destination.addClass( newClasses );
+			}
+		}
+
+		return this;
+	},
+
 	enhanceWithin: function( target, useKeepNative ) {
 		this.enhance( $( $[ this.namespace ][ this.widgetName ].initSelector, $( target ) ), useKeepNative );
 	},

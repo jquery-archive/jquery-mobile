@@ -122,21 +122,6 @@ $.widget( "mobile.collapsible", {
 		this._trigger( isCollapse ? "collapse" : "expand" );
 	},
 
-	_toggleClasses: function( destination, varForOld, newClasses ) {
-		if ( this[ varForOld ] !== newClasses ) {
-			if ( this[ varForOld ] ) {
-				destination.removeClass( this[ varForOld ] );
-				this[ varForOld ] = "";
-			}
-
-			if ( newClasses ) {
-				this[ varForOld ] = newClasses;
-				destination.addClass( this[ varForOld ] );
-			}
-		}
-		return this;
-	},
-
 	// Retrieve the option value first from the options object passed in and, if
 	// null, from the parent accordion or, if that's null too, or if there's no
 	// parent accordion, then from the defaults.
