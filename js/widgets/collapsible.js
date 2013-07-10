@@ -32,7 +32,7 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_create: function() {
-		var anchor,
+		var anchor, placeholder,
 			$el = this.element.addClass( "ui-collapsible" ),
 			opts = this.options,
 			heading = $el.children( opts.heading ).first(),
@@ -43,6 +43,7 @@ $.widget( "mobile.collapsible", {
 		// Replace collapsibleHeading if it's a legend
 		if ( heading.is( "legend" ) ) {
 			replacementHeading = $( "<div role='heading'>"+ heading.html() +"</div>" );
+			placeholder = $( "<div><!-- placeholder for legend --></div>" ).insertBefore( heading );
 			heading.remove();
 		}
 
@@ -65,6 +66,8 @@ $.widget( "mobile.collapsible", {
 			_elClasses: "",
 			_contentTheme: "",
 			_ui: {
+				placeholder: placeholder,
+				originalHeading: heading,
 				anchor: anchor,
 				content: content,
 				heading: replacementHeading
@@ -157,6 +160,29 @@ $.widget( "mobile.collapsible", {
 
 	collapse: function() {
 		this._handleExpandCollapse( true );
+	},
+
+	_destroy: function() {
+		var ui = this._ui;
+
+		if ( ui.placeholder ) {
+			ui.originalHeading.insertBefore( ui.placeholder );
+			ui.placeholder.remove();
+			ui.heading.remove();
+		} else {
+			ui.heading
+				.removeClass( "ui-collapsible-heading ui-collapsible-heading-collapsed" )
+				.find( ".ui-collapsible-heading-status" )
+					.remove()
+				.end()
+				.children()
+					.contents()
+						.unwrap();
+		}
+
+		ui.anchor.contents().unwrap();
+		ui.content.contents().unwrap();
+		this.element.removeClass( "ui-collapsible " + this._elClasses + ( this.options.collapsed ? " ui-collapsible-collapsed" : "" ) );
 	},
 
 	_setOptions: function( options ) {
