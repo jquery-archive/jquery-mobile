@@ -404,6 +404,48 @@
 		]);
 	});
 
+	module( "Caching" );
+
+		asyncTest( "list filter is inset from prototype options value", function() {
+		$.mobile.filterbar.prototype.options.inset = true;
+		$("#list-inset-filter-prototype").page();
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-inset-filter-prototype");
+			},
+
+			function( timedOut) {
+				ok( !timedOut );
+				console.log( $.mobile.activePage );
+				console.log( $.mobile.activePage.find("div.ui-filter-inset"));
+				deepEqual( $.mobile.activePage.find("div.ui-filter-inset").length, 1, "div is inset");
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "list filter is inset from data attr value", function() {
+		$.mobile.listview.prototype.options.inset = false;
+		$("#list-inset-filter-data-attr").page();
+
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-inset-filter-data-attr");
+			},
+
+			function( timedOut) {
+				ok( !timedOut );
+				deepEqual( $.mobile.activePage.find("div.ui-filter-inset").length, 1, "div is inset");
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
 	module( "Filter Widget Configuration" );
 	
 	asyncTest( "Custom id and classes are set on filter", function () {
