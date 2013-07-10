@@ -54,7 +54,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 					// Change val as lastval for next execution
 					search.setAttribute( "data-" + $.mobile.ns + "lastval" , val );
 					
-					self._filterItems( search, val, lastval )
+					self._filterItems( search, val, lastval );
 				}, 250);
 			},
 
@@ -97,7 +97,6 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			
 			_filterItems: function( search, val, lastval ){
 				var self = this,
-					el = self.element,
 					o = self.options,
 					getAttrFixed = $.mobile.getAttribute,
 					filterItems = self._setFilterableItems(val, lastval),
@@ -253,7 +252,9 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 					key;
 
 				for ( key in options ) {
+                  if(options.hasOwnProperty(key)) {
 					self._setOption( key, options[ key ] );
+                  }
 				}
 
 				return self;
@@ -278,7 +279,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			},
 			
 			widget: function() {
-				return this.element
+				return this.element;
 			},
 			
 			enable: function() {
@@ -287,7 +288,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 
 			disable: function() {
 				return this._setOption( "disabled", true );
-			}, 
+			},
 			
 			destroy: function() {
 				var self = this,
@@ -297,13 +298,13 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				if ( o.enhance ) {
 					wrapper.parentNode.removeChild( wrapper );
 				}
-				self._toggleFilterableItems( self._getFilterableItems(), false, false ); 
+				self._toggleFilterableItems( self._getFilterableItems(), false, false );
 				self._destroy();
 			}
 
 	}, $.mobile.behaviors.addFirstLastClasses ) );
 
-	$.mobile.filterbar.initSelector = ':jqmData(filter="true")';
+	$.mobile.filterbar.initSelector = ":jqmData(filter='true')";
 
 	//auto self-init widgets
 	$.mobile._enhancer.add( "mobile.filterbar" );
