@@ -7,7 +7,6 @@
 define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-	"use strict";
 
 	// TODO rename filterCallback/deprecate and default to the item itself as the first argument
 	var defaultfilterCallback = function( text, searchValue /*, item */) {
@@ -31,9 +30,8 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			},
 
 			_onKeyUp: function() {
-				var self = this,
-					search = self._search[ 0 ],
-					o = self.options,
+				var search = this._search[ 0 ],
+					o = this.options,
 					getAttrFixed = $.mobile.getAttribute,
 					val = search.value.toLowerCase(),
 					lastval = getAttrFixed( search, "lastval", true ) + "";
@@ -47,21 +45,19 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 					window.clearTimeout(o.timer);
 				}
 
-				o.timer = window.setTimeout(function() {
+				o.timer = this._delay(function() {
+					this._trigger( "beforefilter", "beforefilter", { input: search } );
 
-					self._trigger( "beforefilter", "beforefilter", { input: search } );
-					
 					// Change val as lastval for next execution
 					search.setAttribute( "data-" + $.mobile.ns + "lastval" , val );
-					
-					self._filterItems( search, val, lastval );
-				}, 250);
+
+					this._filterItems( search, val, lastval );
+				}, 250 )
 			},
 
 			_getFilterableItems: function() {
-				var self = this,
-					el = self.element,
-					o = self.options,
+				var el = this.element,
+					o = this.options,
 					items = [];
 
 				if (typeof o.selector === "string") {
@@ -73,11 +69,10 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			},
 			
 			_setFilterableItems: function(val, lastval) {
-				var self = this,
-					o = self.options,
+				var o = this.options,
 					filterItems = [],
 					isCustomfilterCallback = o.filterCallback !== defaultfilterCallback,
-					_getFilterableItems = self._getFilterableItems();
+					_getFilterableItems = this._getFilterableItems();
 				
 				if ( isCustomfilterCallback || val.length < lastval.length || val.indexOf( lastval ) !== 0 ) {
 
@@ -96,18 +91,17 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			},
 			
 			_filterItems: function( search, val, lastval ){
-				var self = this,
-					o = self.options,
+				var o = this.options,
 					getAttrFixed = $.mobile.getAttribute,
-					filterItems = self._setFilterableItems(val, lastval),
-					_getFilterableItems = self._getFilterableItems(),
+					filterItems = this._setFilterableItems(val, lastval),
+					_getFilterableItems = this._getFilterableItems(),
 					childItems = false,
 					itemtext = "",
 					item,
-					select = self.element.parents( ".ui-select" ),
+					select = this.element.parents( ".ui-select" ),
 					i;
 
-				self._setOption( "timer", undefined );
+				this._setOption( "timer", undefined );
 
 				if ( val ) {
 
@@ -137,12 +131,12 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 						}
 					}
 					
-					self._toggleFilterableItems( filterItems, select, o.filterReveal , true);
+					this._toggleFilterableItems( filterItems, select, o.filterReveal , true);
 				} else {
-					self._toggleFilterableItems( filterItems, select, o.filterReveal );
+					this._toggleFilterableItems( filterItems, select, o.filterReveal );
 				}
 
-				self._addFirstLastClasses( _getFilterableItems, self._getVisibles( _getFilterableItems, false ), false );
+				this._addFirstLastClasses( _getFilterableItems, this._getVisibles( _getFilterableItems, false ), false );
 			},
 			
 			_toggleFilterableItems: function( filterItems, select, reveal, isVal )	{
@@ -176,13 +170,12 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			},
 			
 			_enhance: function () {
-				var self = this,
-					el = this.element,
-					o = self.options,
+				var el = this.element,
+					o = this.options,
 					wrapper = $( "<div>", {
 						"class": o.classes + " ui-filter ",
 						"role": "search",
-						"id" : o.id || "ui-filter-" + self.uuid
+						"id" : o.id || "ui-filter-" + this.uuid
 					}),
 					search = $( "<input>", {
 						placeholder: o.filterPlaceholder
@@ -208,19 +201,18 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			},
 
 			_create: function() {
-				var self = this,
-					o = self.options,
+				var o = this.options,
 					search,
-					items = self._getFilterableItems();
+					items = this._getFilterableItems();
 				
 				if ( o.filterReveal ) {
 					items.addClass( "ui-screen-hidden" );
 				}
 
-				self._setOption( "timer", undefined );
+				this._setOption( "timer", undefined );
 
 				if (o.enhance) {
-					search = self._enhance();
+					search = this._enhance();
 				} else {
 					// NOTE: DIY requires data-id, otherwise how do we find the search 
 					// input. We could always wrap the filterable element (e.g. ul) in
@@ -229,9 +221,9 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 					search = $( "#" + o.id ).find( "input" );
 				}
 
-				self._on( search, { keyup: "_onKeyUp", change: "_onKeyUp", input: "_onKeyUp" } );
+				this._on( search, { keyup: "_onKeyUp", change: "_onKeyUp", input: "_onKeyUp" } );
 				
-				$.extend( self, {
+				$.extend( this, {
 					_search: search
 				});
 				
@@ -244,26 +236,24 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				// "_super()-widget" calling it. So 2x input on the filter should trigger
 				// 2x addFirstLastClasses vs. currently 3x because of including the call
 				// when setting up the parent listview.
-				self._addFirstLastClasses( items, self._getVisibles( items, true ), true );
+				this._addFirstLastClasses( items, this._getVisibles( items, true ), true );
 			},
 
 			_setOptions: function( options ) {
-				var self = this,
-					key;
+				var key;
 
 				for ( key in options ) {
                   if(options.hasOwnProperty(key)) {
-					self._setOption( key, options[ key ] );
+					this._setOption( key, options[ key ] );
                   }
 				}
 
-				return self;
+				return this;
 			},
 			
 			_setOption: function( key, value ) {
-				var self = this,
-					o = self.options,
-					wrapper = document.getElementById( o.id || "ui-filter-" + self.uuid ),
+				var o = this.options,
+					wrapper = document.getElementById( o.id || "ui-filter-" + this.uuid ),
 					$input = $( wrapper ).find( "input" );
 
 				// always update
@@ -271,11 +261,11 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 
 				if ( key === "disabled" ) {
 					$input
-						.toggleClass( self.widgetFullName + "-disabled ui-state-disabled", !!value )
+						.toggleClass( this.widgetFullName + "-disabled ui-state-disabled", !!value )
 						.attr( "aria-disabled", value )
 						.textinput( value ? "disable" : "enable" );
 				}
-				return self;
+				return this;
 			},
 			
 			widget: function() {
@@ -291,15 +281,14 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			},
 			
 			destroy: function() {
-				var self = this,
-					o = self.options,
-					wrapper = document.getElementById( o.id || "ui-filter-" + self.uuid );
+				var o = this.options,
+					wrapper = document.getElementById( o.id || "ui-filter-" + this.uuid );
 				
 				if ( o.enhance ) {
 					wrapper.parentNode.removeChild( wrapper );
 				}
-				self._toggleFilterableItems( self._getFilterableItems(), false, false );
-				self._destroy();
+				this._toggleFilterableItems( this._getFilterableItems(), false, false );
+				this._destroy();
 			}
 
 	}, $.mobile.behaviors.addFirstLastClasses ) );
