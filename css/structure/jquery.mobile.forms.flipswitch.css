@@ -25,7 +25,7 @@ div.ui-flipswitch{
     border:none;
     opacity: 0;
 }
-.ui-flipswitch-input.ui-flipswitch-active + .ui-flipswitch{
+div.ui-flipswitch.ui-flipswitch-active{
 	padding-left: 4.1em;
     background-position:0 0;
     width: 1.85em;

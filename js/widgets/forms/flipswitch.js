@@ -10,52 +10,133 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 (function( $, undefined ) {
 
 $.widget( "mobile.flipswitch", $.mobile.widget, $.extend({
+
 	options: {
 		onText: "On",
 		offText: "Off",
-		theme: "a"
+		theme: "a",
+		enhanced: false,
+		wrapperClass: null
 	},
+
 	_create: function(){
-		var flipswitch = $("<div>");
-			on = $("<span tabindex='1'>"),
-			off = $("<span>"),
-			type = this.element.get(0).tagName,
-			onText = ( type === "INPUT")? this.options.onText:this.element.find("option").eq(0).text(),
-			offText = ( type === "INPUT")? this.options.offText:this.element.find("option").eq(1).text();
+			if( !this.options.enhanced ){
+				this._enhance();
+			} else {
+				$.extend( this, {
+					flipswitch: this.element.parent(),
+					on: this.element.find( ".ui-flipswitch-on" ).eq( 0 ),
+					off: this.element.find( ".ui-flipswitch-off" ).eq(0),
+					type: this.element.get( 0 ).tagName
+				});
+			}
 
-			on.addClass("ui-flipswitch-on ui-btn ui-shadow ui-btn-"+this.options.theme).text( onText );
-			off.addClass("ui-flipswitch-off").text( offText );
-			flipswitch.addClass("ui-flipswitch ui-shadow-inset ui-bar-inherit ui-corner-all ui-bar-"+this.options.theme).append( on, off );
-			this.element.addClass("ui-flipswitch-input");
-			this.element.after( flipswitch );
-			$.extend( this, {
-				flipswitch:flipswitch,
-				on:on,
-				off:off,
-				type:type
+			this._on( this.flipswitch, {
+				"click": "_toggle",
+				"swipeleft": "_left",
+				"swiperight":"_right"
 			});
 
-			this._on( flipswitch, {
-				"click": "_toggle"+type,
-				"swipe": "_toggle"+type
+			this._on( this.on, {
+				"keydown": "_keydown"
 			});
 	},
-	_toggleINPUT: function(){
-		this.element.toggleClass("ui-flipswitch-active").prop("checked", function(idx,attr){
-            return !attr;
-        });
-	},
-	_toggleSELECT: function(){
-		var index = this.element.get(0).selectedIndex;
-		this.element.toggleClass("ui-flipswitch-active").get(0).selectedIndex = ( index > 0 )? 0:1;
 
+	widget: function() {
+		return this.element.flipswitch;
 	},
-	refresh: function(){
 
+	_left: function(){
+		this.flipswitch.removeClass( "ui-flipswitch-active" );
+		if( this.type === "SELECT" ){
+			this.element.get( 0 ).selectedIndex = 0;
+		} else {
+			this.element.prop( "checked", true );
+		}
+		this._trigger("change");
 	},
-	_setOptions: function(){
 
+	_right: function(){
+		this.flipswitch.addClass( "ui-flipswitch-active" );
+		if( this.type === "SELECT" ){
+			this.element.get( 0 ).selectedIndex = 1;
+		} else {
+			this.element.prop( "checked", false );
+		}
+		this._trigger("change");
+	},
+
+	_enhance: function(){
+		var flipswitch = $( "<div>" );
+			on = $( "<span tabindex='1'>" ),
+			off = $( "<span>" ),
+			type = this.element.get( 0 ).tagName,
+			onText = ( type === "INPUT" )? this.options.onText: this.element.find( "option" ).eq( 0 ).text(),
+			offText = ( type === "INPUT" )? this.options.offText: this.element.find( "option" ).eq( 1 ).text();
+
+			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-" + this.options.theme ).text( onText );
+			off.addClass( "ui-flipswitch-off" ).text( offText );
+			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-bar-inherit ui-corner-all ui-bar-" + this.options.theme + " " + this.options.wrapperClass + " " + ( this.element.is( ":checked" )? "ui-flipswitch-active": "" ) ).append( on, off );
+			this.element.addClass( "ui-flipswitch-input" );
+			this.element.after( flipswitch ).appendTo( flipswitch );
+
+		$.extend( this, {
+			flipswitch:flipswitch,
+			on:on,
+			off:off,
+			type:type
+		});
+	},
+
+	_change: function() {
+		var direction;
+		if( this.type === "SELECT" ){
+			direction = ( this.element.get( 0 ).selectedIndex > 0 )? "_right": "_left";
+		} else {
+			direction = this.element.is( ":checked" )? "_right": "_left";
+		}
+		this[ direction ]();
+	},
+
+	_toggle: function(){
+		var direction = this.flipswitch.hasClass("ui-flipswitch-active")? "_left": "_right";
+		this[direction]();
+	},
+
+	_keydown: function( e ){
+		if( e.which === $.mobile.keyCode.LEFT ){
+			this._left();
+		} else if( e.which === $.mobile.keyCode.RIGHT ){
+			this._right();
+		} else if( e.which === $.mobile.keyCode.SPACE ){
+			this._toggle();
+			e.preventDefault();
+		}
+	},
+
+	_setOptions: function( options ){
+		if( options.theme !== undefined ) {
+			this.widget().removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + options.theme );
+		}
+		if( options.onText !== undefined ) {
+			this.on.text( options.onText );
+		}
+		if( options.offText ) {
+			this.off.text( options.offText );
+		}
+	},
+
+	_destroy: function(){
+		if( this.options.enhanced ){
+			return;
+		}
+		this.on.remove();
+		this.off.remove();
+		this.element.unwrap();
+		this.flipswitch.remove();
+		this.removeClass( "ui-flipswitch-input" );
 	}
+
 }, $.mobile.behaviors.formReset ) );
 
 $.mobile.flipswitch.initSelector = ":jqmData(role='flipswitch')";
