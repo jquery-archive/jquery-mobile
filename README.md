@@ -133,8 +133,7 @@ Additionally, jQuery Mobile's test suite is split between integration and unit t
 Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this _before_ submitting a pull request it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on `new-feature` branch where `upstream` is the remote at `git://github.com/jquery/jquery-mobile.git`:
 
     git checkout new-feature
-    git fetch upstream
-    git rebase upstream/master
+    git pull --rebase upstream master
     ## ... here you may have to resolve some conflicts ... ##
 
 You can now push to your own fork and submit the pull request. Keep in mind that it's only a good idea to do this if you _haven't_ already submitted a pull request unless you want to create a new one because your origin remote (your fork) will report a discrepancy. Again, please refer to the [chapter](http://git-scm.com/book/ch3-6.html) in Pro Git on rebasing if you're new to it.
