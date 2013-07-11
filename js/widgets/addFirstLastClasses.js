@@ -7,7 +7,7 @@ define( [ "jquery", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile.behaviors.addFirstLastClasses = {
+$.ui.behaviors.addFirstLastClasses = {
 	_getVisibles: function( $els, create ) {
 		var visibles;
 

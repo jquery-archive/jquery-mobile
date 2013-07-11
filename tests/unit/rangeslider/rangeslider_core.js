@@ -2,7 +2,7 @@
  * mobile slider unit tests
  */
 (function($){
-	module( "jquery.mobile.rangeslider.js core" );
+	module( "jquery.ui.rangeslider.js core" );
 
 	test( "Hightlight has correct margin and width", function() {
 		expect( 2 );

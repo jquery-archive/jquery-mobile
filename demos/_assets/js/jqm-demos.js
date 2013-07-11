@@ -25,8 +25,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 		isLocal: true
 	}).error(function() {
 		// Ajax doesn't work so turn it off
-		$( document ).on( "mobileinit", function() {
-			$.mobile.ajaxEnabled = false;
+		$( document ).on( "uiinit", function() {
+			$.ui.ajaxEnabled = false;
 			
 			var message = $( '<div>' , {
 				'class': "jqm-content jqm-fullwidth ui-bar-f",
@@ -36,7 +36,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 			
 			message
 			.append( "<h3 style='margin:0 0 .3em; padding:0; font-size:1em; font-weight: bold; color:#fff;'>Note: Navigation may not work if viewed locally</h3>" )
-			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help' style='color:white'>view help</a>.</p>" );
+			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>The AJAX-based navigation used throughout the jQuery ui docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-ui/wiki/Downloadable-Docs-Help' style='color:white'>view help</a>.</p>" );
 			
 			$( document ).on( "pagecreate", function( event ) {
 				$( event.target ).append( message );
@@ -48,7 +48,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 
 // display the version of jQM
 $( document ).on( "pageinit", function() {
-	var version = $.mobile.version || "dev",
+	var version = $.ui.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
 		str = words[1] || "",
@@ -60,7 +60,7 @@ $( document ).on( "pageinit", function() {
 		str = str.toUpperCase().replace( ".", "" );
 	}
 
-	if ( $.mobile.version && str ) {
+	if ( $.ui.version && str ) {
 		text += " " + str;
 	}
 
@@ -146,7 +146,7 @@ $( document ).on( "pageshow",  ".jqm-demos", function() {
 });
 
 $( document ).on( "pageshow", ".jqm-demos-search-results", function() {
-	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1], self = this;
+	var search = $.ui.path.parseUrl( window.location.href ).search.split( "=" )[1], self = this;
 	setTimeout(function() {
 		e = $.Event( "keyup" );
 		e.which = 65;
@@ -194,7 +194,7 @@ jQuery.fn.removeHighlight = function() {
 $( document ).on( "mobileinit", function() {
 	(function( $, undefined ) {
 
-	$.widget( "mobile.listview", $.mobile.listview, {
+	$.widget( "ui.listview", $.ui.listview, {
 		options: {
 			theme: null,
 			countTheme: null,
@@ -233,7 +233,7 @@ $( document ).on( "mobileinit", function() {
 				base = base.split( "index.html" )[0] + "demos" + "/";
 				url = base + this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
 			
-			$.mobile.changePage( url ); 
+			$.ui.changePage( url ); 
 		},
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
@@ -263,7 +263,7 @@ $( document ).on( "mobileinit", function() {
 		handleKeyUp: function( e ) {
 			var input = this.element.parent().find( "input" );
 			
-			if ( e.which === $.mobile.keyCode.DOWN ) {
+			if ( e.which === $.ui.keyCode.DOWN ) {
 				if ( this.element.find( "li.ui-btn-active" ).length == 0 ) {
 					this.element.find( "li:first" ).toggleClass( "ui-btn-active" );
 				} else {
@@ -271,7 +271,7 @@ $( document ).on( "mobileinit", function() {
 				}
 				
 				this.highlightDown();
-			} else if ( e.which === $.mobile.keyCode.UP ) {
+			} else if ( e.which === $.ui.keyCode.UP ) {
 				if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
 					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" );
 					
@@ -296,7 +296,7 @@ $( document ).on( "mobileinit", function() {
 			if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
 				var href = this.element.find( "li.ui-btn-active a" ).attr( "href" );
 				
-				$.mobile.changePage( href );
+				$.ui.changePage( href );
 				return false;
 			}
 			

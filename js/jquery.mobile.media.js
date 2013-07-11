@@ -42,8 +42,8 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 
 	}( document ));
 
-	// $.mobile.media uses matchMedia to return a boolean.
-	$.mobile.media = function( q ) {
+	// $.ui.media uses matchMedia to return a boolean.
+	$.ui.media = function( q ) {
 		return window.matchMedia( q ).matches;
 	};
 

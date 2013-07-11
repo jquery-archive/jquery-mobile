@@ -52,8 +52,8 @@
 		setPushState: function() {
 			if( $.support.pushState && location.search.indexOf( "push-state" ) >= 0 ) {
 				$.support.pushState = false;
-				$.mobile.window.unbind( "popstate.navigate" );
-				$.mobile.window.unbind( "popstate.hashchange" );
+				$.ui.window.unbind( "popstate.navigate" );
+				$.ui.window.unbind( "popstate.hashchange" );
 				$.event.special.navigate.bound = false;
 				$.event.special.navigate.setup();
 			}
@@ -62,7 +62,7 @@
 		setPageTransition: function() {
 			if( location.search.indexOf( "transition=none" ) >= 0 ) {
 				$( document ).bind( 'mobileinit', function() {
-					$.mobile.defaultPageTransition = "none";
+					$.ui.defaultPageTransition = "none";
 				});
 			}
 		},
@@ -212,7 +212,7 @@
 				}, 2000);
 
 				// bind the recursive call to the event
-				( self.eventTarget || $.mobile.pageContainer ).one(event, function( event, data ) {
+				( self.eventTarget || $.ui.pageContainer ).one(event, function( event, data ) {
 					clearTimeout( warnTimer );
 
 					// Let the current stack unwind before we fire off the next item in the sequence.
@@ -373,7 +373,7 @@
 		},
 
 		assertUrlLocation: function( args ) {
-			var parts = $.mobile.path.parseUrl( location.href ),
+			var parts = $.ui.path.parseUrl( location.href ),
 				pathnameOnward = location.href.replace( parts.domain, "" );
 
 			if( $.support.pushState ) {

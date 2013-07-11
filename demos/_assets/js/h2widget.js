@@ -4,7 +4,7 @@
 		ele = "";
 	$( document ).on( "click", "a", function( e ) {
 		href = $( this ).attr( "href" );
-		var hash = $.mobile.path.parseUrl( href );
+		var hash = $.ui.path.parseUrl( href );
 		if( typeof href !== "undefined" && hash !== "" && href !== href.replace( hash,"" ) && hash.search( "/" ) !== -1 ){
 			//remove the hash from the link to allow normal loading of the page.
 			var newHref = href.replace( hash,"" );
@@ -16,7 +16,7 @@
 			f.originalHref = href;
 	});
 	$( document ).on("pagebeforechange", function( e,f ){
-		var hash = $.mobile.path.parseUrl(f.toPage).hash,
+		var hash = $.ui.path.parseUrl(f.toPage).hash,
 			hashEl, hashElInPage;
 
 		try {
@@ -41,16 +41,16 @@
 			!hashElInPage.hasClass( "ui-popup" ) ) {
 			//scroll to the id
 			var pos = hashEl.offset().top;
-			$.mobile.silentScroll( pos );
-			$.mobile.navigate( hash, '', true );
+			$.ui.silentScroll( pos );
+			$.ui.navigate( hash, '', true );
 		} else if( typeof f.toPage !== "object" &&
 			hash !== "" &&
-			$.mobile.path.parseUrl( href ).hash !== "" &&
+			$.ui.path.parseUrl( href ).hash !== "" &&
 			!hashEl.hasClass( "ui-page" ) && hashEl.attr('data-role') !== "page" &&
 			!hashElInPage.hasClass( "ui-panel" ) &&
 			!hashElInPage.hasClass( "ui-popup" ) ) {
 			$( ele ).attr( "href", href );
-			$.mobile.document.one( "pagechange", function() {
+			$.ui.document.one( "pagechange", function() {
 				if( typeof hash !== "undefined" &&
 					hash.search( "/" ) === -1 &&
 					hash !== "" &&
@@ -60,16 +60,16 @@
 					hashEl.data('role') !== "page" &&
 					!hashElInPage.hasClass( "ui-panel" ) &&
 					!hashElInPage.hasClass( "ui-popup" ) ) {
-					hash = $.mobile.path.parseUrl( href ).hash;
+					hash = $.ui.path.parseUrl( href ).hash;
 					var pos = hashElInPage.offset().top;
-					$.mobile.silentScroll( pos );
+					$.ui.silentScroll( pos );
 				}
 			} );
 		}
 	});
 	$( document ).on( "mobileinit", function(){
 		hash = window.location.hash;
-		$.mobile.document.one( "pageshow", function(){
+		$.ui.document.one( "pageshow", function(){
 			var hashEl, hashElInPage;
 
 			try {
@@ -94,14 +94,14 @@
 				!hashEl.is( "body" ) ){
 				var pos = hashElInPage.offset().top;
 				setTimeout( function(){
-					$.mobile.silentScroll( pos );
+					$.ui.silentScroll( pos );
 				}, 100 );
 			}
 		});
 	});
 	//h2 widget
 	$( document ).on( "mobileinit", function(){
-		$.widget( "mobile.h2linker", {
+		$.widget( "ui.h2linker", {
 			options:{
 				initSelector: ":jqmData(quicklinks='true')"
 			},
@@ -161,7 +161,7 @@
 		});
 	});
 	$( document ).bind( "pagecreate create", function( e ) {
-		var initselector = $.mobile.h2linker.prototype.options.initSelector;
+		var initselector = $.ui.h2linker.prototype.options.initSelector;
 		if($(e.target).data("quicklinks")){
 			$(e.target).h2linker();
 		}

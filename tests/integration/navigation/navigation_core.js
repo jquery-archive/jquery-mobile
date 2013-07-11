@@ -4,11 +4,11 @@ $.testHelper.delayStart();
  */
 (function($){
 	// TODO move siteDirectory over to the nav path helper
-	var changePageFn = $.mobile.changePage,
+	var changePageFn = $.ui.changePage,
 		originalTitle = document.title,
-		originalLinkBinding = $.mobile.linkBindingEnabled,
+		originalLinkBinding = $.ui.linkBindingEnabled,
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
-		home = $.mobile.path.parseUrl(location.pathname).directory,
+		home = $.ui.path.parseUrl(location.pathname).directory,
 		homeWithSearch = home + location.search,
 		search = location.search;
 
@@ -16,17 +16,17 @@ $.testHelper.delayStart();
 			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
 
-	module('jquery.mobile.navigation.js', {
+	module('jquery.ui.navigation.js', {
 		setup: function() {
-			$.mobile.navigate.history.stack = [];
-			$.mobile.navigate.history.activeIndex = 0;
+			$.ui.navigate.history.stack = [];
+			$.ui.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( homeWithSearch );
 		},
 
 		teardown: function() {
 			$.Event.prototype.which = undefined;
-			$.mobile.linkBindingEnabled = originalLinkBinding;
-			$.mobile.changePage = changePageFn;
+			$.ui.linkBindingEnabled = originalLinkBinding;
+			$.ui.changePage = changePageFn;
 			document.title = originalTitle;
 		}
 	});
@@ -39,18 +39,18 @@ $.testHelper.delayStart();
 			},
 
 			function(){
-				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation to internal page." );
+				ok( $.ui.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation to internal page." );
 
 				$.testHelper.openPage("#/tests/integration/navigation/external.html");
 			},
 
 			function() {
-				ok( $.mobile.activePage.attr("id"), "external-test", "successful navigation to external page." );
+				ok( $.ui.activePage.attr("id"), "external-test", "successful navigation to external page." );
 				window.history.back();
 			},
 
 			function() {
-				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation back to internal page." );
+				ok( $.ui.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation back to internal page." );
 				start( 1000 );
 			}
 		]);
@@ -59,12 +59,12 @@ $.testHelper.delayStart();
 	asyncTest( "external empty page does not result in any contents", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "blank.html" );
+				$.ui.changePage( "blank.html" );
 			},
 
 			function() {
-				deepEqual( $.mobile.activePage.contents().length, 0, "A blank page has no contents" );
-				$.mobile.back();
+				deepEqual( $.ui.activePage.contents().length, 0, "A blank page has no contents" );
+				$.ui.back();
 			},
 
 			function() {
@@ -76,7 +76,7 @@ $.testHelper.delayStart();
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "external.html" );
+				$.ui.changePage( "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -105,7 +105,7 @@ $.testHelper.delayStart();
 
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( "external.html" );
+				$.ui.changePage( "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -119,7 +119,7 @@ $.testHelper.delayStart();
 				deepEqual( $( "#external-test" ).length, 1 );
 
 				// Switch back to the page again!
-				$.mobile.changePage( "external.html" );
+				$.ui.changePage( "external.html" );
 			},
 
 			// page is still present and displayed in the dom
@@ -144,7 +144,7 @@ $.testHelper.delayStart();
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( "cached-external.html" );
+				$.ui.changePage( "cached-external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -164,8 +164,8 @@ $.testHelper.delayStart();
 	asyncTest( "external page is cached in the DOM after pagehide when option is set globally", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.page.prototype.options.domCache = true;
-				$.mobile.changePage( "external.html" );
+				$.ui.page.prototype.options.domCache = true;
+				$.ui.changePage( "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -177,7 +177,7 @@ $.testHelper.delayStart();
 			// external test page is cached in the dom after transitioning away
 			function(){
 				deepEqual( $( "#external-test" ).length, 1 );
-				$.mobile.page.prototype.options.domCache = false;
+				$.ui.page.prototype.options.domCache = false;
 				$( "#external-test" ).remove();
 				start();
 			}]);
@@ -187,7 +187,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			function(){
 				$( "body" ).height( $( window ).height() + 500 );
-				$.mobile.changePage( "external.html" );
+				$.ui.changePage( "external.html" );
 			},
 
 			function(){
@@ -227,7 +227,7 @@ $.testHelper.delayStart();
 		$.testHelper.sequence([
 			// avoid initial page load triggering changePage early
 			function(){
-				$.mobile.changePage = newChangePage;
+				$.ui.changePage = newChangePage;
 
  				$('#non-ajax-form').one('submit', function(event){
 					ok(true, 'submit callbacks are fired');
@@ -250,7 +250,7 @@ $.testHelper.delayStart();
 		$.testHelper.sequence([
 			// avoid initial page load triggering changePage early
 			function(){
-				$.mobile.changePage = newChangePage;
+				$.ui.changePage = newChangePage;
 				$('#ajax-form, #rand-ajax-form').submit();
 			},
 
@@ -268,7 +268,7 @@ $.testHelper.delayStart();
 			fired = true;
 		});
 
-		$( "<a>test</a>" ).appendTo( $.mobile.firstPage ).click();
+		$( "<a>test</a>" ).appendTo( $.ui.firstPage ).click();
 
 		setTimeout(function(){
 			deepEqual(fired, false, "hash shouldn't change after click");
@@ -280,38 +280,38 @@ $.testHelper.delayStart();
 	test( "urlHistory is working properly", function(){
 
 		//urlHistory
-		deepEqual( $.type( $.mobile.urlHistory.stack ), "array", "urlHistory.stack is an array" );
+		deepEqual( $.type( $.ui.urlHistory.stack ), "array", "urlHistory.stack is an array" );
 
 		//preload the stack
-		$.mobile.urlHistory.stack[0] = { url: "foo", transition: "bar" };
-		$.mobile.urlHistory.stack[1] = { url: "baz", transition: "shizam" };
-		$.mobile.urlHistory.stack[2] = { url: "shizoo", transition: "shizaah" };
+		$.ui.urlHistory.stack[0] = { url: "foo", transition: "bar" };
+		$.ui.urlHistory.stack[1] = { url: "baz", transition: "shizam" };
+		$.ui.urlHistory.stack[2] = { url: "shizoo", transition: "shizaah" };
 
 		//active index
-		deepEqual( $.mobile.urlHistory.activeIndex , 0, "urlHistory.activeIndex is 0" );
+		deepEqual( $.ui.urlHistory.activeIndex , 0, "urlHistory.activeIndex is 0" );
 
 		//getActive
-		deepEqual( $.type( $.mobile.urlHistory.getActive() ) , "object", "active item is an object" );
-		deepEqual( $.mobile.urlHistory.getActive().url , "foo", "active item has url foo" );
-		deepEqual( $.mobile.urlHistory.getActive().transition , "bar", "active item has transition bar" );
+		deepEqual( $.type( $.ui.urlHistory.getActive() ) , "object", "active item is an object" );
+		deepEqual( $.ui.urlHistory.getActive().url , "foo", "active item has url foo" );
+		deepEqual( $.ui.urlHistory.getActive().transition , "bar", "active item has transition bar" );
 
 		//get prev / next
-		deepEqual( $.mobile.urlHistory.getPrev(), undefined, "urlHistory.getPrev() is undefined when active index is 0" );
-		$.mobile.urlHistory.activeIndex = 1;
-		deepEqual( $.mobile.urlHistory.getPrev().url, "foo", "urlHistory.getPrev() has url foo when active index is 1" );
-		$.mobile.urlHistory.activeIndex = 0;
-		deepEqual( $.mobile.urlHistory.getNext().url, "baz", "urlHistory.getNext() has url baz when active index is 0" );
+		deepEqual( $.ui.urlHistory.getPrev(), undefined, "urlHistory.getPrev() is undefined when active index is 0" );
+		$.ui.urlHistory.activeIndex = 1;
+		deepEqual( $.ui.urlHistory.getPrev().url, "foo", "urlHistory.getPrev() has url foo when active index is 1" );
+		$.ui.urlHistory.activeIndex = 0;
+		deepEqual( $.ui.urlHistory.getNext().url, "baz", "urlHistory.getNext() has url baz when active index is 0" );
 
 		//add new
-		$.mobile.urlHistory.activeIndex = 2;
-		$.mobile.urlHistory.add("test");
-		deepEqual( $.mobile.urlHistory.stack.length, 4, "urlHistory.addNew() adds an item after the active index" );
-		deepEqual( $.mobile.urlHistory.activeIndex, 3, "urlHistory.addNew() moves the activeIndex to the newly added item" );
+		$.ui.urlHistory.activeIndex = 2;
+		$.ui.urlHistory.add("test");
+		deepEqual( $.ui.urlHistory.stack.length, 4, "urlHistory.addNew() adds an item after the active index" );
+		deepEqual( $.ui.urlHistory.activeIndex, 3, "urlHistory.addNew() moves the activeIndex to the newly added item" );
 
 		//clearForward
-		$.mobile.urlHistory.activeIndex = 0;
-		$.mobile.urlHistory.clearForward();
-		deepEqual( $.mobile.urlHistory.stack.length, 1, "urlHistory.clearForward() clears the url stack after the active index" );
+		$.ui.urlHistory.activeIndex = 0;
+		$.ui.urlHistory.clearForward();
+		deepEqual( $.ui.urlHistory.stack.length, 1, "urlHistory.clearForward() clears the url stack after the active index" );
 	});
 
 	//url listening
@@ -330,11 +330,11 @@ $.testHelper.delayStart();
 	}
 
 	asyncTest( "ability to disable our hash change event listening internally", function(){
-		testListening( ! $.mobile.urlHistory.ignoreNextHashChange );
+		testListening( ! $.ui.urlHistory.ignoreNextHashChange );
 	});
 
 	asyncTest( "ability to disable our hash change event listening globally", function(){
-		testListening( $.mobile.hashListeningEnabled );
+		testListening( $.ui.hashListeningEnabled );
 	});
 
 	var testDataUrlHash = function( linkSelector, matches ) {
@@ -375,7 +375,7 @@ $.testHelper.delayStart();
 	});
 
 	asyncTest( "last entry chosen amongst multiple identical url history stack entries on hash change", function(){
-		var stackLength = $.mobile.navigate.history.stack.length;
+		var stackLength = $.ui.navigate.history.stack.length;
 
 		$.testHelper.pageSequence([
 			function(){ $.testHelper.openPage("#dup-history-first"); },
@@ -390,7 +390,7 @@ $.testHelper.delayStart();
 			function(){
 				// it should be the third page after whatever is in the stack to start with
 				// [wherever this test starts] -> #dup-history-first -> #dup-history-second -> #dup-history-first -> #dup-history-second -> dialog --close/back button--> [first #dup-history-second-entry]
-				deepEqual($.mobile.urlHistory.activeIndex, 3 + stackLength, "should be the fourth page in the stack");
+				deepEqual($.ui.urlHistory.activeIndex, 3 + stackLength, "should be the fourth page in the stack");
 				start();
 			}]);
 	});
@@ -399,7 +399,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			// setup
 			function(){
-				$.mobile.changePage("#skip-dialog-first");
+				$.ui.changePage("#skip-dialog-first");
 			},
 
 			// transition to the dialog
@@ -537,7 +537,7 @@ $.testHelper.delayStart();
 			// make sure the dialog is closed
 			function() {
 				setTimeout( function() {
-					deepEqual($("#dialog-double-hash-test")[0], $.mobile.activePage[0], "should be back to the test page");
+					deepEqual($("#dialog-double-hash-test")[0], $.ui.activePage[0], "should be back to the test page");
 					start();
 				}, 800);
 			}
@@ -620,7 +620,7 @@ $.testHelper.delayStart();
 
 			function(){
 				deepEqual(document.title, "Title Tag");
-				$.mobile.activePage.find("#title-check-link").click();
+				$.ui.activePage.find("#title-check-link").click();
 			},
 
 			function(){
@@ -692,7 +692,7 @@ $.testHelper.delayStart();
 			},
 
 			function(){
-				deepEqual($.mobile.activePage[0], $("#self-link")[0], "self-link page is still the active page" );
+				deepEqual($.ui.activePage[0], $("#self-link")[0], "self-link page is still the active page" );
 				start();
 			}
 		]);
@@ -795,7 +795,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
-				$.mobile.changePage( "form-tests/changepage-data.html", {
+				$.ui.changePage( "form-tests/changepage-data.html", {
 					data: "foo=1&bar=2"
 				});
 			},
@@ -815,7 +815,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
-				$.mobile.changePage( "form-tests/changepage-data.html", {
+				$.ui.changePage( "form-tests/changepage-data.html", {
 					data: {
 						foo: 3,
 						bar: 4
@@ -920,7 +920,7 @@ $.testHelper.delayStart();
 			},
 
 			function(){
-				ok(!$("#active-state-page1 a").hasClass( $.mobile.activeBtnClass ), "No button should not have class " + $.mobile.activeBtnClass );
+				ok(!$("#active-state-page1 a").hasClass( $.ui.activeBtnClass ), "No button should not have class " + $.ui.activeBtnClass );
 				start();
 			}
 		]);
@@ -936,7 +936,7 @@ $.testHelper.delayStart();
 			},
 
 			function(){
-				$.mobile.activePage.find( "a" ).click();
+				$.ui.activePage.find( "a" ).click();
 			},
 
 			function(){
@@ -944,8 +944,8 @@ $.testHelper.delayStart();
 			},
 
 			function(){
-				deepEqual( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
-				$.mobile.activePage.find( "a" ).click();
+				deepEqual( $.ui.activePage[0], $( "#default-trans-dialog" )[0] );
+				$.ui.activePage.find( "a" ).click();
 			},
 
 			function(){
@@ -953,7 +953,7 @@ $.testHelper.delayStart();
 			},
 
 			function(){
-				deepEqual( $.mobile.activePage[0], $( "#default-trans-dialog" )[0] );
+				deepEqual( $.ui.activePage[0], $( "#default-trans-dialog" )[0] );
 				start();
 			}
 		]);
@@ -972,7 +972,7 @@ $.testHelper.delayStart();
 			// make sure the page is opening first without the mocked button click value
 			// only necessary to prevent issues with test specific fixtures
 			function() {
-				deepEqual($.mobile.activePage[0], $("#odd-clicks-page-dest")[0]);
+				deepEqual($.ui.activePage[0], $("#odd-clicks-page-dest")[0]);
 				$.testHelper.openPage( "#odd-clicks-page" );
 
 				// mock the which value to simulate a middle click
@@ -985,14 +985,14 @@ $.testHelper.delayStart();
 
 			function( timeout ) {
 				ok( timeout, "page event handler timed out due to ignored click" );
-				ok($.mobile.activePage[0] !== $("#odd-clicks-page-dest")[0], "pages are not the same");
+				ok($.ui.activePage[0] !== $("#odd-clicks-page-dest")[0], "pages are not the same");
 				start();
 			}
 		]);
 	});
 
 	asyncTest( "disabling link binding disables navigation via links and highlighting", function() {
-		$.mobile.linkBindingEnabled = false;
+		$.ui.linkBindingEnabled = false;
 
 		$.testHelper.pageSequence([
 			function() {
@@ -1000,11 +1000,11 @@ $.testHelper.delayStart();
 			},
 
 			function() {
-				$.mobile.activePage.find( "a" ).click();
+				$.ui.activePage.find( "a" ).click();
 			},
 
 			function( timeout ) {
-				ok( !$.mobile.activePage.find( "a" ).hasClass( $.mobile.activeBtnClass ), "vlick handler doesn't add the activebtn class" );
+				ok( !$.ui.activePage.find( "a" ).hasClass( $.ui.activeBtnClass ), "vlick handler doesn't add the activebtn class" );
 				ok( timeout, "no page change was fired" );
 				start();
 			}
@@ -1031,7 +1031,7 @@ $.testHelper.delayStart();
 			},
 
 			function(){
-				ok(!$("#active-state-page2 a").hasClass( $.mobile.activeBtnClass ), "No button should not have class " + $.mobile.activeBtnClass );
+				ok(!$("#active-state-page2 a").hasClass( $.ui.activeBtnClass ), "No button should not have class " + $.ui.activeBtnClass );
 				start();
 			}
 		]);
@@ -1049,7 +1049,7 @@ $.testHelper.delayStart();
 					$link = $( "<a href='#injected-test-page'>injected-test-page link</a>" );
 
 				// Make sure we actually navigated to the expected page.
-				ok( $.mobile.activePage[ 0 ] == $ilpage[ 0 ], "navigated successfully to #inject-links-page" );
+				ok( $.ui.activePage[ 0 ] == $ilpage[ 0 ], "navigated successfully to #inject-links-page" );
 
 				// Now dynamically insert a page.
 				$ilpage.parent().append( "<div data-role='page' id='injected-test-page'>testing...</div>" );
@@ -1061,7 +1061,7 @@ $.testHelper.delayStart();
 
 			function(){
 				// Make sure we actually navigated to the expected page.
-				ok( $.mobile.activePage[ 0 ] == $( "#injected-test-page" )[ 0 ], "navigated successfully to #injected-test-page" );
+				ok( $.ui.activePage[ 0 ] == $( "#injected-test-page" )[ 0 ], "navigated successfully to #injected-test-page" );
 
 				start();
 			}
@@ -1077,18 +1077,18 @@ $.testHelper.delayStart();
 			},
 
 			function(){
-				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
+				ok( $.ui.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
 
 				// Now navigate to an hash that contains just a dialogHashKey.
-				$.mobile.changePage("#" + $.mobile.dialogHashKey);
+				$.ui.changePage("#" + $.ui.dialogHashKey);
 			},
 
 			function(){
 				// Make sure we actually navigated to the first page.
-				ok( $.mobile.activePage[ 0 ] === $.mobile.firstPage[ 0 ], "navigated successfully to first-page" );
+				ok( $.ui.activePage[ 0 ] === $.ui.firstPage[ 0 ], "navigated successfully to first-page" );
 
 				// Now make sure opening the page didn't result in page duplication.
-				ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
+				ok( $.ui.firstPage.hasClass( "first-page" ), "first page has expected class" );
 				deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
 
 				start();
@@ -1108,7 +1108,7 @@ $.testHelper.delayStart();
 			// open our test page
 			function(){
 				// Make sure there's only one copy of the first-page in the DOM to begin with.
-				ok( $.mobile.firstPage.hasClass( "first-page" ), "first page has expected class" );
+				ok( $.ui.firstPage.hasClass( "first-page" ), "first page has expected class" );
 				deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
 
 				// Navigate to any page except the first page of the application.
@@ -1117,7 +1117,7 @@ $.testHelper.delayStart();
 
 			function(){
 				var $foo = $( "#foo" );
-				ok( $.mobile.activePage[ 0 ] === $foo[ 0 ], "navigated successfully to #foo" );
+				ok( $.ui.activePage[ 0 ] === $foo[ 0 ], "navigated successfully to #foo" );
 				deepEqual( pagechangefailed, false, "no page change failures" );
 
 				// Now navigate to a non-existent page.
@@ -1129,7 +1129,7 @@ $.testHelper.delayStart();
 				deepEqual( pagechangefailed, true, "pagechangefailed dispatched" );
 
 				// Make sure we didn't navigate away from #foo.
-				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "did not navigate away from #foo" );
+				ok( $.ui.activePage[ 0 ] === $( "#foo" )[ 0 ], "did not navigate away from #foo" );
 
 				// Now make sure opening the page didn't result in page duplication.
 				deepEqual( $( ".first-page" ).length, 1, "first page was not duplicated" );
@@ -1154,7 +1154,7 @@ $.testHelper.delayStart();
 			},
 
 			function() {
-				ok( $.mobile.activePage.is(".ui-dialog"), "prefetched page is rendered as a dialog" );
+				ok( $.ui.activePage.is(".ui-dialog"), "prefetched page is rendered as a dialog" );
         start();
 			}
 		]);
@@ -1166,8 +1166,8 @@ $.testHelper.delayStart();
 		function hideCallback( e, data )
 		{
 			var page = e.target;
-			ok( ( page === $.mobile.firstPage[ 0 ] ), "hide called with prevPage set to firstPage");
-	  		if ( page === $.mobile.firstPage[ 0 ] ) {
+			ok( ( page === $.ui.firstPage[ 0 ] ), "hide called with prevPage set to firstPage");
+	  		if ( page === $.ui.firstPage[ 0 ] ) {
 				 $( page ).remove();
 			}
 			hideCallbackTriggered = true;
@@ -1178,13 +1178,13 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			function(){
 				// Make sure the first page is actually in the DOM.
-				ok( $.mobile.firstPage.parent().length !== 0, "first page is currently in the DOM" );
+				ok( $.ui.firstPage.parent().length !== 0, "first page is currently in the DOM" );
 
 				// Make sure the first page is the active page.
-				ok( $.mobile.activePage[ 0 ] === $.mobile.firstPage[ 0 ], "first page is the active page" );
+				ok( $.ui.activePage[ 0 ] === $.ui.firstPage[ 0 ], "first page is the active page" );
 
 				// Now make sure the first page has an id that we can use to reload it.
-				ok( $.mobile.firstPage[ 0 ].id, "first page has an id" );
+				ok( $.ui.firstPage[ 0 ].id, "first page has an id" );
 
 				// Make sure there is only one first page in the DOM.
 				deepEqual( $( ".first-page" ).length, 1, "only one instance of the first page in the DOM" );
@@ -1195,20 +1195,20 @@ $.testHelper.delayStart();
 
 			function(){
 				// Make sure the active page is #foo.
-				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
+				ok( $.ui.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
 
 				// Make sure our hide callback was triggered.
 				ok( hideCallbackTriggered, "hide callback was triggered" );
 
 				// Make sure the first page was actually pruned from the document.
-				ok( $.mobile.firstPage.parent().length === 0, "first page was pruned from the DOM" );
+				ok( $.ui.firstPage.parent().length === 0, "first page was pruned from the DOM" );
 				deepEqual( $( ".first-page" ).length, 0, "no instance of the first page in the DOM" );
 
 				// Remove our hideCallback.
 				$(document).unbind('pagehide', hideCallback);
 
 				// Navigate back to the first page!
-				$.testHelper.openPage( "#" + $.mobile.firstPage[0].id );
+				$.testHelper.openPage( "#" + $.ui.firstPage[0].id );
 			},
 
 			function(){
@@ -1219,14 +1219,14 @@ $.testHelper.delayStart();
 
 				// Make sure the first page in the DOM is actually a different DOM element than the original
 				// one we started with.
-				ok( $.mobile.firstPage[ 0 ] !== firstPage[ 0 ], "first page is a new DOM element");
+				ok( $.ui.firstPage[ 0 ] !== firstPage[ 0 ], "first page is a new DOM element");
 
 				// Make sure we actually navigated to the new first page.
-				ok( $.mobile.activePage[ 0 ] === firstPage[ 0 ], "navigated successfully to new first-page");
+				ok( $.ui.activePage[ 0 ] === firstPage[ 0 ], "navigated successfully to new first-page");
 
-				// Reset the $.mobile.firstPage	for subsequent tests.
+				// Reset the $.ui.firstPage	for subsequent tests.
 				// XXX: Should we just get rid of the new one and restore the old?
-				$.mobile.firstPage = $.mobile.activePage;
+				$.ui.firstPage = $.ui.activePage;
 
 				start();
 			}
@@ -1237,11 +1237,11 @@ $.testHelper.delayStart();
 		var $disabledByParent = $( "#unhijacked-link-by-parent" ),
 			$disabledByAttr = $( "#unhijacked-link-by-attr" );
 
-		$.mobile.ignoreContentEnabled = true;
+		$.ui.ignoreContentEnabled = true;
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#link-hijacking-test" );
+				$.ui.changePage( "#link-hijacking-test" );
 			},
 
 			function() {
@@ -1249,7 +1249,7 @@ $.testHelper.delayStart();
 			},
 
 			function() {
-				ok( $.mobile.activePage.is("#link-hijacking-destination"), "nav works for links to hijacking destination" );
+				ok( $.ui.activePage.is("#link-hijacking-destination"), "nav works for links to hijacking destination" );
 				window.history.back();
 			},
 
@@ -1258,7 +1258,7 @@ $.testHelper.delayStart();
 			},
 
 			function() {
-				ok( $.mobile.activePage.is("#link-hijacking-test"), "click should be ignored keeping the active mobile page the same as before" );
+				ok( $.ui.activePage.is("#link-hijacking-test"), "click should be ignored keeping the active mobile page the same as before" );
 			},
 
 			function() {
@@ -1266,9 +1266,9 @@ $.testHelper.delayStart();
 			},
 
 			function() {
-				ok( $.mobile.activePage.is("#link-hijacking-test"), "click should be ignored keeping the active mobile page the same as before" );
+				ok( $.ui.activePage.is("#link-hijacking-test"), "click should be ignored keeping the active mobile page the same as before" );
 
-				$.mobile.ignoreContentEnabled = false;
+				$.ui.ignoreContentEnabled = false;
 				start();
 			}
 		]);
@@ -1279,26 +1279,26 @@ $.testHelper.delayStart();
 			$disabledByAttr = $( "#unhijacked-link-by-attr" ),
 			$hijacked = $( "#hijacked-link" );
 
-		$.mobile.ignoreContentEnabled = true;
+		$.ui.ignoreContentEnabled = true;
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#link-hijacking-test" );
+				$.ui.changePage( "#link-hijacking-test" );
 			},
 
 			function() {
 				// force the active button class
-				$hijacked.addClass( $.mobile.activeBtnClass );
+				$hijacked.addClass( $.ui.activeBtnClass );
 				$hijacked.trigger( 'vclick' );
-				ok( $hijacked.hasClass( $.mobile.activeBtnClass ), "active btn class is added to the link per normal" );
+				ok( $hijacked.hasClass( $.ui.activeBtnClass ), "active btn class is added to the link per normal" );
 
 				$disabledByParent.trigger( 'vclick' );
-				ok( !$disabledByParent.hasClass( $.mobile.activeBtnClass ), "active button class is never added to the link" );
+				ok( !$disabledByParent.hasClass( $.ui.activeBtnClass ), "active button class is never added to the link" );
 
 				$disabledByAttr.trigger( 'vclick' );
-				ok( !$disabledByAttr.hasClass( $.mobile.activeBtnClass ), "active button class is never added to the link" );
+				ok( !$disabledByAttr.hasClass( $.ui.activeBtnClass ), "active button class is never added to the link" );
 
-				$.mobile.ignoreContentEnabled = false;
+				$.ui.ignoreContentEnabled = false;
 				start();
 			}
 		]);
@@ -1307,7 +1307,7 @@ $.testHelper.delayStart();
 	asyncTest( "data-urls with parens work properly (avoid jqmData regex)", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "data-url-tests/parentheses.html?foo=(bar)" );
+				$.ui.changePage( "data-url-tests/parentheses.html?foo=(bar)" );
 			},
 
 			function() {
@@ -1320,7 +1320,7 @@ $.testHelper.delayStart();
 			},
 
 			function() {
-				equal( $.trim($.mobile.activePage.text()), "Parens!", "the page loaded" );
+				equal( $.trim($.ui.activePage.text()), "Parens!", "the page loaded" );
 				start();
 			}
 		]);
@@ -1329,12 +1329,12 @@ $.testHelper.delayStart();
 	asyncTest( "loading an embeded page with query params works", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#bar?baz=bak", { dataUrl: false } );
+				$.ui.changePage( "#bar?baz=bak", { dataUrl: false } );
 			},
 
 			function() {
 				ok( location.hash.indexOf( "bar?baz=bak" ) >= -1, "the hash is targeted at the page to be loaded" );
-				ok( $.mobile.activePage.attr( "id" ), "bar", "the correct page is loaded" );
+				ok( $.ui.activePage.attr( "id" ), "bar", "the correct page is loaded" );
 				start();
 			}
 		]);
@@ -1343,18 +1343,18 @@ $.testHelper.delayStart();
 	asyncTest( "external page is accessed correctly even if it has a space in the url", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( " external.html" );
+				$.ui.changePage( " external.html" );
 			},
 			function(){
-				equal( $.mobile.activePage.attr( "id" ), "external-test", "the correct page is loaded" );
+				equal( $.ui.activePage.attr( "id" ), "external-test", "the correct page is loaded" );
 				start();
 			}
 
 		]);
 	});
 
-	var absHomeUrl = $.mobile.path.parseLocation().hrefNoHash,
-	    homeDomain = $.mobile.path.parseLocation().domain;
+	var absHomeUrl = $.ui.path.parseLocation().hrefNoHash,
+	    homeDomain = $.ui.path.parseLocation().domain;
 
 	asyncTest( "page load events are providided with the absolute url for the content", function() {
 		var requestPath;
@@ -1369,7 +1369,7 @@ $.testHelper.delayStart();
 			equal( data.absUrl, absHomeUrl + "#bar" );
 		});
 
-		$.mobile.changePage( "#bar" );
+		$.ui.changePage( "#bar" );
 
 		requestPath = "/theres/no/way/this/page/exists.html";
 
@@ -1378,6 +1378,6 @@ $.testHelper.delayStart();
 			start();
 		});
 
-		$.mobile.changePage( requestPath );
+		$.ui.changePage( requestPath );
 	});
 })(jQuery);

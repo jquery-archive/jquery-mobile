@@ -1,19 +1,19 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Default values for jQuery Mobile
+//>>description: Default values for jQuery ui
 //>>label: Defaults
 //>>group: Core
-//>>css.structure: ../css/structure/jquery.mobile.core.css
-//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+//>>css.structure: ../css/structure/jquery.ui.core.css
+//>>css.theme: ../css/themes/default/jquery.ui.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg, __version__ ) {
+define( [ "jquery", "./jquery.ui.core", "json!../package.json" ], function( jQuery, ns, pkg, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 	__version__ = ( pkg && pkg.version ) || "dev";
 //>>excludeEnd("jqmBuildExclude");
-	$.extend($.mobile, {
+	$.extend($.ui, {
 
-		// Version of the jQuery Mobile Framework
+		// Version of the jQuery ui Framework
 		version: __version__,
 
 		// Define the url parameter used for referencing widget-generated sub-pages.

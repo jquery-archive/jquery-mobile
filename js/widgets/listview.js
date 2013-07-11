@@ -9,9 +9,9 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "./addFirstLastClasses"
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var getAttr = $.mobile.getAttribute;
+var getAttr = $.ui.getAttribute;
 
-$.widget( "mobile.listview", $.extend( {
+$.widget( "ui.listview", $.extend( {
 
 	options: {
 		theme: null,
@@ -195,12 +195,12 @@ $.widget( "mobile.listview", $.extend( {
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh
 		this._trigger( "afterrefresh" );
-	}}, $.mobile.behaviors.addFirstLastClasses ) );
+	}}, $.ui.behaviors.addFirstLastClasses ) );
 
-$.mobile.listview.initSelector = ":jqmData(role='listview')";
+$.ui.listview.initSelector = ":jqmData(role='listview')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.listview" );
+$.ui._enhancer.add( "ui.listview" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

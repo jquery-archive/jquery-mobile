@@ -7,7 +7,7 @@ define( [ "jquery", "../../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile.behaviors.formReset = {
+$.ui.behaviors.formReset = {
 	_handleFormReset: function() {
 		this._on( this.element.closest( "form" ), {
 			reset: function() {

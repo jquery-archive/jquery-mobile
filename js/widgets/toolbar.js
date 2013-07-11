@@ -9,8 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-
-	$.widget( "mobile.toolbar", {
+	$.widget( "ui.toolbar", {
 		options: {
 			theme: null,
 			addBackBtn: false,
@@ -24,7 +23,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				page = this.element.closest( ".ui-page" );
 			if ( page.length === 0 ){
 				page = false;
-				this._on( $.mobile.document, {
+				this._on( $.ui.document, {
 					"pageshow": "refresh"
 				});
 			}
@@ -44,7 +43,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				if ( this.options.addBackBtn &&
 					this.role === "header" &&
 					$( ".ui-page" ).length > 1 &&
-					this.page[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+					this.page[ 0 ].getAttribute( "data-" + $.ui.ns + "url" ) !== $.ui.path.stripHash( location.hash ) &&
 					!this.leftbtn ) {
 						this._addBackButton();
 				} else {
@@ -52,7 +51,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				}
 			}
 			if ( o.backBtnTheme !== undefined ) {
-				this.element.find( ".ui-toolbar-back-btn" ).attr( "data-" + $.mobile.ns + "theme", o.backBtnTheme ).buttonMarkup({ theme: o.backBtnTheme });
+				this.element.find( ".ui-toolbar-back-btn" ).attr( "data-" + $.ui.ns + "theme", o.backBtnTheme ).buttonMarkup({ theme: o.backBtnTheme });
 			}
 			if ( o.backBtnText !== undefined ) {
 				this.element.find( ".ui-toolbar-back-btn .ui-btn-text" ).text( o.backBtnText );
@@ -71,7 +70,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				this._addHeaderButtonClasses();
 			}
 			if ( !this.page ) {
-				$( "[data-"+ $.mobile.ns +"role='page']" ).css({"position":"relative"});
+				$( "[data-"+ $.ui.ns +"role='page']" ).css({"position":"relative"});
 				if ( this.role === "footer" ) {
 					this.element.appendTo( "body" );
 				}
@@ -81,7 +80,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		},
 		// Deprecated in 1.4. As from 1.5 data-role="button" has to be present in the markup.
 		_btnMarkup: function() {
-			this.element.children( "a" ).attr( "data-" + $.mobile.ns + "role", "button" );
+			this.element.children( "a" ).attr( "data-" + $.ui.ns + "role", "button" );
 			this.element.trigger( "create" );
 		},
 		_addHeaderButtonClasses: function() {
@@ -95,9 +94,9 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 		},
 		_addBackButton:function() {
-			this.backBtn = $( "<a href='javascript:void(0);' class='ui-btn-left ui-toolbar-back-btn' data-" + $.mobile.ns + "rel='back' data-" + $.mobile.ns + "icon='arrow-l'>" + this.options.backBtnText + "</a>" )
+			this.backBtn = $( "<a href='javascript:void(0);' class='ui-btn-left ui-toolbar-back-btn' data-" + $.ui.ns + "rel='back' data-" + $.ui.ns + "icon='arrow-l'>" + this.options.backBtnText + "</a>" )
 					// If theme is provided, override default inheritance
-					.attr( "data-" + $.mobile.ns + "theme", this.options.backBtnTheme || this.options.theme )
+					.attr( "data-" + $.ui.ns + "theme", this.options.backBtnTheme || this.options.theme )
 					.prependTo( this.element );
 		},
 		_addHeadingClasses: function() {
@@ -110,9 +109,9 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				});
 		}
 	});
-	$.mobile.toolbar.initSelector = ":jqmData(role='footer'), :jqmData(role='header')";
+	$.ui.toolbar.initSelector = ":jqmData(role='footer'), :jqmData(role='header')";
 
-	$.mobile._enhancer.add( "mobile.toolbar" );
+	$.ui._enhancer.add( "ui.toolbar" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

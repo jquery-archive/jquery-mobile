@@ -3,7 +3,7 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.events.js",
+	var libName = "jquery.ui.events.js",
 	    components = [ "events/touch.js", "events/throttledresize.js", "events/orientationchange.js" ],
 	    absFn = Math.abs,
 	    originalEventFn = $.Event.prototype.originalEvent,
@@ -28,7 +28,7 @@
 			// the collections existence in non touch enabled test browsers
 			$.Event.prototype.touches = [{pageX: 1, pageY: 1 }];
 
-			$($.mobile.pageContainer).unbind( "throttledresize" );
+			$($.ui.pageContainer).unbind( "throttledresize" );
 		}
 	});
 
@@ -132,7 +132,7 @@
 
 	var forceTouchSupport = function(){
 		document.ontouchend = function() {};
-		$.testHelper.reloadLib( "jquery.mobile.support.touch.js" );
+		$.testHelper.reloadLib( "jquery.ui.support.touch.js" );
 		$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
 
 		//mock originalEvent information
@@ -519,7 +519,7 @@
 			}
 		]);
 
-		$.mobile.pageContainer
+		$.ui.pageContainer
 			.trigger( "resize" )
 			.trigger( "resize" )
 			.trigger( "resize" );

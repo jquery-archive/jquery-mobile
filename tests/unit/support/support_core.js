@@ -24,7 +24,7 @@ $.testHelper.excludeFileProtocol(function(){
 		window.history.pushState = function(){};
 		window.history.replaceState = function(){};
 
-		$.mobile.media = function(){ return true; };
+		$.ui.media = function(){ return true; };
 
 		$.testHelper.reloadModule( moduleName ).done( function() {
 			ok($.support.cssTransitions, "css transitions are supported" );
@@ -50,7 +50,7 @@ $.testHelper.excludeFileProtocol(function(){
 		document.ontouchend = true;
 
 		$.testHelper.reloadModule( "jquery.mobile.support.touch" ).done( function() {
-			ok( $.mobile.support.touch, "touch is supported" );
+			ok( $.ui.support.touch, "touch is supported" );
 			ok( $.support.touch, "touch is supported" );
 			start();
 		});
@@ -104,7 +104,7 @@ $.testHelper.excludeFileProtocol(function(){
 		//here we're just comparing our version to what the conditional compilation finds
 		 var ie 			= !!$.browser.msie, //get a boolean
 		 	 version 		= parseInt( $.browser.version, 10),
-		 	 jqmdetectedver = $.mobile.browser.oldIE;
+		 	 jqmdetectedver = $.ui.browser.oldIE;
 
 		 	if( ie ){
 		 		deepEqual(version, jqmdetectedver, "It's IE and the version is correct");

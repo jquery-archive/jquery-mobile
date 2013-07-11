@@ -8,7 +8,7 @@
 
 	test( "cleanFrom removes transition classes", function(){
 		var $from = $("<div>"),
-			transition = new $.mobile.Transition( "foo", false, $(), $from);
+			transition = new $.ui.Transition( "foo", false, $(), $from);
 
 		$from.addClass( "out in reverse foo" );
 		transition.cleanFrom();
@@ -20,7 +20,7 @@
 
 	module( "Transition scrollPage", {
 		setup: function() {
-			instance = new $.mobile.Transition();
+			instance = new $.ui.Transition();
 		},
 
 		teardown: function() {
@@ -46,7 +46,7 @@
 	module( "Transition doneIn", {
 		setup: function() {
 			$to = $("<div>");
-			instance = new $.mobile.Transition( "foo", "reverse", $to, "from");
+			instance = new $.ui.Transition( "foo", "reverse", $to, "from");
 			instance.toggleViewportClass = $.noop;
 		}
 	});
@@ -91,7 +91,7 @@
 	module( "Transition hideIn", {
 		setup: function() {
 			$to = $("<div>");
-			instance = new $.mobile.Transition( "foo", "reverse", $to, "from");
+			instance = new $.ui.Transition( "foo", "reverse", $to, "from");
 			instance.toggleViewportClass = $.noop;
 		}
 	});
@@ -110,14 +110,14 @@
 	module( "Transition startIn", {
 		setup: function() {
 			$to = $("<div>");
-			instance = new $.mobile.Transition( "foo", "reverse", $to, "from");
+			instance = new $.ui.Transition( "foo", "reverse", $to, "from");
 		}
 	});
 
 	test( "sets active page class on the dom element", function() {
-		ok( !$to.hasClass($.mobile.activePageClass) );
+		ok( !$to.hasClass($.ui.activePageClass) );
 		instance.startIn();
-		ok( $to.hasClass($.mobile.activePageClass) );
+		ok( $to.hasClass($.ui.activePageClass) );
 	});
 
 	test( "sets the height", function() {
@@ -141,7 +141,7 @@
 	module( "Transition transition", {
 		setup: function() {
 			$to = $from = $("<div>");
-			instance = new $.mobile.Transition( "foo", "reverse", $to, $from );
+			instance = new $.ui.Transition( "foo", "reverse", $to, $from );
 		}
 	});
 
@@ -150,7 +150,7 @@
 
 		var counter = 0, defaults;
 
-		defaults = $.extend({}, $.mobile.Transition.prototype);
+		defaults = $.extend({}, $.ui.Transition.prototype);
 
 		// transition child classes generally set this up
 		instance.beforeStartOut = function() {

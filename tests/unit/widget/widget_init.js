@@ -4,7 +4,7 @@
 (function($){
 	var widgetInitialized = false;
 
-	module( 'jquery.mobile.widget.js' );
+	module( 'jquery.ui.widget.js' );
 
 	$( document ).on( 'pageinit', "#foo", function(){
 		// ordering sensitive here, the value has to be set after the call
@@ -19,27 +19,27 @@
 	});
 
 	test( "elements within an ignore container are not enhanced when ignoreContentEnabled is true ", function() {
-		$.mobile.ignoreContentEnabled = true;
+		$.ui.ignoreContentEnabled = true;
 
-		$.mobile.collapsible.prototype.enhanceWithin( $("#ignored") );
+		$.ui.collapsible.prototype.enhanceWithin( $("#ignored") );
 
 		ok( !$( "#ignored-collapsible" ).hasClass( "ui-collapsible" ), "ignored element doesn't have ui-collapsible" );
 
-		$.mobile.collapsible.prototype.enhanceWithin( $("#not-ignored") );
+		$.ui.collapsible.prototype.enhanceWithin( $("#not-ignored") );
 
 		ok( $( "#collapsible" ).hasClass( "ui-collapsible" ), "identical unignored elements are enahanced" );
 
-		$.mobile.ignoreContentEnabled = false;
+		$.ui.ignoreContentEnabled = false;
 	});
 
 	test( "siblings without ignore parent are enhanced", function() {
-		$.mobile.ignoreContentEnabled = true;
+		$.ui.ignoreContentEnabled = true;
 
-		$.mobile.collapsible.prototype.enhanceWithin( $("#many-ignored") );
+		$.ui.collapsible.prototype.enhanceWithin( $("#many-ignored") );
 
 		ok( !$( "#many-ignored-collapsible" ).hasClass( "ui-collapsible" ), "sibling ignored element doesn't have ui-collapsible" );
 		ok( $( "#many-enhanced-collapsible" ).hasClass( "ui-collapsible" ), "sibling unignored elements are enahanced" );
 
-		$.mobile.ignoreContentEnabled = false;
+		$.ui.ignoreContentEnabled = false;
 	});
 })( jQuery );

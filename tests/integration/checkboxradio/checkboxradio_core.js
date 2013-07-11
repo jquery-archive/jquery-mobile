@@ -2,7 +2,7 @@
  * mobile checkboxradio unit tests
  */
 (function($){
-	module( 'jquery.mobile.forms.checkboxradio.js' );
+	module( 'jquery.ui.forms.checkboxradio.js' );
 
 	asyncTest( "radio button labels should update the active button class to last clicked and clear checked", function(){
 		var $radioBtns = $( '#radio-active-btn-test input' ),

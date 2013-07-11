@@ -15,7 +15,7 @@ $.fn.fieldcontain = function(/* options */) {
 };
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.fieldcontain", undefined, function( target ) {
+$.ui._enhancer.add( "ui.fieldcontain", undefined, function( target ) {
 	$( ":jqmData(role='fieldcontain')", target ).jqmEnhanceable().fieldcontain();
 });
 

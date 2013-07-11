@@ -4,7 +4,7 @@
 (function($) {
 	module( "jquery.mobile.dialog.js", {
 		setup: function() {
-			$.mobile.page.prototype.options.contentTheme = "d";
+			$.ui.page.prototype.options.contentTheme = "d";
 		}
 	});
 
@@ -15,11 +15,11 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( $( "#mypage" ) );
+				$.ui.changePage( $( "#mypage" ) );
 			},
 
 			function() {
-				activePage = $.mobile.activePage;
+				activePage = $.ui.activePage;
 				//bring up the dialog
 				$( "#dialog-no-hash-link" ).click();
 			},
@@ -34,7 +34,7 @@
 
 			function() {
 				ok( !$( "#dialog-no-hash" ).is( ":visible" ), "dialog disappeared" );
-				ok( $.mobile.activePage[0] === activePage[0], "active page has been restored" );
+				ok( $.ui.activePage[0] === activePage[0], "active page has been restored" );
 				start();
 			}
 		]);

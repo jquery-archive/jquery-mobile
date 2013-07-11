@@ -9,10 +9,10 @@ define( [ "jquery", "./table" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.table", $.mobile.table, {
+$.widget( "ui.table", $.ui.table, {
 	options: {
 		mode: "reflow",
-		classes: $.extend( $.mobile.table.prototype.options.classes, {
+		classes: $.extend( $.ui.table.prototype.options.classes, {
 			reflowTable: "ui-table-reflow",
 			cellLabels: "ui-table-cell-label"
 		})

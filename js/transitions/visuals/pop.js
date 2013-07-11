@@ -12,7 +12,7 @@ define( [ "jquery", "../handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-$.mobile.transitionFallbacks.pop = "fade";
+$.ui.transitionFallbacks.pop = "fade";
 
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

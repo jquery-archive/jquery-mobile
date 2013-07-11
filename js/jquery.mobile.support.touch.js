@@ -3,16 +3,16 @@
 //>>label: Touch support test
 //>>group: Core
 
-define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
+define( [ "jquery", "./jquery.ui.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 	(function( $, undefined ) {
 		var support = {
 			touch: "ontouchend" in document
 		};
 
-		$.mobile.support = $.mobile.support || {};
+		$.ui.support = $.ui.support || {};
 		$.extend( $.support, support );
-		$.extend( $.mobile.support, support );
+		$.extend( $.ui.support, support );
 	}( jQuery ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

@@ -3,9 +3,9 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.forms.select",
-		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
-		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
+	var libName = "jquery.ui.forms.select",
+		originalDefaultDialogTrans = $.ui.defaultDialogTransition,
+		originalDefTransitionHandler = $.ui.defaultTransitionHandler,
 		originalGetEncodedText = $.fn.getEncodedText,
 		resetHash, closeDialog;
 
@@ -14,7 +14,7 @@
 	};
 
 	closeDialog = function(timeout){
-		$.mobile.activePage.find("li a").first().click();
+		$.ui.activePage.find("li a").first().click();
 	};
 
 	// Check if two chunks of DOM are identical
@@ -68,18 +68,18 @@
 		return false;
 	};
 
-	var homeWithSearch = $.mobile.path.parseUrl(location.pathname).pathname + location.search;
+	var homeWithSearch = $.ui.path.parseUrl(location.pathname).pathname + location.search;
 
 	module(libName, {
 		setup: function() {
-			$.mobile.navigate.history.stack = [];
-			$.mobile.navigate.history.activeIndex = 0;
+			$.ui.navigate.history.stack = [];
+			$.ui.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( homeWithSearch );
 		},
 
 		teardown: function(){
-			$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
-			$.mobile.defaultTransitionHandler = originalDefTransitionHandler;
+			$.ui.defaultDialogTransition = originalDefaultDialogTrans;
+			$.ui.defaultTransitionHandler = originalDefTransitionHandler;
 
 			$.fn.getEncodedText = originalGetEncodedText;
 			window.encodedValueIsDefined = undefined;
@@ -149,11 +149,11 @@
 				select = $("#select-choice-many-container-1 a");
 
 				//set to something else
-				$.mobile.defaultTransitionHandler = $.testHelper.decorate({
-					fn: $.mobile.defaultTransitionHandler,
+				$.ui.defaultTransitionHandler = $.testHelper.decorate({
+					fn: $.ui.defaultTransitionHandler,
 
 					before: function(name){
-						deepEqual(name, $.mobile.defaultDialogTransition);
+						deepEqual(name, $.ui.defaultDialogTransition);
 					}
 				});
 
@@ -212,10 +212,10 @@
 
 	module("Non native menus", {
 		setup: function() {
-			$.mobile.selectmenu.prototype.options.nativeMenu = false;
+			$.ui.selectmenu.prototype.options.nativeMenu = false;
 		},
 		teardown: function() {
-			$.mobile.selectmenu.prototype.options.nativeMenu = true;
+			$.ui.selectmenu.prototype.options.nativeMenu = true;
 		}
 	});
 
@@ -305,7 +305,7 @@
 
 			function(){
 				var firstMenuChoice = $("#select-choice-few\\.dotTest-menu li:first a");
-				ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
+				ok( firstMenuChoice.hasClass( $.ui.activeBtnClass ),
 						"default menu choice has the active button class" );
 
 				$("#select-choice-few\\.dotTest-menu a:last").click();
@@ -318,7 +318,7 @@
 
 			function(){
 				var lastMenuChoice = $("#select-choice-few\\.dotTest-menu li:last a");
-				ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
+				ok( lastMenuChoice.hasClass( $.ui.activeBtnClass ),
 						"previously selected item has the active button class" );
 
 				// close the dialog
@@ -368,7 +368,7 @@
 
 	// issue #2547
 	test( "custom select list item links have encoded option text values", function() {
-		$( "#encoded-option" ).data( 'mobile-selectmenu' )._buildList();
+		$( "#encoded-option" ).data( 'ui-selectmenu' )._buildList();
 		deepEqual(window.encodedValueIsDefined, undefined);
 	});
 
@@ -388,7 +388,7 @@
 			},
 
 			function() {
-				deepEqual($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
+				deepEqual($.ui.activePage.find( ".ui-title" ).text(), $label.text());
 				window.history.back();
 			},
 
@@ -407,14 +407,14 @@
 				$button.click();
 			},
 
-			{ pagechange: { src: $.mobile.pageContainer, event: "pagechange.dialogSizeSelectTitleMod1" } },
+			{ pagechange: { src: $.ui.pageContainer, event: "pagechange.dialogSizeSelectTitleMod1" } },
 
 			function() {
-				deepEqual($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
+				deepEqual($.ui.activePage.find( ".ui-title" ).text(), $label.text());
 				window.history.back();
 			},
 
-			{ pagechange: { src: $.mobile.pageContainer, event: "pagechange.dialogSizeSelectTitleMod2" } },
+			{ pagechange: { src: $.ui.pageContainer, event: "pagechange.dialogSizeSelectTitleMod2" } },
 
 			start
 		]);
@@ -422,11 +422,11 @@
 
 	asyncTest( "destroying a select menu leaves no traces", function() {
 		$.testHelper.pageSequence( [
-			function() { $.mobile.changePage( "#destroyTest" ); },
+			function() { $.ui.changePage( "#destroyTest" ); },
 			// Check if two chunks of DOM are identical
 			function() {
 				var unenhancedSelect = $(
-						"<select data-" + ( $.mobile.ns || "" ) + "native-menu='true'>" +
+						"<select data-" + ( $.ui.ns || "" ) + "native-menu='true'>" +
 						"<option>Title</option>" +
 						"<option value='option1'>Option 1</option>" +
 						"<option value='option2'>Option 2</option>" +
@@ -441,7 +441,7 @@
 				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, destroying, and removing the select menu, the page is empty" );
 				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
 			},
-			function() { $.mobile.back(); },
+			function() { $.ui.back(); },
 
 			start
 		]);
@@ -454,18 +454,18 @@
 			prefix = ".destroyingASelectMenuLeavesNoTraces",
 			id = "select-" + Math.round( Math.random() * 1177 ),
 			unenhancedSelect = $(
-				"<select id='" + id + "' data-" + ( $.mobile.ns || "" ) + "native-menu='false'>" +
+				"<select id='" + id + "' data-" + ( $.ui.ns || "" ) + "native-menu='false'>" +
 				"<option>Title</option>" +
 				"<option value='option1'>Option 1</option>" +
 				"<option value='option2'>Option 2</option>" +
 				"</select>");
 		$.testHelper.detailedEventCascade( [
 			function() {
-				$.mobile.changePage( "#destroyTest" );
+				$.ui.changePage( "#destroyTest" );
 			},
 
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "0" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + prefix + "0" }
 			},
 
 			function() {
@@ -477,7 +477,7 @@
 			},
 
 			{
-				popupafteropen: { src: $.mobile.document, event: "popupafteropen" + prefix + "1" }
+				popupafteropen: { src: $.ui.document, event: "popupafteropen" + prefix + "1" }
 			},
 
 			function( result ) {
@@ -486,7 +486,7 @@
 			},
 
 			{
-				popupafterclose: { src: $.mobile.document, event: "popupafterclose" + prefix + "2" }
+				popupafterclose: { src: $.ui.document, event: "popupafterclose" + prefix + "2" }
 			},
 
 			function( result ) {
@@ -512,16 +512,16 @@
 			},
 
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + prefix + "3" }
 			},
 
 			function() {
 				// Close the dialog
-				$.mobile.activePage.find( "a:first" ).click();
+				$.ui.activePage.find( "a:first" ).click();
 			},
 
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + prefix + "4" }
 			},
 
 			function() {
@@ -531,11 +531,11 @@
 				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, the page is empty" );
 				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
 				deepEqual( $( "#" + id + "-dialog" ).length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, no dialog page is left behind" );
-				$.mobile.back();
+				$.ui.back();
 			},
 
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + prefix + "5" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + prefix + "5" }
 			},
 
 			start

@@ -132,7 +132,7 @@ $.testHelper.delayStart();
 		var $unenhancedFieldSet = $( "#unenhanced-fieldset" ),
 			$enhancedFieldSet = $( "#enhanced-fieldset" );
 
-		$.mobile.ignoreContentEnabled = true;
+		$.ui.ignoreContentEnabled = true;
 
 		// attempt to enhance the controlgroup
 		$unenhancedFieldSet.parent().trigger("create");
@@ -146,7 +146,7 @@ $.testHelper.delayStart();
 		deepEqual( $enhancedFieldSet.length, 1, "the fieldset test fixtures exist" );
 		ok( $enhancedFieldSet.is(".ui-controlgroup"), "there is a control group" );
 
-		$.mobile.ignoreContentEnabled = false;
+		$.ui.ignoreContentEnabled = false;
 	});
 
 	test( "calling .controlgroup() again is the same as calling .controlgroup( 'refresh' )", function() {

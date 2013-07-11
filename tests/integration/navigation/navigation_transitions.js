@@ -5,7 +5,7 @@
 	var perspective,
 			transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
-			defaultMaxTrans = $.mobile.maxTransitionWidth,
+			defaultMaxTrans = $.ui.maxTransitionWidth,
 
 			//TODO centralize class names?
 			transitionTypes = "in out fade slide flip reverse pop",
@@ -21,11 +21,11 @@
 			},
 
 			disableMaxTransWidth = function(){
-				$.mobile.maxTransitionWidth = false;
+				$.ui.maxTransitionWidth = false;
 			},
 
 			enableMaxTransWidth = function(){
-				$.mobile.maxTransitionWidth = defaultMaxTrans;
+				$.ui.maxTransitionWidth = defaultMaxTrans;
 			},
 
 			//animationComplete callback queue
@@ -48,8 +48,8 @@
 
 			//wipe all urls
 			clearUrlHistory = function(){
-				$.mobile.urlHistory.stack = [];
-				$.mobile.urlHistory.activeIndex = 0;
+				$.ui.urlHistory.stack = [];
+				$.ui.urlHistory.activeIndex = 0;
 			};
 
 
@@ -59,7 +59,7 @@
     perspective = "viewport-flip";
   }
 
-	module('jquery.mobile.navigation.js', {
+	module('jquery.ui.navigation.js', {
 		setup: function(){
 
 
@@ -110,7 +110,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#foo");
+				$.ui.changePage("#foo");
 			},
 
 			function() {
@@ -128,7 +128,7 @@
 		expect(1);
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#baz");
+				$.ui.changePage("#baz");
 			},
 
 			function() {
@@ -173,8 +173,8 @@
 		var firstPage = $("#foo"),
 			secondPage = $("#bar");
 
-		$.mobile.changePage(firstPage);
-		$.mobile.changePage(secondPage);
+		$.ui.changePage(firstPage);
+		$.ui.changePage(secondPage);
 
 		onToComplete(function(){
 			ok(isTransitioningIn(firstPage), "first page begins transition");
@@ -214,7 +214,7 @@
 	function testTransitionMaxWidth( val, expected ){
 		expect( 1 );
 
-		$.mobile.maxTransitionWidth = val;
+		$.ui.maxTransitionWidth = val;
 
 		var transitionOccurred = false;
 
@@ -228,7 +228,7 @@
 			start();
 		}, 5000);
 
-		$.mobile.changePage( $(".ui-page:not(.ui-page-active)").first() );
+		$.ui.changePage( $(".ui-page:not(.ui-page-active)").first() );
 
 	}
 

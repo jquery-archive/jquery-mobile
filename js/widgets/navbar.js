@@ -10,7 +10,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid", "../jque
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.navbar", {
+$.widget( "ui.navbar", {
 	options: {
 		iconpos: "top",
 		grid: null
@@ -31,8 +31,8 @@ $.widget( "mobile.navbar", {
 
 		$navbtns
 			.each( function() {
-				var icon = $.mobile.getAttribute( this, "icon", true ),
-					theme = $.mobile.getAttribute( this, "theme", true );
+				var icon = $.ui.getAttribute( this, "icon", true ),
+					theme = $.ui.getAttribute( this, "theme", true );
 
 				if ( theme ) {
 					classes += " ui-btn-" + theme;
@@ -47,29 +47,29 @@ $.widget( "mobile.navbar", {
 			var activeBtn;
 
 			if ( !$( this ).is( ".ui-disabled, .ui-btn-active" ) ) {
-				$navbtns.removeClass( $.mobile.activeBtnClass );
-				$( this ).addClass( $.mobile.activeBtnClass );
+				$navbtns.removeClass( $.ui.activeBtnClass );
+				$( this ).addClass( $.ui.activeBtnClass );
 
 				// The code below is a workaround to fix #1181
 				activeBtn = $( this );
 
 				$( document ).one( "pagehide", function() {
-					activeBtn.removeClass( $.mobile.activeBtnClass );
+					activeBtn.removeClass( $.ui.activeBtnClass );
 				});
 			}
 		});
 
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+			$navbtns.filter( ".ui-state-persist" ).addClass( $.ui.activeBtnClass );
 		});
 	}
 });
 
-$.mobile.navbar.initSelector = ":jqmData(role='navbar')";
+$.ui.navbar.initSelector = ":jqmData(role='navbar')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.navbar" );
+$.ui._enhancer.add( "ui.navbar" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

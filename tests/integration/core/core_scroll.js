@@ -3,7 +3,7 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.core",
+	var libName = "jquery.ui.core",
 			scrollTimeout = 20, // TODO expose timing as an attribute
 			scrollStartEnabledTimeout = 150;
 
@@ -20,7 +20,7 @@
 	var scrollUp = function( pos ){
 		$(window).scrollTop(1000);
 		ok($(window).scrollTop() > 0, $(window).scrollTop());
-		$.mobile.silentScroll(pos);
+		$.ui.silentScroll(pos);
 	};
 
 	asyncTest( "silent scroll scrolls the page to the top by default", function(){

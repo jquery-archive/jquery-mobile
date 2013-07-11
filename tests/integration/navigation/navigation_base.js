@@ -2,16 +2,16 @@
  * mobile navigation base tag unit tests
  */
 (function($){
-	var baseDir = $.mobile.path.parseUrl($("base").attr("href")).directory,
-		contentDir = $.mobile.path.makePathAbsolute("../content/", baseDir),
+	var baseDir = $.ui.path.parseUrl($("base").attr("href")).directory,
+		contentDir = $.ui.path.makePathAbsolute("../content/", baseDir),
 		home = location.pathname + location.search,
-		baseTagEnabled = $.mobile.dynamicBaseTagEnabled,
+		baseTagEnabled = $.ui.dynamicBaseTagEnabled,
 		baseTagSupported = $.support.dynamicBaseTag;
 
-	module('jquery.mobile.navigation.js - base tag', {
+	module('jquery.ui.navigation.js - base tag', {
 		setup: function(){
-			$.mobile.navigate.history.stack = [];
-			$.mobile.navigate.history.activeIndex = 0;
+			$.ui.navigate.history.stack = [];
+			$.ui.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( home );
 		}
 	});
@@ -90,7 +90,7 @@
 				});
 
 				// Try calling changePage() directly with a relative path.
-				$.mobile.changePage("base-page-1.html");
+				$.ui.changePage("base-page-1.html");
 			},
 
 			function(){
@@ -101,7 +101,7 @@
 				});
 
 				// Try calling changePage() directly with a relative path.
-				$.mobile.changePage("../content/content-page-1.html");
+				$.ui.changePage("../content/content-page-1.html");
 			},
 
 			function(){
@@ -112,7 +112,7 @@
 				});
 
 				// Try calling changePage() with an id
-				$.mobile.changePage("content-page-2.html");
+				$.ui.changePage("content-page-2.html");
 			},
 
 			function(){
@@ -135,7 +135,7 @@
 				});
 
 				// Try calling changePage() with an id
-				$.mobile.changePage("internal-page-1");
+				$.ui.changePage("internal-page-1");
 			},
 
 			function(){
@@ -206,7 +206,7 @@
 	var testBaseTagAlteration = function( assertions ) {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( "../../base-change.html" );
+				$.ui.changePage( "../../base-change.html" );
 			},
 
 			function(){
@@ -223,20 +223,20 @@
 
 	asyncTest( "disabling base tag changes should prevent base href value changes", function() {
 		var baseHref = $( "base" ).attr( "href" );
-		$.mobile.dynamicBaseEnabled = false;
+		$.ui.dynamicBaseEnabled = false;
 
 		testBaseTagAlteration(function() {
 				if ( $.support.dynamicBaseTag ) {
 					equal( baseHref, $( "base" ).attr( "href" ), "the base href value should be unchanged" );
 				} else {
-					equal( $.mobile.activePage.find( "#base-change-link" ).attr( "href" ), "foo", "the link href's remain unchanged" );
+					equal( $.ui.activePage.find( "#base-change-link" ).attr( "href" ), "foo", "the link href's remain unchanged" );
 				}
 		});
 	});
 
 	asyncTest( "enabling base tag changes should enable base href value changes", function() {
 		var baseHref = $( "base" ).attr( "href" );
-		$.mobile.dynamicBaseEnabled = true;
+		$.ui.dynamicBaseEnabled = true;
 		$.support.dynamicBaseTag = true;
 
 		testBaseTagAlteration(function() {
@@ -245,21 +245,21 @@
 	});
 
 	asyncTest( "enabling base tag changes when a dynamic base isn't supported should alter links", function() {
-		$.mobile.dynamicBaseEnabled = true;
+		$.ui.dynamicBaseEnabled = true;
 		$.support.dynamicBaseTag = false;
 
 		testBaseTagAlteration(function() {
-			var linkHref = $.mobile.activePage.find( "#base-change-link" ).attr( "href" );
+			var linkHref = $.ui.activePage.find( "#base-change-link" ).attr( "href" );
 
 			if ( $.support.pushState ) {
 				equal( linkHref,
-					$.mobile.path.get( location.href ) + "foo",
+					$.ui.path.get( location.href ) + "foo",
 					"the link's href is changed" );
 			} else {
 				// compare the pathname of the links href with the directory of the current
 				// location + foo
-				equal( $.mobile.path.parseUrl( linkHref ).pathname,
-					$.mobile.path.parseUrl( location.href ).directory + "foo",
+				equal( $.ui.path.parseUrl( linkHref ).pathname,
+					$.ui.path.parseUrl( location.href ).directory + "foo",
 					"the link's href is changed" );
 			}
 		});

@@ -12,7 +12,7 @@
 		window.scrollTo(0,0);
 	}
 
-	module("jquery.mobile.toolbar.js", {setup: function() {
+	module("jquery.ui.toolbar.js", {setup: function() {
 		var startTimeout;
 
 		// swallow the inital page change
@@ -165,7 +165,7 @@
 
 		$.testHelper.sequence([
 			function(){
-				$.mobile.changePage( "#fullscreen-test-a" );
+				$.ui.changePage( "#fullscreen-test-a" );
 			},
 
 			function(){	
@@ -193,7 +193,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpageheader.length && nextpagefooter.length, "next page has fixed header and fixed footer" );
-				$.mobile.changePage( "#persist-test-a" );
+				$.ui.changePage( "#persist-test-a" );
 			},
 
 			function(){
@@ -202,12 +202,12 @@
 						ok( nextpageheader.parent( ".ui-mobile-viewport" ).length, "fixed header and footer are now a child of page container" );
 					});
 
-				$.mobile.changePage( "#persist-test-b" );
+				$.ui.changePage( "#persist-test-b" );
 			},
 
 			function() {
 				ok( nextpageheader.parent( ".ui-page" ).length, "fixed header and footer are now a child of page again" );
-				$.mobile.changePage( "#default" );
+				$.ui.changePage( "#default" );
 			},
 
 			start
@@ -225,21 +225,21 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpageheader.length, "next page has fixed header and fixed footer" );
-				$.mobile.changePage( "#persist-test-c" );
+				$.ui.changePage( "#persist-test-c" );
 			},
 
 			function(){
 				$( "#persist-test-d" )
 					.one( "pagebeforeshow", function(){
-						deepEqual( nextpageheader.parent()[0], $.mobile.pageContainer[0], "fixed header is now a child of page container" );
+						deepEqual( nextpageheader.parent()[0], $.ui.pageContainer[0], "fixed header is now a child of page container" );
 					});
 
-				$.mobile.changePage( "#persist-test-d" );
+				$.ui.changePage( "#persist-test-d" );
 			},
 
 			function() {
-				deepEqual( nextpageheader.parent()[0], $.mobile.activePage[0], "fixed header is now a child of page again" );
-				$.mobile.changePage( "#default" );
+				deepEqual( nextpageheader.parent()[0], $.ui.activePage[0], "fixed header is now a child of page again" );
+				$.ui.changePage( "#default" );
 			},
 
 			start
@@ -257,21 +257,21 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpagefooter.length, "next page has fixed footer and fixed footer" );
-				$.mobile.changePage( "#persist-test-e" );
+				$.ui.changePage( "#persist-test-e" );
 			},
 
 			function(){
 				$( "#persist-test-f" )
 					.one( "pagebeforeshow", function(){
-						deepEqual( nextpagefooter.parent()[0], $.mobile.pageContainer[0], "fixed footer is now a child of page container" );
+						deepEqual( nextpagefooter.parent()[0], $.ui.pageContainer[0], "fixed footer is now a child of page container" );
 					});
 
-				$.mobile.changePage( "#persist-test-f" );
+				$.ui.changePage( "#persist-test-f" );
 			},
 
 			function() {
-				deepEqual( nextpagefooter.parent()[0], $.mobile.activePage[0], "fixed footer is now a child of page again" );
-				$.mobile.changePage( "#default" );
+				deepEqual( nextpagefooter.parent()[0], $.ui.activePage[0], "fixed footer is now a child of page again" );
+				$.ui.changePage( "#default" );
 			},
 
 			start
@@ -281,12 +281,12 @@
 	var asyncTestFooterAndHeader = function( pageSelector, visible ) {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( pageSelector );
+				$.ui.changePage( pageSelector );
 			},
 
 			function() {
-				var $footer = $.mobile.activePage.find( ".ui-footer" ),
-					$header = $.mobile.activePage.find( ".ui-header" ),
+				var $footer = $.ui.activePage.find( ".ui-footer" ),
+					$header = $.ui.activePage.find( ".ui-header" ),
 					hiddenStr = visible ? "hidden" : "visible";
 
 				equal( $footer.length, 1, "there should be one footer" );
@@ -295,7 +295,7 @@
 				equal( !$footer.hasClass( "ui-fixed-hidden" ), visible, "the footer should be " + hiddenStr );
 				equal( !$header.hasClass( "ui-fixed-hidden" ), visible, "the header should be " + hiddenStr );
 
-				$.mobile.changePage( "#default" );
+				$.ui.changePage( "#default" );
 			},
 
 			start

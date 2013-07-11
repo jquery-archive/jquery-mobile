@@ -13,10 +13,10 @@ define( [ "jquery", "../handlers" ], function( jQuery ) {
 (function( $, window, undefined ) {
 
 // Use the simultaneous transitions handler for slide transitions
-$.mobile.transitionHandlers.slide = $.mobile.transitionHandlers.simultaneous;
+$.ui.transitionHandlers.slide = $.ui.transitionHandlers.simultaneous;
 
 // Set the slide transitions's fallback to "fade"
-$.mobile.transitionFallbacks.slide = "fade";
+$.ui.transitionFallbacks.slide = "fade";
 
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

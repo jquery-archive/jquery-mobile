@@ -1,6 +1,6 @@
 (function( $, undefined ) {	
 	$( document ).on( "mobileinit", function(){
-		$.widget( "mobile.listview", $.mobile.listview, {
+		$.widget( "ui.listview", $.ui.listview, {
 			options: {
 				theme: null,
 				countTheme: null,

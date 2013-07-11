@@ -4,13 +4,13 @@
 //>>group: Navigation
 define([
 	"jquery",
-	"./../jquery.mobile.ns" ], function( jQuery ) {
+	"./../jquery.ui.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
 		var path, $base, dialogHashKey = "&ui-state=dialog";
 
-		$.mobile.path = path = {
+		$.ui.path = path = {
 			uiStateKey: "&ui-state",
 
 			// This scary looking regular expression parses an absolute URL or its relative

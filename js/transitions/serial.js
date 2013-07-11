@@ -8,11 +8,11 @@ define( [ "jquery", "./transition" ], function( jQuery ) {
 
 (function( $ ) {
 
-	$.mobile.SerialTransition = function(){
+	$.ui.SerialTransition = function(){
 		this.init.apply(this, arguments);
 	};
 
-	$.extend($.mobile.SerialTransition.prototype, $.mobile.Transition.prototype, {
+	$.extend($.ui.SerialTransition.prototype, $.ui.Transition.prototype, {
 		sequential: true,
 
 		beforeDoneOut: function() {

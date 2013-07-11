@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.selectmenu", $.extend( {
+$.widget( "ui.selectmenu", $.extend( {
 	options: {
 		theme: null,
 		disabled: false,
@@ -56,7 +56,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 		var inline = this.options.inline || this.element.jqmData( "inline" ),
 			mini = this.options.mini || this.element.jqmData( "mini" ),
 			classes = "";
-		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-ui/issues/3577
 		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
 		} */
@@ -158,52 +158,52 @@ $.widget( "mobile.selectmenu", $.extend( {
 			.appendTo( self.button )
 			.bind( "vmousedown", function() {
 				// Add active class to button
-				self.button.addClass( $.mobile.activeBtnClass );
+				self.button.addClass( $.ui.activeBtnClass );
 			})
 			.bind( "focus", function() {
-				self.button.addClass( $.mobile.focusClass );
+				self.button.addClass( $.ui.focusClass );
 			})
 			.bind( "blur", function() {
-				self.button.removeClass( $.mobile.focusClass );
+				self.button.removeClass( $.ui.focusClass );
 			})
 			.bind( "focus vmouseover", function() {
 				self.button.trigger( "vmouseover" );
 			})
 			.bind( "vmousemove", function() {
 				// Remove active class on scroll/touchmove
-				self.button.removeClass( $.mobile.activeBtnClass );
+				self.button.removeClass( $.ui.activeBtnClass );
 			})
 			.bind( "change blur vmouseout", function() {
 				self.button.trigger( "vmouseout" )
-					.removeClass( $.mobile.activeBtnClass );
+					.removeClass( $.ui.activeBtnClass );
 			});
 
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
 		self.button.bind( "vmousedown", function() {
 			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
+					$.ui.zoom.disable( true );
 			}
 		});
 		self.label.bind( "click focus", function() {
 			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
+					$.ui.zoom.disable( true );
 			}
 		});
 		self.select.bind( "focus", function() {
 			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
+					$.ui.zoom.disable( true );
 			}
 		});
 		self.button.bind( "mouseup", function() {
 			if ( self.options.preventFocusZoom ) {
 				setTimeout(function() {
-					$.mobile.zoom.enable( true );
+					$.ui.zoom.enable( true );
 				}, 0 );
 			}
 		});
 		self.select.bind( "blur", function() {
 			if ( self.options.preventFocusZoom ) {
-				$.mobile.zoom.enable( true );
+				$.ui.zoom.enable( true );
 			}
 		});
 
@@ -281,12 +281,12 @@ $.widget( "mobile.selectmenu", $.extend( {
 		this._setDisabled( false );
 		this.button.removeClass( "ui-state-disabled" );
 	}
-}, $.mobile.behaviors.formReset ) );
+}, $.ui.behaviors.formReset ) );
 
-$.mobile.selectmenu.initSelector = "select:not( :jqmData(role='slider') )";
+$.ui.selectmenu.initSelector = "select:not( :jqmData(role='slider') )";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.selectmenu" );
+$.ui._enhancer.add( "ui.selectmenu" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

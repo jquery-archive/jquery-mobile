@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.regis
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.table", {
+$.widget( "ui.table", {
 	options: {
 		classes: {
 			table: "ui-table"
@@ -63,10 +63,10 @@ $.widget( "mobile.table", {
 	}
 });
 
-$.mobile.table.initSelector = ":jqmData(role='table')";
+$.ui.table.initSelector = ":jqmData(role='table')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.table" );
+$.ui._enhancer.add( "ui.table" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

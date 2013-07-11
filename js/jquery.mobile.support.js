@@ -64,7 +64,7 @@ function validStyle( prop, value, check_vend ) {
 function transform3dTest() {
 	var mqProp = "transform-3d",
 		// Because the `translate3d` test below throws false positives in Android:
-		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" ),
+		ret = $.ui.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" ),
 		el, transforms, t;
 
 	if( ret ) {
@@ -139,9 +139,9 @@ function boundingRect() {
 }
 
 // non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
-// allows for inclusion of IE 6+, including Windows Mobile 7
-$.extend( $.mobile, { browser: {} } );
-$.mobile.browser.oldIE = (function() {
+// allows for inclusion of IE 6+, including Windows ui 7
+$.extend( $.ui, { browser: {} } );
+$.ui.browser.oldIE = (function() {
 	var v = 3,
 		div = document.createElement( "div" ),
 		a = div.all || [];
@@ -162,18 +162,18 @@ function fixedPosition() {
 		wkversion = !!wkmatch && wkmatch[ 1 ],
 		ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
 		ffversion = !!ffmatch && ffmatch[ 1 ],
-		operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
-		omversion = !!operammobilematch && operammobilematch[ 1 ];
+		operamuimatch = ua.match( /Opera Mobi\/([0-9]+)/ ),
+		omversion = !!operamuimatch && operamuimatch[ 1 ];
 
 	if(
 		// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
 		( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
 		// Opera Mini
 		( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" ) ||
-		( operammobilematch && omversion < 7458 )	||
+		( operamuimatch && omversion < 7458 )	||
 		//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
 		( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 ) ||
-		// Firefox Mobile before 6.0 -
+		// Firefox ui before 6.0 -
 		( ffversion && ffversion < 6 ) ||
 		// WebOS less than 3
 		( "palmGetResource" in window && wkversion && wkversion < 534 )	||
@@ -188,19 +188,19 @@ function fixedPosition() {
 $.extend( $.support, {
 	cssTransitions: "WebKitTransitionEvent" in window ||
 		validStyle( "transition", "height 100ms linear", [ "Webkit", "Moz", "" ] ) &&
-		!$.mobile.browser.oldIE && !opera,
+		!$.ui.browser.oldIE && !opera,
 
 	// Note, Chrome for iOS has an extremely quirky implementation of popstate.
 	// We've chosen to take the shortest path to a bug fix here for issue #5426
 	// See the following link for information about the regex chosen
-	// https://developers.google.com/chrome/mobile/docs/user-agent#chrome_for_ios_user-agent
+	// https://developers.google.com/chrome/ui/docs/user-agent#chrome_for_ios_user-agent
 	pushState: "pushState" in history &&
 		"replaceState" in history &&
 		// When running inside a FF iframe, calling replaceState causes an error
 		!( window.navigator.userAgent.indexOf( "Firefox" ) >= 0 && window.top !== window ) &&
 		( window.navigator.userAgent.search(/CriOS/) === -1 ),
 
-	mediaquery: $.mobile.media( "only all" ),
+	mediaquery: $.ui.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
 	touchOverflow: !!propExists( "overflowScrolling" ),
 	cssTransform3d: transform3dTest(),
@@ -218,7 +218,7 @@ $.extend( $.support, {
 fakeBody.remove();
 
 
-// $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
+// $.ui.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
 // or that generally work better browsing in regular http for full page refreshes (Opera Mini)
 // Note: This detection below is used as a last resort.
 // We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
@@ -236,11 +236,11 @@ nokiaLTE7_3 = (function() {
 // Support conditions that must be met in order to proceed
 // default enhanced qualifications are media query support OR IE 7+
 
-$.mobile.gradeA = function() {
-	return ( ( $.support.mediaquery && $.support.cssPseudoElement ) || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 8 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
+$.ui.gradeA = function() {
+	return ( ( $.support.mediaquery && $.support.cssPseudoElement ) || $.ui.browser.oldIE && $.ui.browser.oldIE >= 8 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
 };
 
-$.mobile.ajaxBlacklist =
+$.ui.ajaxBlacklist =
 			// BlackBerry browsers, pre-webkit
 			window.blackberry && !window.WebKitPoint ||
 			// Opera Mini

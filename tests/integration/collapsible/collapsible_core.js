@@ -10,7 +10,7 @@
 		expect( 5 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#basic-collapsible-test" ) );
+				$.ui.changePage( $( "#basic-collapsible-test" ) );
 			},
 
 			function() {
@@ -29,7 +29,7 @@
 		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#basic-collapsible-test" ) );
+				$.ui.changePage( $( "#basic-collapsible-test" ) );
 			},
 
 			function() {
@@ -49,7 +49,7 @@
 		var nTests = 2;
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
+				$.ui.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -74,7 +74,7 @@
 		var nTests = 0;
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-lonely-collapsible-test" ) );
+				$.ui.changePage( $( "#collapsible-set-with-lonely-collapsible-test" ) );
 			},
 
 			function() {
@@ -96,7 +96,7 @@
 		expect( 2 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
+				$.ui.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -111,7 +111,7 @@
 		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
+				$.ui.changePage( $( "#basic-collapsible-set-test" ) );
 			},
 
 			function() {
@@ -129,13 +129,13 @@
 		expect( 7 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-dynamic-content" ) );
+				$.ui.changePage( $( "#collapsible-set-with-dynamic-content" ) );
 			},
 
 			function() {
 				var set = $( ".ui-page-active" ).find( ".ui-collapsible-set" );
 				for ( var i = 0; i < 3; i++ ) {
-					$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
+					$( '<div data-'+ $.ui.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
 				}
 				set.collapsibleset( "refresh" );
 				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
@@ -154,13 +154,13 @@
 		expect( 7 );
 		$.testHelper.pageSequence([
 			function(){
-  				$.mobile.changePage( $( "#collapsible-set-with-static-and-dynamic-content" ) );
+  				$.ui.changePage( $( "#collapsible-set-with-static-and-dynamic-content" ) );
   			},
 
   			function() {
   				var set = $( ".ui-page-active" ).find( ".ui-collapsible-set" );
   				for ( var i = 0; i < 2; i++ ) {
-  					$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
+  					$( '<div data-'+ $.ui.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
   				}
   				set.collapsibleset( "refresh" );
   				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
@@ -179,11 +179,11 @@
 		expect( 1 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-last-collapsible-expanded" ) );
+				$.ui.changePage( $( "#collapsible-set-with-last-collapsible-expanded" ) );
 			},
 
 			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				var collapsibles = $.ui.activePage.find( ".ui-collapsible" );
 				ok( collapsibles.last().hasClass( "ui-last-child" ), "Content of last collapsible should have class ui-last-child");
 				start();
 			}
@@ -194,11 +194,11 @@
 		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-legends" ) );
+				$.ui.changePage( $( "#collapsible-set-with-legends" ) );
 			},
 
 			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible-heading" );
+				var collapsibles = $.ui.activePage.find( ".ui-collapsible-heading" );
 				ok( !collapsibles.eq(0).is( ".ui-first-child" ), "First collapsible should NOT have class ui-last-child");
 				ok( !collapsibles.eq(1).is( ".ui-last-child,.ui-first-child" ), "Middle collapsible should NOT have class ui-first-child or ui-last-child");
 				ok( !collapsibles.eq(2).is( ".ui-first-child" ), "Last collapsible should NOT have class ui-first-child");
@@ -213,11 +213,11 @@
 		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#collapsible-with-custom-icons" ) );
+				$.ui.changePage( $( "#collapsible-with-custom-icons" ) );
 			},
 
 			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				var collapsibles = $.ui.activePage.find( ".ui-collapsible" );
 				ok( collapsibles.eq(0).find( ".ui-btn" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
 				ok( collapsibles.eq(1).find( ".ui-btn" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
 				ok( collapsibles.eq(2).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
@@ -237,11 +237,11 @@
 		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-custom-icons" ) );
+				$.ui.changePage( $( "#collapsible-set-with-custom-icons" ) );
 			},
 
 			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				var collapsibles = $.ui.activePage.find( ".ui-collapsible" );
 				ok( collapsibles.eq(0).find( ".ui-btn" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
 				ok( collapsibles.eq(1).find( ".ui-btn" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
 				ok( collapsibles.eq(2).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
@@ -259,11 +259,11 @@
 		expect( 6 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#collapsible-with-theming" ) );
+				$.ui.changePage( $( "#collapsible-with-theming" ) );
 			},
 
 			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				var collapsibles = $.ui.activePage.find( ".ui-collapsible" );
 				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-a" ), "Heading of first collapsible should have class ui-btn-a");
 				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-a" ), "Content of first collapsible should NOT have class ui-btn-a");
 				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-b" ), "Heading of second collapsible should have class ui-btn-b");
@@ -280,11 +280,11 @@
 		expect( 13 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-theming" ) );
+				$.ui.changePage( $( "#collapsible-set-with-theming" ) );
 			},
 
 			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
+				var collapsibles = $.ui.activePage.find( ".ui-collapsible" );
 
 				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-a" ), "Heading of first collapsible should have class ui-btn-a" );
 				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of first collapsible should NOT have class ui-body-[a,b,c]" );

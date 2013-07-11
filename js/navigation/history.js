@@ -2,16 +2,16 @@
 //>>description: Manages a stack of history entries. Used exclusively by the Navigation Manager
 //>>label: History Manager
 //>>group: Navigation
-define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
+define([ "jquery", "./../jquery.ui.core", "./path" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-	$.mobile.History = function( stack, index ) {
+	$.ui.History = function( stack, index ) {
 		this.stack = stack || [];
 		this.activeIndex = index || 0;
 	};
 
-	$.extend($.mobile.History.prototype, {
+	$.extend($.ui.History.prototype, {
 		getActive: function() {
 			return this.stack[ this.activeIndex ];
 		},
@@ -80,7 +80,7 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 			// First, take the slice of the history stack before the current index and search
 			// for a url match. If one is found, we'll avoid avoid looking through forward history
 			// NOTE the preference for backward history movement is driven by the fact that
-			//      most mobile browsers only have a dedicated back button, and users rarely use
+			//      most ui browsers only have a dedicated back button, and users rarely use
 			//      the forward button in desktop browser anyhow
 			closest = this.find( url, this.stack.slice(0, a) );
 

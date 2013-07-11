@@ -17,13 +17,13 @@ define( [ "jquery",
 
 (function( $, window, undefined ) {
 
-	// TODO remove direct references to $.mobile and properties, we should
+	// TODO remove direct references to $.ui and properties, we should
 	//      favor injection with params to the constructor
-	$.mobile.Transition = function() {
+	$.ui.Transition = function() {
 		this.init.apply(this, arguments);
 	};
 
-	$.extend($.mobile.Transition.prototype, {
+	$.extend($.ui.Transition.prototype, {
 		toPreClass: " ui-page-pre-in",
 
 		init: function( name, reverse, $to, $from ) {
@@ -38,7 +38,7 @@ define( [ "jquery",
 
 		cleanFrom: function() {
 			this.$from
-				.removeClass( $.mobile.activePageClass + " out in reverse " + this.name )
+				.removeClass( $.ui.activePageClass + " out in reverse " + this.name )
 				.height( "" );
 		},
 
@@ -56,7 +56,7 @@ define( [ "jquery",
 
 			// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
 			// This ensures we jump to that spot after the fact, if we aren't there already.
-			if ( $.mobile.window.scrollTop() !== this.toScroll ) {
+			if ( $.ui.window.scrollTop() !== this.toScroll ) {
 				this.scrollPage();
 			}
 
@@ -90,10 +90,10 @@ define( [ "jquery",
 
 		startIn: function( screenHeight, reverseClass, none ) {
 			this.hideIn(function() {
-				this.$to.addClass( $.mobile.activePageClass + this.toPreClass );
+				this.$to.addClass( $.ui.activePageClass + this.toPreClass );
 
 				// Send focus to page as it is now display: block
-				$.mobile.focusPage( this.$to );
+				$.ui.focusPage( this.$to );
 
 				// Set to page height
 				this.$to.height( screenHeight + this.toScroll );
@@ -123,13 +123,13 @@ define( [ "jquery",
 			// Set the from page's height and start it transitioning out
 			// Note: setting an explicit height helps eliminate tiling in the transitions
 			this.$from
-				.height( screenHeight + $.mobile.window.scrollTop() )
+				.height( screenHeight + $.ui.window.scrollTop() )
 				.addClass( this.name + " out" + reverseClass );
 		},
 
 
 		toggleViewportClass: function() {
-			$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + this.name );
+			$.ui.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + this.name );
 		},
 
 		transition: function() {
@@ -139,11 +139,11 @@ define( [ "jquery",
 			//      object will be created and transition will be run immediately after as
 			//      it is today. So we wait until transition is invoked to gather the following
 			var reverseClass = this.reverse ? " reverse" : "",
-				screenHeight = $.mobile.getScreenHeight(),
-				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
-				none = !$.support.cssTransitions || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), this.toScroll ) > $.mobile.getMaxScrollForTransition();
+				screenHeight = $.ui.getScreenHeight(),
+				maxTransitionOverride = $.ui.maxTransitionWidth !== false && $.ui.window.width() > $.ui.maxTransitionWidth,
+				none = !$.support.cssTransitions || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.ui.window.scrollTop(), this.toScroll ) > $.ui.getMaxScrollForTransition();
 
-			this.toScroll = $.mobile.urlHistory.getActive().lastScroll || $.mobile.defaultHomeScroll;
+			this.toScroll = $.ui.urlHistory.getActive().lastScroll || $.ui.defaultHomeScroll;
 			this.toggleViewportClass();
 
 			if ( this.$from && !none ) {

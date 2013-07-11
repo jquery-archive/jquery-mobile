@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.regis
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.panel", {
+$.widget( "ui.panel", {
 	options: {
 		classes: {
 			panel: "ui-panel",
@@ -51,7 +51,7 @@ $.widget( "mobile.panel", {
 			$el = self.element,
 			page = $el.closest( ":jqmData(role='page')" ),
 			_getPageTheme = function() {
-				var $theme = $.data( page[0], "mobile-page" ).options.theme,
+				var $theme = $.data( page[0], "ui-page" ).options.theme,
 				$pageThemeClass = "ui-body-" + $theme;
 				return $pageThemeClass;
 			},
@@ -165,12 +165,12 @@ $.widget( "mobile.panel", {
 	_positionPanel: function() {
 		var self = this,
 			panelInnerHeight = self._panelInner.outerHeight(),
-			expand = panelInnerHeight > $.mobile.getScreenHeight();
+			expand = panelInnerHeight > $.ui.getScreenHeight();
 
 		if ( expand || !self.options.positionFixed ) {
 			if ( expand ) {
 				self._unfixPanel();
-				$.mobile.resetActivePageHeight( panelInnerHeight );
+				$.ui.resetActivePageHeight( panelInnerHeight );
 			}
 			self._scrollIntoView( panelInnerHeight );
 		} else {
@@ -222,9 +222,9 @@ $.widget( "mobile.panel", {
 				e.preventDefault();
 				var $link = $( this );
 				if ( ! $link.hasClass( "ui-link" ) ) {
-					$link.addClass( $.mobile.activeBtnClass );
+					$link.addClass( $.ui.activeBtnClass );
 					self.element.one( "panelopen panelclose", function() {
-						$link.removeClass( $.mobile.activeBtnClass );
+						$link.removeClass( $.ui.activeBtnClass );
 					});
 				}
 				self.toggle();
@@ -393,7 +393,7 @@ $.widget( "mobile.panel", {
 
 					self._fixPanel();
 					self._unbindFixListener();
-					$.mobile.resetActivePageHeight();
+					$.ui.resetActivePageHeight();
 
 					self._page.jqmRemoveData( "panel" );
 					self._trigger( "close" );
@@ -432,7 +432,7 @@ $.widget( "mobile.panel", {
 				if ( theme ) {
 					this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
 				}
-				$.mobile.resetActivePageHeight();
+				$.ui.resetActivePageHeight();
 			}
 		} else if ( this._open ) {
 			this._wrapper.removeClass( classes.contentWrapOpen );
@@ -465,10 +465,10 @@ $.widget( "mobile.panel", {
 	}
 });
 
-$.mobile.panel.initSelector = ":jqmData(role='panel')";
+$.ui.panel.initSelector = ":jqmData(role='panel')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.panel" );
+$.ui._enhancer.add( "ui.panel" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

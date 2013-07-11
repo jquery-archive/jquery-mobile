@@ -9,8 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-
-	$.widget( "mobile.toolbar", $.mobile.toolbar, {
+	$.widget( "ui.toolbar", $.ui.toolbar, {
 		options: {
 			position:null,
 			visibleOnPageShow: true,
@@ -79,7 +78,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		},
 
 		_bindPageEvents: function() {
-			var page = ( !!this.page )? this.element.closest( ".ui-page" ): $.mobile.document;
+			var page = ( !!this.page )? this.element.closest( ".ui-page" ): $.ui.document;
 			//page event bindings
 			// Fixed toolbars require page zoom to be disabled, otherwise usability issues crop up
 			// This method is meant to disable zoom while a fixed-positioned toolbar page is visible
@@ -96,7 +95,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_handlePageBeforeShow: function( ) {
 			var o = this.options;
 			if ( o.disablePageZoom ) {
-				$.mobile.zoom.disable( true );
+				$.ui.zoom.disable( true );
 			}
 			if ( !o.visibleOnPageShow ) {
 				this.hide( true );
@@ -112,7 +111,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_handlePageShow: function() {
 			this.updatePagePadding( ( !!this.page )? this.page: ".ui-page-active" );
 			if ( this.options.updatePagePadding ) {
-				this._on( $.mobile.window, { "throttledresize": "updatePagePadding" } );
+				this._on( $.ui.window, { "throttledresize": "updatePagePadding" } );
 			}
 		},
 
@@ -122,10 +121,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 
 			if ( o.disablePageZoom ) {
-				$.mobile.zoom.enable( true );
+				$.ui.zoom.enable( true );
 			}
 			if ( o.updatePagePadding ) {
-				this._off( $.mobile.window, "throttledresize" );
+				this._off( $.ui.window, "throttledresize" );
 			}
 
 			if ( o.trackPersistentToolbars ) {
@@ -136,7 +135,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 				if ( nextFooter.length || nextHeader.length ) {
 
-					nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
+					nextFooter.add( nextHeader ).appendTo( $.ui.pageContainer );
 
 					ui.nextPage.one( "pageshow", function() {
 						nextHeader.prependTo( this );
@@ -163,12 +162,12 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		},
 
 		_useTransition: function( notransition ) {
-			var $win = $.mobile.window,
+			var $win = $.ui.window,
 				$el = this.element,
 				scroll = $win.scrollTop(),
 				elHeight = $el.height(),
 				pHeight = ( !!this.page )? $el.closest( ".ui-page" ).height():$(".ui-page-active").height(),
-				viewportHeight = $.mobile.getScreenHeight();
+				viewportHeight = $.ui.getScreenHeight();
 
 			return !notransition &&
 				( this.options.transition && this.options.transition !== "none" &&
@@ -242,7 +241,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 					//and issue #4113 Header and footer change their position after keyboard popup - iOS
 					//and issue #4410 Footer navbar moves up when clicking on a textbox in an Android environment
 					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ) {
-						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system
+						//Fix for issue #4724 Moving through form in ui Safari with "Next" and "Previous" system
 						//controls causes fixed position, tap-toggle false Header to reveal itself
 						// isVisible instead of self._visible because the focusin and focusout events fire twice at the same time
 						// Also use a delay for hiding the toolbars because on Android native browser focusin is direclty followed

@@ -3,44 +3,44 @@
  */
 (function($){
 	var siteDirectory = location.pathname.replace(/[^/]+$/, ""),
-		home = $.mobile.path.parseUrl(location.pathname).directory,
+		home = $.ui.path.parseUrl(location.pathname).directory,
 		homeWithSearch = home + location.search;
 
-	module('jquery.mobile.navigation.js', {
+	module('jquery.ui.navigation.js', {
 		setup: function(){
-			$.mobile.navigate.history.stack = [];
-			$.mobile.navigate.history.activeIndex = 0;
+			$.ui.navigate.history.stack = [];
+			$.ui.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( homeWithSearch );
 		}
 	});
 
 	test( "path.get method is working properly", function(){
 		window.location.hash = "foo";
-		deepEqual($.mobile.path.get(), "foo", "get method returns location.hash minus hash character");
-		deepEqual($.mobile.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
-		deepEqual($.mobile.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
+		deepEqual($.ui.path.get(), "foo", "get method returns location.hash minus hash character");
+		deepEqual($.ui.path.get( "#foo/bar/baz.html" ), "foo/bar/", "get method with hash arg returns path with no filename or hash prefix");
+		deepEqual($.ui.path.get( "#foo/bar/baz.html/" ), "foo/bar/baz.html/", "last segment of hash is retained if followed by a trailing slash");
 	});
 
 	test( "path.isPath method is working properly", function(){
-		ok(!$.mobile.path.isPath('bar'), "anything without a slash is not a path");
-		ok($.mobile.path.isPath('bar/'), "anything with a slash is a path");
-		ok($.mobile.path.isPath('/bar'), "anything with a slash is a path");
-		ok($.mobile.path.isPath('a/r'), "anything with a slash is a path");
-		ok($.mobile.path.isPath('/'), "anything with a slash is a path");
+		ok(!$.ui.path.isPath('bar'), "anything without a slash is not a path");
+		ok($.ui.path.isPath('bar/'), "anything with a slash is a path");
+		ok($.ui.path.isPath('/bar'), "anything with a slash is a path");
+		ok($.ui.path.isPath('a/r'), "anything with a slash is a path");
+		ok($.ui.path.isPath('/'), "anything with a slash is a path");
 	});
 
 	test( "path.getFilePath method is working properly", function(){
-		deepEqual($.mobile.path.getFilePath("foo.html" + "&" + $.mobile.subPageUrlKey ), "foo.html", "returns path without sub page key");
+		deepEqual($.ui.path.getFilePath("foo.html" + "&" + $.ui.subPageUrlKey ), "foo.html", "returns path without sub page key");
 	});
 
 	test( "path.set method is working properly", function(){
-		$.mobile.urlHistory.ignoreNextHashChange = false;
-		$.mobile.path.set("foo");
+		$.ui.urlHistory.ignoreNextHashChange = false;
+		$.ui.path.set("foo");
 		deepEqual("foo", window.location.hash.replace(/^#/,""), "sets location.hash properly");
 	});
 
 	test( "path.makeUrlAbsolute is working properly", function(){
-		var mua = $.mobile.path.makeUrlAbsolute,
+		var mua = $.ui.path.makeUrlAbsolute,
 			p1 = "http://jqm.com/",
 			p2 = "http://jqm.com/?foo=1&bar=2",
 			p3 = "http://jqm.com/#spaz",
@@ -138,17 +138,17 @@
 			ipv6_7 = "http://[2010:836B:4179::836B:4179]",
 		  fromIssue = "http://[3fff:cafe:babe::]:443/foo";
 
-		deepEqual( $.mobile.path.parseUrl(ipv6_1).host, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80");
-		deepEqual( $.mobile.path.parseUrl(ipv6_1).hostname, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]");
-		deepEqual( $.mobile.path.parseUrl(ipv6_2).host, "[1080:0:0:0:8:800:200C:417A]");
-		deepEqual( $.mobile.path.parseUrl(ipv6_3).host, "[3ffe:2a00:100:7031::1]");
-		deepEqual( $.mobile.path.parseUrl(ipv6_4).host, "[1080::8:800:200C:417A]");
-		deepEqual( $.mobile.path.parseUrl(ipv6_5).host, "[::192.9.5.5]");
-		deepEqual( $.mobile.path.parseUrl(ipv6_6).host, "[::FFFF:129.144.52.38]:80");
-		deepEqual( $.mobile.path.parseUrl(ipv6_6).hostname, "[::FFFF:129.144.52.38]");
-		deepEqual( $.mobile.path.parseUrl(ipv6_7).host, "[2010:836B:4179::836B:4179]");
-		deepEqual( $.mobile.path.parseUrl(fromIssue).host, "[3fff:cafe:babe::]:443");
-		deepEqual( $.mobile.path.parseUrl(fromIssue).hostname, "[3fff:cafe:babe::]");
+		deepEqual( $.ui.path.parseUrl(ipv6_1).host, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]:80");
+		deepEqual( $.ui.path.parseUrl(ipv6_1).hostname, "[FEDC:BA98:7654:3210:FEDC:BA98:7654:3210]");
+		deepEqual( $.ui.path.parseUrl(ipv6_2).host, "[1080:0:0:0:8:800:200C:417A]");
+		deepEqual( $.ui.path.parseUrl(ipv6_3).host, "[3ffe:2a00:100:7031::1]");
+		deepEqual( $.ui.path.parseUrl(ipv6_4).host, "[1080::8:800:200C:417A]");
+		deepEqual( $.ui.path.parseUrl(ipv6_5).host, "[::192.9.5.5]");
+		deepEqual( $.ui.path.parseUrl(ipv6_6).host, "[::FFFF:129.144.52.38]:80");
+		deepEqual( $.ui.path.parseUrl(ipv6_6).hostname, "[::FFFF:129.144.52.38]");
+		deepEqual( $.ui.path.parseUrl(ipv6_7).host, "[2010:836B:4179::836B:4179]");
+		deepEqual( $.ui.path.parseUrl(fromIssue).host, "[3fff:cafe:babe::]:443");
+		deepEqual( $.ui.path.parseUrl(fromIssue).hostname, "[3fff:cafe:babe::]");
 	});
 
 	test( "path.clean is working properly", function(){
@@ -159,101 +159,101 @@
 			localpath = localroot + fakepath,
 			remotepath = remoteroot + fakepath;
 
-		deepEqual( $.mobile.path.clean( localpath ), location.pathname + fakepath, "removes location protocol, host, and portfrom same-domain path");
-		deepEqual( $.mobile.path.clean( remotepath ), remotepath, "does nothing to an external domain path");
-		deepEqual( $.mobile.path.clean( pathWithParam ), location.pathname + "bar?baz=" + localroot, "doesn't remove params with localroot value");
+		deepEqual( $.ui.path.clean( localpath ), location.pathname + fakepath, "removes location protocol, host, and portfrom same-domain path");
+		deepEqual( $.ui.path.clean( remotepath ), remotepath, "does nothing to an external domain path");
+		deepEqual( $.ui.path.clean( pathWithParam ), location.pathname + "bar?baz=" + localroot, "doesn't remove params with localroot value");
 	});
 
 	test( "path.stripHash is working properly", function(){
-		deepEqual( $.mobile.path.stripHash( "#bar" ), "bar", "returns a hash without the # prefix");
+		deepEqual( $.ui.path.stripHash( "#bar" ), "bar", "returns a hash without the # prefix");
 	});
 
 	test( "path.hasProtocol is working properly", function(){
-		deepEqual( $.mobile.path.hasProtocol( "tel:5559999" ), true, "value in tel protocol format has protocol" );
-		deepEqual( $.mobile.path.hasProtocol( location.href ), true, "location href has protocol" );
-		deepEqual( $.mobile.path.hasProtocol( "foo/bar/baz.html" ), false, "simple directory path has no protocol" );
-		deepEqual( $.mobile.path.hasProtocol( "file://foo/bar/baz.html" ), true, "simple directory path with file:// has protocol" );
+		deepEqual( $.ui.path.hasProtocol( "tel:5559999" ), true, "value in tel protocol format has protocol" );
+		deepEqual( $.ui.path.hasProtocol( location.href ), true, "location href has protocol" );
+		deepEqual( $.ui.path.hasProtocol( "foo/bar/baz.html" ), false, "simple directory path has no protocol" );
+		deepEqual( $.ui.path.hasProtocol( "file://foo/bar/baz.html" ), true, "simple directory path with file:// has protocol" );
 	});
 
 	test( "path.isRelativeUrl is working properly", function(){
-		deepEqual( $.mobile.path.isRelativeUrl("http://company.com/"), false, "absolute url is not relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("//company.com/"), true, "protocol relative url is relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("/"), true, "site relative url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("http://company.com/"), false, "absolute url is not relative" );
+		deepEqual( $.ui.path.isRelativeUrl("//company.com/"), true, "protocol relative url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("/"), true, "site relative url is relative" );
 
-		deepEqual( $.mobile.path.isRelativeUrl("http://company.com/test.php"), false, "absolute url is not relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("//company.com/test.php"), true, "protocol relative url is relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("/test.php"), true, "site relative url is relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("test.php"), true, "document relative url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("http://company.com/test.php"), false, "absolute url is not relative" );
+		deepEqual( $.ui.path.isRelativeUrl("//company.com/test.php"), true, "protocol relative url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("/test.php"), true, "site relative url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("test.php"), true, "document relative url is relative" );
 
-		deepEqual( $.mobile.path.isRelativeUrl("http://company.com/dir1/dir2/test.php?foo=1&bar=2#frag"), false, "absolute url is not relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("//company.com/dir1/dir2/test.php?foo=1&bar=2#frag"), true, "protocol relative url is relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("/dir1/dir2/test.php?foo=1&bar=2#frag"), true, "site relative url is relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("dir1/dir2/test.php?foo=1&bar=2#frag"), true, "document relative path url is relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("test.php?foo=1&bar=2#frag"), true, "document relative file url is relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("?foo=1&bar=2#frag"), true, "query relative url is relative" );
-		deepEqual( $.mobile.path.isRelativeUrl("#frag"), true, "fragments are relative" );
+		deepEqual( $.ui.path.isRelativeUrl("http://company.com/dir1/dir2/test.php?foo=1&bar=2#frag"), false, "absolute url is not relative" );
+		deepEqual( $.ui.path.isRelativeUrl("//company.com/dir1/dir2/test.php?foo=1&bar=2#frag"), true, "protocol relative url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("/dir1/dir2/test.php?foo=1&bar=2#frag"), true, "site relative url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("dir1/dir2/test.php?foo=1&bar=2#frag"), true, "document relative path url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("test.php?foo=1&bar=2#frag"), true, "document relative file url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("?foo=1&bar=2#frag"), true, "query relative url is relative" );
+		deepEqual( $.ui.path.isRelativeUrl("#frag"), true, "fragments are relative" );
 	});
 
 	test( "path.isExternal is working properly", function(){
-		deepEqual( $.mobile.path.isExternal( location.href ), false, "same domain is not external" );
-		deepEqual( $.mobile.path.isExternal( "http://example.com" ), true, "example.com is external" );
-		deepEqual($.mobile.path.isExternal("mailto:"), true, "mailto protocol");
-		deepEqual($.mobile.path.isExternal("http://foo.com"), true, "http protocol");
-		deepEqual($.mobile.path.isExternal("http://www.foo.com"), true, "http protocol with www");
-		deepEqual($.mobile.path.isExternal("tel:16178675309"), true, "tel protocol");
-		deepEqual($.mobile.path.isExternal("foo.html"), false, "filename");
-		deepEqual($.mobile.path.isExternal("foo/foo/foo.html"), false, "file path");
-		deepEqual($.mobile.path.isExternal("../../index.html"), false, "relative parent path");
-		deepEqual($.mobile.path.isExternal("/foo"), false, "root-relative path");
-		deepEqual($.mobile.path.isExternal("foo"), false, "simple string");
-		deepEqual($.mobile.path.isExternal("#foo"), false, "local id reference");
+		deepEqual( $.ui.path.isExternal( location.href ), false, "same domain is not external" );
+		deepEqual( $.ui.path.isExternal( "http://example.com" ), true, "example.com is external" );
+		deepEqual($.ui.path.isExternal("mailto:"), true, "mailto protocol");
+		deepEqual($.ui.path.isExternal("http://foo.com"), true, "http protocol");
+		deepEqual($.ui.path.isExternal("http://www.foo.com"), true, "http protocol with www");
+		deepEqual($.ui.path.isExternal("tel:16178675309"), true, "tel protocol");
+		deepEqual($.ui.path.isExternal("foo.html"), false, "filename");
+		deepEqual($.ui.path.isExternal("foo/foo/foo.html"), false, "file path");
+		deepEqual($.ui.path.isExternal("../../index.html"), false, "relative parent path");
+		deepEqual($.ui.path.isExternal("/foo"), false, "root-relative path");
+		deepEqual($.ui.path.isExternal("foo"), false, "simple string");
+		deepEqual($.ui.path.isExternal("#foo"), false, "local id reference");
 	});
 
 	test( "path.cleanHash", function(){
-		deepEqual( $.mobile.path.cleanHash( "#anything/atall?akjfdjjf" ), "anything/atall", "removes query param");
-		deepEqual( $.mobile.path.cleanHash( "#nothing/atall" ), "nothing/atall", "removes query param");
+		deepEqual( $.ui.path.cleanHash( "#anything/atall?akjfdjjf" ), "anything/atall", "removes query param");
+		deepEqual( $.ui.path.cleanHash( "#nothing/atall" ), "nothing/atall", "removes query param");
 	});
 
 	test( "path.isHashValid", function(){
-        deepEqual( $.mobile.path.isHashValid( "#id" ), true, "Valid hash");
-        deepEqual( $.mobile.path.isHashValid( "#" ), false, "Empty hash");
-        deepEqual( $.mobile.path.isHashValid( "#id#" ), false, "Hash with more than one #");
-        deepEqual( $.mobile.path.isHashValid( "id" ), false, "Hash without #");
-        deepEqual( $.mobile.path.isHashValid( "i#d" ), false, "Hash with # in the wrong spot");
+        deepEqual( $.ui.path.isHashValid( "#id" ), true, "Valid hash");
+        deepEqual( $.ui.path.isHashValid( "#" ), false, "Empty hash");
+        deepEqual( $.ui.path.isHashValid( "#id#" ), false, "Hash with more than one #");
+        deepEqual( $.ui.path.isHashValid( "id" ), false, "Hash without #");
+        deepEqual( $.ui.path.isHashValid( "i#d" ), false, "Hash with # in the wrong spot");
 	});
 
 	test( "path.isPermittedCrossDomainRequest", function() {
-		var fileDocUrl = $.mobile.path.parseUrl( "file://foo" );
+		var fileDocUrl = $.ui.path.parseUrl( "file://foo" );
 
-		$.mobile.allowCrossDomainPages = false;
-		deepEqual( $.mobile.path.isPermittedCrossDomainRequest( "foo",  "bar"), false, "always false from the setting");
+		$.ui.allowCrossDomainPages = false;
+		deepEqual( $.ui.path.isPermittedCrossDomainRequest( "foo",  "bar"), false, "always false from the setting");
 
 
-		$.mobile.allowCrossDomainPages = true;
+		$.ui.allowCrossDomainPages = true;
 		// test the two states of the file protocol logic
-		deepEqual( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl,  "http://bar.com/foo"), true, "external url from file protocol succeeds");
+		deepEqual( $.ui.path.isPermittedCrossDomainRequest( fileDocUrl,  "http://bar.com/foo"), true, "external url from file protocol succeeds");
 
-		deepEqual( $.mobile.path.isPermittedCrossDomainRequest( fileDocUrl,  "file://foo"), false, "two file protocol urls fail");
+		deepEqual( $.ui.path.isPermittedCrossDomainRequest( fileDocUrl,  "file://foo"), false, "two file protocol urls fail");
 
 	});
 
 	test( "path.getLocation works properly", function() {
-		equal( $.mobile.path.getLocation("http://example.com/"), "http://example.com/" );
-		equal( $.mobile.path.getLocation("http://foo@example.com"), "http://example.com" );
-		equal( $.mobile.path.getLocation("http://foo:bar@example.com"), "http://example.com" );
-		equal( $.mobile.path.getLocation("http://<foo<:bar@example.com"), "http://example.com" );
+		equal( $.ui.path.getLocation("http://example.com/"), "http://example.com/" );
+		equal( $.ui.path.getLocation("http://foo@example.com"), "http://example.com" );
+		equal( $.ui.path.getLocation("http://foo:bar@example.com"), "http://example.com" );
+		equal( $.ui.path.getLocation("http://<foo<:bar@example.com"), "http://example.com" );
 
 		var allUriParts = "http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread#msg-content";
 
-		equal( $.mobile.path.getLocation( allUriParts ), allUriParts.replace( "jblas:password@", "") );
+		equal( $.ui.path.getLocation( allUriParts ), allUriParts.replace( "jblas:password@", "") );
 	});
 
 	test( "calling mobile back uses phonegap's navigator object when present", function() {
-		var previous = $.mobile.phonegapNavigationEnabled;
+		var previous = $.ui.phonegapNavigationEnabled;
 
 		expect( 1 );
 
-		$.mobile.phonegapNavigationEnabled = true;
+		$.ui.phonegapNavigationEnabled = true;
 		window.navigator = window.navigator || {};
 
 		window.navigator.app = {
@@ -262,12 +262,12 @@
 			}
 		};
 
-		$.mobile.back();
-		$.mobile.phonegapNavigationEnabled = previous;
+		$.ui.back();
+		$.ui.phonegapNavigationEnabled = previous;
 	});
 
 	test( "make sure squash is working properly", function() {
-		var squash = $.proxy( $.mobile.path.squash, $.mobile.path );
+		var squash = $.proxy( $.ui.path.squash, $.ui.path );
 
 		equal( squash("#foo/bar.html", "http://example.com/"), "http://example.com/foo/bar.html", "relative path hash" );
 		equal( squash("foo/bar.html", "http://example.com/"), "http://example.com/foo/bar.html", "document relative path" );

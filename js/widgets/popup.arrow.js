@@ -12,7 +12,7 @@ function( jQuery ) {
 
 ( function( $, undefined ) {
 
-var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
+var ieHack = ( $.ui.browser.oldIE && $.ui.browser.oldIE <= 8 ),
 	uiTemplate = $(
 		"<div class='arrow-guide'></div>" +
 		"<div class='arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
@@ -34,7 +34,7 @@ function getArrow() {
 	return { arEls: ct.add( gd ), gd: gd, ct: ct, ar: ar, bg: bg };
 }
 
-$.widget( "mobile.popup", $.mobile.popup, {
+$.widget( "ui.popup", $.ui.popup, {
 	options: {
 		arrow: false,
 		arrowSides: "t,b,l,r"

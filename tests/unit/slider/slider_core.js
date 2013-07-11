@@ -2,9 +2,9 @@
  * mobile slider unit tests
  */
 (function($){
-	$.mobile.page.prototype.options.keepNative = "input.should-be-native";
+	$.ui.page.prototype.options.keepNative = "input.should-be-native";
 	
-	module( "jquery.mobile.slider.js core" );
+	module( "jquery.ui.slider.js core" );
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "slider elements in the keepNative set shouldn't be enhanced", function() {

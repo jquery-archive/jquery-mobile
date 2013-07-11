@@ -27,7 +27,7 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 	// Note that we used to use a media query to figure out what the orientation the browser
 	// thinks it is in:
 	//
-	//     initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+	//     initial_orientation_is_landscape = $.ui.media("all and (orientation: landscape)");
 	//
 	// but there was an iPhone/iPod Touch bug beginning with iOS 4.2, up through iOS 5.1,
 	// where the browser *ALWAYS* applied the landscape media query. This bug does not

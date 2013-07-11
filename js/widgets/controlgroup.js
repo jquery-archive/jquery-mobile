@@ -12,7 +12,7 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.controlgroup", $.extend( {
+$.widget( "ui.controlgroup", $.extend( {
 	options: {
 		theme: null,
 		shadow: false,
@@ -87,18 +87,18 @@ $.widget( "mobile.controlgroup", $.extend( {
 		var $el = this.container(),
 			els = $el.find( ".ui-btn" ).not( ".ui-slider-handle" ),
 			create = this._initialRefresh;
-		if ( $.mobile.checkboxradio ) {
-			$el.find( ":mobile-checkboxradio" ).checkboxradio( "refresh" );
+		if ( $.ui.checkboxradio ) {
+			$el.find( ":ui-checkboxradio" ).checkboxradio( "refresh" );
 		}
 		this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
 		this._initialRefresh = false;
 	}
-}, $.mobile.behaviors.addFirstLastClasses ) );
+}, $.ui.behaviors.addFirstLastClasses ) );
 
-$.mobile.controlgroup.initSelector = ":jqmData(role='controlgroup')";
+$.ui.controlgroup.initSelector = ":jqmData(role='controlgroup')";
 
-$.mobile._enhancer.add( "mobile.controlgroup", {
-	dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.checkboxradio" ]
+$.ui._enhancer.add( "ui.controlgroup", {
+	dependencies: [ "ui.selectmenu", "ui.button", "ui.checkboxradio" ]
 });
 
 })(jQuery);
