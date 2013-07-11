@@ -289,5 +289,5 @@ $.ui.plugin = {
 		}
 	}
 };
-
+$.mobile = $.ui;
 })( jQuery );
