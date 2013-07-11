@@ -7,7 +7,7 @@
 define([
 	"jquery",
 	"jquery.hashchange",
-	"./../jquery.mobile.ns",
+	"./../jquery.ui.core",
 	"./../jquery.mobile.support" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 

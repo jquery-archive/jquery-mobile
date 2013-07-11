@@ -3,7 +3,7 @@
 //>>label: Registry of enhancers
 //>>group: Widgets
 
-define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
+define( [ "jquery", "./jquery.ui.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

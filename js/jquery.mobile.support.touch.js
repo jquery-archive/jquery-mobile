@@ -3,7 +3,7 @@
 //>>label: Touch support test
 //>>group: Core
 
-define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
+define( [ "jquery", "./jquery.ui.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 	(function( $, undefined ) {
 		var support = {
