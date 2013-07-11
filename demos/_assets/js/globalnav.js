@@ -1,5 +1,5 @@
 (function( $, undefined ) {	
-	$( document ).on( "uiinit", function(){
+	$( document ).on( "mobileinit", function(){
 		$.widget( "ui.listview", $.ui.listview, {
 			options: {
 				theme: null,
