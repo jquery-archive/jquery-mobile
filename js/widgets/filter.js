@@ -168,7 +168,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				}
 			},
 			
-			_enhance: function () {
+			_enhance: function ( items ) {
 				var el = this.element,
 					o = this.options,
 					wrapper = $( "<div>", {
@@ -190,6 +190,10 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 					wrapper.addClass( "ui-filter-inset" );
 				}
 
+				if ( o.filterReveal ) {
+					items.addClass( "ui-screen-hidden" );
+				}
+
 				if ( typeof o.target === "string" ) {
 					wrapper.prependTo( $( "." + o.target + "" ) );
 				} else {
@@ -200,18 +204,14 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			},
 
 			_create: function() {
-				var o = this.options,
-					search,
+				var search,
+					o = this.options,
 					items = this._getFilterableItems();
-				
-				if ( o.filterReveal ) {
-					items.addClass( "ui-screen-hidden" );
-				}
 
 				this._setOption( "timer", undefined );
 
 				if ( o.enhanced === false ) {
-					search = this._enhance();
+					search = this._enhance( items );
 				} else {
 					search = $( "#ui-filter-" + this.uuid ).find( "input" );
 				}
@@ -237,18 +237,6 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				// when setting up the parent listview.
 				this._addFirstLastClasses( items, this._getVisibles( items, true ), true );
 			},
-
-			_setOptions: function( options ) {
-				var key;
-
-				for ( key in options ) {
-                  if(options.hasOwnProperty(key)) {
-					this._setOption( key, options[ key ] );
-                  }
-				}
-
-				return this;
-			},
 			
 			_setOption: function( key, value ) {
 				var o = this.options,
@@ -271,23 +259,14 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				return this.element;
 			},
 			
-			enable: function() {
-				return this._setOption( "disabled", false );
-			},
-
-			disable: function() {
-				return this._setOption( "disabled", true );
-			},
-			
-			destroy: function() {
+			_destroy: function() {
 				var o = this.options,
 					wrapper = document.getElementById( "ui-filter-" + this.uuid );
-				
+
 				if ( o.enhanced === false ) {
 					wrapper.parentNode.removeChild( wrapper );
 				}
 				this._toggleFilterableItems( this._getFilterableItems(), false, false );
-				this._destroy();
 			}
 
 	}, $.mobile.behaviors.addFirstLastClasses ) );
