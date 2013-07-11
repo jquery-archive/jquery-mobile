@@ -10,38 +10,38 @@ define( ["jquery", "../jquery.mobile.core", "./serial", "./concurrent"], functio
 
 	// generate the handlers from the above
 	var defaultGetMaxScrollForTransition = function() {
-		return $.mobile.getScreenHeight() * 3;
+		return $.ui.getScreenHeight() * 3;
 	};
 
 	//transition handler dictionary for 3rd party transitions
-	$.mobile.transitionHandlers = {
-		"default": $.mobile.defaultTransitionHandler,
+	$.ui.transitionHandlers = {
+		"default": $.ui.defaultTransitionHandler,
 		"sequential": function( name, reverse, to, from ) {
-			return (new $.mobile.SerialTransition( name, reverse, to, from )).transition();
+			return (new $.ui.SerialTransition( name, reverse, to, from )).transition();
 		},
 
 		"simultaneous": function( name, reverse, to, from ) {
-			return (new $.mobile.ConcurrentTransition( name, reverse, to, from )).transition();
+			return (new $.ui.ConcurrentTransition( name, reverse, to, from )).transition();
 		}
 	};
 
 	// Make our transition handler the public default.
-	$.mobile.defaultTransitionHandler = $.mobile.transitionHandlers.sequential;
-	$.mobile.transitionHandlers["default"] = $.mobile.defaultTransitionHandler;
+	$.ui.defaultTransitionHandler = $.ui.transitionHandlers.sequential;
+	$.ui.transitionHandlers["default"] = $.ui.defaultTransitionHandler;
 
-	$.mobile.transitionFallbacks = {};
+	$.ui.transitionFallbacks = {};
 
 	// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
-	$.mobile._maybeDegradeTransition = function( transition ) {
-		if ( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ) {
-			transition = $.mobile.transitionFallbacks[ transition ];
+	$.ui._maybeDegradeTransition = function( transition ) {
+		if ( transition && !$.support.cssTransform3d && $.ui.transitionFallbacks[ transition ] ) {
+			transition = $.ui.transitionFallbacks[ transition ];
 		}
 
 		return transition;
 	};
 
 	// Set the getMaxScrollForTransition to default if no implementation was set by user
-	$.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defaultGetMaxScrollForTransition;
+	$.ui.getMaxScrollForTransition = $.ui.getMaxScrollForTransition || defaultGetMaxScrollForTransition;
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -9,7 +9,7 @@ define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastC
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.collapsibleset", $.extend( {
+$.widget( "ui.collapsibleset", $.extend( {
 	_create: function() {
 		var $el = this.element,
 			o = this.options,
@@ -49,7 +49,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 				.bind( "expand", function( event ) {
 					var closestCollapsible = $( event.target )
 						.closest( ".ui-collapsible" );
-					if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
+					if ( closestCollapsible.parent().is( ":ui-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
 						closestCollapsible
 							.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
 							.trigger( "collapse" );
@@ -60,19 +60,19 @@ $.widget( "mobile.collapsibleset", $.extend( {
 
 	_init: function() {
 		var $el = this.element,
-			collapsiblesInSet = $el.children( ":mobile-collapsible, :jqmData(role='collapsible')" ),
+			collapsiblesInSet = $el.children( ":ui-collapsible, :jqmData(role='collapsible')" ),
 			expanded = collapsiblesInSet.filter( ":jqmData(collapsed='false')" );
 		this._refresh( "true" );
 
 		// Because the corners are handled by the collapsible itself and the default state is collapsed
-		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
+		// That was causing https://github.com/jquery/jquery-ui/issues/4116
 		expanded.trigger( "expand" );
 	},
 
 	_refresh: function( create ) {
-		var collapsiblesInSet = this.element.children( ":mobile-collapsible, :jqmData(role='collapsible')" );
+		var collapsiblesInSet = this.element.children( ":ui-collapsible, :jqmData(role='collapsible')" );
 
-		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
+		$.ui.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
 		this._addFirstLastClasses( collapsiblesInSet, this._getVisibles( collapsiblesInSet, create ), create );
 	},
@@ -80,12 +80,12 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	refresh: function() {
 		this._refresh( false );
 	}
-}, $.mobile.behaviors.addFirstLastClasses ) );
+}, $.ui.behaviors.addFirstLastClasses ) );
 
-$.mobile.collapsibleset.initSelector = ":jqmData(role='collapsible-set')";
+$.ui.collapsibleset.initSelector = ":jqmData(role='collapsible-set')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.collapsibleset" );
+$.ui._enhancer.add( "ui.collapsibleset" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

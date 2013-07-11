@@ -9,11 +9,11 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 
 var doc = $( document );
 
-$.mobile._Enhancer = function() {
+$.ui._Enhancer = function() {
 	this._dependencies = {};
 };
 
-$.extend( $.mobile._Enhancer.prototype, {
+$.extend( $.ui._Enhancer.prototype, {
 
 	_defaultCallback: function( widget ) {
 		var parts = widget.split( "." ),
@@ -78,11 +78,11 @@ $.extend( $.mobile._Enhancer.prototype, {
 	}
 });
 
-$.mobile._enhancer = new $.mobile._Enhancer();
+$.ui._enhancer = new $.ui._Enhancer();
 
 // Support triggering "create" on an element
 doc.bind( "create", function( e ) {
-	$.mobile._enhancer.enhance( e.target );
+	$.ui._enhancer.enhance( e.target );
 });
 
 })( jQuery );

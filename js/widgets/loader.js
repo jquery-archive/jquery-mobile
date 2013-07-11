@@ -9,7 +9,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 (function( $ ) {
 	// DEPRECATED
 	// NOTE global mobile object settings
-	$.extend( $.mobile, {
+	$.extend( $.ui, {
 		// DEPRECATED Should the text be visble in the loading message?
 		loadingMessageTextVisible: undefined,
 
@@ -22,14 +22,14 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		// DEPRECATED
 		// Turn on/off page loading message. Theme doubles as an object argument
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
-		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
+		// NOTE that the $.ui.loading* settings and params past the first are deprecated
 		showPageLoadingMsg: function( theme, msgText, textonly ) {
-			$.mobile.loading( "show", theme, msgText, textonly );
+			$.ui.loading( "show", theme, msgText, textonly );
 		},
 
 		// DEPRECATED
 		hidePageLoadingMsg: function() {
-			$.mobile.loading( "hide" );
+			$.ui.loading( "hide" );
 		},
 
 		loading: function() {
@@ -38,9 +38,9 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 	});
 
 	// TODO move loader class down into the widget settings
-	var loaderClass = "ui-loader", $html = $( "html" ), $window = $.mobile.window;
+	var loaderClass = "ui-loader", $html = $( "html" ), $window = $.ui.window;
 
-	$.widget( "mobile.loader", {
+	$.widget( "ui.loader", {
 		// NOTE if the global config settings are defined they will override these
 		//      options
 		options: {
@@ -64,7 +64,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 
 		// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
 		fakeFixLoader: function() {
-			var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+			var activeBtn = $( "." + $.ui.activeBtnClass ).first();
 
 			this.element
 				.css({
@@ -78,7 +78,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		checkLoaderPosition: function() {
 			var offset = this.element.offset(),
 				scrollTop = $window.scrollTop(),
-				screenHeight = $.mobile.getScreenHeight();
+				screenHeight = $.ui.getScreenHeight();
 
 			if ( offset.top < scrollTop || ( offset.top - scrollTop ) > screenHeight ) {
 				this.element.addClass( "ui-loader-fakefix" );
@@ -95,7 +95,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 
 		// Turn on/off page loading message. Theme doubles as an object argument
 		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
-		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
+		// NOTE that the $.ui.loading* settings and params past the first are deprecated
 		// TODO sweet jesus we need to break some of this out
 		show: function( theme, msgText, textonly ) {
 			var textVisible, message, loadSettings;
@@ -103,33 +103,33 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 			this.resetHtml();
 
 			// use the prototype options so that people can set them globally at
-			// mobile init. Consistency, it's what's for dinner
+			// ui init. Consistency, it's what's for dinner
 			if ( $.type(theme) === "object" ) {
 				loadSettings = $.extend( {}, this.options, theme );
 
 				// prefer object property from the param then the old theme setting
-				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
+				theme = loadSettings.theme || $.ui.loadingMessageTheme;
 			} else {
 				loadSettings = this.options;
 
 				// here we prefer the them value passed as a string argument, then
 				// we prefer the global option because we can't use undefined default
 				// prototype options, then the prototype option
-				theme = theme || $.mobile.loadingMessageTheme || loadSettings.theme;
+				theme = theme || $.ui.loadingMessageTheme || loadSettings.theme;
 			}
 
 			// set the message text, prefer the param, then the settings object
 			// then loading message
-			message = msgText || $.mobile.loadingMessage || loadSettings.text;
+			message = msgText || $.ui.loadingMessage || loadSettings.text;
 
 			// prepare the dom
 			$html.addClass( "ui-loading" );
 
-			if ( $.mobile.loadingMessage !== false || loadSettings.html ) {
+			if ( $.ui.loadingMessage !== false || loadSettings.html ) {
 				// boolean values require a bit more work :P, supports object properties
 				// and old settings
-				if ( $.mobile.loadingMessageTextVisible !== undefined ) {
-					textVisible = $.mobile.loadingMessageTextVisible;
+				if ( $.ui.loadingMessageTextVisible !== undefined ) {
+					textVisible = $.ui.loadingMessageTextVisible;
 				} else {
 					textVisible = loadSettings.textVisible;
 				}
@@ -153,7 +153,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				}
 
 				// attach the loader to the DOM
-				this.element.appendTo( $.mobile.pageContainer );
+				this.element.appendTo( $.ui.pageContainer );
 
 				// check that the loader is visible
 				this.checkLoaderPosition();
@@ -166,17 +166,17 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		hide: function() {
 			$html.removeClass( "ui-loading" );
 
-			if ( $.mobile.loadingMessage ) {
+			if ( $.ui.loadingMessage ) {
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$.mobile.window.unbind( "scroll", this.fakeFixLoader );
-			$.mobile.window.unbind( "scroll", this.checkLoaderPosition );
+			$.ui.window.unbind( "scroll", this.fakeFixLoader );
+			$.ui.window.unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 
 	$window.bind( "pagecontainercreate", function() {
-		$.mobile.loaderWidget = $.mobile.loaderWidget || $( $.mobile.loader.prototype.defaultHtml ).loader();
+		$.ui.loaderWidget = $.ui.loaderWidget || $( $.ui.loader.prototype.defaultHtml ).loader();
 	});
 })(jQuery, this);
 

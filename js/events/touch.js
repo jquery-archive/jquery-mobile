@@ -8,7 +8,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 (function( $, window, undefined ) {
 	var $document = $( document ),
-		supportTouch = $.mobile.support.touch,
+		supportTouch = $.ui.support.touch,
 		scrollEvent = "touchmove scroll",
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",

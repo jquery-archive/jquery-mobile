@@ -5,7 +5,7 @@
 define([ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $ ) {
-	$.mobile = {};
+	$.ui = {};
 }( jQuery ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

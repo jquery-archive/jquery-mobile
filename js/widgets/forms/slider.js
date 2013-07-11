@@ -14,7 +14,7 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.slider", $.extend( {
+$.widget( "ui.slider", $.extend( {
 	widgetEventPrefix: "slide",
 
 	options: {
@@ -30,7 +30,7 @@ $.widget( "mobile.slider", $.extend( {
 		// TODO: Each of these should have comments explain what they're for
 		var self = this,
 			control = this.element,
-			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme", true ),
+			trackTheme = this.options.trackTheme || $.ui.getAttribute( control[ 0 ], "theme", true ),
 			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
 			cornerClass = ( this.options.corners || control.jqmData( "corners" ) ) ? " ui-corner-all" : "",
 			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
@@ -50,7 +50,7 @@ $.widget( "mobile.slider", $.extend( {
 			slider = $( domSlider ),
 			valuebg = this.options.highlight && !isToggleSwitch ? (function() {
 				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
+				bg.className = "ui-slider-bg " + $.ui.activeBtnClass;
 				return $( bg ).prependTo( slider );
 			})() : false,
 			options,
@@ -123,7 +123,7 @@ $.widget( "mobile.slider", $.extend( {
 
 			for ( i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
 				side = !i ? "b" : "a";
-				activeClass = !i ? "" : " " + $.mobile.activeBtnClass;
+				activeClass = !i ? "" : " " + $.ui.activeBtnClass;
 				sliderLabel = document.createElement( "div" );
 				sliderImg = document.createElement( "span" );
 
@@ -216,14 +216,14 @@ $.widget( "mobile.slider", $.extend( {
 
 		// In all cases prevent the default and mark the handle as active
 		switch ( event.keyCode ) {
-			case $.mobile.keyCode.HOME:
-			case $.mobile.keyCode.END:
-			case $.mobile.keyCode.PAGE_UP:
-			case $.mobile.keyCode.PAGE_DOWN:
-			case $.mobile.keyCode.UP:
-			case $.mobile.keyCode.RIGHT:
-			case $.mobile.keyCode.DOWN:
-			case $.mobile.keyCode.LEFT:
+			case $.ui.keyCode.HOME:
+			case $.ui.keyCode.END:
+			case $.ui.keyCode.PAGE_UP:
+			case $.ui.keyCode.PAGE_DOWN:
+			case $.ui.keyCode.UP:
+			case $.ui.keyCode.RIGHT:
+			case $.ui.keyCode.DOWN:
+			case $.ui.keyCode.LEFT:
 				event.preventDefault();
 
 				if ( !this._keySliding ) {
@@ -236,20 +236,20 @@ $.widget( "mobile.slider", $.extend( {
 
 		// move the slider according to the keypress
 		switch ( event.keyCode ) {
-			case $.mobile.keyCode.HOME:
+			case $.ui.keyCode.HOME:
 				this.refresh( this.min );
 				break;
-			case $.mobile.keyCode.END:
+			case $.ui.keyCode.END:
 				this.refresh( this.max );
 				break;
-			case $.mobile.keyCode.PAGE_UP:
-			case $.mobile.keyCode.UP:
-			case $.mobile.keyCode.RIGHT:
+			case $.ui.keyCode.PAGE_UP:
+			case $.ui.keyCode.UP:
+			case $.ui.keyCode.RIGHT:
 				this.refresh( index + this.step );
 				break;
-			case $.mobile.keyCode.PAGE_DOWN:
-			case $.mobile.keyCode.DOWN:
-			case $.mobile.keyCode.LEFT:
+			case $.ui.keyCode.PAGE_DOWN:
+			case $.ui.keyCode.DOWN:
+			case $.ui.keyCode.LEFT:
 				this.refresh( index - this.step );
 				break;
 		}
@@ -355,7 +355,7 @@ $.widget( "mobile.slider", $.extend( {
 		//       alteration of the input value, which should still update the slider
 
 		var self = this,
-			parentTheme = $.mobile.getAttribute( this.element[ 0 ], "theme", true ),
+			parentTheme = $.ui.getAttribute( this.element[ 0 ], "theme", true ),
 			theme = this.options.theme || parentTheme,
 			themeClass =  theme ? " ui-btn-" + theme : "",
 			trackTheme = this.options.trackTheme || parentTheme,
@@ -379,7 +379,7 @@ $.widget( "mobile.slider", $.extend( {
 		if ( this.options.highlight && !this.isToggleSwitch && this.slider.find( ".ui-slider-bg" ).length === 0 ) {
 			this.valuebg = (function() {
 				var bg = document.createElement( "div" );
-				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
+				bg.className = "ui-slider-bg " + $.ui.activeBtnClass;
 				return $( bg ).prependTo( self.slider );
 			})();
 		}
@@ -558,12 +558,12 @@ $.widget( "mobile.slider", $.extend( {
 		this.slider.toggleClass( "ui-disabled", value ).attr( "aria-disabled", value );
 	}
 
-}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
+}, $.ui.behaviors.formReset, $.ui.behaviors.optionDemultiplexer ) );
 
-$.mobile.slider.initSelector = "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')";
+$.ui.slider.initSelector = "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.slider" );
+$.ui._enhancer.add( "ui.slider" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

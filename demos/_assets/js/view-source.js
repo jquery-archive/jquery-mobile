@@ -30,7 +30,7 @@ function getHeadSnippet( type, selector ) {
 	}
 
 	// First, try to grab a tag in this document
-	if ( !$.mobile.path.isPath( selector ) ) {
+	if ( !$.ui.path.isPath( selector ) ) {
 		el = $( "head" ).find( type + selector );
 		// If this is not an embedded style, try a stylesheet reference
 		if ( el.length === 0 && type === "style" ) {
@@ -45,8 +45,8 @@ function getHeadSnippet( type, selector ) {
 
 	// If not, try to SJAX in the document referred to by the selector
 	if ( !text && selector ) {
-		absUrl = $.mobile.path.makeUrlAbsolute( selector );
-		hash = $.mobile.path.parseUrl( absUrl ).hash;
+		absUrl = $.ui.path.makeUrlAbsolute( selector );
+		hash = $.ui.path.parseUrl( absUrl ).hash;
 
 		// selector is a path to SJAX in
 		$.ajax( absUrl, { async: false, dataType: "text" } )
@@ -74,7 +74,7 @@ $( document ).bind( "pagebeforechange", function( e, data ) {
 
 			attachPopupHandler( popup, sources );
 			popup
-				.appendTo( $.mobile.activePage )
+				.appendTo( $.ui.activePage )
 				.popup()
 				.bind( "popupafterclose", function() {
 					popup.remove();
@@ -173,13 +173,13 @@ $( document ).on( "pageinit", function( e ) {
 	
 	// reposition when switching between html / js / css
 	$( e.target ).delegate( ".jqm-view-source .ui-collapsible", "expand", function() {
-		$( this ).parents( ":mobile-popup" ).popup( "reposition", { positionTo: "window" } );
+		$( this ).parents( ":ui-popup" ).popup( "reposition", { positionTo: "window" } );
 	});
 
 	$( e.target ).delegate( ".jqm-view-source", "popupbeforeposition", function() {
 		// max height: screen height - tolerance (2*30px) - 42px for each collapsible heading
 		var x = $( this ).find( ".ui-collapsible" ).length,
-			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
+			maxHeight = $.ui.getScreenHeight() - 60 - ( x * 42 );
 
 		$( this ).find( ".ui-collapsible-content" ).css( "max-height", maxHeight + "px" );
 

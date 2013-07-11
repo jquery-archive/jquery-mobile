@@ -7,7 +7,7 @@ define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile._enhancer.add( "mobile.nojs", undefined, function( target ) {
+$.ui._enhancer.add( "ui.nojs", undefined, function( target ) {
 	$( ":jqmData(role='nojs')", target ).addClass( "ui-nojs" );
 });
 

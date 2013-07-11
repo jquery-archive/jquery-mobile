@@ -13,7 +13,7 @@ define( [ "jquery", "../handlers" ], function( jQuery ) {
 (function( $, window, undefined ) {
 
 // Set the slide transitions's fallback to "fade"
-$.mobile.transitionFallbacks.slidefade = "fade";
+$.ui.transitionFallbacks.slidefade = "fade";
 
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

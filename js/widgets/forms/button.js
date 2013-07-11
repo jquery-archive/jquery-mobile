@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.registry"
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.button", {
+$.widget( "ui.button", {
 	options: {
 		theme: null,
 		icon: null,
@@ -30,7 +30,7 @@ $.widget( "mobile.button", {
 		if ( isInput ) {
 			classes += " ui-input-btn";
 
-			// TODO: data-class and data-id options. See https://github.com/jquery/jquery-mobile/issues/3577
+			// TODO: data-class and data-id options. See https://github.com/jquery/jquery-ui/issues/3577
 			if ( !!~$el[ 0 ].className.indexOf( "ui-btn-left" ) ) {
 				classes += " ui-btn-left";
 			}
@@ -48,11 +48,11 @@ $.widget( "mobile.button", {
 
 			this._on( $el, {
 				focus: function() {
-					$button.addClass( $.mobile.focusClass );
+					$button.addClass( $.ui.focusClass );
 				},
 
 				blur: function() {
-					$button.removeClass( $.mobile.focusClass );
+					$button.removeClass( $.ui.focusClass );
 				}
 			});
 		} else {
@@ -147,10 +147,10 @@ $.widget( "mobile.button", {
 	}
 });
 
-$.mobile.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
+$.ui.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.button" );
+$.ui._enhancer.add( "ui.button" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -13,9 +13,9 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var getAttr = $.mobile.getAttribute;
+var getAttr = $.ui.getAttribute;
 
-$.widget( "mobile.collapsible", {
+$.widget( "ui.collapsible", {
 	options: {
 		expandCueText: " click to expand contents",
 		collapseCueText: " click to collapse contents",
@@ -34,7 +34,7 @@ $.widget( "mobile.collapsible", {
 	_create: function() {
 		var $el = this.element,
 			o = this.options,
-			collapsiblesetWidgetSelector = ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ),
+			collapsiblesetWidgetSelector = ( $.ui.collapsibleset ? ", :ui-collapsibleset" : "" ),
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.children( o.heading ).first(),
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
@@ -118,7 +118,7 @@ $.widget( "mobile.collapsible", {
 
 		this._on( collapsibleHeading, {
 			"tap": function(/* event */) {
-				collapsibleHeading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
+				collapsibleHeading.find( "a" ).first().addClass( $.ui.activeBtnClass );
 			},
 
 			"click": function( event ) {
@@ -153,7 +153,7 @@ $.widget( "mobile.collapsible", {
 				.toggleClass( "ui-icon-" + o.expandedIcon, !isCollapse )
 				// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
 				.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
-				.removeClass( $.mobile.activeBtnClass );
+				.removeClass( $.ui.activeBtnClass );
 
 			this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
 			this._collapsibleContent
@@ -174,10 +174,10 @@ $.widget( "mobile.collapsible", {
 	}
 });
 
-$.mobile.collapsible.initSelector = ":jqmData(role='collapsible')";
+$.ui.collapsible.initSelector = ":jqmData(role='collapsible')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.collapsible", { dependencies: [ "mobile.page","mobile.toolbar" ] });
+$.ui._enhancer.add( "ui.collapsible", { dependencies: [ "ui.page","ui.toolbar" ] });
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

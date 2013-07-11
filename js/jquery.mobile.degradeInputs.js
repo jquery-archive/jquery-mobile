@@ -8,7 +8,7 @@ define( [ "jquery", "./widgets/page", "./jquery.mobile.registry" ], function( jQ
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile.page.prototype.options.degradeInputs = {
+$.ui.page.prototype.options.degradeInputs = {
 	color: false,
 	date: false,
 	datetime: false,
@@ -25,10 +25,10 @@ $.mobile.page.prototype.options.degradeInputs = {
 };
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.degradeinputs", undefined, function( target ) {
+$.ui._enhancer.add( "ui.degradeinputs", undefined, function( target ) {
 
 	var $target = $( target ),
-		page = $.mobile.closestPageData( $target ), options;
+		page = $.ui.closestPageData( $target ), options;
 
 	if ( !page ) {
 		return;
@@ -48,7 +48,7 @@ $.mobile._enhancer.add( "mobile.degradeinputs", undefined, function( target ) {
 			// In IE browsers, the type sometimes doesn't exist in the cloned markup, so we replace the closing tag instead
 			hasType = html.indexOf( " type=" ) > -1;
 			findstr = hasType ? /\s+type=["']?\w+['"]?/ : /\/?>/;
-			repstr = " type=\"" + optType + "\" data-" + $.mobile.ns + "type=\"" + type + "\"" + ( hasType ? "" : ">" );
+			repstr = " type=\"" + optType + "\" data-" + $.ui.ns + "type=\"" + type + "\"" + ( hasType ? "" : ">" );
 
 			$this.replaceWith( html.replace( findstr, repstr ) );
 		}

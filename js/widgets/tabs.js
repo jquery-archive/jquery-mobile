@@ -10,7 +10,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core","./jquery
 
 	$.ui.tabs.initSelector = ":jqmData(role='tabs'), :jqmData(content='tabs')";
 
-	$.mobile._enhancer.add( "ui.tabs" );
+	$.ui._enhancer.add( "ui.tabs" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

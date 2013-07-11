@@ -37,13 +37,13 @@ var unfocusableItemSelector = ".ui-disabled,.ui-li-divider,.ui-screen-hidden,:jq
 		}
 	};
 
-$.widget( "mobile.selectmenu", $.mobile.selectmenu, {
+$.widget( "ui.selectmenu", $.ui.selectmenu, {
 	_create: function() {
 		var o = this.options;
 
 		// Custom selects cannot exist inside popups, so revert the "nativeMenu"
 		// option to true if a parent is a popup
-		o.nativeMenu = o.nativeMenu || ( this.element.parents( ":jqmData(role='popup'),:mobile-popup" ).length > 0 );
+		o.nativeMenu = o.nativeMenu || ( this.element.parents( ":jqmData(role='popup'),:ui-popup" ).length > 0 );
 
 		return this._super();
 	},
@@ -59,13 +59,13 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 
 		if (event.type === "vclick" ||
-				event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE)) {
+				event.keyCode && (event.keyCode === $.ui.keyCode.ENTER || event.keyCode === $.ui.keyCode.SPACE)) {
 
 			this._decideFormat();
 			if ( this.menuType === "overlay" ) {
-				this.button.attr( "href", "#" + this.popupId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+				this.button.attr( "href", "#" + this.popupId ).attr( "data-" + ( $.ui.ns || "" ) + "rel", "popup" );
 			} else {
-				this.button.attr( "href", "#" + this.dialogId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+				this.button.attr( "href", "#" + this.dialogId ).attr( "data-" + ( $.ui.ns || "" ) + "rel", "dialog" );
 			}
 			this.isOpen = true;
 			// Do not prevent default, so the navigation may have a chance to actually open the chosen format
@@ -117,7 +117,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// of a dialog sized custom select
 		//
 		// doing this here provides for the back button on the custom select dialog
-		$.mobile._bindPageRemove.call( this.thisPage );
+		$.ui._bindPageRemove.call( this.thisPage );
 	},
 
 	_handleHeaderCloseClick: function() {
@@ -138,21 +138,21 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		self = this;
 		selectId = this.selectId;
-		prefix = ( selectId ? selectId : ( ( $.mobile.ns || "" ) + "uuid-" + this.uuid ) );
+		prefix = ( selectId ? selectId : ( ( $.ui.ns || "" ) + "uuid-" + this.uuid ) );
 		popupId = prefix + "-listbox";
 		dialogId = prefix + "-dialog";
 		label = this.label;
 		thisPage = this.element.closest( ".ui-page" );
 		isMultiple = this.element[ 0 ].multiple;
 		menuId = selectId + "-menu";
-		themeAttr = o.theme ? ( " data-" + $.mobile.ns + "theme='" + o.theme + "'" ) : "";
-		overlayThemeAttr = o.overlayTheme ? ( " data-" + $.mobile.ns + "theme='" + o.overlayTheme + "'" ) : "";
-		dividerThemeAttr = ( o.dividerTheme && isMultiple ) ? ( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
-		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogId + "'" + themeAttr + overlayThemeAttr + ">" +
-			"<div data-" + $.mobile.ns + "role='header'>" +
+		themeAttr = o.theme ? ( " data-" + $.ui.ns + "theme='" + o.theme + "'" ) : "";
+		overlayThemeAttr = o.overlayTheme ? ( " data-" + $.ui.ns + "theme='" + o.overlayTheme + "'" ) : "";
+		dividerThemeAttr = ( o.dividerTheme && isMultiple ) ? ( " data-" + $.ui.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
+		menuPage = $( "<div data-" + $.ui.ns + "role='dialog' class='ui-selectmenu' id='" + dialogId + "'" + themeAttr + overlayThemeAttr + ">" +
+			"<div data-" + $.ui.ns + "role='header'>" +
 			"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
 			"</div>"+
-			"<div data-" + $.mobile.ns + "role='content'></div>"+
+			"<div data-" + $.ui.ns + "role='content'></div>"+
 			"</div>" );
 		listbox = $( "<div id='" + popupId + "' class='ui-selectmenu'>" ).insertAfter( this.select ).popup({ theme: o.overlayTheme });
 		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + ">" ).appendTo( listbox );
@@ -219,7 +219,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 				// index of option tag to be selected
 				var oldIndex = self.select[ 0 ].selectedIndex,
-					newIndex = $.mobile.getAttribute( this, "option-index", true ),
+					newIndex = $.ui.getAttribute( this, "option-index", true ),
 					option = self._selectOptions().eq( newIndex )[ 0 ];
 
 				// toggle selected status on the tag for multi selects
@@ -297,7 +297,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		self.setButtonCount();
 
 		self.list.find( "li:not(.ui-li-divider)" )
-			.find( "a" ).removeClass( $.mobile.activeBtnClass ).end()
+			.find( "a" ).removeClass( $.ui.activeBtnClass ).end()
 			.attr( "aria-selected", false )
 			.each(function( i ) {
 
@@ -312,9 +312,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 						item.find( "a" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 					} else {
 						if ( item.hasClass( "ui-screen-hidden" ) ) {
-							item.next().find( "a" ).addClass( $.mobile.activeBtnClass );
+							item.next().find( "a" ).addClass( $.ui.activeBtnClass );
 						} else {
-							item.find( "a" ).addClass( $.mobile.activeBtnClass );
+							item.find( "a" ).addClass( $.ui.activeBtnClass );
 						}
 					}
 				}
@@ -345,7 +345,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	_focusMenuItem: function() {
-		var selector = this.list.find( "a." + $.mobile.activeBtnClass );
+		var selector = this.list.find( "a." + $.ui.activeBtnClass );
 		if ( selector.length === 0 ) {
 			selector = this.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-btn" );
 		}
@@ -354,7 +354,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 	_decideFormat: function() {
 		var self = this,
-			$window = $.mobile.window,
+			$window = $.ui.window,
 			selfListParent = self.list.parent(),
 			menuHeight = selfListParent.outerHeight(),
 			scrollTop = $window.scrollTop(),
@@ -363,7 +363,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
 
-			self.menuPage.appendTo( $.mobile.pageContainer ).page();
+			self.menuPage.appendTo( $.ui.pageContainer ).page();
 			self.menuPageContent = self.menuPage.find( ".ui-content" );
 			self.menuPageClose = self.menuPage.find( ".ui-header a" );
 
@@ -401,7 +401,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			needPlaceholder = true,
 			dataIcon = this.isMultiple ? "checkbox-off" : "false",
 			$options, numOptions, select,
-			dataPrefix = "data-" + $.mobile.ns,
+			dataPrefix = "data-" + $.ui.ns,
 			dataIndexAttr = dataPrefix + "option-index",
 			dataIconAttr = dataPrefix + "icon",
 			dataRoleAttr = dataPrefix + "role",
@@ -523,7 +523,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 			// Remove the placeholder attribute if we were the ones to add it
 			if ( this._removePlaceholderAttr ) {
-				this._selectOptions().removeAttr( "data-" + $.mobile.ns + "placeholder" );
+				this._selectOptions().removeAttr( "data-" + $.ui.ns + "placeholder" );
 			}
 
 			// Remove the popup
@@ -540,7 +540,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 //auto self-init widgets - custom select needs to be enhanced after popup to
 // make sure that it reverts to native select
-$.mobile._enhancer.add( "mobile.selectmenu", { dependencies: [ "mobile.popup" ] } );
+$.ui._enhancer.add( "ui.selectmenu", { dependencies: [ "ui.popup" ] } );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

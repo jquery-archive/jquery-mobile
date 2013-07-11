@@ -12,27 +12,27 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		enabledZoom = initialContent + ",maximum-scale=10, user-scalable=yes",
 		disabledInitially = /(user-scalable[\s]*=[\s]*no)|(maximum-scale[\s]*=[\s]*1)[$,\s]/.test( initialContent );
 
-	$.mobile.zoom = $.extend( {}, {
+	$.ui.zoom = $.extend( {}, {
 		enabled: !disabledInitially,
 		locked: false,
 		disable: function( lock ) {
-			if ( !disabledInitially && !$.mobile.zoom.locked ) {
+			if ( !disabledInitially && !$.ui.zoom.locked ) {
 				meta.attr( "content", disabledZoom );
-				$.mobile.zoom.enabled = false;
-				$.mobile.zoom.locked = lock || false;
+				$.ui.zoom.enabled = false;
+				$.ui.zoom.locked = lock || false;
 			}
 		},
 		enable: function( unlock ) {
-			if ( !disabledInitially && ( !$.mobile.zoom.locked || unlock === true ) ) {
+			if ( !disabledInitially && ( !$.ui.zoom.locked || unlock === true ) ) {
 				meta.attr( "content", enabledZoom );
-				$.mobile.zoom.enabled = true;
-				$.mobile.zoom.locked = false;
+				$.ui.zoom.enabled = true;
+				$.ui.zoom.locked = false;
 			}
 		},
 		restore: function() {
 			if ( !disabledInitially ) {
 				meta.attr( "content", initialContent );
-				$.mobile.zoom.enabled = true;
+				$.ui.zoom.enabled = true;
 			}
 		}
 	});

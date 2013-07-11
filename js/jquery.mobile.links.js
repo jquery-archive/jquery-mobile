@@ -11,7 +11,7 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile._enhancer.add( "mobile.links", undefined, function( target ) {
+$.ui._enhancer.add( "ui.links", undefined, function( target ) {
 
 	//links within content areas, tests included with page
 	$( target )
@@ -22,7 +22,7 @@ $.mobile._enhancer.add( "mobile.links", undefined, function( target ) {
 			// Accessibility info for popups
 			var e = this,
 				href = $( this ).attr( "href" ),
-				sel = $.mobile.path.hashToSelector( href ),
+				sel = $.ui.path.hashToSelector( href ),
 				idref = href.substring( 1 );
 
 			e.setAttribute( "aria-haspopup", true );

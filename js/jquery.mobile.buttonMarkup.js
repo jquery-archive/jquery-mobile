@@ -239,7 +239,7 @@ $.fn.buttonMarkup.defaults = {
 // future.
 function enhanceWithButtonMarkup( idx, el ) {
 	var classes,
-		getAttrFixed = $.mobile.getAttribute;
+		getAttrFixed = $.ui.getAttribute;
 
 	classes = optionsToClasses( $.extend( {},
 		$.fn.buttonMarkup.defaults, {
@@ -260,7 +260,7 @@ function enhanceWithButtonMarkup( idx, el ) {
 
 //links in bars, or those with data-role become buttons
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
+$.ui._enhancer.add( "ui.buttonmarkup", undefined, function( target ) {
 	$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a", target ).each( enhanceWithButtonMarkup );
 });
 

@@ -7,7 +7,7 @@ define( [ "jquery", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile.behaviors.optionDemultiplexer = {
+$.ui.behaviors.optionDemultiplexer = {
 	_setOption: function( key, value ) {
 		var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 

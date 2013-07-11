@@ -15,13 +15,13 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.table", $.mobile.table, {
+$.widget( "ui.table", $.ui.table, {
 	options: {
 		mode: "columntoggle",
 		columnBtnTheme: null,
 		columnPopupTheme: null,
 		columnBtnText: "Columns...",
-		classes: $.extend( $.mobile.table.prototype.options.classes, {
+		classes: $.extend( $.ui.table.prototype.options.classes, {
 			popup: "ui-table-columntoggle-popup",
 			columnBtn: "ui-table-columntoggle-btn",
 			priorityPrefix: "ui-table-priority-",
@@ -33,7 +33,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		var id, $menuButton, $popup, $menu,
 			$table = this.element,
 			o = this.options,
-			ns = $.mobile.ns,
+			ns = $.ui.ns,
 			menuInputChange = function(/* e */) {
 				var checked = this.checked;
 				$( this ).jqmData( "cells" )
@@ -87,7 +87,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		// refresh method
 
-		this._on( $.mobile.window, { "throttledresize": "refresh" } );
+		this._on( $.ui.window, { "throttledresize": "refresh" } );
 
 		$.extend( this, {
 			_menu: $menu,

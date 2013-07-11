@@ -17,7 +17,7 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.checkboxradio", $.extend( {
+$.widget( "ui.checkboxradio", $.extend( {
 	options: {
 		theme: null,
 		mini: false
@@ -83,11 +83,11 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	},
 
 	_handleInputFocus: function() {
-		this.label.addClass( $.mobile.focusClass );
+		this.label.addClass( $.ui.focusClass );
 	},
 
 	_handleInputBlur: function() {
-		this.label.removeClass( $.mobile.focusClass );
+		this.label.removeClass( $.ui.focusClass );
 	},
 
 	_handleInputVClick: function() {
@@ -174,7 +174,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 
 	refresh: function() {
 		var input = this.element[ 0 ],
-			active = " " + $.mobile.activeBtnClass,
+			active = " " + $.ui.activeBtnClass,
 			hasIcon = ( this.element.parents( ".ui-controlgroup-horizontal" ).length === 0 ),
 			checkedClass = this.checkedClass + ( hasIcon ? "" : active ),
 			label = this.label;
@@ -221,12 +221,12 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		this.input.prop( "disabled", false );
 	}
 
-}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
+}, $.ui.behaviors.formReset, $.ui.behaviors.optionDemultiplexer ) );
 
-$.mobile.checkboxradio.initSelector = "input[type='checkbox'],input[type='radio']";
+$.ui.checkboxradio.initSelector = "input[type='checkbox'],input[type='radio']";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.checkboxradio" );
+$.ui._enhancer.add( "ui.checkboxradio" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

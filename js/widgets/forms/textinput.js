@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.textinput", {
+$.widget( "ui.textinput", {
 	options: {
 		theme: null,
 		corners: true,
@@ -103,14 +103,14 @@ $.widget( "mobile.textinput", {
 		input.focus(function() {
 				// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
 				if ( o.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
+					$.ui.zoom.disable( true );
 				}
-				focusedEl.addClass( $.mobile.focusClass );
+				focusedEl.addClass( $.ui.focusClass );
 			})
 			.blur(function() {
-				focusedEl.removeClass( $.mobile.focusClass );
+				focusedEl.removeClass( $.ui.focusClass );
 				if ( o.preventFocusZoom ) {
-					$.mobile.zoom.enable( true );
+					$.ui.zoom.enable( true );
 				}
 			});
 
@@ -138,13 +138,13 @@ $.widget( "mobile.textinput", {
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			this._on( true, $.mobile.document, { "pagechange": "_keyup" });
+			this._on( true, $.ui.document, { "pagechange": "_keyup" });
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				this._on( true, $.mobile.window, {"load": "_keyup"});
+				this._on( true, $.ui.window, {"load": "_keyup"});
 			}
 		}
 		if ( input.attr( "disabled" ) ) {
@@ -183,10 +183,10 @@ $.widget( "mobile.textinput", {
 	}
 });
 
-$.mobile.textinput.initSelector = "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']";
+$.ui.textinput.initSelector = "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.textinput" );
+$.ui._enhancer.add( "ui.textinput" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

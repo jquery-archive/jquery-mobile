@@ -13,7 +13,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		oldFind = $.find,
 		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
-	$.extend($.mobile, {
+	$.extend($.ui, {
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 
@@ -25,7 +25,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 			var value;
 
 			if ( dns ) {
-				key = "data-" + $.mobile.ns + key;
+				key = "data-" + $.ui.ns + key;
 			}
 
 			value = e.getAttribute( key );
@@ -42,7 +42,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// and then camel case the attribute string. Add the result
 		// to our nsNormalizeDict so we don't have to do this again.
 		nsNormalize: function( prop ) {
-			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
+			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.ui.ns + prop ) );
 		},
 
 		// Find the closest javascript page element to gather settings data jsperf test
@@ -53,17 +53,17 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		closestPageData: function( $target ) {
 			return $target
 				.closest( ":jqmData(role='page'), :jqmData(role='dialog')" )
-				.data( "mobile-page" );
+				.data( "ui-page" );
 		}
 
 	});
-	// Mobile version of data and removeData and hasData methods
-	// ensures all data is set and retrieved using jQuery Mobile's data namespace
+	// ui version of data and removeData and hasData methods
+	// ensures all data is set and retrieved using jQuery ui's data namespace
 	$.fn.jqmData = function( prop, value ) {
 		var result;
 		if ( typeof prop !== "undefined" ) {
 			if ( prop ) {
-				prop = $.mobile.nsNormalize( prop );
+				prop = $.ui.nsNormalize( prop );
 			}
 
 			// undefined is permitted as an explicit input for the second param
@@ -80,22 +80,22 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	$.jqmData = function( elem, prop, value ) {
 		var result;
 		if ( typeof prop !== "undefined" ) {
-			result = $.data( elem, prop ? $.mobile.nsNormalize( prop ) : prop, value );
+			result = $.data( elem, prop ? $.ui.nsNormalize( prop ) : prop, value );
 		}
 		return result;
 	};
 
 	$.fn.jqmRemoveData = function( prop ) {
-		return this.removeData( $.mobile.nsNormalize( prop ) );
+		return this.removeData( $.ui.nsNormalize( prop ) );
 	};
 
 	$.jqmRemoveData = function( elem, prop ) {
-		return $.removeData( elem, $.mobile.nsNormalize( prop ) );
+		return $.removeData( elem, $.ui.nsNormalize( prop ) );
 	};
 
 
 	$.find = function( selector, context, ret, extra ) {
-		selector = selector.replace( jqmDataRE, "[data-" + ( $.mobile.ns || "" ) + "$1]" );
+		selector = selector.replace( jqmDataRE, "[data-" + ( $.ui.ns || "" ) + "$1]" );
 
 		return oldFind.call( this, selector, context, ret, extra );
 	};

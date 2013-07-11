@@ -8,11 +8,11 @@ define( [ "jquery", "./transition" ], function( jQuery ) {
 
 (function( $ ) {
 
-	$.mobile.ConcurrentTransition = function(){
+	$.ui.ConcurrentTransition = function(){
 		this.init.apply(this, arguments);
 	};
 
-	$.extend($.mobile.ConcurrentTransition.prototype, $.mobile.Transition.prototype, {
+	$.extend($.ui.ConcurrentTransition.prototype, $.ui.Transition.prototype, {
 		sequential: false,
 
 		beforeDoneIn: function() {

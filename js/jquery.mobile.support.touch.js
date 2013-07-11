@@ -10,9 +10,9 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 			touch: "ontouchend" in document
 		};
 
-		$.mobile.support = $.mobile.support || {};
+		$.ui.support = $.ui.support || {};
 		$.extend( $.support, support );
-		$.extend( $.mobile.support, support );
+		$.extend( $.ui.support, support );
 	}( jQuery ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

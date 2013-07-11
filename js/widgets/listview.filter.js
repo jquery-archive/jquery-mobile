@@ -13,7 +13,7 @@ var defaultFilterCallback = function( text, searchValue /*, item */) {
 	return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 };
 
-$.widget( "mobile.listview", $.mobile.listview, {
+$.widget( "ui.listview", $.ui.listview, {
 	options: {
 		filter: false,
 		filterPlaceholder: "Filter items...",
@@ -131,7 +131,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 		search = $( "<input>", {
 			placeholder: o.filterPlaceholder
 		})
-		.attr( "data-" + $.mobile.ns + "type", "search" )
+		.attr( "data-" + $.ui.ns + "type", "search" )
 		.jqmData( "lastval", "" )
 		.appendTo( wrapper )
 		.textinput();

@@ -42,7 +42,7 @@ function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
 }
 
 function windowCoords() {
-	var $win = $.mobile.window;
+	var $win = $.ui.window;
 
 	return {
 		x: $win.scrollLeft(),
@@ -52,7 +52,7 @@ function windowCoords() {
 	};
 }
 
-$.widget( "mobile.popup", {
+$.widget( "ui.popup", {
 	options: {
 		wrapperClass: null,
 		theme: null,
@@ -72,10 +72,10 @@ $.widget( "mobile.popup", {
 
 		// NOTE Windows Phone 7 has a scroll position caching issue that
 		//      requires us to disable popup history management by default
-		//      https://github.com/jquery/jquery-mobile/issues/4784
+		//      https://github.com/jquery/jquery-ui/issues/4784
 		//
 		// NOTE this option is modified in _create!
-		history: !$.mobile.browser.oldIE
+		history: !$.ui.browser.oldIE
 	},
 
 	_eatEventAndClose: function( evt ) {
@@ -98,7 +98,7 @@ $.widget( "mobile.popup", {
 	},
 
 	_handleWindowKeyUp: function( evt ) {
-		if ( this._isOpen && evt.keyCode === $.mobile.keyCode.ESCAPE ) {
+		if ( this._isOpen && evt.keyCode === $.ui.keyCode.ESCAPE ) {
 			return this._eatEventAndClose( evt );
 		}
 	},
@@ -212,7 +212,7 @@ $.widget( "mobile.popup", {
 		// We need to adjust the history option to be false if there's no AJAX nav.
 		// We can't do it in the option declarations because those are run before
 		// it is determined whether there shall be AJAX nav.
-		opts.history = opts.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
+		opts.history = opts.history && $.ui.ajaxEnabled && $.ui.hashListeningEnabled;
 
 		// Define instance variables
 		$.extend( this, {
@@ -248,12 +248,12 @@ $.widget( "mobile.popup", {
 
 		// Event handlers
 		this._on( this._ui.screen, { "vclick": "_eatEventAndClose" } );
-		this._on( $.mobile.window, {
+		this._on( $.ui.window, {
 			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 			resize: $.proxy( this, "_handleWindowResize" ),
 			keyup: $.proxy( this, "_handleWindowKeyUp" )
 		});
-		this._on( $.mobile.document, { "focusin": "_handleDocumentFocusIn" } );
+		this._on( $.ui.document, { "focusin": "_handleDocumentFocusIn" } );
 	},
 
 	_enhance: function( elem, myId ) {
@@ -314,7 +314,7 @@ $.widget( "mobile.popup", {
 	_applyTransition: function( value ) {
 		this._ui.container.removeClass( this._fallbackTransition );
 		if ( value && value !== "none" ) {
-			this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
+			this._fallbackTransition = $.ui._maybeDegradeTransition( value );
 			if ( this._fallbackTransition === "none" ) {
 				this._fallbackTransition = "";
 			}
@@ -457,7 +457,7 @@ $.widget( "mobile.popup", {
 		var ret,
 			rc = clampInfo.rc,
 			menuSize = clampInfo.menuSize,
-			// fix for $.mobile.document.height() bug in core 1.7.2.
+			// fix for $.ui.document.height() bug in core 1.7.2.
 			docEl = document.documentElement,
 			docBody = document.body,
 			docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
@@ -658,9 +658,9 @@ $.widget( "mobile.popup", {
 		if ( this.options.overlayTheme && androidBlacklist ) {
 			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
 			This fix closes the following bugs ( I use "closes" with reluctance, and stress that this issue should be revisited as soon as possible ):
-			https://github.com/jquery/jquery-mobile/issues/4816
-			https://github.com/jquery/jquery-mobile/issues/4844
-			https://github.com/jquery/jquery-mobile/issues/4874
+			https://github.com/jquery/jquery-ui/issues/4816
+			https://github.com/jquery/jquery-ui/issues/4844
+			https://github.com/jquery/jquery-ui/issues/4874
 			*/
 
 			// TODO sort out why this._page isn't working
@@ -696,7 +696,7 @@ $.widget( "mobile.popup", {
 		container.removeAttr( "tabindex" );
 
 		// remove the global mutex for popups
-		$.mobile.popup.active = undefined;
+		$.ui.popup.active = undefined;
 
 		// Blur elements inside the container, including the container
 		$( ":focus", container[ 0 ] ).add( container[ 0 ] ).blur();
@@ -732,7 +732,7 @@ $.widget( "mobile.popup", {
 
 	_unenhance: function() {
 		// Put the element back to where the placeholder was and remove the "ui-popup" class
-		this._setOptions( { theme: $.mobile.popup.prototype.options.theme } );
+		this._setOptions( { theme: $.ui.popup.prototype.options.theme } );
 		this.element
 			// Cannot directly insertAfter() - we need to detach() first, because
 			// insertAfter() will do nothing if the payload div was not attached
@@ -749,7 +749,7 @@ $.widget( "mobile.popup", {
 	},
 
 	_destroy: function() {
-		if ( $.mobile.popup.active === this ) {
+		if ( $.ui.popup.active === this ) {
 			this.element.one( "popupafterclose", $.proxy( this, "_unenhance" ) );
 			this.close();
 		} else {
@@ -777,10 +777,10 @@ $.widget( "mobile.popup", {
 			} else {
 				parsedDst = data.toPage.jqmData( "url" );
 			}
-			parsedDst = $.mobile.path.parseUrl( parsedDst );
+			parsedDst = $.ui.path.parseUrl( parsedDst );
 			toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
 
-			if ( this._myUrl !== $.mobile.path.makeUrlAbsolute( toUrl ) ) {
+			if ( this._myUrl !== $.ui.path.makeUrlAbsolute( toUrl ) ) {
 				// Going to a different page - close immediately
 				immediate = true;
 			} else {
@@ -789,7 +789,7 @@ $.widget( "mobile.popup", {
 		}
 
 		// remove nav bindings
-		$.mobile.window.off( opts.closeEvents );
+		$.ui.window.off( opts.closeEvents );
 		// unbind click handlers added when history is disabled
 		this.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
 
@@ -800,7 +800,7 @@ $.widget( "mobile.popup", {
 	// NOTE the pagebeforechange is bound to catch navigation events that don't
 	//      alter the url (eg, dialogs from popups)
 	_bindContainerClose: function() {
-		$.mobile.window
+		$.ui.window
 			.on( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
 	},
 
@@ -814,13 +814,13 @@ $.widget( "mobile.popup", {
 		var self = this, opts = this.options, url, hashkey, activePage, currentIsDialog, hasHash, urlHistory;
 
 		// make sure open is idempotent
-		if( $.mobile.popup.active || opts.disabled ) {
+		if( $.ui.popup.active || opts.disabled ) {
 			return this;
 		}
 
 		// set the global popup mutex
-		$.mobile.popup.active = this;
-		this._scrollTop = $.mobile.window.scrollTop();
+		$.ui.popup.active = this;
+		this._scrollTop = $.ui.window.scrollTop();
 
 		// if history alteration is disabled close on navigate events
 		// and leave the url as is
@@ -841,9 +841,9 @@ $.widget( "mobile.popup", {
 		}
 
 		// cache some values for min/readability
-		urlHistory = $.mobile.urlHistory;
-		hashkey = $.mobile.dialogHashKey;
-		activePage = $.mobile.activePage;
+		urlHistory = $.ui.urlHistory;
+		hashkey = $.ui.dialogHashKey;
+		activePage = $.ui.activePage;
 		currentIsDialog = ( activePage ? activePage.hasClass( "ui-dialog" ) : false );
 		this._myUrl = url = urlHistory.getActive().url;
 		hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog && ( urlHistory.activeIndex > 0 );
@@ -859,7 +859,7 @@ $.widget( "mobile.popup", {
 		if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ){
 			url = url + (url.indexOf( "#" ) > -1 ? hashkey : "#" + hashkey);
 		} else {
-			url = $.mobile.path.parseLocation().hash + hashkey;
+			url = $.ui.path.parseLocation().hash + hashkey;
 		}
 
 		// Tack on an extra hashkey if this is the first page and we've just reconstructed the initial hash
@@ -868,28 +868,28 @@ $.widget( "mobile.popup", {
 		}
 
 		// swallow the the initial navigation event, and bind for the next
-		$.mobile.window.one( "beforenavigate", function( evt ) {
+		$.ui.window.one( "beforenavigate", function( evt ) {
 			evt.preventDefault();
 			self._open( options );
 			self._bindContainerClose();
 		});
 
 		this.urlAltered = true;
-		$.mobile.navigate( url, { role: "dialog" } );
+		$.ui.navigate( url, { role: "dialog" } );
 
 		return this;
 	},
 
 	close: function() {
 		// make sure close is idempotent
-		if( $.mobile.popup.active !== this ) {
+		if( $.ui.popup.active !== this ) {
 			return this;
 		}
 
-		this._scrollTop = $.mobile.window.scrollTop();
+		this._scrollTop = $.ui.window.scrollTop();
 
 		if( this.options.history && this.urlAltered ) {
-			$.mobile.back();
+			$.ui.back();
 			this.urlAltered = false;
 		} else {
 			// simulate the nav bindings having fired
@@ -902,16 +902,16 @@ $.widget( "mobile.popup", {
 
 
 // TODO this can be moved inside the widget
-$.mobile.popup.handleLink = function( $link ) {
+$.ui.popup.handleLink = function( $link ) {
 	var closestPage = $link.closest( ":jqmData(role='page')" ),
-		path = $.mobile.path,
+		path = $.ui.path,
 		scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
 		// NOTE make sure to get only the hash, ie7 (wp7) returns the absolute href
 		//      in this case ruining the element selection
 		popup = $( path.hashToSelector( path.parseUrl( $link.attr( "href" ) ).hash ), scope[ 0 ] ),
 		offset;
 
-	if ( popup.data( "mobile-popup" ) ) {
+	if ( popup.data( "ui-popup" ) ) {
 		offset = $link.offset();
 		popup.popup( "open", {
 			x: offset.left + $link.outerWidth() / 2,
@@ -923,22 +923,22 @@ $.mobile.popup.handleLink = function( $link ) {
 
 	//remove after delay
 	setTimeout( function() {
-		$link.removeClass( $.mobile.activeBtnClass );
+		$link.removeClass( $.ui.activeBtnClass );
 	}, 300 );
 };
 
 // TODO move inside _create
-$.mobile.document.bind( "pagebeforechange", function( evt, data ) {
+$.ui.document.bind( "pagebeforechange", function( evt, data ) {
 	if ( data.options.role === "popup" ) {
-		$.mobile.popup.handleLink( data.options.link );
+		$.ui.popup.handleLink( data.options.link );
 		evt.preventDefault();
 	}
 });
 
-$.mobile.popup.initSelector = ":jqmData(role='popup')";
+$.ui.popup.initSelector = ":jqmData(role='popup')";
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.popup" );
+$.ui._enhancer.add( "ui.popup" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

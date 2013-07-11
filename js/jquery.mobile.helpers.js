@@ -9,8 +9,8 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-	// jQuery.mobile configurable options
-	$.extend($.mobile, {
+	// jQuery.ui configurable options
+	$.extend($.ui, {
 		// define the window and the document objects
 		window: $( window ),
 		document: $( document ),
@@ -40,7 +40,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			if ( $.type( ypos ) !== "number" ) {
-				ypos = $.mobile.defaultHomeScroll;
+				ypos = $.ui.defaultHomeScroll;
 			}
 
 			// prevent scrollstart and scrollstop events
@@ -48,7 +48,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 
 			setTimeout( function() {
 				window.scrollTo( 0, ypos );
-				$.mobile.document.trigger( "silentscroll", { x: 0, y: ypos });
+				$.ui.document.trigger( "silentscroll", { x: 0, y: ypos });
 			}, 20 );
 
 			setTimeout( function() {
@@ -81,7 +81,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 			return ltr || defaultTheme || "a";
 		},
 
-		// TODO the following $ and $.fn extensions can/probably should be moved into jquery.mobile.core.helpers
+		// TODO the following $ and $.fn extensions can/probably should be moved into jquery.ui.core.helpers
 		//
 
 		enhanceable: function( $set ) {
@@ -93,7 +93,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		},
 
 		haveParents: function( $set, attr ) {
-			if ( !$.mobile.ignoreContentEnabled ) {
+			if ( !$.ui.ignoreContentEnabled ) {
 				return $set;
 			}
 
@@ -108,7 +108,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 				e = $set[ i ];
 
 				while ( e ) {
-					c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
+					c = e.getAttribute ? e.getAttribute( "data-" + $.ui.ns + attr ) : "";
 
 					if ( c === "false" ) {
 						excluded = true;
@@ -129,16 +129,16 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		getScreenHeight: function() {
 			// Native innerHeight returns more accurate value for this across platforms,
 			// jQuery version is here as a normalized fallback for platforms like Symbian
-			return window.innerHeight || $.mobile.window.height();
+			return window.innerHeight || $.ui.window.height();
 		},
 
 		//simply set the active page's minimum height to screen height, depending on orientation
 		resetActivePageHeight: function( height ) {
-			var aPage = $( "." + $.mobile.activePageClass ),
+			var aPage = $( "." + $.ui.activePageClass ),
 				aPageHeight = aPage.height(),
 				aPageOuterHeight = aPage.outerHeight( true );
 
-			height = ( typeof height === "number" ) ? height : $.mobile.getScreenHeight();
+			height = ( typeof height === "number" ) ? height : $.ui.getScreenHeight();
 
 			aPage.css( "min-height", height - ( aPageOuterHeight - aPageHeight ) );
 		}
@@ -173,13 +173,13 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		return $( "<a>" ).text( $( this ).text() ).html();
 	};
 
-	// fluent helper function for the mobile namespaced equivalent
+	// fluent helper function for the ui namespaced equivalent
 	$.fn.jqmEnhanceable = function() {
-		return $.mobile.enhanceable( this );
+		return $.ui.enhanceable( this );
 	};
 
 	$.fn.jqmHijackable = function() {
-		return $.mobile.hijackable( this );
+		return $.ui.hijackable( this );
 	};
 
 	$.find.matches = function( expr, set ) {

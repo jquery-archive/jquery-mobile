@@ -20,7 +20,7 @@ function getPopup() {
 	return popup.clone();
 }
 
-$.widget( "mobile.slider", $.mobile.slider, {
+$.widget( "ui.slider", $.ui.slider, {
 	options: {
 		popupEnabled: false,
 		showValue: false
@@ -38,7 +38,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		this._setOption( "popupEnabled", this.options.popupEnabled );
 
 		this._on( this.handle, { "vmousedown" : "_showPopup" } );
-		this._on( this.slider.add( $.mobile.document ), { "vmouseup" : "_hidePopup" } );
+		this._on( this.slider.add( $.ui.document ), { "vmouseup" : "_hidePopup" } );
 		this._refresh();
 	},
 

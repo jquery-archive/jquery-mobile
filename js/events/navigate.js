@@ -12,7 +12,7 @@ define([
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
-	var $win = $.mobile.window, self,
+	var $win = $.ui.window, self,
 		dummyFnToInitNavigate = function() {
 		};
 
@@ -34,16 +34,16 @@ define([
 		originalEventName: undefined,
 
 		// If pushstate support is present and push state support is defined to
-		// be true on the mobile namespace.
+		// be true on the ui namespace.
 		isPushStateEnabled: function() {
 			return $.support.pushState &&
-				$.mobile.pushStateEnabled === true &&
+				$.ui.pushStateEnabled === true &&
 				this.isHashChangeEnabled();
 		},
 
-		// !! assumes mobile namespace is present
+		// !! assumes ui namespace is present
 		isHashChangeEnabled: function() {
-			return $.mobile.hashListeningEnabled === true;
+			return $.ui.hashListeningEnabled === true;
 		},
 
 		// TODO a lot of duplication between popstate and hashchange

@@ -20,7 +20,7 @@ function defaultAutodividersSelector( elt ) {
 	return text;
 }
 
-$.widget( "mobile.listview", $.mobile.listview, {
+$.widget( "ui.listview", $.ui.listview, {
 	options: {
 		autodividers: false,
 		autodividersSelector: defaultAutodividersSelector
@@ -51,7 +51,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 			if ( dividerText && lastDividerText !== dividerText ) {
 				divider = document.createElement( "li" );
 				divider.appendChild( document.createTextNode( dividerText ) );
-				divider.setAttribute( "data-" + $.mobile.ns + "role", "list-divider" );
+				divider.setAttribute( "data-" + $.ui.ns + "role", "list-divider" );
 				li.parentNode.insertBefore( divider, li );
 			}
 

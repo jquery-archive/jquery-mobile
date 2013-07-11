@@ -16,7 +16,7 @@ $.extend( $.Widget.prototype, {
 
 		$.each( this.options, function( option ) {
 
-			var value = $.mobile.getAttribute( elem[ 0 ], option.replace( /[A-Z]/g, function( c ) {
+			var value = $.ui.getAttribute( elem[ 0 ], option.replace( /[A-Z]/g, function( c ) {
 							return "-" + c.toLowerCase();
 						}), true );
 
@@ -38,13 +38,13 @@ $.extend( $.Widget.prototype, {
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a
 		// parent with the data-namespace-ignore attribute
-		$widgetElements = $.mobile.enhanceable( $widgetElements );
+		$widgetElements = $.ui.enhanceable( $widgetElements );
 
 		if ( useKeepNative && $widgetElements.length ) {
 			// TODO remove dependency on the page widget for the keepNative.
 			// Currently the keepNative value is defined on the page prototype so
 			// the method is as well
-			page = $.mobile.closestPageData( $widgetElements );
+			page = $.ui.closestPageData( $widgetElements );
 			keepNative = ( page && page.keepNativeSelector()) || "";
 
 			$widgetElements = $widgetElements.not( keepNative );
@@ -54,7 +54,7 @@ $.extend( $.Widget.prototype, {
 	}
 });
 //TODO: Remove in 1.5 for backcompat only
-$.mobile.widget = $.Widget;
+$.ui.widget = $.Widget;
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
