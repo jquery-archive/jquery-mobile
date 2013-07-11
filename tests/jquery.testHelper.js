@@ -434,6 +434,57 @@
 			location.hash = location.hash.replace("#", "") === hash ? "" : "#" + hash;
 		},
 
+		// Check if two chunks of DOM are identical
+		domEqual: function( l, r ) {
+			var idx, idxAttr, lattr, rattr;
+
+			// If the lengths of the two jQuery objects are different, the DOM
+			// must be different so don't bother checking
+			if ( l.length === r.length ) {
+				// Otherwise, examine each element
+				for ( idx = 0 ; idx < l.length ; idx++ ) {
+					l = l.eq( idx ); r = r.eq( idx );
+
+					// If the tagName is different the DOM must be different
+					if ( l[ 0 ].tagName !== r[ 0 ].tagName ){
+						return false;
+					}
+
+					// Otherwise, check the attributes
+					if ( l[ 0 ].attributes.length === r[ 0 ].attributes.length ) {
+						// convert attributes array to dictionary, because the order
+						// of the attributes may be different between l and r
+						lattr = {};
+						rattr = {};
+						for ( idxAttr = 0 ; idxAttr < l[ 0 ].attributes.length ; idxAttr++ ) {
+							lattr[ l[ 0 ].attributes[ idxAttr ].name ] = l[ 0 ].attributes[ idxAttr ].value;
+							rattr[ r[ 0 ].attributes[ idxAttr ].name ] = r[ 0 ].attributes[ idxAttr ].value;
+						}
+
+						// Check if each attribute in lattr has the same value in rattr
+						for ( idxAttr in lattr ) {
+							if ( rattr[ idxAttr ] !== lattr[ idxAttr ] ) {
+								return false;
+							}
+						}
+
+						// If so, compare the children of l and r recursively
+						if ( !this.domEqual( $( l[ 0 ] ).children(), $( r[ 0 ] ).children() ) ) {
+							return false;
+						}
+					} else {
+						return false;
+					}
+					l = l.end(); r = r.end();
+				}
+				if ( idx === l.length ) {
+					return true;
+				}
+			}
+
+			return false;
+		},
+
 		delayStart: function( milliseconds ) {
 			// stop qunit from running the tests until everything is in the page
 			QUnit.config.autostart = false;
