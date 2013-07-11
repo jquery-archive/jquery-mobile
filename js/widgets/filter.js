@@ -13,17 +13,16 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 		return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 	};
 
-	$.widget("mobile.filterbar", $.mobile.widget, $.extend( {
+	$.widget( "mobile.filterbar", $.extend( {
 
 			options: {
-				filterTheme: "a",
+				theme: "a",
 				filterPlaceholder: "Filter items...",
 				filterReveal: false,
 				filterCallback: defaultfilterCallback,
-				classes: "",
-				id: null,
+				wrapperClass: "",
 				inset: false,
-				enhance: true,
+				enhanced: false,
 				target: null,
 				mini: false,
 				selector: null
@@ -173,9 +172,9 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				var el = this.element,
 					o = this.options,
 					wrapper = $( "<div>", {
-						"class": o.classes + " ui-filter ",
+						"class": o.wrapperClass + " ui-filter ",
 						"role": "search",
-						"id" : o.id || "ui-filter-" + this.uuid
+						"id" : "ui-filter-" + this.uuid
 					}),
 					search = $( "<input>", {
 						placeholder: o.filterPlaceholder
@@ -211,17 +210,17 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 
 				this._setOption( "timer", undefined );
 
-				if (o.enhance) {
+				if ( o.enhanced === false ) {
 					search = this._enhance();
 				} else {
-					// NOTE: DIY requires data-id, otherwise how do we find the search 
-					// input. We could always wrap the filterable element (e.g. ul) in
-					// ui-filter as well, but I'm not sure I want to move elements around
-					// that much.
-					search = $( "#" + o.id ).find( "input" );
+					search = $( "#ui-filter-" + this.uuid ).find( "input" );
 				}
 
-				this._on( search, { keyup: "_onKeyUp", change: "_onKeyUp", input: "_onKeyUp" } );
+				this._on( search, {
+					keyup: "_onKeyUp",
+					change: "_onKeyUp",
+					input: "_onKeyUp"
+				});
 				
 				$.extend( this, {
 					_search: search
@@ -253,7 +252,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			
 			_setOption: function( key, value ) {
 				var o = this.options,
-					wrapper = document.getElementById( o.id || "ui-filter-" + this.uuid ),
+					wrapper = document.getElementById( "ui-filter-" + this.uuid ),
 					$input = $( wrapper ).find( "input" );
 
 				// always update
@@ -282,9 +281,9 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 			
 			destroy: function() {
 				var o = this.options,
-					wrapper = document.getElementById( o.id || "ui-filter-" + this.uuid );
+					wrapper = document.getElementById( "ui-filter-" + this.uuid );
 				
-				if ( o.enhance ) {
+				if ( o.enhanced === false ) {
 					wrapper.parentNode.removeChild( wrapper );
 				}
 				this._toggleFilterableItems( this._getFilterableItems(), false, false );

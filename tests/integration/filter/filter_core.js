@@ -224,7 +224,6 @@
 
 				$page.find('input').val('at');
 				$page.find('input').trigger('change');
-
 				setTimeout(function() {
 					deepEqual($page.find('li:jqmData(role=list-divider):hidden').length, 2);
 					deepEqual($page.find('li:jqmData(role=list-divider):hidden + li:not(:jqmData(role=list-divider)):hidden').length, 2);
@@ -417,8 +416,6 @@
 
 			function( timedOut) {
 				ok( !timedOut );
-				console.log( $.mobile.activePage );
-				console.log( $.mobile.activePage.find("div.ui-filter-inset"));
 				deepEqual( $.mobile.activePage.find("div.ui-filter-inset").length, 1, "div is inset");
 				window.history.back();
 			},
@@ -463,8 +460,8 @@
 					$filter = $page.find( ".ui-filter" ),
 					$list = $page.find( "ul" );
 
-				ok($filter.hasClass( "baz" ), "filter element has custom classed set by user");
-				ok($filter.attr( "id" ) === "foo", "filter has custom id");
+				ok($filter.is( ".baz" ), "filter element has custom classed set by user");
+				//removed ok($filter.attr( "id" ) === "foo", "filter has custom id");
 
 				$list.filterbar("destroy");
 
