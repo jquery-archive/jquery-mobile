@@ -153,5 +153,14 @@
 		ok( !collapsibles.eq(3).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of fourth collapsible should NOT have class ui-body-[a,b,c]" );
 		ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of fourth collapsible should have class ui-body-d" );
 	});
-	
+
+	module( "Instantiation/destruction" );
+
+	test( "Collapsible and collapsible set _destroy() works", function() {
+		var $inplace = $( "#destroy-test" ).children().attr( "data-" + $.mobile.ns + "role", "collapsible" ).end(),
+			$orig = $inplace.clone();
+
+		$inplace.collapsibleset().collapsibleset( "destroy" );
+		ok( $.testHelper.domEqual( $inplace, $orig ), "Collapsible set after instantiation and destruction is identical to a clone of the original." );
+	});
 })( jQuery );
