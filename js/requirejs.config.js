@@ -14,6 +14,9 @@ requirejs.config({
 		},
 		"widgets/jquery.ui.tabs": {
 			deps: [ "jquery.ui.widget" ]
+		},
+		"jquery.ui.core": {
+			deps: [ "jquery" ]
 		}
 	}
 });

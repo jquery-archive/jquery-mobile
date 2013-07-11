@@ -69,6 +69,7 @@ module.exports = function( grunt ) {
 						"js/**/*.js",
 						"!js/jquery.hashchange.js",
 						"!js/jquery.js",
+						"!js/jquery.ui.core.js",
 						"!js/jquery.ui.widget.js",
 						"!js/widgets/jquery.ui.tabs.js"
 					]
