@@ -6,14 +6,14 @@
 	var libName = "jquery.mobile.core",
 			setGradeA = function(value, version) {
 				$.support.mediaquery = value;
-				$.mobile.browser.ie = version;
+				$.ui.browser.ie = version;
 			},
 			extendFn = $.extend,
-			ns = $.mobile.ns;
+			ns = $.ui.ns;
 
 	module(libName, {
 		setup: function(){
-			$.mobile.ns = ns;
+			$.ui.ns = ns;
 
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
@@ -35,7 +35,7 @@
 				},
 
 				function() {
-					ok(!$.mobile.gradeA());
+					ok(!$.ui.gradeA());
 				},
 
 				function() {
@@ -44,7 +44,7 @@
 				},
 
 				function() {
-					ok($.mobile.gradeA());
+					ok($.ui.gradeA());
 					start();
 				}
 			]);
@@ -53,41 +53,41 @@
 
 	function clearNSNormalizeDictionary()
 	{
-		var dict = $.mobile.nsNormalizeDict;
+		var dict = $.ui.nsNormalizeDict;
 		for ( var prop in dict ) {
 			delete dict[ prop ];
 		}
 	}
 
-	test( "$.mobile.nsNormalize works properly with namespace defined (test default)", function(){
+	test( "$.ui.nsNormalize works properly with namespace defined (test default)", function(){
 		// Start with a fresh namespace property cache, just in case
 		// the previous test mucked with namespaces.
 		clearNSNormalizeDictionary();
 
-		equal($.mobile.nsNormalize("foo"), "nstestFoo", "appends ns and initcaps");
-		equal($.mobile.nsNormalize("fooBar"), "nstestFooBar", "leaves capped strings intact");
-		equal($.mobile.nsNormalize("foo-bar"), "nstestFooBar", "changes dashed strings");
-		equal($.mobile.nsNormalize("foo-bar-bak"), "nstestFooBarBak", "changes multiple dashed strings");
+		equal($.ui.nsNormalize("foo"), "nstestFoo", "appends ns and initcaps");
+		equal($.ui.nsNormalize("fooBar"), "nstestFooBar", "leaves capped strings intact");
+		equal($.ui.nsNormalize("foo-bar"), "nstestFooBar", "changes dashed strings");
+		equal($.ui.nsNormalize("foo-bar-bak"), "nstestFooBarBak", "changes multiple dashed strings");
 
 		// Reset the namespace property cache for the next test.
 		clearNSNormalizeDictionary();
 	});
 
-	test( "$.mobile.nsNormalize works properly with an empty namespace", function(){
-		var realNs = $.mobile.ns;
+	test( "$.ui.nsNormalize works properly with an empty namespace", function(){
+		var realNs = $.ui.ns;
 
-		$.mobile.ns = "";
+		$.ui.ns = "";
 
 		// Start with a fresh namespace property cache, just in case
 		// the previous test mucked with namespaces.
 		clearNSNormalizeDictionary();
 
-		equal($.mobile.nsNormalize("foo"), "foo", "leaves uncapped and undashed");
-		equal($.mobile.nsNormalize("fooBar"), "fooBar", "leaves capped strings intact");
-		equal($.mobile.nsNormalize("foo-bar"), "fooBar", "changes dashed strings");
-		equal($.mobile.nsNormalize("foo-bar-bak"), "fooBarBak", "changes multiple dashed strings");
+		equal($.ui.nsNormalize("foo"), "foo", "leaves uncapped and undashed");
+		equal($.ui.nsNormalize("fooBar"), "fooBar", "leaves capped strings intact");
+		equal($.ui.nsNormalize("foo-bar"), "fooBar", "changes dashed strings");
+		equal($.ui.nsNormalize("foo-bar-bak"), "fooBarBak", "changes multiple dashed strings");
 
-		$.mobile.ns = realNs;
+		$.ui.ns = realNs;
 
 		// Reset the namespace property cache for the next test.
 		clearNSNormalizeDictionary();
@@ -101,7 +101,7 @@
 
 		deepEqual( $("body").jqmData("foo"), true, "getting data returns the right value" );
 
-		deepEqual( $("body").data($.mobile.nsNormalize("foo")), true, "data was set using namespace" );
+		deepEqual( $("body").data($.ui.nsNormalize("foo")), true, "data was set using namespace" );
 
 		deepEqual( $("body").jqmData("foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
@@ -127,7 +127,7 @@
 
 		deepEqual( $.jqmData(document.body, "foo"), true, "getting data returns the right value" );
 
-		deepEqual( $.data(document.body, $.mobile.nsNormalize("foo")), true, "data was set using namespace" );
+		deepEqual( $.data(document.body, $.ui.nsNormalize("foo")), true, "data was set using namespace" );
 
 		deepEqual( $.jqmData(document.body, "foo", undefined), true, "getting data still returns the value if there's an undefined second arg" );
 
@@ -165,19 +165,19 @@
 	test( "closestPageData returns the parent's page data", function() {
 		var pageChild = $( "#page-child" );
 
-		$( "#parent-page" ).data( "mobile-page", { foo: "bar" } );
-		deepEqual( $.mobile.closestPageData( pageChild ).foo, "bar" );
+		$( "#parent-page" ).data( "ui-page", { foo: "bar" } );
+		deepEqual( $.ui.closestPageData( pageChild ).foo, "bar" );
 	});
 
 	test( "closestPageData returns the parent dialog's page data", function() {
 		var dialogChild = $( "#dialog-child" );
 
-		$( "#parent-dialog" ).data( "mobile-page", { foo: "bar" } );
-		deepEqual( $.mobile.closestPageData(dialogChild).foo, "bar" );
+		$( "#parent-dialog" ).data( "ui-page", { foo: "bar" } );
+		deepEqual( $.ui.closestPageData(dialogChild).foo, "bar" );
 	});
 
 	test( "test that $.fn.jqmHijackable works", function() {
-		$.mobile.ignoreContentEnabled = true;
+		$.ui.ignoreContentEnabled = true;
 
 		deepEqual( $( "#hijacked-link" ).jqmHijackable().length, 1,
 					"a link without any association to data-ajax=false should be included");
@@ -188,6 +188,6 @@
 		deepEqual( $( "#unhijacked-link-by-attr" ).jqmHijackable().length, 0,
 					"a link with data-ajax=false should be excluded");
 
-		$.mobile.ignoreContentEnabled = false;
+		$.ui.ignoreContentEnabled = false;
 	});
 })(jQuery);

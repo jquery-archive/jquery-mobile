@@ -3,10 +3,10 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.forms.select";
+	var libName = "jquery.ui.forms.select";
 
 	$(document).bind('mobileinit', function(){
-		$.mobile.selectmenu.prototype.options.nativeMenu = false;
+		$.ui.selectmenu.prototype.options.nativeMenu = false;
 	});
 
 	module(libName,{

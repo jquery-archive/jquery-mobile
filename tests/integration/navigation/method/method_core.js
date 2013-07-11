@@ -2,13 +2,13 @@
 $.testHelper.setPushState();
 
 (function( $ ) {
-	var url = $.mobile.path.parseLocation(),
+	var url = $.ui.path.parseLocation(),
 		home = url.pathname + url.search;
 
 	module( "navigate", {
 		setup: function() {
-			$.mobile.navigate.history.stack = [];
-			$.mobile.navigate.history.activeIndex = 0;
+			$.ui.navigate.history.stack = [];
+			$.ui.navigate.history.activeIndex = 0;
 		},
 
 		teardown: function() {
@@ -19,9 +19,9 @@ $.testHelper.setPushState();
 			});
 
 			if( location.hash !== "#reset" ) {
-				$.mobile.navigate( "#reset" );
+				$.ui.navigate( "#reset" );
 			} else {
-				$.mobile.navigate( "#seriously-reset" );
+				$.ui.navigate( "#seriously-reset" );
 			}
 		}
 	});
@@ -29,7 +29,7 @@ $.testHelper.setPushState();
 	test( "navigation changes the url", function() {
 		ok( location.hash.indexOf( "foo" ) == -1, "the hash is clean" );
 
-		$.mobile.navigate( "#foo" );
+		$.ui.navigate( "#foo" );
 
 		equal( location.hash, "#foo", "the hash has been altered" );
 	});
@@ -39,11 +39,11 @@ $.testHelper.setPushState();
 			var destination = home + "#foo";
 
 			ok( location.hash.indexOf( "foo" ) == -1, "the hash is clean" );
-			ok( $.mobile.path.isPath(destination), "the destination is a path" );
+			ok( $.ui.path.isPath(destination), "the destination is a path" );
 
-			$.mobile.navigate( destination );
+			$.ui.navigate( destination );
 
-			equal( $.mobile.path.parseLocation().pathname, url.pathname, "the resulting url has the same pathname as the original test url" );
+			equal( $.ui.path.parseLocation().pathname, url.pathname, "the resulting url has the same pathname as the original test url" );
 			equal( location.hash, "#foo", "the hash has been altered" );
 		});
 	}
@@ -55,11 +55,11 @@ $.testHelper.setPushState();
 
 		$.testHelper.eventSequence( "navigate", [
 			function( timedOut, data ) {
-				$.mobile.navigate( "#foo", { foo: "bar" });
+				$.ui.navigate( "#foo", { foo: "bar" });
 			},
 
 			function( timedOut, data ) {
-				$.mobile.navigate( "#bar", { baz: "bak" });
+				$.ui.navigate( "#bar", { baz: "bak" });
 			},
 
 			function( timedOut, data ) {
@@ -86,31 +86,31 @@ $.testHelper.setPushState();
 
 		$.testHelper.eventSequence( "navigate", [
 			function() {
-				$.mobile.navigate( "#foo" );
+				$.ui.navigate( "#foo" );
 			},
 
 			function() {
-				$.mobile.navigate( "#bar" );
+				$.ui.navigate( "#bar" );
 			},
 
 			function() {
-				$.mobile.navigate( "#baz" );
+				$.ui.navigate( "#baz" );
 			},
 
 			function() {
-				equal( $.mobile.navigate.history.activeIndex, 2, "after n navigation events the active index is correct" );
+				equal( $.ui.navigate.history.activeIndex, 2, "after n navigation events the active index is correct" );
 				window.history.back();
 			},
 
 			function( timedOut, data ) {
-				equal( $.mobile.navigate.history.activeIndex, 1, "after n navigation events, and a back, the active index is correct" );
+				equal( $.ui.navigate.history.activeIndex, 1, "after n navigation events, and a back, the active index is correct" );
 				equal( data.state.direction, "back", "the direction should be back and not forward" );
 				window.history.back();
 			},
 
 			function( timedOut, data ) {
-				equal( $.mobile.navigate.history.stack.length, 3, "the history stack hasn't been truncated" );
-				equal( $.mobile.navigate.history.activeIndex, 0, "the active history entry is the first" );
+				equal( $.ui.navigate.history.stack.length, 3, "the history stack hasn't been truncated" );
+				equal( $.ui.navigate.history.activeIndex, 0, "the active history entry is the first" );
 				equal( data.state.direction, "back", "the direction should be back and not forward" );
 				start();
 			}
@@ -122,7 +122,7 @@ $.testHelper.setPushState();
 
 		$.testHelper.eventSequence( "navigate", [
 			function() {
-				$.mobile.navigate( "#bar" );
+				$.ui.navigate( "#bar" );
 			},
 
 			function() {
@@ -130,8 +130,8 @@ $.testHelper.setPushState();
 			},
 
 			function() {
-				equal($.mobile.navigate.history.stack.length, 2, "there are two entries in the history stack" );
-				equal($.mobile.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
+				equal($.ui.navigate.history.stack.length, 2, "there are two entries in the history stack" );
+				equal($.ui.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
 				start();
 			}
 		]);
@@ -146,14 +146,14 @@ $.testHelper.setPushState();
 			},
 
 			function() {
-				equal($.mobile.navigate.history.stack.length, 1, "there is one entry in the history stack" );
-				equal($.mobile.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
+				equal($.ui.navigate.history.stack.length, 1, "there is one entry in the history stack" );
+				equal($.ui.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
 				location.hash = "#foo";
 			},
 
 			function( timedOut ) {
-				equal($.mobile.navigate.history.stack.length, 1, "there is one entry in the history stack" );
-				equal($.mobile.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
+				equal($.ui.navigate.history.stack.length, 1, "there is one entry in the history stack" );
+				equal($.ui.navigate.history.getActive().hash, "#foo", "the url for the active history entry matches the hash" );
 				ok( timedOut, "there was no navigation event from setting the same hash" );
 				start();
 			}
@@ -162,35 +162,35 @@ $.testHelper.setPushState();
 
 	if( $.support.pushState ) {
 		test( "squash is working properly", function() {
-			var path = $.mobile.path, loc;
-			$.mobile.navigate.navigator.squash( url.pathname + url.search + "#test-hash" );
+			var path = $.ui.path, loc;
+			$.ui.navigate.navigator.squash( url.pathname + url.search + "#test-hash" );
 
-			$.mobile.navigate.navigator.squash("#foo/bar");
+			$.ui.navigate.navigator.squash("#foo/bar");
 			loc = path.parseLocation();
 			equal( loc.pathname, url.directory + "foo/bar", "foo/bar has been squashed onto the url" );
 
-			$.mobile.navigate.navigator.squash("bar/baz");
+			$.ui.navigate.navigator.squash("bar/baz");
 			loc = path.parseLocation();
 			equal( loc.pathname, url.directory + "foo/bar/baz", "foo/bar has been squashed onto the url" );
 
-			$.mobile.navigate.navigator.squash("#foo");
+			$.ui.navigate.navigator.squash("#foo");
 			loc = path.parseLocation();
 			equal( loc.hash, "#foo", "foo is now the hash" );
 			equal( loc.search, url.search, "the search is preserved" );
 
 			// Make sure that the search delimiter is dictated by the squashed value
-			$.mobile.navigate.navigator.squash("#foo/bar" + location.search.replace( "&", ";" ));
+			$.ui.navigate.navigator.squash("#foo/bar" + location.search.replace( "&", ";" ));
 			loc = path.parseLocation();
 			ok( loc.search.indexOf( "&" ) === -1, "the amp has been replaced" );
 
-			$.mobile.navigate.navigator.squash( url.pathname + url.search );
+			$.ui.navigate.navigator.squash( url.pathname + url.search );
 		});
 
 
 		test( "navigating with an absolute url matching the current url save for the hash should transplant the hash", function() {
-			var loc = $.mobile.path.parseLocation();
+			var loc = $.ui.path.parseLocation();
 
-			$.mobile.navigate( loc.hrefNoHash + loc.hash + "foo" );
+			$.ui.navigate( loc.hrefNoHash + loc.hash + "foo" );
 			equal( location.hash, loc.hash + "foo", "the hash is set properly" );
 		});
 	}

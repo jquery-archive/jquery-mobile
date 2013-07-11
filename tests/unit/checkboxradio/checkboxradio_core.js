@@ -2,7 +2,7 @@
  * mobile checkboxradio unit tests
  */
 (function($){
-	module( 'jquery.mobile.forms.checkboxradio.js' );
+	module( 'jquery.ui.forms.checkboxradio.js' );
 
 	test( "widget can be disabled and enabled", function(){
 		var input = $( "#checkbox-1" ),
@@ -72,7 +72,7 @@
 		ok( $("#enhancetest").trigger("create").find(".ui-checkbox").length, "enhancements applied" );
 	});
 
-	$.mobile.page.prototype.options.keepNative = "input.should-be-native";
+	$.ui.page.prototype.options.keepNative = "input.should-be-native";
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "checkboxradio elements in the keepNative set shouldn't be enhanced", function() {

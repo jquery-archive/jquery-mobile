@@ -7,7 +7,7 @@
 		libName = 'jquery.mobile.init.js',
 		coreLib = 'jquery.mobile.core.js',
 		extendFn = $.extend,
-		setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
+		setGradeA = function(value) { $.ui.gradeA = function(){ return value; }; },
 		reloadCoreNSandInit = function(){
 			$.testHelper.reloadLib(coreLib);
 			$.testHelper.reloadLib("jquery.setNameSpace.js");
@@ -17,7 +17,7 @@
 
 	module(libName, {
 		setup: function(){
-			$.mobile.ns = ns;
+			$.ui.ns = ns;
 			// NOTE reset for gradeA tests
 			$('html').removeClass('ui-mobile');
 		},
@@ -33,16 +33,16 @@
 	// NOTE important to use $.fn.one here to make sure library reloads don't fire
 	//      the event before the test check below
 	$(document).one( "mobileinit", function(){
-		ns = $.mobile.ns;
-		mobilePage = $.mobile.page;
+		ns = $.ui.ns;
+		mobilePage = $.ui.page;
 
-		$.mobile.loader.prototype.options.text = "mobileinit";
-		$.mobile.loader.prototype.options.textVisible = true;
+		$.ui.loader.prototype.options.text = "mobileinit";
+		$.ui.loader.prototype.options.textVisible = true;
 	});
 
 	// NOTE for the following two tests see index html for the binding
 	test( "mobile.page is available when mobile init is fired", function(){
-		ok( mobilePage !== undefined, "$.mobile.page is defined" );
+		ok( mobilePage !== undefined, "$.ui.page is defined" );
 	});
 
 	$.testHelper.excludeFileProtocol(function(){
@@ -86,8 +86,8 @@
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			deepEqual($.mobile.firstPage[0], firstPage[0]);
-			deepEqual($.mobile.activePage[0], firstPage[0]);
+			deepEqual($.ui.firstPage[0], firstPage[0]);
+			deepEqual($.ui.activePage[0], firstPage[0]);
 		});
 
 		test( "mobile viewport class is defined on the first page's parent", function(){
@@ -103,7 +103,7 @@
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			deepEqual($.mobile.pageContainer[0], firstPage.parent()[0]);
+			deepEqual($.ui.pageContainer[0], firstPage.parent()[0]);
 		});
 
 		test( "pages without a data-url attribute have it set to their id", function(){
@@ -122,7 +122,7 @@
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" );
 
 			$(document).one("mobileinit", function(){
-				$.mobile.autoInitializePage = true;
+				$.ui.autoInitializePage = true;
 			});
 
 			location.hash = "";
@@ -139,7 +139,7 @@
 
 		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
 			$(document).one("mobileinit", function(){
-				$.mobile.autoInitializePage = false;
+				$.ui.autoInitializePage = false;
 			});
 
 			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" );
@@ -153,7 +153,7 @@
 				deepEqual( $( "#autoinit-off.ui-page" ).length, 0 );
 
 				$(document).bind("mobileinit", function(){
-					$.mobile.autoInitializePage = true;
+					$.ui.autoInitializePage = true;
 				});
 
 				reloadCoreNSandInit();

@@ -2,13 +2,13 @@
  * mobile page unit tests
  */
 (function($){
-	var libName = 'jquery.mobile.page',
-		themedefault = $.mobile.page.prototype.options.theme,
-		keepNative = $.mobile.page.prototype.options.keepNative;
+	var libName = 'jquery.ui.page',
+		themedefault = $.ui.page.prototype.options.theme,
+		keepNative = $.ui.page.prototype.options.keepNative;
 
 	module(libName, {
 		setup: function() {
-			$.mobile.page.prototype.options.keepNative = keepNative;
+			$.ui.page.prototype.options.keepNative = keepNative;
 		}
 	});
 
@@ -77,14 +77,14 @@
 	});
 
 	test( "keepNativeSelector returns the default where keepNative is not different", function() {
-		var pageProto = $.mobile.page.prototype;
+		var pageProto = $.ui.page.prototype;
 		pageProto.options.keepNative = pageProto.options.keepNativeDefault;
 
 		deepEqual(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
 	});
 
 	test( "keepNativeSelector returns the default where keepNative is empty, undefined, whitespace", function() {
-		var pageProto = $.mobile.page.prototype;
+		var pageProto = $.ui.page.prototype;
 
 		pageProto.options.keepNative = "";
 		deepEqual(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
@@ -97,7 +97,7 @@
 	});
 
 	test( "keepNativeSelector returns a selector joined with the default", function() {
-		var pageProto = $.mobile.page.prototype;
+		var pageProto = $.ui.page.prototype;
 
 		pageProto.options.keepNative = "foo, bar";
 		deepEqual(pageProto.keepNativeSelector(), "foo, bar, " + pageProto.options.keepNativeDefault);
@@ -106,7 +106,7 @@
 	test( "links inside an ignored container do not enhance", function() {
 		var $ignored = $( "#ignored-link" ), $enhanced = $( "#enhanced-link" );
 
-		$.mobile.ignoreContentEnabled = true;
+		$.ui.ignoreContentEnabled = true;
 
 		$ignored.parent().trigger( "create" );
 		deepEqual( $ignored.attr( "class" ), undefined, "ignored link doesn't have link class" );
@@ -114,7 +114,7 @@
 		$enhanced.parent().trigger( "create" );
 		deepEqual( $enhanced.attr( "class" ).indexOf("ui-link"), 0, "enhanced link has link class" );
 
-		$.mobile.ignoreContentEnabled = false;
+		$.ui.ignoreContentEnabled = false;
 	});
 
 
@@ -122,13 +122,13 @@
 
 		expect( 1 );
 
-		var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
+		var pageTheme = "ui-overlay-" + $.ui.activePage.page( "option", "theme" );
 
-		$.mobile.pageContainer.removeClass( pageTheme );
+		$.ui.pageContainer.removeClass( pageTheme );
 
-		$.mobile.activePage
+		$.ui.activePage
 			.bind( "pagebeforeshow", function(){
-				ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
+				ok( $.ui.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
 				start();
 			})
 			.trigger( "pagebeforeshow" );
@@ -139,13 +139,13 @@
 
 		expect( 1 );
 
-		var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
+		var pageTheme = "ui-overlay-" + $.ui.activePage.page( "option", "theme" );
 
-		$.mobile.pageContainer.addClass( pageTheme );
+		$.ui.pageContainer.addClass( pageTheme );
 
-		$.mobile.activePage
+		$.ui.activePage
 			.bind( "pagebeforehide", function(){
-				ok( !$.mobile.pageContainer.hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
+				ok( !$.ui.pageContainer.hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
 				start();
 			})
 			.trigger( "pagebeforehide" );

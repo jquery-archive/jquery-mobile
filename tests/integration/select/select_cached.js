@@ -17,18 +17,18 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached.html" );
+				$.ui.changePage( "cached.html" );
 			},
 
 			function(){
-				ok( $.mobile.activePage.is("#dialog-select-parent-cache-test"), "cached page appears" );
+				ok( $.ui.activePage.is("#dialog-select-parent-cache-test"), "cached page appears" );
 				selectButton = $( "#cached-page-select" ).siblings( 'a' );
 				selectButton.click();
 			},
 
 			function(){
-				ok( $.mobile.activePage.hasClass('ui-dialog'), "the dialog came up" );
-				var option = $.mobile.activePage.find( "li a" ).not(":contains('" + selectButton.text() + "')").last();
+				ok( $.ui.activePage.hasClass('ui-dialog'), "the dialog came up" );
+				var option = $.ui.activePage.find( "li a" ).not(":contains('" + selectButton.text() + "')").last();
 				value = $.trim(option.text());
 				option.click();
 			},
@@ -50,19 +50,19 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached.html" );
+				$.ui.changePage( "cached.html" );
 			},
 
 			function(){
-				selectButton = $.mobile.activePage.find( "#cached-page-select" ).siblings( 'a' );
-				parentPageId = $.mobile.activePage.attr( 'id' );
+				selectButton = $.ui.activePage.find( "#cached-page-select" ).siblings( 'a' );
+				parentPageId = $.ui.activePage.attr( 'id' );
 				deepEqual( $("#" + parentPageId).length, 1, "establish the parent page exists" );
 				selectButton.click();
 			},
 
 			function(){
 				deepEqual( $( "#" + parentPageId).length, 1, "make sure parent page is still there after opening the dialog" );
-				$.mobile.activePage.find( "li a" ).last().click();
+				$.ui.activePage.find( "li a" ).last().click();
 			},
 
 			start
@@ -76,21 +76,21 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached-dom-cache-true.html" );
+				$.ui.changePage( "cached-dom-cache-true.html" );
 			},
 
 			function(){
-				$.mobile.activePage.find( "#domcache-page-select" ).siblings( 'a' ).click();
+				$.ui.activePage.find( "#domcache-page-select" ).siblings( 'a' ).click();
 			},
 
 			function(){
-				ok( $.mobile.activePage.hasClass('ui-dialog'), "the dialog came up" );
-				$.mobile.activePage.find( "li a" ).last().click();
+				ok( $.ui.activePage.hasClass('ui-dialog'), "the dialog came up" );
+				$.ui.activePage.find( "li a" ).last().click();
 			},
 
 			function(){
-				ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ), "the dialog closed" );
-				$.mobile.changePage( $( "#default" ) );
+				ok( $.ui.activePage.is( "#dialog-select-parent-domcache-test" ), "the dialog closed" );
+				$.ui.changePage( $( "#default" ) );
 			},
 
 			function(){
@@ -106,7 +106,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "uncached-dom-cached-false.html" );
+				$.ui.changePage( "uncached-dom-cached-false.html" );
 			},
 
 			function(){
@@ -114,13 +114,13 @@
 				deepEqual( $(":jqmData(role='dialog')").length, dialogCount);
 
 				// manually trigger dialog opening
-				$( "#domcache-uncached-page-select" ).data( 'mobile-selectmenu' ).open();
+				$( "#domcache-uncached-page-select" ).data( 'ui-selectmenu' ).open();
 			},
 
 			function(){
 				// check if dialog was successfully  created
 				deepEqual( $(":jqmData(role='dialog')").length, dialogCount + 1 );
-				$( "#domcache-uncached-page-select" ).data( 'mobile-selectmenu' ).close();
+				$( "#domcache-uncached-page-select" ).data( 'ui-selectmenu' ).close();
 			},
 
 			function(){

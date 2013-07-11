@@ -2,7 +2,7 @@
  * mobile buttonMarkup tests
  */
 (function($){
-	module("jquery.mobile.buttonMarkup.js");
+	module("jquery.ui.buttonMarkup.js");
 
 	test( "control group buttons should respect theme-related data attributes", function(){
 		var group = $("#control-group-content");

@@ -5,7 +5,7 @@
 	var options = $.Widget.prototype.options,
 		element = $.Widget.prototype.element;
 
-	module('jquery.mobile.widget.js', {
+	module('jquery.ui.widget.js', {
 		teardown: function(){
 			$.Widget.prototype.options = options;
 			$.Widget.prototype.element = element;
@@ -17,7 +17,7 @@
 		var expected = "bizzle";
 
 		$.Widget.prototype.options = { "fooBar" : true };
-		$.Widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
+		$.Widget.prototype.element = $("<div data-"+$.ui.ns+"foo-bar=" + expected + ">");
 		deepEqual($.Widget.prototype._getCreateOptions()["fooBar"], expected);
 	});
 
@@ -25,7 +25,7 @@
 				var expected = {};
 
 		$.Widget.prototype.options = {};
-		$.Widget.prototype.element = $("<div data-"+$.mobile.ns+"foo-bar=" + expected + ">");
+		$.Widget.prototype.element = $("<div data-"+$.ui.ns+"foo-bar=" + expected + ">");
 		deepEqual($.Widget.prototype._getCreateOptions(), expected);
 	});
 
@@ -40,7 +40,7 @@
 	test( "elements embedded in sub page elements are excluded on create when they match the keep native selector", function() {
 		// uses default keep native of data-role=none
 		$("#enhance-prevented")
-				.append('<label for="unenhanced">Text Input:</label><input type="text" name="name" id="unenhanced" value="" data-'+$.mobile.ns+'role="none" />')
+				.append('<label for="unenhanced">Text Input:</label><input type="text" name="name" id="unenhanced" value="" data-'+$.ui.ns+'role="none" />')
 				.trigger("create");
 
 		ok( !$("#unenhanced").parent().hasClass( "ui-input-text" ), "doesn't have the ui input text class (unenhanced)");

@@ -2,7 +2,7 @@
  * mobile navigation path unit tests
  */
 (function($){
-	var url = $.mobile.path.parseUrl( location.href ),
+	var url = $.ui.path.parseUrl( location.href ),
 		home = location.href.replace( url.domain, "" );
 
 	var testPageLoad = function(testPageAnchorSelector, expectedTextValue){
@@ -16,7 +16,7 @@
 
 			// navigate to the linked page
 			function(){
-				var page = $.mobile.activePage;
+				var page = $.ui.activePage;
 
 				// check that the reset page isn't still open
 				equal("", page.find(".reset-value").text());
@@ -27,7 +27,7 @@
 
 			// verify that the page has changed and the expected text value is present
 			function(){
-				deepEqual($.mobile.activePage.find(".test-value").text(), expectedTextValue);
+				deepEqual($.ui.activePage.find(".test-value").text(), expectedTextValue);
 				start();
 			}
 		]);

@@ -5,7 +5,7 @@
 
 (function( $ ){
 
-	var defaults = $.mobile.panel.prototype.options,
+	var defaults = $.ui.panel.prototype.options,
 		classes = defaults.classes;
 
 	function getPageFromPanel( $panel ) {
@@ -67,7 +67,7 @@
 			$openButton = $page.find( "a[href='\\#panel-test-open']" );
 
 		$panel.one( "panelopen", function( event ) {
-			ok( !$openButton.hasClass( $.mobile.activeBtnClass ), "button doesn't have active class" );
+			ok( !$openButton.hasClass( $.ui.activeBtnClass ), "button doesn't have active class" );
 
 			ok( !$panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
 			ok( $panel.hasClass( defaults.classes.panelOpen ), "open class added" );
@@ -113,7 +113,7 @@
 		$panel.one( "panelopen", function( event ) {
 			$panel.panel( "close" );
 		}).one( "panelclose", function( event ) {
-			ok( !$openButton.hasClass( $.mobile.activeBtnClass ), "button doesn't have active class" );
+			ok( !$openButton.hasClass( $.ui.activeBtnClass ), "button doesn't have active class" );
 			ok( !$panel.hasClass( defaults.classes.panelOpen ), "panel not open class" );
 
 			ok( !$modal.hasClass( defaults.classes.modalOpen ), "modal without open class" );

@@ -8,7 +8,7 @@
 		onChangeCnt++;
 	};
 
-	module('jquery.mobile.slider.js events', {
+	module('jquery.ui.slider.js events', {
 		setup: function() {
 			// force the value to be an increment of 10 when we aren't testing the rounding
 			$("#stepped").val( 20 );
@@ -25,7 +25,7 @@
 		$.each(opts.keyCodes, function(i, elem){
 
 			// stub the keycode value and trigger the keypress
-			$.Event.prototype.keyCode = $.mobile.keyCode[elem];
+			$.Event.prototype.keyCode = $.ui.keyCode[elem];
 			handle.trigger('keydown');
 
 			val += opts.increment;
@@ -128,7 +128,7 @@
 			handle.attr({'aria-valuenow' : opts.start });
 
 			// stub the keycode and trigger the event
-			$.Event.prototype.keyCode = $.mobile.keyCode[elem];
+			$.Event.prototype.keyCode = $.ui.keyCode[elem];
 			handle.trigger('keydown');
 
 			deepEqual(handle.attr('aria-valuenow'), opts.finish, "handle value is " + opts.finish);
@@ -177,7 +177,7 @@
 
 	test( "toggle switch should fire one change event when clicked", function(){
 		var control = $( "#slider-switch" ),
-			widget = control.data( "mobile-slider" ),
+			widget = control.data( "ui-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			changeCount = 0,
@@ -226,7 +226,7 @@
 
 	asyncTest( "toggle switch handle should snap in the old position if dragged less than half of the slider width, in the new position if dragged more than half of the slider width", function() {
 		var control = $( "#slider-switch" ),
-			widget = control.data( "mobile-slider" ),
+			widget = control.data( "ui-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			width = handle.width(),
@@ -291,7 +291,7 @@
 
 	asyncTest( "toggle switch handle should not move if user is dragging and value is changed", function() {
 		var control = $( "#slider-switch" ),
-			widget = control.data( "mobile-slider" ),
+			widget = control.data( "ui-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			width = handle.width(),
@@ -339,7 +339,7 @@
 
 	asyncTest( "toggle switch should refresh when disabled", function() {
 		var control = $( "#slider-switch" ),
-			handle = control.data( "mobile-slider" ).handle;
+			handle = control.data( "ui-slider" ).handle;
 
 		$.testHelper.sequence([
 			function() {
@@ -378,7 +378,7 @@
 		expect( 5 );
 
 		var control = $( "#mousedown-which-events" ),
-			widget = control.data( "mobile-slider" ),
+			widget = control.data( "ui-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			eventNs = ".dragShouldStartOnlyWhenClickedWithLeftButton",
@@ -438,7 +438,7 @@
 
 	asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events", function() {
 		var control = $( "#start-stop-events" ),
-			widget = control.data( "mobile-slider" ),
+			widget = control.data( "ui-slider" ),
 			slider = widget.slider;
 
 		$.testHelper.eventCascade([

@@ -3,12 +3,12 @@
  */
 (function($){
 
-	module( "jquery.mobile.popup.js");
+	module( "jquery.ui.popup.js");
 
 	function popupEnhancementTests( $sel, prefix ) {
 		var $container = $sel.parent(), $screen = $sel.parent().prev();
 
-		ok( $sel.data( "mobile-popup" ),  prefix + ", popup div is associated with a popup widget" );
+		ok( $sel.data( "ui-popup" ),  prefix + ", popup div is associated with a popup widget" );
 		ok( $sel.hasClass( "ui-popup" ),  prefix + ", popup payload has class 'ui-popup'" );
 		ok( $container.hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
 		ok( $container.parent().hasClass( "ui-page" ), prefix + ", popup container parent is the page" );
@@ -24,7 +24,7 @@
 
 	test( "Popup tolerances are parsed correctly", function() {
 		var tolTestElement = $( "#tolerance-test" ),
-			tolTestPopup = tolTestElement.data( "mobile-popup" ),
+			tolTestPopup = tolTestElement.data( "ui-popup" ),
 			defaultValues = tolTestPopup._tolerance;
 
 		ok( (

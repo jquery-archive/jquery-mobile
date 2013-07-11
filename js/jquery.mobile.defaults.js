@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.ui.core.css
 //>>css.theme: ../css/themes/default/jquery.ui.theme.css
 
-define( [ "jquery", "./jquery.ui.ns", "json!../package.json" ], function( jQuery, ns, pkg, __version__ ) {
+define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

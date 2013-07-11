@@ -3,10 +3,10 @@
  */
 
 (function($){
-	module('jquery.mobile.degradeInputs.js');
+	module('jquery.ui.degradeInputs.js');
 
 	asyncTest('should degrade input type to a different type, as specified in page options', function(){
-		var degradeInputs = $.mobile.page.prototype.options.degradeInputs;
+		var degradeInputs = $.ui.page.prototype.options.degradeInputs;
 
 		expect( degradeInputs.length );
 
@@ -14,7 +14,7 @@
 		// and _expect_ that the default page will remain "unreaped". This will break if that assumption changes
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#dialog" );
+				$.ui.changePage( "#dialog" );
 			},
 
 			function() {

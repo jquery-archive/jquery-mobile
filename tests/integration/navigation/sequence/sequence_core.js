@@ -46,17 +46,17 @@
 				$( "#openBasicDialog" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function( result ) {
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
-				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "a:first", $.ui.activePage[ 0 ] ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			}
 		], eventNs );
@@ -69,7 +69,7 @@
 
 		maybeWaitForStartPage([
 			function() {
-				origActive = $.mobile.activePage;
+				origActive = $.ui.activePage;
 				$( "#openPopup" ).click();
 			},
 			{
@@ -84,7 +84,7 @@
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+				ok( $.ui.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				start();
 			}
 		], eventNs );
@@ -98,25 +98,25 @@
 		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 				$( "#fromDialogToAnotherPage" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 				start();
 			}
 		], eventNs );
@@ -139,17 +139,17 @@
 				$( "#openPageFromPopup" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 				start();
 			}
 		], eventNs );
@@ -164,33 +164,33 @@
 			// NOTE: The first part of this test is a copy of the test above
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
-				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "a:first", $.ui.activePage[ 0 ] ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 
 			// NOTE: The second part of this test is also a copy of the test above
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				$( "#openAnotherDialog" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherDialog", "Another dialog has opened" );
-				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+				ok( $.ui.activePage.attr( "id" ) === "anotherDialog", "Another dialog has opened" );
+				$( "a:first", $.ui.activePage[ 0 ] ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			}
 		], eventNs );
@@ -204,7 +204,7 @@
 		maybeWaitForStartPage([
 			// NOTE: This is basically two copies of the "returning from a popup test" one after the other
 			function() {
-				origActive = $.mobile.activePage;
+				origActive = $.ui.activePage;
 				$( "#openPopup" ).click();
 			},
 			{
@@ -219,7 +219,7 @@
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+				ok( $.ui.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				$( "#openAnotherPopup" ).click();
 			},
 			{
@@ -234,7 +234,7 @@
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+				ok( $.ui.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				start();
 			}
 		], eventNs );
@@ -248,31 +248,31 @@
 		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
-				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				$( "a:first", $.ui.activePage[ 0 ] ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				$( "#openAnotherPage" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			}
 		], eventNs );
@@ -285,7 +285,7 @@
 
 		maybeWaitForStartPage([
 			function() {
-				origActive = $.mobile.activePage;
+				origActive = $.ui.activePage;
 				$( "#openPopup" ).click();
 			},
 			{
@@ -300,21 +300,21 @@
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( $.mobile.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
+				ok( $.ui.activePage[ 0 ] === origActive[ 0 ], "The active page is the same as it was before opening the popup" );
 				$( "#openAnotherPage" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			}
 		], "openingAnotherPageAfterPopup" );
@@ -328,10 +328,10 @@
 		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 				$( "#fromDialogToPopup" ).click();
 			},
 			{
@@ -343,18 +343,18 @@
 			},
 			{
 				popupafterclose: { src: function() { return $( "#popupFromBasicDialog" ); }, event: "popupafterclose" + eventNs + "3" },
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Active page is original page" );
 				start();
 			}
 		]);
@@ -377,24 +377,24 @@
 				$( "#openDialogFromPopup" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 				$( "#fromDialogToAnotherPage" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 				start();
 			}
 		], eventNs );
@@ -418,11 +418,11 @@
 			},
 			{
 				popupafterclose: { src: function() { return $( "#thePopup" ); }, event: "popupafterclose" + eventNs + "2" },
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 				$( "#fromDialogToPopup" ).click();
 			},
 			{
@@ -437,15 +437,15 @@
 			},
 			function( result ) {
 				ok( !result.popupafterclose.timedOut, "Popup emitted 'popupafterclose'" );
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog is active page" );
-				$( "a:first", $.mobile.activePage[ 0 ] ).click();
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog is active page" );
+				$( "a:first", $.ui.activePage[ 0 ] ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function( result ) {
 				ok( !result.pagechange.timedOut, "A pagechange event has occurred as a result of returning from the dialog" );
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Basic test page is active page" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Basic test page is active page" );
 				start();
 			}
 		], eventNs );
@@ -459,39 +459,39 @@
 		maybeWaitForStartPage([
 			function() { $( "#openBasicDialog" ).click(); },
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
+				ok( $.ui.activePage.attr( "id" ) === "basicDialog", "Basic dialog has opened" );
 				$( "#fromDialogToAnotherPage" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 				window.history.forward();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
 				start();
 			}
 		], eventNs );
@@ -514,31 +514,31 @@
 				$( "#openPageFromPopup" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "2" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "2" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "3" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "3" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works" );
 				window.history.forward();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
-				$.mobile.back();
+				ok( $.ui.activePage.attr( "id" ) === "anotherPage", "Landed on another page after going forward" );
+				$.ui.back();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "4" }
+				pagechange: { src: $.ui.pageContainer, event: "pagechange" + eventNs + "4" }
 			},
 			function() {
-				ok( $.mobile.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
+				ok( $.ui.activePage.attr( "id" ) === "basicTestPage", "Coming back from another page to the start page works again" );
 				start();
 			}
 		], eventNs );

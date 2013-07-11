@@ -2,7 +2,7 @@
  * mobile textinput unit tests
  */
 (function($){
-	module( "jquery.mobile.forms.textinput.js" );
+	module( "jquery.ui.forms.textinput.js" );
 
 	// NOTE this test isn't run because the event data isn't easily accessible
 	// and with the advent of the widget _on method we are actually testing the
@@ -26,7 +26,7 @@
 		ok( $( "#typeless-input" ).parent().hasClass( "ui-input-text" ) );
 	});
 
-	$.mobile.page.prototype.options.keepNative = "textarea.should-be-native";
+	$.ui.page.prototype.options.keepNative = "textarea.should-be-native";
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "textarea in the keepNative set shouldn't be enhanced", function() {
@@ -66,7 +66,7 @@
 
 			function() {
 				setTimeout(function() {
-					ok($.mobile.activePage.find( "textarea" )[0].clientHeight > 100, "text area's height has grown");
+					ok($.ui.activePage.find( "textarea" )[0].clientHeight > 100, "text area's height has grown");
 					window.history.back();
 				}, 1000);
 			},
