@@ -52,14 +52,14 @@
 		ok( $( "#a" ).hasClass( "ui-page" ) );
 	});
 
-	test( "page element has default body theme when not overidden" , function(){
-		ok( $( "#a" ).hasClass( "ui-body-" + themedefault ) );
+	test( "page element has default page theme class when not overidden" , function(){
+		ok( $( "#a" ).hasClass( "ui-page-theme-" + themedefault ) );
 	});
 
 	test( "B page has non-default theme matching its data-theme attr" , function(){
 		$( "#b" ).page();
 		var btheme = $( "#b" ).jqmData( "theme" );
-		ok( $( "#b" ).hasClass( "ui-body-" + btheme ) );
+		ok( $( "#b" ).hasClass( "ui-page-theme-" + btheme ) );
 	});
 
 	test( "Binding to pagebeforecreate and returning false prevents pagecreate event from firing" , function(){

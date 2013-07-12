@@ -86,21 +86,21 @@
 		}
 	});
 
-	asyncTest( "placeholder correctly gets ui-selectmenu-placeholder class after rebuilding", function(){
-		$.testHelper.sequence([
-			function(){
+	asyncTest( "placeholder correctly gets ui-screen-hidden class after rebuilding", function() {
+		$.testHelper.sequence( [
+			function() {
 				// bring up the optgroup menu
-				ok($("#optgroup-and-placeholder-container a").length > 0, "there is in fact a button in the page");
-				$("#optgroup-and-placeholder-container a").trigger("click");
+				ok( $( "#optgroup-and-placeholder-container a" ).length > 0, "there is in fact a button in the page" );
+				$( "#optgroup-and-placeholder-container a" ).trigger( "click" );
 			},
 
-			function(){
+			function() {
 				//select the first menu item
-				$("#optgroup-and-placeholder-menu a:first").click();
+				$( "#optgroup-and-placeholder-menu li:not(.ui-screen-hidden) a:first" ).click();
 			},
 
-			function(){
-				ok($("#optgroup-and-placeholder-menu li:first").hasClass("ui-selectmenu-placeholder"), "the placeholder item has the ui-selectmenu-placeholder class");
+			function() {
+				ok( $( "#optgroup-and-placeholder-menu li:first" ).hasClass( "ui-screen-hidden" ), "the placeholder item has the ui-screen-hidden class" );
 				start();
 			}
 		], 1000);
@@ -211,10 +211,6 @@
 		$.testHelper.sequence(sequence, 1000);
 	});
 
-	test( "make sure the label for the select gets the ui-select class", function(){
-		ok( $( "#native-select-choice-few-container label" ).hasClass( "ui-select" ), "created label has ui-select class" );
-	});
-
 	module("Non native menus", {
 		setup: function() {
 			$.mobile.selectmenu.prototype.options.nativeMenu = false;
@@ -224,47 +220,41 @@
 		}
 	});
 
-	test( "a popup containing a non-native select will cause the select to be rendered as native", function() {
-		ok( $( "#select-choice-inside-popup-menu" ).length === 0, "non-native select inside popup has no generated menu" );
-	});
-
-	asyncTest( "a large select option should not overflow", function(){
+	asyncTest( "a large select option should not overflow", function() {
 		// https://github.com/jquery/jquery-mobile/issues/1338
-		var menu, select;
+		var menu;
 
-		$.testHelper.sequence([
+		$.testHelper.sequence( [
 			resetHash,
 
-			function(){
-				select = $("#select-long-option-label");
+			function() {
 				// bring up the dialog
-				select.trigger("click");
+				$( "#select-long-option-label" ).siblings( "a" ).trigger( "click" );
 			},
 
 			function() {
-				menu = $(".ui-selectmenu-list");
+				menu = $( "#select-long-option-label-menu.ui-selectmenu-list" );
 
-				equal(menu.width(), menu.find("li:nth-child(2) .ui-btn-text").width(), "ui-btn-text element should not overflow");
+				equal( menu.outerWidth( true ), menu.find( "li:nth-child(2) a" ).outerWidth( true ), "a element should not overflow" );
 				start();
 			}
 		], 500);
 	});
 
 	asyncTest( "focus is transferred to a menu item when the menu is opened",function() {
-		var select, menu, button;
-
 		expect( 1 );
 
 		$.testHelper.sequence([
+			resetHash,
+
 			function() {
-				select = $( "#select-choice-menu-focus-test" );
-				menu = $( "#select-choice-menu-focus-test-menu" );
-				button = select.find( "a" );
-				button.trigger( "click" );
+				// bring up the dialog
+				$( "#select-choice-menu-focus-test a:first" ).trigger( "click" );
 			},
 
 			function() {
-				ok( $( document.activeElement ).parents( "#select-choice-menu-focus-test-menu" ).length > 0, "item in open select menu (" + menu.length + ") has focus" );
+				ok( $( document.activeElement ).parents( "#select-choice-menu-focus-test-menu" ).length > 0,
+					"item in open select menu (" + $( "#select-choice-menu-focus-test-menu" ).length + ") has focus" );
 				$(".ui-popup-screen:not(.ui-screen-hidden)").trigger( "click" );
 			},
 
@@ -315,7 +305,7 @@
 			},
 
 			function(){
-				var firstMenuChoice = $("#select-choice-few\\.dotTest-menu li:first");
+				var firstMenuChoice = $("#select-choice-few\\.dotTest-menu li:first a");
 				ok( firstMenuChoice.hasClass( $.mobile.activeBtnClass ),
 						"default menu choice has the active button class" );
 
@@ -328,42 +318,26 @@
 			},
 
 			function(){
-				var lastMenuChoice = $("#select-choice-few\\.dotTest-menu li:last");
+				var lastMenuChoice = $("#select-choice-few\\.dotTest-menu li:last a");
 				ok( lastMenuChoice.hasClass( $.mobile.activeBtnClass ),
-						"previously slected item has the active button class" );
+						"previously selected item has the active button class" );
 
 				// close the dialog
-				lastMenuChoice.find( "a" ).click();
+				lastMenuChoice.click();
 			},
 
 			start
 		], 1000);
 	});
 
-	test( "enabling and disabling", function(){
-		var select = $( "select" ).first(), button;
-
-		button = select.siblings( "a" ).first();
-
-		select.selectmenu( 'disable' );
-		deepEqual( select.attr('disabled'), "disabled", "select is disabled" );
-		ok( button.hasClass("ui-disabled"), "disabled class added" );
-		deepEqual( button.attr('aria-disabled'), "true", "select is disabled" );
-		deepEqual( select.selectmenu( 'option', 'disabled' ), true, "disbaled option set" );
-
-		select.selectmenu( 'enable' );
-		deepEqual( select.attr('disabled'), undefined, "select is disabled" );
-		ok( !button.hasClass("ui-disabled"), "disabled class added" );
-		deepEqual( button.attr('aria-disabled'), "false", "select is disabled" );
-		deepEqual( select.selectmenu( 'option', 'disabled' ), false, "disbaled option set" );
-	});
-
 	asyncTest( "adding options and refreshing a custom select changes the options list", function(){
 		var select = $( "#custom-refresh-opts-list" ),
-      button = select.siblings( "a" ).find( ".ui-btn-inner" ),
-      text = "foo";
+			button = select.siblings( "a" ),
+			text = "foo";
 
 		$.testHelper.sequence([
+			resetHash,
+
 			// bring up the dialog
 			function() {
 				button.click();
@@ -371,7 +345,7 @@
 
 			function() {
 				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), "default" );
-				$( ".ui-popup-screen" ).click();
+				$( ".ui-popup-screen.in" ).click();
 			},
 
 			function() {
@@ -386,25 +360,11 @@
 
 			function() {
 				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), text );
-				$( ".ui-popup-screen" ).click();
+				$( ".ui-popup-screen.in" ).click();
 			},
 
 			start
 		], 500);
-	});
-
-	test( "theme defined on select is used", function(){
-		var select = $("select#non-parent-themed");
-
-		ok( select.siblings( "a" ).hasClass("ui-btn-up-" + select.jqmData('theme')));
-	});
-
-	test( "select without theme defined inherits theme from parent", function() {
-		var select = $("select#parent-themed");
-
-		ok( select
-			.siblings( "a" )
-			.hasClass("ui-btn-up-" + select.parents(":jqmData(role='page')").jqmData('theme')));
 	});
 
 	// issue #2547
@@ -459,33 +419,6 @@
 
 			start
 		]);
-	});
-
-	test( "a disabled custom select should still be enhanced as custom", function() {
-		$("#select-disabled-enhancetest").selectmenu("enable").selectmenu("open");
-
-		var menu = $(".ui-selectmenu").not( ".ui-popup-hidden" );
-		ok( menu.text().indexOf("disabled enhance test") > -1, "the right select is showing" );
-	});
-
-	test( "selected option classes are persisted to the button text", function() {
-		var $select = $( "#select-preserve-option-class" ),
-			selectedOptionClasses = $select.find( "option:selected" ).attr( "class" );
-
-		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
-	});
-
-	test( "multiple select option classes are persisted from the first selected option to the button text", function() {
-		var $select = $( "#select-preserve-option-class-multiple" ),
-			selectedOptionClasses = $select.find( "option:selected" ).first().attr( "class" );
-
-		deepEqual( $select.parent().find( ".ui-btn-text > span" ).attr( "class" ), selectedOptionClasses );
-	});
-
-	test( "multiple select text values are aggregated in the button text", function() {
-		var $select = $( "#select-aggregate-option-text" );
-
-		deepEqual( "Standard: 7 day, Rush: 3 days", $select.parent().find( ".ui-btn-text" ).text() );
 	});
 
 	asyncTest( "destroying a select menu leaves no traces", function() {
@@ -608,13 +541,6 @@
 
 			start
 		]);
-	});
-
-	test( "changing the placeholder text for a non-native select will update the placeholder list item", function() {
-		var newText = "Updated placeholder";
-		$( "#test-placeholder-update option:first-child" ).text( newText );
-		$( "#test-placeholder-update" ).selectmenu( "refresh", true );
-		deepEqual ( $( "#test-placeholder-update-menu li:first-child .ui-btn-text" ).text(), newText, "Placeholder list item reflects new value after refresh( true )" );
 	});
 
 })(jQuery);

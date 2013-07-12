@@ -41,14 +41,13 @@
 
 			<h2>Auto Init</h2>
 
-			<p>Because these tolbars are not within the page they will not auto initalize. you must call the toolbar plugin yourself on document ready</p>
+			<p>Because these toolbars are not within the page they will not auto initalize. You must call the toolbar plugin yourself on document ready.</p>
 
 			<h2>Ajax Navigation</h2>
 
-			<p>Because these toolbars are not within the page they will remain in the dom until manually removed. However they will automaticly hide if you navigate to a page containing a toolbar to allow the pages own toolbars to take their place. They will automaticly show again if you navigate to a page containing no toolbars. 
-			</p>
+			<p>Because these toolbars are not within the page they will remain in the DOM until manually removed. However they will automatically hide if you navigate to a page containing a toolbar to allow the pages own toolbars to take their place. They will automatically show again if you navigate to a page containing no toolbars.</p>
 
-			<p>Toolbars not within a page will not be pulled into the dom durring ajax navigation</p>
+			<p>Toolbars not within a page will not be pulled into the DOM during Ajax navigation.</p>
 
 			<h2>Fixed External Toolbars</h2>
 

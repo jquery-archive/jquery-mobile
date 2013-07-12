@@ -237,7 +237,7 @@ nokiaLTE7_3 = (function() {
 // default enhanced qualifications are media query support OR IE 7+
 
 $.mobile.gradeA = function() {
-	return ( $.support.mediaquery || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 7 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
+	return ( ( $.support.mediaquery && $.support.cssPseudoElement ) || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 8 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
 };
 
 $.mobile.ajaxBlacklist =

@@ -218,15 +218,15 @@
 
 			function() {
 				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-icon" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
-				ok( collapsibles.eq(1).find( ".ui-icon" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
-				ok( collapsibles.eq(2).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
-				ok( collapsibles.eq(3).find( ".ui-icon" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d");
+				ok( collapsibles.eq(0).find( ".ui-btn" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
+				ok( collapsibles.eq(1).find( ".ui-btn" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
+				ok( collapsibles.eq(2).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
+				ok( collapsibles.eq(3).find( ".ui-btn" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d");
 
 				// issue #4801: BEGIN
-				ok( collapsibles.eq(4).find( ".ui-icon" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should have class ui-icon-info");
+				ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should have class ui-icon-info");
 				collapsibles.eq( 4 ).trigger( "expand" );
-				ok( collapsibles.eq(4).find( ".ui-icon" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should STILL have class ui-icon-info after click");
+				ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should STILL have class ui-icon-info after click");
 				// issue #4801: END
 				start();
 			}
@@ -242,12 +242,12 @@
 
 			function() {
 				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-icon" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
-				ok( collapsibles.eq(1).find( ".ui-icon" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
-				ok( collapsibles.eq(2).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
-				ok( collapsibles.eq(3).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of fourth collapsible should have class ui-icon-arrow-r");
-				ok( collapsibles.eq(4).find( ".ui-icon" ).hasClass( "ui-icon-arrow-l" ), "Heading of fifth collapsible should have class ui-icon-arrow-l");
-				ok( collapsibles.eq(5).find( ".ui-icon" ).hasClass( "ui-icon-arrow-u" ), "Heading of sixth collapsible should have class ui-icon-arrow-u");
+				ok( collapsibles.eq(0).find( ".ui-btn" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
+				ok( collapsibles.eq(1).find( ".ui-btn" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
+				ok( collapsibles.eq(2).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
+				ok( collapsibles.eq(3).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of fourth collapsible should have class ui-icon-arrow-r");
+				ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-arrow-l" ), "Heading of fifth collapsible should have class ui-icon-arrow-l");
+				ok( collapsibles.eq(5).find( ".ui-btn" ).hasClass( "ui-icon-arrow-u" ), "Heading of sixth collapsible should have class ui-icon-arrow-u");
 				start();
 			}
 		]);
@@ -264,12 +264,12 @@
 
 			function() {
 				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-a" ), "Heading of first collapsible should have class ui-btn-up-a");
-				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-a" ), "Content of first collapsible should NOT have class ui-btn-up-a");
-				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-b" ), "Heading of second collapsible should have class ui-btn-up-b");
-				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-btn-up-b");
-				ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-c" ), "Heading of third collapsible should have class ui-btn-up-c");
-				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-c" ), "Content of third collapsible should have class ui-btn-up-c");
+				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-a" ), "Heading of first collapsible should have class ui-btn-a");
+				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-a" ), "Content of first collapsible should NOT have class ui-btn-a");
+				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-b" ), "Heading of second collapsible should have class ui-btn-b");
+				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-body-b");
+				ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-c" ), "Heading of third collapsible should have class ui-btn-c");
+				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-c" ), "Content of third collapsible should have class ui-body-c");
 				start();
 			}
 		]);
@@ -285,19 +285,20 @@
 
 			function() {
 				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-a" ), "Heading of first collapsible should have class ui-btn-up-a");
-				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of first collapsible should NOT have class ui-btn-up-[a,b,c]");
-				ok( collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of first collapsible should NOT have class ui-btn-up-d");
-				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-b" ), "Heading of second collapsible should have class ui-btn-up-b");
-				ok( !collapsibles.eq(1).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-c,.ui-body-d" ), "Content of second collapsible should NOT have class ui-btn-up-[a,c,d]");
-				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-btn-up-b");
-				ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-d" ), "Heading of third collapsible should have class ui-btn-up-d");
-				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of third collapsible should NOT have class ui-btn-up-[a,b,c]");
-				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of third collapsible should have class ui-btn-up-d");
-				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-collapsible-content-collapsed" ), "Content of third collapsible should NOT have class ui-collapsible-content-collapsed");
-				ok( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-d" ), "Heading of fourth collapsible should have class ui-btn-up-d");
-				ok( !collapsibles.eq(3).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of fourth collapsible should NOT have class ui-btn-up-[a,b,c]");
-				ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of fourth collapsible should have class ui-btn-up-d");
+
+				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-a" ), "Heading of first collapsible should have class ui-btn-a" );
+				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of first collapsible should NOT have class ui-body-[a,b,c]" );
+				ok( collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of first collapsible should NOT have class ui-body-d" );
+				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-b" ), "Heading of second collapsible should have class ui-btn-b" );
+				ok( !collapsibles.eq(1).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-c,.ui-body-d" ), "Content of second collapsible should NOT have class ui-body-[a,c,d]" );
+				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-body-b" );
+				deepEqual( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(221, 221, 221)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of third collapsible should NOT have class ui-body-[a,b,c]" );
+				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of third collapsible should have class ui-body-d" );
+				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-collapsible-content-collapsed" ), "Content of third collapsible should NOT have class ui-collapsible-content-collapsed" );
+				deepEqual( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(221, 221, 221)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+				ok( !collapsibles.eq(3).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of fourth collapsible should NOT have class ui-body-[a,b,c]" );
+				ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of fourth collapsible should have class ui-body-d" );
 				start();
 			}
 		]);
