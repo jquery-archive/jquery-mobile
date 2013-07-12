@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>External panels</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://192.168.1.33/jqm/src/css/themes/default/jquery.mobile.css" /> 
+	<script src="http://code.jquery.com/jquery-1.10.1.js"></script> 
+	<script src="http://192.168.1.33/jqm/src/js/"></script> 
+	<script>
+		$( document ).on( "pagecreate", function() {
+			$( "body > [data-role='panel']" ).panel();
+			$( "#outside [data-role='listview']" ).listview();
+		});
+	</script>
+</head>
+<body>
+
+	<div data-role="panel" id="outside" data-display="push" data-theme="c">
+		<ul data-role="listview">
+			<li data-icon="left"><a href="#" data-rel="close">Close</a></li>
+			<li>List item</li>
+			<li>List item</li>
+		</ul>
+		<p>sibling page C</p>
+	</div>
+	
+	<div data-role="page" id="c">
+	
+		<div data-role="panel" id="inside-c" data-position="right" data-theme="b">
+			<ul data-role="listview">
+				<li data-icon="left"><a href="#" data-rel="close">Close</a></li>
+				<li>List item</li>
+				<li>List item</li>
+			</ul>
+		</div>
+	
+		<div data-role="header" data-position="fixed">
+			<h1>Header</h1>
+			<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
+			<a href="#inside-c" data-icon="bars" data-iconpos="notext">Menu</a>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="./">Page A</a></li>
+					<li><a href="page-b.html">Page B</a></li>
+					<li><a href="page-c.html" class="ui-btn-active ui-state-persists">Page C</a></li>
+				</ul>
+			</div>
+		</div><!-- /header -->
+		
+		<div data-role="content">
+		
+			<h2>Page C</h2>
+			
+			<p>Content</p>
+		
+		</div><!-- /content -->
+		
+		<div data-role="footer" data-position="fixed">
+			<h4>Footer</h4>
+		</div><!-- /header -->
+	
+	</div><!-- /page -->
+	
+</body>
+</html>
