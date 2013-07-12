@@ -70,7 +70,8 @@ module.exports = function( grunt ) {
 						"!js/jquery.hashchange.js",
 						"!js/jquery.js",
 						"!js/jquery.ui.widget.js",
-						"!js/widgets/jquery.ui.tabs.js"
+						"!js/widgets/jquery.ui.tabs.js",
+						"!js/jquery.ui.core.js"
 					]
 				}
 			},
