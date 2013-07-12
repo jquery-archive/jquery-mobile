@@ -51,7 +51,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 					search.setAttribute( "data-" + $.mobile.ns + "lastval" , val );
 
 					this._filterItems( search, val, lastval );
-				}, 250 )
+				}, 250 );
 			},
 
 			_getFilterableItems: function() {
@@ -210,7 +210,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 
 				this._setOption( "timer", undefined );
 
-				if ( o.enhanced === false ) {
+				if ( !o.enhanced ) {
 					search = this._enhance( items );
 				} else {
 					search = $( "#ui-filter-" + this.uuid ).find( "input" );
@@ -263,7 +263,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				var o = this.options,
 					wrapper = document.getElementById( "ui-filter-" + this.uuid );
 
-				if ( o.enhanced === false ) {
+				if ( !o.enhanced ) {
 					wrapper.parentNode.removeChild( wrapper );
 				}
 				this._toggleFilterableItems( this._getFilterableItems(), false, false );
