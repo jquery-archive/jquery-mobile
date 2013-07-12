@@ -17,6 +17,7 @@ var rInitialLetter = /([A-Z])/g;
 
 $.widget( "mobile.collapsible", {
 	options: {
+		enhanced: false,
 		expandCueText: null,
 		collapseCueText: null,
 		collapsed: true,
@@ -32,22 +33,64 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_create: function() {
-		var anchor, placeholder,
-			$el = this.element.addClass( "ui-collapsible" ),
-			opts = this.options,
-			heading = $el.children( opts.heading ).first(),
-			replacementHeading = heading,
-			content = $el.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
-			accordion = $el.closest( ":jqmData(role='collapsible-set')" + ( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) ).addClass( "ui-collapsible-set" );
+		var elem = this.element,
+			ui = {
+				accordion: elem
+					.closest( ":jqmData(role='collapsible-set')" +
+						( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) )
+					.addClass( "ui-collapsible-set" )
+			},
+			opts = this.options;
 
-		// Replace collapsibleHeading if it's a legend
-		if ( heading.is( "legend" ) ) {
-			replacementHeading = $( "<div role='heading'>"+ heading.html() +"</div>" );
-			placeholder = $( "<div><!-- placeholder for legend --></div>" ).insertBefore( heading );
-			heading.remove();
+		$.extend( this, {
+			_anchorClasses: "",
+			_elClasses: "",
+			_contentTheme: "",
+			_ui: ui
+		});
+
+		if ( opts.enhanced ) {
+			ui.heading = $( ".ui-collapsible-heading", this.element[ 0 ] );
+			ui.content = ui.heading.next();
+			ui.anchor = $( "a", ui.heading[ 0 ] ).first();
+		} else {
+			this._enhance( elem, ui );
+			this._setOptions( opts );
 		}
 
-		anchor = replacementHeading
+		//events
+		this._on({
+			"expand": "_handleExpandCollapse",
+			"collapse": "_handleExpandCollapse"
+		});
+
+		this._on( ui.heading, {
+			"tap": function() {
+				ui.heading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
+			},
+
+			"click": function( event ) {
+				this._handleExpandCollapse( !ui.heading.hasClass( "ui-collapsible-heading-collapsed" ) );
+				event.preventDefault();
+				event.stopPropagation();
+			}
+		});
+	},
+
+	_enhance: function( elem, ui ) {
+		elem.addClass( "ui-collapsible" );
+		ui.originalHeading = elem.children( this.options.heading ).first(),
+		ui.content = elem.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
+		ui.heading = ui.originalHeading;
+
+		// Replace collapsibleHeading if it's a legend
+		if ( ui.heading.is( "legend" ) ) {
+			ui.heading = $( "<div role='heading'>"+ ui.heading.html() +"</div>" );
+			ui.placeholder = $( "<div><!-- placeholder for legend --></div>" ).insertBefore( ui.originalHeading );
+			ui.originalHeading.remove();
+		}
+
+		ui.anchor = ui.heading
 			.detach()
 			//modify markup & attributes
 			.addClass( "ui-collapsible-heading" )
@@ -57,43 +100,10 @@ $.widget( "mobile.collapsible", {
 				.first()
 				.addClass( "ui-btn" );
 
-			//drop heading in before content
-			replacementHeading.insertBefore( content );
+		//drop heading in before content
+		ui.heading.insertBefore( ui.content );
 
-		$.extend( this, {
-			_accordion: accordion,
-			_accordionWidget: null,
-			_anchorClasses: "",
-			_elClasses: "",
-			_contentTheme: "",
-			_ui: {
-				placeholder: placeholder,
-				originalHeading: heading,
-				anchor: anchor,
-				content: content,
-				heading: replacementHeading
-			}
-		});
-
-		//events
-		this._on({
-			"expand": "_handleExpandCollapse",
-			"collapse": "_handleExpandCollapse"
-		});
-
-		this._on( heading, {
-			"tap": function(/* event */) {
-				heading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
-			},
-
-			"click": function( event ) {
-				this._handleExpandCollapse( !heading.hasClass( "ui-collapsible-heading-collapsed" ) );
-				event.preventDefault();
-				event.stopPropagation();
-			}
-		});
-
-		this._setOptions( opts );
+		return ui;
 	},
 
 	_handleExpandCollapse: function( isCollapse ) {
@@ -131,11 +141,11 @@ $.widget( "mobile.collapsible", {
 	// parent accordion, then from the defaults.
 	_optionValue: function( options, name ) {
 		var ret,
-			accordion = this._accordion,
-			accordionWidget = this._accordionWidget;
+			accordion = this._ui.accordion,
+			accordionWidget = this._ui.accordionWidget;
 
 		if ( accordion.length && !accordionWidget ) {
-			this._accordionWidget = accordionWidget = accordion.data( "mobile-collapsibleset" );
+			this._ui.accordionWidget = accordionWidget = accordion.data( "mobile-collapsibleset" );
 		}
 
 		ret =
@@ -165,6 +175,10 @@ $.widget( "mobile.collapsible", {
 
 	_destroy: function() {
 		var ui = this._ui;
+
+		if ( this.options.enhanced ) {
+			return;
+		}
 
 		if ( ui.placeholder ) {
 			ui.originalHeading.insertBefore( ui.placeholder );
@@ -200,7 +214,7 @@ $.widget( "mobile.collapsible", {
 		}
 
 		// Set corners for individual collapsibles to false when in a collapsible-set
-		if ( this._accordion.length > 0 ) {
+		if ( this._ui.accordion.length > 0 ) {
 			opts.corners = false;
 		}
 
