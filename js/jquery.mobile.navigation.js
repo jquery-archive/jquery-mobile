@@ -1089,7 +1089,9 @@ define( [
 	});
 
 	$.mobile.loadPage = function( url, opts ) {
-		var container = (opts.pageContainer || $.mobile.pageContainer);
+		var container = ( opts.pageContainer || $.mobile.pageContainer );
+
+		opts = opts || {},
 
 		// create the deferred that will be supplied to loadPage callers
 		// and resolved by the content widget's load method
