@@ -26,6 +26,15 @@
 					$( "#testpage" ).addClass( "noshadow" );
 				}
 			});
+			$( "#opt-navbars input" ).on( "change", function( event ) {
+				if ( $( "#show" ).prop( "checked" ) ) {
+					$( "#testpage .ui-navbar" ).show();
+					$( "#testpage .ui-footer h4" ).hide();
+				} else if ( $( "#hide" ).prop( "checked" ) ) {
+					$( "#testpage .ui-navbar" ).hide();
+					$( "#testpage .ui-footer h4" ).show();
+				}
+			});
 		});
 	</script>
 	<style>
@@ -43,6 +52,13 @@
 		<h1>Theme inheritance</h1>
 		<a href="../../" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
 		<a href="#" data-role="button" data-icon="gear">Button</a>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
+				<li><a href="#">Menu item 1</a></li>
+				<li><a href="#">Menu item 1</a></li>
+			</ul>
+		</div>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -66,6 +82,15 @@
 					<input type="radio" name="shadow" id="on" checked>
 					<label for="off">Off</label>
 					<input type="radio" name="shadow" id="off">
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain" id="opt-navbars">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Navbars:</legend>
+					<label for="show">Show</label>
+					<input type="radio" name="navbars" id="show" checked>
+					<label for="hide">Hide</label>
+					<input type="radio" name="navbars" id="hide">
 				</fieldset>
 			</div>
 		</form>
@@ -237,6 +262,17 @@
 		</div>
 		
 	</div><!-- /content -->
+	
+	<div data-role="footer" data-position="fixed">
+		<h4 style="display:none;">Footer</h4>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#">Menu item 1</a></li>
+				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
+				<li><a href="#">Menu item 1</a></li>
+			</ul>
+		</div>
+	</div>
 
 </div><!-- /page -->
 </body>
