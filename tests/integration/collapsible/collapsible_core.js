@@ -4,6 +4,14 @@
 
 // TODO split out into seperate test files
 (function( $ ){
+	function testExpandCollapse( selector ) {
+		ok($( selector ).hasClass( "ui-collapsible-collapsed" ),  selector + " should be collapsed");
+		$( selector + " >:header a" ).first().click();
+		ok(!$( selector ).hasClass( "ui-collapsible-collapsed" ), selector + " should be expanded after click");
+		$( selector + " >:header a" ).first().click();
+		ok($( selector ).hasClass( "ui-collapsible-collapsed" ), selector + " should be collapsed");
+	}
+
 	module( "Collapsible section", {});
 
 	test( "The page should be enhanced correctly", function(){
@@ -15,11 +23,11 @@
 	});
 
 	test( "Expand/Collapse", function(){
-		ok($( "#collapsed-collapsible" ).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be collapsed");
-		$( "#collapsed-collapsible" ).click();
-		ok(!$( "collapsed-collapsible" ).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be expanded after click");
-		$( "#collapsed-collapsible" ).click();
-		ok($( "#collapsed-collapsible" ).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be collapsed");
+		testExpandCollapse( "#collapsed-collapsible" );
+	});
+
+	test( "Expand/Collapse pre-rendered", function(){
+		testExpandCollapse( "#pre-rendered-collapsible" );
 	});
 
 	module( "Collapsible set", {});
