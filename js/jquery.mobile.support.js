@@ -257,6 +257,30 @@ if ( nokiaLTE7_3 ) {
 	});
 }
 
+// inline SVG support test
+function inlineSVG() {
+	// Thanks Modernizr & Erik Dahlstrom
+	var w = window,
+		svg = !!w.document.createElementNS
+			&& !!w.document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect
+			&& !!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1"),
+		support = function( data ) {
+			if ( !( data && svg ) ) {
+				$( "html" ).addClass( "no-svg" );
+			}
+		}
+		img = new w.Image();
+	
+	img.onerror = function() {
+		support( false );
+	}
+	img.onload = function() {
+		support( img.width === 1 && img.height === 1 );
+	}
+	img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+}
+inlineSVG();
+
 // For ruling out shadows via css
 if ( !$.support.boxShadow ) {
 	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
