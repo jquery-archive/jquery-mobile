@@ -15,19 +15,12 @@ define( ["jquery", "../jquery.mobile.core", "./serial", "./concurrent"], functio
 
 	//transition handler dictionary for 3rd party transitions
 	$.mobile.transitionHandlers = {
-		"default": $.mobile.defaultTransitionHandler,
-		"sequential": function( name, reverse, to, from ) {
-			return (new $.mobile.SerialTransition( name, reverse, to, from )).transition();
-		},
-
-		"simultaneous": function( name, reverse, to, from ) {
-			return (new $.mobile.ConcurrentTransition( name, reverse, to, from )).transition();
-		}
+		"sequential": $.mobile.SerialTransition,
+		"simultaneous": $.mobile.ConcurrentTransition
 	};
 
 	// Make our transition handler the public default.
 	$.mobile.defaultTransitionHandler = $.mobile.transitionHandlers.sequential;
-	$.mobile.transitionHandlers["default"] = $.mobile.defaultTransitionHandler;
 
 	$.mobile.transitionFallbacks = {};
 

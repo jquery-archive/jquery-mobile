@@ -30,6 +30,10 @@ $.widget( "mobile.page", {
 			return false;
 		}
 
+		if ( this.options.role ) {
+			this.element.attr( "data-" + $.mobile.ns + "role", this.options.role );
+		}
+
 		this.element
 			.attr( "tabindex", "0" )
 			.addClass( "ui-page ui-page-theme-" + this.options.theme );
@@ -54,6 +58,27 @@ $.widget( "mobile.page", {
 		$.mobile._enhancer.enhance( this.element[ 0 ] );
 	},
 
+	bindRemove: function( callback ) {
+		var page = this.element;
+
+		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
+		if ( !page.data( "mobile-page" ).options.domCache &&
+			page.is( ":jqmData(external-page='true')" ) ) {
+
+			// TODO use _on - that is, sort out why it doesn't work in this case
+			page.bind( "pagehide.remove", callback || function(/* e */) {
+				var $this = $( this ),
+					prEvent = new $.Event( "pageremove" );
+
+				$this.trigger( prEvent );
+
+				if ( !prEvent.isDefaultPrevented() ) {
+					$this.removeWithDependents();
+				}
+			});
+		}
+	},
+	
 	_setOptions: function( o ) {
 		if( o.theme !== undefined ) {
 			this.element.removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + o.theme );

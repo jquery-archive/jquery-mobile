@@ -117,7 +117,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// of a dialog sized custom select
 		//
 		// doing this here provides for the back button on the custom select dialog
-		$.mobile._bindPageRemove.call( this.thisPage );
+		this.thisPage.page( "bindRemove" );
 	},
 
 	_handleHeaderCloseClick: function() {

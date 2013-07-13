@@ -18,6 +18,7 @@ $files = array(
 	'events/throttledresize.js',
 	'events/orientationchange.js',
 	'jquery.hashchange.js',
+	'jquery.ui.core.js',
 	'jquery.mobile.defaults.js',
 	'jquery.mobile.helpers.js',
 	'jquery.mobile.data.js',

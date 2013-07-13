@@ -98,7 +98,9 @@ define( [ "jquery",
 				// Set to page height
 				this.$to.height( screenHeight + this.toScroll );
 
-				this.scrollPage();
+                if ( !none ) {
+                    this.scrollPage();
+                }
 			});
 
 			if ( !none ) {

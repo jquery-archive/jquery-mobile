@@ -107,7 +107,7 @@
 
 		data = $.extend( {}, $("body").data() );
 		delete data[ $.expando ]; //discard the expando for that test
-		deepEqual( data , { "nstestFoo": true }, "passing .data() no arguments returns a hash with all set properties" );
+		deepEqual( data.nstestFoo, true, "passing .data() no arguments returns a hash with all set properties" );
 
 		deepEqual( $("body").jqmData(), undefined, "passing no arguments returns undefined" );
 
