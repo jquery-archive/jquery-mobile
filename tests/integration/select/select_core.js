@@ -5,7 +5,7 @@
 (function($){
 	var libName = "jquery.mobile.forms.select",
 		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
-		originalDefTransitionHandler = $.mobile.defaultTransitionHandler,
+		originalDefTransitionHandler = $.mobile.defaultTransitionHandler.prototype.transition,
 		originalGetEncodedText = $.fn.getEncodedText,
 		resetHash, closeDialog;
 
@@ -79,7 +79,7 @@
 
 		teardown: function(){
 			$.mobile.defaultDialogTransition = originalDefaultDialogTrans;
-			$.mobile.defaultTransitionHandler = originalDefTransitionHandler;
+			$.mobile.defaultTransitionHandler.prototype.transition = originalDefTransitionHandler;
 
 			$.fn.getEncodedText = originalGetEncodedText;
 			window.encodedValueIsDefined = undefined;
@@ -140,22 +140,23 @@
 	});
 
 	asyncTest( "a large select menu should use the default dialog transition", function(){
-		var select;
-
 		$.testHelper.pageSequence([
 			resetHash,
 
 			function(timeout){
+				var select, old;
+
 				select = $("#select-choice-many-container-1 a");
 
-				//set to something else
-				$.mobile.defaultTransitionHandler = $.testHelper.decorate({
-					fn: $.mobile.defaultTransitionHandler,
+				old = $.mobile.defaultTransitionHandler.prototype.transition;
 
-					before: function(name){
-						deepEqual(name, $.mobile.defaultDialogTransition);
-					}
-				});
+				//set to something else
+				$.mobile.defaultTransitionHandler.prototype.transition = function(){
+					// check that the instantiated transition handlers transition name
+					// property matches the default transition
+					deepEqual(this.name, $.mobile.defaultDialogTransition);
+					return old.apply(this, arguments);
+				};
 
 				// bring up the dialog
 				select.trigger("click");

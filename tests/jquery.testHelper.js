@@ -362,7 +362,10 @@
 		decorate: function(opts){
 			var thisVal = opts.self || window;
 
+			console.log( "decorate called" );
+
 			return function(){
+				console.log( "decorated function called" );
 				var returnVal;
 				opts.before && opts.before.apply(thisVal, arguments);
 				returnVal = opts.fn.apply(thisVal, arguments);
@@ -413,26 +416,22 @@
 			return t( parseInt( lRes.replace( /^0*/, "" ) ), parseInt( rRes.replace( /^0*/, "" ) ) );
 		},
 
-		navReset: function( url ) {
-			var pageReset = function( hash ) {
-				var timeout;
+		navReset: function( hash ) {
+			var timeout;
 
-				stop();
+			stop();
 
-				timeout = setTimeout( function() {
-					start();
-					throw "navigation reset timed out";
-				}, 5000);
+			timeout = setTimeout( function() {
+				start();
+				throw "navigation reset timed out";
+			}, 5000);
 
-				$(document).one( "pagechange", function() {
-					clearTimeout( timeout );
-					start();
-				});
+			$(document).one( "pagechange", function() {
+				clearTimeout( timeout );
+				start();
+			});
 
-				location.hash = location.hash.replace("#", "") === hash ? "" : "#" + hash;
-			};
-
-			pageReset( url );
+			location.hash = location.hash.replace("#", "") === hash ? "" : "#" + hash;
 		},
 
 		delayStart: function( milliseconds ) {

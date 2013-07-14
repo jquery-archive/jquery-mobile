@@ -2,8 +2,7 @@
  * mobile navigation unit tests
  */
 (function($){
-	var perspective,
-			transitioning = "ui-mobile-viewport-transitioning",
+	var transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
 			defaultMaxTrans = $.mobile.maxTransitionWidth,
 
@@ -52,13 +51,6 @@
 				$.mobile.urlHistory.activeIndex = 0;
 			};
 
-
-	if( !$.support.cssTransform3d  ) {
-		perspective = "viewport-fade";
-  } else {
-    perspective = "viewport-flip";
-  }
-
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
 
@@ -82,7 +74,7 @@
 			resetQueues();
 			clearUrlHistory();
 
-      if ( location.hash !== "#harmless-default-page" ) {
+			if ( location.hash !== "#harmless-default-page" ) {
 				stop();
 
 				$(document).one("pagechange", function() {
@@ -115,7 +107,7 @@
 
 			function() {
 				onToComplete( function( el ) {
-					ok($("body").hasClass(perspective), "has viewport-flip or viewport-fade based on 3d transform");
+					ok($("body").hasClass("viewport-flip") || $("body").hasClass("viewport-fade"), "has viewport-flip or viewport-fade");
 					start();
 				});
 
@@ -163,7 +155,7 @@
 		onToComplete(function(){
 			ok($("#no-trans").hasClass("fade"), "has fade class");
 			start();
-		})
+		});
 
 		$("#default-trans > a").click();
 	});
@@ -186,22 +178,6 @@
 
 			});
 		});
-	});
-
-	asyncTest( "default transition is pop for a dialog", function(){
-		var defaultTransition = "pop";
-
-		if( !$.support.cssTransform3d ){
-			defaultTransition = "fade";
-		}
-
-		expect( 1 );
-		onToComplete(function(){
-			ok( $("#no-trans-dialog").hasClass(defaultTransition), "has pop class" );
-			start();
-		});
-
-		$("#default-trans-dialog > a").click();
 	});
 
 	test( "animationComplete return value", function(){

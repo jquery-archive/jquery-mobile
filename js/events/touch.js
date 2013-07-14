@@ -205,7 +205,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 
 				$this.bind( touchMoveEvent, moveHandler )
 					.one( touchStopEvent, function() {
-						emitted = false;
+						emitted = true;
 				});
 			});
 		},

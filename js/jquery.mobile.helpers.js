@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.json" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -16,24 +16,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		document: $( document ),
 
 		//TODO: Remove once we pull in UI Core
-		keyCode: {
-			BACKSPACE: 8,
-			COMMA: 188,
-			DELETE: 46,
-			DOWN: 40,
-			END: 35,
-			ENTER: 13,
-			ESCAPE: 27,
-			HOME: 36,
-			LEFT: 37,
-			PAGE_DOWN: 34,
-			PAGE_UP: 33,
-			PERIOD: 190,
-			RIGHT: 39,
-			SPACE: 32,
-			TAB: 9,
-			UP: 38
-		},
+		keyCode: $.ui.keyCode,
 
 		// Place to store various widget extensions
 		behaviors: {},
@@ -189,26 +172,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	$.find.matchesSelector = function( node, expr ) {
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
-	//Needed for ui widgets 
-	//TODO: Remove once ui core is pulled in
-	var uuid = 0,
-		runiqueId = /^ui-id-\d+$/;
-	$.fn.extend({
-		uniqueId: function() {
-			return this.each(function() {
-				if ( !this.id ) {
-					this.id = "ui-id-" + (++uuid);
-				}
-			});
-		},
-		removeUniqueId: function() {
-			return this.each(function() {
-				if ( runiqueId.test( this.id ) ) {
-					$( this ).removeAttr( "id" );
-				}
-			});
-		}
-	});
+
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
