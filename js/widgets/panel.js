@@ -425,6 +425,8 @@ $.widget( "mobile.panel", {
 					self.element
 						.add( self._wrapper() )
 						.off( self._transitionEndEvents, complete )
+						
+					self.element	
 						.addClass( o.classes.panelClosed );
 
 					self._wrapper()
