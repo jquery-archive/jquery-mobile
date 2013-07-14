@@ -96,6 +96,10 @@
 		<div id="ui-body-test" class="ui-body ui-body-a ui-corner-all" style="margin-bottom:1em;">
 			<p>I am a div with classes ui-body, ui-body-<span class="theme">a</span> and ui-corner-all.</p>
 			<p><a href="#">I am a link</a></p>
+			<h4>Panels</h4>
+			<a href="#panel-reveal" data-role="button" data-inline="true" data-mini="true">Reveal</a>
+			<a href="#panel-overlay" data-role="button" data-inline="true" data-mini="true">Overlay</a>
+			<a href="#panel-push" data-role="button" data-inline="true" data-mini="true">Push</a>
 		</div>
 		
 		<div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
@@ -270,6 +274,39 @@
 			</ul>
 		</div>
 		<h4 style="display:none;">Footer</h4>
+	</div>
+
+	<div data-role="panel" id="panel-reveal">
+		<ul data-role="listview">
+			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+		</ul>
+		<br><br>
+		<button>Button</button>
+	</div>
+	
+	<div data-role="panel" id="panel-overlay" data-display="overlay">
+		<ul data-role="listview">
+			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+		</ul>
+		<br><br>
+		<button>Button</button>
+	</div>
+	
+	<div data-role="panel" id="panel-push" data-display="push">
+		<ul data-role="listview">
+			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+			<li><a href="#">List item</a></li>
+		</ul>
+		<br><br>
+		<button>Button</button>
 	</div>
 
 </div><!-- /page -->
