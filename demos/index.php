@@ -60,6 +60,8 @@
 			<li><a href="test/theming/" data-ajax="false">Theme inheritance</a></li>
 			<li data-role="list-divider">Icons</li>
 			<li><a href="test/icons/index.html" data-ajax="false">Grunticon - SVG icons with fallback</a></li>
+			<li data-role="list-divider">Panels</li>
+			<li><a href="test/panels/" data-ajax="false">External panels</a></li>
         </ul>
 
 	</div><!-- /content -->
