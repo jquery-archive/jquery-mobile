@@ -91,6 +91,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		// create the hide/show toggles
 		this.headers.not( "td" ).each( function() {
+
 			var $this = $( this ),
 				priority = $.mobile.getAttribute( this, "priority", true ),
 				$cells = $this.add( $this.data( "cells" ) );
@@ -155,13 +156,13 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		this._menu.appendTo( $popup );
 
-		$menuButton
-			.addClass( "ui-btn ui-btn-" + ( o.columnBtnTheme || "a" ) + " ui-corner-all ui-shadow ui-mini" )
-			.insertBefore( $table );
-
 		$popup
 			.insertBefore( $table )
 			.popup();
+
+		$menuButton
+			.addClass( "ui-btn ui-btn-" + ( o.columnBtnTheme || "a" ) + " ui-corner-all ui-shadow ui-mini" )
+			.insertBefore( $table );
 	},
 
 	_refreshColToggle: function () {
@@ -170,6 +171,9 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		// update columntoggles and $cells
 		this._addToggles( this._menu );
+
+		// check/uncheck
+		this._setToggleState();
 	},
 
 	_setToggleState: function() {
