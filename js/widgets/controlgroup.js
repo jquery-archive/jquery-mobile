@@ -14,6 +14,7 @@ define( [ "jquery",
 
 $.widget( "mobile.controlgroup", $.extend( {
 	options: {
+		enhanced: false,
 		theme: null,
 		shadow: false,
 		corners: true,
@@ -24,63 +25,86 @@ $.widget( "mobile.controlgroup", $.extend( {
 	},
 
 	_create: function() {
-		var $el = this.element,
-			inner = $( "<div class='ui-controlgroup-controls'></div>" ),
-			grouplegend = $el.children( "legend" );
-
-		// Apply the proto
-		$el.wrapInner( inner ).addClass( "ui-controlgroup" );
-		if ( grouplegend.length ) {
-			$( "<div role='heading' class='ui-controlgroup-label'></div>" ).append( grouplegend ).insertBefore( $el.children( 0 ) );
-		}
+		var elem = this.element,
+			opts = this.options;
 
 		$.extend( this, {
+			_ui: null,
+			_classes: "",
 			_initialRefresh: true
 		});
 
-		this._setOptions( this.options );
-
+		if ( !opts.enhanced ) {
+			this._ui = {
+				groupLegend: elem.children( "legend" ),
+				childWrapper: elem
+					.wrapInner( "<div class='ui-controlgroup-controls'></div>" )
+					.addClass( "ui-controlgroup" )
+					.children()
+			}
+			if ( this._ui.groupLegend.length > 0 ) {
+				$( "<div role='heading' class='ui-controlgroup-label'></div>" )
+					.append( this._ui.groupLegend )
+					.prependTo( elem );
+			}
+			this._setOptions( opts );
+		} else {
+			this._ui = {
+				groupLegend: elem.children( ".ui-controlgroup-label" ).children(),
+				childWrapper: elem.children( ".ui-controlgroup-controls" )
+			};
+		}
 	},
 
 	_init: function() {
 		this.refresh();
 	},
 
-	_setOptions: function( o ) {
-		var $el = this.element;
+	_setOptions: function( options ) {
+		var callRefresh, opts,
+			classes = "";
 
-		if ( o.type !== undefined ) {
-			$el
-				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
-				.addClass( "ui-controlgroup-" + o.type );
-			this.refresh();
+		// Must not be able to unset the type of the controlgroup
+		if ( options.type === null ) {
+			options.type = undefined;
 		}
+		opts = $.extend( {}, this.options, options );
 
-		if ( o.theme !== undefined ) {
-			$el.removeClass( "ui-group-theme-" + this.options.theme );
+		if ( opts.type != null ) {
+			classes += " ui-controlgroup-" + opts.type;
 
-			if ( o.theme ) {
-				$el.addClass( "ui-group-theme-" + o.theme );
+			// No need to call refresh if the type hasn't changed
+			if ( this.options.type !== options.type ) {
+				callRefresh = true;
 			}
 		}
 
-		if ( o.corners !== undefined ) {
-			$el.toggleClass( "ui-corner-all", o.corners );
+		if ( opts.theme != null && opts.theme !== "none" ) {
+			classes += " ui-group-theme-" + opts.theme;
 		}
 
-		if ( o.shadow !== undefined ) {
-			$el.find( ".ui-controlgroup-controls" ).toggleClass( "ui-shadow", o.shadow );
+		if ( opts.corners ) {
+			classes += " ui-corner-all";
 		}
 
-		if ( o.mini !== undefined ) {
-			$el.toggleClass( "ui-mini", o.mini );
+		if ( opts.shadow != undefined ) {
+			this._ui.childWrapper.toggleClass( "ui-shadow", opts.shadow );
 		}
 
-		return this._super( o );
+		if ( opts.mini ) {
+			classes += " ui-mini";
+		}
+
+		this._toggleClasses( this.element, "_classes", classes );
+		if ( callRefresh ) {
+			this.refresh();
+		}
+
+		return this._super( options );
 	},
 
 	container: function() {
-		return this.element.children( ".ui-controlgroup-controls" );
+		return this._ui.childWrapper;
 	},
 
 	refresh: function() {
