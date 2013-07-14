@@ -31,8 +31,7 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
-		var o = this.options,
-			$menu;
+		var o = this.options;
 
 		this._super();
 

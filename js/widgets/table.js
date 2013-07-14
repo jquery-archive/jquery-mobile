@@ -83,7 +83,7 @@ $.widget( "mobile.table", {
 
 		// propagate refresh on reflow/columntoggle
 		if ( create === undefined ) {
-			this.element.trigger( 'refresh' );
+			this.element.trigger( "refresh" );
 		}
 }
 
