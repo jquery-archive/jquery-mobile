@@ -28,34 +28,61 @@ $.widget( "mobile.table", $.mobile.table, {
 			return;
 		}
 
-		this.element.addClass( o.classes.reflowTable );
+		if( !o.enhanced ) {
+			this.element.addClass( o.classes.reflowTable );
+
+			this._enhanceReflow();
+		}
+
+		// bind to refresh call of table
+		this._on( this.element, {
+			refresh: "_refreshReflow"
+		});
+	},
+
+	_enhanceReflow: function () {
+		this._updateReflow();
+	},
+
+	_refreshReflow: function () {
+		this._updateReflow( );
+	},
+
+	_updateReflow: function () {
+		var $el = this,
+			o = this.options;
 
 		// get headers in reverse order so that top-level headers are appended last
-		$( this.allHeaders.get().reverse() ).each( function() {
-			// create the hide/show toggles
-			var $cells = $( this ).jqmData( "cells" ),
-				colstart = $( this ).jqmData( "colstart" ),
-				hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
-				text = $(this).text(),
+		$( $el.allHeaders.get().reverse() ).each( function() {
+			var that = this,
+				$cells = $( that ).data( "cells" ),
+				colstart = $.mobile.getAttribute( this, "colstart", true ),
+				hierarchyClass = $cells.not( that ).filter( "thead th" ).length && " ui-table-cell-label-top",
+				text = $( that ).text(),
 				iteration, filter;
 
 				if( text !== ""  ) {
 
 					if( hierarchyClass ) {
-						iteration = parseInt( $( this ).attr( "colspan" ), 10 );
+						iteration = parseInt( that.getAttribute( "colspan" ), 10 );
 						filter = "";
 
 						if( iteration ){
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 						}
-						$cells.filter( filter ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );
-					}
-					else {
-						$cells.prepend( "<b class='" + o.classes.cellLabels + "'>" + text + "</b>"  );
+
+						$el._addLabels( $cells.filter( filter ), o.classes.cellLabels + hierarchyClass, text );
+					} else {
+						$el._addLabels( $cells, o.classes.cellLabels, text );
 					}
 
 				}
 		});
+	},
+
+	_addLabels: function ( cells, label, text ) {
+		// .not fixes #6006
+		cells.not( ":has(b." + label + ")").prepend( "<b class='" + label + "'>" + text + "</b>"  );
 	}
 });
 
