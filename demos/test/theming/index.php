@@ -13,10 +13,10 @@
 			$( "#theme-selector input" ).on( "change", function( event ) {
 				var themeClass = $( "#theme-selector input:checked" ).attr( "id" );
 				
-				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b ui-page-theme-c" ).addClass( "ui-page-theme-" + themeClass );
-				$( "#ui-body-test" ).removeClass( "ui-body-a ui-body-b ui-body-c" ).addClass( "ui-body-" + themeClass );
-				$( "#ui-bar-test, #ui-bar-form" ).removeClass( "ui-bar-a ui-bar-b ui-bar-c" ).addClass( "ui-bar-" + themeClass );
-				$( ".ui-collapsible-content" ).removeClass( "ui-body-a ui-body-b ui-body-c" ).addClass( "ui-body-" + themeClass );
+				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( "ui-page-theme-" + themeClass );
+				$( "#ui-body-test" ).removeClass( "ui-body-a ui-body-b" ).addClass( "ui-body-" + themeClass );
+				$( "#ui-bar-test, #ui-bar-form" ).removeClass( "ui-bar-a ui-bar-b" ).addClass( "ui-bar-" + themeClass );
+				$( ".ui-collapsible-content" ).removeClass( "ui-body-a ui-body-b" ).addClass( "ui-body-" + themeClass );
 				$( ".theme" ).text( themeClass );
 			});
 			$( "#opt-shadow input" ).on( "change", function( event ) {
@@ -71,8 +71,6 @@
 					<input type="radio" name="theme" id="a" checked>
 					<label for="b">B</label>
 					<input type="radio" name="theme" id="b">
-					<label for="c">C</label>
-					<input type="radio" name="theme" id="c">
 				</fieldset>
 			</div>
 			<div data-role="fieldcontain" id="opt-shadow">
