@@ -720,6 +720,7 @@
 				$page.find('input').val('a');
 				$page.find('input').trigger('change');
 				setTimeout(function() {
+
 					deepEqual(
 						$select.find('.ui-screen-hidden').length,
 						9,
@@ -753,26 +754,30 @@
 			},
 
 			function() {
-				var $page = $( ".ui-page-active" ),
+				var $options,
+					$page = $( ".ui-page-active" ),
 					$filter = $page.find( ".ui-filter" ),
-					$select = $page.find( ".ui-select" );
+					$select = $page.find( ".ui-select select" );
 
 				// filter
 				$page.find('input').val('this goes');
 				$page.find('input').trigger('change');
+
 				setTimeout(function() {
+					$options = $select.find("option.ui-screen-hidden");
 					deepEqual(
-						$select.find('.ui-screen-hidden').length,
+						$options.length,
 						9,
 						"Filtering select options by option text"
 					);
-					
+
 					// clear 
 					$page.find('input').val('');
 					$page.find('input').trigger('change');
 					setTimeout(function() {
+						$options = $select.find("option.ui-screen-hidden");
 						deepEqual(
-							$select.find('.ui-screen-hidden').length,
+							$options.length,
 							0,
 							"Removing filter value shows all select options again"
 						);
