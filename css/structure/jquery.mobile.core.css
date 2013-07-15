@@ -47,6 +47,7 @@ div.ui-mobile-viewport {
 .ui-mobile .ui-page-active {
 	display: block;
 	overflow: visible;
+	overflow-x: hidden;
 }
 @media screen and (orientation: portrait) {
 	.ui-mobile .ui-page {
