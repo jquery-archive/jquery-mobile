@@ -41,7 +41,8 @@ $.widget( "mobile.controlgroup", $.extend( {
 					.wrapInner( "<div class='ui-controlgroup-controls'></div>" )
 					.addClass( "ui-controlgroup" )
 					.children()
-			}
+			};
+
 			if ( this._ui.groupLegend.length > 0 ) {
 				$( "<div role='heading' class='ui-controlgroup-label'></div>" )
 					.append( this._ui.groupLegend )
@@ -87,7 +88,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 			classes += " ui-corner-all";
 		}
 
-		if ( opts.shadow != undefined ) {
+		if ( opts.shadow !== undefined ) {
 			this._ui.childWrapper.toggleClass( "ui-shadow", opts.shadow );
 		}
 
