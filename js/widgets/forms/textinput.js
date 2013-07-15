@@ -117,18 +117,30 @@ $.widget( "mobile.textinput", {
 		// Autogrow
 		if ( isTextarea ) {
 			this._keyup = function() {
-				var scrollHeight = input[ 0 ].scrollHeight,
+				input.css( "height", 0 );
+
+				var paddingTop, paddingBottom, paddingHeight,
+					scrollHeight = input[ 0 ].scrollHeight,
 					clientHeight = input[ 0 ].clientHeight,
-					paddingTop, paddingBottom, paddingHeight;
+					borderTop = parseFloat( input.css( "border-top-width" ) ),
+					borderBottom = parseFloat( input.css( "border-bottom-width" ) ),
+					borderHeight = borderTop + borderBottom,
+					height = scrollHeight + borderHeight + extraLineHeight;
 
-
-				if ( clientHeight < scrollHeight ) {
+				// Padding is not included in scrollHeight and clientHeight by Firefox
+				// if no scrollbar is visible. Because textareas use the border-box
+				// box-sizing model, padding should be included in the new (assigned)
+				// height. Because the height is set to 0, clientHeight == 0 in Firefox.
+				// Therefore, we can use this to check if padding must be added.
+				if ( clientHeight === 0 ) {
 					paddingTop = parseFloat( input.css( "padding-top" ) );
 					paddingBottom = parseFloat( input.css( "padding-bottom" ) );
 					paddingHeight = paddingTop + paddingBottom;
 
-					input.height( scrollHeight - paddingHeight + extraLineHeight );
+					height += paddingHeight;
 				}
+
+				input.css( "height", height );
 			};
 
 			input.on( "keyup change input paste", function() {
