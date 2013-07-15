@@ -170,11 +170,6 @@
 	left: 0;
 }
 
-/* always disable overflow-x to prevent zoom issue on Android */
-.ui-page-active.ui-page-panel {
-	overflow-x: hidden;
-}
-
 /* shadows and borders */
 .ui-panel-display-reveal {
 	-webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
