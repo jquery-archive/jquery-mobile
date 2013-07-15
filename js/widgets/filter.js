@@ -172,7 +172,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				var el = this.element,
 					o = this.options,
 					wrapper = $( "<div>", {
-						"class": o.wrapperClass + " ui-filter ",
+						"class":  "ui-filter " + o.wrapperClass,
 						"role": "search",
 						"id" : "ui-filter-" + this.uuid
 					}),
@@ -213,7 +213,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				if ( !o.enhanced ) {
 					search = this._enhance( items );
 				} else {
-					search = $( "#ui-filter-" + this.uuid ).find( "input" );
+					search = $( "." + o.wrapperClass ).find( "input" );
 				}
 
 				this._on( search, {

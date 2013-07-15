@@ -524,7 +524,7 @@
 		]);
 	});
 
-	asyncTest( "Filter can be set pre-enhanced (if data-id is provided)", function () {
+	asyncTest( "Filter can be set pre-enhanced (if wrapper class is provided)", function () {
 		$.testHelper.pageSequence( [
 			function(){
 				$.mobile.changePage( home );
