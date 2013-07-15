@@ -118,23 +118,25 @@ $.widget( "mobile.controlgroup", $.extend( {
 		this._initialRefresh = false;
 	},
 
+	// Caveat: If the legend is not the first child of the controlgroup at enhance
+	// time, it will be after _destroy().
 	_destroy: function() {
-		var ui, elem;
+		var ui, buttons;
 
 		if ( this.options.enhanced ) {
 			return this;
 		}
 
 		ui = this._ui;
-		elem = this.element;
+		buttons = this.element
+			.removeClass( "ui-controlgroup " + this._classes )
+			.find( ".ui-btn" )
+			.not( ".ui-slider-handle" );
 
-		this._removeFirstLastClasses( elem.find( ".ui-btn" ).not( ".ui-slider-handle" ) );
+		this._removeFirstLastClasses( buttons );
 
-		this.element
-			.prepend( ui.groupLegend.children() )
-			.removeClass( "ui-controlgroup " + this._classes );
+		ui.groupLegend.unwrap();
 		ui.childWrapper.children().unwrap();
-		ui.groupLegend.remove();
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
