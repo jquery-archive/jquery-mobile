@@ -119,7 +119,8 @@ $.widget( "mobile.textinput", {
 			this._keyup = function() {
 				input.css( "height", 0 );
 
-				var scrollHeight = input[ 0 ].scrollHeight,
+				var paddingTop, paddingBottom, paddingHeight,
+					scrollHeight = input[ 0 ].scrollHeight,
 					clientHeight = input[ 0 ].clientHeight,
 					borderTop = parseFloat( input.css( "border-top-width" ) ),
 					borderBottom = parseFloat( input.css( "border-bottom-width" ) ),
@@ -132,9 +133,9 @@ $.widget( "mobile.textinput", {
 				// height. Because the height is set to 0, clientHeight == 0 in Firefox.
 				// Therefore, we can use this to check if padding must be added.
 				if ( clientHeight === 0 ) {
-					var paddingTop = parseFloat( input.css( "padding-top" ) ),
-						paddingBottom = parseFloat( input.css( "padding-bottom" ) ),
-						paddingHeight = paddingTop + paddingBottom;
+					paddingTop = parseFloat( input.css( "padding-top" ) );
+					paddingBottom = parseFloat( input.css( "padding-bottom" ) );
+					paddingHeight = paddingTop + paddingBottom;
 
 					height += paddingHeight;
 				}
