@@ -46,36 +46,36 @@ li.ui-block-e {
 	margin-left: .3125em;
 }
 
-.ui-grid-a .ui-block-a,
-.ui-grid-a .ui-block-b {
+.ui-grid-a > .ui-block-a,
+.ui-grid-a > .ui-block-b {
 	/* width: 49.95%; IE7 */
 	/* margin-right: -.5px; BB5 */
 	width: 50%;
 }
-.ui-grid-b .ui-block-a,
-.ui-grid-b .ui-block-b,
-.ui-grid-b .ui-block-c {
+.ui-grid-b > .ui-block-a,
+.ui-grid-b > .ui-block-b,
+.ui-grid-b > .ui-block-c {
 	/* width: 33.25%; IE7 */
 	/* margin-right: -.5px; BB5 */
 	width: 33.333%;
 }
-.ui-grid-c .ui-block-a,
-.ui-grid-c .ui-block-b,
-.ui-grid-c .ui-block-c,
-.ui-grid-c .ui-block-d {
+.ui-grid-c > .ui-block-a,
+.ui-grid-c > .ui-block-b,
+.ui-grid-c > .ui-block-c,
+.ui-grid-c > .ui-block-d {
 	/* width: 24.925%; IE7 */
 	/* margin-right: -.5px; BB5 */
 	width: 25%;
 }
-.ui-grid-d .ui-block-a,
-.ui-grid-d .ui-block-b,
-.ui-grid-d .ui-block-c,
-.ui-grid-d .ui-block-d,
-.ui-grid-d .ui-block-e {
+.ui-grid-d > .ui-block-a,
+.ui-grid-d > .ui-block-b,
+.ui-grid-d > .ui-block-c,
+.ui-grid-d > .ui-block-d,
+.ui-grid-d > .ui-block-e {
 	/* width: 19.925%; IE7 */
 	width: 20%;
 }
-.ui-grid-solo .ui-block-a {
+.ui-grid-solo > .ui-block-a {
 	width: 100%;
 	float: none; 
 }
