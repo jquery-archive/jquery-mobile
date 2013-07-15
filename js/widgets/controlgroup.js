@@ -116,6 +116,25 @@ $.widget( "mobile.controlgroup", $.extend( {
 		}
 		this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
 		this._initialRefresh = false;
+	},
+
+	_destroy: function() {
+		var ui, elem;
+
+		if ( this.options.enhanced ) {
+			return this;
+		}
+
+		ui = this._ui;
+		elem = this.element;
+
+		this._removeFirstLastClasses( elem.find( ".ui-btn" ).not( ".ui-slider-handle" ) );
+
+		this.element
+			.prepend( ui.groupLegend.children() )
+			.removeClass( "ui-controlgroup " + this._classes );
+		ui.childWrapper.children().unwrap();
+		ui.groupLegend.remove();
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
