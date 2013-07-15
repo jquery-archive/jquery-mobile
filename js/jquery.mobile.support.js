@@ -264,7 +264,7 @@ function inlineSVG() {
 		svg = !!w.document.createElementNS && !!w.document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect && !!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1"),
 		support = function( data ) {
 			if ( !( data && svg ) ) {
-				$( "html" ).addClass( "no-svg" );
+				$( "html" ).addClass( "ui-nosvg" );
 			}
 		},
 		img = new w.Image();
