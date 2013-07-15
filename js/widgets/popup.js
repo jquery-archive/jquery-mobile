@@ -456,11 +456,7 @@ $.widget( "mobile.popup", {
 	_calculateFinalLocation: function( desired, clampInfo ) {
 		var ret,
 			rc = clampInfo.rc,
-			menuSize = clampInfo.menuSize,
-			// fix for $.mobile.document.height() bug in core 1.7.2.
-			docEl = document.documentElement,
-			docBody = document.body,
-			docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
+			menuSize = clampInfo.menuSize;
 
 
 		// Center the menu over the desired coordinates, while not going outside
@@ -476,7 +472,7 @@ $.widget( "mobile.popup", {
 		// If the height of the menu is smaller than the height of the document
 		// align the bottom with the bottom of the document
 
-		ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - docHeight ) );
+		ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $.mobile.document.height() ) );
 
 		return { left: ret.x, top: ret.y };
 	},
