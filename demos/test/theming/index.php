@@ -262,7 +262,6 @@
 	</div><!-- /content -->
 	
 	<div data-role="footer" data-position="fixed">
-		<h4 style="display:none;">Footer</h4>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#">Menu item 1</a></li>
@@ -270,6 +269,7 @@
 				<li><a href="#">Menu item 1</a></li>
 			</ul>
 		</div>
+		<h4 style="display:none;">Footer</h4>
 	</div>
 
 </div><!-- /page -->
