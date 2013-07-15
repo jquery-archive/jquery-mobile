@@ -36,6 +36,9 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// Automatically load and show pages based on location.hash
 		hashListeningEnabled: true,
 
+		// Allow dynamically generated initial pages
+		dynamicInitialPage: false,
+
 		// disable to prevent jquery from bothering with links
 		linkBindingEnabled: true,
 
