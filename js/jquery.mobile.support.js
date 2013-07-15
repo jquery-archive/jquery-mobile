@@ -281,7 +281,7 @@ inlineSVG();
 
 // For ruling out shadows via css
 if ( !$.support.boxShadow ) {
-	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
+	$( "html" ).addClass( "ui-noboxshadow" );
 }
 
 })( jQuery );

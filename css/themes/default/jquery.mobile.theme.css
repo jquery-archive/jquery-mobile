@@ -558,13 +558,13 @@ html body .ui-group-theme-b .ui-focus,
 	outline: 0;
 }
 /* Unset box-shadow in browsers that don't do it right */
-.ui-mobile-nosupport-boxshadow * {
+.ui-noboxshadow * {
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 }
-.ui-mobile-nosupport-boxshadow .ui-btn:focus,
-.ui-mobile-nosupport-boxshadow .ui-focus {
+.ui-noboxshadow .ui-btn:focus,
+.ui-noboxshadow .ui-focus {
 	outline-width: 1px;
 	outline-style: auto;
 }
