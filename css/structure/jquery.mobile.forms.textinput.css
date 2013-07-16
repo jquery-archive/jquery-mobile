@@ -81,7 +81,6 @@ textarea.ui-mini {
 	filter: Alpha(Opacity=50);
 	opacity: .5;
 }
-/* Clear button position */;
 .ui-input-search .ui-btn.ui-input-clear,
 .ui-input-text .ui-btn.ui-input-clear {
 	position: absolute;

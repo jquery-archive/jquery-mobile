@@ -35,7 +35,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 					.focus()
 					.trigger( "change" );
 
-			this._clearbtn.addClass( "ui-input-clear-hidden" );
+			this._clearBtn.addClass( "ui-input-clear-hidden" );
 			event.preventDefault();
 		},
 
