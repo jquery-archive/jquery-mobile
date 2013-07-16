@@ -87,17 +87,18 @@ $.widget( "mobile.checkboxradio", $.extend( {
 
 	_enhance: function(){
 
-		this.label.addClass( "ui-btn ui-corner-all ui-btn-icon-" + this.options.iconpos );
+		this.label.addClass( "ui-btn ui-corner-all");
 		// Wrap the input + label in a div
 		this.input.add( this.label ).wrapAll( this._wrapper() );
 		this._setOptions({
-			"theme": this.options.theme
+			"theme": this.options.theme,
+			"iconpos": this.options.iconpos
 		});
 
 	},
 
 	_wrapper: function(){
-		return $( "<div class='"  + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " ui-" + this.inputtype + ( this.options.disabled ? " ui-disabled" : "" ) + "' id='" + this.options.id + "'>" );
+		return $( "<div class='"  + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " ui-" + this.inputtype + ( this.options.disabled ? " ui-disabled" : "" ) + "' >" );
 	},
 
 	_handleInputFocus: function() {
@@ -237,8 +238,10 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		if( options.wrapperClass !== undefined ) {
 			this.widget().removeClass( this.options.class ).addClass( options.wrapperClass );
 		}
-		if( options.iconpos !== undefined && ( this.element.parents( ".ui-controlgroup-horizontal" ).length === 0 ) ) {
+		if( options.iconpos !== undefined && ( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length === 0 ) ) {
 			this.label.removeClass( "ui-btn-icon-" + this.options.iconpos ).addClass( "ui-btn-icon-" + options.iconpos );
+		} else if( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length !== 0 ){
+			this.label.removeClass( "ui-btn-icon-" + this.options.iconpos );
 		}
 	}
 
