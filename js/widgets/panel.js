@@ -260,19 +260,19 @@ $.widget( "mobile.panel", {
 
 		$.mobile.document
 			// Close the panel if another panel on the page opens
-			.on( "panelbeforeopen","[data-role='page']", function( e ) {
+			.on( "panelbeforeopen", ":jqmData(role='page')", function( e ) {
 				if ( self._open && e.target !== self.element[ 0 ] ) {
 					self.close();
 				}
 			})
-			// clean up open panels after page hide
-			.on( "pagehide","[data-role='page']", function(/* e */) {
+			// Clean up open panels after page hide
+			.on( "pagehide", ":jqmData(role='page')", function(/* e */) {
 				if ( self._open ) {
 					self.close( true );
 				}
 			})
-			// on escape, close? might need to have a target check too...
-			.on( "keyup.panel","[data-role='page']", function( e ) {
+			// On escape, close? might need to have a target check too...
+			.on( "keyup.panel", ":jqmData(role='page')", function( e ) {
 				if ( e.keyCode === 27 && self._open ) {
 					self.close();
 				}
