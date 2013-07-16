@@ -55,7 +55,7 @@
         <div data-demo-html="true">
         <form>
             <label for="textarea-1">Textarea:</label>
-            <textarea cols="40" rows="8" name="textarea-1" id="textarea-1"></textarea>
+            <textarea name="textarea-1" id="textarea-1"></textarea>
         </form>
         </div><!-- /demo-html -->
 
