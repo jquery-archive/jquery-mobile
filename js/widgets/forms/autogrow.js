@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-	$.widget( "mobile.textinput", {
+	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
 			autogrow:true,
 			keyupTimeoutBuffer: 100

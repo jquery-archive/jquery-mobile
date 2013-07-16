@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-	$.widget( "mobile.textinput", {
+	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
 			clearBtn: false,
 			clearBtnText: "clear text"
@@ -106,10 +106,11 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_toggleClear: function() {
-			var self = this;
-			setTimeout( function() {
-				self._clearBtn.toggleClass( "ui-input-clear-hidden", !self.element.val() );
-			}, 0);
+			this._delay( "_toggleClearClass", 0 );
+		},
+
+		_toggleClearClass: function(){
+			this._clearBtn.toggleClass( "ui-input-clear-hidden", !this.element.val() );
 		},
 
 		_destroyClear: function() {

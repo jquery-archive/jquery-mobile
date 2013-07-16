@@ -16,8 +16,7 @@ $.widget( "mobile.textinput", {
 		mini: false,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		classes: "",
-		id: "",
+		wrapperClass: "",
 		enhanced: false
 	},
 
@@ -42,6 +41,10 @@ $.widget( "mobile.textinput", {
 
 		this._autoCorrect();
 
+		if( this.element[0].disabled ){
+			this.options.disabled = true;
+		}
+
 		if( !o.enhanced ) {
 			this._enhance();
 		}
@@ -51,17 +54,23 @@ $.widget( "mobile.textinput", {
 			"blur": "_handleBlur"
 		});
 
-		this._setOptions( this.options );
+	},
+
+	refresh: function(){
+		this.setOptions({
+			"disabled" : this.element.is(":disabled")
+		});
 	},
 
 	_enhance: function(){
 
 		if( this.isTextarea ) {
-			this.element.addClass( "ui-input-text" + this.themeclass );
+			this.element.addClass( "ui-input-text" );
 		}
 
 		if( this.element.is( "textarea, [data-" + ( $.mobile.ns || "" ) + "type='range']" ) ){
 			this.element.addClass( "ui-shadow-inset" );
+			this._setOptions( this.options );
 		}
 
 		//"search" and "text" input widgets
@@ -76,7 +85,7 @@ $.widget( "mobile.textinput", {
 	},
 
 	_wrap: function(){
-		return $( "<div class='" + ( this.isSearch ? "ui-input-search" : "ui-input-text" ) + " ui-shadow-inset'></div>" );
+		return $( "<div class='" + ( this.isSearch ? "ui-input-search" : "ui-input-text" ) + " ui-body-" + (( this.options.theme === null ) ? "inherit": this.options.theme ) + ( this.options.corners ? " ui-corner-all": "" ) + ( this.options.mini ? " ui-mini": "" ) + ( this.options.disabled ? " ui-disabled ": "" ) + " ui-shadow-inset'></div>" );
 	},
 
 	_autoCorrect: function(){
@@ -110,35 +119,40 @@ $.widget( "mobile.textinput", {
 		this.element.addClass( $.mobile.focusClass );
 	},
 
-	_setOptions: function ( o ) {
+	_setOptions: function ( options ) {
 		var themeclass;
 
-		if( o.theme !== undefined ) {
-			themeclass = "ui-body-" + (( o.theme === null ) ? "inherit": o.theme );
+		this._super( options );
+
+		if( options.theme !== undefined ) {
+			themeclass = "ui-body-" + (( options.theme === null ) ? "inherit": options.theme );
 			this.widget().removeClass( this.themeclass ).addClass( themeclass );
 			this.themeclass = themeclass;
 		}
 
-		if( o.corners !== undefined ) {
-			this.widget().removeClass( "ui-corner-all" ).addClass( o.corners ? "ui-corner-all": "" );
+		if( options.corners !== undefined ) {
+			this.widget().removeClass( "ui-corner-all" ).addClass( options.corners ? "ui-corner-all": "" );
 		}
 
-		if( o.mini !== undefined ) {
-			this.widget().removeClass( "ui-mini" ).addClass( o.mini ? "ui-mini": "" );
+		if( options.mini !== undefined ) {
+			this.widget().removeClass( "ui-mini" ).addClass( options.mini ? "ui-mini": "" );
 		}
 
-		if( o.disabled !== undefined ) {
-			this.element.prop( "disabled", !!o.disabled );
+		if( options.disabled !== undefined ) {
+			this.element.prop( "disabled", !!options.disabled );
+			this.widget().toggleClass( "ui-disabled", !!options.disabled );
 		}
 
 	},
 
 	_destroy: function() {
-
+		if( this.options.enhanced ){
+			return;
+		}
 		if( this.inputNeedsWrap ){
 			this.element.unwrap();
 		}
-		this.element.removeClass( "ui-input-text " + this.themeclass + " ui-corner-all ui-mini " );
+		this.element.removeClass( "ui-input-text " + this.themeclass + " ui-corner-all ui-mini ui-disabled" );
 	}
 });
 
