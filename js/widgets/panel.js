@@ -41,6 +41,7 @@ $.widget( "mobile.panel", {
 	_panelID: null,
 	_closeLink: null,
 	_page: null,
+	_overlayTheme: null,
 	_modal: null,
 	_panelInner: null,
 	_wrapper: null,
@@ -55,10 +56,7 @@ $.widget( "mobile.panel", {
 			_panelID: $el.attr( "id" ),
 			_closeLink: $el.find( ":jqmData(rel='close')" ),
 			_page: ( page.length > 0 ) ? page : false,
-		});
-		
-		$.extend( this, {
-			_pageTheme: this._getPageTheme(),
+			_overlayTheme: this._getOverlayTheme,
 			_panelInner: this._getPanelInner(),
 			_wrapper: this._getWrapper,
 			_fixedToolbar: this._getFixedToolbar()
@@ -87,14 +85,12 @@ $.widget( "mobile.panel", {
 		this._bindSwipeEvents();
 	},
 	
-	_getPageTheme: function() {
-		if( !!this._page ) {
-			var $theme = $.data( this._page[ 0 ], "mobile-page" ).options.theme,
-			$pageThemeClass = "ui-body-" + $theme;
-		} else {
-			$pageThemeClass = "ui-body-a";
-		}
-		return $pageThemeClass;
+	_getOverlayTheme: function() {
+		// Overlay theme on body is the same as the page theme
+		var $overlayTheme = $.data( $.mobile.activePage[ 0 ], "mobile-page" ).options.theme,
+			$overlayThemeClass = "ui-overlay-" + $overlayTheme;
+
+		return $overlayThemeClass;
 	},
 	
 	_getPanelInner: function() {
@@ -103,6 +99,7 @@ $.widget( "mobile.panel", {
 		if ( $panelInner.length === 0 ) {
 			$panelInner = this.element.children().wrapAll( "<div class='" + this.options.classes.panelInner + "' />" ).parent();
 		}
+		
 		return $panelInner;
 	},
 	
@@ -321,9 +318,8 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( self.options.theme && self.options.display !== "overlay" ) {
-						$( ".ui-page-active" )
-							.removeClass( self._pageTheme )
-							.addClass( "ui-page-theme-" + self.options.theme );
+						$( ".ui-page-active" ).page( "removeContainerBackground" );
+						$.mobile.pageContainer.addClass( "ui-overlay-" + self.options.theme );
 					}
 
 					self.element
@@ -399,7 +395,8 @@ $.widget( "mobile.panel", {
 				},
 				complete = function() {
 					if ( self.options.theme && self.options.display !== "overlay" ) {
-						$( ".ui-page-active" ).removeClass( "ui-page-theme-" + self.options.theme ).addClass( self._pageTheme );
+						$( ".ui-page-active" ).page( "removeContainerBackground" );
+						$.mobile.pageContainer.addClass( self._overlayTheme );
 					}
 					self.element
 						.add( self._wrapper() )
