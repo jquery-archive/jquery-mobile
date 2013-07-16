@@ -116,13 +116,13 @@
 .ui-popup > .ui-btn-left,
 .ui-popup > .ui-btn-right {
 	position: absolute; 
-	top: -9px;
+	top: -11px;
 	margin: 0;
 	z-index: 1101;
 }
 .ui-popup > .ui-btn-left {
-	left: -9px;
+	left: -11px;
 }
 .ui-popup > .ui-btn-right {
-	right: -9px;
+	right: -11px;
 }

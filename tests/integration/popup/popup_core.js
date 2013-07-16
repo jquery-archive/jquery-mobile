@@ -9,7 +9,7 @@
 			var $popup = $( document.getElementById( popupId ) ),
 				link = $( linkSelector )[ 0 ];
 
-			expect( 14 );
+			expect( 13 );
 
 			$.testHelper.detailedEventCascade([
 				function() {
@@ -25,12 +25,9 @@
 				},
 
 				function( result ) {
-					var theOffset = $( contentSelector ).offset();
-
 					deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), true, popupId + ": 'aria-expanded' attribute is set to true when the popup is open" );
 					ok( !$popup.parent().prev().hasClass( "ui-screen-hidden" ), popupId + ": Open popup screen is not hidden" );
 					ok( $popup.attr( "class" ).match( /( |^)ui-body-([a-z]|inherit)( |$)/ ), popupId + ": Open popup has a valid theme" );
-					ok( theOffset.left >= 15 && theOffset.top >= 30, popupId + ": Open popup top left coord is at least (15, 30)" );
 
 					$popup.popup( "option", "overlayTheme", "a" );
 					ok( $popup.parent().prev().hasClass( "ui-overlay-a" ), popupId + ": Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );

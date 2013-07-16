@@ -94,7 +94,7 @@
 		var $inherited = $( "#checkbox-inherit-theme" ),
 			$explicit = $( "#checkbox-explicit-theme" );
 
-		deepEqual( $inherited.siblings("label").css( "background-color" ), "rgb(221, 221, 221)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+		deepEqual( $inherited.siblings("label").css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
 		ok( $explicit.siblings("label").hasClass( "ui-btn-b" ), "should not inherit" );
 	});
 

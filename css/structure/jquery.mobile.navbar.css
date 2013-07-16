@@ -66,13 +66,19 @@
 	border-top-width: 0;
 	border-bottom-width: 0;
 }
-.ui-header .ui-navbar .ui-grid-duo .ui-btn,
-.ui-footer .ui-navbar .ui-grid-duo .ui-btn {
-	border-top-width: 1px;
-}
 .ui-header .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
 .ui-footer .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
 .ui-header .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn,
 .ui-footer .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn {
 	border-top-width: 0;
+}
+.ui-header .ui-title ~ .ui-navbar .ui-btn,
+.ui-footer .ui-title ~ .ui-navbar .ui-btn,
+.ui-header .ui-navbar .ui-grid-duo .ui-btn,
+.ui-footer .ui-navbar .ui-grid-duo .ui-btn,
+.ui-header .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
+.ui-footer .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
+.ui-header .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn,
+.ui-footer .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn {
+	border-top-width: 1px;
 }
