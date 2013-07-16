@@ -21,8 +21,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	options: {
 		theme: null,
 		mini: false,
-		class: null,
-		id: null,
+		wrapperClass: null,
 		enhanced: false,
 		iconpos: "left"
 
