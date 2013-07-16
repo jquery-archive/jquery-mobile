@@ -20,7 +20,7 @@ $.extend( $.Widget.prototype, {
 							return "-" + c.toLowerCase();
 						}), true );
 
-			if ( value !== undefined ) {
+			if ( value != null ) {
 				options[ option ] = value;
 			}
 		});
