@@ -107,24 +107,12 @@ $.widget( "mobile.panel", {
 	},
 	
 	_getWrapper: function() {
-		if( !!this._page ) {
-			var $wrapper = this._page.find( "." + this.options.classes.contentWrap );
-			
-			if ( $wrapper.length === 0 ) {
-				$wrapper = this._page.children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" )
-					.wrapAll( "<div class='" + this.options.classes.contentWrap + " " + this._getPageTheme() + "' />" )
-					.parent();
-				if ( $.support.cssTransform3d && !!this.options.animate ) {
-					$wrapper.addClass( this.options.classes.animate );
-				}
-			}
-		} else {
-			$wrapper = $( ".ui-page-active" );
-			
-			if ( $.support.cssTransform3d && !!this.options.animate ) {
-				$wrapper.addClass( this.options.classes.animate );
-			}
+		$wrapper = $( ".ui-page-active" );
+		
+		if ( $.support.cssTransform3d && !!this.options.animate ) {
+			$wrapper.addClass( this.options.classes.animate );
 		}
+
 		return $wrapper;
 	},
 	
