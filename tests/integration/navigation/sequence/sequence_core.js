@@ -1,5 +1,6 @@
 (function($) {
-
+	//disable inlineSVG support test
+	$.support.inlineSVG = $.noop;
 	// The following tests are not independent of each other. Thus, if you find
 	// that one of them fails, and it causes the failure of the rest of the tests,
 	// but that, if you change the order of the tests, it passes, then you should

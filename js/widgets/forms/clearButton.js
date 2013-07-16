@@ -86,7 +86,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_unbindClear: function() {
 			this._off( this._clearBtn, "click");
-			this._off( this.element, "keyup, change, input, focus, blur, cut, paste" );
+			this._off( this.element, "keyup change input focus blur cut paste" );
 		},
 
 		_setOptions:function( options ) {
