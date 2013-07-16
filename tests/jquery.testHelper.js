@@ -209,7 +209,7 @@
 				// continue in the sequence to alert possible failures
 				var warnTimer = setTimeout(function() {
 					self.eventCascade( sequence, true );
-				}, 2000);
+				}, 4000);
 
 				// bind the recursive call to the event
 				( self.eventTarget || $.mobile.pageContainer ).one(event, function( event, data ) {
