@@ -10,41 +10,61 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.regis
 (function( $, undefined ) {
 
 $.widget( "mobile.table", {
+
 	options: {
 		classes: {
 			table: "ui-table"
-		}
+		},
+		referenceClass: "",
+		enhanced: false
 	},
 
 	_create: function() {
-		var $el = this.element,
-			trs = this.element.find( "thead tr" ),
-			headers = this.element.find( "tr:eq(0)" ).children(),
-			allHeaders = headers.add( trs.children() );
+		var o = this.options;
 
-		this.element.addClass( this.options.classes.table );
+		if ( !o.enhanced ) {
+			this.element.addClass( this.options.classes.table );
+		}
 
+		// extend here, assign on refresh > _setHeaders
 		$.extend( this, {
 
 			// Expose headers and allHeaders properties on the widget
 			// headers references the THs within the first TR in the table
-			headers: headers,
+			headers: undefined,
 
 			// allHeaders references headers, plus all THs in the thead, which may include several rows, or not
-			allHeaders: allHeaders
+			allHeaders: undefined
 		});
+
+		this.refresh( true );
+	},
+
+	_setHeaders: function() {
+		var trs = this.element.find( "thead tr" );
+
+		this.headers = this.element.find( "tr:eq(0)" ).children();
+		this.allHeaders = this.headers.add( trs.children() );
+	},
+
+	refresh: function( create ) {
+		var $el = this.element,
+			trs = $el.find( "thead tr" );
+
+		// updating headers on refresh (fixes #5880)
+		this._setHeaders();
 
 		trs.each( function() {
 			var coltally = 0,
 				$this = $( this );
 
 			$this.children().each( function() {
-				var $this = $( this ),
-					span = parseInt( $this.attr( "colspan" ), 10 ),
+				var that = this,
+					span = parseInt( $.mobile.getAttribute( that, "colspan", true), 10 ),
 					sel = ":nth-child(" + ( coltally + 1 ) + ")",
 					j;
 
-				$this.jqmData( "colstart", coltally + 1 );
+				that.setAttribute( "data-colstart", coltally + 1 );
 
 				if( span ) {
 					for( j = 0; j < span - 1; j++ ) {
@@ -53,14 +73,20 @@ $.widget( "mobile.table", {
 					}
 				}
 
-				// Store "cells" data on header as a reference to all cells in the same column as this TH
-				$this
-					.jqmData( "cells", $el.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( sel ) );
+				// Store "cells" data on header as a reference to all cells in the 
+				// same column as this TH
+				$( that ).data( "cells", $el.find( "tr" ).not( trs.eq( 0 ) ).not( that ).children( sel ) );
 
 				coltally++;
 			});
 		});
-	}
+
+		// propagate refresh on reflow/columntoggle
+		if ( create === undefined ) {
+			this.element.trigger( "refresh" );
+		}
+}
+
 });
 
 $.mobile.table.initSelector = ":jqmData(role='table')";
