@@ -39,11 +39,14 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
 			checkedClass = "ui-" + checkedState,
-			uncheckedClass = "ui-" + uncheckedState,
-			wrapper;
+			uncheckedClass = "ui-" + uncheckedState;
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
 			return;
+		}
+
+		if( this.element[0].disabled ){
+			this.options.disabled = true;
 		}
 
 		o.iconpos = inheritAttr( input, "iconpos" ) || label.attr( "data-" + $.mobile.ns + "iconpos" ) || o.iconpos,
@@ -79,7 +82,6 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		});
 
 		this._handleFormReset();
-		this._setOptions( o );
 		this.refresh();
 	},
 
@@ -87,20 +89,19 @@ $.widget( "mobile.checkboxradio", $.extend( {
 
 		this.label.addClass( "ui-btn ui-corner-all ui-btn-icon-" + this.options.iconpos );
 		// Wrap the input + label in a div
-		input.add( this.label ).wrapAll( this._wrapper() );
+		this.input.add( this.label ).wrapAll( this._wrapper() );
+		this._setOptions({
+			"theme": this.options.theme
+		});
 
 	},
 
 	_wrapper: function(){
-		return $( "<div class='" + this.options.class + "ui-" + inputtype + "' id='" + this.options.id + "'>" );
+		return $( "<div class='"  + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " ui-" + this.inputtype + ( this.options.disabled ? " ui-disabled" : "" ) + "' id='" + this.options.id + "'>" );
 	},
 
 	_handleInputFocus: function() {
 		this.label.addClass( $.mobile.focusClass );
-	},
-
-	widget: function(){
-		return this.element.parent();
 	},
 
 	_handleInputBlur: function() {
@@ -126,6 +127,18 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		if ( this.label.parent().hasClass( "ui-state-disabled" ) ) {
 			event.stopPropagation();
 		}
+	},
+
+	enable: function(){
+		this._setOptions({
+			"disabled": false
+		});
+	},
+
+	disable: function(){
+		this._setOptions({
+			"disabled": true
+		});
 	},
 
 	_handleLabelVClick: function( event ) {
@@ -213,7 +226,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	_setOptions: function( options ) {
 		if( options.disabled !== undefined ) {
 			this.input.prop( "disabled", !!options.disabled );
-			this.widget().toggleClass( "ui-disabled", !!options.disabled )
+			this.widget().toggleClass( "ui-disabled", !!options.disabled );
 		}
 		if( options.mini !== undefined ) {
 			this.label.parent().toggleClass( "ui-mini", !!options.mini );
