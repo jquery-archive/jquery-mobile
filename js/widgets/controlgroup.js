@@ -34,7 +34,12 @@ $.widget( "mobile.controlgroup", $.extend( {
 			_initialRefresh: true
 		});
 
-		if ( !opts.enhanced ) {
+		if ( opts.enhanced ) {
+			this._ui = {
+				groupLegend: elem.children( ".ui-controlgroup-label" ).children(),
+				childWrapper: elem.children( ".ui-controlgroup-controls" )
+			};
+		} else {
 			this._ui = {
 				groupLegend: elem.children( "legend" ),
 				childWrapper: elem
@@ -49,11 +54,6 @@ $.widget( "mobile.controlgroup", $.extend( {
 					.prependTo( elem );
 			}
 			this._setOptions( opts );
-		} else {
-			this._ui = {
-				groupLegend: elem.children( ".ui-controlgroup-label" ).children(),
-				childWrapper: elem.children( ".ui-controlgroup-controls" )
-			};
 		}
 	},
 
