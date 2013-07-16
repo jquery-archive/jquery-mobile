@@ -94,7 +94,7 @@
 				<div data-demo-html="true">
 					<form>
 					<fieldset data-role="controlgroup" data-iconpos="right">
-						<legend>Horizontal, mini sized:</legend>
+						<legend>Icon right:</legend>
 						<input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
 						<label for="checkbox-h-6a">One</label>
 						<input type="checkbox" name="checkbox-h-6b" id="checkbox-h-6b">

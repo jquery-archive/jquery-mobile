@@ -1,74 +1,199 @@
-/* some unsets - more probably needed */
-.ui-mobile, .ui-mobile body { height: 99.9%; }
-.ui-mobile fieldset, .ui-page { padding: 0; margin: 0; }
-.ui-mobile a img, .ui-mobile fieldset { border-width: 0; }
-
-/* responsive page widths */
-.ui-mobile-viewport { margin: 0; overflow-x: visible; -webkit-text-size-adjust: 100%; -ms-text-size-adjust:none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+/* Some unsets */
+.ui-mobile,
+.ui-mobile body {
+	height: 99.9%;
+}
+.ui-mobile fieldset,
+.ui-page {
+	padding: 0;
+	margin: 0;
+}
+.ui-mobile a img,
+.ui-mobile fieldset {
+	border-width: 0;
+}
+.ui-mobile fieldset {
+	min-width: 0;
+}
+/* Viewport */
+.ui-mobile-viewport {
+	margin: 0;
+	overflow-x: visible;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust:none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 /* Issue #2066 */
 body.ui-mobile-viewport,
-div.ui-mobile-viewport { overflow-x: hidden; }
-
+div.ui-mobile-viewport {
+	overflow-x: hidden;
+}
 /* "page" containers - full-screen views, one should always be in view post-pageload */
-.ui-mobile [data-role=page], .ui-mobile [data-role=dialog], .ui-page { top: 0; left: 0; width: 100%; min-height: 100%; position: absolute; display: none; border: 0; }
-.ui-mobile .ui-page-active { display: block; overflow: visible; }
-
-/* on ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
-.ui-page { outline: none; }
-
-/*orientations from js are available */
-@media screen and (orientation: portrait){
-.ui-mobile, .ui-mobile .ui-page { min-height: 420px; }
+.ui-mobile [data-role=page],
+.ui-mobile [data-role=dialog],
+.ui-page {
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100%;
+	position: absolute;
+	display: none;
+	border: 0;
 }
-@media screen and (orientation: landscape){
-.ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
+/* On ios4, setting focus on the page element causes flashing during transitions when there is an outline, so we turn off outlines */
+.ui-page {
+	outline: none;
+}
+.ui-mobile .ui-page-active {
+	display: block;
+	overflow: visible;
+	overflow-x: hidden;
+}
+@media screen and (orientation: portrait) {
+	.ui-mobile .ui-page {
+		min-height: 420px;
+	}
+}
+@media screen and (orientation: landscape) {
+	.ui-mobile .ui-page {
+		min-height: 300px;
+	}
 }
 
-/* loading screen */
-.ui-loading .ui-loader { display: block; }
-.ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; left: 50%; border:0; }
-.ui-loader-default { background: none; filter: Alpha(Opacity=18); opacity: .18; width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
-.ui-loader-verbose { width: 200px; filter: Alpha(Opacity=88); opacity: .88; box-shadow: 0 1px 1px -1px #fff; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
-.ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
-.ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
-.ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; border-radius: 36px; }
-.ui-loader-verbose .ui-icon { margin: 0 auto 10px; filter: Alpha(Opacity=75); opacity: .75; }
-.ui-loader-textonly { padding: 15px; margin-left: -115px; }
-.ui-loader-textonly .ui-icon { display: none; }
-.ui-loader-fakefix { position: absolute; }
-/*fouc*/
-.ui-mobile-rendering > * { visibility: hidden; }
+/* Fouc */
+.ui-mobile-rendering > * {
+	visibility: hidden;
+}
 
-/*headers, content panels*/
-.ui-bar, .ui-body { position: relative; padding: .4em 15px; overflow: hidden; display: block; clear:both; }
-.ui-bar { font-size: 16px; margin: 0; }
-.ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
+/* Non-js content hiding */
+.ui-nojs {
+	position: absolute !important;
+	top: -9999px;
+	left: -9999px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px,1px,1px,1px);
+}
 
-.ui-header, .ui-footer { position: relative; zoom: 1; }
-.ui-mobile .ui-header, .ui-mobile .ui-footer { border-left-width: 0; border-right-width: 0; }
-.ui-header .ui-btn-left,
-.ui-header .ui-btn-right,
-.ui-footer .ui-btn-left,
-.ui-footer .ui-btn-right,
-.ui-header-fixed.ui-fixed-hidden .ui-btn-left,
-.ui-header-fixed.ui-fixed-hidden .ui-btn-right { position: absolute; top: 3px; }
-.ui-header-fixed .ui-btn-left,
-.ui-header-fixed .ui-btn-right { top: 4px;}
-.ui-header .ui-btn-left,
-.ui-footer .ui-btn-left { left: 5px; }
-.ui-header .ui-btn-right,
-.ui-footer .ui-btn-right { right: 5px; }
-.ui-footer > .ui-btn-icon-notext,
-.ui-header > .ui-btn-icon-notext,
-.ui-header-fixed.ui-fixed-hidden > .ui-btn-icon-notext { top: 6px; }
-.ui-header-fixed > .ui-btn-icon-notext { top: 7px;}
-.ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 30% .8em; padding: 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
-.ui-footer .ui-title { margin: .6em 15px .8em; }
+/* Loading screen */
+.ui-loading .ui-loader {
+	display: block;
+}
+.ui-loader {
+	display: none;
+	z-index: 9999999;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	border:0;
+}
+.ui-loader-default {
+	background: none;
+	filter: Alpha(Opacity=18);
+	opacity: .18;
+	width: 2.875em;
+	height: 2.875em;
+	margin-left: -1.4375em;
+	margin-top: -1.4375em;
+}
+.ui-loader-verbose {
+	width: 12.5em;
+	filter: Alpha(Opacity=88);
+	opacity: .88;
+	box-shadow: 0 1px 1px -1px #fff;
+	height: auto;
+	margin-left: -6.875em;
+	margin-top: -2.6875em;
+	padding: .625em;
+}
+.ui-loader-default h1 {
+	font-size: 0;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+.ui-loader-verbose h1 {
+	font-size: 1em;
+	margin: 0;
+	text-align: center;
+}
+.ui-loader .ui-icon-loading {
+	background-color: #000;
+	display: block;
+	margin: 0;
+	width: 2.75em;
+	height: 2.75em;
+	padding: .0625em;
+	-webkit-border-radius: 2.25em;
+	border-radius: 2.25em;
+}
+.ui-loader-verbose .ui-icon-loading {
+	margin: 0 auto .625em;
+	filter: Alpha(Opacity=75);
+	opacity: .75;
+}
+.ui-loader-textonly {
+	padding: .9375em;
+	margin-left: -7.1875em;
+}
+.ui-loader-textonly .ui-icon-loading {
+	display: none;
+}
+.ui-loader-fakefix {
+	position: absolute;
+}
 
-/* content area*/
-.ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
-
-/* corner styling for dialogs and popups */
+/* Headers, content panels */
+.ui-bar,
+.ui-body {
+	position: relative;
+	padding: .4em 1em;
+	overflow: hidden;
+	display: block;
+	clear: both;
+}
+.ui-bar h1,
+.ui-bar h2,
+.ui-bar h3,
+.ui-bar h4,
+.ui-bar h5,
+.ui-bar h6 {
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	display: inline-block;
+}
+.ui-header,
+.ui-footer {
+	border-width: 1px 0;
+	border-style: solid;
+	position: relative;
+}
+.ui-header .ui-title,
+.ui-footer .ui-title {
+	font-size: 1em;
+	min-height: 1.1em;
+	text-align: center;
+	display: block;
+	margin: 0 30%;
+	padding: .7em 0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	outline: 0 !important;
+}
+.ui-footer .ui-title {
+	margin: 0 1em;
+}
+.ui-content {
+	border-width: 0;
+	overflow: visible;
+	overflow-x: hidden;
+	padding: 1em;
+}
+/* Corner styling for dialogs and popups */
 .ui-corner-all > .ui-header:first-child,
 .ui-corner-all > .ui-content:first-child,
 .ui-corner-all > .ui-footer:first-child {
@@ -86,12 +211,174 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	border-bottom-right-radius: inherit;
 }
 
-/* icons sizing */
-.ui-icon { width: 18px; height: 18px; }
+/* Buttons and icons */
+.ui-btn {
+	font-size: 16px;
+	margin: .5em 0;
+	padding: .7em 1em;
+	display: block;
+	position: relative;
+	text-align: center;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.ui-btn-icon-notext {
+	padding: 0;
+	width: 1.75em;
+	height: 1.75em;
+	text-indent: -9999px;
+	white-space: nowrap !important;
+}
+.ui-mini {
+	font-size: 12.5px;
+}
+.ui-mini .ui-btn {
+	font-size: inherit;
+}
+.ui-mini .ui-controlgroup-label {
+	font-size: 16px;
+}
+/* Make buttons in toolbars default to mini and inline. */
+.ui-header .ui-btn,
+.ui-footer .ui-btn {
+	font-size: 12.5px;
+	display: inline-block;
+	vertical-align: middle;
+}
+/* To ensure same top and left/right position when ui-btn-left/right are added to something other than buttons. */
+.ui-header .ui-btn-left,
+.ui-header .ui-btn-right {
+	font-size: 12.5px;
+}
+.ui-mini.ui-btn-icon-notext,
+.ui-mini .ui-btn-icon-notext,
+.ui-header .ui-btn-icon-notext,
+.ui-footer .ui-btn-icon-notext {
+	font-size: 16px;	
+	padding: 0;
+}
+.ui-btn-inline {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: .625em;
+}
+.ui-btn-icon-left {
+	padding-left: 2.5em;
+}
+.ui-btn-icon-right,
+.ui-listview > li > .ui-btn[class*="ui-icon-"] {
+	padding-right: 2.5em;
+}
+.ui-btn-icon-top {
+	padding-top: 2.5em;
+}
+.ui-btn-icon-bottom {
+	padding-bottom: 2.5em;
+}
+.ui-header .ui-btn-icon-top,
+.ui-footer .ui-btn-icon-top,
+.ui-header .ui-btn-icon-bottom,
+.ui-footer .ui-btn-icon-bottom {
+	padding-left: .3125em;
+	padding-right: .3125em;
+}
+.ui-btn[class*="ui-icon-"]:after {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 22px;
+	height: 22px;
+}
+.ui-btn-icon-notext:after,
+.ui-btn-icon-left:after,
+.ui-btn-icon-right:after,
+.ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
+	top: 50%;
+	margin-top: -11px;
+}
+.ui-btn-icon-left:after {
+	left: .5625em;
+}
+.ui-btn-icon-right:after,
+.ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
+	right: .5625em;
+}
+.ui-mini.ui-btn-icon-left:after,
+.ui-mini .ui-btn-icon-left:after,
+.ui-header .ui-btn-icon-left:after,
+.ui-footer .ui-btn-icon-left:after {
+	left: .37em;
+}
+.ui-mini.ui-btn-icon-right:after,
+.ui-mini .ui-btn-icon-right:after,
+.ui-header .ui-btn-icon-right:after,
+.ui-footer .ui-btn-icon-right:after {
+	right: .37em;
+}
+.ui-btn-icon-notext:after,
+.ui-btn-icon-top:after,
+.ui-btn-icon-bottom:after {
+	left: 50%;
+	margin-left: -11px;
+}
+.ui-btn-icon-top:after {
+	top: .5625em;
+}
+.ui-btn-icon-bottom:after {
+	top: auto;
+	bottom: .5625em;
+}
+/* Buttons in header position classes */
+.ui-header .ui-btn-left,
+.ui-header .ui-btn-right,
+.ui-btn-left > [class*="ui-"],
+.ui-btn-right > [class*="ui-"] {
+	margin: 0;
+}
+.ui-btn-left,
+.ui-btn-right {
+	position: absolute;
+	top: .24em;
+}
+.ui-btn-left {
+	left: .4em;
+}
+.ui-btn-right {
+	right: .4em;
+}
+.ui-btn-icon-notext.ui-btn-left {
+	top: .3125em;
+	left: .3125em;
+}
+.ui-btn-icon-notext.ui-btn-right {
+	top: .3125em;
+	right: .3125em;
+}
 
-/* non-js content hiding */
-.ui-nojs { position: absolute; left: -9999px; }
+/* Form labels */
+.ui-mobile label,
+.ui-controlgroup-label {
+	display: block;
+	margin: 0 0 .4em;
+}
 
-/* accessible content hiding */
-.ui-hide-label label.ui-input-text, .ui-hide-label label.ui-select, .ui-hide-label label.ui-slider, .ui-hide-label label.ui-submit, .ui-hide-label .ui-controlgroup-label,
-.ui-hidden-accessible { position: absolute !important; left: -9999px; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
+/* Accessible content hiding */
+.ui-hide-label > label,
+.ui-hide-label .ui-controlgroup-label,
+.ui-hide-label .ui-rangeslider label,
+.ui-hidden-accessible {
+	position: absolute !important;
+	top: -9999px;
+	left: -9999px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px,1px,1px,1px);
+}

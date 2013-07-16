@@ -375,38 +375,59 @@
 	});
 
 	asyncTest( "drag should start only when clicked with left button", function(){
-		expect( 3 );
+		expect( 5 );
 
 		var control = $( "#mousedown-which-events" ),
 			widget = control.data( "mobile-slider" ),
 			slider = widget.slider,
 			handle = widget.handle,
 			eventNs = ".dragShouldStartOnlyWhenClickedWithLeftButton",
-			event = $.Event( "mousedown", { target: handle[ 0 ] } );
+			event;
 
 		$.testHelper.detailedEventCascade( [
 			function() {
-				event.which = 1;
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = 0;
 				slider.trigger( event );
 			},
 			{
 				slidestart: { src: control, event: "slidestart" + eventNs + "0" }
 			},
 			function( result ) {
-				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon left button press" );
-				event.which = 2;
+				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon 0 button press" );
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = 1;
 				slider.trigger( event );
 			},
 			{
 				slidestart: { src: control, event: "slidestart" + eventNs + "1" }
 			},
 			function( result ) {
-				deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon middle button press" );
-				event.which = 3;
+				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon left button press" );
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = undefined;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "1" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon undefined button press" );
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = 2;
 				slider.trigger( event );
 			},
 			{
 				slidestart: { src: control, event: "slidestart" + eventNs + "2" }
+			},
+			function( result ) {
+				deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon middle button press" );
+				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event.which = 3;
+				slider.trigger( event );
+			},
+			{
+				slidestart: { src: control, event: "slidestart" + eventNs + "3" }
 			},
 			function( result ) {
 				deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon right button press" );

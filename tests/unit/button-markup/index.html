@@ -7,7 +7,7 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../external/qunit.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
 	<script>
@@ -15,6 +15,7 @@
 			[
 				"jquery.mobile.buttonMarkup",
 				"widgets/controlgroup",
+				"widgets/toolbar",
 				"widgets/fixedToolbar",
 				"widgets/forms/button",
 			],
@@ -28,7 +29,7 @@
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
-	<script src="../swarminject.js"></script>
+	<script src="../../swarminject.js"></script>
 </head>
 <body>
 
@@ -39,10 +40,6 @@
 </ol>
 
 <div data-nstest-role="page" id="default">
-  <div data-nstest-role="header" id="page-header">
-    <a id="header-button-1" data-role="button" href="index.html">Header button 1</a>
-    <a id="header-button-2" data-role="button" href="index.html">Header button 2</a>
-  </div>
   <div data-nstest-role="content" id="control-group-content">
     <input type="submit" data-nstest-role="button" value="Double Enhanced?" id="double-enhanced" />
     <a href="index.html" data-nstest-role="button" data-nstest-shadow="false">No shadow</a>
@@ -66,14 +63,6 @@
 	<a id="iconpos3" data-nstest-role="button" href="index.html" data-nstest-icon="check" data-nstest-iconpos="right">Right iconpos</a>
 	<a id="hover-delay" data-nstest-role="button" href="index.html"></a>
   </div>
-	<div data-nstest-role="footer" id="control-group-footer" class="ui-bar" data-nstest-position="inline">
-		<div data-nstest-role="controlgroup" data-nstest-type="horizontal">
-			<a href="index.html" data-nstest-icon="delete">Remove</a>
-			<a href="index.html" data-nstest-icon="plus">Add</a>
-			<a href="index.html" data-nstest-icon="arrow-u">Up</a>
-			<a href="index.html" data-nstest-icon="arrow-d">Down</a>
-		</div>
-	</div>
 </div>
 </body>
 </html>

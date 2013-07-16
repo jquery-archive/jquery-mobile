@@ -8,7 +8,7 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../jquery.setNameSpace.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 
 
@@ -27,7 +27,24 @@
 		]);
 	</script>
 
-	<script src="../swarminject.js"></script>
+	<script src="../../swarminject.js"></script>
+	<style>
+		.ui-page-theme-p .ui-btn,
+		html .ui-bar-p .ui-btn,
+		html .ui-body-p .ui-btn,
+		html body .ui-btn.ui-btn-p,
+		html body .ui-group-theme-p .ui-btn,
+		[class*="ui-group-theme-"] .ui-btn.ui-btn-p,
+		/* Button visited */
+		.ui-page-theme-p .ui-btn:visited,
+		html .ui-bar-p .ui-btn:visited,
+		html .ui-body-p .ui-btn:visited,
+		html body .ui-btn.ui-btn-p:visited,
+		html body .ui-group-theme-p .ui-btn:visited,
+		[class*="ui-group-theme-"] .ui-btn.ui-btn-p:visited {
+			background: 			#000 /*{p-bup-background-color}*/;
+		}
+	</style>
 </head>
 <body>
   <h1 id="qunit-header">jQuery Mobile Button Test Suite</h1>
@@ -37,7 +54,7 @@
   </ol>
 
   <div data-nstest-role="page" data-nstest-theme="a">
-    <div data-nstest-role="content" data-nstest-theme="p">
+    <div data-nstest-role="content" data-nstest-theme="b">
       <button class="should-be-native">foo</button>
       <button id="enhanced">bar</button>
       <button id="text">foo</button>
@@ -46,7 +63,7 @@
         <input type="submit" id="hidden-element-addition" name="foo">foo</input>
       </form>
       <button id="theme-check" value="foo"></button>
-      <button id="theme-check-explicit" value="foo" data-nstest-theme="b"></button>
+      <button id="theme-check-explicit" value="foo" data-nstest-theme="a"></button>
       <button id="contains-html">Supports <sup>phrasing content</sup></button>
       <button id="val-contains-html" value="<fake markup>"></button>
     </div>

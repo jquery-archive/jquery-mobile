@@ -15,6 +15,14 @@
 	top: 0;
 	padding-top: 0;
 }
+.ui-header-fixed .ui-btn-left,
+.ui-header-fixed .ui-btn-right {
+	margin-top: 1px;
+}
+.ui-header-fixed.ui-fixed-hidden .ui-btn-left,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-right {
+	margin-top: 0;
+}
 .ui-footer-fixed {
 	bottom: -1px;
 	padding-bottom: 1px;
@@ -43,7 +51,14 @@
 }
 .ui-page-header-fullscreen .ui-fixed-hidden,
 .ui-page-footer-fullscreen .ui-fixed-hidden {
+	position: absolute !important;
+	top: -9999px;
 	left: -9999px;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px,1px,1px,1px);
 }
 .ui-header-fixed .ui-btn,
 .ui-footer-fixed .ui-btn { 

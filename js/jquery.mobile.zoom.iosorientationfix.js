@@ -10,14 +10,15 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 	$.mobile.iosorientationfixEnabled = true;
 
 	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
-	var ua = navigator.userAgent;
+	var ua = navigator.userAgent,
+		zoom,
+		evt, x, y, z, aig;
 	if( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test( ua ) && ua.indexOf( "AppleWebKit" ) > -1 ) ){
 		$.mobile.iosorientationfixEnabled = false;
 		return;
 	}
 
-	var zoom = $.mobile.zoom,
-		evt, x, y, z, aig;
+	zoom = $.mobile.zoom;
 
 	function checkTilt( e ) {
 		evt = e.originalEvent;

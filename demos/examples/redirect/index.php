@@ -66,12 +66,15 @@
 	
 	<div data-role="content" class="jqm-content">
 	
-         <h1>Redirection example: Source Page</h1>
-				 <p>Clicking the link below will cause a page to be loaded from the server which contains a special instruction that is captured in the sample code to load the final redirection target page.</p>
+		<h1>Redirection example: Source Page</h1>
+		
+		<p>Clicking the link below will cause a page to be loaded from the server which contains a special instruction that is captured in the sample code to load the final redirection target page.</p>
          
         <div data-demo-html="true" data-demo-js="#redirectCode" data-demo-php="source.php">
             <a href="redirect.php?to=redirect-target.html" data-role="button" data-inline="true">Redirect</a>
         </div><!--/demo-html -->
+		
+		<p>Note: This is a PHP demo that will only work on a server and not in a build (i.e. the demos that come with each release).</p>
 
 
 	</div><!-- /content -->

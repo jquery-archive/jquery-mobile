@@ -13,7 +13,8 @@
 	<script src="../../../js/"></script>
 	<script>
 $( document ).on( "click", function( e ) {
-	if ( $( e.target ).parents( "#arrow-popup-demo-content" ).length > 0 ) {
+	var el = $( e.target );
+	if ( el.attr( "id" ) === "clickable-area" || el.parents( "#clickable-area" ).length > 0 ) {
 		$( ".click-tracker" ).css( { left: e.pageX, top: e.pageY } );
 		$( "#arrow-popup" ).popup( "open", { x: e.pageX, y: e.pageY } );
 	}
@@ -58,7 +59,7 @@ $( document ).on( "click", function( e ) {
 				<p>And here's another paragraph to help the popup achieve a decent height.</p>
 			</div>
 		</div>
-		<a href="#"><div class="ui-body-c really-tall"></div></a>
+		<a id="clickable-area" href="#"><div class="ui-body-c really-tall"></div></a>
 
 	</div><!-- /content -->
 

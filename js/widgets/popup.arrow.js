@@ -14,12 +14,12 @@ function( jQuery ) {
 
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
-		'<div class="arrow-guide"></div>' +
-		'<div class="arrow-container' + ( ieHack ? ' ie' : '' ) + '">' +
-			'<div class="arrow">' +
-				'<div class="arrow-background"></div>' +
-			'</div>' +
-		'</div>'
+		"<div class='arrow-guide'></div>" +
+		"<div class='arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
+			"<div class='arrow'>" +
+				"<div class='arrow-background'></div>" +
+			"</div>" +
+		"</div>"
 	),
 	// Needed for transforming coordinates from screen to arrow background
 	txFactor = Math.sqrt( 2 ) / 2;
@@ -53,7 +53,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	_updateArrow: function( direction ) {
 		var ar = this._ui.arrow,
 			oldTheme = ar.ct.jqmData( "oldTheme" ),
-			theme = "ui-body-" + ( this.options.theme || $.mobile.getInheritedTheme( this.element, "c" ) );
+			theme = "ui-body-" + ( this.options.theme || "a" );
 
 		// Remove old direction and theme
 		ar.ct.removeClass( "l t r b" );
@@ -137,9 +137,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	},
 
 	_placementCoords: function( desired ) {
-		var state, best, params, bgOffset, elOffset, diff,
-			bgRef = {},
-			ar = this._ui.arrow ;
+		var state, best, params, bgOffset, elOffset, diff, bgRef, ar;
 
 		if ( !this.options.arrow ) {
 			return this._super( desired );
@@ -147,8 +145,9 @@ $.widget( "mobile.popup", $.mobile.popup, {
 
 		ar.arEls.show();
 
+		bgRef = {};
+		ar = this._ui.arrow;
 		state = this._getPlacementState( true );
-
 		params = {
 			"l": { fst: "x", snd: "y", prop: "top", dimKey: "cy", oDimKey: "cx", offsetFactor: 1, tipOffset:  -state.arHalf.cx, arrowOffsetFactor: 0 },
 			"r": { fst: "x", snd: "y", prop: "top", dimKey: "cy", oDimKey: "cx", offsetFactor: -1, tipOffset: state.arHalf.cx + state.contentBox.cx, arrowOffsetFactor: 1 },
@@ -194,17 +193,23 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		return best.result;
 	},
 
-	_setArrow: function( value ) {
-		var ar = this._ui.arrow;
+	_setOptions: function( o ) {
+		var ar;
 
-		if ( value ) {
-			if ( !ar ) {
-				ar = this._ui.arrow = getArrow();
+		if ( o.arrow !== undefined ) {
+			ar = this._ui.arrow;
+
+			if ( o.arrow ) {
+				if ( !ar ) {
+					ar = this._ui.arrow = getArrow();
+				}
+				ar.arEls.appendTo( this.element ).hide();
+			} else if ( ar ) {
+				ar.arEls.remove();
 			}
-			ar.arEls.appendTo( this.element ).hide();
-		} else if ( ar ) {
-			ar.arEls.remove();
 		}
+
+		return this._super( o );
 	}
 });
 

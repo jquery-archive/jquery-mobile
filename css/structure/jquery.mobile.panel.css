@@ -2,6 +2,7 @@
 .ui-panel {
 	width: 17em;
 	min-height: 100%;
+	max-height: none;
 	border-width: 0;
 	position: absolute;
 	top: 0;
@@ -9,7 +10,9 @@
 }
 .ui-panel-closed {
 	width: 0;
+	max-height: 100%;
 	overflow: hidden;
+	visibility: hidden;
 }
 .ui-panel-fixed {
 	position: fixed;
@@ -26,7 +29,7 @@
 	z-index: 999;
 }
 .ui-panel-inner {
-	padding: 15px;
+	padding: 1em;
 }
 
 /* content-wrap */
@@ -34,7 +37,7 @@
 	position: relative;
 	left: 0;
 	min-height: inherit;
-	border: none;
+	border: 0;
 	z-index: 999;
 }
 .ui-panel-content-wrap-display-overlay,
@@ -47,7 +50,7 @@
 .ui-panel-dismiss {
 	position: absolute;
 	top: 0;
-	left:0;
+	left: 0;
 	height: 100%;
 	width: 100%;
 	z-index: 1002;
@@ -64,9 +67,10 @@
 	transition: transform 350ms ease;
 }
 
-/* hardware acceleration for smoother transitions */
+/* hardware acceleration for smoother transitions on WebKit browsers */
 .ui-panel-animate.ui-panel:not(.ui-panel-display-reveal),
 .ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) > div,
+.ui-panel-animate.ui-panel-closed.ui-panel-display-reveal > div,
 .ui-panel-animate.ui-panel-content-wrap,
 .ui-panel-animate.ui-panel-content-fixed-toolbar {
 	-webkit-backface-visibility: hidden;
@@ -95,8 +99,8 @@
 .ui-panel-animate.ui-panel-position-left.ui-panel-open.ui-panel-display-overlay,
 .ui-panel-animate.ui-panel-position-left.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translate3d(0,0,0);
-	-moz-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
+	-moz-transform: none;
 }
 /* panel right */
 .ui-panel-position-right {
@@ -119,8 +123,8 @@
 .ui-panel-animate.ui-panel-position-right.ui-panel-open.ui-panel-display-overlay,
 .ui-panel-animate.ui-panel-position-right.ui-panel-open.ui-panel-display-push {
 	-webkit-transform: translate3d(0,0,0);
-	-moz-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
+	-moz-transform: none;
 }
 
 /* positioning: content wrap, fixed toolbars and dismiss */

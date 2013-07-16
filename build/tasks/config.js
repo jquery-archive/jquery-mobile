@@ -1,16 +1,17 @@
 module.exports = function( grunt ) {
 	"use strict";
-	grunt.registerTask( 'config:dev', 'Retrieve git hashes for output headers', function() {
+	grunt.registerTask( 'config:fetchHeadHash', 'Retrieve git hashes for output headers', function() {
 		var done = this.async();
 
 		grunt.util.spawn(
 			{
 				cmd: "git",
-				args: [ "log", "-1", "--format=format:Git Build: SHA1: %H <> Date: %cd" ],
-				fallback: grunt.config.process( "\"<%= pkg.version %>\"" )
+				args: [ "log", "-1", "--format=%H" ]
 			},
 			function(error, result, code) {
-				grunt.config.set( "version", result );
+				var hash = "" + result;
+				grunt.config.set( "headHash", hash );
+				grunt.config.set( "headShortHash", hash.substring( 0, 7 ) );
 				done();
 			}
 		);

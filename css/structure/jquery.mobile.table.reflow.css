@@ -26,7 +26,6 @@
 	/* Make the label elements a percentage width */ 
 	.ui-table-reflow td .ui-table-cell-label,
 	.ui-table-reflow th .ui-table-cell-label { 
-		display: block;
 		padding: .4em; 
 		min-width: 30%; 
 		display: inline-block;

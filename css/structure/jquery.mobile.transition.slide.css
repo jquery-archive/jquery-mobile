@@ -10,7 +10,7 @@
 	animation-duration: 350ms;
 }
 .slide.out {
-	-webkit-transform: translateX(-100%);
+	-webkit-transform: translate3d(-100%,0,0);
 	-webkit-animation-name: slideouttoleft;
 	-moz-transform: translateX(-100%);
 	-moz-animation-name: slideouttoleft;
@@ -19,7 +19,7 @@
 }
 
 .slide.in {
-	-webkit-transform: translateX(0);
+	-webkit-transform: translate3d(0,0,0);
 	-webkit-animation-name: slideinfromright;
 	-moz-transform: translateX(0);
 	-moz-animation-name: slideinfromright;
@@ -28,7 +28,7 @@
 }
 
 .slide.out.reverse {
-	-webkit-transform: translateX(100%);
+	-webkit-transform: translate3d(100%,0,0);
 	-webkit-animation-name: slideouttoright;
 	-moz-transform: translateX(100%);
 	-moz-animation-name: slideouttoright;
@@ -37,7 +37,7 @@
 }
 
 .slide.in.reverse {
-	-webkit-transform: translateX(0);
+	-webkit-transform: translate3d(0,0,0);
 	-webkit-animation-name: slideinfromleft;
 	-moz-transform: translateX(0);
 	-moz-animation-name: slideinfromleft;

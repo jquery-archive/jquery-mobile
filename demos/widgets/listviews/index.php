@@ -12,7 +12,7 @@
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
 	<style id="custom-icon">
-        .ui-icon-custom {
+        .ui-btn.ui-icon-custom:after {
 			background-image: url("../../_assets/img/glyphish-icons/21-skull.png");
 			background-position: 3px 3px;
 			background-size: 70%;

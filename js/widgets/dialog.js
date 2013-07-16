@@ -5,17 +5,16 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.navigation" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.navigation", "./optionDemultiplexer" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-$.widget( "mobile.dialog", $.mobile.widget, {
+$.widget( "mobile.dialog", $.extend( {
 	options: {
-		closeBtn: "left",
+		closeBtn: "left", /* Accepts left, right and none */
 		closeBtnText: "Close",
 		overlayTheme: "a",
-		corners: true,
-		initSelector: ":jqmData(role='dialog')"
+		corners: true
 	},
 
 	// Override the theme set by the page plugin on pageshow
@@ -28,16 +27,19 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		}
 	},
 
+	_handlePageBeforeHide: function() {
+		this._isCloseable = false;
+	},
+
 	_create: function() {
-		var self = this,
-			$el = this.element,
+		var $el = this.element,
 			cornerClass = !!this.options.corners ? " ui-corner-all" : "",
 			dialogWrap = $( "<div/>", {
 					"role" : "dialog",
 					"class" : "ui-dialog-contain ui-overlay-shadow" + cornerClass
 				});
 
-		$el.addClass( "ui-dialog ui-overlay-" + this.options.overlayTheme );
+		$el.addClass( "ui-dialog" );
 
 		// Class the markup for dialog styling
 		// Set aria role
@@ -62,18 +64,31 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		});
 
 		this._on( $el, {
-			pagebeforeshow: "_handlePageBeforeShow"
-		});
-
-		$.extend( this, {
-			_createComplete: false
+			pagebeforeshow: "_handlePageBeforeShow",
+			pagebeforehide: "_handlePageBeforeHide"
 		});
 
 		this._setCloseBtn( this.options.closeBtn );
 	},
 
+	_setCorners: function( value ) {
+		this.element.children().toggleClass( "ui-corner-all", value );
+	},
+
+	_setOverlayTheme: function( value ) {
+		if ( $.mobile.activePage[ 0 ] === this.element[ 0 ] ) {
+			this.options.overlayTheme = value;
+			this._handlePageBeforeShow();
+		}
+	},
+
+	_setCloseBtnText: function( value ) {
+		this.options.closeBtnText = value;
+		this._setCloseBtn( this.options.closeBtn );
+	},
+
 	_setCloseBtn: function( value ) {
-		var self = this, btn, location;
+		var self = this, btn, location, dst;
 
 		if ( this._headerCloseButton ) {
 			this._headerCloseButton.remove();
@@ -82,32 +97,26 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		if ( value !== "none" ) {
 			// Sanitize value
 			location = ( value === "left" ? "left" : "right" );
-			btn = $( "<a href='#' class='ui-btn-" + location + "' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
-			this.element.children().find( ":jqmData(role='header')" ).first().prepend( btn );
-			if ( this._createComplete && $.fn.buttonMarkup ) {
-				btn.buttonMarkup();
-			}
-			this._createComplete = true;
-
-			// this must be an anonymous function so that select menu dialogs can replace
-			// the close method. This is a change from previously just defining data-rel=back
-			// on the button and letting nav handle it
-			//
-			// Use click rather than vclick in order to prevent the possibility of unintentionally
-			// reopening the dialog if the dialog opening item was directly under the close button.
-			btn.bind( "click", function() {
-				self.close();
-			});
+			dst = this.element.children().find( ":jqmData(role='header')" ).first();
+			btn = $( "<a></a>", {
+				"href": "#",
+				"class": "ui-btn ui-btn-" + location +
+					" ui-corner-all ui-icon-delete ui-btn-icon-notext"
+				})
+				.text( this.options.closeBtnText )
+				.prependTo( dst )
+				// this must be an anonymous function so that select menu dialogs can replace
+				// the close method. This is a change from previously just defining data-rel=back
+				// on the button and letting nav handle it
+				//
+				// Use click rather than vclick in order to prevent the possibility of unintentionally
+				// reopening the dialog if the dialog opening item was directly under the close button.
+				.bind( "click", function() {
+					self.close();
+				});
 
 			this._headerCloseButton = btn;
 		}
-	},
-
-	_setOption: function( key, value ) {
-		if ( key === "closeBtn" ) {
-			this._setCloseBtn( value );
-		}
-		this._super( key, value );
 	},
 
 	// Close method goes back in history
@@ -134,10 +143,11 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			}
 		}
 	}
-});
+}, $.mobile.behaviors.optionDemultiplexer ) );
 
+$.mobile.dialog.initSelector = ":jqmData(role='dialog')";
 //auto self-init widgets
-$.mobile.document.delegate( $.mobile.dialog.prototype.options.initSelector, "pagecreate", function() {
+$.mobile.document.delegate( $.mobile.dialog.initSelector, "pagecreate", function() {
 	$.mobile.dialog.prototype.enhance( this );
 });
 

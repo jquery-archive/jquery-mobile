@@ -5,43 +5,43 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.rangeslider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "./textinput", "../../jquery.mobile.buttonMarkup", "./reset", "./slider" ], function( jQuery ) {
+define( [ "jquery",
+	"../../jquery.mobile.core",
+	"../../jquery.mobile.widget",
+	"./textinput",
+	"./reset",
+	"../optionDemultiplexer",
+	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-	$.widget( "mobile.rangeslider", $.mobile.widget, {
+	$.widget( "mobile.rangeslider", $.extend( {
 
 		options: {
 			theme: null,
 			trackTheme: null,
-			disabled: false,
-			initSelector: ":jqmData(role='rangeslider')",
+			corners: true,
 			mini: false,
 			highlight: true
 		},
 
 		_create: function() {
-			var secondLabel,
-			$el = this.element,
+			var $el = this.element,
 			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
 			_inputFirst = $el.find( "input" ).first(),
 			_inputLast = $el.find( "input" ).last(),
-			label = $el.find( "label" ).first(),
-			_sliderFirst = $.data( _inputFirst.get(0), "mobileSlider" ).slider,
-			_sliderLast = $.data( _inputLast.get(0), "mobileSlider" ).slider,
-			firstHandle = $.data( _inputFirst.get(0), "mobileSlider" ).handle,
-			_sliders = $( "<div class=\"ui-rangeslider-sliders\" />" ).appendTo( $el );
-			
-			if ( $el.find( "label" ).length > 1 ) {
-				secondLabel = $el.find( "label" ).last().hide();
-			}
+			_label = $el.find( "label" ).first(),
+			_sliderFirst = $.data( _inputFirst.get(0), "mobile-slider" ).slider,
+			_sliderLast = $.data( _inputLast.get(0), "mobile-slider" ).slider,
+			firstHandle = $.data( _inputFirst.get(0), "mobile-slider" ).handle,
+			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
 
 			_inputFirst.addClass( "ui-rangeslider-first" );
 			_inputLast.addClass( "ui-rangeslider-last" );
 			$el.addClass( elClass );
-			
+
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
-			label.prependTo( $el );
+			_label.insertBefore( $el );
 			firstHandle.prependTo( _sliderLast );
 
 			$.extend( this, {
@@ -49,12 +49,13 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				_inputLast: _inputLast,
 				_sliderFirst: _sliderFirst,
 				_sliderLast: _sliderLast,
+				_label: _label,
 				_targetVal: null,
 				_sliderTarget: false,
 				_sliders: _sliders,
 				_proxy: false
 			});
-			
+
 			this.refresh();
 			this._on( this.element.find( "input.ui-slider-input" ), {
 				"slidebeforestart": "_slidebeforestart",
@@ -64,15 +65,28 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				"blur": "_change",
 				"keyup": "_change"
 			});
+			this._on({
+				"mousedown":"_change"
+			});
+			this._on( this.element.closest( "form" ), {
+				"reset":"_handleReset"
+			});
 			this._on( firstHandle, {
 				"vmousedown": "_dragFirstHandle"
 			});
 		},
+		_handleReset: function(){
+			var self = this;
+			//we must wait for the stack to unwind before updateing other wise sliders will not have updated yet
+			setTimeout( function(){
+				self._updateHighlight();
+			},0);
+		},
 
 		_dragFirstHandle: function( event ) {
 			//if the first handle is dragged send the event to the first slider
-			$.data( this._inputFirst.get(0), "mobileSlider" ).dragging = true;
-			$.data( this._inputFirst.get(0), "mobileSlider" ).refresh( event );
+			$.data( this._inputFirst.get(0), "mobile-slider" ).dragging = true;
+			$.data( this._inputFirst.get(0), "mobile-slider" ).refresh( event );
 			return false;
 		},
 
@@ -81,20 +95,20 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				otherSlider = ( first ) ? this._inputLast : this._inputFirst;
 
 			this._sliderTarget = false;
-			//if the drag was initaed on an extream and the other handle is focused send the events to
+			//if the drag was initiated on an extreme and the other handle is focused send the events to
 			//the closest handle
 			if ( ( this._proxy === "first" && first ) || ( this._proxy === "last" && !first ) ) {
-				$.data( otherSlider.get(0), "mobileSlider" ).dragging = true;
-				$.data( otherSlider.get(0), "mobileSlider" ).refresh( event );
+				$.data( otherSlider.get(0), "mobile-slider" ).dragging = true;
+				$.data( otherSlider.get(0), "mobile-slider" ).refresh( event );
 				return false;
 			}
 		},
 
 		_slidestop: function( event ) {
 			var first = $( event.target ).is( this._inputFirst );
-			
+
 			this._proxy = false;
-			//this stops dragging of the handle and brings the active track to the front 
+			//this stops dragging of the handle and brings the active track to the front
 			//this makes clicks on the track go the the last handle used
 			this.element.find( "input" ).trigger( "vmouseup" );
 			this._sliderFirst.css( "z-index", first ? 1 : "" );
@@ -122,6 +136,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				theme: o.theme,
 				trackTheme: o.trackTheme,
 				disabled: o.disabled,
+				corners: o.corners,
 				mini: o.mini,
 				highlight: o.highlight
 			}).slider( "refresh" );
@@ -134,25 +149,31 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				return false;
 			}
 
-			var min = parseFloat( this._inputFirst.val(), 10 ),
+			var self = this,
+				min = parseFloat( this._inputFirst.val(), 10 ),
 				max = parseFloat( this._inputLast.val(), 10 ),
 				first = $( event.target ).hasClass( "ui-rangeslider-first" ),
 				thisSlider = first ? this._inputFirst : this._inputLast,
 				otherSlider = first ? this._inputLast : this._inputFirst;
-				
+
+
+			if( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
+				thisSlider.blur();
+			} else if( event.type === "mousedown" ){
+				return;
+			}
 			if ( min > max && !this._sliderTarget ) {
 				//this prevents min from being greater then max
 				thisSlider.val( first ? max: min ).slider( "refresh" );
 				this._trigger( "normalize" );
 			} else if ( min > max ) {
-				//this makes it so clicks on the target on either extream go to the closest handle
+				//this makes it so clicks on the target on either extreme go to the closest handle
 				thisSlider.val( this._targetVal ).slider( "refresh" );
-				
-				var self = this;
+
 				//You must wait for the stack to unwind so first slider is updated before updating second
 				setTimeout( function() {
 					otherSlider.val( first ? min: max ).slider( "refresh" );
-					$.data( otherSlider.get(0), "mobileSlider" ).handle.focus();
+					$.data( otherSlider.get(0), "mobile-slider" ).handle.focus();
 					self._sliderFirst.css( "z-index", first ? "" : 1 );
 					self._trigger( "normalize" );
 				}, 0 );
@@ -160,23 +181,23 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			}
 			//fixes issue where when both _sliders are at min they cannot be adjusted
 			if ( min === max ) {
-				$.data( thisSlider.get(0), "mobileSlider" ).handle.css( "z-index", 1 );
-				$.data( otherSlider.get(0), "mobileSlider" ).handle.css( "z-index", 0 );
+				$.data( thisSlider.get(0), "mobile-slider" ).handle.css( "z-index", 1 );
+				$.data( otherSlider.get(0), "mobile-slider" ).handle.css( "z-index", 0 );
 			} else {
-				$.data( otherSlider.get(0), "mobileSlider" ).handle.css( "z-index", "" );
-				$.data( thisSlider.get(0), "mobileSlider" ).handle.css( "z-index", "" );
+				$.data( otherSlider.get(0), "mobile-slider" ).handle.css( "z-index", "" );
+				$.data( thisSlider.get(0), "mobile-slider" ).handle.css( "z-index", "" );
 			}
-			
+
 			this._updateHighlight();
-			
+
 			if ( min >= max ) {
 				return false;
 			}
 		},
 
 		_updateHighlight: function() {
-			var min = parseInt( $.data( this._inputFirst.get(0), "mobileSlider" ).handle.get(0).style.left, 10 ),
-				max = parseInt( $.data( this._inputLast.get(0), "mobileSlider" ).handle.get(0).style.left, 10 ),
+			var min = parseInt( $.data( this._inputFirst.get(0), "mobile-slider" ).handle.get(0).style.left, 10 ),
+				max = parseInt( $.data( this._inputLast.get(0), "mobile-slider" ).handle.get(0).style.left, 10 ),
 				width = (max - min);
 
 			this.element.find( ".ui-slider-bg" ).css({
@@ -185,22 +206,42 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			});
 		},
 
+		_setTheme: function( value ) {
+			this._inputFirst.slider( "option", "theme", value );
+			this._inputLast.slider( "option", "theme", value );
+		},
+
+		_setTrackTheme: function( value ) {
+			this._inputFirst.slider( "option", "trackTheme", value );
+			this._inputLast.slider( "option", "trackTheme", value );
+		},
+
+		_setMini: function( value ) {
+			this._inputFirst.slider( "option", "mini", value );
+			this._inputLast.slider( "option", "mini", value );
+			this.element.toggleClass( "ui-mini", !!value );
+		},
+
+		_setHighlight: function( value ) {
+			this._inputFirst.slider( "option", "highlight", value );
+			this._inputLast.slider( "option", "highlight", value );
+		},
+
 		_destroy: function() {
-			this.element.removeClass( "ui-rangeslider ui-mini" ).find( "label" ).show();
+			this._label.prependTo( this.element );
+			this.element.removeClass( "ui-rangeslider ui-mini" );
 			this._inputFirst.after( this._sliderFirst );
 			this._inputLast.after( this._sliderLast );
 			this._sliders.remove();
 			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
 		}
 
-	});
+	}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
-$.widget( "mobile.rangeslider", $.mobile.rangeslider, $.mobile.behaviors.formReset );
+$.mobile.rangeslider.initSelector = ":jqmData(role='rangeslider')";
 
 //auto self-init widgets
-$( document ).bind( "pagecreate create", function( e ) {
-	$.mobile.rangeslider.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.rangeslider", { dependencies: [ "mobile.slider" ] } );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

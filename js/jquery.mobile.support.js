@@ -9,9 +9,10 @@ define( [  "jquery", "./jquery.mobile.core", "./jquery.mobile.media", "./jquery.
 // thx Modernizr
 function propExists( prop ) {
 	var uc_prop = prop.charAt( 0 ).toUpperCase() + prop.substr( 1 ),
-		props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " );
+		props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " ),
+		v;
 
-	for ( var v in props ) {
+	for ( v in props ) {
 		if ( fbCSS[ props[ v ] ] !== undefined ) {
 			return true;
 		}
@@ -24,11 +25,12 @@ var fakeBody = $( "<body>" ).prependTo( "html" ),
 	webos = "palmGetResource" in window, //only used to rule out scrollTop
 	opera = window.opera,
 	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
-	bb = window.blackberry && !propExists( "-webkit-transform" ); //only used to rule out box shadow, as it's filled opaque on BB 5 and lower
+	bb = window.blackberry && !propExists( "-webkit-transform" ), //only used to rule out box shadow, as it's filled opaque on BB 5 and lower
+	nokiaLTE7_3;
 
 
 function validStyle( prop, value, check_vend ) {
-	var div = document.createElement( 'div' ),
+	var div = document.createElement( "div" ),
 		uc = function( txt ) {
 			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
 		},
@@ -51,9 +53,9 @@ function validStyle( prop, value, check_vend ) {
 			}
 		},
 		check_vends = check_vend ? check_vend : vendors,
-		ret;
+		i, ret;
 
-	for( var i = 0; i < check_vends.length; i++ ) {
+	for( i = 0; i < check_vends.length; i++ ) {
 		check_style( check_vends[i] );
 	}
 	return !!ret;
@@ -62,24 +64,25 @@ function validStyle( prop, value, check_vend ) {
 function transform3dTest() {
 	var mqProp = "transform-3d",
 		// Because the `translate3d` test below throws false positives in Android:
-		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" );
+		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" ),
+		el, transforms, t;
 
 	if( ret ) {
 		return !!ret;
 	}
 
-	var el = document.createElement( "div" ),
-		transforms = {
-			// We’re omitting Opera for the time being; MS uses unprefixed.
-			'MozTransform':'-moz-transform',
-			'transform':'transform'
-		};
+	el = document.createElement( "div" );
+	transforms = {
+		// We’re omitting Opera for the time being; MS uses unprefixed.
+		"MozTransform": "-moz-transform",
+		"transform": "transform"
+	};
 
 	fakeBody.append( el );
 
-	for ( var t in transforms ) {
+	for ( t in transforms ) {
 		if( el.style[ t ] !== undefined ){
-			el.style[ t ] = 'translate3d( 100px, 1px, 1px )';
+			el.style[ t ] = "translate3d( 100px, 1px, 1px )";
 			ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
 		}
 	}
@@ -112,20 +115,20 @@ function baseTagTest() {
 
 // Thanks Modernizr
 function cssPointerEventsTest() {
-	var element = document.createElement( 'x' ),
+	var element = document.createElement( "x" ),
 		documentElement = document.documentElement,
 		getComputedStyle = window.getComputedStyle,
 		supports;
 
-	if ( !( 'pointerEvents' in element.style ) ) {
+	if ( !( "pointerEvents" in element.style ) ) {
 		return false;
 	}
 
-	element.style.pointerEvents = 'auto';
-	element.style.pointerEvents = 'x';
+	element.style.pointerEvents = "auto";
+	element.style.pointerEvents = "x";
 	documentElement.appendChild( element );
 	supports = getComputedStyle &&
-	getComputedStyle( element, '' ).pointerEvents === 'auto';
+	getComputedStyle( element, "" ).pointerEvents === "auto";
 	documentElement.removeChild( element );
 	return !!supports;
 }
@@ -184,7 +187,7 @@ function fixedPosition() {
 
 $.extend( $.support, {
 	cssTransitions: "WebKitTransitionEvent" in window ||
-		validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "" ] ) &&
+		validStyle( "transition", "height 100ms linear", [ "Webkit", "Moz", "" ] ) &&
 		!$.mobile.browser.oldIE && !opera,
 
 	// Note, Chrome for iOS has an extremely quirky implementation of popstate.
@@ -219,7 +222,7 @@ fakeBody.remove();
 // or that generally work better browsing in regular http for full page refreshes (Opera Mini)
 // Note: This detection below is used as a last resort.
 // We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
-var nokiaLTE7_3 = (function() {
+nokiaLTE7_3 = (function() {
 
 	var ua = window.navigator.userAgent;
 
@@ -234,7 +237,7 @@ var nokiaLTE7_3 = (function() {
 // default enhanced qualifications are media query support OR IE 7+
 
 $.mobile.gradeA = function() {
-	return ( $.support.mediaquery || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 7 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
+	return ( ( $.support.mediaquery && $.support.cssPseudoElement ) || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 8 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
 };
 
 $.mobile.ajaxBlacklist =
@@ -254,9 +257,31 @@ if ( nokiaLTE7_3 ) {
 	});
 }
 
+// inline SVG support test
+function inlineSVG() {
+	// Thanks Modernizr & Erik Dahlstrom
+	var w = window,
+		svg = !!w.document.createElementNS && !!w.document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect && !!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1"),
+		support = function( data ) {
+			if ( !( data && svg ) ) {
+				$( "html" ).addClass( "ui-nosvg" );
+			}
+		},
+		img = new w.Image();
+
+	img.onerror = function() {
+		support( false );
+	};
+	img.onload = function() {
+		support( img.width === 1 && img.height === 1 );
+	};
+	img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+}
+inlineSVG();
+
 // For ruling out shadows via css
 if ( !$.support.boxShadow ) {
-	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
+	$( "html" ).addClass( "ui-noboxshadow" );
 }
 
 })( jQuery );

@@ -9,6 +9,17 @@ define( [ "jquery", "./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+var popup;
+
+function getPopup() {
+	if ( !popup ) {
+		popup = $( "<div></div>", {
+			"class": "ui-slider-popup ui-shadow ui-corner-all"
+		});
+	}
+	return popup.clone();
+}
+
 $.widget( "mobile.slider", $.mobile.slider, {
 	options: {
 		popupEnabled: false,
@@ -16,22 +27,15 @@ $.widget( "mobile.slider", $.mobile.slider, {
 	},
 
 	_create: function() {
-		var o = this.options,
-			popup = $( "<div></div>", {
-				"class": "ui-slider-popup ui-shadow ui-corner-all ui-body-" + ( o.theme ? o.theme : $.mobile.getInheritedTheme( this.element, "c" ) )
-			});
-
 		this._super();
 
 		$.extend( this, {
 			_currentValue: null,
-			_popup: popup,
-			_popupVisible: false,
-			_handleText: this.handle.find( ".ui-btn-text" )
+			_popup: null,
+			_popupVisible: false
 		});
 
-		this.slider.before( popup );
-		popup.hide();
+		this._setOption( "popupEnabled", this.options.popupEnabled );
 
 		this._on( this.handle, { "vmousedown" : "_showPopup" } );
 		this._on( this.slider.add( $.mobile.document ), { "vmouseup" : "_hidePopup" } );
@@ -41,6 +45,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 	// position the popup centered 5px above the handle
 	_positionPopup: function() {
 		var dstOffset = this.handle.offset();
+
 		this._popup.offset( {
 			left: dstOffset.left + ( this.handle.width() - this._popup.width() ) / 2,
 			top: dstOffset.top - this._popup.outerHeight() - 5
@@ -51,10 +56,12 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		this._super( key, value );
 
 		if ( key === "showValue" ) {
-			if ( value ) {
-				this._handleText.html( this._value() ).show();
-			} else {
-				this._handleText.hide();
+			this.handle.html( value && !this.options.mini ? this._value() : "" );
+		} else if ( key === "popupEnabled" ) {
+			if ( value && !this._popup ) {
+				this._popup = getPopup()
+					.addClass( "ui-body-" + ( this.options.theme || "a" ) )
+					.insertBefore( this.element );
 			}
 		}
 	},
@@ -62,13 +69,6 @@ $.widget( "mobile.slider", $.mobile.slider, {
 	// show value on the handle and in popup
 	refresh: function() {
 		this._super.apply( this, arguments );
-
-		// necessary because slider's _create() calls refresh(), and that lands
-		// here before our own _create() has even run
-		if ( !this._popup ) {
-			return;
-		}
-
 		this._refresh();
 	},
 
@@ -80,7 +80,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 			// responsible for the annoying tooltip); NB we have
 			// to do it here as the jqm slider sets it every time
 			// the slider's value changes :(
-			this.handle.removeAttr( 'title' );
+			this.handle.removeAttr( "title" );
 		}
 
 		newValue = this._value();
@@ -89,19 +89,17 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		}
 		this._currentValue = newValue;
 
-		if ( o.popupEnabled ) {
+		if ( o.popupEnabled && this._popup ) {
 			this._positionPopup();
 			this._popup.html( newValue );
-		}
-
-		if ( o.showValue ) {
-			this._handleText.html( newValue );
+		} else if ( o.showValue && !this.options.mini ) {
+			this.handle.html( newValue );
 		}
 	},
 
 	_showPopup: function() {
 		if ( this.options.popupEnabled && !this._popupVisible ) {
-			this._handleText.hide();
+			this.handle.html( "" );
 			this._popup.show();
 			this._positionPopup();
 			this._popupVisible = true;
@@ -109,8 +107,12 @@ $.widget( "mobile.slider", $.mobile.slider, {
 	},
 
 	_hidePopup: function() {
-		if ( this.options.popupEnabled && this._popupVisible ) {
-			this._handleText.show();
+		var o = this.options;
+
+		if ( o.popupEnabled && this._popupVisible ) {
+			if ( o.showValue && !o.mini ) {
+				this.handle.html( this._value() );
+			}
 			this._popup.hide();
 			this._popupVisible = false;
 		}

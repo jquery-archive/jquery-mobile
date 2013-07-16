@@ -9,57 +9,54 @@ define( [ "jquery", "./table" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile.table.prototype.options.mode = "reflow";
+$.widget( "mobile.table", $.mobile.table, {
+	options: {
+		mode: "reflow",
+		classes: $.extend( $.mobile.table.prototype.options.classes, {
+			reflowTable: "ui-table-reflow",
+			cellLabels: "ui-table-cell-label"
+		})
+	},
 
-$.mobile.table.prototype.options.classes = $.extend(
-	$.mobile.table.prototype.options.classes,
-	{
-		reflowTable: "ui-table-reflow",
-		cellLabels: "ui-table-cell-label"
-	}
-);
+	_create: function() {
+		var o = this.options;
 
-$.mobile.document.delegate( ":jqmData(role='table')", "tablecreate", function() {
+		this._super();
 
-	var $table = $( this ),
-		self = $table.data( "mobile-table" ),
-		o = self.options;
+		// If it's not reflow mode, return here.
+		if( o.mode !== "reflow" ) {
+			return;
+		}
 
-	// If it's not reflow mode, return here.
-	if( o.mode !== "reflow" ){
-		return;
-	}
+		this.element.addClass( o.classes.reflowTable );
 
-	self.element.addClass( o.classes.reflowTable );
+		// get headers in reverse order so that top-level headers are appended last
+		$( this.allHeaders.get().reverse() ).each( function() {
+			// create the hide/show toggles
+			var $cells = $( this ).jqmData( "cells" ),
+				colstart = $( this ).jqmData( "colstart" ),
+				hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
+				text = $(this).text(),
+				iteration, filter;
 
-	// get headers in reverse order so that top-level headers are appended last
-	var reverseHeaders =  $( self.allHeaders.get().reverse() );
+				if( text !== ""  ) {
 
-	// create the hide/show toggles
-	reverseHeaders.each(function(i){
-		var $cells = $( this ).jqmData( "cells" ),
-			colstart = $( this ).jqmData( "colstart" ),
-			hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
-			text = $(this).text();
-
-			if( text !== ""  ){
-
-				if( hierarchyClass ){
-					var iteration = parseInt( $( this ).attr( "colspan" ), 10 ),
+					if( hierarchyClass ) {
+						iteration = parseInt( $( this ).attr( "colspan" ), 10 );
 						filter = "";
 
-					if( iteration ){
-						filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
+						if( iteration ){
+							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
+						}
+						$cells.filter( filter ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );
 					}
-					$cells.filter( filter ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );
-				}
-				else {
-					$cells.prepend( "<b class='" + o.classes.cellLabels + "'>" + text + "</b>"  );
-				}
+					else {
+						$cells.prepend( "<b class='" + o.classes.cellLabels + "'>" + text + "</b>"  );
+					}
 
-			}
-	});
-
+				}
+		});
+	}
 });
 
 })( jQuery );

@@ -9,19 +9,21 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "./reset" ], function( jQuery ) {
+define( [ "jquery",
+	"../../jquery.mobile.core",
+	"../../jquery.mobile.widget",
+	"../optionDemultiplexer",
+	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
+$.widget( "mobile.checkboxradio", $.extend( {
 	options: {
 		theme: null,
-		mini: false,
-		initSelector: "input[type='checkbox'],input[type='radio']"
+		mini: false
 	},
 	_create: function() {
-		var self = this,
-			input = this.element,
+		var input = this.element,
 			o = this.options,
 			inheritAttr = function( input, dataAttr ) {
 				return input.jqmData( dataAttr ) || input.closest( "form, fieldset" ).jqmData( dataAttr );
@@ -31,31 +33,24 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 			parentLabel = $( input ).closest( "label" ),
 			label = parentLabel.length ? parentLabel : $( input ).closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ).first(),
 			inputtype = input[0].type,
-			mini = inheritAttr( input, "mini" ) || o.mini,
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
-			iconpos = inheritAttr( input, "iconpos" ),
+			iconpos = inheritAttr( input, "iconpos" ) || label.jqmData( "iconpos" ) || "left",
 			checkedClass = "ui-" + checkedState,
-			uncheckedClass = "ui-" + uncheckedState;
+			uncheckedClass = "ui-" + uncheckedState,
+			wrapper;
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
 			return;
 		}
 
-		// If there's no selected theme check the data attr
-		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
-		}
+		// Establish options
+		o.mini = inheritAttr( input, "mini" ) || o.mini;
 
 		// Expose for other methods
 		$.extend( this, {
-			//save buttonMarkup options to use them in refresh
-			buttonMarkupOptions: {
-				theme: o.theme,
-				shadow: false,
-				mini: mini,
-				iconpos: iconpos
-			},
+			iconpos: iconpos,
+			input: input,
 			label: label,
 			inputtype: inputtype,
 			checkedClass: checkedClass,
@@ -65,83 +60,87 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		});
 
 		// Wrap the input + label in a div
-		var wrapper = document.createElement('div');
-		wrapper.className = 'ui-' + inputtype;
-
+		wrapper = document.createElement( "div" );
+		wrapper.className = "ui-" + inputtype;
 		input.add( label ).wrapAll( wrapper );
+		label.addClass( "ui-btn ui-corner-all ui-btn-icon-" + iconpos );
 
-		label.bind({
-			vmouseover: function( event ) {
-				if ( $( this ).parent().hasClass( "ui-disabled" ) ) {
-					event.stopPropagation();
-				}
-			},
-
-			vclick: function( event ) {
-				if ( input.is( ":disabled" ) ) {
-					event.preventDefault();
-					return;
-				}
-
-				self._cacheVals();
-
-				input.prop( "checked", inputtype === "radio" && true || !input.prop( "checked" ) );
-
-				// trigger click handler's bound directly to the input as a substitute for
-				// how label clicks behave normally in the browsers
-				// TODO: it would be nice to let the browser's handle the clicks and pass them
-				//       through to the associate input. we can swallow that click at the parent
-				//       wrapper element level
-				input.triggerHandler( 'click' );
-
-				// Input set for common radio buttons will contain all the radio
-				// buttons, but will not for checkboxes. clearing the checked status
-				// of other radios ensures the active button state is applied properly
-				self._getInputSet().not( input ).prop( "checked", false );
-
-				self._updateAll();
-				return false;
-			}
+		this._on( label, {
+			vmouseover: "_handleLabelVMouseOver",
+			vclick: "_handleLabelVClick"
 		});
 
-		input
-			.bind({
-				vmousedown: function() {
-					self._cacheVals();
-				},
-
-				vclick: function() {
-					var $this = $( this );
-
-					// Adds checked attribute to checked input when keyboard is used
-					if ( $this.is( ":checked" ) ) {
-
-						$this.prop( "checked", true);
-						self._getInputSet().not( $this ).prop( "checked", false );
-					} else {
-
-						$this.prop( "checked", false );
-					}
-
-					self._updateAll();
-				},
-
-				focus: function() {
-					label.addClass( $.mobile.focusClass );
-				},
-
-				blur: function() {
-					label.removeClass( $.mobile.focusClass );
-				}
-			});
+		this._on( input, {
+			vmousedown: "_cacheVals",
+			vclick: "_handleInputVClick",
+			focus: "_handleInputFocus",
+			blur: "_handleInputBlur"
+		});
 
 		this._handleFormReset();
+		this._setOptions( o );
 		this.refresh();
-		this._labelButtonMarkupOptions = null;
+	},
+
+	_handleInputFocus: function() {
+		this.label.addClass( $.mobile.focusClass );
+	},
+
+	_handleInputBlur: function() {
+		this.label.removeClass( $.mobile.focusClass );
+	},
+
+	_handleInputVClick: function() {
+		var $this = this.element;
+
+		// Adds checked attribute to checked input when keyboard is used
+		if ( $this.is( ":checked" ) ) {
+
+			$this.prop( "checked", true);
+			this._getInputSet().not( $this ).prop( "checked", false );
+		} else {
+			$this.prop( "checked", false );
+		}
+
+		this._updateAll();
+	},
+
+	_handleLabelVMouseOver: function( event ) {
+		if ( this.label.parent().hasClass( "ui-state-disabled" ) ) {
+			event.stopPropagation();
+		}
+	},
+
+	_handleLabelVClick: function( event ) {
+		var input = this.element;
+
+		if ( input.is( ":disabled" ) ) {
+			event.preventDefault();
+			return;
+		}
+
+		this._cacheVals();
+
+		input.prop( "checked", this.inputtype === "radio" && true || !input.prop( "checked" ) );
+
+		// trigger click handler's bound directly to the input as a substitute for
+		// how label clicks behave normally in the browsers
+		// TODO: it would be nice to let the browser's handle the clicks and pass them
+		//       through to the associate input. we can swallow that click at the parent
+		//       wrapper element level
+		input.triggerHandler( "click" );
+
+		// Input set for common radio buttons will contain all the radio
+		// buttons, but will not for checkboxes. clearing the checked status
+		// of other radios ensures the active button state is applied properly
+		this._getInputSet().not( input ).prop( "checked", false );
+
+		this._updateAll();
+		return false;
 	},
 
 	_cacheVals: function() {
-		this._getInputSet().each(function() {
+		this._getInputSet().each( function() {
 			$( this ).jqmData( "cacheVal", this.checked );
 		});
 	},
@@ -153,13 +152,13 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		}
 
 		return this.element.closest( "form, :jqmData(role='page'), :jqmData(role='dialog')" )
-			.find( "input[name='" + this.element[0].name + "'][type='" + this.inputtype + "']" );
+			.find( "input[name='" + this.element[ 0 ].name + "'][type='" + this.inputtype + "']" );
 	},
 
 	_updateAll: function() {
 		var self = this;
 
-		this._getInputSet().each(function() {
+		this._getInputSet().each( function() {
 			var $this = $( this );
 
 			if ( this.checked || self.inputtype === "checkbox" ) {
@@ -176,19 +175,19 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 	refresh: function() {
 		var input = this.element[ 0 ],
 			active = " " + $.mobile.activeBtnClass,
-			checkedClass = this.checkedClass + ( this.element.parents( ".ui-controlgroup-horizontal" ).length ? active : "" ),
-			label = this.label,
-			options = this.buttonMarkupOptions;
+			hasIcon = ( this.element.parents( ".ui-controlgroup-horizontal" ).length === 0 ),
+			checkedClass = this.checkedClass + ( hasIcon ? "" : active ),
+			label = this.label;
 
+		label
+			.toggleClass( "ui-btn-icon-" + this.iconpos, hasIcon )
+			.toggleClass( "ui-icon-" + this.checkedicon, input.checked )
+			.toggleClass( "ui-icon-" + this.uncheckedicon, !input.checked );
 		if ( input.checked ) {
-			options.icon = this.checkedicon;
-			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass ).buttonMarkup( options );
+			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass );
 		} else {
-			options.icon = this.uncheckedicon;
-			label.removeClass( checkedClass ).addClass( this.uncheckedClass ).buttonMarkup( options );
+			label.removeClass( checkedClass ).addClass( this.uncheckedClass );
 		}
-
-		this.buttonMarkupOptions = {};
 
 		if ( input.disabled ) {
 			this.disable();
@@ -197,19 +196,37 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, $.extend( {
 		}
 	},
 
+	_setTheme: function( value ) {
+		if ( value ) {
+			this.label.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + value );
+		}
+	},
+
+	_setMini: function( value ) {
+		/* TODO: expose the wrapper in _create */
+		this.label.parent().toggleClass( "ui-mini", !!value );
+	},
+
+	widget: function() {
+		return this.label.parent();
+	},
+
 	disable: function() {
-		this.element.prop( "disabled", true ).parent().addClass( "ui-disabled" );
+		this._super();
+		this.input.prop( "disabled", true );
 	},
 
 	enable: function() {
-		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
+		this._super();
+		this.input.prop( "disabled", false );
 	}
-}, $.mobile.behaviors.formReset ) );
+
+}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
+
+$.mobile.checkboxradio.initSelector = "input[type='checkbox'],input[type='radio']";
 
 //auto self-init widgets
-$.mobile.document.bind( "pagecreate create", function( e ) {
-	$.mobile.checkboxradio.prototype.enhanceWithin( e.target, true );
-});
+$.mobile._enhancer.add( "mobile.checkboxradio" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
