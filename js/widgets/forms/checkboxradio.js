@@ -12,7 +12,6 @@
 define( [ "jquery",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.widget",
-	"../optionDemultiplexer",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -211,24 +210,22 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		return this.label.parent();
 	},
 
-	_setOptions: function( o ) {
-		if( o.disabled !== undefined ) {
-			this.input.prop( "disabled", !!o.disabled );
+	_setOptions: function( options ) {
+		if( options.disabled !== undefined ) {
+			this.input.prop( "disabled", !!options.disabled );
+			this.widget().toggleClass( "ui-disabled", !!options.disabled )
 		}
-		if( o.mini !== undefined ) {
-			this.label.parent().toggleClass( "ui-mini", !!o.mini );
+		if( options.mini !== undefined ) {
+			this.label.parent().toggleClass( "ui-mini", !!options.mini );
 		}
-		if( o.theme !== undefined ) {
-			this.label.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + o.theme );
+		if( options.theme !== undefined ) {
+			this.label.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + options.theme );
 		}
-		if( o.id !== undefined ) {
-			this.widget().attr( "id", o.id );
+		if( options.wrapperClass !== undefined ) {
+			this.widget().removeClass( this.options.class ).addClass( options.wrapperClass );
 		}
-		if( o.class !== undefined ) {
-			this.widget().removeClass( this.options.class ).addClass( o.class );
-		}
-		if( o.iconpos !== undefined && ( this.element.parents( ".ui-controlgroup-horizontal" ).length === 0 ) ) {
-			this.label.removeClass( "ui-btn-icon-" + this.options.iconpos ).addClass( "ui-btn-icon-" + o.iconpos );
+		if( options.iconpos !== undefined && ( this.element.parents( ".ui-controlgroup-horizontal" ).length === 0 ) ) {
+			this.label.removeClass( "ui-btn-icon-" + this.options.iconpos ).addClass( "ui-btn-icon-" + options.iconpos );
 		}
 	}
 
