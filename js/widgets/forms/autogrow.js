@@ -65,7 +65,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				borderHeight = borderTop + borderBottom,
 				height = scrollHeight + borderHeight + 15;
 
-			this.element.css( "height", height );
+			this.element.css( "height", height + "px" );
 		},
 
 		_setOptions: function( options ){
