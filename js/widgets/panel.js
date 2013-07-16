@@ -21,9 +21,7 @@ $.widget( "mobile.panel", {
 			modalOpen: "ui-panel-dismiss-open",
 			pagePanel: "ui-page-panel",
 			pagePanelOpen: "ui-page-panel-open",
-			contentWrap: "ui-panel-content-wrap",
-			contentWrapOpen: "ui-panel-content-wrap-open",
-			contentWrapClosed: "ui-panel-content-wrap-closed",
+			pagePanelClosed: "ui-page-panel-closed",
 			contentFixedToolbar: "ui-panel-content-fixed-toolbar",
 			contentFixedToolbarOpen: "ui-panel-content-fixed-toolbar-open",
 			contentFixedToolbarClosed: "ui-panel-content-fixed-toolbar-closed",
@@ -61,10 +59,8 @@ $.widget( "mobile.panel", {
 		});
 		
 		this._addPanelClasses();
-		$( ".ui-page-active" ).addClass( this.options.classes.contentWrapClosed );
+		$( ".ui-page-active" ).addClass( this.options.classes.pagePanel, this.options.classes.pagePanelClosed );
 		this._fixedToolbar.addClass( this.options.classes.contentFixedToolbarClosed );
-		// add class to page so we can set "overflow-x: hidden;" for it to fix Android zoom issue
-		$( ".ui-page-active" ).addClass( this.options.classes.pagePanel );
 
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!this.options.animate ) {
@@ -285,8 +281,7 @@ $.widget( "mobile.panel", {
 
 	// state storage of open or closed
 	_open: false,
-
-	_contentWrapOpenClasses: null,
+	_pagePanelOpenClasses: null,
 	_fixedToolbarOpenClasses: null,
 	_modalOpenClasses: null,
 
@@ -317,10 +312,10 @@ $.widget( "mobile.panel", {
 
 					self._positionPanel();
 
-					self._contentWrapOpenClasses = self._getPosDisplayClasses( o.classes.contentWrap );
+					self._pagePanelOpenClasses = self._getPosDisplayClasses( o.classes.pagePanel );
 					$( ".ui-page-active" )
-						.removeClass( o.classes.contentWrapClosed )
-						.addClass( self._contentWrapOpenClasses + " " + o.classes.contentWrapOpen );
+						.removeClass( o.classes.pagePanelClosed )
+						.addClass( self._pagePanelOpenClasses + " " + o.classes.pagePanelOpen );
 
 					self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentFixedToolbar );
 					self._fixedToolbar
@@ -377,7 +372,7 @@ $.widget( "mobile.panel", {
 
 					$( ".ui-page-active" ).removeClass( o.classes.pagePanelOpen );
 					self.element.removeClass( o.classes.panelOpen );
-					$( ".ui-page-active" ).removeClass( o.classes.contentWrapOpen );
+					$( ".ui-page-active" ).removeClass( o.classes.pagePanelOpen );
 					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
 
 					if ( self._modal ) {
@@ -397,8 +392,8 @@ $.widget( "mobile.panel", {
 						.addClass( o.classes.panelClosed );
 
 					$( ".ui-page-active" )
-						.removeClass( self._contentWrapOpenClasses )
-						.addClass( o.classes.contentWrapClosed );
+						.removeClass( self._pagePanelOpenClasses )
+						.addClass( o.classes.pagePanelClosed );
 
 					self._fixedToolbar
 						.removeClass( self._fixedToolbarOpenClasses )
