@@ -18,12 +18,17 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], functi
 
 // Map classes to buttonMarkup boolean options - used in classNameToOptions()
 var reverseBoolOptionMap = {
-	"ui-shadow" : "shadow",
-	"ui-corner-all" : "corners",
-	"ui-btn-inline" : "inline",
-	"ui-shadow-icon" : "iconshadow", /* TODO: Remove in 1.5 */
-	"ui-mini" : "mini"
-};
+		"ui-shadow" : "shadow",
+		"ui-corner-all" : "corners",
+		"ui-btn-inline" : "inline",
+		"ui-shadow-icon" : "iconshadow", /* TODO: Remove in 1.5 */
+		"ui-mini" : "mini"
+	},
+	getAttrFixed = function() {
+		var ret = $.mobile.getAttribute.apply( this, arguments );
+
+		return ( ret == null ? undefined : ret );
+	};
 
 // optionsToClasses:
 // @options: A complete set of options to convert to class names.
@@ -238,8 +243,7 @@ $.fn.buttonMarkup.defaults = {
 // without having to write it inline and may be moved into the enhancer in the
 // future.
 function enhanceWithButtonMarkup( idx, el ) {
-	var classes,
-		getAttrFixed = $.mobile.getAttribute;
+	var classes;
 
 	classes = optionsToClasses( $.extend( {},
 		$.fn.buttonMarkup.defaults, {
