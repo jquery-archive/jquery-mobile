@@ -28,6 +28,8 @@ define([
 	"./widgets/forms/slider",
 	"./widgets/forms/rangeslider",
 	"./widgets/forms/textinput",
+	"./widgets/forms/clearButton",
+	"./widgets/forms/autogrow",
 	"./widgets/forms/select.custom",
 	"./widgets/forms/select",
 	"./jquery.mobile.buttonMarkup",
