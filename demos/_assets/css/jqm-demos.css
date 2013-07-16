@@ -123,6 +123,9 @@ body, .jqm-demos  {
 	margin: 0 -.3125em;
 	padding: 1px 0; /* to resolve Chrome rendering issue (border-bottom not visible */
 }
+.jqm-content	> .ui-filter {
+	margin-bottom: 1.1em;
+}
 .jqm-demos .jqm-search > .ui-filter .ui-input-search {
 	margin: 4px .3125em;
 }

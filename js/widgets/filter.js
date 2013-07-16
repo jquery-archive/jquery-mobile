@@ -134,8 +134,9 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				} else {
 					this._toggleFilterableItems( filterItems, select, o.filterReveal );
 				}
-
-				this._addFirstLastClasses( _getFilterableItems, this._getVisibles( _getFilterableItems, false ), false );
+				if ( typeof o.selector !== "string" ) {
+					this._addFirstLastClasses( _getFilterableItems, this._getVisibles( _getFilterableItems, false ), false );
+				}
 			},
 			
 			_toggleFilterableItems: function( filterItems, select, reveal, isVal )	{
@@ -235,7 +236,11 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 				// "_super()-widget" calling it. So 2x input on the filter should trigger
 				// 2x addFirstLastClasses vs. currently 3x because of including the call
 				// when setting up the parent listview.
-				this._addFirstLastClasses( items, this._getVisibles( items, true ), true );
+
+				// no classes if multiple datasets are used
+				if ( typeof o.selector !== "string" ) {
+					this._addFirstLastClasses( items, this._getVisibles( items, true ), true );
+				}
 			},
 			
 			_setOption: function( key, value ) {
