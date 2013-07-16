@@ -15,7 +15,6 @@ $.widget( "mobile.table", {
 		classes: {
 			table: "ui-table"
 		},
-		referenceClass: "",
 		enhanced: false
 	},
 

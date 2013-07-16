@@ -30,29 +30,28 @@ $.widget( "mobile.table", $.mobile.table, {
 		})
 	},
 
+	_id: function() {
+		return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
+	},
+
 	_create: function() {
-		var o = this.options;
+		var opts = this.options;
 
 		this._super();
 
-		if( o.mode !== "columntoggle" ) {
+		if( opts.mode !== "columntoggle" ) {
 			return;
 		}
 
 		$.extend( this, {
-			// will be set inside _enhance() or by referenceClass
-			_menu: undefined
+			_menu: null
 		});
 
-		if( !o.enhanced ) {
-
-			this.element.addClass( o.classes.columnToggleTable );
-
-			this._enhanceColToggle();
-
+		if( opts.enhanced ) {
+			this._menu = $( this._id() + "-popup" ).children().first();
 		} else {
-			// NOTE: need a better way to access elements pre-enhanced by the user
-			this._menu = $( "." + o.referenceClass );
+			this._menu = this._enhanceColToggle();
+			this.element.addClass( opts.classes.columnToggleTable );
 		}
 
 		this._setupEvents();
@@ -60,7 +59,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._setToggleState();
 	},
 
-	_setupEvents: function () {
+	_setupEvents: function() {
 		//NOTE: inputs are bound in bindToggles,
 		// so it can be called on refresh, too
 
@@ -68,15 +67,10 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._on( $.mobile.window, {
 			throttledresize: "_setToggleState"
 		});
-
-		// bind to refresh call of table
-		this._on( this.element, {
-			refresh: "_refreshColToggle"
-		});
 	},
 
-	_bindToggles: function() {
-		var inputs = this._menu.find( "input" );
+	_bindToggles: function( menu ) {
+		var inputs = menu.find( "input" );
 
 		this._on( inputs, {
 			change: "_menuInputChange"
@@ -84,7 +78,7 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_addToggles: function( menu ) {
-		var o = this.options;
+		var opts = this.options;
 		// allow update of menu on refresh (fixes #5880)
 		menu.empty();
 
@@ -96,21 +90,21 @@ $.widget( "mobile.table", $.mobile.table, {
 				$cells = $this.add( $this.data( "cells" ) );
 
 			if( priority ) {
-				$cells.addClass( o.classes.priorityPrefix + priority );
+				$cells.addClass( opts.classes.priorityPrefix + priority );
 
 				$("<label><input type='checkbox' checked />" + $this.text() + "</label>" )
 					.appendTo( menu )
 					.children( 0 )
 					.data( "cells", $cells )
 					.checkboxradio( {
-						theme: o.columnPopupTheme
+						theme: opts.columnPopupTheme
 					});
 			}
 
 		});
 
 		// set bindings here
-		this._bindToggles();
+		this._bindToggles( menu );
 	},
 
 	_menuInputChange: function( e ) {
@@ -140,39 +134,45 @@ $.widget( "mobile.table", $.mobile.table, {
 	_enhanceColToggle: function() {
 		var id , $menuButton, $popup, $menu,
 			$table = this.element,
-			o = this.options,
-			ns = $.mobile.ns;
+			opts = this.options,
+			ns = $.mobile.ns,
+			fragment = $.mobile.document[ 0 ].createDocumentFragment();
 
-		id = ( $table.attr( "id" ) || o.classes.popup ) + "-popup"; //TODO BETTER FALLBACK ID HERE
-		$menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-" + ns + "rel='popup' data-" + ns + "mini='true'>" + o.columnBtnText + "</a>" );
-		$popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + o.classes.popup + "' id='" + id + "'></div>" );
+		id = this._id() + "-popup";
+		$menuButton = $( "<a href='#" + id + "' " +
+			"class='" + opts.classes.columnBtn + " ui-btn ui-btn-" + ( opts.columnBtnTheme || "a" ) + " ui-corner-all ui-shadow ui-mini' " +
+			"data-" + ns + "rel='popup' " +
+			"data-" + ns + "mini='true'>" + opts.columnBtnText + "</a>" );
+		$popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + opts.classes.popup + "' id='" + id + "'></div>" );
 		$menu = $( "<fieldset data-" + ns + "role='controlgroup'></fieldset>" );
 
-		this._menu = $menu;
-
 		// set extension here
-		this._addToggles( this._menu );
+		this._addToggles( $menu );
 
-		this._menu.appendTo( $popup );
+		$menu.appendTo( $popup );
 
-		$popup
-			.insertBefore( $table )
-			.popup();
+		fragment.appendChild( $popup[ 0 ] );
+		fragment.appendChild( $menuButton[ 0 ] );
+		$table.before( fragment );
 
-		$menuButton
-			.addClass( "ui-btn ui-btn-" + ( o.columnBtnTheme || "a" ) + " ui-corner-all ui-shadow ui-mini" )
-			.insertBefore( $table );
+		$popup.popup();
+
+		return $menu;
 	},
 
-	_refreshColToggle: function () {
-		// columns not being replaced must be cleared from input toggle-locks
-		this._unlockCells( this.allHeaders );
+	refresh: function( create ) {
+		this._super( create );
 
-		// update columntoggles and $cells
-		this._addToggles( this._menu );
+		if ( !create && this.options.mode === "columntoggle" ) {
+			// columns not being replaced must be cleared from input toggle-locks
+			this._unlockCells( this.allHeaders );
 
-		// check/uncheck
-		this._setToggleState();
+			// update columntoggles and $cells
+			this._addToggles( this._menu );
+
+			// check/uncheck
+			this._setToggleState();
+		}
 	},
 
 	_setToggleState: function() {

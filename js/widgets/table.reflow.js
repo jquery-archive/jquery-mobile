@@ -19,38 +19,36 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
-		var o = this.options;
+		var opts = this.options;
 
 		this._super();
 
 		// If it's not reflow mode, return here.
-		if( o.mode !== "reflow" ) {
+		if( opts.mode !== "reflow" ) {
 			return;
 		}
 
-		if( !o.enhanced ) {
-			this.element.addClass( o.classes.reflowTable );
+		if( !opts.enhanced ) {
+			this.element.addClass( opts.classes.reflowTable );
 
 			this._enhanceReflow();
 		}
-
-		// bind to refresh call of table
-		this._on( this.element, {
-			refresh: "_refreshReflow"
-		});
 	},
 
-	_enhanceReflow: function () {
+	_enhanceReflow: function() {
 		this._updateReflow();
 	},
 
-	_refreshReflow: function () {
-		this._updateReflow( );
+	refresh: function( create ) {
+		this._super( create );
+		if ( !create && this.options.mode === "reflow" ) {
+			this._updateReflow( );
+		}
 	},
 
-	_updateReflow: function () {
+	_updateReflow: function() {
 		var $el = this,
-			o = this.options;
+			opts = this.options;
 
 		// get headers in reverse order so that top-level headers are appended last
 		$( $el.allHeaders.get().reverse() ).each( function() {
@@ -71,16 +69,16 @@ $.widget( "mobile.table", $.mobile.table, {
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 						}
 
-						$el._addLabels( $cells.filter( filter ), o.classes.cellLabels + hierarchyClass, text );
+						$el._addLabels( $cells.filter( filter ), opts.classes.cellLabels + hierarchyClass, text );
 					} else {
-						$el._addLabels( $cells, o.classes.cellLabels, text );
+						$el._addLabels( $cells, opts.classes.cellLabels, text );
 					}
 
 				}
 		});
 	},
 
-	_addLabels: function ( cells, label, text ) {
+	_addLabels: function( cells, label, text ) {
 		// .not fixes #6006
 		cells.not( ":has(b." + label + ")").prepend( "<b class='" + label + "'>" + text + "</b>"  );
 	}
