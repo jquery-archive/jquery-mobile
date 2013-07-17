@@ -273,8 +273,8 @@ $.widget( "mobile.panel", {
 					$( ".ui-page-active" ).off( "panelclose" );
 					$( ".ui-page-active" ).jqmData( "panel", "open" );
 					
-					if ( $.support.cssTransform3d && !!self.options.animate ) {
-						$pageContent.addClass( self.options.classes.animate );
+					if ( $.support.cssTransform3d && !!o.animate ) {
+						$pageContent.addClass( o.classes.animate );
 					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
@@ -285,9 +285,9 @@ $.widget( "mobile.panel", {
 						setTimeout( complete, 0 );
 					}
 
-					if ( self.options.theme && self.options.display !== "overlay" ) {
+					if ( o.theme && o.display !== "overlay" ) {
 						$( ".ui-page-active" ).page( "removeContainerBackground" );
-						$.mobile.pageContainer.addClass( "ui-overlay-" + self.options.theme );
+						$.mobile.pageContainer.addClass( "ui-overlay-" + o.theme );
 					}
 
 					self.element
@@ -350,14 +350,14 @@ $.widget( "mobile.panel", {
 					}
 
 					self.element.removeClass( o.classes.panelOpen );
-					$page.removeClass( self._contentOpen )
+					$pageContent.removeClass( o.classes.contentOpen );
 
 					if ( self._modal ) {
 						self._modal.removeClass( self._modalOpenClasses );
 					}
 				},
 				complete = function() {
-					if ( self.options.theme && self.options.display !== "overlay" ) {
+					if ( o.theme && o.display !== "overlay" ) {
 						$( ".ui-page-active" ).page( "removeContainerBackground" );
 						$.mobile.pageContainer.addClass( self._overlayTheme );
 					}
@@ -368,7 +368,7 @@ $.widget( "mobile.panel", {
 					self.element	
 						.addClass( o.classes.panelClosed );
 
-					$page.removeClass( self._contentOpenClasses );
+					$pageContent.removeClass( self._contentOpenClasses );
 
 					self._fixPanel();
 					self._unbindFixListener();
@@ -396,8 +396,7 @@ $.widget( "mobile.panel", {
 	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
 
 	_destroy: function() {
-		var classes = this.options.classes,
-			theme = this.options.theme,
+		var o = this.options,
 			multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1,
 			$page = this._parentPage ? this._parentPage : $( ".ui-page-active" ),
 			$pageContent = $page.add( this._extFxdToolbars );
@@ -412,17 +411,17 @@ $.widget( "mobile.panel", {
 		
 		if ( this._open ) {
 			$( ".ui-page-active" ).jqmRemoveData( "panel" );
-			$pageContent.removeClass( classes.contentOpen );
+			$pageContent.removeClass( o.classes.contentOpen );
 		}
 		
-		if ( this._open && theme && self.options.display !== "overlay" ) {
+		if ( this._open && o.theme && o.display !== "overlay" ) {
 			$( ".ui-page-active" ).page( "removeContainerBackground" );
-			$.mobile.pageContainer.addClass( self._overlayTheme );
+			$.mobile.pageContainer.addClass( this._overlayTheme );
 		}
 
-		if ( $.support.cssTransform3d && !!this.options.animate ) {
-			$( ".ui-page-active" ).removeClass( this.options.classes.animate );
-			this._fixedToolbar.removeClass( this.options.classes.animate );
+		if ( $.support.cssTransform3d && !!o.animate ) {
+			$( ".ui-page-active" ).removeClass( o.classes.animate );
+			this._fixedToolbar.removeClass( o.classes.animate );
 		}
 		
 		this._panelInner.children().unwrap();
