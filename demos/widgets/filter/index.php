@@ -213,7 +213,7 @@
 			<h2 id="filter-callback">Filter Custom Callback</h2>
 			<p>
 			As with the listview extension, you can provide custom callback functions
-			to the filter or override the filter altogether on the <code>filtertextbeforefilter</code>
+			to the filter or override the filter altogether on the <code>filterablebeforefilter</code>
 			event. Please note that the filter has a <strong>delay of 250ms</strong>
 			before the filter actually triggers. This prevents running the filtering 
 			function multiple times while the user is typing. 
@@ -227,7 +227,7 @@
 			</p>
 <code><pre>
 $.mobile.document.bind("mobileinit", function() {
-	$.mobile.filtertext.prototype.filterCallback = function( text, searchValue, item ) {
+	$.mobile.filterable.prototype.filterCallback = function( text, searchValue, item ) {
 		// your custom filtering logic goes here
 	});
 });</code></pre>
@@ -237,7 +237,7 @@ $.mobile.document.bind("mobileinit", function() {
 			appropriate option:
 			</p>
 <code><pre>
-$("selector").filtertext("option", "filterCallback", function( text, searchValue, item ) {
+$("selector").filterable("option", "filterCallback", function( text, searchValue, item ) {
 		// your custom filtering logic goes here
 	});
 });</code></pre>
@@ -245,10 +245,10 @@ $("selector").filtertext("option", "filterCallback", function( text, searchValue
 
 			<p>
 			To override the filter altogether (for example when loading data server-side
-			or from localstorage), bind to the <code>filtertextbeforefilter</code> event.
+			or from localstorage), bind to the <code>filterablebeforefilter</code> event.
 			</p>
 <code><pre>
-$(".selector input").on("filtertextbeforefilter", function( e, data ) {
+$(".selector input").on("filterablebeforefilter", function( e, data ) {
 		var value;
 		
 		e.preventDefault();

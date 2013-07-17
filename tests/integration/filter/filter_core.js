@@ -5,7 +5,7 @@
 // TODO split out into seperate test files
 (function($){
 	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
-		insetVal = $.mobile.filtertext.prototype.options.inset;
+		insetVal = $.mobile.filterable.prototype.options.inset;
 
 	$.mobile.defaultTransition = "none";
 
@@ -117,7 +117,7 @@
 		);
 	});
 
-	asyncTest( "Event filtertextbeforefilter firing", function() {
+	asyncTest( "Event filterablebeforefilter firing", function() {
 		var $searchPage = $( searchFilterId );
 		$.testHelper.pageSequence([
 			function() {
@@ -126,7 +126,7 @@
 
 			function() {
 				var beforeFilterCount = 0;
-				$searchPage.on( "filtertextbeforefilter", function( e ) {
+				$searchPage.on( "filterablebeforefilter", function( e ) {
 					beforeFilterCount += 1;
 				});
 
@@ -138,7 +138,7 @@
 					equal(
 						beforeFilterCount,
 						1,
-						"filtertextbeforefilter should fire only once for the same value"
+						"filterablebeforefilter should fire only once for the same value"
 					);
 					$searchPage.find( 'input' ).val( "ab" );
 					$searchPage.find( 'input' ).trigger('input');
@@ -147,7 +147,7 @@
 						equal(
 							beforeFilterCount,
 							2,
-							"filtertextbeforefilter should fire twice since value has changed"
+							"filterablebeforefilter should fire twice since value has changed"
 						);
 						start();
 					}, 500);
@@ -284,17 +284,17 @@
 		setup: function() {
 			var self = this;
 			this._refreshCornersCount = 0;
-			this._refreshCornersFn = $.mobile.filtertext.prototype._addFirstLastClasses;
+			this._refreshCornersFn = $.mobile.filterable.prototype._addFirstLastClasses;
 
 			// _refreshCorners is the last method called in the filter loop
 			// so we count the number of times _refreshCorners gets invoked to stop the test
-			$.mobile.filtertext.prototype._addFirstLastClasses = function() {
+			$.mobile.filterable.prototype._addFirstLastClasses = function() {
 				self._refreshCornersCount += 1;
 				self._refreshCornersFn.apply( this, arguments );
 			}
 		},
 		teardown: function() {
-			$.mobile.filtertext.prototype._refreshCorners = this._refreshCornersFn;
+			$.mobile.filterable.prototype._refreshCorners = this._refreshCornersFn;
 		}
 	});
 
@@ -316,7 +316,7 @@
 
 			function() {
 				// set the listview instance callback
-				listPage.find( "ul" ).filtertext( "option", "filterCallback", function( text, searchValue, item ) {
+				listPage.find( "ul" ).filterable( "option", "filterCallback", function( text, searchValue, item ) {
 					filterCallbackCount += 1;
 					return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 				});
@@ -355,7 +355,7 @@
 
 			function() {
 				// set the filter instance callback
-				listPage.find( "ul" ).filtertext( "option", "filterCallback", function() {
+				listPage.find( "ul" ).filterable( "option", "filterCallback", function() {
 					filterChangedCallbackCount += 1;
 				});
 
@@ -406,7 +406,7 @@
 	module( "Caching" );
 
 		asyncTest( "list filter is inset from prototype options value", function() {
-		$.mobile.filtertext.prototype.options.inset = true;
+		$.mobile.filterable.prototype.options.inset = true;
 		$("#list-inset-filter-prototype").page();
 
 		$.testHelper.pageSequence([
@@ -463,7 +463,7 @@
 				ok($filter.is( ".baz" ), "filter element has custom classed set by user");
 				//removed ok($filter.attr( "id" ) === "foo", "filter has custom id");
 
-				$list.filtertext("destroy");
+				$list.filterable("destroy");
 
 				ok($page.find( ".ui-filter" ).length === 0, "filter can be destroyed using custom user id");			 
 				start();
@@ -547,7 +547,7 @@
 						3,
 						"Custom filter can be used for filtering"
 					);
-					$list.filtertext( "destroy" );
+					$list.filterable( "destroy" );
 					ok(
 						$page.find( ".ui-filter" ).length === 1,
 						"Pre-enhanced filter element is not removed on destroy"
@@ -580,7 +580,7 @@
 					$filter = $page.find( ".ui-filter" ),
 					$list = $page.find( "ul" ).eq(0);
 
-				$list.filtertext( "disable" );
+				$list.filterable( "disable" );
 
 				deepEqual(
 					$page.find('input').attr( "disabled" ),
@@ -597,7 +597,7 @@
 						"Disabled filters cannot filter"
 					);
 
-					$list.filtertext( "enable" );
+					$list.filterable( "enable" );
 
 					deepEqual(
 						$page.find('input').attr( "disabled" ),
@@ -892,7 +892,7 @@
 									0,
 									"Clearing filter shows all elements again"
 								);
-								$page.find( "#ticktick_p" ).filtertext("destroy");
+								$page.find( "#ticktick_p" ).filterable("destroy");
 								ok(
 									$page.find(".ui-filter").length === 1,
 									"Destroying one filter does not destroy another filter"
@@ -970,7 +970,7 @@
 									0,
 									"Clearing filter shows all elements again"
 								);
-								$page.find( "#ticktick_span" ).filtertext("destroy");
+								$page.find( "#ticktick_span" ).filterable("destroy");
 								ok(
 									$page.find(".ui-filter").length === 1,
 									"Destroying one filter does not destroy another filter"
