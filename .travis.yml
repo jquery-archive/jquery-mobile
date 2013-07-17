@@ -15,4 +15,4 @@ env:
 notifications:
   irc:
     channels:
-      - "chat.freenode.net#jquerymobile-dev"
+      - "chat.freenode.net#jqueryui-dev"
