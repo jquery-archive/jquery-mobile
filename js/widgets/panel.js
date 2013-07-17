@@ -22,9 +22,9 @@ $.widget( "mobile.panel", {
 			pagePanel: "ui-page-panel",
 			pagePanelOpen: "ui-page-panel-open",
 			pagePanelClosed: "ui-page-panel-closed",
-			contentFixedToolbar: "ui-panel-content-fixed-toolbar",
-			contentFixedToolbarOpen: "ui-panel-content-fixed-toolbar-open",
-			contentFixedToolbarClosed: "ui-panel-content-fixed-toolbar-closed",
+			fixedToolbar: "ui-panel-fixed-toolbar",
+			fixedToolbarOpen: "ui-panel-fixed-toolbar-open",
+			fixedToolbarClosed: "ui-panel-fixed-toolbar-closed",
 			animate: "ui-panel-animate"
 		},
 		animate: true,
@@ -60,12 +60,13 @@ $.widget( "mobile.panel", {
 		
 		this._addPanelClasses();
 		$( ".ui-page-active" ).addClass( this.options.classes.pagePanel + " " + this.options.classes.pagePanelClosed );
-		this._fixedToolbar.addClass( this.options.classes.contentFixedToolbarClosed );
+		this._fixedToolbar.addClass( this.options.classes.contentFixedToolbar + " " + this.options.classes.contentFixedToolbarClosed );
 
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!this.options.animate ) {
 			this.element.addClass( this.options.classes.animate );
 			$( ".ui-page-active" ).addClass( this.options.classes.animate );
+			this._fixedToolbar.addClass( this.options.classes.animate );
 		}
 
 		this._bindUpdateLayout();
@@ -99,24 +100,11 @@ $.widget( "mobile.panel", {
 	},
 	
 	_getFixedToolbar: function() {
-		if( !!this._parentPage ) {
-			var $fixedToolbar = this._parentPage.find( "." + this.options.classes.contentFixedToolbar );
-			
-			if ( $fixedToolbar.length === 0 ) {
-				$fixedToolbar = this._parentPage.find( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ).addClass( this.options.classes.contentFixedToolbar );
-				if ( $.support.cssTransform3d && !!this.options.animate ) {
-					$fixedToolbar.addClass( this.options.classes.animate );
-				}
-			}
-		} else {
-			$fixedToolbar = $( ".ui-page-active" )
-				.find( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" )
-				.addClass( this.options.classes.contentFixedToolbar );
-			
-			if ( $.support.cssTransform3d && !!this.options.animate ) {
-				$fixedToolbar.addClass( this.options.classes.animate );
-			}
-		}
+
+		var $extFixedToolbar = $( "body" ).children( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ),
+			$intFixedToolbar = $( ".ui-page-active" ).find( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ),
+			$fixedToolbar = $extFixedToolbar.add( $intFixedToolbar );
+		
 		return $fixedToolbar;
 	},
 	
