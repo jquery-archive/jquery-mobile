@@ -54,8 +54,7 @@
 
 /* hardware acceleration for smoother transitions on WebKit browsers */
 .ui-panel-animate.ui-panel:not(.ui-panel-display-reveal),
-.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) > div,
-.ui-panel-animate.ui-panel-closed.ui-panel-display-reveal > div {
+.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) > div {
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translate3d(0,0,0);
 }
