@@ -92,9 +92,6 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		enterToNav: true,
   		highlight: true,
   		submitTo: "search-results.php"
-	}).filtertext({
-		filterReveal: true,
-		filterPlaceholder: "Search...",
 	});
 	
 	$( this ).find( ".jqm-header .jqm-search-link" ).on( "click", function() {
@@ -130,11 +127,6 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		arrowKeyNav: true,
   		enterToNav: true,
   		highlight: true
-	});
-
-	$( this ).find( ".jqm-content ul.jqm-widget-list" ).filtertext({
-		filterReveal: true,
-		filterPlaceholder: "Search...",
 	});
 
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
