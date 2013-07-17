@@ -363,19 +363,13 @@ $.widget( "mobile.popup", {
 			this._setTolerance( opts.tolerance );
 		}
 
-		return this._super( opts );
-	},
-
-	// FIXME: Move this into _setOptions as soon as we're using a version of the
-	// factory that includes https://github.com/jquery/jquery-ui/pull/1024 ...
-	_setOption: function( key, value ) {
-		if ( key === "disabled" ) {
-			if ( value ) {
+		if ( opts.disabled !== undefined ) {
+			if ( opts.disabled ) {
 				this.close();
 			}
 		}
 
-		return this._super( key, value );
+		return this._super( opts );
 	},
 
 	_setTolerance: function( value ) {
