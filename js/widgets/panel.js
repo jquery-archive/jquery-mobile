@@ -21,6 +21,7 @@ $.widget( "mobile.panel", {
 			modalOpen: "ui-panel-dismiss-open",
 			pagePanelOpen: "ui-page-panel-open",
 			fixedToolbarOpen: "ui-panel-fixed-toolbar-open",
+			contentPrefix: "ui-panel-page-content", /* Used for display and position classes for page and fixed toolbars */
 			animate: "ui-panel-animate"
 		},
 		animate: true,
@@ -297,13 +298,13 @@ $.widget( "mobile.panel", {
 
 					self._positionPanel();
 
-					self._pagePanelOpenClasses = self._getPosDisplayClasses( o.classes.pagePanel );
+					self._pagePanelOpenClasses = self._getPosDisplayClasses( o.classes.contentPrefix );
 					$( ".ui-page-active" )
 						.addClass( self._pagePanelOpenClasses + " " + o.classes.pagePanelOpen );
 
-					self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentFixedToolbar );
+					self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentPrefix );
 					self._fixedToolbar
-						.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
+						.addClass( self._fixedToolbarOpenClasses + " " + o.classes.fixedToolbarOpen );
 
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
 					if ( self._modal ) {
@@ -353,7 +354,7 @@ $.widget( "mobile.panel", {
 
 					self.element.removeClass( o.classes.panelOpen );
 					$( ".ui-page-active" ).removeClass( self._pagePanelOpenClasses )
-					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
+					self._fixedToolbar.removeClass( o.classes.fixedToolbarOpen );
 
 					if ( self._modal ) {
 						self._modal.removeClass( self._modalOpenClasses );
@@ -415,7 +416,7 @@ $.widget( "mobile.panel", {
 		if ( this._open ) {
 			$( ".ui-page-active" ).jqmRemoveData( "panel" );
 			$( ".ui-page-active" ).removeClass( classes.pagePanelOpen );
-			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
+			this._fixedToolbar.removeClass( classes.fixedToolbarOpen );
 		}
 		
 		if ( this._open && theme && self.options.display !== "overlay" ) {
