@@ -51,7 +51,7 @@ $.widget( "mobile.panel", {
 			_parentPage: ( parentPage.length > 0 ) ? parentPage : false,
 			_overlayTheme: this._getOverlayTheme,
 			_panelInner: this._getPanelInner(),
-			_extFxdToolbars: this._getExtFxdToolbars()
+			_extFxdToolbars: this._getExtFxdToolbars
 		});
 		
 		this._addPanelClasses();
@@ -105,7 +105,7 @@ $.widget( "mobile.panel", {
 	_getExtFxdToolbars: function() {
 		// External fixed toolbars: true persistent toolbars outside page
 		var $extFxdToolbars = $( "body" ).children( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" );
-		
+
 		return $extFxdToolbars;
 	},
 
@@ -267,7 +267,7 @@ $.widget( "mobile.panel", {
 			var self = this,
 				o = self.options,
 				$page = self._parentPage ? self._parentPage : $( ".ui-page-active" ),
-				$pageContent = $page.add( self._extFxdToolbars ),
+				$pageContent = $page.add( self._extFxdToolbars() ),
 				
 				_openPanel = function() {
 					$( ".ui-page-active" ).off( "panelclose" );
@@ -338,7 +338,7 @@ $.widget( "mobile.panel", {
 			var o = this.options,
 				self = this,
 				$page = self._parentPage ? self._parentPage : $( ".ui-page-active" ),
-				$pageContent = $page.add( self._extFxdToolbars ),
+				$pageContent = $page.add( self._extFxdToolbars() ),
 				
 				_closePanel = function() {
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
@@ -399,7 +399,7 @@ $.widget( "mobile.panel", {
 		var o = this.options,
 			multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1,
 			$page = this._parentPage ? this._parentPage : $( ".ui-page-active" ),
-			$pageContent = $page.add( this._extFxdToolbars );
+			$pageContent = $page.add( this._extFxdToolbars() );
 
 		// create
 		if ( !multiplePanels ) {
