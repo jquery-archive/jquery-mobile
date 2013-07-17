@@ -2,7 +2,7 @@
 
 <li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">AJAX Navigation</a></li>
 
-<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote filterbarbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote filtertextbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
 
 <li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Buttons</a></li>
 

@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Adds a filterbar to an element collection
-//>>label: Filter
+//>>description: Adds a filtertext widget to an element collection
+//>>label: Filtertext
 //>>group: Widgets
 
 
@@ -13,7 +13,7 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 		return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 	};
 
-	$.widget( "mobile.filterbar", $.extend( {
+	$.widget( "mobile.filtertext", $.extend( {
 
 			options: {
 				theme: "a",
@@ -276,10 +276,10 @@ define( [ "jquery", "./forms/textinput" ], function( jQuery ) {
 
 	}, $.mobile.behaviors.addFirstLastClasses ) );
 
-	$.mobile.filterbar.initSelector = ":jqmData(filter='true')";
+	$.mobile.filtertext.initSelector = ":jqmData(filter='true')";
 
 	//auto self-init widgets
-	$.mobile._enhancer.add( "mobile.filterbar" );
+	$.mobile._enhancer.add( "mobile.filtertext" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

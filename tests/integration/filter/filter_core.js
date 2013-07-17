@@ -5,7 +5,7 @@
 // TODO split out into seperate test files
 (function($){
 	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
-		insetVal = $.mobile.filterbar.prototype.options.inset;
+		insetVal = $.mobile.filtertext.prototype.options.inset;
 
 	$.mobile.defaultTransition = "none";
 
@@ -53,7 +53,7 @@
 			},
 			function() {
 				// first input
-				
+
 				$searchPage.find('input').val('a');
 				$searchPage.find('input').trigger('change');
 				window.setTimeout(function() {
@@ -117,7 +117,7 @@
 		);
 	});
 
-	asyncTest( "Event filterbarbeforefilter firing", function() {
+	asyncTest( "Event filtertextbeforefilter firing", function() {
 		var $searchPage = $( searchFilterId );
 		$.testHelper.pageSequence([
 			function() {
@@ -126,7 +126,7 @@
 
 			function() {
 				var beforeFilterCount = 0;
-				$searchPage.on( "filterbarbeforefilter", function( e ) {
+				$searchPage.on( "filtertextbeforefilter", function( e ) {
 					beforeFilterCount += 1;
 				});
 
@@ -138,7 +138,7 @@
 					equal(
 						beforeFilterCount,
 						1,
-						"filterbarbeforefilter should fire only once for the same value"
+						"filtertextbeforefilter should fire only once for the same value"
 					);
 					$searchPage.find( 'input' ).val( "ab" );
 					$searchPage.find( 'input' ).trigger('input');
@@ -147,7 +147,7 @@
 						equal(
 							beforeFilterCount,
 							2,
-							"filterbarbeforefilter should fire twice since value has changed"
+							"filtertextbeforefilter should fire twice since value has changed"
 						);
 						start();
 					}, 500);
@@ -284,17 +284,17 @@
 		setup: function() {
 			var self = this;
 			this._refreshCornersCount = 0;
-			this._refreshCornersFn = $.mobile.filterbar.prototype._addFirstLastClasses;
+			this._refreshCornersFn = $.mobile.filtertext.prototype._addFirstLastClasses;
 
 			// _refreshCorners is the last method called in the filter loop
 			// so we count the number of times _refreshCorners gets invoked to stop the test
-			$.mobile.filterbar.prototype._addFirstLastClasses = function() {
+			$.mobile.filtertext.prototype._addFirstLastClasses = function() {
 				self._refreshCornersCount += 1;
 				self._refreshCornersFn.apply( this, arguments );
 			}
 		},
 		teardown: function() {
-			$.mobile.filterbar.prototype._refreshCorners = this._refreshCornersFn;
+			$.mobile.filtertext.prototype._refreshCorners = this._refreshCornersFn;
 		}
 	});
 
@@ -316,7 +316,7 @@
 
 			function() {
 				// set the listview instance callback
-				listPage.find( "ul" ).filterbar( "option", "filterCallback", function( text, searchValue, item ) {
+				listPage.find( "ul" ).filtertext( "option", "filterCallback", function( text, searchValue, item ) {
 					filterCallbackCount += 1;
 					return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 				});
@@ -355,14 +355,14 @@
 
 			function() {
 				// set the filter instance callback
-				listPage.find( "ul" ).filterbar( "option", "filterCallback", function() {
+				listPage.find( "ul" ).filtertext( "option", "filterCallback", function() {
 					filterChangedCallbackCount += 1;
 				});
 
 				listPage.find( "input" ).val( "foo" )
 				listPage.find( "input" ).trigger( "change" );
 			},
-			
+
 			function() {
 				equal( filterChangedCallbackCount, expectedCount, "filterChangeCallback should be called exactly "+ expectedCount +" times" );
 				start();
@@ -406,7 +406,7 @@
 	module( "Caching" );
 
 		asyncTest( "list filter is inset from prototype options value", function() {
-		$.mobile.filterbar.prototype.options.inset = true;
+		$.mobile.filtertext.prototype.options.inset = true;
 		$("#list-inset-filter-prototype").page();
 
 		$.testHelper.pageSequence([
@@ -444,7 +444,7 @@
 	});
 
 	module( "Filter Widget Configuration" );
-	
+
 	asyncTest( "Custom id and classes are set on filter", function () {
 		$.testHelper.pageSequence( [
 			function(){
@@ -463,14 +463,14 @@
 				ok($filter.is( ".baz" ), "filter element has custom classed set by user");
 				//removed ok($filter.attr( "id" ) === "foo", "filter has custom id");
 
-				$list.filterbar("destroy");
+				$list.filtertext("destroy");
 
 				ok($page.find( ".ui-filter" ).length === 0, "filter can be destroyed using custom user id");			 
 				start();
 			}
 		]);
 	});
-	
+
 	asyncTest( "Placing the filter at a location specified by data-target", function () {
 		$.testHelper.pageSequence( [
 			function(){
@@ -547,7 +547,7 @@
 						3,
 						"Custom filter can be used for filtering"
 					);
-					$list.filterbar( "destroy" );
+					$list.filtertext( "destroy" );
 					ok(
 						$page.find( ".ui-filter" ).length === 1,
 						"Pre-enhanced filter element is not removed on destroy"
@@ -564,7 +564,7 @@
 	});
 
 	module( "Filter Widget Methods/Options" );
-		
+
 	asyncTest( "Disabling, enabling text input", function () {
 		$.testHelper.pageSequence( [
 			function(){
@@ -580,14 +580,14 @@
 					$filter = $page.find( ".ui-filter" ),
 					$list = $page.find( "ul" ).eq(0);
 
-				$list.filterbar( "disable" );
-				
+				$list.filtertext( "disable" );
+
 				deepEqual(
 					$page.find('input').attr( "disabled" ),
 					"disabled",
 					"Setting disable option on widget (ul) disables filter textinput"
 				);
-			 
+
 				$page.find('input').val('ac');
 				$page.find('input').trigger('change');
 				setTimeout(function() {
@@ -596,9 +596,9 @@
 						0,
 						"Disabled filters cannot filter"
 					);
-					
-					$list.filterbar( "enable" );
-					
+
+					$list.filtertext( "enable" );
+
 					deepEqual(
 						$page.find('input').attr( "disabled" ),
 						undefined,
@@ -636,7 +636,7 @@
 				var $page = $( ".ui-page-active" ),
 					$filter = $page.find( ".ui-filter" ),
 					$table = $page.find( "table" ).eq(0);
-					
+
 				$page.find('input').val('12:12');
 				$page.find('input').trigger('change');
 				setTimeout(function() {
@@ -659,7 +659,7 @@
 			}
 		]);
 	});
-		
+
 	asyncTest( "Controlgroup Search Filter", function () {
 		$.testHelper.pageSequence( [
 			function(){
@@ -684,7 +684,7 @@
 						3,
 						"Filtering controlgroup input/a buttons by value"
 					);
-					
+
 					// clear 
 					$page.find('input').val('');
 					$page.find('input').trigger('change');
@@ -700,7 +700,7 @@
 			}
 		]);
 	});
-	
+
 	asyncTest( "Native Select Search Filter", function () {
 		$.testHelper.pageSequence( [
 			function(){
@@ -726,7 +726,7 @@
 						9,
 						"Filtering select options by option text"
 					);
-					
+
 					// clear 
 					$page.find('input').val('');
 					$page.find('input').trigger('change');
@@ -742,7 +742,7 @@
 			}
 		]);
 	});
-	
+
 	asyncTest( "Native Select Search Filter - using data-filtertext", function () {
 		$.testHelper.pageSequence( [
 			function(){
@@ -787,7 +787,7 @@
 			}
 		]);
 	});
-	
+
 	asyncTest( "Native Select Search Filter - select is hidden if no options match", function () {
 		$.testHelper.pageSequence( [
 			function(){
@@ -811,7 +811,7 @@
 						$select.is( '.ui-screen-hidden' ),
 						"Select element itself is hidden when no options match filter"
 					);
-					
+
 					// clear 
 					$page.find('input').val('');
 					$page.find('input').trigger('change');
@@ -853,7 +853,7 @@
 							5,
 							"Filtering <p> elements by text"
 						);
-					
+
 					// clear 
 					$page.find('input').eq(0).val('');
 					$page.find('input').eq(0).trigger('change');
@@ -863,7 +863,7 @@
 							0,
 							"Clearing filter shows all elements again"
 						);
-						
+
 						// filter second set
 						$page.find('input').eq(1).val('f');
 						$page.find('input').eq(1).trigger('change');
@@ -892,7 +892,7 @@
 									0,
 									"Clearing filter shows all elements again"
 								);
-								$page.find( "#ticktick_p" ).filterbar("destroy");
+								$page.find( "#ticktick_p" ).filtertext("destroy");
 								ok(
 									$page.find(".ui-filter").length === 1,
 									"Destroying one filter does not destroy another filter"
@@ -905,7 +905,7 @@
 			}
 		]);
 	});
-	
+
 	asyncTest( "Random Elements Filter - <span>", function () {
 		$.testHelper.pageSequence( [
 			function(){
@@ -931,7 +931,7 @@
 							5,
 							"Filtering <span> elements by text"
 						);
-					
+
 					// clear 
 					$page.find('input').eq(0).val('');
 					$page.find('input').eq(0).trigger('change');
@@ -941,7 +941,7 @@
 							0,
 							"Clearing filter shows all elements again"
 						);
-						
+
 						// filter second set
 						$page.find('input').eq(1).val('f');
 						$page.find('input').eq(1).trigger('change');
@@ -970,7 +970,7 @@
 									0,
 									"Clearing filter shows all elements again"
 								);
-								$page.find( "#ticktick_span" ).filterbar("destroy");
+								$page.find( "#ticktick_span" ).filtertext("destroy");
 								ok(
 									$page.find(".ui-filter").length === 1,
 									"Destroying one filter does not destroy another filter"

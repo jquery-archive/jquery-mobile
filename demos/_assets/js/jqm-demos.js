@@ -92,7 +92,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		enterToNav: true,
   		highlight: true,
   		submitTo: "search-results.php"
-	}).filterbar({
+	}).filtertext({
 		filterReveal: true,
 		filterPlaceholder: "Search...",
 	});
@@ -132,7 +132,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		highlight: true
 	});
 
-	$( this ).find( ".jqm-content ul.jqm-widget-list" ).filterbar({
+	$( this ).find( ".jqm-content ul.jqm-widget-list" ).filtertext({
 		filterReveal: true,
 		filterPlaceholder: "Search...",
 	});
