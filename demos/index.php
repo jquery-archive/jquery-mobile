@@ -38,7 +38,7 @@
 			<a href="http://api.jquerymobile.com" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" data-theme="f">Visit API Site </a>
 		</div>
 
-		<ul data-role="listview" data-inset="true" data-theme="a" data-icon="false" data-filter-placeholder="Search..." class="jqm-list jqm-home-list">
+		<ul data-role="listview" data-inset="true" data-theme="a" data-icon="false" class="jqm-list jqm-home-list">
             <li><a href="intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
             <li><a href="examples/"><h2>Demo Showcase</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
             <li><a href="faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
@@ -49,7 +49,7 @@
 
 		<p class="jqm-intro">Test drive every component in the library, and easily build pages by copying and pasting the markup configuration you need.</p>
 
-		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="a" data-divider-theme="a" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list">
+		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="a" data-divider-theme="a" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list jqm-widget-list">
         	<?php include( 'nav-widgets.php' ); ?>
         </ul>
 		

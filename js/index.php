@@ -53,7 +53,7 @@ $files = array(
 	'jquery.mobile.grid.js',
 	'widgets/navbar.js',
 	'widgets/listview.js',
-	'widgets/listview.filter.js',
+	'widgets/filter.js',
 	'widgets/listview.autodividers.js',
 	'jquery.mobile.nojs.js',
 	'widgets/forms/reset.js',

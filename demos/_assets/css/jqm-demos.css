@@ -119,11 +119,14 @@ body, .jqm-demos  {
 	display: block;
 	border-top: 1px solid #e0e0e0;
 }
-.jqm-search	> .ui-listview-filter {
+.jqm-search	> .ui-filter {
 	margin: 0 -.3125em;
 	padding: 1px 0; /* to resolve Chrome rendering issue (border-bottom not visible */
 }
-.jqm-demos .jqm-search > .ui-listview-filter .ui-input-search {
+.jqm-content	> .ui-filter {
+	margin-bottom: 1.1em;
+}
+.jqm-demos .jqm-search > .ui-filter .ui-input-search {
 	margin: 4px .3125em;
 }
 .jqm-search > .jqm-list {
@@ -434,19 +437,19 @@ h2.jqm-home-widget {
 }
 
 /* List filter */
-.jqm-demos-home .jqm-content > .ui-listview-filter,
-.jqm-demos-index .jqm-content > .ui-listview-filter {
+.jqm-demos-home .jqm-content > .ui-filter,
+.jqm-demos-index .jqm-content > .ui-filter {
 	margin-top: 0;
 	margin-bottom: -.5em;
 }
-.jqm-demos-home .jqm-content > .ui-listview-filter .ui-input-search,
-.jqm-demos-index .jqm-content > .ui-listview-filter .ui-input-search,
-.jqm-demos-index .jqm-search-results-wrap > .ui-listview-filter .ui-input-search {
+.jqm-demos-home .jqm-content > .ui-filter .ui-input-search,
+.jqm-demos-index .jqm-content > .ui-filter .ui-input-search,
+.jqm-demos-index .jqm-search-results-wrap > .ui-filter .ui-input-search {
 	background-color: #f9f9f9;
 	border-color: #e5e5e5;
 	border-color: rgba(0,0,0,.1);
 }
-.jqm-demos .jqm-search .ui-listview-filter .ui-input-search {
+.jqm-demos .jqm-search .ui-filter .ui-input-search {
 	background-color: #f9f9f9;
 	border-color: #e5e5e5;
 	border-color: rgba(0,0,0,.1);
@@ -454,9 +457,9 @@ h2.jqm-home-widget {
 	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
 	box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
 }
-.jqm-demos-home .jqm-content > .ui-listview-filter .ui-input-search.ui-focus,
-.jqm-demos-index .jqm-content > .ui-listview-filter .ui-input-search.ui-focus,
-.jqm-demos-index .jqm-search-results-wrap > .ui-listview-filter .ui-input-search.ui-focus {
+.jqm-demos-home .jqm-content > .ui-filter .ui-input-search.ui-focus,
+.jqm-demos-index .jqm-content > .ui-filter .ui-input-search.ui-focus,
+.jqm-demos-index .jqm-search-results-wrap > .ui-filter .ui-input-search.ui-focus {
 	background-color: #fff;
 	border-color: #34bae8;
 	border-color: rgba(52,186,232,.2);
@@ -464,7 +467,7 @@ h2.jqm-home-widget {
 	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 0 9px rgba(52,186,232,.2);
 	box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 0 9px rgba(52,186,232,.2);
 }
-.jqm-demos .jqm-search .ui-listview-filter .ui-input-search.ui-focus {
+.jqm-demos .jqm-search .ui-filter .ui-input-search.ui-focus {
 	background-color: #fff;
 	border-color: #e5e5e5;
 	border-color: rgba(0,0,0,.1);
@@ -472,10 +475,10 @@ h2.jqm-home-widget {
 	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
-.jqm-demos .jqm-search > .ui-listview-filter .ui-input-text,
-.jqm-demos-home .jqm-content > .ui-listview-filter .ui-input-text,
-.jqm-demos-index .jqm-content > .ui-listview-filter .ui-input-text,
-.jqm-demos-index .jqm-search-results-wrap > .ui-listview-filter .ui-input-text {
+.jqm-demos .jqm-search > .ui-filter .ui-input-text,
+.jqm-demos-home .jqm-content > .ui-filter .ui-input-text,
+.jqm-demos-index .jqm-content > .ui-filter .ui-input-text,
+.jqm-demos-index .jqm-search-results-wrap > .ui-filter .ui-input-text {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	font-size: .95em;
@@ -625,7 +628,7 @@ h2.jqm-home-widget {
 		background: none;
 		border: none;
 	}
-	.jqm-demos .jqm-search > .ui-listview-filter .ui-input-search {
+	.jqm-demos .jqm-search > .ui-filter .ui-input-search {
 		margin: 0;	
 	}
 	.jqm-search > .jqm-list {

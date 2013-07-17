@@ -20,7 +20,7 @@ define([
 	"./jquery.mobile.grid",
 	"./widgets/navbar",
 	"./widgets/listview",
-	"./widgets/listview.filter",
+	"./widgets/filter",
 	"./widgets/listview.autodividers",
 	"./jquery.mobile.nojs",
 	"./widgets/forms/checkboxradio",

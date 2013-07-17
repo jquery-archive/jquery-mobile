@@ -6,6 +6,11 @@
 
 <li data-section="Demo Showcase" data-filtertext="dynamic controlgroup buttons selects checkboxes forms"><a href="examples/controlgroups/dynamic-controlgroup.php" data-ajax="false">Dynamic controlgroup</a></li>
 
+<!--
+<li data-role="list-divider">Filter</li>
+
+<li data-section="Demo Showcase" data-filtertext="running a custom filter query on local and remote storages"><a href="examples/filter/server-side-filter.php" data-ajax="false">Local/remote storage Filter</a></li>
+-->
 <li data-role="list-divider">Listviews</li>
 
 <li data-section="Demo Showcase" data-filtertext="grid listview responsive grids responsive listviews lists ul"><a href="examples/listviews/grid-listview.php" data-ajax="false">Grid Listview</a></li>

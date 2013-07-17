@@ -84,9 +84,6 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		theme: null,
 		dividerTheme: null,
 		icon: false,
-		filter: true,
-		filterReveal: true,
-		filterPlaceholder: "Search...",
 		autodividers: true,
 		autodividersSelector: function ( li ) {
     		return "";
@@ -95,6 +92,9 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		enterToNav: true,
   		highlight: true,
   		submitTo: "search-results.php"
+	}).filterbar({
+		filterReveal: true,
+		filterPlaceholder: "Search...",
 	});
 	
 	$( this ).find( ".jqm-header .jqm-search-link" ).on( "click", function() {
@@ -121,18 +121,20 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		$( this ).find( ".jqm-search .ui-input-clear" ).trigger( "click" );
 	});
 
-	$( this ).find( ".jqm-content ul.jqm-list " ).listview({
+	$( this ).find( ".jqm-content ul" ).listview({
 		globalNav: "demos",
 		inset: true,
 		theme: null,
 		dividerTheme: null,
 		icon: false,
-		filter: true,
-		filterReveal: true,
-		filterPlaceholder: "Search...",
   		arrowKeyNav: true,
   		enterToNav: true,
   		highlight: true
+	});
+
+	$( this ).find( ".jqm-content ul.jqm-widget-list" ).filterbar({
+		filterReveal: true,
+		filterPlaceholder: "Search...",
 	});
 
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {

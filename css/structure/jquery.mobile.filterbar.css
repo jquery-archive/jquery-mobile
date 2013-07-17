@@ -1,0 +1,29 @@
+.ui-filter {
+	border-width: 0;
+	overflow: hidden;
+	margin: -1em -1em 1em -1em;
+}
+.ui-filter-inset {
+	margin: 1em -.3125em -1em;
+	background: transparent;
+}
+.ui-collapsible-content .ui-filter {
+	margin: -.625em -1em .625em -1em;
+	border-bottom: inherit;
+}
+.ui-collapsible-content .ui-filter-inset {
+	margin: -.3125em;
+	border-bottom-width: 0;
+}
+.ui-filter .ui-input-search {
+	margin: .3125em;
+	width: auto;
+	display: block;
+}
+.ui-screen-hidden {
+	display:none;
+}
+
+
+
+
