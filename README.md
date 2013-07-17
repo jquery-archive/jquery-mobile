@@ -4,7 +4,7 @@ This is the main repository for the jQuery Mobile project. From the [official we
 
 > A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.
 
-jQuery Mobile 1.3 (1.3.0) works with versions of jQuery core from 1.7.0 to 1.9.0. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://jquerymobile.com/demos/).
+jQuery Mobile 1.3 (1.3.0) works with versions of jQuery core from 1.7.0 to 1.9.0. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://view.jquerymobile.com/1.3.1/dist/demos/).
 
 ## Contributing
 
