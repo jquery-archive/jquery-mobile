@@ -20,7 +20,7 @@
 	width: auto;
 	display: block;
 }
-.ui-screen-hidden {
+.ui-filter + * > .ui-screen-hidden {
 	display:none;
 }
 
