@@ -211,6 +211,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 
 			// ... and re-apply any unrecognized classes that were found
 			data.unknownClasses ).join( " " );
+		el.setAttribute( "role", "button" );
 	}
 
 	return this;
@@ -260,6 +261,7 @@ function enhanceWithButtonMarkup( idx, el ) {
 	el.className = $.grep( classes, function( el, idx ) {
 			return !( idx > 0 && classes[ idx - 1 ] === el );
 		}).join( " " );
+	el.setAttribute( "role", "button" );
 }
 
 //links in bars, or those with data-role become buttons
