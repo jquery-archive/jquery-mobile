@@ -18,7 +18,7 @@ define( [ "jquery",
 
 $.widget( "mobile.checkboxradio", $.extend( {
 	options: {
-		theme: null,
+		theme: "inherit",
 		mini: false,
 		wrapperClass: null,
 		enhanced: false,
@@ -92,7 +92,8 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		this.input.add( this.label ).wrapAll( this._wrapper() );
 		this._setOptions({
 			"theme": this.options.theme,
-			"iconpos": this.options.iconpos
+			"iconpos": this.options.iconpos,
+			"mini": this.options.mini
 		});
 
 	},
@@ -243,6 +244,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		} else if( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length !== 0 ){
 			this.label.removeClass( "ui-btn-icon-" + this.options.iconpos );
 		}
+		this._super( options );
 	}
 
 }, $.mobile.behaviors.formReset ) );
