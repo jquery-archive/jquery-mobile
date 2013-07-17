@@ -758,7 +758,7 @@ $.widget( "mobile.popup", {
 	_closePopup: function( evt, data ) {
 		var parsedDst, toUrl, opts = this.options, immediate = false;
 
-		if ( evt && evt.isDefaultPrevented() ) {
+		if ( ( evt && evt.isDefaultPrevented() ) || $.mobile.popup.active !== this ) {
 			return;
 		}
 
