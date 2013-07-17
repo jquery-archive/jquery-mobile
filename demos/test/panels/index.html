@@ -11,25 +11,29 @@
 	<script>
 		$( document ).on( "pagecreate", function() {
 			$( "body > [data-role='panel']" ).panel();
-			$( "#outside [data-role='listview']" ).listview();
+			$( "body > [data-role='panel'] [data-role='listview']" ).listview();
+			$( "body > [data-role='header']" ).toolbar();
+			$( "body > [data-role='header'] [data-role='navbar']" ).navbar();
 		});
 	</script>
 </head>
 <body>
+
+	<div data-role="header" data-position="fixed" data-theme="a">
+		<h1>Header index.html</h1>
+		<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
+		<a href="#inside-a" data-icon="bars" data-iconpos="notext">Menu</a>
+		<div data-role="navbar">
+			<ul>
+				<li><a href="index.html">Page A</a></li>
+				<li><a href="page-b.html">Page B</a></li>
+				<li><a href="page-c.html">Page C</a></li>
+			</ul>
+		</div>
+	</div><!-- /header -->
+
 	<div data-role="page" id="a">
 	
-		<div data-role="header" data-position="fixed">
-			<h1>Header</h1>
-			<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
-			<a href="#inside-a" data-icon="bars" data-iconpos="notext">Menu</a>
-			<div data-role="navbar">
-				<ul>
-					<li><a href="index.html" class="ui-btn-active ui-state-persist">Page A</a></li>
-					<li><a href="page-b.html">Page B</a></li>
-					<li><a href="page-c.html">Page C</a></li>
-				</ul>
-			</div>
-		</div><!-- /header -->
 		
 		<div data-role="content">
 		
@@ -48,7 +52,13 @@
 		</div>
 		
 		<div data-role="footer" data-position="fixed">
-			<h4>Footer</h4>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html" class="ui-btn-active ui-state-persist">Page A</a></li>
+					<li><a href="page-b.html">Page B</a></li>
+					<li><a href="page-c.html">Page C</a></li>
+				</ul>
+			</div>
 		</div><!-- /header -->
 	
 	</div><!-- /page -->
@@ -59,7 +69,8 @@
 			<li>List item</li>
 			<li>List item</li>
 		</ul>
-		<p>sibling page A</p>
+		<br><br>
+		<p>index.html</p>
 	</div>
 
 </body>
