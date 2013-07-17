@@ -59,7 +59,7 @@ $.widget( "mobile.panel", {
 		});
 		
 		this._addPanelClasses();
-		$( ".ui-page-active" ).addClass( this.options.classes.pagePanel, this.options.classes.pagePanelClosed );
+		$( ".ui-page-active" ).addClass( this.options.classes.pagePanel + " " + this.options.classes.pagePanelClosed );
 		this._fixedToolbar.addClass( this.options.classes.contentFixedToolbarClosed );
 
 		// if animating, add the class to do so
@@ -81,7 +81,7 @@ $.widget( "mobile.panel", {
 	},
 	
 	_getOverlayTheme: function() {
-		// Overlay theme on body is the same as the page theme
+		// Overlay theme on page container is the same as the page theme
 		var $overlayTheme = $.data( $.mobile.activePage[ 0 ], "mobile-page" ).options.theme,
 			$overlayThemeClass = "ui-overlay-" + $overlayTheme;
 
@@ -332,8 +332,6 @@ $.widget( "mobile.panel", {
 						.add( ".ui-page-active" )
 						.off( self._transitionEndEvents, complete );
 
-					$( ".ui-page-active" ).addClass( o.classes.pagePanelOpen );
-
 					self._bindFixListener();
 
 					self._trigger( "open" );
@@ -370,9 +368,8 @@ $.widget( "mobile.panel", {
 						setTimeout( complete, 0 );
 					}
 
-					$( ".ui-page-active" ).removeClass( o.classes.pagePanelOpen );
 					self.element.removeClass( o.classes.panelOpen );
-					$( ".ui-page-active" ).removeClass( o.classes.pagePanelOpen );
+					$( ".ui-page-active" ).removeClass( self._pagePanelOpenClasses )
 					self._fixedToolbar.removeClass( o.classes.contentFixedToolbarOpen );
 
 					if ( self._modal ) {
@@ -392,7 +389,6 @@ $.widget( "mobile.panel", {
 						.addClass( o.classes.panelClosed );
 
 					$( ".ui-page-active" )
-						.removeClass( self._pagePanelOpenClasses )
 						.addClass( o.classes.pagePanelClosed );
 
 					self._fixedToolbar
@@ -433,16 +429,20 @@ $.widget( "mobile.panel", {
 		if ( !multiplePanels ) {
 			$( ".ui-page-active" ).find( "a" ).unbind( "panelopen panelclose" );
 			$( ".ui-page-active" ).removeClass( classes.pagePanel );
+				this._fixedToolbar.removeClass( classes.contentFixedToolbar );
 			if ( this._open ) {
 				$( ".ui-page-active" ).jqmRemoveData( "panel" );
 				$( ".ui-page-active" ).removeClass( classes.pagePanelOpen );
+				this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
 				$.mobile.resetActivePageHeight();
+			} else {
+				$( ".ui-page-active" ).removeClass( classes.pagePanelClosed );
+				this._fixedToolbar.removeClass( classes.contentFixedToolbarClosed );
 			}
 		} else if ( this._open ) {
-			$( ".ui-page-active" ).removeClass( classes.contentWrapOpen );
-			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
 			$( ".ui-page-active" ).jqmRemoveData( "panel" );
 			$( ".ui-page-active" ).removeClass( classes.pagePanelOpen );
+			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
 		}
 		
 		if ( this._open && theme && self.options.display !== "overlay" ) {
