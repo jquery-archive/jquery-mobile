@@ -9,7 +9,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.flipswitch", $.mobile.widget, $.extend({
+$.widget( "mobile.flipswitch", $.extend({
 
 	options: {
 		onText: "On",
