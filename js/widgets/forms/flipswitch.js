@@ -14,7 +14,7 @@ $.widget( "mobile.flipswitch", $.mobile.widget, $.extend({
 	options: {
 		onText: "On",
 		offText: "Off",
-		theme: "a",
+		theme: "inherit",
 		enhanced: false,
 		wrapperClass: null
 	},
