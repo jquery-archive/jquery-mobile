@@ -21,10 +21,8 @@ $.widget( "mobile.panel", {
 			modalOpen: "ui-panel-dismiss-open",
 			pagePanel: "ui-page-panel",
 			pagePanelOpen: "ui-page-panel-open",
-			pagePanelClosed: "ui-page-panel-closed",
 			fixedToolbar: "ui-panel-fixed-toolbar",
 			fixedToolbarOpen: "ui-panel-fixed-toolbar-open",
-			fixedToolbarClosed: "ui-panel-fixed-toolbar-closed",
 			animate: "ui-panel-animate"
 		},
 		animate: true,
@@ -59,8 +57,8 @@ $.widget( "mobile.panel", {
 		});
 		
 		this._addPanelClasses();
-		$( ".ui-page-active" ).addClass( this.options.classes.pagePanel + " " + this.options.classes.pagePanelClosed );
-		this._fixedToolbar.addClass( this.options.classes.contentFixedToolbar + " " + this.options.classes.contentFixedToolbarClosed );
+		$( ".ui-page-active" ).addClass( this.options.classes.pagePanel );
+		this._fixedToolbar.addClass( this.options.classes.contentFixedToolbar );
 
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!this.options.animate ) {
@@ -302,12 +300,10 @@ $.widget( "mobile.panel", {
 
 					self._pagePanelOpenClasses = self._getPosDisplayClasses( o.classes.pagePanel );
 					$( ".ui-page-active" )
-						.removeClass( o.classes.pagePanelClosed )
 						.addClass( self._pagePanelOpenClasses + " " + o.classes.pagePanelOpen );
 
 					self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentFixedToolbar );
 					self._fixedToolbar
-						.removeClass( o.classes.contentFixedToolbarClosed )
 						.addClass( self._fixedToolbarOpenClasses + " " + o.classes.contentFixedToolbarOpen );
 
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
@@ -371,17 +367,13 @@ $.widget( "mobile.panel", {
 					}
 					self.element
 						.add( ".ui-page-active" )
-						.off( self._transitionEndEvents, complete )
+						.off( self._transitionEndEvents, complete );
 						
 					self.element	
 						.addClass( o.classes.panelClosed );
 
-					$( ".ui-page-active" )
-						.addClass( o.classes.pagePanelClosed );
-
 					self._fixedToolbar
-						.removeClass( self._fixedToolbarOpenClasses )
-						.addClass( o.classes.contentFixedToolbarClosed );
+						.removeClass( self._fixedToolbarOpenClasses );
 
 					self._fixPanel();
 					self._unbindFixListener();
@@ -423,9 +415,6 @@ $.widget( "mobile.panel", {
 				$( ".ui-page-active" ).removeClass( classes.pagePanelOpen );
 				this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
 				$.mobile.resetActivePageHeight();
-			} else {
-				$( ".ui-page-active" ).removeClass( classes.pagePanelClosed );
-				this._fixedToolbar.removeClass( classes.contentFixedToolbarClosed );
 			}
 		} else if ( this._open ) {
 			$( ".ui-page-active" ).jqmRemoveData( "panel" );
