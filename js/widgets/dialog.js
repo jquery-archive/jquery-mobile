@@ -99,6 +99,7 @@ $.widget( "mobile.dialog", $.extend( {
 			location = ( value === "left" ? "left" : "right" );
 			dst = this.element.children().find( ":jqmData(role='header')" ).first();
 			btn = $( "<a></a>", {
+				"role": "button",
 				"href": "#",
 				"class": "ui-btn ui-btn-" + location +
 					" ui-corner-all ui-icon-delete ui-btn-icon-notext"

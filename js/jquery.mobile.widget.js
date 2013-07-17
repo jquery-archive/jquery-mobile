@@ -28,6 +28,17 @@ $.extend( $.Widget.prototype, {
 		return options;
 	},
 
+	// FIXME: These have to stay in place until we're running on a version of
+	// the widget factory that does enable()/disable() via _setOptions, as in
+	// https://github.com/jquery/jquery-ui/pull/1024
+	enable: function() {
+		return this._setOptions({ disabled: false });
+	},
+
+	disable: function() {
+		return this._setOptions({ disabled: true });
+	},
+
 	enhanceWithin: function( target, useKeepNative ) {
 		this.enhance( $( $[ this.namespace ][ this.widgetName ].initSelector, $( target ) ), useKeepNative );
 	},

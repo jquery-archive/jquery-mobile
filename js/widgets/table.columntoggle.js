@@ -50,7 +50,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		this.element.addClass( o.classes.columnToggleTable );
 
 		id = ( $table.attr( "id" ) || o.classes.popup ) + "-popup"; //TODO BETTER FALLBACK ID HERE
-		$menuButton = $( "<a href='#" + id + "' class='" + o.classes.columnBtn + "' data-" + ns + "rel='popup' data-" + ns + "mini='true'>" + o.columnBtnText + "</a>" );
+		$menuButton = $( "<a role='button' href='#" + id + "' class='" + o.classes.columnBtn + "' data-" + ns + "rel='popup' data-" + ns + "mini='true'>" + o.columnBtnText + "</a>" );
 		$popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + o.classes.popup + "' id='" + id + "'></div>" );
 		$menu = $( "<fieldset data-" + ns + "role='controlgroup'></fieldset>" );
 
