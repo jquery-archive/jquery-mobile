@@ -102,7 +102,7 @@ $.widget( "mobile.panel", {
 	
 	_createModal: function() {
 		var self = this,
-			target = ( !!this._parentPage ) ? this._parentPage : $( "body" );
+			target = $.mobile.pageContainer;
 
 		self._modal = $( "<div class='" + self.options.classes.modal + "' data-panelid='" + self._panelID + "'></div>" )
 			.on( "mousedown", function() {
