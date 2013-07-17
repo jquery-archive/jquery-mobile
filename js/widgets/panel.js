@@ -59,8 +59,6 @@ $.widget( "mobile.panel", {
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!this.options.animate ) {
 			this.element.addClass( this.options.classes.animate );
-			$( ".ui-page-active" ).addClass( this.options.classes.animate );
-			this._fixedToolbar.addClass( this.options.classes.animate );
 		}
 
 		this._bindUpdateLayout();
@@ -274,6 +272,11 @@ $.widget( "mobile.panel", {
 				_openPanel = function() {
 					$( ".ui-page-active" ).off( "panelclose" );
 					$( ".ui-page-active" ).jqmData( "panel", "open" );
+					
+					if ( $.support.cssTransform3d && !!self.options.animate ) {
+						$( ".ui-page-active" ).addClass( self.options.classes.animate );
+						self._fixedToolbar.addClass( self.options.classes.animate );
+					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
 						self.element
@@ -420,6 +423,11 @@ $.widget( "mobile.panel", {
 			$.mobile.pageContainer.addClass( self._overlayTheme );
 		}
 
+		if ( $.support.cssTransform3d && !!this.options.animate ) {
+			$( ".ui-page-active" ).removeClass( this.options.classes.animate );
+			this._fixedToolbar.removeClass( this.options.classes.animate );
+		}
+		
 		this._panelInner.children().unwrap();
 
 		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
