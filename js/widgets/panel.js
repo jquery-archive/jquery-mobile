@@ -19,9 +19,8 @@ $.widget( "mobile.panel", {
 			panelInner: "ui-panel-inner",
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
-			pagePanelOpen: "ui-page-panel-open",
-			fixedToolbarOpen: "ui-panel-fixed-toolbar-open",
 			contentPrefix: "ui-panel-page-content", /* Used for display and position classes for page and fixed toolbars */
+			contentOpen: "ui-panel-page-content-open",
 			animate: "ui-panel-animate"
 		},
 		animate: true,
@@ -262,8 +261,7 @@ $.widget( "mobile.panel", {
 
 	// state storage of open or closed
 	_open: false,
-	_pagePanelOpenClasses: null,
-	_fixedToolbarOpenClasses: null,
+	_contentOpenClasses: null,
 	_modalOpenClasses: null,
 
 	open: function( immediate ) {
@@ -298,13 +296,13 @@ $.widget( "mobile.panel", {
 
 					self._positionPanel();
 
-					self._pagePanelOpenClasses = self._getPosDisplayClasses( o.classes.contentPrefix );
+					self._contentOpenClasses = self._getPosDisplayClasses( o.classes.contentPrefix );
+					
 					$( ".ui-page-active" )
-						.addClass( self._pagePanelOpenClasses + " " + o.classes.pagePanelOpen );
-
-					self._fixedToolbarOpenClasses = self._getPosDisplayClasses( o.classes.contentPrefix );
+						.addClass( self._contentOpenClasses + " " + o.classes.contentOpen );
+						
 					self._fixedToolbar
-						.addClass( self._fixedToolbarOpenClasses + " " + o.classes.fixedToolbarOpen );
+						.addClass( self._contentOpenClasses + " " + o.classes.contentOpen );
 
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
 					if ( self._modal ) {
@@ -353,8 +351,8 @@ $.widget( "mobile.panel", {
 					}
 
 					self.element.removeClass( o.classes.panelOpen );
-					$( ".ui-page-active" ).removeClass( self._pagePanelOpenClasses )
-					self._fixedToolbar.removeClass( o.classes.fixedToolbarOpen );
+					$( ".ui-page-active" ).removeClass( self._contentOpenClasses )
+					self._fixedToolbar.removeClass( o.classes.contentOpen );
 
 					if ( self._modal ) {
 						self._modal.removeClass( self._modalOpenClasses );
@@ -373,7 +371,7 @@ $.widget( "mobile.panel", {
 						.addClass( o.classes.panelClosed );
 
 					self._fixedToolbar
-						.removeClass( self._fixedToolbarOpenClasses );
+						.removeClass( self._contentOpenClasses );
 
 					self._fixPanel();
 					self._unbindFixListener();
@@ -415,8 +413,8 @@ $.widget( "mobile.panel", {
 		
 		if ( this._open ) {
 			$( ".ui-page-active" ).jqmRemoveData( "panel" );
-			$( ".ui-page-active" ).removeClass( classes.pagePanelOpen );
-			this._fixedToolbar.removeClass( classes.fixedToolbarOpen );
+			$( ".ui-page-active" ).removeClass( classes.contentOpen );
+			this._fixedToolbar.removeClass( classes.contentOpen );
 		}
 		
 		if ( this._open && theme && self.options.display !== "overlay" ) {
