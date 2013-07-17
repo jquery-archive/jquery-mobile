@@ -161,6 +161,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		if ( this.isMultiple ) {
 			headerClose = $( "<a>", {
+				"role": "button",
 				"text": o.closeText,
 				"href": "#",
 				"class": "ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
