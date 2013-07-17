@@ -22,19 +22,13 @@
 .ui-panel-display-overlay {
 	z-index: 1001; /* fixed toolbars have z-index 1000 */
 }
-.ui-panel-display-reveal {
-	z-index: 0;
-}
-.ui-panel-display-push {
-	z-index: 999;
-}
 .ui-panel-inner {
 	padding: 1em;
 }
 
 /* page with panel */
-.ui-page-panel {
-	z-index: 999;
+.ui-page.ui-panel-page-content-display-reveal {
+	z-index: 1;
 }
 
 /* dismiss */
