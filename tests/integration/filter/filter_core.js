@@ -576,7 +576,6 @@
 			},
 
 			function() {
-				debugger;
 				var $page = $( ".ui-page-active" ),
 					$filter = $page.find( ".ui-filter" ),
 					$list = $page.find( "ul" ).eq(0);
