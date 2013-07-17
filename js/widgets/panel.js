@@ -19,9 +19,7 @@ $.widget( "mobile.panel", {
 			panelInner: "ui-panel-inner",
 			modal: "ui-panel-dismiss",
 			modalOpen: "ui-panel-dismiss-open",
-			pagePanel: "ui-page-panel",
 			pagePanelOpen: "ui-page-panel-open",
-			fixedToolbar: "ui-panel-fixed-toolbar",
 			fixedToolbarOpen: "ui-panel-fixed-toolbar-open",
 			animate: "ui-panel-animate"
 		},
@@ -57,8 +55,6 @@ $.widget( "mobile.panel", {
 		});
 		
 		this._addPanelClasses();
-		$( ".ui-page-active" ).addClass( this.options.classes.pagePanel );
-		this._fixedToolbar.addClass( this.options.classes.contentFixedToolbar );
 
 		// if animating, add the class to do so
 		if ( $.support.cssTransform3d && !!this.options.animate ) {
@@ -408,15 +404,12 @@ $.widget( "mobile.panel", {
 		// create
 		if ( !multiplePanels ) {
 			$( ".ui-page-active" ).find( "a" ).unbind( "panelopen panelclose" );
-			$( ".ui-page-active" ).removeClass( classes.pagePanel );
-				this._fixedToolbar.removeClass( classes.contentFixedToolbar );
 			if ( this._open ) {
-				$( ".ui-page-active" ).jqmRemoveData( "panel" );
-				$( ".ui-page-active" ).removeClass( classes.pagePanelOpen );
-				this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
 				$.mobile.resetActivePageHeight();
 			}
-		} else if ( this._open ) {
+		}
+		
+		if ( this._open ) {
 			$( ".ui-page-active" ).jqmRemoveData( "panel" );
 			$( ".ui-page-active" ).removeClass( classes.pagePanelOpen );
 			this._fixedToolbar.removeClass( classes.contentFixedToolbarOpen );
