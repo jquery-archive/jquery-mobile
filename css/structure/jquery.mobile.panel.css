@@ -47,14 +47,13 @@
 
 /* animate class is added to panel, wrapper and fixed toolbars */
 .ui-panel-animate {
-	-webkit-transition: -webkit-transform 350ms ease;
-	-moz-transition: -moz-transform 350ms ease;
-	transition: transform 350ms ease;
+	-webkit-transition: -webkit-transform 300ms ease;
+	-moz-transition: -moz-transform 300ms ease;
+	transition: transform 300ms ease;
 }
 
 /* hardware acceleration for smoother transitions on WebKit browsers */
-.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal),
-.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) > div {
+.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) {
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translate3d(0,0,0);
 }
@@ -109,7 +108,7 @@
 	-moz-transform: none;
 }
 
-/* positioning: page panel, fixed toolbars and dismiss */
+/* positioning: pages, fixed toolbars and dismiss */
 /* panel left open */
 .ui-panel-page-content-position-left.ui-panel-page-content-open,
 .ui-panel-dismiss-position-left.ui-panel-dismiss-open {
