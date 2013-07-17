@@ -576,6 +576,7 @@
 			},
 
 			function() {
+				debugger;
 				var $page = $( ".ui-page-active" ),
 					$filter = $page.find( ".ui-filter" ),
 					$list = $page.find( "ul" ).eq(0);
@@ -583,8 +584,8 @@
 				$list.filterable( "disable" );
 
 				deepEqual(
-					$page.find('input').attr( "disabled" ),
-					"disabled",
+					$page.find('input').prop( "disabled" ),
+					true,
 					"Setting disable option on widget (ul) disables filter textinput"
 				);
 
