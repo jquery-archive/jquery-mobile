@@ -19,10 +19,10 @@ $.widget( "mobile.table", {
 	},
 
 	_create: function() {
-		var o = this.options;
+		var opts = this.options;
 
-		if ( !o.enhanced ) {
-			this.element.addClass( this.options.classes.table );
+		if ( !opts.enhanced ) {
+			this.element.addClass( opts.classes.table );
 		}
 
 		// extend here, assign on refresh > _setHeaders
