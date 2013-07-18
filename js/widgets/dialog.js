@@ -5,11 +5,14 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.navigation", "./optionDemultiplexer" ], function( jQuery ) {
+define( [ "jquery",
+	"../jquery.mobile.widget",
+	"./page",
+	"../jquery.mobile.navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-$.widget( "mobile.dialog", $.extend( {
+$.widget( "mobile.dialog", {
 	options: {
 		closeBtn: "left", /* Accepts left, right and none */
 		closeBtnText: "Close",
@@ -31,6 +34,25 @@ $.widget( "mobile.dialog", $.extend( {
 		this._isCloseable = false;
 	},
 
+	// click and submit events:
+	// - clicks and submits should use the closing transition that the dialog
+	//   opened with unless a data-transition is specified on the link/form
+	// - if the click was on the close button, or the link has a data-rel="back"
+	//   it'll go back in history naturally
+	_handleVClickSubmit: function( event ) {
+		var attrs,
+			$target = $( event.target ).closest( event.type === "vclick" ? "a" : "form" );
+
+		if ( $target.length && !$target.jqmData( "transition" ) ) {
+
+			attrs[ "data-" + $.mobile.ns + "transition" ] =
+				( $.mobile.urlHistory.getActive() || {} )[ "transition" ] ||
+				$.mobile.defaultDialogTransition;
+			attrs[ "data-" + $.mobile.ns + "direction" ] = "reverse";
+			$target.attr( attrs );
+		}
+	},
+
 	_create: function() {
 		var $el = this.element,
 			cornerClass = !!this.options.corners ? " ui-corner-all" : "",
@@ -45,25 +67,9 @@ $.widget( "mobile.dialog", $.extend( {
 		// Set aria role
 		$el.wrapInner( dialogWrap );
 
-		/* bind events
-			- clicks and submits should use the closing transition that the dialog opened with
-				unless a data-transition is specified on the link/form
-			- if the click was on the close button, or the link has a data-rel="back" it'll go back in history naturally
-		*/
-		$el.bind( "vclick submit", function( event ) {
-			var $target = $( event.target ).closest( event.type === "vclick" ? "a" : "form" ),
-				active;
-
-			if ( $target.length && !$target.jqmData( "transition" ) ) {
-
-				active = $.mobile.urlHistory.getActive() || {};
-
-				$target.attr( "data-" + $.mobile.ns + "transition", ( active.transition || $.mobile.defaultDialogTransition ) )
-					.attr( "data-" + $.mobile.ns + "direction", "reverse" );
-			}
-		});
-
 		this._on( $el, {
+			vclick: "_handleVClickSubmit",
+			submit: "_handleVClickSubmit",
 			pagebeforeshow: "_handlePageBeforeShow",
 			pagebeforehide: "_handlePageBeforeHide"
 		});
@@ -71,20 +77,34 @@ $.widget( "mobile.dialog", $.extend( {
 		this._setCloseBtn( this.options.closeBtn );
 	},
 
-	_setCorners: function( value ) {
-		this.element.children().toggleClass( "ui-corner-all", value );
-	},
+	_setOptions: function( options ) {
+		var updateCloseButton;
 
-	_setOverlayTheme: function( value ) {
-		if ( $.mobile.activePage[ 0 ] === this.element[ 0 ] ) {
-			this.options.overlayTheme = value;
-			this._handlePageBeforeShow();
+		if ( options.corners !== undefined ) {
+			this.element.children().toggleClass( "ui-corner-all", !!options.corners );
 		}
-	},
 
-	_setCloseBtnText: function( value ) {
-		this.options.closeBtnText = value;
-		this._setCloseBtn( this.options.closeBtn );
+		if ( options.overlayTheme !== undefined ) {
+			if ( $.mobile.activePage[ 0 ] === this.element[ 0 ] ) {
+				this.options.overlayTheme = options.overlayTheme;
+				this._handlePageBeforeShow();
+			}
+		}
+
+		if ( options.closeBtnText !== undefined ) {
+			this.options.closeBtnText = options.closeBtnText;
+			updateCloseButton = this.options.closeBtn;
+		}
+
+		if ( options.closeBtn !== undefined ) {
+			updateCloseButton = options.closeBtn;
+		}
+
+		if ( updateCloseButton ) {
+			this._setCloseBtn( updateCloseButton );
+		}
+
+		this._super( options );
 	},
 
 	_setCloseBtn: function( value ) {
@@ -144,7 +164,7 @@ $.widget( "mobile.dialog", $.extend( {
 			}
 		}
 	}
-}, $.mobile.behaviors.optionDemultiplexer ) );
+});
 
 $.mobile.dialog.initSelector = ":jqmData(role='dialog')";
 //auto self-init widgets
