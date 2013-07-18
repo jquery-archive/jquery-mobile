@@ -63,7 +63,7 @@ $.widget( "mobile.table", {
 					sel = ":nth-child(" + ( coltally + 1 ) + ")",
 					j;
 
-				that.setAttribute( "data-colstart", coltally + 1 );
+				that.setAttribute( "data-" + $.mobile.ns + "colstart", coltally + 1 );
 
 				if( span ) {
 					for( j = 0; j < span - 1; j++ ) {
