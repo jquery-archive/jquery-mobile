@@ -1,4 +1,4 @@
-div.ui-flipswitch {
+.ui-flipswitch {
 	display: inline-block;
     vertical-align: middle;
     background-size: 100% 100%;
@@ -10,6 +10,8 @@ div.ui-flipswitch {
     width: 5.8em;
     padding-left: .15em;
     margin: .5em 0;
+	border-width: 1px;
+	border-style: solid;
     transition-duration: .2s;
     transition-property: padding, width, background-color, background-position;
     -webkit-touch-callout: none;
@@ -25,32 +27,29 @@ div.ui-flipswitch {
     border: none;
     opacity: 0;
 }
-div.ui-flipswitch.ui-flipswitch-active {
+.ui-flipswitch.ui-flipswitch-active {
 	padding-left: 4.1em;
     background-position: 0 0;
     width: 1.85em;
-    background-color: #0066ff;
 }
-html .ui-bar-a .ui-btn.ui-btn-a.ui-flipswitch-on {
+.ui-flipswitch .ui-btn.ui-flipswitch-on {
 	float: left;
     width: 28px;
     height: 28px;
     padding: 0;
     margin: .08em 0 0 -.1em;
     text-align: inherit;
-    border: 1px solid #d5d5d5;
+    border-width: 1px;
+	border-style: solid;
     border-radius: inherit;
-    background: #ededed;
-    color: white;
     overflow: visible;
-    text-shadow: 0 -1px 1px rgba(0,0,0,.3);
+	color: inherit;
+	text-shadow: inherit;
     text-indent: -2.5em;
 }
-.ui-flipswitch-off {
+.ui-flipswitch .ui-btn.ui-flipswitch-off {
     float: left;
     text-indent: .5em;
-    color: #333;
-    text-shadow: none;
 }
 /*ie8*/
 .ui-flipswitch-on,

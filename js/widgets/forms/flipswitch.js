@@ -14,7 +14,7 @@ $.widget( "mobile.flipswitch", $.extend({
 	options: {
 		onText: "On",
 		offText: "Off",
-		theme: "a",
+		theme: null,
 		enhanced: false,
 		wrapperClass: null
 	},
@@ -67,16 +67,19 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_enhance: function() {
-		var flipswitch = $( "<div>" );
+		var flipswitch = $( "<div>" ),
+			theme = this.options.theme ? this.options.theme : "inherit",
 			on = $( "<span tabindex='1'>" ),
 			off = $( "<span>" ),
 			type = this.element.get( 0 ).tagName,
-			onText = ( type === "INPUT" ) ? this.options.onText: this.element.find( "option" ).eq( 0 ).text(),
-			offText = ( type === "INPUT" ) ? this.options.offText: this.element.find( "option" ).eq( 1 ).text();
+			onText = ( type === "INPUT" ) ? this.options.onText : this.element.find( "option" ).eq( 0 ).text(),
+			offText = ( type === "INPUT" ) ? this.options.offText : this.element.find( "option" ).eq( 1 ).text();
 
-			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-" + this.options.theme ).text( onText );
+			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" ).text( onText );
 			off.addClass( "ui-flipswitch-off" ).text( offText );
-			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-bar-inherit ui-corner-all ui-bar-" + this.options.theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( this.element.is( ":checked" ) ? "ui-flipswitch-active": "" ) ).append( on, off );
+			
+			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-bar-inherit ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( this.element.is( ":checked" ) ? "ui-flipswitch-active" : "" ) ).append( on, off );
+			
 			this.element.addClass( "ui-flipswitch-input" );
 			this.element.after( flipswitch ).appendTo( flipswitch );
 
@@ -118,7 +121,12 @@ $.widget( "mobile.flipswitch", $.extend({
 
 	_setOptions: function( options ) {
 		if ( options.theme !== undefined ) {
-			this.widget().removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + options.theme );
+			var currentTheme = options.theme ? options.theme : "inherit",
+				newTheme = options.theme ? options.theme : "inherit";
+
+			this.widget()
+				.removeClass( "ui-bar-" + currentTheme )
+				.addClass( "ui-bar-" + newTheme );
 		}
 		if ( options.onText !== undefined ) {
 			this.on.text( options.onText );
