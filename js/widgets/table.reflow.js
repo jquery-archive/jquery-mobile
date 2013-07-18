@@ -31,12 +31,8 @@ $.widget( "mobile.table", $.mobile.table, {
 		if( !opts.enhanced ) {
 			this.element.addClass( opts.classes.reflowTable );
 
-			this._enhanceReflow();
+			this._updateReflow();
 		}
-	},
-
-	_enhanceReflow: function() {
-		this._updateReflow();
 	},
 
 	refresh: function( create ) {
