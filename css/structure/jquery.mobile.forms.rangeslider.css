@@ -50,12 +50,9 @@ html >/**/body .ui-rangeslider.ui-mini .ui-rangeslider-sliders .ui-slider-track:
 /* Hide the second label (the first is moved outside the div) */
 div.ui-rangeslider label {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }
 .ui-field-contain .ui-rangeslider input.ui-slider-input,
