@@ -36,12 +36,17 @@
 	border-style: solid;
 }
 .ui-popup-hidden {
+	left: 0;
+	top: 0;
 	position: absolute !important;
+	visibility: hidden;
+}
+.ui-popup-truncate {
 	height: 1px;
 	width: 1px;
+	margin: -1px;
 	overflow: hidden;
 	clip: rect(1px,1px,1px,1px);
-	visibility: hidden;
 }
 .ui-popup.ui-content,
 .ui-popup .ui-content {
