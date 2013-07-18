@@ -19,8 +19,8 @@ $.widget( "mobile.flipswitch", $.extend({
 		wrapperClass: null
 	},
 
-	_create: function(){
-			if( !this.options.enhanced ){
+	_create: function() {
+			if ( !this.options.enhanced ) {
 				this._enhance();
 			} else {
 				$.extend( this, {
@@ -34,7 +34,7 @@ $.widget( "mobile.flipswitch", $.extend({
 			this._on( this.flipswitch, {
 				"click": "_toggle",
 				"swipeleft": "_left",
-				"swiperight":"_right"
+				"swiperight": "_right"
 			});
 
 			this._on( this.on, {
@@ -46,51 +46,52 @@ $.widget( "mobile.flipswitch", $.extend({
 		return this.element.flipswitch;
 	},
 
-	_left: function(){
+	_left: function() {
 		this.flipswitch.removeClass( "ui-flipswitch-active" );
-		if( this.type === "SELECT" ){
+		if ( this.type === "SELECT" ) {
 			this.element.get( 0 ).selectedIndex = 0;
 		} else {
 			this.element.prop( "checked", true );
 		}
-		this._trigger("change");
+		this._trigger( "change" );
 	},
 
-	_right: function(){
+	_right: function() {
 		this.flipswitch.addClass( "ui-flipswitch-active" );
-		if( this.type === "SELECT" ){
+		if ( this.type === "SELECT" ) {
 			this.element.get( 0 ).selectedIndex = 1;
 		} else {
 			this.element.prop( "checked", false );
 		}
-		this._trigger("change");
+		this._trigger( "change" );
 	},
 
-	_enhance: function(){
+	_enhance: function() {
 		var flipswitch = $( "<div>" );
 			on = $( "<span tabindex='1'>" ),
 			off = $( "<span>" ),
 			type = this.element.get( 0 ).tagName,
-			onText = ( type === "INPUT" )? this.options.onText: this.element.find( "option" ).eq( 0 ).text(),
-			offText = ( type === "INPUT" )? this.options.offText: this.element.find( "option" ).eq( 1 ).text();
+			onText = ( type === "INPUT" ) ? this.options.onText: this.element.find( "option" ).eq( 0 ).text(),
+			offText = ( type === "INPUT" ) ? this.options.offText: this.element.find( "option" ).eq( 1 ).text();
 
 			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-" + this.options.theme ).text( onText );
 			off.addClass( "ui-flipswitch-off" ).text( offText );
-			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-bar-inherit ui-corner-all ui-bar-" + this.options.theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( this.element.is( ":checked" )? "ui-flipswitch-active": "" ) ).append( on, off );
+			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-bar-inherit ui-corner-all ui-bar-" + this.options.theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( this.element.is( ":checked" ) ? "ui-flipswitch-active": "" ) ).append( on, off );
 			this.element.addClass( "ui-flipswitch-input" );
 			this.element.after( flipswitch ).appendTo( flipswitch );
 
 		$.extend( this, {
-			flipswitch:flipswitch,
-			on:on,
-			off:off,
-			type:type
+			flipswitch: flipswitch,
+			on: on,
+			off: off,
+			type: type
 		});
 	},
 
 	_change: function() {
 		var direction;
-		if( this.type === "SELECT" ){
+		
+		if ( this.type === "SELECT" ) {
 			direction = ( this.element.get( 0 ).selectedIndex > 0 )? "_right": "_left";
 		} else {
 			direction = this.element.is( ":checked" )? "_right": "_left";
@@ -98,36 +99,37 @@ $.widget( "mobile.flipswitch", $.extend({
 		this[ direction ]();
 	},
 
-	_toggle: function(){
-		var direction = this.flipswitch.hasClass("ui-flipswitch-active")? "_left": "_right";
+	_toggle: function() {
+		var direction = this.flipswitch.hasClass( "ui-flipswitch-active" ) ? "_left" : "_right";
+		
 		this[direction]();
 	},
 
-	_keydown: function( e ){
-		if( e.which === $.mobile.keyCode.LEFT ){
+	_keydown: function( e ) {
+		if ( e.which === $.mobile.keyCode.LEFT ) {
 			this._left();
-		} else if( e.which === $.mobile.keyCode.RIGHT ){
+		} else if ( e.which === $.mobile.keyCode.RIGHT ) {
 			this._right();
-		} else if( e.which === $.mobile.keyCode.SPACE ){
+		} else if ( e.which === $.mobile.keyCode.SPACE ) {
 			this._toggle();
 			e.preventDefault();
 		}
 	},
 
-	_setOptions: function( options ){
-		if( options.theme !== undefined ) {
+	_setOptions: function( options ) {
+		if ( options.theme !== undefined ) {
 			this.widget().removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + options.theme );
 		}
-		if( options.onText !== undefined ) {
+		if ( options.onText !== undefined ) {
 			this.on.text( options.onText );
 		}
-		if( options.offText ) {
+		if ( options.offText ) {
 			this.off.text( options.offText );
 		}
 	},
 
-	_destroy: function(){
-		if( this.options.enhanced ){
+	_destroy: function() {
+		if ( this.options.enhanced ) {
 			return;
 		}
 		this.on.remove();

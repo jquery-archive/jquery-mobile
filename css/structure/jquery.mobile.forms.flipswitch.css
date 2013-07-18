@@ -1,15 +1,15 @@
-div.ui-flipswitch{
+div.ui-flipswitch {
 	display: inline-block;
     vertical-align: middle;
     background-size: 100% 100%;
     background-origin: border-box;
     background-clip: border-box;
-    background-position:100% 0;
+    background-position: 100% 0;
     overflow: hidden;
     height: 32px;
     width: 5.8em;
-    padding-left:.15em;
-    margin:.5em 0;
+    padding-left: .15em;
+    margin: .5em 0;
     transition-duration: .2s;
     transition-property: padding, width, background-color, background-position;
     -webkit-touch-callout: none;
@@ -19,25 +19,25 @@ div.ui-flipswitch{
 	-ms-user-select: none;
 	user-select: none;
 }
-.ui-flipswitch-input{
+.ui-flipswitch-input {
 	position: absolute;
-    left:-1000px;
-    border:none;
+    left: -1000px;
+    border: none;
     opacity: 0;
 }
-div.ui-flipswitch.ui-flipswitch-active{
+div.ui-flipswitch.ui-flipswitch-active {
 	padding-left: 4.1em;
-    background-position:0 0;
+    background-position: 0 0;
     width: 1.85em;
-    background-color:#0066ff;
+    background-color: #0066ff;
 }
-html .ui-bar-a .ui-btn.ui-btn-a.ui-flipswitch-on{
+html .ui-bar-a .ui-btn.ui-btn-a.ui-flipswitch-on {
 	float: left;
     width: 28px;
     height: 28px;
     padding: 0;
     margin: .08em 0 0 -.1em;
-    text-align:inherit;
+    text-align: inherit;
     border: 1px solid #d5d5d5;
     border-radius: inherit;
     background: #ededed;
@@ -46,7 +46,7 @@ html .ui-bar-a .ui-btn.ui-btn-a.ui-flipswitch-on{
     text-shadow: 0 -1px 1px rgba(0,0,0,.3);
     text-indent: -2.5em;
 }
-.ui-flipswitch-off{
+.ui-flipswitch-off {
     float: left;
     text-indent: .5em;
     color: #333;
@@ -54,13 +54,13 @@ html .ui-bar-a .ui-btn.ui-btn-a.ui-flipswitch-on{
 }
 /*ie8*/
 .ui-flipswitch-on,
-.ui-flipswitch-off{
+.ui-flipswitch-off {
 	font-size: 1em;
-    padding-top:5px;
+    padding-top: 5px;
 }
 /*everything else*/
 :root .ui-flipswitch-on,
-:root .ui-flipswitch-off{
+:root .ui-flipswitch-off {
 	padding-top: 2px;
     font: bold 1em/1.9 sans-serif;
 }
