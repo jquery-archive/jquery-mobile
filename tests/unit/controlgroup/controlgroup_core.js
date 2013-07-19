@@ -12,6 +12,13 @@ $.testHelper.delayStart();
 		}
 	});
 
+	test( "Pre-rendered controlgroup option-setting works", function() {
+		var grp = $( "#pre-rendered" );
+		grp.controlgroup( "option", "type", "horizontal" );
+		deepEqual( grp.hasClass( "ui-controlgroup-horizontal" ), true, "After setting type to horizontal, the class ui-controlgroup-horizontal has been added." );
+		deepEqual( grp.hasClass( "ui-controlgroup-vertical" ), false, "After setting type to horizontal, the class ui-controlgroup-vertical has been removed." );
+	});
+
 	test( "vertical controlgroup classes", function() {
 		var buttons = this.vcontrolgroup.find( ".ui-btn" ),
 			middlebuttons = buttons.filter(function(index) {
