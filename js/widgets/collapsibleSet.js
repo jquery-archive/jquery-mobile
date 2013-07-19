@@ -40,7 +40,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		});
 
 		if ( !opts.enhanced ) {
-			elem.addClass( "ui-collapsible-set" )
+			elem.addClass( "ui-collapsible-set" );
 		}
 
 		this
