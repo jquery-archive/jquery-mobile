@@ -39,6 +39,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 				groupLegend: elem.children( ".ui-controlgroup-label" ).children(),
 				childWrapper: elem.children( ".ui-controlgroup-controls" )
 			};
+			this._applyOptions( opts, true );
 		} else {
 			this._ui = {
 				groupLegend: elem.children( "legend" ),
@@ -61,7 +62,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 		this.refresh();
 	},
 
-	_setOptions: function( options ) {
+	_applyOptions: function( options, internal ) {
 		var callRefresh, opts,
 			classes = "";
 
@@ -88,20 +89,30 @@ $.widget( "mobile.controlgroup", $.extend( {
 			classes += " ui-corner-all";
 		}
 
-		if ( opts.shadow !== undefined ) {
-			this._ui.childWrapper.toggleClass( "ui-shadow", opts.shadow );
-		}
-
 		if ( opts.mini ) {
 			classes += " ui-mini";
 		}
 
-		this._toggleClasses( this.element, "_classes", classes );
-		if ( callRefresh ) {
-			this.refresh();
+		if ( !( opts.shadow === undefined || internal ) ) {
+			this._ui.childWrapper.toggleClass( "ui-shadow", opts.shadow );
 		}
 
-		return this._super( options );
+		if ( internal ) {
+			this._classes = classes;
+		} else {
+			this._toggleClasses( this.element, "_classes", classes );
+			if ( callRefresh ) {
+				this.refresh();
+			}
+		}
+
+		return this;
+	},
+
+	_setOptions: function( options ) {
+		return this
+			._applyOptions( options )
+			._super( options );
 	},
 
 	container: function() {
