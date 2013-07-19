@@ -85,7 +85,16 @@ $.widget( "mobile.textinput", {
 	},
 
 	_wrap: function(){
-		return $( "<div class='" + ( this.isSearch ? "ui-input-search" : "ui-input-text" ) + " ui-body-" + (( this.options.theme === null ) ? "inherit": this.options.theme ) + ( this.options.corners ? " ui-corner-all": "" ) + ( this.options.mini ? " ui-mini": "" ) + ( this.options.disabled ? " ui-disabled ": "" ) + " ui-shadow-inset'></div>" );
+		var opts = this.options;
+
+		return $( "<div class='" +
+			( this.isSearch ? "ui-input-search " : "ui-input-text " ) +
+			"ui-body-" + ( ( opts.theme === null ) ? "inherit": opts.theme ) + " " +
+			( opts.corners ? "ui-corner-all ": "" ) +
+			( opts.mini ? "ui-mini ": "" ) +
+			( opts.disabled ? "ui-state-disabled ": "" ) +
+			opts.wrapperClass + " " +
+			"ui-shadow-inset'></div>" );
 	},
 
 	_autoCorrect: function(){
