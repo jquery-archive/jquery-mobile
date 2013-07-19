@@ -260,14 +260,14 @@ function enhanceWithButtonMarkup( idx, el ) {
 
 	el.className = $.grep( classes, function( el, idx ) {
 			return !( idx > 0 && classes[ idx - 1 ] === el );
-		}).join( " " );
+		}).join( " " ) + ( el.disabled ? " ui-disabled" : "" );
 	el.setAttribute( "role", "button" );
 }
 
 //links in bars, or those with data-role become buttons
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
-	$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a", target ).each( enhanceWithButtonMarkup );
+	$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button", target ).each( enhanceWithButtonMarkup );
 });
 
 })( jQuery );

@@ -11,7 +11,7 @@ define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.registry"
 
 $.widget( "mobile.button", {
 	options: {
-		theme: null,
+		theme: "inherit",
 		icon: null,
 		iconpos: "left",
 		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
@@ -19,23 +19,21 @@ $.widget( "mobile.button", {
 		shadow: true,
 		inline: null,
 		mini: null,
-		wrapperClass: null
+		wrapperClass: null,
+		enhanced: false
 	},
 
 	_create: function() {
-		var isInput = $el[ 0 ].tagName === "INPUT";
+		
+		if( this.element.is( ":disabled" ) ) {
+			this.options.disabled = true;
+		}
 
-		$.extend( this, {
-			button: null
-		});
+		if( !this.options.enhanced ) {
+			this._enhance();
+		}
 
-		this.refresh( true );
-		this._setOptions( this.options );
-	},
-
-	_enhance: function() {
-		this.element.wrap( this._button () );
-		this.button = this.element.parent();
+		this.wrapper = this.element.parent();
 
 		this._on( {
 			focus: function() {
@@ -46,19 +44,33 @@ $.widget( "mobile.button", {
 				this.widget().removeClass( $.mobile.focusClass );
 			}
 		});
+		this.refresh( true );
+	},
+
+	_enhance: function() {
+		this.element.wrap( this._button () );
 	},
 
 	_button: function() {
-		return $("<div class='ui-btn ui-input-btn" + this.options.wrapperClass + "' >" + this.element.val() + "<div>");
+		return $("<div class='ui-btn ui-input-btn " +
+			this.options.wrapperClass +
+			" ui-btn-" + this.options.theme +
+			( this.options.corners ? " ui-corner-all" : "" ) +
+			( this.options.shadow ? " ui-shadow" : "" ) +
+			( this.options.inline ? " ui-btn-inline" : "" ) +
+			( this.options.mini ? " ui-mini" : "" ) +
+			( this.options.disabled ? " ui-disabled" : "" ) +
+			( this.options.iconpos ? " ui-btn-icon-" + this.options.iconpos : ( this.options.icon ? " ui-btn-icon-left" : "" ) ) +
+			( this.options.icon ? "ui-icon-" + this.options.icon : "" ) +
+			"' >" + this.element.val() + "<div>");
 	},
 
 	widget: function() {
-		return this.button;
+		return this.wrapper;
 	},
 
 	_destroy: function() {
 			this.element.insertBefore( this.button );
-
 			this.button.remove();
 	},
 
@@ -90,29 +102,16 @@ $.widget( "mobile.button", {
 	},
 
 	refresh: function( create ) {
-		var options = this.options,
-			$el = this.element;
-
-		if ( options.icon && options.iconpos === "notext" && !$el.attr( "title" ) ) {
-			$el.attr( "title", ( this.isInput ? $el.val() : $el.getEncodedText() ) );
+		if ( this.options.icon && this.options.iconpos === "notext" && this.element.attr( "title" ) ) {
+			this.element.attr( "title", this.element.val() );
 		}
-
-		if ( !create ) {
-			this.button.removeClass( this.styleClasses );
-		}
-
-		/* If the button element doesn't contain text we use the value if provided */
-		if ( !this.isInput && this.button.text() === "" && !!this.button.val() ) {
-			this.button.text( this.button.val() );
-		}
-
-		if ( this.isInput && !create ) {
-			$( this.button )[ "text" ]( $el.val() ).append( $el );
+		if( !create ) {
+			$( this.button ).text( this.element.val() );
 		}
 	}
 });
 
-$.mobile.button.initSelector = "type='button'], [type='submit'], [type='reset']";
+$.mobile.button.initSelector = "[type='button'], [type='submit'], [type='reset']";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.button" );
