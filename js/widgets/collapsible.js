@@ -53,6 +53,7 @@ $.widget( "mobile.collapsible", {
 			ui.heading = $( ".ui-collapsible-heading", this.element[ 0 ] );
 			ui.content = ui.heading.next();
 			ui.anchor = $( "a", ui.heading[ 0 ] ).first();
+			this._applyOptions( opts, true );
 		} else {
 			this._enhance( elem, ui );
 			this._setOptions( opts );
@@ -200,8 +201,8 @@ $.widget( "mobile.collapsible", {
 		this.element.removeClass( "ui-collapsible " + this._elClasses + ( this.options.collapsed ? " ui-collapsible-collapsed" : "" ) );
 	},
 
-	_setOptions: function( options ) {
-		var key,
+	_applyOptions: function( options, internal ) {
+		var key, contentThemeClass,
 			opts = $.extend( {}, this.options, options ),
 			$el = this.element,
 			classes = "",
@@ -222,7 +223,7 @@ $.widget( "mobile.collapsible", {
 			opts.contentTheme = "";
 		}
 
-		if ( options.collapsed !== undefined ) {
+		if ( !( options.collapsed === undefined || internal ) ) {
 			this._handleExpandCollapse( options.collapsed );
 		}
 
@@ -251,12 +252,26 @@ $.widget( "mobile.collapsible", {
 			anchorClasses += " ui-mini";
 		}
 
-		this
-			._toggleClasses( this._ui.content, "_contentTheme", opts.contentTheme ? ( "ui-body-" + opts.contentTheme ) : "" )
-			._toggleClasses( $el, "_elClasses", classes )
-			._toggleClasses( this._ui.anchor, "_anchorClasses", anchorClasses );
+		contentThemeClass = opts.contentTheme ? ( "ui-body-" + opts.contentTheme ) : "";
 
-		return this._super( options );
+		if ( internal ) {
+			this._contentTheme = contentThemeClass;
+			this._elClasses = classes;
+			this._anchorClasses = anchorClasses;
+		} else {
+			this
+				._toggleClasses( this._ui.content, "_contentTheme", contentThemeClass )
+				._toggleClasses( $el, "_elClasses", classes )
+				._toggleClasses( this._ui.anchor, "_anchorClasses", anchorClasses );
+		}
+
+		return this;
+	},
+
+	_setOptions: function( options ) {
+		return this
+			._applyOptions( options )
+			._super( options );
 	}
 });
 
