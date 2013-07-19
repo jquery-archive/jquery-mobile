@@ -17,35 +17,39 @@ define( [
 var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
 
 $.widget( "mobile.collapsibleset", $.extend( {
-	options: $.extend( {}, $.mobile.collapsible.defaults ),
+	options: $.extend( {
+		enhanced: false,
+	}, $.mobile.collapsible.defaults ),
+
+	_handleCollapsibleExpand: function( event ) {
+		var closestCollapsible = $( event.target ).closest( ".ui-collapsible" );
+
+		if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
+			closestCollapsible
+				.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
+				.collapsible( "collapse" );
+		}
+	},
 
 	_create: function() {
-		var $el = this.element.addClass( "ui-collapsible-set" );
+		var elem = this.element,
+			opts = this.options;
 
 		$.extend( this, {
 			_classes: ""
 		});
 
-		this._updateClasses( this.options );
-
-		// Initialize the collapsible set if it's not already initialized
-		if ( !$el.jqmData( "collapsiblebound" ) ) {
-			$el
-				.jqmData( "collapsiblebound", true )
-				.bind( "collapsibleexpand", function( event ) {
-					var closestCollapsible = $( event.target ).closest( ".ui-collapsible" );
-
-					if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
-						closestCollapsible
-							.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
-							.collapsible( "collapse" );
-					}
-				});
+		if ( !opts.enhanced ) {
+			elem.addClass( "ui-collapsible-set" )
 		}
+
+		this
+			._updateClasses( opts, opts.enhanced )
+			._on( elem, { collapsibleexpand: "_handleCollapsibleExpand" } );
 	},
 
 	_init: function() {
-		this._refresh( "true" );
+		this._refresh( true );
 
 		// Because the corners are handled by the collapsible itself and the default state is collapsed
 		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
@@ -55,7 +59,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 			.collapsible( "expand" );
 	},
 
-	_updateClasses: function( options ) {
+	_updateClasses: function( options, internal ) {
 		var opts = {
 				theme: options.theme || this.options.theme,
 				corners: options.corners || this.options.corners,
@@ -71,7 +75,13 @@ $.widget( "mobile.collapsibleset", $.extend( {
 			classes += " ui-corner-all";
 		}
 
-		this._toggleClasses( this.element, "_classes", classes );
+		if ( internal ) {
+			this._classes = classes;
+		} else {
+			this._toggleClasses( this.element, "_classes", classes );
+		}
+
+		return this;
 	},
 
 	_setOptions: function( options ) {
