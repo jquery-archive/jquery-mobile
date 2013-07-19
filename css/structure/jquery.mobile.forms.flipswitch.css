@@ -1,65 +1,65 @@
 .ui-flipswitch {
 	display: inline-block;
-    vertical-align: middle;
-    background-size: 100% 100%;
-    background-origin: border-box;
-    background-clip: border-box;
-    background-position: 100% 0;
-    overflow: hidden;
-    height: 32px;
-    width: 5.8em;
-    padding-left: .15em;
-    margin: .5em 0;
+	vertical-align: middle;
+	background-size: 100% 100%;
+	background-origin: border-box;
+	background-clip: border-box;
+	background-position: 100% 0;
+	overflow: hidden;
+	height: 2em;
+	width: 5.8em;
+	padding-left: .15em;
+	margin: .5em 0;
 	border-width: 1px;
 	border-style: solid;
-    transition-duration: .2s;
-    transition-property: padding, width, background-color, background-position;
-    -webkit-touch-callout: none;
+	transition-duration: .2s;
+	transition-property: padding, width, background-color, background-position;
+	-webkit-touch-callout: none;
 	-webkit-user-select: none;
-	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-}
-.ui-flipswitch-input {
-	position: absolute;
-    left: -1000px;
-    border: none;
-    opacity: 0;
+	cursor: pointer;
 }
 .ui-flipswitch.ui-flipswitch-active {
 	padding-left: 4.1em;
-    background-position: 0 0;
-    width: 1.85em;
+	background-position: 0 0;
+	width: 1.85em;
+}
+.ui-flipswitch-input {
+	position: absolute;
+	left: -1000px;
+	border: none;
+	opacity: 0;
 }
 .ui-flipswitch .ui-btn.ui-flipswitch-on {
 	float: left;
-    width: 28px;
-    height: 28px;
-    padding: 0;
-    margin: .08em 0 0 -.1em;
-    text-align: inherit;
-    border-width: 1px;
+	width: 1.75em;
+	height: 1.75em;
+	padding: 0;
+	margin: .08em 0 0 -.1em;
+	text-align: left;
+	border-width: 1px;
 	border-style: solid;
-    border-radius: inherit;
-    overflow: visible;
+	border-radius: inherit;
+	overflow: visible;
 	color: inherit;
 	text-shadow: inherit;
-    text-indent: -2.5em;
+	text-indent: -2.5em;
 }
-.ui-flipswitch .ui-btn.ui-flipswitch-off {
-    float: left;
-    text-indent: .5em;
+.ui-flipswitch .ui-flipswitch-off {
+	float: left;
+	text-indent: .75em;
 }
 /*ie8*/
-.ui-flipswitch-on,
-.ui-flipswitch-off {
+.ui-flipswitch .ui-btn.ui-flipswitch-on,
+.ui-flipswitch .ui-flipswitch-off {
 	font-size: 1em;
-    padding-top: 5px;
+	padding-top: 5px;
 }
 /*everything else*/
-:root .ui-flipswitch-on,
-:root .ui-flipswitch-off {
-	padding-top: 2px;
-    font: bold 1em/1.9 sans-serif;
+:root .ui-flipswitch .ui-btn.ui-flipswitch-on,
+:root .ui-flipswitch .ui-flipswitch-off {
+	padding-top: 0;
+	font: bold 1em/1.9 sans-serif;
 }
