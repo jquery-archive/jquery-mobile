@@ -5,7 +5,6 @@
 
 define( [
 	"jquery",
-	"./forms/textinput",
 	"./addFirstLastClasses" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -18,16 +17,17 @@ define( [
 	$.widget( "mobile.filterable", $.extend( {
 
 			options: {
-				theme: "a",
+
+				// DEPRECATED and must be removed in 1.5.0, because the idea is that
+				// filterable DOES NOT create any textinput. Instead, the MUST provide
+				// a textinput as part of the original markup. The "inputSelector"
+				// option below can then be set to a jQuery selector that will retrieve
+				// the input to be used as the source of filter text.
 				filterPlaceholder: "Filter items...",
 				filterReveal: false,
 				filterCallback: defaultfilterCallback,
-				wrapperClass: "",
-				inset: false,
 				enhanced: false,
-				target: null,
-				mini: false,
-				selector: null
+				inputSelector: null
 			},
 
 			_onKeyUp: function() {
@@ -56,16 +56,7 @@ define( [
 			},
 
 			_getFilterableItems: function() {
-				var el = this.element,
-					opts = this.options,
-					items = [];
-
-				if ( typeof opts.selector === "string" ) {
-					items = $( "." + opts.selector ).children();
-				} else {
-					items = el.find( "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn" );
-				}
-				return items;
+				return this.element.find( "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn" );
 			},
 			
 			_setFilterableItems: function( val, lastval ) {
@@ -133,9 +124,7 @@ define( [
 				} else {
 					this._toggleFilterableItems( filterItems, select, opts.filterReveal );
 				}
-				if ( typeof opts.selector !== "string" ) {
-					this._addFirstLastClasses( _getFilterableItems, this._getVisibles( _getFilterableItems, false ), false );
-				}
+				this._addFirstLastClasses( _getFilterableItems, this._getVisibles( _getFilterableItems, false ), false );
 			},
 			
 			_toggleFilterableItems: function( filterItems, select, reveal, isVal )	{
@@ -167,109 +156,105 @@ define( [
 					}
 				}
 			},
-			
-			_enhance: function ( items ) {
-				var el = this.element,
-					opts = this.options,
-					wrapper = $( "<div>", {
-						"class":  "ui-filterable " + opts.wrapperClass,
-						"role": "search",
-						"id" : "ui-filterable-" + this.uuid
-					}),
-					search = $( "<input>", {
-						placeholder: opts.filterPlaceholder
-					})
-					.attr( "data-" + $.mobile.ns + "type", "search" )
-					.appendTo( wrapper )
-					.textinput({
-						theme: opts.filterTheme,
-						mini: opts.mini
-					});
 
-				if ( opts.inset ) {
-					wrapper.addClass( "ui-filterable-inset" );
-				}
+			_setInput: function ( selector ) {
+				var search, bindEvents,
+					uniqid = "ui-filterable-" + this.uuid,
+					isCurrentInternal = ( this._search &&
+						this._search.jqmData( uniqid + "-internal" ) );
 
-				if ( opts.filterReveal ) {
-					items.addClass( "ui-screen-hidden" );
-				}
-
-				if ( typeof opts.target === "string" ) {
-					wrapper.prependTo( $( "." + opts.target + "" ) );
+				if ( selector ) {
+					search = $( "" + selector );
+					bindEvents = true;
+					if ( isCurrentInternal ) {
+						this._search.remove();
+						if ( this._timer ) {
+							clearTimeout( this._timer );
+						}
+					}
 				} else {
-					wrapper.insertBefore( el );
+					if ( isCurrentInternal ) {
+						search = this._search;
+						selector = "#" + uniqid;
+					} else {
+						search = $( "<input " +
+							"data-" + $.mobile.ns + "type='search' " +
+							"class='ui-filterable' " +
+							"id='" + uniqid + "'" +
+							"></input>" )
+							.jqmData( "ui-filterable-" + this.uuid + "-internal", true )
+							.insertBefore( this.element );
+						selector = "#" + uniqid;
+						if ( $.mobile.textinput ) {
+							search.textinput({ wrapperClass: "ui-filterable" });
+						}
+						bindEvents = true;
+					}
 				}
-				
-				return search;
+
+				if ( bindEvents ) {
+					this._on( search, {
+						keyup: "_onKeyUp",
+						change: "_onKeyUp",
+						input: "_onKeyUp"
+					});
+				}
+
+				this._search = search;
+
+				return selector;
 			},
 
 			_create: function() {
-				var search,
-					opts = this.options,
-					items = this._getFilterableItems();
+				var opts = this.options;
 
-				if ( !opts.enhanced ) {
-					search = this._enhance( items );
-				} else {
-					search = $( "." + opts.wrapperClass ).find( "input" );
-				}
-
-				this._on( search, {
-					keyup: "_onKeyUp",
-					change: "_onKeyUp",
-					input: "_onKeyUp"
-				});
-				
 				$.extend( this, {
-					_search: search,
+					_search: null,
 					_timer: 0
 				});
 				
-				// NOTE: since the filter was based on the listview, some unit tests seem
-				// to listen for the initial addFirstLastClasses call when the listview 
-				// is setup (at least I cannot recreate a refreshCornerCount in Qunit
-				// without setting first and last classes on the filterable elements on
-				// create). If refresh corners is to be run on the filter, I would prefer
-				// it being solely called by the filter being triggered and not be the 
-				// "_super()-widget" calling it. So 2x input on the filter should trigger
-				// 2x addFirstLastClasses vs. currently 3x because of including the call
-				// when setting up the parent listview.
-
-				// no classes if multiple datasets are used
-				if ( typeof opts.selector !== "string" ) {
-					this._addFirstLastClasses( items, this._getVisibles( items, true ), true );
+				if ( opts.enhanced ) {
+					this._applyOptions( opts, true );
+				} else {
+					this._setOptions( opts );
 				}
 			},
-			
-			_setOption: function( key, value ) {
-				var opts = this.options,
-					wrapper = document.getElementById( "ui-filterable-" + this.uuid ),
-					$input = $( wrapper ).find( "input" );
 
-				// always update
-				opts[ key ] = value;
+			_applyOptions: function( options, internal ) {
+				var newInputSel = ( options.inputSelector ? ( options.inputSelector + "" ) : "" ),
+					refilter = !( options.filterReveal === undefined &&
+					options.filterCallback === undefined &&
+					newInputSel );
 
-				if ( key === "disabled" ) {
-					$input
-						.toggleClass( this.widgetFullName + "-disabled ui-state-disabled", !!value )
-						.attr( "aria-disabled", value )
-						.textinput( value ? "disable" : "enable" );
+				// If we end up instantiating a textinput internally, then we set the
+				// value of the inputSelector option to the ID we have generated for
+				// the textinput widget we have instantiated.
+				options.inputSelector = this._setInput( newInputSel );
+
+				if ( !internal ) {
+					if ( options.filterPlaceholder !== undefined ) {
+						this._search.attr( "placeholder", options.filterPlaceholder );
+					}
+
+					if ( refilter ) {
+						this._getFilterableItems().removeClass( "ui-screen-hidden" );
+						this._filterItems( ( this._search.val() || "" ).toLowerCase(), "" );
+					}
 				}
+
 				return this;
 			},
-			
-			widget: function() {
-				return this.element;
-			},
-			
-			_destroy: function() {
-				var opts = this.options,
-					wrapper = document.getElementById( "ui-filterable-" + this.uuid );
 
-				if ( !opts.enhanced ) {
-					wrapper.parentNode.removeChild( wrapper );
+			_setOptions: function( options ) {
+				return this
+					._applyOptions( options )
+					._super( options );
+			},
+
+			_destroy: function() {
+				if ( this._search.jqmData( "ui-filterable-" + this.uuid + "-internal" ) ) {
+					this._search.remove();
 				}
-				this._toggleFilterableItems( this._getFilterableItems(), false, false );
 			}
 
 	}, $.mobile.behaviors.addFirstLastClasses ) );
