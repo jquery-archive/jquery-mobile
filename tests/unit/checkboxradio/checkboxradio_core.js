@@ -17,10 +17,9 @@
 		ok( input.prop("checked"), "checked after click" );
 		ok( button.hasClass( "ui-checkbox-on" ), "active styles after click" );
 		button.trigger( "click" );
-
 		input.checkboxradio( "disable" );
-		ok( input.attr( "disabled" ), "input disabled" );
-		ok( input.parent().hasClass( "ui-state-disabled" ), "disabled styles" );
+		ok( input.prop( "disabled" ), "input disabled" );
+		ok( input.parent().hasClass( "ui-disabled" ), "disabled styles" );
 		ok( !input.prop( "checked" ), "not checked before click" );
 		button.trigger( "click" );
 		ok( !input.prop( "checked" ), "not checked after click" );

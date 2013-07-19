@@ -112,14 +112,23 @@
 			<div data-demo-html="true">
                 <form>
 	               	<fieldset data-role="controlgroup">
-						<legend>Swatch A:</legend>
-						<input type="checkbox" name="checkbox-t-2a" id="checkbox-t-2a" data-theme="a">
+						<legend>Swatch B:</legend>
+						<input type="checkbox" name="checkbox-t-2a" id="checkbox-t-2a" data-theme="b">
 						<label for="checkbox-t-2a">One</label>
-						<input type="checkbox" name="checkbox-t-2b" id="checkbox-t-2b" data-theme="a">
+						<input type="checkbox" name="checkbox-t-2b" id="checkbox-t-2b" data-theme="b">
 						<label for="checkbox-t-2b">Two</label>
-						<input type="checkbox" name="checkbox-t-2c" id="checkbox-t-2c" data-theme="a">
+						<input type="checkbox" name="checkbox-t-2c" id="checkbox-t-2c" data-theme="b">
 						<label for="checkbox-t-2c">Three</label>
 					</fieldset>
+            	</form>
+			</div><!--/demo-html -->
+
+			<h2 id="check-theme">Disabled</h2>
+
+			<div data-demo-html="true">
+                <form>
+						<input disabled type="checkbox" name="checkbox-t-2a" id="checkbox-t-2a" data-theme="a">
+						<label for="checkbox-t-2a">One</label>
             	</form>
 			</div><!--/demo-html -->
 

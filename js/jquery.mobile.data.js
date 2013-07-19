@@ -11,6 +11,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	var nsNormalizeDict = {},
 		// Monkey-patching Sizzle to filter the :jqmData selector
 		oldFind = $.find,
+		rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/,
 		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
 	$.extend($.mobile, {
@@ -22,17 +23,27 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// Retrieve an attribute from an element and perform some massaging of the value
 
 		getAttribute: function( e, key, dns ) {
-			var value;
+			var data;
 
 			if ( dns ) {
 				key = "data-" + $.mobile.ns + key;
 			}
 
-			value = e.getAttribute( key );
+			data = e.getAttribute( key );
 
-			return value === "true" ? true :
-				value === "false" ? false :
-				value === null ? undefined : value;
+			// Copied from core's src/data.js:dataAttr()
+			// Convert from a string to a proper data type
+			try {
+				data = data === "true" ? true :
+					data === "false" ? false :
+					data === "null" ? null :
+					// Only convert to a number if it doesn't change the string
+					+data + "" === data ? +data :
+					rbrace.test( data ) ? JSON.parse( data ) :
+					data;
+			} catch( err ) {}
+
+			return data;
 		},
 
 		// Expose our cache for testing purposes.
