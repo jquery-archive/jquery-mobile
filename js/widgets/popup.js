@@ -723,6 +723,10 @@ $.widget( "mobile.popup", {
 	},
 
 	_unenhance: function() {
+		if ( this.options.enhanced ) {
+			return;
+		}
+
 		// Put the element back to where the placeholder was and remove the "ui-popup" class
 		this._setOptions( { theme: $.mobile.popup.prototype.options.theme } );
 		this.element
