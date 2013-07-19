@@ -33,7 +33,7 @@
 			<h2>Mobile page structure</h2>
 
 			<p>A jQuery Mobile site must start with an HTML5 <code>doctype</code> to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) </p>
-			<p>In the <code>head</code>, references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.3.1 works with versions of jQuery core from 1.7.0 to 1.9.1. The easiest way to get started is to link to files hosted on the jQuery CDN or for best performance, <a href="http://jquerymobile.com/download-builder/" rel="external">build a custom bundle</a>:</p>
+			<p>In the <code>head</code>, references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.3.2 works with versions of jQuery core from 1.7.0 to 1.9.1. The easiest way to get started is to link to files hosted on the jQuery CDN or for best performance, <a href="http://jquerymobile.com/download-builder/" rel="external">build a custom bundle</a>:</p>
 
 <pre><code>
 <strong>&lt;!DOCTYPE html&gt; </strong>
@@ -41,9 +41,9 @@
 &lt;head&gt;
 	&lt;title&gt;Page Title&lt;/title&gt;
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css&quot; /&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css&quot; /&gt;
 	&lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
@@ -97,9 +97,9 @@
 
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css&quot; /&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css&quot; /&gt;
 	&lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
