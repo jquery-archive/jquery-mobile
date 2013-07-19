@@ -17,7 +17,8 @@ $.widget( "mobile.textinput", {
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		wrapperClass: "",
-		enhanced: false
+		enhanced: false,
+		maxlength: null
 	},
 
 	_create: function() {
@@ -28,7 +29,10 @@ $.widget( "mobile.textinput", {
 			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = this.element[ 0 ].tagName === "TEXTAREA",
-			inputNeedsWrap = ((this.element.is( "input" ) ||  this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) )&& !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ));
+			inputNeedsWrap = ((this.element.is( "input" ) ||  this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) )&& !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" )),
+			wkmatch = navigator.userAgent.match( /AppleWebKit\/([0-9\.]+)/ ),
+			wkversion = !!wkmatch && wkmatch[ 1 ],
+			requiresMaxLengthWorkaround = navigator.userAgent.indexOf( "Android" ) > -1 && wkversion && wkversion >= 534.30; //Android 4.1+
 			
 		$.extend( this, {
 			themeclass: themeclass,
@@ -36,10 +40,12 @@ $.widget( "mobile.textinput", {
 			miniclass: miniclass,
 			isSearch: isSearch,
 			isTextarea: isTextarea,
-			inputNeedsWrap: inputNeedsWrap
+			inputNeedsWrap: inputNeedsWrap,
+			requiresMaxLengthWorkaround: requiresMaxLengthWorkaround
 		});
 
 		this._autoCorrect();
+		this._maxLengthWorkaround();
 
 		if( this.element[0].disabled ){
 			this.options.disabled = true;
@@ -117,6 +123,23 @@ $.widget( "mobile.textinput", {
 			$.mobile.zoom.disable( true );
 		}
 		this.element.addClass( $.mobile.focusClass );
+	},
+
+	_maxLengthWorkaround: function() {
+		// This is a workaround for android issue 35264, that causes the input field to freeze sometimes when it has a max length field
+		if ( this.requiresMaxLengthWorkaround ) {
+			if ( typeof this.element.attr( "maxLength" ) !== "undefined" ) {
+				this.options.maxlength = this.element.attr( "maxLength" );
+				this.element.removeAttr( "maxLength" );
+				this._on( { "keyup": "_handleMaxLength", "change": "_handleMaxLength" } );
+			}
+		}
+	},
+
+	_handleMaxLength: function() {
+		if ( this.element.val().length > this.options.maxlength ) {
+			this.element.val( this.element.val().slice(0, this.options.maxlength) );
+		}
 	},
 
 	_setOptions: function ( options ) {
