@@ -24,7 +24,7 @@ $.widget( "mobile.button", {
 	},
 
 	_create: function() {
-		
+
 		if( this.element.is( ":disabled" ) ) {
 			this.options.disabled = true;
 		}
@@ -48,7 +48,7 @@ $.widget( "mobile.button", {
 	},
 
 	_enhance: function() {
-		this.element.wrap( this._button () );
+		this.element.wrap( this._button() );
 	},
 
 	_button: function() {
@@ -62,7 +62,7 @@ $.widget( "mobile.button", {
 			( this.options.disabled ? " ui-disabled" : "" ) +
 			( this.options.iconpos ? " ui-btn-icon-" + this.options.iconpos : ( this.options.icon ? " ui-btn-icon-left" : "" ) ) +
 			( this.options.icon ? "ui-icon-" + this.options.icon : "" ) +
-			"' >" + this.element.val() + "<div>");
+			"' >" + this.element.val() + "</div>");
 	},
 
 	widget: function() {
@@ -106,7 +106,8 @@ $.widget( "mobile.button", {
 			this.element.attr( "title", this.element.val() );
 		}
 		if( !create ) {
-			$( this.button ).text( this.element.val() );
+			var originalElement = this.element.detach();
+			$( this.wrapper ).text( this.element.val() ).append( originalElement );
 		}
 	}
 });
