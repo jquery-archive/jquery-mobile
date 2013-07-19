@@ -18,14 +18,14 @@ $.widget( "mobile.button", {
 		corners: true,
 		shadow: true,
 		inline: null,
-		mini: null
+		mini: null,
+		wrapperClass: null
 	},
 
 	_create: function() {
 		var isInput = $el[ 0 ].tagName === "INPUT";
 
 		$.extend( this, {
-			isInput: isInput,
 			button: null
 		});
 
@@ -34,27 +34,22 @@ $.widget( "mobile.button", {
 	},
 
 	_enhance: function() {
-		if ( isInput ) {
+		this.element.wrap( this._button () );
+		this.button = this.element.parent();
 
-			this.element.wrap( this._button () );
-			this.button = this.element.parent();
+		this._on( {
+			focus: function() {
+				this.widget().addClass( $.mobile.focusClass );
+			},
 
-			this._on( {
-				focus: function() {
-					this.widget().addClass( $.mobile.focusClass );
-				},
-
-				blur: function() {
-					this.widget().removeClass( $.mobile.focusClass );
-				}
-			});
-		} else {
-			this.widget().addClass( classes );
-		}
+			blur: function() {
+				this.widget().removeClass( $.mobile.focusClass );
+			}
+		});
 	},
 
 	_button: function() {
-		return $("<div class='ui-btn ui-input-btn" + this.options.class + "' id='" + this.options.id + "'>" + this.element.val() + "<div>");
+		return $("<div class='ui-btn ui-input-btn" + this.options.wrapperClass + "' >" + this.element.val() + "<div>");
 	},
 
 	widget: function() {
@@ -62,52 +57,43 @@ $.widget( "mobile.button", {
 	},
 
 	_destroy: function() {
-		var $button, removeClasses;
-		if ( this.isInput ) {
-			$button = this.button;
+			this.element.insertBefore( this.button );
 
-			this.element.insertBefore( $button );
-
-			$button.remove();
-		} else {
-			removeClasses = this.buttonClasses + " " + this.styleClasses;
-
-			this.button.removeClass( removeClasses );
-		}
+			this.button.remove();
 	},
 
-	_setOptions: function( o ) {
-		if ( o.theme !== undefined ) {
-			this.widget().removeClass( this.options.theme ).addClass( "ui-btn-" + o.theme );
+	_setOptions: function( options ) {
+		if ( options.theme !== undefined ) {
+			this.widget().removeClass( this.options.theme ).addClass( "ui-btn-" + options.theme );
 		}
-		if ( o.corners !== undefined ) {
-			this.widget().toggleClass( "ui-corner-all", o.corners );
+		if ( options.corners !== undefined ) {
+			this.widget().toggleClass( "ui-corner-all", options.corners );
 		}
-		if ( o.shadow !== undefined ) {
-			this.widget().toggleClass( "ui-shadow", o.shadow );
+		if ( options.shadow !== undefined ) {
+			this.widget().toggleClass( "ui-shadow", options.shadow );
 		}
-		if ( o.inline !== undefined ) {
-			this.widget().toggleClass( "ui-btn-inline", o.inline );
+		if ( options.inline !== undefined ) {
+			this.widget().toggleClass( "ui-btn-inline", options.inline );
 		}
-		if ( o.mini !== undefined ) {
-			this.widget().toggleClass( "ui-mini", o.mini );
+		if ( options.mini !== undefined ) {
+			this.widget().toggleClass( "ui-mini", options.mini );
 		}
-		if( o.iconpos !== undefined ) {
-			this.widget().removeClass( "ui-btn-icon-" + o.iconpos );
+		if( options.iconpos !== undefined ) {
+			this.widget().removeClass( "ui-btn-icon-" + options.iconpos );
 		}
-		if( o.icon !== undefined ) {
-			if( !this.options.iconpos && !o.iconpos ){
-				this.widget.toggleClass( "ui-btn-icon-left", o.icon );
+		if( options.icon !== undefined ) {
+			if( !this.options.iconpos && !options.iconpos ){
+				this.widget.toggleClass( "ui-btn-icon-left", options.icon );
 			}
-			this.widget().removeClass( "ui-icon-" + this.options.icon ).toggleClass( "ui-icon-" + o.icon, o.icon );
+			this.widget().removeClass( "ui-icon-" + this.options.icon ).toggleClass( "ui-icon-" + options.icon, options.icon );
 		}
 	},
 
 	refresh: function( create ) {
-		var o = this.options,
+		var options = this.options,
 			$el = this.element;
 
-		if ( o.icon && o.iconpos === "notext" && !$el.attr( "title" ) ) {
+		if ( options.icon && options.iconpos === "notext" && !$el.attr( "title" ) ) {
 			$el.attr( "title", ( this.isInput ? $el.val() : $el.getEncodedText() ) );
 		}
 
@@ -126,7 +112,7 @@ $.widget( "mobile.button", {
 	}
 });
 
-$.mobile.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
+$.mobile.button.initSelector = "type='button'], [type='submit'], [type='reset']";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.button" );
