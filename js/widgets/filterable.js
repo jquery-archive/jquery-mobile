@@ -32,7 +32,6 @@ define( [
 
 			_onKeyUp: function() {
 				var search = this._search[ 0 ],
-					opts = this.options,
 					getAttrFixed = $.mobile.getAttribute,
 					val = search.value.toLowerCase(),
 					lastval = getAttrFixed( search, "lastval", true ) + "";
