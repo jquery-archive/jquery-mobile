@@ -4,12 +4,21 @@
 
 // TODO split out into seperate test files
 (function( $ ){
-	function testExpandCollapse( selector ) {
-		ok($( selector ).hasClass( "ui-collapsible-collapsed" ),  selector + " should be collapsed");
+	function testExpandCollapseAndOptions( selector ) {
+		var collapsible = $( selector );
+		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed");
 		$( selector + " >:header a" ).first().click();
-		ok(!$( selector ).hasClass( "ui-collapsible-collapsed" ), selector + " should be expanded after click");
+		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), false, selector + " should be expanded after click");
 		$( selector + " >:header a" ).first().click();
-		ok($( selector ).hasClass( "ui-collapsible-collapsed" ), selector + " should be collapsed");
+		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed");
+
+		collapsible.collapsible( "option", "inset", false );
+		deepEqual( collapsible.hasClass( "ui-corner-all" ), false, "After turning off the 'inset' option, the collapsible does not have the ui-corner-all class." );
+		deepEqual( collapsible.hasClass( "ui-collapsible-inset" ), false, "After turning off the 'inset' option, the collapsible does not have the ui-collapsible-inset class." );
+
+		collapsible.collapsible( "option", { inset: true, corners: false } );
+		deepEqual( collapsible.hasClass( "ui-corner-all" ), false, "After turning on the 'inset' option and turning off the 'corners' option the collapsible does not have the ui-corner-all class." );
+		deepEqual( collapsible.hasClass( "ui-collapsible-inset" ), true, "After turning on the 'inset' option and turning off the 'corners' option the collapsible has the ui-collapsible-inset class." );
 	}
 
 	module( "Collapsible section", {});
@@ -23,11 +32,11 @@
 	});
 
 	test( "Expand/Collapse", function(){
-		testExpandCollapse( "#collapsed-collapsible" );
+		testExpandCollapseAndOptions( "#collapsed-collapsible" );
 	});
 
 	test( "Expand/Collapse pre-rendered", function(){
-		testExpandCollapse( "#pre-rendered-collapsible" );
+		testExpandCollapseAndOptions( "#pre-rendered-collapsible" );
 	});
 
 	module( "Collapsible set", {});
