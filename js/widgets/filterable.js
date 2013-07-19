@@ -114,7 +114,7 @@ define( [
 
 						if ( item.is( ".ui-li-divider" ) ) {
 
-							item.toggleClass( "ui-filter-hidequeue" , !childItems );
+							item.toggleClass( "ui-filterable-hidequeue" , !childItems );
 
 							// New bucket!
 							childItems = false;
@@ -122,7 +122,7 @@ define( [
 						} else if ( opts.filterCallback( itemtext, val, item ) ) {
 
 							//mark to be hidden
-							item.toggleClass( "ui-filter-hidequeue" , true );
+							item.toggleClass( "ui-filterable-hidequeue" , true );
 						} else {
 
 							// There's a shown item in the bucket
@@ -144,14 +144,14 @@ define( [
 				if ( isVal ) {
 					// Show items not marked to be hidden
 					filterItems
-						.filter( ":not(.ui-filter-hidequeue)" )
+						.filter( ":not(.ui-filterable-hidequeue)" )
 						.toggleClass( "ui-screen-hidden", false );
 
 					// Hide items marked to be hidden
 					filterItems
-						.filter( ".ui-filter-hidequeue" )
+						.filter( ".ui-filterable-hidequeue" )
 						.toggleClass( "ui-screen-hidden", true )
-						.toggleClass( "ui-filter-hidequeue", false );
+						.toggleClass( "ui-filterable-hidequeue", false );
 
 					// select - hide parent when no options match?
 					if ( select ) {
@@ -173,9 +173,9 @@ define( [
 				var el = this.element,
 					opts = this.options,
 					wrapper = $( "<div>", {
-						"class":  "ui-filter " + opts.wrapperClass,
+						"class":  "ui-filterable " + opts.wrapperClass,
 						"role": "search",
-						"id" : "ui-filter-" + this.uuid
+						"id" : "ui-filterable-" + this.uuid
 					}),
 					search = $( "<input>", {
 						placeholder: opts.filterPlaceholder
@@ -188,7 +188,7 @@ define( [
 					});
 
 				if ( opts.inset ) {
-					wrapper.addClass( "ui-filter-inset" );
+					wrapper.addClass( "ui-filterable-inset" );
 				}
 
 				if ( opts.filterReveal ) {
@@ -244,7 +244,7 @@ define( [
 			
 			_setOption: function( key, value ) {
 				var opts = this.options,
-					wrapper = document.getElementById( "ui-filter-" + this.uuid ),
+					wrapper = document.getElementById( "ui-filterable-" + this.uuid ),
 					$input = $( wrapper ).find( "input" );
 
 				// always update
@@ -265,7 +265,7 @@ define( [
 			
 			_destroy: function() {
 				var opts = this.options,
-					wrapper = document.getElementById( "ui-filter-" + this.uuid );
+					wrapper = document.getElementById( "ui-filterable-" + this.uuid );
 
 				if ( !opts.enhanced ) {
 					wrapper.parentNode.removeChild( wrapper );

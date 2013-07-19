@@ -416,7 +416,7 @@
 
 			function( timedOut) {
 				ok( !timedOut );
-				deepEqual( $.mobile.activePage.find("div.ui-filter-inset").length, 1, "div is inset");
+				deepEqual( $.mobile.activePage.find("div.ui-filterable-inset").length, 1, "div is inset");
 				window.history.back();
 			},
 
@@ -435,7 +435,7 @@
 
 			function( timedOut) {
 				ok( !timedOut );
-				deepEqual( $.mobile.activePage.find("div.ui-filter-inset").length, 1, "div is inset");
+				deepEqual( $.mobile.activePage.find("div.ui-filterable-inset").length, 1, "div is inset");
 				window.history.back();
 			},
 
@@ -457,7 +457,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$list = $page.find( "ul" );
 
 				ok($filter.is( ".baz" ), "filter element has custom classed set by user");
@@ -465,7 +465,7 @@
 
 				$list.filterable("destroy");
 
-				ok($page.find( ".ui-filter" ).length === 0, "filter can be destroyed using custom user id");			 
+				ok($page.find( ".ui-filterable" ).length === 0, "filter can be destroyed using custom user id");			 
 				start();
 			}
 		]);
@@ -483,7 +483,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$list = $page.find( "ul" );
 
 				ok($filter.parent().hasClass( "baz" ), "filter appended to element specified by data-target")
@@ -510,7 +510,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$list_a = $page.find( "ul" ).eq(0),
 					$list_b = $page.find( "ul" ).eq(1);
 
@@ -536,7 +536,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$list = $page.find( "ul" ).eq(0);
 
 				$page.find('input').val('ac');
@@ -549,7 +549,7 @@
 					);
 					$list.filterable( "destroy" );
 					ok(
-						$page.find( ".ui-filter" ).length === 1,
+						$page.find( ".ui-filterable" ).length === 1,
 						"Pre-enhanced filter element is not removed on destroy"
 					);
 					deepEqual(
@@ -577,7 +577,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$list = $page.find( "ul" ).eq(0);
 
 				$list.filterable( "disable" );
@@ -634,7 +634,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$table = $page.find( "table" ).eq(0);
 
 				$page.find('input').val('12:12');
@@ -672,7 +672,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$controlgroup = $page.find( "div.helper" );
 
 				// filter
@@ -713,7 +713,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$select = $page.find( ".ui-select" );
 
 				// filter
@@ -756,7 +756,7 @@
 			function() {
 				var $options,
 					$page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$select = $page.find( ".ui-select select" );
 
 				// filter
@@ -800,7 +800,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ),
+					$filter = $page.find( ".ui-filterable" ),
 					$select = $page.find( ".ui-select" );
 
 				// filter
@@ -840,7 +840,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ).eq(1),
+					$filter = $page.find( ".ui-filterable" ).eq(1),
 					$selection = $page.find( ".elements_p" );
 					$selection2 = $page.find( ".elements_b_p" );
 
@@ -894,7 +894,7 @@
 								);
 								$page.find( "#ticktick_p" ).filterable("destroy");
 								ok(
-									$page.find(".ui-filter").length === 1,
+									$page.find(".ui-filterable").length === 1,
 									"Destroying one filter does not destroy another filter"
 								);
 								start();
@@ -918,7 +918,7 @@
 
 			function() {
 				var $page = $( ".ui-page-active" ),
-					$filter = $page.find( ".ui-filter" ).eq(1),
+					$filter = $page.find( ".ui-filterable" ).eq(1),
 					$selection = $page.find( ".elements_span" );
 					$selection2 = $page.find( ".elements_b_span" );
 
@@ -972,7 +972,7 @@
 								);
 								$page.find( "#ticktick_span" ).filterable("destroy");
 								ok(
-									$page.find(".ui-filter").length === 1,
+									$page.find(".ui-filterable").length === 1,
 									"Destroying one filter does not destroy another filter"
 								);
 								start();
