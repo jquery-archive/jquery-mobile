@@ -45,13 +45,18 @@
 
 	test( "Ensure icon positioning defaults to left, and can be overridden with “data-iconpos”", function() {
 		var posdefault = $("#iconpos1"),
-		    posleft = $("#iconpos2"),
+			posleft = $("#iconpos2"),
 			posright = $("#iconpos3");
 
 		ok( posdefault.hasClass("ui-btn-icon-left"), "Button with unspecified icon position gets .ui-btn-icon-left" );
 		ok( posleft.hasClass("ui-btn-icon-left"), "Button with left icon positioning specified .ui-btn-icon-left" );
 		ok( posright.hasClass("ui-btn-icon-right"), "Button with right icon positioning specified .ui-btn-icon-right" );
 
+	});
+
+	test( "Attribute " + '"' + "role='button'" + '"', function() {
+		deepEqual( $( "#role-test" ).attr( "role" ), "button", "Marked-up button has " + '"' + "role='button'" + '"' + "set" );
+		deepEqual( $( "#role-test-unenhanced" ).buttonMarkup().attr( "role" ), "button", "Button marked-up at runtime has " + '"' + "role='button'" + '"' + "set" );
 	});
 
 })(jQuery);

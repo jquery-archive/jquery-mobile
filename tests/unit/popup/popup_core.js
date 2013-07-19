@@ -5,6 +5,18 @@
 
 	module( "jquery.mobile.popup.js");
 
+	function pointInRect( pt, rc ) {
+		return ( pt.x >= rc.x && pt.x <= rc.x + rc.cx && pt.y >= rc.y && pt.y <= rc.y + rc.cy );
+	}
+
+	function rectInRect( small, large ) {
+		return (
+			pointInRect( { x: small.x, y: small.y }, large ) &&
+			pointInRect( { x: small.x + small.cx, y: small.cy }, large ) &&
+			pointInRect( { x: small.x, y: small.y + small.cy }, large ) &&
+			pointInRect( { x: small.x + small.cx, y: small.y + small.cy }, large ) );
+	}
+
 	function popupEnhancementTests( $sel, prefix ) {
 		var $container = $sel.parent(), $screen = $sel.parent().prev();
 
@@ -21,6 +33,47 @@
 		el.popup( "option", "tolerance", val );
 		deepEqual( popup._tolerance, expected, "Popup tolerance: '" + val + "' results in expected tolerances" );
 	}
+
+	test( "Popup placement works correctly", function() {
+		var desired, result,
+			testElem = $( "#tolerance-test" ),
+			popup = testElem.data( "mobile-popup" ),
+			clampInfo = popup._clampPopupWidth(),
+			wnd = $( window ),
+			windowRect = {
+				x: wnd.scrollLeft(),
+				y: wnd.scrollTop(),
+				cx: wnd.width(),
+				cy: wnd.height()
+			};
+
+		ok( rectInRect( clampInfo.rc, windowRect ), "placement window lies within viewport" );
+
+		clampInfo.menuSize.cx = 120;
+		clampInfo.menuSize.cy = 50;
+
+		desired = { x: -12, y: -12 };
+		result = popup._calculateFinalLocation( desired, clampInfo );
+		ok( rectInRect( {
+				x: result.left,
+				y: result.top,
+				cx: clampInfo.menuSize.cx,
+				cy: clampInfo.menuSize.cy
+			}, clampInfo.rc ),
+			"desired: (" + desired.x + "," + desired.y + ") -> " +
+			"result: (" + result.left + "," + result.top + ") lies within the placement window." );
+
+		desired = { x: 23990, y: 19223 };
+		result = popup._calculateFinalLocation( desired, clampInfo );
+		ok( rectInRect( {
+				x: result.left,
+				y: result.top,
+				cx: clampInfo.menuSize.cx,
+				cy: clampInfo.menuSize.cy
+			}, clampInfo.rc ),
+			"desired: (" + desired.x + "," + desired.y + ") -> " +
+			"result: (" + result.left + "," + result.top + ") lies within the placement window." );
+	});
 
 	test( "Popup tolerances are parsed correctly", function() {
 		var tolTestElement = $( "#tolerance-test" ),

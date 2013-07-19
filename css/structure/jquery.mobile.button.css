@@ -18,7 +18,7 @@ button.ui-btn-icon-notext {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
-	width: 1.5em;
+	width: 1.75em;
 }
 /* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
 [class*="ui-grid-"] button.ui-btn {
@@ -51,11 +51,8 @@ button.ui-btn-icon-notext {
 /* Fixes IE/WP filter alpha opacity bugs */
 .ui-input-btn.ui-state-disabled input {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }

@@ -18,12 +18,17 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], functi
 
 // Map classes to buttonMarkup boolean options - used in classNameToOptions()
 var reverseBoolOptionMap = {
-	"ui-shadow" : "shadow",
-	"ui-corner-all" : "corners",
-	"ui-btn-inline" : "inline",
-	"ui-shadow-icon" : "iconshadow", /* TODO: Remove in 1.5 */
-	"ui-mini" : "mini"
-};
+		"ui-shadow" : "shadow",
+		"ui-corner-all" : "corners",
+		"ui-btn-inline" : "inline",
+		"ui-shadow-icon" : "iconshadow", /* TODO: Remove in 1.5 */
+		"ui-mini" : "mini"
+	},
+	getAttrFixed = function() {
+		var ret = $.mobile.getAttribute.apply( this, arguments );
+
+		return ( ret == null ? undefined : ret );
+	};
 
 // optionsToClasses:
 // @options: A complete set of options to convert to class names.
@@ -206,6 +211,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 
 			// ... and re-apply any unrecognized classes that were found
 			data.unknownClasses ).join( " " );
+		el.setAttribute( "role", "button" );
 	}
 
 	return this;
@@ -238,8 +244,7 @@ $.fn.buttonMarkup.defaults = {
 // without having to write it inline and may be moved into the enhancer in the
 // future.
 function enhanceWithButtonMarkup( idx, el ) {
-	var classes,
-		getAttrFixed = $.mobile.getAttribute;
+	var classes;
 
 	classes = optionsToClasses( $.extend( {},
 		$.fn.buttonMarkup.defaults, {
@@ -256,6 +261,7 @@ function enhanceWithButtonMarkup( idx, el ) {
 	el.className = $.grep( classes, function( el, idx ) {
 			return !( idx > 0 && classes[ idx - 1 ] === el );
 		}).join( " " );
+	el.setAttribute( "role", "button" );
 }
 
 //links in bars, or those with data-role become buttons

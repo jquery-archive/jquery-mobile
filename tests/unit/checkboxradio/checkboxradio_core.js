@@ -17,10 +17,9 @@
 		ok( input.prop("checked"), "checked after click" );
 		ok( button.hasClass( "ui-checkbox-on" ), "active styles after click" );
 		button.trigger( "click" );
-
 		input.checkboxradio( "disable" );
-		ok( input.attr( "disabled" ), "input disabled" );
-		ok( input.parent().hasClass( "ui-state-disabled" ), "disabled styles" );
+		ok( input.prop( "disabled" ), "input disabled" );
+		ok( input.parent().hasClass( "ui-disabled" ), "disabled styles" );
 		ok( !input.prop( "checked" ), "not checked before click" );
 		button.trigger( "click" );
 		ok( !input.prop( "checked" ), "not checked after click" );
@@ -94,7 +93,7 @@
 		var $inherited = $( "#checkbox-inherit-theme" ),
 			$explicit = $( "#checkbox-explicit-theme" );
 
-		deepEqual( $inherited.siblings("label").css( "background-color" ), "rgb(221, 221, 221)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+		deepEqual( $inherited.siblings("label").css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
 		ok( $explicit.siblings("label").hasClass( "ui-btn-b" ), "should not inherit" );
 	});
 

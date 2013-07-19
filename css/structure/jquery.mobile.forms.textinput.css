@@ -33,10 +33,6 @@ textarea.ui-input-text {
 	height: 3.125em;
 	overflow: auto;
 	resize: vertical;
-	-webkit-transition: height 200ms linear;
-	-moz-transition: height 200ms linear;
-	-o-transition: height 200ms linear;
-	transition: height 200ms linear;
 }
 .ui-mini .ui-input-text input,
 .ui-mini .ui-input-search input,
@@ -67,26 +63,32 @@ textarea.ui-mini {
 	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
+/* Search icon */
 .ui-input-search input {
 	padding-left: 1.75em;
-	padding-right: 2.25em;
 }
 .ui-input-search:after {
 	position: absolute;
 	left: .3125em;
 	top: 50%;
-	margin-top: -9px;
+	margin-top: -7px;
 	content: "";
-	width: 18px;
-	height: 18px;
+	width: 14px;
+	height: 14px;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	background-color: transparent;
+	filter: Alpha(Opacity=50);
 	opacity: .5;
 }
-.ui-input-search .ui-input-clear,
-.ui-input-text .ui-input-clear {
+.ui-input-search .ui-btn.ui-input-clear,
+.ui-input-text .ui-btn.ui-input-clear {
 	position: absolute;
 	right: 0;
 	top: 50%;
-	margin: -13px .3125em 0;
+	margin: -15px .3125em 0;
+	border: 0;
+	background-color: transparent;
 }
 .ui-input-search .ui-input-clear-hidden,
 .ui-input-text .ui-input-clear-hidden {

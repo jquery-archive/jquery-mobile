@@ -52,7 +52,7 @@ $.widget( "mobile.panel", {
 			page = $el.closest( ":jqmData(role='page')" ),
 			_getPageTheme = function() {
 				var $theme = $.data( page[0], "mobile-page" ).options.theme,
-				$pageThemeClass = "ui-body-" + $theme;
+				$pageThemeClass = "ui-page-theme-" + $theme;
 				return $pageThemeClass;
 			},
 			_getPanelInner = function() {
@@ -299,7 +299,7 @@ $.widget( "mobile.panel", {
 					if ( self.options.theme && self.options.display !== "overlay" ) {
 						self._page
 							.removeClass( self._pageTheme )
-							.addClass( "ui-body-" + self.options.theme );
+							.addClass( "ui-page-theme-" + self.options.theme );
 					}
 
 					self.element.removeClass( o.classes.panelClosed ).addClass( o.classes.panelOpen );
@@ -376,7 +376,7 @@ $.widget( "mobile.panel", {
 				},
 				complete = function() {
 					if ( self.options.theme && self.options.display !== "overlay" ) {
-						self._page.removeClass( "ui-body-" + self.options.theme ).addClass( self._pageTheme );
+						self._page.removeClass( "ui-page-theme-" + self.options.theme ).addClass( self._pageTheme );
 						// reset fix for IE7 min-height bug
 						self._wrapper.css( "min-height", "" );
 					}
@@ -430,7 +430,7 @@ $.widget( "mobile.panel", {
 				this._page.jqmRemoveData( "panel" );
 				this._page.removeClass( classes.pagePanelOpen );
 				if ( theme ) {
-					this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
+					this._page.removeClass( "ui-page-theme-" + theme ).addClass( this._pageTheme );
 				}
 				$.mobile.resetActivePageHeight();
 			}
@@ -440,7 +440,7 @@ $.widget( "mobile.panel", {
 			this._page.jqmRemoveData( "panel" );
 			this._page.removeClass( classes.pagePanelOpen );
 			if ( theme ) {
-				this._page.removeClass( "ui-body-" + theme ).addClass( this._pageTheme );
+				this._page.removeClass( "ui-page-theme-" + theme ).addClass( this._pageTheme );
 			}
 		}
 

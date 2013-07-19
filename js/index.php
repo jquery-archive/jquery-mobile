@@ -63,6 +63,8 @@ $files = array(
 	'widgets/forms/slider.tooltip.js',
 	'widgets/forms/rangeslider.js',
 	'widgets/forms/textinput.js',
+	'widgets/forms/clearButton.js',
+	'widgets/forms/autogrow.js',
 	'widgets/forms/select.js',
 	'widgets/forms/select.custom.js',
 	'jquery.mobile.buttonMarkup.js',

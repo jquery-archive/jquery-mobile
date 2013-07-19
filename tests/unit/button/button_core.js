@@ -38,7 +38,7 @@
 		var $inherited = $( "#theme-check" ),
 		    $explicit = $( "#theme-check-explicit" );
 
-		deepEqual( $inherited.css( "background-color" ), "rgb(221, 221, 221)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+		deepEqual( $inherited.css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
 		ok( $explicit.hasClass( "ui-btn-a" ), "should not inherit" );
 	});
 

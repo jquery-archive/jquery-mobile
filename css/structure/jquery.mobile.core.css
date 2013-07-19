@@ -47,6 +47,7 @@ div.ui-mobile-viewport {
 .ui-mobile .ui-page-active {
 	display: block;
 	overflow: visible;
+	overflow-x: hidden;
 }
 @media screen and (orientation: portrait) {
 	.ui-mobile .ui-page {
@@ -67,12 +68,9 @@ div.ui-mobile-viewport {
 /* Non-js content hiding */
 .ui-nojs {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }
 
@@ -229,8 +227,8 @@ div.ui-mobile-viewport {
 }
 .ui-btn-icon-notext {
 	padding: 0;
-	width: 1.5em;
-	height: 1.5em;
+	width: 1.75em;
+	height: 1.75em;
 	text-indent: -9999px;
 	white-space: nowrap !important;
 }
@@ -256,6 +254,7 @@ div.ui-mobile-viewport {
 	font-size: 12.5px;
 }
 .ui-mini.ui-btn-icon-notext,
+.ui-mini .ui-btn-icon-notext,
 .ui-header .ui-btn-icon-notext,
 .ui-footer .ui-btn-icon-notext {
 	font-size: 16px;	
@@ -290,35 +289,47 @@ div.ui-mobile-viewport {
 	content: "";
 	position: absolute;
 	display: block;
-	width: 18px;
-	height: 18px;
+	width: 22px;
+	height: 22px;
 }
 .ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
 .ui-btn-icon-right:after,
 .ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
 	top: 50%;
-	margin-top: -9px;
+	margin-top: -11px;
 }
 .ui-btn-icon-left:after {
-	left: .625em;
+	left: .5625em;
 }
 .ui-btn-icon-right:after,
 .ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
-	right: .625em;
+	right: .5625em;
+}
+.ui-mini.ui-btn-icon-left:after,
+.ui-mini .ui-btn-icon-left:after,
+.ui-header .ui-btn-icon-left:after,
+.ui-footer .ui-btn-icon-left:after {
+	left: .37em;
+}
+.ui-mini.ui-btn-icon-right:after,
+.ui-mini .ui-btn-icon-right:after,
+.ui-header .ui-btn-icon-right:after,
+.ui-footer .ui-btn-icon-right:after {
+	right: .37em;
 }
 .ui-btn-icon-notext:after,
 .ui-btn-icon-top:after,
 .ui-btn-icon-bottom:after {
 	left: 50%;
-	margin-left: -9px;
+	margin-left: -11px;
 }
 .ui-btn-icon-top:after {
-	top: .625em;
+	top: .5625em;
 }
 .ui-btn-icon-bottom:after {
 	top: auto;
-	bottom: .625em;
+	bottom: .5625em;
 }
 /* Buttons in header position classes */
 .ui-header .ui-btn-left,
@@ -339,11 +350,11 @@ div.ui-mobile-viewport {
 	right: .4em;
 }
 .ui-btn-icon-notext.ui-btn-left {
-	top: .375em;
+	top: .3125em;
 	left: .3125em;
 }
 .ui-btn-icon-notext.ui-btn-right {
-	top: .375em;
+	top: .3125em;
 	right: .3125em;
 }
 
@@ -360,11 +371,8 @@ div.ui-mobile-viewport {
 .ui-hide-label .ui-rangeslider label,
 .ui-hidden-accessible {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }
