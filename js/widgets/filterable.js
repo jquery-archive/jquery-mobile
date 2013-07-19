@@ -52,7 +52,7 @@ define( [
 					// Change val as lastval for next execution
 					search.setAttribute( "data-" + $.mobile.ns + "lastval", val );
 
-					this._filterItems( search, val, lastval );
+					this._filterItems( val, lastval );
 				}, 250 );
 			},
 
@@ -91,7 +91,7 @@ define( [
 				return filterItems;
 			},
 			
-			_filterItems: function( search, val, lastval ){
+			_filterItems: function( val, lastval ){
 				var opts = this.options,
 					getAttrFixed = $.mobile.getAttribute,
 					filterItems = this._setFilterableItems( val, lastval ),
