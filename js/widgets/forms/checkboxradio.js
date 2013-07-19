@@ -237,7 +237,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			this.label.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + options.theme );
 		}
 		if( options.wrapperClass !== undefined ) {
-			this.widget().removeClass( this.options.class ).addClass( options.wrapperClass );
+			this.widget().removeClass( this.options.wrapperClass ).addClass( options.wrapperClass );
 		}
 		if( options.iconpos !== undefined && ( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length === 0 ) ) {
 			this.label.removeClass( "ui-btn-icon-" + this.options.iconpos ).addClass( "ui-btn-icon-" + options.iconpos );
