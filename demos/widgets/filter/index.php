@@ -34,14 +34,12 @@
 			<h1>Filter <a href="http://api.jquerymobile.com/filter/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">
-			A filter can be set on container elements such as <code>ul, table, select, controlgroup, </code>etc) by
-			declaring <code> data-filter="true"</code> attribute on the container.
+			The children of any element can be filtered by setting the attribute <code>data-filter="true"</code> on the element. By default, the text contained in each child is used for filtering. However, you also have the options of setting the attribute <code>data-filtertext</code> to a string value on any child that will be considered for filtering  to associate custom filter text instead.
 			</p>
 
 			<h2 id="filter-ul">Basic filter</h2>
 			<p>
-			The filter widget is based on the listview filter extension. Like with a listview before, you can declare
-			<code> data-filter="true"</code> on a listview to generate a filter for the contained list items.
+			The filter widget is based on and replaces the listview filter extension. Thus, you can set <code>data-filter="true"</code> on a listview to generate a filter for its list items.
 			</p>
 
 			<div data-demo-html="true">
@@ -57,7 +55,7 @@
 			<h2 id="filter-table">Table filter</h2>
 			<p>
 			You are not limited to using filters on listviews. To create a filter for a table widget, set
-			<code> data-filter="true"</code> on the table element to generate a filter for table rows.
+			<code>data-filter="true"</code> on the table element to generate a filter for table rows.
 			</p>
 
 			<div data-demo-html="true">
@@ -100,7 +98,7 @@
 			<h2 id="filter-controlgroup">Controlgroup Filter</h2>
 			<p>
 			The filter widget can be used on other widgets, too. To filter a list of controlgroup buttons,
-			declare <code> data-filter="true"</code> on the element that creates the controlgroup (Note that
+			declare <code>data-filter="true"</code> on the element that creates the controlgroup (Note that
 			you can also use the <code>data-filtertext</code> attribute to declare the text string to filter
 			the respective element by.
 			</p>
@@ -119,12 +117,13 @@
 			<p>
 			The widget also works on <code>select</code> widgets by hiding options that do not match the
 			filter text. To use a filter for <code>options</code>, declare the <code>
-			data-filtertext</code> attribute on the select element. Note that the select element
-			is completely hidden, if no option matches the filtertext.
+			data-filter</code> attribute on the select element. Note that the select element
+			is completely hidden if no option matches the filtertext.
 			</p>
 
 			<div data-demo-html="true">
-				<select id="anotherSelect" data-filter="true">
+				<input data-type="search" id="searchForSelect"></input>
+				<select id="anotherSelect" data-filter="true" data-input-selector="#searchForSelect">
 					<option value="A">Option A</option>
 					<option value="B">Option B</option>
 					<option value="C">Option C</option>
@@ -138,14 +137,13 @@
 				</select>
 			</div>
 
-			<h2 id="filter-random">Random Filter</h2>
+			<h2 id="filter-random">Filter Anything</h2>
 			<p>
-			The widget can also be called on random element containers, like a <code>
-			div</code> tag containing <code>p</code> elements to filter.
+			The widget can be used for filtering on any element containing other elements, like a <code>
+			div</code> containing <code>p</code> elements.
 			</p>
 			<div data-demo-html="true">
-				<div data-filter="true" data-inset="true" data-selector="elements"></div>
-				<div class="elements">
+				<div class="elements" data-filter="true">
 					<p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
 					<p><strong>tags</strong> nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
 					<p><strong>Tags</strong> erat, sed diam voluptua. At vero eos et accusam et justo duo dolores </p>
