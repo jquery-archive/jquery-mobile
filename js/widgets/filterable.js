@@ -56,7 +56,14 @@ define( [
 			},
 
 			_getFilterableItems: function() {
-				return this.element.find( "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn" );
+				var elem = this.element,
+					items = elem.find( "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn" );
+
+				if ( items.length === 0 ) {
+					items = elem.children();
+				}
+
+				return items;
 			},
 			
 			_setFilterableItems: function( val, lastval ) {
