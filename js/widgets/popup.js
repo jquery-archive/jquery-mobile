@@ -132,7 +132,7 @@ $.widget( "mobile.popup", {
 			if ( !this._expectResizeEvent() ) {
 				if ( this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 					// effectively rapid-open the popup while leaving the screen intact
-					this._ui.container.removeClass( "ui-popup-hidden" );
+					this._ui.container.removeClass( "ui-popup-hidden ui-popup-truncate" );
 					this.reposition( { positionTo: "window" } );
 					this._ignoreResizeEvents();
 				}
@@ -164,7 +164,7 @@ $.widget( "mobile.popup", {
 				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 				// effectively rapid-close the popup while leaving the screen intact
 				this._ui.container
-					.addClass( "ui-popup-hidden" )
+					.addClass( "ui-popup-hidden ui-popup-truncate" )
 					.removeAttr( "style" );
 			}
 		}
@@ -260,7 +260,7 @@ $.widget( "mobile.popup", {
 		var ui = {
 				screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-				container: $( "<div class='ui-popup-container ui-popup-hidden'></div>" )
+				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate'></div>" )
 			},
 			frag = this.document[ 0 ].createDocumentFragment();
 
@@ -363,19 +363,13 @@ $.widget( "mobile.popup", {
 			this._setTolerance( opts.tolerance );
 		}
 
-		return this._super( opts );
-	},
-
-	// FIXME: Move this into _setOptions as soon as we're using a version of the
-	// factory that includes https://github.com/jquery/jquery-ui/pull/1024 ...
-	_setOption: function( key, value ) {
-		if ( key === "disabled" ) {
-			if ( value ) {
+		if ( opts.disabled !== undefined ) {
+			if ( opts.disabled ) {
 				this.close();
 			}
 		}
 
-		return this._super( key, value );
+		return this._super( opts );
 	},
 
 	_setTolerance: function( value ) {
@@ -646,10 +640,12 @@ $.widget( "mobile.popup", {
 		this._applyTransition( opts.transition );
 
 		this._ui.screen.removeClass( "ui-screen-hidden" );
-		this._ui.container.removeClass( "ui-popup-hidden" );
+		this._ui.container.removeClass( "ui-popup-truncate" );
 
 		// Give applications a chance to modify the contents of the container before it appears
 		this._reposition( opts );
+
+		this._ui.container.removeClass( "ui-popup-hidden" );
 
 		if ( this.options.overlayTheme && androidBlacklist ) {
 			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
@@ -682,7 +678,7 @@ $.widget( "mobile.popup", {
 	_closePrereqContainer: function() {
 		this._ui.container
 			.removeClass( "reverse out" )
-			.addClass( "ui-popup-hidden" )
+			.addClass( "ui-popup-hidden ui-popup-truncate" )
 			.removeAttr( "style" );
 	},
 
@@ -727,6 +723,10 @@ $.widget( "mobile.popup", {
 	},
 
 	_unenhance: function() {
+		if ( this.options.enhanced ) {
+			return;
+		}
+
 		// Put the element back to where the placeholder was and remove the "ui-popup" class
 		this._setOptions( { theme: $.mobile.popup.prototype.options.theme } );
 		this.element
