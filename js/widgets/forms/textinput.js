@@ -14,6 +14,7 @@ $.widget( "mobile.textinput", {
 		theme: null,
 		corners: true,
 		mini: false,
+		inset: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		wrapperClass: "",
@@ -140,8 +141,15 @@ $.widget( "mobile.textinput", {
 			this.themeclass = themeclass;
 		}
 
+		if ( options.inset !== undefined ) {
+			this.options.inset = options.inset;
+			outer
+				.toggleClass( "ui-input-inset", options.inset )
+				.toggleClass( "ui-corner-all", options.inset && this.options.corners );
+		}
+
 		if( options.corners !== undefined ) {
-			outer.removeClass( "ui-corner-all" ).addClass( options.corners ? "ui-corner-all": "" );
+			outer.toggleClass( "ui-corner-all", options.corners && this.options.inset );
 		}
 
 		if( options.mini !== undefined ) {
@@ -152,7 +160,6 @@ $.widget( "mobile.textinput", {
 			this.element.prop( "disabled", !!options.disabled );
 			outer.toggleClass( "ui-disabled", !!options.disabled );
 		}
-
 	},
 
 	_destroy: function() {
