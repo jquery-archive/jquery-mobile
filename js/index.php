@@ -67,6 +67,7 @@ $files = array(
 	'widgets/forms/select.js',
 	'widgets/forms/select.custom.js',
 	'widgets/filterable.js',
+	'widgets/filterable.backcompat.js',
 	'jquery.mobile.buttonMarkup.js',
 	'widgets/controlgroup.js',
 	'jquery.mobile.links.js',

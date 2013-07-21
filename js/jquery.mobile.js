@@ -21,6 +21,7 @@ define([
 	"./widgets/navbar",
 	"./widgets/listview",
 	"./widgets/filterable",
+	"./widgets/filterable.backcompat",
 	"./widgets/listview.autodividers",
 	"./jquery.mobile.nojs",
 	"./widgets/forms/checkboxradio",
