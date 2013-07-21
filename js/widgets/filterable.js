@@ -164,11 +164,14 @@ define( [
 				}
 			},
 
+			_isSearchInternal: function() {
+				return ( this._search && this._search.jqmData( "ui-filterable-" + this.uuid + "-internal" ) );
+			},
+
 			_setInput: function ( selector ) {
 				var search, bindEvents,
 					uniqid = "ui-filterable-" + this.uuid,
-					isCurrentInternal = ( this._search &&
-						this._search.jqmData( uniqid + "-internal" ) );
+					isCurrentInternal = this._isSearchInternal();
 
 				if ( selector ) {
 					search = $( "" + selector );
@@ -259,7 +262,7 @@ define( [
 			},
 
 			_destroy: function() {
-				if ( this._search.jqmData( "ui-filterable-" + this.uuid + "-internal" ) ) {
+				if ( this._isSearchInternal() ) {
 					this._search.remove();
 				}
 			}
