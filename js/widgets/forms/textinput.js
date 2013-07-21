@@ -14,6 +14,7 @@ $.widget( "mobile.textinput", {
 		theme: null,
 		corners: true,
 		mini: false,
+		inset: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		wrapperClass: "",
@@ -129,29 +130,36 @@ $.widget( "mobile.textinput", {
 	},
 
 	_setOptions: function ( options ) {
-		var themeclass;
+		var themeclass,
+			outer = this.widget();
 
 		this._super( options );
 
 		if( options.theme !== undefined ) {
 			themeclass = "ui-body-" + (( options.theme === null ) ? "inherit": options.theme );
-			this.widget().removeClass( this.themeclass ).addClass( themeclass );
+			outer.removeClass( this.themeclass ).addClass( themeclass );
 			this.themeclass = themeclass;
 		}
 
+		if ( options.inset !== undefined ) {
+			this.options.inset = options.inset;
+			outer
+				.toggleClass( "ui-input-inset", options.inset )
+				.toggleClass( "ui-corner-all", options.inset && this.options.corners );
+		}
+
 		if( options.corners !== undefined ) {
-			this.widget().removeClass( "ui-corner-all" ).addClass( options.corners ? "ui-corner-all": "" );
+			outer.toggleClass( "ui-corner-all", options.corners && this.options.inset );
 		}
 
 		if( options.mini !== undefined ) {
-			this.widget().removeClass( "ui-mini" ).addClass( options.mini ? "ui-mini": "" );
+			outer.removeClass( "ui-mini" ).addClass( options.mini ? "ui-mini": "" );
 		}
 
 		if( options.disabled !== undefined ) {
 			this.element.prop( "disabled", !!options.disabled );
-			this.widget().toggleClass( "ui-disabled", !!options.disabled );
+			outer.toggleClass( "ui-disabled", !!options.disabled );
 		}
-
 	},
 
 	_destroy: function() {
