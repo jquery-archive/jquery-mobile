@@ -118,15 +118,15 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		$( this ).find( ".jqm-search .ui-input-clear" ).trigger( "click" );
 	});
 
-	$( this ).find( ".jqm-content ul" ).listview({
+	$( this ).find( ".jqm-content ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
 		theme: null,
 		dividerTheme: null,
 		icon: false,
-  		arrowKeyNav: true,
-  		enterToNav: true,
-  		highlight: true
+		arrowKeyNav: true,
+		enterToNav: true,
+		highlight: true
 	});
 
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
