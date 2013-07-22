@@ -24,17 +24,11 @@ $.widget( "mobile.textinput", {
 	_create: function() {
 
 		var o = this.options,
-			themeclass  = " ui-body-" + ( o.theme ?  o.theme : "inherit" ),
-			cornerclass = o.corners ? " ui-corner-all" : "",
-			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = this.element[ 0 ].tagName === "TEXTAREA",
-			inputNeedsWrap = ((this.element.is( "input" ) ||  this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) )&& !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ));
+			inputNeedsWrap = ((this.element.is( "input" ) || this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) && !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ));
 			
 		$.extend( this, {
-			themeclass: themeclass,
-			cornerclass: cornerclass,
-			miniclass: miniclass,
 			isSearch: isSearch,
 			isTextarea: isTextarea,
 			inputNeedsWrap: inputNeedsWrap
@@ -42,11 +36,11 @@ $.widget( "mobile.textinput", {
 
 		this._autoCorrect();
 
-		if( this.element[0].disabled ){
+		if ( this.element[ 0 ].disabled ) {
 			this.options.disabled = true;
 		}
 
-		if( !o.enhanced ) {
+		if ( !o.enhanced ) {
 			this._enhance();
 		}
 
@@ -57,19 +51,19 @@ $.widget( "mobile.textinput", {
 
 	},
 
-	refresh: function(){
+	refresh: function() {
 		this.setOptions({
-			"disabled" : this.element.is(":disabled")
+			"disabled" : this.element.is( ":disabled" )
 		});
 	},
 
-	_enhance: function(){
+	_enhance: function() {
 
-		if( this.isTextarea ) {
+		if ( this.isTextarea ) {
 			this.element.addClass( "ui-input-text" );
 		}
 
-		if( this.element.is( "textarea, [data-" + ( $.mobile.ns || "" ) + "type='range']" ) ){
+		if ( this.element.is( "textarea, [data-" + ( $.mobile.ns || "" ) + "type='range']" ) ) {
 			this.element.addClass( "ui-shadow-inset" );
 			this._setOptions( this.options );
 		}
@@ -81,24 +75,25 @@ $.widget( "mobile.textinput", {
 
 	},
 
-	widget: function(){
-		return ( this.inputNeedsWrap ) ? this.element.parent(): this.element;
+	widget: function() {
+		return ( this.inputNeedsWrap ) ? this.element.parent() : this.element;
 	},
 
-	_wrap: function(){
+	_wrap: function() {
 		var opts = this.options;
 
 		return $( "<div class='" +
 			( this.isSearch ? "ui-input-search " : "ui-input-text " ) +
-			"ui-body-" + ( ( opts.theme === null ) ? "inherit": opts.theme ) + " " +
-			( opts.corners ? "ui-corner-all ": "" ) +
-			( opts.mini ? "ui-mini ": "" ) +
-			( opts.disabled ? "ui-state-disabled ": "" ) +
+			"ui-body-" + ( ( opts.theme === null ) ? "inherit" : opts.theme ) + " " +
+			( opts.inset ? "ui-input-inset " : "" ) +
+			( opts.corners ? "ui-corner-all " : "" ) +
+			( opts.mini ? "ui-mini " : "" ) +
+			( opts.disabled ? "ui-state-disabled " : "" ) +
 			opts.wrapperClass + " " +
 			"ui-shadow-inset'></div>" );
 	},
 
-	_autoCorrect: function(){
+	_autoCorrect: function() {
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
 		//      since the popup they use can't be dismissed by the user. Note
@@ -135,8 +130,8 @@ $.widget( "mobile.textinput", {
 
 		this._super( options );
 
-		if( options.theme !== undefined ) {
-			themeclass = "ui-body-" + (( options.theme === null ) ? "inherit": options.theme );
+		if ( options.theme !== undefined ) {
+			themeclass = "ui-body-" + (( options.theme === null ) ? "inherit" : options.theme );
 			outer.removeClass( this.themeclass ).addClass( themeclass );
 			this.themeclass = themeclass;
 		}
@@ -148,25 +143,25 @@ $.widget( "mobile.textinput", {
 				.toggleClass( "ui-corner-all", options.inset && this.options.corners );
 		}
 
-		if( options.corners !== undefined ) {
+		if ( options.corners !== undefined ) {
 			outer.toggleClass( "ui-corner-all", options.corners && this.options.inset );
 		}
 
-		if( options.mini !== undefined ) {
-			outer.removeClass( "ui-mini" ).addClass( options.mini ? "ui-mini": "" );
+		if ( options.mini !== undefined ) {
+			outer.removeClass( "ui-mini" ).addClass( options.mini ? "ui-mini" : "" );
 		}
 
-		if( options.disabled !== undefined ) {
+		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", !!options.disabled );
 			outer.toggleClass( "ui-disabled", !!options.disabled );
 		}
 	},
 
 	_destroy: function() {
-		if( this.options.enhanced ){
+		if ( this.options.enhanced ) {
 			return;
 		}
-		if( this.inputNeedsWrap ){
+		if ( this.inputNeedsWrap ) {
 			this.element.unwrap();
 		}
 		this.element.removeClass( "ui-input-text " + this.themeclass + " ui-corner-all ui-mini ui-disabled" );
