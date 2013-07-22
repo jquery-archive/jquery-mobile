@@ -16,7 +16,8 @@ $.widget( "mobile.flipswitch", $.extend({
 		offText: "Off",
 		theme: null,
 		enhanced: false,
-		wrapperClass: null
+		wrapperClass: null,
+		mini: false
 	},
 
 	_create: function() {
@@ -28,6 +29,12 @@ $.widget( "mobile.flipswitch", $.extend({
 					on: this.element.find( ".ui-flipswitch-on" ).eq( 0 ),
 					off: this.element.find( ".ui-flipswitch-off" ).eq(0),
 					type: this.element.get( 0 ).tagName
+				});
+			}
+
+			if( this.element.is( ":disabled" ) ){
+				this._setOptions({
+					"disabled": true
 				});
 			}
 
@@ -43,7 +50,7 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	widget: function() {
-		return this.element.flipswitch;
+		return this.flipswitch;
 	},
 
 	_left: function() {
@@ -78,7 +85,7 @@ $.widget( "mobile.flipswitch", $.extend({
 			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" ).text( onText );
 			off.addClass( "ui-flipswitch-off" ).text( offText );
 			
-			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( this.element.is( ":checked" ) ? "ui-flipswitch-active" : "" ) ).append( on, off );
+			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( this.element.is( ":checked" ) ? "ui-flipswitch-active" : "" ) + ( this.element.is(":disabled") ? " ui-state-disabled": "") + ( this.options.mini ? " ui-mini": "" ) ).append( on, off );
 			
 			this.element.addClass( "ui-flipswitch-input" );
 			this.element.after( flipswitch ).appendTo( flipswitch );
@@ -131,8 +138,14 @@ $.widget( "mobile.flipswitch", $.extend({
 		if ( options.onText !== undefined ) {
 			this.on.text( options.onText );
 		}
-		if ( options.offText ) {
+		if ( options.offText !== undefined ) {
 			this.off.text( options.offText );
+		}
+		if ( options.disabled !== undefined ) {
+			this.widget().toggleClass( "ui-state-disabled", options.disabled );
+		}
+		if( options.mini !== undefined ) {
+			this.widget().toggleClass( "ui-mini", options.mini );
 		}
 	},
 
