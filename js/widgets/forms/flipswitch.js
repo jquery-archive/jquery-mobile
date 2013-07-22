@@ -78,7 +78,7 @@ $.widget( "mobile.flipswitch", $.extend({
 			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" ).text( onText );
 			off.addClass( "ui-flipswitch-off" ).text( offText );
 			
-			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-bar-inherit ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( this.element.is( ":checked" ) ? "ui-flipswitch-active" : "" ) ).append( on, off );
+			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( this.element.is( ":checked" ) ? "ui-flipswitch-active" : "" ) ).append( on, off );
 			
 			this.element.addClass( "ui-flipswitch-input" );
 			this.element.after( flipswitch ).appendTo( flipswitch );
