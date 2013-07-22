@@ -3,7 +3,8 @@
 //>>label: Filterable
 //>>group: Widgets
 
-define( [ "jquery" ], function( jQuery ) {
+define( [ "jquery",
+	"jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -129,8 +130,8 @@ define( [ "jquery" ], function( jQuery ) {
 						search = $( "<input " +
 							"data-" + $.mobile.ns + "type='search' " +
 							"></input>" )
-							.jqmData( "ui-filterable-" + this.uuid + "-internal", true )
-							.insertBefore( this.element );
+							.jqmData( "ui-filterable-" + this.uuid + "-internal", true );
+						$( "<form></form>" ).append( search ).insertBefore( this.element );
 						if ( $.mobile.textinput ) {
 							search.textinput({ wrapperClass: "ui-filterable" });
 						}
