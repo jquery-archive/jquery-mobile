@@ -59,6 +59,7 @@ define( [ "jquery" ], function( jQuery ) {
 				var elem = this.element,
 					children = this.options.children,
 					items = !children ? { length: 0 }:
+						$.isFunction( children ) ? children():
 						children.nodeName ? $( children ):
 						children.jquery ? children:
 						this.element.find( children );
