@@ -1,19 +1,20 @@
 .ui-flipswitch {
 	display: inline-block;
 	vertical-align: middle;
-	background-size: 100% 100%;
-	background-origin: border-box;
-	background-clip: border-box;
-	background-position: 100% 0;
-	overflow: hidden;
-	height: 2em;
-	width: 5.8em;
-	padding-left: .15em;
-	margin: .5em 0;
+	width: 5.875em; /* Override this and padding-left in next rule if you use labels other than "on/off" and need more space */
+	height: 1.875em;
 	border-width: 1px;
 	border-style: solid;
-	transition-duration: .2s;
-	transition-property: padding, width, background-color, background-position;
+	margin: .5em 0;
+	overflow: hidden;
+	-webkit-transition-property: padding, width, background-color, color, border-color;
+	-moz-transition-property: padding, width, background-color, color, border-color;
+	-o-transition-property: padding, width, background-color, color, border-color;
+	transition-property: padding, width, background-color, color, border-color;
+	-webkit-transition-duration: 200ms;
+	-moz-transition-duration: 200ms;
+	-o-transition-duration: 200ms;
+	transition-duration: 200ms;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -22,44 +23,45 @@
 	cursor: pointer;
 }
 .ui-flipswitch.ui-flipswitch-active {
-	padding-left: 4.1em;
-	background-position: 0 0;
-	width: 1.85em;
+	padding-left: 4em;  /* Override this and width in previous rule if you use labels other than "on/off" and need more space */
+	width: 1.875em;
 }
 .ui-flipswitch-input {
 	position: absolute;
-	left: -1000px;
-	border: none;
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
+	border: 0;
+	outline: 0;
+	filter: Alpha(Opacity=0);
 	opacity: 0;
 }
-.ui-flipswitch .ui-btn.ui-flipswitch-on {
+.ui-flipswitch .ui-btn.ui-flipswitch-on,
+.ui-flipswitch .ui-flipswitch-off {
 	float: left;
-	width: 1.75em;
 	height: 1.75em;
+	margin: .0625em;
+	line-height: 1.65em;
+}
+.ui-flipswitch .ui-btn.ui-flipswitch-on {
+	width: 1.75em;
 	padding: 0;
-	margin: .08em 0 0 -.1em;
+	text-indent: -2.6em; /* Override this to center text if you use a label other than "on" */
 	text-align: left;
 	border-width: 1px;
 	border-style: solid;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
 	border-radius: inherit;
 	overflow: visible;
 	color: inherit;
 	text-shadow: inherit;
-	text-indent: -2.5em;
 }
 .ui-flipswitch .ui-flipswitch-off {
-	float: left;
-	text-indent: .75em;
-}
-/*ie8*/
-.ui-flipswitch .ui-btn.ui-flipswitch-on,
-.ui-flipswitch .ui-flipswitch-off {
-	font-size: 1em;
-	padding-top: 5px;
-}
-/*everything else*/
-:root .ui-flipswitch .ui-btn.ui-flipswitch-on,
-:root .ui-flipswitch .ui-flipswitch-off {
-	padding-top: 0;
-	font: bold 1em/1.9 sans-serif;
+	padding: 1px;
+	text-indent: 1em; /* Override this to center text if you use a label other than "off" */
 }
