@@ -28,32 +28,40 @@ $.mobile.filterable.prototype.options.filterCallback = function( index, searchVa
 
 $.widget( "mobile.filterable", $.mobile.filterable, {
 	_create: function() {
-		var idx, widget,
-			recognizedWidgets = [ "controlgroup", "collapsibleset", "listview", "selectmenu" ];
-
 		this._super();
 
 		$.extend( this, {
 			_widget: null
 		});
-
-		for ( idx in recognizedWidgets ) {
-			widget = this.element.data( "mobile-" + recognizedWidgets[ idx ] );
-			if ( widget ) {
-
-				// Tap into _setOptions for a recognized widget so we may synchronize
-				// the widget's style with the textinput style, if the textinput is
-				// internal
-				widget._setOptions = replaceSetOptions( this, widget._setOptions );
-				this._syncTextInputOptions( widget.options );
-				this._widget = widget;
-				break;
-			}
-		}
 	},
 
 	_filterItems: function() {
+		var idx, widget, recognizedWidgets;
+
 		this._superApply( arguments );
+
+		if ( this._widget === null ) {
+
+			// Next time the filter gets called, do not try to search for the widget
+			this._widget = false;
+
+			recognizedWidgets = [ "controlgroup", "collapsibleset", "listview", "selectmenu" ];
+
+			for ( idx in recognizedWidgets ) {
+				widget = this.element.data( "mobile-" + recognizedWidgets[ idx ] );
+				if ( widget ) {
+
+					// Tap into _setOptions for a recognized widget so we may synchronize
+					// the widget's style with the textinput style, if the textinput is
+					// internal
+					widget._setOptions = replaceSetOptions( this, widget._setOptions );
+					this._syncTextInputOptions( widget.options );
+					this._widget = widget;
+					break;
+				}
+			}
+		}
+
 		if ( this._widget && $.isFunction( this._widget.refresh ) ) {
 			this._widget.refresh();
 		}
@@ -77,20 +85,6 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		}
 	}
 });
-
-	//auto self-init widgets
-	$.mobile._enhancer.add( "mobile.filterable", {
-
-		// We need the widgets to which we can sync the textinput styling to be
-		// instantiated first, so we may find them during the instantiation of the
-		// filterable itself.
-		dependencies: [
-			"mobile.controlgroup",
-			"mobile.collapsibleset",
-			"mobile.listview",
-			"mobile.selectmenu"
-		]
-	});
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
