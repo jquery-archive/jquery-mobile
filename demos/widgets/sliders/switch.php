@@ -43,8 +43,8 @@
                 <form>
                     <label for="flip-1">Flip toggle switch:</label>
                     <select id="flip-1" name="flip-1" data-role="slider">
-                        <option>On</option>
-                        <option>Off</option>
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
                     </select>
                 </form>
                 </div><!-- /demo-html -->
