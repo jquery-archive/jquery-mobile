@@ -98,16 +98,30 @@ define( [ "jquery",
 				} else {
 					filterItems[ opts.filterReveal ? "addClass" : "removeClass" ]( "ui-screen-hidden" );
 				}
+
+				this._refreshChildWidget();
 			},
-			
-			_isSearchInternal: function() {
-				return ( this._search && this._search.jqmData( "ui-filterable-" + this.uuid + "-internal" ) );
+
+			// The Default implementation of _refreshChildWidget attempts to call
+			// refresh on collapsibleset, controlgroup, selectmenu, or listview
+			_refreshChildWidget: function() {
+				var widget, idx,
+					recognizedWidgets = [ "collapsibleset", "selectmenu", "controlgroup", "listview" ];
+
+				for ( idx = recognizedWidgets.length - 1 ; idx > -1 ; idx-- ) {
+					widget = recognizedWidgets[ idx ];
+					if ( $.mobile[ widget ] ) {
+						widget = this.element.data( "mobile-" + widget );
+						if ( widget && $.isFunction( widget.refresh ) ) {
+							widget.refresh();
+						}
+					}
+				}
 			},
 
 			// TODO: When the input is not internal, do not even store it in this._search
 			_setInput: function ( selector ) {
-				var search, bindEvents,
-					isCurrentInternal = this._isSearchInternal();
+				var search = this._search;
 
 				// Stop a pending filter operation
 				if ( this._timer ) {
@@ -115,32 +129,16 @@ define( [ "jquery",
 					this._timer = 0;
 				}
 
+				if ( search ) {
+					this._off( search, "keyup change input" );
+					search = null;
+				}
+
 				if ( selector ) {
 					search = selector.jquery ? selector:
 						selector.nodeName ? $( selector ):
 						this.document.find( selector );
-					bindEvents = true;
-					if ( isCurrentInternal ) {
-						this._search.remove();
-					}
-				} else {
-					if ( isCurrentInternal ) {
-						search = this._search;
-					} else {
-						search = $( "<input " +
-							"data-" + $.mobile.ns + "type='search' " +
-							"></input>" )
-							.jqmData( "ui-filterable-" + this.uuid + "-internal", true );
-						$( "<form></form>" ).append( search ).insertBefore( this.element );
-						if ( $.mobile.textinput ) {
-							search.textinput({ wrapperClass: "ui-filterable" });
-						}
-						bindEvents = true;
-					}
-					selector = search;
-				}
 
-				if ( bindEvents ) {
 					this._on( search, {
 						keyup: "_onKeyUp",
 						change: "_onKeyUp",
@@ -150,7 +148,7 @@ define( [ "jquery",
 
 				this._search = search;
 
-				return selector;
+				return search;
 			},
 
 			_create: function() {
@@ -185,6 +183,17 @@ define( [ "jquery",
 					}
 
 					if ( refilter ) {
+
+						// Update options needed by the filter before refiltering
+						if ( options.filterReveal !== undefined ) {
+							this.options.filterReveal = options.filterReveal;
+						}
+						if ( options.filterCallback !== undefined ) {
+							this.options.filterCallback = options.filterCallback;
+						}
+						if ( options.children !== undefined ) {
+							this.options.children = options.children;
+						}
 						this._getFilterableItems().removeClass( "ui-screen-hidden" );
 						this._filterItems( ( this._search.val() || "" ).toLowerCase() );
 					}
@@ -198,12 +207,6 @@ define( [ "jquery",
 					._applyOptions( options )
 					._super( options );
 			},
-
-			_destroy: function() {
-				if ( this._isSearchInternal() ) {
-					this._search.remove();
-				}
-			}
 
 	});
 

@@ -27,43 +27,74 @@ $.mobile.filterable.prototype.options.filterCallback = function( index, searchVa
 };
 
 $.widget( "mobile.filterable", $.mobile.filterable, {
+	_handleCreate: function( evt ) {
+		this._setWidget( this.element.data( "mobile-" + evt.type.substring( 0, evt.type.length - 6 ) ) );
+	},
+
+	_setWidget: function( widget ) {
+		if ( !this._widget && widget ) {
+			this._widget = widget;
+			this._widget._setOptions = replaceSetOptions( this, this._widget._setOptions );
+		}
+
+		return !!this._widget;
+	},
+
 	_create: function() {
+		var idx, widgetName,
+			elem = this.element,
+			recognizedWidgets = [ "collapsibleset", "selectmenu", "controlgroup", "listview" ],
+			createHandlers = {};
+
 		this._super();
 
 		$.extend( this, {
 			_widget: null
 		});
-	},
 
-	_filterItems: function() {
-		var idx, widget, recognizedWidgets;
-
-		this._superApply( arguments );
-
-		if ( this._widget === null ) {
-
-			// Next time the filter gets called, do not try to search for the widget
-			this._widget = false;
-
-			recognizedWidgets = [ "controlgroup", "collapsibleset", "listview", "selectmenu" ];
-
-			for ( idx in recognizedWidgets ) {
-				widget = this.element.data( "mobile-" + recognizedWidgets[ idx ] );
-				if ( widget ) {
-
-					// Tap into _setOptions for a recognized widget so we may synchronize
-					// the widget's style with the textinput style, if the textinput is
-					// internal
-					widget._setOptions = replaceSetOptions( this, widget._setOptions );
-					this._syncTextInputOptions( widget.options );
-					this._widget = widget;
+		for ( idx = recognizedWidgets.length - 1 ; idx > -1 ; idx-- ) {
+			widgetName = recognizedWidgets[ idx ];
+			if ( $.mobile[ widgetName ] ) {
+				if ( this._setWidget( elem.data( "mobile-" + widgetName ) ) ) {
 					break;
+				} else {
+					createHandlers[ widgetName + "create" ] = "_handleCreate";
 				}
 			}
 		}
 
-		if ( this._widget && $.isFunction( this._widget.refresh ) ) {
-			this._widget.refresh();
+		if ( !this._widget ) {
+			this._on( elem, createHandlers );
+		}
+	},
+
+	_isSearchInternal: function() {
+		return ( this._search && this._search.jqmData( "ui-filterable-" + this.uuid + "-internal" ) );
+	},
+
+	_setInput: function( selector ) {
+		if ( !selector ) {
+
+			if ( !this._isSearchInternal() ) {
+				search = $( "<input data-" + $.mobile.ns + "type='search'></input>" )
+					.jqmData( "ui-filterable-" + this.uuid + "-internal", true );
+				$( "<form class='ui-filterable'></form>" )
+					.append( search )
+					.insertBefore( this.element );
+				if ( $.mobile.textinput ) {
+					search.textinput();
+				}
+			} else {
+				return;
+			}
+		}
+
+		this._super( search );
+	},
+
+	_destroy: function() {
+		if ( this._isSearchInternal() ) {
+			this._search.remove();
 		}
 	},
 
