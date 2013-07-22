@@ -91,6 +91,7 @@ $.widget( "mobile.textinput", {
 		return $( "<div class='" +
 			( this.isSearch ? "ui-input-search " : "ui-input-text " ) +
 			"ui-body-" + ( ( opts.theme === null ) ? "inherit" : opts.theme ) + " " +
+			( opts.inset ? "ui-input-inset " : "" ) +
 			( opts.corners ? "ui-corner-all " : "" ) +
 			( opts.mini ? "ui-mini " : "" ) +
 			( opts.disabled ? "ui-state-disabled " : "" ) +
