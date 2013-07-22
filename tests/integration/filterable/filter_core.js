@@ -2,161 +2,70 @@
  * mobile filter unit tests - listview
  */
 
-// TODO split out into seperate test files
 (function($){
-	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
-		insetVal = $.mobile.filterable.prototype.options.inset;
-
-	$.mobile.defaultTransition = "none";
-
 	module( "Filter Widget Core Functions" );
 
-	var searchFilterId = "#search-filter-test";
+	asyncTest( "Filter hides/shows results when the user enters information", function() {
+		var input = $( "#filtered-listview-filterable" ),
+			listview = $( "#filtered-listview" );
 
-	asyncTest( "Filter downs results when the user enters information", function() {
-		var $searchPage = $(searchFilterId);
-		$.testHelper.pageSequence([
+		expect( 5 );
+
+		$.testHelper.sequence([
 			function() {
-				$.mobile.changePage(searchFilterId);
+				input.val( "at" ).trigger( "change" );
 			},
 			function() {
-				$searchPage.find('input').val('at');
-				$searchPage.find('input').trigger('change');
-				setTimeout(function() {
-					deepEqual($searchPage.find('li.ui-screen-hidden').length, 2);
-				start();
-				}, 500);
-			}
-		]);
-	});
-
-	asyncTest( "Redisplay results when user removes values", function() {
-		var $searchPage = $(searchFilterId);
-		$.testHelper.pageSequence([
-			function() {
-				$.mobile.changePage(searchFilterId);
+				deepEqual( listview.find( "li.ui-screen-hidden" ).length, 2, "Number of hidden item after typing 'at' is 2." );
+				input.val( "aa" ).trigger( "change" );
 			},
 			function() {
-				$searchPage.find('input').val('a');
-				$searchPage.find('input').trigger('change');
-				deepEqual($searchPage.find("li[style^='display: none;']").length, 0);
-				start();
-			}
-		]);
-	});
-
-	asyncTest( "Filter downs results with multiple entries by user", function() {
-		var $searchPage = $("#search-filter-test-multiple");
-		$.testHelper.pageSequence([
-			function() {
-				$.mobile.changePage("#search-filter-test-multiple");
+				deepEqual (listview.find( "li.ui-screen-hidden" ).length, 4, "Number of hidden items after typing 'aa' is 4." );
+				input.val( "m" ).trigger( "change" );
 			},
 			function() {
-				// first input
-
-				$searchPage.find('input').val('a');
-				$searchPage.find('input').trigger('change');
-				window.setTimeout(function() {
-					deepEqual(
-						$searchPage.find('li.ui-screen-hidden').length,
-						3,
-						"Filtering hides non matching columns"
-					);
-					// second input
-					$searchPage.find('input').val('aa');
-					$searchPage.find('input').trigger('change');
-					window.setTimeout(function() {
-						deepEqual(
-							$searchPage.find('li.ui-screen-hidden').length,
-							4,
-							"Filtering again hides all columns"
-						);
-						// clear last input
-						$searchPage.find('input').val('a');
-						$searchPage.find('input').trigger('change');
-						window.setTimeout(function() {
-							deepEqual(
-								$searchPage.find('li.ui-screen-hidden').length,
-								3,
-								"Removing one character shows some columns"
-							);
-							// empty input
-							$searchPage.find('input').val('');
-							$searchPage.find('input').trigger('change');
-							window.setTimeout(function() {
-								deepEqual(
-									$searchPage.find('li.ui-screen-hidden').length,
-									0,
-									"Emptying input shows all columns"
-								);
-								start();
-							},500);
-						},500);
-					},500);
-				}, 500);
-			}
-		]);
-	});
-
-	asyncTest( "Filter works fine with \\W- or regexp-special-characters",
-		function() {
-			var $searchPage = $(searchFilterId);
-			$.testHelper.pageSequence([
-				function() {
-					$.mobile.changePage(searchFilterId);
-				},
-				function() {
-					$searchPage.find('input').val('*');
-					$searchPage.find('input').trigger('change');
-					setTimeout(function() {
-						deepEqual($searchPage.find('li.ui-screen-hidden').length, 4);
-						start();
-					}, 500);
-				}
-			]
-		);
-	});
-
-	asyncTest( "Event filterablebeforefilter firing", function() {
-		var $searchPage = $( searchFilterId );
-		$.testHelper.pageSequence([
-			function() {
-				$.mobile.changePage( searchFilterId );
+				deepEqual (listview.find( "li.ui-screen-hidden" ).length, 1, "Number of hidden items after typing 'm' is 1." );
+				input.val( "" ).trigger( "change" );
 			},
-
 			function() {
-				var beforeFilterCount = 0;
-				$searchPage.on( "filterablebeforefilter", function( e ) {
-					beforeFilterCount += 1;
-				});
-
-				$searchPage.find( 'input' ).val( "a" );
-				$searchPage.find( 'input' ).trigger('input');
-				$searchPage.find( 'input' ).trigger('keyup');
-				$searchPage.find( 'input' ).trigger('change');
-				window.setTimeout(function() {
-					equal(
-						beforeFilterCount,
-						1,
-						"filterablebeforefilter should fire only once for the same value"
-					);
-					$searchPage.find( 'input' ).val( "ab" );
-					$searchPage.find( 'input' ).trigger('input');
-					$searchPage.find( 'input' ).trigger('keyup');
-					window.setTimeout(function() {
-						equal(
-							beforeFilterCount,
-							2,
-							"filterablebeforefilter should fire twice since value has changed"
-						);
-						start();
-					}, 500);
-				}, 500);
-			}
-		]);
+				deepEqual( listview.find( "li.ui-screen-hidden" ).length, 0, "Number of hidden items after emptying input is 0." );
+				input.val( "*" ).trigger( "change" );
+			},
+			function() {
+				deepEqual( listview.find( "li.ui-screen-hidden" ).length, 4, "Number of hidden items after entering a regex special character is 4." );
+				input.val( "" ).trigger( "change" );
+			},
+			start
+		], 500 );
 	});
 
-	asyncTest( "Filter downs results and dividers when the user enters information",
+	asyncTest( "Event filterablebeforefilter fires in response to input change", function() {
+		var input = $( "#filtered-listview-filterable" ),
+			listview = $( "#filtered-listview" ),
+			beforeFilterCount = 0;
+
+		listview.on( "filterablebeforefilter.theEventIsFiring", function() {
+			beforeFilterCount++;
+		});
+
+		$.testHelper.sequence([
+			function() {
+				input.val( "a" ).trigger( "input" ).trigger( "keyup" ).trigger( "change" );
+			},
+			function() {
+				deepEqual( beforeFilterCount, 1, "'filterablebeforefilter' fired only once for the same value." );
+				input.val( "ab" ).trigger( "input" ).trigger( "keyup" );
+			},
+			function() {
+				deepEqual( beforeFilterCount, 2, "'filterablebeforefilter' fired only once again when the value has changed" );
+				listview.off( "filterablebeforefilter.theEventIsFiring" );
+				input.val( "" ).trigger( "change" );
+			},
+			start
+		], 500 );
+	});
+
+	asyncTest( "Filter hides results and dividers when the user enters information",
 		function() {
 			var $searchPage = $("#search-filter-with-dividers-test");
 			$.testHelper.pageSequence([

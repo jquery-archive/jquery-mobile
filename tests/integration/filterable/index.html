@@ -86,10 +86,20 @@
 		<h1>Split List View</h1>
 	</div>
 	<div data-nstest-role="content">
-		<ul data-nstest-role="listview" data-nstest-filter="true">
+		<ul id="filtered-listview" data-nstest-role="listview" data-nstest-filter="true">
 			<li>a is for aquaman</li>
 			<li>b is for batman</li>
 			<li>c is for catwoman</li>
+			<li>d is for darkwing</li>
+		</ul>
+		<ul id="filtered-listview-with-dividers" data-nstest-role="listview" data-nstest-filter="true">
+			<li data-nstest-role="list-divider">a</li>
+			<li>a is for aquaman</li>
+			<li data-nstest-role="list-divider">b</li>
+			<li>b is for batman</li>
+			<li data-nstest-role="list-divider">c</li>
+			<li>c is for catwoman</li>
+			<li data-nstest-role="list-divider">d</li>
 			<li>d is for darkwing</li>
 		</ul>
 	</div>
@@ -120,25 +130,6 @@
 			<li>a is for aquaman</li>
 			<li>b is for batman</li>
 			<li>c is for catwoman</li>
-			<li>d is for darkwing</li>
-		</ul>
-	</div>
-</div>
-
-<!-- Search bar filter with list-dividers -->
-<div data-nstest-role="page" id='search-filter-with-dividers-test'>
-	<div data-nstest-role="header">
-		<h1>Split List View</h1>
-	</div>
-	<div data-nstest-role="content">
-		<ul data-nstest-role="listview" data-nstest-filter="true">
-			<li data-nstest-role="list-divider">a</li>
-			<li>a is for aquaman</li>
-			<li data-nstest-role="list-divider">b</li>
-			<li>b is for batman</li>
-			<li data-nstest-role="list-divider">c</li>
-			<li>c is for catwoman</li>
-			<li data-nstest-role="list-divider">d</li>
 			<li>d is for darkwing</li>
 		</ul>
 	</div>
