@@ -24,17 +24,11 @@ $.widget( "mobile.textinput", {
 	_create: function() {
 
 		var o = this.options,
-			themeclass  = " ui-body-" + ( o.theme ?  o.theme : "inherit" ),
-			cornerclass = o.corners ? " ui-corner-all" : "",
-			miniclass = o.mini ? " ui-mini" : "",
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = this.element[ 0 ].tagName === "TEXTAREA",
-			inputNeedsWrap = ((this.element.is( "input" ) ||  this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) && !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ));
+			inputNeedsWrap = ((this.element.is( "input" ) || this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) && !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ));
 			
 		$.extend( this, {
-			themeclass: themeclass,
-			cornerclass: cornerclass,
-			miniclass: miniclass,
 			isSearch: isSearch,
 			isTextarea: isTextarea,
 			inputNeedsWrap: inputNeedsWrap
@@ -42,7 +36,7 @@ $.widget( "mobile.textinput", {
 
 		this._autoCorrect();
 
-		if ( this.element[0].disabled ) {
+		if ( this.element[ 0 ].disabled ) {
 			this.options.disabled = true;
 		}
 
@@ -59,7 +53,7 @@ $.widget( "mobile.textinput", {
 
 	refresh: function() {
 		this.setOptions({
-			"disabled" : this.element.is(":disabled")
+			"disabled" : this.element.is( ":disabled" )
 		});
 	},
 
