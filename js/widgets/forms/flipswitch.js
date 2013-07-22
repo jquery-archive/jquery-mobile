@@ -69,8 +69,8 @@ $.widget( "mobile.flipswitch", $.extend({
 	_enhance: function() {
 		var flipswitch = $( "<div>" ),
 			theme = this.options.theme ? this.options.theme : "inherit",
-			on = $( "<span tabindex='1'>" ),
-			off = $( "<span>" ),
+			on = $( "<span tabindex='1'></span>" ),
+			off = $( "<span></span>" ),
 			type = this.element.get( 0 ).tagName,
 			onText = ( type === "INPUT" ) ? this.options.onText : this.element.find( "option" ).eq( 0 ).text(),
 			offText = ( type === "INPUT" ) ? this.options.offText : this.element.find( "option" ).eq( 1 ).text();
