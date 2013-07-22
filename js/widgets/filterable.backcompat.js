@@ -33,6 +33,10 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 
 		this._super();
 
+		$.extend( this, {
+			_widget: null
+		});
+
 		for ( idx in recognizedWidgets ) {
 			widget = this.element.data( "mobile-" + recognizedWidgets[ idx ] );
 			if ( widget ) {
@@ -42,8 +46,16 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 				// internal
 				widget._setOptions = replaceSetOptions( this, widget._setOptions );
 				this._syncTextInputOptions( widget.options );
+				this._widget = widget;
 				break;
 			}
+		}
+	},
+
+	_filterItems: function() {
+		this._superApply( arguments );
+		if ( this._widget && $.isFunction( this._widget.refresh ) ) {
+			this._widget.refresh();
 		}
 	},
 
