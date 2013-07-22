@@ -105,7 +105,7 @@ define( [ "jquery" ], function( jQuery ) {
 
 			// TODO: When the input is not internal, do not even store it in this._search
 			_setInput: function ( selector ) {
-				var search, bindEvents, id, uniqid,
+				var search, bindEvents,
 					isCurrentInternal = this._isSearchInternal();
 
 				// Stop a pending filter operation
@@ -125,23 +125,18 @@ define( [ "jquery" ], function( jQuery ) {
 				} else {
 					if ( isCurrentInternal ) {
 						search = this._search;
-						selector = "#" + uniqid;
 					} else {
-						id = this.element.attr( "id" );
-						uniqid = id ? ( id + "-filterable" ) : ( "ui-filterable-" + this.uuid );
 						search = $( "<input " +
 							"data-" + $.mobile.ns + "type='search' " +
-							"class='ui-filterable' " +
-							"id='" + uniqid + "'" +
 							"></input>" )
 							.jqmData( "ui-filterable-" + this.uuid + "-internal", true )
 							.insertBefore( this.element );
-						selector = "#" + uniqid;
 						if ( $.mobile.textinput ) {
 							search.textinput({ wrapperClass: "ui-filterable" });
 						}
 						bindEvents = true;
 					}
+					selector = search;
 				}
 
 				if ( bindEvents ) {
