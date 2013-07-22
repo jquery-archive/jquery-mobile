@@ -8,12 +8,9 @@ define( [ "jquery" ], function( jQuery ) {
 (function( $, undefined ) {
 
 	// TODO rename filterCallback/deprecate and default to the item itself as the first argument
-	var
-		rDividerListItem = /(^|\s)ui-li-divider(\s|$)/;
-		defaultFilterCallback = function( index, searchValue ) {
-		return !this.className.match( rDividerListItem ) &&
-			( ( "" + ( $.mobile.getAttribute( this, "filtertext", true ) || $( this ).text() ) )
-				.toLowerCase().indexOf( searchValue ) === -1 );
+	var defaultFilterCallback = function( index, searchValue ) {
+		return ( ( "" + ( $.mobile.getAttribute( this, "filtertext", true ) || $( this ).text() ) )
+			.toLowerCase().indexOf( searchValue ) === -1 );
 	};
 
 	$.widget( "mobile.filterable", {

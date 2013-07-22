@@ -12,11 +12,19 @@ define( [
 // Create a function that will replace the _setOptions function of a widget,
 // and will pass the options on to the input of the filterable.
 var replaceSetOptions = function( self, orig ) {
-	return function( options ) {
-		orig.call( this, options );
-		self._syncTextInputOptions( options );
-	}
-}
+		return function( options ) {
+			orig.call( this, options );
+			self._syncTextInputOptions( options );
+		}
+	},
+	rDividerListItem = /(^|\s)ui-li-divider(\s|$)/,
+	origDefaultFilterCallback = $.mobile.filterable.prototype.options.filterCallback;
+
+// Override the default filter callback with one that does not hide list dividers
+$.mobile.filterable.prototype.options.filterCallback = function( index, searchValue ) {
+	return !this.className.match( rDividerListItem ) &&
+		origDefaultFilterCallback.call( this, index, searchValue );
+};
 
 $.widget( "mobile.filterable", $.mobile.filterable, {
 	_create: function() {
