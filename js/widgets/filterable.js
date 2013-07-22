@@ -27,7 +27,8 @@ define( [
 				filterReveal: false,
 				filterCallback: defaultfilterCallback,
 				enhanced: false,
-				inputSelector: null
+				input: null,
+				children: "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn"
 			},
 
 			_onKeyUp: function() {
@@ -52,12 +53,17 @@ define( [
 					search.setAttribute( "data-" + $.mobile.ns + "lastval", val );
 
 					this._filterItems( val, lastval );
+					this._timer = 0;
 				}, 250 );
 			},
 
 			_getFilterableItems: function() {
 				var elem = this.element,
-					items = elem.find( "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn" );
+					children = this.options.children,
+					items = !children ? { length: 0 }:
+						children.nodeName ? $( children ):
+						children.jquery ? children:
+						this.element.find( children );
 
 				if ( items.length === 0 ) {
 					items = elem.children();
@@ -168,18 +174,24 @@ define( [
 				return ( this._search && this._search.jqmData( "ui-filterable-" + this.uuid + "-internal" ) );
 			},
 
+			// TODO: When the input is not internal, do not even store it in this._search
 			_setInput: function ( selector ) {
 				var search, bindEvents, id, uniqid,
 					isCurrentInternal = this._isSearchInternal();
 
+				// Stop a pending filter operation
+				if ( this._timer ) {
+					clearTimeout( this._timer );
+					this._timer = 0;
+				}
+
 				if ( selector ) {
-					search = $( "" + selector );
+					search = selector.jquery ? selector:
+						selector.nodeName ? $( selector ):
+						this.document.find( selector );
 					bindEvents = true;
 					if ( isCurrentInternal ) {
 						this._search.remove();
-						if ( this._timer ) {
-							clearTimeout( this._timer );
-						}
 					}
 				} else {
 					if ( isCurrentInternal ) {
@@ -232,15 +244,15 @@ define( [
 			},
 
 			_applyOptions: function( options, internal ) {
-				var newInputSel = ( options.inputSelector ? ( options.inputSelector + "" ) : "" ),
+				var newInputSel = ( options.input ? ( options.input + "" ) : "" ),
 					refilter = !( options.filterReveal === undefined &&
 					options.filterCallback === undefined &&
-					newInputSel );
+					newInputSel && options.children === undefined );
 
 				// If we end up instantiating a textinput internally, then we set the
-				// value of the inputSelector option to the ID we have generated for
-				// the textinput widget we have instantiated.
-				options.inputSelector = this._setInput( newInputSel );
+				// value of the input option to the ID we have generated for the
+				// textinput widget we have instantiated.
+				options.input = this._setInput( newInputSel );
 
 				if ( !internal ) {
 					if ( options.filterPlaceholder !== undefined ) {

@@ -123,7 +123,7 @@
 
 			<div data-demo-html="true">
 				<input data-type="search" id="searchForSelect"></input>
-				<select id="anotherSelect" data-filter="true" data-input-selector="#searchForSelect">
+				<select id="anotherSelect" data-filter="true" data-input="#searchForSelect">
 					<option value="A">Option A</option>
 					<option value="B">Option B</option>
 					<option value="C">Option C</option>
