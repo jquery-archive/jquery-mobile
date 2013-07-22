@@ -65,3 +65,16 @@
 	padding: 1px;
 	text-indent: 1em; /* Override this to center text if you use a label other than "off" */
 }
+@media (min-width: 28em) {
+	.ui-field-contain > label + .ui-flipswitch {
+		display: inline-block;
+		width: 5.875em; /* If you override the width for .ui-flipswitch you should repeat the same value here */
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		-ms-box-sizing: content-box;
+		box-sizing: content-box;
+	}
+	.ui-field-contain .ui-flipswitch.ui-flipswitch-active {
+		width: 1.875em;
+	}
+}	
