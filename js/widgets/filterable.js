@@ -3,18 +3,20 @@
 //>>label: Filterable
 //>>group: Widgets
 
-define( [
-	"jquery",
-	"./addFirstLastClasses" ], function( jQuery ) {
+define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 	// TODO rename filterCallback/deprecate and default to the item itself as the first argument
-	var defaultfilterCallback = function( text, searchValue /*, item */) {
-		return text.toString().toLowerCase().indexOf( searchValue ) === -1;
+	var
+		rDividerListItem = /(^|\s)ui-li-divider(\s|$)/;
+		defaultFilterCallback = function( index, searchValue ) {
+		return !this.className.match( rDividerListItem ) &&
+			( ( "" + ( $.mobile.getAttribute( this, "filtertext", true ) || $( this ).text() ) )
+				.toLowerCase().indexOf( searchValue ) === -1 );
 	};
 
-	$.widget( "mobile.filterable", $.extend( {
+	$.widget( "mobile.filterable", {
 
 			options: {
 
@@ -25,7 +27,7 @@ define( [
 				// the input to be used as the source of filter text.
 				filterPlaceholder: "Filter items...",
 				filterReveal: false,
-				filterCallback: defaultfilterCallback,
+				filterCallback: defaultFilterCallback,
 				enhanced: false,
 				input: null,
 				children: "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn"
@@ -33,9 +35,8 @@ define( [
 
 			_onKeyUp: function() {
 				var search = this._search[ 0 ],
-					getAttrFixed = $.mobile.getAttribute,
 					val = search.value.toLowerCase(),
-					lastval = getAttrFixed( search, "lastval", true ) + "";
+					lastval = $.mobile.getAttribute( search, "lastval", true ) + "";
 
 				if ( lastval && lastval === val ) {
 					// Execute the handler only once per value change
@@ -52,7 +53,7 @@ define( [
 					// Change val as lastval for next execution
 					search.setAttribute( "data-" + $.mobile.ns + "lastval", val );
 
-					this._filterItems( val, lastval );
+					this._filterItems( val );
 					this._timer = 0;
 				}, 250 );
 			},
@@ -71,105 +72,35 @@ define( [
 
 				return items;
 			},
-			
-			_setFilterableItems: function( val, lastval ) {
-				var opts = this.options,
-					filterItems = [],
-					isCustomfilterCallback = opts.filterCallback !== defaultfilterCallback,
-					_getFilterableItems = this._getFilterableItems();
-				
-				if ( isCustomfilterCallback || val.length < lastval.length || val.indexOf( lastval ) !== 0 ) {
 
-					// Custom filter callback applies or removed chars or pasted something totally different, check all items
-					filterItems = _getFilterableItems;
-				} else {
-
-					// Only chars added, not removed, only use visible subset
-					filterItems = _getFilterableItems.filter( ":not(.ui-screen-hidden)" );
-
-					if ( !filterItems.length && opts.filterReveal ) {
-						filterItems = _getFilterableItems.filter( ".ui-screen-hidden" );
-					}
-				}
-				return filterItems;
-			},
-			
-			_filterItems: function( val, lastval ){
-				var opts = this.options,
-					getAttrFixed = $.mobile.getAttribute,
-					filterItems = this._setFilterableItems( val, lastval ),
-					_getFilterableItems = this._getFilterableItems(),
-					childItems = false,
-					itemtext = "",
-					item,
-					select = this.element.parents( ".ui-select" ),
-					i;
+			_filterItems: function( val ) {
+				var idx, show, hide, callback, length,
+					opts = this.options,
+					filterItems = this._getFilterableItems();
 
 				if ( val ) {
 
-					for ( i = filterItems.length - 1; i >= 0; i-- ) {
-						item = $( filterItems[ i ] );
-						// NOTE: should itemtext be stored somewhere? Will text() change much
-						// and does this need to be re-parsed on every iteration? Also, no 
-						// chance to run data-filtertext on anything that JQM wraps, because 
-						// we filter the wrapper and can't access the input/a. Can we?
-						itemtext = getAttrFixed(filterItems[ i ], "filtertext", true) || item.text();
+					show = [];
+					hide = [];
+					callback = opts.filterCallback || defaultFilterCallback;
+					length = filterItems.length;
 
-						if ( item.is( ".ui-li-divider" ) ) {
-
-							item.toggleClass( "ui-filterable-hidequeue" , !childItems );
-
-							// New bucket!
-							childItems = false;
-
-						} else if ( opts.filterCallback( itemtext, val, item ) ) {
-
-							//mark to be hidden
-							item.toggleClass( "ui-filterable-hidequeue" , true );
+					// Partition the items into those to be hidden and those to be shown
+					for ( idx = 0 ; idx < length ; idx++ ) {
+						if ( callback.call( filterItems[ idx ], idx, val ) ) {
+							hide.push( filterItems[ idx ] );
 						} else {
-
-							// There's a shown item in the bucket
-							childItems = true;
+							show.push( filterItems[ idx ] );
 						}
 					}
-					
-					this._toggleFilterableItems( filterItems, select, opts.filterReveal, true);
+
+					$( hide ).addClass( "ui-screen-hidden" );
+					$( show ).removeClass( "ui-screen-hidden" );
 				} else {
-					this._toggleFilterableItems( filterItems, select, opts.filterReveal );
+					filterItems[ opts.filterReveal ? "addClass" : "removeClass" ]( "ui-screen-hidden" );
 				}
-				this._addFirstLastClasses( _getFilterableItems, this._getVisibles( _getFilterableItems, false ), false );
 			},
 			
-			_toggleFilterableItems: function( filterItems, select, reveal, isVal )	{
-
-				if ( isVal ) {
-					// Show items not marked to be hidden
-					filterItems
-						.filter( ":not(.ui-filterable-hidequeue)" )
-						.toggleClass( "ui-screen-hidden", false );
-
-					// Hide items marked to be hidden
-					filterItems
-						.filter( ".ui-filterable-hidequeue" )
-						.toggleClass( "ui-screen-hidden", true )
-						.toggleClass( "ui-filterable-hidequeue", false );
-
-					// select - hide parent when no options match?
-					if ( select ) {
-						if ( filterItems.length === filterItems.filter( ".ui-screen-hidden").length ) {
-							select.addClass( "ui-screen-hidden" );
-						}
-					}
-				} else {
-					//filtervalue is empty => show all
-					filterItems.toggleClass( "ui-screen-hidden", !!reveal );
-					// select
-					if ( select ) {
-						select.removeClass( "ui-screen-hidden", !!reveal );
-					}
-				}
-			},
-
 			_isSearchInternal: function() {
 				return ( this._search && this._search.jqmData( "ui-filterable-" + this.uuid + "-internal" ) );
 			},
@@ -261,7 +192,7 @@ define( [
 
 					if ( refilter ) {
 						this._getFilterableItems().removeClass( "ui-screen-hidden" );
-						this._filterItems( ( this._search.val() || "" ).toLowerCase(), "" );
+						this._filterItems( ( this._search.val() || "" ).toLowerCase() );
 					}
 				}
 
@@ -280,7 +211,7 @@ define( [
 				}
 			}
 
-	}, $.mobile.behaviors.addFirstLastClasses ) );
+	});
 
 	$.mobile.filterable.initSelector = ":jqmData(filter='true')";
 
