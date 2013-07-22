@@ -169,8 +169,7 @@ define( [
 			},
 
 			_setInput: function ( selector ) {
-				var search, bindEvents,
-					uniqid = "ui-filterable-" + this.uuid,
+				var search, bindEvents, id, uniqid,
 					isCurrentInternal = this._isSearchInternal();
 
 				if ( selector ) {
@@ -187,6 +186,8 @@ define( [
 						search = this._search;
 						selector = "#" + uniqid;
 					} else {
+						id = this.element.attr( "id" );
+						uniqid = id ? ( id + "-filterable" ) : ( "ui-filterable-" + this.uuid );
 						search = $( "<input " +
 							"data-" + $.mobile.ns + "type='search' " +
 							"class='ui-filterable' " +
