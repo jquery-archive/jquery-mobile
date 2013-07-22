@@ -11,10 +11,10 @@
 	-moz-transition-property: padding, width, background-color, color, border-color;
 	-o-transition-property: padding, width, background-color, color, border-color;
 	transition-property: padding, width, background-color, color, border-color;
-	-webkit-transition-duration: 200ms;
-	-moz-transition-duration: 200ms;
-	-o-transition-duration: 200ms;
-	transition-duration: 200ms;
+	-webkit-transition-duration: 100ms;
+	-moz-transition-duration: 100ms;
+	-o-transition-duration: 100ms;
+	transition-duration: 100ms;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
