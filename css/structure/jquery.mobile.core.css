@@ -376,3 +376,8 @@ div.ui-mobile-viewport {
 	overflow: hidden;
 	clip: rect(1px,1px,1px,1px);
 }
+
+/* Used for hiding elements by the filterable widget. You can also use this class to hide list items or buttons in controlgroups; this ensures correct corner styling. */
+.ui-screen-hidden {
+	display: none !important;
+}
