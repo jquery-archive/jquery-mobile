@@ -20,8 +20,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 		corners: true,
 		excludeInvisible: true,
 		type: "vertical",
-		mini: false,
-		initSelector: ":jqmData(role='controlgroup')"
+		mini: false
 	},
 
 	_create: function() {
@@ -157,8 +156,6 @@ $.widget( "mobile.controlgroup", $.extend( {
 		ui.childWrapper.children().unwrap();
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
-
-$.mobile.controlgroup.initSelector = ":jqmData(role='controlgroup')";
 
 $.mobile._enhancer.add( "mobile.controlgroup", {
 	dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.checkboxradio" ]
