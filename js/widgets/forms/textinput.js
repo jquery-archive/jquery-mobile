@@ -89,7 +89,7 @@ $.widget( "mobile.textinput", {
 			( opts.corners ? "ui-corner-all " : "" ) +
 			( opts.mini ? "ui-mini " : "" ) +
 			( opts.disabled ? "ui-state-disabled " : "" ) +
-			opts.wrapperClass + " " +
+			( opts.wrapperClass !== "" ? opts.wrapperClass + " " : "" ) +
 			"ui-shadow-inset'></div>" );
 	},
 
@@ -136,7 +136,7 @@ $.widget( "mobile.textinput", {
 			this.themeclass = themeclass;
 		}
 
-		if ( options.inset !== undefined ) {
+		if ( options.inset !== undefined && !this.isTextarea ) {
 			this.options.inset = options.inset;
 			outer
 				.toggleClass( "ui-input-inset", options.inset )
