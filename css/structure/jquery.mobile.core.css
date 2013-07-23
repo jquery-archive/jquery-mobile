@@ -12,9 +12,16 @@
 .ui-mobile fieldset {
 	border-width: 0;
 }
+/* Fixes for fieldset issues on IE10 and FF (see #6077) */
 .ui-mobile fieldset {
 	min-width: 0;
 }
+@-moz-document url-prefix() {
+	.ui-mobile fieldset {
+		display: table-column;
+	}
+}
+
 /* Viewport */
 .ui-mobile-viewport {
 	margin: 0;
