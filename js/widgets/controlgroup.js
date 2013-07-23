@@ -29,7 +29,6 @@ $.widget( "mobile.controlgroup", $.extend( {
 
 		$.extend( this, {
 			_ui: null,
-			_classes: "",
 			_initialRefresh: true
 		});
 
@@ -38,63 +37,74 @@ $.widget( "mobile.controlgroup", $.extend( {
 				groupLegend: elem.children( ".ui-controlgroup-label" ).children(),
 				childWrapper: elem.children( ".ui-controlgroup-controls" )
 			};
-			this._applyOptions( opts, true );
 		} else {
-			this._ui = {
+			this._ui = this._enhance();
+		}
+	},
+
+	_themeClassFromOption: function( value ) {
+		return ( value ? ( value === "none" ? "" : "ui-group-theme-" + value ) : "" );
+	},
+
+	_enhance: function() {
+		var elem = this.element,
+			opts = this.options,
+			ui = {
 				groupLegend: elem.children( "legend" ),
 				childWrapper: elem
-					.wrapInner( "<div class='ui-controlgroup-controls'></div>" )
-					.addClass( "ui-controlgroup" )
+					.addClass( "ui-controlgroup " +
+						"ui-controlgroup-" +
+							( opts.type === "horizontal" ? "horizontal" : "vertical" ) + " " +
+						this._themeClassFromOption( opts.theme ) + " " +
+						( opts.corners ? "ui-corner-all " : "" ) +
+						( opts.mini ? "ui-mini " : "" ) )
+					.wrapInner( "<div " +
+						"class='ui-controlgroup-controls " +
+							( opts.shadow === true ? "ui-shadow" : "" ) + "'></div>" )
 					.children()
 			};
 
-			if ( this._ui.groupLegend.length > 0 ) {
-				$( "<div role='heading' class='ui-controlgroup-label'></div>" )
-					.append( this._ui.groupLegend )
-					.prependTo( elem );
-			}
-			this._setOptions( opts );
+		if ( ui.groupLegend.length > 0 ) {
+			$( "<div role='heading' class='ui-controlgroup-label'></div>" )
+				.append( ui.groupLegend )
+				.prependTo( elem );
 		}
+
+		return ui;
 	},
 
 	_init: function() {
 		this.refresh();
 	},
 
-	_applyOptions: function( options, internal ) {
-		var callRefresh, opts,
-			classes = "";
+	_setOptions: function( options ) {
+		var callRefresh,
+			elem = this.element;
 
-		// Must not be able to unset the type of the controlgroup
-		if ( options.type === null ) {
-			options.type = undefined;
-		}
-		opts = $.extend( {}, this.options, options );
-
-		if ( opts.type != null ) {
-			classes += " ui-controlgroup-" + opts.type;
-
-			// No need to call refresh if the type hasn't changed
-			if ( this.options.type !== options.type ) {
-				this.options.type = options.type;
-				callRefresh = true;
-			}
+		// Must have one of horizontal or vertical
+		if ( options.type !== undefined ) {
+			elem
+				.removeClass( "ui-controlgroup-horizontal ui-controlgroup-vertical" )
+				.addClass( "ui-controlgroup-" + ( options.type === "horizontal" ? "horizontal" : "vertical" ) );
+			callRefresh = true;
 		}
 
-		if ( opts.theme != null && opts.theme !== "none" ) {
-			classes += " ui-group-theme-" + opts.theme;
+		if ( options.theme !== undefined ) {
+			elem
+				.removeClass( this._themeClassFromOption( this.options.theme ) )
+				.addClass( this._themeClassFromOption( options.theme ) );
 		}
 
-		if ( opts.corners ) {
-			classes += " ui-corner-all";
+		if ( options.corners !== undefined ) {
+			elem.toggleClass( "ui-corner-all", options.corners );
 		}
 
-		if ( opts.mini ) {
-			classes += " ui-mini";
+		if ( options.mini !== undefined ) {
+			elem.toggleClass( "ui-mini", options.mini );
 		}
 
-		if ( !( opts.shadow === undefined || internal ) ) {
-			this._ui.childWrapper.toggleClass( "ui-shadow", opts.shadow );
+		if ( options.shadow !== undefined ) {
+			this._ui.childWrapper.toggleClass( "ui-shadow", options.shadow );
 		}
 
 		if ( options.excludeInvisible !== undefined ) {
@@ -102,22 +112,11 @@ $.widget( "mobile.controlgroup", $.extend( {
 			callRefresh = true;
 		}
 
-		if ( internal ) {
-			this._classes = classes;
-		} else {
-			this._toggleClasses( this.element, "_classes", classes );
-			if ( callRefresh ) {
-				this.refresh();
-			}
+		if ( callRefresh ) {
+			this.refresh();
 		}
 
-		return this;
-	},
-
-	_setOptions: function( options ) {
-		return this
-			._applyOptions( options )
-			._super( options );
+		return this._super( options );
 	},
 
 	container: function() {
@@ -131,22 +130,27 @@ $.widget( "mobile.controlgroup", $.extend( {
 		if ( $.mobile.checkboxradio ) {
 			$el.find( ":mobile-checkboxradio" ).checkboxradio( "refresh" );
 		}
-		this._addFirstLastClasses( els, this.options.excludeInvisible ? this._getVisibles( els, create ) : els, create );
+		this._addFirstLastClasses( els,
+			this.options.excludeInvisible ? this._getVisibles( els, create ) : els,
+			create );
 		this._initialRefresh = false;
 	},
 
 	// Caveat: If the legend is not the first child of the controlgroup at enhance
 	// time, it will be after _destroy().
 	_destroy: function() {
-		var ui, buttons;
+		var ui, buttons,
+			opts = this.options;
 
-		if ( this.options.enhanced ) {
+		if ( opts.enhanced ) {
 			return this;
 		}
 
 		ui = this._ui;
 		buttons = this.element
-			.removeClass( "ui-controlgroup " + this._classes )
+			.removeClass( "ui-controlgroup " +
+				"ui-controlgroup-horizontal ui-controlgroup-vertical ui-corner-all ui-mini " +
+				this._themeClassFromOption( opts.theme ) )
 			.find( ".ui-btn" )
 			.not( ".ui-slider-handle" );
 
@@ -156,6 +160,8 @@ $.widget( "mobile.controlgroup", $.extend( {
 		ui.childWrapper.children().unwrap();
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
+
+$.mobile.controlgroup.initSelector = ":jqmData(role='controlgroup')";
 
 $.mobile._enhancer.add( "mobile.controlgroup", {
 	dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.checkboxradio" ]
