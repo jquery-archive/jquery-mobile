@@ -35,6 +35,10 @@ $.widget( "mobile.table", $.mobile.table, {
 		}
 	},
 
+	rebuild: function() {
+		this.refresh( false );
+	},
+
 	refresh: function( create ) {
 		this._super( create );
 		if ( !create && this.options.mode === "reflow" ) {
