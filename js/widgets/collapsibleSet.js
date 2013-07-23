@@ -40,12 +40,16 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		});
 
 		if ( !opts.enhanced ) {
-			elem.addClass( "ui-collapsible-set" );
+			elem.addClass( "ui-collapsible-set " +
+				this._themeClassFromOption( "ui-group-theme-", opts.theme ) + " " +
+				( opts.corners && opts.inset ? "ui-corner-all " : "" ) );
 		}
 
-		this
-			._updateClasses( opts, opts.enhanced )
-			._on( elem, { collapsibleexpand: "_handleCollapsibleExpand" } );
+		this._on( elem, { collapsibleexpand: "_handleCollapsibleExpand" } );
+	},
+
+	_themeClassFromOption: function( prefix, value ) {
+		return ( value ? ( value === "none" ? "" : prefix + value ) : "" );
 	},
 
 	_init: function() {
@@ -59,35 +63,22 @@ $.widget( "mobile.collapsibleset", $.extend( {
 			.collapsible( "expand" );
 	},
 
-	_updateClasses: function( options, internal ) {
-		var opts = {
-				theme: options.theme || this.options.theme,
-				corners: options.corners || this.options.corners,
-				inset: options.inset || this.options.inset
-			},
-			classes = "";
-
-		if ( opts.theme && opts.theme !== "none" ) {
-			classes += " ui-group-theme-" + opts.theme;
-		}
-
-		if ( opts.corners && opts.inset ) {
-			classes += " ui-corner-all";
-		}
-
-		if ( internal ) {
-			this._classes = classes;
-		} else {
-			this._toggleClasses( this.element, "_classes", classes );
-		}
-
-		return this;
-	},
-
 	_setOptions: function( options ) {
-		var ret = this._super( options );
+		var ret,
+			elem = this.element,
+			themeClass = this._themeClassFromOption( "ui-group-theme-", options.theme );
 
-		this._updateClasses( options );
+		if ( themeClass ) {
+			elem
+				.removeClass( this._themeClassFromOption( "ui-group-theme-", this.options.theme ) )
+				.addClass( themeClass );
+		}
+
+		if ( options.corners !== undefined ) {
+			elem.toggleClass( "ui-corner-all", options.corners );
+		}
+
+		ret = this._super( options );
 		this.element.children( ":mobile-collapsible" ).collapsible( "refresh" );
 		return ret;
 	},
@@ -97,7 +88,8 @@ $.widget( "mobile.collapsibleset", $.extend( {
 
 		this._removeFirstLastClasses( el.children( childCollapsiblesSelector ) );
 		el
-			.removeClass( "ui-collapsible-set " + this._classes )
+			.removeClass( "ui-collapsible-set ui-corner-all " +
+				this._themeClassFromOption( "ui-group-theme", this.options.theme ) )
 			.children( ":mobile-collapsible" )
 			.collapsible( "destroy" );
 	},
