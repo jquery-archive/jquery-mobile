@@ -54,6 +54,7 @@ $files = array(
 	'widgets/navbar.js',
 	'widgets/listview.js',
 	'widgets/listview.autodividers.js',
+	'widgets/listview.hidedividers.js',
 	'jquery.mobile.nojs.js',
 	'widgets/forms/reset.js',
 	'widgets/forms/checkboxradio.js',

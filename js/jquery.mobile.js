@@ -23,6 +23,7 @@ define([
 	"./widgets/filterable",
 	"./widgets/filterable.backcompat",
 	"./widgets/listview.autodividers",
+	"./widgets/listview.hidedividers",
 	"./jquery.mobile.nojs",
 	"./widgets/forms/checkboxradio",
 	"./widgets/forms/button",
