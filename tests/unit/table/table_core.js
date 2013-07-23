@@ -209,6 +209,46 @@
 			start();
 		}, 1200);
 	});
+
+	asyncTest( "Column toggle table rebuild" , function(){
+
+		var $last_input, $visibleCells, $visibleHeaders,
+			$input = $( ".ui-popup-container" ).find( "input" ).eq(2),
+			$table = $('#movie-table-column');
+
+		$input.trigger('click');
+
+		setTimeout(function () {
+
+			$(window).trigger("refresh_col_table", ["#column-table-test"]);
+
+			$last_input = $( ".ui-popup-container" ).find( "input" ).last(),
+			$visibleCells = $table.find("tbody tr").first().find("th, td").not('.ui-table-cell-hidden'),
+			$visibleHeaders = $table.find("thead tr").first().find("th, td").not('.ui-table-cell-hidden');
+
+			ok( $table.length, "Table still enhanced after rebuild");
+			equal(
+				$table.find('tbody tr').eq(1).find("th, td").eq(2).hasClass('ui-table-cell-hidden'),
+				false,
+				"Rebuilding a table clears all ui-table-cell-hidden/show classes"
+			);
+			ok( $input.is( ":checked" ), false, "Input still not checked after rebuild" );
+
+			equal(
+				$last_input.data("cells").last().attr("data-test"),
+				"xyz",
+				"Cell referenced in popup is in table after rebuild (new column and toggle button), columns without data-priority don't break table on rebuild");
+
+			equal(
+				$visibleCells.length,
+				$visibleHeaders.length,
+				"same number of headers and rows visible"
+			);
+
+			start();
+		}, 1200);
+	});
+
 	asyncTest( "The dialog should become visible when button is clicked" , function(){
 		expect( 2 );
 		var $input;

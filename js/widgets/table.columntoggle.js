@@ -77,10 +77,13 @@ $.widget( "mobile.table", $.mobile.table, {
 		});
 	},
 
-	_addToggles: function( menu ) {
+	_addToggles: function( menu, keep ) {
 		var opts = this.options;
+
 		// allow update of menu on refresh (fixes #5880)
-		menu.empty();
+		if ( !keep ) {
+			menu.empty();
+		}
 
 		// create the hide/show toggles
 		this.headers.not( "td" ).each( function() {
@@ -92,13 +95,15 @@ $.widget( "mobile.table", $.mobile.table, {
 			if( priority ) {
 				$cells.addClass( opts.classes.priorityPrefix + priority );
 
-				$("<label><input type='checkbox' checked />" + $this.text() + "</label>" )
-					.appendTo( menu )
-					.children( 0 )
-					.data( "cells", $cells )
-					.checkboxradio( {
-						theme: opts.columnPopupTheme
-					});
+				if ( !keep ) {
+					$("<label><input type='checkbox' checked />" + $this.text() + "</label>" )
+						.appendTo( menu )
+						.children( 0 )
+						.data( "cells", $cells )
+						.checkboxradio( {
+							theme: opts.columnPopupTheme
+						});
+				}
 			}
 
 		});
@@ -146,8 +151,8 @@ $.widget( "mobile.table", $.mobile.table, {
 		$popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + opts.classes.popup + "' id='" + id + "'></div>" );
 		$menu = $( "<fieldset data-" + ns + "role='controlgroup'></fieldset>" );
 
-		// set extension here
-		this._addToggles( $menu );
+		// set extension here, send "false" to trigger build/rebuild
+		this._addToggles( $menu, false );
 
 		$menu.appendTo( $popup );
 
@@ -160,6 +165,13 @@ $.widget( "mobile.table", $.mobile.table, {
 		return $menu;
 	},
 
+	rebuild: function() {
+		// NOTE: rebuild passes "false", while refresh passes "undefined"
+		// both refresh the table, but inside addToggles, !false will be true,
+		// so a rebuild call can be indentified
+		this.refresh( false );
+	},
+
 	refresh: function( create ) {
 		this._super( create );
 
@@ -168,7 +180,7 @@ $.widget( "mobile.table", $.mobile.table, {
 			this._unlockCells( this.allHeaders );
 
 			// update columntoggles and $cells
-			this._addToggles( this._menu );
+			this._addToggles( this._menu, create );
 
 			// check/uncheck
 			this._setToggleState();
