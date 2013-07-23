@@ -28,22 +28,6 @@ $.extend( $.Widget.prototype, {
 		return options;
 	},
 
-	_toggleClasses: function( destination, varNameForOldClasses, newClasses ) {
-		if ( this[ varNameForOldClasses ] !== newClasses ) {
-			if ( this[ varNameForOldClasses ] ) {
-				destination.removeClass( this[ varNameForOldClasses ] );
-				this[ varNameForOldClasses ] = "";
-			}
-
-			if ( newClasses ) {
-				this[ varNameForOldClasses ] = newClasses;
-				destination.addClass( newClasses );
-			}
-		}
-
-		return this;
-	},
-
 	// FIXME: These have to stay in place until we're running on a version of
 	// the widget factory that does enable()/disable() via _setOptions, as in
 	// https://github.com/jquery/jquery-ui/pull/1024
