@@ -39,31 +39,20 @@ $.widget( "mobile.collapsible", {
 					.closest( ":jqmData(role='collapsible-set')" +
 						( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) )
 					.addClass( "ui-collapsible-set" )
-			},
-			opts = this.options;
+			};
 
 		$.extend( this, {
-			_anchorClasses: "",
-			_elClasses: "",
-			_contentTheme: "",
 			_ui: ui
 		});
 
-		if ( opts.enhanced ) {
+		if ( this.options.enhanced ) {
 			ui.heading = $( ".ui-collapsible-heading", this.element[ 0 ] );
 			ui.content = ui.heading.next();
 			ui.anchor = $( "a", ui.heading[ 0 ] ).first();
-			this._applyOptions( opts, true );
+			ui.status = ui.anchor.children( ".ui-collapsible-heading-status" );
 		} else {
 			this._enhance( elem, ui );
-			this._setOptions( opts );
 		}
-
-		//events
-		this._on({
-			"expand": "_handleExpandCollapse",
-			"collapse": "_handleExpandCollapse"
-		});
 
 		this._on( ui.heading, {
 			"tap": function() {
@@ -78,10 +67,59 @@ $.widget( "mobile.collapsible", {
 		});
 	},
 
+	// Adjust the keys inside options for inherited values
+	_getOptions: function( options ) {
+		var key,
+			accordion = this._ui.accordion,
+			accordionWidget = this._ui.accordionWidget;
+
+		// Copy options
+		options = $.extend( {}, options );
+
+		if ( accordion.length && !accordionWidget ) {
+			this._ui.accordionWidget =
+			accordionWidget = accordion.data( "mobile-collapsibleset" );
+		}
+
+		for ( key in options ) {
+
+			// Retrieve the option value first from the options object passed in and, if
+			// null, from the parent accordion or, if that's null too, or if there's no
+			// parent accordion, then from the defaults.
+			options[ key ] =
+				( options[ key ] != null ) ? options[ key ] :
+				( accordionWidget ) ? accordionWidget.options[ key ] :
+				accordion.length ? $.mobile.getAttribute( accordion[ 0 ],
+					key.replace( rInitialLetter, "-$1" ).toLowerCase(), true ):
+				null;
+
+			if ( null == options[ key ] ) {
+				options[ key ] = $.mobile.collapsible.defaults[ key ];
+			}
+		}
+
+		return options;
+	},
+
+	_themeClassFromOption: function( prefix, value ) {
+		return ( value ? ( value === "none" ? "" : prefix + value ) : "" );
+	},
+
 	_enhance: function( elem, ui ) {
-		elem.addClass( "ui-collapsible" );
+		var iconclass,
+			opts = this._getOptions( this.options ),
+			contentThemeClass = this._themeClassFromOption( "ui-body-", opts.contentTheme );
+
+		elem.addClass( "ui-collapsible " +
+			( opts.inset ? "ui-collapsible-inset " : "" ) +
+			( opts.inset && opts.corners ? "ui-corner-all " : "" ) +
+			( contentThemeClass ? "ui-collapsible-themed-content " : "" ) );
 		ui.originalHeading = elem.children( this.options.heading ).first(),
-		ui.content = elem.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
+		ui.content = elem
+			.wrapInner( "<div " +
+				"class='ui-collapsible-content " +
+				contentThemeClass + "'></div>" )
+			.children( ".ui-collapsible-content" ),
 		ui.heading = ui.originalHeading;
 
 		// Replace collapsibleHeading if it's a legend
@@ -91,36 +129,138 @@ $.widget( "mobile.collapsible", {
 			ui.originalHeading.remove();
 		}
 
+		iconclass = ( opts.collapsed ? ( opts.collapsedIcon ? "ui-icon-" + opts.collapsedIcon : "" ):
+			( opts.expandedIcon ? "ui-icon-" + opts.expandedIcon : "" ) );
+
+		ui.status = $( "<span class='ui-collapsible-heading-status'></span>" );
 		ui.anchor = ui.heading
 			.detach()
 			//modify markup & attributes
 			.addClass( "ui-collapsible-heading" )
-			.append( "<span class='ui-collapsible-heading-status'></span>" )
+			.append( ui.status )
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
 			.find( "a" )
 				.first()
-				.addClass( "ui-btn" );
+				.addClass( "ui-btn " +
+					( iconclass ? iconclass + " " : "" ) +
+					( iconclass ? ( "ui-btn-icon-" +
+						( opts.iconpos === "right" ? "right" : "left" ) ) +
+						" " : "" ) +
+					this._themeClassFromOption( "ui-btn-", opts.theme ) + " " +
+					( opts.mini ? "ui-mini " : "" ) );
 
 		//drop heading in before content
 		ui.heading.insertBefore( ui.content );
 
+		this._handleExpandCollapse( this.options.collapsed );
+
 		return ui;
 	},
 
-	_handleExpandCollapse: function( isCollapse ) {
-		var key,
-			opts = $.extend( {}, this.options );
+	refresh: function() {
+		var key, options = {};
 
-		// Adjust for inherited values.
-		for ( key in opts ) {
-			opts[ key ] = this._optionValue( opts, key );
+		for ( key in $.mobile.collapsible.defaults ) {
+			options[ key ] = this.options[ key ];
 		}
 
-		this._ui.heading
+		this._setOptions( options );
+	},
+
+	_setOptions: function( options ) {
+		var isCollapsed, newTheme, oldTheme,
+			elem = this.element,
+			currentOpts = this.options,
+			ui = this._ui,
+			anchor = ui.anchor,
+			status = ui.status,
+			opts = this._getOptions( options );
+
+		// First and foremost we need to make sure the collapsible is in the proper
+		// state, in case somebody decided to change the collapsed option at the
+		// same time as another option
+		if ( options.collapsed !== undefined ) {
+			this._handleExpandCollapse( options.collapsed );
+		}
+
+		isCollapsed = elem.hasClass( "ui-collapsible-colapsed" );
+
+		// Only options referring to the current state need to be applied right away
+		// It is enough to store options covering the alternate in this.options.
+		if ( isCollapsed ) {
+			if ( opts.expandCueText !== undefined ) {
+				status.text( opts.expandCueText );
+			}
+			if ( opts.collapsedIcon !== undefined ) {
+				if ( currentOpts.collapsedIcon ) {
+					anchor.removeClass( "ui-icon-" + currentOpts.collapsedIcon );
+				}
+				if ( opts.collapsedIcon ) {
+					anchor.addClass( "ui-icon-" + opts.collapsedIcon );
+				}
+			}
+		} else {
+			if ( opts.collapseCueText !== undefined ) {
+				status.text( opts.collapseCueText );
+			}
+			if ( opts.expandedIcon !== undefined ) {
+				if ( currentOpts.expandedIcon ) {
+					anchor.removeClass( "ui-icon-" + currentOpts.expandedWIcon );
+				}
+				if ( opts.expandedIcon ) {
+					anchor.addClass( "ui-icon-" + opts.expandedIcon );
+				}
+			}
+		}
+
+		if ( opts.iconpos !== undefined ) {
+			anchor.removeClass( "ui-btn-icon-" + ( currentOpts.iconPos === "right" ? "right" : "left" ) );
+			anchor.addClass( "ui-btn-icon-" + ( opts.iconPos === "right" ? "right" : "left" ) );
+		}
+
+		if ( opts.theme !== undefined ) {
+			oldTheme = this._themeClassFromOption( "ui-btn-", currentOpts.theme );
+			newTheme = this._themeClassFromOption( "ui-btn-", opts.theme );
+			anchor.removeClass( oldTheme ).addClass( newTheme );
+		}
+
+		if ( opts.contentTheme !== undefined ) {
+			oldTheme = this._themeClassFromOption( "ui-body-", currentOpts.theme );
+			newTheme = this._themeClassFromOption( "ui-body-", opts.theme );
+			ui.content.removeClass( oldTheme ).addClass( newTheme );
+		}
+
+		// It is important to apply "inset" before corners, because the new value of
+		// "inset" can affect whether we display corners or not. Note that setting
+		// the "inset" option to false does not cause a change in the value of
+		// this.options.corners - it merely causes a change in the interpretation of
+		// the value of the "corners" option.
+		if ( opts.inset !== undefined ) {
+			elem.toggleClass( "ui-collapsible-inset", opts.inset );
+			currentOpts.inset = opts.inset;
+			if ( !opts.inset ) {
+				opts.corners = false;
+			}
+		}
+
+		if ( opts.corners !== undefined ) {
+			elem.toggleClass( "ui-corner-all", currentOpts.inset && opts.corners );
+		}
+
+		if ( opts.mini !== undefined ) {
+			anchor.toggleClass( "ui-mini", opts.mini );
+		}
+
+		this._super( options );
+	},
+
+	_handleExpandCollapse: function( isCollapse ) {
+		var opts = this._getOptions( this.options ),
+			ui = this._ui;
+
+		ui.status.text( isCollapse ? opts.expandCueText : opts.collapseCueText );
+		ui.heading
 			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
-			.find( ".ui-collapsible-heading-status" )
-			.text( isCollapse ? opts.expandCueText : opts.collapseCueText )
-			.end()
 			.find( "a" ).first()
 			.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
 
@@ -129,41 +269,12 @@ $.widget( "mobile.collapsible", {
 			.removeClass( $.mobile.activeBtnClass );
 
 		this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
-		this._ui.content
+		ui.content
 			.toggleClass( "ui-collapsible-content-collapsed", isCollapse )
 			.attr( "aria-hidden", isCollapse )
 			.trigger( "updatelayout" );
 		this.options.collapsed = isCollapse;
 		this._trigger( isCollapse ? "collapse" : "expand" );
-	},
-
-	// Retrieve the option value first from the options object passed in and, if
-	// null, from the parent accordion or, if that's null too, or if there's no
-	// parent accordion, then from the defaults.
-	_optionValue: function( options, name ) {
-		var ret,
-			accordion = this._ui.accordion,
-			accordionWidget = this._ui.accordionWidget;
-
-		if ( accordion.length && !accordionWidget ) {
-			this._ui.accordionWidget = accordionWidget = accordion.data( "mobile-collapsibleset" );
-		}
-
-		ret =
-			( options[ name ] != null ) ? options[ name ] :
-			( accordionWidget ) ? accordionWidget.options[ name ] :
-			accordion.length ? $.mobile.getAttribute( accordion[ 0 ], name.replace( rInitialLetter, "-$1" ).toLowerCase(), true ):
-			null;
-
-		if ( null == ret ) {
-			ret = $.mobile.collapsible.defaults[ name ];
-		}
-
-		return ret;
-	},
-
-	refresh: function() {
-		this._setOptions( {} );
 	},
 
 	expand: function() {
@@ -175,9 +286,10 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_destroy: function() {
-		var ui = this._ui;
+		var ui = this._ui,
+			opts = this.options;
 
-		if ( this.options.enhanced ) {
+		if ( opts.enhanced ) {
 			return;
 		}
 
@@ -186,11 +298,9 @@ $.widget( "mobile.collapsible", {
 			ui.placeholder.remove();
 			ui.heading.remove();
 		} else {
+			ui.status.remove();
 			ui.heading
 				.removeClass( "ui-collapsible-heading ui-collapsible-heading-collapsed" )
-				.find( ".ui-collapsible-heading-status" )
-					.remove()
-				.end()
 				.children()
 					.contents()
 						.unwrap();
@@ -198,80 +308,9 @@ $.widget( "mobile.collapsible", {
 
 		ui.anchor.contents().unwrap();
 		ui.content.contents().unwrap();
-		this.element.removeClass( "ui-collapsible " + this._elClasses + ( this.options.collapsed ? " ui-collapsible-collapsed" : "" ) );
-	},
-
-	_applyOptions: function( options, internal ) {
-		var key, contentThemeClass,
-			opts = $.extend( {}, this.options, options ),
-			$el = this.element,
-			classes = "",
-			anchorClasses = "";
-
-		// Override inheritable options from the accordion or from defaults if
-		// unset in this widget
-		for ( key in opts ) {
-			opts[ key ] = this._optionValue( opts, key );
-		}
-
-		// Set corners for individual collapsibles to false when in a collapsible-set
-		if ( this._ui.accordion.length > 0 ) {
-			opts.corners = false;
-		}
-
-		if ( opts.contentTheme === "none" ) {
-			opts.contentTheme = "";
-		}
-
-		if ( !( options.collapsed === undefined || internal ) ) {
-			this._handleExpandCollapse( options.collapsed );
-		}
-
-		// Establish classes for outermost element
-		if ( !!opts.inset ) {
-			classes += " ui-collapsible-inset";
-			if ( !!opts.corners ) {
-				classes += " ui-corner-all" ;
-			}
-		}
-		if ( opts.contentTheme ) {
-			classes += " ui-collapsible-themed-content";
-		}
-
-		// Establish classes for anchor
-		if ( $el.hasClass( "ui-collapsible-collapsed" ) ) {
-			anchorClasses += " ui-icon-" + opts.collapsedIcon;
-		} else {
-			anchorClasses += " ui-icon-" + opts.expandedIcon;
-		}
-		anchorClasses += " ui-btn-icon-" + opts.iconpos;
-		if ( opts.theme ) {
-			anchorClasses += " ui-btn-" + opts.theme;
-		}
-		if ( opts.mini ) {
-			anchorClasses += " ui-mini";
-		}
-
-		contentThemeClass = opts.contentTheme ? ( "ui-body-" + opts.contentTheme ) : "";
-
-		if ( internal ) {
-			this._contentTheme = contentThemeClass;
-			this._elClasses = classes;
-			this._anchorClasses = anchorClasses;
-		} else {
-			this
-				._toggleClasses( this._ui.content, "_contentTheme", contentThemeClass )
-				._toggleClasses( $el, "_elClasses", classes )
-				._toggleClasses( this._ui.anchor, "_anchorClasses", anchorClasses );
-		}
-
-		return this;
-	},
-
-	_setOptions: function( options ) {
-		return this
-			._applyOptions( options )
-			._super( options );
+		this.element
+			.removeClass( "ui-collapsible ui-collapsible-collapsed " +
+				"ui-collapsible-themed-content ui-collapsible-inset ui-corner-all" );
 	}
 });
 
