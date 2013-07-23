@@ -54,6 +54,49 @@
 		});
 	});
 
+	test( "Option setting works correctly", function() {
+		var set = $( "#collapsible-options-test" ),
+			secondChild = set.children( ":nth(1)" ),
+			anchors = set.find( "a" ),
+			nMatching;
+
+		set.collapsibleset( "option", "mini", true );
+		nMatching = 0;
+		anchors.each( function() {
+			if ( $( this ).hasClass( "ui-mini" ) ) {
+				nMatching++;
+			}
+		});
+		deepEqual( nMatching, 3, "After setting mini on the set, all three collapsibles are mini" );
+
+		secondChild.collapsible( "option", "mini", false );
+		nMatching = 0;
+		anchors.each( function() {
+			if ( $( this ).hasClass( "ui-mini" ) ) {
+				nMatching++;
+			}
+		});
+		deepEqual( nMatching, 2, "After turning off mini on the second child, only two collapsibles are mini" );
+
+		set.collapsibleset( "option", "mini", false );
+		nMatching = 0;
+		anchors.each( function() {
+			if ( $( this ).hasClass( "ui-mini" ) ) {
+				nMatching++;
+			}
+		});
+		deepEqual( nMatching, 0, "After unsetting mini on the set, no collapsibles are mini" );
+
+		set.collapsibleset( "option", "mini", true );
+		nMatching = 0;
+		anchors.each( function() {
+			if ( $( this ).hasClass( "ui-mini" ) ) {
+				nMatching++;
+			}
+		});
+		deepEqual( nMatching, 2, "After setting mini on the set again, only two collapsibles are mini" );
+	});
+
 	test( "Section expanded by default", function(){
 		equal($( "#basic-collapsible-set .ui-collapsible-collapsed" ).length, 2, "There should be 2 section collapsed" );
 		ok(!$( "#basic-collapsible-set >:eq(1)" ).hasClass( "ui-collapsible-collapsed" ), "Section B should be expanded" );
