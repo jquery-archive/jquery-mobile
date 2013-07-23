@@ -12,7 +12,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
 			clearBtn: false,
-			clearBtnText: "clear text"
+			clearBtnText: "Clear text"
 		},
 
 		_create: function(){
