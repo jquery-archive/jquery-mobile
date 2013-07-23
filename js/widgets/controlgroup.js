@@ -77,6 +77,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 
 			// No need to call refresh if the type hasn't changed
 			if ( this.options.type !== options.type ) {
+				this.options.type = options.type;
 				callRefresh = true;
 			}
 		}
@@ -95,6 +96,11 @@ $.widget( "mobile.controlgroup", $.extend( {
 
 		if ( !( opts.shadow === undefined || internal ) ) {
 			this._ui.childWrapper.toggleClass( "ui-shadow", opts.shadow );
+		}
+
+		if ( options.excludeInvisible !== undefined ) {
+			this.options.excludeInvisible = options.excludeInvisible;
+			callRefresh = true;
 		}
 
 		if ( internal ) {
