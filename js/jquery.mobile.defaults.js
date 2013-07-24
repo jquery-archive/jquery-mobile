@@ -21,6 +21,8 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: "ui-page",
 
+		hideUrlBar: true,
+
 		// Class assigned to page currently in view, and during transitions
 		activePageClass: "ui-page-active",
 

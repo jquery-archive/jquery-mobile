@@ -161,7 +161,9 @@ define([
 
 		// window load event
 		// hide iOS browser chrome on load
-		$window.load( $.mobile.silentScroll );
+		if( $.mobile.hideUrlBar ){
+			$window.load( $.mobile.silentScroll );
+		}
 
 		if ( !$.support.cssPointerEvents ) {
 			// IE and Opera don't support CSS pointer-events: none that we use to disable link-based buttons
