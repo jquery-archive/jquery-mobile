@@ -34,7 +34,7 @@
 			<p>Collapsible sets start with the same markup as <a href="../collapsibles/" data-ajax="false">individual collapsibles</a> which have a heading followed by the collapsible content. By adding a parent wrapper with a <code>data-role="collapsible-set"</code> attribute to the collapsibles they will be visually grouped and they will behave like an accordion so only one section can be open at a time.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+				<div data-role="collapsible-set" data-theme="a" data-content-theme="a">
 					<div data-role="collapsible">
 						<h3>Section 1</h3>
 						<p>I'm the collapsible content for section 1</p>
@@ -92,7 +92,7 @@
 			<p>For a more compact version that is useful in tight spaces, add the <code>data-mini="true"</code> attribute to the set. </p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="true">
+				<div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-mini="true">
 					<div data-role="collapsible">
 						<h3>I'm a mini collapsible</h3>
 						<p>This is good for tight spaces.</p>
@@ -114,7 +114,7 @@
 			<p>The default icons of collapsible headings can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes, either at the <code>collapsible-set</code> level or on any of its collapsibles individually.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+				<div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
 					<div data-role="collapsible">
 						<h3>Icon set on the set</h3>
 						<p>Specify the open and close icons on the set to apply it to all the collapsibles within.</p>
@@ -135,7 +135,7 @@
 			<p>The default icon positioning of collapsible headings can be overridden by using the <code>data-iconpos</code> attribute, either at the <code>collapsible-set</code> level or on any of its collapsibles individually.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-iconpos="right">
+				<div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-iconpos="right">
 					<div data-role="collapsible">
 						<h3>Right</h3>
 						<p>Inherits icon positioning from <code>data-iconpos="right"</code> attribute on set.</p>
@@ -159,7 +159,7 @@
 			<p>Add the <code>data-corners="false"</code> attribute to get an inset collapsible set without rounded corners.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-corners="false" data-theme="c" data-content-theme="d">
+				<div data-role="collapsible-set" data-corners="false" data-theme="a" data-content-theme="a">
 					<div data-role="collapsible">
 						<h3>Section 1</h3>
 						<p>Collapsible content</p>
@@ -196,18 +196,18 @@
 			<p>To have individual sections in a group styled differently, add <code>data-theme</code> and <code>data-content-theme</code> attributes to specific collapsibles.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-content-theme="c">
+				<div data-role="collapsible-set" data-content-theme="a">
+					<div data-role="collapsible" data-theme="b" data-content-theme="a">
+						<h3>Section header, swatch B</h3>
+						<p>Collapsible content, swatch "a"</p>
+					</div>
+					<div data-role="collapsible" data-theme="a" data-content-theme="b">
+						<h3>Section header, swatch A</h3>
+						<p>Collapsible content, swatch "b"</p>
+					</div>
 					<div data-role="collapsible" data-theme="b" data-content-theme="b">
 						<h3>Section header, swatch B</h3>
 						<p>Collapsible content, swatch "b"</p>
-					</div>
-					<div data-role="collapsible" data-theme="a" data-content-theme="a">
-						<h3>Section header, swatch A</h3>
-						<p>Collapsible content, swatch "a"</p>
-					</div>
-					<div data-role="collapsible" data-theme="e" data-content-theme="d">
-						<h3>Section header, swatch E</h3>
-						<p>Collapsible content, swatch "d"</p>
 					</div>
 				</div>
 		</div><!--/demo-html -->

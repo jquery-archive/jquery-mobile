@@ -150,7 +150,7 @@
                 <a href="#" data-role="button">Grid Solo</a>
             </div>
             <br>
-            <a href="#" data-role="button" data-theme="e">Outside the grid</a>
+            <a href="#" data-role="button" data-theme="b">Outside the grid</a>
         </div><!--/demo-html -->
         
         

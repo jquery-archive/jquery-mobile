@@ -44,9 +44,9 @@
 			<h2>Tooltip</h2>
 			<p>A tooltip can be created by adding a theme swatch to a basic popup and adding padding via the <code>ui-content</code> class.</p>
 			<div data-demo-html="true">
-				<p class="ui-body-d" style="padding:2em;">A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup"  data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-theme="e" data-iconpos="notext">Learn more</a></p>
+				<p class="ui-body-d" style="padding:2em;">A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup"  data-role="button" class="ui-icon-alt" data-inline="true" data-transition="pop" data-icon="info" data-theme="a" data-iconpos="notext">Learn more</a></p>
 
-				<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
+				<div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width:350px;">
 		          <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
 				</div>
 			</div><!--/demo-html -->
@@ -58,13 +58,13 @@
 				<a href="#popupSydney" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/sydney.jpg" alt="Sydney, Australia" style="width:30%"></a>
 				<a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/newyork.jpg" alt="New York, USA" style="width:30%"></a>
 
-				<div data-role="popup" id="popupParis" data-overlay-theme="a" data-theme="d" data-corners="false">
+				<div data-role="popup" id="popupParis" data-overlay-theme="b" data-theme="b" data-corners="false">
 					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
 				</div>
-				<div data-role="popup" id="popupSydney" data-overlay-theme="a" data-theme="d" data-corners="false">
+				<div data-role="popup" id="popupSydney" data-overlay-theme="b" data-theme="b" data-corners="false">
 					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/sydney.jpg" style="max-height:512px;" alt="Sydney, Australia">
 				</div>
-				<div data-role="popup" id="popupNYC" data-overlay-theme="a" data-theme="d" data-corners="false">
+				<div data-role="popup" id="popupNYC" data-overlay-theme="b" data-theme="b" data-corners="false">
 					<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a><img class="popphoto" src="../../_assets/img/newyork.jpg" style="max-height:512px;" alt="New York, USA">
 				</div>
 			</div><!--/demo-html -->
@@ -72,11 +72,11 @@
 			<h2>Menu</h2>
 			<p>A menu can be created by adding a <a href="../listviews/">listview</a> inside a popup.</p>
 			<div data-demo-html="true">
-				<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup" data-icon="gear" data-theme="e">Actions...</a>
+				<a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="slideup" data-icon="gear" data-theme="a">Actions...</a>
 
-				<div data-role="popup" id="popupMenu" data-theme="d">
-						<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
-							<li data-role="list-divider" data-theme="e">Choose an action</li>
+				<div data-role="popup" id="popupMenu" data-theme="b">
+						<ul data-role="listview" data-inset="true" style="min-width:210px;">
+							<li data-role="list-divider">Choose an action</li>
 							<li><a href="#">View details</a></li>
 							<li><a href="#">Edit</a></li>
 							<li><a href="#">Disable</a></li>
@@ -91,7 +91,7 @@
 				<a href="#popupNested" data-rel="popup" data-role="button" data-inline="true" data-icon="bars" data-theme="b" data-transition="pop">Choose a creature...</a>
 
 				<div data-role="popup" id="popupNested" data-theme="none">
-					<div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+					<div data-role="collapsible-set" data-theme="b" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
 						<div data-role="collapsible" data-inset="false">
 							<h2>Farm animals</h2>
 							<ul data-role="listview">
@@ -158,14 +158,14 @@
 			<div data-demo-html="true">
 				<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="delete" data-theme="b">Delete page...</a>
 
-				<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+				<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
 					<div data-role="header" data-theme="a" class="ui-corner-top">
 						<h1>Delete Page?</h1>
 					</div>
-					<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+					<div data-role="content" data-theme="a" class="ui-corner-bottom ui-content">
 						<h3 class="ui-title">Are you sure you want to delete this page?</h3>
 						<p>This action cannot be undone.</p>
-						<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Cancel</a>
+						<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b">Cancel</a>
 						<a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">Delete</a>
 					</div>
 				</div>
@@ -214,15 +214,15 @@
 				<a href="#positionOrigin" data-role="button" data-inline="true" data-rel="popup" data-position-to="origin">Position to origin</a>
 				<a href="#positionSelector" data-role="button" data-inline="true" data-rel="popup" data-position-to="#position-header">Position to #position-header</a>
 
-				<div data-role="popup" id="positionWindow" class="ui-content" data-theme="d">
+				<div data-role="popup" id="positionWindow" class="ui-content" data-theme="a">
 					<p>I am positioned to the window.</p>
 				</div>
 
-				<div data-role="popup" id="positionOrigin" class="ui-content" data-theme="d">
+				<div data-role="popup" id="positionOrigin" class="ui-content" data-theme="a">
 					<p>I am positioned over the origin.</p>
 				</div>
 
-				<div data-role="popup" id="positionSelector" class="ui-content" data-theme="d">
+				<div data-role="popup" id="positionSelector" class="ui-content" data-theme="a">
 					<p>I am positioned over the header for this section via a selector. If the header isn't scrolled into view, collision detection will place the popup so it's in view.</p>
 				</div>
 			</div><!--/demo-html -->
@@ -242,7 +242,7 @@
 				<a href="#transitionExample" data-transition="slideup" data-role="button" data-inline="true" data-rel="popup">Slide up</a>
 				<a href="#transitionExample" data-transition="slidedown" data-role="button" data-inline="true" data-rel="popup">Slide down</a>
 
-				<div data-role="popup" id="transitionExample" class="ui-content" data-theme="d">
+				<div data-role="popup" id="transitionExample" class="ui-content" data-theme="a">
 					<p>I'm a simple popup.</p>
 				</div>
 			</div><!--/demo-html -->
@@ -268,9 +268,9 @@
 					  <p>I have a <code>data-overlay-theme="a"</code> set on me</p>
 					</div>
 
-					<a href="#both" data-rel="popup" data-role="button" data-inline="true">Theme E + overlay A</a>
-					<div id="both" data-role="popup" data-overlay-theme="a" data-theme="e" class="ui-content">
-					  <p>I have <code>data-theme="e"</code> and <code>data-overlay-theme="a"</code> set on me</p>
+					<a href="#both" data-rel="popup" data-role="button" data-inline="true">Theme B + overlay A</a>
+					<div id="both" data-role="popup" data-overlay-theme="a" data-theme="b" class="ui-content">
+					  <p>I have <code>data-theme="b"</code> and <code>data-overlay-theme="a"</code> set on me</p>
 					</div>
 				</div><!--/demo-html -->
 

@@ -38,14 +38,14 @@
 			<p>Here is an example of a 3rd party video player embedded in a popup:</p>
 				<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Launch video player</a>
 
-				<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="d" data-tolerance="15,15" class="ui-content">
+				<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
 					<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
 				</div>
 
 			<p>The markup is an iframe inside a popup container. The popup will have a 15 pixels padding because of class <code>ui-content</code> and a one pixel border because the framework will add class <code>ui-body-d</code> to the popup.</p>
 
 <pre><code>
-&lt;div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="d" data-tolerance="15,15" class="ui-content"&gt;
+&lt;div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content"&gt;
 
     &lt;iframe src="http://player.vimeo.com/video/41135183" width="497" height="298" seamless&gt;&lt;/iframe&gt;
 
@@ -56,7 +56,7 @@
 
 			<p>Next, bind to the <code>popupbeforeposition</code> event to set the desired size of the iframe when the popup is shown or when the window is resized (e.g. orientation change). For the iframe examples on this page a custom function <code>scale()</code> is used to scale down the iframe to fit smaller screens. Expand the section below to view the code of this function.</p>
 
-			<div data-role="collapsible" data-content-theme="d">
+			<div data-role="collapsible" data-content-theme="a">
 				<h3><code>scale()</code></h3>
 				<p>The window width and height are decreased by 30 to take the tolerance of 15 pixels at each side into account.</p>
 <pre><code>
@@ -143,7 +143,7 @@ $( document ).on( "pageinit", function() {
 
 			<p>Expand the section below to view the source of the iframe.</p>
 
-			<div data-role="collapsible" data-content-theme="d">
+			<div data-role="collapsible" data-content-theme="a">
 				<h3><code>map.html</code></h3>
 <pre><code>
 &lt;!DOCTYPE html&gt;

@@ -114,7 +114,7 @@
 			<p>List items can be turned into dividers to organize and group the list items. This is done by adding the <code> data-role="list-divider"</code> to any list item. These items are styled with the bar swatch "b" by default (blue in the default theme) but you can specify a theme for dividers by adding the <code>data-divider-theme</code> attribute to the list element (<code>ul</code> or <code>ol</code>) and specifying a theme swatch letter. You can override the divider-theme for a specific divider by adding the <code>data-theme</code> attribute to the list item.</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" data-inset="true" data-divider-theme="d">
+				<ul data-role="listview" data-inset="true" data-divider-theme="a">
 					<li data-role="list-divider">Mail</li>
 					<li><a href="#">Inbox</a></li>
 					<li><a href="#">Outbox</a></li>
@@ -142,7 +142,7 @@
 			<p>To add a count indicator to the right of the list item, wrap the number in an element with a class of <code>ui-li-count</code>. The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list and specifying a swatch letter. </p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" data-count-theme="c" data-inset="true">
+				<ul data-role="listview" data-count-theme="b" data-inset="true">
 					<li><a href="#">Inbox <span class="ui-li-count">12</span></a></li>
 					<li><a href="#">Outbox <span class="ui-li-count">0</span></a></li>
 					<li><a href="#">Drafts <span class="ui-li-count">4</span></a></li>
@@ -156,7 +156,7 @@
 			<p>The default icon for each list item containing a link is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../icons/">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styling it's also possible to use third party icons.</p>
 
 			<div data-demo-html="true" data-demo-css="#custom-icon">
-                <ul data-role="listview" data-inset="true" data-theme="c">
+                <ul data-role="listview" data-inset="true">
                     <li data-icon="custom" id="skull"><a href="#">custom-icon</a></li>
                     <li data-icon="delete"><a href="#">data-icon="delete"</a></li>
                     <li data-icon="gear"><a href="#">data-icon="gear"</a></li>
@@ -202,7 +202,7 @@
 			<h2 id="list-split">Split buttons</h2>
 			<p>To make a split list item, simply add a second link inside the <code>li</code>. To adjust the split button icon, add the <code>data-split-icon</code> attribute to the listview . Add the <code>data-icon</code> attribute to individual list items for more control. The theme swatch color of the split button defaults to "b" (blue in the default theme) but can be set by specifying a swatch letter with the <code>data-split-theme</code> attribute at the listview level or for individual splits with the <code>data-theme</code> attribute at the link level.</p>
 			<div data-demo-html="true">
-				<ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="true">
+				<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
 					<li><a href="#">
 						<img src="../../_assets/img/album-bb.jpg" />
 						<h2>Broken Bells</h2>
@@ -223,7 +223,7 @@
 					</li>
 				</ul>
 
-				<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+				<div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 					<h3>Purchase Album?</h3>
 					<p>Your download will begin immediately on your mobile device when you purchase.</p>
 					<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
@@ -266,9 +266,9 @@
 
 			<div data-demo-html="true">
 
-				<ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="e" data-count-theme="b">
+				<ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
 					<li data-role="list-divider">Divider</li>
-					<li><a href="index.html" data-theme="e">Inbox <span class="ui-li-count">12</span></a></li>
+					<li><a href="index.html" data-theme="a">Inbox <span class="ui-li-count">12</span></a></li>
 					<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
 					<li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
 				</ul>
@@ -284,7 +284,7 @@
 					</li>
 					<li><a href="#">
 						<h2>Phoenix</h2>
-						<a href="#purchase" data-theme="e" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+						<a href="#purchase" data-theme="a" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 					</li>
 				</ul>
 			</div><!--/demo-html -->
@@ -338,7 +338,7 @@
                         </li>
                         <li class="ui-body ui-body-b">
                             <fieldset class="ui-grid-a">
-                                    <div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
+                                    <div class="ui-block-a"><button type="submit" data-theme="a">Cancel</button></div>
                                     <div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
                             </fieldset>
                         </li>
@@ -351,7 +351,7 @@
 			<p>This is an example of a listview wrapped in a container with <code>data-role="collapsible"</code>.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible" data-theme="b" data-content-theme="c">
+				<div data-role="collapsible" data-theme="b" data-content-theme="b">
 					<h2>Choose a car model...</h2>
 					<ul data-role="listview" data-filter="true">
 						<li><a href="index.html">Acura</a></li>
@@ -373,10 +373,10 @@
 			<p>You can also use listviews inside a <a href="../accordions/">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+				<div data-role="collapsible-set" data-theme="a" data-content-theme="b">
 					<div data-role="collapsible">
 						<h2>Filtered list</h2>
-						<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d">
+						<ul data-role="listview" data-filter="true" data-filter-theme="a" data-divider-theme="b">
 							<li><a href="index.html">Adam Kinkaid</a></li>
 							<li><a href="index.html">Alex Wickerham</a></li>
 							<li><a href="index.html">Avery Johnson</a></li>
@@ -386,7 +386,7 @@
 					</div>
 					<div data-role="collapsible">
 						<h2>Formatted text</h2>
-						<ul data-role="listview" data-theme="d" data-divider-theme="d">
+						<ul data-role="listview" data-theme="a" data-divider-theme="b">
 							<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
 							<li><a href="index.html">
 								<h3>Stephen Weber</h3>
@@ -404,7 +404,7 @@
 					</div>
 					<div data-role="collapsible">
 						<h2>Thumbnails and split button</h2>
-						<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+						<ul data-role="listview" data-split-icon="gear" data-split-theme="a">
 							<li><a href="index.html">
 								<img src="../../_assets/img/album-bb.jpg" />
 								<h3>Broken Bells</h3>
@@ -433,7 +433,7 @@
 			<p>Setting <code>data-inset="false"</code> on a collapsible or a collapsible set makes the collapsible full width (non-inset), like a full width listview.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-inset="false">
+				<div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-inset="false">
 					<div data-role="collapsible">
 						<h2>Mailbox</h2>
 						<ul data-role="listview">
@@ -446,7 +446,7 @@
 					</div>
 					<div data-role="collapsible">
 						<h2>Calendar</h2>
-						<ul data-role="listview" data-theme="d" data-divider-theme="d">
+						<ul data-role="listview" data-theme="a" data-divider-theme="b">
 							<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
 							<li><a href="index.html">
 									<h3>Stephen Weber</h3>
@@ -478,7 +478,7 @@
 					</div>
 					<div data-role="collapsible">
 						<h2>Contacts</h2>
-						<ul data-role="listview" data-autodividers="true" data-theme="d" data-divider-theme="d">
+						<ul data-role="listview" data-autodividers="true" data-theme="a" data-divider-theme="b">
 							<li><a href="index.html">Adam Kinkaid</a></li>
 							<li><a href="index.html">Alex Wickerham</a></li>
 							<li><a href="index.html">Avery Johnson</a></li>
@@ -498,7 +498,7 @@
 			<p><strong>Warning: Nested listviews are deprecated as of 1.3.0 and will be removed in future versions.</strong></p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" data-header-theme="e">
+				<ul data-role="listview" data-header-theme="a">
 					<li>Animals
 						<ul>
 							<li>Pets

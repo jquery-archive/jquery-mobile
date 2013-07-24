@@ -63,7 +63,7 @@
 		<p>In version 1.1, we added support for using <code>data-ajax="false"</code> on a parent container which allows you to exclude a large number of links from the AJAX navigation system. This avoids the need to add this attribute to every link in a container. To activate this functionality, <code>$.mobile.ignoreContentEnabled</code> must be set to <code>true</code> because this feature adds overhead we don't want to enable by default.</p>
 
 		<div data-demo-html="true">
-			<ul data-role="listview" data-ajax="false" data-inset="true" data-theme="d">
+			<ul data-role="listview" data-ajax="false" data-inset="true" data-theme="a">
 	            <li data-role="list-divider">All links are non-AJAX</li>
 	            <li><a href="../accordions/">Accordion</a></li>
 	            <li><a href="../ajax-nav/">AJAX Navigation</a></li>

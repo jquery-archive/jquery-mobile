@@ -23,14 +23,14 @@
 
 		</div><!-- /grid-b -->
 
-		<div class="ui-bar-d">
+		<div class="ui-bar-b">
 				<div class="ui-grid-a">
 					<div class="ui-block-a" style="width:78%">
 						<label for="text-mini" class="ui-hidden-accessible">Search Input:</label>
 				        <input type="search" name="name" id="search-mini" value="" data-mini="true" placeholder="Search songs..."  />
 					</div>
 					<div class="ui-block-b" style="width:22%">
-						<button type="submit" data-mini="true" style="float:right" data-theme="d">Go</button>
+						<button type="submit" data-mini="true" style="float:right" data-theme="a">Go</button>
 					</div>
 				</div><!-- /grid-a -->
 		</div><!-- /search bar -->
@@ -39,7 +39,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="false">
+			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="false">
 				<li><a href="#">
 					<img src="../../_assets/img/album-bb.jpg" />
 					<h2>Broken Bells</h2>
@@ -96,7 +96,7 @@
 				</li>
 			</ul>
 
-			<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
+			<div data-role="popup" id="purchase" data-theme="b" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 				<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
 				<a href="#" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>

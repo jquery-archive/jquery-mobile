@@ -70,7 +70,7 @@
                 <div data-demo-html="true">
 				<form>
                     <label for="slider-3">Slider:</label>
-                    <input type="range" name="slider-3" id="slider-3" data-track-theme="d" data-theme="b" min="0" max="100" value="50">
+                    <input type="range" name="slider-3" id="slider-3" data-track-theme="b" data-theme="b" min="0" max="100" value="50">
 				</form>
                 </div><!-- /demo-html -->
 

@@ -30,7 +30,7 @@
 
     <div data-role="content" class="jqm-content jqm-fullwidth">
 
-		<ul data-role="listview" data-theme="d" data-dividertheme="e" data-filter="true" data-filter-theme="d" data-filter-placeholder="Search messages...">
+		<ul data-role="listview" data-theme="a" data-dividertheme="a" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search messages...">
 			<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
 			<li><a href="#">
 				<h3>Stephen Weber</h3>
