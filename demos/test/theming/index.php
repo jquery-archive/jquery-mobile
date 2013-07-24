@@ -93,7 +93,6 @@
 			</div>
 		</form>
 		
-		<a data-role="button" data-theme="b" class="ui-btn-active">Active B</a>
 		<div id="ui-body-test" class="ui-body ui-body-a ui-corner-all" style="margin-bottom:1em;">
 			<p>I am a div with classes ui-body, ui-body-<span class="theme">a</span> and ui-corner-all.</p>
 			<p><a href="#">I am a link</a></p>
