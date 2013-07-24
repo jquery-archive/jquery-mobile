@@ -15,7 +15,7 @@ var replaceSetOptions = function( self, orig ) {
 		return function( options ) {
 			orig.call( this, options );
 			self._syncTextInputOptions( options );
-		}
+		};
 	},
 	rDividerListItem = /(^|\s)ui-li-divider(\s|$)/,
 	origDefaultFilterCallback = $.mobile.filterable.prototype.options.filterCallback;
@@ -35,6 +35,10 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		if ( !this._widget && widget ) {
 			this._widget = widget;
 			this._widget._setOptions = replaceSetOptions( this, this._widget._setOptions );
+		}
+
+		if ( !!this._widget ) {
+			this._syncTextInputOptions( this._widget.options );
 		}
 
 		return !!this._widget;
@@ -74,22 +78,24 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 
 	_setInput: function( selector ) {
 		if ( !selector ) {
+			if ( this._isSearchInternal() ) {
 
-			if ( !this._isSearchInternal() ) {
-				search = $( "<input data-" + $.mobile.ns + "type='search'></input>" )
+				// Ignore the call to set a new input if the selector goes to falsy and
+				// the current textinput is already of the internally generated variety.
+				return;
+			} else {
+				selector = $( "<input data-" + $.mobile.ns + "type='search'></input>" )
 					.jqmData( "ui-filterable-" + this.uuid + "-internal", true );
 				$( "<form class='ui-filterable'></form>" )
-					.append( search )
+					.append( selector )
 					.insertBefore( this.element );
 				if ( $.mobile.textinput ) {
-					search.textinput();
+					selector.textinput();
 				}
-			} else {
-				return;
 			}
 		}
 
-		this._super( search );
+		this._super( selector );
 	},
 
 	_destroy: function() {
