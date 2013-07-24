@@ -135,18 +135,18 @@
 /* Used by both listview and custom multiple select button */
 .ui-li-count {
 	position: absolute;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	text-align: center;
 	border-width: 1px;
 	border-style: solid;
 	padding: 0 .5em;
-	line-height: 1.9;
-	min-height: 1.818em;
-	min-width: .818em;
-	right: .909em;
+	line-height: 1.666em;
+	min-height: 1.666em;
+	min-width: .666em;
+	right: .833em;
 	top: 50%;
-	margin-top: -1em;
+	margin-top: -.916em;
 }
 .ui-listview .ui-btn[class*="ui-icon-"] .ui-li-count {
 	right: 3.636em;
