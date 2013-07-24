@@ -785,72 +785,109 @@ h2.jqm-home-widget {
 	resize: none;
 }
 
-/* Swatch F */
-.ui-bar-f {
-	border: 1px solid #86D641;
-	background: #6ABA2F;
+/* Button C - HTML */
+.ui-btn.ui-btn-c,
+.ui-btn.ui-btn-c:visited {
+	background: #005aff;
+	border-color: #0033cc;
 	color: #fff;
-	text-shadow: 0 1px 1px #335413;	
-	font-weight: bold;
+	text-shadow: 0 1px 0 #0033cc;
 }
-.ui-bar-f,
-.ui-bar-f .ui-link-inherit,
-.ui-bar-f .ui-link {
+.ui-btn.ui-btn-c:hover {
+	background: #005aff;
+	border-color: #0033cc;
 	color: #fff;
+	text-shadow: 0 1px 0 #0033cc;
 }
-.ui-btn-up-f {
-	border: 1px solid #3B6F07;
-	background: #56A00E;
-	font-weight: bold;
+.ui-btn.ui-btn-c:active {
+	background: #005aff;
+	border-color: #0033cc;
 	color: #fff;
-	text-shadow: 0 1px 1px #234403;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#74b042), to(#56A00E)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(#74b042, #56A00E); /* Chrome 10+, Saf5.1+ */
-	background-image: -moz-linear-gradient(#74b042, #56A00E); /* FF3.6 */
-	background-image: -ms-linear-gradient(#74b042, #56A00E); /* IE10 */
-	background-image: -o-linear-gradient(#74b042, #56A00E); /* Opera 11.10+ */
-	background-image: linear-gradient(#74b042, #56A00E);
+	text-shadow: 0 1px 0 #0033cc;
 }
-.ui-btn-up-f a.ui-link-inherit {
+.ui-btn.ui-btn-c.ui-btn-active {
+	background: #005aff;
+	border-color: #0033cc;
 	color: #fff;
+	text-shadow: 0 1px 0 #0033cc;
 }
-.ui-btn-hover-f {
-	border: 1px solid #3B6F07;
-	background: #6EBC1F;
-	font-weight: bold;
+/* Button D - PHP */
+.ui-btn.ui-btn-d,
+.ui-btn.ui-btn-d:visited {
+	background: #ed1c24;
+	border-color: #ff0000;
 	color: #fff;
-	text-shadow: 0 1px 1px #234403;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#8FC963), to(#6EBC1F)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(#8FC963, #6EBC1F); /* Chrome 10+, Saf5.1+ */
-	background-image: -moz-linear-gradient(#8FC963, #6EBC1F); /* FF3.6 */
-	background-image: -ms-linear-gradient(#8FC963, #6EBC1F); /* IE10 */
-	background-image: -o-linear-gradient(#8FC963, #6EBC1F); /* Opera 11.10+ */
-	background-image: linear-gradient(#8FC963, #6EBC1F);
+	text-shadow: 0 1px 0 #ff0000;
 }
-.ui-btn-hover-f a.ui-link-inherit {
+.ui-btn.ui-btn-d:hover {
+	background: #ed1c24;
+	border-color: #ff0000;
 	color: #fff;
+	text-shadow: 0 1px 0 #ff0000;
 }
-.ui-btn-down-f {
-	border: 1px solid #3B6F07;
-	background: #3d3d3d;
-	font-weight: bold;
+.ui-btn.ui-btn-d:active {
+	background: #ed1c24;
+	border-color: #ff0000;
 	color: #fff;
-	text-shadow: 0 1px 1px #234403;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#56A00E), to(#64A234)); /* Saf4+, Chrome */
-	background-image: -webkit-linear-gradient(#56A00E, #64A234); /* Chrome 10+, Saf5.1+ */
-	background-image: -moz-linear-gradient(#56A00E, #64A234); /* FF3.6 */
-	background-image: -ms-linear-gradient(#56A00E, #64A234); /* IE10 */
-	background-image: -o-linear-gradient(#56A00E, #64A234); /* Opera 11.10+ */
-	background-image: linear-gradient(#56A00E, #64A234);
+	text-shadow: 0 1px 0 #ff0000;
 }
-.ui-btn-down-f a.ui-link-inherit {
+.ui-btn.ui-btn-d.ui-btn-active {
+	background: #ed1c24;
+	border-color: #ff0000;
 	color: #fff;
+	text-shadow: 0 1px 0 #ff0000;
 }
-.ui-btn-up-f,
-.ui-btn-hover-f,
-.ui-btn-down-f {
-	font-weight: bold;
-	text-decoration: none;
+/* Button E - JS */
+.ui-btn.ui-btn-e,
+.ui-btn.ui-btn-e:visited {
+	background: #3EB249;
+	border-color: #108040;
+	color: #fff;
+	text-shadow: 0 1px 0 #108040;
+}
+.ui-btn.ui-btn-e:hover {
+	background: #3EB249;
+	border-color: #108040;
+	color: #fff;
+	text-shadow: 0 1px 0 #108040;
+}
+.ui-btn.ui-btn-e:active {
+	background: #3EB249;
+	border-color: #108040;
+	color: #fff;
+	text-shadow: 0 1px 0 #108040;
+}
+.ui-btn.ui-btn-e.ui-btn-active {
+	background: #3EB249;
+	border-color: #108040;
+	color: #fff;
+	text-shadow: 0 1px 0 #108040;
+}
+/* Button F - CSS */
+.ui-btn.ui-btn-f,
+.ui-btn.ui-btn-f:visited {
+	background: #ec008c;
+	border-color: #cc0099;
+	color: #fff;
+	text-shadow: 0 1px 0 #cc0099;
+}
+.ui-btn.ui-btn-f:hover {
+	background: #ec008c;
+	border-color: #cc0099;
+	color: #fff;
+	text-shadow: 0 1px 0 #cc0099;
+}
+.ui-btn.ui-btn-f:active {
+	background: #ec008c;
+	border-color: #cc0099;
+	color: #fff;
+	text-shadow: 0 1px 0 #cc0099;
+}
+.ui-btn.ui-btn-f.ui-btn-active {
+	background: #ec008c;
+	border-color: #cc0099;
+	color: #fff;
+	text-shadow: 0 1px 0 #cc0099;
 }
 
 /**

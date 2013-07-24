@@ -7,7 +7,7 @@ function attachPopupHandler( popup, sources ) {
 			collapsible, pre;
 
 		$.each( sources, function( idx, options ) {
-			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-collapsed-icon='arrow-l' data-expanded-icon='arrow-d' data-content-theme='a'>" +
+			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-collapsed-icon='carat-l' data-expanded-icon='carat-d' data-content-theme='b'>" +
 					"<h1>" + options.title + "</h1>" +
 					"<pre class='brush: " + options.brush + ";'></pre>" +
 				"</div>" );
@@ -125,7 +125,7 @@ $.fn.viewSourceCode = function() {
 			} else {
 				data = $( "<div></div>" ).append( $( self.attr( "data-demo-html" ) ).clone() ).html();
 			}
-			sources.push( { title: "HTML", theme: "b", brush: "xml", data: fixData( data ) } );
+			sources.push( { title: "HTML", theme: "c", brush: "xml", data: fixData( data ) } );
 		}
 
 		if ( self.is( "[data-demo-php]" ) ) {
@@ -142,12 +142,12 @@ $.fn.viewSourceCode = function() {
 
 		if ( self.is( "[data-demo-js]" ) ) {
 			data = getHeadSnippet( "script", self.attr( "data-demo-js" ) );
-			sources.push( { title: "JS", theme: "f", brush: "js", data: fixData( data ) } );
+			sources.push( { title: "JS", theme: "e", brush: "js", data: fixData( data ) } );
 		}
 
 		if ( self.is( "[data-demo-css]" ) ) {
 			data = getHeadSnippet( "style", self.attr( "data-demo-css" ) );
-			sources.push( { title: "CSS", theme: "e", brush: "css", data: fixData( data ) } );
+			sources.push( { title: "CSS", theme: "f", brush: "css", data: fixData( data ) } );
 		}
 
 		button.insertAfter( this );
