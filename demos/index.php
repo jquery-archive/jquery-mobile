@@ -53,15 +53,6 @@
         	<?php include( 'nav-widgets.php' ); ?>
         </ul>
 		
-		<h2>Tests</h2>
-		
-		<ul data-role="listview" data-inset="true" data-theme="a" data-divider-theme="a" data-icon="false" class="jqm-list">
-			<li data-role="list-divider">Theming</li>
-			<li><a href="test/theming/" data-ajax="false">Theme inheritance</a></li>
-			<li data-role="list-divider">Icons</li>
-			<li><a href="test/icons/index.html" data-ajax="false">Grunticon - SVG icons with fallback</a></li>
-        </ul>
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
