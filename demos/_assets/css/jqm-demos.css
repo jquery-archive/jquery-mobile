@@ -786,104 +786,104 @@ h2.jqm-home-widget {
 }
 
 /* Button C - HTML */
-.ui-btn.ui-btn-c,
-.ui-btn.ui-btn-c:visited {
+.jqm-view-source .ui-btn.ui-btn-c,
+.jqm-view-source .ui-btn.ui-btn-c:visited {
 	background: #005aff;
 	border-color: #0033cc;
 	color: #fff;
 	text-shadow: 0 1px 0 #0033cc;
 }
-.ui-btn.ui-btn-c:hover {
+.jqm-view-source .ui-btn.ui-btn-c:hover {
 	background: #005aff;
 	border-color: #0033cc;
 	color: #fff;
 	text-shadow: 0 1px 0 #0033cc;
 }
-.ui-btn.ui-btn-c:active {
+.jqm-view-source .ui-btn.ui-btn-c:active {
 	background: #005aff;
 	border-color: #0033cc;
 	color: #fff;
 	text-shadow: 0 1px 0 #0033cc;
 }
-.ui-btn.ui-btn-c.ui-btn-active {
+.jqm-view-source .ui-btn.ui-btn-c.ui-btn-active {
 	background: #005aff;
 	border-color: #0033cc;
 	color: #fff;
 	text-shadow: 0 1px 0 #0033cc;
 }
 /* Button D - PHP */
-.ui-btn.ui-btn-d,
-.ui-btn.ui-btn-d:visited {
+.jqm-view-source .ui-btn.ui-btn-d,
+.jqm-view-source .ui-btn.ui-btn-d:visited {
 	background: #ed1c24;
 	border-color: #ff0000;
 	color: #fff;
 	text-shadow: 0 1px 0 #ff0000;
 }
-.ui-btn.ui-btn-d:hover {
+.jqm-view-source .ui-btn.ui-btn-d:hover {
 	background: #ed1c24;
 	border-color: #ff0000;
 	color: #fff;
 	text-shadow: 0 1px 0 #ff0000;
 }
-.ui-btn.ui-btn-d:active {
+.jqm-view-source .ui-btn.ui-btn-d:active {
 	background: #ed1c24;
 	border-color: #ff0000;
 	color: #fff;
 	text-shadow: 0 1px 0 #ff0000;
 }
-.ui-btn.ui-btn-d.ui-btn-active {
+.jqm-view-source .ui-btn.ui-btn-d.ui-btn-active {
 	background: #ed1c24;
 	border-color: #ff0000;
 	color: #fff;
 	text-shadow: 0 1px 0 #ff0000;
 }
 /* Button E - JS */
-.ui-btn.ui-btn-e,
-.ui-btn.ui-btn-e:visited {
+.jqm-view-source .ui-btn.ui-btn-e,
+.jqm-view-source .ui-btn.ui-btn-e:visited {
 	background: #3EB249;
 	border-color: #108040;
 	color: #fff;
 	text-shadow: 0 1px 0 #108040;
 }
-.ui-btn.ui-btn-e:hover {
+.jqm-view-source .ui-btn.ui-btn-e:hover {
 	background: #3EB249;
 	border-color: #108040;
 	color: #fff;
 	text-shadow: 0 1px 0 #108040;
 }
-.ui-btn.ui-btn-e:active {
+.jqm-view-source .ui-btn.ui-btn-e:active {
 	background: #3EB249;
 	border-color: #108040;
 	color: #fff;
 	text-shadow: 0 1px 0 #108040;
 }
-.ui-btn.ui-btn-e.ui-btn-active {
+.jqm-view-source .ui-btn.ui-btn-e.ui-btn-active {
 	background: #3EB249;
 	border-color: #108040;
 	color: #fff;
 	text-shadow: 0 1px 0 #108040;
 }
 /* Button F - CSS */
-.ui-btn.ui-btn-f,
-.ui-btn.ui-btn-f:visited {
+.jqm-view-source .ui-btn.ui-btn-f,
+.jqm-view-source .ui-btn.ui-btn-f:visited {
 	background: #ec008c;
 	border-color: #cc0099;
 	color: #fff;
 	text-shadow: 0 1px 0 #cc0099;
 }
-.ui-btn.ui-btn-f:hover {
+.jqm-view-source .ui-btn.ui-btn-f:hover {
 	background: #ec008c;
 	border-color: #cc0099;
 	color: #fff;
 	text-shadow: 0 1px 0 #cc0099;
 }
-.ui-btn.ui-btn-f:active {
+.jqm-view-source .ui-btn.ui-btn-f:active {
 	background: #ec008c;
 	border-color: #cc0099;
 	color: #fff;
 	text-shadow: 0 1px 0 #cc0099;
 }
-.ui-btn.ui-btn-f.ui-btn-active {
+.jqm-view-source .ui-btn.ui-btn-f.ui-btn-active {
 	background: #ec008c;
 	border-color: #cc0099;
 	color: #fff;
