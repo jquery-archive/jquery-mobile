@@ -12,6 +12,13 @@ $.testHelper.delayStart();
 		}
 	});
 
+	test( "Pre-rendered controlgroup option-setting works", function() {
+		var grp = $( "#pre-rendered" );
+		grp.controlgroup( "option", "type", "horizontal" );
+		deepEqual( grp.hasClass( "ui-controlgroup-horizontal" ), true, "After setting type to horizontal, the class ui-controlgroup-horizontal has been added." );
+		deepEqual( grp.hasClass( "ui-controlgroup-vertical" ), false, "After setting type to horizontal, the class ui-controlgroup-vertical has been removed." );
+	});
+
 	test( "vertical controlgroup classes", function() {
 		var buttons = this.vcontrolgroup.find( ".ui-btn" ),
 			middlebuttons = buttons.filter(function(index) {
@@ -163,5 +170,15 @@ $.testHelper.delayStart();
 
 		ok( btn1.hasClass( "ui-first-child" ), "The prepended button has class ui-first-child" );
 		ok( btn2.hasClass( "ui-last-child" ), "The appended button has class ui-last-child" );
+	});
+
+	test( "Controlgroup destruction", function() {
+		var grp = $( "#destroy-test" ),
+			orig = grp.clone();
+
+		// We need to manually unenhance the buttons inside for the sake of the
+		// comparison - the point is that the wrappers should be gone.
+		grp.controlgroup().controlgroup( "destroy" ).find( "a" ).removeAttr( "class" );
+		deepEqual( $.testHelper.domEqual( grp, orig ), true, "The post-enhance-unenhance DOM is identical to the pre-enhance DOM." );
 	});
 })(jQuery);
