@@ -5,72 +5,97 @@
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./collapsible", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../jquery.mobile.widget",
+	"./collapsible",
+	"./addFirstLastClasses",
+	"../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
+
 $.widget( "mobile.collapsibleset", $.extend( {
+	options: $.extend( {
+		enhanced: false,
+	}, $.mobile.collapsible.defaults ),
+
+	_handleCollapsibleExpand: function( event ) {
+		var closestCollapsible = $( event.target ).closest( ".ui-collapsible" );
+
+		if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
+			closestCollapsible
+				.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
+				.collapsible( "collapse" );
+		}
+	},
+
 	_create: function() {
-		var $el = this.element,
-			o = this.options,
-			classes = "ui-collapsible-set";
+		var elem = this.element,
+			opts = this.options;
 
-		if ( !o.theme ) {
-			o.theme = $el.jqmData( "theme" );
-		}
-		if ( o.theme ) {
-			classes += " ui-group-theme-" + o.theme;
-		}
+		$.extend( this, {
+			_classes: ""
+		});
 
-		if ( !o.contentTheme ) {
-			o.contentTheme = $el.jqmData( "content-theme" );
+		if ( !opts.enhanced ) {
+			elem.addClass( "ui-collapsible-set " +
+				this._themeClassFromOption( "ui-group-theme-", opts.theme ) + " " +
+				( opts.corners && opts.inset ? "ui-corner-all " : "" ) );
 		}
 
-		if ( !o.corners ) {
-			o.corners = $el.jqmData( "corners" );
-		}
+		this._on( elem, { collapsibleexpand: "_handleCollapsibleExpand" } );
+	},
 
-		if ( $el.jqmData( "inset" ) !== undefined ) {
-			o.inset = $el.jqmData( "inset" );
-		}
-		o.inset = o.inset !== undefined ? o.inset : true;
-		o.corners = o.corners !== undefined ? o.corners : true;
-
-		if ( !!o.corners && !!o.inset ) {
-			classes += " ui-corner-all";
-		}
-
-		$el.addClass( classes );
-
-		// Initialize the collapsible set if it's not already initialized
-		if ( !$el.jqmData( "collapsiblebound" ) ) {
-			$el
-				.jqmData( "collapsiblebound", true )
-				.bind( "expand", function( event ) {
-					var closestCollapsible = $( event.target )
-						.closest( ".ui-collapsible" );
-					if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
-						closestCollapsible
-							.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
-							.trigger( "collapse" );
-					}
-				});
-		}
+	_themeClassFromOption: function( prefix, value ) {
+		return ( value ? ( value === "none" ? "" : prefix + value ) : "" );
 	},
 
 	_init: function() {
-		var $el = this.element,
-			collapsiblesInSet = $el.children( ":mobile-collapsible, :jqmData(role='collapsible')" ),
-			expanded = collapsiblesInSet.filter( ":jqmData(collapsed='false')" );
-		this._refresh( "true" );
+		this._refresh( true );
 
 		// Because the corners are handled by the collapsible itself and the default state is collapsed
 		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
-		expanded.trigger( "expand" );
+		this.element
+			.children( childCollapsiblesSelector )
+			.filter( ":jqmData(collapsed='false')" )
+			.collapsible( "expand" );
+	},
+
+	_setOptions: function( options ) {
+		var ret,
+			elem = this.element,
+			themeClass = this._themeClassFromOption( "ui-group-theme-", options.theme );
+
+		if ( themeClass ) {
+			elem
+				.removeClass( this._themeClassFromOption( "ui-group-theme-", this.options.theme ) )
+				.addClass( themeClass );
+		}
+
+		if ( options.corners !== undefined ) {
+			elem.toggleClass( "ui-corner-all", options.corners );
+		}
+
+		ret = this._super( options );
+		this.element.children( ":mobile-collapsible" ).collapsible( "refresh" );
+		return ret;
+	},
+
+	_destroy: function() {
+		var el = this.element;
+
+		this._removeFirstLastClasses( el.children( childCollapsiblesSelector ) );
+		el
+			.removeClass( "ui-collapsible-set ui-corner-all " +
+				this._themeClassFromOption( "ui-group-theme", this.options.theme ) )
+			.children( ":mobile-collapsible" )
+			.collapsible( "destroy" );
 	},
 
 	_refresh: function( create ) {
-		var collapsiblesInSet = this.element.children( ":mobile-collapsible, :jqmData(role='collapsible')" );
+		var collapsiblesInSet = this.element.children( childCollapsiblesSelector );
 
 		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
