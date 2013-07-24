@@ -80,7 +80,9 @@ define( [ "jquery",
 			// Just to be precautios, disable scrollstart listening like silentScroll would
 			$.event.special.scrollstart.enabled = false;
 
-			window.scrollTo( 0, this.toScroll );
+			if( $.mobile.hideUrlBar ) {
+				window.scrollTo( 0, this.toScroll );
+			}
 
 			// reenable scrollstart listening like silentScroll would
 			setTimeout( function() {
