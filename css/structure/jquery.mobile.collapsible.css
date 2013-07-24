@@ -28,7 +28,7 @@
 	border-right-width: 1px;
 	border-left-width: 1px;
 }
-.ui-collapsible-collapsed + .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn {
+.ui-collapsible-collapsed + .ui-collapsible:not(.ui-collapsible-inset) > .ui-collapsible-heading .ui-btn {
 	border-top-width: 0;
 }
 .ui-collapsible-set .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn {
