@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Accordions <a href="http://api.jquerymobile.com/collapsible-set/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Accordions <a href="http://api.jquerymobile.com/collapsible-set/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">An accordion is created in jQuery Mobile by grouping a series of individual collapsibles into set.
 			</p>

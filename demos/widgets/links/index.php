@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-        <h1>Links <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+        <h1>Links <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
         <p class="jqm-intro">jQuery Mobile is designed to work with standard page link conventions and layers the AJAX navigation on top for maximum compatibility.
         </p>

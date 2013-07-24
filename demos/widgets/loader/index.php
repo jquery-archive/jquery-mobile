@@ -44,7 +44,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Loader <a href="http://api.jquerymobile.com/page-loading/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Loader <a href="http://api.jquerymobile.com/page-loading/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">A small loading overlay displayed when jQuery Mobile loads in content via AJAX, or for use in custom notifications.
 			</p>

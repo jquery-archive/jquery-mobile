@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Table: Reflow <a href="http://api.jquerymobile.com/table-reflow/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Table: Reflow <a href="http://api.jquerymobile.com/table-reflow/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">The reflow table mode works by collapsing the table columns into a stacked presentation that looks like blocks of label/data pairs for each row.
 			</p>

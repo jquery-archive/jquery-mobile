@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Buttons <a href="http://api.jquerymobile.com/button/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Buttons <a href="http://api.jquerymobile.com/button/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons.
 			</p>

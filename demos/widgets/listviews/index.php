@@ -31,7 +31,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Listviews <a href="http://api.jquerymobile.com/listview/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Listviews <a href="http://api.jquerymobile.com/listview/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
 			</p>

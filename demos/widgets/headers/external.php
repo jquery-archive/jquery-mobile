@@ -29,7 +29,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>External Headers <a href="http://api.jquerymobile.com/header/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>External Headers <a href="http://api.jquerymobile.com/header/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">
 				The Header and footer on this page are positioned outside the page. They are before and after the page withing the body. These Toolbars will remain in the dom until manually removed. If you navigate to a page that does not have a header or footer within it these toolbars will persist. Otherwise they will hide to allow the page's internal header and footer to show. 

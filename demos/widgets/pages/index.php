@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Pages <a href="http://api.jquerymobile.com/page/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Pages <a href="http://api.jquerymobile.com/page/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">
 				The page is the primary unit of interaction in jQuery Mobile and is used to group content into logical views that can be animated in and out of view with page transitions. A HTML document may start with a single "page" and the AJAX navigation system will load additional pages on demand into the DOM as users navigate around. Alternatively, a HTML document can be built with multiple "pages" inside it and the framework will transition between these local views with no need to request content from the server.

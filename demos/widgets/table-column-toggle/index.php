@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Table: Column Toggle <a href="http://api.jquerymobile.com/table-columntoggle/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Table: Column Toggle <a href="http://api.jquerymobile.com/table-columntoggle/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">The column toggle table mode selectively hides columns at narrower widths as a sensible default but also offers a menu to let users manually control which columns they want to see.</p>
 
