@@ -129,7 +129,7 @@
 
 						h2dictionary[id] =  text;
 						if(!first){
-							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-link'>Return to top<span class='ui-icon ui-icon-arrow-u'>&nbsp;</span></a>");
+							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-link'>Return to top<span class='ui-icon ui-icon-carat-u'>&nbsp;</span></a>");
 						} else {
 							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink ui-link jqm-open-quicklink-panel'>Jump to section<span class='ui-icon ui-icon-bars'>&nbsp;</span></a>");
 						}
