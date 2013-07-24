@@ -7,7 +7,7 @@ define( [ "jquery", "./listview" ], function( jQuery ) {
 (function( $, undefined ) {
 
 var rdivider = /(^|\s)ui-li-divider($|\s)/,
-	rhidden = /(^|\s)ui-screen-hidden($|\s)/
+	rhidden = /(^|\s)ui-screen-hidden($|\s)/;
 
 $.widget( "mobile.listview", $.mobile.listview, {
 	options: {
