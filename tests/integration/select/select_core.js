@@ -17,57 +17,6 @@
 		$.mobile.activePage.find("li a").first().click();
 	};
 
-	// Check if two chunks of DOM are identical
-	var domEqual = function( l, r ) {
-		var idx, idxAttr, lattr, rattr;
-
-		// If the lengths of the two jQuery objects are different, the DOM
-		// must be different so don't bother checking
-		if ( l.length === r.length ) {
-			// Otherwise, examine each element
-			for ( idx = 0 ; idx < l.length ; idx++ ) {
-				l = l.eq( idx ); r = r.eq( idx );
-
-				// If the tagName is different the DOM must be different
-				if ( l[ 0 ].tagName !== r[ 0 ].tagName ){
-					return false;
-				}
-
-				// Otherwise, check the attributes
-				if ( l[ 0 ].attributes.length === r[ 0 ].attributes.length ) {
-					// convert attributes array to dictionary, because the order
-					// of the attributes may be different between l and r
-					lattr = {};
-					rattr = {};
-					for ( idxAttr = 0 ; idxAttr < l[ 0 ].attributes.length ; idxAttr++ ) {
-						lattr[ l[ 0 ].attributes[ idxAttr ].name ] = l[ 0 ].attributes[ idxAttr ].value;
-						rattr[ r[ 0 ].attributes[ idxAttr ].name ] = r[ 0 ].attributes[ idxAttr ].value;
-					}
-
-					// Check if each attribute in lattr has the same value in rattr
-					for ( idxAttr in lattr ) {
-						if ( rattr[ idxAttr ] !== lattr[ idxAttr ] ) {
-							return false;
-						}
-					}
-
-					// If so, compare the children of l and r recursively
-					if ( !domEqual( $( l[ 0 ] ).children(), $( r[ 0 ] ).children() ) ) {
-						return false;
-					}
-				} else {
-					return false;
-				}
-				l = l.end(); r = r.end();
-			}
-			if ( idx === l.length ) {
-				return true;
-			}
-		}
-
-		return false;
-	};
-
 	var homeWithSearch = $.mobile.path.parseUrl(location.pathname).pathname + location.search;
 
 	module(libName, {
@@ -440,7 +389,7 @@
 				unenhancedSelectClone.remove();
 
 				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, destroying, and removing the select menu, the page is empty" );
-				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+				ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
 			},
 			function() { $.mobile.back(); },
 
@@ -499,7 +448,7 @@
 				unenhancedSelectClone.remove();
 
 				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the popup-sized select menu, the page is empty" );
-				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+				ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
 
 				// Add a bunch of options to make sure the menu ends up larger than
 				// the screen, thus requiring a dialog
@@ -530,7 +479,7 @@
 				unenhancedSelectClone.remove();
 
 				deepEqual( $( "#destroyTest" ).children().length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, the page is empty" );
-				ok( domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
+				ok( $.testHelper.domEqual( unenhancedSelect, unenhancedSelectClone ), "DOM for select after enhancement/destruction is equal to DOM for unenhanced select" );
 				deepEqual( $( "#" + id + "-dialog" ).length, 0, "After adding, enhancing, opening, destroying, and removing the dialog-sized select menu, no dialog page is left behind" );
 				$.mobile.back();
 			},
