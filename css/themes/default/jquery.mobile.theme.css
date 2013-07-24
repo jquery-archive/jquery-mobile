@@ -368,7 +368,7 @@ html body .ui-group-theme-a .ui-focus,
 html .ui-bar-b .ui-bar-inherit,
 html .ui-body-b .ui-bar-inherit,
 html body .ui-group-theme-b .ui-bar-inherit {
-	background: 			#1e1e1e /*{b-bar-background-color}*/;
+	background: 			#1d1d1d /*{b-bar-background-color}*/;
 	border-color:	 		#1b1b1b /*{b-bar-border}*/;
 	color: 					#fff /*{b-bar-color}*/;
 	text-shadow: 0 /*{b-bar-shadow-x}*/ 1px /*{b-bar-shadow-y}*/ 0 /*{b-bar-shadow-radius}*/ 	#111 /*{b-bar-shadow-color}*/;
@@ -431,13 +431,13 @@ html body .ui-group-theme-b a:visited {
 html .ui-bar-b a:hover,
 html .ui-body-b a:hover,
 html body .ui-group-theme-b a:hover {
-	color: #0099ff /*{b-link-hover}*/;
+	color: #3399ff /*{b-link-hover}*/;
 }
 .ui-page-theme-b a:active,
 html .ui-bar-b a:active,
 html .ui-body-b a:active,
 html body .ui-group-theme-b a:active {
-	color: #0099ff /*{b-link-active}*/;
+	color: #3399ff /*{b-link-active}*/;
 }
 
 /* Button up */
@@ -455,7 +455,7 @@ html body .ui-btn.ui-btn-b:visited,
 html body .ui-group-theme-b .ui-btn:visited,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:visited {
 	background: 			#333 /*{b-bup-background-color}*/;
-	border-color:	 		#1d1d1d /*{b-bup-border}*/;
+	border-color:	 		#1f1f1f /*{b-bup-border}*/;
 	color: 					#fff /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #111 /*{b-bup-shadow-color}*/;
 }
@@ -467,7 +467,7 @@ html body .ui-btn.ui-btn-b:hover,
 html body .ui-group-theme-b .ui-btn:hover,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:hover {
 	background: 			#373737 /*{b-bhover-background-color}*/;
-	border-color:	 		#1d1d1d /*{b-bhover-border}*/;
+	border-color:	 		#1f1f1f /*{b-bhover-border}*/;
 	color: 					#fff /*{b-bhover-color}*/;
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #111 /*{b-bhover-shadow-color}*/;
 }
@@ -479,7 +479,7 @@ html body .ui-btn.ui-btn-b:active,
 html body .ui-group-theme-b .ui-btn:active,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:active {
 	background: 			#404040 /*{b-bdown-background-color}*/;
-	border-color:	 		#1d1d1d /*{b-bdown-border}*/;
+	border-color:	 		#1f1f1f /*{b-bdown-border}*/;
 	color: 					#fff /*{b-bdown-color}*/;
 	text-shadow: 0 /*{b-bdown-shadow-x}*/ 1px /*{b-bdown-shadow-y}*/ 0 /*{b-bdown-shadow-radius}*/ #111 /*{b-bdown-shadow-color}*/;
 }
