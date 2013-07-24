@@ -95,7 +95,7 @@ function makeButton() {
 	a.setAttribute( "href", "#popupDemo" );
 	a.setAttribute( "data-rel", "popup" );
 	a.setAttribute( "data-role", "button" );
-	a.setAttribute( "data-icon", "arrow-u" );
+	a.setAttribute( "data-icon", "carat-u" );
 	a.setAttribute( "data-mini", "true" );
 	a.setAttribute( "data-inline", "true" );
 	a.setAttribute( "data-shadow", "false" );
