@@ -24,7 +24,7 @@
 
     <div data-role="content" class="jqm-content jqm-fullwidth">
 
-				<ul data-role="listview" data-theme="d" data-dividertheme="e" data-filter="true" data-filter-theme="d"data-filter-placeholder="Search friends...">
+				<ul data-role="listview" data-theme="a" data-dividertheme="b" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search friends...">
 					<li data-role="list-divider">A</li>
 					<li><a href="#">Adam Kinkaid</a></li>
 					<li><a href="#">Alex Wickerham</a></li>

@@ -20,12 +20,23 @@ $.extend( $.Widget.prototype, {
 							return "-" + c.toLowerCase();
 						}), true );
 
-			if ( value !== undefined ) {
+			if ( value != null ) {
 				options[ option ] = value;
 			}
 		});
 
 		return options;
+	},
+
+	// FIXME: These have to stay in place until we're running on a version of
+	// the widget factory that does enable()/disable() via _setOptions, as in
+	// https://github.com/jquery/jquery-ui/pull/1024
+	enable: function() {
+		return this._setOptions({ disabled: false });
+	},
+
+	disable: function() {
+		return this._setOptions({ disabled: true });
 	},
 
 	enhanceWithin: function( target, useKeepNative ) {

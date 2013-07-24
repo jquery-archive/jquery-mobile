@@ -42,6 +42,8 @@
 
 <li data-section="Questions & Answers" data-filtertext="ajax nav load page loadPage"><a href="faq/how-do-i-load-a-page.php">How do I load a page?</a></li>
 
+<li data-section="Questions & Answers" data-filtertext="ajax nav load page loadPage hide url bar"><a href="faq/how-do-i-turn-off-url-hiding.php" data-ajax="false">How do I turn off the automatic hiding of the url bar?</a></li>
+
 <li data-role="list-divider">Events</li>
 
 <li data-section="Questions & Answers" data-filtertext="touch mouse events vmouseover, vmousedown, vmousemove, vmouseup, vclick, vmousecancel"><a href="faq/how-do-i-use-touch-mouse-events.php">How do I use touch and mouse events?</a></li>

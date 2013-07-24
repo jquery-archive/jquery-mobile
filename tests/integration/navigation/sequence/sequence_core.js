@@ -1,5 +1,6 @@
 (function($) {
-
+	//disable inlineSVG support test
+	$.support.inlineSVG = $.noop;
 	// The following tests are not independent of each other. Thus, if you find
 	// that one of them fails, and it causes the failure of the rest of the tests,
 	// but that, if you change the order of the tests, it passes, then you should
@@ -33,7 +34,7 @@
 			// by the pushState plugin during which, if the location were to require
 			// an adjustment by the pushState plugin, it will not get such an
 			// adjustment because the pushState plugin ignores such requests.
-			setTimeout( function() { $.testHelper.detailedEventCascade( seq ); }, 500 );
+			setTimeout( function() { $.testHelper.detailedEventCascade( seq ); }, 1000 );
 		}
 	}
 

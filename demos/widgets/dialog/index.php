@@ -29,7 +29,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Dialogs <a href="http://api.jquerymobile.com/dialog/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Dialogs <a href="http://api.jquerymobile.com/dialog/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">Any page can be presented as a modal dialog that appears to be suspended above the page by adding an attribute to the link that leads to the dialog page.
 			</p>

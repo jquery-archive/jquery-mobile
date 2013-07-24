@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
+	<script>
+		$( document ).on( "mobileinit", function(){
+			$.mobile.hideUrlBar = false;
+		});
+	</script>
 	<script src="../../js/"></script>
 </head>
 <body>
@@ -25,15 +30,11 @@
 	<div data-role="content" class="jqm-content">
 			<h2>Question:</h2>
 
-			<h1>How do I load a page?</h1>
+			<h1>How do I prevent jQuery Mobile from hiding the url bar?</h1>
 
 			<h2>Answer:</h2>
 
-			<p class="jqm-intro">To load an external page, enhance its content, and insert it into the DOM, use the <code>loadPage</code> method. There are a lot of methods and properties that you can set when loading pages, but here is a simple example:</p>
-<pre><code>
-//load the "about us" page into the DOM
-$.mobile.loadPage( "about/us.html" );
-</code></pre>
+			<p class="jqm-intro"><code>Set $.mobile.hideUrlBar = false; </code> on mobileinit</p>
 
 			<a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">All Questions &amp; Answers</a>
 

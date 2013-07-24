@@ -24,7 +24,7 @@
 
     <div data-role="content" class="jqm-content">
 
-        <h1>Custom select menu <a href="http://api.jquerymobile.com/select/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+        <h1>Custom select menu <a href="http://api.jquerymobile.com/select/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
         <p class="jqm-intro">The custom select uses a popup with a listview to display the menu. For long lists a dialog will be used.
         </p>

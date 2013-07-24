@@ -30,7 +30,7 @@
 
     <div data-role="content" class="jqm-content">
 
-			<h1>Ajax Optimized Persistant Toolbars <a href="http://api.jquerymobile.com/navbar/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Ajax Optimized Persistant Toolbars <a href="http://api.jquerymobile.com/navbar/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 			<p>These pages have been optimized on the server side to check if the request is coming from an ajax request and if so they only send the actual page div instead fo the entire page. If you navigate to any of the pages in the nav bar at the bottom and inspect the return data you will see it contains no head, toolbars, html tag, or body tag</p>
 			<p>However if you refresh the page all of these things will be present</p>
 			<p>This is done by checking the HTTP_X_REQUESTED_WITH header </p>

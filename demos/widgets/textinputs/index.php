@@ -24,7 +24,7 @@
 
     <div data-role="content" class="jqm-content">
 
-        <h1>Text inputs <a href="http://api.jquerymobile.com/textinput/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+        <h1>Text inputs <a href="http://api.jquerymobile.com/textinput/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
         <p class="jqm-intro">Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.
         </p>
@@ -55,7 +55,7 @@
         <div data-demo-html="true">
         <form>
             <label for="textarea-1">Textarea:</label>
-            <textarea cols="40" rows="8" name="textarea-1" id="textarea-1"></textarea>
+            <textarea name="textarea-1" id="textarea-1"></textarea>
         </form>
         </div><!-- /demo-html -->
 

@@ -27,7 +27,7 @@
 
 	    <div data-role="content" class="jqm-content">
 
-        <h1>Controlgroups <a href="http://api.jquerymobile.com/controlgroup/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+        <h1>Controlgroups <a href="http://api.jquerymobile.com/controlgroup/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
         <p class="jqm-intro">Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.
         </p>
@@ -349,6 +349,22 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
+
+		<h2>Pre-rendered markup</h2>
+		<p>You can supply pre-rendered markup for any controlgroup to save startup time. The example below illustrates the markup you have to provide for a pre-rendered controlgroup. Note that the widgets inside the controlgroup need not necessarily be pre-rendered.</p>
+		<div data-demo-html="true">
+			<div data-role="controlgroup" data-enhanced="true" data-theme="b" data-corners="true" data-shadow="true" class="ui-controlgroup ui-controlgroup-vertical ui-group-theme-b ui-corner-all">
+				<div role="heading" class="ui-controlgroup-label">
+					<legend>Pre-rendered controlgroup</legend>
+				</div>
+				<div class="ui-controlgroup-controls ui-shadow">
+					<label for="pre-rendered-cb-1" class="ui-first-child">Checkbox 1</label>
+					<input type="checkbox" id="pre-rendered-cb-1" name="pre-rendered-cb-1" value="1"></input>
+					<label for="pre-rendered-cb-2" class="ui-last-child">Checkbox 2</label>
+					<input type="checkbox" id="pre-rendered-cb-2" name="pre-rendered-cb-2" value="2"></input>
+				</div>
+			</div>
+		</div>
 
 	</div><!-- /content -->
 

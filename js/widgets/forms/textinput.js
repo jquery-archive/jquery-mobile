@@ -14,42 +14,86 @@ $.widget( "mobile.textinput", {
 		theme: null,
 		corners: true,
 		mini: false,
+		inset: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		clearBtn: false,
-		clearBtnText: "clear text",
-		disabled: false
+		wrapperClass: "",
+		enhanced: false
 	},
 
 	_create: function() {
 
-		var self = this,
-			input = this.element,
-			o = this.options,
-			themeclass  = " ui-body-" + ( o.theme ?  o.theme : "inherit" ),
-			cornerclass = o.corners ? " ui-corner-all" : "",
-			miniclass = o.mini ? " ui-mini" : "",
-			isSearch = input.is( "[type='search'], :jqmData(type='search')" ),
-			isTextarea = input[ 0 ].tagName === "TEXTAREA",
-			focusedEl,
-			classes,
-			clearbtn,
-			clearBtnText = o.clearBtnText,
-			clearBtnBlacklist = input.is( "textarea, :jqmData(type='range')" ),
-			inputNeedsClearBtn = !!o.clearBtn && !clearBtnBlacklist,
-			inputNeedsWrap = input.is( "input" ) && !input.is( ":jqmData(type='range')" ),
-			extraLineHeight = 15,
-			keyupTimeoutBuffer = 100,
-			keyupTimeout;
+		var o = this.options,
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			isTextarea = this.element[ 0 ].tagName === "TEXTAREA",
+			inputNeedsWrap = ((this.element.is( "input" ) || this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) && !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ));
+			
+		$.extend( this, {
+			isSearch: isSearch,
+			isTextarea: isTextarea,
+			inputNeedsWrap: inputNeedsWrap
+		});
 
-		function toggleClear() {
-			setTimeout( function() {
-				clearbtn.toggleClass( "ui-input-clear-hidden", !input.val() );
-			}, 0 );
+		this._autoCorrect();
+
+		if ( this.element[ 0 ].disabled ) {
+			this.options.disabled = true;
 		}
 
-		focusedEl = isTextarea ? input.addClass( "ui-input-text" + themeclass ) : input;
+		if ( !o.enhanced ) {
+			this._enhance();
+		}
 
+		this._on( {
+			"focus": "_handleFocus",
+			"blur": "_handleBlur"
+		});
+
+	},
+
+	refresh: function() {
+		this.setOptions({
+			"disabled" : this.element.is( ":disabled" )
+		});
+	},
+
+	_enhance: function() {
+
+		if ( this.isTextarea ) {
+			this.element.addClass( "ui-input-text" );
+		}
+
+		if ( this.element.is( "textarea, [data-" + ( $.mobile.ns || "" ) + "type='range']" ) ) {
+			this.element.addClass( "ui-shadow-inset" );
+			this._setOptions( this.options );
+		}
+
+		//"search" and "text" input widgets
+		if ( this.inputNeedsWrap ) {
+			this.element.wrap( this._wrap() );
+		}
+
+	},
+
+	widget: function() {
+		return ( this.inputNeedsWrap ) ? this.element.parent() : this.element;
+	},
+
+	_wrap: function() {
+		var opts = this.options;
+
+		return $( "<div class='" +
+			( this.isSearch ? "ui-input-search " : "ui-input-text " ) +
+			"ui-body-" + ( ( opts.theme === null ) ? "inherit" : opts.theme ) + " " +
+			( opts.inset ? "ui-input-inset " : "" ) +
+			( opts.corners ? "ui-corner-all " : "" ) +
+			( opts.mini ? "ui-mini " : "" ) +
+			( opts.disabled ? "ui-state-disabled " : "" ) +
+			( opts.wrapperClass !== "" ? opts.wrapperClass + " " : "" ) +
+			"ui-shadow-inset'></div>" );
+	},
+
+	_autoCorrect: function() {
 		// XXX: Temporary workaround for issue 785 (Apple bug 8910589).
 		//      Turn off autocorrect and autocomplete on non-iOS 5 devices
 		//      since the popup they use can't be dismissed by the user. Note
@@ -57,129 +101,70 @@ $.widget( "mobile.textinput", {
 		//      the autocorrect property on the input element. We currently
 		//      have no test for iOS 5 or newer so we're temporarily using
 		//      the touchOverflow support flag for jQM 1.0. Yes, I feel dirty. - jblas
-		if ( typeof input[0].autocorrect !== "undefined" && !$.support.touchOverflow ) {
+		if ( typeof this.element[0].autocorrect !== "undefined" && !$.support.touchOverflow ) {
 			// Set the attribute instead of the property just in case there
 			// is code that attempts to make modifications via HTML.
-			input[0].setAttribute( "autocorrect", "off" );
-			input[0].setAttribute( "autocomplete", "off" );
-		}
-
-		//"search" and "text" input widgets
-		if ( isSearch || inputNeedsWrap ) {
-			classes = isSearch ? "ui-input-search" : "ui-input-text";
-
-			focusedEl = input.wrap( "<div class='" + classes + themeclass + miniclass + cornerclass + " ui-shadow-inset'></div>" ).parent();
-		}
-
-
-		if( inputNeedsClearBtn || isSearch ) {
-			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + clearBtnText + "'>" + clearBtnText + "</a>" )
-				.bind( "click", function( event ) {
-					input
-						.val( "" )
-						.focus()
-						.trigger( "change" );
-					clearbtn.addClass( "ui-input-clear-hidden" );
-					event.preventDefault();
-				})
-				.appendTo( focusedEl )
-				.addClass(
-					"ui-btn ui-icon-delete ui-btn-icon-notext" +
-					" ui-corner-all ui-shadow " +
-					( o.theme ? "ui-btn-" + o.theme : "" ) +
-					( o.mini ? "ui-mini" : "" ) );
-
-			if ( !isSearch ) {
-				focusedEl.addClass( "ui-input-has-clear" );
-			}
-
-			toggleClear();
-
-			input.bind( "paste cut keyup input focus change blur", toggleClear );
-		} else if ( !inputNeedsWrap && !isSearch ) {
-			input.addClass( "ui-shadow-inset" + themeclass + miniclass + cornerclass );
-		}
-
-		input.focus(function() {
-				// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
-				if ( o.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
-				}
-				focusedEl.addClass( $.mobile.focusClass );
-			})
-			.blur(function() {
-				focusedEl.removeClass( $.mobile.focusClass );
-				if ( o.preventFocusZoom ) {
-					$.mobile.zoom.enable( true );
-				}
-			});
-
-		// Autogrow
-		if ( isTextarea ) {
-			this._keyup = function() {
-				var scrollHeight = input[ 0 ].scrollHeight,
-					clientHeight = input[ 0 ].clientHeight,
-					paddingTop, paddingBottom, paddingHeight;
-
-
-				if ( clientHeight < scrollHeight ) {
-					paddingTop = parseFloat( input.css( "padding-top" ) );
-					paddingBottom = parseFloat( input.css( "padding-bottom" ) );
-					paddingHeight = paddingTop + paddingBottom;
-
-					input.height( scrollHeight - paddingHeight + extraLineHeight );
-				}
-			};
-
-			input.on( "keyup change input paste", function() {
-				clearTimeout( keyupTimeout );
-				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
-			});
-
-			// binding to pagechange here ensures that for pages loaded via
-			// ajax the height is recalculated without user input
-			this._on( true, $.mobile.document, { "pagechange": "_keyup" });
-
-			// Issue 509: the browser is not providing scrollHeight properly until the styles load
-			if ( $.trim( input.val() ) ) {
-				// bind to the window load to make sure the height is calculated based on BOTH
-				// the DOM and CSS
-				this._on( true, $.mobile.window, {"load": "_keyup"});
-			}
-		}
-		if ( input.attr( "disabled" ) ) {
-			this.disable();
+			this.element[0].setAttribute( "autocorrect", "off" );
+			this.element[0].setAttribute( "autocomplete", "off" );
 		}
 	},
 
-	disable: function() {
-		var $el,
-			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
-			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
-			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
-
-		if ( parentNeedsDisabled ) {
-			$el = this.element.parent();
-		} else {
-			$el = this.element;
+	_handleBlur: function() {
+		this.element.removeClass( $.mobile.focusClass );
+		if ( this.options.preventFocusZoom ) {
+			$.mobile.zoom.enable( true );
 		}
-		$el.addClass( "ui-disabled" );
-		return this._setOption( "disabled", true );
 	},
 
-	enable: function() {
-		var $el,
-			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
-			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
-			parentNeedsEnabled = this.element.attr( "disabled", false )	&& ( inputNeedsWrap || isSearch );
-
-		if ( parentNeedsEnabled ) {
-			$el = this.element.parent();
-		} else {
-			$el = this.element;
+	_handleFocus: function() {
+		// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
+		if ( this.options.preventFocusZoom ) {
+			$.mobile.zoom.disable( true );
 		}
-		$el.removeClass( "ui-disabled" );
-		return this._setOption( "disabled", false );
+		this.element.addClass( $.mobile.focusClass );
+	},
+
+	_setOptions: function ( options ) {
+		var themeclass,
+			outer = this.widget();
+
+		this._super( options );
+
+		if ( options.theme !== undefined ) {
+			themeclass = "ui-body-" + (( options.theme === null ) ? "inherit" : options.theme );
+			outer.removeClass( this.themeclass ).addClass( themeclass );
+			this.themeclass = themeclass;
+		}
+
+		if ( options.inset !== undefined && !this.isTextarea ) {
+			this.options.inset = options.inset;
+			outer
+				.toggleClass( "ui-input-inset", options.inset )
+				.toggleClass( "ui-corner-all", options.inset && this.options.corners );
+		}
+
+		if ( options.corners !== undefined ) {
+			outer.toggleClass( "ui-corner-all", options.corners && this.options.inset );
+		}
+
+		if ( options.mini !== undefined ) {
+			outer.removeClass( "ui-mini" ).addClass( options.mini ? "ui-mini" : "" );
+		}
+
+		if ( options.disabled !== undefined ) {
+			this.element.prop( "disabled", !!options.disabled );
+			outer.toggleClass( "ui-disabled", !!options.disabled );
+		}
+	},
+
+	_destroy: function() {
+		if ( this.options.enhanced ) {
+			return;
+		}
+		if ( this.inputNeedsWrap ) {
+			this.element.unwrap();
+		}
+		this.element.removeClass( "ui-input-text " + this.themeclass + " ui-corner-all ui-mini ui-disabled" );
 	}
 });
 

@@ -70,7 +70,7 @@
 			<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
 				<h3>Cities worldwide</h3>
             	<p>After you enter <strong>at least three characters</strong> the autocomplete function will show all possible matches.</p>
-				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a city..." data-filter-theme="d"></ul>
+				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a city..." data-filter-theme="a"></ul>
 			</div><!--/demo-html -->
 
             <a href="index.php" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">Back to autocomplete</a>

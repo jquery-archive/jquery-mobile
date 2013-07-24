@@ -30,7 +30,7 @@
 
     <div data-role="content" class="jqm-content jqm-fullwidth">
 
-			<ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="false">
+			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="false">
 				<li><a href="#">
 					<img src="../../_assets/img/album-bb.jpg" />
 					<h2>Broken Bells</h2>
@@ -100,7 +100,7 @@
 				</a></li>
 			</ul>
 
-			<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+			<div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
 				<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
 				<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>

@@ -12,9 +12,16 @@
 .ui-mobile fieldset {
 	border-width: 0;
 }
+/* Fixes for fieldset issues on IE10 and FF (see #6077) */
 .ui-mobile fieldset {
 	min-width: 0;
 }
+@-moz-document url-prefix() {
+	.ui-mobile fieldset {
+		display: table-column;
+	}
+}
+
 /* Viewport */
 .ui-mobile-viewport {
 	margin: 0;
@@ -68,12 +75,9 @@ div.ui-mobile-viewport {
 /* Non-js content hiding */
 .ui-nojs {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }
 
@@ -374,11 +378,8 @@ div.ui-mobile-viewport {
 .ui-hide-label .ui-rangeslider label,
 .ui-hidden-accessible {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }

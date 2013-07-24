@@ -209,7 +209,7 @@
 				// continue in the sequence to alert possible failures
 				var warnTimer = setTimeout(function() {
 					self.eventCascade( sequence, true );
-				}, 2000);
+				}, 10000);
 
 				// bind the recursive call to the event
 				( self.eventTarget || $.mobile.pageContainer ).one(event, function( event, data ) {
@@ -432,6 +432,74 @@
 			});
 
 			location.hash = location.hash.replace("#", "") === hash ? "" : "#" + hash;
+		},
+
+		// Check if two chunks of DOM are identical
+		domEqual: function( l, r ) {
+			var idx, idxAttr, lattr, rattr,
+				// Decide whether an attribute should be added to those that will be compared
+				addAttr = function( el, idx ) {
+					// Special case for empty class attribute
+					if ( el.attributes[ idx ].name === "class" && !el.attributes[ idx ].value ) {
+						return false;
+					}
+					return true;
+				},
+				attrsHash = function( el ) {
+					var idx, attrs = { length: 0, attrs: {} };
+
+					for ( idx = 0 ; idx < el.attributes.length ; idx++ ) {
+						if ( addAttr( el, idx ) ) {
+							attrs.length++;
+							attrs.attrs[ el.attributes[ idx ].name ] = el.attributes[ idx ].value;
+						}
+					}
+
+					return attrs;
+				};
+
+			// If the lengths of the two jQuery objects are different, the DOM
+			// must be different so don't bother checking
+			if ( l.length === r.length ) {
+				// Otherwise, examine each element
+				for ( idx = 0 ; idx < l.length ; idx++ ) {
+					l = l.eq( idx ); r = r.eq( idx );
+
+					// If the tagName is different the DOM must be different
+					if ( l[ 0 ].tagName !== r[ 0 ].tagName ){
+						return false;
+					}
+
+					// Otherwise, check the attributes, but first convert the attributes
+					// array to a dictionary, because the order of the attributes may be
+					// different between l and r
+					lattr = attrsHash( l[ 0 ] );
+					rattr = attrsHash( r[ 0 ] );
+
+					// If l and r have a different number of attributes, don't continue
+					if ( lattr.length !== rattr.length ) {
+						return false;
+					}
+
+					// Check if each attribute in lattr has the same value in rattr
+					for ( idxAttr in lattr.attrs ) {
+						if ( rattr.attrs[ idxAttr ] !== lattr.attrs[ idxAttr ] ) {
+							return false;
+						}
+					}
+
+					// If so, compare the children of l and r recursively
+					if ( !this.domEqual( $( l[ 0 ] ).children(), $( r[ 0 ] ).children() ) ) {
+						return false;
+					}
+					l = l.end(); r = r.end();
+				}
+				if ( idx === l.length ) {
+					return true;
+				}
+			}
+
+			return false;
 		},
 
 		delayStart: function( milliseconds ) {

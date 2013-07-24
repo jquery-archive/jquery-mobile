@@ -199,8 +199,8 @@ $( document ).on( "mobileinit", function() {
 			theme: null,
 			countTheme: null,
 			dividerTheme: null,
-			icon: "arrow-r",
-			splitIcon: "arrow-r",
+			icon: "carat-r",
+			splitIcon: "carat-r",
 			splitTheme: null,
 			corners: true,
 			shadow: true,
@@ -238,7 +238,7 @@ $( document ).on( "mobileinit", function() {
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
 			
-			form.append( "<button type='submit' data-icon='arrow-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
+			form.append( "<button type='submit' data-icon='carat-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
 				.parent()
 				.trigger( "create" );
 			

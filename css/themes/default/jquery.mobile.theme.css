@@ -51,6 +51,9 @@ label.ui-btn {
 .ui-btn:link {
 	text-decoration: none !important;
 }
+.ui-btn-active {
+	cursor: pointer;
+}
 
 /* Corner rounding
 -----------------------------------------------------------------------------------------------------------*/
@@ -88,9 +91,9 @@ label.ui-btn {
 -----------------------------------------------------------------------------------------------------------*/
 
 .ui-shadow {
-	-webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
-	-moz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
-	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.2) /*{global-box-shadow-color}*/
+	-webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.15) /*{global-box-shadow-color}*/;
+	-moz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.15) /*{global-box-shadow-color}*/;
+	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.15) /*{global-box-shadow-color}*/
 }
 .ui-shadow-inset {
 	-webkit-box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ 	rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
@@ -106,34 +109,45 @@ label.ui-btn {
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-action:after, .ui-icon-arrow-d-l:after, .ui-icon-arrow-d-r:after, .ui-icon-arrow-d:after, .ui-icon-arrow-l:after, .ui-icon-arrow-r:after, .ui-icon-arrow-u-l:after, .ui-icon-arrow-u-r:after, .ui-icon-arrow-u:after, .ui-icon-audio:after, .ui-icon-calendar:after, .ui-icon-camera:after, .ui-icon-carat-d:after, .ui-icon-carat-l:after, .ui-icon-carat-r:after, .ui-icon-carat-u:after, .ui-icon-check:after, .ui-icon-checkbox-on:after, .ui-icon-checkbox-off:after, .ui-icon-radio-on:after, .ui-icon-radio-off:after, .ui-icon-clock:after, .ui-icon-cloud:after, .ui-icon-grid:after, .ui-icon-mail:after, .ui-icon-eye:after, .ui-icon-gear:after, .ui-icon-heart:after, .ui-icon-home:after, .ui-icon-info:after, .ui-icon-bullets:after, .ui-icon-bars:after, .ui-icon-navigation:after, .ui-icon-lock:after, .ui-icon-search:after, .ui-input-search:after, .ui-icon-location:after, .ui-icon-minus:after, .ui-icon-forbidden:after, .ui-icon-edit:after, .ui-icon-user:after, .ui-icon-phone:after, .ui-icon-plus:after, .ui-icon-power:after, .ui-icon-recycle:after, .ui-icon-forward:after, .ui-icon-refresh:after, .ui-icon-shop:after, .ui-icon-comment:after, .ui-icon-star:after, .ui-icon-tag:after, .ui-icon-back:after, .ui-icon-video:after, .ui-icon-alert:after, .ui-icon-delete:after {
+.ui-btn:after,
+html .ui-btn.ui-icon-checkbox-off:after,
+html .ui-btn.ui-icon-radio-off:after {
 	background-color: 					#999 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.3) /*{global-icon-disc}*/;
 	background-position: center center;
 	background-repeat: no-repeat;
 	-webkit-border-radius: 1em;
 	border-radius: 1em;
+	display: none;
 }
 
 /* Alt icons */
 .ui-icon-alt.ui-btn:after,
-.ui-icon-alt .ui-icon-action:after, .ui-icon-alt .ui-icon-arrow-d-l:after, .ui-icon-alt .ui-icon-arrow-d-r:after, .ui-icon-alt .ui-icon-arrow-d:after, .ui-icon-alt .ui-icon-arrow-l:after, .ui-icon-alt .ui-icon-arrow-r:after, .ui-icon-alt .ui-icon-arrow-u-l:after, .ui-icon-alt .ui-icon-arrow-u-r:after, .ui-icon-alt .ui-icon-arrow-u:after, .ui-icon-alt .ui-icon-audio:after, .ui-icon-alt .ui-icon-calendar:after, .ui-icon-alt .ui-icon-camera:after, .ui-icon-alt .ui-icon-carat-d:after, .ui-icon-alt .ui-icon-carat-l:after, .ui-icon-alt .ui-icon-carat-r:after, .ui-icon-alt .ui-icon-carat-u:after, .ui-icon-alt .ui-icon-check:after, .ui-icon-alt .ui-icon-checkbox-off:after, .ui-icon-alt .ui-icon-radio-off:after, .ui-icon-alt .ui-icon-clock:after, .ui-icon-alt .ui-icon-cloud:after, .ui-icon-alt .ui-icon-grid:after, .ui-icon-alt .ui-icon-mail:after, .ui-icon-alt .ui-icon-eye:after, .ui-icon-alt .ui-icon-gear:after, .ui-icon-alt .ui-icon-heart:after, .ui-icon-alt .ui-icon-home:after, .ui-icon-alt .ui-icon-info:after, .ui-icon-alt .ui-icon-bullets:after, .ui-icon-alt .ui-icon-bars:after, .ui-icon-alt .ui-icon-navigation:after, .ui-icon-alt .ui-icon-lock:after, .ui-icon-alt .ui-icon-search:after, .ui-icon-alt .ui-icon-location:after, .ui-icon-alt .ui-icon-minus:after, .ui-icon-alt .ui-icon-forbidden:after, .ui-icon-alt .ui-icon-edit:after, .ui-icon-alt .ui-icon-user:after, .ui-icon-alt .ui-icon-phone:after, .ui-icon-alt .ui-icon-plus:after, .ui-icon-alt .ui-icon-power:after, .ui-icon-alt .ui-icon-recycle:after, .ui-icon-alt .ui-icon-forward:after, .ui-icon-alt .ui-icon-refresh:after, .ui-icon-alt .ui-icon-shop:after, .ui-icon-alt .ui-icon-comment:after, .ui-icon-alt .ui-icon-star:after, .ui-icon-alt .ui-icon-tag:after, .ui-icon-alt .ui-icon-back:after, .ui-icon-alt .ui-icon-video:after, .ui-icon-alt .ui-icon-alert:after, .ui-icon-alt .ui-icon-delete:after {
+.ui-icon-alt .ui-btn:after,
+html .ui-icon-alt.ui-icon-checkbox-off:after,
+html .ui-icon-alt.ui-icon-radio-off:after,
+html .ui-icon-alt .ui-icon-checkbox-off:after,
+html .ui-icon-alt .ui-icon-radio-off:after {
 	background-color: 					#999 /*{global-icon-color}*/;
 	background-color: 					rgba(255,255,255,.3) /*{global-icon-disc-alt}*/;
 }
 
 /* No disc */
 .ui-icon-nodisc.ui-btn:after,
-.ui-icon-nodisc .ui-icon-action:after, .ui-icon-nodisc .ui-icon-arrow-d-l:after, .ui-icon-nodisc .ui-icon-arrow-d-r:after, .ui-icon-nodisc .ui-icon-arrow-d:after, .ui-icon-nodisc .ui-icon-arrow-l:after, .ui-icon-nodisc .ui-icon-arrow-r:after, .ui-icon-nodisc .ui-icon-arrow-u-l:after, .ui-icon-nodisc .ui-icon-arrow-u-r:after, .ui-icon-nodisc .ui-icon-arrow-u:after, .ui-icon-nodisc .ui-icon-audio:after, .ui-icon-nodisc .ui-icon-calendar:after, .ui-icon-nodisc .ui-icon-camera:after, .ui-icon-nodisc .ui-icon-carat-d:after, .ui-icon-nodisc .ui-icon-carat-l:after, .ui-icon-nodisc .ui-icon-carat-r:after, .ui-icon-nodisc .ui-icon-carat-u:after, .ui-icon-nodisc .ui-icon-check:after, .ui-icon-nodisc .ui-icon-clock:after, .ui-icon-nodisc .ui-icon-cloud:after, .ui-icon-nodisc .ui-icon-grid:after, .ui-icon-nodisc .ui-icon-mail:after, .ui-icon-nodisc .ui-icon-eye:after, .ui-icon-nodisc .ui-icon-gear:after, .ui-icon-nodisc .ui-icon-heart:after, .ui-icon-nodisc .ui-icon-home:after, .ui-icon-nodisc .ui-icon-info:after, .ui-icon-nodisc .ui-icon-bullets:after, .ui-icon-nodisc .ui-icon-bars:after, .ui-icon-nodisc .ui-icon-navigation:after, .ui-icon-nodisc .ui-icon-lock:after, .ui-icon-nodisc .ui-icon-search:after, .ui-icon-nodisc .ui-icon-location:after, .ui-icon-nodisc .ui-icon-minus:after, .ui-icon-nodisc .ui-icon-forbidden:after, .ui-icon-nodisc .ui-icon-edit:after, .ui-icon-nodisc .ui-icon-user:after, .ui-icon-nodisc .ui-icon-phone:after, .ui-icon-nodisc .ui-icon-plus:after, .ui-icon-nodisc .ui-icon-power:after, .ui-icon-nodisc .ui-icon-recycle:after, .ui-icon-nodisc .ui-icon-forward:after, .ui-icon-nodisc .ui-icon-refresh:after, .ui-icon-nodisc .ui-icon-shop:after, .ui-icon-nodisc .ui-icon-comment:after, .ui-icon-nodisc .ui-icon-star:after, .ui-icon-nodisc .ui-icon-tag:after, .ui-icon-nodisc .ui-icon-back:after, .ui-icon-nodisc .ui-icon-video:after, .ui-icon-nodisc .ui-icon-alert:after, .ui-icon-nodisc .ui-icon-delete:after {
+.ui-icon-nodisc .ui-btn:after {
 	background-color: transparent;
 }
 
 /* Icon shadow */
 .ui-shadow-icon.ui-btn:after,
-.ui-shadow-icon .ui-icon-action:after, .ui-shadow-icon .ui-icon-arrow-d-l:after, .ui-shadow-icon .ui-icon-arrow-d-r:after, .ui-shadow-icon .ui-icon-arrow-d:after, .ui-shadow-icon .ui-icon-arrow-l:after, .ui-shadow-icon .ui-icon-arrow-r:after, .ui-shadow-icon .ui-icon-arrow-u-l:after, .ui-shadow-icon .ui-icon-arrow-u-r:after, .ui-shadow-icon .ui-icon-arrow-u:after, .ui-shadow-icon .ui-icon-audio:after, .ui-shadow-icon .ui-icon-calendar:after, .ui-shadow-icon .ui-icon-camera:after, .ui-shadow-icon .ui-icon-carat-d:after, .ui-shadow-icon .ui-icon-carat-l:after, .ui-shadow-icon .ui-icon-carat-r:after, .ui-shadow-icon .ui-icon-carat-u:after, .ui-shadow-icon .ui-icon-check:after, .ui-shadow-icon .ui-icon-checkbox-off:after, .ui-shadow-icon .ui-icon-checkbox-on:after, .ui-shadow-icon .ui-icon-radio-off:after, .ui-shadow-icon .ui-icon-radio-on:after, .ui-shadow-icon .ui-icon-clock:after, .ui-shadow-icon .ui-icon-cloud:after, .ui-shadow-icon .ui-icon-grid:after, .ui-shadow-icon .ui-icon-mail:after, .ui-shadow-icon .ui-icon-eye:after, .ui-shadow-icon .ui-icon-gear:after, .ui-shadow-icon .ui-icon-heart:after, .ui-shadow-icon .ui-icon-home:after, .ui-shadow-icon .ui-icon-info:after, .ui-shadow-icon .ui-icon-bullets:after, .ui-shadow-icon .ui-icon-bars:after, .ui-shadow-icon .ui-icon-navigation:after, .ui-shadow-icon .ui-icon-lock:after, .ui-shadow-icon .ui-icon-search:after, .ui-shadow-icon .ui-icon-location:after, .ui-shadow-icon .ui-icon-minus:after, .ui-shadow-icon .ui-icon-forbidden:after, .ui-shadow-icon .ui-icon-edit:after, .ui-shadow-icon .ui-icon-user:after, .ui-shadow-icon .ui-icon-phone:after, .ui-shadow-icon .ui-icon-plus:after, .ui-shadow-icon .ui-icon-power:after, .ui-shadow-icon .ui-icon-recycle:after, .ui-shadow-icon .ui-icon-forward:after, .ui-shadow-icon .ui-icon-refresh:after, .ui-shadow-icon .ui-icon-shop:after, .ui-shadow-icon .ui-icon-comment:after, .ui-shadow-icon .ui-icon-star:after, .ui-shadow-icon .ui-icon-tag:after, .ui-shadow-icon .ui-icon-back:after, .ui-shadow-icon .ui-icon-video:after, .ui-shadow-icon .ui-icon-alert:after, .ui-shadow-icon .ui-icon-delete:after {
+.ui-shadow-icon .ui-btn:after {
 	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	-moz-box-shadow: 0 1px 0 				rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	box-shadow: 0 1px 0 					rgba(255,255,255,.3) /*{global-icon-shadow}*/;
+}
+
+.ui-icon-action:after, .ui-icon-arrow-d-l:after, .ui-icon-arrow-d-r:after, .ui-icon-arrow-d:after, .ui-icon-arrow-l:after, .ui-icon-arrow-r:after, .ui-icon-arrow-u-l:after, .ui-icon-arrow-u-r:after, .ui-icon-arrow-u:after, .ui-icon-audio:after, .ui-icon-calendar:after, .ui-icon-camera:after, .ui-icon-carat-d:after, .ui-icon-carat-l:after, .ui-icon-carat-r:after, .ui-icon-carat-u:after, .ui-icon-check:after, .ui-icon-clock:after, .ui-icon-cloud:after, .ui-icon-grid:after, .ui-icon-mail:after, .ui-icon-eye:after, .ui-icon-gear:after, .ui-icon-heart:after, .ui-icon-home:after, .ui-icon-info:after, .ui-icon-bullets:after, .ui-icon-bars:after, .ui-icon-navigation:after, .ui-icon-lock:after, .ui-icon-search:after, .ui-icon-location:after, .ui-icon-minus:after, .ui-icon-forbidden:after, .ui-icon-edit:after, .ui-icon-user:after, .ui-icon-phone:after, .ui-icon-plus:after, .ui-icon-power:after, .ui-icon-recycle:after, .ui-icon-forward:after, .ui-icon-refresh:after, .ui-icon-shop:after, .ui-icon-comment:after, .ui-icon-star:after, .ui-icon-tag:after, .ui-icon-back:after, .ui-icon-video:after, .ui-icon-alert:after, .ui-icon-delete:after {
+	display: block;
 }
 
 /* Checkbox and radio */
@@ -141,6 +155,7 @@ html .ui-btn.ui-icon-checkbox-off:after,
 html .ui-btn.ui-icon-checkbox-on:after,
 html .ui-btn.ui-icon-radio-off:after,
 html .ui-btn.ui-icon-radio-on:after {
+	display: block;
 	width: 18px;
 	height: 18px;
 	margin: -9px 2px 0 2px;
@@ -324,8 +339,7 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	background-color: 		#0066ff /*{a-active-background-color}*/;
 	border-color:	 		#0033ff /*{a-active-border}*/;
 	color: 					#fff /*{a-active-color}*/;
-	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #0066cc /*{a-active-shadow-color}*/;
-	cursor: pointer;
+	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #0033ff /*{a-active-shadow-color}*/;
 }
 /* Active radio button icon */
 .ui-page-theme-a .ui-icon-radio-on:after,
@@ -366,8 +380,8 @@ html body .ui-group-theme-a .ui-focus,
 html .ui-bar-b .ui-bar-inherit,
 html .ui-body-b .ui-bar-inherit,
 html body .ui-group-theme-b .ui-bar-inherit {
-	background: 			#222 /*{b-bar-background-color}*/;
-	border-color:	 		#1d1d1d /*{b-bar-border}*/;
+	background: 			#1d1d1d /*{b-bar-background-color}*/;
+	border-color:	 		#1b1b1b /*{b-bar-border}*/;
 	color: 					#fff /*{b-bar-color}*/;
 	text-shadow: 0 /*{b-bar-shadow-x}*/ 1px /*{b-bar-shadow-y}*/ 0 /*{b-bar-shadow-radius}*/ 	#111 /*{b-bar-shadow-color}*/;
 	font-weight: bold;
@@ -429,13 +443,13 @@ html body .ui-group-theme-b a:visited {
 html .ui-bar-b a:hover,
 html .ui-body-b a:hover,
 html body .ui-group-theme-b a:hover {
-	color: #0099ff /*{b-link-hover}*/;
+	color: #3399ff /*{b-link-hover}*/;
 }
 .ui-page-theme-b a:active,
 html .ui-bar-b a:active,
 html .ui-body-b a:active,
 html body .ui-group-theme-b a:active {
-	color: #0099ff /*{b-link-active}*/;
+	color: #3399ff /*{b-link-active}*/;
 }
 
 /* Button up */
@@ -453,7 +467,7 @@ html body .ui-btn.ui-btn-b:visited,
 html body .ui-group-theme-b .ui-btn:visited,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:visited {
 	background: 			#333 /*{b-bup-background-color}*/;
-	border-color:	 		#1d1d1d /*{b-bup-border}*/;
+	border-color:	 		#1f1f1f /*{b-bup-border}*/;
 	color: 					#fff /*{b-bup-color}*/;
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #111 /*{b-bup-shadow-color}*/;
 }
@@ -465,7 +479,7 @@ html body .ui-btn.ui-btn-b:hover,
 html body .ui-group-theme-b .ui-btn:hover,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:hover {
 	background: 			#373737 /*{b-bhover-background-color}*/;
-	border-color:	 		#1d1d1d /*{b-bhover-border}*/;
+	border-color:	 		#1f1f1f /*{b-bhover-border}*/;
 	color: 					#fff /*{b-bhover-color}*/;
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #111 /*{b-bhover-shadow-color}*/;
 }
@@ -477,7 +491,7 @@ html body .ui-btn.ui-btn-b:active,
 html body .ui-group-theme-b .ui-btn:active,
 [class*="ui-group-theme-"] .ui-btn.ui-btn-b:active {
 	background: 			#404040 /*{b-bdown-background-color}*/;
-	border-color:	 		#1d1d1d /*{b-bdown-border}*/;
+	border-color:	 		#1f1f1f /*{b-bdown-border}*/;
 	color: 					#fff /*{b-bdown-color}*/;
 	text-shadow: 0 /*{b-bdown-shadow-x}*/ 1px /*{b-bdown-shadow-y}*/ 0 /*{b-bdown-shadow-radius}*/ #111 /*{b-bdown-shadow-color}*/;
 }
@@ -502,10 +516,9 @@ html .ui-body-b .ui-slider-track .ui-btn-active,
 html body .ui-group-theme-b .ui-slider-track .ui-btn-active,
 html body div.ui-slider-track.ui-body-b .ui-btn-active {
 	background-color: 		#33ccff /*{b-active-background-color}*/;
-	border-color:	 		#003366 /*{b-active-border}*/;
+	border-color:	 		#3399ff /*{b-active-border}*/;
 	color: 					#fff /*{b-active-color}*/;
-	text-shadow: 0 /*{b-active-shadow-x}*/ 1px /*{b-active-shadow-y}*/ 0 /*{b-active-shadow-radius}*/ #009966 /*{b-active-shadow-color}*/;
-	cursor: pointer;
+	text-shadow: 0 /*{b-active-shadow-x}*/ 1px /*{b-active-shadow-y}*/ 0 /*{b-active-shadow-radius}*/ #3399ff /*{b-active-shadow-color}*/;
 }
 /* Active radio button icon */
 .ui-page-theme-b .ui-icon-radio-on:after,
