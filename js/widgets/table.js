@@ -46,7 +46,7 @@ $.widget( "mobile.table", {
 
 				$this.jqmData( "colstart", coltally + 1 );
 
-				if( span ) {
+				if ( span ) {
 					for( j = 0; j < span - 1; j++ ) {
 						coltally++;
 						sel += ", :nth-child(" + ( coltally + 1 ) + ")";

@@ -24,7 +24,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._super();
 
 		// If it's not reflow mode, return here.
-		if( o.mode !== "reflow" ) {
+		if ( o.mode !== "reflow" ) {
 			return;
 		}
 
@@ -39,13 +39,13 @@ $.widget( "mobile.table", $.mobile.table, {
 				text = $(this).text(),
 				iteration, filter;
 
-				if( text !== ""  ) {
+				if ( text !== ""  ) {
 
-					if( hierarchyClass ) {
+					if ( hierarchyClass ) {
 						iteration = parseInt( $( this ).attr( "colspan" ), 10 );
 						filter = "";
 
-						if( iteration ){
+						if ( iteration ){
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 						}
 						$cells.filter( filter ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );

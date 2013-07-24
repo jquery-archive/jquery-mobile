@@ -45,7 +45,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			return;
 		}
 
-		if( this.element[0].disabled ){
+		if ( this.element[0].disabled ){
 			this.options.disabled = true;
 		}
 
@@ -65,7 +65,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			uncheckedicon: uncheckedState
 		});
 
-		if( !this.options.enhanced ) {
+		if ( !this.options.enhanced ) {
 			this._enhance();
 		}
 
@@ -85,7 +85,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		this.refresh();
 	},
 
-	_enhance: function(){
+	_enhance: function() {
 
 		this.label.addClass( "ui-btn ui-corner-all");
 		// Wrap the input + label in a div
@@ -98,7 +98,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 
 	},
 
-	_wrapper: function(){
+	_wrapper: function() {
 		return $( "<div class='"  + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " ui-" + this.inputtype + ( this.options.disabled ? " ui-disabled" : "" ) + "' >" );
 	},
 
@@ -131,13 +131,13 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		}
 	},
 
-	enable: function(){
+	enable: function() {
 		this._setOptions({
 			"disabled": false
 		});
 	},
 
-	disable: function(){
+	disable: function() {
 		this._setOptions({
 			"disabled": true
 		});
@@ -226,22 +226,22 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	},
 
 	_setOptions: function( options ) {
-		if( options.disabled !== undefined ) {
+		if ( options.disabled !== undefined ) {
 			this.input.prop( "disabled", !!options.disabled );
 			this.widget().toggleClass( "ui-disabled", !!options.disabled );
 		}
-		if( options.mini !== undefined ) {
+		if ( options.mini !== undefined ) {
 			this.label.parent().toggleClass( "ui-mini", !!options.mini );
 		}
-		if( options.theme !== undefined ) {
+		if ( options.theme !== undefined ) {
 			this.label.removeClass( "ui-btn-" + this.options.theme ).addClass( "ui-btn-" + options.theme );
 		}
-		if( options.wrapperClass !== undefined ) {
+		if ( options.wrapperClass !== undefined ) {
 			this.widget().removeClass( this.options.wrapperClass ).addClass( options.wrapperClass );
 		}
-		if( options.iconpos !== undefined && ( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length === 0 ) ) {
+		if ( options.iconpos !== undefined && ( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length === 0 ) ) {
 			this.label.removeClass( "ui-btn-icon-" + this.options.iconpos ).addClass( "ui-btn-icon-" + options.iconpos );
-		} else if( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length !== 0 ){
+		} else if ( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length !== 0 ){
 			this.label.removeClass( "ui-btn-icon-" + this.options.iconpos );
 		}
 		this._super( options );

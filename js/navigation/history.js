@@ -39,7 +39,7 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 
 			// if the hash is included in the data make sure the shape
 			// is consistent for comparison
-			if( data.hash && data.hash.indexOf( "#" ) === -1) {
+			if ( data.hash && data.hash.indexOf( "#" ) === -1) {
 				data.hash = "#" + data.hash;
 			}
 
@@ -65,7 +65,7 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 					decodeURIComponent(url) === decodeURIComponent(entry.hash) ) {
 					index = i;
 
-					if( earlyReturn ) {
+					if ( earlyReturn ) {
 						return index;
 					}
 				}
@@ -91,7 +91,7 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 			// in the original history stack :( :(
 			//
 			// TODO this is hyper confusing and should be cleaned up (ugh so bad)
-			if( closest === undefined ) {
+			if ( closest === undefined ) {
 				closest = this.find( url, this.stack.slice(a), true );
 				closest = closest === undefined ? closest : closest + a;
 			}
@@ -104,7 +104,7 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 
 			// save new page index, null check to prevent falsey 0 result
 			// record the previous index for reference
-			if( newActiveIndex !== undefined ) {
+			if ( newActiveIndex !== undefined ) {
 				this.activeIndex = newActiveIndex;
 				this.previousIndex = a;
 			}

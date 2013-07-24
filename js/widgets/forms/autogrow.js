@@ -15,10 +15,10 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			keyupTimeoutBuffer: 100
 		},
 
-		_create: function(){
+		_create: function() {
 			this._super();
 
-			if( this.options.autogrow && this.isTextarea ) {
+			if ( this.options.autogrow && this.isTextarea ) {
 				this._autogrow();
 			}
 		},
@@ -51,12 +51,12 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		keyupTimeout:null,
 
-		_timeout: function(){
+		_timeout: function() {
 			clearTimeout( this.keyupTimeout );
 			this.keyupTimeout = this._delay( "_updateHeight", this.options.keyupTimeoutBuffer );
 		},
 
-		_updateHeight:function(){
+		_updateHeight:function() {
 			
 				this.element.css({
 					height: "auto"
@@ -70,8 +70,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 			this._super( options );
 			
-			if( options.autogrow !== undefined && this.isTextarea ){
-				if( options.autogrow ){
+			if ( options.autogrow !== undefined && this.isTextarea ){
+				if ( options.autogrow ){
 					this._autogrow();
 				} else {
 					this._unbindAutogrow();

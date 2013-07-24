@@ -75,10 +75,10 @@ define( [ "jquery",
 				"vmousedown": "_dragFirstHandle"
 			});
 		},
-		_handleReset: function(){
+		_handleReset: function() {
 			var self = this;
 			//we must wait for the stack to unwind before updateing other wise sliders will not have updated yet
-			setTimeout( function(){
+			setTimeout( function() {
 				self._updateHighlight();
 			},0);
 		},
@@ -157,9 +157,9 @@ define( [ "jquery",
 				otherSlider = first ? this._inputLast : this._inputFirst;
 
 
-			if( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
+			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
 				thisSlider.blur();
-			} else if( event.type === "mousedown" ){
+			} else if ( event.type === "mousedown" ){
 				return;
 			}
 			if ( min > max && !this._sliderTarget ) {

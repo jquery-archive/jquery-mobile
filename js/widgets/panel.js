@@ -238,7 +238,7 @@ $.widget( "mobile.panel", {
 			area = self._modal ? self.element.add( self._modal ) : self.element;
 
 		// on swipe, close the panel
-		if( !!self.options.swipeClose ) {
+		if ( !!self.options.swipeClose ) {
 			if ( self.options.position === "left" ) {
 				area.on( "swipeleft.panel", function(/* e */) {
 					self.close();

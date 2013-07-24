@@ -80,11 +80,11 @@ $.widget( "mobile.page", {
 	},
 
 	_setOptions: function( o ) {
-		if( o.theme !== undefined ) {
+		if ( o.theme !== undefined ) {
 			this.element.removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + o.theme );
 		}
 
-		if( o.contentTheme !== undefined ) {
+		if ( o.contentTheme !== undefined ) {
 			this.element.find( "[data-" + $.mobile.ns + "='content']" ).removeClass( "ui-body-" + this.options.contentTheme )
 				.addClass( "ui-body-" + o.contentTheme );
 		}

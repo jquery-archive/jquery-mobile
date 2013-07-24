@@ -8,7 +8,7 @@ define( [ "jquery", "./transition" ], function( jQuery ) {
 
 (function( $ ) {
 
-	$.mobile.SerialTransition = function(){
+	$.mobile.SerialTransition = function() {
 		this.init.apply(this, arguments);
 	};
 
@@ -24,7 +24,7 @@ define( [ "jquery", "./transition" ], function( jQuery ) {
 		beforeStartOut: function( screenHeight, reverseClass, none ) {
 			this.$from.animationComplete($.proxy(function() {
 				this.doneOut( screenHeight, reverseClass, none );
-			}, this));
+			}, this ));
 		}
 	});
 

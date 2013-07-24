@@ -43,7 +43,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		this._super();
 
-		if( o.mode !== "columntoggle" ) {
+		if ( o.mode !== "columntoggle" ) {
 			return;
 		}
 
@@ -60,7 +60,7 @@ $.widget( "mobile.table", $.mobile.table, {
 				priority = $this.jqmData( "priority" ),
 				$cells = $this.add( $this.jqmData( "cells" ) );
 
-			if( priority ) {
+			if ( priority ) {
 				$cells.addClass( o.classes.priorityPrefix + priority );
 
 				$("<label><input type='checkbox' checked />" + $this.text() + "</label>" )

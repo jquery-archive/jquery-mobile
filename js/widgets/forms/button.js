@@ -25,11 +25,11 @@ $.widget( "mobile.button", {
 
 	_create: function() {
 
-		if( this.element.is( ":disabled" ) ) {
+		if ( this.element.is( ":disabled" ) ) {
 			this.options.disabled = true;
 		}
 
-		if( !this.options.enhanced ) {
+		if ( !this.options.enhanced ) {
 			this._enhance();
 		}
 
@@ -46,6 +46,7 @@ $.widget( "mobile.button", {
 				this.widget().removeClass( $.mobile.focusClass );
 			}
 		});
+		
 		this.refresh( true );
 	},
 
@@ -92,11 +93,11 @@ $.widget( "mobile.button", {
 		if ( options.mini !== undefined ) {
 			this.widget().toggleClass( "ui-mini", options.mini );
 		}
-		if( options.iconpos !== undefined ) {
+		if ( options.iconpos !== undefined ) {
 			this.widget().removeClass( "ui-btn-icon-" + options.iconpos );
 		}
-		if( options.icon !== undefined ) {
-			if( !this.options.iconpos && !options.iconpos ){
+		if ( options.icon !== undefined ) {
+			if ( !this.options.iconpos && !options.iconpos ) {
 				this.widget.toggleClass( "ui-btn-icon-left", options.icon );
 			}
 			this.widget().removeClass( "ui-icon-" + this.options.icon ).toggleClass( "ui-icon-" + options.icon, options.icon );
@@ -107,7 +108,7 @@ $.widget( "mobile.button", {
 		if ( this.options.icon && this.options.iconpos === "notext" && this.element.attr( "title" ) ) {
 			this.element.attr( "title", this.element.val() );
 		}
-		if( !create ) {
+		if ( !create ) {
 			var originalElement = this.element.detach();
 			$( this.wrapper ).text( this.element.val() ).append( originalElement );
 		}

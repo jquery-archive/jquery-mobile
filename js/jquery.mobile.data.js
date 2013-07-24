@@ -79,7 +79,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 
 			// undefined is permitted as an explicit input for the second param
 			// in this case it returns the value and does not set it to undefined
-			if( arguments.length < 2 || value === undefined ){
+			if ( arguments.length < 2 || value === undefined ){
 				result = this.data( prop );
 			} else {
 				result = this.data( prop, value );
