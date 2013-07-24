@@ -6,7 +6,7 @@
 	module( "Filter Widget Core Functions" );
 
 	asyncTest( "Filter hides/shows results when the user enters information", function() {
-		var input = $( "#filtered-listview" ).prev().find( "input" ),
+		var input = $( "#filtered-listview-input" ),
 			listview = $( "#filtered-listview" );
 
 		expect( 5 );
@@ -40,7 +40,7 @@
 	});
 
 	asyncTest( "Event filterablebeforefilter fires in response to input change", function() {
-		var input = $( "#filtered-listview" ).prev().find( "input" ),
+		var input = $( "#filtered-listview-input" ),
 			listview = $( "#filtered-listview" ),
 			beforeFilterCount = 0;
 

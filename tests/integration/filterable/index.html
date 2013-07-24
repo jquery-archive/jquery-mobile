@@ -87,13 +87,15 @@
 		<h1>Split List View</h1>
 	</div>
 	<div data-nstest-role="content">
-		<ul id="filtered-listview" data-nstest-role="listview" data-nstest-filter="true">
+		<input id="filtered-listview-input"></input>
+		<ul id="filtered-listview" data-nstest-role="listview" data-nstest-filter="true" data-nstest-input="#filtered-listview-input">
 			<li>a is for aquaman</li>
 			<li>b is for batman</li>
 			<li>c is for catwoman</li>
 			<li>d is for darkwing</li>
 		</ul>
-		<ul id="filtered-listview-with-dividers" data-nstest-role="listview" data-nstest-filter="true">
+		<input id="filtered-listview-with-dividers-input"></input>
+		<ul id="filtered-listview-with-dividers" data-nstest-role="listview" data-nstest-filter="true" data-nstest-input="#filtered-listview-with-dividers-input">
 			<li data-nstest-role="list-divider">a</li>
 			<li>a is for aquaman</li>
 			<li data-nstest-role="list-divider">b</li>
