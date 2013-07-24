@@ -146,8 +146,9 @@ define([
 	$(function() {
 		//Run inlineSVG support test
 		$.support.inlineSVG();
-		
-		window.scrollTo( 0, 1 );
+		if( $.mobile.hideUrlBar ){
+			window.scrollTo( 0, 1 );
+		}
 
 		// if defaultHomeScroll hasn't been set yet, see if scrollTop is 1
 		// it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
