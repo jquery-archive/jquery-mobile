@@ -51,6 +51,9 @@ label.ui-btn {
 .ui-btn:link {
 	text-decoration: none !important;
 }
+.ui-btn-active {
+	cursor: pointer;
+}
 
 /* Corner rounding
 -----------------------------------------------------------------------------------------------------------*/
@@ -325,7 +328,6 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	border-color:	 		#0033ff /*{a-active-border}*/;
 	color: 					#fff /*{a-active-color}*/;
 	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #0066cc /*{a-active-shadow-color}*/;
-	cursor: pointer;
 }
 /* Active radio button icon */
 .ui-page-theme-a .ui-icon-radio-on:after,
@@ -505,7 +507,6 @@ html body div.ui-slider-track.ui-body-b .ui-btn-active {
 	border-color:	 		#003366 /*{b-active-border}*/;
 	color: 					#fff /*{b-active-color}*/;
 	text-shadow: 0 /*{b-active-shadow-x}*/ 1px /*{b-active-shadow-y}*/ 0 /*{b-active-shadow-radius}*/ #009966 /*{b-active-shadow-color}*/;
-	cursor: pointer;
 }
 /* Active radio button icon */
 .ui-page-theme-b .ui-icon-radio-on:after,
