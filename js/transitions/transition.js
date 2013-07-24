@@ -79,6 +79,7 @@ define( [ "jquery",
 			// By using scrollTo instead of silentScroll, we can keep things better in order
 			// Just to be precautios, disable scrollstart listening like silentScroll would
 			$.event.special.scrollstart.enabled = false;
+			//if we are hiding the url bar or the page was previously scrolled scroll to hide or return to position
 			if( $.mobile.hideUrlBar || this.toScroll !== $.mobile.defaultHomeScroll ) {
 				window.scrollTo( 0, this.toScroll );
 			}

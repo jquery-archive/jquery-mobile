@@ -146,6 +146,7 @@ define([
 	$(function() {
 		//Run inlineSVG support test
 		$.support.inlineSVG();
+		// hide iOS browser chrome on load if hideUrlBar is true this is to try and do it as soon as possible
 		if( $.mobile.hideUrlBar ){
 			window.scrollTo( 0, 1 );
 		}
@@ -161,7 +162,7 @@ define([
 		}
 
 		// window load event
-		// hide iOS browser chrome on load
+		// hide iOS browser chrome on load if hideUrlBar is true this is as fall back incase we were too early before
 		if( $.mobile.hideUrlBar ){
 			$window.load( $.mobile.silentScroll );
 		}
