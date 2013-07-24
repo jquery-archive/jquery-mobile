@@ -33,7 +33,9 @@ $.widget( "mobile.button", {
 			this._enhance();
 		}
 
-		this.wrapper = this.element.parent();
+		$.extend( this, {
+			wrapper: this.element.parent()
+		});
 
 		this._on( {
 			focus: function() {
