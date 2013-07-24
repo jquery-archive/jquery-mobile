@@ -8,212 +8,213 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-	// TODO rename filterCallback/deprecate and default to the item itself as the first argument
-	var defaultFilterCallback = function( index, searchValue ) {
-		return ( ( "" + ( $.mobile.getAttribute( this, "filtertext", true ) || $( this ).text() ) )
-			.toLowerCase().indexOf( searchValue ) === -1 );
-	};
+// TODO rename filterCallback/deprecate and default to the item itself as the first argument
+var defaultFilterCallback = function( index, searchValue ) {
+	return ( ( "" + ( $.mobile.getAttribute( this, "filtertext", true ) || $( this ).text() ) )
+		.toLowerCase().indexOf( searchValue ) === -1 );
+};
 
-	$.widget( "mobile.filterable", {
+$.widget( "mobile.filterable", {
 
-			options: {
+	options: {
 
-				// DEPRECATED and must be removed in 1.5.0, because the idea is that
-				// filterable DOES NOT create any textinput. Instead, the MUST provide
-				// a textinput as part of the original markup. The "inputSelector"
-				// option below can then be set to a jQuery selector that will retrieve
-				// the input to be used as the source of filter text.
-				filterPlaceholder: "Filter items...",
-				filterReveal: false,
-				filterCallback: defaultFilterCallback,
-				enhanced: false,
-				input: null,
-				children: "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn"
-			},
+		// DEPRECATED and must be removed in 1.5.0, because the idea is that
+		// filterable DOES NOT create any textinput. Instead, the MUST provide
+		// a textinput as part of the original markup. The "inputSelector"
+		// option below can then be set to a jQuery selector that will retrieve
+		// the input to be used as the source of filter text.
+		filterPlaceholder: "Filter items...",
+		filterReveal: false,
+		filterCallback: defaultFilterCallback,
+		enhanced: false,
+		input: null,
+		children: "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn"
+	},
 
-			_onKeyUp: function() {
-				var search = this._search[ 0 ],
-					val = search.value.toLowerCase(),
-					lastval = $.mobile.getAttribute( search, "lastval", true ) + "";
+	_onKeyUp: function() {
+		var val, lastval,
+			search = this._search;
 
-				if ( lastval && lastval === val ) {
-					// Execute the handler only once per value change
-					return;
-				}
+		if ( search ) {
+			val = search.val().toLowerCase(),
+			lastval = $.mobile.getAttribute( search[ 0 ], "lastval", true ) + "";
 
-				if ( this._timer ) {
-					window.clearTimeout( this._timer );
-				}
+			if ( lastval && lastval === val ) {
+				// Execute the handler only once per value change
+				return;
+			}
 
-				this._timer = this._delay( function() {
-					this._trigger( "beforefilter", "beforefilter", { input: search } );
+			if ( this._timer ) {
+				window.clearTimeout( this._timer );
+				this._timer = 0;
+			}
 
-					// Change val as lastval for next execution
-					search.setAttribute( "data-" + $.mobile.ns + "lastval", val );
+			this._timer = this._delay( function() {
+				this._trigger( "beforefilter", "beforefilter", { input: search } );
 
-					this._filterItems( val );
-					this._timer = 0;
-				}, 250 );
-			},
+				// Change val as lastval for next execution
+				search[ 0 ].setAttribute( "data-" + $.mobile.ns + "lastval", val );
 
-			_getFilterableItems: function() {
-				var elem = this.element,
-					children = this.options.children,
-					items = !children ? { length: 0 }:
-						$.isFunction( children ) ? children():
-						children.nodeName ? $( children ):
-						children.jquery ? children:
-						this.element.find( children );
+				this._filterItems( val );
+				this._timer = 0;
+			}, 250 );
+		}
+	},
 
-				if ( items.length === 0 ) {
-					items = elem.children();
-				}
+	_getFilterableItems: function() {
+		var elem = this.element,
+			children = this.options.children,
+			items = !children ? { length: 0 }:
+				$.isFunction( children ) ? children():
+				children.nodeName ? $( children ):
+				children.jquery ? children:
+				this.element.find( children );
 
-				return items;
-			},
+		if ( items.length === 0 ) {
+			items = elem.children();
+		}
 
-			_filterItems: function( val ) {
-				var idx, show, hide, callback, length,
-					opts = this.options,
-					filterItems = this._getFilterableItems();
+		return items;
+	},
 
-				if ( val ) {
+	_filterItems: function( val ) {
+		var idx, show, hide, callback, length,
+			opts = this.options,
+			filterItems = this._getFilterableItems();
 
-					show = [];
-					hide = [];
-					callback = opts.filterCallback || defaultFilterCallback;
-					length = filterItems.length;
+		if ( val ) {
 
-					// Partition the items into those to be hidden and those to be shown
-					for ( idx = 0 ; idx < length ; idx++ ) {
-						if ( callback.call( filterItems[ idx ], idx, val ) ) {
-							hide.push( filterItems[ idx ] );
-						} else {
-							show.push( filterItems[ idx ] );
-						}
-					}
+			show = [];
+			hide = [];
+			callback = opts.filterCallback || defaultFilterCallback;
+			length = filterItems.length;
 
-					$( hide ).addClass( "ui-screen-hidden" );
-					$( show ).removeClass( "ui-screen-hidden" );
+			// Partition the items into those to be hidden and those to be shown
+			for ( idx = 0 ; idx < length ; idx++ ) {
+				if ( callback.call( filterItems[ idx ], idx, val ) ) {
+					hide.push( filterItems[ idx ] );
 				} else {
-					filterItems[ opts.filterReveal ? "addClass" : "removeClass" ]( "ui-screen-hidden" );
+					show.push( filterItems[ idx ] );
 				}
+			}
 
-				this._refreshChildWidget();
-			},
+			$( hide ).addClass( "ui-screen-hidden" );
+			$( show ).removeClass( "ui-screen-hidden" );
+		} else {
+			filterItems[ opts.filterReveal ? "addClass" : "removeClass" ]( "ui-screen-hidden" );
+		}
 
-			// The Default implementation of _refreshChildWidget attempts to call
-			// refresh on collapsibleset, controlgroup, selectmenu, or listview
-			_refreshChildWidget: function() {
-				var widget, idx,
-					recognizedWidgets = [ "collapsibleset", "selectmenu", "controlgroup", "listview" ];
+		this._refreshChildWidget();
+	},
 
-				for ( idx = recognizedWidgets.length - 1 ; idx > -1 ; idx-- ) {
-					widget = recognizedWidgets[ idx ];
-					if ( $.mobile[ widget ] ) {
-						widget = this.element.data( "mobile-" + widget );
-						if ( widget && $.isFunction( widget.refresh ) ) {
-							widget.refresh();
-						}
-					}
+	// The Default implementation of _refreshChildWidget attempts to call
+	// refresh on collapsibleset, controlgroup, selectmenu, or listview
+	_refreshChildWidget: function() {
+		var widget, idx,
+			recognizedWidgets = [ "collapsibleset", "selectmenu", "controlgroup", "listview" ];
+
+		for ( idx = recognizedWidgets.length - 1 ; idx > -1 ; idx-- ) {
+			widget = recognizedWidgets[ idx ];
+			if ( $.mobile[ widget ] ) {
+				widget = this.element.data( "mobile-" + widget );
+				if ( widget && $.isFunction( widget.refresh ) ) {
+					widget.refresh();
 				}
-			},
+			}
+		}
+	},
 
-			// TODO: When the input is not internal, do not even store it in this._search
-			_setInput: function ( selector ) {
-				var search = this._search;
+	// TODO: When the input is not internal, do not even store it in this._search
+	_setInput: function ( selector ) {
+		var search = this._search;
 
-				// Stop a pending filter operation
-				if ( this._timer ) {
-					clearTimeout( this._timer );
-					this._timer = 0;
-				}
+		// Stop a pending filter operation
+		if ( this._timer ) {
+			window.clearTimeout( this._timer );
+			this._timer = 0;
+		}
 
-				if ( search ) {
-					this._off( search, "keyup change input" );
-					search = null;
-				}
+		if ( search ) {
+			this._off( search, "keyup change input" );
+			search = null;
+		}
 
-				if ( selector ) {
-					search = selector.jquery ? selector:
-						selector.nodeName ? $( selector ):
-						this.document.find( selector );
+		if ( selector ) {
+			search = selector.jquery ? selector:
+				selector.nodeName ? $( selector ):
+				this.document.find( selector );
 
-					this._on( search, {
-						keyup: "_onKeyUp",
-						change: "_onKeyUp",
-						input: "_onKeyUp"
-					});
-				}
+			this._on( search, {
+				keyup: "_onKeyUp",
+				change: "_onKeyUp",
+				input: "_onKeyUp"
+			});
+		}
 
-				this._search = search;
+		this._search = search;
+	},
 
-				return search;
-			},
+	_create: function() {
+		var opts = this.options;
 
-			_create: function() {
-				var opts = this.options;
+		$.extend( this, {
+			_search: null,
+			_timer: 0
+		});
 
-				$.extend( this, {
-					_search: null,
-					_timer: 0
-				});
-				
-				if ( opts.enhanced ) {
-					this._applyOptions( opts, true );
-				} else {
-					this._setOptions( opts );
-				}
-			},
+		this._setInput( opts.input );
+		if ( !opts.enhanced ) {
+			this._filterItems( ( ( this._search && this._search.val() ) || "" ).toLowerCase() );
+		}
+	},
 
-			_applyOptions: function( options, internal ) {
-				var newInputSel = ( options.input ? ( options.input + "" ) : "" ),
-					refilter = !( options.filterReveal === undefined &&
-					options.filterCallback === undefined &&
-					newInputSel && options.children === undefined );
+	_setOptions: function( options ) {
+		var refilter,
+			currentOpts = this.options;
 
-				// If we end up instantiating a textinput internally, then we set the
-				// value of the input option to the ID we have generated for the
-				// textinput widget we have instantiated.
-				options.input = this._setInput( newInputSel );
 
-				if ( !internal ) {
-					if ( options.filterPlaceholder !== undefined ) {
-						this._search.attr( "placeholder", options.filterPlaceholder );
-					}
+		if ( options.filterPlaceholder !== undefined && this._search ) {
+			this._search.attr( "placeholder", options.filterPlaceholder );
+		}
 
-					if ( refilter ) {
+		if ( options.filterReveal !== undefined ) {
+			currentOpts.filterReveal = options.filterReveal;
+			refilter = true;
+		}
 
-						// Update options needed by the filter before refiltering
-						if ( options.filterReveal !== undefined ) {
-							this.options.filterReveal = options.filterReveal;
-						}
-						if ( options.filterCallback !== undefined ) {
-							this.options.filterCallback = options.filterCallback;
-						}
-						if ( options.children !== undefined ) {
-							this.options.children = options.children;
-						}
-						this._getFilterableItems().removeClass( "ui-screen-hidden" );
-						this._filterItems( ( this._search.val() || "" ).toLowerCase() );
-					}
-				}
+		if ( options.filterCallback !== undefined ) {
+			currentOpts.filterCallback = options.filterCallback;
+			refilter = true;
+		}
 
-				return this;
-			},
+		if ( options.children !== undefined ) {
+			currentOpts.children = options.children;
+			refilter = true;
+		}
 
-			_setOptions: function( options ) {
-				return this
-					._applyOptions( options )
-					._super( options );
-			},
+		if ( options.input !== undefined ) {
+			this._setInput( options.input );
+			refilter = true;
+		}
 
-	});
+		if ( refilter ) {
+			this.refresh();
+		}
+	},
 
-	$.mobile.filterable.initSelector = ":jqmData(filter='true')";
+	refresh: function() {
+		if ( this._timer ) {
+			window.clearTimeout( this._timer );
+			this._timer = 0;
+		}
+		this._filterItems( ( ( this._search && this._search.val() ) || "" ).toLowerCase() );
+	}
+});
 
-	//auto self-init widgets
-	$.mobile._enhancer.add( "mobile.filterable" );
+$.mobile.filterable.initSelector = ":jqmData(filter='true')";
+
+//auto self-init widgets
+$.mobile._enhancer.add( "mobile.filterable" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
