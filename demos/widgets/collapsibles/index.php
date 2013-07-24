@@ -12,7 +12,7 @@
     <script src="../../_assets/js/"></script>
     <script src="../../../js/"></script>
     <style id="negateDoubleBorder">
-        #demo-borders .ui-collapsible .ui-collapsible-heading { border-top-width: 1px !important; }
+        #demo-borders .ui-collapsible .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }
     </style>
 </head>
 <body>
@@ -186,7 +186,7 @@
 
         <div data-demo-html="true" data-demo-css="#negateDoubleBorder">
             <div id="demo-borders">
-                <div data-role="collapsible" data-theme="b" data-content-theme="b" data-inset="false">
+                <div data-role="collapsible" data-theme="a" data-content-theme="a" data-inset="false">
                     <h3>Pets</h3>
                     <ul data-role="listview">
                         <li><a href="#">Canary</a></li>
@@ -197,7 +197,7 @@
                         <li><a href="#">Mouse</a></li>
                     </ul>
                 </div><!-- /collapsible -->
-                <div data-role="collapsible" data-theme="b" data-content-theme="b" data-inset="false">
+                <div data-role="collapsible" data-theme="b" data-content-theme="a" data-inset="false">
                     <h3>Farm animals</h3>
                     <ul data-role="listview">
                         <li><a href="#">Chicken</a></li>
