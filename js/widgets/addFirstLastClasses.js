@@ -29,6 +29,10 @@ $.mobile.behaviors.addFirstLastClasses = {
 		if ( !create ) {
 			this.element.trigger( "updatelayout" );
 		}
+	},
+
+	_removeFirstLastClasses: function( $els ) {
+		$els.removeClass( "ui-first-child ui-last-child" );
 	}
 };
 

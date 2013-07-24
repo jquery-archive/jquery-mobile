@@ -211,6 +211,22 @@
             </div>
         </div><!--/demo-html -->
 
+				<h2>Pre-rendered markup</h2>
+				<p>You can supply pre-rendered markup for any collapsible to save startup time. The example below illustrates the markup you have to provide for a pre-rendered collapsible.</p>
+				<div data-demo-html="true">
+					<div data-role="collapsible" data-enhanced="true" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-collapsed">
+						<h4 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
+							<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-left ui-icon-plus">
+							Heading
+							<div class="ui-collapsible-heading-status"> click to expand contents</div>
+							</a>
+						</h4>
+						<div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
+							<p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
+						</div>
+					</div>
+				</div>
+
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
