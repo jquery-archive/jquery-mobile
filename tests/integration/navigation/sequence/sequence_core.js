@@ -34,7 +34,7 @@
 			// by the pushState plugin during which, if the location were to require
 			// an adjustment by the pushState plugin, it will not get such an
 			// adjustment because the pushState plugin ignores such requests.
-			setTimeout( function() { $.testHelper.detailedEventCascade( seq ); }, 500 );
+			setTimeout( function() { $.testHelper.detailedEventCascade( seq ); }, 1000 );
 		}
 	}
 
