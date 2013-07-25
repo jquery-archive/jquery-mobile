@@ -307,7 +307,7 @@ $.widget( "mobile.panel", {
 
 					self._pageContentOpenClasses = self._getPosDisplayClasses( o.classes.pageContentPrefix );
 					
-					if (o.display !== "overlay" ) {
+					if ( o.display !== "overlay" ) {
 						self._wrapper().addClass( self._pageContentOpenClasses + " " + o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().addClass( self._pageContentOpenClasses + " " + o.classes.pageContentPrefix + "-open" );
 					}
@@ -318,10 +318,7 @@ $.widget( "mobile.panel", {
 					}
 				},
 				complete = function() {
-					self.element.off( self._transitionEndEvents, complete );
-					if ( o.display !== "overlay" ) {
-						self._wrapper().off( self._transitionEndEvents, complete );
-					}
+					$.mobile.pageContainer.off( self._transitionEndEvents, complete );
 
 					self._bindFixListener();
 
@@ -348,8 +345,8 @@ $.widget( "mobile.panel", {
 
 	close: function( immediate ) {
 		if ( this._open ) {
-			var o = this.options,
-				self = this,
+			var self = this,
+				o = this.options,
 				
 				_closePanel = function() {
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
@@ -378,8 +375,7 @@ $.widget( "mobile.panel", {
 					
 					$.mobile.pageContainer.off( self._transitionEndEvents, complete );
 						
-					self.element	
-						.addClass( o.classes.panelClosed );
+					self.element.addClass( o.classes.panelClosed );
 
 					self._wrapper().removeClass( self._pageContentOpenClasses );
 					self._fixedToolbars().removeClass( self._pageContentOpenClasses );
@@ -470,10 +466,9 @@ $.widget( "mobile.panel", {
 
 		// open and close
 		this.element
-			.add( self._wrapper() )
-			.add( self._fixedToolbars() )
 			.off( this._transitionEndEvents )
 			.removeClass( [ classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
+		$.mobile.pageContainer.off( this._transitionEndEvents );
 	}
 });
 
