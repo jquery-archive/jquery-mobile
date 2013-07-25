@@ -59,20 +59,20 @@ $.widget( "mobile.table", {
 
 		// Iterate over the trs
 		trs.each( function() {
-			var coltally = 0;
+			var columnCount = 0;
 
 			// Iterate over the children of the tr
 			$( this ).children().each( function() {
 				var span = parseInt( $.mobile.getAttribute( this, "colspan", true), 10 ),
-					selector = ":nth-child(" + ( coltally + 1 ) + ")",
+					selector = ":nth-child(" + ( columnCount + 1 ) + ")",
 					j;
 
-				this.setAttribute( "data-" + $.mobile.ns + "colstart", coltally + 1 );
+				this.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
 
 				if( span ) {
 					for( j = 0; j < span - 1; j++ ) {
-						coltally++;
-						selector += ", :nth-child(" + ( coltally + 1 ) + ")";
+						columnCount++;
+						selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
 					}
 				}
 
@@ -80,7 +80,7 @@ $.widget( "mobile.table", {
 				// same column as this TH
 				$( this ).jqmData( "cells", table.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( selector ) );
 
-				coltally++;
+				columnCount++;
 			});
 		});
 	}

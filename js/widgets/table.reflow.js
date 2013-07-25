@@ -54,9 +54,9 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		// get headers in reverse order so that top-level headers are appended last
 		$( table.allHeaders.get().reverse() ).each( function() {
-			var $cells = $( this ).jqmData( "cells" ),
+			var cells = $( this ).jqmData( "cells" ),
 				colstart = $.mobile.getAttribute( this, "colstart", true ),
-				hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
+				hierarchyClass = cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
 				text = $( this ).text(),
 				iteration, filter;
 
@@ -70,9 +70,9 @@ $.widget( "mobile.table", $.mobile.table, {
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 						}
 
-						table._addLabels( $cells.filter( filter ), opts.classes.cellLabels + hierarchyClass, text );
+						table._addLabels( cells.filter( filter ), opts.classes.cellLabels + hierarchyClass, text );
 					} else {
-						table._addLabels( $cells, opts.classes.cellLabels, text );
+						table._addLabels( cells, opts.classes.cellLabels, text );
 					}
 
 				}
@@ -81,7 +81,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 	_addLabels: function( cells, label, text ) {
 		// .not fixes #6006
-		cells.not( ":has(b." + label + ")").prepend( "<b class='" + label + "'>" + text + "</b>"  );
+		cells.not( ":has(b." + label + ")" ).prepend( "<b class='" + label + "'>" + text + "</b>"  );
 	}
 });
 

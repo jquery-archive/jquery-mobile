@@ -109,22 +109,20 @@ $.widget( "mobile.table", $.mobile.table, {
 		}
 	},
 
-	_menuInputChange: function( e ) {
-		var that = e.target,
-			$that = $( that ),
-			checked = that.checked,
-			locked = that.getAttribute("locked");
+	_menuInputChange: function( evt ) {
+		var input = $( evt.target ),
+			checked = input[ 0 ].checked;
 
-		$that.jqmData( "cells" )
+		input.jqmData( "cells" )
 			.toggleClass( "ui-table-cell-hidden", !checked )
 			.toggleClass( "ui-table-cell-visible", checked );
 
-		if ( locked ) {
-			$that.removeAttr( "locked" );
+		if ( input[ 0 ].getAttribute( "locked" ) ) {
+			input.removeAttr( "locked" );
 
-			this._unlockCells( $that.jqmData( "cells" ) );
+			this._unlockCells( input.jqmData( "cells" ) );
 		} else {
-			$that.attr( "locked" , true);
+			input.attr( "locked", true );
 		}
 	},
 
@@ -134,32 +132,32 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_enhanceColToggle: function() {
-		var id , $menuButton, $popup, $menu,
-			$table = this.element,
+		var id , menuButton, popup, menu,
+			table = this.element,
 			opts = this.options,
 			ns = $.mobile.ns,
 			fragment = $.mobile.document[ 0 ].createDocumentFragment();
 
 		id = this._id() + "-popup";
-		$menuButton = $( "<a href='#" + id + "' " +
+		menuButton = $( "<a href='#" + id + "' " +
 			"class='" + opts.classes.columnBtn + " ui-btn ui-btn-" + ( opts.columnBtnTheme || "a" ) + " ui-corner-all ui-shadow ui-mini' " +
 			"data-" + ns + "rel='popup' " +
 			"data-" + ns + "mini='true'>" + opts.columnBtnText + "</a>" );
-		$popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + opts.classes.popup + "' id='" + id + "'></div>" );
-		$menu = $( "<fieldset data-" + ns + "role='controlgroup'></fieldset>" );
+		popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + opts.classes.popup + "' id='" + id + "'></div>" );
+		menu = $( "<fieldset data-" + ns + "role='controlgroup'></fieldset>" );
 
 		// set extension here, send "false" to trigger build/rebuild
-		this._addToggles( $menu, false );
+		this._addToggles( menu, false );
 
-		$menu.appendTo( $popup );
+		menu.appendTo( popup );
 
-		fragment.appendChild( $popup[ 0 ] );
-		fragment.appendChild( $menuButton[ 0 ] );
-		$table.before( fragment );
+		fragment.appendChild( popup[ 0 ] );
+		fragment.appendChild( menuButton[ 0 ] );
+		table.before( fragment );
 
-		$popup.popup();
+		popup.popup();
 
-		return $menu;
+		return menu;
 	},
 
 	rebuild: function() {
@@ -180,7 +178,7 @@ $.widget( "mobile.table", $.mobile.table, {
 			// columns not being replaced must be cleared from input toggle-locks
 			this._unlockCells( this.allHeaders );
 
-			// update columntoggles and $cells
+			// update columntoggles and cells
 			this._addToggles( this._menu, create );
 
 			// check/uncheck
