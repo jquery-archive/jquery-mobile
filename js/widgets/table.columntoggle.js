@@ -30,85 +30,173 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
-		var id, $menuButton, $popup, $menu,
-			$table = this.element,
-			o = this.options,
-			ns = $.mobile.ns,
-			menuInputChange = function(/* e */) {
-				var checked = this.checked;
-				$( this ).jqmData( "cells" )
-					.toggleClass( "ui-table-cell-hidden", !checked )
-					.toggleClass( "ui-table-cell-visible", checked );
-			};
-
 		this._super();
 
-		if( o.mode !== "columntoggle" ) {
+		if( this.options.mode !== "columntoggle" ) {
 			return;
 		}
 
-		this.element.addClass( o.classes.columnToggleTable );
+		$.extend( this, {
+			_menu: null
+		});
 
-		id = ( $table.attr( "id" ) || o.classes.popup ) + "-popup"; //TODO BETTER FALLBACK ID HERE
-		$menuButton = $( "<a role='button' href='#" + id + "' class='" + o.classes.columnBtn + "' data-" + ns + "rel='popup' data-" + ns + "mini='true'>" + o.columnBtnText + "</a>" );
-		$popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + o.classes.popup + "' id='" + id + "'></div>" );
-		$menu = $( "<fieldset data-" + ns + "role='controlgroup'></fieldset>" );
+		if( this.options.enhanced ) {
+			this._menu = this.document.find( this._id() + "-popup" ).children().first();
+		} else {
+			this._menu = this._enhanceColToggle();
+			this.element.addClass( this.options.classes.columnToggleTable );
+		}
+
+		this._setupEvents();
+
+		this._setToggleState();
+	},
+
+	_id: function() {
+		return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
+	},
+
+	_setupEvents: function() {
+		//NOTE: inputs are bound in bindToggles,
+		// so it can be called on refresh, too
+
+		// update column toggles on resize
+		this._on( $.mobile.window, {
+			throttledresize: "_setToggleState"
+		});
+	},
+
+	_bindToggles: function( menu ) {
+		var inputs = menu.find( "input" );
+
+		this._on( inputs, {
+			change: "_menuInputChange"
+		});
+	},
+
+	_addToggles: function( menu, keep ) {
+		var opts = this.options;
+
+		// allow update of menu on refresh (fixes #5880)
+		if ( !keep ) {
+			menu.empty();
+		}
 
 		// create the hide/show toggles
 		this.headers.not( "td" ).each( function() {
-			var $this = $( this ),
-				priority = $this.jqmData( "priority" ),
-				$cells = $this.add( $this.jqmData( "cells" ) );
+			var header = $( this ),
+				priority = $.mobile.getAttribute( this, "priority", true ),
+				cells = header.add( header.jqmData( "cells" ) );
 
 			if( priority ) {
-				$cells.addClass( o.classes.priorityPrefix + priority );
+				cells.addClass( opts.classes.priorityPrefix + priority );
 
-				$("<label><input type='checkbox' checked />" + $this.text() + "</label>" )
-					.appendTo( $menu )
-					.children( 0 )
-					.jqmData( "cells", $cells )
-					.checkboxradio( {
-						theme: o.columnPopupTheme
-					});
+				if ( !keep ) {
+					$("<label><input type='checkbox' checked />" + header.text() + "</label>" )
+						.appendTo( menu )
+						.children( 0 )
+						.jqmData( "cells", cells )
+						.checkboxradio( {
+							theme: opts.columnPopupTheme
+						});
+				}
 			}
 		});
-		$menu.appendTo( $popup );
 
-		// bind change event listeners to inputs - TODO: move to a private method?
-		$menu.on( "change", "input", menuInputChange );
+		// set bindings here
+		if ( !keep ) {
+			this._bindToggles( menu );
+		}
+	},
 
-		$menuButton
-			.insertBefore( $table )
-			.addClass( "ui-btn ui-btn-" + ( o.columnBtnTheme || "a" ) + " ui-corner-all ui-shadow ui-mini" );
+	_menuInputChange: function( evt ) {
+		var input = $( evt.target ),
+			checked = input[ 0 ].checked;
 
-		$popup
-			.insertBefore( $table )
-			.popup();
+		input.jqmData( "cells" )
+			.toggleClass( "ui-table-cell-hidden", !checked )
+			.toggleClass( "ui-table-cell-visible", checked );
 
-		// refresh method
+		if ( input[ 0 ].getAttribute( "locked" ) ) {
+			input.removeAttr( "locked" );
 
-		this._on( $.mobile.window, { "throttledresize": "refresh" } );
+			this._unlockCells( input.jqmData( "cells" ) );
+		} else {
+			input.attr( "locked", true );
+		}
+	},
 
-		$.extend( this, {
-			_menu: $menu,
-			_menuInputChange: menuInputChange
+	_unlockCells: function( cells ) {
+		// allow hide/show via CSS only = remove all toggle-locks
+		cells.removeClass( "ui-table-cell-hidden ui-table-cell-visible");
+	},
+
+	_enhanceColToggle: function() {
+		var id , menuButton, popup, menu,
+			table = this.element,
+			opts = this.options,
+			ns = $.mobile.ns,
+			fragment = $.mobile.document[ 0 ].createDocumentFragment();
+
+		id = this._id() + "-popup";
+		menuButton = $( "<a role='button' href='#" + id + "' " +
+			"class='" + opts.classes.columnBtn + " ui-btn ui-btn-" + ( opts.columnBtnTheme || "a" ) + " ui-corner-all ui-shadow ui-mini' " +
+			"data-" + ns + "rel='popup' " +
+			"data-" + ns + "mini='true'>" + opts.columnBtnText + "</a>" );
+		popup = $( "<div data-" + ns + "role='popup' data-" + ns + "role='fieldcontain' class='" + opts.classes.popup + "' id='" + id + "'></div>" );
+		menu = $( "<fieldset data-" + ns + "role='controlgroup'></fieldset>" );
+
+		// set extension here, send "false" to trigger build/rebuild
+		this._addToggles( menu, false );
+
+		menu.appendTo( popup );
+
+		fragment.appendChild( popup[ 0 ] );
+		fragment.appendChild( menuButton[ 0 ] );
+		table.before( fragment );
+
+		popup.popup();
+
+		return menu;
+	},
+
+	rebuild: function() {
+		this._super();
+
+		if ( this.options.mode === "columntoggle" ) {
+			// NOTE: rebuild passes "false", while refresh passes "undefined"
+			// both refresh the table, but inside addToggles, !false will be true,
+			// so a rebuild call can be indentified
+			this._refresh( false );
+		}
+	},
+
+	_refresh: function( create ) {
+		this._super( create );
+
+		if ( !create && this.options.mode === "columntoggle" ) {
+			// columns not being replaced must be cleared from input toggle-locks
+			this._unlockCells( this.allHeaders );
+
+			// update columntoggles and cells
+			this._addToggles( this._menu, create );
+
+			// check/uncheck
+			this._setToggleState();
+		}
+	},
+
+	_setToggleState: function() {
+		this._menu.find( "input" ).each( function() {
+			var checkbox = $( this );
+
+			this.checked = checkbox.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell";
+			checkbox.checkboxradio( "refresh" );
 		});
-
-		this.refresh();
 	},
 
 	_destroy: function() {
-		this._menu.off( "change", "input", this._menuInputChange );
 		this._super();
-	},
-
-	refresh: function() {
-		this._menu.find( "input" ).each( function() {
-			var $this = $( this );
-
-			this.checked = $this.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell";
-			$this.checkboxradio( "refresh" );
-		});
 	}
 });
 

@@ -286,7 +286,7 @@ define([
 				stateIndex = cleanedUrl.indexOf( this.uiStateKey );
 
 				// store the ui state keys for use
-				if( stateIndex > -1 ){
+				if ( stateIndex > -1 ){
 					uiState = cleanedUrl.slice( stateIndex );
 					cleanedUrl = cleanedUrl.slice( 0, stateIndex );
 				}
@@ -301,18 +301,18 @@ define([
 				// TODO all this crap is terrible, clean it up
 				if ( isPath ) {
 					// reject the hash if it's a path or it's just a dialog key
-					if( path.isPath( preservedHash ) || preservedHash.replace("#", "").indexOf( this.uiStateKey ) === 0) {
+					if ( path.isPath( preservedHash ) || preservedHash.replace("#", "").indexOf( this.uiStateKey ) === 0) {
 						preservedHash = "";
 					}
 
 					// Append the UI State keys where it exists and it's been removed
 					// from the url
-					if( uiState && preservedHash.indexOf( this.uiStateKey ) === -1){
+					if ( uiState && preservedHash.indexOf( this.uiStateKey ) === -1){
 						preservedHash += uiState;
 					}
 
 					// make sure that pound is on the front of the hash
-					if( preservedHash.indexOf( "#" ) === -1 && preservedHash !== "" ){
+					if ( preservedHash.indexOf( "#" ) === -1 && preservedHash !== "" ){
 						preservedHash = "#" + preservedHash;
 					}
 

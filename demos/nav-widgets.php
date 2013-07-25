@@ -2,7 +2,7 @@
 
 <li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">AJAX Navigation</a></li>
 
-<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote filtertextbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
 
 <li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Buttons</a></li>
 
@@ -12,11 +12,15 @@
 
 <li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
 
+<li data-section="Widgets" data-filtertext="filter elements sorting searching"><a href="widgets/filterable/">Filter <span class="ui-li-count">New</span></a></li>
+
 <li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Dialogs</a></li>
 
 <li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Fixed toolbars</a></li>
 
-<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.php" data-ajax="false">Flip switch toggle</a></li>
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.php" data-ajax="false">Flip switch, slider</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/flipswitch/index.php" data-ajax="false">Flip switch <span class="ui-li-count">New</span></a></a></li>
 
 <li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Footer toolbar</a></li>
 

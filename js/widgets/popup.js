@@ -622,7 +622,7 @@ $.widget( "mobile.popup", {
 					chromematch = ua.indexOf( "Chrome" ) > -1;
 
 				// Platform is Android, WebKit version is greater than 534.13 ( Android 3.2.1 ) and not Chrome.
-				if( androidmatch !== null && andversion === "4.0" && wkversion && wkversion > 534.13 && !chromematch ) {
+				if ( androidmatch !== null && andversion === "4.0" && wkversion && wkversion > 534.13 && !chromematch ) {
 					return true;
 				}
 				return false;
@@ -810,7 +810,7 @@ $.widget( "mobile.popup", {
 		var self = this, opts = this.options, url, hashkey, activePage, currentIsDialog, hasHash, urlHistory;
 
 		// make sure open is idempotent
-		if( $.mobile.popup.active || opts.disabled ) {
+		if ( $.mobile.popup.active || opts.disabled ) {
 			return this;
 		}
 
@@ -820,7 +820,7 @@ $.widget( "mobile.popup", {
 
 		// if history alteration is disabled close on navigate events
 		// and leave the url as is
-		if( !( opts.history ) ) {
+		if ( !( opts.history ) ) {
 			self._open( options );
 			self._bindContainerClose();
 
@@ -878,13 +878,13 @@ $.widget( "mobile.popup", {
 
 	close: function() {
 		// make sure close is idempotent
-		if( $.mobile.popup.active !== this ) {
+		if ( $.mobile.popup.active !== this ) {
 			return this;
 		}
 
 		this._scrollTop = $.mobile.window.scrollTop();
 
-		if( this.options.history && this.urlAltered ) {
+		if ( this.options.history && this.urlAltered ) {
 			$.mobile.back();
 			this.urlAltered = false;
 		} else {

@@ -119,11 +119,11 @@ define( [
 
 			url = e.originalEvent.type.indexOf( "hashchange" ) > -1 ? data.state.hash : data.state.url;
 
-			if( !url ) {
+			if ( !url ) {
 				url = this._getHash();
 			}
 
-			if( !url || url === "#" || url.indexOf( "#" + $.mobile.path.uiStateKey ) === 0 ){
+			if ( !url || url === "#" || url.indexOf( "#" + $.mobile.path.uiStateKey ) === 0 ){
 				url = location.href;
 			}
 
@@ -173,7 +173,7 @@ define( [
 			var history, documentBase;
 
 			// clean the hash for comparison if it's a url
-			if( $.type(to) === "string" ) {
+			if ( $.type(to) === "string" ) {
 				to = path.stripHash(to);
 			}
 
@@ -216,7 +216,7 @@ define( [
 			if ( activeContent && !activeContent.hasClass( "ui-dialog" ) ) {
 				// determine if we're heading forward or backward and continue
 				// accordingly past the current dialog
-				if( data.direction === "back" ) {
+				if ( data.direction === "back" ) {
 					this._back();
 				} else {
 					this._forward();
@@ -607,7 +607,7 @@ define( [
 
 				//if we are reloading the content make sure we update
 				// the base if its not a prefetch
-				if( !settings.prefetch ){
+				if ( !settings.prefetch ){
 					this._getBase().set(url);
 				}
 
@@ -991,7 +991,7 @@ define( [
 				url = ( active.url || "" );
 
 				// account for absolute urls instead of just relative urls use as hashes
-				if( !alreadyThere && url.indexOf("#") > -1 ) {
+				if ( !alreadyThere && url.indexOf("#") > -1 ) {
 					url += dialogHashKey;
 				} else {
 					url += "#" + dialogHashKey;
@@ -1029,7 +1029,7 @@ define( [
 
 				// rebuilding the hash here since we loose it earlier on
 				// TODO preserve the originally passed in path
-				if( !path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
+				if ( !path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
 					url = "#" + url;
 				}
 
@@ -1249,7 +1249,7 @@ define( [
 
 		// if the setting is on and the navigator object is
 		// available use the phonegap navigation capability
-		if( this.phonegapNavigationEnabled &&
+		if ( this.phonegapNavigationEnabled &&
 			nav &&
 			nav.app &&
 			nav.app.backHistory ){

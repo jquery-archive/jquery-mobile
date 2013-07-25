@@ -67,7 +67,9 @@ label.ui-btn {
 .ui-btn-corner-all,
 .ui-btn.ui-corner-all,
 /* Slider track */
-.ui-slider-track.ui-corner-all {
+.ui-slider-track.ui-corner-all,
+/*flipswitch*/
+.ui-flipswitch.ui-corner-all {
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }
@@ -331,6 +333,12 @@ html .ui-bar-a .ui-icon-checkbox-on:after,
 html .ui-body-a .ui-icon-checkbox-on:after,
 html body .ui-group-theme-a .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-a:after,
+/* Active flipswitch background */
+.ui-page-theme-a .ui-flipswitch-active,
+html .ui-bar-a .ui-flipswitch-active,
+html .ui-body-a .ui-flipswitch-active,
+html body .ui-group-theme-a .ui-flipswitch-active,
+html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active,
 /* Active slider track */
 .ui-page-theme-a .ui-slider-track .ui-btn-active,
 html .ui-bar-a .ui-slider-track .ui-btn-active,
@@ -511,6 +519,12 @@ html .ui-bar-b .ui-icon-checkbox-on:after,
 html .ui-body-b .ui-icon-checkbox-on:after,
 html body .ui-group-theme-b .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-b:after,
+/* Active flipswitch background */
+.ui-page-theme-b .ui-flipswitch-active,
+html .ui-bar-b .ui-flipswitch-active,
+html .ui-body-b .ui-flipswitch-active,
+html body .ui-group-theme-b .ui-flipswitch-active,
+html body .ui-flipswitch.ui-bar-b.ui-flipswitch-active,
 /* Active slider track */
 .ui-page-theme-b .ui-slider-track .ui-btn-active,
 html .ui-bar-b .ui-slider-track .ui-btn-active,

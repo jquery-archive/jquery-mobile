@@ -20,7 +20,7 @@ define( [ "jquery",
 	// TODO remove direct references to $.mobile and properties, we should
 	//      favor injection with params to the constructor
 	$.mobile.Transition = function() {
-		this.init.apply(this, arguments);
+		this.init.apply( this, arguments );
 	};
 
 	$.extend($.mobile.Transition.prototype, {
@@ -71,7 +71,7 @@ define( [ "jquery",
 		hideIn: function( callback ) {
 			// Prevent flickering in phonegap container: see comments at #4024 regarding iOS
 			this.$to.css( "z-index", -10 );
-			callback.call(this);
+			callback.call( this );
 			this.$to.css( "z-index", "" );
 		},
 
@@ -80,7 +80,7 @@ define( [ "jquery",
 			// Just to be precautios, disable scrollstart listening like silentScroll would
 			$.event.special.scrollstart.enabled = false;
 			//if we are hiding the url bar or the page was previously scrolled scroll to hide or return to position
-			if( $.mobile.hideUrlBar || this.toScroll !== $.mobile.defaultHomeScroll ) {
+			if ( $.mobile.hideUrlBar || this.toScroll !== $.mobile.defaultHomeScroll ) {
 				window.scrollTo( 0, this.toScroll );
 			}
 
@@ -108,7 +108,7 @@ define( [ "jquery",
 			if ( !none ) {
 				this.$to.animationComplete( $.proxy(function() {
 					this.doneIn();
-				}, this));
+				}, this ));
 			}
 
 			this.$to

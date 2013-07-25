@@ -35,7 +35,7 @@ function validStyle( prop, value, check_vend ) {
 			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
 		},
 		vend_pref = function( vend ) {
-			if( vend === "" ) {
+			if ( vend === "" ) {
 				return "";
 			} else {
 				return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
@@ -88,7 +88,7 @@ function transform3dTest() {
 		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" ),
 		el, transforms, t;
 
-	if( ret ) {
+	if ( ret ) {
 		return !!ret;
 	}
 
@@ -102,7 +102,7 @@ function transform3dTest() {
 	fakeBody.append( el );
 
 	for ( t in transforms ) {
-		if( el.style[ t ] !== undefined ){
+		if ( el.style[ t ] !== undefined ){
 			el.style[ t ] = "translate3d( 100px, 1px, 1px )";
 			ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
 		}
@@ -186,7 +186,7 @@ function fixedPosition() {
 		operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
 		omversion = !!operammobilematch && operammobilematch[ 1 ];
 
-	if(
+	if (
 		// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
 		( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
 		// Opera Mini

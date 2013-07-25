@@ -15,22 +15,22 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			clearBtnText: "Clear text"
 		},
 
-		_create: function(){
+		_create: function() {
 			this._super();
 
-			if( !!this.options.clearBtn || this.isSearch ){
+			if ( !!this.options.clearBtn || this.isSearch ){
 				this._addClearBtn();
 			}
 		},
 
-		clearButton: function(){
+		clearButton: function() {
 
 			return $( "<a href='#' class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" +
     "' title='" + this.options.clearBtnText + "'>" + this.options.clearBtnText + "</a>" );
 
 		},
 
-		_clearBtnClick: function( event ){
+		_clearBtnClick: function( event ) {
 			this.element.val( "" )
 					.focus()
 					.trigger( "change" );
@@ -39,9 +39,9 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			event.preventDefault();
 		},
 
-		_addClearBtn: function(){
+		_addClearBtn: function() {
 
-			if( !this.options.enhanced ) {
+			if ( !this.options.enhanced ) {
 				this._enhanceClear();
 			}
 
@@ -89,15 +89,15 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		_setOptions:function( options ) {
 			this._super( options );
 
-			if( options.clearbtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ) {
-				if( options.clearBtn ){
+			if ( options.clearbtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ) {
+				if ( options.clearBtn ){
 					this._addClearBtn();
 				} else {
 					this._destroyClear();
 				}
 			}
 
-			if( options.clearBtnText !== undefined && this._clearBtn !== undefined ) {
+			if ( options.clearBtnText !== undefined && this._clearBtn !== undefined ) {
 				this._clearBtn.text( options.clearBtnText );
 			}
 		},
@@ -106,7 +106,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this._delay( "_toggleClearClass", 0 );
 		},
 
-		_toggleClearClass: function(){
+		_toggleClearClass: function() {
 			this._clearBtn.toggleClass( "ui-input-clear-hidden", !this.element.val() );
 		},
 
