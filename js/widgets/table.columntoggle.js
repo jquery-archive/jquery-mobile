@@ -29,10 +29,6 @@ $.widget( "mobile.table", $.mobile.table, {
 		})
 	},
 
-	_id: function() {
-		return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
-	},
-
 	_create: function() {
 		this._super();
 
@@ -54,6 +50,10 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._setupEvents();
 
 		this._setToggleState();
+	},
+
+	_id: function() {
+		return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
 	},
 
 	_setupEvents: function() {
