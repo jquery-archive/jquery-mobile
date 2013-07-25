@@ -19,17 +19,15 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
-		var opts = this.options;
-
 		this._super();
 
 		// If it's not reflow mode, return here.
-		if( opts.mode !== "reflow" ) {
+		if( this.options.mode !== "reflow" ) {
 			return;
 		}
 
-		if( !opts.enhanced ) {
-			this.element.addClass( opts.classes.reflowTable );
+		if( !this.options.enhanced ) {
+			this.element.addClass( this.options.classes.reflowTable );
 
 			this._updateReflow();
 		}
@@ -51,31 +49,30 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_updateReflow: function() {
-		var $el = this,
+		var table = this,
 			opts = this.options;
 
 		// get headers in reverse order so that top-level headers are appended last
-		$( $el.allHeaders.get().reverse() ).each( function() {
-			var that = this,
-				$cells = $( that ).data( "cells" ),
+		$( table.allHeaders.get().reverse() ).each( function() {
+			var $cells = $( this ).jqmData( "cells" ),
 				colstart = $.mobile.getAttribute( this, "colstart", true ),
-				hierarchyClass = $cells.not( that ).filter( "thead th" ).length && " ui-table-cell-label-top",
-				text = $( that ).text(),
+				hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
+				text = $( this ).text(),
 				iteration, filter;
 
 				if( text !== ""  ) {
 
 					if( hierarchyClass ) {
-						iteration = parseInt( that.getAttribute( "colspan" ), 10 );
+						iteration = parseInt( this.getAttribute( "colspan" ), 10 );
 						filter = "";
 
 						if( iteration ){
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 						}
 
-						$el._addLabels( $cells.filter( filter ), opts.classes.cellLabels + hierarchyClass, text );
+						table._addLabels( $cells.filter( filter ), opts.classes.cellLabels + hierarchyClass, text );
 					} else {
-						$el._addLabels( $cells, opts.classes.cellLabels, text );
+						table._addLabels( $cells, opts.classes.cellLabels, text );
 					}
 
 				}

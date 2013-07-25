@@ -34,11 +34,9 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
-		var opts = this.options;
-
 		this._super();
 
-		if( opts.mode !== "columntoggle" ) {
+		if( this.options.mode !== "columntoggle" ) {
 			return;
 		}
 
@@ -46,11 +44,11 @@ $.widget( "mobile.table", $.mobile.table, {
 			_menu: null
 		});
 
-		if( opts.enhanced ) {
+		if( this.options.enhanced ) {
 			this._menu = this.document.find( this._id() + "-popup" ).children().first();
 		} else {
 			this._menu = this._enhanceColToggle();
-			this.element.addClass( opts.classes.columnToggleTable );
+			this.element.addClass( this.options.classes.columnToggleTable );
 		}
 
 		this._setupEvents();
@@ -86,18 +84,18 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		// create the hide/show toggles
 		this.headers.not( "td" ).each( function() {
-			var $this = $( this ),
+			var header = $( this ),
 				priority = $.mobile.getAttribute( this, "priority", true ),
-				$cells = $this.add( $this.data( "cells" ) );
+				cells = header.add( header.jqmData( "cells" ) );
 
 			if( priority ) {
-				$cells.addClass( opts.classes.priorityPrefix + priority );
+				cells.addClass( opts.classes.priorityPrefix + priority );
 
 				if ( !keep ) {
-					$("<label><input type='checkbox' checked />" + $this.text() + "</label>" )
+					$("<label><input type='checkbox' checked />" + header.text() + "</label>" )
 						.appendTo( menu )
 						.children( 0 )
-						.data( "cells", $cells )
+						.jqmData( "cells", cells )
 						.checkboxradio( {
 							theme: opts.columnPopupTheme
 						});
@@ -117,14 +115,14 @@ $.widget( "mobile.table", $.mobile.table, {
 			checked = that.checked,
 			locked = that.getAttribute("locked");
 
-		$that.data( "cells" )
+		$that.jqmData( "cells" )
 			.toggleClass( "ui-table-cell-hidden", !checked )
 			.toggleClass( "ui-table-cell-visible", checked );
 
 		if ( locked ) {
 			$that.removeAttr( "locked" );
 
-			this._unlockCells( $that.data( "cells" ) );
+			this._unlockCells( $that.jqmData( "cells" ) );
 		} else {
 			$that.attr( "locked" , true);
 		}
@@ -192,10 +190,10 @@ $.widget( "mobile.table", $.mobile.table, {
 
 	_setToggleState: function() {
 		this._menu.find( "input" ).each( function() {
-			var $this = $( this );
+			var checkbox = $( this );
 
-			this.checked = $this.data( "cells" ).eq( 0 ).css( "display" ) === "table-cell";
-			$this.checkboxradio( "refresh" );
+			this.checked = checkbox.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell";
+			checkbox.checkboxradio( "refresh" );
 		});
 	},
 

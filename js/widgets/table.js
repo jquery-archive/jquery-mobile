@@ -18,10 +18,8 @@ $.widget( "mobile.table", {
 	},
 
 	_create: function() {
-		var opts = this.options;
-
-		if ( !opts.enhanced ) {
-			this.element.addClass( opts.classes.table );
+		if ( !this.options.enhanced ) {
+			this.element.addClass( this.options.classes.table );
 		}
 
 		// extend here, assign on refresh > _setHeaders
@@ -53,34 +51,34 @@ $.widget( "mobile.table", {
 	rebuild: $.noop,
 
 	_refresh: function( /* create */ ) {
-		var $el = this.element,
-			trs = $el.find( "thead tr" );
+		var table = this.element,
+			trs = table.find( "thead tr" );
 
 		// updating headers on refresh (fixes #5880)
 		this._setHeaders();
 
+		// Iterate over the trs
 		trs.each( function() {
-			var coltally = 0,
-				$this = $( this );
+			var coltally = 0;
 
-			$this.children().each( function() {
-				var that = this,
-					span = parseInt( $.mobile.getAttribute( that, "colspan", true), 10 ),
-					sel = ":nth-child(" + ( coltally + 1 ) + ")",
+			// Iterate over the children of the tr
+			$( this ).children().each( function() {
+				var span = parseInt( $.mobile.getAttribute( this, "colspan", true), 10 ),
+					selector = ":nth-child(" + ( coltally + 1 ) + ")",
 					j;
 
-				that.setAttribute( "data-" + $.mobile.ns + "colstart", coltally + 1 );
+				this.setAttribute( "data-" + $.mobile.ns + "colstart", coltally + 1 );
 
 				if( span ) {
 					for( j = 0; j < span - 1; j++ ) {
 						coltally++;
-						sel += ", :nth-child(" + ( coltally + 1 ) + ")";
+						selector += ", :nth-child(" + ( coltally + 1 ) + ")";
 					}
 				}
 
 				// Store "cells" data on header as a reference to all cells in the 
 				// same column as this TH
-				$( that ).data( "cells", $el.find( "tr" ).not( trs.eq( 0 ) ).not( that ).children( sel ) );
+				$( this ).jqmData( "cells", table.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( selector ) );
 
 				coltally++;
 			});
