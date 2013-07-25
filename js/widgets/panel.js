@@ -295,10 +295,7 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						self.element
-							.add( self._wrapper() )
-							.add( self._fixedToolbars() )
-							.on( self._transitionEndEvents, complete );
+						$.mobile.pageContainer.on( self._transitionEndEvents, complete );
 					} else {
 						setTimeout( complete, 0 );
 					}
@@ -327,10 +324,10 @@ $.widget( "mobile.panel", {
 					}
 				},
 				complete = function() {
-					self.element
-						.add( self._wrapper() )
-						.add( self._fixedToolbars() )
-						.off( self._transitionEndEvents, complete );
+					self.element.off( self._transitionEndEvents, complete );
+					if ( o.display !== "overlay" ) {
+						self._wrapper().off( self._transitionEndEvents, complete );
+					}
 
 					self._bindFixListener();
 
@@ -362,17 +359,14 @@ $.widget( "mobile.panel", {
 				
 				_closePanel = function() {
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						self.element
-							.add( self._wrapper() )
-							.add( self._fixedToolbars() )
-							.on( self._transitionEndEvents, complete );
+						$.mobile.pageContainer.on( self._transitionEndEvents, complete );
 					} else {
 						setTimeout( complete, 0 );
 					}
 
 					self.element.removeClass( o.classes.panelOpen );
 					
-					if (o.display !== "overlay" ) {
+					if ( o.display !== "overlay" ) {
 						self._wrapper().removeClass( o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
 					}
@@ -387,10 +381,8 @@ $.widget( "mobile.panel", {
 						$.mobile.pageContainer.removeClass( o.classes.pageContainer );
 						$.mobile.pageContainer.addClass( self._overlayTheme );
 					}
-					self.element
-						.add( self._wrapper() )
-						.add( self._fixedToolbars() )
-						.off( self._transitionEndEvents, complete );
+					
+					$.mobile.pageContainer.off( self._transitionEndEvents, complete );
 						
 					self.element	
 						.addClass( o.classes.panelClosed );
