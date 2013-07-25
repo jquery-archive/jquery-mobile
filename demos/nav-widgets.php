@@ -2,7 +2,7 @@
 
 <li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">AJAX Navigation</a></li>
 
-<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote filtertextbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
 
 <li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Buttons</a></li>
 
@@ -11,6 +11,8 @@
 <li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Collapsibles</a></li>
 
 <li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="filter elements sorting searching"><a href="widgets/filter/">Filter <span class="ui-li-count">New</span></a></li>
 
 <li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Dialogs</a></li>
 

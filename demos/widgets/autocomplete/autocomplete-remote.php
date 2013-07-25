@@ -13,7 +13,7 @@
 	<script src="../../../js/"></script>
     <script>
 		$( document ).on( "pageinit", "#myPage", function() {
-			$( "#autocomplete" ).on( "listviewbeforefilter", function ( e, data ) {
+			$( "#autocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
 				var $ul = $( this ),
 					$input = $( data.input ),
 					value = $input.val(),
@@ -43,7 +43,7 @@
 		});
     </script>
 	<style>
-		.ui-listview-filter-inset {
+		.ui-filter-inset {
 			margin-top: 0;
 		}
     </style>
@@ -60,11 +60,11 @@
 
 	<div data-role="content" class="jqm-content">
 
-  			<h1>Remote autocomplete</h1>
+			<h1>Remote autocomplete</h1>
 
-  			<p class="jqm-intro">To use the listview filter as an autocomplete that taps into remote data sources, you can use the <code>listviewbeforefilter</code> event to dynamically populate a listview as a user types a search query.</p>
+			<p class="jqm-intro">To use the filter as an autocomplete that taps into remote data sources, you can use the <code>filterablebeforefilter</code> event to dynamically populate a listview as a user types a search query.</p>
 
-			 <p>This is useful when you have a very large data set like cities, zip codes, or products that can't be loaded up-front locally. Use the view source button to see the JavaScript that powers this demo.</p>
+			<p>This is useful when you have a very large data set like cities, zip codes, or products that can't be loaded up-front locally. Use the view source button to see the JavaScript that powers this demo.</p>
 			<p>If you have a small list of items, you can use the <a href="../listviews/">listview</a> filter reveal option to make an autocomplete with local listview data.</p>
 
 			<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
