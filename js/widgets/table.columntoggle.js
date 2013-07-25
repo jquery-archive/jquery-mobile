@@ -109,7 +109,9 @@ $.widget( "mobile.table", $.mobile.table, {
 		});
 
 		// set bindings here
-		this._bindToggles( menu );
+		if ( !keep ) {
+			this._bindToggles( menu );
+		}
 	},
 
 	_menuInputChange: function( e ) {
