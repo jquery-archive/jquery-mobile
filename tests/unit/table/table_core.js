@@ -60,14 +60,14 @@
 
 				ok($table.length, "table still enhanced");
 
-				ok($firstHeaderCell.data("cells").length,
+				ok($firstHeaderCell.jqmData( "cells" ).length,
 					"column cells still assigned to header cell");
 
-				equal($firstHeaderCell.data('cells').eq(0).closest("table").attr('id'),
+				equal($firstHeaderCell.jqmData( "cells" ).eq(0).closest("table").attr('id'),
 					"movie-table",
 					"Cell stored is a refreshed cell (currently in the table");
 
-				equal($cellLookUp, $firstHeaderCell.data('cells').first().attr("data-test"),
+				equal($cellLookUp, $firstHeaderCell.jqmData( "cells" ).first().attr("data-test"),
 					"Cell stored in header is in the column of the respective header");
 				start();
 		}, 800);
@@ -111,7 +111,7 @@
 				$(window).trigger("refresh_test_table", ["#reflow-table-test"]);
 
 				equal(
-					$firstHeaderCell.data("cells").first().find('b').length,
+					$firstHeaderCell.jqmData( "cells" ).first().find('b').length,
 					1,
 					"Refreshing does not add more labels to a table cell"
 				);
@@ -197,7 +197,7 @@
 			ok( $input.is( ":checked" ), false, "Input still not checked after refresh" );
 
 			equal(
-				$second_input.data("cells").last().attr("data-test"),
+				$second_input.jqmData( "cells" ).last().attr("data-test"),
 				"foo",
 				"Cell referenced in popup is in table after refresh, columns without data-priority set don't break table on refresh");
 
@@ -235,7 +235,7 @@
 			ok( $input.is( ":checked" ), false, "Input still not checked after rebuild" );
 
 			equal(
-				$last_input.data("cells").last().attr("data-test"),
+				$last_input.jqmData( "cells" ).last().attr("data-test"),
 				"xyz",
 				"Cell referenced in popup is in table after rebuild (new column and toggle button), columns without data-priority don't break table on rebuild");
 
