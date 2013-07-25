@@ -173,28 +173,14 @@ $.widget( "mobile.filterable", {
 	},
 
 	_setOptions: function( options ) {
-		var refilter,
-			currentOpts = this.options;
+		var refilter = !( ( options.filterReveal === undefined ) &&
+				( options.filterCallback === undefined ) &&
+				( options.children === undefined ) );
 
-
-		if ( options.filterReveal !== undefined ) {
-			currentOpts.filterReveal = options.filterReveal;
-			refilter = true;
-		}
-
-		if ( options.filterCallback !== undefined ) {
-			currentOpts.filterCallback = options.filterCallback;
-			refilter = true;
-		}
-
-		if ( options.children !== undefined ) {
-			currentOpts.children = options.children;
-			refilter = true;
-		}
+		this._super( options );
 
 		// Need to set the filterPlaceholder after having established the search input
 		if ( options.filterPlaceholder !== undefined ) {
-			currentOpts.filterPlacehoder = options.filterPlaceholder;
 			if ( this._search ) {
 				this._search.attr( "placeholder", options.filterPlaceholder );
 			}
@@ -207,6 +193,17 @@ $.widget( "mobile.filterable", {
 
 		if ( refilter ) {
 			this.refresh();
+		}
+	},
+
+	_destroy: function() {
+		var opts = this.options,
+			items = this._getFilterableItems();
+
+		if ( opts.enhanced ) {
+			items.toggleClass( "ui-screen-hidden", opts.filterReveal );
+		} else {
+			items.removeClass( "ui-screen-hidden" );
 		}
 	},
 
