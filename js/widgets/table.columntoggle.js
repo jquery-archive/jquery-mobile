@@ -48,7 +48,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		});
 
 		if( opts.enhanced ) {
-			this._menu = $( this._id() + "-popup" ).children().first();
+			this._menu = this.document.find( this._id() + "-popup" ).children().first();
 		} else {
 			this._menu = this._enhanceColToggle();
 			this.element.addClass( opts.classes.columnToggleTable );
