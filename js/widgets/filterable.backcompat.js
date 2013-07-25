@@ -27,22 +27,6 @@ $.mobile.filterable.prototype.options.filterCallback = function( index, searchVa
 };
 
 $.widget( "mobile.filterable", $.mobile.filterable, {
-	_handleCreate: function( evt ) {
-		this._setWidget( this.element.data( "mobile-" + evt.type.substring( 0, evt.type.length - 6 ) ) );
-	},
-
-	_setWidget: function( widget ) {
-		if ( !this._widget && widget ) {
-			this._widget = widget;
-			this._widget._setOptions = replaceSetOptions( this, this._widget._setOptions );
-		}
-
-		if ( !!this._widget ) {
-			this._syncTextInputOptions( this._widget.options );
-		}
-
-		return !!this._widget;
-	},
 
 	_create: function() {
 		var idx, widgetName,
@@ -70,6 +54,23 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		if ( !this._widget ) {
 			this._on( elem, createHandlers );
 		}
+	},
+
+	_handleCreate: function( evt ) {
+		this._setWidget( this.element.data( "mobile-" + evt.type.substring( 0, evt.type.length - 6 ) ) );
+	},
+
+	_setWidget: function( widget ) {
+		if ( !this._widget && widget ) {
+			this._widget = widget;
+			this._widget._setOptions = replaceSetOptions( this, this._widget._setOptions );
+		}
+
+		if ( !!this._widget ) {
+			this._syncTextInputOptions( this._widget.options );
+		}
+
+		return !!this._widget;
 	},
 
 	_isSearchInternal: function() {
