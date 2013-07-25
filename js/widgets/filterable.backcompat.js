@@ -105,6 +105,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		if ( this._isSearchInternal() ) {
 			this._search.remove();
 		}
+		this._super();
 	},
 
 	_syncTextInputOptions: function( options ) {
