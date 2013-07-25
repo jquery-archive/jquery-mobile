@@ -79,7 +79,6 @@
 			ok( $wrapper.hasClass( prefix + "-display-reveal" ), "wrapper display type class" );
 
 			ok( $modal.hasClass( defaults.classes.modalOpen ), "modal open class" );
-			console.log($modal);
 	
 			prefix = defaults.classes.modal;
 			ok( $modal.hasClass( prefix + "-position-left" ), "modal position class" );
