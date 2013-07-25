@@ -214,6 +214,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
 
 /* Page background */
 .ui-page-theme-a,
+.ui-page-theme-a .ui-panel-wrapper,
 /* Count bubble */
 .ui-page-theme-a .ui-li-count,
 html .ui-bar-a .ui-li-count,
@@ -393,6 +394,7 @@ html body .ui-group-theme-b .ui-bar-inherit {
 
 /* Page */
 .ui-page-theme-b,
+.ui-page-theme-b .ui-panel-wrapper,
 /* Count bubble */
 .ui-page-theme-b .ui-li-count,
 html .ui-bar-b .ui-li-count,

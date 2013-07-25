@@ -19,6 +19,12 @@
 	bottom: -1px; /* fixes gap on Chrome for Android */
 	padding-bottom: 1px;
 }
+.ui-panel-display-reveal {
+	z-index: 0;
+}
+.ui-panel-display-push {
+	z-index: 999;
+}
 .ui-panel-display-overlay {
 	z-index: 1001; /* fixed toolbars have z-index 1000 */
 }
@@ -26,9 +32,26 @@
 	padding: 1em;
 }
 
-/* page with panel */
-.ui-page.ui-panel-page-content-display-reveal {
-	z-index: 1;
+/* container and page */
+.ui-panel-page-container {
+	-webkit-transform: translate3d(0,0,0);
+}
+.ui-panel-page-container .ui-page-active {
+	background: none;
+}
+
+/* wrapper */
+.ui-panel-wrapper {
+	position: relative;
+	min-height: inherit;
+	border: 0;
+	overflow-x: hidden;
+	z-index: 999;
+}
+
+/* fiixed toolbars */
+.ui-panel-fixed-toolbar {
+	overflow-x: hidden;
 }
 
 /* dismiss */
@@ -169,33 +192,38 @@
 	border-right-width: 1px;
 	margin-right: -1px;
 }
-.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-open.ui-panel-page-content-display-push {
+.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
 	margin-left: 1px;
+	width: auto;
 }
 .ui-panel-display-push.ui-panel-open.ui-panel-position-right {
 	border-left-width: 1px;
 	margin-left: -1px;
 }
-.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-open.ui-panel-page-content-display-push {
+.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push {
 	margin-right: 1px;
+	width: auto;
 }
 
 /* wrap on wide viewports once open */
-/* TODO: Make this work for fixed toolbars again as well */
 @media (min-width:55em){
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-push.ui-panel-page-content-position-left,
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-reveal.ui-panel-page-content-position-left {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal,
+	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
+	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
 		margin-right: 17em;
 	}
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-push.ui-panel-page-content-position-right,
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-reveal.ui-panel-page-content-position-right {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal,
+	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
+	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
 		margin-left: 17em;
 	}
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-push,
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-push,
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-reveal {
 		width: auto;	
 	}
-	.ui-responsive-panel.ui-panel-dismiss-display-push {
+	.ui-responsive-panel .ui-panel-dismiss-display-push {
 		display: none;
 	}	
 }
