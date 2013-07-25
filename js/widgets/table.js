@@ -32,11 +32,12 @@ $.widget( "mobile.table", {
 			// headers references the THs within the first TR in the table
 			headers: undefined,
 
-			// allHeaders references headers, plus all THs in the thead, which may include several rows, or not
+			// allHeaders references headers, plus all THs in the thead, which may
+			// include several rows, or not
 			allHeaders: undefined
 		});
 
-		this.refresh( true );
+		this._refresh( true );
 	},
 
 	_setHeaders: function() {
@@ -46,7 +47,13 @@ $.widget( "mobile.table", {
 		this.allHeaders = this.headers.add( trs.children() );
 	},
 
-	refresh: function( create ) {
+	refresh: function() {
+		this._refresh();
+	},
+
+	rebuild: $.noop,
+
+	_refresh: function( /* create */ ) {
 		var $el = this.element,
 			trs = $el.find( "thead tr" );
 
