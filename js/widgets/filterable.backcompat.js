@@ -84,7 +84,9 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 				// the current textinput is already of the internally generated variety.
 				return;
 			} else {
-				selector = $( "<input data-" + $.mobile.ns + "type='search'></input>" )
+				selector = $( "<input " +
+					"data-" + $.mobile.ns + "type='search' " +
+					"placeholder='" + this.options.filterPlaceholder + "'></input>" )
 					.jqmData( "ui-filterable-" + this.uuid + "-internal", true );
 				$( "<form class='ui-filterable'></form>" )
 					.append( selector )
