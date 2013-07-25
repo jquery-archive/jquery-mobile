@@ -168,13 +168,17 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	rebuild: function() {
-		// NOTE: rebuild passes "false", while refresh passes "undefined"
-		// both refresh the table, but inside addToggles, !false will be true,
-		// so a rebuild call can be indentified
-		this.refresh( false );
+		this._super();
+
+		if ( this.options.mode === "columntoggle" ) {
+			// NOTE: rebuild passes "false", while refresh passes "undefined"
+			// both refresh the table, but inside addToggles, !false will be true,
+			// so a rebuild call can be indentified
+			this._refresh( false );
+		}
 	},
 
-	refresh: function( create ) {
+	_refresh: function( create ) {
 		this._super( create );
 
 		if ( !create && this.options.mode === "columntoggle" ) {
