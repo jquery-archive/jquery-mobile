@@ -13,15 +13,11 @@
 	}
 
 	function getModalFromPanel( $panel ) {
-		var $page = getPageFromPanel( $panel );
-
-		return $page.find( "." + defaults.classes.modal ).filter(function() {
-			return $( this ).data( "panelid" ) === $panel.attr( "id" );
-		});
+		return $panel.data("mobilePanel")._modal;
 	}
 
 	function getWrapperFromPage( $page ) {
-		return $page.find( "." + defaults.classes.contentWrap );
+		return $page.find( "." + defaults.classes.pageWrapper );
 	}
 
 	module( "stock panel" );
@@ -58,36 +54,36 @@
 	});
 
 	asyncTest( "classes modified by open", function() {
-		expect( 12 );
-
+		expect( 11 );
 		var $panel = $( "#panel-test-open" ),
-			$page = getPageFromPanel( $panel ),
-			$wrapper = getWrapperFromPage( $page ),
+			$page = getPageFromPanel( $panel );
+
+		$panel.one( "panelopen", function( event ) {
+			var $wrapper = getWrapperFromPage( $page ),
 			$modal = getModalFromPanel( $panel ),
 			$openButton = $page.find( "a[href='\\#panel-test-open']" );
 
-		$panel.one( "panelopen", function( event ) {
 			ok( !$openButton.hasClass( $.mobile.activeBtnClass ), "button doesn't have active class" );
 
 			ok( !$panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
 			ok( $panel.hasClass( defaults.classes.panelOpen ), "open class added" );
 
 			equal( $wrapper.length, 1, "wrapper exists." );
+
 			ok( !$wrapper.hasClass( defaults.classes.contentWrapClosed ), "wrapper not closed class" );
 
-			ok( $wrapper.hasClass( defaults.classes.contentWrapOpen ), "wrapper open class" );
+			ok( $wrapper.hasClass( defaults.classes.pageContentPrefix + "-open" ), "wrapper open class" );
 
-			var prefix = defaults.classes.contentWrap;
+			var prefix = defaults.classes.pageContentPrefix;
 			ok( $wrapper.hasClass( prefix + "-position-left" ), "wrapper position class" );
 			ok( $wrapper.hasClass( prefix + "-display-reveal" ), "wrapper display type class" );
 
 			ok( $modal.hasClass( defaults.classes.modalOpen ), "modal open class" );
+			console.log($modal);
+	
 			prefix = defaults.classes.modal;
 			ok( $modal.hasClass( prefix + "-position-left" ), "modal position class" );
 			ok( $modal.hasClass( prefix + "-display-reveal" ), "modal display type class" );
-
-			// complete
-			ok( $page.hasClass( defaults.classes.pagePanelOpen ), "page panel open class added to page" );
 
 			// TODO test positioning when panel height > screen height
 			// TODO test rebind resize after complete
@@ -131,7 +127,7 @@
 			ok( !$wrapper.hasClass( prefix + "-position-left" ), "wrapper position class" );
 			ok( !$wrapper.hasClass( prefix + "-display-overlay" ), "wrapper display type class" );
 
-			ok( $wrapper.hasClass( defaults.classes.contentWrapClosed ), "wrapper closed class" );
+			ok( !$wrapper.hasClass( defaults.classes.pageContentPrefix + "-open" ), "wrapper open class removed" );
 			ok( !$page.hasClass( defaults.classes.pageBlock ), "page block class not added to page" );
 
 			// TODO test positioning when panel height > screen height
@@ -168,7 +164,7 @@
 			$wrapper = getWrapperFromPage( $page );
 
 		ok( $wrapper.length, "wrapper exists" );
-		ok( $wrapper.hasClass( defaults.classes.contentWrapClosed ), "wrapper has closed class" );
+		ok( !$wrapper.hasClass( defaults.classes.pageContentPrefix + "-open" ), "wrapper does not have open class" );
 
 	});
 
@@ -193,7 +189,6 @@
 		ok( !$panel.hasClass( defaults.classes.panelClosed ) );
 		ok( !$panel.hasClass( "ui-body-c" ) );
 		ok( !$panel.hasClass( defaults.classes.cssTransform3d ) );
-		ok( getModalFromPanel( $panel ).length === 0, "modal was removed" );
 
 		ok( !$panel.hasClass( [ classes.openComplete, classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) ) );
 		ok( !$page.hasClass( classes.pageBlock ) );

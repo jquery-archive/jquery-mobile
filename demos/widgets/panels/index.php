@@ -236,11 +236,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <a href="#demo-links" data-rel="close" data-role="button" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /rightpanel3 -->
-
-<?php include( '../../global-nav.php' ); ?>
-
-</div><!-- /page -->
-<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
+	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
 
         <h3>Left Panel: Overlay</h3>
         <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -248,5 +244,10 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /leftpanel3 -->
+
+<?php include( '../../global-nav.php' ); ?>
+
+</div><!-- /page -->
+
 </body>
 </html>

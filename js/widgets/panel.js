@@ -451,7 +451,7 @@ $.widget( "mobile.panel", {
 		
 		this._panelInner.children().unwrap();
 
-		this.element.removeClass( [ this._getPanelClasses(), classes.panelAnimate ].join( " " ) )
+		this.element.removeClass( [ this._getPanelClasses(), this.options.classes.panelAnimate ].join( " " ) )
 			.off( "swipeleft.panel swiperight.panel" )
 			.off( "panelbeforeopen" )
 			.off( "panelhide" )
@@ -467,7 +467,7 @@ $.widget( "mobile.panel", {
 		// open and close
 		this.element
 			.off( this._transitionEndEvents )
-			.removeClass( [ classes.panelUnfixed, classes.panelClosed, classes.panelOpen ].join( " " ) );
+			.removeClass( [ this.options.classes.panelUnfixed, this.options.classes.panelClosed, this.options.classes.panelOpen ].join( " " ) );
 		$.mobile.pageContainer.off( this._transitionEndEvents );
 	}
 });
