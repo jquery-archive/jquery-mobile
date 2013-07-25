@@ -59,6 +59,7 @@ $files = array(
 	'widgets/forms/reset.js',
 	'widgets/forms/checkboxradio.js',
 	'widgets/forms/button.js',
+	'widgets/forms/flipswitch.js',
 	'widgets/forms/slider.js',
 	'widgets/forms/slider.tooltip.js',
 	'widgets/forms/rangeslider.js',

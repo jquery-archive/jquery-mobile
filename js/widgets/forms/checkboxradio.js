@@ -249,7 +249,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 
 }, $.mobile.behaviors.formReset ) );
 
-$.mobile.checkboxradio.initSelector = "input[type='checkbox'],input[type='radio']";
+$.mobile.checkboxradio.initSelector = "input:not( :jqmData(role='flipswitch' ) )[type='checkbox'],input[type='radio']:not( :jqmData(role='flipswitch' ))";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.checkboxradio" );
