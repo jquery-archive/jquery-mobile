@@ -279,4 +279,42 @@
 		], 500 );
 	});
 
+	module( "Filter widget destruction" );
+
+	asyncTest( "Destroy restores visibility of items", function() {
+		input = $( "#destroy-test-input" ),
+		list = $( "#destroy-test" );
+
+		$.testHelper.sequence([
+			function() {
+				input.val( "c" ).trigger( "change" );
+			},
+
+			function() {
+				deepEqual( list.children( ".ui-screen-hidden" ).length, 2, "Two children are hidden when filtering for 'c'." );
+				list.filterable( "destroy" );
+				deepEqual( list.children( ".ui-screen-hidden" ).length, 0, "All children become visible when destroying the filterable while a filter is active." );
+				start();
+			}
+		], 500 );
+	});
+
+	asyncTest( "Pre-rendered: destroy restores visibility of items", function() {
+		input = $( "#pre-rendered-destroy-test-input" ),
+		list = $( "#pre-rendered-destroy-test" );
+
+		$.testHelper.sequence([
+			function() {
+				input.val( "c" ).trigger( "change" );
+			},
+
+			function() {
+				deepEqual( list.children( ".ui-screen-hidden" ).length, 2, "Two children are hidden when filtering for 'c'." );
+				list.filterable( "destroy" );
+				deepEqual( list.children( ".ui-screen-hidden" ).length, 4, "All children become hidden when destroying the pre-rendered filterable while a filter is active and filterReveal is set." );
+				start();
+			}
+		], 500 );
+	});
+
 })(jQuery);

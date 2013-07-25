@@ -286,6 +286,26 @@
 			<span data-nstest-filtertext="a">f</span>
 		</div>
 
+		<input id="destroy-test-input"></input>
+		<div id="destroy-test" data-nstest-filter="true" data-nstest-input="#destroy-test-input">
+			<p>San Francisco, CA</p>
+			<p>Portland, OR</p>
+			<p>Washington, DC</p>
+			<p>New York, NY</p>
+		</div>
+
+		<input id="pre-rendered-destroy-test-input"></input>
+		<div id="pre-rendered-destroy-test"
+			data-nstest-enhanced="true"
+			data-nstest-filter="true"
+			data-nstest-input="#pre-rendered-destroy-test-input"
+			data-nstest-filter-reveal="true">
+			<p class="ui-screen-hidden">San Francisco, CA</p>
+			<p class="ui-screen-hidden">Portland, OR</p>
+			<p class="ui-screen-hidden">Washington, DC</p>
+			<p class="ui-screen-hidden">New York, NY</p>
+		</div>
+
 	</div>
 </div>
 
