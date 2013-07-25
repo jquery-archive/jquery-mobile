@@ -172,15 +172,9 @@ $.widget( "mobile.panel", {
 				self._unfixPanel();
 				$.mobile.resetActivePageHeight( panelInnerHeight );
 			}
-			self._scrollIntoView( panelInnerHeight );
+			window.scrollTo( 0, $.mobile.defaultHomeScroll );
 		} else {
 			self._fixPanel();
-		}
-	},
-
-	_scrollIntoView: function( panelInnerHeight ) {
-		if ( panelInnerHeight < $( window ).scrollTop() ) {
-			window.scrollTo( 0, 0 );
 		}
 	},
 
