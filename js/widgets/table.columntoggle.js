@@ -16,7 +16,6 @@ define( [
 (function( $, undefined ) {
 
 $.widget( "mobile.table", $.mobile.table, {
-
 	options: {
 		mode: "columntoggle",
 		columnBtnTheme: null,
@@ -87,7 +86,6 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		// create the hide/show toggles
 		this.headers.not( "td" ).each( function() {
-
 			var $this = $( this ),
 				priority = $.mobile.getAttribute( this, "priority", true ),
 				$cells = $this.add( $this.data( "cells" ) );
@@ -105,7 +103,6 @@ $.widget( "mobile.table", $.mobile.table, {
 						});
 				}
 			}
-
 		});
 
 		// set bindings here

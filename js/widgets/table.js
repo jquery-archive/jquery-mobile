@@ -10,7 +10,6 @@ define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.regis
 (function( $, undefined ) {
 
 $.widget( "mobile.table", {
-
 	options: {
 		classes: {
 			table: "ui-table"
@@ -87,7 +86,6 @@ $.widget( "mobile.table", {
 			});
 		});
 	}
-
 });
 
 $.mobile.table.initSelector = ":jqmData(role='table')";
