@@ -19,10 +19,10 @@ $.widget( "mobile.filterable", {
 	options: {
 
 		// DEPRECATED and must be removed in 1.5.0, because the idea is that
-		// filterable DOES NOT create any textinput. Instead, the MUST provide
-		// a textinput as part of the original markup. The "inputSelector"
-		// option below can then be set to a jQuery selector that will retrieve
-		// the input to be used as the source of filter text.
+		// filterable DOES NOT create any textinput. Instead, the user MUST provide
+		// a textinput as part of the original markup. The "inputSelector" option
+		// below can then be set to a jQuery selector that will retrieve the input
+		// to be used as the source of filter text.
 		filterPlaceholder: "Filter items...",
 		filterReveal: false,
 		filterCallback: defaultFilterCallback,
@@ -78,30 +78,30 @@ $.widget( "mobile.filterable", {
 	},
 
 	_filterItems: function( val ) {
-		var idx, show, hide, callback, length,
+		var idx, callback, length, dst,
+			show = [],
+			hide = [],
 			opts = this.options,
 			filterItems = this._getFilterableItems();
 
-		if ( val ) {
-
-			show = [];
-			hide = [];
+		if ( val != null ) {
 			callback = opts.filterCallback || defaultFilterCallback;
 			length = filterItems.length;
 
 			// Partition the items into those to be hidden and those to be shown
 			for ( idx = 0 ; idx < length ; idx++ ) {
-				if ( callback.call( filterItems[ idx ], idx, val ) ) {
-					hide.push( filterItems[ idx ] );
-				} else {
-					show.push( filterItems[ idx ] );
-				}
+				dst = ( callback.call( filterItems[ idx ], idx, val ) ) ? hide : show;
+				dst.push( filterItems[ idx ] );
 			}
+		}
 
+		// If nothing is hidden, then the decision whether to hide or show the items
+		// is based on the "filterReveal" option.
+		if ( hide.length === 0 ) {
+			filterItems[ opts.filterReveal ? "addClass" : "removeClass" ]( "ui-screen-hidden" );
+		} else {
 			$( hide ).addClass( "ui-screen-hidden" );
 			$( show ).removeClass( "ui-screen-hidden" );
-		} else {
-			filterItems[ opts.filterReveal ? "addClass" : "removeClass" ]( "ui-screen-hidden" );
 		}
 
 		this._refreshChildWidget();
@@ -151,6 +151,10 @@ $.widget( "mobile.filterable", {
 			});
 		}
 
+		if ( search ) {
+			search.attr( "placeholder", this.options.filterPlaceholder );
+		}
+
 		this._search = search;
 	},
 
@@ -173,10 +177,6 @@ $.widget( "mobile.filterable", {
 			currentOpts = this.options;
 
 
-		if ( options.filterPlaceholder !== undefined && this._search ) {
-			this._search.attr( "placeholder", options.filterPlaceholder );
-		}
-
 		if ( options.filterReveal !== undefined ) {
 			currentOpts.filterReveal = options.filterReveal;
 			refilter = true;
@@ -190,6 +190,14 @@ $.widget( "mobile.filterable", {
 		if ( options.children !== undefined ) {
 			currentOpts.children = options.children;
 			refilter = true;
+		}
+
+		// Need to set the filterPlaceholder after having established the search input
+		if ( options.filterPlaceholder !== undefined ) {
+			currentOpts.filterPlacehoder = options.filterPlaceholder;
+			if ( this._search ) {
+				this._search.attr( "placeholder", options.filterPlaceholder );
+			}
 		}
 
 		if ( options.input !== undefined ) {
