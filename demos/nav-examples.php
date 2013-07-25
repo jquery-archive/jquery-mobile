@@ -9,7 +9,7 @@
 <!--
 <li data-role="list-divider">Filter</li>
 
-<li data-section="Demo Showcase" data-filtertext="running a custom filter query on local and remote storages"><a href="examples/filter/server-side-filter.php" data-ajax="false">Local/remote storage Filter</a></li>
+<li data-section="Demo Showcase" data-filtertext="running a custom filter query on local and remote storages"><a href="examples/filterable/server-side-filter.php" data-ajax="false">Local/remote storage Filter</a></li>
 -->
 <li data-role="list-divider">Listviews</li>
 

@@ -31,7 +31,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Filter <a href="http://api.jquerymobile.com/filter/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Filter <a href="http://api.jquerymobile.com/filterable/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">
 			The children of any element can be filtered by setting the attribute <code>data-filter="true"</code> on the element. By default, the text contained in each child is used for filtering. However, you also have the options of setting the attribute <code>data-filtertext</code> to a string value on any child that will be considered for filtering  to associate custom filter text instead.

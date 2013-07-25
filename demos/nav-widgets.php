@@ -12,7 +12,7 @@
 
 <li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
 
-<li data-section="Widgets" data-filtertext="filter elements sorting searching"><a href="widgets/filter/">Filter <span class="ui-li-count">New</span></a></li>
+<li data-section="Widgets" data-filtertext="filter elements sorting searching"><a href="widgets/filterable/">Filter <span class="ui-li-count">New</span></a></li>
 
 <li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Dialogs</a></li>
 
