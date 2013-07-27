@@ -90,7 +90,6 @@ $.widget( "mobile.popup", {
 
 		// Define instance variables
 		$.extend( this, {
-			_containerClasses: "",
 			_scrollTop: 0,
 			_page: elem.closest( ".ui-page" ),
 			_ui: null,
@@ -116,7 +115,9 @@ $.widget( "mobile.popup", {
 			};
 		} else {
 			this._ui = this._enhance( elem, myId );
-			this._setOptions( opts );
+			this
+				._applyTransition( opts.transition )
+				._setTolerance( opts.tolerance );
 		}
 		this._ui.focusElement = this._ui.container;
 
@@ -131,10 +132,13 @@ $.widget( "mobile.popup", {
 	},
 
 	_enhance: function( elem, myId ) {
-		var ui = {
-				screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
+		var opts = this.options,
+			ui = {
+				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
+				this._themeClassFromOption( "ui-overlay-", opts.overlayTheme ) + "'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate'></div>" )
+				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
+					( opts.wrapperClass || "" ) + "'></div>" )
 			},
 			frag = this.document[ 0 ].createDocumentFragment();
 
@@ -153,7 +157,13 @@ $.widget( "mobile.popup", {
 		this._page[ 0 ].appendChild( frag );
 		// Leave a placeholder where the element used to be
 		ui.placeholder.insertAfter( elem );
-		elem.addClass( "ui-popup" ).appendTo( ui.container );
+		elem
+			.detach()
+			.addClass( "ui-popup " +
+				this._themeClassFromOption( "ui-body-", opts.theme ) + " " +
+				( opts.shadow ? "ui-overlay-shadow " : "" ) +
+				( opts.corners ? "ui-corner-all " : "" ) )
+			.appendTo( ui.container );
 
 		return ui;
 	},
@@ -284,42 +294,23 @@ $.widget( "mobile.popup", {
 		this._ignoreResizeEvents();
 	},
 
-	_applyTheme: function( dst, theme, prefix ) {
-		var themeStr, matches,
-			classes = ( dst.attr( "class" ) || "" ).split( " " ),
-			currentTheme = null;
-
-		theme = ( ( theme === null && prefix === "body" ) ? "inherit" : theme );
-		themeStr = String( theme );
-
-		while ( classes.length > 0 ) {
-			currentTheme = classes.pop();
-			matches = ( new RegExp( "^ui-" + prefix + "-([a-z]|inherit)$" ) ).exec( currentTheme );
-			if ( matches && matches.length > 1 ) {
-				currentTheme = matches[ 1 ];
-				break;
-			} else {
-				currentTheme = null;
-			}
-		}
-
-		if ( theme !== currentTheme ) {
-			dst.removeClass( "ui-" + prefix + "-" + currentTheme );
-			if ( ! ( theme === null || theme === "none" ) ) {
-				dst.addClass( "ui-" + prefix + "-" + themeStr );
-			}
-		}
+	_themeClassFromOption: function( prefix, value ) {
+		return ( value ? ( value === "none" ? "" : ( prefix + value ) ) : ( prefix + "inherit" ) );
 	},
 
 	_applyTransition: function( value ) {
-		this._ui.container.removeClass( this._fallbackTransition );
-		if ( value && value !== "none" ) {
-			this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
-			if ( this._fallbackTransition === "none" ) {
-				this._fallbackTransition = "";
+		if ( value ) {
+			this._ui.container.removeClass( this._fallbackTransition );
+			if ( value !== "none" ) {
+				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
+				if ( this._fallbackTransition === "none" ) {
+					this._fallbackTransition = "";
+				}
+				this._ui.container.addClass( this._fallbackTransition );
 			}
-			this._ui.container.addClass( this._fallbackTransition );
 		}
+
+		return this;
 	},
 
 	_setOptions: function( opts ) {
@@ -328,17 +319,20 @@ $.widget( "mobile.popup", {
 
 		if ( opts.wrapperClass !== undefined ) {
 			this._ui.container
-				.removeClass( this._containerClasses )
+				.removeClass( this.options.wrapperClass )
 				.addClass( opts.wrapperClass );
-			this._containerClasses = opts.wrapperClass;
 		}
 
 		if ( opts.theme !== undefined ) {
-			this._applyTheme( el, opts.theme, "body" );
+			el
+				.removeClass( this._themeClassFromOption( "ui-body-", this.options.theme ) )
+				.addClass( this._themeClassFromOption( "ui-body-", opts.theme ) );
 		}
 
 		if ( opts.overlayTheme !== undefined ) {
-			this._applyTheme( screen, opts.overlayTheme, "overlay" );
+			screen
+				.removeClass( this._themeClassFromOption( "ui-overlay-", this.options.overlayTheme ) )
+				.addClass( this._themeClassFromOption( "ui-overlay-", opts.overlayTheme ) );
 
 			if ( this._isOpen ) {
 				screen.addClass( "in" );
@@ -421,6 +415,7 @@ $.widget( "mobile.popup", {
 		}
 
 		this._tolerance = tol;
+		return this;
 	},
 
 	_clampPopupWidth: function( infoOnly ) {
