@@ -78,6 +78,86 @@ $.widget( "mobile.popup", {
 		history: !$.mobile.browser.oldIE
 	},
 
+	_create: function() {
+		var elem = this.element,
+			myId = elem.attr( "id" ),
+			opts = this.options;
+
+		// We need to adjust the history option to be false if there's no AJAX nav.
+		// We can't do it in the option declarations because those are run before
+		// it is determined whether there shall be AJAX nav.
+		opts.history = opts.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
+
+		// Define instance variables
+		$.extend( this, {
+			_containerClasses: "",
+			_scrollTop: 0,
+			_page: elem.closest( ".ui-page" ),
+			_ui: null,
+			_fallbackTransition: "",
+			_currentTransition: false,
+			_prereqs: null,
+			_isOpen: false,
+			_tolerance: null,
+			_resizeData: null,
+			_ignoreResizeTo: 0,
+			_orientationchangeInProgress: false
+		});
+
+		if ( this._page.length === 0 ) {
+			this._page = this.body;
+		}
+
+		if ( opts.enhanced ) {
+			this._ui = {
+				container: elem.parent(),
+				screen: elem.parent().prev(),
+				placeholder: $( this.document[ 0 ].getElementById( myId + "-placeholder" ) )
+			};
+		} else {
+			this._ui = this._enhance( elem, myId );
+			this._setOptions( opts );
+		}
+		this._ui.focusElement = this._ui.container;
+
+		// Event handlers
+		this._on( this._ui.screen, { "vclick": "_eatEventAndClose" } );
+		this._on( $.mobile.window, {
+			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
+			resize: $.proxy( this, "_handleWindowResize" ),
+			keyup: $.proxy( this, "_handleWindowKeyUp" )
+		});
+		this._on( $.mobile.document, { "focusin": "_handleDocumentFocusIn" } );
+	},
+
+	_enhance: function( elem, myId ) {
+		var ui = {
+				screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
+				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
+				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate'></div>" )
+			},
+			frag = this.document[ 0 ].createDocumentFragment();
+
+		frag.appendChild( ui.screen[ 0 ] );
+		frag.appendChild( ui.container[ 0 ] );
+
+		if ( myId ) {
+			ui.screen.attr( "id", myId + "-screen" );
+			ui.container.attr( "id", myId + "-popup" );
+			ui.placeholder
+				.attr( "id", myId + "-placeholder" )
+				.html( "<!-- placeholder for " + myId + " -->" );
+		}
+
+		// Apply the proto
+		this._page[ 0 ].appendChild( frag );
+		// Leave a placeholder where the element used to be
+		ui.placeholder.insertAfter( elem );
+		elem.addClass( "ui-popup" ).appendTo( ui.container );
+
+		return ui;
+	},
+
 	_eatEventAndClose: function( evt ) {
 		evt.preventDefault();
 		evt.stopImmediatePropagation();
@@ -202,86 +282,6 @@ $.widget( "mobile.popup", {
 		}
 
 		this._ignoreResizeEvents();
-	},
-
-	_create: function() {
-		var elem = this.element,
-			myId = elem.attr( "id" ),
-			opts = this.options;
-
-		// We need to adjust the history option to be false if there's no AJAX nav.
-		// We can't do it in the option declarations because those are run before
-		// it is determined whether there shall be AJAX nav.
-		opts.history = opts.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
-
-		// Define instance variables
-		$.extend( this, {
-			_containerClasses: "",
-			_scrollTop: 0,
-			_page: elem.closest( ".ui-page" ),
-			_ui: null,
-			_fallbackTransition: "",
-			_currentTransition: false,
-			_prereqs: null,
-			_isOpen: false,
-			_tolerance: null,
-			_resizeData: null,
-			_ignoreResizeTo: 0,
-			_orientationchangeInProgress: false
-		});
-
-		if ( this._page.length === 0 ) {
-			this._page = this.body;
-		}
-
-		if ( opts.enhanced ) {
-			this._ui = {
-				container: elem.parent(),
-				screen: elem.parent().prev(),
-				placeholder: $( this.document[ 0 ].getElementById( myId + "-placeholder" ) )
-			};
-		} else {
-			this._ui = this._enhance( elem, myId );
-			this._setOptions( opts );
-		}
-		this._ui.focusElement = this._ui.container;
-
-		// Event handlers
-		this._on( this._ui.screen, { "vclick": "_eatEventAndClose" } );
-		this._on( $.mobile.window, {
-			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
-			resize: $.proxy( this, "_handleWindowResize" ),
-			keyup: $.proxy( this, "_handleWindowKeyUp" )
-		});
-		this._on( $.mobile.document, { "focusin": "_handleDocumentFocusIn" } );
-	},
-
-	_enhance: function( elem, myId ) {
-		var ui = {
-				screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
-				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate'></div>" )
-			},
-			frag = this.document[ 0 ].createDocumentFragment();
-
-		frag.appendChild( ui.screen[ 0 ] );
-		frag.appendChild( ui.container[ 0 ] );
-
-		if ( myId ) {
-			ui.screen.attr( "id", myId + "-screen" );
-			ui.container.attr( "id", myId + "-popup" );
-			ui.placeholder
-				.attr( "id", myId + "-placeholder" )
-				.html( "<!-- placeholder for " + myId + " -->" );
-		}
-
-		// Apply the proto
-		this._page[ 0 ].appendChild( frag );
-		// Leave a placeholder where the element used to be
-		ui.placeholder.insertAfter( elem );
-		elem.addClass( "ui-popup" ).appendTo( ui.container );
-
-		return ui;
 	},
 
 	_applyTheme: function( dst, theme, prefix ) {
