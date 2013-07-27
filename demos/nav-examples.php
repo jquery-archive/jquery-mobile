@@ -43,6 +43,8 @@
 
 <li data-section="Demo Showcase" data-filtertext="arrow popups popover"><a href="examples/popups/arrow.php" data-ajax="false">Popup with arrow</a></li>
 
+<li data-section="Demo Showcase" data-filtertext="popups popup position alignment"><a href="examples/popups/alignment.php" data-ajax="false">Popup alignment</a></li>
+
 <li data-role="list-divider">Responsive Tables</li>
 
 <li data-section="Demo Showcase" data-filtertext="responsive tables reflow stack custom styles"><a href="examples/tables/movie-list.php" data-ajax="false">Reflow: Custom styles</a></li>
