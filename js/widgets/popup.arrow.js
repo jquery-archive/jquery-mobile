@@ -143,8 +143,6 @@ $.widget( "mobile.popup", $.mobile.popup, {
 			return this._super( desired );
 		}
 
-		ar.arEls.show();
-
 		bgRef = {};
 		ar = this._ui.arrow;
 		state = this._getPlacementState( true );
@@ -154,6 +152,8 @@ $.widget( "mobile.popup", $.mobile.popup, {
 			"b": { fst: "y", snd: "x", prop: "left", dimKey: "cx", oDimKey: "cy", offsetFactor: -1, tipOffset: state.arHalf.cy + state.contentBox.cy, arrowOffsetFactor: 1 },
 			"t": { fst: "y", snd: "x", prop: "left", dimKey: "cx", oDimKey: "cy", offsetFactor: 1, tipOffset: -state.arHalf.cy, arrowOffsetFactor: 0 }
 		};
+
+		ar.arEls.show();
 
 		// Try each side specified in the options to see on which one the arrow
 		// should be placed such that the distance between the tip of the arrow and
