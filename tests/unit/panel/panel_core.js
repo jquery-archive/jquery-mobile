@@ -13,7 +13,7 @@
 	}
 
 	function getModalFromPanel( $panel ) {
-		return $panel.data("mobilePanel")._modal;
+		return $panel.data("mobile-panel")._modal;
 	}
 
 	function getWrapperFromPage( $page ) {
