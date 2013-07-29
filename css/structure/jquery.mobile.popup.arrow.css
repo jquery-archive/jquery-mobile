@@ -53,17 +53,9 @@
 	clip: rect(-1000px,10px,2000px,-1000px);
 }
 
-.ui-popup-arrow-container.ie.ui-popup-arrow-l {
-	clip: rect(-1000px 10px 2000px -1000px);
-}
-
 .ui-popup-arrow-container.ui-popup-arrow-t {
 	top: -10px;
 	clip: rect(-1000px,2000px,10px,-1000px);
-}
-
-.ui-popup-arrow-container.ie.ui-popup-arrow-t {
-	clip: rect(-1000px 2000px 10px -1000px);
 }
 
 .ui-popup-arrow-container.ui-popup-arrow-r {
@@ -71,17 +63,9 @@
 	clip: rect(-1000px,2000px,2000px,10px);
 }
 
-.ui-popup-arrow-container.ie.ui-popup-arrow-r {
-	clip: rect(-1000px 2000px 2000px 10px);
-}
-
 .ui-popup-arrow-container.ui-popup-arrow-b {
 	bottom: -10px;
 	clip: rect(10px,2000px,1000px,-1000px);
-}
-
-.ui-popup-arrow-container.ie.ui-popup-arrow-b {
-	clip: rect(10px 2000px 1000px -1000px);
 }
 
 /**
