@@ -42,13 +42,6 @@
  * arrow container's top/left coordinate.
  **/
 
-.ui-popup.ui-corner-all > .ui-popup-arrow-guide {
-	left: .6em /*{global-radii-blocks}*/;
-	right: .6em /*{global-radii-blocks}*/;
-	top: .6em /*{global-radii-blocks}*/;
-	bottom: .6em /*{global-radii-blocks}*/;
-}
-
 .ui-popup-arrow-container {
 	width: 20px;
 	height: 20px;
