@@ -64,7 +64,7 @@ $.widget( "mobile.button", {
 			( this.options.mini ? " ui-mini" : "" ) +
 			( this.options.disabled ? " ui-disabled" : "" ) +
 			( ( this.options.iconpos && this.options.icon ) ? " ui-btn-icon-" + this.options.iconpos : ( this.options.icon ? " ui-btn-icon-left" : "" ) ) +
-			( this.options.icon ? "ui-icon-" + this.options.icon : "" ) +
+			( this.options.icon ? " ui-icon-" + this.options.icon : "" ) +
 			"' >" + this.element.val() + "</div>");
 	},
 
