@@ -34,6 +34,7 @@ $( document ).on( "click", function( e ) {
 			border: 1px solid black;
 			margin-left: -1px;
 			margin-top: -1px;
+			pointer-events: none;
 		}
 	</style>
 </head>
