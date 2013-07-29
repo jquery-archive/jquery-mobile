@@ -116,6 +116,8 @@
 	/* ( (2*desired triangle height) - (above width/height) ) / 2 */
 	left: 2.928932188px;
 	top: 2.928932188px;
+	border-width: 1px;
+	border-style: solid;
 }
 
 .ui-popup-arrow-container.ie .ui-popup-arrow {
