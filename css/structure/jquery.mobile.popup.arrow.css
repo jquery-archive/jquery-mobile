@@ -42,52 +42,52 @@
  * arrow container's top/left coordinate.
  **/
 
-.ui-popup.ui-corner-all > .arrow-guide {
+.ui-popup.ui-corner-all > .ui-popup-arrow-guide {
 	left: .6em /*{global-radii-blocks}*/;
 	right: .6em /*{global-radii-blocks}*/;
 	top: .6em /*{global-radii-blocks}*/;
 	bottom: .6em /*{global-radii-blocks}*/;
 }
 
-.arrow-container {
+.ui-popup-arrow-container {
 	width: 20px;
 	height: 20px;
 }
 
 /* aside from the "infinities" (-1000,2000), triangle height is used */
-.arrow-container.l {
+.ui-popup-arrow-container.ui-popup-arrow-l {
 	left: -10px;
 	clip: rect(-1000px,10px,2000px,-1000px);
 }
 
-.arrow-container.ie.l {
+.ui-popup-arrow-container.ie.ui-popup-arrow-l {
 	clip: rect(-1000px 10px 2000px -1000px);
 }
 
-.arrow-container.t {
+.ui-popup-arrow-container.ui-popup-arrow-t {
 	top: -10px;
 	clip: rect(-1000px,2000px,10px,-1000px);
 }
 
-.arrow-container.ie.t {
+.ui-popup-arrow-container.ie.ui-popup-arrow-t {
 	clip: rect(-1000px 2000px 10px -1000px);
 }
 
-.arrow-container.r {
+.ui-popup-arrow-container.ui-popup-arrow-r {
 	right: -10px;
 	clip: rect(-1000px,2000px,2000px,10px);
 }
 
-.arrow-container.ie.r {
+.ui-popup-arrow-container.ie.ui-popup-arrow-r {
 	clip: rect(-1000px 2000px 2000px 10px);
 }
 
-.arrow-container.b {
+.ui-popup-arrow-container.ui-popup-arrow-b {
 	bottom: -10px;
 	clip: rect(10px,2000px,1000px,-1000px);
 }
 
-.arrow-container.ie.b {
+.ui-popup-arrow-container.ie.ui-popup-arrow-b {
 	clip: rect(10px 2000px 1000px -1000px);
 }
 
@@ -109,7 +109,7 @@
  * |    \/    |
  * +----------+
  **/
-.arrow {
+.ui-popup-arrow {
 	/* (2*desired triangle height)/sqrt(2) - does not account for border - centred within the outer rectangle */
 	width: 14.142135624px;
 	height: 14.142135624px;
@@ -118,39 +118,39 @@
 	top: 2.928932188px;
 }
 
-.arrow-container.ie .arrow {
+.ui-popup-arrow-container.ie .ui-popup-arrow {
 	/* Fix rotation center  - see http://www.useragentman.com/IETransformsTranslator/ */
 	margin-left: -3px;
 	margin-top: -3px;
 }
 
-.arrow-background {
+.ui-popup-arrow-background {
 	/* desired triangle height is used here */
 	width: 20px;
 	height: 20px;
 }
 
-.arrow-container.t .arrow-background {
+.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow-background {
 	/* 0px triangle height */
 	background-position: 0 10px;
 }
 
-.arrow-container.l .arrow-background {
+.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow-background {
 	/* triangle height 0px */
 	background-position: 10px 0;
 }
 
 /* For some reason (probably because of all the decimal places) there's a
    rounding error in the background position, so push it over by one */
-.arrow-container.b .arrow-background {
+.ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow-background {
 	background-position: 0 11px;
 }
 
-.arrow-container.r .arrow-background {
+.ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow-background {
 	background-position: 11px 0;
 }
 
-.ui-popup > .arrow-guide {
+.ui-popup > .ui-popup-arrow-guide {
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -159,11 +159,11 @@
 	pointer-events: none;
 }
 
-.arrow-container {
+.ui-popup-arrow-container {
 	position: absolute;
 }
 
-.arrow {
+.ui-popup-arrow {
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
@@ -173,7 +173,7 @@
 	box-sizing: border-box;
 }
 
-.arrow-container.ie .arrow {
+.ui-popup-arrow-container.ie .ui-popup-arrow {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')";
 	filter: progid:DXImageTransform.Microsoft.Matrix(
 	      	M11=0.7071067811865474,
@@ -183,17 +183,17 @@
         	SizingMethod='auto expand');
 }
 
-.arrow-background {
+.ui-popup-arrow-background {
 	position: absolute;
 	border: 0;
 }
 
-.arrow-container.ie .arrow-background {
+.ui-popup-arrow-container.ie .ui-popup-arrow-background {
 	background: none;
 }
 
-.arrow-container.t .arrow-background,
-.arrow-container.b .arrow-background {
+.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow-background,
+.ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow-background {
 	/* Undo rotation and reflect in x axis */
 	-webkit-transform: rotate(-45deg) scale(1, -1);
 	-moz-transform: rotate(-45deg) scale(1, -1);
@@ -201,8 +201,8 @@
 	transform: rotate(-45deg) scale(1, -1);
 }
 
-.arrow-container.t.ie .arrow-background,
-.arrow-container.b.ie .arrow-background {
+.ui-popup-arrow-container.ui-popup-arrow-t.ie .ui-popup-arrow-background,
+.ui-popup-arrow-container.ui-popup-arrow-b.ie .ui-popup-arrow-background {
    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865483, M12=-0.7071067811865467, M21=-0.7071067811865467, M22=-0.7071067811865483, SizingMethod='auto expand')";
    filter: progid:DXImageTransform.Microsoft.Matrix(
             M11=0.7071067811865483,
@@ -212,8 +212,8 @@
             SizingMethod='auto expand');
 }
 
-.arrow-container.l .arrow-background,
-.arrow-container.r .arrow-background {
+.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow-background,
+.ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow-background {
 	/* Undo rotation and reflect in y axis */
 	-webkit-transform: rotate(-45deg) scale(-1, 1);
 	-moz-transform: rotate(-45deg) scale(-1, 1);
@@ -221,8 +221,8 @@
 	transform: rotate(-45deg) scale(-1, 1);
 }
 
-.arrow-container.l.ie .arrow-background,
-.arrow-container.r.ie .arrow-background {
+.ui-popup-arrow-container.ui-popup-arrow-l.ie .ui-popup-arrow-background,
+.ui-popup-arrow-container.ui-popup-arrow-r.ie .ui-popup-arrow-background {
    -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-0.7071067811865483, M12=0.7071067811865467, M21=0.7071067811865467, M22=0.7071067811865483, SizingMethod='auto expand')";
    filter: progid:DXImageTransform.Microsoft.Matrix(
             M11=-0.7071067811865483,
