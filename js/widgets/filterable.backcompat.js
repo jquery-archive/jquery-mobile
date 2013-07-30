@@ -84,6 +84,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 
 	_setInput: function( selector ) {
 		var opts = this.options,
+			updatePlaceholder = true,
 			textinputOpts = {};
 
 		if ( !selector ) {
@@ -93,6 +94,10 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 				// the current textinput is already of the internally generated variety.
 				return;
 			} else {
+
+				// Generating a new textinput widget. No need to set the placeholder
+				// further down the function.
+				updatePlaceholder = false;
 				selector = $( "<input " +
 					"data-" + $.mobile.ns + "type='search' " +
 					"placeholder='" + opts.filterPlaceholder + "'></input>" )
@@ -112,7 +117,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 
 		this._super( selector );
 
-		if ( this._search ) {
+		if ( this._search && updatePlaceholder ) {
 			this._search.attr( "placeholder", this.options.filterPlaceholder );
 		}
 	},
