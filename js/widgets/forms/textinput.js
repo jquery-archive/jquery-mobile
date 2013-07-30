@@ -29,6 +29,7 @@ $.widget( "mobile.textinput", {
 			inputNeedsWrap = ((this.element.is( "input" ) || this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) && !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ));
 			
 		$.extend( this, {
+			themeclass: "ui-body-" + ( ( o.theme === null ) ? "inherit" : o.theme ),
 			isSearch: isSearch,
 			isTextarea: isTextarea,
 			inputNeedsWrap: inputNeedsWrap
@@ -131,7 +132,7 @@ $.widget( "mobile.textinput", {
 		this._super( options );
 
 		if ( options.theme !== undefined ) {
-			themeclass = "ui-body-" + (( options.theme === null ) ? "inherit" : options.theme );
+			themeclass = "ui-body-" + ( ( options.theme === null ) ? "inherit" : options.theme );
 			outer.removeClass( this.themeclass ).addClass( themeclass );
 			this.themeclass = themeclass;
 		}
