@@ -63,7 +63,7 @@ $.widget( "mobile.table", {
 
 			// Iterate over the children of the tr
 			$( this ).children().each( function() {
-				var span = parseInt( $.mobile.getAttribute( this, "colspan" ), 10 ),
+				var span = parseInt( $.mobile.getAttribute( this, "colspan", true), 10 ),
 					selector = ":nth-child(" + ( columnCount + 1 ) + ")",
 					j;
 
