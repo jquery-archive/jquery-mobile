@@ -88,7 +88,8 @@ $( document ).bind( "pagebeforechange", function( e, data ) {
 
 function makeButton() {
 	var d = document.createElement( "div" )
-		a = document.createElement( "a" );
+		a = document.createElement( "a" ),
+		txt = document.createTextNode( "View Source" );
 
 	d.className = "jqm-view-source-link";
 
@@ -99,7 +100,7 @@ function makeButton() {
 	a.setAttribute( "data-mini", "true" );
 	a.setAttribute( "data-inline", "true" );
 	a.setAttribute( "data-shadow", "false" );
-	a.innerHTML = "View Source";
+	a.appendChild( txt );
 
 	d.appendChild( a );
 
