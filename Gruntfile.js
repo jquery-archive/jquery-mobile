@@ -579,6 +579,7 @@ module.exports = function( grunt ) {
 
 		clean: {
 			dist: [ dist ],
+			git: [ path.join( dist, "git" ) ],
 			cdn: [ "<%= files.cdn %>" ]
 		}
 	});
@@ -597,7 +598,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
-	grunt.registerTask( "dist:git", ["dist", "copy:git"] );
+	grunt.registerTask( "dist:git", [ "dist", "clean:git", "copy:git" ] );
 
 	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
