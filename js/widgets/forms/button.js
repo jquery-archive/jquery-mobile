@@ -115,7 +115,7 @@ $.widget( "mobile.button", {
 	}
 });
 
-$.mobile.button.initSelector = "input[type='button'], [type='submit'], [type='reset']";
+$.mobile.button.initSelector = "input[type='button'], input[type='submit'], input[type='reset']";
 
 //auto self-init widgets
 $.mobile._enhancer.add( "mobile.button" );
