@@ -6,6 +6,33 @@
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+$.mobile.widgets = {};
+
+var originalWidget = $.widget;
+
+$.widget = (function( orig ) {
+	return function() {
+		var constructor = orig.apply( this, arguments ),
+			name = constructor.prototype.widgetName;
+ 
+		constructor.initSelector = ( constructor.prototype.initSelector ? constructor.prototype.initSelector : ":jqmData(role='" + name + "')" );
+ 
+		$.mobile.widgets[ name ] = constructor;
+ 
+		return constructor;
+	};
+})( $.widget );
+
+//make sure $.widget still has bridge and extend methods
+$.extend( $.widget, {
+	extend: originalWidget.extend,
+	bridge: originalWidget.bridge
+});
+
+//for backcompat remove in 1.5
+$.mobile.document.on( "create", function( event ){
+	$.mobile.enhanceWithin( event.target );
+});
 
 $.widget( "mobile.page", {
 	options: {

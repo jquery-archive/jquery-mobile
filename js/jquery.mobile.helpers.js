@@ -127,20 +127,7 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 		}
 	});
 
-	$.fn.removeWithDependents = function() {
-		$.removeWithDependents( this );
-	};
-
-	$.removeWithDependents = function( elem ) {
-		var $elem = $( elem );
-
-		( $elem.jqmData( "dependents" ) || $() ).remove();
-		$elem.remove();
-	};
-
-	$.fn.addDependents = function( newDependents ) {
-		$.addDependents( this , newDependents );
-	};
+	
 
 	$.addDependents = function( elem, newDependents ) {
 		var $elem = $( elem ),
@@ -148,21 +135,87 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 
 		$elem.jqmData( "dependents", $( dependents ).add( newDependents ) );
 	};
+	// plugins
+	$.fn.extend({
+		removeWithDependents: function() {
+			$.removeWithDependents( this );
+		},
 
-	// note that this helper doesn't attempt to handle the callback
-	// or setting of an html element's text, its only purpose is
-	// to return the html encoded version of the text in all cases. (thus the name)
-	$.fn.getEncodedText = function() {
-		return $( "<a>" ).text( $( this ).text() ).html();
+		//enhance child elements
+		enhanceWithin: function() {
+			var widgetElements,
+				that = this;
+
+			//Add no js class to elements
+			if( $.mobile.nojs ) {
+				$.mobile.nojs( this );
+			}
+			//bind links for ajax nav
+			if( $.mobile.links ) {
+				$.mobile.links( this );
+			}
+			//degrade inputs for styleing
+			if( $.mobile.degradeInputsWithin ){
+				$.mobile.degradeInputsWithin( this );
+			}
+			//run buttonmarkup
+			if( $.mobile.enhanceWithButtonMarkup ){
+				$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button", this ).each( $.mobile.enhanceWithButtonMarkup );
+			}
+			//add classes for fieldContain
+			if( $.fn.fieldcontain ) {
+
+				$( ":jqmData(role='fieldcontain')", this ).jqmEnhanceable().fieldcontain();
+			}
+			//enhance widgets
+			$.each( $.mobile.widgets, function( name, constructor ) {
+				//filter elements that should not be enhanced based on parents
+				widgetElements = $.mobile.enhanceable( that.find( constructor.initSelector ) );
+				//if any matching elements remain filter ones with keepNativeSelector
+				if ( widgetElements.length ) {
+					//$.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompt
+					//switch to $.mobile.keepNativeSelector in 1.5 which is just a value not a function
+					widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
+				}
+				//enhance whatever is left
+				widgetElements[ constructor.prototype.widgetName ]();
+			});
+
+			return this;
+		},
+
+		addDependents: function( newDependents ) {
+			$.addDependents( this , newDependents );
+		},
+
+		// note that this helper doesn't attempt to handle the callback
+		// or setting of an html element's text, its only purpose is
+		// to return the html encoded version of the text in all cases. (thus the name)
+		getEncodedText: function() {
+			return $( "<a>" ).text( $( this ).text() ).html();
+		},
+
+		// fluent helper function for the mobile namespaced equivalent
+		jqmEnhanceable: function() {
+			return $.mobile.enhanceable( this );
+		},
+
+		jqmHijackable: function() {
+			return $.mobile.hijackable( this );
+		}
+	});
+
+	$.removeWithDependents = function( nativeElement ) {
+		var element = $( nativeElement );
+
+		( element.jqmData( "dependents" ) || $() ).remove();
+		element.remove();
 	};
+	$.addDependents = function( nativeElement, newDependents ) {
+		var element = $( nativeElement ),
+			dependents = element.jqmData( "dependents" ) || $();
 
-	// fluent helper function for the mobile namespaced equivalent
-	$.fn.jqmEnhanceable = function() {
-		return $.mobile.enhanceable( this );
-	};
-
-	$.fn.jqmHijackable = function() {
-		return $.mobile.hijackable( this );
+		element.jqmData( "dependents", $( dependents ).add( newDependents ) );
 	};
 
 	$.find.matches = function( expr, set ) {
