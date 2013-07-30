@@ -28,7 +28,8 @@ $.mobile.filterable.prototype.options.filterCallback = function( index, searchVa
 
 $.widget( "mobile.filterable", $.mobile.filterable, {
 	options: {
-		filterPlaceholder: "Filter items..."
+		filterPlaceholder: "Filter items...",
+		filterTheme: null
 	},
 
 
@@ -82,6 +83,9 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 	},
 
 	_setInput: function( selector ) {
+		var opts = this.options,
+			textinputOpts = {};
+
 		if ( !selector ) {
 			if ( this._isSearchInternal() ) {
 
@@ -91,13 +95,17 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 			} else {
 				selector = $( "<input " +
 					"data-" + $.mobile.ns + "type='search' " +
-					"placeholder='" + this.options.filterPlaceholder + "'></input>" )
+					"placeholder='" + opts.filterPlaceholder + "'></input>" )
 					.jqmData( "ui-filterable-" + this.uuid + "-internal", true );
 				$( "<form class='ui-filterable'></form>" )
 					.append( selector )
 					.insertBefore( this.element );
 				if ( $.mobile.textinput ) {
-					selector.textinput();
+					if ( this.options.filterTheme != null ) {
+						textinputOpts[ "theme" ] = opts.filterTheme;
+					}
+
+					selector.textinput( textinputOpts );
 				}
 			}
 		}
@@ -117,6 +125,10 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 			if ( this._search ) {
 				this._search.attr( "placeholder", options.filterPlaceholder );
 			}
+		}
+
+		if ( options.filterTheme !== undefined && this._search && $.mobile.textinput ) {
+			this._search.textinput( "option", "theme", options.filterTheme );
 		}
 
 		return ret;
@@ -140,7 +152,11 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 			// Apply only the options understood by textinput
 			for ( idx in $.mobile.textinput.prototype.options ) {
 				if ( options[ idx ] !== undefined ) {
-					textinputOptions[ idx ] = options[ idx ];
+					if ( idx === "theme" && this.options.filterTheme != null ) {
+						textinputOptions[ idx ] = this.options.filterTheme;
+					} else {
+						textinputOptions[ idx ] = options[ idx ];
+					}
 				}
 			}
 			this._search.textinput( "option", textinputOptions );
