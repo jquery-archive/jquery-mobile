@@ -135,7 +135,7 @@
 	right: 0;
 	top: 0;
 	bottom: 0;
-	pointer-events: none;
+	visibility: hidden;
 }
 
 .ui-popup-arrow-container {
