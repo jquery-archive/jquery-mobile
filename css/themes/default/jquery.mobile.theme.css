@@ -168,8 +168,8 @@ html .ui-btn.ui-icon-radio-on:after {
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 }
-.ui-btn.ui-icon-checkbox-off:after,
-.ui-btn.ui-icon-checkbox-on:after {
+html .ui-btn.ui-icon-checkbox-off:after,
+html .ui-btn.ui-icon-radio-off:after {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
 }
