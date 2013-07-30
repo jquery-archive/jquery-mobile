@@ -5,15 +5,6 @@
 (function($){
 	module( "Filter Widget Core Functions" );
 
-	test( "Filterable filterPlaceholder option works", function() {
-		var input = $( "#filtered-listview-input" ),
-			listview = $( "#filtered-listview" );
-
-		deepEqual( input.attr( "placeholder" ), "Replacement...", "Input's own placeholder is replaced by the 'filterPlaceholder' option" );
-		listview.filterable( "option", "filterPlaceholder", "Yo!" );
-		deepEqual( input.attr( "placeholder" ), "Yo!", "Replacing the placeholder by setting the filterable's 'filterPlaceholder' option works" );
-	});
-
 	asyncTest( "Filter hides/shows results when the user enters information", function() {
 		var input = $( "#filtered-listview-input" ),
 			listview = $( "#filtered-listview" );
