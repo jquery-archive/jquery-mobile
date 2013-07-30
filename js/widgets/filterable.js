@@ -17,13 +17,6 @@ var defaultFilterCallback = function( index, searchValue ) {
 $.widget( "mobile.filterable", {
 
 	options: {
-
-		// DEPRECATED and must be removed in 1.5.0, because the idea is that
-		// filterable DOES NOT create any textinput. Instead, the user MUST provide
-		// a textinput as part of the original markup. The "inputSelector" option
-		// below can then be set to a jQuery selector that will retrieve the input
-		// to be used as the source of filter text.
-		filterPlaceholder: "Filter items...",
 		filterReveal: false,
 		filterCallback: defaultFilterCallback,
 		enhanced: false,
@@ -165,10 +158,6 @@ $.widget( "mobile.filterable", {
 			});
 		}
 
-		if ( search ) {
-			search.attr( "placeholder", this.options.filterPlaceholder );
-		}
-
 		this._search = search;
 	},
 
@@ -178,13 +167,6 @@ $.widget( "mobile.filterable", {
 				( options.children === undefined ) );
 
 		this._super( options );
-
-		// Need to set the filterPlaceholder after having established the search input
-		if ( options.filterPlaceholder !== undefined ) {
-			if ( this._search ) {
-				this._search.attr( "placeholder", options.filterPlaceholder );
-			}
-		}
 
 		if ( options.input !== undefined ) {
 			this._setInput( options.input );

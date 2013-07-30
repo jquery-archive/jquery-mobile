@@ -27,6 +27,10 @@ $.mobile.filterable.prototype.options.filterCallback = function( index, searchVa
 };
 
 $.widget( "mobile.filterable", $.mobile.filterable, {
+	options: {
+		filterPlaceholder: "Filter items..."
+	},
+
 
 	_create: function() {
 		var idx, widgetName,
@@ -99,6 +103,23 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		}
 
 		this._super( selector );
+
+		if ( this._search ) {
+			this._search.attr( "placeholder", this.options.filterPlaceholder );
+		}
+	},
+
+	_setOptions: function( options ) {
+		var ret = this._super( options );
+
+		// Need to set the filterPlaceholder after having established the search input
+		if ( options.filterPlaceholder !== undefined ) {
+			if ( this._search ) {
+				this._search.attr( "placeholder", options.filterPlaceholder );
+			}
+		}
+
+		return ret;
 	},
 
 	_destroy: function() {
