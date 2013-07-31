@@ -94,7 +94,7 @@ $.widget( "mobile.popup", {
 			_ui: null,
 			_fallbackTransition: "",
 			_currentTransition: false,
-			_prereqs: null,
+			_prerequisites: null,
 			_isOpen: false,
 			_tolerance: null,
 			_resizeData: null,
@@ -471,43 +471,49 @@ $.widget( "mobile.popup", {
 		return this._calculateFinalLocation( desired, this._clampPopupWidth() );
 	},
 
-	_createPrereqs: function( screenPrereq, containerPrereq, whenDone ) {
-		var self = this, prereqs;
+	_createPrerequisites: function( screenPrerequisite, containerPrerequisite, whenDone ) {
+		var prerequisites,
+			self = this;
 
-		// It is important to maintain both the local variable prereqs and self._prereqs. The local variable remains in
-		// the closure of the functions which call the callbacks passed in. The comparison between the local variable and
-		// self._prereqs is necessary, because once a function has been passed to .animationComplete() it will be called
-		// next time an animation completes, even if that's not the animation whose end the function was supposed to catch
-		// (for example, if an abort happens during the opening animation, the .animationComplete handler is not called for
-		// that animation anymore, but the handler remains attached, so it is called the next time the popup is opened
-		// - making it stale. Comparing the local variable prereqs to the widget-level variable self._prereqs ensures that
-		// callbacks triggered by a stale .animationComplete will be ignored.
+		// It is important to maintain both the local variable prerequisites and
+		// self._prerequisites. The local variable remains in the closure of the
+		// functions which call the callbacks passed in. The comparison between the
+		// local variable and self._prerequisites is necessary, because once a
+		// function has been passed to .animationComplete() it will be called next
+		// time an animation completes, even if that's not the animation whose end
+		// the function was supposed to catch (for example, if an abort happens
+		// during the opening animation, the .animationComplete handler is not
+		// called for that animation anymore, but the handler remains attached, so
+		// it is called the next time the popup is opened - making it stale.
+		// Comparing the local variable prerequisites to the widget-level variable
+		// self._prerequisites ensures that callbacks triggered by a stale
+		// .animationComplete will be ignored.
 
-		prereqs = {
+		prerequisites = {
 			screen: $.Deferred(),
 			container: $.Deferred()
 		};
 
-		prereqs.screen.then( function() {
-			if ( prereqs === self._prereqs ) {
-				screenPrereq();
+		prerequisites.screen.then( function() {
+			if ( prerequisites === self._prerequisites ) {
+				screenPrerequisite();
 			}
 		});
 
-		prereqs.container.then( function() {
-			if ( prereqs === self._prereqs ) {
-				containerPrereq();
+		prerequisites.container.then( function() {
+			if ( prerequisites === self._prerequisites ) {
+				containerPrerequisite();
 			}
 		});
 
-		$.when( prereqs.screen, prereqs.container ).done( function() {
-			if ( prereqs === self._prereqs ) {
-				self._prereqs = null;
+		$.when( prerequisites.screen, prerequisites.container ).done( function() {
+			if ( prerequisites === self._prerequisites ) {
+				self._prerequisites = null;
 				whenDone();
 			}
 		});
 
-		self._prereqs = prereqs;
+		self._prerequisites = prerequisites;
 	},
 
 	_animate: function( args ) {
@@ -519,7 +525,7 @@ $.widget( "mobile.popup", {
 			.removeClass( args.classToRemove )
 			.addClass( args.screenClassToAdd );
 
-		args.prereqs.screen.resolve();
+		args.prerequisites.screen.resolve();
 
 		if ( args.transition && args.transition !== "none" ) {
 			if ( args.applyTransition ) {
@@ -527,14 +533,14 @@ $.widget( "mobile.popup", {
 			}
 			if ( this._fallbackTransition ) {
 				this._ui.container
-					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
+					.animationComplete( $.proxy( args.prerequisites.container, "resolve" ) )
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove );
 				return;
 			}
 		}
 		this._ui.container.removeClass( args.classToRemove );
-		args.prereqs.container.resolve();
+		args.prerequisites.container.resolve();
 	},
 
 	// The desired coordinates passed in will be returned untouched if no reference element can be identified via
@@ -604,7 +610,7 @@ $.widget( "mobile.popup", {
 		}
 	},
 
-	_openPrereqsComplete: function() {
+	_openPrerequisitesComplete: function() {
 		this._ui.container.addClass( "ui-popup-active" );
 		this._isOpen = true;
 		this._resizeScreen();
@@ -635,10 +641,10 @@ $.widget( "mobile.popup", {
 		// Count down to triggering "popupafteropen" - we have two prerequisites:
 		// 1. The popup window animation completes (container())
 		// 2. The screen opacity animation completes (screen())
-		this._createPrereqs(
+		this._createPrerequisites(
 			$.noop,
 			$.noop,
-			$.proxy( this, "_openPrereqsComplete" ) );
+			$.proxy( this, "_openPrerequisitesComplete" ) );
 
 		this._currentTransition = openOptions.transition;
 		this._applyTransition( openOptions.transition );
@@ -669,24 +675,24 @@ $.widget( "mobile.popup", {
 			screenClassToAdd: "in",
 			containerClassToAdd: "in",
 			applyTransition: false,
-			prereqs: this._prereqs
+			prerequisites: this._prerequisites
 		});
 	},
 
-	_closePrereqScreen: function() {
+	_closePrerequisiteScreen: function() {
 		this._ui.screen
 			.removeClass( "out" )
 			.addClass( "ui-screen-hidden" );
 	},
 
-	_closePrereqContainer: function() {
+	_closePrerequisiteContainer: function() {
 		this._ui.container
 			.removeClass( "reverse out" )
 			.addClass( "ui-popup-hidden ui-popup-truncate" )
 			.removeAttr( "style" );
 	},
 
-	_closePrereqsDone: function() {
+	_closePrerequisitesDone: function() {
 		var container = this._ui.container;
 
 		container.removeAttr( "tabindex" );
@@ -710,10 +716,10 @@ $.widget( "mobile.popup", {
 		// Count down to triggering "popupafterclose" - we have two prerequisites:
 		// 1. The popup window reverse animation completes (container())
 		// 2. The screen opacity animation completes (screen())
-		this._createPrereqs(
-			$.proxy( this, "_closePrereqScreen" ),
-			$.proxy( this, "_closePrereqContainer" ),
-			$.proxy( this, "_closePrereqsDone" ) );
+		this._createPrerequisites(
+			$.proxy( this, "_closePrerequisiteScreen" ),
+			$.proxy( this, "_closePrerequisiteContainer" ),
+			$.proxy( this, "_closePrerequisitesDone" ) );
 
 		this._animate( {
 			additionalCondition: this._ui.screen.hasClass( "in" ),
@@ -722,7 +728,7 @@ $.widget( "mobile.popup", {
 			screenClassToAdd: "out",
 			containerClassToAdd: "reverse out",
 			applyTransition: true,
-			prereqs: this._prereqs
+			prerequisites: this._prerequisites
 		});
 	},
 
