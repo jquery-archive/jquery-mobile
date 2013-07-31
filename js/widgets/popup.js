@@ -80,12 +80,12 @@ $.widget( "mobile.popup", {
 	_create: function() {
 		var theElement = this.element,
 			myId = theElement.attr( "id" ),
-			opts = this.options;
+			currentOptions = this.options;
 
 		// We need to adjust the history option to be false if there's no AJAX nav.
 		// We can't do it in the option declarations because those are run before
 		// it is determined whether there shall be AJAX nav.
-		opts.history = opts.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
+		currentOptions.history = currentOptions.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
 
 		// Define instance variables
 		$.extend( this, {
@@ -106,7 +106,7 @@ $.widget( "mobile.popup", {
 			this._page = this.body;
 		}
 
-		if ( opts.enhanced ) {
+		if ( currentOptions.enhanced ) {
 			this._ui = {
 				container: theElement.parent(),
 				screen: theElement.parent().prev(),
@@ -115,8 +115,8 @@ $.widget( "mobile.popup", {
 		} else {
 			this._ui = this._enhance( theElement, myId );
 			this
-				._applyTransition( opts.transition )
-				._setTolerance( opts.tolerance );
+				._applyTransition( currentOptions.transition )
+				._setTolerance( currentOptions.tolerance );
 		}
 		this._ui.focusElement = this._ui.container;
 
@@ -131,13 +131,13 @@ $.widget( "mobile.popup", {
 	},
 
 	_enhance: function( theElement, myId ) {
-		var opts = this.options,
+		var currentOptions = this.options,
 			ui = {
 				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
-				this._themeClassFromOption( "ui-overlay-", opts.overlayTheme ) + "'></div>" ),
+				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
-					( opts.wrapperClass || "" ) + "'></div>" )
+					( currentOptions.wrapperClass || "" ) + "'></div>" )
 			},
 			frag = this.document[ 0 ].createDocumentFragment();
 
@@ -159,9 +159,9 @@ $.widget( "mobile.popup", {
 		theElement
 			.detach()
 			.addClass( "ui-popup " +
-				this._themeClassFromOption( "ui-body-", opts.theme ) + " " +
-				( opts.shadow ? "ui-overlay-shadow " : "" ) +
-				( opts.corners ? "ui-corner-all " : "" ) )
+				this._themeClassFromOption( "ui-body-", currentOptions.theme ) + " " +
+				( currentOptions.shadow ? "ui-overlay-shadow " : "" ) +
+				( currentOptions.corners ? "ui-corner-all " : "" ) )
 			.appendTo( ui.container );
 
 		return ui;
@@ -312,57 +312,58 @@ $.widget( "mobile.popup", {
 		return this;
 	},
 
-	_setOptions: function( opts ) {
-		var el = this.element,
+	_setOptions: function( newOptions ) {
+		var currentOptions = this.options,
+			el = this.element,
 			screen = this._ui.screen;
 
-		if ( opts.wrapperClass !== undefined ) {
+		if ( newOptions.wrapperClass !== undefined ) {
 			this._ui.container
-				.removeClass( this.options.wrapperClass )
-				.addClass( opts.wrapperClass );
+				.removeClass( currentOptions.wrapperClass )
+				.addClass( newOptions.wrapperClass );
 		}
 
-		if ( opts.theme !== undefined ) {
+		if ( newOptions.theme !== undefined ) {
 			el
-				.removeClass( this._themeClassFromOption( "ui-body-", this.options.theme ) )
-				.addClass( this._themeClassFromOption( "ui-body-", opts.theme ) );
+				.removeClass( this._themeClassFromOption( "ui-body-", currentOptions.theme ) )
+				.addClass( this._themeClassFromOption( "ui-body-", newOptions.theme ) );
 		}
 
-		if ( opts.overlayTheme !== undefined ) {
+		if ( newOptions.overlayTheme !== undefined ) {
 			screen
-				.removeClass( this._themeClassFromOption( "ui-overlay-", this.options.overlayTheme ) )
-				.addClass( this._themeClassFromOption( "ui-overlay-", opts.overlayTheme ) );
+				.removeClass( this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) )
+				.addClass( this._themeClassFromOption( "ui-overlay-", newOptions.overlayTheme ) );
 
 			if ( this._isOpen ) {
 				screen.addClass( "in" );
 			}
 		}
 
-		if ( opts.shadow !== undefined ) {
-			el.toggleClass( "ui-overlay-shadow", opts.shadow );
+		if ( newOptions.shadow !== undefined ) {
+			el.toggleClass( "ui-overlay-shadow", newOptions.shadow );
 		}
 
-		if ( opts.corners !== undefined ) {
-			el.toggleClass( "ui-corner-all", opts.corners );
+		if ( newOptions.corners !== undefined ) {
+			el.toggleClass( "ui-corner-all", newOptions.corners );
 		}
 
-		if ( opts.transition !== undefined ) {
+		if ( newOptions.transition !== undefined ) {
 			if ( !this._currentTransition ) {
-				this._applyTransition( opts.transition );
+				this._applyTransition( newOptions.transition );
 			}
 		}
 
-		if ( opts.tolerance !== undefined ) {
-			this._setTolerance( opts.tolerance );
+		if ( newOptions.tolerance !== undefined ) {
+			this._setTolerance( newOptions.tolerance );
 		}
 
-		if ( opts.disabled !== undefined ) {
-			if ( opts.disabled ) {
+		if ( newOptions.disabled !== undefined ) {
+			if ( newOptions.disabled ) {
 				this.close();
 			}
 		}
 
-		return this._super( opts );
+		return this._super( newOptions );
 	},
 
 	_setTolerance: function( value ) {
@@ -540,8 +541,13 @@ $.widget( "mobile.popup", {
 	// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 	// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
 	// options: { x: coordinate, y: coordinate, positionTo: string: "origin", "window", or jQuery selector
-	_desiredCoords: function( opts ) {
-		var dst = null, offset, winCoords = getWindowCoordinates(), x = opts.x, y = opts.y, pTo = opts.positionTo;
+	_desiredCoords: function( openOptions ) {
+		var offset,
+			dst = null,
+			winCoords = getWindowCoordinates(),
+			x = openOptions.x,
+			y = openOptions.y,
+			pTo = openOptions.positionTo;
 
 		// Establish which element will serve as the reference
 		if ( pTo && pTo !== "origin" ) {
@@ -581,16 +587,20 @@ $.widget( "mobile.popup", {
 		return { x: x, y: y };
 	},
 
-	_reposition: function( opts ) {
+	_reposition: function( openOptions ) {
 		// We only care about position-related parameters for repositioning
-		opts = { x: opts.x, y: opts.y, positionTo: opts.positionTo };
-		this._trigger( "beforeposition", undefined, opts );
-		this._ui.container.offset( this._placementCoords( this._desiredCoords( opts ) ) );
+		openOptions = {
+			x: openOptions.x,
+			y: openOptions.y,
+			positionTo: openOptions.positionTo
+		};
+		this._trigger( "beforeposition", undefined, openOptions );
+		this._ui.container.offset( this._placementCoords( this._desiredCoords( openOptions ) ) );
 	},
 
-	reposition: function( opts ) {
+	reposition: function( openOptions ) {
 		if ( this._isOpen ) {
-			this._reposition( opts );
+			this._reposition( openOptions );
 		}
 	},
 
@@ -604,7 +614,7 @@ $.widget( "mobile.popup", {
 	},
 
 	_open: function( options ) {
-		var opts = $.extend( {}, this.options, options ),
+		var openOptions = $.extend( {}, this.options, options ),
 			// TODO move blacklist to private method
 			androidBlacklist = ( function() {
 				var ua = navigator.userAgent,
@@ -630,14 +640,14 @@ $.widget( "mobile.popup", {
 			$.noop,
 			$.proxy( this, "_openPrereqsComplete" ) );
 
-		this._currentTransition = opts.transition;
-		this._applyTransition( opts.transition );
+		this._currentTransition = openOptions.transition;
+		this._applyTransition( openOptions.transition );
 
 		this._ui.screen.removeClass( "ui-screen-hidden" );
 		this._ui.container.removeClass( "ui-popup-truncate" );
 
 		// Give applications a chance to modify the contents of the container before it appears
-		this._reposition( opts );
+		this._reposition( openOptions );
 
 		this._ui.container.removeClass( "ui-popup-hidden" );
 
@@ -654,7 +664,7 @@ $.widget( "mobile.popup", {
 		}
 		this._animate({
 			additionalCondition: true,
-			transition: opts.transition,
+			transition: openOptions.transition,
 			classToRemove: "",
 			screenClassToAdd: "in",
 			containerClassToAdd: "in",
@@ -750,7 +760,9 @@ $.widget( "mobile.popup", {
 	},
 
 	_closePopup: function( evt, data ) {
-		var parsedDst, toUrl, opts = this.options, immediate = false;
+		var parsedDst, toUrl,
+			currentOptions = this.options,
+			immediate = false;
 
 		if ( ( evt && evt.isDefaultPrevented() ) || $.mobile.popup.active !== this ) {
 			return;
@@ -779,9 +791,9 @@ $.widget( "mobile.popup", {
 		}
 
 		// remove nav bindings
-		$.mobile.window.off( opts.closeEvents );
+		$.mobile.window.off( currentOptions.closeEvents );
 		// unbind click handlers added when history is disabled
-		this.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
+		this.element.undelegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents );
 
 		this._close( immediate );
 	},
@@ -801,10 +813,12 @@ $.widget( "mobile.popup", {
 	// TODO no clear deliniation of what should be here and
 	// what should be in _open. Seems to be "visual" vs "history" for now
 	open: function( options ) {
-		var self = this, opts = this.options, url, hashkey, activePage, currentIsDialog, hasHash, urlHistory;
+		var url, hashkey, activePage, currentIsDialog, hasHash, urlHistory,
+			self = this,
+			currentOptions = this.options;
 
 		// make sure open is idempotent
-		if ( $.mobile.popup.active || opts.disabled ) {
+		if ( $.mobile.popup.active || currentOptions.disabled ) {
 			return this;
 		}
 
@@ -814,7 +828,7 @@ $.widget( "mobile.popup", {
 
 		// if history alteration is disabled close on navigate events
 		// and leave the url as is
-		if ( !( opts.history ) ) {
+		if ( !( currentOptions.history ) ) {
 			self._open( options );
 			self._bindContainerClose();
 
@@ -822,7 +836,7 @@ $.widget( "mobile.popup", {
 			// back link clicks so we can close the popup instead of
 			// relying on history to do it for us
 			self.element
-				.delegate( opts.closeLinkSelector, opts.closeLinkEvents, function( evt ) {
+				.delegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents, function( evt ) {
 					self.close();
 					evt.preventDefault();
 				});
