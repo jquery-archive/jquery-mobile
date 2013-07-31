@@ -840,8 +840,7 @@ $.widget( "mobile.popup", {
 	// NOTE the pagebeforechange is bound to catch navigation events that don't
 	//      alter the url (eg, dialogs from popups)
 	_bindContainerClose: function() {
-		$.mobile.window
-			.on( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
+		$.mobile.window.on( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
 	},
 
 	widget: function() {
