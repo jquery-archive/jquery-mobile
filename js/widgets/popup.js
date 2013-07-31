@@ -45,10 +45,10 @@ function getWindowCoordinates() {
 	var theWindow = $.mobile.window;
 
 	return {
-		x: theWindow.scrollLeft(),
-		y: theWindow.scrollTop(),
-		cx: ( window.innerWidth || theWindow.width() ),
-		cy: ( window.innerHeight || theWindow.height() )
+		left: theWindow.scrollLeft(),
+		top: theWindow.scrollTop(),
+		width: ( window.innerWidth || theWindow.width() ),
+		height: ( window.innerHeight || theWindow.height() )
 	};
 }
 
@@ -196,10 +196,10 @@ $.widget( "mobile.popup", {
 		var windowCoordinates = getWindowCoordinates();
 
 		if ( this._resizeData ) {
-			if ( windowCoordinates.x === this._resizeData.windowCoordinates.x &&
-				windowCoordinates.y === this._resizeData.windowCoordinates.y &&
-				windowCoordinates.cx === this._resizeData.windowCoordinates.cx &&
-				windowCoordinates.cy === this._resizeData.windowCoordinates.cy ) {
+			if ( windowCoordinates.left === this._resizeData.windowCoordinates.left &&
+				windowCoordinates.top === this._resizeData.windowCoordinates.top &&
+				windowCoordinates.width === this._resizeData.windowCoordinates.width &&
+				windowCoordinates.height === this._resizeData.windowCoordinates.height ) {
 				// timeout not refreshed
 				return false;
 			} else {
@@ -437,20 +437,20 @@ $.widget( "mobile.popup", {
 			windowCoordinates = getWindowCoordinates(),
 			// rectangle within which the popup must fit
 			rc = {
-				x: this._tolerance.left,
-				y: windowCoordinates.y + this._tolerance.top,
-				cx: windowCoordinates.cx - this._tolerance.left - this._tolerance.right,
-				cy: windowCoordinates.cy - this._tolerance.top - this._tolerance.bottom
+				left: this._tolerance.left,
+				top: windowCoordinates.top + this._tolerance.top,
+				width: windowCoordinates.width - this._tolerance.left - this._tolerance.right,
+				height: windowCoordinates.height - this._tolerance.top - this._tolerance.bottom
 			};
 
 		if ( !infoOnly ) {
 			// Clamp the width of the menu before grabbing its size
-			this._ui.container.css( "max-width", rc.cx );
+			this._ui.container.css( "max-width", rc.width );
 		}
 
 		menuSize = {
-			cx: this._ui.container.outerWidth( true ),
-			cy: this._ui.container.outerHeight( true )
+			width: this._ui.container.outerWidth( true ),
+			height: this._ui.container.outerHeight( true )
 		};
 
 		return { rc: rc, menuSize: menuSize };
@@ -465,19 +465,19 @@ $.widget( "mobile.popup", {
 		// Center the menu over the desired coordinates, while not going outside
 		// the window tolerances. This will center wrt. the window if the popup is too large.
 		ret = {
-			x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
-			y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
+			left: fitSegmentInsideSegment( rc.width, menuSize.width, rc.left, desired.left ),
+			top: fitSegmentInsideSegment( rc.height, menuSize.height, rc.top, desired.top )
 		};
 
 		// Make sure the top of the menu is visible
-		ret.y = Math.max( 0, ret.y );
+		ret.top = Math.max( 0, ret.top );
 
 		// If the height of the menu is smaller than the height of the document
 		// align the bottom with the bottom of the document
 
-		ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $.mobile.document.height() ) );
+		ret.top -= Math.min( ret.top, Math.max( 0, ret.top + menuSize.height - $.mobile.document.height() ) );
 
-		return { left: ret.x, top: ret.y };
+		return { left: ret.left, top: ret.top };
 	},
 
 	// Try and center the overlay over the given coordinates
@@ -559,21 +559,21 @@ $.widget( "mobile.popup", {
 
 	// The desired coordinates passed in will be returned untouched if no reference element can be identified via
 	// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
-	// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
-	// options: { x: coordinate, y: coordinate, positionTo: string: "origin", "window", or jQuery selector
+	// left and top coordinates by specifying the center middle of the window if the coordinates are absent.
+	// options: { left: coordinate, top: coordinate, positionTo: string: "origin", "window", or jQuery selector
 	_desiredCoords: function( openOptions ) {
 		var offset,
 			dst = null,
 			windowCoordinates = getWindowCoordinates(),
-			x = openOptions.x,
-			y = openOptions.y,
+			left = openOptions.left,
+			top = openOptions.top,
 			pTo = openOptions.positionTo;
 
 		// Establish which element will serve as the reference
 		if ( pTo && pTo !== "origin" ) {
 			if ( pTo === "window" ) {
-				x = windowCoordinates.cx / 2 + windowCoordinates.x;
-				y = windowCoordinates.cy / 2 + windowCoordinates.y;
+				left = windowCoordinates.width / 2 + windowCoordinates.left;
+				top = windowCoordinates.height / 2 + windowCoordinates.top;
 			} else {
 				try {
 					dst = $( pTo );
@@ -592,26 +592,26 @@ $.widget( "mobile.popup", {
 		// If an element was found, center over it
 		if ( dst ) {
 			offset = dst.offset();
-			x = offset.left + dst.outerWidth() / 2;
-			y = offset.top + dst.outerHeight() / 2;
+			left = offset.left + dst.outerWidth() / 2;
+			top = offset.top + dst.outerHeight() / 2;
 		}
 
-		// Make sure x and y are valid numbers - center over the window
-		if ( $.type( x ) !== "number" || isNaN( x ) ) {
-			x = windowCoordinates.cx / 2 + windowCoordinates.x;
+		// Make sure left and top are valid numbers - center over the window
+		if ( $.type( left ) !== "number" || isNaN( left ) ) {
+			left = windowCoordinates.width / 2 + windowCoordinates.left;
 		}
-		if ( $.type( y ) !== "number" || isNaN( y ) ) {
-			y = windowCoordinates.cy / 2 + windowCoordinates.y;
+		if ( $.type( top ) !== "number" || isNaN( top ) ) {
+			top = windowCoordinates.height / 2 + windowCoordinates.top;
 		}
 
-		return { x: x, y: y };
+		return { left: left, top: top };
 	},
 
 	_reposition: function( openOptions ) {
 		// We only care about position-related parameters for repositioning
 		openOptions = {
-			x: openOptions.x,
-			y: openOptions.y,
+			left: openOptions.left,
+			top: openOptions.top,
 			positionTo: openOptions.positionTo
 		};
 		this._trigger( "beforeposition", undefined, openOptions );
@@ -938,8 +938,8 @@ $.mobile.popup.handleLink = function( $link ) {
 	if ( popup.data( "mobile-popup" ) ) {
 		offset = $link.offset();
 		popup.popup( "open", {
-			x: offset.left + $link.outerWidth() / 2,
-			y: offset.top + $link.outerHeight() / 2,
+			left: offset.left + $link.outerWidth() / 2,
+			top: offset.top + $link.outerHeight() / 2,
 			transition: $link.jqmData( "transition" ),
 			positionTo: $link.jqmData( "position-to" )
 		});
