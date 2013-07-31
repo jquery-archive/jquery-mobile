@@ -22,7 +22,6 @@ define( [
 	"../navigation/navigator",
 	"../navigation/method",
 	"../jquery.mobile.navigation",
-	"../jquery.mobile.registry",
 	"jquery.hashchange" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -930,11 +929,6 @@ $.mobile.document.bind( "pagebeforechange", function( evt, data ) {
 		evt.preventDefault();
 	}
 });
-
-$.mobile.popup.initSelector = ":jqmData(role='popup')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.popup" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

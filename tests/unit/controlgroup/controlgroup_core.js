@@ -178,7 +178,7 @@ $.testHelper.delayStart();
 
 		// We need to manually unenhance the buttons inside for the sake of the
 		// comparison - the point is that the wrappers should be gone.
-		grp.controlgroup().controlgroup( "destroy" ).find( "a" ).removeAttr( "class" );
+		grp.controlgroup().controlgroup( "destroy" ).find( "a" ).removeAttr( "class" ).removeAttr( "role");
 		deepEqual( $.testHelper.domEqual( grp, orig ), true, "The post-enhance-unenhance DOM is identical to the pre-enhance DOM." );
 	});
 })(jQuery);

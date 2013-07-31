@@ -5,11 +5,14 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.registry"  ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.button", {
+
+	initSelector: "input[type='button'], input[type='submit'], input[type='reset']",
+
 	options: {
 		theme: "inherit",
 		icon: null,
@@ -114,11 +117,6 @@ $.widget( "mobile.button", {
 		}
 	}
 });
-
-$.mobile.button.initSelector = "input[type='button'], input[type='submit'], input[type='reset']";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.button" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

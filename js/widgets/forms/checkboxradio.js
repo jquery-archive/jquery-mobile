@@ -17,6 +17,9 @@ define( [ "jquery",
 (function( $, undefined ) {
 
 $.widget( "mobile.checkboxradio", $.extend( {
+
+	initSelector: "input:not( :jqmData(role='flipswitch' ) )[type='checkbox'],input[type='radio']:not( :jqmData(role='flipswitch' ))",
+
 	options: {
 		theme: "inherit",
 		mini: false,
@@ -248,11 +251,6 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	}
 
 }, $.mobile.behaviors.formReset ) );
-
-$.mobile.checkboxradio.initSelector = "input:not( :jqmData(role='flipswitch' ) )[type='checkbox'],input[type='radio']:not( :jqmData(role='flipswitch' ))";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.checkboxradio" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -8,8 +8,7 @@
 define( [
 	"jquery",
 	"../jquery.mobile.core",
-	"../jquery.mobile.widget",
-	"../jquery.mobile.registry" ], function( jQuery ) {
+	"../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -328,11 +327,6 @@ $.mobile.collapsible.defaults = {
 	corners: true,
 	mini: false
 };
-
-$.mobile.collapsible.initSelector = ":jqmData(role='collapsible')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.collapsible" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

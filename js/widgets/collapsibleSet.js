@@ -9,14 +9,15 @@ define( [
 	"jquery",
 	"../jquery.mobile.widget",
 	"./collapsible",
-	"./addFirstLastClasses",
-	"../jquery.mobile.registry" ], function( jQuery ) {
+	"./addFirstLastClasses" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
 
 $.widget( "mobile.collapsibleset", $.extend( {
+	initSelector: ":jqmData(role='collapsible-set')",
+
 	options: $.extend( {
 		enhanced: false,
 	}, $.mobile.collapsible.defaults ),
@@ -43,6 +44,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 			elem.addClass( "ui-collapsible-set " +
 				this._themeClassFromOption( "ui-group-theme-", opts.theme ) + " " +
 				( opts.corners && opts.inset ? "ui-corner-all " : "" ) );
+			this.element.find( $.mobile.collapsible.initSelector ).collapsible();
 		}
 
 		this._on( elem, { collapsibleexpand: "_handleCollapsibleExpand" } );
@@ -106,11 +108,6 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		this._refresh( false );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
-
-$.mobile.collapsibleset.initSelector = ":jqmData(role='collapsible-set')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.collapsibleset" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

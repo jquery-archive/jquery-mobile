@@ -174,12 +174,6 @@ $.widget( "mobile.dialog", {
 	}
 });
 
-$.mobile.dialog.initSelector = ":jqmData(role='dialog')";
-//auto self-init widgets
-$.mobile.document.delegate( $.mobile.dialog.initSelector, "pagecreate", function() {
-	$.mobile.dialog.prototype.enhance( this );
-});
-
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

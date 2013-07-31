@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
@@ -243,31 +243,30 @@ $.fn.buttonMarkup.defaults = {
 // This function is only defined so that it can be called from the enhancer
 // without having to write it inline and may be moved into the enhancer in the
 // future.
-function enhanceWithButtonMarkup( idx, el ) {
-	var classes;
+$.extend( $.mobile, {
+	enhanceWithButtonMarkup: function( idx, el ) {
+		var classes;
 
-	classes = optionsToClasses( $.extend( {},
-		$.fn.buttonMarkup.defaults, {
-			icon      : getAttrFixed( el, "icon",       true ),
-			iconpos   : getAttrFixed( el, "iconpos",    true ),
-			theme     : getAttrFixed( el, "theme",      true ),
-			inline    : getAttrFixed( el, "inline",     true ),
-			shadow    : getAttrFixed( el, "shadow",     true ),
-			corners   : getAttrFixed( el, "corners",    true ),
-			iconshadow: getAttrFixed( el, "iconshadow", true ), /* TODO: Remove in 1.5 */
-			mini      : getAttrFixed( el, "mini",       true )
-		}), el.className.split( " " ) ).sort();
+		classes = optionsToClasses( $.extend( {},
+			$.fn.buttonMarkup.defaults, {
+				icon      : getAttrFixed( el, "icon",       true ),
+				iconpos   : getAttrFixed( el, "iconpos",    true ),
+				theme     : getAttrFixed( el, "theme",      true ),
+				inline    : getAttrFixed( el, "inline",     true ),
+				shadow    : getAttrFixed( el, "shadow",     true ),
+				corners   : getAttrFixed( el, "corners",    true ),
+				iconshadow: getAttrFixed( el, "iconshadow", true ), /* TODO: Remove in 1.5 */
+				mini      : getAttrFixed( el, "mini",       true )
+			}), el.className.split( " " ) ).sort();
 
-	el.className = $.grep( classes, function( el, idx ) {
-			return !( idx > 0 && classes[ idx - 1 ] === el );
-		}).join( " " ) + ( el.disabled ? " ui-disabled" : "" );
-	el.setAttribute( "role", "button" );
-}
-
-//links in bars, or those with data-role become buttons
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
-	$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button", target ).each( enhanceWithButtonMarkup );
+		el.className = $.grep( classes, function( el, idx ) {
+				return !( idx > 0 && classes[ idx - 1 ] === el );
+			}).join( " " ) + ( el.disabled ? " ui-disabled" : "" );
+		el.setAttribute( "role", "button" );
+	}
+});
+$.extend( $.mobile.enhanceWithButtonMarkup, {
+	initSelector: "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button"
 });
 
 })( jQuery );

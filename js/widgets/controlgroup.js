@@ -7,7 +7,6 @@
 
 define( [ "jquery",
 	"./addFirstLastClasses",
-	"../jquery.mobile.registry",
 	"../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -27,6 +26,19 @@ $.widget( "mobile.controlgroup", $.extend( {
 		var elem = this.element,
 			opts = this.options;
 
+		//run buttonmarkup
+		if( $.mobile.enhanceWithButtonMarkup ){
+			$( $.mobile.enhanceWithButtonMarkup.initSelector, this.element ).each( $.mobile.enhanceWithButtonMarkup );
+		}
+		if( $.mobile.checkboxradio ){
+			this.element.find( $.mobile.checkboxradio.initSelector ).checkboxradio();
+		}
+		if( $.mobile.selectmenu ){
+			this.element.find( $.mobile.selectmenu.initSelector ).selectmenu();
+		}
+		if( $.mobile.button ){
+			this.element.find( $.mobile.button.initSelector ).button();
+		}
 		$.extend( this, {
 			_ui: null,
 			_initialRefresh: true
@@ -40,6 +52,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 		} else {
 			this._ui = this._enhance();
 		}
+		
 	},
 
 	_themeClassFromOption: function( value ) {
@@ -160,12 +173,6 @@ $.widget( "mobile.controlgroup", $.extend( {
 		ui.childWrapper.children().unwrap();
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
-
-$.mobile.controlgroup.initSelector = ":jqmData(role='controlgroup')";
-
-$.mobile._enhancer.add( "mobile.controlgroup", {
-	dependencies: [ "mobile.selectmenu", "mobile.button", "mobile.checkboxradio" ]
-});
 
 })(jQuery);
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

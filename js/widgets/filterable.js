@@ -16,6 +16,8 @@ var defaultFilterCallback = function( index, searchValue ) {
 
 $.widget( "mobile.filterable", {
 
+	initSelector: ":jqmData(filter='true')",
+
 	options: {
 
 		// DEPRECATED and must be removed in 1.5.0, because the idea is that
@@ -215,11 +217,6 @@ $.widget( "mobile.filterable", {
 		this._filterItems( ( ( this._search && this._search.val() ) || "" ).toLowerCase() );
 	}
 });
-
-$.mobile.filterable.initSelector = ":jqmData(filter='true')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.filterable" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

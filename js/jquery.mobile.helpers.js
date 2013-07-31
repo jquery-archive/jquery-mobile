@@ -160,7 +160,7 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 			}
 			//run buttonmarkup
 			if( $.mobile.enhanceWithButtonMarkup ){
-				$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button", this ).each( $.mobile.enhanceWithButtonMarkup );
+				$( $.mobile.enhanceWithButtonMarkup.initSelector, this ).each( $.mobile.enhanceWithButtonMarkup );
 			}
 			//add classes for fieldContain
 			if( $.fn.fieldcontain ) {
@@ -178,7 +178,9 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 					widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
 				}
 				//enhance whatever is left
-				widgetElements[ constructor.prototype.widgetName ]();
+				if( name !== "dialog" && name !== "page" && name !== "content" ) {
+					widgetElements[ constructor.prototype.widgetName ]();
+				}
 			});
 
 			return this;

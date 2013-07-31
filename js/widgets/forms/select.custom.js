@@ -539,10 +539,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	}
 });
 
-//auto self-init widgets - custom select needs to be enhanced after popup to
-// make sure that it reverts to native select
-$.mobile._enhancer.add( "mobile.selectmenu", { dependencies: [ "mobile.popup" ] } );
-
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

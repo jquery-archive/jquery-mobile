@@ -3,7 +3,7 @@
 //>>label: Page Creation
 //>>group: Core
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 $.mobile.widgets = {};
@@ -31,7 +31,7 @@ $.extend( $.widget, {
 
 //for backcompat remove in 1.5
 $.mobile.document.on( "create", function( event ){
-	$.mobile.enhanceWithin( event.target );
+	$( event.target ).enhanceWithin();
 });
 
 $.widget( "mobile.page", {
@@ -80,9 +80,12 @@ $.widget( "mobile.page", {
 				// Add ARIA role
 				$this.attr( "role", "main" ).addClass( "ui-content" );
 		});
-
-		// enhance the page
-		$.mobile._enhancer.enhance( this.element[ 0 ] );
+		
+		$( this.element ).enhanceWithin();
+		if( this.element.attr( "data-" + $.mobile.ns + "role") === "dialog" && $.mobile.dialog ){
+			this.element.dialog();
+		}
+		
 	},
 
 	bindRemove: function( callback ) {
