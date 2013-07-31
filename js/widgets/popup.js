@@ -62,7 +62,6 @@ $.widget( "mobile.popup", {
 		transition: "none",
 		positionTo: "origin",
 		tolerance: null,
-		initSelector: ":jqmData(role='popup')",
 		closeLinkSelector: "a:jqmData(rel='back')",
 		closeLinkEvents: "click.popup",
 		navigateEvents: "navigate.popup",
