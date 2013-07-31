@@ -167,9 +167,9 @@ $.widget( "mobile.popup", {
 		return ui;
 	},
 
-	_eatEventAndClose: function( evt ) {
-		evt.preventDefault();
-		evt.stopImmediatePropagation();
+	_eatEventAndClose: function( theEvent ) {
+		theEvent.preventDefault();
+		theEvent.stopImmediatePropagation();
 		if ( this.options.dismissible ) {
 			this.close();
 		}
@@ -186,9 +186,9 @@ $.widget( "mobile.popup", {
 		}
 	},
 
-	_handleWindowKeyUp: function( evt ) {
-		if ( this._isOpen && evt.keyCode === $.mobile.keyCode.ESCAPE ) {
-			return this._eatEventAndClose( evt );
+	_handleWindowKeyUp: function( theEvent ) {
+		if ( this._isOpen && theEvent.keyCode === $.mobile.keyCode.ESCAPE ) {
+			return this._eatEventAndClose( theEvent );
 		}
 	},
 
@@ -247,7 +247,7 @@ $.widget( "mobile.popup", {
 		this._ignoreResizeTo = this._delay( "_stopIgnoringResizeEvents", 1000 );
 	},
 
-	_handleWindowResize: function(/* evt */) {
+	_handleWindowResize: function(/* theEvent */) {
 		if ( this._isOpen && this._ignoreResizeTo === 0 ) {
 			if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
 				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
@@ -259,7 +259,7 @@ $.widget( "mobile.popup", {
 		}
 	},
 
-	_handleWindowOrientationchange: function(/* evt */) {
+	_handleWindowOrientationchange: function(/* theEvent */) {
 		if ( !this._orientationchangeInProgress && this._isOpen && this._ignoreResizeTo === 0 ) {
 			this._expectResizeEvent();
 			this._orientationchangeInProgress = true;
@@ -268,22 +268,22 @@ $.widget( "mobile.popup", {
 
 	// When the popup is open, attempting to focus on an element that is not a
 	// child of the popup will redirect focus to the popup
-	_handleDocumentFocusIn: function( evt ) {
-		var tgt = evt.target, $tgt, ui = this._ui;
+	_handleDocumentFocusIn: function( theEvent ) {
+		var tgt = theEvent.target, $tgt, ui = this._ui;
 
 		if ( !this._isOpen ) {
 			return;
 		}
 
 		if ( tgt !== ui.container[ 0 ] ) {
-			$tgt = $( evt.target );
+			$tgt = $( theEvent.target );
 			if ( 0 === $tgt.parents().filter( ui.container[ 0 ] ).length ) {
-				$( document.activeElement ).one( "focus", function(/* evt */) {
+				$( document.activeElement ).one( "focus", function(/* theEvent */) {
 					$tgt.blur();
 				});
 				ui.focusElement.focus();
-				evt.preventDefault();
-				evt.stopImmediatePropagation();
+				theEvent.preventDefault();
+				theEvent.stopImmediatePropagation();
 				return false;
 			} else if ( ui.focusElement[ 0 ] === ui.container[ 0 ] ) {
 				ui.focusElement = $tgt;
@@ -765,19 +765,19 @@ $.widget( "mobile.popup", {
 		return this;
 	},
 
-	_closePopup: function( evt, data ) {
+	_closePopup: function( theEvent, data ) {
 		var parsedDst, toUrl,
 			currentOptions = this.options,
 			immediate = false;
 
-		if ( ( evt && evt.isDefaultPrevented() ) || $.mobile.popup.active !== this ) {
+		if ( ( theEvent && theEvent.isDefaultPrevented() ) || $.mobile.popup.active !== this ) {
 			return;
 		}
 
 		// restore location on screen
 		window.scrollTo( 0, this._scrollTop );
 
-		if ( evt && evt.type === "pagebeforechange" && data ) {
+		if ( theEvent && theEvent.type === "pagebeforechange" && data ) {
 			// Determine whether we need to rapid-close the popup, or whether we can
 			// take the time to run the closing transition
 			if ( typeof data.toPage === "string" ) {
@@ -792,7 +792,7 @@ $.widget( "mobile.popup", {
 				// Going to a different page - close immediately
 				immediate = true;
 			} else {
-				evt.preventDefault();
+				theEvent.preventDefault();
 			}
 		}
 
@@ -842,9 +842,9 @@ $.widget( "mobile.popup", {
 			// back link clicks so we can close the popup instead of
 			// relying on history to do it for us
 			self.element
-				.delegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents, function( evt ) {
+				.delegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents, function( theEvent ) {
 					self.close();
-					evt.preventDefault();
+					theEvent.preventDefault();
 				});
 
 			return this;
@@ -878,8 +878,8 @@ $.widget( "mobile.popup", {
 		}
 
 		// swallow the the initial navigation event, and bind for the next
-		$.mobile.window.one( "beforenavigate", function( evt ) {
-			evt.preventDefault();
+		$.mobile.window.one( "beforenavigate", function( theEvent ) {
+			theEvent.preventDefault();
 			self._open( options );
 			self._bindContainerClose();
 		});
@@ -938,10 +938,10 @@ $.mobile.popup.handleLink = function( $link ) {
 };
 
 // TODO move inside _create
-$.mobile.document.on( "pagebeforechange", function( evt, data ) {
+$.mobile.document.on( "pagebeforechange", function( theEvent, data ) {
 	if ( data.options.role === "popup" ) {
 		$.mobile.popup.handleLink( data.options.link );
-		evt.preventDefault();
+		theEvent.preventDefault();
 	}
 });
 
