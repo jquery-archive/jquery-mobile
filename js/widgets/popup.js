@@ -561,39 +561,39 @@ $.widget( "mobile.popup", {
 	// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 	// left and top coordinates by specifying the center middle of the window if the coordinates are absent.
 	// options: { left: coordinate, top: coordinate, positionTo: string: "origin", "window", or jQuery selector
-	_desiredCoords: function( openOptions ) {
+	_desiredCoordinates: function( openOptions ) {
 		var offset,
-			dst = null,
+			destination = null,
 			windowCoordinates = getWindowCoordinates(),
 			left = openOptions.left,
 			top = openOptions.top,
-			pTo = openOptions.positionTo;
+			positionTo = openOptions.positionTo;
 
 		// Establish which element will serve as the reference
-		if ( pTo && pTo !== "origin" ) {
-			if ( pTo === "window" ) {
+		if ( positionTo && positionTo !== "origin" ) {
+			if ( positionTo === "window" ) {
 				left = windowCoordinates.width / 2 + windowCoordinates.left;
 				top = windowCoordinates.height / 2 + windowCoordinates.top;
 			} else {
 				try {
-					dst = $( pTo );
-				} catch( err ) {
-					dst = null;
+					destination = $( positionTo );
+				} catch( theError ) {
+					destination = null;
 				}
-				if ( dst ) {
-					dst.filter( ":visible" );
-					if ( dst.length === 0 ) {
-						dst = null;
+				if ( destination ) {
+					destination.filter( ":visible" );
+					if ( destination.length === 0 ) {
+						destination = null;
 					}
 				}
 			}
 		}
 
 		// If an element was found, center over it
-		if ( dst ) {
-			offset = dst.offset();
-			left = offset.left + dst.outerWidth() / 2;
-			top = offset.top + dst.outerHeight() / 2;
+		if ( destination ) {
+			offset = destination.offset();
+			left = offset.left + destination.outerWidth() / 2;
+			top = offset.top + destination.outerHeight() / 2;
 		}
 
 		// Make sure left and top are valid numbers - center over the window
@@ -615,7 +615,7 @@ $.widget( "mobile.popup", {
 			positionTo: openOptions.positionTo
 		};
 		this._trigger( "beforeposition", undefined, openOptions );
-		this._ui.container.offset( this._placementCoords( this._desiredCoords( openOptions ) ) );
+		this._ui.container.offset( this._placementCoords( this._desiredCoordinates( openOptions ) ) );
 	},
 
 	reposition: function( openOptions ) {
