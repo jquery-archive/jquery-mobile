@@ -36,11 +36,12 @@
 	filter: Alpha(Opacity=90);
 	opacity: .9;
 }
+/* updatePagePadding() will update the padding to actual height of header and footer. */
 .ui-page-header-fixed {
-	padding-top: 2.6875em;
+	padding-top: 2.8125em;
 }
 .ui-page-footer-fixed {
-	padding-bottom: 2.6875em;
+	padding-bottom: 2.8125em;
 }
 .ui-page-header-fullscreen > .ui-content,
 .ui-page-footer-fullscreen > .ui-content {
