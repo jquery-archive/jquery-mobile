@@ -918,7 +918,7 @@ $.mobile.popup.handleLink = function( $link ) {
 };
 
 // TODO move inside _create
-$.mobile.document.bind( "pagebeforechange", function( evt, data ) {
+$.mobile.document.on( "pagebeforechange", function( evt, data ) {
 	if ( data.options.role === "popup" ) {
 		$.mobile.popup.handleLink( data.options.link );
 		evt.preventDefault();
