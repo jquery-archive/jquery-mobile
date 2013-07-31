@@ -175,6 +175,10 @@ div.ui-mobile-viewport {
 	border-style: solid;
 	position: relative;
 }
+.ui-header:empty,
+.ui-footer:empty {
+	min-height: 2.6875em;
+}
 .ui-header .ui-title,
 .ui-footer .ui-title {
 	font-size: 1em;
