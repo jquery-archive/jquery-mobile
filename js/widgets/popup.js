@@ -557,10 +557,17 @@ $.widget( "mobile.popup", {
 		args.prerequisites.container.resolve();
 	},
 
-	// The desired coordinates passed in will be returned untouched if no reference element can be identified via
-	// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
-	// left and top coordinates by specifying the center middle of the window if the coordinates are absent.
-	// options: { left: coordinate, top: coordinate, positionTo: string: "origin", "window", or jQuery selector
+	// The desired coordinates passed in will be returned untouched if no
+	// reference element can be identified via desiredPosition.positionTo.
+	// Nevertheless, this function ensures that its return value always contains
+	// valid left and top coordinates by specifying the center middle of the
+	// window if the coordinates are absent. openOptions is a hash with the
+	// following keys:
+	// openOptions: {
+	//   left: coordinate,
+	//   top: coordinate,
+	//   positionTo: string: "origin", "window", or jQuery selector
+	// }
 	_desiredCoordinates: function( openOptions ) {
 		var offset,
 			destination = null,
@@ -615,7 +622,9 @@ $.widget( "mobile.popup", {
 			positionTo: openOptions.positionTo
 		};
 		this._trigger( "beforeposition", undefined, openOptions );
-		this._ui.container.offset( this._placementCoords( this._desiredCoordinates( openOptions ) ) );
+		this._ui.container.offset(
+			this._placementCoords(
+				this._desiredCoordinates( openOptions ) ) );
 	},
 
 	reposition: function( openOptions ) {
@@ -672,12 +681,19 @@ $.widget( "mobile.popup", {
 		this._ui.container.removeClass( "ui-popup-hidden" );
 
 		if ( this.options.overlayTheme && androidBlacklist ) {
-			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
-			This fix closes the following bugs ( I use "closes" with reluctance, and stress that this issue should be revisited as soon as possible ):
-			https://github.com/jquery/jquery-mobile/issues/4816
-			https://github.com/jquery/jquery-mobile/issues/4844
-			https://github.com/jquery/jquery-mobile/issues/4874
-			*/
+
+			// TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich")
+			// suffers from an issue where the popup overlay appears to be z-indexed
+			// above the popup itself when certain other styles exist on the same
+			// page -- namely, any element set to `position: fixed` and certain types
+			// of input. These issues are reminiscent of previously uncovered bugs in
+			// older versions of Android's native browser:
+			// https://github.com/scottjehl/Device-Bugs/issues/3
+			// This fix closes the following bugs ( I use "closes" with reluctance,
+			// and stress that this issue should be revisited as soon as possible ):
+			// https://github.com/jquery/jquery-mobile/issues/4816
+			// https://github.com/jquery/jquery-mobile/issues/4844
+			// https://github.com/jquery/jquery-mobile/issues/4874
 
 			// TODO sort out why this._page isn't working
 			this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
