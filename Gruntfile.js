@@ -25,24 +25,6 @@ module.exports = function( grunt ) {
 			minified: "/*! jQuery Mobile <%= version %> | <%if ( headShortHash ) {%>Git HEAD hash: <%= headShortHash %> <> <% } %>" + grunt.template.today( "UTC:yyyy-mm-dd" ) + "T" + grunt.template.today( "UTC:HH:MM:ss" ) + "Z | (c) 2010, " + copyrightYear + " jQuery Foundation, Inc. | jquery.org/license */\n"
 		};
 
-	// grunt plugins
-	grunt.loadNpmTasks( "grunt-contrib-jshint" );
-	grunt.loadNpmTasks( "grunt-contrib-clean" );
-	grunt.loadNpmTasks( "grunt-contrib-copy" );
-	grunt.loadNpmTasks( "grunt-contrib-compress" );
-	grunt.loadNpmTasks( "grunt-contrib-concat" );
-	grunt.loadNpmTasks( "grunt-contrib-connect" );
-	grunt.loadNpmTasks( "grunt-contrib-qunit" );
-	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
-	grunt.loadNpmTasks( "grunt-contrib-uglify" );
-	grunt.loadNpmTasks( "grunt-css" );
-	grunt.loadNpmTasks( "grunt-git-authors" );
-	grunt.loadNpmTasks( "grunt-qunit-junit" );
-	grunt.loadNpmTasks( "grunt-hash-manifest" );
-
-	// load the project's default tasks
-	grunt.loadTasks( "build/tasks");
-
 	// Project configuration.
 	grunt.config.init({
 		pkg: grunt.file.readJSON( "package.json" ),
@@ -579,10 +561,28 @@ module.exports = function( grunt ) {
 
 		clean: {
 			dist: [ dist ],
-			git: [ path.join( dist, "git" ) ],
+            git: [ path.join( dist, "git" ) ],
 			cdn: [ "<%= files.cdn %>" ]
 		}
 	});
+
+	// grunt plugins
+	grunt.loadNpmTasks( "grunt-contrib-jshint" );
+	grunt.loadNpmTasks( "grunt-contrib-clean" );
+	grunt.loadNpmTasks( "grunt-contrib-copy" );
+	grunt.loadNpmTasks( "grunt-contrib-compress" );
+	grunt.loadNpmTasks( "grunt-contrib-concat" );
+	grunt.loadNpmTasks( "grunt-contrib-connect" );
+	grunt.loadNpmTasks( "grunt-contrib-qunit" );
+	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
+	grunt.loadNpmTasks( "grunt-contrib-uglify" );
+	grunt.loadNpmTasks( "grunt-css" );
+	grunt.loadNpmTasks( "grunt-git-authors" );
+	grunt.loadNpmTasks( "grunt-qunit-junit" );
+	grunt.loadNpmTasks( "grunt-hash-manifest" );
+
+	// load the project's default tasks
+	grunt.loadTasks( "build/tasks");
 
 	grunt.registerTask( "lint", [ "jshint" ] );
 
