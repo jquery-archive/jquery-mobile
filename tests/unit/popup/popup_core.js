@@ -6,15 +6,15 @@
 	module( "jquery.mobile.popup.js");
 
 	function pointInRect( pt, rc ) {
-		return ( pt.x >= rc.x && pt.x <= rc.x + rc.cx && pt.y >= rc.y && pt.y <= rc.y + rc.cy );
+		return ( pt.left >= rc.left && pt.left <= rc.left + rc.width && pt.top >= rc.top && pt.top <= rc.top + rc.height );
 	}
 
 	function rectInRect( small, large ) {
 		return (
-			pointInRect( { x: small.x, y: small.y }, large ) &&
-			pointInRect( { x: small.x + small.cx, y: small.cy }, large ) &&
-			pointInRect( { x: small.x, y: small.y + small.cy }, large ) &&
-			pointInRect( { x: small.x + small.cx, y: small.y + small.cy }, large ) );
+			pointInRect( { left: small.left, top: small.top }, large ) &&
+			pointInRect( { left: small.left + small.width, top: small.height }, large ) &&
+			pointInRect( { left: small.left, top: small.top + small.height }, large ) &&
+			pointInRect( { left: small.left + small.width, top: small.top + small.height }, large ) );
 	}
 
 	function popupEnhancementTests( $sel, prefix ) {
@@ -41,37 +41,37 @@
 			clampInfo = popup._clampPopupWidth(),
 			wnd = $( window ),
 			windowRect = {
-				x: wnd.scrollLeft(),
-				y: wnd.scrollTop(),
-				cx: wnd.width(),
-				cy: wnd.height()
+				left: wnd.scrollLeft(),
+				top: wnd.scrollTop(),
+				width: wnd.width(),
+				height: wnd.height()
 			};
 
 		ok( rectInRect( clampInfo.rc, windowRect ), "placement window lies within viewport" );
 
-		clampInfo.menuSize.cx = 120;
-		clampInfo.menuSize.cy = 50;
+		clampInfo.menuSize.width = 120;
+		clampInfo.menuSize.height = 50;
 
-		desired = { x: -12, y: -12 };
+		desired = { left: -12, top: -12 };
 		result = popup._calculateFinalLocation( desired, clampInfo );
 		ok( rectInRect( {
-				x: result.left,
-				y: result.top,
-				cx: clampInfo.menuSize.cx,
-				cy: clampInfo.menuSize.cy
+				left: result.left,
+				top: result.top,
+				width: clampInfo.menuSize.width,
+				height: clampInfo.menuSize.height
 			}, clampInfo.rc ),
-			"desired: (" + desired.x + "," + desired.y + ") -> " +
+			"desired: (" + desired.left + "," + desired.top + ") -> " +
 			"result: (" + result.left + "," + result.top + ") lies within the placement window." );
 
-		desired = { x: 23990, y: 19223 };
+		desired = { left: 23990, top: 19223 };
 		result = popup._calculateFinalLocation( desired, clampInfo );
 		ok( rectInRect( {
-				x: result.left,
-				y: result.top,
-				cx: clampInfo.menuSize.cx,
-				cy: clampInfo.menuSize.cy
+				left: result.left,
+				top: result.top,
+				width: clampInfo.menuSize.width,
+				height: clampInfo.menuSize.height
 			}, clampInfo.rc ),
-			"desired: (" + desired.x + "," + desired.y + ") -> " +
+			"desired: (" + desired.left + "," + desired.top + ") -> " +
 			"result: (" + result.left + "," + result.top + ") lies within the placement window." );
 	});
 
@@ -81,15 +81,15 @@
 			defaultValues = tolTestPopup._tolerance;
 
 		ok( (
-			$.type( defaultValues.t ) === "number" && !isNaN( defaultValues.t ) &&
-			$.type( defaultValues.r ) === "number" && !isNaN( defaultValues.r ) &&
-			$.type( defaultValues.b ) === "number" && !isNaN( defaultValues.b ) &&
-			$.type( defaultValues.l ) === "number" && !isNaN( defaultValues.l ) ), "Default tolerances are numbers and not NaN" );
+			$.type( defaultValues.top ) === "number" && !isNaN( defaultValues.top ) &&
+			$.type( defaultValues.right ) === "number" && !isNaN( defaultValues.right ) &&
+			$.type( defaultValues.bottom ) === "number" && !isNaN( defaultValues.bottom ) &&
+			$.type( defaultValues.left ) === "number" && !isNaN( defaultValues.left ) ), "Default tolerances are numbers and not NaN" );
 
 		tolTest( tolTestElement, tolTestPopup, "", defaultValues );
-		tolTest( tolTestElement, tolTestPopup, "0", { t: 0, r: 0, b: 0, l: 0 } );
-		tolTest( tolTestElement, tolTestPopup, "14,12", { t: 14, r: 12, b: 14, l: 12 } );
-		tolTest( tolTestElement, tolTestPopup, "9,4,11,5", { t: 9, r: 4, b: 11, l: 5 } );
+		tolTest( tolTestElement, tolTestPopup, "0", { top: 0, right: 0, bottom: 0, left: 0 } );
+		tolTest( tolTestElement, tolTestPopup, "14,12", { top: 14, right: 12, bottom: 14, left: 12 } );
+		tolTest( tolTestElement, tolTestPopup, "9,4,11,5", { top: 9, right: 4, bottom: 11, left: 5 } );
 		tolTest( tolTestElement, tolTestPopup, null, defaultValues );
 	});
 
