@@ -27,18 +27,18 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
-	var ret = desired;
+function fitSegmentInsideSegment( windowSize, segmentSize, offset, desired ) {
+	var returnValue = desired;
 
-	if ( winSize < segSize ) {
+	if ( windowSize < segmentSize ) {
 		// Center segment if it's bigger than the window
-		ret = offset + ( winSize - segSize ) / 2;
+		returnValue = offset + ( windowSize - segmentSize ) / 2;
 	} else {
 		// Otherwise center it at the desired coordinate while keeping it completely inside the window
-		ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
+		returnValue = Math.min( Math.max( offset, desired - segmentSize / 2 ), offset + windowSize - segmentSize );
 	}
 
-	return ret;
+	return returnValue;
 }
 
 function windowCoords() {
