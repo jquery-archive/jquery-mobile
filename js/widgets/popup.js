@@ -316,7 +316,7 @@ $.widget( "mobile.popup", {
 
 	_setOptions: function( newOptions ) {
 		var currentOptions = this.options,
-			el = this.element,
+			theElement = this.element,
 			screen = this._ui.screen;
 
 		if ( newOptions.wrapperClass !== undefined ) {
@@ -326,7 +326,7 @@ $.widget( "mobile.popup", {
 		}
 
 		if ( newOptions.theme !== undefined ) {
-			el
+			theElement
 				.removeClass( this._themeClassFromOption( "ui-body-", currentOptions.theme ) )
 				.addClass( this._themeClassFromOption( "ui-body-", newOptions.theme ) );
 		}
@@ -342,11 +342,11 @@ $.widget( "mobile.popup", {
 		}
 
 		if ( newOptions.shadow !== undefined ) {
-			el.toggleClass( "ui-overlay-shadow", newOptions.shadow );
+			theElement.toggleClass( "ui-overlay-shadow", newOptions.shadow );
 		}
 
 		if ( newOptions.corners !== undefined ) {
-			el.toggleClass( "ui-corner-all", newOptions.corners );
+			theElement.toggleClass( "ui-corner-all", newOptions.corners );
 		}
 
 		if ( newOptions.transition !== undefined ) {
