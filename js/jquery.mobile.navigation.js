@@ -1465,11 +1465,14 @@ define( [
 
 		//bind to form submit events, handle with Ajax
 		$.mobile.document.delegate( "form", "submit", function( event ) {
-			var formData = getAjaxFormData( $( this ) );
+			var formData;
 
-			if ( formData ) {
-				$.mobile.changePage( formData.url, formData.options );
-				event.preventDefault();
+			if ( !event.isDefaultPrevented() ) {
+				formData = getAjaxFormData( $( this ) );
+				if ( formData ) {
+					$.mobile.changePage( formData.url, formData.options );
+					event.preventDefault();
+				}
 			}
 		});
 
