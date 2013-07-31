@@ -369,45 +369,57 @@ $.widget( "mobile.popup", {
 	},
 
 	_setTolerance: function( value ) {
-		var tol = { t: 30, r: 15, b: 30, l: 15 },
-			ar;
+		var tolerance = {
+				top: 30,
+				right: 15,
+				bottom: 30,
+				left: 15
+			},
+			parsedTolerance;
 
 		if ( value !== undefined ) {
-			ar = String( value ).split( "," );
+			parsedTolerance = String( value ).split( "," );
 
-			$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
+			$.each( parsedTolerance, function( idx, value ) {
+				parsedTolerance[ idx ] = parseInt( value, 10 );
+			});
 
-			switch( ar.length ) {
+			switch( parsedTolerance.length ) {
 				// All values are to be the same
 				case 1:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = tol.r = tol.b = tol.l = ar[ 0 ];
+					if ( !isNaN( parsedTolerance[ 0 ] ) ) {
+						tolerance.top =
+						tolerance.right =
+						tolerance.bottom =
+						tolerance.left = parsedTolerance[ 0 ];
 					}
 					break;
 
 				// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
 				case 2:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = tol.b = ar[ 0 ];
+					if ( !isNaN( parsedTolerance[ 0 ] ) ) {
+						tolerance.top =
+						tolerance.bottom = parsedTolerance[ 0 ];
 					}
-					if ( !isNaN( ar[ 1 ] ) ) {
-						tol.l = tol.r = ar[ 1 ];
+					if ( !isNaN( parsedTolerance[ 1 ] ) ) {
+						tolerance.left =
+						tolerance.right = parsedTolerance[ 1 ];
 					}
 					break;
 
 				// The array contains values in the order top, right, bottom, left
 				case 4:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = ar[ 0 ];
+					if ( !isNaN( parsedTolerance[ 0 ] ) ) {
+						tolerance.top = parsedTolerance[ 0 ];
 					}
-					if ( !isNaN( ar[ 1 ] ) ) {
-						tol.r = ar[ 1 ];
+					if ( !isNaN( parsedTolerance[ 1 ] ) ) {
+						tolerance.right = parsedTolerance[ 1 ];
 					}
-					if ( !isNaN( ar[ 2 ] ) ) {
-						tol.b = ar[ 2 ];
+					if ( !isNaN( parsedTolerance[ 2 ] ) ) {
+						tolerance.bottom = parsedTolerance[ 2 ];
 					}
-					if ( !isNaN( ar[ 3 ] ) ) {
-						tol.l = ar[ 3 ];
+					if ( !isNaN( parsedTolerance[ 3 ] ) ) {
+						tolerance.left = parsedTolerance[ 3 ];
 					}
 					break;
 
@@ -416,7 +428,7 @@ $.widget( "mobile.popup", {
 			}
 		}
 
-		this._tolerance = tol;
+		this._tolerance = tolerance;
 		return this;
 	},
 
@@ -425,10 +437,10 @@ $.widget( "mobile.popup", {
 			windowCoordinates = getWindowCoordinates(),
 			// rectangle within which the popup must fit
 			rc = {
-				x: this._tolerance.l,
-				y: windowCoordinates.y + this._tolerance.t,
-				cx: windowCoordinates.cx - this._tolerance.l - this._tolerance.r,
-				cy: windowCoordinates.cy - this._tolerance.t - this._tolerance.b
+				x: this._tolerance.left,
+				y: windowCoordinates.y + this._tolerance.top,
+				cx: windowCoordinates.cx - this._tolerance.left - this._tolerance.right,
+				cy: windowCoordinates.cy - this._tolerance.top - this._tolerance.bottom
 			};
 
 		if ( !infoOnly ) {
