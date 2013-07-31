@@ -139,10 +139,10 @@ $.widget( "mobile.popup", {
 				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
 					( currentOptions.wrapperClass || "" ) + "'></div>" )
 			},
-			frag = this.document[ 0 ].createDocumentFragment();
+			fragment = this.document[ 0 ].createDocumentFragment();
 
-		frag.appendChild( ui.screen[ 0 ] );
-		frag.appendChild( ui.container[ 0 ] );
+		fragment.appendChild( ui.screen[ 0 ] );
+		fragment.appendChild( ui.container[ 0 ] );
 
 		if ( myId ) {
 			ui.screen.attr( "id", myId + "-screen" );
@@ -153,7 +153,7 @@ $.widget( "mobile.popup", {
 		}
 
 		// Apply the proto
-		this._page[ 0 ].appendChild( frag );
+		this._page[ 0 ].appendChild( fragment );
 		// Leave a placeholder where the element used to be
 		ui.placeholder.insertAfter( theElement );
 		theElement
