@@ -796,7 +796,7 @@ $.widget( "mobile.popup", {
 	},
 
 	_closePopup: function( theEvent, data ) {
-		var parsedDst, toUrl,
+		var parsedDestination, toUrl,
 			currentOptions = this.options,
 			immediate = false;
 
@@ -811,12 +811,14 @@ $.widget( "mobile.popup", {
 			// Determine whether we need to rapid-close the popup, or whether we can
 			// take the time to run the closing transition
 			if ( typeof data.toPage === "string" ) {
-				parsedDst = data.toPage;
+				parsedDestination = data.toPage;
 			} else {
-				parsedDst = data.toPage.jqmData( "url" );
+				parsedDestination = data.toPage.jqmData( "url" );
 			}
-			parsedDst = $.mobile.path.parseUrl( parsedDst );
-			toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
+			parsedDestination = $.mobile.path.parseUrl( parsedDestination );
+			toUrl = parsedDestination.pathname +
+				parsedDestination.search +
+				parsedDestination.hash;
 
 			if ( this._myUrl !== $.mobile.path.makeUrlAbsolute( toUrl ) ) {
 				// Going to a different page - close immediately
