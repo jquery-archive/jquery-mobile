@@ -34,8 +34,11 @@ function fitSegmentInsideSegment( windowSize, segmentSize, offset, desired ) {
 		// Center segment if it's bigger than the window
 		returnValue = offset + ( windowSize - segmentSize ) / 2;
 	} else {
-		// Otherwise center it at the desired coordinate while keeping it completely inside the window
-		returnValue = Math.min( Math.max( offset, desired - segmentSize / 2 ), offset + windowSize - segmentSize );
+		// Otherwise center it at the desired coordinate while keeping it
+		// completely inside the window
+		returnValue = Math.min(
+			Math.max( offset, desired - segmentSize / 2 ),
+			offset + windowSize - segmentSize );
 	}
 
 	return returnValue;
@@ -85,7 +88,9 @@ $.widget( "mobile.popup", {
 		// We need to adjust the history option to be false if there's no AJAX nav.
 		// We can't do it in the option declarations because those are run before
 		// it is determined whether there shall be AJAX nav.
-		currentOptions.history = currentOptions.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
+		currentOptions.history = currentOptions.history &&
+			$.mobile.ajaxEnabled &&
+			$.mobile.hashListeningEnabled;
 
 		// Define instance variables
 		$.extend( this, {
@@ -134,7 +139,8 @@ $.widget( "mobile.popup", {
 		var currentOptions = this.options,
 			ui = {
 				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
-				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
+				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) +
+				"'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
 					( currentOptions.wrapperClass || "" ) + "'></div>" )
@@ -176,7 +182,8 @@ $.widget( "mobile.popup", {
 		return false;
 	},
 
-	// Make sure the screen size is increased beyond the page height if the popup's causes the document to increase in height
+	// Make sure the screen size is increased beyond the page height if the popup
+	// causes the document to increase in height
 	_resizeScreen: function() {
 		var popupHeight = this._ui.container.outerHeight( true );
 
@@ -260,7 +267,9 @@ $.widget( "mobile.popup", {
 	},
 
 	_handleWindowOrientationchange: function(/* theEvent */) {
-		if ( !this._orientationchangeInProgress && this._isOpen && this._ignoreResizeTo === 0 ) {
+		if ( !this._orientationchangeInProgress &&
+			this._isOpen &&
+			this._ignoreResizeTo === 0 ) {
 			this._expectResizeEvent();
 			this._orientationchangeInProgress = true;
 		}
@@ -280,9 +289,10 @@ $.widget( "mobile.popup", {
 		if ( targetElement !== ui.container[ 0 ] ) {
 			target = $( targetElement );
 			if ( 0 === target.parents().filter( ui.container[ 0 ] ).length ) {
-				$( this.document[ 0 ].activeElement ).one( "focus", function(/* theEvent */) {
-					target.blur();
-				});
+				$( this.document[ 0 ].activeElement )
+					.one( "focus", function(/* theEvent */) {
+						target.blur();
+					});
 				ui.focusElement.focus();
 				theEvent.preventDefault();
 				theEvent.stopImmediatePropagation();
@@ -296,7 +306,8 @@ $.widget( "mobile.popup", {
 	},
 
 	_themeClassFromOption: function( prefix, value ) {
-		return ( value ? ( value === "none" ? "" : ( prefix + value ) ) : ( prefix + "inherit" ) );
+		return ( value ? ( value === "none" ? "" : ( prefix + value ) ) :
+			( prefix + "inherit" ) );
 	},
 
 	_applyTransition: function( value ) {
@@ -327,14 +338,22 @@ $.widget( "mobile.popup", {
 
 		if ( newOptions.theme !== undefined ) {
 			theElement
-				.removeClass( this._themeClassFromOption( "ui-body-", currentOptions.theme ) )
-				.addClass( this._themeClassFromOption( "ui-body-", newOptions.theme ) );
+				.removeClass(
+					this._themeClassFromOption( "ui-body-",
+						currentOptions.theme ) )
+				.addClass(
+					this._themeClassFromOption( "ui-body-",
+						newOptions.theme ) );
 		}
 
 		if ( newOptions.overlayTheme !== undefined ) {
 			screen
-				.removeClass( this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) )
-				.addClass( this._themeClassFromOption( "ui-overlay-", newOptions.overlayTheme ) );
+				.removeClass(
+					this._themeClassFromOption( "ui-overlay-",
+						currentOptions.overlayTheme ) )
+				.addClass(
+					this._themeClassFromOption( "ui-overlay-",
+						newOptions.overlayTheme ) );
 
 			if ( this._isOpen ) {
 				screen.addClass( "in" );
@@ -395,7 +414,8 @@ $.widget( "mobile.popup", {
 					}
 					break;
 
-				// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
+				// The first value denotes top/bottom tolerance, while the second value
+				// denotes left/right tolerance
 				case 2:
 					if ( !isNaN( parsedTolerance[ 0 ] ) ) {
 						tolerance.top =
@@ -439,8 +459,10 @@ $.widget( "mobile.popup", {
 			rc = {
 				left: this._tolerance.left,
 				top: windowCoordinates.top + this._tolerance.top,
-				width: windowCoordinates.width - this._tolerance.left - this._tolerance.right,
-				height: windowCoordinates.height - this._tolerance.top - this._tolerance.bottom
+				width: windowCoordinates.width - this._tolerance.left -
+					this._tolerance.right,
+				height: windowCoordinates.height - this._tolerance.top -
+					this._tolerance.bottom
 			};
 
 		if ( !infoOnly ) {
@@ -463,10 +485,13 @@ $.widget( "mobile.popup", {
 
 
 		// Center the menu over the desired coordinates, while not going outside
-		// the window tolerances. This will center wrt. the window if the popup is too large.
+		// the window tolerances. This will center wrt. the window if the popup
+		// is too large.
 		ret = {
-			left: fitSegmentInsideSegment( rc.width, menuSize.width, rc.left, desired.left ),
-			top: fitSegmentInsideSegment( rc.height, menuSize.height, rc.top, desired.top )
+			left: fitSegmentInsideSegment( rc.width, menuSize.width, rc.left,
+				desired.left ),
+			top: fitSegmentInsideSegment( rc.height, menuSize.height, rc.top,
+				desired.top )
 		};
 
 		// Make sure the top of the menu is visible
@@ -475,7 +500,8 @@ $.widget( "mobile.popup", {
 		// If the height of the menu is smaller than the height of the document
 		// align the bottom with the bottom of the document
 
-		ret.top -= Math.min( ret.top, Math.max( 0, ret.top + menuSize.height - $.mobile.document.height() ) );
+		ret.top -= Math.min( ret.top,
+			Math.max( 0, ret.top + menuSize.height - $.mobile.document.height() ) );
 
 		return { left: ret.left, top: ret.top };
 	},
@@ -654,11 +680,13 @@ $.widget( "mobile.popup", {
 					andversion = !!androidmatch && androidmatch[ 1 ],
 					chromematch = ua.indexOf( "Chrome" ) > -1;
 
-				// Platform is Android, WebKit version is greater than 534.13 ( Android 3.2.1 ) and not Chrome.
-				if ( androidmatch !== null && andversion === "4.0" && wkversion && wkversion > 534.13 && !chromematch ) {
-					return true;
-				}
-				return false;
+				// Platform is Android, WebKit version is greater than 534.13
+				// ( Android 3.2.1 ) and not Chrome.
+				return ( androidmatch !== null &&
+					andversion === "4.0" &&
+					wkversion &&
+					wkversion > 534.13 &&
+					!chromematch );
 			}());
 
 		// Count down to triggering "popupafteropen" - we have two prerequisites:
@@ -675,7 +703,8 @@ $.widget( "mobile.popup", {
 		this._ui.screen.removeClass( "ui-screen-hidden" );
 		this._ui.container.removeClass( "ui-popup-truncate" );
 
-		// Give applications a chance to modify the contents of the container before it appears
+		// Give applications a chance to modify the contents of the container
+		// before it appears
 		this._reposition( openOptions );
 
 		this._ui.container.removeClass( "ui-popup-hidden" );
@@ -767,7 +796,8 @@ $.widget( "mobile.popup", {
 			return;
 		}
 
-		// Put the element back to where the placeholder was and remove the "ui-popup" class
+		// Put the element back to where the placeholder was and remove the
+		// "ui-popup" class
 		this._setOptions( { theme: $.mobile.popup.prototype.options.theme } );
 		this.element
 			// Cannot directly insertAfter() - we need to detach() first, because
@@ -800,7 +830,8 @@ $.widget( "mobile.popup", {
 			currentOptions = this.options,
 			immediate = false;
 
-		if ( ( theEvent && theEvent.isDefaultPrevented() ) || $.mobile.popup.active !== this ) {
+		if ( ( theEvent && theEvent.isDefaultPrevented() ) ||
+			$.mobile.popup.active !== this ) {
 			return;
 		}
 
@@ -831,7 +862,8 @@ $.widget( "mobile.popup", {
 		// remove nav bindings
 		$.mobile.window.off( currentOptions.closeEvents );
 		// unbind click handlers added when history is disabled
-		this.element.undelegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents );
+		this.element.undelegate( currentOptions.closeLinkSelector,
+			currentOptions.closeLinkEvents );
 
 		this._close( immediate );
 	},
@@ -839,8 +871,10 @@ $.widget( "mobile.popup", {
 	// any navigation event after a popup is opened should close the popup
 	// NOTE the pagebeforechange is bound to catch navigation events that don't
 	//      alter the url (eg, dialogs from popups)
+	// Can't use this._on() here, because the option may specify multiple events.
 	_bindContainerClose: function() {
-		$.mobile.window.on( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
+		$.mobile.window.on( this.options.closeEvents,
+			$.proxy( this, "_closePopup" ) );
 	},
 
 	widget: function() {
@@ -873,10 +907,13 @@ $.widget( "mobile.popup", {
 			// back link clicks so we can close the popup instead of
 			// relying on history to do it for us
 			self.element
-				.delegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents, function( theEvent ) {
-					self.close();
-					theEvent.preventDefault();
-				});
+				.delegate(
+					currentOptions.closeLinkSelector,
+					currentOptions.closeLinkEvents,
+					function( theEvent ) {
+						self.close();
+						theEvent.preventDefault();
+					});
 
 			return this;
 		}
@@ -887,7 +924,9 @@ $.widget( "mobile.popup", {
 		activePage = $.mobile.activePage;
 		currentIsDialog = ( activePage ? activePage.hasClass( "ui-dialog" ) : false );
 		this._myUrl = url = urlHistory.getActive().url;
-		hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog && ( urlHistory.activeIndex > 0 );
+		hasHash = ( url.indexOf( hashkey ) > -1 ) &&
+			!currentIsDialog &&
+			( urlHistory.activeIndex > 0 );
 
 		if ( hasHash ) {
 			self._open( options );
@@ -903,7 +942,8 @@ $.widget( "mobile.popup", {
 			url = $.mobile.path.parseLocation().hash + hashkey;
 		}
 
-		// Tack on an extra hashkey if this is the first page and we've just reconstructed the initial hash
+		// Tack on an extra hashkey if this is the first page and we've just
+		// reconstructed the initial hash
 		if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
 			url += hashkey;
 		}
@@ -949,7 +989,9 @@ $.mobile.popup.handleLink = function( $link ) {
 		scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
 		// NOTE make sure to get only the hash, ie7 (wp7) returns the absolute href
 		//      in this case ruining the element selection
-		popup = $( path.hashToSelector( path.parseUrl( $link.attr( "href" ) ).hash ), scope[ 0 ] ),
+		popup = $( path.hashToSelector(
+			path.parseUrl(
+				$link.attr( "href" ) ).hash ), scope[ 0 ] ),
 		offset;
 
 	if ( popup.data( "mobile-popup" ) ) {
