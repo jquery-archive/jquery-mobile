@@ -34,8 +34,11 @@ function fitSegmentInsideSegment( windowSize, segmentSize, offset, desired ) {
 		// Center segment if it's bigger than the window
 		returnValue = offset + ( windowSize - segmentSize ) / 2;
 	} else {
-		// Otherwise center it at the desired coordinate while keeping it completely inside the window
-		returnValue = Math.min( Math.max( offset, desired - segmentSize / 2 ), offset + windowSize - segmentSize );
+		// Otherwise center it at the desired coordinate while keeping it
+		// completely inside the window
+		returnValue = Math.min(
+			Math.max( offset, desired - segmentSize / 2 ),
+			offset + windowSize - segmentSize );
 	}
 
 	return returnValue;
@@ -45,10 +48,10 @@ function getWindowCoordinates() {
 	var theWindow = $.mobile.window;
 
 	return {
-		x: theWindow.scrollLeft(),
-		y: theWindow.scrollTop(),
-		cx: ( window.innerWidth || theWindow.width() ),
-		cy: ( window.innerHeight || theWindow.height() )
+		left: theWindow.scrollLeft(),
+		top: theWindow.scrollTop(),
+		width: ( window.innerWidth || theWindow.width() ),
+		height: ( window.innerHeight || theWindow.height() )
 	};
 }
 
@@ -85,7 +88,9 @@ $.widget( "mobile.popup", {
 		// We need to adjust the history option to be false if there's no AJAX nav.
 		// We can't do it in the option declarations because those are run before
 		// it is determined whether there shall be AJAX nav.
-		currentOptions.history = currentOptions.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
+		currentOptions.history = currentOptions.history &&
+			$.mobile.ajaxEnabled &&
+			$.mobile.hashListeningEnabled;
 
 		// Define instance variables
 		$.extend( this, {
@@ -134,7 +139,8 @@ $.widget( "mobile.popup", {
 		var currentOptions = this.options,
 			ui = {
 				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
-				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
+				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) +
+				"'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
 					( currentOptions.wrapperClass || "" ) + "'></div>" )
@@ -176,7 +182,8 @@ $.widget( "mobile.popup", {
 		return false;
 	},
 
-	// Make sure the screen size is increased beyond the page height if the popup's causes the document to increase in height
+	// Make sure the screen size is increased beyond the page height if the popup
+	// causes the document to increase in height
 	_resizeScreen: function() {
 		var popupHeight = this._ui.container.outerHeight( true );
 
@@ -196,10 +203,10 @@ $.widget( "mobile.popup", {
 		var windowCoordinates = getWindowCoordinates();
 
 		if ( this._resizeData ) {
-			if ( windowCoordinates.x === this._resizeData.windowCoordinates.x &&
-				windowCoordinates.y === this._resizeData.windowCoordinates.y &&
-				windowCoordinates.cx === this._resizeData.windowCoordinates.cx &&
-				windowCoordinates.cy === this._resizeData.windowCoordinates.cy ) {
+			if ( windowCoordinates.left === this._resizeData.windowCoordinates.left &&
+				windowCoordinates.top === this._resizeData.windowCoordinates.top &&
+				windowCoordinates.width === this._resizeData.windowCoordinates.width &&
+				windowCoordinates.height === this._resizeData.windowCoordinates.height ) {
 				// timeout not refreshed
 				return false;
 			} else {
@@ -260,7 +267,9 @@ $.widget( "mobile.popup", {
 	},
 
 	_handleWindowOrientationchange: function(/* theEvent */) {
-		if ( !this._orientationchangeInProgress && this._isOpen && this._ignoreResizeTo === 0 ) {
+		if ( !this._orientationchangeInProgress &&
+			this._isOpen &&
+			this._ignoreResizeTo === 0 ) {
 			this._expectResizeEvent();
 			this._orientationchangeInProgress = true;
 		}
@@ -280,9 +289,10 @@ $.widget( "mobile.popup", {
 		if ( targetElement !== ui.container[ 0 ] ) {
 			target = $( targetElement );
 			if ( 0 === target.parents().filter( ui.container[ 0 ] ).length ) {
-				$( this.document[ 0 ].activeElement ).one( "focus", function(/* theEvent */) {
-					target.blur();
-				});
+				$( this.document[ 0 ].activeElement )
+					.one( "focus", function(/* theEvent */) {
+						target.blur();
+					});
 				ui.focusElement.focus();
 				theEvent.preventDefault();
 				theEvent.stopImmediatePropagation();
@@ -296,7 +306,8 @@ $.widget( "mobile.popup", {
 	},
 
 	_themeClassFromOption: function( prefix, value ) {
-		return ( value ? ( value === "none" ? "" : ( prefix + value ) ) : ( prefix + "inherit" ) );
+		return ( value ? ( value === "none" ? "" : ( prefix + value ) ) :
+			( prefix + "inherit" ) );
 	},
 
 	_applyTransition: function( value ) {
@@ -327,14 +338,22 @@ $.widget( "mobile.popup", {
 
 		if ( newOptions.theme !== undefined ) {
 			theElement
-				.removeClass( this._themeClassFromOption( "ui-body-", currentOptions.theme ) )
-				.addClass( this._themeClassFromOption( "ui-body-", newOptions.theme ) );
+				.removeClass(
+					this._themeClassFromOption( "ui-body-",
+						currentOptions.theme ) )
+				.addClass(
+					this._themeClassFromOption( "ui-body-",
+						newOptions.theme ) );
 		}
 
 		if ( newOptions.overlayTheme !== undefined ) {
 			screen
-				.removeClass( this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) )
-				.addClass( this._themeClassFromOption( "ui-overlay-", newOptions.overlayTheme ) );
+				.removeClass(
+					this._themeClassFromOption( "ui-overlay-",
+						currentOptions.overlayTheme ) )
+				.addClass(
+					this._themeClassFromOption( "ui-overlay-",
+						newOptions.overlayTheme ) );
 
 			if ( this._isOpen ) {
 				screen.addClass( "in" );
@@ -369,45 +388,58 @@ $.widget( "mobile.popup", {
 	},
 
 	_setTolerance: function( value ) {
-		var tol = { t: 30, r: 15, b: 30, l: 15 },
-			ar;
+		var tolerance = {
+				top: 30,
+				right: 15,
+				bottom: 30,
+				left: 15
+			},
+			parsedTolerance;
 
 		if ( value !== undefined ) {
-			ar = String( value ).split( "," );
+			parsedTolerance = String( value ).split( "," );
 
-			$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
+			$.each( parsedTolerance, function( idx, value ) {
+				parsedTolerance[ idx ] = parseInt( value, 10 );
+			});
 
-			switch( ar.length ) {
+			switch( parsedTolerance.length ) {
 				// All values are to be the same
 				case 1:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = tol.r = tol.b = tol.l = ar[ 0 ];
+					if ( !isNaN( parsedTolerance[ 0 ] ) ) {
+						tolerance.top =
+						tolerance.right =
+						tolerance.bottom =
+						tolerance.left = parsedTolerance[ 0 ];
 					}
 					break;
 
-				// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
+				// The first value denotes top/bottom tolerance, while the second value
+				// denotes left/right tolerance
 				case 2:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = tol.b = ar[ 0 ];
+					if ( !isNaN( parsedTolerance[ 0 ] ) ) {
+						tolerance.top =
+						tolerance.bottom = parsedTolerance[ 0 ];
 					}
-					if ( !isNaN( ar[ 1 ] ) ) {
-						tol.l = tol.r = ar[ 1 ];
+					if ( !isNaN( parsedTolerance[ 1 ] ) ) {
+						tolerance.left =
+						tolerance.right = parsedTolerance[ 1 ];
 					}
 					break;
 
 				// The array contains values in the order top, right, bottom, left
 				case 4:
-					if ( !isNaN( ar[ 0 ] ) ) {
-						tol.t = ar[ 0 ];
+					if ( !isNaN( parsedTolerance[ 0 ] ) ) {
+						tolerance.top = parsedTolerance[ 0 ];
 					}
-					if ( !isNaN( ar[ 1 ] ) ) {
-						tol.r = ar[ 1 ];
+					if ( !isNaN( parsedTolerance[ 1 ] ) ) {
+						tolerance.right = parsedTolerance[ 1 ];
 					}
-					if ( !isNaN( ar[ 2 ] ) ) {
-						tol.b = ar[ 2 ];
+					if ( !isNaN( parsedTolerance[ 2 ] ) ) {
+						tolerance.bottom = parsedTolerance[ 2 ];
 					}
-					if ( !isNaN( ar[ 3 ] ) ) {
-						tol.l = ar[ 3 ];
+					if ( !isNaN( parsedTolerance[ 3 ] ) ) {
+						tolerance.left = parsedTolerance[ 3 ];
 					}
 					break;
 
@@ -416,7 +448,7 @@ $.widget( "mobile.popup", {
 			}
 		}
 
-		this._tolerance = tol;
+		this._tolerance = tolerance;
 		return this;
 	},
 
@@ -425,20 +457,22 @@ $.widget( "mobile.popup", {
 			windowCoordinates = getWindowCoordinates(),
 			// rectangle within which the popup must fit
 			rc = {
-				x: this._tolerance.l,
-				y: windowCoordinates.y + this._tolerance.t,
-				cx: windowCoordinates.cx - this._tolerance.l - this._tolerance.r,
-				cy: windowCoordinates.cy - this._tolerance.t - this._tolerance.b
+				left: this._tolerance.left,
+				top: windowCoordinates.top + this._tolerance.top,
+				width: windowCoordinates.width - this._tolerance.left -
+					this._tolerance.right,
+				height: windowCoordinates.height - this._tolerance.top -
+					this._tolerance.bottom
 			};
 
 		if ( !infoOnly ) {
 			// Clamp the width of the menu before grabbing its size
-			this._ui.container.css( "max-width", rc.cx );
+			this._ui.container.css( "max-width", rc.width );
 		}
 
 		menuSize = {
-			cx: this._ui.container.outerWidth( true ),
-			cy: this._ui.container.outerHeight( true )
+			width: this._ui.container.outerWidth( true ),
+			height: this._ui.container.outerHeight( true )
 		};
 
 		return { rc: rc, menuSize: menuSize };
@@ -451,21 +485,25 @@ $.widget( "mobile.popup", {
 
 
 		// Center the menu over the desired coordinates, while not going outside
-		// the window tolerances. This will center wrt. the window if the popup is too large.
+		// the window tolerances. This will center wrt. the window if the popup
+		// is too large.
 		ret = {
-			x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
-			y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
+			left: fitSegmentInsideSegment( rc.width, menuSize.width, rc.left,
+				desired.left ),
+			top: fitSegmentInsideSegment( rc.height, menuSize.height, rc.top,
+				desired.top )
 		};
 
 		// Make sure the top of the menu is visible
-		ret.y = Math.max( 0, ret.y );
+		ret.top = Math.max( 0, ret.top );
 
 		// If the height of the menu is smaller than the height of the document
 		// align the bottom with the bottom of the document
 
-		ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $.mobile.document.height() ) );
+		ret.top -= Math.min( ret.top,
+			Math.max( 0, ret.top + menuSize.height - $.mobile.document.height() ) );
 
-		return { left: ret.x, top: ret.y };
+		return { left: ret.left, top: ret.top };
 	},
 
 	// Try and center the overlay over the given coordinates
@@ -545,65 +583,74 @@ $.widget( "mobile.popup", {
 		args.prerequisites.container.resolve();
 	},
 
-	// The desired coordinates passed in will be returned untouched if no reference element can be identified via
-	// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
-	// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
-	// options: { x: coordinate, y: coordinate, positionTo: string: "origin", "window", or jQuery selector
-	_desiredCoords: function( openOptions ) {
+	// The desired coordinates passed in will be returned untouched if no
+	// reference element can be identified via desiredPosition.positionTo.
+	// Nevertheless, this function ensures that its return value always contains
+	// valid left and top coordinates by specifying the center middle of the
+	// window if the coordinates are absent. openOptions is a hash with the
+	// following keys:
+	// openOptions: {
+	//   left: coordinate,
+	//   top: coordinate,
+	//   positionTo: string: "origin", "window", or jQuery selector
+	// }
+	_desiredCoordinates: function( openOptions ) {
 		var offset,
-			dst = null,
+			destination = null,
 			windowCoordinates = getWindowCoordinates(),
-			x = openOptions.x,
-			y = openOptions.y,
-			pTo = openOptions.positionTo;
+			left = openOptions.left,
+			top = openOptions.top,
+			positionTo = openOptions.positionTo;
 
 		// Establish which element will serve as the reference
-		if ( pTo && pTo !== "origin" ) {
-			if ( pTo === "window" ) {
-				x = windowCoordinates.cx / 2 + windowCoordinates.x;
-				y = windowCoordinates.cy / 2 + windowCoordinates.y;
+		if ( positionTo && positionTo !== "origin" ) {
+			if ( positionTo === "window" ) {
+				left = windowCoordinates.width / 2 + windowCoordinates.left;
+				top = windowCoordinates.height / 2 + windowCoordinates.top;
 			} else {
 				try {
-					dst = $( pTo );
-				} catch( err ) {
-					dst = null;
+					destination = $( positionTo );
+				} catch( theError ) {
+					destination = null;
 				}
-				if ( dst ) {
-					dst.filter( ":visible" );
-					if ( dst.length === 0 ) {
-						dst = null;
+				if ( destination ) {
+					destination.filter( ":visible" );
+					if ( destination.length === 0 ) {
+						destination = null;
 					}
 				}
 			}
 		}
 
 		// If an element was found, center over it
-		if ( dst ) {
-			offset = dst.offset();
-			x = offset.left + dst.outerWidth() / 2;
-			y = offset.top + dst.outerHeight() / 2;
+		if ( destination ) {
+			offset = destination.offset();
+			left = offset.left + destination.outerWidth() / 2;
+			top = offset.top + destination.outerHeight() / 2;
 		}
 
-		// Make sure x and y are valid numbers - center over the window
-		if ( $.type( x ) !== "number" || isNaN( x ) ) {
-			x = windowCoordinates.cx / 2 + windowCoordinates.x;
+		// Make sure left and top are valid numbers - center over the window
+		if ( $.type( left ) !== "number" || isNaN( left ) ) {
+			left = windowCoordinates.width / 2 + windowCoordinates.left;
 		}
-		if ( $.type( y ) !== "number" || isNaN( y ) ) {
-			y = windowCoordinates.cy / 2 + windowCoordinates.y;
+		if ( $.type( top ) !== "number" || isNaN( top ) ) {
+			top = windowCoordinates.height / 2 + windowCoordinates.top;
 		}
 
-		return { x: x, y: y };
+		return { left: left, top: top };
 	},
 
 	_reposition: function( openOptions ) {
 		// We only care about position-related parameters for repositioning
 		openOptions = {
-			x: openOptions.x,
-			y: openOptions.y,
+			left: openOptions.left,
+			top: openOptions.top,
 			positionTo: openOptions.positionTo
 		};
 		this._trigger( "beforeposition", undefined, openOptions );
-		this._ui.container.offset( this._placementCoords( this._desiredCoords( openOptions ) ) );
+		this._ui.container.offset(
+			this._placementCoords(
+				this._desiredCoordinates( openOptions ) ) );
 	},
 
 	reposition: function( openOptions ) {
@@ -633,11 +680,13 @@ $.widget( "mobile.popup", {
 					andversion = !!androidmatch && androidmatch[ 1 ],
 					chromematch = ua.indexOf( "Chrome" ) > -1;
 
-				// Platform is Android, WebKit version is greater than 534.13 ( Android 3.2.1 ) and not Chrome.
-				if ( androidmatch !== null && andversion === "4.0" && wkversion && wkversion > 534.13 && !chromematch ) {
-					return true;
-				}
-				return false;
+				// Platform is Android, WebKit version is greater than 534.13
+				// ( Android 3.2.1 ) and not Chrome.
+				return ( androidmatch !== null &&
+					andversion === "4.0" &&
+					wkversion &&
+					wkversion > 534.13 &&
+					!chromematch );
 			}());
 
 		// Count down to triggering "popupafteropen" - we have two prerequisites:
@@ -654,18 +703,26 @@ $.widget( "mobile.popup", {
 		this._ui.screen.removeClass( "ui-screen-hidden" );
 		this._ui.container.removeClass( "ui-popup-truncate" );
 
-		// Give applications a chance to modify the contents of the container before it appears
+		// Give applications a chance to modify the contents of the container
+		// before it appears
 		this._reposition( openOptions );
 
 		this._ui.container.removeClass( "ui-popup-hidden" );
 
 		if ( this.options.overlayTheme && androidBlacklist ) {
-			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
-			This fix closes the following bugs ( I use "closes" with reluctance, and stress that this issue should be revisited as soon as possible ):
-			https://github.com/jquery/jquery-mobile/issues/4816
-			https://github.com/jquery/jquery-mobile/issues/4844
-			https://github.com/jquery/jquery-mobile/issues/4874
-			*/
+
+			// TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich")
+			// suffers from an issue where the popup overlay appears to be z-indexed
+			// above the popup itself when certain other styles exist on the same
+			// page -- namely, any element set to `position: fixed` and certain types
+			// of input. These issues are reminiscent of previously uncovered bugs in
+			// older versions of Android's native browser:
+			// https://github.com/scottjehl/Device-Bugs/issues/3
+			// This fix closes the following bugs ( I use "closes" with reluctance,
+			// and stress that this issue should be revisited as soon as possible ):
+			// https://github.com/jquery/jquery-mobile/issues/4816
+			// https://github.com/jquery/jquery-mobile/issues/4844
+			// https://github.com/jquery/jquery-mobile/issues/4874
 
 			// TODO sort out why this._page isn't working
 			this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
@@ -739,7 +796,8 @@ $.widget( "mobile.popup", {
 			return;
 		}
 
-		// Put the element back to where the placeholder was and remove the "ui-popup" class
+		// Put the element back to where the placeholder was and remove the
+		// "ui-popup" class
 		this._setOptions( { theme: $.mobile.popup.prototype.options.theme } );
 		this.element
 			// Cannot directly insertAfter() - we need to detach() first, because
@@ -768,11 +826,12 @@ $.widget( "mobile.popup", {
 	},
 
 	_closePopup: function( theEvent, data ) {
-		var parsedDst, toUrl,
+		var parsedDestination, toUrl,
 			currentOptions = this.options,
 			immediate = false;
 
-		if ( ( theEvent && theEvent.isDefaultPrevented() ) || $.mobile.popup.active !== this ) {
+		if ( ( theEvent && theEvent.isDefaultPrevented() ) ||
+			$.mobile.popup.active !== this ) {
 			return;
 		}
 
@@ -783,12 +842,14 @@ $.widget( "mobile.popup", {
 			// Determine whether we need to rapid-close the popup, or whether we can
 			// take the time to run the closing transition
 			if ( typeof data.toPage === "string" ) {
-				parsedDst = data.toPage;
+				parsedDestination = data.toPage;
 			} else {
-				parsedDst = data.toPage.jqmData( "url" );
+				parsedDestination = data.toPage.jqmData( "url" );
 			}
-			parsedDst = $.mobile.path.parseUrl( parsedDst );
-			toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
+			parsedDestination = $.mobile.path.parseUrl( parsedDestination );
+			toUrl = parsedDestination.pathname +
+				parsedDestination.search +
+				parsedDestination.hash;
 
 			if ( this._myUrl !== $.mobile.path.makeUrlAbsolute( toUrl ) ) {
 				// Going to a different page - close immediately
@@ -801,7 +862,8 @@ $.widget( "mobile.popup", {
 		// remove nav bindings
 		$.mobile.window.off( currentOptions.closeEvents );
 		// unbind click handlers added when history is disabled
-		this.element.undelegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents );
+		this.element.undelegate( currentOptions.closeLinkSelector,
+			currentOptions.closeLinkEvents );
 
 		this._close( immediate );
 	},
@@ -809,9 +871,10 @@ $.widget( "mobile.popup", {
 	// any navigation event after a popup is opened should close the popup
 	// NOTE the pagebeforechange is bound to catch navigation events that don't
 	//      alter the url (eg, dialogs from popups)
+	// Can't use this._on() here, because the option may specify multiple events.
 	_bindContainerClose: function() {
-		$.mobile.window
-			.on( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
+		$.mobile.window.on( this.options.closeEvents,
+			$.proxy( this, "_closePopup" ) );
 	},
 
 	widget: function() {
@@ -844,10 +907,13 @@ $.widget( "mobile.popup", {
 			// back link clicks so we can close the popup instead of
 			// relying on history to do it for us
 			self.element
-				.delegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents, function( theEvent ) {
-					self.close();
-					theEvent.preventDefault();
-				});
+				.delegate(
+					currentOptions.closeLinkSelector,
+					currentOptions.closeLinkEvents,
+					function( theEvent ) {
+						self.close();
+						theEvent.preventDefault();
+					});
 
 			return this;
 		}
@@ -858,7 +924,9 @@ $.widget( "mobile.popup", {
 		activePage = $.mobile.activePage;
 		currentIsDialog = ( activePage ? activePage.hasClass( "ui-dialog" ) : false );
 		this._myUrl = url = urlHistory.getActive().url;
-		hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog && ( urlHistory.activeIndex > 0 );
+		hasHash = ( url.indexOf( hashkey ) > -1 ) &&
+			!currentIsDialog &&
+			( urlHistory.activeIndex > 0 );
 
 		if ( hasHash ) {
 			self._open( options );
@@ -874,7 +942,8 @@ $.widget( "mobile.popup", {
 			url = $.mobile.path.parseLocation().hash + hashkey;
 		}
 
-		// Tack on an extra hashkey if this is the first page and we've just reconstructed the initial hash
+		// Tack on an extra hashkey if this is the first page and we've just
+		// reconstructed the initial hash
 		if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
 			url += hashkey;
 		}
@@ -920,14 +989,16 @@ $.mobile.popup.handleLink = function( $link ) {
 		scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
 		// NOTE make sure to get only the hash, ie7 (wp7) returns the absolute href
 		//      in this case ruining the element selection
-		popup = $( path.hashToSelector( path.parseUrl( $link.attr( "href" ) ).hash ), scope[ 0 ] ),
+		popup = $( path.hashToSelector(
+			path.parseUrl(
+				$link.attr( "href" ) ).hash ), scope[ 0 ] ),
 		offset;
 
 	if ( popup.data( "mobile-popup" ) ) {
 		offset = $link.offset();
 		popup.popup( "open", {
-			x: offset.left + $link.outerWidth() / 2,
-			y: offset.top + $link.outerHeight() / 2,
+			left: offset.left + $link.outerWidth() / 2,
+			top: offset.top + $link.outerHeight() / 2,
 			transition: $link.jqmData( "transition" ),
 			positionTo: $link.jqmData( "position-to" )
 		});
