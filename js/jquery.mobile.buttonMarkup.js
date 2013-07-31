@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
@@ -256,10 +256,8 @@ $.fn.buttonMarkup.defaults = {
 	mini: false
 };
 
-//links in bars, or those with data-role become buttons
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
-	$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button", target ).buttonMarkup();
+$.extend( $.fn.buttonMarkup, {
+	initSelector: "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button"
 });
 
 })( jQuery );

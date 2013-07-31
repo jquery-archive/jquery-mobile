@@ -11,6 +11,8 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 
 	$.widget( "mobile.toolbar", {
+		initSelector: ":jqmData(role='footer'), :jqmData(role='header')",
+
 		options: {
 			theme: null,
 			addBackBtn: false,
@@ -112,10 +114,7 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				});
 		}
 	});
-	$.mobile.toolbar.initSelector = ":jqmData(role='footer'), :jqmData(role='header')";
-
-	$.mobile._enhancer.add( "mobile.toolbar" );
-
+	
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

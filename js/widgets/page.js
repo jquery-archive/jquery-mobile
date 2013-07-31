@@ -3,7 +3,7 @@
 //>>label: Page Creation
 //>>group: Core
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 $.mobile.widgets = {};
@@ -15,7 +15,8 @@ $.widget = (function( orig ) {
 		var constructor = orig.apply( this, arguments ),
 			name = constructor.prototype.widgetName;
  
-		constructor.initSelector = ( constructor.prototype.initSelector ? constructor.prototype.initSelector : ":jqmData(role='" + name + "')" );
+		constructor.initSelector = ( ( constructor.prototype.initSelector !== undefined ) ?
+			constructor.prototype.initSelector : ":jqmData(role='" + name + "')" );
  
 		$.mobile.widgets[ name ] = constructor;
  
@@ -23,15 +24,12 @@ $.widget = (function( orig ) {
 	};
 })( $.widget );
 
-//make sure $.widget still has bridge and extend methods
-$.extend( $.widget, {
-	extend: originalWidget.extend,
-	bridge: originalWidget.bridge
-});
+// Make sure $.widget still has bridge and extend methods
+$.extend( $.widget, originalWidget );
 
-//for backcompat remove in 1.5
+// For backcompat remove in 1.5
 $.mobile.document.on( "create", function( event ){
-	$.mobile.enhanceWithin( event.target );
+	$( event.target ).enhanceWithin();
 });
 
 $.widget( "mobile.page", {
@@ -52,7 +50,7 @@ $.widget( "mobile.page", {
 	_create: function() {
 		var attrPrefix = "data-" + $.mobile.ns,
 			self = this;
-		// if false is returned by the callbacks do not create the page
+		// If false is returned by the callbacks do not create the page
 		if ( this._trigger( "beforecreate" ) === false ) {
 			return false;
 		}
@@ -80,9 +78,12 @@ $.widget( "mobile.page", {
 				// Add ARIA role
 				$this.attr( "role", "main" ).addClass( "ui-content" );
 		});
+		
+		this.element.enhanceWithin();
 
-		// enhance the page
-		$.mobile._enhancer.enhance( this.element[ 0 ] );
+		if( $.mobile.getAttribute( this.element[0], "role", $.mobile.ns ) === "dialog" && $.mobile.dialog ){
+			this.element.dialog();
+		}
 	},
 
 	bindRemove: function( callback ) {

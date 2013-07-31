@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.flipswitch.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -164,10 +164,6 @@ $.widget( "mobile.flipswitch", $.extend({
 
 }, $.mobile.behaviors.formReset ) );
 
-$.mobile.flipswitch.initSelector = ":jqmData(role='flipswitch')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.flipswitch" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

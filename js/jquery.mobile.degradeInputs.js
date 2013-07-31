@@ -4,7 +4,7 @@
 //>>group: Utilities
 
 
-define( [ "jquery", "./widgets/page", "./jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "./widgets/page" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -25,7 +25,7 @@ $.mobile.page.prototype.options.degradeInputs = {
 };
 
 //auto self-init widgets
-$.mobile._enhancer.add( "mobile.degradeinputs", undefined, function( target ) {
+$.mobile.degradeInputsWithin = function( target ) {
 
 	var $target = $( target ),
 		page = $.mobile.closestPageData( $target ), options;
@@ -54,7 +54,7 @@ $.mobile._enhancer.add( "mobile.degradeinputs", undefined, function( target ) {
 		}
 	});
 
-});
+};
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

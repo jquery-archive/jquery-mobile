@@ -171,14 +171,4 @@ $.testHelper.delayStart();
 		ok( btn1.hasClass( "ui-first-child" ), "The prepended button has class ui-first-child" );
 		ok( btn2.hasClass( "ui-last-child" ), "The appended button has class ui-last-child" );
 	});
-
-	test( "Controlgroup destruction", function() {
-		var grp = $( "#destroy-test" ),
-			orig = grp.clone();
-
-		// We need to manually unenhance the buttons inside for the sake of the
-		// comparison - the point is that the wrappers should be gone.
-		grp.controlgroup().controlgroup( "destroy" ).find( "a" ).removeAttr( "class" );
-		deepEqual( $.testHelper.domEqual( grp, orig ), true, "The post-enhance-unenhance DOM is identical to the pre-enhance DOM." );
-	});
 })(jQuery);

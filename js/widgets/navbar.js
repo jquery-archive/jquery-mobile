@@ -6,7 +6,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -65,11 +65,6 @@ $.widget( "mobile.navbar", {
 		});
 	}
 });
-
-$.mobile.navbar.initSelector = ":jqmData(role='navbar')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.navbar" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

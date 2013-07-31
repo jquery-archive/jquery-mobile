@@ -141,44 +141,53 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 			$.removeWithDependents( this );
 		},
 
-		//enhance child elements
+		// Enhance child elements
 		enhanceWithin: function() {
 			var widgetElements,
 				that = this;
 
-			//Add no js class to elements
+			// Add no js class to elements
 			if( $.mobile.nojs ) {
 				$.mobile.nojs( this );
 			}
-			//bind links for ajax nav
+			// Bind links for ajax nav
 			if( $.mobile.links ) {
 				$.mobile.links( this );
 			}
-			//degrade inputs for styleing
+			// Degrade inputs for styleing
 			if( $.mobile.degradeInputsWithin ){
 				$.mobile.degradeInputsWithin( this );
 			}
-			//run buttonmarkup
-			if( $.mobile.enhanceWithButtonMarkup ){
-				$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button", this ).each( $.mobile.enhanceWithButtonMarkup );
+			// Run buttonmarkup
+			if( $.fn.buttonMarkup ){
+				$( $.fn.buttonMarkup.initSelector ).buttonMarkup();
 			}
-			//add classes for fieldContain
+			// Add classes for fieldContain
 			if( $.fn.fieldcontain ) {
-
 				$( ":jqmData(role='fieldcontain')", this ).jqmEnhanceable().fieldcontain();
 			}
-			//enhance widgets
+
+			// Enhance widgets
 			$.each( $.mobile.widgets, function( name, constructor ) {
-				//filter elements that should not be enhanced based on parents
-				widgetElements = $.mobile.enhanceable( that.find( constructor.initSelector ) );
-				//if any matching elements remain filter ones with keepNativeSelector
-				if ( widgetElements.length ) {
-					//$.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompt
-					//switch to $.mobile.keepNativeSelector in 1.5 which is just a value not a function
-					widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
+
+				// If initSelector not false find elements
+				if ( constructor.initSelector ){
+
+					// Filter elements that should not be enhanced based on parents
+					widgetElements = $.mobile.enhanceable( that.find( constructor.initSelector ) );
+
+					// If any matching elements remain filter ones with keepNativeSelector
+					if ( widgetElements.length ) {
+
+						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompt
+						// Switch to $.mobile.keepNativeSelector in 1.5 which is just a value not a function
+						widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
+					}
+
+					// Enhance whatever is left
+					widgetElements[ constructor.prototype.widgetName ]();
 				}
-				//enhance whatever is left
-				widgetElements[ constructor.prototype.widgetName ]();
+				
 			});
 
 			return this;

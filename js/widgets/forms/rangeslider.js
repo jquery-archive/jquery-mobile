@@ -238,11 +238,6 @@ define( [ "jquery",
 
 	}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
 
-$.mobile.rangeslider.initSelector = ":jqmData(role='rangeslider')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.rangeslider", { dependencies: [ "mobile.slider" ] } );
-
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

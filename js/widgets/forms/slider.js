@@ -15,6 +15,8 @@ define( [ "jquery",
 (function( $, undefined ) {
 
 $.widget( "mobile.slider", $.extend( {
+	initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
+
 	widgetEventPrefix: "slide",
 
 	options: {
@@ -559,11 +561,6 @@ $.widget( "mobile.slider", $.extend( {
 	}
 
 }, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
-
-$.mobile.slider.initSelector = "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.slider" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
