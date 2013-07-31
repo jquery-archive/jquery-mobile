@@ -78,8 +78,8 @@ $.widget( "mobile.popup", {
 	},
 
 	_create: function() {
-		var elem = this.element,
-			myId = elem.attr( "id" ),
+		var theElement = this.element,
+			myId = theElement.attr( "id" ),
 			opts = this.options;
 
 		// We need to adjust the history option to be false if there's no AJAX nav.
@@ -90,7 +90,7 @@ $.widget( "mobile.popup", {
 		// Define instance variables
 		$.extend( this, {
 			_scrollTop: 0,
-			_page: elem.closest( ".ui-page" ),
+			_page: theElement.closest( ".ui-page" ),
 			_ui: null,
 			_fallbackTransition: "",
 			_currentTransition: false,
@@ -108,12 +108,12 @@ $.widget( "mobile.popup", {
 
 		if ( opts.enhanced ) {
 			this._ui = {
-				container: elem.parent(),
-				screen: elem.parent().prev(),
+				container: theElement.parent(),
+				screen: theElement.parent().prev(),
 				placeholder: $( this.document[ 0 ].getElementById( myId + "-placeholder" ) )
 			};
 		} else {
-			this._ui = this._enhance( elem, myId );
+			this._ui = this._enhance( theElement, myId );
 			this
 				._applyTransition( opts.transition )
 				._setTolerance( opts.tolerance );
@@ -130,7 +130,7 @@ $.widget( "mobile.popup", {
 		this._on( $.mobile.document, { "focusin": "_handleDocumentFocusIn" } );
 	},
 
-	_enhance: function( elem, myId ) {
+	_enhance: function( theElement, myId ) {
 		var opts = this.options,
 			ui = {
 				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
@@ -155,8 +155,8 @@ $.widget( "mobile.popup", {
 		// Apply the proto
 		this._page[ 0 ].appendChild( frag );
 		// Leave a placeholder where the element used to be
-		ui.placeholder.insertAfter( elem );
-		elem
+		ui.placeholder.insertAfter( theElement );
+		theElement
 			.detach()
 			.addClass( "ui-popup " +
 				this._themeClassFromOption( "ui-body-", opts.theme ) + " " +
