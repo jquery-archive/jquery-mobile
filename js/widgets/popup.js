@@ -269,24 +269,26 @@ $.widget( "mobile.popup", {
 	// When the popup is open, attempting to focus on an element that is not a
 	// child of the popup will redirect focus to the popup
 	_handleDocumentFocusIn: function( theEvent ) {
-		var tgt = theEvent.target, $tgt, ui = this._ui;
+		var target,
+			targetElement = theEvent.target,
+			ui = this._ui;
 
 		if ( !this._isOpen ) {
 			return;
 		}
 
-		if ( tgt !== ui.container[ 0 ] ) {
-			$tgt = $( theEvent.target );
-			if ( 0 === $tgt.parents().filter( ui.container[ 0 ] ).length ) {
-				$( document.activeElement ).one( "focus", function(/* theEvent */) {
-					$tgt.blur();
+		if ( targetElement !== ui.container[ 0 ] ) {
+			target = $( targetElement );
+			if ( 0 === target.parents().filter( ui.container[ 0 ] ).length ) {
+				$( this.document[ 0 ].activeElement ).one( "focus", function(/* theEvent */) {
+					target.blur();
 				});
 				ui.focusElement.focus();
 				theEvent.preventDefault();
 				theEvent.stopImmediatePropagation();
 				return false;
 			} else if ( ui.focusElement[ 0 ] === ui.container[ 0 ] ) {
-				ui.focusElement = $tgt;
+				ui.focusElement = target;
 			}
 		}
 
