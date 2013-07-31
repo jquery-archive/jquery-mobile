@@ -193,13 +193,13 @@ $.widget( "mobile.popup", {
 	},
 
 	_expectResizeEvent: function() {
-		var winCoords = getWindowCoordinates();
+		var windowCoordinates = getWindowCoordinates();
 
 		if ( this._resizeData ) {
-			if ( winCoords.x === this._resizeData.winCoords.x &&
-				winCoords.y === this._resizeData.winCoords.y &&
-				winCoords.cx === this._resizeData.winCoords.cx &&
-				winCoords.cy === this._resizeData.winCoords.cy ) {
+			if ( windowCoordinates.x === this._resizeData.windowCoordinates.x &&
+				windowCoordinates.y === this._resizeData.windowCoordinates.y &&
+				windowCoordinates.cx === this._resizeData.windowCoordinates.cx &&
+				windowCoordinates.cy === this._resizeData.windowCoordinates.cy ) {
 				// timeout not refreshed
 				return false;
 			} else {
@@ -210,7 +210,7 @@ $.widget( "mobile.popup", {
 
 		this._resizeData = {
 			timeoutId: this._delay( "_resizeTimeout", 200 ),
-			winCoords: winCoords
+			windowCoordinates: windowCoordinates
 		};
 
 		return true;
@@ -420,13 +420,13 @@ $.widget( "mobile.popup", {
 
 	_clampPopupWidth: function( infoOnly ) {
 		var menuSize,
-			winCoords = getWindowCoordinates(),
+			windowCoordinates = getWindowCoordinates(),
 			// rectangle within which the popup must fit
 			rc = {
 				x: this._tolerance.l,
-				y: winCoords.y + this._tolerance.t,
-				cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
-				cy: winCoords.cy - this._tolerance.t - this._tolerance.b
+				y: windowCoordinates.y + this._tolerance.t,
+				cx: windowCoordinates.cx - this._tolerance.l - this._tolerance.r,
+				cy: windowCoordinates.cy - this._tolerance.t - this._tolerance.b
 			};
 
 		if ( !infoOnly ) {
@@ -550,7 +550,7 @@ $.widget( "mobile.popup", {
 	_desiredCoords: function( openOptions ) {
 		var offset,
 			dst = null,
-			winCoords = getWindowCoordinates(),
+			windowCoordinates = getWindowCoordinates(),
 			x = openOptions.x,
 			y = openOptions.y,
 			pTo = openOptions.positionTo;
@@ -558,8 +558,8 @@ $.widget( "mobile.popup", {
 		// Establish which element will serve as the reference
 		if ( pTo && pTo !== "origin" ) {
 			if ( pTo === "window" ) {
-				x = winCoords.cx / 2 + winCoords.x;
-				y = winCoords.cy / 2 + winCoords.y;
+				x = windowCoordinates.cx / 2 + windowCoordinates.x;
+				y = windowCoordinates.cy / 2 + windowCoordinates.y;
 			} else {
 				try {
 					dst = $( pTo );
@@ -584,10 +584,10 @@ $.widget( "mobile.popup", {
 
 		// Make sure x and y are valid numbers - center over the window
 		if ( $.type( x ) !== "number" || isNaN( x ) ) {
-			x = winCoords.cx / 2 + winCoords.x;
+			x = windowCoordinates.cx / 2 + windowCoordinates.x;
 		}
 		if ( $.type( y ) !== "number" || isNaN( y ) ) {
-			y = winCoords.cy / 2 + winCoords.y;
+			y = windowCoordinates.cy / 2 + windowCoordinates.y;
 		}
 
 		return { x: x, y: y };
