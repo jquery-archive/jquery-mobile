@@ -41,14 +41,14 @@ function fitSegmentInsideSegment( windowSize, segmentSize, offset, desired ) {
 	return returnValue;
 }
 
-function windowCoords() {
-	var $win = $.mobile.window;
+function getWindowCoordinates() {
+	var theWindow = $.mobile.window;
 
 	return {
-		x: $win.scrollLeft(),
-		y: $win.scrollTop(),
-		cx: ( window.innerWidth || $win.width() ),
-		cy: ( window.innerHeight || $win.height() )
+		x: theWindow.scrollLeft(),
+		y: theWindow.scrollTop(),
+		cx: ( window.innerWidth || theWindow.width() ),
+		cy: ( window.innerHeight || theWindow.height() )
 	};
 }
 
@@ -193,7 +193,7 @@ $.widget( "mobile.popup", {
 	},
 
 	_expectResizeEvent: function() {
-		var winCoords = windowCoords();
+		var winCoords = getWindowCoordinates();
 
 		if ( this._resizeData ) {
 			if ( winCoords.x === this._resizeData.winCoords.x &&
@@ -419,7 +419,7 @@ $.widget( "mobile.popup", {
 
 	_clampPopupWidth: function( infoOnly ) {
 		var menuSize,
-			winCoords = windowCoords(),
+			winCoords = getWindowCoordinates(),
 			// rectangle within which the popup must fit
 			rc = {
 				x: this._tolerance.l,
@@ -541,7 +541,7 @@ $.widget( "mobile.popup", {
 	// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
 	// options: { x: coordinate, y: coordinate, positionTo: string: "origin", "window", or jQuery selector
 	_desiredCoords: function( opts ) {
-		var dst = null, offset, winCoords = windowCoords(), x = opts.x, y = opts.y, pTo = opts.positionTo;
+		var dst = null, offset, winCoords = getWindowCoordinates(), x = opts.x, y = opts.y, pTo = opts.positionTo;
 
 		// Establish which element will serve as the reference
 		if ( pTo && pTo !== "origin" ) {
