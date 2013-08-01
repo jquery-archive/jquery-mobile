@@ -424,7 +424,7 @@ $.widget( "mobile.popup", {
 		var menuSize,
 			windowCoordinates = getWindowCoordinates(),
 			// rectangle within which the popup must fit
-			rc = {
+			rectangle = {
 				x: this._tolerance.l,
 				y: windowCoordinates.y + this._tolerance.t,
 				cx: windowCoordinates.cx - this._tolerance.l - this._tolerance.r,
@@ -433,7 +433,7 @@ $.widget( "mobile.popup", {
 
 		if ( !infoOnly ) {
 			// Clamp the width of the menu before grabbing its size
-			this._ui.container.css( "max-width", rc.cx );
+			this._ui.container.css( "max-width", rectangle.cx );
 		}
 
 		menuSize = {
@@ -441,31 +441,33 @@ $.widget( "mobile.popup", {
 			cy: this._ui.container.outerHeight( true )
 		};
 
-		return { rc: rc, menuSize: menuSize };
+		return { rc: rectangle, menuSize: menuSize };
 	},
 
 	_calculateFinalLocation: function( desired, clampInfo ) {
-		var ret,
-			rc = clampInfo.rc,
+		var returnValue,
+			rectangle = clampInfo.rc,
 			menuSize = clampInfo.menuSize;
 
 
 		// Center the menu over the desired coordinates, while not going outside
-		// the window tolerances. This will center wrt. the window if the popup is too large.
-		ret = {
-			x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
-			y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
+		// the window tolerances. This will center wrt. the window if the popup is
+		// too large.
+		returnValue = {
+			left: fitSegmentInsideSegment( rectangle.cx, menuSize.cx, rectangle.x, desired.x ),
+			top: fitSegmentInsideSegment( rectangle.cy, menuSize.cy, rectangle.y, desired.y )
 		};
 
 		// Make sure the top of the menu is visible
-		ret.y = Math.max( 0, ret.y );
+		returnValue.top = Math.max( 0, returnValue.top );
 
 		// If the height of the menu is smaller than the height of the document
 		// align the bottom with the bottom of the document
 
-		ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $.mobile.document.height() ) );
+		returnValue.top -= Math.min( returnValue.top,
+			Math.max( 0, returnValue.top + menuSize.cy - $.mobile.document.height() ) );
 
-		return { left: ret.x, top: ret.y };
+		return returnValue;
 	},
 
 	// Try and center the overlay over the given coordinates
