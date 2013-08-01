@@ -203,7 +203,7 @@ module.exports = function( grunt ) {
 			images: {
 				expand: true,
 				cwd: "css/themes/default/images",
-				src: "*",
+				src: "**",
 				dest: path.join( dist, "images/" )
 			},
 			"demos.nested-includes": {
@@ -382,7 +382,16 @@ module.exports = function( grunt ) {
 					archive: path.join( dist, name ) + "<%= versionSuffix %>.zip"
 				},
 				files: [
-					{ expand: true, cwd: dist, src: [ "**", "!*.zip" ] }
+					{
+						expand: true,
+						cwd: dist,
+						src: [
+							"*<%= versionSuffix %>.js",
+							"*<%= versionSuffix %>.css",
+							"*<%= versionSuffix %>.min.*",
+							"images/**",
+							"demos/**",
+							"!*.zip" ] }
 				]
 			},
 			cdn: {
