@@ -28,7 +28,8 @@ var reverseBoolOptionMap = {
 		var ret = $.mobile.getAttribute.apply( this, arguments );
 
 		return ( ret == null ? undefined : ret );
-	};
+	},
+	capitalLettersRE = /[A-Z]/g;
 
 // optionsToClasses:
 // @options: A complete set of options to convert to class names.
@@ -164,6 +165,10 @@ function classNameToOptions( classes ) {
 	};
 }
 
+function camelCase2Hyphenated( c ) {
+	return "-" + c.toLowerCase();
+}
+
 // $.fn.buttonMarkup:
 // DOM: gets/sets .className
 //
@@ -211,9 +216,9 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 			for ( optionKey in defaults ) {
 				if ( retrievedOptions[ optionKey ] === undefined ) {
 					retrievedOptions[ optionKey ] = getAttrFixed( el,
-						optionKey.replace( /[A-Z]/g, function( c ) {
-								return "-" + c.toLowerCase();
-						}), true );
+						optionKey.replace( capitalLettersRE, camelCase2Hyphenated ),
+						true
+					);
 				}
 			}
 		}
