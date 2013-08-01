@@ -2,7 +2,7 @@
 //>>description: Consistent styling for native select menus. Tapping opens a native select menu.
 //>>label: Flip Switch
 //>>group: Forms
-//>>css.structure: ../css/structure/jquery.mobile.forms.flip.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.flipswitch.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
