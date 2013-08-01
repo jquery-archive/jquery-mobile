@@ -64,7 +64,7 @@
 				<form>
 					<input id="filterTable-input" data-inset="false" data-type="search"></input>
 				</form>
-				<table data-role="table" id="movie-table" data-filter="true" data-input="#filterTable-input">
+				<table data-role="table" id="movie-table" data-filter="true" data-input="#filterTable-input" class="ui-responsive">
 					<thead>
 						<tr>
 							<th data-priority="1">Rank</th>
