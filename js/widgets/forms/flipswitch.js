@@ -147,6 +147,8 @@ $.widget( "mobile.flipswitch", $.extend({
 		if( options.mini !== undefined ) {
 			this.widget().toggleClass( "ui-mini", options.mini );
 		}
+		
+		this._super( options );
 	},
 
 	_destroy: function() {
