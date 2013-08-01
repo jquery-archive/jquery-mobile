@@ -613,7 +613,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
 	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
-	grunt.registerTask( "release", [ "clean", "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
+	grunt.registerTask( "release", [ "clean:dist", "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );
