@@ -42,18 +42,28 @@ module.exports = function( grunt ) {
 		},
 
 		files: {
+			css: {
+				structure: [
+					name + ".structure<%= versionSuffix %>.css",
+					name + ".structure<%= versionSuffix %>.min.css"
+				],
+				theme: [
+					name + ".theme<%= versionSuffix %>.css",
+					name + ".theme<%= versionSuffix %>.min.css"
+				],
+				bundle: [
+					name + "<%= versionSuffix %>.css",
+					name + "<%= versionSuffix %>.min.css"
+				]
+			},
+
 			cdn: [
 				name + "<%= versionSuffix %>.js",
 				name + "<%= versionSuffix %>.min.js",
 				name + "<%= versionSuffix %>.min.map",
 
-				// CSS Structure files
-				name + ".structure<%= versionSuffix %>.css",
-				name + ".structure<%= versionSuffix %>.min.css",
-
-				// CSS Bundle files
-				name + "<%= versionSuffix %>.css",
-				name + "<%= versionSuffix %>.min.css",
+				"<%= files.css.structure %>",
+				"<%= files.css.bundle %>",
 
 				"images/*",
 				"images/icons-png/**"
@@ -62,9 +72,7 @@ module.exports = function( grunt ) {
 			distZipContent: [
 				"<%= files.cdn %>",
 
-				// CSS Theme files
-				name + ".theme<%= versionSuffix %>.css",
-				name + ".theme<%= versionSuffix %>.min.css",
+				"<%= files.css.theme %>",
 
 				"images/icons-svg/**",
 				"demos/**"
@@ -318,7 +326,7 @@ module.exports = function( grunt ) {
 						expand: true,
 						cwd: dist,
 						src: [
-							"<%= files.css %>",
+							"<%= files.css.bundle %>",
 							"images/**"
 						],
 						dest: path.join( dist, "demos/css/themes/default/" )
