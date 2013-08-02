@@ -37,9 +37,42 @@ module.exports = function( grunt ) {
 
 		headShortHash: "",
 
-		files: {
+		dirs: {
 			cdn: path.join( dist, name + "-cdn" )
 		},
+
+		files: {
+			cdn: [
+				name + "<%= versionSuffix %>.js",
+				name + "<%= versionSuffix %>.min.js",
+				name + "<%= versionSuffix %>.min.map",
+
+				// CSS Structure files
+				name + ".structure<%= versionSuffix %>.css",
+				name + ".structure<%= versionSuffix %>.min.css",
+
+				// CSS Bundle files
+				name + "<%= versionSuffix %>.css",
+				name + "<%= versionSuffix %>.min.css",
+
+				"images/*",
+				"images/icons-png/**"
+			],
+
+			distZipContent: [
+				"<%= files.cdn %>",
+
+				// CSS Theme files
+				name + ".theme<%= versionSuffix %>.css",
+				name + ".theme<%= versionSuffix %>.min.css",
+
+				"images/icons-svg/**",
+				"demos/**"
+			],
+
+			cdnZipFile: "<%= dirs.cdn %>.zip"
+		},
+
 
 		jshint: {
 			js: {
@@ -284,7 +317,10 @@ module.exports = function( grunt ) {
 					{
 						expand: true,
 						cwd: dist,
-						src: [ "*.css", "images/*" ],
+						src: [
+							"<%= files.css %>",
+							"images/**"
+						],
 						dest: path.join( dist, "demos/css/themes/default/" )
 					},
 					{
@@ -314,12 +350,8 @@ module.exports = function( grunt ) {
 					{
 						expand: true,
 						cwd: dist,
-						src: [
-							name + "*<%= versionSuffix %>.*",
-							"images/*",
-							"!*.zip"
-						],
-						dest: "<%= files.cdn %>"
+						src: "<%= files.cdn %>",
+						dest: "<%= dirs.cdn %>"
 					}
 				]
 			},
@@ -357,7 +389,7 @@ module.exports = function( grunt ) {
 						expand: true,
 						cwd: dist,
 						src: [
-							"images/*"
+							"images/**"
 						],
 						dest: "dist/git/"
 					}
@@ -369,7 +401,7 @@ module.exports = function( grunt ) {
 			cdn: {
 				options: {
 					algo: "md5",
-					cwd: "<%= files.cdn %>"
+					cwd: "<%= dirs.cdn %>"
 				},
 				src: [ "**/*" ],
 				dest: "MANIFEST"
@@ -385,23 +417,18 @@ module.exports = function( grunt ) {
 					{
 						expand: true,
 						cwd: dist,
-						src: [
-							"*<%= versionSuffix %>.js",
-							"*<%= versionSuffix %>.css",
-							"*<%= versionSuffix %>.min.*",
-							"images/**",
-							"demos/**",
-							"!*.zip" ] }
+						src: "<%= files.distZipContent %>"
+					}
 				]
 			},
 			cdn: {
 				options: {
-					archive: "<%= files.cdn %>.zip"
+					archive: "<%= files.cdnZipFile %>"
 				},
 				files: [
 					{
 						expand: true,
-						cwd: "<%= files.cdn %>",
+						cwd: "<%= dirs.cdn %>",
 						src: [ "**/*" ]
 					}
 				]
@@ -556,7 +583,6 @@ module.exports = function( grunt ) {
 						path.join( dist, name + "*.js" ),
 						path.join( dist, name + ".min.map" ),
 						path.join( dist, name + "*.css" ),
-						path.join( dist, name + ".zip" )
 					]
 				}
 			}
@@ -571,7 +597,7 @@ module.exports = function( grunt ) {
 		clean: {
 			dist: [ dist ],
             git: [ path.join( dist, "git" ) ],
-			cdn: [ "<%= files.cdn %>" ]
+			cdn: [ "<%= dirs.cdn %>" ]
 		}
 	});
 
