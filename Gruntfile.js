@@ -629,11 +629,11 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "lint", [ "jshint" ] );
 
-	grunt.registerTask( "js:release",  [ "requirejs", "concat:js", "uglify", "copy:sourcemap" ] );
-	grunt.registerTask( "js", [ "config:dev", "js:release" ] );
+	grunt.registerTask( "js", [ "requirejs", "concat:js" ] );
+	grunt.registerTask( "js:release",  [ "js", "uglify", "copy:sourcemap" ] );
 
-	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
-	grunt.registerTask( "css", [ "config:dev", "css:release" ] );
+	grunt.registerTask( "css", [ "cssbuild" ] );
+	grunt.registerTask( "css:release", [ "css", "cssmin" ] );
 
 	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed" ] );
 
