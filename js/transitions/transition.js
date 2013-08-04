@@ -36,9 +36,22 @@ define( [ "jquery",
 			});
 		},
 
+		isSamePage: function() {
+			// NOTE: no friend of comparing ids here
+			return this.$from !== undefined &&
+				( this.$to[0] === this.$from[0] ||
+					this.$to.attr( "id" ) === this.$from.attr( "id" ) );
+		},
+
 		cleanFrom: function() {
+			var samePage = this.isSamePage(),
+				classes = " out in reverse " + this.name;
+
+			if ( samePage ) {
+				classes += $.mobile.activePageClass;
+			}
 			this.$from
-				.removeClass( $.mobile.activePageClass + " out in reverse " + this.name )
+				.removeClass( classes )
 				.height( "" );
 		},
 
