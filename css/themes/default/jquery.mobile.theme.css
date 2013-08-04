@@ -176,7 +176,7 @@ html .ui-btn.ui-icon-radio-on:after {
 	opacity: .3;
 }
 html .ui-btn.ui-icon-checkbox-off:after,
-html .ui-btn.ui-icon-radio-off:after {
+html .ui-btn.ui-icon-checkbox-on:after {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
 }
