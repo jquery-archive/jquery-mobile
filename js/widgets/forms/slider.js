@@ -178,9 +178,6 @@ $.widget( "mobile.slider", $.extend( {
 	},
 
 	_setOptions: function( options ) {
-		var closeButtonLocation, closeButtonText,
-			currentOpts = this.options;
-
 		if ( options.theme !== undefined ) {
 			this._setTheme( options.theme );
 		}
