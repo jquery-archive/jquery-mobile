@@ -18,7 +18,9 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-	$.widget( "mobile.content", $.mobile.widget, {
+	$.widget( "mobile.content", {
+		initSelector: false,
+
 		_create: function() {
 			var $window = $( window );
 

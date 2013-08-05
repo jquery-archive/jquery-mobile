@@ -150,18 +150,22 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 			if( $.mobile.nojs ) {
 				$.mobile.nojs( this );
 			}
+			
 			// Bind links for ajax nav
 			if( $.mobile.links ) {
 				$.mobile.links( this );
 			}
+
 			// Degrade inputs for styleing
 			if( $.mobile.degradeInputsWithin ){
 				$.mobile.degradeInputsWithin( this );
 			}
+
 			// Run buttonmarkup
 			if( $.fn.buttonMarkup ){
 				$( $.fn.buttonMarkup.initSelector ).buttonMarkup();
 			}
+
 			// Add classes for fieldContain
 			if( $.fn.fieldcontain ) {
 				$( ":jqmData(role='fieldcontain')", this ).jqmEnhanceable().fieldcontain();
