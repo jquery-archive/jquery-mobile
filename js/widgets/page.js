@@ -14,12 +14,12 @@ $.widget = (function( orig ) {
 	return function() {
 		var constructor = orig.apply( this, arguments ),
 			name = constructor.prototype.widgetName;
- 
+
 		constructor.initSelector = ( ( constructor.prototype.initSelector !== undefined ) ?
 			constructor.prototype.initSelector : ":jqmData(role='" + name + "')" );
- 
+
 		$.mobile.widgets[ name ] = constructor;
- 
+
 		return constructor;
 	};
 })( $.widget );
@@ -78,7 +78,7 @@ $.widget( "mobile.page", {
 				// Add ARIA role
 				$this.attr( "role", "main" ).addClass( "ui-content" );
 		});
-		
+
 		this.element.enhanceWithin();
 
 		if( $.mobile.getAttribute( this.element[0], "role", $.mobile.ns ) === "dialog" && $.mobile.dialog ){

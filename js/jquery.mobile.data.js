@@ -1,20 +1,19 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Mobile versions of Data functions to allow for namespaceing 
+//>>description: Mobile versions of Data functions to allow for namespaceing
 //>>label: jqmData
 //>>group: Core
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var nsNormalizeDict = {},
-		// Monkey-patching Sizzle to filter the :jqmData selector
 		oldFind = $.find,
 		rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/,
 		jqmDataRE = /:jqmData\(([^)]*)\)/g;
 
-	$.extend($.mobile, {
+	$.extend( $.mobile, {
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 
@@ -22,14 +21,14 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 
 		// Retrieve an attribute from an element and perform some massaging of the value
 
-		getAttribute: function( e, key, dns ) {
+		getAttribute: function( element, key, dns ) {
 			var data;
 
 			if ( dns ) {
 				key = "data-" + $.mobile.ns + key;
 			}
 
-			data = e.getAttribute( key );
+			data = element.getAttribute( key );
 
 			// Copied from core's src/data.js:dataAttr()
 			// Convert from a string to a proper data type
@@ -53,7 +52,8 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// and then camel case the attribute string. Add the result
 		// to our nsNormalizeDict so we don't have to do this again.
 		nsNormalize: function( prop ) {
-			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
+			return nsNormalizeDict[ prop ] ||
+				( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
 		},
 
 		// Find the closest javascript page element to gather settings data jsperf test
@@ -68,6 +68,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		}
 
 	});
+
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
@@ -103,7 +104,6 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 	$.jqmRemoveData = function( elem, prop ) {
 		return $.removeData( elem, $.mobile.nsNormalize( prop ) );
 	};
-
 
 	$.find = function( selector, context, ret, extra ) {
 		if ( selector.indexOf( ":jqmData" ) > -1 ) {
