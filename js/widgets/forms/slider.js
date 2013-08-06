@@ -59,7 +59,7 @@ $.widget( "mobile.slider", $.extend( {
 			wrapper,
 			j, length,
 			i, optionsCount, origTabIndex,
-			side, activeClass, sliderLabel, sliderImg;
+			side, activeClass, sliderImg;
 
 		$label.attr( "id", labelID );
 		this.isToggleSwitch = isToggleSwitch;
@@ -126,7 +126,6 @@ $.widget( "mobile.slider", $.extend( {
 			for ( i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
 				side = !i ? "b" : "a";
 				activeClass = !i ? "" : " " + $.mobile.activeBtnClass;
-				sliderLabel = document.createElement( "div" );
 				sliderImg = document.createElement( "span" );
 
 				sliderImg.className = [ "ui-slider-label ui-slider-label-", side, activeClass ].join( "" );
