@@ -40,7 +40,7 @@ li.ui-block-e {
 	list-style: none;
 }
 /* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
-[class*="ui-block-"] button.ui-btn {
+[class*="ui-block-"] > button.ui-btn {
 	margin-right: 0;
 	margin-left: 0;
 }
