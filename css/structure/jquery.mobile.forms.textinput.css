@@ -13,7 +13,6 @@ textarea.ui-input-text {
 .ui-input-search input,
 textarea.ui-input-text {
 	padding: .4em;
-	min-height: 2.2em;
 	line-height: 1.4em;
 	display: block;
 	width: 100%;
@@ -26,6 +25,7 @@ textarea.ui-input-text {
 .ui-input-text input,
 .ui-input-search input {
 	margin: 0;
+	min-height: 2.2em;
 	text-align: left; /* Opera aligns type="date" right by default */
 	border: 0;
 	background: transparent none;
@@ -34,7 +34,6 @@ textarea.ui-input-text {
 	border-radius: inherit;
 }
 textarea.ui-input-text {
-	height: 3.125em;
 	overflow: auto;
 	resize: vertical;
 }
