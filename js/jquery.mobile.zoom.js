@@ -10,7 +10,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		initialContent = meta.attr( "content" ),
 		disabledZoom = initialContent + ",maximum-scale=1, user-scalable=no",
 		enabledZoom = initialContent + ",maximum-scale=10, user-scalable=yes",
-		disabledInitially = /(user-scalable[\s]*=[\s]*no)|(maximum-scale[\s]*=[\s]*1)[$,\s]/.test( initialContent );
+		disabledInitially = /(?:user-scalable\s*=\s*(?:no(?:,|\s|$)|-?0(?:,|\.\d|\s|$)))|(?:maximum-scale\s*=\s*1)(?:,|\.0|\s|$)/.test( initialContent );
 
 	$.mobile.zoom = $.extend( {}, {
 		enabled: !disabledInitially,
