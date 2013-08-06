@@ -14,8 +14,8 @@ define( [
 	// we will assume that all children of the collapsibleset are to be turned
 	// into collapsibles.
 	"./page",
-	"../jquery.mobile.core",
-	"../jquery.mobile.widget" ], function( jQuery ) {
+	"../core",
+	"../widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

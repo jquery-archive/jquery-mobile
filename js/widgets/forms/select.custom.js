@@ -11,8 +11,8 @@
 
 define( [
 	"jquery",
-	"../../jquery.mobile.core",
-	"../../jquery.mobile.navigation",
+	"../../core",
+	"../../navigation",
 	"../dialog",
 	"./select",
 	"../listview",
