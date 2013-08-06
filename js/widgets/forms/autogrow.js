@@ -58,13 +58,29 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_updateHeight:function() {
 			
-			this.element.css( "height", "auto" );
+			this.element.css( "height", "0px" );
 
-			var scrollHeight = this.element[0].scrollHeight,
+			var paddingTop, paddingBottom, paddingHeight,
+				scrollHeight = this.element[ 0 ].scrollHeight,
+				clientHeight = this.element[ 0 ].clientHeight,
 				borderTop = parseFloat( this.element.css( "border-top-width" ) ),
 				borderBottom = parseFloat( this.element.css( "border-bottom-width" ) ),
 				borderHeight = borderTop + borderBottom,
 				height = scrollHeight + borderHeight + 15;
+
+			// Issue 6179: Padding is not included in scrollHeight and
+			// clientHeight by Firefox if no scrollbar is visible. Because
+			// textareas use the border-box box-sizing model, padding should be
+			// included in the new (assigned) height. Because the height is set
+			// to 0, clientHeight == 0 in Firefox. Therefore, we can use this to
+			// check if padding must be added.
+			if ( clientHeight === 0 ) {
+				paddingTop = parseFloat( this.element.css( "padding-top" ) );
+				paddingBottom = parseFloat( this.element.css( "padding-bottom" ) );
+				paddingHeight = paddingTop + paddingBottom;
+
+				height += paddingHeight;
+			}
 
 			this.element.css( "height", height + "px" );
 		},
