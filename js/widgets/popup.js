@@ -13,15 +13,15 @@
 
 define( [
 	"jquery",
-	"../jquery.mobile.links",
-	"../jquery.mobile.widget",
-	"../jquery.mobile.support",
+	"../links",
+	"../widget",
+	"../support",
 	"../events/navigate",
 	"../navigation/path",
 	"../navigation/history",
 	"../navigation/navigator",
 	"../navigation/method",
-	"../jquery.mobile.navigation",
+	"../navigation",
 	"jquery.hashchange" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

@@ -7,10 +7,10 @@
 
 define( [
 	"jquery",
-	"../jquery.mobile.widget",
-	"../jquery.mobile.core",
-	"../jquery.mobile.navigation",
-	"../jquery.mobile.zoom" ], function( jQuery ) {
+	"../widget",
+	"../core",
+	"../navigation",
+	"../zoom" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

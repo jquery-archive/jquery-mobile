@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.filterable.css
 
 define( [ "jquery",
-	"jquery.mobile.widget" ], function( jQuery ) {
+	"../widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
