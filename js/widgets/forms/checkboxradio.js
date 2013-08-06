@@ -61,6 +61,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		$.extend( this, {
 			input: input,
 			label: label,
+			parentLabel: parentLabel,
 			inputtype: inputtype,
 			checkedClass: checkedClass,
 			uncheckedClass: uncheckedClass,
@@ -89,10 +90,18 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	},
 
 	_enhance: function() {
-
 		this.label.addClass( "ui-btn ui-corner-all");
+
+		if( this.parentLabel.length > 0 ){
+			this.input.add( this.label ).wrapAll( this._wrapper() );
+		} else {
+			//this.element.replaceWith( this.input.add( this.label ).wrapAll( this._wrapper() ) );
+			this.element.wrap( this._wrapper() );
+			this.element.parent().prepend( this.label );
+		}
+		
 		// Wrap the input + label in a div
-		this.input.add( this.label ).wrapAll( this._wrapper() );
+		
 		this._setOptions({
 			"theme": this.options.theme,
 			"iconpos": this.options.iconpos,
