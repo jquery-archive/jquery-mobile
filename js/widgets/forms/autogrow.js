@@ -57,7 +57,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		},
 
 		_updateHeight:function() {
-			
+
 			this.element.css( "height", "0px" );
 
 			var paddingTop, paddingBottom, paddingHeight,
@@ -88,7 +88,7 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 		_setOptions: function( options ){
 
 			this._super( options );
-			
+
 			if ( options.autogrow !== undefined && this.isTextarea ){
 				if ( options.autogrow ){
 					this._autogrow();
