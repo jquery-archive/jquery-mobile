@@ -31,9 +31,9 @@ $.widget( "mobile.controlgroup", $.extend( {
 			this.element.find( $.mobile.enhanceWithButtonMarkup.initSelector ).each( $.mobile.enhanceWithButtonMarkup );
 		}
 		// Enhance child widgets
-		$.each( this._childWidgets, $.proxy( function( number, widget ) {
-			if( widget ) {
-				this.element.find( widget.initSelector )[ widget.prototype.widgetName ]();
+		$.each( this._childWidgets, $.proxy( function( number, widgetName ) {
+			if( $.mobile[ widgetName ] ) {
+				this.element.find( $.mobile[ widgetName ].initSelector )[ widgetName ]();
 			}
 		}, this ));
 
@@ -53,7 +53,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 		
 	},
 
-	_childWidgets: [ $.mobile.checkboxradio, $.mobile.selectmenu, $.mobile.button ],
+	_childWidgets: [ "checkboxradio", "selectmenu", "button" ],
 
 	_themeClassFromOption: function( value ) {
 		return ( value ? ( value === "none" ? "" : "ui-group-theme-" + value ) : "" );
