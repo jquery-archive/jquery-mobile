@@ -39,9 +39,17 @@ li.ui-block-e {
 	padding: 0;
 	list-style: none;
 }
-[class*="ui-grid-"] .ui-btn,
-[class*="ui-grid-"] button.ui-btn-inline,
-[class*="ui-grid-"] button.ui-btn-icon-notext {
+/* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
+[class*="ui-block-"] button.ui-btn {
+	margin-right: 0;
+	margin-left: 0;
+}
+[class*="ui-block-"] > .ui-btn,
+[class*="ui-block-"] > .ui-select,
+[class*="ui-block-"] > .ui-checkbox,
+[class*="ui-block-"] > .ui-radio,
+[class*="ui-block-"] > button.ui-btn-inline,
+[class*="ui-block-"] > button.ui-btn-icon-notext {
 	margin-right: .3125em;
 	margin-left: .3125em;
 }
