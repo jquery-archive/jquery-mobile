@@ -595,6 +595,12 @@ define( [
 				return;
 			}
 
+			// if it is the first page, allow to override query parameters
+			if ( content.length > 0 &&
+				path.isFirstPageUrl(fileUrl) ) {
+					settings.isFirstPage = true;
+			}
+
 			// Reset base to the default document base
 			// TODO figure out why we doe this
 			this._getBase().reset();
@@ -769,7 +775,7 @@ define( [
 
 				// store the original absolute url so that it can be provided
 				// to events in the triggerData of the subsequent changePage call
-				options.absUrl = triggerData.absUrl;
+				options.absUrl = options.isFirstPage ? url : triggerData.absUrl;
 
 				this.transition( content, triggerData, options );
 			}, this));
@@ -895,7 +901,7 @@ define( [
 			// us to avoid generating a document url with an id hash in the case where the
 			// first-page of the document has an id attribute specified.
 			if ( toPage[ 0 ] === $.mobile.firstPage[ 0 ] && !settings.dataUrl ) {
-				settings.dataUrl = documentUrl.hrefNoHash;
+				settings.dataUrl = settings.isFirstPage ? settings.absUrl : documentUrl.hrefNoHash;
 			}
 
 			// The caller passed us a real page DOM element. Update our
@@ -924,7 +930,7 @@ define( [
 			// It is up to the developer that turns on the allowSamePageTransitiona option
 			// to either turn off transition animations, or make sure that an appropriate
 			// animation transition is used.
-			if ( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
+			if ( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition && !settings.isFirstPage ) {
 				isPageTransitioning = false;
 				this._triggerWithDeprecated( "transition", triggerData );
 				this.element.trigger( "pagechange", triggerData );
