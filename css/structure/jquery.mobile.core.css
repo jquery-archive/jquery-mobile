@@ -279,8 +279,7 @@ div.ui-mobile-viewport {
 .ui-btn-icon-left {
 	padding-left: 2.5em;
 }
-.ui-btn-icon-right,
-.ui-listview > li > .ui-btn[class*="ui-icon-"] {
+.ui-btn-icon-right {
 	padding-right: 2.5em;
 }
 .ui-btn-icon-top {
@@ -296,7 +295,11 @@ div.ui-mobile-viewport {
 	padding-left: .3125em;
 	padding-right: .3125em;
 }
-.ui-btn[class*="ui-icon-"]:after {
+.ui-btn-icon-left:after,
+.ui-btn-icon-right:after,
+.ui-btn-icon-top:after,
+.ui-btn-icon-bottom:after,
+.ui-btn-icon-notext:after {
 	content: "";
 	position: absolute;
 	display: block;
@@ -305,16 +308,14 @@ div.ui-mobile-viewport {
 }
 .ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
-.ui-btn-icon-right:after,
-.ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
+.ui-btn-icon-right:after {
 	top: 50%;
 	margin-top: -11px;
 }
 .ui-btn-icon-left:after {
 	left: .5625em;
 }
-.ui-btn-icon-right:after,
-.ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
+.ui-btn-icon-right:after {
 	right: .5625em;
 }
 .ui-mini.ui-btn-icon-left:after,

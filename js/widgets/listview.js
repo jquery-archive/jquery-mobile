@@ -139,7 +139,7 @@ $.widget( "mobile.listview", $.extend( {
 							.addClass( altButtonClass )
 							.empty();
 					} else if ( icon ) {
-						buttonClass += " ui-icon-" + icon;
+						buttonClass += " ui-btn-icon-right ui-icon-" + icon;
 					}
 
 					a.first().addClass( buttonClass );
