@@ -150,7 +150,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					event.originalEvent.touches[ 0 ] : event;
 			return {
 						time: ( new Date() ).getTime(),
-						coords: [ data.pageX, data.pageY ],
+						coords: [ data.clientX, data.clientY ],
 						origin: $( event.target )
 					};
 		},
@@ -160,7 +160,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					event.originalEvent.touches[ 0 ] : event;
 			return {
 						time: ( new Date() ).getTime(),
-						coords: [ data.pageX, data.pageY ]
+						coords: [ data.clientX, data.clientY ]
 					};
 		},
 

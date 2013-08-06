@@ -411,8 +411,8 @@
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
 			touches: [{
-				pageX: 0,
-				pageY: 0
+				clientX: 0,
+				clientY: 0
 			}]
 		};
 
@@ -421,8 +421,8 @@
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
 			touches: [{
-				pageX: 200,
-				pageY: 0
+				clientX: 200,
+				clientY: 0
 			}]
 		};
 
