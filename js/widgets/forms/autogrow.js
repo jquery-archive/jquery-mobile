@@ -64,7 +64,8 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 				borderTop = parseFloat( this.element.css( "border-top-width" ) ),
 				borderBottom = parseFloat( this.element.css( "border-bottom-width" ) ),
 				borderHeight = borderTop + borderBottom,
-				height = scrollHeight + borderHeight + 15;
+				extraLineHeight = ( this.options.disabled ) ? 0 : 15,
+				height = scrollHeight + borderHeight + extraLineHeight;
 
 			this.element.css( "height", height + "px" );
 		},
