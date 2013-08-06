@@ -5,11 +5,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.flipswitch.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../../jquery.mobile.core",
-	"../../jquery.mobile.widget",
-	"../../jquery.mobile.zoom",
+define([ 
+	"jquery", 
+	"../../core", 
+	"../../widget", 
+	"../../zoom", 
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

@@ -4,10 +4,8 @@
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.filterable.css
 
-define( [
-	"jquery",
-	"../jquery.mobile.widget"
-], function( jQuery ) {
+define( [ "jquery",
+	"../widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

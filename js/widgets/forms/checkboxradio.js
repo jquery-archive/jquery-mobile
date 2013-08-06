@@ -10,8 +10,8 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
-	"../../jquery.mobile.core",
-	"../../jquery.mobile.widget",
+	"../../core",
+	"../../widget",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

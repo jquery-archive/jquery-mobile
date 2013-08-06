@@ -2,8 +2,8 @@
 //>>group: exclude
 
 define([
-	"./jquery.mobile.defaults",
-	"./jquery.mobile.data",
-	"./jquery.mobile.helpers"
-], function() {});
+	"./defaults",
+	"./data",
+	"./helpers"
+]);
 //>>excludeEnd("jqmBuildExclude");
