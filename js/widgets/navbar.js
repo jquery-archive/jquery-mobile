@@ -20,8 +20,7 @@ $.widget( "mobile.navbar", {
 
 		var $navbar = this.element,
 			$navbtns = $navbar.find( "a" ),
-			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined,
-			classes = "ui-btn";
+			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
 
 		$navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
@@ -32,7 +31,8 @@ $.widget( "mobile.navbar", {
 		$navbtns
 			.each( function() {
 				var icon = $.mobile.getAttribute( this, "icon", true ),
-					theme = $.mobile.getAttribute( this, "theme", true );
+					theme = $.mobile.getAttribute( this, "theme", true ),
+					classes = "ui-btn";
 
 				if ( theme ) {
 					classes += " ui-btn-" + theme;

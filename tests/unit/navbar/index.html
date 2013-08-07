@@ -15,6 +15,7 @@
 		$.testHelper.asyncLoad([
 			[ "widgets/page" ],
 			[
+				"jquery.mobile.buttonMarkup",
 				"widgets/navbar"
 			],
 			[ "jquery.mobile.init" ],
@@ -41,6 +42,15 @@
 			<li><a href="#">Two</a></li>
 		</ul>
 	</div>
+
+	<div data-nstest-role="navbar">
+		<ul id="enhanced-classes">
+			<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-r">a</a></li>
+			<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-d">b</a></li>
+			<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-u">c</a></li>
+		</ul>
+	</div>
+
 </div>
 
 <div id="foo">
@@ -62,5 +72,6 @@
 		</div>
 	</div>
 </div>
+
 </body>
 </html>
