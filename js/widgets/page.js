@@ -121,33 +121,16 @@ $.widget( "mobile.page", {
 	_handlePageBeforeShow: function(/* e */) {
 		this.setContainerBackground();
 	},
-
+	// Deprecated in 1.4 remove in 1.5
 	removeContainerBackground: function() {
-		var classes = ( $.mobile.pageContainer.attr( "class" ) || "" ).split( " " ),
-			overlayTheme = null,
-			matches;
-
-		while ( classes.length > 0 ) {
-			overlayTheme = classes.pop();
-			matches = ( new RegExp( "^ui-overlay-([a-z])$" ) ).exec( overlayTheme );
-			if ( matches && matches.length > 1 ) {
-				overlayTheme = matches[ 1 ];
-				break;
-			} else {
-				overlayTheme = null;
-			}
-		}
-
-		$.mobile.pageContainer.removeClass( "ui-overlay-" + overlayTheme );
+		this.element.closest( ":mobile-content" ).content({ "theme": "none" });
 	},
-
+	// Deprecated in 1.4 remove in 1.5
 	// set the page container background to the page theme
 	setContainerBackground: function( theme ) {
-		if ( this.options.theme ) {
-			$.mobile.pageContainer.addClass( "ui-overlay-" + ( theme || this.options.theme ) );
-		}
+		this.element.parent().content( { "theme": theme || this.options.theme } );
 	},
-
+	// Deprecated in 1.4 remove in 1.5
 	keepNativeSelector: function() {
 		var options = this.options,
 			keepNativeDefined = options.keepNative && $.trim( options.keepNative );

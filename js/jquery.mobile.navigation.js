@@ -19,6 +19,10 @@ define( [
 (function( $, undefined ) {
 
 	$.widget( "mobile.content", {
+		options: {
+			theme: "a"
+		},
+
 		initSelector: false,
 
 		_create: function() {
@@ -50,6 +54,17 @@ define( [
 			$window.one( "navigate", $.proxy(function() {
 				this.setLastScrollEnabled = true;
 			}, this));
+		},
+
+		_setOptions: function( options ){
+			if ( options.theme !== undefined && options.theme !== "none" ) {
+				this.element.removeClass( "ui-overlay-" + this.options.theme )
+					.addClass( "ui-overlay-" + options.theme );
+			} else if ( options.theme !== undefined ) {
+				this.element.removeClass( "ui-overlay-" + this.options.theme );
+			}
+
+			this._super( options );
 		},
 
 		_disableRecordScroll: function() {
