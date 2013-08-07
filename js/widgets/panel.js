@@ -459,7 +459,7 @@ $.widget( "mobile.panel", {
 			.off( "updatelayout" );
 
 		this._closeLink.off( "click.panel" );
-		
+
 		if ( this._modal ) {
 			this._modal.remove();
 		}
