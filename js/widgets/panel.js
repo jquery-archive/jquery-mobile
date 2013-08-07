@@ -212,7 +212,7 @@ $.widget( "mobile.panel", {
 		var self = this;
 
 		$.mobile.document.on( "click.panel" , "a", function( e ) {
-			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
+			if ($.contains(document.documentElement, self.element[0]) && this.href.split("#")[1] === self._panelID && self._panelID !== undefined) {
 				e.preventDefault();
 				var $link = $( this );
 				if ( ! $link.hasClass( "ui-link" ) ) {
