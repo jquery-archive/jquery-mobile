@@ -9,7 +9,6 @@ define( [ "jquery",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.widget",
 	"./textinput",
-	"../optionDemultiplexer",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -177,6 +176,33 @@ $.widget( "mobile.slider", $.extend( {
 		this._handleFormReset();
 
 		this.refresh( undefined, undefined, true );
+	},
+
+	_setOptions: function( options ) {
+		if ( options.theme !== undefined ) {
+			this._setTheme( options.theme );
+		}
+
+		if ( options.trackTheme !== undefined ) {
+			this._setTrackTheme( options.trackTheme );
+		}
+
+		if ( options.corners !== undefined ) {
+			this._setCorners( options.corners );
+		}
+
+		if ( options.mini !== undefined ) {
+			this._setMini( options.mini );
+		}
+
+		if ( options.highlight !== undefined ) {
+			this._setHighlight( options.highlight );
+		}
+
+		if ( options.disabled !== undefined ) {
+			this._setDisabled( options.disabled );
+		}
+		this._super( options );
 	},
 
 	_controlChange: function( event ) {
@@ -559,7 +585,7 @@ $.widget( "mobile.slider", $.extend( {
 		this.slider.toggleClass( "ui-disabled", value ).attr( "aria-disabled", value );
 	}
 
-}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
+}, $.mobile.behaviors.formReset ) );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
