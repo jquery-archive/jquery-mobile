@@ -152,7 +152,7 @@ $.widget( "mobile.panel", {
 	_bindCloseEvents: function() {
 		var self = this;
 
-		self.element.on( "click.panel" , ":jqmData(rel='close')" , function ( e ) {
+		self._closeLink.on( "click.panel" , function( e ) {
 			e.preventDefault();
 			self.close();
 			return false;
@@ -458,6 +458,8 @@ $.widget( "mobile.panel", {
 			.off( "keyup.panel" )
 			.off( "updatelayout" );
 
+		this._closeLink.off( "click.panel" );
+		
 		if ( this._modal ) {
 			this._modal.remove();
 		}
