@@ -5,11 +5,13 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.zoom", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.zoom" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.textinput", {
+	initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
+
 	options: {
 		theme: null,
 		corners: true,
@@ -168,11 +170,6 @@ $.widget( "mobile.textinput", {
 		this.element.removeClass( "ui-input-text " + this.themeclass + " ui-corner-all ui-mini ui-disabled" );
 	}
 });
-
-$.mobile.textinput.initSelector = "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.textinput" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

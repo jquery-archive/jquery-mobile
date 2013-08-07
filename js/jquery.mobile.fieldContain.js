@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.fieldcontain.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -13,11 +13,6 @@ define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
 $.fn.fieldcontain = function(/* options */) {
 	return this.addClass( "ui-field-contain" );
 };
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.fieldcontain", undefined, function( target ) {
-	$( ":jqmData(role='fieldcontain')", target ).jqmEnhanceable().fieldcontain();
-});
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.panel.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -471,11 +471,6 @@ $.widget( "mobile.panel", {
 		$.mobile.pageContainer.off( this._transitionEndEvents );
 	}
 });
-
-$.mobile.panel.initSelector = ":jqmData(role='panel')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.panel" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

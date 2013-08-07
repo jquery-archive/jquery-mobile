@@ -13,11 +13,14 @@
 	<script src="../../../external/qunit.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
+			['widgets/page'],
 			[
-				"widgets/forms/checkboxradio",
 				"widgets/controlgroup",
 				"jquery.mobile.buttonMarkup"
+				
 			],
+			["widgets/forms/checkboxradio"],
+
 			[ "jquery.mobile.init" ],
 			[ "controlgroup_core.js" ]
 		]);

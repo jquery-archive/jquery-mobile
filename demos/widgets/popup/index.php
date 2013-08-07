@@ -12,6 +12,20 @@
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
 </head>
+<style id="popup-arrow-css">
+.clickable-area {
+	display: block;
+	width: 100%;
+	height: 300px;
+	background-color: #ffefef;
+}
+</style>
+<script id="popup-arrow-script">
+$.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
+	$( "#popupArrow" ).popup( "open", { x: evt.pageX, y: evt.pageY } );
+	evt.preventDefault();
+});
+</script>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
@@ -273,6 +287,17 @@
 					  <p>I have <code>data-theme="b"</code> and <code>data-overlay-theme="a"</code> set on me</p>
 					</div>
 				</div><!--/demo-html -->
+
+			<h2>Arrow</h2>
+			<p>The popup can display an arrow along one of its edges when it opens if the <code>data-arrow</code> attribute is set. The attribute can take a value of <code>true</code>, <code>false</code>, or a string containing a comma-separated list of edge abbreviations ("l" for left, "t" for top, "r" for right, and "b" for bottom). For example, if you set <code>data-arrow="r,b"</code> then the arrow will only ever appear along the bottom or right edge of the popup. <code>true</code> is the same as <code>"l,t,r,b"</code> and <code>false</code> or <code>""</code> indicates that the popup should be displayed without an arrow.</p>
+			<p>Click in the pink area below to display a popup with an arrow.</p>
+			<div data-demo-html="true" data-demo-css="#popup-arrow-css" data-demo-js="#popup-arrow-script">
+				<div data-role="popup" id="popupArrow" data-arrow="true">
+					<p>A paragraph inside the popup with an arrow.</p>
+					<p>This second paragraph serves to increase the height of the popup</p>
+				</div>
+				<a href="#" id="open-popupArrow" class="clickable-area"></a>
+			</div>
 
 			<h2>Pre-rendered markup</h2>
 			<p>You can supply pre-rendered popup markup to save startup time. The page in the example below contains a popup with pre-rendered markup supplied as part of the original page markup.</p>

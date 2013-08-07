@@ -2,10 +2,10 @@
 //>>description: Consistent styling for native select menus. Tapping opens a native select menu.
 //>>label: Flip Switch
 //>>group: Forms
-//>>css.structure: ../css/structure/jquery.mobile.forms.flip.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.flipswitch.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -147,6 +147,8 @@ $.widget( "mobile.flipswitch", $.extend({
 		if( options.mini !== undefined ) {
 			this.widget().toggleClass( "ui-mini", options.mini );
 		}
+		
+		this._super( options );
 	},
 
 	_destroy: function() {
@@ -162,10 +164,6 @@ $.widget( "mobile.flipswitch", $.extend({
 
 }, $.mobile.behaviors.formReset ) );
 
-$.mobile.flipswitch.initSelector = ":jqmData(role='flipswitch')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.flipswitch" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

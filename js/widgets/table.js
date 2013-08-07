@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.table.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -63,7 +63,7 @@ $.widget( "mobile.table", {
 
 			// Iterate over the children of the tr
 			$( this ).children().each( function() {
-				var span = parseInt( $.mobile.getAttribute( this, "colspan", true), 10 ),
+				var span = parseInt( $.mobile.getAttribute( this, "colspan" ), 10 ),
 					selector = ":nth-child(" + ( columnCount + 1 ) + ")",
 					j;
 
@@ -85,11 +85,6 @@ $.widget( "mobile.table", {
 		});
 	}
 });
-
-$.mobile.table.initSelector = ":jqmData(role='table')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.table" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

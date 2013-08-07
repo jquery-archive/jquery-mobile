@@ -34,16 +34,18 @@
 			<h1>Filter <a href="http://api.jquerymobile.com/filterable/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">
-			The children of any element can be filtered by setting the attribute <code>data-filter="true"</code> on the element. By default, the text contained in each child is used for filtering. However, you also have the options of setting the attribute <code>data-filtertext</code> to a string value on any child that will be considered for filtering  to associate custom filter text instead.
-			</p>
+			The children of any element can be filtered by setting the attribute <code>data-filter="true"</code> on the element. By default, the text contained in each child is used for filtering, however, you also have the option of setting the attribute <code>data-filtertext</code> to a string value on any child that will be considered for filtering to associate custom filter text instead.</p>
 
 			<h2 id="filter-ul">Basic filter</h2>
-			<p>
-			The filter widget is based on and replaces the listview filter extension. Thus, you can set <code>data-filter="true"</code> on a listview to generate a filter for its list items.
-			</p>
+			<p>The filter widget is based on and replaces the listview filter extension. Thus, you can set <code>data-filter="true"</code> on a listview to generate a filter for its list items.</p>
+			<p>Nevertheless, the way in which a filterable is constructed differs from the way the listview filter extension worked in one important regard: the text field for entering the search string is not provided. Instead, you can provide the text field in your markup and have the filterable make use of it by providing a selector that will retrieve the text field as the value of the filterable's <code>data-input</code> attribute.</p>
+			<p>The deprecated behavior whereby the filterable injects a text field before the element whose children are to be filtered is retained for version 1.4.0 to help with the transition from the listview filter extension, however, it will be removed in 1.5.0.</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" data-filter="true">
+				<form>
+					<input id="filterBasic-input" data-inset="false" data-type="search"></input>
+				</form>
+				<ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
 					<li>Acura</li>
 					<li>Audi</li>
 					<li>BMW</li>
@@ -59,7 +61,10 @@
 			</p>
 
 			<div data-demo-html="true">
-				<table data-role="table" id="movie-table" data-filter="true">
+				<form>
+					<input id="filterTable-input" data-inset="false" data-type="search"></input>
+				</form>
+				<table data-role="table" id="movie-table" data-filter="true" data-input="#filterTable-input" class="ui-responsive">
 					<thead>
 						<tr>
 							<th data-priority="1">Rank</th>
@@ -96,33 +101,29 @@
 			</div><!--/demo-html -->
 
 			<h2 id="filter-controlgroup">Controlgroup Filter</h2>
-			<p>
-			The filter widget can be used on other widgets, too. To filter a list of controlgroup buttons,
-			declare <code>data-filter="true"</code> on the element that creates the controlgroup (Note that
-			you can also use the <code>data-filtertext</code> attribute to declare the text string to filter
-			the respective element by.
+			<p>The filter widget can be used on other widgets, too. To filter a list of controlgroup buttons, declare <code>data-filter="true"</code> on the element that creates the controlgroup (Note that you can also use the <code>data-filtertext</code> attribute to declare the text string used for filtering the respective element.
 			</p>
 
 			<div data-demo-html="true">
-				<div data-role="controlgroup" data-filter="true">
-					<input type="button" value="button 1" id="bt1">
-					<input type="button" value="button 2" id="bt2" data-filtertext="foo some words">
-					<input type="button" value="button 3" id="bt3">
-					<input type="button" value="button 4" id="bt4">
-					<input type="button" value="button 5" id="bt5">
+				<form>
+					<input data-type="search" data-inset="false" id="filterControlgroup-input"></input>
+				</form>
+				<div data-role="controlgroup" data-filter="true" data-input="#filterControlgroup-input">
+					<a href="#" data-role="button">Button 1</a>
+					<a href="#" data-role="button">Button 2</a>
+					<a href="#" data-role="button" data-filtertext="some text">Button 3</a>
+					<a href="#" data-role="button">Button 4</a>
+					<a href="#" data-role="button">Button 5</a>
 				</div>
 			</div>
 
 			<h2 id="filter-select">Filter Select</h2>
-			<p>
-			The widget also works on <code>select</code> widgets by hiding options that do not match the
-			filter text. To use a filter for <code>options</code>, declare the <code>
-			data-filter</code> attribute on the select element. Note that the select element
-			is completely hidden if no option matches the filtertext.
-			</p>
+			<p>The widget also works on <code>select</code> widgets by hiding options that do not match the filter text. To use a filter for <code>options</code>, declare the <code>data-filter</code> attribute on the select element.</p>
 
 			<div data-demo-html="true">
-				<input data-type="search" id="searchForSelect"></input>
+				<form>
+					<input data-type="search" id="searchForSelect"></input>
+				</form>
 				<select id="anotherSelect" data-filter="true" data-input="#searchForSelect">
 					<option value="A">Option A</option>
 					<option value="B">Option B</option>
@@ -138,12 +139,13 @@
 			</div>
 
 			<h2 id="filter-random">Filter Anything</h2>
-			<p>
-			The widget can be used for filtering on any element containing other elements, like a <code>
-			div</code> containing <code>p</code> elements.
+			<p>The widget can be used for filtering on any element containing other elements, like a <code>div</code> containing <code>p</code> elements.
 			</p>
 			<div data-demo-html="true">
-				<div class="elements" data-filter="true">
+				<form>
+					<input data-type="search" id="divOfPs-input" data-inset="false"></input>
+				</form>
+				<div class="elements" data-filter="true" data-input="#divOfPs-input">
 					<p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
 					<p><strong>tags</strong> nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
 					<p><strong>Tags</strong> erat, sed diam voluptua. At vero eos et accusam et justo duo dolores </p>
@@ -154,25 +156,16 @@
 
 			<h2 id="filter-styling">Filter Styling</h2>
 			<p>
-			The filter widget supports the same attributes as the previous listview
-			extension. Use <code>data-theme</code> to declare a specific theme for the 
-			filter (overriding inheritance). <code>Data-inset="true"</code> will inset
-			the filter element, while <code>data-placeholder</code> allows to customize
-			the inputs placeholder text. You can also set custom classes on the 
-			generated filter wrapper using the <strong>wrapperClass</strong> attribute
-			or specifying the <code>data-wrapper-class</code> when creating a filter.
-			Lastly, <code>data-mini="true"</code> will apply the mini styling to the
-			filter input. Here is an example using all styling options:
+			The filter widget supports the same attributes as the previous listview extension. Use <code>data-filter-theme</code> to declare a specific theme for the text field (overriding inheritance). <code>data-filter-placeholder</code> allows you to customize the input's placeholder text. In addition, the filterable widget will synchronize options shared between the textinput widget and the widget whose children it filters to make sure that the value of the textinput widget options is the same as the value of the widget options. So, for example, if you set <code>data-inset="true"</code> on the listview, then the corresponding textinput widget will also be inset.</p>
+			<p><strong>NOTE:</strong> This behavior is deprecated and will be removed in 1.5.0. The correct way forward is to provide the text field (or any other widget that emits the "change" signal) as part of the original markup and to pass a selector that will retrieve it to the filterable widget via the <code>data-input</code> attribute.
 			</p>
 
 			<div data-demo-html="true">
 				<ul data-role="listview" 
 					data-filter="true" 
 					data-filter-placeholder="Find cars..."
-					data-theme="a"
-					data-wrapper-class="myOwnClass"
-					data-inset="true"
-					data-mini="true">
+					data-filter-theme="a"
+					data-inset="true">
 					<li>Acura</li>
 					<li>Audi</li>
 					<li>BMW</li>
@@ -209,44 +202,41 @@
 			</div><!--/demo-html -->
 
 			<h2 id="filter-callback">Filter Custom Callback</h2>
-			<p>
-			As with the listview extension, you can provide custom callback functions
-			to the filter or override the filter altogether on the <code>filterablebeforefilter</code>
-			event. Please note that the filter has a <strong>delay of 250ms</strong>
-			before the filter actually triggers. This prevents running the filtering 
-			function multiple times while the user is typing. 
+			<p>As with the listview extension, you can provide custom callback functions to the filter or override the filter altogether on the <code>filterablebeforefilter</code> event. Please note that the filter has a <strong>delay of 250ms</strong> before the filter actually triggers. This prevents running the filtering function multiple times while the user is typing.
 			</p>
 
-			<p>
-			To set a custom filtering function, either override the callback property on
-			<code>mobileinit</code> and make sure to pass the tree parameters: <strong>
-			text</strong> to filter, <strong>searchValue</strong> to filter for and
-			<strong>item</strong> to filter.
-			</p>
-<code><pre>
-$.mobile.document.bind("mobileinit", function() {
-	$.mobile.filterable.prototype.filterCallback = function( text, searchValue, item ) {
+			<p>To set a custom filtering function that will become the new default for all filterable widgets, override the <code>filterCallback</code> option in the filterable widget prototype in a "mobileinit" signal handler:</p>
+
+<pre><code>$.mobile.document.one( "mobileinit", function() {
+	$.mobile.filterable.prototype.filterCallback = function( index, searchValue ) {
+		// In this function the keyword "this" refers to the element for which the
+		// code must decide whether it is to be filtered or not.
+		// A return value of true indicates that the element referred to by the
+		// keyword "this" is to be filtered.
+		// Returning false indicates that the item is to be displayed.
+		//
 		// your custom filtering logic goes here
 	});
 });</code></pre>
 
 			<p>
-			Alternatively, you can override the filter on the widget itself by setting the
-			appropriate option:
+			To set a custom filtering function for a single filterable widget, set the <code>filterCallback</code> option:
 			</p>
-<code><pre>
-$("selector").filterable("option", "filterCallback", function( text, searchValue, item ) {
-		// your custom filtering logic goes here
+
+<pre><code>$.mobile.document.one( "filterablecreate", "#myFilterable", function() {
+	$( "#myFilterable" ).filterable( "option", "filterCallback", function( index, searchValue ) {
+		// The previous example explains the signature of the callback function.
+		//
+		// your custom filtering logic goes here.
 	});
 });</code></pre>
-
 
 			<p>
 			To override the filter altogether (for example when loading data server-side
-			or from localstorage), bind to the <code>filterablebeforefilter</code> event.
+			or from localStorage), bind to the <code>filterablebeforefilter</code> event.
 			</p>
-<code><pre>
-$(".selector input").on("filterablebeforefilter", function( e, data ) {
+
+<pre><code>$( ".selector" ).on( "filterablebeforefilter", function( e, data ) {
 		var value;
 		
 		e.preventDefault();
@@ -254,94 +244,37 @@ $(".selector input").on("filterablebeforefilter", function( e, data ) {
 		// trigger own request to database
 	});
 });</code></pre>
-			<!-- 
-			enhance does not work yet, because data-enhanced needs to be supported in button and textinput, too
-			
-			<h2 id="filter-enhance">Filter Enhance</h2>
-			<p>You can reduce rendering time by providing the rendered widget HTML
-			and setting <code>data-enhanced="true"</code>. By setting this attribute, 
-			you are telling JQM to not modify any DOM elements when setting up the
-			widget. Please note when doing so, you also need to provide the <code>
-			data-wrapper-class</code> attribute specifying the class under which
-			your "self-made" filter can be found by the widget in order to attach
-			events to. A self-enhanced filter widget would look like this.
-			</p>
 
-			<div data-demo-html="true">
-				<div class="biz">
-					<div class="ui-filter foo_enhance" role="search">
-						<div class="ui-input-search ui-body-a ui-corner-all ui-shadow-inset">
-							<input data-enhanced="true" placeholder="Filter items..." data-type="search" data-lastval="">
-							<a data-encanced="true" title="clear text" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-shadow ui-btn-a" href="#">clear text</a>
-						</div>
-					</div>
-				</div>
-				<ul data-role="listview" data-filter="true" data-wrapper-class="foo_enhance" data-enhanced="true">
-					<li>Acura</a></li>
-					<li>Audi</li>
-					<li>BMW</li>
-					<li>Cadillac</li>
-					<li>Chrysler</li>
-				</ul>
-			</div>
-			<p>
-			Note how the <code>data-wrapper-class</code> must match the class declared
-			on the <strong>ui-filter</strong> wrapper.
-			</p>
--->
-			<h2 id="filter-target">Filter Target</h2>
-			<p>
-			By default, the filter widget is inserted just before the element it 
-			was called on. To insert the filter in another place, use the <code>
-			data-target</code> attribute and specify a class name. The filter will
-			be appended to this class.
-			</p>
-			
-		<div data-demo-html="true">
-			<ul data-role="listview" data-inset="true" data-filter="true" data-target="foo_target">
-				<li>Acura</a></li>
-				<li>Audi</li>
-				<li>BMW</li>
-				<li>Cadillac</li>
-				<li>Chrysler</li>
-			</ul>
-			<p>The filter is appended below using <code>data-target</code></p>
-			<div class="foo_target">
-			<!-- insert filter here -->
-			</div>
-		</div>
-
-			<h2 id="filter-selector">Filter Selector</h2>
-			<p>
-			The filter widget can also be used on multiple datasets (for example
-			a listview inside a panel and corresponding images in the main section).
-			To set up a widget for multiple datasets, use the <code>data-selector</code> 
-			attribute and declare a class, which is set on the wrapping container of
-			all datasets you want to have filtered.
-			</p>
-
-			<div data-demo-html="true">
-				<!-- filter -->
-				<div class="filterMyContent"
-					data-filter="true"
+	<h2>Pre-rendering</h2>
+	<p>The filterable widget runs the filter a single time during startup to make sure the list of children reflects the value entered in the search input. You can avoid this step by specifying the <code>data-enhanced="true"</code> attribute. When set to true, the filterable will assume that you have correctly applied the class <code>ui-screen-hidden</code> to those children that should be initially hidden.
+	</p>
+	<p>The filterable widget is able to use the search input whether or not the search input is itself pre-rendered. In the example below, both the search input and the filterable are pre-rendered.</p>
+	<div data-demo-html="true">
+		<form>
+			<div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+				<input
+					data-type="search"
+					data-enhanced="true"
 					data-inset="false"
-					data-selector="filter_sets">
-				</div>
-
-				<!-- sets to filter -->
-				<div class="filter_sets">
-					<p>This</p>
-					<p>are</p>
-					<p>Filterable</p>
-					<p>Dataset</p>
-				</div>
-				<ul data-role="listview" data-inset="true" class="filter_sets">
-					<li><a href="#">This</a></li>
-					<li><a href="#">is a</a></li>
-					<li data-filtertext="foo"><a href="#">filterable</a></li>
-					<li>set aswell</li>
-				</ul>
+					id="pre-rendered-example-input"
+					placeholder="Filter items..."
+					value="au"></input>
 			</div>
+			<div
+				data-role="controlgroup"
+				data-enhanced="true"
+				data-filter="true"
+				data-filter-reveal="true"
+				data-input="#pre-rendered-example-input"
+				class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+				<div class="ui-controlgroup-controls">
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-screen-hidden" role="button">Acura</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-first-child ui-last-child" role="button">Renault</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-screen-hidden" role="button">Hyundai</a>
+				</div>
+			</div>
+		</form>
+	</div>
 
 	</div><!-- /content -->
 

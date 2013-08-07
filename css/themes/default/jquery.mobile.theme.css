@@ -89,6 +89,13 @@ label.ui-btn {
 	background-clip: padding-box;
 }
 
+.ui-popup.ui-corner-all > .ui-popup-arrow-guide {
+	left: .6em /*{global-radii-blocks}*/;
+	right: .6em /*{global-radii-blocks}*/;
+	top: .6em /*{global-radii-blocks}*/;
+	bottom: .6em /*{global-radii-blocks}*/;
+}
+
 /* Shadow
 -----------------------------------------------------------------------------------------------------------*/
 
@@ -111,7 +118,11 @@ label.ui-btn {
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn:after,
+.ui-btn-icon-left:after,
+.ui-btn-icon-right:after,
+.ui-btn-icon-top:after,
+.ui-btn-icon-bottom:after,
+.ui-btn-icon-notext:after,
 html .ui-btn.ui-icon-checkbox-off:after,
 html .ui-btn.ui-icon-radio-off:after {
 	background-color: 					#999 /*{global-icon-color}*/;
@@ -120,7 +131,6 @@ html .ui-btn.ui-icon-radio-off:after {
 	background-repeat: no-repeat;
 	-webkit-border-radius: 1em;
 	border-radius: 1em;
-	display: none;
 }
 
 /* Alt icons */
@@ -148,10 +158,6 @@ html .ui-icon-alt .ui-icon-radio-off:after {
 	box-shadow: 0 1px 0 					rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 }
 
-.ui-icon-action:after, .ui-icon-arrow-d-l:after, .ui-icon-arrow-d-r:after, .ui-icon-arrow-d:after, .ui-icon-arrow-l:after, .ui-icon-arrow-r:after, .ui-icon-arrow-u-l:after, .ui-icon-arrow-u-r:after, .ui-icon-arrow-u:after, .ui-icon-audio:after, .ui-icon-calendar:after, .ui-icon-camera:after, .ui-icon-carat-d:after, .ui-icon-carat-l:after, .ui-icon-carat-r:after, .ui-icon-carat-u:after, .ui-icon-check:after, .ui-icon-clock:after, .ui-icon-cloud:after, .ui-icon-grid:after, .ui-icon-mail:after, .ui-icon-eye:after, .ui-icon-gear:after, .ui-icon-heart:after, .ui-icon-home:after, .ui-icon-info:after, .ui-icon-bullets:after, .ui-icon-bars:after, .ui-icon-navigation:after, .ui-icon-lock:after, .ui-icon-search:after, .ui-icon-location:after, .ui-icon-minus:after, .ui-icon-forbidden:after, .ui-icon-edit:after, .ui-icon-user:after, .ui-icon-phone:after, .ui-icon-plus:after, .ui-icon-power:after, .ui-icon-recycle:after, .ui-icon-forward:after, .ui-icon-refresh:after, .ui-icon-shop:after, .ui-icon-comment:after, .ui-icon-star:after, .ui-icon-tag:after, .ui-icon-back:after, .ui-icon-video:after, .ui-icon-alert:after, .ui-icon-delete:after {
-	display: block;
-}
-
 /* Checkbox and radio */
 html .ui-btn.ui-icon-checkbox-off:after,
 html .ui-btn.ui-icon-checkbox-on:after,
@@ -169,7 +175,7 @@ html .ui-btn.ui-icon-radio-on:after {
 	opacity: .3;
 }
 html .ui-btn.ui-icon-checkbox-off:after,
-html .ui-btn.ui-icon-radio-off:after {
+html .ui-btn.ui-icon-checkbox-on:after {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
 }
@@ -568,10 +574,11 @@ html body .ui-group-theme-b .ui-focus,
 
 /* Disabled
 -----------------------------------------------------------------------------------------------------------*/
-/* Class ui-disabled deprecated in 1.4 */
+/* Class ui-disabled deprecated in 1.4. :disabled not supported by IE8 so we use [disabled] */
 
 .ui-disabled,
 .ui-state-disabled,
+button[disabled],
 .ui-select .ui-btn.ui-state-disabled {
 	filter: Alpha(Opacity=30);
 	opacity: .3;

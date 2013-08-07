@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.zoom", "../../jquery.mobile.registry","./textinput" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.degradeInputs", "../../jquery.mobile.zoom", "./textinput" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -58,12 +58,15 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 
 		_updateHeight:function() {
 			
-				this.element.css({
-					height: "auto"
-				}).css({
-					height: this.element[0].scrollHeight + 15 + "px"
-				});
-			
+			this.element.css( "height", "auto" );
+
+			var scrollHeight = this.element[0].scrollHeight,
+				borderTop = parseFloat( this.element.css( "border-top-width" ) ),
+				borderBottom = parseFloat( this.element.css( "border-bottom-width" ) ),
+				borderHeight = borderTop + borderBottom,
+				height = scrollHeight + borderHeight + 15;
+
+			this.element.css( "height", height + "px" );
 		},
 
 		_setOptions: function( options ){

@@ -3,9 +3,34 @@
 //>>label: Page Creation
 //>>group: Core
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+$.mobile.widgets = {};
+
+var originalWidget = $.widget;
+
+$.widget = (function( orig ) {
+	return function() {
+		var constructor = orig.apply( this, arguments ),
+			name = constructor.prototype.widgetName;
+
+		constructor.initSelector = ( ( constructor.prototype.initSelector !== undefined ) ?
+			constructor.prototype.initSelector : ":jqmData(role='" + name + "')" );
+
+		$.mobile.widgets[ name ] = constructor;
+
+		return constructor;
+	};
+})( $.widget );
+
+// Make sure $.widget still has bridge and extend methods
+$.extend( $.widget, originalWidget );
+
+// For backcompat remove in 1.5
+$.mobile.document.on( "create", function( event ){
+	$( event.target ).enhanceWithin();
+});
 
 $.widget( "mobile.page", {
 	options: {
@@ -25,7 +50,7 @@ $.widget( "mobile.page", {
 	_create: function() {
 		var attrPrefix = "data-" + $.mobile.ns,
 			self = this;
-		// if false is returned by the callbacks do not create the page
+		// If false is returned by the callbacks do not create the page
 		if ( this._trigger( "beforecreate" ) === false ) {
 			return false;
 		}
@@ -54,8 +79,11 @@ $.widget( "mobile.page", {
 				$this.attr( "role", "main" ).addClass( "ui-content" );
 		});
 
-		// enhance the page
-		$.mobile._enhancer.enhance( this.element[ 0 ] );
+		this.element.enhanceWithin();
+
+		if( $.mobile.getAttribute( this.element[0], "role", true ) === "dialog" && $.mobile.dialog ){
+			this.element.dialog();
+		}
 	},
 
 	bindRemove: function( callback ) {

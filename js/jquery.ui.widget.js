@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Widget 1.10.1
+ * jQuery UI Widget @VERSION
  * http://jqueryui.com
  *
  * Copyright 2013 jQuery Foundation and other contributors
@@ -106,7 +106,7 @@ $.widget = function( name, base, prototype ) {
 		// TODO: remove support for widgetEventPrefix
 		// always use the name + a colon as the prefix, e.g., draggable:start
 		// don't prefix for widgets that aren't DOM-based
-		widgetEventPrefix: existingConstructor ? basePrototype.widgetEventPrefix : name
+		widgetEventPrefix: existingConstructor ? (basePrototype.widgetEventPrefix || name) : name
 	}, proxiedPrototype, {
 		constructor: constructor,
 		namespace: namespace,
@@ -134,6 +134,8 @@ $.widget = function( name, base, prototype ) {
 	}
 
 	$.widget.bridge( name, constructor );
+
+	return constructor;
 };
 
 $.widget.extend = function( target ) {
@@ -178,6 +180,10 @@ $.widget.bridge = function( name, object ) {
 			this.each(function() {
 				var methodValue,
 					instance = $.data( this, fullName );
+				if ( options === "instance" ) {
+					returnValue = instance;
+					return false;
+				}
 				if ( !instance ) {
 					return $.error( "cannot call methods on " + name + " prior to initialization; " +
 						"attempted to call method '" + options + "'" );
@@ -267,9 +273,6 @@ $.Widget.prototype = {
 		// all event bindings should go through this._on()
 		this.element
 			.unbind( this.eventNamespace )
-			// 1.9 BC for #7810
-			// TODO remove dual storage
-			.removeData( this.widgetName )
 			.removeData( this.widgetFullName )
 			// support: jquery <1.6.3
 			// http://bugs.jquery.com/ticket/9413
@@ -345,8 +348,7 @@ $.Widget.prototype = {
 
 		if ( key === "disabled" ) {
 			this.widget()
-				.toggleClass( this.widgetFullName + "-disabled ui-state-disabled", !!value )
-				.attr( "aria-disabled", value );
+				.toggleClass( this.widgetFullName + "-disabled", !!value );
 			this.hoverable.removeClass( "ui-state-hover" );
 			this.focusable.removeClass( "ui-state-focus" );
 		}
@@ -355,10 +357,10 @@ $.Widget.prototype = {
 	},
 
 	enable: function() {
-		return this._setOption( "disabled", false );
+		return this._setOptions({ disabled: false });
 	},
 	disable: function() {
-		return this._setOption( "disabled", true );
+		return this._setOptions({ disabled: true });
 	},
 
 	_on: function( suppressDisabledCheck, element, handlers ) {

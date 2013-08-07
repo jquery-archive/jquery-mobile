@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
@@ -28,7 +28,8 @@ var reverseBoolOptionMap = {
 		var ret = $.mobile.getAttribute.apply( this, arguments );
 
 		return ( ret == null ? undefined : ret );
-	};
+	},
+	capitalLettersRE = /[A-Z]/g;
 
 // optionsToClasses:
 // @options: A complete set of options to convert to class names.
@@ -164,6 +165,10 @@ function classNameToOptions( classes ) {
 	};
 }
 
+function camelCase2Hyphenated( c ) {
+	return "-" + c.toLowerCase();
+}
+
 // $.fn.buttonMarkup:
 // DOM: gets/sets .className
 //
@@ -180,7 +185,8 @@ function classNameToOptions( classes ) {
 // added by a previous call to $.fn.buttonMarkup() or during page enhancement
 // then you should omit @overwriteClasses or set it to false.
 $.fn.buttonMarkup = function( options, overwriteClasses ) {
-	var idx, data, el;
+	var idx, data, el, retrievedOptions, optionKey,
+		defaults = $.fn.buttonMarkup.defaults;
 
 	for ( idx = 0 ; idx < this.length ; idx++ ) {
 		el = this[ idx ];
@@ -189,8 +195,33 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 			// Assume this element is not enhanced and ignore its classes
 			{ alreadyEnhanced: false, unknownClasses: [] } :
 
-			// Analyze existing classes to establish existing options and classes
+			// Otherwise analyze existing classes to establish existing options and
+			// classes
 			classNameToOptions( el.className );
+
+		retrievedOptions = $.extend( {},
+
+			// If the element already has the class ui-btn, then we assume that
+			// it has passed through buttonMarkup before - otherwise, the options
+			// returned by classNameToOptions do not correctly reflect the state of
+			// the element
+			( data.alreadyEnhanced ? data.options : {} ),
+
+			// Finally, apply the options passed in
+			options );
+
+		// If this is the first call on this element, retrieve remaining options
+		// from the data-attributes
+		if ( !data.alreadyEnhanced ) {
+			for ( optionKey in defaults ) {
+				if ( retrievedOptions[ optionKey ] === undefined ) {
+					retrievedOptions[ optionKey ] = getAttrFixed( el,
+						optionKey.replace( capitalLettersRE, camelCase2Hyphenated ),
+						true
+					);
+				}
+			}
+		}
 
 		el.className = optionsToClasses(
 
@@ -198,16 +229,11 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 			$.extend( {},
 
 				// The defaults form the basis
-				$.fn.buttonMarkup.defaults,
+				defaults,
 
-				// If the element already has the class ui-btn, then we assume that
-				// it has passed through buttonMarkup before - otherwise, the options
-				// returned by classNameToOptions do not correctly reflect the state of
-				// the element
-				( data.alreadyEnhanced ? data.options : {} ),
-
-				// Finally, apply the options passed in
-				options ),
+				// Add the computed options
+				retrievedOptions
+			),
 
 			// ... and re-apply any unrecognized classes that were found
 			data.unknownClasses ).join( " " );
@@ -230,44 +256,8 @@ $.fn.buttonMarkup.defaults = {
 	mini: false
 };
 
-// enhanceWithButtonMarkup:
-// DOM: gets/sets .className
-//
-// this: Element to enhance
-//
-// Harvest an element's buttonMarkup-related data attributes from the DOM and
-// use their value to override defaults. Use optionsToClasses() to establish a
-// new className for the element from the calculated options and any existing
-// classes.
-//
-// This function is only defined so that it can be called from the enhancer
-// without having to write it inline and may be moved into the enhancer in the
-// future.
-function enhanceWithButtonMarkup( idx, el ) {
-	var classes;
-
-	classes = optionsToClasses( $.extend( {},
-		$.fn.buttonMarkup.defaults, {
-			icon      : getAttrFixed( el, "icon",       true ),
-			iconpos   : getAttrFixed( el, "iconpos",    true ),
-			theme     : getAttrFixed( el, "theme",      true ),
-			inline    : getAttrFixed( el, "inline",     true ),
-			shadow    : getAttrFixed( el, "shadow",     true ),
-			corners   : getAttrFixed( el, "corners",    true ),
-			iconshadow: getAttrFixed( el, "iconshadow", true ), /* TODO: Remove in 1.5 */
-			mini      : getAttrFixed( el, "mini",       true )
-		}), el.className.split( " " ) ).sort();
-
-	el.className = $.grep( classes, function( el, idx ) {
-			return !( idx > 0 && classes[ idx - 1 ] === el );
-		}).join( " " ) + ( el.disabled ? " ui-disabled" : "" );
-	el.setAttribute( "role", "button" );
-}
-
-//links in bars, or those with data-role become buttons
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.buttonmarkup", undefined, function( target ) {
-	$( "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button", target ).each( enhanceWithButtonMarkup );
+$.extend( $.fn.buttonMarkup, {
+	initSelector: "a:jqmData(role='button'), .ui-bar > a, .ui-bar > :jqmData(role='controlgroup') > a, button"
 });
 
 })( jQuery );

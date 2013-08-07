@@ -104,6 +104,10 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 					.jqmData( "ui-filterable-" + this.uuid + "-internal", true );
 				$( "<form class='ui-filterable'></form>" )
 					.append( selector )
+					.submit( function( evt ) {
+						evt.preventDefault();
+						selector.blur();
+					})
 					.insertBefore( this.element );
 				if ( $.mobile.textinput ) {
 					if ( this.options.filterTheme != null ) {

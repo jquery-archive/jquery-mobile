@@ -25,24 +25,6 @@ module.exports = function( grunt ) {
 			minified: "/*! jQuery Mobile <%= version %> | <%if ( headShortHash ) {%>Git HEAD hash: <%= headShortHash %> <> <% } %>" + grunt.template.today( "UTC:yyyy-mm-dd" ) + "T" + grunt.template.today( "UTC:HH:MM:ss" ) + "Z | (c) 2010, " + copyrightYear + " jQuery Foundation, Inc. | jquery.org/license */\n"
 		};
 
-	// grunt plugins
-	grunt.loadNpmTasks( "grunt-contrib-jshint" );
-	grunt.loadNpmTasks( "grunt-contrib-clean" );
-	grunt.loadNpmTasks( "grunt-contrib-copy" );
-	grunt.loadNpmTasks( "grunt-contrib-compress" );
-	grunt.loadNpmTasks( "grunt-contrib-concat" );
-	grunt.loadNpmTasks( "grunt-contrib-connect" );
-	grunt.loadNpmTasks( "grunt-contrib-qunit" );
-	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
-	grunt.loadNpmTasks( "grunt-contrib-uglify" );
-	grunt.loadNpmTasks( "grunt-css" );
-	grunt.loadNpmTasks( "grunt-git-authors" );
-	grunt.loadNpmTasks( "grunt-qunit-junit" );
-	grunt.loadNpmTasks( "grunt-hash-manifest" );
-
-	// load the project's default tasks
-	grunt.loadTasks( "build/tasks");
-
 	// Project configuration.
 	grunt.config.init({
 		pkg: grunt.file.readJSON( "package.json" ),
@@ -55,9 +37,50 @@ module.exports = function( grunt ) {
 
 		headShortHash: "",
 
-		files: {
+		dirs: {
 			cdn: path.join( dist, name + "-cdn" )
 		},
+
+		files: {
+			css: {
+				structure: [
+					name + ".structure<%= versionSuffix %>.css",
+					name + ".structure<%= versionSuffix %>.min.css"
+				],
+				theme: [
+					name + ".theme<%= versionSuffix %>.css",
+					name + ".theme<%= versionSuffix %>.min.css"
+				],
+				bundle: [
+					name + "<%= versionSuffix %>.css",
+					name + "<%= versionSuffix %>.min.css"
+				]
+			},
+
+			cdn: [
+				name + "<%= versionSuffix %>.js",
+				name + "<%= versionSuffix %>.min.js",
+				name + "<%= versionSuffix %>.min.map",
+
+				"<%= files.css.structure %>",
+				"<%= files.css.bundle %>",
+
+				"images/*",
+				"images/icons-png/**"
+			],
+
+			distZipContent: [
+				"<%= files.cdn %>",
+
+				"<%= files.css.theme %>",
+
+				"images/icons-svg/**",
+				"demos/**"
+			],
+
+			cdnZipFile: "<%= dirs.cdn %>.zip"
+		},
+
 
 		jshint: {
 			js: {
@@ -221,7 +244,7 @@ module.exports = function( grunt ) {
 			images: {
 				expand: true,
 				cwd: "css/themes/default/images",
-				src: "*",
+				src: "**",
 				dest: path.join( dist, "images/" )
 			},
 			"demos.nested-includes": {
@@ -302,7 +325,10 @@ module.exports = function( grunt ) {
 					{
 						expand: true,
 						cwd: dist,
-						src: [ "*.css", "images/*" ],
+						src: [
+							"<%= files.css.bundle %>",
+							"images/**"
+						],
 						dest: path.join( dist, "demos/css/themes/default/" )
 					},
 					{
@@ -332,12 +358,8 @@ module.exports = function( grunt ) {
 					{
 						expand: true,
 						cwd: dist,
-						src: [
-							name + "*<%= versionSuffix %>.*",
-							"images/*",
-							"!*.zip"
-						],
-						dest: "<%= files.cdn %>"
+						src: "<%= files.cdn %>",
+						dest: "<%= dirs.cdn %>"
 					}
 				]
 			},
@@ -375,7 +397,7 @@ module.exports = function( grunt ) {
 						expand: true,
 						cwd: dist,
 						src: [
-							"images/*"
+							"images/**"
 						],
 						dest: "dist/git/"
 					}
@@ -387,7 +409,7 @@ module.exports = function( grunt ) {
 			cdn: {
 				options: {
 					algo: "md5",
-					cwd: "<%= files.cdn %>"
+					cwd: "<%= dirs.cdn %>"
 				},
 				src: [ "**/*" ],
 				dest: "MANIFEST"
@@ -400,17 +422,21 @@ module.exports = function( grunt ) {
 					archive: path.join( dist, name ) + "<%= versionSuffix %>.zip"
 				},
 				files: [
-					{ expand: true, cwd: dist, src: [ "**", "!*.zip" ] }
+					{
+						expand: true,
+						cwd: dist,
+						src: "<%= files.distZipContent %>"
+					}
 				]
 			},
 			cdn: {
 				options: {
-					archive: "<%= files.cdn %>.zip"
+					archive: "<%= files.cdnZipFile %>"
 				},
 				files: [
 					{
 						expand: true,
-						cwd: "<%= files.cdn %>",
+						cwd: "<%= dirs.cdn %>",
 						src: [ "**/*" ]
 					}
 				]
@@ -565,7 +591,6 @@ module.exports = function( grunt ) {
 						path.join( dist, name + "*.js" ),
 						path.join( dist, name + ".min.map" ),
 						path.join( dist, name + "*.css" ),
-						path.join( dist, name + ".zip" )
 					]
 				}
 			}
@@ -579,18 +604,36 @@ module.exports = function( grunt ) {
 
 		clean: {
 			dist: [ dist ],
-			git: [ path.join( dist, "git" ) ],
-			cdn: [ "<%= files.cdn %>" ]
+            git: [ path.join( dist, "git" ) ],
+			cdn: [ "<%= dirs.cdn %>" ]
 		}
 	});
 
+	// grunt plugins
+	grunt.loadNpmTasks( "grunt-contrib-jshint" );
+	grunt.loadNpmTasks( "grunt-contrib-clean" );
+	grunt.loadNpmTasks( "grunt-contrib-copy" );
+	grunt.loadNpmTasks( "grunt-contrib-compress" );
+	grunt.loadNpmTasks( "grunt-contrib-concat" );
+	grunt.loadNpmTasks( "grunt-contrib-connect" );
+	grunt.loadNpmTasks( "grunt-contrib-qunit" );
+	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
+	grunt.loadNpmTasks( "grunt-contrib-uglify" );
+	grunt.loadNpmTasks( "grunt-css" );
+	grunt.loadNpmTasks( "grunt-git-authors" );
+	grunt.loadNpmTasks( "grunt-qunit-junit" );
+	grunt.loadNpmTasks( "grunt-hash-manifest" );
+
+	// load the project's default tasks
+	grunt.loadTasks( "build/tasks");
+
 	grunt.registerTask( "lint", [ "jshint" ] );
 
-	grunt.registerTask( "js:release",  [ "requirejs", "concat:js", "uglify", "copy:sourcemap" ] );
-	grunt.registerTask( "js", [ "config:dev", "js:release" ] );
+	grunt.registerTask( "js", [ "requirejs", "concat:js" ] );
+	grunt.registerTask( "js:release",  [ "js", "uglify", "copy:sourcemap" ] );
 
-	grunt.registerTask( "css:release", [ "cssbuild", "cssmin" ] );
-	grunt.registerTask( "css", [ "config:dev", "css:release" ] );
+	grunt.registerTask( "css", [ "cssbuild" ] );
+	grunt.registerTask( "css:release", [ "css", "cssmin" ] );
 
 	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed" ] );
 
@@ -604,7 +647,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
 	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
-	grunt.registerTask( "release", [ "clean", "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
+	grunt.registerTask( "release", [ "clean:dist", "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );
