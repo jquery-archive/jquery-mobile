@@ -24,11 +24,15 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 		getAttribute: function( element, key, dns ) {
 			var data;
 
-			if ( dns ) {
-				key = "data-" + $.mobile.ns + key;
-			}
+			element = element.jquery ? element[0] : element;
 
-			data = element.getAttribute( key );
+			if( element && element.getAttribute ){
+				if ( !!dns ) {
+					key = "data-" + $.mobile.ns + key;
+				}
+
+				data = element.getAttribute( key );
+			}
 
 			// Copied from core's src/data.js:dataAttr()
 			// Convert from a string to a proper data type
