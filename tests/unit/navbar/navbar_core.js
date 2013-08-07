@@ -28,4 +28,15 @@
 
 		$.mobile.ignoreContentEnabled = false;
 	});
+
+	test( "classes are correctly assigned", function() {
+		var $ul = $('#enhanced-classes'),
+			r = $ul.find("li").eq(0).find("a"),
+			d = $ul.find("li").eq(1).find("a"),
+			u = $ul.find("li").eq(2).find("a");
+
+		ok(r.hasClass("ui-icon-arrow-r") && !r.hasClass("ui-icon-arrow-d") && !r.hasClass("ui-icon-arrow-u"),"first item only has class of arrow-r");
+		ok(!d.hasClass("ui-icon-arrow-r") && d.hasClass("ui-icon-arrow-d") && !d.hasClass("ui-icon-arrow-u"),"second item only has class of arrow-d");
+		ok(!u.hasClass("ui-icon-arrow-r") && !u.hasClass("ui-icon-arrow-d") && u.hasClass("ui-icon-arrow-u"),"third item only has class of arrow-u");
+	});
 })(jQuery);
