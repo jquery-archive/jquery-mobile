@@ -1,35 +1,101 @@
 /* content configurations. */
-.ui-grid-a, .ui-grid-b, .ui-grid-c, .ui-grid-d { overflow: hidden; }
-.ui-block-a, .ui-block-b, .ui-block-c, .ui-block-d, .ui-block-e { margin: 0; padding: 0; border: 0; float: left; min-height: 1px; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
+.ui-grid-a,
+.ui-grid-b,
+.ui-grid-c,
+.ui-grid-d,
+.ui-grid-solo {
+	overflow: hidden;
+}
+.ui-block-a,
+.ui-block-b,
+.ui-block-c,
+.ui-block-d,
+.ui-block-e {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	float: left;
+	min-height: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/* force new row */
+.ui-block-a {
+	clear: left;
+}
+ul.ui-grid-a,
+ul.ui-grid-b,
+ul.ui-grid-c,
+ul.ui-grid-d,
+ul.ui-grid-solo,
+li.ui-block-a,
+li.ui-block-b,
+li.ui-block-c,
+li.ui-block-d,
+li.ui-block-e {
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0;
+	list-style: none;
+}
+/* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
+[class*="ui-block-"] > button.ui-btn {
+	margin-right: 0;
+	margin-left: 0;
+}
+[class*="ui-block-"] > .ui-btn,
+[class*="ui-block-"] > .ui-select,
+[class*="ui-block-"] > .ui-checkbox,
+[class*="ui-block-"] > .ui-radio,
+[class*="ui-block-"] > button.ui-btn-inline,
+[class*="ui-block-"] > button.ui-btn-icon-notext {
+	margin-right: .3125em;
+	margin-left: .3125em;
+}
 
-/* grid solo: 100 - single item fallback */
-.ui-grid-solo .ui-block-a { display: block; float: none; }
-/* Lower percentages for older browsers (i.e. IE7) to prevent wrapping. -.5px to fix BB5 wrap issue. */
-/* grid a: 50/50 */
-.ui-grid-a .ui-block-a, .ui-grid-a .ui-block-b { width: 49.95%; }
-.ui-grid-a > :nth-child(n) { width: 50%; margin-right: -.5px; }
-.ui-grid-a .ui-block-a { clear: left; }
-/* grid b: 33/33/33 */
-.ui-grid-b .ui-block-a, .ui-grid-b .ui-block-b, .ui-grid-b .ui-block-c { width: 33.25%; }
-.ui-grid-b > :nth-child(n) { width: 33.333%; margin-right: -.5px; }
-.ui-grid-b .ui-block-a { clear: left; }
-/* grid c: 25/25/25/25 */
-.ui-grid-c .ui-block-a, .ui-grid-c .ui-block-b, .ui-grid-c .ui-block-c, .ui-grid-c .ui-block-d { width: 24.925%; }
-.ui-grid-c > :nth-child(n) { width: 25%; margin-right: -.5px; }
-.ui-grid-c .ui-block-a { clear: left; }
-/* grid d: 20/20/20/20/20 */
-.ui-grid-d .ui-block-a, .ui-grid-d .ui-block-b, .ui-grid-d .ui-block-c, .ui-grid-d .ui-block-d, .ui-grid-d .ui-block-e { width: 19.925%; }
-.ui-grid-d > :nth-child(n) { width: 20%; }
-.ui-grid-d .ui-block-a { clear: left; }
+.ui-grid-a > .ui-block-a,
+.ui-grid-a > .ui-block-b {
+	/* width: 49.95%; IE7 */
+	/* margin-right: -.5px; BB5 */
+	width: 50%;
+}
+.ui-grid-b > .ui-block-a,
+.ui-grid-b > .ui-block-b,
+.ui-grid-b > .ui-block-c {
+	/* width: 33.25%; IE7 */
+	/* margin-right: -.5px; BB5 */
+	width: 33.333%;
+}
+.ui-grid-c > .ui-block-a,
+.ui-grid-c > .ui-block-b,
+.ui-grid-c > .ui-block-c,
+.ui-grid-c > .ui-block-d {
+	/* width: 24.925%; IE7 */
+	/* margin-right: -.5px; BB5 */
+	width: 25%;
+}
+.ui-grid-d > .ui-block-a,
+.ui-grid-d > .ui-block-b,
+.ui-grid-d > .ui-block-c,
+.ui-grid-d > .ui-block-d,
+.ui-grid-d > .ui-block-e {
+	/* width: 19.925%; IE7 */
+	width: 20%;
+}
+.ui-grid-solo > .ui-block-a {
+	width: 100%;
+	float: none; 
+}
 
 /* preset breakpoint to switch to stacked grid styles below 35em (560px) */
-@media all and (max-width: 35em) {
-	.ui-responsive .ui-block-a, 
-	.ui-responsive .ui-block-b, 
-	.ui-responsive .ui-block-c,
-	.ui-responsive .ui-block-d,
-	.ui-responsive .ui-block-e { 
+@media (max-width: 35em) {
+	.ui-responsive > .ui-block-a,
+	.ui-responsive > .ui-block-b,
+	.ui-responsive > .ui-block-c,
+	.ui-responsive > .ui-block-d,
+	.ui-responsive > .ui-block-e {
 		width: 100%; 
-		float:none; 
+		float: none; 
 	}
 }

@@ -33,7 +33,7 @@
 
         <p>Create a listview from an unordered list. For this demo we used an inset listview to show you how you can apply the corner styling to the tiles as well.</p>
 
-        <p>In this demo there are two breakpoints. At the first breakpoint we swap from the regular stacked layout to a three column grid layout with tiles. At the second we swith from three to four columns.</p>
+        <p>In this demo there are two breakpoints. At the first breakpoint we swap from the regular stacked layout to a three column grid layout with tiles. At the second we switch from three to four columns.</p>
 
         <p>The list items have a thumbail. In the grid layout those will get the same size as the tile. One list item doesn't hold an image to demonstrate how you can take advantage of class <code>ui-li-has-thumb</code> to adjust the style.</p>
 

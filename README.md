@@ -4,7 +4,7 @@ This is the main repository for the jQuery Mobile project. From the [official we
 
 > A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.
 
-jQuery Mobile 1.3 (1.3.0) works with versions of jQuery core from 1.7.0 to 1.9.0. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://jquerymobile.com/demos/).
+jQuery Mobile 1.3 (1.3.2) works with versions of jQuery core from 1.7.0 to 1.9.1. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://api.jquerymobile.com) and exploring the [demos](http://view.jquerymobile.com/1.3.2/dist/demos/).
 
 ## Contributing
 
@@ -133,8 +133,7 @@ Additionally, jQuery Mobile's test suite is split between integration and unit t
 Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this _before_ submitting a pull request it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on `new-feature` branch where `upstream` is the remote at `git://github.com/jquery/jquery-mobile.git`:
 
     git checkout new-feature
-    git fetch upstream
-    git rebase upstream/master
+    git pull --rebase upstream master
     ## ... here you may have to resolve some conflicts ... ##
 
 You can now push to your own fork and submit the pull request. Keep in mind that it's only a good idea to do this if you _haven't_ already submitted a pull request unless you want to create a new one because your origin remote (your fork) will report a discrepancy. Again, please refer to the [chapter](http://git-scm.com/book/ch3-6.html) in Pro Git on rebasing if you're new to it.

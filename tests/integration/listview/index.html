@@ -19,12 +19,14 @@
   </script>
 	<script>
 		$.testHelper.asyncLoad([
+			[ "widgets/page" ],
 			[
 				"jquery.mobile.navigation",
 				"widgets/listview",
-				"widgets/listview.filter",
 				"widgets/listview.autodividers",
-				"widgets/collapsible"
+				"widgets/toolbar",
+				"widgets/collapsible",
+				"jquery.mobile.buttonMarkup"
 			],
 			[ "jquery.mobile.init" ],
 			[ "listview_core.js" ]
@@ -46,18 +48,18 @@
 
 <!-- Basic Linked view test -->
 <div data-nstest-role="page" id='basic-linked-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Basic List View</h1>
 	</div>
 	<div data-nstest-role="content">
 		<ul data-nstest-role="listview">
+			<li>Static</li>
+			<li data-nstest-role="list-divider">Divider</li>
 			<li><a href="#basic-link-results">Home</a></li>
 			<li><a href="#basic-link-results">Back</a></li>
 			<li><a href="#basic-link-results">Return</a></li>
-			<li><a href="#nested-list-test" id="nested-list-test-anchor">Nested List Test</a></li>
 		</ul>
 	</div>
-  <a href="cache-tests/nested.html" id="cached-tests"></a>
 </div>
 
 <div data-nstest-role='page' id='basic-link-results'>
@@ -66,86 +68,9 @@
 	</div>
 </div>
 
-<!-- Nested List -->
-<div data-nstest-role="page" id='nested-list-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Basic List View</h1>
-	</div>
-	<div data-nstest-role="content">
-		<ul data-nstest-role="listview">
-			<li>Groups of animals
-				<ul>
-					<li>pod of whales</li>
-					<li>quiver of cobras</li>
-					<li>troop of baboons</li>
-				</ul>
-			</li>
-			<li class="linebreaknode">
-
-			More animals
-
-
-				<ul>
-					<li>Shoal of Bass</li>
-					<li>Rhumba of rattlesnakes</li>
-				</ul>
-			</li>
-		</ul>
-	</div>
-</div>
-
-
-<div data-nstest-role="page" id='nested-lists-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Basic multiple lists view</h1>
-	</div>
-    <div data-nstest-role="content">
-        <ul data-nstest-role="listview" data-nstest-inset="true">
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3
-                <ul data-nstest-role="listview">
-                    <li>Item A-3-0</li>
-                    <li>Item A-3-1</li>
-                    <li>Item A-3-2</li>
-                </ul>
-            </li>
-        </ul>
-        <ul data-nstest-role="listview" data-nstest-inset="true">
-            <li>Item 1</li>
-            <li>Item 2</li>
-            <li>Item 3
-                <ul data-nstest-role="listview">
-                    <li>Item B-3-0
-                        <ul data-nstest-role="listview">
-							<li>Item B-3-0-0</li>
-							<li>Item B-3-0-1
-								<ul data-nstest-role="listview">
-									<li>Item B-3-0-1-0</li>
-									<li>Item B-3-0-1-1</li>
-									<li>Item B-3-0-1-2</li>
-								</ul>
-							</li>
-							<li>Item B-3-0-2</li>
-						</ul>
-                    </li>
-                    <li>Item B-3-1
-						<ul data-nstest-role="listview">
-							<li>Item B-3-1-0</li>
-							<li>Item B-3-1-1</li>
-							<li>Item B-3-1-2</li>
-						</ul>
-                    </li>
-                    <li>Item B-3-2</li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</div>
-
 <!-- Numbered List -->
 <div data-nstest-role="page" id='numbered-list-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Basic List View</h1>
 	</div>
 	<div data-nstest-role="content">
@@ -180,7 +105,7 @@
 
 <!-- Split listview -->
 <div data-nstest-role="page" id='split-list-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Split List View</h1>
 	</div>
 	<div data-nstest-role="content">
@@ -202,20 +127,20 @@
 </div>
 
 <div data-nstest-role="page" id='split-list-link1'>
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Split List view 1</h1>
 	</div>
 </div>
 
 <div data-nstest-role="page" id='split-list-link2'>
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Split List view 2</h1>
 	</div>
 </div>
 
 <!-- List divider -->
 <div data-nstest-role="page" id='list-divider-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>List Divider Test</h1>
 	</div>
 	<div data-nstest-role="content">
@@ -232,7 +157,7 @@
 
 <!-- Autodivider -->
 <div data-nstest-role="page" id="autodividers-test">
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Autodivider Test</h1>
 	</div>
 	<div data-nstest-role="content">
@@ -247,7 +172,7 @@
 </div>
 
 <div data-nstest-role="page" id="autodividers-selector-test">
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Autodivider Selector Test</h1>
 	</div>
 	<div data-nstest-role="content">
@@ -267,103 +192,6 @@
 	</div>
 </div>
 
-<!-- Search bar filter -->
-<div data-nstest-role="page" id='search-filter-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Split List View</h1>
-	</div>
-	<div data-nstest-role="content">
-		<ul data-nstest-role="listview" data-nstest-filter="true">
-			<li>a is for aquaman</li>
-			<li>b is for batman</li>
-			<li>c is for catwoman</li>
-			<li>d is for darkwing</li>
-		</ul>
-	</div>
-</div>
-
-<!-- Search bar filter -->
-<div data-nstest-role="page" id='search-customfilter-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Filtered List View</h1>
-	</div>
-	<div data-nstest-role="content">
-		<ul data-nstest-role="listview" data-nstest-filter="true">
-			<li>a is for aquaman</li>
-			<li>b is for batman</li>
-			<li>c is for catwoman</li>
-			<li>d is for darkwing</li>
-		</ul>
-	</div>
-</div>
-
-<!-- Search bar filter with list-dividers -->
-<div data-nstest-role="page" id='search-filter-with-dividers-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Split List View</h1>
-	</div>
-	<div data-nstest-role="content">
-		<ul data-nstest-role="listview" data-nstest-filter="true">
-			<li data-nstest-role="list-divider">a</li>
-			<li>a is for aquaman</li>
-			<li data-nstest-role="list-divider">b</li>
-			<li>b is for batman</li>
-			<li data-nstest-role="list-divider">c</li>
-			<li>c is for catwoman</li>
-			<li data-nstest-role="list-divider">d</li>
-			<li>d is for darkwing</li>
-		</ul>
-	</div>
-</div>
-
-<!-- Search bar filter inset -->
-<div data-nstest-role="page" id='search-filter-inset-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Inset Filter List View</h1>
-	</div>
-	<div data-nstest-role="content">
-		<ul data-nstest-role="listview" data-nstest-filter="true" data-nstest-inset="true">
-			<li>a is for aquaman</li>
-			<li>b is for batman</li>
-			<li>c is for catwoman</li>
-			<li>d is for darkwing</li>
-		</ul>
-	</div>
-</div>
-
-<!-- Search bar filter -->
-<div data-nstest-role="page" id='search-filter-reveal-test'>
-    <div data-nstest-role="header" data-nstest-position="inline">
-        <h1>Reveal Listview</h1>
-    </div>
-    <div data-nstest-role="content">
-        <ul data-nstest-role="listview" data-nstest-filter="true" data-nstest-filter-reveal="true">
-            <li>Acura</a></li>
-            <li>Audi</li>
-            <li>BMW</li>
-            <li>Cadillac</li>
-            <li>Chrysler</li>
-            <li>Dodge</li>
-            <li>Ferrari</li>
-            <li>Ford</li>
-            <li>GMC</li>
-            <li>Honda</li>
-            <li>Hyundai</li>
-            <li>Infiniti</li>
-            <li>Jeep</li>
-            <li>Kia</li>
-            <li>Lexus</li>
-            <li>Mini</li>
-            <li>Nissan</li>
-            <li>Porsche</li>
-            <li>Subaru</li>
-            <li>Toyota</li>
-            <li>Volkswagon</li>
-            <li>Volvo</li>
-        </ul>
-    </div>
-</div>
-
 <!-- Programmatically generated list items !-->
 <div data-nstest-role="page" id="programmatically-generated-list">
 	<ul data-nstest-role="listview" data-nstest-inset="true" id="programmatically-generated-list-items"></ul>
@@ -371,7 +199,7 @@
 
 <!-- Removing items from list -->
 <div data-nstest-role="page" id='removing-items-from-list-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Basic List View</h1>
 	</div>
 	<div data-nstest-role="content">
@@ -386,7 +214,7 @@
 
 <!-- Rounded corners inset list with variable items -->
 <div data-nstest-role="page" id='corner-rounded-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
+	<div data-nstest-role="header">
 		<h1>Basic List View</h1>
 	</div>
 	<div data-nstest-role="content">
@@ -420,33 +248,21 @@
 	  <li><a href="#page1">Page1 Link LI without counter -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a><a href="#page2"></a></li>
 	  <li>Static LI with counter ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------<span class="ui-li-count">123</span></li>
 	  <li>Static LI without counter ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</li>
+	  <li><a href="#">Link LI with split button -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a><a href="#">Split</a></li>
+	  <li><a href="#"><img class="ui-li-icon">Link LI with icon -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a></li>
+	  <li><a href="#"><img>Link LI with thumb -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</a></li>
 	</ol>
   </div>
-</div>
-
-
-<div id="list-inset-filter-prototype" data-nstest-theme="b">
-	<ul data-nstest-role="listview" data-nstest-filter="true">
-		<li>foo</li>
-		<li>bar</li>
-	</ul>
-</div>
-
-<div id="list-inset-filter-data-attr" data-nstest-theme="b">
-	<ul data-nstest-role="listview" data-nstest-filter="true" data-nstest-inset="true">
-		<li>foo</li>
-		<li>bar</li>
-	</ul>
 </div>
 
 <div data-nstest-role="page" id="split-list-icon">
 	<div data-nstest-role="content">
 		<ul data-nstest-role="listview" data-nstest-split-icon="delete">
 			<li data-nstest-icon="star"><a href="#">Star</a><a href="#">Star</a></li>
-			<li data-nstest-icon="plug"><a href="#">Plus</a><a href="#">Plus</a></li>
+			<li data-nstest-icon="plus"><a href="#">Plus</a><a href="#">Plus</a></li>
 			<li><a href="#">Default</a><a href="#">Default</a></li>
       <!-- respect the child element icon -->
-			<li data-nstest-icon="star"><a href="#">Default</a><a data-nstest-icon="plug" href="#">Default</a></li>
+			<li data-nstest-icon="star"><a href="#">Default</a><a data-nstest-icon="grid" href="#">Grid</a></li>
 		</ul>
 	</div>
 </div>

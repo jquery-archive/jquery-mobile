@@ -23,7 +23,7 @@
 	}
 
 	test( "inputs without type specified are enhanced", function(){
-		ok( $( "#typeless-input" ).hasClass( "ui-input-text" ) );
+		ok( $( "#typeless-input" ).parent().hasClass( "ui-input-text" ) );
 	});
 
 	$.mobile.page.prototype.options.keepNative = "textarea.should-be-native";

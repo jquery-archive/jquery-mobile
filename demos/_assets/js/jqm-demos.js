@@ -81,12 +81,9 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
-		theme: "d",
-		dividerTheme: "d",
+		theme: null,
+		dividerTheme: null,
 		icon: false,
-		filter: true,
-		filterReveal: true,
-		filterPlaceholder: "Search...",
 		autodividers: true,
 		autodividersSelector: function ( li ) {
     		return "";
@@ -121,18 +118,15 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		$( this ).find( ".jqm-search .ui-input-clear" ).trigger( "click" );
 	});
 
-	$( this ).find( ".jqm-content ul.jqm-list " ).listview({
+	$( this ).find( ".jqm-content ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
-		theme: "d",
-		dividerTheme: "d",
+		theme: null,
+		dividerTheme: null,
 		icon: false,
-		filter: true,
-		filterReveal: true,
-		filterPlaceholder: "Search...",
-  		arrowKeyNav: true,
-  		enterToNav: true,
-  		highlight: true
+		arrowKeyNav: true,
+		enterToNav: true,
+		highlight: true
 	});
 
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
@@ -197,12 +191,11 @@ $( document ).on( "mobileinit", function() {
 	$.widget( "mobile.listview", $.mobile.listview, {
 		options: {
 			theme: null,
-			countTheme: "c",
-			headerTheme: "b",
-			dividerTheme: "b",
-			icon: "arrow-r",
-			splitIcon: "arrow-r",
-			splitTheme: "b",
+			countTheme: null,
+			dividerTheme: null,
+			icon: "carat-r",
+			splitIcon: "carat-r",
+			splitTheme: null,
 			corners: true,
 			shadow: true,
 			inset: false,
@@ -239,7 +232,7 @@ $( document ).on( "mobileinit", function() {
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
 			
-			form.append( "<button type='submit' data-icon='arrow-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
+			form.append( "<button type='submit' data-icon='carat-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
 				.parent()
 				.trigger( "create" );
 			

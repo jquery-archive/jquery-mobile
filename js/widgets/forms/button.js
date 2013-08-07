@@ -5,160 +5,118 @@
 //>>css.structure: ../css/structure/jquery.mobile.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.widget", "../../jquery.mobile.buttonMarkup", "../../jquery.mobile.registry"  ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-function splitOptions( o ) {
-	var key, ret = { btn: {}, widget: {} };
+$.widget( "mobile.button", {
 
-	for ( key in o ) {
-		if ( o[ key ] !== null ) {
-			if ( key === "disabled" ) {
-				ret.widget.disabled = o[ key ];
-				ret.haveWidget = true;
-			} else if ( key !== "initSelector" ) {
-				ret.btn[ key ] = o[ key ];
-				ret.haveBtn = true;
-			}
-		}
-	}
+	initSelector: "input[type='button'], input[type='submit'], input[type='reset']",
 
-	return ret;
-}
-
-$.widget( "mobile.button", $.mobile.widget, {
 	options: {
-		theme: null,
+		theme: "inherit",
 		icon: null,
-		iconpos: null,
+		iconpos: "left",
+		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
 		corners: true,
 		shadow: true,
-		iconshadow: true,
 		inline: null,
-		mini: null
+		mini: null,
+		wrapperClass: null,
+		enhanced: false
 	},
 
 	_create: function() {
-		var $button,
-			o = this.options,
-			$el = this.element,
-			classes = "";
 
-		// if this is a link, check if it's been enhanced and, if not, use the right function
-		if ( $el[ 0 ].tagName === "A" ) {
-			if ( !$el.hasClass( "ui-btn" ) ) {
-				$el.buttonMarkup();
-			}
-			return;
+		if ( this.element.is( ":disabled" ) ) {
+			this.options.disabled = true;
 		}
 
-		// get the inherited theme
-		// TODO centralize for all widgets
-		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( $el, "c" );
-		}
-		o.disabled = $el.prop( "disabled" );
-		o = splitOptions( o );
-
-		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-		/* if ( $el[0].className.length ) {
-			classes = $el[0].className;
-		} */
-		if ( !!~$el[ 0 ].className.indexOf( "ui-btn-left" ) ) {
-			classes = "ui-btn-left";
+		if ( !this.options.enhanced ) {
+			this._enhance();
 		}
 
-		if ( !!~$el[ 0 ].className.indexOf( "ui-btn-right" ) ) {
-			classes = "ui-btn-right";
-		}
+		$.extend( this, {
+			wrapper: this.element.parent()
+		});
 
-		if ( $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
-			if ( classes ) {
-				classes += " ui-submit";
-			} else {
-				classes = "ui-submit";
-			}
-		}
-		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
-
-		// Add ARIA role
-		this.button = $( "<div></div>" )
-			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )
-			.insertBefore( $el )
-			.buttonMarkup( o.btn )
-			.addClass( classes )
-			.append( $el.addClass( "ui-btn-hidden" ) );
-		this._setOption( "disabled", o.widget.disabled );
-
-		$button = this.button;
-
-		this._on( $el, {
+		this._on( {
 			focus: function() {
-				$button.addClass( $.mobile.focusClass );
+				this.widget().addClass( $.mobile.focusClass );
 			},
 
 			blur: function() {
-				$button.removeClass( $.mobile.focusClass );
+				this.widget().removeClass( $.mobile.focusClass );
 			}
 		});
+		
+		this.refresh( true );
+	},
+
+	_enhance: function() {
+		this.element.wrap( this._button() );
+	},
+
+	_button: function() {
+		return $("<div class='ui-btn ui-input-btn" +
+			( this.options.wrapperClass ? " " + this.options.wrapperClass : "" ) +
+			( this.options.theme ? " ui-btn-" + this.options.theme : "" ) +
+			( this.options.corners ? " ui-corner-all" : "" ) +
+			( this.options.shadow ? " ui-shadow" : "" ) +
+			( this.options.inline ? " ui-btn-inline" : "" ) +
+			( this.options.mini ? " ui-mini" : "" ) +
+			( this.options.disabled ? " ui-disabled" : "" ) +
+			( ( this.options.iconpos && this.options.icon ) ? " ui-btn-icon-" + this.options.iconpos : ( this.options.icon ? " ui-btn-icon-left" : "" ) ) +
+			( this.options.icon ? " ui-icon-" + this.options.icon : "" ) +
+			"' >" + this.element.val() + "</div>");
 	},
 
 	widget: function() {
-		return this.button;
+		return this.wrapper;
 	},
 
 	_destroy: function() {
-		var b = this.button;
-		this.element.insertBefore( b );
-		b.remove();
+			this.element.insertBefore( this.button );
+			this.button.remove();
 	},
 
-	_setOptions: function( o ) {
-		o = splitOptions( o );
-
-		// Resolve the buttonMarkup options
-		if ( o.haveBtn ) {
-			this.button.buttonMarkup( o.btn );
+	_setOptions: function( options ) {
+		if ( options.theme !== undefined ) {
+			this.widget().removeClass( this.options.theme ).addClass( "ui-btn-" + options.theme );
 		}
-
-		// ... and pass the rest up
-		if ( o.haveWidget ) {
-			this._super( o.widget );
+		if ( options.corners !== undefined ) {
+			this.widget().toggleClass( "ui-corner-all", options.corners );
+		}
+		if ( options.shadow !== undefined ) {
+			this.widget().toggleClass( "ui-shadow", options.shadow );
+		}
+		if ( options.inline !== undefined ) {
+			this.widget().toggleClass( "ui-btn-inline", options.inline );
+		}
+		if ( options.mini !== undefined ) {
+			this.widget().toggleClass( "ui-mini", options.mini );
+		}
+		if ( options.iconpos !== undefined ) {
+			this.widget().removeClass( "ui-btn-icon-" + options.iconpos );
+		}
+		if ( options.icon !== undefined ) {
+			if ( !this.options.iconpos && !options.iconpos ) {
+				this.widget.toggleClass( "ui-btn-icon-left", options.icon );
+			}
+			this.widget().removeClass( "ui-icon-" + this.options.icon ).toggleClass( "ui-icon-" + options.icon, options.icon );
 		}
 	},
 
-	_setOption: function( key, value ) {
-		var op = {};
-
-		op[ key ] = value;
-		if ( key === "disabled" ) {
-			value = !!value;
-			this.element.prop( "disabled", value );
-			// FIXME: We should be using ui-state-disabled, so we can get rid of this line
-			this.button.toggleClass( "ui-disabled", value );
-		} else if ( key !== "initSelector" ) {
-			this.button.buttonMarkup( op );
-			// Record the option change in the options and in the DOM data-* attributes
-			this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
+	refresh: function( create ) {
+		if ( this.options.icon && this.options.iconpos === "notext" && this.element.attr( "title" ) ) {
+			this.element.attr( "title", this.element.val() );
 		}
-		this._super( key, value );
-	},
-
-	refresh: function() {
-		var $el = this.element;
-
-		this._setOption( "disabled", $el.prop( "disabled" ) );
-
-		// Grab the button's text element from its implementation-independent data item
-		$( this.button.data( "buttonElements" ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
+		if ( !create ) {
+			var originalElement = this.element.detach();
+			$( this.wrapper ).text( this.element.val() ).append( originalElement );
+		}
 	}
 });
-
-$.mobile.button.initSelector = "button, [type='button'], [type='submit'], [type='reset']";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.button" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

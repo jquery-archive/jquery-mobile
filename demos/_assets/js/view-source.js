@@ -7,7 +7,7 @@ function attachPopupHandler( popup, sources ) {
 			collapsible, pre;
 
 		$.each( sources, function( idx, options ) {
-			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-collapsed-icon='arrow-l' data-expanded-icon='arrow-d' data-content-theme='a'>" +
+			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-collapsed-icon='carat-l' data-expanded-icon='carat-d' data-content-theme='b'>" +
 					"<h1>" + options.title + "</h1>" +
 					"<pre class='brush: " + options.brush + ";'></pre>" +
 				"</div>" );
@@ -88,18 +88,19 @@ $( document ).bind( "pagebeforechange", function( e, data ) {
 
 function makeButton() {
 	var d = document.createElement( "div" )
-		a = document.createElement( "a" );
+		a = document.createElement( "a" ),
+		txt = document.createTextNode( "View Source" );
 
 	d.className = "jqm-view-source-link";
 
 	a.setAttribute( "href", "#popupDemo" );
 	a.setAttribute( "data-rel", "popup" );
 	a.setAttribute( "data-role", "button" );
-	a.setAttribute( "data-icon", "arrow-u" );
+	a.setAttribute( "data-icon", "carat-u" );
 	a.setAttribute( "data-mini", "true" );
 	a.setAttribute( "data-inline", "true" );
 	a.setAttribute( "data-shadow", "false" );
-	a.innerHTML = "View Source";
+	a.appendChild( txt );
 
 	d.appendChild( a );
 
@@ -125,7 +126,7 @@ $.fn.viewSourceCode = function() {
 			} else {
 				data = $( "<div></div>" ).append( $( self.attr( "data-demo-html" ) ).clone() ).html();
 			}
-			sources.push( { title: "HTML", theme: "b", brush: "xml", data: fixData( data ) } );
+			sources.push( { title: "HTML", theme: "c", brush: "xml", data: fixData( data ) } );
 		}
 
 		if ( self.is( "[data-demo-php]" ) ) {
@@ -142,12 +143,12 @@ $.fn.viewSourceCode = function() {
 
 		if ( self.is( "[data-demo-js]" ) ) {
 			data = getHeadSnippet( "script", self.attr( "data-demo-js" ) );
-			sources.push( { title: "JS", theme: "f", brush: "js", data: fixData( data ) } );
+			sources.push( { title: "JS", theme: "e", brush: "js", data: fixData( data ) } );
 		}
 
 		if ( self.is( "[data-demo-css]" ) ) {
 			data = getHeadSnippet( "style", self.attr( "data-demo-css" ) );
-			sources.push( { title: "CSS", theme: "e", brush: "css", data: fixData( data ) } );
+			sources.push( { title: "CSS", theme: "f", brush: "css", data: fixData( data ) } );
 		}
 
 		button.insertAfter( this );
@@ -156,7 +157,7 @@ $.fn.viewSourceCode = function() {
 };
 
 $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
-	$( this ).find( "[data-demo-html='true'], [data-demo-js], [data-demo-css], [data-demo-php]" ).viewSourceCode();
+	$( this ).find( "[data-demo-html], [data-demo-js], [data-demo-css], [data-demo-php]" ).viewSourceCode();
 	SyntaxHighlighter.defaults['toolbar'] = false;
 	SyntaxHighlighter.defaults['auto-links'] = false;
 });

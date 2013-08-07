@@ -5,26 +5,21 @@
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "./page", "./page.sections", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page", "./addFirstLastClasses" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-//Keeps track of the number of lists per page UID
-//This allows support for multiple nested list in the same page
-//https://github.com/jquery/jquery-mobile/issues/1617
-var listCountPerPage = {},
-	getAttr = $.mobile.getAttribute;
+var getAttr = $.mobile.getAttribute;
 
-$.widget( "mobile.listview", $.mobile.widget, $.extend( {
+$.widget( "mobile.listview", $.extend( {
 
 	options: {
 		theme: null,
-		countTheme: "c",
-		headerTheme: "b",
-		dividerTheme: "b",
-		icon: "arrow-r",
-		splitIcon: "arrow-r",
-		splitTheme: "b",
+		countTheme: null,
+		dividerTheme: null,
+		icon: "carat-r",
+		splitIcon: "carat-r",
+		splitTheme: null,
 		corners: true,
 		shadow: true,
 		inset: false
@@ -42,24 +37,12 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		}
 
 		// create listview markup
-		t.element.addClass(function( i, orig ) {
-			return orig + " ui-listview" + listviewClasses;
-		});
+		t.element.addClass( " ui-listview" + listviewClasses );
 
 		t.refresh( true );
 	},
 
-	// This is a generic utility method for finding the first
-	// node with a given nodeName. It uses basic DOM traversal
-	// to be fast and is meant to be a substitute for simple
-	// $.fn.closest() and $.fn.children() calls on a single
-	// element. Note that callers must pass both the lowerCase
-	// and upperCase version of the nodeName they are looking for.
-	// The main reason for this is that this function will be
-	// called many times and we want to avoid having to lowercase
-	// the nodeName from the element every time to ensure we have
-	// a match. Note that this function lives here for now, but may
-	// be moved into $.mobile if other components need a similar method.
+	// TODO: Remove in 1.5
 	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName ) {
 		var dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
@@ -71,6 +54,17 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		}
 		return null;
 	},
+	// TODO: Remove in 1.5
+	_addThumbClasses: function( containers ) {
+		var i, img, len = containers.length;
+		for ( i = 0; i < len; i++ ) {
+			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
+			if ( img.length ) {
+				$( this._findFirstElementByTagName( img[ 0 ].parentNode, "parentNode", "li", "LI" ) ).addClass( img.hasClass( "ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
+			}
+		}
+	},
+
 	_getChildrenByTagName: function( ele, lcName, ucName ) {
 		var results = [],
 			dict = {};
@@ -85,149 +79,88 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 		return $( results );
 	},
 
-	_addThumbClasses: function( containers ) {
-		var i, img, len = containers.length;
-		for ( i = 0; i < len; i++ ) {
-			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
-			if ( img.length ) {
-				img.addClass( "ui-li-thumb" );
-				$( this._findFirstElementByTagName( img[ 0 ].parentNode, "parentNode", "li", "LI" ) ).addClass( img.hasClass( "ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-			}
-		}
-	},
-
 	refresh: function( create ) {
-		this.parentPage = this.element.closest( ".ui-page" );
-		this._createSubPages();
-
-		var o = this.options,
+		var buttonClass, pos, numli, item, itemClass, itemTheme, itemIcon, icon, a,
+			isDivider, startCount, newStartCount, value, last, splittheme, spliticon,
+			altButtonClass, dividerTheme,
+			o = this.options,
 			$list = this.element,
-			dividertheme = getAttr( $list[ 0 ], "dividertheme", true ) || o.dividerTheme,
-			listsplittheme = getAttr( $list[ 0 ], "splittheme", true ),
-			listspliticon = getAttr( $list[ 0 ], "spliticon", true ),
-			listicon = getAttr( $list[ 0 ], "icon", true ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
-			jsCount = !$.support.cssPseudoElement,
 			start = $list.attr( "start" ),
 			itemClassDict = {},
-			item, itemClass, itemTheme,
-			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, linkIcon,
-			pos, numli, isDivider;
+			countBubbles = $list.find( ".ui-li-count" ),
+			countTheme = getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme,
+			countThemeClass = countTheme ? "ui-body-" + countTheme : false;
 
-		if ( ol && jsCount ) {
-			$list.find( ".ui-li-dec" ).remove();
+		if ( o.theme ) {
+			$list.addClass( "ui-group-theme-" + o.theme );
 		}
 
-		if ( ol ) {
-			// Check if a start attribute has been set while taking a value of 0 into account
-			if ( start || start === 0 ) {
-				if ( !jsCount ) {
-					startCount = parseInt( start , 10 ) - 1;
-					$list.css( "counter-reset", "listnumbering " + startCount );
-				} else {
-					counter = parseInt( start , 10 );
-				}
-			} else if ( jsCount ) {
-					counter = 1;
-			}
-		}
-
-		if ( !o.theme ) {
-			o.theme = $.mobile.getInheritedTheme( this.element, "c" );
+		// Check if a start attribute has been set while taking a value of 0 into account
+		if ( ol && ( start || start === 0 ) ) {
+			startCount = parseInt( start, 10 ) - 1;
+			$list.css( "counter-reset", "listnumbering " + startCount );
 		}
 
 		for ( pos = 0, numli = li.length; pos < numli; pos++ ) {
 			item = li.eq( pos );
-			itemClass = "ui-li";
+			itemClass = "";
 
-			// If we're creating the element, we update it regardless
-			if ( create || !item.hasClass( "ui-li" ) ) {
-				itemTheme = getAttr( item[ 0 ], "theme", true ) || o.theme;
+			if ( create || item[ 0 ].className.search( /\bui-li-static\b|\bui-li-divider\b/ ) < 0 ) {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
+				value = item.attr( "value" );
+				itemTheme = getAttr( item[ 0 ], "theme", true );
 
-				if ( a.length && !isDivider ) {
-					icon = getAttr( item[ 0 ], "icon", true );
+				if ( a.length && a[ 0 ].className.search( /\bui-btn\b/ ) < 0 && !isDivider ) {
+					itemIcon = getAttr( item[ 0 ], "icon", true );
+					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
-					item.buttonMarkup({
-						wrapperEls: "div",
-						shadow: false,
-						corners: false,
-						iconpos: "right",
-						icon: a.length > 1 || icon === false ? false : icon || listicon || o.icon,
-						theme: itemTheme
-					});
+					// TODO: Remove in 1.5 together with links.js (links.js / .ui-link deprecated in 1.4)
+					a.removeClass( "ui-link" );
 
-					if ( ( icon !== false ) && ( a.length === 1 ) ) {
-						item.addClass( "ui-li-has-arrow" );
+					buttonClass = "ui-btn";
+
+					if ( itemTheme ) {
+						buttonClass += " ui-btn-" + itemTheme;
 					}
-
-					a.first().removeClass( "ui-link" ).addClass( "ui-link-inherit" );
 
 					if ( a.length > 1 ) {
-						itemClass += " ui-li-has-alt";
+						itemClass = "ui-li-has-alt";
 
 						last = a.last();
-						splittheme = listsplittheme || getAttr( last[ 0 ], "theme", true ) || o.splitTheme;
-						linkIcon = getAttr( last[ 0 ], "icon", true );
+						splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
+						spliticon = getAttr( last[ 0 ], "icon", true ) || getAttr( item[ 0 ], "icon", true ) || o.splitIcon;
+						altButtonClass = splittheme ? "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon : "ui-btn ui-icon-" + spliticon;
 
-						last.appendTo( item )
-							.attr( "title", $.trim(last.getEncodedText()) )
-							.addClass( "ui-li-link-alt" )
-							.empty()
-							.buttonMarkup({
-								shadow: false,
-								corners: false,
-								theme: itemTheme,
-								icon: false,
-								iconpos: "notext"
-							})
-							.find( ".ui-btn-inner" )
-								.append(
-									$( document.createElement( "span" ) ).buttonMarkup({
-										shadow: true,
-										corners: true,
-										theme: splittheme,
-										iconpos: "notext",
-										// link icon overrides list item icon overrides ul element overrides options
-										icon: linkIcon || icon || listspliticon || o.splitIcon
-									})
-								);
+						last
+							.attr( "title", $.trim( last.getEncodedText() ) )
+							.addClass( altButtonClass )
+							.empty();
+					} else if ( icon ) {
+						buttonClass += " ui-btn-icon-right ui-icon-" + icon;
 					}
+
+					a.first().addClass( buttonClass );
 				} else if ( isDivider ) {
+					dividerTheme = ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme || o.theme );
 
-					itemClass += " ui-li-divider ui-bar-" + ( getAttr( item[ 0 ], "theme", true ) || dividertheme );
+					itemClass = "ui-li-divider ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
+
 					item.attr( "role", "heading" );
+				} else if ( a.length <= 0 ) {
+					itemClass = "ui-li-static ui-body-" + ( itemTheme ? itemTheme : "inherit" );
+				}
+				if ( ol && value ) {
+					newStartCount = parseInt( value , 10 ) - 1;
 
-					if ( ol ) {
-						//reset counter when a divider heading is encountered
-						if ( start || start === 0 ) {
-							if ( !jsCount ) {
-								newStartCount = parseInt( start , 10 ) - 1;
-								item.css( "counter-reset", "listnumbering " + newStartCount );
-							} else {
-								counter = parseInt( start , 10 );
-							}
-						} else if ( jsCount ) {
-								counter = 1;
-						}
-					}
-
-				} else {
-					itemClass += " ui-li-static ui-btn-up-" + itemTheme;
+					item.css( "counter-reset", "listnumbering " + newStartCount );
 				}
 			}
 
-			if ( ol && jsCount && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-				countParent = itemClass.indexOf( "ui-li-static" ) > 0 ? item : item.find( ".ui-link-inherit" );
-
-				countParent.addClass( "ui-li-jsnumbering" )
-					.prepend( "<span class='ui-li-dec'>" + ( counter++ ) + ". </span>" );
-			}
-
-			// Instead of setting item class directly on the list item and its
-			// btn-inner at this point in time, push the item into a dictionary
+			// Instead of setting item class directly on the list item
+			// at this point in time, push the item into a dictionary
 			// that tells us what class to set on it so we can do this after this
 			// processing loop is finished.
 
@@ -238,151 +171,32 @@ $.widget( "mobile.listview", $.mobile.widget, $.extend( {
 			itemClassDict[ itemClass ].push( item[ 0 ] );
 		}
 
-		// Set the appropriate listview item classes on each list item
-		// and their btn-inner elements. The main reason we didn't do this
+		// Set the appropriate listview item classes on each list item.
+		// The main reason we didn't do this
 		// in the for-loop above is because we can eliminate per-item function overhead
 		// by calling addClass() and children() once or twice afterwards. This
 		// can give us a significant boost on platforms like WP7.5.
 
 		for ( itemClass in itemClassDict ) {
-			$( itemClassDict[ itemClass ] ).addClass( itemClass ).children( ".ui-btn-inner" ).addClass( itemClass );
+			$( itemClassDict[ itemClass ] ).addClass( itemClass );
 		}
 
-		$list.find( "h1, h2, h3, h4, h5, h6" ).addClass( "ui-li-heading" )
-			.end()
+		countBubbles.each( function() {
+			$( this ).closest( "li" ).addClass( "ui-li-has-count" );
+		});
+		if ( countThemeClass ) {
+			countBubbles.addClass( countThemeClass );
+		}
 
-			.find( "p, dl" ).addClass( "ui-li-desc" )
-			.end()
-
-			.find( ".ui-li-aside" ).each(function() {
-					var $this = $( this );
-					$this.prependTo( $this.parent() ); //shift aside to front for css float
-				})
-			.end()
-
-			.find( ".ui-li-count" ).each(function() {
-					$( this ).closest( "li" ).addClass( "ui-li-has-count" );
-				}).addClass( "ui-btn-up-" + ( getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme) + " ui-btn-corner-all" );
-
-		// The idea here is to look at the first image in the list item
-		// itself, and any .ui-link-inherit element it may contain, so we
-		// can place the appropriate classes on the image and list item.
-		// Note that we used to use something like:
-		//
-		//    li.find(">img:eq(0), .ui-link-inherit>img:eq(0)").each( ... );
-		//
-		// But executing a find() like that on Windows Phone 7.5 took a
-		// really long time. Walking things manually with the code below
-		// allows the 400 listview item page to load in about 3 seconds as
-		// opposed to 30 seconds.
-
+		// Deprecated in 1.4. From 1.5 you have to add class ui-li-has-thumb or ui-li-has-icon to the LI.
 		this._addThumbClasses( li );
-		this._addThumbClasses( $list.find( ".ui-link-inherit" ) );
+		this._addThumbClasses( li.find( ".ui-btn" ) );
 
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 		// autodividers binds to this to redraw dividers after the listview refresh
 		this._trigger( "afterrefresh" );
-	},
-
-	//create a string for ID/subpage url creation
-	_idStringEscape: function( str ) {
-		return str.replace(/[^a-zA-Z0-9]/g, "-");
-	},
-
-	_createSubPages: function() {
-		var parentList = this.element,
-			parentPage = parentList.closest( ".ui-page" ),
-			parentUrl = getAttr( parentPage[ 0 ], "url", true ),
-			parentId = parentUrl || parentPage[ 0 ][ $.expando ],
-			parentListId = parentList.attr( "id" ),
-			o = this.options,
-			dns = "data-" + $.mobile.ns,
-			self = this,
-			persistentFooter = parentPage.find( ":jqmData(role='footer')" ),
-			persistentFooterID = ( persistentFooter.length > 0 ? getAttr( persistentFooter[ 0 ], "id", true ) : undefined ),
-			hasSubPages,
-			newRemove = function( e, ui ) {
-				var nextPage = ui.nextPage, npURL,
-					prEvent = new $.Event( "pageremove" );
-
-				if ( ui.nextPage ) {
-					npURL = getAttr( nextPage[ 0 ], "url", true );
-					if ( npURL.indexOf( parentUrl + "&" + $.mobile.subPageUrlKey ) !== 0 ) {
-						self.childPages().remove();
-						parentPage.trigger( prEvent );
-						if ( !prEvent.isDefaultPrevented() ) {
-							parentPage.removeWithDependents();
-						}
-					}
-				}
-			};
-
-		if ( typeof listCountPerPage[ parentId ] === "undefined" ) {
-			listCountPerPage[ parentId ] = -1;
-		}
-
-		parentListId = parentListId || ++listCountPerPage[ parentId ];
-
-		$( parentList.find( "li>ul, li>ol" ).toArray().reverse() ).each(function( i ) {
-			var list = $( this ),
-				listId = list.attr( "id" ) || parentListId + "-" + i,
-				parent = list.parent(),
-				nodeElsFull = $( list.prevAll().toArray().reverse() ),
-				nodeEls = nodeElsFull.length ? nodeElsFull : $( "<span>" + $.trim(parent.contents()[ 0 ].nodeValue) + "</span>" ),
-				title = nodeEls.first().getEncodedText(),//url limits to first 30 chars of text
-				id = ( parentUrl || "" ) + "&" + $.mobile.subPageUrlKey + "=" + listId,
-				theme = getAttr( list[ 0 ], "theme", true ) || o.theme,
-				countTheme = getAttr( list[ 0 ], "counttheme", true ) || getAttr( parentList[ 0 ], "counttheme", true ) || o.countTheme,
-				newPage, anchor;
-
-			//define hasSubPages for use in later removal
-			hasSubPages = true;
-
-			newPage = list.detach()
-						.wrap( "<div " + dns + "role='page' " + dns + "url='" + id + "' " + dns + "theme='" + theme + "' " + dns + "count-theme='" + countTheme + "'><div " + dns + "role='content'></div></div>" )
-						.parent()
-							.before( "<div " + dns + "role='header' " + dns + "theme='" + o.headerTheme + "'><div class='ui-title'>" + title + "</div></div>" )
-							.after( persistentFooterID ? $( "<div " + dns + "role='footer' " + dns + "id='"+ persistentFooterID +"'>" ) : "" )
-							.parent()
-								.appendTo( $.mobile.pageContainer );
-
-			newPage.page();
-
-			anchor = parent.find( "a:first" );
-
-			if ( !anchor.length ) {
-				anchor = $( "<a/>" ).html( nodeEls || title ).prependTo( parent.empty() );
-			}
-
-			anchor.attr( "href", "#" + id );
-
-		}).listview();
-
-		// on pagehide, remove any nested pages along with the parent page, as long as they aren't active
-		// and aren't embedded
-		if ( hasSubPages &&
-			parentPage.is( ":jqmData(external-page='true')" ) &&
-			parentPage.data( "mobile-page" ).options.domCache === false ) {
-
-			// unbind the original page remove and replace with our specialized version
-			parentPage
-				.unbind( "pagehide.remove" )
-				.bind( "pagehide.remove", newRemove);
-		}
-	},
-
-	// TODO sort out a better way to track sub pages of the listview this is brittle
-	childPages: function() {
-		var parentUrl = this.parentPage.jqmData( "url" );
-
-		return $( ":jqmData(url^='"+  parentUrl + "&" + $.mobile.subPageUrlKey + "')" );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
-
-$.mobile.listview.initSelector = ":jqmData(role='listview')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.listview" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -19,38 +19,46 @@
 	bottom: -1px; /* fixes gap on Chrome for Android */
 	padding-bottom: 1px;
 }
-.ui-panel-display-overlay {
-	z-index: 1001; /* fixed toolbars have z-index 1000 */
-}
 .ui-panel-display-reveal {
 	z-index: 0;
 }
 .ui-panel-display-push {
 	z-index: 999;
 }
+.ui-panel-display-overlay {
+	z-index: 1001; /* fixed toolbars have z-index 1000 */
+}
 .ui-panel-inner {
-	padding: 15px;
+	padding: 1em;
 }
 
-/* content-wrap */
-.ui-panel-content-wrap {
+/* container and page */
+.ui-panel-page-container {
+	-webkit-transform: translate3d(0,0,0);
+}
+.ui-panel-page-container .ui-page-active {
+	background: none;
+}
+
+/* wrapper */
+.ui-panel-wrapper {
 	position: relative;
-	left: 0;
 	min-height: inherit;
-	border: none;
+	border: 0;
+	overflow-x: hidden;
 	z-index: 999;
 }
-.ui-panel-content-wrap-display-overlay,
-.ui-panel-animate.ui-panel-content-wrap > .ui-header, /* ios4 fix */
-.ui-panel-content-wrap-closed {
-	position: static;
+
+/* fiixed toolbars */
+.ui-panel-fixed-toolbar {
+	overflow-x: hidden;
 }
 
 /* dismiss */
 .ui-panel-dismiss {
 	position: absolute;
 	top: 0;
-	left:0;
+	left: 0;
 	height: 100%;
 	width: 100%;
 	z-index: 1002;
@@ -62,17 +70,13 @@
 
 /* animate class is added to panel, wrapper and fixed toolbars */
 .ui-panel-animate {
-	-webkit-transition: -webkit-transform 350ms ease;
-	-moz-transition: -moz-transform 350ms ease;
-	transition: transform 350ms ease;
+	-webkit-transition: -webkit-transform 300ms ease;
+	-moz-transition: -moz-transform 300ms ease;
+	transition: transform 300ms ease;
 }
 
 /* hardware acceleration for smoother transitions on WebKit browsers */
-.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal),
-.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) > div,
-.ui-panel-animate.ui-panel-closed.ui-panel-display-reveal > div,
-.ui-panel-animate.ui-panel-content-wrap,
-.ui-panel-animate.ui-panel-content-fixed-toolbar {
+.ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) {
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translate3d(0,0,0);
 }
@@ -127,19 +131,16 @@
 	-moz-transform: none;
 }
 
-/* positioning: content wrap, fixed toolbars and dismiss */
+/* positioning: pages, fixed toolbars and dismiss */
 /* panel left open */
-.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open,
-.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open,
+.ui-panel-page-content-position-left.ui-panel-page-content-open,
 .ui-panel-dismiss-position-left.ui-panel-dismiss-open {
 	left: 17em;
 	right: -17em;
 }
 /* animated: panel left open (for reveal and push) */
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal,
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-.ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal,
-.ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-open.ui-panel-page-content-display-reveal,
+.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-open.ui-panel-page-content-display-push {
 	left: 0;
 	right: 0;
 	-webkit-transform: translate3d(17em,0,0);
@@ -147,17 +148,14 @@
 	transform: translate3d(17em,0,0);
 }
 /* panel right open */
-.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open,
-.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open,
+.ui-panel-page-content-position-right.ui-panel-page-content-open,
 .ui-panel-dismiss-position-right.ui-panel-dismiss-open {
 	left: -17em;
 	right: 17em;
 }
 /* animated: panel right open (for reveal and push) */
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-reveal, 
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push,
-.ui-panel-animate.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal, 
-.ui-panel-animate.ui-panel-content-wrap-position-right.ui-panel-content-wrap-open.ui-panel-content-wrap-display-push {
+.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-open.ui-panel-page-content-display-reveal, 
+.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-open.ui-panel-page-content-display-push {
 	left: 0;
 	right: 0;
 	-webkit-transform: translate3d(-17em,0,0);
@@ -165,14 +163,8 @@
 	transform: translate3d(-17em,0,0);
 }
 /* negate "panel left/right open" for overlay */
-.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-overlay,
-.ui-panel-content-wrap-open.ui-panel-content-wrap-display-overlay {
+.ui-panel-page-content-open.ui-panel-page-content-display-overlay {
 	left: 0;
-}
-
-/* always disable overflow-x to prevent zoom issue on Android */
-.ui-page-active.ui-page-panel {
-	overflow-x: hidden;
 }
 
 /* shadows and borders */
@@ -200,33 +192,35 @@
 	border-right-width: 1px;
 	margin-right: -1px;
 }
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-left.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push {
+.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
 	margin-left: 1px;
+	width: auto;
 }
 .ui-panel-display-push.ui-panel-open.ui-panel-position-right {
 	border-left-width: 1px;
 	margin-left: -1px;
 }
-.ui-panel-animate.ui-panel-content-fixed-toolbar-position-right.ui-panel-content-fixed-toolbar-open.ui-panel-content-fixed-toolbar-display-push {
+.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push {
 	margin-right: 1px;
+	width: auto;
 }
 
 /* wrap on wide viewports once open */
 @media (min-width:55em){
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-left,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-left,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-left,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-left {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal,
+	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
+	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
 		margin-right: 17em;
 	}
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-right,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-right,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal,
+	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
+	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
 		margin-left: 17em;
 	}
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push,
-	.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-push,
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-reveal {
 		width: auto;	
 	}
 	.ui-responsive-panel .ui-panel-dismiss-display-push {

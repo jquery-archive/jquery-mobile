@@ -429,34 +429,6 @@
 		$( "#qunit-fixture" ).trigger("touchmove");
 	});
 
-	asyncTest( "move handler returns when touchstart has been fired since touchstop", function(){
-		expect( 1 );
-
-		// bypass triggered event check
-		$.Event.prototype.originalEvent = {
-			touches: false
-		};
-
-		forceTouchSupport();
-
-		// ensure the swipe custome event is setup
-		$( "#qunit-fixture" ).bind('swipe', function(){});
-
-		$( "#qunit-fixture" ).trigger("touchstart");
-		$( "#qunit-fixture" ).trigger("touchend");
-
-		$( "#qunit-fixture" ).bind("touchmove", function(){
-			ok(true, "touchmove bound functions are fired");
-			start();
-		});
-
-		Math.abs = function(){
-			ok(false, "shouldn't compare coordinates");
-		};
-
-		$( "#qunit-fixture" ).trigger("touchmove");
-	});
-
 	var nativeSupportTest = function(opts){
 		$.support.orientation = opts.orientationSupport;
 		deepEqual($.event.special.orientationchange[opts.method](), opts.returnValue);

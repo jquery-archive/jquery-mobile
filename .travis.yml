@@ -8,12 +8,11 @@ branches:
     - master
     - 1.3-stable
 env:
-  - JQUERIES=1.7.2
   - JQUERIES=1.8.3
-  - JQUERIES=1.9.1
-  - JQUERIES=2.0.0
+  - JQUERIES=1.10.2
+  - JQUERIES=2.0.3
   - JQUERIES=git
 notifications:
   irc:
     channels:
-      - "chat.freenode.net#jquerymobile-dev"
+      - "chat.freenode.net#jqueryui-dev"

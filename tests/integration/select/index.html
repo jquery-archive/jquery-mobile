@@ -20,8 +20,6 @@
 			],
 			[ "jquery.mobile.init" ],
 			[
-				"select_events.js",
-				"select_native.js",
 				"select_core.js"
 			]
 		]);
@@ -89,14 +87,6 @@
 			<option value="rush">Rush: 3 days</option>
 			<option value="express">Express: next day</option>
 			<option value="overnight">Overnight</option>
-		</select>
-	</div>
-
-	<div data-nstest-role="popup" id="popup-containing-select">
-		<select name="select-choice-inside-popup" id="select-choice-inside-popup" data-nstest-native-menu="false">
-			<option value="abracadabra">Abracadabra</option>
-			<option value="simsalabim">Simsalabim</option>
-			<option value="csiribu-csiriba">Csiribu-Csiriba</option>
 		</select>
 	</div>
 
@@ -355,19 +345,7 @@
     <option value="-1">other</option>
   </select>
 
-  <select name="custom-refresh" id="custom-refresh" data-nstest-native-menu="false">
-    <option value="-1">default</option>
-  </select>
-
   <select name="custom-refresh-opts-list" id="custom-refresh-opts-list" data-nstest-native-menu="false">
-    <option value="-1">default</option>
-  </select>
-
-  <select name="non-parent-themed" id="non-parent-themed" data-nstest-native-menu="false" data-nstest-theme="a">
-    <option value="-1">default</option>
-  </select>
-
-  <select name="parent-themed" id="parent-themed" data-nstest-native-menu="false">
     <option value="-1">default</option>
   </select>
 
@@ -395,39 +373,6 @@
 			</optgroup>
 		</select>
 	</div>
-
-	<select name="select-disabled-enhancetest" id="select-disabled-enhancetest" disabled="disabled" data-nstest-native-menu="false">
-		<option value="overnight">disabled enhance test</option>
-	</select>
-
-	<select name="select-preserve-option-class" id="select-preserve-option-class">
-		<option value="standard" class="foo" selected>Standard: 7 day</option>
-		<option value="rush">Rush: 3 days</option>
-		<option value="express">Express: next day</option>
-		<option value="overnight">Overnight</option>
-	</select>
-
-	<select name="select-preserve-option-class-multiple" id="select-preserve-option-class-multiple" multiple>
-		<option value="standard" class="foo" selected>Standard: 7 day</option>
-		<option value="rush">Rush: 3 days</option>
-		<option value="express">Express: next day</option>
-		<option value="overnight">Overnight</option>
-	</select>
-
-	<select name="select-aggregate-option-text" id="select-aggregate-option-text" multiple>
-		<option value="standard" selected>Standard: 7 day</option>
-		<option value="rush" selected>Rush: 3 days</option>
-		<option value="express">Express: next day</option>
-		<option value="overnight">Overnight</option>
-	</select>
-
-	<select name="test-placeholder-update" id="test-placeholder-update" data-nstest-native-menu="false">
-		<option>Placeholder</option>
-		<option value="standard">Standard: 7 day</option>
-		<option value="rush">Rush: 3 days</option>
-		<option value="express">Express: next day</option>
-		<option value="overnight">Overnight</option>
-	</select>
 
 	<select name="select-default-option-text" id="select-default-option-text">
 		<option value="standard">Standard: 7 day</option>

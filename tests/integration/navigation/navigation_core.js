@@ -330,7 +330,7 @@ $.testHelper.delayStart();
 	}
 
 	asyncTest( "ability to disable our hash change event listening internally", function(){
-		testListening( ! $.mobile.urlHistory.ignoreNextHashChange );
+		testListening( !$.mobile.urlHistory.ignoreNextHashChange );
 	});
 
 	asyncTest( "ability to disable our hash change event listening globally", function(){

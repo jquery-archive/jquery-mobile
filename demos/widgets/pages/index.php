@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Pages <a href="http://api.jquerymobile.com/page/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Pages <a href="http://api.jquerymobile.com/page/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">
 				The page is the primary unit of interaction in jQuery Mobile and is used to group content into logical views that can be animated in and out of view with page transitions. A HTML document may start with a single "page" and the AJAX navigation system will load additional pages on demand into the DOM as users navigate around. Alternatively, a HTML document can be built with multiple "pages" inside it and the framework will transition between these local views with no need to request content from the server.
@@ -33,7 +33,7 @@
 			<h2>Mobile page structure</h2>
 
 			<p>A jQuery Mobile site must start with an HTML5 <code>doctype</code> to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.) </p>
-			<p>In the <code>head</code>, references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.3.0 works with versions of jQuery core from 1.7.0 to 1.9.1. The easiest way to get started is to link to files hosted on the jQuery CDN or for best performance, <a href="http://jquerymobile.com/download-builder/" rel="external">build a custom bundle</a>:</p>
+			<p>In the <code>head</code>, references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. jQuery Mobile 1.4.0-alpha.1 works with versions of jQuery core from 1.7.0 to 1.9.1. The easiest way to get started is to link to files hosted on the jQuery CDN or for best performance, <a href="http://jquerymobile.com/download-builder/" rel="external">build a custom bundle</a>:</p>
 
 <pre><code>
 <strong>&lt;!DOCTYPE html&gt; </strong>
@@ -41,9 +41,9 @@
 &lt;head&gt;
 	&lt;title&gt;Page Title&lt;/title&gt;
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css&quot; /&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.4.0-alpha.1/jquery.mobile-1.4.0-alpha.1.min.css&quot; /&gt;
 	&lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/mobile/1.4.0-alpha.1/jquery.mobile-1.4.0-alpha.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 
 &lt;body&gt;
@@ -97,9 +97,9 @@
 
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css&quot; /&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.4.0-alpha.1/jquery.mobile-1.4.0-alpha.1.min.css&quot; /&gt;
 	&lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/mobile/1.4.0-alpha.1/jquery.mobile-1.4.0-alpha.1.min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 

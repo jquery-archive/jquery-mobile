@@ -2,7 +2,7 @@
  * mobile Fixed Toolbar unit tests
  */
 (function($){
-	module('jquery.mobile.fixedToolbar.js');
+	module('jquery.mobile.toolbar.js');
 
 	test( "Fixed Header Structural Classes are applied correctly", function(){
 		//footer
@@ -18,44 +18,42 @@
 		//parent
 		ok( $('#classes-test-b').closest( ".ui-page" ).hasClass( "ui-page-header-fixed" ), "Parent page of a fixed header has class ui-page-header-fixed" );
 		ok( $('#classes-test-e').closest( ".ui-page" ).hasClass( "ui-page-footer-fixed" ), "Parent page of a fixed footer has class ui-page-header-fixed" );
-		ok( $('#classes-test-c').closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
-		ok( $('#classes-test-f').closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
 	});
 
 	test( "User zooming is disabled when the header is visible and disablePageZoom is true", function(){
 		$.mobile.zoom.enable();
-		var defaultZoom = $.mobile.fixedtoolbar.prototype.options.disablePageZoom;
-		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", true );
+		var defaultZoom = $.mobile.toolbar.prototype.options.disablePageZoom;
+		$( ".ui-page-active .ui-header-fixed" ).toolbar("option", "disablePageZoom", true );
 
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 		ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
-		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", defaultZoom );
+		$( ".ui-page-active .ui-header-fixed" ).toolbar("option", "disablePageZoom", defaultZoom );
 		$.mobile.zoom.enable();
 	});
 
 	test( "Meta viewport content is restored to previous state, and zooming renabled, after pagebeforehide", function(){
 		$.mobile.zoom.enable( true );
-		var defaultZoom = $.mobile.fixedtoolbar.prototype.options.disablePageZoom;
-		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", true );
+		var defaultZoom = $.mobile.toolbar.prototype.options.disablePageZoom;
+		$( ".ui-page-active .ui-header-fixed" ).toolbar("option", "disablePageZoom", true );
 
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 		ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
 		$( ".ui-page-active" ).trigger( "pagebeforehide" );
 		ok( $.mobile.zoom.enabled, "Viewport scaling is enabled." );
-		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", defaultZoom );
+		$( ".ui-page-active .ui-header-fixed" ).toolbar("option", "disablePageZoom", defaultZoom );
 		$.mobile.zoom.enable( true );
 	});
 
 	test( "User zooming is not disabled when the header is visible and disablePageZoom is false", function(){
 		$.mobile.zoom.enable( true );
-		var defaultZoom = $.mobile.fixedtoolbar.prototype.options.disablePageZoom;
-		$( ".ui-page :jqmData(position='fixed')" ).fixedtoolbar( "option", "disablePageZoom", false );
+		var defaultZoom = $.mobile.toolbar.prototype.options.disablePageZoom;
+		$( ".ui-page :jqmData(position='fixed')" ).toolbar( "option", "disablePageZoom", false );
 
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 
 		ok( $.mobile.zoom.enabled, "Viewport scaling is not disabled before page show." );
 
-		$( ".ui-page :jqmData(position='fixed')" ).fixedtoolbar( "option", "disablePageZoom", defaultZoom );
+		$( ".ui-page :jqmData(position='fixed')" ).toolbar( "option", "disablePageZoom", defaultZoom );
 
 		$.mobile.zoom.enable( true );
 	});

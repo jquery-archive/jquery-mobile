@@ -1,46 +1,128 @@
-label.ui-input-text { font-size: 16px; line-height: 1.4; display: block; font-weight: normal; margin: 0 0 .3em; }
-input.ui-input-text, textarea.ui-input-text { background-image: none; padding: .4em; margin: .5em 0; min-height: 1.4em; line-height: 1.4em; font-size: 16px; display: block; width: 100%; outline: 0; }
-input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
-div.ui-input-text input.ui-input-text, div.ui-input-text textarea.ui-input-text,
-.ui-input-search input.ui-input-text { border: none; width: 100%; padding: .4em 0; margin: 0; display: block; background: transparent none; outline: 0 !important; }
-.ui-input-search, div.ui-input-text { margin: .5em 0; background-image: none; position: relative; }
-.ui-input-search { padding: 0 30px; }
-div.ui-input-text { padding: 0 .4em; }
-div.ui-input-has-clear { padding: 0 30px 0 .4em; }
-input.ui-input-text.ui-mini, textarea.ui-input-text.ui-mini,
-.ui-input-search.ui-mini, div.ui-input-text.ui-mini { margin: .25em 0; }
-.ui-field-contain input.ui-input-text, .ui-field-contain textarea.ui-input-text,
-.ui-field-contain .ui-input-search, .ui-field-contain div.ui-input-text { margin: 0; }
-textarea.ui-input-text { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
-input.ui-input-text { -webkit-appearance: none; }
-textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; -moz-transition: height 200ms linear; -o-transition: height 200ms linear; transition: height 200ms linear; }
-textarea.ui-mini { height: 45px; }
-.ui-icon-searchfield:after { position: absolute; left: 7px; top: 50%; margin-top: -9px; content: ""; width: 18px; height: 18px; opacity: .5; }
-.ui-input-search .ui-input-clear, .ui-input-text .ui-input-clear { position: absolute; right: 0; top: 50%; margin-top: -13px; }
-.ui-mini .ui-input-clear { right: -3px; }
-.ui-input-search .ui-input-clear-hidden, .ui-input-text .ui-input-clear-hidden { display: none; }
-
+.ui-input-text,
+.ui-input-search {
+	margin: -.5em -.5em 1.5em -.5em;
+	background-image: none;
+	border-width: 1px;
+	border-style: solid;
+}
+.ui-input-inset,
+textarea.ui-input-text {
+	margin: .5em 0;
+}
+.ui-input-text input,
+.ui-input-search input,
+textarea.ui-input-text {
+	padding: .4em;
+	min-height: 2.2em;
+	line-height: 1.4em;
+	display: block;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	outline: 0;
+}
+.ui-input-text input,
+.ui-input-search input {
+	margin: 0;
+	text-align: left; /* Opera aligns type="date" right by default */
+	border: 0;
+	background: transparent none;
+	-webkit-appearance: none;
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
+}
+textarea.ui-input-text {
+	height: 3.125em;
+	overflow: auto;
+	resize: vertical;
+}
+.ui-mini .ui-input-text input,
+.ui-mini .ui-input-search input,
+.ui-input-text.ui-mini input,
+.ui-input-search.ui-mini input,
+.ui-mini textarea.ui-input-text,
+textarea.ui-mini {
+	font-size: 14px;
+}
+/* Same margin for mini textareas as other mini sized widgets (12.5/14 * 0.5em) */
+.ui-mini textarea.ui-input-text,
+textarea.ui-mini {
+	margin: .446em 0;
+}
+.ui-input-has-clear,
+.ui-input-search {
+	position: relative;
+}
+/* Padding on the div instead of input because of browser spinners etc. */
+.ui-input-has-clear {
+	padding-right: 2.25em;
+}
+.ui-input-has-clear input {
+	padding-right: 0;
+	/* Autofill on Chrome has bg color so we unset corners right as well. */
+	-webkit-border-top-right-radius: 0;
+	border-top-right-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+/* Search icon */
+.ui-input-search input {
+	padding-left: 1.75em;
+}
+.ui-input-search:after {
+	position: absolute;
+	left: .3125em;
+	top: 50%;
+	margin-top: -7px;
+	content: "";
+	background-position: center center;
+	background-repeat: no-repeat;
+	width: 14px;
+	height: 14px;
+	filter: Alpha(Opacity=50);
+	opacity: .5;
+}
+.ui-input-search.ui-input-has-clear .ui-btn.ui-input-clear,
+.ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	margin: -15px .3125em 0;
+	border: 0;
+	background-color: transparent;
+}
+.ui-input-search .ui-input-clear-hidden,
+.ui-input-text .ui-input-clear-hidden {
+	display: none;
+}
 /* Resolves issue #5166: Added to support issue introduced in Firefox 15. We can likely remove this in the future. */
-input::-moz-placeholder, textarea::-moz-placeholder { color: #aaa; }
+.ui-input-text input::-moz-placeholder,
+.ui-input-search input::-moz-placeholder,
+textarea.ui-input-text::-moz-placeholder {
+	color: #aaa;
+}
+/* Same for IE10 */
+.ui-input-text input:-ms-input-placeholder,
+.ui-input-search input:-ms-input-placeholder,
+textarea.ui-input-text:-ms-input-placeholder {
+	color: #aaa;
+}
 
-/* Resolves issue #5131: Width of textinput depends on its type, for Android 4.1 */
-input[type=number]::-webkit-outer-spin-button { margin: 0; }
-
-/* Resolves issue #5756: Textinput in IE10 has a default clear icon */
-input[data-clear-btn=true]::-ms-clear { display: none; }
-
-@media all and (min-width: 28em){
-	.ui-field-contain label.ui-input-text { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
-	.ui-field-contain input.ui-input-text,
-	.ui-field-contain textarea.ui-input-text,
-	.ui-field-contain .ui-input-search,
-	.ui-field-contain div.ui-input-text { width: 78%; display: inline-block; }
-	.ui-field-contain .ui-input-search,
-	.ui-field-contain div.ui-input-text { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
-	.ui-hide-label input.ui-input-text,
-	.ui-hide-label textarea.ui-input-text,
-	.ui-hide-label .ui-input-search,
-	.ui-hide-label div.ui-input-text,
-	.ui-input-search input.ui-input-text,
-	div.ui-input-text input.ui-input-text { width: 100%; }
+/* Resolves issue #5131: Width of textinput depends on its type,
+for Android 4.1 */
+.ui-input-text input[type=number]::-webkit-outer-spin-button {
+	margin: 0;
+}
+/* Resolves issue #5756: Textinput in IE10 has a default clear button */
+.ui-input-text input::-ms-clear,
+.ui-input-search input::-ms-clear {
+	display: none;
+}
+.ui-input-text input:focus,
+.ui-input-search input:focus {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }

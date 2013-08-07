@@ -3,12 +3,11 @@
 		$.widget( "mobile.listview", $.mobile.listview, {
 			options: {
 				theme: null,
-				countTheme: "c",
-				headerTheme: "b",
-				dividerTheme: "b",
-				icon: "arrow-r",
-				splitIcon: "arrow-r",
-				splitTheme: "b",
+				countTheme: null,
+				dividerTheme: null,
+				icon: "carat-r",
+				splitIcon: "carat-r",
+				splitTheme: null,
 				corners: true,
 				shadow: true,
 				inset: false,

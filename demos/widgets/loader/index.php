@@ -44,7 +44,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Loader <a href="http://api.jquerymobile.com/page-loading/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Loader <a href="http://api.jquerymobile.com/page-loading/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">A small loading overlay displayed when jQuery Mobile loads in content via AJAX, or for use in custom notifications.
 			</p>
@@ -52,9 +52,9 @@
 			<h2>Standard loader</h2>
 			<p>The loader overlay can be icon only, text only or both. These demos rely on a custom JavaScript, view the source to see how it works.</p>
 			<div data-demo-html="true" data-demo-js="true">
-				<button class="show-page-loading-msg" data-theme="d" data-textonly="false" data-textvisible="false" data-msgtext="" data-inline="true">Icon (default)</button>
-				<button class="show-page-loading-msg" data-theme="d" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</button>
-				<button class="show-page-loading-msg" data-theme="d" data-textonly="true" data-textvisible="true" data-msgtext="Text only loader" data-inline="true">Text only</button>
+				<button class="show-page-loading-msg" data-textonly="false" data-textvisible="false" data-msgtext="" data-inline="true">Icon (default)</button>
+				<button class="show-page-loading-msg" data-textonly="false" data-textvisible="true" data-msgtext="" data-inline="true">Icon + text</button>
+				<button class="show-page-loading-msg" data-textonly="true" data-textvisible="true" data-msgtext="Text only loader" data-inline="true">Text only</button>
 				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
 
 			</div><!--/demo-html -->
@@ -62,7 +62,7 @@
 			<h2>Custom HTML</h2>
 			<p>Any HTML can be added to the loader overlay</p>
 			<div data-demo-html="true" data-demo-js="true">
-				<button class="show-page-loading-msg" data-theme="c" data-textonly="true" data-textvisible="true" data-msgtext="Custom Loader" data-inline="true"  data-html="<span class='ui-bar ui-shadow ui-overlay-d ui-corner-all'><img src='../../_assets/img/jquery-logo.png' /><h2>is loading for you ...</h2></span>" data-iconpos="right">Custom HTML</button>
+				<button class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="Custom Loader" data-inline="true"  data-html="<span class='ui-bar ui-shadow ui-overlay-d ui-corner-all'><img src='../../_assets/img/jquery-logo.png' /><h2>is loading for you ...</h2></span>" data-iconpos="right">Custom HTML</button>
 				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
 
 			</div><!--/demo-html -->
@@ -73,9 +73,6 @@
 			<div data-demo-html="true" data-demo-js="true">
 				<button class="show-page-loading-msg" data-theme="a" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme a" data-inline="true">A</button>
 				<button class="show-page-loading-msg" data-theme="b" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme b" data-inline="true">B</button>
-				<button class="show-page-loading-msg" data-theme="c" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme c" data-inline="true">C</button>
-				<button class="show-page-loading-msg" data-theme="d" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme d" data-inline="true">D</button>
-				<button class="show-page-loading-msg" data-theme="e" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme e" data-inline="true">E</button>
 				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
 			</div><!--/demo-html -->
 

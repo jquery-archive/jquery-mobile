@@ -19,7 +19,7 @@
 			<h1>Page</h1>
 		</div><!-- /header -->
 
-		<div data-role="content" data-theme="d">
+		<div data-role="content" data-theme="a">
 			<p>That was an animated page transition effect to a page that we added with a <code>data-transition</code> attribute on the link. This uses a different background theme swatch to see how that looks with the transitions.</p>
 			<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
 
@@ -56,7 +56,7 @@
 			<a href="index.php" data-role="button" data-theme="b" data-rel="back" data-inline="true">Take me back</a>
 		</div>
 
-		<div data-role="footer" data-theme="d">
+		<div data-role="footer" data-theme="a">
 			<div style="margin:5px 10px;"><!-- To add a bit of spacing -->
 			<label for="search" class="ui-hidden-accessible">Search:</label>
 	        <input type="search" name="password" id="search" placeholder="Search..." value="" />

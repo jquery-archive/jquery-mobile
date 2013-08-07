@@ -6,6 +6,11 @@
 
 <li data-section="Demo Showcase" data-filtertext="dynamic controlgroup buttons selects checkboxes forms"><a href="examples/controlgroups/dynamic-controlgroup.php" data-ajax="false">Dynamic controlgroup</a></li>
 
+<!--
+<li data-role="list-divider">Filter</li>
+
+<li data-section="Demo Showcase" data-filtertext="running a custom filter query on local and remote storages"><a href="examples/filterable/server-side-filter.php" data-ajax="false">Local/remote storage Filter</a></li>
+-->
 <li data-role="list-divider">Listviews</li>
 
 <li data-section="Demo Showcase" data-filtertext="grid listview responsive grids responsive listviews lists ul"><a href="examples/listviews/grid-listview.php" data-ajax="false">Grid Listview</a></li>
@@ -37,6 +42,8 @@
 <li data-section="Demo Showcase" data-filtertext="dynamic popups popup images lightbox"><a href="examples/popups/dynamic-popup.php" data-ajax="false">Dynamic popup</a></li>
 
 <li data-section="Demo Showcase" data-filtertext="arrow popups popover"><a href="examples/popups/arrow.php" data-ajax="false">Popup with arrow</a></li>
+
+<li data-section="Demo Showcase" data-filtertext="popups popup position alignment"><a href="examples/popups/alignment.php" data-ajax="false">Popup alignment</a></li>
 
 <li data-role="list-divider">Responsive Tables</li>
 

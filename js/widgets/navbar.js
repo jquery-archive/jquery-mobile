@@ -6,11 +6,11 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.buttonMarkup", "../jquery.mobile.grid", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.navbar", $.mobile.widget, {
+$.widget( "mobile.navbar", {
 	options: {
 		iconpos: "top",
 		grid: null
@@ -20,28 +20,33 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 
 		var $navbar = this.element,
 			$navbtns = $navbar.find( "a" ),
-			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ?
-									this.options.iconpos : undefined;
+			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined,
+			classes = "ui-btn";
 
-		$navbar.addClass( "ui-navbar ui-mini" )
+		$navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable()
 			.grid({ grid: this.options.grid });
 
-		$navbtns.buttonMarkup({
-			corners:	false,
-			shadow:		false,
-			inline:     true,
-			iconpos:	iconpos
-		});
+		$navbtns
+			.each( function() {
+				var icon = $.mobile.getAttribute( this, "icon", true ),
+					theme = $.mobile.getAttribute( this, "theme", true );
 
-		$navbar.delegate( "a", "vclick", function( event ) {
-			// ui-btn-inner is returned as target
-			var target = $( event.target ).is( "a" ) ? $( this ) : $( this ).parent( "a" ),
-				activeBtn;
+				if ( theme ) {
+					classes += " ui-btn-" + theme;
+				}
+				if ( icon ) {
+					classes += " ui-icon-" + icon + " ui-btn-icon-" + iconpos;
+				}
+				$( this ).addClass( classes );
+			});
 
-			if ( !target.is( ".ui-disabled, .ui-btn-active" ) ) {
+		$navbar.delegate( "a", "vclick", function( /* event */ ) {
+			var activeBtn;
+
+			if ( !$( this ).is( ".ui-disabled, .ui-btn-active" ) ) {
 				$navbtns.removeClass( $.mobile.activeBtnClass );
 				$( this ).addClass( $.mobile.activeBtnClass );
 
@@ -60,11 +65,6 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		});
 	}
 });
-
-$.mobile.navbar.initSelector = ":jqmData(role='navbar')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.navbar" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

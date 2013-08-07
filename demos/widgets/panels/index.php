@@ -21,7 +21,7 @@
         <h3>Default panel options</h3>
         <p>This panel has all the default options: positioned on the left with the reveal display mode. The panel markup is <em>before</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
+        <a href="#demo-links" data-rel="close" data-role="button" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /default panel -->
 
@@ -36,7 +36,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-		<h1>Panels <a href="http://api.jquerymobile.com/panel/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+		<h1>Panels <a href="http://api.jquerymobile.com/panel/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 		<p class="jqm-intro">Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
 
@@ -137,29 +137,33 @@ $( "#mypanel" ).trigger( "updatelayout" );
 <pre><code>
 @media (min-width:35em){
 
-/* wrap on wide viewports once open */
-
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-left,
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-left,
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-left,
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-left {
-    margin-right: 17em;
-}
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-right,
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-right,
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right,
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right {
-    margin-left: 17em;
-}
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push,
-.ui-responsive-panel.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal {
-    width: auto;
-}
-
-/* disable "dismiss" on wide viewports for "push" panels */
-.ui-responsive-panel .ui-panel-dismiss-display-push {
-    display: none;
-}
+	/* wrap on wide viewports once open */
+	
+	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-left,
+	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-left,
+	.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-left,
+	.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-left {
+		margin-right: 17em;
+	}
+	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-right,
+	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-right,
+	.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right,
+	.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right {
+		margin-left: 17em;
+	}
+	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push,
+	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal {
+		width: auto;
+	}
+	
+	/* disable "dismiss" on wide viewports */
+	.ui-panel-dismiss {
+		display: none;
+	}
+	/* same as the above but for panels with display mode "push" only */
+	.ui-panel-dismiss-display-push {
+		display: none;
+	}
 
 }
 </code></pre>
@@ -168,6 +172,9 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the <em>page wrapper</em> (not the panel). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
 
+		<h2 id="external-panels">Panels outside pages</h2>
+
+		<p>As of 1.4 it is now possible to use panels outside of a page <a href="external.php">External Panels</a></p>
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
@@ -198,14 +205,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	</div><!-- /leftpanel2 -->
 
 	<!-- leftpanel3  -->
-	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
-
-        <h3>Left Panel: Overlay</h3>
-        <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
-        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">Close panel</a>
-
-	</div><!-- /leftpanel3 -->
+	
 
 	<!-- rightpanel1  -->
 	<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
@@ -213,7 +213,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Right Panel: Reveal</h3>
         <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
+        <a href="#demo-links" data-rel="close" data-role="button" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /rightpanel1 -->
 
@@ -223,7 +223,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Right Panel: Push</h3>
         <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
+        <a href="#demo-links" data-rel="close" data-role="button" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /rightpanel2 -->
 
@@ -233,12 +233,21 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Right Panel: Overlay</h3>
         <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
+        <a href="#demo-links" data-rel="close" data-role="button" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /rightpanel3 -->
+	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
+
+        <h3>Left Panel: Overlay</h3>
+        <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
+        <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+        <a href="#demo-links" data-rel="close" data-role="button" data-theme="a" data-icon="delete" data-inline="true">Close panel</a>
+
+	</div><!-- /leftpanel3 -->
 
 <?php include( '../../global-nav.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

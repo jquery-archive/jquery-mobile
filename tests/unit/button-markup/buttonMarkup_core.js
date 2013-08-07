@@ -4,26 +4,6 @@
 (function($){
 	module("jquery.mobile.buttonMarkup.js");
 
-	test( "header buttons should have the header class", function() {
-		var headerButton1 = $("#header-button-1"),
-		    headerButton2 = $("#header-button-2");
-
-		ok((headerButton1.hasClass("ui-btn-left") &&
-		    headerButton2.hasClass("ui-btn-right")), "first header button should have class 'ui-btn-left' and the second one should have 'ui-btn-right'");
-	});
-
-	test( "control group buttons should be enhanced inside a footer", function(){
-		var group, linkCount;
-
-		group = $("#control-group-footer");
-		linkCount = group.find( "a" ).length;
-
-		deepEqual( group.find("a.ui-btn").length, linkCount, "all 4 links should be buttons");
-		deepEqual( group.find("a.ui-first-child").length, 1, "only 1 left cornered button");
-		deepEqual( group.find("a.ui-last-child").length, 1, "only 1 right cornered button");
-		deepEqual( group.find("a:not(.ui-first-child):not(.ui-last-child)").length, linkCount - 2, "only 2 buttons are cornered");
-	});
-
 	test( "control group buttons should respect theme-related data attributes", function(){
 		var group = $("#control-group-content");
 
@@ -65,7 +45,7 @@
 
 	test( "Ensure icon positioning defaults to left, and can be overridden with “data-iconpos”", function() {
 		var posdefault = $("#iconpos1"),
-		    posleft = $("#iconpos2"),
+			posleft = $("#iconpos2"),
 			posright = $("#iconpos3");
 
 		ok( posdefault.hasClass("ui-btn-icon-left"), "Button with unspecified icon position gets .ui-btn-icon-left" );
@@ -74,24 +54,9 @@
 
 	});
 
-	asyncTest( "ui-btn-* should be applied based on a setting", function() {
-		// force touch support so the timeout is set
-		$.Event.prototype.originalEvent = {
-			type: "touch"
-		};
-
-		var $btn = $( "#hover-delay" );
-
-
-		$btn.trigger( "vmousedown" );
-
-		setTimeout(function() {
-				ok( $btn.attr("class").indexOf( "ui-btn-down" ) == -1, "button doesn't have the down class yet" );
-		}, $.mobile.buttonMarkup.hoverDelay / 2);
-
-		setTimeout(function() {
-				ok( $btn.attr("class").indexOf( "ui-btn-down" ) >= 0, "button has the down class yet" );
-				start();
-		}, $.mobile.buttonMarkup.hoverDelay + 100 );
+	test( "Attribute " + '"' + "role='button'" + '"', function() {
+		deepEqual( $( "#role-test" ).attr( "role" ), "button", "Marked-up button has " + '"' + "role='button'" + '"' + "set" );
+		deepEqual( $( "#role-test-unenhanced" ).buttonMarkup().attr( "role" ), "button", "Button marked-up at runtime has " + '"' + "role='button'" + '"' + "set" );
 	});
+
 })(jQuery);

@@ -24,19 +24,19 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Autocomplete <a href="http://api.jquerymobile.com/listview/#option-filter" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Autocomplete <a href="http://api.jquerymobile.com/listview/#option-filter" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
-			<p class="jqm-intro">An autocomplete widget backed by either local or remote data can be created by leveraging the listview filter feature.
+			<p class="jqm-intro">An autocomplete widget backed by either local or remote data can be created by leveraging the filter feature.
 			</p>
 
 			<h2>Remote data</h2>
 
-			<p>To use the listview filter as an autocomplete that taps into remote data sources, you can use the <code>listviewbeforefilter</code> event to dynamically populate a listview as a user types a search query: <a href="autocomplete-remote.php" data-ajax="false">Remote autocomplete demo</a></p>
+			<p>To use the filter as an autocomplete that taps into remote data sources, you can use the <code>filterablebeforefilter</code> event to dynamically populate a listview as a user types a search query: <a href="autocomplete-remote.php" data-ajax="false">Remote autocomplete demo</a></p>
 
 			<h2 id="autocomplete-local">Local data</h2>
 
 			<p>The filter reveal feature makes it easy to build a simple autocomplete with local data. When a filterable list has the <code>data-filter-reveal="true"</code>, it will auto-hide all the list items when the search field is blank. The <code>data-filter-placeholder</code> attribute can be added to specify the placeholder text for the filter.</p>
-			<p>Any listview filter with more than 100-200 items may be slow to perform on a mobile device so we recommend using this feature for  autocomplete situations with a relatively small number of items.</p>
+			<p>Any filter with more than 100-200 items may be slow to perform on a mobile device so we recommend using this feature for  autocomplete situations with a relatively small number of items.</p>
 
 			<h4>Full width listview (non-inset)</h4>
 
@@ -96,7 +96,7 @@
 			</div><!--/demo-html -->
 
 		<h2 id="autocomplete-filtertext">Providing richer search content</h2>
-			<p>By default, the listview filter simply searches against the contents of each list item. If you want the filter to search against different content, add the <code>data-filtertext</code>	attribute to the item and populate it with one or many keywords and phrases that should be used to match against. Note that if this attribute is added, the contents of the list item are ignored.</p>
+			<p>By default, the filter simply searches against the contents of each list item. If you want the filter to search against different content, add the <code>data-filtertext</code>	attribute to the item and populate it with one or many keywords and phrases that should be used to match against. Note that if this attribute is added, the contents of the list item are ignored.</p>
 			<p>This attribute is useful for dealing with allowing for ticker symbols and full company names to be searched, or for covering common spellings and abbreviations for countries.</p>
 
 <pre><code>

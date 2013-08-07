@@ -4,10 +4,10 @@
 .ui-dialog-contain {
 	width: 92.5%;
 	max-width: 500px;
-	margin: 10% auto 15px auto;
+	margin: 10% auto 1em auto;
 	padding: 0;
 	position: relative;
-	top: -15px;
+	top: -1em;
 }
 .ui-dialog-contain > .ui-header, 
 .ui-dialog-contain > .ui-content, 
@@ -18,15 +18,13 @@
 	margin: 0;
 }
 .ui-dialog-contain > .ui-header {
-	border: none;
 	overflow: hidden;
 	z-index: 10; 
 	padding: 0;
-}
-.ui-dialog-contain > .ui-content { 
-	padding: 15px; 
+	border-top-width: 0;
 }
 .ui-dialog-contain > .ui-footer {
 	z-index: 10; 
-	padding: 0 15px; 
+	padding: 0 1em; 
+	border-bottom-width: 0;
 }

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Popup Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		( function( $, undefined ) {
+			// Set the default transition to "fade" if specified in the query
+			if ( !!~location.search.indexOf( "setFadeTransition" ) ) {
+				$( document ).one( "mobileinit", function() {
+					$.mobile.popup.prototype.options.transition = "fade";
+				});
+			}
+		})( jQuery );
+	</script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/popup",
+				"widgets/listview",
+				"widgets/dialog"
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"popup_core.js"
+			]
+		]);
+	</script>
+
+	<script src="../../swarminject.js"></script>
+</head>
+<body>
+  <div id="qunit"></div>
+
+  <div data-nstest-role="page" id="start-page">
+    <div data-nstest-role="content" id="page-content">
+      <div data-nstest-role="popup" id="test-popup">
+        <p>This is the test popup</p>
+        <a href="other.html">other.html</a>
+      </div>
+      <div data-nstest-role="popup" id="test-popup-2">
+        <p>This is another test popup</p>
+      </div>
+			<a id="open-xyzzy-popup" href="#xyzzy" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
+			<a id="open-test-popup" href="#test-popup" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
+			<ul data-nstest-role="listview">
+				<li id="open-test-popup-li"><a id="open-test-popup-li-link" href="#test-popup" data-nstest-rel="popup">Pop</a></li>
+			</ul>
+			<div data-nstest-role="popup" id="popup-sequence-test">
+				<a id="popup-sequence-test-open-dialog" href="popup-sequence-test-dialog.html">Dialog</a>
+			</div>
+
+      <div data-nstest-role="popup" id="test-history-popup" data-nstest-history="false">
+        <p>This is the test popup</p>
+        <a href="#" data-nstest-rel="back" data-nstest-role="button" data-nstest-theme="a" data-nstest-icon="delete" data-nstest-iconpos="notext" class="ui-btn-right">Close</a>
+      </div>
+
+      <div data-nstest-role="popup" id="test-destroy-popup" data-nstest-history="false">
+        <p>This is the test popup</p>
+      </div>
+
+      <div data-nstest-role="popup" id="test-popup-dismissible" data-nstest-dismissible="false">
+        <p>This is the test popup</p>
+      </div>
+      <a id="go-to-another-page" href="back-two.html">Go</a>
+
+			<div data-nstest-role="popup" id="popupLogin">
+				<form>
+					<input type="text" name="user" id="textBox" value="" placeholder="username" />
+				</form>
+			</div>
+
+			<div data-nstest-role="popup" id="double-close">
+				<p>Double close</p>
+			</div>
+			<a id="open-double-close" href="#double-close" data-nstest-rel="popup">Go</a>
+
+			<a id="open-disabled-popup" href="#disabled-popup" data-nstest-rel="popup">Go</a>
+			<div data-nstest-role="popup" id="disabled-popup">
+				<p>This popup is used for testing the response to setting the "disabled" option.</p>
+			</div>
+
+			<div style="display:none;" id="already-enhanced-placeholder"><!-- placeholder for already-enhanced --></div>
+			<a id="open-already-enhanced" href="#already-enhanced" data-nstest-rel="popup" aria-haspopup="true" aria-owns="already-enhanced" aria-expanded="false">Already-enhanced popup</a>
+    </div>
+		<div id="already-enhanced-screen" class="ui-popup-screen ui-screen-hidden"></div>
+		<div id="already-enhanced-popup" class="ui-popup-container ui-popup-hidden">
+			<div id="already-enhanced" data-nstest-role="popup" class="ui-popup ui-overlay-shadow ui-body-inherit ui-corner-all">
+				<p>This is a popup already enhanced</p>
+			</div>
+		</div>
+  </div>
+
+  <div data-nstest-role="page" id="no-popups">
+    Page that is not the popup page
+  </div>
+</body>
+</html>

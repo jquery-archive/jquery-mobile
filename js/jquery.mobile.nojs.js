@@ -3,13 +3,13 @@
 //>>label: “nojs” Classes
 //>>group: Utilities
 
-define( [ "jquery", "jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.mobile._enhancer.add( "mobile.nojs", undefined, function( target ) {
+$.mobile.nojs = function( target ) {
 	$( ":jqmData(role='nojs')", target ).addClass( "ui-nojs" );
-});
+};
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

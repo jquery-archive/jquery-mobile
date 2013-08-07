@@ -32,13 +32,13 @@
 		
 		</div>
 		
-		<div data-role="popup" id="api-popup" class="home-pop ui-content" data-theme="d" data-overlay-theme="b">
+		<div data-role="popup" id="api-popup" class="home-pop ui-content" data-theme="a" data-overlay-theme="b">
 			<p>The API docs are a separate site from the demos and cover the technical details of each jQuery Mobile plugin in depth.</p>
 			<a href="#" data-role="button" data-inline="true" data-rel="back"  data-mini="true" data-theme="c">Stay here</a>
 			<a href="http://api.jquerymobile.com" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" data-theme="f">Visit API Site </a>
 		</div>
 
-		<ul data-role="listview" data-inset="true" data-theme="d" data-icon="false" data-filter-placeholder="Search..." class="jqm-list jqm-home-list">
+		<ul data-role="listview" data-inset="true" data-theme="a" data-icon="false" class="jqm-list jqm-home-list">
             <li><a href="intro/"><h2>Introduction</h2><p>New to jQuery Mobile? Start here.</p></a></li>
             <li><a href="examples/"><h2>Demo Showcase</h2><p>Examples of how to customize and extend jQuery Mobile.</p></a></li>
             <li><a href="faq/"><h2>Questions &amp; Answers</h2><p>Common issues and questions, explained.</p></a></li>
@@ -49,10 +49,10 @@
 
 		<p class="jqm-intro">Test drive every component in the library, and easily build pages by copying and pasting the markup configuration you need.</p>
 
-		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list">
+		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="a" data-divider-theme="a" data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="demos" class="jqm-list jqm-widget-list">
         	<?php include( 'nav-widgets.php' ); ?>
         </ul>
-
+		
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">

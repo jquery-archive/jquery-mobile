@@ -28,7 +28,7 @@
 
         <p class="jqm-intro">We've collected common questions and solutions to help get you up to speed and solve tricky issues when working with jQuery Mobile.</p>
 
-        <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d" data-icon="false" data-filter-placeholder="Search questions..." data-global-nav="demos" class="jqm-list">
+        <ul data-role="listview" data-inset="true" data-filter="true" data-theme="a" data-divider-theme="a" data-icon="false" data-filter-placeholder="Search questions..." data-global-nav="demos" class="jqm-list">
         	<?php include( '../nav-faq.php' ); ?>
         </ul>
 

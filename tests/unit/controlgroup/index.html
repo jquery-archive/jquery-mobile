@@ -13,10 +13,14 @@
 	<script src="../../../external/qunit.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
+			['widgets/page'],
 			[
-				"widgets/forms/checkboxradio",
-				"widgets/controlgroup"
+				"widgets/controlgroup",
+				"jquery.mobile.buttonMarkup"
+				
 			],
+			["widgets/forms/checkboxradio"],
+
 			[ "jquery.mobile.init" ],
 			[ "controlgroup_core.js" ]
 		]);
@@ -72,6 +76,16 @@
 			</fieldset>
 		</div>
 
+		<div id="pre-rendered" data-nstest-role="controlgroup" data-nstest-shadow="true" data-nstest-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+			<div role="heading" class="ui-controlgroup-label">
+				<legend>Pre-rendered</legend>
+			</div>
+			<div class="ui-controlgroup-controls ui-shadow">
+				<a href="#" data-nstest-role="button">Button 1</a>
+				<a href="#" data-nstest-role="button">Button 2</a>
+			</div>
+		</div>
+
 		<div data-nstest-role="fieldcontain">
 			<fieldset data-nstest-role="controlgroup" id="test-reinstantiate">
 				<legend>Options</legend>
@@ -100,6 +114,12 @@
 		<input type="checkbox" name="checkbox-13" id="checkbox-13" class="custom" />
 		<label for="checkbox-13"><em>i</em></label>
 	</fieldset>
+</div>
+
+<div id="destroy-test">
+	<legend>Destroy test</legend>
+	<a href="#" data-nstest-role="button">Button 1</a>
+	<a href="#" data-nstest-role="button">Button 2</a>
 </div>
 
 <div data-nstest-role="fieldcontain" id="enhancetest">

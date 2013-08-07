@@ -12,9 +12,11 @@
 	<script src="../../jquery.testHelper.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
+			[ "widgets/page" ],
 			[
 				"jquery.mobile.buttonMarkup",
 				"widgets/controlgroup",
+				"widgets/toolbar",
 				"widgets/fixedToolbar",
 				"widgets/forms/button",
 			],
@@ -39,10 +41,6 @@
 </ol>
 
 <div data-nstest-role="page" id="default">
-  <div data-nstest-role="header" id="page-header">
-    <a id="header-button-1" data-role="button" href="index.html">Header button 1</a>
-    <a id="header-button-2" data-role="button" href="index.html">Header button 2</a>
-  </div>
   <div data-nstest-role="content" id="control-group-content">
     <input type="submit" data-nstest-role="button" value="Double Enhanced?" id="double-enhanced" />
     <a href="index.html" data-nstest-role="button" data-nstest-shadow="false">No shadow</a>
@@ -65,15 +63,9 @@
 	<a id="iconpos2" data-nstest-role="button" href="index.html" data-nstest-icon="check" data-nstest-iconpos="left">Left iconpos</a>
 	<a id="iconpos3" data-nstest-role="button" href="index.html" data-nstest-icon="check" data-nstest-iconpos="right">Right iconpos</a>
 	<a id="hover-delay" data-nstest-role="button" href="index.html"></a>
+	<a id="role-test" data-nstest-role="button" href="index.html">Blah</a>
+	<a id="role-test-unenhanced" href="index.html">Blah</a>
   </div>
-	<div data-nstest-role="footer" id="control-group-footer" class="ui-bar" data-nstest-position="inline">
-		<div data-nstest-role="controlgroup" data-nstest-type="horizontal">
-			<a href="index.html" data-nstest-icon="delete">Remove</a>
-			<a href="index.html" data-nstest-icon="plus">Add</a>
-			<a href="index.html" data-nstest-icon="arrow-u">Up</a>
-			<a href="index.html" data-nstest-icon="arrow-d">Down</a>
-		</div>
-	</div>
 </div>
 </body>
 </html>

@@ -8,19 +8,17 @@ define( [ "jquery", "./jquery.mobile.ns", "jquery.ui.widget" ], function( jQuery
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "mobile.widget", {
+$.extend( $.Widget.prototype, {
 	_getCreateOptions: function() {
-
-		var elem = this.element,
+		var elem = this.element[ 0 ],
 			options = {};
 
 		$.each( this.options, function( option ) {
+			var value = $.mobile.getAttribute( elem, option.replace( /[A-Z]/g, function( c ) {
+				return "-" + c.toLowerCase();
+			}), true );
 
-			var value = $.mobile.getAttribute( elem[ 0 ], option.replace( /[A-Z]/g, function( c ) {
-							return "-" + c.toLowerCase();
-						}), true );
-
-			if ( value !== undefined ) {
+			if ( value != null ) {
 				options[ option ] = value;
 			}
 		});
@@ -51,12 +49,11 @@ $.widget( "mobile.widget", {
 		}
 
 		$widgetElements[ this.widgetName ]();
-	},
-
-	raise: function( msg ) {
-		throw "Widget [" + this.widgetName + "]: " + msg;
 	}
 });
+
+//TODO: Remove in 1.5 for backcompat only
+$.mobile.widget = $.Widget;
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

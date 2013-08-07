@@ -39,7 +39,7 @@
 
 			<h2>$.support.cors</h2>
 
-			<p>In jQuery core, there is a <a href="http://api.jquery.com/jQuery.support/" rel="external">$.support.cors</a> boolean that indicates whether or not jQuery thinks the browser supports the W3C "<a hre="http://www.w3.org/TR/cors/" rel="external">Cross-Origin Resource Sharing</a>" feature to support cross-domain requests.</p>
+			<p>In jQuery core, there is a <a href="http://api.jquery.com/jQuery.support/" rel="external">$.support.cors</a> boolean that indicates whether or not jQuery thinks the browser supports the W3C "<a href="http://www.w3.org/TR/cors/" rel="external">Cross-Origin Resource Sharing</a>" feature to support cross-domain requests.</p>
 
 			<p>Since jQuery Mobile relies on jQuery core's $.ajax() functionality, <code>$.support.cors</code> must be set to <code>true</code> to tell <code>$.ajax</code> to load cross-domain pages. We've heard reports that webviews on some platforms, like BlackBerry, support cross-domain loading, but that jQuery core incorrectly sets <code>$.support.cors</code> value to <code>false</code> which disables cross-domain $.ajax() requests and will cause the page or assets to fail to load. </p>
 

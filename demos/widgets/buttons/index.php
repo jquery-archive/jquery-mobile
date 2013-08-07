@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Buttons <a href="http://api.jquerymobile.com/button/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Buttons <a href="http://api.jquerymobile.com/button/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons.
 			</p>
@@ -62,9 +62,6 @@
 				<p>
 					<a href="#" data-role="button" data-theme="a" data-inline="true">A</a>
 					<a href="#" data-role="button" data-theme="b" data-inline="true">B</a>
-					<a href="#" data-role="button" data-theme="c" data-inline="true">C</a>
-					<a href="#" data-role="button" data-theme="d" data-inline="true">D</a>
-					<a href="#" data-role="button" data-theme="e" data-inline="true">E</a>
 				</p>
 			</div><!--/demo-html -->
 
@@ -84,26 +81,26 @@
 			<p>An <a href="../icons/">icon</a> can be added to a button by adding a <code> data-icon</code> attribute on the anchor specifying the icon to display.</p>
 
 			<div data-demo-html="true">
-				<a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" data-inline="true">Plus</a>
-				<a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true">Minus</a>
-				<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="c" data-inline="true">Delete</a>
-				<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true">Arrow left</a>
-				<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="c" data-inline="true">Arrow right</a>
-				<a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="c" data-inline="true">Arrow up</a>
-				<a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="c" data-inline="true">Arrow down</a>
-				<a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true">Check</a>
-				<a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Gear</a>
-				<a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="c" data-inline="true">Refresh</a>
-				<a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="c" data-inline="true">Forward</a>
-				<a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="c" data-inline="true">Back</a>
-				<a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true">Grid</a>
-				<a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-theme="c" data-inline="true">Star</a>
-				<a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="c" data-inline="true">Alert</a>
-				<a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="c" data-inline="true">Info</a>
-		        <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="c" data-inline="true">Home</a>
-		        <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="c" data-inline="true">Search</a>
-				<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="c" data-inline="true">Bars</a>
-				<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="c" data-inline="true">Edit</a>
+				<a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-inline="true">Plus</a>
+				<a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-inline="true">Minus</a>
+				<a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Delete</a>
+				<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-inline="true">Arrow left</a>
+				<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Arrow right</a>
+				<a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-inline="true">Arrow up</a>
+				<a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-inline="true">Arrow down</a>
+				<a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-inline="true">Check</a>
+				<a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-inline="true">Gear</a>
+				<a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-inline="true">Refresh</a>
+				<a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-inline="true">Forward</a>
+				<a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-inline="true">Back</a>
+				<a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">Grid</a>
+				<a href="#" data-role="button" data-icon="star" data-iconpos="notext" data-inline="true">Star</a>
+				<a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-inline="true">Alert</a>
+				<a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-inline="true">Info</a>
+		        <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-inline="true">Home</a>
+		        <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-inline="true">Search</a>
+				<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-inline="true">Bars</a>
+				<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-inline="true">Edit</a>
 			</div><!--/demo-html -->
 
 			<h2 id="button-icon-position">Icon position</h2>

@@ -38,15 +38,15 @@
 		<p>Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons. Learn more about <a href="../buttons/">buttons</a>.</p>
         <div data-demo-html="true">
             <a href="#" data-role="button">Link button</a>
-            <input type="button" value="Button element" data-icon="delete" data-theme="b" />
-            <input type="submit" value="Submit button, mini" data-icon="grid" data-iconpos="right" data-mini="true"  data-theme="e" />
+            <input type="button" value="Button element" data-icon="delete" data-theme="a" />
+            <input type="submit" value="Submit button, mini" data-icon="grid" data-iconpos="right" data-mini="true" data-theme="b" />
         </div><!-- /demo-html -->
 
         <p>Inline buttons</p>
         <div data-demo-html="true">
             <a href="#" data-role="button" data-inline="true" data-icon="star">Inline + icon</a>
             <a href="#" data-role="button" data-inline="true" data-theme="b" data-mini="true">Mini + theme</a>
-            <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="notext" data-theme="e" data-mini="true">icon only button</a>
+            <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="notext" data-theme="b" data-mini="true">icon only button</a>
         </div><!-- /demo-html -->
 
         <p>Horizontal grouped buttons</p>
@@ -74,7 +74,7 @@
 
         <div data-demo-html="true">
             <label for="slider-fill-mini">Slider with fill, mini, track theme:</label>
-            <input type="range" name="slider-fill-mini" id="slider-fill-mini" value="40" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="d" />
+            <input type="range" name="slider-fill-mini" id="slider-fill-mini" value="40" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="b" />
         </div><!-- /demo-html -->
 
         <h2>Range slider</h2>

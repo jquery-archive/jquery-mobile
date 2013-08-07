@@ -9,36 +9,31 @@ define( [ "jquery",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.widget",
 	"./textinput",
-	"../../jquery.mobile.buttonMarkup",
 	"./reset",
 	"../optionDemultiplexer",
 	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-	$.widget( "mobile.rangeslider", $.mobile.widget, $.extend( {
+	$.widget( "mobile.rangeslider", $.extend( {
 
 		options: {
 			theme: null,
 			trackTheme: null,
+			corners: true,
 			mini: false,
 			highlight: true
 		},
 
 		_create: function() {
-			var secondLabel,
-			$el = this.element,
+			var $el = this.element,
 			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
 			_inputFirst = $el.find( "input" ).first(),
 			_inputLast = $el.find( "input" ).last(),
-			label = $el.find( "label" ).first(),
+			_label = $el.find( "label" ).first(),
 			_sliderFirst = $.data( _inputFirst.get(0), "mobile-slider" ).slider,
 			_sliderLast = $.data( _inputLast.get(0), "mobile-slider" ).slider,
 			firstHandle = $.data( _inputFirst.get(0), "mobile-slider" ).handle,
 			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
-
-			if ( $el.find( "label" ).length > 1 ) {
-				secondLabel = $el.find( "label" ).last().hide();
-			}
 
 			_inputFirst.addClass( "ui-rangeslider-first" );
 			_inputLast.addClass( "ui-rangeslider-last" );
@@ -46,7 +41,7 @@ define( [ "jquery",
 
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
-			label.prependTo( $el );
+			_label.insertBefore( $el );
 			firstHandle.prependTo( _sliderLast );
 
 			$.extend( this, {
@@ -54,6 +49,7 @@ define( [ "jquery",
 				_inputLast: _inputLast,
 				_sliderFirst: _sliderFirst,
 				_sliderLast: _sliderLast,
+				_label: _label,
 				_targetVal: null,
 				_sliderTarget: false,
 				_sliders: _sliders,
@@ -79,10 +75,10 @@ define( [ "jquery",
 				"vmousedown": "_dragFirstHandle"
 			});
 		},
-		_handleReset: function(){
+		_handleReset: function() {
 			var self = this;
 			//we must wait for the stack to unwind before updateing other wise sliders will not have updated yet
-			setTimeout( function(){
+			setTimeout( function() {
 				self._updateHighlight();
 			},0);
 		},
@@ -140,6 +136,7 @@ define( [ "jquery",
 				theme: o.theme,
 				trackTheme: o.trackTheme,
 				disabled: o.disabled,
+				corners: o.corners,
 				mini: o.mini,
 				highlight: o.highlight
 			}).slider( "refresh" );
@@ -160,9 +157,9 @@ define( [ "jquery",
 				otherSlider = first ? this._inputLast : this._inputFirst;
 
 
-			if( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
+			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
 				thisSlider.blur();
-			} else if( event.type === "mousedown" ){
+			} else if ( event.type === "mousedown" ){
 				return;
 			}
 			if ( min > max && !this._sliderTarget ) {
@@ -231,7 +228,8 @@ define( [ "jquery",
 		},
 
 		_destroy: function() {
-			this.element.removeClass( "ui-rangeslider ui-mini" ).find( "label" ).show();
+			this._label.prependTo( this.element );
+			this.element.removeClass( "ui-rangeslider ui-mini" );
 			this._inputFirst.after( this._sliderFirst );
 			this._inputLast.after( this._sliderLast );
 			this._sliders.remove();
@@ -239,11 +237,6 @@ define( [ "jquery",
 		}
 
 	}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
-
-$.mobile.rangeslider.initSelector = ":jqmData(role='rangeslider')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.rangeslider", { dependencies: [ "mobile.slider" ] } );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

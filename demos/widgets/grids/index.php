@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Grids <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Grids <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">The jQuery Mobile framework provides a simple way to build CSS-based columns that can also be responsive.
 			</p>
@@ -34,12 +34,13 @@
 			<p>Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them. Within the grid container, child elements are assigned <code>ui-block-a/b/c/d/e</code> in a sequential manner which makes each "block" element float side-by-side, forming the grid.</p>
 
 			<h2>Two column grids</h2>
-			<p>To build a two-column (50/50%) layout, start with a container with a <code>class</code> of <code>ui-grid-a</code>, and add two child containers inside it classed with <code>ui-block-a</code> for the first column and <code>ui-block-b</code> for the second. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-e</code> to apply the background gradient and font styling for the "e" toolbar theme swatch. For illustration purposes, an inline <code>style="height:120px"</code> attribute is also added to each grid to set each to a standard height. </p>
+			
+			<p>To build a two-column (50/50%) layout, start with a container with a <code>class</code> of <code>ui-grid-a</code>, and add two child containers inside it classed with <code>ui-block-a</code> for the first column and <code>ui-block-b</code> for the second. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-a</code> to apply the background and font styling for the "a" toolbar theme swatch. For illustration purposes, an inline <code>style="height:60px"</code> attribute is also added to each grid to set each to a standard height.</p>
 
 			<div data-demo-html="true">
 				<div class="ui-grid-a">
-					<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:60px">Block A</div></div>
-					<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">Block B</div></div>
+					<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+					<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
 				</div><!-- /grid-a -->
 			</div><!--/demo-html -->
 
@@ -47,8 +48,8 @@
 
 			<div data-demo-html="true">
 				<fieldset class="ui-grid-a">
-					<div class="ui-block-a"><button type="submit" data-theme="c">Cancel</button></div>
-					<div class="ui-block-b"><button type="submit" data-theme="b">Submit</button></div>
+					<div class="ui-block-a"><input type="submit" value="Submit" data-theme="a"></div>
+					<div class="ui-block-b"><input type="reset" value="Reset" data-theme="b"></div>
 				</fieldset>
 			</div><!--/demo-html -->
 
@@ -59,9 +60,9 @@
 
 			<div data-demo-html="true">
 				<div class="ui-grid-b">
-					<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:60px">Block A</div></div>
-					<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">Block B</div></div>
-					<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:60px">Block C</div></div>
+					<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+					<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+					<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
 				</div><!-- /grid-b -->
 			</div><!--/demo-html -->
 
@@ -69,9 +70,9 @@
 
 			<div data-demo-html="true">
 				<fieldset class="ui-grid-b">
-					<div class="ui-block-a"><button type="submit" data-theme="c">Hmm</button></div>
-					<div class="ui-block-b"><button type="submit" data-theme="a">No</button></div>
-					<div class="ui-block-c"><button type="submit" data-theme="b">Yes</button></div>
+					<div class="ui-block-a"><input type="button" value="Hmm"></div>
+					<div class="ui-block-b"><input type="reset" value="No"></div>
+					<div class="ui-block-c"><input type="submit" value="Yes"></div>
 				</fieldset>
 			</div><!--/demo-html -->
             
@@ -84,10 +85,10 @@
 
 			<div data-demo-html="true">
 				<div class="ui-grid-c">
-					<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:60px">A</div></div>
-					<div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">B</div></div>
-					<div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:60px">C</div></div>
-					<div class="ui-block-d"><div class="ui-bar ui-bar-e" style="height:60px">D</div></div>
+					<div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+					<div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+					<div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
+					<div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Block D</div></div>
 				</div><!-- /grid-c -->
 			</div><!--/demo-html -->
 
@@ -98,11 +99,11 @@
 
 			<div data-demo-html="true">
                 <div class="ui-grid-d">
-                    <div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:60px">A</div></div>
-                    <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">B</div></div>
-                    <div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:60px">C</div></div>
-                    <div class="ui-block-d"><div class="ui-bar ui-bar-e" style="height:60px">D</div></div>
-                    <div class="ui-block-e"><div class="ui-bar ui-bar-e" style="height:60px">E</div></div>
+                    <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+                    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+                    <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
+                    <div class="ui-block-d"><div class="ui-bar ui-bar-a" style="height:60px">Block D</div></div>
+                    <div class="ui-block-e"><div class="ui-bar ui-bar-a" style="height:60px">Block E</div></div>
                 </div><!-- /grid-c -->
 			</div><!--/demo-html -->
 
@@ -113,31 +114,31 @@
 
 			<div data-demo-html="true">
                 <div class="ui-grid-b">
-                    <div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:60px">A</div></div>
-                    <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">B</div></div>
-                    <div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:60px">C</div></div>
-                    <div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:60px">A</div></div>
-                    <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">B</div></div>
-                    <div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:60px">C</div></div>
-                    <div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:60px">A</div></div>
-                    <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:60px">B</div></div>
-                    <div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:60px">C</div></div>
+                    <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+                    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+                    <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
+                    <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+                    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+                    <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
+                    <div class="ui-block-a"><div class="ui-bar ui-bar-a" style="height:60px">Block A</div></div>
+                    <div class="ui-block-b"><div class="ui-bar ui-bar-a" style="height:60px">Block B</div></div>
+                    <div class="ui-block-c"><div class="ui-bar ui-bar-a" style="height:60px">Block C</div></div>
                 </div><!-- /grid-c -->
 			</div><!--/demo-html -->
 
 
 			<h2>Grid solo class</h2>
             
-			<p>The framework adds left and right margin to buttons in a grid. For a single button you can use a container with class <code>ui-grid-solo</code> and wrap the button in a div with class <code>ui-block-a</code> like the example below. This way the button will get the same margin. View more examples of <a href="grid-buttons.php" data-ajax="false">buttons in grids</a>.</p>
+			<p>The framework adds left and right margin to buttons in a grid (one exception: 100% width button elements). For a single button you can use a container with class <code>ui-grid-solo</code> and wrap the button in a div with class <code>ui-block-a</code> like the example below. This way the button will get the same margin. View more examples of <a href="grid-buttons.php" data-ajax="false">buttons in grids</a>.</p>
 
 			<div data-demo-html="true">
 				<div class="ui-grid-a">
-					<div class="ui-block-a"><button type="button" data-theme="c">Previous</button></div>
-					<div class="ui-block-b"><button type="button" data-theme="c">Next</button></div>
+					<div class="ui-block-a"><a data-role="button">Previous</a></div>
+					<div class="ui-block-b"><a data-role="button">Next</a></div>
 				</div>
 
 				<div class="ui-grid-solo">
-					<div class="ui-block-a"><button type="button" data-theme="b">More</button></div>
+					<div class="ui-block-a"><input type="button" value="More"></div>
 				</div>
 			</div><!--/demo-html -->
 

@@ -3,15 +3,41 @@
 //>>label: Page Creation
 //>>group: Core
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+$.mobile.widgets = {};
 
-$.widget( "mobile.page", $.mobile.widget, {
+var originalWidget = $.widget;
+
+$.widget = (function( orig ) {
+	return function() {
+		var constructor = orig.apply( this, arguments ),
+			name = constructor.prototype.widgetName;
+
+		constructor.initSelector = ( ( constructor.prototype.initSelector !== undefined ) ?
+			constructor.prototype.initSelector : ":jqmData(role='" + name + "')" );
+
+		$.mobile.widgets[ name ] = constructor;
+
+		return constructor;
+	};
+})( $.widget );
+
+// Make sure $.widget still has bridge and extend methods
+$.extend( $.widget, originalWidget );
+
+// For backcompat remove in 1.5
+$.mobile.document.on( "create", function( event ){
+	$( event.target ).enhanceWithin();
+});
+
+$.widget( "mobile.page", {
 	options: {
-		theme: "c",
+		theme: "a",
 		domCache: false,
-		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')"
+		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')",
+		contentTheme: null
 	},
 
 	// DEPRECATED for > 1.4
@@ -22,22 +48,74 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_create: function() {
-		// if false is returned by the callbacks do not create the page
+		var attrPrefix = "data-" + $.mobile.ns,
+			self = this;
+		// If false is returned by the callbacks do not create the page
 		if ( this._trigger( "beforecreate" ) === false ) {
 			return false;
 		}
 
+		if ( this.options.role ) {
+			this.element.attr( "data-" + $.mobile.ns + "role", this.options.role );
+		}
+
 		this.element
 			.attr( "tabindex", "0" )
-			.addClass( "ui-page ui-body-" + this.options.theme );
+			.addClass( "ui-page ui-page-theme-" + this.options.theme );
 
 		this._on( this.element, {
 			pagebeforehide: "removeContainerBackground",
 			pagebeforeshow: "_handlePageBeforeShow"
 		});
+		this.element.find( "[" + attrPrefix + "role='content']" ).each( function() {
+			var $this = $( this ),
+				theme = this.getAttribute( attrPrefix + "theme" ) || undefined;
+				self.options.contentTheme = theme || self.options.contentTheme || ( self.element.jqmData("role") === "dialog" &&  self.options.theme );
+				$this.addClass( "ui-content" );
+				if ( self.options.contentTheme ) {
+					$this.addClass( "ui-body-" + ( self.options.contentTheme ) );
+				}
+				// Add ARIA role
+				$this.attr( "role", "main" ).addClass( "ui-content" );
+		});
 
-		// enhance the page
-		$.mobile._enhancer.enhance( this.element[ 0 ] );
+		this.element.enhanceWithin();
+
+		if( $.mobile.getAttribute( this.element[0], "role", true ) === "dialog" && $.mobile.dialog ){
+			this.element.dialog();
+		}
+	},
+
+	bindRemove: function( callback ) {
+		var page = this.element;
+
+		// when dom caching is not enabled or the page is embedded bind to remove the page on hide
+		if ( !page.data( "mobile-page" ).options.domCache &&
+			page.is( ":jqmData(external-page='true')" ) ) {
+
+			// TODO use _on - that is, sort out why it doesn't work in this case
+			page.bind( "pagehide.remove", callback || function(/* e */) {
+				var $this = $( this ),
+					prEvent = new $.Event( "pageremove" );
+
+				$this.trigger( prEvent );
+
+				if ( !prEvent.isDefaultPrevented() ) {
+					$this.removeWithDependents();
+				}
+			});
+		}
+	},
+
+	_setOptions: function( o ) {
+		if ( o.theme !== undefined ) {
+			this.element.removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + o.theme );
+		}
+
+		if ( o.contentTheme !== undefined ) {
+			this.element.find( "[data-" + $.mobile.ns + "='content']" ).removeClass( "ui-body-" + this.options.contentTheme )
+				.addClass( "ui-body-" + o.contentTheme );
+		}
 	},
 
 	_handlePageBeforeShow: function(/* e */) {
@@ -45,7 +123,22 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	removeContainerBackground: function() {
-		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element.parent() ) );
+		var classes = ( $.mobile.pageContainer.attr( "class" ) || "" ).split( " " ),
+			overlayTheme = null,
+			matches;
+
+		while ( classes.length > 0 ) {
+			overlayTheme = classes.pop();
+			matches = ( new RegExp( "^ui-overlay-([a-z])$" ) ).exec( overlayTheme );
+			if ( matches && matches.length > 1 ) {
+				overlayTheme = matches[ 1 ];
+				break;
+			} else {
+				overlayTheme = null;
+			}
+		}
+
+		$.mobile.pageContainer.removeClass( "ui-overlay-" + overlayTheme );
 	},
 
 	// set the page container background to the page theme

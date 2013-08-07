@@ -4,303 +4,222 @@
 
 // TODO split out into seperate test files
 (function( $ ){
+	function testExpandCollapseAndOptions( selector ) {
+		var collapsible = $( selector );
+		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed");
+		$( selector + " >:header a" ).first().click();
+		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), false, selector + " should be expanded after click");
+		$( selector + " >:header a" ).first().click();
+		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed");
+
+		collapsible.collapsible( "option", "inset", false );
+		deepEqual( collapsible.hasClass( "ui-corner-all" ), false, "After turning off the 'inset' option, the collapsible does not have the ui-corner-all class." );
+		deepEqual( collapsible.hasClass( "ui-collapsible-inset" ), false, "After turning off the 'inset' option, the collapsible does not have the ui-collapsible-inset class." );
+
+		collapsible.collapsible( "option", { inset: true, corners: false } );
+		deepEqual( collapsible.hasClass( "ui-corner-all" ), false, "After turning on the 'inset' option and turning off the 'corners' option the collapsible does not have the ui-corner-all class." );
+		deepEqual( collapsible.hasClass( "ui-collapsible-inset" ), true, "After turning on the 'inset' option and turning off the 'corners' option the collapsible has the ui-collapsible-inset class." );
+	}
+
 	module( "Collapsible section", {});
 
-	asyncTest( "The page should be enhanced correctly", function(){
-		expect( 5 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#basic-collapsible-test" ) );
-			},
-
-			function() {
-				var $page = $( "#basic-collapsible-test" );
-				ok($page.find( ".ui-content >:eq(0)" ).hasClass( "ui-collapsible" ), ".ui-collapsible class added to collapsible elements" );
-				ok($page.find( ".ui-content >:eq(0) >:header" ).hasClass( "ui-collapsible-heading" ), ".ui-collapsible-heading class added to collapsible heading" );
-				ok($page.find( ".ui-content >:eq(0) > div" ).hasClass( "ui-collapsible-content" ), ".ui-collapsible-content class added to collapsible content" );
-				ok($page.find( ".ui-content >:eq(0)" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed added to collapsed elements" );
-				ok(!$page.find( ".ui-content >:eq(1)" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed not added to expanded elements" );
-				start();
-			}
-		]);
+	test( "The page should be enhanced correctly", function(){
+		ok($( "#collapsed-collapsible" ).hasClass( "ui-collapsible" ), ".ui-collapsible class added to collapsible elements" );
+		ok($( "#collapsed-collapsible >:header" ).hasClass( "ui-collapsible-heading" ), ".ui-collapsible-heading class added to collapsible heading" );
+		ok($( "#collapsed-collapsible > div" ).hasClass( "ui-collapsible-content" ), ".ui-collapsible-content class added to collapsible content" );
+		ok($( "#collapsed-collapsible" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed added to collapsed elements" );
+		ok(!$( "#expanded-collapsible" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed not added to expanded elements" );
 	});
 
-	asyncTest( "Expand/Collapse", function(){
-		expect( 3 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#basic-collapsible-test" ) );
-			},
+	test( "Expand/Collapse", function(){
+		testExpandCollapseAndOptions( "#collapsed-collapsible" );
+	});
 
-			function() {
-				ok($( "#basic-collapsible-test .ui-collapsible" ).eq(0).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be collapsed");
-				$( "#basic-collapsible-test .ui-collapsible-heading-toggle" ).eq(0).click();
-				ok(!$( "#basic-collapsible-test .ui-collapsible" ).eq(0).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be expanded after click");
-				$( "#basic-collapsible-test .ui-collapsible-heading-toggle" ).eq(0).click();
-				ok($( "#basic-collapsible-test .ui-collapsible" ).eq(0).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be collapsed");
-				start();
-			}
-		]);
+	test( "Expand/Collapse pre-rendered", function(){
+		testExpandCollapseAndOptions( "#pre-rendered-collapsible" );
 	});
 
 	module( "Collapsible set", {});
 
-	asyncTest( "The page should be enhanced correctly", function(){
-		var nTests = 2;
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
-			},
+	test( "The page should be enhanced correctly", function(){
+		ok($( "#basic-collapsible-set" ).hasClass( "ui-collapsible-set" ), ".ui-collapsible-set class added to collapsible set" );
+		ok($( "#basic-collapsible-set > div" ).hasClass( "ui-collapsible" ), ".ui-collapsible class added to collapsible elements" );
+		$( ".ui-collapsible-set" ).each(function() {
+			var $this = $( this );
 
-			function() {
-				var $page = $( "#basic-collapsible-set-test" );
-
-				ok($page.find( ".ui-content >:eq(0)" ).hasClass( "ui-collapsible-set" ), ".ui-collapsible-set class added to collapsible set" );
-				ok($page.find( ".ui-content >:eq(0) > div" ).hasClass( "ui-collapsible" ), ".ui-collapsible class added to collapsible elements" );
-				$page.find( ".ui-collapsible-set" ).each(function() {
-					var $this = $( this );
-					nTests += 2;
-					ok($this.find( ".ui-collapsible" ).first().hasClass( "ui-first-child" ), "First collapsible header button should have class ui-first-child" );
-					ok($this.find( ".ui-collapsible" ).last().hasClass( "ui-last-child" ), "Last collapsible header button should have class ui-last-child" );
-				});
-
-				expect( nTests );
-				start();
+			if ( $this.children().length > 0 ) {
+				ok($this.find( ".ui-collapsible" ).first().hasClass( "ui-first-child" ), $this.attr( "id" ) + ": First collapsible header button should have class ui-first-child" );
+				ok($this.find( ".ui-collapsible" ).last().hasClass( "ui-last-child" ), $this.attr( "id" ) + ": Last collapsible header button should have class ui-last-child" );
 			}
-		]);
+		});
 	});
 
-	asyncTest( "Collapsible set with only one collapsible", function() {
-		var nTests = 0;
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-lonely-collapsible-test" ) );
-			},
+	test( "Option setting works correctly", function() {
+		var set = $( "#collapsible-options-test" ),
+			secondChild = set.children( ":nth(1)" ),
+			anchors = set.find( "a" ),
+			nMatching;
 
-			function() {
-				var $page = $( "#collapsible-set-with-lonely-collapsible-test" );
-				$page.find( ".ui-collapsible-set" ).each(function() {
-					var $this = $( this );
-					nTests += 2;
-					ok($this.find( ".ui-collapsible" ).first().hasClass( "ui-first-child" ), "First collapsible header button should have class ui-first-child" );
-					ok($this.find( ".ui-collapsible" ).last().hasClass( "ui-last-child" ), "Last collapsible header button should have class ui-last-child" );
-				});
-
-				expect( nTests );
-				start();
+		set.collapsibleset( "option", "mini", true );
+		nMatching = 0;
+		anchors.each( function() {
+			if ( $( this ).hasClass( "ui-mini" ) ) {
+				nMatching++;
 			}
-		]);
+		});
+		deepEqual( nMatching, 3, "After setting mini on the set, all three collapsibles are mini" );
+
+		secondChild.collapsible( "option", "mini", false );
+		nMatching = 0;
+		anchors.each( function() {
+			if ( $( this ).hasClass( "ui-mini" ) ) {
+				nMatching++;
+			}
+		});
+		deepEqual( nMatching, 2, "After turning off mini on the second child, only two collapsibles are mini" );
+
+		set.collapsibleset( "option", "mini", false );
+		nMatching = 0;
+		anchors.each( function() {
+			if ( $( this ).hasClass( "ui-mini" ) ) {
+				nMatching++;
+			}
+		});
+		deepEqual( nMatching, 0, "After unsetting mini on the set, no collapsibles are mini" );
+
+		set.collapsibleset( "option", "mini", true );
+		nMatching = 0;
+		anchors.each( function() {
+			if ( $( this ).hasClass( "ui-mini" ) ) {
+				nMatching++;
+			}
+		});
+		deepEqual( nMatching, 2, "After setting mini on the set again, only two collapsibles are mini" );
 	});
 
-	asyncTest( "Section expanded by default", function(){
-		expect( 2 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
-			},
-
-			function() {
-				equal($( "#basic-collapsible-set-test .ui-content >:eq(0) .ui-collapsible-collapsed" ).length, 2, "There should be 2 section collapsed" );
-				ok(!$( "#basic-collapsible-set-test .ui-content >:eq(0) >:eq(1)" ).hasClass( "ui-collapsible-collapsed" ), "Section B should be expanded" );
-				start();
-			}
-		]);
+	test( "Section expanded by default", function(){
+		equal($( "#basic-collapsible-set .ui-collapsible-collapsed" ).length, 2, "There should be 2 section collapsed" );
+		ok(!$( "#basic-collapsible-set >:eq(1)" ).hasClass( "ui-collapsible-collapsed" ), "Section B should be expanded" );
 	});
 
-	asyncTest( "Expand/Collapse", function(){
-		expect( 3 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#basic-collapsible-set-test" ) );
-			},
-
-			function() {
-				ok($( "#basic-collapsible-set-test .ui-collapsible" ).eq(0).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be collapsed");
-				$( "#basic-collapsible-set-test .ui-collapsible-heading-toggle" ).eq(0).click();
-				ok(!$( "#basic-collapsible-set-test .ui-collapsible" ).eq(0).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be expanded after click");
-				$( "#basic-collapsible-set-test .ui-collapsible-heading-toggle" ).eq(0).click();
-				ok($( "#basic-collapsible-set-test .ui-collapsible" ).hasClass( "ui-collapsible-collapsed" ), "All collapsible should be collapsed");
-				start();
-			}
-		]);
+	test( "Expand/Collapse", function(){
+		ok($( "#basic-collapsible-set .ui-collapsible" ).eq(0).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be collapsed");
+		$( "#basic-collapsible-set .ui-collapsible-heading-toggle" ).eq(0).click();
+		ok(!$( "#basic-collapsible-set .ui-collapsible" ).eq(0).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be expanded after click");
+		$( "#basic-collapsible-set .ui-collapsible-heading-toggle" ).eq(0).click();
+		ok($( "#basic-collapsible-set .ui-collapsible" ).hasClass( "ui-collapsible-collapsed" ), "All collapsible should be collapsed");
 	});
 
-	asyncTest( "Collapsible Set with dynamic content", function(){
-		expect( 7 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-dynamic-content" ) );
-			},
+	test( "Collapsible Set with dynamic content", function(){
+		var set = $( "#dynamic-content" );
 
-			function() {
-				var set = $( ".ui-page-active" ).find( ".ui-collapsible-set" );
-				for ( var i = 0; i < 3; i++ ) {
-					$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
-				}
-				set.collapsibleset( "refresh" );
-				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
-				ok( set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-first-child" ), "The 1st collapsible should have top corners" );
-				ok( !set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-last-child" ), "The 1st collapsible should NOT have bottom corners" );
-				ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-first-child" ), "The 2nd collapsible should NOT have top corners" );
-				ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-last-child" ), "The 2nd collapsible should NOT have bottom corners" );
-				ok( set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-last-child" ), "The 3rd collapsible should have bottom corners" );
-				ok( !set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-first-child" ), "The 3rd collapsible should NOT have top corners" );
-				start();
-			}
-		]);
+		for ( var i = 0; i < 3; i++ ) {
+			$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
+		}
+		set.collapsibleset( "refresh" );
+		equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
+		ok( set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-first-child" ), "The 1st collapsible should have top corners" );
+		ok( !set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-last-child" ), "The 1st collapsible should NOT have bottom corners" );
+		ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-first-child" ), "The 2nd collapsible should NOT have top corners" );
+		ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-last-child" ), "The 2nd collapsible should NOT have bottom corners" );
+		ok( set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-last-child" ), "The 3rd collapsible should have bottom corners" );
+		ok( !set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-first-child" ), "The 3rd collapsible should NOT have top corners" );
 	});
 
-	asyncTest( "Collapsible Set with static and dynamic content", function(){
-		expect( 7 );
-		$.testHelper.pageSequence([
-			function(){
-  				$.mobile.changePage( $( "#collapsible-set-with-static-and-dynamic-content" ) );
-  			},
+	test( "Collapsible Set with static and dynamic content", function(){
+		var set = $( "#static-and-dynamic" );
 
-  			function() {
-  				var set = $( ".ui-page-active" ).find( ".ui-collapsible-set" );
-  				for ( var i = 0; i < 2; i++ ) {
-  					$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
-  				}
-  				set.collapsibleset( "refresh" );
-  				equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
-  				ok( set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-first-child" ), "The 1st collapsible should have top corners" );
-  				ok( !set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-last-child" ), "The 1st collapsible should NOT have bottom corners" );
-  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-first-child" ), "The 2nd collapsible should NOT have top corners" );
-  				ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-last-child" ), "The 2nd collapsible should NOT have bottom corners" );
-  				ok( set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-last-child" ), "The 3rd collapsible should have bottom corners" );
-  				ok( !set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-first-child" ), "The 3rd collapsible should NOT have top corners" );
-  				start();
-  			}
-  		]);
-  	});
-
-	asyncTest( "Collapsible set with last collapsible expanded", function(){
-		expect( 1 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-last-collapsible-expanded" ) );
-			},
-
-			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.last().hasClass( "ui-last-child" ), "Content of last collapsible should have class ui-last-child");
-				start();
-			}
-		]);
+		for ( var i = 0; i < 2; i++ ) {
+			$( '<div data-'+ $.mobile.ns +'role="collapsible"><h3>Collapsible Item ' + i + '</h3></div>' ).appendTo( set );
+		}
+		set.collapsibleset( "refresh" );
+		equal( set.find( ".ui-collapsible" ).length, 3, "The 3 collapsibles should be enhanced" );
+		ok( set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-first-child" ), "The 1st collapsible should have top corners" );
+		ok( !set.find( ".ui-collapsible" ).eq( 0 ).hasClass( "ui-last-child" ), "The 1st collapsible should NOT have bottom corners" );
+		ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-first-child" ), "The 2nd collapsible should NOT have top corners" );
+		ok( !set.find( ".ui-collapsible" ).eq( 1 ).hasClass( "ui-last-child" ), "The 2nd collapsible should NOT have bottom corners" );
+		ok( set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-last-child" ), "The 3rd collapsible should have bottom corners" );
+		ok( !set.find( ".ui-collapsible" ).eq( 2 ).hasClass( "ui-first-child" ), "The 3rd collapsible should NOT have top corners" );
 	});
 
-	asyncTest( "Collapsible Set", function(){
-		expect( 3 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-legends" ) );
-			},
+	test( "Collapsible set with last collapsible expanded", function(){
+		ok( $( "#last-collapsible-expanded .ui-collapsible" ).last().hasClass( "ui-last-child" ), "Content of last collapsible should have class ui-last-child");
+	});
 
-			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible-heading" );
-				ok( !collapsibles.eq(0).is( ".ui-first-child" ), "First collapsible should NOT have class ui-last-child");
-				ok( !collapsibles.eq(1).is( ".ui-last-child,.ui-first-child" ), "Middle collapsible should NOT have class ui-first-child or ui-last-child");
-				ok( !collapsibles.eq(2).is( ".ui-first-child" ), "Last collapsible should NOT have class ui-first-child");
-				start();
-			}
-		]);
+	test( "Collapsible set with legend", function(){
+		var collapsibles = $( "#legend-based" ).find( ".ui-collapsible-heading" );
+
+		ok( !collapsibles.eq(0).is( ".ui-first-child" ), "First collapsible should NOT have class ui-last-child");
+		ok( !collapsibles.eq(1).is( ".ui-last-child,.ui-first-child" ), "Middle collapsible should NOT have class ui-first-child or ui-last-child");
+		ok( !collapsibles.eq(2).is( ".ui-first-child" ), "Last collapsible should NOT have class ui-first-child");
 	});
 	
 	module( "Icons", {});
 
-	asyncTest( "Collapsible with custom icons", function(){
-		expect( 6 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#collapsible-with-custom-icons" ) );
-			},
+	test( "Collapsible with custom icons", function(){
+		var collapsibles = $( "#collapsible-with-custom-icons" ).find( ".ui-collapsible" );
 
-			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-icon" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
-				ok( collapsibles.eq(1).find( ".ui-icon" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
-				ok( collapsibles.eq(2).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
-				ok( collapsibles.eq(3).find( ".ui-icon" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d");
+		ok( collapsibles.eq(0).find( ".ui-btn" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
+		ok( collapsibles.eq(1).find( ".ui-btn" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
+		ok( collapsibles.eq(2).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
+		ok( collapsibles.eq(3).find( ".ui-btn" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d");
 
-				// issue #4801: BEGIN
-				ok( collapsibles.eq(4).find( ".ui-icon" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should have class ui-icon-info");
-				collapsibles.eq( 4 ).trigger( "expand" );
-				ok( collapsibles.eq(4).find( ".ui-icon" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should STILL have class ui-icon-info after click");
-				// issue #4801: END
-				start();
-			}
-		]);
+		// issue #4801: BEGIN
+		ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should have class ui-icon-info");
+		collapsibles.eq( 4 ).trigger( "expand" );
+		ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should STILL have class ui-icon-info after click");
+		// issue #4801: END
 	});
 
-	asyncTest( "Collapsible sets with custom icons", function(){
-		expect( 6 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-custom-icons" ) );
-			},
+	test( "Collapsible sets with custom icons", function(){
+		var collapsibles = $( "#collapsible-set-with-custom-icons" ).find( ".ui-collapsible" );
 
-			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-icon" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
-				ok( collapsibles.eq(1).find( ".ui-icon" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
-				ok( collapsibles.eq(2).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
-				ok( collapsibles.eq(3).find( ".ui-icon" ).hasClass( "ui-icon-arrow-r" ), "Heading of fourth collapsible should have class ui-icon-arrow-r");
-				ok( collapsibles.eq(4).find( ".ui-icon" ).hasClass( "ui-icon-arrow-l" ), "Heading of fifth collapsible should have class ui-icon-arrow-l");
-				ok( collapsibles.eq(5).find( ".ui-icon" ).hasClass( "ui-icon-arrow-u" ), "Heading of sixth collapsible should have class ui-icon-arrow-u");
-				start();
-			}
-		]);
+		ok( collapsibles.eq(0).find( ".ui-btn" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
+		ok( collapsibles.eq(1).find( ".ui-btn" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
+		ok( collapsibles.eq(2).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
+		ok( collapsibles.eq(3).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of fourth collapsible should have class ui-icon-arrow-r");
+		ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-arrow-l" ), "Heading of fifth collapsible should have class ui-icon-arrow-l");
+		ok( collapsibles.eq(5).find( ".ui-btn" ).hasClass( "ui-icon-arrow-u" ), "Heading of sixth collapsible should have class ui-icon-arrow-u");
 	});
 
 	module( "Theming", {});
 
-	asyncTest( "Collapsible", 6, function(){
-		expect( 6 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#collapsible-with-theming" ) );
-			},
+	test( "Collapsible", 6, function(){
+		var collapsibles = $( "#collapsible-with-theming" ).find( ".ui-collapsible" );
 
-			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-a" ), "Heading of first collapsible should have class ui-btn-up-a");
-				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-up-a" ), "Content of first collapsible should NOT have class ui-btn-up-a");
-				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-b" ), "Heading of second collapsible should have class ui-btn-up-b");
-				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-btn-up-b");
-				ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-c" ), "Heading of third collapsible should have class ui-btn-up-c");
-				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-c" ), "Content of third collapsible should have class ui-btn-up-c");
-				start();
-			}
-		]);
+		ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-a" ), "Heading of first collapsible should have class ui-btn-a");
+		ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-a" ), "Content of first collapsible should NOT have class ui-btn-a");
+		ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-b" ), "Heading of second collapsible should have class ui-btn-b");
+		ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-body-b");
+		ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-c" ), "Heading of third collapsible should have class ui-btn-c");
+		ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-c" ), "Content of third collapsible should have class ui-body-c");
 	});
 
+	test( "Collapsible Set", function(){
+		var collapsibles = $( "#collapsible-set-with-theming" ).find( ".ui-collapsible" );
 
-	asyncTest( "Collapsible Set", function(){
-		expect( 13 );
-		$.testHelper.pageSequence([
-			function(){
-				$.mobile.changePage( $( "#collapsible-set-with-theming" ) );
-			},
-
-			function() {
-				var collapsibles = $.mobile.activePage.find( ".ui-collapsible" );
-				ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-a" ), "Heading of first collapsible should have class ui-btn-up-a");
-				ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of first collapsible should NOT have class ui-btn-up-[a,b,c]");
-				ok( collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of first collapsible should NOT have class ui-btn-up-d");
-				ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-b" ), "Heading of second collapsible should have class ui-btn-up-b");
-				ok( !collapsibles.eq(1).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-c,.ui-body-d" ), "Content of second collapsible should NOT have class ui-btn-up-[a,c,d]");
-				ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-btn-up-b");
-				ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-d" ), "Heading of third collapsible should have class ui-btn-up-d");
-				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of third collapsible should NOT have class ui-btn-up-[a,b,c]");
-				ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of third collapsible should have class ui-btn-up-d");
-				ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-collapsible-content-collapsed" ), "Content of third collapsible should NOT have class ui-collapsible-content-collapsed");
-				ok( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-up-d" ), "Heading of fourth collapsible should have class ui-btn-up-d");
-				ok( !collapsibles.eq(3).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of fourth collapsible should NOT have class ui-btn-up-[a,b,c]");
-				ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of fourth collapsible should have class ui-btn-up-d");
-				start();
-			}
-		]);
+		ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-a" ), "Heading of first collapsible should have class ui-btn-a" );
+		ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of first collapsible should NOT have class ui-body-[a,b,c]" );
+		ok( collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of first collapsible should NOT have class ui-body-d" );
+		ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-b" ), "Heading of second collapsible should have class ui-btn-b" );
+		ok( !collapsibles.eq(1).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-c,.ui-body-d" ), "Content of second collapsible should NOT have class ui-body-[a,c,d]" );
+		ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-body-b" );
+		deepEqual( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+		ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of third collapsible should NOT have class ui-body-[a,b,c]" );
+		ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of third collapsible should have class ui-body-d" );
+		ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-collapsible-content-collapsed" ), "Content of third collapsible should NOT have class ui-collapsible-content-collapsed" );
+		deepEqual( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+		ok( !collapsibles.eq(3).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of fourth collapsible should NOT have class ui-body-[a,b,c]" );
+		ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of fourth collapsible should have class ui-body-d" );
 	});
-	
+
+	module( "Instantiation/destruction" );
+
+	test( "Collapsible and collapsible set _destroy() works", function() {
+		var $inplace = $( "#destroy-test" ).children().attr( "data-" + $.mobile.ns + "role", "collapsible" ).end(),
+			$orig = $inplace.clone();
+
+		$inplace.collapsibleset().collapsibleset( "destroy" );
+		ok( $.testHelper.domEqual( $inplace, $orig ), "Collapsible set after instantiation and destruction is identical to a clone of the original." );
+	});
 })( jQuery );

@@ -15,6 +15,14 @@
 	top: 0;
 	padding-top: 0;
 }
+.ui-header-fixed .ui-btn-left,
+.ui-header-fixed .ui-btn-right {
+	margin-top: 1px;
+}
+.ui-header-fixed.ui-fixed-hidden .ui-btn-left,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-right {
+	margin-top: 0;
+}
 .ui-footer-fixed {
 	bottom: -1px;
 	padding-bottom: 1px;
@@ -28,11 +36,12 @@
 	filter: Alpha(Opacity=90);
 	opacity: .9;
 }
+/* updatePagePadding() will update the padding to actual height of header and footer. */
 .ui-page-header-fixed {
-	padding-top: 2.6875em;
+	padding-top: 2.8125em;
 }
 .ui-page-footer-fixed {
-	padding-bottom: 2.6875em;
+	padding-bottom: 2.8125em;
 }
 .ui-page-header-fullscreen > .ui-content,
 .ui-page-footer-fullscreen > .ui-content {
@@ -43,7 +52,11 @@
 }
 .ui-page-header-fullscreen .ui-fixed-hidden,
 .ui-page-footer-fullscreen .ui-fixed-hidden {
-	left: -9999px;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px,1px,1px,1px);
 }
 .ui-header-fixed .ui-btn,
 .ui-footer-fixed .ui-btn { 
