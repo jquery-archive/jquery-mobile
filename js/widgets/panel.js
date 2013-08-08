@@ -45,13 +45,13 @@ $.widget( "mobile.panel", {
 	_fixedToolbars: null,
 
 	_create: function() {
-		var $el = this.element,
-			parentPage = $el.closest( ":jqmData(role='page')" );
+		var el = this.element,
+			parentPage = el.closest( ":jqmData(role='page')" );
 
 		// expose some private props to other methods
 		$.extend( this, {
-			_panelID: $el.attr( "id" ),
-			_closeLink: $el.find( ":jqmData(rel='close')" ),
+			_panelID: el.attr( "id" ),
+			_closeLink: el.find( ":jqmData(rel='close')" ),
 			_parentPage: ( parentPage.length > 0 ) ? parentPage : false,
 			_page: this._getPage,
 			_overlayTheme: this._getOverlayTheme,
@@ -81,20 +81,20 @@ $.widget( "mobile.panel", {
 	
 	_getOverlayTheme: function() {
 		// Overlay theme on page container is the same as the page theme
-		var $overlayTheme = $.data( $.mobile.activePage[ 0 ], "mobile-page" ).options.theme,
-			$overlayThemeClass = "ui-overlay-" + $overlayTheme;
+		var overlayTheme = $.data( $.mobile.activePage[ 0 ], "mobile-page" ).options.theme,
+			overlayThemeClass = "ui-overlay-" + overlayTheme;
 
-		return $overlayThemeClass;
+		return overlayThemeClass;
 	},
 	
 	_getPanelInner: function() {
-		var $panelInner = this.element.find( "." + this.options.classes.panelInner );
+		var panelInner = this.element.find( "." + this.options.classes.panelInner );
 		
-		if ( $panelInner.length === 0 ) {
-			$panelInner = this.element.children().wrapAll( "<div class='" + this.options.classes.panelInner + "' />" ).parent();
+		if ( panelInner.length === 0 ) {
+			panelInner = this.element.children().wrapAll( "<div class='" + this.options.classes.panelInner + "' />" ).parent();
 		}
 		
-		return $panelInner;
+		return panelInner;
 	},
 	
 	_createModal: function() {
@@ -115,24 +115,24 @@ $.widget( "mobile.panel", {
 	},
 	
 	_getWrapper: function() {
-		var $wrapper = this._page().find( "." + this.options.classes.pageWrapper ),
+		var wrapper = this._page().find( "." + this.options.classes.pageWrapper ),
 			animateClass = ( $.support.cssTransform3d && !!this.options.animate ) ? " " + this.options.classes.animate : "";
 
-		if ( $wrapper.length === 0 ) {
-			$wrapper = this._page().children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" )
+		if ( wrapper.length === 0 ) {
+			wrapper = this._page().children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" )
 				.wrapAll( "<div class='" + this.options.classes.pageWrapper + animateClass + "' /></div>" )
 				.parent();
 		}
 
-		return $wrapper;
+		return wrapper;
 	},
 	
 	_getFixedToolbars: function() {
-		var $extFixedToolbars = $( "body" ).children( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ),
-			$intFixedToolbars = this._page().find( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ),
-			$fixedToolbars = $extFixedToolbars.add( $intFixedToolbars ).addClass( this.options.classes.pageFixedToolbar );
+		var extFixedToolbars = $( "body" ).children( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ),
+			intFixedToolbars = this._page().find( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ),
+			fixedToolbars = extFixedToolbars.add( intFixedToolbars ).addClass( this.options.classes.pageFixedToolbar );
 
-		return $fixedToolbars;
+		return fixedToolbars;
 	},
 
 	_getPosDisplayClasses: function( prefix ) {
@@ -222,11 +222,11 @@ $.widget( "mobile.panel", {
 		$.mobile.document.on( "click.panel" , "a", function( e ) {
 			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
 				e.preventDefault();
-				var $link = $( this );
-				if ( ! $link.hasClass( "ui-link" ) ) {
-					$link.addClass( $.mobile.activeBtnClass );
+				var link = $( this );
+				if ( !link.hasClass( "ui-link" ) ) {
+					link.addClass( $.mobile.activeBtnClass );
 					self.element.one( "panelopen panelclose", function() {
-						$link.removeClass( $.mobile.activeBtnClass );
+						link.removeClass( $.mobile.activeBtnClass );
 					});
 				}
 				self.toggle();
