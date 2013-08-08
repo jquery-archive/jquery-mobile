@@ -1,0 +1,39 @@
+@import url("jquery.mobile.transition.slidein.keyframes.css");
+@import url("jquery.mobile.transition.slideout.keyframes.css");
+@import url("jquery.mobile.transition.cover.keyframes.css");
+
+.coverright.out, .coverright.in {
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-timing-function: ease-out;
+	-moz-animation-duration: 350ms;
+	animation-timing-function: ease-out;
+	animation-duration: 350ms;
+}
+
+.coverright.out, .coverright.in.reverse {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: coverstay;
+	-moz-transform: translateX(0);
+	-moz-animation-name: coverstay;
+	transform: translateX(0);
+	animation-name: coverstay;
+}
+
+.coverright.in {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: slideinfromleft;
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromleft;
+	transform: translateX(0);
+	animation-name: slideinfromleft;
+}
+
+.coverright.out.reverse {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: slideouttoleft;
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideouttoleft;
+	transform: translateX(0);
+	animation-name: slideouttoleft;
+}

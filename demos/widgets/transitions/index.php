@@ -87,6 +87,16 @@
 					<td><a href="page-transitions-page.php" data-role="button" data-transition="slidedown" data-inline="true">page</a></td>
 				</tr>
 				<tr>
+					<th><h3>coverright</h3></th>
+					<td><a href="page-transitions-dialog.php" data-role="button" data-rel="dialog" data-transition="coverright" data-inline="true">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-role="button" data-transition="coverright" data-inline="true">page</a></td>
+				</tr>
+				<tr>
+					<th><h3>coverleft</h3></th>
+					<td><a href="page-transitions-dialog.php" data-role="button" data-rel="dialog" data-transition="coverleft" data-inline="true">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-role="button" data-transition="coverleft" data-inline="true">page</a></td>
+				</tr>
+				<tr>
 					<th><h3>none</h3></th>
 					<td><a href="page-transitions-dialog.php" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">dialog</a></td>
 					<td><a href="page-transitions-page.php" data-role="button" data-transition="none" data-inline="true">page</a></td>

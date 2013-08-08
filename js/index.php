@@ -42,6 +42,8 @@ $files = array(
 	'transitions/visuals/flip.js',
 	'transitions/visuals/flow.js',
 	'transitions/visuals/turn.js',
+	'transitions/visuals/coverright.js',
+	'transitions/visuals/coverleft.js',
 	'jquery.mobile.degradeInputs.js',
 	'widgets/optionDemultiplexer.js',
 	'widgets/dialog.js',
