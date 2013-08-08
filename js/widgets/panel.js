@@ -219,7 +219,7 @@ $.widget( "mobile.panel", {
 	_bindLinkListeners: function() {
 		var self = this;
 
-		$.mobile.document.on( "click.panel" , "a", function( e ) {
+		$.mobile.document.on( "click.panel", "a", function( e ) {
 			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
 				e.preventDefault();
 				var link = $( this );
@@ -488,6 +488,11 @@ $.widget( "mobile.panel", {
 			.off( this._transitionEndEvents )
 			.removeClass( [ this.options.classes.panelUnfixed, this.options.classes.panelClosed, this.options.classes.panelOpen ].join( " " ) );
 		$.mobile.document.off( this._transitionEndEvents );
+		
+		if ( !multiplePanels ) {
+			$.mobile.document.off( "click.panel", "a" );
+		}
+		
 	}
 });
 
