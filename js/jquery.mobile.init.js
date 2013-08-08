@@ -98,15 +98,17 @@ define([
 			//remove initial build class (only present on first pageshow)
 			hideRenderingClass();
 
-			// if hashchange listening is disabled, there's no hash deeplink,
+			// if dynamic initial page is disabled, hashchange listening is disabled, there's no hash deeplink,
 			// the hash is not valid (contains more than one # or does not start with #)
 			// or there is no page with that hash, change to the first page in the DOM
 			// Remember, however, that the hash can also be a path!
-			if ( ! ( $.mobile.hashListeningEnabled &&
-				$.mobile.path.isHashValid( location.hash ) &&
-				( $( hashPage ).is( ":jqmData(role='page')" ) ||
-					$.mobile.path.isPath( hash ) ||
-					hash === $.mobile.dialogHashKey ) ) ) {
+			if ( ( ! $.mobile.dynamicInitialPage ) &&
+				( ! ( $.mobile.hashListeningEnabled &&
+					!$.mobile.dynamicInitialPage &&
+					$.mobile.path.isHashValid( location.hash ) &&
+					( $( hashPage ).is( ":jqmData(role='page')" ) ||
+						$.mobile.path.isPath( hash ) ||
+						hash === $.mobile.dialogHashKey ) ) ) ) {
 
 				// Store the initial destination
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
