@@ -3703,9 +3703,11 @@ var createHandler = function( sequential ) {
 					$to.animationComplete( doneIn );
 				}
 
-				$to
-					.removeClass( toPreClass )
-					.addClass( name + " in" + reverseClass );
+				setTimeout(function() {
+					$to
+						.removeClass( toPreClass )
+						.addClass( name + " in" + reverseClass );
+				},1);		
 
 				if ( none ) {
 					doneIn();
