@@ -9,12 +9,13 @@ define( [ "jquery",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.widget",
 	"./textinput",
-	"../optionDemultiplexer",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.slider", $.extend( {
+	initSelector: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')",
+
 	widgetEventPrefix: "slide",
 
 	options: {
@@ -57,7 +58,7 @@ $.widget( "mobile.slider", $.extend( {
 			wrapper,
 			j, length,
 			i, optionsCount, origTabIndex,
-			side, activeClass, sliderLabel, sliderImg;
+			side, activeClass, sliderImg;
 
 		$label.attr( "id", labelID );
 		this.isToggleSwitch = isToggleSwitch;
@@ -124,7 +125,6 @@ $.widget( "mobile.slider", $.extend( {
 			for ( i = 0, optionsCount = options.length; i < optionsCount; i++ ) {
 				side = !i ? "b" : "a";
 				activeClass = !i ? "" : " " + $.mobile.activeBtnClass;
-				sliderLabel = document.createElement( "div" );
 				sliderImg = document.createElement( "span" );
 
 				sliderImg.className = [ "ui-slider-label ui-slider-label-", side, activeClass ].join( "" );
@@ -176,6 +176,33 @@ $.widget( "mobile.slider", $.extend( {
 		this._handleFormReset();
 
 		this.refresh( undefined, undefined, true );
+	},
+
+	_setOptions: function( options ) {
+		if ( options.theme !== undefined ) {
+			this._setTheme( options.theme );
+		}
+
+		if ( options.trackTheme !== undefined ) {
+			this._setTrackTheme( options.trackTheme );
+		}
+
+		if ( options.corners !== undefined ) {
+			this._setCorners( options.corners );
+		}
+
+		if ( options.mini !== undefined ) {
+			this._setMini( options.mini );
+		}
+
+		if ( options.highlight !== undefined ) {
+			this._setHighlight( options.highlight );
+		}
+
+		if ( options.disabled !== undefined ) {
+			this._setDisabled( options.disabled );
+		}
+		this._super( options );
 	},
 
 	_controlChange: function( event ) {
@@ -558,12 +585,7 @@ $.widget( "mobile.slider", $.extend( {
 		this.slider.toggleClass( "ui-disabled", value ).attr( "aria-disabled", value );
 	}
 
-}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
-
-$.mobile.slider.initSelector = "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.slider" );
+}, $.mobile.behaviors.formReset ) );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

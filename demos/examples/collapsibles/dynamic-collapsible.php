@@ -23,11 +23,11 @@
 			});
 
 			$("#expand").click(function() {
-				$("#set").children(":last").trigger( "expand" );
+				$("#set").children(":last").collapsible( "expand" );
 			});
 
 			$("#collapse").click(function() {
-				$("#set").children(":last").trigger( "collapse" );
+				$("#set").children(":last").collapsible( "collapse" );
 			});
 		});
 	</script>
@@ -53,7 +53,7 @@
             <button type="button" data-icon="plus" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="expand">Expand last</button>
             <button type="button" data-icon="minus" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="collapse">Collapse last</button>
 
-            <div data-role="collapsible-set" data-content-theme="d" id="set">
+            <div data-role="collapsible-set" data-content-theme="a" data-iconpos="right" id="set">
                 <div data-role="collapsible" id="set1" data-collapsed="true">
                     <h3>Section 1</h3>
                     <p>I'm the collapsible content.</p>

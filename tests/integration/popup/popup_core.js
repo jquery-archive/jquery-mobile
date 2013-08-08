@@ -62,6 +62,47 @@
 		}
 	});
 
+	asyncTest( "Popup emits popupafterclose exactly once", function() {
+		var eventNs = ".doubleClose",
+			popup = $( "#double-close" ),
+			link = $( "#open-double-close" );
+
+		expect( 2 );
+
+		$.testHelper.detailedEventCascade([
+			function() {
+				link.click();
+			},
+
+			{
+				popupafteropen: { src: popup, event: "popupafteropen" + eventNs + "1" }
+			},
+
+			function() {
+				var outerTimeout = setTimeout( function() {
+					ok( false, "The popup did not emit a single 'popupafterclose' event." );
+					start();
+				}, 5000 );
+
+				popup.one( "popupafterclose" + eventNs + "2", function() {
+					var timeoutId = setTimeout( function() {
+						ok( true, "Waiting for a second 'popupafterclose' event has timed out." );
+						start();
+					}, 5000 );
+					clearTimeout( outerTimeout );
+					ok( true, "The popup emitted a 'popupafterclose' event" );
+					popup.one( "popupafterclose" + eventNs + "3", function() {
+						ok( false, "The popup emitted a second 'popupafterclose' event" );
+						clearTimeout( timeoutId );
+						start();
+					});
+				});
+
+				$( "#double-close-screen" ).click();
+			}
+		]);
+	});
+
 	asyncTest( "Popup does not go back in history twice when opening on separate page", function() {
 		var eventNs = ".backTwice", popup = function() { return $( "#back-twice-test-popup" ); };
 		$.testHelper.detailedEventCascade([

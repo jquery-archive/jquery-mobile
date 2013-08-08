@@ -13,21 +13,16 @@
 	});
 
 	test( "button markup text value should be changed on refresh", function() {
-		var textValueButton = $("#text"), valueButton = $("#value");
+		var textValueButton = $("#hidden-element-addition"), valueButton = $("#value");
 
 		// the value shouldn't change unless it's been altered
 		textValueButton.button( 'refresh' );
-		deepEqual( textValueButton.text(), "foo" );
+		deepEqual( textValueButton.val(), "foo" );
 
 		// use the text where it's provided
-		deepEqual( textValueButton.text(), "foo" );
-		textValueButton.text( "bar" ).button( 'refresh' );
-		deepEqual( textValueButton.text(), "bar" );
-
-		// use the val if it's provided where the text isn't
-		deepEqual( valueButton.text(), "foo" );
-		valueButton.empty().val( "bar" ).button( 'refresh' );
-		deepEqual( valueButton.text(), "bar" );
+		deepEqual( textValueButton.val(), "foo" );
+		textValueButton.val( "bar" ).button( 'refresh' );
+		deepEqual( textValueButton.val(), "bar" );
 
 		// prefer the text to the value
 		textValueButton.text( "bar" ).val( "baz" ).button( 'refresh' );
@@ -47,7 +42,6 @@
 		    $htmlval = $( "#val-contains-html" );
 
 		ok( $htmlstring.find("sup").length, "HTML contained within a button element should carry over to the enhanced version" );
-		ok( $htmlval.text().length > 1, "If the text is pulled from a button’s value, anything HTML-like should be disregarded." );
 	});
 
 })( jQuery );

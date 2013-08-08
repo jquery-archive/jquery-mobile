@@ -19,43 +19,69 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
-		var o = this.options;
-
 		this._super();
 
 		// If it's not reflow mode, return here.
-		if( o.mode !== "reflow" ) {
+		if( this.options.mode !== "reflow" ) {
 			return;
 		}
 
-		this.element.addClass( o.classes.reflowTable );
+		if( !this.options.enhanced ) {
+			this.element.addClass( this.options.classes.reflowTable );
+
+			this._updateReflow();
+		}
+	},
+
+	rebuild: function() {
+		this._super();
+
+		if ( this.options.mode === "reflow" ) {
+			this._refresh( false );
+		}
+	},
+
+	_refresh: function( create ) {
+		this._super( create );
+		if ( !create && this.options.mode === "reflow" ) {
+			this._updateReflow( );
+		}
+	},
+
+	_updateReflow: function() {
+		var table = this,
+			opts = this.options;
 
 		// get headers in reverse order so that top-level headers are appended last
-		$( this.allHeaders.get().reverse() ).each( function() {
-			// create the hide/show toggles
-			var $cells = $( this ).jqmData( "cells" ),
-				colstart = $( this ).jqmData( "colstart" ),
-				hierarchyClass = $cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
-				text = $(this).text(),
+		$( table.allHeaders.get().reverse() ).each( function() {
+			var cells = $( this ).jqmData( "cells" ),
+				colstart = $.mobile.getAttribute( this, "colstart", true ),
+				hierarchyClass = cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
+				text = $( this ).text(),
 				iteration, filter;
 
-				if( text !== ""  ) {
+				if ( text !== ""  ) {
 
 					if( hierarchyClass ) {
-						iteration = parseInt( $( this ).attr( "colspan" ), 10 );
+						iteration = parseInt( this.getAttribute( "colspan" ), 10 );
 						filter = "";
 
-						if( iteration ){
+						if ( iteration ){
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 						}
-						$cells.filter( filter ).prepend( "<b class='" + o.classes.cellLabels + hierarchyClass + "'>" + text + "</b>"  );
-					}
-					else {
-						$cells.prepend( "<b class='" + o.classes.cellLabels + "'>" + text + "</b>"  );
+
+						table._addLabels( cells.filter( filter ), opts.classes.cellLabels + hierarchyClass, text );
+					} else {
+						table._addLabels( cells, opts.classes.cellLabels, text );
 					}
 
 				}
 		});
+	},
+
+	_addLabels: function( cells, label, text ) {
+		// .not fixes #6006
+		cells.not( ":has(b." + label + ")" ).prepend( "<b class='" + label + "'>" + text + "</b>"  );
 	}
 });
 

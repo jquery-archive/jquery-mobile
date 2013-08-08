@@ -55,11 +55,11 @@ define([
 			beforeNavigate.originalEvent = event;
 			$win.trigger( beforeNavigate );
 
-			if( beforeNavigate.isDefaultPrevented() ){
+			if ( beforeNavigate.isDefaultPrevented() ){
 				return;
 			}
 
-			if( event.historyState ){
+			if ( event.historyState ){
 				$.extend(state, event.historyState);
 			}
 
@@ -85,7 +85,7 @@ define([
 			beforeNavigate.originalEvent = event;
 			$win.trigger( beforeNavigate );
 
-			if( beforeNavigate.isDefaultPrevented() ){
+			if ( beforeNavigate.isDefaultPrevented() ){
 				return;
 			}
 
@@ -109,13 +109,13 @@ define([
 		//      but I'm not clear if there's a beter way to achieve
 		//      this with the jQuery special event structure
 		setup: function( /* data, namespaces */ ) {
-			if( self.bound ) {
+			if ( self.bound ) {
 				return;
 			}
 
 			self.bound = true;
 
-			if( self.isPushStateEnabled() ) {
+			if ( self.isPushStateEnabled() ) {
 				self.originalEventName = "popstate";
 				$win.bind( "popstate.navigate", self.popstate );
 			} else if ( self.isHashChangeEnabled() ){

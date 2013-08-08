@@ -35,7 +35,7 @@ function validStyle( prop, value, check_vend ) {
 			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
 		},
 		vend_pref = function( vend ) {
-			if( vend === "" ) {
+			if ( vend === "" ) {
 				return "";
 			} else {
 				return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
@@ -61,13 +61,34 @@ function validStyle( prop, value, check_vend ) {
 	return !!ret;
 }
 
+// inline SVG support test
+function inlineSVG() {
+	// Thanks Modernizr & Erik Dahlstrom
+	var w = window,
+		svg = !!w.document.createElementNS && !!w.document.createElementNS( "http://www.w3.org/2000/svg", "svg" ).createSVGRect && !( w.opera && navigator.userAgent.indexOf( "Chrome" ) === -1 ),
+		support = function( data ) {
+			if ( !( data && svg ) ) {
+				$( "html" ).addClass( "ui-nosvg" );
+			}
+		},
+		img = new w.Image();
+
+	img.onerror = function() {
+		support( false );
+	};
+	img.onload = function() {
+		support( img.width === 1 && img.height === 1 );
+	};
+	img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+}
+
 function transform3dTest() {
 	var mqProp = "transform-3d",
 		// Because the `translate3d` test below throws false positives in Android:
 		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" ),
 		el, transforms, t;
 
-	if( ret ) {
+	if ( ret ) {
 		return !!ret;
 	}
 
@@ -81,7 +102,7 @@ function transform3dTest() {
 	fakeBody.append( el );
 
 	for ( t in transforms ) {
-		if( el.style[ t ] !== undefined ){
+		if ( el.style[ t ] !== undefined ){
 			el.style[ t ] = "translate3d( 100px, 1px, 1px )";
 			ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
 		}
@@ -165,7 +186,7 @@ function fixedPosition() {
 		operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
 		omversion = !!operammobilematch && operammobilematch[ 1 ];
 
-	if(
+	if (
 		// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
 		( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
 		// Opera Mini
@@ -212,7 +233,8 @@ $.extend( $.support, {
 
 	dynamicBaseTag: baseTagTest(),
 	cssPointerEvents: cssPointerEventsTest(),
-	boundingRect: boundingRect()
+	boundingRect: boundingRect(),
+	inlineSVG: inlineSVG
 });
 
 fakeBody.remove();
@@ -256,28 +278,6 @@ if ( nokiaLTE7_3 ) {
 		$( "head link[rel='stylesheet']" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
 	});
 }
-
-// inline SVG support test
-function inlineSVG() {
-	// Thanks Modernizr & Erik Dahlstrom
-	var w = window,
-		svg = !!w.document.createElementNS && !!w.document.createElementNS("http://www.w3.org/2000/svg", "svg").createSVGRect && !!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image", "1.1"),
-		support = function( data ) {
-			if ( !( data && svg ) ) {
-				$( "html" ).addClass( "ui-nosvg" );
-			}
-		},
-		img = new w.Image();
-
-	img.onerror = function() {
-		support( false );
-	};
-	img.onload = function() {
-		support( img.width === 1 && img.height === 1 );
-	};
-	img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-}
-inlineSVG();
 
 // For ruling out shadows via css
 if ( !$.support.boxShadow ) {

@@ -12,9 +12,16 @@
 .ui-mobile fieldset {
 	border-width: 0;
 }
+/* Fixes for fieldset issues on IE10 and FF (see #6077) */
 .ui-mobile fieldset {
 	min-width: 0;
 }
+@-moz-document url-prefix() {
+	.ui-mobile fieldset {
+		display: table-column;
+	}
+}
+
 /* Viewport */
 .ui-mobile-viewport {
 	margin: 0;
@@ -68,12 +75,9 @@ div.ui-mobile-viewport {
 /* Non-js content hiding */
 .ui-nojs {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }
 
@@ -170,6 +174,10 @@ div.ui-mobile-viewport {
 	border-width: 1px 0;
 	border-style: solid;
 	position: relative;
+}
+.ui-header:empty,
+.ui-footer:empty {
+	min-height: 2.6875em;
 }
 .ui-header .ui-title,
 .ui-footer .ui-title {
@@ -271,8 +279,7 @@ div.ui-mobile-viewport {
 .ui-btn-icon-left {
 	padding-left: 2.5em;
 }
-.ui-btn-icon-right,
-.ui-listview > li > .ui-btn[class*="ui-icon-"] {
+.ui-btn-icon-right {
 	padding-right: 2.5em;
 }
 .ui-btn-icon-top {
@@ -288,7 +295,11 @@ div.ui-mobile-viewport {
 	padding-left: .3125em;
 	padding-right: .3125em;
 }
-.ui-btn[class*="ui-icon-"]:after {
+.ui-btn-icon-left:after,
+.ui-btn-icon-right:after,
+.ui-btn-icon-top:after,
+.ui-btn-icon-bottom:after,
+.ui-btn-icon-notext:after {
 	content: "";
 	position: absolute;
 	display: block;
@@ -297,16 +308,14 @@ div.ui-mobile-viewport {
 }
 .ui-btn-icon-notext:after,
 .ui-btn-icon-left:after,
-.ui-btn-icon-right:after,
-.ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
+.ui-btn-icon-right:after {
 	top: 50%;
 	margin-top: -11px;
 }
 .ui-btn-icon-left:after {
 	left: .5625em;
 }
-.ui-btn-icon-right:after,
-.ui-listview > li > .ui-btn[class*="ui-icon-"]:after {
+.ui-btn-icon-right:after {
 	right: .5625em;
 }
 .ui-mini.ui-btn-icon-left:after,
@@ -374,11 +383,13 @@ div.ui-mobile-viewport {
 .ui-hide-label .ui-rangeslider label,
 .ui-hidden-accessible {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
+}
+
+/* Used for hiding elements by the filterable widget. You can also use this class to hide list items or buttons in controlgroups; this ensures correct corner styling. */
+.ui-screen-hidden {
+	display: none !important;
 }

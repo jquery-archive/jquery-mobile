@@ -84,9 +84,6 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		theme: null,
 		dividerTheme: null,
 		icon: false,
-		filter: true,
-		filterReveal: true,
-		filterPlaceholder: "Search...",
 		autodividers: true,
 		autodividersSelector: function ( li ) {
     		return "";
@@ -121,18 +118,15 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		$( this ).find( ".jqm-search .ui-input-clear" ).trigger( "click" );
 	});
 
-	$( this ).find( ".jqm-content ul.jqm-list " ).listview({
+	$( this ).find( ".jqm-content ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
 		theme: null,
 		dividerTheme: null,
 		icon: false,
-		filter: true,
-		filterReveal: true,
-		filterPlaceholder: "Search...",
-  		arrowKeyNav: true,
-  		enterToNav: true,
-  		highlight: true
+		arrowKeyNav: true,
+		enterToNav: true,
+		highlight: true
 	});
 
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
@@ -199,8 +193,8 @@ $( document ).on( "mobileinit", function() {
 			theme: null,
 			countTheme: null,
 			dividerTheme: null,
-			icon: "arrow-r",
-			splitIcon: "arrow-r",
+			icon: "carat-r",
+			splitIcon: "carat-r",
 			splitTheme: null,
 			corners: true,
 			shadow: true,
@@ -238,7 +232,7 @@ $( document ).on( "mobileinit", function() {
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
 			
-			form.append( "<button type='submit' data-icon='arrow-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
+			form.append( "<button type='submit' data-icon='carat-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
 				.parent()
 				.trigger( "create" );
 			

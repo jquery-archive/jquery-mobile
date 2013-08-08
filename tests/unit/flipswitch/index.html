@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Button Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[ "widgets/page" ],
+      [
+				"widgets/forms/flipswitch",
+			],
+			[ "jquery.mobile.init" ],
+			[
+				"flipswitch_core.js"
+			]
+		]);
+	</script>
+
+	<script src="../../swarminject.js"></script>
+</head>
+<body>
+  <h1 id="qunit-header">jQuery Mobile Flipswitch Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests">
+  </ol>
+
+  <div data-nstest-role="page" data-nstest-theme="a">
+    <div data-nstest-role="content" data-nstest-theme="b">
+      	<input type="checkbox" data-nstest-role="flipswitch" name="flip-checkbox" id="flip-checkbox"/>
+      	<input type="checkbox" data-nstest-role="flipswitch" name="flip-checkbox" id="flip-checkbox-disabled" disabled/>
+      	<input type="checkbox" data-nstest-role="flipswitch" name="flip-checkbox" id="flip-checkbox-active" checked/>
+      	<select id="flip-select" name="flip-select" data-nstest-role="flipswitch">
+            <option>On</option>
+            <option>Off</option>
+        </select>
+        <select id="flip-select-disabled" name="flip-select" data-nstest-role="flipswitch" disabled>
+            <option>On</option>
+            <option>Off</option>
+        </select>
+        <select id="flip-select-second-option" name="flip-select" data-nstest-role="flipswitch">
+            <option>On</option>
+            <option selected>Off</option>
+        </select>
+        <select id="flip-select-mini" data-nstest-mini="true" name="flip-select" data-nstest-role="flipswitch">
+            <option>On</option>
+            <option selected>Off</option>
+        </select>
+        <input type="checkbox" data-nstest-mini="true" data-nstest-role="flipswitch" name="flip-checkbox" id="flip-checkbox-mini" checked/>
+    </div>
+  </div>
+</body>
+</html>

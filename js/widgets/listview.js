@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./page", "./addFirstLastClasses", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page", "./addFirstLastClasses" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -139,7 +139,7 @@ $.widget( "mobile.listview", $.extend( {
 							.addClass( altButtonClass )
 							.empty();
 					} else if ( icon ) {
-						buttonClass += " ui-icon-" + icon;
+						buttonClass += " ui-btn-icon-right ui-icon-" + icon;
 					}
 
 					a.first().addClass( buttonClass );
@@ -197,11 +197,6 @@ $.widget( "mobile.listview", $.extend( {
 		this._trigger( "afterrefresh" );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
-
-$.mobile.listview.initSelector = ":jqmData(role='listview')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.listview" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

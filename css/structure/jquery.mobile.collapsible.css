@@ -5,6 +5,9 @@
 .ui-collapsible-set {
 	margin: .5em 0;
 }
+.ui-collapsible + .ui-collapsible {
+	margin-top: -.5em;
+}
 .ui-collapsible-heading {
 	display: block;
 	margin: 0;
@@ -25,7 +28,7 @@
 	border-right-width: 1px;
 	border-left-width: 1px;
 }
-.ui-collapsible-collapsed + .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn {
+.ui-collapsible-collapsed + .ui-collapsible:not(.ui-collapsible-inset) > .ui-collapsible-heading .ui-btn {
 	border-top-width: 0;
 }
 .ui-collapsible-set .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn {
@@ -33,12 +36,9 @@
 }
 .ui-collapsible-heading-status {
 	position: absolute !important;
-	top: -9999px;
-	left: -9999px;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	clip: rect(1px 1px 1px 1px);
 	clip: rect(1px,1px,1px,1px);
 }
 .ui-collapsible-content {

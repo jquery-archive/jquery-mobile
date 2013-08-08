@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.table.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../jquery.mobile.widget", "./page", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "./page" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -13,60 +13,78 @@ $.widget( "mobile.table", {
 	options: {
 		classes: {
 			table: "ui-table"
-		}
+		},
+		enhanced: false
 	},
 
 	_create: function() {
-		var $el = this.element,
-			trs = this.element.find( "thead tr" ),
-			headers = this.element.find( "tr:eq(0)" ).children(),
-			allHeaders = headers.add( trs.children() );
+		if ( !this.options.enhanced ) {
+			this.element.addClass( this.options.classes.table );
+		}
 
-		this.element.addClass( this.options.classes.table );
-
+		// extend here, assign on refresh > _setHeaders
 		$.extend( this, {
 
 			// Expose headers and allHeaders properties on the widget
 			// headers references the THs within the first TR in the table
-			headers: headers,
+			headers: undefined,
 
-			// allHeaders references headers, plus all THs in the thead, which may include several rows, or not
-			allHeaders: allHeaders
+			// allHeaders references headers, plus all THs in the thead, which may
+			// include several rows, or not
+			allHeaders: undefined
 		});
 
-		trs.each( function() {
-			var coltally = 0,
-				$this = $( this );
+		this._refresh( true );
+	},
 
-			$this.children().each( function() {
-				var $this = $( this ),
-					span = parseInt( $this.attr( "colspan" ), 10 ),
-					sel = ":nth-child(" + ( coltally + 1 ) + ")",
+	_setHeaders: function() {
+		var trs = this.element.find( "thead tr" );
+
+		this.headers = this.element.find( "tr:eq(0)" ).children();
+		this.allHeaders = this.headers.add( trs.children() );
+	},
+
+	refresh: function() {
+		this._refresh();
+	},
+
+	rebuild: $.noop,
+
+	_refresh: function( /* create */ ) {
+		var table = this.element,
+			trs = table.find( "thead tr" );
+
+		// updating headers on refresh (fixes #5880)
+		this._setHeaders();
+
+		// Iterate over the trs
+		trs.each( function() {
+			var columnCount = 0;
+
+			// Iterate over the children of the tr
+			$( this ).children().each( function() {
+				var span = parseInt( $.mobile.getAttribute( this, "colspan" ), 10 ),
+					selector = ":nth-child(" + ( columnCount + 1 ) + ")",
 					j;
 
-				$this.jqmData( "colstart", coltally + 1 );
+				this.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
 
-				if( span ) {
+				if ( span ) {
 					for( j = 0; j < span - 1; j++ ) {
-						coltally++;
-						sel += ", :nth-child(" + ( coltally + 1 ) + ")";
+						columnCount++;
+						selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
 					}
 				}
 
-				// Store "cells" data on header as a reference to all cells in the same column as this TH
-				$this
-					.jqmData( "cells", $el.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( sel ) );
+				// Store "cells" data on header as a reference to all cells in the 
+				// same column as this TH
+				$( this ).jqmData( "cells", table.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( selector ) );
 
-				coltally++;
+				columnCount++;
 			});
 		});
 	}
 });
-
-$.mobile.table.initSelector = ":jqmData(role='table')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.table" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

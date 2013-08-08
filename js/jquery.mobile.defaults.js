@@ -5,21 +5,23 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg, __version__ ) {
+define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQuery, ns, pkg ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-	__version__ = ( pkg && pkg.version ) || "dev";
+	var __version__ = ( pkg && pkg.version ) || "dev";
 //>>excludeEnd("jqmBuildExclude");
-	$.extend($.mobile, {
+	$.extend( $.mobile, {
 
 		// Version of the jQuery Mobile Framework
 		version: __version__,
 
 		// Define the url parameter used for referencing widget-generated sub-pages.
-		// Translates to to example.html&ui-page=subpageIdentifier
+		// Translates to example.html&ui-page=subpageIdentifier
 		// hash segment before &ui-page= is used to make Ajax request
 		subPageUrlKey: "ui-page",
+
+		hideUrlBar: true,
 
 		// Class assigned to page currently in view, and during transitions
 		activePageClass: "ui-page-active",

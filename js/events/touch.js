@@ -122,7 +122,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				$document.bind( "vmousecancel", clearTapHandlers );
 
 				timer = setTimeout( function() {
-					if( $.event.special.tap.emitTapOnTaphold ) {
+					if ( $.event.special.tap.emitTapOnTaphold ) {
 						isTaphold = true;
 					}
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
@@ -194,7 +194,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					}
 
 					stop = $.event.special.swipe.stop( event );
-					if( !emitted ){
+					if ( !emitted ){
 						emitted = $.event.special.swipe.handleSwipe( start, stop, thisObject, origTarget );
 					}
 					// prevent scrolling

@@ -49,27 +49,27 @@
                 <div class="ui-block-a"><a href="#" data-role="button">Anchor</a></div>
                 <div class="ui-block-b"><div class="button-wrap"><button>Button</button></div></div>
                 <div class="ui-block-c"><input type="button" value="Input"></div>
-				<form>
-					<div class="ui-block-a">
-						<label for="grid-select-1" class="ui-hidden-accessible">Select</label>
-						<select id="grid-select-1" name="grid-select-1" data-shadow="false">
-							<option>Select</option>
-							<option value="1">The 1st Option</option>
-							<option value="2">The 2nt Option</option>
-							<option value="3">The 3rd Option</option>
-							<option value="4">The 4th Option</option>
-						</select>
-					</div>
-					<div class="ui-block-b">
-						<label for="grid-checkbox-1">Checkbox</label>
-						<input type="checkbox" id="grid-checkbox-1" name="grid-checkbox-1">
-					</div>
-					<div class="ui-block-c">
-						<label for="grid-radio-1">Radio</label>
-						<input type="radio" id="grid-radio-1" name="grid-radio-1">
-					</div>
-				</form>
             </div>
+			<form class="ui-grid-b">
+				<div class="ui-block-a">
+					<label for="grid-select-1" class="ui-hidden-accessible">Select</label>
+					<select id="grid-select-1" name="grid-select-1" data-shadow="false">
+						<option>Select</option>
+						<option value="1">The 1st Option</option>
+						<option value="2">The 2nt Option</option>
+						<option value="3">The 3rd Option</option>
+						<option value="4">The 4th Option</option>
+					</select>
+				</div>
+				<div class="ui-block-b">
+					<label for="grid-checkbox-1">Checkbox</label>
+					<input type="checkbox" id="grid-checkbox-1" name="grid-checkbox-1">
+				</div>
+				<div class="ui-block-c">
+					<label for="grid-radio-1">Radio</label>
+					<input type="radio" id="grid-radio-1" name="grid-radio-1">
+				</div>
+			</form>
         </div><!--/demo-html -->
 
 
@@ -80,27 +80,27 @@
                 <div class="ui-block-a"><a href="#" data-role="button" data-mini="true">Anchor</a></div>
                 <div class="ui-block-b"><div class="button-wrap"><button data-mini="true">Button</button></div></div>
                 <div class="ui-block-c"><input type="button" value="Input" data-mini="true"></div>
-				<form>
-					<div class="ui-block-a">
-						<label for="grid-select-2" class="ui-hidden-accessible">Select</label>
-						<select id="grid-select-2" name="grid-select-2" data-shadow="false" data-mini="true">
-							<option>Select</option>
-							<option value="1">The 1st Option</option>
-							<option value="2">The 2nt Option</option>
-							<option value="3">The 3rd Option</option>
-							<option value="4">The 4th Option</option>
-						</select>
-					</div>
-					<div class="ui-block-b">
-						<label for="grid-checkbox-2">Checkbox</label>
-						<input type="checkbox" id="grid-checkbox-2" name="grid-checkbox-2" data-mini="true">
-					</div>
-					<div class="ui-block-c">
-						<label for="grid-radio-2">Radio</label>
-						<input type="radio" id="grid-radio-2" name="grid-radio-2" data-mini="true">
-					</div>
-				</form>
             </div>
+			<form class="ui-grid-b">
+				<div class="ui-block-a">
+					<label for="grid-select-2" class="ui-hidden-accessible">Select</label>
+					<select id="grid-select-2" name="grid-select-2" data-shadow="false" data-mini="true">
+						<option>Select</option>
+						<option value="1">The 1st Option</option>
+						<option value="2">The 2nt Option</option>
+						<option value="3">The 3rd Option</option>
+						<option value="4">The 4th Option</option>
+					</select>
+				</div>
+				<div class="ui-block-b">
+					<label for="grid-checkbox-2">Checkbox</label>
+					<input type="checkbox" id="grid-checkbox-2" name="grid-checkbox-2" data-mini="true">
+				</div>
+				<div class="ui-block-c">
+					<label for="grid-radio-2">Radio</label>
+					<input type="radio" id="grid-radio-2" name="grid-radio-2" data-mini="true">
+				</div>
+			</form>
         </div><!--/demo-html -->
 
 
@@ -150,7 +150,7 @@
                 <a href="#" data-role="button">Grid Solo</a>
             </div>
             <br>
-            <a href="#" data-role="button" data-theme="e">Outside the grid</a>
+            <a href="#" data-role="button" data-theme="b">Outside the grid</a>
         </div><!--/demo-html -->
         
         

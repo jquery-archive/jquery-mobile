@@ -34,7 +34,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Navbar <a href="http://api.jquerymobile.com/navbar/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Navbar <a href="http://api.jquerymobile.com/navbar/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar.
 			</p>
@@ -231,7 +231,7 @@
 			<p>You can add any of the popular icon libraries like <a href="http://glyphish.com/">Glyphish</a> to achieve the iOS style tab that has large icons stacked on top of text labels. All that is required is a bit of custom styles to link to the icons and position them in the navbar. Here is an example using Glyphish icons and custom styles (view page source for styles) in our navbar:</p>
 
 			<div data-demo-html="true" data-demo-css="true">
-			<div data-role="footer" class="nav-glyphish-example">
+			<div data-role="footer" class="nav-glyphish-example" data-theme="b">
 				<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
 				<ul>
 					<li><a href="#" id="chat" data-icon="custom">Chat</a></li>
@@ -289,9 +289,6 @@
 					<ul>
 						<li><a href="#" data-icon="grid"data-theme="a">A</a></li>
 						<li><a href="#" data-icon="star" data-theme="b">B</a></li>
-						<li><a href="#" data-icon="gear" data-theme="c">C</a></li>
-						<li><a href="#" data-icon="arrow-l" data-theme="d">D</a></li>
-						<li><a href="#" data-icon="arrow-r" data-theme="e">E</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->

@@ -13,7 +13,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 	var ua = navigator.userAgent,
 		zoom,
 		evt, x, y, z, aig;
-	if( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test( ua ) && ua.indexOf( "AppleWebKit" ) > -1 ) ){
+	if ( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test( ua ) && ua.indexOf( "AppleWebKit" ) > -1 ) ){
 		$.mobile.iosorientationfixEnabled = false;
 		return;
 	}
@@ -38,8 +38,8 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 		}
 	}
 
-	$.mobile.document.on( "mobileinit", function(){
-		if( $.mobile.iosorientationfixEnabled ){
+	$.mobile.document.on( "mobileinit", function() {
+		if ( $.mobile.iosorientationfixEnabled ){
 			$.mobile.window
 				.bind( "orientationchange.iosorientationfix", zoom.enable )
 				.bind( "devicemotion.iosorientationfix", checkTilt );

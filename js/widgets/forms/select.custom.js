@@ -161,6 +161,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		if ( this.isMultiple ) {
 			headerClose = $( "<a>", {
+				"role": "button",
 				"text": o.closeText,
 				"href": "#",
 				"class": "ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
@@ -537,10 +538,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this._super();
 	}
 });
-
-//auto self-init widgets - custom select needs to be enhanced after popup to
-// make sure that it reverts to native select
-$.mobile._enhancer.add( "mobile.selectmenu", { dependencies: [ "mobile.popup" ] } );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -308,7 +308,7 @@
                         <legend>Vertical controlgroup, buttons:</legend>
                         <button disabled="disabled" data-icon="home" data-iconpos="right">One</button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
+                        <a class="ui-disabled" href="#" data-role="button" data-icon="grid" data-iconpos="right">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->

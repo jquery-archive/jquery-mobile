@@ -24,7 +24,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Footers <a href="http://api.jquerymobile.com/footer/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Footers <a href="http://api.jquerymobile.com/footer/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">The footer is a toolbar at the bottom of the page that can contain a wide range of content, from form elements to navbars.
 			</p>

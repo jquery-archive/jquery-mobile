@@ -33,27 +33,28 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Flip switch <a href="http://api.jquerymobile.com/slider/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Flip switch <a href="http://api.jquerymobile.com/slider/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element.
 			</p>
 
-				<h2>Basic switch</h2>
+                <h2>Basic</h2>
                 <div data-demo-html="true">
-				<form>
+                <form>
                     <label for="flip-1">Flip toggle switch:</label>
-                    <select name="flip-1" id="flip-1" data-role="slider">
+                    <select id="flip-1" name="flip-1" data-role="slider">
                         <option value="off">Off</option>
                         <option value="on">On</option>
                     </select>
-				</form>
+                </form>
                 </div><!-- /demo-html -->
-
+				
 				<h2>Theme</h2>
+				
                 <div data-demo-html="true">
 				<form>
                     <label for="flip-2">Flip toggle switch:</label>
-                    <select name="flip-2" id="flip-2" data-role="slider" data-track-theme="a" data-theme="a">
+                    <select name="flip-2" id="flip-2" data-role="slider" data-track-theme="b" data-theme="b">
                         <option value="off">Off</option>
                         <option value="on">On</option>
                     </select>

@@ -10,7 +10,6 @@ define( [ "jquery",
 	"../../jquery.mobile.widget",
 	"./textinput",
 	"./reset",
-	"../optionDemultiplexer",
 	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -75,10 +74,10 @@ define( [ "jquery",
 				"vmousedown": "_dragFirstHandle"
 			});
 		},
-		_handleReset: function(){
+		_handleReset: function() {
 			var self = this;
 			//we must wait for the stack to unwind before updateing other wise sliders will not have updated yet
-			setTimeout( function(){
+			setTimeout( function() {
 				self._updateHighlight();
 			},0);
 		},
@@ -123,6 +122,25 @@ define( [ "jquery",
 			}
 		},
 
+		_setOptions: function( options ) {
+			if ( options.theme !== undefined ) {
+				this._setTheme( options.theme );
+			}
+
+			if ( options.trackTheme !== undefined ) {
+				this._setTrackTheme( options.trackTheme );
+			}
+
+			if ( options.mini !== undefined ) {
+				this._setMini( options.mini );
+			}
+
+			if ( options.highlight !== undefined ) {
+				this._setHighlight( options.highlight );
+			}
+			this._super( options );
+		},
+
 		_setOption: function( options ) {
 			this._superApply( options );
 			this.refresh();
@@ -157,9 +175,9 @@ define( [ "jquery",
 				otherSlider = first ? this._inputLast : this._inputFirst;
 
 
-			if( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
+			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
 				thisSlider.blur();
-			} else if( event.type === "mousedown" ){
+			} else if ( event.type === "mousedown" ){
 				return;
 			}
 			if ( min > max && !this._sliderTarget ) {
@@ -236,12 +254,7 @@ define( [ "jquery",
 			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
 		}
 
-	}, $.mobile.behaviors.formReset, $.mobile.behaviors.optionDemultiplexer ) );
-
-$.mobile.rangeslider.initSelector = ":jqmData(role='rangeslider')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.rangeslider", { dependencies: [ "mobile.slider" ] } );
+	}, $.mobile.behaviors.formReset ) );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

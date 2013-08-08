@@ -5,21 +5,21 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.json" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-	// jQuery.mobile configurable options
-	$.extend($.mobile, {
+	$.extend( $.mobile, {
 		// define the window and the document objects
 		window: $( window ),
 		document: $( document ),
 
-		//TODO: Remove once we pull in UI Core
+		// TODO: Remove and use $.ui.keyCode directly
 		keyCode: $.ui.keyCode,
 
 		// Place to store various widget extensions
 		behaviors: {},
+
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			if ( $.type( ypos ) !== "number" ) {
@@ -29,12 +29,12 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 			// prevent scrollstart and scrollstop events
 			$.event.special.scrollstart.enabled = false;
 
-			setTimeout( function() {
+			setTimeout(function() {
 				window.scrollTo( 0, ypos );
 				$.mobile.document.trigger( "silentscroll", { x: 0, y: ypos });
 			}, 20 );
 
-			setTimeout( function() {
+			setTimeout(function() {
 				$.event.special.scrollstart.enabled = true;
 			}, 150 );
 		},
@@ -64,31 +64,28 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 			return ltr || defaultTheme || "a";
 		},
 
-		// TODO the following $ and $.fn extensions can/probably should be moved into jquery.mobile.core.helpers
-		//
-
-		enhanceable: function( $set ) {
-			return this.haveParents( $set, "enhance" );
+		enhanceable: function( elements ) {
+			return this.haveParents( elements, "enhance" );
 		},
 
-		hijackable: function( $set ) {
-			return this.haveParents( $set, "ajax" );
+		hijackable: function( elements ) {
+			return this.haveParents( elements, "ajax" );
 		},
 
-		haveParents: function( $set, attr ) {
+		haveParents: function( elements, attr ) {
 			if ( !$.mobile.ignoreContentEnabled ) {
-				return $set;
+				return elements;
 			}
 
-			var count = $set.length,
+			var count = elements.length,
 				$newSet = $(),
 				e, $element, excluded,
 				i, c;
 
 			for ( i = 0; i < count; i++ ) {
-				$element = $set.eq( i );
+				$element = elements.eq( i );
 				excluded = false;
-				e = $set[ i ];
+				e = elements[ i ];
 
 				while ( e ) {
 					c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
@@ -117,30 +114,15 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 
 		//simply set the active page's minimum height to screen height, depending on orientation
 		resetActivePageHeight: function( height ) {
-			var aPage = $( "." + $.mobile.activePageClass ),
-				aPageHeight = aPage.height(),
-				aPageOuterHeight = aPage.outerHeight( true );
+			var page = $( "." + $.mobile.activePageClass ),
+				pageHeight = page.height(),
+				pageOuterHeight = page.outerHeight( true );
 
 			height = ( typeof height === "number" ) ? height : $.mobile.getScreenHeight();
 
-			aPage.css( "min-height", height - ( aPageOuterHeight - aPageHeight ) );
+			page.css( "min-height", height - ( pageOuterHeight - pageHeight ) );
 		}
 	});
-
-	$.fn.removeWithDependents = function() {
-		$.removeWithDependents( this );
-	};
-
-	$.removeWithDependents = function( elem ) {
-		var $elem = $( elem );
-
-		( $elem.jqmData( "dependents" ) || $() ).remove();
-		$elem.remove();
-	};
-
-	$.fn.addDependents = function( newDependents ) {
-		$.addDependents( this , newDependents );
-	};
 
 	$.addDependents = function( elem, newDependents ) {
 		var $elem = $( elem ),
@@ -149,20 +131,99 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core", "json!../package.j
 		$elem.jqmData( "dependents", $( dependents ).add( newDependents ) );
 	};
 
-	// note that this helper doesn't attempt to handle the callback
-	// or setting of an html element's text, its only purpose is
-	// to return the html encoded version of the text in all cases. (thus the name)
-	$.fn.getEncodedText = function() {
-		return $( "<a>" ).text( $( this ).text() ).html();
-	};
+	// plugins
+	$.fn.extend({
+		removeWithDependents: function() {
+			$.removeWithDependents( this );
+		},
 
-	// fluent helper function for the mobile namespaced equivalent
-	$.fn.jqmEnhanceable = function() {
-		return $.mobile.enhanceable( this );
-	};
+		// Enhance child elements
+		enhanceWithin: function() {
+			var widgetElements,
+				that = this;
 
-	$.fn.jqmHijackable = function() {
-		return $.mobile.hijackable( this );
+			// Add no js class to elements
+			if ( $.mobile.nojs ) {
+				$.mobile.nojs( this );
+			}
+
+			// Bind links for ajax nav
+			if ( $.mobile.links ) {
+				$.mobile.links( this );
+			}
+
+			// Degrade inputs for styleing
+			if ( $.mobile.degradeInputsWithin ) {
+				$.mobile.degradeInputsWithin( this );
+			}
+
+			// Run buttonmarkup
+			if ( $.fn.buttonMarkup ) {
+				$( $.fn.buttonMarkup.initSelector ).buttonMarkup();
+			}
+
+			// Add classes for fieldContain
+			if ( $.fn.fieldcontain ) {
+				this.find( ":jqmData(role='fieldcontain')" ).jqmEnhanceable().fieldcontain();
+			}
+
+			// Enhance widgets
+			$.each( $.mobile.widgets, function( name, constructor ) {
+
+				// If initSelector not false find elements
+				if ( constructor.initSelector ) {
+
+					// Filter elements that should not be enhanced based on parents
+					widgetElements = $.mobile.enhanceable( that.find( constructor.initSelector ) );
+
+					// If any matching elements remain filter ones with keepNativeSelector
+					if ( widgetElements.length ) {
+
+						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompt
+						// Switch to $.mobile.keepNativeSelector in 1.5 which is just a value not a function
+						widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
+					}
+
+					// Enhance whatever is left
+					widgetElements[ constructor.prototype.widgetName ]();
+				}
+			});
+
+			return this;
+		},
+
+		addDependents: function( newDependents ) {
+			$.addDependents( this, newDependents );
+		},
+
+		// note that this helper doesn't attempt to handle the callback
+		// or setting of an html element's text, its only purpose is
+		// to return the html encoded version of the text in all cases. (thus the name)
+		getEncodedText: function() {
+			return $( "<a>" ).text( this.text() ).html();
+		},
+
+		// fluent helper function for the mobile namespaced equivalent
+		jqmEnhanceable: function() {
+			return $.mobile.enhanceable( this );
+		},
+
+		jqmHijackable: function() {
+			return $.mobile.hijackable( this );
+		}
+	});
+
+	$.removeWithDependents = function( nativeElement ) {
+		var element = $( nativeElement );
+
+		( element.jqmData( "dependents" ) || $() ).remove();
+		element.remove();
+	};
+	$.addDependents = function( nativeElement, newDependents ) {
+		var element = $( nativeElement ),
+			dependents = element.jqmData( "dependents" ) || $();
+
+		element.jqmData( "dependents", $( dependents ).add( newDependents ) );
 	};
 
 	$.find.matches = function( expr, set ) {

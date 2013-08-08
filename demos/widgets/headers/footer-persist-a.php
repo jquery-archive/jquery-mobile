@@ -28,7 +28,7 @@
 
     <div data-role="content" class="jqm-content">
 
-			<h1>Persistent navbars <a href="http://api.jquerymobile.com/navbar/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Persistent navbars <a href="http://api.jquerymobile.com/navbar/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 		<p>These pages are a demo of a persistent <a href="../navbar/">navbar</a> in a fixed footer toolbar. Click on any of the links in the footer, and you'll see the page content transition. Both the persistent header and footer on these pages remain in place during the animation to a new HTML page.</p>
 		<p>With the new external toolbars no extra effort is required to now have persistant toolbars simply place them outside of the page container on each page they will be loaded on the first page and persist on subsequent pages. The toolbars still need to be placed on each page to account for refresh however they will be ignored if not within a page container.</p>
 

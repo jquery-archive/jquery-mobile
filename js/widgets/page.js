@@ -3,9 +3,34 @@
 //>>label: Page Creation
 //>>group: Core
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+$.mobile.widgets = {};
+
+var originalWidget = $.widget;
+
+$.widget = (function( orig ) {
+	return function() {
+		var constructor = orig.apply( this, arguments ),
+			name = constructor.prototype.widgetName;
+
+		constructor.initSelector = ( ( constructor.prototype.initSelector !== undefined ) ?
+			constructor.prototype.initSelector : ":jqmData(role='" + name + "')" );
+
+		$.mobile.widgets[ name ] = constructor;
+
+		return constructor;
+	};
+})( $.widget );
+
+// Make sure $.widget still has bridge and extend methods
+$.extend( $.widget, originalWidget );
+
+// For backcompat remove in 1.5
+$.mobile.document.on( "create", function( event ){
+	$( event.target ).enhanceWithin();
+});
 
 $.widget( "mobile.page", {
 	options: {
@@ -25,7 +50,7 @@ $.widget( "mobile.page", {
 	_create: function() {
 		var attrPrefix = "data-" + $.mobile.ns,
 			self = this;
-		// if false is returned by the callbacks do not create the page
+		// If false is returned by the callbacks do not create the page
 		if ( this._trigger( "beforecreate" ) === false ) {
 			return false;
 		}
@@ -54,8 +79,11 @@ $.widget( "mobile.page", {
 				$this.attr( "role", "main" ).addClass( "ui-content" );
 		});
 
-		// enhance the page
-		$.mobile._enhancer.enhance( this.element[ 0 ] );
+		this.element.enhanceWithin();
+
+		if( $.mobile.getAttribute( this.element[0], "role", true ) === "dialog" && $.mobile.dialog ){
+			this.element.dialog();
+		}
 	},
 
 	bindRemove: function( callback ) {
@@ -80,11 +108,11 @@ $.widget( "mobile.page", {
 	},
 
 	_setOptions: function( o ) {
-		if( o.theme !== undefined ) {
+		if ( o.theme !== undefined ) {
 			this.element.removeClass( "ui-body-" + this.options.theme ).addClass( "ui-body-" + o.theme );
 		}
 
-		if( o.contentTheme !== undefined ) {
+		if ( o.contentTheme !== undefined ) {
 			this.element.find( "[data-" + $.mobile.ns + "='content']" ).removeClass( "ui-body-" + this.options.contentTheme )
 				.addClass( "ui-body-" + o.contentTheme );
 		}
@@ -93,33 +121,16 @@ $.widget( "mobile.page", {
 	_handlePageBeforeShow: function(/* e */) {
 		this.setContainerBackground();
 	},
-
+	// Deprecated in 1.4 remove in 1.5
 	removeContainerBackground: function() {
-		var classes = ( $.mobile.pageContainer.attr( "class" ) || "" ).split( " " ),
-			overlayTheme = null,
-			matches;
-
-		while ( classes.length > 0 ) {
-			overlayTheme = classes.pop();
-			matches = ( new RegExp( "^ui-overlay-([a-z])$" ) ).exec( overlayTheme );
-			if ( matches && matches.length > 1 ) {
-				overlayTheme = matches[ 1 ];
-				break;
-			} else {
-				overlayTheme = null;
-			}
-		}
-
-		$.mobile.pageContainer.removeClass( "ui-overlay-" + overlayTheme );
+		this.element.closest( ":mobile-content" ).content({ "theme": "none" });
 	},
-
+	// Deprecated in 1.4 remove in 1.5
 	// set the page container background to the page theme
 	setContainerBackground: function( theme ) {
-		if ( this.options.theme ) {
-			$.mobile.pageContainer.addClass( "ui-overlay-" + ( theme || this.options.theme ) );
-		}
+		this.element.parent().content( { "theme": theme || this.options.theme } );
 	},
-
+	// Deprecated in 1.4 remove in 1.5
 	keepNativeSelector: function() {
 		var options = this.options,
 			keepNativeDefined = options.keepNative && $.trim( options.keepNative );

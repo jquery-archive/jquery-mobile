@@ -119,7 +119,7 @@
 .ui-listview .ui-li-divider.ui-li-has-count {
 	padding-right: 2.8125em;
 }
-.ui-listview .ui-li-has-count > .ui-btn[class*="ui-icon-"] {
+.ui-listview .ui-li-has-count > .ui-btn-icon-right {
 	padding-right: 4.6875em;
 }
 .ui-listview .ui-li-has-thumb > .ui-btn,
@@ -135,20 +135,20 @@
 /* Used by both listview and custom multiple select button */
 .ui-li-count {
 	position: absolute;
-	font-size: 11px;
+	font-size: 12px;
 	font-weight: bold;
 	text-align: center;
 	border-width: 1px;
 	border-style: solid;
 	padding: 0 .5em;
-	line-height: 1.9;
-	min-height: 1.818em;
-	min-width: .818em;
-	right: .909em;
+	line-height: 1.666em;
+	min-height: 1.666em;
+	min-width: .666em;
+	right: .833em;
 	top: 50%;
-	margin-top: -1em;
+	margin-top: -.916em;
 }
-.ui-listview .ui-btn[class*="ui-icon-"] .ui-li-count {
+.ui-listview .ui-btn-icon-right .ui-li-count {
 	right: 3.636em;
 }
 .ui-listview .ui-li-has-thumb > img:first-child,
@@ -269,29 +269,4 @@ ol.ui-listview > li p:first-child ~ *,
 ol.ui-listview > li img:first-child + * ~ * {
 	margin-top: 0;
 	text-indent: 2.04em; /* (1.4em + .3em) * .9em / .75em */
-}
-.ui-listview-filter {
-	border-width: 0;
-	overflow: hidden;
-	margin: -1em -1em 1em -1em;
-}
-.ui-listview-filter-inset {
-	margin: 1em -.3125em -1em;
-	background: transparent;
-}
-.ui-collapsible-content .ui-listview-filter {
-	margin: -.625em -1em .625em -1em;
-	border-bottom: inherit;
-}
-.ui-collapsible-content .ui-listview-filter-inset {
-	margin: -.3125em;
-	border-bottom-width: 0;
-}
-.ui-listview-filter .ui-input-search {
-	margin: .3125em;
-	width: auto;
-	display: block;
-}
-.ui-listview > li.ui-screen-hidden {
-	display:none;
 }

@@ -14,10 +14,10 @@ function( jQuery ) {
 
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
-		"<div class='arrow-guide'></div>" +
-		"<div class='arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
-			"<div class='arrow'>" +
-				"<div class='arrow-background'></div>" +
+		"<div class='ui-popup-arrow-guide'></div>" +
+		"<div class='ui-popup-arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
+			"<div class='ui-popup-arrow'>" +
+				"<div class='ui-popup-arrow-background'></div>" +
 			"</div>" +
 		"</div>"
 	),
@@ -36,8 +36,32 @@ function getArrow() {
 
 $.widget( "mobile.popup", $.mobile.popup, {
 	options: {
-		arrow: false,
-		arrowSides: "t,b,l,r"
+
+		arrow: ""
+	},
+
+	_create: function() {
+		var ar,
+			ret = this._super();
+
+		if ( this.options.arrow ) {
+			this._ui.arrow = ar = this._addArrow();
+		}
+
+		return ret;
+	},
+
+	_addArrow: function() {
+		var theme,
+			opts = this.options,
+			ar = getArrow();
+
+		theme = this._themeClassFromOption( "ui-body-", opts.theme );
+		ar.ar.addClass( theme + ( opts.shadow ? " ui-overlay-shadow" : "" ) );
+		ar.bg.addClass( theme );
+		ar.arEls.hide().appendTo( this.element );
+
+		return ar;
 	},
 
 	_unenhance: function() {
@@ -48,27 +72,6 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		}
 
 		return this._super();
-	},
-
-	_updateArrow: function( direction ) {
-		var ar = this._ui.arrow,
-			oldTheme = ar.ct.jqmData( "oldTheme" ),
-			theme = "ui-body-" + ( this.options.theme || "a" );
-
-		// Remove old direction and theme
-		ar.ct.removeClass( "l t r b" );
-		if ( oldTheme ) {
-			ar.ar.removeClass( oldTheme );
-			ar.bg.removeClass( oldTheme );
-		}
-
-		ar.ar.toggleClass( "ui-overlay-shadow", this.options.shadow );
-
-		// Set new direction and theme
-		ar.ct.jqmData( "oldTheme", theme );
-		ar.ct.addClass( direction );
-		ar.ar.addClass( theme );
-		ar.bg.addClass( theme );
 	},
 
 	// Pretend to show an arrow described by @p and @dir and calculate the
@@ -137,16 +140,17 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	},
 
 	_placementCoords: function( desired ) {
-		var state, best, params, bgOffset, elOffset, diff, bgRef, ar;
+		var state, best, params, bgOffset, elOffset, diff, bgRef,
+			optionValue = this.options.arrow,
+			ar = this._ui.arrow;
 
-		if ( !this.options.arrow ) {
+		if ( !ar ) {
 			return this._super( desired );
 		}
 
 		ar.arEls.show();
 
 		bgRef = {};
-		ar = this._ui.arrow;
 		state = this._getPlacementState( true );
 		params = {
 			"l": { fst: "x", snd: "y", prop: "top", dimKey: "cy", oDimKey: "cx", offsetFactor: 1, tipOffset:  -state.arHalf.cx, arrowOffsetFactor: 0 },
@@ -158,7 +162,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		// Try each side specified in the options to see on which one the arrow
 		// should be placed such that the distance between the tip of the arrow and
 		// the desired coordinates is the shortest.
-		$.each( this.options.arrowSides.split( "," ),
+		$.each( ( optionValue === true ? "l,t,r,b" : optionValue ).split( "," ),
 			$.proxy( function( key, value ) {
 				best = this._tryAnArrow( params[ value ], value, desired, state, best );
 			}, this ) );
@@ -171,8 +175,11 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		}
 
 		// Move the arrow into place
-		ar.ct.removeAttr( "style" ).show().css( best.posProp, best.posVal );
-		this._updateArrow( best.dir );
+		ar.ct
+			.removeClass( "ui-popup-arrow-l ui-popup-arrow-t ui-popup-arrow-r ui-popup-arrow-b" )
+			.addClass( "ui-popup-arrow-" + best.dir )
+			.removeAttr( "style" ).css( best.posProp, best.posVal )
+			.show();
 
 		// Do not move/size the background div on IE, because we use the arrow div for background as well.
 		if ( !ieHack ) {
@@ -193,23 +200,52 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		return best.result;
 	},
 
-	_setOptions: function( o ) {
-		var ar;
+	_setOptions: function( opts ) {
+		var newTheme,
+			oldTheme = this.options.theme,
+			ar = this._ui.arrow,
+			ret = this._super( opts );
 
-		if ( o.arrow !== undefined ) {
-			ar = this._ui.arrow;
+		if ( opts.arrow !== undefined ) {
+			if ( !ar && opts.arrow ) {
+				this._ui.arrow = this._addArrow();
 
-			if ( o.arrow ) {
-				if ( !ar ) {
-					ar = this._ui.arrow = getArrow();
-				}
-				ar.arEls.appendTo( this.element ).hide();
-			} else if ( ar ) {
+				// Important to return here so we don't set the same options all over
+				// again below.
+				return;
+			} else if ( ar && !opts.arrow ) {
 				ar.arEls.remove();
+				this._ui.arrow = null;
 			}
 		}
 
-		return this._super( o );
+		// Reassign with potentially new arrow
+		ar = this._ui.arrow;
+
+		if ( ar ) {
+			if ( opts.theme !== undefined ) {
+				oldTheme = this._themeClassFromOption( "ui-body-", oldTheme );
+				newTheme = this._themeClassFromOption( "ui-body-", opts.theme );
+				ar.ar.removeClass( oldTheme ).addClass( newTheme );
+				ar.bg.removeClass( oldTheme ).addClass( newTheme );
+			}
+
+			if ( opts.shadow !== undefined ) {
+				ar.ar.toggleClass( "ui-overlay-shadow", opts.shadow );
+			}
+		}
+
+		return ret;
+	},
+
+	_destroy: function() {
+		var ar = this._ui.arrow;
+
+		if ( ar ) {
+			ar.arEls.remove();
+		}
+
+		return this._super();
 	}
 });
 

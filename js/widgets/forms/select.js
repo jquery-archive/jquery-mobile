@@ -5,11 +5,13 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset", "../../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.selectmenu", $.extend( {
+	initSelector: "select:not( :jqmData(role='slider')):not( :jqmData(role='flipswitch') )",
+
 	options: {
 		theme: null,
 		disabled: false,
@@ -283,10 +285,6 @@ $.widget( "mobile.selectmenu", $.extend( {
 	}
 }, $.mobile.behaviors.formReset ) );
 
-$.mobile.selectmenu.initSelector = "select:not( :jqmData(role='slider') )";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.selectmenu" );
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

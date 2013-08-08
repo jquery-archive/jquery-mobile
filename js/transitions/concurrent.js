@@ -8,7 +8,7 @@ define( [ "jquery", "./transition" ], function( jQuery ) {
 
 (function( $ ) {
 
-	$.mobile.ConcurrentTransition = function(){
+	$.mobile.ConcurrentTransition = function() {
 		this.init.apply(this, arguments);
 	};
 

@@ -6,7 +6,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 
-define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid", "../jquery.mobile.registry" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -20,8 +20,7 @@ $.widget( "mobile.navbar", {
 
 		var $navbar = this.element,
 			$navbtns = $navbar.find( "a" ),
-			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined,
-			classes = "ui-btn";
+			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
 
 		$navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
@@ -32,7 +31,8 @@ $.widget( "mobile.navbar", {
 		$navbtns
 			.each( function() {
 				var icon = $.mobile.getAttribute( this, "icon", true ),
-					theme = $.mobile.getAttribute( this, "theme", true );
+					theme = $.mobile.getAttribute( this, "theme", true ),
+					classes = "ui-btn";
 
 				if ( theme ) {
 					classes += " ui-btn-" + theme;
@@ -65,11 +65,6 @@ $.widget( "mobile.navbar", {
 		});
 	}
 });
-
-$.mobile.navbar.initSelector = ":jqmData(role='navbar')";
-
-//auto self-init widgets
-$.mobile._enhancer.add( "mobile.navbar" );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -80,9 +80,9 @@ define([
 
 			// define page container
 			$.mobile.pageContainer = $.mobile.firstPage
-        .parent()
-        .addClass( "ui-mobile-viewport" )
-        .content();
+				.parent()
+				.addClass( "ui-mobile-viewport" )
+				.content();
 
 			// initialize navigation events now, after mobileinit has occurred and the page container
 			// has been created but before the rest of the library is alerted to that fact
@@ -115,7 +115,7 @@ define([
 
 				// make sure to set initial popstate state if it exists
 				// so that navigation back to the initial page works properly
-				if( $.event.special.navigate.isPushStateEnabled() ) {
+				if ( $.event.special.navigate.isPushStateEnabled() ) {
 					$.mobile.navigate.navigator.squash( path.parseLocation().href );
 				}
 
@@ -128,7 +128,7 @@ define([
 			} else {
 				// trigger hashchange or navigate to squash and record the correct
 				// history entry for an initial hash path
-				if( !$.event.special.navigate.isPushStateEnabled() ) {
+				if ( !$.event.special.navigate.isPushStateEnabled() ) {
 					$window.trigger( "hashchange", [true] );
 				} else {
 					// TODO figure out how to simplify this interaction with the initial history entry
@@ -140,11 +140,18 @@ define([
 		}
 	});
 
-	// check which scrollTop value should be used by scrolling to 1 immediately at domready
-	// then check what the scroll top is. Android will report 0... others 1
-	// note that this initial scroll won't hide the address bar. It's just for the check.
 	$(function() {
-		window.scrollTo( 0, 1 );
+		//Run inlineSVG support test
+		$.support.inlineSVG();
+		
+		// check which scrollTop value should be used by scrolling to 1 immediately at domready
+		// then check what the scroll top is. Android will report 0... others 1
+		// note that this initial scroll won't hide the address bar. It's just for the check.
+		
+		// hide iOS browser chrome on load if hideUrlBar is true this is to try and do it as soon as possible
+		if ( $.mobile.hideUrlBar ) {
+			window.scrollTo( 0, 1 );
+		}
 
 		// if defaultHomeScroll hasn't been set yet, see if scrollTop is 1
 		// it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
@@ -157,8 +164,10 @@ define([
 		}
 
 		// window load event
-		// hide iOS browser chrome on load
-		$window.load( $.mobile.silentScroll );
+		// hide iOS browser chrome on load if hideUrlBar is true this is as fall back incase we were too early before
+		if ( $.mobile.hideUrlBar ) {
+			$window.load( $.mobile.silentScroll );
+		}
 
 		if ( !$.support.cssPointerEvents ) {
 			// IE and Opera don't support CSS pointer-events: none that we use to disable link-based buttons
