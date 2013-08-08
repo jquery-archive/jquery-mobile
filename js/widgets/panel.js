@@ -276,13 +276,13 @@ $.widget( "mobile.panel", {
 				if ( self._open ) {
 					self.close( true );
 				}
-			})
+			});
 		} else {
 			$.mobile.document.on( "pagebeforehide", ":jqmData(role='page')", function() {
 				if ( self._open ) {
 					self.close( true );
 				}
-			})
+			});
 		}
 	},
 
