@@ -53,10 +53,16 @@ $.widget( "mobile.collapsible", {
 			this._enhance( elem, ui );
 		}
 
+		function cancelActiveState() {
+			ui.heading.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
+		}
+
 		this._on( ui.heading, {
-			"tap": function() {
+			"vmousedown": function() {
 				ui.heading.find( "a" ).first().addClass( $.mobile.activeBtnClass );
 			},
+			"vmouseup": cancelActiveState,
+			"vmousecancel": cancelActiveState,
 
 			"click": function( event ) {
 				this._handleExpandCollapse( !ui.heading.hasClass( "ui-collapsible-heading-collapsed" ) );
