@@ -32,6 +32,11 @@
 	padding: 1em;
 }
 
+/* container */
+.ui-panel-page-container {
+	overflow-x: visible;
+}
+
 /* page */
 .ui-panel-page-container .ui-page-active {
 	background: none;
