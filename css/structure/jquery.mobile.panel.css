@@ -32,10 +32,7 @@
 	padding: 1em;
 }
 
-/* container and page */
-.ui-panel-page-container {
-	-webkit-transform: translate3d(0,0,0);
-}
+/* page */
 .ui-panel-page-container .ui-page-active {
 	background: none;
 }
@@ -76,6 +73,7 @@
 }
 
 /* hardware acceleration for smoother transitions on WebKit browsers */
+.ui-panel-animate.ui-panel-page-container,
 .ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) {
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translate3d(0,0,0);
