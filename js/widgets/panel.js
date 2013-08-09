@@ -394,8 +394,10 @@ $.widget( "mobile.panel", {
 						
 					self.element.addClass( o.classes.panelClosed );
 
-					self._wrapper().removeClass( self._pageContentOpenClasses );
-					self._fixedToolbars().removeClass( self._pageContentOpenClasses );
+					if ( o.display !== "overlay" ) {
+						self._wrapper().removeClass( self._pageContentOpenClasses );
+						self._fixedToolbars().removeClass( self._pageContentOpenClasses );
+					}
 					
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
 						self._wrapper().removeClass( o.classes.animate );
