@@ -36,7 +36,9 @@ $.widget( "mobile.page", {
 	options: {
 		theme: "a",
 		domCache: false,
-		keepNativeDefault: ":jqmData(role='none'), :jqmData(role='nojs')",
+
+		// Deprecated in 1.4 remove in 1.5
+		keepNativeDefault: $.mobile.keepNative,
 		contentTheme: null
 	},
 
