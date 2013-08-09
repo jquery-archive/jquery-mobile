@@ -102,7 +102,7 @@ $.widget( "mobile.popup", {
 		});
 
 		if ( this._page.length === 0 ) {
-			this._page = this.body;
+			this._page = $( "body" );
 		}
 
 		if ( currentOptions.enhanced ) {
