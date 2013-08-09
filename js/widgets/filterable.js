@@ -23,7 +23,7 @@ $.widget( "mobile.filterable", {
 		filterCallback: defaultFilterCallback,
 		enhanced: false,
 		input: null,
-		children: "> li, > option, tbody tr, .ui-controlgroup-controls .ui-btn"
+		children: "> li, > option, optgroup options, tbody tr, .ui-controlgroup-controls .ui-btn"
 	},
 
 	_create: function() {
