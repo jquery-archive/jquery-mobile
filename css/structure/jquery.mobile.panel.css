@@ -51,7 +51,7 @@
 	z-index: 999;
 }
 
-/* fiixed toolbars */
+/* fixed toolbars */
 .ui-panel-fixed-toolbar {
 	overflow-x: hidden;
 }
@@ -226,7 +226,7 @@
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-reveal {
 		width: auto;	
 	}
-	.ui-responsive-panel .ui-panel-dismiss-display-push {
+	.ui-responsive-panel.ui-page-active ~ .ui-panel-dismiss-display-push {
 		display: none;
 	}	
 }
