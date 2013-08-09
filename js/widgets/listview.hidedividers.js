@@ -11,7 +11,7 @@ var rdivider = /(^|\s)ui-li-divider($|\s)/,
 
 $.widget( "mobile.listview", $.mobile.listview, {
 	options: {
-		hidedividers: false
+		hidedividers: true
 	},
 
 	refresh: function() {
