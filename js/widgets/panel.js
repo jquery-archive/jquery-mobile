@@ -38,7 +38,6 @@ $.widget( "mobile.panel", {
 	_closeLink: null,
 	_parentPage: null,
 	_page: null,
-	_overlayTheme: null,
 	_modal: null,
 	_panelInner: null,
 	_wrapper: null,
@@ -54,7 +53,6 @@ $.widget( "mobile.panel", {
 			_closeLink: el.find( ":jqmData(rel='close')" ),
 			_parentPage: ( parentPage.length > 0 ) ? parentPage : false,
 			_page: this._getPage,
-			_overlayTheme: this._getOverlayTheme,
 			_panelInner: this._getPanelInner(),
 			_wrapper: this._getWrapper,
 			_fixedToolbars: this._getFixedToolbars
@@ -77,14 +75,6 @@ $.widget( "mobile.panel", {
 		}
 
 		this._bindSwipeEvents();
-	},
-	
-	_getOverlayTheme: function() {
-		// Overlay theme on page container is the same as the page theme
-		var overlayTheme = $.data( $.mobile.activePage[ 0 ], "mobile-page" ).options.theme,
-			overlayThemeClass = "ui-overlay-" + overlayTheme;
-
-		return overlayThemeClass;
 	},
 	
 	_getPanelInner: function() {
@@ -312,8 +302,8 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( o.theme && o.display !== "overlay" ) {
-						self._page().page( "removeContainerBackground" );
-						$.mobile.pageContainer.addClass( o.classes.pageContainer + " ui-overlay-" + o.theme );
+						self._page().parent().content({ "theme": o.theme });
+						$.mobile.pageContainer.addClass( o.classes.pageContainer + "-themed" );
 					}
 
 					self.element
@@ -325,6 +315,7 @@ $.widget( "mobile.panel", {
 					self._pageContentOpenClasses = self._getPosDisplayClasses( o.classes.pageContentPrefix );
 					
 					if ( o.display !== "overlay" ) {
+						$.mobile.pageContainer.addClass( o.classes.pageContainer );
 						self._wrapper().addClass( self._pageContentOpenClasses + " " + o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().addClass( self._pageContentOpenClasses + " " + o.classes.pageContentPrefix + "-open" );
 					}
@@ -384,17 +375,19 @@ $.widget( "mobile.panel", {
 					}
 				},
 				complete = function() {
-					if ( o.theme && o.display !== "overlay" ) {
-						self._page().page( "removeContainerBackground" );
-						$.mobile.pageContainer.removeClass( o.classes.pageContainer );
-						$.mobile.pageContainer.addClass( self._overlayTheme );
-					}
-					
 					$.mobile.document.off( self._transitionEndEvents, complete );
+					
+					if ( o.theme && o.display !== "overlay" ) {
+						var pageTheme = $( ".ui-page-active" ).page( "option", "theme" );
+						
+						$.mobile.pageContainer.removeClass( o.classes.pageContainer + "-themed" );
+						$( ".ui-page-active" ).parent().content({ "theme": pageTheme });
+					}
 						
 					self.element.addClass( o.classes.panelClosed );
 
 					if ( o.display !== "overlay" ) {
+						$.mobile.pageContainer.removeClass( o.classes.pageContainer );
 						self._wrapper().removeClass( self._pageContentOpenClasses );
 						self._fixedToolbars().removeClass( self._pageContentOpenClasses );
 					}
@@ -457,13 +450,15 @@ $.widget( "mobile.panel", {
 		}
 		
 		if ( this._open && o.display !== "overlay" ) {
+			$.mobile.pageContainer.removeClass( o.classes.pageContainer );
 			this._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
 		}
 		
 		if ( this._open && o.theme && o.display !== "overlay" ) {
-			this._page().page( "removeContainerBackground" );
-			$.mobile.pageContainer.removeClass( o.classes.pageContainer );
-			$.mobile.pageContainer.addClass( this._overlayTheme );
+			var pageTheme = this._page().page( "option", "theme" );
+			
+			$.mobile.pageContainer.removeClass( o.classes.pageContainer + "-themed" );
+			this._page().parent().content({ "theme": pageTheme });
 		}
 		
 		if ( this._open ) {

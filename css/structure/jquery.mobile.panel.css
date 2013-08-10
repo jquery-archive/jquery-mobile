@@ -20,7 +20,7 @@
 	padding-bottom: 1px;
 }
 .ui-panel-display-reveal {
-	z-index: 0;
+	z-index: 1;
 }
 .ui-panel-display-push {
 	z-index: 999;
@@ -38,7 +38,7 @@
 }
 
 /* page */
-.ui-panel-page-container .ui-page-active {
+.ui-panel-page-container-themed .ui-page-active {
 	background: none;
 }
 
