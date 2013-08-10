@@ -155,7 +155,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		fragment.appendChild( menuButton[ 0 ] );
 		table.before( fragment );
 
-		popup.popup();
+		popup.popup().enhanceWithin();
 
 		return menu;
 	},
