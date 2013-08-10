@@ -9,6 +9,7 @@
 /* Remove top/bottom margins around the fieldcontain on check list */
 .ui-table-columntoggle-popup fieldset {
 	margin:0;
+	display: block;
 }
 
 /* Hide all prioritized columns by default */
