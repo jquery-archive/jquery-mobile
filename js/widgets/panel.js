@@ -248,13 +248,13 @@ $.widget( "mobile.panel", {
 
 		$.mobile.document
 			// Close the panel if another panel on the page opens
-			.on( "panelbeforeopen", ":jqmData(role='page')", function( e ) {
+			.on( "panelbeforeopen", function( e ) {
 				if ( self._open && e.target !== self.element[ 0 ] ) {
 					self.close();
 				}
 			})
 			// On escape, close? might need to have a target check too...
-			.on( "keyup.panel", ":jqmData(role='page')", function( e ) {
+			.on( "keyup.panel", function( e ) {
 				if ( e.keyCode === 27 && self._open ) {
 					self.close();
 				}
@@ -268,7 +268,7 @@ $.widget( "mobile.panel", {
 				}
 			});
 		} else {
-			$.mobile.document.on( "pagebeforehide", ":jqmData(role='page')", function() {
+			$.mobile.document.on( "pagebeforehide", function() {
 				if ( self._open ) {
 					self.close( true );
 				}
@@ -287,7 +287,7 @@ $.widget( "mobile.panel", {
 				o = self.options,
 				
 				_openPanel = function() {
-					self._page().off( "panelclose" );
+					$.mobile.document.off( "panelclose" );
 					self._page().jqmData( "panel", "open" );
 					
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
@@ -333,14 +333,10 @@ $.widget( "mobile.panel", {
 					self._trigger( "open" );
 				};
 
-			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
-				immediate = true;
-			}
-
 			self._trigger( "beforeopen" );
-
+			
 			if ( self._page().jqmData( "panel" ) === "open" ) {
-				self._page().on( "panelclose", function() {
+				$.mobile.document.on( "panelclose", function() {
 					_openPanel();
 				});
 			} else {
@@ -406,10 +402,6 @@ $.widget( "mobile.panel", {
 					self._trigger( "close" );
 				};
 
-			if ( this.element.closest( ".ui-page-active" ).length < 0 ) {
-				immediate = true;
-			}
-			
 			self._trigger( "beforeclose" );
 
 			_closePanel();
