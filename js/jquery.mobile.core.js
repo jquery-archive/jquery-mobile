@@ -227,6 +227,11 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 				while ( e ) {
 					var c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
 
+					if ( c === "true" ) {
+						excluded = false;
+						break;
+					}
+
 					if ( c === "false" ) {
 						excluded = true;
 						break;
