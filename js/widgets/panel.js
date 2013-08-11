@@ -420,37 +420,40 @@ $.widget( "mobile.panel", {
 		var o = this.options,
 			multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1;
 
-		if ( !multiplePanels ) {
-			if ( o.display !== "overlay" ) {
-				this._wrapper().children().unwrap();
+		if ( o.display !== "overlay" ) {
+			// Destroy the wrapper even if there are still other panels, because we don't know if they use a wrapper
+			this._wrapper().children().unwrap();
+
+			if ( this._open ) {
+				
+				this._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
+				
+				if ( $.support.cssTransform3d && !!o.animate ) {
+					this._fixedToolbars().removeClass( o.classes.animate );
+				}
+				
+				$.mobile.pageContainer.removeClass( o.classes.pageContainer );
+				
+				if ( o.theme ) {
+					var pageTheme = this._page().page( "option", "theme" );
+					
+					this._page().parent().content({ "theme": pageTheme });
+					
+					$.mobile.pageContainer.removeClass( o.classes.pageContainer + "-themed" );
+				}
 			}
-			
-			$.mobile.document.off( "click.panel panelopen panelclose", "a" );
+		}
+
+		if ( !multiplePanels ) {
+			$.mobile.document
+				.off( "click.panel", "a" )
+				.find( "a" )
+				.off( "panelopen panelclose" );
 			
 			if ( this._open ) {
+				$.mobile.document.off( this._transitionEndEvents );
 				$.mobile.resetActivePageHeight();
 			}
-			
-			if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
-				this._wrapper().removeClass( o.classes.animate );
-				this._fixedToolbars().removeClass( o.classes.animate );
-			}
-		}
-		
-		if ( multiplePanels && this._open && o.display !== "overlay" ) {
-			this._wrapper().removeClass( o.classes.pageContentPrefix + "-open" );
-		}
-		
-		if ( this._open && o.display !== "overlay" ) {
-			$.mobile.pageContainer.removeClass( o.classes.pageContainer );
-			this._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
-		}
-		
-		if ( this._open && o.theme && o.display !== "overlay" ) {
-			var pageTheme = this._page().page( "option", "theme" );
-			
-			$.mobile.pageContainer.removeClass( o.classes.pageContainer + "-themed" );
-			this._page().parent().content({ "theme": pageTheme });
 		}
 		
 		if ( this._open ) {
@@ -459,26 +462,20 @@ $.widget( "mobile.panel", {
 		
 		this._panelInner.children().unwrap();
 
-		this.element.removeClass( [ this._getPanelClasses(), this.options.classes.panelAnimate ].join( " " ) )
+		this.element
+			.removeClass( [ this._getPanelClasses(), o.classes.panelOpen, o.classes.animate ].join( " " ) )
 			.off( "swipeleft.panel swiperight.panel" )
 			.off( "panelbeforeopen" )
 			.off( "panelhide" )
 			.off( "keyup.panel" )
-			.off( "updatelayout" );
+			.off( "updatelayout" )
+			.off( this._transitionEndEvents );
 
 		this._closeLink.off( "click.panel" );
 
 		if ( this._modal ) {
 			this._modal.remove();
 		}
-
-		// open and close
-		this.element
-			.off( this._transitionEndEvents )
-			.removeClass( [ this.options.classes.panelUnfixed, this.options.classes.panelClosed, this.options.classes.panelOpen ].join( " " ) );
-			
-		$.mobile.document.off( this._transitionEndEvents );
-		
 	}
 });
 
