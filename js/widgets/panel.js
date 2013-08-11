@@ -433,7 +433,7 @@ $.widget( "mobile.panel", {
 				this._wrapper().children().unwrap();
 			}
 			
-			this._page().find( "a" ).unbind( "panelopen panelclose" );
+			$.mobile.document.off( "click.panel panelopen panelclose", "a" );
 			
 			if ( this._open ) {
 				$.mobile.resetActivePageHeight();
@@ -484,11 +484,8 @@ $.widget( "mobile.panel", {
 		this.element
 			.off( this._transitionEndEvents )
 			.removeClass( [ this.options.classes.panelUnfixed, this.options.classes.panelClosed, this.options.classes.panelOpen ].join( " " ) );
+			
 		$.mobile.document.off( this._transitionEndEvents );
-		
-		if ( !multiplePanels ) {
-			$.mobile.document.off( "click.panel", "a" );
-		}
 		
 	}
 });
