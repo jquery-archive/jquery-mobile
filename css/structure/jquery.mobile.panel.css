@@ -209,29 +209,21 @@
 }
 
 /* wrap on wide viewports once open */
-@media (min-width:55em){
+@media (min-width:55em) {
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal,
-	/* External fixed toolbars (the toolbar must have the responsive class as well or it should be on the container instead of the page) */
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
 		margin-right: 17em;
 	}
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal,
-	/* External fixed toolbars (the toolbar must have the responsive class as well or it should be on the container instead of the page) */
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
 		margin-left: 17em;
 	}
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-push,
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-reveal,
-	/* External fixed toolbars (the toolbar must have the responsive class as well or it should be on the container instead of the page) */
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-push,
-	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-reveal {
 		width: auto;	
 	}
+	.ui-responsive-panel .ui-panel-dismiss-display-push,
 	.ui-responsive-panel.ui-page-active ~ .ui-panel-dismiss-display-push {
 		display: none;
-	}	
+	}
 }
