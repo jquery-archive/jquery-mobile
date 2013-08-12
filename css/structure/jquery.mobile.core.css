@@ -19,6 +19,7 @@
 @-moz-document url-prefix() {
 	.ui-mobile fieldset {
 		display: table-column;
+		vertical-align: middle;
 	}
 }
 
