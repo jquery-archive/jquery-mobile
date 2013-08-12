@@ -182,4 +182,40 @@ asyncTest( "Form resets correctly", function() {
 	setTimeout( maybeGoToTestPage );
 });
 
+asyncTest( "form action is honored", function() {
+
+	expect( 1 );
+
+	$.testHelper.pageSequence([
+		function() {
+			$( "#default-submit" ).click();
+		},
+
+		function() {
+			deepEqual( $.mobile.activePage.attr( "id" ), "landing1", "Clicking the default submit button lands you on landing1.html" );
+			$.mobile.back();
+		},
+
+		start
+	]);
+});
+
+asyncTest( "button's formaction attribute is honored", function() {
+
+	expect( 1 );
+
+	$.testHelper.pageSequence([
+		function() {
+			$( "#formaction-submit" ).click();
+		},
+
+		function() {
+			deepEqual( $.mobile.activePage.attr( "id" ), "landing2", "Clicking the default submit button lands you on landing2.html" );
+			$.mobile.back();
+		},
+
+		start
+	]);
+});
+
 })( jQuery );

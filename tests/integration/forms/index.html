@@ -28,7 +28,7 @@
 			],
 			[ "jquery.mobile.init" ],
 			[
-				"reset_core.js"
+				"forms_core.js"
 			]
 		]);
 	</script>
@@ -88,6 +88,10 @@
 				<button id="reset" type="reset" value="Test Reset"></button>
 			</form>
 			<a href="#startPage" id="goToStartPage">Go</a>
+			<form id="formactiontest" action="landing1.html">
+				<input type="submit" id="default-submit">Default Submit</input>
+				<input type="submit" id="formaction-submit" formaction="landing2.html">Formaction Submit</input>
+			</form>
     </div>
   </div>
 </body>
