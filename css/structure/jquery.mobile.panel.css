@@ -99,12 +99,12 @@
 }
 /* panel left open */
 .ui-panel-position-left.ui-panel-display-reveal, /* negate "panel left" for reveal */
-.ui-panel-position-left.ui-panel-open {
+.ui-panel-open.ui-panel-position-left {
 	left: 0;
 }
 /* animated: panel left open (for overlay and push) */
-.ui-panel-animate.ui-panel-position-left.ui-panel-open.ui-panel-display-overlay,
-.ui-panel-animate.ui-panel-position-left.ui-panel-open.ui-panel-display-push {
+.ui-panel-animate.ui-panel-open.ui-panel-position-left.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-open.ui-panel-position-left.ui-panel-display-push {
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 	-moz-transform: none;
@@ -127,8 +127,8 @@
 	right: 0;
 }
 /* animated: panel right open (for overlay and push) */
-.ui-panel-animate.ui-panel-position-right.ui-panel-open.ui-panel-display-overlay,
-.ui-panel-animate.ui-panel-position-right.ui-panel-open.ui-panel-display-push {
+.ui-panel-animate.ui-panel-open.ui-panel-position-right.ui-panel-display-overlay,
+.ui-panel-animate.ui-panel-open.ui-panel-position-right.ui-panel-display-push {
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 	-moz-transform: none;
@@ -136,14 +136,14 @@
 
 /* positioning: pages, fixed toolbars and dismiss */
 /* panel left open */
-.ui-panel-page-content-position-left.ui-panel-page-content-open,
-.ui-panel-dismiss-position-left.ui-panel-dismiss-open {
+.ui-panel-page-content-position-left,
+.ui-panel-dismiss-open.ui-panel-dismiss-position-left {
 	left: 17em;
 	right: -17em;
 }
 /* animated: panel left open (for reveal and push) */
-.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-open.ui-panel-page-content-display-reveal,
-.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-open.ui-panel-page-content-display-push {
+.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal,
+.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
 	left: 0;
 	right: 0;
 	-webkit-transform: translate3d(17em,0,0);
@@ -151,14 +151,14 @@
 	transform: translate3d(17em,0,0);
 }
 /* panel right open */
-.ui-panel-page-content-position-right.ui-panel-page-content-open,
-.ui-panel-dismiss-position-right.ui-panel-dismiss-open {
+.ui-panel-page-content-position-right,
+.ui-panel-dismiss-open.ui-panel-dismiss-position-right {
 	left: -17em;
 	right: 17em;
 }
 /* animated: panel right open (for reveal and push) */
-.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-open.ui-panel-page-content-display-reveal, 
-.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-open.ui-panel-page-content-display-push {
+.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal, 
+.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-display-push {
 	left: 0;
 	right: 0;
 	-webkit-transform: translate3d(-17em,0,0);
@@ -166,7 +166,7 @@
 	transform: translate3d(-17em,0,0);
 }
 /* negate "panel left/right open" for overlay */
-.ui-panel-page-content-open.ui-panel-page-content-display-overlay {
+.ui-panel-page-content-display-overlay {
 	left: 0;
 }
 
@@ -191,19 +191,19 @@
 	-moz-box-shadow: -5px 0 5px rgba(0,0,0,.15);
 	box-shadow: -5px 0 5px rgba(0,0,0,.15);
 }
-.ui-panel-display-push.ui-panel-open.ui-panel-position-left {
+.ui-panel-open.ui-panel-position-left.ui-panel-display-push {
 	border-right-width: 1px;
 	margin-right: -1px;
 }
-.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
+.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
 	margin-left: 1px;
 	width: auto;
 }
-.ui-panel-display-push.ui-panel-open.ui-panel-position-right {
+.ui-panel-open.ui-panel-position-right.ui-panel-display-push {
 	border-left-width: 1px;
 	margin-left: -1px;
 }
-.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push {
+.ui-panel-page-content-position-right.ui-panel-page-content-display-push {
 	margin-right: 1px;
 	width: auto;
 }
@@ -212,18 +212,23 @@
 @media (min-width:55em){
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal,
-	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
-	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
+	/* External fixed toolbars (the toolbar must have the responsive class as well or it should be on the container instead of the page) */
+	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
+	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
 		margin-right: 17em;
 	}
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal,
-	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
-	.ui-responsive-panel.ui-panel-fixed-toolbar.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
+	/* External fixed toolbars (the toolbar must have the responsive class as well or it should be on the container instead of the page) */
+	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
+	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
 		margin-left: 17em;
 	}
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-push,
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-reveal,
+	/* External fixed toolbars (the toolbar must have the responsive class as well or it should be on the container instead of the page) */
+	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-push,
+	.ui-responsive-panel.ui-panel-page-content-open.ui-panel-page-content-display-reveal {
 		width: auto;	
 	}
 	.ui-responsive-panel.ui-page-active ~ .ui-panel-dismiss-display-push {

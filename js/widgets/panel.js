@@ -319,8 +319,8 @@ $.widget( "mobile.panel", {
 					
 					if ( o.display !== "overlay" ) {
 						$.mobile.pageContainer.addClass( o.classes.pageContainer );
-						self._wrapper().addClass( self._pageContentOpenClasses + " " + o.classes.pageContentPrefix + "-open" );
-						self._fixedToolbars().addClass( self._pageContentOpenClasses + " " + o.classes.pageContentPrefix + "-open" );
+						self._wrapper().addClass( self._pageContentOpenClasses );
+						self._fixedToolbars().addClass( self._pageContentOpenClasses );
 					}
 
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
@@ -330,6 +330,11 @@ $.widget( "mobile.panel", {
 				},
 				complete = function() {
 					$.mobile.document.off( self._transitionEndEvents, complete );
+					
+					if ( o.display !== "overlay" ) {
+						self._wrapper().addClass( o.classes.pageContentPrefix + "-open" );
+						self._fixedToolbars().addClass( o.classes.pageContentPrefix + "-open" );
+					}
 
 					self._bindFixListener();
 
@@ -365,8 +370,8 @@ $.widget( "mobile.panel", {
 					self.element.removeClass( o.classes.panelOpen );
 					
 					if ( o.display !== "overlay" ) {
-						self._wrapper().removeClass( o.classes.pageContentPrefix + "-open" );
-						self._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
+						self._wrapper().removeClass( self._pageContentOpenClasses );
+						self._fixedToolbars().removeClass( self._pageContentOpenClasses );
 					}
 					
 					if ( self._modal ) {
@@ -387,10 +392,10 @@ $.widget( "mobile.panel", {
 
 					if ( o.display !== "overlay" ) {
 						$.mobile.pageContainer.removeClass( o.classes.pageContainer );
-						self._wrapper().removeClass( self._pageContentOpenClasses );
-						self._fixedToolbars().removeClass( self._pageContentOpenClasses );
+						self._wrapper().removeClass( o.classes.pageContentPrefix + "-open" );
+						self._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
 					}
-					
+
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
 						self._wrapper().removeClass( o.classes.animate );
 						self._fixedToolbars().removeClass( o.classes.animate );
