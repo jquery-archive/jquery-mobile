@@ -136,7 +136,7 @@ $.widget( "mobile.popup", {
 				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
-					( currentOptions.wrapperClass || "" ) + "'></div>" )
+					( " " + currentOptions.wrapperClass || "" ) + "'></div>" )
 			},
 			fragment = this.document[ 0 ].createDocumentFragment();
 
