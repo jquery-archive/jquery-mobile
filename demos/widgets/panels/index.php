@@ -139,27 +139,24 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 	/* wrap on wide viewports once open */
 	
-	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-left,
-	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-left,
-	.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-left,
-	.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-left {
+	.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
+	.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
 		margin-right: 17em;
 	}
-	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-right,
-	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-right,
-	.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-right,
-	.ui-page-panel-open .ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-position-right {
+	.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
+	.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
 		margin-left: 17em;
 	}
-	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push,
-	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal {
-		width: auto;
+	.ui-panel-page-content-open.ui-panel-page-content-display-push,
+	.ui-panel-page-content-open.ui-panel-page-content-display-reveal {
+		width: auto;	
 	}
 	
 	/* disable "dismiss" on wide viewports */
 	.ui-panel-dismiss {
 		display: none;
 	}
+	
 	/* same as the above but for panels with display mode "push" only */
 	.ui-panel-dismiss-display-push {
 		display: none;
@@ -170,7 +167,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<h4>Applying a preset breakpoint</h4>
 
-		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the <em>page wrapper</em> (not the panel). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
+		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the page or, in case you use external panels and/or fixed toolbars, to the page container (<code>body</code>). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
 
 		<h2 id="external-panels">Panels outside pages</h2>
 
