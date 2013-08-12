@@ -267,7 +267,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 	_isRebuildRequired: function() {
 		var list = this.list.find( "li" ),
-			options = this._selectOptions();
+			options = this._selectOptions().not( ".ui-screen-hidden" );
 
 		// TODO exceedingly naive method to determine difference
 		// ignores value changes etc in favor of a forcedRebuild
@@ -414,13 +414,19 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			optLabel, divider, item;
 
 		self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
-		$options = this.select.find( "option" );
+		$options = this._selectOptions();
 		numOptions = $options.length;
 		select = this.select[ 0 ];
 
 		for ( i = 0; i < numOptions;i++, isPlaceholderItem = false) {
 			option = $options[i];
 			$option = $( option );
+
+			// Do not create options based on ui-screen-hidden select options
+			if ( $option.hasClass( "ui-screen-hidden" ) ) {
+				continue;
+			}
+
 			parent = option.parentNode;
 			text = $option.text();
 			anchor  = document.createElement( "a" );
