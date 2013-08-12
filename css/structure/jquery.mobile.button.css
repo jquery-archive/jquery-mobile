@@ -1,5 +1,6 @@
 /* TODO: This file only contains CSS for the button widget and should be renamed to jquery.mobile.forms.button.css */
-button.ui-btn {
+button.ui-btn,
+.ui-controlgroup-controls button.ui-btn-icon-notext {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -14,7 +15,8 @@ button.ui-btn::-moz-focus-inner {
 button.ui-btn-inline {
 	width: auto;
 }
-button.ui-btn-icon-notext {
+button.ui-btn-icon-notext,
+.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-btn {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
