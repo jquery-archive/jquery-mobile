@@ -7,6 +7,13 @@ fieldset.ui-controlgroup {
 .ui-field-contain fieldset.ui-controlgroup {
 	margin: 0;
 }
+.ui-mini .ui-controlgroup-label {
+	font-size: 16px;
+}
+.ui-controlgroup.ui-mini .ui-btn-icon-notext,
+.ui-controlgroup .ui-mini.ui-btn-icon-notext {
+	font-size: inherit;
+}
 .ui-controlgroup-controls .ui-btn,
 .ui-controlgroup-controls .ui-checkbox,
 .ui-controlgroup-controls .ui-radio,
