@@ -207,22 +207,25 @@ $.widget( "mobile.panel", {
 	},
 
 	_bindLinkListeners: function() {
-		var self = this;
-
-		$.mobile.document.on( "click.panel", "a", function( e ) {
-			if ( this.href.split( "#" )[ 1 ] === self._panelID && self._panelID !== undefined ) {
-				e.preventDefault();
-				var link = $( this );
-				if ( link.hasClass( "ui-btn" ) ) {
-					link.addClass( $.mobile.activeBtnClass );
-					self.element.one( "panelopen panelclose", function() {
-						link.removeClass( $.mobile.activeBtnClass );
-					});
-				}
-				self.toggle();
-				return false;
-			}
+		this._on( "a", {
+			"click": "_handleClick"
 		});
+		
+	},
+
+	_handleClick: function( e ){
+		if (  e.currentTarget.href.split( "#" )[ 1 ] === this._panelID && this._panelID !== undefined ) {
+			e.preventDefault();
+			var link = $( e.target );
+			if ( link.hasClass( "ui-btn" ) ) {
+				link.addClass( $.mobile.activeBtnClass );
+				this.element.one( "panelopen panelclose", function() {
+					link.removeClass( $.mobile.activeBtnClass );
+				});
+			}
+			this.toggle();
+			return false;
+		}
 	},
 
 	_bindSwipeEvents: function() {
@@ -418,6 +421,7 @@ $.widget( "mobile.panel", {
 
 	_destroy: function() {
 		var o = this.options,
+			pageTheme,
 			multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1;
 
 		if ( o.display !== "overlay" ) {
@@ -435,7 +439,7 @@ $.widget( "mobile.panel", {
 				$.mobile.pageContainer.removeClass( o.classes.pageContainer );
 				
 				if ( o.theme ) {
-					var pageTheme = this._page().page( "option", "theme" );
+					pageTheme = this._page().page( "option", "theme" );
 					
 					this._page().parent().content({ "theme": pageTheme });
 					
@@ -445,10 +449,8 @@ $.widget( "mobile.panel", {
 		}
 
 		if ( !multiplePanels ) {
-			$.mobile.document
-				.off( "click.panel", "a" )
-				.find( "a" )
-				.off( "panelopen panelclose" );
+
+			$.mobile.document.off( "panelopen panelclose" );
 			
 			if ( this._open ) {
 				$.mobile.document.off( this._transitionEndEvents );
