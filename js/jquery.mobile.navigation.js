@@ -1413,7 +1413,8 @@ define( [
 				return false;
 			}
 
-			url = $form.attr( "action" );
+			url = ( $lastVClicked && $lastVClicked.attr( "formaction" ) ) ||
+				$form.attr( "action" );
 			method = ( $form.attr( "method" ) || "get" ).toLowerCase();
 
 			// If no action is specified, browsers default to using the
