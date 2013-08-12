@@ -128,7 +128,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	build: function() {
-		var selectId, prefix, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
+		var selectId, popupId, dialogId, label, thisPage, isMultiple, menuId, themeAttr, overlayThemeAttr,
 			dividerThemeAttr, menuPage, listbox, list, header, headerTitle, menuPageContent, menuPageClose, headerClose, self,
 			o = this.options;
 
@@ -138,9 +138,8 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		self = this;
 		selectId = this.selectId;
-		prefix = ( selectId ? selectId : ( ( $.mobile.ns || "" ) + "uuid-" + this.uuid ) );
-		popupId = prefix + "-listbox";
-		dialogId = prefix + "-dialog";
+		popupId = selectId + "-listbox";
+		dialogId = selectId + "-dialog";
 		label = this.label;
 		thisPage = this.element.closest( ".ui-page" );
 		isMultiple = this.element[ 0 ].multiple;
