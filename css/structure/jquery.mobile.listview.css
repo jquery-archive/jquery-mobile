@@ -127,6 +127,7 @@
 	min-height: 3.625em;
 	padding-left: 6.25em;
 }
+/* ui-li-has-icon deprecated in 1.4. TODO: remove in 1.5 */
 .ui-listview .ui-li-has-icon > .ui-btn,
 .ui-listview .ui-li-static.ui-li-has-icon {
 	min-height: 1.25em;
@@ -152,13 +153,15 @@
 	right: 3.636em;
 }
 .ui-listview .ui-li-has-thumb > img:first-child,
-.ui-listview .ui-li-has-thumb > .ui-btn > img:first-child {
+.ui-listview .ui-li-has-thumb > .ui-btn > img:first-child,
+.ui-listview .ui-li-has-thumb .ui-li-thumb {
 	position: absolute;
 	left: 0;
 	top: 0;
 	max-height: 5em;
 	max-width: 5em;
 }
+/* ui-li-has-icon deprecated in 1.4. TODO: remove in 1.5 */
 .ui-listview .ui-li-has-icon > img:first-child,
 .ui-listview .ui-li-has-icon > .ui-btn > img:first-child {
 	position: absolute;
