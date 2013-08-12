@@ -294,17 +294,15 @@ html body .ui-group-theme-a a:active {
 .ui-overlay-a .ui-btn,
 html .ui-bar-a .ui-btn,
 html .ui-body-a .ui-btn,
-html body .ui-btn.ui-btn-a,
 html body .ui-group-theme-a .ui-btn,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-a,
+html head + body .ui-btn.ui-btn-a,
 /* Button visited */
 .ui-page-theme-a .ui-btn:visited,
 .ui-overlay-a .ui-btn:visited,
 html .ui-bar-a .ui-btn:visited,
 html .ui-body-a .ui-btn:visited,
-html body .ui-btn.ui-btn-a:visited,
 html body .ui-group-theme-a .ui-btn:visited,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-a:visited {
+html head + body .ui-btn.ui-btn-a:visited {
 	background: 			#f6f6f6 /*{a-bup-background-color}*/;
 	border-color:	 		#ddd /*{a-bup-border}*/;
 	color: 					#111 /*{a-bup-color}*/;
@@ -315,9 +313,8 @@ html body .ui-group-theme-a .ui-btn:visited,
 .ui-overlay-a .ui-btn:hover,
 html .ui-bar-a .ui-btn:hover,
 html .ui-body-a .ui-btn:hover,
-html body .ui-btn.ui-btn-a:hover,
 html body .ui-group-theme-a .ui-btn:hover,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-a:hover {
+html head + body .ui-btn.ui-btn-a:hover {
 	background: 			#ededed /*{a-bhover-background-color}*/;
 	border-color:	 		#ddd /*{a-bhover-border}*/;
 	color: 					#111 /*{a-bhover-color}*/;
@@ -328,9 +325,8 @@ html body .ui-group-theme-a .ui-btn:hover,
 .ui-overlay-a .ui-btn:active,
 html .ui-bar-a .ui-btn:active,
 html .ui-body-a .ui-btn:active,
-html body .ui-btn.ui-btn-a:active,
 html body .ui-group-theme-a .ui-btn:active,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-a:active {
+html head + body .ui-btn.ui-btn-a:active {
 	background: 			#e8e8e8 /*{a-bdown-background-color}*/;
 	border-color:	 		#ddd /*{a-bdown-border}*/;
 	color: 					#111 /*{a-bdown-color}*/;
@@ -342,9 +338,8 @@ html body .ui-group-theme-a .ui-btn:active,
 .ui-overlay-a .ui-btn.ui-btn-active,
 html .ui-bar-a .ui-btn.ui-btn-active,
 html .ui-body-a .ui-btn.ui-btn-active,
-html body .ui-btn.ui-btn-a.ui-btn-active,
 html body .ui-group-theme-a .ui-btn.ui-btn-active,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-a.ui-btn-active,
+html head + body .ui-btn.ui-btn-a.ui-btn-active,
 /* Active checkbox icon */
 .ui-page-theme-a .ui-icon-checkbox-on:after,
 .ui-overlay-a .ui-icon-checkbox-on:after,
@@ -386,19 +381,16 @@ html body .ui-group-theme-a .ui-icon-radio-on:after,
 .ui-overlay-a .ui-btn:focus,
 html .ui-bar-a .ui-btn:focus,
 html .ui-body-a .ui-btn:focus,
-html body .ui-btn.ui-btn-a:focus,
 html body .ui-group-theme-a .ui-btn:focus,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-a:focus,
+html head + body .ui-btn.ui-btn-a:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-a .ui-focus,
 .ui-overlay-a .ui-focus,
 html .ui-bar-a .ui-focus,
 html .ui-body-a .ui-focus,
-html body .ui-btn-a.ui-focus,
-html body .ui-body-a.ui-focus,
 html body .ui-group-theme-a .ui-focus,
-[class*="ui-group-theme-"] .ui-btn-a.ui-focus,
-[class*="ui-group-theme-"] .ui-body-a.ui-focus {
+html head + body .ui-btn-a.ui-focus,
+html head + body .ui-body-a.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#0066ff /*{a-active-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#0066ff /*{a-active-background-color}*/;
 	box-shadow: 0 0 12px 			#0066ff /*{a-active-background-color}*/;
@@ -498,17 +490,15 @@ html body .ui-group-theme-b a:active {
 .ui-overlay-b .ui-btn,
 html .ui-bar-b .ui-btn,
 html .ui-body-b .ui-btn,
-html body .ui-btn.ui-btn-b,
 html body .ui-group-theme-b .ui-btn,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-b,
+html head + body .ui-btn.ui-btn-b,
 /* Button visited */
 .ui-page-theme-b .ui-btn:visited,
 .ui-overlay-b .ui-btn:visited,
 html .ui-bar-b .ui-btn:visited,
 html .ui-body-b .ui-btn:visited,
-html body .ui-btn.ui-btn-b:visited,
 html body .ui-group-theme-b .ui-btn:visited,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-b:visited {
+html head + body .ui-btn.ui-btn-b:visited {
 	background: 			#333 /*{b-bup-background-color}*/;
 	border-color:	 		#1f1f1f /*{b-bup-border}*/;
 	color: 					#fff /*{b-bup-color}*/;
@@ -519,9 +509,8 @@ html body .ui-group-theme-b .ui-btn:visited,
 .ui-overlay-b .ui-btn:hover,
 html .ui-bar-b .ui-btn:hover,
 html .ui-body-b .ui-btn:hover,
-html body .ui-btn.ui-btn-b:hover,
 html body .ui-group-theme-b .ui-btn:hover,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-b:hover {
+html head + body .ui-btn.ui-btn-b:hover {
 	background: 			#373737 /*{b-bhover-background-color}*/;
 	border-color:	 		#1f1f1f /*{b-bhover-border}*/;
 	color: 					#fff /*{b-bhover-color}*/;
@@ -532,9 +521,8 @@ html body .ui-group-theme-b .ui-btn:hover,
 .ui-overlay-b .ui-btn:active,
 html .ui-bar-b .ui-btn:active,
 html .ui-body-b .ui-btn:active,
-html body .ui-btn.ui-btn-b:active,
 html body .ui-group-theme-b .ui-btn:active,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-b:active {
+html head + body .ui-btn.ui-btn-b:active {
 	background: 			#404040 /*{b-bdown-background-color}*/;
 	border-color:	 		#1f1f1f /*{b-bdown-border}*/;
 	color: 					#fff /*{b-bdown-color}*/;
@@ -546,9 +534,8 @@ html body .ui-group-theme-b .ui-btn:active,
 .ui-overlay-b .ui-btn.ui-btn-active,
 html .ui-bar-b .ui-btn.ui-btn-active,
 html .ui-body-b .ui-btn.ui-btn-active,
-html body .ui-btn.ui-btn-b.ui-btn-active,
 html body .ui-group-theme-b .ui-btn.ui-btn-active,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-b.ui-btn-active,
+html head + body .ui-btn.ui-btn-b.ui-btn-active,
 /* Active checkbox icon */
 .ui-page-theme-b .ui-icon-checkbox-on:after,
 .ui-overlay-b .ui-icon-checkbox-on:after,
@@ -590,19 +577,16 @@ html body .ui-group-theme-b .ui-icon-radio-on:after,
 .ui-overlay-b .ui-btn:focus,
 html .ui-bar-b .ui-btn:focus,
 html .ui-body-b .ui-btn:focus,
-html body .ui-btn.ui-btn-b:focus,
 html body .ui-group-theme-b .ui-btn:focus,
-[class*="ui-group-theme-"] .ui-btn.ui-btn-b:focus,
+html head + body .ui-btn.ui-btn-b:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-b .ui-focus,
 .ui-overlay-b .ui-focus,
 html .ui-bar-b .ui-focus,
 html .ui-body-b .ui-focus,
-html body .ui-btn-b.ui-focus,
-html body .ui-body-b.ui-focus,
 html body .ui-group-theme-b .ui-focus,
-[class*="ui-group-theme-"] .ui-btn-b.ui-focus,
-[class*="ui-group-theme-"] .ui-body-b.ui-focus {
+html head + body .ui-btn-b.ui-focus,
+html head + body .ui-body-b.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#33ccff /*{b-active-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#33ccff /*{b-active-background-color}*/;
 	box-shadow: 0 0 12px 			#33ccff /*{b-active-background-color}*/;
@@ -630,7 +614,15 @@ button[disabled],
 	outline: 0;
 }
 /* Unset box-shadow in browsers that don't do it right */
-.ui-noboxshadow * {
+.ui-noboxshadow .ui-shadow,
+.ui-noboxshadow .ui-shadow-inset,
+.ui-noboxshadow .ui-overlay-shadow,
+.ui-noboxshadow .ui-shadow-icon.ui-btn:after,
+.ui-noboxshadow .ui-shadow-icon .ui-btn:after,
+.ui-noboxshadow .ui-focus,
+.ui-noboxshadow .ui-btn:focus,
+.ui-noboxshadow  input:focus,
+.ui-noboxshadow .ui-panel {
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
