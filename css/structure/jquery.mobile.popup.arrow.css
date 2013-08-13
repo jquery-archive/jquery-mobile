@@ -119,14 +119,15 @@
 	background-position: 10px 0;
 }
 
-/* For some reason (probably because of all the decimal places) there's a
-   rounding error in the background position, so push it over by one */
+/* For some reason (probably because of all the decimal places) a rounding
+   error might show up in the background position, so it may have to be pushed
+	 over by one (i.e, 11px instead of 10px in the values below) */
 .ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow-background {
-	background-position: 0 11px;
+	background-position: 0 10px;
 }
 
 .ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow-background {
-	background-position: 11px 0;
+	background-position: 10px 0;
 }
 
 .ui-popup > .ui-popup-arrow-guide {
