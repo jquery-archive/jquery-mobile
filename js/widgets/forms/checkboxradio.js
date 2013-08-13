@@ -32,12 +32,18 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		var input = this.element,
 			o = this.options,
 			inheritAttr = function( input, dataAttr ) {
-				return input.jqmData( dataAttr ) || input.closest( "form, fieldset" ).jqmData( dataAttr );
+				return input.jqmData( dataAttr ) ||
+					input.closest( "form, fieldset" ).jqmData( dataAttr );
 			},
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
-			parentLabel = $( input ).closest( "label" ),
-			label = parentLabel.length ? parentLabel : $( input ).closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ).first(),
+			parentLabel = input.closest( "label" ),
+			label = parentLabel.length ? parentLabel :
+				input
+					.closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" )
+					.find( "label" )
+					.filter( "[for='" + $.mobile.path.hashToSelector( input[0].id ) + "']" )
+					.first(),
 			inputtype = input[0].type,
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
