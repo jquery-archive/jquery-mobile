@@ -45,18 +45,49 @@ function arrowCSS( size ) {
 		"	clip: rect(" + size + "px,2000px,1000px,-1000px);\n" +
 		"}\n" +
 		"\n" +
-		".ui-popup-arrow {\n" +
-		"	width: " + size * sqrt2 + "px;\n" +
-		"	height: " + size * sqrt2 + "px;\n" +
-		"	left: " + ( ( ( 2 - sqrt2 ) * size ) / 2 ) + "px;\n" +
-		"	top: " + ( ( ( 2 - sqrt2 ) * size ) / 2 ) + "px;\n" +
+		".ui-popup-arrow-container .ui-popup-arrow {\n" +
+		"	width: " + ( 2 * size * sqrt2 ) + "px;\n" +
+		"	height: " + ( 2 * size * sqrt2 ) + "px;\n" +
 		"	border-width: 1px;\n" +
 		"	border-style: solid;\n" +
 		"}\n" +
 		"\n" +
-		".ui-popup-arrow-container.ie .ui-popup-arrow {\n" +
-		"	margin-left: -" + ( size / 3.5 ) + "px;\n" +
-		"	margin-top: -" + ( size / 3.5 ) + "px;\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow {\n" +
+		"	left: " + ( ( 1 - sqrt2 ) * size ) + "px;\n" +
+		"	top: " + ( ( 2 - sqrt2 ) * size ) + "px;\n" +
+		"}\n" +
+		"\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow {\n" +
+		"	left: " + ( ( 1 - sqrt2 ) * size ) + "px;\n" +
+		"	top: -" + ( size * sqrt2 ) + "px;\n" +
+		"}\n" +
+		"\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow {\n" +
+		"	left: " + ( ( 2 - sqrt2 ) * size ) + "px;\n" +
+		"	top: " + ( ( 1 - sqrt2 ) * size ) + "px;\n" +
+		"}\n" +
+		"\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow {\n" +
+		"	left: -" + ( size * sqrt2 ) + "px;\n" +
+		"	top: " + ( ( 1 - sqrt2 ) * size ) + "px;\n" +
+		"}\n" +
+		"\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-t.ie .ui-popup-arrow {\n" +
+		"	margin-left: -" + ( ( 2 - sqrt2 ) * size ) + "px;\n" +
+		"	margin-top: " + ( ( sqrt2 / 2 - sqrt2 ) * size ) + "px;\n" +
+		"}\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-b.ie .ui-popup-arrow {\n" +
+		"	margin-left: -" + ( ( 2 - sqrt2 ) * size ) + "px;\n" +
+		"	margin-top: " + ( ( 1 - sqrt2 ) * size ) + "px;\n" +
+		"}\n" +
+		"\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-l.ie .ui-popup-arrow {\n" +
+		"	margin-left: " + ( ( sqrt2 / 2 - sqrt2 ) * size ) + "px;\n" +
+		"	margin-top: -" + ( ( 2 - sqrt2 ) * size ) + "px;\n" +
+		"}\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-r.ie .ui-popup-arrow {\n" +
+		"	margin-left: " + ( ( 1 - sqrt2 ) * size ) + "px;\n" +
+		"	margin-top: -" + ( ( 2 - sqrt2 ) * size ) + "px;\n" +
 		"}\n" +
 		"\n" +
 		".ui-popup-arrow-background {\n" +
@@ -64,18 +95,12 @@ function arrowCSS( size ) {
 		"	height: " + ( 2 * size ) + "px;\n" +
 		"}\n" +
 		"\n" +
-		".ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow-background {\n" +
-		"	background-position: 0 " + size + "px;\n" +
-		"}\n" +
-		"\n" +
-		".ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow-background {\n" +
-		"	background-position: " + size + "px 0;\n" +
-		"}\n" +
-		"\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow-background,\n" +
 		".ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow-background {\n" +
 		"	background-position: 0 " + size + "px;\n" +
 		"}\n" +
 		"\n" +
+		".ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow-background,\n" +
 		".ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow-background {\n" +
 		"	background-position: " + size + "px 0;\n" +
 		"}";
