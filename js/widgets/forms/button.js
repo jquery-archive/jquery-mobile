@@ -14,7 +14,7 @@ $.widget( "mobile.button", {
 	initSelector: "input[type='button'], input[type='submit'], input[type='reset']",
 
 	options: {
-		theme: "inherit",
+		theme: null,
 		icon: null,
 		iconpos: "left",
 		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
