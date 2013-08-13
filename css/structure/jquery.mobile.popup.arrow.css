@@ -99,8 +99,8 @@
 
 .ui-popup-arrow-container.ie .ui-popup-arrow {
 	/* Fix rotation center  - see http://www.useragentman.com/IETransformsTranslator/ */
-	margin-left: -3px;
-	margin-top: -3px;
+	margin-left: -2.828px;
+	margin-top: -2.828px;
 }
 
 .ui-popup-arrow-background {
