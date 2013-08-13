@@ -40,7 +40,7 @@
 
 <li data-section="Demo Showcase" data-filtertext="dynamic popups popup images lightbox"><a href="examples/popups/dynamic-popup.php" data-ajax="false">Dynamic popup</a></li>
 
-<li data-section="Demo Showcase" data-filtertext="arrow popups popover"><a href="examples/popups/arrow.php" data-ajax="false">Popup with arrow</a></li>
+<li data-section="Demo Showcase" data-filtertext="arrow popups popover size"><a href="examples/popups/arrow-size.php" data-ajax="false">Popup arrow size</a></li>
 
 <li data-section="Demo Showcase" data-filtertext="popups popup position alignment"><a href="examples/popups/alignment.php" data-ajax="false">Popup alignment</a></li>
 
