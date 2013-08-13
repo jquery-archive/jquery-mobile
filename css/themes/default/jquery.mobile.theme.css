@@ -247,7 +247,8 @@ html body .ui-group-theme-a .ui-li-count,
 .ui-page-theme-a .ui-body-inherit,
 html .ui-bar-a .ui-body-inherit,
 html .ui-body-a .ui-body-inherit,
-html body .ui-group-theme-a .ui-body-inherit {
+html body .ui-group-theme-a .ui-body-inherit,
+html .ui-panel-page-container-a {
 	background: 			#fff /*{a-body-background-color}*/;
 	border-color:	 		#ddd /*{a-body-border}*/;
 	color: 					#111 /*{a-body-color}*/;
@@ -443,7 +444,8 @@ html body .ui-group-theme-b .ui-li-count,
 .ui-page-theme-b .ui-body-inherit,
 html .ui-bar-b .ui-body-inherit,
 html .ui-body-b .ui-body-inherit,
-html body .ui-group-theme-b .ui-body-inherit {
+html body .ui-group-theme-b .ui-body-inherit,
+html .ui-panel-page-container-b {
 	background: 			#2a2a2a /*{b-body-background-color}*/;
 	border-color:	 		#1d1d1d /*{b-body-border}*/;
 	color: 					#fff /*{b-body-color}*/;

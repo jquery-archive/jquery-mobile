@@ -306,8 +306,7 @@ $.widget( "mobile.panel", {
 
 					if ( o.theme && o.display !== "overlay" ) {
 						self._page().parent()
-							.content({ "theme": o.theme })
-							.addClass( o.classes.pageContainer + "-themed" );
+							.addClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
 					}
 
 					self.element
@@ -383,10 +382,7 @@ $.widget( "mobile.panel", {
 					$.mobile.document.off( self._transitionEndEvents, complete );
 					
 					if ( o.theme && o.display !== "overlay" ) {
-						var pageTheme = $( ".ui-page-active" ).page( "option", "theme" );
-						
-						self._page().parent().removeClass( o.classes.pageContainer + "-themed" );
-						$( ".ui-page-active" ).parent().content({ "theme": pageTheme });
+						self._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
 					}
 						
 					self.element.addClass( o.classes.panelClosed );
@@ -445,11 +441,7 @@ $.widget( "mobile.panel", {
 				this._page().parent().removeClass( o.classes.pageContainer );
 				
 				if ( o.theme ) {
-					pageTheme = this._page().page( "option", "theme" );
-					
-					this._page().parent().content({ "theme": pageTheme });
-					
-					this._page().parent().removeClass( o.classes.pageContainer + "-themed" );
+					this._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
 				}
 			}
 		}
