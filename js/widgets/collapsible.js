@@ -321,6 +321,7 @@ $.mobile.collapsible.defaults = {
 	expandCueText: " click to expand contents",
 	collapseCueText: " click to collapse contents",
 	collapsedIcon: "plus",
+	contentTheme: "inherit",
 	expandedIcon: "minus",
 	iconpos: "left",
 	inset: true,
