@@ -131,12 +131,13 @@ $.widget( "mobile.popup", {
 
 	_enhance: function( theElement, myId ) {
 		var currentOptions = this.options,
+			wrapperClass = currentOptions.wrapperClass,
 			ui = {
 				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
 				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
 				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
-					( " " + currentOptions.wrapperClass || "" ) + "'></div>" )
+					( wrapperClass ? ( " " + wrapperClass ) : "" ) + "'></div>" )
 			},
 			fragment = this.document[ 0 ].createDocumentFragment();
 
