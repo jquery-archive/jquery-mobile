@@ -89,7 +89,7 @@ $.widget( "mobile.panel", {
 	
 	_createModal: function() {
 		var self = this,
-			target = $.mobile.pageContainer;
+			target = self._parentPage ? self._parentPage.parent() : self.element.parent();
 
 		self._modal = $( "<div class='" + self.options.classes.modal + "' data-panelid='" + self._panelID + "'></div>" )
 			.on( "mousedown", function() {
@@ -305,8 +305,9 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( o.theme && o.display !== "overlay" ) {
-						self._page().parent().content({ "theme": o.theme });
-						$.mobile.pageContainer.addClass( o.classes.pageContainer + "-themed" );
+						self._page().parent()
+							.content({ "theme": o.theme })
+							.addClass( o.classes.pageContainer + "-themed" );
 					}
 
 					self.element
@@ -318,7 +319,7 @@ $.widget( "mobile.panel", {
 					self._pageContentOpenClasses = self._getPosDisplayClasses( o.classes.pageContentPrefix );
 					
 					if ( o.display !== "overlay" ) {
-						$.mobile.pageContainer.addClass( o.classes.pageContainer );
+						self._page().parent().addClass( o.classes.pageContainer );
 						self._wrapper().addClass( self._pageContentOpenClasses );
 						self._fixedToolbars().addClass( self._pageContentOpenClasses );
 					}
@@ -384,14 +385,14 @@ $.widget( "mobile.panel", {
 					if ( o.theme && o.display !== "overlay" ) {
 						var pageTheme = $( ".ui-page-active" ).page( "option", "theme" );
 						
-						$.mobile.pageContainer.removeClass( o.classes.pageContainer + "-themed" );
+						self._page().parent().removeClass( o.classes.pageContainer + "-themed" );
 						$( ".ui-page-active" ).parent().content({ "theme": pageTheme });
 					}
 						
 					self.element.addClass( o.classes.panelClosed );
 
 					if ( o.display !== "overlay" ) {
-						$.mobile.pageContainer.removeClass( o.classes.pageContainer );
+						self._page().parent().removeClass( o.classes.pageContainer );
 						self._wrapper().removeClass( o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
 					}
@@ -441,14 +442,14 @@ $.widget( "mobile.panel", {
 					this._fixedToolbars().removeClass( o.classes.animate );
 				}
 				
-				$.mobile.pageContainer.removeClass( o.classes.pageContainer );
+				this._page().parent().removeClass( o.classes.pageContainer );
 				
 				if ( o.theme ) {
 					pageTheme = this._page().page( "option", "theme" );
 					
 					this._page().parent().content({ "theme": pageTheme });
 					
-					$.mobile.pageContainer.removeClass( o.classes.pageContainer + "-themed" );
+					this._page().parent().removeClass( o.classes.pageContainer + "-themed" );
 				}
 			}
 		}
