@@ -16,7 +16,7 @@ $.extend( $.Widget.prototype, {
 		$.each( this.options, function( option ) {
 			var value = $.mobile.getAttribute( elem, option.replace( /[A-Z]/g, function( c ) {
 				return "-" + c.toLowerCase();
-			}), true );
+			}));
 
 			if ( value != null ) {
 				options[ option ] = value;

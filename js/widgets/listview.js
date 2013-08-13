@@ -90,7 +90,7 @@ $.widget( "mobile.listview", $.extend( {
 			start = $list.attr( "start" ),
 			itemClassDict = {},
 			countBubbles = $list.find( ".ui-li-count" ),
-			countTheme = getAttr( $list[ 0 ], "counttheme", true ) || this.options.countTheme,
+			countTheme = getAttr( $list[ 0 ], "counttheme" ) || this.options.countTheme,
 			countThemeClass = countTheme ? "ui-body-" + countTheme : false;
 
 		if ( o.theme ) {
@@ -109,12 +109,12 @@ $.widget( "mobile.listview", $.extend( {
 
 			if ( create || item[ 0 ].className.search( /\bui-li-static\b|\bui-li-divider\b/ ) < 0 ) {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
-				isDivider = ( getAttr( item[ 0 ], "role", true ) === "list-divider" );
+				isDivider = ( getAttr( item[ 0 ], "role" ) === "list-divider" );
 				value = item.attr( "value" );
-				itemTheme = getAttr( item[ 0 ], "theme", true );
+				itemTheme = getAttr( item[ 0 ], "theme" );
 
 				if ( a.length && a[ 0 ].className.search( /\bui-btn\b/ ) < 0 && !isDivider ) {
-					itemIcon = getAttr( item[ 0 ], "icon", true );
+					itemIcon = getAttr( item[ 0 ], "icon" );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
 					// TODO: Remove in 1.5 together with links.js (links.js / .ui-link deprecated in 1.4)
@@ -130,8 +130,8 @@ $.widget( "mobile.listview", $.extend( {
 						itemClass = "ui-li-has-alt";
 
 						last = a.last();
-						splittheme = getAttr( last[ 0 ], "theme", true ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
-						spliticon = getAttr( last[ 0 ], "icon", true ) || getAttr( item[ 0 ], "icon", true ) || o.splitIcon;
+						splittheme = getAttr( last[ 0 ], "theme" ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
+						spliticon = getAttr( last[ 0 ], "icon" ) || getAttr( item[ 0 ], "icon" ) || o.splitIcon;
 						altButtonClass = splittheme ? "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon : "ui-btn ui-icon-" + spliticon;
 
 						last
@@ -144,7 +144,7 @@ $.widget( "mobile.listview", $.extend( {
 
 					a.first().addClass( buttonClass );
 				} else if ( isDivider ) {
-					dividerTheme = ( getAttr( item[ 0 ], "theme", true ) || o.dividerTheme || o.theme );
+					dividerTheme = ( getAttr( item[ 0 ], "theme" ) || o.dividerTheme || o.theme );
 
 					itemClass = "ui-li-divider ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
 

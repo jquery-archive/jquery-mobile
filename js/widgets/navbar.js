@@ -30,8 +30,8 @@ $.widget( "mobile.navbar", {
 
 		$navbtns
 			.each( function() {
-				var icon = $.mobile.getAttribute( this, "icon", true ),
-					theme = $.mobile.getAttribute( this, "theme", true ),
+				var icon = $.mobile.getAttribute( this, "icon" ),
+					theme = $.mobile.getAttribute( this, "theme" ),
 					classes = "ui-btn";
 
 				if ( theme ) {

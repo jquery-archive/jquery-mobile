@@ -31,7 +31,7 @@ $.widget( "mobile.slider", $.extend( {
 		// TODO: Each of these should have comments explain what they're for
 		var self = this,
 			control = this.element,
-			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme", true ),
+			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme" ),
 			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
 			cornerClass = ( this.options.corners || control.jqmData( "corners" ) ) ? " ui-corner-all" : "",
 			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
@@ -382,7 +382,7 @@ $.widget( "mobile.slider", $.extend( {
 		//       alteration of the input value, which should still update the slider
 
 		var self = this,
-			parentTheme = $.mobile.getAttribute( this.element[ 0 ], "theme", true ),
+			parentTheme = $.mobile.getAttribute( this.element[ 0 ], "theme" ),
 			theme = this.options.theme || parentTheme,
 			themeClass =  theme ? " ui-btn-" + theme : "",
 			trackTheme = this.options.trackTheme || parentTheme,

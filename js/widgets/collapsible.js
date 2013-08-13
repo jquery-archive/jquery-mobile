@@ -89,7 +89,7 @@ $.widget( "mobile.collapsible", {
 				( options[ key ] != null ) ? options[ key ] :
 				( accordionWidget ) ? accordionWidget.options[ key ] :
 				accordion.length ? $.mobile.getAttribute( accordion[ 0 ],
-					key.replace( rInitialLetter, "-$1" ).toLowerCase(), true ):
+					key.replace( rInitialLetter, "-$1" ).toLowerCase() ):
 				null;
 
 			if ( null == options[ key ] ) {

@@ -10,7 +10,7 @@ define( [ "jquery",
 
 // TODO rename filterCallback/deprecate and default to the item itself as the first argument
 var defaultFilterCallback = function( index, searchValue ) {
-	return ( ( "" + ( $.mobile.getAttribute( this, "filtertext", true ) || $( this ).text() ) )
+	return ( ( "" + ( $.mobile.getAttribute( this, "filtertext" ) || $( this ).text() ) )
 		.toLowerCase().indexOf( searchValue ) === -1 );
 };
 
@@ -46,7 +46,7 @@ $.widget( "mobile.filterable", {
 
 		if ( search ) {
 			val = search.val().toLowerCase(),
-			lastval = $.mobile.getAttribute( search[ 0 ], "lastval", true ) + "";
+			lastval = $.mobile.getAttribute( search[ 0 ], "lastval" ) + "";
 
 			if ( lastval && lastval === val ) {
 				// Execute the handler only once per value change

@@ -216,8 +216,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 			for ( optionKey in defaults ) {
 				if ( retrievedOptions[ optionKey ] === undefined ) {
 					retrievedOptions[ optionKey ] = getAttrFixed( el,
-						optionKey.replace( capitalLettersRE, camelCase2Hyphenated ),
-						true
+						optionKey.replace( capitalLettersRE, camelCase2Hyphenated )
 					);
 				}
 			}

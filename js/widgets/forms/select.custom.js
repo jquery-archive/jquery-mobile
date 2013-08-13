@@ -219,7 +219,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 				// index of option tag to be selected
 				var oldIndex = self.select[ 0 ].selectedIndex,
-					newIndex = $.mobile.getAttribute( this, "option-index", true ),
+					newIndex = $.mobile.getAttribute( this, "option-index" ),
 					option = self._selectOptions().eq( newIndex )[ 0 ];
 
 				// toggle selected status on the tag for multi selects

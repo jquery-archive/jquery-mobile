@@ -13,9 +13,9 @@
 
 			$.testHelper.detailedEventCascade([
 				function() {
-					deepEqual( $.mobile.getAttribute( link, "aria-haspopup" ), true, popupId + ": 'aria-haspopup' attribute is set to true on link that opens the popup" );
-					deepEqual( $.mobile.getAttribute( link, "aria-owns" ), popupId, popupId + ": 'aria-owns' attribute is set to the ID of the owned popup ('test-popup')" );
-					deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), false, popupId + ": 'aria-expanded' attribute is set to false when the popup is not open" );
+					deepEqual( link.getAttribute( "aria-haspopup" ), "true", popupId + ": 'aria-haspopup' attribute is set to true on link that opens the popup" );
+					deepEqual( link.getAttribute( "aria-owns" ), popupId, popupId + ": 'aria-owns' attribute is set to the ID of the owned popup ('test-popup')" );
+					deepEqual( link.getAttribute( "aria-expanded" ), "false", popupId + ": 'aria-expanded' attribute is set to false when the popup is not open" );
 					$popup.popup( "open" );
 				},
 
@@ -25,7 +25,7 @@
 				},
 
 				function( result ) {
-					deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), true, popupId + ": 'aria-expanded' attribute is set to true when the popup is open" );
+					deepEqual( link.getAttribute( "aria-expanded" ), "true", popupId + ": 'aria-expanded' attribute is set to true when the popup is open" );
 					ok( !$popup.parent().prev().hasClass( "ui-screen-hidden" ), popupId + ": Open popup screen is not hidden" );
 					ok( $popup.attr( "class" ).match( /( |^)ui-body-([a-z]|inherit)( |$)/ ), popupId + ": Open popup has a valid theme" );
 
@@ -43,7 +43,7 @@
 				},
 
 				function( result) {
-					deepEqual( $.mobile.getAttribute( link, "aria-expanded" ), false, "'aria-expanded' attribute is set to false when the popup is not open" );
+					deepEqual( link.getAttribute( "aria-expanded" ), "false", "'aria-expanded' attribute is set to false when the popup is not open" );
 					ok( !$popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
 					ok( $popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
 					ok( !$popup.parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );

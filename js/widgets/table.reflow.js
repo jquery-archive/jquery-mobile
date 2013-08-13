@@ -55,7 +55,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		// get headers in reverse order so that top-level headers are appended last
 		$( table.allHeaders.get().reverse() ).each( function() {
 			var cells = $( this ).jqmData( "cells" ),
-				colstart = $.mobile.getAttribute( this, "colstart", true ),
+				colstart = $.mobile.getAttribute( this, "colstart" ),
 				hierarchyClass = cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
 				text = $( this ).text(),
 				iteration, filter;

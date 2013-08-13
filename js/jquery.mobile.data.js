@@ -21,17 +21,13 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 
 		// Retrieve an attribute from an element and perform some massaging of the value
 
-		getAttribute: function( element, key, dns ) {
+		getAttribute: function( element, key ) {
 			var data;
 
 			element = element.jquery ? element[0] : element;
 
 			if( element && element.getAttribute ){
-				if ( !!dns ) {
-					key = "data-" + $.mobile.ns + key;
-				}
-
-				data = element.getAttribute( key );
+				data = element.getAttribute( "data-" + $.mobile.ns + key );
 			}
 
 			// Copied from core's src/data.js:dataAttr()

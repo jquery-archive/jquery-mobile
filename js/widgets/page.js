@@ -83,7 +83,7 @@ $.widget( "mobile.page", {
 
 		this.element.enhanceWithin();
 
-		if( $.mobile.getAttribute( this.element[0], "role", true ) === "dialog" && $.mobile.dialog ){
+		if( $.mobile.getAttribute( this.element[0], "role" ) === "dialog" && $.mobile.dialog ){
 			this.element.dialog();
 		}
 	},
