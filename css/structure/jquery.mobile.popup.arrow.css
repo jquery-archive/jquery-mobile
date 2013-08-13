@@ -69,38 +69,71 @@
 }
 
 /**
- * The arrow needs to be centred inside the arrow container such that, when
- * rotated 45 degrees, its corners touch, but do not break through, the sides
- * of the arrow container:
- *
- * +----------+
- * |    /\    |
- * |   /  \  <------ arrow container
- * |  /    \  |
- * | /      \ |
- * |/  arrow \|
- * |\        /|
- * | \      / |
- * |  \    /  |
- * |   \  /   |
- * |    \/    |
- * +----------+
+ * For each side, the arrow is twice the desired size and its corner is aligned
+ * with the edge of the container:
+ *                                           
+ *           /\         /\                +----+	     /\
+ *          /  \       /  \ 					    | /\ |top   /  \
+ *      +----+  \     /  +----+       +-->|/  \|     /    \
+ *  left| /  |   \   /   |  \ |right  |   |    |    /      \
+ *      |/   |    \ /    |   \| 			|  /|    |\  /        \
+ *      |\   |    / \    |   /| 			| / +----+ \ \ +----+ /
+ *      | \  |   /   \   |  / |       | \        /  \|    |/
+ *      +----+  /     \  +----+       |  \      /    |    |
+ *       ^  \  /       \  /  ^        |   \    /  +->|\  /|
+ *       |   \/         \/   |        |    \  /   |  | \/ |bottom
+ *       |                   |        |     \/    |  +----+
+ *       +-------------------+--------+-----------+
+ *                           |
+ *                    arrow container
+ *                     (clips arrow)
  **/
-.ui-popup-arrow {
-	/* (2*desired triangle height)/sqrt(2) - does not account for border - centred within the outer rectangle */
-	width: 14.142135624px;
-	height: 14.142135624px;
-	/* ( (2*desired triangle height) - (above width/height) ) / 2 */
-	left: 2.928932188px;
-	top: 2.928932188px;
+
+.ui-popup-arrow-container .ui-popup-arrow {
+	/* (4*desired triangle height)/sqrt(2) - does not account for border - centred within the outer rectangle */
+	width: 28.284271247px;
+	height: 28.284271247px;
 	border-width: 1px;
 	border-style: solid;
 }
 
-.ui-popup-arrow-container.ie .ui-popup-arrow {
-	/* Fix rotation center  - see http://www.useragentman.com/IETransformsTranslator/ */
-	margin-left: -2.828px;
-	margin-top: -2.828px;
+.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow {
+	left: -4.142135623px;
+	top: 5.857864376px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow {
+	left: -4.142135623px;
+	top: -14.142135623px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow {
+	left: 5.857864376px;
+	top: -4.142135623px;
+}
+
+.ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow {
+	left: -14.142135623px;
+	top: -4.142135623px;
+}
+
+/* Fix rotation center for oldIE - see http://www.useragentman.com/IETransformsTranslator/ */
+.ui-popup-arrow-container.ui-popup-arrow-t.ie .ui-popup-arrow {
+    margin-left: -5.857864376269049px;
+    margin-top: -7.0710678118654755px;
+}
+.ui-popup-arrow-container.ui-popup-arrow-b.ie .ui-popup-arrow {
+    margin-left: -5.857864376269049px;
+    margin-top: -4.142135623730951px;
+}
+ 
+.ui-popup-arrow-container.ui-popup-arrow-l.ie .ui-popup-arrow {
+    margin-left: -7.0710678118654755px;
+    margin-top: -5.857864376269049px;
+}
+.ui-popup-arrow-container.ui-popup-arrow-r.ie .ui-popup-arrow {
+    margin-left: -4.142135623730951px;
+    margin-top: -5.857864376269049px;
 }
 
 .ui-popup-arrow-background {
@@ -109,27 +142,17 @@
 	height: 20px;
 }
 
-.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow-background {
-	/* 0px triangle height */
-	background-position: 0 10px;
-}
-
-.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow-background {
-	/* triangle height 0px */
-	background-position: 10px 0;
-}
-
-/* For some reason (probably because of all the decimal places) a rounding
-   error might show up in the background position, so it may have to be pushed
-	 over by one (i.e, 11px instead of 10px in the values below) */
+.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow-background
 .ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow-background {
 	background-position: 0 10px;
 }
 
+.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow-background,
 .ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow-background {
 	background-position: 10px 0;
 }
 
+/* structure */
 .ui-popup > .ui-popup-arrow-guide {
 	position: absolute;
 	left: 0;
