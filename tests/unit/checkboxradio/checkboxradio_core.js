@@ -4,6 +4,12 @@
 (function($){
 	module( 'jquery.mobile.forms.checkboxradio.js' );
 
+	test( "widget with weird label is created successfully", function() {
+		var elem = $( "#chk\\[\\'3\\'\\]-1" );
+		ok( elem.parent().is( "div.ui-checkbox" ), "element has been wrapped in a div.ui-checkbox" );
+		ok( elem.siblings( "label[for='chk\\[\\'3\\'\\]-1']" ).length === 1, "element has exactly one sibling of the form label[for='chk[\'3\']-1']" );
+	});
+
 	test( "widget can be disabled and enabled", function(){
 		var input = $( "#checkbox-1" ),
 			button = input.parent().find( ".ui-btn" );
