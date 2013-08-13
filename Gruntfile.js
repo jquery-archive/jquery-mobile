@@ -558,27 +558,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		rsync: {
-			options: {
-				user: "jqadmin",
-				host: "code.origin.jquery.com",
-				remoteBase: "/var/www/html/code.jquery.com/mobile/",
-				cwd: dist
-			},
-			release: {
-				files: {
-					"<%= pkg.version %>/": [
-						path.join( dist, name + "*.js" ),
-						path.join( dist, name + ".min.map" ),
-						path.join( dist, name + "*.css" ),
-						path.join( dist, name + ".zip" ),
-						path.join( dist, "demos" ),
-						path.join( dist, "images" )
-					]
-				}
-			}
-		},
-
 		curl: {
 			options: {
 				baseUrl: "http://code.origin.jquery.com/mobile/",
@@ -646,7 +625,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
-	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release", "rsync:release" ] );
+	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release" ] ); // TODO: Add copy to cdn repo and add / commit / push
 	grunt.registerTask( "release", [ "clean:dist", "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
 
 	// Default grunt
