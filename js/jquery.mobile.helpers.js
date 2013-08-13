@@ -87,8 +87,14 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 				excluded = false;
 				e = elements[ i ];
 
+				// The first value encountered while descending the ancestors tree is the official one
 				while ( e ) {
 					c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
+
+					if ( c === "true" ) {
+						excluded = false;
+						break;
+					}
 
 					if ( c === "false" ) {
 						excluded = true;
