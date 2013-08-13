@@ -39,7 +39,8 @@ $.widget( "mobile.page", {
 
 		// Deprecated in 1.4 remove in 1.5
 		keepNativeDefault: $.mobile.keepNative,
-		contentTheme: null
+		contentTheme: null,
+		enhanced: false
 	},
 
 	// DEPRECATED for > 1.4

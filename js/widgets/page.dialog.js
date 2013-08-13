@@ -12,77 +12,47 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-$.widget( "mobile.dialog", {
+$.widget( "mobile.page", $.mobile.page, {
 	options: {
 
 		// Accepts left, right and none
 		closeBtn: "left",
 		closeBtnText: "Close",
 		overlayTheme: "a",
-		corners: true
-	},
-
-	// Override the theme set by the page plugin on pageshow
-	_handlePageBeforeShow: function() {
-		this._isCloseable = true;
-		if ( this.options.overlayTheme ) {
-			this.element
-				.page( "removeContainerBackground" )
-				.page( "setContainerBackground", this.options.overlayTheme );
-		}
-	},
-
-	_handlePageBeforeHide: function() {
-		this._isCloseable = false;
-	},
-
-	// click and submit events:
-	// - clicks and submits should use the closing transition that the dialog
-	//   opened with unless a data-transition is specified on the link/form
-	// - if the click was on the close button, or the link has a data-rel="back"
-	//   it'll go back in history naturally
-	_handleVClickSubmit: function( event ) {
-		var attrs,
-			$target = $( event.target ).closest( event.type === "vclick" ? "a" : "form" );
-
-		if ( $target.length && !$target.jqmData( "transition" ) ) {
-			attrs = {};
-			attrs[ "data-" + $.mobile.ns + "transition" ] =
-				( $.mobile.urlHistory.getActive() || {} )[ "transition" ] ||
-				$.mobile.defaultDialogTransition;
-			attrs[ "data-" + $.mobile.ns + "direction" ] = "reverse";
-			$target.attr( attrs );
-		}
+		corners: true,
+		dialog: false
 	},
 
 	_create: function() {
-		var elem = this.element,
-			opts = this.options;
+		this._super();
+		if( this.options.dialog ){
+			
+			if( !this.options.enhanced ) {
+				this._enhance();
+			}
 
+			$.extend( this, {
+				_isCloseable: false,
+				_inner: this.element.children(),
+				_headerCloseButton: null
+			});
+
+			if( !this.options.enhanced ) {
+				this._setCloseBtn( this.options.closeBtn );
+			}
+		}
+	},
+
+	_enhance: function() {
 		// Class the markup for dialog styling and wrap interior
-		elem.addClass( "ui-dialog" )
+		this.element.addClass( "ui-dialog" )
 			.wrapInner( $( "<div/>", {
 
 				// ARIA role
 				"role" : "dialog",
 				"class" : "ui-dialog-contain ui-overlay-shadow" +
-					( !!opts.corners ? " ui-corner-all" : "" )
+					( this.options.corners ? " ui-corner-all" : "" )
 			}));
-
-		$.extend( this, {
-			_isCloseable: false,
-			_inner: elem.children(),
-			_headerCloseButton: null
-		});
-
-		this._on( elem, {
-			vclick: "_handleVClickSubmit",
-			submit: "_handleVClickSubmit",
-			pagebeforeshow: "_handlePageBeforeShow",
-			pagebeforehide: "_handlePageBeforeHide"
-		});
-
-		this._setCloseBtn( opts.closeBtn );
 	},
 
 	_setOptions: function( options ) {
@@ -152,11 +122,6 @@ $.widget( "mobile.dialog", {
 	close: function() {
 		var idx, dst, hist = $.mobile.navigate.history;
 
-		if ( this._isCloseable ) {
-			this._isCloseable = false;
-			// If the hash listening is enabled and there is at least one preceding history
-			// entry it's ok to go back. Initial pages with the dialog hash state are an example
-			// where the stack check is necessary
 			if ( $.mobile.hashListeningEnabled && hist.activeIndex > 0 ) {
 				$.mobile.back();
 			} else {
@@ -170,7 +135,6 @@ $.widget( "mobile.dialog", {
 
 				$.mobile.changePage( dst, { direction: "back", changeHash: false, fromHashChange: true } );
 			}
-		}
 	}
 });
 

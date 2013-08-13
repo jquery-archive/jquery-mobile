@@ -13,7 +13,7 @@
 	<script src="../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos" data-quicklinks="true">
+<div data-role="page" class="jqm-demos" data-quicklinks="true" data-dialog="true">
 
 	<div data-role="header" class="jqm-header">
         <h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
