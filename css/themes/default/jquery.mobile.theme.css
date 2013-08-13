@@ -205,8 +205,8 @@ html .ui-btn.ui-icon-checkbox-on:after {
 
 /* Bar: Toolbars, dividers, slider track */
 .ui-bar-a,
-.ui-page-theme-a .ui-bar-inherit,
 .ui-overlay-a .ui-bar-inherit,
+.ui-page-theme-a .ui-bar-inherit,
 html .ui-bar-a .ui-bar-inherit,
 html .ui-body-a .ui-bar-inherit,
 html body .ui-group-theme-a .ui-bar-inherit {
@@ -221,12 +221,13 @@ html body .ui-group-theme-a .ui-bar-inherit {
 	border-style: solid;
 }
 
-/* Page background */
+/* Page and overlay */
+.ui-overlay-a,
 .ui-page-theme-a,
 .ui-page-theme-a .ui-panel-wrapper,
 /* Count bubble */
-.ui-page-theme-a .ui-li-count,
 .ui-overlay-a .ui-li-count,
+.ui-page-theme-a .ui-li-count,
 html .ui-bar-a .ui-li-count,
 html .ui-body-a .ui-li-count,
 html body .ui-group-theme-a .ui-li-count,
@@ -240,14 +241,13 @@ html body .ui-group-theme-a .ui-li-count,
 	text-shadow: 0 /*{a-body-shadow-x}*/ 1px /*{a-body-shadow-y}*/ 0 /*{a-body-shadow-radius}*/ 	#eee /*{a-body-shadow-color}*/;
 }
 
-/* Body and overlay: Read-only lists, text inputs, collapsible content */
+/* Body: Read-only lists, text inputs, collapsible content */
 .ui-body-a,
-.ui-page-theme-a .ui-body-inherit,
 .ui-overlay-a .ui-body-inherit,
+.ui-page-theme-a .ui-body-inherit,
 html .ui-bar-a .ui-body-inherit,
 html .ui-body-a .ui-body-inherit,
-html body .ui-group-theme-a .ui-body-inherit,
-.ui-overlay-a {
+html body .ui-group-theme-a .ui-body-inherit {
 	background: 			#fff /*{a-body-background-color}*/;
 	border-color:	 		#ddd /*{a-body-border}*/;
 	color: 					#111 /*{a-body-color}*/;
@@ -259,30 +259,30 @@ html body .ui-group-theme-a .ui-body-inherit,
 }
 
 /* Links */
-.ui-page-theme-a a,
 .ui-overlay-a a,
+.ui-page-theme-a a,
 html .ui-bar-a a,
 html .ui-body-a a,
 html body .ui-group-theme-a a {
 	color: #0066ff /*{a-link-color}*/;
 	font-weight: bold;
 }
-.ui-page-theme-a a:visited,
 .ui-overlay-a a:visited,
+.ui-page-theme-a a:visited,
 html .ui-bar-a a:visited,
 html .ui-body-a a:visited,
 html body .ui-group-theme-a a:visited {
     color: #0066ff /*{a-link-visited}*/;
 }
-.ui-page-theme-a a:hover,
 .ui-overlay-a a:hover,
+.ui-page-theme-a a:hover,
 html .ui-bar-a a:hover,
 html .ui-body-a a:hover,
 html body .ui-group-theme-a a:hover {
 	color: #0033ff /*{a-link-hover}*/;
 }
-.ui-page-theme-a a:active,
 .ui-overlay-a a:active,
+.ui-page-theme-a a:active,
 html .ui-bar-a a:active,
 html .ui-body-a a:active,
 html body .ui-group-theme-a a:active {
@@ -290,15 +290,15 @@ html body .ui-group-theme-a a:active {
 }
 
 /* Button up */
-.ui-page-theme-a .ui-btn,
 .ui-overlay-a .ui-btn,
+.ui-page-theme-a .ui-btn,
 html .ui-bar-a .ui-btn,
 html .ui-body-a .ui-btn,
 html body .ui-group-theme-a .ui-btn,
 html head + body .ui-btn.ui-btn-a,
 /* Button visited */
-.ui-page-theme-a .ui-btn:visited,
 .ui-overlay-a .ui-btn:visited,
+.ui-page-theme-a .ui-btn:visited,
 html .ui-bar-a .ui-btn:visited,
 html .ui-body-a .ui-btn:visited,
 html body .ui-group-theme-a .ui-btn:visited,
@@ -309,8 +309,8 @@ html head + body .ui-btn.ui-btn-a:visited {
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #eee /*{a-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-page-theme-a .ui-btn:hover,
 .ui-overlay-a .ui-btn:hover,
+.ui-page-theme-a .ui-btn:hover,
 html .ui-bar-a .ui-btn:hover,
 html .ui-body-a .ui-btn:hover,
 html body .ui-group-theme-a .ui-btn:hover,
@@ -321,8 +321,8 @@ html head + body .ui-btn.ui-btn-a:hover {
 	text-shadow: 0 /*{a-bhover-shadow-x}*/ 1px /*{a-bhover-shadow-y}*/ 0 /*{a-bhover-shadow-radius}*/ #eee /*{a-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-page-theme-a .ui-btn:active,
 .ui-overlay-a .ui-btn:active,
+.ui-page-theme-a .ui-btn:active,
 html .ui-bar-a .ui-btn:active,
 html .ui-body-a .ui-btn:active,
 html body .ui-group-theme-a .ui-btn:active,
@@ -334,29 +334,29 @@ html head + body .ui-btn.ui-btn-a:active {
 }
 
 /* Active button */
-.ui-page-theme-a .ui-btn.ui-btn-active,
 .ui-overlay-a .ui-btn.ui-btn-active,
+.ui-page-theme-a .ui-btn.ui-btn-active,
 html .ui-bar-a .ui-btn.ui-btn-active,
 html .ui-body-a .ui-btn.ui-btn-active,
 html body .ui-group-theme-a .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-a.ui-btn-active,
 /* Active checkbox icon */
-.ui-page-theme-a .ui-icon-checkbox-on:after,
 .ui-overlay-a .ui-icon-checkbox-on:after,
+.ui-page-theme-a .ui-icon-checkbox-on:after,
 html .ui-bar-a .ui-icon-checkbox-on:after,
 html .ui-body-a .ui-icon-checkbox-on:after,
 html body .ui-group-theme-a .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-a:after,
 /* Active flipswitch background */
-.ui-page-theme-a .ui-flipswitch-active,
 .ui-overlay-a .ui-flipswitch-active,
+.ui-page-theme-a .ui-flipswitch-active,
 html .ui-bar-a .ui-flipswitch-active,
 html .ui-body-a .ui-flipswitch-active,
 html body .ui-group-theme-a .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active,
 /* Active slider track */
-.ui-page-theme-a .ui-slider-track .ui-btn-active,
 .ui-overlay-a .ui-slider-track .ui-btn-active,
+.ui-page-theme-a .ui-slider-track .ui-btn-active,
 html .ui-bar-a .ui-slider-track .ui-btn-active,
 html .ui-body-a .ui-slider-track .ui-btn-active,
 html body .ui-group-theme-a .ui-slider-track .ui-btn-active,
@@ -367,8 +367,8 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #0033ff /*{a-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-page-theme-a .ui-icon-radio-on:after,
 .ui-overlay-a .ui-icon-radio-on:after,
+.ui-page-theme-a .ui-icon-radio-on:after,
 html .ui-bar-a .ui-icon-radio-on:after,
 html .ui-body-a .ui-icon-radio-on:after,
 html body .ui-group-theme-a .ui-icon-radio-on:after,
@@ -377,15 +377,15 @@ html body .ui-group-theme-a .ui-icon-radio-on:after,
 }
 
 /* Focus */
-.ui-page-theme-a .ui-btn:focus,
 .ui-overlay-a .ui-btn:focus,
+.ui-page-theme-a .ui-btn:focus,
 html .ui-bar-a .ui-btn:focus,
 html .ui-body-a .ui-btn:focus,
 html body .ui-group-theme-a .ui-btn:focus,
 html head + body .ui-btn.ui-btn-a:focus,
 /* Focus buttons and text inputs with div wrap */
-.ui-page-theme-a .ui-focus,
 .ui-overlay-a .ui-focus,
+.ui-page-theme-a .ui-focus,
 html .ui-bar-a .ui-focus,
 html .ui-body-a .ui-focus,
 html body .ui-group-theme-a .ui-focus,
@@ -401,8 +401,8 @@ html head + body .ui-body-a.ui-focus {
 
 /* Bar: Toolbars, dividers, slider track */
 .ui-bar-b,
-.ui-page-theme-b .ui-bar-inherit,
 .ui-overlay-b .ui-bar-inherit,
+.ui-page-theme-b .ui-bar-inherit,
 html .ui-bar-b .ui-bar-inherit,
 html .ui-body-b .ui-bar-inherit,
 html body .ui-group-theme-b .ui-bar-inherit {
@@ -417,12 +417,13 @@ html body .ui-group-theme-b .ui-bar-inherit {
 	border-style: solid;
 }
 
-/* Page */
+/* Page and overlay */
+.ui-overlay-b,
 .ui-page-theme-b,
 .ui-page-theme-b .ui-panel-wrapper,
 /* Count bubble */
-.ui-page-theme-b .ui-li-count,
 .ui-overlay-b .ui-li-count,
+.ui-page-theme-b .ui-li-count,
 html .ui-bar-b .ui-li-count,
 html .ui-body-b .ui-li-count,
 html body .ui-group-theme-b .ui-li-count,
@@ -436,14 +437,13 @@ html body .ui-group-theme-b .ui-li-count,
 	text-shadow: 0 /*{b-body-shadow-x}*/ 1px /*{b-body-shadow-y}*/ 0 /*{b-body-shadow-radius}*/ 	#111 /*{b-body-shadow-color}*/;
 }
 
-/* Body and overlay: Read-only lists, text inputs, collapsible content */
+/* Body: Read-only lists, text inputs, collapsible content */
 .ui-body-b,
-.ui-page-theme-b .ui-body-inherit,
 .ui-overlay-b .ui-body-inherit,
+.ui-page-theme-b .ui-body-inherit,
 html .ui-bar-b .ui-body-inherit,
 html .ui-body-b .ui-body-inherit,
-html body .ui-group-theme-b .ui-body-inherit,
-.ui-overlay-b {
+html body .ui-group-theme-b .ui-body-inherit {
 	background: 			#2a2a2a /*{b-body-background-color}*/;
 	border-color:	 		#1d1d1d /*{b-body-border}*/;
 	color: 					#fff /*{b-body-color}*/;
@@ -455,30 +455,30 @@ html body .ui-group-theme-b .ui-body-inherit,
 }
 
 /* Links */
-.ui-page-theme-b a,
 .ui-overlay-b a,
+.ui-page-theme-b a,
 html .ui-bar-b a,
 html .ui-body-b a,
 html body .ui-group-theme-b a {
 	color: #33ccff /*{b-link-color}*/;
 	font-weight: bold;
 }
-.ui-page-theme-b a:visited,
 .ui-overlay-b a:visited,
+.ui-page-theme-b a:visited,
 html .ui-bar-b a:visited,
 html .ui-body-b a:visited,
 html body .ui-group-theme-b a:visited {
     color: #33ccff /*{b-link-visited}*/;
 }
-.ui-page-theme-b a:hover,
 .ui-overlay-b a:hover,
+.ui-page-theme-b a:hover,
 html .ui-bar-b a:hover,
 html .ui-body-b a:hover,
 html body .ui-group-theme-b a:hover {
 	color: #3399ff /*{b-link-hover}*/;
 }
-.ui-page-theme-b a:active,
 .ui-overlay-b a:active,
+.ui-page-theme-b a:active,
 html .ui-bar-b a:active,
 html .ui-body-b a:active,
 html body .ui-group-theme-b a:active {
@@ -486,15 +486,15 @@ html body .ui-group-theme-b a:active {
 }
 
 /* Button up */
-.ui-page-theme-b .ui-btn,
 .ui-overlay-b .ui-btn,
+.ui-page-theme-b .ui-btn,
 html .ui-bar-b .ui-btn,
 html .ui-body-b .ui-btn,
 html body .ui-group-theme-b .ui-btn,
 html head + body .ui-btn.ui-btn-b,
 /* Button visited */
-.ui-page-theme-b .ui-btn:visited,
 .ui-overlay-b .ui-btn:visited,
+.ui-page-theme-b .ui-btn:visited,
 html .ui-bar-b .ui-btn:visited,
 html .ui-body-b .ui-btn:visited,
 html body .ui-group-theme-b .ui-btn:visited,
@@ -505,8 +505,8 @@ html head + body .ui-btn.ui-btn-b:visited {
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #111 /*{b-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-page-theme-b .ui-btn:hover,
 .ui-overlay-b .ui-btn:hover,
+.ui-page-theme-b .ui-btn:hover,
 html .ui-bar-b .ui-btn:hover,
 html .ui-body-b .ui-btn:hover,
 html body .ui-group-theme-b .ui-btn:hover,
@@ -517,8 +517,8 @@ html head + body .ui-btn.ui-btn-b:hover {
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #111 /*{b-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-page-theme-b .ui-btn:active,
 .ui-overlay-b .ui-btn:active,
+.ui-page-theme-b .ui-btn:active,
 html .ui-bar-b .ui-btn:active,
 html .ui-body-b .ui-btn:active,
 html body .ui-group-theme-b .ui-btn:active,
@@ -530,29 +530,29 @@ html head + body .ui-btn.ui-btn-b:active {
 }
 
 /* Active button */
-.ui-page-theme-b .ui-btn.ui-btn-active,
 .ui-overlay-b .ui-btn.ui-btn-active,
+.ui-page-theme-b .ui-btn.ui-btn-active,
 html .ui-bar-b .ui-btn.ui-btn-active,
 html .ui-body-b .ui-btn.ui-btn-active,
 html body .ui-group-theme-b .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-b.ui-btn-active,
 /* Active checkbox icon */
-.ui-page-theme-b .ui-icon-checkbox-on:after,
 .ui-overlay-b .ui-icon-checkbox-on:after,
+.ui-page-theme-b .ui-icon-checkbox-on:after,
 html .ui-bar-b .ui-icon-checkbox-on:after,
 html .ui-body-b .ui-icon-checkbox-on:after,
 html body .ui-group-theme-b .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-b:after,
 /* Active flipswitch background */
-.ui-page-theme-b .ui-flipswitch-active,
 .ui-overlay-b .ui-flipswitch-active,
+.ui-page-theme-b .ui-flipswitch-active,
 html .ui-bar-b .ui-flipswitch-active,
 html .ui-body-b .ui-flipswitch-active,
 html body .ui-group-theme-b .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-b.ui-flipswitch-active,
 /* Active slider track */
-.ui-page-theme-b .ui-slider-track .ui-btn-active,
 .ui-overlay-b .ui-slider-track .ui-btn-active,
+.ui-page-theme-b .ui-slider-track .ui-btn-active,
 html .ui-bar-b .ui-slider-track .ui-btn-active,
 html .ui-body-b .ui-slider-track .ui-btn-active,
 html body .ui-group-theme-b .ui-slider-track .ui-btn-active,
@@ -563,8 +563,8 @@ html body div.ui-slider-track.ui-body-b .ui-btn-active {
 	text-shadow: 0 /*{b-active-shadow-x}*/ 1px /*{b-active-shadow-y}*/ 0 /*{b-active-shadow-radius}*/ #3399ff /*{b-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-page-theme-b .ui-icon-radio-on:after,
 .ui-overlay-b .ui-icon-radio-on:after,
+.ui-page-theme-b .ui-icon-radio-on:after,
 html .ui-bar-b .ui-icon-radio-on:after,
 html .ui-body-b .ui-icon-radio-on:after,
 html body .ui-group-theme-b .ui-icon-radio-on:after,
@@ -573,15 +573,15 @@ html body .ui-group-theme-b .ui-icon-radio-on:after,
 }
 
 /* Focus */
-.ui-page-theme-b .ui-btn:focus,
 .ui-overlay-b .ui-btn:focus,
+.ui-page-theme-b .ui-btn:focus,
 html .ui-bar-b .ui-btn:focus,
 html .ui-body-b .ui-btn:focus,
 html body .ui-group-theme-b .ui-btn:focus,
 html head + body .ui-btn.ui-btn-b:focus,
 /* Focus buttons and text inputs with div wrap */
-.ui-page-theme-b .ui-focus,
 .ui-overlay-b .ui-focus,
+.ui-page-theme-b .ui-focus,
 html .ui-bar-b .ui-focus,
 html .ui-body-b .ui-focus,
 html body .ui-group-theme-b .ui-focus,
