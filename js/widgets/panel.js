@@ -423,7 +423,6 @@ $.widget( "mobile.panel", {
 
 	_destroy: function() {
 		var o = this.options,
-			pageTheme,
 			multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1;
 
 		if ( o.display !== "overlay" ) {
