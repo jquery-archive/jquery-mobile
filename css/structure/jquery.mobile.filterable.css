@@ -1,3 +1,7 @@
 html .ui-filterable + .ui-listview {
 	margin-top: .5em;
 }
+.ui-collapsible-content > .ui-filterable + .ui-listview:not(.ui-listview-inset) > li.ui-first-child,
+.ui-collapsible-content > .ui-filterable + .ui-listview:not(.ui-listview-inset) > li.ui-first-child > a.ui-btn {
+	border-top-width: 1px;
+}
