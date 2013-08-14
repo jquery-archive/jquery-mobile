@@ -11,20 +11,23 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+var rcapitals = /[A-Z]/g,
+	replaceFunction = function( c ) {
+		return "-" + c.toLowerCase();
+	};
+
 $.extend( $.Widget.prototype, {
 	_getCreateOptions: function() {
-		var elem = this.element[ 0 ],
+		var option, value,
+			elem = this.element[ 0 ],
 			options = {};
 
-		$.each( this.options, function( option ) {
-			var value = $.mobile.getAttribute( elem, option.replace( /[A-Z]/g, function( c ) {
-				return "-" + c.toLowerCase();
-			}));
-
+		for ( option in this.options ) {
+			value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
 			if ( value != null ) {
 				options[ option ] = value;
 			}
-		});
+		}
 
 		return options;
 	},
