@@ -99,7 +99,7 @@ $.widget( "mobile.panel", {
 	},
 	
 	_getPage: function() {
-		var page = this._parentPage ? this._parentPage : $( ".ui-page-active" );
+		var page = this._parentPage ? this._parentPage : $( "." + $.mobile.activePageClass );
 		
 		return page;
 	},
