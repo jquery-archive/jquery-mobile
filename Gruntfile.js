@@ -531,6 +531,12 @@ module.exports = function( grunt ) {
 						}
 
 						paths = grunt.file.expand( patterns )
+							.filter( function( path ) {
+								if ( path.substring( path.length - 1 ) === "/" ) {
+									path = path + "index.html";
+								}
+								return grunt.file.exists( path );
+							})
 							.map( function( path ) {
 								// Some of our tests (ie. navigation) don't like having the index.html too much
 								return path.replace( /\/\index.html$/, "/" );
