@@ -66,9 +66,21 @@
 				.prependTo( destination );
 		});
 	</script>
+	<style>
+		.ui-selectmenu .ui-input-search {
+			margin-left: .5em;
+			margin-right: .5em;
+		}
+		.ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
+			border-top-width: 1px;
+			-webkit-border-radius: 0;
+			border-radius: 0;
+		}
+	
+	</style>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" class="jqm-demos">
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
@@ -87,7 +99,7 @@
 
 		<p>You can create an input field and prepend it to the popup and/or the dialog used by the custom select menu list and you can use it to filter items inside the list by instantiating a filterable widget on the list.</p>
 
-		<div data-demo-html="true" data-demo-js="true">
+		<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
 			<form>
 				<select id="filter-menu" data-native-menu="false">
 					<option value="SFO">San Francisco</option>
