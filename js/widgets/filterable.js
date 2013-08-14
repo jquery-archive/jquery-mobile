@@ -2,6 +2,7 @@
 //>>description: Renders the children of an element filterable via a callback and a textinput
 //>>label: Filterable
 //>>group: Widgets
+//>>css.structure: ../css/structure/jquery.mobile.filterable.css
 
 define( [ "jquery",
 	"jquery.mobile.widget" ], function( jQuery ) {

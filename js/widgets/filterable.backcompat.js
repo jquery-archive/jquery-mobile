@@ -2,6 +2,7 @@
 //>>description: Links options present in the widget to be filtered to the input
 //>>label: Filterable-widgetlink
 //>>group: Widgets
+//>>css.structure: ../css/structure/jquery.mobile.filterable.css
 
 define( [
 	"jquery",
