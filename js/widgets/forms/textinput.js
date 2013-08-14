@@ -138,11 +138,11 @@ $.widget( "mobile.textinput", {
 		}
 
 		if ( options.corners !== undefined ) {
-			outer.removeClass( "ui-corner-all" ).addClass( options.corners ? "ui-corner-all" : "" );
+			outer.toggleClass( "ui-corner-all", options.corners );
 		}
 
 		if ( options.mini !== undefined ) {
-			outer.removeClass( "ui-mini" ).addClass( options.mini ? "ui-mini" : "" );
+			outer.toggleClass( "ui-mini", options.mini );
 		}
 
 		if ( options.disabled !== undefined ) {
