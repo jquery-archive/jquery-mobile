@@ -16,6 +16,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// Version of the jQuery Mobile Framework
 		version: __version__,
 
+		// Deprecated and no longer used in 1.4 remove in 1.5
 		// Define the url parameter used for referencing widget-generated sub-pages.
 		// Translates to example.html&ui-page=subpageIdentifier
 		// hash segment before &ui-page= is used to make Ajax request
@@ -26,12 +27,15 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// Keepnative Selector
 		keepNative: ":jqmData(role='none'), :jqmData(role='nojs')",
 
+		// Deprecated in 1.4 remove in 1.5
 		// Class assigned to page currently in view, and during transitions
 		activePageClass: "ui-page-active",
 
+		// Deprecated in 1.4 remove in 1.5
 		// Class used for "active" button state, from CSS framework
 		activeBtnClass: "ui-btn-active",
 
+		// Deprecated in 1.4 remove in 1.5
 		// Class used for "focus" form element state, from CSS framework
 		focusClass: "ui-focus",
 
