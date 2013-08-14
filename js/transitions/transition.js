@@ -2,7 +2,7 @@
 //>>description: Animated page change base constructor and logic
 //>>label: Transition Core
 //>>group: Transitions
-//>>css.structure: ../css/structure/jquery.mobile.transition.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.css, ../css/structure/jquery.mobile.transition.fade.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
