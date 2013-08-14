@@ -92,7 +92,10 @@ $.widget( "mobile.table", $.mobile.table, {
 				cells.addClass( opts.classes.priorityPrefix + priority );
 
 				if ( !keep ) {
-					$("<label><input type='checkbox' checked />" + header.text() + "</label>" )
+					$("<label><input type='checkbox' checked />" +
+						( header.children( "abbr" ).first().attr( "title" ) ||
+							header.text() ) +
+						"</label>" )
 						.appendTo( menu )
 						.children( 0 )
 						.jqmData( "cells", cells )
