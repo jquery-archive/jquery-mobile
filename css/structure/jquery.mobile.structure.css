@@ -1,5 +1,6 @@
 @import url( "jquery.mobile.core.css" );
-@import url( "jquery.mobile.transitions.css" );
+@import url( "jquery.mobile.transition.css" );
+@import url( "jquery.mobile.transition.visuals.css" );
 @import url( "jquery.mobile.forms.fieldcontain.css" );
 @import url( "jquery.mobile.grid.css" );
 @import url( "jquery.mobile.fixedToolbar.css" );
