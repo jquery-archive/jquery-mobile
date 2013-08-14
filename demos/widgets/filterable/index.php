@@ -35,7 +35,7 @@
 			<p>The deprecated behavior whereby the filterable injects a text field before the element whose children are to be filtered is retained for version 1.4.0 to help with the transition from the listview filter extension, however, it will be removed in 1.5.0.</p>
 
 			<div data-demo-html="true">
-				<form>
+				<form class="ui-filterable">
 					<input id="filterBasic-input" data-type="search"></input>
 				</form>
 				<ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
