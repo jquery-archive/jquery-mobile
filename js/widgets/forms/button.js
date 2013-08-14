@@ -2,7 +2,7 @@
 //>>description: Custom-styled native input/buttons
 //>>label: Buttons: Input or button-based
 //>>group: Forms
-//>>css.structure: ../css/structure/jquery.mobile.button.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery", "../../jquery.mobile.widget" ], function( jQuery ) {
