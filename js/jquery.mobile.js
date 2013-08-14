@@ -13,6 +13,7 @@ define([
 	"./transitions/visuals",
 	"./jquery.mobile.navigation",
 	"./jquery.mobile.degradeInputs",
+	"./widgets/page.dialog",
 	"./widgets/dialog",
 	"./widgets/collapsible",
 	"./widgets/collapsibleSet",

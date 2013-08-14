@@ -86,6 +86,15 @@ $.widget( "mobile.page", $.mobile.page, {
 		this._super( options );
 	},
 
+	_handlePageBeforeShow: function () {
+		if ( this.options.overlayTheme ) {
+			this.removeContainerBackground();
+			this.setContainerBackground( this.options.overlayTheme );
+		} else {
+			this._super();
+		}
+	},
+
 	_setCloseBtn: function( location, text ) {
 		var dst,
 			btn = this._headerCloseButton;

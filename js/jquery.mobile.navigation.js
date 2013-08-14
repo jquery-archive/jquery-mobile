@@ -927,7 +927,7 @@ define( [
 			activeIsInitialPage = urlHistory.activeIndex === 0;
 			historyDir = 0;
 			pageTitle = document.title;
-			isDialog = settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog";
+			isDialog = ( settings.role === "dialog" || toPage.jqmData( "role" ) === "dialog" ) && toPage.jqmData( "dialog" ) !== true;
 
 			// By default, we prevent changePage requests when the fromPage and toPage
 			// are the same element, but folks that generate content manually/dynamically
