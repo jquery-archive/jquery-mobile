@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Button Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/forms/button"
+			],
+			[
+				"button_core.js"
+			]
+		]);
+	</script>
+
+	<script src="../../swarminject.js"></script>
+</head>
+<body>
+  <h1 id="qunit-header">jQuery Mobile Button Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests">
+  </ol>
+
+  <input type="button" value="Button element" data-nstest-inline="true" data-nstest-icon="delete" data-nstest-theme="a"></input>
+  <input type="submit" value="Submit button, mini" data-nstest-inline="true" data-nstest-icon="grid" data-nstest-iconpos="right" data-nstest-mini="true" data-nstest-theme="b"></input>
+  <input type="reset" value="Reset" data-nstest-inline="true" data-nstest-theme="b"></input>
+</body>
+</html>
