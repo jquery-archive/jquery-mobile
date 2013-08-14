@@ -4,7 +4,10 @@
 //>>group: Core
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.ns", "jquery.ui.widget" ], function( jQuery ) {
+define( [ "jquery",
+	"./jquery.mobile.ns",
+	"jquery.ui.widget",
+	"jquery.mobile.data" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
