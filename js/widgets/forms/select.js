@@ -247,7 +247,8 @@ $.widget( "mobile.selectmenu", $.extend( {
 			// TODO possibly aggregate multiple select option classes
 			return span
 				.addClass( self.select.attr( "class" ) )
-				.addClass( selected.attr( "class" ) );
+				.addClass( selected.attr( "class" ) )
+				.removeClass( "ui-screen-hidden" );
 		})());
 	},
 
