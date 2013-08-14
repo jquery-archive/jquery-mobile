@@ -1,4 +1,5 @@
-html .ui-filterable + .ui-listview {
+html .ui-filterable + .ui-listview,
+html .ui-filterable.ui-listview {
 	margin-top: .5em;
 }
 .ui-collapsible-content > form.ui-filterable {
@@ -8,6 +9,8 @@ html .ui-filterable + .ui-listview {
 	margin-top: 0;
 }
 .ui-collapsible-content > .ui-filterable + .ui-listview:not(.ui-listview-inset) > li.ui-first-child,
-.ui-collapsible-content > .ui-filterable + .ui-listview:not(.ui-listview-inset) > li.ui-first-child > a.ui-btn {
+.ui-collapsible-content > .ui-filterable + .ui-listview:not(.ui-listview-inset) > li.ui-first-child > a.ui-btn,
+.ui-collapsible-content > .ui-filterable.ui-listview:not(.ui-listview-inset) > li.ui-first-child,
+.ui-collapsible-content > .ui-filterable.ui-listview:not(.ui-listview-inset) > li.ui-first-child > a.ui-btn {
 	border-top-width: 1px;
 }
