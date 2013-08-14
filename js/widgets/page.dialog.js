@@ -44,15 +44,19 @@ $.widget( "mobile.page", $.mobile.page, {
 	},
 
 	_enhance: function() {
+		this._super();
+		
 		// Class the markup for dialog styling and wrap interior
-		this.element.addClass( "ui-dialog" )
-			.wrapInner( $( "<div/>", {
+		if( this.options.dialog ){
+			this.element.addClass( "ui-dialog" )
+				.wrapInner( $( "<div/>", {
 
-				// ARIA role
-				"role" : "dialog",
-				"class" : "ui-dialog-contain ui-overlay-shadow" +
-					( this.options.corners ? " ui-corner-all" : "" )
-			}));
+					// ARIA role
+					"role" : "dialog",
+					"class" : "ui-dialog-contain ui-overlay-shadow" +
+						( this.options.corners ? " ui-corner-all" : "" )
+				}));
+		}
 	},
 
 	_setOptions: function( options ) {

@@ -51,12 +51,30 @@ $.widget( "mobile.page", {
 	},
 
 	_create: function() {
-		var attrPrefix = "data-" + $.mobile.ns,
-			self = this;
 		// If false is returned by the callbacks do not create the page
 		if ( this._trigger( "beforecreate" ) === false ) {
 			return false;
 		}
+
+		if ( !this.options.enhanced ) {
+			this._enhance();
+		}
+
+		this._on( this.element, {
+			pagebeforehide: "removeContainerBackground",
+			pagebeforeshow: "_handlePageBeforeShow"
+		});
+
+		this.element.enhanceWithin();
+		// Dialog widget is deprecated in 1.4 remove this in 1.5
+		if( $.mobile.getAttribute( this.element[0], "role" ) === "dialog" && $.mobile.dialog ){
+			this.element.dialog();
+		}
+	},
+
+	_enhance: function (){
+		var attrPrefix = "data-" + $.mobile.ns,
+			self = this;
 
 		if ( this.options.role ) {
 			this.element.attr( "data-" + $.mobile.ns + "role", this.options.role );
@@ -66,10 +84,7 @@ $.widget( "mobile.page", {
 			.attr( "tabindex", "0" )
 			.addClass( "ui-page ui-page-theme-" + this.options.theme );
 
-		this._on( this.element, {
-			pagebeforehide: "removeContainerBackground",
-			pagebeforeshow: "_handlePageBeforeShow"
-		});
+		// Manipulation of content os Deprecated as of 1.4 remove in 1.5
 		this.element.find( "[" + attrPrefix + "role='content']" ).each( function() {
 			var $this = $( this ),
 				theme = this.getAttribute( attrPrefix + "theme" ) || undefined;
@@ -81,12 +96,6 @@ $.widget( "mobile.page", {
 				// Add ARIA role
 				$this.attr( "role", "main" ).addClass( "ui-content" );
 		});
-
-		this.element.enhanceWithin();
-
-		if( $.mobile.getAttribute( this.element[0], "role" ) === "dialog" && $.mobile.dialog ){
-			this.element.dialog();
-		}
 	},
 
 	bindRemove: function( callback ) {
