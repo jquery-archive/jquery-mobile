@@ -11,13 +11,6 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
-	<style id="custom-icon">
-		.ui-btn.ui-icon-custom:after {
-			background-image: url("../../_assets/img/glyphish-icons/21-skull.png");
-			background-position: 3px 3px;
-			background-size: 70%;
-		}
-    </style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -31,19 +24,19 @@
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Filter <a href="http://api.jquerymobile.com/filterable/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+			<h1>Filterable <a href="http://api.jquerymobile.com/filterable/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
 
 			<p class="jqm-intro">
 			The children of any element can be filtered by setting the attribute <code>data-filter="true"</code> on the element. By default, the text contained in each child is used for filtering, however, you also have the option of setting the attribute <code>data-filtertext</code> to a string value on any child that will be considered for filtering to associate custom filter text instead.</p>
 
 			<h2 id="filter-ul">Basic filter</h2>
 			<p>The filter widget is based on and replaces the listview filter extension. Thus, you can set <code>data-filter="true"</code> on a listview to generate a filter for its list items.</p>
-			<p>Nevertheless, the way in which a filterable is constructed differs from the way the listview filter extension worked in one important regard: the text field for entering the search string is not provided. Instead, you can provide the text field in your markup and have the filterable make use of it by providing a selector that will retrieve the text field as the value of the filterable's <code>data-input</code> attribute.</p>
+			<p>Nevertheless, the way in which a filterable is constructed differs from the way the listview filter extension worked in one important regard: the text field for entering the search string is not provided. Instead, you can provide the text field in your markup and have the filterable make use of it by providing a selector that will retrieve the text field as the value of the filterable's <code>data-input</code> attribute. Add a class of <code>ui-filterable</code> to the <code>input</code> element or  its <code>form</code> wrapper to have the framework adjust the margin between the text field and listview.</p>
 			<p>The deprecated behavior whereby the filterable injects a text field before the element whose children are to be filtered is retained for version 1.4.0 to help with the transition from the listview filter extension, however, it will be removed in 1.5.0.</p>
 
 			<div data-demo-html="true">
 				<form>
-					<input id="filterBasic-input" data-inset="false" data-type="search"></input>
+					<input id="filterBasic-input" data-type="search"></input>
 				</form>
 				<ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
 					<li>Acura</li>
@@ -62,7 +55,7 @@
 
 			<div data-demo-html="true">
 				<form>
-					<input id="filterTable-input" data-inset="false" data-type="search"></input>
+					<input id="filterTable-input" data-type="search"></input>
 				</form>
 				<table data-role="table" id="movie-table" data-filter="true" data-input="#filterTable-input" class="ui-responsive">
 					<thead>
@@ -106,7 +99,7 @@
 
 			<div data-demo-html="true">
 				<form>
-					<input data-type="search" data-inset="false" id="filterControlgroup-input"></input>
+					<input data-type="search" id="filterControlgroup-input"></input>
 				</form>
 				<div data-role="controlgroup" data-filter="true" data-input="#filterControlgroup-input">
 					<a href="#" data-role="button">Button 1</a>
@@ -143,7 +136,7 @@
 			</p>
 			<div data-demo-html="true">
 				<form>
-					<input data-type="search" id="divOfPs-input" data-inset="false"></input>
+					<input data-type="search" id="divOfPs-input"></input>
 				</form>
 				<div class="elements" data-filter="true" data-input="#divOfPs-input">
 					<p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
