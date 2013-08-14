@@ -1,13 +1,9 @@
 .ui-input-text,
 .ui-input-search {
-	margin: -.5em -.5em 1.5em -.5em;
+	margin: .5em 0;
 	background-image: none;
 	border-width: 1px;
 	border-style: solid;
-}
-.ui-input-inset,
-textarea.ui-input-text {
-	margin: .5em 0;
 }
 .ui-input-text input,
 .ui-input-search input,
