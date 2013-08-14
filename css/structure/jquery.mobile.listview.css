@@ -8,13 +8,15 @@
 .ui-panel-inner > .ui-listview {
 	margin: -1em;
 }
+.ui-content .ui-listview-inset,
+.ui-panel-inner > .ui-listview-inset {
+	margin: 1em 0;
+}
 .ui-collapsible-content > .ui-listview {
 	margin: -.5em -1em;
 }
-.ui-content .ui-listview-inset,
-.ui-panel-inner > .ui-listview-inset,
 .ui-collapsible-content > .ui-listview-inset {
-	margin: 1em 0;
+	margin: .5em 0;
 }
 .ui-listview > li {
 	display: block;
