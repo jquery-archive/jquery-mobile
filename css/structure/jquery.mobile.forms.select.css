@@ -85,7 +85,7 @@
 .ui-selectmenu .ui-header {
 	margin: 0;
 	padding: 0;
-	border: 0;
+	border-width: 0;
 }
 .ui-selectmenu.ui-dialog .ui-header {
 	z-index: 1;
