@@ -1,27 +1,3 @@
-/* TODO: This file only contains CSS for the button widget and should be renamed to jquery.mobile.forms.button.css */
-button.ui-btn,
-.ui-controlgroup-controls button.ui-btn-icon-notext {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	width: 100%;
-}
-/* Firefox adds a 1px border in a button element. We negate this to make sure they have the same height as other buttons in controlgroups. */
-button.ui-btn::-moz-focus-inner {
-	border: 0;
-}
-button.ui-btn-inline {
-	width: auto;
-}
-button.ui-btn-icon-notext,
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-btn {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	width: 1.75em;
-}
 /* Hide the native input element */
 .ui-input-btn input {
 	position: absolute;
