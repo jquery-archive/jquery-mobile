@@ -26,10 +26,6 @@ $.widget( "mobile.page", $.mobile.page, {
 	_create: function() {
 		this._super();
 		if( this.options.dialog ){
-			
-			if( !this.options.enhanced ) {
-				this._enhance();
-			}
 
 			$.extend( this, {
 				_isCloseable: false,
@@ -45,7 +41,7 @@ $.widget( "mobile.page", $.mobile.page, {
 
 	_enhance: function() {
 		this._super();
-		
+
 		// Class the markup for dialog styling and wrap interior
 		if( this.options.dialog ){
 			this.element.addClass( "ui-dialog" )
