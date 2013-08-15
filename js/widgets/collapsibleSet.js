@@ -7,6 +7,13 @@
 
 define( [
 	"jquery",
+
+	// Deprecated as of 1.4.0 and will be removed in 1.5.0
+	// We only need this dependency so we get the $.widget shim from page, so we
+	// can use $.mobile.collapsible.initSelector, which is added by the shim.
+	// As of 1.5.0 we will assume that all children of the collapsibleset are to
+	// be turned into collapsibles.
+	"./page",
 	"../jquery.mobile.widget",
 	"./collapsible",
 	"./addFirstLastClasses" ], function( jQuery ) {
