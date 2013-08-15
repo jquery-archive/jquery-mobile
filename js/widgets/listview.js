@@ -81,7 +81,7 @@ $.widget( "mobile.listview", $.extend( {
 
 	refresh: function( create ) {
 		var buttonClass, pos, numli, item, itemClass, itemTheme, itemIcon, icon, a,
-			isDivider, startCount, newStartCount, value, last, splittheme, spliticon,
+			isDivider, startCount, newStartCount, value, last, splittheme, splitThemeClass, spliticon,
 			altButtonClass, dividerTheme,
 			o = this.options,
 			$list = this.element,
@@ -131,8 +131,9 @@ $.widget( "mobile.listview", $.extend( {
 
 						last = a.last();
 						splittheme = getAttr( last[ 0 ], "theme" ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
+						splitThemeClass = splittheme ? " ui-btn-" + splittheme : "";
 						spliticon = getAttr( last[ 0 ], "icon" ) || getAttr( item[ 0 ], "icon" ) || o.splitIcon;
-						altButtonClass = splittheme ? "ui-btn ui-btn-" + splittheme + " ui-icon-" + spliticon : "ui-btn ui-icon-" + spliticon;
+						altButtonClass = "ui-btn ui-btn-icon-notext ui-icon-" + spliticon + splitThemeClass;
 
 						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
