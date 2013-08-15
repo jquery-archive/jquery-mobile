@@ -53,8 +53,8 @@
                 <form>
                     <label for="flip-select">Flip toggle switch select:</label>
                     <select id="flip-select" name="flip-select" data-role="flipswitch">
-                        <option>On</option>
                         <option>Off</option>
+                        <option>On</option>
                     </select>
                 </form>
                 </div><!-- /demo-html -->
@@ -62,10 +62,10 @@
                 
                 <div data-demo-html="true">
                 <form>
-                    <label for="flip-select">Flip toggle switch select:</label>
-                    <select id="flip-select" name="flip-select" data-role="flipswitch">
-                        <option>On</option>
-                        <option selected>Off</option>
+                    <label for="flip-select-second">Flip toggle switch select:</label>
+                    <select id="flip-select-second" name="flip-select" data-role="flipswitch">
+                        <option>Off</option>
+                        <option selected>On</option>
                     </select>
                 </form>
                 </div><!-- /demo-html -->

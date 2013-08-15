@@ -79,13 +79,13 @@ $.widget( "mobile.flipswitch", $.extend({
 			on = $( "<span tabindex='1'></span>" ),
 			off = $( "<span></span>" ),
 			type = this.element.get( 0 ).tagName,
-			onText = ( type === "INPUT" ) ? this.options.onText : this.element.find( "option" ).eq( 0 ).text(),
-			offText = ( type === "INPUT" ) ? this.options.offText : this.element.find( "option" ).eq( 1 ).text();
+			onText = ( type === "INPUT" ) ? this.options.onText : this.element.find( "option" ).eq( 1 ).text(),
+			offText = ( type === "INPUT" ) ? this.options.offText : this.element.find( "option" ).eq( 0 ).text();
 
 			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" ).text( onText );
 			off.addClass( "ui-flipswitch-off" ).text( offText );
 			
-			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( ( this.element.is( ":checked" ) || !this.element.find("option").eq(1).is(":selected") ) ? "ui-flipswitch-active" : "" ) + ( this.element.is(":disabled") ? " ui-state-disabled": "") + ( this.options.mini ? " ui-mini": "" ) ).append( on, off );
+			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( ( this.element.is( ":checked" ) || this.element.find("option").eq(1).is(":selected") ) ? "ui-flipswitch-active" : "" ) + ( this.element.is(":disabled") ? " ui-state-disabled": "") + ( this.options.mini ? " ui-mini": "" ) ).append( on, off );
 			
 			this.element.addClass( "ui-flipswitch-input" );
 			this.element.after( flipswitch ).appendTo( flipswitch );
