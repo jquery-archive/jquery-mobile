@@ -73,7 +73,7 @@
 
         <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
 
-        <a href="#demo-page" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
+        <a href="#demo-page" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
