@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Collapsible Set Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<script src="../../../external/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/collapsibleSet"
+			],
+			[
+				"../../jquery.setNameSpace.immediately.js"
+			],
+			[
+				"collapsibleset_core.js"
+			]
+		]);
+	</script>
+
+	<script src="../../swarminject.js"></script>
+</head>
+<body>
+  <h1 id="qunit-header">jQuery Mobile Collapsible Set Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests">
+  </ol>
+
+	<div id="collapsibleset">
+		<div data-nstest-role="collapsible">
+			<h1>Collapsible 1</h1>
+			<p>Content of collapsible 1</p>
+		</div>
+		<div data-nstest-role="collapsible">
+			<h1>Collapsible 2</h1>
+			<p>Content of collapsible 2</p>
+		</div>
+	</div>
+</body>
+</html>
