@@ -139,10 +139,6 @@ define( [ "jquery",
 				this._setHighlight( options.highlight );
 			}
 			this._super( options );
-		},
-
-		_setOption: function( options ) {
-			this._superApply( options );
 			this.refresh();
 		},
 
