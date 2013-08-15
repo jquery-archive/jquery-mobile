@@ -20,7 +20,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	// The initSelector is deprecated as of 1.4.0. In 1.5.0 we will use
 	// :jqmData(role='collapsibleset') which will allow us to get rid of the line
 	// below altogether, because the autoinit will generate such an initSelector
-	initSelector: ":jqmData(role='collapsible-set')",
+	initSelector: ":jqmData(role='collapsible-set'),:jqmData(role='collapsibleset')",
 
 	options: $.extend( {
 		enhanced: false,
