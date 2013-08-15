@@ -68,27 +68,26 @@ label.ui-btn {
 .ui-btn.ui-corner-all,
 /* Slider track */
 .ui-slider-track.ui-corner-all,
-/*flipswitch*/
-.ui-flipswitch.ui-corner-all {
+/* Flipswitch */
+.ui-flipswitch.ui-corner-all,
+/* Count bubble */
+.ui-li-count {
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }
 /* Icon-only buttons */
 .ui-btn-icon-notext.ui-btn-corner-all,
-.ui-btn-icon-notext.ui-corner-all,
-/* Count bubbles */
-.ui-li-count {
-	-webkit-border-radius: 				1em /*{global-radii-icononly}*/;
-	border-radius: 						1em /*{global-radii-icononly}*/;
+.ui-btn-icon-notext.ui-corner-all {
+	-webkit-border-radius: 1em;
+	border-radius: 1em;
 }
-
 /* Radius clip workaround for cleaning up corner trapping */
 .ui-btn-corner-all,
 .ui-corner-all {
 	-webkit-background-clip: padding;
 	background-clip: padding-box;
 }
-
+/* Popup arrow */
 .ui-popup.ui-corner-all > .ui-popup-arrow-guide {
 	left: .6em /*{global-radii-blocks}*/;
 	right: .6em /*{global-radii-blocks}*/;
@@ -224,17 +223,7 @@ html body .ui-group-theme-a .ui-bar-inherit {
 /* Page and overlay */
 .ui-overlay-a,
 .ui-page-theme-a,
-.ui-page-theme-a .ui-panel-wrapper,
-/* Count bubble */
-.ui-overlay-a .ui-li-count,
-.ui-page-theme-a .ui-li-count,
-html .ui-bar-a .ui-li-count,
-html .ui-body-a .ui-li-count,
-html body .ui-group-theme-a .ui-li-count,
-.ui-btn.ui-btn-a > .ui-li-count,
-.ui-li-static.ui-body-a > .ui-li-count,
-.ui-li-divider.ui-bar-a > .ui-li-count,
-.ui-listview li .ui-li-count.ui-body-a {
+.ui-page-theme-a .ui-panel-wrapper {
 	background: 			#f9f9f9 /*{a-page-background-color}*/;
 	border-color:	 		#bbb /*{a-page-border}*/;
 	color: 					#111 /*{a-page-color}*/;
@@ -421,17 +410,7 @@ html body .ui-group-theme-b .ui-bar-inherit {
 /* Page and overlay */
 .ui-overlay-b,
 .ui-page-theme-b,
-.ui-page-theme-b .ui-panel-wrapper,
-/* Count bubble */
-.ui-overlay-b .ui-li-count,
-.ui-page-theme-b .ui-li-count,
-html .ui-bar-b .ui-li-count,
-html .ui-body-b .ui-li-count,
-html body .ui-group-theme-b .ui-li-count,
-.ui-btn.ui-btn-b > .ui-li-count,
-.ui-li-static.ui-body-b > .ui-li-count,
-.ui-li-divider.ui-bar-b > .ui-li-count,
-.ui-listview li .ui-li-count.ui-body-b {
+.ui-page-theme-b .ui-panel-wrapper {
 	background: 			#252525 /*{b-page-background-color}*/;
 	border-color:	 		#454545 /*{b-page-border}*/;
 	color: 					#fff /*{b-page-color}*/;

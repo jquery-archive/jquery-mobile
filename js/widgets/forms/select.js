@@ -129,7 +129,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 		// Add counter for multi selects
 		if ( this.isMultiple ) {
 			this.buttonCount = $( "<span>" )
-				.addClass( "ui-li-count" )
+				.addClass( "ui-li-count ui-body-inherit" )
 				.hide()
 				.appendTo( button.addClass( "ui-li-has-count" ) );
 		}

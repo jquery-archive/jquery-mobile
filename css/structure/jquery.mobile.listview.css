@@ -138,21 +138,21 @@
 /* Used by both listview and custom multiple select button */
 .ui-li-count {
 	position: absolute;
-	font-size: 12px;
+	font-size: 12.5px;
 	font-weight: bold;
 	text-align: center;
 	border-width: 1px;
 	border-style: solid;
-	padding: 0 .5em;
-	line-height: 1.666em;
-	min-height: 1.666em;
-	min-width: .666em;
-	right: .833em;
+	padding: 0 .48em;
+	line-height: 1.6em;
+	min-height: 1.6em;
+	min-width: .64em;
+	right: .8em;
 	top: 50%;
-	margin-top: -.916em;
+	margin-top: -.88em;
 }
 .ui-listview .ui-btn-icon-right .ui-li-count {
-	right: 3.636em;
+	right: 3.2em;
 }
 .ui-listview .ui-li-has-thumb > img:first-child,
 .ui-listview .ui-li-has-thumb > .ui-btn > img:first-child,
