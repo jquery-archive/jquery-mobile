@@ -122,7 +122,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				$document.bind( "vmousecancel", clearTapHandlers );
 
 				timer = setTimeout( function() {
-					if ( $.event.special.tap.emitTapOnTaphold ) {
+					if ( !$.event.special.tap.emitTapOnTaphold ) {
 						isTaphold = true;
 					}
 					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
