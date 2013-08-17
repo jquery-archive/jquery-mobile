@@ -199,4 +199,7 @@
 		border-top-color: transparent;
 		border-top-width: 1px; /* magic */
 	}
+	.ui-collapsible-tabs .ui-collapsible + .ui-collapsible h1 a {
+		border-left-color: transparent;
+	}
 }
