@@ -24,6 +24,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 
 	options: $.extend( {
 		enhanced: false,
+		type: null
 	}, $.mobile.collapsible.defaults ),
 
 	_handleCollapsibleExpand: function( event ) {
@@ -48,6 +49,9 @@ $.widget( "mobile.collapsibleset", $.extend( {
 			elem.addClass( "ui-collapsible-set " +
 				this._themeClassFromOption( "ui-group-theme-", opts.theme ) + " " +
 				( opts.corners && opts.inset ? "ui-corner-all " : "" ) );
+			if (opts.type) {
+				elem.addClass( "ui-collapsible-tabs" );
+			}
 			this.element.find( $.mobile.collapsible.initSelector ).collapsible();
 		}
 
