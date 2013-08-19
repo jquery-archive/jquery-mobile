@@ -189,7 +189,7 @@ $.widget( "mobile.collapsible", {
 			this._handleExpandCollapse( options.collapsed );
 		}
 
-		isCollapsed = elem.hasClass( "ui-collapsible-colapsed" );
+		isCollapsed = elem.hasClass( "ui-collapsible-collapsed" );
 
 		// Only options referring to the current state need to be applied right away
 		// It is enough to store options covering the alternate in this.options.
@@ -211,7 +211,7 @@ $.widget( "mobile.collapsible", {
 			}
 			if ( opts.expandedIcon !== undefined ) {
 				if ( currentOpts.expandedIcon ) {
-					anchor.removeClass( "ui-icon-" + currentOpts.expandedWIcon );
+					anchor.removeClass( "ui-icon-" + currentOpts.expandedIcon );
 				}
 				if ( opts.expandedIcon ) {
 					anchor.addClass( "ui-icon-" + opts.expandedIcon );
