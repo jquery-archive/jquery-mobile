@@ -40,7 +40,8 @@ module.exports = function( grunt ) {
 		dirs: {
 			dist: dist,
 			cdn: {
-				noversion: path.join( dist, "cdn-noversion" )
+				noversion: path.join( dist, "cdn-noversion" ),
+				git: path.join( dist, "git" )
 			},
 			tmp: path.join( dist, "tmp" )
 		},
@@ -370,7 +371,7 @@ module.exports = function( grunt ) {
 							content = content.replace( re, "" );
 						}
 						return content;
-					}
+					},
 				},
 				files: {
 					// This will be modified by the config:copy:noversion task
@@ -379,6 +380,17 @@ module.exports = function( grunt ) {
 				}
 			},
 			git: {
+				options: {
+					processContent: function( content, srcPath ) {
+						if ( /\.min.js$|\.min.map$/.test( srcPath ) ) {
+							// We need to rewrite the map info
+							var re = new RegExp( grunt.template.process( name ), "g" );
+							content = content.replace( re, name + "-git" );
+						}
+						return content;
+					},
+					processContentExclude: [ "**/*.zip", "**/*.gif", "**/*.png" ]
+				},
 				files: [
 					{
 						src: "dist/jquery.mobile.js",
@@ -387,6 +399,10 @@ module.exports = function( grunt ) {
 					{
 						src: "dist/jquery.mobile.min.js",
 						dest: "dist/git/jquery.mobile-git.min.js"
+					},
+					{
+						src: "dist/jquery.mobile.min.map",
+						dest: "dist/git/jquery.mobile-git.min.map"
 					},
 					{
 						src: "dist/jquery.mobile.css",
@@ -412,9 +428,10 @@ module.exports = function( grunt ) {
 						expand: true,
 						cwd: dist,
 						src: [
-							"images/**"
+							"images/*.*",
+							"images/icons-png/**"
 						],
-						dest: "dist/git/"
+						dest: "<%= dirs.cdn.git %>"
 					}
 				]
 			}
