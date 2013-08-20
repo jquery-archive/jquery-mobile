@@ -38,7 +38,11 @@ module.exports = function( grunt ) {
 		headShortHash: "",
 
 		dirs: {
-			cdn: path.join( dist, name + "-cdn" )
+			dist: dist,
+			cdn: {
+				noversion: path.join( dist, "cdn-noversion" )
+			},
+			tmp: path.join( dist, "tmp" )
 		},
 
 		files: {
@@ -65,7 +69,7 @@ module.exports = function( grunt ) {
 				"<%= files.css.structure %>",
 				"<%= files.css.bundle %>",
 
-				"images/*",
+				"images/*.*",
 				"images/icons-png/**"
 			],
 
@@ -78,7 +82,11 @@ module.exports = function( grunt ) {
 				"demos/**"
 			],
 
-			cdnZipFile: "<%= dirs.cdn %>.zip"
+			zipFileName: name + "<%= versionSuffix %>.zip",
+
+			distZipOut: path.join( dist, name + "<%= versionSuffix %>.zip" ),
+
+			cdnNoversionZipOut: path.join( "<%= dirs.cdn.noversion %>","<%= files.zipFileName %>" )
 		},
 
 
@@ -353,15 +361,22 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
-			cdn: {
-				files: [
-					{
-						expand: true,
-						cwd: dist,
-						src: "<%= files.cdn %>",
-						dest: "<%= dirs.cdn %>"
+			noversion: {
+				options: {
+					processContent: function( content, srcPath ) {
+						if ( /\.min.js$|\.min.map$/.test( srcPath ) ) {
+							// We need to rewrite the map info
+							var re = new RegExp( grunt.template.process( "<%= versionSuffix %>" ), "g" );
+							content = content.replace( re, "" );
+						}
+						return content;
 					}
-				]
+				},
+				files: {
+					// This will be modified by the config:copy:noversion task
+					src: "<%= files.cdn %>",
+					dest: "<%= dirs.tmp %>"
+				}
 			},
 			git: {
 				files: [
@@ -406,10 +421,10 @@ module.exports = function( grunt ) {
 		},
 
 		"hash-manifest": {
-			cdn: {
+			noversion: {
 				options: {
 					algo: "md5",
-					cwd: "<%= dirs.cdn %>"
+					cwd: "<%= dirs.tmp %>"
 				},
 				src: [ "**/*" ],
 				dest: "MANIFEST"
@@ -419,7 +434,7 @@ module.exports = function( grunt ) {
 		compress: {
 			dist: {
 				options: {
-					archive: path.join( dist, name ) + "<%= versionSuffix %>.zip"
+					archive: "<%= files.distZipOut %>"
 				},
 				files: [
 					{
@@ -429,14 +444,14 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
-			cdn: {
+			"cdn-noversion": {
 				options: {
-					archive: "<%= files.cdnZipFile %>"
+					archive: "<%= files.cdnNoversionZipOut %>"
 				},
 				files: [
 					{
 						expand: true,
-						cwd: "<%= dirs.cdn %>",
+						cwd: "<%= dirs.tmp %>",
 						src: [ "**/*" ]
 					}
 				]
@@ -590,7 +605,8 @@ module.exports = function( grunt ) {
 		clean: {
 			dist: [ dist ],
             git: [ path.join( dist, "git" ) ],
-			cdn: [ "<%= dirs.cdn %>" ]
+			tmp: [ "<%= dirs.tmp %>" ],
+			"cdn-noversion": [ "<%= dirs.cdn.noversion %>" ]
 		}
 	});
 
@@ -622,7 +638,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed" ] );
 
-	grunt.registerTask( "cdn", [ "release:init", "clean:cdn", "copy:cdn", "hash-manifest:cdn", "compress:cdn", "clean:cdn" ] );
+	grunt.registerTask( "cdn", [ "release:init", "clean:tmp", "config:copy:noversion", "copy:noversion", "hash-manifest:noversion", "compress:cdn-noversion", "clean:tmp" ] );
 
 	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
