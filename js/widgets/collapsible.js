@@ -176,7 +176,7 @@ $.widget( "mobile.collapsible", {
 	_setOptions: function( options ) {
 		var isCollapsed, newTheme, oldTheme,
 			elem = this.element,
-			currentOpts = this.options,
+			currentOpts = this._getOptions( this.options ),
 			ui = this._ui,
 			anchor = ui.anchor,
 			status = ui.status,
