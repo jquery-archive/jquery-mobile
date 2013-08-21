@@ -704,6 +704,8 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "lint", [ "jshint" ] );
 
+	grunt.registerTask( "changelog", ["changelog:create"] );
+
 	grunt.registerTask( "js", [ "requirejs", "concat:js" ] );
 	grunt.registerTask( "js:release",  [ "js", "uglify", "copy:sourcemap" ] );
 
