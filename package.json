@@ -38,7 +38,10 @@
 		"grunt-git-authors": "1.2.0",
 		"grunt-qunit-junit": "0.1.0-alpha2",
 		"requirejs": "2.1.8",
-		"grunt-hash-manifest": "0.4.0"
+		"grunt-hash-manifest": "0.4.0",
+		"jsdom": "0.8.3",
+		"xmlhttprequest": "1.6.0",
+		"optimist": "0.6.0"
 	},
 	"main": "Gruntfile.js",
 	"engines": {
