@@ -103,7 +103,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	_refresh: function( create ) {
 		var collapsiblesInSet = this.element.children( childCollapsiblesSelector );
 
-		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
+		this.element.find( $.mobile.collapsible.initSelector ).not( ".ui-collapsible" ).collapsible();
 
 		this._addFirstLastClasses( collapsiblesInSet, this._getVisibles( collapsiblesInSet, create ), create );
 	},
