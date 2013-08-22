@@ -89,7 +89,7 @@ module.exports = function( grunt ) {
 	            console.log('listRepoIssues: Yeah, it worked...' + textStatus + ' - ' );
 
 	            $.each( data, function(index, value) {
-	            	issues.push( "* " + ( ( value.labels[0] !== undefined ) ? value.labels[0].name + ": " : "" ) + value.title + " [# " + value.number + "](" + value.html_url + ")" );
+	            	issues.push( "* " + ( ( value.labels[0] !== undefined && /:/.test( value.title ) ) ? value.labels[0].name + ": " : "" ) + value.title + " [# " + value.number + "](" + value.html_url + ")" );
 	            });
 
 	            parseHttpHeaders(jqXHR);
@@ -149,9 +149,9 @@ module.exports = function( grunt ) {
 
 		linkNextPage = "https://api.github.com/repos/jquery/jquery-mobile/issues?state=closed&per_page=100&milestone=" + 20;
 		changelog += "\n###Closed Issues\n";
-		recurse();
+		//recurse();
 		linkNextPage = "https://api.github.com/repos/jquery/jquery-mobile/issues?state=closed&per_page=100&since=2013-02-20T00:00:01Z&milestone=none";
-		recurse();
+		//recurse();
 
 	}
 
