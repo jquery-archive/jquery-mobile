@@ -49,14 +49,14 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this._off( $.mobile.window, "load pagechange" );
 		},
 
-		keyupTimeout:null,
+		keyupTimeout: null,
 
 		_timeout: function() {
 			clearTimeout( this.keyupTimeout );
 			this.keyupTimeout = this._delay( "_updateHeight", this.options.keyupTimeoutBuffer );
 		},
 
-		_updateHeight:function() {
+		_updateHeight: function() {
 
 			this.element.css( "height", "0px" );
 
@@ -85,12 +85,12 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this.element.css( "height", height + "px" );
 		},
 
-		_setOptions: function( options ){
+		_setOptions: function( options ) {
 
 			this._super( options );
 
-			if ( options.autogrow !== undefined && this.isTextarea ){
-				if ( options.autogrow ){
+			if ( options.autogrow !== undefined && this.isTextarea ) {
+				if ( options.autogrow ) {
 					this._autogrow();
 				} else {
 					this._unbindAutogrow();

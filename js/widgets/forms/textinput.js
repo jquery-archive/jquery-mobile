@@ -27,7 +27,7 @@ $.widget( "mobile.textinput", {
 		var o = this.options,
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = this.element[ 0 ].tagName === "TEXTAREA",
-			inputNeedsWrap = ((this.element.is( "input" ) || this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) && !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ));
+			inputNeedsWrap = ( (this.element.is( "input" ) || this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) && !this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ) );
 			
 		$.extend( this, {
 			themeclass: "ui-body-" + ( ( o.theme === null ) ? "inherit" : o.theme ),
