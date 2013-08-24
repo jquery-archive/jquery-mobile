@@ -230,7 +230,8 @@ module.exports = function( grunt ) {
 
 		cssmin: {
 			options: {
-				banner: banner.minified
+				banner: banner.minified,
+				keepSpecialComments: 0
 			},
 			structure: {
 				files: {
