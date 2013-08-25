@@ -146,6 +146,10 @@ define( [ "jquery",
 			var $el = this.element,
 				o = this.options;
 
+			if( this._inputFirst.is( ":disabled" ) || this._inputLast.is( ":disabled" ) ){
+				this.options.disabled = true;
+			}
+
 			$el.find( "input" ).slider({
 				theme: o.theme,
 				trackTheme: o.trackTheme,
