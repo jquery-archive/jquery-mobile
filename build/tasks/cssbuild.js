@@ -29,7 +29,7 @@ module.exports = function( grunt ) {
 
 		async.forEach( this.files,
 			function( file, callback ) {
-				var src = file.src[0],
+				var src = grunt.template.process( file.orig.src[0] ),
 					dest = file.dest;
 				
 				grunt.log.debug( "Building '" + src + "' -> '" + dest + "'" );
