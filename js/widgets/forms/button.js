@@ -105,6 +105,8 @@ $.widget( "mobile.button", {
 			}
 			this.widget().removeClass( "ui-icon-" + this.options.icon ).toggleClass( "ui-icon-" + options.icon, options.icon );
 		}
+
+		this._super( options );
 	},
 
 	refresh: function( create ) {
