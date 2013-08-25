@@ -6,4 +6,6 @@
 * Released under the MIT license.
 * http://jquery.org/license
 *
+* :)
+*
 */
