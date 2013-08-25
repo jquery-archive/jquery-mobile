@@ -66,8 +66,8 @@ module.exports = function( grunt ) {
 					list.push({
 						src: value.src,
 						dest: path.join( destDir, value.unminified )
-					})
-				})
+					});
+				});
 				return list;
 			},
 			getMinifiedCSSFiles: function( destDir ) {
@@ -78,7 +78,7 @@ module.exports = function( grunt ) {
 						src: path.join( destDir, value.unminified ),
 						dest: path.join( destDir, value.minified )
 					});
-				})
+				});
 				return list;
 			},
 			cdn: [
