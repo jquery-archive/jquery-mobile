@@ -424,49 +424,12 @@ module.exports = function( grunt ) {
 					},
 					processContentExclude: [ "**/*.zip", "**/*.gif", "**/*.png" ]
 				},
-				files: [
-					{
-						src: "dist/jquery.mobile.js",
-						dest: "dist/git/jquery.mobile-git.js"
-					},
-					{
-						src: "dist/jquery.mobile.min.js",
-						dest: "dist/git/jquery.mobile-git.min.js"
-					},
-					{
-						src: "dist/jquery.mobile.min.map",
-						dest: "dist/git/jquery.mobile-git.min.map"
-					},
-					{
-						src: "dist/jquery.mobile.css",
-						dest: "dist/git/jquery.mobile-git.css"
-					},
-					{
-						src: "dist/jquery.mobile.min.css",
-						dest: "dist/git/jquery.mobile-git.min.css"
-					},
-					{
-						src: "dist/jquery.mobile.structure.css",
-						dest: "dist/git/jquery.mobile.structure-git.css"
-					},
-					{
-						src: "dist/jquery.mobile.structure.min.css",
-						dest: "dist/git/jquery.mobile.structure-git.min.css"
-					},
-					{
-						src: "dist/jquery.mobile.zip",
-						dest: "dist/git/jquery.mobile-git.zip"
-					},
-					{
-						expand: true,
-						cwd: dist,
-						src: [
-							"images/*.*",
-							"images/icons-png/**"
-						],
-						dest: "<%= dirs.cdn.git %>"
-					}
-				]
+				files: {
+					// WARNING: This will be modified by the config:copy:noversion task
+					cwd: dist,
+					src: "<%= files.cdn %>",
+					dest: "<%= dirs.cdn.git %>"
+				}
 			}
 		},
 
@@ -692,7 +655,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
-	grunt.registerTask( "dist:git", [ "dist", "clean:git", "copy:git" ] );
+	grunt.registerTask( "dist:git", [ "dist", "clean:git", "config:copy:git:-git", "copy:git" ] );
 
 	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
