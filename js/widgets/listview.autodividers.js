@@ -26,12 +26,11 @@ $.widget( "mobile.listview", $.mobile.listview, {
 		autodividersSelector: defaultAutodividersSelector
 	},
 
-	_afterListviewRefresh: function() {
-		var el = this.element;
-		this._off( el, "listviewafterrefresh" );
-		this._replaceDividers();
-		this.refresh();
-		this._on( el, { listviewafterrefresh: "_afterListviewRefresh" } );
+	_beforeListviewRefresh: function() {
+		if ( this.options.autodividers ) {
+			this._replaceDividers();
+			this._superApply( arguments );
+		}
 	},
 
 	_replaceDividers: function() {
@@ -40,9 +39,9 @@ $.widget( "mobile.listview", $.mobile.listview, {
 			list = this.element,
 			divider;
 
-		list.find( "li:jqmData(role='list-divider')" ).remove();
+		list.children( "li:jqmData(role='list-divider')" ).remove();
 
-		lis = list.find( "li" );
+		lis = list.children( "li" );
 
 		for ( i = 0; i < lis.length ; i++ ) {
 			li = lis[ i ];
@@ -57,16 +56,6 @@ $.widget( "mobile.listview", $.mobile.listview, {
 
 			lastDividerText = dividerText;
 		}
-	},
-
-	_create: function() {
-		this._super();
-
-		if ( !this.options.autodividers ) {
-			return;
-		}
-
-		this._afterListviewRefresh();
 	}
 });
 

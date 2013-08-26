@@ -14,7 +14,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 		hidedividers: false
 	},
 
-	refresh: function() {
+	_afterListviewRefresh: function() {
 		var items, idx, item, hideDivider = true;
 
 		this._superApply( arguments );

@@ -79,13 +79,15 @@ $.widget( "mobile.listview", $.extend( {
 		return $( results );
 	},
 
+	_beforeListviewRefresh: $.noop,
+	_afterListviewRefresh: $.noop,
+
 	refresh: function( create ) {
 		var buttonClass, pos, numli, item, itemClass, itemTheme, itemIcon, icon, a,
 			isDivider, startCount, newStartCount, value, last, splittheme, splitThemeClass, spliticon,
-			altButtonClass, dividerTheme,
+			altButtonClass, dividerTheme, li,
 			o = this.options,
 			$list = this.element,
-			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
 			start = $list.attr( "start" ),
 			itemClassDict = {},
@@ -102,6 +104,10 @@ $.widget( "mobile.listview", $.extend( {
 			startCount = parseInt( start, 10 ) - 1;
 			$list.css( "counter-reset", "listnumbering " + startCount );
 		}
+
+		this._beforeListviewRefresh();
+
+		li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" );
 
 		for ( pos = 0, numli = li.length; pos < numli; pos++ ) {
 			item = li.eq( pos );
@@ -193,9 +199,9 @@ $.widget( "mobile.listview", $.extend( {
 		this._addThumbClasses( li );
 		this._addThumbClasses( li.find( ".ui-btn" ) );
 
+		this._afterListviewRefresh();
+
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
-		// autodividers binds to this to redraw dividers after the listview refresh
-		this._trigger( "afterrefresh" );
 	}
 }, $.mobile.behaviors.addFirstLastClasses ) );
 
