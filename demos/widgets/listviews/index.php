@@ -491,67 +491,6 @@
 				</div>
 			</div><!--/demo-html -->
 
-			<h2 id="list-nested">Nested</h2>
-
-			<p>By nesting child <code>ul</code> or <code>ol</code> inside list items, you can create nested lists. To set the swatch color of the child listviews, set the <code>data-theme</code> attribute on each list inside.</p>
-
-			<p><strong>Warning: Nested listviews are deprecated as of 1.3.0 and will be removed in future versions.</strong></p>
-
-			<div data-demo-html="true">
-				<ul data-role="listview" data-header-theme="a">
-					<li>Animals
-						<ul>
-							<li>Pets
-								<ul>
-									<li><a href="index.html">Canary</a></li>
-									<li><a href="index.html">Cat</a></li>
-									<li><a href="index.html">Dog</a></li>
-								</ul>
-							</li>
-							<li>Farm animals
-								<ul>
-									<li><a href="index.html">Chicken</a></li>
-									<li><a href="index.html">Cow</a></li>
-									<li><a href="index.html">Sheep</a></li>
-								</ul>
-							</li>
-							<li>Wild animals>
-								<ul>
-									<li><a href="index.html">Alligator</a></li>
-									<li><a href="index.html">Bear</a></li>
-									<li><a href="index.html">Zebra</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<li>Colors
-						<ul>
-							<li><a href="index.html">Blue</a></li>
-							<li><a href="index.html">Green</a></li>
-							<li><a href="index.html">Red</a></li>
-						</ul>
-					</li>
-					<li>Vehicles
-						<ul>
-							<li>Cars
-								<ul>
-									<li><a href="index.html">Audi</a></li>
-									<li><a href="index.html">BMW</a></li>
-									<li><a href="index.html">Volkswagen</a></li>
-								</ul>
-							</li>
-							<li>Planes
-								<ul>
-									<li><a href="index.html">Boeing</a></li>
-									<li><a href="index.html">Embraer</a></li>
-									<li><a href="index.html">Airbus</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div><!--/demo-html -->
-
 	</div><!-- /content -->
 
 	<div data-role="footer" class="jqm-footer">
