@@ -425,7 +425,7 @@ module.exports = function( grunt ) {
 					processContentExclude: [ "**/*.zip", "**/*.gif", "**/*.png" ]
 				},
 				files: {
-					// WARNING: This will be modified by the config:copy:noversion task
+					// WARNING: This will be modified by the config:copy:git task
 					cwd: dist,
 					src: "<%= files.cdn %>",
 					dest: "<%= dirs.cdn.git %>"
