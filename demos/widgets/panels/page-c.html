@@ -21,57 +21,56 @@
 </head>
 <body>
 
+	<div data-role="panel" id="outside" data-display="push" data-theme="b">
+		<ul data-role="listview">
+			<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+			<li>push</li>
+			<li>page-c.html</li>
+		</ul>
+	</div>
+	
 	<div data-role="header" data-position="fixed" data-theme="a">
-		<h1>Header index.html</h1>
+		<h1>Header page-c.html</h1>
 		<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
 		<div data-role="navbar">
 			<ul>
-				<li><a href="index.html">Page A</a></li>
+				<li><a href="page-a.html">Page A</a></li>
 				<li><a href="page-b.html">Page B</a></li>
 				<li><a href="page-c.html">Page C</a></li>
 			</ul>
 		</div>
 	</div><!-- /header -->
-
-	<div data-role="page" id="a">
+			
+	<div data-role="page" id="c">
 	
-		
+		<div data-role="panel" id="inside-c" data-position="right" data-theme="b">
+			<ul data-role="listview">
+				<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+				<li>Reveal</li>
+			</ul>
+		</div>
+	
 		<div data-role="content">
 		
-			<h2>Page A</h2>
+			<h2>Page C</h2>
 			
 			<p>Content</p>
 			
-			<a href="#inside-a" data-role="button" data-inline="true">Open right panel</a>
+			<a href="#inside-c" data-role="button" data-inline="true">Open right panel</a>
 		
 		</div><!-- /content -->
-		
-		<div data-role="panel" id="inside-a" data-position="right" data-display="overlay" data-theme="b">
-			<ul data-role="listview">
-				<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
-				<li>Overlay</li>
-			</ul>
-		</div>
 		
 		<div data-role="footer" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="index.html" class="ui-btn-active ui-state-persist">Page A</a></li>
+					<li><a href="page-a.html">Page A</a></li>
 					<li><a href="page-b.html">Page B</a></li>
-					<li><a href="page-c.html">Page C</a></li>
+					<li><a href="page-c.html" class="ui-btn-active ui-state-persists">Page C</a></li>
 				</ul>
 			</div>
 		</div><!-- /header -->
 	
 	</div><!-- /page -->
 	
-	<div data-role="panel" id="outside" data-theme="b">
-		<ul data-role="listview">
-			<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
-			<li>Reveal</li>
-			<li>index.html</li>
-		</ul>
-	</div>
-
 </body>
 </html>
