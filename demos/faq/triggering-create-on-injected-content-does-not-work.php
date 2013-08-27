@@ -39,7 +39,7 @@
 //javaScript **CORRECT**
 $("#formid").trigger("create");
 //javaScript INCORRECT
-$("#serchInput").trigger("create");
+$("#searchInput").trigger("create");
 $("#submitButton").trigger("create");
 </pre></code>
 
