@@ -4,7 +4,7 @@
 
 // TODO split out into seperate test files
 (function( $ ){
-	function testExpandCollapseAndOptions( selector ) {
+	function testExpandCollapse( selector ) {
 		var collapsible = $( selector );
 		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed");
 		$( selector + " >:header a" ).first().click();
@@ -16,14 +16,22 @@
 
 		$( selector + " >:header a" ).first().click();
 		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed");
+	}
 
-		collapsible.collapsible( "option", "inset", false );
-		deepEqual( collapsible.hasClass( "ui-corner-all" ), false, "After turning off the 'inset' option, the collapsible does not have the ui-corner-all class." );
-		deepEqual( collapsible.hasClass( "ui-collapsible-inset" ), false, "After turning off the 'inset' option, the collapsible does not have the ui-collapsible-inset class." );
+	function testCornersAndInset( selector, widgetType ) {
+		var widget = $( selector );
 
-		collapsible.collapsible( "option", { inset: true, corners: false } );
-		deepEqual( collapsible.hasClass( "ui-corner-all" ), false, "After turning on the 'inset' option and turning off the 'corners' option the collapsible does not have the ui-corner-all class." );
-		deepEqual( collapsible.hasClass( "ui-collapsible-inset" ), true, "After turning on the 'inset' option and turning off the 'corners' option the collapsible has the ui-collapsible-inset class." );
+		widget[ widgetType ]( "option", "inset", false );
+		deepEqual( widget.hasClass( "ui-corner-all" ), false, selector + ": non-inset has no corners." );
+		widget[ widgetType ]( "option", "corners", false );
+		widget[ widgetType ]( "option", "inset", true );
+		deepEqual( widget.hasClass( "ui-corner-all" ), false, selector + ": turning off corners while non-inset does not cause ui-corner-all to be re-added after inset is turned back on." );
+		widget[ widgetType ]( "option", "inset", false );
+		deepEqual( widget.hasClass( "ui-corner-all" ), false, selector + ": non-inset has no corners." );
+		widget[ widgetType ]( "option", "corners", true );
+		deepEqual( widget.hasClass( "ui-corner-all" ), false, selector + ": turning on corners while non-inset does not cause ui-corner-all to be added." );
+		widget[ widgetType ]( "option", "inset", true );
+		deepEqual( widget.hasClass( "ui-corner-all" ), true, selector + ": turning on inset while corners are on causes ui-corner-all to be added." );
 	}
 
 	module( "Collapsible section", {});
@@ -37,11 +45,19 @@
 	});
 
 	test( "Expand/Collapse", function(){
-		testExpandCollapseAndOptions( "#collapsed-collapsible" );
+		testExpandCollapse( "#collapsed-collapsible" );
 	});
 
-	test( "Expand/Collapse pre-rendered", function(){
-		testExpandCollapseAndOptions( "#pre-rendered-collapsible" );
+	test( "Expand/Collapse for pre-rendered", function(){
+		testExpandCollapse( "#pre-rendered-collapsible" );
+	});
+
+	test( "Corners and inset", function() {
+		testCornersAndInset( "#collapsed-collapsible", "collapsible" );
+	});
+
+	test( "Corners and inset for pre-rendered", function() {
+		testCornersAndInset( "#pre-rendered-collapsible", "collapsible" );
 	});
 
 	module( "Collapsible set", {});
@@ -113,6 +129,10 @@
 		ok(!$( "#basic-collapsible-set .ui-collapsible" ).eq(0).hasClass( "ui-collapsible-collapsed" ), "First collapsible should be expanded after click");
 		$( "#basic-collapsible-set .ui-collapsible-heading-toggle" ).eq(0).click();
 		ok($( "#basic-collapsible-set .ui-collapsible" ).hasClass( "ui-collapsible-collapsed" ), "All collapsible should be collapsed");
+	});
+
+	test( "Corners and inset", function() {
+		testCornersAndInset( "#basic-collapsible-set", "collapsibleset" );
 	});
 
 	test( "Collapsible Set with dynamic content", function(){
