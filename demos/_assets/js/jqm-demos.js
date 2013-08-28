@@ -36,7 +36,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 			
 			message
 			.append( "<h3 style='margin:0 0 .3em; padding:0; font-size:1em; font-weight: bold; color:#fff;'>Note: Navigation may not work if viewed locally</h3>" )
-			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help' style='color:white'>view help</a>.</p>" );
+			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
 			
 			$( document ).on( "pagecreate", function( event ) {
 				$( event.target ).append( message );
@@ -44,7 +44,6 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 		});
 	});
 }
-
 
 // display the version of jQM
 $( document ).on( "pageinit", function() {
@@ -78,9 +77,13 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 	});
 
 	// global search
+	$( ".jqm-search-link" ).on( "click", function() {
+		page.find( ".jqm-search-panel" ).panel( "open" );
+	});
+	
 	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
 		globalNav: "demos",
-		inset: true,
+		inset: false,
 		theme: null,
 		dividerTheme: null,
 		icon: false,
@@ -91,16 +94,9 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
   		arrowKeyNav: true,
   		enterToNav: true,
   		highlight: true,
-  		submitTo: "search-results.php"
+  		submitTo: "_search/"
 	});
 	
-	$( this ).find( ".jqm-header .jqm-search-link" ).on( "click", function() {
-		$( this ).parent( ".jqm-header" ).toggleClass( "jqm-search-toggle" );
-		
-		var type = $( this ).parent( ".jqm-header" ).hasClass( "jqm-search-toggle" ) ? "searchshow" : "searchhide";
-		
-		$( this ).parent( ".jqm-header" ).find( ".jqm-search" ).trigger( type );
-	});
 	
 	$( this ).find( ".jqm-header .jqm-search" )
 		.on( "searchshow searchhide", function( event ) {
@@ -114,10 +110,6 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 			}
 		});
 		
-	$( this ).on( "pagehide", function() {
-		$( this ).find( ".jqm-search .ui-input-clear" ).trigger( "click" );
-	});
-
 	$( this ).find( ".jqm-content ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
@@ -131,7 +123,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
 		var text = $( this ).attr( "data-filtertext" );
-		$( this ).find( "a" ).append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'>//</span> " + text + "</span>" );
+		$( this ).find( "a" ).append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'></span> " + text + "</span>" );
 	});
 });
 
