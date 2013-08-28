@@ -70,7 +70,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	},
 
 	_setOptions: function( options ) {
-		var ret,
+		var ret, hasCorners,
 			elem = this.element,
 			themeClass = this._themeClassFromOption( "ui-group-theme-", options.theme );
 
@@ -80,8 +80,16 @@ $.widget( "mobile.collapsibleset", $.extend( {
 				.addClass( themeClass );
 		}
 
+		if ( options.inset !== undefined ) {
+			hasCorners = !!( options.inset && ( options.corners || this.options.corners ) );
+		}
+
 		if ( options.corners !== undefined ) {
-			elem.toggleClass( "ui-corner-all", options.corners );
+			hasCorners = !!( options.corners && ( options.inset || this.options.inset ) );
+		}
+
+		if ( hasCorners !== undefined ) {
+			elem.toggleClass( "ui-corner-all", hasCorners );
 		}
 
 		ret = this._super( options );

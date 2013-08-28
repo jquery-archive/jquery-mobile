@@ -174,7 +174,7 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_setOptions: function( options ) {
-		var isCollapsed, newTheme, oldTheme,
+		var isCollapsed, newTheme, oldTheme, hasCorners,
 			elem = this.element,
 			currentOpts = this._getOptions( this.options ),
 			ui = this._ui,
@@ -236,21 +236,16 @@ $.widget( "mobile.collapsible", {
 			ui.content.removeClass( oldTheme ).addClass( newTheme );
 		}
 
-		// It is important to apply "inset" before corners, because the new value of
-		// "inset" can affect whether we display corners or not. Note that setting
-		// the "inset" option to false does not cause a change in the value of
-		// this.options.corners - it merely causes a change in the interpretation of
-		// the value of the "corners" option.
 		if ( opts.inset !== undefined ) {
-			elem.toggleClass( "ui-collapsible-inset", opts.inset );
-			currentOpts.inset = opts.inset;
-			if ( !opts.inset ) {
-				opts.corners = false;
-			}
+			hasCorners = !!( opts.inset && ( opts.corners || currentOpts.corners ) );
 		}
 
 		if ( opts.corners !== undefined ) {
-			elem.toggleClass( "ui-corner-all", currentOpts.inset && opts.corners );
+			hasCorners = !!( opts.corners && ( opts.inset || currentOpts.inset ) );
+		}
+
+		if ( hasCorners !== undefined ) {
+			elem.toggleClass( "ui-corner-all", hasCorners );
 		}
 
 		if ( opts.mini !== undefined ) {
