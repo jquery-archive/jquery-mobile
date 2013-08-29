@@ -133,19 +133,19 @@ html .ui-btn.ui-icon-radio-off:after {
 }
 
 /* Alt icons */
-.ui-icon-alt.ui-btn:after,
-.ui-icon-alt .ui-btn:after,
-html .ui-icon-alt.ui-icon-checkbox-off:after,
-html .ui-icon-alt.ui-icon-radio-off:after,
-html .ui-icon-alt .ui-icon-checkbox-off:after,
-html .ui-icon-alt .ui-icon-radio-off:after {
+.ui-alt-icon.ui-btn:after,
+.ui-alt-icon .ui-btn:after,
+html .ui-alt-icon.ui-icon-checkbox-off:after,
+html .ui-alt-icon.ui-icon-radio-off:after,
+html .ui-alt-icon .ui-icon-checkbox-off:after,
+html .ui-alt-icon .ui-icon-radio-off:after {
 	background-color: 					#999 /*{global-icon-color}*/;
 	background-color: 					rgba(255,255,255,.3) /*{global-icon-disc-alt}*/;
 }
 
 /* No disc */
-.ui-icon-nodisc.ui-btn:after,
-.ui-icon-nodisc .ui-btn:after {
+.ui-nodisc-icon.ui-btn:after,
+.ui-nodisc-icon .ui-btn:after {
 	background-color: transparent;
 }
 
@@ -186,8 +186,8 @@ html .ui-btn.ui-icon-checkbox-on:after {
 	border-width: 5px;
 	border-style: solid; 
 }
-.ui-icon-alt.ui-btn.ui-icon-radio-on:after,
-.ui-icon-alt .ui-btn.ui-icon-radio-on:after {
+.ui-alt-icon.ui-btn.ui-icon-radio-on:after,
+.ui-alt-icon .ui-btn.ui-icon-radio-on:after {
 	background-color: #000;
 }
 
