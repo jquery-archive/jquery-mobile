@@ -124,7 +124,7 @@ label.ui-btn {
 .ui-btn-icon-notext:after,
 html .ui-btn.ui-icon-checkbox-off:after,
 html .ui-btn.ui-icon-radio-off:after {
-	background-color: 					#999 /*{global-icon-color}*/;
+	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.3) /*{global-icon-disc}*/;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -139,8 +139,8 @@ html .ui-alt-icon.ui-icon-checkbox-off:after,
 html .ui-alt-icon.ui-icon-radio-off:after,
 html .ui-alt-icon .ui-icon-checkbox-off:after,
 html .ui-alt-icon .ui-icon-radio-off:after {
-	background-color: 					#999 /*{global-icon-color}*/;
-	background-color: 					rgba(255,255,255,.3) /*{global-icon-disc-alt}*/;
+	background-color: 					#666 /*{global-icon-color}*/;
+	background-color: 					rgba(0,0,0,.15) /*{global-icon-disc-alt}*/;
 }
 
 /* No disc */
