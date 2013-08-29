@@ -42,7 +42,6 @@
 	display: block;
 	margin: 0;	
 	padding: .5em 1em;
-	background-image: none;
 }
 .ui-collapsible-themed-content .ui-collapsible-content {
 	border-left-width: 0;
