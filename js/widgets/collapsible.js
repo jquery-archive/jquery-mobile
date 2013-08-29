@@ -237,6 +237,7 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.inset !== undefined ) {
+			elem.toggleClass( "ui-collapsible-inset", opts.inset );
 			hasCorners = !!( opts.inset && ( opts.corners || currentOpts.corners ) );
 		}
 
