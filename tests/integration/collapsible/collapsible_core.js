@@ -22,9 +22,19 @@
 		var widget = $( selector );
 
 		widget[ widgetType ]( "option", "inset", false );
+		if ( widgetType === "collapsibleset" ) {
+			deepEqual( widget.children( ".ui-collapsible" ).length, widget.children( ":not(.ui-collapsible-inset)" ).length, selector + ": Turning off inset causes the class ui-collapsible-inset to be removed from all children." );
+		} else {
+			deepEqual( widget.hasClass( "ui-collapsible-inset" ), false, selector + ": Turning off inset causes the class ui-collapsible-inset to be removed." );
+		}
 		deepEqual( widget.hasClass( "ui-corner-all" ), false, selector + ": non-inset has no corners." );
 		widget[ widgetType ]( "option", "corners", false );
 		widget[ widgetType ]( "option", "inset", true );
+		if ( widgetType === "collapsibleset" ) {
+			deepEqual( widget.children( ".ui-collapsible" ).length, widget.children( ".ui-collapsible-inset" ).length, selector + ": Turning on inset causes the class ui-collapsible-inset to be added to all children." );
+		} else {
+			deepEqual( widget.hasClass( "ui-collapsible-inset" ), true, selector + ": Turning on inset causes the class ui-collapsible-inset to be added." );
+		}
 		deepEqual( widget.hasClass( "ui-corner-all" ), false, selector + ": turning off corners while non-inset does not cause ui-corner-all to be re-added after inset is turned back on." );
 		widget[ widgetType ]( "option", "inset", false );
 		deepEqual( widget.hasClass( "ui-corner-all" ), false, selector + ": non-inset has no corners." );
