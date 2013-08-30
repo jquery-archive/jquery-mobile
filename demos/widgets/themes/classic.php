@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Default theme - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<title>Classic theme - jQuery Mobile Demos</title>
+	<link rel="stylesheet"  href="../../../css/themes/classic/jquery.mobile.css">
 	<link rel="shortcut icon" href="../../favicon.ico">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../js/"></script>
@@ -13,10 +13,10 @@
 			$( "#theme-selector input" ).on( "change", function( event ) {
 				var themeClass = $( "#theme-selector input:checked" ).attr( "id" );
 				
-				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( "ui-page-theme-" + themeClass );
-				$( "#ui-body-test" ).removeClass( "ui-body-a ui-body-b" ).addClass( "ui-body-" + themeClass );
-				$( "#ui-bar-test, #ui-bar-form" ).removeClass( "ui-bar-a ui-bar-b" ).addClass( "ui-bar-" + themeClass );
-				$( ".ui-collapsible-content" ).removeClass( "ui-body-a ui-body-b" ).addClass( "ui-body-" + themeClass );
+				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b ui-page-theme-c ui-page-theme-d ui-page-theme-e" ).addClass( "ui-page-theme-" + themeClass );
+				$( "#ui-body-test" ).removeClass( "ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e" ).addClass( "ui-body-" + themeClass );
+				$( "#ui-bar-test, #ui-bar-form" ).removeClass( "ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e" ).addClass( "ui-bar-" + themeClass );
+				$( ".ui-collapsible-content" ).removeClass( "ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e" ).addClass( "ui-body-" + themeClass );
 				$( ".theme" ).text( themeClass );
 			});
 			$( "#opt-shadow input" ).on( "change", function( event ) {
@@ -56,7 +56,7 @@
 <div data-role="page" id="testpage">
 
 	<div data-role="header">
-		<h1>Default theme</h1>
+		<h1>Classic theme</h1>
 		<a href="../../" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
 		<a href="#" data-role="button" data-icon="gear">Button</a>
 		<div data-role="navbar">
@@ -78,6 +78,12 @@
 					<input type="radio" name="theme" id="a" checked>
 					<label for="b">B</label>
 					<input type="radio" name="theme" id="b">
+					<label for="c">C</label>
+					<input type="radio" name="theme" id="c">
+					<label for="d">D</label>
+					<input type="radio" name="theme" id="d">
+					<label for="e">E</label>
+					<input type="radio" name="theme" id="e">
 				</fieldset>
 			</div>
 			<div data-role="fieldcontain" id="opt-shadow">
@@ -126,16 +132,16 @@
 		<button data-inline="true" data-icon="carat-r" data-iconpos="right">are</button>
 		<input type="button" value="buttons" data-inline="true" data-icon="carat-r" data-iconpos="right">
 
-		<ul data-role="listview" data-inset="true">
+		<ul data-role="listview" data-inset="true" data-counttheme="c">
 			<li>I</li>
-			<li data-role="list-divider">Divider<span class="ui-li-count">3</span></li>
+			<li data-role="list-divider" data-theme="b">Divider<span class="ui-li-count">3</span></li>
 			<li>am</li>
 			<li>static<span class="ui-li-count">6</span></li>
 		</ul>
 
-		<ul data-role="listview" data-inset="true">
+		<ul data-role="listview" data-inset="true" data-counttheme="c">
 			<li><a href="#">We</a></li>
-			<li data-role="list-divider">Divider</li>
+			<li data-role="list-divider" data-theme="b">Divider</li>
 			<li><a href="#">have<span class="ui-li-count">4</span></a></li>
 			<li><a href="#">links</a></li>
 		</ul>
