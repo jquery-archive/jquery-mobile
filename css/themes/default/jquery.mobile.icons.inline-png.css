@@ -47,7 +47,7 @@
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAICAYAAADN5B7xAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAEBJREFUGJV9kMEKADAIQmtfbl/uLtsYoXmKfIYUIUQSJKE8B1/NoQbPIQPrkIChdhaeDq3WrDLzBc5crr/9yO9v0Dinb5SKJTsAAAAASUVORK5CYII=');
 }
 .ui-icon-check:after,
-.ui-icon-checkbox-on:after {
+.ui-btn.ui-checkbox-on.ui-icon-checkbox-on:after {
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAGlJREFUKJGVkFEKwCAMQ9vee1AdjLE7x+xnMEXRms/S1zQRCYqkk/TovoiIAEj8FYMBZPZyW0Fmdkwvk3QAqYLOgVP76hecJAkgb0MLNaVYKUUDHSVV9W46ea1zGsHXNlTlvbehyvmJQC95zvcNDVD87AAAAABJRU5ErkJggg==');
 }
 .ui-icon-clock:after {
@@ -217,8 +217,8 @@
 }
 .ui-alt-icon.ui-icon-check:after,
 .ui-alt-icon .ui-icon-check:after,
-.ui-alt-icon.ui-icon-checkbox-on:after,
-.ui-alt-icon .ui-icon-checkbox-on:after {
+.ui-alt-icon.ui-btn.ui-checkbox-on.ui-icon-checkbox-on:after,
+.ui-alt-icon .ui-btn.ui-checkbox-on.ui-icon-checkbox-on:after {
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAFhJREFUKJGdkEEKwCAMBFf/XUgtSPHT9pKIRVvXDOwpjG4C8IhmixNA1dBy6qQmR0I6Vi+LVjKuyU9DVekGySP95SVFAGG1g64gs8FXNer82SMZt0cyCiM9Aok1Bu4pGTQAAAAASUVORK5CYII=');
 }
 .ui-alt-icon.ui-icon-clock:after,
