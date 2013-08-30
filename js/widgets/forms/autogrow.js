@@ -85,6 +85,12 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 			this.element.css( "height", height + "px" );
 		},
 
+		refresh: function() {
+			if ( this.options.autogrow && this.isTextarea ) {
+				this._updateHeight();
+			}
+		},
+
 		_setOptions: function( options ) {
 
 			this._super( options );
