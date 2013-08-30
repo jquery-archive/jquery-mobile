@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Theme inheritance - jQuery Mobile Tests</title>
+	<title>Default theme - jQuery Mobile Demos</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
 	<link rel="shortcut icon" href="../favicon.ico">
 	<script src="../../js/jquery.js"></script>
@@ -24,6 +24,13 @@
 					$( "#testpage" ).removeClass( "noshadow" );
 				} else if ( $( "#off" ).prop( "checked" ) ) {
 					$( "#testpage" ).addClass( "noshadow" );
+				}
+			});
+			$( "#opt-iconshadow input" ).on( "change", function( event ) {
+				if ( $( "#off1" ).prop( "checked" ) ) {
+					$( "#testpage" ).removeClass( "ui-shadow-icon" );
+				} else if ( $( "#on1" ).prop( "checked" ) ) {
+					$( "#testpage" ).addClass( "ui-shadow-icon" );
 				}
 			});
 			$( "#opt-navbars input" ).on( "change", function( event ) {
@@ -49,7 +56,7 @@
 <div data-role="page" id="testpage">
 
 	<div data-role="header">
-		<h1>Theme inheritance</h1>
+		<h1>Default theme</h1>
 		<a href="../../" data-role="button" data-rel="back" data-icon="back" data-iconpos="notext">Back</a>
 		<a href="#" data-role="button" data-icon="gear">Button</a>
 		<div data-role="navbar">
@@ -77,9 +84,18 @@
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Shadow:</legend>
 					<label for="on">On</label>
-					<input type="radio" name="shadow" id="on" checked>
+					<input type="radio" name="shadow" id="on">
 					<label for="off">Off</label>
-					<input type="radio" name="shadow" id="off">
+					<input type="radio" name="shadow" id="off" checked>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain" id="opt-iconshadow">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Shadow:</legend>
+					<label for="on1">On</label>
+					<input type="radio" name="iconshadow" id="on1">
+					<label for="off1">Off</label>
+					<input type="radio" name="iconshadow" id="off1" checked>
 				</fieldset>
 			</div>
 			<div data-role="fieldcontain" id="opt-navbars">
@@ -106,9 +122,9 @@
 			<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 				
-		<a href="#" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">We</a>
-		<button data-inline="true" data-icon="arrow-r" data-iconpos="right">are</button>
-		<input type="button" value="buttons" data-inline="true" data-icon="arrow-r" data-iconpos="right">
+		<a href="#" data-role="button" data-inline="true" data-icon="carat-r" data-iconpos="right">We</a>
+		<button data-inline="true" data-icon="carat-r" data-iconpos="right">are</button>
+		<input type="button" value="buttons" data-inline="true" data-icon="carat-r" data-iconpos="right">
 
 		<ul data-role="listview" data-inset="true">
 			<li>I</li>
@@ -156,7 +172,7 @@
 			</div>
 			<div data-role="fieldcontain">
 				<label for="flip2">Flip switch:</label>
-				<select name="flip2" id="flip2" data-role="slider">
+				<select name="flip2" id="flip2" data-role="flipswitch">
 					<option value="off">Off</option>
 					<option value="on">On</option>
 				</select>
@@ -174,6 +190,17 @@
 					<label for="checkbox-v-1b">Two</label>
 					<input type="checkbox" name="checkbox-v-1c" id="checkbox-v-1c">
 					<label for="checkbox-v-1c">Three</label>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<fieldset data-role="controlgroup">
+					<legend>Radio:</legend>
+					<input type="radio" name="radio-v-1" id="radio-v-1a" checked>
+					<label for="radio-v-1a">One</label>
+					<input type="radio" name="radio-v-1" id="radio-v-1b">
+					<label for="radio-v-1b">Two</label>
+					<input type="radio" name="radio-v-1" id="radio-v-1c">
+					<label for="radio-v-1c">Three</label>
 				</fieldset>
 			</div>
 			<div data-role="fieldcontain">
@@ -211,7 +238,7 @@
 					<input type="text" name="name3" id="name3" value="" data-clear-btn="true">
 				</li>
 				<li data-role="fieldcontain">
-					<label for="flip3">Flip switch:</label>
+					<label for="flip3">Slider flip switch:</label>
 					<select name="flip3" id="flip3" data-role="slider">
 						<option value="off">Off</option>
 						<option value="on">On</option>
