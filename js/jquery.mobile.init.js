@@ -82,7 +82,7 @@ define([
 			$.mobile.pageContainer = $.mobile.firstPage
 				.parent()
 				.addClass( "ui-mobile-viewport" )
-				.content();
+				.pagecontainer();
 
 			// initialize navigation events now, after mobileinit has occurred and the page container
 			// has been created but before the rest of the library is alerted to that fact

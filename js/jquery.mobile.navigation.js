@@ -18,7 +18,7 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-	$.widget( "mobile.content", {
+	$.widget( "mobile.pagecontainer", {
 		options: {
 			theme: "a"
 		},
@@ -1117,7 +1117,7 @@ define( [
 
 		// Preferring to allow exceptions for uninitialized opts.pageContainer
 		// widgets so we know if we need to force init here for users
-		container.content( "load", url, opts );
+		container.pagecontainer( "load", url, opts );
 
 		// provide the deferred
 		return opts.deferred.promise();
@@ -1349,7 +1349,7 @@ define( [
 	$.mobile.allowCrossDomainPages = false;
 
 	$.mobile.changePage = function( to, options ) {
-		$.mobile.pageContainer.content( "change", to, options );
+		$.mobile.pageContainer.pagecontainer( "change", to, options );
 	};
 
 	$.mobile.changePage.defaults = {
@@ -1681,7 +1681,7 @@ define( [
 		});
 
 		// TODO ensure that the navigate binding in the content widget happens at the right time
-		$.mobile.pageContainer.content();
+		$.mobile.pageContainer.pagecontainer();
 
 		//set page min-heights to be device specific
 		$.mobile.document.bind( "pageshow", $.mobile.resetActivePageHeight );

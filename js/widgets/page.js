@@ -135,12 +135,12 @@ $.widget( "mobile.page", {
 	},
 	// Deprecated in 1.4 remove in 1.5
 	removeContainerBackground: function() {
-		this.element.closest( ":mobile-content" ).content({ "theme": "none" });
+		this.element.closest( ":mobile-pagecontainer" ).pagecontainer({ "theme": "none" });
 	},
 	// Deprecated in 1.4 remove in 1.5
 	// set the page container background to the page theme
 	setContainerBackground: function( theme ) {
-		this.element.parent().content( { "theme": theme || this.options.theme } );
+		this.element.parent().pagecontainer( { "theme": theme || this.options.theme } );
 	},
 	// Deprecated in 1.4 remove in 1.5
 	keepNativeSelector: function() {

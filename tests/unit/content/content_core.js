@@ -4,7 +4,7 @@
 (function($){
 	// TODO !! reset the prototype after every test
 
-	var mockEvent, proto = $.mobile.content.prototype, reset = $.extend( {}, proto );
+	var mockEvent, proto = $.mobile.pagecontainer.prototype, reset = $.extend( {}, proto );
 
 	proto.element = $( "<div>" );
 
@@ -84,7 +84,7 @@
 
 	module("Content Widget _handleDialog", {
 		setup: function() {
-			proto = $.mobile.content.prototype;
+			proto = $.mobile.pagecontainer.prototype;
 		}
 	});
 
@@ -146,7 +146,7 @@
 
 	module("Content Widget _handleDestination", {
 		setup: function() {
-			proto = $.mobile.content.prototype;
+			proto = $.mobile.pagecontainer.prototype;
 			proto._getHistory = function() {
 				return {
 					initialDst: "foo",
@@ -397,7 +397,7 @@
 			equal( data.bar, "baz", "data is passed through" );
 		});
 
-		proto.element.bind( "contentfoo", function( event, data ) {
+		proto.element.bind( "pagecontainerfoo", function( event, data ) {
 			ok( true, "content event trigger" );
 			equal( data.bar, "baz", "data is passed through" );
 		});
@@ -457,7 +457,7 @@
 		proto._loadUrl( "foo", {}, {} );
 	});
 
-	test( "should trigger contentchangefailed on failure", function() {
+	test( "should trigger pagecontainerchangefailed on failure", function() {
 		expect( 2 );
 
 		proto.load = function( to, settings ) {
@@ -467,8 +467,8 @@
 			settings.deferred.reject( "foo", {} );
 		};
 
-		proto.element.bind( "contentchangefailed", function() {
-			ok( true, "contentchangefailed was triggered" );
+		proto.element.bind( "pagecontainerchangefailed", function() {
+			ok( true, "pagecontainerchangefailed was triggered" );
 		});
 
 		proto._loadUrl( "foo", {}, {} );
