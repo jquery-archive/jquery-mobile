@@ -58,15 +58,16 @@ define( [
 		// content has become visible, but the collapsible is still collapsed, so
 		// the autogrow textarea is still not visible.
 		_handleShow: function( event ) {
-			if ( this.element.parents( event.target ).length > 0 &&
+			if ( $.contains( event.target, this.element[ 0 ] ) &&
 				this.element.is( ":visible" ) ) {
+
 				this._prepareHeightUpdate();
 			}
 		},
 
 		_unbindAutogrow: function() {
 			this._off( this.element, "keyup change input paste" );
-			this._off( true, this.document,
+			this._off( this.document,
 				"pageshow popupbeforeposition updatelayout panelopen" );
 		},
 
