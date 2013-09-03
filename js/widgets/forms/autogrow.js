@@ -21,14 +21,6 @@ define( [
 			keyupTimeoutBuffer: 100
 		},
 
-		_create: function() {
-			this._super();
-
-			if ( this.options.autogrow && this.isTextarea ) {
-				this._autogrow();
-			}
-		},
-
 		_autogrow: function() {
 			this._on({
 				"keyup": "_timeout",
