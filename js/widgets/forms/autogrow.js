@@ -2,7 +2,7 @@
 //>>description: Enhances and consistently styles text inputs.
 //>>label: Textarea Autosize
 //>>group: Forms
-//>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.textinput.autogrow.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [
@@ -19,14 +19,6 @@ define( [
 		options: {
 			autogrow:true,
 			keyupTimeoutBuffer: 100
-		},
-
-		_create: function() {
-			this._super();
-
-			if ( this.options.autogrow && this.isTextarea ) {
-				this._autogrow();
-			}
 		},
 
 		_autogrow: function() {
@@ -61,6 +53,14 @@ define( [
 			if ( $.contains( event.target, this.element[ 0 ] ) &&
 				this.element.is( ":visible" ) ) {
 
+				if ( event.type !== "popupbeforeposition" ) {
+					this.element
+						.addClass( "ui-textinput-autogrow-resize" )
+						.one( "transitionend webkitTransitionEnd oTransitionEnd",
+							$.proxy( function() {
+								this.element.removeClass( "ui-textinput-autogrow-resize" );
+							}, this ) );
+				}
 				this._prepareHeightUpdate();
 			}
 		},
@@ -89,18 +89,23 @@ define( [
 		},
 
 		_updateHeight: function() {
+			var paddingTop, paddingBottom, paddingHeight, scrollHeight, clientHeight,
+			borderTop, borderBottom, borderHeight, height;
 
 			this.keyupTimeout = 0;
 
-			this.element.css( "height", "0px" );
+			this.element.css({
+				"height": 0,
+				"min-height": 0,
+				"max-height": 0
+			});
 
-			var paddingTop, paddingBottom, paddingHeight,
-				scrollHeight = this.element[ 0 ].scrollHeight,
-				clientHeight = this.element[ 0 ].clientHeight,
-				borderTop = parseFloat( this.element.css( "border-top-width" ) ),
-				borderBottom = parseFloat( this.element.css( "border-bottom-width" ) ),
-				borderHeight = borderTop + borderBottom,
-				height = scrollHeight + borderHeight + 15;
+			scrollHeight = this.element[ 0 ].scrollHeight;
+			clientHeight = this.element[ 0 ].clientHeight;
+			borderTop = parseFloat( this.element.css( "border-top-width" ) );
+			borderBottom = parseFloat( this.element.css( "border-bottom-width" ) );
+			borderHeight = borderTop + borderBottom;
+			height = scrollHeight + borderHeight + 15;
 
 			// Issue 6179: Padding is not included in scrollHeight and
 			// clientHeight by Firefox if no scrollbar is visible. Because
@@ -116,7 +121,11 @@ define( [
 				height += paddingHeight;
 			}
 
-			this.element.css( "height", height + "px" );
+			this.element.css({
+				"height": height,
+				"min-height": "",
+				"max-height": ""
+			});
 		},
 
 		refresh: function() {
