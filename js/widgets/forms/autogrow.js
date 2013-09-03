@@ -53,12 +53,14 @@ define( [
 			if ( $.contains( event.target, this.element[ 0 ] ) &&
 				this.element.is( ":visible" ) ) {
 
-				this.element
-					.addClass( "ui-textinput-autogrow-resize" )
-					.one( "transitionend webkitTransitionEnd oTransitionEnd",
-						$.proxy( function() {
-							this.element.removeClass( "ui-textinput-autogrow-resize" );
-						}, this ) );
+				if ( event.type !== "popupbeforeposition" ) {
+					this.element
+						.addClass( "ui-textinput-autogrow-resize" )
+						.one( "transitionend webkitTransitionEnd oTransitionEnd",
+							$.proxy( function() {
+								this.element.removeClass( "ui-textinput-autogrow-resize" );
+							}, this ) );
+				}
 				this._prepareHeightUpdate();
 			}
 		},
