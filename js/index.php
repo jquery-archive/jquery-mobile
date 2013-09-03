@@ -30,6 +30,7 @@ $files = array(
 	'navigation/history.js',
 	'navigation/navigator.js',
 	'navigation/method.js',
+	'widgets/pagecontainer.js',
 	'jquery.mobile.navigation.js',
 	'transitions/transition.js',
 	'transitions/serial.js',
