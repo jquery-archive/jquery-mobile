@@ -2,7 +2,7 @@
 //>>description: Enhances and consistently styles text inputs.
 //>>label: Textarea Autosize
 //>>group: Forms
-//>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
+//>>css.structure: ../css/structure/jquery.mobile.forms.textinput.autogrow.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [
@@ -57,6 +57,14 @@ define( [
 			if ( $.contains( event.target, this.element[ 0 ] ) &&
 				this.element.is( ":visible" ) ) {
 
+				if ( event.type !== "popupbeforeposition" ) {
+					this.element
+						.addClass( "ui-textinput-autogrow-resize" )
+						.one( "transitionend webkitTransitionEnd oTransitionEnd",
+							$.proxy( function() {
+								this.element.removeClass( "ui-textinput-autogrow-resize" );
+							}, this ) );
+				}
 				this._prepareHeightUpdate();
 			}
 		},
@@ -88,7 +96,11 @@ define( [
 
 			this.keyupTimeout = 0;
 
-			this.element.css( "height", "0px" );
+			this.element.css({
+				"height": 0,
+				"min-height": 0,
+				"max-height": 0
+			});
 
 			var paddingTop, paddingBottom, paddingHeight,
 				scrollHeight = this.element[ 0 ].scrollHeight,
@@ -112,7 +124,11 @@ define( [
 				height += paddingHeight;
 			}
 
-			this.element.css( "height", height + "px" );
+			this.element.css({
+				"height": height,
+				"min-height": "",
+				"max-height": ""
+			});
 		},
 
 		refresh: function() {
