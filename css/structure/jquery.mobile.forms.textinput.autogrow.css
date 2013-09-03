@@ -1,0 +1,6 @@
+.ui-textinput-autogrow-resize {
+	-webkit-transition: height 0.25s;
+	-o-transition: height 0.25s;
+	-moz-transition: height 0.25s;
+	transition: height 0.25s;
+}
