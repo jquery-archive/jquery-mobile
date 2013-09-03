@@ -98,7 +98,11 @@ define( [
 
 			this.keyupTimeout = 0;
 
-			this.element.css( "height", "0px" );
+			this.element.css({
+				"height": 0,
+				"min-height": 0,
+				"max-height": 0
+			});
 
 			var paddingTop, paddingBottom, paddingHeight,
 				scrollHeight = this.element[ 0 ].scrollHeight,
@@ -122,7 +126,11 @@ define( [
 				height += paddingHeight;
 			}
 
-			this.element.css( "height", height + "px" );
+			this.element.css({
+				"height": height,
+				"min-height": "",
+				"max-height": ""
+			});
 		},
 
 		refresh: function() {
