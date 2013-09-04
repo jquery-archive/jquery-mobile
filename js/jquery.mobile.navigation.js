@@ -295,7 +295,12 @@ define( [
 				$btn = $btn.closest( ".ui-btn" );
 			}
 
-			if ( $btn.length > 0 && !$btn.hasClass( "ui-disabled" ) ) {
+			if ( $btn.length > 0 &&
+				!( $btn.hasClass( "ui-state-disabled" ||
+
+					// DEPRECATED as of 1.4.0 - remove after 1.4.0 release
+					// only ui-state-disabled should be present thereafter
+					$btn.hasClass( "ui-disabled" ) ) ) ) {
 				$.mobile.removeActiveLinkClass( true );
 				$.mobile.activeClickedLink = $btn;
 				$.mobile.activeClickedLink.addClass( $.mobile.activeBtnClass );
