@@ -174,7 +174,9 @@ define([
 			// by adding the 'ui-disabled' class to them. Using a JavaScript workaround for those browser.
 			// https://github.com/jquery/jquery-mobile/issues/3558
 
-			$.mobile.document.delegate( ".ui-disabled", "vclick",
+			// DEPRECATED as of 1.4.0 - remove ui-disabled after 1.4.0 release
+			// only ui-state-disabled should be present thereafter
+			$.mobile.document.delegate( ".ui-state-disabled,.ui-disabled", "vclick",
 				function( e ) {
 					e.preventDefault();
 					e.stopImmediatePropagation();
