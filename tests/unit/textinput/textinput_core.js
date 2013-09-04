@@ -22,6 +22,20 @@
 		});
 	}
 
+	test( "focus/blur adds resp. removes focus class", function() {
+		var input = $( "#focus-class-test-for-input" ),
+			textarea = $( "#focus-class-test-for-textarea" ),
+			testFocusBlur = function( widget ) {
+				widget.blur();
+				deepEqual( widget.textinput( "widget" ).hasClass( $.mobile.focusClass ), false, widget.attr( "id" ) + ": focus class is absent when the widget is blurred." );
+				widget.focus();
+				deepEqual( widget.textinput( "widget" ).hasClass( $.mobile.focusClass ), true, widget.attr( "id" ) + ": focus class is present when the widget is focused." );
+			};
+
+		testFocusBlur( input );
+		testFocusBlur( textarea );
+	});
+
 	test( "inputs without type specified are enhanced", function(){
 		ok( $( "#typeless-input" ).parent().hasClass( "ui-input-text" ) );
 	});
