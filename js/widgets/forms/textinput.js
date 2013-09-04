@@ -136,7 +136,7 @@ $.widget( "mobile.textinput", {
 	},
 
 	_handleBlur: function() {
-		this.element.removeClass( $.mobile.focusClass );
+		this.widget().removeClass( $.mobile.focusClass );
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.enable( true );
 		}
@@ -148,7 +148,7 @@ $.widget( "mobile.textinput", {
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.disable( true );
 		}
-		this.element.addClass( $.mobile.focusClass );
+		this.widget().addClass( $.mobile.focusClass );
 	},
 
 	_setOptions: function ( options ) {
