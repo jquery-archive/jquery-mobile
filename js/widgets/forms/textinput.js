@@ -123,8 +123,11 @@ $.widget( "mobile.textinput", {
 		//      that we test for the presence of the feature by looking for
 		//      the autocorrect property on the input element. We currently
 		//      have no test for iOS 5 or newer so we're temporarily using
-		//      the touchOverflow support flag for jQM 1.0. Yes, I feel dirty. - jblas
-		if ( typeof this.element[0].autocorrect !== "undefined" && !$.support.touchOverflow ) {
+		//      the touchOverflow support flag for jQM 1.0. Yes, I feel dirty.
+		//      - jblas
+		if ( typeof this.element[0].autocorrect !== "undefined" &&
+			!$.support.touchOverflow ) {
+
 			// Set the attribute instead of the property just in case there
 			// is code that attempts to make modifications via HTML.
 			this.element[0].setAttribute( "autocorrect", "off" );
@@ -140,7 +143,8 @@ $.widget( "mobile.textinput", {
 	},
 
 	_handleFocus: function() {
-		// In many situations, iOS will zoom into the input upon tap, this prevents that from happening
+		// In many situations, iOS will zoom into the input upon tap, this
+		// prevents that from happening
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.disable( true );
 		}
