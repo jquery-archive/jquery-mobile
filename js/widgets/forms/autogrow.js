@@ -7,10 +7,6 @@
 
 define( [
 	"jquery",
-	"../../jquery.mobile.core",
-	"../../jquery.mobile.widget",
-	"../../jquery.mobile.degradeInputs",
-	"../../jquery.mobile.zoom",
 	"./textinput" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
