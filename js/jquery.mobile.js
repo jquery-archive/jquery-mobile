@@ -29,6 +29,7 @@ define([
 	"./widgets/forms/checkboxradio",
 	"./widgets/forms/button",
 	"./widgets/forms/slider",
+	"./widgets/forms/slider.tooltip",
 	"./widgets/forms/flipswitch",
 	"./widgets/forms/rangeslider",
 	"./widgets/forms/textinput",
