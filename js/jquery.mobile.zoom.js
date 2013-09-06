@@ -12,7 +12,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 		enabledZoom = initialContent + ",maximum-scale=10, user-scalable=yes",
 		disabledInitially = /(user-scalable[\s]*=[\s]*no)|(maximum-scale[\s]*=[\s]*1)[$,\s]/.test( initialContent );
 
-	$.mobile.zoom = $.extend( {}, {
+	$.mobile.zoom = {
 		enabled: !disabledInitially,
 		locked: false,
 		disable: function( lock ) {
@@ -35,7 +35,7 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 				$.mobile.zoom.enabled = true;
 			}
 		}
-	});
+	};
 
 }( jQuery ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

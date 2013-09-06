@@ -63,7 +63,7 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 		}
 	}
 
-	$.event.special.orientationchange = $.extend( {}, $.event.special.orientationchange, {
+	$.event.special.orientationchange = {
 		setup: function() {
 			// If the event is supported natively, return false so that jQuery
 			// will bind to the event using DOM methods.
@@ -102,7 +102,7 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 				return old_handler.apply( this, arguments );
 			};
 		}
-	});
+	};
 
 	// If the event is not supported natively, this handler will be bound to
 	// the window resize event to simulate the orientationchange event.
