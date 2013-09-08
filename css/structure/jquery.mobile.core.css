@@ -401,6 +401,7 @@ button.ui-btn-icon-notext,
 }
 
 /* Accessible content hiding */
+/* ui-hide-label deprecated in 1.4. TODO: Remove in 1.5 */
 .ui-hide-label > label,
 .ui-hide-label .ui-controlgroup-label,
 .ui-hide-label .ui-rangeslider label,
