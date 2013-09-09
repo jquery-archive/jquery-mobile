@@ -12,22 +12,23 @@
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
 </head>
-<style id="popup-arrow-css">
-.clickable-area {
-	display: block;
-	width: 100%;
-	height: 300px;
-	background-color: #ffefef;
-}
-</style>
-<script id="popup-arrow-script">
-$.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
-	$( "#popupArrow" ).popup( "open", { x: evt.pageX, y: evt.pageY } );
-	evt.preventDefault();
-});
-</script>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<style id="popup-arrow-css">
+	.clickable-area {
+		display: block;
+		width: 100%;
+		height: 300px;
+		background-color: #ffefef;
+	}
+	</style>
+	<script id="popup-arrow-script">
+	$.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
+		$( "#popupArrow" ).popup( "open", { x: evt.pageX, y: evt.pageY } );
+		evt.preventDefault();
+	});
+	</script>
 
 	<div data-role="header" class="jqm-header">
 		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="jQuery Mobile Framework"></a></h1>
