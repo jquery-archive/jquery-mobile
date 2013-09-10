@@ -67,7 +67,7 @@
 			</div><!--/demo-html -->
 
 			<h2>Photo lightbox</h2>
-			<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="a"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="popup-images.php" data-ajax="false">scaling images in popups</a>.</p>
+			<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="b"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="popup-images.php" data-ajax="false">scaling images in popups</a>.</p>
 			<div data-demo-html="true">
 				<a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/paris.jpg" alt="Paris, France" style="width:30%"></a>
 				<a href="#popupSydney" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../../_assets/img/sydney.jpg" alt="Sydney, Australia" style="width:30%"></a>
