@@ -11,63 +11,60 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 	var nsNormalizeDict = {},
 		oldFind = $.find,
 		rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/,
-		jqmDataRE = /:jqmData\(([^)]*)\)/g;
+		jqmDataRE = /:jqmData\(([^)]*)\)/g,
+		mobile = $.mobile;
 
-	$.extend( $.mobile, {
+	// Namespace used framework-wide for data-attrs. Default is no namespace
 
-		// Namespace used framework-wide for data-attrs. Default is no namespace
+	mobile.ns = "";
 
-		ns: "",
+	// Retrieve an attribute from an element and perform some massaging of the value
 
-		// Retrieve an attribute from an element and perform some massaging of the value
+	mobile.getAttribute = function( element, key ) {
+		var data;
 
-		getAttribute: function( element, key ) {
-			var data;
+		element = element.jquery ? element[0] : element;
 
-			element = element.jquery ? element[0] : element;
-
-			if( element && element.getAttribute ){
-				data = element.getAttribute( "data-" + $.mobile.ns + key );
-			}
-
-			// Copied from core's src/data.js:dataAttr()
-			// Convert from a string to a proper data type
-			try {
-				data = data === "true" ? true :
-					data === "false" ? false :
-					data === "null" ? null :
-					// Only convert to a number if it doesn't change the string
-					+data + "" === data ? +data :
-					rbrace.test( data ) ? JSON.parse( data ) :
-					data;
-			} catch( err ) {}
-
-			return data;
-		},
-
-		// Expose our cache for testing purposes.
-		nsNormalizeDict: nsNormalizeDict,
-
-		// Take a data attribute property, prepend the namespace
-		// and then camel case the attribute string. Add the result
-		// to our nsNormalizeDict so we don't have to do this again.
-		nsNormalize: function( prop ) {
-			return nsNormalizeDict[ prop ] ||
-				( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
-		},
-
-		// Find the closest javascript page element to gather settings data jsperf test
-		// http://jsperf.com/single-complex-selector-vs-many-complex-selectors/edit
-		// possibly naive, but it shows that the parsing overhead for *just* the page selector vs
-		// the page and dialog selector is negligable. This could probably be speed up by
-		// doing a similar parent node traversal to the one found in the inherited theme code above
-		closestPageData: function( $target ) {
-			return $target
-				.closest( ":jqmData(role='page'), :jqmData(role='dialog')" )
-				.data( "mobile-page" );
+		if( element && element.getAttribute ){
+			data = element.getAttribute( "data-" + $.mobile.ns + key );
 		}
 
-	});
+		// Copied from core's src/data.js:dataAttr()
+		// Convert from a string to a proper data type
+		try {
+			data = data === "true" ? true :
+				data === "false" ? false :
+				data === "null" ? null :
+				// Only convert to a number if it doesn't change the string
+				+data + "" === data ? +data :
+				rbrace.test( data ) ? JSON.parse( data ) :
+				data;
+		} catch( err ) {}
+
+		return data;
+	};
+
+	// Expose our cache for testing purposes.
+	mobile.nsNormalizeDict = nsNormalizeDict;
+
+	// Take a data attribute property, prepend the namespace
+	// and then camel case the attribute string. Add the result
+	// to our nsNormalizeDict so we don't have to do this again.
+	mobile.nsNormalize = function( prop ) {
+		return nsNormalizeDict[ prop ] ||
+			( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
+	};
+
+	// Find the closest javascript page element to gather settings data jsperf test
+	// http://jsperf.com/single-complex-selector-vs-many-complex-selectors/edit
+	// possibly naive, but it shows that the parsing overhead for *just* the page selector vs
+	// the page and dialog selector is negligable. This could probably be speed up by
+	// doing a similar parent node traversal to the one found in the inherited theme code above
+	mobile.closestPageData = function( $target ) {
+		return $target
+			.closest( ":jqmData(role='page'), :jqmData(role='dialog')" )
+			.data( "mobile-page" );
+	};
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace

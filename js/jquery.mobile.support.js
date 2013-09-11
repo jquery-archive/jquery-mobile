@@ -26,8 +26,8 @@ var fakeBody = $( "<body>" ).prependTo( "html" ),
 	opera = window.opera,
 	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
 	bb = window.blackberry && !propExists( "-webkit-transform" ), //only used to rule out box shadow, as it's filled opaque on BB 5 and lower
-	nokiaLTE7_3;
-
+	nokiaLTE7_3,
+	$support = $.support;
 
 function validStyle( prop, value, check_vend ) {
 	var div = document.createElement( "div" ),
@@ -161,18 +161,19 @@ function boundingRect() {
 
 // non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
 // allows for inclusion of IE 6+, including Windows Mobile 7
-$.extend( $.mobile, { browser: {} } );
-$.mobile.browser.oldIE = (function() {
-	var v = 3,
-		div = document.createElement( "div" ),
-		a = div.all || [];
+$.mobile.browser = {
+	oldIE: (function() {
+		var v = 3,
+			div = document.createElement( "div" ),
+			a = div.all || [];
 
-	do {
-		div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->";
-	} while( a[0] );
+		do {
+			div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->";
+		} while( a[0] );
 
-	return v > 4 ? v : !v;
-})();
+		return v > 4 ? v : !v;
+	})()
+};
 
 function fixedPosition() {
 	var w = window,
@@ -206,37 +207,35 @@ function fixedPosition() {
 	return true;
 }
 
-$.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window ||
-		validStyle( "transition", "height 100ms linear", [ "Webkit", "Moz", "" ] ) &&
-		!$.mobile.browser.oldIE && !opera,
+$support.cssTransitions = "WebKitTransitionEvent" in window ||
+	validStyle( "transition", "height 100ms linear", [ "Webkit", "Moz", "" ] ) &&
+	!$.mobile.browser.oldIE && !opera;
 
-	// Note, Chrome for iOS has an extremely quirky implementation of popstate.
-	// We've chosen to take the shortest path to a bug fix here for issue #5426
-	// See the following link for information about the regex chosen
-	// https://developers.google.com/chrome/mobile/docs/user-agent#chrome_for_ios_user-agent
-	pushState: "pushState" in history &&
-		"replaceState" in history &&
-		// When running inside a FF iframe, calling replaceState causes an error
-		!( window.navigator.userAgent.indexOf( "Firefox" ) >= 0 && window.top !== window ) &&
-		( window.navigator.userAgent.search(/CriOS/) === -1 ),
+// Note, Chrome for iOS has an extremely quirky implementation of popstate.
+// We've chosen to take the shortest path to a bug fix here for issue #5426
+// See the following link for information about the regex chosen
+// https://developers.google.com/chrome/mobile/docs/user-agent#chrome_for_ios_user-agent
+$support.pushState = "pushState" in history &&
+	"replaceState" in history &&
+	// When running inside a FF iframe, calling replaceState causes an error
+	!( window.navigator.userAgent.indexOf( "Firefox" ) >= 0 && window.top !== window ) &&
+	( window.navigator.userAgent.search(/CriOS/) === -1 );
 
-	mediaquery: $.mobile.media( "only all" ),
-	cssPseudoElement: !!propExists( "content" ),
-	touchOverflow: !!propExists( "overflowScrolling" ),
-	cssTransform3d: transform3dTest(),
-	cssAnimations: !!propExists( "animationName" ),
-	boxShadow: !!propExists( "boxShadow" ) && !bb,
-	fixedPosition: fixedPosition(),
-	scrollTop: ("pageXOffset" in window ||
-		"scrollTop" in document.documentElement ||
-		"scrollTop" in fakeBody[ 0 ]) && !webos && !operamini,
+$support.mediaquery = $.mobile.media( "only all" );
+$support.cssPseudoElement = !!propExists( "content" );
+$support.touchOverflow = !!propExists( "overflowScrolling" );
+$support.cssTransform3d = transform3dTest();
+$support.cssAnimations = propExists( "animationName" );
+$support.boxShadow = !!propExists( "boxShadow" ) && !bb;
+$support.fixedPosition = fixedPosition();
+$support.scrollTop = ("pageXOffset" in window ||
+	"scrollTop" in document.documentElement ||
+	"scrollTop" in fakeBody[ 0 ]) && !webos && !operamini;
 
-	dynamicBaseTag: baseTagTest(),
-	cssPointerEvents: cssPointerEventsTest(),
-	boundingRect: boundingRect(),
-	inlineSVG: inlineSVG
-});
+$support.dynamicBaseTag = baseTagTest();
+$support.cssPointerEvents = cssPointerEventsTest();
+$support.boundingRect = boundingRect();
+$support.inlineSVG = inlineSVG;
 
 fakeBody.remove();
 

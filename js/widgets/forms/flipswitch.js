@@ -24,12 +24,10 @@ $.widget( "mobile.flipswitch", $.extend({
 			if ( !this.options.enhanced ) {
 				this._enhance();
 			} else {
-				$.extend( this, {
-					flipswitch: this.element.parent(),
-					on: this.element.find( ".ui-flipswitch-on" ).eq( 0 ),
-					off: this.element.find( ".ui-flipswitch-off" ).eq(0),
-					type: this.element.get( 0 ).tagName
-				});
+				this.flipswitch = this.element.parent();
+				this.on = this.element.find( ".ui-flipswitch-on" ).eq( 0 );
+				this.off = this.element.find( ".ui-flipswitch-off" ).eq(0);
+				this.type = this.element.get( 0 ).tagName;
 			}
 
 			if( this.element.is( ":disabled" ) ){
@@ -90,12 +88,10 @@ $.widget( "mobile.flipswitch", $.extend({
 			this.element.addClass( "ui-flipswitch-input" );
 			this.element.after( flipswitch ).appendTo( flipswitch );
 
-		$.extend( this, {
-			flipswitch: flipswitch,
-			on: on,
-			off: off,
-			type: type
-		});
+		this.flipswitch = flipswitch;
+		this.on = on;
+		this.off = off;
+		this.type = type;
 	},
 
 	_change: function() {

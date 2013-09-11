@@ -6,9 +6,7 @@
 define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 	(function( $, undefined ) {
-		$.extend( $.support, {
-			orientation: "orientation" in window && "onorientationchange" in window
-		});
+		$.support.orientation = "orientation" in window && "onorientationchange" in window;
 	}( jQuery ));
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

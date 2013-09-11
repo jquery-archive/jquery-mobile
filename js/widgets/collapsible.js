@@ -47,9 +47,7 @@ $.widget( "mobile.collapsible", {
 					.addClass( "ui-collapsible-set" )
 			};
 
-		$.extend( this, {
-			_ui: ui
-		});
+		this._ui = ui;
 
 		if ( this.options.enhanced ) {
 			ui.heading = $( ".ui-collapsible-heading", this.element[ 0 ] );

@@ -37,10 +37,8 @@ $.widget( "mobile.controlgroup", $.extend( {
 			}
 		}, this ));
 
-		$.extend( this, {
-			_ui: null,
-			_initialRefresh: true
-		});
+		this._ui = null;
+		this._initialRefresh = true;
 
 		if ( opts.enhanced ) {
 			this._ui = {

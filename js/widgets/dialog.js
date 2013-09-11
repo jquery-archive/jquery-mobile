@@ -69,11 +69,9 @@ $.widget( "mobile.dialog", {
 					( !!opts.corners ? " ui-corner-all" : "" )
 			}));
 
-		$.extend( this, {
-			_isCloseable: false,
-			_inner: elem.children(),
-			_headerCloseButton: null
-		});
+		this._isCloseable = false;
+		this._inner = elem.children();
+		this._headerCloseButton = null;
 
 		this._on( elem, {
 			vclick: "_handleVClickSubmit",

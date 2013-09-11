@@ -42,9 +42,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 
 		this._super();
 
-		$.extend( this, {
-			_widget: null
-		});
+		this._widget = null;
 
 		for ( idx = recognizedWidgets.length - 1 ; idx > -1 ; idx-- ) {
 			widgetName = recognizedWidgets[ idx ];

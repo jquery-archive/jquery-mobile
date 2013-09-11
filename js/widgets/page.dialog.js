@@ -27,11 +27,9 @@ $.widget( "mobile.page", $.mobile.page, {
 		this._super();
 		if( this.options.dialog ){
 
-			$.extend( this, {
-				_isCloseable: false,
-				_inner: this.element.children(),
-				_headerCloseButton: null
-			});
+			this._isCloseable = false;
+			this._inner = this.element.children();
+			this._headerCloseButton = null;
 
 			if( !this.options.enhanced ) {
 				this._setCloseBtn( this.options.closeBtn );

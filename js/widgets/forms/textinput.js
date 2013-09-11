@@ -32,13 +32,11 @@ $.widget( "mobile.textinput", {
 				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
 					!isRange );
 			
-		$.extend( this, {
-			classes: this._classesFromOptions(),
-			isSearch: isSearch,
-			isTextarea: isTextarea,
-			isRange: isRange,
-			inputNeedsWrap: inputNeedsWrap
-		});
+		this.classes = this._classesFromOptions();
+		this.isSearch = isSearch;
+		this.isTextarea = isTextarea;
+		this.isRange = isRange;
+		this.inputNeedsWrap = inputNeedsWrap;
 
 		this._autoCorrect();
 

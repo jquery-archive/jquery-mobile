@@ -30,10 +30,8 @@ $.widget( "mobile.filterable", {
 	_create: function() {
 		var opts = this.options;
 
-		$.extend( this, {
-			_search: null,
-			_timer: 0
-		});
+		this._search = null;
+		this._timer = 0;
 
 		this._setInput( opts.input );
 		if ( !opts.enhanced ) {

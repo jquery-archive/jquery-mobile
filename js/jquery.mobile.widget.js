@@ -16,22 +16,20 @@ var rcapitals = /[A-Z]/g,
 		return "-" + c.toLowerCase();
 	};
 
-$.extend( $.Widget.prototype, {
-	_getCreateOptions: function() {
-		var option, value,
-			elem = this.element[ 0 ],
-			options = {};
+$.Widget.prototype._getCreateOptions = function() {
+	var option, value,
+		elem = this.element[ 0 ],
+		options = {};
 
-		for ( option in this.options ) {
-			value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
-			if ( value != null ) {
-				options[ option ] = value;
-			}
+	for ( option in this.options ) {
+		value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
+		if ( value != null ) {
+			options[ option ] = value;
 		}
-
-		return options;
 	}
-});
+
+	return options;
+};
 
 //TODO: Remove in 1.5 for backcompat only
 $.mobile.widget = $.Widget;
