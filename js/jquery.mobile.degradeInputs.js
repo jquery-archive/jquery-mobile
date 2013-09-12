@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Changes input type to another after custom enhancements are made (ex. range > numberic).
+//>>description: Changes input type to another after custom enhancements are made (ex. range > numeric).
 //>>label: Degrade Inputs
 //>>group: Utilities
 
