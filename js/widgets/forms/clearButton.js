@@ -7,7 +7,7 @@
 
 define( [
 	"jquery",
-	"./textinput" ], function( jQuery ) {
+    "./textinput" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
