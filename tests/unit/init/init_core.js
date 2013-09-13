@@ -88,12 +88,13 @@ define([
 			$.testHelper.reloadLib(libName);
 			var firstPage = findFirstPage();
 
-			test( "enhancements are skipped when the browser is not grade A", function(){
+			asyncTest( "enhancements are skipped when the browser is not grade A", function(){
 				setGradeA(false);
-				$.testHelper.reloadModule( libName );
+				$.testHelper.reloadModule( libName ).then(function() {
+					//NOTE easiest way to check for enhancements, not the most obvious
+					ok( !$( "html" ).hasClass( "ui-mobile" ), "html elem doesn't have class ui-mobile" );
+				}).then( start );
 
-				//NOTE easiest way to check for enhancements, not the most obvious
-				ok(!$("html").hasClass("ui-mobile"), "html elem doesn't have class ui-mobile");
 			});
 
 			asyncTest( "enhancements are added when the browser is grade A", function(){
@@ -107,7 +108,7 @@ define([
 			});
 
 			var findFirstPage = function() {
-				return $(":jqmData(role='page')").first();
+				return $( ":jqmData(role='page')" ).first();
 			};
 
 			asyncTest( "active page and start page should be set to the fist page in the selected set", function(){
