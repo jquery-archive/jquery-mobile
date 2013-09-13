@@ -3,7 +3,7 @@
  */
 define([
 	"jquery",
-	"main",
+	"jquery.mobile",
 	"./shared",
 	"./prepare"
 ], function( $, jqm, shared ){
