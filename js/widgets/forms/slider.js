@@ -79,21 +79,19 @@ $.widget( "mobile.slider", $.extend( {
 			"aria-labelledby": labelID
 		});
 
-		$.extend( this, {
-			slider: slider,
-			handle: handle,
-			control: control,
-			type: cType,
-			step: step,
-			max: max,
-			min: min,
-			valuebg: valuebg,
-			isRangeslider: isRangeslider,
-			dragging: false,
-			beforeStart: null,
-			userModified: false,
-			mouseMoved: false
-		});
+		this.slider = slider;
+		this.handle = handle;
+		this.control = control;
+		this.type = cType;
+		this.step = step;
+		this.max = max;
+		this.min = min;
+		this.valuebg = valuebg;
+		this.isRangeslider = isRangeslider;
+		this.dragging = false;
+		this.beforeStart = null;
+		this.userModified = false;
+		this.mouseMoved = false;
 
 		if ( isToggleSwitch ) {
 			// TODO: restore original tabindex (if any) in a destroy method

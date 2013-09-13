@@ -87,19 +87,17 @@ $.widget( "mobile.popup", {
 		currentOptions.history = currentOptions.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
 
 		// Define instance variables
-		$.extend( this, {
-			_scrollTop: 0,
-			_page: theElement.closest( ".ui-page" ),
-			_ui: null,
-			_fallbackTransition: "",
-			_currentTransition: false,
-			_prerequisites: null,
-			_isOpen: false,
-			_tolerance: null,
-			_resizeData: null,
-			_ignoreResizeTo: 0,
-			_orientationchangeInProgress: false
-		});
+		this._scrollTop = 0;
+		this._page = theElement.closest( ".ui-page" );
+		this._ui = null;
+		this._fallbackTransition = "";
+		this._currentTransition = false;
+		this._prerequisites = null;
+		this._isOpen = false;
+		this._tolerance = null;
+		this._resizeData = null;
+		this._ignoreResizeTo = 0;
+		this._orientationchangeInProgress = false;
 
 		if ( this._page.length === 0 ) {
 			this._page = $( "body" );

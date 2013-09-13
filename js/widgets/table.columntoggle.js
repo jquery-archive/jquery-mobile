@@ -14,6 +14,11 @@ define( [
 	"./forms/checkboxradio" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+	var tableClasses = $.mobile.table.prototype.options.classes;
+	tableClasses.popup = "ui-table-columntoggle-popup";
+	tableClasses.columnBtn = "ui-table-columntoggle-btn";
+	tableClasses.priorityPrefix = "ui-table-priority-";
+	tableClasses.columnToggleTable = "ui-table-columntoggle";
 
 $.widget( "mobile.table", $.mobile.table, {
 	options: {
@@ -21,12 +26,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		columnBtnTheme: null,
 		columnPopupTheme: null,
 		columnBtnText: "Columns...",
-		classes: $.extend( $.mobile.table.prototype.options.classes, {
-			popup: "ui-table-columntoggle-popup",
-			columnBtn: "ui-table-columntoggle-btn",
-			priorityPrefix: "ui-table-priority-",
-			columnToggleTable: "ui-table-columntoggle"
-		})
+		classes: tableClasses
 	},
 
 	_create: function() {
@@ -36,9 +36,7 @@ $.widget( "mobile.table", $.mobile.table, {
 			return;
 		}
 
-		$.extend( this, {
-			_menu: null
-		});
+		this._menu = null;
 
 		if( this.options.enhanced ) {
 			this._menu = this.document.find( this._id() + "-popup" ).children().first();

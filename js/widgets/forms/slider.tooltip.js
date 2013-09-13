@@ -29,11 +29,9 @@ $.widget( "mobile.slider", $.mobile.slider, {
 	_create: function() {
 		this._super();
 
-		$.extend( this, {
-			_currentValue: null,
-			_popup: null,
-			_popupVisible: false
-		});
+		this._currentValue = null;
+		this._popup = null;
+		this._popupVisible = false;
 
 		this._setOption( "popupEnabled", this.options.popupEnabled );
 

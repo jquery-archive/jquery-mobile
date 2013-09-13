@@ -40,9 +40,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		var elem = this.element,
 			opts = this.options;
 
-		$.extend( this, {
-			_classes: ""
-		});
+		this._classes = "";
 
 		if ( !opts.enhanced ) {
 			elem.addClass( "ui-collapsible-set " +

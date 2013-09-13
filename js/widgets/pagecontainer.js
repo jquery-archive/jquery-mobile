@@ -798,7 +798,8 @@ define( [
 		_triggerPageBeforeChange: function( to, triggerData, settings ) {
 			var pbcEvent = new $.Event( "pagebeforechange" );
 
-			$.extend(triggerData, { toPage: to, options: settings });
+			triggerData.toPage = to;
+			triggerData.options = settings;
 
 			// NOTE: preserve the original target as the dataUrl value will be
 			// simplified eg, removing ui-state, and removing query params from
@@ -1125,99 +1126,18 @@ define( [
 		}
 	}
 
-	// The base URL for any given element depends on the page it resides in.
-	$.extend( $.mobile, {
-		getClosestBaseUrl: function( ele )	{
-			// Find the closest page and extract out its url.
-			var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
-				base = documentBase.hrefNoHash;
-
-			if ( !$.mobile.dynamicBaseEnabled || !url || !path.isPath( url ) ) {
-				url = base;
-			}
-
-			return path.makeUrlAbsolute( url, base );
-		},
-		removeActiveLinkClass: function( forceRemoval ) {
-			if ( !!$.mobile.activeClickedLink &&
-				( !$.mobile.activeClickedLink.closest( "." + $.mobile.activePageClass ).length ||
-					forceRemoval ) ) {
-
-				$.mobile.activeClickedLink.removeClass( $.mobile.activeBtnClass );
-			}
-			$.mobile.activeClickedLink = null;
-		}
-	});
-
-	// The following handlers should be bound after mobileinit has been triggered
-	// the following deferred is resolved in the init file
-	$.mobile.navreadyDeferred = $.Deferred();
-
-	// determine the current base url
-	function findBaseWithDefault() {
-		var closestBase = ( $.mobile.activePage &&
-			$.mobile.getClosestBaseUrl( $.mobile.activePage ) );
-		return closestBase || documentBase.hrefNoHash;
-	}
-
 	// NOTE: path extensions dependent on core attributes. Moved here to remove
 	//       deps from $.mobile.path definition
 	var $window = $( window ),
 		rPageTitle = /<title[^>]*>([^<]*)/,
-		path = $.extend($.mobile.path, {
-
-			// return the substring of a filepath before the sub-page key, for making
-			// a server request
-			getFilePath: function( path ) {
-				var splitkey = "&" + $.mobile.subPageUrlKey;
-				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
-			},
-
-			// check if the specified url refers to the first page in the main
-			// application document.
-			isFirstPageUrl: function( url ) {
-				// We only deal with absolute paths.
-				var u = path.parseUrl( path.makeUrlAbsolute( url, this.documentBase ) ),
-
-					// Does the url have the same path as the document?
-					samePath = u.hrefNoHash === this.documentUrl.hrefNoHash ||
-						( this.documentBaseDiffers &&
-							u.hrefNoHash === this.documentBase.hrefNoHash ),
-
-					// Get the first page element.
-					fp = $.mobile.firstPage,
-
-					// Get the id of the first page element if it has one.
-					fpId = fp && fp[0] ? fp[0].id : undefined;
-
-				// The url refers to the first page if the path matches the document and
-				// it either has no hash value, or the hash is exactly equal to the id
-				// of the first page element.
-				return samePath &&
-					( !u.hash ||
-						u.hash === "#" ||
-						( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
-			},
-
-			// Some embedded browsers, like the web view in Phone Gap, allow
-			// cross-domain XHR requests if the document doing the request was loaded
-			// via the file:// protocol. This is usually to allow the application to
-			// "phone home" and fetch app specific data. We normally let the browser
-			// handle external/cross-domain urls, but if the allowCrossDomainPages
-			// option is true, we will allow cross-domain http/https requests to go
-			// through our page loading logic.
-			isPermittedCrossDomainRequest: function( docUrl, reqUrl ) {
-				return $.mobile.allowCrossDomainPages &&
-					(docUrl.protocol === "file:" || docUrl.protocol === "content:") &&
-					reqUrl.search( /^https?:/ ) !== -1;
-			}
-		}),
+		mobile = $.mobile,
+		path = mobile.path,
 
 		$head = $( "head" ),
 
 		// urlHistory is purely here to make guesses at whether the back or forward
 		// button was clicked and provide an appropriate transition
-		urlHistory = $.mobile.navigate.history,
+		urlHistory = mobile.navigate.history,
 
 		// queue to hold simultanious page transitions
 		pageTransitionQueue = [],
@@ -1291,26 +1211,105 @@ define( [
 			}
 		};
 
+	// The base URL for any given element depends on the page it resides in.
+	mobile.getClosestBaseUrl = function( ele ) {
+		// Find the closest page and extract out its url.
+		var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
+			base = documentBase.hrefNoHash;
+
+		if ( !$.mobile.dynamicBaseEnabled || !url || !path.isPath( url ) ) {
+			url = base;
+		}
+
+		return path.makeUrlAbsolute( url, base );
+	};
+
+	mobile.removeActiveLinkClass = function( forceRemoval ) {
+		if ( !!$.mobile.activeClickedLink &&
+			( !$.mobile.activeClickedLink.closest( "." + $.mobile.activePageClass ).length ||
+				forceRemoval ) ) {
+
+			$.mobile.activeClickedLink.removeClass( $.mobile.activeBtnClass );
+		}
+		$.mobile.activeClickedLink = null;
+	};
+
+	// The following handlers should be bound after mobileinit has been triggered
+	// the following deferred is resolved in the init file
+	mobile.navreadyDeferred = $.Deferred();
+
+	// determine the current base url
+	function findBaseWithDefault() {
+		var closestBase = ( $.mobile.activePage &&
+			$.mobile.getClosestBaseUrl( $.mobile.activePage ) );
+		return closestBase || documentBase.hrefNoHash;
+	}
+
+	// return the substring of a filepath before the sub-page key, for making
+	// a server request
+	path.getFilePath = function( path ) {
+		var splitkey = "&" + $.mobile.subPageUrlKey;
+		return path && path.split( splitkey )[0].split( dialogHashKey )[0];
+	};
+
+	// check if the specified url refers to the first page in the main
+	// application document.
+	path.isFirstPageUrl = function( url ) {
+		// We only deal with absolute paths.
+		var u = path.parseUrl( path.makeUrlAbsolute( url, this.documentBase ) ),
+
+			// Does the url have the same path as the document?
+			samePath = u.hrefNoHash === this.documentUrl.hrefNoHash ||
+				( this.documentBaseDiffers &&
+					u.hrefNoHash === this.documentBase.hrefNoHash ),
+
+			// Get the first page element.
+			fp = $.mobile.firstPage,
+
+			// Get the id of the first page element if it has one.
+			fpId = fp && fp[0] ? fp[0].id : undefined;
+
+		// The url refers to the first page if the path matches the document and
+		// it either has no hash value, or the hash is exactly equal to the id
+		// of the first page element.
+		return samePath &&
+			( !u.hash ||
+				u.hash === "#" ||
+				( fpId && u.hash.replace( /^#/, "" ) === fpId ) );
+	};
+
+	// Some embedded browsers, like the web view in Phone Gap, allow
+	// cross-domain XHR requests if the document doing the request was loaded
+	// via the file:// protocol. This is usually to allow the application to
+	// "phone home" and fetch app specific data. We normally let the browser
+	// handle external/cross-domain urls, but if the allowCrossDomainPages
+	// option is true, we will allow cross-domain http/https requests to go
+	// through our page loading logic.
+	path.isPermittedCrossDomainRequest = function( docUrl, reqUrl ) {
+		return $.mobile.allowCrossDomainPages &&
+			(docUrl.protocol === "file:" || docUrl.protocol === "content:") &&
+			reqUrl.search( /^https?:/ ) !== -1;
+	};
 
 	//return the original document url
-	$.mobile.getDocumentUrl = path.getDocumentUrl;
+	mobile.getDocumentUrl = path.getDocumentUrl;
 
 	//return the original document base url
-	$.mobile.getDocumentBase = path.getDocumentBase;
+	mobile.getDocumentBase = path.getDocumentBase;
 
 	//expose path object on $.mobile
-	$.mobile.path = path;
+	mobile.path = path;
 
 	//expose base object on $.mobile
-	$.mobile.base = base;
+	mobile.base = base;
 
 	//history stack
-	$.mobile.urlHistory = urlHistory;
+	mobile.urlHistory = urlHistory;
 
-	$.mobile.dialogHashKey = dialogHashKey;
+	mobile.dialogHashKey = dialogHashKey;
 
 	//enable cross-domain page support
-	$.mobile.allowCrossDomainPages = false;
+	mobile.allowCrossDomainPages = false;
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

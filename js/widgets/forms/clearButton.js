@@ -47,9 +47,7 @@ define( [
 				this._enhanceClear();
 			}
 
-			$.extend( this, {
-				_clearBtn: this.widget().find("a.ui-input-clear")
-			});
+			this._clearBtn = this.widget().find("a.ui-input-clear");
 
 			this._bindClearEvents();
 

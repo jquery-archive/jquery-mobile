@@ -214,7 +214,7 @@
   
   // Override existing $.event.special.hashchange methods (allowing this plugin
   // to be defined after jQuery BBQ in BBQ's source code).
-  special[ str_hashchange ] = $.extend( special[ str_hashchange ], {
+  special[ str_hashchange ] = {
     
     // Called only when the first 'hashchange' event is bound to window.
     setup: function() {
@@ -236,7 +236,7 @@
       $( fake_onhashchange.stop );
     }
     
-  });
+  };
   
   // fake_onhashchange does all the work of triggering the window.onhashchange
   // event for browsers that don't natively support it, including creating a
