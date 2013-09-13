@@ -6,8 +6,8 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
-	"../../core",
-	"../../widget",
+	"../../jquery.mobile.core",
+	"../../jquery.mobile.widget",
 	"./textinput",
 	"./reset",
 	"./slider" ], function( jQuery ) {

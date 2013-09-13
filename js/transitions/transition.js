@@ -6,13 +6,13 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
-		  "../core",
+		  "../jquery.mobile.core",
 
 		  // TODO event.special.scrollstart
 		  "../events/touch",
 
 		  // TODO $.mobile.focusPage reference
-		  "../navigation" ], function( jQuery ) {
+		  "../jquery.mobile.navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {

@@ -7,7 +7,7 @@
 
 define( [ "jquery",
 	"./addFirstLastClasses",
-	"../widget" ], function( jQuery ) {
+	"../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

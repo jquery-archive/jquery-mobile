@@ -7,16 +7,16 @@
 define([
 	"jquery",
 	"./jquery.ui.core",
-	"./defaults",
-	"./helpers",
-	"./data",
-	"./support",
+	"./jquery.mobile.defaults",
+	"./jquery.mobile.helpers",
+	"./jquery.mobile.data",
+	"./jquery.mobile.support",
 	"./events/navigate",
 	"./navigation/path",
 	"./navigation/method",
-	"./navigation",
+	"./jquery.mobile.navigation",
 	"./widgets/loader",
-	"./vmouse",
+	"./jquery.mobile.vmouse",
 	"jquery.hashchange" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {

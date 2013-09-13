@@ -3,7 +3,7 @@
 //>>label: iOS Orientation Change Fix
 //>>group: Utilities
 
-define( [ "jquery", "../core", "../zoom" ], function( jQuery ) {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window ) {
 

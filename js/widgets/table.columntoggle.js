@@ -9,7 +9,7 @@ define( [
 	"jquery",
 	"./table",
 	"./popup",
-	"../fieldContain",
+	"../jquery.mobile.fieldContain",
 	"./controlgroup",
 	"./forms/checkboxradio" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
