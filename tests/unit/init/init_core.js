@@ -16,7 +16,7 @@ define([
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){
 				$.testHelper.reloadLib("jquery.setNameSpace.js");
-				return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ))
+				return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ));
 			};
 
 
@@ -119,9 +119,6 @@ define([
 				deepEqual($("#bar").jqmData('url'), "bak");
 			});
 
-			// NOTE the next two tests work on timeouts that assume a page will be
-			// created within 2 seconds it'd be great to get these using a more
-			// reliable callback or event
 			asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
 
 				$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" );
@@ -139,29 +136,6 @@ define([
 				).then( start );
 			});
 
-
-			asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
-				$(document).one("mobileinit", function(){
-					$.mobile.autoInitializePage = false;
-				});
-
-				$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" );
-
-				location.hash = "";
-
-
-				reloadCoreNSandInit().then(
-					function() {
-						deepEqual( $( "#autoinit-off.ui-page" ).length, 0 );
-
-						$(document).bind("mobileinit", function(){
-							$.mobile.autoInitializePage = true;
-						});
-
-						return reloadCoreNSandInit();
-					}
-				).then( start );
-			});
 		});
 	});
 });
