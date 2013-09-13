@@ -111,13 +111,13 @@
 			require(
 				{
 					baseUrl: "../../../js"
-				}, [ libName ],
+				}, [libName],
 				function() {
 					deferred.resolve();
 				}
 			);
 
-			return deferred.promise();
+			return deferred;
 		},
 
 		reloadLib: function(libName){

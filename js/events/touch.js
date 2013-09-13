@@ -3,7 +3,7 @@
 //>>label: Touch
 //>>group: Events
 
-define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {

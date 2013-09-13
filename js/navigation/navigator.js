@@ -3,7 +3,7 @@
 //>>label: Navigation Manager
 //>>group: Navigation
 define(["jquery",
-	"./../ns",
+	"./../jquery.mobile.ns",
 	"../events/navigate",
 	"./path",
 	"./history" ], function( jQuery ) {

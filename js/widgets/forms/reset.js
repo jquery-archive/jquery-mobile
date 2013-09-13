@@ -3,7 +3,7 @@
 //>>label: Form Reset
 //>>group: Forms
 
-define( [ "jquery", "../../core" ], function( jQuery ) {
+define( [ "jquery", "../../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

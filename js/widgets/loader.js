@@ -3,7 +3,7 @@
 //>>label: Loading Message
 //>>group: Widgets
 
-define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
+define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {

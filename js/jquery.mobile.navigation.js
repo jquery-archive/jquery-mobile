@@ -4,14 +4,14 @@
 //>>group: Navigation
 define( [
 	"jquery",
-	"./core",
+	"./jquery.mobile.core",
 	"./navigation/path",
 	"./events/navigate",
 	"./navigation/history",
 	"./navigation/navigator",
 	"./navigation/method",
-	"./events",
-	"./support",
+	"./jquery.mobile.events",
+	"./jquery.mobile.support",
 	"jquery.hashchange",
 	"./widgets/pagecontainer",
 	"./widgets/page",
