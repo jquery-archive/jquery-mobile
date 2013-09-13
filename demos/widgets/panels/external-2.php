@@ -46,7 +46,7 @@
 
 		<p class="jqm-intro">Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
 
-		<h2 id="panel-examples">External Panels - These panels only exist if you navigated here from page 1. to try this refresh the page and try the links they will not work.</h2>
+		<h2 id="panel-examples">External Panels - These panels only exist if you navigated here from page 1.  Refreshing this page will cause the links below not to work.</h2>
 
 		<p>The panels below are all located outside the page</p>
 
