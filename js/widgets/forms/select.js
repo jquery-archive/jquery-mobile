@@ -150,6 +150,10 @@ $.widget( "mobile.selectmenu", $.extend( {
 
 		this._handleFormReset();
 
+		this._on( this.button, {
+			keydown: "_handleKeydown"
+		});
+
 		this.build();
 	},
 
@@ -261,13 +265,21 @@ $.widget( "mobile.selectmenu", $.extend( {
 		}
 	},
 
+	_handleKeydown: function( /* event */ ) {
+		this._delay( "_refreshButton" );
+	},
+
 	_reset: function() {
 		this.refresh();
 	},
 
-	refresh: function() {
+	_refreshButton: function() {
 		this.setButtonText();
 		this.setButtonCount();
+	},
+
+	refresh: function() {
+		this._refreshButton();
 	},
 
 	// open and close preserved in native selects
