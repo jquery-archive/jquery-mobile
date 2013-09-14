@@ -53,6 +53,11 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this.button.focus();
 	},
 
+	_handleKeydown: function( event ) {
+		this._super( event );
+		this._handleButtonVclickKeydown( event );
+	},
+
 	_handleButtonVclickKeydown: function( event ) {
 		if ( this.options.disabled || this.isOpen ) {
 			return;
@@ -203,8 +208,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// Button events
 		this._on( this.button, {
-			vclick : "_handleButtonVclickKeydown",
-			keydown : "_handleButtonVclickKeydown"
+			vclick: "_handleButtonVclickKeydown"
 		});
 
 		// Events for list items
