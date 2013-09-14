@@ -16,7 +16,7 @@ define([
 			setGradeA = function(value) { $.mobile.gradeA = function(){ return value; }; },
 			reloadCoreNSandInit = function(){
 				$.testHelper.reloadLib("jquery.setNameSpace.js");
-				return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ));
+				return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ))
 			};
 
 
