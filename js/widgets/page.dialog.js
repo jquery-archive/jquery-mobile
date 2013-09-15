@@ -5,10 +5,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery",
-	"../jquery.mobile.widget",
+define( [
+	"jquery",
+	"../widget",
 	"./page",
-	"../jquery.mobile.navigation" ], function( jQuery ) {
+	"../navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 

@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.button.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.widget" ], function( jQuery ) {
+define( [ "jquery", "../../widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

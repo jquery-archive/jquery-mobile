@@ -4,7 +4,7 @@
 
 $.testHelper.excludeFileProtocol(function(){
 	var	prependToFn = $.fn.prependTo,
-		moduleName = "jquery.mobile.support";
+		moduleName = "support";
 
 	module(moduleName, {
 		teardown: function(){
@@ -40,7 +40,7 @@ $.testHelper.excludeFileProtocol(function(){
 			onorientationchange: true
 		});
 
-		$.testHelper.reloadModule( "jquery.mobile.support.orientation" ).done( function() {
+		$.testHelper.reloadModule( "support/orientation" ).done( function() {
 			ok($.support.orientation, "orientation is supported" );
 			start();
 		});
@@ -49,7 +49,7 @@ $.testHelper.excludeFileProtocol(function(){
 	asyncTest( "detects touch", function() {
 		document.ontouchend = true;
 
-		$.testHelper.reloadModule( "jquery.mobile.support.touch" ).done( function() {
+		$.testHelper.reloadModule( "support/touch" ).done( function() {
 			ok( $.mobile.support.touch, "touch is supported" );
 			ok( $.support.touch, "touch is supported" );
 			start();
@@ -59,7 +59,7 @@ $.testHelper.excludeFileProtocol(function(){
 	asyncTest( "detects functionality from basic negative properties and attributes (where possible)", function(){
 		delete window["orientation"];
 
-		$.testHelper.reloadModule( "jquery.mobile.support.orientation" ).done( function() {
+		$.testHelper.reloadModule( "support/orientation" ).done( function() {
 			ok(!$.support.orientation, "orientation is not supported" );
 			start();
 		});

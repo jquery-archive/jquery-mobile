@@ -3,8 +3,8 @@
 
 define([
 	"require",
-	"./jquery.mobile.defaults",
-	"./jquery.mobile.data",
-	"./jquery.mobile.helpers"
+	"./defaults",
+	"./data",
+	"./helpers"
 ]);
 //>>excludeEnd("jqmBuildExclude");
