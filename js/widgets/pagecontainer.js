@@ -371,7 +371,7 @@ define( [
 		},
 
 		_getLoader: function() {
-			return $.mobile.loaderWidget;
+			return $.mobile.loading();
 		},
 
 		_showLoading: function( delay, theme, msg, textonly ) {
