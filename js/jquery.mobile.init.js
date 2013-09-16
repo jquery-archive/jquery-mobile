@@ -93,7 +93,7 @@ define([
 			$window.trigger( "pagecontainercreate" );
 
 			// cue page loading message
-			$.mobile.showPageLoadingMsg();
+			$.mobile.loading( "show" );
 
 			//remove initial build class (only present on first pageshow)
 			hideRenderingClass();

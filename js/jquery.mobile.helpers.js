@@ -121,6 +121,19 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 			height = ( typeof height === "number" ) ? height : $.mobile.getScreenHeight();
 
 			page.css( "min-height", height - ( pageOuterHeight - pageHeight ) );
+		},
+
+		loading: function() {
+			// If this is the first call to this function, instantiate a loader widget
+			var loader = this.loading._widget || $( $.mobile.loader.prototype.defaultHtml ).loader(),
+
+				// Call the appropriate method on the loader
+				returnValue = loader.loader.apply( loader, arguments );
+
+			// Make sure the loader is retained for future calls to this function.
+			this.loading._widget = loader;
+
+			return returnValue;
 		}
 	});
 
