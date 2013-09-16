@@ -34,7 +34,7 @@ function getSnippet( type, selector, source ) {
 		el = source.find( type + selector );
 		// If this is not an embedded style, try a stylesheet reference
 		if ( el.length === 0 && type === "style" ) {
-			el = snippetSource.find( "link[rel='stylesheet']" + selector );
+			el = source.find( "link[rel='stylesheet']" + selector );
 		}
 		text = $( "<div></div>" ).append( el.contents().clone() ).html();
 		if ( !text ) {
