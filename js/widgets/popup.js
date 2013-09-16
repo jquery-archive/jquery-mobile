@@ -113,11 +113,11 @@ $.widget( "mobile.popup", {
 			};
 		} else {
 			this._ui = this._enhance( theElement, myId );
-			this
-				._applyTransition( currentOptions.transition )
-				._setTolerance( currentOptions.tolerance );
+			this._applyTransition( currentOptions.transition );
 		}
-		this._ui.focusElement = this._ui.container;
+		this
+			._setTolerance( currentOptions.tolerance )
+			._ui.focusElement = this._ui.container;
 
 		// Event handlers
 		this._on( this._ui.screen, { "vclick": "_eatEventAndClose" } );
