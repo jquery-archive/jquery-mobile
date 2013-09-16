@@ -332,7 +332,7 @@
 		</div>
 		<div id="pre-rendered-screen" class="ui-popup-screen ui-screen-hidden"></div>
 		<div id="pre-rendered-popup" class="ui-popup-container fade ui-popup-hidden ui-body-inherit ui-overlay-shadow ui-corner-all">
-			<div id="pre-rendered" class="ui-popup" data-role="popup" data-transition="fade">
+			<div id="pre-rendered" class="ui-popup" data-role="popup" data-enhanced="true" data-transition="fade">
 				<p>This is the contents of the pre-rendered popup</p>
 			</div>
 		</div>
