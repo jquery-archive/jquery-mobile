@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Popup alignment - jQuery Mobile Demos</title>
+	<title>Popup across multiple pages - jQuery Mobile Demos</title>
 	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../../favicon.ico">
@@ -15,11 +15,6 @@
 // Instantiate the popup on DOMReady, and enhance its contents
 $( function() {
 	$( "#popup-outside-page" ).enhanceWithin().popup();
-});
-
-// Upon click on any button that opens the popup, open the popup over the button
-$.mobile.document.on( "click", ".popup-outside-page-link", function( event ) {
-	$( "#popup-outside-page" ).popup( "open", { positionTo: $( event.target ) });
 });
 	</script>
 </head>
@@ -47,7 +42,7 @@ $.mobile.document.on( "click", ".popup-outside-page-link", function( event ) {
 		<p>If you wish the popup to be opened from a set of links, then you must also handle that manually, because automatic handling via <code>data-rel="popup"</code> is restricted to popups on the active page.</p>
 		<p>The example below illustrates the setup with two pages.</p>
 		<div data-demo-html="#popup-outside-page,#other-page,#third-page" data-demo-js="#popup-outside-page-script">
-			<a href="#" class="popup-outside-page-link ui-btn ui-btn-inline ui-corner-all">Menu</a>
+			<a href="#popup-outside-page" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Menu</a>
 		</div>
 	</div><!-- /content -->
 
@@ -63,7 +58,7 @@ $.mobile.document.on( "click", ".popup-outside-page-link", function( event ) {
 <div id="other-page" data-role="page">
 	<div data-role="header">
 		<!-- Links that open the global popup are all marked with a class -->
-		<a href="#" class="popup-outside-page-link">Menu</a>
+		<a href="#popup-outside-page" data-rel="popup">Menu</a>
 		<h1>Another Page</h1>
 	</div>
 	<div data-role="content">
@@ -73,7 +68,7 @@ $.mobile.document.on( "click", ".popup-outside-page-link", function( event ) {
 <div id="third-page" data-role="page">
 	<div data-role="header">
 		<!-- Links that open the global popup are all marked with a class -->
-		<a href="#" class="popup-outside-page-link">Menu</a>
+		<a href="#popup-outside-page" data-rel="popup">Menu</a>
 		<h1>Third Page</h1>
 	</div>
 	<div data-role="content">
