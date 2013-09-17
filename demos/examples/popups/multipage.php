@@ -12,19 +12,14 @@
 	<script src="../../_assets/js/"></script>
 	<script src="../../../js/"></script>
 	<script id="popup-outside-page-script">
-// Do this on DOMReady so we find the popup
+// Instantiate the popup on DOMReady, and enhance its contents
 $( function() {
 	$( "#popup-outside-page" ).enhanceWithin().popup();
 });
 
 // Upon click on any button that opens the popup, open the popup over the button
-$.mobile.document.on( "click", ".popup-outside-page-button", function( event ) {
-	var target = $( event.target );
-	$( "#popup-outside-page" ).popup( "open", {
-		x: target.offset().left + target.width() / 2,
-		y: target.offset().top + target.height() / 2
-	});
-	event.preventDefault();
+$.mobile.document.on( "click", ".popup-outside-page-link", function( event ) {
+	$( "#popup-outside-page" ).popup( "open", { positionTo: $( event.target ) });
 });
 	</script>
 </head>
@@ -52,7 +47,7 @@ $.mobile.document.on( "click", ".popup-outside-page-button", function( event ) {
 		<p>If you wish the popup to be opened from a set of links, then you must also handle that manually, because automatic handling via <code>data-rel="popup"</code> is restricted to popups on the active page.</p>
 		<p>The example below illustrates the setup with two pages.</p>
 		<div data-demo-html="#popup-outside-page,#other-page,#third-page" data-demo-js="#popup-outside-page-script">
-			<a href="#" class="popup-outside-page-button ui-btn ui-btn-inline ui-corner-all">Menu</a>
+			<a href="#" class="popup-outside-page-link ui-btn ui-btn-inline ui-corner-all">Menu</a>
 		</div>
 	</div><!-- /content -->
 
@@ -68,7 +63,7 @@ $.mobile.document.on( "click", ".popup-outside-page-button", function( event ) {
 <div id="other-page" data-role="page">
 	<div data-role="header">
 		<!-- Links that open the global popup are all marked with a class -->
-		<a href="#" class="popup-outside-page-button">Menu</a>
+		<a href="#" class="popup-outside-page-link">Menu</a>
 		<h1>Another Page</h1>
 	</div>
 	<div data-role="content">
@@ -78,7 +73,7 @@ $.mobile.document.on( "click", ".popup-outside-page-button", function( event ) {
 <div id="third-page" data-role="page">
 	<div data-role="header">
 		<!-- Links that open the global popup are all marked with a class -->
-		<a href="#" class="popup-outside-page-button">Menu</a>
+		<a href="#" class="popup-outside-page-link">Menu</a>
 		<h1>Third Page</h1>
 	</div>
 	<div data-role="content">
