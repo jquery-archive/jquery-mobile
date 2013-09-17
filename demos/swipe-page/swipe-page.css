@@ -29,11 +29,3 @@ small {
 	font-size: .75em;
 	color: #666;
 }
-/* Prevent text selection while swiping with mouse */
-.demo-page .ui-header, .ui-title, .control .ui-btn, .trivia-btn {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
-}
