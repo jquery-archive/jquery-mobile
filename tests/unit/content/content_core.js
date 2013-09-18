@@ -351,7 +351,7 @@
 		}
 	});
 
-	test( "does nothing where the title is alread defined for the page", function() {
+	test( "does nothing where the title is already defined for the page", function() {
 		var html, page, pageHtml;
 
 		pageHtml = "<div data-foo-role='page' data-foo-title='bar'></div>";
