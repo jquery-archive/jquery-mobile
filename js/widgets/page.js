@@ -12,12 +12,7 @@ var originalWidget = $.widget,
 
 	// Record the original, non-mobileinit-modified version of $.mobile.keepNative
 	// so we can later determine whether someone has modified $.mobile.keepNative
-	keepNativeFactoryDefault = $.mobile.keepNative,
-
-	// We also need to record the original, non-mobileinit-modified version of
-	// $.mobile.page.prototype.options.keepNativeDefault so that, if legacy code
-	// modifies it, we know that it's been modified
-	pageProtoKeepNativeFactoryDefault = $.mobile.keepNative;
+	keepNativeFactoryDefault = $.mobile.keepNative;
 
 $.widget = (function( orig ) {
 	return function() {
@@ -154,31 +149,21 @@ $.widget( "mobile.page", {
 	// Deprecated in 1.4 remove in 1.5
 	keepNativeSelector: function() {
 		var options = this.options,
-
-			// Check if the keepNative option has been set
-			keepNative = ( options.keepNative ?
-				$.trim( options.keepNative ) : "" ),
+			globalValue = $.trim( $.mobile.keepNative ),
+			optionValue = $.trim( options.keepNativeDefault ),
 
 			// Check if $.mobile.keepNative has changed from the factory default
-			newDefault = ( keepNativeFactoryDefault === $.mobile.keepNative ?
-				"" : $.mobile.keepNative ),
+			newDefault = ( keepNativeFactoryDefault === globalValue ?
+				"" : globalValue ),
 
-			// Check if the deprecated keepNativeDefault option has changed from the
-			// factory default
-			oldDefault = ( pageProtoKeepNativeFactoryDefault === options.keepNativeDefault ?
-				"" : options.keepNativeDefault ),
-
-			// If neither default has changed, use options.keepNativeDefault
-			overallDefault = ( ( oldDefault === "" && newDefault === "" ) ?
-				options.keepNativeDefault : "" );
+			// If $.mobile.keepNative has not changed, use options.keepNativeDefault
+			oldDefault = ( newDefault === "" ? optionValue : "" );
 
 		// Concatenate keepNative selectors from all sources where the value has
 		// changed or, if nothing has changed, return the default
-		return ( ( keepNative ? [ keepNative ] : [] )
-			.concat( newDefault ? [ newDefault ] : [] )
+		return ( ( newDefault ? [ newDefault ] : [] )
 			.concat( oldDefault ? [ oldDefault ] : [] )
-			.concat( overallDefault ? [ overallDefault ] : [] )
-			.join( ", " ) ) || options.keepNativeDefault;
+			.join( ", " ) );
 	}
 });
 })( jQuery );
