@@ -149,6 +149,7 @@ $.widget( "mobile.page", {
 	// Deprecated in 1.4 remove in 1.5
 	keepNativeSelector: function() {
 		var options = this.options,
+			keepNative = $.trim( options.keepNative || "" ),
 			globalValue = $.trim( $.mobile.keepNative ),
 			optionValue = $.trim( options.keepNativeDefault ),
 
@@ -161,7 +162,8 @@ $.widget( "mobile.page", {
 
 		// Concatenate keepNative selectors from all sources where the value has
 		// changed or, if nothing has changed, return the default
-		return ( ( newDefault ? [ newDefault ] : [] )
+		return ( ( keepNative ? [ keepNative ] : [] )
+			.concat( newDefault ? [ newDefault ] : [] )
 			.concat( oldDefault ? [ oldDefault ] : [] )
 			.join( ", " ) );
 	}
