@@ -76,13 +76,6 @@
 		ok( !$( "#c" ).hasClass( "ui-page" ) );
 	});
 
-	test( "keepNativeSelector returns the default where keepNative is not different", function() {
-		var pageProto = $.mobile.page.prototype;
-		pageProto.options.keepNative = pageProto.options.keepNativeDefault;
-
-		deepEqual(pageProto.keepNativeSelector(), pageProto.options.keepNativeDefault);
-	});
-
 	test( "keepNativeSelector returns the default where keepNative is empty, undefined, whitespace", function() {
 		var pageProto = $.mobile.page.prototype;
 
