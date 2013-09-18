@@ -15,7 +15,7 @@
 		}
 	});
 
-	test( "rejects navigate events where the origina event's default is prevented", function(){
+	test( "rejects navigate events where the original event's default is prevented", function(){
 		expect( 1 );
 
 		mockEvent.originalEvent.isDefaultPrevented = function() {
