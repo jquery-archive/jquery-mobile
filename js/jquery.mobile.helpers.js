@@ -192,8 +192,8 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 					// If any matching elements remain filter ones with keepNativeSelector
 					if ( widgetElements.length ) {
 
-						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompt
-						// Switch to $.mobile.keepNativeSelector in 1.5 which is just a value not a function
+						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompat
+						// Switch to $.mobile.keepNative in 1.5 which is just a value not a function
 						widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
 					}
 
