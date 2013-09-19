@@ -16,7 +16,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 	$( fixLinks );
 
 	// Fix the links for subsequent ajax page loads
-	$( document ).on( 'pagecreate', fixLinks );
+	$( document ).on( "pagecreate", fixLinks );
 
 	// Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
 	$.ajax({
@@ -29,14 +29,14 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 			$.mobile.ajaxEnabled = false;
 			
 			var message = $( '<div>' , {
-				'class': "jqm-content jqm-fullwidth ui-bar-f",
+				'class': "jqm-content",
 				style: "border:none; padding: 10px 15px; overflow: auto;",
 				'data-ajax-warning': true
 			});
 			
 			message
-			.append( "<h3 style='margin:0 0 .3em; padding:0; font-size:1em; font-weight: bold; color:#fff;'>Note: Navigation may not work if viewed locally</h3>" )
-			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
+			.append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
+			.append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
 			
 			$( document ).on( "pagecreate", function( event ) {
 				$( event.target ).append( message );
@@ -46,7 +46,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 }
 
 // display the version of jQM
-$( document ).on( "pageinit", function() {
+$( document ).on( "pagecreate", function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
@@ -63,12 +63,11 @@ $( document ).on( "pageinit", function() {
 		text += " " + str;
 	}
 
-	$( ".jqm-version" ).html( "Version " + text );
-	$( ".jqm-version-number" ).html( text );
+	$( ".jqm-version" ).html( text );
 });
 
 
-$( document ).on( "pageinit", ".jqm-demos", function() {
+$( document ).on( "pagecreate", ".jqm-demos", function() {
 	var page = $( this );
 
 	// global navmenu panel
@@ -263,7 +262,7 @@ $( document ).on( "mobileinit", function() {
 					
 					this.highlightUp()
 				} else {
-					this.element.find( "li:last" ).toggleClass( "ui-btn-up-d" ).toggleClass( "ui-btn-active" );
+					this.element.find( "li:last" ).toggleClass( "ui-btn-a" ).toggleClass( "ui-btn-active" );
 				}
 			} else if ( typeof e.which !== "undefined" ) {
 				this.element.find( "li.ui-btn-active" ).removeClass( "ui-btn-active" );

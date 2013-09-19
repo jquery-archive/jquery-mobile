@@ -19,16 +19,17 @@
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	    <div data-role="header" class="jqm-header">
-			<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-	        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-	        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+			<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+	        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+	        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 		    </div><!-- /header -->
 
 	    <div data-role="content" class="jqm-content">
 
-        <h1>Controlgroups <a href="http://api.jquerymobile.com/controlgroup/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+        <h1>Controlgroups</h1>
 
-        <p class="jqm-intro">Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.
+        <p>Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.
         </p>
 
 		<h2>Controlgroup vertical</h2>
@@ -57,7 +58,7 @@
 				</div>
 			</div><!--/demo-html -->
 
-			<h2>Controlgroup horizontal</h2>
+		<h2>Controlgroup horizontal</h2>
 
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-type="horizontal">
@@ -92,7 +93,7 @@
 				</form>
 			</div><!--/demo-html -->
 
-			<h2>Mini sized</h2>
+		<h2>Mini sized</h2>
 
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -127,7 +128,7 @@
 				</form>
 			</div><!--/demo-html -->
 
-				<h2>Radio button</h2>
+			<h2>Radio button</h2>
 
 				<div data-demo-html="true">
 					<form>
@@ -185,7 +186,7 @@
 					</form>
 				</div><!--/demo-html -->
 
-				<h2>Checkbox</h2>
+			<h2>Checkbox</h2>
 
 				<div data-demo-html="true">
 					<form>
@@ -243,7 +244,7 @@
 					</form>
 				</div><!--/demo-html -->
 
-				<h2>Selects</h2>
+			<h2>Selects</h2>
 
 				<div data-demo-html="true">
 					<form>
@@ -352,9 +353,9 @@
 		<h2>Pre-rendered markup</h2>
 		<p>You can supply pre-rendered markup for any controlgroup to save startup time. The example below illustrates the markup you have to provide for a pre-rendered controlgroup. Note that the widgets inside the controlgroup need not necessarily be pre-rendered.</p>
 		<div data-demo-html="true">
-			<div data-role="controlgroup" data-enhanced="true" data-theme="b" data-corners="true" data-shadow="true" class="ui-controlgroup ui-controlgroup-vertical ui-group-theme-b ui-corner-all">
+			<div data-role="controlgroup" data-enhanced="true" class="ui-controlgroup ui-controlgroup-vertical ui-group-theme-b ui-corner-all">
 				<div role="heading" class="ui-controlgroup-label">
-					<legend>Pre-rendered controlgroup</legend>
+					<legend>Pre-rendered controlgroup:</legend>
 				</div>
 				<div class="ui-controlgroup-controls ui-shadow">
 					<label for="pre-rendered-cb-1" class="ui-first-child">Checkbox 1</label>
@@ -367,8 +368,8 @@
 
 	</div><!-- /content -->
 
-    <div data-role="footer" class="jqm-footer">
-        <p class="jqm-version"></p>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+        <p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
         <p>Copyright 2013 The jQuery Foundation</p>
     </div><!-- /footer -->
 

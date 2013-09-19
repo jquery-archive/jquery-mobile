@@ -30,32 +30,32 @@
 	<script src="../../js/"></script>
 	<!-- Google Maps JS assets are loaded at bottom of page for performance -->
 	<script>
-	$( document ).on("pageinit", "#map-page", function() {
+	$( document ).on( "pagecreate", "#map-page", function() {
 		var $mapSwitch = $( "#map-switch" ),
 		    $listSwitch = $( "#list-switch" ),
-			$map = $("#map-canvas"),
-	        $list = $("#list-canvas");
+			$map = $( "#map-canvas" ),
+	        $list = $( "#list-canvas" );
 			
-	    $mapSwitch.on( "click", function(e){
+	    $mapSwitch.on( "click", function( e ){
 	       	$map.show();
 	       	$map.gmap();
 	       	$list.hide();
 	    });
 		
-	    $listSwitch.on( "click", function(e){
+	    $listSwitch.on( "click", function( e ){
 	       	$list.show();
 			$map.hide();
 	    });
 	
-	    $("#show-more a").on( "click", function(e){
+	    $( "#show-more a" ).on( "click", function( e ){
 			// Assume we already have a cached geolocation because it's not necessary for this example.
 			var location = location || {};
 			    location.coords = location.coords || {};
 				location.coords.latitude = location.coords.latitude || {};
 				location.coords.longitude = location.coords.longitude || {};
 	    	
-			JQM.geo.startIndex = $("#list-results li").size() -1; // exclude show more list item
-	    	JQM.geo.showMore(location);
+			JQM.geo.startIndex = $( "#list-results li" ).size() -1; // exclude show more list item
+	    	JQM.geo.showMore( location );
 	    	e.preventDefault();
 	    });
 	});
@@ -95,11 +95,10 @@
 <div data-role="page" class="jqm-demos">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-		<div><!-- TODO: Remove div wrapper -->
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-icon-nodisc ui-icon-alt ui-btn-left">Menu</a>
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-icon-nodisc ui-icon-alt ui-btn-right">Search</a>
-		</div><!-- TODO: Remove div wrapper -->
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
@@ -114,15 +113,15 @@
             <li>How to display an info box on the map when a push pin is tapped.</li>
         </ul>
         
-        <a href="#map-page" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
+        <a href="#map-page" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
 
         <div data-demo-html="#map-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
     </div><!-- /content -->
 
-		<div data-role="footer" class="jqm-footer">
-			<p class="jqm-version"></p>
-			<p>Copyright 2013 The jQuery Foundation</p>
+		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
 		</div><!-- /footer -->
 
 	<?php include( '../jqm-panels.php' ); ?>

@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Grids - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
@@ -16,27 +16,26 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-		<div><!-- TODO: Remove div wrapper -->
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-icon-nodisc ui-icon-alt ui-btn-left">Menu</a>
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-icon-nodisc ui-icon-alt ui-btn-right">Search</a>
-		</div><!-- TODO: Remove div wrapper -->
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Grids <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+		<h1>Grids</h1>
 
-			<p class="jqm-intro">The jQuery Mobile framework provides a simple way to build CSS-based columns that can also be responsive.
+		<p>The jQuery Mobile framework provides a simple way to build CSS-based columns that can also be responsive.
 			</p>
 
-			<h2>Grid basics</h2>
+		<h2>Grid basics</h2>
 
-			<p>Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them. Within the grid container, child elements are assigned <code>ui-block-a/b/c/d/e</code> in a sequential manner which makes each "block" element float side-by-side, forming the grid.</p>
+		<p>Grids are 100% width, completely invisible (no borders or backgrounds) and don't have padding or margins, so they shouldn't interfere with the styles of elements placed inside them. Within the grid container, child elements are assigned <code>ui-block-a/b/c/d/e</code> in a sequential manner which makes each "block" element float side-by-side, forming the grid.</p>
 
-			<h2>Two column grids</h2>
+		<h2>Two column grids</h2>
 			
-			<p>To build a two-column (50/50%) layout, start with a container with a <code>class</code> of <code>ui-grid-a</code>, and add two child containers inside it classed with <code>ui-block-a</code> for the first column and <code>ui-block-b</code> for the second. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-a</code> to apply the background and font styling for the "a" toolbar theme swatch. For illustration purposes, an inline <code>style="height:60px"</code> attribute is also added to each grid to set each to a standard height.</p>
+		<p>To build a two-column (50/50%) layout, start with a container with a <code>class</code> of <code>ui-grid-a</code>, and add two child containers inside it classed with <code>ui-block-a</code> for the first column and <code>ui-block-b</code> for the second. On the blocks below, we're adding two classes: <code>ui-bar</code> to add the default bar padding and <code>ui-bar-a</code> to apply the background and font styling for the "a" toolbar theme swatch. For illustration purposes, an inline <code>style="height:60px"</code> attribute is also added to each grid to set each to a standard height.</p>
 
 			<div data-demo-html="true">
 				<div class="ui-grid-a">
@@ -45,7 +44,7 @@
 				</div><!-- /grid-a -->
 			</div><!--/demo-html -->
 
-			<p>Grid classes can be applied to any container. In this next example, we add <code>ui-grid-a</code> to a <code>fieldset</code>, and apply the <code>ui-block</code> classes to the container of each of the two buttons inside to stretch them each to 50% of the screen width:</p>
+		<p>Grid classes can be applied to any container. In this next example, we add <code>ui-grid-a</code> to a <code>fieldset</code>, and apply the <code>ui-block</code> classes to the container of each of the two buttons inside to stretch them each to 50% of the screen width:</p>
 
 			<div data-demo-html="true">
 				<fieldset class="ui-grid-a">
@@ -55,9 +54,9 @@
 			</div><!--/demo-html -->
 
 
-			<h2>Three-column grids</h2>
+		<h2>Three-column grids</h2>
             
-			<p>The other grid layout configuration uses <code>class=ui-grid-b</code> on the parent, and 3 child container elements, each with its respective <code>ui-block-a/b/c</code> class, to create a three-column layout (33/33/33%). </p>
+		<p>The other grid layout configuration uses <code>class=ui-grid-b</code> on the parent, and 3 child container elements, each with its respective <code>ui-block-a/b/c</code> class, to create a three-column layout (33/33/33%). </p>
 
 			<div data-demo-html="true">
 				<div class="ui-grid-b">
@@ -67,7 +66,7 @@
 				</div><!-- /grid-b -->
 			</div><!--/demo-html -->
 
-			<p>And an example of a 3 column grid with buttons inside:</p>
+		<p>And an example of a 3 column grid with buttons inside:</p>
 
 			<div data-demo-html="true">
 				<fieldset class="ui-grid-b">
@@ -80,9 +79,9 @@
             <p>View more examples of <a href="grid-buttons.php" data-ajax="false">buttons in grids</a>.</p>
 
 
-			<h2>Four-column grids</h2>
+		<h2>Four-column grids</h2>
 
-			<p>A four-column, 25/25/25/25% grid is created by specifying <code>class=ui-grid-c</code> on the parent and adding a fourth block. </p>
+		<p>A four-column, 25/25/25/25% grid is created by specifying <code>class=ui-grid-c</code> on the parent and adding a fourth block. </p>
 
 			<div data-demo-html="true">
 				<div class="ui-grid-c">
@@ -94,9 +93,9 @@
 			</div><!--/demo-html -->
 
 
-			<h2>Five-column grids</h2>
+		<h2>Five-column grids</h2>
             
-			<p>A five-column, 20/20/20/20/20% grid is created by specifying <code>class=ui-grid-d</code> on the parent and adding a fifth block. </p>
+		<p>A five-column, 20/20/20/20/20% grid is created by specifying <code>class=ui-grid-d</code> on the parent and adding a fifth block. </p>
 
 			<div data-demo-html="true">
                 <div class="ui-grid-d">
@@ -109,9 +108,9 @@
 			</div><!--/demo-html -->
 
 
-			<h2>Multiple row grids</h2>
+		<h2>Multiple row grids</h2>
 
-			<p>Grids are designed to wrap to multiple rows of items. For example, if you specify a 3-column grid (ui-grid-b) on a container that has nine child blocks, it will wrap to 3 rows of 3 items each. There is a CSS rule to clear the floats and start a new line when the <code>class=ui-block-a</code> is seen so make sure to assign block classes in a repeating sequence (a, b, c, a, b, c, etc.) that maps to the grid type:</p>
+		<p>Grids are designed to wrap to multiple rows of items. For example, if you specify a 3-column grid (ui-grid-b) on a container that has nine child blocks, it will wrap to 3 rows of 3 items each. There is a CSS rule to clear the floats and start a new line when the <code>class=ui-block-a</code> is seen so make sure to assign block classes in a repeating sequence (a, b, c, a, b, c, etc.) that maps to the grid type:</p>
 
 			<div data-demo-html="true">
                 <div class="ui-grid-b">
@@ -128,9 +127,9 @@
 			</div><!--/demo-html -->
 
 
-			<h2>Grid solo class</h2>
+		<h2>Grid solo class</h2>
             
-			<p>The framework adds left and right margin to buttons in a grid (one exception: 100% width button elements). For a single button you can use a container with class <code>ui-grid-solo</code> and wrap the button in a div with class <code>ui-block-a</code> like the example below. This way the button will get the same margin. View more examples of <a href="grid-buttons.php" data-ajax="false">buttons in grids</a>.</p>
+		<p>The framework adds left and right margin to buttons in a grid (one exception: 100% width button elements). For a single button you can use a container with class <code>ui-grid-solo</code> and wrap the button in a div with class <code>ui-block-a</code> like the example below. This way the button will get the same margin. View more examples of <a href="grid-buttons.php" data-ajax="false">buttons in grids</a>.</p>
 
 			<div data-demo-html="true">
 				<div class="ui-grid-a">
@@ -144,11 +143,11 @@
 			</div><!--/demo-html -->
 
 
-			<h2>Responsive grids</h2>
+		<h2>Responsive grids</h2>
 
-			<p>It's straightforward to take the standard grids and make them responsive by stacking the grid blocks at narrow widths. Since we just want to override the floats and widths of the standard grid styles <em>below</em> a single breakpoint, use a <code>max-width</code> breakpoint to only apply the stacked styling as an override.</p>
+		<p>It's straightforward to take the standard grids and make them responsive by stacking the grid blocks at narrow widths. Since we just want to override the floats and widths of the standard grid styles <em>below</em> a single breakpoint, use a <code>max-width</code> breakpoint to only apply the stacked styling as an override.</p>
 
-			<p>We recommend adding a class (ex: <code>my-breakpoint</code>) to scope the styles for the media query so it can be applied selectively. From this basic start, you can customize the appearance further or even add additional breakpoints. See an example of a <a href="grid-custom.php" data-ajax="false">custom responsive grid</a>.</p>
+		<p>We recommend adding a class (ex: <code>my-breakpoint</code>) to scope the styles for the media query so it can be applied selectively. From this basic start, you can customize the appearance further or even add additional breakpoints. See an example of a <a href="grid-custom.php" data-ajax="false">custom responsive grid</a>.</p>
 
 <pre><code>
 /* stack all grids below 40em (640px) */
@@ -211,8 +210,8 @@
 
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 

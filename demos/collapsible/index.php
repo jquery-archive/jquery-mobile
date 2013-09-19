@@ -12,23 +12,24 @@
     <script src="../_assets/js/"></script>
     <script src="../../js/"></script>
     <style id="negateDoubleBorder">
-        #demo-borders .ui-collapsible .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }
+        #demo-borders .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }
     </style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
     <div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
 
-            <h1>Collapsibles <a href="http://api.jquerymobile.com/collapsible/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+            <h1>Collapsibles</h1>
 
-            <p class="jqm-intro">Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.
+            <p>Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.
             </p>
 
         <h2>Basic collapsible</h2>
@@ -44,21 +45,31 @@
 
         <h2>Theme</h2>
 
-        <p>Add the <code>data-content-theme</code> attribute to set a theme for the content of the collapsible. To provide a stronger visual connection between the collapsible header and content, add the <code>data-content-theme</code> attribute to the wrapper and specify a theme swatch letter. This applies the swatch's border and <em>flat</em> background color (not the gradient) to the content block, removes the rounded corners from the bottom of the header, and gives the bottom of the content block rounded corners to visually group these elements.</p>
+        <p>Add the <code>data-theme</code> attribute to set a theme for the collapsible, and the <code>data-content-theme</code> attribute to the wrapper and specify a theme swatch letter.</p>
 
         <div data-demo-html="true">
-            <div data-role="collapsible" data-theme="a" data-content-theme="a">
+            <div data-role="collapsible" data-theme="b" data-content-theme="b">
                 <h4>Heading</h4>
-                <p>I'm the collapsible content with a themed content block set to "a".</p>
+                <p>I'm the collapsible content with a themed content block set to "b".</p>
             </div>
         </div><!--/demo-html -->
+
+        <p>The collapsible content inherits a theme by default. Set <code>data-content-theme</code> to <code>false</code> to have no theme at all.</p>
+
+        <div data-demo-html="true">
+            <div data-role="collapsible" data-content-theme="false">
+                <h4>Heading</h4>
+                <p>I'm the collapsible content without a theme.</p>
+            </div>
+        </div><!--/demo-html -->
+
 
         <h2>Expanded</h2>
 
         <p>To expand the content when the page loads, add the <code>data-collapsed="false"</code> attribute to the wrapper.</p>
 
         <div data-demo-html="true">
-            <div data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="a">
+            <div data-role="collapsible" data-collapsed="false">
                 <h4>Heading</h4>
                 <ul data-role="listview">
                     <li><a href="#">List item 1</a></li>
@@ -73,7 +84,7 @@
         <p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a mini version. </p>
 
         <div data-demo-html="true">
-            <div data-role="collapsible" data-mini="true" data-theme="b" data-content-theme="a">
+            <div data-role="collapsible" data-mini="true">
                 <h4>Heading</h4>
                 <ul data-role="listview">
                     <li><a href="#">List item 1</a></li>
@@ -88,7 +99,7 @@
             <p>The default icons of collapsible headings can be overridden by using the <code>data-collapsed-icon</code> and <code>data-expanded-icon</code> attributes. In the example below, <code>data-collapsed-icon="carat-d"</code> and <code>data-expanded-icon="carat-u"</code>.</p>
 
             <div data-demo-html="true">
-                <div data-role="collapsible" data-theme="a" data-content-theme="a" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                <div data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
                     <h4>Heading</h4>
                     <ul data-role="listview" data-inset="false">
                         <li>Read-only list item 1</li>
@@ -99,9 +110,10 @@
             </div><!--/demo-html -->
 
             <h2>Icon positioning</h2>
+
             <p>The default icon positioning of collapsible headings can be overridden by using the <code>data-iconpos</code> attribute. In the below case, <code>data-iconpos="right"</code>.</p>
 
-            <div data-role="collapsible" data-iconpos="right" data-theme="a" data-content-theme="a">
+            <div data-role="collapsible" data-iconpos="right">
                 <h3>I'm a header</h3>
                 <p><code>data-iconpos="right"</code></p>
             </div>
@@ -111,7 +123,7 @@
         <p>For forms, use a <code>fieldset</code> and <code>legend</code> for the collapsible.</p>
         <div data-demo-html="true">
             <form>
-                <fieldset data-role="collapsible" data-theme="a" data-content-theme="a">
+                <fieldset data-role="collapsible">
                     <legend>Legend</legend>
 
                     <label for="textinput-f">Text Input:</label>
@@ -134,7 +146,7 @@
         <p>By default collapsibles have an inset appearance. To make them full width without corner styling add the <code>data-inset="false"</code> attribute to the element.</p>
 
         <div data-demo-html="true">
-            <div data-role="collapsible" data-inset="false" data-content-theme="a">
+            <div data-role="collapsible" data-inset="false">
                 <h4>Heading</h4>
                 <p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
             </div>
@@ -145,7 +157,7 @@
         <p>This is an example of a series of individual collapsibles. The difference with a "Collapsible Set" is that multiple collapsible rows can be open at once.</p>
 
         <div data-demo-html="true">
-            <div data-role="collapsible" data-theme="b" data-content-theme="a" data-inset="false">
+            <div data-role="collapsible" data-inset="false">
                 <h3>Pets</h3>
                 <ul data-role="listview">
                     <li><a href="#">Canary</a></li>
@@ -156,7 +168,7 @@
                     <li><a href="#">Mouse</a></li>
                 </ul>
             </div><!-- /collapsible -->
-            <div data-role="collapsible" data-theme="b" data-content-theme="a" data-inset="false">
+            <div data-role="collapsible" data-inset="false">
                 <h3>Farm animals</h3>
                 <ul data-role="listview">
                     <li><a href="#">Chicken</a></li>
@@ -167,7 +179,7 @@
                     <li><a href="#">Sheep</a></li>
                 </ul>
             </div><!-- /collapsible -->
-            <div data-role="collapsible" data-theme="b" data-content-theme="a" data-inset="false">
+            <div data-role="collapsible" data-inset="false">
                 <h3>Wild Animals</h3>
                 <ul data-role="listview">
                     <li><a href="#">Aardvark</a></li>
@@ -185,7 +197,7 @@
 
         <div data-demo-html="true" data-demo-css="#negateDoubleBorder">
             <div id="demo-borders">
-                <div data-role="collapsible" data-theme="a" data-content-theme="a" data-inset="false">
+                <div data-role="collapsible" data-inset="false">
                     <h3>Pets</h3>
                     <ul data-role="listview">
                         <li><a href="#">Canary</a></li>
@@ -196,7 +208,7 @@
                         <li><a href="#">Mouse</a></li>
                     </ul>
                 </div><!-- /collapsible -->
-                <div data-role="collapsible" data-theme="b" data-content-theme="a" data-inset="false">
+                <div data-role="collapsible" data-inset="false">
                     <h3>Farm animals</h3>
                     <ul data-role="listview">
                         <li><a href="#">Chicken</a></li>
@@ -210,8 +222,8 @@
             </div>
         </div><!--/demo-html -->
 
-				<h2>Pre-rendered markup</h2>
-				<p>You can supply pre-rendered markup for any collapsible to save startup time. The example below illustrates the markup you have to provide for a pre-rendered collapsible.</p>
+			<h2>Pre-rendered markup</h2>
+			<p>You can supply pre-rendered markup for any collapsible to save startup time. The example below illustrates the markup you have to provide for a pre-rendered collapsible.</p>
 				<div data-demo-html="true">
 					<div data-role="collapsible" data-enhanced="true" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-collapsed">
 						<h4 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
@@ -221,15 +233,15 @@
 							</a>
 						</h4>
 						<div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
-							<p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
+						<p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
 						</div>
 					</div>
 				</div>
 
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 

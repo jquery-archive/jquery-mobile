@@ -1,4 +1,4 @@
-$( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
+$( document ).on( "pagecreate", "[data-role='page'].demo-page", function() {
 	var page = "#" + $( this ).attr( "id" ),
 		// Get the filename of the next page that we stored in the data-next attribute
 		next = $( this ).jqmData( "next" ),

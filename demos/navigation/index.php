@@ -17,19 +17,20 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
     <div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
 
 		<h1>AJAX Navigation</h1>
 
-		<p class="jqm-intro">The <code>$.mobile.navigate</code> method and the <code>navigate</code> event form the foundation of jQuery Mobile's navigation infrastructure. As such, they can function outside the confines of jQuery Mobile as a clean and intuitive navigation/history API.
+		<p>The <code>$.mobile.navigate</code> method and the <code>navigate</code> event form the foundation of jQuery Mobile's navigation infrastructure. As such, they can function outside the confines of jQuery Mobile as a clean and intuitive navigation/history API.
 		</p>
 
-		<h2 id="nav-intro">Introduction</h2>
+		<h2>Introduction</h2>
 
 		<p>jQuery Mobile includes a navigation system to load pages into the DOM via AJAX, enhance the new content, then display <a href="../pages/">pages</a> with a rich set of animated <a href="../transitions/"  data-ajax="false">transitions</a>. The navigation system uses progressive enhancement to automatically 'hijack' standard <a href="../links/">links</a> and form submissions and route them as an AJAX request.</p>
 
@@ -73,7 +74,7 @@ $( window ).on( "navigate", function( event, data ){
   alterContent( data.state.url );
 });</code></pre>
 
-		<h2 id="nav-event-example">Event Example  <a href="http://api.jquerymobile.com/navigate/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h2>
+		<h2>Event Example </h2>
 
 		<p>jQuery Mobile provides the <code>navigate</code> event as a wrapper for both <code>hashchange</code> and <code>popstate</code>. That is, where a binding to both events would be required to support browsers with and without <code>popstate</code> only one binding to <code>navigate</code> is necessary. In this example, altering the hash will trigger <code>popstate</code> or <code>hashchange</code> event depending on the browser, but only a single <code>navigate</code> binding is necessary. Make sure to use the back button after alterting the hash to see that the event is fired in both cases.</p>
 
@@ -94,7 +95,7 @@ $( "#event-example" ).click(function( event ) {
 
     <a href="#" id="event-example" data-role="button">Event Example</a>
 
-		<h2 id="nav-method-example">Method Example  <a href="http://api.jquerymobile.com/jQuery.mobile.navigate/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h2>
+		<h2>Method Example </h2>
 
     <p>jQuery Mobile provides the <code>$.mobile.navigate</code> method as a means to track history and receive additional information along with <code>navigate</code> events. In this example, when the method example link is clicked, the url will be changed twice. The first time will it will store additional aribitrary information along with the URL and hash stored by the method. The second time it will simply change the url and store the URL and hash. When the browser moves backward through history the <code>navigate</code> event is triggered as in the event example above <em>but</em> along with it comes information about the direction of history traversal, the url, the hash, and the arbitrary data stored with the first call to the navigate method.</p>
 
@@ -129,8 +130,8 @@ $( "#method-example" ).click(function( event ) {
     <a href="#" id="method-example" data-role="button">Method Example</a>
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 

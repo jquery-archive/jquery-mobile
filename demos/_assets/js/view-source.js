@@ -91,15 +91,10 @@ function makeButton() {
 		a = document.createElement( "a" ),
 		txt = document.createTextNode( "View Source" );
 
-	d.className = "jqm-view-source-link";
+	a.className = "jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini";
 
 	a.setAttribute( "href", "#popupDemo" );
 	a.setAttribute( "data-rel", "popup" );
-	a.setAttribute( "data-role", "button" );
-	a.setAttribute( "data-icon", "carat-u" );
-	a.setAttribute( "data-mini", "true" );
-	a.setAttribute( "data-inline", "true" );
-	a.setAttribute( "data-shadow", "false" );
 	a.appendChild( txt );
 
 	d.appendChild( a );
@@ -162,7 +157,7 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 	SyntaxHighlighter.defaults['auto-links'] = false;
 });
 
-$( document ).on( "pageinit", function( e ) {
+$( document ).on( "pagecreate", function( e ) {
 	// prevent page scroll while scrolling source code
 	$( document ).on( "mousewheel", ".jqm-view-source .ui-collapsible-content", function( event, delta ) {
 		if ( delta > 0 && $( this ).scrollTop() === 0 ) {

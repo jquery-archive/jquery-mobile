@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Table Column toggle demo: Phone comparison - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
@@ -81,12 +81,13 @@
 <div data-role="page" class="jqm-demos">
 
     <div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-	<div data-role="content" class="jqm-content jqm-fullwidth">
+	<div data-role="content" class="jqm-content">
 
         <h1>Popular Phones</h1>
 
@@ -119,10 +120,10 @@
               <tbody>
                 <tr class="photos">
                   <th class="label">Photo</th>
-                  <td><a href="#img-iphone5" data-rel="popup" data-position-to="window"><img src="../../_assets/img/phone_iphone5.png" /></a></td>
-                  <td><a href="#img-galaxy" data-rel="popup" data-position-to="window"><img src="../../_assets/img/phone_galaxy3.png" /></a></td>
-                  <td><a href="#img-lumia" data-rel="popup" data-position-to="window"><img src="../../_assets/img/phone_lumia920.png" /></a></td>
-                  <td><a href="#img-onex" data-rel="popup" data-position-to="window"><img src="../../_assets/img/phone_onex.png" /></a></td>
+                  <td><a href="#img-iphone5" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_iphone5.png" /></a></td>
+                  <td><a href="#img-galaxy" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_galaxy3.png" /></a></td>
+                  <td><a href="#img-lumia" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_lumia920.png" /></a></td>
+                  <td><a href="#img-onex" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_onex.png" /></a></td>
                 </tr>
                 <tr>
                   <th class="label">Height</th>
@@ -158,27 +159,27 @@
 			<!-- Popups for lightbox images -->
 
 			<div id="img-iphone5" data-role="popup" data-overlay-theme="a">
-				<img src="../../_assets/img/phone_iphone5.png">
+				<img src="../_assets/img/phone_iphone5.png">
 			</div>
 
 			<div id="img-galaxy" data-role="popup" data-overlay-theme="a">
-				<img src="../../_assets/img/phone_galaxy3.png">
+				<img src="../_assets/img/phone_galaxy3.png">
 			</div>
 
 			<div id="img-lumia" data-role="popup" data-overlay-theme="a">
-				<img src="../../_assets/img/phone_lumia920.png">
+				<img src="../_assets/img/phone_lumia920.png">
 			</div>
 
 			<div id="img-onex" data-role="popup" data-overlay-theme="a">
-				<img src="../../_assets/img/phone_onex.png">
+				<img src="../_assets/img/phone_onex.png">
 			</div>
 
 		</div><!-- /data-demo -->
 
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 

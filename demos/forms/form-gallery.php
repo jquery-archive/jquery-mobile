@@ -16,14 +16,15 @@
 <div data-role="page" class="jqm-demos">
 
     <div data-role="header" class="jqm-header">
-        <h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+        <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
     
-    <div data-role="content" class="jqm-content">
+	<div data-role="content" class="jqm-content">
     
-        <h1>Form gallery</h1>
+    	<h1>Form gallery</h1>
         
         <form action="#" method="get">
         
@@ -420,13 +421,13 @@
         
         </form>
 
-		<a href="./" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Forms</a>
+		<a href="./" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Forms</a>
 
     
     </div><!-- /content -->
 
-    <div data-role="footer" class="jqm-footer">
-        <p class="jqm-version"></p>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+        <p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
         <p>Copyright 2013 The jQuery Foundation</p>
     </div><!-- /footer -->
 
