@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Panels - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
@@ -28,20 +28,19 @@
 	<!-- Note: all other panels are at the end of the page, scroll down  -->
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-		<div><!-- TODO: Remove div wrapper -->
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-icon-nodisc ui-icon-alt ui-btn-left">Menu</a>
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-icon-nodisc ui-icon-alt ui-btn-right">Search</a>
-		</div><!-- TODO: Remove div wrapper -->
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
-		<h1>Panels <a href="http://api.jquerymobile.com/panel/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+		<h1>Panels</h1>
 
-		<p class="jqm-intro">Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
+		<p>Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
 
-		<h2 id="panel-examples">Panel examples</h2>
+		<h2>Panel examples</h2>
 
 		<p><strong>Left</strong> panel examples</p>
 		<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true">Overlay</a>
@@ -57,7 +56,7 @@
 
 		<p>The <strong>display mode</strong> of the panel is set by the <code>data-display</code> attribute. The value of the attribute defaults to <code>reveal</code>, meaning the panel will sit under the page and reveal as the page slides away. Specify <code>data-display="overlay"</code> for the panel to appear on top of the page contents. A third mode, <code>data-display="push"</code> animates both the panel and page at the same time.</p>
 
-		<h2 id="panel-markup">Where panel markup goes in the markup</h2>
+		<h2>Where panel markup goes in the markup</h2>
 
 		<p>A panel must be a sibling to the header, content and footer elements inside a jQuery Mobile page. You can add the panel markup either <em>before</em> or <em>after</em> these elements, but not in between. A panel cannot be placed outside a page, but this constraint will be removed in a future version.</p>
 
@@ -79,7 +78,7 @@
 
 		<p>Alternatively, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want the page content to read for people experiencing the page on a C-grade device (HTML only) or for a screen reader.</p>
 
-		<h2 id="panel-dynamic">Dynamic content</h2>
+		<h2>Dynamic content</h2>
 
 		<p>When you dynamically add content to a panel or make hidden content visible while the panel is open, you have to trigger the <code>updatelayout</code> event on the panel.</p>
 
@@ -89,13 +88,13 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>The framework will then check the new height of the panel contents. If it exceeds the screen height, it will set the page <code>min-height</code> to this height and unfix panels with <code>data-position-fixed="true"</code>. See also <strong>Panel positioning</strong>.</p>
 
-		<h2 id="panel-open">Opening a panel</h2>
+		<h2>Opening a panel</h2>
 
 		<p>To control a panel from a link, set the <code>href</code> to the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above). This instructs the framework to bind the link to the panel. This link will toggle the visibility of the panel so tapping it will open the panel, and tapping it again will close it.</p>
 
 		<a href="#defaultpanel" data-role="button" data-inline="true" data-icon="bars">Default panel</a>
 
-		<h2 id="panel-close">Closing a panel</h2>
+		<h2>Closing a panel</h2>
 
 		<p>Clicking the link that opened the panel, swiping left or right, or tapping the Esc key will close the panel. To turn off the swipe-to-close behavior, add the <code>data-swipe-close="false"</code> attribute to the panel.</p>
 
@@ -107,19 +106,19 @@ $( "#mypanel" ).trigger( "updatelayout" );
 &lt;a href=&quot;#my-header&quot; <strong>data-rel=&quot;close&quot;</strong>&gt;Close panel&lt;/a&gt;
 </code></pre>
 
-		<h2 id="panel-animate">Panel animations</h2>
+		<h2>Panel animations</h2>
 
 		<p>Panels will animate if the browser supports 3D transforms &mdash; the same criteria for CSS animation support we use for page transitions. Panel animations use <code>translate3d(x,y,z)</code> CSS transforms to ensure they are hardware accelerated and smooth.</p>
 
 		<p>The <code>animate</code> option allows you to turn off panel animations for all devices. To turn off animations via markup, add the <code>data-animate="false"</code> attribute to the panel container.</p>
 
-		<h2 id="panel-positioning">Panel positioning</h2>
+		<h2>Panel positioning</h2>
 
 		<p>The panel will be displayed with the <code>position:absolute</code> CSS property, meaning it will scroll with the page. When a panel is opened the framework checks to see if the bottom of the panel contents is in view. If not, it scrolls to the top of the page.</p>
 
         <p>You can set a panel to <code>position:fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and make it inaccessible. <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without fixed positioning. See an example of <a href="panel-fixed.php" data-ajax="false">panels with fixed positioning</a>.</p>
 
-		<h2 id="panel-styling">Styling panels</h2>
+		<h2>Styling panels</h2>
 
 		<p>By default, panels have very simple styles to let you customize them as needed. Panels are essentially just simple blocks with no margins that sit on either side of the page content. The framework wraps the panel content in a <code>div</code> with class <code>ui-panel-inner</code> which has a padding of 15 pixels. If needed you can override this with custom CSS or use option <code>classes.panelInner</code> to set a different class name for the <code>div</code>.</p>
 
@@ -129,7 +128,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>Note that adding padding, borders, or margins directly to the panel container will alter the overall dimensions and could cause the positioning and animation to be affected. To avoid this, apply styles to the panel content wrapper (<code>.ui-panel-inner</code>).</p>
 
-		<h2 id="panel-responsive">Making the panel responsive</h2>
+		<h2>Making the panel responsive</h2>
 
 		<p>When the push or reveal display is used, a panel pushes the page aside when it opens. Since some of the page is pushed offscreen, the panel is modal and must be closed to interact with the page content again. On larger screens, you may want to have the panel work more like a collapsible column that can be opened and used alongside the page to make better use of the screen real estate. </p>
 		<p>To make the page work alongside the open panel, it needs to re-flow to a narrower width so it will fit next to the panel. This can be done purely with CSS by adding a left or right margin equal to the panel width (17em) to the page contents to force a re-flow. Second, the invisible layer placed over the page for the click-out-to-dismiss behavior is hidden with CSS so you can click on the page and not close the menu. </p>
@@ -170,13 +169,13 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the page or, in case you use external panels and/or fixed toolbars, to the page container (<code>body</code>). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
 
-		<h2 id="external-panels">Panels outside pages</h2>
+		<h2>Panels outside pages</h2>
 
 		<p>As of 1.4 it is now possible to use panels outside of a page <a href="external.php">External Panels</a></p>
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 

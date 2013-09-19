@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Transitions - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
@@ -16,17 +16,17 @@
 
 	<div data-role="page" id="page-success" data-dom-cache="true"><!-- page-->
 		<div data-role="header" data-theme="a">
-			<h1>Page</h1>
+		<h1>Page</h1>
 		</div><!-- /header -->
 
 		<div data-role="content" data-theme="a">
-			<p>That was an animated page transition effect to a page that we added with a <code>data-transition</code> attribute on the link. This uses a different background theme swatch to see how that looks with the transitions.</p>
-			<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
+		<p>That was an animated page transition effect to a page that we added with a <code>data-transition</code> attribute on the link. This uses a different background theme swatch to see how that looks with the transitions.</p>
+		<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
 
 			<form action="#" method="get">
-				<h2>Here's a few form elements</h2>
+			<h2>Here's a few form elements</h2>
 
-				<p>These are here to see if this slows down rendering.</p>
+			<p>These are here to see if this slows down rendering.</p>
 
 				<div data-role="fieldcontain">
 		         <label for="name">Text Input:</label>

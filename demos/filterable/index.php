@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Filter - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
@@ -16,24 +16,23 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-		<div><!-- TODO: Remove div wrapper -->
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-icon-nodisc ui-icon-alt ui-btn-left">Menu</a>
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-icon-nodisc ui-icon-alt ui-btn-right">Search</a>
-		</div><!-- TODO: Remove div wrapper -->
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
-			<h1>Filterable <a href="http://api.jquerymobile.com/filterable/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+		<h1>Filterable</h1>
 
-			<p class="jqm-intro">
+		<p>
 			The children of any element can be filtered by setting the attribute <code>data-filter="true"</code> on the element. By default, the text contained in each child is used for filtering, however, you also have the option of setting the attribute <code>data-filtertext</code> to a string value on any child that will be considered for filtering to associate custom filter text instead.</p>
 
-			<h2 id="filter-ul">Basic filter</h2>
-			<p>The filter widget is based on and replaces the listview filter extension. Thus, you can set <code>data-filter="true"</code> on a listview to generate a filter for its list items.</p>
-			<p>Nevertheless, the way in which a filterable is constructed differs from the way the listview filter extension worked in one important regard: the text field for entering the search string is not provided. Instead, you can provide the text field in your markup and have the filterable make use of it by providing a selector that will retrieve the text field as the value of the filterable's <code>data-input</code> attribute. Add class <code>ui-filterable</code> to the <code>form</code> in which you wrap the search input or to the listview to have the framework adjust the margin between the text field and listview.</p>
-			<p>The deprecated behavior whereby the filterable injects a text field before the element whose children are to be filtered is retained for version 1.4.0 to help with the transition from the listview filter extension, however, it will be removed in 1.5.0.</p>
+		<h2>Basic filter</h2>
+		<p>The filter widget is based on and replaces the listview filter extension. Thus, you can set <code>data-filter="true"</code> on a listview to generate a filter for its list items.</p>
+		<p>Nevertheless, the way in which a filterable is constructed differs from the way the listview filter extension worked in one important regard: the text field for entering the search string is not provided. Instead, you can provide the text field in your markup and have the filterable make use of it by providing a selector that will retrieve the text field as the value of the filterable's <code>data-input</code> attribute. Add class <code>ui-filterable</code> to the <code>form</code> in which you wrap the search input or to the listview to have the framework adjust the margin between the text field and listview.</p>
+		<p>The deprecated behavior whereby the filterable injects a text field before the element whose children are to be filtered is retained for version 1.4.0 to help with the transition from the listview filter extension, however, it will be removed in 1.5.0.</p>
 
 			<div data-demo-html="true">
 				<form class="ui-filterable">
@@ -48,8 +47,8 @@
 				</ul>
 			</div><!--/demo-html -->
 
-			<h2 id="filter-table">Table filter</h2>
-			<p>
+		<h2>Table filter</h2>
+		<p>
 			You are not limited to using filters on listviews. To create a filter for a table widget, set
 			<code>data-filter="true"</code> on the table element to generate a filter for table rows.
 			</p>
@@ -94,8 +93,8 @@
 					</table>
 			</div><!--/demo-html -->
 
-			<h2 id="filter-controlgroup">Controlgroup Filter</h2>
-			<p>The filter widget can be used on other widgets, too. To filter a list of controlgroup buttons, declare <code>data-filter="true"</code> on the element that creates the controlgroup (Note that you can also use the <code>data-filtertext</code> attribute to declare the text string used for filtering the respective element.
+		<h2>Controlgroup Filter</h2>
+		<p>The filter widget can be used on other widgets, too. To filter a list of controlgroup buttons, declare <code>data-filter="true"</code> on the element that creates the controlgroup (Note that you can also use the <code>data-filtertext</code> attribute to declare the text string used for filtering the respective element.
 			</p>
 
 			<div data-demo-html="true">
@@ -111,8 +110,8 @@
 				</div>
 			</div>
 
-			<h2 id="filter-select">Filter Select</h2>
-			<p>The widget also works on <code>select</code> widgets by hiding options that do not match the filter text. To use a filter for <code>options</code>, declare the <code>data-filter</code> attribute on the select element.</p>
+		<h2>Filter Select</h2>
+		<p>The widget also works on <code>select</code> widgets by hiding options that do not match the filter text. To use a filter for <code>options</code>, declare the <code>data-filter</code> attribute on the select element.</p>
 
 			<div data-demo-html="true">
 				<form>
@@ -132,26 +131,26 @@
 				</select>
 			</div>
 
-			<h2 id="filter-random">Filter Anything</h2>
-			<p>The widget can be used for filtering on any element containing other elements, like a <code>div</code> containing <code>p</code> elements.
+		<h2>Filter Anything</h2>
+		<p>The widget can be used for filtering on any element containing other elements, like a <code>div</code> containing <code>p</code> elements.
 			</p>
 			<div data-demo-html="true">
 				<form>
 					<input data-type="search" id="divOfPs-input"></input>
 				</form>
 				<div class="elements" data-filter="true" data-input="#divOfPs-input">
-					<p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
-					<p><strong>tags</strong> nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-					<p><strong>Tags</strong> erat, sed diam voluptua. At vero eos et accusam et justo duo dolores </p>
-					<p><strong>are</strong> et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est</p>
-					<p><strong>Filterable</strong> Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur</p>
+				<p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
+				<p><strong>tags</strong> nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+				<p><strong>Tags</strong> erat, sed diam voluptua. At vero eos et accusam et justo duo dolores </p>
+				<p><strong>are</strong> et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est</p>
+				<p><strong>Filterable</strong> Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur</p>
 				</div>
 			</div>
 
-			<h2 id="filter-styling">Filter Styling</h2>
-			<p>
+		<h2>Filter Styling</h2>
+		<p>
 			The filter widget supports the same attributes as the previous listview extension. Use <code>data-filter-theme</code> to declare a specific theme for the text field (overriding inheritance). <code>data-filter-placeholder</code> allows you to customize the input's placeholder text. In addition, the filterable widget will synchronize options shared between the textinput widget and the widget whose children it filters to make sure that the value of the textinput widget options is the same as the value of the widget options. So, for example, if you set <code>data-inset="true"</code> on the listview, then the corresponding textinput widget will also be inset.</p>
-			<p><strong>NOTE:</strong> This behavior is deprecated and will be removed in 1.5.0. The correct way forward is to provide the text field (or any other widget that emits the "change" signal) as part of the original markup and to pass a selector that will retrieve it to the filterable widget via the <code>data-input</code> attribute.
+		<p><strong>NOTE:</strong> This behavior is deprecated and will be removed in 1.5.0. The correct way forward is to provide the text field (or any other widget that emits the "change" signal) as part of the original markup and to pass a selector that will retrieve it to the filterable widget via the <code>data-input</code> attribute.
 			</p>
 
 			<div data-demo-html="true">
@@ -168,8 +167,8 @@
 				</ul>
 			</div><!--/demo-html -->
 
-			<h2 id="filter-reveal">Filter Reveal</h2>
-			<p>
+		<h2>Filter Reveal</h2>
+		<p>
 			The filter reveal feature makes it easy to build a simple autocomplete 
 			with local data. When a filter has the <code>data-filter-reveal="true"
 			</code> attribute, it will auto-hide all the list items when the search 
@@ -195,11 +194,11 @@
 				</ul>
 			</div><!--/demo-html -->
 
-			<h2 id="filter-callback">Filter Custom Callback</h2>
-			<p>As with the listview extension, you can provide custom callback functions to the filter or override the filter altogether on the <code>filterablebeforefilter</code> event. Please note that the filter has a <strong>delay of 250ms</strong> before the filter actually triggers. This prevents running the filtering function multiple times while the user is typing.
+		<h2>Filter Custom Callback</h2>
+		<p>As with the listview extension, you can provide custom callback functions to the filter or override the filter altogether on the <code>filterablebeforefilter</code> event. Please note that the filter has a <strong>delay of 250ms</strong> before the filter actually triggers. This prevents running the filtering function multiple times while the user is typing.
 			</p>
 
-			<p>To set a custom filtering function that will become the new default for all filterable widgets, override the <code>filterCallback</code> option in the filterable widget prototype in a "mobileinit" signal handler:</p>
+		<p>To set a custom filtering function that will become the new default for all filterable widgets, override the <code>filterCallback</code> option in the filterable widget prototype in a "mobileinit" signal handler:</p>
 
 <pre><code>$.mobile.document.one( "mobileinit", function() {
 	$.mobile.filterable.prototype.filterCallback = function( index, searchValue ) {
@@ -213,7 +212,7 @@
 	});
 });</code></pre>
 
-			<p>
+		<p>
 			To set a custom filtering function for a single filterable widget, set the <code>filterCallback</code> option:
 			</p>
 
@@ -225,7 +224,7 @@
 	});
 });</code></pre>
 
-			<p>
+		<p>
 			To override the filter altogether (for example when loading data server-side
 			or from localStorage), bind to the <code>filterablebeforefilter</code> event.
 			</p>
@@ -272,8 +271,8 @@
 
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 

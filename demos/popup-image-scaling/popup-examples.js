@@ -1,5 +1,5 @@
 // popup examples
-$( document ).on( "pageinit", function() {
+$( document ).on( "pagecreate", function() {
 
 	$( ".photopopup" ).on({
 		popupbeforeposition: function() {

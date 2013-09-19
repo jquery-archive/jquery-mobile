@@ -5,10 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery Mobile - Backbone.js and Require.js Apps</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
@@ -18,15 +18,16 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
     <div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
       <h1>jQuery Mobile, Backbone.js and Require.js</h1>
-      <p class="jqm-intro">jQuery Mobile provides an <strong>HTML5-based user interface for all popular mobile device platforms</strong>, but it does not influence how you organize and structure your app's JavaScript.  Many jQuery Mobile users turn to a variety of other popular third-party libraries, including MV* frameworks and dependency management tools, to help structure their code.
+      <p>jQuery Mobile provides an <strong>HTML5-based user interface for all popular mobile device platforms</strong>, but it does not influence how you organize and structure your app's JavaScript.  Many jQuery Mobile users turn to a variety of other popular third-party libraries, including MV* frameworks and dependency management tools, to help structure their code.
       </p>
 
 	  <h2>Backbone and Require.js</h2>
@@ -78,11 +79,11 @@
       // Sets the require.js configuration for your application.
       require.config( {
 
-        // 3rd party script alias names (Easier to type "jquery" than "libs/jquery-1.8.3.min")
+        // 3rd party script alias names
         paths: {
 
             // Core Libraries
-            "jquery": "libs/jquery",
+            "jquery": "../../../js/jquery",
             "jquerymobile": "libs/jquerymobile",
             "underscore": "libs/lodash",
             "backbone": "libs/backbone"
@@ -139,14 +140,13 @@
         }
 </code>
 </pre>
-<p>
-The <a href="backbone-require.html" rel="external">example page</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously.  Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.
-</p>
+
+		<p>The <a href="backbone-require.html" rel="external">example page</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously. Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.</p>
 
 	</div><!-- /content -->
 
-    <div data-role="footer" class="jqm-footer">
-        <p class="jqm-version"></p>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+        <p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
         <p>Copyright 2013 The jQuery Foundation</p>
     </div><!-- /footer -->
 

@@ -1,11 +1,11 @@
 // Sets the require.js configuration for your application.
 require.config( {
 
-      // 3rd party script alias names (Easier to type "jquery" than "libs/jquery-1.8.2.min")
+      // 3rd party script alias names
       paths: {
 
             // Core Libraries
-            "jquery": "libs/jquery",
+            "jquery": "../../../js/jquery",
             "jquerymobile": "libs/jquerymobile",
             "underscore": "libs/lodash",
             "backbone": "libs/backbone"

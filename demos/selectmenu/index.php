@@ -16,16 +16,17 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
     <div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a>
-        <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Search</a>
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
 
-        <h1>Select menu <a href="http://api.jquerymobile.com/select/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+        <h1>Select menu</h1>
 
-        <p class="jqm-intro">The select menu is based on a native select element, which is hidden from view and replaced with a custom-styled select button. Tapping it opens the native menu. There is also a <a href="custom-selects.php">custom select menu</a> widget, which also replaces the native dropdown.
+        <p>The select menu is based on a native select element, which is hidden from view and replaced with a custom-styled select button. Tapping it opens the native menu. There is also a <a href="custom-selects.php">custom select menu</a> widget, which also replaces the native dropdown.
         </p>
 
         <h2>Basic select</h2>
@@ -245,8 +246,8 @@
 
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 

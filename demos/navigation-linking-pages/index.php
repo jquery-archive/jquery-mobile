@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Links - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
@@ -16,18 +16,17 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-		<div><!-- TODO: Remove div wrapper -->
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-icon-nodisc ui-icon-alt ui-btn-left">Menu</a>
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-icon-nodisc ui-icon-alt ui-btn-right">Search</a>
-		</div><!-- TODO: Remove div wrapper -->
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
-        <h1>Links <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+        <h1>Links</h1>
 
-        <p class="jqm-intro">jQuery Mobile is designed to work with standard page link conventions and layers the AJAX navigation on top for maximum compatibility.
+        <p>jQuery Mobile is designed to work with standard page link conventions and layers the AJAX navigation on top for maximum compatibility.
         </p>
 
         <h2>Linking pages</h2>
@@ -48,7 +47,7 @@
 
         <div data-demo-html="true">
             <p>Example:</p>
-            <a href="../../../">To the homepage, with AJAX</a>
+            <a href="../">To the homepage, with AJAX</a>
         </div><!--/demo-html -->
 
         <h2>Linking without AJAX</h2>
@@ -57,7 +56,7 @@
 
 		<div data-demo-html="true">
             <p>Examples:</p>
-            <p><a href="../../../" data-ajax="false">To the homepage, no AJAX</a></p>
+            <p><a href="../" data-ajax="false">To the homepage, no AJAX</a></p>
             <p><a href="http://www.google.com" rel="external">Google</a></p>
 		</div><!--/demo-html -->
 
@@ -76,9 +75,9 @@
 
 		<h2>Linking within a multi-page document</h2>
 
-			<p>A single HTML document can contain one or many "page" containers simply by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first "page" it finds in the source order when the page loads.</p>
+		<p>A single HTML document can contain one or many "page" containers simply by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first "page" it finds in the source order when the page loads.</p>
 
-			<p>If a link in a <a href="../pages/">multi-page document</a> points to an anchor (<code>#foo</code>), the framework will look for a page wrapper with that id (<code>id="foo"</code>). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the AJAX spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking.</p>
+		<p>If a link in a <a href="../pages/">multi-page document</a> points to an anchor (<code>#foo</code>), the framework will look for a page wrapper with that id (<code>id="foo"</code>). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the AJAX spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking.</p>
 
 		<p>It's important to note that if you are linking from a mobile page that was loaded via AJAX to a page that contains multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the AJAX hash in the URL. This is critical because AJAX pages use the hash (<code>#</code>) to track the AJAX history, while multiple internal pages use the hash to indicate internal pages so there will be conflicts in the hash between these two modes.</p>
 
@@ -98,9 +97,9 @@
 
 		<p>However, you can work around this issue by returning your page div with a <code>data-url</code> attribute already specified. When you do this, jQuery Mobile will use that attribute's value for updating the URL, instead of the url used to request that page. This also allows you to return urls that change as the result of a redirect, for example, you might post a form to "/login.html" but return a page from the url "/account" after a successful submission. This tool allows you to take control of the jQuery Mobile history stack in these situations. </p>
 
-			<h2>Link notes</h2>
+		<h2>Link notes</h2>
 
-			<p>The non-standard environment created by jQuery Mobile's page navigation model introduces some conditions of which you should be aware when building pages:</p>
+		<p>The non-standard environment created by jQuery Mobile's page navigation model introduces some conditions of which you should be aware when building pages:</p>
 
 			<ul class="jqm-list">
 			<li><p>When linking to directories, without a filename URL, (such as <code>href="typesofcats/"</code> instead of <code>href="typesofcats/index.html"</code>), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a URL is a filename, and it will remove that section when creating base URLs from which future pages will be referenced.</p></li>
@@ -115,9 +114,9 @@
 
 		</div><!-- /content -->
 
-		<div data-role="footer" class="jqm-footer">
-			<p class="jqm-version"></p>
-			<p>Copyright 2013 The jQuery Foundation</p>
+		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
 		</div><!-- /footer -->
 
 	<?php include( '../jqm-panels.php' ); ?>

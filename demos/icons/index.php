@@ -4,10 +4,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Icons - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
@@ -16,18 +16,17 @@
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h1>
-		<div><!-- TODO: Remove div wrapper -->
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-icon-nodisc ui-icon-alt ui-btn-left">Menu</a>
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-icon-nodisc ui-icon-alt ui-btn-right">Search</a>
-		</div><!-- TODO: Remove div wrapper -->
+		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+		<p>Demos <span class="jqm-version"></span></p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
         <h1>Icons</h1>
 
-        <p class="jqm-intro">A set of built-in icons in jQuery Mobile can be applied to buttons, collapsibles, lists and more.
+        <p>A set of built-in icons in jQuery Mobile can be applied to buttons, collapsibles, lists and more.
         </p>
 
         <h2>Icon set</h2>
@@ -98,18 +97,18 @@
 
         <h2>Removing the disc and shadow</h2>
 
-        <p>There is dark semi-opaque disc behind each icon to ensure good contrast when placed on any background color. If you prefer to not have this disc, it can be removed by adding the class <code>ui-icon-nodisc</code> to the element or its container. Set <code>data-iconshadow="false"</code> to disable the icon shadow.<p>
+        <p>There is dark semi-opaque disc behind each icon to ensure good contrast when placed on any background color. If you prefer to not have this disc, it can be removed by adding the class <code>ui-nodisc-icon</code> to the element or its container. Set <code>data-iconshadow="false"</code> to disable the icon shadow.<p>
 
         <div data-demo-html="true" data-demo-css="#icon-bg-demo">
-            <a href="index.html" class="ui-icon-nodisc" data-role="button" data-iconshadow="false" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">No disc or shadow</a>
-			<a href="index.html" class="ui-icon-nodisc" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">No disc</a>
+            <a href="index.html" class="ui-nodisc-icon" data-role="button" data-iconshadow="false" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">No disc or shadow</a>
+			<a href="index.html" class="ui-nodisc-icon" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">No disc</a>
 			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Standard</a>
 
         </div><!--/demo-html -->
 
 		<p>Example of the class being applied to a wrapper.</p>
 		<div data-demo-html="true">
-		<div class="ui-icon-nodisc"><!-- Class added to the wrapper -->
+		<div class="ui-nodisc-icon"><!-- Class added to the wrapper -->
 			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b" data-iconshadow="false" data-inline="true">Bars</a>
 			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Edit</a>
 			<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Arrow left</a>
@@ -134,17 +133,17 @@
 
         <h2>Black vs. white icon sets</h2>
 
-        <p>The white vs. black icon sprite is set at the theme level but you can override which is used by adding the <code>ui-icon-alt</code> class to the element or its container. This also changes the color that is used for the discs.<p>
+        <p>The white vs. black icon sprite is set at the theme level but you can override which is used by adding the <code>ui-alt-icon</code> class to the element or its container. This also changes the color that is used for the discs.<p>
 
         <div data-demo-html="true">
-            <a href="index.html" class="ui-icon-alt" data-role="button" data-icon="home" data-iconpos="notext" data-inline="true">Home - Black icons, no disc</a>
+            <a href="index.html" class="ui-alt-icon" data-role="button" data-icon="home" data-iconpos="notext" data-inline="true">Home - Black icons, no disc</a>
             <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-inline="true">Home - Standard</a>
         </div><!--/demo-html -->
 
 		<p>Example of the class being applied to a wrapper.</p>
 
-		<div data-demo-html="true" class="ui-icon-alt">
-		<div class="ui-icon-alt"><!-- Class added to the wrapper -->
+		<div data-demo-html="true" class="ui-alt-icon">
+		<div class="ui-alt-icon"><!-- Class added to the wrapper -->
 			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-inline="true">Bars</a>
 			<a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-inline="true">Edit</a>
 			<a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-inline="true">Arrow left</a>
@@ -169,7 +168,7 @@
 
 		<p>Example of the class applied to the <code>UL</code> or <code>OL</code> to change to the black icons for each list item.</p>
 		<div data-demo-html="true">
-			<ul data-role="listview" data-inset="true" class="ui-icon-alt">
+			<ul data-role="listview" data-inset="true" class="ui-alt-icon">
 				<li><a href="#">Acura</a></li>
 				<li><a href="#">Audi</a></li>
 				<li><a href="#">BMW</a></li>
@@ -181,7 +180,7 @@
 		<p>Example of the class being applied to a collapsible.</p>
 
 		<div data-demo-html="true">
-            <div data-role="collapsible" class="ui-icon-alt" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+            <div data-role="collapsible" class="ui-alt-icon" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
                 <h4>Heading</h4>
                 <p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
             </div>
@@ -269,8 +268,8 @@
 
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 

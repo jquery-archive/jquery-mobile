@@ -13,26 +13,24 @@
 	<script src="../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos">
+<div data-role="page" class="jqm-demos jqm-home">
 
 	<div data-role="header" class="jqm-header">
-		<h1 class="jqm-logo"><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile"></h1>
-		
-		<div><!-- TODO: Remove div wrapper -->
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-icon-nodisc ui-icon-alt ui-btn-left">Menu</a>
-			<!-- TODO: Remove data-role="none" --><a href="#" data-role="none" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-icon-nodisc ui-icon-alt ui-btn-right">Search</a>
-		</div><!-- TODO: Remove div wrapper -->
+		<h2><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile"></h2>
+		<p>Version <span class="jqm-version"></span></p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
-
-		<h1>Demos <span class="jqm-version-number"></span></h1>
+	
+		<h1>Demos</h1>
 		
 		<p>jQuery Mobile is a touch-optimized HTML5 UI framework designed to make responsive web sites and apps that are accessible on all smartphone, tablet and desktop devices.</p>
-
-        <p>For more info about the project, visit the <a href="http://jquerymobile.com" title="jQuery Mobile web site" target="_blank">web site</a>.</p>
-
-        <p>For technical info, visit the <a href="http://api.jquerymobile.com" title="jQuery Mobile API documentation" target="_blank">API documentation</a>.</p>
+		
+        <p>For technical info, visit the <a href="http://api.jquerymobile.com" title="jQuery Mobile API documentation" target="_blank">API documentation</a>. Downloads and info about the project can be found on <a href="http://jquerymobile.com" title="jQuery Mobile web site" target="_blank">jquerymobile.com</a>.</p>
+		
+		<h2>Contents</h2>
 		
         <ul data-role="listview" data-inset="true" data-icon="false" data-global-nav="demos" class="jqm-list">
 			<?php include( 'jqm-contents.php' ); ?>
@@ -40,8 +38,8 @@
 		
 	</div><!-- /content -->
 
-	<div data-role="footer" class="jqm-footer">
-		<p class="jqm-version"></p>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 	

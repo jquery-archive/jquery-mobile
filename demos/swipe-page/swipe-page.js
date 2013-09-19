@@ -1,4 +1,4 @@
-$( document ).on( "pageinit", "[data-role='page'].demo-page", function() {
+$( document ).on( "pagecreate", "[data-role='page'].demo-page", function() {
 	var page = "#" + $( this ).attr( "id" ),
 
 		// Get the filename of the next page. We stored that in the data-next
