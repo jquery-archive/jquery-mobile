@@ -57,7 +57,6 @@ $( function() {
 </div><!-- /page -->
 <div id="other-page" data-role="page">
 	<div data-role="header">
-		<!-- Links that open the global popup are all marked with a class -->
 		<a href="#popup-outside-page" data-rel="popup">Menu</a>
 		<h1>Another Page</h1>
 	</div>
@@ -67,7 +66,6 @@ $( function() {
 </div>
 <div id="third-page" data-role="page">
 	<div data-role="header">
-		<!-- Links that open the global popup are all marked with a class -->
 		<a href="#popup-outside-page" data-rel="popup">Menu</a>
 		<h1>Third Page</h1>
 	</div>
