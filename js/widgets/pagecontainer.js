@@ -1213,7 +1213,7 @@ define( [
 			}
 		}),
 
-		$head = $( "head" ),
+		head = $( "head" ),
 
 		// urlHistory is purely here to make guesses at whether the back or forward
 		// button was clicked and provide an appropriate transition
@@ -1229,7 +1229,7 @@ define( [
 		dialogHashKey = "&ui-state=dialog",
 
 		// existing base tag?
-		$base = $head.children( "base" ),
+		base = head.children( "base" ),
 
 		// tuck away the original document URL minus any fragment.
 		documentUrl = path.documentUrl,
@@ -1244,8 +1244,8 @@ define( [
 		base = {
 			// define base element, for use in routing asset urls that are referenced
 			// in Ajax-requested markup
-			element: ( $base.length ? $base :
-				$( "<base>", { href: documentBase.hrefNoHash } ).prependTo( $head ) ),
+			element: ( base.length ? base :
+				$( "<base>", { href: documentBase.hrefNoHash } ).prependTo( head ) ),
 
 			linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
 
