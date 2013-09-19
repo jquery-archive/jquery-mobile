@@ -1229,7 +1229,7 @@ define( [
 		dialogHashKey = "&ui-state=dialog",
 
 		// existing base tag?
-		base = head.children( "base" ),
+		baseElement = head.children( "base" ),
 
 		// tuck away the original document URL minus any fragment.
 		documentUrl = path.documentUrl,
@@ -1244,7 +1244,7 @@ define( [
 		base = {
 			// define base element, for use in routing asset urls that are referenced
 			// in Ajax-requested markup
-			element: ( base.length ? base :
+			element: ( baseElement.length ? baseElement :
 				$( "<base>", { href: documentBase.hrefNoHash } ).prependTo( head ) ),
 
 			linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
