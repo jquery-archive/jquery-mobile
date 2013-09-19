@@ -76,10 +76,6 @@
 				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
 			</div><!--/demo-html -->
 
-		<div data-demo-html="true">
-
-      	</div><!-- /data-demo -->
-
 		</div><!-- /content -->
 
 		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">

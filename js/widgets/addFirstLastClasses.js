@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Behavior mixing to mark first and last visible item with special classes.
+//>>description: Behavior mixin to mark first and last visible item with special classes.
 //>>label: First & Last Classes
 //>>group: Widgets
 

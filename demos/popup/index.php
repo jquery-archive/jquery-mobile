@@ -12,22 +12,23 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 </head>
-<style id="popup-arrow-css">
-.clickable-area {
-	display: block;
-	width: 100%;
-	height: 300px;
-	background-color: #ffefef;
-}
-</style>
-<script id="popup-arrow-script">
-$.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
-	$( "#popupArrow" ).popup( "open", { x: evt.pageX, y: evt.pageY } );
-	evt.preventDefault();
-});
-</script>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<style id="popup-arrow-css">
+	.clickable-area {
+		display: block;
+		width: 100%;
+		height: 300px;
+		background-color: #ffefef;
+	}
+	</style>
+	<script id="popup-arrow-script">
+	$.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
+		$( "#popupArrow" ).popup( "open", { x: evt.pageX, y: evt.pageY } );
+		evt.preventDefault();
+	});
+	</script>
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
@@ -67,6 +68,7 @@ $.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
 
 		<h2>Photo lightbox</h2>
 		<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="b"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="popup-images.php" data-ajax="false">scaling images in popups</a>.</p>
+
 			<div data-demo-html="true">
 				<a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../_assets/img/paris.jpg" alt="Paris, France" style="width:30%"></a>
 				<a href="#popupSydney" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../_assets/img/sydney.jpg" alt="Sydney, Australia" style="width:30%"></a>
@@ -330,8 +332,13 @@ $.mobile.document.on( "click", "#open-popupArrow", function( evt ) {
 		</div>
 		<div id="pre-rendered-screen" class="ui-popup-screen ui-screen-hidden"></div>
 		<div id="pre-rendered-popup" class="ui-popup-container fade ui-popup-hidden ui-body-inherit ui-overlay-shadow ui-corner-all">
+<<<<<<< HEAD:demos/popup/index.php
 			<div id="pre-rendered" class="ui-popup" data-role="popup" data-transition="fade">
 			<p>This is the contents of the pre-rendered popup</p>
+=======
+			<div id="pre-rendered" class="ui-popup" data-role="popup" data-enhanced="true" data-transition="fade">
+				<p>This is the contents of the pre-rendered popup</p>
+>>>>>>> master:demos/widgets/popup/index.php
 			</div>
 		</div>
 	</div>

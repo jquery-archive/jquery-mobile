@@ -7,36 +7,6 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {
-	// DEPRECATED
-	// NOTE global mobile object settings
-	$.extend( $.mobile, {
-		// DEPRECATED Should the text be visble in the loading message?
-		loadingMessageTextVisible: undefined,
-
-		// DEPRECATED When the text is visible, what theme does the loading box use?
-		loadingMessageTheme: undefined,
-
-		// DEPRECATED default message setting
-		loadingMessage: undefined,
-
-		// DEPRECATED
-		// Turn on/off page loading message. Theme doubles as an object argument
-		// with the following shape: { theme: '', text: '', html: '', textVisible: '' }
-		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
-		showPageLoadingMsg: function( theme, msgText, textonly ) {
-			$.mobile.loading( "show", theme, msgText, textonly );
-		},
-
-		// DEPRECATED
-		hidePageLoadingMsg: function() {
-			$.mobile.loading( "hide" );
-		},
-
-		loading: function() {
-			this.loaderWidget.loader.apply( this.loaderWidget, arguments );
-		}
-	});
-
 	// TODO move loader class down into the widget settings
 	var loaderClass = "ui-loader", $html = $( "html" ), $window = $.mobile.window;
 
@@ -104,69 +74,60 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 
 			// use the prototype options so that people can set them globally at
 			// mobile init. Consistency, it's what's for dinner
-			if ( $.type(theme) === "object" ) {
+			if ( $.type( theme ) === "object" ) {
 				loadSettings = $.extend( {}, this.options, theme );
 
-				// prefer object property from the param then the old theme setting
-				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
+				theme = loadSettings.theme;
 			} else {
 				loadSettings = this.options;
 
-				// here we prefer the them value passed as a string argument, then
+				// here we prefer the theme value passed as a string argument, then
 				// we prefer the global option because we can't use undefined default
 				// prototype options, then the prototype option
-				theme = theme || $.mobile.loadingMessageTheme || loadSettings.theme;
+				theme = theme || loadSettings.theme;
 			}
 
 			// set the message text, prefer the param, then the settings object
 			// then loading message
-			message = msgText || $.mobile.loadingMessage || loadSettings.text;
+			message = msgText || ( loadSettings.text === false ? "" : loadSettings.text );
 
 			// prepare the dom
 			$html.addClass( "ui-loading" );
 
-			if ( $.mobile.loadingMessage !== false || loadSettings.html ) {
-				// boolean values require a bit more work :P, supports object properties
-				// and old settings
-				if ( $.mobile.loadingMessageTextVisible !== undefined ) {
-					textVisible = $.mobile.loadingMessageTextVisible;
-				} else {
-					textVisible = loadSettings.textVisible;
-				}
+			textVisible = loadSettings.textVisible;
 
-				// add the proper css given the options (theme, text, etc)
-				// Force text visibility if the second argument was supplied, or
-				// if the text was explicitly set in the object args
-				this.element.attr("class", loaderClass +
-					" ui-corner-all ui-body-" + theme +
-					" ui-loader-" + ( textVisible || msgText || theme.text ? "verbose" : "default" ) +
-					( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
+			// add the proper css given the options (theme, text, etc)
+			// Force text visibility if the second argument was supplied, or
+			// if the text was explicitly set in the object args
+			this.element.attr("class", loaderClass +
+				" ui-corner-all ui-body-" + theme +
+				" ui-loader-" + ( textVisible || msgText || theme.text ? "verbose" : "default" ) +
+				( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
 
-				// TODO verify that jquery.fn.html is ok to use in both cases here
-				//      this might be overly defensive in preventing unknowing xss
-				// if the html attribute is defined on the loading settings, use that
-				// otherwise use the fallbacks from above
-				if ( loadSettings.html ) {
-					this.element.html( loadSettings.html );
-				} else {
-					this.element.find( "h1" ).text( message );
-				}
-
-				// attach the loader to the DOM
-				this.element.appendTo( $.mobile.pageContainer );
-
-				// check that the loader is visible
-				this.checkLoaderPosition();
-
-				// on scroll check the loader position
-				$window.bind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
+			// TODO verify that jquery.fn.html is ok to use in both cases here
+			//      this might be overly defensive in preventing unknowing xss
+			// if the html attribute is defined on the loading settings, use that
+			// otherwise use the fallbacks from above
+			if ( loadSettings.html ) {
+				this.element.html( loadSettings.html );
+			} else {
+				this.element.find( "h1" ).text( message );
 			}
+
+			// attach the loader to the DOM
+			this.element.appendTo( $.mobile.pageContainer );
+
+			// check that the loader is visible
+			this.checkLoaderPosition();
+
+			// on scroll check the loader position
+			$window.bind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
 		},
 
 		hide: function() {
 			$html.removeClass( "ui-loading" );
 
-			if ( $.mobile.loadingMessage ) {
+			if ( this.options.text ) {
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
@@ -175,9 +136,6 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		}
 	});
 
-	$window.bind( "pagecontainercreate", function() {
-		$.mobile.loaderWidget = $.mobile.loaderWidget || $( $.mobile.loader.prototype.defaultHtml ).loader();
-	});
 })(jQuery, this);
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

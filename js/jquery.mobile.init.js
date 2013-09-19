@@ -82,7 +82,7 @@ define([
 			$.mobile.pageContainer = $.mobile.firstPage
 				.parent()
 				.addClass( "ui-mobile-viewport" )
-				.content();
+				.pagecontainer();
 
 			// initialize navigation events now, after mobileinit has occurred and the page container
 			// has been created but before the rest of the library is alerted to that fact
@@ -93,7 +93,7 @@ define([
 			$window.trigger( "pagecontainercreate" );
 
 			// cue page loading message
-			$.mobile.showPageLoadingMsg();
+			$.mobile.loading( "show" );
 
 			//remove initial build class (only present on first pageshow)
 			hideRenderingClass();
@@ -174,7 +174,9 @@ define([
 			// by adding the 'ui-disabled' class to them. Using a JavaScript workaround for those browser.
 			// https://github.com/jquery/jquery-mobile/issues/3558
 
-			$.mobile.document.delegate( ".ui-disabled", "vclick",
+			// DEPRECATED as of 1.4.0 - remove ui-disabled after 1.4.0 release
+			// only ui-state-disabled should be present thereafter
+			$.mobile.document.delegate( ".ui-state-disabled,.ui-disabled", "vclick",
 				function( e ) {
 					e.preventDefault();
 					e.stopImmediatePropagation();

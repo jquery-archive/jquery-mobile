@@ -78,6 +78,7 @@
 <li data-filtertext=""><a href="popup-dynamic/" data-ajax="false">Popup: dynamic</a></li>
 <li data-filtertext=""><a href="popup-iframe/" data-ajax="false">Popup: iframe</a></li>
 <li data-filtertext=""><a href="popup-image-scaling/" data-ajax="false">Popup: image scaling</a></li>
+<li data-filtertext=""><a href="popup-outside-multipage" data-ajax="false">Popup outside multi-page</a></li>
 
 <li data-filtertext=""><a href="listview/" data-ajax="false">Listview</a></li>
 <li data-filtertext=""><a href="listview-autocomplete/" data-ajax="false">Listview: autocomplete</a></li>
@@ -98,6 +99,7 @@
 <li data-filtertext=""><a href="table-column-toggle-heading-groups/" data-ajax="false">Table Column Toggle: heading groups</a></li>
 <li data-filtertext=""><a href="table-column-toggle-options/" data-ajax="false">Table Column Toggle: options</a></li>
 <li data-filtertext=""><a href="table-reflow/" data-ajax="false">Table Reflow</a></li>
+<li data-filtertext=""><a href="table-reflow-double-headings/" data-ajax="false">Table Reflow: Double headings</a></li>
 <li data-filtertext=""><a href="table-reflow-heading-groups/" data-ajax="false">Table Reflow: Heading groups</a></li>
 <li data-filtertext=""><a href="table-reflow-styling/" data-ajax="false">Table Reflow: styling</a></li>
 
@@ -165,6 +167,7 @@
 <li data-filtertext="dynamic popups popup images lightbox"><a href="examples/popups/dynamic-popup.php" data-ajax="false">Dynamic popup</a></li>
 <li data-filtertext="arrow popups popover size"><a href="examples/popups/arrow-size.php" data-ajax="false">Popup arrow size</a></li>
 <li data-filtertext="popups popup position alignment"><a href="examples/popups/alignment.php" data-ajax="false">Popup alignment</a></li>
+<li data-filtertext="popups multipage outside page"><a href="examples/popups/multipage.php" data-ajax="false">Popup outside the page</a></li>
 <li data-filtertext="widgets listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listviews</a></li>
 <li data-filtertext="grid listview responsive grids responsive listviews lists ul"><a href="examples/listviews/grid-listview.php" data-ajax="false">Grid Listview</a></li>
 <li data-filtertext="autodividers anchor jump scroll linkbars listviews lists ul"><a href="examples/listviews/autodividers-linkbar.php" data-ajax="false">Autodividers Linkbar</a></li>

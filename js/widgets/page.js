@@ -8,7 +8,11 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core" ], functi
 (function( $, undefined ) {
 $.mobile.widgets = {};
 
-var originalWidget = $.widget;
+var originalWidget = $.widget,
+
+	// Record the original, non-mobileinit-modified version of $.mobile.keepNative
+	// so we can later determine whether someone has modified $.mobile.keepNative
+	keepNativeFactoryDefault = $.mobile.keepNative;
 
 $.widget = (function( orig ) {
 	return function() {
@@ -135,23 +139,33 @@ $.widget( "mobile.page", {
 	},
 	// Deprecated in 1.4 remove in 1.5
 	removeContainerBackground: function() {
-		this.element.closest( ":mobile-content" ).content({ "theme": "none" });
+		this.element.closest( ":mobile-pagecontainer" ).pagecontainer({ "theme": "none" });
 	},
 	// Deprecated in 1.4 remove in 1.5
 	// set the page container background to the page theme
 	setContainerBackground: function( theme ) {
-		this.element.parent().content( { "theme": theme || this.options.theme } );
+		this.element.parent().pagecontainer( { "theme": theme || this.options.theme } );
 	},
 	// Deprecated in 1.4 remove in 1.5
 	keepNativeSelector: function() {
 		var options = this.options,
-			keepNativeDefined = options.keepNative && $.trim( options.keepNative );
+			keepNative = $.trim( options.keepNative || "" ),
+			globalValue = $.trim( $.mobile.keepNative ),
+			optionValue = $.trim( options.keepNativeDefault ),
 
-		if ( keepNativeDefined && options.keepNative !== options.keepNativeDefault ) {
-			return [options.keepNative, options.keepNativeDefault].join( ", " );
-		}
+			// Check if $.mobile.keepNative has changed from the factory default
+			newDefault = ( keepNativeFactoryDefault === globalValue ?
+				"" : globalValue ),
 
-		return options.keepNativeDefault;
+			// If $.mobile.keepNative has not changed, use options.keepNativeDefault
+			oldDefault = ( newDefault === "" ? optionValue : "" );
+
+		// Concatenate keepNative selectors from all sources where the value has
+		// changed or, if nothing has changed, return the default
+		return ( ( keepNative ? [ keepNative ] : [] )
+			.concat( newDefault ? [ newDefault ] : [] )
+			.concat( oldDefault ? [ oldDefault ] : [] )
+			.join( ", " ) );
 	}
 });
 })( jQuery );

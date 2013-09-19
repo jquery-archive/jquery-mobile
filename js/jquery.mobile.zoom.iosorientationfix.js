@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fixes the orientation change bug in iOS when switching between landspace and portrait
+//>>description: Fixes the orientation change bug in iOS when switching between landscape and portrait
 //>>label: iOS Orientation Change Fix
 //>>group: Utilities
 

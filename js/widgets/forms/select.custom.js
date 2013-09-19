@@ -21,7 +21,7 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var unfocusableItemSelector = ".ui-disabled,.ui-li-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
+var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-li-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
 	goToAdjacentItem = function( item, target, direction ) {
 		var adjacent = item[ direction + "All" ]()
 			.not( unfocusableItemSelector )
@@ -51,6 +51,11 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	_handleSelectFocus: function() {
 		this.element.blur();
 		this.button.focus();
+	},
+
+	_handleKeydown: function( event ) {
+		this._super( event );
+		this._handleButtonVclickKeydown( event );
 	},
 
 	_handleButtonVclickKeydown: function( event ) {
@@ -203,8 +208,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// Button events
 		this._on( this.button, {
-			vclick : "_handleButtonVclickKeydown",
-			keydown : "_handleButtonVclickKeydown"
+			vclick: "_handleButtonVclickKeydown"
 		});
 
 		// Events for list items
@@ -215,7 +219,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			keydown: "_handleListKeydown"
 		});
 		this.list
-			.delegate( "li:not(.ui-disabled, .ui-li-divider)", "click", function( event ) {
+			.delegate( "li:not(.ui-disabled,.ui-state-disabled,.ui-li-divider)", "click", function( event ) {
 
 				// index of option tag to be selected
 				var oldIndex = self.select[ 0 ].selectedIndex,

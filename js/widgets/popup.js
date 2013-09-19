@@ -113,11 +113,11 @@ $.widget( "mobile.popup", {
 			};
 		} else {
 			this._ui = this._enhance( theElement, myId );
-			this
-				._applyTransition( currentOptions.transition )
-				._setTolerance( currentOptions.tolerance );
+			this._applyTransition( currentOptions.transition );
 		}
-		this._ui.focusElement = this._ui.container;
+		this
+			._setTolerance( currentOptions.tolerance )
+			._ui.focusElement = this._ui.container;
 
 		// Event handlers
 		this._on( this._ui.screen, { "vclick": "_eatEventAndClose" } );
@@ -917,15 +917,14 @@ $.widget( "mobile.popup", {
 
 // TODO this can be moved inside the widget
 $.mobile.popup.handleLink = function( $link ) {
-	var closestPage = $link.closest( ":jqmData(role='page')" ),
+	var offset,
 		path = $.mobile.path,
-		scope = ( ( closestPage.length === 0 ) ? $( "body" ) : closestPage ),
-		// NOTE make sure to get only the hash, ie7 (wp7) returns the absolute href
-		//      in this case ruining the element selection
-		popup = $( path.hashToSelector( path.parseUrl( $link.attr( "href" ) ).hash ), scope[ 0 ] ),
-		offset;
 
-	if ( popup.data( "mobile-popup" ) ) {
+		// NOTE make sure to get only the hash from the href because ie7 (wp7)
+		//      returns the absolute href in this case ruining the element selection
+		popup = $( path.hashToSelector( path.parseUrl( $link.attr( "href" ) ).hash ) ).first();
+
+	if ( popup.length > 0 && popup.data( "mobile-popup" ) ) {
 		offset = $link.offset();
 		popup.popup( "open", {
 			x: offset.left + $link.outerWidth() / 2,

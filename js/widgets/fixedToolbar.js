@@ -37,16 +37,23 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_create: function() {
 			this._super();
 			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ){
-				this.element.addClass( "ui-"+ this.role +"-fixed" );
-				this.updatePagePadding();
-				this._addTransitionClass();
-				this._bindPageEvents();
-				this._bindToggleHandlers();
-				this._setOptions( this.options );
+				this._makeFixed();
 			}
 		},
 
+		_makeFixed: function(){
+			this.element.addClass( "ui-"+ this.role +"-fixed" );
+			this.updatePagePadding();
+			this._addTransitionClass();
+			this._bindPageEvents();
+			this._bindToggleHandlers();
+			this._setOptions( this.options );
+		},
+
 		_setOptions: function( o ){
+			if( o.position === "fixed" && this.options.position !== "fixed" ) {
+				this._makeFixed();
+			}
 			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ){
 				var $page = ( !!this.page )? this.page: ( $(".ui-page-active").length > 0 )? $(".ui-page-active"): $(".ui-page").eq(0);
 

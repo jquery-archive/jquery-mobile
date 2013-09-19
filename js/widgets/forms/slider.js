@@ -582,7 +582,7 @@ $.widget( "mobile.slider", $.extend( {
 	_setDisabled: function( value ) {
 		value = !!value;
 		this.element.prop( "disabled", value );
-		this.slider.toggleClass( "ui-disabled", value ).attr( "aria-disabled", value );
+		this.slider.toggleClass( "ui-state-disabled" ).attr( "aria-disabled", value );
 	}
 
 }, $.mobile.behaviors.formReset ) );

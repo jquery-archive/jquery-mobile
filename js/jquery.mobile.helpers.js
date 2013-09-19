@@ -121,6 +121,19 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 			height = ( typeof height === "number" ) ? height : $.mobile.getScreenHeight();
 
 			page.css( "min-height", height - ( pageOuterHeight - pageHeight ) );
+		},
+
+		loading: function() {
+			// If this is the first call to this function, instantiate a loader widget
+			var loader = this.loading._widget || $( $.mobile.loader.prototype.defaultHtml ).loader(),
+
+				// Call the appropriate method on the loader
+				returnValue = loader.loader.apply( loader, arguments );
+
+			// Make sure the loader is retained for future calls to this function.
+			this.loading._widget = loader;
+
+			return returnValue;
 		}
 	});
 
@@ -179,8 +192,8 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 					// If any matching elements remain filter ones with keepNativeSelector
 					if ( widgetElements.length ) {
 
-						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompt
-						// Switch to $.mobile.keepNativeSelector in 1.5 which is just a value not a function
+						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompat
+						// Switch to $.mobile.keepNative in 1.5 which is just a value not a function
 						widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
 					}
 

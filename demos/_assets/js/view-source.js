@@ -22,7 +22,7 @@ function attachPopupHandler( popup, sources ) {
 	});
 }
 
-function getHeadSnippet( type, selector ) {
+function getSnippet( type, selector, source ) {
 	var text = "", el, absUrl, hash;
 
 	if ( selector === "true" ) {
@@ -31,10 +31,10 @@ function getHeadSnippet( type, selector ) {
 
 	// First, try to grab a tag in this document
 	if ( !$.mobile.path.isPath( selector ) ) {
-		el = $( "head" ).find( type + selector );
+		el = source.find( type + selector );
 		// If this is not an embedded style, try a stylesheet reference
 		if ( el.length === 0 && type === "style" ) {
-			el = $( "head" ).find( "link[rel='stylesheet']" + selector );
+			el = source.find( "link[rel='stylesheet']" + selector );
 		}
 		text = $( "<div></div>" ).append( el.contents().clone() ).html();
 		if ( !text ) {
@@ -106,7 +106,7 @@ $.fn.viewSourceCode = function() {
 	return $( this ).each( function() {
 		var button = makeButton(),
 			self = $( this ),
-			page = self.closest( "[data-role='page']" ),
+			snippetSource = self.parents( ".ui-page,:jqmData(role='page')" ).add( $( "head" ) ),
 			fixData = function( data ) {
 				return data.replace( /\s+$/gm, "" );
 			},
@@ -137,12 +137,12 @@ $.fn.viewSourceCode = function() {
 		}
 
 		if ( self.is( "[data-demo-js]" ) ) {
-			data = getHeadSnippet( "script", self.attr( "data-demo-js" ) );
+			data = getSnippet( "script", self.attr( "data-demo-js" ), snippetSource );
 			sources.push( { title: "JS", theme: "e", brush: "js", data: fixData( data ) } );
 		}
 
 		if ( self.is( "[data-demo-css]" ) ) {
-			data = getHeadSnippet( "style", self.attr( "data-demo-css" ) );
+			data = getSnippet( "style", self.attr( "data-demo-css" ), snippetSource );
 			sources.push( { title: "CSS", theme: "f", brush: "css", data: fixData( data ) } );
 		}
 
