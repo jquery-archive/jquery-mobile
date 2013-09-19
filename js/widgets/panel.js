@@ -207,8 +207,8 @@ $.widget( "mobile.panel", {
 	},
 
 	_bindLinkListeners: function() {
-		this._on( "a", {
-			"click": "_handleClick"
+		this._on( "body", {
+			"click a": "_handleClick"
 		});
 		
 	},
