@@ -99,12 +99,12 @@
 
 			<h2 id="radio-iconpos">Icon position</h2>
 
-			<p>To swap the position of the radio icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the fieldset to create a mini version. </p>
+			<p>To swap the position of the radio icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the fieldset to create a right-aligned version. </p>
 
 			<div data-demo-html="true">
                 <form>
 					<fieldset data-role="controlgroup" data-iconpos="right">
-						<legend>Vertical, icon right, mini sized:</legend>
+						<legend>Vertical, icon right:</legend>
 						<input type="radio" name="radio-choice-w-6" id="radio-choice-w-6a" value="on" checked="checked">
 						<label for="radio-choice-w-6a">One</label>
 						<input type="radio" name="radio-choice-w-6" id="radio-choice-w-6b" value="off">
