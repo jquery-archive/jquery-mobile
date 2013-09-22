@@ -59,4 +59,8 @@
 		float: none;
 		width: 100%;
 	}
+	.ui-field-contain > label + .ui-btn-inline {
+		width: auto;
+		margin-right: .625em;
+	}
 }
