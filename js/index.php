@@ -27,6 +27,7 @@ $files = array(
 	'widgets/loader.js',
 	'events/navigate.js',
 	'navigation/path.js',
+	'navigation/base.js',
 	'navigation/history.js',
 	'navigation/navigator.js',
 	'navigation/method.js',
