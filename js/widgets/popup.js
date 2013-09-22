@@ -855,7 +855,7 @@ $.widget( "mobile.popup", {
 		}
 
 		// cache some values for min/readability
-		urlHistory = $.mobile.urlHistory;
+		urlHistory = $.mobile.navigate.history;
 		hashkey = $.mobile.dialogHashKey;
 		activePage = $.mobile.activePage;
 		currentIsDialog = ( activePage ? activePage.hasClass( "ui-dialog" ) : false );

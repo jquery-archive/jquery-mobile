@@ -39,6 +39,27 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 			}, 150 );
 		},
 
+		getClosestBaseUrl: function( ele )	{
+			// Find the closest page and extract out its url.
+			var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
+				base = $.mobile.path.documentBase.hrefNoHash;
+
+			if ( !$.mobile.dynamicBaseEnabled || !url || !$.mobile.path.isPath( url ) ) {
+				url = base;
+			}
+
+			return $.mobile.path.makeUrlAbsolute( url, base );
+		},
+		removeActiveLinkClass: function( forceRemoval ) {
+			if ( !!$.mobile.activeClickedLink &&
+				( !$.mobile.activeClickedLink.closest( "." + $.mobile.activePageClass ).length ||
+					forceRemoval ) ) {
+
+				$.mobile.activeClickedLink.removeClass( $.mobile.activeBtnClass );
+			}
+			$.mobile.activeClickedLink = null;
+		},
+
 		// DEPRECATED in 1.4
 		// Find the closest parent with a theme class on it. Note that
 		// we are not using $.fn.closest() on purpose here because this

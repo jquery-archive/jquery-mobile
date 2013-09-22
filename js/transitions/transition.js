@@ -149,7 +149,7 @@ define( [ "jquery",
 				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
 				none = !$.support.cssTransitions || !$.support.cssAnimations || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), this.toScroll ) > $.mobile.getMaxScrollForTransition();
 
-			this.toScroll = $.mobile.urlHistory.getActive().lastScroll || $.mobile.defaultHomeScroll;
+			this.toScroll = $.mobile.navigate.history.getActive().lastScroll || $.mobile.defaultHomeScroll;
 			this.toggleViewportClass();
 
 			if ( this.$from && !none ) {

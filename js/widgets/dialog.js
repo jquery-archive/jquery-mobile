@@ -48,7 +48,7 @@ $.widget( "mobile.dialog", {
 		if ( $target.length && !$target.jqmData( "transition" ) ) {
 			attrs = {};
 			attrs[ "data-" + $.mobile.ns + "transition" ] =
-				( $.mobile.urlHistory.getActive() || {} )[ "transition" ] ||
+				( $.mobile.navigate.history.getActive() || {} )[ "transition" ] ||
 				$.mobile.defaultDialogTransition;
 			attrs[ "data-" + $.mobile.ns + "direction" ] = "reverse";
 			$target.attr( attrs );

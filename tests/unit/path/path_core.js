@@ -34,7 +34,7 @@
 	});
 
 	test( "path.set method is working properly", function(){
-		$.mobile.urlHistory.ignoreNextHashChange = false;
+		$.mobile.navigate.history.ignoreNextHashChange = false;
 		$.mobile.path.set("foo");
 		deepEqual("foo", window.location.hash.replace(/^#/,""), "sets location.hash properly");
 	});
