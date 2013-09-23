@@ -406,6 +406,7 @@ define([
 			return asParsedObject ? $.extend( {}, path.documentBase ) : path.documentBase.href;
 		};
 
+		// DEPRECATED as of 1.4.0 - remove in 1.5.0
 		$.extend( $.mobile, {
 
 			//return the original document url
