@@ -33,7 +33,7 @@
 		<p>The reflow responsive table only requires a table with a <code>data-role=&quot;table&quot;</code> on the table element. There is no need to set the <code>data-mode</code> attribute since <code>reflow</code> is the default. Be sure to include <code>thead</code> and <code>tbody</code> elements in your table. This example also uses the preset responsive breakpoint, applied via the <code>ui-responsive</code> class.</p>
 
 		<div data-demo-html="true">
-		    <table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
+		    <table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive">
 		      <thead>
 		        <tr>
 		          <th data-priority="1">Rank</th>
