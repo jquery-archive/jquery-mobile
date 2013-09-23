@@ -306,7 +306,7 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "demos/global-nav.php", "demos/search.php" ],
+						src: [ "demos/jqm-contents.php", "demos/jqm-panels.php" ],
 						dest: dist
 					}
 				]
@@ -328,7 +328,7 @@ module.exports = function( grunt ) {
 								// If we've already handled the nested includes use the version
 								// that was copied to the dist folder
 								// TODO use the config from copy:demos.nested.files
-								if( includePath.match(/search.php|global\-nav.php/) ) {
+								if( includePath.match(/jqm\-panels.php|jqm\-contents.php/) ) {
 									newSrcPath = "dist/" + newSrcPath;
 								}
 
@@ -344,7 +344,7 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "index.php", "demos/**/*.php", "demos/**/*.html", "!demos/examples/redirect/**" ],
+						src: [ "index.php", "demos/**/*.php", "demos/**/*.html", "!demos/navigation-php-redirect/**" ],
 						dest: dist,
 						ext: ".html"
 					}
