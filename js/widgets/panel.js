@@ -26,7 +26,7 @@ $.widget( "mobile.panel", {
 			animate: "ui-panel-animate"
 		},
 		animate: true,
-		theme: "a",
+		theme: null,
 		position: "left",
 		dismissible: true,
 		display: "reveal", //accepts reveal, push, overlay
@@ -132,14 +132,13 @@ $.widget( "mobile.panel", {
 	_getPanelClasses: function() {
 		var panelClasses = this.options.classes.panel +
 			" " + this._getPosDisplayClasses( this.options.classes.panel ) +
-			" " + this.options.classes.panelClosed;
+			" " + this.options.classes.panelClosed +
+			" " + "ui-body-" + ( this.options.theme ? this.options.theme : "inherit" );
 
-		if ( this.options.theme ) {
-			panelClasses += " ui-body-" + this.options.theme;
-		}
 		if ( !!this.options.positionFixed ) {
 			panelClasses += " " + this.options.classes.panelFixed;
 		}
+
 		return panelClasses;
 	},
 
