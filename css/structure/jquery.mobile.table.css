@@ -23,29 +23,3 @@
 	margin-bottom: 1.4em;
 	opacity: .5;
 }
-
-/* Add strokes between each row */
-.table-stroke thead th {
-	border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback */
-	border-bottom: 1px solid rgba(0, 0, 0, .1);
-}
-.table-stroke tbody th,
-.table-stroke tbody td {
-	border-bottom: 1px solid #e6e6e6; /* non-RGBA fallback  */
-	border-bottom: 1px solid rgba(0, 0, 0, .05);
-}
-
-
-/* Add alternating row stripes */
-.table-stripe tbody tr:nth-child(odd) td,
-.table-stripe tbody tr:nth-child(odd) th {
-  background-color: #eeeeee; /* non-RGBA fallback  */
-  background-color: rgba(0,0,0,0.04);
-}
-/* Add stroke to the header and last item */
-.table-stripe thead th,
-.table-stripe tbody tr:last-child {
-  border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback  */
-  border-bottom: 1px solid rgba(0, 0, 0, .1);
-}
-
