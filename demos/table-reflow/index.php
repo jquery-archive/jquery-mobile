@@ -116,14 +116,15 @@
 		        </tr>
 		      </tbody>
 		    </table>
-	</div><!--/demo-html -->
+		</div><!--/demo-html -->
 
 		<h2>Making the table responsive</h2>
 
 		<p>By default, a table with reflow mode will display the stacked presentation style on all screen widths. The styles to make the table responsive are added by applying a media query with rules to switch to the tabular style presentation above a specific screen width.</p>
-		<p>This is done by wrapping a few simple CSS rules in and a media query that only applies the rules above a certain width breakpoint. The styles make the table header rows visible, display the cells in a tabular format, and hide the generated label elements within each. Here is an example media query that swaps the presentation at 40em (640 pixels):  </p>
+		<p>This is done by wrapping a few simple CSS rules in and a media query that only applies the rules above a certain width breakpoint. The styles make the table header rows visible, display the cells in a tabular format, and hide the generated label elements within each. Here is an example media query that swaps the presentation at 40em (640 pixels):</p>
 
-<pre><code><strong>@media ( min-width: 40em ) {</strong>
+<pre><code>
+<strong>@media ( min-width: 40em ) {</strong>
 	/* Show the table header rows and set all cells to display: table-cell */
 	.my-custom-breakpoint td,
 	.my-custom-breakpoint th,
@@ -145,24 +146,132 @@
 		<p>It's best to use a <code>class</code> on the table to apply the breakpoint. Add these rules to your custom stylesheet that is included in the <code>head</code> of the page. We recommend creating a set of custom breakpoint classes that can be used to apply standard table breakpoints in your project.</p>
 
 		<h2>Choosing a breakpoint</h2>
+		
 		<p>The goal is to determine the minimum width at which the <em>entire table</em> will fit comfortably within the screen. Find this width by populating a table with realistic sample data, then adjust the browser window until the table completely fits and has a bit of extra space to account for rendering differences across devices. This is the natural place to set the breakpoint that switches between the stacked and tabular presentation modes. The breakpoint width is highly dependent on the number of columns in the table and content within each cell.</p>
 
 		<h2>Applying a preset breakpoint</h2>
+		
 		<p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a single pre-configured breakpoint that targets the stacked style to smaller phones and swaps to a tabular prsentation on larger phones, tablet and desktop devices. To use this preset breakpoint, add the <code>ui-responsive</code> class to the table to convert from the stacked presentation to a tabular presentation at 560px (35em). If this breakpoint doesn't work for your content, we encourage you to write a custom breakpoint as descibed above.</p>
 
-		<pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;ui-responsive&quot;</strong>&gt;</code></pre>
-
-		<p></p>
+<pre><code>
+&lt;table data-role=&quot;table&quot; <strong>class=&quot;ui-responsive&quot;</strong>&gt;
+</code></pre>
 
 		<h2>Grouped column headers</h2>
-		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a  class to the label of the first cell in each group to allow you to style these differently and provide additional visual hierarchy. </p>
+		
+		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a  class to the label of the first cell in each group to allow you to style these differently and provide additional visual hierarchy.</p>
+		
+		<div data-demo-html="true">
+		    <table data-role="table" id="temp-table" data-mode="reflow" class="ui-responsive table-stroke">
+			<thead>
+				<tr>
+					<th data-priority="persist">Paris</th>
+					<th colspan="2">Average Temperatures (C)</th>
+					<th colspan="2">Average Rainfall</th>
+				</tr>
+				<tr>
+					<th data-priority="persist">Month</th>
+					<th data-priority="1">Minimum Temp</th>
+					<th data-priority="1">Maximum Temp</th>
+					<th data-priority="2">Precipitaion (mm)</th>
+					<th data-priority="2">Rainfall Days</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>Jaunuary</th>
+					<td>3</td>
+					<td>8</td>
+					<td>17.8</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<th>February</th>
+					<td>2</td>
+					<td>9</td>
+					<td>21.7</td>
+					<td>9</td>
+				</tr>
+				<tr>
+					<th>March</th>
+					<td>4</td>
+					<td>13</td>
+					<td>24.2</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<th>April</th>
+					<td>6</td>
+					<td>15</td>
+					<td>24.6</td>
+					<td>11</td>
+				</tr>
+				<tr>
+					<th>May</th>
+					<td>10</td>
+					<td>20</td>
+					<td>26.2</td>
+					<td>10</td>
+				</tr>
+				<tr>
+					<th>June</th>
+					<td>13</td>
+					<td>23</td>
+					<td>25.1</td>
+					<td>9</td>
+				</tr>
+				<tr>
+					<th>July</th>
+					<td>15</td>
+					<td>25</td>
+					<td>21.7</td>
+					<td>7</td>
+				</tr>
+				<tr>
+					<th>August</th>
+					<td>15</td>
+					<td>25</td>
+					<td>21.4</td>
+					<td>7</td>
+				</tr>
+				<tr>
+					<th>September</th>
+					<td>11</td>
+					<td>21</td>
+					<td>15.6</td>
+					<td>8</td>
+				</tr>
+				<tr>
+					<th>October</th>
+					<td>9</td>
+					<td>17</td>
+					<td>25.3</td>
+					<td>11</td>
+				</tr>
+				<tr>
+					<th>November</th>
+					<td>5</td>
+					<td>11</td>
+					<td>22.4</td>
+					<td>12</td>
+				</tr>
+				<tr>
+					<th>December</th>
+					<td>3</td>
+					<td>8</td>
+					<td>26.6</td>
+					<td>12</td>
+				</tr>
+			</tbody>
+		</table>
+	</div><!--/demo-html -->
 
-		</div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+	<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
 
 <?php include( '../jqm-panels.php' ); ?>
 
