@@ -32,7 +32,7 @@
         <div data-demo-html="#city" data-demo-js="#demo-script" data-demo-css="#demo-style">
             <p>This demo shows how you can use the swipe event to navigate between pages. We are using single HTML files for each page. Here you can see the JavaScript and CSS source. On each of the demo pages you can see the page markup as well.</p>
 
-            <p><a href="newyork.html" data-prefetch="true" data-transition="fade" data-role="button" data-inline="true" data-theme="c">Open swipe page demo</a></p>
+            <p><a href="newyork.html" data-prefetch="true" data-transition="fade" data-role="button" data-inline="true">Open swipe page demo</a></p>
         </div>
 
 	</div><!-- /content -->
@@ -68,11 +68,11 @@
 
     <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
 		<div data-role="controlgroup" class="control ui-btn-left" data-type="horizontal" data-mini="true">
-        	<a href="#" class="prev" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="d">Previous</a>
-        	<a href="#" class="next" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="d">Next</a>
+        	<a href="#" class="prev" data-role="button" data-icon="arrow-l" data-iconpos="notext">Previous</a>
+        	<a href="#" class="next" data-role="button" data-icon="arrow-r" data-iconpos="notext">Next</a>
         </div>
 
-		<a href="#trivia-city" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-theme="d" data-mini="true">Trivia</a>
+		<a href="#trivia-city" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-mini="true">Trivia</a>
     </div><!-- /footer -->
 
 </div><!-- /page -->
