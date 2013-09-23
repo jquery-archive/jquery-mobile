@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Table Reflow: Custom styles - jQuery Mobile Demos</title>
+	<title>Table Reflow: Strikes and strokes - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -12,29 +12,8 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style>
-		/* These apply across all breakpoints because they are outside of a media query */
-		/* Make the labels light gray all caps across the board */
 		.movie-list thead th,
-		.movie-list tbody th .ui-table-cell-label,
-		.movie-list tbody td .ui-table-cell-label {
-			text-transform: uppercase;
-			font-size: .7em;
-			color: rgba(0,0,0,0.5);
-			font-weight: normal;
-		}
-		/* White bg, large blue text for rank and title */
-		.movie-list tbody th {
-			font-size: 1.2em;
-			background-color: #fff;
-			color: #77bbff;
-			text-align: center;
-		}
-		/*  Add a bit of extra left padding for the title */
-		.movie-list tbody td.title {
-			padding-left: .8em;
-		}
-		/* Add strokes */
-		.movie-list thead th {
+		.movie-list tbody tr:last-child {
 			border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback */
 			border-bottom: 1px solid rgba(0,0,0,.1);
 		}
@@ -43,80 +22,14 @@
 			border-bottom: 1px solid #e6e6e6; /* non-RGBA fallback  */
 			border-bottom: 1px solid rgba(0,0,0,.05);
 		}
-		/*  Custom stacked styles for mobile sizes */
-		/*  Use a max-width media query so we don't have to undo these styles */
-		@media (max-width: 40em) {
-			/*  Negate the margin between sections */
-			.movie-list tbody th {
-				margin-top: 0;
-				text-align: left;
-			}
-			/*  White bg, large blue text for rank and title */
-			.movie-list tbody th,
-			.movie-list tbody td.title {
-				display: block;
-				font-size: 1.2em;
-				line-height: 110%;
-				padding: .5em .5em;
-				background-color: #fff;
-				color: #77bbff;
-				-moz-box-shadow: 0 1px 6px rgba(0,0,0,.1);
-				-webkit-box-shadow: 0 1px 6px rgba(0,0,0,.1);
-				box-shadow: 0 1px 6px rgba(0,0,0,.1);
-			}
-			/*  Hide labels for rank and title */
-			.movie-list tbody th .ui-table-cell-label,
-			.movie-list tbody td.title .ui-table-cell-label {
-				display: none;
-			}
-			/*  Position the title next to the rank, pad to the left */
-			.movie-list tbody td.title {
-				margin-top: -2.1em;
-				padding-left: 2.2em;
-				border-bottom: 1px solid rgba(0,0,0,.15);
-			}
-			/*  Make the data bold */
-			.movie-list th,
-			.movie-list td {
-				font-weight: bold;
-			}
-			/* Make the label elements a percentage width */
-			.movie-list td .ui-table-cell-label,
-			.movie-list th .ui-table-cell-label {
-				min-width: 20%;
-			}
+		.movie-list tbody tr:last-child th,
+		.movie-list tbody tr:last-child td {
+			border-bottom: 0;
 		}
-
-		/* Media query to show as a standard table at wider widths */
-		@media ( min-width: 40em ) {
-			/* Show the table header rows */
-			.movie-list td,
-			.movie-list th,
-			.movie-list tbody th,
-			.movie-list tbody td,
-			.movie-list thead td,
-			.movie-list thead th {
-				display: table-cell;
-				margin: 0;
-			}
-			/* Hide the labels in each cell */
-			.movie-list td .ui-table-cell-label,
-			.movie-list th .ui-table-cell-label {
-				display: none;
-			}
-		}
-		/* Hack to make IE9 and WP7.5 treat cells like block level elements */
-		/* Applied in a max-width media query up to the table layout breakpoint so we don't need to negate this */
-		@media ( max-width: 40em ) {
-			.movie-list td,
-			.movie-list th {
-				width: 100%;
-				-webkit-box-sizing: border-box;
-				-moz-box-sizing: border-box;
-				box-sizing: border-box;
-				float: left;
-				clear: left;
-			}
+		.movie-list tbody tr:nth-child(odd) td,
+		.movie-list tbody tr:nth-child(odd) th {
+			background-color: #eeeeee; /* non-RGBA fallback  */
+			background-color: rgba(0,0,0,.04);
 		}
     </style>
 </head>
@@ -132,15 +45,13 @@
 
 	<div data-role="content" class="jqm-content">
 
-		<h1>Table Reflow: Custom styles</h1>
-
-		<p>Custom styles for the reflow table at stacked widths.</p>
+		<h1>Table Reflow: Strikes and strokes</h1>
 
         <h3>Top Movies</h3>
 
 		<div data-demo-html="true" data-demo-css="true">
 
-            <table data-role="table" id="movie-table-custom" data-mode="reflow" class="movie-list">
+            <table data-role="table" id="movie-table-custom" data-mode="reflow" class="movie-list ui-responsive">
               <thead>
                 <tr>
                   <th data-priority="1">Rank</th>
