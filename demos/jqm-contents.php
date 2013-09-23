@@ -101,7 +101,7 @@
 <li data-filtertext=""><a href="table-reflow-heading-groups/" data-ajax="false">Table Reflow: heading groups</a></li>
 <li data-filtertext=""><a href="table-reflow-heading-groups-responsive/" data-ajax="false">Table Reflow: heading groups responsive</a></li>
 <li data-filtertext=""><a href="table-reflow-styling/" data-ajax="false">Table Reflow: custom styles</a></li>
-<li data-filtertext=""><a href="table-reflow-strikes-strokes/" data-ajax="false">Table Reflow: strikes and strokes</a></li>
+<li data-filtertext=""><a href="table-reflow-stripes-strokes/" data-ajax="false">Table Reflow: stripes and strokes</a></li>
 
 <li data-filtertext=""><a href="filterable/" data-ajax="false">Filterable</a></li>
 
