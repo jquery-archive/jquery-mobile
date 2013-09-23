@@ -358,7 +358,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 	_decideFormat: function() {
 		var self = this,
-			$window = $.mobile.window,
+			$window = this.window,
 			selfListParent = self.list.parent(),
 			menuHeight = selfListParent.outerHeight(),
 			scrollTop = $window.scrollTop(),

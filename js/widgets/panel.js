@@ -249,7 +249,7 @@ $.widget( "mobile.panel", {
 	_bindPageEvents: function() {
 		var self = this;
 
-		$.mobile.document
+		this.document
 			// Close the panel if another panel on the page opens
 			.on( "panelbeforeopen", function( e ) {
 				if ( self._open && e.target !== self.element[ 0 ] ) {
@@ -265,13 +265,13 @@ $.widget( "mobile.panel", {
 			
 		// Clean up open panels after page hide
 		if ( self._parentPage ) {
-			$.mobile.document.on( "pagehide", ":jqmData(role='page')", function() {
+			this.document.on( "pagehide", ":jqmData(role='page')", function() {
 				if ( self._open ) {
 					self.close( true );
 				}
 			});
 		} else {
-			$.mobile.document.on( "pagebeforehide", function() {
+			this.document.on( "pagebeforehide", function() {
 				if ( self._open ) {
 					self.close( true );
 				}
@@ -290,7 +290,7 @@ $.widget( "mobile.panel", {
 				o = self.options,
 				
 				_openPanel = function() {
-					$.mobile.document.off( "panelclose" );
+					self.document.off( "panelclose" );
 					self._page().jqmData( "panel", "open" );
 					
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
@@ -299,7 +299,7 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						$.mobile.document.on( self._transitionEndEvents, complete );
+						self.document.on( self._transitionEndEvents, complete );
 					} else {
 						setTimeout( complete, 0 );
 					}
@@ -329,7 +329,7 @@ $.widget( "mobile.panel", {
 					}
 				},
 				complete = function() {
-					$.mobile.document.off( self._transitionEndEvents, complete );
+					self.document.off( self._transitionEndEvents, complete );
 					
 					if ( o.display !== "overlay" ) {
 						self._wrapper().addClass( o.classes.pageContentPrefix + "-open" );
@@ -344,7 +344,7 @@ $.widget( "mobile.panel", {
 			self._trigger( "beforeopen" );
 			
 			if ( self._page().jqmData( "panel" ) === "open" ) {
-				$.mobile.document.on( "panelclose", function() {
+				self.document.on( "panelclose", function() {
 					_openPanel();
 				});
 			} else {
@@ -362,7 +362,7 @@ $.widget( "mobile.panel", {
 				
 				_closePanel = function() {
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						$.mobile.document.on( self._transitionEndEvents, complete );
+						self.document.on( self._transitionEndEvents, complete );
 					} else {
 						setTimeout( complete, 0 );
 					}
@@ -379,7 +379,7 @@ $.widget( "mobile.panel", {
 					}
 				},
 				complete = function() {
-					$.mobile.document.off( self._transitionEndEvents, complete );
+					self.document.off( self._transitionEndEvents, complete );
 					
 					if ( o.theme && o.display !== "overlay" ) {
 						self._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
@@ -447,10 +447,10 @@ $.widget( "mobile.panel", {
 
 		if ( !multiplePanels ) {
 
-			$.mobile.document.off( "panelopen panelclose" );
+			this.document.off( "panelopen panelclose" );
 			
 			if ( this._open ) {
-				$.mobile.document.off( this._transitionEndEvents );
+				this.document.off( this._transitionEndEvents );
 				$.mobile.resetActivePageHeight();
 			}
 		}
