@@ -37,15 +37,6 @@
 			-o-user-select: none;
 			user-select: none;
 		}
-		/* Arrow only buttons in the header. */
-		#demo-page .ui-header .ui-btn {
-			background: none;
-			border: none;
-			top: 9px;
-		}
-		#demo-page .ui-header .ui-btn-inner {
-			border: none;
-		}
 		/* Content styling. */
 		dl { font-family: "Times New Roman", Times, serif; padding: 1em; }
 		dt { font-size: 2em; font-weight: bold; }
@@ -73,7 +64,7 @@
 
         <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
 
-        <a href="#demo-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
+        <a href="#demo-page" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
@@ -88,12 +79,12 @@
 
 </div><!-- /page -->
 
-<div data-role="page" id="demo-page" data-theme="d">
+<div data-role="page" id="demo-page">
 
     <div data-role="header" data-theme="b">
         <h1>Swipe left or right</h1>
-		<a href="#left-panel" data-theme="d" data-icon="arrow-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
-		<a href="#right-panel" data-theme="d" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
+		<a href="#left-panel" data-icon="carat-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
+		<a href="#right-panel" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
     </div><!-- /header -->
 
     <div data-role="content">
@@ -114,7 +105,7 @@
 
     </div><!-- /panel -->
 
-    <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="c">
+    <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
 
     	<p>Right push panel.</p>
 		<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
