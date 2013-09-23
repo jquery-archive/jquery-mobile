@@ -40,6 +40,7 @@ div.ui-controlgroup-label {
 }
 
 /* Table opt-in classes: strokes between each row, and alternating row stripes */
+/* Classes table-stroke and table-strike are deprecated in 1.4. */
 .table-stroke thead th,
 .table-stripe thead th,
 .table-stripe tbody tr:last-child {
