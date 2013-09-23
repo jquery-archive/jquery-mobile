@@ -31,8 +31,9 @@
 
 		<h1>Dialogs</h1>
 
-		<p>Any page can be presented as a modal dialog that appears to be suspended above the page by adding an attribute to the link that leads to the dialog page.
-			</p>
+		<p>Any page can be presented as a modal dialog that appears to be suspended above the page by adding an attribute to the link that leads to the dialog page.</p>
+		
+		<p>Note: The dialog widget is deprecated in 1.4 and will be removed in 1.5. The page widget now has an option dialog. These dialog demos don't reflect this change yet.</p>
 
 		<h2>Basics</h2>
 		<p>Any page can be presented as a modal dialog by adding the <code>data-rel="dialog"</code> attribute to the page anchor link. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page. By default the framework will also add a close button if the dialog has a header.</p>

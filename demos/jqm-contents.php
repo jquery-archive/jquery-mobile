@@ -23,8 +23,9 @@
 <li data-filtertext=""><a href="themes-default/" data-ajax="false">Default theme</a></li>
 <li data-filtertext=""><a href="themes-classic/" data-ajax="false">Classic theme</a></li>
 
-<li data-role="list-divider">Icons</li>
+<li data-role="list-divider">Buttons &amp; Icons</li>
 
+<li data-filtertext=""><a href="buttons/" data-ajax="false">Buttons</a></li>
 <li data-filtertext=""><a href="icons/" data-ajax="false">Icons</a></li>
 <li data-filtertext=""><a href="icons-grunticon/" data-ajax="false">Icons load script</a></li>
 
@@ -37,9 +38,7 @@
 <li data-filtertext=""><a href="field-contain/" data-ajax="false">Form field containers</a></li>
 <li data-filtertext=""><a href="hidden-accessible/" data-ajax="false">Form hide labels</a></li>
 
-<li data-role="list-divider">Methods</li>
-
-<li data-filtertext=""><a href="buttons/" data-ajax="false">buttonMarkup</a></li>
+<!-- <li data-role="list-divider">Methods</li> -->
 
 <!-- <li data-role="list-divider">Properties</li> -->
 
@@ -99,8 +98,8 @@
 <li data-filtertext=""><a href="table-column-toggle-heading-groups/" data-ajax="false">Table Column Toggle: heading groups</a></li>
 <li data-filtertext=""><a href="table-column-toggle-options/" data-ajax="false">Table Column Toggle: options</a></li>
 <li data-filtertext=""><a href="table-reflow/" data-ajax="false">Table Reflow</a></li>
-<li data-filtertext=""><a href="table-reflow-double-headings/" data-ajax="false">Table Reflow: Double headings</a></li>
-<li data-filtertext=""><a href="table-reflow-heading-groups/" data-ajax="false">Table Reflow: Heading groups</a></li>
+<li data-filtertext=""><a href="table-reflow-heading-groups/" data-ajax="false">Table Reflow: heading groups</a></li>
+<li data-filtertext=""><a href="table-reflow-heading-groups-responsive/" data-ajax="false">Table Reflow: heading groups responsive</a></li>
 <li data-filtertext=""><a href="table-reflow-styling/" data-ajax="false">Table Reflow: styling</a></li>
 
 <li data-filtertext=""><a href="filterable/" data-ajax="false">Filterable</a></li>
@@ -110,7 +109,7 @@
 <li data-filtertext=""><a href="forms/" data-ajax="false">Forms</a></li>
 
 <li data-filtertext=""><a href="textinput/" data-ajax="false">Textinput</a></li>
-<li data-filtertext=""><a href="buttons/" data-ajax="false">Buttons</a></li>
+<li data-filtertext=""><a href="button/" data-ajax="false">Input button</a></li>
 <li data-filtertext=""><a href="checkboxradio-checkbox/" data-ajax="false">Checkboxradio: checkbox</a></li>
 <li data-filtertext=""><a href="checkboxradio-radio/" data-ajax="false">Checkboxradio: radio</a></li>
 <li data-filtertext=""><a href="selectmenu/" data-ajax="false">Selectmenu</a></li>

@@ -164,8 +164,8 @@
 		<p>Copyright 2013 The jQuery Foundation</p>
 		</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-panels.php' ); ?>
 
-	</div><!-- /page -->
-	</body>
-	</html>
+</div><!-- /page -->
+</body>
+</html>

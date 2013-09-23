@@ -26,7 +26,7 @@
 
       	<h1>Going Responsive</h1>
 
-      	<p>Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase. The framework has a number of responsive widgets: <a href="../grids/">responsive grids</a>, <a href="../table-reflow/">reflow tables</a> and <a href="../table-column-toggle/">column chooser tables</a>, and <a href="../panels/">sliding panels</a>.</p>
+      	<p>Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase. The framework has a number of responsive widgets: <a href="../grids/">responsive grids</a>, <a href="../table-reflow/">reflow tables</a> and <a href="../table-column-toggle/">column chooser tables</a>, and <a href="../panel/">panels</a>.</p>
 
 		<h2>RWD Basics</h2>
       	<p>RWD has three key elements:<p>

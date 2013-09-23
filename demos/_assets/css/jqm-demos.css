@@ -72,6 +72,7 @@
 .jqm-demos .jqm-content > h1,
 .jqm-demos .jqm-content > h2,
 .jqm-demos .jqm-content > p,
+.jqm-demos .jqm-content > ul li,
 .jqm-demos .jqm-content > a {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
@@ -94,7 +95,21 @@
 	color: #333;
 	font-size: 1.2em;
 	line-height: 1.5;
+}
+.jqm-demos .jqm-content > ul:not(.jqm-list) li {
+	color: #333;
+	font-size: 1.2em;
+	line-height: 1.5;
+}
+.jqm-demos .jqm-content > p {
 	margin: 0 0 1.25em;
+}
+.jqm-demos .jqm-content > ul,
+.jqm-demos .jqm-content > ol {
+	padding-left: 1.3em;
+}
+.jqm-demos .jqm-content > .ui-listview {
+	padding-left: 0;
 }
 .jqm-demos .jqm-content > a,
 .jqm-demos .jqm-content > p a {
