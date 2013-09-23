@@ -59,7 +59,9 @@ define( [ "jquery",
 			if ( $.mobile.window.scrollTop() !== this.toScroll ) {
 				this.scrollPage();
 			}
-
+			if( !this.sequential ){
+				this.$to.addClass( $.mobile.activePageClass );
+			}
 			this.deferred.resolve( this.name, this.reverse, this.$to, this.$from, true );
 		},
 
