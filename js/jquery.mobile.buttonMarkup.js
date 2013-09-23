@@ -238,7 +238,9 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 
 			// ... and re-apply any unrecognized classes that were found
 			data.unknownClasses ).join( " " );
-		el.setAttribute( "role", "button" );
+		if ( el.tagName.toLowerCase() !== "button" ) {
+			el.setAttribute( "role", "button" );
+		}
 	}
 
 	return this;
