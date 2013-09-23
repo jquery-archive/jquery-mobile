@@ -12,26 +12,19 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style>
-		/* Adjust the width of the left reveal menu.
-		Copy all CSS from jquery.mobile.panel.css and delete the properties other than width, left, right and transform.
-		Then delete the selectors/rules for display modes (reveal/push/overlay) and the position (left/right) that you don't use.
-		If you don't use fixed toolbars on your page you can delete those selectors as well.
-		Narrow the scope of the selectors to prevent other panels being affected by the overrides. */
+		/* Adjust the width of the left reveal menu. */
 		#demo-page #left-panel.ui-panel {
 			width: 15em;
 		}
 		#demo-page #left-panel.ui-panel-closed {
 			width: 0;
 		}
-		#demo-page .ui-panel-position-left.ui-panel-display-reveal {
-			left: 0;
-		}
-		#demo-page .ui-panel-content-wrap-position-left.ui-panel-content-wrap-open,
-		.ui-panel-dismiss-position-left.ui-panel-dismiss-open {
+		#demo-page .ui-panel-page-content-position-left,
+		.ui-panel-dismiss-open.ui-panel-dismiss-position-left {
 			left: 15em;
 			right: -15em;
 		}
-		#demo-page .ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-open.ui-panel-content-wrap-display-reveal {
+		#demo-page .ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
 			left: 0;
 			right: 0;
 			-webkit-transform: translate3d(15em,0,0);
@@ -65,16 +58,15 @@
 			-moz-box-shadow: none;
 			box-shadow: none;
 		}
-		#demo-page .ui-panel-content-wrap-position-left {
+		#demo-page .ui-panel-page-content-position-left {
 			-webkit-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
 			-moz-box-shadow: -5px 0px 5px rgba(0,0,0,.15);
 			box-shadow: -5px 0px 5px rgba(0,0,0,.15);
 		}
 
-		/* Use the ui-body class of your page theme (ui-body-d in this demo) to set a background image.
-		This class will be added to the content wrapper, while the page itself gets the same background
-		as the panel before opening the panel. */
-		#demo-page .ui-body-d {
+		/* Setting a custom background image. */
+		#demo-page.ui-page-theme-a,
+		#demo-page .ui-panel-wrapper {
 			background-image: url(../_assets/img/bg-pattern.png);
 			background-repeat: repeat-x;
 			background-position: left bottom;
@@ -101,8 +93,6 @@
 		}
 		.article a.ui-btn {
 			margin-right: 2em;
-			-webkit-border-radius: .4em;
-			border-radius: .4em;
 		}
 		@media all and (min-width:769px) {
 			.article {
@@ -151,7 +141,7 @@
         
         <p>Click the "view source" button to see the CSS and markup of this demo and open the demo to see the result.</p>
 
-        <a href="#demo-page" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open demo</a>
+        <a href="#demo-page" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-css="true"></div><!--/demo-html -->
 
@@ -166,9 +156,9 @@
 
 </div><!-- /page -->
 
-<div data-role="page" id="demo-page" data-theme="d">
+<div data-role="page" id="demo-page">
 
-    <div data-role="header" data-theme="c">
+    <div data-role="header">
         <h1>Bikes</h1>
         <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
     </div><!-- /header -->
@@ -184,25 +174,25 @@
 
             <p><small>Source: Wikipedia</small></p>
 
-            <p><a href="#right-panel" data-role="button" data-theme="b" data-inline="true" data-mini="true" data-shadow="false">Share</a></p>
+            <p><a href="#right-panel" data-role="button" data-inline="true" data-mini="true" data-shadow="false">Share</a></p>
 
 		</div><!-- /article -->
 
     </div><!-- /content -->
 
-    <div data-role="panel" id="left-panel" data-theme="c">
+    <div data-role="panel" id="left-panel">
 
-        <ul data-role="listview" data-theme="d">
+        <ul data-role="listview">
         	<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
         	<li data-role="list-divider">Menu</li>
         	<li data-icon="back"><a href="#demo-intro" data-rel="back">Demo intro</a></li>
         </ul>
 
-        <div data-role="collapsible" data-inset="false" data-iconpos="right" data-theme="d" data-content-theme="d">
+        <div data-role="collapsible" data-inset="false" data-iconpos="right">
 
           <h3>Categories</h3>
 
-          <div data-role="collapsible-set" data-inset="false" data-iconpos="right" data-theme="b" data-content-theme="d">
+          <div data-role="collapsible-set" data-inset="false" data-iconpos="right">
 
             <div data-role="collapsible">
 
@@ -248,7 +238,7 @@
 
     </div><!-- /panel -->
 
-    <div data-role="panel" id="right-panel" data-display="overlay" data-position="right" data-theme="c">
+    <div data-role="panel" id="right-panel" data-display="overlay" data-position="right">
 
         <ul data-role="listview" data-theme="d" data-icon="false">
         	<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
