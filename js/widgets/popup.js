@@ -52,10 +52,10 @@ function getWindowCoordinates( theWindow ) {
 $.widget( "mobile.popup", {
 	options: {
 		wrapperClass: null,
-		theme: null,
+		theme: null, /* TODO: Deprecated in 1.4, remove in 1.5. */
 		overlayTheme: null,
-		shadow: true,
-		corners: true,
+		shadow: true, /* TODO: Deprecated in 1.4, remove in 1.5. */
+		corners: true, /* TODO: Deprecated in 1.4, remove in 1.5. */
 		transition: "none",
 		positionTo: "origin",
 		tolerance: null,
