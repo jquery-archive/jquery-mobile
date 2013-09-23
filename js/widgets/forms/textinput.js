@@ -13,9 +13,9 @@ $.widget( "mobile.textinput", {
 	initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
 
 	options: {
-		theme: null,
-		corners: true,
-		mini: false,
+		theme: null, /* TODO: Deprecated in 1.4, remove in 1.5. */
+		corners: true, /* TODO: Deprecated in 1.4, remove in 1.5. */
+		mini: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		wrapperClass: "",
