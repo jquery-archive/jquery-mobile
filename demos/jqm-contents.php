@@ -97,8 +97,10 @@
 <li data-filtertext=""><a href="table-column-toggle-heading-groups/" data-ajax="false">Table Column Toggle: heading groups</a></li>
 <li data-filtertext=""><a href="table-column-toggle-options/" data-ajax="false">Table Column Toggle: options</a></li>
 <li data-filtertext=""><a href="table-reflow/" data-ajax="false">Table Reflow</a></li>
-<li data-filtertext=""><a href="table-reflow-heading-groups/" data-ajax="false">Table Reflow: Heading groups</a></li>
-<li data-filtertext=""><a href="table-reflow-styling/" data-ajax="false">Table Reflow: styling</a></li>
+<li data-filtertext=""><a href="table-reflow-heading-groups/" data-ajax="false">Table Reflow: heading groups</a></li>
+<li data-filtertext=""><a href="table-reflow-heading-groups-responsive/" data-ajax="false">Table Reflow: heading groups responsive</a></li>
+<li data-filtertext=""><a href="table-reflow-styling/" data-ajax="false">Table Reflow: custom styles</a></li>
+<li data-filtertext=""><a href="table-reflow-stripes-strokes/" data-ajax="false">Table Reflow: stripes and strokes</a></li>
 
 <li data-filtertext=""><a href="filterable/" data-ajax="false">Filterable</a></li>
 
