@@ -8,7 +8,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 
 (function( $ ) {
 	// TODO move loader class down into the widget settings
-	var loaderClass = "ui-loader", $html = $( "html" ), $window = $.mobile.window;
+	var loaderClass = "ui-loader", $html = $( "html" );
 
 	$.widget( "mobile.loader", {
 		// NOTE if the global config settings are defined they will override these
@@ -38,7 +38,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 
 			this.element
 				.css({
-					top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
+					top: $.support.scrollTop && this.window.scrollTop() + this.window.height() / 2 ||
 						activeBtn.length && activeBtn.offset().top || 100
 				});
 		},
@@ -47,13 +47,13 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 		// if not, use abs positioning
 		checkLoaderPosition: function() {
 			var offset = this.element.offset(),
-				scrollTop = $window.scrollTop(),
+				scrollTop = this.window.scrollTop(),
 				screenHeight = $.mobile.getScreenHeight();
 
 			if ( offset.top < scrollTop || ( offset.top - scrollTop ) > screenHeight ) {
 				this.element.addClass( "ui-loader-fakefix" );
 				this.fakeFixLoader();
-				$window
+				this.window
 					.unbind( "scroll", this.checkLoaderPosition )
 					.bind( "scroll", $.proxy( this.fakeFixLoader, this ) );
 			}
@@ -121,7 +121,7 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 			this.checkLoaderPosition();
 
 			// on scroll check the loader position
-			$window.bind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
+			this.window.bind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
 		},
 
 		hide: function() {
