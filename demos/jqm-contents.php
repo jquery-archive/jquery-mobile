@@ -23,8 +23,9 @@
 <li data-filtertext=""><a href="themes-default/" data-ajax="false">Default theme</a></li>
 <li data-filtertext=""><a href="themes-classic/" data-ajax="false">Classic theme</a></li>
 
-<li data-role="list-divider">Icons</li>
+<li data-role="list-divider">Buttons &amp; Icons</li>
 
+<li data-filtertext=""><a href="buttons/" data-ajax="false">Buttons</a></li>
 <li data-filtertext=""><a href="icons/" data-ajax="false">Icons</a></li>
 <li data-filtertext=""><a href="icons-grunticon/" data-ajax="false">Icons load script</a></li>
 
@@ -37,9 +38,7 @@
 <li data-filtertext=""><a href="field-contain/" data-ajax="false">Form field containers</a></li>
 <li data-filtertext=""><a href="hidden-accessible/" data-ajax="false">Form hide labels</a></li>
 
-<li data-role="list-divider">Methods</li>
-
-<li data-filtertext=""><a href="buttons/" data-ajax="false">buttonMarkup</a></li>
+<!-- <li data-role="list-divider">Methods</li> -->
 
 <!-- <li data-role="list-divider">Properties</li> -->
 
@@ -108,7 +107,7 @@
 <li data-filtertext=""><a href="forms/" data-ajax="false">Forms</a></li>
 
 <li data-filtertext=""><a href="textinput/" data-ajax="false">Textinput</a></li>
-<li data-filtertext=""><a href="buttons/" data-ajax="false">Buttons</a></li>
+<li data-filtertext=""><a href="button/" data-ajax="false">Input button</a></li>
 <li data-filtertext=""><a href="checkboxradio-checkbox/" data-ajax="false">Checkboxradio: checkbox</a></li>
 <li data-filtertext=""><a href="checkboxradio-radio/" data-ajax="false">Checkboxradio: radio</a></li>
 <li data-filtertext=""><a href="selectmenu/" data-ajax="false">Selectmenu</a></li>

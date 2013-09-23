@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Panels - jQuery Mobile Demos</title>
+	<title>Panel - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -36,7 +36,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-		<h1>Panels</h1>
+		<h1>Panel</h1>
 
 		<p>Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
 
