@@ -240,7 +240,7 @@
 
     <div data-role="panel" id="right-panel" data-display="overlay" data-position="right">
 
-        <ul data-role="listview" data-theme="d" data-icon="false">
+        <ul data-role="listview" data-icon="false">
         	<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
         	<li data-role="list-divider">Share this page</li>
             <li><a href="#">Twitter</a></li>

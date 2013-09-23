@@ -103,29 +103,20 @@
 		<p>The library also includes a number of responsive widgets like <a href="../grids/">responsive grids</a>, <a href="../table-reflow/">reflow tables</a> and <a href="../table-column-toggle/">column chooser tables</a>, and <a href="../panels/">sliding panels</a>.</p>
 
 		<h2>Theming</h2>
-		<p>jQuery Mobile has a robust theme framework that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="e"</code> attribute to any of the widgets on this page: page, header, list, input for the slider, or button to turn it yellow. Try different swatch letters from "a" to "e" in the default theme to mix and match swatches.</p>
-		<p>Cool party trick: add the theme swatch to the page and see how all the widgets inside the content will automatically inherit the theme (headers and footers don't inherit, they default to swatch "a").</p>
-
-			<div data-demo-html="true">
-			<a href="#" data-role="button" data-icon="star" data-theme="a">data-theme="a"</a>
-			<a href="#" data-role="button" data-icon="star" data-theme="b">data-theme="b"</a>
-			<a href="#" data-role="button" data-icon="star" data-theme="c">data-theme="c"</a>
-			<a href="#" data-role="button" data-icon="star" data-theme="d">data-theme="d"</a>
-			<a href="#" data-role="button" data-icon="star" data-theme="e">data-theme="e"</a>
-			</div><!--/demo-html -->
+		<p>jQuery Mobile has a robust <a href="../themes-default/" data-ajax="false">theme framework</a> that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="b"</code> attribute to any of the widgets on this page to turn it black.</p>
+		<p>Cool party trick: add the theme swatch to the page and see how all the widgets inside the content will automatically inherit the theme.</p>
 
 		<p>When you're ready to build a custom theme, use <a href="http://www.jquerymobile.com/themeroller" rel="external">ThemeRoller</a> to drag and drop, then download a custom theme.</p>
 
-			</div><!-- /content -->
+	</div><!-- /content -->
 
-			<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-			<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-			<p>Copyright 2013 The jQuery Foundation</p>
-			</div><!-- /footer -->
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+	<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
 
-		<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-panels.php' ); ?>
 
-		</div><!-- /page -->
-		</body>
-		</html>
-
+</div><!-- /page -->
+</body>
+</html>

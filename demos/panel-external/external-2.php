@@ -27,7 +27,7 @@
         <h3>Default panel options</h3>
         <p>This panel has all the default options: positioned on the left with the reveal display mode. The panel markup is <em>before</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" data-role="button" data-theme="c" data-icon="delete" data-inline="true">Close panel</a>
+        <a href="#demo-links" data-rel="close" data-role="button" data-icon="delete" data-inline="true">Close panel</a>
 
 	</div><!-- /default panel -->
 
