@@ -14,14 +14,14 @@ $.widget( "mobile.button", {
 	initSelector: "input[type='button'], input[type='submit'], input[type='reset']",
 
 	options: {
-		theme: null, /* TODO: Deprecated in 1.4, remove in 1.5. */
-		icon: null,  /* TODO: Deprecated in 1.4, remove in 1.5. */
-		iconpos: "left",  /* TODO: Deprecated in 1.4, remove in 1.5. */
+		theme: null,
+		icon: null,
+		iconpos: "left",
 		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
-		corners: true, /* TODO: Deprecated in 1.4, remove in 1.5. */
-		shadow: true, /* TODO: Deprecated in 1.4, remove in 1.5. */
-		inline: null, /* TODO: Deprecated in 1.4, remove in 1.5. */
-		mini: null, /* TODO: Deprecated in 1.4, remove in 1.5. */
+		corners: true,
+		shadow: true,
+		inline: null,
+		mini: null,
 		wrapperClass: null,
 		enhanced: false
 	},

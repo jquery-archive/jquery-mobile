@@ -38,7 +38,7 @@ $.mobile.document.on( "create", function( event ){
 
 $.widget( "mobile.page", {
 	options: {
-		theme: "a", /* TODO: Deprecated in 1.4, remove in 1.5. */
+		theme: "a",
 		domCache: false,
 
 		// Deprecated in 1.4 remove in 1.5

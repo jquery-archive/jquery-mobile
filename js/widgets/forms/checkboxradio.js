@@ -21,11 +21,11 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	initSelector: "input:not( :jqmData(role='flipswitch' ) )[type='checkbox'],input[type='radio']:not( :jqmData(role='flipswitch' ))",
 
 	options: {
-		theme: "inherit", /* TODO: Deprecated in 1.4, remove in 1.5. */
-		mini: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
+		theme: "inherit",
+		mini: false,
 		wrapperClass: null,
 		enhanced: false,
-		iconpos: "left" /* TODO: Deprecated in 1.4, remove in 1.5. */
+		iconpos: "left"
 
 	},
 	_create: function() {

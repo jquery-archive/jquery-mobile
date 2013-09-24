@@ -14,12 +14,12 @@ define( [ "jquery",
 $.widget( "mobile.controlgroup", $.extend( {
 	options: {
 		enhanced: false,
-		theme: null, /* TODO: Deprecated in 1.4, remove in 1.5. */
+		theme: null,
 		shadow: false,
-		corners: true, /* TODO: Deprecated in 1.4, remove in 1.5. */
+		corners: true,
 		excludeInvisible: true,
 		type: "vertical",
-		mini: false /* TODO: Deprecated in 1.4, remove in 1.5. */
+		mini: false
 	},
 
 	_create: function() {
