@@ -324,7 +324,9 @@ $.widget( "mobile.panel", {
 
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
 					if ( self._modal ) {
-						self._modal.addClass( self._modalOpenClasses );
+						self._modal
+							.addClass( self._modalOpenClasses )
+							.height( Math.max( self._modal.height(), self.document.height() ) );
 					}
 				},
 				complete = function() {
