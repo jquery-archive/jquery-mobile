@@ -426,7 +426,7 @@ $.widget( "mobile.panel", {
 
 		if ( o.display !== "overlay" ) {
 			// Destroy the wrapper even if there are still other panels, because we don't know if they use a wrapper
-			this._wrapper().children().unwrap();
+		    this._wrapper().not("[data-id='persistent']").children().unwrap();
 
 			if ( this._open ) {
 				
