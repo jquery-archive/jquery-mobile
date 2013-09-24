@@ -19,7 +19,7 @@ define( [
 		initSelector: ":jqmData(role='footer'), :jqmData(role='header')",
 
 		options: {
-			theme: null, /* TODO: Deprecated in 1.4, remove in 1.5. */
+			theme: null,
 			addBackBtn: false,
 			backBtnTheme: null,
 			backBtnText: "Back"
