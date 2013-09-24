@@ -91,7 +91,7 @@
 	test( "continues backward when the active content isn't a dialog", function() {
 		expect( 2 );
 
-		proto._getActiveContent = function() {
+		proto.getActivePage = function() {
 			return $( "<div>" );
 		};
 
@@ -105,7 +105,7 @@
 	test( "continues forward when the active content isn't a dialog", function() {
 		expect( 2 );
 
-		proto._getActiveContent = function() {
+		proto.getActivePage = function() {
 			return $( "<div>" );
 		};
 
@@ -119,7 +119,7 @@
 	test( "extends changePageOptions when current content is a dialog", function() {
 		var result, opts = {};
 
-		proto._getActiveContent = function() {
+		proto.getActivePage = function() {
 			return $( "<div>", {"class": "ui-dialog"} );
 		};
 

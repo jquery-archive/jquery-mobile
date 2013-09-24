@@ -151,7 +151,7 @@ define( [
 		},
 
 		// TODO active page should be managed by the container (ie, it should be a property)
-		_getActiveContent: function() {
+		getActivePage: function() {
 			return this.activePage;
 		},
 
@@ -223,7 +223,7 @@ define( [
 		},
 
 		_handleDialog: function( changePageOptions, data ) {
-			var to, active, activeContent = this._getActiveContent();
+			var to, active, activeContent = this.getActivePage();
 
 			// If current active page is not a dialog skip the dialog and continue
 			// in the same direction
