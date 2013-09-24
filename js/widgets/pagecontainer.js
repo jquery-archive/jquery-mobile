@@ -152,7 +152,7 @@ define( [
 
 		// TODO active page should be managed by the container (ie, it should be a property)
 		_getActiveContent: function() {
-			return $.mobile.activePage;
+			return this.activePage;
 		},
 
 		// TODO the first page should be a property set during _create using the logic
@@ -834,7 +834,7 @@ define( [
 				triggerData = {};
 
 			// Make sure we have a fromPage.
-			settings.fromPage = settings.fromPage || $.mobile.activePage;
+			settings.fromPage = settings.fromPage || this.activePage;
 
 			// if the page beforechange default is prevented return early
 			if ( !this._triggerPageBeforeChange(to, triggerData, settings) ) {
@@ -1002,8 +1002,8 @@ define( [
 				// original dialog
 				if ( active.url &&
 					active.url.indexOf( $.mobile.dialogHashKey ) > -1 &&
-					$.mobile.activePage &&
-					!$.mobile.activePage.hasClass( "ui-dialog" ) &&
+					this.activePage &&
+					!this.activePage.hasClass( "ui-dialog" ) &&
 					$.mobile.navigate.history.activeIndex > 0 ) {
 
 					settings.changeHash = false;
@@ -1077,8 +1077,11 @@ define( [
 			//set page title
 			document.title = pageTitle;
 
-			//set "toPage" as activePage
+			//set "toPage" as activePage deprecated in 1.4 remove in 1.5
 			$.mobile.activePage = toPage;
+
+			//new way to handle activePage
+			this.activePage = toPage;
 
 			// If we're navigating back in the URL history, set reverse accordingly.
 			settings.reverse = settings.reverse || historyDir < 0;
@@ -1113,8 +1116,8 @@ define( [
 
 		// determine the current base url
 		_findBaseWithDefault: function() {
-			var closestBase = ( $.mobile.activePage &&
-			$.mobile.getClosestBaseUrl( $.mobile.activePage ) );
+			var closestBase = ( this.activePage &&
+			$.mobile.getClosestBaseUrl( this.activePage ) );
 		return closestBase || $.mobile.path.documentBase.hrefNoHash;
 		}
 	});
