@@ -26,7 +26,7 @@
 
 		<h1>Input button</h1>
 
-		<p>Examples of how to style input buttons. See <a href="../buttons/">this page</a> for examples of <code>a</code> and <code>button</code> elements.</p>
+		<p>Examples of how to style input buttons. See <a href="../button-markup/">this page</a> for examples of <code>a</code> and <code>button</code> elements.</p>
 		
 		<p>Note that in 1.4 <code>data-</code> attributes will still work, but the style options are deprecated.</p>
 

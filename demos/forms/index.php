@@ -35,11 +35,11 @@
 
         <h2>Buttons</h2>
 
-		<p>Buttons are core widgets in jQuery Mobile and are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons. Learn more about <a href="../buttons/">buttons</a>.</p>
+		<p>Buttons are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons. Learn more about <a href="../button-markup/">button markup</a> and <a href="../button-markup/">input buttons</a>.</p>
         <div data-demo-html="true">
             <a href="#" data-role="button">Link button</a>
+            <button>Button element</button>
             <input type="button" value="Button element" data-icon="delete" data-theme="a" />
-            <input type="submit" value="Submit button, mini" data-icon="grid" data-iconpos="right" data-mini="true" data-theme="b" />
         </div><!-- /demo-html -->
 
         <p>Inline buttons</p>
@@ -160,7 +160,7 @@
 
         <h2>Radio buttons</h2>
 
-		<p>Radio buttons are used to provide a list of options where only a single option can be selected. Learn more about <a href="../radiobuttons/">radiobuttons</a>.</p>
+		<p>Radio buttons are used to provide a list of options where only a single option can be selected. Learn more about <a href="../checkboxradio-radio/">radiobuttons</a>.</p>
 
         <div data-demo-html="true">
                 <fieldset data-role="controlgroup">

@@ -25,7 +25,7 @@
 
 <li data-role="list-divider">Buttons &amp; Icons</li>
 
-<li data-filtertext=""><a href="buttons/" data-ajax="false">Buttons</a></li>
+<li data-filtertext=""><a href="button-markup/" data-ajax="false">Buttons</a></li>
 <li data-filtertext=""><a href="icons/" data-ajax="false">Icons</a></li>
 <li data-filtertext=""><a href="icons-grunticon/" data-ajax="false">Icons load script</a></li>
 

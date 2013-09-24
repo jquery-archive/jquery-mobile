@@ -162,7 +162,7 @@
 
 		<p>The page footer is very similar to the header in terms of options and configuration. The primary difference is that the footer is designed to be less structured than the header to allow more flexibility, so the framework doesn't automatically reserve slots for buttons to the left or right as it does in headers. Since footers do not have the same prescriptive markup conventions as headers, we recommend using layout <a href="../grids/">grids</a> or writing custom styles to achieve the design you want.</p>
 
-			<p>Any link or valid <a href="../buttons/">button markup</a> added to the footer will automatically be turned into a button. To save space, buttons in toolbars are automatically set to inline styling so the button is only as wide as the text and icons it contains.  </p>
+			<p>Any link or valid <a href="../button-markup/">button markup</a> added to the footer will automatically be turned into a button. To save space, buttons in toolbars are automatically set to inline styling so the button is only as wide as the text and icons it contains.  </p>
 
 			<p>By default, toolbars don't have any padding to accommodate nav bars and other widgets. To include padding on the bar, add a <code>class="ui-bar"</code> to the footer.</p>
 
