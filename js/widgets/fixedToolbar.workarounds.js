@@ -10,7 +10,9 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 		_create: function() {
 			this._super();
-			this._workarounds();
+			if ( this.element.hasClass( "ui-" + this.role + "-fixed" ) ) {
+				this._workarounds();
+			}
 		},
 
 		//check the browser and version and run needed workarounds
