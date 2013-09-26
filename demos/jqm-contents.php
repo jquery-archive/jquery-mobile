@@ -9,7 +9,7 @@
 
 <li data-filtertext=""><a href="pages-single-page/" data-ajax="false">Single page</a></li>
 <li data-filtertext=""><a href="pages-multi-page/" data-ajax="false">Multi-page template</a></li>
-<li data-filtertext=""><a href="page-dialog/" data-ajax="false">Dialog page</a></li>
+<li data-filtertext=""><a href="pages-dialog/" data-ajax="false">Dialog page</a></li>
 
 <li data-filtertext=""><a href="navigation/" data-ajax="false">Navigation</a></li>
 <li data-filtertext=""><a href="navigation-linking-pages/" data-ajax="false">Linking pages</a></li>
