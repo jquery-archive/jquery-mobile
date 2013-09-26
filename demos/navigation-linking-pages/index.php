@@ -31,7 +31,7 @@
 
         <h2>Linking pages</h2>
 
-        <p>You can link pages and assets as you normally would, and jQuery Mobile will automatically handle page requests in a single-page model, using AJAX when possible. When AJAX isn't possible (such as a non-same-domain url, or if specified using certain attributes on the link), a normal http request is used instead.</p>
+        <p>You can link pages and assets as you normally would, and jQuery Mobile will automatically handle page requests in a single-page model, using AJAX when possible. When AJAX isn't possible (such as a non-same-domain url, or if specified using certain attributes on the link), a normal HTTP request is used instead.</p>
 
         <p>The goal of this nav model is to allow developers to create websites using best practices &mdash; where ordinary links will "just work" without any special configuration &mdash; while creating a rich, native-like experience that can't be achieved with standard HTTP requests.</p>
 
@@ -41,7 +41,7 @@
 
         <p>If the AJAX request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
 
-        <p>If the AJAX request fails, the framework will display a small error message overlay (styled in the "e" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
+        <p>If the AJAX request fails, the framework will display a small error message overlay (styled in the "a" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
 
         <p><strong>Note:</strong> You cannot link <strong>to</strong> a multipage document with AJAX navigation active because the framework will only load the first page it finds, not the full set of internal pages. In these cases, you must link without AJAX (see next section) for a full page refresh to prevent potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multi-page documents.</p>
 
@@ -64,10 +64,10 @@
 
 		<div data-demo-html="true">
 			<ul data-role="listview" data-ajax="false" data-inset="true" data-theme="a">
-	            <li data-role="list-divider">All links are non-AJAX</li>
-	            <li><a href="../accordions/">Accordion</a></li>
-	            <li><a href="../ajax-nav/">AJAX Navigation</a></li>
-	            <li><a href="../autocomplete/">Autocomplete</a></li>
+				<li data-role="list-divider">All links are non-AJAX</li>
+				<li><a href="../collapsibleset/">Accordion</a></li>
+				<li><a href="../navigation/">AJAX Navigation</a></li>
+				<li><a href="../listview-autocomplete/">Autocomplete</a></li>
 			</ul>
 		</div><!--/demo-html -->
 
