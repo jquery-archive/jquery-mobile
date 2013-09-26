@@ -82,6 +82,7 @@
 <li data-filtertext=""><a href="listview-autocomplete/" data-ajax="false">Listview: autocomplete</a></li>
 <li data-filtertext=""><a href="listview-autocomplete-remote/" data-ajax="false">Listview: autocomplete remote data</a></li>
 <li data-filtertext=""><a href="listview-autodividers-selector/" data-ajax="false">Listview: autodividers selector</a></li>
+<li data-filtertext=""><a href="listview-collapsible-item/" data-ajax="false">Listview: collapsible list items</a></li>
 <li data-filtertext=""><a href="listview-grid/" data-ajax="false">Listview: responsive grid</a></li>
 <li data-filtertext=""><a href="listview-linkbar/" data-ajax="false">Listview: linkbar</a></li>
 
