@@ -59,7 +59,10 @@
 		<p>jQuery Mobile includes a diverse set of common <a href="../listviews/" title="docs-lists">listviews</a> that are coded as lists with a <code>data-role="listview"</code> added. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> attribute and we add a dynamic search filter with <code>data-filter="true"</code>.</p>
 
 			<div data-demo-html="true">
-			<ul data-role="listview" data-inset="true" data-filter="true">
+			<form>
+				<input id="filter-for-listview" data-type="search" placeholder="Type to search..."></input>
+			</form>
+			<ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
 				<li><a href="#">Acura</a></li>
 				<li><a href="#">Audi</a></li>
 				<li><a href="#">BMW</a></li>
