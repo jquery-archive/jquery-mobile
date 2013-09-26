@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Buttons - jQuery Mobile Demos</title>
+	<title>Button markup - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -30,7 +30,7 @@
 
 	<div data-role="content" class="jqm-content">
 
-		<h1>Buttons</h1>
+		<h1>Button markup</h1>
 
 		<p>Add classes to style <code>a</code> and <code>button</code> elements. <code>input</code> buttons are enhanced by the button widget. See <a href="../button/" data-ajax="false">this page</a> for examples.</p>
 		
