@@ -141,51 +141,57 @@
 	<div data-demo-html="true" data-demo-css="#collapsible-list-item-style,#flat-sublist-style">
     <ul data-role="listview" class="ui-listview-outer" data-inset="true" data-shadow="false">
       <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-        <h2>Indented Sublists</h2>
+        <legend>
+          <h2>Indented Sublists</h2>
+          <p>The sublists of this list will have the regular, indented look.</p>
+        </legend>
 
-    <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-      <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-        <h2>Birds</h2>
         <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-          <li>Condor</li>
-          <li><a href="#">Eagle</a></li>
-          <li>Sparrow</li>
+          <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+            <h2>Birds</h2>
+            <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
+              <li>Condor</li>
+              <li><a href="#">Eagle</a></li>
+              <li>Sparrow</li>
+            </ul>
+          </li>
+          <li><a href="#">Humans</a></li>
+          <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+            <h2>Fish</h2>
+            <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
+              <li><a href="#">Salmon</a></li>
+              <li>Pollock</li>
+              <li>Trout</li>
+            </ul>
+          </li>
         </ul>
-      </li>
-      <li><a href="#">Humans</a></li>
-      <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-        <h2>Fish</h2>
-        <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-          <li><a href="#">Salmon</a></li>
-          <li>Pollock</li>
-          <li>Trout</li>
-        </ul>
-      </li>
-    </ul>
 
       </li>
       <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-        <h2>Flat Sublists</h2>
+        <legend>
+          <h2>Flat Sublists</h2>
+          <p>The sublists of this list will not be indented.</p>
+        </legend>
 
-    <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false" class="ui-listview-flat-sublists">
-      <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-        <h2>Birds</h2>
-        <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-          <li>Condor</li>
-          <li><a href="#">Eagle</a></li>
-          <li>Sparrow</li>
+        <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false" class="ui-listview-flat-sublists">
+          <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+            <h2>Birds</h2>
+            <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
+              <li>Condor</li>
+              <li><a href="#">Eagle</a></li>
+              <li>Sparrow</li>
+            </ul>
+          </li>
+          <li><a href="#">Humans</a></li>
+          <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+            <h2>Fish</h2>
+            <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
+              <li><a href="#">Salmon</a></li>
+              <li>Pollock</li>
+              <li>Trout</li>
+            </ul>
+          </li>
         </ul>
-      </li>
-      <li><a href="#">Humans</a></li>
-      <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-        <h2>Fish</h2>
-        <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-          <li><a href="#">Salmon</a></li>
-          <li>Pollock</li>
-          <li>Trout</li>
-        </ul>
-      </li>
-    </ul>
 
       </li>
     </ul>
