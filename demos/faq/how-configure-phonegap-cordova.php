@@ -50,7 +50,7 @@
 
 		<h2>$.mobile.allowCrossDomainPages</h2>
 
-		<p>When jQuery Mobile attempts to load an external page, the request runs through <code>$.mobile.loadPage()</code>. This will only allow cross-domain requests if the <code>$.mobile.allowCrossDomainPages</code> configuration option is set to <code>true</code>. Because the jQuery Mobile framework tracks what page is being viewed within the browser's location hash, it is possible for a cross-site scripting (XSS) attack to occur if the XSS code in question can manipulate the hash and set it to a cross-domain URL of its choice. This is the main reason that the default setting for <code>$.mobile.allowCrossDomainPages</code> is set to <code>false</code>.</p>
+		<p>When jQuery Mobile attempts to load an external page, the request runs through the page container's <code>load()</code> method. This will only allow cross-domain requests if the <code>$.mobile.allowCrossDomainPages</code> configuration option is set to <code>true</code>. Because the jQuery Mobile framework tracks what page is being viewed within the browser's location hash, it is possible for a cross-site scripting (XSS) attack to occur if the XSS code in question can manipulate the hash and set it to a cross-domain URL of its choice. This is the main reason that the default setting for <code>$.mobile.allowCrossDomainPages</code> is set to <code>false</code>.</p>
 
 		<p>So in PhoneGap apps that must "phone home" by loading assets off a remote server, both the <code>$.support.cors</code> AND <code>$.mobile.allowCrossDomainPages</code> must be set to <code>true</code>.  The <code>$.mobile.allowCrossDomainPages</code> option must be set before any cross-domain request is made so we recommend wrapping this in a <code>mobileinit</code> handler:</p>
 

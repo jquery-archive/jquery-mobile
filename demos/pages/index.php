@@ -204,10 +204,10 @@
 
 	</div><!--/demo-html -->
 
-  <p>Alternatively, you can prefetch a page programmatically using <code>$.mobile.loadPage()</code>:</p>
+  <p>Alternatively, you can prefetch a page programmatically using the pagecontainer widget's <code>load()</code> method:</p>
 
 <pre><code>
-$.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
+$( ":mobile-pagecontainer" ).pagecontainer( "load", <var>pageUrl</var>, { showLoadMsg: false } );
 </code></pre>
 
 		<h2>DOM Cache</h2>

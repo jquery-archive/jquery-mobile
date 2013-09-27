@@ -218,7 +218,7 @@ $( document ).on( "mobileinit", function() {
 				base = base.split( "index.html" )[0] + "demos" + "/";
 				url = base + this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
 			
-			$.mobile.changePage( url ); 
+			$( ":mobile-pagecontainer" ).pagecontainer( "change", url );
 		},
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
@@ -281,7 +281,7 @@ $( document ).on( "mobileinit", function() {
 			if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
 				var href = this.element.find( "li.ui-btn-active a" ).attr( "href" );
 				
-				$.mobile.changePage( href );
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", href );
 				return false;
 			}
 			
