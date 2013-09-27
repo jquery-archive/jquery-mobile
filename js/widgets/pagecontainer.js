@@ -552,7 +552,7 @@ define( [
 		load: function( url, options ) {
 			// This function uses deferred notifications to let callers
 			// know when the content is done loading, or if an error has occurred.
-			var deferred = options.deferred || $.Deferred(),
+			var deferred = ( options && options.deferred ) || $.Deferred(),
 
 				// The default load options with overrides specified by the caller.
 				settings = $.extend( {}, this._loadDefaults, options ),
