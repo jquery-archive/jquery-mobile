@@ -45,10 +45,12 @@
 }
 
 /* Footer */
-.jqm-demos .jqm-footer {
+.jqm-demos .jqm-footer.ui-footer {
 	position: absolute;
 	bottom: 0;
 	padding-bottom: 0;
+}
+.jqm-demos .jqm-footer {
 	border-top: 1px solid #3eb249;
 }
 .jqm-demos .jqm-footer p {
