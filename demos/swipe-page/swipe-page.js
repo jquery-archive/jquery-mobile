@@ -13,7 +13,7 @@ $( document ).on( "pagecreate", "[data-role='page'].demo-page", function() {
 	if ( next ) {
 
 		// Prefetch the next page
-		$.mobile.loadPage( next + ".html" );
+		$( ":mobile-pagecontainer" ).pagecontainer( "load", next + ".html" );
 
 		// Navigate to next page on swipe left
 		$( document ).on( "swipeleft", page, function( event ) {
@@ -21,13 +21,13 @@ $( document ).on( "pagecreate", "[data-role='page'].demo-page", function() {
 			// Swipes may also happen when the user highlights text, so ignore those.
 			// We're only interested in swipes on the page.
 			if ( event.target === $( page )[ 0 ] ) {
-				$.mobile.changePage( next + ".html", { transition: "slide" });
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", next + ".html", { transition: "slide" });
 			}
 		});
 
 		// Navigate to next page when the "next" button is clicked
 		$( ".control .next", page ).on( "click", function() {
-			$.mobile.changePage( next + ".html", { transition: "slide" } );
+			$( ":mobile-pagecontainer" ).pagecontainer( "change", next + ".html", { transition: "slide" } );
 		});
 	}
 
@@ -44,14 +44,14 @@ $( document ).on( "pagecreate", "[data-role='page'].demo-page", function() {
 			// Swipes may also happen when the user highlights text, so ignore those.
 			// We're only interested in swipes on the page.
 			if ( event.target === $( page )[ 0 ] ) {
-				$.mobile.changePage( prev + ".html", {
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", prev + ".html", {
 					transition: "slide",
 					reverse: true
 				});
 			}
 		});
 		$( ".control .prev", page ).on( "click", function() {
-			$.mobile.changePage( prev + ".html", {
+			$( ":mobile-pagecontainer" ).pagecontainer( "change", prev + ".html", {
 				transition: "slide",
 				reverse: true
 			});
