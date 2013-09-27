@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Listviews collapsible list items - jQuery Mobile Demos</title>
+	<title>Listviews indented collapsible list items - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -57,19 +57,7 @@
   border-left-width: 0;
 }
 	</style>
-	<style id="flat-sublist-style">
-/* Additional rules for flat sublists */
-/* Remove some more left borders and paddings for flat sublists */
-.ui-listview-flat-sublists .ui-li-static.ui-collapsible > .ui-collapsible-content {
-  padding-left: 0;
-}
 
-.ui-listview-outer.ui-listview-flat-sublists .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
-.ui-listview-outer.ui-listview-flat-sublists .ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-li-static,
-.ui-listview-outer.ui-listview-flat-sublists .ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn {
-  border-left-width: 0;
-}
-  </style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -83,9 +71,9 @@
 
 	<div data-role="content" class="jqm-content">
 
-	<h1>Collapsible list items</h1>
+	<h1>Indented collapsible list items</h1>
 
-	<p>You can render list items collapsible by instantiating collapsible widgets on them and adding some custom CSS to collapse borders and padding. In all the examples below, the outermost listview has class <code>ui-listview-outer</code> to identify it as the outermost listview in the tree structure of indented lists.</p>
+	<p>You can create indented collapsible list items by instantiating collapsible widgets on them and adding some custom CSS to collapse borders and padding. In all the examples below, the outermost listview has class <code>ui-listview-outer</code> to identify it as the outermost listview in the tree structure of indented lists.</p>
 
 	<h2>Regular listview</h2>
 
@@ -131,68 +119,6 @@
           <li>Pollock</li>
           <li>Trout</li>
         </ul>
-      </li>
-    </ul>
-	</div>
-
-	<h2>Flat sublists</h2>
-	<p>With a little more CSS, you can create class <code>ui-listview-flat-sublists</code> that will cause all the sublists of a listview to which it is applied to display without indentation. In the example below, the first list item contains a list that has indented sublists. The second list item contains a list that has flat sublists.</p>
-
-	<div data-demo-html="true" data-demo-css="#collapsible-list-item-style,#flat-sublist-style">
-    <ul data-role="listview" class="ui-listview-outer" data-inset="true" data-shadow="false">
-      <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-        <legend>
-          <h2>Indented Sublists</h2>
-          <p>The sublists of this list will have the regular, indented look.</p>
-        </legend>
-
-        <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-          <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-            <h2>Birds</h2>
-            <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-              <li>Condor</li>
-              <li><a href="#">Eagle</a></li>
-              <li>Sparrow</li>
-            </ul>
-          </li>
-          <li><a href="#">Humans</a></li>
-          <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-            <h2>Fish</h2>
-            <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-              <li><a href="#">Salmon</a></li>
-              <li>Pollock</li>
-              <li>Trout</li>
-            </ul>
-          </li>
-        </ul>
-
-      </li>
-      <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-        <legend>
-          <h2>Flat Sublists</h2>
-          <p>The sublists of this list will not be indented.</p>
-        </legend>
-
-        <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false" class="ui-listview-flat-sublists">
-          <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-            <h2>Birds</h2>
-            <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-              <li>Condor</li>
-              <li><a href="#">Eagle</a></li>
-              <li>Sparrow</li>
-            </ul>
-          </li>
-          <li><a href="#">Humans</a></li>
-          <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
-            <h2>Fish</h2>
-            <ul data-role="listview" data-shadow="false" data-inset="true" data-corners="false">
-              <li><a href="#">Salmon</a></li>
-              <li>Pollock</li>
-              <li>Trout</li>
-            </ul>
-          </li>
-        </ul>
-
       </li>
     </ul>
 	</div>
