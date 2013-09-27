@@ -3,7 +3,7 @@
 function attachPopupHandler( popup, sources ) {
 	popup.one( "popupbeforeposition", function() {
 		var
-			collapsibleSet = popup.find( "[data-role='collapsible-set']" ),
+			collapsibleSet = popup.find( "[data-role='collapsibleset']" ),
 			collapsible, pre;
 
 		$.each( sources, function( idx, options ) {
@@ -13,7 +13,24 @@ function attachPopupHandler( popup, sources ) {
 				"</div>" );
 			pre = collapsible.find( "pre" );
 			pre.append( options.data.replace( /</gmi, '&lt;' ) );
-			collapsible.appendTo( collapsibleSet );
+			collapsible
+				.appendTo( collapsibleSet )
+				.on( "collapsiblecollapse", function() {
+					popup.popup( "reposition", { positionTo: "window" } );
+				})
+				.on( "collapsibleexpand", function() {
+					var doReposition = true;
+
+					collapsibleSet.find( ":mobile-collapsible" ).not( this ).each( function() {
+						if ( $( this ).collapsible( "option", "expanded" ) ) {
+							doReposition = false;
+						}
+					});
+
+					if ( doReposition ) {
+						popup.popup( "reposition", { positionTo: "window" } );
+					}
+				});
 			SyntaxHighlighter.highlight( {}, pre[ 0 ] );
 		});
 
@@ -69,7 +86,7 @@ $( document ).bind( "pagebeforechange", function( e, data ) {
 		sources = data.options.link.jqmData( "sources" );
 		if ( sources ) {
 			popup = $( "<div id='jqm-view-source' class='jqm-view-source' data-role='popup' data-theme='none' data-position-to='window'>" +
-								"<div data-role='collapsible-set' data-inset='true'></div>" +
+								"<div data-role='collapsibleset' data-inset='true'></div>" +
 							"</div>" );
 
 			attachPopupHandler( popup, sources );
