@@ -105,12 +105,11 @@ $.widget( "mobile.panel", {
 	},
 	
 	_getWrapper: function() {
-		var wrapper = this._page().find( "." + this.options.classes.pageWrapper ),
-			animateClass = ( $.support.cssTransform3d && !!this.options.animate ) ? " " + this.options.classes.animate : "";
+		var wrapper = this._page().find( "." + this.options.classes.pageWrapper );
 
 		if ( wrapper.length === 0 ) {
 			wrapper = this._page().children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" )
-				.wrapAll( "<div class='" + this.options.classes.pageWrapper + animateClass + "' /></div>" )
+				.wrapAll( "<div class='" + this.options.classes.pageWrapper + "'></div>" )
 				.parent();
 		}
 
