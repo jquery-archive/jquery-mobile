@@ -12,44 +12,49 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<script id="redirectCode">
-	$( document ).bind( "pagebeforechange", function( e, data ) {
-		if ( $.type( data.toPage ) !== "string" ) {
+	$( document ).bind( "pagecontainerload", function( e, triggerData ) {
 
-			// Search for redirect data that has been set on the data.toPage by the
-			// "pageload" handler below. If we find such data we know that we are
-			// supposed to perform a redirect.
-
-			var redirect = data.toPage.jqmData( "redirect" );
-			if ( redirect ) {
-
-				// The data has been found. Perform the appropriate redirect.
-
-				data.toPage = redirect;
-			}
-		}
-	});
-
-	$( document ).bind( "pageload", function( e, triggerData ) {
-
-		// We can use this event to recognize that this is a redirect. In this
-		// example the server helpfully returns a custom header. However, if you
-		// don't have access to the server side, you can still examine
+		// We can use this event to recognize that this is a redirect. It is
+		// triggered when jQuery Mobile has finished loading a page, but before it
+		// has enhanced the page, and before it has altered the browser history. In
+		// this example the server helpfully returns a custom header. However, if
+		// you don't have access to the server side, you can still examine
 		// triggerData.page, which contains the page that was loaded, but which has
-		// not yet been displayed or even recorded in the browser history. If there
-		// is a way to recognize that this is not the expected page, you can mark
-		// it with some jqmData that will be picked up in "pagebeforechange"
-		// (above) which in turn will give you an opportunity to redirect (by
-		// overwriting data.toPage as in the handler above)
+		// not yet been displayed or even recorded in the browser history. You can
+		// also examine triggerData.xhr which contains the full XMLHTTPRequest. If
+		// there is a way to recognize that this is not the expected page, you can
+		// mark it with some jqmData that will be picked up in
+		// "pagecontainerbeforetransition" (below) which in turn will give you an
+		// opportunity to redirect (by calling the pagecontainer widget's change()
+		// method).
 
 		var redirect = triggerData.xhr.getResponseHeader( "X-Redirect" );
 		if ( redirect ) {
 
 			// We have identified that this page is really a redirect. Mark it as
-			// such by setting some jqmData on it. The "pagebeforechange" handler
-			// above will look for this data, and, if present, will perform the
-			// appropriate redirect.
-
+			// such by setting some jqmData on it. The "pagecontainerbeforetransition"
+			// handler below will look for this data, and, if present, will perform
+			// the appropriate redirect.
 			triggerData.page.jqmData( "redirect", redirect );
+		}
+	});
+
+	$( document ).bind( "pagecontainerbeforetransition", function( e, data ) {
+
+		// Search for redirect data that has been set on the data.toPage by the
+		// "pagecontainerload" handler above If we find such data we know that we
+		// are supposed to perform a redirect.
+		var redirect = data.toPage.jqmData( "redirect" );
+
+		if ( redirect ) {
+
+			// The data has been found. Perform the appropriate redirect.
+			$( e.target ).pagecontainer( "change", redirect, data.options );
+
+			// Stop the process of loading the current page, because in the line
+			// above we've initiated the process of loading the redirect destination
+			// page, which is the page we wish to display to the user.
+			e.preventDefault();
 		}
 	});
 	</script>
