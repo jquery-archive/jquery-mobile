@@ -135,20 +135,17 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		<p>Here is an example of these rules wrapped in a media query to only apply this behavior above 35em (560px):</p>
 
 <pre><code>
-@media (min-width:35em){
+@media ( min-width: 35em ) {
 
 	/* wrap on wide viewports once open */
 	
-	.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
-	.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
+	.ui-panel-page-content-open.ui-panel-page-content-position-left {
 		margin-right: 17em;
 	}
-	.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
-	.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
+	.ui-panel-page-content-open.ui-panel-page-content-position-right {
 		margin-left: 17em;
 	}
-	.ui-panel-page-content-open.ui-panel-page-content-display-push,
-	.ui-panel-page-content-open.ui-panel-page-content-display-reveal {
+	.ui-panel-page-content-open {
 		width: auto;	
 	}
 	
@@ -158,10 +155,20 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	}
 	
 	/* same as the above but for panels with display mode "push" only */
+
+	.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
+		margin-right: 17em;
+	}
+	.ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push {
+		margin-left: 17em;
+	}
+	.ui-panel-page-content-open.ui-panel-page-content-display-push {
+		width: auto;	
+	}
+
 	.ui-panel-dismiss-display-push {
 		display: none;
 	}
-
 }
 </code></pre>
 
