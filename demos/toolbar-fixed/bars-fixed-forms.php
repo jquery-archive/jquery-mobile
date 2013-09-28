@@ -15,7 +15,7 @@
 <body>
 <div data-role="page" class="jqm-demos">
 
-	<div data-role="header" data-position="fixed" data-theme="f">
+	<div data-role="header" data-position="fixed">
 
 		<div class="ui-grid-a">
 
