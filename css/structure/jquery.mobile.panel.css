@@ -134,16 +134,15 @@
 	-moz-transform: none;
 }
 
-/* positioning: pages, fixed toolbars and dismiss */
+/* positioning: pages, fixed toolbars and dismiss (for reveal and push) */
 /* panel left open */
 .ui-panel-page-content-position-left,
 .ui-panel-dismiss-open.ui-panel-dismiss-position-left {
 	left: 17em;
 	right: -17em;
 }
-/* animated: panel left open (for reveal and push) */
-.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal,
-.ui-panel-animate.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
+/* animated: panel left open */
+.ui-panel-animate.ui-panel-page-content-position-left {
 	left: 0;
 	right: 0;
 	-webkit-transform: translate3d(17em,0,0);
@@ -156,18 +155,13 @@
 	left: -17em;
 	right: 17em;
 }
-/* animated: panel right open (for reveal and push) */
-.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal, 
-.ui-panel-animate.ui-panel-page-content-position-right.ui-panel-page-content-display-push {
+/* animated: panel right open */
+.ui-panel-animate.ui-panel-page-content-position-right {
 	left: 0;
 	right: 0;
 	-webkit-transform: translate3d(-17em,0,0);
 	-moz-transform: translate3d(-17em,0,0);
 	transform: translate3d(-17em,0,0);
-}
-/* negate "panel left/right open" for overlay */
-.ui-panel-page-content-display-overlay {
-	left: 0;
 }
 
 /* shadows and borders */
@@ -210,16 +204,13 @@
 
 /* wrap on wide viewports once open */
 @media (min-width:55em) {
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push,
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left {
 		margin-right: 17em;
 	}
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-push,
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right.ui-panel-page-content-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-right {
 		margin-left: 17em;
 	}
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-push,
-	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-display-reveal {
+	.ui-responsive-panel .ui-panel-page-content-open {
 		width: auto;	
 	}
 	.ui-responsive-panel .ui-panel-dismiss-display-push,
