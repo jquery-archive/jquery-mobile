@@ -48,7 +48,7 @@
 <body>
 <div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1">
 
-    <div data-role="header" data-theme="f" data-position="fixed">
+    <div data-role="header" data-position="fixed">
         <h1>Fixed header</h1>
         <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
         <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
@@ -74,7 +74,7 @@
 
 	</div><!-- /content -->
 
-    <div data-role="footer" data-position="fixed" data-theme="f">
+    <div data-role="footer" data-position="fixed">
     	<h4>Fixed footer</h4>
     </div><!-- /footer -->
 
@@ -141,7 +141,7 @@
 
 <div data-role="page" id="panel-fixed-page2">
 
-    <div data-role="header" data-theme="f">
+    <div data-role="header">
         <h1>Landing page</h1>
     </div><!-- /header -->
 

@@ -102,7 +102,7 @@
 
     </div><!-- /content -->
     
-    <div data-role="footer" data-theme="f" data-position="fixed">
+    <div data-role="footer" data-position="fixed">
     	<h1>Fixed Footer</h1>
     </div>
 
