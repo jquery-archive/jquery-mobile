@@ -20,8 +20,8 @@
 
 <li data-role="list-divider">Themes</li>
 
-<li data-filtertext=""><a href="themes-default/" data-ajax="false">Default theme</a></li>
-<li data-filtertext=""><a href="themes-classic/" data-ajax="false">Classic theme</a></li>
+<li data-filtertext=""><a href="theme-default/" data-ajax="false">Default theme</a></li>
+<li data-filtertext=""><a href="theme-classic/" data-ajax="false">Classic theme</a></li>
 
 <li data-role="list-divider">Buttons &amp; Icons</li>
 
