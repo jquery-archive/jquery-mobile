@@ -4,7 +4,9 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Classic theme - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/classic/jquery.mobile.css">
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.icons.css">
+	<link rel="stylesheet"  href="theme-classic.css">
+	<link rel="stylesheet"  href="../../css/structure/jquery.mobile.structure.css">
 	<link rel="shortcut icon" href="../favicon.ico">
 	<script src="../../js/jquery.js"></script>
 	<script src="../../js/"></script>

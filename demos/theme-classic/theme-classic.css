@@ -1,5 +1,5 @@
 /*
-This "classic" theme mimics the old jQuery Mobile default theme. IMPORTANT: This is not a supported feature. Issues might not be fixed and this theme can be removed at any time! This theme is only available on the repo and not part of the build process. This means it's not included in the release ZIP file and not uploaded to the CDN.
+This "classic" theme mimics the old jQuery Mobile default theme. IMPORTANT: This classic theme is only a demo and not a supported feature. Issues or ThemeRoller incompatibility might not be fixed, this theme is not available on the CDN, and this demo can be removed at any time.
 */
 
 /* Globals */
@@ -87,8 +87,9 @@ label.ui-btn {
 /* Class ui-btn-corner-all deprecated in 1.4 */
 
 .ui-corner-all {
-	-webkit-border-radius: 				.6em /*{global-radii-blocks}*/;
-	border-radius: 						.6em /*{global-radii-blocks}*/;
+	/* Note: change this radius to .6em if you want the old, more rounded, corner style. */
+	-webkit-border-radius: 				.3125em /*{global-radii-blocks}*/;
+	border-radius: 						.3125em /*{global-radii-blocks}*/;
 }
 /* Buttons */
 .ui-btn-corner-all,
