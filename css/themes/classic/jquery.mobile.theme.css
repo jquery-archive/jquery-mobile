@@ -33,14 +33,37 @@ div.ui-controlgroup-label {
 	font-size: 16px;
 }
 
-/* Field contain separator (< 28em)
+/* Separators
 -----------------------------------------------------------------------------------------------------------*/
-
+/* Field contain separator (< 28em) */
 .ui-field-contain {
 	border-bottom-color: #828282;
 	border-bottom-color: rgba(0,0,0,.15);
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
+}
+
+/* Table opt-in classes: strokes between each row, and alternating row stripes */
+/* Classes table-stroke and table-stripe are deprecated in 1.4. */
+.table-stroke thead th,
+.table-stripe thead th,
+.table-stripe tbody tr:last-child {
+	border-bottom: 1px solid #d6d6d6; /* non-RGBA fallback */
+	border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.table-stroke tbody th,
+.table-stroke tbody td {
+	border-bottom: 1px solid #e6e6e6; /* non-RGBA fallback  */
+	border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.table-stripe.table-stroke tbody tr:last-child th,
+.table-stripe.table-stroke tbody tr:last-child td {
+	border-bottom: 0;
+}
+.table-stripe tbody tr:nth-child(odd) td,
+.table-stripe tbody tr:nth-child(odd) th {
+	background-color: #eeeeee; /* non-RGBA fallback  */
+	background-color: rgba(0,0,0,.04);
 }
 
 /* Buttons
@@ -106,12 +129,12 @@ label.ui-btn {
 .ui-shadow {
 	-webkit-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.15) /*{global-box-shadow-color}*/;
 	-moz-box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.15) /*{global-box-shadow-color}*/;
-	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.15) /*{global-box-shadow-color}*/
+	box-shadow: 0 1px 3px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.15) /*{global-box-shadow-color}*/;
 }
 .ui-shadow-inset {
 	-webkit-box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ 	rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
 	-moz-box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
-	box-shadow: inset 0 1px 3px 0 1px 3px /*{global-box-shadow-size}*/ 	rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
+	box-shadow: inset 0 1px 3px /*{global-box-shadow-size}*/ 	rgba(0,0,0,.2) /*{global-box-shadow-color}*/;
 }
 .ui-overlay-shadow {
 	-webkit-box-shadow: 0 0 12px 		rgba(0,0,0,.6);
@@ -209,7 +232,6 @@ html .ui-btn.ui-icon-checkbox-on:after {
 
 /* Bar: Toolbars, dividers, slider track */
 .ui-bar-a,
-.ui-overlay-a .ui-bar-inherit,
 .ui-page-theme-a .ui-bar-inherit,
 html .ui-bar-a .ui-bar-inherit,
 html .ui-body-a .ui-bar-inherit,
@@ -249,7 +271,6 @@ html body .ui-group-theme-a .ui-bar-inherit {
 
 /* Body: Read-only lists, text inputs, collapsible content */
 .ui-body-a,
-.ui-overlay-a .ui-body-inherit,
 .ui-page-theme-a .ui-body-inherit,
 html .ui-bar-a .ui-body-inherit,
 html .ui-body-a .ui-body-inherit,
@@ -272,7 +293,6 @@ html .ui-panel-page-container-a {
 }
 
 /* Links */
-.ui-overlay-a a,
 .ui-page-theme-a a,
 html .ui-bar-a a,
 html .ui-body-a a,
@@ -280,21 +300,18 @@ html body .ui-group-theme-a a {
 	color: #2489ce /*{a-link-color}*/;
 	font-weight: bold;
 }
-.ui-overlay-a a:visited,
 .ui-page-theme-a a:visited,
 html .ui-bar-a a:visited,
 html .ui-body-a a:visited,
 html body .ui-group-theme-a a:visited {
     color: #2489ce /*{a-link-visited}*/;
 }
-.ui-overlay-a a:hover,
 .ui-page-theme-a a:hover,
 html .ui-bar-a a:hover,
 html .ui-body-a a:hover,
 html body .ui-group-theme-a a:hover {
 	color: #2489ce /*{a-link-hover}*/;
 }
-.ui-overlay-a a:active,
 .ui-page-theme-a a:active,
 html .ui-bar-a a:active,
 html .ui-body-a a:active,
@@ -303,14 +320,12 @@ html body .ui-group-theme-a a:active {
 }
 
 /* Button up */
-.ui-overlay-a .ui-btn,
 .ui-page-theme-a .ui-btn,
 html .ui-bar-a .ui-btn,
 html .ui-body-a .ui-btn,
 html body .ui-group-theme-a .ui-btn,
 html head + body .ui-btn.ui-btn-a,
 /* Button visited */
-.ui-overlay-a .ui-btn:visited,
 .ui-page-theme-a .ui-btn:visited,
 html .ui-bar-a .ui-btn:visited,
 html .ui-body-a .ui-btn:visited,
@@ -328,7 +343,6 @@ html head + body .ui-btn.ui-btn-a:visited {
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #111 /*{a-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-overlay-a .ui-btn:hover,
 .ui-page-theme-a .ui-btn:hover,
 html .ui-bar-a .ui-btn:hover,
 html .ui-body-a .ui-btn:hover,
@@ -346,7 +360,6 @@ html head + body .ui-btn.ui-btn-a:hover {
 	text-shadow: 0 /*{a-bhover-shadow-x}*/ 1px /*{a-bhover-shadow-y}*/ 0 /*{a-bhover-shadow-radius}*/ #111 /*{a-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-overlay-a .ui-btn:active,
 .ui-page-theme-a .ui-btn:active,
 html .ui-bar-a .ui-btn:active,
 html .ui-body-a .ui-btn:active,
@@ -365,28 +378,24 @@ html head + body .ui-btn.ui-btn-a:active {
 }
 
 /* Active button */
-.ui-overlay-a .ui-btn.ui-btn-active,
 .ui-page-theme-a .ui-btn.ui-btn-active,
 html .ui-bar-a .ui-btn.ui-btn-active,
 html .ui-body-a .ui-btn.ui-btn-active,
 html body .ui-group-theme-a .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-a.ui-btn-active,
 /* Active checkbox icon */
-.ui-overlay-a .ui-icon-checkbox-on:after,
 .ui-page-theme-a .ui-icon-checkbox-on:after,
 html .ui-bar-a .ui-icon-checkbox-on:after,
 html .ui-body-a .ui-icon-checkbox-on:after,
 html body .ui-group-theme-a .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-a:after,
 /* Active flipswitch background */
-.ui-overlay-a .ui-flipswitch-active,
 .ui-page-theme-a .ui-flipswitch-active,
 html .ui-bar-a .ui-flipswitch-active,
 html .ui-body-a .ui-flipswitch-active,
 html body .ui-group-theme-a .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active,
 /* Active slider track */
-.ui-overlay-a .ui-slider-track .ui-btn-active,
 .ui-page-theme-a .ui-slider-track .ui-btn-active,
 html .ui-bar-a .ui-slider-track .ui-btn-active,
 html .ui-body-a .ui-slider-track .ui-btn-active,
@@ -404,7 +413,6 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #3373a5 /*{a-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-overlay-a .ui-icon-radio-on:after,
 .ui-page-theme-a .ui-icon-radio-on:after,
 html .ui-bar-a .ui-icon-radio-on:after,
 html .ui-body-a .ui-icon-radio-on:after,
@@ -414,14 +422,12 @@ html body .ui-group-theme-a .ui-icon-radio-on:after,
 }
 
 /* Focus */
-.ui-overlay-a .ui-btn:focus,
 .ui-page-theme-a .ui-btn:focus,
 html .ui-bar-a .ui-btn:focus,
 html .ui-body-a .ui-btn:focus,
 html body .ui-group-theme-a .ui-btn:focus,
 html head + body .ui-btn.ui-btn-a:focus,
 /* Focus buttons and text inputs with div wrap */
-.ui-overlay-a .ui-focus,
 .ui-page-theme-a .ui-focus,
 html .ui-bar-a .ui-focus,
 html .ui-body-a .ui-focus,
@@ -438,7 +444,6 @@ html head + body .ui-body-a.ui-focus {
 
 /* Bar: Toolbars, dividers, slider track */
 .ui-bar-b,
-.ui-overlay-b .ui-bar-inherit,
 .ui-page-theme-b .ui-bar-inherit,
 html .ui-bar-b .ui-bar-inherit,
 html .ui-body-b .ui-bar-inherit,
@@ -478,7 +483,6 @@ html body .ui-group-theme-b .ui-bar-inherit {
 
 /* Body: Read-only lists, text inputs, collapsible content */
 .ui-body-b,
-.ui-overlay-b .ui-body-inherit,
 .ui-page-theme-b .ui-body-inherit,
 html .ui-bar-b .ui-body-inherit,
 html .ui-body-b .ui-body-inherit,
@@ -501,7 +505,6 @@ html .ui-panel-page-container-b {
 }
 
 /* Links */
-.ui-overlay-b a,
 .ui-page-theme-b a,
 html .ui-bar-b a,
 html .ui-body-b a,
@@ -509,21 +512,18 @@ html body .ui-group-theme-b a {
 	color: #2489ce /*{b-link-color}*/;
 	font-weight: bold;
 }
-.ui-overlay-b a:visited,
 .ui-page-theme-b a:visited,
 html .ui-bar-b a:visited,
 html .ui-body-b a:visited,
 html body .ui-group-theme-b a:visited {
     color: #2489ce /*{b-link-visited}*/;
 }
-.ui-overlay-b a:hover,
 .ui-page-theme-b a:hover,
 html .ui-bar-b a:hover,
 html .ui-body-b a:hover,
 html body .ui-group-theme-b a:hover {
 	color: #2489ce /*{b-link-hover}*/;
 }
-.ui-overlay-b a:active,
 .ui-page-theme-b a:active,
 html .ui-bar-b a:active,
 html .ui-body-b a:active,
@@ -532,14 +532,12 @@ html body .ui-group-theme-b a:active {
 }
 
 /* Button up */
-.ui-overlay-b .ui-btn,
 .ui-page-theme-b .ui-btn,
 html .ui-bar-b .ui-btn,
 html .ui-body-b .ui-btn,
 html body .ui-group-theme-b .ui-btn,
 html head + body .ui-btn.ui-btn-b,
 /* Button visited */
-.ui-overlay-b .ui-btn:visited,
 .ui-page-theme-b .ui-btn:visited,
 html .ui-bar-b .ui-btn:visited,
 html .ui-body-b .ui-btn:visited,
@@ -557,7 +555,6 @@ html head + body .ui-btn.ui-btn-b:visited {
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #194b7e /*{b-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-overlay-b .ui-btn:hover,
 .ui-page-theme-b .ui-btn:hover,
 html .ui-bar-b .ui-btn:hover,
 html .ui-body-b .ui-btn:hover,
@@ -575,7 +572,6 @@ html head + body .ui-btn.ui-btn-b:hover {
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #194b7e /*{b-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-overlay-b .ui-btn:active,
 .ui-page-theme-b .ui-btn:active,
 html .ui-bar-b .ui-btn:active,
 html .ui-body-b .ui-btn:active,
@@ -594,28 +590,24 @@ html head + body .ui-btn.ui-btn-b:active {
 }
 
 /* Active button */
-.ui-overlay-b .ui-btn.ui-btn-active,
 .ui-page-theme-b .ui-btn.ui-btn-active,
 html .ui-bar-b .ui-btn.ui-btn-active,
 html .ui-body-b .ui-btn.ui-btn-active,
 html body .ui-group-theme-b .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-b.ui-btn-active,
 /* Active checkbox icon */
-.ui-overlay-b .ui-icon-checkbox-on:after,
 .ui-page-theme-b .ui-icon-checkbox-on:after,
 html .ui-bar-b .ui-icon-checkbox-on:after,
 html .ui-body-b .ui-icon-checkbox-on:after,
 html body .ui-group-theme-b .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-b:after,
 /* Active flipswitch background */
-.ui-overlay-b .ui-flipswitch-active,
 .ui-page-theme-b .ui-flipswitch-active,
 html .ui-bar-b .ui-flipswitch-active,
 html .ui-body-b .ui-flipswitch-active,
 html body .ui-group-theme-b .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-b.ui-flipswitch-active,
 /* Active slider track */
-.ui-overlay-b .ui-slider-track .ui-btn-active,
 .ui-page-theme-b .ui-slider-track .ui-btn-active,
 html .ui-bar-b .ui-slider-track .ui-btn-active,
 html .ui-body-b .ui-slider-track .ui-btn-active,
@@ -633,7 +625,6 @@ html body div.ui-slider-track.ui-body-b .ui-btn-active {
 	text-shadow: 0 /*{b-active-shadow-x}*/ 1px /*{b-active-shadow-y}*/ 0 /*{b-active-shadow-radius}*/ #3373a5 /*{b-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-overlay-b .ui-icon-radio-on:after,
 .ui-page-theme-b .ui-icon-radio-on:after,
 html .ui-bar-b .ui-icon-radio-on:after,
 html .ui-body-b .ui-icon-radio-on:after,
@@ -643,14 +634,12 @@ html body .ui-group-theme-b .ui-icon-radio-on:after,
 }
 
 /* Focus */
-.ui-overlay-b .ui-btn:focus,
 .ui-page-theme-b .ui-btn:focus,
 html .ui-bar-b .ui-btn:focus,
 html .ui-body-b .ui-btn:focus,
 html body .ui-group-theme-b .ui-btn:focus,
 html head + body .ui-btn.ui-btn-b:focus,
 /* Focus buttons and text inputs with div wrap */
-.ui-overlay-b .ui-focus,
 .ui-page-theme-b .ui-focus,
 html .ui-bar-b .ui-focus,
 html .ui-body-b .ui-focus,
@@ -667,7 +656,6 @@ html head + body .ui-body-b.ui-focus {
 
 /* Bar: Toolbars, dividers, slider track */
 .ui-bar-c,
-.ui-overlay-c .ui-bar-inherit,
 .ui-page-theme-c .ui-bar-inherit,
 html .ui-bar-c .ui-bar-inherit,
 html .ui-body-c .ui-bar-inherit,
@@ -707,7 +695,6 @@ html body .ui-group-theme-c .ui-bar-inherit {
 
 /* Body: Read-only lists, text inputs, collapsible content */
 .ui-body-c,
-.ui-overlay-c .ui-body-inherit,
 .ui-page-theme-c .ui-body-inherit,
 html .ui-bar-c .ui-body-inherit,
 html .ui-body-c .ui-body-inherit,
@@ -730,7 +717,6 @@ html .ui-panel-page-container-c {
 }
 
 /* Links */
-.ui-overlay-c a,
 .ui-page-theme-c a,
 html .ui-bar-c a,
 html .ui-body-c a,
@@ -738,21 +724,18 @@ html body .ui-group-theme-c a {
 	color: #2489ce /*{c-link-color}*/;
 	font-weight: bold;
 }
-.ui-overlay-c a:visited,
 .ui-page-theme-c a:visited,
 html .ui-bar-c a:visited,
 html .ui-body-c a:visited,
 html body .ui-group-theme-c a:visited {
     color: #2489ce /*{c-link-visited}*/;
 }
-.ui-overlay-c a:hover,
 .ui-page-theme-c a:hover,
 html .ui-bar-c a:hover,
 html .ui-body-c a:hover,
 html body .ui-group-theme-c a:hover {
 	color: #2489ce /*{c-link-hover}*/;
 }
-.ui-overlay-c a:active,
 .ui-page-theme-c a:active,
 html .ui-bar-c a:active,
 html .ui-body-c a:active,
@@ -761,14 +744,12 @@ html body .ui-group-theme-c a:active {
 }
 
 /* Button up */
-.ui-overlay-c .ui-btn,
 .ui-page-theme-c .ui-btn,
 html .ui-bar-c .ui-btn,
 html .ui-body-c .ui-btn,
 html body .ui-group-theme-c .ui-btn,
 html head + body .ui-btn.ui-btn-c,
 /* Button visited */
-.ui-overlay-c .ui-btn:visited,
 .ui-page-theme-c .ui-btn:visited,
 html .ui-bar-c .ui-btn:visited,
 html .ui-body-c .ui-btn:visited,
@@ -786,7 +767,6 @@ html head + body .ui-btn.ui-btn-c:visited {
 	text-shadow: 0 /*{c-bup-shadow-x}*/ 1px /*{c-bup-shadow-y}*/ 0 /*{c-bup-shadow-radius}*/ #fff /*{c-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-overlay-c .ui-btn:hover,
 .ui-page-theme-c .ui-btn:hover,
 html .ui-bar-c .ui-btn:hover,
 html .ui-body-c .ui-btn:hover,
@@ -804,7 +784,6 @@ html head + body .ui-btn.ui-btn-c:hover {
 	text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ #fff /*{c-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-overlay-c .ui-btn:active,
 .ui-page-theme-c .ui-btn:active,
 html .ui-bar-c .ui-btn:active,
 html .ui-body-c .ui-btn:active,
@@ -823,28 +802,24 @@ html head + body .ui-btn.ui-btn-c:active {
 }
 
 /* Active button */
-.ui-overlay-c .ui-btn.ui-btn-active,
 .ui-page-theme-c .ui-btn.ui-btn-active,
 html .ui-bar-c .ui-btn.ui-btn-active,
 html .ui-body-c .ui-btn.ui-btn-active,
 html body .ui-group-theme-c .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-c.ui-btn-active,
 /* Active checkbox icon */
-.ui-overlay-c .ui-icon-checkbox-on:after,
 .ui-page-theme-c .ui-icon-checkbox-on:after,
 html .ui-bar-c .ui-icon-checkbox-on:after,
 html .ui-body-c .ui-icon-checkbox-on:after,
 html body .ui-group-theme-c .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-c:after,
 /* Active flipswitch background */
-.ui-overlay-c .ui-flipswitch-active,
 .ui-page-theme-c .ui-flipswitch-active,
 html .ui-bar-c .ui-flipswitch-active,
 html .ui-body-c .ui-flipswitch-active,
 html body .ui-group-theme-c .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-c.ui-flipswitch-active,
 /* Active slider track */
-.ui-overlay-c .ui-slider-track .ui-btn-active,
 .ui-page-theme-c .ui-slider-track .ui-btn-active,
 html .ui-bar-c .ui-slider-track .ui-btn-active,
 html .ui-body-c .ui-slider-track .ui-btn-active,
@@ -862,7 +837,6 @@ html body div.ui-slider-track.ui-body-c .ui-btn-active {
 	text-shadow: 0 /*{c-active-shadow-x}*/ 1px /*{c-active-shadow-y}*/ 0 /*{c-active-shadow-radius}*/ #3373a5 /*{c-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-overlay-c .ui-icon-radio-on:after,
 .ui-page-theme-c .ui-icon-radio-on:after,
 html .ui-bar-c .ui-icon-radio-on:after,
 html .ui-body-c .ui-icon-radio-on:after,
@@ -872,14 +846,12 @@ html body .ui-group-theme-c .ui-icon-radio-on:after,
 }
 
 /* Focus */
-.ui-overlay-c .ui-btn:focus,
 .ui-page-theme-c .ui-btn:focus,
 html .ui-bar-c .ui-btn:focus,
 html .ui-body-c .ui-btn:focus,
 html body .ui-group-theme-c .ui-btn:focus,
 html head + body .ui-btn.ui-btn-c:focus,
 /* Focus buttons and text inputs with div wrap */
-.ui-overlay-c .ui-focus,
 .ui-page-theme-c .ui-focus,
 html .ui-bar-c .ui-focus,
 html .ui-body-c .ui-focus,
@@ -896,7 +868,6 @@ html head + body .ui-body-c.ui-focus {
 
 /* Bar: Toolbars, dividers, slider track */
 .ui-bar-d,
-.ui-overlay-d .ui-bar-inherit,
 .ui-page-theme-d .ui-bar-inherit,
 html .ui-bar-d .ui-bar-inherit,
 html .ui-body-d .ui-bar-inherit,
@@ -936,7 +907,6 @@ html body .ui-group-theme-d .ui-bar-inherit {
 
 /* Body: Read-only lists, text inputs, collapsible content */
 .ui-body-d,
-.ui-overlay-d .ui-body-inherit,
 .ui-page-theme-d .ui-body-inherit,
 html .ui-bar-d .ui-body-inherit,
 html .ui-body-d .ui-body-inherit,
@@ -959,7 +929,6 @@ html .ui-panel-page-container-d {
 }
 
 /* Links */
-.ui-overlay-d a,
 .ui-page-theme-d a,
 html .ui-bar-d a,
 html .ui-body-d a,
@@ -967,21 +936,18 @@ html body .ui-group-theme-d a {
 	color: #2489ce /*{d-link-color}*/;
 	font-weight: bold;
 }
-.ui-overlay-d a:visited,
 .ui-page-theme-d a:visited,
 html .ui-bar-d a:visited,
 html .ui-body-d a:visited,
 html body .ui-group-theme-d a:visited {
     color: #2489ce /*{d-link-visited}*/;
 }
-.ui-overlay-d a:hover,
 .ui-page-theme-d a:hover,
 html .ui-bar-d a:hover,
 html .ui-body-d a:hover,
 html body .ui-group-theme-d a:hover {
 	color: #2489ce /*{d-link-hover}*/;
 }
-.ui-overlay-d a:active,
 .ui-page-theme-d a:active,
 html .ui-bar-d a:active,
 html .ui-body-d a:active,
@@ -990,14 +956,12 @@ html body .ui-group-theme-d a:active {
 }
 
 /* Button up */
-.ui-overlay-d .ui-btn,
 .ui-page-theme-d .ui-btn,
 html .ui-bar-d .ui-btn,
 html .ui-body-d .ui-btn,
 html body .ui-group-theme-d .ui-btn,
 html head + body .ui-btn.ui-btn-d,
 /* Button visited */
-.ui-overlay-d .ui-btn:visited,
 .ui-page-theme-d .ui-btn:visited,
 html .ui-bar-d .ui-btn:visited,
 html .ui-body-d .ui-btn:visited,
@@ -1015,7 +979,6 @@ html head + body .ui-btn.ui-btn-d:visited {
 	text-shadow: 0 /*{d-bup-shadow-x}*/ 1px /*{d-bup-shadow-y}*/ 0 /*{d-bup-shadow-radius}*/ #fff /*{d-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-overlay-d .ui-btn:hover,
 .ui-page-theme-d .ui-btn:hover,
 html .ui-bar-d .ui-btn:hover,
 html .ui-body-d .ui-btn:hover,
@@ -1033,7 +996,6 @@ html head + body .ui-btn.ui-btn-d:hover {
 	text-shadow: 0 /*{d-bhover-shadow-x}*/ 1px /*{d-bhover-shadow-y}*/ 0 /*{d-bhover-shadow-radius}*/ #fff /*{d-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-overlay-d .ui-btn:active,
 .ui-page-theme-d .ui-btn:active,
 html .ui-bar-d .ui-btn:active,
 html .ui-body-d .ui-btn:active,
@@ -1052,28 +1014,24 @@ html head + body .ui-btn.ui-btn-d:active {
 }
 
 /* Active button */
-.ui-overlay-d .ui-btn.ui-btn-active,
 .ui-page-theme-d .ui-btn.ui-btn-active,
 html .ui-bar-d .ui-btn.ui-btn-active,
 html .ui-body-d .ui-btn.ui-btn-active,
 html body .ui-group-theme-d .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-d.ui-btn-active,
 /* Active checkbox icon */
-.ui-overlay-d .ui-icon-checkbox-on:after,
 .ui-page-theme-d .ui-icon-checkbox-on:after,
 html .ui-bar-d .ui-icon-checkbox-on:after,
 html .ui-body-d .ui-icon-checkbox-on:after,
 html body .ui-group-theme-d .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-d:after,
 /* Active flipswitch background */
-.ui-overlay-d .ui-flipswitch-active,
 .ui-page-theme-d .ui-flipswitch-active,
 html .ui-bar-d .ui-flipswitch-active,
 html .ui-body-d .ui-flipswitch-active,
 html body .ui-group-theme-d .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-d.ui-flipswitch-active,
 /* Active slider track */
-.ui-overlay-d .ui-slider-track .ui-btn-active,
 .ui-page-theme-d .ui-slider-track .ui-btn-active,
 html .ui-bar-d .ui-slider-track .ui-btn-active,
 html .ui-body-d .ui-slider-track .ui-btn-active,
@@ -1091,7 +1049,6 @@ html body div.ui-slider-track.ui-body-d .ui-btn-active {
 	text-shadow: 0 /*{d-active-shadow-x}*/ 1px /*{d-active-shadow-y}*/ 0 /*{d-active-shadow-radius}*/ #3373a5 /*{d-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-overlay-d .ui-icon-radio-on:after,
 .ui-page-theme-d .ui-icon-radio-on:after,
 html .ui-bar-d .ui-icon-radio-on:after,
 html .ui-body-d .ui-icon-radio-on:after,
@@ -1101,14 +1058,12 @@ html body .ui-group-theme-d .ui-icon-radio-on:after,
 }
 
 /* Focus */
-.ui-overlay-d .ui-btn:focus,
 .ui-page-theme-d .ui-btn:focus,
 html .ui-bar-d .ui-btn:focus,
 html .ui-body-d .ui-btn:focus,
 html body .ui-group-theme-d .ui-btn:focus,
 html head + body .ui-btn.ui-btn-d:focus,
 /* Focus buttons and text inputs with div wrap */
-.ui-overlay-d .ui-focus,
 .ui-page-theme-d .ui-focus,
 html .ui-bar-d .ui-focus,
 html .ui-body-d .ui-focus,
@@ -1125,7 +1080,6 @@ html head + body .ui-body-d.ui-focus {
 
 /* Bar: Toolbars, dividers, slider track */
 .ui-bar-e,
-.ui-overlay-e .ui-bar-inherit,
 .ui-page-theme-e .ui-bar-inherit,
 html .ui-bar-e .ui-bar-inherit,
 html .ui-body-e .ui-bar-inherit,
@@ -1165,7 +1119,6 @@ html body .ui-group-theme-e .ui-bar-inherit {
 
 /* Body: Read-only lists, text inputs, collapsible content */
 .ui-body-e,
-.ui-overlay-e .ui-body-inherit,
 .ui-page-theme-e .ui-body-inherit,
 html .ui-bar-e .ui-body-inherit,
 html .ui-body-e .ui-body-inherit,
@@ -1188,7 +1141,6 @@ html .ui-panel-page-container-e {
 }
 
 /* Links */
-.ui-overlay-e a,
 .ui-page-theme-e a,
 html .ui-bar-e a,
 html .ui-body-e a,
@@ -1196,21 +1148,18 @@ html body .ui-group-theme-e a {
 	color: #2489ce /*{e-link-color}*/;
 	font-weight: bold;
 }
-.ui-overlay-e a:visited,
 .ui-page-theme-e a:visited,
 html .ui-bar-e a:visited,
 html .ui-body-e a:visited,
 html body .ui-group-theme-e a:visited {
     color: #2489ce /*{e-link-visited}*/;
 }
-.ui-overlay-e a:hover,
 .ui-page-theme-e a:hover,
 html .ui-bar-e a:hover,
 html .ui-body-e a:hover,
 html body .ui-group-theme-e a:hover {
 	color: #2489ce /*{e-link-hover}*/;
 }
-.ui-overlay-e a:active,
 .ui-page-theme-e a:active,
 html .ui-bar-e a:active,
 html .ui-body-e a:active,
@@ -1219,14 +1168,12 @@ html body .ui-group-theme-e a:active {
 }
 
 /* Button up */
-.ui-overlay-e .ui-btn,
 .ui-page-theme-e .ui-btn,
 html .ui-bar-e .ui-btn,
 html .ui-body-e .ui-btn,
 html body .ui-group-theme-e .ui-btn,
 html head + body .ui-btn.ui-btn-e,
 /* Button visited */
-.ui-overlay-e .ui-btn:visited,
 .ui-page-theme-e .ui-btn:visited,
 html .ui-bar-e .ui-btn:visited,
 html .ui-body-e .ui-btn:visited,
@@ -1244,7 +1191,6 @@ html head + body .ui-btn.ui-btn-e:visited {
 	text-shadow: 0 /*{e-bup-shadow-x}*/ 1px /*{e-bup-shadow-y}*/ 0 /*{e-bup-shadow-radius}*/ #fff /*{e-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-overlay-e .ui-btn:hover,
 .ui-page-theme-e .ui-btn:hover,
 html .ui-bar-e .ui-btn:hover,
 html .ui-body-e .ui-btn:hover,
@@ -1262,7 +1208,6 @@ html head + body .ui-btn.ui-btn-e:hover {
 	text-shadow: 0 /*{e-bhover-shadow-x}*/ 1px /*{e-bhover-shadow-y}*/ 0 /*{e-bhover-shadow-radius}*/ #fff /*{e-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-overlay-e .ui-btn:active,
 .ui-page-theme-e .ui-btn:active,
 html .ui-bar-e .ui-btn:active,
 html .ui-body-e .ui-btn:active,
@@ -1281,28 +1226,24 @@ html head + body .ui-btn.ui-btn-e:active {
 }
 
 /* Active button */
-.ui-overlay-e .ui-btn.ui-btn-active,
 .ui-page-theme-e .ui-btn.ui-btn-active,
 html .ui-bar-e .ui-btn.ui-btn-active,
 html .ui-body-e .ui-btn.ui-btn-active,
 html body .ui-group-theme-e .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-e.ui-btn-active,
 /* Active checkbox icon */
-.ui-overlay-e .ui-icon-checkbox-on:after,
 .ui-page-theme-e .ui-icon-checkbox-on:after,
 html .ui-bar-e .ui-icon-checkbox-on:after,
 html .ui-body-e .ui-icon-checkbox-on:after,
 html body .ui-group-theme-e .ui-icon-checkbox-on:after,
 .ui-btn.ui-icon-checkbox-on.ui-btn-e:after,
 /* Active flipswitch background */
-.ui-overlay-e .ui-flipswitch-active,
 .ui-page-theme-e .ui-flipswitch-active,
 html .ui-bar-e .ui-flipswitch-active,
 html .ui-body-e .ui-flipswitch-active,
 html body .ui-group-theme-e .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-e.ui-flipswitch-active,
 /* Active slider track */
-.ui-overlay-e .ui-slider-track .ui-btn-active,
 .ui-page-theme-e .ui-slider-track .ui-btn-active,
 html .ui-bar-e .ui-slider-track .ui-btn-active,
 html .ui-body-e .ui-slider-track .ui-btn-active,
@@ -1320,7 +1261,6 @@ html body div.ui-slider-track.ui-body-e .ui-btn-active {
 	text-shadow: 0 /*{e-active-shadow-x}*/ 1px /*{e-active-shadow-y}*/ 0 /*{e-active-shadow-radius}*/ #3373a5 /*{e-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-overlay-e .ui-icon-radio-on:after,
 .ui-page-theme-e .ui-icon-radio-on:after,
 html .ui-bar-e .ui-icon-radio-on:after,
 html .ui-body-e .ui-icon-radio-on:after,
@@ -1330,14 +1270,12 @@ html body .ui-group-theme-e .ui-icon-radio-on:after,
 }
 
 /* Focus */
-.ui-overlay-e .ui-btn:focus,
 .ui-page-theme-e .ui-btn:focus,
 html .ui-bar-e .ui-btn:focus,
 html .ui-body-e .ui-btn:focus,
 html body .ui-group-theme-e .ui-btn:focus,
 html head + body .ui-btn.ui-btn-e:focus,
 /* Focus buttons and text inputs with div wrap */
-.ui-overlay-e .ui-focus,
 .ui-page-theme-e .ui-focus,
 html .ui-bar-e .ui-focus,
 html .ui-body-e .ui-focus,
