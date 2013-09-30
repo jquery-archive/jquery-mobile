@@ -60,17 +60,16 @@ $( document ).one( "pagecreate", ".demo-page", function() {
 			navprev( prev );
 		}
 	});
-
-	// Open the trivia popup when clicking on the button
-	$( ".trivia-btn" ).on( "click", function() {
-		$( ".ui-page-active .trivia" ).popup( "open" );
-	});
 });
 
 $( document ).on( "pageshow", ".demo-page", function() {
-	var title = $( this ).jqmData( "title" ),
-		next = $( this ).jqmData( "next" ),
-		prev = $( this ).jqmData( "prev" );
+	var thePage = $( this ),
+		title = thePage.jqmData( "title" ),
+		next = thePage.jqmData( "next" ),
+		prev = thePage.jqmData( "prev" );
+
+	// Point the "Trivia" button to the popup for the current page.
+	$( "#trivia-button" ).attr( "href", "#" + thePage.find( ".trivia" ).attr( "id" ) );
 
 	// We use the same header on each page
 	// so we have to update the title
