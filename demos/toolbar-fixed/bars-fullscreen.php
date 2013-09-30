@@ -17,7 +17,7 @@
 
     <div data-role="header" data-position="fixed" data-fullscreen="true">
         <h1>Fullscreen fixed header</h1>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
     </div>
 
     <div data-role="content" class="jqm-content">
