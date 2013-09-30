@@ -426,8 +426,11 @@ $.widget( "mobile.panel", {
 			multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1;
 
 		if ( o.display !== "overlay" ) {
-			// Destroy the wrapper even if there are still other panels, because we don't know if they use a wrapper
-		    this._wrapper().not("[data-id='persistent']").children().unwrap();
+			// keeep the wrapper if not in use
+		    var pnls = $( "body > :mobile-panel" ).add( $.mobile.activePage.find( ":mobile-panel" ) );
+		    if (pnls.not( ".ui-panel-display-overlay" ).not(this.element).length === 0) {
+		        this._wrapper().children().unwrap();
+		    }
 
 			if ( this._open ) {
 				
