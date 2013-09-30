@@ -15,32 +15,32 @@
 </head>
 <body>
 
-<div data-role="page" id="newyork" class="demo-page" data-dom-cache="true" data-theme="b" data-next="buenosaires">
+<div id="header" data-role="header" data-id="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
+    <h1>New York</h1>
+    <a href="./" data-ajax="false" data-direction="reverse" data-icon="delete" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
+</div><!-- /header -->
 
-    <div data-role="header" data-position="fixed" data-fullscreen="true" data-id="hdr" data-tap-toggle="false">
-        <h1>New York</h1>
-        <a href="./" data-ajax="false" data-direction="reverse" data-icon="delete" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
-    </div><!-- /header -->
+<div data-role="page" id="newyork" class="demo-page" data-title="New York" data-dom-cache="true" data-theme="b" data-next="buenosaires">
   
 	<div data-role="content">
     
 		<div id="trivia-newyork" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
         	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
-		<p>Although many legends exist about the origin of New York City's nickname, the Big Apple, most historians agree that it can be traced back to a writer who covered horse racing in the 1920s. In The Morning Telegraph, he wrote that stable hands often referred to New York as the Big Apple, meaning that any thoroughbred that raced in New York had reached the pinnacle of racing. <small>source:&nbsp;nylady.hubpages.com</small></p>
+			<p>Although many legends exist about the origin of New York City's nickname, the Big Apple, most historians agree that it can be traced back to a writer who covered horse racing in the 1920s. In The Morning Telegraph, he wrote that stable hands often referred to New York as the Big Apple, meaning that any thoroughbred that raced in New York had reached the pinnacle of racing. <small>source:&nbsp;nylady.hubpages.com</small></p>
         </div>
 
 	</div><!-- /content -->
 
-    <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+</div><!-- /page -->
+
+    <div id="footer" data-id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
 		<div data-role="controlgroup" class="control ui-btn-left" data-type="horizontal" data-mini="true">
         	<a href="#" class="prev" data-role="button" data-icon="arrow-l" data-iconpos="notext">Previous</a>
         	<a href="#" class="next" data-role="button" data-icon="arrow-r" data-iconpos="notext">Next</a>
         </div>
         
-		<a href="#trivia-newyork" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-mini="true">Trivia</a>
+		<a href="#" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-mini="true">Trivia</a>
     </div><!-- /footer -->
-
-</div><!-- /page -->
 
 </body>
 </html>

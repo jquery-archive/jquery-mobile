@@ -19,7 +19,8 @@
 }
 /* The footer won't have a height because there are only two absolute positioned elements in it.
 So we position the buttons from the bottom. */
-.control.ui-btn-left, .trivia-btn.ui-btn-right {
+.control.ui-btn-left,
+.trivia-btn.ui-btn-right {
 	top: auto;
 	bottom: 7px;
 	margin: 0;
