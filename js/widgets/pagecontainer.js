@@ -392,14 +392,20 @@ define( [
 		_showLoading: function( delay, theme, msg, textonly ) {
 			// This configurable timeout allows cached pages a brief
 			// delay to load without showing a message
+			if ( this._loadMsg ) {
+				return;
+			}
+
 			this._loadMsg = setTimeout($.proxy(function() {
 				this._getLoader().loader( "show", theme, msg, textonly );
+				this._loadMsg = 0;
 			}, this), delay );
 		},
 
 		_hideLoading: function() {
 			// Stop message show timer
 			clearTimeout( this._loadMsg );
+			this._loadMsg = 0;
 
 			// Hide loading message
 			this._getLoader().loader( "hide" );
