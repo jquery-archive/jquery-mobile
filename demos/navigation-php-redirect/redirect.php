@@ -1,4 +1,10 @@
 <?php
+	// ************************************************************************
+	// The two-second sleep simulates network delays, hopefully causing a
+	// loading indicator message to appear on the client side.
+	// ************************************************************************
+	sleep(2);
+
 	$dst = ( isset( $_GET[ "to" ] ) 
 		? $_GET[ "to" ] 
 		: ( isset( $_POST[ "to" ] ) 
