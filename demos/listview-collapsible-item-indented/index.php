@@ -14,31 +14,31 @@
 	<style id="collapsible-list-item-style">
 		/* Basic settings */
 		.ui-li-static.ui-collapsible {
-  		padding: 0;
+			padding: 0;
 		}
 
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview,
 		.ui-li-static.ui-collapsible > .ui-collapsible-heading {
-  		margin: 0;
+			margin: 0;
 		}
 
 		.ui-li-static.ui-collapsible > .ui-collapsible-content {
-  		padding-top: 0;
-  		padding-bottom: 0;
-  		padding-right: 0;
-  		border-bottom-width: 0;
+			padding-top: 0;
+			padding-bottom: 0;
+			padding-right: 0;
+			border-bottom-width: 0;
 		}
 
 		/* collapse vertical borders */
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-last-child,
 		.ui-li-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-btn {
-  		border-bottom-width: 0;
+			border-bottom-width: 0;
 		}
 
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child,
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-btn,
 		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn {
-  		border-top-width: 0;
+			border-top-width: 0;
 		}
 
 		/* Remove right borders */
@@ -46,7 +46,7 @@
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-li-static,
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn,
 		.ui-li-static.ui-collapsible > .ui-collapsible-content {
-  		border-right-width: 0;
+			border-right-width: 0;
 		}
 
 		/* Remove left borders */
@@ -54,7 +54,7 @@
 		.ui-listview-outer > .ui-li-static.ui-collapsible .ui-li-static.ui-collapsible.ui-collapsible,
 		.ui-listview-outer > .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
 		.ui-li-static.ui-collapsible > .ui-collapsible-content {
-  		border-left-width: 0;
+			border-left-width: 0;
 		}
 	</style>
 
