@@ -67,7 +67,7 @@
 	<div data-role="content">
 
 		<div id="trivia-city" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
-        	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+        	<a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete" role="button">Close</a>
 			<p>Here some text.</small></p>
         </div><!-- /popup -->
 
@@ -77,8 +77,8 @@
 
 <div id="_footer" data-id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
 	<div data-role="controlgroup" class="control ui-btn-left" data-type="horizontal" data-mini="true">
-    	<a href="#" class="prev" data-role="button" data-icon="arrow-l" data-iconpos="notext">Previous</a>
-    	<a href="#" class="next" data-role="button" data-icon="arrow-r" data-iconpos="notext">Next</a>
+    	<a href="#" class="prev ui-btn ui-btn-icon-notext ui-icon-carat-l" role="button">Previous</a>
+    	<a href="#" class="next ui-btn ui-btn-icon-notext ui-icon-carat-r" role="button">Next</a>
     </div>
 
 	<a href="#" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-mini="true">Trivia</a>
