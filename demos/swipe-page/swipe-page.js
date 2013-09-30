@@ -1,63 +1,98 @@
-$( document ).on( "pagecreate", "[data-role='page'].demo-page", function() {
-	var page = "#" + $( this ).attr( "id" ),
+// Pagecreate will fire for each of the pages in this demo
+// but we only need to bind once so we use "one()"
+$( document ).one( "pagecreate", ".demo-page", function() {
+	// Initialize the external persistent header and footer
+	$( "#header" ).toolbar({ theme: "b" });
+	$( "#footer" ).toolbar({ theme: "b" });
 
+	// Handler for navigating to the next page
+	function navnext( next ) {
+		$( ":mobile-pagecontainer" ).pagecontainer( "change", next + ".html", {
+			transition: "slide"
+		});
+	}
+
+	// Handler for navigating to the previous page
+	function navprev( prev ) {
+		$( ":mobile-pagecontainer" ).pagecontainer( "change", prev + ".html", {
+			transition: "slide",
+			reverse: true
+		});
+	}
+
+	// Navigate to the next page on swipeleft
+	$( document ).on( "swipeleft", ".ui-page", function( event ) {
 		// Get the filename of the next page. We stored that in the data-next
 		// attribute in the original markup.
+		var next = $( this ).jqmData( "next" );
+
+		// Check if there is a next page and
+		// swipes may also happen when the user highlights text, so ignore those.
+		// We're only interested in swipes on the page.
+		if ( next && ( event.target === $( this )[ 0 ] ) ) {
+			navnext( next );
+		}
+	});
+
+	// Navigate to the next page when the "next" button in the footer is clicked
+	$( document ).on( "click", ".next", function() {
+		var next = $( ".ui-page-active" ).jqmData( "next" );
+
+		// Check if there is a next page
+		if ( next ) {
+			navnext( next );
+		}
+	});
+
+	// The same for the navigating to the previous page
+	$( document ).on( "swiperight", ".ui-page", function( event ) {
+		var prev = $( this ).jqmData( "prev" );
+
+		if ( prev && ( event.target === $( this )[ 0 ] ) ) {
+			navprev( prev );
+		}
+	});
+
+	$( document ).on( "click", ".prev", function() {
+		var prev = $( ".ui-page-active" ).jqmData( "prev" );
+
+		if ( prev ) {
+			navprev( prev );
+		}
+	});
+
+	// Open the trivia popup when clicking on the button
+	$( ".trivia-btn" ).on( "click", function() {
+		$( ".ui-page-active .trivia" ).popup( "open" );
+	});
+});
+
+$( document ).on( "pageshow", ".demo-page", function() {
+	var title = $( this ).jqmData( "title" ),
 		next = $( this ).jqmData( "next" ),
-
-		// Get the filename of the previous page. We stored that in the data-prev
-		// attribute in the original markup.
 		prev = $( this ).jqmData( "prev" );
-	
-	// Check if we did set the data-next attribute
+
+	// We use the same header on each page
+	// so we have to update the title
+	$( "#header h1" ).text( title );
+
+	// Prefetch the next page
+	// We added data-dom-cache="true" to the page so it won't be deleted
+	// so there is no need to prefetch it
 	if ( next ) {
-
-		// Prefetch the next page
 		$( ":mobile-pagecontainer" ).pagecontainer( "load", next + ".html" );
-
-		// Navigate to next page on swipe left
-		$( document ).on( "swipeleft", page, function( event ) {
-
-			// Swipes may also happen when the user highlights text, so ignore those.
-			// We're only interested in swipes on the page.
-			if ( event.target === $( page )[ 0 ] ) {
-				$( ":mobile-pagecontainer" ).pagecontainer( "change", next + ".html", { transition: "slide" });
-			}
-		});
-
-		// Navigate to next page when the "next" button is clicked
-		$( ".control .next", page ).on( "click", function() {
-			$( ":mobile-pagecontainer" ).pagecontainer( "change", next + ".html", { transition: "slide" } );
-		});
 	}
 
-	// Disable the "next" button if there is no next page
-	else {
-		$( ".control .next", page ).addClass( "ui-disabled" );
-	}
+	// We disable the next or previous buttons in the footer
+	// if there is no next or previous page
+	// We use the same footer on each page
+	// so first we remove the disabled class if it is there
+	$( ".next.ui-state-disabled, .prev.ui-state-disabled" ).removeClass( "ui-state-disabled" );
 
-	// The same for the previous page (we set data-dom-cache="true" so there is
-	// no need to prefetch)
-	if ( prev ) {
-		$( document ).on( "swiperight", page, function( event ) {
-
-			// Swipes may also happen when the user highlights text, so ignore those.
-			// We're only interested in swipes on the page.
-			if ( event.target === $( page )[ 0 ] ) {
-				$( ":mobile-pagecontainer" ).pagecontainer( "change", prev + ".html", {
-					transition: "slide",
-					reverse: true
-				});
-			}
-		});
-		$( ".control .prev", page ).on( "click", function() {
-			$( ":mobile-pagecontainer" ).pagecontainer( "change", prev + ".html", {
-				transition: "slide",
-				reverse: true
-			});
-		});
+	if ( ! next ) {
+		$( ".next" ).addClass( "ui-state-disabled" );
 	}
-	else {
-		$( ".control .prev", page ).addClass( "ui-disabled" );
+	if ( ! prev ) {
+		$( ".prev" ).addClass( "ui-state-disabled" );
 	}
 });
