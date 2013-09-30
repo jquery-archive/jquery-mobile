@@ -24,16 +24,18 @@ $.mobile.links = function( target ) {
 				sel = $.mobile.path.hashToSelector( href ),
 				idref = href.substring( 1 );
 
-			e.setAttribute( "aria-haspopup", true );
-			e.setAttribute( "aria-owns", idref );
-			e.setAttribute( "aria-expanded", false );
-			$( document )
-				.on( "popupafteropen", sel, function() {
-					e.setAttribute( "aria-expanded", true );
-				})
-				.on( "popupafterclose", sel, function() {
-					e.setAttribute( "aria-expanded", false );
-				});
+			if ( idref ) {
+				e.setAttribute( "aria-haspopup", true );
+				e.setAttribute( "aria-owns", idref );
+				e.setAttribute( "aria-expanded", false );
+				$( document )
+					.on( "popupafteropen", sel, function() {
+						e.setAttribute( "aria-expanded", true );
+					})
+					.on( "popupafterclose", sel, function() {
+						e.setAttribute( "aria-expanded", false );
+					});
+			}
 		})
 		.end()
 		.not( ".ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
