@@ -36,6 +36,7 @@
 			hash !== "" &&
 			hashEl.length > 0 &&
 			!hashEl.hasClass( "ui-page" ) &&
+			!hashEl.hasClass( "ui-popup" ) &&
 			hashEl.data('role') !== "page" &&
 			!hashElInPage.hasClass( "ui-panel" ) &&
 			!hashElInPage.hasClass( "ui-popup" ) ) {
