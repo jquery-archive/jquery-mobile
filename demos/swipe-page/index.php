@@ -67,7 +67,7 @@
 	<div data-role="content">
 
 		<div id="trivia-city" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
-        	<a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete" role="button">Close</a>
+        	<a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all" role="button">Close</a>
 			<p>Here some text.</small></p>
         </div><!-- /popup -->
 
@@ -81,7 +81,7 @@
     	<a href="#" class="next ui-btn ui-btn-icon-notext ui-icon-carat-r" role="button">Next</a>
     </div>
 
-	<a href="#" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-mini="true">Trivia</a>
+	<a href="#" data-rel="popup" class="trivia-btn ui-btn ui-btn-right ui-btn-icon-left ui-icon-info ui-mini ui-corner-all" role="button">Trivia</a>
 </div><!-- /footer -->
 
 </body>
