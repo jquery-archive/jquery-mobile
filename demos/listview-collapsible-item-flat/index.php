@@ -12,17 +12,22 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style id="collapsible-list-item-style-flat">
-    .ui-listview > li .ui-collapsible-heading {
-      margin: 0;
-    }
-    .ui-collapsible.ui-li-static {
-      padding: 0;
-      border: none !important;
-    }
-    .ui-collapsible + .ui-li-static,
-    .ui-collapsible + li > .ui-btn {
-      border-top: none !important;
-    }
+	.ui-li-static.ui-collapsible > .ui-collapsible-heading {
+		margin: 0;
+	}
+
+	.ui-li-static.ui-collapsible {
+		padding: 0;
+	}
+
+	.ui-li-static.ui-collapsible > .ui-collapsible-heading > .ui-btn {
+		border-top-width: 0;
+	}
+
+	.ui-li-static.ui-collapsible > .ui-collapsible-heading.ui-collapsible-heading-collapsed > .ui-btn,
+	.ui-li-static.ui-collapsible > .ui-collapsible-content {
+		border-bottom-width: 0;
+	}
 	</style>
 
 </head>
@@ -63,16 +68,16 @@
           <li><a href="#">Trout</a></li>
         </ul>
       </li>
-			<li data-role="collapsible" data-iconpos="right" data-inset="false">
-				<h2>Choose your preference</h2>
-				<form>
-					<fieldset data-role="controlgroup" data-type="horizontal">
-						<label>Birds<input type="checkbox" id="choose-birds-regular"></input></label>
-						<label>Humans<input type="checkbox" id="choose-humans-regular"></input></label>
-						<label>Fish<input type="checkbox" id="choose-fish-regular"></input></label>
-					</fieldset>
-				</form>
-			</li>
+      <li data-role="collapsible" data-iconpos="right" data-inset="false">
+        <h2>Choose your preference</h2>
+        <form>
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <label>Birds<input type="checkbox" id="choose-birds-regular"></input></label>
+            <label>Humans<input type="checkbox" id="choose-humans-regular"></input></label>
+            <label>Fish<input type="checkbox" id="choose-fish-regular"></input></label>
+          </fieldset>
+        </form>
+      </li>
     </ul>
 	</div>
 
@@ -97,16 +102,16 @@
           <li><a href="#">Trout</a></li>
         </ul>
       </li>
-			<li data-role="collapsible" data-iconpos="right" data-inset="false">
-				<h2>Choose your preference</h2>
-				<form>
-					<fieldset data-role="controlgroup" data-type="horizontal">
-						<label>Birds<input type="checkbox" id="choose-birds-inset"></input></label>
-						<label>Humans<input type="checkbox" id="choose-humans-inset"></input></label>
-						<label>Fish<input type="checkbox" id="choose-fish-inset"></input></label>
-					</fieldset>
-				</form>
-			</li>
+      <li data-role="collapsible" data-iconpos="right" data-inset="false">
+        <h2>Choose your preference</h2>
+        <form>
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <label>Birds<input type="checkbox" id="choose-birds-inset"></input></label>
+            <label>Humans<input type="checkbox" id="choose-humans-inset"></input></label>
+            <label>Fish<input type="checkbox" id="choose-fish-inset"></input></label>
+          </fieldset>
+        </form>
+      </li>
     </ul>
 	</div>
 

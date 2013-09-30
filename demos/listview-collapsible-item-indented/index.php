@@ -12,50 +12,50 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style id="collapsible-list-item-style">
-/* Basic settings */
-.ui-li-static.ui-collapsible {
-  padding: 0;
-}
+		/* Basic settings */
+		.ui-li-static.ui-collapsible {
+  		padding: 0;
+		}
 
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview,
-.ui-li-static.ui-collapsible > .ui-collapsible-heading {
-  margin: 0;
-}
+		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview,
+		.ui-li-static.ui-collapsible > .ui-collapsible-heading {
+  		margin: 0;
+		}
 
-.ui-li-static.ui-collapsible > .ui-collapsible-content {
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-right: 0;
-  border-bottom-width: 0;
-}
+		.ui-li-static.ui-collapsible > .ui-collapsible-content {
+  		padding-top: 0;
+  		padding-bottom: 0;
+  		padding-right: 0;
+  		border-bottom-width: 0;
+		}
 
-/* collapse vertical borders */
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-last-child,
-.ui-li-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-btn {
-  border-bottom-width: 0;
-}
+		/* collapse vertical borders */
+		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-last-child,
+		.ui-li-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-btn {
+  		border-bottom-width: 0;
+		}
 
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child,
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-btn,
-.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn {
-  border-top-width: 0;
-}
+		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child,
+		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-btn,
+		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn {
+  		border-top-width: 0;
+		}
 
-/* Remove right borders */
-.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-li-static,
-.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn,
-.ui-li-static.ui-collapsible > .ui-collapsible-content {
-  border-right-width: 0;
-}
+		/* Remove right borders */
+		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
+		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-li-static,
+		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn,
+		.ui-li-static.ui-collapsible > .ui-collapsible-content {
+  		border-right-width: 0;
+		}
 
-/* Remove left borders */
-/* Here, we need class ui-listview-outer to identify the outermost listview */
-.ui-listview-outer > .ui-li-static.ui-collapsible .ui-li-static.ui-collapsible.ui-collapsible,
-.ui-listview-outer > .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
-.ui-li-static.ui-collapsible > .ui-collapsible-content {
-  border-left-width: 0;
-}
+		/* Remove left borders */
+		/* Here, we need class ui-listview-outer to identify the outermost listview */
+		.ui-listview-outer > .ui-li-static.ui-collapsible .ui-li-static.ui-collapsible.ui-collapsible,
+		.ui-listview-outer > .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
+		.ui-li-static.ui-collapsible > .ui-collapsible-content {
+  		border-left-width: 0;
+		}
 	</style>
 
 </head>
@@ -96,6 +96,16 @@
           <li>Trout</li>
         </ul>
       </li>
+      <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+        <h2>Choose your preference</h2>
+        <form>
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <label>Birds<input type="checkbox" id="choose-birds-regular"></input></label>
+            <label>Humans<input type="checkbox" id="choose-humans-regular"></input></label>
+            <label>Fish<input type="checkbox" id="choose-fish-regular"></input></label>
+          </fieldset>
+        </form>
+      </li>
     </ul>
 	</div>
 
@@ -119,6 +129,16 @@
           <li>Pollock</li>
           <li>Trout</li>
         </ul>
+      </li>
+      <li data-role="collapsible" data-iconpos="right" data-shadow="false" data-corners="false">
+        <h2>Choose your preference</h2>
+        <form>
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <label>Birds<input type="checkbox" id="choose-birds-regular"></input></label>
+            <label>Humans<input type="checkbox" id="choose-humans-regular"></input></label>
+            <label>Fish<input type="checkbox" id="choose-fish-regular"></input></label>
+          </fieldset>
+        </form>
       </li>
     </ul>
 	</div>
