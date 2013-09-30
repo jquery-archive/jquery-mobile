@@ -20,7 +20,7 @@ define( [
 		_create: function() {
 			this._super();
 
-			if ( !!this.options.clearBtn || this.isSearch ){
+			if ( !!this.options.clearBtn || this.isSearch ) {
 				this._addClearBtn();
 			}
 		},
@@ -92,7 +92,7 @@ define( [
 			this._super( options );
 
 			if ( options.clearbtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ) {
-				if ( options.clearBtn ){
+				if ( options.clearBtn ) {
 					this._addClearBtn();
 				} else {
 					this._destroyClear();

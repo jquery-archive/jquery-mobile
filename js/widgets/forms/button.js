@@ -115,7 +115,7 @@ $.widget( "mobile.button", {
 				.removeClass( "ui-icon-" + this.options.icon )
 				.toggleClass( "ui-icon-" + options.icon, options.icon );
 		}
-		if( options.disabled !== undefined ) {
+		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", options.disabled );
 			outer.toggleClass( "ui-state-disabled", options.disabled );
 		}

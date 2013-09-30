@@ -32,7 +32,7 @@ $.widget( "mobile.table", $.mobile.table, {
 	_create: function() {
 		this._super();
 
-		if( this.options.mode !== "columntoggle" ) {
+		if ( this.options.mode !== "columntoggle" ) {
 			return;
 		}
 
@@ -40,7 +40,7 @@ $.widget( "mobile.table", $.mobile.table, {
 			_menu: null
 		});
 
-		if( this.options.enhanced ) {
+		if ( this.options.enhanced ) {
 			this._menu = this.document.find( this._id() + "-popup" ).children().first();
 		} else {
 			this._menu = this._enhanceColToggle();
@@ -88,7 +88,7 @@ $.widget( "mobile.table", $.mobile.table, {
 				priority = $.mobile.getAttribute( this, "priority" ),
 				cells = header.add( header.jqmData( "cells" ) );
 
-			if( priority ) {
+			if ( priority ) {
 				cells.addClass( opts.classes.priorityPrefix + priority );
 
 				if ( !keep ) {

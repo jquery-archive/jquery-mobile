@@ -79,7 +79,7 @@ define( [
 		if ( this.phonegapNavigationEnabled &&
 			nav &&
 			nav.app &&
-			nav.app.backHistory ){
+			nav.app.backHistory ) {
 			nav.app.backHistory();
 		} else {
 			window.history.back();

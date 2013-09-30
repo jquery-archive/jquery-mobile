@@ -29,7 +29,7 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 		},
 
 		// addNew is used whenever a new page is added
-		add: function( url, data ){
+		add: function( url, data ) {
 			data = data || {};
 
 			//if there's forward history, wipe it
@@ -116,7 +116,7 @@ define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
 				( opts.present || opts.back || $.noop )( this.getActive(), "back" );
 			} else if ( newActiveIndex > a ) {
 				( opts.present || opts.forward || $.noop )( this.getActive(), "forward" );
-			} else if ( newActiveIndex === undefined && opts.missing ){
+			} else if ( newActiveIndex === undefined && opts.missing ) {
 				opts.missing( this.getActive() );
 			}
 		}

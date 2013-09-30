@@ -291,7 +291,7 @@ define([
 				stateIndex = cleanedUrl.indexOf( this.uiStateKey );
 
 				// store the ui state keys for use
-				if ( stateIndex > -1 ){
+				if ( stateIndex > -1 ) {
 					uiState = cleanedUrl.slice( stateIndex );
 					cleanedUrl = cleanedUrl.slice( 0, stateIndex );
 				}
@@ -312,12 +312,12 @@ define([
 
 					// Append the UI State keys where it exists and it's been removed
 					// from the url
-					if ( uiState && preservedHash.indexOf( this.uiStateKey ) === -1){
+					if ( uiState && preservedHash.indexOf( this.uiStateKey ) === -1) {
 						preservedHash += uiState;
 					}
 
 					// make sure that pound is on the front of the hash
-					if ( preservedHash.indexOf( "#" ) === -1 && preservedHash !== "" ){
+					if ( preservedHash.indexOf( "#" ) === -1 && preservedHash !== "" ) {
 						preservedHash = "#" + preservedHash;
 					}
 

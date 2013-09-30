@@ -26,7 +26,7 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 
 			element = element.jquery ? element[0] : element;
 
-			if( element && element.getAttribute ){
+			if ( element && element.getAttribute ) {
 				data = element.getAttribute( "data-" + $.mobile.ns + key );
 			}
 
@@ -80,7 +80,7 @@ define( [ "jquery", "./jquery.mobile.ns" ], function( jQuery ) {
 
 			// undefined is permitted as an explicit input for the second param
 			// in this case it returns the value and does not set it to undefined
-			if ( arguments.length < 2 || value === undefined ){
+			if ( arguments.length < 2 || value === undefined ) {
 				result = this.data( prop );
 			} else {
 				result = this.data( prop, value );

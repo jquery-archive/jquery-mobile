@@ -59,7 +59,7 @@ define( [ "jquery",
 			if ( $.mobile.window.scrollTop() !== this.toScroll ) {
 				this.scrollPage();
 			}
-			if( !this.sequential ){
+			if ( !this.sequential ) {
 				this.$to.addClass( $.mobile.activePageClass );
 			}
 			this.deferred.resolve( this.name, this.reverse, this.$to, this.$from, true );
@@ -97,7 +97,7 @@ define( [ "jquery",
 				this.$to.addClass( $.mobile.activePageClass + this.toPreClass );
 
 				// Send focus to page as it is now display: block
-				if( !preventFocus ){
+				if ( !preventFocus ) {
 					$.mobile.focusPage( this.$to );
 				}
 
