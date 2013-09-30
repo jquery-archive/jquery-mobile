@@ -523,6 +523,23 @@ define( [
 
 				this._setLoadedTitle( content, html );
 
+				// Add the content reference and xhr to our triggerData.
+				triggerData.xhr = xhr;
+				triggerData.textStatus = textStatus;
+
+				// DEPRECATED
+				triggerData.page = content;
+
+				triggerData.content = content;
+
+				// If the default behavior is prevented, stop here!
+				// Note that it is the responsibility of the listener/handler
+				// that called preventDefault(), to resolve/reject the
+				// deferred object within the triggerData.
+				if ( !this._trigger( "load", undefined, triggerData ) ) {
+					return;
+				}
+
 				// rewrite src and href attrs to use a base url if the base tag won't work
 				if ( this._isRewritableBaseTag() && content ) {
 					this._getBase().rewrite( fileUrl, content );
@@ -542,17 +559,10 @@ define( [
 					this._hideLoading();
 				}
 
-				// Add the content reference and xhr to our triggerData.
-				triggerData.xhr = xhr;
-				triggerData.textStatus = textStatus;
-
-				// DEPRECATED
-				triggerData.page = content;
-
-				triggerData.content = content;
-
+				// BEGIN DEPRECATED ---------------------------------------------------
 				// Let listeners know the content loaded successfully.
-				this._triggerWithDeprecated( "load", triggerData );
+				this.element.trigger( "pageload" );
+				// END DEPRECATED -----------------------------------------------------
 
 				deferred.resolve( absUrl, settings, content );
 			}, this);
