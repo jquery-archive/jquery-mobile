@@ -19,7 +19,10 @@ $( function() {
 	</script>
 </head>
 <body>
-<div id="popup-outside-page">
+<div id="popup-outside-page" data-theme="a">
+	<!-- This popup has its theme explicitly defined via data-theme="a"
+	     because it has no parent from which to automatically inherit
+	     its theme -->
 	<ul data-role="listview">
 		<li>Global Menu</li>
 		<li><a href="#demo-intro">Intro Page</a></li>
