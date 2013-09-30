@@ -55,11 +55,11 @@ define([
 			beforeNavigate.originalEvent = event;
 			$win.trigger( beforeNavigate );
 
-			if ( beforeNavigate.isDefaultPrevented() ){
+			if ( beforeNavigate.isDefaultPrevented() ) {
 				return;
 			}
 
-			if ( event.historyState ){
+			if ( event.historyState ) {
 				$.extend(state, event.historyState);
 			}
 
@@ -85,7 +85,7 @@ define([
 			beforeNavigate.originalEvent = event;
 			$win.trigger( beforeNavigate );
 
-			if ( beforeNavigate.isDefaultPrevented() ){
+			if ( beforeNavigate.isDefaultPrevented() ) {
 				return;
 			}
 
@@ -118,7 +118,7 @@ define([
 			if ( self.isPushStateEnabled() ) {
 				self.originalEventName = "popstate";
 				$win.bind( "popstate.navigate", self.popstate );
-			} else if ( self.isHashChangeEnabled() ){
+			} else if ( self.isHashChangeEnabled() ) {
 				self.originalEventName = "hashchange";
 				$win.bind( "hashchange.navigate", self.hashchange );
 			}

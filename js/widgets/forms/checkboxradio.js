@@ -54,7 +54,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			return;
 		}
 
-		if ( this.element[0].disabled ){
+		if ( this.element[0].disabled ) {
 			this.options.disabled = true;
 		}
 
@@ -98,7 +98,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	_enhance: function() {
 		this.label.addClass( "ui-btn ui-corner-all");
 
-		if( this.parentLabel.length > 0 ){
+		if ( this.parentLabel.length > 0 ) {
 			this.input.add( this.label ).wrapAll( this._wrapper() );
 		} else {
 			//this.element.replaceWith( this.input.add( this.label ).wrapAll( this._wrapper() ) );
@@ -258,7 +258,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		if ( options.iconpos !== undefined &&
 			( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length === 0 ) ) {
 			label.removeClass( "ui-btn-icon-" + currentOptions.iconpos ).addClass( "ui-btn-icon-" + options.iconpos );
-		} else if ( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length !== 0 ){
+		} else if ( this.element.parents( "[data-" + $.mobile.ns + "type='horizontal']" ).length !== 0 ) {
 			label.removeClass( "ui-btn-icon-" + currentOptions.iconpos );
 		}
 		this._super( options );

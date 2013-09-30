@@ -55,7 +55,7 @@ define( [
 			}, this));
 		},
 
-		_setOptions: function( options ){
+		_setOptions: function( options ) {
 			if ( options.theme !== undefined && options.theme !== "none" ) {
 				this.element.removeClass( "ui-overlay-" + this.options.theme )
 					.addClass( "ui-overlay-" + options.theme );
@@ -139,7 +139,7 @@ define( [
 				url = this._getHash();
 			}
 
-			if ( !url || url === "#" || url.indexOf( "#" + $.mobile.path.uiStateKey ) === 0 ){
+			if ( !url || url === "#" || url.indexOf( "#" + $.mobile.path.uiStateKey ) === 0 ) {
 				url = location.href;
 			}
 
@@ -487,7 +487,7 @@ define( [
 				}
 
 				//dont update the base tag if we are prefetching
-				if ( settings.prefetch === undefined ){
+				if ( settings.prefetch === undefined ) {
 					this._getBase().set( fileUrl );
 				}
 
@@ -616,7 +616,7 @@ define( [
 
 				//if we are reloading the content make sure we update
 				// the base if its not a prefetch
-				if ( !settings.prefetch ){
+				if ( !settings.prefetch ) {
 					this._getBase().set(url);
 				}
 

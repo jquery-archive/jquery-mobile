@@ -146,7 +146,7 @@ define( [ "jquery",
 			var $el = this.element,
 				o = this.options;
 
-			if( this._inputFirst.is( ":disabled" ) || this._inputLast.is( ":disabled" ) ){
+			if ( this._inputFirst.is( ":disabled" ) || this._inputLast.is( ":disabled" ) ) {
 				this.options.disabled = true;
 			}
 
@@ -175,9 +175,9 @@ define( [ "jquery",
 				otherSlider = first ? this._inputLast : this._inputFirst;
 
 
-			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ){
+			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ) {
 				thisSlider.blur();
-			} else if ( event.type === "mousedown" ){
+			} else if ( event.type === "mousedown" ) {
 				return;
 			}
 			if ( min > max && !this._sliderTarget ) {

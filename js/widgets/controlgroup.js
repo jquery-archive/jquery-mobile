@@ -27,12 +27,12 @@ $.widget( "mobile.controlgroup", $.extend( {
 			opts = this.options;
 
 		// Run buttonmarkup
-		if( $.fn.buttonMarkup ){
+		if ( $.fn.buttonMarkup ) {
 			this.element.find( $.fn.buttonMarkup.initSelector ).buttonMarkup();
 		}
 		// Enhance child widgets
 		$.each( this._childWidgets, $.proxy( function( number, widgetName ) {
-			if( $.mobile[ widgetName ] ) {
+			if ( $.mobile[ widgetName ] ) {
 				this.element.find( $.mobile[ widgetName ].initSelector )[ widgetName ]();
 			}
 		}, this ));

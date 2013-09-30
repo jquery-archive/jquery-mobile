@@ -32,7 +32,7 @@ $.widget = (function( orig ) {
 $.extend( $.widget, originalWidget );
 
 // For backcompat remove in 1.5
-$.mobile.document.on( "create", function( event ){
+$.mobile.document.on( "create", function( event ) {
 	$( event.target ).enhanceWithin();
 });
 
@@ -71,12 +71,12 @@ $.widget( "mobile.page", {
 
 		this.element.enhanceWithin();
 		// Dialog widget is deprecated in 1.4 remove this in 1.5
-		if( $.mobile.getAttribute( this.element[0], "role" ) === "dialog" && $.mobile.dialog ){
+		if ( $.mobile.getAttribute( this.element[0], "role" ) === "dialog" && $.mobile.dialog ) {
 			this.element.dialog();
 		}
 	},
 
-	_enhance: function (){
+	_enhance: function () {
 		var attrPrefix = "data-" + $.mobile.ns,
 			self = this;
 

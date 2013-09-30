@@ -22,11 +22,11 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._super();
 
 		// If it's not reflow mode, return here.
-		if( this.options.mode !== "reflow" ) {
+		if ( this.options.mode !== "reflow" ) {
 			return;
 		}
 
-		if( !this.options.enhanced ) {
+		if ( !this.options.enhanced ) {
 			this.element.addClass( this.options.classes.reflowTable );
 
 			this._updateReflow();
@@ -62,11 +62,11 @@ $.widget( "mobile.table", $.mobile.table, {
 
 				if ( text !== ""  ) {
 
-					if( hierarchyClass ) {
+					if ( hierarchyClass ) {
 						iteration = parseInt( this.getAttribute( "colspan" ), 10 );
 						filter = "";
 
-						if ( iteration ){
+						if ( iteration ) {
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 						}
 

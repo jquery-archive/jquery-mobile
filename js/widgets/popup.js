@@ -868,7 +868,7 @@ $.widget( "mobile.popup", {
 
 		// if the current url has no dialog hash key proceed as normal
 		// otherwise, if the page is a dialog simply tack on the hash key
-		if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ){
+		if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ) {
 			url = url + (url.indexOf( "#" ) > -1 ? hashkey : "#" + hashkey);
 		} else {
 			url = $.mobile.path.parseLocation().hash + hashkey;

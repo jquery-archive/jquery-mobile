@@ -36,12 +36,12 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 
 		_create: function() {
 			this._super();
-			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ){
+			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
 				this._makeFixed();
 			}
 		},
 
-		_makeFixed: function(){
+		_makeFixed: function() {
 			this.element.addClass( "ui-"+ this.role +"-fixed" );
 			this.updatePagePadding();
 			this._addTransitionClass();
@@ -50,14 +50,14 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			this._setOptions( this.options );
 		},
 
-		_setOptions: function( o ){
-			if( o.position === "fixed" && this.options.position !== "fixed" ) {
+		_setOptions: function( o ) {
+			if ( o.position === "fixed" && this.options.position !== "fixed" ) {
 				this._makeFixed();
 			}
-			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ){
+			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
 				var $page = ( !!this.page )? this.page: ( $(".ui-page-active").length > 0 )? $(".ui-page-active"): $(".ui-page").eq(0);
 
-				if ( o.fullscreen !== undefined){
+				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
 						this.element.addClass( "ui-"+ this.role +"-fullscreen" );
 						$page.addClass( "ui-page-" + this.role + "-fullscreen" );

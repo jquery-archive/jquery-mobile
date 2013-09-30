@@ -32,7 +32,7 @@ $.widget( "mobile.flipswitch", $.extend({
 				});
 			}
 
-			if( this.element.is( ":disabled" ) ){
+			if ( this.element.is( ":disabled" ) ) {
 				this._setOptions({
 					"disabled": true
 				});
@@ -144,7 +144,7 @@ $.widget( "mobile.flipswitch", $.extend({
 		if ( options.disabled !== undefined ) {
 			this.widget().toggleClass( "ui-state-disabled", options.disabled );
 		}
-		if( options.mini !== undefined ) {
+		if ( options.mini !== undefined ) {
 			this.widget().toggleClass( "ui-mini", options.mini );
 		}
 		

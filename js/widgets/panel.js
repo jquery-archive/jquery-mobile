@@ -211,7 +211,7 @@ $.widget( "mobile.panel", {
 		
 	},
 
-	_handleClick: function( e ){
+	_handleClick: function( e ) {
 		if (  e.currentTarget.href.split( "#" )[ 1 ] === this._panelID && this._panelID !== undefined ) {
 			e.preventDefault();
 			var link = $( e.target );

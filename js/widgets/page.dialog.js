@@ -25,7 +25,7 @@ $.widget( "mobile.page", $.mobile.page, {
 
 	_create: function() {
 		this._super();
-		if( this.options.dialog ){
+		if ( this.options.dialog ) {
 
 			$.extend( this, {
 				_isCloseable: false,
@@ -33,7 +33,7 @@ $.widget( "mobile.page", $.mobile.page, {
 				_headerCloseButton: null
 			});
 
-			if( !this.options.enhanced ) {
+			if ( !this.options.enhanced ) {
 				this._setCloseBtn( this.options.closeBtn );
 			}
 		}
@@ -43,7 +43,7 @@ $.widget( "mobile.page", $.mobile.page, {
 		this._super();
 
 		// Class the markup for dialog styling and wrap interior
-		if( this.options.dialog ){
+		if ( this.options.dialog ) {
 			this.element.addClass( "ui-dialog" )
 				.wrapInner( $( "<div/>", {
 

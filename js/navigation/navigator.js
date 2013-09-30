@@ -158,7 +158,7 @@ define(["jquery",
 
 			// Partly to support our test suite which manually alters the support
 			// value to test hashchange. Partly to prevent all around weirdness
-			if ( !$.event.special.navigate.isPushStateEnabled() ){
+			if ( !$.event.special.navigate.isPushStateEnabled() ) {
 				return;
 			}
 
@@ -250,7 +250,7 @@ define(["jquery",
 
 			// On occasion explicitly want to prevent the next hash from propogating because we only
 			// with to alter the url to represent the new state do so here
-			if ( this.preventNextHashChange ){
+			if ( this.preventNextHashChange ) {
 				this.preventNextHashChange = false;
 				event.stopImmediatePropagation();
 				return;

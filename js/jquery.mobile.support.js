@@ -102,7 +102,7 @@ function transform3dTest() {
 	fakeBody.append( el );
 
 	for ( t in transforms ) {
-		if ( el.style[ t ] !== undefined ){
+		if ( el.style[ t ] !== undefined ) {
 			el.style[ t ] = "translate3d( 100px, 1px, 1px )";
 			ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
 		}

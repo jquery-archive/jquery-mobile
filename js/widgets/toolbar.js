@@ -29,7 +29,7 @@ define( [
 			var leftbtn, rightbtn, backBtn,
 				role =  this.element.is( ":jqmData(role='header')" ) ? "header" : "footer",
 				page = this.element.closest( ".ui-page" );
-			if ( page.length === 0 ){
+			if ( page.length === 0 ) {
 				page = false;
 				this._on( this.document, {
 					"pageshow": "refresh"
@@ -80,7 +80,7 @@ define( [
 				this._addHeaderButtonClasses();
 			}
 			if ( !this.page ) {
-				$( "[data-"+ $.mobile.ns +"role='page']" ).css({"position":"relative"});
+				$( "[data-"+ $.mobile.ns + "role='page']" ).css({ "position": "relative" });
 				if ( this.role === "footer" ) {
 					this.element.appendTo( "body" );
 				}
