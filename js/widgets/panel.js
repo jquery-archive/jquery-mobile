@@ -422,17 +422,17 @@ $.widget( "mobile.panel", {
 	_transitionEndEvents: "webkitTransitionEnd oTransitionEnd otransitionend transitionend msTransitionEnd",
 
 	_destroy: function() {
-        var o = this.options,
-            otherPanels = null,
-			multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1;
+		var otherPanels,
+		o = this.options,
+		multiplePanels = ( $( "body > :mobile-panel" ).length + $.mobile.activePage.find( ":mobile-panel" ).length ) > 1;
 
 		if ( o.display !== "overlay" ) {
 
-            //  remove the wrapper if not in use by another panel
-            otherPanels = $( "body > :mobile-panel" ).add( $.mobile.activePage.find( ":mobile-panel" ) );
-            if ( otherPanels.not( ".ui-panel-display-overlay" ).not( this.element ).length === 0 ) {
-                this._wrapper().children().unwrap();
-            }
+			//  remove the wrapper if not in use by another panel
+			otherPanels = $( "body > :mobile-panel" ).add( $.mobile.activePage.find( ":mobile-panel" ) );
+			if ( otherPanels.not( ".ui-panel-display-overlay" ).not( this.element ).length === 0 ) {
+				this._wrapper().children().unwrap();
+			}
 
 			if ( this._open ) {
 				
