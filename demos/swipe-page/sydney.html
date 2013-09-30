@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sydney</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="stylesheet" href="swipe-page.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+	<script src="../../js/jquery.js"></script>
+	<script src="../_assets/js/"></script>
+	<script src="../../js/"></script>
+	<script src="swipe-page.js"></script>
+</head>
+<body>
+
+<div id="header" data-role="header" data-id="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
+	<h1>Sydney</h1>
+    <a href="./" data-ajax="false" data-direction="reverse" data-icon="delete" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
+</div><!-- /header -->
+
+<div data-role="page" id="sydney" class="demo-page" data-title="Sydney" data-dom-cache="true" data-theme="b" data-prev="seoul">
+
+	<div data-role="content">
+
+		<div id="trivia-sydney" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
+        	<a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all" role="button">Close</a>
+        	<p>The Sydney Opera House provides 45,000 square metres (11 acres) of usable office space out of 18,000 square metres (4.5 acres) of land. It is 183 metres (600 feet) tall and about 120 metres (388 feet) wide at its widest point. It is supported on 580 concrete piers sunk up to 25 metres below sea level. It has about 1000 rooms. It has five theatres, five rehearsal studios, two main halls, four restaurants, six bars and numerous souvenir shops. <small>source:&nbsp;sheppardsoftware.com</small></p>
+        </div>
+
+	</div><!-- /content -->
+    
+</div><!-- /page -->
+
+<div id="footer" data-id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
+	<div data-role="controlgroup" class="control ui-btn-left" data-type="horizontal" data-mini="true">
+    	<a href="#" class="prev ui-btn ui-btn-icon-notext ui-icon-carat-l" role="button">Previous</a>
+    	<a href="#" class="next ui-btn ui-btn-icon-notext ui-icon-carat-r" role="button">Next</a>
+    </div>
+    
+	<a href="#trivia-sydney" id="trivia-button" data-rel="popup" class="trivia-btn ui-btn ui-btn-right ui-btn-icon-left ui-icon-info ui-mini ui-corner-all" role="button">Trivia</a>
+</div><!-- /footer -->
+
+</body>
+</html>

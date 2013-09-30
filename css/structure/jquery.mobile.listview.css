@@ -104,7 +104,7 @@
 }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) {
 	-webkit-border-radius: inherit;
-	border-bottom-radius: inherit;	
+	border-radius: inherit;	
 }
 .ui-listview > .ui-li-static {
 	padding: .7em 1em;

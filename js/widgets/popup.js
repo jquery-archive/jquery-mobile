@@ -40,14 +40,12 @@ function fitSegmentInsideSegment( windowSize, segmentSize, offset, desired ) {
 	return returnValue;
 }
 
-function getWindowCoordinates() {
-	var theWindow = $.mobile.window;
-
+function getWindowCoordinates( theWindow ) {
 	return {
 		x: theWindow.scrollLeft(),
 		y: theWindow.scrollTop(),
-		cx: ( window.innerWidth || theWindow.width() ),
-		cy: ( window.innerHeight || theWindow.height() )
+		cx: ( theWindow[ 0 ].innerWidth || theWindow.width() ),
+		cy: ( theWindow[ 0 ].innerHeight || theWindow.height() )
 	};
 }
 
@@ -121,12 +119,12 @@ $.widget( "mobile.popup", {
 
 		// Event handlers
 		this._on( this._ui.screen, { "vclick": "_eatEventAndClose" } );
-		this._on( $.mobile.window, {
+		this._on( this.window, {
 			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 			resize: $.proxy( this, "_handleWindowResize" ),
 			keyup: $.proxy( this, "_handleWindowKeyUp" )
 		});
-		this._on( $.mobile.document, { "focusin": "_handleDocumentFocusIn" } );
+		this._on( this.document, { "focusin": "_handleDocumentFocusIn" } );
 	},
 
 	_enhance: function( theElement, myId ) {
@@ -193,7 +191,7 @@ $.widget( "mobile.popup", {
 	},
 
 	_expectResizeEvent: function() {
-		var windowCoordinates = getWindowCoordinates();
+		var windowCoordinates = getWindowCoordinates( this.window );
 
 		if ( this._resizeData ) {
 			if ( windowCoordinates.x === this._resizeData.windowCoordinates.x &&
@@ -422,7 +420,7 @@ $.widget( "mobile.popup", {
 
 	_clampPopupWidth: function( infoOnly ) {
 		var menuSize,
-			windowCoordinates = getWindowCoordinates(),
+			windowCoordinates = getWindowCoordinates( this.window ),
 			// rectangle within which the popup must fit
 			rectangle = {
 				x: this._tolerance.l,
@@ -465,7 +463,7 @@ $.widget( "mobile.popup", {
 		// align the bottom with the bottom of the document
 
 		returnValue.top -= Math.min( returnValue.top,
-			Math.max( 0, returnValue.top + menuSize.cy - $.mobile.document.height() ) );
+			Math.max( 0, returnValue.top + menuSize.cy - this.document.height() ) );
 
 		return returnValue;
 	},
@@ -554,7 +552,7 @@ $.widget( "mobile.popup", {
 	_desiredCoords: function( openOptions ) {
 		var offset,
 			dst = null,
-			windowCoordinates = getWindowCoordinates(),
+			windowCoordinates = getWindowCoordinates( this.window ),
 			x = openOptions.x,
 			y = openOptions.y,
 			pTo = openOptions.positionTo;
@@ -801,7 +799,7 @@ $.widget( "mobile.popup", {
 		}
 
 		// remove nav bindings
-		$.mobile.window.off( currentOptions.closeEvents );
+		this.window.off( currentOptions.closeEvents );
 		// unbind click handlers added when history is disabled
 		this.element.undelegate( currentOptions.closeLinkSelector, currentOptions.closeLinkEvents );
 
@@ -812,7 +810,7 @@ $.widget( "mobile.popup", {
 	// NOTE the pagebeforechange is bound to catch navigation events that don't
 	//      alter the url (eg, dialogs from popups)
 	_bindContainerClose: function() {
-		$.mobile.window
+		this.window
 			.on( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
 	},
 
@@ -834,7 +832,7 @@ $.widget( "mobile.popup", {
 
 		// set the global popup mutex
 		$.mobile.popup.active = this;
-		this._scrollTop = $.mobile.window.scrollTop();
+		this._scrollTop = this.window.scrollTop();
 
 		// if history alteration is disabled close on navigate events
 		// and leave the url as is
@@ -855,7 +853,7 @@ $.widget( "mobile.popup", {
 		}
 
 		// cache some values for min/readability
-		urlHistory = $.mobile.urlHistory;
+		urlHistory = $.mobile.navigate.history;
 		hashkey = $.mobile.dialogHashKey;
 		activePage = $.mobile.activePage;
 		currentIsDialog = ( activePage ? activePage.hasClass( "ui-dialog" ) : false );
@@ -882,7 +880,7 @@ $.widget( "mobile.popup", {
 		}
 
 		// swallow the the initial navigation event, and bind for the next
-		$.mobile.window.one( "beforenavigate", function( theEvent ) {
+		this.window.one( "beforenavigate", function( theEvent ) {
 			theEvent.preventDefault();
 			self._open( options );
 			self._bindContainerClose();
@@ -900,7 +898,7 @@ $.widget( "mobile.popup", {
 			return this;
 		}
 
-		this._scrollTop = $.mobile.window.scrollTop();
+		this._scrollTop = this.window.scrollTop();
 
 		if ( this.options.history && this.urlAltered ) {
 			$.mobile.back();

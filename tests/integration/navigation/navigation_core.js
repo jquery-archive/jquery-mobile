@@ -280,38 +280,38 @@ $.testHelper.delayStart();
 	test( "urlHistory is working properly", function(){
 
 		//urlHistory
-		deepEqual( $.type( $.mobile.urlHistory.stack ), "array", "urlHistory.stack is an array" );
+		deepEqual( $.type( $.mobile.navigate.history.stack ), "array", "urlHistory.stack is an array" );
 
 		//preload the stack
-		$.mobile.urlHistory.stack[0] = { url: "foo", transition: "bar" };
-		$.mobile.urlHistory.stack[1] = { url: "baz", transition: "shizam" };
-		$.mobile.urlHistory.stack[2] = { url: "shizoo", transition: "shizaah" };
+		$.mobile.navigate.history.stack[0] = { url: "foo", transition: "bar" };
+		$.mobile.navigate.history.stack[1] = { url: "baz", transition: "shizam" };
+		$.mobile.navigate.history.stack[2] = { url: "shizoo", transition: "shizaah" };
 
 		//active index
-		deepEqual( $.mobile.urlHistory.activeIndex , 0, "urlHistory.activeIndex is 0" );
+		deepEqual( $.mobile.navigate.history.activeIndex , 0, "urlHistory.activeIndex is 0" );
 
 		//getActive
-		deepEqual( $.type( $.mobile.urlHistory.getActive() ) , "object", "active item is an object" );
-		deepEqual( $.mobile.urlHistory.getActive().url , "foo", "active item has url foo" );
-		deepEqual( $.mobile.urlHistory.getActive().transition , "bar", "active item has transition bar" );
+		deepEqual( $.type( $.mobile.navigate.history.getActive() ) , "object", "active item is an object" );
+		deepEqual( $.mobile.navigate.history.getActive().url , "foo", "active item has url foo" );
+		deepEqual( $.mobile.navigate.history.getActive().transition , "bar", "active item has transition bar" );
 
 		//get prev / next
-		deepEqual( $.mobile.urlHistory.getPrev(), undefined, "urlHistory.getPrev() is undefined when active index is 0" );
-		$.mobile.urlHistory.activeIndex = 1;
-		deepEqual( $.mobile.urlHistory.getPrev().url, "foo", "urlHistory.getPrev() has url foo when active index is 1" );
-		$.mobile.urlHistory.activeIndex = 0;
-		deepEqual( $.mobile.urlHistory.getNext().url, "baz", "urlHistory.getNext() has url baz when active index is 0" );
+		deepEqual( $.mobile.navigate.history.getPrev(), undefined, "urlHistory.getPrev() is undefined when active index is 0" );
+		$.mobile.navigate.history.activeIndex = 1;
+		deepEqual( $.mobile.navigate.history.getPrev().url, "foo", "urlHistory.getPrev() has url foo when active index is 1" );
+		$.mobile.navigate.history.activeIndex = 0;
+		deepEqual( $.mobile.navigate.history.getNext().url, "baz", "urlHistory.getNext() has url baz when active index is 0" );
 
 		//add new
-		$.mobile.urlHistory.activeIndex = 2;
-		$.mobile.urlHistory.add("test");
-		deepEqual( $.mobile.urlHistory.stack.length, 4, "urlHistory.addNew() adds an item after the active index" );
-		deepEqual( $.mobile.urlHistory.activeIndex, 3, "urlHistory.addNew() moves the activeIndex to the newly added item" );
+		$.mobile.navigate.history.activeIndex = 2;
+		$.mobile.navigate.history.add("test");
+		deepEqual( $.mobile.navigate.history.stack.length, 4, "urlHistory.addNew() adds an item after the active index" );
+		deepEqual( $.mobile.navigate.history.activeIndex, 3, "urlHistory.addNew() moves the activeIndex to the newly added item" );
 
 		//clearForward
-		$.mobile.urlHistory.activeIndex = 0;
-		$.mobile.urlHistory.clearForward();
-		deepEqual( $.mobile.urlHistory.stack.length, 1, "urlHistory.clearForward() clears the url stack after the active index" );
+		$.mobile.navigate.history.activeIndex = 0;
+		$.mobile.navigate.history.clearForward();
+		deepEqual( $.mobile.navigate.history.stack.length, 1, "urlHistory.clearForward() clears the url stack after the active index" );
 	});
 
 	//url listening
@@ -330,7 +330,7 @@ $.testHelper.delayStart();
 	}
 
 	asyncTest( "ability to disable our hash change event listening internally", function(){
-		testListening( !$.mobile.urlHistory.ignoreNextHashChange );
+		testListening( !$.mobile.navigate.history.ignoreNextHashChange );
 	});
 
 	asyncTest( "ability to disable our hash change event listening globally", function(){
@@ -390,7 +390,7 @@ $.testHelper.delayStart();
 			function(){
 				// it should be the third page after whatever is in the stack to start with
 				// [wherever this test starts] -> #dup-history-first -> #dup-history-second -> #dup-history-first -> #dup-history-second -> dialog --close/back button--> [first #dup-history-second-entry]
-				deepEqual($.mobile.urlHistory.activeIndex, 3 + stackLength, "should be the fourth page in the stack");
+				deepEqual($.mobile.navigate.history.activeIndex, 3 + stackLength, "should be the fourth page in the stack");
 				start();
 			}]);
 	});

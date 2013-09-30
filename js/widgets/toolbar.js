@@ -31,7 +31,7 @@ define( [
 				page = this.element.closest( ".ui-page" );
 			if ( page.length === 0 ){
 				page = false;
-				this._on( $.mobile.document, {
+				this._on( this.document, {
 					"pageshow": "refresh"
 				});
 			}

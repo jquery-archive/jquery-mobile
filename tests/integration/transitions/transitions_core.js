@@ -47,8 +47,8 @@
 
 			//wipe all urls
 			clearUrlHistory = function(){
-				$.mobile.urlHistory.stack = [];
-				$.mobile.urlHistory.activeIndex = 0;
+				$.mobile.navigate.history.stack = [];
+				$.mobile.navigate.history.activeIndex = 0;
 			};
 
 	module('jquery.mobile.navigation.js', {

@@ -269,11 +269,8 @@ div.ui-mobile-viewport {
 	font-size: 16px;	
 	padding: 0;
 }
-.ui-btn-inline,
-/* The high specificity ensures inline buttons in field containers stay inline */
-html body .ui-btn.ui-btn-inline {
+.ui-btn-inline {
 	display: inline-block;
-	width: auto;
 	vertical-align: middle;
 	margin-right: .625em;
 }
@@ -381,6 +378,9 @@ button.ui-btn,
 	-moz-appearance: none;
 	width: 100%;
 }
+button.ui-btn-inline {
+	width: auto;
+}
 /* Firefox adds a 1px border in a button element. We negate this to make sure they have the same height as other buttons in controlgroups. */
 button.ui-btn::-moz-focus-inner {
 	border: 0;
@@ -401,6 +401,7 @@ button.ui-btn-icon-notext,
 }
 
 /* Accessible content hiding */
+/* ui-hide-label deprecated in 1.4. TODO: Remove in 1.5 */
 .ui-hide-label > label,
 .ui-hide-label .ui-controlgroup-label,
 .ui-hide-label .ui-rangeslider label,

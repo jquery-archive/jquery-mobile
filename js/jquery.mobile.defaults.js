@@ -92,7 +92,12 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		dynamicBaseEnabled: true,
 
 		// default the property to remove dependency on assignment in init module
-		pageContainer: $()
+		pageContainer: $(),
+
+		//enable cross-domain page support
+		allowCrossDomainPages: false,
+
+		dialogHashKey: "&ui-state=dialog"
 	});
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

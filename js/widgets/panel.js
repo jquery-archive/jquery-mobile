@@ -26,7 +26,7 @@ $.widget( "mobile.panel", {
 			animate: "ui-panel-animate"
 		},
 		animate: true,
-		theme: "a",
+		theme: null,
 		position: "left",
 		dismissible: true,
 		display: "reveal", //accepts reveal, push, overlay
@@ -105,12 +105,11 @@ $.widget( "mobile.panel", {
 	},
 	
 	_getWrapper: function() {
-		var wrapper = this._page().find( "." + this.options.classes.pageWrapper ),
-			animateClass = ( $.support.cssTransform3d && !!this.options.animate ) ? " " + this.options.classes.animate : "";
+		var wrapper = this._page().find( "." + this.options.classes.pageWrapper );
 
 		if ( wrapper.length === 0 ) {
 			wrapper = this._page().children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" )
-				.wrapAll( "<div class='" + this.options.classes.pageWrapper + animateClass + "' /></div>" )
+				.wrapAll( "<div class='" + this.options.classes.pageWrapper + "'></div>" )
 				.parent();
 		}
 
@@ -132,14 +131,13 @@ $.widget( "mobile.panel", {
 	_getPanelClasses: function() {
 		var panelClasses = this.options.classes.panel +
 			" " + this._getPosDisplayClasses( this.options.classes.panel ) +
-			" " + this.options.classes.panelClosed;
+			" " + this.options.classes.panelClosed +
+			" " + "ui-body-" + ( this.options.theme ? this.options.theme : "inherit" );
 
-		if ( this.options.theme ) {
-			panelClasses += " ui-body-" + this.options.theme;
-		}
 		if ( !!this.options.positionFixed ) {
 			panelClasses += " " + this.options.classes.panelFixed;
 		}
+
 		return panelClasses;
 	},
 
@@ -249,7 +247,7 @@ $.widget( "mobile.panel", {
 	_bindPageEvents: function() {
 		var self = this;
 
-		$.mobile.document
+		this.document
 			// Close the panel if another panel on the page opens
 			.on( "panelbeforeopen", function( e ) {
 				if ( self._open && e.target !== self.element[ 0 ] ) {
@@ -265,13 +263,13 @@ $.widget( "mobile.panel", {
 			
 		// Clean up open panels after page hide
 		if ( self._parentPage ) {
-			$.mobile.document.on( "pagehide", ":jqmData(role='page')", function() {
+			this.document.on( "pagehide", ":jqmData(role='page')", function() {
 				if ( self._open ) {
 					self.close( true );
 				}
 			});
 		} else {
-			$.mobile.document.on( "pagebeforehide", function() {
+			this.document.on( "pagebeforehide", function() {
 				if ( self._open ) {
 					self.close( true );
 				}
@@ -290,7 +288,7 @@ $.widget( "mobile.panel", {
 				o = self.options,
 				
 				_openPanel = function() {
-					$.mobile.document.off( "panelclose" );
+					self.document.off( "panelclose" );
 					self._page().jqmData( "panel", "open" );
 					
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
@@ -299,7 +297,7 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						$.mobile.document.on( self._transitionEndEvents, complete );
+						self.document.on( self._transitionEndEvents, complete );
 					} else {
 						setTimeout( complete, 0 );
 					}
@@ -325,11 +323,13 @@ $.widget( "mobile.panel", {
 
 					self._modalOpenClasses = self._getPosDisplayClasses( o.classes.modal ) + " " + o.classes.modalOpen;
 					if ( self._modal ) {
-						self._modal.addClass( self._modalOpenClasses );
+						self._modal
+							.addClass( self._modalOpenClasses )
+							.height( Math.max( self._modal.height(), self.document.height() ) );
 					}
 				},
 				complete = function() {
-					$.mobile.document.off( self._transitionEndEvents, complete );
+					self.document.off( self._transitionEndEvents, complete );
 					
 					if ( o.display !== "overlay" ) {
 						self._wrapper().addClass( o.classes.pageContentPrefix + "-open" );
@@ -344,7 +344,7 @@ $.widget( "mobile.panel", {
 			self._trigger( "beforeopen" );
 			
 			if ( self._page().jqmData( "panel" ) === "open" ) {
-				$.mobile.document.on( "panelclose", function() {
+				self.document.on( "panelclose", function() {
 					_openPanel();
 				});
 			} else {
@@ -362,7 +362,7 @@ $.widget( "mobile.panel", {
 				
 				_closePanel = function() {
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						$.mobile.document.on( self._transitionEndEvents, complete );
+						self.document.on( self._transitionEndEvents, complete );
 					} else {
 						setTimeout( complete, 0 );
 					}
@@ -379,7 +379,7 @@ $.widget( "mobile.panel", {
 					}
 				},
 				complete = function() {
-					$.mobile.document.off( self._transitionEndEvents, complete );
+					self.document.off( self._transitionEndEvents, complete );
 					
 					if ( o.theme && o.display !== "overlay" ) {
 						self._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
@@ -450,10 +450,10 @@ $.widget( "mobile.panel", {
 
 		if ( !multiplePanels ) {
 
-			$.mobile.document.off( "panelopen panelclose" );
+			this.document.off( "panelopen panelclose" );
 			
 			if ( this._open ) {
-				$.mobile.document.off( this._transitionEndEvents );
+				this.document.off( this._transitionEndEvents );
 				$.mobile.resetActivePageHeight();
 			}
 		}

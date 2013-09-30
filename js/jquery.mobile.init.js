@@ -110,7 +110,7 @@ define([
 
 				// Store the initial destination
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
-					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
+					$.mobile.navigate.history.initialDst = hash.replace( "#", "" );
 				}
 
 				// make sure to set initial popstate state if it exists
