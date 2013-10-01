@@ -82,7 +82,7 @@ define( [
 			nav.app.backHistory ) {
 			nav.app.backHistory();
 		} else {
-			window.history.back();
+			$.mobile.pageContainer.pagecontainer( "back" );
 		}
 	};
 
