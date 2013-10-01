@@ -621,11 +621,16 @@ $.widget( "mobile.popup", {
 	},
 
 	_openPrerequisitesComplete: function() {
+		var id = this.element.attr( "id" );
+
 		this._ui.container.addClass( "ui-popup-active" );
 		this._isOpen = true;
 		this._resizeScreen();
 		this._ui.container.attr( "tabindex", "0" ).focus();
 		this._ignoreResizeEvents();
+		if ( id ) {
+			this.document.find( "[aria-haspopup='true'][aria-owns='" +  id + "']" ).attr( "aria-expanded", true );
+		}
 		this._trigger( "afteropen" );
 	},
 
@@ -703,7 +708,8 @@ $.widget( "mobile.popup", {
 	},
 
 	_closePrerequisitesDone: function() {
-		var container = this._ui.container;
+		var container = this._ui.container,
+			id = this.element.attr( "id" );
 
 		container.removeAttr( "tabindex" );
 
@@ -712,6 +718,10 @@ $.widget( "mobile.popup", {
 
 		// Blur elements inside the container, including the container
 		$( ":focus", container[ 0 ] ).add( container[ 0 ] ).blur();
+
+		if ( id ) {
+			this.document.find( "[aria-haspopup='true'][aria-owns='" +  id + "']" ).attr( "aria-expanded", false );
+		}
 
 		// alert users that the popup is closed
 		this._trigger( "afterclose" );
