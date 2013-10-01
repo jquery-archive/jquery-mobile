@@ -176,12 +176,34 @@ define( [
 			return $.mobile.path.documentBase;
 		},
 
-		_back: function() {
-			$.mobile.back();
+		back: function() {
+			this.go( -1 );
 		},
 
-		_forward: function() {
-			window.history.forward();
+		forward: function() {
+			this.go( 1 );
+		},
+
+		go: function( steps ) {
+
+			//if hashlistening is enabled use native history method
+			if ( $.mobile.hashListeningEnabled ) {
+				window.history.go( steps );
+			} else {
+
+				//we are not listening to the hash so handle history internally
+				var activeIndex = $.mobile.navigate.history.activeIndex,
+					index = activeIndex + parseInt( steps, 10 ),
+					url = $.mobile.navigate.history.stack[ index ].url,
+					direction = ( steps >= 1 )? "forward" : "back";
+
+				//update the history object
+				$.mobile.navigate.history.activeIndex = index;
+				$.mobile.navigate.history.previousIndex = activeIndex;
+
+				//change to the new page
+				this.change( url, { direction: direction, changeHash: false, fromHashChange: true } );
+			}
 		},
 
 		// TODO rename _handleDestination
@@ -231,9 +253,9 @@ define( [
 				// determine if we're heading forward or backward and continue
 				// accordingly past the current dialog
 				if ( data.direction === "back" ) {
-					this._back();
+					this.back();
 				} else {
-					this._forward();
+					this.forward();
 				}
 
 				// prevent changePage call
