@@ -8,10 +8,6 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 (function( $, undefined ) {
 	$.widget( "mobile.toolbar", $.mobile.toolbar, {
 
-		_create: function() {
-			this._super();
-		},
-
 		_makeFixed: function() {
 			this._super();
 			this._workarounds();
