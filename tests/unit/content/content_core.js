@@ -95,7 +95,7 @@
 			return $( "<div>" );
 		};
 
-		proto._back = function(){
+		proto.back = function(){
 			ok( true, "back called" );
 		};
 
@@ -109,7 +109,7 @@
 			return $( "<div>" );
 		};
 
-		proto._forward = function(){
+		proto.forward = function(){
 			ok( true, "forward called" );
 		};
 
