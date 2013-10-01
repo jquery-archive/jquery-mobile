@@ -174,13 +174,21 @@ $.widget( "mobile.popup", {
 		return false;
 	},
 
-	// Make sure the screen size is increased beyond the page height if the popup's causes the document to increase in height
+	// Make sure the screen covers the entire document - CSS is sometimes not
+	// enough to accomplish this.
 	_resizeScreen: function() {
-		var popupHeight = this._ui.container.outerHeight( true );
+		var screen = this._ui.screen,
+			popupHeight = this._ui.container.outerHeight( true ),
+			screenHeight = screen.removeAttr( "style" ).height(),
 
-		this._ui.screen.removeAttr( "style" );
-		if ( popupHeight > this._ui.screen.height() ) {
-			this._ui.screen.height( popupHeight );
+			// Subtracting 1 here is necessary for an obscure Andrdoid 4.0 bug where
+			// the browser hangs if the screen covers the entire document :/
+			documentHeight = this.document.height() - 1;
+
+		if ( screenHeight < documentHeight ) {
+			screen.height( documentHeight );
+		} else if ( popupHeight > screenHeight ) {
+			screen.height( popupHeight );
 		}
 	},
 
