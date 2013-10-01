@@ -62,8 +62,8 @@
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
-				<li><a href="#">Menu item 1</a></li>
-				<li><a href="#">Menu item 1</a></li>
+				<li><a href="#">Menu item 2</a></li>
+				<li><a href="#">Menu item 3</a></li>
 			</ul>
 		</div>
 	</div><!-- /header -->
@@ -302,8 +302,8 @@
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#">Menu item 1</a></li>
-				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
-				<li><a href="#">Menu item 1</a></li>
+				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 2</a></li>
+				<li><a href="#">Menu item 3</a></li>
 			</ul>
 		</div>
 		<h4 style="display:none;">Footer</h4>
