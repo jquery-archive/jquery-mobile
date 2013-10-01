@@ -26,7 +26,7 @@
 
         <h1>Select menu</h1>
 
-        <p>The select menu is based on a native select element, which is hidden from view and replaced with a custom-styled select button. Tapping it opens the native menu. There is also a <a href="custom-selects.php">custom select menu</a> widget, which also replaces the native dropdown.
+        <p>The select menu is based on a native select element, which is hidden from view and replaced with a custom-styled select button. Tapping it opens the native menu. There is also a <a href="../selectmenu-custom/">custom select menu</a> widget, which also replaces the native dropdown.
         </p>
 
         <h2>Basic select</h2>
