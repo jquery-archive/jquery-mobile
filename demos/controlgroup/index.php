@@ -36,12 +36,12 @@
 
 			<div data-demo-html="true">
 				<div data-role="controlgroup">
-					<a href="#" data-role="button">No icon</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="left">Left</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="right">Right</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Top</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bottom</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icon only</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all">No icon</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left">Left</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right">Right</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-top">Top</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-bottom">Bottom</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">Icon only</a>
 				</div>
 			</div><!--/demo-html -->
 
@@ -49,12 +49,12 @@
 
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-mini="true">
-					<a href="#" data-role="button">No icon</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="left">Left</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="right">Right</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Top</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bottom</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icon only</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all">No icon</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left">Left</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right">Right</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-top">Top</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-bottom">Bottom</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">Icon only</a>
 				</div>
 			</div><!--/demo-html -->
 
@@ -62,21 +62,21 @@
 
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#" data-role="button">No icon</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="left">Left</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="right">Right</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all">No icon</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left">Left</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right">Right</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Top</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Top</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-top">Top</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-top">Top</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bottom</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bottom</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-bottom">Bottom</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-bottom">Bottom</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icon only</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icon only</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">Icon only</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">Icon only</a>
 				</div>
 				<form>
 					<fieldset data-role="controlgroup" data-type="horizontal">
@@ -97,21 +97,21 @@
 
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-					<a href="#" data-role="button">No icon</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="left">Left</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="right">Right</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all">No icon</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-left">Left</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-right">Right</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Top</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Top</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-top">Top</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-top">Top</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bottom</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bottom</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-bottom">Bottom</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-bottom">Bottom</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icon only</a>
-					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icon only</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">Icon only</a>
+					<a href="#" role="button" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">Icon only</a>
 				</div>
 				<form>
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
