@@ -117,10 +117,10 @@
 
 		<h2>Customizing the back button text</h2>
 
-		<p>If you'd like to configure the back button text, you can either use the <code>data-back-btn-text="previous"</code> attribute on your page element, or set it programmatically via the page plugin's options: <br /><code>$.mobile.page.prototype.options.backBtnText = "previous";</code></p>
+		<p>If you'd like to configure the back button text, you can either use the <code>data-back-btn-text="previous"</code> attribute on your page element, or set it programmatically via the page plugin's options: <br /><code>$.mobile.toolbar.prototype.options.backBtnText = "previous";</code></p>
 
 		<h3>Default back button style</h3>
-		<p>If you'd like to configure the back button role-theme, you can use: <br /><code>$.mobile.page.prototype.options.backBtnTheme = "a";</code><br />
+		<p>If you'd like to configure the back button role-theme, you can use: <br /><code>$.mobile.toolbar.prototype.options.backBtnTheme = "a";</code><br />
 		If you're doing this programmatically, set this option inside the mobileinit event handler.</p>
 
 		<h2>Custom header configurations</h2>
