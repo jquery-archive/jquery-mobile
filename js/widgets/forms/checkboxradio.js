@@ -45,10 +45,8 @@ $.widget( "mobile.checkboxradio", $.extend( {
 					.filter( "[for='" + $.mobile.path.hashToSelector( input[0].id ) + "']" )
 					.first(),
 			inputtype = input[0].type,
-			checkedState = inputtype + "-on",
-			uncheckedState = inputtype + "-off",
-			checkedClass = "ui-" + checkedState,
-			uncheckedClass = "ui-" + uncheckedState;
+			checkedClass = "ui-" + inputtype + "-on",
+			uncheckedClass = "ui-" + inputtype + "-off";
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
 			return;
@@ -70,9 +68,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			parentLabel: parentLabel,
 			inputtype: inputtype,
 			checkedClass: checkedClass,
-			uncheckedClass: uncheckedClass,
-			checkedicon: checkedState,
-			uncheckedicon: uncheckedState
+			uncheckedClass: uncheckedClass
 		});
 
 		if ( !this.options.enhanced ) {
@@ -220,9 +216,6 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			checkedClass = this.checkedClass + ( hasIcon ? "" : active ),
 			label = this.label;
 
-		label
-			.toggleClass( "ui-icon-" + this.checkedicon, input.checked )
-			.toggleClass( "ui-icon-" + this.uncheckedicon, !input.checked );
 		if ( input.checked ) {
 			label.removeClass( this.uncheckedClass + active ).addClass( checkedClass );
 		} else {
