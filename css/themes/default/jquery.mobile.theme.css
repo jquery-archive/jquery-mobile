@@ -144,9 +144,7 @@ label.ui-btn {
 .ui-btn-icon-right:after,
 .ui-btn-icon-top:after,
 .ui-btn-icon-bottom:after,
-.ui-btn-icon-notext:after,
-html .ui-btn.ui-checkbox-off:after,
-html .ui-btn.ui-radio-off:after {
+.ui-btn-icon-notext:after {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.3) /*{global-icon-disc}*/;
 	background-position: center center;
@@ -181,23 +179,22 @@ html .ui-alt-icon .ui-radio-off:after {
 }
 
 /* Checkbox and radio */
-html .ui-btn.ui-checkbox-off:after,
-html .ui-btn.ui-checkbox-on:after,
-html .ui-btn.ui-radio-off:after,
-html .ui-btn.ui-radio-on:after {
+.ui-btn.ui-checkbox-off:after,
+.ui-btn.ui-checkbox-on:after,
+.ui-btn.ui-radio-off:after,
+.ui-btn.ui-radio-on:after {
 	display: block;
 	width: 18px;
 	height: 18px;
 	margin: -9px 2px 0 2px;
 }
-.ui-btn.ui-checkbox-off:after,
+.ui-checkbox-off:after,
 .ui-btn.ui-radio-off:after {
-	background-image: none;
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 }
-html .ui-btn.ui-checkbox-off:after,
-html .ui-btn.ui-checkbox-on:after {
+.ui-btn.ui-checkbox-off:after,
+.ui-btn.ui-checkbox-on:after {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
 }
