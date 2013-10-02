@@ -29,8 +29,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-left" role="button">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -46,8 +46,8 @@
 
         <div data-demo-html="true" data-demo-css="#wrap">
             <div class="ui-grid-b">
-                <div class="ui-block-a"><a href="#" data-role="button">Anchor</a></div>
-                <div class="ui-block-b"><div class="button-wrap"><button>Button</button></div></div>
+                <div class="ui-block-a"><a href="#" role="button" class="ui-shadow ui-btn ui-corner-all">Anchor</a></div>
+                <div class="ui-block-b"><div class="button-wrap"><button class="ui-shadow ui-btn ui-corner-all">Button</button></div></div>
                 <div class="ui-block-c"><input type="button" value="Input"></div>
             </div>
 			<form class="ui-grid-b">
@@ -77,8 +77,8 @@
 
         <div data-demo-html="true" data-demo-css="#wrap">
             <div class="ui-grid-b">
-                <div class="ui-block-a"><a href="#" data-role="button" data-mini="true">Anchor</a></div>
-                <div class="ui-block-b"><div class="button-wrap"><button data-mini="true">Button</button></div></div>
+                <div class="ui-block-a"><a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-mini">Anchor</a></div>
+                <div class="ui-block-b"><div class="button-wrap"><button  class="ui-shadow ui-btn ui-corner-all ui-mini">Button</button></div></div>
                 <div class="ui-block-c"><input type="button" value="Input" data-mini="true"></div>
             </div>
 			<form class="ui-grid-b">
@@ -110,11 +110,11 @@
 
         <div data-demo-html="true" data-demo-css="#center">
             <div class="ui-grid-d center">
-                <div class="ui-block-a"><a data-role="button" data-icon="home" data-iconpos="notext" data-inline="true">Button</a></div>
-                <div class="ui-block-b"><a data-role="button" data-icon="arrow-l" data-iconpos="notext" data-inline="true">Button</a></div>
-                <div class="ui-block-c"><a data-role="button" data-icon="grid" data-iconpos="notext" data-inline="true">Button</a></div>
-                <div class="ui-block-d"><a data-role="button" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Button</a></div>
-                <div class="ui-block-e"><a data-role="button" data-icon="gear" data-iconpos="notext" data-inline="true">Button</a></div>
+                <div class="ui-block-a"><a role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-notext ui-btn-inline">Button</a></div>
+                <div class="ui-block-b"><a role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-l ui-btn-icon-notext ui-btn-inline">Button</a></div>
+                <div class="ui-block-c"><a role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext ui-btn-inline">Button</a></div>
+                <div class="ui-block-d"><a role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-notext ui-btn-inline">Button</a></div>
+                <div class="ui-block-e"><a role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-gear ui-btn-icon-notext ui-btn-inline">Button</a></div>
             </div>
         </div><!--/demo-html -->
 
@@ -125,7 +125,7 @@
 
         <div data-demo-html="true">
             <div class="ui-grid-b ui-responsive">
-                <div class="ui-block-a"><a href="#" data-role="button" data-icon="arrow-l">Back to order</a></div>
+                <div class="ui-block-a"><a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-arrow-l">Back to order</a></div>
                 <div class="ui-block-b"><input type="button" data-icon="plus" value="Add products"></div>
                 <div class="ui-block-c"><input type="button" data-icon="check" data-iconpos="right" value="Confirm order"></div>
             </div>
@@ -138,23 +138,23 @@
 
         <div data-demo-html="true">
             <div class="ui-grid-b ui-responsive">
-                <div class="ui-block-a"><a href="#" data-role="button">Grid B</a></div>
-                <div class="ui-block-b"><a href="#" data-role="button">Grid B</a></div>
-                <div class="ui-block-c"><a href="#" data-role="button">Grid B</a></div>
+                <div class="ui-block-a"><a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Grid B</a></div>
+                <div class="ui-block-b"><a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Grid B</a></div>
+                <div class="ui-block-c"><a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Grid B</a></div>
             </div>
             <div class="ui-grid-a ui-responsive">
-                <div class="ui-block-a"><a href="#" data-role="button">Grid A</a></div>
-                <div class="ui-block-b"><a href="#" data-role="button">Grid A</a></div>
+                <div class="ui-block-a"><a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Grid A</a></div>
+                <div class="ui-block-b"><a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Grid A</a></div>
             </div>
             <div class="ui-grid-solo">
-                <a href="#" data-role="button">Grid Solo</a>
+                <a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Grid Solo</a>
             </div>
             <br>
-            <a href="#" data-role="button" data-theme="b">Outside the grid</a>
+            <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b" role="button">Outside the grid</a>
         </div><!--/demo-html -->
         
         
-		<a href="./" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Grids</a>
+		<a href="./" data-ajax="false" role="button" class="ui-shadow ui-btn ui-corner-all ui-mini ui-btn-inline ui-icon-arrow-l ui-btn-icon-left">Back to Grids</a>
 
 	</div><!-- /content -->
 

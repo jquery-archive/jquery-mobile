@@ -19,7 +19,7 @@
 					brand = target.find( "h2" ).html(),
 					model = target.find( "p" ).html(),
 					short = target.attr( "id" ),
-					closebtn = '<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-btn-right">Close</a>',
+					closebtn = '<a href="#" data-rel="back" role="button" class="ui-btn ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>',
 					header = '<div data-role="header"><h2>' + brand + ' ' + model + '</h2></div>',
 					img = '<img src="../_assets/img/' + short + '.jpg" alt="' + brand + '" class="photo">',
 					popup = '<div data-role="popup" id="popup-' + short + '" data-short="' + short +'" data-theme="none" data-overlay-theme="a" data-corners="false" data-tolerance="15">' + closebtn + header + img + '</div>';
@@ -84,7 +84,7 @@
         <div data-demo-html="#demo-page" data-demo-js="true">
             <p>This demo shows how you can dynamically create a popup. The popup contains images which means we have to set the image width and height to make sure the popup gets the right size and position. At client side we can only get the size when the image has been loaded in the DOM. In this demo we use the <code>load</code> event, but with a fallback because it has some caveats (see <a href="http://api.jquery.com/load-event/" rel="external">.load() - jQuery API</a>).</p>
 
-            <p><a href="#demo-page" data-transition="fade" data-role="button" data-inline="true" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Open dynamic popup demo</a></p>
+            <p><a href="#demo-page" data-transition="fade" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">Open dynamic popup demo</a></p>
         </div><!--/demo-html -->
 
 	</div><!-- /content -->

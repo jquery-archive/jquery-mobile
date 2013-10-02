@@ -64,7 +64,7 @@
 
         <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
 
-        <a href="#demo-page" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right">Open demo</a>
+        <a href="#demo-page" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-carat-r ui-btn-icon-right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
@@ -94,21 +94,21 @@
             <dd><b>1.</b> to strike or move with a sweeping motion</dd>
         </dl>
 
-		<a href="#demo-intro" data-rel="back" class="back-btn" data-role="button" data-mini="true" data-inline="true" data-icon="back" data-iconpos="right">Back to demo intro</a>
+		<a href="#demo-intro" data-rel="back" role="button" class="back-btn ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-back ui-btn-icon-right">Back to demo intro</a>
 
     </div><!-- /content -->
 
     <div data-role="panel" id="left-panel" data-theme="b">
 
     	<p>Left reveal panel.</p>
-		<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
+		<a href="#" data-rel="close" role="button" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Close</a>
 
     </div><!-- /panel -->
 
     <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
 
     	<p>Right push panel.</p>
-		<a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
+		<a href="#" data-rel="close" role="button" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-right">Close</a>
 
     </div><!-- /panel -->
 

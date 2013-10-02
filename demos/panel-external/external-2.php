@@ -27,7 +27,7 @@
         <h3>Default panel options</h3>
         <p>This panel has all the default options: positioned on the left with the reveal display mode. The panel markup is <em>before</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" data-role="button" data-icon="delete" data-inline="true">Close panel</a>
+        <a href="#demo-links" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
 
 	</div><!-- /default panel -->
 
@@ -36,13 +36,13 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-left" role="button">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
-		<h1>External Panels Page 2<a href="http://api.jquerymobile.com/panel/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+		<h1>External Panels Page 2<a href="http://api.jquerymobile.com/panel/" data-ajax="false" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right jqm-api-link">API</a></h1>
 
 		<p>Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
 
@@ -51,14 +51,14 @@
 		<p>The panels below are all located outside the page</p>
 
 		<p><strong>Left</strong> panel examples</p>
-		<a href="#leftpanel3" data-role="button" data-inline="true" data-mini="true">Overlay</a>
-		<a href="#leftpanel1" data-role="button" data-inline="true" data-mini="true">Reveal</a>
-		<a href="#leftpanel2" data-role="button" data-inline="true" data-mini="true">Push</a>
+		<a href="#leftpanel3" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Overlay</a>
+		<a href="#leftpanel1" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a>
+		<a href="#leftpanel2" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Push</a>
 
 		<p><strong>Right</strong> panel examples</p>
-		<a href="#rightpanel3" data-role="button" data-inline="true" data-mini="true">Overlay</a>
-		<a href="#rightpanel1" data-role="button" data-inline="true" data-mini="true">Reveal</a>
-		<a href="#rightpanel2" data-role="button" data-inline="true" data-mini="true">Push</a>
+		<a href="#rightpanel3" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Overlay</a>
+		<a href="#rightpanel1" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a>
+		<a href="#rightpanel2" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Push</a>
 
 	</div><!-- /content -->
 
