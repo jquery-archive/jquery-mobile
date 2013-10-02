@@ -232,8 +232,8 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				// toggle checkbox class for multiple selects
 				if ( self.isMultiple ) {
 					$( this ).find( "a" )
-						.toggleClass( "ui-icon-checkbox-on", option.selected )
-						.toggleClass( "ui-icon-checkbox-off", !option.selected );
+						.toggleClass( "ui-checkbox-on", option.selected )
+						.toggleClass( "ui-checkbox-off", !option.selected );
 				}
 
 				// trigger change if value changed
@@ -313,7 +313,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 					// Multiple selects: add the "on" checkbox state to the icon
 					if ( self.isMultiple ) {
-						item.find( "a" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
+						item.find( "a" ).removeClass( "ui-checkbox-off" ).addClass( "ui-checkbox-on" );
 					} else {
 						if ( item.hasClass( "ui-screen-hidden" ) ) {
 							item.next().find( "a" ).addClass( $.mobile.activeBtnClass );
@@ -403,7 +403,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			o = this.options,
 			placeholder = this.placeholder,
 			needPlaceholder = true,
-			dataIcon = this.isMultiple ? "checkbox-off" : "false",
+			dataIcon = "false",
 			$options, numOptions, select,
 			dataPrefix = "data-" + $.mobile.ns,
 			dataIndexAttr = dataPrefix + "option-index",
@@ -485,6 +485,10 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			item.className = classes.join( " " );
 			item.setAttribute( "role", "option" );
 			anchor.setAttribute( "tabindex", "-1" );
+			if ( this.isMultiple ) {
+				$( anchor ).addClass( "ui-btn ui-checkbox-off ui-btn-icon-right" );
+			}
+
 			item.appendChild( anchor );
 			fragment.appendChild( item );
 		}
