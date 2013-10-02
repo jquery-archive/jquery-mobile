@@ -740,7 +740,7 @@ define( [
 			if ( from ) {
 
 				//Check if this is a same page transition and tell the handler in page
-				if( to[0] == from[0] ){
+				if( to[0] === from[0] ){
 					samePage = true;
 				}
 
