@@ -748,13 +748,21 @@ define( [
 
 		// TODO move into transition handlers?
 		_triggerCssTransitionEvents: function( to, from, prefix ) {
+			var samePage = false;
+
 			prefix = prefix || "";
 
 			// TODO decide if these events should in fact be triggered on the container
 			if ( from ) {
+
+				//Check if this is a same page transition and tell the handler in page
+				if( to[0] === from[0] ){
+					samePage = true;
+				}
+
 				//trigger before show/hide events
 				// TODO deprecate nextPage in favor of next
-				this._triggerWithDeprecated( prefix + "hide", { nextPage: to }, from );
+				this._triggerWithDeprecated( prefix + "hide", { nextPage: to, samePage: samePage }, from );
 			}
 
 			// TODO deprecate prevPage in favor of previous
