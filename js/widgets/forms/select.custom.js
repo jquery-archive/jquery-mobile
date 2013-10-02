@@ -474,7 +474,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 			item = document.createElement( "li" );
 			if ( option.disabled ) {
-				classes.push( "ui-disabled" );
+				classes.push( "ui-state-disabled" );
 				item.setAttribute( "aria-disabled", true );
 			}
 			item.setAttribute( dataIndexAttr, i );
