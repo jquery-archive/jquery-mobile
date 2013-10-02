@@ -28,11 +28,8 @@ $.widget( "mobile.selectmenu", $.extend( {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		mini: false
-	},
-
-	_button: function() {
-		return $( "<div/>" );
+		mini: false,
+		enhanced: false
 	},
 
 	_setDisabled: function( value ) {
@@ -53,37 +50,6 @@ $.widget( "mobile.selectmenu", $.extend( {
 		return this.select.find( "option" );
 	},
 
-	// setup items that are generally necessary for select menu extension
-	_preExtension: function() {
-		var inline = this.options.inline || this.element.jqmData( "inline" ),
-			mini = this.options.mini || this.element.jqmData( "mini" ),
-			classes = "";
-		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-		/* if ( $el[0].className.length ) {
-			classes = $el[0].className;
-		} */
-		if ( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
-			classes = " ui-btn-left";
-		}
-
-		if (  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
-			classes = " ui-btn-right";
-		}
-
-		if ( inline ) {
-			classes += " ui-btn-inline";
-		}
-		if ( mini ) {
-			classes += " ui-mini";
-		}
-
-		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
-		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
-		this.buttonId = this.selectId + "-button";
-		this.label = $( "label[for='"+ this.selectId +"']" );
-		this.isMultiple = this.select[ 0 ].multiple;
-	},
-
 	_destroy: function() {
 		var wrapper = this.element.parents( ".ui-select" );
 		if ( wrapper.length > 0 ) {
@@ -95,26 +61,77 @@ $.widget( "mobile.selectmenu", $.extend( {
 		}
 	},
 
+	_button: function () {
+		return $( "<div/>" );
+	},
+
+	_enhance: function () {
+		// setup items that are generally necessary for select menu extension
+		var classes,
+			o = this.options,
+			el = this.element[0],
+			iconpos = o.icon ? ( o.iconpos || el.getAttribute( "data-iconpos" ) ) : false;
+
+		// TODO: move all(?) classes on wrapper or only ui-btn-left/right?
+		classes = el.className +
+			(o.mini || el.getAttribute( "data-mini" )) ? " ui-mini" : "" +
+			(o.inline || el.getAttribute( "data-inline" )) ? " ui-btn-inline" : "";
+
+		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
+		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
+		this.buttonId = this.selectId + "-button";
+		this.label = $( "label[for='"+ this.selectId +"']" );
+
+		this.button = this._button()
+			.insertBefore( this.select )
+			.attr( "id", this.buttonId )
+			.addClass( "ui-btn" +
+				( o.icon ? ( " ui-icon-" + o.icon + " ui-btn-icon-" + iconpos +
+				( o.iconshadow ? " ui-shadow-icon" : "" ) ) : "" ) + /* TODO: Remove in 1.5. */
+				( o.theme ? " ui-btn-" + o.theme : "" ) +
+				( o.corners ? " ui-corner-all" : "" ) +
+				( o.shadow ? " ui-shadow" : "" ) );
+
+		// Add button text placeholder
+		this.buttonText = $ ( "<span>" )
+			.appendTo( this.button );
+
+		this._setMultiple();
+
+		// Add counter for multi selects
+		if ( this.isMultiple ) {
+			this.buttonCount = $( "<span>" )
+				.addClass( "ui-li-count ui-body-inherit" )
+				.hide()
+				.appendTo( this.button.addClass( "ui-li-has-count" ) );
+		}
+	},
+
+	_setMultiple: function () {
+		// TODO: are multiples supported in regular select?
+		this.isMultiple = this.select[ 0 ].multiple;
+	},
+
 	_create: function() {
-		this._preExtension();
-
-		this.button = this._button();
-
 		var self = this,
+			o = this.options;
 
-			options = this.options,
+		if (o.enhanced) {
+			this.button = this.element.parent();
+			this.select = this.element;
+			this.selectId = this.select[0].id;
+			this.buttonId = this.button[0].id;
+			this.label = this.element.prev("label");
+			this.buttonText = this.button.find("span").first();
 
-			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
+			this._setMultiple();
 
-			button = this.button
-				.insertBefore( this.select )
-				.attr( "id", this.buttonId )
-				.addClass( "ui-btn" +
-					( options.icon ? ( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos +
-					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
-					( options.theme ? " ui-btn-" + options.theme : "" ) +
-					( options.corners ? " ui-corner-all" : "" ) +
-					( options.shadow ? " ui-shadow" : "" ) );
+			if (this.isMultiple) {
+				this.buttonCount = this.button.find("span").last();
+			}
+		} else {
+			this._enhance();
+		}
 
 		this.setButtonText();
 
@@ -122,20 +139,12 @@ $.widget( "mobile.selectmenu", $.extend( {
 		// In Mini, it hides the element, but not its text
 		// On the desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
-		if ( options.nativeMenu && window.opera && window.opera.version ) {
-			button.addClass( "ui-select-nativeonly" );
-		}
-
-		// Add counter for multi selects
-		if ( this.isMultiple ) {
-			this.buttonCount = $( "<span>" )
-				.addClass( "ui-li-count ui-body-inherit" )
-				.hide()
-				.appendTo( button.addClass( "ui-li-has-count" ) );
+		if ( o.nativeMenu && window.opera && window.opera.version ) {
+			this.button.addClass( "ui-select-nativeonly" );
 		}
 
 		// Disable if specified
-		if ( options.disabled || this.element.attr( "disabled" )) {
+		if ( o.disabled || this.element.attr( "disabled" )) {
 			this.disable();
 		}
 
@@ -143,7 +152,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 		this.select.change(function() {
 			self.refresh();
 
-			if ( !!options.nativeMenu ) {
+			if ( !!o.nativeMenu ) {
 				this.blur();
 			}
 		});
@@ -231,7 +240,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 		var self = this,
 			selected = this.selected(),
 			text = this.placeholder,
-			span = $( document.createElement( "span" ) );
+			span = this.buttonText;
 
 		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( (function() {
 			if ( selected.length ) {
@@ -249,7 +258,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 			}
 
 			// TODO possibly aggregate multiple select option classes
-			return span
+			return this.buttonText = span
 				.addClass( self.select.attr( "class" ) )
 				.addClass( selected.attr( "class" ) )
 				.removeClass( "ui-screen-hidden" );
