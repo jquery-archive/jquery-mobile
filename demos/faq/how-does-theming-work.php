@@ -92,11 +92,11 @@
 					<p>Each swatch also includes default styles for interactive elements like list items and buttons. Each button has styles for normal, hover/focus and pressed states.</p>
 
 						<div class="swatch-preview">
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-a ui-icon-arrow-l">Button A</a>
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-b ui-icon-arrow-l">Button B</a>
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-c ui-icon-arrow-l">Button C</a>
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-d ui-icon-arrow-l">Button D</a>
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-e ui-icon-arrow-l">Button E</a>
+							<a href="index.html" class="ui-btn ui-corner-all ui-btn-a ui-btn-icon-left ui-icon-arrow-l">Button A</a>
+							<a href="index.html" class="ui-btn ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-arrow-l">Button B</a>
+							<a href="index.html" class="ui-btn ui-corner-all ui-btn-c ui-btn-icon-left ui-icon-arrow-l">Button C</a>
+							<a href="index.html" class="ui-btn ui-corner-all ui-btn-d ui-btn-icon-left ui-icon-arrow-l">Button D</a>
+							<a href="index.html" class="ui-btn ui-corner-all ui-btn-e ui-btn-icon-left ui-icon-arrow-l">Button E</a>
 						</div><!-- end swatch-bars -->
 
 

@@ -68,7 +68,7 @@
 
         <p>To make this responsive, you can make the page re-flow at wider widths. This allows both the reveal panel menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page.</p>
 
-        <a href="./" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Back to Panels</a>
+        <a href="./" data-ajax="false" role="button" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-arrow-l ui-btn-icon-left">Back to Panels</a>
 
 		<div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div><!--/demo-html -->
 
@@ -130,8 +130,8 @@
             <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 
             <div class="ui-grid-a">
-                <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Cancel</a></div>
-                <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Save</a></div>
+                <div class="ui-block-a"><a href="#" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a></div>
+                <div class="ui-block-b"><a href="#" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Save</a></div>
 			</div>
         </form>
 
@@ -149,7 +149,7 @@
 
         <p>This is just a landing page.</p>
 
-        <a href="#panel-fixed-page1" data-role="button" data-inline="true" data-mini="true" data-icon="back" data-iconpos="left">Back</a>
+        <a href="#panel-fixed-page1" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-back ui-btn-icon-left">Back</a>
 
     </div><!-- /content -->
 

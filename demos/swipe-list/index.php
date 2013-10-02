@@ -146,7 +146,7 @@
 
 		<p>This demo shows how you can remove list items by swiping left or right. For devices without touchscreen there is a delete button. This demo also contains a custom styled confirmation popup.</p>
 		
-		<p><a href="#demo-page" data-transition="fade" data-role="button" data-inline="true">Open swipe list demo</a></p>
+		<p><a href="#demo-page" data-transition="fade" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open swipe list demo</a></p>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div>
 
@@ -303,10 +303,10 @@
 
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <a id="yes" data-role="button" data-mini="true" data-shadow="false" data-theme="a" data-rel="back">Yes</a>
+                <a id="yes" role="button" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Yes</a>
             </div>
             <div class="ui-block-b">
-                <a id="cancel" data-role="button" data-mini="true" data-shadow="false" data-theme="a" data-rel="back">Cancel</a>
+                <a id="cancel" role="button" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
             </div>
         </div>
 

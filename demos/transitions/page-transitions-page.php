@@ -53,7 +53,7 @@
 
 			</form>
 
-			<a href="index.php" data-role="button" data-theme="b" data-rel="back" data-inline="true">Take me back</a>
+			<a href="index.php" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline" data-rel="back">Take me back</a>
 		</div>
 
 		<div data-role="footer" data-theme="a">

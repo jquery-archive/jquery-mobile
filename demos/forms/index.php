@@ -18,8 +18,8 @@
 		<div data-role="header" class="jqm-header">
 			<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-			<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-			<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+			<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-left" role="button">Menu</a>
+			<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
 			</div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
@@ -37,24 +37,24 @@
 
 		<p>Buttons are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons. Learn more about <a href="../button-markup/">button markup</a> and <a href="../button-markup/">input buttons</a>.</p>
         <div data-demo-html="true">
-            <a href="#" data-role="button">Link button</a>
-            <button>Button element</button>
+            <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all">Link button</a>
+            <button class="ui-shadow ui-btn ui-corner-all">Button element</button>
             <input type="button" value="Button element" data-icon="delete" data-theme="a" />
         </div><!-- /demo-html -->
 
         <p>Inline buttons</p>
         <div data-demo-html="true">
-            <a href="#" data-role="button" data-inline="true" data-icon="star">Inline + icon</a>
-            <a href="#" data-role="button" data-inline="true" data-theme="b" data-mini="true">Mini + theme</a>
-            <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="notext" data-theme="b" data-mini="true">icon only button</a>
+            <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-star">Inline + icon</a>
+            <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-b ui-mini">Mini + theme</a>
+            <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">icon only button</a>
         </div><!-- /demo-html -->
 
         <p>Horizontal grouped buttons</p>
         <div data-demo-html="true">
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                <a href="#" data-role="button" data-icon="plus" data-theme="b">Add</a>
-                <a href="#" data-role="button" data-icon="delete" data-theme="b">Delete</a>
-                <a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>
+                <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-plus ui-btn-b">Add</a>
+                <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete ui-btn-b">Delete</a>
+                <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-grid ui-btn-b">More</a>
             </div>
         </div><!-- /demo-html -->
 

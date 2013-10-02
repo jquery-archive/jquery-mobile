@@ -37,7 +37,7 @@
         <div data-demo-html="#city" data-demo-js="#demo-script" data-demo-css="#demo-style">
             <p>This demo shows how you can use the swipe event to navigate between pages. We are using single HTML files for each page. Here you can see the JavaScript and CSS source. On each of the demo pages you can see the page markup as well.</p>
 
-            <p><a href="newyork.html" data-ajax="false" data-role="button" data-inline="true">Open swipe page demo</a></p>
+            <p><a href="newyork.html" data-ajax="false" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open swipe page demo</a></p>
         </div>
 
 	</div><!-- /content -->

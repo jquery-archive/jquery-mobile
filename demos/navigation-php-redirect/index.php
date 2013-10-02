@@ -65,8 +65,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-left" role="button">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
 	</div><!-- /header -->
 	
 	<div data-role="content" class="jqm-content">
@@ -76,7 +76,7 @@
 		<p>Clicking the link below will cause a page to be loaded from the server which contains a special instruction that is captured in the sample code to load the final redirection target page.</p>
          
         <div data-demo-html="true" data-demo-js="#redirectCode" data-demo-php="source.php">
-            <a href="redirect.php?to=redirect-target.html" data-role="button" data-inline="true">Redirect</a>
+            <a href="redirect.php?to=redirect-target.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Redirect</a>
         </div><!--/demo-html -->
 		
 		<p>Note: This is a PHP demo that will only work on a server and not in a build (i.e. the demos that come with each release).</p>

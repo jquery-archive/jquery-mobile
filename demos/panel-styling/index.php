@@ -124,8 +124,8 @@
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-left" role="button">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
     </div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
@@ -144,7 +144,7 @@
         
         <p>Click the "view source" button to see the CSS and markup of this demo and open the demo to see the result.</p>
 
-        <a href="#demo-page" data-role="button" data-inline="true" data-mini="true" data-icon="carat-r" data-iconpos="right">Open demo</a>
+        <a href="#demo-page" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-carat-r ui-btn-icon-right">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-css="true"></div><!--/demo-html -->
 
@@ -177,7 +177,7 @@
 
             <p><small>Source: Wikipedia</small></p>
 
-            <p><a href="#right-panel" data-role="button" data-inline="true" data-mini="true" data-shadow="false">Share</a></p>
+            <p><a href="#right-panel" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Share</a></p>
 
 		</div><!-- /article -->
 

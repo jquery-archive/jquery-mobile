@@ -82,7 +82,7 @@ $.mobile.document.on( "slidestop", function() {
 
 <?php include( '../jqm-panels.php' ); ?>
 
-	<a href="#alignment-example" id="open-alignment-example" data-rel="popup" data-role="button" data-inline="true">Open</a>
+	<a href="#alignment-example" id="open-alignment-example" data-rel="popup" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open</a>
 </div><!-- /page -->
 </body>
 </html>

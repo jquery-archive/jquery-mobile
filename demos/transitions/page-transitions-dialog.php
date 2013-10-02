@@ -24,7 +24,7 @@
 		<p>That was an animated page transition effect to a dialog that we added with a <code>data-transition</code> attribute on the link.</p>
 		<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
 
-			<a href="index.php" data-role="button" data-theme="b" data-rel="back">Take me back</a>
+			<a href="index.php" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b" data-rel="back">Take me back</a>
 		</div>
 	</div>
 

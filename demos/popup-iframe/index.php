@@ -28,7 +28,7 @@
 
     <div data-role="content" class="jqm-content">
 
-			<a href="index.php" data-role="button" data-transition="fade" data-icon="arrow-l" data-inline="true" data-mini="true">Back to Popups</a>
+			<a href="index.php" role="button" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left ui-btn-inline ui-mini">Back to Popups</a>
 		<h1>iframes in popups</h1>
 
 		<p>You may need to embed an iframe into a popup to use a 3rd party widget. Here, we'll walk through a few real-world examples of working with iframes: videos and maps.</p>
@@ -36,7 +36,7 @@
 		<h2>Video example</h2>
 
 		<p>Here is an example of a 3rd party video player embedded in a popup:</p>
-				<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Launch video player</a>
+				<a href="#popupVideo" data-rel="popup" data-position-to="window" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline">Launch video player</a>
 
 				<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
 					<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
@@ -123,10 +123,10 @@ $( document ).on( "pagecreate", function() {
 		<h2>Map example</h2>
 		<p>In the second example, an iframe is used to display <strong>Google Maps API</strong>. Using an iframe prevents issues with the controls of the map.</p>
 
-			<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Open Map</a>
+			<a href="#popupMap" data-rel="popup" data-position-to="window" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline">Open Map</a>
 
 			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
-				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<a href="#" data-rel="back" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
 				<iframe src="map.html" width="480" height="320" seamless></iframe>
 			</div>
 
@@ -134,7 +134,7 @@ $( document ).on( "pagecreate", function() {
 <pre><code>
 &lt;div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15"&gt;
 
-    &lt;a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close&lt;/a&gt;
+    &lt;a href="#" data-rel="back" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close&lt;/a&gt;
 
     &lt;iframe src="map.html" width="480" height="320" seamless&gt;&lt;/iframe&gt;
 
