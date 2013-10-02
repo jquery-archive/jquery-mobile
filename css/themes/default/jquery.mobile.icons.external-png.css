@@ -47,8 +47,8 @@
 	background-image: url(images/icons-png/carat-u-white.png);
 }
 .ui-icon-check:after,
-html .ui-btn.ui-checkbox-on.ui-icon-checkbox-on:after,
-html .ui-selectmenu-list .ui-btn.ui-icon-checkbox-on:after {
+html .ui-btn.ui-checkbox-on.ui-checkbox-on:after,
+html .ui-selectmenu-list .ui-btn.ui-checkbox-on:after {
 	background-image: url(images/icons-png/check-white.png);
 }
 .ui-icon-clock:after {
@@ -218,8 +218,8 @@ html .ui-selectmenu-list .ui-btn.ui-icon-checkbox-on:after {
 }
 .ui-alt-icon.ui-icon-check:after,
 .ui-alt-icon .ui-icon-check:after,
-html .ui-alt-icon.ui-btn.ui-icon-checkbox-on:after,
-html .ui-alt-icon .ui-btn.ui-icon-checkbox-on:after {
+html .ui-alt-icon.ui-btn.ui-checkbox-on:after,
+html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 	background-image: url(images/icons-png/check-black.png);
 }
 .ui-alt-icon.ui-icon-clock:after,

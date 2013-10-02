@@ -145,8 +145,8 @@ label.ui-btn {
 .ui-btn-icon-top:after,
 .ui-btn-icon-bottom:after,
 .ui-btn-icon-notext:after,
-html .ui-btn.ui-icon-checkbox-off:after,
-html .ui-btn.ui-icon-radio-off:after {
+html .ui-btn.ui-checkbox-off:after,
+html .ui-btn.ui-radio-off:after {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.3) /*{global-icon-disc}*/;
 	background-position: center center;
@@ -158,10 +158,10 @@ html .ui-btn.ui-icon-radio-off:after {
 /* Alt icons */
 .ui-alt-icon.ui-btn:after,
 .ui-alt-icon .ui-btn:after,
-html .ui-alt-icon.ui-icon-checkbox-off:after,
-html .ui-alt-icon.ui-icon-radio-off:after,
-html .ui-alt-icon .ui-icon-checkbox-off:after,
-html .ui-alt-icon .ui-icon-radio-off:after {
+html .ui-alt-icon.ui-checkbox-off:after,
+html .ui-alt-icon.ui-radio-off:after,
+html .ui-alt-icon .ui-checkbox-off:after,
+html .ui-alt-icon .ui-radio-off:after {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.15) /*{global-icon-disc-alt}*/;
 }
@@ -181,27 +181,27 @@ html .ui-alt-icon .ui-icon-radio-off:after {
 }
 
 /* Checkbox and radio */
-html .ui-btn.ui-icon-checkbox-off:after,
-html .ui-btn.ui-icon-checkbox-on:after,
-html .ui-btn.ui-icon-radio-off:after,
-html .ui-btn.ui-icon-radio-on:after {
+html .ui-btn.ui-checkbox-off:after,
+html .ui-btn.ui-checkbox-on:after,
+html .ui-btn.ui-radio-off:after,
+html .ui-btn.ui-radio-on:after {
 	display: block;
 	width: 18px;
 	height: 18px;
 	margin: -9px 2px 0 2px;
 }
-.ui-btn.ui-icon-checkbox-off:after,
-.ui-btn.ui-icon-radio-off:after {
+.ui-btn.ui-checkbox-off:after,
+.ui-btn.ui-radio-off:after {
 	background-image: none;
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 }
-html .ui-btn.ui-icon-checkbox-off:after,
-html .ui-btn.ui-icon-checkbox-on:after {
+html .ui-btn.ui-checkbox-off:after,
+html .ui-btn.ui-checkbox-on:after {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
 }
-.ui-radio .ui-btn.ui-icon-radio-on:after {
+.ui-radio .ui-btn.ui-radio-on:after {
 	background-image: none;
 	background-color: #fff;
 	width: 8px;
@@ -209,8 +209,8 @@ html .ui-btn.ui-icon-checkbox-on:after {
 	border-width: 5px;
 	border-style: solid; 
 }
-.ui-alt-icon.ui-btn.ui-icon-radio-on:after,
-.ui-alt-icon .ui-btn.ui-icon-radio-on:after {
+.ui-alt-icon.ui-btn.ui-radio-on:after,
+.ui-alt-icon .ui-btn.ui-radio-on:after {
 	background-color: #000;
 }
 
@@ -343,11 +343,11 @@ html .ui-body-a .ui-btn.ui-btn-active,
 html body .ui-group-theme-a .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-a.ui-btn-active,
 /* Active checkbox icon */
-.ui-page-theme-a .ui-icon-checkbox-on:after,
-html .ui-bar-a .ui-icon-checkbox-on:after,
-html .ui-body-a .ui-icon-checkbox-on:after,
-html body .ui-group-theme-a .ui-icon-checkbox-on:after,
-.ui-btn.ui-icon-checkbox-on.ui-btn-a:after,
+.ui-page-theme-a .ui-checkbox-on:after,
+html .ui-bar-a .ui-checkbox-on:after,
+html .ui-body-a .ui-checkbox-on:after,
+html body .ui-group-theme-a .ui-checkbox-on:after,
+.ui-btn.ui-checkbox-on.ui-btn-a:after,
 /* Active flipswitch background */
 .ui-page-theme-a .ui-flipswitch-active,
 html .ui-bar-a .ui-flipswitch-active,
@@ -366,11 +366,11 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #0033ff /*{a-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-page-theme-a .ui-icon-radio-on:after,
-html .ui-bar-a .ui-icon-radio-on:after,
-html .ui-body-a .ui-icon-radio-on:after,
-html body .ui-group-theme-a .ui-icon-radio-on:after,
-.ui-btn.ui-icon-radio-on.ui-btn-a:after {
+.ui-page-theme-a .ui-radio-on:after,
+html .ui-bar-a .ui-radio-on:after,
+html .ui-body-a .ui-radio-on:after,
+html body .ui-group-theme-a .ui-radio-on:after,
+.ui-btn.ui-radio-on.ui-btn-a:after {
 	border-color:			#0066ff /*{a-active-background-color}*/;
 }
 
@@ -513,11 +513,11 @@ html .ui-body-b .ui-btn.ui-btn-active,
 html body .ui-group-theme-b .ui-btn.ui-btn-active,
 html head + body .ui-btn.ui-btn-b.ui-btn-active,
 /* Active checkbox icon */
-.ui-page-theme-b .ui-icon-checkbox-on:after,
-html .ui-bar-b .ui-icon-checkbox-on:after,
-html .ui-body-b .ui-icon-checkbox-on:after,
-html body .ui-group-theme-b .ui-icon-checkbox-on:after,
-.ui-btn.ui-icon-checkbox-on.ui-btn-b:after,
+.ui-page-theme-b .ui-checkbox-on:after,
+html .ui-bar-b .ui-checkbox-on:after,
+html .ui-body-b .ui-checkbox-on:after,
+html body .ui-group-theme-b .ui-checkbox-on:after,
+.ui-btn.ui-checkbox-on.ui-btn-b:after,
 /* Active flipswitch background */
 .ui-page-theme-b .ui-flipswitch-active,
 html .ui-bar-b .ui-flipswitch-active,
@@ -536,11 +536,11 @@ html body div.ui-slider-track.ui-body-b .ui-btn-active {
 	text-shadow: 0 /*{b-active-shadow-x}*/ 1px /*{b-active-shadow-y}*/ 0 /*{b-active-shadow-radius}*/ #3399ff /*{b-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-page-theme-b .ui-icon-radio-on:after,
-html .ui-bar-b .ui-icon-radio-on:after,
-html .ui-body-b .ui-icon-radio-on:after,
-html body .ui-group-theme-b .ui-icon-radio-on:after,
-.ui-btn.ui-icon-radio-on.ui-btn-b:after {
+.ui-page-theme-b .ui-radio-on:after,
+html .ui-bar-b .ui-radio-on:after,
+html .ui-body-b .ui-radio-on:after,
+html body .ui-group-theme-b .ui-radio-on:after,
+.ui-btn.ui-radio-on.ui-btn-b:after {
 	border-color:			#33ccff /*{b-active-background-color}*/;
 }
 
