@@ -73,6 +73,7 @@
 }
 .jqm-demos .jqm-content > h1,
 .jqm-demos .jqm-content > h2,
+.jqm-demos .jqm-content > h3,
 .jqm-demos .jqm-content > p,
 .jqm-demos .jqm-content > ul li,
 .jqm-demos .jqm-content > a {
@@ -92,6 +93,12 @@
 	font-size: 1.6em;
 	padding-bottom: .2em;
 	margin: 0 0 .7375em;
+}
+.jqm-demos .jqm-content > h3 {
+	color: #3eb249;
+	background-color: transparent;
+	font-size: 1.4em;
+	margin: 0 0 1em;
 }
 .jqm-demos .jqm-content > p {
 	color: #333;
@@ -119,7 +126,10 @@
 	text-decoration: none;
 }
 .jqm-demos .jqm-content strong {
-	font-weight: 700; /* font-weight 400 for OpenSans ? */
+	font-weight: 700;
+}
+.jqm-demos .jqm-content > p strong {
+	font-weight: 400;
 }
 
 .jqm-demos .jqm-content .jqm-deeplink {
