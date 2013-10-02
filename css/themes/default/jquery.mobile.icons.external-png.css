@@ -47,8 +47,8 @@
 	background-image: url(images/icons-png/carat-u-white.png);
 }
 .ui-icon-check:after,
-html .ui-btn.ui-checkbox-on.ui-checkbox-on:after,
-html .ui-selectmenu-list .ui-btn.ui-checkbox-on:after {
+/* Used ui-checkbox-on twice to increase specificity. If active state has background-image for gradient this rule overrides. */
+html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 	background-image: url(images/icons-png/check-white.png);
 }
 .ui-icon-clock:after {

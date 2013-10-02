@@ -47,8 +47,8 @@
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAICAYAAADN5B7xAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAEBJREFUGJV9kMEKADAIQmtfbl/uLtsYoXmKfIYUIUQSJKE8B1/NoQbPIQPrkIChdhaeDq3WrDLzBc5crr/9yO9v0Dinb5SKJTsAAAAASUVORK5CYII=');
 }
 .ui-icon-check:after,
-html .ui-btn.ui-checkbox-on.ui-checkbox-on:after,
-html .ui-selectmenu-list .ui-btn.ui-checkbox-on:after {
+/* Used ui-checkbox-on twice to increase specificity. If active state has background-image for gradient this rule overrides. */
+html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAAGlJREFUKJGVkFEKwCAMQ9vee1AdjLE7x+xnMEXRms/S1zQRCYqkk/TovoiIAEj8FYMBZPZyW0Fmdkwvk3QAqYLOgVP76hecJAkgb0MLNaVYKUUDHSVV9W46ea1zGsHXNlTlvbehyvmJQC95zvcNDVD87AAAAABJRU5ErkJggg==');
 }
 .ui-icon-clock:after {
