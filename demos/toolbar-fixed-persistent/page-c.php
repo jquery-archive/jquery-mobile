@@ -24,9 +24,9 @@
         <h1>Fixed external header</h1>
     </div><!-- /header -->
 
-<div data-role="page" class="jqm-demos">
+<div data-role="page">
 
-    <div data-role="content" class="jqm-content">
+    <div data-role="content">
 
 			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="false">
 				<li><a href="#">
