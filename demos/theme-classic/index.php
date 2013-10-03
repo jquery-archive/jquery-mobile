@@ -99,7 +99,7 @@
 			</div>
 			<div data-role="fieldcontain" id="opt-iconshadow">
 				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Shadow:</legend>
+					<legend>Icon shadow:</legend>
 					<label for="on1">On</label>
 					<input type="radio" name="iconshadow" id="on1">
 					<label for="off1">Off</label>
