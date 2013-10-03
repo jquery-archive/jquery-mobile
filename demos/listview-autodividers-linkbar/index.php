@@ -15,7 +15,7 @@
 	<script src="autodividers-linkbar.js" id="demo-script"></script>
 </head>
 <body>
-<div data-role="page" id="demo-page" class="jqm-demos">
+<div data-role="page" class="jqm-demos">
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>

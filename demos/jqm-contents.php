@@ -84,11 +84,11 @@
 <li data-filtertext=""><a href="listview/" data-ajax="false">Listview</a></li>
 <li data-filtertext=""><a href="listview-autocomplete/" data-ajax="false">Listview: autocomplete</a></li>
 <li data-filtertext=""><a href="listview-autocomplete-remote/" data-ajax="false">Listview: autocomplete remote data</a></li>
+<li data-filtertext=""><a href="listview-autodividers-linkbar/" data-ajax="false">Listview: autodividers linkbar</a></li>
 <li data-filtertext=""><a href="listview-autodividers-selector/" data-ajax="false">Listview: autodividers selector</a></li>
 <li data-filtertext=""><a href="listview-collapsible-item-flat/" data-ajax="false">Listview: collapsible list items (flat)</a></li>
 <li data-filtertext=""><a href="listview-collapsible-item-indented/" data-ajax="false">Listview: collapsible list items (indented)</a></li>
 <li data-filtertext=""><a href="listview-grid/" data-ajax="false">Listview: responsive grid</a></li>
-<li data-filtertext=""><a href="listview-linkbar/" data-ajax="false">Listview: linkbar</a></li>
 
 <li data-filtertext=""><a href="collapsible/" data-ajax="false">Collapsible</a></li>
 <li data-filtertext=""><a href="collapsible-dynamic/" data-ajax="false">Collapsible: dynamic</a></li>
