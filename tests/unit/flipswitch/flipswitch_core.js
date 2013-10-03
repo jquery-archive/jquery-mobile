@@ -34,7 +34,8 @@
 		ok( $("#flip-select-second-option").parent().hasClass("ui-bar-inherit"), "should be inherit theme" );
 	});
 	test( "checkbox based flipswitch is toggled on click", function() {
-		$("#flip-checkbox").click()
+		ok( !$("#flip-checkbox").parent().hasClass("ui-flipswitch-active"), "should not be active" );
+		$("#flip-checkbox").parent().click()
 		ok( $("#flip-checkbox").parent().hasClass("ui-flipswitch-active"), "should be active" );
 	});
 	test( "select based flipswitch is toggled on click", function() {
