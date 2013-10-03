@@ -47,6 +47,10 @@ $.widget( "mobile.flipswitch", $.extend({
 			this._on( this.on, {
 				"keydown": "_keydown"
 			});
+
+			this._on( {
+				"change": "refresh"
+			});
 	},
 
 	widget: function() {
@@ -60,7 +64,6 @@ $.widget( "mobile.flipswitch", $.extend({
 		} else {
 			this.element.prop( "checked", true );
 		}
-		this._trigger( "change" );
 	},
 
 	_right: function() {
@@ -70,7 +73,6 @@ $.widget( "mobile.flipswitch", $.extend({
 		} else {
 			this.element.prop( "checked", false );
 		}
-		this._trigger( "change" );
 	},
 
 	_enhance: function() {
@@ -84,9 +86,9 @@ $.widget( "mobile.flipswitch", $.extend({
 
 			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" ).text( onText );
 			off.addClass( "ui-flipswitch-off" ).text( offText );
-			
+
 			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( ( this.element.is( ":checked" ) || this.element.find("option").eq(1).is(":selected") ) ? "ui-flipswitch-active" : "" ) + ( this.element.is(":disabled") ? " ui-state-disabled": "") + ( this.options.mini ? " ui-mini": "" ) ).append( on, off );
-			
+
 			this.element.addClass( "ui-flipswitch-input" );
 			this.element.after( flipswitch ).appendTo( flipswitch );
 
@@ -98,9 +100,10 @@ $.widget( "mobile.flipswitch", $.extend({
 		});
 	},
 
-	_change: function() {
+
+	refresh: function() {
 		var direction;
-		
+
 		if ( this.type === "SELECT" ) {
 			direction = ( this.element.get( 0 ).selectedIndex > 0 )? "_right": "_left";
 		} else {
@@ -111,7 +114,7 @@ $.widget( "mobile.flipswitch", $.extend({
 
 	_toggle: function() {
 		var direction = this.flipswitch.hasClass( "ui-flipswitch-active" ) ? "_left" : "_right";
-		
+
 		this[direction]();
 	},
 
@@ -147,7 +150,7 @@ $.widget( "mobile.flipswitch", $.extend({
 		if ( options.mini !== undefined ) {
 			this.widget().toggleClass( "ui-mini", options.mini );
 		}
-		
+
 		this._super( options );
 	},
 
