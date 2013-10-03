@@ -3,13 +3,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Q&A - jQuery Mobile Demos</title>
+	<title>Q&A - jQuery Mobile Demos - How do I load a page?</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
+	<script>
+		$( document ).on( "mobileinit", function(){
+			$.mobile.hideUrlBar = false;
+		});
+	</script>
 	<script src="../../js/"></script>
 </head>
 <body>
@@ -24,13 +29,15 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>My HTML 5 inputs look different across devices and browsers.</h1>
+		<h1>How do I prevent jQuery Mobile from hiding the url bar?</h1>
 
 		<h2>Answer:</h2>
 
-		<p>jQuery Mobile does not have control over the UI for most of the newer HTML5 input elements like date, color and number. The keyboards and pickers provided are browser-dependent but will safely fall back to a standard input if it's not supported. We do apply basic border and color styles to inputs for these elements so there is some visual consistency. See the <a href="../widgets/textinputs/index.html">text input page</a> for examples of all the input types available</p>
+		<p><code>Set $.mobile.hideUrlBar = false; </code> on mobileinit</p>
 
 	</div><!-- /content -->
 

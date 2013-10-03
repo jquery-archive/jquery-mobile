@@ -3,18 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Q&A - jQuery Mobile Demos - How do I prevent jQuery Mobile from hiding the url bar?</title>
+	<title>Q&A - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
-	<script>
-		$( document ).on( "mobileinit", function(){
-			$.mobile.hideUrlBar = false;
-		});
-	</script>
 	<script src="../../js/"></script>
 </head>
 <body>
@@ -29,13 +24,15 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>How do I prevent jQuery Mobile from hiding the url bar?</h1>
+		<h1>I'm trying to pass information via the hash but it's not working?</h1>
 
 		<h2>Answer:</h2>
 
-		<p><code>Set $.mobile.hideUrlBar = false; </code> on mobileinit</p>
+		<p>jQuery Mobile does not currently support passing information via the hash to pages. This is because jQuery Mobile uses the hash for history tracking and navigation. Any alterations to the hash or attempting to set or pass a hash will interfere with this process and result in unexpected behavior. There is currently no workaround except to disable jQuery mobile's hash and history handling altogether. There are, however, plans to support this in some form in future releases</p>
 
 	</div><!-- /content -->
 

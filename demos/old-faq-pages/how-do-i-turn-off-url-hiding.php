@@ -3,13 +3,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Q&A - jQuery Mobile Demos</title>
+	<title>Q&A - jQuery Mobile Demos - How do I prevent jQuery Mobile from hiding the url bar?</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
+	<script>
+		$( document ).on( "mobileinit", function(){
+			$.mobile.hideUrlBar = false;
+		});
+	</script>
 	<script src="../../js/"></script>
 </head>
 <body>
@@ -24,13 +29,15 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>My range or search inputs are being change to number/text.</h1>
+		<h1>How do I prevent jQuery Mobile from hiding the url bar?</h1>
 
 		<h2>Answer:</h2>
 
-		<p>These inputs are degraded to type text or number to allow for consistent look and enhancement by jQuery Mobile. For example, we parse the min, max, value, and step attributes of a <code>range</code> input to configure the JavaScript-based slider we generate to give us full control of the features and appearance. We then 'degrade' the input type of the original <code>range</code> input (which is a native slider) to <code>number</code> in order provide the numeric field next to the slider.</p>
+		<p><code>Set $.mobile.hideUrlBar = false; </code> on mobileinit</p>
 
 	</div><!-- /content -->
 

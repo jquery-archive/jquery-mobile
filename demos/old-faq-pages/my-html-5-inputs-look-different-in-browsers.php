@@ -24,13 +24,15 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>Controls in my fixed header or footer are not responding or behave erratically.</h1>
+		<h1>My HTML 5 inputs look different across devices and browsers.</h1>
 
 		<h2>Answer:</h2>
 
-		<p>There are several well known bugs in mobile browsers regarding form elements inside <code>position: fixed</code> elements. Android 2.3 has a number of serious issues with fixed positioning and scrolling that can make select menus inoperable. See the device bugs project issue #1 <A href="https://github.com/scottjehl/Device-Bugs/issues/1">https://github.com/scottjehl/Device-Bugs/issues/1</a></p>
+		<p>jQuery Mobile does not have control over the UI for most of the newer HTML5 input elements like date, color and number. The keyboards and pickers provided are browser-dependent but will safely fall back to a standard input if it's not supported. We do apply basic border and color styles to inputs for these elements so there is some visual consistency. See the <a href="../widgets/textinputs/index.html">text input page</a> for examples of all the input types available</p>
 
 	</div><!-- /content -->
 

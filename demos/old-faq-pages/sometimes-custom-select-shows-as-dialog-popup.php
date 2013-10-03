@@ -24,13 +24,15 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>I'm trying to pass information via the hash but it's not working?</h1>
+		<h1>Sometimes my custom select shows as a popup other times its a dialog.</h1>
 
 		<h2>Answer:</h2>
 
-		<p>jQuery Mobile does not currently support passing information via the hash to pages. This is because jQuery Mobile uses the hash for history tracking and navigation. Any alterations to the hash or attempting to set or pass a hash will interfere with this process and result in unexpected behavior. There is currently no workaround except to disable jQuery mobile's hash and history handling altogether. There are, however, plans to support this in some form in future releases</p>
+		<p>Whether a custom select shows as a dialog or popup is based on the number of options and the amount of available space on the screen for maximum usability across devices. By default, the framework will use a small popup if all the options fit on-screen without scrolling. Longer selects open in a dialog to avoid awkward scrolling within a popup.</p>
 
 	</div><!-- /content -->
 

@@ -24,13 +24,27 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>Disabling a button does not work.</h1>
+		<h1>Triggering create on injected HTML does not work.</h1>
 
 		<h2>Answer:</h2>
 
-		<p>Buttons that are created from a link cannot be disabled because these aren't form elements and aren't designed to be disabled. This is the reason why the HTML spec does not provide for a disabled attribute on links. To disable a link-based button, you can add the <code>.ui-disabled</code> class via JavaScript and prevent interaction to give it a disabled appearance.</p>
+		<p>It is important to remember that create must be triggered on the <strong>parent container</strong> and not on the individual element that needs to be enhanced.</p>
+<pre><code>
+//HTML
+&#60;form id="formid"&#62;
+	&#60;input type="search" id="searchInput"/&#62;
+	&#60;button id="submitButton"&#62;Submit&#60;/button&#62;
+&#60;/form&#62;
+//javaScript **CORRECT**
+$("#formid").trigger("create");
+//javaScript INCORRECT
+$("#searchInput").trigger("create");
+$("#submitButton").trigger("create");
+</pre></code>
 
 	</div><!-- /content -->
 
