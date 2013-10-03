@@ -24,6 +24,8 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
 		<h1>How does theming work?</h1>

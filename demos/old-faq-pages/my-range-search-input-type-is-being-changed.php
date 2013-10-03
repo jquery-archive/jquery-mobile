@@ -24,25 +24,15 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>I'm trying to use the application cache but it's not working.</h1>
+		<h1>My range or search inputs are being change to number/text.</h1>
 
 		<h2>Answer:</h2>
 
-		<p>The issue here is not actually jQuery Mobile but the fact that some browsers return a status of zero. This causes the internal error handlers to be triggered in jQuery's AJAX function.</p>
-		<p>There is a simple workaround for this:</p>
-<pre><code>
-$.ajaxPrefilter( function(options, originalOptions, jqXHR) {
-  if ( applicationCache &&
-    applicationCache.status != applicationCache.UNCACHED &&
-    applicationCache.status != applicationCache.OBSOLETE ) {
-     // the important bit
-	options.isLocal = true;
-  }
-});
-</pre></code>
-<p>One important note on this workaround is that this sets is local to true for all AJAX requests weather or not they are in the manifest. This works currently because is local is only checked As long as the cache is valid and the status is 0 so it doesn't affect uncached results. This may  change in the future breaking applications using this workaround.</p>
+		<p>These inputs are degraded to type text or number to allow for consistent look and enhancement by jQuery Mobile. For example, we parse the min, max, value, and step attributes of a <code>range</code> input to configure the JavaScript-based slider we generate to give us full control of the features and appearance. We then 'degrade' the input type of the original <code>range</code> input (which is a native slider) to <code>number</code> in order provide the numeric field next to the slider.</p>
 
 	</div><!-- /content -->
 

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Q&A - jQuery Mobile: Why isn't DOM ready working for my scripts?</title>
+	<title>Q&A - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -24,28 +24,15 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>Why isn't DOM ready working for my scripts?</h1>
+		<h1>Controls in my fixed header or footer are not responding or behave erratically.</h1>
 
 		<h2>Answer:</h2>
 
-		<p>One of the first things people learn in jQuery is to use the <code>$(document).ready()</code> function for executing DOM-specific code as soon as the DOM is ready (which often occurs long before the <code>onload</code> event). However, in jQuery Mobile site and apps, pages are requested and injected into the same DOM as the user navigates, so the DOM ready event is not as useful, as it only executes for the first page. To execute code whenever a new page is loaded and created in jQuery Mobile, you can bind to the <code>pagecreate</code> event. </p>
-
-		<p>The <code>pagecreate</code> event is triggered on a page when it is initialized, right after initialization occurs. Most of jQuery Mobile's official widgets auto-initialize themselves based on this event, and you can set up your code to do the same.</p>
-<pre><code>
-$( document ).delegate("#aboutPage", "pagecreate", function() {
-  alert('A page with an id of "aboutPage" was just created by jQuery Mobile!');
-});
-</code></pre>
-
-	<p>If you'd like to manipulate a page's contents <em>before</em> the <code>pagecreate</code> event fires and widgets are auto-initialized, you can instead bind to the <code>pagebeforecreate</code> event:</p>
-
-<pre><code>
-$( document ).delegate("#aboutPage", "pagebeforecreate", function() {
-  alert('A page with an id of "aboutPage" is about to be created by jQuery Mobile!');
-});
-</code></pre>
+		<p>There are several well known bugs in mobile browsers regarding form elements inside <code>position: fixed</code> elements. Android 2.3 has a number of serious issues with fixed positioning and scrolling that can make select menus inoperable. See the device bugs project issue #1 <A href="https://github.com/scottjehl/Device-Bugs/issues/1">https://github.com/scottjehl/Device-Bugs/issues/1</a></p>
 
 	</div><!-- /content -->
 

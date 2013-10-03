@@ -24,13 +24,15 @@
 
 	<div data-role="content" class="jqm-content">
 
+		<p><strong>Note: this page has not been updated after 1.3</strong></p>
+
 		<h2>Question:</h2>
 
-		<h1>Why is only the first page of my multi page document loaded?</h1>
+		<h1>Disabling a button does not work.</h1>
 
 		<h2>Answer:</h2>
 
-		<p>jQuery Mobile currently only supports loading of single page documents via AJAX. To navigate to a multi page document you must disable ajax on the link by adding the <code>data-ajax="false"</code> attribute. There is also a widget to allow for supporting sub-pages by Todd Thompson available at <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget">https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget</a></p>
+		<p>Buttons that are created from a link cannot be disabled because these aren't form elements and aren't designed to be disabled. This is the reason why the HTML spec does not provide for a disabled attribute on links. To disable a link-based button, you can add the <code>.ui-disabled</code> class via JavaScript and prevent interaction to give it a disabled appearance.</p>
 
 	</div><!-- /content -->
 
