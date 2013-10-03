@@ -1,10 +1,9 @@
-<?php	if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Navbar - jQuery Mobile Demos</title>
+	<title>Persistent toolbars - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -20,13 +19,11 @@
 	</script>
 </head>
 <body>
-	 <div data-role="header" class="jqm-header" data-position="fixed">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+    <div data-role="header" data-position="fixed" data-theme="a">
+		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+        <h1>Fixed external header</h1>
     </div><!-- /header -->
-<?php } ?>
+
 <div data-role="page" class="jqm-demos">
 
     <div data-role="content" class="jqm-content">
@@ -110,22 +107,18 @@
 
 		</div><!-- /content -->
 
-		<?php include( '../jqm-panels.php' ); ?>
+	</div><!-- /page -->
 
-		</div><!-- /page -->
-<?php	if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
+	<div data-role="footer" data-position="fixed" data-theme="a">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
+				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
+				<li><a href="page-c.php" data-prefetch="true" data-transition="turn" class="ui-btn-active ui-state-persist">Albums</a></li>
+				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div><!-- /footer -->
 
-		<div data-role="footer" data-position="fixed">
-			<div data-role="navbar">
-				<ul>
-					<li><a href="optimized-persistant-toolbars-a.php" data-prefetch="true" data-transition="none">Info</a></li>
-					<li><a href="optimized-persistant-toolbars-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
-					<li><a href="optimized-persistant-toolbars-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
-					<li><a href="optimized-persistant-toolbars-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
-				</ul>
-			</div><!-- /navbar -->
-		</div><!-- /footer -->
-		</body>
-		</html>
-<?php } ?>
-
+</body>
+</html>

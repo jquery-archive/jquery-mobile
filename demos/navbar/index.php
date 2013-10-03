@@ -36,8 +36,7 @@
 
 		<h1>Navbar</h1>
 
-		<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar.
-			</p>
+		<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar.</p>
 
 		<h2>Navbar basics</h2>
 
@@ -163,7 +162,7 @@
 
 		<h2>Persistent</h2>
 
-		<p>The <a href="../fixed-toolbars/footer-persist-a.php">persistent navbar</a> variation is designed to work more like a tab bar that stays fixed as you navigate across pages. To set an item to the active state upon initialization of the navbar, add <code>class="ui-btn-active"</code> to the corresponding anchor in your markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.</p>
+		<p>The <a href="../toolbar-fixed-persistent/">persistent navbar</a> variation is designed to work more like a tab bar that stays fixed as you navigate across pages. To set an item to the active state upon initialization of the navbar, add <code>class="ui-btn-active"</code> to the corresponding anchor in your markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.</p>
 
 		<h2>Icons</h2>
 

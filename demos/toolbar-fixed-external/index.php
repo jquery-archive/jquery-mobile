@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Headers - jQuery Mobile Demos</title>
+	<title>External fixed toolbars - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -13,43 +13,37 @@
 	<script src="../../js/"></script>
 	<script>
 		$(function(){
-			$("[data-role='header'], [data-role='footer']").toolbar();
+			$( "[data-role='header'], [data-role='footer']" ).toolbar();
 		});
 	</script>
 </head>
 <body>
-	<div data-role="header" class="jqm-header" data-position="fixed">
-		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+	<div data-role="header" data-theme="a">
+			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<h1>External fixed header</h1>
 	</div><!-- /header -->
-<div data-role="page" class="jqm-demos" data-quicklinks="true">
-
 	
+	<div data-role="page" class="jqm-demos">
 
-	<div data-role="content" class="jqm-content">
+		<div data-role="content" class="jqm-content">
 
-		<h1>Fixed External Headers</h1>
+			<h1>Fixed external headers</h1>
 
-		<p>The Header and footer on this page are outside of the page within the body. They have been set to position fixed.</p>
+			<p>The header and footer on this page are outside of the page within the body. They have been set to position fixed.</p>
 
-		<h2>True Persistant Toolbars</h2>
+			<h2>True persistant toolbars</h2>
 
-		<p>Because External toolbars are outside of the page they are not effected by transition and make truely persistant toolbars possible</p>
+			<p>Because External toolbars are outside of the page they are not effected by transition and make truely persistant toolbars possible.</p>
 
-		<p><a href="footer-persist-a.php" data-ajax="false">Persistant Footer</a></p>
+			<p><a href="../toolbar-fixed-persistent/" data-ajax="false">Persistant footer example</a></p>
 
-	</div><!-- /content -->
+		</div><!-- /content -->
 
-	
+	</div><!-- /page -->
 
-<?php include( '../jqm-panels.php' ); ?>
+	<div data-role="footer" data-theme="a">
+		<h1>External fixed footer</h1>
+	</div><!-- /footer -->
 
-</div><!-- /page -->
-<div data-role="footer" class="jqm-footer" data-position="fixed" style="background-color:white;">
-	<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-	<p>Copyright 2013 The jQuery Foundation</p>
-</div><!-- /footer -->
 </body>
 </html>
