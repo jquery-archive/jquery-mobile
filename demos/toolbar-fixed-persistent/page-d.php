@@ -24,9 +24,9 @@
         <h1>Fixed external header</h1>
     </div><!-- /header -->
 
-	<div data-role="page" class="jqm-demos">
+	<div data-role="page">
 
-	    <div data-role="content" class="jqm-content">
+	    <div data-role="content">
 
 			<ul data-role="listview" data-theme="a" data-dividertheme="a" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search messages...">
 				<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
@@ -87,7 +87,7 @@
 
 	</div><!-- /page -->
 
-	<div data-role="footer" data-position="fixed" data-theme="a"
+	<div data-role="footer" data-position="fixed" data-theme="a">
 		<div data-role="navbar">
 			<ul>
 				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
