@@ -11,35 +11,47 @@
     <script src="../../js/jquery.js"></script>
     <script src="../_assets/js/"></script>
     <script src="../../js/"></script>
+    <style>
+    	.left {
+    		float: left;
+    		width: 78%;
+    		margin-right: 2%;
+    	}
+    	.right {
+    		float: right;
+    		width: 20%;
+    	}
+    	.ui-input-search {
+    		margin: 0;
+    	}
+    	button.ui-btn {
+    		margin: 0;
+    	}
+    </style>
 </head>
 <body>
-<div data-role="page" class="jqm-demos">
 
-	<div data-role="header" data-position="fixed">
+	<div data-role="page" class="jqm-demos">
 
-		<div class="ui-grid-a">
-
-				<h1 style="font-size:19px; margin-left:12px;">2,146 Songs</h1>
-
-		</div><!-- /grid-b -->
-
-		<div class="ui-bar-b">
-				<div class="ui-grid-a">
-					<div class="ui-block-a" style="width:78%">
-						<label for="text-mini" class="ui-hidden-accessible">Search Input:</label>
-				        <input type="search" name="name" id="search-mini" value="" data-mini="true" placeholder="Search songs..."  />
+		<div data-role="header" data-position="fixed">
+			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+			<h1>2,146 Songs</h1>
+			<div class="ui-bar ui-bar-b">
+				<form action="#" method="get">
+					<div class="left">
+						<label for="search" class="ui-hidden-accessible">Search Input:</label>
+				        <input type="search" name="search" id="search" value="" placeholder="Search songs...">
 					</div>
-					<div class="ui-block-b" style="width:22%">
-						<button type="submit" data-mini="true" style="float:right" data-theme="a">Go</button>
+					<div class="right">
+						<button type="submit" class="ui-btn ui-btn-a ui-corner-all ui-mini">Go</button>
 					</div>
-				</div><!-- /grid-a -->
-		</div><!-- /search bar -->
-		</form>
-	</div>
+				</form>
+			</div>
+		</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+		<div data-role="content">
 
-			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="false">
+			<ul data-role="listview" data-split-icon="gear">
 				<li><a href="#">
 					<img src="../_assets/img/album-bb.jpg" />
 				<h2>Broken Bells</h2>
@@ -98,24 +110,23 @@
 
 			<div data-role="popup" id="purchase" data-theme="b" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 				<h3>Purchase Album?</h3>
-			<p>Your download will begin immediately on your mobile device when you purchase.</p>
+				<p>Your download will begin immediately on your mobile device when you purchase.</p>
 				<a href="#" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
 				<a href="#" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
 			</div>
 
-			</div><!-- /content -->
+		</div><!-- /content -->
 
-			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
-				<form action="#" method="get">
-					<div data-role="fieldcontain">
-						<label for="slider-2" style="margin-left:15px;">Volume:</label>
-					 	<input type="range" name="slider" id="slider-2" value="50" min="0" max="100" data-highlight="true" data-mini="true"  class="ui-hidden-accessible" />
-					</div>
-				</form>
+		<div data-role="footer" data-theme="b" data-position="fixed">
+			<form action="#" method="get">
+				<div class="ui-bar">
+					<label for="slider">Volume:</label>
+				 	<input type="range" name="slider" id="slider" value="50" min="0" max="100" data-highlight="true" data-mini="true">
+				</div>
+			</form>
+		</div><!-- /footer -->
 
-			</div>
+	</div><!-- /page -->
 
-			</div><!-- /page -->
-
-			</body>
-			</html>
+</body>
+</html>

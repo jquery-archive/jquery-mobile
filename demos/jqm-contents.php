@@ -56,8 +56,11 @@
 <li data-filtertext=""><a href="toolbar/" data-ajax="false">Toolbar</a></li>
 <li data-filtertext=""><a href="toolbar-external/" data-ajax="false">Toolbar: external</a></li>
 <li data-filtertext=""><a href="toolbar-fixed/" data-ajax="false">Toolbar: fixed</a></li>
+<li data-filtertext=""><a href="toolbar-fixed-fullscreen/" data-ajax="false">Toolbar: fixed fullscreen</a></li>
 <li data-filtertext=""><a href="toolbar-fixed-external/" data-ajax="false">Toolbar: fixed external</a></li>
-<li data-filtertext=""><a href="toolbar-persistent/" data-ajax="false">Toolbar: persistent</a></li>
+<li data-filtertext=""><a href="toolbar-fixed-persistent/" data-ajax="false">Toolbar: fixed persistent</a></li>
+<li data-filtertext=""><a href="toolbar-fixed-persistent-optimized/" data-ajax="false">Toolbar: fixed persistent AJAX optimized</a></li>
+<li data-filtertext=""><a href="toolbar-fixed-forms/" data-ajax="false">Toolbar: fixed with forms</a></li>
 
 <li data-filtertext=""><a href="navbar/" data-ajax="false">Navbar</a></li>
 
