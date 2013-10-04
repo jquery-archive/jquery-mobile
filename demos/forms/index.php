@@ -349,21 +349,21 @@ $( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "cre
 
 		<h2>Refreshing form elements</h2>
 
-		    <p>In jQuery Mobile, some enhanced form controls are simply styled (inputs), but others are custom controls (selects, sliders) built from, and kept in sync with, the native control. To programmatically update a form control with JavaScript, first manipulate the native control, then use the <code>refresh</code> method to tell the enhanced control to update itself to match the new state. Here are some examples of how to update common form controls, then call the <code>refresh</code> method:</p>
+		 <p>In jQuery Mobile, some enhanced form controls are simply styled (inputs), but others are custom controls (selects, sliders) built from, and kept in sync with, the native control. To programmatically update a form control with JavaScript, first manipulate the native control, then use the <code>refresh</code> method to tell the enhanced control to update itself to match the new state. Here are some examples of how to update common form controls, then call the <code>refresh</code> method:</p>
             
-			<h4>Checkboxes:</h4>
+		<h3>Checkboxes:</h3>
 
 <pre><code>
 $( "input[type='checkbox']" ).prop( "checked", true ).checkboxradio( "refresh" );
 </code></pre>
 
-		<h4>Radios:</h4>
+		<h3>Radios:</h3>
         
 <pre><code>
 $( "input[type='radio']" ).prop( "checked", true ).checkboxradio( "refresh" );
 </code></pre>
 
-		<h4>Selects:</h4>
+		<h3>Selects:</h3>
         
 <pre><code>
 var myselect = $( "#selectfoo" );
@@ -371,13 +371,13 @@ myselect[0].selectedIndex = 3;
 myselect.selectmenu( "refresh" );
 </code></pre>
 
-		<h4>Sliders:</h4>
+		<h3>Sliders:</h3>
         
 <pre><code>
 $( "input[type='range']" ).val( 60 ).slider( "refresh" );
 </code></pre>
 
-		<h4>Flip switches:</h4>
+		<h3>Flip switches:</h3>
         
         <p>They use the slider widget.</p>
 
@@ -408,7 +408,7 @@ $( document ).bind( "mobileinit", function() {
 });
 </code></pre>
 
-		  	<p>Alternately you can use the <code>data-enhance="false"</code> data attribute on a parent element with <code>$.mobile.ignoreContentEnabled</code> set to true. Beware though, this will incur a performance penalty for each and every element in the page that would otherwise be enhanced as jQuery Mobile must traverse the set of parents to look for those elements.</p>
+		<p>Alternately you can use the <code>data-enhance="false"</code> data attribute on a parent element with <code>$.mobile.ignoreContentEnabled</code> set to true. Beware though, this will incur a performance penalty for each and every element in the page that would otherwise be enhanced as jQuery Mobile must traverse the set of parents to look for those elements.</p>
 
 		<p>One special case is that of selects. The above sample will prevent any and all augmentation from taking place on select elements in the page if <code>select</code> is included. If you wish to retain the native performance and appearance of the menu itself and benefit from the visual augmentation of the select button by jQuery Mobile, you can set <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> to true in a <code>mobileinit</code> callback as a global setting or use <code>data-native-menu="true"</code> on a case by case basis.</p>
 

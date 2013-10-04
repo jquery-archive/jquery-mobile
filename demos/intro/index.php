@@ -55,7 +55,8 @@
 
 		<p>jQuery Mobile includes a wide range of touch-friendly UI widgets: <a href="../forms/">form elements</a>, <a href="../collapsibles/">collapsibles</a>, <a href="../accordions/">accordions</a>, <a href="../popup/">popups</a>, <a href="../dialog/">dialogs</a>, <a href="../table-column-toggle/">responsive tables</a>, and much more. For best performance, use the <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> to pick the components you need.</p>
 
-			<h4>Listviews</h4>
+		<h3>Listviews</h3>
+
 		<p>jQuery Mobile includes a diverse set of common <a href="../listviews/" title="docs-lists">listviews</a> that are coded as lists with a <code>data-role="listview"</code> added. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> attribute and we add a dynamic search filter with <code>data-filter="true"</code>.</p>
 
 			<div data-demo-html="true">
@@ -71,7 +72,8 @@
 			</ul>
 			</div><!--/demo-html -->
 
-			<h4>Form elements</h4>
+		<h3>Form elements</h3>
+		
 		<p>The framework contains a full set of <a href="../forms/">form elements</a> that are automatically enhanced into touch-friendly styled widgets. Here's a slider made with the new HTML5 input type of range, no <code>data-role</code> needed. Be sure to wrap these in a <code>form</code> element and always properly associate a <code>label</code> with every form element.</p>
 
 			<div data-demo-html="true">

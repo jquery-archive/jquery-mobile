@@ -38,7 +38,7 @@
 		<p>The filter reveal feature makes it easy to build a simple autocomplete with local data. When a filterable list has the <code>data-filter-reveal="true"</code>, it will auto-hide all the list items when the search field is blank. The <code>data-filter-placeholder</code> attribute can be added to specify the placeholder text for the filter.</p>
 		<p>Any filter with more than 100-200 items may be slow to perform on a mobile device so we recommend using this feature for  autocomplete situations with a relatively small number of items.</p>
 
-			<h4>Full width listview (non-inset)</h4>
+			<h3>Full width listview (non-inset)</h3>
 
 			<div data-demo-html="true">
 				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
@@ -67,7 +67,7 @@
 				</ul>
 			</div><!--/demo-html -->
 
-			<h4>Inset listiew</h4>
+			<h3>Inset listiew</h3>
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
 					<li><a href="#">Acura</a></li>
