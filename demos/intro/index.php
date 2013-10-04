@@ -26,8 +26,7 @@
 
 		<h1>Introduction</h1>
 
-		<p>jQuery Mobile is a touch-friendly UI framework built on jQuery Core that works across all popular mobile, tablet and desktop platforms.
-			</p>
+		<p>jQuery Mobile is a touch-friendly UI framework built on jQuery Core that works across all popular mobile, tablet and desktop platforms.</p>
 
 		<h2>Introduction</h2>
 
@@ -53,55 +52,56 @@
 
 		<p>Inside your content container, you can add any standard HTML elements - headings, lists, paragraphs, etc. You can write your own custom styles to create custom layouts by adding an additional stylesheet to the <code>head</code> after the jQuery Mobile stylesheet.</p>
 
-		<p>jQuery Mobile includes a wide range of touch-friendly UI widgets: <a href="../forms/">form elements</a>, <a href="../collapsibles/">collapsibles</a>, <a href="../accordions/">accordions</a>, <a href="../popup/">popups</a>, <a href="../dialog/">dialogs</a>, <a href="../table-column-toggle/">responsive tables</a>, and much more. For best performance, use the <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> to pick the components you need.</p>
+		<p>jQuery Mobile includes a wide range of touch-friendly UI widgets: <a href="../forms/">form elements</a>, <a href="../collapsible/">collapsibles</a>, <a href="../collapsibleset/">collapsible sets</a> (accordions), <a href="../popup/">popups</a>, <a href="../pages-dialog/">dialogs</a>, <a href="../table-column-toggle/">responsive tables</a>, and much more. For best performance, use the <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> to pick the components you need.</p>
 
 		<h3>Listviews</h3>
 
-		<p>jQuery Mobile includes a diverse set of common <a href="../listviews/" title="docs-lists">listviews</a> that are coded as lists with a <code>data-role="listview"</code> added. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> attribute and we add a dynamic search filter with <code>data-filter="true"</code>.</p>
+		<p>jQuery Mobile includes a diverse set of common <a href="../listview/" data-ajax="false">listviews</a> that are coded as lists with a <code>data-role="listview"</code> added. Here is a simple linked list that has a role of <code>listview</code>. We're going to make this look like an inset module by adding a <code>data-inset="true"</code> attribute and we add a dynamic search filter with <code>data-filter="true"</code>.</p>
 
-			<div data-demo-html="true">
-			<form>
-				<input id="filter-for-listview" data-type="search" placeholder="Type to search..."></input>
-			</form>
-			<ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
-				<li><a href="#">Acura</a></li>
-				<li><a href="#">Audi</a></li>
-				<li><a href="#">BMW</a></li>
-				<li><a href="#">Cadillac</a></li>
-				<li><a href="#">Ferrari</a></li>
-			</ul>
-			</div><!--/demo-html -->
+		<div data-demo-html="true">
+		<form>
+			<input id="filter-for-listview" data-type="search" placeholder="Type to search..."></input>
+		</form>
+		<ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
+			<li><a href="#">Acura</a></li>
+			<li><a href="#">Audi</a></li>
+			<li><a href="#">BMW</a></li>
+			<li><a href="#">Cadillac</a></li>
+			<li><a href="#">Ferrari</a></li>
+		</ul>
+		</div><!--/demo-html -->
 
 		<h3>Form elements</h3>
-		
+
 		<p>The framework contains a full set of <a href="../forms/">form elements</a> that are automatically enhanced into touch-friendly styled widgets. Here's a slider made with the new HTML5 input type of range, no <code>data-role</code> needed. Be sure to wrap these in a <code>form</code> element and always properly associate a <code>label</code> with every form element.</p>
 
-			<div data-demo-html="true">
-			<form>
-				<label for="textinput-s">Text Input:</label>
-				<input type="text" name="textinput-s" id="textinput-s" placeholder="Text input" value="" data-clear-btn="true">
+		<div data-demo-html="true">
+		<form>
+			<label for="textinput-s">Text Input:</label>
+			<input type="text" name="textinput-s" id="textinput-s" placeholder="Text input" value="" data-clear-btn="true">
 
-				<label for="select-native-s">Select:</label>
-				<select name="select-native-s" id="select-native-s">
-					<option value="small">One</option>
-					<option value="medium">Two</option>
-					<option value="large">Three</option>
-				</select>
+			<label for="select-native-s">Select:</label>
+			<select name="select-native-s" id="select-native-s">
+				<option value="small">One</option>
+				<option value="medium">Two</option>
+				<option value="large">Three</option>
+			</select>
 
-				<label for="slider-s">Input slider:</label>
-				<input type="range" name="slider-s" id="slider-s" value="25" min="0" max="100" data-highlight="true"  />
-			</form>
+			<label for="slider-s">Input slider:</label>
+			<input type="range" name="slider-s" id="slider-s" value="25" min="0" max="100" data-highlight="true"  />
+		</form>
 
-			</div><!--/demo-html -->
+		</div><!--/demo-html -->
 
 		<h2>Responsive Design</h2>
 
-		<p>jQuery Mobile has always been designed to work within a <a href="rwd.php">responsive web design (RWD)</a> context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
+		<p>jQuery Mobile has always been designed to work within a <a href="../rwd/">responsive web design (RWD)</a> context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
 
-		<p>The library also includes a number of responsive widgets like <a href="../grids/">responsive grids</a>, <a href="../table-reflow/">reflow tables</a> and <a href="../table-column-toggle/">column chooser tables</a>, and <a href="../panels/">sliding panels</a>.</p>
+		<p>The library also includes a number of responsive widgets like <a href="../grids/">responsive grids</a>, <a href="../table-reflow/">reflow tables</a> and <a href="../table-column-toggle/">column chooser tables</a>, and <a href="../panel/">sliding panels</a>.</p>
 
 		<h2>Theming</h2>
-		<p>jQuery Mobile has a robust <a href="../themes-default/" data-ajax="false">theme framework</a> that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="b"</code> attribute to any of the widgets on this page to turn it black.</p>
+
+		<p>jQuery Mobile has a robust <a href="../theme-default/" data-ajax="false">theme framework</a> that supports up to 26 sets of toolbar, content and button colors, called a "swatch". Just add a <code>data-theme="b"</code> attribute to any of the widgets on this page to turn it black.</p>
 		<p>Cool party trick: add the theme swatch to the page and see how all the widgets inside the content will automatically inherit the theme.</p>
 
 		<p>When you're ready to build a custom theme, use <a href="http://www.jquerymobile.com/themeroller" rel="external">ThemeRoller</a> to drag and drop, then download a custom theme.</p>
