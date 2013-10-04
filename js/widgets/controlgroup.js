@@ -91,7 +91,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 	},
 
 	_setOptions: function( options ) {
-		var callRefresh,
+		var callRefresh, returnValue,
 			elem = this.element;
 
 		// Must have one of horizontal or vertical
@@ -125,11 +125,13 @@ $.widget( "mobile.controlgroup", $.extend( {
 			callRefresh = true;
 		}
 
+		returnValue = this._super( options );
+
 		if ( callRefresh ) {
 			this.refresh();
 		}
 
-		return this._super( options );
+		return returnValue;
 	},
 
 	container: function() {
