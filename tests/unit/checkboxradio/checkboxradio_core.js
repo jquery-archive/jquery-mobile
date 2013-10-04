@@ -134,4 +134,59 @@
 		ok( bottomicon.hasClass("ui-btn-icon-bottom"), "Icon position set on label adds the appropriate class." );
 		ok( topicon.hasClass("ui-btn-icon-top"), "Icon position set on input adds the appropriate class to the label." );
 	});
+
+	test( "Converting from horizontal to vertical controlgroup causes icons to appear", function() {
+		var controlgroup = $( "#set-vertical-group" ),
+			checkbox = $( "#set-vertical-group-1" );
+
+		controlgroup.controlgroup( "option", "type", "vertical" );
+
+		deepEqual( checkbox.prev().hasClass( "ui-btn-icon-left" ), true,
+			"After converting from a horizontal controlgroup to a vertical controlgroup the checkbox inside has an icon position class" );
+	});
+
+	test( "Runtime generation of a horizontal controlgroup does not cause checkboxes inside to have space set aside for icons", function() {
+		var controlgroup = $( "<div>" +
+			"<label for='dynamic-horizontal-checkbox1'>Checkbox 1</label>" +
+			"<input type='checkbox' id='dynamic-horizontal-checkbox1'></input>" +
+			"</div>" ).appendTo( "#the-content" ).controlgroup({ type: "horizontal" });
+
+		deepEqual( controlgroup.find( ":mobile-checkboxradio" ).prev().hasClass( "ui-btn-icon-left" ), false,
+			"Dynamically created horizontal controlgroup checkboxes do not have icon position classes" );
+
+		controlgroup.remove();
+	});
+
+	test( "Manual value update", function() {
+		var h = $( "#manual-set-horizontal-1" ),
+			v = $( "#manual-set-vertical-1" );
+
+		h[ 0 ].checked = true;
+		h.checkboxradio( "refresh" );
+		deepEqual( h.prev().hasClass( $.mobile.activeBtnClass ), true, "Horizontal: After checking and refreshing, the active class is present." );
+		deepEqual( h.prev().hasClass( "ui-btn-icon-left" ), false, "Horizontal: After checking and refreshing, the icon position class is not present." );
+		deepEqual( h.prev().hasClass( "ui-checkbox-on" ), true, "Horizontal: After checking and refreshing, the label has the ui-checkbox-on class" );
+		deepEqual( h.prev().hasClass( "ui-checkbox-off" ), false, "Horizontal: After checking and refreshing, the label does not have the ui-checkbox-off class" );
+
+		h[ 0 ].checked = false;
+		h.checkboxradio( "refresh" );
+		deepEqual( h.prev().hasClass( $.mobile.activeBtnClass ), false, "Horizontal: After unchecking and refreshing, the active class is not present." );
+		deepEqual( h.prev().hasClass( "ui-btn-icon-left" ), false, "Horizontal: After unchecking and refreshing, the icon position class is not present." );
+		deepEqual( h.prev().hasClass( "ui-checkbox-on" ), false, "Horizontal: After unchecking and refreshing, the label does not have the ui-checkbox-on class" );
+		deepEqual( h.prev().hasClass( "ui-checkbox-off" ), true, "Horizontal: After unchecking and refreshing, the label has the ui-checkbox-off class" );
+
+		v[ 0 ].checked = true;
+		v.checkboxradio( "refresh" );
+		deepEqual( v.prev().hasClass( $.mobile.activeBtnClass ), false, "Vertical: After checking and refreshing, the active class is not present." );
+		deepEqual( v.prev().hasClass( "ui-btn-icon-left" ), true, "Vertical: After checking and refreshing, the icon position class is not present." );
+		deepEqual( v.prev().hasClass( "ui-checkbox-on" ), true, "Vertical: After checking and refreshing, the label has the ui-checkbox-on class" );
+		deepEqual( v.prev().hasClass( "ui-checkbox-off" ), false, "Vertical: After checking and refreshing, the label does not have the ui-checkbox-off class" );
+
+		v[ 0 ].checked = false;
+		v.checkboxradio( "refresh" );
+		deepEqual( v.prev().hasClass( $.mobile.activeBtnClass ), false, "Vertical: After unchecking and refreshing, the active class is not present." );
+		deepEqual( v.prev().hasClass( "ui-btn-icon-left" ), true, "Vertical: After unchecking and refreshing, the icon position class is not present." );
+		deepEqual( v.prev().hasClass( "ui-checkbox-on" ), false, "Vertical: After unchecking and refreshing, the label does not have the ui-checkbox-on class" );
+		deepEqual( v.prev().hasClass( "ui-checkbox-off" ), true, "Vertical: After unchecking and refreshing, the label has the ui-checkbox-off class" );
+	});
 })(jQuery);
