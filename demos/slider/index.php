@@ -11,6 +11,15 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
+    <style id="full-width-slider">
+        /* Hide the number input */
+        .full-width-slider input {
+            display: none;
+        }
+        .full-width-slider .ui-slider-track {
+            margin-left: 15px;
+        }
+    </style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -134,6 +143,17 @@
                         <input type="range" name="slider-11" id="slider-11" data-mini="true" min="0" max="100" value="50">
 					</div>
 				</form>
+                </div><!-- /demo-html -->
+
+                <h2>Full width slider, no input</h2>
+
+                <p>Here we show how you can hide the number input and make the slider full width with custom CSS.</p>
+
+                <div data-demo-html="true" data-demo-css="#full-width-slider">
+                <form class="full-width-slider">
+                    <label for="slider-12" class="ui-hidden-accessible">Slider:</label>
+                    <input type="range" name="slider-12" id="slider-12" min="0" max="100" value="50">
+                </form>
                 </div><!-- /demo-html -->
 
 	</div><!-- /content -->
