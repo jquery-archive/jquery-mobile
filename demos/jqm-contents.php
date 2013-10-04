@@ -54,6 +54,7 @@
 <li data-filtertext=""><a href="loader/" data-ajax="false">Loader</a></li>
 
 <li data-filtertext=""><a href="toolbar/" data-ajax="false">Toolbar</a></li>
+<li data-filtertext=""><a href="toolbar-dynamic/" data-ajax="false">Toolbar: dynamic</a></li>
 <li data-filtertext=""><a href="toolbar-external/" data-ajax="false">Toolbar: external</a></li>
 <li data-filtertext=""><a href="toolbar-fixed/" data-ajax="false">Toolbar: fixed</a></li>
 <li data-filtertext=""><a href="toolbar-fixed-fullscreen/" data-ajax="false">Toolbar: fixed fullscreen</a></li>
