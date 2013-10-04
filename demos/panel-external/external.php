@@ -179,7 +179,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 }
 </code></pre>
 
-		<h4>Applying a preset breakpoint</h4>
+		<h3>Applying a preset breakpoint</h3>
 
 		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the <em>page wrapper</em> (not the panel). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
 
