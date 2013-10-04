@@ -150,19 +150,19 @@
 		
 		<ul data-role="listview" data-split-icon="gear" data-inset="true">
 			<li><a href="#">
-				<img src="../_assets/img/album-bb.jpg" />
+				<img src="../_assets/img/album-bb.jpg">
 			<h2>Broken Bells</h2>
 			<p>Broken Bells</p></a>
 				<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 			</li>
 			<li><a href="#">
-				<img src="../_assets/img/album-hc.jpg" />
+				<img src="../_assets/img/album-hc.jpg">
 			<h2>Warning</h2>
 			<p>Hot Chip</p></a>
 				<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 			</li>
 			<li><a href="#">
-				<img src="../_assets/img/album-bb.jpg" />
+				<img src="../_assets/img/album-bb.jpg">
 			<h2>Wolfgang Amadeus Phoenix</h2>
 			<p>Phoenix</p></a>
 				<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>

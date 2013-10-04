@@ -68,8 +68,6 @@
 
         <p>To make this responsive, you can make the page re-flow at wider widths. This allows both the reveal panel menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page.</p>
 
-        <a href="./" data-ajax="false" role="button" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-arrow-l ui-btn-icon-left">Back to Panels</a>
-
 		<div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div><!--/demo-html -->
 
 	</div><!-- /content -->

@@ -114,9 +114,9 @@
 
 						<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
 					     	<legend>Active is used for the on state of these toggles:</legend>
-					         	<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
+					         	<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked">
 					         	<label for="radio-choice-a">On</label>
-					         	<input type="radio" name=" radio-choice-a" id="radio-choice-b" value="off"  />
+					         	<input type="radio" name=" radio-choice-a" id="radio-choice-b" value="off">
 					         	<label for="radio-choice-b">Off</label>
 					    </fieldset>
 

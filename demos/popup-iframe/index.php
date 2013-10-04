@@ -11,10 +11,8 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-
 	<script src="popup-examples.js"></script>
-	<link rel="stylesheet" href="popup-examples.css" />
-
+	<link rel="stylesheet" href="popup-examples.css">
 </head>
 <body>
 <div data-role="page" class="jqm-demos">
@@ -28,7 +26,6 @@
 
     <div data-role="content" class="jqm-content">
 
-			<a href="index.php" role="button" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left ui-btn-inline ui-mini">Back to Popups</a>
 		<h1>iframes in popups</h1>
 
 		<p>You may need to embed an iframe into a popup to use a 3rd party widget. Here, we'll walk through a few real-world examples of working with iframes: videos and maps.</p>
@@ -36,11 +33,12 @@
 		<h2>Video example</h2>
 
 		<p>Here is an example of a 3rd party video player embedded in a popup:</p>
-				<a href="#popupVideo" data-rel="popup" data-position-to="window" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline">Launch video player</a>
+        
+		<a href="#popupVideo" data-rel="popup" data-position-to="window" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline">Launch video player</a>
 
-				<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
-					<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
-				</div>
+		<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
+			<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
+		</div>
 
 		<p>The markup is an iframe inside a popup container. The popup will have a 15 pixels padding because of class <code>ui-content</code> and a one pixel border because the framework will add class <code>ui-body-d</code> to the popup.</p>
 

@@ -55,7 +55,7 @@
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
 		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -65,15 +65,13 @@
 		<p>To use the filter as an autocomplete that taps into remote data sources, you can use the <code>filterablebeforefilter</code> event to dynamically populate a listview as a user types a search query.</p>
 
 		<p>This is useful when you have a very large data set like cities, zip codes, or products that can't be loaded up-front locally. Use the view source button to see the JavaScript that powers this demo.</p>
-		<p>If you have a small list of items, you can use the <a href="../listviews/">listview</a> filter reveal option to make an autocomplete with local listview data.</p>
+		<p>If you have a small list of items, you can use the <a href="../listview/">listview</a> filter reveal option to make an autocomplete with local listview data.</p>
 
 			<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
 				<h3>Cities worldwide</h3>
             	<p>After you enter <strong>at least three characters</strong> the autocomplete function will show all possible matches.</p>
 				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a city..." data-filter-theme="a"></ul>
 			</div><!--/demo-html -->
-
-            <a href="index.php" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-l ui-btn-icon-left">Back to autocomplete</a>
 
 	</div><!-- /content -->
 

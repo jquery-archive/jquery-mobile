@@ -19,7 +19,7 @@
 			<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
 			<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-			<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
+			<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
 			</div><!-- /header -->
 
     <div data-role="content" class="jqm-content">
@@ -39,7 +39,7 @@
         <div data-demo-html="true">
             <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all">Link button</a>
             <button class="ui-shadow ui-btn ui-corner-all">Button element</button>
-            <input type="button" value="Button element" data-icon="delete" data-theme="a" />
+            <input type="button" value="Button element" data-icon="delete" data-theme="a">
         </div><!-- /demo-html -->
 
         <p>Inline buttons</p>
@@ -64,17 +64,17 @@
 
         <div data-demo-html="true">
             <label for="slider">Slider:</label>
-            <input type="range" name="slider" id="slider" value="50" min="0" max="100" />
+            <input type="range" name="slider" id="slider" value="50" min="0" max="100">
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
             <label for="slider-fill">Slider with fill and step of 50:</label>
-            <input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="1000" step="50" data-highlight="true" />
+            <input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="1000" step="50" data-highlight="true">
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
             <label for="slider-fill-mini">Slider with fill, mini, track theme:</label>
-            <input type="range" name="slider-fill-mini" id="slider-fill-mini" value="40" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="b" />
+            <input type="range" name="slider-fill-mini" id="slider-fill-mini" value="40" min="0" max="100" data-mini="true" data-highlight="true" data-theme="b" data-track-theme="b">
         </div><!-- /demo-html -->
 
         <h2>Range slider</h2>
@@ -125,21 +125,21 @@
 
         <h2>Checkboxes</h2>
 
-		<p>Checkboxes are used to provide a list of options where more than one can be selected. Learn more about <a href="../checkbox/">checkboxes</a>.</p>
+		<p>Checkboxes are used to provide a list of options where more than one can be selected. Learn more about <a href="../checkboxradio-checkbox/">checkboxes</a>.</p>
 
         <div data-demo-html="true">
             <fieldset data-role="controlgroup">
                 <legend>Checkboxes, vertical controlgroup:</legend>
-                <input type="checkbox" name="checkbox-1a" id="checkbox-1a" checked  />
+                <input type="checkbox" name="checkbox-1a" id="checkbox-1a" checked>
                 <label for="checkbox-1a">Cheetos</label>
 
-                <input type="checkbox" name="checkbox-2a" id="checkbox-2a" />
+                <input type="checkbox" name="checkbox-2a" id="checkbox-2a">
                 <label for="checkbox-2a">Doritos</label>
 
-                <input type="checkbox" name="checkbox-3a" id="checkbox-3a" />
+                <input type="checkbox" name="checkbox-3a" id="checkbox-3a">
                 <label for="checkbox-3a">Fritos</label>
 
-                <input type="checkbox" name="checkbox-4a" id="checkbox-4a" />
+                <input type="checkbox" name="checkbox-4a" id="checkbox-4a">
                 <label for="checkbox-4a">Sun Chips</label>
             </fieldset>
         </div><!-- /demo-html -->
@@ -147,13 +147,13 @@
         <div data-demo-html="true">
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                 <legend>Checkboxes, mini, horizontal controlgroup:</legend>
-                <input type="checkbox" name="checkbox-6" id="checkbox-6" />
+                <input type="checkbox" name="checkbox-6" id="checkbox-6">
                 <label for="checkbox-6">b</label>
 
-                <input type="checkbox" name="checkbox-7" id="checkbox-7" checked />
+                <input type="checkbox" name="checkbox-7" id="checkbox-7" checked>
                 <label for="checkbox-7"><em>i</em></label>
 
-                <input type="checkbox" name="checkbox-8" id="checkbox-8" />
+                <input type="checkbox" name="checkbox-8" id="checkbox-8">
                 <label for="checkbox-8">u</label>
             </fieldset>
         </div><!-- /demo-html -->
@@ -165,16 +165,16 @@
         <div data-demo-html="true">
                 <fieldset data-role="controlgroup">
                     <legend>Radio buttons, vertical controlgroup:</legend>
-                        <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
+                        <input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked">
                         <label for="radio-choice-1">Cat</label>
 
-                        <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
+                        <input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2">
                         <label for="radio-choice-2">Dog</label>
 
-                        <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3"  />
+                        <input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3">
                         <label for="radio-choice-3">Hamster</label>
 
-                        <input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4"  />
+                        <input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4">
                         <label for="radio-choice-4">Lizard</label>
                 </fieldset>
         </div><!-- /demo-html -->
@@ -182,11 +182,11 @@
         <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Radio buttons, mini, horizontal controlgroup:</legend>
-                        <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked" />
+                        <input type="radio" name="radio-choice-b" id="radio-choice-c" value="list" checked="checked">
                         <label for="radio-choice-c">List</label>
-                        <input type="radio" name="radio-choice-b" id="radio-choice-d" value="grid" />
+                        <input type="radio" name="radio-choice-b" id="radio-choice-d" value="grid">
                         <label for="radio-choice-d">Grid</label>
-                        <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery" />
+                        <input type="radio" name="radio-choice-b" id="radio-choice-e" value="gallery">
                         <label for="radio-choice-e">Gallery</label>
                 </fieldset>
         </div><!-- /demo-html -->
@@ -251,7 +251,7 @@
 
         <div data-demo-html="true">
              <label for="text-basic">Text input:</label>
-             <input type="text" name="text-basic" id="text-basic" value=""  />
+             <input type="text" name="text-basic" id="text-basic" value="">
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
@@ -261,32 +261,32 @@
 
         <div data-demo-html="true">
              <label for="number-pattern">Number + [0-9]* pattern:</label>
-             <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="" />
+             <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="">
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
              <label for="date">Date:</label>
-             <input type="date" name="date" id="date" value="" />
+             <input type="date" name="date" id="date" value="">
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
              <label for="tel">Tel:</label>
-             <input type="tel" name="tel" id="tel" value="" />
+             <input type="tel" name="tel" id="tel" value="">
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
              <label for="search">Search Input:</label>
-             <input type="search" name="password" id="search" value="" placeholder="Placeholder text..." />
+             <input type="search" name="password" id="search" value="" placeholder="Placeholder text...">
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
              <label for="file">File:</label>
-             <input type="file" name="file" id="file" value="" />
+             <input type="file" name="file" id="file" value="">
         </div><!-- /demo-html -->
 
         <div data-demo-html="true">
              <label for="password">Password:</label>
-             <input type="password" name="password" id="password" value="" autocomplete="off" />
+             <input type="password" name="password" id="password" value="" autocomplete="off">
         </div><!-- /demo-html -->
 
 		<p>See the <a href="form-gallery.php">form gallery</a> for more form element examples.</p>

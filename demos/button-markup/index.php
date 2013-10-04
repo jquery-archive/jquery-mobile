@@ -34,7 +34,7 @@
 
 		<p>Add classes to style <code>a</code> and <code>button</code> elements. <code>input</code> buttons are enhanced by the button widget. See <a href="../button/" data-ajax="false">this page</a> for examples.</p>
 		
-		<p>Note that in 1.4 <code>data-</code> attributes will still work. The deprecated <code>buttonMarkup</code> method will add the applicable classes and the <code>role="button"</code> attribute to <code>a</code> and <code>button</code>.</p>
+		<p>Note that in 1.4 <code>data-</code> attributes will still work. The deprecated <code>buttonMarkup</code> method will add the applicable classes to <code>a</code> (with <code>data-role="button"</code>) and <code>button</code> elements. This method also adds the <code>role="button"</code> attribute to anchor elements.</p>
 		
 		<h2>Basic markup</h2>
 

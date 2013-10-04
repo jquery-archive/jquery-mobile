@@ -27,7 +27,7 @@
 
     <div data-role="content" class="jqm-content">
 
-            <h1>Collapsibles</h1>
+            <h1>Collapsible</h1>
 
             <p>Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.
             </p>
@@ -130,11 +130,11 @@
                     <input type="text" name="textinput-f" id="textinput-f" placeholder="Text input" value="">
 
                     <div data-role="controlgroup">
-                        <input type="checkbox" name="checkbox-1-a" id="checkbox-1-a" />
+                        <input type="checkbox" name="checkbox-1-a" id="checkbox-1-a">
                         <label for="checkbox-1-a">One</label>
-                        <input type="checkbox" name="checkbox-2-a" id="checkbox-2-a" />
+                        <input type="checkbox" name="checkbox-2-a" id="checkbox-2-a">
                         <label for="checkbox-2-a">Two</label>
-                        <input type="checkbox" name="checkbox-3-a" id="checkbox-3-a" />
+                        <input type="checkbox" name="checkbox-3-a" id="checkbox-3-a">
                         <label for="checkbox-3-a">Three</label>
                     </div>
                 </fieldset>

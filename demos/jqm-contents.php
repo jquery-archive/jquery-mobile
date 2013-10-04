@@ -109,17 +109,17 @@
 
 <li data-filtertext=""><a href="filterable/" data-ajax="false">Filterable</a></li>
 
-<li data-role="list-divider">Form Widgets</li>
+<li data-role="list-divider">Form widgets</li>
 
 <li data-filtertext=""><a href="forms/" data-ajax="false">Forms</a></li>
 
 <li data-filtertext=""><a href="textinput/" data-ajax="false">Textinput</a></li>
-<li data-filtertext=""><a href="button/" data-ajax="false">Input button</a></li>
+<li data-filtertext=""><a href="button/" data-ajax="false">Input buttons</a></li>
 <li data-filtertext=""><a href="checkboxradio-checkbox/" data-ajax="false">Checkboxradio: checkbox</a></li>
 <li data-filtertext=""><a href="checkboxradio-radio/" data-ajax="false">Checkboxradio: radio</a></li>
 <li data-filtertext=""><a href="selectmenu/" data-ajax="false">Selectmenu</a></li>
-<li data-filtertext=""><a href="selectmenu-custom/" data-ajax="false">Selectmenu: custom</a></li>
-<li data-filtertext=""><a href="selectmenu-custom-filter/" data-ajax="false">Selectmenu: custom with filter</a></li>
+<li data-filtertext=""><a href="selectmenu-custom/" data-ajax="false">Selectmenu: custom menu</a></li>
+<li data-filtertext=""><a href="selectmenu-custom-filter/" data-ajax="false">Selectmenu: custom menu with filter</a></li>
 <li data-filtertext=""><a href="slider/" data-ajax="false">Slider</a></li>
 <li data-filtertext=""><a href="slider-flipswitch/" data-ajax="false">Slider: flip toggle switch</a></li>
 <li data-filtertext=""><a href="slider-tooltip/" data-ajax="false">Slider: tooltip</a></li>

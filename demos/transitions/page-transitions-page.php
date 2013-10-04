@@ -30,7 +30,7 @@
 
 				<div data-role="fieldcontain">
 		         <label for="name">Text Input:</label>
-		         <input type="text" name="name" id="name" value=""  />
+		         <input type="text" name="name" id="name" value="">
 				</div>
 
 				<div data-role="fieldcontain">
@@ -48,7 +48,7 @@
 
 				<div data-role="fieldcontain">
 					<label for="slider">Slider:</label>
-				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" />
+				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true">
 				</div>
 
 			</form>
@@ -59,7 +59,7 @@
 		<div data-role="footer" data-theme="a">
 			<div style="margin:5px 10px;"><!-- To add a bit of spacing -->
 			<label for="search" class="ui-hidden-accessible">Search:</label>
-	        <input type="search" name="password" id="search" placeholder="Search..." value="" />
+	        <input type="search" name="password" id="search" placeholder="Search..." value="">
 			</div>
 		</div><!-- /footer -->
 	</div>
