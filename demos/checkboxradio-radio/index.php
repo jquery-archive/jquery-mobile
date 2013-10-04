@@ -25,8 +25,7 @@
 
 		<h1>Radio buttons</h1>
 
-		<p>Radio buttons are used to provide a list of options where only a single option can be selected.
-			</p>
+		<p>Radio inputs are used to provide a list of options where only a single option can be selected. Radio buttons are enhanced by the checkboxradio widget.</p>
 
 		<h2>Basic markup</h2>
 
@@ -35,11 +34,11 @@
 			<div data-demo-html="true">
                 <form>
 					<label>
-						<input type="radio" name="radio-choice-0" id="radio-choice-0a"/>One
+						<input type="radio" name="radio-choice-0" id="radio-choice-0a">One
 					</label>
 
                     <label for="radio-choice-0b">Two</label>
-                    <input type="radio" name="radio-choice-0" id="radio-choice-0b" class="custom" />
+                    <input type="radio" name="radio-choice-0" id="radio-choice-0b" class="custom">
             	</form>
 			</div><!--/demo-html -->
 

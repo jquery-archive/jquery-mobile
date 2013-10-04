@@ -18,8 +18,8 @@
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left ui-shadow" role="button">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
     </div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -486,9 +486,6 @@
 
         </form>
         
-		<a href="./" data-ajax="false" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-l ui-mini ui-btn-inline ui-btn-icon-left">Back to Forms</a>
-
-
 	</div><!-- /content -->
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">

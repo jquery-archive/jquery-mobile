@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Controlgroups - jQuery Mobile Demos</title>
+	<title>Controlgroup - jQuery Mobile Demos</title>
 	    <link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
 	    <link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	    <link rel="shortcut icon" href="../favicon.ico">
@@ -27,7 +27,7 @@
 
 	    <div data-role="content" class="jqm-content">
 
-        <h1>Controlgroups</h1>
+        <h1>Controlgroup</h1>
 
         <p>Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.
         </p>

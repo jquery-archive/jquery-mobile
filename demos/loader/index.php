@@ -62,7 +62,7 @@
 		<h2>Custom HTML</h2>
 		<p>Any HTML can be added to the loader overlay</p>
 			<div data-demo-html="true" data-demo-js="true">
-				<button class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="Custom Loader" data-inline="true"  data-html="<span class='ui-bar ui-shadow ui-overlay-d ui-corner-all'><img src='../_assets/img/jquery-logo.png' /><h2>is loading for you ...</h2></span>" data-iconpos="right">Custom HTML</button>
+				<button class="show-page-loading-msg" data-theme="b" data-textonly="true" data-textvisible="true" data-msgtext="Custom Loader" data-inline="true"  data-html="<span class='ui-bar ui-shadow ui-overlay-d ui-corner-all'><img src='../_assets/img/jquery-logo.png'><h2>is loading for you ...</h2></span>" data-iconpos="right">Custom HTML</button>
 				<button class="hide-page-loading-msg" data-inline="true" data-icon="delete">Hide</button>
 
 			</div><!--/demo-html -->

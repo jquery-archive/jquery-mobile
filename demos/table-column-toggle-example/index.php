@@ -120,10 +120,10 @@
               <tbody>
                 <tr class="photos">
                   <th class="label">Photo</th>
-                  <td><a href="#img-iphone5" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_iphone5.png" /></a></td>
-                  <td><a href="#img-galaxy" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_galaxy3.png" /></a></td>
-                  <td><a href="#img-lumia" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_lumia920.png" /></a></td>
-                  <td><a href="#img-onex" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_onex.png" /></a></td>
+                  <td><a href="#img-iphone5" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_iphone5.png"></a></td>
+                  <td><a href="#img-galaxy" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_galaxy3.png"></a></td>
+                  <td><a href="#img-lumia" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_lumia920.png"></a></td>
+                  <td><a href="#img-onex" data-rel="popup" data-position-to="window"><img src="../_assets/img/phone_onex.png"></a></td>
                 </tr>
                 <tr>
                   <th class="label">Height</th>

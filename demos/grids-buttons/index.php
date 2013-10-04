@@ -30,7 +30,7 @@
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
 		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -152,9 +152,6 @@
             <br>
             <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b" role="button">Outside the grid</a>
         </div><!--/demo-html -->
-        
-        
-		<a href="./" data-ajax="false" role="button" class="ui-shadow ui-btn ui-corner-all ui-mini ui-btn-inline ui-icon-arrow-l ui-btn-icon-left">Back to Grids</a>
 
 	</div><!-- /content -->
 

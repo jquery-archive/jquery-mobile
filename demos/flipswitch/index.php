@@ -34,7 +34,7 @@
                 <div data-demo-html="true">
 				<form>
                     <label for="flip-checkbox">Flip toggle switch checkbox:</label>
-                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox"/>
+                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox">
 				</form>
                 </div><!-- /demo-html -->
 
@@ -43,7 +43,7 @@
                 <div data-demo-html="true">
                 <form>
                     <label for="flip-checkbox">Flip toggle switch checkbox:</label>
-                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox" checked/>
+                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox" checked>
                 </form>
                 </div><!-- /demo-html -->
 				

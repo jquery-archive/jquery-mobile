@@ -88,7 +88,7 @@
 			</select>
 
 			<label for="slider-s">Input slider:</label>
-			<input type="range" name="slider-s" id="slider-s" value="25" min="0" max="100" data-highlight="true"  />
+			<input type="range" name="slider-s" id="slider-s" value="25" min="0" max="100" data-highlight="true">
 		</form>
 
 		</div><!--/demo-html -->

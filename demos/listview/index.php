@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Listviews - jQuery Mobile Demos</title>
+	<title>Listview - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -26,12 +26,12 @@
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
 		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-shadow ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
 
-		<h1>Listviews</h1>
+		<h1>Listview</h1>
 
 		<p>A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
 			</p>
@@ -182,17 +182,17 @@
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true">
 					<li><a href="#">
-						<img src="../_assets/img/album-bb.jpg" />
+						<img src="../_assets/img/album-bb.jpg">
 					<h2>Broken Bells</h2>
 					<p>Broken Bells</p></a>
 					</li>
 					<li><a href="#">
-						<img src="../_assets/img/album-hc.jpg" />
+						<img src="../_assets/img/album-hc.jpg">
 					<h2>Warning</h2>
 					<p>Hot Chip</p></a>
 					</li>
 					<li><a href="#">
-						<img src="../_assets/img/album-p.jpg" />
+						<img src="../_assets/img/album-p.jpg">
 					<h2>Wolfgang Amadeus Phoenix</h2>
 					<p>Phoenix</p></a>
 					</li>
@@ -204,19 +204,19 @@
 			<div data-demo-html="true">
 				<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="true">
 					<li><a href="#">
-						<img src="../_assets/img/album-bb.jpg" />
+						<img src="../_assets/img/album-bb.jpg">
 					<h2>Broken Bells</h2>
 					<p>Broken Bells</p></a>
 						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 					</li>
 					<li><a href="#">
-						<img src="../_assets/img/album-hc.jpg" />
+						<img src="../_assets/img/album-hc.jpg">
 					<h2>Warning</h2>
 					<p>Hot Chip</p></a>
 						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 					</li>
 					<li><a href="#">
-						<img src="../_assets/img/album-p.jpg" />
+						<img src="../_assets/img/album-p.jpg">
 					<h2>Wolfgang Amadeus Phoenix</h2>
 					<p>Phoenix</p></a>
 						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
@@ -254,7 +254,7 @@
 					<li><a href="index.html">
 					<h2>Avery Walker</h2>
 					<p><strong>Re: Dinner Tonight</strong></p>
-					<p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
+					<p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
 						<p class="ui-li-aside"><strong>4:48</strong>PM</p>
 					</a></li>
 				</ul>
@@ -406,19 +406,19 @@
 					<h2>Thumbnails and split button</h2>
 						<ul data-role="listview" data-split-icon="gear" data-split-theme="a">
 							<li><a href="index.html">
-								<img src="../_assets/img/album-bb.jpg" />
+								<img src="../_assets/img/album-bb.jpg">
 								<h3>Broken Bells</h3>
 							<p>Broken Bells</p>
 								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
 							</a></li>
 							<li><a href="index.html">
-								<img src="../_assets/img/album-hc.jpg" />
+								<img src="../_assets/img/album-hc.jpg">
 								<h3>Warning</h3>
 							<p>Hot Chip</p>
 							</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
 							</a></li>
 							<li><a href="index.html">
-								<img src="../_assets/img/album-p.jpg" />
+								<img src="../_assets/img/album-p.jpg">
 								<h3>Wolfgang Amadeus Phoenix</h3>
 							<p>Phoenix</p>
 								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
