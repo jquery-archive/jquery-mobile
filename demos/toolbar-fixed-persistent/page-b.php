@@ -75,7 +75,7 @@
 		<div data-role="navbar">
 			<ul>
 				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
-				<li><a href="page-b.php" data-prefetch="true" data-transition="flip" class="ui-btn-active ui-state-persist">Friends</a></li>
+				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
 				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
 				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
 			</ul>
