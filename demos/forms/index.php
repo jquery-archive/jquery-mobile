@@ -60,7 +60,7 @@
 
         <h2>Sliders</h2>
 
-		<p>Sliders are used to enter numeric values along a numeric continuum by dragging a handle or entering in a value. Learn more about <a href="../sliders/" data-ajax="false">sliders</a>.</p>
+		<p>Sliders are used to enter numeric values along a numeric continuum by dragging a handle or entering in a value. Learn more about <a href="../slider/" data-ajax="false">sliders</a>.</p>
 
         <div data-demo-html="true">
             <label for="slider">Slider:</label>
@@ -105,7 +105,7 @@
 
         <h2>Flip switch</h2>
 
-		<p>Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element. Learn more about <a href="../sliders/switch.php" data-ajax="false">flip switches</a>.</p>
+		<p>Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element. Learn more about <a href="../slider-flipswitch/" data-ajax="false">flip switches</a>.</p>
 
         <div data-demo-html="true">
             <label for="slider2">Flip switch:</label>
@@ -193,7 +193,7 @@
 
         <h2>Selects</h2>
 
-		<p>The select menu is used to offer a list of options in a compact picker. Ours is based on a native select element, which is hidden from view and replaced with a custom-styled select button. Tapping it opens the native menu or a custom styled version. Learn more about <a href="../selects/">selects</a>.</p>
+		<p>The select menu is used to offer a list of options in a compact picker. Ours is based on a native select element, which is hidden from view and replaced with a custom-styled select button. Tapping it opens the native menu or a custom styled version. Learn more about <a href="../selectmenu/">selects</a>.</p>
 
         <div data-demo-html="true">
             <label for="select-choice-1" class="select">Select, native menu</label>
