@@ -36,7 +36,7 @@
 
             <div data-demo-html="true">
 				<form>
-                <div data-role="fieldcontain">
+                <div class="ui-field-contain">
                     <label for="select-native-x">Native select: </label>
                     <select name="select-native-x" id="select-native-x" data-role="none">
                         <option value="1">The 1st Option</option>
