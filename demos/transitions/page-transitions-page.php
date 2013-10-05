@@ -28,17 +28,17 @@
 
 			<p>These are here to see if this slows down rendering.</p>
 
-				<div data-role="fieldcontain">
+				<div class="ui-field-contain">
 		         <label for="name">Text Input:</label>
 		         <input type="text" name="name" id="name" value="">
 				</div>
 
-				<div data-role="fieldcontain">
+				<div class="ui-field-contain">
 				<label for="textarea">Textarea:</label>
 				<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
 				</div>
 
-				<div data-role="fieldcontain">
+				<div class="ui-field-contain">
 					<label for="slider2">Flip switch:</label>
 					<select name="slider2" id="slider2" data-role="slider">
 						<option value="off">Off</option>
@@ -46,7 +46,7 @@
 					</select>
 				</div>
 
-				<div data-role="fieldcontain">
+				<div class="ui-field-contain">
 					<label for="slider">Slider:</label>
 				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true">
 				</div>

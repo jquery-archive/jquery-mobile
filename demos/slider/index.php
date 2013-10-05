@@ -105,7 +105,7 @@
 
                 <div data-demo-html="true">
 				<form>
-					<div data-role="fieldcontain">
+					<div class="ui-field-contain">
                         <label for="slider-7">Slider:</label>
                         <input type="range" name="slider-7" id="slider-7" min="0" max="100" value="50">
 					</div>
@@ -116,7 +116,7 @@
 
                 <div data-demo-html="true">
 				<form>
-					<div data-role="fieldcontain">
+					<div class="ui-field-contain">
                         <label for="slider-8">Slider:</label>
                         <input type="range" name="slider-8" id="slider-8" data-mini="true" min="0" max="100" value="50">
 					</div>
@@ -127,7 +127,7 @@
 
                 <div data-demo-html="true">
 				<form>
-					<div data-role="fieldcontain" class="ui-hide-label">
+					<div class="ui-field-contain ui-hide-label">
                         <label for="slider-9">Slider:</label>
                         <input type="range" name="slider-9" id="slider-9" min="0" max="100" value="50">
 					</div>
@@ -138,7 +138,7 @@
 
                 <div data-demo-html="true">
 				<form>
-					<div data-role="fieldcontain" class="ui-hide-label">
+					<div class="ui-field-contain ui-hide-label">
                         <label for="slider-11">Slider:</label>
                         <input type="range" name="slider-11" id="slider-11" data-mini="true" min="0" max="100" value="50">
 					</div>

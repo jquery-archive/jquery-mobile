@@ -32,7 +32,7 @@
         <h2>Basic select</h2>
         <div data-demo-html="true">
             <form>
-            <div data-role="fieldcontain">
+            <div class="ui-field-contain">
                 <label for="select-native-1">Basic:</label>
                 <select name="select-native-1" id="select-native-1">
                     <option value="1">The 1st Option</option>
@@ -48,7 +48,7 @@
 
         <div data-demo-html="true">
             <form>
-            <div data-role="fieldcontain">
+            <div class="ui-field-contain">
                 <label for="select-native-2">Mini sized:</label>
                 <select name="select-native-2" id="select-native-2" data-mini="true">
                     <option value="1">The 1st Option</option>
@@ -64,7 +64,7 @@
 
         <div data-demo-html="true">
             <form>
-            <div data-role="fieldcontain">
+            <div class="ui-field-contain">
                 <label for="select-native-3">Icon left:</label>
                 <select name="select-native-3" id="select-native-3" data-iconpos="left">
                     <option value="1">The 1st Option</option>
@@ -80,7 +80,7 @@
 
         <div data-demo-html="true">
             <form>
-            <div data-role="fieldcontain">
+            <div class="ui-field-contain">
                 <label for="select-native-17">1 option selected:</label>
                 <select name="select-native-17" id="select-native-17">
                     <option value="1">The 1st Option</option>
@@ -96,7 +96,7 @@
 
         <div data-demo-html="true">
             <form>
-            <div data-role="fieldcontain">
+            <div class="ui-field-contain">
                 <label for="select-native-18">1 option disabled:</label>
                 <select name="select-native-18" id="select-native-18">
                     <option value="1">The 1st Option</option>
@@ -112,7 +112,7 @@
 
         <div data-demo-html="true">
             <form>
-            <div data-role="fieldcontain">
+            <div class="ui-field-contain">
                 <label for="select-native-4">Optgroup (if supported):</label>
                 <select name="select-native-4" id="select-native-4">
                     <option>Choose...</option>

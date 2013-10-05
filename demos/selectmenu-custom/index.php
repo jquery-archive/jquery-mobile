@@ -32,7 +32,7 @@
 		<h2>Examples</h2>
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-1">Basic:</label>
                         <select name="select-custom-1" id="select-custom-1" data-native-menu="false">
                             <option value="1">The 1st Option</option>
@@ -44,7 +44,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-20">Long list:</label>
                         <select name="select-custom-20" id="select-custom-20" data-native-menu="false">
                             <option value="AL">Alabama</option>
@@ -102,7 +102,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-2">Mini sized:</label>
                         <select name="select-custom-2" id="select-custom-2" data-native-menu="false" data-mini="true">
                             <option value="1">The 1st Option</option>
@@ -114,7 +114,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-3">Icon left:</label>
                         <select name="select-custom-3" id="select-custom-3" data-native-menu="false" data-iconpos="left">
                             <option value="1">The 1st Option</option>
@@ -126,7 +126,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-21">Data-placeholder:</label>
                         <select name="select-custom-21" id="select-custom-21" data-native-menu="false">
                             <option value="choose-one" data-placeholder="true">Choose one...</option>
@@ -139,7 +139,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-22">Option w/o value:</label>
                         <select name="select-custom-22" id="select-custom-22" data-native-menu="false">
                             <option>Choose one...</option>
@@ -152,7 +152,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-23">Empty option w/o value:</label>
                         <select name="select-custom-23" id="select-custom-23" data-native-menu="false">
                             <option></option>
@@ -165,7 +165,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-17">1 option selected:</label>
                         <select name="select-custom-17" id="select-custom-17" data-native-menu="false">
                             <option value="1">The 1st Option</option>
@@ -177,7 +177,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-18">1 option disabled:</label>
                         <select name="select-custom-18" id="select-custom-18" data-native-menu="false">
                             <option value="1">The 1st Option</option>
@@ -189,7 +189,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-19">Multiple:</label>
                         <select name="select-custom-19" id="select-custom-19" multiple="multiple" data-native-menu="false">
                             <option>Choose options</option>
@@ -202,7 +202,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-24">Multiple, icon left, long list:</label>
                         <select name="select-custom-24" id="select-custom-24" data-native-menu="false" multiple="multiple" data-iconpos="left">
                             <option>Choose options</option>
@@ -261,7 +261,7 @@
                 </div><!--/demo-html -->
 
                 <div data-demo-html="true">
-                    <div data-role="fieldcontain">
+                    <div class="ui-field-contain">
                         <label for="select-custom-4">Optgroup:</label>
                         <select name="select-custom-4" id="select-custom-4" data-native-menu="false">
                             <option>Choose...</option>

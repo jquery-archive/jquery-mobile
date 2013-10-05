@@ -62,11 +62,11 @@ $.mobile.document.on( "slidestop", function() {
 		<div data-demo-html="true" data-demo-js="#extension" data-demo-css="#alignment-example-style">
 			<div data-role="popup" id="alignment-example" class="ui-content">
 				<form data-role="fieldset">
-					<div data-role="fieldcontain">
+					<div class="ui-field-contain">
 						<label for="xalign">X Alignment</label>
 						<input type="range" id="xalign" name="xalign" value="0.5" min="-1" max="2" step="0.5"></input>
 					</div>
-					<div data-role="fieldcontain">
+					<div class="ui-field-contain">
 						<label for="yalign">Y Alignment</label>
 						<input type="range" id="yalign" name="yalign" value="0.5" min="-1" max="2" step="0.5"></input>
 					</div>

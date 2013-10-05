@@ -307,27 +307,27 @@
 			<div data-demo-html="true">
 				<form>
 					<ul data-role="listview" data-inset="true">
-                        <li data-role="fieldcontain">
+                        <li class="ui-field-contain">
                             <label for="name2">Text Input:</label>
                             <input type="text" name="name2" id="name2" value="" data-clear-btn="true">
                         </li>
-                        <li data-role="fieldcontain">
+                        <li class="ui-field-contain">
                             <label for="textarea2">Textarea:</label>
                         <textarea cols="40" rows="8" name="textarea2" id="textarea2"></textarea>
                         </li>
-                        <li data-role="fieldcontain">
+                        <li class="ui-field-contain">
                             <label for="flip2">Flip switch:</label>
                             <select name="flip2" id="flip2" data-role="slider">
                                 <option value="off">Off</option>
                                 <option value="on">On</option>
                             </select>
                         </li>
-                        <li data-role="fieldcontain">
+                        <li class="ui-field-contain">
                             <label for="slider2">Slider:</label>
                             <input type="range" name="slider2" id="slider2" value="0" min="0" max="100" data-highlight="true">
                         </li>
 
-                        <li data-role="fieldcontain">
+                        <li class="ui-field-contain">
                             <label for="select-choice-1" class="select">Choose shipping method:</label>
                             <select name="select-choice-1" id="select-choice-1">
                                 <option value="standard">Standard: 7 day</option>

@@ -31,28 +31,28 @@
         <form action="#" method="get">
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="textinput-3">Text Input:</label>
                     <input type="text" name="textinput-3" id="textinput-3" placeholder="Text input" value="">
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="search-3">Search Input:</label>
                     <input type="search" name="search-3" id="search-3" value="">
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="textarea-3">Textarea:</label>
                     <textarea cols="40" rows="8" name="textarea-3" id="textarea-3">Textarea</textarea>
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="select-native-3">Native select:</label>
                     <select name="select-native-3" id="select-native-3">
                         <option value="small">One</option>
@@ -63,7 +63,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="select-multiple-3">Custom multiple select:</label>
                     <select multiple="multiple" data-native-menu="false" name="select-multiple-3" id="select-multiple-3">
                         <option value="">Choices:</option>
@@ -75,7 +75,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, buttons:</legend>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
@@ -86,7 +86,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, buttons:</legend>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
@@ -97,7 +97,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, select:</legend>
                         <label for="select-v-3a">Select A</label>
@@ -123,7 +123,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, select:</legend>
                         <label for="select-h-3a">Select A</label>
@@ -149,7 +149,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, mixed:</legend>
                         <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
@@ -165,14 +165,14 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="slider-3">Slider:</label>
                     <input type="range" name="slider-3" id="slider-3" value="50" min="0" max="100" data-highlight="true">
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="flip-3">Flip toggle:</label>
                     <select name="flip-3" id="flip-3" data-role="slider">
                         <option value="off">Off</option>
@@ -182,7 +182,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup">
                         <legend>Single checkbox:</legend>
                         <label for="checkbox-3">I agree</label>
@@ -192,7 +192,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, checkbox:</legend>
                         <input type="checkbox" name="checkbox-v-3a" id="checkbox-v-3a">
@@ -206,7 +206,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, radio:</legend>
                         <input type="radio" name="radio-choice-v-3" id="radio-choice-v-3a" value="on" checked="checked">
@@ -220,7 +220,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, checkbox:</legend>
                         <input type="checkbox" name="checkbox-h-3a" id="checkbox-h-3a">
@@ -234,7 +234,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, radio:</legend>
                         <input type="radio" name="radio-choice-h-3" id="radio-choice-h-3a" value="on" checked="checked">
@@ -248,7 +248,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="submit-3">Send:</label>
                     <button class="ui-shadow ui-btn ui-corner-all" type="submit" id="submit-3">Submit</button>
                 </div>
@@ -261,28 +261,28 @@
         <form action="#" method="get">
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="textinput-7">Text Input:</label>
                     <input type="text" name="textinput-7" id="textinput-7" placeholder="Text input" value="" data-mini="true">
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="search-7">Search Input:</label>
                     <input type="search" name="search-7" id="search-7" value="" data-mini="true">
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="textarea-7">Textarea:</label>
                     <textarea cols="40" rows="8" name="textarea-7" id="textarea-7" data-mini="true">Textarea</textarea>
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="select-native-7">Native select:</label>
                     <select name="select-native-7" id="select-native-7" data-mini="true">
                         <option value="small">One</option>
@@ -293,7 +293,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="select-multiple-7">Custom multiple select:</label>
                     <select multiple="multiple" data-native-menu="false" name="select-multiple-7" id="select-multiple-7" data-mini="true">
                         <option value="">Choices:</option>
@@ -305,7 +305,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, buttons:</legend>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
@@ -316,7 +316,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, buttons:</legend>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
@@ -327,7 +327,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, select:</legend>
                         <label for="select-v-7a">Select A</label>
@@ -353,7 +353,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, select:</legend>
                         <label for="select-h-7a">Select A</label>
@@ -379,7 +379,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, mixed:</legend>
                         <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
@@ -395,14 +395,14 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="slider-7">Slider:</label>
                     <input type="range" name="slider-7" id="slider-7" value="50" min="0" max="100" data-highlight="true" data-mini="true">
                 </div>
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="flip-7">Flip toggle:</label>
                     <select name="flip-7" id="flip-7" data-role="slider" data-mini="true">
                         <option value="off">Off</option>
@@ -412,7 +412,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Single checkbox:</legend>
                         <label for="checkbox-7">I agree</label>
@@ -422,7 +422,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, checkbox:</legend>
                         <input type="checkbox" name="checkbox-v-7a" id="checkbox-v-7a">
@@ -436,7 +436,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, radio:</legend>
                         <input type="radio" name="radio-choice-v-7" id="radio-choice-v-7a" value="on" checked="checked">
@@ -450,7 +450,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, checkbox:</legend>
                         <input type="checkbox" name="checkbox-h-7a" id="checkbox-h-7a">
@@ -464,7 +464,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, radio:</legend>
                         <input type="radio" name="radio-choice-h-7" id="radio-choice-h-7a" value="on" checked="checked">
@@ -478,7 +478,7 @@
             </div><!--/demo-html -->
 
             <div data-demo-html="true">
-                <div data-role="fieldcontain" class="ui-hide-label">
+                <div class="ui-field-contain ui-hide-label">
                     <label for="submit-7">Send:</label>
                     <button type="submit" id="submit-7" class="ui-shadow ui-btn ui-corner-all ui-mini">Submit</button>
                 </div>
