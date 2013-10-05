@@ -87,7 +87,7 @@
                 </div>
             </form>
 
-            <div data-role="fieldcontain">
+            <div class="ui-field-contain">
                 <label for="prepend">Add item</label>
                 <button id="prepend" data-mini="true" data-inline="true">Prepend</button>
                 <label for="append" class="ui-hidden-accessible">Action</label>
@@ -95,7 +95,7 @@
             </div>
 
             <form action="#" method="get">
-            	<div data-role="fieldcontain">
+            	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Widget type</legend>
     
@@ -110,7 +110,7 @@
                     </fieldset>
             	</div>
 
-            	<div data-role="fieldcontain">
+            	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Action<br><small>on click/change</small></legend>
     
@@ -125,7 +125,7 @@
                     </fieldset>
             	</div>
 
-            	<div data-role="fieldcontain">
+            	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Switch orientation</legend>
     

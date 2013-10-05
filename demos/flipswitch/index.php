@@ -122,7 +122,7 @@
 
                 <div data-demo-html="true">
 				<form>
-					<div data-role="fieldcontain">
+					<div class="ui-field-contain">
                         <label for="flip-6">Flip toggle switch:</label>
                         <select name="flip-6" id="flip-6" data-role="flipswitch">
                             <option value="off">Off</option>
@@ -136,7 +136,7 @@
 
                 <div data-demo-html="true">
 				<form>
-					<div data-role="fieldcontain">
+					<div class="ui-field-contain">
                         <label for="flip-7">Flip toggle switch:</label>
                         <select name="flip-7" id="flip-7" data-role="flipswitch" data-mini="true">
                             <option value="off">Off</option>

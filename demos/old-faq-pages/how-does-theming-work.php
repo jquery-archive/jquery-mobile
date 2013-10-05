@@ -112,7 +112,7 @@
 						<h3>Global "Active" state</h3>
 					<p>The jQuery Mobile framework uses a swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the individual swatch of the given widget. We apply this in navigation and form controls whenever there is a need to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it cannot be overridden via the markup; it is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
 
-						<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+						<fieldset data-role="controlgroup"  data-type="horizontal" class="ui-field-contain">
 					     	<legend>Active is used for the on state of these toggles:</legend>
 					         	<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked">
 					         	<label for="radio-choice-a">On</label>

@@ -71,7 +71,7 @@
 	<div data-role="content">
 
 		<form class="ui-mini">
-			<div data-role="fieldcontain" id="theme-selector">
+			<div class="ui-field-contain" id="theme-selector">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Theme:</legend>
 					<label for="a">A</label>
@@ -86,7 +86,7 @@
 					<input type="radio" name="theme" id="e">
 				</fieldset>
 			</div>
-			<div data-role="fieldcontain" id="opt-shadow">
+			<div class="ui-field-contain" id="opt-shadow">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Shadow:</legend>
 					<label for="on">On</label>
@@ -95,7 +95,7 @@
 					<input type="radio" name="shadow" id="off" checked>
 				</fieldset>
 			</div>
-			<div data-role="fieldcontain" id="opt-iconshadow">
+			<div class="ui-field-contain" id="opt-iconshadow">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Icon shadow:</legend>
 					<label for="on1">On</label>
@@ -104,7 +104,7 @@
 					<input type="radio" name="iconshadow" id="off1" checked>
 				</fieldset>
 			</div>
-			<div data-role="fieldcontain" id="opt-navbars">
+			<div class="ui-field-contain" id="opt-navbars">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Navbars:</legend>
 					<label for="show">Show</label>
@@ -168,26 +168,26 @@
 		</ul>
 		
 		<form>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<label for="name2">Text Input:</label>
 				<input type="text" name="name2" id="name2" value="" data-clear-btn="true">
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<label for="textarea2">Textarea:</label>
 				<textarea cols="40" rows="8" name="textarea2" id="textarea2"></textarea>
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<label for="flip2">Flip switch:</label>
 				<select name="flip2" id="flip2" data-role="flipswitch">
 					<option value="off">Off</option>
 					<option value="on">On</option>
 				</select>
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<label for="slider2">Slider:</label>
 				<input type="range" name="slider2" id="slider2" value="0" min="0" max="100" data-highlight="true">
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<fieldset data-role="controlgroup">
 					<legend>Checkbox:</legend>
 					<input type="checkbox" name="checkbox-v-1a" id="checkbox-v-1a">
@@ -198,7 +198,7 @@
 					<label for="checkbox-v-1c">Three</label>
 				</fieldset>
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<fieldset data-role="controlgroup">
 					<legend>Radio:</legend>
 					<input type="radio" name="radio-v-1" id="radio-v-1a" checked>
@@ -209,7 +209,7 @@
 					<label for="radio-v-1c">Three</label>
 				</fieldset>
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Controlgroup:</legend>
 					<button class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-right">One</button>
@@ -217,7 +217,7 @@
 					<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-right">Three</a>
 				</fieldset>
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<label for="select-choice-1" class="select">Custom select:</label>
 				<select name="select-choice-1" id="select-choice-1" data-native-menu="false" multiple="multiple">
 					<option value="standard">Standard: 7 day</option>
@@ -226,7 +226,7 @@
 					<option value="overnight">Overnight</option>
 				</select>
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<label for="submit-1">Send form:</label>
 				<input type="submit" id="submit-1" value="Send">
 			</div>
@@ -239,18 +239,18 @@
 		
 		<form>
 			<ul data-role="listview" data-inset="true">
-				<li data-role="fieldcontain">
+				<li class="ui-field-contain">
 					<label for="name3">Text Input:</label>
 					<input type="text" name="name3" id="name3" value="" data-clear-btn="true">
 				</li>
-				<li data-role="fieldcontain">
+				<li class="ui-field-contain">
 					<label for="flip3">Slider flip switch:</label>
 					<select name="flip3" id="flip3" data-role="slider">
 						<option value="off">Off</option>
 						<option value="on">On</option>
 					</select>
 				</li>
-				<li data-role="fieldcontain">
+				<li class="ui-field-contain">
 					<label for="slider3">Slider:</label>
 					<input type="range" name="slider3" id="slider3" value="0" min="0" max="100" data-highlight="true">
 				</li>
@@ -263,14 +263,14 @@
 				<label for="name4">Text Input:</label>
 				<input type="text" name="name4" id="name4" value="" data-clear-btn="true">
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<label for="flip4">Flip switch:</label>
 				<select name="flip4" id="flip4" data-role="slider">
 					<option value="off">Off</option>
 					<option value="on">On</option>
 				</select>
 			</div>
-			<div data-role="fieldcontain">
+			<div class="ui-field-contain">
 				<label for="slider4">Slider:</label>
 				<input type="range" name="slider4" id="slider4" value="0" min="0" max="100" data-highlight="true">
 			</div>
