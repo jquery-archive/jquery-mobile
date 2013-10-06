@@ -72,6 +72,8 @@
 
 	<div data-role="content">
 
+		<p><a href="theme-classic.css" target="_blank">Open the classic theme CSS file in a new tab</a></p>
+
 		<form class="ui-mini">
 			<div class="ui-field-contain" id="theme-selector">
 				<fieldset data-role="controlgroup" data-type="horizontal">
