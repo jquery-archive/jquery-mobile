@@ -12,19 +12,36 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<script>
-		$(function(){
-			$("[data-role='navbar']").navbar();
-			$("[data-role='header'], [data-role='footer']").toolbar();
+		$(function() {
+			$( "[data-role='navbar']" ).navbar();
+			$( "[data-role='header'], [data-role='footer']" ).toolbar();
+		});
+		// Update the contents of the toolbars
+		$( document ).on( "pageshow", "[data-role='page']", function() {
+			// Each of the four pages in this demo has a data-title attribute
+			// which value is equal to the text of the nav button
+			// For example, on first page: <div data-role="page" data-title="Info">
+			var current = $( this ).jqmData( "title" );
+			// Change the heading
+			$( "[data-role='header'] h1" ).text( current );
+			// Remove active class from nav buttons
+			$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
+			// Add active class to current nav button
+			$( "[data-role='navbar'] a" ).each(function() {
+				if ( $( this ).text() === current ) {
+					$( this ).addClass( "ui-btn-active" );
+				}
+			});
 		});
 	</script>
 </head>
 <body>
     <div data-role="header" data-position="fixed" data-theme="a">
 		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
-        <h1>Fixed external header</h1>
+        <h1>Info</h1>
     </div><!-- /header -->
 
-	<div data-role="page" class="jqm-demos">
+	<div data-role="page" data-title="Info" class="jqm-demos">
 
 	    <div data-role="content" class="jqm-content">
 
@@ -35,6 +52,12 @@
 			<p>With the new external toolbars no extra effort is required to now have persistant toolbars. Simply place them outside of the page container on each page they will be loaded on the first page and persist on subsequent pages. The toolbars still need to be placed on each page to account for refresh however they will be ignored if not within a page container.</p>
 
 			<p>Typically, the persistent toolbar technique will be combined with fixed positioning.</p>
+
+			<h2>Updating toolbar contents</h2>
+
+			<p>Because the same toolbar is used on every page, you might want to update the content. In this demo we show how to change the heading in the header and set the nav button of the page currently in view to the active state.</p>
+
+			<div data-demo-js="true"></div>
 
 			<h2>Improving page load with persistant toolbars</h2>
 
@@ -51,7 +74,7 @@
 	<div data-role="footer" data-position="fixed" data-theme="a">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
+				<li><a href="index.php" data-prefetch="true" data-transition="fade">Info</a></li>
 				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
 				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
 				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
