@@ -25,6 +25,10 @@
 	<div data-role="content" class="jqm-content">
     
     	<h1>Field containers</h1>
+
+    	<p>Add class <code>ui-field-contain</code> to a wrapper of a form widget and its <code>label</code>.</p>
+
+    	<p><strong>Note:</strong> <code>data-role="fieldcontain"</code> has been deprecated in 1.4 and will be removed in 1.5.<p>
     
         <form action="#" method="get">
     
