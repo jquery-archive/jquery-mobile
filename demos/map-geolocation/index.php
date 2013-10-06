@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Google Maps - jQuery Mobile Demos</title>
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<style>
 		#map-page, #map-canvas { width: 100%; height: 100%; padding: 0; }
 	</style>
