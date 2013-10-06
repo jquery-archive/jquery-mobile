@@ -12,19 +12,36 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<script>
-		$(function(){
-			$("[data-role='navbar']").navbar();
-			$("[data-role='header'], [data-role='footer']").toolbar();
+		$(function() {
+			$( "[data-role='navbar']" ).navbar();
+			$( "[data-role='header'], [data-role='footer']" ).toolbar();
+		});
+		// Update the contents of the toolbars
+		$( document ).on( "pageshow", "[data-role='page']", function() {
+			// Each of the four pages in this demo has a data-title attribute
+			// which value is equal to the text of the nav button
+			// For example, on first page: <div data-role="page" data-title="Info">
+			var current = $( this ).jqmData( "title" );
+			// Change the heading
+			$( "[data-role='header'] h1" ).text( current );
+			// Remove active class from nav buttons
+			$( "[data-role='navbar'] a.ui-btn-active" ).removeClass( "ui-btn-active" );
+			// Add active class to current nav button
+			$( "[data-role='navbar'] a" ).each(function() {
+				if ( $( this ).text() === current ) {
+					$( this ).addClass( "ui-btn-active" );
+				}
+			});
 		});
 	</script>
 </head>
 <body>
     <div data-role="header" data-position="fixed" data-theme="a">
 		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
-        <h1>Fixed external header</h1>
+        <h1>Albums</h1>
     </div><!-- /header -->
 
-<div data-role="page">
+<div data-role="page" data-title="Albums">
 
     <div data-role="content">
 
@@ -112,7 +129,7 @@
 	<div data-role="footer" data-position="fixed" data-theme="a">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
+				<li><a href="index.php" data-prefetch="true" data-transition="fade">Info</a></li>
 				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
 				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
 				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
