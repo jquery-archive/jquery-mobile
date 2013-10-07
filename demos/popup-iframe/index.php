@@ -119,15 +119,18 @@
 
             <p>Setting the size of the iframe is done exactly the same as for the video example, with one exception. You should also set the width and height of the div that contains the map to prevent the page to break on platforms like Android 2.3. In this example the ID of this div is <code>#map_canvas</code>.</p>
 
-		</div><!-- /content -->
+	</div><!-- /content -->
+
+	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-	<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-	<p>Copyright 2013 The jQuery Foundation</p>
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
+</div><!-- /page -->
+
 </body>
 </html>

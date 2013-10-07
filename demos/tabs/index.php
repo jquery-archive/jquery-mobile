@@ -73,15 +73,18 @@
 		    <h2>Tabbed page content</h2>
 		    <p>You can also use tabs to swap out an enitre pages content <a data-ajax="false" href="tabbed-content.php">Tabbed Content Pages</a></p>
 
-		</div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
-	</body>
-	</html>
+</div><!-- /page -->
+
+</body>
+</html>

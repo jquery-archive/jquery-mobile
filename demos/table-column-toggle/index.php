@@ -300,15 +300,18 @@
 	      <h2>Grouped column headers</h2>
 	      <p>It's fairly common to need to logically group multiple columns under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser.</p>
 
-		</div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
-	</body>
-	</html>
+</div><!-- /page -->
+
+</body>
+</html>

@@ -63,16 +63,18 @@
 		
 		<p>Note: This is a PHP demo that will only work on a server and not in a build (i.e. the demos that come with each release).</p>
 
-
 	</div><!-- /content -->
-	
+
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

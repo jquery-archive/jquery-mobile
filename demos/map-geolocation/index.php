@@ -86,26 +86,28 @@
 
         <div data-demo-html="#map-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
-    </div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
+</div><!-- /page -->
 
-	<div data-role="page" id="map-page">
-		<div data-role="header" data-theme="c">
-		<h1>Maps</h1>
-		</div>
-		
-		<div data-role="content" id="map-canvas">
-			<!-- map loads here... -->
-		</div>
+<div data-role="page" id="map-page">
+	<div data-role="header" data-theme="a">
+	<h1>Maps</h1>
 	</div>
 	
-	</body>
-	</html>
+	<div data-role="content" id="map-canvas">
+		<!-- map loads here... -->
+	</div>
+</div>
+
+</body>
+</html>

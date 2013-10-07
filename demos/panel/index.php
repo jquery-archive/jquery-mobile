@@ -179,12 +179,17 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		<h2>Panels outside pages</h2>
 
 		<p>As of 1.4 it is now possible to use panels outside of a page <a href="external.php">External Panels</a></p>
+
 	</div><!-- /content -->
+
+	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 	<!-- Here are a bunch of panels at the end, just before the close page tag  -->
 
@@ -249,7 +254,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 	</div><!-- /leftpanel3 -->
 
-<?php include( '../jqm-panels.php' ); ?>
 
 </div><!-- /page -->
 
