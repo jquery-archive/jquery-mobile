@@ -29,7 +29,7 @@
 
 			<h1>External toolbars</h1>
 
-			<p>The header and footer on this page are positioned outside the page. They are before and after the page withing the body. These Toolbars will remain in the dom until manually removed. If you navigate to a page that does not have a header or footer within it these toolbars will persist. Otherwise they will hide to allow the page's internal header and footer to show.</p>
+			<p>The header and footer on this page are positioned outside the page. They are before and after the page within the body. These Toolbars will remain in the dom until manually removed. If you navigate to a page that does not have a header or footer within it these toolbars will persist. Otherwise they will hide to allow the page's internal header and footer to show.</p>
 
 			<h2>Markup</h2>
 
