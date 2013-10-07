@@ -68,14 +68,16 @@
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
-    </div><!-- /content -->
+	</div><!-- /content -->
+
+	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
 
@@ -113,5 +115,6 @@
     </div><!-- /panel -->
 
 </div><!-- /page -->
+
 </body>
 </html>

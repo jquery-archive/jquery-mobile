@@ -112,15 +112,18 @@
 			<li><p>Some external applications (notably Facebook's OAuth implementation) modify their response URL in such a way that interferes with jQuery Mobile. In particular, Facebook appends <code>#_=_</code> to the end of the callback. Currently the best solution for this is to remove it from the location hash before jQuery Mobile loads using something like: <code>if (window.location.hash == "#_=_") window.location.hash = ""; </code>. jQuery Mobile can then process &amp; enhance the page properly.</p></li>
 			</ul>
 
-		</div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
-	</body>
-	</html>
+</div><!-- /page -->
+
+</body>
+</html>

@@ -50,16 +50,20 @@ $( function() {
 		<div data-demo-html="#popup-outside-page,#other-page,#third-page" data-demo-js="#popup-outside-page-script">
 			<a href="#popup-outside-page" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Menu</a>
 		</div>
+
 	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 <div id="other-page" data-role="page">
 	<div data-role="header">
 		<a href="#popup-outside-page" data-rel="popup">Menu</a>

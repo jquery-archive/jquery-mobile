@@ -494,15 +494,18 @@
             <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-state-disabled ui-icon-arrow-r ui-btn-icon-right ui-mini">Link button</a>
         </div><!--/demo-html -->
     
-    </div><!-- /content -->
+	</div><!-- /content -->
 
-    <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-        <p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-        <p>Copyright 2013 The jQuery Foundation</p>
-    </div><!-- /footer -->
+	<?php include( '../jqm-navmenu.php' ); ?>
 
-<?php include( '../jqm-panels.php' ); ?>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

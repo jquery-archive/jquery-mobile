@@ -143,15 +143,18 @@
 
 		<p>The <a href="backbone-require.html" rel="external">example page</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously. Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.</p>
 
-	</div><!-- /content -->
+    </div><!-- /content -->
+
+    <?php include( '../jqm-navmenu.php' ); ?>
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
         <p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
         <p>Copyright 2013 The jQuery Foundation</p>
     </div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>
