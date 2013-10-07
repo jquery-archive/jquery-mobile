@@ -315,10 +315,20 @@ define( [
 
 			var link = findClosestLink( event.target ),
 				$link = $( link ),
-				httpCleanup,
+
+				//remove active link class if external (then it won't be there if you come back)
+				httpCleanup = function() {
+					window.setTimeout(function() { $.mobile.removeActiveLinkClass( true ); }, 200 );
+				},
 				baseUrl, href,
 				useDefaultUrlHandling, isExternal,
 				transition, reverse, role;
+
+			// If a button was clicked, clean up the active class added by vclick above
+			if ( $.mobile.activeClickedLink &&
+				$.mobile.activeClickedLink[ 0 ] === event.target.parentNode ) {
+				httpCleanup();
+			}
 
 			// If there is no link associated with the click or its not a left
 			// click we want to ignore the click
@@ -327,11 +337,6 @@ define( [
 			if ( !link || event.which > 1 || !$link.jqmHijackable().length ) {
 				return;
 			}
-
-			//remove active link class if external (then it won't be there if you come back)
-			httpCleanup = function() {
-				window.setTimeout(function() { $.mobile.removeActiveLinkClass( true ); }, 200 );
-			};
 
 			//if there's a data-rel=back attr, go back in history
 			if ( $link.is( ":jqmData(rel='back')" ) ) {
