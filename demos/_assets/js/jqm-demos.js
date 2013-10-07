@@ -66,13 +66,6 @@ $( document ).on( "pagecreate", function() {
 	$( ".jqm-version" ).html( text );
 });
 
-$( document ).on( "pagebeforecreate", ".jqm-demos", function() {
-	$( ".jqm-navmenu-panel .jqm-navmenu-list" )
-		.clone()
-		.insertAfter( ".jqm-header" )
-		.wrap( "<div class='jqm-navmenu ui-content'></div>" );
-});
-
 $( document ).on( "pagecreate", ".jqm-demos", function() {
 	var page = $( this );
 

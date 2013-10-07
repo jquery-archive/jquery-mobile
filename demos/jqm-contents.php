@@ -1,4 +1,4 @@
-<ul data-role="listview" data-icon="false" class="jqm-list jqm-navmenu-list">
+<ul data-role="listview" data-icon="false" class="jqm-list">
 	<li><a href="./">Home</a></li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
 		<h3>Getting started</h3>
