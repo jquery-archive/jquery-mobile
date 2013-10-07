@@ -209,38 +209,23 @@
 }
 
 /* Navmenu */
-/* Target navmenu panel only to not affect panel demos */
-.jqm-demos .jqm-navmenu.ui-content {
-	display: none;
-}
-.ui-panel-display-reveal {
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-}
-.jqm-demos .ui-panel-page-content-position-left.ui-panel-page-content-display-reveal {
-	-webkit-box-shadow: -5px 0 5px rgba(0,0,0,.10);
-	-moz-box-shadow: -5px 0 5px rgba(0,0,0,.10);
-	box-shadow: -5px 0 5px rgba(0,0,0,.10);
-}
-
-.jqm-navmenu .ui-listview > li .ui-collapsible-heading {
+.jqm-navmenu-panel .ui-listview > li .ui-collapsible-heading {
 	margin: 0;
 }
-.jqm-navmenu .ui-collapsible.ui-li-static {
+.jqm-navmenu-panel .ui-collapsible.ui-li-static {
 	padding: 0;
 	border: none !important;
 }
-.jqm-navmenu .ui-collapsible + li> .ui-btn,
-.jqm-navmenu .ui-collapsible + .ui-collapsible > .ui-collapsible-heading > .ui-btn,
-.jqm-navmenu > .ui-listview > li.ui-first-child .ui-btn {
+.jqm-navmenu-panel .ui-collapsible + li> .ui-btn,
+.jqm-navmenu-panel .ui-collapsible + .ui-collapsible > .ui-collapsible-heading > .ui-btn,
+.jqm-navmenu-panel .ui-panel-inner > .ui-listview > li.ui-first-child .ui-btn {
 	border-top: none !important;
 }
-.jqm-navmenu .ui-listview .ui-listview .ui-btn {
+.jqm-navmenu-panel .ui-listview .ui-listview .ui-btn {
 	padding-left: 2em;
 	color: #999;
 }
-.jqm-navmenu .ui-listview .ui-listview .ui-btn:after {
+.jqm-navmenu-panel .ui-listview .ui-listview .ui-btn:after {
 	opacity: .4;
 	filter: Alpha(Opacity=40);
 }
@@ -277,38 +262,46 @@
 		float: left;
 		margin: 1.25em 1.25em 1.25em 3%;
 	}
-	.jqm-demos .jqm-navmenu.ui-content {
-		display: block;
+	.jqm-demos .jqm-navmenu-panel {
+		visibility: visible;
+		position: relative;
+		left: 0;
 		float: left;
 		width: 25%;
+		background: none;
+		-webkit-transform: none !important;
+		-moz-transform: none !important;
+		transform: none !important;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+	.jqm-demos .jqm-navmenu-panel .ui-panel-inner {
 		margin-top: 3em;
 		margin-bottom: 3em;
-		-webkit-box-sizing: border-box;
-		-moz_box-sizing: border-box;
-		box-sizing: border-box;
 	}
-	.jqm-demos .jqm-navmenu.ui-content + .jqm-content {
+	.jqm-demos .jqm-content {
 		width: 67%;
 		padding-left: 5%;
 		padding-right: 3%;
 		float: right;
 	}
-	.jqm-navmenu .ui-listview .ui-btn {
+	.jqm-navmenu-panel .ui-listview .ui-btn {
 		padding-left: 12.5%;
 	}
-	.jqm-navmenu .ui-listview .ui-listview .ui-btn {
+	.jqm-navmenu-panel .ui-listview .ui-listview .ui-btn {
 		padding-left: 17.5%;
 	}
-	.jqm-navmenu .ui-collapsible,
-	.jqm-navmenu .ui-collapsible-content,
-	.jqm-navmenu .ui-btn {
+	.jqm-navmenu-panel .ui-collapsible,
+	.jqm-navmenu-panel .ui-collapsible-content,
+	.jqm-navmenu-panel .ui-btn {
 		background: none !important;
 	}
-	.jqm-navmenu .ui-btn {
+	.jqm-navmenu-panel .ui-btn {
 		color: #333 !important;
 	}
-	.jqm-navmenu .ui-btn:hover,
-	.jqm-navmenu .ui-btn:active {
+	.jqm-navmenu-panel .ui-btn:hover,
+	.jqm-navmenu-panel .ui-btn:active {
 		color: #000 !important;
 	}
 
