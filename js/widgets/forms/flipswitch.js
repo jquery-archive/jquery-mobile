@@ -5,7 +5,12 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.flipswitch.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", "../../jquery.mobile.zoom", "./reset" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../../jquery.mobile.core",
+	"../../jquery.mobile.widget",
+	"../../jquery.mobile.zoom",
+	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -31,6 +36,8 @@ $.widget( "mobile.flipswitch", $.extend({
 					type: this.element.get( 0 ).tagName
 				});
 			}
+
+			this._handleFormReset();
 
 			if ( this.element.is( ":disabled" ) ) {
 				this._setOptions({
@@ -62,8 +69,9 @@ $.widget( "mobile.flipswitch", $.extend({
 		if ( this.type === "SELECT" ) {
 			this.element.get( 0 ).selectedIndex = 0;
 		} else {
-			this.element.prop( "checked", true );
+			this.element.prop( "checked", false );
 		}
+		this.element.trigger( "change" );
 	},
 
 	_right: function() {
@@ -71,26 +79,48 @@ $.widget( "mobile.flipswitch", $.extend({
 		if ( this.type === "SELECT" ) {
 			this.element.get( 0 ).selectedIndex = 1;
 		} else {
-			this.element.prop( "checked", false );
+			this.element.prop( "checked", true );
 		}
+		this.element.trigger( "change" );
 	},
 
 	_enhance: function() {
 		var flipswitch = $( "<div>" ),
-			theme = this.options.theme ? this.options.theme : "inherit",
-			on = $( "<span tabindex='1'></span>" ),
+			options = this.options,
+			element = this.element,
+			theme = options.theme ? options.theme : "inherit",
+			on = $( "<span></span>", { tabindex: 1 } ),
 			off = $( "<span></span>" ),
-			type = this.element.get( 0 ).tagName,
-			onText = ( type === "INPUT" ) ? this.options.onText : this.element.find( "option" ).eq( 1 ).text(),
-			offText = ( type === "INPUT" ) ? this.options.offText : this.element.find( "option" ).eq( 0 ).text();
+			type = element.get( 0 ).tagName,
+			onText = ( type === "INPUT" ) ?
+				options.onText : element.find( "option" ).eq( 1 ).text(),
+			offText = ( type === "INPUT" ) ?
+				options.offText : element.find( "option" ).eq( 0 ).text();
 
-			on.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" ).text( onText );
-			off.addClass( "ui-flipswitch-off" ).text( offText );
+			on
+				.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" )
+				.text( onText );
+			off
+				.addClass( "ui-flipswitch-off" )
+				.text( offText );
 
-			flipswitch.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all ui-bar-" + theme + " " + ( this.options.wrapperClass ? this.options.wrapperClass : "" ) + " " + ( ( this.element.is( ":checked" ) || this.element.find("option").eq(1).is(":selected") ) ? "ui-flipswitch-active" : "" ) + ( this.element.is(":disabled") ? " ui-state-disabled": "") + ( this.options.mini ? " ui-mini": "" ) ).append( on, off );
+			flipswitch
+				.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all " +
+					"ui-bar-" + theme + " " +
+					( options.wrapperClass ? options.wrapperClass : "" ) + " " +
+					( ( element.is( ":checked" ) ||
+						element
+							.find( "option" )
+							.eq( 1 )
+							.is( ":selected" ) ) ? "ui-flipswitch-active" : "" ) +
+					( element.is(":disabled") ? " ui-state-disabled": "") +
+					( options.mini ? " ui-mini": "" ) )
+				.append( on, off );
 
-			this.element.addClass( "ui-flipswitch-input" );
-			this.element.after( flipswitch ).appendTo( flipswitch );
+			element
+				.addClass( "ui-flipswitch-input" )
+				.after( flipswitch )
+				.appendTo( flipswitch );
 
 		$.extend( this, {
 			flipswitch: flipswitch,
@@ -100,22 +130,29 @@ $.widget( "mobile.flipswitch", $.extend({
 		});
 	},
 
+	_reset: function() {
+		this.refresh();
+	},
 
 	refresh: function() {
-		var direction;
+		var direction,
+			existingDirection = this.flipswitch.hasClass( "ui-flipswitch-active" ) ? "_right" : "_left";
 
 		if ( this.type === "SELECT" ) {
-			direction = ( this.element.get( 0 ).selectedIndex > 0 )? "_right": "_left";
+			direction = ( this.element.get( 0 ).selectedIndex > 0 ) ? "_right": "_left";
 		} else {
-			direction = this.element.is( ":checked" )? "_right": "_left";
+			direction = this.element.prop( "checked" ) ? "_right": "_left";
 		}
-		this[ direction ]();
+
+		if ( direction !== existingDirection ) {
+			this[ direction ]();
+		}
 	},
 
 	_toggle: function() {
 		var direction = this.flipswitch.hasClass( "ui-flipswitch-active" ) ? "_left" : "_right";
 
-		this[direction]();
+		this[ direction ]();
 	},
 
 	_keydown: function( e ) {
