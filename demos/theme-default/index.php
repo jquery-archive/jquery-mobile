@@ -50,6 +50,9 @@
 			-moz-box-shadow: none !important;
 			box-shadow: none !important;
 		}
+		form.ui-mini .ui-field-contain fieldset.ui-controlgroup legend small {
+			color: #666;
+		}
 	</style>
 </head>
 <body>
@@ -80,24 +83,6 @@
 					<input type="radio" name="theme" id="b">
 				</fieldset>
 			</div>
-			<div class="ui-field-contain" id="opt-shadow">
-				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Shadow:</legend>
-					<label for="on">On</label>
-					<input type="radio" name="shadow" id="on">
-					<label for="off">Off</label>
-					<input type="radio" name="shadow" id="off" checked>
-				</fieldset>
-			</div>
-			<div class="ui-field-contain" id="opt-iconshadow">
-				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Icon shadow:</legend>
-					<label for="on1">On</label>
-					<input type="radio" name="iconshadow" id="on1">
-					<label for="off1">Off</label>
-					<input type="radio" name="iconshadow" id="off1" checked>
-				</fieldset>
-			</div>
 			<div class="ui-field-contain" id="opt-navbars">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Navbars:</legend>
@@ -105,6 +90,24 @@
 					<input type="radio" name="navbars" id="show" checked>
 					<label for="hide">Hide</label>
 					<input type="radio" name="navbars" id="hide">
+				</fieldset>
+			</div>
+			<div class="ui-field-contain" id="opt-shadow">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Shadow:<br><small>Off: set the widget option shadow to false (data-shadow="false")</small></legend>
+					<label for="on">On</label>
+					<input type="radio" name="shadow" id="on" checked>
+					<label for="off">Off</label>
+					<input type="radio" name="shadow" id="off">
+				</fieldset>
+			</div>
+			<div class="ui-field-contain" id="opt-iconshadow">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Icon shadow:<br><small>On: add class ui-shadow-icon to the button or its container</small></legend>
+					<label for="on1">On</label>
+					<input type="radio" name="iconshadow" id="on1">
+					<label for="off1">Off</label>
+					<input type="radio" name="iconshadow" id="off1" checked>
 				</fieldset>
 			</div>
 		</form>
