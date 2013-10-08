@@ -19,6 +19,15 @@
 				$( ".ui-collapsible-content" ).removeClass( "ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e" ).addClass( "ui-body-" + themeClass );
 				$( ".theme" ).text( themeClass );
 			});
+			$( "#opt-navbars input" ).on( "change", function( event ) {
+				if ( $( "#show" ).prop( "checked" ) ) {
+					$( "#testpage .ui-navbar" ).show();
+					$( "#testpage .ui-footer h4" ).hide();
+				} else if ( $( "#hide" ).prop( "checked" ) ) {
+					$( "#testpage .ui-navbar" ).hide();
+					$( "#testpage .ui-footer h4" ).show();
+				}
+			});
 			$( "#opt-shadow input" ).on( "change", function( event ) {
 				if ( $( "#on" ).prop( "checked" ) ) {
 					$( "#testpage" ).removeClass( "noshadow" );
@@ -33,13 +42,18 @@
 					$( "#testpage" ).addClass( "ui-shadow-icon" );
 				}
 			});
-			$( "#opt-navbars input" ).on( "change", function( event ) {
-				if ( $( "#show" ).prop( "checked" ) ) {
-					$( "#testpage .ui-navbar" ).show();
-					$( "#testpage .ui-footer h4" ).hide();
-				} else if ( $( "#hide" ).prop( "checked" ) ) {
-					$( "#testpage .ui-navbar" ).hide();
-					$( "#testpage .ui-footer h4" ).show();
+			$( "#opt-gradient input" ).on( "change", function( event ) {
+				if ( $( "#off2" ).prop( "checked" ) ) {
+					$( "#testpage" ).addClass( "nogradient" );
+				} else if ( $( "#on2" ).prop( "checked" ) ) {
+					$( "#testpage" ).removeClass( "nogradient" );
+				}
+			});
+			$( "#opt-highlight input" ).on( "change", function( event ) {
+				if ( $( "#off3" ).prop( "checked" ) ) {
+					$( "#testpage" ).addClass( "nohighlight" );
+				} else if ( $( "#on3" ).prop( "checked" ) ) {
+					$( "#testpage" ).removeClass( "nohighlight" );
 				}
 			});
 		});
@@ -49,6 +63,16 @@
 			-webkit-box-shadow: none !important;
 			-moz-box-shadow: none !important;
 			box-shadow: none !important;
+		}
+		.nogradient,
+		.nogradient * {
+			background-image: none !important;
+		}
+		.nohighlight .ui-btn:before {
+			display: none !important;
+		}
+		form.ui-mini .ui-field-contain fieldset.ui-controlgroup legend small {
+			color: #666;
 		}
 	</style>
 </head>
@@ -88,24 +112,6 @@
 					<input type="radio" name="theme" id="e">
 				</fieldset>
 			</div>
-			<div class="ui-field-contain" id="opt-shadow">
-				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Shadow:</legend>
-					<label for="on">On</label>
-					<input type="radio" name="shadow" id="on">
-					<label for="off">Off</label>
-					<input type="radio" name="shadow" id="off" checked>
-				</fieldset>
-			</div>
-			<div class="ui-field-contain" id="opt-iconshadow">
-				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Icon shadow:</legend>
-					<label for="on1">On</label>
-					<input type="radio" name="iconshadow" id="on1">
-					<label for="off1">Off</label>
-					<input type="radio" name="iconshadow" id="off1" checked>
-				</fieldset>
-			</div>
 			<div class="ui-field-contain" id="opt-navbars">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Navbars:</legend>
@@ -113,6 +119,42 @@
 					<input type="radio" name="navbars" id="show" checked>
 					<label for="hide">Hide</label>
 					<input type="radio" name="navbars" id="hide">
+				</fieldset>
+			</div>
+			<div class="ui-field-contain" id="opt-shadow">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Shadow:<br><small>Off: set the widget option shadow to false (data-shadow="false")</small></legend>
+					<label for="on">On</label>
+					<input type="radio" name="shadow" id="on" checked>
+					<label for="off">Off</label>
+					<input type="radio" name="shadow" id="off">
+				</fieldset>
+			</div>
+			<div class="ui-field-contain" id="opt-iconshadow">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Icon shadow:<br><small>On: add class ui-shadow-icon to the button or its container</small></legend>
+					<label for="on1">On</label>
+					<input type="radio" name="iconshadow" id="on1">
+					<label for="off1">Off</label>
+					<input type="radio" name="iconshadow" id="off1" checked>
+				</fieldset>
+			</div>
+			<div class="ui-field-contain" id="opt-gradient">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Gradient:<br><small>Off: remove background-image rules from classic theme CSS</small></legend>
+					<label for="on2">On</label>
+					<input type="radio" name="gradient" id="on2" checked>
+					<label for="off2">Off</label>
+					<input type="radio" name="gradient" id="off2">
+				</fieldset>
+			</div>
+			<div class="ui-field-contain" id="opt-highlight">
+				<fieldset data-role="controlgroup" data-type="horizontal">
+					<legend>Highlight:<br><small>Off: remove .ui-btn:before rule from classic theme CSS</small></legend>
+					<label for="on3">On</label>
+					<input type="radio" name="highlight" id="on3" checked>
+					<label for="off3">Off</label>
+					<input type="radio" name="highlight" id="off3">
 				</fieldset>
 			</div>
 		</form>
