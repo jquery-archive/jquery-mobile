@@ -22,6 +22,7 @@ $.widget( "mobile.flipswitch", $.extend({
 		theme: null,
 		enhanced: false,
 		wrapperClass: null,
+		corners: true,
 		mini: false
 	},
 
@@ -105,7 +106,7 @@ $.widget( "mobile.flipswitch", $.extend({
 				.text( offText );
 
 			flipswitch
-				.addClass( "ui-flipswitch ui-shadow-inset ui-corner-all " +
+				.addClass( "ui-flipswitch ui-shadow-inset " +
 					"ui-bar-" + theme + " " +
 					( options.wrapperClass ? options.wrapperClass : "" ) + " " +
 					( ( element.is( ":checked" ) ||
@@ -114,6 +115,7 @@ $.widget( "mobile.flipswitch", $.extend({
 							.eq( 1 )
 							.is( ":selected" ) ) ? "ui-flipswitch-active" : "" ) +
 					( element.is(":disabled") ? " ui-state-disabled": "") +
+					( options.corners ? " ui-corner-all": "" ) +
 					( options.mini ? " ui-mini": "" ) )
 				.append( on, off );
 
@@ -186,6 +188,9 @@ $.widget( "mobile.flipswitch", $.extend({
 		}
 		if ( options.mini !== undefined ) {
 			this.widget().toggleClass( "ui-mini", options.mini );
+		}
+		if ( options.corners !== undefined ) {
+			this.widget().toggleClass( "ui-corner-all", options.corners );
 		}
 
 		this._super( options );
