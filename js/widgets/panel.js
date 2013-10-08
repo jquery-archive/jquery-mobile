@@ -108,7 +108,7 @@ $.widget( "mobile.panel", {
 		var wrapper = this._page().find( "." + this.options.classes.pageWrapper );
 
 		if ( wrapper.length === 0 ) {
-			wrapper = this._page().children( ".ui-header:not(:jqmData(position='fixed')), .ui-content:not(:jqmData(role='popup')), .ui-footer:not(:jqmData(position='fixed'))" )
+			wrapper = this._page().children( ".ui-header:not(.ui-header-fixed), .ui-content:not(.ui-popup), .ui-footer:not(.ui-footer-fixed)" )
 				.wrapAll( "<div class='" + this.options.classes.pageWrapper + "'></div>" )
 				.parent();
 		}
@@ -117,8 +117,8 @@ $.widget( "mobile.panel", {
 	},
 	
 	_getFixedToolbars: function() {
-		var extFixedToolbars = $( "body" ).children( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ),
-			intFixedToolbars = this._page().find( ".ui-header:jqmData(position='fixed'), .ui-footer:jqmData(position='fixed')" ),
+		var extFixedToolbars = $( "body" ).children( ".ui-header-fixed, .ui-footer-fixed" ),
+			intFixedToolbars = this._page().find( ".ui-header-fixed, .ui-footer-fixed" ),
 			fixedToolbars = extFixedToolbars.add( intFixedToolbars ).addClass( this.options.classes.pageFixedToolbar );
 
 		return fixedToolbars;
