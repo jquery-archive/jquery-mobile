@@ -23,8 +23,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -54,16 +54,16 @@
 </code>
 
 			<div>
-			<a href="dialog.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="slidedown">data-transition="slidedown"</a>
-			<a href="dialog.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="flip">data-transition="flip"</a>
+			<a href="dialog.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="slidedown">data-transition="slidedown"</a>
+			<a href="dialog.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="flip">data-transition="flip"</a>
 			</div>
 
 		<h2>Closing dialogs</h2>
 		<p>When any link is clicked within a dialog, the framework will automatically close the dialog and transition to the requested page, just as if the dialog were a normal page. Nevertheless, dialogs can also be chained, as explained below under <strong>"Chaining Dialogs"</strong>. Similarly, a link that opens a popup will also leave the dialog in place.</p>
 
             <p>If the dialog has a header the framework will add a close button at the left side of the header. You can change the position by adding <code>data-close-btn="right"</code> to the dialog container. If you don't want a close button in the header or if you want to add a custom close button, you can use <code>data-close-btn="none"</code>.</p>
-			<a href="dialog-rightclosebtn.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Right close button</a>
-			<a href="dialog-noclosebtn.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">No close button</a>
+			<a href="dialog-rightclosebtn.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Right close button</a>
+			<a href="dialog-noclosebtn.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">No close button</a>
 
 		<p>To create a "cancel" button in a dialog, just link to the page that triggered the dialog to open and add the <code>data-rel="back"</code> attribute to your link. This pattern of linking to the previous page is also usable in non-JS devices as well.</p>
 		<p>For JavaScript-generated links, you can simply set the href attribute to "#" and use the <code>data-rel="back"</code> attribute.</p>
@@ -79,16 +79,16 @@
 
 		<h2>Styling &amp; theming</h2>
 		<p>Dialogs can be styled with different theme swatches, just like any page by adding <code>data-theme</code> attributes to the header, content, or footer containers. Here is an example of a different dialog design:</p>
-				<a href="dialog-alt.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">An alternate color scheme</a>
+				<a href="dialog-alt.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">An alternate color scheme</a>
 
 		<p>By default dialogs have rounded corners. The option <code>corners</code> can be set to <code>false</code> by adding <code>data-corners="false"</code> to the dialog container:</p>
-				<a href="dialog-corners.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">No rounded corners</a>
+				<a href="dialog-corners.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">No rounded corners</a>
 
 		<p>Dialogs appear to be floating above an overlay layer. This overlay adopts the swatch "a" content color by default, but the <code>data-overlay-theme</code> attribute can be added to the page wrapper to set the overlay to any swatch letter. Here is an example of a dialog with the overlay set to swatch "e":</p>
-				<a href="dialog-overlay.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Custom overlay swatch</a>
+				<a href="dialog-overlay.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Custom overlay swatch</a>
 
 		<p>Dialogs can also be used more like a control sheet to offer multiple buttons if you simply remove the top margin from the dialog's inner container element. For example, if your dialog page had a class of <code>my-dialog</code>, you could add this CSS to pin that dialog to the top: <code>.ui-dialog.my-dialog .ui-dialog-contain { margin-top: 0 }</code>, or you could just apply that style to all dialogs with <code>.ui-dialog .ui-dialog-contain { margin-top: 0 }</code>.</p>
-						<a href="dialog-buttons.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="slidedown">Share photos...</a>
+						<a href="dialog-buttons.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="slidedown">Share photos...</a>
 
 		<h2>Dialog width and margins</h2>
 		<p>For the sake of readability, dialogs have a default <code>width</code> of 92.5% and a <code>max-width</code> of 500 pixels. There is also a 10% top <code>margin</code> to give dialogs larger top margin on larger screens, but collapse to a small margin on smartphones. The dialog's inner container is shifted towards the <code>top</code> with 15px to hide the corner styling if a dialog is used as a control sheet (see above). To override these styles, add the following CSS override rule to your stylesheet and tweak as needed:</p>

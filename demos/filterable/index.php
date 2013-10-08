@@ -18,8 +18,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -102,11 +102,11 @@
 					<input data-type="search" id="filterControlgroup-input"></input>
 				</form>
 				<div data-role="controlgroup" data-filter="true" data-input="#filterControlgroup-input">
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Button 1</a>
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Button 2</a>
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button" data-filtertext="some text">Button 3</a>
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Button 4</a>
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Button 5</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 1</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 2</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all" data-filtertext="some text">Button 3</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 4</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 5</a>
 				</div>
 			</div>
 
@@ -261,9 +261,9 @@
 				data-input="#pre-rendered-example-input"
 				class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
 				<div class="ui-controlgroup-controls">
-					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden" role="button">Acura</a>
-					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-first-child ui-shadow ui-last-child" role="button">Renault</a>
-					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden" role="button">Hyundai</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden">Acura</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-first-child ui-shadow ui-last-child">Renault</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden">Hyundai</a>
 				</div>
 			</div>
 		</form>

@@ -24,8 +24,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -39,21 +39,21 @@
 		<h2>Basic markup</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn">Anchor</a>
+			<a href="#" class="ui-btn">Anchor</a>
 			<button class="ui-btn">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Corners</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-corner-all">Anchor</a>
+			<a href="#" class="ui-btn ui-corner-all">Anchor</a>
 			<button class="ui-btn ui-corner-all">Button</button>
 		</div><!--/demo-html -->
 		
 		<p>Icon-only buttons are round by default. Here we show how you can set the same border-radius as other buttons.</p>
 		
 		<div data-demo-html="true" data-demo-css="true">
-			<a href="#" role="button" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all">No text</a>
+			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all">No text</a>
 			<div id="custom-border-radius">
 				<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all">No text</a>
 			</div>
@@ -62,23 +62,23 @@
 		<h2>Shadow</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-shadow">Anchor</a>
+			<a href="#" class="ui-btn ui-shadow">Anchor</a>
 			<button class="ui-btn ui-shadow">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Inline</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-btn-inline">Anchor</a>
+			<a href="#" class="ui-btn ui-btn-inline">Anchor</a>
 			<button class="ui-btn ui-btn-inline">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Theme</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn">Anchor - Inherit</a>
-			<a href="#" role="button" class="ui-btn ui-btn-a">Anchor - Theme swatch A</a>
-			<a href="#" role="button" class="ui-btn ui-btn-b">Anchor - Theme swatch B</a>
+			<a href="#" class="ui-btn">Anchor - Inherit</a>
+			<a href="#" class="ui-btn ui-btn-a">Anchor - Theme swatch A</a>
+			<a href="#" class="ui-btn ui-btn-b">Anchor - Theme swatch B</a>
 			<button class="ui-btn">Button - Inherit</button>
 			<button class="ui-btn ui-btn-a">Button - Theme swatch A</button>
 			<button class="ui-btn ui-btn-b">Button - Theme swatch B</button>
@@ -87,41 +87,41 @@
 		<h2>Mini</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-mini">Anchor</a>
+			<a href="#" class="ui-btn ui-mini">Anchor</a>
 			<button class="ui-btn ui-mini">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Icons</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-icon-delete ui-btn-icon-left">Anchor</a>
+			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left">Anchor</a>
 			<button class="ui-btn ui-icon-delete ui-btn-icon-left">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Icon position</h2>
 		
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-icon-delete ui-btn-icon-left">Left</a>
-			<a href="#" role="button" class="ui-btn ui-icon-delete ui-btn-icon-right">Right</a>
-			<a href="#" role="button" class="ui-btn ui-icon-delete ui-btn-icon-top">Top</a>
-			<a href="#" role="button" class="ui-btn ui-icon-delete ui-btn-icon-bottom">Bottom</a>
-			<a href="#" role="button" class="ui-btn ui-icon-delete ui-btn-icon-notext">Icon only</a>
+			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left">Left</a>
+			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-right">Right</a>
+			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-top">Top</a>
+			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-bottom">Bottom</a>
+			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext">Icon only</a>
 		</div><!--/demo-html -->
 		
 		<p>Inline:</p>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left">Left</a>
-			<a href="#" role="button" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right">Right</a>
-			<a href="#" role="button" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-top">Top</a>
-			<a href="#" role="button" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-bottom">Bottom</a>
-			<a href="#" role="button" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-notext">Icon only</a>
+			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left">Left</a>
+			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right">Right</a>
+			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-top">Top</a>
+			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-bottom">Bottom</a>
+			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-notext">Icon only</a>
 		</div><!--/demo-html -->
 
 		<h2>Icon shadow</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-icon-delete ui-btn-icon-left ui-shadow-icon">Anchor</a>
+			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left ui-shadow-icon">Anchor</a>
 			<p>Theme B:</p>
 			<button class="ui-btn ui-icon-delete ui-btn-icon-left ui-shadow-icon ui-btn-b">Button</button>
 		</div><!--/demo-html -->
@@ -129,7 +129,7 @@
 		<h2>Disabled</h2>
 
 		<div data-demo-html="true">
-			<a href="#" role="button" class="ui-btn ui-state-disabled">Disabled anchor via class</a>
+			<a href="#" class="ui-btn ui-state-disabled">Disabled anchor via class</a>
 			<button disabled>Button with disabled attribute</button>
 		</div><!--/demo-html -->
 
