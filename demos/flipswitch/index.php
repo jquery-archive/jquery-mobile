@@ -94,6 +94,18 @@
 				</form>
                 </div><!-- /demo-html -->
 
+                <h2>No corners</h2>
+
+                <div data-demo-html="true">
+				<form>
+                    <label for="flip-8">Flip toggle switch:</label>
+                    <select name="flip-8" id="flip-8" data-role="flipswitch" data-corners="false">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+				</form>
+                </div><!-- /demo-html -->
+
                 <h2>Disabled</h2>
 
                 <div data-demo-html="true">
