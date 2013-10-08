@@ -24,7 +24,8 @@
 				"widgets/forms/checkboxradio",
 				"widgets/forms/select",
 				"widgets/forms/slider",
-				"widgets/forms/textinput"
+				"widgets/forms/textinput",
+				"widgets/forms/flipswitch"
 			],
 			[ "jquery.mobile.init" ],
 			[
@@ -85,6 +86,11 @@
 					<label for="testRange">Test Range</label>
 					<input id="testRange" type="range" min="0" max="100" value="42"></input>
 				</div>
+				<input type="checkbox" id="checkbox-based-flipswitch" data-nstest-role="flipswitch"></input>
+				<select id="select-based-flipswitch" data-nstest-role="flipswitch">
+					<option name="op1">Option 1</option>
+					<option name="op2">Option 2</option>
+				</select>
 				<button id="reset" type="reset" value="Test Reset"></button>
 			</form>
 			<a href="#startPage" id="goToStartPage">Go</a>
