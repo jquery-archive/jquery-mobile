@@ -18,8 +18,8 @@
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p>Demos <span class="jqm-version"></span></p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
@@ -80,7 +80,7 @@
                         <legend>Vertical controlgroup, buttons:</legend>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
                         <input type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -91,7 +91,7 @@
                         <legend>Horizontal controlgroup, buttons:</legend>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
                         <input type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -152,7 +152,7 @@
                 <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, mixed:</legend>
-                        <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext">Button</button>
                         <label for="select-v-3e">Select</label>
                         <select name="select-v-3e" id="select-v-3e">
@@ -310,7 +310,7 @@
                         <legend>Vertical controlgroup, buttons:</legend>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
                         <input type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -321,7 +321,7 @@
                         <legend>Horizontal controlgroup, buttons:</legend>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
                         <input type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -382,7 +382,7 @@
                 <div class="ui-field-contain ui-hide-label">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, mixed:</legend>
-                        <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
+                        <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
                         <button class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext">Button</button>
                         <label for="select-v-7e">Select</label>
                         <select name="select-v-7e" id="select-v-7e">

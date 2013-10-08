@@ -60,8 +60,8 @@
 
 	<div data-role="header">
 		<h1>Default theme</h1>
-		<a href="#" data-rel="back" role="button" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Back</a>
-		<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>
+		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Back</a>
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
@@ -116,16 +116,16 @@
 		<p>I am a div with classes ui-body, ui-body-<span class="theme">a</span> and ui-corner-all.</p>
 		<p><a href="#">I am a link</a></p>
 			<h4>Panels</h4>
-			<a href="#panel-reveal" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Reveal</a>
-			<a href="#panel-overlay" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Overlay</a>
-			<a href="#panel-push" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Push</a>
+			<a href="#panel-reveal" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Reveal</a>
+			<a href="#panel-overlay" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Overlay</a>
+			<a href="#panel-push" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Push</a>
 		</div>
 		
 		<div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 				
-		<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">We</a>
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">We</a>
 		<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">are</button>
 		<input type="button" value="buttons" data-inline="true" data-icon="carat-r" data-iconpos="right">
 
@@ -211,7 +211,7 @@
 					<legend>Controlgroup:</legend>
 					<button class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-right">One</button>
 					<input type="button" data-icon="back" data-iconpos="right" value="Two">
-					<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-right">Three</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-right">Three</a>
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
@@ -230,7 +230,7 @@
 		</form>
 		
 		
-		<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left ui-btn-active">Active button</a>
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left ui-btn-active">Active button</a>
 		
 		<p>Form inside static list:</p>
 		
