@@ -57,7 +57,7 @@
 		<h2>Tooltip</h2>
 		<p>A tooltip can be created by adding a theme swatch to a basic popup and adding padding via the <code>ui-content</code> class.</p>
 		<div data-demo-html="true">
-			<p class="ui-body-d" style="padding:2em;">A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup"  role="button" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-alt-icon ui-btn-inline ui-icon-info ui-btn-a ui-btn-icon-notext">Learn more</a></p>
+			<p>A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup" role="button" data-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext">Learn more</a></p>
 
 			<div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width:350px;">
 	          <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
