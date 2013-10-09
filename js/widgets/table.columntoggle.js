@@ -40,7 +40,9 @@ $.widget( "mobile.table", $.mobile.table, {
 		});
 
 		if ( this.options.enhanced ) {
-			this._menu = this.document.find( this._id() + "-popup" ).children().first();
+			this._menu = $( this.document[ 0 ].getElementById( this._id() + "-popup" ) ).children().first();
+			this._addToggles( this._menu, true );
+			this._bindToggles( this._menu );
 		} else {
 			this._menu = this._enhanceColToggle();
 			this.element.addClass( this.options.classes.columnToggleTable );
@@ -74,11 +76,15 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_addToggles: function( menu, keep ) {
-		var opts = this.options,
+		var inputs,
+			checkboxIndex = 0,
+			opts = this.options,
 			container = menu.controlgroup( "container" );
 
 		// allow update of menu on refresh (fixes #5880)
-		if ( !keep ) {
+		if ( keep ) {
+			inputs = menu.find( "input" );
+		} else {
 			container.empty();
 		}
 
@@ -91,18 +97,17 @@ $.widget( "mobile.table", $.mobile.table, {
 			if ( priority ) {
 				cells.addClass( opts.classes.priorityPrefix + priority );
 
-				if ( !keep ) {
+				( keep ? inputs.eq( checkboxIndex++ ) :
 					$("<label><input type='checkbox' checked />" +
 						( header.children( "abbr" ).first().attr( "title" ) ||
 							header.text() ) +
 						"</label>" )
 						.appendTo( container )
 						.children( 0 )
-						.jqmData( "cells", cells )
 						.checkboxradio( {
 							theme: opts.columnPopupTheme
-						});
-				}
+						}) )
+					.jqmData( "cells", cells );
 			}
 		});
 
