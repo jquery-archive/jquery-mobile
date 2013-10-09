@@ -162,7 +162,6 @@
 			ok($('#column-table-test .ui-table-columntoggle').length, ".ui-table-columntoggle class added to table element");
 			ok($('#column-table-test .ui-table-columntoggle-btn').length, ".ui-table-columntoggle-btn button added");
 			deepEqual( button.text(), "Columns...",  "Column toggle button has correct text");
-			deepEqual( button.attr( "role" ), "button", "Column toggle button has attribute " + '"' + "role='button'" + '"' + " set" );
 			ok( $popup.length, "dialog added" );
 			ok( $popup.is( ".ui-popup-hidden" ) , "dialog hidden");
 			ok($('#column-table-test #movie-table-column-popup-popup').find( "input[type=checkbox]" ).length > 0 , "Checkboxes added");
