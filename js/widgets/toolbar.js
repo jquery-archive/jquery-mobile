@@ -80,7 +80,7 @@ define( [
 				this._addHeaderButtonClasses();
 			}
 			if ( !this.page ) {
-				$( "[data-"+ $.mobile.ns + "role='page']" ).css({ "position": "relative" });
+				this._setRelative();
 				if ( this.role === "footer" ) {
 					this.element.appendTo( "body" );
 				}
@@ -88,6 +88,12 @@ define( [
 			this._addHeadingClasses();
 			this._btnMarkup();
 		},
+
+		//we only want this to run on non fixed toolbars so make it easy to override 
+		_setRelative: function() {
+			$( "[data-"+ $.mobile.ns + "role='page']" ).css({ "position": "relative" });
+		},
+
 		// Deprecated in 1.4. As from 1.5 button classes have to be present in the markup.
 		_btnMarkup: function() {
 			this.element.children( "a" ).attr( "data-" + $.mobile.ns + "role", "button" );
