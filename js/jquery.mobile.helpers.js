@@ -193,7 +193,7 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 
 			// Run buttonmarkup
 			if ( $.fn.buttonMarkup ) {
-				$( $.fn.buttonMarkup.initSelector ).buttonMarkup();
+				$( $.fn.buttonMarkup.initSelector ).not( $.mobile.page.prototype.keepNativeSelector() ).buttonMarkup();
 			}
 
 			// Add classes for fieldContain
