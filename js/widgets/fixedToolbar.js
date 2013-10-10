@@ -273,6 +273,12 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 				});
 		},
 
+		_setRelative: function() {
+			if( this.options.position !== "fixed" ){
+				$( "[data-"+ $.mobile.ns + "role='page']" ).css({ "position": "relative" });
+			}
+		},
+
 		_destroy: function() {
 			var $el = this.element,
 				header = $el.hasClass( "ui-header" );
