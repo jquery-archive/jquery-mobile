@@ -4082,11 +4082,11 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 	/* exposed $.mobile methods */
 
 	//animation complete callback
+	var animationEndEvent = "WebKitTransitionEvent" in window ? "webkitAnimationEnd" : "animationend";
 	$.fn.animationComplete = function( callback ) {
 		if ( $.support.cssTransitions ) {
-			return $( this ).one( 'webkitAnimationEnd animationend', callback );
-		}
-		else{
+			return $( this ).one( animationEndEvent, callback );
+		} else {
 			// defer execution for consistency between webkit/non webkit
 			setTimeout( callback, 0 );
 			return $( this );
