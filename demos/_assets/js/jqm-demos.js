@@ -94,20 +94,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function() {
   		highlight: true,
   		submitTo: "_search/"
 	});
-	
-	
-	$( this ).find( ".jqm-header .jqm-search" )
-		.on( "searchshow searchhide", function( event ) {
-			if ( event.type === "searchshow" ) {
-				$( this ).find( ".ui-input-text" ).focus();
-			} else {
-				$( this )
-					.find( ".ui-input-clear" ).trigger( "click" )
-					.end()
-					.find( ".ui-input-text" ).blur();
-			}
-		});
-		
+			
 	$( this ).find( ".jqm-content ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
