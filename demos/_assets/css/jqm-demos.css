@@ -299,6 +299,7 @@
 	}
 	.jqm-navmenu-panel .ui-btn {
 		color: #333 !important;
+		text-shadow: none !important;
 	}
 	.jqm-navmenu-panel .ui-btn:hover,
 	.jqm-navmenu-panel .ui-btn:active {
