@@ -27,10 +27,9 @@
 
     <div data-role="content" class="jqm-content">
 
-            <h1>Collapsible</h1>
+        <h1>Collapsible</h1>
 
-            <p>Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.
-            </p>
+        <p>Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.</p>
 
         <h2>Basic collapsible</h2>
 
