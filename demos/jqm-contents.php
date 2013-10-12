@@ -8,18 +8,29 @@
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Pages &amp; Navigation</h3>
+		<h3>Pages</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="pages/" data-ajax="false">Pages</a></li>
 			<li data-filtertext=""><a href="pages-single-page/" data-ajax="false">Single page</a></li>
 			<li data-filtertext=""><a href="pages-multi-page/" data-ajax="false">Multi-page template</a></li>
 			<li data-filtertext=""><a href="pages-dialog/" data-ajax="false">Dialog page</a></li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Navigation</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="navigation/" data-ajax="false">Navigation</a></li>
 			<li data-filtertext=""><a href="navigation-linking-pages/" data-ajax="false">Linking pages</a></li>
 			<li data-filtertext=""><a href="navigation-php-redirect/" data-ajax="false">PHP redirect demo</a></li>
-			<li data-filtertext=""><a href="backbone-requirejs/" data-ajax="false">Backbone RequireJS demo</a></li>
 			<li data-filtertext=""><a href="transitions/" data-ajax="false">Transitions</a></li>
 			<li data-filtertext=""><a href="loader/" data-ajax="false">Loader</a></li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Events</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+			<li data-filtertext=""><a href="swipe-list/" data-ajax="false">Swipe list items</a></li>
+			<li data-filtertext=""><a href="swipe-page/" data-ajax="false">Swipe page navigation</a></li>
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
@@ -30,17 +41,21 @@
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Buttons &amp; Icons</h3>
+		<h3>Buttons</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="button-markup/" data-ajax="false">Buttons</a></li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Icons</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="icons/" data-ajax="false">Icons</a></li>
 			<li data-filtertext=""><a href="icons-grunticon/" data-ajax="false">Icons load script</a></li>
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Widgets</h3>
+		<h3>Toolbar</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
-			<li data-role="list-divider">Toolbar</li>
 			<li data-filtertext=""><a href="toolbar/" data-ajax="false">Toolbar</a></li>
 			<li data-filtertext=""><a href="toolbar-dynamic/" data-ajax="false">Toolbar: dynamic</a></li>
 			<li data-filtertext=""><a href="toolbar-external/" data-ajax="false">Toolbar: external</a></li>
@@ -51,9 +66,17 @@
 			<li data-filtertext=""><a href="toolbar-fixed-persistent-optimized/" data-ajax="false">Toolbar: fixed persistent AJAX optimized</a></li>
 			<li data-filtertext=""><a href="toolbar-fixed-forms/" data-ajax="false">Toolbar: fixed with forms</a></li>
 			<li data-filtertext=""><a href="navbar/" data-ajax="false">Navbar</a></li>
-			<li data-role="list-divider">Tabs</li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Tabs</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="tabs/" data-ajax="false">Tabs</a></li>
-			<li data-role="list-divider">Panel</li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Panel</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="panel/" data-ajax="false">Panel</a></li>
 			<li data-filtertext=""><a href="panel-examples/" data-ajax="false">Panel: examples</a></li>
 			<li data-filtertext=""><a href="panel-external/" data-ajax="false">Panel: external</a></li>
@@ -61,7 +84,11 @@
 			<li data-filtertext=""><a href="panel-responsive/" data-ajax="false">Panel: responsive</a></li>
 			<li data-filtertext=""><a href="panel-styling/" data-ajax="false">Panel: styling</a></li>
 			<li data-filtertext=""><a href="panel-swipe-open/" data-ajax="false">Panel: swipe open</a></li>
-			<li data-role="list-divider">Popup</li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Popup</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="popup/" data-ajax="false">Popup</a></li>
 			<li data-filtertext=""><a href="popup-alignment/" data-ajax="false">Popup: alignment</a></li>
 			<li data-filtertext=""><a href="popup-arrow-size/" data-ajax="false">Popup: arrow size</a></li>
@@ -69,7 +96,19 @@
 			<li data-filtertext=""><a href="popup-iframe/" data-ajax="false">Popup: iframe</a></li>
 			<li data-filtertext=""><a href="popup-image-scaling/" data-ajax="false">Popup: image scaling</a></li>
 			<li data-filtertext=""><a href="popup-outside-multipage" data-ajax="false">Popup outside multi-page</a></li>
-			<li data-role="list-divider">Listview</li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Collapsible</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+			<li data-filtertext=""><a href="collapsible/" data-ajax="false">Collapsible</a></li>
+			<li data-filtertext=""><a href="collapsible-dynamic/" data-ajax="false">Collapsible: dynamic</a></li>
+			<li data-filtertext=""><a href="collapsibleset/" data-ajax="false">Collapsible set</a></li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Listview</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="listview/" data-ajax="false">Listview</a></li>
 			<li data-filtertext=""><a href="listview-autocomplete/" data-ajax="false">Listview: autocomplete</a></li>
 			<li data-filtertext=""><a href="listview-autocomplete-remote/" data-ajax="false">Listview: autocomplete remote data</a></li>
@@ -78,14 +117,11 @@
 			<li data-filtertext=""><a href="listview-collapsible-item-flat/" data-ajax="false">Listview: collapsible list items (flat)</a></li>
 			<li data-filtertext=""><a href="listview-collapsible-item-indented/" data-ajax="false">Listview: collapsible list items (indented)</a></li>
 			<li data-filtertext=""><a href="listview-grid/" data-ajax="false">Listview: responsive grid</a></li>
-			<li data-role="list-divider">Collapsible</li>
-			<li data-filtertext=""><a href="collapsible/" data-ajax="false">Collapsible</a></li>
-			<li data-filtertext=""><a href="collapsible-dynamic/" data-ajax="false">Collapsible: dynamic</a></li>
-			<li data-filtertext=""><a href="collapsibleset/" data-ajax="false">Collapsible set</a></li>
-			<li data-role="list-divider">Controlgroup</li>
-			<li data-filtertext=""><a href="controlgroup/" data-ajax="false">Controlgroup</a></li>
-			<li data-filtertext=""><a href="controlgroup-dynamic/" data-ajax="false">Controlgroup: dynamic</a></li>
-			<li data-role="list-divider">Table</li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Table</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="table-column-toggle/" data-ajax="false">Table Column Toggle</a></li>
 			<li data-filtertext=""><a href="table-column-toggle-example/" data-ajax="false">Table Column Toggle: example</a></li>
 			<li data-filtertext=""><a href="table-column-toggle-heading-groups/" data-ajax="false">Table Column Toggle: heading groups</a></li>
@@ -94,16 +130,28 @@
 			<li data-filtertext=""><a href="table-reflow-heading-groups/" data-ajax="false">Table Reflow: heading groups</a></li>
 			<li data-filtertext=""><a href="table-reflow-stripes-strokes/" data-ajax="false">Table Reflow: stripes and strokes</a></li>
 			<li data-filtertext=""><a href="table-reflow-styling/" data-ajax="false">Table Reflow: custom styles</a></li>
-			<li data-role="list-divider">Filterable</li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Filterable</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="filterable/" data-ajax="false">Filterable</a></li>
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Form widgets</h3>
+		<h3>Controlgroup</h3>
+		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+			<li data-filtertext=""><a href="controlgroup/" data-ajax="false">Controlgroup</a></li>
+			<li data-filtertext=""><a href="controlgroup-dynamic/" data-ajax="false">Controlgroup: dynamic</a></li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+		<h3>Forms</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="forms/" data-ajax="false">Forms</a></li>
-			<li data-filtertext=""><a href="field-contain/" data-ajax="false">Form field containers</a></li>
-			<li data-filtertext=""><a href="hidden-accessible/" data-ajax="false">Form hide labels</a></li>
+
+			<li data-filtertext=""><a href="field-contain/" data-ajax="false">Field containers</a></li>
+			<li data-filtertext=""><a href="hidden-accessible/" data-ajax="false">Label hidden</a></li>
 
 			<li data-filtertext=""><a href="textinput/" data-ajax="false">Textinput</a></li>
 			<li data-filtertext=""><a href="button/" data-ajax="false">Input buttons</a></li>
@@ -120,7 +168,7 @@
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>CSS Framework</h3>
+		<h3>Grids</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="grids/" data-ajax="false">Grids</a></li>
 			<li data-filtertext=""><a href="grids-buttons/" data-ajax="false">Grids: buttons</a></li>
@@ -128,17 +176,11 @@
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Events</h3>
+		<h3>3rd party</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
-			<li data-filtertext=""><a href="swipe-list/" data-ajax="false">Swipe list items</a></li>
-			<li data-filtertext=""><a href="swipe-page/" data-ajax="false">Swipe page navigation</a></li>
-		</ul>
-	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Showcase</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
-			<li data-filtertext=""><a href="map-geolocation/" data-ajax="false">Map geolocation demo</a></li>
-			<li data-filtertext=""><a href="map-list-toggle/" data-ajax="false">Map list toggle demo</a></li>
+			<li data-filtertext=""><a href="backbone-requirejs/" data-ajax="false">Backbone RequireJS demo</a></li>
+			<li data-filtertext=""><a href="map-geolocation/" data-ajax="false">Google Maps geolocation</a></li>
+			<li data-filtertext=""><a href="map-list-toggle/" data-ajax="false">Google Maps list toggle</a></li>
 		</ul>
 	</li>
 </ul>
