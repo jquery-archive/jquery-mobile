@@ -265,6 +265,9 @@
 		float: left;
 		width: 25%;
 		background: none;
+		-webkit-transition: none !important;
+		-moz-transition: none !important
+		transition: none !important;
 		-webkit-transform: none !important;
 		-moz-transform: none !important;
 		transform: none !important;
