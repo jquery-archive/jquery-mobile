@@ -99,13 +99,13 @@
 
         <h2>Custom Icons</h2>
 
-		<p>The icons uses the <code>:after</code> pseudo element for icons. Here is an example of how to use a custom icon.</p>
+		<p>Icons are displayed as background image of <code>:after</code> pseudo elements. Target the pseudo element to set a custom icon.</p>
 
         <div data-demo-html="true" data-demo-css="#custom-icon">
 			<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-myicon">myicon</button>
 		</div>
 
-		<p>You can safely use SVG icons. The framework contains a SVG support test and adds class <code>ui-nosvg</code> to the <code>html</code> element on platforms that don't support SVG. You can use this class in your CSS to provide a PNG image as fallback.</p>
+		<p>You can safely use SVG icons. The framework contains a SVG support test and adds class <code>ui-nosvg</code> to the <code>html</code> element on platforms that don't support SVG. Use this class in your CSS to provide a PNG image as fallback.</p>
 
 <pre><code>
 .ui-icon-myicon:after {
