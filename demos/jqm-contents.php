@@ -40,12 +40,7 @@
 			<li data-filtertext=""><a href="theme-classic/" data-ajax="false">Classic theme</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Buttons</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
-			<li data-filtertext=""><a href="button-markup/" data-ajax="false">Buttons</a></li>
-		</ul>
-	</li>
+	<li data-filtertext=""><a href="button-markup/" data-ajax="false">Buttons</a></li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
 		<h3>Icons</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
@@ -68,22 +63,17 @@
 			<li data-filtertext=""><a href="navbar/" data-ajax="false">Navbar</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Tabs</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
-			<li data-filtertext=""><a href="tabs/" data-ajax="false">Tabs</a></li>
-		</ul>
-	</li>
+	<li data-filtertext=""><a href="tabs/" data-ajax="false">Tabs</a></li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
 		<h3>Panel</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
 			<li data-filtertext=""><a href="panel/" data-ajax="false">Panel</a></li>
-			<li data-filtertext=""><a href="panel-examples/" data-ajax="false">Panel: examples</a></li>
 			<li data-filtertext=""><a href="panel-external/" data-ajax="false">Panel: external</a></li>
 			<li data-filtertext=""><a href="panel-fixed/" data-ajax="false">Panel: fixed</a></li>
 			<li data-filtertext=""><a href="panel-responsive/" data-ajax="false">Panel: responsive</a></li>
 			<li data-filtertext=""><a href="panel-styling/" data-ajax="false">Panel: styling</a></li>
 			<li data-filtertext=""><a href="panel-swipe-open/" data-ajax="false">Panel: swipe open</a></li>
+			<li data-filtertext=""><a href="panel-test/" data-ajax="false">Panel: test page</a></li>
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
@@ -132,12 +122,7 @@
 			<li data-filtertext=""><a href="table-reflow-styling/" data-ajax="false">Table Reflow: custom styles</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
-		<h3>Filterable</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
-			<li data-filtertext=""><a href="filterable/" data-ajax="false">Filterable</a></li>
-		</ul>
-	</li>
+	<li data-filtertext=""><a href="filterable/" data-ajax="false">Filterable</a></li>
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
 		<h3>Controlgroup</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
@@ -178,7 +163,7 @@
 	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
 		<h3>3rd party</h3>
 		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
-			<li data-filtertext=""><a href="backbone-requirejs/" data-ajax="false">Backbone RequireJS demo</a></li>
+			<li data-filtertext=""><a href="backbone-requirejs/" data-ajax="false">Backbone RequireJS</a></li>
 			<li data-filtertext=""><a href="map-geolocation/" data-ajax="false">Google Maps geolocation</a></li>
 			<li data-filtertext=""><a href="map-list-toggle/" data-ajax="false">Google Maps list toggle</a></li>
 		</ul>
