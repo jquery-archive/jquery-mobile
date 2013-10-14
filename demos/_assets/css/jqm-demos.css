@@ -294,6 +294,12 @@
 		padding-right: 3%;
 		float: right;
 	}
+    .jqm-demos .jqm-content.jqm-fullwidth {
+		width: auto;
+		padding-left: 15%;
+		padding-right: 15%;
+		float: none;
+	}
 	.jqm-navmenu-panel .ui-listview .ui-btn {
 		padding-left: 12.5%;
 	}
@@ -313,10 +319,6 @@
 	}
 	.jqm-navmenu-panel .ui-btn:hover::after {
 		opacity: .4;
-	}
-
-    .jqm-demos .jqm-content.jqm-fullwidth {
-
 	}
 }
 

@@ -25,7 +25,7 @@
 	
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-		<div data-role="content" class="jqm-content">
+		<div data-role="content" class="jqm-content jqm-fullwidth">
 
 			<h1>External toolbars</h1>
 

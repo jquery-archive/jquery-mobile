@@ -20,7 +20,7 @@
 	        <h1>Fixed header</h1>
 	    </div><!-- /header -->
 
-	    <div data-role="content" class="jqm-content">
+	    <div data-role="content" class="jqm-content jqm-fullwidth">
 
 	    	<h1>Fixed toolbars</h1>
 
