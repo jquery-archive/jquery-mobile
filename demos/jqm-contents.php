@@ -1,24 +1,24 @@
-<ul data-role="listview" data-icon="false" class="jqm-list">
-	<li><a href="./">Home</a></li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+<ul data-role="listview" class="jqm-list ui-alt-icon ui-nodisc-icon">
+	<li data-icon="home"><a href="./">Home</a></li>
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Getting started</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="intro/" data-ajax="false">Introduction</a></li>
 			<li data-filtertext=""><a href="rwd/" data-ajax="false">Responsive Web Design</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Pages</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="pages/" data-ajax="false">Pages</a></li>
 			<li data-filtertext=""><a href="pages-single-page/" data-ajax="false">Single page</a></li>
 			<li data-filtertext=""><a href="pages-multi-page/" data-ajax="false">Multi-page template</a></li>
 			<li data-filtertext=""><a href="pages-dialog/" data-ajax="false">Dialog page</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Navigation</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="navigation/" data-ajax="false">Navigation</a></li>
 			<li data-filtertext=""><a href="navigation-linking-pages/" data-ajax="false">Linking pages</a></li>
 			<li data-filtertext=""><a href="navigation-php-redirect/" data-ajax="false">PHP redirect demo</a></li>
@@ -26,31 +26,31 @@
 			<li data-filtertext=""><a href="loader/" data-ajax="false">Loader</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Events</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="swipe-list/" data-ajax="false">Swipe list items</a></li>
 			<li data-filtertext=""><a href="swipe-page/" data-ajax="false">Swipe page navigation</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Themes</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="theme-default/" data-ajax="false">Default theme</a></li>
 			<li data-filtertext=""><a href="theme-classic/" data-ajax="false">Classic theme</a></li>
 		</ul>
 	</li>
 	<li data-filtertext=""><a href="button-markup/" data-ajax="false">Buttons</a></li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Icons</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="icons/" data-ajax="false">Icons</a></li>
 			<li data-filtertext=""><a href="icons-grunticon/" data-ajax="false">Icons load script</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Toolbar</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="toolbar/" data-ajax="false">Toolbar</a></li>
 			<li data-filtertext=""><a href="toolbar-dynamic/" data-ajax="false">Toolbar: dynamic</a></li>
 			<li data-filtertext=""><a href="toolbar-external/" data-ajax="false">Toolbar: external</a></li>
@@ -64,9 +64,9 @@
 		</ul>
 	</li>
 	<li data-filtertext=""><a href="tabs/" data-ajax="false">Tabs</a></li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Panel</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="panel/" data-ajax="false">Panel</a></li>
 			<li data-filtertext=""><a href="panel-external/" data-ajax="false">Panel: external</a></li>
 			<li data-filtertext=""><a href="panel-fixed/" data-ajax="false">Panel: fixed</a></li>
@@ -76,9 +76,9 @@
 			<li data-filtertext=""><a href="panel-test/" data-ajax="false">Panel: test page</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Popup</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="popup/" data-ajax="false">Popup</a></li>
 			<li data-filtertext=""><a href="popup-alignment/" data-ajax="false">Popup: alignment</a></li>
 			<li data-filtertext=""><a href="popup-arrow-size/" data-ajax="false">Popup: arrow size</a></li>
@@ -88,17 +88,17 @@
 			<li data-filtertext=""><a href="popup-outside-multipage" data-ajax="false">Popup outside multi-page</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Collapsible</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="collapsible/" data-ajax="false">Collapsible</a></li>
 			<li data-filtertext=""><a href="collapsible-dynamic/" data-ajax="false">Collapsible: dynamic</a></li>
 			<li data-filtertext=""><a href="collapsibleset/" data-ajax="false">Collapsible set</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Listview</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="listview/" data-ajax="false">Listview</a></li>
 			<li data-filtertext=""><a href="listview-autocomplete/" data-ajax="false">Listview: autocomplete</a></li>
 			<li data-filtertext=""><a href="listview-autocomplete-remote/" data-ajax="false">Listview: autocomplete remote data</a></li>
@@ -109,9 +109,9 @@
 			<li data-filtertext=""><a href="listview-grid/" data-ajax="false">Listview: responsive grid</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Table</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="table-column-toggle/" data-ajax="false">Table Column Toggle</a></li>
 			<li data-filtertext=""><a href="table-column-toggle-example/" data-ajax="false">Table Column Toggle: example</a></li>
 			<li data-filtertext=""><a href="table-column-toggle-heading-groups/" data-ajax="false">Table Column Toggle: heading groups</a></li>
@@ -123,16 +123,16 @@
 		</ul>
 	</li>
 	<li data-filtertext=""><a href="filterable/" data-ajax="false">Filterable</a></li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Controlgroup</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="controlgroup/" data-ajax="false">Controlgroup</a></li>
 			<li data-filtertext=""><a href="controlgroup-dynamic/" data-ajax="false">Controlgroup: dynamic</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Forms</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="forms/" data-ajax="false">Forms</a></li>
 
 			<li data-filtertext=""><a href="field-contain/" data-ajax="false">Field containers</a></li>
@@ -152,17 +152,17 @@
 			<li data-filtertext=""><a href="flipswitch/" data-ajax="false">Flipswitch</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Grids</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="grids/" data-ajax="false">Grids</a></li>
 			<li data-filtertext=""><a href="grids-buttons/" data-ajax="false">Grids: buttons</a></li>
 			<li data-filtertext=""><a href="grids-custom-responsive/" data-ajax="false">Grids: custom responsive</a></li>
 		</ul>
 	</li>
-	<li data-role="collapsible" data-collapsed-icon="false" data-inset="false">
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>3rd party</h3>
-		<ul data-role="listview" class="ui-alt-icon ui-nodisc-icon">
+		<ul data-role="listview">
 			<li data-filtertext=""><a href="backbone-requirejs/" data-ajax="false">Backbone RequireJS</a></li>
 			<li data-filtertext=""><a href="map-geolocation/" data-ajax="false">Google Maps geolocation</a></li>
 			<li data-filtertext=""><a href="map-list-toggle/" data-ajax="false">Google Maps list toggle</a></li>
