@@ -25,7 +25,7 @@
 }
 .jqm-demos .jqm-header p {
 	position: absolute;
-	bottom: -2.5em;
+	bottom: -2em;
 	left: 1em;
 	margin: 0;
 	color: #666;
@@ -71,7 +71,7 @@
 
 /* Content */
 .jqm-demos .jqm-content {
-	padding-top: 2em;
+	padding-top: 3em;
 }
 .jqm-demos .jqm-content > h1,
 .jqm-demos .jqm-content > h2,
@@ -241,7 +241,8 @@
 		bottom: auto;
 		left: auto;
 		top: 50%;
-		right: 10%;
+		right: 15%;
+		font-size: 1.2em;
 		margin-top: -.625em;
 	}
 	.jqm-demos .jqm-navmenu-link {
@@ -281,6 +282,7 @@
 	}
 	.jqm-demos .jqm-content {
 		width: 67%;
+		padding-top: 2em;
 		padding-left: 5%;
 		padding-right: 3%;
 		float: right;
