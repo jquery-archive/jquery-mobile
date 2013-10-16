@@ -123,28 +123,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-                <h2>Fieldcontain, hide label</h2>
-
-                <div data-demo-html="true">
-				<form>
-					<div class="ui-field-contain ui-hide-label">
-                        <label for="slider-9">Slider:</label>
-                        <input type="range" name="slider-9" id="slider-9" min="0" max="100" value="50">
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
-                <h2>Fieldcontain, hide label, mini sized</h2>
-
-                <div data-demo-html="true">
-				<form>
-					<div class="ui-field-contain ui-hide-label">
-                        <label for="slider-11">Slider:</label>
-                        <input type="range" name="slider-11" id="slider-11" data-mini="true" min="0" max="100" value="50">
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
                 <h2>Full width slider, no input</h2>
 
                 <p>Here we show how you can hide the number input and make the slider full width with custom CSS.</p>

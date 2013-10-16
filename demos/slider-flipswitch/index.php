@@ -125,33 +125,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-                <h2>Fieldcontain, hidden label</h2>
-
-                <div data-demo-html="true">
-					<div class="ui-field-contain ui-hide-label">
-                        <label for="flip-8">Flip toggle switch:</label>
-                        <select name="flip-8" id="flip-8" data-role="slider">
-                            <option value="off">Off</option>
-                            <option value="on">On</option>
-                        </select>
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
-                <h2>Fieldcontain, hidden label, mini</h2>
-
-                <div data-demo-html="true">
-				<form>
-					<div class="ui-field-contain ui-hide-label">
-                        <label for="flip-9">Flip toggle switch:</label>
-                        <select name="flip-9" id="flip-9" data-role="slider" data-mini="true">
-                            <option value="off">Off</option>
-                            <option value="on">On</option>
-                        </select>
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
                 <h2>Grid</h2>
 
                 <p>We make the grid blocks 100% width below 28em with custom CSS.</p>
