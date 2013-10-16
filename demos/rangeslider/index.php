@@ -11,15 +11,6 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-	<style id="grid-style">
-		@media all and (max-width: 28em){
-			.ui-grid-a .ui-block-a,
-			.ui-grid-a .ui-block-b {
-				width: 100%;
-				clear: left;
-			}
-		}
-    </style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -158,48 +149,6 @@
                             <input type="range" name="range-8b" id="range-8b" min="0" max="100" value="100">
                         </div>
 					</div>
-				</form>
-                </div><!-- /demo-html -->
-
-                <h2>Grid</h2>
-
-                <p>We make the grid blocks 100% width below 28em with custom CSS.</p>
-
-                <div data-demo-html="true" data-demo-css="#grid-style">
-                	<div class="ui-grid-a">
-                    	<div class="ui-block-a">
-                            <div class="ui-bar ui-bar-c">
-                                <div data-role="rangeslider">
-                                    <label for="range-12a">Rangeslider:</label>
-                                    <input type="range" name="range-12a" id="range-12a" min="0" max="100" value="0">
-                                    <label for="range-12b">Rangeslider:</label>
-                                    <input type="range" name="range-12b" id="range-12b" min="0" max="100" value="100">
-                                </div>
-                        	</div><!-- /ui-bar -->
-        				</div><!-- /ui-block -->
-                    	<div class="ui-block-b">
-                            <div class="ui-bar ui-bar-c">
-                                <label for="slider-12">Slider:</label>
-                                <input type="range" name="slider-12" id="slider-12" data-highlight="true" min="0" max="100" value="50">
-                        	</div><!-- /ui-bar -->
-        				</div><!-- /ui-block -->
-                    	<div class="ui-block-a">
-                            <div class="ui-bar ui-bar-c">
-                                <div data-role="rangeslider" data-mini="true">
-                                    <label for="range-13a">Rangeslider:</label>
-                                    <input type="range" name="range-13a" id="range-13a" min="0" max="100" value="0">
-                                    <label for="range-13b">Rangeslider:</label>
-                                    <input type="range" name="range-13b" id="range-13b" min="0" max="100" value="100">
-                                </div>
-                        	</div><!-- /ui-bar -->
-        				</div><!-- /ui-block -->
-                    	<div class="ui-block-b">
-                            <div class="ui-bar ui-bar-c">
-                                <label for="slider-13">Slider:</label>
-                                <input type="range" name="slider-13" id="slider-13" data-mini="true" data-highlight="true" min="0" max="100" value="50">
-                        	</div><!-- /ui-bar -->
-        				</div><!-- /ui-block -->
-                	</div><!-- /ui-grid -->
 				</form>
                 </div><!-- /demo-html -->
 
