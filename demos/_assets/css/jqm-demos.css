@@ -191,10 +191,10 @@
 }
 .jqm-content pre {
 	padding: 0 1em 1.2em;
-	white-space: pre-wrap;	
+	white-space: pre-wrap;
 }
 .jqm-content pre > code {
-	padding: 0;	
+	padding: 0;
 	background: none;
 	font-size: .9em;
 }
@@ -346,7 +346,7 @@
  *
  * @version
  * 3.0.83 (July 02 2010)
- * 
+ *
  * @copyright
  * Copyright (C) 2004-2010 Alex Gorbatchev.
  *

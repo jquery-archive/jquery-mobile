@@ -21,7 +21,7 @@ $( document ).on( "pagecreate", function() {
 			h = scrHeight;
 			w = ( scrHeight / ifrHeight ) * ifrWidth;
 		}
-		
+
 		return {
 			'width': w - ( ifrPadding + ifrBorder ),
 			'height': h - ( ifrPadding + ifrBorder )
@@ -31,10 +31,10 @@ $( document ).on( "pagecreate", function() {
 	$( ".ui-popup iframe" )
 		.attr( "width", 0 )
 		.attr( "height", "auto" );
-	 
+
 	$( "#popupMap iframe" ).contents().find( "#map_canvas" )
 		.css( { "width" : 0, "height" : 0 } );
-	 		 
+
 	$( "#popupMap" ).on({
 		popupbeforeposition: function() {
 			var size = scale( 480, 320, 0, 1 ),
@@ -44,7 +44,7 @@ $( document ).on( "pagecreate", function() {
 			$( "#popupMap iframe" )
 				.attr( "width", w )
 				.attr( "height", h );
-					 
+
 			$( "#popupMap iframe" ).contents().find( "#map_canvas" )
 				.css( { "width": w, "height" : h } );
 		},
@@ -52,7 +52,7 @@ $( document ).on( "pagecreate", function() {
 			$( "#popupMap iframe" )
 				.attr( "width", 0 )
 				.attr( "height", 0 );
-					 
+
 			$( "#popupMap iframe" ).contents().find( "#map_canvas" )
 				.css( { "width": 0, "height" : 0 } );
 		}

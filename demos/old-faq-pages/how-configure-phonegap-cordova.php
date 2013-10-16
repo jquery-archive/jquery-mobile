@@ -79,9 +79,9 @@ $( document ).on( "mobileinit", function() {
 		<p>Here are a few more tips that aren't specifically related to PhoneGap but are good to know:</p>
 
 		<p><strong>We recommend disabling the pushState feature for installed apps </strong>because there are edge cases where this feature can cause unexpected navigation behavior and since URLs aren't visible in a webview, it's not worth keeping this active in these situations.</p>
-			
+
 		<p>Use to following code to disable pushState. Because the mobileinit event is triggered immediately, you'll need to bind your event handler before jQuery Mobile is loaded.</p>
-		
+
 <pre><code>
 $(document).bind("mobileinit", function(){
 	$.mobile.pushStateEnabled = false;

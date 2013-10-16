@@ -183,7 +183,7 @@ $( document ).on( "pagecreate", function( e ) {
 			event.preventDefault();
 		}
 	});
-	
+
 	// reposition when switching between html / js / css
 	$( e.target ).delegate( ".jqm-view-source .ui-collapsible", "expand", function() {
 		$( this ).parents( ":mobile-popup" ).popup( "reposition", { positionTo: "window" } );
@@ -469,7 +469,6 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-
 
 /*! Copyright (c) 2011 Brandon Aaron (http://brandonaaron.net)
  * Licensed under the MIT License (LICENSE.txt).

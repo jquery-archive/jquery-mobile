@@ -149,7 +149,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 @media (min-width:35em){
 
 	/* wrap on wide viewports once open */
-	
+
 	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-push.ui-panel-content-fixed-toolbar-position-left,
 	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal.ui-panel-content-fixed-toolbar-position-left,
 	.ui-page-panel-open .ui-panel-content-wrap-display-push.ui-panel-content-wrap-position-left,
@@ -166,7 +166,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	.ui-page-panel-open .ui-panel-content-fixed-toolbar-display-reveal {
 		width: auto;
 	}
-	
+
 	/* disable "dismiss" on wide viewports */
 	.ui-panel-dismiss {
 		display: none;
@@ -193,7 +193,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	<!-- Here are a bunch of panels at the end, just before the close page tag  -->
 
 	<!-- leftpanel1  -->
-	
 
 <?php include( '../jqm-panels.php' ); ?>
 

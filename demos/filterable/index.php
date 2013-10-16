@@ -154,8 +154,8 @@
 			</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" 
-					data-filter="true" 
+				<ul data-role="listview"
+					data-filter="true"
 					data-filter-placeholder="Find cars..."
 					data-filter-theme="a"
 					data-inset="true">
@@ -169,20 +169,20 @@
 
 		<h2>Filter Reveal</h2>
 		<p>
-			The filter reveal feature makes it easy to build a simple autocomplete 
+			The filter reveal feature makes it easy to build a simple autocomplete
 			with local data. When a filter has the <code>data-filter-reveal="true"
-			</code> attribute, it will auto-hide all the list items when the search 
-			field is blank. The <code>data-filter-placeholder</code> attribute can be 
-			added to specify the placeholder text for the filter. If you need to search 
-			against a long list of values, we provide a way to create a filter with a 
-			<a href="../autocomplete/autocomplete-remote.php" data-ajax="false">remote 
+			</code> attribute, it will auto-hide all the list items when the search
+			field is blank. The <code>data-filter-placeholder</code> attribute can be
+			added to specify the placeholder text for the filter. If you need to search
+			against a long list of values, we provide a way to create a filter with a
+			<a href="../autocomplete/autocomplete-remote.php" data-ajax="false">remote
 			data source</a>.
 			</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" 
-					data-filter="true" 
-					data-filter-reveal="true" 
+				<ul data-role="listview"
+					data-filter="true"
+					data-filter-reveal="true"
 					data-filter-placeholder="Search fruits..."
 					data-inset="true">
 					<li><a href="#">Apple</a></li>
@@ -231,7 +231,7 @@
 
 <pre><code>$( ".selector" ).on( "filterablebeforefilter", function( e, data ) {
 		var value;
-		
+
 		e.preventDefault();
 		value = data.input.value;
 		// trigger own request to database

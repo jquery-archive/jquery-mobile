@@ -12,7 +12,7 @@
 		$( document ).on( "pagecreate", function() {
 			$( "#theme-selector input" ).on( "change", function( event ) {
 				var themeClass = $( "#theme-selector input:checked" ).attr( "id" );
-				
+
 				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( "ui-page-theme-" + themeClass );
 				$( "#ui-body-test" ).removeClass( "ui-body-a ui-body-b" ).addClass( "ui-body-" + themeClass );
 				$( "#ui-bar-test, #ui-bar-form" ).removeClass( "ui-bar-a ui-bar-b" ).addClass( "ui-bar-" + themeClass );
@@ -111,7 +111,7 @@
 				</fieldset>
 			</div>
 		</form>
-		
+
 		<div id="ui-body-test" class="ui-body ui-body-a ui-corner-all" style="margin-bottom:1em;">
 		<p>I am a div with classes ui-body, ui-body-<span class="theme">a</span> and ui-corner-all.</p>
 		<p><a href="#">I am a link</a></p>
@@ -120,11 +120,11 @@
 			<a href="#panel-overlay" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Overlay</a>
 			<a href="#panel-push" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Push</a>
 		</div>
-		
+
 		<div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
-				
+
 		<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">We</a>
 		<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">are</button>
 		<input type="button" value="buttons" data-inline="true" data-icon="carat-r" data-iconpos="right">
@@ -142,7 +142,7 @@
 			<li><a href="#">have<span class="ui-li-count">4</span></a></li>
 			<li><a href="#">links</a></li>
 		</ul>
-		
+
 		<ul data-role="listview" data-split-icon="gear" data-inset="true">
 			<li><a href="#">
 				<img src="../_assets/img/album-bb.jpg">
@@ -163,7 +163,7 @@
 				<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 			</li>
 		</ul>
-		
+
 		<form>
 			<div class="ui-field-contain">
 				<label for="name2">Text Input:</label>
@@ -228,12 +228,11 @@
 				<input type="submit" id="submit-1" value="Send">
 			</div>
 		</form>
-		
-		
+
 		<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left ui-btn-active">Active button</a>
-		
+
 		<p>Form inside static list:</p>
-		
+
 		<form>
 			<ul data-role="listview" data-inset="true">
 				<li class="ui-field-contain">
@@ -277,7 +276,7 @@
 			<h4>Heading</h4>
 		<p>I'm the collapsible content with a themed content block set to "<span class="theme">a</span>".</p>
 		</div>
-		
+
 		<div data-role="collapsible-set" data-content-theme="a">
 			<div data-role="collapsible">
 				<h3>Section 1</h3>
@@ -292,9 +291,9 @@
 			<p>I'm the collapsible content for section 3</p>
 			</div>
 		</div>
-		
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" data-position="fixed">
 		<div data-role="navbar">
 			<ul>
@@ -316,7 +315,7 @@
 		<br><br>
 		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
 	</div>
-	
+
 	<div data-role="panel" id="panel-overlay" data-display="overlay">
 		<ul data-role="listview">
 			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
@@ -327,7 +326,7 @@
 		<br><br>
 		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
 	</div>
-	
+
 	<div data-role="panel" id="panel-push" data-display="push">
 		<ul data-role="listview">
 			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>

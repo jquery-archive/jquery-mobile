@@ -350,7 +350,7 @@ $( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "cre
 		<h2>Refreshing form elements</h2>
 
 		 <p>In jQuery Mobile, some enhanced form controls are simply styled (inputs), but others are custom controls (selects, sliders) built from, and kept in sync with, the native control. To programmatically update a form control with JavaScript, first manipulate the native control, then use the <code>refresh</code> method to tell the enhanced control to update itself to match the new state. Here are some examples of how to update common form controls, then call the <code>refresh</code> method:</p>
-            
+
 		<h3>Checkboxes:</h3>
 
 <pre><code>
@@ -358,13 +358,13 @@ $( "input[type='checkbox']" ).prop( "checked", true ).checkboxradio( "refresh" )
 </code></pre>
 
 		<h3>Radios:</h3>
-        
+
 <pre><code>
 $( "input[type='radio']" ).prop( "checked", true ).checkboxradio( "refresh" );
 </code></pre>
 
 		<h3>Selects:</h3>
-        
+
 <pre><code>
 var myselect = $( "#selectfoo" );
 myselect[0].selectedIndex = 3;
@@ -372,13 +372,13 @@ myselect.selectmenu( "refresh" );
 </code></pre>
 
 		<h3>Sliders:</h3>
-        
+
 <pre><code>
 $( "input[type='range']" ).val( 60 ).slider( "refresh" );
 </code></pre>
 
 		<h3>Flip switches:</h3>
-        
+
         <p>They use the slider widget.</p>
 
 <pre><code>
@@ -388,9 +388,9 @@ myswitch.slider( "refresh" );
 </code></pre>
 
 		<h2>Preventing auto-initialization of form elements</h2>
-            
+
 		<p>If you'd prefer that a particular form control be left untouched by jQuery Mobile, simply give that element the attribute <code> data-role="none"</code>. For example:</p>
-            
+
 <pre><code>
 &lt;label for=&quot;foo&quot;&gt;
 &lt;select name=&quot;foo&quot; id=&quot;foo&quot; <strong>data-role=&quot;none&quot;</strong>&gt;
@@ -401,7 +401,7 @@ myswitch.slider( "refresh" );
 </code></pre>
 
 		<p>If you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>[data-role="none"]</code>). Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
-            
+
 <pre><code>
 $( document ).bind( "mobileinit", function() {
 	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>

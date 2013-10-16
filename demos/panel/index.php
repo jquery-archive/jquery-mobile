@@ -138,7 +138,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 @media ( min-width: 35em ) {
 
 	/* wrap on wide viewports once open */
-	
+
 	.ui-panel-page-content-open.ui-panel-page-content-position-left {
 		margin-right: 17em;
 	}
@@ -146,14 +146,14 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		margin-left: 17em;
 	}
 	.ui-panel-page-content-open {
-		width: auto;	
+		width: auto;
 	}
-	
+
 	/* disable "dismiss" on wide viewports */
 	.ui-panel-dismiss {
 		display: none;
 	}
-	
+
 	/* same as the above but for panels with display mode "push" only */
 
 	.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
@@ -163,7 +163,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		margin-left: 17em;
 	}
 	.ui-panel-page-content-open.ui-panel-page-content-display-push {
-		width: auto;	
+		width: auto;
 	}
 
 	.ui-panel-dismiss-display-push {
@@ -209,7 +209,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 	</div><!-- /leftpanel2 -->
 
 	<!-- leftpanel3  -->
-	
 
 	<!-- rightpanel1  -->
 	<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
