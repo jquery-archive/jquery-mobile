@@ -13,7 +13,7 @@
     <script src="../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos" data-quicklinks="true">
+<div data-role="page" class="jqm-demos">
 
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
