@@ -123,20 +123,13 @@
 	</li>
 	<li data-filtertext="filterable filter elements sorting searching listview table"><a href="filterable/" data-ajax="false">Filterable</a></li>
 	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
-		<h3>Controlgroups</h3>
-		<ul data-role="listview">
-			<li data-filtertext="controlgroups selectmenu checkboxradio input grouped buttons horizontal vertical"><a href="controlgroup/" data-ajax="false">Controlgroup</a></li>
-			<li data-filtertext="dynamic controlgroup dynamically add buttons"><a href="controlgroup-dynamic/" data-ajax="false">Dynamic controlgroups</a></li>
-		</ul>
-	</li>
-	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Forms</h3>
 		<ul data-role="listview">
 			<li data-filtertext="forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="forms/" data-ajax="false">Forms</a></li>
-			<li data-filtertext="form gallery examples overview forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="forms-gallery/" data-ajax="false">Form gallery</a></li>
-			<li data-filtertext="form disabled"><a href="forms-gallery/" data-ajax="false">Form disabled</a></li>
-			<li data-filtertext="form field containers fieldcontain ui-field-contain"><a href="forms-field-contain/" data-ajax="false">Form field containers</a></li>
-			<li data-filtertext="form hide labels hidden accessible ui-hidden-accessible"><a href="forms-label-hidden-accessible/" data-ajax="false">Hide labels</a></li>
+			<li data-filtertext="forms gallery examples overview forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="forms-gallery/" data-ajax="false">Forms gallery</a></li>
+			<li data-filtertext="forms disabled form elements"><a href="forms-disabled/" data-ajax="false">Forms disabled</a></li>
+			<li data-filtertext="form field containers fieldcontain ui-field-contain forms"><a href="forms-field-contain/" data-ajax="false">Field containers</a></li>
+			<li data-filtertext="form hide labels hidden accessible ui-hidden-accessible forms"><a href="forms-label-hidden-accessible/" data-ajax="false">Hide labels</a></li>
 
 			<li data-filtertext="form textinput widget text input textarea number date time tel email file color password"><a href="textinput/" data-ajax="false">Textinput</a></li>
 			<li data-filtertext="form button widget input button submit reset"><a href="button/" data-ajax="false">Input button</a></li>
@@ -150,6 +143,13 @@
 			<li data-filtertext="form slider tooltip handle value input range sliders"><a href="slider-tooltip/" data-ajax="false">Slider tooltip</a></li>
 			<li data-filtertext="form rangeslider widget dual sliders dual handle sliders range input"><a href="rangeslider/" data-ajax="false">Rangeslider</a></li>
 			<li data-filtertext="form flipswitch widget flip toggle switch binary select checkbox input"><a href="flipswitch/" data-ajax="false">Flipswitch</a></li>
+		</ul>
+	</li>
+	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
+		<h3>Controlgroups</h3>
+		<ul data-role="listview">
+			<li data-filtertext="controlgroups selectmenu checkboxradio input grouped buttons horizontal vertical"><a href="controlgroup/" data-ajax="false">Controlgroup</a></li>
+			<li data-filtertext="dynamic controlgroup dynamically add buttons"><a href="controlgroup-dynamic/" data-ajax="false">Dynamic controlgroups</a></li>
 		</ul>
 	</li>
 	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
