@@ -78,6 +78,10 @@
 
 		<p>Alternatively, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want the page content to read for people experiencing the page on a C-grade device (HTML only) or for a screen reader.</p>
 
+		<h2>Panels outside pages</h2>
+
+		<p>If you want to use the same panel on multiple pages you can place the markup outside the page. See <a href="../panel/external/">external panels</a></p>
+
 		<h2>Dynamic content</h2>
 
 		<p>When you dynamically add content to a panel or make hidden content visible while the panel is open, you have to trigger the <code>updatelayout</code> event on the panel.</p>
@@ -175,10 +179,6 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		<h4>Applying a preset breakpoint</h4>
 
 		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the page or, in case you use external panels and/or fixed toolbars, to the page container (<code>body</code>). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
-
-		<h2>Panels outside pages</h2>
-
-		<p>As of 1.4 it is now possible to use panels outside of a page <a href="external.php">External Panels</a></p>
 
 	</div><!-- /content -->
 
