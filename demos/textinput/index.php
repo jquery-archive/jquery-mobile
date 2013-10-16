@@ -362,32 +362,6 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Fieldcontain, hidden label</h3>
-
-        <div data-demo-html="true">
-        <form>
-            <div class="ui-field-contain ui-hide-label">
-                 <label for="text-16">Text input:</label>
-                 <input type="text" name="text-16" id="text-16" value="">
-            </div>
-
-            <div class="ui-field-contain ui-hide-label">
-                 <label for="text-17">Text input: data-clear-btn="true"</label>
-                 <input type="text" data-clear-btn="true" name="text-17" id="text-17" value="">
-            </div>
-
-            <div class="ui-field-contain ui-hide-label">
-             <label for="search-10">Search:</label>
-             <input type="search" name="search-110" id="search-10" value="">
-            </div>
-
-            <div class="ui-field-contain ui-hide-label">
-            <label for="textarea-16">Textarea:</label>
-            <textarea cols="40" rows="8" name="textarea-16" id="textarea-16"></textarea>
-            </div>
-        </form>
-        </div><!-- /demo-html -->
-
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
