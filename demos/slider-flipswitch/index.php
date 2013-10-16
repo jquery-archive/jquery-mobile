@@ -11,15 +11,6 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-	<style id="grid-style">
-		@media all and (max-width: 28em){
-			.ui-grid-a .ui-block-a,
-			.ui-grid-a .ui-block-b {
-				width: 100%;
-				clear: left;
-			}
-		}
-    </style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -122,39 +113,6 @@
                             <option value="on">On</option>
                         </select>
 					</div>
-				</form>
-                </div><!-- /demo-html -->
-
-                <h2>Grid</h2>
-
-                <p>We make the grid blocks 100% width below 28em with custom CSS.</p>
-
-                <div data-demo-html="true" data-demo-css="#grid-style">
-				<form>
-                	<div class="ui-grid-a">
-                    	<div class="ui-block-a">
-                            <label for="slider-12">Slider:</label>
-                            <input type="range" name="slider-12" id="slider-12" data-highlight="true" min="0" max="100" value="50">
-        				</div><!-- /ui-block -->
-                    	<div class="ui-block-b">
-                            <label for="flip-10">Flip toggle switch:</label>
-                            <select name="flip-10" id="flip-10" data-role="slider">
-                                <option value="off">Off</option>
-                                <option value="on">On</option>
-                            </select>
-        				</div><!-- /ui-block -->
-                    	<div class="ui-block-a">
-                            <label for="slider-13">Slider:</label>
-                            <input type="range" name="slider-13" id="slider-13" data-mini="true" data-highlight="true" min="0" max="100" value="50">
-        				</div><!-- /ui-block -->
-                    	<div class="ui-block-b">
-                            <label for="flip-11">Flip toggle switch:</label>
-                            <select name="flip-11" id="flip-11" data-role="slider" data-mini="true">
-                                <option value="off">Off</option>
-                                <option value="on">On</option>
-                            </select>
-        				</div><!-- /ui-block -->
-                	</div><!-- /ui-grid -->
 				</form>
                 </div><!-- /demo-html -->
 
