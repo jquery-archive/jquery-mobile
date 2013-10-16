@@ -35,7 +35,7 @@
 
 		<h1>Slider</h1>
 
-		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="rangeslider.php">range sliders</a> or <a href="switch.php">flip switches</a>.
+		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="../rangeslider/">range sliders</a> or <a href="../slider-flipswitch/">flip switches</a>.
 			</p>
 
                 <h2>Basic slider</h2>

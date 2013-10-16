@@ -31,7 +31,7 @@
 
 		<h2>Remote data</h2>
 
-		<p>To use the filter as an autocomplete that taps into remote data sources, you can use the <code>filterablebeforefilter</code> event to dynamically populate a listview as a user types a search query: <a href="autocomplete-remote.php" data-ajax="false">Remote autocomplete demo</a></p>
+		<p>To use the filter as an autocomplete that taps into remote data sources, you can use the <code>filterablebeforefilter</code> event to dynamically populate a listview as a user types a search query: <a href="../listview-autocomplete-remote/" data-ajax="false">Remote autocomplete demo</a></p>
 
 		<h2>Local data</h2>
 

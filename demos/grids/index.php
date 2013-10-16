@@ -76,7 +76,7 @@
 				</fieldset>
 			</div><!--/demo-html -->
             
-            <p>View more examples of <a href="grid-buttons.php" data-ajax="false">buttons in grids</a>.</p>
+            <p>View more examples of <a href="../grids-buttons/" data-ajax="false">buttons in grids</a>.</p>
 
 
 		<h2>Four-column grids</h2>
