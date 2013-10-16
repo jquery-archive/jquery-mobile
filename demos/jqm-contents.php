@@ -99,8 +99,8 @@
 		<h3>Listviews</h3>
 		<ul data-role="listview">
 			<li data-filtertext="listview widget thumbnails icons nested split button collapsible ul ol"><a href="listview/" data-ajax="false">Listview</a></li>
-			<li data-filtertext="autocomplete filter reveal listview filtertextbeforefilter placeholder"><a href="listview-autocomplete/" data-ajax="false">Listview autocomplete</a></li>
-			<li data-filtertext="autocomplete filter reveal listview remote filtertextbeforefilter placeholder"><a href="listview-autocomplete-remote/" data-ajax="false">Listview autocomplete remote data</a></li>
+			<li data-filtertext="autocomplete filterable reveal listview filtertextbeforefilter placeholder"><a href="listview-autocomplete/" data-ajax="false">Listview autocomplete</a></li>
+			<li data-filtertext="autocomplete filterable reveal listview remote data filtertextbeforefilter placeholder"><a href="listview-autocomplete-remote/" data-ajax="false">Listview autocomplete remote data</a></li>
 			<li data-filtertext="autodividers anchor jump scroll linkbars listview lists ul ol"><a href="listview-autodividers-linkbar/" data-ajax="false">Listview autodividers linkbar</a></li>
 			<li data-filtertext="listview autodividers selector autodividersselector lists ul ol"><a href="listview-autodividers-selector/" data-ajax="false">Listview autodividers selector</a></li>
 			<li data-filtertext=""><a href="listview-collapsible-item-flat/" data-ajax="false">Listview collapsible list items (flat)</a></li>
@@ -132,9 +132,11 @@
 	<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 		<h3>Forms</h3>
 		<ul data-role="listview">
-			<li data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="forms/" data-ajax="false">Forms</a></li>
-			<li data-filtertext="form field containers fieldcontain ui-field-contain"><a href="field-contain/" data-ajax="false">Field containers</a></li>
-			<li data-filtertext="form hide labels accessible ui-hidden-accessible"><a href="hidden-accessible/" data-ajax="false">Hide labels</a></li>
+			<li data-filtertext="forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="forms/" data-ajax="false">Forms</a></li>
+			<li data-filtertext="form gallery examples overview forms text checkbox radio range button submit reset inputs selects textarea slider flipswitch label form elements"><a href="forms-gallery/" data-ajax="false">Form gallery</a></li>
+			<li data-filtertext="form disabled"><a href="forms-gallery/" data-ajax="false">Form disabled</a></li>
+			<li data-filtertext="form field containers fieldcontain ui-field-contain"><a href="forms-field-contain/" data-ajax="false">Form field containers</a></li>
+			<li data-filtertext="form hide labels hidden accessible ui-hidden-accessible"><a href="forms-label-hidden-accessible/" data-ajax="false">Hide labels</a></li>
 
 			<li data-filtertext="form textinput widget text input textarea number date time tel email file color password"><a href="textinput/" data-ajax="false">Textinput</a></li>
 			<li data-filtertext="form button widget input button submit reset"><a href="button/" data-ajax="false">Input button</a></li>
