@@ -33,28 +33,27 @@
 
 		<p>Any page can be presented as a modal dialog that appears to be suspended above the page by adding an attribute to the link that leads to the dialog page.</p>
 		
-		<p>Note: The dialog widget is deprecated in 1.4 and will be removed in 1.5. The page widget now has an option dialog. These dialog demos don't reflect this change yet.</p>
+		<p><strong>Note:</strong> The dialog widget is deprecated in 1.4 and will be removed in 1.5. The page widget now has the <code>dialog</code> option which, when set to <code>true</code> will apply dialog styling to a page.</p>
 
 		<h2>Basics</h2>
-		<p>Any page can be presented as a modal dialog by adding the <code>data-rel="dialog"</code> attribute to the page anchor link. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page. By default the framework will also add a close button if the dialog has a header.</p>
+		<p>Any page can be presented as a modal dialog by adding the <code>data-dialog="true"</code> attribute to the page. When the "dialog" attribute is applied, the framework adds styles to add rounded corners, margins around the page and a dark background to make the "dialog" appear to be suspended above the page. By default the framework will also add a close button if the dialog has a header.</p>
 
 		<p>
 			<code>
-			&lt;a href=&quot;foo.html&quot; data-rel=&quot;dialog&quot;&gt;Open dialog&lt;/a&gt;
+			&lt;a href=&quot;dialog.html&quot; class=&quot;ui-shadow ui-btn ui-corner-all ui-btn-inline&quot; data-transition=&quot;pop&quot;&gt;Open dialog&lt;/a&gt;
 			</code>
 			</p>
 
-			<a href="dialog.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Open dialog</a>
+			<a href="dialog.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Open dialog</a>
 
 		<h2>Transitions</h2>
-		<p>By default, the dialog will open with a 'pop' transition.  Like all pages, you can specify any <a href="page-transitions.html">page transition</a> you want on the dialog by adding the <code>data-transition</code> attribute to the link. To make it feel more dialog-like, we recommend specifying a transition of "pop", "slidedown" or "flip".</p>
+		<p>By default, the dialog will open with the same transition as a regular page. Like all pages, you can specify any <a href="page-transitions.html">page transition</a> you want on the dialog by adding the <code>data-transition</code> attribute to the link. To make it feel more dialog-like, we recommend specifying a transition of "pop", "slidedown" or "flip".</p>
 
 <code>
-&lt;a href=&quot;foo.html&quot; data-rel=&quot;dialog&quot; data-transition=&quot;pop&quot;&gt;Open dialog&lt;/a&gt;
+&lt;a href=&quot;dialog.html&quot; role=&quot;button&quot; class=&quot;ui-shadow ui-btn ui-corner-all ui-btn-inline&quot; <strong>data-transition=&quot;slidedown&quot;</strong>&gt;data-transition=&quot;slidedown&quot;&lt;/a&gt;
 </code>
 
 			<div>
-			<a href="dialog.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">data-transition="pop"</a>
 			<a href="dialog.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="slidedown">data-transition="slidedown"</a>
 			<a href="dialog.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="flip">data-transition="flip"</a>
 			</div>
@@ -67,16 +66,13 @@
 			<a href="dialog-noclosebtn.html" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">No close button</a>
 
 		<p>To create a "cancel" button in a dialog, just link to the page that triggered the dialog to open and add the <code>data-rel="back"</code> attribute to your link. This pattern of linking to the previous page is also usable in non-JS devices as well.</p>
-		<p>For JavaScript-generated links, you can simply set the href attribute to "#" and use the <code>data-rel="back"</code> attribute. You can also call the dialog's <code>close()</code> method to programmatically close dialogs, for example: <code>$('.ui-dialog').dialog('close')</code>. </p>
+		<p>For JavaScript-generated links, you can simply set the href attribute to "#" and use the <code>data-rel="back"</code> attribute.</p>
 
 			<h3>Setting the close button text</h3>
 		<p>Just like the page plugin, you can set a dialog's close button text through an option or data attribute.
 			This option is used to customize the text of the close button which is helpful for translating this into different languages. This is displayed as an icon-only button by default so the text isn't visible on-screen, but is read by screen readers so this is an important accessibility feature.
 			The option can be configured for all dialogs by binding to the <code>mobileinit</code> event and setting the <code>$.mobile.dialog.prototype.options.closeBtnText</code> property to a string of your choosing, or you can place the data attribute <code>data-close-btn-text</code> to configure the text from your markup.
 			</p>
-
-		<h2>History &amp; Back button behavior</h2>
-		<p>Since dialogs are typically used to support actions within a page, the framework does not include dialogs in the hash state history tracking. This means that dialogs will not appear in your browsing history chronology when the Back button is clicked. For example, if you are on a page, click a link to open a dialog, close the dialog, then navigate to another page, if you were to click the browser's Back button at that point you will navigate back to the first page, not the dialog.</p>
 
 		<h2>Chaining Dialogs</h2>
 		<p>Please note: If a dialog opens another dialog (chaining), closing the last one with a link of type <code>data-rel="back"</code> will always navigate to the previous dialog until the root-page of type <code>data-role="page"</code> is reached. This guarantees a consistent navigation between dialogs.</p>
