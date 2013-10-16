@@ -93,7 +93,7 @@
 		-webkit-border-bottom-right-radius: 0;
 		border-bottom-right-radius: 0;
 	}
-	/* If you want to add shadow, don't kill the focus style. */
+	/* If you want to add shadow, don't kill the focus style. */ 
 	.my-page .ui-listview li {
 		-moz-box-shadow: 0px 0px 9px #111;
 		-webkit-box-shadow: 0px 0px 9px #111;
@@ -105,14 +105,14 @@
 		-webkit-box-shadow: 0px 0px 12px #33ccff;
 		box-shadow: 0px 0px 12px #33ccff;
 	}
-	/* Animate focus and hover style, and resizing. */
+	/* Animate focus and hover style, and resizing. */ 
 	.my-page .ui-listview li,
 	.my-page .ui-listview .ui-btn {
 		-webkit-transition: all 500ms ease;
 		-moz-transition: all 500ms ease;
 		-o-transition: all 500ms ease;
 		-ms-transition: all 500ms ease;
-		transition: all 500ms ease;
+		transition: all 500ms ease;	
 	}
 }
 

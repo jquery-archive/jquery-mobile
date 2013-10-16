@@ -56,6 +56,7 @@
 
 					<p>Most theme changes can be done using ThemeRoller, but it's also simple to manually edit the base swatches in the default theme and/or add additional swatches by editing the theme CSS file. Just copy a block of swatch styles, rename the classes with the new swatch letter name, and tweak colors as you see fit.</p>
 
+
 						<h3>Bars</h3>
 					<p>The default theme contains the following five bar styles:</p>
 
@@ -69,10 +70,12 @@
 
 					<p>By default, the framework assigns the "a" swatch to all headers and footers, because these are typically given high visual priority in an application. To set the color of a bar to a different swatch color, simply add the <code> data-theme</code> attribute to your header or footer and specify an alternate swatch letter ("b" or "d", for example) and the specified theme swatch color will be applied. </p>
 
+
+
 						<h3>Content Blocks</h3>
 					<p>The default theme also includes color swatch values for use in content blocks, designed to coordinate with the header color swatches in the theme. </p>
 
-						<div class="swatch-preview">
+						<div class="swatch-preview">	
 							<div class="ui-body ui-body-a">Block A - <a href="#">Link</a></div>
 							<div class="ui-body ui-body-b">Block B - <a href="#">Link</a></div>
 							<div class="ui-body ui-body-c">Block C - <a href="#">Link</a></div>
@@ -80,7 +83,12 @@
 							<div class="ui-body ui-body-e">Block E - <a href="#">Link</a></div>
 						</div><!-- end swatch-bars -->
 
+
 					<p>If a theme isn't specified on a content block, the framework will default to "c" to maximize contrast against the default header "a".</p>
+
+				
+
+
 
 					<h2>Lists &amp; Buttons</h2>
 					<p>Each swatch also includes default styles for interactive elements like list items and buttons. Each button has styles for normal, hover/focus and pressed states.</p>
@@ -93,9 +101,13 @@
 							<a href="index.html" class="ui-btn ui-corner-all ui-btn-e ui-btn-icon-left ui-icon-arrow-l">Button E</a>
 						</div><!-- end swatch-bars -->
 
+
 					<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box. This  behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container.</p>
 
 					<p>If you want to add visual emphasis to a button, an alternate swatch color can be set by adding a <code> data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
+
+						
+
 
 						<h3>Global "Active" state</h3>
 					<p>The jQuery Mobile framework uses a swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the individual swatch of the given widget. We apply this in navigation and form controls whenever there is a need to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it cannot be overridden via the markup; it is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
@@ -107,6 +119,7 @@
 					         	<input type="radio" name=" radio-choice-a" id="radio-choice-b" value="off">
 					         	<label for="radio-choice-b">Off</label>
 					    </fieldset>
+
 
 						<h3>Icons</h3>
 					<p>There is a core set of <a href="../widgets/icons/">standard icons</a> included in the framework that can be assigned to any button. To minimize the download size of the core icons, jQuery Mobile only includes these icons in white and automatically adds a semi-transparent black circle behind the icon to make sure it has good contrast on all background colors.</p>
@@ -130,6 +143,7 @@
 
 							<h3>Overriding themes</h3>
 						<p>The themes are meant as a solid starting point, but are meant to be customized. Since everything is controlled by CSS, it's easy to use a web inspector tool to identify the style properties you want to modify. The set of of theme classes (global) and semantic structural classes (widget-specific) added to elements provide a rich set of possible selectors against which to target style overrides. We recommend adding an external stylesheet to the <code>head</code>, placed <strong>after</strong> the structure and theme stylesheet references, that contain all your style overrides. This allows you to easily update to newer versions of the library because overrides are kept separate from the library code.</p>
+
 
 	</div><!-- /content -->
 

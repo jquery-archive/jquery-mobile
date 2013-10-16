@@ -34,13 +34,14 @@
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
-
+    
     	<h1>Buttons in grids</h1>
-
+        
         <p>On this page you see examples of how you can use grids to layout buttons.</p>
 
-        <h2>Basic</h2>
 
+        <h2>Basic</h2>
+        
         <p>Buttons in grids get a bit margin left and right. There is one exception; fullwidth <code>button</code> elements (i.e. not inline or icon-only). Because of the 100% width the margin can't be applied to the element directly. You can wrap them in a <code>div</code> and give this the same margin as other buttons as we do in this example:</p>
 
         <div data-demo-html="true" data-demo-css="#wrap">
@@ -70,6 +71,7 @@
 				</div>
 			</form>
         </div><!--/demo-html -->
+
 
         <h2>Mini sized</h2>
 
@@ -101,8 +103,9 @@
 			</form>
         </div><!--/demo-html -->
 
-        <h2>Icon only, inline centered</h2>
 
+        <h2>Icon only, inline centered</h2>
+        
         <p>Inline buttons can be centered by adding <code>text-align: center;</code> to your custom CSS.</p>
 
         <div data-demo-html="true" data-demo-css="#center">
@@ -115,8 +118,9 @@
             </div>
         </div><!--/demo-html -->
 
-        <h2>Responsive</h2>
 
+        <h2>Responsive</h2>
+        
         <p>It's not recommended to have many buttons with text on one row at small screens, because the text might get truncated. You can use <a href="./">responsive grids</a> to stack the buttons at small screens. Here we use the framework preset breakpoint by adding class <code>ui-responsive</code> to the container.</p>
 
         <div data-demo-html="true">
@@ -127,8 +131,9 @@
             </div>
         </div><!--/demo-html -->
 
-        <h2>Alignment</h2>
 
+        <h2>Alignment</h2>
+        
         <p>Use grid solo to align a single button with buttons in other grids.</p>
 
         <div data-demo-html="true">

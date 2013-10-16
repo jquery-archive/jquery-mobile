@@ -32,7 +32,7 @@
 		<h1>Dialogs</h1>
 
 		<p>Any page can be presented as a modal dialog that appears to be suspended above the page by adding an attribute to the link that leads to the dialog page.</p>
-
+		
 		<p><strong>Note:</strong> The dialog widget is deprecated in 1.4 and will be removed in 1.5. The page widget now has the <code>dialog</code> option which, when set to <code>true</code> will apply dialog styling to a page.</p>
 
 		<h2>Basics</h2>

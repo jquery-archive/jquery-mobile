@@ -120,7 +120,7 @@
 					}
 					this.element.find("div.jqm-content>h2").each(function(){
 						var id, text = $(this).text();
-
+						
 						if(typeof $(this).attr("id") === "undefined"){
 							id = text.replace(/[^\.a-z0-9:_-]+/gi,"");
 							$(this).attr( "id", id );
@@ -156,6 +156,7 @@
 						self.element.find(".jqm-quicklink-panel ul").append("<li><a href='#"+id+"'>"+text+"</a></li>");
 					});
 					self.element.find(".jqm-quicklink-panel ul").listview("refresh");
+
 
 			}
 		});
