@@ -120,7 +120,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>The panel will be displayed with the <code>position:absolute</code> CSS property, meaning it will scroll with the page. When a panel is opened the framework checks to see if the bottom of the panel contents is in view. If not, it scrolls to the top of the page.</p>
 
-        <p>You can set a panel to <code>position:fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and make it inaccessible. <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without fixed positioning. See an example of <a href="panel-fixed.php" data-ajax="false">panels with fixed positioning</a>.</p>
+        <p>You can set a panel to <code>position:fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and make it inaccessible. <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without fixed positioning. See an example of <a href="../panel-fixed/" data-ajax="false">panels with fixed positioning</a>.</p>
 
 		<h2>Styling panels</h2>
 
@@ -178,7 +178,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<h4>Applying a preset breakpoint</h4>
 
-		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the page or, in case you use external panels and/or fixed toolbars, to the page container (<code>body</code>). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
+		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the page or, in case you use external panels and/or fixed toolbars, to the page container (<code>body</code>). See an example of a <a href="../panel-responsive/" data-ajax="false">responsive panel</a> page.</p>
 
 	</div><!-- /content -->
 

@@ -175,7 +175,7 @@
 			field is blank. The <code>data-filter-placeholder</code> attribute can be 
 			added to specify the placeholder text for the filter. If you need to search 
 			against a long list of values, we provide a way to create a filter with a 
-			<a href="../autocomplete/autocomplete-remote.php" data-ajax="false">remote 
+			<a href="../listview-autocomplete-remote/" data-ajax="false">remote 
 			data source</a>.
 			</p>
 

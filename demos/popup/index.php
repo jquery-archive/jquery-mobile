@@ -304,11 +304,6 @@
 				<a href="#pre-rendered-page" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-r ui-btn-icon-right" data-mini="true" data-inline="true">Go to demo</a>
 			</div>
 
-		<h2>Advanced techniques</h2>
-		<p>Learn how to customize and extend popups by working with the API, custom scripts, and styles.</p>
-			<a href="popup-images.php" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-arrow-r ui-btn-icon-right">Scaling images</a>
-			<a href="popup-iframes.php" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-arrow-r ui-btn-icon-right">Map + video iframes</a>
-
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>

@@ -289,7 +289,7 @@
              <input type="password" name="password" id="password" value="" autocomplete="off">
         </div><!-- /demo-html -->
 
-		<p>See the <a href="form-gallery.php">form gallery</a> for more form element examples.</p>
+		<p>See the <a href="../forms-gallery/">form gallery</a> for more form element examples.</p>
 
 		<h2>Accessibly hidden labels</h2>
 
