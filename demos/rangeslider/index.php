@@ -161,36 +161,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-                <h2>Fieldcontain, hidden label</h2>
-
-                <div data-demo-html="true">
-				<form>
-					<div class="ui-field-contain ui-hide-label">
-                        <div data-role="rangeslider">
-                            <label for="range-9a">Rangeslider:</label>
-                            <input type="range" name="range-9a" id="range-9a" min="0" max="100" value="0">
-                            <label for="range-9b">Rangeslider:</label>
-                            <input type="range" name="range-9b" id="range-9b" min="0" max="100" value="100">
-                        </div>
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
-                <h2>Fieldcontain, hidden label, mini</h2>
-
-                <div data-demo-html="true">
-				<form>
-					<div class="ui-field-contain ui-hide-label">
-                        <div data-role="rangeslider" data-mini="true">
-                            <label for="range-11a">Rangeslider:</label>
-                            <input type="range" name="range-11a" id="range-11a" min="0" max="100" value="0">
-                            <label for="range-11b">Rangeslider:</label>
-                            <input type="range" name="range-11b" id="range-11b" min="0" max="100" value="100">
-                        </div>
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
                 <h2>Grid</h2>
 
                 <p>We make the grid blocks 100% width below 28em with custom CSS.</p>
