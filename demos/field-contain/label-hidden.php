@@ -25,7 +25,7 @@
 	<div data-role="content" class="jqm-content">
 
         <h1>Field containers, hide label/legend</h1>
-
+		
 		<p>Deprecated in 1.4. Use class <code>ui-hidden-accessible</code> for the label/legend and no field container instead.</p>
 
         <form action="#" method="get">
@@ -485,7 +485,7 @@
             </div><!--/demo-html -->
 
         </form>
-
+        
 	</div><!-- /content -->
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">

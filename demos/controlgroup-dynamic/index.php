@@ -98,13 +98,13 @@
             	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Widget type</legend>
-
+    
                         <input type="radio" name="radio-widget" id="link" value="link" checked="checked">
                         <label for="link">Link</label>
-
+    
                         <input type="radio" name="radio-widget" id="select" value="select">
                         <label for="select">Select</label>
-
+    
                         <input type="radio" name="radio-widget" id="checkbox" value="checkbox">
                         <label for="checkbox">Checkbox</label>
                     </fieldset>
@@ -113,13 +113,13 @@
             	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Action<br><small>on click/change</small></legend>
-
+    
                         <input type="radio" name="radio-action" id="remove" value="remove" checked="checked">
                         <label for="remove">Remove</label>
-
+    
                         <input type="radio" name="radio-action" id="hide" value="hide">
                         <label for="hide">Hide</label>
-
+    
                         <input type="radio" name="radio-action" id="width" value="width">
                         <label for="width">Nothing</label>
                     </fieldset>
@@ -128,15 +128,15 @@
             	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Switch orientation</legend>
-
+    
                         <input type="radio" name="radio-orientation" id="isVertical" value="isVertical" checked="checked">
                         <label for="isVertical">Vertical</label>
-
+    
                         <input type="radio" name="radio-orientation" id="isHorizontal" value="isHorizontal">
                         <label for="isHorizontal">Horizontal</label>
                     </fieldset>
             	</div>
-
+                
             </form>
 
         </div><!--/demo-html -->

@@ -30,7 +30,7 @@
 			</p>
 
 			<h2>Basic checkbox switch</h2>
-
+				
                 <div data-demo-html="true">
 				<form>
                     <label for="flip-checkbox">Flip toggle switch checkbox:</label>
@@ -39,16 +39,16 @@
                 </div><!-- /demo-html -->
 
                 <h2>Basic checkbox switch checked</h2>
-
+                
                 <div data-demo-html="true">
                 <form>
                     <label for="flip-checkbox">Flip toggle switch checkbox:</label>
                     <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox" checked>
                 </form>
                 </div><!-- /demo-html -->
-
+				
                 <h2>Basic select switch</h2>
-
+				
                 <div data-demo-html="true">
                 <form>
                     <label for="flip-select">Flip toggle switch select:</label>
@@ -59,7 +59,7 @@
                 </form>
                 </div><!-- /demo-html -->
                 <h2>Basic select switch second option selected</h2>
-
+                
                 <div data-demo-html="true">
                 <form>
                     <label for="flip-select-second">Flip toggle switch select:</label>
@@ -70,6 +70,7 @@
                 </form>
                 </div><!-- /demo-html -->
 
+				
 			<h2>Theme</h2>
                 <div data-demo-html="true">
 				<form>

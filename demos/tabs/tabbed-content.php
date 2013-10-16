@@ -21,7 +21,7 @@
 			      <li><a href="ajax-content.php"  data-theme="a" data-ajax="false">three</a></li>
 			    </ul>
 			</div>
-
+		
 		<div id="one" class="ui-content">
 		<h1>First tab contents</h1>
 		</div>
@@ -32,7 +32,7 @@
 			    <li><a href="#">BMW</a></li>
 			    <li><a href="#">Cadillac</a></li>
 			    <li><a href="#">Ferrari</a></li>
-			</ul>
+			</ul>      
 		</div>
 </div>
 		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">

@@ -21,7 +21,7 @@ $( document ).on( "pagecreate", function() {
 			h = scrHeight;
 			w = ( scrHeight / ifrHeight ) * ifrWidth;
 		}
-
+		
 		return {
 			'width': w - ( ifrPadding + ifrBorder ),
 			'height': h - ( ifrPadding + ifrBorder )
@@ -31,10 +31,10 @@ $( document ).on( "pagecreate", function() {
 	$( ".ui-popup iframe" )
 		.attr( "width", 0 )
 		.attr( "height", "auto" );
-
+	 
 	$( "#popupVideo" ).on({
 		popupbeforeposition: function() {
-			// call our custom function scale() to get the width and height
+			// call our custom function scale() to get the width and height 
 			var size = scale( 497, 298, 15, 1 ),
 				w = size.width,
 				h = size.height;
@@ -46,7 +46,7 @@ $( document ).on( "pagecreate", function() {
 		popupafterclose: function() {
 			$( "#popupVideo iframe" )
 				.attr( "width", 0 )
-				.attr( "height", 0 );
+				.attr( "height", 0 );	
 		}
 	});
 });

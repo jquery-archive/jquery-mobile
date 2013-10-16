@@ -132,6 +132,7 @@
 <li data-filtertext=""><a href="map-geolocation/" data-ajax="false">Map geolocation demo</a></li>
 <li data-filtertext=""><a href="map-list-toggle/" data-ajax="false">Map list toggle demo</a></li>
 
+
 <!--
 
 <li data-filtertext="introduction"><a href="intro/" data-ajax="false">Introduction</a></li>
@@ -236,6 +237,7 @@
 <li data-section="Questions & Answers" data-filtertext="How do I need to configure PhoneGap Cordova?"><a href="faq/how-configure-phonegap-cordova.php">How do I need to configure PhoneGap/Cordova?</a></li>
 
 -->
+
 
 <!--
 
