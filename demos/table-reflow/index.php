@@ -146,11 +146,11 @@
 		<p>It's best to use a <code>class</code> on the table to apply the breakpoint. Add these rules to your custom stylesheet that is included in the <code>head</code> of the page. We recommend creating a set of custom breakpoint classes that can be used to apply standard table breakpoints in your project.</p>
 
 		<h2>Choosing a breakpoint</h2>
-		
+
 		<p>The goal is to determine the minimum width at which the <em>entire table</em> will fit comfortably within the screen. Find this width by populating a table with realistic sample data, then adjust the browser window until the table completely fits and has a bit of extra space to account for rendering differences across devices. This is the natural place to set the breakpoint that switches between the stacked and tabular presentation modes. The breakpoint width is highly dependent on the number of columns in the table and content within each cell.</p>
 
 		<h2>Applying a preset breakpoint</h2>
-		
+
 		<p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a single pre-configured breakpoint that targets the stacked style to smaller phones and swaps to a tabular prsentation on larger phones, tablet and desktop devices. To use this preset breakpoint, add the <code>ui-responsive</code> class to the table to convert from the stacked presentation to a tabular presentation at 560px (35em). If this breakpoint doesn't work for your content, we encourage you to write a custom breakpoint as descibed above.</p>
 
 <pre><code>
@@ -158,9 +158,9 @@
 </code></pre>
 
 		<h2>Grouped column headers</h2>
-		
+
 		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a  class to the label of the first cell in each group to allow you to style these differently and provide additional visual hierarchy.</p>
-		
+
 		<div data-demo-html="true">
 		    <table data-role="table" id="temp-table" data-mode="reflow" class="ui-responsive table-stroke">
 			<thead>

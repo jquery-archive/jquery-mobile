@@ -70,7 +70,6 @@
 	<!-- Here are a bunch of panels at the end, just before the close page tag  -->
 
 	<!-- leftpanel1  -->
-	
 
 <?php include( '../jqm-panels.php' ); ?>
 

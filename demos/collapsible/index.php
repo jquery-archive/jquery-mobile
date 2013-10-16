@@ -63,7 +63,6 @@
             </div>
         </div><!--/demo-html -->
 
-
         <h2>Expanded</h2>
 
         <p>To expand the content when the page loads, add the <code>data-collapsed="false"</code> attribute to the wrapper.</p>
