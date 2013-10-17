@@ -135,7 +135,7 @@ $( document ).one( "pagecreate", ".jqm-demos", function( event ) {
 
 		$( this )
 			.find( "a" )
-			.append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'></span> " + text + "</span>" );
+			.append( "<span class='jqm-search-results-keywords ui-li-desc'>" + text + "</span>" );
 	});
 });
 
@@ -184,15 +184,7 @@ $( document ).on( "mobileinit", function() {
 
 	$.widget( "mobile.listview", $.mobile.listview, {
 		options: {
-			theme: null,
-			countTheme: null,
-			dividerTheme: null,
-			icon: "carat-r",
-			splitIcon: "carat-r",
-			splitTheme: null,
-			corners: true,
-			shadow: true,
-			inset: false,
+			icon: false,
 			arrowKeyNav: false,
 			enterToNav: false,
 			highlight: false,

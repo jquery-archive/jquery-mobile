@@ -202,6 +202,35 @@
 	filter: Alpha(Opacity=40);
 }
 
+/* Search */
+.jqm-search-panel .ui-panel-inner {
+	padding-top: 0;
+}
+.jqm-search-panel .ui-input-search {
+	margin: 1em 0;
+}
+.jqm-list .jqm-search-results-keywords {
+    padding: .46857em 0 0;
+    font-size: .8em;
+    font-weight: 300;
+    color: #999;
+    display: block;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.ui-btn-active .jqm-search-results-keywords {
+    color: #fff;
+}
+.jqm-search-results-highlight {
+    color: #3388cc;
+    font-weight: 400;
+}
+.ui-btn-active .jqm-search-results-highlight {
+    color: #fff;
+    font-weight: 300;
+}
+
 /* Quick links */
 .jqm-demos .jqm-content .jqm-deeplink {
 	display: block;
@@ -328,6 +357,20 @@
 	}
 	.jqm-navmenu-panel .ui-btn:hover::after {
 		opacity: .4;
+	}
+	.jqm-search-panel {
+		width: 26em;
+		right: -26em;
+		z-index: 1003; /* Puts the panel on top of the dismiss modal which is not adjusted to custom width */
+	}
+	.jqm-search-panel.ui-panel-animate.ui-panel-position-right {
+		-webkit-transform: translate3d(26em,0,0);
+		-moz-transform: translate3d(26em,0,0);
+		transform: translate3d(26em,0,0);
+	}
+	.ui-panel-dismiss-open.ui-panel-dismiss-position-right {
+		left: -17em;
+		right: 17em;
 	}
 }
 
@@ -627,43 +670,4 @@
 	background-color: #3399ff;
 	color: #fff;
 	text-shadow: none;
-}
-/* CSS for keywords highlighting in search results */
-.jqm-search-results-highlight {
-        color: #07ade0;
-        font-weight: 400;
-        text-shadow: none;
-}
-.ui-btn-active .jqm-search-results-highlight,
-.ui-focus .jqm-search-results-highlight {
-        color: #fff;
-        text-shadow: 0 1px 0 #369;        
-}
-.jqm-search .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
-.jqm-search-results-wrap .jqm-list .ui-li .ui-btn-text a.ui-link-inherit {
-        padding: .5626em 15px;
-        font-weight: 400;
-}
-.jqm-list .jqm-search-results-keywords {
-        padding: 6px 0 0;
-        font-size: .8em;
-        font-weight: 300;
-        color: #999;
-        display:block;
-}
-.jqm-search-results-keywords .jqm-keyword-hash {
-        margin-right: .2em;
-        margin-left: .2em;
-        font-weight: 400;
-        color: #aaa;
-        font-size: .75em;
-        text-transform: uppercase;
-}
-.ui-btn-active .jqm-search-results-keywords,
-.ui-focus .jqm-search-results-keywords,
-.ui-btn-active .jqm-search-results-keywords .jqm-keyword-hash,
-.ui-focus .jqm-search-results-keywords .jqm-keyword-hash {
-        color: #fff;
-        text-shadow: 0 1px 0 #369;
-        font-weight: 400;
 }
