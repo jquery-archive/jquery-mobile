@@ -67,7 +67,9 @@ $( document ).on( "pagecreate", function() {
 });
 
 $( document ).on( "pagecreate", ".jqm-demos", function() {
-	var page = $( this );
+	var page = $( this ),
+		searchUrl = ( $( this ).hasClass( "jqm-home") )? "_search/": "../_search/",
+		searchContents = $( ".jqm-search ul.jqm-list").find( "li:not(.ui-collapsible)" );
 
 	// global navmenu panel
 	$( ".jqm-navmenu-link" ).on( "click", function() {
@@ -78,9 +80,8 @@ $( document ).on( "pagecreate", ".jqm-demos", function() {
 	$( ".jqm-search-link" ).on( "click", function() {
 		page.find( ".jqm-search-panel" ).panel( "open" );
 	});
-	
-	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
-		globalNav: "demos",
+
+	$( this ).find( ".jqm-search ul.jqm-list" ).html( searchContents ).listview({
 		inset: false,
 		theme: null,
 		dividerTheme: null,
@@ -92,11 +93,10 @@ $( document ).on( "pagecreate", ".jqm-demos", function() {
   		arrowKeyNav: true,
   		enterToNav: true,
   		highlight: true,
-  		submitTo: "_search/"
-	});
+  		submitTo: searchUrl
+	}).filterable();
 			
-	$( this ).find( ".jqm-content ul.jqm-list" ).listview({
-		globalNav: "demos",
+	$( this ).find( ".jqm-content ul.jqm-list" ).html( searchContents ).listview({
 		inset: true,
 		theme: null,
 		dividerTheme: null,
@@ -112,16 +112,24 @@ $( document ).on( "pagecreate", ".jqm-demos", function() {
 	});
 });
 
+//fix links on homepage to point to sub directories
+$( document ).on( "pagecreate", ".jqm-home", function(){
+	$( this ).find( "a" ).each( function() {
+		$( this ).attr( "href", $( this ).attr( "href" ).replace( "../", "" ) );
+	});
+});
+
 $( document ).on( "pageshow",  ".jqm-demos", function() {
 	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
 });
 
-$( document ).on( "pageshow", ".jqm-demos-search-results", function() {
-	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1], self = this;
+$( document ).on( "pagecreate", ".jqm-demos-search-results", function() {
+	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1],
+		that = this;
 	setTimeout(function() {
 		e = $.Event( "keyup" );
 		e.which = 65;
-		$( self ).find( ".jqm-content .jqm-search-results-wrap input" ).val( search ).trigger(e).trigger( "change" );
+		$( that ).find( ".jqm-content .jqm-search-results-wrap input" ).val( search ).trigger(e).trigger( "change" );
 	}, 0 );
 });
 
@@ -176,7 +184,6 @@ $( document ).on( "mobileinit", function() {
 			corners: true,
 			shadow: true,
 			inset: false,
-			initSelector: ":jqmData(role='listview')",
 			arrowKeyNav: false,
 			enterToNav: false,
 			highlight: false,
@@ -200,9 +207,7 @@ $( document ).on( "mobileinit", function() {
 			form.attr( "method", "get" )
 				.attr( "action", this.options.submitTo );
 				
-			var base = $( "base" ).attr( "href" ).split( "demos" )[0];
-				base = base.split( "index.html" )[0] + "demos" + "/";
-				url = base + this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
+			var url = this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
 			
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", url );
 		},
@@ -221,7 +226,7 @@ $( document ).on( "mobileinit", function() {
 		},
 		enhanced: false,
 		arrowKeyNav: function() {
-			var input = this.element.parent().find( "input" );
+			var input = this.element.prev("form").find( "input" );
 			
 			if ( !this.enhanced ) {
 				this._on( input, {
@@ -232,24 +237,25 @@ $( document ).on( "mobileinit", function() {
 			}
 		},
 		handleKeyUp: function( e ) {
-			var input = this.element.parent().find( "input" );
+			var input = this.element.prev("form").find( "input" );
 			
-			if ( e.which === $.mobile.keyCode.DOWN ) {
+			if ( e.which === $.ui.keyCode.DOWN ) {
 				if ( this.element.find( "li.ui-btn-active" ).length == 0 ) {
-					this.element.find( "li:first" ).toggleClass( "ui-btn-active" );
+					this.element.find( "li:first" ).toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				} else {
-					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" );
+					this.element.find( "li.ui-btn-active a" ).toggleClass( "ui-btn-active");
+					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				}
 				
 				this.highlightDown();
-			} else if ( e.which === $.mobile.keyCode.UP ) {
+			} else if ( e.which === $.ui.keyCode.UP ) {
 				if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
-					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" );
-					
-					this.highlightUp()
+					this.element.find( "li.ui-btn-active a" ).toggleClass( "ui-btn-active");
+					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				} else {
-					this.element.find( "li:last" ).toggleClass( "ui-btn-a" ).toggleClass( "ui-btn-active" );
+					this.element.find( "li:last" ).toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				}
+				this.highlightUp();
 			} else if ( typeof e.which !== "undefined" ) {
 				this.element.find( "li.ui-btn-active" ).removeClass( "ui-btn-active" );
 				
@@ -277,16 +283,16 @@ $( document ).on( "mobileinit", function() {
 		},
 		highlightDown: function() {
 			if ( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" );
-				
+				this.element.find( "li.ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				this.highlightDown();
 			}
 			return;
 		},
 		highlightUp: function() {
 			if ( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" );
-				
+				this.element.find( "li.ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				this.highlightUp();
 			}
 			return;
