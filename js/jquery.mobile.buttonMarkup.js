@@ -206,7 +206,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 			return;
 		}
 
-		optionKey = overwriteClasses.trim();
+		optionKey = $.trim( overwriteClasses );
 		if ( !optionKey.length ) {
 			return;
 		}
