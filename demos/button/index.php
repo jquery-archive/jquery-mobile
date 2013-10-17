@@ -44,7 +44,7 @@
 
 		<div data-demo-html="true">
 			<form>
-				<div class="ui-input-btn ui-btn">
+				<div class="ui-input-btn ui-btn ui-corner-all ui-shadow">
 					Input value
 					<input type="button" data-enhanced="true" value="Input value">
 				</div>
