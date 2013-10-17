@@ -217,7 +217,7 @@ $.fn.buttonMarkup = function( options, overwriteClasses ) {
 			return ( optionValue !== undefined ) ? optionValue : defaults[ optionKey ];
 		}
 
-		eval( "retrievedOptions." + optionKey + " = arguments[2]" );
+		retrievedOptions[ optionKey ] = arguments[2];
 		el.className = optionsToClasses( $.extend( {}, defaults, retrievedOptions ) ).join( " " );
 		return this;
 	}
