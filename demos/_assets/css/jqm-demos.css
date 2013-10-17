@@ -628,3 +628,42 @@
 	color: #fff;
 	text-shadow: none;
 }
+/* CSS for keywords highlighting in search results */
+.jqm-search-results-highlight {
+        color: #07ade0;
+        font-weight: 400;
+        text-shadow: none;
+}
+.ui-btn-active .jqm-search-results-highlight,
+.ui-focus .jqm-search-results-highlight {
+        color: #fff;
+        text-shadow: 0 1px 0 #369;        
+}
+.jqm-search .jqm-list .ui-li .ui-btn-text a.ui-link-inherit,
+.jqm-search-results-wrap .jqm-list .ui-li .ui-btn-text a.ui-link-inherit {
+        padding: .5626em 15px;
+        font-weight: 400;
+}
+.jqm-list .jqm-search-results-keywords {
+        padding: 6px 0 0;
+        font-size: .8em;
+        font-weight: 300;
+        color: #999;
+        display:block;
+}
+.jqm-search-results-keywords .jqm-keyword-hash {
+        margin-right: .2em;
+        margin-left: .2em;
+        font-weight: 400;
+        color: #aaa;
+        font-size: .75em;
+        text-transform: uppercase;
+}
+.ui-btn-active .jqm-search-results-keywords,
+.ui-focus .jqm-search-results-keywords,
+.ui-btn-active .jqm-search-results-keywords .jqm-keyword-hash,
+.ui-focus .jqm-search-results-keywords .jqm-keyword-hash {
+        color: #fff;
+        text-shadow: 0 1px 0 #369;
+        font-weight: 400;
+}
