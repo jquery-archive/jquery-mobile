@@ -50,6 +50,10 @@ $.widget( "mobile.textinput", {
 				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
 					!isRange );
 			
+		if ( this.element.prop( "disabled" ) ) {
+			options.disabled = true;
+		}
+
 		$.extend( this, {
 			classes: this._classesFromOptions(),
 			isSearch: isSearch,
@@ -59,10 +63,6 @@ $.widget( "mobile.textinput", {
 		});
 
 		this._autoCorrect();
-
-		if ( this.element[ 0 ].disabled ) {
-			options.disabled = true;
-		}
 
 		if ( !options.enhanced ) {
 			this._enhance();
