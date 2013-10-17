@@ -45,14 +45,19 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 	});
 }
 
-// display the version of jQM
-$( document ).on( "pagecreate", function() {
-	var version = $.mobile.version || "dev",
+$( document ).on( "pagecreate", ".jqm-demos", function( event ) {
+	var search,
+		page = $( this ),
+		that = this,
+		searchUrl = ( $( this ).hasClass( "jqm-home") )? "_search/": "../_search/",
+		searchContents = $( ".jqm-search ul.jqm-list").find( "li:not(.ui-collapsible)" )
+		version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
 		str = words[1] || "",
 		text = ver;
 
+	// Insert jqm version in header
 	if ( str.indexOf( "rc" ) == -1 ) {
 		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
 	} else {
@@ -64,23 +69,21 @@ $( document ).on( "pagecreate", function() {
 	}
 
 	$( ".jqm-version" ).html( text );
-});
-
-$( document ).on( "pagecreate", ".jqm-demos", function() {
-	var page = $( this ),
-		searchUrl = ( $( this ).hasClass( "jqm-home") )? "_search/": "../_search/",
-		searchContents = $( ".jqm-search ul.jqm-list").find( "li:not(.ui-collapsible)" );
 
 	// global navmenu panel
 	$( ".jqm-navmenu-link" ).on( "click", function() {
 		page.find( ".jqm-navmenu-panel" ).panel( "open" );
 	});
 
+	// Turn off autocomplete / correct for demos search
+	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
+
 	// global search
 	$( ".jqm-search-link" ).on( "click", function() {
 		page.find( ".jqm-search-panel" ).panel( "open" );
 	});
 
+	// initalize search panel list and filter also remove collapsibles
 	$( this ).find( ".jqm-search ul.jqm-list" ).html( searchContents ).listview({
 		inset: false,
 		theme: null,
@@ -95,7 +98,8 @@ $( document ).on( "pagecreate", ".jqm-demos", function() {
   		highlight: true,
   		submitTo: searchUrl
 	}).filterable();
-			
+
+	// Initalize search page list and remove collapsibles
 	$( this ).find( ".jqm-content ul.jqm-list" ).html( searchContents ).listview({
 		inset: true,
 		theme: null,
@@ -104,35 +108,33 @@ $( document ).on( "pagecreate", ".jqm-demos", function() {
 		arrowKeyNav: true,
 		enterToNav: true,
 		highlight: true
-	});
+	}).filterable();
 
+	// Append keywords list to each list item
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
 		var text = $( this ).attr( "data-filtertext" );
 		$( this ).find( "a" ).append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'></span> " + text + "</span>" );
 	});
+
+	//fix links on homepage to point to sub directories
+	if( $( event.target ).hasClass( "jqm-home") ){
+		$( this ).find( "a" ).each( function() {
+			$( this ).attr( "href", $( this ).attr( "href" ).replace( "../", "" ) );
+		});
+	}
+
+	// Search results page get search query string and enter it into filter then trigger keyup to filter
+	if( $( event.target ).hasClass( "jqm-demos-search-results") ){
+		search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1];
+		setTimeout(function() {
+			e = $.Event( "keyup" );
+			e.which = 65;
+			$( that ).find( ".jqm-content .jqm-search-results-wrap input" ).val( search ).trigger(e).trigger( "change" );
+		}, 0 );
+	}
 });
 
-//fix links on homepage to point to sub directories
-$( document ).on( "pagecreate", ".jqm-home", function(){
-	$( this ).find( "a" ).each( function() {
-		$( this ).attr( "href", $( this ).attr( "href" ).replace( "../", "" ) );
-	});
-});
-
-$( document ).on( "pageshow",  ".jqm-demos", function() {
-	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
-});
-
-$( document ).on( "pagecreate", ".jqm-demos-search-results", function() {
-	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1],
-		that = this;
-	setTimeout(function() {
-		e = $.Event( "keyup" );
-		e.which = 65;
-		$( that ).find( ".jqm-content .jqm-search-results-wrap input" ).val( search ).trigger(e).trigger( "change" );
-	}, 0 );
-});
-
+// funstions for highlighting text used for keywords highlight in search
 jQuery.fn.highlight = function( pat ) {
 	function innerHighlight( node, pat ) {
 		var skip = 0;
@@ -160,6 +162,7 @@ jQuery.fn.highlight = function( pat ) {
 	}) : this;
 };
 
+// Funstion to remove highlights in text
 jQuery.fn.removeHighlight = function() {
 	return this.find( "span.jqm-search-results-highlight" ).each(function() {
 		this.parentNode.firstChild.nodeName;
@@ -170,6 +173,7 @@ jQuery.fn.removeHighlight = function() {
 	}).end();
 };
 
+// Extension to listview to add keyboard navigation 
 $( document ).on( "mobileinit", function() {
 	(function( $, undefined ) {
 

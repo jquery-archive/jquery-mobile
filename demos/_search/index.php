@@ -27,7 +27,7 @@
 
 		<h2>Search Results</h2>
         <div class="jqm-search-results-wrap">
-	        <ul class="jqm-list jqm-search-results-list" data-filter="true">
+	        <ul class="jqm-list jqm-search-results-list">
 	            <?php include( '../jqm-contents.php' ); ?>
 	        </ul>
 	    </div>
