@@ -171,6 +171,10 @@ function camelCase2Hyphenated( c ) {
 	return "-" + c.toLowerCase();
 }
 
+function isAlreadyEnhanced( classes ) {
+	return ( /(^|\s)ui-btn(?=\s|$)/g ).test( classes );
+}
+
 // $.fn.buttonMarkup:
 // DOM: gets/sets .className
 //
@@ -188,7 +192,35 @@ function camelCase2Hyphenated( c ) {
 // then you should omit @overwriteClasses or set it to false.
 $.fn.buttonMarkup = function( options, overwriteClasses ) {
 	var idx, data, el, retrievedOptions, optionKey,
-		defaults = $.fn.buttonMarkup.defaults;
+		defaults = $.fn.buttonMarkup.defaults,
+		argc = arguments.length,
+		optionValue;
+
+	if ( typeof options === "string" && options === "option" ) {
+		if ( argc !== 2 && argc !== 3 ) {
+			return;
+		}
+
+		el = this[ 0 ];
+		if ( !overwriteClasses || !isAlreadyEnhanced( el.className ) ) {
+			return;
+		}
+
+		optionKey = $.trim( overwriteClasses );
+		if ( !optionKey.length ) {
+			return;
+		}
+
+		retrievedOptions = classNameToOptions( el.className ).options;
+		if ( argc === 2 ) {
+			optionValue = retrievedOptions[ optionKey ];
+			return ( optionValue !== undefined ) ? optionValue : defaults[ optionKey ];
+		}
+
+		retrievedOptions[ optionKey ] = arguments[2];
+		el.className = optionsToClasses( $.extend( {}, defaults, retrievedOptions ) ).join( " " );
+		return this;
+	}
 
 	for ( idx = 0 ; idx < this.length ; idx++ ) {
 		el = this[ idx ];
