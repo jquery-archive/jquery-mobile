@@ -25,7 +25,8 @@
 
 	<div data-role="content" class="jqm-content">
 
-		<h2>Search Results</h2>
+		<h1>Search Results</h1>
+		
         <div class="jqm-search-results-wrap">
 	        <ul class="jqm-list jqm-search-results-list">
 	            <?php include( '../jqm-contents.php' ); ?>
