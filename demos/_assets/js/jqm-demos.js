@@ -70,7 +70,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 
 	$( ".jqm-version" ).html( text );
 
-	// global navmenu panel
+	// Global navmenu panel
 	$( ".jqm-navmenu-link" ).on( "click", function() {
 		page.find( ".jqm-navmenu-panel" ).panel( "open" );
 	});
@@ -78,12 +78,12 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	// Turn off autocomplete / correct for demos search
 	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
 
-	// global search
+	// Global search
 	$( ".jqm-search-link" ).on( "click", function() {
 		page.find( ".jqm-search-panel" ).panel( "open" );
 	});
 
-	// initalize search panel list and filter also remove collapsibles
+	// Initalize search panel list and filter also remove collapsibles
 	$( this ).find( ".jqm-search ul.jqm-list" ).html( searchContents ).listview({
 		inset: false,
 		theme: null,
@@ -110,22 +110,16 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		highlight: true
 	}).filterable();
 
-	// Append keywords list to each list item
-	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
-		var text = $( this ).attr( "data-filtertext" );
-		$( this ).find( "a" ).append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'></span> " + text + "</span>" );
-	});
-
-	//fix links on homepage to point to sub directories
-	if( $( event.target ).hasClass( "jqm-home") ){
+	// Fix links on homepage to point to sub directories
+	if ( $( event.target ).hasClass( "jqm-home") ) {
 		$( this ).find( "a" ).each( function() {
 			$( this ).attr( "href", $( this ).attr( "href" ).replace( "../", "" ) );
 		});
 	}
 
 	// Search results page get search query string and enter it into filter then trigger keyup to filter
-	if( $( event.target ).hasClass( "jqm-demos-search-results") ){
-		search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1];
+	if ( $( event.target ).hasClass( "jqm-demos-search-results") ) {
+		search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[ 1 ];
 		setTimeout(function() {
 			e = $.Event( "keyup" );
 			e.which = 65;
@@ -134,7 +128,18 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	}
 });
 
-// funstions for highlighting text used for keywords highlight in search
+// Append keywords list to each list item
+$( document ).one( "pagecreate", ".jqm-demos", function( event ) {
+	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
+		var text = $( this ).attr( "data-filtertext" );
+
+		$( this )
+			.find( "a" )
+			.append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'></span> " + text + "</span>" );
+	});
+});
+
+// Functions for highlighting text used for keywords highlight in search
 jQuery.fn.highlight = function( pat ) {
 	function innerHighlight( node, pat ) {
 		var skip = 0;
@@ -162,7 +167,7 @@ jQuery.fn.highlight = function( pat ) {
 	}) : this;
 };
 
-// Funstion to remove highlights in text
+// Function to remove highlights in text
 jQuery.fn.removeHighlight = function() {
 	return this.find( "span.jqm-search-results-highlight" ).each(function() {
 		this.parentNode.firstChild.nodeName;
