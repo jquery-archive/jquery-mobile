@@ -88,7 +88,7 @@ define( [
 			this._off( this.element, "keyup change input focus blur cut paste" );
 		},
 
-		_setOptions:function( options ) {
+		_setOptions: function( options ) {
 			this._super( options );
 
 			if ( options.clearbtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ) {
