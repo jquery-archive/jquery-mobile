@@ -10,25 +10,25 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 (function( $, undefined ) {
 
 $.widget( "mobile.textinput", {
-	initSelector: "input[type='text'], " +
-		"input[type='search'], " +
-		":jqmData(type='search'), " +
-		"input[type='number'], " +
-		":jqmData(type='number'), " +
-		"input[type='password'], " +
-		"input[type='email'], " +
-		"input[type='url'], " +
-		"input[type='tel'], " +
-		"input[type='time'], " +
-		"input[type='date'], " +
-		"input[type='month'], " +
-		"input[type='week'], " +
-		"input[type='datetime'], " +
-		"input[type='datetime-local'], " +
-		"input[type='color'], " +
-		"input:not([type]), " +
-		"input[type='file'], " +
-		"textarea",
+	initSelector: "input[type='text']," +
+		"input[type='search']," +
+		":jqmData(type='search')," +
+		"input[type='number']," +
+		":jqmData(type='number')," +
+		"input[type='password']," +
+		"input[type='email']," +
+		"input[type='url']," +
+		"input[type='tel']," +
+		"textarea," +
+		"input[type='time']," +
+		"input[type='date']," +
+		"input[type='month']," +
+		"input[type='week']," +
+		"input[type='datetime']," +
+		"input[type='datetime-local']," +
+		"input[type='color']," +
+		"input:not([type])," +
+		"input[type='file']",
 
 	options: {
 		theme: null,
