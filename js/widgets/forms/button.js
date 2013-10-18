@@ -105,7 +105,9 @@ $.widget( "mobile.button", {
 			outer.toggleClass( "ui-mini", options.mini );
 		}
 		if ( options.iconpos !== undefined ) {
-			outer.removeClass( "ui-btn-icon-" + options.iconpos );
+			outer
+				.removeClass( "ui-btn-icon-" + this.options.iconpos )
+				.addClass( "ui-btn-icon-" + options.iconpos );
 		}
 		if ( options.icon !== undefined ) {
 			if ( !options.iconpos && ( !this.options.icon || !this.options.iconpos ) ) {
