@@ -209,6 +209,11 @@
 .jqm-search-panel .ui-input-search {
 	margin: 1em 0;
 }
+.jqm-search-panel .ui-input-search.ui-focus {
+	-webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+	-moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+	box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
+}
 .jqm-list .jqm-search-results-keywords {
     padding: .46857em 0 0;
     font-size: .8em;
