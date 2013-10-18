@@ -73,6 +73,10 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	// Global navmenu panel
 	$( ".jqm-navmenu-panel ul" ).listview();
 
+	$( document ).on( "panelopen", ".jqm-search-panel", function() {
+		$( this ).find( "input" ).focus();
+	})
+
 	$( ".jqm-navmenu-link" ).on( "click", function() {
 		page.find( ".jqm-navmenu-panel" ).panel( "open" );
 	});
