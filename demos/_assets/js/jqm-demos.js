@@ -49,8 +49,8 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	var search,
 		page = $( this ),
 		that = this,
-		searchUrl = ( $( this ).hasClass( "jqm-home") )? "_search/": "../_search/",
-		searchContents = $( ".jqm-search ul.jqm-list").find( "li:not(.ui-collapsible)" )
+		searchUrl = ( $( this ).hasClass( "jqm-home" ) ) ? "_search/" : "../_search/",
+		searchContents = $( ".jqm-search ul.jqm-list" ).find( "li:not(.ui-collapsible)" ),
 		version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
@@ -71,6 +71,8 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	$( ".jqm-version" ).html( text );
 
 	// Global navmenu panel
+	$( ".jqm-navmenu-panel ul" ).listview();
+
 	$( ".jqm-navmenu-link" ).on( "click", function() {
 		page.find( ".jqm-navmenu-panel" ).panel( "open" );
 	});
@@ -100,7 +102,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	}).filterable();
 
 	// Initalize search page list and remove collapsibles
-	$( this ).find( ".jqm-content ul.jqm-list" ).html( searchContents ).listview({
+	$( this ).find( ".jqm-search-results-wrap ul.jqm-list" ).html( searchContents ).listview({
 		inset: true,
 		theme: null,
 		dividerTheme: null,
@@ -184,7 +186,6 @@ $( document ).on( "mobileinit", function() {
 
 	$.widget( "mobile.listview", $.mobile.listview, {
 		options: {
-			icon: false,
 			arrowKeyNav: false,
 			enterToNav: false,
 			highlight: false,
