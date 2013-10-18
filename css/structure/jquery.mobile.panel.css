@@ -32,17 +32,14 @@
 	padding: 1em;
 }
 
-/* container */
-.ui-panel-page-container {
+/* container, page and wrapper */
+.ui-panel-page-container,
+.ui-panel-page-container .ui-page.ui-page-active {
 	overflow-x: visible;
 }
-
-/* page */
 .ui-panel-page-container-themed .ui-page-active {
 	background: none;
 }
-
-/* wrapper */
 .ui-panel-wrapper {
 	position: relative;
 	min-height: inherit;
