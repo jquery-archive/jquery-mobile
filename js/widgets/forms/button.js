@@ -71,6 +71,8 @@ $.widget( "mobile.button", {
 			( ( options.iconpos && options.icon ) ?
 				" ui-btn-icon-" + options.iconpos :
 				( options.icon ? " ui-btn-icon-left" : "" ) ) +
+			( ( options.iconshadow && options.icon ) ?	/* TODO: Deprecated in 1.4, remove in 1.5. */
+				" ui-shadow-icon" : "" ) +
 			( options.icon ? " ui-icon-" + options.icon : "" ) +
 			"' >" + this.element.val() + "</div>");
 	},
@@ -108,6 +110,9 @@ $.widget( "mobile.button", {
 			outer
 				.removeClass( "ui-btn-icon-" + this.options.iconpos )
 				.addClass( "ui-btn-icon-" + options.iconpos );
+		}
+		if ( options.iconshadow !== undefined ) {	/* TODO: Deprecated in 1.4, remove in 1.5. */
+			outer.toggleClass( "ui-shadow-icon", options.iconshadow );
 		}
 		if ( options.icon !== undefined ) {
 			if ( !options.iconpos && ( !this.options.icon || !this.options.iconpos ) ) {
