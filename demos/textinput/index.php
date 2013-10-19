@@ -310,6 +310,27 @@
         </form>
         </div><!-- /demo-html -->
 
+        <h2>Enhanced</h2>
+
+        <div data-demo-html="true">
+        <form>
+            <label for="text-enhanced">Text input:</label>
+            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+                <input type="text" data-enhanced="true" data-clear-btn="true" name="text-enhanced" id="text-enhanced" value="">
+                <a href="#" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a>
+            </div>
+
+            <label for="search-enhanced">Search:</label>
+            <div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+                <input type="text" data-type="search" data-enhanced="true" name="search-enhanced" id="search-enhanced" value="">
+                <a href="#" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a>
+            </div>
+
+            <label for="textarea-enhanced">Textarea:</label>
+            <textarea name="textarea-enhanced" id="textarea-enhanced" data-enhanced="true" class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all"></textarea>
+        </form>
+        </div><!-- /demo-html -->
+
         <h2>Fieldcontain</h3>
 
         <div data-demo-html="true">
