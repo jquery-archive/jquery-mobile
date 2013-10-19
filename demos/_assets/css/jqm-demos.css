@@ -83,8 +83,6 @@
 	font-weight: 300;
 }
 .jqm-demos .jqm-content > h1 {
-	color: #333;
-	background-color: transparent;
 	font-size: 2.4em;
 	margin: 0 0 .625em;
 }
@@ -103,12 +101,10 @@
 	margin: 0 0 1em;
 }
 .jqm-demos .jqm-content > p {
-	color: #333;
 	font-size: 1.2em;
 	line-height: 1.5;
 }
 .jqm-demos .jqm-content > ul:not(.jqm-list) li {
-	color: #333;
 	font-size: 1.2em;
 	line-height: 1.5;
 }
@@ -142,7 +138,6 @@
 	background: #e5e5e5;
 	background: rgba(0,0,0,.05);
 	padding: 0 .125em;
-	color: #333;
 }
 .jqm-content pre {
 	padding: 0 1em 1.2em;
@@ -161,7 +156,6 @@
 .jqm-demos .jqm-list .ui-btn,
 .jqm-demos .jqm-list .ui-btn:visited,
 .jqm-demos .jqm-list .ui-li-divider {
-	color: #333;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	text-shadow: none !important;
