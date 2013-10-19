@@ -25,6 +25,14 @@
 		background-color: #ffefef;
 	}
 	</style>
+	<style id="tooltip-btn">
+	.ui-btn.my-tooltip-btn,
+	.ui-btn.my-tooltip-btn:hover,
+	.ui-btn.my-tooltip-btn:active {
+		background: none;
+		border: 0;
+	}
+	</style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -55,9 +63,9 @@
 		</div><!--/demo-html -->
 
 		<h2>Tooltip</h2>
-		<p>A tooltip can be created by adding a theme swatch to a basic popup and adding padding via the <code>ui-content</code> class.</p>
-		<div data-demo-html="true">
-			<p>A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup" rdata-transition="pop" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext">Learn more</a></p>
+		<p>A tooltip can be created by adding a theme swatch to a basic popup and adding padding via the <code>ui-content</code> class. Here we also show how you can custom style the tooltip button.</p>
+		<div data-demo-html="true" data-demo-css="#tooltip-btn">
+			<p>A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Learn more">Learn more</a></p>
 
 			<div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width:350px;">
 	          <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
