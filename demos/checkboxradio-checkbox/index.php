@@ -131,6 +131,15 @@
         	</form>
 		</div><!--/demo-html -->
 
+		<h2>Enhanced</h2>
+
+        <div data-demo-html="true">
+			<div class="ui-checkbox">
+				<label for="checkbox-enhanced" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-checkbox-off">I agree</label>
+				<input type="checkbox" name="checkbox-enhanced" id="checkbox-enhanced" data-enhanced="true">
+			</div>
+		</div><!--/demo-html -->
+
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
