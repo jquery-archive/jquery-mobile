@@ -173,7 +173,8 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 
 		// Enhance child elements
 		enhanceWithin: function() {
-			var widgetElements,
+			var widgetElements, idx,
+				enhanceables = {},
 				that = this;
 
 			// Add no js class to elements
@@ -218,10 +219,15 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 						widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
 					}
 
-					// Enhance whatever is left
-					widgetElements[ constructor.prototype.widgetName ]();
+					// Record whatever is left for enhancement
+					enhanceables[ constructor.prototype.widgetName ] = widgetElements;
 				}
 			});
+
+			// Enhance widgets recorded previously
+			for ( idx in enhanceables ) {
+				enhanceables[ idx ][ idx ]();
+			}
 
 			return this;
 		},
