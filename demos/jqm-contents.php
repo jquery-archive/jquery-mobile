@@ -156,8 +156,8 @@
 	<h3>Grids</h3>
 	<ul>
 		<li data-filtertext="grids columns blocks content formatting rwd responsive"><a href="../grids/" data-ajax="false">Grids</a></li>
-		<li data-filtertext=""><a href="../grids-buttons/" data-ajax="false">Grids: buttons</a></li>
-		<li data-filtertext=""><a href="../grids-custom-responsive/" data-ajax="false">Grids: custom responsive</a></li>
+		<li data-filtertext="buttons in grids"><a href="../grids-buttons/" data-ajax="false">Buttons in grids</a></li>
+		<li data-filtertext="custom responsive grids rwd"><a href="../grids-custom-responsive/" data-ajax="false">Custom responsive grids</a></li>
 	</ul>
 </li>
 <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
