@@ -108,12 +108,12 @@ $.widget( "mobile.button", {
 			outer.removeClass( "ui-btn-icon-" + options.iconpos );
 		}
 		if ( options.icon !== undefined ) {
-			if ( !this.options.iconpos && !options.iconpos ) {
-				outer.toggleClass( "ui-btn-icon-left", options.icon );
+			if ( !options.iconpos && ( !this.options.icon || !this.options.iconpos ) ) {
+				outer.addClass( "ui-btn-icon-left" );
 			}
 			outer
 				.removeClass( "ui-icon-" + this.options.icon )
-				.toggleClass( "ui-icon-" + options.icon, options.icon );
+				.addClass( "ui-icon-" + options.icon );
 		}
 		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", options.disabled );
