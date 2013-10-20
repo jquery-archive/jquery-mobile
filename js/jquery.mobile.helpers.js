@@ -174,7 +174,7 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 		// Enhance child elements
 		enhanceWithin: function() {
 			var index,
-				widgetElements ={},
+				widgetElements = {},
 				that = this;
 
 			// Add no js class to elements
@@ -194,7 +194,8 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 
 			// Run buttonmarkup
 			if ( $.fn.buttonMarkup ) {
-				$( $.fn.buttonMarkup.initSelector ).not( $.mobile.page.prototype.keepNativeSelector() ).buttonMarkup();
+				this.find( $.fn.buttonMarkup.initSelector ).not( $.mobile.page.prototype.keepNativeSelector() )
+				.jqmEnhanceable().buttonMarkup();
 			}
 
 			// Add classes for fieldContain
