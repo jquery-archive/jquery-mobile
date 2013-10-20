@@ -175,6 +175,7 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 		enhanceWithin: function() {
 			var index,
 				widgetElements = {},
+				keepNative = $.mobile.page.prototype.keepNativeSelector(),
 				that = this;
 
 			// Add no js class to elements
@@ -194,13 +195,13 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 
 			// Run buttonmarkup
 			if ( $.fn.buttonMarkup ) {
-				this.find( $.fn.buttonMarkup.initSelector ).not( $.mobile.page.prototype.keepNativeSelector() )
+				this.find( $.fn.buttonMarkup.initSelector ).not( keepNative )
 				.jqmEnhanceable().buttonMarkup();
 			}
 
 			// Add classes for fieldContain
 			if ( $.fn.fieldcontain ) {
-				this.find( ":jqmData(role='fieldcontain')" ).not( $.mobile.page.prototype.keepNativeSelector() )
+				this.find( ":jqmData(role='fieldcontain')" ).not( keepNative )
 				.jqmEnhanceable().fieldcontain();
 			}
 
@@ -218,7 +219,7 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 
 						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompat
 						// Switch to $.mobile.keepNative in 1.5 which is just a value not a function
-						elements = elements.not( $.mobile.page.prototype.keepNativeSelector() );
+						elements = elements.not( keepNative );
 					}
 
 					// Enhance whatever is left
