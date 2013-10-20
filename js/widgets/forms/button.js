@@ -68,13 +68,8 @@ $.widget( "mobile.button", {
 			( options.inline ? " ui-btn-inline" : "" ) +
 			( options.mini ? " ui-mini" : "" ) +
 			( options.disabled ? " ui-state-disabled" : "" ) +
-			( ( options.iconpos && options.icon ) ?
-				" ui-btn-icon-" + options.iconpos :
-				( options.icon ? " ui-btn-icon-left" : "" ) ) +
-			( ( options.iconshadow && options.icon ) ?	/* TODO: Deprecated in 1.4, remove in 1.5. */
-				" ui-shadow-icon" : "" ) +
-			( options.icon ? " ui-icon-" + options.icon : "" ) +
-			"' >" + this.element.val() + "</div>");
+			this._getIconClasses( this.options ) +
+			"' >" + this.element.val() + "</div>" );
 	},
 
 	widget: function() {
@@ -84,6 +79,12 @@ $.widget( "mobile.button", {
 	_destroy: function() {
 			this.element.insertBefore( this.button );
 			this.button.remove();
+	},
+
+	_getIconClasses: function( options ) {
+		return ( options.icon ? ( "ui-icon-" + options.icon +
+			( options.iconshadow ? " ui-shadow-icon" : "" ) + /* TODO: Deprecated in 1.4, remove in 1.5. */
+			" ui-btn-icon-" + options.iconpos ) : "" );
 	},
 
 	_setOptions: function( options ) {
@@ -106,25 +107,18 @@ $.widget( "mobile.button", {
 		if ( options.mini !== undefined ) {
 			outer.toggleClass( "ui-mini", options.mini );
 		}
-		if ( options.iconpos !== undefined ) {
-			outer
-				.removeClass( "ui-btn-icon-" + this.options.iconpos )
-				.addClass( "ui-btn-icon-" + options.iconpos );
-		}
-		if ( options.iconshadow !== undefined ) {	/* TODO: Deprecated in 1.4, remove in 1.5. */
-			outer.toggleClass( "ui-shadow-icon", options.iconshadow );
-		}
-		if ( options.icon !== undefined ) {
-			if ( !options.iconpos && ( !this.options.icon || !this.options.iconpos ) ) {
-				outer.addClass( "ui-btn-icon-left" );
-			}
-			outer
-				.removeClass( "ui-icon-" + this.options.icon )
-				.addClass( "ui-icon-" + options.icon );
-		}
 		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", options.disabled );
 			outer.toggleClass( "ui-state-disabled", options.disabled );
+		}
+
+		if ( options.icon !== undefined ||
+				options.iconshadow !== undefined || /* TODO: Deprecated in 1.4, remove in 1.5. */
+				options.iconpos !== undefined ) {
+			outer
+				.removeClass( this._getIconClasses( this.options ) )
+				.addClass( this._getIconClasses(
+					$.extend( {}, this.options, options ) ) );
 		}
 
 		this._super( options );
