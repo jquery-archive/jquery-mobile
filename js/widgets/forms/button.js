@@ -58,7 +58,8 @@ $.widget( "mobile.button", {
 	},
 
 	_button: function() {
-		var options = this.options;
+		var options = this.options,
+			iconClasses = this._getIconClasses( this.options );
 
 		return $("<div class='ui-btn ui-input-btn" +
 			( options.wrapperClass ? " " + options.wrapperClass : "" ) +
@@ -68,7 +69,7 @@ $.widget( "mobile.button", {
 			( options.inline ? " ui-btn-inline" : "" ) +
 			( options.mini ? " ui-mini" : "" ) +
 			( options.disabled ? " ui-state-disabled" : "" ) +
-			this._getIconClasses( this.options ) +
+			( iconClasses ? ( " " + iconClasses ) : "" ) +
 			"' >" + this.element.val() + "</div>" );
 	},
 
