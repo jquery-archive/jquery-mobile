@@ -29,9 +29,13 @@ define( [ "jquery",
 			_inputFirst = $el.find( "input" ).first(),
 			_inputLast = $el.find( "input" ).last(),
 			_label = $el.find( "label" ).first(),
-			_sliderFirst = $.data( _inputFirst.get(0), "mobile-slider" ).slider,
-			_sliderLast = $.data( _inputLast.get(0), "mobile-slider" ).slider,
-			firstHandle = $.data( _inputFirst.get(0), "mobile-slider" ).handle,
+			_sliderWidgetFirst = $.data( _inputFirst.get( 0 ), "mobile-slider" ) ||
+				$.data( _inputFirst.slider().get( 0 ), "mobile-slider" ),
+			_sliderWidgetLast = $.data( _inputLast.get(0), "mobile-slider" ) ||
+				$.data( _inputLast.slider().get( 0 ), "mobile-slider" ),
+			_sliderFirst = _sliderWidgetFirst.slider,
+			_sliderLast = _sliderWidgetLast.slider,
+			firstHandle = _sliderWidgetFirst.handle,
 			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
 
 			_inputFirst.addClass( "ui-rangeslider-first" );
