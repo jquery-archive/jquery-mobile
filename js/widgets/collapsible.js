@@ -329,6 +329,7 @@ $.mobile.collapsible.defaults = {
 	iconpos: "left",
 	inset: true,
 	corners: true,
+	theme: "inherit",
 	mini: false
 };
 
