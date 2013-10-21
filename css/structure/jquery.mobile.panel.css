@@ -58,8 +58,8 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+	right: 0;
 	height: 100%;
-	width: 100%;
 	z-index: 1002;
 	display: none;
 }
@@ -131,10 +131,9 @@
 	-moz-transform: none;
 }
 
-/* positioning: pages, fixed toolbars and dismiss (for reveal and push) */
+/* positioning: wrapper and fixed toolbars (for reveal and push) */
 /* panel left open */
-.ui-panel-page-content-position-left,
-.ui-panel-dismiss-open.ui-panel-dismiss-position-left {
+.ui-panel-page-content-position-left {
 	left: 17em;
 	right: -17em;
 }
@@ -147,8 +146,7 @@
 	transform: translate3d(17em,0,0);
 }
 /* panel right open */
-.ui-panel-page-content-position-right,
-.ui-panel-dismiss-open.ui-panel-dismiss-position-right {
+.ui-panel-page-content-position-right {
 	left: -17em;
 	right: 17em;
 }
@@ -159,6 +157,14 @@
 	-webkit-transform: translate3d(-17em,0,0);
 	-moz-transform: translate3d(-17em,0,0);
 	transform: translate3d(-17em,0,0);
+}
+
+/* dismiss */
+.ui-panel-dismiss-open.ui-panel-dismiss-position-left {
+	left: 17em;
+}
+.ui-panel-dismiss-open.ui-panel-dismiss-position-right {
+	right: 17em;
 }
 
 /* shadows and borders */
