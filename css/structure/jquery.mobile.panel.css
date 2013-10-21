@@ -33,8 +33,7 @@
 }
 
 /* Container, page and wrapper */
-.ui-panel-page-container,
-.ui-panel-page-container .ui-page.ui-page-active {
+.ui-panel-page-container {
 	overflow-x: visible;
 }
 .ui-panel-page-container-themed .ui-page-active {
