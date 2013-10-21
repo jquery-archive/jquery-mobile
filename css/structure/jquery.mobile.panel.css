@@ -1,4 +1,4 @@
-/* panel */
+/* Panel */
 .ui-panel {
 	width: 17em;
 	min-height: 100%;
@@ -16,7 +16,7 @@
 }
 .ui-panel-fixed {
 	position: fixed;
-	bottom: -1px; /* fixes gap on Chrome for Android */
+	bottom: -1px; /* Fixes gap on Chrome for Android */
 	padding-bottom: 1px;
 }
 .ui-panel-display-reveal {
@@ -26,13 +26,13 @@
 	z-index: 999;
 }
 .ui-panel-display-overlay {
-	z-index: 1001; /* fixed toolbars have z-index 1000 */
+	z-index: 1001; /* Fixed toolbars have z-index 1000 */
 }
 .ui-panel-inner {
 	padding: 1em;
 }
 
-/* container, page and wrapper */
+/* Container, page and wrapper */
 .ui-panel-page-container,
 .ui-panel-page-container .ui-page.ui-page-active {
 	overflow-x: visible;
@@ -48,12 +48,12 @@
 	z-index: 999;
 }
 
-/* fixed toolbars */
+/* Fixed toolbars */
 .ui-panel-fixed-toolbar {
 	overflow-x: hidden;
 }
 
-/* dismiss */
+/* Dismiss */
 .ui-panel-dismiss {
 	position: absolute;
 	top: 0;
@@ -67,25 +67,25 @@
 	display: block;
 }
 
-/* animate class is added to panel, wrapper and fixed toolbars */
+/* Animate class is added to panel, wrapper and fixed toolbars */
 .ui-panel-animate {
 	-webkit-transition: -webkit-transform 300ms ease;
 	-moz-transition: -moz-transform 300ms ease;
 	transition: transform 300ms ease;
 }
 
-/* hardware acceleration for smoother transitions on WebKit browsers */
+/* Hardware acceleration for smoother transitions on WebKit browsers */
 .ui-panel-animate.ui-panel:not(.ui-panel-display-reveal) {
 	-webkit-backface-visibility: hidden;
 	-webkit-transform: translate3d(0,0,0);
 }
 
-/* positioning: panel */
-/* panel left  */
+/* Panel positioning (for overlay and push) */
+/* Panel left closed */
 .ui-panel-position-left {
 	left: -17em;
 }
-/* animated: panel left (for overlay and push) */
+/* Panel left closed animated */
 .ui-panel-animate.ui-panel-position-left.ui-panel-display-overlay,
 .ui-panel-animate.ui-panel-position-left.ui-panel-display-push {
 	left: 0;
@@ -93,23 +93,23 @@
 	-moz-transform: translate3d(-17em,0,0);
 	transform: translate3d(-17em,0,0);
 }
-/* panel left open */
-.ui-panel-position-left.ui-panel-display-reveal, /* negate "panel left" for reveal */
+/* Panel left open */
+.ui-panel-position-left.ui-panel-display-reveal, /* Unset "panel left closed" for reveal */
 .ui-panel-open.ui-panel-position-left {
 	left: 0;
 }
-/* animated: panel left open (for overlay and push) */
+/* Panel left open animated */
 .ui-panel-animate.ui-panel-open.ui-panel-position-left.ui-panel-display-overlay,
 .ui-panel-animate.ui-panel-open.ui-panel-position-left.ui-panel-display-push {
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 	-moz-transform: none;
 }
-/* panel right */
+/* Panel right closed */
 .ui-panel-position-right {
 	right: -17em;
 }
-/* animated: panel right (for overlay and push) */
+/* Panel right closed animated */
 .ui-panel-animate.ui-panel-position-right.ui-panel-display-overlay,
 .ui-panel-animate.ui-panel-position-right.ui-panel-display-push {
 	right: 0;
@@ -117,12 +117,12 @@
 	-moz-transform: translate3d(17em,0,0);
 	transform: translate3d(17em,0,0);
 }
-/* panel right open */
-.ui-panel-position-right.ui-panel-display-reveal,  /* negate "panel right" for reveal */
+/* Panel right open */
+.ui-panel-position-right.ui-panel-display-reveal, /* Unset "panel right closed" for reveal */
 .ui-panel-position-right.ui-panel-open {
 	right: 0;
 }
-/* animated: panel right open (for overlay and push) */
+/* Panel right open animated */
 .ui-panel-animate.ui-panel-open.ui-panel-position-right.ui-panel-display-overlay,
 .ui-panel-animate.ui-panel-open.ui-panel-position-right.ui-panel-display-push {
 	-webkit-transform: translate3d(0,0,0);
@@ -130,13 +130,13 @@
 	-moz-transform: none;
 }
 
-/* positioning: wrapper and fixed toolbars (for reveal and push) */
-/* panel left open */
+/* Wrapper and fixed toolbars positioning (for reveal and push) */
+/* Panel left open */
 .ui-panel-page-content-position-left {
 	left: 17em;
 	right: -17em;
 }
-/* animated: panel left open */
+/* Panel left open animated */
 .ui-panel-animate.ui-panel-page-content-position-left {
 	left: 0;
 	right: 0;
@@ -144,12 +144,12 @@
 	-moz-transform: translate3d(17em,0,0);
 	transform: translate3d(17em,0,0);
 }
-/* panel right open */
+/* Panel right open */
 .ui-panel-page-content-position-right {
 	left: -17em;
 	right: 17em;
 }
-/* animated: panel right open */
+/* Panel right open animated */
 .ui-panel-animate.ui-panel-page-content-position-right {
 	left: 0;
 	right: 0;
@@ -158,7 +158,7 @@
 	transform: translate3d(-17em,0,0);
 }
 
-/* dismiss */
+/* Dismiss model open */
 .ui-panel-dismiss-open.ui-panel-dismiss-position-left {
 	left: 17em;
 }
@@ -166,7 +166,7 @@
 	right: 17em;
 }
 
-/* shadows and borders */
+/* Shadows and borders */
 .ui-panel-display-reveal {
 	-webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
 	-moz-box-shadow: inset -5px 0 5px rgba(0,0,0,.15);
@@ -204,7 +204,7 @@
 	width: auto;
 }
 
-/* wrap on wide viewports once open */
+/* Responsive: wrap on wide viewports once open */
 @media (min-width:55em) {
 	.ui-responsive-panel .ui-panel-page-content-open.ui-panel-page-content-position-left {
 		margin-right: 17em;
