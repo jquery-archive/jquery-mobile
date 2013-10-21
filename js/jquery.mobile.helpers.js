@@ -215,7 +215,7 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 					var elements = $.mobile.enhanceable( that.find( constructor.initSelector ) );
 
 					// If any matching elements remain filter ones with keepNativeSelector
-					if ( elements.length ) {
+					if ( elements.length > 0 ) {
 
 						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompat
 						// Switch to $.mobile.keepNative in 1.5 which is just a value not a function
@@ -223,7 +223,9 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 					}
 
 					// Enhance whatever is left
-					widgetElements[ constructor.prototype.widgetName ] = elements;
+					if ( elements.length > 0 ) {
+						widgetElements[ constructor.prototype.widgetName ] = elements;
+					}
 				}
 			});
 
