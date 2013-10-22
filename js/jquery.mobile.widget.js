@@ -26,7 +26,7 @@ $.extend( $.Widget.prototype, {
 		if ( !$.mobile.getAttribute( elem, "defaults" ) ) {
 			for ( option in this.options ) {
 				value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
-				
+
 				if ( value != null ) {
 					options[ option ] = value;
 				}

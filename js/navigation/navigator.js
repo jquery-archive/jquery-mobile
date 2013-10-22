@@ -145,7 +145,6 @@ define(["jquery",
 			this.history.add( state.url, state );
 		},
 
-
 		// This binding is intended to catch the popstate events that are fired
 		// when execution of the `$.navigate` method stops at window.location.hash = url;
 		// and completely prevent them from propagating. The popstate event will then be

@@ -3,7 +3,6 @@
 //>>label: Init
 //>>group: Core
 
-
 define([
 	"jquery",
 	"./jquery.ui.core",
@@ -143,11 +142,11 @@ define([
 	$(function() {
 		//Run inlineSVG support test
 		$.support.inlineSVG();
-		
+
 		// check which scrollTop value should be used by scrolling to 1 immediately at domready
 		// then check what the scroll top is. Android will report 0... others 1
 		// note that this initial scroll won't hide the address bar. It's just for the check.
-		
+
 		// hide iOS browser chrome on load if hideUrlBar is true this is to try and do it as soon as possible
 		if ( $.mobile.hideUrlBar ) {
 			window.scrollTo( 0, 1 );

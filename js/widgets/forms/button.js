@@ -49,7 +49,7 @@ $.widget( "mobile.button", {
 				this.widget().removeClass( $.mobile.focusClass );
 			}
 		});
-		
+
 		this.refresh( true );
 	},
 

@@ -124,7 +124,6 @@ define( [
 
 	});
 
-
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

@@ -269,7 +269,6 @@ function handleTouchMove( event ) {
 			( Math.abs( t.pageX - startX ) > moveThreshold ||
 				Math.abs( t.pageY - startY ) > moveThreshold );
 
-
 	if ( didScroll && !didCancel ) {
 		triggerVirtualEvent( "vmousecancel", event, flags );
 	}

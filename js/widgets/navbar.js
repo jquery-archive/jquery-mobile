@@ -5,7 +5,6 @@
 //>>css.structure: ../css/structure/jquery.mobile.navbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-
 define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.grid" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

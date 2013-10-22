@@ -33,7 +33,6 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		filterTheme: null
 	},
 
-
 	_create: function() {
 		var idx, widgetName,
 			elem = this.element,
