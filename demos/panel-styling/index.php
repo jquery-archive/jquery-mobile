@@ -141,7 +141,7 @@
         	<li>Set a background image for a page that contains a panel.</li>
             <li>Give the page a responsive layout with CSS columns.</li>
         </ul>
-        
+
         <p>Click the "view source" button to see the CSS and markup of this demo and open the demo to see the result.</p>
 
         <a href="#demo-page" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-carat-r ui-btn-icon-right">Open demo</a>

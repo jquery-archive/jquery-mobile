@@ -39,9 +39,9 @@
                     </select>
                 </form>
                 </div><!-- /demo-html -->
-				
+
 			<h2>Theme</h2>
-				
+
                 <div data-demo-html="true">
 				<form>
                     <label for="flip-2">Flip toggle switch:</label>

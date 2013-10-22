@@ -21,34 +21,34 @@
         <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
         <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
-    
+
 	<div data-role="content" class="jqm-content">
-    
+
     	<h1>Disabled form elements</h1>
-    
+
         <form action="#" method="get">
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="textinput-1">Text Input:</label>
                     <input disabled="disabled" type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="search-1">Search Input:</label>
                     <input disabled="disabled" type="search" name="search-1" id="search-1" value="">
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="textarea-1">Textarea:</label>
                     <textarea disabled="disabled" cols="40" rows="8" name="textarea-1" id="textarea-1">Textarea</textarea>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="select-native-1">Native select:</label>
@@ -59,7 +59,7 @@
                     </select>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="select-multiple-1">Custom multiple select:</label>
@@ -71,7 +71,7 @@
                     </select>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup">
@@ -82,7 +82,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
@@ -93,7 +93,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup">
@@ -119,7 +119,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
@@ -145,7 +145,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
@@ -161,14 +161,14 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="slider-1">Slider:</label>
                     <input disabled="disabled" type="range" name="slider-1" id="slider-1" value="50" min="0" max="100" data-highlight="true">
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="flip-1">Flip toggle:</label>
@@ -178,7 +178,7 @@
                     </select>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup">
@@ -188,7 +188,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup">
@@ -202,7 +202,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup">
@@ -216,7 +216,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
@@ -230,7 +230,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
@@ -244,41 +244,41 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="submit-1">Send:</label>
                     <button class="ui-btn ui-shadow ui-corner-all" disabled="disabled" type="submit" id="submit-1">Submit</button>
                 </div>
             </div><!--/demo-html -->
-    
+
         </form>
-    
+
         <h2>Mini sized</h2>
-    
+
         <form action="#" method="get">
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="textinput-5">Text Input:</label>
                     <input disabled="disabled" type="text" name="textinput-5" id="textinput-5" placeholder="Text input" value="" data-mini="true">
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="search-5">Search Input:</label>
                     <input disabled="disabled" type="search" name="search-5" id="search-5" value="" data-mini="true">
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="textarea-5">Textarea:</label>
                     <textarea disabled="disabled" cols="40" rows="8" name="textarea-5" id="textarea-5" data-mini="true">Textarea</textarea>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="select-native-5">Native select:</label>
@@ -289,7 +289,7 @@
                     </select>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="select-multiple-5">Custom multiple select:</label>
@@ -301,7 +301,7 @@
                     </select>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -312,7 +312,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -323,7 +323,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -349,7 +349,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -375,7 +375,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -391,14 +391,14 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="slider-5">Slider:</label>
                     <input disabled="disabled" type="range" name="slider-5" id="slider-5" value="50" min="0" max="100" data-highlight="true" data-mini="true">
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="flip-5">Flip toggle:</label>
@@ -408,7 +408,7 @@
                     </select>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -418,7 +418,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -432,7 +432,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-mini="true">
@@ -446,7 +446,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -460,7 +460,7 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
@@ -474,26 +474,26 @@
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
-    
+
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="submit-5">Send:</label>
                     <button disabled="disabled" type="submit" id="submit-5" class="ui-shadow ui-btn ui-corner-all ui-mini">Submit</button>
                 </div>
             </div><!--/demo-html -->
-    
+
         </form>
-    
+
         <h2>Class ui-state-disabled</h2>
-    
+
         <div data-demo-html="true">
             <a href="#" class="ui-state-disabled ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link button</a>
         </div><!--/demo-html -->
-    
+
         <div data-demo-html="true">
             <a href="#" class="ui-shadow ui-btn ui-corner-all ui-state-disabled ui-icon-arrow-r ui-btn-icon-right ui-mini">Link button</a>
         </div><!--/demo-html -->
-    
+
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>

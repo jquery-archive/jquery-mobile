@@ -21,28 +21,28 @@
         <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
         <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
-    
+
 	<div data-role="content" class="jqm-content">
-    
+
     	<h1>Form gallery</h1>
-        
+
         <form action="#" method="get">
-        
+
             <div data-demo-html="true">
                 <label for="textinput-2">Text Input:</label>
                 <input type="text" name="textinput-2" id="textinput-2" placeholder="Text input" value="">
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="search-2">Search Input:</label>
                 <input type="search" name="search-2" id="search-2" value="">
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="textarea-2">Textarea:</label>
                 <textarea cols="40" rows="8" name="textarea-2" id="textarea-2">Textarea</textarea>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="select-native-2">Native select:</label>
                 <select name="select-native-2" id="select-native-2">
@@ -51,7 +51,7 @@
                     <option value="large">Three</option>
                 </select>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="select-multiple-2">Custom multiple select:</label>
                 <select multiple="multiple" data-native-menu="false" name="select-multiple-2" id="select-multiple-2">
@@ -61,7 +61,7 @@
                     <option value="large">Three</option>
                 </select>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup">
                     <legend>Vertical controlgroup, buttons:</legend>
@@ -70,7 +70,7 @@
                     <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, buttons:</legend>
@@ -79,7 +79,7 @@
                     <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup">
                     <legend>Vertical controlgroup, select:</legend>
@@ -103,7 +103,7 @@
                     </select>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, select:</legend>
@@ -127,7 +127,7 @@
                     </select>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, mixed:</legend>
@@ -141,12 +141,12 @@
                     </select>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="slider-2">Slider:</label>
                 <input type="range" name="slider-2" id="slider-2" value="50" min="0" max="100" data-highlight="true">
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
             <div data-role="rangeslider">
                 <label for="range-1a">Rangeslider:</label>
@@ -155,7 +155,7 @@
                 <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="80">
             </div>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="flip-2">Flip toggle:</label>
                 <select name="flip-2" id="flip-2" data-role="slider">
@@ -163,7 +163,7 @@
                     <option value="on">On</option>
                 </select>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup">
                     <legend>Single checkbox:</legend>
@@ -171,7 +171,7 @@
                     <input type="checkbox" name="checkbox-2" id="checkbox-2">
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup">
                     <legend>Vertical controlgroup, checkbox:</legend>
@@ -183,7 +183,7 @@
                     <label for="checkbox-v-2c">Three</label>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup">
                     <legend>Vertical controlgroup, radio:</legend>
@@ -195,7 +195,7 @@
                     <label for="radio-choice-v-2c">Three</label>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, checkbox:</legend>
@@ -207,7 +207,7 @@
                     <label for="checkbox-h-2c">Three</label>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal">
                     <legend>Horizontal controlgroup, radio:</legend>
@@ -219,33 +219,33 @@
                     <label for="radio-choice-h-2c">Three</label>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="submit-2">Send:</label>
                 <button class="ui-shadow ui-btn ui-corner-all" type="submit" id="submit-2">Submit</button>
             </div><!--/demo-html -->
-        
+
         </form>
-        
+
         <h2>Mini sized</h2>
-        
+
         <form action="#" method="get">
-        
+
             <div data-demo-html="true">
                 <label for="textinput-6">Text Input:</label>
                 <input type="text" name="textinput-6" id="textinput-6" placeholder="Text input" value="" data-mini="true">
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="search-6">Search Input:</label>
                 <input type="search" name="search-6" id="search-6" value="" data-mini="true">
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="textarea-6">Textarea:</label>
                 <textarea cols="40" rows="8" name="textarea-6" id="textarea-6" data-mini="true">Textarea</textarea>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="select-native-6">Native select:</label>
                 <select name="select-native-6" id="select-native-6" data-mini="true">
@@ -254,7 +254,7 @@
                     <option value="large">Three</option>
                 </select>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="select-multiple-6">Custom multiple select:</label>
                 <select multiple="multiple" data-native-menu="false" name="select-multiple-6" id="select-multiple-6" data-mini="true">
@@ -264,7 +264,7 @@
                     <option value="large">Three</option>
                 </select>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Vertical controlgroup, buttons:</legend>
@@ -273,7 +273,7 @@
                     <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, buttons:</legend>
@@ -282,7 +282,7 @@
                     <a href="#" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Vertical controlgroup, select:</legend>
@@ -306,7 +306,7 @@
                     </select>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, select:</legend>
@@ -330,7 +330,7 @@
                     </select>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, mixed:</legend>
@@ -344,12 +344,12 @@
                     </select>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="slider-6">Slider:</label>
                 <input type="range" name="slider-6" id="slider-6" value="50" min="0" max="100" data-highlight="true" data-mini="true">
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="flip-6">Flip toggle:</label>
                 <select name="flip-6" id="flip-6" data-role="slider" data-mini="true">
@@ -357,7 +357,7 @@
                     <option value="on">On</option>
                 </select>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Single checkbox:</legend>
@@ -365,7 +365,7 @@
                     <input type="checkbox" name="checkbox-6" id="checkbox-6">
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Vertical controlgroup, checkbox:</legend>
@@ -377,7 +377,7 @@
                     <label for="checkbox-v-6c">Three</label>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-mini="true">
                     <legend>Vertical controlgroup, radio:</legend>
@@ -389,7 +389,7 @@
                     <label for="radio-choice-v-6c">Three</label>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, checkbox:</legend>
@@ -401,7 +401,7 @@
                     <label for="checkbox-h-6c">Three</label>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                     <legend>Horizontal controlgroup, radio:</legend>
@@ -413,14 +413,14 @@
                     <label for="radio-choice-h-6c">Three</label>
                 </fieldset>
             </div><!--/demo-html -->
-        
+
             <div data-demo-html="true">
                 <label for="submit-6">Send:</label>
                 <button type="submit" id="submit-6" class="ui-shadow ui-btn ui-corner-all ui-mini">Submit</button>
             </div><!--/demo-html -->
-        
+
         </form>
-    
+
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>

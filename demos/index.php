@@ -23,11 +23,11 @@
 	</div><!-- /header -->
 
 	<div data-role="content" class="jqm-content">
-	
+
 		<h1>Demos</h1>
 
 		<p>jQuery Mobile is a touch-optimized HTML5 UI framework designed to make responsive web sites and apps that are accessible on all smartphone, tablet and desktop devices.</p>
-		
+
         <p>For technical info, visit the <a href="http://api.jquerymobile.com" title="jQuery Mobile API documentation" target="_blank">API documentation</a>. Downloads and info about the project can be found on <a href="http://jquerymobile.com" title="jQuery Mobile web site" target="_blank">jquerymobile.com</a>.</p>
 
 	</div><!-- /content -->

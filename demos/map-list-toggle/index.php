@@ -8,17 +8,17 @@
 	<style>
 	.segmented-control { text-align:center; }
 	.segmented-control .ui-controlgroup { display:inline; margin:.2em 0px; }
-	
+
 	#map-page { width:100%; height:100%; }
 	#map-canvas { width:100%; height:100%; margin-top:-30px; padding:0px!important; }
 	#gmap-marker-link { color:#00a0df; text-decoration:none; }
-	
+
 	.ui-gmap-canvas { width:100%; height:100%; }
 	.ui-gmap-infobox { display:none; }
-	
+
 	#show-more .ui-li-heading { text-align:center; }
 	#show-more .ui-icon { visibility:hidden; }
-	
+
 	.ui-li-has-count .ui-li-count { border-color:transparent; }
 	.wrap { white-space:normal; }
 	</style>
@@ -35,31 +35,31 @@
 		    $listSwitch = $( "#list-switch" ),
 			$map = $( "#map-canvas" ),
 	        $list = $( "#list-canvas" );
-			
+
 	    $mapSwitch.on( "click", function( e ){
 	       	$map.show();
 	       	$map.gmap();
 	       	$list.hide();
 	    });
-		
+
 	    $listSwitch.on( "click", function( e ){
 	       	$list.show();
 			$map.hide();
 	    });
-	
+
 	    $( "#show-more a" ).on( "click", function( e ){
 			// Assume we already have a cached geolocation because it's not necessary for this example.
 			var location = location || {};
 			    location.coords = location.coords || {};
 				location.coords.latitude = location.coords.latitude || {};
 				location.coords.longitude = location.coords.longitude || {};
-	    	
+
 			JQM.geo.startIndex = $( "#list-results li" ).size() -1; // exclude show more list item
 	    	JQM.geo.showMore( location );
 	    	e.preventDefault();
 	    });
 	});
-	
+
 	/**
 	 * Geolocation configuration
 	 */
@@ -68,11 +68,11 @@
 		location: "",
 		zip: "",
 		startIndex: "",
-	
+
 	    showMore: function(latlng) {
 	    	$.mobile.loading( "show" );
 	    	JQM.geo.location = latlng;
-	
+
 			$.ajax({
 			  	url: "showMore.html?lat="+JQM.geo.location.coords.latitude+"&lon="+JQM.geo.location.coords.longitude+"&zip="+JQM.geo.zip+"&startIndex="+JQM.geo.startIndex,
 			  	success: function( response ) {
@@ -112,7 +112,7 @@
             <li>How to load more list results and dynamically append them to an existing list.</li>
             <li>How to display an info box on the map when a push pin is tapped.</li>
         </ul>
-        
+
         <a href="#map-page" data-ajax="false" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">Open demo</a>
 
         <div data-demo-html="#map-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
@@ -141,7 +141,7 @@
 		    </fieldset>
 			</div>
 		</div>
-		<div data-role="content" class="ui-content-list">	
+		<div data-role="content" class="ui-content-list">
 	        <div id="list-canvas">
 	            <ul id="list-results" data-role="listview">
 	            	<li data-marker-info="44.811805,-93.176352">
@@ -214,7 +214,7 @@
 	            	  	</div>
 	            	  </a>
 	            	</li>
-					<li id="show-more"><a href=""><h1>Show more</h1></a></li>								
+					<li id="show-more"><a href=""><h1>Show more</h1></a></li>
 				</ul>
 			</div>
 		</div>
@@ -222,8 +222,8 @@
 	<!-- Load map assets at bottom for performance -->
 	<script type="text/javascript" src="jquery.gmap.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.0/src/infobox_packed.js"></script>			
+	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.0/src/infobox_packed.js"></script>
 	</div>
-	
+
 </body>
 </html>

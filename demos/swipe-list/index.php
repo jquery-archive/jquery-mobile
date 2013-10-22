@@ -145,7 +145,7 @@
         <h1>Swipe to delete list item</h1>
 
 		<p>This demo shows how you can remove list items by swiping left or right. For devices without touchscreen there is a delete button. This demo also contains a custom styled confirmation popup.</p>
-		
+
 		<p><a href="#demo-page" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open swipe list demo</a></p>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div>

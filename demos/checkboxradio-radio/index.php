@@ -146,7 +146,7 @@
 
 		<h2>Enhanced</h2>
 
-		<div data-demo-html="true">		
+		<div data-demo-html="true">
 			<div class="ui-radio">
 				<label for="radio-enhanced" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-radio-off">I agree</label>
 				<input type="radio" name="radio-enhanced" id="radio-enhanced" data-enhanced="true">

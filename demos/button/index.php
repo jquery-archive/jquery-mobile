@@ -27,7 +27,7 @@
 		<h1>Input buttons</h1>
 
 		<p>Examples of how to style input buttons; <code>input</code> elements with <code>type="button"</code>, <code>type="submit"</code>, or <code>type="reset"</code>. See <a href="../button-markup/">button markup</a> for examples of <code>a</code> and <code>button</code> elements.</p>
-		
+
 		<p>Note that in 1.4 <code>data-</code> attributes will still work, but the style options are deprecated.</p>
 
 		<h2>Default</h2>
@@ -63,9 +63,9 @@
 				</div>
 			</form>
 		</div><!--/demo-html -->
-		
+
 		<p>Icon-only buttons are round by default. Here we show how you can set the same border-radius as other buttons.</p>
-		
+
 		<div data-demo-html="true" data-demo-css="true">
 			<form>
 				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
@@ -150,7 +150,7 @@
 		</div><!--/demo-html -->
 
 		<h2>Icon position</h2>
-		
+
 		<div data-demo-html="true">
 			<form>
 				<input type="button" data-icon="delete" value="Left (default)">
@@ -160,7 +160,7 @@
 				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
 			</form>
 		</div><!--/demo-html -->
-		
+
 		<p>Inline:</p>
 
 		<div data-demo-html="true">
