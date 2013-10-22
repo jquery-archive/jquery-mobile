@@ -28,7 +28,6 @@ var fakeBody = $( "<body>" ).prependTo( "html" ),
 	bb = window.blackberry && !propExists( "-webkit-transform" ), //only used to rule out box shadow, as it's filled opaque on BB 5 and lower
 	nokiaLTE7_3;
 
-
 function validStyle( prop, value, check_vend ) {
 	var div = document.createElement( "div" ),
 		uc = function( txt ) {
@@ -239,7 +238,6 @@ $.extend( $.support, {
 });
 
 fakeBody.remove();
-
 
 // $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
 // or that generally work better browsing in regular http for full page refreshes (Opera Mini)

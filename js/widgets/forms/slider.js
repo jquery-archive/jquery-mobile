@@ -372,7 +372,6 @@ $.widget( "mobile.slider", $.extend( {
 		return  this.isToggleSwitch ? this.element[0].selectedIndex : parseFloat( this.element.val() ) ;
 	},
 
-
 	_reset: function() {
 		this.refresh( undefined, false, true );
 	},

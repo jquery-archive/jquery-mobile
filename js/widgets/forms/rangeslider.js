@@ -178,7 +178,6 @@ define( [ "jquery",
 				thisSlider = first ? this._inputFirst : this._inputLast,
 				otherSlider = first ? this._inputLast : this._inputFirst;
 
-
 			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ) {
 				thisSlider.blur();
 			} else if ( event.type === "mousedown" ) {

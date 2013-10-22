@@ -50,7 +50,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 		} else {
 			this._ui = this._enhance();
 		}
-		
+
 	},
 
 	_childWidgets: [ "checkboxradio", "selectmenu", "button" ],

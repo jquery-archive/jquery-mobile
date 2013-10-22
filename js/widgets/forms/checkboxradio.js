@@ -101,9 +101,9 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			this.element.wrap( this._wrapper() );
 			this.element.parent().prepend( this.label );
 		}
-		
+
 		// Wrap the input + label in a div
-		
+
 		this._setOptions({
 			"theme": this.options.theme,
 			"iconpos": this.options.iconpos,
@@ -214,7 +214,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		var controlgroup, controlgroupWidget,
 			controlgroupConstructor = $.mobile.controlgroup;
 
-		// If the controlgroup widget is defined ... 
+		// If the controlgroup widget is defined ...
 		if ( controlgroupConstructor ) {
 			controlgroup = this.element.closest(
 				":mobile-controlgroup," +

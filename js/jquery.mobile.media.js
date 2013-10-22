@@ -3,7 +3,6 @@
 //>>label: Match Media Polyfill
 //>>group: Utilities
 
-
 define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

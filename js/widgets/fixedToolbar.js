@@ -9,7 +9,6 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-
 	$.widget( "mobile.toolbar", $.mobile.toolbar, {
 		options: {
 			position:null,
@@ -126,7 +125,6 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		_handlePageBeforeHide: function( e, ui ) {
 			var o = this.options,
 				thisFooter, thisHeader, nextFooter, nextHeader;
-
 
 			if ( o.disablePageZoom ) {
 				$.mobile.zoom.enable( true );

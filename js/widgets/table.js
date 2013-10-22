@@ -76,7 +76,7 @@ $.widget( "mobile.table", {
 					}
 				}
 
-				// Store "cells" data on header as a reference to all cells in the 
+				// Store "cells" data on header as a reference to all cells in the
 				// same column as this TH
 				$( this ).jqmData( "cells", table.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( selector ) );
 

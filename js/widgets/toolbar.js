@@ -14,7 +14,6 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-
 	$.widget( "mobile.toolbar", {
 		initSelector: ":jqmData(role='footer'), :jqmData(role='header')",
 
@@ -89,7 +88,7 @@ define( [
 			this._btnMarkup();
 		},
 
-		//we only want this to run on non fixed toolbars so make it easy to override 
+		//we only want this to run on non fixed toolbars so make it easy to override
 		_setRelative: function() {
 			$( "[data-"+ $.mobile.ns + "role='page']" ).css({ "position": "relative" });
 		},
@@ -134,7 +133,7 @@ define( [
 				});
 		}
 	});
-	
+
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

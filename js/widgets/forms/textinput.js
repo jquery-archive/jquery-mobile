@@ -49,7 +49,7 @@ $.widget( "mobile.textinput", {
 			inputNeedsWrap = ( (this.element.is( "input" ) ||
 				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
 					!isRange );
-			
+
 		if ( this.element.prop( "disabled" ) ) {
 			options.disabled = true;
 		}

@@ -55,7 +55,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
-		// Deprecated remove in 1.5 
+		// Deprecated remove in 1.5
 		minScrollBack: 0,
 
 		// Set default dialog transition - 'none' for no transitions

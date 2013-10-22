@@ -50,7 +50,6 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 
 		initial_orientation_is_landscape = ww > wh && ( ww - wh ) > landscape_threshold;
 
-
 		// Now check to see if the current window.orientation is 0 or 180.
 		initial_orientation_is_default = portrait_map[ window.orientation ];
 
@@ -92,7 +91,6 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 		add: function( handleObj ) {
 			// Save a reference to the bound event handler.
 			var old_handler = handleObj.handler;
-
 
 			handleObj.handler = function( event ) {
 				// Modify event object, adding the .orientation property.

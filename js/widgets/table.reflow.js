@@ -4,7 +4,6 @@
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.table.reflow.css
 
-
 define( [ "jquery", "./table" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
