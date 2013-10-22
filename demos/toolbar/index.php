@@ -84,7 +84,6 @@
 
 		<p>See <a href="../toolbar-fixed-persistent/" data-ajax="false">persistent toolbars</a>.</p>
 
-
 		<h2>Buttons in toolbars</h2>
 
 		<p>The framework automatically enhances links in toolbars as buttons with inline and mini style, but this has been deprecated in version 1.4. The same goes for positioning the first two buttons in a header left and right if they are immediate child of the header. The demos below prepare you for the next version.</p>
@@ -124,7 +123,7 @@
 		<p>jQuery Mobile has a feature to automatically create and append "back" buttons to any header, though it is disabled by default. This is primarily useful in chromeless installed applications, such as those running in a native app webview. The framework automatically generates a "back" button on a header when the page plugin's <code>addBackBtn</code> option is true. This can also be set via markup if the page div has a <code>data-add-back-btn="true"</code> attribute.</p>
 
 		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page. This will allow the feature to work for users in C-Grade browsers.</strong></p>
-        
+
         <p>If you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute.</p>
 
 		<h3>Customizing the back button text</h3>
@@ -136,7 +135,6 @@
 		<p>If you'd like to configure the back button role-theme, you can use:<br>
 		<code>$.mobile.toolbar.prototype.options.backBtnTheme = "a";</code><br>
 		If you're doing this programmatically, set this option inside the <code>mobileinit</code> event handler.</p>
-
 
 		<h2>Navbars</h2>
 
@@ -174,7 +172,6 @@
 				</div>
 			</div>
 		</div>
-
 
 	</div><!-- /content -->
 

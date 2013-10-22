@@ -27,17 +27,17 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 		// Ajax doesn't work so turn it off
 		$( document ).on( "mobileinit", function() {
 			$.mobile.ajaxEnabled = false;
-			
+
 			var message = $( '<div>' , {
 				'class': "jqm-content",
 				style: "border:none; padding: 10px 15px; overflow: auto;",
 				'data-ajax-warning': true
 			});
-			
+
 			message
 			.append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
 			.append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
-			
+
 			$( document ).on( "pagecreate", function( event ) {
 				$( event.target ).append( message );
 			});
@@ -184,7 +184,7 @@ jQuery.fn.removeHighlight = function() {
 	}).end();
 };
 
-// Extension to listview to add keyboard navigation 
+// Extension to listview to add keyboard navigation
 $( document ).on( "mobileinit", function() {
 	(function( $, undefined ) {
 
@@ -197,35 +197,35 @@ $( document ).on( "mobileinit", function() {
 		},
 		_create: function() {
 			this._super();
-			
+
 			if ( this.options.arrowKeyNav ) {
 				this._on( document, { "pageshow": "arrowKeyNav" });
 			}
-			
+
 			if ( this.options.enterToNav ) {
 				this._on( document, { "pageshow": "enterToNav" });
 			}
-			
+
 		},
 		submitTo: function() {
 			var form = this.element.parent().find( "form" );
-			
+
 			form.attr( "method", "get" )
 				.attr( "action", this.options.submitTo );
-				
+
 			var url = this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
-			
+
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", url );
 		},
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
-			
+
 			form.append( "<button type='submit' data-icon='carat-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
 				.parent()
 				.trigger( "create" );
-			
+
 			this.element.parent().find( "form" ).children( ".ui-btn" ).addClass( "ui-hidden-accessible" );
-			
+
 			this._on( form, {
 				"submit": "submitHandler"
 			});
@@ -233,18 +233,18 @@ $( document ).on( "mobileinit", function() {
 		enhanced: false,
 		arrowKeyNav: function() {
 			var input = this.element.prev("form").find( "input" );
-			
+
 			if ( !this.enhanced ) {
 				this._on( input, {
 					"keyup": "handleKeyUp"
 				});
-				
+
 				this.enhanced = true;
 			}
 		},
 		handleKeyUp: function( e ) {
 			var input = this.element.prev("form").find( "input" );
-			
+
 			if ( e.which === $.ui.keyCode.DOWN ) {
 				if ( this.element.find( "li.ui-btn-active" ).length == 0 ) {
 					this.element.find( "li:first" ).toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
@@ -252,7 +252,7 @@ $( document ).on( "mobileinit", function() {
 					this.element.find( "li.ui-btn-active a" ).toggleClass( "ui-btn-active");
 					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				}
-				
+
 				this.highlightDown();
 			} else if ( e.which === $.ui.keyCode.UP ) {
 				if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
@@ -264,10 +264,10 @@ $( document ).on( "mobileinit", function() {
 				this.highlightUp();
 			} else if ( typeof e.which !== "undefined" ) {
 				this.element.find( "li.ui-btn-active" ).removeClass( "ui-btn-active" );
-				
+
 				if ( this.options.highlight ) {
 					var search = input.val();
-					
+
 					this.element.find( "li" ).each(function() {
 						$( this ).removeHighlight();
 						$( this ).highlight( search );
@@ -278,11 +278,11 @@ $( document ).on( "mobileinit", function() {
 		submitHandler: function() {
 			if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
 				var href = this.element.find( "li.ui-btn-active a" ).attr( "href" );
-				
+
 				$( ":mobile-pagecontainer" ).pagecontainer( "change", href );
 				return false;
 			}
-			
+
 			if ( this.options.submitTo ) {
 				this.submitTo();
 			}

@@ -47,7 +47,7 @@
 		            <li><a href="#">BMW</a></li>
 		            <li><a href="#">Cadillac</a></li>
 		            <li><a href="#">Ferrari</a></li>
-		        </ul>      
+		        </ul>
 		      </div>
 		    </div>
 		    <h2>Use inset listview for tabs</h2>
@@ -60,15 +60,15 @@
 			    <div id="one" class="ui-body-d tabs-list-content">
 		        <h1>First tab contents</h1>
 		      </div>
-		      
+
 		        <ul id="two" class="tabs-list-content" data-role="listview" data-inset="true">
 		            <li><a href="#">Acura</a></li>
 		            <li><a href="#">Audi</a></li>
 		            <li><a href="#">BMW</a></li>
 		            <li><a href="#">Cadillac</a></li>
 		            <li><a href="#">Ferrari</a></li>
-		        </ul>      
-		      
+		        </ul>
+
 		    </div>
 		    <h2>Tabbed page content</h2>
 		    <p>You can also use tabs to swap out an enitre pages content <a data-ajax="false" href="tabbed-content.php">Tabbed Content Pages</a></p>

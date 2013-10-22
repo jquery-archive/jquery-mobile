@@ -46,7 +46,7 @@
 </code></pre>
 
 			<h2>Fullscreen Toolbars</h2>
-	        
+
 			<p><a href="../toolbar-fixed-fullscreen/" data-ajax="false">Fullscreen</a> fixed toolbars sit on top of the content at all times when they are visible, and unlike regular fixed toolbars, fullscreen toolbars do not fall back to static positioning when toggled. Instead they disappear from the screen entirely. Fullscreen toolbars are ideal for more immersive interfaces, like a photo viewer that is meant to fill the entire screen with the photo itself and no distractions.</p>
 
 			<p>To enable this option on a fixed header or footer, add the <code>data-fullscreen</code> attribute to the element.</p>
@@ -99,9 +99,8 @@
 
 			<p>Prior to jQuery Mobile 1.1, true fixed toolbar support was contingent on native browser support for the CSS property <code>overflow-scrolling: touch</code>, which is currently only supported in iOS5. As of version 1.1, jQuery Mobile no longer uses this CSS property at all. We've removed all internal usage of this property in the framework, but we've left it defined globally on the $.mobile object to reduce the risk that its removal will cause trouble with existing applications. This property is flagged for removal, so please update your code to no longer use it. The support test for this property, however, remains defined under <code>$.support</code> and we have no plans to remove that test at this time. </p>
 
-
 	    </div><!-- /content -->
-	    
+
 	    <div data-role="footer" data-position="fixed">
 	    	<h1>Fixed footer</h1>
 	    </div><!-- /footer -->
