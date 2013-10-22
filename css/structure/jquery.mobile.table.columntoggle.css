@@ -11,6 +11,10 @@
 	margin:0;
 }
 
+.ui-table-columntoggle {
+	clear: both;
+}
+
 /* Hide all prioritized columns by default */
 @media only all {
 	th.ui-table-priority-6,
