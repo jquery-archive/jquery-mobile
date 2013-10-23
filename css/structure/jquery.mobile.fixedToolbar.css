@@ -50,6 +50,14 @@
 .ui-fixed-hidden {
 	position: absolute;
 }
+/* Tap toggle: hide external fixed footer. See issue #6604 */
+.ui-footer-fixed.ui-fixed-hidden {
+  display: none;
+}
+.ui-page .ui-footer-fixed.ui-fixed-hidden {
+  display: block
+}
+
 .ui-page-header-fullscreen .ui-fixed-hidden,
 .ui-page-footer-fullscreen .ui-fixed-hidden {
 	position: absolute !important;
