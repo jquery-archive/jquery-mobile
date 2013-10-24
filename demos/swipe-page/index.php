@@ -30,7 +30,7 @@
         <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Swipe to navigate</h1>
 
@@ -66,7 +66,7 @@
 
 <div data-role="page" id="city" class="demo-page" data-dom-cache="true" data-theme="b" data-prev="prevCity" data-next="nextCity">
 
-	<div data-role="content">
+	<div role="main" class="ui-content">
 
 		<div id="trivia-city" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
         	<a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all">Close</a>

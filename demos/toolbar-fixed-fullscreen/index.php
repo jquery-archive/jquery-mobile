@@ -21,7 +21,7 @@
 	        <h1>Fullscreen fixed header</h1>
 	    </div><!-- /header -->
 
-	    <div data-role="content">
+	    <div class="ui-content" role="main">
 
 			<img src="../_assets/img/newyork.jpg" alt="New York" style="width:100%; max-width:2048px; margin:0 auto; display:block;">
 

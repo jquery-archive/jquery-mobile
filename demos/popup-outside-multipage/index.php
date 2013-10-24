@@ -39,7 +39,7 @@ $( function() {
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Using the same popup across multiple pages</h1>
 
@@ -69,7 +69,7 @@ $( function() {
 		<a href="#popup-outside-page" data-rel="popup">Menu</a>
 		<h1>Another Page</h1>
 	</div>
-	<div data-role="content">
+	<div role="main" class="ui-content">
 		<p>This is another page that can be reached using the links in the global menu.</p>
 	</div>
 </div>
@@ -78,7 +78,7 @@ $( function() {
 		<a href="#popup-outside-page" data-rel="popup">Menu</a>
 		<h1>Third Page</h1>
 	</div>
-	<div data-role="content">
+	<div role="main" class="ui-content">
 		<p>This is a third page that can be reached using the links in the global menu.</p>
 	</div>
 </div><!-- /page -->

@@ -24,7 +24,7 @@
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
         <h1>Listview Responsive Grid</h1>
 
@@ -64,7 +64,7 @@
 		<a href="./" data-shadow="false" data-iconshadow="false" data-icon="carat-l" data-iconpos="notext" data-rel="back" data-ajax="false">Back</a>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div role="main" class="ui-content">
 
         <ul data-role="listview" data-inset="true">
         	<li><a href="#">

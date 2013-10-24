@@ -20,7 +20,7 @@
 		<a href="../panel/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content jqm-fullwidth">
+	<div role="main" class="ui-content jqm-content jqm-fullwidth">
 
 		<h1>External Panels - Page 2</h1>
 

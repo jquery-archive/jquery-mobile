@@ -22,7 +22,7 @@
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Pages</h1>
 
@@ -80,7 +80,7 @@
 <pre><code>
 &lt;div data-role="page"&gt;
 	&lt;div data-role="header"&gt;...&lt;/div&gt;
-	&lt;div data-role="content"&gt;...&lt;/div&gt;
+	&lt;div role="main" class="ui-content"&gt;...&lt;/div&gt;
 	&lt;div data-role="footer"&gt;...&lt;/div&gt;
 &lt;/div&gt;</span>
 </code></pre>

@@ -56,7 +56,7 @@
         <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Open panel on swipe</h1>
 
@@ -89,7 +89,7 @@
 		<a href="#right-panel" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
     </div><!-- /header -->
 
-    <div data-role="content">
+    <div role="main" class="ui-content">
 
     	<dl>
             <dt>Swipe <span>verb</span></dt>

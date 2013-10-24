@@ -27,7 +27,7 @@
 <?php } ?>
 	<div data-role="page" class="jqm-demos">
 
-	    <div data-role="content" class="jqm-content jqm-fullwidth">
+	    <div class="ui-content jqm-content jqm-fullwidth" role="main">
 
 			<h1>AJAX optimized Persistant Toolbars</h1>
 

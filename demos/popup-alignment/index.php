@@ -58,7 +58,7 @@ $.mobile.document.on( "slidestop", function() {
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 		<div data-demo-html="true" data-demo-js="#extension" data-demo-css="#alignment-example-style">
 			<div data-role="popup" id="alignment-example" class="ui-content">
 				<form data-role="fieldset">

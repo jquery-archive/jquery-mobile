@@ -140,7 +140,7 @@
         <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Swipe to delete list item</h1>
 
@@ -171,7 +171,7 @@
         <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
     </div><!-- /header -->
 
-    <div data-role="content">
+    <div role="main" class="ui-content">
 
         <ul id="list" class="touch" data-role="listview" data-icon="false" data-split-icon="delete">
             <li>

@@ -44,7 +44,7 @@
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Popup</h1>
 
@@ -180,11 +180,11 @@
 		<div data-demo-html="true">
 			<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-b">Delete page...</a>
 
-			<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
-				<div data-role="header" data-theme="a" class="ui-corner-top">
+			<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+				<div data-role="header" data-theme="a">
 				<h1>Delete Page?</h1>
 				</div>
-				<div data-role="content" data-theme="a" class="ui-corner-bottom ui-content">
+				<div role="main" class="ui-content">
 					<h3 class="ui-title">Are you sure you want to delete this page?</h3>
 				<p>This action cannot be undone.</p>
 					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
@@ -330,7 +330,7 @@
 		<div data-role="header" data-add-back-btn="true">
 		<h1>Pre-rendered popup demo</h1>
 		</div>
-		<div data-role="content">
+		<div role="main" class="ui-content">
 			<a href="#pre-rendered" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" aria-owns="pre-rendered" aria-haspopup="true" aria-expanded="false">Open Popup</a>
 			<div style="display: none;"><!-- placeholder for pre-rendered --></div>
 		</div>

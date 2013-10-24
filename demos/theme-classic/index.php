@@ -94,7 +94,7 @@
 		</div>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div class="ui-content" role="main">
 
 		<p><a href="theme-classic.css" target="_blank">Open the classic theme CSS file in a new tab</a></p>
 
