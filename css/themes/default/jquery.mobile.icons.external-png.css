@@ -1,6 +1,9 @@
 .ui-icon-action:after {
 	background-image: url(images/icons-png/action-white.png);
 }
+.ui-icon-alert:after {
+	background-image: url(images/icons-png/alert-white.png);
+}
 .ui-icon-arrow-d-l:after {
 	background-image: url(images/icons-png/arrow-d-l-white.png);
 }
@@ -27,6 +30,15 @@
 }
 .ui-icon-audio:after {
 	background-image: url(images/icons-png/audio-white.png);
+}
+.ui-icon-back:after {
+	background-image: url(images/icons-png/back-white.png);
+}
+.ui-icon-bars:after {
+	background-image: url(images/icons-png/bars-white.png);
+}
+.ui-icon-bullets:after {
+	background-image: url(images/icons-png/bullets-white.png);
 }
 .ui-icon-calendar:after {
 	background-image: url(images/icons-png/calendar-white.png);
@@ -57,17 +69,29 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 .ui-icon-cloud:after {
 	background-image: url(images/icons-png/cloud-white.png);
 }
-.ui-icon-grid:after {
-	background-image: url(images/icons-png/grid-white.png);
+.ui-icon-comment:after {
+	background-image: url(images/icons-png/comment-white.png);
 }
-.ui-icon-mail:after {
-	background-image: url(images/icons-png/mail-white.png);
+.ui-icon-delete:after {
+	background-image: url(images/icons-png/delete-white.png);
+}
+.ui-icon-edit:after {
+	background-image: url(images/icons-png/edit-white.png);
 }
 .ui-icon-eye:after {
 	background-image: url(images/icons-png/eye-white.png);
 }
+.ui-icon-forbidden:after {
+	background-image: url(images/icons-png/forbidden-white.png);
+}
+.ui-icon-forward:after {
+	background-image: url(images/icons-png/forward-white.png);
+}
 .ui-icon-gear:after {
 	background-image: url(images/icons-png/gear-white.png);
+}
+.ui-icon-grid:after {
+	background-image: url(images/icons-png/grid-white.png);
 }
 .ui-icon-heart:after {
 	background-image: url(images/icons-png/heart-white.png);
@@ -78,35 +102,20 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 .ui-icon-info:after {
 	background-image: url(images/icons-png/info-white.png);
 }
-.ui-icon-bullets:after {
-	background-image: url(images/icons-png/bullets-white.png);
-}
-.ui-icon-bars:after {
-	background-image: url(images/icons-png/bars-white.png);
-}
-.ui-icon-navigation:after {
-	background-image: url(images/icons-png/navigation-white.png);
+.ui-icon-location:after {
+	background-image: url(images/icons-png/location-white.png);
 }
 .ui-icon-lock:after {
 	background-image: url(images/icons-png/lock-white.png);
 }
-.ui-icon-search:after {
-	background-image: url(images/icons-png/search-white.png);
-}
-.ui-icon-location:after {
-	background-image: url(images/icons-png/location-white.png);
+.ui-icon-mail:after {
+	background-image: url(images/icons-png/mail-white.png);
 }
 .ui-icon-minus:after {
 	background-image: url(images/icons-png/minus-white.png);
 }
-.ui-icon-forbidden:after {
-	background-image: url(images/icons-png/forbidden-white.png);
-}
-.ui-icon-edit:after {
-	background-image: url(images/icons-png/edit-white.png);
-}
-.ui-icon-user:after {
-	background-image: url(images/icons-png/user-white.png);
+.ui-icon-navigation:after {
+	background-image: url(images/icons-png/navigation-white.png);
 }
 .ui-icon-phone:after {
 	background-image: url(images/icons-png/phone-white.png);
@@ -120,17 +129,14 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 .ui-icon-recycle:after {
 	background-image: url(images/icons-png/recycle-white.png);
 }
-.ui-icon-forward:after {
-	background-image: url(images/icons-png/forward-white.png);
-}
 .ui-icon-refresh:after {
 	background-image: url(images/icons-png/refresh-white.png);
 }
+.ui-icon-search:after {
+	background-image: url(images/icons-png/search-white.png);
+}
 .ui-icon-shop:after {
 	background-image: url(images/icons-png/shop-white.png);
-}
-.ui-icon-comment:after {
-	background-image: url(images/icons-png/comment-white.png);
 }
 .ui-icon-star:after {
 	background-image: url(images/icons-png/star-white.png);
@@ -138,23 +144,21 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 .ui-icon-tag:after {
 	background-image: url(images/icons-png/tag-white.png);
 }
-.ui-icon-back:after {
-	background-image: url(images/icons-png/back-white.png);
+.ui-icon-user:after {
+	background-image: url(images/icons-png/user-white.png);
 }
 .ui-icon-video:after {
 	background-image: url(images/icons-png/video-white.png);
-}
-.ui-icon-alert:after {
-	background-image: url(images/icons-png/alert-white.png);
-}
-.ui-icon-delete:after {
-	background-image: url(images/icons-png/delete-white.png);
 }
 
 /* Alt icons */
 .ui-alt-icon.ui-icon-action:after,
 .ui-alt-icon .ui-icon-action:after {
 	background-image: url(images/icons-png/action-black.png);
+}
+.ui-alt-icon.ui-icon-alert:after,
+.ui-alt-icon .ui-icon-alert:after {
+	background-image: url(images/icons-png/alert-black.png);
 }
 .ui-alt-icon.ui-icon-arrow-d:after,
 .ui-alt-icon .ui-icon-arrow-d:after {
@@ -191,6 +195,18 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 .ui-alt-icon.ui-icon-audio:after,
 .ui-alt-icon .ui-icon-audio:after {
 	background-image: url(images/icons-png/audio-black.png);
+}
+.ui-alt-icon.ui-icon-back:after,
+.ui-alt-icon .ui-icon-back:after {
+	background-image: url(images/icons-png/back-black.png);
+}
+.ui-alt-icon.ui-icon-bars:after,
+.ui-alt-icon .ui-icon-bars:after {
+	background-image: url(images/icons-png/bars-black.png);
+}
+.ui-alt-icon.ui-icon-bullets:after,
+.ui-alt-icon .ui-icon-bullets:after {
+	background-image: url(images/icons-png/bullets-black.png);
 }
 .ui-alt-icon.ui-icon-calendar:after,
 .ui-alt-icon .ui-icon-calendar:after {
@@ -230,21 +246,37 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 .ui-alt-icon .ui-icon-cloud:after {
 	background-image: url(images/icons-png/cloud-black.png);
 }
-.ui-alt-icon.ui-icon-grid:after,
-.ui-alt-icon .ui-icon-grid:after {
-	background-image: url(images/icons-png/grid-black.png);
+.ui-alt-icon.ui-icon-comment:after,
+.ui-alt-icon .ui-icon-comment:after {
+	background-image: url(images/icons-png/comment-black.png);
 }
-.ui-alt-icon.ui-icon-mail:after,
-.ui-alt-icon .ui-icon-mail:after {
-	background-image: url(images/icons-png/mail-black.png);
+.ui-alt-icon.ui-icon-delete:after,
+.ui-alt-icon .ui-icon-delete:after {
+	background-image: url(images/icons-png/delete-black.png);
+}
+.ui-alt-icon.ui-icon-edit:after,
+.ui-alt-icon .ui-icon-edit:after {
+	background-image: url(images/icons-png/edit-black.png);
 }
 .ui-alt-icon.ui-icon-eye:after,
 .ui-alt-icon .ui-icon-eye:after {
 	background-image: url(images/icons-png/eye-black.png);
 }
+.ui-alt-icon.ui-icon-forbidden:after,
+.ui-alt-icon .ui-icon-forbidden:after {
+	background-image: url(images/icons-png/forbidden-black.png);
+}
+.ui-alt-icon.ui-icon-forward:after,
+.ui-alt-icon .ui-icon-forward:after {
+	background-image: url(images/icons-png/forward-black.png);
+}
 .ui-alt-icon.ui-icon-gear:after,
 .ui-alt-icon .ui-icon-gear:after {
 	background-image: url(images/icons-png/gear-black.png);
+}
+.ui-alt-icon.ui-icon-grid:after,
+.ui-alt-icon .ui-icon-grid:after {
+	background-image: url(images/icons-png/grid-black.png);
 }
 .ui-alt-icon.ui-icon-heart:after,
 .ui-alt-icon .ui-icon-heart:after {
@@ -258,46 +290,25 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 .ui-alt-icon .ui-icon-info:after {
 	background-image: url(images/icons-png/info-black.png);
 }
-.ui-alt-icon.ui-icon-bars:after,
-.ui-alt-icon .ui-icon-bars:after {
-	background-image: url(images/icons-png/bars-black.png);
-}
-.ui-alt-icon.ui-icon-bullets:after,
-.ui-alt-icon .ui-icon-bullets:after {
-	background-image: url(images/icons-png/bullets-black.png);
-}
-.ui-alt-icon.ui-icon-navigation:after,
-.ui-alt-icon .ui-icon-navigation:after {
-	background-image: url(images/icons-png/navigation-black.png);
+.ui-alt-icon.ui-icon-location:after,
+.ui-alt-icon .ui-icon-location:after {
+	background-image: url(images/icons-png/location-black.png);
 }
 .ui-alt-icon.ui-icon-lock:after,
 .ui-alt-icon .ui-icon-lock:after {
 	background-image: url(images/icons-png/lock-black.png);
 }
-.ui-alt-icon.ui-icon-search:after,
-.ui-alt-icon .ui-icon-search:after,
-.ui-input-search:after {
-	background-image: url(images/icons-png/search-black.png);
-}
-.ui-alt-icon.ui-icon-location:after,
-.ui-alt-icon .ui-icon-location:after {
-	background-image: url(images/icons-png/location-black.png);
+.ui-alt-icon.ui-icon-mail:after,
+.ui-alt-icon .ui-icon-mail:after {
+	background-image: url(images/icons-png/mail-black.png);
 }
 .ui-alt-icon.ui-icon-minus:after,
 .ui-alt-icon .ui-icon-minus:after {
 	background-image: url(images/icons-png/minus-black.png);
 }
-.ui-alt-icon.ui-icon-forbidden:after,
-.ui-alt-icon .ui-icon-forbidden:after {
-	background-image: url(images/icons-png/forbidden-black.png);
-}
-.ui-alt-icon.ui-icon-edit:after,
-.ui-alt-icon .ui-icon-edit:after {
-	background-image: url(images/icons-png/edit-black.png);
-}
-.ui-alt-icon.ui-icon-user:after,
-.ui-alt-icon .ui-icon-user:after {
-	background-image: url(images/icons-png/user-black.png);
+.ui-alt-icon.ui-icon-navigation:after,
+.ui-alt-icon .ui-icon-navigation:after {
+	background-image: url(images/icons-png/navigation-black.png);
 }
 .ui-alt-icon.ui-icon-phone:after,
 .ui-alt-icon .ui-icon-phone:after {
@@ -315,21 +326,18 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 .ui-alt-icon .ui-icon-recycle:after {
 	background-image: url(images/icons-png/recycle-black.png);
 }
-.ui-alt-icon.ui-icon-forward:after,
-.ui-alt-icon .ui-icon-forward:after {
-	background-image: url(images/icons-png/forward-black.png);
-}
 .ui-alt-icon.ui-icon-refresh:after,
 .ui-alt-icon .ui-icon-refresh:after {
 	background-image: url(images/icons-png/refresh-black.png);
 }
+.ui-alt-icon.ui-icon-search:after,
+.ui-alt-icon .ui-icon-search:after,
+.ui-input-search:after {
+	background-image: url(images/icons-png/search-black.png);
+}
 .ui-alt-icon.ui-icon-shop:after,
 .ui-alt-icon .ui-icon-shop:after {
 	background-image: url(images/icons-png/shop-black.png);
-}
-.ui-alt-icon.ui-icon-comment:after,
-.ui-alt-icon .ui-icon-comment:after {
-	background-image: url(images/icons-png/comment-black.png);
 }
 .ui-alt-icon.ui-icon-star:after,
 .ui-alt-icon .ui-icon-star:after {
@@ -339,19 +347,11 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 .ui-alt-icon .ui-icon-tag:after {
 	background-image: url(images/icons-png/tag-black.png);
 }
-.ui-alt-icon.ui-icon-back:after,
-.ui-alt-icon .ui-icon-back:after {
-	background-image: url(images/icons-png/back-black.png);
+.ui-alt-icon.ui-icon-user:after,
+.ui-alt-icon .ui-icon-user:after {
+	background-image: url(images/icons-png/user-black.png);
 }
 .ui-alt-icon.ui-icon-video:after,
 .ui-alt-icon .ui-icon-video:after {
 	background-image: url(images/icons-png/video-black.png);
-}
-.ui-alt-icon.ui-icon-alert:after,
-.ui-alt-icon .ui-icon-alert:after {
-	background-image: url(images/icons-png/alert-black.png);
-}
-.ui-alt-icon.ui-icon-delete:after,
-.ui-alt-icon .ui-icon-delete:after {
-	background-image: url(images/icons-png/delete-black.png);
 }
