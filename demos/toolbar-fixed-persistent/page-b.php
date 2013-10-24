@@ -43,7 +43,7 @@
 
 	<div data-role="page" data-title="Friends">
 
-	    <div data-role="content">
+	    <div class="ui-content" role="main">
 
 				<ul data-role="listview" data-theme="a" data-dividertheme="e" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search friends...">
 					<li data-role="list-divider">A</li>

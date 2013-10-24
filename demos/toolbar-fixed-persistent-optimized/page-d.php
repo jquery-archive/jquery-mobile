@@ -28,7 +28,7 @@
 
 	<div data-role="page">
 
-    	<div data-role="content">
+    	<div class="ui-content" role="main">
 
 			<ul data-role="listview" data-theme="a" data-dividertheme="b" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search messages...">
 				<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>

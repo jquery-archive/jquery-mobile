@@ -101,7 +101,7 @@
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Google Maps with List toggle</h1>
 
@@ -141,7 +141,7 @@
 		    </fieldset>
 			</div>
 		</div>
-		<div data-role="content" class="ui-content-list">
+		<div role="main" class="ui-content ui-content-list">
 	        <div id="list-canvas">
 	            <ul id="list-results" data-role="listview">
 	            	<li data-marker-info="44.811805,-93.176352">
@@ -218,7 +218,7 @@
 				</ul>
 			</div>
 		</div>
-		<div data-role="content" id="map-canvas" data-initial-view="44.80,-93.16,10" style="display:none;"></div>
+		<div role="main" class="ui-content" id="map-canvas" data-initial-view="44.80,-93.16,10" style="display:none;"></div>
 	<!-- Load map assets at bottom for performance -->
 	<script type="text/javascript" src="jquery.gmap.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>

@@ -70,7 +70,7 @@
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Google Maps</h1>
 
@@ -104,7 +104,7 @@
 	<h1>Maps</h1>
 	</div>
 
-	<div data-role="content" id="map-canvas">
+	<div role="main" class="ui-content" id="map-canvas">
 		<!-- map loads here... -->
 	</div>
 </div>

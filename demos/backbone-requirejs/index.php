@@ -24,7 +24,7 @@
         <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
       <h1>jQuery Mobile, Backbone.js and Require.js</h1>
       <p>jQuery Mobile provides an <strong>HTML5-based user interface for all popular mobile device platforms</strong>, but it does not influence how you organize and structure your app's JavaScript.  Many jQuery Mobile users turn to a variety of other popular third-party libraries, including MV* frameworks and dependency management tools, to help structure their code.

@@ -165,7 +165,7 @@ $.mobile.document
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 		<h1>Popup arrow size</h1>
 		<p>The size of the popup arrow can be adjusted via custom CSS. Drag the slider below and copy/paste the resulting CSS into your project. Make sure you paste it after the jQuery Mobile structure/theme CSS.</p>
 		<div style="padding: 100px;">

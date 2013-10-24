@@ -28,7 +28,7 @@
 
 	<div data-role="page">
 
-    	<div data-role="content">
+    	<div class="ui-content" role="main">
 
 			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="false">
 				<li><a href="#">

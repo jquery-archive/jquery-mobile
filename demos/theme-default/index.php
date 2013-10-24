@@ -71,7 +71,7 @@
 		</div>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div class="ui-content" role="main">
 
 		<form class="ui-mini">
 			<div class="ui-field-contain" id="theme-selector">

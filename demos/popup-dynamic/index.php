@@ -77,7 +77,7 @@
 		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
         <h1>Dynamic popup</h1>
 
@@ -107,7 +107,7 @@
         <h1>Cars</h1>
     </div><!-- /header -->
 
-    <div data-role="content">
+    <div role="main" class="ui-content">
 
         <ul data-role="listview">
             <li><a href="#" class="cars" id="bmw"><img src="../_assets/img/bmw-thumb.jpg" alt="BMW"><h2>BMW</h2><p>5 series</p></a></li>

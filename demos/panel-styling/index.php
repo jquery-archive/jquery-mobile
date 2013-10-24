@@ -128,7 +128,7 @@
         <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Panel styling</h1>
 
@@ -168,7 +168,7 @@
         <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
     </div><!-- /header -->
 
-    <div data-role="content">
+    <div role="main" class="ui-content">
 
     	<div class="article">
     		<p><img src="../_assets/img/bike.jpg" alt="Fixed Gear bike"></p>

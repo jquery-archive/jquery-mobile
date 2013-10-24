@@ -19,7 +19,7 @@
 	<div data-role="header">
 		<h1>Redirect Target</h1>
 	</div>
-	<div data-role="content">
+	<div role="main" class="ui-content">
 		<p>Content</p>
 		<tt>
 		</tt>

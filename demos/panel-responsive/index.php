@@ -21,7 +21,7 @@
         <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content jqm-fullwidth">
+    <div role="main" class="ui-content jqm-content jqm-fullwidth">
 
     	<h1>Panel responsive</h1>
 
@@ -106,7 +106,7 @@
         <h1>Landing page</h1>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <p>This is just a landing page.</p>
 

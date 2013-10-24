@@ -49,7 +49,7 @@
 			</div>
 		</div><!-- /header -->
 
-		<div data-role="content">
+		<div class="ui-content" role="main">
 
 			<ul data-role="listview" data-split-icon="gear">
 				<li><a href="#">
