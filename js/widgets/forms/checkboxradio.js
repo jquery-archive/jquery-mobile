@@ -184,7 +184,13 @@ $.widget( "mobile.checkboxradio", $.extend( {
 
 	//returns either a set of radios with the same name attribute, or a single checkbox
 	_getInputSet: function() {
+		var name = this.element[ 0 ].name;
+
 		if ( this.inputtype === "checkbox" ) {
+			return this.element;
+		}
+
+		if ( !name ) {
 			return this.element;
 		}
 
