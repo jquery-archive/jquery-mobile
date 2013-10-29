@@ -69,6 +69,13 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		if ( !this._widget && widget ) {
 			this._widget = widget;
 			this._widget._setOptions = replaceSetOptions( this, this._widget._setOptions );
+			if ( widget.widgetFullName === "mobile-listview" ) {
+				this.element.on( "filterablebeforefilter", $.proxy( function( event ) {
+					if ( event.target === this.element[ 0 ] ) {
+						this.element.trigger( "listviewbeforefilter" );
+					}
+				}, this ));
+			}
 		}
 
 		if ( !!this._widget ) {
