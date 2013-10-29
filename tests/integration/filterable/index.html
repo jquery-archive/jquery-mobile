@@ -24,6 +24,7 @@
 				"jquery.mobile.navigation",
 				"widgets/listview",
 				"widgets/filterable",
+				"widgets/filterable.backcompat",
 				"widgets/listview.autodividers",
 				"widgets/toolbar",
 				"widgets/collapsible",
@@ -305,6 +306,17 @@
 			<p class="ui-screen-hidden">Washington, DC</p>
 			<p class="ui-screen-hidden">New York, NY</p>
 		</div>
+
+		<input id="test-backcompat-signal-emission-input"></input>
+		<ul id="test-backcompat-signal-emission"
+			data-nstest-role="listview"
+			data-nstest-filter="true"
+			data-nstest-input="#test-backcompat-signal-emission-input">
+			<li>San Francisco, CA</li>
+			<li>Portland, OR</li>
+			<li>Washington, DC</li>
+			<li>New York, NY</li>
+		</ul>
 
 	</div>
 </div>

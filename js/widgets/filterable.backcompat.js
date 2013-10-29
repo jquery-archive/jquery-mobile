@@ -65,6 +65,16 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		this._setWidget( this.element.data( "mobile-" + evt.type.substring( 0, evt.type.length - 6 ) ) );
 	},
 
+	_trigger: function( type, event, data ) {
+		if ( this._widget && this._widget.widgetFullName === "mobile-listview" &&
+			type === "beforefilter" ) {
+
+			// Also trigger listviewbeforefilter if this widget is also a listview
+			this._widget._trigger( "beforefilter", event, data );
+		}
+		this._super( type, event, data );
+	},
+
 	_setWidget: function( widget ) {
 		if ( !this._widget && widget ) {
 			this._widget = widget;
