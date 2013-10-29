@@ -8,7 +8,7 @@ module.exports = function( grunt ) {
 		pkg = { version: "1.4.0pre" },
 		rnewline = /\r?\n/,
 		fs = require( "fs" ),
-		$ = require('jquery');
+		$ = require( "jquery" );
 
 	grunt.registerTask( "changelog:create", function() {
 		done = this.async();
@@ -16,7 +16,7 @@ module.exports = function( grunt ) {
 			bootstrap,
 			getVersions,
 			generateChangelog
-		])
+		]);
 
 	});
 
@@ -41,19 +41,20 @@ module.exports = function( grunt ) {
 	    // Parse the HTTP headers
 	    // -------------------------------------------
 
-	    // Split headers at newline into array
-	    var headersArray = jqXHR.getAllResponseHeaders().split("\r\n");
+	    var linksArray, linksJSON,
+				// Split headers at newline into array
+			headersArray = jqXHR.getAllResponseHeaders().split("\r\n"),
 
-	    // Crate JSON object to populate
-	    var headersJSON = {};
+			// Crate JSON object to populate
+			headersJSON = {};
 
 	    // Iterate over HTTP headers
 	    $.each( headersArray, function(index, value){
 
 	        // Extract key and value for JSON object
-	        var delIdx = value.indexOf(":");
-	        var key    = value.substr(0, delIdx);
-	        var value  = value.substr(delIdx+1, value.length);
+	        var delIdx = value.indexOf(":"),
+			key    = value.substr(0, delIdx);
+			value  = value.substr(delIdx+1, value.length);
 
 	        // Update JSON object
 	        headersJSON[key.trim()] = value.trim();
@@ -61,35 +62,34 @@ module.exports = function( grunt ) {
 
 
 	    // Parse the HTTP Link header
-	    var linksArray = headersJSON.link != null ? headersJSON.link.split(",") : [];
+	    linksArray = headersJSON.link != null ? headersJSON.link.split( "," ) : [];
 
-	    // Create JSON object
-	    var linksJSON = {};
+		// Create JSON object
+		linksJSON = {};
 	    $.each( linksArray, function(index, value){
-	        var keyValue = value.split(";");
+	        var keyValue = value.split( ";" );
 	        linksJSON[keyValue[1].trim()] = keyValue[0].trim().substr(1, keyValue[0].trim().length-2 );
 	    });
 
-	    linkNextPage = linksJSON['rel="next"'];
-
-	    console.log('parseHttpHeaders: metadata of response: ' + linksJSON['rel="next"'] );
+	    linkNextPage = linksJSON[ "rel='next'" ];
+		console.log( "parseHttpHeaders: metadata of response: " + linksJSON[ "rel='next'" ] );
 	 }
 
 
 	function getIssues(repo_url) {
 
-	    console.log('listRepoIssues: Starting getting issues for jquery-mobile ...');
+	    console.log( "listRepoIssues: Starting getting issues for jquery-mobile ..." );
 
 	    var request = $.ajax({
 
 	        url: repo_url,
-	        type: 'GET',
+	        type: "GET",
 
 	        success: function(data, textStatus, jqXHR){
-	            console.log('listRepoIssues: Yeah, it worked...' + textStatus + ' - ' );
+	            console.log( "listRepoIssues: Yeah, it worked..." + textStatus + " - " );
 
 	            $.each( data, function(index, value) {
-	            	issues.push( "* " + ( ( value.labels[0] !== undefined && /:/.test( value.title ) ) ? value.labels[0].name + ": " : "" ) + value.title + " [# " + value.number + "](" + value.html_url + ")" );
+					issues.push( "* " + ( ( value.labels[0] !== undefined && /:/.test( value.title ) ) ? value.labels[0].name + ": " : "" ) + value.title + " [# " + value.number + "](" + value.html_url + ")" );
 	            });
 
 	            parseHttpHeaders(jqXHR);
@@ -145,7 +145,6 @@ module.exports = function( grunt ) {
 		}).sort()
 		.join( "\n" ) + "\n";
 		// Sort commits so that they're grouped by component
-		
 
 		linkNextPage = "https://api.github.com/repos/jquery/jquery-mobile/issues?state=closed&per_page=100&milestone=" + 20;
 		changelog += "\n###Closed Issues\n";
