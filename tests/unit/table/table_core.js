@@ -157,7 +157,7 @@
 	asyncTest( "The page should be enhanced correctly" , function(){
 		setTimeout(function() {
 			var $popup = $('#column-table-test #movie-table-column-popup-popup'),
-				button = $('#column-table-test .ui-table-columntoggle-btn');
+				button = $('#column-table-test .ui-table-columntoggle-btn:last');
 
 			ok($('#column-table-test .ui-table-columntoggle').length, ".ui-table-columntoggle class added to table element");
 			ok($('#column-table-test .ui-table-columntoggle-btn').length, ".ui-table-columntoggle-btn button added");
@@ -171,6 +171,62 @@
 
 			start();
 		}, 800);
+	});
+
+	asyncTest( "Toggle column", function() {
+		expect( 6 );
+
+		var initial, post,
+			input = $( "#toggle-column-test-popup input:nth(1)" ),
+			column = $( "#toggle-column-test tr>:nth-child(3)" ),
+
+			// Ascertain visibility and consistency
+			checkColumn = function( messagePrefix ) {
+				var visible = undefined,
+					inconsistent = false;
+
+				column.each( function() {
+					if ( visible === undefined ) {
+						visible = !!$( this ).is( ":visible" );
+					} else {
+						inconsistent = ( !!$( this ).is( ":visible" ) !== visible );
+					}
+					if ( inconsistent ) {
+
+						// Stop checking
+						return false;
+					}
+				});
+
+				deepEqual( inconsistent, false,
+					messagePrefix + " visibility of column members is consistent" );
+				deepEqual( visible, input.is( ":checked" ),
+					messagePrefix + " visibility of column members coincides with the " +
+					"corresponding column checkbox state" );
+
+				return visible;
+			};
+
+			$.testHelper.detailedEventCascade([
+
+				function() {
+					initial = checkColumn( "Initially: " );
+					input.click().checkboxradio( "refresh" ).trigger( "change" );
+				},
+
+				{
+					change: { src: input, event: "change.toggleColumn1" }
+				},
+
+				function( result ) {
+					deepEqual( result.change.timedOut, false, "Clicking the checkbox " +
+						"has resulted in a 'change' event" );
+					post = checkColumn( "After clicking: " );
+					deepEqual( initial !== post, true,
+						"Visibility was toggled by clicking the checkbox" );
+					start();
+				}
+			]);
 	});
 
 	asyncTest( "Column toggle table refresh" , function(){
@@ -258,7 +314,7 @@
 		var $input;
 		$.testHelper.pageSequence([
 			function() {
-				$( ".ui-table-columntoggle-btn" ).click();
+				$( ".ui-table-columntoggle-btn:last" ).click();
 			},
 			function() {
 				setTimeout(function() {
@@ -266,7 +322,7 @@
 				}, 800);
 			},
 			function() {
-				$input = $( ".ui-popup-container" ).find( "input:first" );
+				$input = $( "#movie-table-column-popup-popup" ).find( "input:first" );
 				$input.click();
 			},
 			function(){

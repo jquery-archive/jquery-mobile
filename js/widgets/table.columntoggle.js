@@ -41,7 +41,6 @@ $.widget( "mobile.table", $.mobile.table, {
 		if ( this.options.enhanced ) {
 			this._menu = $( this.document[ 0 ].getElementById( this._id() + "-popup" ) ).children().first();
 			this._addToggles( this._menu, true );
-			this._bindToggles( this._menu );
 		} else {
 			this._menu = this._enhanceColToggle();
 			this.element.addClass( this.options.classes.columnToggleTable );
@@ -64,13 +63,8 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._on( this.window, {
 			throttledresize: "_setToggleState"
 		});
-	},
-
-	_bindToggles: function( menu ) {
-		var inputs = menu.find( "input" );
-
-		this._on( inputs, {
-			change: "_menuInputChange"
+		this._on( this._menu, {
+			"change input": "_menuInputChange"
 		});
 	},
 
@@ -113,7 +107,6 @@ $.widget( "mobile.table", $.mobile.table, {
 		// set bindings here
 		if ( !keep ) {
 			menu.controlgroup( "refresh" );
-			this._bindToggles( menu );
 		}
 	},
 
