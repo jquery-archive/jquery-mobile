@@ -153,7 +153,7 @@
 
 		<h2>Icons: Standard</h2>
 
-		<p>The default icon for each list item containing a link is <code>arrow-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../icons/">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styling it's also possible to use third party icons.</p>
+		<p>The default icon for each list item containing a link is <code>carat-r</code>. To override this, set the <code>data-icon</code> attribute on the desired list item to the <a href="../icons/">name of a standard icon</a>. To prevent icons from appearing altogether, set the <code> data-icon</code> attribute to &quot;false&quot;. With a bit of custom styling it's also possible to use third party icons.</p>
 
 			<div data-demo-html="true" data-demo-css="#custom-icon">
                 <ul data-role="listview" data-inset="true">
