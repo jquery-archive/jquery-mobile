@@ -142,7 +142,7 @@
                 <div class="ui-block-b"><a href="#" class="ui-btn ui-shadow ui-corner-all">Grid A</a></div>
             </div>
             <div class="ui-grid-solo">
-                <a href="#" class="ui-btn ui-shadow ui-corner-all">Grid Solo</a>
+                <div class="ui-block-a"><a href="#" class="ui-btn ui-shadow ui-corner-all">Grid Solo</a></div>
             </div>
             <br>
             <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-b">Outside the grid</a>
