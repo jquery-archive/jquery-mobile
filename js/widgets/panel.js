@@ -149,12 +149,16 @@ $.widget( "mobile.panel", {
 		var self = this;
 
 		self._closeLink.on( "click.panel" , function( e ) {
-			e.preventDefault();
-			self.close();
-			return false;
+			if ( !e.isDefaultPrevented() ) {
+				e.preventDefault();
+				self.close();
+				return false;
+			}
 		});
-		self.element.on( "click.panel" , "a:jqmData(ajax='false')", function(/* e */) {
-			self.close();
+		self.element.on( "click.panel" , "a:jqmData(ajax='false')", function( event ) {
+			if ( !event.isDefaultPrevented() ) {
+				self.close();
+			}
 		});
 	},
 
