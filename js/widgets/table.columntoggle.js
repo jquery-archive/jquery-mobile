@@ -178,7 +178,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		if ( !create && this.options.mode === "columntoggle" ) {
 			// columns not being replaced must be cleared from input toggle-locks
-			this._unlockCells( this.allHeaders );
+			this._unlockCells( this.element.find( ".ui-table-cell-hidden, .ui-table-cell-visible" ) );
 
 			// update columntoggles and cells
 			this._addToggles( this._menu, create );
