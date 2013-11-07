@@ -138,6 +138,17 @@ $.widget( "mobile.page", {
 			this.element.find( "[data-" + $.mobile.ns + "='content']" ).removeClass( "ui-body-" + this.options.contentTheme )
 				.addClass( "ui-body-" + o.contentTheme );
 		}
+
+		if ( o.domCache !== undefined && this.options.domCache !== o.domCache ) {
+			this.options.domCache = o.domCache;
+			this.element.attr( "data-dom-cache", o.domCache );
+
+			if ( o.domCache ) {
+				this.element.unbind( "pagehide.remove" );
+			} else {
+				this.element.page( "bindRemove" );
+			}
+		}
 	},
 
 	_handlePageBeforeShow: function(/* e */) {
