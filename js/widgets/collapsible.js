@@ -201,8 +201,11 @@ $.widget( "mobile.collapsible", {
 				if ( currentOpts.collapsedIcon ) {
 					anchor.removeClass( "ui-icon-" + currentOpts.collapsedIcon );
 				}
-				if ( opts.collapsedIcon ) {
-					anchor.addClass( "ui-icon-" + opts.collapsedIcon );
+				if ( /false/i.test( opts.collapsedIcon ) ) {
+					anchor.removeClass( "ui-btn-icon-" + ( currentOpts.iconPos === "right" ? "right" : "left" ) );
+				} else {
+					anchor.addClass( "ui-icon-" + opts.collapsedIcon )
+						.toggleClass( "ui-btn-icon-" + ( currentOpts.iconPos === "right" ? "right" : "left" ), true );
 				}
 			}
 		} else {
