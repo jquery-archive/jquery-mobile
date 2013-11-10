@@ -11,55 +11,70 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 		event_name = "orientationchange",
 		get_orientation,
 		last_orientation,
-		initial_orientation_is_landscape,
-		initial_orientation_is_default,
-		portrait_map = { "0": true, "180": true },
-		ww, wh, landscape_threshold;
+		initial_map = { "0": true, "180": true },
+		portrait_map = initial_map;
 
-	// It seems that some device/browser vendors use window.orientation values 0 and 180 to
-	// denote the "default" orientation. For iOS devices, and most other smart-phones tested,
-	// the default orientation is always "portrait", but in some Android and RIM based tablets,
-	// the default orientation is "landscape". The following code attempts to use the window
-	// dimensions to figure out what the current orientation is, and then makes adjustments
-	// to the to the portrait_map if necessary, so that we can properly decode the
-	// window.orientation value whenever get_orientation() is called.
-	//
-	// Note that we used to use a media query to figure out what the orientation the browser
-	// thinks it is in:
-	//
-	//     initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
-	//
-	// but there was an iPhone/iPod Touch bug beginning with iOS 4.2, up through iOS 5.1,
-	// where the browser *ALWAYS* applied the landscape media query. This bug does not
-	// happen on iPad.
+    function setOrientationMap() {
+		// It seems that some device/browser vendors use window.orientation values 0 and 180 to
+		// denote the "default" orientation. For iOS devices, and most other smart-phones tested,
+		// the default orientation is always "portrait", but in some Android and RIM based tablets,
+		// the default orientation is "landscape". The following code attempts to use the window
+		// dimensions to figure out what the current orientation is, and then makes adjustments
+		// to the to the portrait_map if necessary, so that we can properly decode the
+		// window.orientation value whenever get_orientation() is called.
+		//
+		// Note that we used to use a media query to figure out what the orientation the browser
+		// thinks it is in:
+		//
+		//     initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+		//
+		// but there was an iPhone/iPod Touch bug beginning with iOS 4.2, up through iOS 5.1,
+		// where the browser *ALWAYS* applied the landscape media query. This bug does not
+		// happen on iPad.
 
-	if ( $.support.orientation ) {
+		if ( $.support.orientation ) {
 
-		// Check the window width and height to figure out what the current orientation
-		// of the device is at this moment. Note that we've initialized the portrait map
-		// values to 0 and 180, *AND* we purposely check for landscape so that if we guess
-		// wrong, , we default to the assumption that portrait is the default orientation.
-		// We use a threshold check below because on some platforms like iOS, the iPhone
-		// form-factor can report a larger width than height if the user turns on the
-		// developer console. The actual threshold value is somewhat arbitrary, we just
-		// need to make sure it is large enough to exclude the developer console case.
+			// Check the window width and height to figure out what the current orientation
+			// of the device is at this moment. Note that we've initialized the portrait map
+			// values to 0 and 180, *AND* we purposely check for landscape so that if we guess
+			// wrong, , we default to the assumption that portrait is the default orientation.
+			// We use a threshold check below because on some platforms like iOS, the iPhone
+			// form-factor can report a larger width than height if the user turns on the
+			// developer console. The actual threshold value is somewhat arbitrary, we just
+			// need to make sure it is large enough to exclude the developer console case.
 
-		ww = window.innerWidth || win.width();
-		wh = window.innerHeight || win.height();
-		landscape_threshold = 50;
+			var ww = window.innerWidth || win.width(),
+				wh = window.innerHeight || win.height(),
+				landscape_threshold = 50,
+				initial_orientation_is_landscape,
+				initial_orientation_is_default;
 
-		initial_orientation_is_landscape = ww > wh && ( ww - wh ) > landscape_threshold;
+			initial_orientation_is_landscape = ww > wh && ( ww - wh ) > landscape_threshold;
 
-		// Now check to see if the current window.orientation is 0 or 180.
-		initial_orientation_is_default = portrait_map[ window.orientation ];
+			// Now check to see if the current window.orientation is 0 or 180.
+			initial_orientation_is_default = initial_map[ window.orientation ];
 
-		// If the initial orientation is landscape, but window.orientation reports 0 or 180, *OR*
-		// if the initial orientation is portrait, but window.orientation reports 90 or -90, we
-		// need to flip our portrait_map values because landscape is the default orientation for
-		// this device/browser.
-		if ( ( initial_orientation_is_landscape && initial_orientation_is_default ) || ( !initial_orientation_is_landscape && !initial_orientation_is_default ) ) {
-			portrait_map = { "-90": true, "90": true };
+			// If the initial orientation is landscape, but window.orientation reports 0 or 180, *OR*
+			// if the initial orientation is portrait, but window.orientation reports 90 or -90, we
+			// need to flip our portrait_map values because landscape is the default orientation for
+			// this device/browser.
+			if ( ( initial_orientation_is_landscape && initial_orientation_is_default ) || ( !initial_orientation_is_landscape && !initial_orientation_is_default ) ) {
+				portrait_map = { "-90": true, "90": true };
+			} else {
+				portrait_map = initial_map;
+			}
 		}
+	}
+
+	setOrientationMap();
+
+	// On iPhones, when a webapp is started in full screen mode (via a launcher icon, not via Safari) *while* device is
+	// held in landscape orientation, then the initial value of window.orientation may be incorrect, stating that
+	// device is still in portrait mode while innerHeight and innerWidth are already set to landscape dimensions. It
+	// seems that window.orientation is delivered correctly on ready event. This is why we need to trigger our decision
+	// logic once again on document ready if we previously had to flip portrait_map values.
+	if ( initial_map !== portrait_map ) {
+		$( window.document ).ready( setOrientationMap );
 	}
 
 	$.event.special.orientationchange = $.extend( {}, $.event.special.orientationchange, {
