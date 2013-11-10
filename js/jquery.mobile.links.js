@@ -3,7 +3,6 @@
 //>>label: Link Classes
 //>>group: Utilities
 
-
 define( [ "jquery",
 	"jquery.mobile.core",
 	"navigation/path" ], function( jQuery ) {

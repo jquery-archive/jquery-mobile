@@ -173,7 +173,9 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 
 		// Enhance child elements
 		enhanceWithin: function() {
-			var widgetElements,
+			var index,
+				widgetElements = {},
+				keepNative = $.mobile.page.prototype.keepNativeSelector(),
 				that = this;
 
 			// Add no js class to elements
@@ -193,12 +195,14 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 
 			// Run buttonmarkup
 			if ( $.fn.buttonMarkup ) {
-				$( $.fn.buttonMarkup.initSelector ).not( $.mobile.page.prototype.keepNativeSelector() ).buttonMarkup();
+				this.find( $.fn.buttonMarkup.initSelector ).not( keepNative )
+				.jqmEnhanceable().buttonMarkup();
 			}
 
 			// Add classes for fieldContain
 			if ( $.fn.fieldcontain ) {
-				this.find( ":jqmData(role='fieldcontain')" ).jqmEnhanceable().fieldcontain();
+				this.find( ":jqmData(role='fieldcontain')" ).not( keepNative )
+				.jqmEnhanceable().fieldcontain();
 			}
 
 			// Enhance widgets
@@ -208,20 +212,26 @@ define( [ "jquery", "./jquery.mobile.ns", "./jquery.ui.core" ], function( jQuery
 				if ( constructor.initSelector ) {
 
 					// Filter elements that should not be enhanced based on parents
-					widgetElements = $.mobile.enhanceable( that.find( constructor.initSelector ) );
+					var elements = $.mobile.enhanceable( that.find( constructor.initSelector ) );
 
 					// If any matching elements remain filter ones with keepNativeSelector
-					if ( widgetElements.length ) {
+					if ( elements.length > 0 ) {
 
 						// $.mobile.page.prototype.keepNativeSelector is deprecated this is just for backcompat
 						// Switch to $.mobile.keepNative in 1.5 which is just a value not a function
-						widgetElements = widgetElements.not( $.mobile.page.prototype.keepNativeSelector() );
+						elements = elements.not( keepNative );
 					}
 
 					// Enhance whatever is left
-					widgetElements[ constructor.prototype.widgetName ]();
+					if ( elements.length > 0 ) {
+						widgetElements[ constructor.prototype.widgetName ] = elements;
+					}
 				}
 			});
+
+			for ( index in widgetElements ) {
+				widgetElements[ index ][ index ]();
+			}
 
 			return this;
 		},

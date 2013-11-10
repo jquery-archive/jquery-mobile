@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Panel fixed positioning - jQuery Mobile Demos</title>
+    <title>Panel responsive - jQuery Mobile Demos</title>
     <link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
     <link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
@@ -11,113 +11,74 @@
 	<script src="../../js/jquery.js"></script>
     <script src="../_assets/js/"></script>
     <script src="../../js/"></script>
-    <style>
-        .nav-search .ui-btn-up-a {
-            background-image: none;
-            background-color: #333;
-        }
-        .nav-search .ui-btn-inner {
-            border-top: 1px solid #888;
-            border-color: rgba(255, 255, 255, .1);
-        }
-        .nav-search .ui-btn.ui-first-child {
-            border-top-width: 0;
-            background: #111;
-        }
-        .userform {
-			padding: .8em 1.2em;
-		}
-        .userform h2 {
-			color: #555;
-			margin: 0.3em 0 .8em 0;
-			padding-bottom: .5em;
-			border-bottom: 1px solid rgba(0,0,0,.1);
-		}
-        .userform label {
-			display: block;
-			margin-top: 1.2em;
-		}
-        .ui-grid-a {
-			margin-top: 1em;
-			padding-top: .8em;
-			margin-top: 1.4em;
-			border-top: 1px solid rgba(0,0,0,.1);
-		}
-    </style>
 </head>
 <body>
-<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1">
+<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-responsive-page1" data-title="Panel responsive page">
 
-    <div data-role="header" data-position="fixed">
-        <h1>Fixed header</h1>
+    <div data-role="header">
+        <h1>Panel responsive</h1>
         <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
         <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content jqm-fullwidth">
 
-    	<h1>Panels</h1>
+    	<h1>Panel responsive</h1>
 
-		<h2>Fixed positioning</h2>
+        <p>This is a typical page that has two buttons in the header bar that open panels. The left panel has the push display mode, the right panel reveal. To make this responsive, you can make the page re-flow at wider widths. This allows both the panel menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page. Note that when using the preset class, we also hide the dismiss layer on wider screens if the panel has the push display mode.</p>
 
-        <p>This is a typical page that has two buttons in the header bar that open panels. The left panel has the reveal display mode. The right panel opens as overlay. For both panels we set <code>data-position-fixed="true"</code>. We also set position fixed for the header and footer on this page.</p>
+		<div data-demo-html="#panel-responsive-page1"></div><!--/demo-html -->
 
-        <p>The left panel contains a long menu to demonstrate that the framework will check the panel contents height and unfixes the panel so its content can be scrolled. In the right panel there is a short form that shows the fixed positioning.</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
-		<h2>Responsive</h2>
-
-        <p>To make this responsive, you can make the page re-flow at wider widths. This allows both the reveal panel menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page.</p>
-
-        <a href="./" data-ajax="false" role="button" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-arrow-l ui-btn-icon-left">Back to Panels</a>
-
-		<div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div><!--/demo-html -->
+        <a href="../" data-rel="back" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
 
 	</div><!-- /content -->
 
-    <div data-role="footer" data-position="fixed">
-    	<h4>Fixed footer</h4>
-    </div><!-- /footer -->
+	<div data-role="panel" data-display="push" data-theme="b" id="nav-panel">
 
-	<div data-role="panel" data-position-fixed="true" data-theme="a" id="nav-panel">
-
-		<ul data-role="listview" data-theme="a" class="nav-search">
+		<ul data-role="listview">
             <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
-                <li><a href="#panel-fixed-page2">Accordion</a></li>
-                <li><a href="#panel-fixed-page2">AJAX Navigation</a></li>
-                <li><a href="#panel-fixed-page2">Autocomplete</a></li>
-                <li><a href="#panel-fixed-page2">Buttons</a></li>
-                <li><a href="#panel-fixed-page2">Checkboxes</a></li>
-                <li><a href="#panel-fixed-page2">Collapsibles</a></li>
-                <li><a href="#panel-fixed-page2">Controlgroup</a></li>
-                <li><a href="#panel-fixed-page2">Dialogs</a></li>
-                <li><a href="#panel-fixed-page2">Fixed toolbars</a></li>
-                <li><a href="#panel-fixed-page2">Flip switch toggle</a></li>
-                <li><a href="#panel-fixed-page2">Footer toolbar</a></li>
-                <li><a href="#panel-fixed-page2">Form elements</a></li>
-                <li><a href="#panel-fixed-page2">Grids</a></li>
-                <li><a href="#panel-fixed-page2">Header toolbar</a></li>
-                <li><a href="#panel-fixed-page2">Icons</a></li>
-                <li><a href="#panel-fixed-page2">Links</a></li>
-                <li><a href="#panel-fixed-page2">Listviews</a></li>
-                <li><a href="#panel-fixed-page2">Loader overlay</a></li>
-                <li><a href="#panel-fixed-page2">Navbar</a></li>
-                <li><a href="#panel-fixed-page2">Navbar, persistent</a></li>
-                <li><a href="#panel-fixed-page2">Pages</a></li>
-                <li><a href="#panel-fixed-page2">New</span></a></li>
-                <li><a href="#panel-fixed-page2">Popup</a></li>
-                <li><a href="#panel-fixed-page2">Radio buttons</a></li>
-                <li><a href="#panel-fixed-page2">Select</a></li>
-                <li><a href="#panel-fixed-page2">Slider, single</a></li>
-                <li><a href="#panel-fixed-page2">New</span></a></li>
-                <li><a href="#panel-fixed-page2">New</span></a></li>
-                <li><a href="#panel-fixed-page2">New</span></a></li>
-                <li><a href="#panel-fixed-page2">Text inputs & textarea</a></li>
-                <li><a href="#panel-fixed-page2">Transitions</a></li>
+                <li><a href="#panel-responsive-page2">Accordion</a></li>
+                <li><a href="#panel-responsive-page2">AJAX Navigation</a></li>
+                <li><a href="#panel-responsive-page2">Autocomplete</a></li>
+                <li><a href="#panel-responsive-page2">Buttons</a></li>
+                <li><a href="#panel-responsive-page2">Checkboxes</a></li>
+                <li><a href="#panel-responsive-page2">Collapsibles</a></li>
+                <li><a href="#panel-responsive-page2">Controlgroup</a></li>
+                <li><a href="#panel-responsive-page2">Dialogs</a></li>
+                <li><a href="#panel-responsive-page2">Fixed toolbars</a></li>
+                <li><a href="#panel-responsive-page2">Flip switch toggle</a></li>
+                <li><a href="#panel-responsive-page2">Footer toolbar</a></li>
+                <li><a href="#panel-responsive-page2">Form elements</a></li>
+                <li><a href="#panel-responsive-page2">Grids</a></li>
+                <li><a href="#panel-responsive-page2">Header toolbar</a></li>
+                <li><a href="#panel-responsive-page2">Icons</a></li>
+                <li><a href="#panel-responsive-page2">Links</a></li>
+                <li><a href="#panel-responsive-page2">Listviews</a></li>
+                <li><a href="#panel-responsive-page2">Loader overlay</a></li>
+                <li><a href="#panel-responsive-page2">Navbar</a></li>
+                <li><a href="#panel-responsive-page2">Navbar, persistent</a></li>
+                <li><a href="#panel-responsive-page2">Pages</a></li>
+                <li><a href="#panel-responsive-page2">New</span></a></li>
+                <li><a href="#panel-responsive-page2">Popup</a></li>
+                <li><a href="#panel-responsive-page2">Radio buttons</a></li>
+                <li><a href="#panel-responsive-page2">Select</a></li>
+                <li><a href="#panel-responsive-page2">Slider, single</a></li>
+                <li><a href="#panel-responsive-page2">New</span></a></li>
+                <li><a href="#panel-responsive-page2">New</span></a></li>
+                <li><a href="#panel-responsive-page2">New</span></a></li>
+                <li><a href="#panel-responsive-page2">Text inputs & textarea</a></li>
+                <li><a href="#panel-responsive-page2">Transitions</a></li>
 		</ul>
 
 	</div><!-- /panel -->
 
-	<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
+	<div data-role="panel" data-position="right" data-display="reveal" data-theme="a" id="add-form">
 
         <form class="userform">
 
@@ -130,8 +91,8 @@
             <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 
             <div class="ui-grid-a">
-                <div class="ui-block-a"><a href="#" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a></div>
-                <div class="ui-block-b"><a href="#" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Save</a></div>
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a></div>
+                <div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a></div>
 			</div>
         </form>
 
@@ -139,20 +100,21 @@
 
 </div><!-- /page -->
 
-<div data-role="page" id="panel-fixed-page2">
+<div data-role="page" id="panel-responsive-page2">
 
     <div data-role="header">
         <h1>Landing page</h1>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <p>This is just a landing page.</p>
 
-        <a href="#panel-fixed-page1" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-back ui-btn-icon-left">Back</a>
+        <a href="#panel-responsive-page1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-back ui-btn-icon-left">Back</a>
 
     </div><!-- /content -->
 
 </div><!-- /page -->
+
 </body>
 </html>

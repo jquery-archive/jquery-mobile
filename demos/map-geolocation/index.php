@@ -16,39 +16,39 @@
 	<script src="../../js/"></script>
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script>
-	/* 
-	 * Google Maps documentation: http://code.google.com/apis/maps/documentation/javascript/basics.html 
+	/*
+	 * Google Maps documentation: http://code.google.com/apis/maps/documentation/javascript/basics.html
 	 * Geolocation documentation: http://dev.w3.org/geo/api/spec-source.html
 	 */
-	
+
 	$( document ).on( "pageinit", "#map-page", function() {
 		var defaultLatLng = new google.maps.LatLng(34.0983425, -118.3267434);  // Default to Hollywood, CA when no geolocation support
-		
+
 		if ( navigator.geolocation ) {
 			function success(pos) {
 				// Location found, show map with these coordinates
 				drawMap(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
 			}
-			
+
 			function fail(error) {
 				drawMap(defaultLatLng);  // Failed to find location, show default map
 			}
-			
+
 			// Find the users current position.  Cache the location for 5 minutes, timeout after 6 seconds
 			navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
 		} else {
-			drawMap(defaultLatLng);  // No geolocation support, show default map	
+			drawMap(defaultLatLng);  // No geolocation support, show default map
 		}
-	
+
 		function drawMap(latlng) {
 			var myOptions = {
 				zoom: 10,
 				center: latlng,
 				mapTypeId: google.maps.MapTypeId.ROADMAP
 			};
-			
+
 			var map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-			
+
 			// Add an overlay to the map of current lat/lng
 			var marker = new google.maps.Marker({
 				position: latlng,
@@ -56,7 +56,7 @@
 				title: "Greetings!"
 			});
 		}
-		
+
 	});
 	</script>
 </head>
@@ -65,12 +65,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Google Maps</h1>
 
@@ -81,31 +81,33 @@
             <li>How to plot a point on the map using your current location.</li>
             <li>How to display a default location (Hollywood, CA) if Geolocation is unavailable or a user declines to share it.</li>
         </ul>
-        
-        <a href="#map-page" data-ajax="false" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">Open demo</a>
+
+        <a href="#map-page" data-ajax="false" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">Open demo</a>
 
         <div data-demo-html="#map-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
-    </div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
+</div><!-- /page -->
 
-	<div data-role="page" id="map-page">
-		<div data-role="header" data-theme="c">
-		<h1>Maps</h1>
-		</div>
-		
-		<div data-role="content" id="map-canvas">
-			<!-- map loads here... -->
-		</div>
+<div data-role="page" id="map-page">
+	<div data-role="header" data-theme="a">
+	<h1>Maps</h1>
 	</div>
-	
-	</body>
-	</html>
+
+	<div role="main" class="ui-content" id="map-canvas">
+		<!-- map loads here... -->
+	</div>
+</div>
+
+</body>
+</html>

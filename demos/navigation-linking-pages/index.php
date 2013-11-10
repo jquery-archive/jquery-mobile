@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Links - jQuery Mobile Demos</title>
+	<title>Linking pages - jQuery Mobile Demos</title>
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
@@ -17,19 +17,19 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
-        <h1>Links</h1>
+        <h1>Linking pages</h1>
 
         <p>jQuery Mobile is designed to work with standard page link conventions and layers the AJAX navigation on top for maximum compatibility.
         </p>
 
-        <h2>Linking pages</h2>
+        <h2>Links</h2>
 
         <p>You can link pages and assets as you normally would, and jQuery Mobile will automatically handle page requests in a single-page model, using AJAX when possible. When AJAX isn't possible (such as a non-same-domain url, or if specified using certain attributes on the link), a normal HTTP request is used instead.</p>
 
@@ -101,7 +101,7 @@
 
 		<p>The non-standard environment created by jQuery Mobile's page navigation model introduces some conditions of which you should be aware when building pages:</p>
 
-			<ul class="jqm-list">
+		<ul>
 			<li><p>When linking to directories, without a filename URL, (such as <code>href="typesofcats/"</code> instead of <code>href="typesofcats/index.html"</code>), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a URL is a filename, and it will remove that section when creating base URLs from which future pages will be referenced.</p></li>
 			<li><p>Documents loaded via AJAX will select the first page in the DOM of that document to be loaded as a jQuery Mobile page element. As a result the developer must make sure to manage the <code>id</code> attributes of the loaded page and child elements to prevent confusion when manipulating the DOM.</p></li>
 			<li><p>If you link to a multipage document, you must use a <code>data-ajax="false"</code> attribute on the link to cause a full page refresh due to the limitation above where we only load the first page node in an AJAX request due to potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multipage documents. </p></li>
@@ -110,17 +110,20 @@
 			<li><p>When traveling back to a previously loaded jQuery Mobile document from an external <b>or</b> internal document with the push state plugin enabled, some browsers load and trigger the <code>popstate</code> event on the wrong document or for the wrong reasons (two edge cases recorded so far). If you are regularly linking to external documents and find the application behaving erratically try disabling pushstate support.</p></li>
 			<li><p>jQuery Mobile does not support query parameter passing to internal/embedded pages but there are two plugins that you can add to your project to support this feature. There is a lightweight <a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params" rel="external">page params plugin</a> and a more fully featured <a href="https://github.com/azicchetti/jquerymobile-router" rel="external">jQuery Mobile router plugin</a> for use with backbone.js or spine.js. A newer plugin called <a href="https://github.com/1Marc/jquery-mobile-routerlite" rel="external">routerlite</a> keeps it simple with just four methods: routeinit, routechange, pageinit and pagechange.</p></li>
 			<li><p>Some external applications (notably Facebook's OAuth implementation) modify their response URL in such a way that interferes with jQuery Mobile. In particular, Facebook appends <code>#_=_</code> to the end of the callback. Currently the best solution for this is to remove it from the location hash before jQuery Mobile loads using something like: <code>if (window.location.hash == "#_=_") window.location.hash = ""; </code>. jQuery Mobile can then process &amp; enhance the page properly.</p></li>
-			</ul>
+		</ul>
 
-		</div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
-	</body>
-	</html>
+</div><!-- /page -->
+
+</body>
+</html>

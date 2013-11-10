@@ -17,12 +17,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Flip switch</h1>
 
@@ -30,7 +30,7 @@
 			</p>
 
 			<h2>Basic checkbox switch</h2>
-				
+
                 <div data-demo-html="true">
 				<form>
                     <label for="flip-checkbox">Flip toggle switch checkbox:</label>
@@ -39,16 +39,16 @@
                 </div><!-- /demo-html -->
 
                 <h2>Basic checkbox switch checked</h2>
-                
+
                 <div data-demo-html="true">
                 <form>
                     <label for="flip-checkbox">Flip toggle switch checkbox:</label>
                     <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox" checked>
                 </form>
                 </div><!-- /demo-html -->
-				
+
                 <h2>Basic select switch</h2>
-				
+
                 <div data-demo-html="true">
                 <form>
                     <label for="flip-select">Flip toggle switch select:</label>
@@ -59,7 +59,7 @@
                 </form>
                 </div><!-- /demo-html -->
                 <h2>Basic select switch second option selected</h2>
-                
+
                 <div data-demo-html="true">
                 <form>
                     <label for="flip-select-second">Flip toggle switch select:</label>
@@ -70,7 +70,6 @@
                 </form>
                 </div><!-- /demo-html -->
 
-				
 			<h2>Theme</h2>
                 <div data-demo-html="true">
 				<form>
@@ -160,13 +159,16 @@
 
 	</div><!-- /content -->
 
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

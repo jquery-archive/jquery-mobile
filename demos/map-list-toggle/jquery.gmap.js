@@ -1,23 +1,23 @@
 /* gmap plugin.
- * 
+ *
  * 	$.gmap()
  * 	$.gmap({ ...options... })
  * 	$.gmap('addMarkers', data)
- * 
+ *
  * The jQuery object being mapified must have an attribute: data-initial-view="lat,lng,zoom"
- * 
+ *
  * Configuration options:
- * 
+ *
  * 	loadingMessage: a string for the loading overlay. Default: "Loading..."
- *  autoAddMarkers: boolean. If true, a marker is automatically added for each item with the  
+ *  autoAddMarkers: boolean. If true, a marker is automatically added for each item with the
  *  	attribute data-marker-info="lat,lng". If the element or any descendant has the class
  *  	"ui-gmap-marker-content", then an infobox containing that content will be shown when
- *  	the marker is clicked (this content is cloned). The HTML contents of a subelement with 
+ *  	the marker is clicked (this content is cloned). The HTML contents of a subelement with
  *  	class "ui-gmap-marker-title" will be used for the mouseover tooltip.
  *  infoWindowConfig: Object containing a list of properties for the info window (if applicable).
- *  
+ *
  * Markup requirements:
- * 
+ *
  *  1. The class "ui-gmap" will be added to each element to which the plugin is applied.
  */
 (function($) {
@@ -30,7 +30,7 @@
 		if (parts.length != 2) throw 'Invalid lat/lng: "'+string+'"';
 		var lat = parseFloat(parts[0]);
 		var lng = parseFloat(parts[1]);
-		if (isNaN(lat) || lat < -90 || lat > 90 || isNaN(lng) || lng < -180 || lng > 180) 
+		if (isNaN(lat) || lat < -90 || lat > 90 || isNaN(lng) || lng < -180 || lng > 180)
 			throw 'Invalid lat/lng: "'+string+'"';
 		return new google.maps.LatLng(lat, lng);
 	}
@@ -42,7 +42,7 @@
 		var lat = parseFloat(parts[0]);
 		var lng = parseFloat(parts[1]);
 		var zoom = parseInt(parts[2]);
-		if (isNaN(lat) || lat < -90 || lat > 90 || isNaN(lng) || lng < -180 || lng > 180 || zoom < 3 || zoom > 30) 
+		if (isNaN(lat) || lat < -90 || lat > 90 || isNaN(lng) || lng < -180 || lng > 180 || zoom < 3 || zoom > 30)
 			throw 'Invalid lat/lng/zoom: "'+string+'"';
 		return { center: new google.maps.LatLng(lat, lng), zoom: zoom };
 	}
@@ -74,8 +74,8 @@
 			}
 
 			// propagate resize events
-			$canvas.resize(function(e) { 
-				google.maps.event.trigger(map, 'resize'); 
+			$canvas.resize(function(e) {
+				google.maps.event.trigger(map, 'resize');
 			});
 
 			// ideally we would like to say: "resize the map if it or any parent goes from hidden->visible"
@@ -83,12 +83,12 @@
 		},
 		addMarkersFromDOM: function() {
 			var data = [];
-			
+
 			$('[data-marker-info]').each(function() {
 				try {
 					var pos = parseLatLng($(this).attr('data-marker-info'));
-					data.push({ position: pos, 
-						title: $(this).find('.ui-gmap-marker-title').html(), 
+					data.push({ position: pos,
+						title: $(this).find('.ui-gmap-marker-title').html(),
 						content: $(this).find('.ui-gmap-marker-info').andSelf().filter('.ui-gmap-marker-info').clone().get(0)
 					});
 				}
@@ -96,7 +96,7 @@
 					console.log(e);
 				}
 			});
-			
+
 			var config = $(this).data(pluginName);
 			var map = $(this).data(pluginName + '.map');
 			var bounds = $(this).gmap('addMarkers', data);
@@ -116,7 +116,7 @@
 			var map = $(this).data(pluginName + '.map');
 			var bounds = new google.maps.LatLngBounds();
 			var info = new InfoBox({
-				boxStyle: { 
+				boxStyle: {
 					border: "1px solid black",
 					background: "white",
 	                width: "220px",
@@ -149,14 +149,14 @@
 			return bounds;
 		}
 	};
-	
+
 	var defaultConfig = {
 		autoAddMarkers: true,
 		zoomForSingleMarker: 15,
 		infoWindowConfig: { maxWidth: 175 }
 	};
-	
-	$.fn[pluginName] = function() {		
+
+	$.fn[pluginName] = function() {
 		if (arguments.length == 0) {
 			var config = $.extend({}, defaultConfig);
 			$(this).each(function() {

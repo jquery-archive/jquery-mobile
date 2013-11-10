@@ -27,17 +27,17 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 		// Ajax doesn't work so turn it off
 		$( document ).on( "mobileinit", function() {
 			$.mobile.ajaxEnabled = false;
-			
+
 			var message = $( '<div>' , {
 				'class': "jqm-content",
 				style: "border:none; padding: 10px 15px; overflow: auto;",
 				'data-ajax-warning': true
 			});
-			
+
 			message
 			.append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
 			.append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
-			
+
 			$( document ).on( "pagecreate", function( event ) {
 				$( event.target ).append( message );
 			});
@@ -45,14 +45,19 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 	});
 }
 
-// display the version of jQM
-$( document ).on( "pagecreate", function() {
-	var version = $.mobile.version || "dev",
+$( document ).on( "pagecreate", ".jqm-demos", function( event ) {
+	var search,
+		page = $( this ),
+		that = this,
+		searchUrl = ( $( this ).hasClass( "jqm-home" ) ) ? "_search/" : "../_search/",
+		searchContents = $( ".jqm-search ul.jqm-list" ).find( "li:not(.ui-collapsible)" ),
+		version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
 		str = words[1] || "",
 		text = ver;
 
+	// Insert jqm version in header
 	if ( str.indexOf( "rc" ) == -1 ) {
 		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
 	} else {
@@ -64,24 +69,28 @@ $( document ).on( "pagecreate", function() {
 	}
 
 	$( ".jqm-version" ).html( text );
-});
 
+	// Global navmenu panel
+	$( ".jqm-navmenu-panel ul" ).listview();
 
-$( document ).on( "pagecreate", ".jqm-demos", function() {
-	var page = $( this );
+	$( document ).on( "panelopen", ".jqm-search-panel", function() {
+		$( this ).find( "input" ).focus();
+	})
 
-	// global navmenu panel
 	$( ".jqm-navmenu-link" ).on( "click", function() {
 		page.find( ".jqm-navmenu-panel" ).panel( "open" );
 	});
 
-	// global search
+	// Turn off autocomplete / correct for demos search
+	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
+
+	// Global search
 	$( ".jqm-search-link" ).on( "click", function() {
 		page.find( ".jqm-search-panel" ).panel( "open" );
 	});
-	
-	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
-		globalNav: "demos",
+
+	// Initalize search panel list and filter also remove collapsibles
+	$( this ).find( ".jqm-search ul.jqm-list" ).html( searchContents ).listview({
 		inset: false,
 		theme: null,
 		dividerTheme: null,
@@ -93,24 +102,11 @@ $( document ).on( "pagecreate", ".jqm-demos", function() {
   		arrowKeyNav: true,
   		enterToNav: true,
   		highlight: true,
-  		submitTo: "_search/"
-	});
-	
-	
-	$( this ).find( ".jqm-header .jqm-search" )
-		.on( "searchshow searchhide", function( event ) {
-			if ( event.type === "searchshow" ) {
-				$( this ).find( ".ui-input-text" ).focus();
-			} else {
-				$( this )
-					.find( ".ui-input-clear" ).trigger( "click" )
-					.end()
-					.find( ".ui-input-text" ).blur();
-			}
-		});
-		
-	$( this ).find( ".jqm-content ul.jqm-list" ).listview({
-		globalNav: "demos",
+  		submitTo: searchUrl
+	}).filterable();
+
+	// Initalize search page list and remove collapsibles
+	$( this ).find( ".jqm-search-results-wrap ul.jqm-list" ).html( searchContents ).listview({
 		inset: true,
 		theme: null,
 		dividerTheme: null,
@@ -118,27 +114,38 @@ $( document ).on( "pagecreate", ".jqm-demos", function() {
 		arrowKeyNav: true,
 		enterToNav: true,
 		highlight: true
-	});
+	}).filterable();
 
+	// Fix links on homepage to point to sub directories
+	if ( $( event.target ).hasClass( "jqm-home") ) {
+		$( this ).find( "a" ).each( function() {
+			$( this ).attr( "href", $( this ).attr( "href" ).replace( "../", "" ) );
+		});
+	}
+
+	// Search results page get search query string and enter it into filter then trigger keyup to filter
+	if ( $( event.target ).hasClass( "jqm-demos-search-results") ) {
+		search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[ 1 ];
+		setTimeout(function() {
+			e = $.Event( "keyup" );
+			e.which = 65;
+			$( that ).find( ".jqm-content .jqm-search-results-wrap input" ).val( search ).trigger(e).trigger( "change" );
+		}, 0 );
+	}
+});
+
+// Append keywords list to each list item
+$( document ).one( "pagecreate", ".jqm-demos", function( event ) {
 	$( this ).find( ".jqm-search-results-list li, .jqm-search li" ).each(function() {
 		var text = $( this ).attr( "data-filtertext" );
-		$( this ).find( "a" ).append( "<span class='jqm-search-results-keywords ui-li-desc'><span class='jqm-keyword-hash'></span> " + text + "</span>" );
+
+		$( this )
+			.find( "a" )
+			.append( "<span class='jqm-search-results-keywords ui-li-desc'>" + text + "</span>" );
 	});
 });
 
-$( document ).on( "pageshow",  ".jqm-demos", function() {
-	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
-});
-
-$( document ).on( "pageshow", ".jqm-demos-search-results", function() {
-	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1], self = this;
-	setTimeout(function() {
-		e = $.Event( "keyup" );
-		e.which = 65;
-		$( self ).find( ".jqm-content .jqm-search-results-wrap input" ).val( search ).trigger(e).trigger( "change" );
-	}, 0 );
-});
-
+// Functions for highlighting text used for keywords highlight in search
 jQuery.fn.highlight = function( pat ) {
 	function innerHighlight( node, pat ) {
 		var skip = 0;
@@ -166,6 +173,7 @@ jQuery.fn.highlight = function( pat ) {
 	}) : this;
 };
 
+// Function to remove highlights in text
 jQuery.fn.removeHighlight = function() {
 	return this.find( "span.jqm-search-results-highlight" ).each(function() {
 		this.parentNode.firstChild.nodeName;
@@ -176,21 +184,12 @@ jQuery.fn.removeHighlight = function() {
 	}).end();
 };
 
+// Extension to listview to add keyboard navigation
 $( document ).on( "mobileinit", function() {
 	(function( $, undefined ) {
 
 	$.widget( "mobile.listview", $.mobile.listview, {
 		options: {
-			theme: null,
-			countTheme: null,
-			dividerTheme: null,
-			icon: "carat-r",
-			splitIcon: "carat-r",
-			splitTheme: null,
-			corners: true,
-			shadow: true,
-			inset: false,
-			initSelector: ":jqmData(role='listview')",
 			arrowKeyNav: false,
 			enterToNav: false,
 			highlight: false,
@@ -198,78 +197,77 @@ $( document ).on( "mobileinit", function() {
 		},
 		_create: function() {
 			this._super();
-			
+
 			if ( this.options.arrowKeyNav ) {
 				this._on( document, { "pageshow": "arrowKeyNav" });
 			}
-			
+
 			if ( this.options.enterToNav ) {
 				this._on( document, { "pageshow": "enterToNav" });
 			}
-			
+
 		},
 		submitTo: function() {
 			var form = this.element.parent().find( "form" );
-			
+
 			form.attr( "method", "get" )
 				.attr( "action", this.options.submitTo );
-				
-			var base = $( "base" ).attr( "href" ).split( "demos" )[0];
-				base = base.split( "index.html" )[0] + "demos" + "/";
-				url = base + this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
-			
+
+			var url = this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
+
 			$( ":mobile-pagecontainer" ).pagecontainer( "change", url );
 		},
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
-			
+
 			form.append( "<button type='submit' data-icon='carat-r' data-inline='true' class='ui-hidden-accessible' data-iconpos='notext'>Submit</button>" )
 				.parent()
 				.trigger( "create" );
-			
+
 			this.element.parent().find( "form" ).children( ".ui-btn" ).addClass( "ui-hidden-accessible" );
-			
+
 			this._on( form, {
 				"submit": "submitHandler"
 			});
 		},
 		enhanced: false,
 		arrowKeyNav: function() {
-			var input = this.element.parent().find( "input" );
-			
+			var input = this.element.prev("form").find( "input" );
+
 			if ( !this.enhanced ) {
 				this._on( input, {
 					"keyup": "handleKeyUp"
 				});
-				
+
 				this.enhanced = true;
 			}
 		},
 		handleKeyUp: function( e ) {
-			var input = this.element.parent().find( "input" );
-			
-			if ( e.which === $.mobile.keyCode.DOWN ) {
+			var input = this.element.prev("form").find( "input" );
+
+			if ( e.which === $.ui.keyCode.DOWN ) {
 				if ( this.element.find( "li.ui-btn-active" ).length == 0 ) {
-					this.element.find( "li:first" ).toggleClass( "ui-btn-active" );
+					this.element.find( "li:first" ).toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				} else {
-					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" );
+					this.element.find( "li.ui-btn-active a" ).toggleClass( "ui-btn-active");
+					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				}
-				
+
 				this.highlightDown();
-			} else if ( e.which === $.mobile.keyCode.UP ) {
+			} else if ( e.which === $.ui.keyCode.UP ) {
 				if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
-					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" );
-					
-					this.highlightUp()
+					this.element.find( "li.ui-btn-active a" ).toggleClass( "ui-btn-active");
+					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				} else {
-					this.element.find( "li:last" ).toggleClass( "ui-btn-a" ).toggleClass( "ui-btn-active" );
+					this.element.find( "li:last" ).toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				}
+				this.highlightUp();
 			} else if ( typeof e.which !== "undefined" ) {
 				this.element.find( "li.ui-btn-active" ).removeClass( "ui-btn-active" );
-				
+
 				if ( this.options.highlight ) {
 					var search = input.val();
-					
+
 					this.element.find( "li" ).each(function() {
 						$( this ).removeHighlight();
 						$( this ).highlight( search );
@@ -280,27 +278,27 @@ $( document ).on( "mobileinit", function() {
 		submitHandler: function() {
 			if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
 				var href = this.element.find( "li.ui-btn-active a" ).attr( "href" );
-				
+
 				$( ":mobile-pagecontainer" ).pagecontainer( "change", href );
 				return false;
 			}
-			
+
 			if ( this.options.submitTo ) {
 				this.submitTo();
 			}
 		},
 		highlightDown: function() {
 			if ( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" );
-				
+				this.element.find( "li.ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				this.highlightDown();
 			}
 			return;
 		},
 		highlightUp: function() {
 			if ( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" );
-				
+				this.element.find( "li.ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				this.highlightUp();
 			}
 			return;

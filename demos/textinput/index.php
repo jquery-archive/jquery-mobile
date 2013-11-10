@@ -17,12 +17,12 @@
 
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Text inputs</h1>
 
@@ -310,6 +310,27 @@
         </form>
         </div><!-- /demo-html -->
 
+        <h2>Enhanced</h2>
+
+        <div data-demo-html="true">
+        <form>
+            <label for="text-enhanced">Text input:</label>
+            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+                <input type="text" data-enhanced="true" data-clear-btn="true" name="text-enhanced" id="text-enhanced" value="">
+                <a href="#" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a>
+            </div>
+
+            <label for="search-enhanced">Search:</label>
+            <div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+                <input type="text" data-type="search" data-enhanced="true" name="search-enhanced" id="search-enhanced" value="">
+                <a href="#" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a>
+            </div>
+
+            <label for="textarea-enhanced">Textarea:</label>
+            <textarea name="textarea-enhanced" id="textarea-enhanced" data-enhanced="true" class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all"></textarea>
+        </form>
+        </div><!-- /demo-html -->
+
         <h2>Fieldcontain</h3>
 
         <div data-demo-html="true">
@@ -362,41 +383,18 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Fieldcontain, hidden label</h3>
-
-        <div data-demo-html="true">
-        <form>
-            <div class="ui-field-contain ui-hide-label">
-                 <label for="text-16">Text input:</label>
-                 <input type="text" name="text-16" id="text-16" value="">
-            </div>
-
-            <div class="ui-field-contain ui-hide-label">
-                 <label for="text-17">Text input: data-clear-btn="true"</label>
-                 <input type="text" data-clear-btn="true" name="text-17" id="text-17" value="">
-            </div>
-
-            <div class="ui-field-contain ui-hide-label">
-             <label for="search-10">Search:</label>
-             <input type="search" name="search-110" id="search-10" value="">
-            </div>
-
-            <div class="ui-field-contain ui-hide-label">
-            <label for="textarea-16">Textarea:</label>
-            <textarea cols="40" rows="8" name="textarea-16" id="textarea-16"></textarea>
-            </div>
-        </form>
-        </div><!-- /demo-html -->
-
 	</div><!-- /content -->
+
+	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

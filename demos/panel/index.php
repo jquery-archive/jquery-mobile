@@ -21,7 +21,7 @@
         <h3>Default panel options</h3>
         <p>This panel has all the default options: positioned on the left with the reveal display mode. The panel markup is <em>before</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
 
 	</div><!-- /default panel -->
 
@@ -29,12 +29,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Panel</h1>
 
@@ -43,14 +43,14 @@
 		<h2>Panel examples</h2>
 
 		<p><strong>Left</strong> panel examples</p>
-		<a href="#leftpanel3" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Overlay</a>
-		<a href="#leftpanel1" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Reveal</a>
-		<a href="#leftpanel2" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Push</a>
+		<a href="#leftpanel3" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Overlay</a>
+		<a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Reveal</a>
+		<a href="#leftpanel2" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Push</a>
 
 		<p><strong>Right</strong> panel examples</p>
-		<a href="#rightpanel3" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Overlay</a>
-		<a href="#rightpanel1" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Reveal</a>
-		<a href="#rightpanel2" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Push</a>
+		<a href="#rightpanel3" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Overlay</a>
+		<a href="#rightpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Reveal</a>
+		<a href="#rightpanel2" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-mini">Push</a>
 
 		<p>The <strong>position</strong> of the panel on the screen is set by the <code>data-position</code> attribute. The default value of the attribute is <code>left</code>, meaning it will appear from the left edge of the screen. Specify <code>data-position="right"</code> for it to appear from the right edge instead.</p>
 
@@ -78,6 +78,10 @@
 
 		<p>Alternatively, it's possible to add the panel markup <em>after</em> the header, content and footer in the source order, just before the end of the page container. Where in the source order you place the panel markup will depend on how you want the page content to read for people experiencing the page on a C-grade device (HTML only) or for a screen reader.</p>
 
+		<h2>Panels outside pages</h2>
+
+		<p>If you want to use the same panel on multiple pages you can place the markup outside the page. See <a href="../panel/external/">external panels</a></p>
+
 		<h2>Dynamic content</h2>
 
 		<p>When you dynamically add content to a panel or make hidden content visible while the panel is open, you have to trigger the <code>updatelayout</code> event on the panel.</p>
@@ -92,7 +96,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>To control a panel from a link, set the <code>href</code> to the <code>ID</code> of the panel you want to toggle (<code>mypanel</code> in the example above). This instructs the framework to bind the link to the panel. This link will toggle the visibility of the panel so tapping it will open the panel, and tapping it again will close it.</p>
 
-		<a href="#defaultpanel" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars">Default panel</a>
+		<a href="#defaultpanel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-bars">Default panel</a>
 
 		<h2>Closing a panel</h2>
 
@@ -116,7 +120,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>The panel will be displayed with the <code>position:absolute</code> CSS property, meaning it will scroll with the page. When a panel is opened the framework checks to see if the bottom of the panel contents is in view. If not, it scrolls to the top of the page.</p>
 
-        <p>You can set a panel to <code>position:fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and make it inaccessible. <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without fixed positioning. See an example of <a href="panel-fixed.php" data-ajax="false">panels with fixed positioning</a>.</p>
+        <p>You can set a panel to <code>position:fixed</code>, so its contents will appear no matter how far down the page you're scrolled, by adding the <code>data-position-fixed="true"</code> attribute to the panel. The framework also checks to see if the panel contents will fit within the viewport before applying the fixed positioning because this property would prevent the panel contents from scrolling and make it inaccessible. <code>overflow</code> is not well supported enough to use at this time. If the panel contents are too long to fit within the viewport, the framework will simply display the panel without fixed positioning. See an example of <a href="../panel-fixed/" data-ajax="false">panels with fixed positioning</a>.</p>
 
 		<h2>Styling panels</h2>
 
@@ -138,7 +142,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 @media ( min-width: 35em ) {
 
 	/* wrap on wide viewports once open */
-	
+
 	.ui-panel-page-content-open.ui-panel-page-content-position-left {
 		margin-right: 17em;
 	}
@@ -146,14 +150,14 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		margin-left: 17em;
 	}
 	.ui-panel-page-content-open {
-		width: auto;	
+		width: auto;
 	}
-	
+
 	/* disable "dismiss" on wide viewports */
 	.ui-panel-dismiss {
 		display: none;
 	}
-	
+
 	/* same as the above but for panels with display mode "push" only */
 
 	.ui-panel-page-content-open.ui-panel-page-content-position-left.ui-panel-page-content-display-push {
@@ -163,7 +167,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
 		margin-left: 17em;
 	}
 	.ui-panel-page-content-open.ui-panel-page-content-display-push {
-		width: auto;	
+		width: auto;
 	}
 
 	.ui-panel-dismiss-display-push {
@@ -174,17 +178,18 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<h4>Applying a preset breakpoint</h4>
 
-		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the page or, in case you use external panels and/or fixed toolbars, to the page container (<code>body</code>). See an example of a <a href="panel-fixed.php" data-ajax="false">responsive panel</a> page.</p>
+		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the page or, in case you use external panels and/or fixed toolbars, to the page container (<code>body</code>). See an example of a <a href="../panel-responsive/" data-ajax="false">responsive panel</a> page.</p>
 
-		<h2>Panels outside pages</h2>
-
-		<p>As of 1.4 it is now possible to use panels outside of a page <a href="external.php">External Panels</a></p>
 	</div><!-- /content -->
+
+	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 	<!-- Here are a bunch of panels at the end, just before the close page tag  -->
 
@@ -194,7 +199,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Left Panel: Reveal</h3>
         <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
 
 	</div><!-- /leftpanel1 -->
 
@@ -204,12 +209,11 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Left Panel: Push</h3>
         <p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
 
 	</div><!-- /leftpanel2 -->
 
 	<!-- leftpanel3  -->
-	
 
 	<!-- rightpanel1  -->
 	<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
@@ -217,7 +221,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Right Panel: Reveal</h3>
         <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
 
 	</div><!-- /rightpanel1 -->
 
@@ -227,7 +231,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Right Panel: Push</h3>
         <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
 
 	</div><!-- /rightpanel2 -->
 
@@ -237,7 +241,7 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Right Panel: Overlay</h3>
         <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
 
 	</div><!-- /rightpanel3 -->
 	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
@@ -245,11 +249,9 @@ $( "#mypanel" ).trigger( "updatelayout" );
         <h3>Left Panel: Overlay</h3>
         <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
 
 	</div><!-- /leftpanel3 -->
-
-<?php include( '../jqm-panels.php' ); ?>
 
 </div><!-- /page -->
 

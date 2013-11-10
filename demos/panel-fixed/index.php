@@ -11,42 +11,9 @@
 	<script src="../../js/jquery.js"></script>
     <script src="../_assets/js/"></script>
     <script src="../../js/"></script>
-    <style>
-        .nav-search .ui-btn-up-a {
-            background-image: none;
-            background-color: #333;
-        }
-        .nav-search .ui-btn-inner {
-            border-top: 1px solid #888;
-            border-color: rgba(255, 255, 255, .1);
-        }
-        .nav-search .ui-btn.ui-first-child {
-            border-top-width: 0;
-            background: #111;
-        }
-        .userform {
-			padding: .8em 1.2em;
-		}
-        .userform h2 {
-			color: #555;
-			margin: 0.3em 0 .8em 0;
-			padding-bottom: .5em;
-			border-bottom: 1px solid rgba(0,0,0,.1);
-		}
-        .userform label {
-			display: block;
-			margin-top: 1.2em;
-		}
-        .ui-grid-a {
-			margin-top: 1em;
-			padding-top: .8em;
-			margin-top: 1.4em;
-			border-top: 1px solid rgba(0,0,0,.1);
-		}
-    </style>
 </head>
 <body>
-<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1">
+<div data-role="page" class="jqm-demos" id="panel-fixed-page1" data-title="Panel fixed positioning">
 
     <div data-role="header" data-position="fixed">
         <h1>Fixed header</h1>
@@ -54,21 +21,46 @@
         <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content jqm-fullwidth">
 
-    	<h1>Panels</h1>
+    	<h1>Panel fixed positioning</h1>
 
-		<h2>Fixed positioning</h2>
-
-        <p>This is a typical page that has two buttons in the header bar that open panels. The left panel has the reveal display mode. The right panel opens as overlay. For both panels we set <code>data-position-fixed="true"</code>. We also set position fixed for the header and footer on this page.</p>
+        <p>This is a typical page that has two buttons in the header bar that open panels. The left panel has the push display mode. The right panel opens as overlay. For both panels we set <code>data-position-fixed="true"</code>. We also set position fixed for the header and footer on this page.</p>
 
         <p>The left panel contains a long menu to demonstrate that the framework will check the panel contents height and unfixes the panel so its content can be scrolled. In the right panel there is a short form that shows the fixed positioning.</p>
 
-		<h2>Responsive</h2>
+		<div data-demo-html="#panel-fixed-page1"></div><!--/demo-html -->
 
-        <p>To make this responsive, you can make the page re-flow at wider widths. This allows both the reveal panel menu and page to be used together when more space is available. This behavior is controlled by CSS media queries. You can create a custom one for a specific breakpoint or use the breakpoint preset by adding the <code>class="ui-responsive-panel"</code> to the page container. We have added this class on this demo page.</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
-		<div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div><!--/demo-html -->
+        <a href="../" data-rel="back" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-carat-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <p>We made the page a bit longer because you only see the panel fixed positioning if you can scroll the page :-)</p>
 
 	</div><!-- /content -->
 
@@ -76,9 +68,9 @@
     	<h4>Fixed footer</h4>
     </div><!-- /footer -->
 
-	<div data-role="panel" data-position-fixed="true" data-theme="a" id="nav-panel">
+	<div data-role="panel" data-position-fixed="true" data-display="push" data-theme="b" id="nav-panel">
 
-		<ul data-role="listview" data-theme="a" class="nav-search">
+		<ul data-role="listview">
             <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
                 <li><a href="#panel-fixed-page2">Accordion</a></li>
                 <li><a href="#panel-fixed-page2">AJAX Navigation</a></li>
@@ -115,7 +107,7 @@
 
 	</div><!-- /panel -->
 
-	<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
+	<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="a" id="add-form">
 
         <form class="userform">
 
@@ -128,8 +120,8 @@
             <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 
             <div class="ui-grid-a">
-                <div class="ui-block-a"><a href="#" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a></div>
-                <div class="ui-block-b"><a href="#" data-rel="close" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Save</a></div>
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a></div>
+                <div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a></div>
 			</div>
         </form>
 
@@ -143,14 +135,15 @@
         <h1>Landing page</h1>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <p>This is just a landing page.</p>
 
-        <a href="#panel-fixed-page1" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-back ui-btn-icon-left">Back</a>
+        <a href="#panel-fixed-page1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-back ui-btn-icon-left">Back</a>
 
     </div><!-- /content -->
 
 </div><!-- /page -->
+
 </body>
 </html>

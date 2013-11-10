@@ -455,7 +455,6 @@ $.widget( "mobile.popup", {
 			rectangle = clampInfo.rc,
 			menuSize = clampInfo.menuSize;
 
-
 		// Center the menu over the desired coordinates, while not going outside
 		// the window tolerances. This will center wrt. the window if the popup is
 		// too large.
@@ -929,7 +928,6 @@ $.widget( "mobile.popup", {
 		return this;
 	}
 });
-
 
 // TODO this can be moved inside the widget
 $.mobile.popup.handleLink = function( $link ) {

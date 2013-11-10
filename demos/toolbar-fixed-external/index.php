@@ -22,10 +22,10 @@
 			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 		<h1>External fixed header</h1>
 	</div><!-- /header -->
-	
+
 	<div data-role="page" class="jqm-demos">
 
-		<div data-role="content" class="jqm-content">
+		<div class="ui-content jqm-content jqm-fullwidth" role="main">
 
 			<h1>Fixed external toolbars</h1>
 

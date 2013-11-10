@@ -13,7 +13,7 @@
 	});
 
 	asyncTest( "Test option data-close-btn", function() {
-		expect( 7 );
+		expect( 5 );
 
 		$.testHelper.pageSequence([
 			function() {
@@ -29,15 +29,11 @@
 				a = $( "#close-btn-test .ui-header a" );
 				deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'left'" );
 				ok( a.hasClass( "ui-btn-left" ), "The close button has class ui-btn-left when the closeBtn option is set to 'left'" );
-				deepEqual( a.attr( "role" ), "button", "The close button has the attribute " + '"' + "role='button'" + '"' + "set" );
-
 				$( "#close-btn-test" ).page( "option", "closeBtn", "right" );
 				a = $( "#close-btn-test .ui-header a" );
 				deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'right'" );
 				ok( a.hasClass( "ui-btn-right" ), "The close button has class ui-btn-right when the closeBtn option is set to 'right'" );
-				deepEqual( a.attr( "role" ), "button", "The close button has the attribute " + '"' + "role='button'" + '"' + "set" );
 
-				
 			},
 
 			function() {

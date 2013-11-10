@@ -49,7 +49,7 @@ $.widget( "mobile.button", {
 				this.widget().removeClass( $.mobile.focusClass );
 			}
 		});
-		
+
 		this.refresh( true );
 	},
 
@@ -58,7 +58,8 @@ $.widget( "mobile.button", {
 	},
 
 	_button: function() {
-		var options = this.options;
+		var options = this.options,
+			iconClasses = this._getIconClasses( this.options );
 
 		return $("<div class='ui-btn ui-input-btn" +
 			( options.wrapperClass ? " " + options.wrapperClass : "" ) +
@@ -68,11 +69,8 @@ $.widget( "mobile.button", {
 			( options.inline ? " ui-btn-inline" : "" ) +
 			( options.mini ? " ui-mini" : "" ) +
 			( options.disabled ? " ui-state-disabled" : "" ) +
-			( ( options.iconpos && options.icon ) ?
-				" ui-btn-icon-" + options.iconpos :
-				( options.icon ? " ui-btn-icon-left" : "" ) ) +
-			( options.icon ? " ui-icon-" + options.icon : "" ) +
-			"' >" + this.element.val() + "</div>");
+			( iconClasses ? ( " " + iconClasses ) : "" ) +
+			"' >" + this.element.val() + "</div>" );
 	},
 
 	widget: function() {
@@ -82,6 +80,12 @@ $.widget( "mobile.button", {
 	_destroy: function() {
 			this.element.insertBefore( this.button );
 			this.button.remove();
+	},
+
+	_getIconClasses: function( options ) {
+		return ( options.icon ? ( "ui-icon-" + options.icon +
+			( options.iconshadow ? " ui-shadow-icon" : "" ) + /* TODO: Deprecated in 1.4, remove in 1.5. */
+			" ui-btn-icon-" + options.iconpos ) : "" );
 	},
 
 	_setOptions: function( options ) {
@@ -104,20 +108,18 @@ $.widget( "mobile.button", {
 		if ( options.mini !== undefined ) {
 			outer.toggleClass( "ui-mini", options.mini );
 		}
-		if ( options.iconpos !== undefined ) {
-			outer.removeClass( "ui-btn-icon-" + options.iconpos );
-		}
-		if ( options.icon !== undefined ) {
-			if ( !this.options.iconpos && !options.iconpos ) {
-				outer.toggleClass( "ui-btn-icon-left", options.icon );
-			}
-			outer
-				.removeClass( "ui-icon-" + this.options.icon )
-				.toggleClass( "ui-icon-" + options.icon, options.icon );
-		}
 		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", options.disabled );
 			outer.toggleClass( "ui-state-disabled", options.disabled );
+		}
+
+		if ( options.icon !== undefined ||
+				options.iconshadow !== undefined || /* TODO: Deprecated in 1.4, remove in 1.5. */
+				options.iconpos !== undefined ) {
+			outer
+				.removeClass( this._getIconClasses( this.options ) )
+				.addClass( this._getIconClasses(
+					$.extend( {}, this.options, options ) ) );
 		}
 
 		this._super( options );

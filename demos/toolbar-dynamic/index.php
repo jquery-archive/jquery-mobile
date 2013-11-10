@@ -28,7 +28,7 @@
 <body>
 	<div data-role="page" class="jqm-demos" id="page-with-dynamic-toolbars">
 
-		<div data-role="content" class="jqm-content">
+		<div role="main" class="ui-content jqm-content jqm-fullwidth">
 
 			<h1>Dynamic toolbars</h1>
 
@@ -41,5 +41,6 @@
 		</div><!-- /content -->
 
 	</div><!-- /page -->
+
 </body>
 </html>

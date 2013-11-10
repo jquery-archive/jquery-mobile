@@ -17,12 +17,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Table: Column Toggle</h1>
 
@@ -124,19 +124,21 @@
 
 	      <p>The column chooser mode requires a <code>table</code> element with two attributes: <code>data-role=&quot;table&quot;</code> and <code>data-mode=&quot;columntoggle&quot;</code>. An <code>ID</code> attribute is also required on the table to associate it with the column chooser popup menu.</p>
 
-	      <pre><code>&lt;table <strong>data-role=&quot;table&quot; data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;</strong>&gt;</code></pre>
+<pre><code>
+&lt;table <strong>data-role=&quot;table&quot; data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;</strong>&gt;
+</code></pre>
 
 	      <h2>Setting column priority</h2>
 
 	      <p>The table works by hiding and showing columns based on two inputs: available screen width or by the user checking and unchecking which columns to display in a column picker popup. Add <code>data-priority</code> attributes to each of the table headers of columns you want to responsively display and assign a priority (1 = highest, 6 = lowest). Any table header given a priority will be available in the column picker menu. </p>
 	      <p>To make a column <em>persistent</em> so it's not available for hiding, omit the <code>data-priority</code> attribute. This will make the column visible at all widths and won't be available in the column chooser menu.</p>
 
-	<pre><code>
-	&lt;th&gt;I&#x27;m critical and can&#x27;t be removed&lt;/th&gt;
-	&lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m very important&lt;/th&gt;
-	&lt;th <strong>data-priority=&quot;3&quot;</strong>&gt;I&#x27;m somewhat&lt;/th&gt;
-	&lt;th <strong>data-priority=&quot;5&quot;</strong>&gt;I&#x27;m less important&lt;/th&gt;
-	</code></pre>
+<pre><code>
+&lt;th&gt;I&#x27;m critical and can&#x27;t be removed&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;1&quot;</strong>&gt;I&#x27;m very important&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;3&quot;</strong>&gt;I&#x27;m somewhat&lt;/th&gt;
+&lt;th <strong>data-priority=&quot;5&quot;</strong>&gt;I&#x27;m less important&lt;/th&gt;
+</code></pre>
 
 	    <p>You may use any priority naming convention and assign as many (or few) levels of priority for the columns. The plugin  simply generates class names based on the values in the <code>data-priority</code> attribute so even though we default to using a numeric system of 1-6, any naming convention is possible. </p>
 	    <p>For example, if a priority of <code>data-priority="critical"</code> is added to the heading, a class of <code>ui-table-priority-critial</code> will be applied to each cell in that column. If a priority is assigned, the column will be made available for toggling in the column menu and the class will be added to each cell. The rest of the styling and media query creation is up to you to write in your custom stylesheet.</p>
@@ -248,42 +250,47 @@
 
 	    <p>In the example styles below for a <code> my-custom-class</code> class on the table, the priority 1 columns are shown first, at widths above <code>20em</code> (320px), then priority 2 kicks in above <code>30em</code> (480px) and so on up to wide desktop widths with priority 6. Feel free to change these breakpoints in your stylesheet and choose how many priority levels you'd like to use.</p>
 
-	<pre><code>
-	<strong>/* Show priority 1 at 320px (20em x 16px) */</strong>
-	@media screen and (min-width: 20em) {
-	   .my-custom-class th.ui-table-priority-1,
-	   .my-custom-class td.ui-table-priority-1 {
-	     display: table-cell;
-	   }
-	}
-	<strong>/* Show priority 2 at 480px (30em x 16px) */</strong>
-	@media screen and (min-width: 30em) {
-	   .my-custom-class  th.ui-table-priority-2,
-	   .my-custom-class td.ui-table-priority-2 {
-	     display: table-cell;
-	   }
-	}
-	...more breakpoints...
-	</code></pre>
-	<p>Due to CSS specificity, you will also need to include the class definitions for the hidden and visible states <em>after</em> the custom breakpoints in your custom stylesheet so be sure to include these as well:</p>
-	<pre><code>
-	/* Manually hidden */
-	.my-custom-class th.ui-table-cell-hidden,
-	.my-custom-class td.ui-table-cell-hidden {
-	  display: none;
-	}
+<pre><code>
+<strong>/* Show priority 1 at 320px (20em x 16px) */</strong>
+@media screen and (min-width: 20em) {
+   .my-custom-class th.ui-table-priority-1,
+   .my-custom-class td.ui-table-priority-1 {
+     display: table-cell;
+   }
+}
+<strong>/* Show priority 2 at 480px (30em x 16px) */</strong>
+@media screen and (min-width: 30em) {
+   .my-custom-class  th.ui-table-priority-2,
+   .my-custom-class td.ui-table-priority-2 {
+     display: table-cell;
+   }
+}
+...more breakpoints...
+</code></pre>
 
-	/* Manually shown */
-	.my-custom-class th.ui-table-cell-visible,
-	.my-custom-class td.ui-table-cell-visible {
-	   display: table-cell;
-	}
-	</code></pre>
+	<p>Due to CSS specificity, you will also need to include the class definitions for the hidden and visible states <em>after</em> the custom breakpoints in your custom stylesheet so be sure to include these as well:</p>
+
+<pre><code>
+/* Manually hidden */
+.my-custom-class th.ui-table-cell-hidden,
+.my-custom-class td.ui-table-cell-hidden {
+  display: none;
+}
+
+/* Manually shown */
+.my-custom-class th.ui-table-cell-visible,
+.my-custom-class td.ui-table-cell-visible {
+   display: table-cell;
+}
+</code></pre>
+
 	      <h2>Applying a preset breakpoint</h2>
 	      <p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a set of pre-configured breakpoints for each of the six priority levels that you can use if they happen work well for your content.</p>
 	      <p>These breakpoints can be applied by adding a <code>class="ui-responsive"</code> to the table element. Here is an example of a table with this class added:</p>
 
-	      <pre><code>&lt;table data-role=&quot;table&quot; <strong>class=&quot;ui-responsive&quot;</strong> data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;&gt;</code></pre>
+<pre><code>
+&lt;table data-role=&quot;table&quot; <strong>class=&quot;ui-responsive&quot;</strong> data-mode=&quot;columntoggle&quot; id=&quot;my-table&quot;&gt;
+</code></pre>
 
 	      <p>The six preset breakpoint classes included in the column toggle stylesheet use regular increments of 10em (160 pixels). Here is a summary of the breakpoints assigned to each priority in the preset styles: </p>
 	      <dl>
@@ -300,15 +307,18 @@
 	      <h2>Grouped column headers</h2>
 	      <p>It's fairly common to need to logically group multiple columns under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will parse the first row only for the priority and expose these heading groups as the options in the column chooser popup. In this configuration, the second heading will not be exposed as columns that can be hidden or shown independently of the groupings in the chooser.</p>
 
-		</div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
-	</body>
-	</html>
+</div><!-- /page -->
+
+</body>
+</html>

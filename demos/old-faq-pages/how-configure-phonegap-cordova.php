@@ -17,12 +17,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<p><strong>Note: this page has not been updated after 1.3</strong></p>
 
@@ -79,9 +79,9 @@ $( document ).on( "mobileinit", function() {
 		<p>Here are a few more tips that aren't specifically related to PhoneGap but are good to know:</p>
 
 		<p><strong>We recommend disabling the pushState feature for installed apps </strong>because there are edge cases where this feature can cause unexpected navigation behavior and since URLs aren't visible in a webview, it's not worth keeping this active in these situations.</p>
-			
+
 		<p>Use to following code to disable pushState. Because the mobileinit event is triggered immediately, you'll need to bind your event handler before jQuery Mobile is loaded.</p>
-		
+
 <pre><code>
 $(document).bind("mobileinit", function(){
 	$.mobile.pushStateEnabled = false;
@@ -110,13 +110,16 @@ $(document).bind("mobileinit", function(){
 
 	</div><!-- /content -->
 
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

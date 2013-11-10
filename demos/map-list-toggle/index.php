@@ -8,17 +8,17 @@
 	<style>
 	.segmented-control { text-align:center; }
 	.segmented-control .ui-controlgroup { display:inline; margin:.2em 0px; }
-	
+
 	#map-page { width:100%; height:100%; }
 	#map-canvas { width:100%; height:100%; margin-top:-30px; padding:0px!important; }
 	#gmap-marker-link { color:#00a0df; text-decoration:none; }
-	
+
 	.ui-gmap-canvas { width:100%; height:100%; }
 	.ui-gmap-infobox { display:none; }
-	
+
 	#show-more .ui-li-heading { text-align:center; }
 	#show-more .ui-icon { visibility:hidden; }
-	
+
 	.ui-li-has-count .ui-li-count { border-color:transparent; }
 	.wrap { white-space:normal; }
 	</style>
@@ -35,31 +35,31 @@
 		    $listSwitch = $( "#list-switch" ),
 			$map = $( "#map-canvas" ),
 	        $list = $( "#list-canvas" );
-			
+
 	    $mapSwitch.on( "click", function( e ){
 	       	$map.show();
 	       	$map.gmap();
 	       	$list.hide();
 	    });
-		
+
 	    $listSwitch.on( "click", function( e ){
 	       	$list.show();
 			$map.hide();
 	    });
-	
+
 	    $( "#show-more a" ).on( "click", function( e ){
 			// Assume we already have a cached geolocation because it's not necessary for this example.
 			var location = location || {};
 			    location.coords = location.coords || {};
 				location.coords.latitude = location.coords.latitude || {};
 				location.coords.longitude = location.coords.longitude || {};
-	    	
+
 			JQM.geo.startIndex = $( "#list-results li" ).size() -1; // exclude show more list item
 	    	JQM.geo.showMore( location );
 	    	e.preventDefault();
 	    });
 	});
-	
+
 	/**
 	 * Geolocation configuration
 	 */
@@ -68,11 +68,11 @@
 		location: "",
 		zip: "",
 		startIndex: "",
-	
+
 	    showMore: function(latlng) {
 	    	$.mobile.loading( "show" );
 	    	JQM.geo.location = latlng;
-	
+
 			$.ajax({
 			  	url: "showMore.html?lat="+JQM.geo.location.coords.latitude+"&lon="+JQM.geo.location.coords.longitude+"&zip="+JQM.geo.zip+"&startIndex="+JQM.geo.startIndex,
 			  	success: function( response ) {
@@ -96,12 +96,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Google Maps with List toggle</h1>
 
@@ -112,21 +112,23 @@
             <li>How to load more list results and dynamically append them to an existing list.</li>
             <li>How to display an info box on the map when a push pin is tapped.</li>
         </ul>
-        
-        <a href="#map-page" data-ajax="false" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">Open demo</a>
+
+        <a href="#map-page" data-ajax="false" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">Open demo</a>
 
         <div data-demo-html="#map-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
-    </div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
+</div><!-- /page -->
 
 	<div data-role="page" id="map-page">
 		<div data-role="header" data-position="fixed">
@@ -139,7 +141,7 @@
 		    </fieldset>
 			</div>
 		</div>
-		<div data-role="content" class="ui-content-list">	
+		<div role="main" class="ui-content ui-content-list">
 	        <div id="list-canvas">
 	            <ul id="list-results" data-role="listview">
 	            	<li data-marker-info="44.811805,-93.176352">
@@ -212,16 +214,16 @@
 	            	  	</div>
 	            	  </a>
 	            	</li>
-					<li id="show-more"><a href=""><h1>Show more</h1></a></li>								
+					<li id="show-more"><a href=""><h1>Show more</h1></a></li>
 				</ul>
 			</div>
 		</div>
-		<div data-role="content" id="map-canvas" data-initial-view="44.80,-93.16,10" style="display:none;"></div>
+		<div role="main" class="ui-content" id="map-canvas" data-initial-view="44.80,-93.16,10" style="display:none;"></div>
 	<!-- Load map assets at bottom for performance -->
 	<script type="text/javascript" src="jquery.gmap.js"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.0/src/infobox_packed.js"></script>			
+	<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.0/src/infobox_packed.js"></script>
 	</div>
-	
-	</body>
-	</html>
+
+</body>
+</html>

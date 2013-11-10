@@ -17,12 +17,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Pages</h1>
 
@@ -33,11 +33,11 @@
 		<h2>Mobile page structure</h2>
 
 		<p>A jQuery Mobile site must start with an HTML5 <code>doctype</code> to take full advantage of all of the framework's features. (Older devices with browsers that don't understand HTML5 will safely ignore the 'doctype' and various custom attributes.)</p>
-		
+
 		<p>In the <code>head</code>, references to jQuery, jQuery Mobile and the mobile theme CSS are all required to start things off. The easiest way to get started is to link to files hosted on the jQuery CDN or for best performance, <a href="http://jquerymobile.com/download-builder/" rel="external">build a custom bundle</a>.</p>
 
 		<p>Here is how you can link to the CDN, where [version] should be replaced by the actual version. See also the <a href="http://jquerymobile.com/download/" rel="external">download</a> page on the web site.</p>
-		
+
 <pre><code>
 <strong>&lt;!DOCTYPE html&gt; </strong>
 &lt;html&gt;
@@ -56,7 +56,7 @@
 </code></pre>
 
 		<h2>Viewport meta tag</h2>
-            
+
 		<p>Note above that there is a meta <code>viewport</code> tag in the <code>head</code> to specify how the browser should display the page zoom level and dimensions. If this isn't set, many mobile browsers will use a "virtual" page width around 900 pixels to make it work well with existing desktop sites but the screens may look zoomed out and too wide. By setting the viewport attributes to <code>content=&quot;width=device-width, initial-scale=1&quot;</code>, the width will be set to the pixel width of the device screen. </p>
 
 <pre><code>
@@ -65,9 +65,8 @@
 
 		<p>These settings do not disable the user's ability to zoom the pages, which is nice from an accessibility perspective. There is a minor issue in iOS that doesn't properly set the width when changing orientations with these viewport settings, but this will hopefully be fixed in a future release. You can set other viewport values to disable zooming if required since this is part of your page content, not the library. </p>
 
-
 		<h2>Inside the body: Pages</h2>
-            
+
 		<p>Inside the <code>&lt;body&gt;</code> tag, each view or "page" on the mobile device is identified with an element (usually a <code>div</code>) with the <code> data-role="page"</code> attribute. </p>
 
 <pre><code>
@@ -78,15 +77,13 @@
 
 		<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p>
 
-
 <pre><code>
 &lt;div data-role="page"&gt;
 	&lt;div data-role="header"&gt;...&lt;/div&gt;
-	&lt;div data-role="content"&gt;...&lt;/div&gt;
+	&lt;div role="main" class="ui-content"&gt;...&lt;/div&gt;
 	&lt;div data-role="footer"&gt;...&lt;/div&gt;
 &lt;/div&gt;</span>
 </code></pre>
-
 
 <h2>Putting it together: Basic single page template</h2>
 
@@ -125,7 +122,7 @@
 &lt;/html&gt;
 </code></pre>
 
-		<a href="../pages-single-page/index.html" data-ajax="false" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">View page template</a>
+		<a href="../pages-single-page/index.html" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">View page template</a>
 
 		<h2>Multi-page template structure</h2>
 
@@ -172,7 +169,7 @@
 &lt;/body&gt;
 </code></pre>
 
-		<a href="../pages-multi-page/index.html" data-ajax="false" role="button" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">View multi-page template</a>
+		<a href="../pages-multi-page/index.html" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-arrow-r ui-btn-icon-right">View multi-page template</a>
 
 		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the AJAX "pages", it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a "page" with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
 
@@ -233,13 +230,16 @@ $.mobile.page.prototype.options.domCache = true;
 
 	</div><!-- /content -->
 
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

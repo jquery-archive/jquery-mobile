@@ -135,24 +135,31 @@
 
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Swipe to delete list item</h1>
 
 		<p>This demo shows how you can remove list items by swiping left or right. For devices without touchscreen there is a delete button. This demo also contains a custom styled confirmation popup.</p>
-		
-		<p><a href="#demo-page" data-transition="fade" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open swipe list demo</a></p>
+
+		<p><a href="#demo-page" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open swipe list demo</a></p>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div>
 
-	</div><!-- /content -->
+    </div><!-- /content -->
 
-<?php include( '../jqm-panels.php' ); ?>
+    <?php include( '../jqm-navmenu.php' ); ?>
+
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+        <p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+        <p>Copyright 2013 The jQuery Foundation</p>
+    </div><!-- /footer -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
 
@@ -164,7 +171,7 @@
         <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
     </div><!-- /header -->
 
-    <div data-role="content">
+    <div role="main" class="ui-content">
 
         <ul id="list" class="touch" data-role="listview" data-icon="false" data-split-icon="delete">
             <li>
@@ -303,10 +310,10 @@
 
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <a id="yes" role="button" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Yes</a>
+                <a id="yes" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Yes</a>
             </div>
             <div class="ui-block-b">
-                <a id="cancel" role="button" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
+                <a id="cancel" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
             </div>
         </div>
 

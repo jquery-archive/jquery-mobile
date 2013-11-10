@@ -28,7 +28,6 @@ $.widget( "mobile.page", $.mobile.page, {
 		if ( this.options.dialog ) {
 
 			$.extend( this, {
-				_isCloseable: false,
 				_inner: this.element.children(),
 				_headerCloseButton: null
 			});
@@ -115,35 +114,16 @@ $.widget( "mobile.page", $.mobile.page, {
 		} else {
 			dst = this._inner.find( ":jqmData(role='header')" ).first();
 			btn = $( "<a></a>", {
-					"role": "button",
 					"href": "#",
 					"class": "ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-" + location
 				})
+				.attr( "data-" + $.mobile.ns + "rel", "back" )
 				.text( text || this.options.closeBtnText || "" )
 				.prependTo( dst );
 			this._on( btn, { click: "close" } );
 		}
 
 		this._headerCloseButton = btn;
-	},
-
-	// Close method goes back in history
-	close: function() {
-		var idx, dst, hist = $.mobile.navigate.history;
-
-			if ( $.mobile.hashListeningEnabled && hist.activeIndex > 0 ) {
-				$.mobile.back();
-			} else {
-				idx = Math.max( 0, hist.activeIndex - 1 );
-				dst = hist.stack[ idx ].pageUrl || hist.stack[ idx ].url;
-				hist.previousIndex = hist.activeIndex;
-				hist.activeIndex = idx;
-				if ( !$.mobile.path.isPath( dst ) ) {
-					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
-				}
-
-				$.mobile.changePage( dst, { direction: "back", changeHash: false, fromHashChange: true } );
-			}
 	}
 });
 

@@ -28,7 +28,7 @@
 
 	<div data-role="page">
 
-    	<div data-role="content">
+    	<div class="ui-content" role="main">
 
 			<ul data-role="listview" data-split-icon="gear" data-split-theme="a" data-inset="false">
 				<li><a href="#">
@@ -100,11 +100,11 @@
 				</a></li>
 			</ul>
 
-			<div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+			<div data-role="popup" id="purchase" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 				<h3>Purchase Album?</h3>
-			<p>Your download will begin immediately on your mobile device when you purchase.</p>
-				<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Buy: $10.99</a>
-				<a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Cancel</a>
+				<p>Your download will begin immediately on your mobile device when you purchase.</p>
+				<a href="#" class="ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-shadow ui-btn-icon-left ui-icon-check" data-rel="back">Buy: $10.99</a>
+				<a href="#" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-shadow" data-rel="back">Cancel</a>
 			</div>
 
 		</div><!-- /content -->

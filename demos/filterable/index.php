@@ -17,12 +17,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Filterable</h1>
 
@@ -102,11 +102,11 @@
 					<input data-type="search" id="filterControlgroup-input"></input>
 				</form>
 				<div data-role="controlgroup" data-filter="true" data-input="#filterControlgroup-input">
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Button 1</a>
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Button 2</a>
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button" data-filtertext="some text">Button 3</a>
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Button 4</a>
-					<a href="#" class="ui-btn ui-shadow ui-corner-all" role="button">Button 5</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 1</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 2</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all" data-filtertext="some text">Button 3</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 4</a>
+					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 5</a>
 				</div>
 			</div>
 
@@ -154,8 +154,8 @@
 			</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" 
-					data-filter="true" 
+				<ul data-role="listview"
+					data-filter="true"
 					data-filter-placeholder="Find cars..."
 					data-filter-theme="a"
 					data-inset="true">
@@ -169,20 +169,20 @@
 
 		<h2>Filter Reveal</h2>
 		<p>
-			The filter reveal feature makes it easy to build a simple autocomplete 
+			The filter reveal feature makes it easy to build a simple autocomplete
 			with local data. When a filter has the <code>data-filter-reveal="true"
-			</code> attribute, it will auto-hide all the list items when the search 
-			field is blank. The <code>data-filter-placeholder</code> attribute can be 
-			added to specify the placeholder text for the filter. If you need to search 
-			against a long list of values, we provide a way to create a filter with a 
-			<a href="../autocomplete/autocomplete-remote.php" data-ajax="false">remote 
+			</code> attribute, it will auto-hide all the list items when the search
+			field is blank. The <code>data-filter-placeholder</code> attribute can be
+			added to specify the placeholder text for the filter. If you need to search
+			against a long list of values, we provide a way to create a filter with a
+			<a href="../listview-autocomplete-remote/" data-ajax="false">remote
 			data source</a>.
 			</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" 
-					data-filter="true" 
-					data-filter-reveal="true" 
+				<ul data-role="listview"
+					data-filter="true"
+					data-filter-reveal="true"
 					data-filter-placeholder="Search fruits..."
 					data-inset="true">
 					<li><a href="#">Apple</a></li>
@@ -231,7 +231,7 @@
 
 <pre><code>$( ".selector" ).on( "filterablebeforefilter", function( e, data ) {
 		var value;
-		
+
 		e.preventDefault();
 		value = data.input.value;
 		// trigger own request to database
@@ -261,9 +261,9 @@
 				data-input="#pre-rendered-example-input"
 				class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
 				<div class="ui-controlgroup-controls">
-					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden" role="button">Acura</a>
-					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-first-child ui-shadow ui-last-child" role="button">Renault</a>
-					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden" role="button">Hyundai</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden">Acura</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-first-child ui-shadow ui-last-child">Renault</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden">Hyundai</a>
 				</div>
 			</div>
 		</form>
@@ -271,13 +271,16 @@
 
 	</div><!-- /content -->
 
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

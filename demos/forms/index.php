@@ -17,12 +17,12 @@
 
 		<div data-role="header" class="jqm-header">
 			<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-			<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-			<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+			<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+			<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 			</div><!-- /header -->
 
-    <div data-role="content" class="jqm-content">
+    <div role="main" class="ui-content jqm-content">
 
         <h1>Form elements</h1>
 
@@ -35,26 +35,26 @@
 
         <h2>Buttons</h2>
 
-		<p>Buttons are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons. Learn more about <a href="../button-markup/">button markup</a> and <a href="../button-markup/">input buttons</a>.</p>
+		<p>Buttons are used within a wide range of other plugins. The button markup is flexible and can be created from links or form buttons. Learn more about <a href="../button-markup/">button markup</a> and <a href="../button/">input buttons</a>.</p>
         <div data-demo-html="true">
-            <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all">Link button</a>
+            <a href="#" class="ui-shadow ui-btn ui-corner-all">Link button</a>
             <button class="ui-shadow ui-btn ui-corner-all">Button element</button>
             <input type="button" value="Button element" data-icon="delete" data-theme="a">
         </div><!-- /demo-html -->
 
         <p>Inline buttons</p>
         <div data-demo-html="true">
-            <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-star">Inline + icon</a>
-            <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-b ui-mini">Mini + theme</a>
-            <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">icon only button</a>
+            <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-icon-left ui-icon-star">Inline + icon</a>
+            <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-b ui-mini">Mini + theme</a>
+            <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-notext ui-btn-b ui-mini">icon only button</a>
         </div><!-- /demo-html -->
 
         <p>Horizontal grouped buttons</p>
         <div data-demo-html="true">
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-plus ui-btn-b">Add</a>
-                <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete ui-btn-b">Delete</a>
-                <a href="#" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-grid ui-btn-b">More</a>
+                <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-plus ui-btn-b">Add</a>
+                <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-delete ui-btn-b">Delete</a>
+                <a href="#" class="ui-shadow ui-btn ui-corner-all ui-btn-icon-left ui-icon-grid ui-btn-b">More</a>
             </div>
         </div><!-- /demo-html -->
 
@@ -79,7 +79,7 @@
 
         <h2>Range slider</h2>
 
-		<p>Range sliders offer two handles to set a min and max value along a numeric continuum. Learn more about <a href="../sliders/rangeslider.php" data-ajax="false">range sliders</a>.</p>
+		<p>Range sliders offer two handles to set a min and max value along a numeric continuum. Learn more about <a href="../rangeslider/" data-ajax="false">range sliders</a>.</p>
 
         <div data-demo-html="true">
         <form>
@@ -247,7 +247,7 @@
 
         <h2>Text inputs & Textareas</h2>
 
-		<p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device. Learn more about <a href="../textinputs/">text inputs and textareas</a>.</p>
+		<p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device. Learn more about <a href="../textinput/">text inputs and textareas</a>.</p>
 
         <div data-demo-html="true">
              <label for="text-basic">Text input:</label>
@@ -289,11 +289,11 @@
              <input type="password" name="password" id="password" value="" autocomplete="off">
         </div><!-- /demo-html -->
 
-		<p>See the <a href="form-gallery.php">form gallery</a> for more form element examples.</p>
+		<p>See the <a href="../forms-gallery/">form gallery</a> for more form element examples.</p>
 
 		<h2>Accessibly hidden labels</h2>
 
-		<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies &mdash; for example, when letting an element's <code>placeholder</code> attribute serve as a label &mdash; apply the helper class <code>ui-hidden-accessible</code> to the label. View more examples of <a href="form-label-hidden.php">accessibly hidden labels</a>. In case you use a field container you can use class <code>ui-hide-label</code> on the element with <code>class="ui-field-contain"</code> to <a href="form-hide-label.php">hide the label or legend</a>.</p>
+		<p>For the sake of accessibility, jQuery Mobile requires that all form elements be paired with a meaningful <code>label</code>. To hide labels in a way that leaves them visible to assistive technologies &mdash; for example, when letting an element's <code>placeholder</code> attribute serve as a label &mdash; apply the helper class <code>ui-hidden-accessible</code> to the label. View more examples of <a href="../forms-label-hidden-accessible/">accessibly hidden labels</a>.</p>
 
 		<div data-demo-html="true">
 			<label for="textinput-hide" class="ui-hidden-accessible">Text Input:</label>
@@ -302,7 +302,7 @@
 
 		<h2>Disabling form elements</h2>
 
-		<p>All jQuery Mobile widgets can be disabled in the markup by adding the standard <code>disabled</code> attribute to the element, just like you would with native controls. To dynamically disable or enable them, each form widget also has standard <code>disable</code> and <code>enable</code> methods that are documented with each form widget. View more examples of <a href="form-disabled.php" >disabled form elements</a>.</p>
+		<p>All jQuery Mobile widgets can be disabled in the markup by adding the standard <code>disabled</code> attribute to the element, just like you would with native controls. To dynamically disable or enable them, each form widget also has standard <code>disable</code> and <code>enable</code> methods that are documented with each form widget. View more examples of <a href="../forms-disabled/" >disabled form elements</a>.</p>
 
 		<div data-demo-html="true">
 			<div class="ui-field-contain">
@@ -315,7 +315,7 @@
 
 		<h2>Fieldcontainer groupings</h2>
 
-		<p>To improve the styling of labels and form elements on wider screens, wrap a <code>div</code> or <code>fieldset </code>with the <code>class="ui-field-contain"</code> attribute around each label/form element. This framework aligns the input and associated label side-by-side, and breaks to stacked block-level elements below ~448px. The framework will also add a thin bottom border to act as a field separator. See more examples of <a href="form-fieldcontain.php">fieldcontainer groupings</a>.</p>
+		<p>To improve the styling of labels and form elements on wider screens, wrap a <code>div</code> or <code>fieldset </code>with the <code>class="ui-field-contain"</code> attribute around each label/form element. This framework aligns the input and associated label side-by-side, and breaks to stacked block-level elements below ~448px. The framework will also add a thin bottom border to act as a field separator. See more examples of <a href="../forms-field-contain/">fieldcontainer groupings</a>.</p>
 
 		<div data-demo-html="true">
 			<div class="ui-field-contain">
@@ -350,7 +350,7 @@ $( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "cre
 		<h2>Refreshing form elements</h2>
 
 		 <p>In jQuery Mobile, some enhanced form controls are simply styled (inputs), but others are custom controls (selects, sliders) built from, and kept in sync with, the native control. To programmatically update a form control with JavaScript, first manipulate the native control, then use the <code>refresh</code> method to tell the enhanced control to update itself to match the new state. Here are some examples of how to update common form controls, then call the <code>refresh</code> method:</p>
-            
+
 		<h3>Checkboxes:</h3>
 
 <pre><code>
@@ -358,13 +358,13 @@ $( "input[type='checkbox']" ).prop( "checked", true ).checkboxradio( "refresh" )
 </code></pre>
 
 		<h3>Radios:</h3>
-        
+
 <pre><code>
 $( "input[type='radio']" ).prop( "checked", true ).checkboxradio( "refresh" );
 </code></pre>
 
 		<h3>Selects:</h3>
-        
+
 <pre><code>
 var myselect = $( "#selectfoo" );
 myselect[0].selectedIndex = 3;
@@ -372,13 +372,13 @@ myselect.selectmenu( "refresh" );
 </code></pre>
 
 		<h3>Sliders:</h3>
-        
+
 <pre><code>
 $( "input[type='range']" ).val( 60 ).slider( "refresh" );
 </code></pre>
 
 		<h3>Flip switches:</h3>
-        
+
         <p>They use the slider widget.</p>
 
 <pre><code>
@@ -388,9 +388,9 @@ myswitch.slider( "refresh" );
 </code></pre>
 
 		<h2>Preventing auto-initialization of form elements</h2>
-            
+
 		<p>If you'd prefer that a particular form control be left untouched by jQuery Mobile, simply give that element the attribute <code> data-role="none"</code>. For example:</p>
-            
+
 <pre><code>
 &lt;label for=&quot;foo&quot;&gt;
 &lt;select name=&quot;foo&quot; id=&quot;foo&quot; <strong>data-role=&quot;none&quot;</strong>&gt;
@@ -401,7 +401,7 @@ myswitch.slider( "refresh" );
 </code></pre>
 
 		<p>If you'd like to prevent auto-initialization without adding attributes to your markup, you can customize the selector that is used for preventing auto-initialization by setting the page plugin's <code>keepNative</code> option (which defaults to <code>[data-role="none"]</code>). Be sure to configure this option inside an event handler bound to the <code>mobileinit</code> event, so that it applies to the first page as well as subsequent pages that are loaded.</p>
-            
+
 <pre><code>
 $( document ).bind( "mobileinit", function() {
 	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
@@ -417,13 +417,16 @@ $( document ).bind( "mobileinit", function() {
 
 	</div><!-- /content -->
 
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

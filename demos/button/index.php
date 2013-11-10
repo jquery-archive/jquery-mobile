@@ -17,17 +17,17 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Input buttons</h1>
 
 		<p>Examples of how to style input buttons; <code>input</code> elements with <code>type="button"</code>, <code>type="submit"</code>, or <code>type="reset"</code>. See <a href="../button-markup/">button markup</a> for examples of <code>a</code> and <code>button</code> elements.</p>
-		
+
 		<p>Note that in 1.4 <code>data-</code> attributes will still work, but the style options are deprecated.</p>
 
 		<h2>Default</h2>
@@ -44,7 +44,7 @@
 
 		<div data-demo-html="true">
 			<form>
-				<div class="ui-input-btn ui-btn">
+				<div class="ui-input-btn ui-btn ui-corner-all ui-shadow">
 					Input value
 					<input type="button" data-enhanced="true" value="Input value">
 				</div>
@@ -63,9 +63,9 @@
 				</div>
 			</form>
 		</div><!--/demo-html -->
-		
+
 		<p>Icon-only buttons are round by default. Here we show how you can set the same border-radius as other buttons.</p>
-		
+
 		<div data-demo-html="true" data-demo-css="true">
 			<form>
 				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
@@ -150,7 +150,7 @@
 		</div><!--/demo-html -->
 
 		<h2>Icon position</h2>
-		
+
 		<div data-demo-html="true">
 			<form>
 				<input type="button" data-icon="delete" value="Left (default)">
@@ -160,7 +160,7 @@
 				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
 			</form>
 		</div><!--/demo-html -->
-		
+
 		<p>Inline:</p>
 
 		<div data-demo-html="true">
@@ -225,13 +225,17 @@
 
 	</div><!-- /content -->
 
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span data-wrapper-classes="jqm-version"></span></p>
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>
+

@@ -46,33 +46,35 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
-	
-	<div data-role="content" class="jqm-content">
-	
+
+	<div role="main" class="ui-content jqm-content">
+
 		<h1>Redirection example: Source Page</h1>
-		
+
 		<p>Clicking the link below will cause a page to be loaded from the server which contains a special instruction that is captured in the sample code to load the final redirection target page. Note that both the initial page (which contains the redirect) as well as the final redirect target page contain an intentional delay that should simulate network congestion and should allow jQuery Mobile enough time to display the loading indicator.</p>
-         
+
         <div data-demo-html="true" data-demo-js="#redirectCode" data-demo-php="source.php">
-            <a href="redirect.php?to=redirect-target.php" role="button" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Redirect</a>
+            <a href="redirect.php?to=redirect-target.php" class="ui-shadow ui-btn ui-corner-all ui-btn-inline">Redirect</a>
         </div><!--/demo-html -->
-		
+
 		<p>Note: This is a PHP demo that will only work on a server and not in a build (i.e. the demos that come with each release).</p>
 
-
 	</div><!-- /content -->
-	
+
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

@@ -19,12 +19,12 @@
 
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
     </div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
       <h1>jQuery Mobile, Backbone.js and Require.js</h1>
       <p>jQuery Mobile provides an <strong>HTML5-based user interface for all popular mobile device platforms</strong>, but it does not influence how you organize and structure your app's JavaScript.  Many jQuery Mobile users turn to a variety of other popular third-party libraries, including MV* frameworks and dependency management tools, to help structure their code.
@@ -39,7 +39,7 @@
       </p>
       <p>Although there is a high amount of developer interest with using jQuery Mobile, Backbone.js, and Require.js together, there is a high barrier of entry.  Many users are confused about how to use the Backbone.js Router class object with the jQuery Mobile routing system.</p>
 
-	<a href="backbone-require.html" rel="external" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">View example page</a>
+	   <a href="backbone-require.html" rel="external" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-icon-right ui-icon-carat-r">View example page</a>
 
       <h2>jQuery Mobile configuration</h2>
 
@@ -143,15 +143,18 @@
 
 		<p>The <a href="backbone-require.html" rel="external">example page</a> illustrates how to render a jQuery Mobile ListView that is populated with dynamic JSON data asynchronously. Feel free to take a deeper look into the source code to see how Require.js and Backbone.js are used.</p>
 
-	</div><!-- /content -->
+    </div><!-- /content -->
+
+    <?php include( '../jqm-navmenu.php' ); ?>
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
         <p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
         <p>Copyright 2013 The jQuery Foundation</p>
     </div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

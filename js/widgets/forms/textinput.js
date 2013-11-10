@@ -10,7 +10,25 @@ define( [ "jquery", "../../jquery.mobile.core", "../../jquery.mobile.widget", ".
 (function( $, undefined ) {
 
 $.widget( "mobile.textinput", {
-	initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
+	initSelector: "input[type='text']," +
+		"input[type='search']," +
+		":jqmData(type='search')," +
+		"input[type='number']," +
+		":jqmData(type='number')," +
+		"input[type='password']," +
+		"input[type='email']," +
+		"input[type='url']," +
+		"input[type='tel']," +
+		"textarea," +
+		"input[type='time']," +
+		"input[type='date']," +
+		"input[type='month']," +
+		"input[type='week']," +
+		"input[type='datetime']," +
+		"input[type='datetime-local']," +
+		"input[type='color']," +
+		"input:not([type])," +
+		"input[type='file']",
 
 	options: {
 		theme: null,
@@ -31,7 +49,11 @@ $.widget( "mobile.textinput", {
 			inputNeedsWrap = ( (this.element.is( "input" ) ||
 				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
 					!isRange );
-			
+
+		if ( this.element.prop( "disabled" ) ) {
+			options.disabled = true;
+		}
+
 		$.extend( this, {
 			classes: this._classesFromOptions(),
 			isSearch: isSearch,
@@ -41,10 +63,6 @@ $.widget( "mobile.textinput", {
 		});
 
 		this._autoCorrect();
-
-		if ( this.element[ 0 ].disabled ) {
-			options.disabled = true;
-		}
 
 		if ( !options.enhanced ) {
 			this._enhance();

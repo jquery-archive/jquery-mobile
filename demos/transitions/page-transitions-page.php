@@ -19,7 +19,7 @@
 		<h1>Page</h1>
 		</div><!-- /header -->
 
-		<div data-role="content" data-theme="a">
+		<div class="ui-content" role="main">
 		<p>That was an animated page transition effect to a page that we added with a <code>data-transition</code> attribute on the link. This uses a different background theme swatch to see how that looks with the transitions.</p>
 		<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
 
@@ -53,7 +53,7 @@
 
 			</form>
 
-			<a href="index.php" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline" data-rel="back">Take me back</a>
+			<a href="index.php" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-inline" data-rel="back">Take me back</a>
 		</div>
 
 		<div data-role="footer" data-theme="a">

@@ -11,7 +11,7 @@ var rdivider = /(^|\s)ui-li-divider($|\s)/,
 
 $.widget( "mobile.listview", $.mobile.listview, {
 	options: {
-		hidedividers: false
+		hideDividers: false
 	},
 
 	_afterListviewRefresh: function() {
@@ -19,7 +19,7 @@ $.widget( "mobile.listview", $.mobile.listview, {
 
 		this._superApply( arguments );
 
-		if ( this.options.hidedividers ) {
+		if ( this.options.hideDividers ) {
 			items = this._getChildrenByTagName( this.element[ 0 ], "li", "LI" );
 			for ( idx = items.length - 1 ; idx > -1 ; idx-- ) {
 				item = items[ idx ];

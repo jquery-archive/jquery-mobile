@@ -24,12 +24,12 @@
 
         <div data-role="header" class="jqm-header">
     		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-    		<p>Demos <span class="jqm-version"></span></p>
-            <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-            <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+    		<p><span class="jqm-version"></span> Demos</p>
+            <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+            <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
         </div><!-- /header -->
 
-        <div data-role="content" class="jqm-content">
+        <div role="main" class="ui-content jqm-content">
 
     		<h1>iframes in popups</h1>
 
@@ -40,7 +40,7 @@
     		<p>Here is an example of a 3rd party video player embedded in a popup:</p>
 
             <div data-demo-html="true" data-demo-css="true" data-demo-js="#video-script">
-        		<a href="#popupVideo" data-rel="popup" data-position-to="window" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Launch video player</a>
+        		<a href="#popupVideo" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Launch video player</a>
 
         		<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
         			<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
@@ -57,16 +57,15 @@
 
             <p>Note that the video will still be playing in the iframe when the popup is closed. If available you can use the 3rd party API to stop the video on the <code>popupafterclose</code> event. Another way is to create the iframe when the popup is opened and destroy it when the popup is closed, but this would drop support for browsers that have JavaScript disabled.</p>
 
-
     		<h2>Map example</h2>
 
     		<p>In the second example, an iframe is used to display <strong>Google Maps API</strong>. Using an iframe prevents issues with the controls of the map.</p>
 
             <div data-demo-html="true" data-demo-css="true" data-demo-js="#map-script">
-    			<a href="#popupMap" data-rel="popup" data-position-to="window" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open Map</a>
+    			<a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open Map</a>
 
     			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
-    				<a href="#" data-rel="back" role="button" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    				<a href="#" data-rel="back" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
     				<iframe src="map.html" width="480" height="320" seamless></iframe>
     			</div>
             </div>
@@ -119,15 +118,18 @@
 
             <p>Setting the size of the iframe is done exactly the same as for the video example, with one exception. You should also set the width and height of the div that contains the map to prevent the page to break on platforms like Android 2.3. In this example the ID of this div is <code>#map_canvas</code>.</p>
 
-		</div><!-- /content -->
+	</div><!-- /content -->
+
+	<?php include( '../jqm-navmenu.php' ); ?>
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-	<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-	<p>Copyright 2013 The jQuery Foundation</p>
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
+</div><!-- /page -->
+
 </body>
 </html>

@@ -67,12 +67,12 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
         <h1>Dynamic controlgroup</h1>
 
@@ -98,13 +98,13 @@
             	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Widget type</legend>
-    
+
                         <input type="radio" name="radio-widget" id="link" value="link" checked="checked">
                         <label for="link">Link</label>
-    
+
                         <input type="radio" name="radio-widget" id="select" value="select">
                         <label for="select">Select</label>
-    
+
                         <input type="radio" name="radio-widget" id="checkbox" value="checkbox">
                         <label for="checkbox">Checkbox</label>
                     </fieldset>
@@ -113,13 +113,13 @@
             	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Action<br><small>on click/change</small></legend>
-    
+
                         <input type="radio" name="radio-action" id="remove" value="remove" checked="checked">
                         <label for="remove">Remove</label>
-    
+
                         <input type="radio" name="radio-action" id="hide" value="hide">
                         <label for="hide">Hide</label>
-    
+
                         <input type="radio" name="radio-action" id="width" value="width">
                         <label for="width">Nothing</label>
                     </fieldset>
@@ -128,28 +128,31 @@
             	<div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Switch orientation</legend>
-    
+
                         <input type="radio" name="radio-orientation" id="isVertical" value="isVertical" checked="checked">
                         <label for="isVertical">Vertical</label>
-    
+
                         <input type="radio" name="radio-orientation" id="isHorizontal" value="isHorizontal">
                         <label for="isHorizontal">Horizontal</label>
                     </fieldset>
             	</div>
-                
+
             </form>
 
         </div><!--/demo-html -->
 
-		</div><!-- /content -->
+	</div><!-- /content -->
 
-		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<?php include( '../jqm-navmenu.php' ); ?>
+
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
-		</div><!-- /footer -->
+	</div><!-- /footer -->
 
-	<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
-	</div><!-- /page -->
-	</body>
-	</html>
+</div><!-- /page -->
+
+</body>
+</html>

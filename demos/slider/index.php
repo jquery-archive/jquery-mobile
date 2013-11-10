@@ -26,16 +26,16 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
 		<h1>Slider</h1>
 
-		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="rangeslider.php">range sliders</a> or <a href="switch.php">flip switches</a>.
+		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="../rangeslider/">range sliders</a> or <a href="../slider-flipswitch/">flip switches</a>.
 			</p>
 
                 <h2>Basic slider</h2>
@@ -123,28 +123,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-                <h2>Fieldcontain, hide label</h2>
-
-                <div data-demo-html="true">
-				<form>
-					<div class="ui-field-contain ui-hide-label">
-                        <label for="slider-9">Slider:</label>
-                        <input type="range" name="slider-9" id="slider-9" min="0" max="100" value="50">
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
-                <h2>Fieldcontain, hide label, mini sized</h2>
-
-                <div data-demo-html="true">
-				<form>
-					<div class="ui-field-contain ui-hide-label">
-                        <label for="slider-11">Slider:</label>
-                        <input type="range" name="slider-11" id="slider-11" data-mini="true" min="0" max="100" value="50">
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
                 <h2>Full width slider, no input</h2>
 
                 <p>Here we show how you can hide the number input and make the slider full width with custom CSS.</p>
@@ -158,13 +136,16 @@
 
 	</div><!-- /content -->
 
+	<?php include( '../jqm-navmenu.php' ); ?>
+
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
-<?php include( '../jqm-panels.php' ); ?>
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

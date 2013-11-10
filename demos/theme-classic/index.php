@@ -14,7 +14,7 @@
 		$( document ).on( "pagecreate", function() {
 			$( "#theme-selector input" ).on( "change", function( event ) {
 				var themeClass = $( "#theme-selector input:checked" ).attr( "id" );
-				
+
 				$( "#testpage" ).removeClass( "ui-page-theme-a ui-page-theme-b ui-page-theme-c ui-page-theme-d ui-page-theme-e" ).addClass( "ui-page-theme-" + themeClass );
 				$( "#ui-body-test" ).removeClass( "ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e" ).addClass( "ui-body-" + themeClass );
 				$( "#ui-bar-test, #ui-bar-form" ).removeClass( "ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e" ).addClass( "ui-bar-" + themeClass );
@@ -83,8 +83,8 @@
 
 	<div data-role="header">
 		<h1>Classic theme</h1>
-		<a href="#" role="button" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-notext">Back</a>
-		<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left">Button</a>
+		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-notext">Back</a>
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left">Button</a>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
@@ -94,7 +94,7 @@
 		</div>
 	</div><!-- /header -->
 
-	<div data-role="content">
+	<div class="ui-content" role="main">
 
 		<p><a href="theme-classic.css" target="_blank">Open the classic theme CSS file in a new tab</a></p>
 
@@ -160,21 +160,21 @@
 				</fieldset>
 			</div>
 		</form>
-		
+
 		<div id="ui-body-test" class="ui-body ui-body-a ui-corner-all" style="margin-bottom:1em;">
 		<p>I am a div with classes ui-body, ui-body-<span class="theme">a</span> and ui-corner-all.</p>
 		<p><a href="#">I am a link</a></p>
 			<h4>Panels</h4>
-			<a href="#panel-reveal" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Reveal</a>
-			<a href="#panel-overlay" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Overlay</a>
-			<a href="#panel-push" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Push</a>
+			<a href="#panel-reveal" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Reveal</a>
+			<a href="#panel-overlay" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Overlay</a>
+			<a href="#panel-push" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Push</a>
 		</div>
-		
+
 		<div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
-				
-		<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">We</a>
+
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">We</a>
 		<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-carat-r ui-btn-icon-right">are</button>
 		<input type="button" value="buttons" data-inline="true" data-icon="carat-r" data-iconpos="right">
 
@@ -191,7 +191,7 @@
 			<li><a href="#">have<span class="ui-li-count">4</span></a></li>
 			<li><a href="#">links</a></li>
 		</ul>
-		
+
 		<ul data-role="listview" data-split-icon="gear" data-inset="true">
 			<li><a href="#">
 				<img src="../_assets/img/album-bb.jpg">
@@ -212,7 +212,7 @@
 				<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 			</li>
 		</ul>
-		
+
 		<form>
 			<div class="ui-field-contain">
 				<label for="name2">Text Input:</label>
@@ -260,7 +260,7 @@
 					<legend>Controlgroup:</legend>
 					<button class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-right">One</button>
 					<input type="button" data-icon="back" data-iconpos="right" value="Two">
-					<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-right">Three</a>
+					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-right">Three</a>
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
@@ -277,12 +277,11 @@
 				<input type="submit" id="submit-1" value="Send">
 			</div>
 		</form>
-		
-		
-		<a href="#" role="button" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left ui-btn-active">Active button</a>
-		
+
+		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left ui-btn-active">Active button</a>
+
 		<p>Form inside static list:</p>
-		
+
 		<form>
 			<ul data-role="listview" data-inset="true">
 				<li class="ui-field-contain">
@@ -326,7 +325,7 @@
 			<h4>Heading</h4>
 		<p>I'm the collapsible content with a themed content block set to "<span class="theme">a</span>".</p>
 		</div>
-		
+
 		<div data-role="collapsible-set" data-content-theme="a">
 			<div data-role="collapsible">
 				<h3>Section 1</h3>
@@ -341,9 +340,9 @@
 			<p>I'm the collapsible content for section 3</p>
 			</div>
 		</div>
-		
+
 	</div><!-- /content -->
-	
+
 	<div data-role="footer" data-position="fixed">
 		<div data-role="navbar">
 			<ul>
@@ -365,7 +364,7 @@
 		<br><br>
 		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
 	</div>
-	
+
 	<div data-role="panel" id="panel-overlay" data-display="overlay">
 		<ul data-role="listview">
 			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
@@ -376,7 +375,7 @@
 		<br><br>
 		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
 	</div>
-	
+
 	<div data-role="panel" id="panel-push" data-display="push">
 		<ul data-role="listview">
 			<li data-icon="delete"><a href="#" data-rel="close">Close</a></li>
@@ -389,5 +388,6 @@
 	</div>
 
 </div><!-- /page -->
+
 </body>
 </html>

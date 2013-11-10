@@ -4,7 +4,6 @@
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
-
 define( [
 	"jquery",
 	"./table",

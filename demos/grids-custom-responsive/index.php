@@ -23,7 +23,7 @@
 			color: #777;
 			line-height: 140%
 		}
-	
+
 		/* Stack all blocks to start */
 		.rwd-example .ui-block-a,
 		.rwd-example .ui-block-b,
@@ -31,12 +31,12 @@
 			width: 100%;
 			float: none;
 		}
-		
+
 		/* Collapsing borders */
 		.rwd-example > div + div .ui-body {
 			border-top-width: 0;
 		}
-	
+
 		/* 1st breakpoint - Float B and C, leave A full width on top */
 		@media all and (min-width: 42em) {
 			.rwd-example {
@@ -64,7 +64,7 @@
 				border-left-width: 0;
 			}
 		}
-	
+
 		/* 2nd breakpoint - Float all, 50/25/25 */
 		@media all and (min-width: 55em) {
 			.rwd-example .ui-body {
@@ -87,7 +87,7 @@
 				border-left-width: 0;
 			}
 		}
-	
+
 		/* 3rd breakpoint - Bump up font size at very wide screens */
 		@media all and (min-width: 75em) {
 			.rwd-example .ui-body {
@@ -111,25 +111,25 @@
 
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
-		<p>Demos <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left" role="button">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right" role="button">Search</a>
+		<p><span class="jqm-version"></span> Demos</p>
+		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
 	</div><!-- /header -->
 
-	<div data-role="content" class="jqm-content">
+	<div role="main" class="ui-content jqm-content">
 
         <h1>Custom responsive grid</h1>
-        
+
         <p>It's easy to extend the basic grid styles into a custom responsive layout by using CSS media queries to adjust the layout and design across various screen width breakpoints.</p>
-        
+
         <p>This example is a typical news feature block that changes its layout across screen widths and illustrates how to change the grid ratios and overall layout with simple CSS. It starts as a simple set of stacked stories on phones, that goes to a layout with the lead story full width stacked over a 50/50 layout of the secondary stories. At wider widths, these secondary stories float next to the lead story in a 50/25/25 layout. When the screen gets very wide, the font size is bumped up to keep line lengths short.</p>
         <p>Use the view source button below to see how the media queries work for each of these breakpoints.</p>
 
         <!-- view source utilty wrapper -->
         <div data-demo-html="true" data-demo-css="true">
-        
+
             <div class="rwd-example">
-            
+
                 <!-- Lead story block -->
                 <div class="ui-block-a">
                     <div class="ui-body ui-body-d">
@@ -137,7 +137,7 @@
                         <p>One of the worst-kept secrets in tech has been confirmed: Apple will hold an event October 23 in San Jose, California, at which the company is widely expected to unveil a smaller, cheaper version of its popular iPad called "Mini".</p>
                     </div>
                 </div>
-                
+
                 <!-- secondary story block #1 -->
                 <div class="ui-block-b">
                     <div class="ui-body ui-body-d">
@@ -145,7 +145,7 @@
                         <p>The Microsoft Surface tablet picture has come into focus. The Redmond giant filled in the blanks on the new tablet's availability and specs.</p>
                     </div>
                 </div>
-                
+
                 <!-- secondary story block #2 -->
                 <div class="ui-block-c">
                     <div class="ui-body ui-body-d">
@@ -153,20 +153,23 @@
                         <p>AOL, struggling to shed its outdated image, is reimagining one of the most visibly aging parts of its platform: Its email service. </p>
                     </div>
                 </div>
-            
+
             </div><!-- /rwd-example -->
-        
+
         </div><!-- /data-demo -->
 
 	</div><!-- /content -->
 
-    <div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-        <p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-        <p>Copyright 2013 The jQuery Foundation</p>
-    </div><!-- /footer -->
+	<?php include( '../jqm-navmenu.php' ); ?>
 
-<?php include( '../jqm-panels.php' ); ?>
+	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+
+<?php include( '../jqm-search.php' ); ?>
 
 </div><!-- /page -->
+
 </body>
 </html>

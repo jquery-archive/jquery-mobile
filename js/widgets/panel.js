@@ -57,7 +57,7 @@ $.widget( "mobile.panel", {
 			_wrapper: this._getWrapper,
 			_fixedToolbars: this._getFixedToolbars
 		});
-		
+
 		this._addPanelClasses();
 
 		// if animating, add the class to do so
@@ -76,17 +76,17 @@ $.widget( "mobile.panel", {
 
 		this._bindSwipeEvents();
 	},
-	
+
 	_getPanelInner: function() {
 		var panelInner = this.element.find( "." + this.options.classes.panelInner );
-		
+
 		if ( panelInner.length === 0 ) {
 			panelInner = this.element.children().wrapAll( "<div class='" + this.options.classes.panelInner + "' />" ).parent();
 		}
-		
+
 		return panelInner;
 	},
-	
+
 	_createModal: function() {
 		var self = this,
 			target = self._parentPage ? self._parentPage.parent() : self.element.parent();
@@ -97,13 +97,13 @@ $.widget( "mobile.panel", {
 			})
 			.appendTo( target );
 	},
-	
+
 	_getPage: function() {
 		var page = this._parentPage ? this._parentPage : $( "." + $.mobile.activePageClass );
-		
+
 		return page;
 	},
-	
+
 	_getWrapper: function() {
 		var wrapper = this._page().find( "." + this.options.classes.pageWrapper );
 
@@ -115,7 +115,7 @@ $.widget( "mobile.panel", {
 
 		return wrapper;
 	},
-	
+
 	_getFixedToolbars: function() {
 		var extFixedToolbars = $( "body" ).children( ".ui-header-fixed, .ui-footer-fixed" ),
 			intFixedToolbars = this._page().find( ".ui-header-fixed, .ui-footer-fixed" ),
@@ -208,7 +208,7 @@ $.widget( "mobile.panel", {
 		this._on( "body", {
 			"click a": "_handleClick"
 		});
-		
+
 	},
 
 	_handleClick: function( e ) {
@@ -260,7 +260,7 @@ $.widget( "mobile.panel", {
 					self.close();
 				}
 			});
-			
+
 		// Clean up open panels after page hide
 		if ( self._parentPage ) {
 			this.document.on( "pagehide", ":jqmData(role='page')", function() {
@@ -286,11 +286,11 @@ $.widget( "mobile.panel", {
 		if ( !this._open ) {
 			var self = this,
 				o = self.options,
-				
+
 				_openPanel = function() {
 					self.document.off( "panelclose" );
 					self._page().jqmData( "panel", "open" );
-					
+
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
 						self._wrapper().addClass( o.classes.animate );
 						self._fixedToolbars().addClass( o.classes.animate );
@@ -314,7 +314,7 @@ $.widget( "mobile.panel", {
 					self._positionPanel();
 
 					self._pageContentOpenClasses = self._getPosDisplayClasses( o.classes.pageContentPrefix );
-					
+
 					if ( o.display !== "overlay" ) {
 						self._page().parent().addClass( o.classes.pageContainer );
 						self._wrapper().addClass( self._pageContentOpenClasses );
@@ -330,7 +330,7 @@ $.widget( "mobile.panel", {
 				},
 				complete = function() {
 					self.document.off( self._transitionEndEvents, complete );
-					
+
 					if ( o.display !== "overlay" ) {
 						self._wrapper().addClass( o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().addClass( o.classes.pageContentPrefix + "-open" );
@@ -342,7 +342,7 @@ $.widget( "mobile.panel", {
 				};
 
 			self._trigger( "beforeopen" );
-			
+
 			if ( self._page().jqmData( "panel" ) === "open" ) {
 				self.document.on( "panelclose", function() {
 					_openPanel();
@@ -359,7 +359,7 @@ $.widget( "mobile.panel", {
 		if ( this._open ) {
 			var self = this,
 				o = this.options,
-				
+
 				_closePanel = function() {
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
 						self.document.on( self._transitionEndEvents, complete );
@@ -368,23 +368,23 @@ $.widget( "mobile.panel", {
 					}
 
 					self.element.removeClass( o.classes.panelOpen );
-					
+
 					if ( o.display !== "overlay" ) {
 						self._wrapper().removeClass( self._pageContentOpenClasses );
 						self._fixedToolbars().removeClass( self._pageContentOpenClasses );
 					}
-					
+
 					if ( self._modal ) {
 						self._modal.removeClass( self._modalOpenClasses );
 					}
 				},
 				complete = function() {
 					self.document.off( self._transitionEndEvents, complete );
-					
+
 					if ( o.theme && o.display !== "overlay" ) {
 						self._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
 					}
-						
+
 					self.element.addClass( o.classes.panelClosed );
 
 					if ( o.display !== "overlay" ) {
@@ -403,7 +403,7 @@ $.widget( "mobile.panel", {
 					$.mobile.resetActivePageHeight();
 
 					self._page().jqmRemoveData( "panel" );
-					
+
 					self._trigger( "close" );
 				};
 
@@ -435,15 +435,15 @@ $.widget( "mobile.panel", {
 			}
 
 			if ( this._open ) {
-				
+
 				this._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
-				
+
 				if ( $.support.cssTransform3d && !!o.animate ) {
 					this._fixedToolbars().removeClass( o.classes.animate );
 				}
-				
+
 				this._page().parent().removeClass( o.classes.pageContainer );
-				
+
 				if ( o.theme ) {
 					this._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
 				}
@@ -453,17 +453,17 @@ $.widget( "mobile.panel", {
 		if ( !multiplePanels ) {
 
 			this.document.off( "panelopen panelclose" );
-			
+
 			if ( this._open ) {
 				this.document.off( this._transitionEndEvents );
 				$.mobile.resetActivePageHeight();
 			}
 		}
-		
+
 		if ( this._open ) {
 			this._page().jqmRemoveData( "panel" );
 		}
-		
+
 		this._panelInner.children().unwrap();
 
 		this.element
