@@ -113,7 +113,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					if ( !isTaphold && origTarget === event.target ) {
 						triggerCustomEvent( thisObject, "tap", event );
 					} else if ( isTaphold ) {
-						event.stopPropagation();
+						event.preventDefault();
 					}
 				}
 
