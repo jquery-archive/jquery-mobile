@@ -117,7 +117,7 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 					if ( !isTaphold && origTarget === event.target ) {
 						triggerCustomEvent( thisObject, "tap", event );
 					} else if ( isTaphold ) {
-						event.stopPropagation();
+						event.preventDefault();
 					}
 				}
 
