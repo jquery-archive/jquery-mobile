@@ -7,7 +7,7 @@
 define( [ "jquery",
 	"./jquery.mobile.ns",
 	"jquery.ui.widget",
-	"jquery.mobile.data" ], function( jQuery ) {
+	"./jquery.mobile.data" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
