@@ -5,7 +5,7 @@
 
 define( [ "jquery",
 	"./jquery.mobile.core",
-	"navigation/path" ], function( jQuery ) {
+	"./navigation/path" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
