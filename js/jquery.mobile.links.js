@@ -4,7 +4,7 @@
 //>>group: Utilities
 
 define( [ "jquery",
-	"jquery.mobile.core",
+	"./jquery.mobile.core",
 	"navigation/path" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
