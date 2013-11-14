@@ -23,7 +23,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	initSelector: ":jqmData(role='collapsible-set'),:jqmData(role='collapsibleset')",
 
 	options: $.extend( {
-		enhanced: false,
+		enhanced: false
 	}, $.mobile.collapsible.defaults ),
 
 	_handleCollapsibleExpand: function( event ) {
