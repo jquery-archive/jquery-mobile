@@ -284,4 +284,44 @@
 		$panel.panel( "open" );
 	});
 
+	// Test for https://github.com/jquery/jquery-mobile/issues/6693
+	asyncTest( "link unrelated to closing the panel does not close the panel", function() {
+		var panel = $( "#panel-test-ignore-unrelated-link" ),
+			eventNs = ".ignoreUnrelatedLinkClick";
+
+		$( "#unrelated-link" ).one( "click", function( event ) {
+			event.preventDefault();
+		});
+
+		$.testHelper.detailedEventCascade([
+			function() {
+				panel.panel( "open" );
+			},
+
+			{
+				panelopen: { src: panel, event: "panelopen" + eventNs + "1" }
+			},
+
+			function( result ) {
+				deepEqual( result.panelopen.timedOut, false, "Panel opened successfully" );
+				$( "#unrelated-link" ).click();
+			},
+
+			{
+				panelclose: { src: panel, event: "panelclose" + eventNs + "2" }
+			},
+
+			function( result ) {
+				deepEqual( result.panelclose.timedOut, true, "Panel did not close in response to unrelated link click" );
+				panel.panel( "close" );
+			},
+
+			{
+				panelclose: { src: panel, event: "panelclose" + eventNs + "3" }
+			},
+
+			start
+		]);
+	});
+
 }( jQuery ));
