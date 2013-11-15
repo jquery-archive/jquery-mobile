@@ -165,6 +165,41 @@
 					</div>
 				</div>
 			</div><!--/demo-html -->
+		<h2>Filter Collapsible Set and collapsible children</h2>
+		<div data-demo-html="true">
+			<form>
+				<input data-type="search" id="searchForCollapsibleSetChildren"></input>
+			</form>
+				<div data-role="collapsible-set" data-filter="true" data-children="> div, > div div ul li" data-inset="true" data-inset="true" id="collapsiblesetForFilterChildren" data-input="#searchForCollapsibleSetChildren">
+					<div data-role="collapsible" data-filtertext="Animals Cats Dogs Lizards snakes">
+						<h3>Animals</h3>
+						<ul data-role="listview" data-inset="false">
+							<li data-filtertext="Animals Cats">Cats</li>
+							<li data-filtertext="Animals Dogs">Dogs</li>
+							<li data-filtertext="Animals Lizards">Lizards</li>
+							<li data-filtertext="Animals Snakes">Snakes</li>
+						</ul>
+					</div>
+					<div data-role="collapsible" data-filtertext="Cars Acura Audi BMW Cadillac">
+						<h3>Cars</h3>
+						<ul data-role="listview" data-inset="false">
+							<li data-filtertext="Cars Acura">Acura</li>
+							<li data-filtertext="Cars Audi">Audi</li>
+							<li data-filtertext="Cars BMW">BMW</li>
+							<li data-filtertext="Cars Cadillac">Cadillac</li>
+						</ul>
+					</div>
+					<div data-role="collapsible" data-filtertext="Planets Earth Jupiter Mars Mercury">
+						<h3>Planets</h3>
+						<ul data-role="listview" data-inset="false">
+							<li data-filtertext="Planets Acura">Earth</li>
+							<li data-filtertext="Planets Jupiter">Jupiter</li>
+							<li data-filtertext="Planets Mars">Mars</li>
+							<li data-filtertext="Planets Mercury">Mercury</li>
+						</ul>
+					</div>
+				</div>
+			</div><!--/demo-html -->
 		<h2>Filter Anything</h2>
 		<p>The widget can be used for filtering on any element containing other elements, like a <code>div</code> containing <code>p</code> elements.
 			</p>
