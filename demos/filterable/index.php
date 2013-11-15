@@ -130,7 +130,41 @@
 					<option value="J">Option J</option>
 				</select>
 			</div>
-
+		<h2>Filter Collapsible Set</h2>
+		<div data-demo-html="true">
+			<form>
+				<input data-type="search" id="searchForCollapsibleSet"></input>
+			</form>
+				<div data-role="collapsible-set" data-filter="true" data-inset="true" data-inset="true" id="collapsiblesetForFilter" data-input="#searchForCollapsibleSet">
+					<div data-role="collapsible" data-filtertext="Animals">
+						<h3>Animals</h3>
+						<ul data-role="listview" data-inset="false">
+							<li>Cats</li>
+							<li>Dogs</li>
+							<li>Lizards</li>
+							<li>Snakes</li>
+						</ul>
+					</div>
+					<div data-role="collapsible" data-filtertext="Cars">
+						<h3>Cars</h3>
+						<ul data-role="listview" data-inset="false">
+							<li>Acura</li>
+							<li>Audi</li>
+							<li>BMW</li>
+							<li>Cadillac</li>
+						</ul>
+					</div>
+					<div data-role="collapsible" data-filtertext="Planets">
+						<h3>Planets</h3>
+						<ul data-role="listview" data-inset="false">
+							<li>Earth</li>
+							<li>Jupiter</li>
+							<li>Mars</li>
+							<li>Mercury</li>
+						</ul>
+					</div>
+				</div>
+			</div><!--/demo-html -->
 		<h2>Filter Anything</h2>
 		<p>The widget can be used for filtering on any element containing other elements, like a <code>div</code> containing <code>p</code> elements.
 			</p>
