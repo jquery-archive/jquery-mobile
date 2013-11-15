@@ -42,8 +42,7 @@ $.widget( "mobile.collapsible", {
 		var elem = this.element,
 			ui = {
 				accordion: elem
-					.closest( ":jqmData(role='collapsible-set')" +
-						( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) )
+					.closest( ":jqmData(role='collapsible-set'), :jqmData(role='collapsibleset')" )
 					.addClass( "ui-collapsible-set" )
 			};
 
