@@ -16,7 +16,7 @@ $.testHelper.delayStart();
 			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
 
-	module('jquery.mobile.navigation.js', {
+	module('jquery.mobile.navigation', {
 		setup: function() {
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;

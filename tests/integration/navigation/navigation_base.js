@@ -8,7 +8,7 @@
 		baseTagEnabled = $.mobile.dynamicBaseTagEnabled,
 		baseTagSupported = $.support.dynamicBaseTag;
 
-	module('jquery.mobile.navigation.js - base tag', {
+	module('jquery.mobile.navigation:base tag', {
 		setup: function(){
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;

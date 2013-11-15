@@ -51,7 +51,7 @@
 				$.mobile.navigate.history.activeIndex = 0;
 			};
 
-	module('jquery.mobile.navigation.js', {
+	module('jquery.mobile.transitions', {
 		setup: function(){
 
 
