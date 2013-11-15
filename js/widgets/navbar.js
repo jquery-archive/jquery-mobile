@@ -6,9 +6,9 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 
-define([ 
-	"jquery", 
-	"../widget", 
+define([
+	"jquery",
+	"../widget",
 	"../grid" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
