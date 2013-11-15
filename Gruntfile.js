@@ -99,7 +99,7 @@ module.exports = function( grunt ) {
 				},
 				theme: {
 					src: "css/themes/default/jquery.mobile.theme.css",
-					unminified: name + ".theme<%= versionSuffix %>.css",
+					unminified: name + ".theme<%= versionSuffix %>.css"
 				},
 				bundle: {
 					src: "css/themes/default/jquery.mobile.css",
@@ -107,15 +107,19 @@ module.exports = function( grunt ) {
 				},
 				inlinesvg: {
 					src: "css/themes/default/jquery.mobile.inline-svg.css",
-					unminified: name + ".inline-svg<%= versionSuffix %>.css",
+					unminified: name + ".inline-svg<%= versionSuffix %>.css"
 				},
 				inlinepng: {
 					src: "css/themes/default/jquery.mobile.inline-png.css",
-					unminified: name + ".inline-png<%= versionSuffix %>.css",
+					unminified: name + ".inline-png<%= versionSuffix %>.css"
 				},
 				externalpng: {
 					src: "css/themes/default/jquery.mobile.external-png.css",
-					unminified: name + ".external-png<%= versionSuffix %>.css",
+					unminified: name + ".external-png<%= versionSuffix %>.css"
+				},
+				icons: {
+					src: "css/themes/default/jquery.mobile.icons.css",
+					unminified: name + ".icons<%= versionSuffix %>.css"
 				}
 			},
 			getCSSFiles: function( destDir ) {
@@ -155,6 +159,8 @@ module.exports = function( grunt ) {
 				"<%= files.css.inlinepng.minified %>",
 				"<%= files.css.externalpng.unminified %>",
 				"<%= files.css.externalpng.minified %>",
+				"<%= files.css.icons.unminified %>",
+				"<%= files.css.icons.minified %>",
 
 				"images/*.*",
 				"images/icons-png/**"
@@ -399,6 +405,14 @@ module.exports = function( grunt ) {
 							}
 						);
 						content = content.replace( /\.php/gi, ".html" );
+
+						// Demos that separately refer to the structure need to be processed here
+						content = content.replace( /css\/structure\/jquery\.mobile\.structure\.css/gi,
+							path.join( "css", "themes", "default", processedName + ".structure" + ".min.css" ) );
+
+						// References to the icons CSS file need to be processed here
+						content = content.replace( /css\/themes\/default\/jquery\.mobile\.icons\.css/gi,
+							path.join( "..", "jquery.mobile.icons.min.css" ) );
 						return content;
 					}
 				},
