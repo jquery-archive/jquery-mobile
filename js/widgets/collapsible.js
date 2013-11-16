@@ -163,14 +163,27 @@ $.widget( "mobile.collapsible", {
 		return ui;
 	},
 
-	refresh: function() {
-		var key, options = {};
+	refresh: function( collapsibleSetOptions ) {
+		var key, options = {}, opts = {};
 
-		for ( key in $.mobile.collapsible.defaults ) {
-			options[ key ] = this.options[ key ];
+		if ( collapsibleSetOptions && typeof collapsibleSetOptions  === "object" ) {
+			// if refreshed by collapsibleset.
+			for ( key in collapsibleSetOptions ) {
+				if ( this.options[ key ] == null ) {
+					options[ key ] = collapsibleSetOptions[ key ];
+					opts[ key ] = null;
+				}
+			}
+		} else {
+			for ( key in $.mobile.collapsible.defaults ) {
+					options[ key ] = this.options[ key ];
+			}
 		}
-
 		this._setOptions( options );
+		// recover options.
+		for ( key in opts ) {
+			this.options[ key ] = opts[ key ];
+		}
 	},
 
 	_setOptions: function( options ) {
