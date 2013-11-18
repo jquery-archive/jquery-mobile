@@ -54,22 +54,22 @@ define([
             }).then( start );
 
         });
-//
-//		$.testHelper.excludeFileProtocol(function(){
-//			asyncTest( "loading the init library triggers mobilinit on the document", function(){
-//				var initFired = false;
-//				expect( 1 );
-//
-//				$(window.document).one('mobileinit', function(event){
-//					initFired = true;
-//				});
-//
-//				$.testHelper.reloadModule( libName ).then(function() {
-//					ok(initFired, "init fired");
-//				}).then( start );
-//			});
-//		});
-//
+
+		$.testHelper.excludeFileProtocol(function(){
+			asyncTest( "loading the init library triggers mobilinit on the document", function(){
+				var initFired = false;
+				expect( 1 );
+
+				$(window.document).one('mobileinit', function(event){
+					initFired = true;
+				});
+
+				$.testHelper.reloadModule( libName ).then(function() {
+					ok(initFired, "init fired");
+				}).then( start );
+			});
+		});
+
 //        asyncTest( "enhancements are skipped when the browser is not grade A", function(){
 //            setGradeA(false);
 //            $.testHelper.reloadModule( libName ).then(function() {
