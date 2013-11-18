@@ -3,6 +3,11 @@ module.exports = function( grunt ) {
 
 	var _ = grunt.util._,
 
+		replaceCombinedCssReference = function( content, processedName ) {
+			return content.replace( /\.\.\/css\//, "css/" )
+				.replace( /jquery\.mobile\.css/gi, processedName + ".min.css" );
+		},
+
 		// Ensure that modules specified via the --modules option are in the same
 		// order as the one in which they appear in js/jquery.mobile.js. To achieve
 		// this, we parse js/jquery.mobile.js and reconstruct the array of
@@ -386,8 +391,7 @@ module.exports = function( grunt ) {
 						content = content.replace( /_assets\/js\/">/gi, "_assets/js/index.js\">" );
 						content = content.replace( /\.\.\/js\//gi, "js/" );
 						content = content.replace( /js\/"/gi, "js/" + processedName + ".min.js\"" );
-						content = content.replace( /\.\.\/css\//gi, "css/" );
-						content = content.replace( /jquery\.mobile\.css/gi, processedName + ".min.css" );
+						content = replaceCombinedCssReference( content, processedName );
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
 							function( match, includePath /*, offset, string */ ) {
 								var fileToInclude, newSrcPath = srcPath;
@@ -425,6 +429,28 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
+			"demos.backbone": {
+				options: {
+					processContent: function( content /*, srcPath */ ) {
+						var processedName = grunt.config.process( name + "<%= versionSuffix %>" );
+						content = content.replace( /"jquery": "\.\.\/\.\.\/\.\.\/js\/jquery"/,
+								"\"jquery\": \"../../js/jquery\"" );
+						content = replaceCombinedCssReference( content, processedName );
+
+						// Update dependency to jquery.mobile claimed by jquerymobile.js
+						content = content.replace( /\[ "\.\.\/\.\.\/js\/\?noext" \]/,
+							"[ \"../../../" + processedName + "\" ]" );
+						return content;
+					}
+				},
+				files: [
+					{
+						expand: true,
+						src: [ "demos/backbone-requirejs/**/*" ],
+						dest: dist
+					}
+				]
+			},
 			"demos.unprocessed": {
 				files: [
 					{
@@ -449,7 +475,7 @@ module.exports = function( grunt ) {
 					},
 					{
 						expand: true,
-						src: [ "demos/**/*", "!**/*.php", "!**/*.html" ],
+						src: [ "demos/**/*", "!**/*.php", "!**/*.html", "!demos/backbone-requirejs/**/*" ],
 						dest: dist
 					}
 				]
@@ -726,7 +752,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "css", [ "cssbuild" ] );
 	grunt.registerTask( "css:release", [ "css", "cssmin" ] );
 
-	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed" ] );
+	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed", "copy:demos.backbone" ] );
 
 	grunt.registerTask( "cdn", [ "release:init", "clean:tmp", "config:copy:noversion", "copy:noversion", "hash-manifest:noversion", "compress:cdn-noversion", "clean:tmp" ] );
 
