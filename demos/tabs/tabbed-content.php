@@ -9,10 +9,12 @@
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../js/jquery.js"></script>
+	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
+	<div data-demo-html="true">
 		<div data-role="tabs">
 			<div data-role="navbar">
 				<ul>
@@ -22,24 +24,25 @@
 			    </ul>
 			</div>
 
-		<div id="one" class="ui-content">
-		<h1>First tab contents</h1>
+			<div id="one" class="ui-content">
+			<h1>First tab contents</h1>
+			</div>
+			<div id="two" class="ui-content">
+				<ul data-role="listview">
+				    <li><a href="#">Acura</a></li>
+				    <li><a href="#">Audi</a></li>
+				    <li><a href="#">BMW</a></li>
+				    <li><a href="#">Cadillac</a></li>
+				    <li><a href="#">Ferrari</a></li>
+				</ul>
+			</div>
 		</div>
-		<div id="two" class="ui-content">
-			<ul data-role="listview">
-			    <li><a href="#">Acura</a></li>
-			    <li><a href="#">Audi</a></li>
-			    <li><a href="#">BMW</a></li>
-			    <li><a href="#">Cadillac</a></li>
-			    <li><a href="#">Ferrari</a></li>
-			</ul>
-		</div>
-</div>
 		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
-		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-		<p>Copyright 2013 The jQuery Foundation</p>
+			<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+			<p>Copyright 2013 The jQuery Foundation</p>
 		</div><!-- /footer -->
-
-	</div><!-- /page -->
-	</body>
-	</html>
+		
+	</div>
+</div><!-- /page -->
+</body>
+</html>

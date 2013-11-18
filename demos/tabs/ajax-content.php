@@ -1,1 +1,1 @@
-<div class="tabs-list-content">I am ajax tab content i was pulled in from ajax-content.php </div>
+<div class="tablist-content">I am ajax tab content i was pulled in from ajax-content.php </div>

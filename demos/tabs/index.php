@@ -11,6 +11,18 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
+	<style id="inset-tablist">
+		.tablist-left {
+			width: 25%;
+			display: inline-block;
+		}
+		.tablist-content {
+			width: 60%;
+			display: inline-block;
+			vertical-align: top;
+			margin-left: 5%;
+		}
+	</style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -29,6 +41,7 @@
 		<p>The jQuery mobile tabs widget is actually just an extension of the jQuery ui tabs widget and takes all the same options and methods</p>
 			</p>
 		<h2>Use navbar for tabs</h2>
+		<div data-demo-html="true">
 			<div data-role="tabs" id="tabs">
 		      <div data-role="navbar">
 			    <ul>
@@ -50,18 +63,20 @@
 		        </ul>
 		      </div>
 		    </div>
+		</div>
+		<div data-demo-html="true" data-demo-css="#inset-tablist">
 		    <h2>Use inset listview for tabs</h2>
 		    <div data-role="tabs">
-		      	<ul data-role="listview" data-inset="true" class="tabs-list-left">
+		      	<ul data-role="listview" data-inset="true" class="tablist-left">
 			      <li><a href="#one" data-ajax="false">one</a></li>
 			      <li><a href="#two" data-ajax="false">two</a></li>
 			      <li><a href="ajax-content.php" data-ajax="false">three</a></li>
 			    </ul>
-			    <div id="one" class="ui-body-d tabs-list-content">
+			    <div id="one" class="ui-body-d tablist-content">
 		        <h1>First tab contents</h1>
 		      </div>
 
-		        <ul id="two" class="tabs-list-content" data-role="listview" data-inset="true">
+		        <ul id="two" class="tablist-content" data-role="listview" data-inset="true">
 		            <li><a href="#">Acura</a></li>
 		            <li><a href="#">Audi</a></li>
 		            <li><a href="#">BMW</a></li>
@@ -70,6 +85,7 @@
 		        </ul>
 
 		    </div>
+		</div>
 		    <h2>Tabbed page content</h2>
 		    <p>You can also use tabs to swap out an enitre pages content <a data-ajax="false" href="tabbed-content.php">Tabbed Content Pages</a></p>
 
