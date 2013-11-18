@@ -269,8 +269,8 @@
 
 		<p>To set a custom filtering function that will become the new default for all filterable widgets, override the <code>filterCallback</code> option in the filterable widget prototype in a "mobileinit" signal handler:</p>
 
-<pre><code>$.mobile.document.one( "mobileinit", function() {
-	$.mobile.filterable.prototype.filterCallback = function( index, searchValue ) {
+<pre><code>$( document ).one( "mobileinit", function() {
+	$.mobile.filterable.prototype.options.filterCallback = function( index, searchValue ) {
 		// In this function the keyword "this" refers to the element for which the
 		// code must decide whether it is to be filtered or not.
 		// A return value of true indicates that the element referred to by the
