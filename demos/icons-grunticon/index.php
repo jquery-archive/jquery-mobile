@@ -1,15 +1,26 @@
 <!doctype HTML>
 <html>
 	<head>
-		<title>Icons</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Grunticon Loader - jQuery Mobile Demos</title>
 		<link rel="shortcut icon" href="../favicon.ico">
-		<script>
+		<script id="grunticon-loader">
 			/* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
+			// Selects the correct stylesheet based on feature detects
 			window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!(!t.document.createElementNS||!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||window.opera&&-1===navigator.userAgent.indexOf("Chrome")),o=function(o){var r=t.document.createElement("link"),a=t.document.getElementsByTagName("script")[0];r.rel="stylesheet",r.href=e[o&&n?0:o?1:2],a.parentNode.insertBefore(r,a)},r=new t.Image;r.onerror=function(){o(!1)},r.onload=function(){o(1===r.width&&1===r.height)},r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
+
+			// Point to style sheet locations
 			grunticon( [ "../../css/themes/default/jquery.mobile.inline-svg.css", "../../css/themes/default/jquery.mobile.inline-png.css", "../../css/themes/default/jquery.mobile.external-png.css" ] );
 		</script>
-		<noscript><link href="../../css/themes/default/jquery.mobile.fallback.css" rel="stylesheet"></noscript>
+		<!-- Fall back style sheet incase javascript is turned off -->
+		<noscript id="grunticon-fallback"><link href="../../css/themes/default/jquery.mobile.fallback.css" rel="stylesheet"></noscript>
+		</span>
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+		<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+		<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 		<script src="../../js/jquery.js"></script>
+		<script src="../_assets/js/"></script>
 		<script src="../../js/"></script>
 		<script>
 			$( document ).on( "pagecreate", function() {
@@ -30,11 +41,10 @@
 					}
 					if ( event.target.id === "opt-notext" ) {
 						if ( $( "#opt-notext" ).prop( "checked" ) ) {
-							$( "#test button" ).button( "option", "iconpos", "notext" );
+							$( "#test button" ).addClass( "ui-btn-icon-notext" ).removeClass( "ui-btn-icon-left" );
 						} else {
-							$( "#test button" ).button( "option", "iconpos", "left" );
+							$( "#test button" ).removeClass( "ui-btn-icon-notext" ).addClass( "ui-btn-icon-left" );
 						}
-						$( "#test button" ).button( "refresh" );
 					}
 					if ( event.target.id === "opt-alt" ) {
 						if ( $( "#opt-alt" ).prop( "checked" ) ) {
@@ -63,17 +73,51 @@
 						$( "#icon-page" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( themeClass );
 					}
 				});
+				var stylesheet = $( "head" ).find( "link" ).eq( "1" ).attr( "href" ),
+					svg = /svg/.test( "svg" ),
+					external = /external/.test( stylesheet ),
+					using = ( ( external? "External ":"Inline " ) + ( svg? "SVG's " : "PNG's" ) );
+
+				$( "#grunticon-stylesheet" ).text( stylesheet );
+				$( "#grunticon-icon-type" ).text( using );
 			});
 		</script>
 	</head>
 	<body>
+		<div data-role="page" class="jqm-demos" data-quicklinks="true">
+			<div data-role="header" class="jqm-header">
+				<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
+				<p><span class="jqm-version"></span> Demos</p>
+				<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
+				<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+			</div><!-- /header -->
 
-		<div data-role="page" id="icon-page">
-			<div data-role="header">
-			<h1>Icons</h1>
-			</div>
-			<div role="main" class="ui-content">
+			<div role="main" class="ui-content jqm-content">
+				<h1>Grunticon</h1>
+				<p>Grunticon is a grunt plugin built by the filament group which takes svg's and creates stylesheets and png icons for use in your webpage see <a href="https://github.com/filamentgroup/grunticon">https://github.com/filamentgroup/grunticon</a></p>
+				<h2>Grunticon Loader Script</h2>
+				<span data-demo-html="#grunticon-fallback" data-demo-js="#grunticon-loader"></span>
 
+				<p>jQuery Mobile uses grunticon to generate svg icons with png fall backs and the style sheets for these. By default the library uses inline svg's but falls back to individual png's if inline svg is not supported.</p>
+
+				<p>However you can further optimize for a wider variety of devices by using a loader script for selecting the approriate style sheet this reduces data transfer and the length of the style sheet</p>
+
+				<p>To use the grunticon loader place the script in the view source button below in the head of your page before all other stylesheets or scripts. In the script you will see a call to the grunticon function at the bottom which is being passed an array of three stylesheet url's you will want to change this to match your setup or to point at the corresponding stylesheets on the cdn</p>
+
+				<span data-demo-js="#grunticon-loader"></span>
+
+				<p>After this script you will want to place a fallback style sheet in a noscript tag incase javascript is disabled link in the view source button below</p>
+
+				<span data-demo-html="#grunticon-fallback"></span>
+
+				<h2>So what style sheet was loaded?</h2>
+				<p>Based on your browsers abilities the style sheet loaded was</p>
+				<h3 id="grunticon-stylesheet"></h3>
+				<p> Which means you are seeing</p>
+				<h3 id="grunticon-icon-type"></h3>
+
+				<h2>Grunticon Icons</h2>
+				<p> All the icons in the buttons below were loaded using the grunticon loader script use the toggle buttons to try all different options for icon style</p>
 				<form id="settings" class="ui-mini">
 					<div class="ui-field-contain">
 						<fieldset data-role="controlgroup" data-type="horizontal" id="theme-setting">
@@ -155,66 +199,18 @@
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-video">video</button>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-alert">alert</button>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete">delete</button>
-
-						<div class="ui-field-contain">
-							<fieldset data-role="controlgroup">
-								<legend>Checkbox:</legend>
-								<label for="checkbox-v-1a">One</label>
-								<input type="checkbox" name="checkbox-v-1a" id="checkbox-v-1a">
-								<label for="checkbox-v-1b">Two</label>
-								<input type="checkbox" name="checkbox-v-1b" id="checkbox-v-1b">
-								<label for="checkbox-v-1c">Three</label>
-								<input type="checkbox" name="checkbox-v-1c" id="checkbox-v-1c">
-							</fieldset>
-						</div>
-
-						<div class="ui-field-contain"><fieldset data-role="controlgroup"><legend>Radio:</legend>
-								<label for="radio-choice-v-1a">One</label>
-								<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1a" value="one" checked="checked">
-								<label for="radio-choice-v-1b">Two</label>
-								<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1b" value="two">
-								<label for="radio-choice-v-1c">Three</label>
-								<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1c" value="three">
-							</fieldset>
-						</div>
-
-						<div class="ui-field-contain">
-							<label for="select-custom">Multiple select:</label>
-							<select name="select-custom" id="select-custom" multiple="multiple" data-native-menu="false">
-								<option>Choose options</option>
-								<option value="1">The 1st Option</option>
-								<option value="2" selected="selected">The 2nd Option</option>
-								<option value="3">The 3rd Option</option>
-								<option value="4" selected="selected">The 4th Option</option>
-							</select>
-						</div>
-
-						<div class="ui-field-contain">
-							<label for="search-1">Search:</label>
-							<input type="search" name="search-1" id="search-1" value="">
-						</div>
-					</form>
-
-					<div data-role="collapsible">
-						<h4>Collapsibe</h4>
-					<p>I'm the collapsible content.</p>
-					</div>
-
-					<ul data-role="listview" data-inset="true">
-						<li><a href="#">List item</a></li>
-						<li><a href="#">List item</a></li>
-						<li><a href="#">List item</a></li>
-					</ul>
-
-					<a href="#popup" data-rel="popup" class="ui-btn ui-shadow ui-corner-all">Popup</a>
-					<div data-role="popup" id="popup" style="max-width:280px">
-							<a href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-						<p>I have a close button at the top right corner with simple HTML markup.</p>
-					</div>
 				</div>
 
-			</div>
-		</div>
+				</div><!-- /content -->
+
+		<?php include( '../jqm-navmenu.php' ); ?>
+
+		<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+			<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
+			<p>Copyright 2013 The jQuery Foundation</p>
+		</div><!-- /footer -->
+
+	<?php include( '../jqm-search.php' ); ?>
 
 	</body>
 </html>
