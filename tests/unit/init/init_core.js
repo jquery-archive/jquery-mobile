@@ -104,28 +104,28 @@ define([
                 }
             ).then( start );
         });
-//
-//		asyncTest( "mobile viewport class is defined on the first page's parent", function(){
-//			expect( 1 );
-//			$.testHelper.reloadModule( libName ).then(
-//				function() {
-//					var firstPage = findFirstPage();
-//
-//					ok(firstPage.parent().hasClass("ui-mobile-viewport"), "first page has viewport");
-//				}
-//			).then( start );
-//		});
-//
-//		asyncTest( "mobile page container is the first page's parent", function(){
-//			expect( 1 );
-//			$.testHelper.reloadModule( libName ).then(
-//				function() {
-//					var firstPage = findFirstPage();
-//
-//					deepEqual($.mobile.pageContainer[0], firstPage.parent()[0]);
-//				}
-//			).then( start );
-//		});
+
+		asyncTest( "mobile viewport class is defined on the first page's parent", function(){
+			expect( 1 );
+			$.testHelper.reloadModule( libName ).then(
+				function() {
+					var firstPage = findFirstPage();
+
+					ok(firstPage.parent().hasClass("ui-mobile-viewport"), "first page has viewport");
+				}
+			).then( start );
+		});
+
+		asyncTest( "mobile page container is the first page's parent", function(){
+			expect( 1 );
+			$.testHelper.reloadModule( libName ).then(
+				function() {
+					var firstPage = findFirstPage();
+
+					deepEqual($.mobile.pageContainer[0], firstPage.parent()[0]);
+				}
+			).then( start );
+		});
 //
 //		test( "pages with a data-url attribute are left with the original value", function(){
 //			deepEqual($("#bar").jqmData('url'), "bak");
