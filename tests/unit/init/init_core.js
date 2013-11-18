@@ -126,31 +126,31 @@ define([
 				}
 			).then( start );
 		});
-//
-//		test( "pages with a data-url attribute are left with the original value", function(){
-//			deepEqual($("#bar").jqmData('url'), "bak");
-//		});
-//
-//		// NOTE the next two tests work on timeouts that assume a page will be
-//		// created within 2 seconds it'd be great to get these using a more
-//		// reliable callback or event
-//		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
-//
-//			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" );
-//
-//			$(document).one("mobileinit", function(){
-//				$.mobile.autoInitializePage = true;
-//			});
-//
-//			location.hash = "";
-//
-//			reloadCoreNSandInit().then(
-//				function() {
-//					deepEqual( $( "#autoinit-on.ui-page" ).length, 1 );
-//				}
-//			).then( start );
-//		});
-//
+
+		test( "pages with a data-url attribute are left with the original value", function(){
+			deepEqual($("#bar").jqmData('url'), "bak");
+		});
+
+		// NOTE the next two tests work on timeouts that assume a page will be
+		// created within 2 seconds it'd be great to get these using a more
+		// reliable callback or event
+		asyncTest( "page does auto-initialize at domready when autoinitialize option is true (default) ", function(){
+
+			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-on" } ).prependTo( "body" );
+
+			$(document).one("mobileinit", function(){
+				$.mobile.autoInitializePage = true;
+			});
+
+			location.hash = "";
+
+			reloadCoreNSandInit().then(
+				function() {
+					deepEqual( $( "#autoinit-on.ui-page" ).length, 1 );
+				}
+			).then( start );
+		});
+
 //
 //		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
 //			$(document).one("mobileinit", function(){
