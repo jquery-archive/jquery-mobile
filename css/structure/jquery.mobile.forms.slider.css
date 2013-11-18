@@ -32,7 +32,6 @@ input.ui-slider-input {
 	appearance: none;
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
-	-ms-box-sizing: content-box;
 	box-sizing: content-box;
 }
 .ui-slider-input::-webkit-outer-spin-button,

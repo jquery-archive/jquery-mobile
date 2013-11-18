@@ -48,7 +48,6 @@
 		width: 78%;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
-		-ms-box-sizing: border-box;
 		box-sizing: border-box;
 	}
 	/* ui-hide-label deprecated in 1.4. TODO: Remove in 1.5 */
