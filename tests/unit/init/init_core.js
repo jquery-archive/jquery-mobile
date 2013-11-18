@@ -40,18 +40,9 @@ define([
         // NOTE for the following two tests see index html for the binding
         asyncTest( "mobile.page is available when mobile init is fired", function(){
 			expect(1);
-			// NOTE important to use $.fn.one here to make sure library reloads don't fire
-			//      the event before the test check below
-			$(document).one( "mobileinit", function(){
-				ns = $.mobile.ns;
-				mobilePage = $.mobile.page;
-
-				$.mobile.loader.prototype.options.text = "mobileinit";
-				$.mobile.loader.prototype.options.textVisible = true;
-			});
 
 			$.testHelper.reloadModule( libName ).then(function() {
-            	ok( mobilePage !== undefined, "$.mobile.page is defined" );
+            	ok( shared.page !== undefined, "$.mobile.page is defined" );
 			}).then( start );
         });
 
