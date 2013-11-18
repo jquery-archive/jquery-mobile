@@ -162,6 +162,12 @@
 	</ul>
 </li>
 <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
+	<h3>Grouping content</h3>
+	<ul>
+		<li data-filtertext="blocks content formatting sections heading"><a href="../body-bar-classes/" data-ajax="false">Grouping and dividing content</a></li>
+	</ul>
+</li>
+<li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
 	<h3>3rd party API</h3>
 	<ul>
 		<li data-filtertext="backbone requirejs navigation router"><a href="../backbone-requirejs/" data-ajax="false">Backbone RequireJS</a></li>
