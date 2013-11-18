@@ -70,14 +70,14 @@ define([
 			});
 		});
 
-//        asyncTest( "enhancements are skipped when the browser is not grade A", function(){
-//            setGradeA(false);
-//            $.testHelper.reloadModule( libName ).then(function() {
-//                //NOTE easiest way to check for enhancements, not the most obvious
-//                ok( !$( "html" ).hasClass( "ui-mobile" ), "html elem doesn't have class ui-mobile" );
-//            }).then( start );
-//
-//        });
+        asyncTest( "enhancements are skipped when the browser is not grade A", function(){
+            setGradeA(false);
+            $.testHelper.reloadModule( libName ).then(function() {
+                //NOTE easiest way to check for enhancements, not the most obvious
+                ok( !$( "html" ).hasClass( "ui-mobile" ), "html elem doesn't have class ui-mobile" );
+            }).then( start );
+
+        });
 //
 //        asyncTest( "enhancements are added when the browser is grade A", function(){
 //            expect( 1 );
