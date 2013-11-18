@@ -151,28 +151,27 @@ define([
 			).then( start );
 		});
 
-//
-//		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
-//			$(document).one("mobileinit", function(){
-//				$.mobile.autoInitializePage = false;
-//			});
-//
-//			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" );
-//
-//			location.hash = "";
-//
-//
-//			reloadCoreNSandInit().then(
-//				function() {
-//					deepEqual( $( "#autoinit-off.ui-page" ).length, 0 );
-//
-//					$(document).bind("mobileinit", function(){
-//						$.mobile.autoInitializePage = true;
-//					});
-//
-//					return reloadCoreNSandInit();
-//				}
-//			).then( start );
-//		});
+		asyncTest( "page does not initialize at domready when autoinitialize option is false ", function(){
+			$(document).one("mobileinit", function(){
+				$.mobile.autoInitializePage = false;
+			});
+
+			$( "<div />", { "data-nstest-role": "page", "id": "autoinit-off" } ).prependTo( "body" );
+
+			location.hash = "";
+
+
+			reloadCoreNSandInit().then(
+				function() {
+					deepEqual( $( "#autoinit-off.ui-page" ).length, 0 );
+
+					$(document).bind("mobileinit", function(){
+						$.mobile.autoInitializePage = true;
+					});
+
+					return reloadCoreNSandInit();
+				}
+			).then( start );
+		});
 	});
 });
