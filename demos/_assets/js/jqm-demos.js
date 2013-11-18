@@ -78,7 +78,7 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	})
 
 	$( ".jqm-navmenu-link" ).on( "click", function() {
-		page.find( ".jqm-navmenu-panel" ).panel( "open" );
+		page.find( ".jqm-navmenu-panel:not(.jqm-panel-page-nav)" ).panel( "open" );
 	});
 
 	// Turn off autocomplete / correct for demos search
@@ -97,12 +97,12 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		icon: false,
 		autodividers: true,
 		autodividersSelector: function ( li ) {
-    		return "";
-  		},
-  		arrowKeyNav: true,
-  		enterToNav: true,
-  		highlight: true,
-  		submitTo: searchUrl
+			return "";
+		},
+		arrowKeyNav: true,
+		enterToNav: true,
+		highlight: true,
+		submitTo: searchUrl
 	}).filterable();
 
 	// Initalize search page list and remove collapsibles

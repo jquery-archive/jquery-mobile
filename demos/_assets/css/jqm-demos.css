@@ -195,7 +195,15 @@
 	opacity: .4;
 	filter: Alpha(Opacity=40);
 }
-
+.jqm-demos .jqm-navmenu-panel.jqm-panel-page-nav {
+	display: none;
+	position: absolute;
+	top: 178px;
+	left: 12px;
+}
+.jqm-demos .jqm-navmenu-panel.jqm-panel-page-nav ul li:first-child a{
+	border-top: none;
+}
 /* Search */
 .jqm-search-panel .ui-panel-inner {
 	padding-top: 0;
@@ -315,6 +323,12 @@
 		-webkit-box-shadow: none;
 		-moz-box-shadow: none;
 		box-shadow: none;
+	}
+	.jqm-demos.jqm-panel-page .jqm-navmenu-panel {
+		display: none;
+	}
+	html .jqm-demos.jqm-panel-page .jqm-navmenu-panel.jqm-panel-page-nav {
+		display: block;
 	}
 	.jqm-demos .jqm-navmenu-panel .ui-panel-inner {
 		margin-top: 3em;

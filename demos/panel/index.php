@@ -13,7 +13,7 @@
 	<script src="../../js/"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos" data-quicklinks="true">
+<div data-role="page" class="jqm-demos jqm-panel-page" data-quicklinks="true">
 
 	<!-- default panel  -->
 	<div data-role="panel" id="defaultpanel">
@@ -180,6 +180,11 @@ $( "#mypanel" ).trigger( "updatelayout" );
 
 		<p>Included in the widget styles is a breakpoint preset for this behavior that kicks in at 55em (880px). This breakpoint is not applied by default to make it easier for you to write custom breakpoints that work best for your content and design. To apply the breakpoint preset, add the <code>ui-responsive-panel</code> class to the page or, in case you use external panels and/or fixed toolbars, to the page container (<code>body</code>). See an example of a <a href="../panel-responsive/" data-ajax="false">responsive panel</a> page.</p>
 
+		<div class="jqm-navmenu-panel jqm-panel-page-nav">
+			<ul class="jqm-list ui-alt-icon ui-nodisc-icon">
+				<?php include( '../jqm-contents.php' ); ?>
+			</ul>
+		</div>
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
