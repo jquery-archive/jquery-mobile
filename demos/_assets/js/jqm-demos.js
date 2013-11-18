@@ -208,14 +208,15 @@ $( document ).on( "mobileinit", function() {
 
 		},
 		submitTo: function() {
-			var form = this.element.parent().find( "form" );
+			var url,
+				form = this.element.parent().find( "form" );
 
 			form.attr( "method", "get" )
 				.attr( "action", this.options.submitTo );
 
-			var url = this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
+			url = this.options.submitTo + "?search=" + this.element.parent().find( "input" ).val();
 
-			$( ":mobile-pagecontainer" ).pagecontainer( "change", url );
+			window.location =  url;
 		},
 		enterToNav: function() {
 			var form = this.element.parent().find( "form" );
@@ -243,10 +244,11 @@ $( document ).on( "mobileinit", function() {
 			}
 		},
 		handleKeyUp: function( e ) {
-			var input = this.element.prev("form").find( "input" );
+			var search,
+				input = this.element.prev("form").find( "input" );
 
 			if ( e.which === $.ui.keyCode.DOWN ) {
-				if ( this.element.find( "li.ui-btn-active" ).length == 0 ) {
+				if ( this.element.find( "li.ui-btn-active" ).length === 0 ) {
 					this.element.find( "li:first" ).toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
 				} else {
 					this.element.find( "li.ui-btn-active a" ).toggleClass( "ui-btn-active");
@@ -266,7 +268,7 @@ $( document ).on( "mobileinit", function() {
 				this.element.find( "li.ui-btn-active" ).removeClass( "ui-btn-active" );
 
 				if ( this.options.highlight ) {
-					var search = input.val();
+					search = input.val();
 
 					this.element.find( "li" ).each(function() {
 						$( this ).removeHighlight();
