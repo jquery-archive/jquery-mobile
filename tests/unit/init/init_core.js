@@ -78,17 +78,17 @@ define([
             }).then( start );
 
         });
-//
-//        asyncTest( "enhancements are added when the browser is grade A", function(){
-//            expect( 1 );
-//            setGradeA(true);
-//            $.testHelper.reloadModule( libName ).then(
-//                function() {
-//                    ok( $("html").hasClass("ui-mobile"), "html elem has class mobile");
-//                }
-//            ).then( start );
-//        });
-//
+
+        asyncTest( "enhancements are added when the browser is grade A", function(){
+            expect( 1 );
+            setGradeA(true);
+            $.testHelper.reloadModule( libName ).then(
+                function() {
+                    ok( $("html").hasClass("ui-mobile"), "html elem has class mobile");
+                }
+            ).then( start );
+        });
+
 //        var findFirstPage = function() {
 //            return $( ":jqmData(role='page')" ).first();
 //        };
