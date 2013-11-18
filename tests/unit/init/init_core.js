@@ -89,21 +89,21 @@ define([
             ).then( start );
         });
 
-//        var findFirstPage = function() {
-//            return $( ":jqmData(role='page')" ).first();
-//        };
-//
-//        asyncTest( "active page and start page should be set to the fist page in the selected set", function(){
-//            expect( 2 );
-//            $.testHelper.reloadModule( libName ).then(
-//                function() {
-//                    var firstPage = findFirstPage();
-//
-//                    deepEqual($.mobile.firstPage[0], firstPage[0]);
-//                    deepEqual($.mobile.activePage[0], firstPage[0]);
-//                }
-//            ).then( start );
-//        });
+        var findFirstPage = function() {
+            return $( ":jqmData(role='page')" ).first();
+        };
+
+        asyncTest( "active page and start page should be set to the fist page in the selected set", function(){
+            expect( 2 );
+            $.testHelper.reloadModule( libName ).then(
+                function() {
+                    var firstPage = findFirstPage();
+
+                    deepEqual($.mobile.firstPage[0], firstPage[0]);
+                    deepEqual($.mobile.activePage[0], firstPage[0]);
+                }
+            ).then( start );
+        });
 //
 //		asyncTest( "mobile viewport class is defined on the first page's parent", function(){
 //			expect( 1 );
