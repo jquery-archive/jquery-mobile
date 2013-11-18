@@ -48,7 +48,7 @@
 		"node": ">= 0.8.0"
 	},
 	"scripts": {
-		"test": "grunt --verbose test --suites=init",
+		"test": "grunt --verbose test",
 		"lint": "grunt jshint"
 	},
 	"keywords": []
