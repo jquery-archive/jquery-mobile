@@ -1,1 +1,1 @@
-$.getScript( "../../js/" );
+define( "jquerymobile", [ "../../js/?noext" ], function() {} );
