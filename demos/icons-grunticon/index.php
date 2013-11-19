@@ -77,7 +77,7 @@
 					stylesheet = $( "head" ).find( "link" ).eq( "1" ).attr( "href" ),
 					svg = /svg/.test( "svg" ),
 					external = /external/.test( stylesheet ),
-					using = ( ( external? "External ":"Inline " ) + ( svg? "SVG's " : "PNG's" ) );
+					using = ( ( external? "External ":"Inline " ) + ( svg? "SVGs " : "PNGs" ) );
 
 				$( "#grunticon-stylesheet" ).text( stylesheet );
 					$( "<span>&nbsp;</span>" ).css({
@@ -110,30 +110,30 @@
 
 			<div role="main" class="ui-content jqm-content">
 				<h1>Grunticon</h1>
-				<p>Grunticon is a grunt plugin built by the filament group which takes svg's and creates stylesheets and png icons for use in your webpage see <a href="https://github.com/filamentgroup/grunticon">https://github.com/filamentgroup/grunticon</a></p>
+				<p>Grunticon is a grunt plugin built by the filament group which takes SVG files and creates style sheets and PNG icons for use in your webpage. See <a href="https://github.com/filamentgroup/grunticon">https://github.com/filamentgroup/grunticon</a></p>
 				<h2>Grunticon Loader Script</h2>
 				<span data-demo-html="#grunticon-fallback" data-demo-js="#grunticon-loader"></span>
 
-				<p>jQuery Mobile uses grunticon to generate svg icons with png fall backs and the style sheets for these. By default the library uses inline svg's but falls back to individual png's if inline svg is not supported.</p>
+				<p>jQuery Mobile uses grunticon to generate SVG icons with PNG fallbacks and the style sheets for these. By default the library uses inline SVGs but falls back to individual PNGs if inline SVG is not supported.</p>
 
-				<p>However you can further optimize for a wider variety of devices by using a loader script for selecting the approriate style sheet this reduces data transfer and the length of the style sheet</p>
+				<p>However, you can further optimize for a wider variety of devices by using a loader script for selecting the approriate style sheet. This reduces data transfer and the length of the style sheet.</p>
 
-				<p>To use the grunticon loader place the script in the view source button below in the head of your page before all other stylesheets or scripts. In the script you will see a call to the grunticon function at the bottom which is being passed an array of three stylesheet url's you will want to change this to match your setup or to point at the corresponding stylesheets on the cdn</p>
+				<p>To use the grunticon loader place the script in the "View Source" button below in the head of your page before all other stylesheets or scripts. In the script you will see a call to the grunticon function at the bottom which is being passed an array of three stylesheet URLs. You will want to change this to match your setup or to point at the corresponding style sheets on the CDN.</p>
 
 				<span data-demo-js="#grunticon-loader"></span>
 
-				<p>After this script you will want to place a fallback style sheet in a noscript tag incase javascript is disabled link in the view source button below</p>
+				<p>After this script you will want to place a fallback style sheet in a noscript tag, in case javascript is disabled. Link in the "View Source" button below:</p>
 
 				<span data-demo-html="#grunticon-fallback"></span>
 
 				<h2>So what style sheet was loaded?</h2>
-				<p>Based on your browsers abilities the style sheet loaded was</p>
+				<p>Based on your browser's abilities the style sheet loaded was:</p>
 				<h3 id="grunticon-stylesheet"></h3>
 				<p> Which means you are seeing</p>
 				<h3 id="grunticon-icon-type"></h3>
 
 				<h2>Grunticon Icons</h2>
-				<p> All the icons in the buttons below were loaded using the grunticon loader script use the toggle buttons to try all different options for icon style</p>
+				<p> All the icons in the buttons below were loaded using the grunticon loader script. Use the toggle buttons to try all different options for icon style.</p>
 				<form id="settings" class="ui-mini">
 					<div class="ui-field-contain">
 						<fieldset data-role="controlgroup" data-type="horizontal" id="theme-setting">
