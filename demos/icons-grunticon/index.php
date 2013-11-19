@@ -70,7 +70,7 @@
 					if ( event.target.name === "theme" ) {
 						var themeClass = $( "#theme-setting input:checked" ).attr( "id" );
 
-						$( "#icon-page" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( themeClass );
+						$( "#test" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( themeClass );
 					}
 				});
 				var eye,
@@ -163,7 +163,7 @@
 					</div>
 				</form>
 
-				<div id="test">
+				<div id="test" class="ui-page-theme-a ui-content">
 					<form>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-action">action</button>
 						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d-l">arrow-d-l</button>
