@@ -73,12 +73,28 @@
 						$( "#icon-page" ).removeClass( "ui-page-theme-a ui-page-theme-b" ).addClass( themeClass );
 					}
 				});
-				var stylesheet = $( "head" ).find( "link" ).eq( "1" ).attr( "href" ),
+				var eye,
+					stylesheet = $( "head" ).find( "link" ).eq( "1" ).attr( "href" ),
 					svg = /svg/.test( "svg" ),
 					external = /external/.test( stylesheet ),
 					using = ( ( external? "External ":"Inline " ) + ( svg? "SVG's " : "PNG's" ) );
 
 				$( "#grunticon-stylesheet" ).text( stylesheet );
+					$( "<span>&nbsp;</span>" ).css({
+						"width": "200px",
+						"height": "200px",
+						"display": "block",
+						"background-size": "200px 200px",
+						"background-image": svg? "url('data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2210px%22%20viewBox%3D%220%200%2014%2010%22%20style%3D%22enable-background%3Anew%200%200%2014%2010%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpath%20fill%3D%22%23FFF%22%20d%3D%22M7%2C0C3%2C0%2C0%2C5%2C0%2C5s3%2C5%2C7%2C5s7-5%2C7-5S11%2C0%2C7%2C0z%20M7%2C8C5.343%2C8%2C4%2C6.657%2C4%2C5s1.343-3%2C3-3s3%2C1.343%2C3%2C3S8.657%2C8%2C7%2C8z%20M7%2C4%20C6.448%2C4%2C6%2C4.447%2C6%2C5s0.448%2C1%2C1%2C1s1-0.447%2C1-1S7.552%2C4%2C7%2C4z%22%2F%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3Cg%3E%3C%2Fg%3E%3C%2Fsvg%3E')": "url(../../css/themes/default/images/icons-png/eye-white.png)",
+						"background-color":  "rgba(0,0,0,.3)"
+					})
+					.insertAfter("#grunticon-icon-type");
+
+					if( !svg ) {
+						$("#grunticon-icon-type").after("<p>Pixels make me sad :(</p>");
+					} else {
+						$("#grunticon-icon-type").after("<p>Woo! Vector graphics!</p>");
+					}
 				$( "#grunticon-icon-type" ).text( using );
 			});
 		</script>
