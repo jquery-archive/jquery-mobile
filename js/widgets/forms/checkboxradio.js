@@ -116,7 +116,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		return $( "<div class='"  +
 			( this.options.wrapperClass ? this.options.wrapperClass : "" ) +
 			" ui-" + this.inputtype +
-			( this.options.disabled ? " ui-state-disabled" : "" ) + "' >" );
+			( this.options.disabled ? " ui-state-disabled" : "" ) + "' ></div>" );
 	},
 
 	_handleInputFocus: function() {
