@@ -7,7 +7,7 @@ define( [ "jquery", "../jquery.mobile.support.orientation", "./throttledresize" 
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window ) {
-	var win = $( window ),
+	var win = $.mobile.window,
 		event_name = "orientationchange",
 		get_orientation,
 		last_orientation,
