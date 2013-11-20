@@ -357,8 +357,8 @@
 				</div><!--/demo-html -->
 
 				<h2>Textinputs</h2>
-				<p>While textinputs are not officially supported by the controlgroup they can be made to work with some simple css</p>
-				<p>To make this work you will need to add one css rule and uses textinput's wrapperClass option to set two classes on the textinput wrapper</p>
+				<p>While textinputs are not officially supported by the controlgroup they can be made to work with some simple css.</p>
+				<p>To make this work you will need to add one css rule and use textinput's wrapperClass option to set two classes on the textinput wrapper.</p>
 				<div data-demo-html="true" data-demo-css="#textinput-controlgroup">
 					<label for="currency-controlgroup">Value</label>
 					<div data-role="controlgroup" data-type="horizontal">
