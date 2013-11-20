@@ -14,6 +14,12 @@
 	    <style>
 	        #demo-borders .ui-collapsible .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }
 	    </style>
+	    <style id="textinput-controlgroup">
+			.controlgroup-textinput{
+				padding-top:.22em;
+				padding-bottom:.22em;
+			}
+	    </style>
 	</head>
 	<body>
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -349,6 +355,31 @@
 					</fieldset>
 					</form>
 				</div><!--/demo-html -->
+
+				<h2>Textinputs</h2>
+				<p>While textinputs are not officially supported by the controlgroup they can be made to work with some simple css</p>
+				<p>To make this work you will need to add one css rule and uses textinput's wrapperClass option to set two classes on the textinput wrapper</p>
+				<div data-demo-html="true" data-demo-css="#textinput-controlgroup">
+					<label for="currency-controlgroup">Value</label>
+					<div data-role="controlgroup" data-type="horizontal">
+						<select>
+							<option>$</option>
+							<option>€</option>
+							<option>£</option>
+							<option>¥</option>
+							<option>₩</option>
+							<option>₹</option>
+						</select>
+						<input id="currency-controlgroup" type="text" data-wrapper-class="controlgroup-textinput ui-btn">
+						<button>.00</button>
+					</div>
+					<label for="search-control-group">Search</label>
+					<div data-role="controlgroup" data-type="horizontal">
+						<input type="text" id="search-control-group" data-wrapper-class="controlgroup-textinput ui-btn">
+						<button>Submit</button>
+						<button>Reset</button>
+					</div>
+				</div>
 
 		<h2>Pre-rendered markup</h2>
 		<p>You can supply pre-rendered markup for any controlgroup to save startup time. The example below illustrates the markup you have to provide for a pre-rendered controlgroup. Note that the widgets inside the controlgroup need not necessarily be pre-rendered.</p>
