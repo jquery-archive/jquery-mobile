@@ -18,6 +18,7 @@ $.widget( "mobile.navbar", {
 	_create: function() {
 
 		var $navbar = this.element,
+			self = this,
 			$navbtns = $navbar.find( "a" ),
 			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
 
@@ -56,7 +57,7 @@ $.widget( "mobile.navbar", {
 				activeBtn.addClass( $.mobile.activeBtnClass );
 
 				// The code below is a workaround to fix #1181
-				$( document ).one( "pagehide", function() {
+				self.document.one( "pagehide", function() {
 					activeBtn.removeClass( $.mobile.activeBtnClass );
 				});
 			}
