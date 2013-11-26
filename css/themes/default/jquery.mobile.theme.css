@@ -161,7 +161,7 @@ html .ui-alt-icon.ui-radio-off:after,
 html .ui-alt-icon .ui-checkbox-off:after,
 html .ui-alt-icon .ui-radio-off:after {
 	background-color: 					#666 /*{global-icon-color}*/;
-	background-color: 					rgba(0,0,0,.15) /*{global-icon-disc-alt}*/;
+	background-color: 					rgba(0,0,0,.15);
 }
 
 /* No disc */
@@ -558,6 +558,8 @@ html head + body .ui-body-b.ui-focus {
 	-moz-box-shadow: 0 0 12px 		#22aadd /*{b-active-background-color}*/;
 	box-shadow: 0 0 12px 			#22aadd /*{b-active-background-color}*/;
 }
+
+/* Structure */
 
 /* Disabled
 -----------------------------------------------------------------------------------------------------------*/
