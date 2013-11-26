@@ -26,9 +26,7 @@
 
 		<h1>Pages</h1>
 
-		<p>
-				The page is the primary unit of interaction in jQuery Mobile and is used to group content into logical views that can be animated in and out of view with page transitions. A HTML document may start with a single "page" and the AJAX navigation system will load additional pages on demand into the DOM as users navigate around. Alternatively, a HTML document can be built with multiple "pages" inside it and the framework will transition between these local views with no need to request content from the server.
-			</p>
+		<p>The page is the primary unit of interaction in jQuery Mobile and is used to group content into logical views that can be animated in and out of view with page transitions. A HTML document may start with a single "page" and the AJAX navigation system will load additional pages on demand into the DOM as users navigate around. Alternatively, a HTML document can be built with multiple "pages" inside it and the framework will transition between these local views with no need to request content from the server.</p>
 
 		<h2>Mobile page structure</h2>
 
@@ -75,7 +73,7 @@
 &lt;/div&gt;
 </code></pre>
 
-		<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with data-roles of <code>"header"</code>, <code>"content"</code>, and <code>"footer"</code>.</p>
+		<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with <code>data-role="header"</code>, <code>class="ui-content"</code>, and <code>data-role="footer"</code>.</p>
 
 <pre><code>
 &lt;div data-role="page"&gt;
@@ -85,9 +83,9 @@
 &lt;/div&gt;</span>
 </code></pre>
 
-<h2>Putting it together: Basic single page template</h2>
+		<h2>Putting it together: Basic single page template</h2>
 
-<p>Putting it all together, this is the standard boilerplate page template you should start with on a project: </p>
+		<p>Putting it all together, this is the standard boilerplate page template you should start with on a project: </p>
 
 <pre><code>
 &lt;!DOCTYPE html&gt;
@@ -175,33 +173,32 @@
 
 		<p>The <code>id</code> attribute of all your elements must be not only unique on a given page, but also unique across the pages in a site. This is because jQuery Mobile's single-page navigation model allows many different "pages" to be present in the DOM at the same time. This also applies when using a multi-page template, since all "pages" on the template are loaded at once.</p>
 
-	<h2>Conventions, not requirements</h2>
+		<h2>Conventions, not requirements</h2>
 
-	<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure.
-	The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure.
-	The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all.
-	For a web page with a custom layout, all of these structural elements can be omitted and the AJAX navigation and all widgets will work just like they do in the boilerplate structure.
-	Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it's needed for managing pages, but the starting markup can now be extremely simple. </p>
+		<p>Although the page structure outlined above is a recommended approach for a standard web app built with jQuery Mobile, the framework is very flexible with document structure.
+		The page, header, content, and footer data-role elements are optional and are mostly helpful for providing some basic formatting and structure.
+		The page wrapper that used to be required for auto-initialization to work is now optional for single page documents, so there isn't any required markup at all.
+		For a web page with a custom layout, all of these structural elements can be omitted and the AJAX navigation and all widgets will work just like they do in the boilerplate structure.
+		Behind the scenes, the framework will inject the page wrapper if it's not included in the markup because it's needed for managing pages, but the starting markup can now be extremely simple.</p>
 
-	<p><strong>Note:</strong> In a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
+		<p><strong>Note:</strong> In a multi-page setup, you are required to have page wrappers in your markup in order to group the content into multiple pages.</p>
 
-	<p><strong>Also Note:</strong> If your body contains no <code>data-role="page"</code> divs, jQuery Mobile wraps the entire contents of the body within a page div as explained above.
-	jQuery Mobile is using jQuery's <code>wrapAll()</code> method to do this which looks for any script tags inside the content being wrapped, and loads each script source via XHR.
-	If scripts are present in the body, the browser ends up loading them twice.
-	We therefore strongly recommend that jQuery Mobile documents with scripts in their body also contain a <code>div</code> with <code>data-role="page"</code>.
-	</p>
+		<p><strong>Also Note:</strong> If your body contains no <code>data-role="page"</code> divs, jQuery Mobile wraps the entire contents of the body within a page div as explained above.
+		jQuery Mobile is using jQuery's <code>wrapAll()</code> method to do this which looks for any script tags inside the content being wrapped, and loads each script source via XHR.
+		If scripts are present in the body, the browser ends up loading them twice.
+		We therefore strongly recommend that jQuery Mobile documents with scripts in their body also contain a <code>div</code> with <code>data-role="page"</code>.</p>
 
-	<h2>Prefetching pages</h2>
+		<h2>Prefetching pages</h2>
 
-	<p>When using single-page templates, you can prefetch pages into the DOM so that they're available instantly when the user visits them. To prefetch a page, add the <code>data-prefetch</code> attribute to a link that points to the page. jQuery Mobile then loads the target page in the background after the primary page has loaded and the <code>pagecreate</code> event has triggered.
+		<p>When using single-page templates, you can prefetch pages into the DOM so that they're available instantly when the user visits them. To prefetch a page, add the <code>data-prefetch</code> attribute to a link that points to the page. jQuery Mobile then loads the target page in the background after the primary page has loaded and the <code>pagecreate</code> event has triggered.</p>
 
-	<div data-demo-html="true">
+		<div data-demo-html="true">
 
-		<a href="../pages-dialog/dialog-alt.html" data-prefetch="true">This link will prefetch the page</a>
+			<a href="../pages-dialog/dialog-alt.html" data-prefetch="true">This link will prefetch the page</a>
 
-	</div><!--/demo-html -->
+		</div><!--/demo-html -->
 
-  <p>Alternatively, you can prefetch a page programmatically using the pagecontainer widget's <code>load()</code> method:</p>
+  		<p>Alternatively, you can prefetch a page programmatically using the pagecontainer widget's <code>load()</code> method:</p>
 
 <pre><code>
 $( ":mobile-pagecontainer" ).pagecontainer( "load", <var>pageUrl</var>, { showLoadMsg: false } );
