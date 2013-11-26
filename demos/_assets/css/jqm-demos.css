@@ -316,7 +316,7 @@
 	color: #fff;
 }
 
-@media (min-width: 78em) {
+@media (min-width: 60em) {
 	.jqm-demos .jqm-header h2 {
 		padding: 1em 0 .7em;
 		margin: 0 1em 0 3%;
@@ -426,6 +426,8 @@
 		left: -17em;
 		right: 17em;
 	}
+}
+@media (min-width: 35em) {
 	.jqm-block-content {
 		min-height: 18em;
 	}
