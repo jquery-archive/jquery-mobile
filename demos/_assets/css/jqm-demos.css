@@ -4,7 +4,7 @@
 .jqm-demos .jqm-header {
 	background: #fff;
 	border-top: 4px solid #3eb249;
-	border-bottom-color: #f5f5f5;
+	border-bottom-color: #eee;
 }
 .jqm-demos .jqm-header h2 {
 	padding: .4em 0 .1em;
@@ -129,6 +129,47 @@
 }
 .jqm-demos .jqm-content > p strong {
 	font-weight: 400;
+}
+
+/* Homepage */
+.jqm-home > .jqm-content > img {
+	width: 400px;
+	max-width: 100%;
+	display: block;
+	margin: 2.5em 0;
+}
+.jqm-home .ui-grid-a {
+	margin: 2.5em -.5em -.5em;
+}
+.jqm-block-content {
+	margin: .5em;
+	padding: 1em;
+	background: #fff;
+	border: 1px solid #eee;
+	-webkit-border-radius: .3125em;
+	border-radius: .3125em;
+	font-family: 'Open Sans', sans-serif;
+}
+.jqm-block-content h3 {
+	font-size: 1.5em;
+	font-weight: 300;
+	color: #3eb249;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: .25em;
+	margin: 0 0 .5em;
+}
+.jqm-block-content p {
+	font-size: 1.1em;
+	font-weight: 300;
+	line-height: 1.4;
+	margin: .7em 0;
+}
+.jqm-block-content p:last-child {
+	margin-bottom: 0;
+}
+.jqm-block-content a:link {
+	font-weight: 300;
+	text-decoration: none;
 }
 
 /* Code */
@@ -384,6 +425,9 @@
 	.ui-panel-dismiss-open.ui-panel-dismiss-position-right {
 		left: -17em;
 		right: 17em;
+	}
+	.jqm-block-content {
+		min-height: 18em;
 	}
 }
 
