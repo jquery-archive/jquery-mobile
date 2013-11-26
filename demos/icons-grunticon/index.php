@@ -110,7 +110,8 @@
 
 			<div role="main" class="ui-content jqm-content">
 				<h1>Grunticon</h1>
-				<p>Grunticon is a grunt plugin built by the filament group which takes SVG files and creates style sheets and PNG icons for use in your webpage. See <a href="https://github.com/filamentgroup/grunticon">https://github.com/filamentgroup/grunticon</a></p>
+
+				<p>Grunticon is a grunt plugin built by the Filament Group which takes SVG files and creates style sheets and PNG icons for use in your webpage. See <a href="https://github.com/filamentgroup/grunticon">https://github.com/filamentgroup/grunticon</a>.</p>
 				<h2>Grunticon Loader Script</h2>
 				<span data-demo-html="#grunticon-fallback" data-demo-js="#grunticon-loader"></span>
 

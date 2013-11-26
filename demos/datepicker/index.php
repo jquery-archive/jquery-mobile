@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Collapsible - jQuery Mobile Demos</title>
+	<title>Datepicker - jQuery Mobile Demos</title>
     <link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
     <link rel="stylesheet" href="../_assets/css/jqm-demos.css">
     <link rel="shortcut icon" href="../favicon.ico">
@@ -28,17 +28,25 @@
     <div role="main" class="ui-content jqm-content">
 
         <h1>Datepicker Widget</h1>
-        <h2>PLEASE NOTE: This is not a jQuery Mobile widget and is not supported by jQuery Mobile</h2>
-        <p>This demo uses the jQuery UI Dateicker widget combined with a 3rd party wrapper to make this work with jQuery Mobile</p>
-        <p>This widget has all the same options and methods as the jQuery UI widget</p>
-        <p>For documentation on the Datepicker widget please see jQuery UI API docs <a href="http://api.jqueryui.com/datepicker/">http://api.jqueryui.com/datepicker/</a>
-        <p>For information and support on the jQuery Mobile Wrapper please see <a href="https://github.com/arschmitz/jquery-mobile-datepicker-wrapper">https://github.com/arschmitz/jquery-mobile-datepicker-wrapper</a></p>
+
+        <p><strong>PLEASE NOTE: This is not a jQuery Mobile widget and is not supported by jQuery Mobile.</strong></p>
+
+        <p>This demo uses the jQuery UI Datepicker widget combined with a 3rd party wrapper to make this work with jQuery Mobile. This widget has all the same options and methods as the jQuery UI widget.</p>
+
+        <p>For documentation on the Datepicker widget please see jQuery UI API docs <a href="http://api.jqueryui.com/datepicker/">http://api.jqueryui.com/datepicker/</a>.</p>
+
+        <p>For information and support on the jQuery Mobile Wrapper please see <a href="https://github.com/arschmitz/jquery-mobile-datepicker-wrapper">https://github.com/arschmitz/jquery-mobile-datepicker-wrapper</a>.</p>
+
         <h2>Popup Datepicker</h2>
+
         <div data-demo-html="true">
             <input type="text" data-role="date">
         </div>
+
         <p> The Popup does not always position well for use on small screens and mobile devices there for the wrapper adds an inline option this option makes the calendar for the datepicker show up inline after the input which it is called on avoiding the issues related to popups</p>
+
         <h2>Inline Datepicker</h2>
+
         <div data-demo-html="true">
             <input type="text" data-role="date" data-inline="true">
         </div>

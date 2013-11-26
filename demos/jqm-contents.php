@@ -57,7 +57,7 @@
 	<h3>Icons</h3>
 	<ul>
 		<li data-filtertext="button icons svg disc alt custom icon position"><a href="../icons/" data-ajax="false">Icons</a></li>
-		<li data-filtertext=""><a href="../icons-grunticon/" data-ajax="false">Icons load script</a></li>
+		<li data-filtertext=""><a href="../icons-grunticon/" data-ajax="false">Grunticon loader</a></li>
 	</ul>
 </li>
 <li data-role="collapsible" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false">
