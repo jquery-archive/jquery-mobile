@@ -91,7 +91,8 @@ module.exports = function( grunt ) {
 		dirs = {
 			dist: dist,
 			cdn: {
-				noversion: path.join( dist, "cdn-noversion" ),
+				google: path.join( dist, "cdn-google" ),
+				jquery: path.join( dist, "cdn" ),
 				git: path.join( dist, "git" )
 			},
 			tmp: path.join( dist, "tmp" )
@@ -185,7 +186,7 @@ module.exports = function( grunt ) {
 
 			distZipOut: path.join( dist, name + "<%= versionSuffix %>.zip" ),
 
-			cdnNoversionZipOut: path.join( "<%= dirs.cdn.noversion %>","<%= files.zipFileName %>" )
+			googleCDNZipOut: path.join( "<%= dirs.cdn.google %>","<%= files.zipFileName %>" )
 		};
 
 	// Add minified property to files.css.*
@@ -495,7 +496,15 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
-			noversion: {
+			"jqueryCDN": {
+				files: {
+					// WARNING: This will be modified by the config:copy:noversion task
+					cwd: dist,
+					src: "<%= files.cdn %>",
+					dest: "<%= dirs.cdn.jquery %>"
+				}
+			},
+			"googleCDN": {
 				options: {
 					processContent: function( content, srcPath ) {
 						if ( /\.min.js$|\.min.map$/.test( srcPath ) ) {
@@ -535,7 +544,7 @@ module.exports = function( grunt ) {
 		},
 
 		"hash-manifest": {
-			noversion: {
+			googleCDN: {
 				options: {
 					algo: "md5",
 					cwd: "<%= dirs.tmp %>"
@@ -558,9 +567,9 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
-			"cdn-noversion": {
+			"googleCDN": {
 				options: {
-					archive: "<%= files.cdnNoversionZipOut %>"
+					archive: "<%= files.googleCDNZipOut %>"
 				},
 				files: [
 					{
@@ -720,7 +729,8 @@ module.exports = function( grunt ) {
 			dist: [ dist ],
             git: [ path.join( dist, "git" ) ],
 			tmp: [ "<%= dirs.tmp %>" ],
-			"cdn-noversion": [ "<%= dirs.cdn.noversion %>" ]
+			"googleCDN": [ "<%= dirs.cdn.google %>" ],
+			"jqueryCDN": [ "<%= dirs.cdn.jquery %>" ]
 		}
 	});
 
@@ -752,19 +762,46 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "css", [ "cssbuild" ] );
 	grunt.registerTask( "css:release", [ "css", "cssmin" ] );
 
-	grunt.registerTask( "demos", [ "concat:demos", "copy:demos.nested-includes", "copy:demos.processed", "copy:demos.unprocessed", "copy:demos.backbone" ] );
+	grunt.registerTask( "demos", [
+		"concat:demos",
+		"copy:demos.nested-includes",
+		"copy:demos.processed",
+		"copy:demos.unprocessed",
+		"copy:demos.backbone"
+	]);
 
-	grunt.registerTask( "cdn", [ "release:init", "clean:tmp", "config:copy:noversion", "copy:noversion", "hash-manifest:noversion", "compress:cdn-noversion", "clean:tmp" ] );
+	grunt.registerTask( "cdn", [
+		"release:init",
+		"clean:jqueryCDN", "config:copy:jqueryCDN", "copy:jqueryCDN",
+		"clean:tmp",
+		"config:copy:googleCDN", "copy:googleCDN", "hash-manifest:googleCDN", "compress:googleCDN",
+		"clean:tmp"
+	]);
 
-	grunt.registerTask( "dist", [ "config:fetchHeadHash", "js:release", "css:release", "copy:images", "demos", "compress:dist"  ] );
+	grunt.registerTask( "dist", [
+		"config:fetchHeadHash",
+		"js:release",
+		"css:release",
+		"copy:images",
+		"demos",
+		"compress:dist"
+	]);
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
 	grunt.registerTask( "dist:git", [ "dist", "clean:git", "config:copy:git:-git", "copy:git" ] );
 
 	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
-	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release" ] ); // TODO: Add copy to cdn repo and add / commit / push
-	grunt.registerTask( "release", [ "clean:dist", "release:init", "release:check-git-status", "release:set-version", "release:tag", "recurse:deploy", "release:set-next-version" ] );
+	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release" ] );
+	grunt.registerTask( "release", [
+		"clean:dist",
+		"release:init",
+		"release:check-git-status",
+		"release:set-version",
+		"release:tag",
+		"recurse:deploy",
+		"release:set-next-version"
+	]);
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );
