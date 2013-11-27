@@ -119,6 +119,7 @@
 		</div><!--/demo-html -->
 
 		<h2>Icon shadow</h2>
+		<p>Note: This styling option is deprecated in jQuery Mobile 1.4.0 and will be removed in 1.5.0. Accordingly, we changed the default for framework-enhanced buttons to false.</p>
 
 		<div data-demo-html="true">
 			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left ui-shadow-icon">Anchor</a>
