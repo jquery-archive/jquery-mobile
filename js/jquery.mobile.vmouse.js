@@ -18,7 +18,7 @@
 //>>label: Virtual Mouse (vmouse) Bindings
 //>>group: Core
 
-define( [ "jquery", "./jquery.mobile.helpers" ], function( jQuery ) {
+define( [ "jquery" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, document, undefined ) {
 
@@ -37,7 +37,7 @@ var dataPropertyName = "virtualMouseBindings",
 	blockMouseTriggers = false,
 	blockTouchTriggers = false,
 	eventCaptureSupported = "addEventListener" in document,
-	$document = $.mobile.document,
+	$document = $( document ),
 	nextTouchID = 1,
 	lastTouchID = 0, threshold,
 	i;

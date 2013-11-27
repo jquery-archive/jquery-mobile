@@ -7,7 +7,7 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {
-	var $document = $.mobile.document,
+	var $document = $( document ),
 		supportTouch = $.mobile.support.touch,
 		scrollEvent = "touchmove scroll",
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
