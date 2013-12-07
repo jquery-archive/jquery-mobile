@@ -34,7 +34,7 @@
       <h1>Page 1</h1>
     </div><!-- /header -->
     
-    <div data-role="content" id="content">
+    <div role="main" class="ui-content jqm-content" id="content">
       <form name="test_button" id="test_button" action="." method="POST" data-ajax="false">
           <input type="submit" value="Go to Page 2" data-theme="g" data-icon="plus" />
       </form>
@@ -70,7 +70,7 @@
       <h1>Page 2</h1>
     </div><!-- /header -->
     
-    <div data-role="content" id="content">
+    <div role="main" class="ui-content jqm-content" id="content">
      
       <br />
       <br />
@@ -140,7 +140,7 @@
       <h1>Page 3</h1>
     </div><!-- /header -->
     
-    <div data-role="content" id="content">
+    <div role="main" class="ui-content jqm-content" id="content">
       
       <p>Page3</p>
       
