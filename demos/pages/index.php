@@ -95,9 +95,9 @@
 
 	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
 
-	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/1.4.0-alpha.2/jquery.mobile-1.4.0-alpha.2.min.css&quot; /&gt;
-	&lt;script src=&quot;http://code.jquery.com/jquery-1.9.1.min.js&quot;&gt;&lt;/script&gt;
-	&lt;script src=&quot;http://code.jquery.com/mobile/1.4.0-alpha.2/jquery.mobile-1.4.0-alpha.2.min.js&quot;&gt;&lt;/script&gt;
+	&lt;link rel=&quot;stylesheet&quot; href=&quot;http://code.jquery.com/mobile/[version]/jquery.mobile-[version].min.css&quot; /&gt;
+	&lt;script src=&quot;http://code.jquery.com/jquery-[version].min.js&quot;&gt;&lt;/script&gt;
+	&lt;script src=&quot;http://code.jquery.com/mobile/[version]/jquery.mobile-[version].min.js&quot;&gt;&lt;/script&gt;
 &lt;/head&gt;
 &lt;body&gt;
 
