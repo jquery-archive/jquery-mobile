@@ -25,7 +25,7 @@
 	
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-		<div data-role="content" class="jqm-content">
+		<div role="main" class="ui-content jqm-content">
 
 			<h1>External toolbars page 2</h1>
 
