@@ -107,7 +107,7 @@
 		&lt;h1&gt;Page Title&lt;/h1&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;
+	&lt;div role=&quot;main&quot; class=&quot;ui-content&quot;&gt;
 		&lt;p&gt;Page content goes here.&lt;/p&gt;
 	&lt;/div&gt;&lt;!-- /content --&gt;
 
@@ -138,7 +138,7 @@
 		&lt;h1&gt;Foo&lt;/h1&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;
+	&lt;div role=&quot;main&quot; class=&quot;ui-content&quot;&gt;
 		&lt;p&gt;I&#x27;m first in the source order so I&#x27;m shown as the page.&lt;/p&gt;
 		&lt;p&gt;View internal page called &lt;a href=&quot;#bar&quot;&gt;bar&lt;/a&gt;&lt;/p&gt;
 	&lt;/div&gt;&lt;!-- /content --&gt;
@@ -155,7 +155,7 @@
 		&lt;h1&gt;Bar&lt;/h1&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
-	&lt;div data-role=&quot;content&quot;&gt;
+	&lt;div role=&quot;main&quot; class=&quot;ui-content&quot;&gt;
 		&lt;p&gt;I&#x27;m the second in the source order so I&#x27;m hidden when the page loads. I&#x27;m just shown if a link that references my id is beeing clicked.&lt;/p&gt;
 		&lt;p&gt;&lt;a href=&quot;#foo&quot;&gt;Back to foo&lt;/a&gt;&lt;/p&gt;
 	&lt;/div&gt;&lt;!-- /content --&gt;
