@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Tabs @VERSION
+ * jQuery UI Tabs fadf2b312a05040436451c64bbfaf4814bc62c56
  * http://jqueryui.com
  *
  * Copyright 2013 jQuery Foundation and other contributors
@@ -28,7 +28,7 @@ function isLocal( anchor ) {
 }
 
 $.widget( "ui.tabs", {
-	version: "@VERSION",
+	version: "fadf2b312a05040436451c64bbfaf4814bc62c56",
 	delay: 300,
 	options: {
 		active: null,
