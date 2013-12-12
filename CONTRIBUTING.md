@@ -33,7 +33,7 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
 
 * What? - Keep the test page as simple as possible. Only include markup/code that is required to reproduce the issue.
 
-* How? - Use our [JS Bin template](http://jsbin.com/ofuhaw/1/edit) which uses latest code on branch "master". Do not replace the links to the the framework CSS and JavaScript: always test with latest code!
+* How? - Use our [JS Bin template](http://jsbin.com/IFolanOW/1/edit) which uses latest code on branch "master". Do not replace the links to the the framework CSS and JavaScript: always test with latest code!
 
   * You will notice if the issue has been fixed already
   * It enables us to edit your code if necessary
