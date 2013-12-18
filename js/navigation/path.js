@@ -53,7 +53,7 @@ define([
 				// Make sure to parse the url or the location object for the hash because using location.hash
 				// is autodecoded in firefox, the rest of the url should be from the object (location unless
 				// we're testing) to avoid the inclusion of the authority
-				return uri.protocol + "//" + uri.host + uri.pathname + uri.search + hash;
+				return uri.protocol + ((uri.host !== "") ? "//" : "") + uri.host + uri.pathname + uri.search + hash;
 			},
 
 			//return the original document url
@@ -323,7 +323,7 @@ define([
 
 					// reconstruct each of the pieces with the new search string and hash
 					href = path.parseUrl( href );
-					href = href.protocol + "//" + href.host + href.pathname + search + preservedHash;
+					href = href.protocol + ((href.host !== "") ? "//" : "") + href.host + href.pathname + search + preservedHash;
 				} else {
 					href += href.indexOf( "#" ) > -1 ? uiState : "#" + uiState;
 				}
