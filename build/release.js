@@ -54,7 +54,6 @@ module.exports = function( Release ) {
 				}
 				done();
 			});
-
 		},
 
 		_complete: function( done ) {
