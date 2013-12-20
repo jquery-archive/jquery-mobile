@@ -186,6 +186,8 @@ module.exports = function( grunt ) {
 
 			distZipOut: path.join( dist, name + "<%= versionSuffix %>.zip" ),
 
+			imagesZipOut: path.join( dist, name + ".images<%= versionSuffix %>.zip" ),
+
 			googleCDNZipOut: path.join( "<%= dirs.cdn.google %>","<%= files.zipFileName %>" )
 		};
 
@@ -567,6 +569,18 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
+			images: {
+				options: {
+					archive: "<%= files.imagesZipOut %>"
+				},
+				files: [
+					{
+						expand: true,
+						cwd: dist,
+						src: [ "images/**" ]
+					}
+				]
+			},
 			"googleCDN": {
 				options: {
 					archive: "<%= files.googleCDNZipOut %>"
@@ -784,7 +798,8 @@ module.exports = function( grunt ) {
 		"css:release",
 		"copy:images",
 		"demos",
-		"compress:dist"
+		"compress:dist",
+		"compress:images"
 	]);
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
 	grunt.registerTask( "dist:git", [ "dist", "clean:git", "config:copy:git:-git", "copy:git" ] );
