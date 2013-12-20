@@ -42,7 +42,9 @@
 		"optimist": "0.6.0",
 		"requirejs": "2.1.8",
 		"scp": "0.0.3",
-		"xmlhttprequest": "1.6.0"
+		"xmlhttprequest": "1.6.0",
+		"semver": "2.2.1",
+		"cheerio": "0.12.4"
 	},
 	"main": "Gruntfile.js",
 	"engines": {
