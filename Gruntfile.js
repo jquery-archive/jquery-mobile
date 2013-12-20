@@ -497,12 +497,12 @@ module.exports = function( grunt ) {
 				]
 			},
 			"jqueryCDN": {
-				files: {
-					// WARNING: This will be modified by the config:copy:noversion task
+				files: [{
+					expand: true,
 					cwd: dist,
 					src: "<%= files.cdn %>",
-					dest: "<%= dirs.cdn.jquery %>"
-				}
+					dest: "<%= dirs.cdn.jquery %>/"
+				}]
 			},
 			"googleCDN": {
 				options: {
@@ -772,7 +772,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "cdn", [
 		"release:init",
-		"clean:jqueryCDN", "config:copy:jqueryCDN", "copy:jqueryCDN",
+		"clean:jqueryCDN", "copy:jqueryCDN",
 		"clean:tmp",
 		"config:copy:googleCDN", "copy:googleCDN", "hash-manifest:googleCDN", "compress:googleCDN",
 		"clean:tmp"
