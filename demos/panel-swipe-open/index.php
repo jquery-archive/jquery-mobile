@@ -30,7 +30,8 @@
     </script>
 	<style>
 		/* Swipe works with mouse as well but often causes text selection. */
-		#demo-page * {
+		/* We'll deny text selecton on everything but INPUTs and TEXTAREAs. */
+		#demo-page :not(INPUT):not(TEXTAREA) {
 			-webkit-user-select: none;
 			-moz-user-select: none;
 			-ms-user-select: none;
