@@ -74,7 +74,7 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		if ( !!this._widget ) {
 			this._syncTextInputOptions( this._widget.options );
 			if ( this._widget.widgetName === "listview" ) {
-				this._widget.options.hidedividers = true;
+				this._widget.options.hideDividers = true;
 				this._widget.element.listview( "refresh" );
 			}
 		}
