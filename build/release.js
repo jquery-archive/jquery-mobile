@@ -35,29 +35,6 @@ module.exports = function( Release ) {
 			});
 		},
 
-		_uploadDemosToWebsite: function( done ) {
-			var releaseDist = path.join( Release.dir.repo, "dist" ),
-				zipFilename = "jquery.mobile-" + Release.newVersion + ".zip",
-				dest = "/var/www/jquerymobile.com/htdocs/demos/" + Release.newVersion;
-
-			console.log( "Uploading demos to jquerymobile.com..." );
-
-			shell.exec( "ssh jqadmin@jquerymobile.com rm -rf '" + dest + "'" );
-			shell.exec( "ssh jqadmin@jquerymobile.com mkdir -p  '" + dest + "'" );
-			scp.send({
-				user: "jqadmin",
-				host: "jquerymobile.com",
-				file: path.join( releaseDist, "demos" ) + path.sep + "*",
-				path: dest
-			}, function( err ) {
-				if ( err ) {
-					Release.abort( "Error while uploading demos to the website: " + err );
-				}
-				done();
-			});
-			console.log();
-		},
-
 		_cloneDemosRepo: function() {
 			var local = Release.dir.base + "/demos.jquerymobile.com",
 				remote = "git@github.com:jquery/demos.jquerymobile.com";
@@ -98,7 +75,6 @@ module.exports = function( Release ) {
 				Release._section( "publishing zip file" ),
 				Release._uploadZipToWebsite,
 				Release._section( "publishing demos" ),
-				Release._uploadDemosToWebsite,
 				Release._publishDemos
 			], done );
 		},
