@@ -60,8 +60,12 @@ $.widget( "mobile.table", $.mobile.table, {
 		// so it can be called on refresh, too
 
 		// update column toggles on resize
-		this._on( this.window, { throttledresize: "_setToggleState" } );
-		this._on( this._menu, { "change input": "_menuInputChange" } );
+		this._on( this.window, {
+			throttledresize: "_setToggleState"
+		});
+		this._on( this._menu, {
+			"change input": "_menuInputChange"
+		});
 	},
 
 	_addToggles: function( menu, keep ) {
