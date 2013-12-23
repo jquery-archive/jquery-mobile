@@ -30,7 +30,8 @@
     </script>
 	<style>
 		/* Swipe works with mouse as well but often causes text selection. */
-		#demo-page * {
+		/* We'll deny text selecton on everything but INPUTs and TEXTAREAs. */
+		#demo-page :not(INPUT):not(TEXTAREA) {
 			-webkit-user-select: none;
 			-moz-user-select: none;
 			-ms-user-select: none;
@@ -94,7 +95,10 @@
     	<dl>
             <dt>Swipe <span>verb</span></dt>
             <dd><b>1.</b> to strike or move with a sweeping motion</dd>
-        </dl>
+            <dd>
+            	<form>Form textual inputs are not effected.<br><input type="text" placeholder="INPUT field"><br><textarea placeholder="TEXTAREA field"></textarea></form>
+            </dd>
+        </dl>   
 
 		<a href="#demo-intro" data-rel="back" class="back-btn ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-back ui-btn-icon-right">Back to demo intro</a>
 
