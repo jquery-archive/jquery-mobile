@@ -44,7 +44,8 @@
 		"scp": "0.0.3",
 		"xmlhttprequest": "1.6.0",
 		"semver": "2.2.1",
-		"cheerio": "0.12.4"
+		"cheerio": "0.12.4",
+		"underscore": "1.5.2"
 	},
 	"main": "Gruntfile.js",
 	"engines": {

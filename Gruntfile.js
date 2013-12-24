@@ -1,7 +1,7 @@
 module.exports = function( grunt ) {
 	"use strict";
 
-	var _ = grunt.util._,
+	var _ = require( "underscore" ),
 
 		replaceCombinedCssReference = function( content, processedName ) {
 			return content.replace( /\.\.\/css\//, "css/" )
@@ -716,29 +716,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		curl: {
-			options: {
-				baseUrl: "http://code.origin.jquery.com/mobile/",
-				querystring: "?reload=1",
-				cwd: dist
-			},
-			release: {
-				files: {
-					"<%= pkg.version %>/": [
-						path.join( dist, name + "*.js" ),
-						path.join( dist, name + ".min.map" ),
-						path.join( dist, name + "*.css" ),
-					]
-				}
-			}
-		},
-
-		release: {
-			options: {
-				versionRegExp: /^(\d)\.(\d+)\.(\d)(-(?:alpha|beta|rc)\.\d|pre)?$/
-			}
-		},
-
 		clean: {
 			dist: [ dist ],
             git: [ path.join( dist, "git" ) ],
@@ -765,6 +742,11 @@ module.exports = function( grunt ) {
 
 	// load the project's default tasks
 	grunt.loadTasks( "build/tasks");
+
+	grunt.registerTask( "release:init", function() {
+		// Set the version suffix for releases
+		grunt.config.set( "versionSuffix", "-<%= pkg.version%>" );
+	});
 
 	grunt.registerTask( "lint", [ "jshint" ] );
 
@@ -806,17 +788,6 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
-
-	grunt.registerTask( "deploy", [ "release:init", "release:fail-if-pre", "dist:release" ] );
-	grunt.registerTask( "release", [
-		"clean:dist",
-		"release:init",
-		"release:check-git-status",
-		"release:set-version",
-		"release:tag",
-		"recurse:deploy",
-		"release:set-next-version"
-	]);
 
 	// Default grunt
 	grunt.registerTask( "default", [ "dist" ] );
