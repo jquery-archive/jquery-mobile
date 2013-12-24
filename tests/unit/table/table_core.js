@@ -157,7 +157,7 @@
 	asyncTest( "The page should be enhanced correctly" , function(){
 		setTimeout(function() {
 			var $popup = $('#column-table-test #movie-table-column-popup-popup'),
-				button = $('#column-table-test .ui-table-columntoggle-btn');
+				button = $('#column-table-test .ui-table-columntoggle-btn:last');
 
 			ok($('#column-table-test .ui-table-columntoggle').length, ".ui-table-columntoggle class added to table element");
 			ok($('#column-table-test .ui-table-columntoggle-btn').length, ".ui-table-columntoggle-btn button added");
@@ -258,7 +258,7 @@
 		var $input;
 		$.testHelper.pageSequence([
 			function() {
-				$( ".ui-table-columntoggle-btn" ).click();
+				$( ".ui-table-columntoggle-btn:last" ).click();
 			},
 			function() {
 				setTimeout(function() {
@@ -266,7 +266,7 @@
 				}, 800);
 			},
 			function() {
-				$input = $( ".ui-popup-container" ).find( "input:first" );
+				$input = $( "#movie-table-column-popup-popup" ).find( "input:first" );
 				$input.click();
 			},
 			function(){
