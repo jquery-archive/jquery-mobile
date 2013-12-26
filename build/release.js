@@ -6,6 +6,8 @@ var cheerio = require( "cheerio" ),
 	shell = require( "shelljs" );
 
 module.exports = function( Release ) {
+	var clonedRepos = {};
+
 	Release.define({
 		issueTracker: "github",
 		changelogShell: function() {
@@ -19,33 +21,19 @@ module.exports = function( Release ) {
 			done([]);
 		},
 
-		_uploadZipToWebsite: function( done ) {
-			var releaseDist = path.join( Release.dir.repo, "dist" ),
-				zipFilename = "jquery.mobile-" + Release.newVersion + ".zip";
-
-			console.log( "Uploading " + zipFilename + " to jquerymobile.com..." );
-			scp.send({
-				user: "jqadmin",
-				host: "jquerymobile.com",
-				file: path.join( releaseDist, zipFilename),
-				path: "/var/www/jquerymobile.com/htdocs/resources/download/"
-			}, function( err ) {
-				if ( err ) {
-					Release.abort( "Error while uploading " + zipFilename + " to the website: " + err );
-				}
-				done();
-			});
-		},
-
 		_cloneDemosRepo: function() {
 			var local = Release.dir.base + "/demos.jquerymobile.com",
 				remote = "git@github.com:jquery/demos.jquerymobile.com";
 
-			console.log( "Cloning " + remote.cyan + "..." );
-			Release.git( "clone " + remote + " " + local, "Error cloning Demos repo." );
-			console.log();
+			if ( !clonedRepos[ remote ] ) {
+				console.log( "Cloning " + remote.cyan + "..." );
+				Release.git( "clone " + remote + " " + local, "Error cloning Demos repo." );
+				console.log();
 
-			return local;
+				clonedRepos[ remote ] = local;
+			}
+
+			return clonedRepos[ remote ];
 		},
 
 		_publishDemos: function() {
@@ -66,7 +54,7 @@ module.exports = function( Release ) {
 			console.log( "Adding files..." );
 			process.chdir( repo );
 			Release.git( "add ." , "Error adding files." );
-			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting files." );
+			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting demos files." );
 			console.log( "Pushing to github..." );
 			Release.git( "push", "Error pushing demos to github." );
 			console.log();
@@ -76,11 +64,15 @@ module.exports = function( Release ) {
 			var local = Release.dir.base + "/jquerymobile.com",
 				remote = "git@github.com:jquery/jquerymobile.com";
 
-			console.log( "Cloning " + remote.cyan + "..." );
-			Release.git( "clone " + remote + " " + local, "Error cloning website repo." );
-			console.log();
+			if ( !clonedRepos[ remote ] ) {
+				console.log( "Cloning " + remote.cyan + "..." );
+				Release.git( "clone " + remote + " " + local, "Error cloning website repo." );
+				console.log();
 
-			return local;
+				clonedRepos[ remote ] = local;
+			}
+
+			return clonedRepos[ remote ];
 		},
 
 		_updateBuilder: function() {
@@ -125,18 +117,38 @@ module.exports = function( Release ) {
 			console.log( "Adding files..." );
 			process.chdir( repo );
 			Release.git( "add ." , "Error adding files." );
-			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting files." );
+			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting builder files." );
 			console.log( "Pushing to github..." );
-			Release.git( "push", "Error pushing demos to github." );
+			Release.git( "push", "Error pushing builder update to github." );
+			console.log();
+		},
+
+		_publishZipsToWebsite: function() {
+			var repo = Release._cloneWebsiteRepo(),
+				dest = repo + "/resources/download",
+				dist = Release.dir.repo + "/dist/jquery.mobile-" + Release.newVersion + ".zip",
+				images = Release.dir.repo + "/dist/jquery.mobile.images-" + Release.newVersion + ".zip",
+				commitMessage = "Release: Added zip for version " + Release.newVersion;
+
+			shell.mkdir( "-p", dest );
+			shell.cp( dist, dest );
+			shell.cp( images, dest );
+
+			console.log( "Adding files..." );
+			process.chdir( repo );
+			Release.git( "add ." , "Error adding zip files." );
+			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting zip files." );
+			console.log( "Pushing to github..." );
+			Release.git( "push", "Error pushing zip files to github." );
 			console.log();
 		},
 
 		_complete: function( done ) {
 			Release._walk([
-				Release._section( "publishing zip file" ),
-				Release._uploadZipToWebsite,
 				Release._section( "publishing demos" ),
 				Release._publishDemos,
+				Release._section( "publishing zip files" ),
+				Release._publishZipsToWebsite,
 				Release._section( "updating builder" ),
 				Release._updateBuilder
 			], done );
