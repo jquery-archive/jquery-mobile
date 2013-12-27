@@ -11,7 +11,6 @@ define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
 // buttonMarkup is deprecated as of 1.4.0 and will be removed in 1.5.0.
 
 (function( $, undefined ) {
-"use strict";
 
 // General policy: Do not access data-* attributes except during enhancement.
 // In all other cases we determine the state of the button exclusively from its
