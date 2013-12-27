@@ -5,19 +5,9 @@ requirejs.config({
 		"json": "../external/requirejs/plugins/json"
 	},
 	"shim": {
-		"jquery.hashchange": {
-			deps: [ "jquery" ]
-		},
-		"jquery.ui.widget": {
-			deps: [ "jquery" ],
-			exports: "$.widget"
-		},
-		"widgets/jquery.ui.tabs": {
-			deps: [ "jquery.ui.widget" ]
-		},
-		"widgets/jquery.ui.core": {
-			deps: [ "jquery" ],
-			exports: [ "$.ui" ]
-		}
+		"jquery.hashchange": [ "jquery" ],
+		"jquery.ui.widget": [ "jquery" ],
+		"widgets/jquery.ui.tabs": [ "jquery.ui.widget" ],
+		"widgets/jquery.ui.core": [ "jquery" ]
 	}
 });
