@@ -55,8 +55,10 @@ module.exports = function( Release ) {
 			process.chdir( repo );
 			Release.git( "add ." , "Error adding files." );
 			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting demos files." );
-			console.log( "Pushing to github..." );
-			Release.git( "push", "Error pushing demos to github." );
+			if ( !Release.isTest ) {
+				console.log( "Pushing to github..." );
+				Release.git( "push", "Error pushing demos to github." );
+			}
 			console.log();
 		},
 
@@ -118,8 +120,10 @@ module.exports = function( Release ) {
 			process.chdir( repo );
 			Release.git( "add ." , "Error adding files." );
 			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting builder files." );
-			console.log( "Pushing to github..." );
-			Release.git( "push", "Error pushing builder update to github." );
+			if ( !Release.isTest ) {
+				console.log( "Pushing to github..." );
+				Release.git( "push", "Error pushing builder update to github." );
+			}
 			console.log();
 		},
 
@@ -138,8 +142,10 @@ module.exports = function( Release ) {
 			process.chdir( repo );
 			Release.git( "add ." , "Error adding zip files." );
 			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting zip files." );
-			console.log( "Pushing to github..." );
-			Release.git( "push", "Error pushing zip files to github." );
+			if ( !Release.isTest ) {
+				console.log( "Pushing to github..." );
+				Release.git( "push", "Error pushing zip files to github." );
+			}
 			console.log();
 		},
 
