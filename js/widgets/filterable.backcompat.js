@@ -65,16 +65,18 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		this._setWidget( this.element.data( "mobile-" + evt.type.substring( 0, evt.type.length - 6 ) ) );
 	},
 
+	_triggerListviewBeforeFilter: function( event ) {
+		if ( event.target === this.element[ 0 ] ) {
+			this.element.trigger( "listviewbeforefilter" );
+		}
+	},
+
 	_setWidget: function( widget ) {
 		if ( !this._widget && widget ) {
 			this._widget = widget;
 			this._widget._setOptions = replaceSetOptions( this, this._widget._setOptions );
 			if ( widget.widgetFullName === "mobile-listview" ) {
-				this.element.on( "filterablebeforefilter", $.proxy( function( event ) {
-					if ( event.target === this.element[ 0 ] ) {
-						this.element.trigger( "listviewbeforefilter" );
-					}
-				}, this ));
+				this._on({ "filterablebeforefilter": "_triggerListviewBeforeFilter" });
 			}
 		}
 
