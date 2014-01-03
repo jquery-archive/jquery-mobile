@@ -145,20 +145,27 @@ $.widget( "mobile.panel", {
 		this.element.addClass( this._getPanelClasses() );
 	},
 
-	_bindCloseEvents: function() {
-		var self = this;
+	_handleCloseClickAndEatEvent: function( event ) {
+		if ( !event.isDefaultPrevented() ) {
+			event.preventDefault();
+			this.close();
+			return false;
+		}
+	},
 
-		self._closeLink.on( "click.panel" , function( e ) {
-			if ( !e.isDefaultPrevented() ) {
-				e.preventDefault();
-				self.close();
-				return false;
-			}
+	_handleCloseClick: function( event ) {
+		if ( !event.isDefaultPrevented() ) {
+			this.close();
+		}
+	},
+
+	_bindCloseEvents: function() {
+		this._on( this._closeLink, {
+			"click": "_handleCloseClick"
 		});
-		self.element.on( "click.panel" , "a:jqmData(ajax='false')", function( event ) {
-			if ( !event.isDefaultPrevented() ) {
-				self.close();
-			}
+
+		this._on({
+			"click a:jqmData(ajax='false')": "_handleCloseClick"
 		});
 	},
 
@@ -478,8 +485,6 @@ $.widget( "mobile.panel", {
 			.off( "keyup.panel" )
 			.off( "updatelayout" )
 			.off( this._transitionEndEvents );
-
-		this._closeLink.off( "click.panel" );
 
 		if ( this._modal ) {
 			this._modal.remove();
