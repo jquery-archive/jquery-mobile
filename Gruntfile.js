@@ -353,7 +353,7 @@ module.exports = function( grunt ) {
 				keepSpecialComments: 0
 			},
 			minify: {
-				files: files.getMinifiedCSSFiles( dist ),
+				files: files.getMinifiedCSSFiles( dist )
 			}
 		},
 
@@ -515,7 +515,7 @@ module.exports = function( grunt ) {
 							content = content.replace( re, "" );
 						}
 						return content;
-					},
+					}
 				},
 				files: {
 					// WARNING: This will be modified by the config:copy:noversion task
@@ -636,10 +636,22 @@ module.exports = function( grunt ) {
 
 		qunit: {
 			options: {
-				timeout: 30000
+				timeout: 30000,
+				"--web-security": "no",
+				coverage: {
+					baseUrl: ".",
+					src: [
+						"js/**/*.js",
+						"!js/jquery.js",
+						"!js/**/jquery.ui*.js",
+						"!js/jquery.hashchange.js"
+					],
+					instrumentedFiles: "temp/",
+					htmlReport: "build/report/coverage",
+					lcovReport: "build/report/lcov",
+					linesThresholdPct: 0
+				}
 			},
-
-			files: {},
 
 			http: {
 				options: {
@@ -716,6 +728,14 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		coveralls: {
+			all: {
+
+				// LCOV coverage file relevant to every target
+				src: "build/report/lcov/lcov.info"
+			}
+		},
+
 		clean: {
 			dist: [ dist ],
             git: [ path.join( dist, "git" ) ],
@@ -733,7 +753,8 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-contrib-concat" );
 	grunt.loadNpmTasks( "grunt-contrib-connect" );
 	grunt.loadNpmTasks( "grunt-contrib-cssmin" );
-	grunt.loadNpmTasks( "grunt-contrib-qunit" );
+	grunt.loadNpmTasks( "grunt-coveralls" );
+	grunt.loadNpmTasks( "grunt-qunit-istanbul" );
 	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
 	grunt.loadNpmTasks( "grunt-contrib-uglify" );
 	grunt.loadNpmTasks( "grunt-git-authors" );
