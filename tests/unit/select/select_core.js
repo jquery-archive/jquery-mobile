@@ -16,4 +16,7 @@
 		ok( $( ".no-id-test" ).closest( ".ui-btn" ).attr( "id" ) !== "undefined-button", "Select menu without an ID does not result in the button having name 'undefined-button'" );
 	});
 
+	test( "Already enhanced", function() {
+		ok( $( "#enhanced" ).parents( ".ui-select" ).length === 1, "Select menu with data-enhanced='true' should not be double enhanced" );
+	});
 })(jQuery);
