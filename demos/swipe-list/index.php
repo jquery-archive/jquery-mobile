@@ -75,7 +75,7 @@
 				});
 				// Remove active state and unbind when the cancel button is clicked
 				$( "#confirm #cancel" ).on( "click", function() {
-					listitem.removeClass( "ui-btn-active" );
+					listitem.children( ".ui-btn" ).removeClass( "ui-btn-active" );
 					$( "#confirm #yes" ).off();
 				});
 			}
