@@ -44,7 +44,7 @@
 		<ul data-role="listview">
             <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
                 <li><a href="#panel-responsive-page2">Accordion</a></li>
-                <li><a href="#panel-responsive-page2">AJAX Navigation</a></li>
+                <li><a href="#panel-responsive-page2">Ajax Navigation</a></li>
                 <li><a href="#panel-responsive-page2">Autocomplete</a></li>
                 <li><a href="#panel-responsive-page2">Buttons</a></li>
                 <li><a href="#panel-responsive-page2">Checkboxes</a></li>
