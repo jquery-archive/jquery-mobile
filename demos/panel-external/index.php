@@ -29,7 +29,7 @@
 
 		<h1>External Panels</h1>
 
-		<p>The panels below are all located outside the page. Panels outside of a page must be initalized manually and will not be handled by auto init. Panels outside of pages will remain in the DOM (unless manually removed) as long as you use AJAX navigation, and can be opened or closed from any page.</p>
+		<p>The panels below are all located outside the page. Panels outside of a page must be initalized manually and will not be handled by auto init. Panels outside of pages will remain in the DOM (unless manually removed) as long as you use Ajax navigation, and can be opened or closed from any page.</p>
 
 		<p>Navigate to page 2 to see this behavior. The HTML document for page 2 doesn't contain panel markup, but you can still open the panels.</p>
 

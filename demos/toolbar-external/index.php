@@ -55,11 +55,11 @@ $(function(){
 });
 </code></pre>
 
-			<h2>AJAX navigation</h2>
+			<h2>Ajax navigation</h2>
 
 			<p>Because these toolbars are not within the page they will remain in the DOM until manually removed. However they will automatically hide if you navigate to a page containing a toolbar to allow the page's own toolbars to take their place. They will automatically show again if you navigate to a page containing no toolbars.</p>
 
-			<p>Toolbars not within a page will not be pulled into the DOM during AJAX navigation.</p>
+			<p>Toolbars not within a page will not be pulled into the DOM during Ajax navigation.</p>
 
 			<h2>Fixed external toolbars</h2>
 

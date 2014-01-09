@@ -50,7 +50,7 @@
 
       	<p>When working with RWD, it's very important to consider performance to ensure that you're not simply taking a heavy desktop site and shrinking it down to mobile screens. We recommend following a "mobile-first" approach  to keep development focused on reducing bandwidth, server requests and optimizing source order.</p>
 
-      	<p>When building a page, start by creating the lightest and most semantic HTML possible. Think about how the source order of the markup would work if you didn't have CSS or JS. Do not include code that is only needed for larger viewports and hide it at smaller widths. Instead, use AJAX to conditionally load these assets when larger screens are detected via JS.</p>
+      	<p>When building a page, start by creating the lightest and most semantic HTML possible. Think about how the source order of the markup would work if you didn't have CSS or JS. Do not include code that is only needed for larger viewports and hide it at smaller widths. Instead, use Ajax to conditionally load these assets when larger screens are detected via JS.</p>
 
       	<p>When writing CSS for a responsive site or app, it's usually most efficient to write all the core typography and basic style elements outside of a media query to form the styles for the smallest devices, such as phones. This is a good approach because the majority of these core styles are usually also shared at greater widths, albeit in a different layout and it leverages the cascading power of CSS. Build up breakpoints using multiple <code>min-width</code> media queries to layer in additional style rules that should only apply above a certain screen width.</p>
 

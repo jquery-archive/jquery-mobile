@@ -32,7 +32,7 @@
 
 		<h2>Answer:</h2>
 
-		<p>The issue here is not actually jQuery Mobile but the fact that some browsers return a status of zero. This causes the internal error handlers to be triggered in jQuery's AJAX function.</p>
+		<p>The issue here is not actually jQuery Mobile but the fact that some browsers return a status of zero. This causes the internal error handlers to be triggered in jQuery's Ajax function.</p>
 		<p>There is a simple workaround for this:</p>
 <pre><code>
 $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
@@ -44,7 +44,7 @@ $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
   }
 });
 </pre></code>
-<p>One important note on this workaround is that this sets is local to true for all AJAX requests weather or not they are in the manifest. This works currently because is local is only checked As long as the cache is valid and the status is 0 so it doesn't affect uncached results. This may  change in the future breaking applications using this workaround.</p>
+<p>One important note on this workaround is that this sets is local to true for all Ajax requests weather or not they are in the manifest. This works currently because is local is only checked As long as the cache is valid and the status is 0 so it doesn't affect uncached results. This may  change in the future breaking applications using this workaround.</p>
 
 	</div><!-- /content -->
 

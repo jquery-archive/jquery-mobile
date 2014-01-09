@@ -1,4 +1,4 @@
-// Turn off AJAX for local file browsing
+// Turn off Ajax for local file browsing
 if ( location.protocol.substr(0,4)  === 'file' ||
      location.protocol.substr(0,11) === '*-extension' ||
      location.protocol.substr(0,6)  === 'widget' ) {
@@ -36,7 +36,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 
 			message
 			.append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
-			.append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
+			.append( "<p>The Ajax-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, please try a different browser.</p>" );
 
 			$( document ).on( "pagecreate", function( event ) {
 				$( event.target ).append( message );

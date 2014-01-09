@@ -46,7 +46,7 @@
 
 		<h1>Loader</h1>
 
-		<p>A small loading overlay displayed when jQuery Mobile loads in content via AJAX, or for use in custom notifications.
+		<p>A small loading overlay displayed when jQuery Mobile loads in content via Ajax, or for use in custom notifications.
 			</p>
 
 		<h2>Standard loader</h2>

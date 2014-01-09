@@ -34,7 +34,7 @@
 
 		<h1>Transitions</h1>
 
-		<p>The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with AJAX navigation.
+		<p>The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation.
 			</p>
 
 		<h2>Page transitions</h2>

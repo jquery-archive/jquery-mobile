@@ -339,9 +339,9 @@
 		<p>By default, jQuery Mobile will automatically enhance certain native form controls into rich touch-friendly components. This is handled internally by finding form elements by tag name and running a plugin method on them. For instance, a <code>select</code> element will be found and initialized with the "selectmenu" plugin, while an <code>input</code> element with a <code>type="checkbox"</code> will be enhanced with the "checkboxradio" plugin. Once initialized, you can address these enhanced components programmatically through their jQuery UI widget API methods. See options, methods, and events listed on each form plugin's documentation page for details. </p>
 
 		<h2>Initializing groups of dynamically-injected form elements</h2>
-		<p>If you should generate new markup client-side or load in content via AJAX and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page div itself), saving you the task of manually initializing each plugin (see below).</p>
+		<p>If you should generate new markup client-side or load in content via Ajax and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page div itself), saving you the task of manually initializing each plugin (see below).</p>
 
-		<p>For example, if a block of HTML markup (say a login form) was loaded in through AJAX, trigger the create event to automatically transform all the widgets it contains (inputs and buttons in this case) into the enhanced versions. The code for this scenario would be:</p>
+		<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the create event to automatically transform all the widgets it contains (inputs and buttons in this case) into the enhanced versions. The code for this scenario would be:</p>
 
 <pre><code>
 $( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
@@ -412,8 +412,8 @@ $( document ).bind( "mobileinit", function() {
 
 		<p>One special case is that of selects. The above sample will prevent any and all augmentation from taking place on select elements in the page if <code>select</code> is included. If you wish to retain the native performance and appearance of the menu itself and benefit from the visual augmentation of the select button by jQuery Mobile, you can set <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> to true in a <code>mobileinit</code> callback as a global setting or use <code>data-native-menu="true"</code> on a case by case basis.</p>
 
-		<h2>File Inputs + AJAX</h2>
-		<p>Using a multipart form with a file input is not supported by AJAX. In this case you should decorate the parent form with <code>data-ajax="false"</code> to ensure the form is submitted properly to the server.</p>
+		<h2>File Inputs + Ajax</h2>
+		<p>Using a multipart form with a file input is not supported by Ajax. In this case you should decorate the parent form with <code>data-ajax="false"</code> to ensure the form is submitted properly to the server.</p>
 
 	</div><!-- /content -->
 

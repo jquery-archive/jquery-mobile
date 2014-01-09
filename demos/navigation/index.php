@@ -25,14 +25,14 @@
 
     <div role="main" class="ui-content jqm-content">
 
-		<h1>AJAX Navigation</h1>
+		<h1>Ajax Navigation</h1>
 
 		<p>The <code>$.mobile.navigate</code> method and the <code>navigate</code> event form the foundation of jQuery Mobile's navigation infrastructure. As such, they can function outside the confines of jQuery Mobile as a clean and intuitive navigation/history API.
 		</p>
 
 		<h2>Introduction</h2>
 
-		<p>jQuery Mobile includes a navigation system to load pages into the DOM via AJAX, enhance the new content, then display <a href="../pages/">pages</a> with a rich set of animated <a href="../transitions/"  data-ajax="false">transitions</a>. The navigation system uses progressive enhancement to automatically 'hijack' standard <a href="../links/">links</a> and form submissions and route them as an AJAX request.</p>
+		<p>jQuery Mobile includes a navigation system to load pages into the DOM via Ajax, enhance the new content, then display <a href="../pages/">pages</a> with a rich set of animated <a href="../transitions/"  data-ajax="false">transitions</a>. The navigation system uses progressive enhancement to automatically 'hijack' standard <a href="../links/">links</a> and form submissions and route them as an Ajax request.</p>
 
 		<p>One of jQuery Mobile's core features is the ability to load and view content from disparate pages into the initial document with support for standard navigation methods like anchors and the back button. To accomplish this the library has progressive support for <code>hashchange</code> and <code>popstate</code> coupled with internal history tracking which can be used à la carte.</p>
 
@@ -53,7 +53,7 @@ $( "a" ).on( "click", function( event ){
   });
 
   // Hypothetical content alteration based on the url. E.g, make
-  // an AJAX request for JSON data and render a template into the page.
+  // an Ajax request for JSON data and render a template into the page.
   alterContent( this.attr("href") );
 });</code></pre>
 
