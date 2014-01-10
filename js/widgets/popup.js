@@ -22,7 +22,7 @@ define( [
 	"../navigation/navigator",
 	"../navigation/method",
 	"../jquery.mobile.navigation",
-	"jquery.hashchange" ], function( jQuery ) {
+	"jquery-plugins/jquery.hashchange" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
