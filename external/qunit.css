@@ -38,8 +38,10 @@
 	line-height: 1em;
 	font-weight: normal;
 
-	-webkit-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
 }
 
 #qunit-header a {
@@ -111,8 +113,9 @@
 
 	background-color: #fff;
 
-	-webkit-border-radius: 5px;
 	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 }
 
 #qunit-tests table {
@@ -187,8 +190,10 @@
 }
 
 #qunit-tests > li:last-child {
-	-webkit-border-radius: 0 0 5px 5px;
 	border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
 }
 
 #qunit-tests .fail                          { color: #000000; background-color: #EE5757; }
@@ -223,9 +228,4 @@
 	left: -10000px;
 	width: 1000px;
 	height: 1000px;
-}
-
-[data-nstest-role='page'], [data-nstest-role='dialog'] {
-  position: absolute !important;
-  top: -10000px !important;
 }

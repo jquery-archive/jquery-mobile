@@ -797,7 +797,6 @@ jQuery.extend({
 			}
 		}
 
-
 		// Flatten any nested arrays
 		return core_concat.apply( [], ret );
 	},
@@ -8199,7 +8198,6 @@ jQuery.extend({
 						jQuery.etag[ cacheURL ] = modified;
 					}
 				}
-
 
 				// if no content
 				if ( status === 204 || s.type === "HEAD" ) {
