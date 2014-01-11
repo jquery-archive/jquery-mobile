@@ -14,14 +14,15 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"widgets/toolbar"
+				"widgets/toolbar",
+				"jquery.mobile.buttonMarkup"
 			],
 			[ "jquery.mobile.init" ],
 			[ "toolbar_core.js" ]
 		]);
 	</script>
 
-	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
@@ -32,7 +33,11 @@
 	<div id="qunit"></div>
 
 	<div data-nstest-role="page">
-		<div data-role="content">
+		<div data-nstest-role="header" id="start-page-header">
+			<a href="#">Left Link</a>
+			<a href="#" data-nstest-role="none">Right Link</a>
+		</div>
+		<div class="ui-content">
 			<a href="#page2" id="go-to-page2">Go</a>
 		</div>
 	</div>
