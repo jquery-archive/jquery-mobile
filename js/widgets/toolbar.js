@@ -95,7 +95,10 @@ define( [
 
 		// Deprecated in 1.4. As from 1.5 button classes have to be present in the markup.
 		_btnMarkup: function() {
-			this.element.children( "a" ).attr( "data-" + $.mobile.ns + "role", "button" );
+			this.element
+				.children( "a" )
+				.filter( ":not([data-" + $.mobile.ns + "role='none'])" )
+				.attr( "data-" + $.mobile.ns + "role", "button" );
 			this.element.trigger( "create" );
 		},
 		// Deprecated in 1.4. As from 1.5 ui-btn-left/right classes have to be present in the markup.
