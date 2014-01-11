@@ -17,13 +17,30 @@ env:
   - TYPES=unit
     JQUERIES=git
   - TYPES=integration
+    SUITES=!navigation
     JQUERIES=1.8.3
   - TYPES=integration
+    SUITES=!navigation
     JQUERIES=1.10.2
   - TYPES=integration
+    SUITES=!navigation
     JQUERIES=2.0.3
   - TYPES=integration
+    SUITES=!navigation
     JQUERIES=git
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=1.8.3
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=1.10.2
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=2.0.3
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=git
+
 notifications:
   irc:
     channels:

@@ -656,12 +656,16 @@ module.exports = function( grunt ) {
 			http: {
 				options: {
 					urls: (function() {
-						var patterns, paths,
+						var allSuites, patterns, paths,
+							testDirs = [ "unit", "integration" ],
 							suites = ( grunt.option( "suites" ) || process.env.SUITES || "" ).split( "," ),
 							types = ( grunt.option( "types" ) || process.env.TYPES || "" ).split( "," ),
-							prefixes = ["tests/unit/", "tests/integration/"],
 							versionedPaths = [],
-							jQueries = ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," );
+							jQueries = ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ),
+							excludes = _.chain( suites )
+								.filter( function( suite ) { return ( /^!/.test( suite ) ); } )
+								.map( function( suite ) { return suite.substring( 1 ); } )
+								.value();
 
 						// Trim empties
 						suites = _.without( suites, "" );
@@ -671,35 +675,48 @@ module.exports = function( grunt ) {
 						// So that unit suites runs before integration suites
 						types = types.sort().reverse();
 
+						allSuites = _.chain( grunt.file.expand(
+								{
+									filter: "isDirectory",
+									cwd: "tests"
+								},
+								_.map( testDirs, function( dir ) {
+									return dir + "/*";
+								})
+							))
+							.map( function( dir ) { return dir.split( "/" )[ 1 ]; } )
+							.difference( excludes )
+							.unique()
+							.value();
+
+
+						// Remove negations from list of suites
+						suites = _.filter( suites, function( suite ) { return ( !/^!/.test( suite ) ); } );
+
 						if( types.length ){
-							prefixes = [];
+							testDirs = [];
 							types.forEach(function( type ) {
-								prefixes.push( "tests/" + type +"/" );
+								testDirs.push( "tests/" + type );
 							});
 						}
 
 						patterns = [];
 
-						if ( suites.length ) {
-							suites.forEach( function( unit ) {
-								prefixes.forEach( function( prefix ) {
+						if ( !suites.length ) {
+							suites = allSuites;
+						}
+
+						_.chain( suites )
+							.difference( excludes )
+							.forEach( function( suite ) {
+								testDirs.forEach( function( dir ) {
 									patterns = patterns.concat([
-										prefix + unit + "/",
-										prefix + unit + "/index.html",
-										prefix + unit + "/*/index.html",
-										prefix + unit + "/**/*-tests.html"
+										dir + "/" + suite + "/index.html",
+										dir + "/" + suite + "/*/index.html",
+										dir + "/" + suite + "/**/*-tests.html"
 									]);
 								});
 							});
-						} else {
-							prefixes.forEach( function( prefix ) {
-								patterns = patterns.concat([
-									prefix + "*/index.html",
-									prefix + "*/*/index.html",
-									prefix + "**/*-tests.html"
-								]);
-							});
-						}
 
 						paths = grunt.file.expand( patterns )
 							.filter( function( testPath ) {
@@ -710,7 +727,7 @@ module.exports = function( grunt ) {
 							})
 							.map( function( path ) {
 								// Some of our tests (ie. navigation) don't like having the index.html too much
-								return path.replace( /\/\index.html$/, "/" );
+								return path.replace( /\/index.html$/, "/" );
 							});
 
 						paths = grunt.util._.uniq( paths );
