@@ -86,7 +86,22 @@
 				<a href="#panel-test-destroy">Open Panel</a>
 				<a href="#panel-test-non-default-theme">Open Panel</a>
 				<a href="#panel-test-with-close">Open Panel</a>
+				<a href="#panel-test-external">Open Panel</a>
 			</div>
+		</div>
+
+		<div data-nstest-role="page" id="multipage">
+			<div data-nstest-role="header">
+				<h1>Multipage</h1>
+			</div>
+			<div data-nstest-role="content">
+				<p>Contents of a page.</p>
+			</div>
+		</div>
+
+		<div data-nstest-role="panel" id="panel-test-external">
+			<a href="#multipage">Multipage</a>
+			<a href="#" data-nstest-rel="back">Back</a>
 		</div>
 
 	</body>

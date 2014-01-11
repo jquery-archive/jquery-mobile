@@ -52,6 +52,7 @@ $.widget( "mobile.panel", {
 			_panelID: el.attr( "id" ),
 			_closeLink: el.find( ":jqmData(rel='close')" ),
 			_parentPage: ( parentPage.length > 0 ) ? parentPage : false,
+			_openedPage: null,
 			_page: this._getPage,
 			_panelInner: this._getPanelInner(),
 			_wrapper: this._getWrapper,
@@ -99,7 +100,7 @@ $.widget( "mobile.panel", {
 	},
 
 	_getPage: function() {
-		var page = this._parentPage ? this._parentPage : $( "." + $.mobile.activePageClass );
+		var page = this._openedPage || this._parentPage || $( "." + $.mobile.activePageClass );
 
 		return page;
 	},
@@ -339,6 +340,8 @@ $.widget( "mobile.panel", {
 					self._bindFixListener();
 
 					self._trigger( "open" );
+
+					self._openedPage = self._page();
 				};
 
 			self._trigger( "beforeopen" );
@@ -405,6 +408,8 @@ $.widget( "mobile.panel", {
 					self._page().jqmRemoveData( "panel" );
 
 					self._trigger( "close" );
+
+					self._openedPage = null;
 				};
 
 			self._trigger( "beforeclose" );
