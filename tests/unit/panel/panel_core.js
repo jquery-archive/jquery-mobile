@@ -450,7 +450,7 @@
 	});
 	asyncTest( "external panel should call panel once on create and on page changes", function(){
 		expect( 5 );
-		var testPanel = $( "#external-panel-test" );
+		var testPanel = $( "#external-panel-getWrapper-test" );
 
 		testPanel.panel();
 		ok( count === 1, "getWrapper only called once durring create" );
@@ -475,6 +475,67 @@
 				});
 				$.mobile.changePage( "#page1" );
 			});
+		});
+	});
+
+	asyncTest( "external panel: test classes during A>B>A transition", function() {
+		expect( 16 );
+
+		var $panel = $( "#panel-test-external" ).panel(),
+			$firstPage = $( ":jqmData(role='page')" ).first(),
+			$secondPage = $( ":jqmData(role='page')" ).last(),
+			$openButton = $firstPage.find( "a[href='\\#panel-test-external']" ),
+			$link = $panel.find( "a[href='\\#multipage']" ),
+			$back = $panel.find( "a[data-nstest-rel='back']" );
+
+		$panel.one( "panelopen", function( event ) {
+
+			ok( !$panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
+			ok( $panel.hasClass( defaults.classes.panelOpen ), "open class added" );
+			ok( $firstPage.data("nstestPanel") === "open", "open flag set on first page" );
+			equal( $firstPage.find(".ui-panel-wrapper").length, 1, "wrapper exists." );
+
+			$link.trigger( "click" );
+
+		}).one( "panelclose", function( event ) {
+
+			ok( $panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
+			ok( !$panel.hasClass( defaults.classes.panelOpen ), "open class added" );
+			ok( $firstPage.data("nstestPanel") === undefined, "no open flag on first" );
+
+			$panel.trigger( "continue" );
+
+		}).one( "continue", function( event ) {
+
+			setTimeout(function() {
+				$panel.panel( "open" );
+
+				ok( !$panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
+				ok( $panel.hasClass( defaults.classes.panelOpen ), "open class added" );
+				ok( $secondPage.data("nstestPanel") === "open", "open flag set on 2nd page" );
+				equal( $secondPage.find(".ui-panel-wrapper").length, 1, "wrapper exists." );
+
+				$back.trigger( "click" );
+
+			},500);
+
+		}).panel( "open" );
+
+		$back.one( "click", function( event ) {
+
+			ok( $firstPage.data("nstestPanel") === undefined,
+				"no open flag on first page on backwards transition" );
+			equal( $firstPage.find(".ui-panel-wrapper").length, 1, "wrapper exists." );
+
+			setTimeout(function() {
+				$panel.panel( "open" );
+
+				ok( $firstPage.data("nstestPanel") === "open", "open flag set on first page" );
+				ok( !$panel.hasClass( defaults.classes.panelClosed ), "closed class removed" );
+				ok( $panel.hasClass( defaults.classes.panelOpen ), "open class added" );
+
+				start();
+			},500);
 		});
 	});
 
