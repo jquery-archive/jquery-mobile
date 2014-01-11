@@ -656,13 +656,20 @@ module.exports = function( grunt ) {
 			http: {
 				options: {
 					urls: (function() {
-						// Find the test files
-						var suites = _.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
-							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ).sort().reverse(), // So that unit runs before integration
-							patterns, paths,
+						var patterns, paths,
+							suites = ( grunt.option( "suites" ) || process.env.SUITES || "" ).split( "," ),
+							types = ( grunt.option( "types" ) || process.env.TYPES || "" ).split( "," ),
 							prefixes = ["tests/unit/", "tests/integration/"],
 							versionedPaths = [],
-							jQueries = _.without( ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ), "" );
+							jQueries = ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," );
+
+						// Trim empties
+						suites = _.without( suites, "" );
+						types = _.without( types, "" );
+						jQueries = _.without( jQueries, "" );
+
+						// So that unit suites runs before integration suites
+						types = types.sort().reverse();
 
 						if( types.length ){
 							prefixes = [];
