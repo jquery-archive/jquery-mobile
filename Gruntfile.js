@@ -642,9 +642,8 @@ module.exports = function( grunt ) {
 					baseUrl: ".",
 					src: [
 						"js/**/*.js",
-						"!js/jquery.js",
-						"!js/**/jquery.ui*.js",
-						"!js/jquery.hashchange.js"
+						"!js/jquery.tag.inserter.js",
+						"!js/requirejs.config.js"
 					],
 					instrumentedFiles: "temp/",
 					htmlReport: "build/report/coverage",
@@ -740,22 +739,17 @@ module.exports = function( grunt ) {
 			options: {
 
 				// Bower components folder will be removed afterwards
-				clean: true
+				clean: true,
+				destPrefix: "external"
 			},
 			tests: {
-				options: {
-					destPrefix: "external"
-				},
 				files: {
-					"qunit.js": "qunit/qunit/qunit.js",
-					"qunit.css": "qunit/qunit/qunit.css",
+					"qunit/qunit.js": "qunit/qunit/qunit.js",
+					"qunit/qunit.css": "qunit/qunit/qunit.css",
 					"jshint/jshint.js": "jshint/dist/jshint.js"
 				}
 			},
 			requirejs: {
-				options: {
-					destPrefix: "external"
-				},
 				files: {
 					"requirejs/require.js": "requirejs/require.js",
 					"requirejs/plugins/text.js": "requirejs-text/text.js",
@@ -763,16 +757,12 @@ module.exports = function( grunt ) {
 				}
 			},
 			jquery: {
-				options: {
-					destPrefix: "js"
-				},
 				files: {
-					"jquery.js": "jquery/jquery.js"
+					"jquery/jquery.js": "jquery/jquery.js"
 				}
 			},
 			"jquery-ui": {
 				options: {
-					destPrefix: "js",
 					copyOptions: {
 						process: function( content ) {
 							var version = grunt.file.readJSON( "bower.json" ).dependencies[ "jquery-ui" ];
@@ -784,13 +774,12 @@ module.exports = function( grunt ) {
 					}
 				},
 				files: {
-					"jquery.ui.core.js": "jquery-ui/ui/jquery.ui.core.js",
-					"jquery.ui.widget.js": "jquery-ui/ui/jquery.ui.widget.js"
+					"jquery-ui/jquery.ui.core.js": "jquery-ui/ui/jquery.ui.core.js",
+					"jquery-ui/jquery.ui.widget.js": "jquery-ui/ui/jquery.ui.widget.js"
 				}
 			},
 			"jquery-ui-tabs": {
 				options: {
-					destPrefix: "js",
 					copyOptions: {
 						process: function( content ) {
 							var version = grunt.file.readJSON( "bower.json" ).dependencies[ "jquery-ui-tabs" ];
@@ -802,15 +791,12 @@ module.exports = function( grunt ) {
 					}
 				},
 				files: {
-					"widgets/jquery.ui.tabs.js": "jquery-ui-tabs/ui/jquery.ui.tabs.js"
+					"jquery-ui/jquery.ui.tabs.js": "jquery-ui-tabs/ui/jquery.ui.tabs.js"
 				}
 			},
 			"jquery-plugins": {
-				options: {
-					destPrefix: "js"
-				},
 				files: {
-					"jquery.hashchange.js": "jquery-hashchange/jquery.ba-hashchange.js"
+					"jquery/plugins/jquery.hashchange.js": "jquery-hashchange/jquery.ba-hashchange.js"
 				}
 			}
 		},

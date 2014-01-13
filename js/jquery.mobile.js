@@ -49,7 +49,6 @@ define([
 	"./widgets/table.reflow",
 	"./widgets/filterable",
 	"./widgets/filterable.backcompat",
-	"./widgets/jquery.ui.tabs",
 	"./widgets/tabs",
 	"./jquery.mobile.zoom",
 	"./jquery.mobile.zoom.iosorientationfix"

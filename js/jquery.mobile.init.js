@@ -5,7 +5,7 @@
 
 define([
 	"jquery",
-	"./jquery.ui.core",
+	"jquery-ui/jquery.ui.core",
 	"./jquery.mobile.defaults",
 	"./jquery.mobile.helpers",
 	"./jquery.mobile.data",
@@ -16,7 +16,7 @@ define([
 	"./jquery.mobile.navigation",
 	"./widgets/loader",
 	"./jquery.mobile.vmouse",
-	"jquery.hashchange" ], function( jQuery ) {
+	"jquery-plugins/jquery.hashchange" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),

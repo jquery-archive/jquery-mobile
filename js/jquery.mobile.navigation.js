@@ -12,7 +12,7 @@ define( [
 	"./navigation/method",
 	"./jquery.mobile.events",
 	"./jquery.mobile.support",
-	"jquery.hashchange",
+	"jquery-plugins/jquery.hashchange",
 	"./widgets/pagecontainer",
 	"./widgets/page",
 	"./transitions/handlers" ], function( jQuery ) {
