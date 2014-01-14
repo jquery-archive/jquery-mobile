@@ -392,6 +392,7 @@ module.exports = function( grunt ) {
 					processContent: function( content, srcPath ) {
 						var processedName = grunt.config.process( name + "<%= versionSuffix %>" );
 						content = content.replace( /_assets\/js\/">/gi, "_assets/js/index.js\">" );
+						content = content.replace( /\.\.\/external\/jquery\//gi, "js/" );
 						content = content.replace( /\.\.\/js\//gi, "js/" );
 						content = content.replace( /js\/"/gi, "js/" + processedName + ".min.js\"" );
 						content = replaceCombinedCssReference( content, processedName );

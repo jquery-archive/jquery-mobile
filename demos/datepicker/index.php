@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
     <link rel="stylesheet" href="https://rawgithub.com/arschmitz/jquery-mobile-datepicker-wrapper/master/jquery.mobile.datepicker.css" />
-    <script src="../../js/jquery.js"></script>
+    <script src="../../external/jquery/jquery.js"></script>
     <script src="../_assets/js/"></script>
     <script src="../../js/"></script>
     <script src="http://view.jqueryui.com/master/ui/jquery.ui.datepicker.js"></script>

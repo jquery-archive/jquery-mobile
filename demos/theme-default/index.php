@@ -6,7 +6,7 @@
 	<title>Default theme - jQuery Mobile Demos</title>
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<script src="../../js/jquery.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../../js/"></script>
 	<script>
 		$( document ).on( "pagecreate", function() {
