@@ -117,6 +117,10 @@ $.widget( "mobile.filterable", {
 		}
 
 		this._refreshChildWidget();
+
+		this._trigger( "filter", null, {
+			items: filterItems
+		});
 	},
 
 	// The Default implementation of _refreshChildWidget attempts to call
