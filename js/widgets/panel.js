@@ -233,21 +233,19 @@ $.widget( "mobile.panel", {
 		}
 	},
 
-	_bindSwipeEvents: function() {
-		var self = this,
-			area = self._modal ? self.element.add( self._modal ) : self.element;
+	_handleSwipe: function( event ) {
+		if ( !event.isDefaultPrevented() ) {
+			this.close();
+		}
+	},
 
-		// on swipe, close the panel
-		if ( !!self.options.swipeClose ) {
-			if ( self.options.position === "left" ) {
-				area.on( "swipeleft.panel", function(/* e */) {
-					self.close();
-				});
-			} else {
-				area.on( "swiperight.panel", function(/* e */) {
-					self.close();
-				});
-			}
+	_bindSwipeEvents: function() {
+		var handler = {};
+
+		// Close the panel on swipe if the swipe event's default is not prevented
+		if ( this.options.swipeClose ) {
+			handler[ "swipe" + this.options.position ] = "_handleSwipe";
+			this._on( ( this._modal ? this.element.add( this._modal ) : this.element ), handler );
 		}
 	},
 
@@ -487,7 +485,6 @@ $.widget( "mobile.panel", {
 
 		this.element
 			.removeClass( [ this._getPanelClasses(), o.classes.panelOpen, o.classes.animate ].join( " " ) )
-			.off( "swipeleft.panel swiperight.panel" )
 			.off( "panelbeforeopen" )
 			.off( "panelhide" )
 			.off( "keyup.panel" )
