@@ -30,10 +30,14 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 		}
 	});
 
-	function triggerCustomEvent( obj, eventType, event ) {
+	function triggerCustomEvent( obj, eventType, event, bubble ) {
 		var originalType = event.type;
 		event.type = eventType;
-		$.event.dispatch.call( obj, event );
+		if ( bubble ) {
+			$.event.trigger( event, undefined, obj );
+		} else {
+			$.event.dispatch.call( obj, event );
+		}
 		event.type = originalType;
 	}
 
@@ -170,19 +174,30 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
 				var direction = start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight";
 
-				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget, swipestart: start, swipestop: stop }) );
-				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget, swipestart: start, swipestop: stop } ) );
+				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget, swipestart: start, swipestop: stop }), true );
+				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget, swipestart: start, swipestop: stop } ), true );
 				return true;
 			}
 			return false;
 
 		},
 
+		// This serves as a flag to ensure that at most one swipe event event is
+		// in work at any given time
+		context: null,
+
 		setup: function() {
 			var thisObject = this,
 				$this = $( thisObject );
 
 			$this.bind( touchStartEvent, function( event ) {
+
+				// Bail if we're already working on a swipe event
+				if ( $.event.special.swipe.context ) {
+					return;
+				}
+				$.event.special.swipe.context = thisObject;
+
 				var stop,
 					start = $.event.special.swipe.start( event ),
 					origTarget = event.target,
@@ -196,6 +211,11 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					stop = $.event.special.swipe.stop( event );
 					if ( !emitted ) {
 						emitted = $.event.special.swipe.handleSwipe( start, stop, thisObject, origTarget );
+						if ( emitted ) {
+
+							// Reset the context to make way for the next swipe event
+							$.event.special.swipe.context = null;
+						}
 					}
 					// prevent scrolling
 					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
@@ -203,9 +223,12 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					}
 				}
 
-				$this.bind( touchMoveEvent, moveHandler )
+				$document.bind( touchMoveEvent, moveHandler )
 					.one( touchStopEvent, function() {
 						emitted = true;
+
+						// Reset the context to make way for the next swipe event
+						$.event.special.swipe.context = null;
 						$this.unbind( touchMoveEvent, moveHandler );
 				});
 			});
