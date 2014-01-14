@@ -30,10 +30,14 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 		}
 	});
 
-	function triggerCustomEvent( obj, eventType, event ) {
+	function triggerCustomEvent( obj, eventType, event, bubble ) {
 		var originalType = event.type;
 		event.type = eventType;
-		$.event.dispatch.call( obj, event );
+		if ( bubble ) {
+			$.event.trigger( event, undefined, obj );
+		} else {
+			$.event.dispatch.call( obj, event );
+		}
 		event.type = originalType;
 	}
 
@@ -170,25 +174,47 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 				Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
 				var direction = start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight";
 
-				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget, swipestart: start, swipestop: stop }) );
-				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget, swipestart: start, swipestop: stop } ) );
+				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget, swipestart: start, swipestop: stop }), true );
+				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget, swipestart: start, swipestop: stop } ), true );
 				return true;
 			}
 			return false;
 
 		},
 
-		setup: function() {
-			var thisObject = this,
-				$this = $( thisObject );
+		// This serves as a flag to ensure that at most one swipe event event is
+		// in work at any given time
+		eventInProgress: false,
 
-			$this.bind( touchStartEvent, function( event ) {
+		setup: function() {
+			var events,
+				thisObject = this,
+				$this = $( thisObject ),
+				context = {};
+
+			// Retrieve the events data for this element and add the swipe context
+			events = $.data( this, "mobile-events" );
+			if ( !events ) {
+				events = { length: 0 };
+				$.data( this, "mobile-events", events );
+			}
+			events.length++;
+			events.swipe = context;
+
+			context.start = function( event ) {
+
+				// Bail if we're already working on a swipe event
+				if ( $.event.special.swipe.eventInProgress ) {
+					return;
+				}
+				$.event.special.swipe.eventInProgress = true;
+
 				var stop,
 					start = $.event.special.swipe.start( event ),
 					origTarget = event.target,
 					emitted = false;
 
-				function moveHandler( event ) {
+				context.move = function( event ) {
 					if ( !start ) {
 						return;
 					}
@@ -196,23 +222,57 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					stop = $.event.special.swipe.stop( event );
 					if ( !emitted ) {
 						emitted = $.event.special.swipe.handleSwipe( start, stop, thisObject, origTarget );
+						if ( emitted ) {
+
+							// Reset the context to make way for the next swipe event
+							$.event.special.swipe.eventInProgress = false;
+						}
 					}
 					// prevent scrolling
 					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
 						event.preventDefault();
 					}
-				}
+				};
 
-				$this.bind( touchMoveEvent, moveHandler )
-					.one( touchStopEvent, function() {
+				context.stop = function() {
 						emitted = true;
-						$this.unbind( touchMoveEvent, moveHandler );
-				});
-			});
+
+						// Reset the context to make way for the next swipe event
+						$.event.special.swipe.eventInProgress = false;
+						$document.off( touchMoveEvent, context.move );
+						context.move = null;
+				};
+
+				$document.on( touchMoveEvent, context.move )
+					.one( touchStopEvent, context.stop );
+			};
+			$this.on( touchStartEvent, context.start );
 		},
 
 		teardown: function() {
-			$( this ).unbind( touchStartEvent ).unbind( touchMoveEvent ).unbind( touchStopEvent );
+			var events, context;
+
+			events = $.data( this, "mobile-events" );
+			if ( events ) {
+				context = events.swipe;
+				delete events.swipe;
+				events.length--;
+				if ( events.length === 0 ) {
+					$.removeData( this, "mobile-events" );
+				}
+			}
+
+			if ( context ) {
+				if ( context.start ) {
+					$( this ).off( touchStartEvent, context.start );
+				}
+				if ( context.move ) {
+					$document.off( touchMoveEvent, context.move );
+				}
+				if ( context.stop ) {
+					$document.off( touchStopEvent, context.stop );
+				}
+			}
 		}
 	};
 	$.each({
