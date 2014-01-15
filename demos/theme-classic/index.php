@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="theme-classic.css">
 	<link rel="stylesheet" href="../../css/structure/jquery.mobile.structure.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<script src="../../js/jquery.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../../js/"></script>
 	<script>
 		$( document ).on( "pagecreate", function() {
