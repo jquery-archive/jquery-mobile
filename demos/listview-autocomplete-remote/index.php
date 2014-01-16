@@ -12,7 +12,7 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
     <script>
-		$( document ).on( "pageinit", "#myPage", function() {
+		$( document ).on( "pagecreate", "#myPage", function() {
 			$( "#autocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
 				var $ul = $( this ),
 					$input = $( data.input ),

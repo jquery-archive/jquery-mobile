@@ -21,7 +21,7 @@
 	 * Geolocation documentation: http://dev.w3.org/geo/api/spec-source.html
 	 */
 
-	$( document ).on( "pageinit", "#map-page", function() {
+	$( document ).on( "pagecreate", "#map-page", function() {
 		var defaultLatLng = new google.maps.LatLng(34.0983425, -118.3267434);  // Default to Hollywood, CA when no geolocation support
 
 		if ( navigator.geolocation ) {
