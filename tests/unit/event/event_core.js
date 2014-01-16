@@ -6,6 +6,7 @@
 	var libName = "jquery.mobile.events.js",
 	    components = [ "events/touch.js", "events/throttledresize.js", "events/orientationchange.js" ],
 	    absFn = Math.abs,
+			originalPageContainer = $.mobile.pageContainer,
 	    originalEventFn = $.Event.prototype.originalEvent,
 	    preventDefaultFn = $.Event.prototype.preventDefault,
 	    events = ("touchstart touchmove touchend tap taphold " +
@@ -28,7 +29,12 @@
 			// the collections existence in non touch enabled test browsers
 			$.Event.prototype.touches = [{pageX: 1, pageY: 1 }];
 
+			$.mobile.pageContainer = originalPageContainer || $( "body" );
+
 			$($.mobile.pageContainer).unbind( "throttledresize" );
+		},
+		teardown: function() {
+			$.mobile.pageContainer = originalPageContainer;
 		}
 	});
 
