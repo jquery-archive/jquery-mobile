@@ -8,10 +8,22 @@ branches:
   only:
     - master
 env:
-  - JQUERIES=1.8.3
-  - JQUERIES=1.10.2
-  - JQUERIES=2.0.3
-  - JQUERIES=git
+  - TYPES=unit
+    JQUERIES=1.8.3
+  - TYPES=unit
+    JQUERIES=1.10.2
+  - TYPES=unit
+    JQUERIES=2.0.3
+  - TYPES=unit
+    JQUERIES=git
+  - TYPES=integration
+    JQUERIES=1.8.3
+  - TYPES=integration
+    JQUERIES=1.10.2
+  - TYPES=integration
+    JQUERIES=2.0.3
+  - TYPES=integration
+    JQUERIES=git
 notifications:
   irc:
     channels:
