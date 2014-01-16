@@ -344,13 +344,30 @@
 	});
 
 	var swipeTimedTest = function(opts){
-		var swipe = false;
+		var origHandleSwipe = $.event.special.swipe.handleSwipe,
+			handleSwipeAlwaysOnInner = true,
+			swipe = false,
+			bubble = false,
+			qunitFixture = $( "#qunit-fixture" );
 
 		forceTouchSupport();
 
-		$( "#qunit-fixture" ).bind('swipe', function(){
+		qunitFixture.one('swipe', function(){
 			swipe = true;
 		});
+
+		$( "body" ).one( "swipe", function() {
+			bubble = true;
+		});
+
+		// Instrument method handleSwipe
+		$.event.special.swipe.handleSwipe =
+			function( start, stop, thisObject, origTarget ) {
+				if ( thisObject !== qunitFixture[ 0 ] ) {
+					handleSwipeAlwaysOnInner = false;
+				}
+				return origHandleSwipe.apply( this, arguments );
+			};
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
@@ -360,19 +377,23 @@
 			}]
 		};
 
-		$( "#qunit-fixture" ).trigger("touchstart");
+		qunitFixture.trigger("touchstart");
 
 		//NOTE make sure the coordinates are calculated within range
 		//		 to be registered as a swipe
 		mockAbs(opts.coordChange);
 
 		setTimeout(function(){
-			$( "#qunit-fixture" ).trigger("touchmove");
-			$( "#qunit-fixture" ).trigger("touchend");
+			qunitFixture.trigger("touchmove");
+			qunitFixture.trigger("touchend");
 		}, opts.timeout + 100);
 
 		setTimeout(function(){
 			deepEqual(swipe, opts.expected, "swipe expected");
+			deepEqual( bubble, opts.expected, "swipe bubbles when present" );
+			deepEqual( handleSwipeAlwaysOnInner, true, "handleSwipe is always called on the inner element" );
+			qunitFixture.off( "swipe" );
+			$( "body" ).off( "swipe" );
 			start();
 		}, opts.timeout + 200);
 
