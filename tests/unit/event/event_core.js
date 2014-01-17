@@ -350,19 +350,48 @@
 	});
 
 	var swipeTimedTest = function(opts){
-		var origHandleSwipe = $.event.special.swipe.handleSwipe,
+		var newHandlerCount, origHandlerCount,
+			origHandleSwipe = $.event.special.swipe.handleSwipe,
 			handleSwipeAlwaysOnInner = true,
 			swipe = false,
 			bubble = false,
-			qunitFixture = $( "#qunit-fixture" );
+			qunitFixture = $( "#qunit-fixture" ),
+			body = $( "body" ),
+			dummyFunction = function() {},
+			getHandlerCount = function( element ) {
+				var event, index,
+					eventNames = [ "touchstart", "touchmove", "touchend" ],
+					returnValue = {},
+					events = $._data( element, "events" );
+
+				for ( index in eventNames ) {
+					returnValue[ eventNames[ index ] ] = 0;
+					if ( events && events[ eventNames[ index ] ] ) {
+						returnValue[ eventNames[ index ] ] =
+							( events[ eventNames[ index ] ].length || 0 );
+					}
+				}
+
+				return returnValue;
+			};
 
 		forceTouchSupport();
+
+		// Attach a dummy function to ensure that the swipe teardown leaves it attached
+		body.add( qunitFixture )
+			.on( "touchstart touchmove touchend", dummyFunction );
+
+		// Count handlers - this will include the function added above
+		origHandlerCount = {
+			body: getHandlerCount( body[ 0 ] ),
+			qunitFixture: getHandlerCount( qunitFixture[ 0 ] )
+		};
 
 		qunitFixture.one('swipe', function(){
 			swipe = true;
 		});
 
-		$( "body" ).one( "swipe", function() {
+		body.one( "swipe", function() {
 			bubble = true;
 		});
 
@@ -398,8 +427,19 @@
 			deepEqual(swipe, opts.expected, "swipe expected");
 			deepEqual( bubble, opts.expected, "swipe bubbles when present" );
 			deepEqual( handleSwipeAlwaysOnInner, true, "handleSwipe is always called on the inner element" );
+
+			// Make sure swipe handlers are removed in case swipe never fired
 			qunitFixture.off( "swipe" );
 			$( "body" ).off( "swipe" );
+
+			deepEqual({
+				body: getHandlerCount( body[ 0 ] ),
+				qunitFixture: getHandlerCount( qunitFixture[ 0 ] )
+			}, origHandlerCount, "exactly the swipe-related event handlers are removed." );
+
+			// Remove dummy event handler
+			body.add( qunitFixture )
+				.off( "touchstart touchmove touchend", dummyFunction );
 			start();
 		}, opts.timeout + 200);
 
