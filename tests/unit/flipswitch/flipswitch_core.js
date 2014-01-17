@@ -58,5 +58,13 @@
 		$("#flip-select").trigger("swiperight");
 		ok( $("#flip-select").parent().hasClass("ui-flipswitch-active"), "should not be active" );
 	});
+	test( "checkbox based flipswitch is untabbable", function() {
+		deepEqual( parseInt( $( "#flip-checkbox" ).attr( "tabindex" ) ), -1,
+			"tabindex is set to -1" );
+	});
+	test( "select based flipswitch is untabbable", function() {
+		deepEqual( parseInt( $( "#flip-select" ).attr( "tabindex" ) ), -1,
+			"tabindex is set to -1" );
+	});
 
 })( jQuery );
