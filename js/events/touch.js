@@ -186,15 +186,20 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 		// in work at any given time
 		eventInProgress: false,
 
-		// This hash helps teardown remove all the right handlers
-		contexts: {},
-
 		setup: function() {
-			var thisObject = this,
+			var events,
+				thisObject = this,
 				$this = $( thisObject ),
 				context = {};
 
-			$.event.special.swipe.contexts[ this ] = context;
+			// Retrieve the events data for this element and add the swipe context
+			events = $.data( this, "mobile-events" );
+			if ( !events ) {
+				events = { length: 0 };
+				$.data( this, "mobile-events", events );
+			}
+			events.length++;
+			events.swipe = context;
 
 			context.start = function( event ) {
 
@@ -245,7 +250,17 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 		},
 
 		teardown: function() {
-			var context = $.event.special.swipe.contexts[ this ];
+			var events, context;
+
+			events = $.data( this, "mobile-events" );
+			if ( events ) {
+				context = events.swipe;
+				delete events.swipe;
+				events.length--;
+				if ( events.length === 0 ) {
+					$.removeData( this, "mobile-events" );
+				}
+			}
 
 			if ( context ) {
 				if ( context.start ) {
@@ -258,8 +273,6 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 					$document.off( touchStopEvent, context.stop );
 				}
 			}
-
-			delete $.event.special.swipe.contexts[ this ];
 		}
 	};
 	$.each({
