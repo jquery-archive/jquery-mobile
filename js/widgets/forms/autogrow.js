@@ -54,15 +54,30 @@ define( [
 		// content has become visible, but the collapsible is still collapsed, so
 		// the autogrow textarea is still not visible.
 		_handleShow: function( event ) {
+			var eventNs = ".textinputAutogrow" + this.uuid,
+				eventName = "transitionend" + eventNs +
+					" webkitTransitionEnd" + eventNs +
+					" oTransitionEnd" + eventNs;
+
 			if ( $.contains( event.target, this.element[ 0 ] ) &&
 				this.element.is( ":visible" ) ) {
 
 				if ( event.type !== "popupbeforeposition" ) {
 					this.element
 						.addClass( "ui-textinput-autogrow-resize" )
-						.one( "transitionend webkitTransitionEnd oTransitionEnd",
+
+						// Remove previous events in case none of them fired
+						.off( eventName )
+
+						// Listen for the first event related to the transition ending
+						.one( eventName,
 							$.proxy( function() {
-								this.element.removeClass( "ui-textinput-autogrow-resize" );
+
+								this.element
+
+									// Remove events not emitted by this browser
+									.off( eventName )
+									.removeClass( "ui-textinput-autogrow-resize" );
 							}, this ) );
 				}
 				this._prepareHeightUpdate();

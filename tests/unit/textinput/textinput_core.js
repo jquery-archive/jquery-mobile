@@ -91,6 +91,43 @@
 		]);
 	});
 
+	test( "text area should not keep attaching transition end handlers to itself",
+		function() {
+			var newNumberOfHandlers,
+				textarea = $( "#reference-autogrow" ),
+				getMaxEventHandlers = function() {
+					var index,
+						numberOfHandlers = 0,
+						eventHandlers = $._data( textarea[ 0 ], "events" ),
+						eventNames = [
+							"transitionend",
+							"oTransitionEnd",
+							"webkitTransitionEnd"
+						];
+
+					for ( index in eventNames ) {
+						numberOfHandlers = Math.max( numberOfHandlers,
+							( ( eventHandlers[ eventNames[ index ] ] &&
+								eventHandlers[ eventNames[ index ] ].length ) || 0 ) );
+					}
+
+					return numberOfHandlers;
+				},
+				initialNumberOfHandlers = getMaxEventHandlers();
+
+			$( document ).trigger( "updatelayout" );
+			$( document ).trigger( "updatelayout" );
+			$( document ).trigger( "updatelayout" );
+			$( document ).trigger( "updatelayout" );
+
+			newNumberOfHandlers = getMaxEventHandlers();
+
+			deepEqual( newNumberOfHandlers - initialNumberOfHandlers < 4, true,
+				"Fewer than four additional transition end event handlers were attached " +
+				"(initial " + initialNumberOfHandlers +
+				" vs. final " + newNumberOfHandlers + ")" );
+		});
+
 	// NOTE init binding to alter the setting is in settings.js
 	test( "'clear text' button for search inputs should use configured text", function(){
 		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
