@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -35,45 +35,45 @@
 </head>
 <body>
 
-<div id="qunit"></div>
+	<div id="qunit"></div>
 
-<div id="qunit-fixture">
+	<div id="qunit-fixture">
 
-<div id="widget-wrapper">
-	<div id="widget">
-		<div>...</div>
+		<div id="widget-wrapper">
+			<div id="widget">
+				<div>...</div>
+			</div>
+		</div>
+
 	</div>
-</div>
 
-</div>
-
-<div id="foo" data-nstest-role="page">
-	<input type="range" id="foo-slider" name="foo-slider" value="" />
-	<div id="enhance-prevented">
-	</div>
-	<div id="enhance-allowed">
-	</div>
-</div>
-
-<div id="ignored" data-nstest-enhance="false" style="display: none">
-	<div id="ignored-collapsible" data-nstest-role="collapsible">
-	</div>
-</div>
-
-<div id="many-ignored" style="display: none">
-	<div>
-		<div id="many-enhanced-collapsible" data-nstest-role="collapsible">
+	<div id="foo" data-nstest-role="page">
+		<input type="range" id="foo-slider" name="foo-slider" value="" />
+		<div id="enhance-prevented">
+		</div>
+		<div id="enhance-allowed">
 		</div>
 	</div>
-	<div data-nstest-enhance="false">
-		<div id="many-ignored-collapsible" data-nstest-role="collapsible">
+
+	<div id="ignored" data-nstest-enhance="false" style="display: none">
+		<div id="ignored-collapsible" data-nstest-role="collapsible">
 		</div>
 	</div>
-</div>
 
-<div id="not-ignored" style="display: none">
-	<div id="collapsible" data-nstest-role="collapsible">
+	<div id="many-ignored" style="display: none">
+		<div>
+			<div id="many-enhanced-collapsible" data-nstest-role="collapsible">
+			</div>
+		</div>
+		<div data-nstest-enhance="false">
+			<div id="many-ignored-collapsible" data-nstest-role="collapsible">
+			</div>
+		</div>
 	</div>
-</div>
+
+	<div id="not-ignored" style="display: none">
+		<div id="collapsible" data-nstest-role="collapsible">
+		</div>
+	</div>
 </body>
 </html>

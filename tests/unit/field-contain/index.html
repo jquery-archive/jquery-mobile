@@ -1,9 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
 	<title>jQuery Mobile FieldContain Integration Test</title>
-
 
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
@@ -32,32 +31,32 @@
 
 	<div id="qunit"></div>
 
-<div data-nstest-role="page">
+	<div data-nstest-role="page">
 
-	<!-- Basic fieldcontain test -->
-	<div id="test-fieldcontain" data-nstest-role="fieldcontain">
-	    <label for="name">Text Input:</label>
-	    <input type="text" name="name" id="name" value=""  />
+		<!-- Basic fieldcontain test -->
+		<div id="test-fieldcontain" data-nstest-role="fieldcontain">
+			<label for="name">Text Input:</label>
+			<input type="text" name="name" id="name" value=""  />
+		</div>
+
 	</div>
 
-</div>
+	<div id="enhancetest">
+		<div data-nstest-role="fieldcontain">
+		</div>
+	</div>
 
-<div id="enhancetest">
-  <div data-nstest-role="fieldcontain">
-  </div>
-</div>
+	<div id="ignore-container-tests">
+		<div data-nstest-enhance="false">
+			<div data-nstest-role="fieldcontain" id="ignored-fieldcontain">
+			</div>
+		</div>
 
-<div id="ignore-container-tests">
-  <div data-nstest-enhance="false">
-    <div data-nstest-role="fieldcontain" id="ignored-fieldcontain">
-    </div>
-  </div>
-
-  <div>
-    <div data-nstest-role="fieldcontain" id="enhanced-fieldcontain">
-    </div>
-  </div>
-</div>
+		<div>
+			<div data-nstest-role="fieldcontain" id="enhanced-fieldcontain">
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -33,49 +33,49 @@
 
 	<div id="qunit"></div>
 
-<div id="qunit-fixture">
-	<div data-nstest-role="page">
-		<div data-nstest-role="header">
-			<div>
+	<div id="qunit-fixture">
+		<div data-nstest-role="page">
+			<div data-nstest-role="header">
+				<div>
+					<a href="foo">foo</a>
+				</div>
+				<a href="foo">foo</a>
+			</div><!-- /header -->
+
+			<div  data-nstest-role="footer">
+				<div>
+					<a href="foo">foo</a>
+				</div>
+
+				<a href="foo">foo</a>
+			</div><!-- /header -->
+
+			<div class="ui-bar">
+				<div>
+					<a href="foo">foo</a>
+				</div>
+
 				<a href="foo">foo</a>
 			</div>
-			<a href="foo">foo</a>
-		</div><!-- /header -->
-
-		<div  data-nstest-role="footer">
-			<div>
-				<a href="foo">foo</a>
-			</div>
-
-			<a href="foo">foo</a>
-		</div><!-- /header -->
-
-		<div class="ui-bar">
-			<div>
-				<a href="foo">foo</a>
-			</div>
-
-			<a href="foo">foo</a>
 		</div>
 	</div>
-</div>
 
-<div data-nstest-enhance="false">
-	<div data-nstest-role="header" id="ignored-header">
-		<div>
+	<div data-nstest-enhance="false">
+		<div data-nstest-role="header" id="ignored-header">
+			<div>
+				<a href="foo">foo</a>
+			</div>
 			<a href="foo">foo</a>
-		</div>
-		<a href="foo">foo</a>
-	</div><!-- /header -->
-</div>
+		</div><!-- /header -->
+	</div>
 
-<div>
-	<div data-nstest-role="header" id="enhanced-header">
-		<div>
+	<div>
+		<div data-nstest-role="header" id="enhanced-header">
+			<div>
+				<a href="foo">foo</a>
+			</div>
 			<a href="foo">foo</a>
-		</div>
-		<a href="foo">foo</a>
-	</div><!-- /header -->
-</div>
+		</div><!-- /header -->
+	</div>
 </body>
 </html>
