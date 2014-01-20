@@ -27,7 +27,8 @@ $.widget( "mobile.selectmenu", $.extend( {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		mini: false
+		mini: false,
+		enhanced: false
 	},
 
 	_button: function() {
@@ -94,14 +95,12 @@ $.widget( "mobile.selectmenu", $.extend( {
 		}
 	},
 
-	_create: function() {
+	_enhance: function() {
 		this._preExtension();
 
 		this.button = this._button();
 
-		var self = this,
-
-			options = this.options,
+		var options = this.options,
 
 			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
@@ -110,12 +109,10 @@ $.widget( "mobile.selectmenu", $.extend( {
 				.attr( "id", this.buttonId )
 				.addClass( "ui-btn" +
 					( options.icon ? ( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos +
-					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
+						( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
 					( options.theme ? " ui-btn-" + options.theme : "" ) +
 					( options.corners ? " ui-corner-all" : "" ) +
 					( options.shadow ? " ui-shadow" : "" ) );
-
-		this.setButtonText();
 
 		// Opera does not properly support opacity on select elements
 		// In Mini, it hides the element, but not its text
@@ -132,11 +129,30 @@ $.widget( "mobile.selectmenu", $.extend( {
 				.hide()
 				.appendTo( button.addClass( "ui-li-has-count" ) );
 		}
+	},
+
+	_create: function() {
+		var self = this,
+			options = this.options;
+
+		this.select = this.element;
+		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
+		this.buttonId = this.selectId + "-button";
+		this.label = $( "label[for='"+ this.selectId +"']" );
+		this.isMultiple = this.select[ 0 ].multiple;
 
 		// Disable if specified
-		if ( options.disabled || this.element.attr( "disabled" )) {
+		if ( this.options.disabled || this.element.attr( "disabled" )) {
 			this.disable();
 		}
+
+		if ( !this.options.enhanced ) {
+			this._enhance();
+		} else {
+			this.button = this.element.closest( ".ui-btn" );
+		}
+
+		this.setButtonText();
 
 		// Events on native select
 		this.select.change(function() {
