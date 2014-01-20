@@ -693,10 +693,10 @@ module.exports = function( grunt ) {
 						// Remove negations from list of suites
 						suites = _.filter( suites, function( suite ) { return ( !/^!/.test( suite ) ); } );
 
-						if( types.length ){
+						if ( types.length ){
 							testDirs = [];
 							types.forEach(function( type ) {
-								testDirs.push( "tests/" + type );
+								testDirs.push( type );
 							});
 						}
 
@@ -710,6 +710,7 @@ module.exports = function( grunt ) {
 							.difference( excludes )
 							.forEach( function( suite ) {
 								testDirs.forEach( function( dir ) {
+									dir = "tests/" + dir;
 									patterns = patterns.concat([
 										dir + "/" + suite + "/index.html",
 										dir + "/" + suite + "/*/index.html",
