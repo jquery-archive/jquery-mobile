@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
 <head>
@@ -28,24 +28,20 @@
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Toolbar Test Suite</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests">
-</ol>
+	<div id="qunit"></div>
 
-<div data-nstest-role="page">
-	<div data-role="content">
-		<a href="#page2" id="go-to-page2">Go</a>
+	<div data-nstest-role="page">
+		<div data-role="content">
+			<a href="#page2" id="go-to-page2">Go</a>
+		</div>
 	</div>
-</div>
-<div data-nstest-role="page" id="page2">
-	<div id="header" data-nstest-role="header" data-nstest-add-back-btn="true">
-		<h1>Header</h1>
+	<div data-nstest-role="page" id="page2">
+		<div id="header" data-nstest-role="header" data-nstest-add-back-btn="true">
+			<h1>Header</h1>
+		</div>
+		<div data-nstest-role="content">
+			<p>Content</p>
+		</div>
 	</div>
-	<div data-nstest-role="content">
-		<p>Content</p>
-	</div>
-</div>
 </body>
 </html>
