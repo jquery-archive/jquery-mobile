@@ -120,7 +120,6 @@ $.widget( "mobile.page", $.mobile.page, {
 				.attr( "data-" + $.mobile.ns + "rel", "back" )
 				.text( text || this.options.closeBtnText || "" )
 				.prependTo( dst );
-			this._on( btn, { click: "close" } );
 		}
 
 		this._headerCloseButton = btn;
