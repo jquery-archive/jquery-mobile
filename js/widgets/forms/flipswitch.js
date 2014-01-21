@@ -41,9 +41,7 @@ $.widget( "mobile.flipswitch", $.extend({
 			this._handleFormReset();
 
 			// Transfer tabindex to "on" element and make input unfocusable
-			$.extend( this, {
-				_originalTabIndex: this.element.attr( "tabindex" )
-			});
+			this._originalTabIndex = this.element.attr( "tabindex" );
 			if ( this._originalTabIndex != null ) {
 				this.on.attr( "tabindex", this._originalTabIndex );
 			}
@@ -74,7 +72,6 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_handleInputFocus: function( event ) {
-		$( event.target ).blur();
 		this.on.focus();
 	},
 
