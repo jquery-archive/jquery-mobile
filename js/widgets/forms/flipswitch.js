@@ -71,7 +71,7 @@ $.widget( "mobile.flipswitch", $.extend({
 			});
 	},
 
-	_handleInputFocus: function( event ) {
+	_handleInputFocus: function() {
 		this.on.focus();
 	},
 
