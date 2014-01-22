@@ -13,63 +13,36 @@
 	<script src="../../js/"></script>
 	<script id="demo-script">
 $.mobile.document
-	.on( "pagebeforechange", function( event, data ) {
+	.on( "pagecontainerbeforetransition", function( event, data ) {
 		var hashQuery, cleanHash, url, hash, absNoHash, queryParameters;
 
-		// pagebeforechange gets called twice for each page change. The first time
-		// around data.toPage contains a string, and the second time around it
-		// contains a jQuery object (the destination page itself).
-		// This behaviour is deprecated. As of 1.5.0 pagebeforechange will only be
-		// called once per page change, with a string. Until then, however, we need
-		// to ignore the case where data.toPage is not a string.
-		if ( $.type( data.toPage ) === "string" ) {
+		// Split the URL of the destination page into its components, retrieve the
+		// hash, create an object from the query string, and replace all URLs in
+		// data with a version that does not include the hash query string
+		url = $.mobile.path.parseUrl( data.absUrl );
+		hash = url.hash;
+		absNoHash = url.hrefNoHash;
+		queryParameters = {};
+		hashQuery = hash.split( "?" );
+		cleanHash = hashQuery[ 0 ] || "";
 
-			// Split the URL of the destination page into its components, retrieve the
-			// hash, create an object from the query string, and replace all URLs in
-			// data with a version that does not include the hash query string
-			url = $.mobile.path.parseUrl( data.absUrl );
-			hash = url.hash;
-			absNoHash = url.hrefNoHash;
-			queryParameters = {};
-			hashQuery = hash.split( "?" );
-			cleanHash = hashQuery[ 0 ] || "";
+		// We're only interested in the case where we're navigating to the
+		// secondary page
+		if ( cleanHash === "#secondary-page" ) {
 
-			// We're only interested in the case where we're navigating to the
-			// secondary page
-			if ( cleanHash === "#secondary-page" ) {
+			// Assemble query parameters object from the query string
+			hashQuery = hashQuery.length > 1 ? hashQuery[ 1 ] : "";
+			$.each( hashQuery.split( "&" ), function( index, value ) {
+				var pair = value.split( "=" );
 
-				// Assemble query parameters object from the query string
-				hashQuery = hashQuery.length > 1 ? hashQuery[ 1 ] : "";
-				$.each( hashQuery.split( "&" ), function( index, value ) {
-					var pair = value.split( "=" );
+				if ( pair.length > 0 && pair[ 0 ] ) {
+					queryParameters[ pair[ 0 ] ] =
+						( pair.length > 1 ? pair[ 1 ] : true );
+				}
+			});
 
-					if ( pair.length > 0 && pair[ 0 ] ) {
-						queryParameters[ pair[ 0 ] ] =
-							( pair.length > 1 ? pair[ 1 ] : true );
-					}
-				});
-
-				// Remove the hash query from the event data
-				data.options.target = 
-				data.absUrl = url.hrefNoHash + cleanHash;
-				data.originalHref = cleanHash;
-
-				// Attach query parameters for use later on
-				data.options.queryParameters = queryParameters;
-			}
-		}
-	})
-	.on( "pagebeforetransition", function( event, data ) {
-
-		// Restore original state
-		$( "#section" ).text( "" );
-
-		// Retrieve the section stored in the event data ...
-		if ( data.toPage.attr( "id" ) === "secondary-page" &&
-			data.options.queryParameters.section ) {
-
-			// ... and set it as the page title
-			$( "#section" ).text( data.options.queryParameters.section );
+			$( "#section" ).text( queryParameters.section );
+			$( "#secondary-page" ).jqmData( "url", hash );
 		}
 	});
 	</script>
