@@ -105,7 +105,7 @@ $.mobile.document
 
 	<div id="demo-page" data-role="page">
 		<div data-role="header">
-			<a href="#main-page">Back To Demos</a>
+			<a href="#main-page" class="ui-btn ui-icon-back ui-btn-icon-left">Back To Demos</a>
 			<h1>Demo Main Page</h1>
 		</div>
 		<div role="main" class="ui-content">
@@ -118,8 +118,8 @@ $.mobile.document
 
 	<div id="secondary-page" data-role="page">
 		<div data-role="header">
-			<a href="#demo-page">Back To Main Page</a>
-			<a href="#main-page">Back To Demos</a>
+			<a href="#demo-page" class="ui-btn ui-icon-back ui-btn-icon-left">Back To Main Page</a>
+			<a href="#main-page" class="ui-btn ui-icon-arrow-u ui-btn-icon-left">Back To Demos</a>
 			<h1 id="section"></h1>
 		</div>
 		<div role="main" class="ui-content">
