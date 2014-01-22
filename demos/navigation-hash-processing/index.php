@@ -41,7 +41,11 @@ $.mobile.document
 				}
 			});
 
+			// Set the title from the query parameters
 			$( "#section" ).text( queryParameters.section );
+
+			// Set the url of the page - this will be used by navigation to set the
+			// URL in the location bar
 			$( "#secondary-page" ).jqmData( "url", hash );
 		}
 	});
