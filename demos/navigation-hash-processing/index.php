@@ -109,7 +109,8 @@ $.mobile.document
 			<h1>Demo Main Page</h1>
 		</div>
 		<div role="main" class="ui-content">
-			<a href="#secondary-page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Area</a>
+			<p>The following three buttons all take you to the same page. However, when you get there, you will notice that the title of the page is different depending on which button you have clicked.</p>
+			<a href="#secondary-page?section=My Area" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Area</a>
 			<a href="#secondary-page?section=My Friends" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Friends</a>
 			<a href="#secondary-page?section=My Items" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Items</a>
 		</div>
@@ -121,6 +122,8 @@ $.mobile.document
 			<a href="#main-page">Back To Demos</a>
 			<h1 id="section"></h1>
 		</div>
-
+		<div role="main" class="ui-content">
+			<p>This is the second page in the demo. Notice that, as you navigate to this page from the main page, the title of this page changes depending on which button on the main page you clicked.</p>
+		</div>
 </body>
 </html>
