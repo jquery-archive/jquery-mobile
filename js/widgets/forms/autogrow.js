@@ -93,7 +93,9 @@ define( [
 		},
 
 		_updateHeight: function() {
-
+			var paddingTop, paddingBottom, paddingHeight, scrollHeight, clientHeight,
+				borderTop, borderBottom, borderHeight, height,
+				scrollTop = this.window.scrollTop();
 			this.keyupTimeout = 0;
 
 			// IE8 textareas have the onpage property - others do not
@@ -105,13 +107,12 @@ define( [
 				});
 			}
 
-			var paddingTop, paddingBottom, paddingHeight,
-				scrollHeight = this.element[ 0 ].scrollHeight,
-				clientHeight = this.element[ 0 ].clientHeight,
-				borderTop = parseFloat( this.element.css( "border-top-width" ) ),
-				borderBottom = parseFloat( this.element.css( "border-bottom-width" ) ),
-				borderHeight = borderTop + borderBottom,
-				height = scrollHeight + borderHeight + 15;
+			scrollHeight = this.element[ 0 ].scrollHeight;
+			clientHeight = this.element[ 0 ].clientHeight;
+			borderTop = parseFloat( this.element.css( "border-top-width" ) );
+			borderBottom = parseFloat( this.element.css( "border-bottom-width" ) );
+			borderHeight = borderTop + borderBottom;
+			height = scrollHeight + borderHeight + 15;
 
 			// Issue 6179: Padding is not included in scrollHeight and
 			// clientHeight by Firefox if no scrollbar is visible. Because
@@ -132,6 +133,8 @@ define( [
 				"min-height": "",
 				"max-height": ""
 			});
+
+			this.window.scrollTop( scrollTop );
 		},
 
 		refresh: function() {
