@@ -44,7 +44,7 @@ $.widget( "mobile.panel", {
 
 	_create: function() {
 		var el = this.element,
-			parentPage = el.closest( ":jqmData(role='page')" );
+			parentPage = el.closest( ".ui-page, :jqmData(role='page')" );
 
 		// expose some private props to other methods
 		$.extend( this, {
@@ -52,10 +52,11 @@ $.widget( "mobile.panel", {
 			_parentPage: ( parentPage.length > 0 ) ? parentPage : false,
 			_page: this._getPage,
 			_panelInner: this._getPanelInner(),
-			_wrapper: this._getWrapper,
 			_fixedToolbars: this._getFixedToolbars
 		});
-
+		if ( this.options.display !== "overlay" ){
+			this._getWrapper();
+		}
 		this._addPanelClasses();
 
 		// if animating, add the class to do so
@@ -104,14 +105,13 @@ $.widget( "mobile.panel", {
 
 	_getWrapper: function() {
 		var wrapper = this._page().find( "." + this.options.classes.pageWrapper );
-
 		if ( wrapper.length === 0 ) {
 			wrapper = this._page().children( ".ui-header:not(.ui-header-fixed), .ui-content:not(.ui-popup), .ui-footer:not(.ui-footer-fixed)" )
 				.wrapAll( "<div class='" + this.options.classes.pageWrapper + "'></div>" )
 				.parent();
 		}
 
-		return wrapper;
+		this._wrapper = wrapper;
 	},
 
 	_getFixedToolbars: function() {
@@ -275,7 +275,11 @@ $.widget( "mobile.panel", {
 					self.close();
 				}
 			});
-
+		if ( !this._parentPage && this.options.display !== "overlay" ) {
+			this._on( this.document, {
+				"pageshow": "_getWrapper"
+			});
+		}
 		// Clean up open panels after page hide
 		if ( self._parentPage ) {
 			this.document.on( "pagehide", ":jqmData(role='page')", function() {
@@ -307,7 +311,7 @@ $.widget( "mobile.panel", {
 					self._page().jqmData( "panel", "open" );
 
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
-						self._wrapper().addClass( o.classes.animate );
+						self._wrapper.addClass( o.classes.animate );
 						self._fixedToolbars().addClass( o.classes.animate );
 					}
 
@@ -332,7 +336,7 @@ $.widget( "mobile.panel", {
 
 					if ( o.display !== "overlay" ) {
 						self._page().parent().addClass( o.classes.pageContainer );
-						self._wrapper().addClass( self._pageContentOpenClasses );
+						self._wrapper.addClass( self._pageContentOpenClasses );
 						self._fixedToolbars().addClass( self._pageContentOpenClasses );
 					}
 
@@ -346,7 +350,7 @@ $.widget( "mobile.panel", {
 				complete = function() {
 
 					if ( o.display !== "overlay" ) {
-						self._wrapper().addClass( o.classes.pageContentPrefix + "-open" );
+						self._wrapper.addClass( o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().addClass( o.classes.pageContentPrefix + "-open" );
 					}
 
@@ -379,7 +383,7 @@ $.widget( "mobile.panel", {
 					self.element.removeClass( o.classes.panelOpen );
 
 					if ( o.display !== "overlay" ) {
-						self._wrapper().removeClass( self._pageContentOpenClasses );
+						self._wrapper.removeClass( self._pageContentOpenClasses );
 						self._fixedToolbars().removeClass( self._pageContentOpenClasses );
 					}
 
@@ -402,12 +406,12 @@ $.widget( "mobile.panel", {
 
 					if ( o.display !== "overlay" ) {
 						self._page().parent().removeClass( o.classes.pageContainer );
-						self._wrapper().removeClass( o.classes.pageContentPrefix + "-open" );
+						self._wrapper.removeClass( o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
 					}
 
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
-						self._wrapper().removeClass( o.classes.animate );
+						self._wrapper.removeClass( o.classes.animate );
 						self._fixedToolbars().removeClass( o.classes.animate );
 					}
 
@@ -442,7 +446,7 @@ $.widget( "mobile.panel", {
 			//  remove the wrapper if not in use by another panel
 			otherPanels = $( "body > :mobile-panel" ).add( $.mobile.activePage.find( ":mobile-panel" ) );
 			if ( otherPanels.not( ".ui-panel-display-overlay" ).not( this.element ).length === 0 ) {
-				this._wrapper().children().unwrap();
+				this._wrapper.children().unwrap();
 			}
 
 			if ( this._open ) {

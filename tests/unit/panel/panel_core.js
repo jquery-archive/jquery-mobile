@@ -5,8 +5,10 @@
 
 (function( $ ){
 
-	var defaults = $.mobile.panel.prototype.options,
-		classes = defaults.classes;
+	var count,
+		defaults = $.mobile.panel.prototype.options,
+		classes = defaults.classes,
+		originalWidget = $.mobile.panel.prototype;
 
 	function getPageFromPanel( $panel ) {
 		return $panel.closest( ":jqmData(role='page')" );
@@ -352,6 +354,128 @@
 			},
 			start
 		]);
+	});
+	module( "wrapper generation", {
+		setup: function() {
+			count = 0;
+			$.widget( "mobile.panel", $.mobile.panel, {
+				_getWrapper: function() {
+					this._super();
+					count++;
+				}
+			});
+		},
+		teardown: function() {
+			$.mobile.panel.prototype = originalWidget;
+		}
+	});
+	asyncTest( "overlay panel should not call getWrapper", function(){
+		expect( 5 );
+		var testPanel = $( "#panel-test-get-wrapper-overlay" );
+
+		testPanel.panel({
+			"display": "overlay"
+		});
+		ok( count === 0, "getWrapper only called once durring create" );
+		testPanel.panel( "open" );
+		testPanel.one( "panelopen", function(){
+			ok( count === 0, "getWrapper not called on open" );
+		});
+		testPanel.panel( "close" );
+		testPanel.one( "panelclose", function(){
+			ok( count === 0, "getWrapper not called on close" );
+			$.mobile.changePage( "#page2" );
+		});
+		$( "body" ).one( "pagechange", function(){
+			ok( count === 0, "getWrapper not called on pagechange" );
+			$.mobile.changePage( "#page1" );
+			$( "body" ).one( "pagechange", function(){
+				ok( count === 0, "getWrapper not called on pagechange back to inital page" );
+				start();
+			});
+		});
+
+	});
+	asyncTest( "push should call getWrapper only once on create", function(){
+		expect( 5 );
+		var testPanel = $( "#panel-test-get-wrapper-push" );
+
+		testPanel.panel({
+			"display": "push"
+		});
+		ok( count === 1, "getWrapper only called once durring create" );
+		testPanel.panel( "open" );
+		testPanel.one( "panelopen", function(){
+			ok( count === 1, "getWrapper not called on open" );
+		});
+		testPanel.panel( "close" );
+		testPanel.one( "panelclose", function(){
+			ok( count === 1, "getWrapper not called on close" );
+			$.mobile.changePage( "#page2" );
+		});
+		$( "body" ).one( "pagechange", function(){
+			ok( count === 1, "getWrapper not called on pagechange" );
+			$.mobile.changePage( "#page1" );
+			$( "body" ).one( "pagechange", function(){
+				ok( count === 1, "getWrapper not called on pagechange back to inital page" );
+				start();
+			});
+		});
+
+	});
+	asyncTest( "reveal panel should call getWrapper only once on create", function(){
+		expect( 5 );
+		var testPanel = $( "#panel-test-get-wrapper" );
+
+		testPanel.panel();
+		ok( count === 1, "getWrapper only called once durring create" );
+		testPanel.panel( "open" );
+		testPanel.one( "panelopen", function(){
+			ok( count === 1, "getWrapper not called on open" );
+		});
+		testPanel.panel( "close" );
+		testPanel.one( "panelclose", function(){
+			ok( count === 1, "getWrapper not called on close" );
+			$.mobile.changePage( "#page2" );
+		});
+		$( "body" ).one( "pagechange", function(){
+			ok( count === 1, "getWrapper not called on pagechange" );
+			$.mobile.changePage( "#page1" );
+			$( "body" ).one( "pagechange", function(){
+				ok( count === 1, "getWrapper not called on pagechange back to inital page" );
+				start();
+			});
+		});
+
+	});
+	asyncTest( "external panel should call panel once on create and on page changes", function(){
+		expect( 5 );
+		var testPanel = $( "#external-panel-test" );
+
+		testPanel.panel();
+		ok( count === 1, "getWrapper only called once durring create" );
+		testPanel.panel( "open" );
+		testPanel.one( "panelopen", function(){
+			ok( count === 1, "getWrapper not called on open" );
+		});
+		testPanel.panel( "close" );
+		testPanel.one( "panelclose", function(){
+			ok( count === 1, "getWrapper not called on close" );
+			$.mobile.changePage( "#page2" );
+			$( "body" ).one( "pageshow", function(){
+				window.setTimeout( function(){
+					ok( count === 2, "getWrapper called on pagechange" );
+				}, 0 );
+
+				$( "body" ).one( "pageshow", function(){
+					window.setTimeout( function(){
+						ok( count === 3, "getWrapper called on pagechange back to inital page" );
+						start();
+					}, 0 );
+				});
+				$.mobile.changePage( "#page1" );
+			});
+		});
 	});
 
 }( jQuery ));
