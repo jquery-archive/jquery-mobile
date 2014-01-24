@@ -26,6 +26,8 @@ define( [
 		},
 
 		_autogrow: function() {
+			this.element.addClass( "ui-textinput-autogrow" );
+
 			this._on({
 				"keyup": "_timeout",
 				"change": "_timeout",
@@ -70,6 +72,7 @@ define( [
 		},
 
 		_unbindAutogrow: function() {
+			this.element.removeClass( "ui-textinput-autogrow" );
 			this._off( this.element, "keyup change input paste" );
 			this._off( this.document,
 				"pageshow popupbeforeposition updatelayout panelopen" );
