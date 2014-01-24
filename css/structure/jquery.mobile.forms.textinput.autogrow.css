@@ -1,3 +1,7 @@
+textarea.ui-input-text.ui-textinput-autogrow {
+	overflow: hidden;
+}
+
 .ui-textinput-autogrow-resize {
 	-webkit-transition: height 0.25s;
 	-o-transition: height 0.25s;
