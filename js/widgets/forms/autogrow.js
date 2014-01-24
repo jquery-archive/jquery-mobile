@@ -93,8 +93,9 @@ define( [
 		},
 
 		_updateHeight: function() {
-			var scrollTop = this.window.scrollTop();
-
+			var paddingTop, paddingBottom, paddingHeight, scrollHeight, clientHeight,
+				borderTop, borderBottom, borderHeight, height,
+				scrollTop = this.window.scrollTop();
 			this.keyupTimeout = 0;
 
 			this.element.css({
@@ -103,13 +104,12 @@ define( [
 				"max-height": 0
 			});
 
-			var paddingTop, paddingBottom, paddingHeight,
-				scrollHeight = this.element[ 0 ].scrollHeight,
-				clientHeight = this.element[ 0 ].clientHeight,
-				borderTop = parseFloat( this.element.css( "border-top-width" ) ),
-				borderBottom = parseFloat( this.element.css( "border-bottom-width" ) ),
-				borderHeight = borderTop + borderBottom,
-				height = scrollHeight + borderHeight + 15;
+			scrollHeight = this.element[ 0 ].scrollHeight;
+			clientHeight = this.element[ 0 ].clientHeight;
+			borderTop = parseFloat( this.element.css( "border-top-width" ) );
+			borderBottom = parseFloat( this.element.css( "border-bottom-width" ) );
+			borderHeight = borderTop + borderBottom;
+			height = scrollHeight + borderHeight + 15;
 
 			// Issue 6179: Padding is not included in scrollHeight and
 			// clientHeight by Firefox if no scrollbar is visible. Because
