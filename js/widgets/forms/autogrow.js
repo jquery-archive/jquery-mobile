@@ -93,6 +93,7 @@ define( [
 		},
 
 		_updateHeight: function() {
+			var scrollTop = this.window.scrollTop();
 
 			this.keyupTimeout = 0;
 
@@ -129,6 +130,8 @@ define( [
 				"min-height": "",
 				"max-height": ""
 			});
+
+			this.window.scrollTop( scrollTop );
 		},
 
 		refresh: function() {
