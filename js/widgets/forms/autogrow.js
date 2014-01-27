@@ -65,7 +65,7 @@ define( [
 								this.element.removeClass( "ui-textinput-autogrow-resize" );
 							}, this ) );
 				}
-				this._prepareHeightUpdate();
+				this._timeout();
 			}
 		},
 
@@ -96,11 +96,14 @@ define( [
 
 			this.keyupTimeout = 0;
 
-			this.element.css({
-				"height": 0,
-				"min-height": 0,
-				"max-height": 0
-			});
+			// IE8 textareas have the onpage property - others do not
+			if ( !( "onpage" in this.element[ 0 ] ) ) {
+				this.element.css({
+					"height": 0,
+					"min-height": 0,
+					"max-height": 0
+				});
+			}
 
 			var paddingTop, paddingBottom, paddingHeight,
 				scrollHeight = this.element[ 0 ].scrollHeight,
