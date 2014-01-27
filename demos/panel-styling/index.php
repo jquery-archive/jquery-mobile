@@ -70,7 +70,7 @@
 		#demo-page.ui-page-theme-a,
 		#demo-page .ui-panel-wrapper {
 			background-color: #fff;
-			background-image: url(../_assets/img/bg-pattern.png);
+			background-image: url("../_assets/img/bg-pattern.png");
 			background-repeat: repeat-x;
 			background-position: left bottom;
 		}
