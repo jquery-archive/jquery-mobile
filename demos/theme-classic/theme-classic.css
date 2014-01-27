@@ -222,7 +222,7 @@ html .ui-btn.ui-checkbox-on:after {
 
 /* Loader */
 .ui-icon-loading {
-	background: url(images/ajax-loader.gif);
+	background: url("images/ajax-loader.gif");
 	background-size: 2.875em 2.875em;
 }
 
