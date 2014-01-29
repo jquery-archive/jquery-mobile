@@ -1,6 +1,15 @@
-## jQuery Mobile Contributing Guidelines
+# Contributing to jQuery Mobile
 
-Welcome! Thanks for your interest in contributing to jQuery Mobile. Most of our information on how to contribute to this and all other jQuery Foundation projects is over at [contribute.jquery.org](http://contribute.jquery.org/). More information about the project and how to get more involved can be found on the "[About](http://jquerymobile.com/about/)" page at the project website. On this page we provide project specific information regarding [reporting bugs](#issues), [suggesting new features](#feature-requests), and [contributing code or content](#pull-requests). Please take a moment to read this before opening a ticket or submitting a pull request. 
+Welcome! Thanks for your interest in contributing to jQuery Mobile. You're **almost** in the right place. More information on how to contribute to this and all other jQuery Foundation projects is over at [contribute.jquery.org](http://contribute.jquery.org). You'll definitely want to take a look at the articles on contributing [code](http://contribute.jquery.org/code).
+
+You may also want to take a look at our [commit & pull request guide](http://contribute.jquery.org/commits-and-pull-requests/) and [style guides](http://contribute.jquery.org/style-guide/) for instructions on how to maintain your fork and submit your code. Before we can merge any pull request, we'll also need you to sign our [contributor license agreement](http://contribute.jquery.org/cla).
+
+You can find us on [IRC](http://irc.jquery.org), specifically in #jqueryui-dev should you have any questions. If you've never contributed to open source before, we've put together [a short guide with tips, tricks, and ideas on getting started](http://contribute.jquery.org/open-source/).
+
+
+## Getting Involved
+
+More information about the project, the jQuery Mobile team, our weekly meetings, and how to get more involved can be found on the "[About](http://jquerymobile.com/about/)" page at the project website. On this page we provide project specific information regarding [reporting bugs](#issues), [suggesting new features](#feature-requests), and [contributing code or content](#pull-requests). Please take a moment to read this before opening a ticket or submitting a pull request. 
 
 
 ## Issues
@@ -21,7 +30,7 @@ When [submitting an issue](https://github.com/jquery/jquery-mobile/issues/new) i
 7. jQuery Mobile and jQuery core version used
 8. Other relevant information, e.g. using PhoneGap
 
-In the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see Syntax Highlighting).
+In the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript, CSS, or HTML snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for GitHub Flavored Markdown (see Syntax Highlighting).
 
 
 ### Test page
@@ -60,13 +69,100 @@ When submitting a pull request for review there are a few important steps you ha
 * Make sure you have signed the [CLA](http://contribute.jquery.org/CLA/)
 * Before opening a pull request for a bug fix or new feature, make sure there is a ticket for it (don't include a bug report in a pull request)
 * Limit the scope to one issue/feature
-* Follow the [JS](http://contribute.jquery.org/style-guide/js/) and [HTML](http://contribute.jquery.org/style-guide/html/) style guides
+* Add and run unit tests
+* Follow the [style guides](http://contribute.jquery.org/style-guide/)
 * Follow the [commit message guidelines](http://contribute.jquery.org/commits-and-pull-requests/#commit-guidelines)
 
 If you need help or feedback, or want to get more involved in the jQuery Mobile project, don't hesitate to reach out to us. You can find us on [IRC](http://irc.jquery.org/) in #jqueryui-dev (Freenode).
 
 
-### Rebasing
+### Tips For Bug Patching
+
+
+#### Environment: localhost with PHP, Node.js, and Grunt
+
+jQuery Mobile uses Node.js and Grunt to automate the building and validation of source code.
+
+The Demos depend on PHP running locally, so make sure you have the following installed:
+
+* A web server with PHP support (any will do, such as [XAMPP](http://www.apachefriends.org/en/xampp.html) or [MAMP](http://www.mamp.info/en/index.html))
+* [Node.js](http://nodejs.org/) (includes NPM, necessary for the next step)
+* [Grunt](http://gruntjs.com/) (install with: `npm install -g grunt-cli`)
+
+
+#### Build a Local Copy of jQuery Mobile
+
+Create a fork of the jQuery Mobile repo on GitHub at http://github.com/jquery/jquery-mobile.
+
+Change directory to your web root directory, whatever that might be:
+
+```bash
+$ cd /path/to/your/www/root/
+```
+
+Clone your jQuery UI fork to work locally.
+
+*Note: be sure to replace `[USERNAME]` with your GitHub username.*
+
+```bash
+$ git clone git@github.com:[USERNAME]/jquery-mobile.git
+```
+
+Change to the newly created directory.
+
+```bash
+$ cd jquery-mobile
+```
+
+Add the official jQuery repository as a remote. We recommend naming it "upstream".
+
+```bash
+$ git remote add upstream git://github.com/jquery/jquery-mobile.git
+```
+
+Get in the habit of pulling in the "upstream" master to stay up to date as jQuery UI receives new commits.
+
+```bash
+$ git pull upstream master
+```
+
+Install the dependencies.
+
+```bash
+npm install
+```
+
+To lint the JavaScript and CSS, as well as build the Demos, run grunt:
+
+```bash
+$ grunt
+```
+
+
+#### Testing
+
+You can run all the test suites by running the following command:
+
+```bash
+$ grunt test
+```
+
+You can choose to run only a subset of the tests by adding the `--suites` option like:
+
+```bash
+$ grunt test --suites=button,checkboxradio
+```
+
+will only run the tests under `tests/unit/button/` and `tests/unit/checkboxradio/`.
+
+You can also specify which versions of jQuery you want to test jQuery Mobile with by using the `--jqueries` option:
+
+```bash
+$ grunt test --jqueries=1.10.2,git
+```
+
+
+#### Rebasing
 
 Often times when working on a feature or bug fix branch it's useful to pull in the latest from the parent branch. If you're doing this _before_ submitting a pull request it's best to use git's rebase to apply your commits onto the latest from the parent branch. For example, working on `new-feature` branch where `upstream` is the remote at `git://github.com/jquery/jquery-mobile.git`:
 
