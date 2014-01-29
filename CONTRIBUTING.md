@@ -1,9 +1,7 @@
-## Contribution Guides
+## jQuery Mobile Contributing Guidelines
 
-In the spirit of open source software development, jQuery always encourages community code contribution. To help you get started and before you jump into writing code, be sure to read these important contribution guidelines thoroughly:
+Welcome! Thanks for your interest in contributing to jQuery Mobile. Most of our information on how to contribute to this and all other jQuery Foundation projects is over at [contribute.jquery.org](http://contribute.jquery.org/). More information about the project and how to get more involved can be found on the "[About](http://jquerymobile.com/about/)" page at the project website. On this page we provide project specific information regarding [reporting bugs](#issues), [suggesting new features](#feature-requests), and [contributing code or content](#pull-requests). Please take a moment to read this before opening a ticket or submitting a pull request. 
 
-1. [Getting Involved](http://contribute.jquery.org/)
-2. [Code Style Guide](http://contribute.jquery.org/style-guide/)
 
 ## Issues
 
@@ -25,6 +23,7 @@ When [submitting an issue](https://github.com/jquery/jquery-mobile/issues/new) i
 
 In the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript/HTML/CSS snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for github flavored markdown (see Syntax Highlighting).
 
+
 ### Test page
 
 It is IMPORTANT that you always provide a test page when submitting an issue!
@@ -33,7 +32,7 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
 
 * What? - Keep the test page as simple as possible. Only include markup/code that is required to reproduce the issue.
 
-* How? - Use our [JS Bin template](http://jsbin.com/ofuhaw/1/edit) which uses latest code on branch "master". Do not replace the links to the the framework CSS and JavaScript: always test with latest code!
+* How? - Use our [JS Bin template](http://jsbin.com/acIRUBo/1/edit) which uses latest code on branch "master". Do not replace the links to the the framework CSS and JavaScript: always test with latest code!
 
   * You will notice if the issue has been fixed already
   * It enables us to edit your code if necessary
@@ -41,6 +40,7 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
   * We can test again after committing a fix for the issue
 
 JS Bin instructions: When you start editing the JS Bin, the url will update and contain a new version number. As long as you keep the JS Bin open in your browser this url won't change. Copy the url in your issue report when you are done editing. If your test case requires multiple "single" jQuery Mobile pages, open the JS Bin on multiple tabs on your browser and each of them will get an unique url. Link to this url without "/edit" at the end on your other page(s).
+
 
 ## Feature Requests
 
@@ -51,32 +51,20 @@ If you have an idea for a new feature or a suggestion how to improve an existing
 
 Please note that we will flag the issue as feature request and then close it. We check requests on regular base and when we decide to implement a feature we set a milestone and re-open the ticket.
 
+
 ## Pull Requests
 
-When submitting a pull request for review there are a few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
+When submitting a pull request for review there are a few important steps you have to take to ensure that it gets reviewed quickly and increase the chances that it will be merged:
 
-1. Include tests (see [Testing](https://github.com/jquery/jquery-mobile/blob/master/README.md#testing))
-2. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
-3. Limit the scope to one Issue/Feature
-4. Small focused commits, ideally less than 10 to 20 lines
-5. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) below)
-6. Add the appropriate commit message (see below)
+* If you are new to contributing code or content to jQuery projects, read the information at [contribute.jquery.org](http://contribute.jquery.org/) first
+* Make sure you have signed the [CLA](http://contribute.jquery.org/CLA/)
+* Before opening a pull request for a bug fix or new feature, make sure there is a ticket for it (don't include a bug report in a pull request)
+* Limit the scope to one issue/feature
+* Follow the [JS](http://contribute.jquery.org/style-guide/js/) and [HTML](http://contribute.jquery.org/style-guide/html/) style guides
+* Follow the [commit message guidelines](http://contribute.jquery.org/commits-and-pull-requests/#commit-guidelines)
 
-Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
+If you need help or feedback, or want to get more involved in the jQuery Mobile project, don't hesitate to reach out to us. You can find us on [IRC](http://irc.jquery.org/) in #jqueryui-dev (Freenode).
 
-### Commit messages
-
-Commit messages should include four components:
-
-* The WHERE - a single word that categorizes and provides context for the commit and its message, followed by a colon (:). This is typically the name of the plugin being worked on, but sometimes might be something like Build: or Docs:
-* The WHAT - a sufficient summary of the fix or change made (example: modified the foo to no longer bar), followed by a period (.)
-* The WHY #Num - the ticket number with a #sign so Trac creates a hyperlink (example: #1234), followed by a hyphen/dash (-)
-* The WHY Name - the name of the ticket. Notice this is different than summary of the fix. This is a short description of the issue (example: dialog: IE6 crashed when foo is set to bar)
-
-Combined into one, here's a full example:
-
-        "Dialog: modified the foo to no longer bar. Fixed #1234 - dialog: IE6 crashed when foo is set to bar"
-        \WHERE/:\------------- WHAT -------------/.\  WHY #Num /-\---------------- WHY Name ----------------/
 
 ### Rebasing
 
