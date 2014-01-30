@@ -61,6 +61,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 			if ( value && !this._popup ) {
 				this._popup = getPopup()
 					.addClass( "ui-body-" + ( this.options.theme || "a" ) )
+					.hide()
 					.insertBefore( this.element );
 			}
 		}
