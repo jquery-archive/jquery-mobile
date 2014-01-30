@@ -14,7 +14,8 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"widgets/forms/slider"
+				"widgets/forms/slider",
+				"widgets/forms/slider.tooltip"
 			],
 			[
 				"slider_events.js",
@@ -117,6 +118,10 @@
 
 		<label>Input slider:
 			<input type="range" name="disable-test" id="disable-test" value="17" min="0" max="100"/>
+		</label>
+
+		<label>Tooltip slider:
+			<input type="range" name="tooltip-test" id="tooltip-test" value="17" min="0" max="100" data-nstest-popup-enabled="true"/>
 		</label>
 
 	</div>
