@@ -12,43 +12,62 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<script id="demo-script">
+( function( $, undefined ) {
+
+// Helper function that splits a URL just the way we want it
+var processHash = function( url ) {
+	var parsed = $.mobile.path.parseUrl( url ),
+		hashQuery = parsed.hash.split( "?" );
+
+	return {
+		parsed: parsed,
+		cleanHash: ( hashQuery.length > 0 ? hashQuery[ 0 ] : "" ),
+		queryParameters: ( hashQuery.length > 1 ? hashQuery[ 1 ] : "" )
+	};
+};
+
 $.mobile.document
+	.on( "pagebeforechange", function( event, data ) {
+
+		// When we go from #secondary-page to #secondary-page we wish to indicate
+		// that a transition to the same page is allowed.
+		if ( $.type( data.toPage ) === "string" &&
+			data.options.fromPage &&
+			data.options.fromPage.attr( "id" ) === "secondary-page" &&
+			processHash( data.toPage ).cleanHash === "#secondary-page" ) {
+
+				data.options.allowSamePageTransition = true;
+		}
+	})
 	.on( "pagecontainerbeforetransition", function( event, data ) {
-		var hashQuery, cleanHash, url, hash, absNoHash, queryParameters;
+		var queryParameters = {},
+			processedHash = processHash( data.absUrl );
 
-		// Split the URL of the destination page into its components, retrieve the
-		// hash, create an object from the query string, and replace all URLs in
-		// data with a version that does not include the hash query string
-		url = $.mobile.path.parseUrl( data.absUrl );
-		hash = url.hash;
-		absNoHash = url.hrefNoHash;
-		queryParameters = {};
-		hashQuery = hash.split( "?" );
-		cleanHash = hashQuery[ 0 ] || "";
-
-		// We're only interested in the case where we're navigating to the
-		// secondary page
-		if ( cleanHash === "#secondary-page" ) {
+		// We only modify default behaviour when navigating to the secondary page
+		if ( processedHash.cleanHash === "#secondary-page" ) {
 
 			// Assemble query parameters object from the query string
-			hashQuery = hashQuery.length > 1 ? hashQuery[ 1 ] : "";
-			$.each( hashQuery.split( "&" ), function( index, value ) {
-				var pair = value.split( "=" );
+			if ( processedHash.queryParameters ) {
+				$.each( processedHash.queryParameters.split( "&" ),
+					function( index, value ) {
+						var pair = value.split( "=" );
 
-				if ( pair.length > 0 && pair[ 0 ] ) {
-					queryParameters[ pair[ 0 ] ] =
-						( pair.length > 1 ? pair[ 1 ] : true );
-				}
-			});
+						if ( pair.length > 0 && pair[ 0 ] ) {
+							queryParameters[ pair[ 0 ] ] =
+								( pair.length > 1 ? pair[ 1 ] : true );
+						}
+					});
+			}
 
 			// Set the title from the query parameters
 			$( "#section" ).text( queryParameters.section );
 
 			// Set the url of the page - this will be used by navigation to set the
 			// URL in the location bar
-			$( "#secondary-page" ).jqmData( "url", hash );
+			$( "#secondary-page" ).jqmData( "url", processedHash.parsed.hash );
 		}
 	});
+})( jQuery );
 	</script>
 </head>
 <body>
@@ -101,6 +120,10 @@ $.mobile.document
 		</div>
 		<div role="main" class="ui-content">
 			<p>This is the second page in the demo. Notice that, as you navigate to this page from the main page, the title of this page changes depending on which button on the main page you clicked.</p>
+			<p>You can also navigate to this same page with different parameters using the links below:</p>
+			<a href="#secondary-page?section=My Area" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Area</a>
+			<a href="#secondary-page?section=My Friends" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Friends</a>
+			<a href="#secondary-page?section=My Items" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Items</a>
 		</div>
 </body>
 </html>
