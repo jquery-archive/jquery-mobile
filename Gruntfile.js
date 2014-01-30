@@ -754,6 +754,9 @@ module.exports = function( grunt ) {
 		},
 
 		coveralls: {
+			options: {
+				force: true
+			},
 			all: {
 
 				// LCOV coverage file relevant to every target
