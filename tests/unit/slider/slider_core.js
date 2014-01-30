@@ -67,6 +67,13 @@
 		ok( ! $( "#textinput-test" ).parents().is( "div.ui-input-text" ), "slider input is not wrapped in div.ui-input-text" );
 	});
 
+	test( "slider tooltip", function() {
+		var tooltip = $( "#tooltip-test" ).siblings( "div.ui-slider-popup" );
+
+		deepEqual( tooltip.length, 1, "is present" );
+		deepEqual( tooltip.is( ":visible" ), false, "is initially hidden" );
+	});
+
 	test( "slider is enabled/disabled correctly", function() {
 		var slider = $( "#disable-test" ),
 			track = slider.siblings( "div" );
