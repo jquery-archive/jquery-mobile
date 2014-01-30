@@ -45,9 +45,9 @@ $(function(){
 
 			<p>Since external toolbars are outside the page they don't inherit a theme from the page. This means you always have to set a theme for them. You can use the <code>data-theme</code> attribute for this or set the <code>theme</code> option when you call the plugin:
 
-			<h2>True persistant toolbars</h2>
+			<h2>True persistent toolbars</h2>
 
-			<p>Because External toolbars are outside of the page they are not effected by transition and make truly persistant toolbars possible.</p>
+			<p>Because External toolbars are outside of the page they are not effected by transition and make truly persistent toolbars possible.</p>
 
 			<p><a href="../toolbar-fixed-persistent/" data-ajax="false">Persistant toolbar demo</a></p>
 
