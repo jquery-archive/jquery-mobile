@@ -82,7 +82,7 @@ $.mobile.document
 
 		<div role="main" class="ui-content jqm-content">
 			<h1>Hash Processing</h1>
-			<p>If you wish to perform processing on the hash values as a user clicks the links to the various internal pages in your application, you can do so by handling the <code>pagecontainerbeforetransition</code> event.</p>
+			<p>If you wish to perform processing on the hash values as a user clicks the links to the various internal pages in your application, you can do so by handling the events <code>pagebeforechange</code> and <code>pagecontainerbeforetransition</code>.</p>
 			<div data-demo-html="#demo-page,#secondary-page" data-demo-js="#demo-script">
 				<a href="#demo-page" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open Demo</a>
 			</div>
