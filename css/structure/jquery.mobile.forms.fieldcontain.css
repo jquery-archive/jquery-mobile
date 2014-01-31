@@ -6,7 +6,7 @@
 	clear: both;
 	padding: .8em 0;
 }
-.ui-field-contain > label + [class*="ui-"],
+.ui-field-contain > label ~ [class*="ui-"],
 .ui-field-contain .ui-controlgroup-controls {
 	margin: 0;
 }
@@ -42,7 +42,7 @@
 		width: auto;
 		margin: 0 0 .4em;
 	}
-	.ui-field-contain > label + [class*="ui-"],
+	.ui-field-contain > label ~ [class*="ui-"],
 	.ui-field-contain .ui-controlgroup-controls {
 		float: left;
 		width: 78%;
@@ -52,14 +52,14 @@
 		box-sizing: border-box;
 	}
 	/* ui-hide-label deprecated in 1.4. TODO: Remove in 1.5 */
-	.ui-hide-label > label + [class*="ui-"],
+	.ui-hide-label > label ~ [class*="ui-"],
 	.ui-hide-label .ui-controlgroup-controls,
-	.ui-popup .ui-field-contain > label + [class*="ui-"],
+	.ui-popup .ui-field-contain > label ~ [class*="ui-"],
 	.ui-popup .ui-field-contain .ui-controlgroup-controls {
 		float: none;
 		width: 100%;
 	}
-	.ui-field-contain > label + .ui-btn-inline {
+	.ui-field-contain > label ~ .ui-btn-inline {
 		width: auto;
 		margin-right: .625em;
 	}
