@@ -19,7 +19,6 @@ Currently the library is shipped on the jQuery CDN/download as a single monolith
 * `js` - resolve dependencies, build, concat, and minify the JavaScript used for jQuery Mobile
 * `css` - resolve dependencies, build, concat, and minify all the css, just the structure css, and just the theme css
 * `demos` - build the js and css, and make the docs ready for static consumption
-* `zip` - package all the JavaScript and all the css into a zip archive
 * `dist` (default target) - all of the above
 * `lint` - Validates JavaScript files using [JSHint](http://jshint.com/)
 
@@ -116,6 +115,12 @@ You can choose to run only a subset of the tests by adding the `--suites` option
     grunt test --suites=button,slider
 
 will only run the tests under `tests/unit/button/` and `tests/unit/slider/`.
+
+You can also exclude some tests buy using `!`.  For instance:
+
+    grunt test --type=integration --suites=!navigation
+
+will run all the integration tests but the navigation suite.
 
 You can also specify which versions of jQuery you want to test jQuery Mobile by using the `--jqueries` option:
 
