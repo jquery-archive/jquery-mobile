@@ -48,13 +48,13 @@ $( "a" ).on( "click", function( event ){
 
   // Alter the url according to the anchor's href attribute, and
   // store the data-foo attribute information with the url
-  $.mobile.navigate( this.attr( "href" ), {
-    foo: this.attr("data-foo")
+  $.mobile.navigate( $(this).attr( "href" ), {
+    foo: $(this).attr("data-foo")
   });
 
   // Hypothetical content alteration based on the url. E.g, make
   // an Ajax request for JSON data and render a template into the page.
-  alterContent( this.attr("href") );
+  alterContent( $(this).attr("href") );
 });</code></pre>
 
     <p>Next, a <code>navigate</code> event binding helps in responding to backward and forward navigation via the browsers history API. Here the <code>alterContent</code> function can address the direction in which the browser is navigating as well as any additional information stored on the data object when <code>$.mobile.navigate</code> was invoked to store the corresponding history entry.</p>
