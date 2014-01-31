@@ -163,14 +163,27 @@ $.widget( "mobile.collapsible", {
 		return ui;
 	},
 
-	refresh: function() {
-		var key, options = {};
+	refresh: function( collapsibleSetOptions ) {
+		var key, options = {}, opts = {};
 
-		for ( key in $.mobile.collapsible.defaults ) {
-			options[ key ] = this.options[ key ];
+		if ( collapsibleSetOptions && typeof collapsibleSetOptions  === "object" ) {
+			// if refreshed by collapsibleset.
+			for ( key in collapsibleSetOptions ) {
+				if ( this.options[ key ] == null ) {
+					options[ key ] = collapsibleSetOptions[ key ];
+					opts[ key ] = null;
+				}
+			}
+		} else {
+			for ( key in $.mobile.collapsible.defaults ) {
+					options[ key ] = this.options[ key ];
+			}
 		}
-
 		this._setOptions( options );
+		// recover options.
+		for ( key in opts ) {
+			this.options[ key ] = opts[ key ];
+		}
 	},
 
 	_setOptions: function( options ) {
@@ -220,8 +233,8 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.iconpos !== undefined ) {
-			anchor.removeClass( "ui-btn-icon-" + ( currentOpts.iconPos === "right" ? "right" : "left" ) );
-			anchor.addClass( "ui-btn-icon-" + ( opts.iconPos === "right" ? "right" : "left" ) );
+			anchor.removeClass( "ui-btn-icon-" + ( currentOpts.iconpos === "right" ? "right" : "left" ) );
+			anchor.addClass( "ui-btn-icon-" + ( opts.iconpos === "right" ? "right" : "left" ) );
 		}
 
 		if ( opts.theme !== undefined ) {
@@ -231,8 +244,8 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.contentTheme !== undefined ) {
-			oldTheme = this._themeClassFromOption( "ui-body-", currentOpts.theme );
-			newTheme = this._themeClassFromOption( "ui-body-", opts.theme );
+			oldTheme = this._themeClassFromOption( "ui-body-", currentOpts.contentTheme );
+			newTheme = this._themeClassFromOption( "ui-body-", opts.contentTheme );
 			ui.content.removeClass( oldTheme ).addClass( newTheme );
 		}
 

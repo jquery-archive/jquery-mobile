@@ -92,8 +92,8 @@ $.widget( "mobile.collapsibleset", $.extend( {
 			elem.toggleClass( "ui-corner-all", hasCorners );
 		}
 
+		this.element.children( ":mobile-collapsible" ).collapsible( "refresh" , options );
 		ret = this._super( options );
-		this.element.children( ":mobile-collapsible" ).collapsible( "refresh" );
 		return ret;
 	},
 
