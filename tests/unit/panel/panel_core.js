@@ -285,7 +285,7 @@
 	});
 
 	// Test for https://github.com/jquery/jquery-mobile/issues/6693
-	asyncTest( "link unrelated to closing the panel does not close the panel", function() {
+	asyncTest( "unrelated link does not close the panel", function() {
 		var panel = $( "#panel-test-ignore-unrelated-link" ),
 			eventNs = ".ignoreUnrelatedLinkClick";
 
@@ -303,7 +303,8 @@
 			},
 
 			function( result ) {
-				deepEqual( result.panelopen.timedOut, false, "Panel opened successfully" );
+				deepEqual( result.panelopen.timedOut, false,
+					"Panel opened successfully" );
 				$( "#unrelated-link" ).click();
 			},
 
@@ -312,7 +313,8 @@
 			},
 
 			function( result ) {
-				deepEqual( result.panelclose.timedOut, true, "Panel did not close in response to unrelated link click" );
+				deepEqual( result.panelclose.timedOut, true,
+					"Panel did not close in response to unrelated click" );
 				panel.panel( "close" );
 			},
 
