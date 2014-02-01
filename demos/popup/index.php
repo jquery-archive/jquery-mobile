@@ -24,6 +24,9 @@
 		height: 300px;
 		background-color: #ffefef;
 	}
+	.clickable-area:focus {
+		outline: 0;
+	}
 	</style>
 	<style id="tooltip-btn">
 	.ui-btn.my-tooltip-btn,
