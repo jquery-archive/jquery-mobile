@@ -36,6 +36,10 @@
 
 	<div data-nstest-role="page">
 		<div data-nstest-role="content">
+			<div id="collapsible-iconpos-test" data-nstest-role="collapsible" data-nstest-iconpos="xyzzy">
+				<h4>Header</h4>
+				<p>Contents</p>
+			</div>
 			<div id="collapsed-collapsible" data-nstest-role="collapsible" data-nstest-expanded-icon="minus">
 				<h3>Section A</h3>
 
@@ -55,7 +59,7 @@
 				<h4 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
 					<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-left ui-icon-plus">
 					Heading
-					<div class="ui-collapsible-heading-status"> click to expand contents</div>
+					<span class="ui-collapsible-heading-status"> click to expand contents</span>
 					</a>
 				</h4>
 				<div class="ui-collapsible-content ui-collapsible-content-collapsed" aria-hidden="true">
@@ -291,6 +295,23 @@
 
 					<p>I'm the collapsible content in a set so this feels like an accordion. I'm hidden by default because I
 						have the "collapsed" state; you need to expand the header to see me.</p>
+				</div>
+			</div>
+			<div data-nstest-role="collapsibleset" id="inherit-test">
+				<div data-nstest-role="collapsible" id="inherits">
+					<h4>Heading</h4>
+					<p>Contents</p>
+				</div>
+				<div data-nstest-role="collapsible"
+					id="explicit"
+					data-nstest-theme="a"
+					data-nstest-content-theme="a"
+					data-nstest-collapsed-icon="plus"
+					data-nstest-expanded-icon="minus"
+					data-nstest-iconpos="left"
+					data-nstest-mini="false">
+					<h4>Heading</h4>
+					<p>Contents</p>
 				</div>
 			</div>
 			<form id="destroy-test" data-nstest-theme="a" data-nstest-content-theme="b">
