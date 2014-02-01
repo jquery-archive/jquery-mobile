@@ -3,14 +3,14 @@
  */
 (function($){
 
-	var testFocusTransfer = function( el ) {
+	var testFocusTransfer = function( element ) {
 		expect( 1 );
 		$.testHelper.detailedEventCascade([
 			function() {
-				el.focus();
+				element.focus();
 			},
 			{
-				focus: { src: el.siblings( "a" ), event: "focus.TransfersFocus1" }
+				focus: { src: element.siblings( "a" ), event: "focus.TransfersFocus1" }
 			},
 			function( result ) {
 				deepEqual( result.focus.timedOut, false, "'on' button received focus event" );
