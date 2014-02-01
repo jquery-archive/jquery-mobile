@@ -42,14 +42,13 @@ $.widget( "mobile.collapsible", {
 		var elem = this.element,
 			ui = {
 				accordion: elem
-					.closest( ":jqmData(role='collapsible-set')" +
+					.closest( ":jqmData(role='collapsible-set'),:jqmData(role='collapsibleset')" +
 						( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) )
 					.addClass( "ui-collapsible-set" )
 			};
 
-		$.extend( this, {
-			_ui: ui
-		});
+		this._ui = ui;
+		this._renderedOptions = this._getOptions( this.options );
 
 		if ( this.options.enhanced ) {
 			ui.heading = $( ".ui-collapsible-heading", this.element[ 0 ] );
@@ -113,7 +112,7 @@ $.widget( "mobile.collapsible", {
 
 	_enhance: function( elem, ui ) {
 		var iconclass,
-			opts = this._getOptions( this.options ),
+			opts = this._renderedOptions,
 			contentThemeClass = this._themeClassFromOption( "ui-body-", opts.contentTheme );
 
 		elem.addClass( "ui-collapsible " +
@@ -164,19 +163,14 @@ $.widget( "mobile.collapsible", {
 	},
 
 	refresh: function() {
-		var key, options = {};
-
-		for ( key in $.mobile.collapsible.defaults ) {
-			options[ key ] = this.options[ key ];
-		}
-
-		this._setOptions( options );
+		this._applyOptions( this.options );
+		this._renderedOptions = this._getOptions( this.options );
 	},
 
-	_setOptions: function( options ) {
+	_applyOptions: function( options ) {
 		var isCollapsed, newTheme, oldTheme, hasCorners,
 			elem = this.element,
-			currentOpts = this._getOptions( this.options ),
+			currentOpts = this._renderedOptions,
 			ui = this._ui,
 			anchor = ui.anchor,
 			status = ui.status,
@@ -252,12 +246,16 @@ $.widget( "mobile.collapsible", {
 		if ( opts.mini !== undefined ) {
 			anchor.toggleClass( "ui-mini", opts.mini );
 		}
+	},
 
+	_setOptions: function( options ) {
+		this._applyOptions( options );
 		this._super( options );
+		this._renderedOptions = this._getOptions( this.options );
 	},
 
 	_handleExpandCollapse: function( isCollapse ) {
-		var opts = this._getOptions( this.options ),
+		var opts = this._renderedOptions,
 			ui = this._ui;
 
 		ui.status.text( isCollapse ? opts.expandCueText : opts.collapseCueText );
