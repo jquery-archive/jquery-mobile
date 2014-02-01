@@ -257,4 +257,83 @@
 		$inplace.collapsibleset().collapsibleset( "destroy" );
 		ok( $.testHelper.domEqual( $inplace, $orig ), "Collapsible set after instantiation and destruction is identical to a clone of the original." );
 	});
+
+	module( "Collapsible inherits options from parent collapsibleset" );
+	test( "theme", function() {
+		$( "#inherit-test" ).collapsibleset( "option", "theme", "b" );
+
+		deepEqual( $( "#inherits" ).collapsible( "option", "theme" ), null,
+			"Option not set on inheriting child collapsible" );
+		deepEqual( $( "#explicit" ).collapsible( "option", "theme" ), "a",
+			"Option not set on explicitly assigned child collapsible" );
+		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-btn-b" ), true,
+			"Inheriting collapsible has theme 'b'" );
+		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-btn-a" ), true,
+			"Explicitly assigned collapsible has theme 'a'" );
+	});
+	test( "contentTheme", function() {
+		$( "#inherit-test" ).collapsibleset( "option", "contentTheme", "b" );
+
+		deepEqual( $( "#inherits" ).collapsible( "option", "contentTheme" ),
+			null, "Option not set on inheriting child collapsible" );
+		deepEqual( $( "#explicit" ).collapsible( "option", "contentTheme" ),
+			"a", "Option not set on explicitly assigned child collapsible" );
+		deepEqual( $( "#inherits" ).children().last().hasClass( "ui-body-b" ),
+			true, "Inheriting collapsible has content theme 'b'" );
+		deepEqual( $( "#explicit" ).children().last().hasClass( "ui-body-a" ),
+			true, "Explicitly assigned collapsible has content theme 'a'" );
+	});
+	test( "collapsedIcon", function() {
+		$( "#inherit-test" ).collapsibleset( "option", "collapsedIcon",
+			"forward" );
+
+		deepEqual( $( "#inherits" ).collapsible( "option", "collapsedIcon" ),
+			null, "Option not set on inheriting child collapsible" );
+		deepEqual( $( "#explicit" ).collapsible( "option", "collapsedIcon" ),
+			"plus", "Option not set on explicitly assigned child collapsible" );
+		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-icon-forward" ),
+			true, "Inheriting collapsible has collapsedIcon 'forward'" );
+		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-icon-plus" ),
+			true, "Explicitly assigned collapsible has collapsedIcon 'plus'" );
+	});
+	test( "expandedIcon", function() {
+		$( "#inherit-test" ).collapsibleset( "option", "expandedIcon", "back" );
+
+		deepEqual( $( "#inherits" ).collapsible( "option", "expandedIcon" ),
+			null, "Option not set on inheriting child collapsible" );
+		deepEqual( $( "#explicit" ).collapsible( "option", "expandedIcon" ),
+			"minus",
+			"Option not set on explicitly assigned child collapsible" );
+		$( "#inherits" ).collapsible( "expand" );
+		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-icon-back" ),
+			true, "Inheriting collapsible has expandedIcon 'back'" );
+		$( "#explicit" ).collapsible( "expand" );
+		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-icon-minus" ),
+			true, "Explicitly assigned collapsible has expandedIcon 'minus'" );
+	});
+	test( "iconpos", function() {
+		$( "#inherit-test" ).collapsibleset( "option", "iconpos", "right" );
+
+		deepEqual( $( "#inherits" ).collapsible( "option", "iconpos" ),
+			null, "Option not set on inheriting child collapsible" );
+		deepEqual( $( "#explicit" ).collapsible( "option", "iconpos" ),
+			"left",
+			"Option not set on explicitly assigned child collapsible" );
+		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-btn-icon-right" ),
+			true, "Inheriting collapsible has iconpos 'right'" );
+		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-btn-icon-left" ),
+			true, "Explicitly assigned collapsible has iconpos 'left'" );
+	});
+	test( "mini", function() {
+		$( "#inherit-test" ).collapsibleset( "option", "mini", "true" );
+
+		deepEqual( $( "#inherits" ).collapsible( "option", "mini" ),
+			null, "Option not set on inheriting child collapsible" );
+		deepEqual( $( "#explicit" ).collapsible( "option", "mini" ), false,
+			"Option not set on explicitly assigned child collapsible" );
+		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-mini" ),
+			true, "Inheriting collapsible is mini" );
+		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-mini" ),
+			false, "Explicitly assigned collapsible is not mini" );
+	});
 })( jQuery );
