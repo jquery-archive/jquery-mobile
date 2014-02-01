@@ -126,7 +126,7 @@ define(["jquery",
 				popstateEvent = new $.Event( "popstate" );
 				popstateEvent.originalEvent = {
 					type: "popstate",
-					state: null
+					state: data
 				};
 
 				this.squash( url, state );

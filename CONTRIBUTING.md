@@ -55,12 +55,14 @@ Please note that we will flag the issue as feature request and then close it. We
 
 When submitting a pull request for review there are a few important steps you can take to ensure that it gets reviewed quickly and increase the chances that it will be merged (in order of descending importance):
 
-1. Include tests (see [Testing](https://github.com/jquery/jquery-mobile/blob/master/README.md#testing))
-2. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
-3. Limit the scope to one Issue/Feature
-4. Small focused commits, ideally less than 10 to 20 lines
-5. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) below)
-6. Add the appropriate commit message (see below)
+1. Make sure you have typed in your real name in your [GitHub account] (https://github.com/settings/profile)
+2. Sign the [jQuery CLA] (http://contribute.jquery.org/CLA/)
+3. Include tests (see [Testing](https://github.com/jquery/jquery-mobile/blob/master/README.md#testing))
+4. Follow the [jQuery Core style guide](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
+5. Limit the scope to one Issue/Feature
+6. Small focused commits, ideally less than 10 to 20 lines
+7. Avoid merge commits (see Pro Git's [chapter on rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) below)
+8. Add the appropriate commit message (see below)
 
 Taken together, the above reduces the effort that's required of the contributor reviewing your pull request.
 
