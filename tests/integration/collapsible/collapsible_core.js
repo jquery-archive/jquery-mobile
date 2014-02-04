@@ -7,8 +7,14 @@
 	function testExpandCollapse( selector ) {
 		var collapsible = $( selector );
 		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), true, selector + " should be collapsed");
+		deepEqual( collapsible.find( "a span" ).text(),
+			$.mobile.collapsible.defaults.expandCueText,
+			"expand cue text should be set to default" );
 		$( selector + " >:header a" ).first().click();
 		deepEqual( collapsible.hasClass( "ui-collapsible-collapsed" ), false, selector + " should be expanded after click");
+		deepEqual( collapsible.find( "a span" ).text(),
+			$.mobile.collapsible.defaults.collapseCueText,
+			"collapse cue text should be set to default" );
 
 		collapsible.collapsible( "option", "expandedIcon", "arrow-up" );
 		deepEqual( $( selector + ">:header a" ).hasClass( "ui-icon-arrow-up" ), true, selector + " when expanded and after setting expanded icon to 'arrow-up' should have class ui-icon-arrow-up." );
