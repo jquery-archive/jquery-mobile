@@ -42,8 +42,10 @@ $.widget( "mobile.collapsible", {
 		var elem = this.element,
 			ui = {
 				accordion: elem
-					.closest( ":jqmData(role='collapsible-set'),:jqmData(role='collapsibleset')" +
-						( $.mobile.collapsibleset ? ", :mobile-collapsibleset" : "" ) )
+					.closest( ":jqmData(role='collapsible-set')," +
+						":jqmData(role='collapsibleset')" +
+						( $.mobile.collapsibleset ? ", :mobile-collapsibleset" :
+							"" ) )
 					.addClass( "ui-collapsible-set" )
 			};
 
@@ -214,8 +216,10 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.iconpos !== undefined ) {
-			anchor.removeClass( "ui-btn-icon-" + ( currentOpts.iconpos === "right" ? "right" : "left" ) );
-			anchor.addClass( "ui-btn-icon-" + ( opts.iconpos === "right" ? "right" : "left" ) );
+			anchor.removeClass( "ui-btn-icon-" +
+				( currentOpts.iconpos === "right" ? "right" : "left" ) );
+			anchor.addClass( "ui-btn-icon-" +
+				( opts.iconpos === "right" ? "right" : "left" ) );
 		}
 
 		if ( opts.theme !== undefined ) {
@@ -225,8 +229,10 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.contentTheme !== undefined ) {
-			oldTheme = this._themeClassFromOption( "ui-body-", currentOpts.contentTheme );
-			newTheme = this._themeClassFromOption( "ui-body-", opts.contentTheme );
+			oldTheme = this._themeClassFromOption( "ui-body-",
+				currentOpts.contentTheme );
+			newTheme = this._themeClassFromOption( "ui-body-",
+				opts.contentTheme );
 			ui.content.removeClass( oldTheme ).addClass( newTheme );
 		}
 
