@@ -55,7 +55,7 @@
 		"node": ">= 0.8.0"
 	},
 	"scripts": {
-		"ci": "grunt test && grunt coveralls",
+		"ci": "grunt test coveralls",
 		"test": "grunt test",
 		"lint": "grunt jshint"
 	},

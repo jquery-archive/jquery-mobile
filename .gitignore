@@ -19,6 +19,8 @@ branches
 # node build dependencies
 node_modules
 
+# tests output
+_tests/
+
 # phantom junit output
 build/test-results/
-

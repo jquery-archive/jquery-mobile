@@ -647,8 +647,8 @@ module.exports = function( grunt ) {
 						"!js/requirejs.config.js"
 					],
 					instrumentedFiles: "temp/",
-					htmlReport: "build/report/coverage",
-					lcovReport: "build/report/lcov",
+					htmlReport: "_tests/reports/coverage",
+					lcovReport: "_tests/reports/lcov",
 					linesThresholdPct: 0
 				}
 			},
@@ -760,7 +760,7 @@ module.exports = function( grunt ) {
 			all: {
 
 				// LCOV coverage file relevant to every target
-				src: "build/report/lcov/lcov.info"
+				src: "_tests/reports/lcov/lcov.info"
 			}
 		},
 
@@ -834,6 +834,7 @@ module.exports = function( grunt ) {
 			dist: [ dist ],
             git: [ path.join( dist, "git" ) ],
 			tmp: [ "<%= dirs.tmp %>" ],
+			testsOutput: [ "_tests" ],
 			"googleCDN": [ "<%= dirs.cdn.google %>" ],
 			"jqueryCDN": [ "<%= dirs.cdn.jquery %>" ]
 		}
@@ -889,7 +890,15 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "updateDependencies", [ "bowercopy" ] );
 
-	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
+	grunt.registerTask( "test",
+		[
+			"clean:testsOutput",
+			"jshint",
+			"config:fetchHeadHash",
+			"js:release",
+			"connect", "qunit:http"
+		]
+	);
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
 	// Default grunt
