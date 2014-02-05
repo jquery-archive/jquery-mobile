@@ -135,7 +135,7 @@
 			<form>
 				<input data-type="search" id="searchForCollapsibleSet"></input>
 			</form>
-				<div data-role="collapsible-set" data-filter="true" data-inset="true" data-inset="true" id="collapsiblesetForFilter" data-input="#searchForCollapsibleSet">
+				<div data-role="collapsibleset" data-filter="true" data-inset="true" data-inset="true" id="collapsiblesetForFilter" data-input="#searchForCollapsibleSet">
 					<div data-role="collapsible" data-filtertext="Animals">
 						<h3>Animals</h3>
 						<ul data-role="listview" data-inset="false">
@@ -170,7 +170,7 @@
 			<form>
 				<input data-type="search" id="searchForCollapsibleSetChildren"></input>
 			</form>
-				<div data-role="collapsible-set" data-filter="true" data-children="> div, > div div ul li" data-inset="true" data-inset="true" id="collapsiblesetForFilterChildren" data-input="#searchForCollapsibleSetChildren">
+				<div data-role="collapsibleset" data-filter="true" data-children="> div, > div div ul li" data-inset="true" data-inset="true" id="collapsiblesetForFilterChildren" data-input="#searchForCollapsibleSetChildren">
 					<div data-role="collapsible" data-filtertext="Animals Cats Dogs Lizards snakes">
 						<h3>Animals</h3>
 						<ul data-role="listview" data-inset="false">

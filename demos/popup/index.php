@@ -113,7 +113,7 @@
 			<a href="#popupNested" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-b" data-transition="pop">Choose a creature...</a>
 
 			<div data-role="popup" id="popupNested" data-theme="none">
-				<div data-role="collapsible-set" data-theme="b" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+				<div data-role="collapsibleset" data-theme="b" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
 					<div data-role="collapsible" data-inset="false">
 					<h2>Farm animals</h2>
 						<ul data-role="listview">
