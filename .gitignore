@@ -9,6 +9,7 @@ combine/
 compiled/
 dist/
 tmp/
+temp/
 *.swp
 .gitignore
 
@@ -20,3 +21,4 @@ node_modules
 
 # phantom junit output
 build/test-results/
+
