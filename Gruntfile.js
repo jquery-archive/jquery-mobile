@@ -837,22 +837,7 @@ module.exports = function( grunt ) {
 	});
 
 	// grunt plugins
-	grunt.loadNpmTasks( "grunt-bowercopy" );
-	grunt.loadNpmTasks( "grunt-contrib-jshint" );
-	grunt.loadNpmTasks( "grunt-contrib-clean" );
-	grunt.loadNpmTasks( "grunt-contrib-copy" );
-	grunt.loadNpmTasks( "grunt-contrib-compress" );
-	grunt.loadNpmTasks( "grunt-contrib-concat" );
-	grunt.loadNpmTasks( "grunt-contrib-connect" );
-	grunt.loadNpmTasks( "grunt-contrib-cssmin" );
-	grunt.loadNpmTasks( "grunt-coveralls" );
-	grunt.loadNpmTasks( "grunt-qunit-istanbul" );
-	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
-	grunt.loadNpmTasks( "grunt-contrib-uglify" );
-	grunt.loadNpmTasks( "grunt-git-authors" );
-	grunt.loadNpmTasks( "grunt-qunit-junit" );
-	grunt.loadNpmTasks( "grunt-hash-manifest" );
-
+	require( "load-grunt-tasks" )( grunt );
 	// load the project's default tasks
 	grunt.loadTasks( "build/tasks");
 
