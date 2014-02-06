@@ -19,7 +19,12 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var rInitialLetter = /([A-Z])/g;
+var rInitialLetter = /([A-Z])/g,
+
+	// Construct iconpos class from iconpos value
+	iconposClass = function( iconpos ) {
+		return ( "ui-btn-icon-" + ( iconpos === null ? "left" : iconpos ) );
+	};
 
 $.widget( "mobile.collapsible", {
 	options: {
@@ -150,8 +155,7 @@ $.widget( "mobile.collapsible", {
 				.first()
 				.addClass( "ui-btn " +
 					( iconclass ? iconclass + " " : "" ) +
-					( iconclass ? ( "ui-btn-icon-" +
-						( opts.iconpos === "right" ? "right" : "left" ) ) +
+					( iconclass ? iconposClass( opts.iconpos ) +
 						" " : "" ) +
 					this._themeClassFromOption( "ui-btn-", opts.theme ) + " " +
 					( opts.mini ? "ui-mini " : "" ) );
@@ -216,10 +220,9 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.iconpos !== undefined ) {
-			anchor.removeClass( "ui-btn-icon-" +
-				( currentOpts.iconpos === "right" ? "right" : "left" ) );
-			anchor.addClass( "ui-btn-icon-" +
-				( opts.iconpos === "right" ? "right" : "left" ) );
+			anchor
+				.removeClass( iconposClass( currentOpts.iconpos ) )
+				.addClass( iconposClass( opts.iconpos ) );
 		}
 
 		if ( opts.theme !== undefined ) {
