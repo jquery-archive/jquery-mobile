@@ -174,7 +174,7 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_applyOptions: function( options ) {
-		var isCollapsed, newTheme, oldTheme, hasCorners,
+		var isCollapsed, newTheme, oldTheme, hasCorners, hasIcon,
 			elem = this.element,
 			currentOpts = this._renderedOptions,
 			ui = this._ui,
@@ -191,41 +191,61 @@ $.widget( "mobile.collapsible", {
 
 		isCollapsed = elem.hasClass( "ui-collapsible-collapsed" );
 
-		// Only options referring to the current state need to be applied right away
-		// It is enough to store options covering the alternate in this.options.
+		// We only need to apply the cue text for the current state right away.
+		// The cue text for the alternate state will be stored in the options
+		// and applied the next time the collapsible's state is toggled
 		if ( isCollapsed ) {
 			if ( opts.expandCueText !== undefined ) {
 				status.text( opts.expandCueText );
-			}
-			if ( opts.collapsedIcon !== undefined ) {
-				if ( currentOpts.collapsedIcon ) {
-					anchor.removeClass( "ui-icon-" + currentOpts.collapsedIcon );
-				}
-				if ( /false/i.test( opts.collapsedIcon ) ) {
-					anchor.removeClass( "ui-btn-icon-" + ( currentOpts.iconPos === "right" ? "right" : "left" ) );
-				} else {
-					anchor.addClass( "ui-icon-" + opts.collapsedIcon )
-						.toggleClass( "ui-btn-icon-" + ( currentOpts.iconPos === "right" ? "right" : "left" ), true );
-				}
 			}
 		} else {
 			if ( opts.collapseCueText !== undefined ) {
 				status.text( opts.collapseCueText );
 			}
-			if ( opts.expandedIcon !== undefined ) {
-				if ( currentOpts.expandedIcon ) {
-					anchor.removeClass( "ui-icon-" + currentOpts.expandedIcon );
-				}
-				if ( opts.expandedIcon ) {
-					anchor.addClass( "ui-icon-" + opts.expandedIcon );
-				}
-			}
 		}
 
-		if ( opts.iconpos !== undefined ) {
-			anchor
-				.removeClass( iconposClass( currentOpts.iconpos ) )
-				.addClass( iconposClass( opts.iconpos ) );
+		// Update icon
+
+		// Is it supposed to have an icon?
+		hasIcon =
+
+			// If the collapsedIcon is being set, consult that
+			( opts.collapsedIcon !== undefined ? opts.collapsedIcon !== false :
+
+				// Otherwise consult the existing option value
+				currentOpts.collapsedIcon !== false );
+
+
+		// If any icon-related options have changed, make sure the new icon
+		// state is reflected by first removing all icon-related classes
+		// reflecting the current state and then adding all icon-related
+		// classes for the new state
+		if ( !( opts.iconpos === undefined &&
+			opts.collapsedIcon === undefined &&
+			opts.expandedIcon === undefined ) ) {
+
+			// Remove all current icon-related classes
+			anchor.removeClass( [ iconposClass( currentOpts.iconpos ) ]
+				.concat( ( currentOpts.expandedIcon ?
+					[ "ui-icon-" + currentOpts.expandedIcon ] : [] ) )
+				.concat( ( currentOpts.collapsedIcon ?
+					[ "ui-icon-" + currentOpts.collapsedIcon ] : [] ) )
+				.join( " " ) );
+
+			// Add new classes if an icon is supposed to be present
+			if ( hasIcon ) {
+				anchor.addClass(
+					[ iconposClass( opts.iconpos !== undefined ?
+						opts.iconpos : currentOpts.iconpos ) ]
+						.concat( isCollapsed ?
+							[ "ui-icon-" + ( opts.collapsedIcon !== undefined ?
+								opts.collapsedIcon :
+								currentOpts.collapsedIcon ) ] :
+							[ "ui-icon-" + ( opts.expandedIcon !== undefined ?
+								opts.expandedIcon :
+								currentOpts.expandedIcon ) ] )
+						.join( " " ) );
+			}
 		}
 
 		if ( opts.theme !== undefined ) {
