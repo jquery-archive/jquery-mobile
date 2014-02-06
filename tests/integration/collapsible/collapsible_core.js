@@ -76,6 +76,19 @@
 		testCornersAndInset( "#pre-rendered-collapsible", "collapsible" );
 	});
 
+	test( "iconpos option accepts arbitrary values", function() {
+		var collapsible = $( "#collapsible-iconpos-test" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-xyzzy" ),
+			true, "Initially anchor has class ui-btn-icon-xyzzy" );
+		collapsible.collapsible( "option", "iconpos", "gnurbles" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-xyzzy" ),
+			false, "After setting iconpos option anchor no longer has class " +
+				"ui-btn-icon-xyzzy" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-gnurbles" ),
+			true, "After setting iconpos option anchor has class " +
+				"ui-btn-icon-gnurbles" );
+	});
+
 	module( "Collapsible set", {});
 
 	test( "The page should be enhanced correctly", function(){
