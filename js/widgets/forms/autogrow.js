@@ -26,6 +26,19 @@ define( [
 		},
 
 		_autogrow: function() {
+
+			// This div is added right after the textarea. It vertically wedges open
+			// the space occupied by the textarea while its height is being
+			// recalculated, because in the process of recalculating its height the
+			// height has to be set to 0, and doing that can cause the page to jump
+			// https://github.com/jquery/jquery-mobile/issues/6898
+			this._shadow = $( "<div>" )
+				.css({
+					"visibility": "none"
+				})
+				.hide()
+				.insertAfter( this.element );
+
 			this._on({
 				"keyup": "_timeout",
 				"change": "_timeout",
@@ -70,6 +83,8 @@ define( [
 		},
 
 		_unbindAutogrow: function() {
+			this._shadow.remove();
+			this._shadow = null;
 			this._off( this.element, "keyup change input paste" );
 			this._off( this.document,
 				"pageshow popupbeforeposition updatelayout panelopen" );
@@ -95,6 +110,10 @@ define( [
 		_updateHeight: function() {
 
 			this.keyupTimeout = 0;
+
+			this._shadow
+				.show()
+				.css( "height", this.element.outerHeight() );
 
 			this.element.css({
 				"height": 0,
@@ -129,6 +148,8 @@ define( [
 				"min-height": "",
 				"max-height": ""
 			});
+
+			this._shadow.hide();
 		},
 
 		refresh: function() {
