@@ -40,6 +40,16 @@ $.widget( "mobile.flipswitch", $.extend({
 
 			this._handleFormReset();
 
+			// Transfer tabindex to "on" element and make input unfocusable
+			this._originalTabIndex = this.element.attr( "tabindex" );
+			if ( this._originalTabIndex != null ) {
+				this.on.attr( "tabindex", this._originalTabIndex );
+			}
+			this.element.attr( "tabindex", "-1" );
+			this._on({
+				"focus" : "_handleInputFocus"
+			});
+
 			if ( this.element.is( ":disabled" ) ) {
 				this._setOptions({
 					"disabled": true
@@ -59,6 +69,10 @@ $.widget( "mobile.flipswitch", $.extend({
 			this._on( {
 				"change": "refresh"
 			});
+	},
+
+	_handleInputFocus: function() {
+		this.on.focus();
 	},
 
 	widget: function() {
@@ -90,7 +104,11 @@ $.widget( "mobile.flipswitch", $.extend({
 			options = this.options,
 			element = this.element,
 			theme = options.theme ? options.theme : "inherit",
-			on = $( "<span></span>", { tabindex: 1 } ),
+
+			// The "on" button is an anchor so it's focusable
+			on = $( "<a></a>", {
+				"href": "#"
+			}),
 			off = $( "<span></span>" ),
 			type = element.get( 0 ).tagName,
 			onText = ( type === "INPUT" ) ?
@@ -199,6 +217,11 @@ $.widget( "mobile.flipswitch", $.extend({
 	_destroy: function() {
 		if ( this.options.enhanced ) {
 			return;
+		}
+		if ( this._originalTabIndex != null ) {
+			this.element.attr( "tabindex", this._originalTabIndex );
+		} else {
+			this.element.removeAttr( "tabindex" );
 		}
 		this.on.remove();
 		this.off.remove();
