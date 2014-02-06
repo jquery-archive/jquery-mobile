@@ -41,7 +41,7 @@
     <pre>
       <code>
 // Define a click binding for all anchors in the page
-$( "a" ).on( "click", function( event ){
+$( "a" ).on( "click", function( event ) {
 
 	// Prevent the usual navigation behavior
 	event.preventDefault();
@@ -62,11 +62,11 @@ $( "a" ).on( "click", function( event ){
     <pre><code>
 // Respond to back/forward navigation
 $( window ).on( "navigate", function( event, data ){
-	if( data.state.foo ){
+	if ( data.state.foo ) {
 		// Make use of the arbitrary data stored
 	}
 
-	if( data.state.direction == "back" ) {
+	if ( data.state.direction == "back" ) {
 		// Make use of the directional information
 	}
 
@@ -114,7 +114,7 @@ $( "#method-example" ).click(function( event ) {
 	$.mobile.navigate( "#baz" );
 
 	// Log the results of the navigate event
-	$( window ).on( "navigate", function( event, data ){
+	$( window ).on( "navigate", function( event, data ) {
 		console.log( data.state.info );
 		console.log( data.state.direction );
 		console.log( data.state.url );
