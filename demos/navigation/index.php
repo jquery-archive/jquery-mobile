@@ -43,18 +43,18 @@
 // Define a click binding for all anchors in the page
 $( "a" ).on( "click", function( event ){
 
-  // Prevent the usual navigation behavior
-  event.preventDefault();
+	// Prevent the usual navigation behavior
+	event.preventDefault();
 
-  // Alter the url according to the anchor's href attribute, and
-  // store the data-foo attribute information with the url
-  $.mobile.navigate( $(this).attr( "href" ), {
-    foo: $(this).attr("data-foo")
-  });
+	// Alter the url according to the anchor's href attribute, and
+	// store the data-foo attribute information with the url
+	$.mobile.navigate( $(this).attr( "href" ), {
+		foo: $(this).attr("data-foo")
+	});
 
-  // Hypothetical content alteration based on the url. E.g, make
-  // an Ajax request for JSON data and render a template into the page.
-  alterContent( $(this).attr("href") );
+	// Hypothetical content alteration based on the url. E.g, make
+	// an Ajax request for JSON data and render a template into the page.
+	alterContent( $(this).attr("href") );
 });</code></pre>
 
     <p>Next, a <code>navigate</code> event binding helps in responding to backward and forward navigation via the browsers history API. Here the <code>alterContent</code> function can address the direction in which the browser is navigating as well as any additional information stored on the data object when <code>$.mobile.navigate</code> was invoked to store the corresponding history entry.</p>
@@ -62,16 +62,16 @@ $( "a" ).on( "click", function( event ){
     <pre><code>
 // Respond to back/forward navigation
 $( window ).on( "navigate", function( event, data ){
-  if( data.state.foo ){
-    // Make use of the arbitrary data stored
-  }
+	if( data.state.foo ){
+		// Make use of the arbitrary data stored
+	}
 
-  if( data.state.direction == "back" ) {
-    // Make use of the directional information
-  }
+	if( data.state.direction == "back" ) {
+		// Make use of the directional information
+	}
 
-  // reset the content based on the url
-  alterContent( data.state.url );
+	// reset the content based on the url
+	alterContent( data.state.url );
 });</code></pre>
 
 		<h2>Event Example </h2>
@@ -83,13 +83,13 @@ $( window ).on( "navigate", function( event, data ){
     <pre><code>
 // Bind to the navigate event
 $( window ).on( "navigate", function() {
-  console.log( "navigated!" );
+	console.log( "navigated!" );
 });
 
 // Bind to the click of the example link
 $( "#event-example" ).click(function( event ) {
-  event.preventDefault();
-  location.hash = "foo";
+	event.preventDefault();
+	location.hash = "foo";
 });
 </code></pre>
 
@@ -105,24 +105,24 @@ $( "#event-example" ).click(function( event ) {
       <code>
 // Bind to the click of the example link
 $( "#method-example" ).click(function( event ) {
-  // Append #bar
-  $.mobile.navigate( "#bar", {
-    info: "info about the #bar hash"
-  });
+	// Append #bar
+	$.mobile.navigate( "#bar", {
+		info: "info about the #bar hash"
+	});
 
-  // Replace #bar with #baz
-  $.mobile.navigate( "#baz" );
+	// Replace #bar with #baz
+	$.mobile.navigate( "#baz" );
 
-  // Log the results of the navigate event
-  $( window ).on( "navigate", function( event, data ){
-    console.log( data.state.info );
-    console.log( data.state.direction );
-    console.log( data.state.url );
-    console.log( data.state.hash );
-  });
+	// Log the results of the navigate event
+	$( window ).on( "navigate", function( event, data ){
+		console.log( data.state.info );
+		console.log( data.state.direction );
+		console.log( data.state.url );
+		console.log( data.state.hash );
+	});
 
-  // Go back to pop the state for #bar and log it
-  window.history.back();
+	// Go back to pop the state for #bar and log it
+	window.history.back();
 });
 </code>
     </pre>
