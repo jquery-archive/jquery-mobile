@@ -210,6 +210,29 @@
 	
 	module( "Icons", {});
 
+	test( "expandedIcon behavior when collapsedIcon set to false", function() {
+		var collapsible = $( "#collapsible-collapsed-icon-false-expanded-icon" );
+		collapsible.collapsible( "expand" );
+		collapsible.collapsible( "option", "collapsedIcon", false );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
+			false, "Turning off collapsedIcon makes expanded icon disappear" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-left" ),
+			false, "Turning off collapsedIcon makes iconpos class disappear" );
+		collapsible.collapsible( "option", "collapsedIcon", "plus" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
+			true, "Turning on collapsedIcon makes expanded icon reappear" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-left" ),
+			true, "Turning on collapsedIcon makes iconpos class reappear" );
+	});
+
+	test( "iconpos behavior when collapsedIcon set to false", function() {
+		var collapsible = $( "#collapsible-collapsed-icon-false-iconpos" );
+		collapsible.collapsible( "option", "collapsedIcon", false );
+		collapsible.collapsible( "option", "iconpos", "top" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-top" ),
+			false, "Setting iconpos while collapsedIcon is off has no effect" );
+	});
+
 	test( "Collapsible with custom icons", function(){
 		var collapsibles = $( "#collapsible-with-custom-icons" ).find( ".ui-collapsible" );
 
