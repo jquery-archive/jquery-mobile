@@ -96,6 +96,8 @@
 
 	<div class="ui-content" role="main">
 
+		<p>This "classic" theme mimics the old jQuery Mobile default theme. IMPORTANT: This classic theme is only a demo and not a supported feature. Issues or ThemeRoller incompatibility might not be fixed, this theme is not available on the CDN, and this demo can be removed at any time.</p>
+
 		<p><a href="theme-classic.css" target="_blank">Open the classic theme CSS file in a new tab</a></p>
 
 		<form class="ui-mini">
