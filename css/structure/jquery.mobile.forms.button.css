@@ -9,7 +9,7 @@
 	border: 0;
 	outline: 0;
 	-webkit-border-radius: inherit;
-	border-bottom-radius: inherit;	
+	border-radius: inherit;	
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	cursor: pointer;
