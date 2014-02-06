@@ -459,7 +459,7 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						cwd: "js",
+						cwd: "external/jquery",
 						src: [ "jquery.js" ],
 						dest: path.join( dist, "demos/js/" )
 					},
