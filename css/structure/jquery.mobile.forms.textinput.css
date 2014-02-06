@@ -51,7 +51,10 @@ textarea.ui-mini {
 }
 /* Padding on the div instead of input because of browser spinners etc. */
 .ui-input-has-clear {
-	padding-right: 2.25em;
+	padding-right: 2.375em;
+}
+.ui-mini.ui-input-has-clear {
+	padding-right: 2.923em;
 }
 .ui-input-has-clear input {
 	padding-right: 0;
