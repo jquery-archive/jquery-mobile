@@ -38,8 +38,7 @@ define( [
 				role: role,
 				page: page,
 				leftbtn: leftbtn,
-				rightbtn: rightbtn,
-				backBtn: null
+				rightbtn: rightbtn
 			});
 			this.element.attr( "role", role === "header" ? "banner" : "contentinfo" ).addClass( "ui-" + role );
 			this.refresh();
@@ -113,18 +112,15 @@ define( [
 
 		},
 		_addBackButton: function() {
-			var theme,
-				options = this.options;
-
-			if ( !this.backBtn ) {
+			var options = this.options,
 				theme = options.backBtnTheme || options.theme;
-				this.backBtn = $( "<a role='button' href='javascript:void(0);' " +
-					"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
-						( theme ? "ui-btn-" + theme + " " : "" ) +
-						"ui-toolbar-back-btn ui-icon-carat-l ui-btn-icon-left' " +
-					"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText + "</a>" )
-						.prependTo( this.element );
-			}
+
+			$( "<a role='button' href='javascript:void(0);' " +
+				"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
+					( theme ? "ui-btn-" + theme + " " : "" ) +
+					"ui-toolbar-back-btn ui-icon-carat-l ui-btn-icon-left' " +
+				"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText + "</a>" )
+					.prependTo( this.element );
 		},
 		_addHeadingClasses: function() {
 			this.element.children( "h1, h2, h3, h4, h5, h6" )
