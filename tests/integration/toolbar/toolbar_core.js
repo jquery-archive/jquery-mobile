@@ -20,7 +20,7 @@ asyncTest( "Back button appears correctly", function() {
 		},
 
 		function() {
-			var backBtn = $( "#header a:first" );
+			var backBtn = $( "#page-2-header a:first" );
 
 			deepEqual( backBtn.length, 1, "A 'Back' button was added to the header." );
 			deepEqual( backBtn.attr( "role" ), "button", "The 'Back' button has the attribute " + '"' + "data-role='button'" + '"' );
@@ -30,5 +30,29 @@ asyncTest( "Back button appears correctly", function() {
 		start
 	]);
 });
+
+// Test the order of history update and page transition to guarantee that
+// the back button properly displays.
+asyncTest( "navigating with $.mobile.navigate should trigger the back button", function() {
+
+	expect( 2 );
+
+	$.testHelper.pageSequence([
+		function() {
+			$.mobile.navigate("#page3");
+		},
+
+		function() {
+			var backBtn = $( "#page-3-header a:first" );
+
+			deepEqual( backBtn.length, 1, "A 'Back' button was added to the header." );
+			deepEqual( backBtn.attr( "role" ), "button", "The 'Back' button has the attribute " + '"' + "data-role='button'" + '"' );
+			$.mobile.back();
+		},
+
+		start
+	]);
+});
+
 
 })( jQuery );

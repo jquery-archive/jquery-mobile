@@ -50,7 +50,7 @@ define( [
 				if ( this.options.addBackBtn &&
 					this.role === "header" &&
 					$( ".ui-page" ).length > 1 &&
-					this.page[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" ) !== $.mobile.path.stripHash( location.hash ) &&
+					this.page[ 0 ] !== $.mobile.pageContainer.pagecontainer("getActivePage")[ 0 ] &&
 					!this.leftbtn ) {
 						this._addBackButton();
 				} else {
