@@ -2,7 +2,10 @@
 // ===================
 
 // Includes file dependencies
-define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, CategoryModel ) {
+define([
+	"jquery",
+	"backbone",
+	"../models/CategoryModel" ], function( $, Backbone, CategoryModel ) {
 
     // Extends Backbone.Router
     var Collection = Backbone.Collection.extend( {
