@@ -125,4 +125,28 @@
 		ok( !d, "native clear button is still visible" );
 	});
 
+	test( "clearBtn option works at runtime", function() {
+		var input = $( "#test-clear-btn-option" );
+
+		deepEqual( input.siblings( "a" ).length, 0,
+			"input initially has no clear button" );
+		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), false,
+			"wrapper does not initially have class 'ui-input-has-clear'" );
+
+		input.textinput( "option", "clearBtn", true );
+
+		deepEqual( input.siblings( "a" ).length, 1,
+			"turning on clearBtn option causes an anchor to be added" );
+		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), true,
+			"turning on clearBtn option causes 'ui-input-has-clear' to be " +
+				"added to wrapper" );
+
+		input.textinput( "option", "clearBtn", false );
+
+		deepEqual( input.siblings( "a" ).length, 0,
+			"turning off clearBtn removes clear button anchor" );
+		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), false,
+			"turning off clearBtn removes wrapper class 'ui-input-has-clear'" );
+	});
+
 })(jQuery);

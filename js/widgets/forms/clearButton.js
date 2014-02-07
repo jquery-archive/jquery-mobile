@@ -91,7 +91,8 @@ define( [
 		_setOptions: function( options ) {
 			this._super( options );
 
-			if ( options.clearBtn !== undefined && !this.element.is( "textarea, :jqmData(type='range')" ) ) {
+			if ( options.clearBtn !== undefined &&
+				!this.element.is( "textarea, :jqmData(type='range')" ) ) {
 				if ( options.clearBtn ) {
 					this._addClearBtn();
 				} else {
@@ -100,7 +101,8 @@ define( [
 			}
 
 			if ( options.clearBtnText !== undefined && this._clearBtn !== undefined ) {
-				this._clearBtn.text( options.clearBtnText ).attr("title", options.clearBtnText);
+				this._clearBtn.text( options.clearBtnText )
+					.attr("title", options.clearBtnText);
 			}
 		},
 
@@ -113,7 +115,7 @@ define( [
 		},
 
 		_destroyClear: function() {
-			this.element.removeClass( "ui-input-has-clear" );
+			this.widget().removeClass( "ui-input-has-clear" );
 			this._unbindClear();
 			this._clearBtn.remove();
 		},
