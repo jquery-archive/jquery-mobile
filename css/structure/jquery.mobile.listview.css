@@ -235,7 +235,7 @@ ol.ui-listview > li > .ui-btn,
 ol.ui-listview > li.ui-li-static {
 	vertical-align: middle;
 }
-ol.ui-listview > li > .ui-btn:before,
+ol.ui-listview > li > .ui-btn:first-child:before,
 ol.ui-listview > li.ui-li-static:before,
 ol.ui-listview > li.ui-field-contain > label:before,
 ol.ui-listview > li.ui-field-contain > .ui-controlgroup-label:before {
