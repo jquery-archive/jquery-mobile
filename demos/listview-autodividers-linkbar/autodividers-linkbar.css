@@ -1,7 +1,7 @@
-#sorter .ui-li.ui-li-static.ui-btn-up-c {
+#sorter li {
 	height: 3.8%;
 	padding: 0;
-	font-size: 8px;
+	font-size: 14px;
 	padding-left: 5px;
 	line-height: 1.8em;
 }
