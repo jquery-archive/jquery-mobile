@@ -3,7 +3,7 @@
 //>>label: Transition Handlers
 //>>group: Transitions
 
-define( ["jquery", "../jquery.mobile.core", "./serial", "./concurrent"], function( jQuery ) {
+define( ["jquery", "../core", "./serial", "./concurrent"], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {

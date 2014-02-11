@@ -54,7 +54,7 @@
 			]);
 		};
 
-	module( "jquery.mobile.popup.js", {
+	module( "popup", {
 		setup: function() {
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;

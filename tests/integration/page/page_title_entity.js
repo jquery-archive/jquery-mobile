@@ -1,5 +1,5 @@
 ( function( $, undefined ) {
-	module( "jquery.mobile.page" );
+	module( "page" );
 
 	asyncTest( "Entity in page title", function() {
 		$.testHelper.pageSequence([

@@ -12,7 +12,7 @@
 		window.scrollTo(0,0);
 	}
 
-	module("jquery.mobile.toolbar.js", {setup: function() {
+	module( "toolbar", {setup: function() {
 		var startTimeout;
 
 		// swallow the inital page change

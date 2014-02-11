@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./jquery.mobile.core" ], function( jQuery ) {
+define( [ "jquery", "./core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 // buttonMarkup is deprecated as of 1.4.0 and will be removed in 1.5.0.

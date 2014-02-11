@@ -11,8 +11,8 @@
 
 define( [ "jquery",
 	"../../navigation/path",
-	"../../jquery.mobile.core",
-	"../../jquery.mobile.widget",
+	"../../core",
+	"../../widget",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

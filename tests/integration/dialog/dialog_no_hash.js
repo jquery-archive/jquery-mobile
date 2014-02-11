@@ -2,7 +2,7 @@
  * mobile dialog unit tests
  */
 (function($) {
-	module( "jquery.mobile.dialog.js", {
+	module( "dialog", {
 		setup: function() {
 			$.mobile.page.prototype.options.contentTheme = "d";
 		}
