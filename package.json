@@ -2,7 +2,7 @@
 	"name": "jquery-mobile",
 	"title": "jQuery Mobile",
 	"description": "Touch-Optimized Web Framework for Smartphones & Tablets",
-	"version": "1.4.1pre",
+	"version": "1.4.2pre",
 	"homepage": "http://jquerymobile.com",
 	"author": {
 		"name": "jQuery Foundation Inc. and other contributors",
