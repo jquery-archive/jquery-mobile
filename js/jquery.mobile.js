@@ -11,6 +11,7 @@ define([
 	"./navigation/method",
 	"./transitions/handlers",
 	"./transitions/visuals",
+	"./jquery.mobile.animationComplete.js",
 	"./jquery.mobile.navigation",
 	"./jquery.mobile.degradeInputs",
 	"./widgets/page.dialog",

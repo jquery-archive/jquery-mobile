@@ -62,10 +62,11 @@ define( [
 				if ( event.type !== "popupbeforeposition" ) {
 					this.element
 						.addClass( "ui-textinput-autogrow-resize" )
-						.one( "transitionend webkitTransitionEnd oTransitionEnd",
+						.animationComplete(
 							$.proxy( function() {
 								this.element.removeClass( "ui-textinput-autogrow-resize" );
-							}, this ) );
+							}, this ),
+						"transition" );
 				}
 				this._timeout();
 			}
