@@ -69,6 +69,7 @@
 /* Animate class is added to panel, wrapper and fixed toolbars */
 .ui-panel-animate {
 	-webkit-transition: -webkit-transform 300ms ease;
+	-webkit-transition-duration: 300ms;
 	-moz-transition: -moz-transform 300ms ease;
 	transition: transform 300ms ease;
 }

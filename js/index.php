@@ -22,6 +22,7 @@ $files = array(
 	'jquery.mobile.defaults.js',
 	'jquery.mobile.helpers.js',
 	'jquery.mobile.data.js',
+	'jquery.mobile.animationComplete.js',
 	'widgets/page.js',
 	'widgets/page.dialog.js',
 	'widgets/loader.js',

@@ -10,6 +10,7 @@ define( [ "jquery",
 
 		  // TODO event.special.scrollstart
 		  "../events/touch",
+		  "../jquery.mobile.animationComplete",
 
 		  // TODO $.mobile.focusPage reference
 		  "../jquery.mobile.navigation" ], function( jQuery ) {
@@ -109,17 +110,15 @@ define( [ "jquery",
                 }
 			});
 
-			if ( !none ) {
-				this.$to.animationComplete( $.proxy(function() {
-					this.doneIn();
-				}, this ));
-			}
-
 			this.$to
 				.removeClass( this.toPreClass )
 				.addClass( this.name + " in " + reverseClass );
 
-			if ( none ) {
+			if ( !none ) {
+				this.$to.animationComplete( $.proxy(function() {
+					this.doneIn();
+				}, this ));
+			} else {
 				this.doneIn();
 			}
 
