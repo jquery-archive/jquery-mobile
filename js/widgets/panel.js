@@ -37,7 +37,6 @@ $.widget( "mobile.panel", {
 	_panelID: null,
 	_closeLink: null,
 	_parentPage: null,
-	_page: null,
 	_modal: null,
 	_panelInner: null,
 	_wrapper: null,
@@ -52,7 +51,6 @@ $.widget( "mobile.panel", {
 			_panelID: el.attr( "id" ),
 			_closeLink: el.find( ":jqmData(rel='close')" ),
 			_parentPage: ( parentPage.length > 0 ) ? parentPage : false,
-			_page: this._getPage,
 			_panelInner: this._getPanelInner(),
 			_wrapper: this._getWrapper,
 			_fixedToolbars: this._getFixedToolbars
@@ -98,7 +96,7 @@ $.widget( "mobile.panel", {
 			.appendTo( target );
 	},
 
-	_getPage: function() {
+	_page: function() {
 		var page = this._parentPage ? this._parentPage : $( "." + $.mobile.activePageClass );
 
 		return page;
