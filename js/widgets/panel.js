@@ -39,7 +39,6 @@ $.widget( "mobile.panel", {
 	_parentPage: null,
 	_modal: null,
 	_panelInner: null,
-	_wrapper: null,
 	_fixedToolbars: null,
 
 	_create: function() {
@@ -52,7 +51,6 @@ $.widget( "mobile.panel", {
 			_closeLink: el.find( ":jqmData(rel='close')" ),
 			_parentPage: ( parentPage.length > 0 ) ? parentPage : false,
 			_panelInner: this._getPanelInner(),
-			_wrapper: this._getWrapper,
 			_fixedToolbars: this._getFixedToolbars
 		});
 
@@ -102,7 +100,7 @@ $.widget( "mobile.panel", {
 		return page;
 	},
 
-	_getWrapper: function() {
+	_wrapper: function() {
 		var wrapper = this._page().find( "." + this.options.classes.pageWrapper );
 
 		if ( wrapper.length === 0 ) {
