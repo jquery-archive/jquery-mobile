@@ -1,5 +1,5 @@
 /*
- * mobile AnimationComplete integration tests
+ * mobile flipswitch unit tests
  */
 (function($){
 	var oldTransitions, oldAnimations;
@@ -17,15 +17,15 @@
 
 		$( "#transition-test" )
 			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
-			.animationComplete(function() {
+			.animationComplete( function() {
 				transitionComplete = true;
 		}, "transition" );
 
-		$( "#animation-test" ).addClass( "in" ).animationComplete(function() {
+		$( "#animation-test" ).addClass( "in" ).animationComplete( function() {
 			animationComplete = true;
 		});
 
-		window.setTimeout(function() {
+		window.setTimeout( function(){
 			ok( transitionComplete, "transition completed" );
 			ok( animationComplete, "animation completed" );
 			start();
@@ -43,15 +43,15 @@
 		var transitionComplete = false,
 			animationComplete = false;
 
-		$( "#transition-test" ).animationComplete(function() {
+		$( "#transition-test" ).animationComplete( function() {
 			transitionComplete = true;
 		}, "transition" );
 
-		$( "#animation-test" ).animationComplete(function() {
+		$( "#animation-test" ).animationComplete( function() {
 			animationComplete = true;
 		});
 
-		window.setTimeout(function() {
+		window.setTimeout( function(){
 			ok( transitionComplete, "transition callback called" );
 			ok( animationComplete, "animation callback called" );
 			start();
@@ -80,20 +80,20 @@
 
 		$( "#transition-test" )
 			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
-			.animationComplete(function() {
+			.animationComplete( function() {
 				transitionComplete = true;
 		}, "transition" );
 
-		$( "animation-test" ).addClass( "in" ).animationComplete(function() {
+		$( "animation-test" ).addClass( "in" ).animationComplete( function() {
 			animationComplete = true;
 		});
 
-		window.setTimeout(function() {
+		window.setTimeout( function(){
 			ok( transitionComplete, "transition callback called" );
 			ok( animationComplete, "animation callback called" );
 		}, 10 );
 
-		window.setTimeout(function() {
+		window.setTimeout( function(){
 			start();
 		}, 800 );
 	});
@@ -109,10 +109,10 @@
 
 		$( "#transition-test" )
 			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
-			.animationComplete(function() {
+			.animationComplete( function() {
 				transitionComplete = true;
 			}, "transition" );
-		$( "#animation-test" ).addClass( "in" ).animationComplete(function() {
+		$( "#animation-test" ).addClass( "in" ).animationComplete( function() {
 			animationComplete = true;
 		});
 		ok( Object.keys( $._data( $("#animation-test")[0], "events" ) ).length === 1,
@@ -120,7 +120,7 @@
 
 		ok( Object.keys( $._data( $("#transition-test")[0], "events" ) ).length === 1,
 			 "Only one transition event" );
-		window.setTimeout(function() {
+		window.setTimeout( function(){
 			start();
 		}, 800 );
 	});
@@ -145,12 +145,12 @@
 		var transitionComplete = false,
 			animationComplete = false;
 
-		window.setTimeout(function() {
-			$( "#transition-test" ).animationComplete(function() {
+		window.setTimeout( function(){
+			$( "#transition-test" ).animationComplete( function() {
 				transitionComplete = true;
 			}, "transition" );
 
-			$( "#animation-test" ).animationComplete(function() {
+			$( "#animation-test" ).animationComplete( function() {
 				animationComplete = true;
 			});
 			ok( $._data( $("#animation-test")[0], "events" ) === undefined,
@@ -174,14 +174,14 @@
 
 		$( "#transition-test" )
 			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
-			.animationComplete(function() {
+			.animationComplete( function() {
 				transitionComplete = true;
 		}, "transition" );
 
-		$( "#animation-test" ).addClass( "in" ).animationComplete(function() {
+		$( "#animation-test" ).addClass( "in" ).animationComplete( function() {
 			animationComplete = true;
 		});
-		window.setTimeout(function(){
+		window.setTimeout( function(){
 			ok( $._data( $("#animation-test")[0], "events" ) === undefined,
 				"no animation bindings remain" );
 			ok( $._data( $("#transition-test")[0], "events" ) === undefined,
@@ -201,15 +201,15 @@
 		var transitionComplete = false,
 			animationComplete = false;
 
-		$( "#transition-test" ).animationComplete(function() {
+		$( "#transition-test" ).animationComplete( function() {
 			transitionComplete = true;
 		}, "transition" );
 
-		$( "#animation-test" ).animationComplete(function() {
+		$( "#animation-test" ).animationComplete( function() {
 			animationComplete = true;
 		});
 
-		window.setTimeout(function(){
+		window.setTimeout( function(){
 			ok( $._data( $("#animation-test")[0], "events" ) === undefined,
 				"no animation bindings remain" );
 			ok( $._data( $("#transition-test")[0], "events" ) === undefined,
