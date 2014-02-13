@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
-	<script src="../../js/jquery.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style id="custom-label-flipswitch">
@@ -68,8 +68,8 @@
 
                 <div data-demo-html="true">
 				<form>
-                    <label for="flip-checkbox">Flip toggle switch checkbox:</label>
-                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox">
+                    <label for="flip-checkbox-1">Flip toggle switch checkbox:</label>
+                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox-1" id="flip-checkbox-1">
 				</form>
                 </div><!-- /demo-html -->
 
@@ -77,8 +77,8 @@
 
                 <div data-demo-html="true" data-demo-css="#custom-label-flipswitch">
 				<form>
-                    <label for="flip-checkbox">Flip toggle switch checkbox:</label>
-                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox" data-on-text="Light" data-off-text="Dark" data-wrapper-class="custom-label-flipswitch">
+                    <label for="flip-checkbox-2">Flip toggle switch checkbox:</label>
+                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox-2" id="flip-checkbox-2" data-on-text="Light" data-off-text="Dark" data-wrapper-class="custom-label-flipswitch">
 				</form>
                 </div><!-- /demo-html -->
 
@@ -86,8 +86,8 @@
 
                 <div data-demo-html="true" data-demo-css="#custom-size-flipswitch">
 				<form>
-                    <label for="flip-checkbox">Flip toggle switch checkbox:</label>
-                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox" data-on-text="Assured" data-off-text="Uncertain" data-wrapper-class="custom-size-flipswitch">
+                    <label for="flip-checkbox-3">Flip toggle switch checkbox:</label>
+                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox-3" id="flip-checkbox-3" data-on-text="Assured" data-off-text="Uncertain" data-wrapper-class="custom-size-flipswitch">
 				</form>
                 </div><!-- /demo-html -->
 
@@ -95,8 +95,8 @@
 
                 <div data-demo-html="true">
                 <form>
-                    <label for="flip-checkbox">Flip toggle switch checkbox:</label>
-                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox" id="flip-checkbox" checked>
+                    <label for="flip-checkbox-4">Flip toggle switch checkbox:</label>
+                    <input type="checkbox" data-role="flipswitch" name="flip-checkbox-4" id="flip-checkbox-4" checked>
                 </form>
                 </div><!-- /demo-html -->
 
@@ -216,7 +216,7 @@
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-		<p>Copyright 2013 The jQuery Foundation</p>
+		<p>Copyright 2014 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
 <?php include( '../jqm-search.php' ); ?>

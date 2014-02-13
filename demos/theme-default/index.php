@@ -6,7 +6,7 @@
 	<title>Default theme - jQuery Mobile Demos</title>
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="shortcut icon" href="../favicon.ico">
-	<script src="../../js/jquery.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../../js/"></script>
 	<script>
 		$( document ).on( "pagecreate", function() {
@@ -277,7 +277,7 @@
 		<p>I'm the collapsible content with a themed content block set to "<span class="theme">a</span>".</p>
 		</div>
 
-		<div data-role="collapsible-set" data-content-theme="a">
+		<div data-role="collapsibleset" data-content-theme="a">
 			<div data-role="collapsible">
 				<h3>Section 1</h3>
 			<p>I'm the collapsible content for section 1</p>

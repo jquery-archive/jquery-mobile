@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
-	<script src="../../js/jquery.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style id="custom-icon">
@@ -373,7 +373,7 @@
 		<p>You can also use listviews inside a <a href="../accordions/">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-theme="a" data-content-theme="b">
+				<div data-role="collapsibleset" data-theme="a" data-content-theme="b">
 					<div data-role="collapsible">
 					<h2>Filtered list</h2>
 						<ul data-role="listview" data-filter="true" data-filter-theme="a" data-divider-theme="b">
@@ -433,7 +433,7 @@
 		<p>Setting <code>data-inset="false"</code> on a collapsible or a collapsible set makes the collapsible full width (non-inset), like a full width listview.</p>
 
 			<div data-demo-html="true">
-				<div data-role="collapsible-set" data-theme="a" data-inset="false">
+				<div data-role="collapsibleset" data-theme="a" data-inset="false">
 					<div data-role="collapsible">
 					<h2>Mailbox</h2>
 						<ul data-role="listview">
@@ -497,7 +497,7 @@
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-		<p>Copyright 2013 The jQuery Foundation</p>
+		<p>Copyright 2014 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
 <?php include( '../jqm-search.php' ); ?>

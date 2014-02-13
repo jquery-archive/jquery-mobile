@@ -72,12 +72,12 @@
  * For each side, the arrow is twice the desired size and its corner is aligned
  * with the edge of the container:
  *                                           
- *           /\         /\                +----+	     /\
- *          /  \       /  \ 					    | /\ |top   /  \
+ *           /\         /\                +----+       /\
+ *          /  \       /  \               | /\ |top   /  \
  *      +----+  \     /  +----+       +-->|/  \|     /    \
  *  left| /  |   \   /   |  \ |right  |   |    |    /      \
- *      |/   |    \ /    |   \| 			|  /|    |\  /        \
- *      |\   |    / \    |   /| 			| / +----+ \ \ +----+ /
+ *      |/   |    \ /    |   \|       |  /|    |\  /        \
+ *      |\   |    / \    |   /|       | / +----+ \ \ +----+ /
  *      | \  |   /   \   |  / |       | \        /  \|    |/
  *      +----+  /     \  +----+       |  \      /    |    |
  *       ^  \  /       \  /  ^        |   \    /  +->|\  /|
@@ -136,22 +136,6 @@
     margin-top: -5.857864376269049px;
 }
 
-.ui-popup-arrow-background {
-	/* desired triangle height is used here */
-	width: 20px;
-	height: 20px;
-}
-
-.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow-background
-.ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow-background {
-	background-position: 0 10px;
-}
-
-.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow-background,
-.ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow-background {
-	background-position: 10px 0;
-}
-
 /* structure */
 .ui-popup > .ui-popup-arrow-guide {
 	position: absolute;
@@ -184,53 +168,4 @@
         	M21=0.7071067811865477,
         	M22=0.7071067811865474,
         	SizingMethod='auto expand');
-}
-
-.ui-popup-arrow-background {
-	position: absolute;
-	border: 0;
-}
-
-.ui-popup-arrow-container.ie .ui-popup-arrow-background {
-	background: none;
-}
-
-.ui-popup-arrow-container.ui-popup-arrow-t .ui-popup-arrow-background,
-.ui-popup-arrow-container.ui-popup-arrow-b .ui-popup-arrow-background {
-	/* Undo rotation and reflect in x axis */
-	-webkit-transform: rotate(-45deg) scale(1, -1);
-	-moz-transform: rotate(-45deg) scale(1, -1);
-	-ms-transform: rotate(-45deg) scale(1, -1);
-	transform: rotate(-45deg) scale(1, -1);
-}
-
-.ui-popup-arrow-container.ui-popup-arrow-t.ie .ui-popup-arrow-background,
-.ui-popup-arrow-container.ui-popup-arrow-b.ie .ui-popup-arrow-background {
-   -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865483, M12=-0.7071067811865467, M21=-0.7071067811865467, M22=-0.7071067811865483, SizingMethod='auto expand')";
-   filter: progid:DXImageTransform.Microsoft.Matrix(
-            M11=0.7071067811865483,
-            M12=-0.7071067811865467,
-            M21=-0.7071067811865467,
-            M22=-0.7071067811865483,
-            SizingMethod='auto expand');
-}
-
-.ui-popup-arrow-container.ui-popup-arrow-l .ui-popup-arrow-background,
-.ui-popup-arrow-container.ui-popup-arrow-r .ui-popup-arrow-background {
-	/* Undo rotation and reflect in y axis */
-	-webkit-transform: rotate(-45deg) scale(-1, 1);
-	-moz-transform: rotate(-45deg) scale(-1, 1);
-	-ms-transform: rotate(-45deg) scale(-1, 1);
-	transform: rotate(-45deg) scale(-1, 1);
-}
-
-.ui-popup-arrow-container.ui-popup-arrow-l.ie .ui-popup-arrow-background,
-.ui-popup-arrow-container.ui-popup-arrow-r.ie .ui-popup-arrow-background {
-   -ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=-0.7071067811865483, M12=0.7071067811865467, M21=0.7071067811865467, M22=0.7071067811865483, SizingMethod='auto expand')";
-   filter: progid:DXImageTransform.Microsoft.Matrix(
-            M11=-0.7071067811865483,
-            M12=0.7071067811865467,
-            M21=0.7071067811865467,
-            M22=0.7071067811865483,
-            SizingMethod='auto expand');
 }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
-	<script src="../../js/jquery.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<script>
@@ -49,7 +49,7 @@
 
 			<p>These pages are a demo of a persistent <a href="../navbar/">navbar</a> in a fixed footer toolbar. Click on any of the links in the footer, and you'll see the page content transition. Both the persistent header and footer on these pages remain in place during the animation to a new HTML page.</p>
 
-			<p>With the new external toolbars no extra effort is required to now have persistant toolbars. Simply place them outside of the page container on each page they will be loaded on the first page and persist on subsequent pages. The toolbars still need to be placed on each page to account for refresh however they will be ignored if not within a page container.</p>
+			<p>With the new external toolbars no extra effort is required to now have persistent toolbars. Simply place them outside of the page container on each page they will be loaded on the first page and persist on subsequent pages. The toolbars still need to be placed on each page to account for refresh however they will be ignored if not within a page container.</p>
 
 			<p>Typically, the persistent toolbar technique will be combined with fixed positioning.</p>
 
@@ -59,13 +59,13 @@
 
 			<div data-demo-js="true"></div>
 
-			<h2>Improving page load with persistant toolbars</h2>
+			<h2>Improving page load with persistent toolbars</h2>
 
-			<p>By combining this technique with a little bit of server side logic you can reduce the file size for each page load significantly by not sending anything except the actual page container back when the request is from ajax. this not only reduces file size but makes the actual processing of the page quicker also. To see an example of this technique see <a href="../toolbar-fixed-persistent-optimized/" data-ajax="false">AJAX optimized persistant toolbars</a></p>
+			<p>By combining this technique with a little bit of server side logic you can reduce the file size for each page load significantly by not sending anything except the actual page container back when the request is from ajax. this not only reduces file size but makes the actual processing of the page quicker also. To see an example of this technique see <a href="../toolbar-fixed-persistent-optimized/" data-ajax="false">Ajax optimized persistent toolbars</a></p>
 
 			<h3>A note about transitions</h3>
 
-			<p>By Removing the toolbars from the page container they are no longer part of the page transition which dramaticly improves the performance of complex 3D page transitions over the older style of persistant toolbars.</p>
+			<p>By Removing the toolbars from the page container they are no longer part of the page transition which dramaticly improves the performance of complex 3D page transitions over the older style of persistent toolbars.</p>
 
 		</div><!-- /content -->
 

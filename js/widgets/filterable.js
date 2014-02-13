@@ -62,7 +62,7 @@ $.widget( "mobile.filterable", {
 			}
 
 			this._timer = this._delay( function() {
-				this._trigger( "beforefilter", "beforefilter", { input: search } );
+				this._trigger( "beforefilter", null, { input: search } );
 
 				// Change val as lastval for next execution
 				search[ 0 ].setAttribute( "data-" + $.mobile.ns + "lastval", val );
@@ -117,6 +117,10 @@ $.widget( "mobile.filterable", {
 		}
 
 		this._refreshChildWidget();
+
+		this._trigger( "filter", null, {
+			items: filterItems
+		});
 	},
 
 	// The Default implementation of _refreshChildWidget attempts to call

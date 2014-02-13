@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
-	<script src="../../js/jquery.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 </head>
@@ -26,60 +26,60 @@
 
         <h1>Linking pages</h1>
 
-        <p>jQuery Mobile is designed to work with standard page link conventions and layers the AJAX navigation on top for maximum compatibility.
+        <p>jQuery Mobile is designed to work with standard page link conventions and layers the Ajax navigation on top for maximum compatibility.
         </p>
 
         <h2>Links</h2>
 
-        <p>You can link pages and assets as you normally would, and jQuery Mobile will automatically handle page requests in a single-page model, using AJAX when possible. When AJAX isn't possible (such as a non-same-domain url, or if specified using certain attributes on the link), a normal HTTP request is used instead.</p>
+        <p>You can link pages and assets as you normally would, and jQuery Mobile will automatically handle page requests in a single-page model, using Ajax when possible. When Ajax isn't possible (such as a non-same-domain url, or if specified using certain attributes on the link), a normal HTTP request is used instead.</p>
 
         <p>The goal of this nav model is to allow developers to create websites using best practices &mdash; where ordinary links will "just work" without any special configuration &mdash; while creating a rich, native-like experience that can't be achieved with standard HTTP requests.</p>
 
-        <h2>Default link behavior: AJAX</h2>
+        <h2>Default link behavior: Ajax</h2>
 
-        <p>To enable animated page transitions, all links that point to an external page (ex. products.html) will be loaded via AJAX. To do this unobtrusively, the framework parses the link's <code>href</code> to formulate an AJAX request (Hijax) and displays the loading spinner. All this is done automatically by jQuery Mobile.</p>
+        <p>To enable animated page transitions, all links that point to an external page (ex. products.html) will be loaded via Ajax. To do this unobtrusively, the framework parses the link's <code>href</code> to formulate an Ajax request (Hijax) and displays the loading spinner. All this is done automatically by jQuery Mobile.</p>
 
-        <p>If the AJAX request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
+        <p>If the Ajax request is successful, the new page content is added to the DOM, all mobile widgets are auto-initialized, then the new page is animated into view with a page transition.</p>
 
-        <p>If the AJAX request fails, the framework will display a small error message overlay (styled in the "a" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
+        <p>If the Ajax request fails, the framework will display a small error message overlay (styled in the "a" swatch) that disappears after a brief time so this doesn't break the navigation flow. View an <a href="notapage.html">example of the error message</a>.</p>
 
-        <p><strong>Note:</strong> You cannot link <strong>to</strong> a multipage document with AJAX navigation active because the framework will only load the first page it finds, not the full set of internal pages. In these cases, you must link without AJAX (see next section) for a full page refresh to prevent potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multi-page documents.</p>
+        <p><strong>Note:</strong> You cannot link <strong>to</strong> a multipage document with Ajax navigation active because the framework will only load the first page it finds, not the full set of internal pages. In these cases, you must link without Ajax (see next section) for a full page refresh to prevent potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multi-page documents.</p>
 
         <div data-demo-html="true">
             <p>Example:</p>
-            <a href="../">To the homepage, with AJAX</a>
+            <a href="../">To the homepage, with Ajax</a>
         </div><!--/demo-html -->
 
-        <h2>Linking without AJAX</h2>
+        <h2>Linking without Ajax</h2>
 
-		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with AJAX. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via AJAX. Because of security restrictions, the framework always opts links to external domains out of the AJAX behavior.</p>
+		<p>Links that point to other domains or that have <code>rel="external"</code>, <code>data-ajax="false"</code> or <code>target</code> attributes will not be loaded with Ajax. Instead, these links will cause a full page refresh with no animated transition. Both attributes (<code>rel="external"</code> and <code>data-ajax="false"</code>) have the same effect, but a different semantic meaning: <code>rel="external"</code> should be used when linking to another site or domain, while <code>data-ajax="false"</code> is useful for simply opting a page within your domain from being loaded via Ajax. Because of security restrictions, the framework always opts links to external domains out of the Ajax behavior.</p>
 
 		<div data-demo-html="true">
             <p>Examples:</p>
-            <p><a href="../" data-ajax="false">To the homepage, no AJAX</a></p>
+            <p><a href="../" data-ajax="false">To the homepage, no Ajax</a></p>
             <p><a href="http://www.google.com" rel="external">Google</a></p>
 		</div><!--/demo-html -->
 
-		<p>In version 1.1, we added support for using <code>data-ajax="false"</code> on a parent container which allows you to exclude a large number of links from the AJAX navigation system. This avoids the need to add this attribute to every link in a container. To activate this functionality, <code>$.mobile.ignoreContentEnabled</code> must be set to <code>true</code> because this feature adds overhead we don't want to enable by default.</p>
+		<p>In version 1.1, we added support for using <code>data-ajax="false"</code> on a parent container which allows you to exclude a large number of links from the Ajax navigation system. This avoids the need to add this attribute to every link in a container. To activate this functionality, <code>$.mobile.ignoreContentEnabled</code> must be set to <code>true</code> because this feature adds overhead we don't want to enable by default.</p>
 
 		<div data-demo-html="true">
 			<ul data-role="listview" data-ajax="false" data-inset="true" data-theme="a">
-				<li data-role="list-divider">All links are non-AJAX</li>
+				<li data-role="list-divider">All links are non-Ajax</li>
 				<li><a href="../collapsibleset/">Accordion</a></li>
-				<li><a href="../navigation/">AJAX Navigation</a></li>
+				<li><a href="../navigation/">Ajax Navigation</a></li>
 				<li><a href="../listview-autocomplete/">Autocomplete</a></li>
 			</ul>
 		</div><!--/demo-html -->
 
-		<p>Note: When building a jQuery Mobile application where the AJAX navigation system is disabled globally or frequently disabled on individual links, we recommend disabling the <code>$.mobile.pushStateEnabled</code> global configuration option to avoid inconsistent navigation behavior in some browsers.</p>
+		<p>Note: When building a jQuery Mobile application where the Ajax navigation system is disabled globally or frequently disabled on individual links, we recommend disabling the <code>$.mobile.pushStateEnabled</code> global configuration option to avoid inconsistent navigation behavior in some browsers.</p>
 
 		<h2>Linking within a multi-page document</h2>
 
 		<p>A single HTML document can contain one or many "page" containers simply by stacking multiple divs with a <code>data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first "page" it finds in the source order when the page loads.</p>
 
-		<p>If a link in a <a href="../pages/">multi-page document</a> points to an anchor (<code>#foo</code>), the framework will look for a page wrapper with that id (<code>id="foo"</code>). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the AJAX spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking.</p>
+		<p>If a link in a <a href="../pages/">multi-page document</a> points to an anchor (<code>#foo</code>), the framework will look for a page wrapper with that id (<code>id="foo"</code>). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the Ajax spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking.</p>
 
-		<p>It's important to note that if you are linking from a mobile page that was loaded via AJAX to a page that contains multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the AJAX hash in the URL. This is critical because AJAX pages use the hash (<code>#</code>) to track the AJAX history, while multiple internal pages use the hash to indicate internal pages so there will be conflicts in the hash between these two modes.</p>
+		<p>It's important to note that if you are linking from a mobile page that was loaded via Ajax to a page that contains multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (<code>#</code>) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be conflicts in the hash between these two modes.</p>
 
 		<p>For example, a link to a page containing multiple internal pages would look like this:</p>
 
@@ -103,8 +103,8 @@
 
 		<ul>
 			<li><p>When linking to directories, without a filename URL, (such as <code>href="typesofcats/"</code> instead of <code>href="typesofcats/index.html"</code>), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a URL is a filename, and it will remove that section when creating base URLs from which future pages will be referenced.</p></li>
-			<li><p>Documents loaded via AJAX will select the first page in the DOM of that document to be loaded as a jQuery Mobile page element. As a result the developer must make sure to manage the <code>id</code> attributes of the loaded page and child elements to prevent confusion when manipulating the DOM.</p></li>
-			<li><p>If you link to a multipage document, you must use a <code>data-ajax="false"</code> attribute on the link to cause a full page refresh due to the limitation above where we only load the first page node in an AJAX request due to potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multipage documents. </p></li>
+			<li><p>Documents loaded via Ajax will select the first page in the DOM of that document to be loaded as a jQuery Mobile page element. As a result the developer must make sure to manage the <code>id</code> attributes of the loaded page and child elements to prevent confusion when manipulating the DOM.</p></li>
+			<li><p>If you link to a multipage document, you must use a <code>data-ajax="false"</code> attribute on the link to cause a full page refresh due to the limitation above where we only load the first page node in an Ajax request due to potential hash collisions. There is currently a <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">subpage plugin</a> that makes it possible to load in multipage documents. </p></li>
 			<li><p>While linking pages inside a multipage template, you should not use the <code>data-ajax="false"</code> attribute as it is of no use and will only interfere with the transition settings. </p></li>
 			<li><p>The <code>"ui-page"</code> key name used in sub-hash URL references can be set to any value you'd like, so as to blend into your URL structure. This value is stored in <code>jQuery.mobile.subPageUrlKey</code>.</p></li>
 			<li><p>When traveling back to a previously loaded jQuery Mobile document from an external <b>or</b> internal document with the push state plugin enabled, some browsers load and trigger the <code>popstate</code> event on the wrong document or for the wrong reasons (two edge cases recorded so far). If you are regularly linking to external documents and find the application behaving erratically try disabling pushstate support.</p></li>
@@ -118,7 +118,7 @@
 
 	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
-		<p>Copyright 2013 The jQuery Foundation</p>
+		<p>Copyright 2014 The jQuery Foundation</p>
 	</div><!-- /footer -->
 
 <?php include( '../jqm-search.php' ); ?>

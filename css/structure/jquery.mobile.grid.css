@@ -40,8 +40,7 @@ li.ui-block-e {
 	list-style: none;
 }
 /* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
-[class*="ui-block-"] > button.ui-btn,
-.ui-grid-solo > button.ui-btn {
+[class*="ui-block-"] > button.ui-btn {
 	margin-right: 0;
 	margin-left: 0;
 }
@@ -50,8 +49,7 @@ li.ui-block-e {
 [class*="ui-block-"] > .ui-checkbox,
 [class*="ui-block-"] > .ui-radio,
 [class*="ui-block-"] > button.ui-btn-inline,
-[class*="ui-block-"] > button.ui-btn-icon-notext,
-.ui-grid-solo > [class*="ui-"] {
+[class*="ui-block-"] > button.ui-btn-icon-notext {
 	margin-right: .3125em;
 	margin-left: .3125em;
 }

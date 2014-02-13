@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -13,16 +13,17 @@
 	</script>
 
 	<script src="../../../js/jquery.mobile.define.js"></script>
+	<script src="../../../js/jquery.mobile.ns.js"></script>
 	<script src="../../../js/jquery.mobile.support.touch.js"></script>
 	<script src="../../../js/jquery.mobile.events.js"></script>
-    <script src="../../../js/events/touch.js"></script>
-    <script src="../../../js/events/throttledresize.js"></script>
-    <script src="../../../js/events/orientationchange.js"></script>
-	<script src="../../../js/"></script>
+	<script src="../../../js/jquery.mobile.vmouse.js"></script>
+	<script src="../../../js/events/touch.js"></script>
+	<script src="../../../js/events/throttledresize.js"></script>
+	<script src="../../../js/events/orientationchange.js"></script>
 
-
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
-	<script src="../../../external/qunit.js"></script>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+	<script src="../../../external/qunit/qunit.js"></script>
 
 	<script src="event_core.js"></script>
 
@@ -30,17 +31,13 @@
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Event Test Suite</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests">
-</ol>
+	<div id="qunit"></div>
 
-<div id="qunit-fixture"></div>
+	<div id="qunit-fixture"></div>
 
-<div id="foo" data-nstest-role="page">
-	<a href="#bar" data-nstest-transition="flip"></a>
-</div>
+	<div id="foo" data-nstest-role="page">
+		<a href="#bar" data-nstest-transition="flip"></a>
+	</div>
 
 </body>
 </html>

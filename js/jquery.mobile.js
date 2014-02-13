@@ -11,6 +11,7 @@ define([
 	"./navigation/method",
 	"./transitions/handlers",
 	"./transitions/visuals",
+	"./jquery.mobile.animationComplete.js",
 	"./jquery.mobile.navigation",
 	"./jquery.mobile.degradeInputs",
 	"./widgets/page.dialog",
@@ -49,7 +50,6 @@ define([
 	"./widgets/table.reflow",
 	"./widgets/filterable",
 	"./widgets/filterable.backcompat",
-	"./widgets/jquery.ui.tabs",
 	"./widgets/tabs",
 	"./jquery.mobile.zoom",
 	"./jquery.mobile.zoom.iosorientationfix"

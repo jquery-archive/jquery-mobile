@@ -8,7 +8,7 @@
 		version = "",
 		myScriptTag = document.getElementsByTagName( "script" )[document.getElementsByTagName( "script" ).length - 1],
 		baseUrl = myScriptTag.src.replace( /(.*)\/.*$/, "$1/" ),
-		url = baseUrl + "jquery.js";
+		url = baseUrl + "../external/jquery/jquery.js";
 
 	if ( results ) {
 		version = decodeURIComponent( results[results.length - 1].replace( /\+/g, " " ) );

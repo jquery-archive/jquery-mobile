@@ -3,15 +3,44 @@ node_js:
   - 0.8
 before_script: 
   - npm install -g grunt-cli
+script: npm run-script ci
 branches:
   only:
     - master
-    - 1.3-stable
 env:
-  - JQUERIES=1.8.3
-  - JQUERIES=1.10.2
-  - JQUERIES=2.0.3
-  - JQUERIES=git
+  - TYPES=unit
+    JQUERIES=1.8.3
+  - TYPES=unit
+    JQUERIES=1.10.2
+  - TYPES=unit
+    JQUERIES=2.0.3
+  - TYPES=unit
+    JQUERIES=git
+  - TYPES=integration
+    SUITES=!navigation
+    JQUERIES=1.8.3
+  - TYPES=integration
+    SUITES=!navigation
+    JQUERIES=1.10.2
+  - TYPES=integration
+    SUITES=!navigation
+    JQUERIES=2.0.3
+  - TYPES=integration
+    SUITES=!navigation
+    JQUERIES=git
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=1.8.3
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=1.10.2
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=2.0.3
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=git
+
 notifications:
   irc:
     channels:

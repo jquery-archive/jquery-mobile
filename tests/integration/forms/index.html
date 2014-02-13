@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -12,10 +12,10 @@
 	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 
-
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
-	<script src="../../../external/qunit.js"></script>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+	<script src="../../../external/qunit/qunit.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
 			[ "widgets/page" ],
@@ -37,14 +37,14 @@
 	<script src="../../swarminject.js"></script>
 </head>
 <body>
-  <div id="qunit"></div>
+	<div id="qunit"></div>
 
 	<div id="startPage" data-nstest-role="page">
 		<a href="#testPage" id="goToTestPage">Go</a>
 	</div>
 
-  <div id="testPage" data-nstest-role="page">
-    <div data-nstest-role="content">
+	<div id="testPage" data-nstest-role="page">
+		<div data-nstest-role="content">
 			<form id="theForm" action="#" method="get">
 				<fieldset data-nstest-role="controlgroup">
 					<label for="testVCheckbox1">Test Vertical Checkbox 1</label>
@@ -98,7 +98,7 @@
 				<input type="submit" id="default-submit">Default Submit</input>
 				<input type="submit" id="formaction-submit" formaction="landing2.html">Formaction Submit</input>
 			</form>
-    </div>
-  </div>
+		</div>
+	</div>
 </body>
 </html>

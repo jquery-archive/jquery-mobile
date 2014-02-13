@@ -3,7 +3,7 @@
 //>>label: Transition Serial
 //>>group: Transitions
 
-define( [ "jquery", "./transition" ], function( jQuery ) {
+define( [ "jquery", "../jquery.mobile.animationComplete", "./transition" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {

@@ -66,7 +66,35 @@
 	test( "slider input is not wrapped in div.ui-input-text", function() {
 		ok( ! $( "#textinput-test" ).parents().is( "div.ui-input-text" ), "slider input is not wrapped in div.ui-input-text" );
 	});
-	
+
+	test( "slider tooltip", function() {
+		var tooltip = $( "#tooltip-test" ).siblings( "div.ui-slider-popup" );
+
+		deepEqual( tooltip.length, 1, "is present" );
+		deepEqual( tooltip.is( ":visible" ), false, "is initially hidden" );
+	});
+
+	test( "slider is enabled/disabled correctly", function() {
+		var slider = $( "#disable-test" ),
+			track = slider.siblings( "div" );
+
+			testDisabled = function( prefix, expectedDisabled ) {
+				deepEqual( !!track.attr( "aria-disabled" ), expectedDisabled,
+					prefix + "'aria-disabled' is " + expectedDisabled );
+				deepEqual( !!slider.attr( "disabled" ), expectedDisabled,
+					prefix + "'disabled' property is " + expectedDisabled );
+				deepEqual( track.hasClass( "ui-state-disabled" ), expectedDisabled,
+					prefix + "track class 'ui-state-disabled' is " +
+						( expectedDisabled ? "on" : "off" ) );
+			};
+
+		testDisabled( "Initially: ", false );
+		slider.slider( "option", "disabled", true );
+		testDisabled( "After setting option 'disabled' to true: ", true );
+		slider.slider( "option", "disabled", true );
+		testDisabled( "After setting option 'disabled' to true a second time: ", true );
+	});
+
 	test( "refresh is triggered on mouseup", function() {
 		expect( 1 );
 		var slider = $( "#mouseup-refresh" );

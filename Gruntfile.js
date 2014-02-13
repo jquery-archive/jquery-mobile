@@ -353,7 +353,7 @@ module.exports = function( grunt ) {
 				keepSpecialComments: 0
 			},
 			minify: {
-				files: files.getMinifiedCSSFiles( dist ),
+				files: files.getMinifiedCSSFiles( dist )
 			}
 		},
 
@@ -392,6 +392,7 @@ module.exports = function( grunt ) {
 					processContent: function( content, srcPath ) {
 						var processedName = grunt.config.process( name + "<%= versionSuffix %>" );
 						content = content.replace( /_assets\/js\/">/gi, "_assets/js/index.js\">" );
+						content = content.replace( /\.\.\/external\/jquery\//gi, "js/" );
 						content = content.replace( /\.\.\/js\//gi, "js/" );
 						content = content.replace( /js\/"/gi, "js/" + processedName + ".min.js\"" );
 						content = replaceCombinedCssReference( content, processedName );
@@ -458,7 +459,7 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						cwd: "js",
+						cwd: "external/jquery",
 						src: [ "jquery.js" ],
 						dest: path.join( dist, "demos/js/" )
 					},
@@ -515,7 +516,7 @@ module.exports = function( grunt ) {
 							content = content.replace( re, "" );
 						}
 						return content;
-					},
+					}
 				},
 				files: {
 					// WARNING: This will be modified by the config:copy:noversion task
@@ -636,51 +637,87 @@ module.exports = function( grunt ) {
 
 		qunit: {
 			options: {
-				timeout: 30000
+				timeout: 30000,
+				"--web-security": "no",
+				coverage: {
+					baseUrl: ".",
+					src: [
+						"js/**/*.js",
+						"!js/jquery.tag.inserter.js",
+						"!js/requirejs.config.js"
+					],
+					instrumentedFiles: "temp/",
+					htmlReport: "_tests/reports/coverage",
+					lcovReport: "_tests/reports/lcov",
+					linesThresholdPct: 0
+				}
 			},
-
-			files: {},
 
 			http: {
 				options: {
 					urls: (function() {
-						// Find the test files
-						var suites = _.without( ( grunt.option( "suites" ) || "" ).split( "," ), "" ),
-							types = _.without( ( grunt.option( "types" ) || "" ).split( "," ), "" ).sort().reverse(), // So that unit runs before integration
-							patterns, paths,
-							prefixes = ["tests/unit/", "tests/integration/"],
+						var allSuites, patterns, paths,
+							testDirs = [ "unit", "integration" ],
+							suites = ( grunt.option( "suites" ) || process.env.SUITES || "" ).split( "," ),
+							types = ( grunt.option( "types" ) || process.env.TYPES || "" ).split( "," ),
 							versionedPaths = [],
-							jQueries = _.without( ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ), "" );
+							jQueries = ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ),
+							excludes = _.chain( suites )
+								.filter( function( suite ) { return ( /^!/.test( suite ) ); } )
+								.map( function( suite ) { return suite.substring( 1 ); } )
+								.value();
 
-						if( types.length ){
-							prefixes = [];
+						// Trim empties
+						suites = _.without( suites, "" );
+						types = _.without( types, "" );
+						jQueries = _.without( jQueries, "" );
+
+						// So that unit suites runs before integration suites
+						types = types.sort().reverse();
+
+						allSuites = _.chain( grunt.file.expand(
+								{
+									filter: "isDirectory",
+									cwd: "tests"
+								},
+								_.map( testDirs, function( dir ) {
+									return dir + "/*";
+								})
+							))
+							.map( function( dir ) { return dir.split( "/" )[ 1 ]; } )
+							.difference( excludes )
+							.unique()
+							.value();
+
+
+						// Remove negations from list of suites
+						suites = _.filter( suites, function( suite ) { return ( !/^!/.test( suite ) ); } );
+
+						if ( types.length ){
+							testDirs = [];
 							types.forEach(function( type ) {
-								prefixes.push( "tests/" + type +"/" );
+								testDirs.push( type );
 							});
 						}
 
 						patterns = [];
 
-						if ( suites.length ) {
-							suites.forEach( function( unit ) {
-								prefixes.forEach( function( prefix ) {
+						if ( !suites.length ) {
+							suites = allSuites;
+						}
+
+						_.chain( suites )
+							.difference( excludes )
+							.forEach( function( suite ) {
+								testDirs.forEach( function( dir ) {
+									dir = "tests/" + dir;
 									patterns = patterns.concat([
-										prefix + unit + "/",
-										prefix + unit + "/index.html",
-										prefix + unit + "/*/index.html",
-										prefix + unit + "/**/*-tests.html"
+										dir + "/" + suite + "/index.html",
+										dir + "/" + suite + "/*/index.html",
+										dir + "/" + suite + "/**/*-tests.html"
 									]);
 								});
 							});
-						} else {
-							prefixes.forEach( function( prefix ) {
-								patterns = patterns.concat([
-									prefix + "*/index.html",
-									prefix + "*/*/index.html",
-									prefix + "**/*-tests.html"
-								]);
-							});
-						}
 
 						paths = grunt.file.expand( patterns )
 							.filter( function( testPath ) {
@@ -691,7 +728,7 @@ module.exports = function( grunt ) {
 							})
 							.map( function( path ) {
 								// Some of our tests (ie. navigation) don't like having the index.html too much
-								return path.replace( /\/\index.html$/, "/" );
+								return path.replace( /\/index.html$/, "/" );
 							});
 
 						paths = grunt.util._.uniq( paths );
@@ -716,30 +753,95 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		coveralls: {
+			options: {
+				force: true
+			},
+			all: {
+
+				// LCOV coverage file relevant to every target
+				src: "_tests/reports/lcov/lcov.info"
+			}
+		},
+
+		bowercopy: {
+			options: {
+
+				// Bower components folder will be removed afterwards
+				clean: true,
+				destPrefix: "external"
+			},
+			tests: {
+				files: {
+					"qunit/qunit.js": "qunit/qunit/qunit.js",
+					"qunit/qunit.css": "qunit/qunit/qunit.css",
+					"jshint/jshint.js": "jshint/dist/jshint.js"
+				}
+			},
+			requirejs: {
+				files: {
+					"requirejs/require.js": "requirejs/require.js",
+					"requirejs/plugins/text.js": "requirejs-text/text.js",
+					"requirejs/plugins/json.js": "requirejs-plugins/src/json.js"
+				}
+			},
+			jquery: {
+				files: {
+					"jquery/jquery.js": "jquery/jquery.js"
+				}
+			},
+			"jquery-ui": {
+				options: {
+					copyOptions: {
+						process: function( content ) {
+							var version = grunt.file.readJSON( "bower.json" ).dependencies[ "jquery-ui" ];
+							if ( /#/.test( version ) ) {
+								version = version.split( "#" )[ 1 ];
+							}
+							return content.replace( /@VERSION/g, version );
+						}
+					}
+				},
+				files: {
+					"jquery-ui/jquery.ui.core.js": "jquery-ui/ui/jquery.ui.core.js",
+					"jquery-ui/jquery.ui.widget.js": "jquery-ui/ui/jquery.ui.widget.js"
+				}
+			},
+			"jquery-ui-tabs": {
+				options: {
+					copyOptions: {
+						process: function( content ) {
+							var version = grunt.file.readJSON( "bower.json" ).dependencies[ "jquery-ui-tabs" ];
+							if ( /#/.test( version ) ) {
+								version = version.split( "#" )[ 1 ];
+							}
+							return content.replace( /@VERSION/g, version );
+						}
+					}
+				},
+				files: {
+					"jquery-ui/jquery.ui.tabs.js": "jquery-ui-tabs/ui/jquery.ui.tabs.js"
+				}
+			},
+			"jquery-plugins": {
+				files: {
+					"jquery/plugins/jquery.hashchange.js": "jquery-hashchange/jquery.ba-hashchange.js"
+				}
+			}
+		},
+
 		clean: {
 			dist: [ dist ],
             git: [ path.join( dist, "git" ) ],
 			tmp: [ "<%= dirs.tmp %>" ],
+			testsOutput: [ "_tests" ],
 			"googleCDN": [ "<%= dirs.cdn.google %>" ],
 			"jqueryCDN": [ "<%= dirs.cdn.jquery %>" ]
 		}
 	});
 
 	// grunt plugins
-	grunt.loadNpmTasks( "grunt-contrib-jshint" );
-	grunt.loadNpmTasks( "grunt-contrib-clean" );
-	grunt.loadNpmTasks( "grunt-contrib-copy" );
-	grunt.loadNpmTasks( "grunt-contrib-compress" );
-	grunt.loadNpmTasks( "grunt-contrib-concat" );
-	grunt.loadNpmTasks( "grunt-contrib-connect" );
-	grunt.loadNpmTasks( "grunt-contrib-cssmin" );
-	grunt.loadNpmTasks( "grunt-contrib-qunit" );
-	grunt.loadNpmTasks( "grunt-contrib-requirejs" );
-	grunt.loadNpmTasks( "grunt-contrib-uglify" );
-	grunt.loadNpmTasks( "grunt-git-authors" );
-	grunt.loadNpmTasks( "grunt-qunit-junit" );
-	grunt.loadNpmTasks( "grunt-hash-manifest" );
-
+	require( "load-grunt-tasks" )( grunt );
 	// load the project's default tasks
 	grunt.loadTasks( "build/tasks");
 
@@ -786,7 +888,17 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
 	grunt.registerTask( "dist:git", [ "dist", "clean:git", "config:copy:git:-git", "copy:git" ] );
 
-	grunt.registerTask( "test", [ "jshint", "config:fetchHeadHash", "js:release", "connect", "qunit:http" ] );
+	grunt.registerTask( "updateDependencies", [ "bowercopy" ] );
+
+	grunt.registerTask( "test",
+		[
+			"clean:testsOutput",
+			"jshint",
+			"config:fetchHeadHash",
+			"js:release",
+			"connect", "qunit:http"
+		]
+	);
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );
 
 	// Default grunt

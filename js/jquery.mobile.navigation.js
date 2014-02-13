@@ -12,7 +12,8 @@ define( [
 	"./navigation/method",
 	"./jquery.mobile.events",
 	"./jquery.mobile.support",
-	"jquery.hashchange",
+	"jquery-plugins/jquery.hashchange",
+	"./jquery.mobile.animationComplete",
 	"./widgets/pagecontainer",
 	"./widgets/page",
 	"./transitions/handlers" ], function( jQuery ) {
@@ -86,7 +87,7 @@ define( [
 		}
 	};
 
-	//direct focus to the page title, or otherwise first focusable element
+	// Direct focus to the page title, or otherwise first focusable element
 	$.mobile.focusPage = function ( page ) {
 		var autofocus = page.find( "[autofocus]" ),
 			pageTitle = page.find( ".ui-title:eq(0)" );
@@ -108,19 +109,7 @@ define( [
 		return transition;
 	};
 
-	/* exposed $.mobile methods */
-
-	//animation complete callback
-	$.fn.animationComplete = function( callback ) {
-		if ( $.support.cssTransitions ) {
-			return $( this ).one( "webkitAnimationEnd animationend", callback );
-		}
-		else{
-			// defer execution for consistency between webkit/non webkit
-			setTimeout( callback, 0 );
-			return $( this );
-		}
-	};
+	// Exposed $.mobile methods
 
 	$.mobile.changePage = function( to, options ) {
 		$.mobile.pageContainer.pagecontainer( "change", to, options );

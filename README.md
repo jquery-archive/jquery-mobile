@@ -1,10 +1,10 @@
-# jQuery Mobile [![Build Status](https://travis-ci.org/jquery/jquery-mobile.png?branch=master)](https://travis-ci.org/jquery/jquery-mobile)
+# jQuery Mobile [![Build Status](https://travis-ci.org/jquery/jquery-mobile.png?branch=master)](https://travis-ci.org/jquery/jquery-mobile) [![Coverage Status](https://coveralls.io/repos/jquery/jquery-mobile/badge.png?branch=master)](https://coveralls.io/r/jquery/jquery-mobile?branch=master)
 
 This is the main repository for the jQuery Mobile project. From the [official website](http://jquerymobile.com):
 
 > A unified, HTML5-based user interface system for all popular mobile device platforms, built on the rock-solid jQuery and jQuery UI foundation. Its lightweight code is built with progressive enhancement, and has a flexible, easily themeable design.
 
-jQuery Mobile 1.3 (1.3.2) works with versions of jQuery core from 1.7.0 to 1.9.1. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://api.jquerymobile.com) and exploring the [demos](http://view.jquerymobile.com/1.3.2/dist/demos/).
+jQuery Mobile 1.4.x works with versions of jQuery core from 1.8.3 to 1.10.2 / 2.0.3. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://api.jquerymobile.com) and exploring the [demos](http://demos.jquerymobile.com/).
 
 ## Contributing
 
@@ -19,7 +19,6 @@ Currently the library is shipped on the jQuery CDN/download as a single monolith
 * `js` - resolve dependencies, build, concat, and minify the JavaScript used for jQuery Mobile
 * `css` - resolve dependencies, build, concat, and minify all the css, just the structure css, and just the theme css
 * `demos` - build the js and css, and make the docs ready for static consumption
-* `zip` - package all the JavaScript and all the css into a zip archive
 * `dist` (default target) - all of the above
 * `lint` - Validates JavaScript files using [JSHint](http://jshint.com/)
 
@@ -29,8 +28,8 @@ The easiest way to obtain a custom build is to use the [download builder](http:/
 
 ### Requirements
 
-* [Node.js](http://nodejs.org/) ~0.8.22
-* [Grunt](http://gruntjs.com/) >=0.4.0
+* [node.js](http://nodejs.org/) ~0.8.22
+* [grunt-cli](http://gruntjs.com/)
 
 ### Commands
 
@@ -117,9 +116,15 @@ You can choose to run only a subset of the tests by adding the `--suites` option
 
 will only run the tests under `tests/unit/button/` and `tests/unit/slider/`.
 
-You can also specify which versions of jQuery you want to test jQuery Mobile with by using the `--jqueries` option:
+You can also exclude some tests buy using `!`.  For instance:
 
-    grunt test --jqueries=1.8.2,git
+    grunt test --type=integration --suites=!navigation
+
+will run all the integration tests but the navigation suite.
+
+You can also specify which versions of jQuery you want to test jQuery Mobile by using the `--jqueries` option:
+
+    grunt test --jqueries=1.8.3,git
 
 Additionally, jQuery Mobile's test suite is split between integration and unit tests. Where the unit tests are meant to focus on a single piece of the library (eg, a widget) and the integration tests require multiple pieces of the library to function. You can target either type by including the `--types` option when testing:
 

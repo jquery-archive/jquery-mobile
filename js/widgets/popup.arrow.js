@@ -16,22 +16,17 @@ var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
 		"<div class='ui-popup-arrow-guide'></div>" +
 		"<div class='ui-popup-arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
-			"<div class='ui-popup-arrow'>" +
-				"<div class='ui-popup-arrow-background'></div>" +
-			"</div>" +
+			"<div class='ui-popup-arrow'></div>" +
 		"</div>"
-	),
-	// Needed for transforming coordinates from screen to arrow background
-	txFactor = Math.sqrt( 2 ) / 2;
+	);
 
 function getArrow() {
 	var clone = uiTemplate.clone(),
 		gd = clone.eq( 0 ),
 		ct = clone.eq( 1 ),
-		ar = ct.children(),
-		bg = ar.children();
+		ar = ct.children();
 
-	return { arEls: ct.add( gd ), gd: gd, ct: ct, ar: ar, bg: bg };
+	return { arEls: ct.add( gd ), gd: gd, ct: ct, ar: ar };
 }
 
 $.widget( "mobile.popup", $.mobile.popup, {
@@ -58,7 +53,6 @@ $.widget( "mobile.popup", $.mobile.popup, {
 
 		theme = this._themeClassFromOption( "ui-body-", opts.theme );
 		ar.ar.addClass( theme + ( opts.shadow ? " ui-overlay-shadow" : "" ) );
-		ar.bg.addClass( theme );
 		ar.arEls.hide().appendTo( this.element );
 
 		return ar;
@@ -140,7 +134,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	},
 
 	_placementCoords: function( desired ) {
-		var state, best, params, bgOffset, elOffset, diff, bgRef,
+		var state, best, params, elOffset, bgRef,
 			optionValue = this.options.arrow,
 			ar = this._ui.arrow;
 
@@ -189,12 +183,6 @@ $.widget( "mobile.popup", $.mobile.popup, {
 				left: elOffset.left + state.contentBox.x,
 				top: elOffset.top + state.contentBox.y
 			};
-			bgOffset = ar.bg
-				.removeAttr( "style" )
-				.css( ( "cx" === params[ best.dir ].dimKey ? "width" : "height" ), state.contentBox[ params[ best.dir ].dimKey ] )
-				.offset();
-			diff = { dx: bgRef.x.left - bgOffset.left, dy: bgRef.y.top - bgOffset.top };
-			ar.bg.css( { left: txFactor * diff.dy + txFactor * diff.dx, top: txFactor * diff.dy - txFactor * diff.dx } );
 		}
 
 		return best.result;
@@ -227,7 +215,6 @@ $.widget( "mobile.popup", $.mobile.popup, {
 				oldTheme = this._themeClassFromOption( "ui-body-", oldTheme );
 				newTheme = this._themeClassFromOption( "ui-body-", opts.theme );
 				ar.ar.removeClass( oldTheme ).addClass( newTheme );
-				ar.bg.removeClass( oldTheme ).addClass( newTheme );
 			}
 
 			if ( opts.shadow !== undefined ) {

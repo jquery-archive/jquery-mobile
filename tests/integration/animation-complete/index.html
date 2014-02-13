@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile animationComplete Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+	<script src="../../../external/qunit/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[ "jquery.mobile.animationComplete" ],
+			[ "animationComplete.js" ]
+		]);
+	</script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+
+	<script src="../../swarminject.js"></script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="animation-test" class="pop"></div>
+	<div id="transition-test"></div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -10,7 +10,7 @@
 	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
-	<script src="../../../external/qunit.js"></script>
+	<script src="../../../external/qunit/qunit.js"></script>
 	<script type="text/javascript">
 		// redirects from push-state-tests.html
 		$( document ).bind( 'mobileinit', function(){
@@ -30,167 +30,164 @@
 	</script>
 
 	<link rel="stylesheet"	href="../../../css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
 	<script src="../../swarminject.js"></script>
 	<script type="text/javascript">
-	// basic
-	var xcount = 0;
-	var ycount = 0;
-	$(window).on('refresh_test_table', function (e, data) {
-		var tb = $(data).find('tbody'),
+		// basic
+		var xcount = 0;
+		var ycount = 0;
+		$(window).on('refresh_test_table', function (e, data) {
+			var tb = $(data).find('tbody'),
+					numbers = [1,2,3,4,5,6,7,8,9],
+					chars = ["a","b","c","d","e","f","g","h","i"],
+					use = xcount % 2 === 1 ? numbers : chars,
+					newRow = '<tr><th data-test="abc">'+use[0]+'</th><td>'+use[1]+'</td><td data-test="foo">'+use[2]+'</td><td data-col="3">'+use[3]+'</td><td>'+use[4]+'</td></tr>';
+			tb.empty()
+				.append(newRow)
+				.closest('table')
+				.table('refresh');
+			xcount += 1;
+		})
+		.on('refresh_col_table', function (e, data) {
+			var tb = $(data).find('tbody'),
+				th = $(data).find('thead tr'),
 				numbers = [1,2,3,4,5,6,7,8,9],
-				chars = ["a","b","c","d","e","f","g","h","i"],
+				chars = ["z","y","x","w","v","u","t","s","t"],
 				use = xcount % 2 === 1 ? numbers : chars,
-				newRow = '<tr><th data-test="abc">'+use[0]+'</th><td>'+use[1]+'</td><td data-test="foo">'+use[2]+'</td><td data-col="3">'+use[3]+'</td><td>'+use[4]+'</td></tr>';
-		tb.empty()
-			.append(newRow)
-			.closest('table')
-			.table('refresh');
-		xcount += 1;
-	})
-	.on('refresh_col_table', function (e, data) {
-		var tb = $(data).find('tbody'),
-			th = $(data).find('thead tr'),
-			numbers = [1,2,3,4,5,6,7,8,9],
-			chars = ["z","y","x","w","v","u","t","s","t"],
-			use = xcount % 2 === 1 ? numbers : chars,
-			newRow = '<tr><th>'+use[0]+'</th><td>'+use[1]+'</td><td data-test="foo">'+use[2]+'</td><td data-col="3">'+use[3]+'</td><td>'+use[4]+'</td><td>'+use[5]+'</td><td data-test="xyz">'+use[6]+'</td></tr>';
-		th.append('<th data-nstest-priority="3">New_A</th><th data-nstest-priority="5">New_B</th>');
-		tb.empty()
-			.append(newRow)
-			.closest('table')
-			.table('rebuild');
-		ycount += 1;
-	});
-</script>
+				newRow = '<tr><th>'+use[0]+'</th><td>'+use[1]+'</td><td data-test="foo">'+use[2]+'</td><td data-col="3">'+use[3]+'</td><td>'+use[4]+'</td><td>'+use[5]+'</td><td data-test="xyz">'+use[6]+'</td></tr>';
+			th.append('<th data-nstest-priority="3">New_A</th><th data-nstest-priority="5">New_B</th>');
+			tb.empty()
+				.append(newRow)
+				.closest('table')
+				.table('rebuild');
+			ycount += 1;
+		});
+	</script>
 
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Table Integration Test</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests">
-</ol>
+	<div id="qunit"></div>
 
-<!-- Basic Table test -->
-<div data-nstest-role="page" id='basic-table-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Basic Table</h1>
+	<!-- Basic Table test -->
+	<div data-nstest-role="page" id='basic-table-test'>
+		<div data-nstest-role="header" data-nstest-position="inline">
+			<h1>Basic Table</h1>
+		</div>
+		<div data-nstest-role="content">
+			<table data-nstest-role="table" id="movie-table">
+				<thead>
+					<tr>
+						<th data-priority="1">Rank</th>
+						<th data-priority="persist">Movie Title</th>
+						<th data-priority="2">Year</th>
+						<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-priority="4">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div data-nstest-role="content">
-		<table data-nstest-role="table" id="movie-table">
-			<thead>
-				<tr>
-					<th data-priority="1">Rank</th>
-					<th data-priority="persist">Movie Title</th>
-					<th data-priority="2">Year</th>
-					<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-					<th data-priority="4">Reviews</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>1</th>
-					<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-					<td>1941</td>
-					<td>100%</td>
-					<td>74</td>
-				</tr>
-			</tbody>
-		</table>
+	<div data-nstest-role="page" id='reflow-table-test'>
+		<div data-nstest-role="header" data-nstest-position="inline">
+			<h1>Basic Table</h1>
+		</div>
+		<div data-nstest-role="content">
+			<table data-nstest-role="table" data-nstest-mode="reflow" id="movie-table-reflow">
+				<thead>
+					<tr>
+						<th data-priority="1">Rank</th>
+						<th data-priority="persist">Movie Title</th>
+						<th data-priority="2">Year</th>
+						<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-priority="4">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
-<div data-nstest-role="page" id='reflow-table-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Basic Table</h1>
-	</div>
-	<div data-nstest-role="content">
-		<table data-nstest-role="table" data-nstest-mode="reflow" id="movie-table-reflow">
-			<thead>
-				<tr>
-					<th data-priority="1">Rank</th>
-					<th data-priority="persist">Movie Title</th>
-					<th data-priority="2">Year</th>
-					<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-					<th data-priority="4">Reviews</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>1</th>
-					<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-					<td>1941</td>
-					<td>100%</td>
-					<td>74</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
 
-<div data-nstest-role="page" id='column-table-test'>
-	<div data-nstest-role="header" data-nstest-position="inline">
-		<h1>Basic Table</h1>
+	<div data-nstest-role="page" id='column-table-test'>
+		<div data-nstest-role="header" data-nstest-position="inline">
+			<h1>Basic Table</h1>
+		</div>
+		<div data-nstest-role="content">
+			<table data-nstest-role="table" data-nstest-mode="columntoggle" id="toggle-column-test">
+				<thead>
+					<tr class="ui-bar-d">
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+			<table data-nstest-role="table" data-nstest-mode="columntoggle" id="movie-table-column">
+				<thead>
+					<tr class="ui-bar-d">
+						<th data-nstest-priority="2">Rank</th>
+						<th>Movie Title</th>
+						<th data-nstest-priority="3">Year</th>
+						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-nstest-priority="5">Reviews</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+						<td>1941</td>
+						<td>100%</td>
+						<td>74</td>
+					</tr>
+					<tr>
+						<th>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+						<td>1942</td>
+						<td>97%</td>
+						<td>64</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<div data-nstest-role="content">
-		<table data-nstest-role="table" data-nstest-mode="columntoggle" id="toggle-column-test">
-			<thead>
-				<tr class="ui-bar-d">
-					<th data-nstest-priority="2">Rank</th>
-					<th>Movie Title</th>
-					<th data-nstest-priority="3">Year</th>
-					<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-					<th data-nstest-priority="5">Reviews</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>1</th>
-					<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-					<td>1941</td>
-					<td>100%</td>
-					<td>74</td>
-				</tr>
-				<tr>
-					<th>2</th>
-					<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
-					<td>1942</td>
-					<td>97%</td>
-					<td>64</td>
-				</tr>
-			</tbody>
-		</table>
-		<table data-nstest-role="table" data-nstest-mode="columntoggle" id="movie-table-column">
-			<thead>
-				<tr class="ui-bar-d">
-					<th data-nstest-priority="2">Rank</th>
-					<th>Movie Title</th>
-					<th data-nstest-priority="3">Year</th>
-					<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-					<th data-nstest-priority="5">Reviews</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<th>1</th>
-					<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-					<td>1941</td>
-					<td>100%</td>
-					<td>74</td>
-				</tr>
-				<tr>
-					<th>2</th>
-					<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
-					<td>1942</td>
-					<td>97%</td>
-					<td>64</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
 
 </body>
 </html>

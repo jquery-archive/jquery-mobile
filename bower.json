@@ -1,0 +1,29 @@
+{
+	"name": "jquery-mobile",
+	"version": "1.4.2pre",
+	"main": [
+		"js/jquery.mobile.js",
+		"css/themes/default/jquery.mobile.css"
+	],
+	"ignore": [
+		".jshintrc",
+		"**/*.txt",
+		"build",
+		"demos",
+		"tests",
+		"tools"
+	],
+	"dependencies": {
+		"jquery": "1.10.2",
+		"jquery-ui": "jquery/jquery-ui#c0ab71056b936627e8a7821f03c044aec6280a40",
+		"jquery-ui-tabs": "jquery/jquery-ui#fadf2b312a05040436451c64bbfaf4814bc62c56",
+		"jquery-hashchange": "gseguin/jquery-hashchange#77c4b3551fc6bdc2ac6b22b2641cfd7ac6b212d2"
+	},
+	"devDependencies": {
+		"requirejs": "2.1.2",
+		"qunit": "1.9.0",
+		"jshint": "2.4.0",
+		"requirejs-text": "2.0.3",
+		"requirejs-plugins": "millermedeiros/requirejs-plugins#34330a5d735474ac0b518eb1eb270c9e5505a537"
+	}
+}

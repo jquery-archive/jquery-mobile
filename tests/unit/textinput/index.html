@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -8,7 +8,7 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../../external/qunit.js"></script>
+	<script src="../../../external/qunit/qunit.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
@@ -20,53 +20,52 @@
 	</script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
 	<script src="../../swarminject.js"></script>
 </head>
 <body>
 
-<h1 id="qunit-header">jQuery Mobile Textinput Test Suite</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests">
-</ol>
+	<div id="qunit"></div>
 
-<div  data-nstest-role="page">
-  <input name="" id="typeless-input" />
-  <textarea class="should-be-native"></textarea>
+	<div  data-nstest-role="page">
+		<input name="" id="typeless-input" />
+		<textarea class="should-be-native"></textarea>
 
-  <textarea id="reference-autogrow">
-  </textarea>
+		<textarea id="reference-autogrow">
+		</textarea>
 
-  <textarea id="init-autogrow">
-    Place holder text
-    Place holder text
-    Place holder text
-    Place holder text
-    Place holder text
-    Place holder text
-    Place holder text
-    Place holder text
-    Place holder text
-  </textarea>
+		<textarea id="init-autogrow">
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		Place holder text
+		</textarea>
 
-  <textarea id="keyup-autogrow">
-  </textarea>
-  <a href="external.html" id="external">external</a>
+		<textarea id="keyup-autogrow">
+		</textarea>
+		<a href="external.html" id="external">external</a>
 
-  <textarea id="destroycorrectly">Test Value</textarea>
+		<textarea id="destroycorrectly">Test Value</textarea>
 
-  <input type="search" id="search-input">
+		<input type="search" id="search-input">
 
-  <input type="text" id="text-input">
-  
-  <input type="text" data-clear-btn="true" id="text-input-clear-btn">
+		<input type="text" id="text-input">
 
-  <textarea data-clear-btn="true" id="textarea-clear-btn"></textarea>
+		<input type="text" data-clear-btn="true" id="text-input-clear-btn">
 
-	<input type="text" id="focus-class-test-for-input"></input>
-	<textarea id="focus-class-test-for-textarea"></textarea>
-</div>
+		<textarea data-clear-btn="true" id="textarea-clear-btn"></textarea>
+
+		<input id="test-clear-btn-option"></input>
+
+		<input type="text" id="focus-class-test-for-input"></input>
+		<textarea id="focus-class-test-for-textarea"></textarea>
+	</div>
 </body>
 </html>

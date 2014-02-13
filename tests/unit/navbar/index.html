@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -10,7 +10,7 @@
 	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
-	<script src="../../../external/qunit.js"></script>
+	<script src="../../../external/qunit/qunit.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
 			[ "widgets/page" ],
@@ -26,52 +26,49 @@
 	</script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
-	<link rel="stylesheet" href="../../../external/qunit.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
 	<script src="../../swarminject.js"></script>
 </head>
 <body>
-<h1 id="qunit-header">jQuery Mobile Navigation Test Suite</h1>
-<h2 id="qunit-banner"></h2>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests">
-</ol>
-<div data-nstest-role="page" id="disabled-btn-click">
-	<div data-nstest-role="navbar">
-		<ul>
-			<li><a href="#" class="ui-disabled">One</a></li>
-			<li><a href="#">Two</a></li>
-		</ul>
-	</div>
-
-	<div data-nstest-role="navbar">
-		<ul id="enhanced-classes">
-			<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-r">a</a></li>
-			<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-d">b</a></li>
-			<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-u">c</a></li>
-		</ul>
-	</div>
-
-</div>
-
-<div id="foo">
-	<div data-nstest-role="navbar">
-		<div data-nstest-enhance="false">
-			<ul id="ignored-grid">
-				<li></li>
-				<li></li>
+	<div id="qunit"></div>
+	<div data-nstest-role="page" id="disabled-btn-click">
+		<div data-nstest-role="navbar">
+			<ul>
+				<li><a href="#" class="ui-disabled">One</a></li>
+				<li><a href="#">Two</a></li>
 			</ul>
 		</div>
-	</div>
 
-	<div data-nstest-role="navbar">
-		<div>
-			<ul id="enhanced-grid">
-				<li></li>
-				<li></li>
+		<div data-nstest-role="navbar">
+			<ul id="enhanced-classes">
+				<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-r">a</a></li>
+				<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-d">b</a></li>
+				<li><a href="#" data-nstest-role="button" data-nstest-icon="arrow-u">c</a></li>
 			</ul>
 		</div>
+
 	</div>
-</div>
+
+	<div id="foo">
+		<div data-nstest-role="navbar">
+			<div data-nstest-enhance="false">
+				<ul id="ignored-grid">
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+
+		<div data-nstest-role="navbar">
+			<div>
+				<ul id="enhanced-grid">
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

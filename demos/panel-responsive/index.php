@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<script src="../../js/jquery.js"></script>
+	<script src="../../external/jquery/jquery.js"></script>
     <script src="../_assets/js/"></script>
     <script src="../../js/"></script>
 </head>
@@ -44,7 +44,7 @@
 		<ul data-role="listview">
             <li data-icon="delete"><a href="#" data-rel="close">Close menu</a></li>
                 <li><a href="#panel-responsive-page2">Accordion</a></li>
-                <li><a href="#panel-responsive-page2">AJAX Navigation</a></li>
+                <li><a href="#panel-responsive-page2">Ajax Navigation</a></li>
                 <li><a href="#panel-responsive-page2">Autocomplete</a></li>
                 <li><a href="#panel-responsive-page2">Buttons</a></li>
                 <li><a href="#panel-responsive-page2">Checkboxes</a></li>

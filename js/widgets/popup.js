@@ -21,8 +21,9 @@ define( [
 	"../navigation/history",
 	"../navigation/navigator",
 	"../navigation/method",
+	"../jquery.mobile.animationComplete",
 	"../jquery.mobile.navigation",
-	"jquery.hashchange" ], function( jQuery ) {
+	"jquery-plugins/jquery.hashchange" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -542,9 +543,9 @@ $.widget( "mobile.popup", {
 			}
 			if ( this._fallbackTransition ) {
 				this._ui.container
-					.animationComplete( $.proxy( args.prerequisites.container, "resolve" ) )
 					.addClass( args.containerClassToAdd )
-					.removeClass( args.classToRemove );
+					.removeClass( args.classToRemove )
+					.animationComplete( $.proxy( args.prerequisites.container, "resolve" ) );
 				return;
 			}
 		}
