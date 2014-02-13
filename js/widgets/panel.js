@@ -34,7 +34,6 @@ $.widget( "mobile.panel", {
 		positionFixed: false
 	},
 
-	_panelID: null,
 	_closeLink: null,
 	_parentPage: null,
 	_page: null,
@@ -49,7 +48,6 @@ $.widget( "mobile.panel", {
 
 		// expose some private props to other methods
 		$.extend( this, {
-			_panelID: el.attr( "id" ),
 			_closeLink: el.find( ":jqmData(rel='close')" ),
 			_parentPage: ( parentPage.length > 0 ) ? parentPage : false,
 			_page: this._getPage,
@@ -91,7 +89,7 @@ $.widget( "mobile.panel", {
 		var self = this,
 			target = self._parentPage ? self._parentPage.parent() : self.element.parent();
 
-		self._modal = $( "<div class='" + self.options.classes.modal + "' data-panelid='" + self._panelID + "'></div>" )
+		self._modal = $( "<div class='" + self.options.classes.modal + "'></div>" )
 			.on( "mousedown", function() {
 				self.close();
 			})
@@ -223,9 +221,13 @@ $.widget( "mobile.panel", {
 	},
 
 	_handleClick: function( e ) {
-		if (  e.currentTarget.href.split( "#" )[ 1 ] === this._panelID && this._panelID !== undefined ) {
+		var link,
+			panelId = this.element.attr( "id" );
+
+		if ( e.currentTarget.href.split( "#" )[ 1 ] === panelId && panelId !== undefined ) {
+
 			e.preventDefault();
-			var link = $( e.target );
+			link = $( e.target );
 			if ( link.hasClass( "ui-btn" ) ) {
 				link.addClass( $.mobile.activeBtnClass );
 				this.element.one( "panelopen panelclose", function() {

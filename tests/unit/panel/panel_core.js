@@ -326,4 +326,32 @@
 		]);
 	});
 
+	asyncTest( "Panel still opens after changing its ID", function() {
+		var eventNs = ".panelStillOpensAfterChangingItsId",
+			idTestPanel = $( "#panel-test-id-change" ),
+			idTestLink = $( "a[href='#panel-test-id-change']" );
+
+		expect( 1 );
+
+		idTestPanel.attr( "id", "something-else" );
+		idTestLink.attr( "href", "#something-else" );
+
+		$.testHelper.detailedEventCascade([
+			function() {
+				idTestLink.click();
+			},
+			{
+				panelopen: { src: idTestPanel, event: "panelopen" + eventNs + "1" }
+			},
+			function( result ) {
+				deepEqual( result.panelopen.timedOut, false, "Renamed panel has opened" );
+				idTestPanel.panel( "close" );
+			},
+			{
+				panelclose: { src: idTestPanel, event: "panelclose" + eventNs + "2" }
+			},
+			start
+		]);
+	});
+
 }( jQuery ));
