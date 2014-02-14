@@ -34,7 +34,6 @@ define( [
 
 		// All lower case if not a vendor prop
 		if ( props[ test ][ "prefix" ] === "" ) {
-			props[ test ][ "duration" ] = props[ test ][ "duration" ].toLowerCase();
 			props[ test ][ "event" ] = props[ test ][ "event" ].toLowerCase();
 		}
 	});
@@ -70,8 +69,8 @@ define( [
 				}
 
 				// If we could not read a duration use the default
-				if ( duration === 0 || duration === undefined ) {
-					duration = $.fn.animationComplete.default;
+				if ( duration === 0 || duration === undefined || isNaN( duration ) ) {
+					duration = $.fn.animationComplete.defaultDuration;
 				}
 			}
 
@@ -98,7 +97,7 @@ define( [
 	};
 
 	// Allow default callback to be configured on mobileInit
-	$.fn.animationComplete.default = 1000;
+	$.fn.animationComplete.defaultDuration = 1000;
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
