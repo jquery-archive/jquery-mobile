@@ -40,7 +40,7 @@
 	width: 1.875em;
 }
 @media (min-width: 28em) {
-	// Repeated from rule .ui-flipswitch above
+	/*Repeated from rule .ui-flipswitch above*/
 	.ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
 		width: 1.875em;
 	}
