@@ -89,8 +89,7 @@ $.widget( "mobile.panel", {
 		var self = this,
 			target = self._parentPage ? self._parentPage.parent() : self.element.parent();
 
-		self._modal = $( "<div class='" + self.options.classes.modal +
-			"'></div>" )
+		self._modal = $( "<div class='" + self.options.classes.modal + "'></div>" )
 			.on( "mousedown", function() {
 				self.close();
 			})
@@ -225,8 +224,7 @@ $.widget( "mobile.panel", {
 		var link,
 			panelId = this.element.attr( "id" );
 
-		if ( e.currentTarget.href.split( "#" )[ 1 ] === panelId &&
-			panelId !== undefined ) {
+		if ( e.currentTarget.href.split( "#" )[ 1 ] === panelId && panelId !== undefined ) {
 
 			e.preventDefault();
 			link = $( e.target );

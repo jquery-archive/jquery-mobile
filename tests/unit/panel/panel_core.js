@@ -341,21 +341,14 @@
 				idTestLink.click();
 			},
 			{
-				panelopen: {
-					src: idTestPanel,
-					event: "panelopen" + eventNs + "1"
-				}
+				panelopen: { src: idTestPanel, event: "panelopen" + eventNs + "1" }
 			},
 			function( result ) {
-				deepEqual( result.panelopen.timedOut, false,
-					"Renamed panel has opened" );
+				deepEqual( result.panelopen.timedOut, false, "Renamed panel has opened" );
 				idTestPanel.panel( "close" );
 			},
 			{
-				panelclose: {
-					src: idTestPanel,
-					event: "panelclose" + eventNs + "2"
-				}
+				panelclose: { src: idTestPanel, event: "panelclose" + eventNs + "2" }
 			},
 			start
 		]);
