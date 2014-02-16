@@ -71,7 +71,7 @@ define( [
 
 				// If we could not read a duration use the default
 				if ( duration === 0 || duration === undefined ) {
-					duration = $.fn.animationComplete.default;
+					duration = $.fn.animationComplete[ "default" ];
 				}
 			}
 
@@ -98,7 +98,7 @@ define( [
 	};
 
 	// Allow default callback to be configured on mobileInit
-	$.fn.animationComplete.default = 1000;
+	$.fn.animationComplete[ "default" ] = 1000;
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
