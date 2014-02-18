@@ -34,7 +34,6 @@ define( [
 
 		// All lower case if not a vendor prop
 		if ( props[ test ][ "prefix" ] === "" ) {
-			props[ test ][ "duration" ] = props[ test ][ "duration" ].toLowerCase();
 			props[ test ][ "event" ] = props[ test ][ "event" ].toLowerCase();
 		}
 	});
@@ -64,14 +63,15 @@ define( [
 
 					// Parse the durration since its in second multiple by 1000 for milliseconds
 					// Multiply by 3 to make sure we give the animation plenty of time.
-					duration = parseFloat(
-						$( this ).css( props[ animationType ].duration )
-					) * 3000;
+					duration = $( this ).css( props[ animationType ].duration );
+					if ( duration !== undefined ) {
+						duration = parseFloat( duration ) * 3000;
+					}
 				}
 
 				// If we could not read a duration use the default
 				if ( duration === 0 || duration === undefined ) {
-					duration = $.fn.animationComplete.default;
+					duration = $.fn.animationComplete.defaultDuration;
 				}
 			}
 
@@ -98,7 +98,7 @@ define( [
 	};
 
 	// Allow default callback to be configured on mobileInit
-	$.fn.animationComplete.default = 1000;
+	$.fn.animationComplete.defaultDuration = 1000;
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
