@@ -9,6 +9,36 @@ define( [ "jquery", "./jquery.mobile.ns", "jquery-ui/jquery.ui.core" ], function
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
+	// Subtract the height of external toolbars from the page height, if the page does not have
+	// internal toolbars of the same type
+	var compensateToolbars = function( page, desiredHeight ) {
+		var pageParent = page.parent(),
+			toolbarsAffectingHeight = [],
+			externalHeaders = pageParent.children( ":jqmData(role='header')" ),
+			internalHeaders = page.children( ":jqmData(role='header')" ),
+			externalFooters = pageParent.children( ":jqmData(role='footer')" ),
+			internalFooters = page.children( ":jqmData(role='footer')" );
+
+		// If we have no internal headers, but we do have external headers, then their height
+		// reduces the page height
+		if ( internalHeaders.length === 0 && externalHeaders.length > 0 ) {
+			toolbarsAffectingHeight = toolbarsAffectingHeight.concat( externalHeaders.toArray() );
+		}
+
+		// If we have no internal footers, but we do have external footers, then their height
+		// reduces the page height
+		if ( internalFooters.length === 0 && externalFooters.length > 0 ) {
+			toolbarsAffectingHeight = toolbarsAffectingHeight.concat( externalFooters.toArray() );
+		}
+
+		$.each( toolbarsAffectingHeight, function( index, value ) {
+			desiredHeight -= $( value ).outerHeight();
+		});
+
+		// Height must be at least zero
+		return Math.max( 0, desiredHeight );
+	};
+
 	$.extend( $.mobile, {
 		// define the window and the document objects
 		window: $( window ),
@@ -139,7 +169,8 @@ define( [ "jquery", "./jquery.mobile.ns", "jquery-ui/jquery.ui.core" ], function
 				pageHeight = page.height(),
 				pageOuterHeight = page.outerHeight( true );
 
-			height = ( typeof height === "number" ) ? height : $.mobile.getScreenHeight();
+			height = compensateToolbars( page,
+				( typeof height === "number" ) ? height : $.mobile.getScreenHeight() );
 
 			page.css( "min-height", height - ( pageOuterHeight - pageHeight ) );
 		},
