@@ -22,6 +22,9 @@ define( [
 
 		// resolved on domready
 	var domreadyDeferred = $.Deferred(),
+
+		// resolved and nulled on window.load()
+		loadDeferred = $.Deferred(),
 		documentUrl = $.mobile.path.documentUrl,
 
 		// used to track last vclicked element to make sure its value is added to form data
@@ -423,12 +426,28 @@ define( [
 		$.mobile.pageContainer.pagecontainer();
 
 		//set page min-heights to be device specific
-		$.mobile.document.bind( "pageshow", $.mobile.resetActivePageHeight );
+		$.mobile.document.bind( "pageshow", function() {
+
+			// We need to wait for window.load to make sure that styles have already been rendered,
+			// otherwise heights of external toolbars will have the wrong value
+			if ( loadDeferred ) {
+				loadDeferred.done( $.mobile.resetActivePageHeight );
+			} else {
+				$.mobile.resetActivePageHeight();
+			}
+		});
 		$.mobile.window.bind( "throttledresize", $.mobile.resetActivePageHeight );
 
 	};//navreadyDeferred done callback
 
 	$( function() { domreadyDeferred.resolve(); } );
+
+	$.mobile.window.load( function() {
+
+		// Resolve and null the deferred
+		loadDeferred.resolve();
+		loadDeferred = null;
+	});
 
 	$.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() { $.mobile._registerInternalEvents(); } );
 })( jQuery );
