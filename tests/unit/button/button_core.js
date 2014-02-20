@@ -44,4 +44,14 @@
 		ok( $htmlstring.find("sup").length, "HTML contained within a button element should carry over to the enhanced version" );
 	});
 
+	test( "Button's disabled state synced via refresh()", function() {
+		var button = $( "#disabled-state" );
+
+		button.prop( "disabled", true ).button( "refresh" );
+
+		deepEqual( button.parent().hasClass( "ui-state-disabled" ), true,
+			"class ui-state-disabled has been added to the wrapper" );
+		deepEqual( button.button( "option", "disabled" ), true, "option disabled is now true" );
+	});
+
 })( jQuery );
