@@ -29,7 +29,7 @@
 
 			<h1>External toolbars</h1>
 
-			<p>The header and footer on this page are positioned outside the page. They are before and after the page within the body. These Toolbars will remain in the dom until manually removed. If you navigate to a page that does not have a header or footer within it these toolbars will persist. Otherwise they will hide to allow the page's internal header and footer to show.</p>
+			<p>The header and footer on this page are positioned outside the page. They are before and after the page within the body. These Toolbars will remain in the dom until manually removed.</p>
 
 			<h2>Markup</h2>
 
@@ -57,7 +57,7 @@ $(function(){
 
 			<h2>Ajax navigation</h2>
 
-			<p>Because these toolbars are not within the page they will remain in the DOM until manually removed. However they will automatically hide if you navigate to a page containing a toolbar to allow the page's own toolbars to take their place. They will automatically show again if you navigate to a page containing no toolbars.</p>
+			<p>Because these toolbars are not within the page they will remain in the DOM until manually removed.</p>
 
 			<p>Toolbars not within a page will not be pulled into the DOM during Ajax navigation.</p>
 
