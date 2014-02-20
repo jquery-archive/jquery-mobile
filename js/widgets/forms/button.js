@@ -126,12 +126,18 @@ $.widget( "mobile.button", {
 	},
 
 	refresh: function( create ) {
+		var originalElement,
+			isDisabled = this.element.prop( "disabled" );
+
 		if ( this.options.icon && this.options.iconpos === "notext" && this.element.attr( "title" ) ) {
 			this.element.attr( "title", this.element.val() );
 		}
 		if ( !create ) {
-			var originalElement = this.element.detach();
+			originalElement = this.element.detach();
 			$( this.wrapper ).text( this.element.val() ).append( originalElement );
+		}
+		if ( this.options.disabled !== isDisabled ) {
+			this._setOptions({ disabled: isDisabled });
 		}
 	}
 });
