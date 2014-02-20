@@ -144,12 +144,19 @@ define( [ "jquery",
 			//      better transitions with fewer bugs. Ie, it's not guaranteed that the
 			//      object will be created and transition will be run immediately after as
 			//      it is today. So we wait until transition is invoked to gather the following
-			var reverseClass = this.reverse ? " reverse" : "",
+			var none,
+				reverseClass = this.reverse ? " reverse" : "",
 				screenHeight = $.mobile.getScreenHeight(),
-				maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $.mobile.window.width() > $.mobile.maxTransitionWidth,
-				none = !$.support.cssTransitions || !$.support.cssAnimations || maxTransitionOverride || !this.name || this.name === "none" || Math.max( $.mobile.window.scrollTop(), this.toScroll ) > $.mobile.getMaxScrollForTransition();
+				maxTransitionOverride = $.mobile.maxTransitionWidth !== false &&
+					$.mobile.window.width() > $.mobile.maxTransitionWidth;
 
 			this.toScroll = $.mobile.navigate.history.getActive().lastScroll || $.mobile.defaultHomeScroll;
+
+			none = !$.support.cssTransitions || !$.support.cssAnimations ||
+				maxTransitionOverride || !this.name || this.name === "none" ||
+				Math.max( $.mobile.window.scrollTop(), this.toScroll ) >
+					$.mobile.getMaxScrollForTransition();
+
 			this.toggleViewportClass();
 
 			if ( this.$from && !none ) {
