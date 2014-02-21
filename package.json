@@ -25,6 +25,7 @@
 	"devDependencies": {
 		"async": "0.2.9",
 		"cheerio": "0.12.4",
+		"commitplease": "1.7.0",
 		"grunt": "0.4.2",
 		"grunt-bowercopy": "0.5.0",
 		"grunt-contrib-clean": "0.5.0",
