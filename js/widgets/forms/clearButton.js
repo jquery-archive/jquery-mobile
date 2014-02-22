@@ -30,7 +30,7 @@ define( [
 		},
 
 		clearButton: function() {
-			return $( "<a href='#' " +
+			return $( "<a href='#' tabindex='-1' " +
 				"class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all'>" +
 				"</a>" )
 					.attr( "title", this.options.clearBtnText )
