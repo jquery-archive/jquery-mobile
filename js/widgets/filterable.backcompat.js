@@ -72,7 +72,9 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 			// Also trigger listviewbeforefilter if this widget is also a listview
 			this._widget._trigger( "beforefilter", event, data );
 		}
-		this._super( type, event, data );
+
+		// Passing back the response enables calling preventDefault()
+		return this._super( type, event, data );
 	},
 
 	_setWidget: function( widget ) {
