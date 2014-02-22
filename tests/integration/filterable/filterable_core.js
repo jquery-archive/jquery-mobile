@@ -67,6 +67,29 @@
 		], 500 );
 	});
 
+	asyncTest( "Filter won't run when preventing default on 'filterablebeforefilter'", function() {
+		expect( 1 );
+
+		var input = $( "#test-prevent-default-handler" ),
+			listview = $( "#test-prevent-default-signal-emission" );
+
+		listview.on( "filterablebeforefilter.theEventIsPrevented", function (e) {
+			e.preventDefault();
+		});
+
+		$.testHelper.sequence([
+			function() {
+				input.val( "a" ).trigger( "change" );
+			},
+			function() {
+				deepEqual( listview.children( ".ui-screen-hidden" ).length, 0,
+					"No children are hidden." );
+				listview.off( "filterablebeforefilter.theEventIsPrevented" );
+			},
+			start
+		], 500);
+	});
+
 	asyncTest( "filterCallback and filterReveal can be altered after widget creation", function(){
 		var filterable = $( "#custom-callback-listview" ),
 			input = $( "#custom-callback-listview-input" ),
