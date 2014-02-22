@@ -27,7 +27,7 @@ define( [
 
 		clearButton: function() {
 
-			return $( "<a href='#' class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" +
+			return $( "<a href='#' tabindex='-1' class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" +
     "' title='" + this.options.clearBtnText + "'>" + this.options.clearBtnText + "</a>" );
 
 		},
