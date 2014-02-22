@@ -29,11 +29,6 @@ define( [
 		_create: function() {
 			this.setLastScrollEnabled = true;
 
-			// TODO consider moving the navigation handler OUT of widget into
-			//      some other object as glue between the navigate event and the
-			//      content widget load and change methods
-			this._on( this.window, { navigate: "_filterNavigateEvents" });
-
 			this._on( this.window, {
 				// disable an scroll setting when a hashchange has been fired,
 				// this only works because the recording of the scroll position
@@ -45,6 +40,11 @@ define( [
 				// fired in that case
 				scrollstop: "_delayedRecordScroll"
 			});
+
+			// TODO consider moving the navigation handler OUT of widget into
+			//      some other object as glue between the navigate event and the
+			//      content widget load and change methods
+			this._on( this.window, { navigate: "_filterNavigateEvents" });
 
 			// TODO move from page* events to content* events
 			this._on({ pagechange: "_afterContentChange" });
