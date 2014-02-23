@@ -4,6 +4,7 @@
 //>>group: Navigation
 define([
 	"jquery",
+	"./path",
 	"./../jquery.mobile.ns" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
