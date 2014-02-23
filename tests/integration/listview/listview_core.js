@@ -635,4 +635,26 @@ asyncTest( "list inside collapsible content", function() {
 	] );
 } );
 
+module( "Pre-enhanced" );
+
+asyncTest( "basic pre-enhanced listview", function() {
+	var $page = $( "#list-pre-enhanced" ),
+		$list = $page.find( "ul" );
+
+	$.testHelper.pageSequence( [
+		function() {
+			$.mobile.changePage( "#list-pre-enhanced" );
+		},
+
+		function() {
+			deepEqual( typeof $list.listview, "function",
+				"listview object declared on pre-enhanced list" );
+
+			window.history.back();
+		},
+
+		start
+	] );
+} );
+
 } )( jQuery );
