@@ -9,7 +9,7 @@ You can find us on [IRC](http://irc.jquery.org), specifically in #jqueryui-dev s
 
 ## Getting Involved
 
-More information about the project, the jQuery Mobile team, our weekly meetings, and how to get more involved can be found on the "[About](http://jquerymobile.com/about/)" page at the project website. On this page we provide project specific information regarding [reporting bugs](#issues), [suggesting new features](#feature-requests), and [contributing code or content](#pull-requests). Please take a moment to read this before opening a ticket or submitting a pull request. 
+More information about the project, the jQuery Mobile team, our weekly meetings, and how to get more involved can be found on the "[About](http://jquerymobile.com/about/)" page on the project website. On this page we provide project specific information regarding [reporting bugs](#issues), [suggesting new features](#feature-requests), and [contributing code or content](#pull-requests). Please take a moment to read this before opening a ticket or submitting a pull request. 
 
 
 ## Issues
@@ -30,7 +30,7 @@ When [submitting an issue](https://github.com/jquery/jquery-mobile/issues/new) i
 7. jQuery Mobile and jQuery core version used
 8. Other relevant information, e.g. using PhoneGap
 
-In the interest of creating more readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript, CSS, or HTML snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for GitHub Flavored Markdown (see Syntax Highlighting).
+In the interest of creating readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript, CSS, or HTML snippet you wish to discuss. More information is available at the [introduction page](http://github.github.com/github-flavored-markdown/) for GitHub Flavored Markdown (see Syntax Highlighting).
 
 
 ### Test page
@@ -100,7 +100,7 @@ Change directory to your web root directory, whatever that might be:
 $ cd /path/to/your/www/root/
 ```
 
-Clone your jQuery UI fork to work locally.
+Clone your jQuery Mobile fork to work locally.
 
 *Note: be sure to replace `[USERNAME]` with your GitHub username.*
 
@@ -120,7 +120,7 @@ Add the official jQuery repository as a remote. We recommend naming it "upstream
 $ git remote add upstream git://github.com/jquery/jquery-mobile.git
 ```
 
-Get in the habit of pulling in the "upstream" master to stay up to date as jQuery UI receives new commits.
+Get in the habit of pulling in the "upstream" master to stay up to date as jQuery Mobile receives new commits.
 
 ```bash
 $ git pull upstream master
