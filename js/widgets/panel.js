@@ -167,7 +167,7 @@ $.widget( "mobile.panel", {
 		});
 	},
 
-	_positionPanel: function() {
+	_positionPanel: function( scrollToTop ) {
 		var self = this,
 			panelInnerHeight = self._panelInner.outerHeight(),
 			expand = panelInnerHeight > $.mobile.getScreenHeight();
@@ -177,7 +177,9 @@ $.widget( "mobile.panel", {
 				self._unfixPanel();
 				$.mobile.resetActivePageHeight( panelInnerHeight );
 			}
-			window.scrollTo( 0, $.mobile.defaultHomeScroll );
+			if ( scrollToTop ) {
+				this.window[ 0 ].scrollTo( 0, $.mobile.defaultHomeScroll );
+			}
 		} else {
 			self._fixPanel();
 		}
@@ -324,7 +326,7 @@ $.widget( "mobile.panel", {
 						.removeClass( o.classes.panelClosed )
 						.addClass( o.classes.panelOpen );
 
-					self._positionPanel();
+					self._positionPanel( true );
 
 					self._pageContentOpenClasses = self._getPosDisplayClasses( o.classes.pageContentPrefix );
 
