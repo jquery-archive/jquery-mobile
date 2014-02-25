@@ -1,4 +1,5 @@
 {
+	"es3": true,
 	"boss": true,
 	"curly": true,
 	"eqeqeq": true,
