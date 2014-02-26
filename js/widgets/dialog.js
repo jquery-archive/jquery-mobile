@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Displays a page as a modal dialog with inset appearance and overlay background
-//>>label: Dialogs
+//>>label: Dialogs (deprecated)
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
