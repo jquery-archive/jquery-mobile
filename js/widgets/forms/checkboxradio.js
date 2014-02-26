@@ -131,17 +131,9 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	},
 
 	_handleInputVClick: function() {
-		var $this = this.element;
-
 		// Adds checked attribute to checked input when keyboard is used
-		if ( $this.is( ":checked" ) ) {
-
-			$this.prop( "checked", true);
-			this._getInputSet().not( $this ).prop( "checked", false );
-		} else {
-			$this.prop( "checked", false );
-		}
-
+		this.element.prop( "checked", this.element.is( ":checked" ) );
+		this._getInputSet().not( this.element ).prop( "checked", false );
 		this._updateAll();
 	},
 
