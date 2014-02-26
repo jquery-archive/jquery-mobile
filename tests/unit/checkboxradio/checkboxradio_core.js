@@ -3,6 +3,22 @@
  */
 (function($){
 	module( 'jquery.mobile.forms.checkboxradio.js' );
+	test( "Programmatic click on radio input correctly updates group", function() {
+		var first = $( "#programmatic-click-test input" ).eq( 0 ),
+			last = $( "#programmatic-click-test input" ).eq( 2 );
+
+		last.click().checkboxradio( "refresh" );
+		deepEqual( first.prop( "checked" ), false, "First checkboxradio prop is false" );
+		deepEqual( first.prev( "label" ).hasClass( "ui-radio-off" ), true,
+			"First label has class 'ui-radio-off'" );
+		deepEqual( first.prev( "label" ).hasClass( "ui-radio-on" ), false,
+			"First label does not have class 'ui-radio-on'" );
+		deepEqual( last.prop( "checked" ), true, "Last checkboxradio prop is true" );
+		deepEqual( last.prev( "label" ).hasClass( "ui-radio-off" ), false,
+			"Last label does not have class 'ui-radio-off'" );
+		deepEqual( last.prev( "label" ).hasClass( "ui-radio-on" ), true,
+			"First label has class 'ui-radio-on'" );
+	});
 
 	test( "widget with weird label is created successfully", function() {
 		var elem = $( "#chk\\[\\'3\\'\\]-1" );
