@@ -536,4 +536,100 @@
 		]);
 	});
 
+	// Utensils for logging calls to $.event.trigger()
+	var callLog, origTrigger,
+		replacementTrigger = function( event, data, element, onlyHandlers ) {
+			callLog.push({
+				event: event,
+				data: data,
+				element: element,
+				onlyHandlers: onlyHandlers
+			});
+			return origTrigger.apply( this, arguments );
+		};
+
+	module( "Custom select change comes after closing list", {
+		setup: function() {
+			callLog = [];
+			origTrigger = $.event.trigger;
+			$.event.trigger = replacementTrigger;
+		},
+		teardown: function() {
+			$.event.trigger = origTrigger;
+		}
+	});
+
+	function testChangeAfterClose( select, ns, openEvent, closeEvent, tail ) {
+		var closeComesBeforeChange = false,
+			closeEventName = closeEvent.event;
+
+		openEvent.event += ns + "1";
+		closeEvent.event += ns + "2";
+
+		$.testHelper.detailedEventCascade([
+			function() {
+				$( "#" + select.attr( "id" ) + "-button" ).click();
+			},
+			{
+				openevent: openEvent
+			},
+			function() {
+				$( "#" + select.attr( "id" ) + "-menu" ).find( "a" ).eq( 2 ).click();
+			},
+			{
+				closeevent: closeEvent,
+				change: { src: select, event: "change" + ns + "2" }
+			},
+			function() {
+				$.each( callLog, function( index, value ) {
+					var name = ( typeof callLog[ index ].event === "string" ?
+						callLog[ index ].event :
+						callLog[ index ].event.type ),
+						target = callLog[ index ].element;
+
+					if ( name === "change" && target === select[ 0 ] ) {
+						return false;
+					}
+
+					if ( name === closeEventName &&
+							target === ( typeof closeEvent.src === "function" ?
+								closeEvent.src()[ 0 ] :
+								closeEvent.src[ 0 ] ) ) {
+
+						closeComesBeforeChange = true;
+						return false;
+					}
+				});
+
+				deepEqual( closeComesBeforeChange, true,
+					"close event is triggered before change event" );
+				tail();
+			}
+		]);
+	}
+
+	asyncTest( "Small select triggers change after popup closes", function() {
+		testChangeAfterClose( $( "#small-select-change-after-close" ),
+			".smallSelectTriggersChangeAfterPopupCloses",
+			{
+				src: $( "#small-select-change-after-close-listbox" ),
+				event: "popupafteropen"
+			},
+			{
+				src: $( "#small-select-change-after-close-listbox" ),
+				event: "popupafterclose"
+			}, start);
+	});
+
+	asyncTest( "Large select triggers change after dialog closes", function() {
+		testChangeAfterClose( $( "#large-select-change-after-close" ),
+			".largeSelectTriggersChangeAfterPopupCloses",
+			{ src: $( document ), event: "pageshow" },
+			{
+				src: function() { return $( "#large-select-change-after-close-dialog" ); },
+				event: "pagehide"
+			},
+			start);
+	});
+
 })(jQuery);
