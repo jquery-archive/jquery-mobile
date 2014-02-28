@@ -110,6 +110,10 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	_handleMenuPageHide: function() {
+
+		// After the dialog's done, we may want to trigger change if the value has actually changed
+		this._delayedTrigger();
+
 		// TODO centralize page removal binding / handling in the page plugin.
 		// Suggestion from @jblas to do refcounting
 		//
@@ -132,18 +136,55 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 	},
 
+	_handleListItemClick: function( event ) {
+		var listItem = $( event.target ).closest( "li" ),
+
+			// Index of option tag to be selected
+			oldIndex = this.select[ 0 ].selectedIndex,
+			newIndex = $.mobile.getAttribute( listItem, "option-index" ),
+			option = this._selectOptions().eq( newIndex )[ 0 ];
+
+		// Toggle selected status on the tag for multi selects
+		option.selected = this.isMultiple ? !option.selected : true;
+
+		// Toggle checkbox class for multiple selects
+		if ( this.isMultiple ) {
+			listItem.find( "a" )
+				.toggleClass( "ui-checkbox-on", option.selected )
+				.toggleClass( "ui-checkbox-off", !option.selected );
+		}
+
+		// If it's not a multiple select, trigger change after it has finished closing
+		if ( !this.isMultiple && oldIndex !== newIndex ) {
+			this._triggerChange = true;
+		}
+
+		// Trigger change if it's a multiple select
+		// Hide custom select for single selects only - otherwise focus clicked item
+		// We need to grab the clicked item the hard way, because the list may have been rebuilt
+		if ( this.isMultiple ) {
+			this.select.trigger( "change" );
+			this.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
+				.find( "a" ).first().focus();
+		}
+		else {
+			this.close();
+		}
+
+		event.preventDefault();
+	},
+
 	build: function() {
 		var selectId, popupId, dialogId, label, thisPage, isMultiple, menuId,
 			themeAttr, overlayTheme, overlayThemeAttr, dividerThemeAttr,
 			menuPage, listbox, list, header, headerTitle, menuPageContent,
-			menuPageClose, headerClose, self,
+			menuPageClose, headerClose,
 			o = this.options;
 
 		if ( o.nativeMenu ) {
 			return this._super();
 		}
 
-		self = this;
 		selectId = this.selectId;
 		popupId = selectId + "-listbox";
 		dialogId = selectId + "-dialog";
@@ -221,52 +262,18 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// Events for list items
 		this.list.attr( "role", "listbox" );
 		this._on( this.list, {
-			focusin : "_handleListFocus",
-			focusout : "_handleListFocus",
-			keydown: "_handleListKeydown"
+			"focusin": "_handleListFocus",
+			"focusout": "_handleListFocus",
+			"keydown": "_handleListKeydown",
+			"click li:not(.ui-disabled,.ui-state-disabled,.ui-li-divider)": "_handleListItemClick"
 		});
-		this.list
-			.delegate( "li:not(.ui-disabled,.ui-state-disabled,.ui-li-divider)", "click", function( event ) {
-
-				// index of option tag to be selected
-				var oldIndex = self.select[ 0 ].selectedIndex,
-					newIndex = $.mobile.getAttribute( this, "option-index" ),
-					option = self._selectOptions().eq( newIndex )[ 0 ];
-
-				// toggle selected status on the tag for multi selects
-				option.selected = self.isMultiple ? !option.selected : true;
-
-				// toggle checkbox class for multiple selects
-				if ( self.isMultiple ) {
-					$( this ).find( "a" )
-						.toggleClass( "ui-checkbox-on", option.selected )
-						.toggleClass( "ui-checkbox-off", !option.selected );
-				}
-
-				// trigger change if value changed
-				if ( self.isMultiple || oldIndex !== newIndex ) {
-					self.select.trigger( "change" );
-				}
-
-				// hide custom select for single selects only - otherwise focus clicked item
-				// We need to grab the clicked item the hard way, because the list may have been rebuilt
-				if ( self.isMultiple ) {
-					self.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
-						.find( "a" ).first().focus();
-				}
-				else {
-					self.close();
-				}
-
-				event.preventDefault();
-			});
 
 		// button refocus ensures proper height calculation
 		// by removing the inline style and ensuring page inclusion
 		this._on( this.menuPage, { pagehide: "_handleMenuPageHide" } );
 
 		// Events on the popup
-		this._on( this.listbox, { popupafterclose: "close" } );
+		this._on( this.listbox, { popupafterclose: "_popupClosed" } );
 
 		// Close button on small overlays
 		if ( this.isMultiple ) {
@@ -274,6 +281,18 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 
 		return this;
+	},
+
+	_popupClosed: function() {
+		this.close();
+		this._delayedTrigger();
+	},
+
+	_delayedTrigger: function() {
+		if ( this._triggerChange ) {
+			this.element.trigger( "change" );
+		}
+		this._triggerChange = false;
 	},
 
 	_isRebuildRequired: function() {
