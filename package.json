@@ -2,11 +2,11 @@
 	"name": "jquery-mobile",
 	"title": "jQuery Mobile",
 	"description": "Touch-Optimized Web Framework for Smartphones & Tablets",
-	"version": "1.4.2pre",
+	"version": "1.4.2",
 	"homepage": "http://jquerymobile.com",
 	"author": {
 		"name": "jQuery Foundation Inc. and other contributors",
-		"url": "https://github.com/jquery/jquery-mobile/blob/master/AUTHORS.txt"
+		"url": "https://github.com/jquery/jquery-mobile/blob/1.4.2/AUTHORS.txt"
 	},
 	"repository": {
 		"type": "git",
@@ -16,7 +16,7 @@
 	"licenses": [
 		{
 			"type": "MIT",
-			"url": "https://github.com/jquery/jquery-mobile/blob/master/MIT-LICENSE.txt"
+			"url": "https://github.com/jquery/jquery-mobile/blob/1.4.2/MIT-LICENSE.txt"
 		}
 	],
 	"dependencies": {

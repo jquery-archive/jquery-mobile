@@ -1,6 +1,6 @@
 {
 	"name": "jquery-mobile",
-	"version": "1.4.2pre",
+	"version": "1.4.2",
 	"main": [
 		"js/jquery.mobile.js",
 		"css/themes/default/jquery.mobile.css"
