@@ -55,9 +55,10 @@ module.exports = function( Release ) {
 			process.chdir( repo );
 			Release.git( "add ." , "Error adding files." );
 			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting demos files." );
+			Release.exec( "npm version patch" );
 			if ( !Release.isTest ) {
 				console.log( "Pushing to github..." );
-				Release.git( "push", "Error pushing demos to github." );
+				Release.git( "push --tags origin master", "Error pushing demos to github." );
 			}
 			console.log();
 		},
