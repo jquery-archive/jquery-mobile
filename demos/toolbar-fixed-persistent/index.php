@@ -17,11 +17,11 @@
 			$( "[data-role='header'], [data-role='footer']" ).toolbar();
 		});
 		// Update the contents of the toolbars
-		$( document ).on( "pageshow", "[data-role='page']", function() {
+		$( document ).on( "pagecontainershow", function() {
 			// Each of the four pages in this demo has a data-title attribute
 			// which value is equal to the text of the nav button
 			// For example, on first page: <div data-role="page" data-title="Info">
-			var current = $( this ).jqmData( "title" );
+			var current = $( ".ui-page-active" ).jqmData( "title" );
 			// Change the heading
 			$( "[data-role='header'] h1" ).text( current );
 			// Remove active class from nav buttons
