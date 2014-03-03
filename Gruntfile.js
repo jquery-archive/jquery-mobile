@@ -5,8 +5,40 @@ module.exports = function( grunt ) {
 		cheerio = require( "cheerio" ),
 
 		replaceCombinedCssReference = function( content, processedName ) {
-			return content.replace( /\.\.\/css\//, "css/" )
-				.replace( /jquery\.mobile\.css/gi, processedName + ".min.css" );
+			return content.replace( /([<]link[^>]*[>])/gi, function( match ) {
+				var index, tag, tagDelimiter, attributeDelimiter, pair;
+
+				// Strip angle brackets
+				match = match.substring( 1, match.length - 1 );
+
+				// Split off the tag
+				tagDelimiter = match.indexOf( " " );
+				tag = match.substring( 0, tagDelimiter );
+
+				// Split the rest into attribute definitions
+				match = match
+					.substring( tagDelimiter )
+
+					// Assumes no spaces in the attribute values
+					.split( " " );
+
+				// Establish attributes
+				for ( index in match ) {
+					attributeDelimiter = match[ index ].indexOf( "=" );
+					pair = [
+						match[ index ].substring( 0, attributeDelimiter ),
+						match[ index ].substring( attributeDelimiter + 1 ) ];
+
+					if ( pair[ 0 ] === "href" ) {
+						pair[ 1 ] = pair[ 1 ]
+							.replace( /\.\.\/css\//, "css/" )
+							.replace( /jquery\.mobile\.css/, processedName + ".min.css" );
+						match[ index ] = pair.join( "=" );
+					}
+				}
+
+				return "<" + tag + match.join( " " ) + ">";
+			});
 		},
 
 		// Ensure that modules specified via the --modules option are in the same
