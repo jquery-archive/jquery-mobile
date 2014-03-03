@@ -454,6 +454,26 @@ module.exports = function( grunt ) {
 						// References to the icons CSS file need to be processed here
 						content = content.replace( /css\/themes\/default\/jquery\.mobile\.icons\.css/gi,
 							path.join( "..", "jquery.mobile.icons.min.css" ) );
+
+						// References to stylesheets via grunticon need to be updated
+						content = content.replace( /(grunticon\( \[([^\]]*))/,
+							function( match, group ) {
+								var index,
+									offset = group.indexOf( "[" ),
+									prefix = group.substring( 0, offset + 1 );
+
+								group = group.substring( offset + 1 ).split( "," );
+
+								for ( index in group ) {
+									group[ index ] = "\"" + group[ index ]
+										.trim()
+										.replace( /(^['"])|(['"]$)/g, "" )
+										.replace( /\.\.\/css\//, "css/" )
+										.replace( /\.css$/, ".min.css" ) + "\"";
+								}
+
+								return prefix + " " + group.join( "," ) + " ";
+							});
 						return content;
 					}
 				},
