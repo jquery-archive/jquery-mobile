@@ -80,7 +80,7 @@
 	&lt;div data-role="header"&gt;...&lt;/div&gt;
 	&lt;div role="main" class="ui-content"&gt;...&lt;/div&gt;
 	&lt;div data-role="footer"&gt;...&lt;/div&gt;
-&lt;/div&gt;</span>
+&lt;/div&gt;
 </code></pre>
 
 		<h2>Putting it together: Basic single page template</h2>

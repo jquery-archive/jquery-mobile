@@ -53,7 +53,7 @@ $("#formid").trigger("create");
 // JavaScript INCORRECT
 $("#serchInput").trigger("create");
 $("#submitButton").trigger("create");
-			</pre></code>
+			</code></pre>
 
 		<h2>Create vs. refresh: An important distinction</h2>
 		<p>Note that there is an important difference between the <code>create</code> event and <code>refresh</code> method that some widgets have. The <code>create</code> event is suited for enhancing <em>raw markup</em> that contains one or more widgets. The <code>refresh</code> method should be used on existing (already enhanced) widgets that have been manipulated programmatically and need the UI be updated to match.</p>

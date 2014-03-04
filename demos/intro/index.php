@@ -60,7 +60,7 @@
 
 		<div data-demo-html="true">
 		<form>
-			<input id="filter-for-listview" data-type="search" placeholder="Type to search..."></input>
+			<input id="filter-for-listview" data-type="search" placeholder="Type to search...">
 		</form>
 		<ul data-role="listview" data-inset="true" data-filter="true" data-input="#filter-for-listview">
 			<li><a href="#">Acura</a></li>

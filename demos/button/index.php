@@ -176,7 +176,7 @@
 					Enhanced - Icon only
 					<input type="button" data-enhanced="true" value="Enhanced - Icon only">
 				</div>
-			<form>
+			</form>
 		</div><!--/demo-html -->
 
 		<h2>Icon shadow</h2>
@@ -228,4 +228,3 @@
 
 </body>
 </html>
-

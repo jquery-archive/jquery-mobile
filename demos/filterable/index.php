@@ -36,7 +36,7 @@
 
 			<div data-demo-html="true">
 				<form class="ui-filterable">
-					<input id="filterBasic-input" data-type="search"></input>
+					<input id="filterBasic-input" data-type="search">
 				</form>
 				<ul data-role="listview" data-filter="true" data-input="#filterBasic-input">
 					<li>Acura</li>
@@ -55,7 +55,7 @@
 
 			<div data-demo-html="true">
 				<form>
-					<input id="filterTable-input" data-type="search"></input>
+					<input id="filterTable-input" data-type="search">
 				</form>
 				<table data-role="table" id="movie-table" data-filter="true" data-input="#filterTable-input" class="ui-responsive">
 					<thead>
@@ -99,7 +99,7 @@
 
 			<div data-demo-html="true">
 				<form>
-					<input data-type="search" id="filterControlgroup-input"></input>
+					<input data-type="search" id="filterControlgroup-input">
 				</form>
 				<div data-role="controlgroup" data-filter="true" data-input="#filterControlgroup-input">
 					<a href="#" class="ui-btn ui-shadow ui-corner-all">Button 1</a>
@@ -115,7 +115,7 @@
 
 			<div data-demo-html="true">
 				<form>
-					<input data-type="search" id="searchForSelect"></input>
+					<input data-type="search" id="searchForSelect">
 				</form>
 				<select id="anotherSelect" data-filter="true" data-input="#searchForSelect">
 					<option value="A">Option A</option>
@@ -133,9 +133,9 @@
 		<h2>Filter Collapsible Set</h2>
 		<div data-demo-html="true">
 			<form>
-				<input data-type="search" id="searchForCollapsibleSet"></input>
+				<input data-type="search" id="searchForCollapsibleSet">
 			</form>
-				<div data-role="collapsibleset" data-filter="true" data-inset="true" data-inset="true" id="collapsiblesetForFilter" data-input="#searchForCollapsibleSet">
+				<div data-role="collapsibleset" data-filter="true" data-inset="true" id="collapsiblesetForFilter" data-input="#searchForCollapsibleSet">
 					<div data-role="collapsible" data-filtertext="Animals">
 						<h3>Animals</h3>
 						<ul data-role="listview" data-inset="false">
@@ -168,9 +168,9 @@
 		<h2>Filter Collapsible Set and collapsible children</h2>
 		<div data-demo-html="true">
 			<form>
-				<input data-type="search" id="searchForCollapsibleSetChildren"></input>
+				<input data-type="search" id="searchForCollapsibleSetChildren">
 			</form>
-				<div data-role="collapsibleset" data-filter="true" data-children="> div, > div div ul li" data-inset="true" data-inset="true" id="collapsiblesetForFilterChildren" data-input="#searchForCollapsibleSetChildren">
+				<div data-role="collapsibleset" data-filter="true" data-children="&gt; div, &gt; div div ul li" data-inset="true" id="collapsiblesetForFilterChildren" data-input="#searchForCollapsibleSetChildren">
 					<div data-role="collapsible" data-filtertext="Animals Cats Dogs Lizards snakes">
 						<h3>Animals</h3>
 						<ul data-role="listview" data-inset="false">
@@ -205,7 +205,7 @@
 			</p>
 			<div data-demo-html="true">
 				<form>
-					<input data-type="search" id="divOfPs-input"></input>
+					<input data-type="search" id="divOfPs-input">
 				</form>
 				<div class="elements" data-filter="true" data-input="#divOfPs-input">
 				<p><strong>These</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>
@@ -223,11 +223,7 @@
 			</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview"
-					data-filter="true"
-					data-filter-placeholder="Find cars..."
-					data-filter-theme="a"
-					data-inset="true">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Find cars..." data-filter-theme="a" data-inset="true">
 					<li>Acura</li>
 					<li>Audi</li>
 					<li>BMW</li>
@@ -249,11 +245,7 @@
 			</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview"
-					data-filter="true"
-					data-filter-reveal="true"
-					data-filter-placeholder="Search fruits..."
-					data-inset="true">
+				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search fruits..." data-inset="true">
 					<li><a href="#">Apple</a></li>
 					<li><a href="#">Banana</a></li>
 					<li><a href="#">Cherry</a></li>
@@ -314,21 +306,9 @@
 	<div data-demo-html="true">
 		<form>
 			<div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
-				<input
-					data-type="search"
-					data-enhanced="true"
-					data-inset="false"
-					id="pre-rendered-example-input"
-					placeholder="Filter items..."
-					value="au"></input>
+				<input data-type="search" data-enhanced="true" data-inset="false" id="pre-rendered-example-input" placeholder="Filter items..." value="au">
 			</div>
-			<div
-				data-role="controlgroup"
-				data-enhanced="true"
-				data-filter="true"
-				data-filter-reveal="true"
-				data-input="#pre-rendered-example-input"
-				class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
+			<div data-role="controlgroup" data-enhanced="true" data-filter="true" data-filter-reveal="true" data-input="#pre-rendered-example-input" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">
 				<div class="ui-controlgroup-controls">
 					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-shadow ui-screen-hidden">Acura</a>
 					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-first-child ui-shadow ui-last-child">Renault</a>

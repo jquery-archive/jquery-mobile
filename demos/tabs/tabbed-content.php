@@ -19,8 +19,8 @@
 			<div data-role="navbar">
 				<ul>
 			      <li><a href="#one" data-theme="a" data-ajax="false">one</a></li>
-			      <li><a href="#two"  data-theme="a" data-ajax="false">two</a></li>
-			      <li><a href="ajax-content.php"  data-theme="a" data-ajax="false">three</a></li>
+			      <li><a href="#two" data-theme="a" data-ajax="false">two</a></li>
+			      <li><a href="ajax-content.php" data-theme="a" data-ajax="false">three</a></li>
 			    </ul>
 			</div>
 

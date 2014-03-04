@@ -32,7 +32,7 @@
 
 		<h2>Answer:</h2>
 
-		<p>There are several well known bugs in mobile browsers regarding form elements inside <code>position: fixed</code> elements. Android 2.3 has a number of serious issues with fixed positioning and scrolling that can make select menus inoperable. See the device bugs project issue #1 <A href="https://github.com/scottjehl/Device-Bugs/issues/1">https://github.com/scottjehl/Device-Bugs/issues/1</a></p>
+		<p>There are several well known bugs in mobile browsers regarding form elements inside <code>position: fixed</code> elements. Android 2.3 has a number of serious issues with fixed positioning and scrolling that can make select menus inoperable. See the device bugs project issue #1 <a href="https://github.com/scottjehl/Device-Bugs/issues/1">https://github.com/scottjehl/Device-Bugs/issues/1</a></p>
 
 	</div><!-- /content -->
 

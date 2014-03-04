@@ -17,18 +17,18 @@
 	<div data-role="page" id="dialog-success" data-dom-cache="true"><!-- dialog-->
 
 		<div data-role="header" data-theme="b">
-		<h1>Dialog</h1>
+			<h1>Dialog</h1>
 		</div><!-- /header -->
 
 		<div class="ui-content" role="main">
-		<p>That was an animated page transition effect to a dialog that we added with a <code>data-transition</code> attribute on the link.</p>
-		<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
+			<p>That was an animated page transition effect to a dialog that we added with a <code>data-transition</code> attribute on the link.</p>
+			<p>Since it uses CSS animations, this should be hardware accelerated on many devices. To see transitions, 3D transform support is required so if you only saw a fade transition that's the reason.</p>
 
 			<a href="index.php" class="ui-btn ui-corner-all ui-shadow ui-btn-b" data-rel="back">Take me back</a>
 		</div>
-	</div>
+	</div><!-- dialog-->
 
-	<div data-role="page" id="page-success"><!-- dialog-->
+	<div data-role="page" id="page-success"></div>
 
 </body>
 </html>
