@@ -100,9 +100,9 @@
         <h2>Choose your preference</h2>
         <form>
           <fieldset data-role="controlgroup" data-type="horizontal">
-            <label>Birds<input type="checkbox" id="choose-birds-regular"></input></label>
-            <label>Humans<input type="checkbox" id="choose-humans-regular"></input></label>
-            <label>Fish<input type="checkbox" id="choose-fish-regular"></input></label>
+            <label>Birds<input type="checkbox" id="choose-birds-regular"></label>
+            <label>Humans<input type="checkbox" id="choose-humans-regular"></label>
+            <label>Fish<input type="checkbox" id="choose-fish-regular"></label>
           </fieldset>
         </form>
       </li>
@@ -134,9 +134,9 @@
         <h2>Choose your preference</h2>
         <form>
           <fieldset data-role="controlgroup" data-type="horizontal">
-            <label>Birds<input type="checkbox" id="choose-birds-regular"></input></label>
-            <label>Humans<input type="checkbox" id="choose-humans-regular"></input></label>
-            <label>Fish<input type="checkbox" id="choose-fish-regular"></input></label>
+            <label>Birds<input type="checkbox" id="choose-birds-regular"></label>
+            <label>Humans<input type="checkbox" id="choose-humans-regular"></label>
+            <label>Fish<input type="checkbox" id="choose-fish-regular"></label>
           </fieldset>
         </form>
       </li>

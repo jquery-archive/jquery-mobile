@@ -302,7 +302,7 @@
 
 		<h2>Disabling form elements</h2>
 
-		<p>All jQuery Mobile widgets can be disabled in the markup by adding the standard <code>disabled</code> attribute to the element, just like you would with native controls. To dynamically disable or enable them, each form widget also has standard <code>disable</code> and <code>enable</code> methods that are documented with each form widget. View more examples of <a href="../forms-disabled/" >disabled form elements</a>.</p>
+		<p>All jQuery Mobile widgets can be disabled in the markup by adding the standard <code>disabled</code> attribute to the element, just like you would with native controls. To dynamically disable or enable them, each form widget also has standard <code>disable</code> and <code>enable</code> methods that are documented with each form widget. View more examples of <a href="../forms-disabled/">disabled form elements</a>.</p>
 
 		<div data-demo-html="true">
 			<div class="ui-field-contain">

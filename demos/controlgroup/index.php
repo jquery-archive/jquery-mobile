@@ -390,9 +390,9 @@
 				</div>
 				<div class="ui-controlgroup-controls ui-shadow">
 					<label for="pre-rendered-cb-1" class="ui-first-child">Checkbox 1</label>
-					<input type="checkbox" id="pre-rendered-cb-1" name="pre-rendered-cb-1" value="1"></input>
+					<input type="checkbox" id="pre-rendered-cb-1" name="pre-rendered-cb-1" value="1">
 					<label for="pre-rendered-cb-2" class="ui-last-child">Checkbox 2</label>
-					<input type="checkbox" id="pre-rendered-cb-2" name="pre-rendered-cb-2" value="2"></input>
+					<input type="checkbox" id="pre-rendered-cb-2" name="pre-rendered-cb-2" value="2">
 				</div>
 			</div>
 		</div>

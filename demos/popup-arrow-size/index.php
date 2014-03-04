@@ -192,7 +192,7 @@ $.mobile.document
 			</div>
 		</div>
 		<form id="arrowSizeForm">
-			<input type="range" id="arrowSize" min="5" value="10" max="90" step="1"></input>
+			<input type="range" id="arrowSize" min="5" value="10" max="90" step="1">
 			<div class="ui-body-b ui-corner-all" id="arrowCSS"></div>
 		</form>
 	</div><!-- /content -->

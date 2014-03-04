@@ -60,13 +60,13 @@
 
 		<div data-demo-html="true">
 			<div data-role="header" data-theme="b">
-			<h1>Page Title</h1>
+				<h1>Page Title</h1>
 			</div>
 		</div><!-- /demo-html -->
 
 		<h2>External toolbars</h2>
 
-		<p>If you want to use the same toolbar on multiple pages, you can use <a href="../toolbar-external/" data-ajax="false">external toolbars</a>.
+		<p>If you want to use the same toolbar on multiple pages, you can use <a href="../toolbar-external/" data-ajax="false">external toolbars</a>.</p>
 
 		<h2>Fixed position</h2>
 
@@ -96,12 +96,12 @@
 			<div data-role="header">
 				<a href="#" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-delete">Cancel</a>
 			<h1>My App</h1>
-				<button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Save</a>
+				<button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-check">Save</button>
 			</div>
 		</div><!-- /demo-html -->
 
 		<div data-demo-html="true">
-			<div data-role="header" >
+			<div data-role="header">
 			<h1>Page Title</h1>
 				<a href="#" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-gear">Options</a>
 			</div>
@@ -112,7 +112,7 @@
 		<p>The heading in the header bar has some margin that will give the bar its height. If you choose not to use a heading, you will need to add an element with <code>class="ui-title"</code> so that the bar can get the height and display correctly.</p>
 
 		<div data-demo-html="true">
-			<div data-role="header" >
+			<div data-role="header">
 				<a href="#" class="ui-btn-left ui-btn ui-btn-inline ui-mini ui-corner-all ui-btn-icon-left ui-icon-grid">View</a>
 				<span class="ui-title"></span>
 			</div>

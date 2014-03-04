@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -59,7 +58,6 @@
             </ul>
         </li>
       </ul>
-      </p>
 
 	  <h2>Example page code</h2>
       <p>To illustrate how the above internal jQuery Mobile properties are turned off, let's examine our example page code.</p>

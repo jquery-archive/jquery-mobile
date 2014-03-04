@@ -64,14 +64,14 @@
                 <li><a href="#panel-responsive-page2">Navbar</a></li>
                 <li><a href="#panel-responsive-page2">Navbar, persistent</a></li>
                 <li><a href="#panel-responsive-page2">Pages</a></li>
-                <li><a href="#panel-responsive-page2">New</span></a></li>
+                <li><a href="#panel-responsive-page2">New</a></li>
                 <li><a href="#panel-responsive-page2">Popup</a></li>
                 <li><a href="#panel-responsive-page2">Radio buttons</a></li>
                 <li><a href="#panel-responsive-page2">Select</a></li>
                 <li><a href="#panel-responsive-page2">Slider, single</a></li>
-                <li><a href="#panel-responsive-page2">New</span></a></li>
-                <li><a href="#panel-responsive-page2">New</span></a></li>
-                <li><a href="#panel-responsive-page2">New</span></a></li>
+                <li><a href="#panel-responsive-page2">New</a></li>
+                <li><a href="#panel-responsive-page2">New</a></li>
+                <li><a href="#panel-responsive-page2">New</a></li>
                 <li><a href="#panel-responsive-page2">Text inputs & textarea</a></li>
                 <li><a href="#panel-responsive-page2">Transitions</a></li>
 		</ul>

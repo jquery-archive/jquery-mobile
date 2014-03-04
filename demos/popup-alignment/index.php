@@ -57,11 +57,11 @@ $.mobile.document.on( "slidestop", function() {
 				<form data-role="fieldset">
 					<div class="ui-field-contain">
 						<label for="xalign">X Alignment</label>
-						<input type="range" id="xalign" name="xalign" value="0.5" min="-1" max="2" step="0.5"></input>
+						<input type="range" id="xalign" name="xalign" value="0.5" min="-1" max="2" step="0.5">
 					</div>
 					<div class="ui-field-contain">
 						<label for="yalign">Y Alignment</label>
-						<input type="range" id="yalign" name="yalign" value="0.5" min="-1" max="2" step="0.5"></input>
+						<input type="range" id="yalign" name="yalign" value="0.5" min="-1" max="2" step="0.5">
 					</div>
 				</form>
 			</div>

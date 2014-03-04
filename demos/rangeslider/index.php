@@ -40,13 +40,11 @@
                         <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="80">
                     </div>
 				</form>
-				</form>
                 </div><!-- /demo-html -->
 
                 <h2>Step attribute</h2>
 
                 <div data-demo-html="true">
-				<form>
 				<form>
                     <div data-role="rangeslider">
                         <label for="range-10a">Rangeslider:</label>

@@ -34,8 +34,7 @@
 
 		<h1>Transitions</h1>
 
-		<p>The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation.
-			</p>
+		<p>The jQuery Mobile framework includes a set of CSS-based transition effects that can be applied to any page link or form submission with Ajax navigation.</p>
 
 		<h2>Page transitions</h2>
 
@@ -94,13 +93,7 @@
 			</table>
 			</div><!-- /demo-html -->
 
-	            <p><strong>Important:</strong> Some platforms currently have issues with transitions.
-	                We are working on a solution to solve the problem for everyone.
-	                If you are experiencing flickers and flashes during or at the end of a transition we suggest the following workaround.
-	                Please note that this workaround should be thoroughly tested on the target platform before deployment.
-	                This workaround is known to cause performance issues and browser crashes on some platforms, especially Android.
-	                Add the following code to your custom css.
-	            </p>
+	            <p><strong>Important:</strong> Some platforms currently have issues with transitions. We are working on a solution to solve the problem for everyone. If you are experiencing flickers and flashes during or at the end of a transition we suggest the following workaround. Please note that this workaround should be thoroughly tested on the target platform before deployment. This workaround is known to cause performance issues and browser crashes on some platforms, especially Android. Add the following code to your custom css:</p>
 	            <code>
 	                .ui-page { -webkit-backface-visibility: hidden; }
 	            </code>
@@ -141,10 +134,10 @@
 		<p>By default, transitions can be disabled (set to "none") when the window width is greater than a certain pixel width. This feature is useful because transitions can be distracting or perform poorly on larger screens. This value is configurable via the global option <code>$.mobile.maxTransitionWidth</code>, which defaults to <code>false</code>. The option accepts any number representing a pixel width or <code>false</code> value. If it's not <code>false</code>, the handler will use a "none" transition when the window is wider than the specified value.</p>
 
 		<h2>Same page transition</h2>
-		<p>Transitions to the current active page are ignored by default but can be enabled by using the <code>allowSamePageTransition</code> option of the pagecontainer widget's <code>change()</code> method. Note that not all transitions will work as expected and may end in an impractical result. </p>
+		<p>Transitions to the current active page are ignored by default but can be enabled by using the <code>allowSamePageTransition</code> option of the pagecontainer widget's <code>change()</code> method. Note that not all transitions will work as expected and may end in an impractical result.</p>
 
 		<h2>Creating custom transitions</h2>
-		<p>jQuery Mobile allows for the addition of custom transitions to the <code>$.mobile.transitionHandlers</code> dictionary so you can expand the selection of transitions on your site or app.
+		<p>jQuery Mobile allows for the addition of custom transitions to the <code>$.mobile.transitionHandlers</code> dictionary so you can expand the selection of transitions on your site or app.</p>
 
 	</div><!-- /content -->
 

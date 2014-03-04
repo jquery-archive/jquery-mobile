@@ -41,7 +41,7 @@
                 <li data-role="list-divider"><h1>Nested list page generated from markup requires plugin</h1></li>
                 <li>
                     Infiniti
-                    <ul >
+                    <ul>
                         <li>G37</li>
                         <li>Q50</li>
                         <li>M57</li>
@@ -49,9 +49,9 @@
                         <li>EX</li>
                     </ul>
                 </li>
-                <li >
+                <li>
                     <h1>Audi</h1>
-                    <ul >
+                    <ul>
                         <li>A6</li>
                         <li>S6</li>
                         <li>A7</li>
@@ -62,7 +62,7 @@
                 </li>
                 <li>
                     <h1>BMW</h1>
-                    <ul >
+                    <ul>
                         <li>1 series</li>
                         <li>3 series</li>
                         <li>5 series</li>
@@ -73,7 +73,7 @@
                 <li>
                     <h1>Cadillac
                     </h1>
-                    <ul >
+                    <ul>
                         <li>CTS</li>
                         <li>ATS</li>
                         <li>XTS</li>
@@ -81,7 +81,7 @@
                 </li>
                 <li>
                     <h1>Lexus</h1>
-                    <ul >
+                    <ul>
                         <li>IS</li>
                         <li>ES</li>
                         <li>GS</li>
@@ -90,7 +90,7 @@
                 </li>
                 <li>
                     <h1>Mercedes</h1>
-                    <ul >
+                    <ul>
                         <li>A-Class</li>
                         <li>B-Class</li>
                         <li>C-Class</li>
