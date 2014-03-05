@@ -38,8 +38,7 @@
 
 		<h1>Tabs</h1>
 
-		<p>The jQuery mobile tabs widget is actually just an extension of the jQuery ui tabs widget and takes all the same options and methods</p>
-			</p>
+		<p>The jQuery mobile tabs widget is actually just an extension of the jQuery ui tabs widget and takes all the same options and methods.</p>
 		<h2>Use navbar for tabs</h2>
 		<div data-demo-html="true">
 			<div data-role="tabs" id="tabs">

@@ -43,7 +43,13 @@ $(function(){
 
 			<h2>Theme</h2>
 
-			<p>Since external toolbars are outside the page they don't inherit a theme from the page. This means you always have to set a theme for them. You can use the <code>data-theme</code> attribute for this or set the <code>theme</code> option when you call the plugin:
+			<p>Since external toolbars are outside the page they don't inherit a theme from the page. This means you always have to set a theme for them. You can use the <code>data-theme</code> attribute for this or set the <code>theme</code> option when you call the plugin:</p>
+
+<pre><code>
+$(function(){
+	$( "[data-role='header'], [data-role='footer']" ).toolbar({ theme: "a" });
+});
+</code></pre>
 
 			<h2>True persistent toolbars</h2>
 

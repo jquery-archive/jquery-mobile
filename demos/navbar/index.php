@@ -286,7 +286,7 @@
 			<div data-role="footer">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-icon="grid"data-theme="a">A</a></li>
+						<li><a href="#" data-icon="grid" data-theme="a">A</a></li>
 						<li><a href="#" data-icon="star" data-theme="b">B</a></li>
 					</ul>
 				</div><!-- /navbar -->

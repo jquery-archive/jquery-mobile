@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Hash Processing - Navigation - jQuery Mobile Demos</title>
-	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="../_assets/css/jqm-demos.css" />
+	<link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<link rel="shortcut icon" href="../favicon.ico">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<script src="../../external/jquery/jquery.js"></script>
@@ -125,5 +125,7 @@ $.mobile.document
 			<a href="#secondary-page?section=My Friends" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Friends</a>
 			<a href="#secondary-page?section=My Items" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">My Items</a>
 		</div>
+	</div>
+
 </body>
 </html>

@@ -12,7 +12,6 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-	<
 </head>
 <body>
 <div data-role="page" class="jqm-demos">

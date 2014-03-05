@@ -43,7 +43,7 @@
         		<a href="#popupVideo" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Launch video player</a>
 
         		<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
-        			<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
+        			<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless=""></iframe>
         		</div>
             </div>
 
@@ -66,7 +66,7 @@
 
     			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
     				<a href="#" data-rel="back" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-    				<iframe src="map.html" width="480" height="320" seamless></iframe>
+    				<iframe src="map.html" width="480" height="320" seamless=""></iframe>
     			</div>
             </div>
 

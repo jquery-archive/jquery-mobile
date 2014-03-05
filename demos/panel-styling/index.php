@@ -221,11 +221,10 @@
 
 	          <h3>Boats</h3>
 
-	          <ul data-role="listview" >
+	          <ul data-role="listview">
 	            <li><a href="#">Runabout</a></li>
 	            <li><a href="#">Motorboat</a></li>
 	            <li><a href="#">Sailboat</a></li>
-	            </li>
 	          </ul>
 
 	        </li><!-- /collapsible -->

@@ -70,7 +70,7 @@
 
 		<div id="trivia-city" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
         	<a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all">Close</a>
-			<p>Here some text.</small></p>
+			<p>Here some text.</p>
         </div><!-- /popup -->
 
 	</div><!-- /content -->

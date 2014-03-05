@@ -44,7 +44,7 @@ $("#formid").trigger("create");
 //javaScript INCORRECT
 $("#searchInput").trigger("create");
 $("#submitButton").trigger("create");
-</pre></code>
+</code></pre>
 
 	</div><!-- /content -->
 

@@ -59,7 +59,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Number</h3>
+        <h2>Number</h2>
 
         <div data-demo-html="true">
         <form>
@@ -77,7 +77,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Date</h3>
+        <h2>Date</h2>
 
         <div data-demo-html="true">
         <form>
@@ -89,7 +89,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Month</h3>
+        <h2>Month</h2>
 
         <div data-demo-html="true">
         <form>
@@ -101,7 +101,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Week</h3>
+        <h2>Week</h2>
 
         <div data-demo-html="true">
         <form>
@@ -113,7 +113,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Time</h3>
+        <h2>Time</h2>
 
         <div data-demo-html="true">
         <form>
@@ -125,7 +125,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Datetime</h3>
+        <h2>Datetime</h2>
 
         <div data-demo-html="true">
         <form>
@@ -143,7 +143,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Telephone</h3>
+        <h2>Telephone</h2>
 
         <div data-demo-html="true">
         <form>
@@ -155,7 +155,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Email</h3>
+        <h2>Email</h2>
 
         <div data-demo-html="true">
         <form>
@@ -167,7 +167,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>URL</h3>
+        <h2>URL</h2>
 
         <div data-demo-html="true">
         <form>
@@ -179,7 +179,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Password</h3>
+        <h2>Password</h2>
 
         <div data-demo-html="true">
         <form>
@@ -191,7 +191,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Color</h3>
+        <h2>Color</h2>
 
         <div data-demo-html="true">
         <form>
@@ -202,13 +202,12 @@
 
         <div data-demo-html="true">
         <form>
-        <form>
             <label for="color-2">Color: data-clear-btn="true"</label>
             <input type="color" data-clear-btn="true" name="color-2" id="color-2" value="">
         </form>
         </div><!-- /demo-html -->
 
-        <h2>File</h3>
+        <h2>File</h2>
 
         <div data-demo-html="true">
         <form>
@@ -220,7 +219,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Mini</h3>
+        <h2>Mini</h2>
 
         <div data-demo-html="true">
         <form>
@@ -238,7 +237,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Placeholder</h3>
+        <h2>Placeholder</h2>
 
         <div data-demo-html="true">
         <form>
@@ -256,7 +255,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Value/Text</h3>
+        <h2>Value/Text</h2>
 
         <div data-demo-html="true">
         <form>
@@ -274,7 +273,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Label hidden</h3>
+        <h2>Label hidden</h2>
 
         <div data-demo-html="true">
         <form>
@@ -292,7 +291,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Disabled</h3>
+        <h2>Disabled</h2>
 
         <div data-demo-html="true">
         <form>
@@ -331,7 +330,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Fieldcontain</h3>
+        <h2>Fieldcontain</h2>
 
         <div data-demo-html="true">
         <form>
@@ -357,7 +356,7 @@
         </form>
         </div><!-- /demo-html -->
 
-        <h2>Fieldcontain, mini sized</h3>
+        <h2>Fieldcontain, mini sized</h2>
 
         <div data-demo-html="true">
         <form>

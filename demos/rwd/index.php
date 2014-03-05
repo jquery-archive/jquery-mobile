@@ -29,7 +29,7 @@
       	<p>Responsive web design (RWD) is a design and technical approach that aims to adapt the layout and interaction of a site or app to work optimally across a wide range of device resolutions, screen densities and interaction modes with the same underlying codebase. The framework has a number of responsive widgets: <a href="../grids/">responsive grids</a>, <a href="../table-reflow/">reflow tables</a> and <a href="../table-column-toggle/">column chooser tables</a>, and <a href="../panel/">panels</a>.</p>
 
 		<h2>RWD basics</h2>
-      	<p>RWD has three key elements:<p>
+      	<p>RWD has three key elements:</p>
       	<ul>
       		<li><strong>CSS media queries</strong>, used to target styles to specific device characteristics such as screen width breakpoint or resolution.</li>
       		<li><strong>A fluid grid</strong>, that specifies elements and widgets in flexible units with the goal of making them flow to fill their containers.</li>
@@ -54,15 +54,15 @@
 
       	<p>When writing CSS for a responsive site or app, it's usually most efficient to write all the core typography and basic style elements outside of a media query to form the styles for the smallest devices, such as phones. This is a good approach because the majority of these core styles are usually also shared at greater widths, albeit in a different layout and it leverages the cascading power of CSS. Build up breakpoints using multiple <code>min-width</code> media queries to layer in additional style rules that should only apply above a certain screen width.</p>
 
-      	<p>For images in your pages, we recommend starting with images sized for mobile screens in the markup. It doesn't make sense to serve a 1,000 pixel wide photo to a smartphone with a 480 pixel max resolution because this is a waste of bandwidth and memory. Instead, include an image targeted for a mobile size. Add a <code>width: 100%;</code> style rule to make images scale to the page or container, but not larger because this would look blurry. </p>
+      	<p>For images in your pages, we recommend starting with images sized for mobile screens in the markup. It doesn't make sense to serve a 1,000 pixel wide photo to a smartphone with a 480 pixel max resolution because this is a waste of bandwidth and memory. Instead, include an image targeted for a mobile size. Add a <code>width: 100%;</code> style rule to make images scale to the page or container, but not larger because this would look blurry.</p>
 
       	<p>For larger or higher resolution screens, there is a wide range of JS-based techniques and services to conditionally load a higher quality image. The forthcoming <code>picture</code>element will address the need to handle multiple image sources natively in HTML and can be used today with a polyfill script.</p>
 
-      	<p>Always look for ways to limit the number of server requests on a page by concatenating files into a single request and always use minification and compression (gzip). </p>
+      	<p>Always look for ways to limit the number of server requests on a page by concatenating files into a single request and always use minification and compression (gzip).</p>
 
 		<h2>Responsive in jQuery Mobile</h2>
 
-		<p>jQuery Mobile has always been designed to work within a responsive context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build. </p>
+		<p>jQuery Mobile has always been designed to work within a responsive context and our docs and forms had a few responsive elements from the very start. All the widgets are built to be 100% flexible in width to fit easily inside any responsive layout system you choose to build.</p>
 
 		<p>Here is a checklist of RWD tips to keep in mind:</p>
 

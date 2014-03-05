@@ -76,7 +76,7 @@
         <div data-demo-html="true" data-demo-css="#wrap">
             <div class="ui-grid-b">
                 <div class="ui-block-a"><a href="#" class="ui-shadow ui-btn ui-corner-all ui-mini">Anchor</a></div>
-                <div class="ui-block-b"><div class="button-wrap"><button  class="ui-shadow ui-btn ui-corner-all ui-mini">Button</button></div></div>
+                <div class="ui-block-b"><div class="button-wrap"><button class="ui-shadow ui-btn ui-corner-all ui-mini">Button</button></div></div>
                 <div class="ui-block-c"><input type="button" value="Input" data-mini="true"></div>
             </div>
 			<form class="ui-grid-b">
