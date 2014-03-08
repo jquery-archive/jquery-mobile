@@ -7,16 +7,31 @@ define( [ "jquery", "../jquery.mobile.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+var uiScreenHiddenRegex = /\bui-screen-hidden\b/;
+function noHiddenClass( elements ) {
+	var index,
+		length = elements.length,
+		result = [];
+
+	for ( index = 0; index < length; index++ ) {
+		if ( !elements[ index ].className.match( uiScreenHiddenRegex ) ) {
+			result.push( elements[ index ] );
+		}
+	}
+
+	return $( result );
+}
+
 $.mobile.behaviors.addFirstLastClasses = {
 	_getVisibles: function( $els, create ) {
 		var visibles;
 
 		if ( create ) {
-			visibles = $els.not( ".ui-screen-hidden" );
+			visibles = noHiddenClass( $els );
 		} else {
 			visibles = $els.filter( ":visible" );
 			if ( visibles.length === 0 ) {
-				visibles = $els.not( ".ui-screen-hidden" );
+				visibles = noHiddenClass( $els );
 			}
 		}
 
