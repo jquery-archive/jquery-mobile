@@ -145,11 +145,15 @@ $.widget( "mobile.listview", $.extend( {
 							.attr( "title", $.trim( last.getEncodedText() ) )
 							.addClass( altButtonClass )
 							.empty();
+
+						// Reduce to the first anchor, because only the first gets the buttonClass
+						a = a.first();
 					} else if ( icon ) {
 						buttonClass += " ui-btn-icon-right ui-icon-" + icon;
 					}
 
-					a.first().addClass( buttonClass );
+					// Apply buttonClass to the (first) anchor
+					a.addClass( buttonClass );
 				} else if ( isDivider ) {
 					dividerTheme = ( getAttr( item[ 0 ], "theme" ) || o.dividerTheme || o.theme );
 
