@@ -196,7 +196,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 
 			// If we're inside a form
 			if ( form ) {
-				formId = form.id;
+				formId = form.getAttribute( "id" );
 
 				// If the form has an ID, collect radios scattered throught the document which
 				// nevertheless are part of the form by way of the value of their form attribute
