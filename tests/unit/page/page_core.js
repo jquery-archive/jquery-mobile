@@ -17,7 +17,7 @@
 		etargets.push( e.target );
 	});
 
-	$( "body" ).on("pagebeforecreate", "#c", function( e ){
+	$( document ).on("pagebeforecreate", "#c", function( e ){
 		cEvents.push( e.type );
 		cTargets.push( e.target );
 		return false;
