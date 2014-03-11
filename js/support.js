@@ -78,7 +78,8 @@ function transform3dTest() {
 
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
 function baseTagTest() {
-	var fauxBase = location.protocol + ((location.host !== "") ? "//" : "") + location.host + location.pathname + "ui-dir/",
+	var fauxBase = location.protocol + ( ( location.host !== "" ) ? "//" : "" ) + location.host +
+			location.pathname + "ui-dir/",
 		base = $( "head base" ),
 		fauxEle = null,
 		href = "",
