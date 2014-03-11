@@ -4,9 +4,10 @@ module.exports = function( grunt ) {
 	var _ = require( "underscore" ),
 		cheerio = require( "cheerio" ),
 
-		replaceCombinedCssReference = function( content, processedName ) {
-			return content.replace( /\.\.\/css\//, "css/" )
-				.replace( /jquery\.mobile\.css/gi, processedName + ".min.css" );
+		replaceCombinedCssReference = function( href, processedName ) {
+			return href
+				.replace( /\.\.\/css/, "css" )
+				.replace( /jquery\.mobile\.css/, processedName + ".min.css" );
 		},
 
 		// Ensure that modules specified via the --modules option are in the same
@@ -391,37 +392,96 @@ module.exports = function( grunt ) {
 			"demos.processed": {
 				options: {
 					processContent: function( content, srcPath ) {
-						var processedName = grunt.config.process( name + "<%= versionSuffix %>" );
-						content = content.replace( /_assets\/js\/">/gi, "_assets/js/index.js\">" );
-						content = content.replace( /\.\.\/external\/jquery\//gi, "js/" );
-						content = content.replace( /\.\.\/js\/\"/gi, "js/\"" );
-						content = content.replace( /js\/"/gi, "js/" + processedName + ".min.js\"" );
-						content = replaceCombinedCssReference( content, processedName );
+						var processedName, $;
+
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
 							function( match, includePath /*, offset, string */ ) {
-								var fileToInclude, newSrcPath = srcPath;
+								var newSrcPath = srcPath;
 
 								// If we've already handled the nested includes use the version
 								// that was copied to the dist folder
 								// TODO use the config from copy:demos.nested.files
-								if( includePath.match(/jqm\-contents.php|jqm\-navmenu.php|jqm\-search.php/) ) {
+								if( includePath.match(/jqm\-(contents|navmenu|search)\.php/) ) {
 									newSrcPath = "dist/" + newSrcPath;
 								}
 
-								fileToInclude = path.resolve( path.join(path.dirname(newSrcPath), includePath) );
-
-								return grunt.file.read( fileToInclude );
+								return grunt.file.read( path.resolve( path.join(
+									path.dirname( newSrcPath ), includePath ) ) );
 							}
 						);
-						content = content.replace( /\.php/gi, ".html" );
 
-						// Demos that separately refer to the structure need to be processed here
-						content = content.replace( /css\/structure\/jquery\.mobile\.structure\.css/gi,
-							path.join( "css", "themes", "default", processedName + ".structure" + ".min.css" ) );
+						if ( content.substring( 0, 15 ).toLowerCase() === "<!doctype html>" || srcPath.match( /\.php$/ ) ) {
+							processedName = grunt.config.process( name + "<%= versionSuffix %>" );
+							$ = cheerio.load( content );
+							$( "script" ).each( function() {
+								var text,
+									element = $( this ),
+									src = element.attr( "src" );
 
-						// References to the icons CSS file need to be processed here
-						content = content.replace( /css\/themes\/default\/jquery\.mobile\.icons\.css/gi,
-							path.join( "..", "jquery.mobile.icons.min.css" ) );
+								if ( src ) {
+									element.attr( "src", src
+										.replace( /_assets\/js\/?$/, "_assets/js/index.js" )
+										.replace( /\.\.\/external\/jquery\/jquery.js$/,
+											"js/jquery.js" )
+										.replace( /\.\.\/js\/?$/,
+											"js/" + processedName + ".min.js" )
+										.replace( /^js\/?$/, "demos/js/" + processedName + ".min.js" ) );
+								} else {
+									text = element.text();
+
+									// References to stylesheets via grunticon need to be updated
+									text = text.replace( /(grunticon\( \[([^\]]*))/,
+											function( match, group ) {
+												var index,
+													offset = group.indexOf( "[" ),
+													prefix = group.substring( 0, offset + 1 );
+
+												group = group.substring( offset + 1 ).split( "," );
+
+												for ( index in group ) {
+													group[ index ] = "\"" + group[ index ]
+														.trim()
+														.replace( /(^['"])|(['"]$)/g, "" )
+														.replace( /\.\.\/css\//, "css/" )
+														.replace( /\.css$/, ".min.css" ) + "\"";
+												}
+
+												return prefix + " " + group.join( "," ) + " ";
+											});
+
+									//element.html( text );
+									element[ 0 ].children[ 0 ].data = text;
+								}
+							});
+
+							$( "link[rel='stylesheet'][href]" ).each( function() {
+								var element = $( this );
+
+								element.attr( "href",
+									replaceCombinedCssReference( element.attr( "href" ),
+										processedName )
+
+									// Demos that separately refer to the structure need to be
+									// processed here
+									.replace( /css\/structure\/jquery\.mobile\.structure\.css/gi,
+										path.join( "css", "themes", "default",
+											processedName + ".structure" + ".min.css" ) )
+
+									// References to the icons CSS file need to be processed here
+									.replace( /css\/themes\/default\/jquery\.mobile\.icons\.css/,
+										path.join( "..", "jquery.mobile.icons.min.css" ) ) );
+
+							});
+
+							$( "a[href]" ).each( function() {
+								var element = $( this );
+
+								element.attr( "href",
+									element.attr( "href" ).replace( /\.php$/, ".html" ) );
+							});
+
+							content = $.html();
+						}
 						return content;
 					}
 				},
@@ -442,9 +502,15 @@ module.exports = function( grunt ) {
 
 						if ( /\.html$/.test( srcPath ) ) {
 
-							content = replaceCombinedCssReference( content, processedName );
-
 							$ = cheerio.load( content );
+
+							$( "link[rel='stylesheet'][href]" ).each( function() {
+								var element = $( this );
+
+								element.attr( "href",
+									replaceCombinedCssReference( element.attr( "href" ),
+										processedName ) );
+							});
 
 							$( "script" ).each( function ( idx, element ) {
 								var script = $( element );
