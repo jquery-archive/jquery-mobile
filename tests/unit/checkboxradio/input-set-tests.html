@@ -32,6 +32,14 @@
 	<div data-nstest-role="page">
 		<label>Radio<input id="radio:1" type="radio" name="group1"></label>
 		<form id="the-[form]">
+			<!--
+			https://github.com/jquery/jquery-mobile/issues/7223
+			Adding the below hidden input will cause code that accesses the form attribute via
+			form.id to return this input, rather than the ID of the form. The presence of this
+			input constitutes a test against that kind of code. The correct way to retrieve the
+			id of a form is form.getAttribute( "id" ).
+			-->
+			<input type="hidden" name="id" value="">
 			<label>Radio<input id="radio:2" type="radio" name="group1"></label>
 			<label>Radio<input id="radio:7" type="radio" name="group1" form="the-'other'-form"></label>
 		</form>
