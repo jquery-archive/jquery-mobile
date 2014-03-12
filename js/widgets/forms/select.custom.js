@@ -162,7 +162,10 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			"</div>"+
 			"<div data-" + $.mobile.ns + "role='content'></div>"+
 			"</div>" );
-		listbox = $( "<div id='" + popupId + "' class='ui-selectmenu'></div>" ).insertAfter( this.select ).popup({ theme: o.overlayTheme });
+		listbox = $( "<div" + themeAttr + overlayThemeAttr + " id='" + popupId +
+				"' class='ui-selectmenu'></div>" )
+			.insertAfter( this.select )
+			.popup();
 		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" ).appendTo( listbox );
 		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'></div>" ).prependTo( listbox );
 		headerTitle = $( "<h1 class='ui-title'></h1>" ).appendTo( header );
