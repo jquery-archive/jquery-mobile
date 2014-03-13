@@ -161,6 +161,7 @@ $.widget( "mobile.filterable", {
 				this.document.find( selector );
 
 			this._on( search, {
+				keydown: "_onKeyDown",
 				keyup: "_onKeyUp",
 				change: "_onKeyUp",
 				input: "_onKeyUp"
@@ -168,6 +169,13 @@ $.widget( "mobile.filterable", {
 		}
 
 		this._search = search;
+	},
+
+	// Prevent form submission
+	_onKeyDown: function( event ) {
+		if ( event.keyCode === $.ui.keyCode.ENTER ) {
+			event.preventDefault();
+		}
 	},
 
 	_setOptions: function( options ) {
