@@ -6,7 +6,7 @@ before_script:
 script: npm run-script ci
 branches:
   only:
-    - master
+    - 1.4-stable
 env:
   - TYPES=unit
     JQUERIES=1.8.3
