@@ -11,13 +11,20 @@ test( "Listview with filter has hideDividers option set to true", function() {
 });
 
 test( "Filterable input prevents default on ENTER", function() {
-	var event = $.Event( "keydown" );
+	var event = $.Event( "keydown" ),
+		input = $( "#test-input-preventDefault" );
 
 	event.keyCode = $.ui.keyCode.ENTER;
 
-	$( "#test-input-preventDefault" ).trigger( event );
+	input.trigger( event );
 
-	deepEqual( event.isDefaultPrevented(), true, "Keydown for ENTER default is prevented" );
+	deepEqual( event.isDefaultPrevented(), true, "keydown for ENTER default is prevented" );
+
+	event = $.Event( "keypress" );
+
+	input.trigger( event );
+
+	deepEqual( event.isDefaultPrevented(), true, "Subsequent keypress default is also prevented" );
 });
 
 })( jQuery );
