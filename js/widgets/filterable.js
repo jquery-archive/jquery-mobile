@@ -162,6 +162,7 @@ $.widget( "mobile.filterable", {
 
 			this._on( search, {
 				keydown: "_onKeyDown",
+				keypress: "_onKeyPress",
 				keyup: "_onKeyUp",
 				change: "_onKeyUp",
 				input: "_onKeyUp"
@@ -175,6 +176,14 @@ $.widget( "mobile.filterable", {
 	_onKeyDown: function( event ) {
 		if ( event.keyCode === $.ui.keyCode.ENTER ) {
 			event.preventDefault();
+			this._preventKeyPress = true;
+		}
+	},
+
+	_onKeyPress: function( event ) {
+		if ( this._preventKeyPress ) {
+			event.preventDefault();
+			this._preventKeyPress = false;
 		}
 	},
 
