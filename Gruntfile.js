@@ -70,6 +70,7 @@ module.exports = function( grunt ) {
 		},
 		path = require( "path" ),
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
+		phpPort = Math.floor( 8000 + Math.random()*1000 ),
 		name = "jquery.mobile",
 		dist = "dist" + path.sep,
 		copyrightYear = grunt.template.today( "UTC:yyyy" ),
@@ -693,6 +694,37 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		php: {
+			server: {
+				options: {
+					port: phpPort,
+					baseUrl: "."
+				}
+			}
+		},
+
+		casper: {
+			options: {
+				test: true,
+				verbose : false,
+				"log-level": "error",
+				parallel: true,
+				concurrency: 5
+			},
+			"demos.src": {
+				options: {
+					args: [ "--port=" + phpPort ]
+				},
+				src: [ "tests/casperjs/**/*.js" ]
+			},
+			"demos.dist": {
+				options: {
+					args: [ "--port=" + phpPort ]
+				},
+				src: [ "tests/casperjs/**/*.js" ]
+			}
+		},
+
 		connect: {
 			server: {
 				options: {
@@ -987,13 +1019,21 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "updateDependencies", [ "bowercopy" ] );
 
+	grunt.registerTask( "test:demos:src", [ "php", "casper:demos.src" ] );
+
+	grunt.registerTask( "test:demos:dist", [ "casper:demos.dist" ] );
+
 	grunt.registerTask( "test",
 		[
 			"clean:testsOutput",
 			"jshint",
+			"test:demos:src",
 			"config:fetchHeadHash",
 			"js:release",
-			"connect", "qunit:http"
+			"demos",
+			"connect",
+			"test:demos:dist",
+			"qunit:http"
 		]
 	);
 	grunt.registerTask( "test:ci", [ "qunit_junit", "connect", "qunit:http" ] );

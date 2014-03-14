@@ -4,9 +4,9 @@
 <li data-filtertext="form button widget input button submit reset"><a href="../button/" data-ajax="false">Button widget</a></li>
 <li data-role="collapsible" data-enhanced="true" data-collapsed-icon="carat-d" data-expanded-icon="carat-u" data-iconpos="right" data-inset="false" class="ui-collapsible ui-collapsible-themed-content ui-collapsible-collapsed">
 	<h3 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d">
-			Checkboxradio widget<span class="ui-collapsible-heading-status"> click to expand contents</span>
-		</a>
+		<a href="#" class="ui-collapsible-heading-toggle ui-btn ui-btn-icon-right ui-btn-inherit ui-icon-carat-d"
+		    >Checkboxradio widget<span class="ui-collapsible-heading-status"> click to expand contents</span><
+		/a>
 	</h3>
 	<div class="ui-collapsible-content ui-body-inherit ui-collapsible-content-collapsed" aria-hidden="true">
 		<ul>
