@@ -131,8 +131,9 @@ define( [ "jquery",	"../jquery.mobile.core", "../jquery.mobile.widget" ], functi
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$.mobile.window.unbind( "scroll", this.fakeFixLoader );
-			$.mobile.window.unbind( "scroll", this.checkLoaderPosition );
+			this.window
+				.unbind( "scroll", this.fakeFixLoader )
+				.unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 

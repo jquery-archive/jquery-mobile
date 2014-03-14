@@ -28,7 +28,7 @@ define([
 	}
 
 	// trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
-	$( window.document ).trigger( "mobileinit" );
+	$.mobile.document.trigger( "mobileinit" );
 
 	// support conditions
 	// if device support condition(s) aren't met, leave things as they are -> a basic, usable experience,
