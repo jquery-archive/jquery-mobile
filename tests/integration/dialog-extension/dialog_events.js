@@ -5,7 +5,7 @@
 	var home = $.mobile.path.parseUrl(location.pathname).directory,
 		homeWithSearch = home + location.search;
 
-	module( "jquery.mobile.dialog.js", {
+	module( "dialog", {
 		setup: function() {
 			$.mobile.page.prototype.options.contentTheme = "d";
 			$.testHelper.navReset( homeWithSearch );

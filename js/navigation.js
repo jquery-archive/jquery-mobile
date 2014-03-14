@@ -4,16 +4,16 @@
 //>>group: Navigation
 define( [
 	"jquery",
-	"./jquery.mobile.core",
+	"./core",
 	"./navigation/path",
 	"./events/navigate",
 	"./navigation/history",
 	"./navigation/navigator",
 	"./navigation/method",
-	"./jquery.mobile.events",
-	"./jquery.mobile.support",
+	"./events",
+	"./support",
 	"jquery-plugins/jquery.hashchange",
-	"./jquery.mobile.animationComplete",
+	"./animationComplete",
 	"./widgets/pagecontainer",
 	"./widgets/page",
 	"./transitions/handlers" ], function( jQuery ) {

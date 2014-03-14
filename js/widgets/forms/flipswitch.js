@@ -7,9 +7,9 @@
 
 define( [
 	"jquery",
-	"../../jquery.mobile.core",
-	"../../jquery.mobile.widget",
-	"../../jquery.mobile.zoom",
+	"../../core",
+	"../../widget",
+	"../../zoom",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

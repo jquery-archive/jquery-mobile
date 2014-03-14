@@ -6,7 +6,7 @@
 
 define( [
 	"jquery",
-	"../jquery.mobile.widget"
+	"../widget"
 ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {

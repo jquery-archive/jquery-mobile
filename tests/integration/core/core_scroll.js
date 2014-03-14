@@ -3,7 +3,7 @@
  */
 
 (function($){
-	var libName = "jquery.mobile.core",
+	var libName = "core",
 			scrollTimeout = 20, // TODO expose timing as an attribute
 			scrollStartEnabledTimeout = 150;
 

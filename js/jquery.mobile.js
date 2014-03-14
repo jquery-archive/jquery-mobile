@@ -11,20 +11,20 @@ define([
 	"./navigation/method",
 	"./transitions/handlers",
 	"./transitions/visuals",
-	"./jquery.mobile.animationComplete.js",
-	"./jquery.mobile.navigation",
-	"./jquery.mobile.degradeInputs",
+	"./animationComplete",
+	"./navigation",
+	"./degradeInputs",
 	"./widgets/page.dialog",
 	"./widgets/dialog",
 	"./widgets/collapsible",
 	"./widgets/collapsibleSet",
-	"./jquery.mobile.fieldContain",
-	"./jquery.mobile.grid",
+	"./fieldContain",
+	"./grid",
 	"./widgets/navbar",
 	"./widgets/listview",
 	"./widgets/listview.autodividers",
 	"./widgets/listview.hidedividers",
-	"./jquery.mobile.nojs",
+	"./nojs",
 	"./widgets/forms/checkboxradio",
 	"./widgets/forms/button",
 	"./widgets/forms/slider",
@@ -36,9 +36,9 @@ define([
 	"./widgets/forms/autogrow",
 	"./widgets/forms/select.custom",
 	"./widgets/forms/select",
-	"./jquery.mobile.buttonMarkup",
+	"./buttonMarkup",
 	"./widgets/controlgroup",
-	"./jquery.mobile.links",
+	"./links",
 	"./widgets/toolbar",
 	"./widgets/fixedToolbar",
 	"./widgets/fixedToolbar.workarounds",
@@ -51,9 +51,9 @@ define([
 	"./widgets/filterable",
 	"./widgets/filterable.backcompat",
 	"./widgets/tabs",
-	"./jquery.mobile.zoom",
-	"./jquery.mobile.zoom.iosorientationfix"
+	"./zoom",
+	"./zoom/iosorientationfix"
 ], function( require ) {
-	require( [ "./jquery.mobile.init" ], function() {} );
+	require( [ "./init" ], function() {} );
 });
 //>>excludeEnd("jqmBuildExclude");

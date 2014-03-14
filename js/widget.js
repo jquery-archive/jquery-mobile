@@ -5,9 +5,9 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
-	"./jquery.mobile.ns",
+	"./ns",
 	"jquery-ui/jquery.ui.widget",
-	"./jquery.mobile.data" ], function( jQuery ) {
+	"./data" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

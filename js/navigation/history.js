@@ -2,7 +2,7 @@
 //>>description: Manages a stack of history entries. Used exclusively by the Navigation Manager
 //>>label: History Manager
 //>>group: Navigation
-define([ "jquery", "./../jquery.mobile.ns", "./path" ], function( jQuery ) {
+define([ "jquery", "./../ns", "./path" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
