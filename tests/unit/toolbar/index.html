@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>jQuery Mobile Toolbar Test Suite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../../../external/requirejs/require.js"></script>
+    <script src="../../../js/requirejs.config.js"></script>
+    <script src="../../../js/jquery.tag.inserter.js"></script>
+    <script src="../../jquery.setNameSpace.js"></script>
+    <script src="../../../tests/jquery.testHelper.js"></script>
+    <script src="../../../external/qunit/qunit.js"></script>
+    <script>
+        $.testHelper.asyncLoad([
+            [
+                "navigation/method",
+                "buttonMarkup",
+                "widgets/toolbar",
+            ],
+            [ "init"],
+            [ "./toolbar_core.js" ]
+        ]);
+    </script>
+
+    <link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+    <link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+    <link rel="stylesheet" href="../../jqm-tests.css"/>
+
+    <script src="../../swarminject.js"></script>
+</head>
+<body>
+
+    <div id="qunit"></div>
+    <div data-nstest-role="page" id="default">
+        <div data-nstest-role="header" id="testHeaderClasses">
+            <h1>Header</h1>
+        </div>
+        <div data-nstest-role="footer" id="testFooterClasses">
+            <h1>Footer</h1>
+        </div>
+        <div id="testInit">
+            <h1>Header</h1>
+        </div>
+    </div>
+    <div data-nstest-role="page" id="destroyPage">
+        <div id="testDestroy" >
+            <h1>title</h1>
+        </div>
+    </div>
+
+    <div data-nstest-role="header" class="ui-screen-hidden" id="testExternalHeader">
+        <h1>External Header</h1>
+    </div>
+
+    <div data-nstest-role="footer" class="ui-screen-hidden" id="testExternalFooter">
+        <h1>External Footer</h1>
+    </div>
+    
+</body>
+</html>
