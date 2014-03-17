@@ -584,6 +584,8 @@ $.widget( "mobile.slider", $.extend( {
 		this.slider
 			.toggleClass( "ui-state-disabled", value )
 			.attr( "aria-disabled", value );
+
+		this.element.toggleClass( "ui-state-disabled", value );
 	}
 
 }, $.mobile.behaviors.formReset ) );
