@@ -694,6 +694,13 @@ define( [
 				return deferred.promise();
 			}
 
+			// The Windows Phone 8 app URL scheme does not handle absolute path references well, so
+			// remove the proto and the leading double-slash (hence the + 2 in the substring call)
+			// https://github.com/jquery/jquery-mobile/issues/6574
+			if ( fileUrl.indexOf( "x-wmapp" ) === 0 ) {
+				fileUrl = fileUrl.substring( $.mobile.path.parseLocation().protocol.length + 2 );
+			}
+
 			// Load the new content.
 			$.ajax({
 				url: fileUrl,
