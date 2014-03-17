@@ -18,7 +18,8 @@
 				"jquery.mobile.buttonMarkup",
 					"navigation/method",
 					"widgets/toolbar",
-				"widgets/fixedToolbar"
+				"widgets/fixedToolbar",
+				"widgets/popup"
 			],
 			[ "jquery.mobile.init" ],
 			[ "./fixedToolbar.js"	]
@@ -100,6 +101,14 @@
 	<div data-nstest-role="page" id="page-show-visible-undefined">
 		<div data-nstest-role="header" data-nstest-fullscreen="true" data-nstest-position="fixed"></div>
 		<div data-nstest-role="footer" data-nstest-fullscreen="true" data-nstest-position="fixed"></div>
+	</div>
+	<div data-nstest-role="page" id="page-retains-fixed-header-on-popup-removed">
+		<div data-nstest-role="header" data-nstest-position="fixed"></div>
+	</div>
+	<div data-nstest-role="page" id="page-destroy-test">
+		<div id="testDestroyFixedFullscreen" data-nstest-position="fixed" data-nstest-fullscreen="true" >
+            <h1>title</h1>
+        </div>
 	</div>
 </body>
 </html>

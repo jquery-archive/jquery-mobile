@@ -145,7 +145,7 @@ define( [
 
 				// Skip back button creation if one is already present
 				if ( !backButton.attached ) {
-					backButton.element = ( backButton.element ||
+					this.backButton = backButton.element = ( backButton.element ||
 						$( "<a role='button' href='javascript:void(0);' " +
 							"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
 								( theme ? "ui-btn-" + theme + " " : "" ) +
@@ -170,6 +170,27 @@ define( [
 					"role": "heading",
 					"aria-level": "1"
 				});
+		},
+		_destroy: function() {
+			var currentTheme;
+
+			this.element.children( "h1, h2, h3, h4, h5, h6" )
+				.removeClass( "ui-title" )
+				.removeAttr( "role" )
+				.removeAttr( "aria-level" );
+
+			if ( this.role === "header" ) {
+				this.element.children( "a, button" )
+					.removeClass( "ui-btn-left ui-btn-right ui-btn ui-shadow ui-corner-all" );
+				if ( this.backButton) {
+					this.backButton.remove();
+				}
+			}
+
+			currentTheme = this.options.theme ? this.options.theme : "inherit";
+			this.element.removeClass( "ui-bar-" + currentTheme );
+
+			this.element.removeClass( "ui-" + this.role ).removeAttr( "role" );
 		}
 	});
 

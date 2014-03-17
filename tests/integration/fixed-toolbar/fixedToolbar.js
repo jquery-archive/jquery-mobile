@@ -313,4 +313,66 @@
 	asyncTest( "data-visible-on-page-show shows toolbars when undefined", function() {
 		asyncTestFooterAndHeader( "#page-show-visible-undefined", true );
 	});
+
+	asyncTest( "page-retains-fixed-header-on-popup-remove" , function() {
+		expect( 1 );
+
+		var page = $( "#page-retains-fixed-header-on-popup-removed" ).page();
+
+		$.testHelper.pageSequence([
+			function() {
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", page );
+			},
+
+			function() {
+				var popup;
+
+				popup = $( "<div data-nstest-role='popup' />" )
+									.append( "<div data-nstest-role='header' />" )
+									.append( "<h1>Dynamic Popup</h1>" );
+
+				page.append( popup );
+
+				popup.popup( { positionTo: "window" } ).trigger( "create" );
+
+				popup.on( "popupafterclose", function() {
+					popup.remove();
+					ok( $( ":mobile-pagecontainer" ).pagecontainer( "getActivePage" )
+								.hasClass( "ui-page-header-fixed" ),
+								"page should retain the fixed header after popup is removed" );
+					start();
+				});
+
+				popup.popup( "open" ).popup( "close" );
+			},
+
+			function() {
+
+				$.mobile.pageContainer.change( "#default" );
+
+			}
+		]);
+	});
+	
+	asyncTest( "destroy preserves original markup" , function() {
+		expect( 1 );
+		
+		$.testHelper.pageSequence([
+			function() {
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#page-destroy-test" );
+			},
+			function() {
+				var unEnhanced = $("#testDestroyFixedFullscreen").clone(),
+		            destroyed = $("#testDestroyFixedFullscreen").toolbar().toolbar("destroy");
+
+		        ok( $.testHelper.domEqual( destroyed, unEnhanced ),
+		        	"unEnhanced equals destroyed" );
+		        start();
+			},
+			function() {
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
+			}
+		]);
+	});
+
 })(jQuery);
