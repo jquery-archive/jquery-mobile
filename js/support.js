@@ -45,7 +45,7 @@ function inlineSVG() {
 	img.onload = function() {
 		support( img.width === 1 && img.height === 1 );
 	};
-	img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+	img.src = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==";
 }
 
 function transform3dTest() {
