@@ -46,8 +46,6 @@
 		"load-grunt-tasks": "0.3.0",
 		"optimist": "0.6.0",
 		"requirejs": "2.1.8",
-		"scp": "0.0.3",
-		"semver": "2.2.1",
 		"underscore": "1.5.2",
 		"xmlhttprequest": "1.6.0"
 	},
