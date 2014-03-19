@@ -41,19 +41,31 @@ define([
 			urlParseRE: /^\s*(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
 			// Abstraction to address xss (Issue #4787) by removing the authority in
-			// browsers that auto	decode it. All references to location.href should be
+			// browsers that auto-decode it. All references to location.href should be
 			// replaced with a call to this method so that it can be dealt with properly here
 			getLocation: function( url ) {
-				var uri = url ? this.parseUrl( url ) : location,
-					hash = this.parseUrl( url || location.href ).hash;
+
+				// Always use our own URL parser, even though location potentially provides all the
+				// fields we may need later on. This way, URL parsing is consistent, and we only
+				// grab location.href from the browser.
+				var uri = this.parseUrl( url || location.href ),
+					hash = uri.hash;
 
 				// mimic the browser with an empty string when the hash is empty
 				hash = hash === "#" ? "" : hash;
 
+				// The pathname must start with a slash if there's a protocol, because you can't
+				// have a protocol followed by a relative path. Also, it's impossible to calculate
+				// absolute URLs from relative ones if the absolute one doesn't have a leading "/".
+				if ( uri.protocol !== "" && uri.pathname.substring( 0, 1 ) !== "/" ) {
+					uri.pathname = "/" + uri.pathname;
+					uri.directory = "/" + uri.directory;
+				}
+
 				// Make sure to parse the url or the location object for the hash because using location.hash
 				// is autodecoded in firefox, the rest of the url should be from the object (location unless
 				// we're testing) to avoid the inclusion of the authority
-				return uri.protocol + "//" + uri.host + uri.pathname + uri.search + hash;
+				return uri.protocol + uri.doubleSlash + uri.host + uri.pathname + uri.search + hash;
 			},
 
 			//return the original document url
@@ -323,7 +335,7 @@ define([
 
 					// reconstruct each of the pieces with the new search string and hash
 					href = path.parseUrl( href );
-					href = href.protocol + "//" + href.host + href.pathname + search + preservedHash;
+					href = href.protocol + href.doubleSlash + href.host + href.pathname + search + preservedHash;
 				} else {
 					href += href.indexOf( "#" ) > -1 ? uiState : "#" + uiState;
 				}
