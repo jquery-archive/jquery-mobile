@@ -1,12 +1,11 @@
-var cheerio = require( "cheerio" ),
-	fs = require( "fs" ),
-	scp = require( "scp" ),
-	path = require( "path" ),
-	semver = require( "semver" ),
-	shell = require( "shelljs" );
-
 module.exports = function( Release ) {
-	var clonedRepos = {};
+	var cheerio = require( "cheerio" ),
+		fs = require( "fs" ),
+		scp = require( "scp" ),
+		path = require( "path" ),
+		semver = require( "semver" ),
+		shell = require( "shelljs" ),
+		clonedRepos = {};
 
 	Release.define({
 		issueTracker: "github",
