@@ -1,8 +1,6 @@
 module.exports = function( Release ) {
 	var cheerio = require( "cheerio" ),
 		fs = require( "fs" ),
-		scp = require( "scp" ),
-		path = require( "path" ),
 		semver = require( "semver" ),
 		shell = require( "shelljs" ),
 		clonedRepos = {};
@@ -169,7 +167,6 @@ module.exports = function( Release ) {
 };
 
 module.exports.dependencies = [
-	"scp@0.0.3",
 	"semver@2.2.1",
 	"shelljs@0.2.6"
 ];
