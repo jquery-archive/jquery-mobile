@@ -1,12 +1,9 @@
-var cheerio = require( "cheerio" ),
-	fs = require( "fs" ),
-	scp = require( "scp" ),
-	path = require( "path" ),
-	semver = require( "semver" ),
-	shell = require( "shelljs" );
-
 module.exports = function( Release ) {
-	var clonedRepos = {};
+	var cheerio = require( "cheerio" ),
+		fs = require( "fs" ),
+		semver = require( "semver" ),
+		shell = require( "shelljs" ),
+		clonedRepos = {};
 
 	Release.define({
 		issueTracker: "github",
@@ -15,9 +12,7 @@ module.exports = function( Release ) {
 		},
 
 		generateArtifacts: function( done ) {
-			Release.exec(
-				"grunt dist:release"
-			);
+			Release.exec( "grunt dist:release" );
 			done([]);
 		},
 
@@ -27,7 +22,7 @@ module.exports = function( Release ) {
 
 			if ( !clonedRepos[ remote ] ) {
 				console.log( "Cloning " + remote.cyan + "..." );
-				Release.git( "clone " + remote + " " + local, "Error cloning Demos repo." );
+				Release.exec( "git clone " + remote + " " + local, "Error cloning Demos repo." );
 				console.log();
 
 				clonedRepos[ remote ] = local;
@@ -48,17 +43,18 @@ module.exports = function( Release ) {
 
 			if (!Release.preRelease) {
 				console.log( "Updating demos index..." );
-				fs.writeFileSync( repo + "/index.php", "<?php header('Location: " + Release.newVersion + "');" );
+				fs.writeFileSync( repo + "/index.php",
+					"<?php header('Location: " + Release.newVersion + "');" );
 			}
 
 			console.log( "Adding files..." );
 			process.chdir( repo );
-			Release.git( "add ." , "Error adding files." );
-			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting demos files." );
+			Release.exec( "git add .", "Error adding files." );
+			Release.exec( "git commit -m '" + commitMessage + "'", "Error commiting demos files." );
 			Release.exec( "npm version patch" );
 			if ( !Release.isTest ) {
 				console.log( "Pushing to github..." );
-				Release.git( "push --tags origin master", "Error pushing demos to github." );
+				Release.exec( "git push --tags origin master", "Error pushing demos to github." );
 			}
 			console.log();
 		},
@@ -69,7 +65,7 @@ module.exports = function( Release ) {
 
 			if ( !clonedRepos[ remote ] ) {
 				console.log( "Cloning " + remote.cyan + "..." );
-				Release.git( "clone " + remote + " " + local, "Error cloning website repo." );
+				Release.exec( "git clone " + remote + " " + local, "Error cloning website repo." );
 				console.log();
 
 				clonedRepos[ remote ] = local;
@@ -119,11 +115,12 @@ module.exports = function( Release ) {
 
 			console.log( "Adding files..." );
 			process.chdir( repo );
-			Release.git( "add ." , "Error adding files." );
-			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting builder files." );
+			Release.exec( "git add .", "Error adding files." );
+			Release.exec( "git commit -m '" + commitMessage + "'",
+				"Error commiting builder files." );
 			if ( !Release.isTest ) {
 				console.log( "Pushing to github..." );
-				Release.git( "push", "Error pushing builder update to github." );
+				Release.exec( "git push", "Error pushing builder update to github." );
 			}
 			console.log();
 		},
@@ -141,11 +138,11 @@ module.exports = function( Release ) {
 
 			console.log( "Adding files..." );
 			process.chdir( repo );
-			Release.git( "add ." , "Error adding zip files." );
-			Release.git( "commit -m '" + commitMessage + "'" , "Error commiting zip files." );
+			Release.exec( "git add .", "Error adding zip files." );
+			Release.exec( "git commit -m '" + commitMessage + "'", "Error commiting zip files." );
 			if ( !Release.isTest ) {
 				console.log( "Pushing to github..." );
-				Release.git( "push", "Error pushing zip files to github." );
+				Release.exec( "git push", "Error pushing zip files to github." );
 			}
 			console.log();
 		},
@@ -168,3 +165,8 @@ module.exports = function( Release ) {
 		}
 	});
 };
+
+module.exports.dependencies = [
+	"semver@2.2.1",
+	"shelljs@0.2.6"
+];
