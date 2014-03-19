@@ -197,6 +197,38 @@
 		$panel.panel();
 	});
 
+	asyncTest( "panelclose not called on document", function() {
+		expect( 2 );
+		
+		$( document ).on( "panelopen", "#panel-panelclose-event", function() {
+			$(this).panel("close");
+		});
+
+		$( document ).on( "panelclose", "#panel-panelclose-event", function() {
+			ok( true, "document panelclose event emitted" );
+		});
+
+		$( document.body ).on( "panelclose", "#panel-panelclose-event", function() {
+			ok( true, "document.body panelclose event emitted" );
+			start();
+		});
+
+		$( "#panel-panelclose-event" ).panel("open");	
+		
+	});
+
+	asyncTest( "should be able to open a second panel", function() {
+		expect ( 1 );
+
+		$( document ).on( "panelopen", "#panel-opensecond", function() {
+			ok( true, "second panel opened" );
+			start();
+		});
+
+		$( "#panel-openfirst" ).panel( "open" );
+		$( "#panel-opensecond" ).panel( "open" );
+	});
+
 	module( "dismissable panel", {
 		setup: function(){
 			$.Event.prototype.originalEvent = {

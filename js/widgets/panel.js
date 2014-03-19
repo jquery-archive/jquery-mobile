@@ -308,7 +308,7 @@ $.widget( "mobile.panel", {
 				o = self.options,
 
 				_openPanel = function() {
-					self.document.off( "panelclose" );
+					self._off( self.document , "panelclose" );
 					self._page().jqmData( "panel", "open" );
 
 					if ( $.support.cssTransform3d && !!o.animate && o.display !== "overlay" ) {
@@ -365,8 +365,8 @@ $.widget( "mobile.panel", {
 			self._trigger( "beforeopen" );
 
 			if ( self._page().jqmData( "panel" ) === "open" ) {
-				self.document.on( "panelclose", function() {
-					_openPanel();
+				self._on( self.document, {
+					"panelclose": "_openPanel"
 				});
 			} else {
 				_openPanel();
