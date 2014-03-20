@@ -242,6 +242,8 @@
 		equal( $.mobile.path.getLocation("http://foo@example.com/"), "http://example.com/" );
 		equal( $.mobile.path.getLocation("http://foo:bar@example.com/"), "http://example.com/" );
 		equal( $.mobile.path.getLocation("http://<foo<:bar@example.com/"), "http://example.com/" );
+		equal( $.mobile.path.getLocation("x-wmapp0:www/index.html" ), "x-wmapp0:/www/index.html" );
+		equal( $.mobile.path.getLocation("qrc:/index.html" ), "qrc:/index.html" );
 
 		var allUriParts = "http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234&type=unread#msg-content";
 
