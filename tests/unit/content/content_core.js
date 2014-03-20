@@ -507,4 +507,30 @@
 
 		proto._loadUrl( "foo", {}, {} );
 	});
+
+	test( "load() strips Windows Phone protocol from URL", function() {
+		var mockLocation = "x-wmapp0://path/to/otherfile.html",
+			origAjax = $.ajax,
+			origDocUrl = $.mobile.path.documentUrl,
+			origGetLocation = $.mobile.path.getLocation;
+
+		// Set up the mocking
+		$.ajax = function( url, settings ) {
+			if ( arguments.length === 1 ) {
+				url = url.url;
+			}
+
+			deepEqual( url, "path/to/file.html",
+				"No x-wmap proto nor double-slash at the beginning of the URL" );
+		};
+		$.mobile.path.documentUrl = $.mobile.path.parseUrl( mockLocation );
+		$.mobile.path.getLocation = function() { return mockLocation; };
+
+		proto.load( "x-wmapp0://path/to/file.html" );
+
+		// Tear down the mocking
+		$.ajax = origAjax;
+		$.mobile.path.documentUrl = origDocUrl;
+		$.mobile.path.getLocation = origGetLocation;
+	});
 })(jQuery);
