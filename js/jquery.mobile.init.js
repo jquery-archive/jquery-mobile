@@ -57,6 +57,7 @@ define([
 			var path = $.mobile.path,
 				$pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
 				hash = path.stripHash( path.stripQueryParams(path.parseLocation().hash) ),
+				theLocation = $.mobile.path.parseLocation(),
 				hashPage = document.getElementById( hash );
 
 			// if no pages are found, create one with body's inner html
@@ -70,7 +71,8 @@ define([
 
 				// unless the data url is already set set it to the pathname
 				if ( !$this[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" ) ) {
-					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) || location.pathname + location.search );
+					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) ||
+						theLocation.pathname + theLocation.search );
 				}
 			});
 
