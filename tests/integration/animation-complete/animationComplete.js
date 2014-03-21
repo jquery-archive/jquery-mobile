@@ -2,7 +2,50 @@
  * mobile flipswitch unit tests
  */
 (function($){
-	var oldTransitions, oldAnimations;
+	var oldTransitions, oldAnimations,
+		countEvents = function( element, eventName ) {
+			var count = 0,
+				events = $._data( element, "events" );
+
+			if ( events && events[ eventName ] ) {
+				count = events[ eventName ].length;
+			}
+
+			return count;
+		},
+		events = ( function() {
+			var nameIndex, match, event,
+				names = [
+					"animation", "transition",
+					"mozAnimation", "mozTransition",
+					"oAnimation", "oTransition",
+					"webkitAnimation", "webkitTransition"
+				],
+				element = document.createElement( "a" ),
+				events = {
+					animation: { name: "animationend" },
+					transition: { name: "transitionend" }
+				};
+
+			for( nameIndex in names ) {
+				if ( element.style[ names[ nameIndex ] ] !== undefined ) {
+					match = names[ nameIndex ].match( /(.*)(animation|transition)$/i );
+					event = match[ 2 ].toLowerCase();
+
+					// Unprefixed is the best, so do not overwrite if we've already found an
+					// unprefixed version
+					if ( events[ event ].prefix !== "" ) {
+						events[ event ] = {
+							name: match[ 1 ] + match[ 2 ] + ( match[ 1 ] ? "End" : "end" ),
+							prefix: match[ 1 ]
+						};
+					}
+				}
+			}
+
+			return events;
+		})();
+
 	module( "Callbacks: Event", {
 		teardown: function() {
 			$( "#transition-test" )
@@ -73,7 +116,7 @@
 			$( "#animation-test" ).removeClass( "in" );
 		}
 	});
-	asyncTest( "call back executes immeditly when animations not supported on device", function() {
+	asyncTest( "callback executes immediately when animations unsupported on device", function() {
 		expect( 2 );
 		var transitionComplete = false,
 			animationComplete = false;
@@ -140,7 +183,7 @@
 			$( "#animation-test" ).removeClass( "in" );
 		}
 	});
-	asyncTest( "Make sure no bidnings when no cssanimation support", function() {
+	asyncTest( "Make sure no bindings when no cssanimation support", function() {
 		expect( 2 );
 		var transitionComplete = false,
 			animationComplete = false;
@@ -167,7 +210,7 @@
 			$( "#animation-test" ).removeClass( "in" );
 		}
 	});
-	asyncTest( "Make sure no bidnings remain after event", function() {
+	asyncTest( "Make sure no bindings remain after event", function() {
 		expect( 2 );
 		var transitionComplete = false,
 			animationComplete = false;
@@ -190,13 +233,19 @@
 		}, 800 );
 	});
 	module( "Event Removal: fallback", {
+		setup: function() {
+			$( "#transition-test" ).on( events.transition.name, $.noop );
+			$( "#animation-test" ).on( events.animation.name, $.noop );
+		},
 		teardown: function() {
 			$( "#transition-test" )
 				.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
 			$( "#animation-test" ).removeClass( "in" );
+			$( "#transition-test" ).off( events.transition.name, $.noop );
+			$( "#animation-test" ).off( events.animation.name, $.noop );
 		}
 	});
-	asyncTest( "Make sure no bidnings remain after fallback", function() {
+	asyncTest( "Make sure no bindings remain after fallback", function() {
 		expect( 2 );
 		var transitionComplete = false,
 			animationComplete = false;
@@ -210,9 +259,9 @@
 		});
 
 		window.setTimeout( function(){
-			ok( $._data( $("#animation-test")[0], "events" ) === undefined,
+			deepEqual( countEvents( $("#animation-test")[0], events.animation.name ), 1,
 				"no animation bindings remain" );
-			ok( $._data( $("#transition-test")[0], "events" ) === undefined,
+			deepEqual( countEvents( $("#transition-test")[0], events.transition.name ), 1,
 				"no transition bindings remain" );
 			start();
 		}, 1200 );
