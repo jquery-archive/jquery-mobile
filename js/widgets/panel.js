@@ -308,7 +308,8 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						self.element.animationComplete( complete, "transition" );
+						( self._wrapper || self.element )
+							.animationComplete( complete, "transition" );
 					} else {
 						setTimeout( complete, 0 );
 					}
@@ -340,6 +341,11 @@ $.widget( "mobile.panel", {
 					}
 				},
 				complete = function() {
+
+					// Bail if the panel was closed before the opening animation has completed
+					if ( !self._open ) {
+						return;
+					}
 
 					if ( o.display !== "overlay" ) {
 						self._wrapper.addClass( o.classes.pageContentPrefix + "-open" );
@@ -382,7 +388,8 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( !immediate && $.support.cssTransform3d && !!o.animate ) {
-						self.element.animationComplete( complete, "transition" );
+						( self._wrapper || self.element )
+							.animationComplete( complete, "transition" );
 					} else {
 						setTimeout( complete, 0 );
 					}
