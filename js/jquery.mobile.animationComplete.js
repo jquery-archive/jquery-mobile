@@ -49,6 +49,12 @@ define( [
 	$.fn.animationComplete = function( callback, type, fallbackTime ) {
 		var timer, duration,
 			that = this,
+			eventBinding = function() {
+
+				// Clear the timer so we don't call callback twice
+				clearTimeout( timer );
+				callback.apply( this, arguments );
+			},
 			animationType = ( !type || type === "animation" ) ? "animation" : "transition";
 
 		// Make sure selected type is supported by browser
@@ -76,17 +82,12 @@ define( [
 
 			// Sets up the fallback if event never comes
 			timer = setTimeout( function() {
-				$( that ).off( props[ animationType ].event );
+				$( that ).off( props[ animationType ].event, eventBinding );
 				callback.apply( that );
 			}, duration );
 
 			// Bind the event
-			return $( this ).one( props[ animationType ].event, function() {
-
-				// Clear the timer so we dont call callback twice
-				clearTimeout( timer );
-				callback.call( this, arguments );
-			});
+			return $( this ).one( props[ animationType ].event, eventBinding );
 		} else {
 
 			// CSS animation / transitions not supported
