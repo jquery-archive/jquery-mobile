@@ -204,7 +204,7 @@
                 <div data-demo-html="true">
                     <div class="ui-field-contain">
                         <label for="select-custom-24">Multiple, icon left, long list:</label>
-                        <select name="select-custom-24" id="select-custom-24" data-native-menu="false" multiple="multiple" data-iconpos="left">
+                        <select name="select-custom-24" size="5" id="select-custom-24" data-native-menu="false" multiple="multiple" data-iconpos="left">
                             <option>Choose options</option>
                             <option value="AL">Alabama</option>
                             <option value="AK">Alaska</option>

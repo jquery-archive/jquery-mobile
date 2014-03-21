@@ -49,8 +49,8 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	_handleSelectFocus: function() {
-		this.element.blur();
-		this.button.focus();
+		//this.element.blur();
+		//this.button.focus();
 	},
 
 	_handleKeydown: function( event ) {
@@ -64,15 +64,54 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 
 		if (event.type === "vclick" ||
-				event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE)) {
+				event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
+				event.keyCode === $.mobile.keyCode.SPACE)) {
 
 			this._decideFormat();
 			if ( this.menuType === "overlay" ) {
 				this.button.attr( "href", "#" + this.popupId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
+				this.isOpen = true;
+			} else if( this.element[0].multiple ){
+				this.element.css( {
+					"height": "auto",
+					"max-height": "10000px",
+					"min-height": "0"
+				})
+				var isSoft = ( this.element.height() < 40 );
+				if( !isSoft ){
+					this.element.css({
+						"opacity": "1",
+					});
+					//this.element.attr( "size", "5" );
+					this.element.appendTo( this.button );
+					this.button.innerHeight( this.element.height() );
+					this.element.focus();
+					this._on( this.document, {
+						"click": function(event){
+							if( event.target.nodeName !== "OPTION" ){
+								this.element.css({
+									"opacity":"0",
+									"height":"auto",
+									"max-height": "100%"
+								})
+								this.button.height( "auto" );
+								this._off( this.document, "click" );
+							}
+						}
+					})
+
+				} else {
+					this._destroy();
+				this.options.nativeMenu = true;
+				this._create();
+				}
 			} else {
-				this.button.attr( "href", "#" + this.dialogId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
+				this._destroy();
+				this.options.nativeMenu = true;
+				this._create();
+				//return false;
+				//this.button.attr( "href", "#" + this.dialogId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
 			}
-			this.isOpen = true;
 			// Do not prevent default, so the navigation may have a chance to actually open the chosen format
 		}
 	},
@@ -364,40 +403,15 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	_decideFormat: function() {
-		var self = this,
+		var self = this, options, iconpos,
 			$window = this.window,
 			selfListParent = self.list.parent(),
 			menuHeight = selfListParent.outerHeight(),
-			scrollTop = $window.scrollTop(),
-			btnOffset = self.button.offset().top,
 			screenHeight = $window.height();
 
 		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
-
-			self.menuPage.appendTo( $.mobile.pageContainer ).page();
-			self.menuPageContent = self.menuPage.find( ".ui-content" );
-			self.menuPageClose = self.menuPage.find( ".ui-header a" );
-
-			// prevent the parent page from being removed from the DOM,
-			// otherwise the results of selecting a list item in the dialog
-			// fall into a black hole
-			self.thisPage.unbind( "pagehide.remove" );
-
-			//for WebOS/Opera Mini (set lastscroll using button offset)
-			if ( scrollTop === 0 && btnOffset > screenHeight ) {
-				self.thisPage.one( "pagehide", function() {
-					$( this ).jqmData( "lastScroll", btnOffset );
-				});
-			}
-
-			self.menuPage.one( {
-				pageshow: $.proxy( this, "_focusMenuItem" ),
-				pagehide: $.proxy( this, "close" )
-			});
-
-			self.menuType = "page";
-			self.menuPageContent.append( self.list );
-			self.menuPage.find( "div .ui-title" ).text( self.label.text() );
+			this.menuType = "native";
+			this.options.nativeMenu = true;
 		} else {
 			self.menuType = "overlay";
 
@@ -531,6 +545,8 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	_destroy: function() {
 
 		if ( !this.options.nativeMenu ) {
+			this._off( this.button, "vclick" );
+			this._off( this.select, "focus" );
 			this.close();
 
 			// Restore the tabindex attribute to its original value
