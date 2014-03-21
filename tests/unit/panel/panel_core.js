@@ -371,112 +371,183 @@
 	});
 	asyncTest( "overlay panel should not call getWrapper", function(){
 		expect( 5 );
-		var testPanel = $( "#panel-test-get-wrapper-overlay" );
+		var eventNs = ".overlayPanelShouldNotCallGetWrapper",
+			testPanel = $( "#panel-test-get-wrapper-overlay" );
 
 		testPanel.panel({
 			"display": "overlay"
 		});
-		ok( count === 0, "getWrapper only called once durring create" );
-		testPanel.panel( "open" );
-		testPanel.one( "panelopen", function(){
-			ok( count === 0, "getWrapper not called on open" );
-		});
-		testPanel.panel( "close" );
-		testPanel.one( "panelclose", function(){
-			ok( count === 0, "getWrapper not called on close" );
-			$.mobile.changePage( "#page2" );
-		});
-		$( "body" ).one( "pagechange", function(){
-			ok( count === 0, "getWrapper not called on pagechange" );
-			$.mobile.changePage( "#page1" );
-			$( "body" ).one( "pagechange", function(){
-				ok( count === 0, "getWrapper not called on pagechange back to inital page" );
-				start();
-			});
-		});
+		deepEqual( count, 0, "getWrapper only called once durring create" );
 
+		$.testHelper.detailedEventCascade([
+			function() {
+				testPanel.panel( "open" );
+			},
+			{
+				panelopen: { src: testPanel, event: "panelopen" + eventNs + "1" }
+			},
+			function() {
+				deepEqual( count, 0, "getWrapper not called on open" );
+				testPanel.panel( "close" );
+			},
+			{
+				panelclose: { src: testPanel, event: "panelclose" + eventNs + "2" }
+			},
+			function() {
+				deepEqual( count, 0, "getWrapper not called on close" );
+				$.mobile.changePage( "#page2" );
+			},
+			{
+				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
+			},
+			function() {
+				deepEqual( count, 0, "getWrapper not called on pagechange" );
+				$.mobile.changePage( "#page1" );
+			},
+			{
+				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				deepEqual( count, 0, "getWrapper not called on pagechange back to initial page" );
+				start();
+			}
+		]);
 	});
-	asyncTest( "push should call getWrapper only once on create", function(){
+
+	asyncTest( "push panel should call getWrapper only once on create", function(){
 		expect( 5 );
-		var testPanel = $( "#panel-test-get-wrapper-push" );
+		var eventNs = ".pushPanelShouldCallGetWrapperOnlyOnceOnCreate",
+			testPanel = $( "#panel-test-get-wrapper-push" );
 
 		testPanel.panel({
 			"display": "push"
 		});
 		ok( count === 1, "getWrapper only called once durring create" );
-		testPanel.panel( "open" );
-		testPanel.one( "panelopen", function(){
-			ok( count === 1, "getWrapper not called on open" );
-		});
-		testPanel.panel( "close" );
-		testPanel.one( "panelclose", function(){
-			ok( count === 1, "getWrapper not called on close" );
-			$.mobile.changePage( "#page2" );
-		});
-		$( "body" ).one( "pagechange", function(){
-			ok( count === 1, "getWrapper not called on pagechange" );
-			$.mobile.changePage( "#page1" );
-			$( "body" ).one( "pagechange", function(){
-				ok( count === 1, "getWrapper not called on pagechange back to inital page" );
-				start();
-			});
-		});
 
+		$.testHelper.detailedEventCascade([
+			function() {
+				testPanel.panel( "open" );
+			},
+			{
+				panelopen: { src: testPanel, event: "panelopen" + eventNs + "1" }
+			},
+			function() {
+				deepEqual( count, 1, "getWrapper not called on open" );
+				testPanel.panel( "close" );
+			},
+			{
+				panelclose: { src: testPanel, event: "panelclose" + eventNs + "2" }
+			},
+			function() {
+				deepEqual( count, 1, "getWrapper not called on close" );
+				$.mobile.changePage( "#page2" );
+			},
+			{
+				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
+			},
+			function() {
+				deepEqual( count, 1, "getWrapper not called on pagechange" );
+				$.mobile.changePage( "#page1" );
+			},
+			{
+				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				deepEqual( count, 1, "getWrapper not called on pagechange back to inital page" );
+				start();
+			}
+		]);
 	});
+
 	asyncTest( "reveal panel should call getWrapper only once on create", function(){
 		expect( 5 );
-		var testPanel = $( "#panel-test-get-wrapper" );
+		var eventNs = ".revealPanelShouldCallGetWrapperOnlyOnceOnCreate",
+			testPanel = $( "#panel-test-get-wrapper" );
 
 		testPanel.panel();
-		ok( count === 1, "getWrapper only called once durring create" );
-		testPanel.panel( "open" );
-		testPanel.one( "panelopen", function(){
-			ok( count === 1, "getWrapper not called on open" );
-		});
-		testPanel.panel( "close" );
-		testPanel.one( "panelclose", function(){
-			ok( count === 1, "getWrapper not called on close" );
-			$.mobile.changePage( "#page2" );
-		});
-		$( "body" ).one( "pagechange", function(){
-			ok( count === 1, "getWrapper not called on pagechange" );
-			$.mobile.changePage( "#page1" );
-			$( "body" ).one( "pagechange", function(){
-				ok( count === 1, "getWrapper not called on pagechange back to inital page" );
-				start();
-			});
-		});
+		deepEqual( count, 1, "getWrapper only called once durring create" );
 
-	});
-	asyncTest( "external panel should call panel once on create and on page changes", function(){
-		expect( 5 );
-		var testPanel = $( "#external-panel-getWrapper-test" );
-
-		testPanel.panel();
-		ok( count === 1, "getWrapper only called once durring create" );
-		testPanel.panel( "open" );
-		testPanel.one( "panelopen", function(){
-			ok( count === 1, "getWrapper not called on open" );
-		});
-		testPanel.panel( "close" );
-		testPanel.one( "panelclose", function(){
-			ok( count === 1, "getWrapper not called on close" );
-			$.mobile.changePage( "#page2" );
-			$( "body" ).one( "pageshow", function(){
-				window.setTimeout( function(){
-					ok( count === 2, "getWrapper called on pagechange" );
-				}, 0 );
-
-				$( "body" ).one( "pageshow", function(){
-					window.setTimeout( function(){
-						ok( count === 3, "getWrapper called on pagechange back to inital page" );
-						start();
-					}, 0 );
-				});
+		$.testHelper.detailedEventCascade([
+			function() {
+				testPanel.panel( "open" );
+			},
+			{
+				panelopen: { src: testPanel, event: "panelopen" + eventNs + "1" }
+			},
+			function(){
+				deepEqual( count, 1, "getWrapper not called on open" );
+				testPanel.panel( "close" );
+			},
+			{
+				panelclose: { src: testPanel, event: "panelclose" + eventNs + "2" }
+			},
+			function() {
+				deepEqual( count, 1, "getWrapper not called on close" );
+				$.mobile.changePage( "#page2" );
+			},
+			{
+				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
+			},
+			function() {
+				deepEqual( count, 1, "getWrapper not called on pagechange" );
 				$.mobile.changePage( "#page1" );
-			});
-		});
+			},
+			{
+				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
+			},
+			function() {
+				deepEqual( count, 1, "getWrapper not called on pagechange back to inital page" );
+				start();
+			}
+		]);
+
 	});
+	asyncTest( "external panel should call getWrapper once on create and on page changes",
+		function(){
+			expect( 5 );
+			var eventNs = ".externalPanelShouldCallGetWrapperOnceOnCreateAndOnPageChanges",
+				testPanel = $( "#external-panel-getWrapper-test" );
+
+			testPanel.panel();
+			deepEqual( count, 1, "getWrapper only called once durring create" );
+
+			$.testHelper.detailedEventCascade([
+				function() {
+					testPanel.panel( "open" );
+				},
+				{
+					panelopen: { src: testPanel, event: "panelopen" }
+				},
+				function() {
+					deepEqual( count, 1, "getWrapper not called on open" );
+					testPanel.panel( "close" );
+				},
+				{
+					panelclose: { src: testPanel, event: "panelclose" }
+				},
+				function() {
+					deepEqual( count, 1, "getWrapper not called on close" );
+					$.mobile.changePage( "#page2" );
+				},
+				{
+					pageshow: { src: $( "body" ), event: "pagecontainershow" }
+				},
+				function() {
+					window.setTimeout( function() {
+						deepEqual( count, 2, "getWrapper called on pagechange" );
+					}, 0 );
+
+					$( "body" ).one( "pagecontainershow", function() {
+						window.setTimeout( function() {
+							deepEqual( count, 3,
+								"getWrapper called on pagechange back to inital page" );
+							start();
+						}, 0 );
+					});
+					$.mobile.changePage( "#page1" );
+				}
+			]);
+		});
 
 	asyncTest( "external panel: test classes during A>B>A transition", function() {
 		expect( 16 );
