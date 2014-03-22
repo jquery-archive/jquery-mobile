@@ -237,4 +237,5 @@ Lou Franco <lfranco@greenwave-solutions.com>
 Vasu Bhardwaj <voodoorapter014@gmail.com>
 Richard McDaniel <rm0026@uah.edu>
 Timothy Elliott <tle@holymonkey.com>
-
+Florian Böhle <boehle@fzi.de>
+Marcus Krahl <marcuskrahl@googlemail.com>
