@@ -27,6 +27,10 @@ $.extend( $.Widget.prototype, {
 			for ( option in this.options ) {
 				value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
 
+				if( value == null && option === "disabled" ) {
+					value = this.element.is( "[disabled]" );
+					console.log( value );
+				}
 				if ( value != null ) {
 					options[ option ] = value;
 				}

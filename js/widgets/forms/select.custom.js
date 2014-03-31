@@ -58,6 +58,25 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		this._handleButtonVclickKeydown( event );
 	},
 
+	_decideFormat: function() {
+		var self = this,
+			$window = this.window,
+			selfListParent = self.list.parent(),
+			menuHeight = selfListParent.outerHeight(),
+			screenHeight = $window.height();
+
+		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
+			this.menuType = "native";
+			this._destroy();
+			this.options.nativeMenu = true;
+			this._create();
+		} else {
+			self.menuType = "overlay";
+
+			self.listbox.one( { popupafteropen: $.proxy( this, "_focusMenuItem" ) } );
+		}
+	},
+
 	_handleButtonVclickKeydown: function( event ) {
 		if ( this.options.disabled || this.isOpen ) {
 			return;
@@ -67,50 +86,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
 				event.keyCode === $.mobile.keyCode.SPACE)) {
 
-			this._decideFormat();
 			if ( this.menuType === "overlay" ) {
 				this.button.attr( "href", "#" + this.popupId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "popup" );
 				this.isOpen = true;
-			} else if( this.element[0].multiple ){
-				this.element.css( {
-					"height": "auto",
-					"max-height": "10000px",
-					"min-height": "0"
-				})
-				var isSoft = ( this.element.height() < 40 );
-				if( !isSoft ){
-					this.element.css({
-						"opacity": "1",
-					});
-					//this.element.attr( "size", "5" );
-					this.element.appendTo( this.button );
-					this.button.innerHeight( this.element.height() );
-					this.element.focus();
-					this._on( this.document, {
-						"click": function(event){
-							if( event.target.nodeName !== "OPTION" ){
-								this.element.css({
-									"opacity":"0",
-									"height":"auto",
-									"max-height": "100%"
-								})
-								this.button.height( "auto" );
-								this._off( this.document, "click" );
-							}
-						}
-					})
-
-				} else {
-					this._destroy();
-				this.options.nativeMenu = true;
-				this._create();
-				}
-			} else {
-				this._destroy();
-				this.options.nativeMenu = true;
-				this._create();
-				//return false;
-				//this.button.attr( "href", "#" + this.dialogId ).attr( "data-" + ( $.mobile.ns || "" ) + "rel", "dialog" );
 			}
 			// Do not prevent default, so the navigation may have a chance to actually open the chosen format
 		}
@@ -148,22 +126,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 	},
 
-	_handleMenuPageHide: function() {
-		// TODO centralize page removal binding / handling in the page plugin.
-		// Suggestion from @jblas to do refcounting
-		//
-		// TODO extremely confusing dependency on the open method where the pagehide.remove
-		// bindings are stripped to prevent the parent page from disappearing. The way
-		// we're keeping pages in the DOM right now sucks
-		//
-		// rebind the page remove that was unbound in the open function
-		// to allow for the parent page removal from actions other than the use
-		// of a dialog sized custom select
-		//
-		// doing this here provides for the back button on the custom select dialog
-		this.thisPage.page( "bindRemove" );
-	},
-
 	_handleHeaderCloseClick: function() {
 		if ( this.menuType === "overlay" ) {
 			this.close();
@@ -174,13 +136,20 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	build: function() {
 		var selectId, popupId, dialogId, label, thisPage, isMultiple, menuId,
 			themeAttr, overlayTheme, overlayThemeAttr, dividerThemeAttr,
-			menuPage, listbox, list, header, headerTitle, menuPageContent,
-			menuPageClose, headerClose, self,
+			listbox, list, header, headerTitle, headerClose, self,
 			o = this.options;
 
 		if ( o.nativeMenu ) {
 			return this._super();
 		}
+
+		this._on( this.document, {
+			"orientationchange": "_decideFormat",
+			"throttledresize": "_decideFormat",
+		});
+		this._on( this.window, {
+			"load": "_decideFormat"
+		});
 
 		self = this;
 		selectId = this.selectId;
@@ -195,15 +164,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		overlayThemeAttr = overlayTheme ? ( " data-" + $.mobile.ns +
 			"overlay-theme='" + overlayTheme + "'" ) : "";
 		dividerThemeAttr = ( o.dividerTheme && isMultiple ) ? ( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
-		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogId + "'" + themeAttr + overlayThemeAttr + ">" +
-			"<div data-" + $.mobile.ns + "role='header'>" +
-			"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
-			"</div>"+
-			"<div data-" + $.mobile.ns + "role='content'></div>"+
-			"</div>" );
 		listbox = $( "<div" + themeAttr + overlayThemeAttr + " id='" + popupId +
 				"' class='ui-selectmenu'></div>" )
-			.insertAfter( this.select )
+			.insertAfter( this.element )
 			.popup();
 		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" ).appendTo( listbox );
 		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'></div>" ).prependTo( listbox );
@@ -224,7 +187,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			popupId: popupId,
 			dialogId: dialogId,
 			thisPage: thisPage,
-			menuPage: menuPage,
 			label: label,
 			isMultiple: isMultiple,
 			theme: o.theme,
@@ -233,8 +195,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			header: header,
 			headerTitle: headerTitle,
 			headerClose: headerClose,
-			menuPageContent: menuPageContent,
-			menuPageClose: menuPageClose,
 			placeholder: ""
 		});
 
@@ -247,10 +207,10 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			// originally had a tabindex attribute, whereas false indicates that
 			// we have checked the select for such an attribute, and have found
 			// none present.
-			this._origTabIndex = ( this.select[ 0 ].getAttribute( "tabindex" ) === null ) ? false : this.select.attr( "tabindex" );
+			this._origTabIndex = ( this.element[ 0 ].getAttribute( "tabindex" ) === null ) ? false : this.element.attr( "tabindex" );
 		}
-		this.select.attr( "tabindex", "-1" );
-		this._on( this.select, { focus : "_handleSelectFocus" } );
+		this.element.attr( "tabindex", "-1" );
+		this._on( this.element, { focus : "_handleSelectFocus" } );
 
 		// Button events
 		this._on( this.button, {
@@ -300,10 +260,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				event.preventDefault();
 			});
 
-		// button refocus ensures proper height calculation
-		// by removing the inline style and ensuring page inclusion
-		this._on( this.menuPage, { pagehide: "_handleMenuPageHide" } );
-
 		// Events on the popup
 		this._on( this.listbox, { popupafterclose: "close" } );
 
@@ -311,7 +267,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		if ( this.isMultiple ) {
 			this._on( this.headerClose, { click: "_handleHeaderCloseClick" } );
 		}
-
+		this._decideFormat();
 		return this;
 	},
 
@@ -327,6 +283,14 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 	selected: function() {
 		return this._selectOptions().filter( ":selected:not( :jqmData(placeholder='true') )" );
+	},
+
+	_focusButton : function() {
+		var self = this;
+
+		setTimeout( function() {
+			self.button.focus();
+		}, 40);
 	},
 
 	refresh: function( force ) {
@@ -378,12 +342,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		var self = this;
 
-		if ( self.menuType === "page" ) {
-			self.menuPage.dialog( "close" );
-			self.list.appendTo( self.listbox );
-		} else {
-			self.listbox.popup( "close" );
-		}
+		self.listbox.popup( "close" );
 
 		self._focusButton();
 		// allow the dialog to be closed again
@@ -400,23 +359,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			selector = this.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-btn" );
 		}
 		selector.first().focus();
-	},
-
-	_decideFormat: function() {
-		var self = this, options, iconpos,
-			$window = this.window,
-			selfListParent = self.list.parent(),
-			menuHeight = selfListParent.outerHeight(),
-			screenHeight = $window.height();
-
-		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
-			this.menuType = "native";
-			this.options.nativeMenu = true;
-		} else {
-			self.menuType = "overlay";
-
-			self.listbox.one( { popupafteropen: $.proxy( this, "_focusMenuItem" ) } );
-		}
 	},
 
 	_buildList: function() {
@@ -441,7 +383,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
 		$options = this._selectOptions();
 		numOptions = $options.length;
-		select = this.select[ 0 ];
+		select = this.element[ 0 ];
 
 		for ( i = 0; i < numOptions;i++, isPlaceholderItem = false) {
 			option = $options[i];
@@ -546,15 +488,15 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		if ( !this.options.nativeMenu ) {
 			this._off( this.button, "vclick" );
-			this._off( this.select, "focus" );
+			this._off( this.element, "focus" );
 			this.close();
 
 			// Restore the tabindex attribute to its original value
 			if ( this._origTabIndex !== undefined ) {
 				if ( this._origTabIndex !== false ) {
-					this.select.attr( "tabindex", this._origTabIndex );
+					this.element.attr( "tabindex", this._origTabIndex );
 				} else {
-					this.select.removeAttr( "tabindex" );
+					this.element.removeAttr( "tabindex" );
 				}
 			}
 
@@ -566,8 +508,6 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			// Remove the popup
 			this.listbox.remove();
 
-			// Remove the dialog
-			this.menuPage.remove();
 		}
 
 		// Chain up

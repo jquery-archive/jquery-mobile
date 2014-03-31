@@ -17,21 +17,23 @@ $.widget( "mobile.selectmenu", $.extend( {
 		icon: "carat-d",
 		iconpos: "right",
 		inline: false,
+		enhanced: false,
 		corners: true,
 		shadow: true,
-		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
-		overlayTheme: null,
-		dividerTheme: null,
 		hidePlaceholderMenuItems: true,
-		closeText: "Close",
-		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		mini: false
 	},
 
 	_button: function() {
-		return $( "<div/>" );
+		var iconpos = this.options.icon ? this.options.iconpos : false;
+		return $( "<div/>" ).attr( "id", this.buttonId )
+			.addClass( "ui-btn" +
+				( this.options.icon ? ( " ui-icon-" + this.options.icon + " ui-btn-icon-" + iconpos ) :	"" ) + /* TODO: Remove in 1.5. */
+				( this.options.theme ? " ui-btn-" + this.options.theme : "" ) +
+				( this.options.corners ? " ui-corner-all" : "" ) +
+				( this.options.shadow ? " ui-shadow" : "" ) );;
 	},
 
 	_setDisabled: function( value ) {
@@ -40,47 +42,84 @@ $.widget( "mobile.selectmenu", $.extend( {
 		return this._setOption( "disabled", value );
 	},
 
-	_focusButton : function() {
-		var self = this;
-
-		setTimeout( function() {
-			self.button.focus();
-		}, 40);
+	_selectOptions: function() {
+		return this.element.find( "option" );
 	},
 
-	_selectOptions: function() {
-		return this.select.find( "option" );
+	// Checks if the device is using a softkeyboard to display multiple selects
+	// multiple selects on desktop are at least 4 selections high but on mobile are the same as
+	// a dropdown select
+	_isSoft: function() {
+		var testElement = this.element.clone();
+
+		testElement.css({
+			"height": "auto",
+			"max-height": "10000px",
+			"min-height": "0",
+			"position": "absolute",
+			"top":"-900000px"
+		});
+		$( "body" ).append( testElement );
+		this.isSoft = ( testElement.height() < 40 );
+		testElement.remove();
+		return this;
+	},
+
+	_makeMultiple: function() {
+		if( !this.isSoft ) {
+			this.isOpen = false;
+			this._on( this.button, {
+				"click": "_toggleMultiple"
+			});
+		}
+		this.buttonCount = $( "<span>" )
+			.addClass( "ui-li-count ui-body-inherit" )
+			.hide()
+			.appendTo( this.button.addClass( "ui-li-has-count" ) );
+	},
+	_toggleMultiple: function( event ) {
+		if ( this.options.disabled || this.isOpen ) {
+			return;
+		}
+		if (event.type === "click" ||
+			event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER ||
+			event.keyCode === $.mobile.keyCode.SPACE)) {
+				this.isOpen = true;
+				this.element.css({
+					"opacity": "1"
+				});
+				this.element.css({
+					"height": "auto",
+					"max-height": "10000px",
+					"min-height": "0"
+				});
+				this.button.innerHeight( this.element.height() );
+				this.element.focus();
+				this._on( this.document, {
+					"click": "_closeMultiple",
+				});
+			}
+	},
+
+	_closeMultiple: function() {
+		if( event.target.nodeName !== "OPTION" ){
+			this.isOpen = false;
+			this.element.css({
+				"opacity":"0",
+				"height":"auto",
+				"max-height": "100%"
+			});
+			this.button.height( "auto" );
+			this._off( this.document, "click" );
+		}
 	},
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function() {
-		var inline = this.options.inline || this.element.jqmData( "inline" ),
-			mini = this.options.mini || this.element.jqmData( "mini" ),
-			classes = "";
-		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-		/* if ( $el[0].className.length ) {
-			classes = $el[0].className;
-		} */
-		if ( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
-			classes = " ui-btn-left";
-		}
-
-		if (  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
-			classes = " ui-btn-right";
-		}
-
-		if ( inline ) {
-			classes += " ui-btn-inline";
-		}
-		if ( mini ) {
-			classes += " ui-mini";
-		}
-
-		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
-		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
+		this.selectId  = this.element.attr( "id" ) || ( "select-" + this.uuid );
 		this.buttonId = this.selectId + "-button";
 		this.label = $( "label[for='"+ this.selectId +"']" );
-		this.isMultiple = this.select[ 0 ].multiple;
+		this.isMultiple = this.element[0].multiple;
 	},
 
 	_destroy: function() {
@@ -94,122 +133,123 @@ $.widget( "mobile.selectmenu", $.extend( {
 		}
 	},
 
+	_enhance: function(){
+		var classes = "";
+
+		if ( this.options.inline ) {
+			classes += " ui-btn-inline";
+		}
+		if ( this.options.mini ) {
+			classes += " ui-mini";
+		}
+
+		this.element.wrap( "<div class='ui-select" + classes + "'>" );
+		this.button = this._button().insertBefore( this.element );
+
+		this.setButtonText();
+
+		// Disable if specified
+		if ( this.options.disabled ) {
+			this.disable();
+		}
+
+	},
+
 	_create: function() {
 		this._preExtension();
 
-		this.button = this._button();
-
-		var self = this,
-
-			options = this.options,
-
-			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
-
-			button = this.button
-				.insertBefore( this.select )
-				.attr( "id", this.buttonId )
-				.addClass( "ui-btn" +
-					( options.icon ? ( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos +
-					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
-					( options.theme ? " ui-btn-" + options.theme : "" ) +
-					( options.corners ? " ui-corner-all" : "" ) +
-					( options.shadow ? " ui-shadow" : "" ) );
-
-		this.setButtonText();
+		if( !this.options.enhanced ) {
+			this._enhance();
+		}
 
 		// Opera does not properly support opacity on select elements
 		// In Mini, it hides the element, but not its text
 		// On the desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
-		if ( options.nativeMenu && window.opera && window.opera.version ) {
-			button.addClass( "ui-select-nativeonly" );
+		if ( this.options.nativeMenu && window.opera && window.opera.version ) {
+			this.button.addClass( "ui-select-nativeonly" );
 		}
-
-		// Add counter for multi selects
-		if ( this.isMultiple ) {
-			this.buttonCount = $( "<span>" )
-				.addClass( "ui-li-count ui-body-inherit" )
-				.hide()
-				.appendTo( button.addClass( "ui-li-has-count" ) );
-		}
-
-		// Disable if specified
-		if ( options.disabled || this.element.attr( "disabled" )) {
-			this.disable();
-		}
-
-		// Events on native select
-		this.select.change(function() {
-			self.refresh();
-
-			if ( !!options.nativeMenu ) {
-				this.blur();
-			}
-		});
 
 		this._handleFormReset();
 
-		this._on( this.button, {
-			keydown: "_handleKeydown"
-		});
-
 		this.build();
+		if( this.element[0].multiple ){
+			this._on( this.window, {
+				"load": function(){
+						this._isSoft();
+						this._makeMultiple();
+				}
+			});
+		}
 	},
 
-	build: function() {
-		var self = this;
+	_handleSelectOut: function() {
+		this.button.trigger( "vmouseout" ).removeClass( $.mobile.activeBtnClass );
+	},
 
-		this.select
-			.appendTo( self.button )
-			.bind( "vmousedown", function() {
-				// Add active class to button
-				self.button.addClass( $.mobile.activeBtnClass );
-			})
-			.bind( "focus", function() {
-				self.button.addClass( $.mobile.focusClass );
-			})
-			.bind( "blur", function() {
-				self.button.removeClass( $.mobile.focusClass );
-			})
-			.bind( "focus vmouseover", function() {
-				self.button.trigger( "vmouseover" );
-			})
-			.bind( "vmousemove", function() {
-				// Remove active class on scroll/touchmove
-				self.button.removeClass( $.mobile.activeBtnClass );
-			})
-			.bind( "change blur vmouseout", function() {
-				self.button.trigger( "vmouseout" )
-					.removeClass( $.mobile.activeBtnClass );
-			});
-
-		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
-		self.button.bind( "vmousedown", function() {
-			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
-			}
-		});
-		self.label.bind( "click focus", function() {
-			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
-			}
-		});
-		self.select.bind( "focus", function() {
-			if ( self.options.preventFocusZoom ) {
-					$.mobile.zoom.disable( true );
-			}
-		});
-		self.button.bind( "mouseup", function() {
-			if ( self.options.preventFocusZoom ) {
+	_preventFocusZoom: function( event ) {
+		if ( this.options.preventFocusZoom ) {
+			if( event.type === "mouseup" ){
 				setTimeout(function() {
 					$.mobile.zoom.enable( true );
 				}, 0 );
-			}
-		});
-		self.select.bind( "blur", function() {
-			if ( self.options.preventFocusZoom ) {
+				return;
+			} else if ( event.type === "blur" ) {
 				$.mobile.zoom.enable( true );
+				return;
 			}
+
+			$.mobile.zoom.disable( true );
+		}
+	},
+
+	build: function() {
+
+		this.element.appendTo( this.button );
+
+		this._on({
+			"vmousedown": function(){
+				// Add active class to button
+				this.button.addClass( $.mobile.activeBtnClass );
+			},
+			"focus": function( event ) {
+				this.button.addClass( $.mobile.focusClass );
+				this.button.trigger( "vmouseover" );
+				this._preventFocusZoom( event );
+			},
+			"vmouseover": function(){
+				this.button.trigger( "vmouseover" );
+			},
+			"blur": function( event ) {
+				this.button.removeClass( $.mobile.focusClass );
+				this._handleSelectOut();
+				this._preventFocusZoom( event );
+				if( this.isOpen ){
+					this._closeMultiple();
+				}
+			},
+			"vmousemove": function() {
+				// Remove active class on scroll/touchmove
+				this.button.removeClass( $.mobile.activeBtnClass );
+			},
+			"change": function() {
+				this.refresh();
+				if ( this.options.nativeMenu && !this.isMultiple ) {
+					this.element.blur();
+				}
+				this._handleSelectOut();
+			},
+			"vmouseout": "_handleSelectOut"
+		});
+		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
+		this._on( this.button, {
+			"vmousedown": "_preventFocusZoom",
+			"vmouseup": "_preventFocusZoom",
+			"keydown": "_handleKeydown"
+		});
+		this._on( this.label, {
+			"click": "_preventFocusZoom",
+			"focus": "_preventFocusZoom"
 		});
 
 	},
@@ -230,9 +270,9 @@ $.widget( "mobile.selectmenu", $.extend( {
 		var self = this,
 			selected = this.selected(),
 			text = this.placeholder,
-			span = $( document.createElement( "span" ) );
+			span = $( "<span/>" );
 
-		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( (function() {
+		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend(function() {
 			if ( selected.length ) {
 				text = selected.map(function() {
 					return $( this ).text();
@@ -250,11 +290,8 @@ $.widget( "mobile.selectmenu", $.extend( {
 			}
 
 			// TODO possibly aggregate multiple select option classes
-			return span
-				.addClass( self.select.attr( "class" ) )
-				.addClass( selected.attr( "class" ) )
-				.removeClass( "ui-screen-hidden" );
-		})());
+			return span;
+		});
 	},
 
 	setButtonCount: function() {
@@ -266,8 +303,11 @@ $.widget( "mobile.selectmenu", $.extend( {
 		}
 	},
 
-	_handleKeydown: function( /* event */ ) {
+	_handleKeydown: function( event ) {
 		this._delay( "_refreshButton" );
+		if ( this.isMultiple ) {
+			this._toggleMultiple( event );
+		}
 	},
 
 	_reset: function() {
