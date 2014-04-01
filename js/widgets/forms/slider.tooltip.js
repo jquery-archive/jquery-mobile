@@ -93,7 +93,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 		if ( o.popupEnabled && this._popup ) {
 			this._positionPopup();
 			this._popup.html( newValue );
-		} 
+		}
 
 		if ( o.showValue && !this.options.mini ) {
 			this.handle.html( newValue );
