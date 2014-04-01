@@ -110,6 +110,8 @@
 		var slider = $("#tooltip-test-both");
 		var sliderHandle = slider.siblings(".ui-slider-track").children(".ui-slider-handle");
 
+		slider.val( "9" ).blur();
+
 		ok( slider.val() === sliderHandle.text(), "slider text should match handle text");
 	});
 })( jQuery );
