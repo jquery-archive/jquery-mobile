@@ -105,4 +105,11 @@
 		});
 		slider.trigger( "mouseup" );
 	});
+
+	test( "slider tooltip & button values should match after input value changes", function() {
+		var slider = $("#tooltip-test-both");
+		var sliderHandle = slider.siblings(".ui-slider-track").children(".ui-slider-handle");
+
+		ok( slider.val() === sliderHandle.text(), "slider text should match handle text");
+	});
 })( jQuery );
