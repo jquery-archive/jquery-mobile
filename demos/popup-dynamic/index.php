@@ -34,13 +34,13 @@
 					// Set height and width attribute of the image
 					$( this ).attr({ "height": height, "width": width });
 					// Open the popup
-					$( "#popup-" + short ).popup( "open" );
+					$( "#popup-" + short ).enhanceWithin().popup().popup( "open" );
 					// Clear the fallback
 					clearTimeout( fallback );
 				});
 				// Fallback in case the browser doesn't fire a load event
 				var fallback = setTimeout(function() {
-					$( "#popup-" + short ).popup( "open" );
+					$( "#popup-" + short ).enhanceWithin().popup().popup( "open" );
 				}, 2000);
 			});
 
