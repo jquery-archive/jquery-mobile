@@ -38,15 +38,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 				return input.jqmData( dataAttr ) ||
 					input.closest( "form, fieldset" ).jqmData( dataAttr );
 			},
-			// NOTE: Windows Phone could not find the label through a selector
-			// filter works though.
-			parentLabel = input.closest( "label" ),
-			label = parentLabel.length ? parentLabel :
-				input
-					.closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" )
-					.find( "label" )
-					.filter( "[for='" + escapeId( input[0].id ) + "']" )
-					.first(),
+			label = this._findLabel(),
 			inputtype = input[0].type,
 			checkedClass = "ui-" + inputtype + "-on",
 			uncheckedClass = "ui-" + inputtype + "-off";
@@ -59,7 +51,8 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			this.options.disabled = true;
 		}
 
-		o.iconpos = inheritAttr( input, "iconpos" ) || label.attr( "data-" + $.mobile.ns + "iconpos" ) || o.iconpos,
+		o.iconpos = inheritAttr( input, "iconpos" ) ||
+			label.element.attr( "data-" + $.mobile.ns + "iconpos" ) || o.iconpos,
 
 		// Establish options
 		o.mini = inheritAttr( input, "mini" ) || o.mini;
@@ -67,8 +60,8 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		// Expose for other methods
 		$.extend( this, {
 			input: input,
-			label: label,
-			parentLabel: parentLabel,
+			label: label.element,
+			labelIsParent: label.isParent,
 			inputtype: inputtype,
 			checkedClass: checkedClass,
 			uncheckedClass: uncheckedClass
@@ -78,7 +71,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			this._enhance();
 		}
 
-		this._on( label, {
+		this._on( label.element, {
 			vmouseover: "_handleLabelVMouseOver",
 			vclick: "_handleLabelVClick"
 		});
@@ -94,10 +87,29 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		this.refresh();
 	},
 
+	_findLabel: function() {
+		var input = this.element,
+			parentLabel = input.closest( "label" ),
+
+			// NOTE: Windows Phone could not find the label through a selector
+			// filter works though.
+			label = parentLabel.length ? parentLabel :
+				input
+					.closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" )
+					.find( "label" )
+					.filter( "[for='" + escapeId( input[0].id ) + "']" )
+					.first();
+
+		return {
+			element: label,
+			isParent: ( parentLabel.length > 0 )
+		};
+	},
+
 	_enhance: function() {
 		this.label.addClass( "ui-btn ui-corner-all");
 
-		if ( this.parentLabel.length > 0 ) {
+		if ( this.labelIsParent ) {
 			this.input.add( this.label ).wrapAll( this._wrapper() );
 		} else {
 			//this.element.replaceWith( this.input.add( this.label ).wrapAll( this._wrapper() ) );
