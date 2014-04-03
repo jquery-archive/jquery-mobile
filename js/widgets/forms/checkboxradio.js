@@ -88,21 +88,28 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	},
 
 	_findLabel: function() {
-		var input = this.element,
-			parentLabel = input.closest( "label" ),
+		var parentLabel, label, isParent,
+			input = this.element,
+			labelsList = input[ 0 ].labels;
+
+		if( labelsList && labelsList.length > 0 ) {
+			label = $( labelsList[ 0 ] );
+			isParent = $.contains( label[ 0 ], input[ 0 ] );
+		} else {
+			parentLabel = input.closest( "label" );
+			isParent = ( parentLabel.length > 0 );
 
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
-			label = parentLabel.length ? parentLabel :
-				input
-					.closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" )
-					.find( "label" )
-					.filter( "[for='" + escapeId( input[0].id ) + "']" )
+			label = isParent ? parentLabel :
+				$( this.document[ 0 ].getElementsByTagName( "label" ) )
+					.filter( "[for='" + escapeId( input[ 0 ].id ) + "']" )
 					.first();
+		}
 
 		return {
 			element: label,
-			isParent: ( parentLabel.length > 0 )
+			isParent: isParent
 		};
 	},
 
