@@ -10,6 +10,7 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
+	"../../vmouse",
 	"../../navigation/path",
 	"../../core",
 	"../../widget",
