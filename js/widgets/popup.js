@@ -299,7 +299,9 @@ $.widget( "mobile.popup", {
 			target = $( targetElement );
 			if ( 0 === target.parents().filter( ui.container[ 0 ] ).length ) {
 				$( this.document[ 0 ].activeElement ).one( "focus", function(/* theEvent */) {
-					target.blur();
+					if ( targetElement.nodeName.toLowerCase() !== "body" ) {
+				            target.blur();
+				        }
 				});
 				ui.focusElement.focus();
 				theEvent.preventDefault();
