@@ -230,7 +230,6 @@ $.widget( "mobile.panel", {
 				});
 			}
 			this.toggle();
-			return false;
 		}
 	},
 
