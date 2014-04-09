@@ -68,14 +68,11 @@ $.widget( "mobile.button", {
 			for ( ; index < classes.length ; index++ ) {
 				if ( classes[ index ] === "ui-corner-all" ) {
 					opt.corners = true;
-				}
-				if ( classes[ index ] === "ui-shadow" ) {
+				} else if ( classes[ index ] === "ui-shadow" ) {
 					opt.shadow = true;
-				}
-				if ( classes[ index ] === "ui-btn-inline" ) {
+				} else if ( classes[ index ] === "ui-btn-inline" ) {
 					opt.inline = true;
-				}
-				if ( classes[ index ] === "ui-mini" ) {
+				} else if ( classes[ index ] === "ui-mini" ) {
 					opt.mini = true;
 				}
 			}
