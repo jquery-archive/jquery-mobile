@@ -15,7 +15,7 @@
 <body>
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	    <div data-role="header" data-position="fixed" data-fullscreen="true">
+	    <div data-role="header" data-position="fixed">
 			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 	        <h1>Fixed header</h1>
 	    </div><!-- /header -->
