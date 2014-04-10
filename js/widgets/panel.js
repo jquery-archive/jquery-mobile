@@ -144,14 +144,6 @@ $.widget( "mobile.panel", {
 		this.element.addClass( this._getPanelClasses() );
 	},
 
-	_handleCloseClickAndEatEvent: function( event ) {
-		if ( !event.isDefaultPrevented() ) {
-			event.preventDefault();
-			this.close();
-			return false;
-		}
-	},
-
 	_handleCloseClick: function( event ) {
 		if ( !event.isDefaultPrevented() ) {
 			this.close();
@@ -238,7 +230,6 @@ $.widget( "mobile.panel", {
 				});
 			}
 			this.toggle();
-			return false;
 		}
 	},
 
