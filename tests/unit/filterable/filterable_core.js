@@ -27,4 +27,19 @@ test( "Filterable input prevents default on ENTER", function() {
 	deepEqual( event.isDefaultPrevented(), true, "Subsequent keypress default is also prevented" );
 });
 
+asyncTest( "filterReveal filterable shows all items when all items match filter text", function() {
+	var input = $( "#test-filter-reveal-show-all-input" ),
+		list = $( "#test-filter-reveal-show-all-list" );
+
+	expect( 1 );
+
+	input.val( "Test" ).trigger( "change" );
+
+	setTimeout( function() {
+		deepEqual( list.children( ".ui-screen-hidden" ).length, 0,
+			"All items visible when search value matches them all" );
+		start();
+	}, 500 );
+});
+
 })( jQuery );
