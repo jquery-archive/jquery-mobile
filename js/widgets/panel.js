@@ -398,7 +398,7 @@ $.widget( "mobile.panel", {
 
 					if ( self._modal ) {
 						self._modal.removeClass( self._modalOpenClasses )
-						.height('');
+						.height("");
 					}
 				},
 				complete = function() {
