@@ -388,7 +388,9 @@ $.widget( "mobile.panel", {
 					}
 
 					if ( self._modal ) {
-						self._modal.removeClass( self._modalOpenClasses );
+						self._modal
+							.removeClass( self._modalOpenClasses )
+							.height( "" );
 					}
 				},
 				complete = function() {
