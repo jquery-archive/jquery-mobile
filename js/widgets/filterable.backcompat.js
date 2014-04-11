@@ -6,7 +6,6 @@
 
 define( [
 	"jquery",
-	"../data",
 	"./listview",
 	"./filterable" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -197,9 +196,11 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 // that a listview with data-filter="true" will be filterable even if you just instantiate a
 // listview on it. The extension below ensures that this continues to happen in 1.4.x.
 $.widget( "mobile.listview", $.mobile.listview, {
+	options: {
+		filter: false
+	},
 	_create: function() {
-		if ( $.mobile.getAttribute( this.element[ 0 ], "filter" ) === true &&
-				this.widgetFullName === "mobile-listview" &&
+		if ( this.options.filter === true &&
 				!this.element.data( "mobile-filterable" ) ) {
 			this.element.filterable();
 		}
