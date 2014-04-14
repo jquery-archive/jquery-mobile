@@ -148,7 +148,7 @@ module.exports = function( Release ) {
 		},
 
 		_complete: function( done ) {
-			Release._walk([
+			Release.walk([
 				Release._section( "publishing demos" ),
 				Release._publishDemos,
 				Release._section( "publishing zip files" ),
