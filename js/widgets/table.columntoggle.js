@@ -85,9 +85,10 @@ $.widget( "mobile.table", $.mobile.table, {
 		this.headers.not( "td" ).each( function() {
 			var header = $( this ),
 				priority = $.mobile.getAttribute( this, "priority" ),
-				cells = header.add( header.jqmData( "cells" ) );
+				cells;
 
 			if ( priority ) {
+				cells = header.add( header.jqmData( "cells" ) );
 				cells.addClass( opts.classes.priorityPrefix + priority );
 
 				( keep ? inputs.eq( checkboxIndex++ ) :
