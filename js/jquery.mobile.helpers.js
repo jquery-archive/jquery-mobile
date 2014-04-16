@@ -172,7 +172,13 @@ define( [ "jquery", "./jquery.mobile.ns", "jquery-ui/jquery.ui.core" ], function
 			height = compensateToolbars( page,
 				( typeof height === "number" ) ? height : $.mobile.getScreenHeight() );
 
-			page.css( "min-height", height - ( pageOuterHeight - pageHeight ) );
+			// Remove any previous min-height setting
+			page.css( "min-height", "" );
+
+			// Set the minimum height only if the height as determined by CSS is insufficient
+			if ( page.height() < height ) {
+				page.css( "min-height", height - ( pageOuterHeight - pageHeight ) );
+			}
 		},
 
 		loading: function() {
