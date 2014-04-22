@@ -83,14 +83,17 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		// create the hide/show toggles
 		this.headers.not( "td" ).each( function() {
-			var header = $( this ),
+			var input,
+				header = $( this ),
 				priority = $.mobile.getAttribute( this, "priority" ),
 				cells = header.add( header.jqmData( "cells" ) );
 
 			if ( priority ) {
 				cells.addClass( opts.classes.priorityPrefix + priority );
 
-				( keep ? inputs.eq( checkboxIndex++ ) :
+				// Make sure the (new?) checkbox is associated with its header via .jqmData() and
+				// that, vice versa, the header is also associated with the checkbox
+				input = ( keep ? inputs.eq( checkboxIndex++ ) :
 					$("<label><input type='checkbox' checked />" +
 						( header.children( "abbr" ).first().attr( "title" ) ||
 							header.text() ) +
@@ -100,7 +103,13 @@ $.widget( "mobile.table", $.mobile.table, {
 						.checkboxradio( {
 							theme: opts.columnPopupTheme
 						}) )
-					.jqmData( "cells", cells );
+
+						// Associate the header with the checkbox
+						.jqmData( "header", header )
+						.jqmData( "cells", cells );
+
+				// Associate the checkbox with the header
+				header.jqmData( "input", input );
 			}
 		});
 
@@ -174,9 +183,33 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_refresh: function( create ) {
+		var headers, hiddenColumns, index;
+
+		// Calling _super() here updates this.headers
 		this._super( create );
 
 		if ( !create && this.options.mode === "columntoggle" ) {
+			headers = this.headers;
+			hiddenColumns = [];
+
+			// Find the index of the column header associated with each old checkbox among the
+			// post-refresh headers and, if the header is still there, make sure the corresponding
+			// column will be hidden if the pre-refresh checkbox indicates that the column is
+			// hidden by recording its index in the array of hidden columns.
+			this._menu.find( "input" ).each( function() {
+				var input = $( this ),
+					header = input.jqmData( "header" ),
+					index = headers.index( header[ 0 ] );
+
+				if ( index > -1 && !input.prop( "checked" ) ) {
+
+					// The column header associated with /this/ checkbox is still present in the
+					// post-refresh table and the checkbox is not checked, so the column associated
+					// with this column header is currently hidden. Let's record that.
+					hiddenColumns.push( index );
+				}
+			});
+
 			// columns not being replaced must be cleared from input toggle-locks
 			this._unlockCells( this.element.find( ".ui-table-cell-hidden, " +
 				".ui-table-cell-visible" ) );
@@ -184,8 +217,14 @@ $.widget( "mobile.table", $.mobile.table, {
 			// update columntoggles and cells
 			this._addToggles( this._menu, create );
 
-			// check/uncheck
-			this._setToggleState();
+			// At this point all columns are visible, so uncheck the checkboxes that correspond to
+			// those columns we've found to be hidden
+			for ( index = hiddenColumns.length - 1 ; index > -1 ; index-- ) {
+				headers.eq( hiddenColumns[ index ] ).jqmData( "input" )
+					.prop( "checked", false )
+					.checkboxradio( "refresh" )
+					.trigger( "change" );
+			}
 		}
 	},
 
