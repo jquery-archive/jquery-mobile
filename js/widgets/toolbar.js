@@ -96,23 +96,22 @@ define( [
 		},
 		// Deprecated in 1.4. As from 1.5 ui-btn-left/right classes have to be present in the markup.
 		_addHeaderButtonClasses: function() {
-			var $headeranchors = this.element.children( "a, button" );
+			var headerAnchors = this.element.children( "a, button" );
 
 			// Do not mistake a back button for a left toolbar button
-			this.leftbtn = $headeranchors.hasClass( "ui-btn-left" ) &&
-				!$headeranchors.hasClass( "ui-toolbar-back-btn" );
+			this.leftbtn = headerAnchors.hasClass( "ui-btn-left" ) &&
+				!headerAnchors.hasClass( "ui-toolbar-back-btn" );
 
-			this.rightbtn = $headeranchors.hasClass( "ui-btn-right" );
+			this.rightbtn = headerAnchors.hasClass( "ui-btn-right" );
 
 			// Filter out right buttons and back buttons
 			this.leftbtn = this.leftbtn ||
-				$headeranchors.eq( 0 )
+				headerAnchors.eq( 0 )
 					.not( ".ui-btn-right,.ui-toolbar-back-btn" )
 					.addClass( "ui-btn-left" )
 					.length;
 
-			this.rightbtn = this.rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
-
+			this.rightbtn = this.rightbtn || headerAnchors.eq( 1 ).addClass( "ui-btn-right" ).length;
 		},
 		_updateBackButton: function() {
 			var options = this.options,
