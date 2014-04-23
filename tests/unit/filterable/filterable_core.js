@@ -44,6 +44,8 @@ test( "Filterable input prevents default on ENTER", function() {
 	deepEqual( event.isDefaultPrevented(), true, "Subsequent keypress default is also prevented" );
 });
 
+module( "Filterable backwards compatibility" );
+
 asyncTest( "Working filterable is instantiated on dynamic listview when data-filter='true'", function() {
 	var list = $( "<ul data-nstest-filter='true'><li>Chicago</li><li>Berlin</li><li>Windsor</li></ul>" )
 			.appendTo( "#content" )
@@ -59,6 +61,14 @@ asyncTest( "Working filterable is instantiated on dynamic listview when data-fil
 		deepEqual( list.children( ".ui-screen-hidden" ).text(), "Berlin", "'Berlin' was hidden" );
 		start();
 	}, 500 );
+});
+
+test( "Refreshing the listview also refreshes the filterable", function() {
+	var listview = $( "#listview-refresh-refreshes-filterable" );
+
+	listview.append( "<li>Item 3</li><li>Item 4</li><li>Item 5</li>" ).listview( "refresh" );
+	deepEqual( listview.children( ".ui-screen-hidden" ).length, 5,
+		"All list items are hidden after listview refresh" );
 });
 
 })( jQuery );
