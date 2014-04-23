@@ -124,7 +124,7 @@ define( [
 					// This must also be a header toolbar
 					this.role === "header" &&
 
-					// There must be multiple pages in the DOMN
+					// There must be multiple pages in the DOM
 					$( ".ui-page" ).length > 1 &&
 					( this.page ?
 
