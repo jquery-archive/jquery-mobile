@@ -9,4 +9,4 @@
 		// Browser globals
 		factory( root.jQuery, root, doc );
 	}
-}( this, document, function ( jQuery, window, document, undefined ) {
+}( window, document, function ( jQuery, window, document, undefined ) {
