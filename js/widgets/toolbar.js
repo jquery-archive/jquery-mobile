@@ -114,9 +114,12 @@ define( [
 			this.rightbtn = this.rightbtn || headerAnchors.eq( 1 ).addClass( "ui-btn-right" ).length;
 		},
 		_updateBackButton: function() {
-			var options = this.options,
-				backButton = this.element.find( ".ui-toolbar-back-btn" ),
+			var backButton,
+				options = this.options,
 				theme = options.backBtnTheme || options.theme;
+
+			// Retrieve the back button or create a new, empty one
+			backButton = this._backButton = ( this._backButton || {} );
 
 			// We add a back button only if the option to do so is on
 			if ( this.options.addBackBtn &&
@@ -141,18 +144,22 @@ define( [
 					!this.leftbtn ) {
 
 				// Skip back button creation if one is already present
-				if ( backButton.length === 0 ) {
-					$( "<a role='button' href='javascript:void(0);' " +
-						"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
-							( theme ? "ui-btn-" + theme + " " : "" ) +
-							"ui-toolbar-back-btn ui-icon-carat-l ui-btn-icon-left' " +
-						"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText + "</a>" )
+				if ( !backButton.attached ) {
+					backButton.element = ( backButton.element ||
+						$( "<a role='button' href='javascript:void(0);' " +
+							"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
+								( theme ? "ui-btn-" + theme + " " : "" ) +
+								"ui-toolbar-back-btn ui-icon-carat-l ui-btn-icon-left' " +
+							"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText +
+							"</a>" ) )
 							.prependTo( this.element );
+					backButton.attached = true;
 				}
 
 			// If we are not adding a back button, then remove the one present, if any
-			} else {
-				backButton.remove();
+			} else if ( backButton.element ) {
+				backButton.element.detach();
+				backButton.attached = false;
 			}
 		},
 		_addHeadingClasses: function() {
