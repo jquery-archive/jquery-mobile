@@ -205,6 +205,31 @@ $.widget( "mobile.listview", $.mobile.listview, {
 			this.element.filterable();
 		}
 		return this._super();
+	},
+
+	_afterListviewRefresh: function() {
+		var filterable = this.element.data( "mobile-filterable" );
+
+		if ( this.options.filter === true && filterable ) {
+			this._preventRefreshLoop = true;
+			filterable.refresh();
+		}
+	},
+
+	// Eliminate infinite recursion caused by the fact that we call filterable.refresh() from
+	// _afterListviewRefresh() above, which, in turn, calls _refreshChildWidget(), which, in
+	// turn, calls listview refresh(), which would, in turn, calls _afterListviewRefresh()
+	// above, if we wouldn't prevent that right here.
+	refresh: function() {
+		var returnValue;
+
+		if ( !this._preventRefreshLoop ) {
+			returnValue = this._superApply( arguments );
+		}
+
+		this._preventRefreshLoop = false;
+
+		return returnValue;
 	}
 });
 
