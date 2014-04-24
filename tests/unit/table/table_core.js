@@ -273,7 +273,7 @@
 	asyncTest( "Column toggle table rebuild" , function(){
 
 		var $last_input, $visibleCells, $visibleHeaders,
-			$input = $( ".ui-popup-container" ).find( "input" ).eq(2),
+			$input = $( "#movie-table-column-popup" ).find( "input" ).eq(2),
 			$table = $('#movie-table-column');
 
 		$input.trigger('click');
@@ -282,7 +282,7 @@
 
 			$(window).trigger("refresh_col_table", ["#column-table-test"]);
 
-			$last_input = $( ".ui-popup-container" ).find( "input" ).last(),
+			$last_input = $( "#movie-table-column-popup" ).find( "input" ).last(),
 			$visibleCells = $table.find("tbody tr").first().find("th, td").not('.ui-table-cell-hidden'),
 			$visibleHeaders = $table.find("thead tr").first().find("th, td").not('.ui-table-cell-hidden');
 
