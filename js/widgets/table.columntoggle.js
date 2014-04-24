@@ -86,9 +86,10 @@ $.widget( "mobile.table", $.mobile.table, {
 			var input,
 				header = $( this ),
 				priority = $.mobile.getAttribute( this, "priority" ),
-				cells = header.add( header.jqmData( "cells" ) );
+				cells;
 
 			if ( priority ) {
+				cells = header.add( header.jqmData( "cells" ) );
 				cells.addClass( opts.classes.priorityPrefix + priority );
 
 				// Make sure the (new?) checkbox is associated with its header via .jqmData() and
