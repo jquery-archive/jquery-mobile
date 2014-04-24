@@ -1,9 +1,8 @@
-language: php
-php:
-  - "5.5"
+language: node_js
+node_js:
+  - 0.8
 before_script: 
   - npm install -g grunt-cli
-  - npm install
 script: npm run-script ci
 branches:
   only:
