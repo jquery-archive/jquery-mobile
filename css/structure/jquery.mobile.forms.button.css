@@ -29,3 +29,15 @@
 	overflow: hidden;
 	clip: rect(1px,1px,1px,1px);
 }
+.ui-btn.ui-corner-all.ui-corner-none {
+	-webkit-border-radius: : 0 !important; /*{negate ui-corner-all}*/
+	border-radius: 0 !important; /*{negate ui-corner-all}*/
+}
+
+
+.ui-btn.ui-shadow.ui-shadow-none {
+	-webkit-box-shadow: none !important; /*{negate ui-shadow*/
+	-moz-box-shadow: none !important; /*{negate ui-shadow*/
+	box-shadow: none !important;  /*{negate ui-shadow*/
+}
+
