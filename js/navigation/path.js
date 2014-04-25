@@ -44,10 +44,6 @@ define([
 			// browsers that auto-decode it. All references to location.href should be
 			// replaced with a call to this method so that it can be dealt with properly here
 			getLocation: function( url ) {
-
-				// Always use our own URL parser, even though location potentially provides all the
-				// fields we may need later on. This way, URL parsing is consistent, and we only
-				// grab location.href from the browser.
 				var uri = this.parseUrl( url || location.href ),
 					hash = uri.hash;
 
