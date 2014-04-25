@@ -41,14 +41,14 @@ casper.test.begin("Checkboxradio widget should render properly", 2, function sui
 
 	// Click "Checkboxradio widget" list item
 	casper.then( function() {
-		casper.clickLabel( "Checkboxradio widget", "a" );
+		casper.click( "ul.jqm-list > li:nth-child(5) > h3 > a" );
 	});
 
 	// Click "Checkboxes" sub list item
 	casper.then( function() {
 		casper.waitUntilVisible( "ul.jqm-list > li:nth-child(5) > div > ul > li.ui-first-child > a",
 			function() {
-				casper.clickLabel( "Checkboxes", "a" );
+				casper.click( "ul.jqm-list > li:nth-child(5) > div > ul > li.ui-first-child > a" );
 			}
 		);
 	});
