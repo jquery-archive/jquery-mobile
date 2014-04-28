@@ -313,8 +313,8 @@ define( [ "jquery", "../jquery.mobile.vmouse", "../jquery.mobile.support.touch" 
 	$.each({
 		scrollstop: "scrollstart",
 		taphold: "tap",
-		swipeleft: "swipe",
-		swiperight: "swipe"
+		swipeleft: "swipe.left",
+		swiperight: "swipe.right"
 	}, function( event, sourceEvent ) {
 
 		$.event.special[ event ] = {
