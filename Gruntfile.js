@@ -614,7 +614,8 @@ module.exports = function( grunt ) {
 							content = content.replace( re, "" );
 						}
 						return content;
-					}
+					},
+					processContentExclude: [ "**/*.+(gif|png)" ]
 				},
 				files: {
 					// WARNING: This will be modified by the config:copy:noversion task
