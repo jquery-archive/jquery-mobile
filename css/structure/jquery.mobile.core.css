@@ -257,6 +257,11 @@ div.ui-mobile-viewport {
 	display: inline-block;
 	vertical-align: middle;
 }
+.ui-header .ui-controlgroup .ui-btn-icon-notext,
+.ui-footer .ui-controlgroup .ui-btn-icon-notext {
+    font-size: 12.5px;
+}
+
 /* To ensure same top and left/right position when ui-btn-left/right are added to something other than buttons. */
 .ui-header .ui-btn-left,
 .ui-header .ui-btn-right {
