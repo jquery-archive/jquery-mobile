@@ -786,7 +786,7 @@ module.exports = function( grunt ) {
 				options: {
 					urls: (function() {
 						var allSuites, patterns, paths,
-							testDirs = [ "unit", "integration" ],
+							testDirs = [ "unit", "integration", "css" ],
 							suites = ( grunt.option( "suites" ) || process.env.SUITES || "" ).split( "," ),
 							types = ( grunt.option( "types" ) || process.env.TYPES || "" ).split( "," ),
 							versionedPaths = [],
