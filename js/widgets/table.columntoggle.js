@@ -83,11 +83,12 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		// create the hide/show toggles
 		this.headers.not( "td" ).each( function() {
-			var header = $( this ),
-				priority = $.mobile.getAttribute( this, "priority" ),
-				cells = header.add( header.jqmData( "cells" ) );
+			var cells,
+				header = $( this ),
+				priority = $.mobile.getAttribute( this, "priority" );
 
 			if ( priority ) {
+				cells = header.add( header.jqmData( "cells" ) );
 				cells.addClass( opts.classes.priorityPrefix + priority );
 
 				( keep ? inputs.eq( checkboxIndex++ ) :
