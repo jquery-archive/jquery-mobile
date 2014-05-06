@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<title>Services</title>
+
+	<!-- References to the scripts and stylesheets required for application startup must appear in all
+	     documents containing your application's pages, because any one of them can become the start page -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.css"/>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.js"></script>
+	<script src="init.js"></script>
+</head>
+<body>
+
+	<!-- The header and the popup must be copied verbatim into each document that can serve as
+	     the start page. They must also be themed explicitly because they do not inherit their
+	     theme swatches from the page, since they are not contained inside a page. -->
+	<div data-role="header" id="common-header" data-theme="a">
+		<h1>Welcome to International Widgets, Inc.</h1>
+		<a href="#nav-menu" data-rel="popup" class="ui-btn ui-icon-grid ui-btn-icon-notext ui-btn-right ui-corner-all">Navigate our site</a>
+	</div>
+
+	<div data-role="popup" id="nav-menu" data-theme="a">
+		<ul data-role="listview">
+			<li><a href="products.html">Products</a></li>
+			<li><a href="services.html">Services</a></li>
+		</ul>
+	</div>
+
+	<div data-role="page" id="products">
+		<div class="ui-content">
+			<h1>Services</h1>
+			<p>Allow our experts to design and deliver the solutions you need.</p>
+		</div>
+	</div>
+</body>
+</html>
