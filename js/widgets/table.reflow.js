@@ -40,6 +40,11 @@ $.widget( "mobile.table", $.mobile.table, {
 		}
 	},
 
+	_refreshHeadCell: function( cellIndex, element, columnCount ) {
+		element.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
+		return this._superApply( arguments );
+	},
+
 	_refresh: function( create ) {
 		this._super( create );
 		if ( !create && this.options.mode === "reflow" ) {

@@ -50,6 +50,40 @@ $.widget( "mobile.table", {
 
 	rebuild: $.noop,
 
+	_refreshHeadCell: function( cellIndex, element, columnCount ) {
+		var columnIndex,
+			table = this.element,
+			trs = table.find( "thead tr" ),
+			span = parseInt( element.getAttribute( "colspan" ), 10 ),
+			selector = ":nth-child(" + ( columnCount + 1 ) + ")";
+
+		if ( span ) {
+			for( columnIndex = 0; columnIndex < span - 1; columnIndex++ ) {
+				columnCount++;
+				selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
+			}
+		}
+
+		// Store "cells" data on header as a reference to all cells in the same column as this TH
+		$( element ).jqmData( "cells",
+			table
+				.find( "tr" )
+					.not( trs.eq( 0 ) )
+					.not( element )
+					.children( selector ) );
+
+		return columnCount;
+	},
+
+	_refreshHeadRow: function( rowIndex, element ) {
+		var columnCount = 0;
+
+		// Iterate over the children of the tr
+		$( element ).children().each( $.proxy( function( cellIndex, element ) {
+			columnCount = this._refreshHeadCell( cellIndex, element, columnCount ) + 1;
+		}, this ) );
+	},
+
 	_refresh: function( /* create */ ) {
 		var table = this.element,
 			trs = table.find( "thead tr" );
@@ -58,31 +92,7 @@ $.widget( "mobile.table", {
 		this._setHeaders();
 
 		// Iterate over the trs
-		trs.each( function() {
-			var columnCount = 0;
-
-			// Iterate over the children of the tr
-			$( this ).children().each( function() {
-				var span = parseInt( this.getAttribute( "colspan" ), 10 ),
-					selector = ":nth-child(" + ( columnCount + 1 ) + ")",
-					j;
-
-				this.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
-
-				if ( span ) {
-					for( j = 0; j < span - 1; j++ ) {
-						columnCount++;
-						selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
-					}
-				}
-
-				// Store "cells" data on header as a reference to all cells in the
-				// same column as this TH
-				$( this ).jqmData( "cells", table.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( selector ) );
-
-				columnCount++;
-			});
-		});
+		trs.each( $.proxy( this, "_refreshHeadRow" ) );
 	}
 });
 
