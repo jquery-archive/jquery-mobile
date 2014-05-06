@@ -55,7 +55,7 @@ $(function(){
 
 			<p>Because External toolbars are outside of the page they are not effected by transition and make truly persistent toolbars possible.</p>
 
-			<p><a href="../toolbar-fixed-persistent/" data-ajax="false">Persistant toolbar demo</a></p>
+			<p><a href="../toolbar-fixed-persistent/" data-ajax="false">Persistent toolbar demo</a></p>
 
 		</div><!-- /content -->
 
