@@ -39,31 +39,25 @@ return $.widget( "mobile.table", {
 		enhanced: false
 	},
 
+	// Expose headers and allHeaders properties on the widget
+	// headers references the THs within the first TR in the table
+	headers: null,
+
+	// allHeaders references headers, plus all THs in the thead, which may
+	// include several rows, or not
+	allHeaders: null,
+
 	_create: function() {
 		if ( !this.options.enhanced ) {
 			this.element.addClass( this.options.classes.table );
 		}
 
-		// extend here, assign on refresh > _setHeaders
-		$.extend( this, {
-
-			// Expose headers and allHeaders properties on the widget
-			// headers references the THs within the first TR in the table
-			headers: undefined,
-
-			// allHeaders references headers, plus all THs in the thead, which may
-			// include several rows, or not
-			allHeaders: undefined
-		} );
-
 		this._refresh( true );
 	},
 
 	_setHeaders: function() {
-		var trs = this.element.find( "thead tr" );
-
 		this.headers = this.element.find( "tr:eq(0)" ).children();
-		this.allHeaders = this.headers.add( trs.children() );
+		this.allHeaders = this.element.find( "thead tr" ).children().add( this.headers );
 	},
 
 	refresh: function() {
