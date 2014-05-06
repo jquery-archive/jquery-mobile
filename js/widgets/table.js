@@ -93,6 +93,20 @@ $.widget( "mobile.table", {
 
 		// Iterate over the trs
 		trs.each( $.proxy( this, "_refreshHeadRow" ) );
+	},
+
+	_destroy: function() {
+		var table = this.element;
+
+		if ( !this.options.enhanced ) {
+			table.removeClass( this.options.classes.table );
+		}
+
+		// We have to remove "cells" data even if the table was originally enhanced, because it is
+		// added during refresh
+		table.find( "thead tr" ).children().each( function() {
+			$( this ).jqmRemoveData( "cells" );
+		});
 	}
 });
 
