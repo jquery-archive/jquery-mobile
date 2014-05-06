@@ -80,32 +80,22 @@ return $.widget( "mobile.table", {
 		this._setHeaders();
 
 		// Iterate over the trs
-		trs.each( function() {
-			var columnCount = 0;
+		trs.each( $.proxy( this, "_refreshHeadRow" ) );
+	},
 
-			// Iterate over the children of the tr
-			$( this ).children().each( function() {
-				var span = parseInt( this.getAttribute( "colspan" ), 10 ),
-					selector = ":nth-child(" + ( columnCount + 1 ) + ")",
-					j;
+	_destroy: function() {
+		var table = this.element;
 
-				this.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
+		if ( !this.options.enhanced ) {
+			table.removeClass( this.options.classes.table );
+		}
 
-				if ( span ) {
-					for ( j = 0; j < span - 1; j++ ) {
-						columnCount++;
-						selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
-					}
-				}
-
-				// Store "cells" data on header as a reference to all cells in the
-				// same column as this TH
-				$( this ).jqmData( "cells", table.find( "tr" ).not( trs.eq( 0 ) ).not( this ).children( selector ) );
-
-				columnCount++;
-			} );
-		} );
+		// We have to remove "cells" data even if the table was originally enhanced, because it is
+		// added during refresh
+		table.find( "thead tr" ).children().each( function() {
+			$( this ).jqmRemoveData( "cells" );
+		});
 	}
-} );
+});
 
 } );
