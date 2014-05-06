@@ -180,6 +180,10 @@ return $.widget( "mobile.table", $.mobile.table, {
 		fragment.appendChild( menuButton[ 0 ] );
 		table.before( fragment );
 
+		// Save the UI so it can be destroyed later
+		this._popup = popup;
+		this._menuButton = menuButton;
+
 		popup.popup();
 
 		return menu;
@@ -251,8 +255,40 @@ return $.widget( "mobile.table", $.mobile.table, {
 		} );
 	},
 
+	_destroyHeader: function( index, headerElement ) {
+		var priority, cells,
+			header = $( headerElement );
+
+		if ( !this.options.enhanced ) {
+			priority = $.mobile.getAttribute( headerElement, "priority" );
+			cells = header.add( header.jqmData( "cells" ) );
+
+			if ( priority ) {
+				cells.removeClass( this.options.classes.priorityPrefix + priority );
+			}
+		}
+
+		// This data has to be removed whether or not the widget is pre-rendered
+		header.jqmRemoveData( "input" );
+	},
+
 	_destroy: function() {
-		this._super();
+		if ( this.options.mode === "columntoggle" ) {
+			if ( this.options.enhanced ) {
+
+				// If the widget is enhanced, the checkboxes will be left alone, but the jqmData()
+				// attached to them has to be removed
+				this._menu.find( "input" ).each( function() {
+					$( this ).jqmRemoveData( "cells" ).jqmRemoveData( "header" );
+				});
+			} else {
+				this.element.removeClass( this.options.classes.columnToggleTable );
+				this._popup.remove();
+				this._menuButton.remove();
+			}
+			this.headers.not( "td" ).each( $.proxy( this, "_destroyHeader" ) );
+		}
+		return this._superApply( arguments );
 	}
 } );
 
