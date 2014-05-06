@@ -45,7 +45,6 @@ $( function() {
 
 		<p>You can reuse the same popup on multiple pages if you declare it as a direct child of the <code>body</code> element. It can then appear on any page in the document.</p>
 		<p>If you define the popup outside of any page, then you must take care to instantiate the popup widget yourself. You can do this as early as DOMReady, because the popup is not on any page.</p>
-		<p>If you wish the popup to be opened from a set of links, then you must also handle that manually, because automatic handling via <code>data-rel="popup"</code> is restricted to popups on the active page.</p>
 		<p>The example below illustrates the setup with two pages.</p>
 		<div data-demo-html="#popup-outside-page,#other-page,#third-page" data-demo-js="#popup-outside-page-script">
 			<a href="#popup-outside-page" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Menu</a>
