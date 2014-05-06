@@ -48,12 +48,50 @@ function getSnippet( type, selector, source ) {
 
 	// First, try to grab a tag in this document
 	if ( !$.mobile.path.isPath( selector ) ) {
-		el = source.find( type + selector );
+		el = source.find( ( "markup" === type ? "" : type ) + selector );
 		// If this is not an embedded style, try a stylesheet reference
 		if ( el.length === 0 && type === "style" ) {
 			el = source.find( "link[rel='stylesheet']" + selector );
 		}
-		text = $( "<div></div>" ).append( el.contents().clone() ).html();
+
+		// Stringify each element and cache the string representation on the element. This helps us
+		// avoid re-stringifying the element later. This, in turn, prevents us from re-stringifying
+		// already enhanced elements, such as shared widgets outside the page, when the View Source
+		// button is in the page, and the elements have already been enhanced when the View Source
+		// button is created. This assumes, of course, that the first time we stringify an element
+		// the element is not yet enhanced.
+		el.each( function( index, singleElement ) {
+			var whitespace,
+				single = $( this ),
+				singleText = single.jqmData( "viewSourceCachedData" );
+
+			if ( !singleText ) {
+				singleText = $( "<div></div>" )
+						.append( ( "markup" === type ? single : single.contents() ).clone() )
+						.html();
+
+				// If we're dealing with markup, retrieve the initial indentation of the element so
+				// we get proper indentation in the source view
+				if ( type === "markup" ) {
+					if ( this.previousSibling && this.previousSibling.nodeType === 3 ) {
+						whitespace = $( "<div>" )
+							.append( $( this.previousSibling ).clone() )
+							.html()
+							.match( /\n(\s*)$/ );
+						if ( whitespace && whitespace.length > 1 ) {
+							singleText = whitespace[ 1 ] + singleText;
+						}
+					}
+				}
+				single.jqmData( "viewSourceCachedData", singleText );
+			}
+
+			text = text +
+
+				// Separate the text for multiple elements with a newline
+				( index > 0 ? "\n" : "" ) +
+				singleText;
+		});
 		if ( !text ) {
 			text = "";
 			selector = el.attr( "href" ) || el.attr( "src" ) || "";
@@ -91,7 +129,7 @@ $( document ).bind( "pagebeforechange", function( e, data ) {
 
 			attachPopupHandler( popup, sources );
 			popup
-				.appendTo( $.mobile.activePage )
+				.appendTo( "body" )
 				.popup()
 				.bind( "popupafterclose", function() {
 					popup.remove();
@@ -136,7 +174,7 @@ $.fn.viewSourceCode = function() {
 			if ( self.attr( "data-demo-html" ) === "true" ) {
 				data = self.html();
 			} else {
-				data = $( "<div></div>" ).append( $( self.attr( "data-demo-html" ) ).clone() ).html();
+				data = getSnippet( "markup", self.attr( "data-demo-html" ), $( document ) );
 			}
 			sources.push( { title: "HTML", theme: "c", brush: "xml", data: fixData( data ) } );
 		}
@@ -174,22 +212,12 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 	SyntaxHighlighter.defaults['auto-links'] = false;
 });
 
-$( document ).on( "pagecreate", function( e ) {
-	// prevent page scroll while scrolling source code
-	$( document ).on( "mousewheel", ".jqm-view-source .ui-collapsible-content", function( event, delta ) {
-		if ( delta > 0 && $( this ).scrollTop() === 0 ) {
-			event.preventDefault();
-		} else if ( delta < 0 &&  $( this ).scrollTop() === $( this ).get( 0 ).scrollHeight - $( this ).innerHeight() ) {
-			event.preventDefault();
-		}
-	});
-
+$( document )
 	// reposition when switching between html / js / css
-	$( e.target ).delegate( ".jqm-view-source .ui-collapsible", "expand", function() {
+	.on( "collapsibleexpand", ".jqm-view-source .ui-collapsible", function() {
 		$( this ).parents( ":mobile-popup" ).popup( "reposition", { positionTo: "window" } );
-	});
-
-	$( e.target ).delegate( ".jqm-view-source", "popupbeforeposition", function() {
+	})
+	.on( "popupbeforeposition", ".jqm-view-source", function() {
 		// max height: screen height - tolerance (2*30px) - 42px for each collapsible heading
 		var x = $( this ).find( ".ui-collapsible" ).length,
 			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
@@ -209,8 +237,17 @@ $( document ).on( "pagecreate", function( e ) {
 				$( line ).height( height );
 			}
 		});
+	})
+	.on( "pagecreate", function( e ) {
+		// prevent page scroll while scrolling source code
+		$( document ).on( "mousewheel", ".jqm-view-source .ui-collapsible-content", function( event, delta ) {
+			if ( delta > 0 && $( this ).scrollTop() === 0 ) {
+				event.preventDefault();
+			} else if ( delta < 0 &&  $( this ).scrollTop() === $( this ).get( 0 ).scrollHeight - $( this ).innerHeight() ) {
+				event.preventDefault();
+			}
+		});
 	});
-});
 
 /**
  * SyntaxHighlighter
