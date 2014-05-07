@@ -11,8 +11,7 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-  <script id="script" src="https://rawgithub.com/arschmitz/jquery-mobile-nestedlists/master/jquery.mobile.nestedlists.js"></script>
-
+    <script id="script" src="https://rawgithub.com/arschmitz/jquery-mobile-nestedlists/master/jquery.mobile.nestedlists.js"></script>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -28,7 +27,7 @@
 
         <h1>Nested Listviews</h1>
 
-        <p>Nested listviews were deprecated in jQuery Mobile 1.3 and were removed in 1.4. For those wishing to use the 1.3 behivor there is a plugin available at <a href="https://github.com/arschmitz/jquery-mobile-nestedlists/">https://github.com/arschmitz/jquery-mobile-nestedlists/</a>. With this plugin you can just drop it in after the jQuery Mobile script to be able to use "jQuery Mobile 1.3 style" nested listviews. You can use the same markup all you need to do is drop in the script.</p>
+        <p>Nested listviews were deprecated in jQuery Mobile 1.3 and were removed in 1.4. For those wishing to use the 1.3 behavior there is a plugin available at <a href="https://github.com/arschmitz/jquery-mobile-nestedlists/">https://github.com/arschmitz/jquery-mobile-nestedlists/</a>. With this plugin you can use the same markup. All you need to do to be able to use "jQuery Mobile 1.3 style" nested listviews is drop the plugin script in after the jQuery Mobile script.</p>
         
         <div data-demo-html="true" data-demo-js="#script">
             <ul data-role="listview" data-inset="true">
