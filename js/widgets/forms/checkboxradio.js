@@ -135,7 +135,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		// Adds checked attribute to checked input when keyboard is used
 		this.element.prop( "checked", this.element.is( ":checked" ) );
 		this._getInputSet().not( this.element ).prop( "checked", false );
-		this._updateAll();
+		this._updateAll( true );
 	},
 
 	_handleLabelVMouseOver: function( event ) {
@@ -225,13 +225,13 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		return radios;
 	},
 
-	_updateAll: function() {
+	_updateAll: function( changeTriggered ) {
 		var self = this;
 
 		this._getInputSet().each( function() {
 			var $this = $( this );
 
-			if ( this.checked || self.inputtype === "checkbox" ) {
+			if ( ( this.checked || self.inputtype === "checkbox" ) && !changeTriggered ) {
 				$this.trigger( "change" );
 			}
 		})
