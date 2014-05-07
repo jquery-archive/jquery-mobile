@@ -211,6 +211,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 		this._super();
 
 		if ( this.options.mode === "columntoggle" ) {
+
 			// NOTE: rebuild passes "false", while refresh passes "undefined"
 			// both refresh the table, but inside addToggles, !false will be true,
 			// so a rebuild call can be indentified
@@ -297,7 +298,9 @@ return $.widget( "mobile.table", $.mobile.table, {
 				// If the widget is enhanced, the checkboxes will be left alone, but the jqmData()
 				// attached to them has to be removed
 				this._ui.menu.find( "input" ).each( function() {
-					$( this ).jqmRemoveData( "cells" ).jqmRemoveData( "header" );
+					$( this )
+						.jqmRemoveData( "cells" )
+						.jqmRemoveData( "header" );
 				});
 			} else {
 				this.element.removeClass( this.options.classes.columnToggleTable );
