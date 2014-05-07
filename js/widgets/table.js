@@ -55,6 +55,13 @@ return $.widget( "mobile.table", {
 		this._refresh( true );
 	},
 
+	_setOptions: function( options ) {
+		if ( options.disabled !== undefined ) {
+			this.element.toggleClass( "ui-state-disabled", options.disabled );
+		}
+		return this._super( options );
+	},
+
 	_setHeaders: function() {
 		this.headers = this.element.find( "tr:eq(0)" ).children();
 		this.allHeaders = this.element.find( "thead tr" ).children().add( this.headers );
