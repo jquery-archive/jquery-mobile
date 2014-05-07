@@ -80,6 +80,20 @@ return $.widget( "mobile.table", $.mobile.table, {
 		this._setToggleState();
 	},
 
+	_setOptions: function( options ) {
+		if ( options.disabled !== undefined && this.options.mode === "columntoggle" ) {
+			this._ui.popup.popup( "option", "disabled", options.disabled );
+			this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
+			if( options.disabled ) {
+				this._ui.button.attr( "tabindex", -1 );
+			} else {
+				this._ui.button.removeAttr( "tabindex" );
+			}
+		}
+
+		return this._super( options );
+	},
+
 	_id: function() {
 		return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
 	},
