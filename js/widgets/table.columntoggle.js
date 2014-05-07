@@ -46,21 +46,32 @@ return $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
+		var id, popup;
+
 		this._super();
 
 		if ( this.options.mode !== "columntoggle" ) {
 			return;
 		}
 
+<<<<<<< HEAD
 		$.extend( this, {
 			_menu: null
 		} );
 
+=======
+>>>>>>> 1c6ea65... Table: Record UI elements both when pre-rendered and not
 		if ( this.options.enhanced ) {
-			this._menu = $( this.document[ 0 ].getElementById( this._id() + "-popup" ) ).children().first();
-			this._addToggles( this._menu, true );
+			id = this._id();
+			popup = $( this.document[ 0 ].getElementById( id + "-popup" ) );
+			this._ui = {
+				popup: popup,
+				menu: popup.children().first(),
+				button: $( this.document[ 0 ].getElementById( id + "-button" ) )
+			};
+			this._addToggles( this._ui.menu, true );
 		} else {
-			this._menu = this._enhanceColToggle();
+			this._ui = this._enhanceColToggle();
 			this.element.addClass( this.options.classes.columnToggleTable );
 		}
 
@@ -80,8 +91,9 @@ return $.widget( "mobile.table", $.mobile.table, {
 		// update column toggles on resize
 		this._on( this.window, {
 			throttledresize: "_setToggleState"
-		} );
-		this._on( this._menu, {
+		});
+		
+		this._on( this._ui.menu, {
 			"change input": "_menuInputChange"
 		} );
 	},
@@ -164,8 +176,14 @@ return $.widget( "mobile.table", $.mobile.table, {
 
 		id = this._id() + "-popup";
 		menuButton = $( "<a href='#" + id + "' " +
+<<<<<<< HEAD
 			"class='" + opts.classes.columnBtn + " ui-button " +
 			"ui-button-" + ( opts.columnBtnTheme || "a" ) +
+=======
+			"id='" + this._id() + "-button' " +
+			"class='" + opts.classes.columnBtn + " ui-btn " +
+			"ui-btn-" + ( opts.columnBtnTheme || "a" ) +
+>>>>>>> 1c6ea65... Table: Record UI elements both when pre-rendered and not
 			" ui-corner-all ui-shadow ui-mini' " +
 			"data-" + ns + "rel='popup'>" + opts.columnBtnText + "</a>" );
 		popup = $( "<div class='" + opts.classes.popup + "' id='" + id + "'></div>" );
@@ -180,13 +198,13 @@ return $.widget( "mobile.table", $.mobile.table, {
 		fragment.appendChild( menuButton[ 0 ] );
 		table.before( fragment );
 
-		// Save the UI so it can be destroyed later
-		this._popup = popup;
-		this._menuButton = menuButton;
-
 		popup.popup();
 
-		return menu;
+		return {
+			menu: menu,
+			popup: popup,
+			button: menuButton
+		};
 	},
 
 	rebuild: function() {
@@ -214,7 +232,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 			// post-refresh headers and, if the header is still there, make sure the corresponding
 			// column will be hidden if the pre-refresh checkbox indicates that the column is
 			// hidden by recording its index in the array of hidden columns.
-			this._menu.find( "input" ).each( function() {
+			this._ui.menu.find( "input" ).each( function() {
 				var input = $( this ),
 					header = input.jqmData( "header" ),
 					index = headers.index( header[ 0 ] );
@@ -233,7 +251,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 				".ui-table-cell-visible" ) );
 
 			// update columntoggles and cells
-			this._addToggles( this._menu, create );
+			this._addToggles( this._ui.menu, create );
 
 			// At this point all columns are visible, so uncheck the checkboxes that correspond to
 			// those columns we've found to be hidden
@@ -247,7 +265,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_setToggleState: function() {
-		this._menu.find( "input" ).each( function() {
+		this._ui.menu.find( "input" ).each( function() {
 			var checkbox = $( this );
 
 			this.checked = checkbox.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell";
@@ -278,13 +296,13 @@ return $.widget( "mobile.table", $.mobile.table, {
 
 				// If the widget is enhanced, the checkboxes will be left alone, but the jqmData()
 				// attached to them has to be removed
-				this._menu.find( "input" ).each( function() {
+				this._ui.menu.find( "input" ).each( function() {
 					$( this ).jqmRemoveData( "cells" ).jqmRemoveData( "header" );
 				});
 			} else {
 				this.element.removeClass( this.options.classes.columnToggleTable );
-				this._popup.remove();
-				this._menuButton.remove();
+				this._ui.popup.remove();
+				this._ui.button.remove();
 			}
 			this.headers.not( "td" ).each( $.proxy( this, "_destroyHeader" ) );
 		}
