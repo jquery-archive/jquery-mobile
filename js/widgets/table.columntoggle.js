@@ -126,14 +126,6 @@ $.widget( "mobile.table", $.mobile.table, {
 		input.jqmData( "cells" )
 			.toggleClass( "ui-table-cell-hidden", !checked )
 			.toggleClass( "ui-table-cell-visible", checked );
-
-		if ( input[ 0 ].getAttribute( "locked" ) ) {
-			input.removeAttr( "locked" );
-
-			this._unlockCells( input.jqmData( "cells" ) );
-		} else {
-			input.attr( "locked", true );
-		}
 	},
 
 	_unlockCells: function( cells ) {
