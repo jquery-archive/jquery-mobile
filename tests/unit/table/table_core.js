@@ -304,18 +304,18 @@ QUnit.asyncTest( "Column toggle table rebuild", function( assert ) {
 		$visibleCells = $table.find( "tbody tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' ),
 		$visibleHeaders = $table.find( "thead tr" ).first().find( "th, td" ).not( '.ui-table-cell-hidden' );
 
-		assert.ok( $table.length, "Table still enhanced after rebuild" );
-		assert.equal(
-			$table.find( 'tbody tr' ).eq( 1 ).find( "th, td" ).eq( 2 ).hasClass( 'ui-table-cell-hidden' ),
-			false,
-			"Rebuilding a table clears all ui-table-cell-hidden/show classes"
-		);
-		assert.ok( $input.is( ":checked" ), false, "Input still not checked after rebuild" );
+			ok( $table.length, "Table still enhanced after refresh");
+			equal(
+				$table.find('tbody tr').eq(1).find("th, td").eq(2).hasClass('ui-table-cell-hidden'),
+				false,
+				"Refreshing a table clears all ui-table-cell-hidden/show classes"
+			);
+			ok( $input.is( ":checked" ), false, "Input still not checked after refresh" );
 
-		assert.equal(
-			$last_input.jqmData( "cells" ).last().attr( "data-test" ),
-			"xyz",
-			"Cell referenced in popup is in table after rebuild (new column and toggle button), columns without data-priority don't break table on rebuild" );
+			equal(
+				$last_input.jqmData( "cells" ).last().attr("data-test"),
+				"xyz",
+				"Cell referenced in popup is in table after refresh (new column and toggle button), columns without data-priority don't break table on refresh");
 
 		assert.equal(
 			$visibleCells.length,
