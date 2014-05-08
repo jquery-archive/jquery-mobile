@@ -48,6 +48,8 @@ return $.widget( "mobile.table", $.mobile.table, {
 	_create: function() {
 		var id, popup;
 
+		this._instantiating = true;
+
 		this._super();
 
 		if ( this.options.mode !== "columntoggle" ) {
@@ -78,6 +80,8 @@ return $.widget( "mobile.table", $.mobile.table, {
 		this._setupEvents();
 
 		this._setToggleState();
+
+		this._instantiating = false;
 	},
 
 	_setOptions: function( options ) {
@@ -221,25 +225,13 @@ return $.widget( "mobile.table", $.mobile.table, {
 		};
 	},
 
-	rebuild: function() {
-		this._super();
-
-		if ( this.options.mode === "columntoggle" ) {
-
-			// NOTE: rebuild passes "false", while refresh passes "undefined"
-			// both refresh the table, but inside addToggles, !false will be true,
-			// so a rebuild call can be indentified
-			this._refresh( false );
-		}
-	},
-
-	_refresh: function( create ) {
+	refresh: function() {
 		var headers, hiddenColumns, index;
 
 		// Calling _super() here updates this.headers
-		this._super( create );
+		this._super();
 
-		if ( !create && this.options.mode === "columntoggle" ) {
+		if ( !this._instantiating && this.options.mode === "columntoggle" ) {
 			headers = this.headers;
 			hiddenColumns = [];
 
@@ -266,7 +258,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 				".ui-table-cell-visible" ) );
 
 			// update columntoggles and cells
-			this._addToggles( this._ui.menu, create );
+			this._addToggles( this._ui.menu, false );
 
 			// At this point all columns are visible, so uncheck the checkboxes that correspond to
 			// those columns we've found to be hidden
