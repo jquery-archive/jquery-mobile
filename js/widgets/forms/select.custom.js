@@ -59,7 +59,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	},
 
 	_handleButtonVclickKeydown: function( event ) {
-		if ( this.options.disabled || this.isOpen || this.options.nativeMenu) {
+		if ( this.options.disabled || this.isOpen || this.options.nativeMenu ) {
 			return;
 		}
 
