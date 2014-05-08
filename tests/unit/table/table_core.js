@@ -291,7 +291,7 @@
 		}, 1200);
 	});
 
-	asyncTest( "Column toggle table rebuild" , function(){
+	asyncTest( "Column toggle table refresh" , function(){
 
 		var $last_input, $visibleCells, $visibleHeaders,
 			$input = $( "#movie-table-column-popup" ).find( "input" ).eq(2),
@@ -307,18 +307,18 @@
 			$visibleCells = $table.find("tbody tr").first().find("th, td").not('.ui-table-cell-hidden'),
 			$visibleHeaders = $table.find("thead tr").first().find("th, td").not('.ui-table-cell-hidden');
 
-			ok( $table.length, "Table still enhanced after rebuild");
+			ok( $table.length, "Table still enhanced after refresh");
 			equal(
 				$table.find('tbody tr').eq(1).find("th, td").eq(2).hasClass('ui-table-cell-hidden'),
 				false,
-				"Rebuilding a table clears all ui-table-cell-hidden/show classes"
+				"Refreshing a table clears all ui-table-cell-hidden/show classes"
 			);
-			ok( $input.is( ":checked" ), false, "Input still not checked after rebuild" );
+			ok( $input.is( ":checked" ), false, "Input still not checked after refresh" );
 
 			equal(
 				$last_input.jqmData( "cells" ).last().attr("data-test"),
 				"xyz",
-				"Cell referenced in popup is in table after rebuild (new column and toggle button), columns without data-priority don't break table on rebuild");
+				"Cell referenced in popup is in table after refresh (new column and toggle button), columns without data-priority don't break table on refresh");
 
 			equal(
 				$visibleCells.length,
