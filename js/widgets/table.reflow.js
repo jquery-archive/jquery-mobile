@@ -18,18 +18,11 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
-		this._super();
-
-		// If it's not reflow mode, return here.
-		if ( this.options.mode !== "reflow" ) {
-			return;
-		}
-
-		if ( !this.options.enhanced ) {
+		if ( this.options.mode === "reflow" && !this.options.enhanced ) {
 			this.element.addClass( this.options.classes.reflowTable );
-
-			this._updateReflow();
 		}
+
+		return this._superApply( arguments );
 	},
 
 	rebuild: function() {
@@ -45,9 +38,9 @@ $.widget( "mobile.table", $.mobile.table, {
 		return this._superApply( arguments );
 	},
 
-	_refresh: function( create ) {
-		this._super( create );
-		if ( !create && this.options.mode === "reflow" ) {
+	_refresh: function() {
+		this._superApply( arguments );
+		if ( this.options.mode === "reflow" ) {
 			this._updateReflow( );
 		}
 	},
