@@ -289,7 +289,7 @@ QUnit.asyncTest( "Column toggle table refresh", function( assert ) {
 	}, 1200 );
 } );
 
-QUnit.asyncTest( "Column toggle table rebuild", function( assert ) {
+QUnit.asyncTest( "Column toggle table refresh", function( assert ) {
 
 	var $lastInput, $visibleCells, $visibleHeaders,
 		$input = $( "#movie-table-column-popup" ).find( "input" ).eq( 2 ),
@@ -305,18 +305,18 @@ QUnit.asyncTest( "Column toggle table rebuild", function( assert ) {
 		$visibleCells = $table.find( "tbody tr" ).first().find( "th, td" ).not( ".ui-table-cell-hidden" ),
 		$visibleHeaders = $table.find( "thead tr" ).first().find( "th, td" ).not( ".ui-table-cell-hidden" );
 
-		assert.ok( $table.length, "Table still enhanced after rebuild" );
+		assert.ok( $table.length, "Table still enhanced after refresh" );
 		assert.equal(
 			$table.find( "tbody tr" ).eq( 1 ).find( "th, td" ).eq( 2 ).hasClass( "ui-table-cell-hidden" ),
 			false,
-			"Rebuilding a table clears all ui-table-cell-hidden/show classes"
+			"refreshing a table clears all ui-table-cell-hidden/show classes"
 		);
-		assert.ok( $input.is( ":checked" ), false, "Input still not checked after rebuild" );
+		assert.ok( $input.is( ":checked" ), false, "Input still not checked after refresh" );
 
 		assert.equal(
 			$lastInput.jqmData( "cells" ).last().attr( "data-test" ),
 			"xyz",
-			"Cell referenced in popup is in table after rebuild (new column and toggle button), columns without data-priority don't break table on rebuild" );
+			"Cell referenced in popup is in table after refresh (new column and toggle button), columns without data-priority don't break table on refresh" );
 
 		assert.equal(
 			$visibleCells.length,
