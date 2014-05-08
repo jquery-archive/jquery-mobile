@@ -52,7 +52,7 @@ return $.widget( "mobile.table", {
 			this.element.addClass( this.options.classes.table );
 		}
 
-		this._refresh( true );
+		this.refresh();
 	},
 
 	_setOptions: function( options ) {
@@ -67,13 +67,45 @@ return $.widget( "mobile.table", {
 		this.allHeaders = this.element.find( "thead tr" ).children().add( this.headers );
 	},
 
-	refresh: function() {
-		this._refresh();
+	rebuild: function() {
+		this.refresh();
 	},
 
-	rebuild: $.noop,
+	_refreshHeadCell: function( cellIndex, element, columnCount ) {
+		var columnIndex,
+			table = this.element,
+			trs = table.find( "thead tr" ),
+			span = parseInt( element.getAttribute( "colspan" ), 10 ),
+			selector = ":nth-child(" + ( columnCount + 1 ) + ")";
 
-	_refresh: function( /* create */ ) {
+		if ( span ) {
+			for( columnIndex = 0; columnIndex < span - 1; columnIndex++ ) {
+				columnCount++;
+				selector += ", :nth-child(" + ( columnCount + 1 ) + ")";
+			}
+		}
+
+		// Store "cells" data on header as a reference to all cells in the same column as this TH
+		$( element ).jqmData( "cells",
+			table
+				.find( "tr" )
+					.not( trs.eq( 0 ) )
+					.not( element )
+					.children( selector ) );
+
+		return columnCount;
+	},
+
+	_refreshHeadRow: function( rowIndex, element ) {
+		var columnCount = 0;
+
+		// Iterate over the children of the tr
+		$( element ).children().each( $.proxy( function( cellIndex, element ) {
+			columnCount = this._refreshHeadCell( cellIndex, element, columnCount ) + 1;
+		}, this ) );
+	},
+
+	refresh: function() {
 		var table = this.element,
 			trs = table.find( "thead tr" );
 

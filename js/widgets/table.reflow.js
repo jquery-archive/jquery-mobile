@@ -45,20 +45,12 @@ return $.widget( "mobile.table", $.mobile.table, {
 		return this._superApply( arguments );
 	},
 
-	rebuild: function() {
-		this._super();
-
-		if ( this.options.mode === "reflow" ) {
-			this._refresh( false );
-		}
-	},
-
 	_refreshHeadCell: function( cellIndex, element, columnCount ) {
 		element.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
 		return this._superApply( arguments );
 	},
 
-	_refresh: function() {
+	refresh: function() {
 		this._superApply( arguments );
 		if ( this.options.mode === "reflow" ) {
 			this._updateReflow( );
