@@ -174,7 +174,7 @@
 	});
 
 	asyncTest( "Toggle column", function() {
-		expect( 6 );
+		expect( 9 );
 
 		var initial, post,
 			input = $( "#toggle-column-test-popup input:nth(1)" ),
@@ -224,6 +224,17 @@
 					post = checkColumn( "After clicking: " );
 					deepEqual( initial !== post, true,
 						"Visibility was toggled by clicking the checkbox" );
+					input.prop( "checked", false ).checkboxradio( "refresh" ).trigger( "change" );
+					post = initial;
+				},
+				{
+					change: { src: input, event: "change.toggleColumn2" }
+				},
+				function() {
+					post = checkColumn( "After unchecking checkbox via its 'checked' property" );
+					deepEqual( initial === post, true,
+						"Unchecking already unchecked checkbox via its 'checked' property does " +
+						"not affect column visibility" );
 					start();
 				}
 			]);
