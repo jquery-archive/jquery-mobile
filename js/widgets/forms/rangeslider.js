@@ -9,6 +9,7 @@ define( [ "jquery",
 	"../../core",
 	"../../widget",
 	"./textinput",
+	"../../vmouse",
 	"./reset",
 	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
