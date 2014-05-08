@@ -7,6 +7,7 @@
 
 define( [ "jquery",
 	"../../core",
+	"../../vmouse",
 	"../../widget",
 	"./textinput",
 	"./reset" ], function( jQuery ) {
