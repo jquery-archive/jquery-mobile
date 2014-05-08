@@ -38,18 +38,11 @@ return $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_create: function() {
-		this._super();
-
-		// If it's not reflow mode, return here.
-		if ( this.options.mode !== "reflow" ) {
-			return;
-		}
-
-		if ( !this.options.enhanced ) {
+		if ( this.options.mode === "reflow" && !this.options.enhanced ) {
 			this.element.addClass( this.options.classes.reflowTable );
-
-			this._updateReflow();
 		}
+
+		return this._superApply( arguments );
 	},
 
 	rebuild: function() {
@@ -60,10 +53,15 @@ return $.widget( "mobile.table", $.mobile.table, {
 		}
 	},
 
-	_refresh: function( create ) {
-		this._super( create );
-		if ( !create && this.options.mode === "reflow" ) {
-			this._updateReflow();
+	_refreshHeadCell: function( cellIndex, element, columnCount ) {
+		element.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
+		return this._superApply( arguments );
+	},
+
+	_refresh: function() {
+		this._superApply( arguments );
+		if ( this.options.mode === "reflow" ) {
+			this._updateReflow( );
 		}
 	},
 
