@@ -30,7 +30,7 @@ $.widget( "mobile.table", {
 			this.element.addClass( this.options.classes.table );
 		}
 
-		this._refresh( true );
+		this.refresh();
 	},
 
 	_setOptions: function( options ) {
@@ -45,11 +45,9 @@ $.widget( "mobile.table", {
 		this.allHeaders = this.element.find( "thead tr" ).children().add( this.headers );
 	},
 
-	refresh: function() {
-		this._refresh();
+	rebuild: function() {
+		this.refresh();
 	},
-
-	rebuild: $.noop,
 
 	_refreshHeadCell: function( cellIndex, element, columnCount ) {
 		var columnIndex,
@@ -85,7 +83,7 @@ $.widget( "mobile.table", {
 		}, this ) );
 	},
 
-	_refresh: function( /* create */ ) {
+	refresh: function() {
 		var table = this.element,
 			trs = table.find( "thead tr" );
 
