@@ -25,6 +25,15 @@ define( [
 
 		// resolved and nulled on window.load()
 		loadDeferred = $.Deferred(),
+
+		// function that resolves the above deferred
+		pageIsFullyLoaded = function() {
+
+			// Resolve and null the deferred
+			loadDeferred.resolve();
+			loadDeferred = null;
+		},
+
 		documentUrl = $.mobile.path.documentUrl,
 
 		// used to track last vclicked element to make sure its value is added to form data
@@ -442,12 +451,12 @@ define( [
 
 	$( function() { domreadyDeferred.resolve(); } );
 
-	$.mobile.window.load( function() {
-
-		// Resolve and null the deferred
-		loadDeferred.resolve();
-		loadDeferred = null;
-	});
+	// Account for the possibility that the load event has already fired
+	if ( document.readyState === "complete" ) {
+		pageIsFullyLoaded();
+	} else {
+		$.mobile.window.load( pageIsFullyLoaded );
+	}
 
 	$.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() { $.mobile._registerInternalEvents(); } );
 })( jQuery );
