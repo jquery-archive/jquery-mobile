@@ -14,9 +14,9 @@
 	<script>
 	$.mobile.document
 
-		// "filter-menu-menu" is the ID generated for the listview when it is created by the custom
-		// selectmenu plugin. Upon creation of the listview widget we want to prepend an input field
-		// to the list to be used for a filter.
+		// The custom selectmenu plugin generates an ID for the listview by suffixing the ID of the
+		// native widget with "-menu". Upon creation of the listview widget we want to place an
+		// input field before the list to be used for a filter.
 		.on( "listviewcreate", "#filter-menu-menu,#title-filter-menu-menu", function( event ) {
 			var input,
 				list = $( event.target )
@@ -58,6 +58,7 @@
 			// to the popup, so we won't be able to find it inside the dialog with a selector.
 			dialog.jqmData( "listview", listview );
 
+			// Place the form before the listview in the dialog.
 			listview.before( form );
 		})
 
@@ -66,6 +67,7 @@
 			var listview = $( event.target ).jqmData( "listview" ),
 				form = listview.jqmData( "filter-form" );
 
+			// Put the form back in the popup. It goes ahead of the listview.
 			listview.before( form );
 		});
 	</script>
