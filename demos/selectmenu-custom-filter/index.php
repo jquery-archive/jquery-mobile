@@ -14,56 +14,61 @@
 	<script>
 	$.mobile.document
 
-		// "filter-menu-menu" is the ID generated for the listview when it is created
-		// by the custom selectmenu plugin. Upon creation of the listview widget we
-		// want to prepend an input field to the list to be used for a filter.
-		.on( "listviewcreate", "#filter-menu-menu", function( e ) {
+		// The custom selectmenu plugin generates an ID for the listview by suffixing the ID of the
+		// native widget with "-menu". Upon creation of the listview widget we want to place an
+		// input field before the list to be used for a filter.
+		.on( "listviewcreate", "#filter-menu-menu,#title-filter-menu-menu", function( event ) {
 			var input,
-				listbox = $( "#filter-menu-listbox" ),
-				form = listbox.jqmData( "filter-form" ),
-				listview = $( e.target );
+				list = $( event.target )
+				form = list.jqmData( "filter-form" );
 
-			// We store the generated form in a variable attached to the popup so we
-			// avoid creating a second form/input field when the listview is
-			// destroyed/rebuilt during a refresh.
+			// We store the generated form in a variable attached to the popup so we avoid creating a
+			// second form/input field when the listview is destroyed/rebuilt during a refresh.
 			if ( !form ) {
 				input = $( "<input data-type='search'></input>" );
 				form = $( "<form></form>" ).append( input );
 
 				input.textinput();
 
-				$( "#filter-menu-listbox" )
-					.prepend( form )
-					.jqmData( "filter-form", form );
+				list
+					.before( form )
+					.jqmData( "filter-form", form )	;
+				form.jqmData( "listview", list );
 			}
 
-			// Instantiate a filterable widget on the newly created listview and
-			// indicate that the generated input is to be used for the filtering.
-			listview.filterable({ input: input });
+			// Instantiate a filterable widget on the newly created listview and indicate that the
+			// generated input is to be used for the filtering.
+			list.filterable({
+				input: input,
+				children: "> li:not(:jqmData(placeholder='true'))"
+			});
 		})
 
-		// The custom select list may show up as either a popup or a dialog,
-		// depending how much vertical room there is on the screen. If it shows up
-		// as a dialog, then the form containing the filter input field must be
-		// transferred to the dialog so that the user can continue to use it for
-		// filtering list items.
-		//
-		// After the dialog is closed, the form containing the filter input is
-		// transferred back into the popup.
-		.on( "pagebeforeshow pagehide", "#filter-menu-dialog", function( e ) {
-			var form = $( "#filter-menu-listbox" ).jqmData( "filter-form" ),
-				placeInDialog = ( e.type === "pagebeforeshow" ),
-				destination = placeInDialog ? $( e.target ).find( ".ui-content" ) : $( "#filter-menu-listbox" );
+		// The custom select list may show up as either a popup or a dialog, depending how much
+		// vertical room there is on the screen. If it shows up as a dialog, then the form containing
+		// the filter input field must be transferred to the dialog so that the user can continue to
+		// use it for filtering list items.
+		.on( "pagebeforeshow", "#filter-menu-dialog,#title-filter-menu-dialog", function( event ) {
+			var dialog = $( event.target )
+				listview = dialog.find( "ul" ),
+				form = listview.jqmData( "filter-form" );
 
-			form
-				.find( "input" )
+			// Attach a reference to the listview as a data item to the dialog, because during the
+			// pagehide handler below the selectmenu widget will already have returned the listview
+			// to the popup, so we won't be able to find it inside the dialog with a selector.
+			dialog.jqmData( "listview", listview );
 
-				// Turn off the "inset" option when the filter input is inside a dialog
-				// and turn it back on when it is placed back inside the popup, because
-				// it looks better that way.
-				.textinput( "option", "inset", !placeInDialog )
-				.end()
-				.prependTo( destination );
+			// Place the form before the listview in the dialog.
+			listview.before( form );
+		})
+
+		// After the dialog is closed, the form containing the filter input is returned to the popup.
+		.on( "pagehide", "#filter-menu-dialog,#title-filter-menu-dialog", function( event ) {
+			var listview = $( event.target ).jqmData( "listview" ),
+				form = listview.jqmData( "filter-form" );
+
+			// Put the form back in the popup. It goes ahead of the listview.
+			listview.before( form );
 		});
 	</script>
 	<style>
@@ -114,6 +119,20 @@
 					<option value="LAX">Los Angeles</option>
 					<option value="YVR">Vancouver</option>
 					<option value="YYZ">Toronto</option>
+				</select>
+			</form>
+		</div>
+
+		<p>You can also handle custom menus with placeholder items:</p>
+
+		<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
+			<form>
+				<select id="title-filter-menu" data-native-menu="false">
+					<option>Select fruit...</option>
+					<option value="orange">Orange</option>
+					<option value="apple">Apple</option>
+					<option value="peach">Peach</option>
+					<option value="Lemon">Lemon</option>
 				</select>
 			</form>
 		</div>
