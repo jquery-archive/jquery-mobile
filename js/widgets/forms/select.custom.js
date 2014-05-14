@@ -158,7 +158,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		dividerThemeAttr = ( o.dividerTheme && isMultiple ) ? ( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
 		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogId + "'" + themeAttr + overlayThemeAttr + ">" +
 			"<div data-" + $.mobile.ns + "role='header'>" +
-			"<div class='ui-title'>" + label.getEncodedText() + "</div>"+
+			"<div class='ui-title'></div>"+
 			"</div>"+
 			"<div data-" + $.mobile.ns + "role='content'></div>"+
 			"</div>" );
@@ -397,7 +397,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
-			self.menuPage.find( "div .ui-title" ).text( self.label.text() );
+			self.menuPage
+				.find( "div .ui-title" )
+					.text( self.label.getEncodedText() || self.placeholder );
 		} else {
 			self.menuType = "overlay";
 
@@ -439,7 +441,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			}
 
 			parent = option.parentNode;
-			text = $option.text();
+			text = $option.getEncodedText();
 			anchor  = document.createElement( "a" );
 			classes = [];
 

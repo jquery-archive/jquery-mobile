@@ -346,6 +346,26 @@
 		]);
 	});
 
+	asyncTest( "dialog size select title should match the placeholder when there's no label",
+		function() {
+			var $select = $( "#select-choice-many-placeholder-1" ),
+				$label = $( "#select-choice-many-placeholder-1-listbox li:first" ),
+				$button = $select.siblings( "a" );
+
+			$.testHelper.pageSequence([
+				function() {
+					$button.click();
+				},
+
+				function() {
+					deepEqual($.mobile.activePage.find( ".ui-title" ).text(), $label.text());
+					window.history.back();
+				},
+
+				start
+			]);
+		});
+
 	asyncTest( "dialog size select title should match the label when changed after the dialog markup is added to the DOM", function() {
 		var $select = $( "#select-choice-many-1\\.dotTest" ),
 			$label = $select.parent().siblings( "label" ),
