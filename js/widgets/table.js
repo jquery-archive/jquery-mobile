@@ -63,20 +63,17 @@ return $.widget( "mobile.table", {
 	},
 
 	_setHeaders: function() {
-		var headerRows = this.element.children( "thead" ).children( "tr" );
-
-		this.headers = headerRows.first().children();
-		this.allHeaders = headerRows.children();
+		this.headerRows = this.element.children( "thead" ).children( "tr" );
+		this.headers = this.headerRows.first().children();
+		this.allHeaders = this.headerRows.children();
 	},
 
 	rebuild: function() {
 		this.refresh();
 	},
 
-	_refreshHeadCell: function( cellIndex, element, columnCount ) {
+	_refreshHeaderCell: function( cellIndex, element, columnCount ) {
 		var columnIndex,
-			table = this.element,
-			trs = table.find( "thead tr" ),
 			span = parseInt( element.getAttribute( "colspan" ), 10 ),
 			selector = ":nth-child(" + ( columnCount + 1 ) + ")";
 
@@ -89,33 +86,31 @@ return $.widget( "mobile.table", {
 
 		// Store "cells" data on header as a reference to all cells in the same column as this TH
 		$( element ).jqmData( "cells",
-			table
-				.find( "tr" )
-					.not( trs.eq( 0 ) )
+			this.element
+				.children( "thead,tbody" )
+				.children( "tr" )
+					.not( this.headerRows.eq( 0 ) )
 					.not( element )
 					.children( selector ) );
 
 		return columnCount;
 	},
 
-	_refreshHeadRow: function( rowIndex, element ) {
+	_refreshHeaderRow: function( rowIndex, element ) {
 		var columnCount = 0;
 
 		// Iterate over the children of the tr
 		$( element ).children().each( $.proxy( function( cellIndex, element ) {
-			columnCount = this._refreshHeadCell( cellIndex, element, columnCount ) + 1;
+			columnCount = this._refreshHeaderCell( cellIndex, element, columnCount ) + 1;
 		}, this ) );
 	},
 
 	refresh: function() {
-		var table = this.element,
-			trs = table.find( "thead tr" );
-
 		// updating headers on refresh (fixes #5880)
 		this._setHeaders();
 
-		// Iterate over the trs
-		trs.each( $.proxy( this, "_refreshHeadRow" ) );
+		// Iterate over the header rows
+		this.headerRows.each( $.proxy( this, "_refreshHeaderRow" ) );
 	},
 
 	_destroy: function() {

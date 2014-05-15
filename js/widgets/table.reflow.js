@@ -45,7 +45,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 		return this._superApply( arguments );
 	},
 
-	_refreshHeadCell: function( cellIndex, element, columnCount ) {
+	_refreshHeaderCell: function( cellIndex, element, columnCount ) {
 		element.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
 		return this._superApply( arguments );
 	},
