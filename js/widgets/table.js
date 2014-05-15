@@ -39,12 +39,12 @@ return $.widget( "mobile.table", {
 		enhanced: false
 	},
 
-	// Expose headers and allHeaders properties on the widget
-	// headers references the THs within the first TR in the table
+	// Expose headers and allHeaders properties on the widget headers references the THs within the
+	// first TR in the table
 	headers: null,
 
-	// allHeaders references headers, plus all THs in the thead, which may
-	// include several rows, or not
+	// allHeaders references headers, plus all THs in the thead, which may or may not include
+	// several rows
 	allHeaders: null,
 
 	_create: function() {
@@ -63,8 +63,10 @@ return $.widget( "mobile.table", {
 	},
 
 	_setHeaders: function() {
-		this.headers = this.element.find( "tr:eq(0)" ).children();
-		this.allHeaders = this.element.find( "thead tr" ).children().add( this.headers );
+		var headerRows = this.element.children( "thead" ).children( "tr" );
+
+		this.headers = headerRows.first().children();
+		this.allHeaders = headerRows.children();
 	},
 
 	rebuild: function() {
