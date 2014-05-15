@@ -66,6 +66,10 @@ return $.widget( "mobile.table", {
 		this.headerRows = this.element.children( "thead" ).children( "tr" );
 		this.headers = this.headerRows.first().children();
 		this.allHeaders = this.headerRows.children();
+		this.allRowsExceptFirst = this.element
+			.children( "thead,tbody" )
+				.children( "tr" )
+					.not( this.headerRows.eq( 0 ) );
 	},
 
 	rebuild: function() {
@@ -86,12 +90,9 @@ return $.widget( "mobile.table", {
 
 		// Store "cells" data on header as a reference to all cells in the same column as this TH
 		$( element ).jqmData( "cells",
-			this.element
-				.children( "thead,tbody" )
-				.children( "tr" )
-					.not( this.headerRows.eq( 0 ) )
-					.not( element )
-					.children( selector ) );
+			this.allRowsExceptFirst
+				.not( element )
+				.children( selector ) );
 
 		return columnCount;
 	},
