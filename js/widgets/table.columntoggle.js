@@ -59,14 +59,32 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._instantiating = false;
 	},
 
+	_themeClassFromOption: function( prefix, value ) {
+		return ( value ? ( value === "none" ? "" : prefix + value ) : "" );
+	},
+
 	_setOptions: function( options ) {
-		if ( options.disabled !== undefined && this.options.mode === "columntoggle" ) {
-			this._ui.popup.popup( "option", "disabled", options.disabled );
-			this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
-			if( options.disabled ) {
-				this._ui.button.attr( "tabindex", -1 );
-			} else {
-				this._ui.button.removeAttr( "tabindex" );
+		if ( this.options.mode === "columntoggle" ) {
+			if ( options.disabled !== undefined ) {
+				this._ui.popup.popup( "option", "disabled", options.disabled );
+				this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
+				if( options.disabled ) {
+					this._ui.button.attr( "tabindex", -1 );
+				} else {
+					this._ui.button.removeAttr( "tabindex" );
+				}
+			}
+			if ( options.columnBtnTheme !== undefined ) {
+				this._ui.button
+					.removeClass(
+						this._themeClassFromOption( "ui-btn-", this.options.columnBtnTheme ) )
+					.addClass( this._themeClassFromOption( "ui-btn-", options.columnBtnTheme ) );
+			}
+			if ( options.columnPopupTheme !== undefined ) {
+				this._ui.popup.popup( "option", "theme", options.columnPopupTheme );
+			}
+			if ( options.columnBtnText !== undefined ) {
+				this._ui.button.text( options.columnBtnText );
 			}
 		}
 
@@ -160,16 +178,20 @@ $.widget( "mobile.table", $.mobile.table, {
 			table = this.element,
 			opts = this.options,
 			ns = $.mobile.ns,
+			buttonTheme = this._themeClassFromOption( "ui-btn-", opts.columnBtnTheme ),
+			popupThemeAttr = opts.columnPopupTheme ?
+				( " data-" + $.mobile.ns + "theme='" + opts.columnPopupTheme + "'" ) : "",
 			fragment = this.document[ 0 ].createDocumentFragment();
 
 		id = this._id() + "-popup";
 		menuButton = $( "<a href='#" + id + "' " +
 			"id='" + this._id() + "-button' " +
-			"class='" + opts.classes.columnBtn + " ui-btn " +
-			"ui-btn-" + ( opts.columnBtnTheme || "a" ) +
-			" ui-corner-all ui-shadow ui-mini' " +
+			"class='ui-btn ui-corner-all ui-shadow ui-mini" +
+				( opts.classes.columnBtn ? " " + opts.classes.columnBtn : "" ) +
+				( buttonTheme ? " " + buttonTheme : "" ) + "' " +
 			"data-" + ns + "rel='popup'>" + opts.columnBtnText + "</a>" );
-		popup = $( "<div class='" + opts.classes.popup + "' id='" + id + "'></div>" );
+		popup = $( "<div class='" + opts.classes.popup + "' id='" + id + "'" +
+			popupThemeAttr + "></div>" );
 		menu = $( "<fieldset></fieldset>" ).controlgroup();
 
 		// set extension here, send "false" to trigger build/rebuild
