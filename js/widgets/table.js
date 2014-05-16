@@ -72,6 +72,7 @@ return $.widget( "mobile.table", {
 					.not( this.headerRows.eq( 0 ) );
 	},
 
+	// Deprecated as of 1.5.0 and will be removed in 1.6.0 - use refresh() instead
 	rebuild: function() {
 		this.refresh();
 	},
