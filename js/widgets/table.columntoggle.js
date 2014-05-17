@@ -238,33 +238,60 @@ return $.widget( "mobile.table", $.mobile.table, {
 		};
 	},
 
+	// Use the .jqmData() stored on the checkboxes to determine which columns have show/hide
+	// overrides, and make a list of the indices of those that have such overrides
+	_recordLockedColumns: function() {
+		var headers = this.headers,
+			lockedColumns = [];
+
+		// Find the index of the column header associated with each old checkbox among the
+		// post-refresh headers and, if the header is still there, make sure the corresponding
+		// column will be hidden if the pre-refresh checkbox indicates that the column is
+		// hidden by recording its index in the array of hidden columns.
+		this._ui.menu.find( "input" ).each( function() {
+			var input = $( this ),
+				header = input.jqmData( "header" ),
+				index = -1;
+
+			if ( header ) {
+				index = headers.index( header[ 0 ] );
+			}
+
+			if ( index > -1 && !input.prop( "checked" ) ) {
+
+				// The column header associated with /this/ checkbox is still present in the
+				// post-refresh table and the checkbox is not checked, so the column associated
+				// with this column header is currently hidden. Let's record that.
+				lockedColumns.push( index );
+			}
+		});
+
+		return lockedColumns;
+	},
+
+	_restoreLockedColumns: function( lockedColumns ) {
+		var index;
+
+		// At this point all columns are visible, so uncheck the checkboxes that correspond to
+		// those columns we've found to be hidden
+		for ( index = lockedColumns.length - 1 ; index > -1 ; index-- ) {
+			this.headers.eq( lockedColumns[ index ] ).jqmData( "input" )
+				.prop( "checked", false )
+				.checkboxradio( "refresh" )
+				.trigger( "change" );
+		}
+	},
+
 	refresh: function() {
-		var headers, hiddenColumns, index;
+		var lockedColumns;
 
 		// Calling _super() here updates this.headers
 		this._super();
 
 		if ( !this._instantiating && this.options.mode === "columntoggle" ) {
-			headers = this.headers;
-			hiddenColumns = [];
 
-			// Find the index of the column header associated with each old checkbox among the
-			// post-refresh headers and, if the header is still there, make sure the corresponding
-			// column will be hidden if the pre-refresh checkbox indicates that the column is
-			// hidden by recording its index in the array of hidden columns.
-			this._ui.menu.find( "input" ).each( function() {
-				var input = $( this ),
-					header = input.jqmData( "header" ),
-					index = headers.index( header[ 0 ] );
-
-				if ( index > -1 && !input.prop( "checked" ) ) {
-
-					// The column header associated with /this/ checkbox is still present in the
-					// post-refresh table and the checkbox is not checked, so the column associated
-					// with this column header is currently hidden. Let's record that.
-					hiddenColumns.push( index );
-				}
-			} );
+			// Record which columns are locked
+			lockedColumns = this._recordLockedColumns();
 
 			// columns not being replaced must be cleared from input toggle-locks
 			this._unlockCells();
@@ -272,14 +299,9 @@ return $.widget( "mobile.table", $.mobile.table, {
 			// update columntoggles and cells
 			this._addToggles( this._ui.menu, false );
 
-			// At this point all columns are visible, so uncheck the checkboxes that correspond to
-			// those columns we've found to be hidden
-			for ( index = hiddenColumns.length - 1; index > -1; index-- ) {
-				headers.eq( hiddenColumns[ index ] ).jqmData( "input" )
-					.prop( "checked", false )
-					.checkboxradio( "refresh" )
-					.trigger( "change" );
-			}
+			// Make sure columns that were locked before this refresh, and which are still around
+			// after the refresh, are restored to their locked state
+			this._restoreLockedColumns( lockedColumns );
 		}
 	},
 
