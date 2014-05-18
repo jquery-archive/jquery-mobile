@@ -257,11 +257,16 @@ return $.widget( "mobile.table", $.mobile.table, {
 				index = headers.index( header[ 0 ] );
 			}
 
-			if ( index > -1 && !input.prop( "checked" ) ) {
-
+			if ( index > -1 ) {
 				// The column header associated with /this/ checkbox is still present in the
-				// post-refresh table and the checkbox is not checked, so the column associated
-				// with this column header is currently hidden. Let's record that.
+				// post-refresh table and it is locked, so the column associated with this column
+				// header is also currently locked. Let's record that.
+				lockedColumns = lockedColumns.concat(
+					header.hasClass( "ui-table-cell-visible" ) ?
+						[ { index: index, visible: true } ] :
+					header.hasClass( "ui-table-cell-hidden" ) ?
+						[ { index: index, visible: false } ] : [] );
+
 				lockedColumns.push( index );
 			}
 		});
@@ -270,15 +275,21 @@ return $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_restoreLockedColumns: function( lockedColumns ) {
-		var index;
+		var index, lockedStatus, input;
 
-		// At this point all columns are visible, so uncheck the checkboxes that correspond to
-		// those columns we've found to be hidden
+		// At this point all columns are visible, so programmatically check/uncheck all the
+		// checkboxes that correspond to columns that were previously unlocked so as to ensure that
+		// the unlocked status is restored
 		for ( index = lockedColumns.length - 1 ; index > -1 ; index-- ) {
-			this.headers.eq( lockedColumns[ index ] ).jqmData( "input" )
-				.prop( "checked", false )
-				.checkboxradio( "refresh" )
-				.trigger( "change" );
+			lockedStatus = lockedColumns[ index ];
+			input = this.headers.eq( lockedStatus.index ).jqmData( "input" );
+
+			if ( input ) {
+				input
+					.prop( "checked", lockedStatus.visible )
+					.checkboxradio( "refresh" )
+					.trigger( "change" );
+			}
 		}
 	},
 
