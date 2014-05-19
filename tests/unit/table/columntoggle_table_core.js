@@ -55,7 +55,7 @@ test( "The page should be enhanced correctly", function() {
 });
 
 asyncTest( "Toggle column", function() {
-	expect( 9 );
+	expect( 12 );
 
 	var initial, post,
 		input = $( "#toggle-column-test-popup input:nth(1)" ),
@@ -105,19 +105,37 @@ asyncTest( "Toggle column", function() {
 			post = checkColumn( "After clicking: " );
 			deepEqual( initial !== post, true, "Visibility was toggled by clicking the checkbox" );
 
-			// Uncheck an already unchecked checkbox
-			input.prop( "checked", false ).checkboxradio( "refresh" ).trigger( "change" );
 			initial = post;
-		},
-		{
-			change: { src: input, event: "change.toggleColumn2" }
-		},
-		function() {
-			post = checkColumn( "After unchecking checkbox via its 'checked' property" );
-			deepEqual( initial, post,
-				"Unchecking already unchecked checkbox via its 'checked' property does " +
-				"not affect column visibility" );
-			start();
+
+			// If the column is currently visible, turn it off and then proceed with the test.
+			// Otherwise, proceed with the test immediately. The test consists of making sure that
+			// programmatically unchecking a checkbox that's already unchecked alters neither the
+			// visibility of the column, not the checked state of the checkbox
+			$.testHelper.detailedEventCascade( ( post === true ? [
+				function() {
+					input.click().checkboxradio( "refresh" ).trigger( "change" );
+				},
+				{
+					change: { src: input, event: "change.toggleColumn2" }
+				}
+			] : [] ).concat( [
+				function() {
+					post = checkColumn( "After making sure input is off: " );
+					deepEqual( post, false, "Column is not visible" );
+					input.prop( "checked", false ).checkboxradio( "refresh" ).trigger( "change" );
+				},
+				{
+					change: { src: input, event: "change.toggleColumn3" }
+				},
+				function() {
+					post = checkColumn( "After programmatically unchecking an already unchecked " +
+						"checkbox: " );
+					deepEqual( post, false,
+						"Unchecking already unchecked checkbox by programmatically setting its" +
+						"'checked' property does not affect column visibility" );
+					start();
+				}
+			]));
 		}
 	]);
 });
