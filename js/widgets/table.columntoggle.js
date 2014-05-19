@@ -30,6 +30,8 @@ $.widget( "mobile.table", $.mobile.table, {
 	_create: function() {
 		var id, popup;
 
+		// Needed because the superclass calls refresh() which needs to behave differently if
+		// _create() hasn't happened yet
 		this._instantiating = true;
 
 		this._super();
@@ -56,6 +58,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		this._setToggleState();
 
+		// Cause refresh() to revert to normal operation
 		this._instantiating = false;
 	},
 
