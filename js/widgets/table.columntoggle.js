@@ -191,11 +191,13 @@ return $.widget( "mobile.table", $.mobile.table, {
 			.toggleClass( "ui-table-cell-visible", checked );
 	},
 
-	_unlockCells: function() {
+	unlock: function() {
 		// allow hide/show via CSS only = remove all toggle-locks
 		this.element
-			.find( ".ui-table-cell-hidden, .ui-table-cell-visible" )
-				.removeClass( "ui-table-cell-hidden ui-table-cell-visible" );
+			.children( "thead, tbody" )
+				.children( "tr" )
+					.children( ".ui-table-cel-hidden, .ui-table-cell-visible" )
+						.removeClass( "ui-table-cell-hidden ui-table-cell-visible" );
 	},
 
 	_enhanceColToggle: function() {
@@ -305,7 +307,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 			lockedColumns = this._recordLockedColumns();
 
 			// columns not being replaced must be cleared from input toggle-locks
-			this._unlockCells();
+			this.unlock();
 
 			// update columntoggles and cells
 			this._addToggles( this._ui.menu, false );
