@@ -289,12 +289,18 @@ test( "Table refresh does not drop columns", function() {
 			"data columns" );
 });
 
-test( "Hidden columns stay hidden after row/column addition", function() {
+test( "Locked columns stay locked after row/column addition", function() {
 	var table = $( "#refresh-hidden-column-test" );
 
-	// Hide a column
+	// Force a column into the hidden state
 	$( "#refresh-hidden-column-test-popup" ).find( "input" ).eq( 2 )
 		.prop( "checked", false )
+		.checkboxradio( "refresh" )
+		.trigger( "change" );
+
+	// Force a column into the shown state
+	$( "#refresh-hidden-column-test-popup" ).find( "input" ).eq( 3 )
+		.prop( "checked", true )
 		.checkboxradio( "refresh" )
 		.trigger( "change" );
 
@@ -309,16 +315,56 @@ test( "Hidden columns stay hidden after row/column addition", function() {
 		"</tr>" );
 	table.table( "refresh" );
 
+	deepEqual(
+		$( "#refresh-hidden-column-test tr" )
+			.children( "td:nth-child(4), th:nth-child(4)" )
+				.is( function() {
+					return !( $( this ).hasClass( "ui-table-cell-hidden" ) );
+				}),
+		false,
+		"After adding row, all forced-hidden column cells have class 'ui-table-cell-hidden'" );
+
+	deepEqual(
+		$( "#refresh-hidden-column-test tr" )
+			.children( "td:nth-child(5), th:nth-child(5)" )
+				.is( function() {
+					return !( $( this ).hasClass( "ui-table-cell-visible" ) );
+				}), false,
+		"After adding row: All forced-hidden column cells have class 'ui-table-cell-visible'" );
+
 	deepEqual( $( "#refresh-hidden-column-test-popup" ).find( "input" ).eq( 2 ).prop( "checked" ),
-		false, "Checkbox remains unchecked after row addition and table refresh" );
+		false, "Unchecked checkbox remains unchecked after row addition and table refresh" );
+
+	deepEqual( $( "#refresh-hidden-column-test-popup" ).find( "input" ).eq( 3 ).prop( "checked" ),
+		true, "Checked checkbox remains checked after row addition and table refresh" );
 
 	// Add a column
-	table.find( "thead tr th:nth(2)" ).before( "<th data-nstest-priority='4'>Test</th>" );
-	table.find( "tbody tr th:nth(2)" ).each( function() {
+	table.find( "thead tr th:nth-child(2)" ).before( "<th data-nstest-priority='4'>Test</th>" );
+	table.find( "tbody tr th:nth-child(2)" ).each( function() {
 		$( this ).before( "<td>Test</td>" );
 	});
 	table.table( "refresh" );
 
+	deepEqual(
+		$( "#refresh-hidden-column-test tr" )
+			.children( "td:nth-child(5), th:nth-child(5)" )
+				.is( function() {
+					return !( $( this ).hasClass( "ui-table-cell-hidden" ) );
+				}),
+		false,
+		"After adding column, all forced-hidden column cells have class 'ui-table-cell-hidden'" );
+
+	deepEqual(
+		$( "#refresh-hidden-column-test tr" )
+			.children( "td:nth-child(6), th:nth-child(6)" )
+				.is( function() {
+					return !( $( this ).hasClass( "ui-table-cell-visible" ) );
+				}), false,
+		"After adding column: All forced-hidden column cells have class 'ui-table-cell-visible'" );
+
 	deepEqual( $( "#refresh-hidden-column-test-popup" ).find( "input" ).eq( 3 ).prop( "checked" ),
-		false, "Checkbox remains unchecked after row addition and table refresh" );
+		false, "Unchecked checkbox remains unchecked after column addition and table refresh" );
+
+	deepEqual( $( "#refresh-hidden-column-test-popup" ).find( "input" ).eq( 4 ).prop( "checked" ),
+		true, "Checked checkbox remains checked after column addition and table refresh" );
 });
