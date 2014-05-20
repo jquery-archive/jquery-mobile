@@ -19,7 +19,7 @@ $.mobile.document
 	// input field before the list to be used for a filter.
 	.on( "listviewcreate", "#filter-menu-menu,#title-filter-menu-menu", function( event ) {
 		var input,
-			list = $( event.target )
+			list = $( event.target ),
 			form = list.jqmData( "filter-form" );
 
 		// We store the generated form in a variable attached to the popup so we avoid creating a
