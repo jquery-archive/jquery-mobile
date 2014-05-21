@@ -40,7 +40,8 @@ test( "Columntoggle table is enhanced correctly", function() {
 					.children( "tbody" )
 						.children()
 							.children( ":nth(" + index + ")" )
-								.filter( ":not(.ui-table-priority-" + priority + ")" ).length === 0 );
+								.filter( ":not(.ui-table-priority-" + priority + ")" )
+									.length === 0 );
 		}
 
 		// If incorrect priorities have been identified, stop .each()-ing
