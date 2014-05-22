@@ -24,6 +24,39 @@ $.widget( "mobile.table", $.mobile.table, {
 		})
 	},
 
+	_create: function() {
+		var id, popup;
+
+		this._super();
+
+		if ( this.options.mode !== "columntoggle" ) {
+			return;
+		}
+
+		if ( this.options.enhanced ) {
+			id = this._id();
+			popup = $( this.document[ 0 ].getElementById( id + "-popup" ) );
+			this._ui = {
+				popup: popup,
+				menu: popup.children().first(),
+				button: $( this.document[ 0 ].getElementById( id + "-button" ) )
+			};
+			this._addToggles( this._ui.menu, true );
+		} else {
+			this._ui = this._enhanceColToggle();
+			this.element.addClass( this.options.classes.columnToggleTable );
+		}
+
+		this._setupEvents();
+
+		this._setToggleState();
+
+	},
+
+	_id: function() {
+		return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
+	},
+
 	_themeClassFromOption: function( prefix, value ) {
 		return ( value ? ( value === "none" ? "" : prefix + value ) : "" );
 	},
