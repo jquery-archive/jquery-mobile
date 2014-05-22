@@ -47,6 +47,7 @@ define([
 	"./widgets/panel",
 	"./widgets/table",
 	"./widgets/table.columntoggle",
+	"./widgets/table.columntoggle.popup",
 	"./widgets/table.reflow",
 	"./widgets/filterable",
 	"./widgets/filterable.backcompat",
