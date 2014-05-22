@@ -14,32 +14,16 @@
 //>>demos: http://demos.jquerymobile.com/@VERSION/table-column-toggle/
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
-( function( factory ) {
-	if ( typeof define === "function" && define.amd ) {
-
-		// AMD. Register as an anonymous module.
-		define( [
-			"jquery",
-			"./table",
-			"./popup",
-			"./controlgroup",
-			"../jquery-ui/checkboxradio" ], factory );
-	} else {
-
-		// Browser globals
-		factory( jQuery );
-	}
-} )( function( $ ) {
+define( [
+	"jquery",
+	"./table" ], function( jQuery ) {
+//>>excludeEnd("jqmBuildExclude");
+(function( $, undefined ) {
 
 return $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		mode: "columntoggle",
-		columnBtnTheme: null,
-		columnPopupTheme: null,
-		columnBtnText: "Columns...",
 		classes: $.extend( {}, $.mobile.table.prototype.options.classes, {
-			popup: "ui-table-columntoggle-popup",
-			columnBtn: "ui-table-columntoggle-button",
 			priorityPrefix: "ui-table-priority-",
 			columnToggleTable: "ui-table-columntoggle"
 		} )
@@ -80,54 +64,8 @@ return $.widget( "mobile.table", $.mobile.table, {
 		this._instantiating = false;
 	},
 
-	_themeClassFromOption: function( prefix, value ) {
-		return ( value ? ( value === "none" ? "" : prefix + value ) : "" );
-	},
-
-	_setOptions: function( options ) {
-		if ( this.options.mode === "columntoggle" ) {
-			if ( options.disabled !== undefined ) {
-				this._ui.popup.popup( "option", "disabled", options.disabled );
-				this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
-				if( options.disabled ) {
-					this._ui.button.attr( "tabindex", -1 );
-				} else {
-					this._ui.button.removeAttr( "tabindex" );
-				}
-			}
-			if ( options.columnBtnTheme !== undefined ) {
-				this._ui.button
-					.removeClass(
-						this._themeClassFromOption( "ui-btn-", this.options.columnBtnTheme ) )
-					.addClass( this._themeClassFromOption( "ui-btn-", options.columnBtnTheme ) );
-			}
-			if ( options.columnPopupTheme !== undefined ) {
-				this._ui.popup.popup( "option", "theme", options.columnPopupTheme );
-			}
-			if ( options.columnBtnText !== undefined ) {
-				this._ui.button.text( options.columnBtnText );
-			}
-		}
-
-		return this._super( options );
-	},
-
 	_id: function() {
 		return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
-	},
-
-	_setupEvents: function() {
-		//NOTE: inputs are bound in bindToggles,
-		// so it can be called on refresh, too
-
-		// update column toggles on resize
-		this._on( this.window, {
-			throttledresize: "_setToggleState"
-		});
-
-		this._on( this._ui.menu, {
-			"change input": "_menuInputChange"
-		} );
 	},
 
 	_addToggles: function( menu, keep ) {
@@ -185,15 +123,6 @@ return $.widget( "mobile.table", $.mobile.table, {
 		}
 	},
 
-	_menuInputChange: function( evt ) {
-		var input = $( evt.target ),
-			checked = input[ 0 ].checked;
-
-		input.jqmData( "cells" )
-			.toggleClass( "ui-table-cell-hidden", !checked )
-			.toggleClass( "ui-table-cell-visible", checked );
-	},
-
 	unlock: function() {
 		// allow hide/show via CSS only = remove all toggle-locks
 		this.element
@@ -201,46 +130,6 @@ return $.widget( "mobile.table", $.mobile.table, {
 				.children( "tr" )
 					.children( ".ui-table-cel-hidden, .ui-table-cell-visible" )
 						.removeClass( "ui-table-cell-hidden ui-table-cell-visible" );
-	},
-
-	_enhanceColToggle: function() {
-		var id , menuButton, popup, menu,
-			table = this.element,
-			opts = this.options,
-			ns = $.mobile.ns,
-			buttonTheme = this._themeClassFromOption( "ui-btn-", opts.columnBtnTheme ),
-			popupThemeAttr = opts.columnPopupTheme ?
-				( " data-" + $.mobile.ns + "theme='" + opts.columnPopupTheme + "'" ) : "",
-			fragment = this.document[ 0 ].createDocumentFragment();
-
-		id = this._id() + "-popup";
-		menuButton = $( "<a href='#" + id + "' " +
-			"id='" + this._id() + "-button' " +
-			" ui-corner-all ui-shadow ui-mini' " +
-			"class='ui-btn ui-corner-all ui-shadow ui-mini" +
-				( opts.classes.columnBtn ? " " + opts.classes.columnBtn : "" ) +
-				( buttonTheme ? " " + buttonTheme : "" ) + "' " +
-			"data-" + ns + "rel='popup'>" + opts.columnBtnText + "</a>" );
-		popup = $( "<div class='" + opts.classes.popup + "' id='" + id + "'" +
-			popupThemeAttr + "></div>" );
-		menu = $( "<fieldset></fieldset>" ).controlgroup();
-
-		// set extension here, send "false" to trigger build/rebuild
-		this._addToggles( menu, false );
-
-		menu.appendTo( popup );
-
-		fragment.appendChild( popup[ 0 ] );
-		fragment.appendChild( menuButton[ 0 ] );
-		table.before( fragment );
-
-		popup.popup();
-
-		return {
-			menu: menu,
-			popup: popup,
-			button: menuButton
-		};
 	},
 
 	// Use the .jqmData() stored on the checkboxes to determine which columns have show/hide
@@ -319,15 +208,6 @@ return $.widget( "mobile.table", $.mobile.table, {
 			// after the refresh, are restored to their locked state
 			this._restoreLockedColumns( lockedColumns );
 		}
-	},
-
-	_setToggleState: function() {
-		this._ui.menu.find( "input" ).each( function() {
-			var checkbox = $( this );
-
-			this.checked = checkbox.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell";
-			checkbox.checkboxradio( "refresh" );
-		} );
 	},
 
 	_destroyHeader: function( index, headerElement ) {
