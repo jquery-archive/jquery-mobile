@@ -210,40 +210,27 @@ return $.widget( "mobile.table", $.mobile.table, {
 		}
 	},
 
-	_destroyHeader: function( index, headerElement ) {
-		var priority, cells,
-			header = $( headerElement );
+	_destroyHeader: function( header ) {
+		var priority, cells;
 
 		if ( !this.options.enhanced ) {
-			priority = $.mobile.getAttribute( headerElement, "priority" );
+			priority = $.mobile.getAttribute( header, "priority" );
 			cells = header.add( header.jqmData( "cells" ) );
 
 			if ( priority ) {
 				cells.removeClass( this.options.classes.priorityPrefix + priority );
 			}
 		}
-
-		// This data has to be removed whether or not the widget is pre-rendered
-		header.jqmRemoveData( "input" );
 	},
 
 	_destroy: function() {
 		if ( this.options.mode === "columntoggle" ) {
-			if ( this.options.enhanced ) {
-
-				// If the widget is enhanced, the checkboxes will be left alone, but the jqmData()
-				// attached to them has to be removed
-				this._ui.menu.find( "input" ).each( function() {
-					$( this )
-						.jqmRemoveData( "cells" )
-						.jqmRemoveData( "header" );
-				});
-			} else {
+			if ( !this.options.enhanced ) {
 				this.element.removeClass( this.options.classes.columnToggleTable );
-				this._ui.popup.remove();
-				this._ui.button.remove();
 			}
-			this.headers.not( "td" ).each( $.proxy( this, "_destroyHeader" ) );
+			this.headers.not( "td" ).each( $.proxy( function( index, element ) {
+				this._destroyHeader( $( element ) );
+			}, this ));
 		}
 		return this._superApply( arguments );
 	}
