@@ -19,7 +19,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		columnBtnTheme: null,
 		columnPopupTheme: null,
 		columnBtnText: "Columns...",
-		classes: $.extend( $.mobile.table.prototype.options.classes, {
+		classes: $.extend( {}, $.mobile.table.prototype.options.classes, {
 			popup: "ui-table-columntoggle-popup",
 			columnBtn: "ui-table-columntoggle-btn",
 			priorityPrefix: "ui-table-priority-",
