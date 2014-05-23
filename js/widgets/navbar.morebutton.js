@@ -13,36 +13,39 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
 
     options: {
         morebutton: false,
-        morebuttontext: "..."
+        morebuttontext: "...",
+        morebuttoniconpos: "top"
     },
 
     _create: function() {
-        if (this.options.morebutton) {
-            $.extend(this, {
-                _createNavRows: function() {}
-            });
+        this._super();
+        if ( this.options.morebutton ) {
             this._createNavPopup();
         }
-        this._super();
     },
 
     _id: function() {
         return ( this.element.attr( "id" ) || ( this.widgetName + this.uuid ) );
     },
 
+    _createNavRows: function () {
+        if ( this.options.morebutton ) {
+            return;
+        }
+
+        this._super();
+    },
+
     _createNavPopup: function(){
-        var $navbar = this.element,
-            $navbtns = $navbar.find( "a" ),
-            $navitems = $navbar.find( "li" ),
-            numbuttons = $navbtns.length,
-            maxbutton = this.options.maxbutton,
-            iconpos = this.option.iconpos,
-            $popupDiv,
-            $popupNav,
-            morebtn,
-            pos,
-            btn,
-            id;
+        var $popupDiv, $popupNav, moreButton, pos, buttonItem, id,
+            $navbar = this.element,
+            $navButtons = $navbar.find( "a" ),
+            $navItems = $navbar.find( "li" ),
+            buttonCount = $navButtons.length,
+            maxButton = this.options.maxbutton,
+            iconpos = this.options.iconpos,
+            icon = $.mobile.getAttribute( this.element, "morebuttonicon" ),
+            classes = "ui-btn";
 
         id = this._id() + "-popup";
         $popupDiv = $( "<div class='ui-navbar-popup' id='" + id + "'></div>" );
@@ -50,22 +53,25 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
             .appendTo( $popupDiv );
 
         // enhance buttons and move to new rows
-        for( pos = 0; pos < numbuttons; pos++ ) {
-            btn = $navitems.eq(pos);
-            this._makeNavButton(btn.find("a"), iconpos);
-            if (pos + 1 === maxbutton) {
-                morebtn = $( "<li></li>" ).append(
+        for( pos = 0; pos < buttonCount; pos++ ) {
+            buttonItem = $navItems.eq(pos);
+            this._makeNavButton(buttonItem.find("a"), iconpos);
+            if (pos + 1 === maxButton) {
+                if ( icon ) {
+                    classes += " ui-icon-" + icon + " ui-btn-icon-" + this.options.morebuttoniconpos;
+                }
+                moreButton = $( "<li></li>" ).append(
                                  $( "<a></a>" )
                                     .attr( "href", "#" + id)
                                     .attr( "data-rel", "popup" )
-                                    .addClass( "ui-btn" )
+                                    .addClass( classes )
                                     .html( this.options.morebuttontext ));
-                $navbar.find( "ul" ).first().append( morebtn );
+                $navbar.find( "ul" ).first().append( moreButton );
 
             }
-            if ( pos + 1 >= maxbutton ) {
-                btn.detach();
-                $popupNav.append( btn );
+            if ( pos + 1 >= maxButton ) {
+                buttonItem.detach();
+                $popupNav.append( buttonItem );
             }
             $popupNav.listview();
            
