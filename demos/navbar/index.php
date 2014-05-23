@@ -154,6 +154,31 @@
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
 
+		<h2> Show More Button with icon</h2>
+		<p>If more than the set <code>maxbutton</code> items are added and the <code>morebutton</code> 
+			option is set to <code>true</code>, the navbar will add the extra items to a popup that 
+			resides on the last button in the row of buttons. An icon can be added by adding the
+			<code>data-morebuttonicon</code> attribute and specifying an icon</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar" data-maxbutton="5" data-morebutton="true" data-morebuttonicon="grid">
+					<ul>
+						<li><a data-icon="star" href="#" class="ui-btn-active">One</a></li>
+						<li><a data-icon="star" href="#">Two</a></li>
+						<li><a data-icon="star" href="#">Three</a></li>
+						<li><a data-icon="star" href="#">Four</a></li>
+						<li><a data-icon="star" href="#">Five</a></li>
+						<li><a data-icon="star" href="#">Six</a></li>
+						<li><a data-icon="star" href="#">Seven</a></li>
+						<li><a data-icon="star" href="#">Eight</a></li>
+						<li><a data-icon="star" href="#">Nine</a></li>
+						<li><a data-icon="star" href="#">Ten</a></li>
+						<li><a data-icon="star" href="#">Eleven</a></li>
+						<li><a data-icon="star" href="#">Twelve</a></li>
+						<li><a data-icon="star" href="#">Thirteen</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
 		<h2>Navbars in headers</h2>
 
 		<p>If you want to add a navbar to the top of the page, you can still have a page title and buttons. Just add the navbar container inside the header block, right after the title and buttons in the source order.</p>
