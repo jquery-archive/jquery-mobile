@@ -21,6 +21,7 @@ define([
 	"./fieldContain",
 	"./grid",
 	"./widgets/navbar",
+	"./widgets/navbar.morebutton",
 	"./widgets/listview",
 	"./widgets/listview.autodividers",
 	"./widgets/listview.hidedividers",

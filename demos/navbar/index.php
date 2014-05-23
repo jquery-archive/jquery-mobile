@@ -106,10 +106,11 @@
 
 		<h2>Multi-row</h2>
 
-		<p>If more than 5 items are added, the navbar will simply wrap to multiple lines of two across:</p>
+		<p>If more than the set <code>maxbutton</code> items are added, the navbar will smart wrap the items 
+			n-across up to the value of the <code>maxbutton</code>option and then fill the remaining rows to full width:</p>
 
 			<div data-demo-html="true">
-				<div data-role="navbar">
+				<div data-role="navbar" data-maxbutton="5" >
 					<ul>
 						<li><a href="#" class="ui-btn-active">One</a></li>
 						<li><a href="#">Two</a></li>
@@ -121,6 +122,34 @@
 						<li><a href="#">Eight</a></li>
 						<li><a href="#">Nine</a></li>
 						<li><a href="#">Ten</a></li>
+						<li><a href="#">Eleven</a></li>
+						<li><a href="#">Twelve</a></li>
+						<li><a href="#">Thirteen</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+		<h2> Show More Button </h2>
+		<p>If more than the set <code>maxbutton</code> items are added and the <code>morebutton</code> 
+			option is set to <code>true</code>, the navbar will add the extra items to a popup that 
+			resides on the last button in the row of buttons</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar" data-maxbutton="5" data-morebutton="true">
+					<ul>
+						<li><a href="#" class="ui-btn-active">One</a></li>
+						<li><a href="#">Two</a></li>
+						<li><a href="#">Three</a></li>
+						<li><a href="#">Four</a></li>
+						<li><a href="#">Five</a></li>
+						<li><a href="#">Six</a></li>
+						<li><a href="#">Seven</a></li>
+						<li><a href="#">Eight</a></li>
+						<li><a href="#">Nine</a></li>
+						<li><a href="#">Ten</a></li>
+						<li><a href="#">Eleven</a></li>
+						<li><a href="#">Twelve</a></li>
+						<li><a href="#">Thirteen</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->

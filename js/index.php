@@ -54,6 +54,7 @@ $files = array(
 	'fieldContain.js',
 	'grid.js',
 	'widgets/navbar.js',
+	'widgets/navbar.morebutton.js',
 	'widgets/listview.js',
 	'widgets/listview.autodividers.js',
 	'widgets/listview.hidedividers.js',
