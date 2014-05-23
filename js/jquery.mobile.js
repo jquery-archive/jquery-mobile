@@ -32,6 +32,7 @@
 			"./widgets/collapsibleSet",
 			"./grid",
 			"./widgets/navbar",
+			"./widgets/navbar.morebutton",
 			"./widgets/listview",
 			"./widgets/listview.backcompat",
 			"./widgets/listview.autodividers",
