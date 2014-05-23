@@ -50,6 +50,9 @@ module.exports = {
 			"js/widgets/listview.backcompat.js",
 			"js/widgets/listview.hidedividers.js",
 			"js/widgets/listview.js",
+			"js/widgets/navbar.js",
+			"js/widgets/navbar.backcompat.js",
+			"js/widgets/navbar.morebutton.js",
 
 			// Tests
 			"tests/integration/listview/autodividers_core.js",
@@ -69,6 +72,7 @@ module.exports = {
 			"tests/unit/rangeslider/*.js",
 			"tests/unit/toolbar/*.js",
 			"tests/unit/fixed-toolbar/*.js",
+			"tests/unit/navbar/*.js",
 			"tests/integration/fixed-toolbar/*.js",
 			"tests/integration/toolbar/*.js",
 			"tests/unit/dialog/dialog_count.js",
