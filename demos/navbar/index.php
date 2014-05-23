@@ -12,14 +12,13 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style>
-		.nav-glyphish-example .ui-button { padding-top: 40px !important; }
-		.nav-glyphish-example .ui-button:after { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
-		#chat:after { background:  url("../_assets/img/glyphish-icons/09-chat2.png") 50% 50% no-repeat; background-size: 24px 22px; }
-		#email:after { background:  url("../_assets/img/glyphish-icons/18-envelope.png") 50% 50% no-repeat; background-size: 24px 16px;  }
-		#login:after { background:  url("../_assets/img/glyphish-icons/30-key.png") 50% 50% no-repeat;  background-size: 12px 26px; }
-		#beer:after { background:  url("../_assets/img/glyphish-icons/88-beermug.png") 50% 50% no-repeat;  background-size: 22px 27px; }
-		#coffee:after { background:  url("../_assets/img/glyphish-icons/100-coffee.png") 50% 50% no-repeat;  background-size: 20px 24px; }
-		#skull:after { background:  url("../_assets/img/glyphish-icons/21-skull.png") 50% 50% no-repeat;  background-size: 22px 24px; }
+		.nav-glyphish-example .ui-button span { width: 30px!important; height: 30px!important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+		#chat span { background:  url("../_assets/img/glyphish-icons/09-chat2.png") 50% 50% no-repeat; background-size: 24px 22px; }
+		#email span { background:  url("../_assets/img/glyphish-icons/18-envelope.png") 50% 50% no-repeat; background-size: 24px 16px;  }
+		#login span { background:  url("../_assets/img/glyphish-icons/30-key.png") 50% 50% no-repeat;  background-size: 12px 26px; }
+		#beer span { background:  url("../_assets/img/glyphish-icons/88-beermug.png") 50% 50% no-repeat;  background-size: 22px 27px; }
+		#coffee span { background:  url("../_assets/img/glyphish-icons/100-coffee.png") 50% 50% no-repeat;  background-size: 20px 24px; }
+		#skull span { background:  url("../_assets/img/glyphish-icons/21-skull.png") 50% 50% no-repeat;  background-size: 22px 24px; }
 	</style>
 </head>
 <body>
@@ -36,7 +35,7 @@
 
 		<h1>Navbar <a href="http://api.jquerymobile.com/navbar/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
-		<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar.</p>
+		<p>jQuery Mobile has a navbar widget that is useful for providing buttons with optional icons in a bar. The navbar can support any number of buttons resorting to multiple rows when the number of buttons exceeds the <code>maxbuttons</code> option. Alternatively, if you set the <code>morebutton</code> option you will turn the final button in the row into a popup that contains the remaining buttons</p>
 
 		<h2>Navbar basics</h2>
 
@@ -90,7 +89,7 @@
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
 
-		<p>The navbar maxes out with 5 items, each 1/5 the width of the browser window:</p>
+		<p>The navbar defaults to a maximum of 5 buttons, each 1/5 the width of the browser window:</p>
 
 			<div data-demo-html="true">
 				<div data-role="navbar" data-grid="d">
@@ -106,10 +105,11 @@
 
 		<h2>Multi-row</h2>
 
-		<p>If more than 5 items are added, the navbar will simply wrap to multiple lines of two across:</p>
+		<p>If more than the set <code>maxbutton</code> items are added, the navbar will smart wrap the items 
+			n-across up to the value of the <code>maxbutton</code>option and then fill the remaining rows to full width:</p>
 
 			<div data-demo-html="true">
-				<div data-role="navbar">
+				<div data-role="navbar" data-maxbutton="5" >
 					<ul>
 						<li><a href="#" class="ui-button-active">One</a></li>
 						<li><a href="#">Two</a></li>
@@ -121,10 +121,63 @@
 						<li><a href="#">Eight</a></li>
 						<li><a href="#">Nine</a></li>
 						<li><a href="#">Ten</a></li>
+						<li><a href="#">Eleven</a></li>
+						<li><a href="#">Twelve</a></li>
+						<li><a href="#">Thirteen</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
 
+		<h2> Show More Button </h2>
+		<p>If more than the set <code>maxbutton</code> items are added and the <code>morebutton</code> 
+			option is set to <code>true</code>, the navbar will add the extra items to a popup that 
+			resides on the last button in the row of buttons</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar" data-maxbutton="5" data-morebutton="true">
+					<ul>
+						<li><a href="#" class="ui-button-active">One</a></li>
+						<li><a href="#">Two</a></li>
+						<li><a href="#">Three</a></li>
+						<li><a href="#">Four</a></li>
+						<li><a href="#">Five</a></li>
+						<li><a href="#">Six</a></li>
+						<li><a href="#">Seven</a></li>
+						<li><a href="#">Eight</a></li>
+						<li><a href="#">Nine</a></li>
+						<li><a href="#">Ten</a></li>
+						<li><a href="#">Eleven</a></li>
+						<li><a href="#">Twelve</a></li>
+						<li><a href="#">Thirteen</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+		<h2> Show More Button with icon</h2>
+		<p>If more than the set <code>maxbutton</code> items are added and the <code>morebutton</code> 
+			option is set to <code>true</code>, the navbar will add the extra items to a popup that 
+			resides on the last button in the row of buttons. An icon can be added by adding the
+			<code>data-morebuttonicon</code> attribute and specifying an icon</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar" data-maxbutton="5" data-morebutton="true" data-morebuttonicon="ui-icon-grid">
+					<ul>
+						<li><a data-icon="ui-icon-star" href="#" class="ui-button-active">One</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Two</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Three</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Four</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Five</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Six</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Seven</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Eight</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Nine</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Ten</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Eleven</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Twelve</a></li>
+						<li><a data-icon="ui-icon-star" href="#">Thirteen</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
 		<h2>Navbars in headers</h2>
 
 		<p>If you want to add a navbar to the top of the page, you can still have a page title and buttons. Just add the navbar container inside the header block, right after the title and buttons in the source order.</p>
@@ -132,7 +185,7 @@
 			<div data-demo-html="true">
 				<div data-role="toolbar" data-type="header" style="overflow:hidden;">
 				<h1>I'm a header</h1>
-					<a href="#" data-icon="gear" class="ui-toolbar-header-button-right">Options</a>
+					<a href="#" data-icon="ui-icon-gear" class="ui-button-right">Options</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#">One</a></li>
@@ -172,9 +225,9 @@
 				<div data-role="toolbar" data-type="footer">
 					<div data-role="navbar">
 						<ul>
-							<li><a href="#" data-icon="grid">Summary</a></li>
-							<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
-							<li><a href="#" data-icon="gear">Setup</a></li>
+							<li><a href="#" data-icon="ui-icon-grid">Summary</a></li>
+							<li><a href="#" data-icon="ui-icon-star" class="ui-button-active">Favs</a></li>
+							<li><a href="#" data-icon="ui-icon-gear">Setup</a></li>
 						</ul>
 					</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -189,9 +242,9 @@
 			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="bottom">
 					<ul>
-						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
-						<li><a href="#" data-icon="gear">Setup</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">Summary</a></li>
+						<li><a href="#" data-icon="ui-icon-star" class="ui-button-active">Favs</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -203,9 +256,9 @@
 			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="left">
 					<ul>
-						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
-						<li><a href="#" data-icon="gear">Setup</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">Summary</a></li>
+						<li><a href="#" data-icon="ui-icon-star" class="ui-button-active">Favs</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -217,9 +270,9 @@
 			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar" data-iconpos="right">
 					<ul>
-						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
-						<li><a href="#" data-icon="gear">Setup</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">Summary</a></li>
+						<li><a href="#" data-icon="ui-icon-star" class="ui-button-active">Favs</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -255,11 +308,11 @@
 				<h3>Swatch "a"</h3>
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-icon="grid">A</a></li>
-						<li><a href="#" data-icon="star">B</a></li>
-						<li><a href="#" data-icon="gear">C</a></li>
-						<li><a href="#" data-icon="arrow-l">D</a></li>
-						<li><a href="#" data-icon="arrow-r">E</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">A</a></li>
+						<li><a href="#" data-icon="ui-icon-star">B</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">C</a></li>
+						<li><a href="#" data-icon="ui-icon-arrow-l">D</a></li>
+						<li><a href="#" data-icon="ui-icon-arrow-r">E</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /container -->
@@ -270,11 +323,11 @@
 				<h3>Swatch "b"</h3>
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-icon="grid">A</a></li>
-						<li><a href="#" data-icon="star">B</a></li>
-						<li><a href="#" data-icon="gear">C</a></li>
-						<li><a href="#" data-icon="arrow-l">D</a></li>
-						<li><a href="#" data-icon="arrow-r">E</a></li>
+						<li><a href="#" data-icon="ui-icon-grid">A</a></li>
+						<li><a href="#" data-icon="ui-icon-star">B</a></li>
+						<li><a href="#" data-icon="ui-icon-gear">C</a></li>
+						<li><a href="#" data-icon="ui-icon-arrow-l">D</a></li>
+						<li><a href="#" data-icon="ui-icon-arrow-r">E</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /container -->
@@ -286,8 +339,8 @@
 			<div data-role="toolbar" data-type="footer">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" data-icon="grid" data-theme="a">A</a></li>
-						<li><a href="#" data-icon="star" data-theme="b">B</a></li>
+						<li><a href="#" data-icon="ui-icon-grid" data-theme="a">A</a></li>
+						<li><a href="#" data-icon="ui-icon-star" data-theme="b">B</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!-- /footer -->
@@ -300,9 +353,9 @@
 			<div data-demo-html="true">
 				<div data-role="navbar" data-iconpos="left">
 					<ul>
-						<li><button data-icon="home">One</button></li>
-						<li><button data-icon="grid" data-theme="b">Two</button></li>
-						<li><button data-icon="search">Three</button></li>
+						<li><button data-icon="ui-icon-home">One</button></li>
+						<li><button data-icon="ui-icon-grid" data-theme="b">Two</button></li>
+						<li><button data-icon="ui-icon-search">Three</button></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
@@ -312,9 +365,9 @@
 				<h1>I'm a header</h1>
 					<div data-role="navbar" data-iconpos="right">
 						<ul>
-							<li><button data-icon="home">One</button></li>
-							<li><button data-icon="grid" data-theme="b">Two</button></li>
-							<li><button data-icon="search">Three</button></li>
+							<li><button data-icon="ui-icon-home">One</button></li>
+							<li><button data-icon="ui-icon-grid" data-theme="b">Two</button></li>
+							<li><button data-icon="ui-icon-search">Three</button></li>
 						</ul>
 					</div><!-- /navbar -->
 				</div><!-- /header -->
