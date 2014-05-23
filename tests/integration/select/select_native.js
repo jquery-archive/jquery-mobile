@@ -34,12 +34,12 @@
 		$.mobile.selectmenu.prototype.options.preventFocusZoom = true;
 
 		$(document)
-			.one("vmousedown.test", function(){
-				ok( $.mobile.zoom.enabled === false, "zoom is disabled on vmousedown" );
+			.one("pointerdown.test", function(){
+				ok( $.mobile.zoom.enabled === false, "zoom is disabled on pointerdown" );
 			})
-			.one("mouseup.test", function(){
+			.one("pointerup.test", function(){
 				setTimeout(function() { // This empty setTimeout is to match the work-around for the issue reported in https://github.com/jquery/jquery-mobile/issues/5041
-					ok( $.mobile.zoom.enabled === true, "zoom is enabled on mouseup" );
+					ok( $.mobile.zoom.enabled === true, "zoom is enabled on pointerup" );
 					$.mobile.selectmenu.prototype.options.preventFocusZoom = zoomoptiondefault;
 					$(document).unbind(".test");
 					$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault );
@@ -50,8 +50,8 @@
 		$( "#select-choice-native" )
 			.selectmenu( "option", "preventFocusZoom", true )
 			.parent()
-			.trigger( "vmousedown" )
-			.trigger( "mouseup" );
+			.trigger( "pointerdown" )
+			.trigger( "pointerup" );
 	});
 
 	asyncTest( "The preventFocusZoom option does not manipulate zoom when it is false", function() {
@@ -61,11 +61,11 @@
 
 
 		$(document)
-			.one("vmousedown.test", function(){
-				ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on vmousedown" );
+			.one("pointerdown.test", function(){
+				ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on pointerdown" );
 			})
-			.one("mouseup.test", function(){
-				ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on mouseup" );
+			.one("pointerup.test", function(){
+				ok( $.mobile.zoom.enabled === zoomstate, "zoom is unaffected on pointerup" );
 				$(document).unbind(".test");
 				$( "#select-choice-native" ).selectmenu( "option", "preventFocusZoom", zoomoptiondefault );
 				start();
@@ -75,8 +75,8 @@
 		$( "#select-choice-native" )
 			.selectmenu( "option", "preventFocusZoom", false )
 			.parent()
-			.trigger( "vmousedown" )
-			.trigger( "mouseup" );
+			.trigger( "pointerdown" )
+			.trigger( "pointerup" );
 
 	});
 })(jQuery);

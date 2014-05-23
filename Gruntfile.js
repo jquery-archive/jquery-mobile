@@ -9,7 +9,6 @@ module.exports = function( grunt ) {
 				.replace( /\.\.\/css/, "css" )
 				.replace( /jquery\.mobile\.css/, processedName + ".min.css" );
 		},
-
 		// Ensure that modules specified via the --modules option are in the same
 		// order as the one in which they appear in js/jquery.mobile.js. To achieve
 		// this, we parse js/jquery.mobile.js and reconstruct the array of
@@ -882,7 +881,8 @@ module.exports = function( grunt ) {
 				}
 			}
 		},
-
+		browserstack_runner: {
+		},
 		coveralls: {
 			options: {
 				force: true
@@ -957,6 +957,9 @@ module.exports = function( grunt ) {
 				files: {
 					"jquery/plugins/jquery.hashchange.js": "jquery-hashchange/jquery.ba-hashchange.js"
 				}
+			},
+			"pointerevents-polyfill": {
+				src: "pointerevents-polyfill/src"
 			}
 		},
 
@@ -1019,6 +1022,8 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "dist:git", [ "dist", "clean:git", "config:copy:git:-git", "copy:git" ] );
 
 	grunt.registerTask( "updateDependencies", [ "bowercopy" ] );
+
+	grunt.registerTask( "testBrowserstack", [ "browserstack_runner" ] );
 
 	grunt.registerTask( "test:demos:src", [ "php", "casper:demos.src" ] );
 

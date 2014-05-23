@@ -15,7 +15,7 @@ define([
 	"./navigation/method",
 	"./navigation",
 	"./widgets/loader",
-	"./vmouse",
+	"./events/polymer",
 	"jquery-plugins/jquery.hashchange" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
@@ -175,7 +175,7 @@ define([
 
 			// DEPRECATED as of 1.4.0 - remove ui-disabled after 1.4.0 release
 			// only ui-state-disabled should be present thereafter
-			$.mobile.document.delegate( ".ui-state-disabled,.ui-disabled", "vclick",
+			$.mobile.document.delegate( ".ui-state-disabled,.ui-disabled", "click",
 				function( e ) {
 					e.preventDefault();
 					e.stopImmediatePropagation();

@@ -3,19 +3,19 @@
 //>>label: Touch
 //>>group: Events
 
-define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
+define( [ "jquery", "../events/polymer" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {
 	var $document = $( document ),
-		supportTouch = $.mobile.support.touch,
-		scrollEvent = "touchmove scroll",
-		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
-		touchStopEvent = supportTouch ? "touchend" : "mouseup",
-		touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
+		scrollEvent = "pointermove scroll",
+		touchStartEvent = "pointerdown",
+		touchStopEvent = "pointerup",
+		touchMoveEvent = "pointermove";
 
 	// setup new event shortcuts
-	$.each( ( "touchstart touchmove touchend " +
+	$.each( ( "pointerdown pointermove pointerend " +
+		"touchstart touchmove touchend " +
 		"tap taphold " +
 		"swipe swipeleft swiperight " +
 		"scrollstart scrollstop" ).split( " " ), function( i, name ) {
@@ -88,7 +88,7 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 				$this = $( thisObject ),
 				isTaphold = false;
 
-			$this.bind( "vmousedown", function( event ) {
+			$this.bind( "pointerdown", function( event ) {
 				isTaphold = false;
 				if ( event.which && event.which !== 1 ) {
 					return false;
@@ -104,9 +104,9 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 				function clearTapHandlers() {
 					clearTapTimer();
 
-					$this.unbind( "vclick", clickHandler )
-						.unbind( "vmouseup", clearTapTimer );
-					$document.unbind( "vmousecancel", clearTapHandlers );
+					$this.unbind( "click", clickHandler )
+						.unbind( "pointerup", clearTapTimer );
+					$document.unbind( "pointercancel", clearTapHandlers );
 				}
 
 				function clickHandler( event ) {
@@ -121,9 +121,9 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 					}
 				}
 
-				$this.bind( "vmouseup", clearTapTimer )
-					.bind( "vclick", clickHandler );
-				$document.bind( "vmousecancel", clearTapHandlers );
+				$this.bind( "pointerup", clearTapTimer )
+					.bind( "click", clickHandler );
+				$document.bind( "pointercancel", clearTapHandlers );
 
 				timer = setTimeout( function() {
 					if ( !$.event.special.tap.emitTapOnTaphold ) {
@@ -134,8 +134,8 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 			});
 		},
 		teardown: function() {
-			$( this ).unbind( "vmousedown" ).unbind( "vclick" ).unbind( "vmouseup" );
-			$document.unbind( "vmousecancel" );
+			$( this ).unbind( "pointerdown" ).unbind( "click" ).unbind( "pointerup" );
+			$document.unbind( "pointercancel" );
 		}
 	};
 
@@ -183,9 +183,7 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 		},
 
 		start: function( event ) {
-			var data = event.originalEvent.touches ?
-					event.originalEvent.touches[ 0 ] : event,
-				location = $.event.special.swipe.getLocation( data );
+			var location = $.event.special.swipe.getLocation( event.originalEvent );
 			return {
 						time: ( new Date() ).getTime(),
 						coords: [ location.x, location.y ],
@@ -194,9 +192,7 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 		},
 
 		stop: function( event ) {
-			var data = event.originalEvent.touches ?
-					event.originalEvent.touches[ 0 ] : event,
-				location = $.event.special.swipe.getLocation( data );
+			var location = $.event.special.swipe.getLocation( event.originalEvent );
 			return {
 						time: ( new Date() ).getTime(),
 						coords: [ location.x, location.y ]
@@ -227,6 +223,9 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 				$this = $( thisObject ),
 				context = {};
 
+			if ( this == document ) {
+				$( document.documentElement ).attr( "touch-action", "pan-y" );
+			}
 			// Retrieve the events data for this element and add the swipe context
 			events = $.data( this, "mobile-events" );
 			if ( !events ) {
@@ -253,7 +252,6 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 					if ( !start ) {
 						return;
 					}
-
 					stop = $.event.special.swipe.stop( event );
 					if ( !emitted ) {
 						emitted = $.event.special.swipe.handleSwipe( start, stop, thisObject, origTarget );
@@ -286,6 +284,8 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 
 		teardown: function() {
 			var events, context;
+
+			$( this ).removeAttr( "touch-action" );
 
 			events = $.data( this, "mobile-events" );
 			if ( events ) {

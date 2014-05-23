@@ -161,7 +161,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 
 		this.select
 			.appendTo( self.button )
-			.bind( "vmousedown", function() {
+			.bind( "pointerdown", function() {
 				// Add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
 			})
@@ -171,20 +171,20 @@ $.widget( "mobile.selectmenu", $.extend( {
 			.bind( "blur", function() {
 				self.button.removeClass( $.mobile.focusClass );
 			})
-			.bind( "focus vmouseover", function() {
-				self.button.trigger( "vmouseover" );
+			.bind( "focus pointerover", function() {
+				self.button.trigger( "pointerover" );
 			})
-			.bind( "vmousemove", function() {
+			.bind( "pointermove", function() {
 				// Remove active class on scroll/touchmove
 				self.button.removeClass( $.mobile.activeBtnClass );
 			})
-			.bind( "change blur vmouseout", function() {
-				self.button.trigger( "vmouseout" )
+			.bind( "change blur pointerout", function() {
+				self.button.trigger( "pointerout" )
 					.removeClass( $.mobile.activeBtnClass );
 			});
 
 		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
-		self.button.bind( "vmousedown", function() {
+		self.button.bind( "pointerdown", function() {
 			if ( self.options.preventFocusZoom ) {
 					$.mobile.zoom.disable( true );
 			}

@@ -42,7 +42,7 @@ $.widget( "mobile.navbar", {
 				$( this ).addClass( classes );
 			});
 
-		$navbar.delegate( "a", "vclick", function( /* event */ ) {
+		$navbar.delegate( "a", "click", function( /* event */ ) {
 			var activeBtn = $( this );
 
 			if ( !( activeBtn.hasClass( "ui-state-disabled" ) ||

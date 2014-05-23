@@ -170,8 +170,10 @@
 	var createEvent = function( name, target, x, y ) {
 		var event = $.Event( name );
 		event.target = target;
-		event.pageX = x;
-		event.pageY = y;
+		event.originalEvent = {
+			pageX: x,
+			pageY: y
+		};
 		return event;
 	};
 
@@ -191,12 +193,12 @@
 
 		control.bind( "change", changeFunc );
 
-		// The toggle switch actually updates on mousedown and mouseup events, so we go through
+		// The toggle switch actually updates on pointerdown and pointerup events, so we go through
 		// the motions of generating all the events that happen during a click to make sure that
 		// during all of those events, the value only changes once.
 
-		slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
-		slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+		slider.trigger( createEvent( "pointerdown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+		slider.trigger( createEvent( "pointerup", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
 		slider.trigger( createEvent( "click", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
 
 		control.unbind( "change", changeFunc );
@@ -247,9 +249,9 @@
 
 				// simulate dragging less than a half
 				offset = handle.offset();
-				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + width - 10, offset.top + 10 ) );
-				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left + width - 20, offset.top + 10 ) );
-				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left + width - 20, offset.top + 10 ) );
+				slider.trigger( createEvent( "pointerdown", handle[ 0 ], offset.left + width - 10, offset.top + 10 ) );
+				slider.trigger( createEvent( "pointermove", handle[ 0 ], offset.left + width - 20, offset.top + 10 ) );
+				slider.trigger( createEvent( "pointerup", handle[ 0 ], offset.left + width - 20, offset.top + 10 ) );
 			},
 
 			function() {
@@ -272,9 +274,9 @@
 
 				// simulate dragging more than a half
 				offset = handle.offset();
-				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
-				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - ( width / 2 + 10 ), offset.top + 10 ) );
-				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - ( width / 2 + 10 ), offset.top + 10 ) );
+				slider.trigger( createEvent( "pointerdown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+				slider.trigger( createEvent( "pointermove", handle[ 0 ], offset.left - ( width / 2 + 10 ), offset.top + 10 ) );
+				slider.trigger( createEvent( "pointerup", handle[ 0 ], offset.left - ( width / 2 + 10 ), offset.top + 10 ) );
 			},
 
 			function() {
@@ -312,8 +314,8 @@
 
 				// simulate dragging more than a half
 				offset = handle.offset();
-				slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
-				slider.trigger( createEvent( "mousemove", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
+				slider.trigger( createEvent( "pointerdown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+				slider.trigger( createEvent( "pointermove", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
 			},
 
 			function() {
@@ -330,7 +332,7 @@
 				notEqual(handle.css('left'), max, 'handle is not on the right side');
 
 				// reset slider state so it is ready for other tests
-				slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
+				slider.trigger( createEvent( "pointerup", handle[ 0 ], offset.left - ( width / 2 ), offset.top + 10 ) );
 
 				start();
 			}
@@ -386,8 +388,12 @@
 
 		$.testHelper.detailedEventCascade( [
 			function() {
-				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event = $.Event( "pointerdown", { target: handle[ 0 ] } );
 				event.which = 0;
+				$.Event.prototype.originalEvent = {
+					pageX: 0,
+					pageY: 0
+				};
 				slider.trigger( event );
 			},
 			{
@@ -395,8 +401,12 @@
 			},
 			function( result ) {
 				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon 0 button press" );
-				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event = $.Event( "pointerdown", { target: handle[ 0 ] } );
 				event.which = 1;
+				$.Event.prototype.originalEvent = {
+					pageX: 0,
+					pageY: 0
+				};
 				slider.trigger( event );
 			},
 			{
@@ -404,8 +414,12 @@
 			},
 			function( result ) {
 				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon left button press" );
-				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event = $.Event( "pointerdown", { target: handle[ 0 ] } );
 				event.which = undefined;
+				event.originalEvent = {
+					pageX: 0,
+					pageY: 0
+				};
 				slider.trigger( event );
 			},
 			{
@@ -413,8 +427,12 @@
 			},
 			function( result ) {
 				deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon undefined button press" );
-				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event = $.Event( "pointerdown", { target: handle[ 0 ] } );
 				event.which = 2;
+				event.originalEvent = {
+					pageX: 0,
+					pageY: 0
+				};
 				slider.trigger( event );
 			},
 			{
@@ -422,8 +440,12 @@
 			},
 			function( result ) {
 				deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon middle button press" );
-				event = $.Event( "mousedown", { target: handle[ 0 ] } );
+				event = $.Event( "pointerdown", { target: handle[ 0 ] } );
 				event.which = 3;
+				event.originalEvent = {
+					pageX: 0,
+					pageY: 0
+				};
 				slider.trigger( event );
 			},
 			{
@@ -444,12 +466,12 @@
 		$.testHelper.eventCascade([
 			function() {
 				// trigger the slider grab event
-				slider.trigger( "mousedown" );
+				slider.trigger( "pointerdown" );
 			},
 
 			"slidestart", function( timeout ) {
 				ok( !timeout, "slidestart fired" );
-				slider.trigger( "mouseup" );
+				slider.trigger( "pointerup" );
 			},
 
 			"slidestop", function( timeout ) {
@@ -467,20 +489,20 @@
 		test( "slider should detach event", function() {
 			var slider = $( "#remove-events-slider" ),
 			doc = $( document ),
-			vmouseupLength,
-			vmousemoveLength;
+			pointerupLength,
+			pointermoveLength;
 
 			function getDocumentEventsLength( name ){
 				return (doc.data( 'events' )[name] || []).length;
 			}
 
-			vmouseupLength = getDocumentEventsLength( "vmouseup" );
-			vmousemoveLength = getDocumentEventsLength( "vmousemove" );
+			pointerupLength = getDocumentEventsLength( "pointerup" );
+			pointermoveLength = getDocumentEventsLength( "pointermove" );
 
 			slider.remove();
 
-			equal(getDocumentEventsLength( "vmouseup" ), (vmouseupLength - 1), 'vmouseup event was removed');
-			equal(getDocumentEventsLength( "vmousemove" ), (vmousemoveLength - 1), 'vmousemove event was removed');
+			equal(getDocumentEventsLength( "pointerup" ), (pointerupLength - 1), 'pointerup event was removed');
+			equal(getDocumentEventsLength( "pointermove" ), (pointermoveLength - 1), 'pointermove event was removed');
 		});
 	}
 })(jQuery);

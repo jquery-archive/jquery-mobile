@@ -27,6 +27,7 @@
 		"casperjs": "1.1.0-beta3",
 		"cheerio": "0.12.4",
 		"commitplease": "1.7.0",
+		"browserstack-runner": "0.1.13",
 		"grunt": "0.4.2",
 		"grunt-bowercopy": "0.5.0",
 		"grunt-casper": "0.3.2",

@@ -234,7 +234,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 			// tap toggle
 			page
-				.bind( "vclick", function( e ) {
+				.bind( "click", function( e ) {
 					if ( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ) {
 						self.toggle();
 					}

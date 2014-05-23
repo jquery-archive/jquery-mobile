@@ -55,7 +55,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 	_handleKeydown: function( event ) {
 		this._super( event );
-		this._handleButtonVclickKeydown( event );
+		this._handleButtonclickKeydown( event );
 	},
 
 	_handleButtonVclickKeydown: function( event ) {
@@ -63,7 +63,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			return;
 		}
 
-		if (event.type === "vclick" ||
+		if (event.type === "click" ||
 				event.keyCode && (event.keyCode === $.mobile.keyCode.ENTER || event.keyCode === $.mobile.keyCode.SPACE)) {
 
 			this._decideFormat();
@@ -79,8 +79,8 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 	_handleListFocus: function( e ) {
 		var params = ( e.type === "focusin" ) ?
-			{ tabindex: "0", event: "vmouseover" }:
-			{ tabindex: "-1", event: "vmouseout" };
+			{ tabindex: "0", event: "pointerover" }:
+			{ tabindex: "-1", event: "pointerout" };
 
 		$( e.target )
 			.attr( "tabindex", params.tabindex )
@@ -215,7 +215,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 		// Button events
 		this._on( this.button, {
-			vclick: "_handleButtonVclickKeydown"
+			click: "_handleButtonclickKeydown"
 		});
 
 		// Events for list items

@@ -24,7 +24,7 @@
 		},
 
 		teardown: function() {
-			window.scrollTo( 0 );
+			window.scrollTo( 0, 0 );
 			$( "body" ).height( $(window).height() );
 		}
 	});
