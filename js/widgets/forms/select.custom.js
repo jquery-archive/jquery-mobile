@@ -397,7 +397,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 
 			self.menuType = "page";
 			self.menuPageContent.append( self.list );
-			self.menuPage.find( "div .ui-title" ).text( self.label.getEncodedText() || self.placeholder );
+			self.menuPage
+				.find( "div .ui-title" )
+					.text( self.label.getEncodedText() || self.placeholder );
 		} else {
 			self.menuType = "overlay";
 
