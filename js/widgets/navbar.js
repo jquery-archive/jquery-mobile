@@ -21,8 +21,7 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"../widget",
-			"../grid" ], factory );
+			"../widget"], factory );
 	} else {
 
 		// Browser globals
@@ -35,45 +34,36 @@ return $.widget( "mobile.navbar", {
 
 	options: {
 		iconpos: "top",
-		grid: null
+		maxbutton: 5
 	},
 
 	_create: function() {
 
-		var $navbar = this.element,
-			$navbuttons = $navbar.find( "a, button" ),
-			iconpos = $navbuttons.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
+		var self = this,
+			$navbar = self.element,
+			$navbtns = $navbar.find( "a" ),
+			numbuttons = $navbtns.length,
+			maxbutton = this.options.maxbutton,
+			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? self.options.iconpos : undefined;
 
 		$navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
 			.find( "ul" )
-				.jqmEnhanceable()
-				.grid( { grid: this.options.grid } );
+			.jqmEnhanceable();
 
-		$navbuttons
-			.each( function() {
-				var icon = $.mobile.getAttribute( this, "icon" ),
-					theme = $.mobile.getAttribute( this, "theme" ),
-					classes = "ui-button";
-
-				if ( theme ) {
-					classes += " ui-button-" + theme;
-				}
-				if ( icon ) {
-					classes += " ui-icon-" + icon + " ui-button-icon-" + iconpos;
-				}
-				$( this ).addClass( classes );
-			} );
+		 if ( numbuttons <= maxbutton ) {
+			$navbtns.each(function() {
+				self._makeNavButton(this, iconpos);
+			});
+		} else {
+			self._createNavRows();
+		}
 
 		$navbar.delegate( "a", "vclick", function( /* event */ ) {
 			var activeBtn = $( this );
 
 			if ( !( activeBtn.hasClass( "ui-state-disabled" ) ||
-
-					// DEPRECATED as of 1.4.0 - remove after 1.4.0 release
-					// only ui-state-disabled should be present thereafter
-					activeBtn.hasClass( "ui-disabled" ) ||
-					activeBtn.hasClass( "ui-button-active" ) ) ) {
+				activeBtn.hasClass( $.mobile.activeBtnClass ) ) ) {
 
 				$navbuttons.removeClass( "ui-button-active" );
 				activeBtn.addClass( "ui-button-active" );
@@ -85,10 +75,60 @@ return $.widget( "mobile.navbar", {
 			}
 		} );
 
+		// DEPRECATE
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			$navbuttons.filter( ".ui-state-persist" ).addClass( "ui-button-active" );
-		} );
+			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+		});
+	},
+
+	_createNavRows: function(){
+		var $navbar = this.element,
+			$navbtns = $navbar.find( "a" ),
+			$navitems = $navbar.find( "li" ),
+			numbuttons = $navbtns.length,
+			maxbutton = this.options.maxbutton,
+			iconpos = this.option.iconpos,
+			numrows,
+			row,
+			pos,
+			btn,
+			overflowNav;
+		numrows = (numbuttons % maxbutton) === 0 ?
+						(numbuttons / maxbutton) :
+						Math.floor( numbuttons / maxbutton ) + 1;
+			// prep for new rows
+			for ( pos = 1; pos < numrows; pos++ ) {
+				$("<ul>")
+					.addClass("ui-navbar-row ui-navbar-row-" + pos)
+					.appendTo($navbar);
+			}
+			// enhance buttons and move to new rows
+			for( pos = 0; pos < numbuttons; pos++ ) {
+				btn = $navitems.eq(pos);
+				this._makeNavButton(btn.find("a"), iconpos);
+				if ( pos + 1 > maxbutton) {
+					btn.detach();
+					row = ((pos + 1) % maxbutton) === 0 ?
+							Math.floor((pos) / maxbutton) :
+							Math.floor((pos + 1) / maxbutton);
+					overflowNav ="ul.ui-navbar-row-" + row;
+					$navbar.find(overflowNav).append(btn);
+				}
+			}
+		},
+	_makeNavButton: function(btn, iconpos) {
+		var icon = $.mobile.getAttribute( btn, "icon" ),
+			theme = $.mobile.getAttribute( btn, "theme" ),
+			classes = "ui-btn";
+
+		if ( theme ) {
+			classes += " ui-btn-" + theme;
+		}
+		if ( icon ) {
+			classes += " ui-icon-" + icon + " ui-btn-icon-" + iconpos;
+		}
+		$( btn ).addClass( classes );
 	}
 } );
 
