@@ -41,16 +41,66 @@ $.widget( "mobile.table", $.mobile.table, {
 				menu: popup.children().first(),
 				button: $( this.document[ 0 ].getElementById( id + "-button" ) )
 			};
-			this._addToggles( this._ui.menu, true );
-		} else {
-			this._ui = this._enhanceColToggle();
-			this.element.addClass( this.options.classes.columnToggleTable );
+			this._updateHeaderPriorities({ keep: true });
 		}
 
 		this._setupEvents();
 
 		this._setToggleState();
 
+	},
+
+	_updateSingleHeaderPriority: function( header, cells, priority, state ) {
+		var input;
+
+		if ( priority ) {
+
+			// Make sure the (new?) checkbox is associated with its header via .jqmData() and that,
+			// vice versa, the header is also associated with the checkbox
+			input = ( state.keep ? state.inputs.eq( state.checkboxIndex++ ) :
+				$("<label><input type='checkbox' checked />" +
+					( header.children( "abbr" ).first().attr( "title" ) || header.text() ) +
+					"</label>" )
+					.appendTo( state.container )
+					.children( 0 )
+					.checkboxradio( {
+						theme: this.options.columnPopupTheme
+					}));
+
+			// Associate the header with the checkbox
+			input
+				.jqmData( "header", header )
+				.jqmData( "cells", cells );
+
+			// Associate the checkbox with the header
+			header.jqmData( "input", input );
+		}
+
+		return this._superApply( arguments );
+	},
+
+	_updateHeaderPriorities: function( state ) {
+		var inputs,
+			container = this._ui.menu.controlgroup( "container" );
+
+		state = state || {};
+
+		// allow update of menu on refresh (fixes #5880)
+		if ( state.keep ) {
+			inputs = container.find( "input" );
+		} else {
+			container.empty();
+		}
+
+		this._super( $.extend( state, {
+			checkboxIndex: 0,
+			container: container,
+			inputs: inputs
+		}));
+
+		if ( !state.keep ) {
+			this._ui.menu.controlgroup( "refresh" );
+		}
 	},
 
 	_id: function() {
@@ -111,8 +161,8 @@ $.widget( "mobile.table", $.mobile.table, {
 			.toggleClass( "ui-table-cell-visible", checked );
 	},
 
-	_enhanceColToggle: function() {
-		var menuButton, popup, menu,
+	_enhanceColumnToggle: function() {
+		var ui,
 			id = this._id(),
 			popupId = id + "-popup",
 			table = this.element,
@@ -123,32 +173,31 @@ $.widget( "mobile.table", $.mobile.table, {
 				( " data-" + $.mobile.ns + "theme='" + opts.columnPopupTheme + "'" ) : "",
 			fragment = this.document[ 0 ].createDocumentFragment();
 
-		menuButton = $( "<a href='#" + popupId + "' " +
-			"id='" + id + "-button' " +
-			"class='ui-btn ui-corner-all ui-shadow ui-mini" +
-				( opts.classes.columnBtn ? " " + opts.classes.columnBtn : "" ) +
-				( buttonTheme ? " " + buttonTheme : "" ) + "' " +
-			"data-" + ns + "rel='popup'>" + opts.columnBtnText + "</a>" );
-		popup = $( "<div class='" + opts.classes.popup + "' id='" + popupId + "'" +
-			popupThemeAttr + "></div>" );
-		menu = $( "<fieldset></fieldset>" ).controlgroup();
+		ui = this._ui = {
+			button: $( "<a href='#" + popupId + "' " +
+				"id='" + id + "-button' " +
+				"class='ui-btn ui-corner-all ui-shadow ui-mini" +
+					( opts.classes.columnBtn ? " " + opts.classes.columnBtn : "" ) +
+					( buttonTheme ? " " + buttonTheme : "" ) + "' " +
+				"data-" + ns + "rel='popup'>" + opts.columnBtnText + "</a>" ),
+			popup: $( "<div class='" + opts.classes.popup + "' id='" + popupId + "'" +
+				popupThemeAttr + "></div>" ),
+			menu: $( "<fieldset></fieldset>" ).controlgroup()
+		};
 
-		// set extension here, send "false" to trigger build/rebuild
-		this._addToggles( menu, false );
+		// Call the superclass before we attach the menu to the DOM, because the superclass calls
+		// _updateHeaderPriorities(), which we've overridden to also populate the menu with
+		// checkboxes, and we don't want to populate the menu when it's already attached to the DOM
+		// because we want to avoid causing reflows
+		this._superApply( arguments );
 
-		menu.appendTo( popup );
+		ui.menu.appendTo( ui.popup );
 
-		fragment.appendChild( popup[ 0 ] );
-		fragment.appendChild( menuButton[ 0 ] );
+		fragment.appendChild( ui.popup[ 0 ] );
+		fragment.appendChild( ui.button[ 0 ] );
 		table.before( fragment );
 
-		popup.popup();
-
-		return {
-			menu: menu,
-			popup: popup,
-			button: menuButton
-		};
+		ui.popup.popup();
 	},
 
 	_setToggleState: function() {
