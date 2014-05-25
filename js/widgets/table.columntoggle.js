@@ -42,69 +42,37 @@ return $.widget( "mobile.table", $.mobile.table, {
 		}
 
 		if ( !this.options.enhanced ) {
-			this.element.addClass( this.options.classes.columnToggleTable );
+			this._enhanceColumnToggle();
 		}
 
 		// Cause refresh() to revert to normal operation
 		this._instantiating = false;
 	},
 
-	_addToggles: function( menu, keep ) {
-		var inputs,
-			checkboxIndex = 0,
-			opts = this.options,
-			container = menu.controlgroup( "container" );
+	_enhanceColumnToggle: function() {
+		this.element.addClass( this.options.classes.columnToggleTable );
+		this._updateHeaderPriorities();
+	},
 
-		// allow update of menu on refresh (fixes #5880)
-		if ( keep ) {
-			inputs = menu.find( "input" );
-		} else {
-			container.empty();
-		}
-
-		// create the hide/show toggles
-		this.headers.not( "td" ).each( function() {
-			var input, cells,
-				header = $( this ),
-				priority = $.mobile.getAttribute( this, "priority" ),
-				makeInput = function( text ) {
-					var input = $( "<input type='checkbox' checked='checked' />" ).uniqueId(),
-						label = $( "<label>" ).text( text ).attr( "for", input.attr( "id" ) );
-
-					return input.add( label );
-				};
-
-			if ( priority ) {
-				cells = header.add( header.jqmData( "cells" ) );
-				cells.addClass( opts.classes.priorityPrefix + priority );
-
-				// Make sure the (new?) checkbox is associated with its header via .jqmData() and
-				// that, vice versa, the header is also associated with the checkbox
-				input = ( keep ? inputs.eq( checkboxIndex++ ) :
-					makeInput( ( header.children( "abbr" ).first().attr( "title" ) ||
-						header.text() ) )
-						.appendTo( container )
-						.first()
-							.checkboxradio( {
-								theme: opts.columnPopupTheme
-							} ) )
-
-					// Associate the header with the checkbox
-					.jqmData( "header", header )
-					.jqmData( "cells", cells );
-
-				// Associate the checkbox with the header
-				header.jqmData( "input", input );
-			}
-		} );
-
-		// set bindings here
-		if ( !keep ) {
-			menu.controlgroup( "refresh" );
+	_updateSingleHeaderPriority: function( header, cells, priority/*, state */ ) {
+		if ( priority ) {
+			cells.addClass( this.options.classes.priorityPrefix + priority );
 		}
 	},
 
-	unlock: function() {
+	_updateHeaderPriorities: function( state ) {
+		this.headers.not( "td" ).each( $.proxy( function( index, element ) {
+			var header = $( element );
+
+			this._updateSingleHeaderPriority(
+				header,
+				header.add( header.jqmData( "cells" ) ),
+				$.mobile.getAttribute( element, "priority" ),
+				state );
+		}, this ) );
+	},
+
+	_unlock: function() {
 		// allow hide/show via CSS only = remove all toggle-locks
 		this.element
 			.children( "thead, tbody" )
@@ -180,10 +148,10 @@ return $.widget( "mobile.table", $.mobile.table, {
 			lockedColumns = this._recordLockedColumns();
 
 			// columns not being replaced must be cleared from input toggle-locks
-			this.unlock();
+			this._unlock();
 
-			// update columntoggles and cells
-			this._addToggles( this._ui.menu, false );
+			// update priorities
+			this._updateHeaderPriorities();
 
 			// Make sure columns that were locked before this refresh, and which are still around
 			// after the refresh, are restored to their locked state
@@ -217,4 +185,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 	}
 } );
 
-} );
+})( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
