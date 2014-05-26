@@ -49,7 +49,7 @@ if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQ
 			<p>All of the markup not needed when being requested via Ajax is wrapped in if statements like the one above.</p>
 
 		<h2>Shared scripts and widgets</h2>
-		<p>Any one of the pages in this demo must be able to serve as the start page for your application. Thus, when accessed via plain HTTP, the server will return the full page, including references to jQuery and jQuery Mobile, as well as custom scripts which ensure that widgets shared by all the pages in the application are initialized at startup, no matter which page the user chooses as their start page.</p>
+		<p>Any one of the pages in this demo must be able to serve as the start page for your application. Thus, when accessed via plain HTTP, the server will return the full page, including references to jQuery and jQuery Mobile, as well as custom scripts which ensure that widgets shared by all the pages in the application are initialized at startup, no matter which page the user chooses as their start page. Thus, you must copy references to jQuery, jQuery Mobile, and your custom startup script(s) to the <code>&lt;head&gt;</code> section of each of your documents, and all shared widgets to the corresponding <code>&lt;body&gt;</code> section.</p>
 		<div data-demo-html="#shared-header,#shared-navbar" data-demo-js="#shared-widget-init"></div>
 
 		</div><!-- /content -->
