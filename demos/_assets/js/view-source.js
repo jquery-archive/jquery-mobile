@@ -133,7 +133,7 @@ $( document ).bind( "pagebeforechange", function( e, data ) {
 
 			attachPopupHandler( popup, sources );
 			popup
-				.appendTo( $.mobile.activePage )
+				.appendTo( "body" )
 				.popup()
 				.bind( "popupafterclose", function() {
 					popup.remove();
