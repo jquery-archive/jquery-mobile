@@ -12,16 +12,20 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-	<script>
-		$(function(){
-			$("[data-role='navbar']").navbar();
-			$("[data-role='header'], [data-role='footer']").toolbar();
-		});
-	</script>
+	<script src="shared-widget-init.js"></script>
 </head>
 <body>
     <div data-role="header" data-position="fixed" data-theme="a">
 		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<a href="#nav-menu" data-rel="popup" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-right ui-icon-navigation">Navigation</a>
+		<div data-role="popup" id="nav-menu" data-theme="a">
+			<ul id="nav-menu-links">
+				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
+				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
+				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
+				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
+			</ul>
+		</div>
         <h1>Fixed external header</h1>
     </div><!-- /header -->
 <?php } ?>
