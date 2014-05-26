@@ -64,7 +64,7 @@ define( [ "jquery", "./jquery.mobile.ns", "json!../package.json" ], function( jQ
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
 
-		// For error messages, which theme does the box uses?
+		// For error messages, which theme does the box use?
 		pageLoadErrorMessageTheme: "a",
 
 		// replace calls to window.history.back with phonegaps navigation helper
