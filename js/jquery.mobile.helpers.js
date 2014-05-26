@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Helper functions and refrences
+//>>description: Helper functions and references
 //>>label: Helpers
 //>>group: Core
 //>>css.structure: ../css/structure/jquery.mobile.core.css
