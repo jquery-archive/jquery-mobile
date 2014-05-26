@@ -52,12 +52,14 @@ function getSnippet( type, selector, source ) {
 
 	// First, try to grab a tag in this document
 	if ( !$.mobile.path.isPath( selector ) ) {
-		el = source.find( type + selector );
+		el = source.find( ( "markup" === type ? "" : type ) + selector );
 		// If this is not an embedded style, try a stylesheet reference
 		if ( el.length === 0 && type === "style" ) {
 			el = source.find( "link[rel='stylesheet']" + selector );
 		}
-		text = $( "<div></div>" ).append( el.contents().clone() ).html();
+		text = $( "<div></div>" )
+			.append( ( "markup" === type ? el : el.contents() ).clone() )
+			.html();
 		if ( !text ) {
 			text = "";
 			selector = el.attr( "href" ) || el.attr( "src" ) || "";
@@ -140,7 +142,7 @@ $.fn.viewSourceCode = function() {
 			if ( self.attr( "data-demo-html" ) === "true" ) {
 				data = self.html();
 			} else {
-				data = $( "<div></div>" ).append( $( self.attr( "data-demo-html" ) ).clone() ).html();
+				data = getSnippet( "markup", self.attr( "data-demo-html" ), $( document ) );
 			}
 			sources.push( { title: "HTML", theme: "c", brush: "xml", data: fixData( data ) } );
 		}
