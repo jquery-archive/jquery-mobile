@@ -33,6 +33,11 @@
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
+	<style>
+.make-it-red {
+	color: red;
+}
+	</style>
 	<script src="../../swarminject.js"></script>
 	<script type="text/javascript">
 		// basic
@@ -108,7 +113,7 @@
 				<thead>
 					<tr>
 						<th data-priority="1">Rank</th>
-						<th data-priority="persist">Movie Title</th>
+						<th data-priority="persist">Movie <span class="make-it-red">Title</span></th>
 						<th data-priority="2">Year</th>
 						<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
 						<th data-priority="4">Reviews</th>

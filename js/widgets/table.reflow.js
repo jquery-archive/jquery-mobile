@@ -56,10 +56,10 @@ $.widget( "mobile.table", $.mobile.table, {
 			var cells = $( this ).jqmData( "cells" ),
 				colstart = $.mobile.getAttribute( this, "colstart" ),
 				hierarchyClass = cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
-				text = $( this ).text(),
+				contents = $( this ).clone().contents(),
 				iteration, filter;
 
-				if ( text !== ""  ) {
+				if ( contents.length > 0  ) {
 
 					if ( hierarchyClass ) {
 						iteration = parseInt( this.getAttribute( "colspan" ), 10 );
@@ -69,18 +69,21 @@ $.widget( "mobile.table", $.mobile.table, {
 							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 						}
 
-						table._addLabels( cells.filter( filter ), opts.classes.cellLabels + hierarchyClass, text );
+						table._addLabels( cells.filter( filter ),
+							opts.classes.cellLabels + hierarchyClass, contents );
 					} else {
-						table._addLabels( cells, opts.classes.cellLabels, text );
+						table._addLabels( cells, opts.classes.cellLabels, contents );
 					}
 
 				}
 		});
 	},
 
-	_addLabels: function( cells, label, text ) {
+	_addLabels: function( cells, label, contents ) {
 		// .not fixes #6006
-		cells.not( ":has(b." + label + ")" ).prepend( "<b class='" + label + "'>" + text + "</b>"  );
+		cells
+			.not( ":has(b." + label + ")" )
+				.prepend( $( "<b class='" + label + "'></b>" ).append( contents ) );
 	}
 });
 
