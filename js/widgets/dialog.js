@@ -41,9 +41,9 @@ $.widget( "mobile.dialog", {
 	//   opened with unless a data-transition is specified on the link/form
 	// - if the click was on the close button, or the link has a data-rel="back"
 	//   it'll go back in history naturally
-	_handleVClickSubmit: function( event ) {
+	_handleclickSubmit: function( event ) {
 		var attrs,
-			$target = $( event.target ).closest( event.type === "vclick" ? "a" : "form" );
+			$target = $( event.target ).closest( event.type === "click" ? "a" : "form" );
 
 		if ( $target.length && !$target.jqmData( "transition" ) ) {
 			attrs = {};
@@ -76,8 +76,8 @@ $.widget( "mobile.dialog", {
 		});
 
 		this._on( elem, {
-			vclick: "_handleVClickSubmit",
-			submit: "_handleVClickSubmit",
+			click: "_handleclickSubmit",
+			submit: "_handleclickSubmit",
 			pagebeforeshow: "_handlePageBeforeShow",
 			pagebeforehide: "_handlePageBeforeHide"
 		});

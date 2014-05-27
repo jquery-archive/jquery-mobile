@@ -36,8 +36,8 @@ define( [
 
 		documentUrl = $.mobile.path.documentUrl,
 
-		// used to track last vclicked element to make sure its value is added to form data
-		$lastVClicked = null;
+		// used to track last clicked element to make sure its value is added to form data
+		$lastclicked = null;
 
 	/* Event Bindings - hashchange, submit, and click */
 	function findClosestLink( ele )	{
@@ -143,7 +143,7 @@ define( [
 
 	$.mobile._registerInternalEvents = function() {
 		var getAjaxFormData = function( $form, calculateOnly ) {
-			var url, ret = true, formData, vclickedName, method;
+			var url, ret = true, formData, clickedName, method;
 			if ( !$.mobile.ajaxEnabled ||
 					// test that the form is, itself, ajax false
 					$form.is( ":jqmData(ajax='false')" ) ||
@@ -154,7 +154,7 @@ define( [
 				return false;
 			}
 
-			url = ( $lastVClicked && $lastVClicked.attr( "formaction" ) ) ||
+			url = ( $lastclicked && $lastclicked.attr( "formaction" ) ) ||
 				$form.attr( "action" );
 			method = ( $form.attr( "method" ) || "get" ).toLowerCase();
 
@@ -191,19 +191,19 @@ define( [
 			if ( !calculateOnly ) {
 				formData = $form.serializeArray();
 
-				if ( $lastVClicked && $lastVClicked[ 0 ].form === $form[ 0 ] ) {
-					vclickedName = $lastVClicked.attr( "name" );
-					if ( vclickedName ) {
+				if ( $lastclicked && $lastclicked[ 0 ].form === $form[ 0 ] ) {
+					clickedName = $lastclicked.attr( "name" );
+					if ( clickedName ) {
 						// Make sure the last clicked element is included in the form
 						$.each( formData, function( key, value ) {
-							if ( value.name === vclickedName ) {
-								// Unset vclickedName - we've found it in the serialized data already
-								vclickedName = "";
+							if ( value.name === clickedName ) {
+								// Unset clickedName - we've found it in the serialized data already
+								clickedName = "";
 								return false;
 							}
 						});
-						if ( vclickedName ) {
-							formData.push( { name: vclickedName, value: $lastVClicked.attr( "value" ) } );
+						if ( clickedName ) {
+							formData.push( { name: clickedName, value: $lastclicked.attr( "value" ) } );
 						}
 					}
 				}
@@ -236,8 +236,8 @@ define( [
 			}
 		});
 
-		//add active state on vclick
-		$.mobile.document.bind( "vclick", function( event ) {
+		//add active state on click
+		$.mobile.document.bind( "click", function( event ) {
 			var $btn, btnEls, target = event.target, needClosest = false;
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
@@ -247,7 +247,7 @@ define( [
 
 			// Record that this element was clicked, in case we need it for correct
 			// form submission during the "submit" handler above
-			$lastVClicked = $( target );
+			$lastclicked = $( target );
 
 			// Try to find a target element to which the active class will be applied
 			if ( $.data( target, "mobile-button" ) ) {
@@ -325,7 +325,7 @@ define( [
 				useDefaultUrlHandling, isExternal,
 				transition, reverse, role;
 
-			// If a button was clicked, clean up the active class added by vclick above
+			// If a button was clicked, clean up the active class added by click above
 			if ( $.mobile.activeClickedLink &&
 				$.mobile.activeClickedLink[ 0 ] === event.target.parentNode ) {
 				httpCleanup();

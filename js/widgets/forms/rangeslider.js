@@ -75,7 +75,7 @@ define( [ "jquery",
 				"reset":"_handleReset"
 			});
 			this._on( firstHandle, {
-				"vmousedown": "_dragFirstHandle"
+				"pointerdown": "_dragFirstHandle"
 			});
 		},
 		_handleReset: function() {
@@ -113,7 +113,7 @@ define( [ "jquery",
 			this._proxy = false;
 			//this stops dragging of the handle and brings the active track to the front
 			//this makes clicks on the track go the the last handle used
-			this.element.find( "input" ).trigger( "vmouseup" );
+			this.element.find( "input" ).trigger( "pointerup" );
 			this._sliderFirst.css( "z-index", first ? 1 : "" );
 		},
 

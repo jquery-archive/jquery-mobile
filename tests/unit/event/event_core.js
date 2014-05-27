@@ -16,7 +16,7 @@
 		setup: function(){
 
 			// ensure bindings are removed
-			$.each( events.concat( "vmouseup vmousedown".split(" ") ), function(i, name){
+			$.each( events.concat( "mouseup mousedown".split(" ") ), function(i, name){
 				$("#qunit-fixture").unbind();
 			});
 
@@ -115,7 +115,7 @@
 			start();
 		});
 
-		$( "#qunit-fixture" ).trigger("touchmove");
+		$( "#qunit-fixture" ).trigger("pointermove");
 	});
 
 	asyncTest( "scrollstart setup binds a function that triggers scroll stop after 50 ms", function(){
@@ -158,7 +158,7 @@
 			target = e.target;
 		});
 
-		$( "#qunit-fixture" ).trigger("vmousedown");
+		$( "#qunit-fixture" ).trigger("pointerdown");
 
 		setTimeout(function(){
 			ok( !taphold, "taphold not fired" );
@@ -195,11 +195,11 @@
 		});
 
 		//NOTE start the touch events
-		$( "#qunit-fixture" ).trigger("vmousedown");
+		$( "#qunit-fixture" ).trigger("pointerdown");
 
 		//NOTE fire touchmove to push back taphold
 		setTimeout(function(){
-			$( "#qunit-fixture" ).trigger("vmousecancel");
+			$( "#qunit-fixture" ).trigger("pointercancel");
 		}, 100);
 
 		//NOTE verify that the taphold hasn't been fired
@@ -222,9 +222,9 @@
 		//NOTE record the tap event
 		$( "#qunit-fixture" ).bind("tap", checkTap);
 
-		$( "#qunit-fixture" ).trigger("vmousedown");
-		$( "#qunit-fixture" ).trigger("vmouseup");
-		$( "#qunit-fixture" ).trigger("vclick");
+		$( "#qunit-fixture" ).trigger("pointerdown");
+		$( "#qunit-fixture" ).trigger("pointerup");
+		$( "#qunit-fixture" ).trigger("click");
 
 		setTimeout(function(){
 			start();
@@ -274,9 +274,9 @@
 
 		$doc.bind( "tap", docTapCB );
 
-		$qf.trigger( "vmousedown" )
-			.trigger( "vmouseup" )
-			.trigger( "vclick" );
+		$qf.trigger( "pointerdown" )
+			.trigger( "pointerup" )
+			.trigger( "click" );
 
 		// tap binding should be triggered twice, once for
 		// #qunit-fixture, and a second time for document.
@@ -305,9 +305,9 @@
 
 		$doc.bind( "tap", docTapCB);
 
-		$qf.trigger( "vmousedown" )
-			.trigger( "vmouseup" )
-			.trigger( "vclick" );
+		$qf.trigger( "pointerdown" )
+			.trigger( "pointerup" )
+			.trigger( "click" );
 
 		// tap binding should be triggered twice.
 		deepEqual( tap, 2, "final tap count is 2" );
@@ -337,9 +337,9 @@
 
 		$doc.bind( "tap", docTapCB);
 
-		$cf.trigger( "vmousedown" )
-			.trigger( "vmouseup" )
-			.trigger( "vclick" );
+		$cf.trigger( "pointerdown" )
+			.trigger( "pointerup" )
+			.trigger( "click" );
 
 		// tap binding should be triggered once.
 		deepEqual( tap, 1, "final tap count is 1" );
@@ -482,23 +482,19 @@
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
-			touches: [{
-				clientX: 0,
-				clientY: 0
-			}]
+			clientX: 0,
+			clientY: 0
 		};
 
-		$( "#qunit-fixture" ).trigger("touchstart");
+		$( "#qunit-fixture" ).trigger("pointerdown");
 
 		//NOTE bypass the trigger source check
 		$.Event.prototype.originalEvent = {
-			touches: [{
-				clientX: 200,
-				clientY: 0
-			}]
+			clientX: 200,
+			clientY: 0
 		};
 
-		$( "#qunit-fixture" ).trigger("touchmove");
+		$( "#qunit-fixture" ).trigger("pointermove");
 	});
 
 	test( "Swipe get cords returns proper values", function() {
@@ -618,24 +614,5 @@
 			.trigger( "resize" )
 			.trigger( "resize" )
 			.trigger( "resize" );
-	});
-
-	asyncTest( "mousedown mouseup and click events should add a which when its not defined", function() {
-		var whichDefined = function( event ){
-			deepEqual(event.which, 1);
-		};
-
-		$( document ).bind( "vclick", whichDefined);
-		$( document ).trigger( "click" );
-
-		$( document ).bind( "vmousedown", whichDefined);
-		$( document ).trigger( "mousedown" );
-
-		$( document ).bind( "vmouseup", function( event ){
-			deepEqual(event.which, 1);
-			start();
-		});
-
-		$( document ).trigger( "mouseup" );
 	});
 })(jQuery);

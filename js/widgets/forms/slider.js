@@ -28,6 +28,8 @@ $.widget( "mobile.slider", $.extend( {
 
 	_create: function() {
 
+		this.element.attr( "touch-action",  "pan-y pinch-zoom double-tap-zoom" );
+
 		// TODO: Each of these should have comments explain what they're for
 		var self = this,
 			control = this.element,
@@ -144,16 +146,16 @@ $.widget( "mobile.slider", $.extend( {
 			"change": "_controlChange",
 			"keyup": "_controlKeyup",
 			"blur": "_controlBlur",
-			"vmouseup": "_controlVMouseUp"
+			"pointerup": "_controlpointerup"
 		});
 
-		slider.bind( "vmousedown", $.proxy( this._sliderVMouseDown, this ) )
-			.bind( "vclick", false );
+		slider.bind( "pointerdown", $.proxy( this._sliderpointerdown, this ) )
+			.bind( "click", false );
 
 		// We have to instantiate a new function object for the unbind to work properly
 		// since the method itself is defined in the prototype (causing it to unbind everything)
-		this._on( document, { "vmousemove": "_preventDocumentDrag" });
-		this._on( slider.add( document ), { "vmouseup": "_sliderVMouseUp" });
+		this._on( document, { "pointermove": "_preventDocumentDrag" });
+		this._on( slider.add( document ), { "pointerup": "_sliderpointerup" });
 
 		slider.insertAfter( control );
 
@@ -166,12 +168,12 @@ $.widget( "mobile.slider", $.extend( {
 
 		// bind the handle event callbacks and set the context to the widget instance
 		this._on( this.handle, {
-			"vmousedown": "_handleVMouseDown",
+			"pointerdown": "_handlepointerdown",
 			"keydown": "_handleKeydown",
 			"keyup": "_handleKeyup"
 		});
 
-		this.handle.bind( "vclick", false );
+		this.handle.bind( "click", false );
 
 		this._handleFormReset();
 
@@ -226,12 +228,12 @@ $.widget( "mobile.slider", $.extend( {
 	// it appears the clicking the up and down buttons in chrome on
 	// range/number inputs doesn't trigger a change until the field is
 	// blurred. Here we check thif the value has changed and refresh
-	_controlVMouseUp: function(/* event */) {
+	_controlpointerup: function(/* event */) {
 		this._checkedRefresh();
 	},
 
 	// NOTE force focus on handle
-	_handleVMouseDown: function(/* event */) {
+	_handlepointerdown: function(/* event */) {
 		this.handle.focus();
 	},
 
@@ -289,7 +291,8 @@ $.widget( "mobile.slider", $.extend( {
 		}
 	},
 
-	_sliderVMouseDown: function( event ) {
+	_sliderpointerdown: function( event ) {
+
 		// NOTE: we don't do this in refresh because we still want to
 		//       support programmatic alteration of disabled inputs
 		if ( this.options.disabled || !( event.which === 1 || event.which === 0 || event.which === undefined ) ) {
@@ -311,7 +314,7 @@ $.widget( "mobile.slider", $.extend( {
 		return false;
 	},
 
-	_sliderVMouseUp: function() {
+	_sliderpointerup: function() {
 		if ( this.dragging ) {
 			this.dragging = false;
 
@@ -419,10 +422,9 @@ $.widget( "mobile.slider", $.extend( {
 		step = ( isInput && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
-			data = val;
+			data = val.originalEvent;
 			// a slight tolerance helped get to the ends of the slider
 			tol = 8;
-
 			left = this.slider.offset().left;
 			width = this.slider.width();
 			pxStep = width/((max-min)/step);

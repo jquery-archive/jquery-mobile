@@ -77,7 +77,7 @@ $.widget( "mobile.popup", {
 
 	// When the user depresses the mouse/finger on an element inside the popup while the popup is
 	// open, we ignore resize events for a short while. This prevents #6961.
-	_handleDocumentVmousedown: function( theEvent ) {
+	_handleDocumentpointerdown: function( theEvent ) {
 		if ( this._isOpen && $.contains( this._ui.container[ 0 ], theEvent.target ) ) {
 			this._ignoreResizeEvents();
 		}
@@ -94,7 +94,7 @@ $.widget( "mobile.popup", {
 		currentOptions.history = currentOptions.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
 
 		this._on( this.document, {
-			"vmousedown": "_handleDocumentVmousedown"
+			"pointerdown": "_handleDocumentpointerdown"
 		});
 
 		// Define instance variables
@@ -131,7 +131,7 @@ $.widget( "mobile.popup", {
 			._ui.focusElement = this._ui.container;
 
 		// Event handlers
-		this._on( this._ui.screen, { "vclick": "_eatEventAndClose" } );
+		this._on( this._ui.screen, { "click": "_eatEventAndClose" } );
 		this._on( this.window, {
 			orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 			resize: $.proxy( this, "_handleWindowResize" ),

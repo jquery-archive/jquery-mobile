@@ -95,15 +95,16 @@
 		testDisabled( "After setting option 'disabled' to true a second time: ", true );
 	});
 
-	test( "refresh is triggered on mouseup", function() {
+	asyncTest( "refresh is triggered on pointer", function() {
 		expect( 1 );
 		var slider = $( "#mouseup-refresh" );
 
 		slider.val( parseInt(slider.val(), 10) +  10 );
 		slider.change(function() {
 			ok( true, "slider changed" );
+			start();
 		});
-		slider.trigger( "mouseup" );
+		slider.trigger( "pointerup" );
 	});
 
 	test( "slider tooltip & button values should match after input value changes", function() {

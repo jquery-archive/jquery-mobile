@@ -10,7 +10,6 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [ "jquery",
-	"../../vmouse",
 	"../../navigation/path",
 	"../../core",
 	"../../widget",
@@ -80,13 +79,13 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		}
 
 		this._on( label, {
-			vmouseover: "_handleLabelVMouseOver",
-			vclick: "_handleLabelVClick"
+			pointerover: "_handleLabelpointerover",
+			click: "_handleLabelclick"
 		});
 
 		this._on( input, {
-			vmousedown: "_cacheVals",
-			vclick: "_handleInputVClick",
+			pointerdown: "_cacheVals",
+			click: "_handleInputclick",
 			focus: "_handleInputFocus",
 			blur: "_handleInputBlur"
 		});
@@ -131,20 +130,20 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		this.label.removeClass( $.mobile.focusClass );
 	},
 
-	_handleInputVClick: function() {
+	_handleInputclick: function() {
 		// Adds checked attribute to checked input when keyboard is used
 		this.element.prop( "checked", this.element.is( ":checked" ) );
 		this._getInputSet().not( this.element ).prop( "checked", false );
 		this._updateAll( true );
 	},
 
-	_handleLabelVMouseOver: function( event ) {
+	_handleLabelpointerover: function( event ) {
 		if ( this.label.parent().hasClass( "ui-state-disabled" ) ) {
 			event.stopPropagation();
 		}
 	},
 
-	_handleLabelVClick: function( event ) {
+	_handleLabelclick: function( event ) {
 		var input = this.element;
 
 		if ( input.is( ":disabled" ) ) {
