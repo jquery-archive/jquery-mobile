@@ -149,10 +149,10 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 		durationThreshold: 1000,
 
 		// Swipe horizontal displacement must be more than this.
-		horizontalDistanceThreshold: 30,
+		horizontalDistanceThreshold: window.devicePixelRatio >= 2 ? 15 : 30,
 
 		// Swipe vertical displacement must be less than this.
-		verticalDistanceThreshold: 30,
+		verticalDistanceThreshold: window.devicePixelRatio >= 2 ? 15 : 30,
 
 		getLocation: function ( event ) {
 			var winPageX = window.pageXOffset,
