@@ -110,6 +110,28 @@ $.widget( "mobile.navbar", {
 			classes += " ui-icon-" + icon + " ui-btn-icon-" + iconpos;
 		}
 		$( button ).addClass( classes );
+	},
+
+	refresh: function() {
+		var self = this,
+			$navbar = self.element,
+			$navbtns = $navbar.find( "a" ),
+			numbuttons = $navbtns.length,
+			maxbutton = this.options.maxbutton,
+			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? self.options.iconpos : undefined;
+
+		$navbar.addClass( "ui-navbar" )
+			.attr( "role", "navigation" )
+			.find( "ul" )
+			.jqmEnhanceable();
+
+		 if ( numbuttons <= maxbutton ) {
+			$navbtns.each(function() {
+				self._makeNavButton(this, iconpos);
+			});
+		} else {
+			self._createNavRows();
+		}
 	}
 });
 

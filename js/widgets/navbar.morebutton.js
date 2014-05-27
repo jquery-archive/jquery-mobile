@@ -19,8 +19,12 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
     },
 
     _create: function() {
+		var self = this,
+			$navbtns = self.element.find( "a" ),
+			numbuttons = $navbtns.length,
+			maxbutton = this.options.maxbutton;
         this._super();
-        if ( this.options.morebutton ) {
+        if ( this.options.morebutton  && numbuttons > maxbutton) {
             this._createNavPopup();
         }
     },
@@ -79,6 +83,27 @@ $.widget( "mobile.navbar", $.mobile.navbar, {
         }
         $popupDiv.appendTo( $navbar );
         $popupDiv.popup();
+    },
+    refresh: function() {
+	    var popup, morebutton, newitems,
+	        self = this,
+	        iconpos = self.options.iconpos;
+	    if (!this.options.morebutton) {
+	      this._super();
+	      return;
+	    }
+
+	    morebutton = this.element.find("[data-rel='popup']");
+	    popup = morebutton.attr( "href" );
+
+        if (popup) {
+		    newitems = morebutton.parent().nextAll();
+		    newitems.find("a").each(function() {
+		      self._makeNavButton(this, iconpos);
+		    });
+		    newitems.appendTo($(popup).find("ul"));
+		}
+        self._createNavPopup();
     }
 });
   
