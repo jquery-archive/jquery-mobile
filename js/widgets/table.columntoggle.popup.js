@@ -15,6 +15,7 @@ define( [
 
 $.widget( "mobile.table", $.mobile.table, {
 	options: {
+		columnButton: true,
 		columnBtnTheme: null,
 		columnPopupTheme: null,
 		columnBtnText: "Columns...",
@@ -115,14 +116,16 @@ $.widget( "mobile.table", $.mobile.table, {
 		if ( this.options.mode === "columntoggle" ) {
 			if ( options.disabled !== undefined ) {
 				this._ui.popup.popup( "option", "disabled", options.disabled );
-				this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
-				if( options.disabled ) {
-					this._ui.button.attr( "tabindex", -1 );
-				} else {
-					this._ui.button.removeAttr( "tabindex" );
+				if ( this._ui.button ) {
+					this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
+					if( options.disabled ) {
+						this._ui.button.attr( "tabindex", -1 );
+					} else {
+						this._ui.button.removeAttr( "tabindex" );
+					}
 				}
 			}
-			if ( options.columnBtnTheme !== undefined ) {
+			if ( options.columnBtnTheme !== undefined && this._ui.button ) {
 				this._ui.button
 					.removeClass(
 						this._themeClassFromOption( "ui-btn-", this.options.columnBtnTheme ) )
@@ -131,8 +134,18 @@ $.widget( "mobile.table", $.mobile.table, {
 			if ( options.columnPopupTheme !== undefined ) {
 				this._ui.popup.popup( "option", "theme", options.columnPopupTheme );
 			}
-			if ( options.columnBtnText !== undefined ) {
+			if ( options.columnBtnText !== undefined && this._ui.button ) {
 				this._ui.button.text( options.columnBtnText );
+			}
+			if ( options.columnButton !== undefined ) {
+				if ( options.columnButton ) {
+					if ( !this._ui.button ) {
+						this._ui.button = this._columnsButton();
+					}
+					this._ui.button.insertBefore( this.element );
+				} else if ( this._ui.button ) {
+					this._ui.button.detach();
+				}
 			}
 		}
 
@@ -161,26 +174,37 @@ $.widget( "mobile.table", $.mobile.table, {
 			.toggleClass( "ui-table-cell-visible", checked );
 	},
 
+	_columnsButton: function() {
+		var id = this._id(),
+			options = this.options,
+			buttonTheme = this._themeClassFromOption( "ui-btn-", options.columnBtnTheme ),
+			button = $( "<a href='#" + id + "-popup' " +
+				"id='" + id + "-button' " +
+				"class='ui-btn ui-corner-all ui-shadow ui-mini" +
+					( options.classes.columnBtn ? " " + options.classes.columnBtn : "" ) +
+					( buttonTheme ? " " + buttonTheme : "" ) + "' " +
+				"data-" + $.mobile.ns + "rel='popup'>" + options.columnBtnText + "</a>" );
+
+		this._on( button, {
+			click: "_handleButtonClicked"
+		});
+
+		return button;
+	},
+
 	_enhanceColumnToggle: function() {
 		var ui,
 			id = this._id(),
 			popupId = id + "-popup",
 			table = this.element,
-			opts = this.options,
-			ns = $.mobile.ns,
-			buttonTheme = this._themeClassFromOption( "ui-btn-", opts.columnBtnTheme ),
-			popupThemeAttr = opts.columnPopupTheme ?
-				( " data-" + $.mobile.ns + "theme='" + opts.columnPopupTheme + "'" ) : "",
+			options = this.options,
+			popupThemeAttr = options.columnPopupTheme ?
+				( " data-" + $.mobile.ns + "theme='" + options.columnPopupTheme + "'" ) : "",
 			fragment = this.document[ 0 ].createDocumentFragment();
 
 		ui = this._ui = {
-			button: $( "<a href='#" + popupId + "' " +
-				"id='" + id + "-button' " +
-				"class='ui-btn ui-corner-all ui-shadow ui-mini" +
-					( opts.classes.columnBtn ? " " + opts.classes.columnBtn : "" ) +
-					( buttonTheme ? " " + buttonTheme : "" ) + "' " +
-				"data-" + ns + "rel='popup'>" + opts.columnBtnText + "</a>" ),
-			popup: $( "<div class='" + opts.classes.popup + "' id='" + popupId + "'" +
+			button: this.options.columnButton ? this._columnsButton() : null,
+			popup: $( "<div class='" + options.classes.popup + "' id='" + popupId + "'" +
 				popupThemeAttr + "></div>" ),
 			menu: $( "<fieldset></fieldset>" ).controlgroup()
 		};
@@ -194,10 +218,17 @@ $.widget( "mobile.table", $.mobile.table, {
 		ui.menu.appendTo( ui.popup );
 
 		fragment.appendChild( ui.popup[ 0 ] );
-		fragment.appendChild( ui.button[ 0 ] );
+		if ( ui.button ) {
+			fragment.appendChild( ui.button[ 0 ] );
+		}
 		table.before( fragment );
 
 		ui.popup.popup();
+	},
+
+	_handleButtonClicked: function( event ) {
+		$.mobile.popup.handleLink( this._ui.button );
+		event.preventDefault();
 	},
 
 	_setToggleState: function() {
@@ -231,7 +262,9 @@ $.widget( "mobile.table", $.mobile.table, {
 			} else {
 				this._ui.menu.remove();
 				this._ui.popup.remove();
-				this._ui.button.remove();
+				if ( this._ui.button ) {
+					this._ui.button.remove();
+				}
 			}
 		}
 		return this._superApply( arguments );
