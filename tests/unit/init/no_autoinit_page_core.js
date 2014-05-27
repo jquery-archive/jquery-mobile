@@ -12,7 +12,7 @@ asyncTest( "resetActivePageHeight() will be called when page is initialized late
 		})( $.mobile.resetActivePageHeight );
 	});
 
-	require([ "jquery", "./init" ], function() {
+	require([ "jquery", "./jquery.mobile.init" ], function() {
 		setTimeout( function() {
 			$.mobile.initializePage();
 
