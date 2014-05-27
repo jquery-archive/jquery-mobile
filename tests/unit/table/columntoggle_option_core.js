@@ -88,3 +88,35 @@ test( "Explicitly assigned columnBtnText", function() {
 	deepEqual( $( "#columntoggle-option-test-explicit-button" ).text(), "xyzzy",
 		"Button text assigned via option is propagated to the button" );
 });
+
+function isMenuButton( element, tableId ) {
+	return element.is( "a#" + tableId + "-button[href='#" + tableId + "-popup']" );
+}
+
+test( "Default columnButton", function() {
+	deepEqual(
+		isMenuButton( $( "#columntoggle-option-test-blank" ).prev(),
+			"columntoggle-option-test-blank" ),
+		true,
+		"By default the table is preceded by a button that opens the column selection popup" );
+});
+
+test( "Toggling option columnButton works", function() {
+	var tableId = "columntoggle-toggle-button",
+		table = $( "#" + tableId ),
+		button = table.prev();
+
+	deepEqual( isMenuButton( table.prev(), tableId ), true, "Button is present by default" );
+
+	table.table( "option", "columnButton", false );
+
+	deepEqual( isMenuButton( table.prev(), tableId ), false,
+		"Button is absent when 'columnButton' option is off" );
+
+	table.table( "option", "columnButton", true );
+
+	deepEqual( isMenuButton( table.prev(), tableId ), true,
+		"Button is present when 'columnButton' option is turned back on" );
+
+	deepEqual( table.prev()[ 0 ], button[ 0 ], "Button is reused" );
+});
