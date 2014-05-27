@@ -92,6 +92,17 @@
 	asyncTest( "The page should be enhanced correctly" , function(){
 		setTimeout(function() {
 			ok($('#reflow-table-test .ui-table-reflow').length, ".ui-table-reflow class added to table element");
+			deepEqual(
+				$('#reflow-table-test .ui-table-reflow')
+					.children( "tbody" )
+						.children( "tr" )
+							.first()
+								.children()
+									.eq( 1 )
+										.children( "b" )
+											.children( "span.make-it-red" )
+												.length,
+				1, "span was copied from table header" );
 			start();
 		}, 800);
 	});
