@@ -10,11 +10,11 @@
 	clear: both;
 }
 .ui-navbar ul {
-  padding: 0;
-  display: table;
-  table-layout:fixed;
-  width: 100%;
-  margin: 0;
+	padding: 0;
+	display: table;
+	table-layout:fixed;
+	width: 100%;
+	margin: 0;
 }
 .ui-navbar li {
 	display: table-cell;
