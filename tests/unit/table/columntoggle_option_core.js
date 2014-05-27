@@ -1,4 +1,4 @@
-module( "Columntoggle style options" );
+module( "Columntoggle options" );
 
 function getSwatchClasses( element, prefix ) {
 	var index,
@@ -40,26 +40,26 @@ function testClasses( table, element, prefix, startClass, optionName, newValue, 
 
 test( "Default columnBtnTheme", function() {
 	testClasses(
-		$( "#columntoggle-style-option-test-blank" ),
-		$( "#columntoggle-style-option-test-blank-button" )[ 0 ],
+		$( "#columntoggle-option-test-blank" ),
+		$( "#columntoggle-option-test-blank-button" )[ 0 ],
 		"ui-btn-", "", "columnBtnTheme", "b", "ui-btn-b" );
 });
 
 test( "Explicit columnBtnTheme", function() {
 	testClasses(
-		$( "#columntoggle-style-option-test-explicit" ),
-		$( "#columntoggle-style-option-test-explicit-button" )[ 0 ],
+		$( "#columntoggle-option-test-explicit" ),
+		$( "#columntoggle-option-test-explicit-button" )[ 0 ],
 		"ui-btn-", "ui-btn-b", "columnBtnTheme", "a", "ui-btn-a" );
 });
 
 test( "Default columnPopupTheme", function() {
-	var popup = $( "#columntoggle-style-option-test-blank-popup" );
+	var popup = $( "#columntoggle-option-test-blank-popup" );
 
 	deepEqual( popup.popup( "option", "theme" ), null,
 		"Popup has no theme assigned initially" );
 
 	testClasses(
-		$( "#columntoggle-style-option-test-blank" ),
+		$( "#columntoggle-option-test-blank" ),
 		popup[ 0 ],
 		"ui-body-", "ui-body-inherit", "columnPopupTheme", "b", "ui-body-b" );
 
@@ -68,13 +68,13 @@ test( "Default columnPopupTheme", function() {
 });
 
 test( "Explicit columnPopupTheme", function() {
-	var popup = $( "#columntoggle-style-option-test-explicit-popup" );
+	var popup = $( "#columntoggle-option-test-explicit-popup" );
 
 	deepEqual( popup.popup( "option", "theme" ), "b",
 		"Popup has swatch 'b' assigned initially" );
 
 	testClasses(
-		$( "#columntoggle-style-option-test-explicit" ),
+		$( "#columntoggle-option-test-explicit" ),
 		popup[ 0 ],
 		"ui-body-", "ui-body-b", "columnPopupTheme", "a", "ui-body-a" );
 
@@ -83,8 +83,8 @@ test( "Explicit columnPopupTheme", function() {
 });
 
 test( "Explicitly assigned columnBtnText", function() {
-	$( "#columntoggle-style-option-test-explicit" ).table( "option", "columnBtnText", "xyzzy" );
+	$( "#columntoggle-option-test-explicit" ).table( "option", "columnBtnText", "xyzzy" );
 
-	deepEqual( $( "#columntoggle-style-option-test-explicit-button" ).text(), "xyzzy",
+	deepEqual( $( "#columntoggle-option-test-explicit-button" ).text(), "xyzzy",
 		"Button text assigned via option is propagated to the button" );
 });
