@@ -50,10 +50,15 @@ define([
 				// mimic the browser with an empty string when the hash is empty
 				hash = hash === "#" ? "" : hash;
 
-				// Make sure to parse the url or the location object for the hash because using location.hash
-				// is autodecoded in firefox, the rest of the url should be from the object (location unless
-				// we're testing) to avoid the inclusion of the authority
-				return uri.protocol + "//" + uri.host + uri.pathname + uri.search + hash;
+				if (!uri.doubleSlash) {
+					// Make sure to parse the url or the location object for the hash because using location.hash
+					// is autodecoded in firefox, the rest of the url should be from the object (location unless
+					// we're testing) to avoid the inclusion of the authority
+					return uri.protocol + "//" + uri.host + uri.pathname + uri.search + hash;
+				} else {
+					// support URI schemes which contain only a path and no authority (e.g. "qrc:")
+					return uri.protocol + uri.pathname + uri.search + hash;
+				}
 			},
 
 			//return the original document url
