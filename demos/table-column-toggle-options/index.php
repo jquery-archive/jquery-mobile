@@ -11,6 +11,11 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
+	<style id="financial-table-style">
+.financial-table-columns-button {
+	margin: 0;
+}
+	</style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos">
@@ -121,6 +126,119 @@
 
 		</div><!-- /data-demo -->
 
+		<h2>No Button</h2>
+		<p>You can prevent the table widget from generating a button by adding the <code>data-column-button="false"</code> attribute to the table element. The popup will still be created, and it will have an ID that is equal to the ID of the table plus the suffix <code>"-popup"</code>, so you can manually add an anchor that will open the popup.</p>
+
+		<div data-demo-html="true" data-demo-css="#financial-table-style">
+			<table data-role="table" id="financial-table" data-mode="columntoggle" class="ui-responsive" data-column-button="false">
+				<thead>
+					<tr class="th-groups">
+						<td><a href="#financial-table-popup" data-rel="popup" class="financial-table-columns-button ui-btn ui-corner-all">Quarters</a></td>
+						<th colspan="3" data-priority="6">Q1 2012</th>
+						<th colspan="3" data-priority="5">Q2 2012</th>
+						<th colspan="3" data-priority="4">Q3 2012</th>
+						<th colspan="3" data-priority="3">Q4 2012</th>
+						<th colspan="3" data-priority="1" class="totals">YTD Totals</th>
+					</tr>
+					<tr>
+						<th>Store</th>
+
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<th>Boston</th>
+
+						<td>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+
+					<tr>
+						<th>Chicago</th>
+
+						<td>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+					<tr>
+						<th>NYC</th>
+
+						<td>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+				</tbody>
+			</table>
+		  </div>
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
