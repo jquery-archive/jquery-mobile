@@ -18,24 +18,34 @@ $.widget( "mobile.navbar", {
 	_create: function() {
 
 		var self = this,
-			$navbar = self.element,
-			$navbtns = $navbar.find( "a" ),
-			numbuttons = $navbtns.length,
-			maxbutton = this.options.maxbutton,
-			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? self.options.iconpos : undefined;
+			navbar = self.element,
+			navButtons = navbar.find( "a" ),
+			numButtons = navButtons.length,
+			maxButton = this.options.maxbutton,
+			iconpos = navButtons.filter( ":jqmData(icon)" ).length ? self.options.iconpos : undefined;
 
-		$navbar.addClass( "ui-navbar" )
+		navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable();
 
-		 if ( numbuttons <= maxbutton ) {
-			$navbtns.each(function() {
+		$.extend(self, {
+			navbar: navbar,
+			navButtons: navButtons,
+			numButtons: numButtons,
+			maxButton: maxButton,
+			iconpos: iconpos
+		});
+
+		 if ( numButtons <= maxButton ) {
+			navButtons.each(function() {
 				self._makeNavButton(this, iconpos);
 			});
 		} else {
 			self._createNavRows();
 		}
+
+
 
 		// Deprecated in 1.5
 		self._on( self.element, {
@@ -45,7 +55,7 @@ $.widget( "mobile.navbar", {
 				if ( !( activeBtn.hasClass( "ui-state-disabled" ) ||
 					activeBtn.hasClass( $.mobile.activeBtnClass ) ) ) {
 
-					$navbtns.removeClass( $.mobile.activeBtnClass );
+					navButtons.removeClass( $.mobile.activeBtnClass );
 					activeBtn.addClass( $.mobile.activeBtnClass );
 
 					// The code below is a workaround to fix #1181
@@ -58,19 +68,16 @@ $.widget( "mobile.navbar", {
 
 		// Deprecated in 1.5
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
-		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+		navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
+			navButtons.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
 		});
 	},
 
 	_createNavRows: function(){
 		var rowCount, row, pos, buttonItem, overflowNav,
-			$navbar = this.element,
-			$navButtons = $navbar.find( "a" ),
-			$navItems = $navbar.find( "li" ),
-			buttonCount = $navButtons.length,
-			maxButton = this.options.maxbutton,
-			iconpos = this.options.iconpos;
+			navItems = this.navbar.find( "li" ),
+			buttonCount = this.numButtons,
+			maxButton = this.maxButton;
 
 		rowCount = (buttonCount % maxButton) === 0 ?
 						(buttonCount / maxButton) :
@@ -80,20 +87,20 @@ $.widget( "mobile.navbar", {
 		for ( pos = 1; pos < rowCount ; pos++ ) {
 			$( "<ul>" )
 				.addClass( "ui-navbar-row ui-navbar-row-" + pos )
-				.appendTo($navbar);
+				.appendTo(this.navbar);
 		}
 
 		// enhance buttons and move to new rows
 		for( pos = 0; pos < buttonCount ; pos++ ) {
-			buttonItem = $navItems.eq(pos);
-			this._makeNavButton( buttonItem.find( "a" ), iconpos );
+			buttonItem = navItems.eq(pos);
+			this._makeNavButton( buttonItem.find( "a" ), this.iconpos );
 			if ( pos + 1 > maxButton) {
 				buttonItem.detach();
 				row = ((pos + 1) % maxButton) === 0 ?
 						Math.floor((pos) / maxButton) :
 						Math.floor((pos + 1) / maxButton);
 				overflowNav = "ul.ui-navbar-row-" + row;
-				$navbar.find(overflowNav).append(buttonItem);
+				this.navbar.find(overflowNav).append(buttonItem);
 			}
 		}
 	},
@@ -113,25 +120,47 @@ $.widget( "mobile.navbar", {
 	},
 
 	refresh: function() {
-		var self = this,
-			$navbar = self.element,
-			$navbtns = $navbar.find( "a" ),
-			numbuttons = $navbtns.length,
-			maxbutton = this.options.maxbutton,
-			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? self.options.iconpos : undefined;
+		var self = this;
 
-		$navbar.addClass( "ui-navbar" )
+		self.navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable();
 
-		 if ( numbuttons <= maxbutton ) {
-			$navbtns.each(function() {
-				self._makeNavButton(this, iconpos);
+		 if ( self.numButtons <= self.maxButton ) {
+			self.navButtons.each(function() {
+				self._makeNavButton(this, self.iconpos);
 			});
 		} else {
 			self._createNavRows();
 		}
+	},
+
+	_destroy: function() {
+		var navrows,
+			self = this;
+
+		if ( self.numButtons > self.maxButton ) {
+			navrows = self.navbar.find( ".ui-navbar-row li" ).detach();
+			$( ".ui-navbar-row" ).remove();
+			self.navbar.find( "ul" ).append( navrows );
+		}
+
+		self.navbar.removeClass( "ui-navbar" );
+
+		self.navButtons.each(function() {
+			var icon = $.mobile.getAttribute( this, "icon" ),
+				theme = $.mobile.getAttribute( this, "theme" ),
+				classes = "ui-btn";
+
+			if ( theme ) {
+				classes += " ui-btn-" + theme;
+			}
+			if ( icon ) {
+				classes += " ui-icon-" + icon + " ui-btn-icon-" + self.iconpos;
+			}
+			$( this ).removeClass( classes );
+		});
 	}
 });
 
