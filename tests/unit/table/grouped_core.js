@@ -27,7 +27,7 @@ function runTests() {
 							.length === 1 );
 			}),
 			false,
-			"Cells in the first of a group of columns have both group and column reflow mode labels" );
+			"Cells in the first of a group of columns have both group and column reflow labels" );
 	});
 }
 
