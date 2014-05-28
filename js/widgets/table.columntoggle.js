@@ -24,6 +24,8 @@ return $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		mode: "columntoggle",
 		classes: $.extend( {}, $.mobile.table.prototype.options.classes, {
+			cellHidden: "ui-table-cell-hidden",
+			cellVisible: "ui-table-cell-visible",
 			priorityPrefix: "ui-table-priority-",
 			columnToggleTable: "ui-table-columntoggle"
 		} )
@@ -72,13 +74,60 @@ return $.widget( "mobile.table", $.mobile.table, {
 		}, this ) );
 	},
 
-	_unlock: function() {
+	_setColumnVisibility: function( header, visible ) {
+		var cells = header.jqmData( "cells" );
+
+		if ( cells ) {
+			cells = cells.add( header );
+			this._unlock( cells );
+			cells.addClass( this.options.classes[ visible ? "cellVisible" : "cellHidden" ] );
+		}
+	},
+
+	setColumnVisibility: function( cell, visible ) {
+		var header;
+
+		// If cell is a number, then simply index into the headers array
+		if ( $.type( cell ) === "number" ) {
+			header = this.headers.eq( cell );
+
+		// Otherwise it's assumed to be a jQuery collection object
+		} else if ( cell.length > 0 ) {
+
+			// If it's one of the headers, then we already have the header we wanted
+			if ( this.headers.index( cell[ 0 ] ) >= 0 ) {
+				header = cell.first();
+
+			// Otherwise we assume it's one of the cells, so look for it in the "cells" data for
+			// each header
+			} else {
+				this.headers.each( $.proxy( function( index, singleHeader ) {
+					var possibleHeader = $( singleHeader ),
+						cells = possibleHeader.jqmData( "cells" );
+
+					if ( ( cells ? cells.index( cell[ 0 ] ) : -1 ) >= 0 ) {
+						header = possibleHeader;
+						return false;
+					}
+				}, this ) );
+			}
+		}
+
+		if ( header ) {
+			this._setColumnVisibility( header, visible );
+		}
+	},
+
+	_unlock: function( cells ) {
+		var classes = this.options.classes;
+
 		// allow hide/show via CSS only = remove all toggle-locks
-		this.element
-			.children( "thead, tbody" )
-				.children( "tr" )
-					.children( ".ui-table-cel-hidden, .ui-table-cell-visible" )
-						.removeClass( "ui-table-cell-hidden ui-table-cell-visible" );
+		( cells ||
+			this.element
+				.children( "thead, tbody" )
+					.children( "tr" )
+						.children( "." + classes.cellHidden + ", ." + classes.cellVisible ) )
+			.removeClass( classes.cellHidden + " " + classes.cellVisible );
 	},
 
 	// Use the .jqmData() stored on the checkboxes to determine which columns have show/hide

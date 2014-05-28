@@ -152,6 +152,20 @@ $.widget( "mobile.table", $.mobile.table, {
 		return this._superApply( arguments );
 	},
 
+	_setColumnVisibility: function( header, visible, /* INTERNAL */ fromInput ) {
+		var input;
+
+		if ( !fromInput ) {
+			input = header.jqmData( "input" );
+
+			if ( input ) {
+				input.prop( "checked", visible ).checkboxradio( "refresh" );
+			}
+		}
+
+		return this._superApply( arguments );
+	},
+
 	_setupEvents: function() {
 		//NOTE: inputs are bound in bindToggles,
 		// so it can be called on refresh, too
@@ -165,13 +179,10 @@ $.widget( "mobile.table", $.mobile.table, {
 		});
 	},
 
-	_menuInputChange: function( evt ) {
-		var input = $( evt.target ),
-			checked = input[ 0 ].checked;
+	_menuInputChange: function( event ) {
+		var input = $( event.target );
 
-		input.jqmData( "cells" )
-			.toggleClass( "ui-table-cell-hidden", !checked )
-			.toggleClass( "ui-table-cell-visible", checked );
+		this._setColumnVisibility( input.jqmData( "header" ), input.prop( "checked" ), true );
 	},
 
 	_columnsButton: function() {
@@ -235,8 +246,10 @@ $.widget( "mobile.table", $.mobile.table, {
 		this._ui.menu.find( "input" ).each( function() {
 			var checkbox = $( this );
 
-			this.checked = checkbox.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell";
-			checkbox.checkboxradio( "refresh" );
+			checkbox
+				.prop( "checked",
+					( checkbox.jqmData( "cells" ).eq( 0 ).css( "display" ) === "table-cell" ) )
+				.checkboxradio( "refresh" );
 		});
 	},
 
