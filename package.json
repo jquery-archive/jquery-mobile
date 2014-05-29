@@ -20,7 +20,7 @@
 		}
 	],
 	"dependencies": {
-		"jquery": ">=1.8.3"
+		"jquery": ">=1.9.1"
 	},
 	"devDependencies": {
 		"async": "0.2.9",
