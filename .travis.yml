@@ -12,9 +12,9 @@ env:
   - TYPES=unit
     JQUERIES=1.8.3
   - TYPES=unit
-    JQUERIES=1.10.2
+    JQUERIES=1.11.1
   - TYPES=unit
-    JQUERIES=2.0.3
+    JQUERIES=2.1.1
   - TYPES=unit
     JQUERIES=git
   - TYPES=integration
@@ -22,10 +22,10 @@ env:
     JQUERIES=1.8.3
   - TYPES=integration
     SUITES=!navigation
-    JQUERIES=1.10.2
+    JQUERIES=1.11.1
   - TYPES=integration
     SUITES=!navigation
-    JQUERIES=2.0.3
+    JQUERIES=2.1.1
   - TYPES=integration
     SUITES=!navigation
     JQUERIES=git
@@ -34,10 +34,10 @@ env:
     JQUERIES=1.8.3
   - TYPES=integration
     SUITES=navigation
-    JQUERIES=1.10.2
+    JQUERIES=1.11.1
   - TYPES=integration
     SUITES=navigation
-    JQUERIES=2.0.3
+    JQUERIES=2.1.1
   - TYPES=integration
     SUITES=navigation
     JQUERIES=git

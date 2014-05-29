@@ -41,7 +41,7 @@ It is IMPORTANT that you always provide a test page when submitting an issue!
 
 * What? - Keep the test page as simple as possible. Only include markup/code that is required to reproduce the issue.
 
-* How? - Use our [JS Bin template](http://jsbin.com/acIRUBo/1/edit) which uses latest code on branch "master". Do not replace the links to the the framework CSS and JavaScript: always test with latest code!
+* How? - Use our [JS Bin template](http://jsbin.com/huvoraba/1/edit) which uses latest code on branch "master". Do not replace the links to the the framework CSS and JavaScript: always test with latest code!
 
   * You will notice if the issue has been fixed already
   * It enables us to edit your code if necessary
@@ -158,7 +158,7 @@ will only run the tests under `tests/unit/button/` and `tests/unit/checkboxradio
 You can also specify which versions of jQuery you want to test jQuery Mobile with by using the `--jqueries` option:
 
 ```bash
-$ grunt test --jqueries=1.10.2,git
+$ grunt test --jqueries=1.11.1,git
 ```
 
 
