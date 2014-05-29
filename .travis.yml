@@ -10,7 +10,7 @@ branches:
     - master
 env:
   - TYPES=unit
-    JQUERIES=1.9.1
+    JQUERIES=1.8.3
   - TYPES=unit
     JQUERIES=1.11.1
   - TYPES=unit
@@ -19,7 +19,7 @@ env:
     JQUERIES=git
   - TYPES=integration
     SUITES=!navigation
-    JQUERIES=1.9.1
+    JQUERIES=1.8.3
   - TYPES=integration
     SUITES=!navigation
     JQUERIES=1.11.1
@@ -31,7 +31,7 @@ env:
     JQUERIES=git
   - TYPES=integration
     SUITES=navigation
-    JQUERIES=1.9.1
+    JQUERIES=1.8.3
   - TYPES=integration
     SUITES=navigation
     JQUERIES=1.11.1
