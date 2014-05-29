@@ -71,7 +71,7 @@ label.ui-btn {
 	border-width: 1px;
 	border-style: solid;
 }
-.ui-btn:link {
+.ui-btn {
 	text-decoration: none !important;
 }
 .ui-btn-active {
