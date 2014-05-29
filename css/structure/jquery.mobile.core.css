@@ -237,7 +237,9 @@ div.ui-mobile-viewport {
 	-ms-user-select: none;
 	user-select: none;
 }
-.ui-btn-icon-notext {
+.ui-btn-icon-notext,
+.ui-header button.ui-btn.ui-btn-icon-notext,
+.ui-footer button.ui-btn.ui-btn-icon-notext {
 	padding: 0;
 	width: 1.75em;
 	height: 1.75em;
@@ -383,7 +385,9 @@ button.ui-btn,
 	-moz-appearance: none;
 	width: 100%;
 }
-button.ui-btn-inline {
+button.ui-btn-inline,
+.ui-header button.ui-btn,
+.ui-footer button.ui-btn {
 	width: auto;
 }
 /* Firefox adds a 1px border in a button element. We negate this to make sure they have the same height as other buttons in controlgroups. */
