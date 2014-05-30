@@ -24,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Collapsible set</h1>
+		<h1>Collapsible set <a href="http://api.jquerymobile.com/1.5/collapsibleset/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>An accordion is created in jQuery Mobile by grouping a series of individual collapsibles into set.</p>
 
