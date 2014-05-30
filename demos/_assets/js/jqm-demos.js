@@ -55,7 +55,10 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 		words = version.split( "-" ),
 		ver = words[0],
 		str = words[1] || "",
-		text = ver;
+		text = ver,
+		versionNumbers = ver.split( "." ),
+		apiVersion = versionNumbers[ 0 ] + "." + versionNumbers[ 1 ],
+		href;
 
 	// Insert jqm version in header
 	if ( str.indexOf( "rc" ) == -1 ) {
@@ -69,6 +72,15 @@ $( document ).on( "pagecreate", ".jqm-demos", function( event ) {
 	}
 
 	$( ".jqm-version" ).html( text );
+
+	// Insert version in API documentation links
+	if ( version !== "dev" ) {
+		$( ".jqm-api-docs-link" ).each(function() {
+			href = $( this ).attr( "href" ).replace( "api.jquerymobile.com/", "api.jquerymobile.com/" + apiVersion + "/" );
+
+			$( this ).attr( "href", href );
+		});
+	}
 
 	// Global navmenu panel
 	$( ".jqm-navmenu-panel ul" ).listview();

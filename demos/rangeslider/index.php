@@ -24,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Range slider</h1>
+		<h1>Range slider <a href="http://api.jquerymobile.com/rangeslider/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>Range slider offer two handles to set a min and max value along a numeric continuum.
 			</p>

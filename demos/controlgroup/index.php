@@ -33,7 +33,7 @@
 
 	    <div role="main" class="ui-content jqm-content">
 
-        <h1>Controlgroup</h1>
+        <h1>Controlgroup <a href="http://api.jquerymobile.com/controlgroup/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
         <p>Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.
         </p>

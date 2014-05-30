@@ -49,7 +49,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Popup</h1>
+		<h1>Popup <a href="http://api.jquerymobile.com/popup/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>The popup widget can be used for various types of popups. From a small tooltip popup to a large photo lightbox.</p>
 

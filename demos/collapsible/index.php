@@ -27,7 +27,7 @@
 
     <div role="main" class="ui-content jqm-content">
 
-        <h1>Collapsible</h1>
+        <h1>Collapsible <a href="http://api.jquerymobile.com/collapsible/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
         <p>Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.</p>
 

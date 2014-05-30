@@ -24,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Toolbar</h1>
+		<h1>Toolbar <a href="http://api.jquerymobile.com/toolbar/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>The toolbar widget is used to enhance headers and footers.</p>
 
