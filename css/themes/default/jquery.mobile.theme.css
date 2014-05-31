@@ -198,6 +198,10 @@ html .ui-alt-icon .ui-radio-off:after {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
 }
+.ui-btn.ui-checkbox-off:after {
+	background-color: #666;
+	background-color: rgba(0,0,0,.3);
+}
 .ui-radio .ui-btn.ui-radio-on:after {
 	background-image: none;
 	background-color: #fff;
