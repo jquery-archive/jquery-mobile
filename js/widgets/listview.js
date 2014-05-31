@@ -196,7 +196,7 @@ $.widget( "mobile.listview", $.extend( {
 			$( this ).closest( "li" ).addClass( "ui-li-has-count" );
 		});
 		if ( countThemeClass ) {
-			countBubbles.addClass( countThemeClass );
+			countBubbles.not( "[class*='ui-body-']" ).addClass( countThemeClass );
 		}
 
 		// Deprecated in 1.4. From 1.5 you have to add class ui-li-has-thumb or ui-li-has-icon to the LI.
