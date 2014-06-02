@@ -86,7 +86,7 @@
 		    </div>
 		</div>
 		    <h2>Tabbed page content</h2>
-		    <p>You can also use tabs to swap out an enitre pages content <a data-ajax="false" href="tabbed-content.php">Tabbed Content Pages</a></p>
+		    <p>You can also use tabs to swap out the contents of an entire page. See <a data-ajax="false" href="tabbed-content.php">Tabbed Content Pages</a> for details.</p>
 
 	</div><!-- /content -->
 
