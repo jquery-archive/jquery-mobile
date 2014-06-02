@@ -161,7 +161,7 @@ html .ui-alt-icon.ui-radio-off:after,
 html .ui-alt-icon .ui-checkbox-off:after,
 html .ui-alt-icon .ui-radio-off:after {
 	background-color: 					#666 /*{global-icon-color}*/;
-	background-color: 					rgba(0,0,0,.15);
+	background-color: 					rgba(0,0,0,.15) /*{global-icon-disc}*/;
 }
 
 /* No disc */
