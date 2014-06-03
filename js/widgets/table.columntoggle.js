@@ -63,7 +63,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_updateHeaderPriorities: function( state ) {
-		this.headers.not( "td" ).each( $.proxy( function( index, element ) {
+		this.headers.each( $.proxy( function( index, element ) {
 			var header = $( element );
 
 			this._updateSingleHeaderPriority(
@@ -226,7 +226,7 @@ return $.widget( "mobile.table", $.mobile.table, {
 			if ( !this.options.enhanced ) {
 				this.element.removeClass( this.options.classes.columnToggleTable );
 			}
-			this.headers.not( "td" ).each( $.proxy( function( index, element ) {
+			this.headers.each( $.proxy( function( index, element ) {
 				this._destroyHeader( $( element ) );
 			}, this ));
 		}
