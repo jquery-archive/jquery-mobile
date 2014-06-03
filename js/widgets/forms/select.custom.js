@@ -136,18 +136,55 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 	},
 
+	_handleListItemClick: function( event ) {
+		var listItem = $( event.target ).closest( "li" ),
+
+			// index of option tag to be selected
+			oldIndex = this.select[ 0 ].selectedIndex,
+			newIndex = $.mobile.getAttribute( listItem, "option-index" ),
+			option = this._selectOptions().eq( newIndex )[ 0 ];
+
+		// toggle selected status on the tag for multi selects
+		option.selected = this.isMultiple ? !option.selected : true;
+
+		// toggle checkbox class for multiple selects
+		if ( this.isMultiple ) {
+			listItem.find( "a" )
+				.toggleClass( "ui-checkbox-on", option.selected )
+				.toggleClass( "ui-checkbox-off", !option.selected );
+		}
+
+		// If it's not a multiple select, trigger change after it has finished closing
+		if ( !this.isMultiple && oldIndex !== newIndex ) {
+			this._triggerChange = true;
+		}
+
+		// Trigger change if it's a multiple select
+		// Hide custom select for single selects only - otherwise focus clicked item
+		// We need to grab the clicked item the hard way, because the list may have been rebuilt
+		if ( this.isMultiple ) {
+			this.select.trigger( "change" );
+			this.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
+				.find( "a" ).first().focus();
+		}
+		else {
+			this.close();
+		}
+
+		event.preventDefault();
+	},
+
 	build: function() {
 		var selectId, popupId, dialogId, label, thisPage, isMultiple, menuId,
 			themeAttr, overlayTheme, overlayThemeAttr, dividerThemeAttr,
 			menuPage, listbox, list, header, headerTitle, menuPageContent,
-			menuPageClose, headerClose, self,
+			menuPageClose, headerClose,
 			o = this.options;
 
 		if ( o.nativeMenu ) {
 			return this._super();
 		}
 
-		self = this;
 		selectId = this.selectId;
 		popupId = selectId + "-listbox";
 		dialogId = selectId + "-dialog";
@@ -225,47 +262,11 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		// Events for list items
 		this.list.attr( "role", "listbox" );
 		this._on( this.list, {
-			focusin : "_handleListFocus",
-			focusout : "_handleListFocus",
-			keydown: "_handleListKeydown"
+			"focusin": "_handleListFocus",
+			"focusout": "_handleListFocus",
+			"keydown": "_handleListKeydown",
+			"click li:not(.ui-disabled,.ui-state-disabled,.ui-li-divider)": "_handleListItemClick"
 		});
-		this.list
-			.delegate( "li:not(.ui-disabled,.ui-state-disabled,.ui-li-divider)", "click", function( event ) {
-
-				// index of option tag to be selected
-				var oldIndex = self.select[ 0 ].selectedIndex,
-					newIndex = $.mobile.getAttribute( this, "option-index" ),
-					option = self._selectOptions().eq( newIndex )[ 0 ];
-
-				// toggle selected status on the tag for multi selects
-				option.selected = self.isMultiple ? !option.selected : true;
-
-				// toggle checkbox class for multiple selects
-				if ( self.isMultiple ) {
-					$( this ).find( "a" )
-						.toggleClass( "ui-checkbox-on", option.selected )
-						.toggleClass( "ui-checkbox-off", !option.selected );
-				}
-
-				// if it's not a multiple select, trigger change after it has finished closing
-				if ( !self.isMultiple && oldIndex !== newIndex ) {
-					self._triggerChange = true;
-				}
-
-				// trigger change if it's a multiple select
-				// hide custom select for single selects only - otherwise focus clicked item
-				// We need to grab the clicked item the hard way, because the list may have been rebuilt
-				if ( self.isMultiple ) {
-					self.select.trigger( "change" );
-					self.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
-						.find( "a" ).first().focus();
-				}
-				else {
-					self.close();
-				}
-
-				event.preventDefault();
-			});
 
 		// button refocus ensures proper height calculation
 		// by removing the inline style and ensuring page inclusion
