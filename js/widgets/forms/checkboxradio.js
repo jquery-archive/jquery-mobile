@@ -26,6 +26,8 @@ $.widget( "mobile.checkboxradio", $.extend( {
 
 	options: {
 		theme: "inherit",
+
+		// Deprecated as of 1.5.0
 		mini: false,
 		wrapperClass: null,
 		enhanced: false,
@@ -55,6 +57,7 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		o.iconpos = inheritAttr( input, "iconpos" ) ||
 			label.element.attr( "data-" + $.mobile.ns + "iconpos" ) || o.iconpos,
 
+		// Deprecated as of 1.5.0
 		// Establish options
 		o.mini = inheritAttr( input, "mini" ) || o.mini;
 
@@ -130,15 +133,16 @@ $.widget( "mobile.checkboxradio", $.extend( {
 		this._setOptions({
 			"theme": this.options.theme,
 			"iconpos": this.options.iconpos,
+			"wrapperClass": this.options.wrapperClass,
+
+			// Deprecated as of 1.5.0
 			"mini": this.options.mini
 		});
 
 	},
 
 	_wrapper: function() {
-		return $( "<div class='"  +
-			( this.options.wrapperClass ? this.options.wrapperClass : "" ) +
-			" ui-" + this.inputtype +
+		return $( "<div class='ui-" + this.inputtype +
 			( this.options.disabled ? " ui-state-disabled" : "" ) + "' ></div>" );
 	},
 
@@ -333,6 +337,8 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			this.input.prop( "disabled", !!options.disabled );
 			outer.toggleClass( "ui-state-disabled", !!options.disabled );
 		}
+
+		// Deprecated as of 1.5.0
 		if ( options.mini !== undefined ) {
 			outer.toggleClass( "ui-mini", !!options.mini );
 		}
