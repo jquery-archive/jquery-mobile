@@ -81,7 +81,7 @@
 
 		<h2>Mini size</h2>
 
-		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a mini version. </p>
+		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>ui-mini</code> class to the element to create a mini version. </p>
 
 		<div data-demo-html="true">
 			<form>
