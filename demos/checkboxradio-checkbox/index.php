@@ -42,11 +42,11 @@
 
 		<h2>Mini size</h2>
 
-		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>data-mini="true"</code> attribute to the element to create a mini version. </p>
+		<p>For a more compact version that is useful in toolbars and tight spaces, add the <code>ui-mini</code> class to the element's <code>data-wrapper-class</code> attribute to create a mini version. </p>
 
 		<div data-demo-html="true">
 			<form>
-				<input type="checkbox" name="checkbox-mini-0" id="checkbox-mini-0" data-mini="true">
+				<input type="checkbox" name="checkbox-mini-0" id="checkbox-mini-0" data-wrapper-class="ui-mini">
 				<label for="checkbox-mini-0">I agree</label>
 			</form>
 		</div><!--/demo-html -->
@@ -89,7 +89,7 @@
 
 		<h2>Icon position</h2>
 
-		<p>To swap the position of the check icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the fieldset to create a mini version. </p>
+		<p>To swap the position of the check icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the fieldset.</p>
 
 		<div data-demo-html="true">
 			<form>
