@@ -139,15 +139,15 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	_handleListItemClick: function( event ) {
 		var listItem = $( event.target ).closest( "li" ),
 
-			// index of option tag to be selected
+			// Index of option tag to be selected
 			oldIndex = this.select[ 0 ].selectedIndex,
 			newIndex = $.mobile.getAttribute( listItem, "option-index" ),
 			option = this._selectOptions().eq( newIndex )[ 0 ];
 
-		// toggle selected status on the tag for multi selects
+		// Toggle selected status on the tag for multi selects
 		option.selected = this.isMultiple ? !option.selected : true;
 
-		// toggle checkbox class for multiple selects
+		// Toggle checkbox class for multiple selects
 		if ( this.isMultiple ) {
 			listItem.find( "a" )
 				.toggleClass( "ui-checkbox-on", option.selected )
