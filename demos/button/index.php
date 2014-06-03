@@ -54,7 +54,7 @@
 		<div data-demo-html="true">
 			<form>
 				<input type="button" value="Has corners by default">
-				<input type="button" data-corners="false" value="Unset corners">
+				<input type="button" data-wrapper-class="ui-corner-none" value="Unset corners">
 				<div class="ui-input-btn ui-btn ui-corner-all">
 					Enhanced
 					<input type="button" data-enhanced="true" value="Enhanced">
@@ -81,7 +81,7 @@
 		<div data-demo-html="true">
 			<form>
 				<input type="button" value="Has shadow by default">
-				<input type="button" data-shadow="false" value="Unset shadow">
+				<input type="button" data-wrapper-class="ui-shadow-none" value="Unset shadow">
 				<div class="ui-input-btn ui-btn ui-shadow">
 					Enhanced
 					<input type="button" data-enhanced="true" value="Enhanced">
@@ -212,6 +212,17 @@
 				<input type="reset" data-role="none" value="Reset">
 			</form>
 		</div><!--/demo-html -->
+
+		<h2>Negate style options</h2>
+
+		<div data-demo-html="true">
+			<form>
+				<input type="button" value="No corner" data-wrapper-class="ui-corner-none">
+				<input type="submit" value="No shadow" data-wrapper-class="ui-shadow-none">
+				<input type="submit" value="No corener and shadow." data-wrapper-class="ui-corner-none ui-shadow-none">
+			</form>
+		</div><!--/demo-html -->
+
 
 	</div><!-- /content -->
 
