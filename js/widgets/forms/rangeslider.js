@@ -9,7 +9,7 @@ define( [ "jquery",
 	"../../jquery.mobile.core",
 	"../../jquery.mobile.widget",
 	"./textinput",
-	"../../vmouse",
+	"../../jquery.mobile.vmouse",
 	"./reset",
 	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
