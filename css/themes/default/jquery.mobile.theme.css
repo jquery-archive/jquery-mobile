@@ -605,3 +605,15 @@ button[disabled],
 	outline-width: 1px;
 	outline-style: auto;
 }
+
+/* Negate Class
+ +-----------------------------------------------------------------------------------------------------------*/
+.ui-corner-none, .ui-corner-none.ui-corner-all {
+	-webkit-border-radius: : 0; /*{negate ui-corner-all}*/
+	border-radius: 0; /*{negate ui-corner-all}*/
+}
+.ui-shadow-none {
+	-webkit-box-shadow: none; /*{negate ui-shadow*/
+	-moz-box-shadow: none; /*{negate ui-shadow*/
+	box-shadow: none;  /*{negate ui-shadow*/
+}
