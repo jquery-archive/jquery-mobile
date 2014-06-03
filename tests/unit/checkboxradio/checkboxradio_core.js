@@ -3,6 +3,16 @@
  */
 (function($){
 	module( 'jquery.mobile.forms.checkboxradio.js' );
+	test( "Checkbox is made mini when ui-mini is among wrapper classes", function() {
+		var widget = $( "#wrapper-class-mini" );
+
+		deepEqual( widget.checkboxradio( "option", "mini" ), false,
+			"Checkboxradio option mini is false" );
+		deepEqual( widget.parent().hasClass( "ui-mini" ),
+		true,
+		"Widget has class ui-mini" );
+	});
+
 	test( "Programmatic click on radio input correctly updates group", function() {
 		var first = $( "#programmatic-click-test input" ).eq( 0 ),
 			last = $( "#programmatic-click-test input" ).eq( 2 );
