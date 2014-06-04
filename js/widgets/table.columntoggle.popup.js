@@ -19,6 +19,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		columnBtnTheme: null,
 		columnPopupTheme: null,
 		columnBtnText: "Columns...",
+		columnUi: true,
 		classes: $.extend( {}, $.mobile.table.prototype.options.classes, {
 			popup: "ui-table-columntoggle-popup",
 			columnBtn: "ui-table-columntoggle-btn"
@@ -30,7 +31,7 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		this._super();
 
-		if ( this.options.mode !== "columntoggle" ) {
+		if ( this.options.mode !== "columntoggle" || !this.options.columnUi ) {
 			return;
 		}
 
@@ -44,17 +45,12 @@ $.widget( "mobile.table", $.mobile.table, {
 			};
 			this._updateHeaderPriorities({ keep: true });
 		}
-
-		this._setupEvents();
-
-		this._setToggleState();
-
 	},
 
 	_updateSingleHeaderPriority: function( header, cells, priority, state ) {
 		var input;
 
-		if ( priority ) {
+		if ( priority && ( this.options.columnUi || ( state && state.turningOnUI ) ) ) {
 
 			// Make sure the (new?) checkbox is associated with its header via .jqmData() and that,
 			// vice versa, the header is also associated with the checkbox
@@ -77,31 +73,44 @@ $.widget( "mobile.table", $.mobile.table, {
 			header.jqmData( "input", input );
 		}
 
-		return this._superApply( arguments );
+		return ( state && state.turningOnUI ) ? this : this._superApply( arguments );
 	},
 
 	_updateHeaderPriorities: function( state ) {
-		var inputs,
-			container = this._ui.menu.controlgroup( "container" );
+		var inputs, container, returnValue;
 
 		state = state || {};
 
-		// allow update of menu on refresh (fixes #5880)
-		if ( state.keep ) {
-			inputs = container.find( "input" );
+		if ( this.options.columnUi || state.turningOnUI ) {
+			container = this._ui.menu.controlgroup( "container" );
+
+			// allow update of menu on refresh (fixes #5880)
+			if ( state.keep ) {
+				inputs = container.find( "input" );
+			} else {
+				container.empty();
+			}
+
+			returnValue = this._super( $.extend( state, {
+				checkboxIndex: 0,
+				container: container,
+				inputs: inputs
+			}));
+
+			// the controlgroup can only be refreshed after having called the superclass, because
+			// the superclass ultimately ends up instantiating the checkboxes inside the
+			// controlgroup's container
+			if ( !state.keep ) {
+				this._ui.menu.controlgroup( "refresh" );
+			}
+
+			this._setupEvents();
+			this._setToggleState();
 		} else {
-			container.empty();
+			returnValue = this._superApply( arguments );
 		}
 
-		this._super( $.extend( state, {
-			checkboxIndex: 0,
-			container: container,
-			inputs: inputs
-		}));
-
-		if ( !state.keep ) {
-			this._ui.menu.controlgroup( "refresh" );
-		}
+		return returnValue;
 	},
 
 	_id: function() {
@@ -112,39 +121,87 @@ $.widget( "mobile.table", $.mobile.table, {
 		return ( value ? ( value === "none" ? "" : prefix + value ) : "" );
 	},
 
+	_removeColumnUi: function( detachOnly ) {
+		var inputs = this._ui.menu.find( "input" );
+
+		inputs.each( function() {
+			var input = $( this ),
+				header = input.jqmData( "header" );
+
+			// If we're simply detaching, the checkboxes will be left alone, but the jqmData()
+			// attached to them has to be removed
+			if ( detachOnly ) {
+				input
+					.jqmRemoveData( "cells" )
+					.jqmRemoveData( "header" );
+			}
+
+			// The reference from the header to the input has to be removed whether we're merely
+			// detaching, or whether we're removing altogether
+			header.jqmRemoveData( "input" );
+		});
+
+		if ( !detachOnly ) {
+			this._ui.menu.remove();
+			this._ui.popup.remove();
+			if ( this._ui.button ) {
+				this._ui.button.remove();
+			}
+		}
+	},
+
 	_setOptions: function( options ) {
+		var haveUi = this.options.columnUi;
+
 		if ( this.options.mode === "columntoggle" ) {
-			if ( options.disabled !== undefined ) {
-				this._ui.popup.popup( "option", "disabled", options.disabled );
-				if ( this._ui.button ) {
-					this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
-					if( options.disabled ) {
-						this._ui.button.attr( "tabindex", -1 );
-					} else {
-						this._ui.button.removeAttr( "tabindex" );
+
+			if ( options.columnUi !== undefined ) {
+				if ( this.options.columnUi && !options.columnUi ) {
+					this._removeColumnUi( false );
+				} else if ( !this.options.columnUi && options.columnUi ) {
+					this._addColumnUI({
+						callback: this._updateHeaderPriorities,
+						callbackContext: this,
+						callbackArguments: [{ turningOnUI: true }]
+					});
+				}
+
+				haveUi = options.columnUi;
+			}
+
+			if ( haveUi ) {
+				if ( options.disabled !== undefined ) {
+					this._ui.popup.popup( "option", "disabled", options.disabled );
+					if ( this._ui.button ) {
+						this._ui.button.toggleClass( "ui-state-disabled", options.disabled );
+						if( options.disabled ) {
+							this._ui.button.attr( "tabindex", -1 );
+						} else {
+							this._ui.button.removeAttr( "tabindex" );
+						}
 					}
 				}
-			}
-			if ( options.columnBtnTheme !== undefined && this._ui.button ) {
-				this._ui.button
-					.removeClass(
-						this._themeClassFromOption( "ui-btn-", this.options.columnBtnTheme ) )
-					.addClass( this._themeClassFromOption( "ui-btn-", options.columnBtnTheme ) );
-			}
-			if ( options.columnPopupTheme !== undefined ) {
-				this._ui.popup.popup( "option", "theme", options.columnPopupTheme );
-			}
-			if ( options.columnBtnText !== undefined && this._ui.button ) {
-				this._ui.button.text( options.columnBtnText );
-			}
-			if ( options.columnButton !== undefined ) {
-				if ( options.columnButton ) {
-					if ( !this._ui.button ) {
-						this._ui.button = this._columnsButton();
+				if ( options.columnBtnTheme !== undefined && this._ui.button ) {
+					this._ui.button
+						.removeClass(
+							this._themeClassFromOption( "ui-btn-", this.options.columnBtnTheme ) )
+						.addClass( this._themeClassFromOption( "ui-btn-", options.columnBtnTheme ) );
+				}
+				if ( options.columnPopupTheme !== undefined ) {
+					this._ui.popup.popup( "option", "theme", options.columnPopupTheme );
+				}
+				if ( options.columnBtnText !== undefined && this._ui.button ) {
+					this._ui.button.text( options.columnBtnText );
+				}
+				if ( options.columnButton !== undefined ) {
+					if ( options.columnButton ) {
+						if ( !this._ui.button ) {
+							this._ui.button = this._columnsButton();
+						}
+						this._ui.button.insertBefore( this.element );
+					} else if ( this._ui.button ) {
+						this._ui.button.detach();
 					}
-					this._ui.button.insertBefore( this.element );
-				} else if ( this._ui.button ) {
-					this._ui.button.detach();
 				}
 			}
 		}
@@ -155,7 +212,7 @@ $.widget( "mobile.table", $.mobile.table, {
 	_setColumnVisibility: function( header, visible, /* INTERNAL */ fromInput ) {
 		var input;
 
-		if ( !fromInput ) {
+		if ( !fromInput && this.options.columnUi ) {
 			input = header.jqmData( "input" );
 
 			if ( input ) {
@@ -203,16 +260,16 @@ $.widget( "mobile.table", $.mobile.table, {
 		return button;
 	},
 
-	_enhanceColumnToggle: function() {
-		var ui,
-			id = this._id(),
-			popupId = id + "-popup",
-			table = this.element,
-			options = this.options,
-			popupThemeAttr = options.columnPopupTheme ?
-				( " data-" + $.mobile.ns + "theme='" + options.columnPopupTheme + "'" ) : "",
-			fragment = this.document[ 0 ].createDocumentFragment();
+	_addColumnUI: function( updater ) {
+		var ui, id, popupId, table, options, popupThemeAttr, fragment, returnValue;
 
+		id = this._id();
+		popupId = id + "-popup";
+		table = this.element;
+		options = this.options;
+		popupThemeAttr = options.columnPopupTheme ?
+			( " data-" + $.mobile.ns + "theme='" + options.columnPopupTheme + "'" ) : "";
+		fragment = this.document[ 0 ].createDocumentFragment();
 		ui = this._ui = {
 			button: this.options.columnButton ? this._columnsButton() : null,
 			popup: $( "<div class='" + options.classes.popup + "' id='" + popupId + "'" +
@@ -220,11 +277,10 @@ $.widget( "mobile.table", $.mobile.table, {
 			menu: $( "<fieldset></fieldset>" ).controlgroup()
 		};
 
-		// Call the superclass before we attach the menu to the DOM, because the superclass calls
-		// _updateHeaderPriorities(), which we've overridden to also populate the menu with
-		// checkboxes, and we don't want to populate the menu when it's already attached to the DOM
-		// because we want to avoid causing reflows
-		this._superApply( arguments );
+		// Call the updater before we attach the menu to the DOM, because its job is to populate
+		// the menu with checkboxes, and we don't want to do that when it's already attached to
+		// the DOM because we want to avoid causing reflows
+		returnValue = updater.callback.apply( updater.callbackContext, updater.callbackArguments );
 
 		ui.menu.appendTo( ui.popup );
 
@@ -235,6 +291,18 @@ $.widget( "mobile.table", $.mobile.table, {
 		table.before( fragment );
 
 		ui.popup.popup();
+
+		return returnValue;
+	},
+
+	_enhanceColumnToggle: function() {
+		return this.options.columnUi ?
+			this._addColumnUI({
+				callback: this._superApply,
+				callbackContext: this,
+				callbackArguments: arguments
+			}) :
+			this._superApply( arguments );
 	},
 
 	_handleButtonClicked: function( event ) {
@@ -253,32 +321,9 @@ $.widget( "mobile.table", $.mobile.table, {
 		});
 	},
 
-	_destroyHeader: function( header ) {
-
-		// This data has to be removed whether or not the widget is pre-rendered
-		header.jqmRemoveData( "input" );
-
-		return this._superApply( arguments );
-	},
-
 	_destroy: function() {
-		if ( this.options.mode === "columntoggle" ) {
-			if ( this.options.enhanced ) {
-
-				// If the widget is enhanced, the checkboxes will be left alone, but the jqmData()
-				// attached to them has to be removed
-				this._ui.menu.find( "input" ).each( function() {
-					$( this )
-						.jqmRemoveData( "cells" )
-						.jqmRemoveData( "header" );
-				});
-			} else {
-				this._ui.menu.remove();
-				this._ui.popup.remove();
-				if ( this._ui.button ) {
-					this._ui.button.remove();
-				}
-			}
+		if ( this.options.mode === "columntoggle" && this.options.columnUi ) {
+			this._removeColumnUi( this.options.enhanced );
 		}
 		return this._superApply( arguments );
 	}
