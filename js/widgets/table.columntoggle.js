@@ -56,21 +56,22 @@ return $.widget( "mobile.table", $.mobile.table, {
 		this._updateHeaderPriorities();
 	},
 
-	_updateSingleHeaderPriority: function( header, cells, priority/*, state */ ) {
-		if ( priority ) {
-			cells.addClass( this.options.classes.priorityPrefix + priority );
-		}
+	_updateVariableColumn: function( header, cells, priority/*, state */ ) {
+		cells.addClass( this.options.classes.priorityPrefix + priority );
 	},
 
 	_updateHeaderPriorities: function( state ) {
 		this.headers.each( $.proxy( function( index, element ) {
-			var header = $( element );
+			var header = $( element ),
+				priority = $.mobile.getAttribute( element, "priority" );
 
-			this._updateSingleHeaderPriority(
-				header,
-				header.add( header.jqmData( "cells" ) ),
-				$.mobile.getAttribute( element, "priority" ),
-				state );
+			if ( priority ) {
+				this._updateVariableColumn(
+					header,
+					header.add( header.jqmData( "cells" ) ),
+					priority,
+					state );
+			}
 		}, this ) );
 	},
 
