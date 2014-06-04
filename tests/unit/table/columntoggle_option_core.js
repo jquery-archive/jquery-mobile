@@ -101,22 +101,71 @@ test( "Default columnButton", function() {
 		"By default the table is preceded by a button that opens the column selection popup" );
 });
 
-test( "Toggling option columnButton works", function() {
-	var tableId = "columntoggle-toggle-button",
-		table = $( "#" + tableId ),
+function testColumnButtonOption( prefix, tableId, shouldBeThere ) {
+	var table = $( "#" + tableId ),
 		button = table.prev();
 
-	deepEqual( isMenuButton( table.prev(), tableId ), true, "Button is present by default" );
+	deepEqual( isMenuButton( table.prev(), tableId ), shouldBeThere,
+		prefix + "Button is initially present" );
 
 	table.table( "option", "columnButton", false );
 
 	deepEqual( isMenuButton( table.prev(), tableId ), false,
-		"Button is absent when 'columnButton' option is off" );
+		prefix + "Button is absent when 'columnButton' option is off" );
 
 	table.table( "option", "columnButton", true );
 
-	deepEqual( isMenuButton( table.prev(), tableId ), true,
-		"Button is present when 'columnButton' option is turned back on" );
+	deepEqual( isMenuButton( table.prev(), tableId ), shouldBeThere,
+		prefix + "Button is present when 'columnButton' option is turned back on" );
 
-	deepEqual( table.prev()[ 0 ], button[ 0 ], "Button is reused" );
+	deepEqual( table.prev()[ 0 ], button[ 0 ], prefix + "Button is reused" );
+}
+
+test( "Toggling option columnButton works", function() {
+	testColumnButtonOption( "", "columntoggle-toggle-button", true );
+});
+
+test( "Toggling option columnUi works", function() {
+	var tableId = "columntoggle-toggle-ui",
+		table = $( "#" + tableId ),
+		testUIPresence = function( prefix, shouldBeThere ) {
+			var negation = shouldBeThere ? "" : "not ",
+				inputs = $( "#" + tableId + "-popup" ).find( "input" );
+
+			deepEqual( isMenuButton( table.prev(), tableId ), shouldBeThere,
+				prefix + "Button is " + negation + "present" );
+			deepEqual( $( "#" + tableId + "-popup" ).length, ( shouldBeThere ? 1 : 0 ),
+				prefix + "Popup is " + negation + "present" );
+			if ( shouldBeThere ) {
+				deepEqual( !!$( "#" + tableId + "-popup" ).data( "mobile-popup" ), shouldBeThere,
+					prefix + "Popup is popup widget" );
+			}
+			deepEqual(
+				table
+					.find( "thead > tr" )
+						.children( shouldBeThere ? "[data-" + $.mobile.ns + "priority]" : "*" )
+							.is( function() {
+								var data = $( this ).jqmData( "input" );
+
+								return shouldBeThere ?
+									!( data && inputs.index( data[ 0 ] ) >= 0 ):
+									!!data;
+							}),
+				false,
+				prefix + "Data " + negation + "present at header key 'input'" +
+					( shouldBeThere ? " and it refers to an input in the popup" : "" ) );
+
+			testColumnButtonOption( "While UI is " + negation + "present: ", tableId,
+				shouldBeThere );
+		};
+
+	testUIPresence( "By default: ", true );
+
+	table.table( "option", "columnUi", false );
+
+	testUIPresence( "After turning off option: ", false );
+
+	table.table( "option", "columnUi", true );
+
+	testUIPresence( "After turning option back on: ", true );
 });
