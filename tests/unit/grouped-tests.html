@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Table Integration Test</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
+	<script src="../../jquery.testHelper.js"></script>
+	<script src="../../../external/qunit/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/table.reflow"
+			],
+			[
+				"init"
+			],
+			[
+				"grouped_core.js"
+			]
+		]);
+	</script>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+
+	<script src="../../swarminject.js"></script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div data-nstest-role="page">
+		<div class="ui-content" role="main">
+			<table data-nstest-role="table" id="grouped-test-table" data-nstest-column-btn-theme="b" data-nstest-column-popup-theme="a" data-nstest-mode="reflow" class="ui-responsive">
+				<thead>
+					<tr class="th-groups">
+						<td></td>
+						<th colspan="3" data-priority="6">Q1 2012</th>
+						<th id="test-column-header" colspan="3" data-priority="5">Q2 2012</th>
+						<th colspan="3" data-priority="4">Q3 2012</th>
+						<th colspan="3" data-priority="3">Q4 2012</th>
+						<th colspan="3" data-priority="1" class="totals">YTD Totals</th>
+					</tr>
+					<tr>
+						<th>Store</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th data-nstest-column>Change</th>
+						<th data-nstest-column>Income</th>
+						<th data-nstest-column>Profit</th>
+						<th>Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+						<th>Income</th>
+						<th>Profit</th>
+						<th>Change</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Boston</th>
+						<td>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+						<td data-nstest-column>3,647</td>
+						<td data-nstest-column>1,354</td>
+						<td data-nstest-column>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+					<tr>
+						<th>Chicago</th>
+						<td>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+						<td data-nstest-column>3,647</td>
+						<td data-nstest-column>1,354</td>
+						<td data-nstest-column>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+					<tr>
+						<th>NYC</th>
+						<td>2,898</td>
+						<td>739</td>
+						<td>-5.8%</td>
+						<td data-nstest-column>3,647</td>
+						<td data-nstest-column>1,354</td>
+						<td data-nstest-column>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
