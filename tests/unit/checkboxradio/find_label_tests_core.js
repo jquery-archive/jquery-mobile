@@ -1,3 +1,5 @@
+$.mobile.ns = "nstest-";
+
 var pairs = [
 		{
 			label: "#separate-label-outside-form-label",
@@ -48,4 +50,14 @@ test( "_findLabel() works correctly", function() {
 			pair.input.attr( "id" ) +
 				": the label was correctly identified as (not?) the parent" );
 	}
+});
+
+test( "label on pre-rendered checkbox is found", function() {
+	var actualLabel = $( "#pre-rendered-label-test" )
+			.checkboxradio()
+			.data( "mobile-checkboxradio" ).label,
+		expectedLabel = $( "#pre-rendered-label-test" ).prev();
+
+	deepEqual( actualLabel.length, 1, "One label was found" );
+	deepEqual( actualLabel[ 0 ], expectedLabel[ 0 ], "The right label was found" );
 });
