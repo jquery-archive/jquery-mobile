@@ -47,10 +47,10 @@ $.widget( "mobile.table", $.mobile.table, {
 		}
 	},
 
-	_updateSingleHeaderPriority: function( header, cells, priority, state ) {
+	_updateVariableColumn: function( header, cells, priority, state ) {
 		var input;
 
-		if ( priority && ( this.options.columnUi || ( state && state.turningOnUI ) ) ) {
+		if ( this.options.columnUi || ( state && state.turningOnUI ) ) {
 
 			// Make sure the (new?) checkbox is associated with its header via .jqmData() and that,
 			// vice versa, the header is also associated with the checkbox
