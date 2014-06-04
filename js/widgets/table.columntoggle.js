@@ -208,27 +208,22 @@ return $.widget( "mobile.table", $.mobile.table, {
 		}
 	},
 
-	_destroyHeader: function( header ) {
-		var priority, cells;
-
-		if ( !this.options.enhanced ) {
-			priority = $.mobile.getAttribute( header, "priority" );
-			cells = header.add( header.jqmData( "cells" ) );
-
-			if ( priority ) {
-				cells.removeClass( this.options.classes.priorityPrefix + priority );
-			}
-		}
-	},
-
 	_destroy: function() {
 		if ( this.options.mode === "columntoggle" ) {
 			if ( !this.options.enhanced ) {
 				this.element.removeClass( this.options.classes.columnToggleTable );
+				this.headers.each( $.proxy( function( index, element ) {
+					var header,
+						priority = $.mobile.getAttribute( element, "priority" );
+
+					if ( priority ) {
+						header = $( element );
+						header
+							.add( header.jqmData( "cells" ) )
+								.removeClass( this.options.classes.priorityPrefix + priority );
+					}
+				}, this ));
 			}
-			this.headers.each( $.proxy( function( index, element ) {
-				this._destroyHeader( $( element ) );
-			}, this ));
 		}
 		return this._superApply( arguments );
 	}
