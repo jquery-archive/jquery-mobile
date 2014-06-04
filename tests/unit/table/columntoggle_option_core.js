@@ -1,3 +1,5 @@
+// These tests run on both prerendered and non-prerendered tables
+
 module( "Columntoggle options" );
 
 function getSwatchClasses( element, prefix ) {
