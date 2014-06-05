@@ -357,7 +357,8 @@ define( [
 			// NOTE do _not_ use the :jqmData pseudo selector because parenthesis
 			//      are a valid url char and it breaks on the first occurence
 			page = this.element
-				.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
+				.children( "[data-" + this._getNs() +
+					"url='" + $.mobile.path.hashToSelector( dataUrl ) + "']" );
 
 			// If we failed to find the page, check to see if the url is a
 			// reference to an embedded page. If so, it may have been dynamically
@@ -442,7 +443,7 @@ define( [
 			// TODO tagging a page with external to make sure that embedded pages aren't
 			// removed by the various page handling code is bad. Having page handling code
 			// in many places is bad. Solutions post 1.0
-			page.attr( "data-" + this._getNs() + "url", $.mobile.path.convertUrlToDataUrl(fileUrl) )
+			page.attr( "data-" + this._getNs() + "url", this._createDataUrl( fileUrl ) )
 				.attr( "data-" + this._getNs() + "external-page", true );
 
 			return page;
@@ -491,8 +492,7 @@ define( [
 		//      or require ordering such that other bits are sprinkled in between parts that
 		//      could be abstracted out as a group
 		_loadSuccess: function( absUrl, triggerData, settings, deferred ) {
-			var fileUrl = this._createFileUrl( absUrl ),
-				dataUrl = this._createDataUrl( absUrl );
+			var fileUrl = this._createFileUrl( absUrl );
 
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
@@ -512,6 +512,11 @@ define( [
 					dataUrlRegex.test( RegExp.$1 ) &&
 					RegExp.$1 ) {
 					fileUrl = $.mobile.path.getFilePath( $("<div>" + RegExp.$1 + "</div>").text() );
+
+					// We specify that, if a data-url attribute is given on the page div, its value
+					// must be given non-URL-encoded. However, in this part of the code, fileUrl is
+					// assumed to be URL-encoded, so we URL-encode the retrieved value here
+					fileUrl = this.window[ 0 ].encodeURIComponent( fileUrl );
 				}
 
 				//dont update the base tag if we are prefetching
@@ -548,13 +553,6 @@ define( [
 				}
 
 				this._include( content, settings );
-
-				// Enhancing the content may result in new dialogs/sub content being inserted
-				// into the DOM. If the original absUrl refers to a sub-content, that is the
-				// real content we are interested in.
-				if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-					content = this.element.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
-				}
 
 				// Remove loading message.
 				if ( settings.showLoadMsg ) {
@@ -1125,7 +1123,7 @@ define( [
 				};
 
 				if ( settings.changeHash !== false && $.mobile.hashListeningEnabled ) {
-					$.mobile.navigate( url, params, true);
+					$.mobile.navigate( this.window[ 0 ].encodeURI( url ), params, true);
 				} else if ( toPage[ 0 ] !== $.mobile.firstPage[ 0 ] ) {
 					$.mobile.navigate.history.add( url, params );
 				}

@@ -72,7 +72,7 @@ define([
 				// unless the data url is already set set it to the pathname
 				if ( !$this[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" ) ) {
 					$this.attr( "data-" + $.mobile.ns + "url", $this.attr( "id" ) ||
-						theLocation.pathname + theLocation.search );
+						path.convertUrlToDataUrl( theLocation.pathname + theLocation.search ) );
 				}
 			});
 

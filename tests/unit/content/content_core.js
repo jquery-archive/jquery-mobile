@@ -512,4 +512,23 @@
 
 		proto._loadUrl( "foo", {}, {} );
 	});
+
+	test( "_find() does not throw upon encountering a weird file name", function() {
+		var errorThrown,
+			proto = $.mobile.pagecontainer.prototype;
+
+		try {
+			proto._find.call({
+				_getNs: proto._getNs,
+				_createFileUrl: proto._createFileUrl,
+				_createDataUrl: proto._createDataUrl,
+				_getInitialContent: function() { return $( "<div>" ); },
+				element: $( "<body>" )
+			}, "http://localhost/Raison d'être.html" );
+		} catch( error ) {
+			errorThrown = error;
+		}
+
+		deepEqual( errorThrown, undefined, "Error was not thrown" );
+	});
 })(jQuery);
