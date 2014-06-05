@@ -93,13 +93,8 @@
 		setTimeout(function() {
 			ok($('#reflow-table-test .ui-table-reflow').length, ".ui-table-reflow class added to table element");
 			deepEqual(
-				$( "#reflow-table-test .ui-table-reflow > tbody > tr:first-child" )
-					.children()
-						.eq( 1 )
-							.children( "b" )
-								.children( "span.make-it-red" )
-									.length,
-				1, "span was copied from table header" );
+				$( "#reflow-table-test .ui-table-reflow > tbody span.make-it-red" ).length, 1,
+					"span was copied from table header" );
 			start();
 		}, 800);
 	});
