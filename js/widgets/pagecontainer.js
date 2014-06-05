@@ -496,8 +496,7 @@ define( [
 		//      or require ordering such that other bits are sprinkled in between parts that
 		//      could be abstracted out as a group
 		_loadSuccess: function( absUrl, triggerData, settings, deferred ) {
-			var fileUrl = this._createFileUrl( absUrl ),
-				dataUrl = this._createDataUrl( absUrl );
+			var fileUrl = this._createFileUrl( absUrl );
 
 			return $.proxy(function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
@@ -553,13 +552,6 @@ define( [
 				}
 
 				this._include( content, settings );
-
-				// Enhancing the content may result in new dialogs/sub content being inserted
-				// into the DOM. If the original absUrl refers to a sub-content, that is the
-				// real content we are interested in.
-				if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-					content = this.element.children( "[data-" + this._getNs() +"url='" + dataUrl + "']" );
-				}
 
 				// Remove loading message.
 				if ( settings.showLoadMsg ) {
