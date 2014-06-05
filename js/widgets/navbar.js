@@ -122,6 +122,9 @@ $.widget( "mobile.navbar", {
 	refresh: function() {
 		var self = this;
 
+		self.navButtons = self.navbar.find( "a" );
+		self.numButtons = self.navButtons.length;
+
 		self.navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
 			.find( "ul" )
