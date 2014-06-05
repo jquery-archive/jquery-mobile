@@ -29,10 +29,6 @@
 		ok($.mobile.path.isPath('/'), "anything with a slash is a path");
 	});
 
-	test( "path.getFilePath method is working properly", function(){
-		deepEqual($.mobile.path.getFilePath("foo.html" + "&" + $.mobile.subPageUrlKey ), "foo.html", "returns path without sub page key");
-	});
-
 	test( "path.set method is working properly", function(){
 		$.mobile.navigate.history.ignoreNextHashChange = false;
 		$.mobile.path.set("foo");

@@ -202,19 +202,21 @@ define([
 			},
 
 			convertUrlToDataUrl: function( absUrl ) {
-				var u = path.parseUrl( absUrl );
+				var result = absUrl,
+					u = path.parseUrl( absUrl );
+
 				if ( path.isEmbeddedPage( u ) ) {
 					// For embedded pages, remove the dialog hash key as in getFilePath(),
 					// and remove otherwise the Data Url won't match the id of the embedded Page.
-					return u.hash
+					result = u.hash
 						.split( dialogHashKey )[0]
 						.replace( /^#/, "" )
 						.replace( /\?.*$/, "" );
 				} else if ( path.isSameDomain( u, this.documentBase ) ) {
-					return u.hrefNoHash.replace( this.documentBase.domain, "" ).split( dialogHashKey )[0];
+					result = u.hrefNoHash.replace( this.documentBase.domain, "" ).split( dialogHashKey )[0];
 				}
 
-				return window.decodeURIComponent(absUrl);
+				return window.decodeURIComponent( result );
 			},
 
 			//get path from current hash, or from a file path
@@ -374,11 +376,10 @@ define([
 				return ( hasHash ? "#" : "" ) + hash.replace( /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1" );
 			},
 
-			// return the substring of a filepath before the sub-page key, for making
-			// a server request
+			// return the substring of a filepath before the dialogHashKey, for making a server
+			// request
 			getFilePath: function( path ) {
-				var splitkey = "&" + $.mobile.subPageUrlKey;
-				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
+				return path && path.split( dialogHashKey )[0];
 			},
 
 			// check if the specified url refers to the first page in the main
