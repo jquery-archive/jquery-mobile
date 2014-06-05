@@ -374,11 +374,10 @@ define([
 				return ( hasHash ? "#" : "" ) + hash.replace( /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g, "\\$1" );
 			},
 
-			// return the substring of a filepath before the sub-page key, for making
-			// a server request
+			// return the substring of a filepath before the dialogHashKey, for making a server
+			// request
 			getFilePath: function( path ) {
-				var splitkey = "&" + $.mobile.subPageUrlKey;
-				return path && path.split( splitkey )[0].split( dialogHashKey )[0];
+				return path && path.split( dialogHashKey )[0];
 			},
 
 			// check if the specified url refers to the first page in the main
