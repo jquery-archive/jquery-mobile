@@ -451,7 +451,7 @@ define( [
 			// in many places is bad. Solutions post 1.0
 			page.attr( "data-" + this._getNs() + "url",
 				this.window[ 0 ].decodeURIComponent(
-					$.mobile.path.convertUrlToDataUrl( fileUrl ) ) )
+					this._createDataUrl( fileUrl ) ) )
 				.attr( "data-" + this._getNs() + "external-page", true );
 
 			return page;
