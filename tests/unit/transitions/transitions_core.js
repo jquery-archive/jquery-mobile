@@ -24,7 +24,7 @@
 		},
 
 		teardown: function() {
-			window.scrollTo( 0 );
+			window.scrollTo( 0, 0 );
 			$( "body" ).height( $(window).height() );
 		}
 	});
@@ -64,7 +64,7 @@
 		expect( 1 );
 
 		// ensure the two values are different to trigger the method call
-		window.scrollTo( 0 );
+		window.scrollTo( 0, 0 );
 		instance.toScroll = 100;
 
 		// stub to capture call
