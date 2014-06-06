@@ -356,7 +356,6 @@ define( [
 			// TODO consider supporting a custom callback
 			var fileUrl = this._createFileUrl( absUrl ),
 				dataUrl = this._createDataUrl( absUrl ),
-				decodedDataUrl = this.window[ 0 ].decodeURIComponent( dataUrl ),
 				page, initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
@@ -364,7 +363,7 @@ define( [
 			//      are a valid url char and it breaks on the first occurence
 			page = this.element
 				.children( "[data-" + this._getNs() +
-					"url='" + $.mobile.path.hashToSelector( decodedDataUrl ) + "']" );
+					"url='" + $.mobile.path.hashToSelector( dataUrl ) + "']" );
 
 			// If we failed to find the page, check to see if the url is a
 			// reference to an embedded page. If so, it may have been dynamically
@@ -372,8 +371,8 @@ define( [
 			// data-url attribute and in need of enhancement.
 			if ( page.length === 0 && dataUrl && !$.mobile.path.isPath( dataUrl ) ) {
 				page = this.element.children( $.mobile.path.hashToSelector("#" + dataUrl) )
-					.attr( "data-" + this._getNs() + "url", decodedDataUrl )
-					.jqmData( "url", decodedDataUrl );
+					.attr( "data-" + this._getNs() + "url", dataUrl )
+					.jqmData( "url", dataUrl );
 			}
 
 			// If we failed to find a page in the DOM, check the URL to see if it
@@ -449,9 +448,7 @@ define( [
 			// TODO tagging a page with external to make sure that embedded pages aren't
 			// removed by the various page handling code is bad. Having page handling code
 			// in many places is bad. Solutions post 1.0
-			page.attr( "data-" + this._getNs() + "url",
-				this.window[ 0 ].decodeURIComponent(
-					this._createDataUrl( fileUrl ) ) )
+			page.attr( "data-" + this._getNs() + "url", this._createDataUrl( fileUrl ) )
 				.attr( "data-" + this._getNs() + "external-page", true );
 
 			return page;
