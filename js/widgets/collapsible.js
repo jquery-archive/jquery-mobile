@@ -58,9 +58,9 @@ $.widget( "mobile.collapsible", {
 		this._renderedOptions = this._getOptions( this.options );
 
 		if ( this.options.enhanced ) {
-			ui.heading = $( ".ui-collapsible-heading", this.element[ 0 ] );
+			ui.heading = this.element.children( ".ui-collapsible-heading" );
 			ui.content = ui.heading.next();
-			ui.anchor = $( "a", ui.heading[ 0 ] ).first();
+			ui.anchor = ui.heading.children();
 			ui.status = ui.anchor.children( ".ui-collapsible-heading-status" );
 		} else {
 			this._enhance( elem, ui );
