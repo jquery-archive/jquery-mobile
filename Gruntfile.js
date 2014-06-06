@@ -917,7 +917,7 @@ module.exports = function( grunt ) {
 			},
 			jquery: {
 				files: {
-					"jquery/jquery.js": "jquery/jquery.js"
+					"jquery/jquery.js": "jquery/dist/jquery.js"
 				}
 			},
 			"jquery-ui": {
