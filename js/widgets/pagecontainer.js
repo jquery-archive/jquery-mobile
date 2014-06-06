@@ -364,7 +364,7 @@ define( [
 			//      are a valid url char and it breaks on the first occurence
 			page = this.element
 				.children( "[data-" + this._getNs() +
-					"url='" + $.mobile.path.hashToSelector( dataUrl ) + "']" );
+					"url='" + $.mobile.path.hashToSelector( decodedDataUrl ) + "']" );
 
 			// If we failed to find the page, check to see if the url is a
 			// reference to an embedded page. If so, it may have been dynamically
