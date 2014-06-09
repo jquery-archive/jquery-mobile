@@ -21,7 +21,7 @@
 	},
 	"devDependencies": {
 		"requirejs": "2.1.2",
-		"qunit": "1.9.0",
+		"qunit": "1.14.0",
 		"jshint": "2.4.0",
 		"requirejs-text": "2.0.3",
 		"requirejs-plugins": "millermedeiros/requirejs-plugins#34330a5d735474ac0b518eb1eb270c9e5505a537"
