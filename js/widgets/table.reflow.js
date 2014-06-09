@@ -33,8 +33,9 @@ return $.widget( "mobile.table", $.mobile.table, {
 		mode: "reflow",
 		classes: $.extend( $.mobile.table.prototype.options.classes, {
 			reflowTable: "ui-table-reflow",
-			cellLabels: "ui-table-cell-label"
-		} )
+			cellLabels: "ui-table-cell-label",
+			cellLabelsTop: "ui-table-cell-label-top"
+		})
 	},
 
 	_create: function() {
@@ -53,46 +54,43 @@ return $.widget( "mobile.table", $.mobile.table, {
 	refresh: function() {
 		this._superApply( arguments );
 		if ( this.options.mode === "reflow" ) {
-			this._updateReflow( );
+			// get headers in reverse order so that top-level headers are appended last
+			$( this.allHeaders.get().reverse() ).each( $.proxy( this, "_updateCellsFromHeader" ) );
 		}
 	},
 
-	_updateReflow: function() {
-		var table = this,
-			opts = this.options;
+	_updateCellsFromHeader: function( index, headerCell ) {
+		var iteration, cells, colstart, labelClasses,
+			header = $( headerCell ),
+			contents = header.clone().contents();
 
-		// get headers in reverse order so that top-level headers are appended last
-		$( table.allHeaders.get().reverse() ).each( function() {
-			var cells = $( this ).jqmData( "cells" ),
-				colstart = $.mobile.getAttribute( this, "colstart" ),
-				hierarchyClass = cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
-				contents = $( this ).clone().contents(),
-				iteration, filter;
+		if ( contents.length > 0  ) {
+			labelClasses = this.options.classes.cellLabels;
+			cells = header.jqmData( "cells" );
+			colstart = $.mobile.getAttribute( headerCell, "colstart" );
 
-			if ( hierarchyClass ) {
-				iteration = parseInt( this.getAttribute( "colspan" ), 10 );
-				filter = "";
+			if ( cells.not( headerCell ).filter( "thead th" ).length > 0 ) {
+				labelClasses = labelClasses + ( " " + this.options.classes.cellLabelsTop );
+				iteration = parseInt( headerCell.getAttribute( "colspan" ), 10 );
 
 				if ( iteration ) {
-					filter = "td:nth-child(" + iteration + "n + " + ( colstart ) + ")";
+					cells = cells.filter( "td:nth-child("+ iteration + "n + " + colstart + ")" );
 				}
-
-				table._addLabels( cells.filter( filter ),
-					opts.classes.cellLabels + hierarchyClass, contents );
-			} else {
-				table._addLabels( cells, opts.classes.cellLabels, contents );
 			}
-		} );
+
+			this._addLabels( cells, labelClasses, contents );
+		}
 	},
 
-	_addLabels: function( cells, label, contents ) {
+	_addLabels: function( cells, labelClasses, contents ) {
 		if ( contents.length === 1 && contents[ 0 ].nodeName.toLowerCase() === "abbr" ) {
 			contents = contents.eq( 0 ).attr( "title" );
 		}
+
 		// .not fixes #6006
 		cells
-			.not( ":has(b." + label + ")" )
-				.prepend( $( "<b class='" + label + "'></b>" ).append( contents ) );
+			.not( ":has(b." + labelClasses.split( " " ).join( "." ) + ")" )
+				.prepend( $( "<b class='" + labelClasses + "'></b>" ).append( contents ) );
 	},
 
 	_destroy: function() {
