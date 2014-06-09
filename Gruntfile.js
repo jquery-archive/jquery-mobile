@@ -905,6 +905,7 @@ module.exports = function( grunt ) {
 				files: {
 					"qunit/qunit.js": "qunit/qunit/qunit.js",
 					"qunit/qunit.css": "qunit/qunit/qunit.css",
+					"qunit/MIT-LICENSE.txt": "qunit/MIT-LICENSE.txt",
 					"jshint/jshint.js": "jshint/dist/jshint.js"
 				}
 			},
