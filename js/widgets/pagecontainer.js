@@ -167,9 +167,8 @@ define( [
 			return $.mobile.navigate.history;
 		},
 
-		// TODO use _getHistory
 		_getActiveHistory: function() {
-			return $.mobile.navigate.history.getActive();
+			return this._getHistory().getActive();
 		},
 
 		// TODO the document base should be determined at creation
@@ -245,6 +244,13 @@ define( [
 			return to || this._getInitialContent();
 		},
 
+		_transitionFromHistory: function( direction, defaultTransition ) {
+			var history = this._getHistory(),
+				entry = ( direction === "back" ? history.getLast() : history.getActive() );
+
+			return ( entry && entry.transition ) || defaultTransition;
+		},
+
 		_handleDialog: function( changePageOptions, data ) {
 			var to, active, activeContent = this.getActivePage();
 
@@ -271,7 +277,9 @@ define( [
 				// as most of this is lost by the domCache cleaning
 				$.extend( changePageOptions, {
 					role: active.role,
-					transition: active.transition,
+					transition: this._transitionFromHistory(
+						data.direction,
+						changePageOptions.transition ),
 					reverse: data.direction === "back"
 				});
 			}
@@ -286,7 +294,8 @@ define( [
 
 				// transition is false if it's the first page, undefined
 				// otherwise (and may be overridden by default)
-				transition = history.stack.length === 0 ? "none" : undefined,
+				transition = history.stack.length === 0 ? "none" :
+					this._transitionFromHistory( data.direction ),
 
 				// default options for the changPage calls made after examining
 				// the current state of the page and the hash, NOTE that the
@@ -298,7 +307,7 @@ define( [
 				};
 
 			$.extend( changePageOptions, data, {
-				transition: ( history.getLast() || {} ).transition || transition
+				transition: transition
 			});
 
 			// TODO move to _handleDestination ?

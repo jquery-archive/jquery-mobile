@@ -123,23 +123,45 @@
 			return $( "<div>", {"class": "ui-dialog"} );
 		};
 
-		proto._getActiveHistory = function() {
+		proto._getHistory = function() {
 			return {
-				role: "foo",
-				transition: "bar"
+				length: 3,
+				activeIndex: 1,
+				lastIndex: 2,
+				stack: [
+					{
+						role: "page",
+						transition: "none"
+					},
+					{
+						role: "foo",
+						transition: "flip"
+					},
+					{
+						role: "page",
+						transition: "bar"
+					}
+				],
+				getLast: function() {
+					return this.stack[ this.lastIndex ];
+				},
+				getActive: function() {
+					return this.stack[ this.activeIndex ];
+				}
 			};
 		};
 
-		equal( opts.role, undefined );
-		equal( opts.transition, undefined );
-		equal( opts.reverse, undefined );
+		deepEqual( opts.role, undefined, "Initially, role is undefined" );
+		deepEqual( opts.transition, undefined, "Initially, transition is undefined" );
+		deepEqual( opts.reverse, undefined, "Initially, reverse is undefined" );
 
 		// the pageUrl is returned for use as the target url when the active content is a dialog
-		equal( proto._handleDialog( opts, {direction: "back", pageUrl: "baz" } ), "baz" );
+		deepEqual( proto._handleDialog( opts, { direction: "back", pageUrl: "baz" } ), "baz",
+			"pageUrl is returned" );
 
-		equal( opts.role, "foo" );
-		equal( opts.transition, "bar" );
-		equal( opts.reverse, true );
+		deepEqual( opts.role, "foo", "Afterwards, role is 'foo'" );
+		deepEqual( opts.transition, "bar", "Afterwards, transition is 'bar'" );
+		deepEqual( opts.reverse, true, "Afterwards, reverse is true" );
 	});
 
 	var base = "http://example.com/";
