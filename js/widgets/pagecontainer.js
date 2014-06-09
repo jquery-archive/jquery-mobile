@@ -285,7 +285,9 @@ define( [
 
 				// transition is false if it's the first page, undefined
 				// otherwise (and may be overridden by default)
-				transition = history.stack.length === 0 ? "none" : undefined,
+				transition = history.stack.length === 0 ? "none" :
+					( ( data.direction === "back" ? history.getLast() : history.getActive() ) ||
+						{} ).transition,
 
 				// default options for the changPage calls made after examining
 				// the current state of the page and the hash, NOTE that the
@@ -297,7 +299,7 @@ define( [
 				};
 
 			$.extend( changePageOptions, data, {
-				transition: ( history.getLast() || {} ).transition || transition
+				transition: transition
 			});
 
 			// TODO move to _handleDestination ?
