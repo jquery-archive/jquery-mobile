@@ -295,4 +295,34 @@
 		equal( squash("#foo", "http://example.com/?foo=bar&baz=bak"), "http://example.com/?foo=bar&baz=bak#foo", "ui-state keys attached to simple string hashes are preserved" );
 
 	});
+
+	test( "isSameDomain() compares domains case-insensitively", function() {
+		deepEqual(
+			$.mobile.path.isSameDomain(
+				"http://example.com/path/to/filename.html",
+				"http://EXAmPLE.cOm/path/to/filename.html" ),
+			true,
+			"Domain comparison was case-insensitive" );
+	});
+
+( function() {
+
+	var originalDocumentUrl,
+		path = $.mobile.path;
+
+	module( "$.mobile.path.isExternal()", {
+		setup: function() {
+			originalDocumentUrl = path.documentUrl;
+			path.documentUrl = path.parseUrl( "http://example.com/path/to/filename.html" );
+		},
+		teardown: function() {
+			path.documentUrl = originalDocumentUrl;
+		}
+	});
+
+	test( "$.mobile.path.isExternal() compares domains case-insensitively", function() {
+		deepEqual( path.isExternal( "http://EXAmPLE.CoM/path/to/other-filename.html" ), false,
+			"Domain comparison was case-insensitive" );
+	});
+})();
 })(jQuery);
