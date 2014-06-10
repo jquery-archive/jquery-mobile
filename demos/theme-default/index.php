@@ -59,7 +59,7 @@
 <div data-role="page" id="testpage">
 
 	<div data-role="header">
-		<h1>Default theme <a href="http://api.jquerymobile.com/1.5/theme/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Default theme <a href="http://api.jquerymobile.com/theme/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-left ui-btn-icon-notext">Back</a>
 		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-left ui-icon-gear">Button</a>
 		<div data-role="navbar">

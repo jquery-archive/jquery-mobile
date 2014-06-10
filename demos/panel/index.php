@@ -36,7 +36,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Panel <a href="http://api.jquerymobile.com/1.5/panel/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Panel <a href="http://api.jquerymobile.com/panel/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>Flexible by design, panels can be used for navigation, forms, inspectors and more.</p>
 

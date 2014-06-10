@@ -33,7 +33,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Slider <a href="http://api.jquerymobile.com/1.5/slider/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Slider <a href="http://api.jquerymobile.com/slider/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="../rangeslider/">range sliders</a> or <a href="../slider-flipswitch/">flip switches</a>.
 			</p>

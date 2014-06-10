@@ -24,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Input buttons <a href="http://api.jquerymobile.com/1.5/button/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Input buttons <a href="http://api.jquerymobile.com/button/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>Examples of how to style input buttons; <code>input</code> elements with <code>type="button"</code>, <code>type="submit"</code>, or <code>type="reset"</code>. See <a href="../button-markup/">button markup</a> for examples of <code>a</code> and <code>button</code> elements.</p>
 
