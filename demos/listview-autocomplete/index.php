@@ -26,8 +26,7 @@
 
 		<h1>Autocomplete</h1>
 
-		<p>An autocomplete widget backed by either local or remote data can be created by leveraging the filter feature.
-			</p>
+		<p>An autocomplete widget backed by either local or remote data can be created by using the <a href="../filterable/" data-ajax="false">Filterable widget</a> on a listview.</p>
 
 		<h2>Remote data</h2>
 
@@ -35,13 +34,16 @@
 
 		<h2>Local data</h2>
 
-		<p>The filter reveal feature makes it easy to build a simple autocomplete with local data. When a filterable list has the <code>data-filter-reveal="true"</code>, it will auto-hide all the list items when the search field is blank. The <code>data-filter-placeholder</code> attribute can be added to specify the placeholder text for the filter.</p>
+		<p>The filter reveal feature of the Filterable widget makes it easy to build a simple autocomplete with local data. When the Filterable widget is used on a list that has the <code>data-filter-reveal="true"</code> attribute, it will auto-hide all the list items when the search field is blank.</p>
 		<p>Any filter with more than 100-200 items may be slow to perform on a mobile device so we recommend using this feature for  autocomplete situations with a relatively small number of items.</p>
 
 			<h3>Full width listview (non-inset)</h3>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
+				<form class="ui-filterable">
+					<input id="autocomplete-input" data-type="search" placeholder="Search cars...">
+				</form>
+				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-input="#autocomplete-input">
 					<li><a href="#">Acura</a></li>
 					<li><a href="#">Audi</a></li>
 					<li><a href="#">BMW</a></li>
@@ -69,7 +71,10 @@
 
 			<h3>Inset listiew</h3>
 			<div data-demo-html="true">
-				<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
+				<form class="ui-filterable">
+					<input id="inset-autocomplete-input" data-type="search" placeholder="Search cars...">
+				</form>
+				<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-input="#inset-autocomplete-input">
 					<li><a href="#">Acura</a></li>
 					<li><a href="#">Audi</a></li>
 					<li><a href="#">BMW</a></li>
@@ -104,16 +109,21 @@
 &lt;li <strong>data-filtertext=&quot;USA U.S.A. United States of America&quot;</strong>&gt;&lt;a href=&quot;#&quot;&gt;United States&lt;/a&gt;&lt;/li&gt;
 </code></pre>
 
-			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search ticker or firm name..." data-inset="true">
-				<li data-filtertext="NASDAQ:ADBE Adobe Systems Incorporated"><a href="#">Adobe</a></li>
-				<li data-filtertext="NASDAQ:AMZNL Amazon.com, Inc."><a href="#">Amazon</a></li>
-				<li data-filtertext="NASDAQ:AAPL Apple Inc."><a href="#">Apple</a></li>
-				<li data-filtertext="NASDAQ:GOOG Google Inc."><a href="#">Google</a></li>
-				<li data-filtertext="NYSE:IBM Intl. International Business Machines Corp."><a href="#">IBM</a></li>
-				<li data-filtertext="NASDAQ:MSFT Microsoft Corporation"><a href="#">Microsoft</a></li>
-				<li data-filtertext="NASDAQ:YHOO Yahoo! Inc."><a href="#">Yahoo</a></li>
-				<li data-filtertext="USA U.S.A. United States of America"><a href="#">United States</a></li>
-			</ul>
+			<div data-demo-html="true">
+				<form class="ui-filterable">
+					<input id="rich-autocomplete-input" data-type="search" placeholder="Search ticker or firm name...">
+				</form>
+				<ul data-role="listview" data-filter="true" data-inset="true" data-input="#rich-autocomplete-input">
+					<li data-filtertext="NASDAQ:ADBE Adobe Systems Incorporated"><a href="#">Adobe</a></li>
+					<li data-filtertext="NASDAQ:AMZNL Amazon.com, Inc."><a href="#">Amazon</a></li>
+					<li data-filtertext="NASDAQ:AAPL Apple Inc."><a href="#">Apple</a></li>
+					<li data-filtertext="NASDAQ:GOOG Google Inc."><a href="#">Google</a></li>
+					<li data-filtertext="NYSE:IBM Intl. International Business Machines Corp."><a href="#">IBM</a></li>
+					<li data-filtertext="NASDAQ:MSFT Microsoft Corporation"><a href="#">Microsoft</a></li>
+					<li data-filtertext="NASDAQ:YHOO Yahoo! Inc."><a href="#">Yahoo</a></li>
+					<li data-filtertext="USA U.S.A. United States of America"><a href="#">United States</a></li>
+				</ul>
+			</div><!--/demo-html -->
 
 	</div><!-- /content -->
 
