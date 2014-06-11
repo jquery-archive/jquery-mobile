@@ -54,4 +54,15 @@
 		deepEqual( button.button( "option", "disabled" ), true, "option disabled is now true" );
 	});
 
+	test( "Destroying a button works correctly", function() {
+		var button = $( "<input type='button' value='Destroy Test'>" ),
+			container = $( "#destroy-test-container" ).append( button ),
+			pristineDOM = container.clone();
+
+		button.button().button( "destroy" );
+
+		deepEqual( $.testHelper.domEqual( container, pristineDOM ), true,
+			"_destroy() leaves DOM unmodified" );
+	});
+
 })( jQuery );

@@ -78,8 +78,8 @@ $.widget( "mobile.button", {
 	},
 
 	_destroy: function() {
-			this.element.insertBefore( this.button );
-			this.button.remove();
+			this.element.insertBefore( this.wrapper );
+			this.wrapper.remove();
 	},
 
 	_getIconClasses: function( options ) {
