@@ -244,6 +244,13 @@ define( [
 			return to || this._getInitialContent();
 		},
 
+		_transitionFromHistory: function( direction, defaultTransition ) {
+			var history = this._getHistory(),
+				entry = ( direction === "back" ? history.getLast() : history.getActive() );
+
+			return ( entry && entry.transition ) || defaultTransition;
+		},
+
 		_handleDialog: function( changePageOptions, data ) {
 			var to, active, activeContent = this.getActivePage();
 
@@ -270,7 +277,9 @@ define( [
 				// as most of this is lost by the domCache cleaning
 				$.extend( changePageOptions, {
 					role: active.role,
-					transition: active.transition,
+					transition: this._transitionFromHistory(
+						data.direction,
+						changePageOptions.transition ),
 					reverse: data.direction === "back"
 				});
 			}
@@ -286,8 +295,7 @@ define( [
 				// transition is false if it's the first page, undefined
 				// otherwise (and may be overridden by default)
 				transition = history.stack.length === 0 ? "none" :
-					( ( data.direction === "back" ? history.getLast() : history.getActive() ) ||
-						{} ).transition,
+					this._transitionFromHistory( data.direction ),
 
 				// default options for the changPage calls made after examining
 				// the current state of the page and the hash, NOTE that the
