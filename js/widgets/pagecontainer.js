@@ -166,9 +166,8 @@ define( [
 			return $.mobile.navigate.history;
 		},
 
-		// TODO use _getHistory
 		_getActiveHistory: function() {
-			return $.mobile.navigate.history.getActive();
+			return this._getHistory().getActive();
 		},
 
 		// TODO the document base should be determined at creation
