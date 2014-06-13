@@ -15,8 +15,7 @@ define([
 	"./navigation/method",
 	"./navigation",
 	"./widgets/loader",
-	"./vmouse",
-	"jquery-plugins/jquery.hashchange" ], function( jQuery ) {
+	"./vmouse" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),

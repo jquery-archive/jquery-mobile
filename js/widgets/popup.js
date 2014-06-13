@@ -22,8 +22,7 @@ define( [
 	"../navigation/navigator",
 	"../navigation/method",
 	"../animationComplete",
-	"../navigation",
-	"jquery-plugins/jquery.hashchange" ], function( jQuery ) {
+	"../navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

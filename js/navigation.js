@@ -12,7 +12,6 @@ define( [
 	"./navigation/method",
 	"./events",
 	"./support",
-	"jquery-plugins/jquery.hashchange",
 	"./animationComplete",
 	"./widgets/pagecontainer",
 	"./widgets/page",
