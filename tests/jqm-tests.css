@@ -2,3 +2,11 @@
 	position: absolute !important;
 	top: -10000px !important;
 }
+
+[data-nstest-role='header'][data-nstest-position='fixed'] {
+	top: -10000px !important;
+}
+
+[data-nstest-role='footer'][data-nstest-position='fixed'] {
+	left: -10000px !important;
+}
