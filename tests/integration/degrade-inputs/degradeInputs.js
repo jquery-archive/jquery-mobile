@@ -7,8 +7,7 @@
 
 	asyncTest('should degrade input type to a different type, as specified in page options', function(){
 		var degradeInputs = $.mobile.page.prototype.options.degradeInputs;
-
-		expect( degradeInputs.length );
+		expect( Object.keys( degradeInputs ).length * 2 );
 
 		// NOTE the initial page is already enhanced (or expected to be) so we load the dialog to enhance it
 		// and _expect_ that the default page will remain "unreaped". This will break if that assumption changes
