@@ -15,7 +15,9 @@
 		$.testHelper.asyncLoad([
 			[ "widgets/page" ],
 			[
-				"widgets/navbar"
+				"buttonMarkup",
+				"widgets/navbar",
+				"widgets/navbar.morebutton"
 			],
 			[ "init" ],
 			[
@@ -77,6 +79,17 @@
 		</div>
 
 		<div data-nstest-role="navbar" id="default-maxbutton-overflow-destroy">
+			<ul>
+				<li><a href="#">one</a></li>
+				<li><a href="#">two</a></li>
+				<li><a href="#">three</a></li>
+				<li><a href="#">four</a></li>
+				<li><a href="#">five</a></li>
+				<li><a href="#">six</a></li>
+			</ul>
+		</div>
+
+		<div data-nstest-role="navbar" data-nstest-morebutton="true" id="default-maxbutton-morebutton">
 			<ul>
 				<li><a href="#">one</a></li>
 				<li><a href="#">two</a></li>

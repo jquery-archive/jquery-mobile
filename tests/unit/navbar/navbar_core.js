@@ -90,4 +90,15 @@ QUnit.test( "destroy navbar ", function() {
         ok( !$(this).find("a").hasClass( "ui-btn" ), "ui-btn class removed on item" );
     });
 });
+
+QUnit.module( "navbar exceed maxbutton, with moreButton" );
+
+QUnit.test( "exceeding maxbutton creates morebutton", function() {
+    var navbar = $( "#default-maxbutton-morebutton" ),
+        morebutton = navbar.find( "li:last-child > a" );
+
+    equal( morebutton.data("rel"), "popup",
+        "The last item in the list is the more button" );
+
+});
 } )( QUnit, jQuery );

@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.navbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./navbar", "./popup" ], function( jQuery ) {
+define( [ "jquery", "./navbar", "./popup", "./listview"], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
