@@ -935,23 +935,9 @@ module.exports = function( grunt ) {
 				},
 				files: {
 					"jquery-ui/jquery.ui.core.js": "jquery-ui/ui/jquery.ui.core.js",
-					"jquery-ui/jquery.ui.widget.js": "jquery-ui/ui/jquery.ui.widget.js"
-				}
-			},
-			"jquery-ui-tabs": {
-				options: {
-					copyOptions: {
-						process: function( content ) {
-							var version = grunt.file.readJSON( "bower.json" ).dependencies[ "jquery-ui-tabs" ];
-							if ( /#/.test( version ) ) {
-								version = version.split( "#" )[ 1 ];
-							}
-							return content.replace( /@VERSION/g, version );
-						}
-					}
-				},
-				files: {
-					"jquery-ui/jquery.ui.tabs.js": "jquery-ui-tabs/ui/jquery.ui.tabs.js"
+					"jquery-ui/jquery.ui.widget.js": "jquery-ui/ui/jquery.ui.widget.js",
+					"jquery-ui/jquery.ui.tabs.js": "jquery-ui/ui/jquery.ui.tabs.js",
+					"jquery-ui/MIT-LICENSE.txt": "jquery-ui/MIT-LICENSE.txt"
 				}
 			},
 			"jquery-plugins": {
