@@ -1,27 +1,18 @@
 $.testHelper.setPushState();
 
-(function( $ ) {
-	module( "beforenavigate", {
-		setup: function() {
-			location.hash = "";
+asyncTest( "changes to the url trigger a beforenavigate", function() {
+
+	$.testHelper.detailedEventCascade([
+		function() {
+			location.hash = "foo";
 		},
-
-		teardown: function() {
-			$( window ).unbind( "beforenavigate" );
+		{
+			beforenavigate: { src: $( window ), event: "beforenavigate.changesToUrlTrigger1" }
+		},
+		function( result ) {
+			deepEqual( result.beforenavigate.timedOut, false,
+				"beforenavigate event was triggered" );
+			start();
 		}
-	});
-
-	asyncTest( "changes to the url trigger a beforenavigate", function() {
-		setTimeout( function() {
-			ok( false, "beforenavigate should have been triggered" );
-			start();
-		}, 3000 );
-		$( window ).one( "beforenavigate", function( event, data ) {
-			ok( true, "beforenavigate should have been triggered" );
-			start();
-		});
-
-		location.hash = "foo";
-	});
-
-})( jQuery );
+	]);
+});
