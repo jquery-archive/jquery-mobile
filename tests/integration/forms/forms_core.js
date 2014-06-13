@@ -176,26 +176,28 @@ asyncTest( "Form resets correctly", function() {
 				wentToTestPage = true;
 				$( "#goToTestPage" ).click();
 			}
-		};
-
-	$( document ).bind( "pageshow", function( e ) {
-		if ( e.target.id === "testPage" ) {
-			setTimeout( function() {
-				runTest( e.target, function() {
-					testComplete = true;
-					setTimeout( function() { $( "#goToStartPage" ).click(); } );
+		},
+		handlePageShow = function( e ) {
+			if ( e.target.id === "testPage" ) {
+				setTimeout( function() {
+					runTest( e.target, function() {
+						testComplete = true;
+						setTimeout( function() { $( "#goToStartPage" ).click(); } );
+					});
 				});
-			});
-		} else if ( e.target.id === "startPage" ) {
-			if ( wentToTestPage ) {
-				if ( testComplete ) {
-					start();
+			} else if ( e.target.id === "startPage" ) {
+				if ( wentToTestPage ) {
+					if ( testComplete ) {
+						$( document ).unbind( "pageshow", handlePageShow );
+						start();
+					}
+				} else {
+					setTimeout( maybeGoToTestPage );
 				}
-			} else {
-				setTimeout( maybeGoToTestPage );
 			}
 		}
-	});
+
+	$( document ).bind( "pageshow", handlePageShow );
 
 	setTimeout( maybeGoToTestPage );
 });
