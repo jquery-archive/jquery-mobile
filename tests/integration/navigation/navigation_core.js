@@ -51,7 +51,7 @@ $.testHelper.delayStart();
 
 			function() {
 				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation back to internal page." );
-				start( 1000 );
+				start();
 			}
 		]);
 	});
@@ -68,7 +68,7 @@ $.testHelper.delayStart();
 			},
 
 			function() {
-				start( 1000 );
+				start();
 			}
 		]);
 	});
@@ -88,7 +88,7 @@ $.testHelper.delayStart();
 			// external-test is *NOT* cached in the dom after transitioning away
 			function( timedOut ) {
 				deepEqual( $( "#external-test" ).length, 0 );
-				start( 1000 );
+				start();
 			}
 		]);
 	});
@@ -136,7 +136,7 @@ $.testHelper.delayStart();
 			function() {
 				deepEqual( $( "#external-test" ).length, 0, "#external-test is gone" );
 				$( document ).unbind( "pageremove", removeCallback );
-				start( 1000 );
+				start();
 			}
 		]);
 	});
