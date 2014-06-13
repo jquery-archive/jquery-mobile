@@ -229,7 +229,7 @@ $.testHelper.delayStart();
 			function(){
 				$.mobile.changePage = newChangePage;
 
- 				$('#non-ajax-form').one('submit', function(event){
+				$('#non-ajax-form').one('submit', function(event){
 					ok(true, 'submit callbacks are fired');
 					event.preventDefault();
 				}).submit();
