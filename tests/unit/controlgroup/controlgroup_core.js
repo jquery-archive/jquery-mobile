@@ -2,9 +2,6 @@
  * mobile controlgroup unit tests
  */
 
-// delay the start to prevent the tests running before enhancement has completed
-$.testHelper.delayStart();
-
 (function($){
 	module( 'vertical controlgroup, no refresh' , {
 		setup: function() {
