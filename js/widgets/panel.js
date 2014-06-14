@@ -363,7 +363,7 @@ $.widget( "mobile.panel", {
 
 			if ( self._page().jqmData( "panel" ) === "open" ) {
 				self._on( self.document, {
-					"panelclose": "_openPanel"
+					"panelclose": _openPanel
 				});
 			} else {
 				_openPanel();
