@@ -907,11 +907,20 @@ module.exports = function( grunt ) {
 							.forEach( function( suite ) {
 								testDirs.forEach( function( dir ) {
 									dir = "tests/" + dir;
-									patterns = patterns.concat([
-										dir + "/" + suite + "/index.html",
-										dir + "/" + suite + "/*/index.html",
-										dir + "/" + suite + "/**/*-tests.html"
-									]);
+
+									if ( suite.indexOf( "/" ) >= 0 ) {
+
+										// If the suite is a path, then append it exactly
+										patterns.push( dir + "/" + suite );
+									} else {
+
+										// If not, append all patterns we care about
+										patterns = patterns.concat([
+											dir + "/" + suite + "/index.html",
+											dir + "/" + suite + "/*/index.html",
+											dir + "/" + suite + "/**/*-tests.html"
+										]);
+									}
 								});
 							});
 
