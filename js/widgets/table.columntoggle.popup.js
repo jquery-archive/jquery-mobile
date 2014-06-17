@@ -195,7 +195,7 @@ $.widget( "mobile.table", $.mobile.table, {
 				}
 				if ( options.columnButton !== undefined ) {
 					if ( options.columnButton ) {
-						if ( !this._ui.button ) {
+						if ( !this._ui.button || this._ui.button.length === 0 ) {
 							this._ui.button = this._columnsButton();
 						}
 						this._ui.button.insertBefore( this.element );
