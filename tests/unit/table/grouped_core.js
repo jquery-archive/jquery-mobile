@@ -1,18 +1,15 @@
-function runTests() {
+function runTests( prefix, table, expectedColstart ) {
 	test( "Grouped headers have correct data", function() {
 
-		var table = $( "#grouped-test-table" ),
-			expectedCells = table.find( "[data-column]" ),
-			header = table.find( "#test-column-header" );
+		var expectedCells = table.find( "[data-column]" ),
+			header = table.find( ".test-column-header" );
 
 		deepEqual( expectedCells.is( header.data( $.camelCase( $.mobile.ns + "cells" ) ) ), true,
 			"header's 'cells' data item contains the right cells." );
 	});
 
 	test( "Reflow attributes and classes are correct", function() {
-		var table = $( "#grouped-test-table" );
-
-		deepEqual( table.find( "#test-column-header" ).jqmData( "colstart" ), 5,
+		deepEqual( table.find( ".test-column-header" ).jqmData( "colstart" ), expectedColstart,
 			"header's 'colstart' attribute points to the right column" );
 		deepEqual(
 			table.find( "[data-top-label]" ).is( function() {
@@ -31,12 +28,17 @@ function runTests() {
 	});
 }
 
-module( "Initially" );
+function beforeAndAfterRefresh( prefix, table, expectedColStart ) {
+	module( prefix + "Initially" );
 
-runTests();
+	runTests( prefix, table, expectedColStart );
 
-$( "#grouped-test-table" ).table( "refresh" );
+	table.table( "refresh" );
 
-module( "After refresh" );
+	module( prefix + "After refresh" );
 
-runTests();
+	runTests( prefix, table, expectedColStart );
+}
+
+beforeAndAfterRefresh( "With colspan: ", $( "#grouped-test-table" ), 5 );
+beforeAndAfterRefresh( "Without colspan: ", $( "#single-column-grouped" ), 1 );
