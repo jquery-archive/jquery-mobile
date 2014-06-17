@@ -17,6 +17,7 @@ function initSingleTable( tableId ) {
 initSingleTable( "columntoggle-option-test-blank" );
 initSingleTable( "columntoggle-option-test-explicit" );
 initSingleTable( "columntoggle-toggle-button" );
+initSingleTable( "columntoggle-toggle-button-initially-absent" );
 initSingleTable( "columntoggle-toggle-ui" );
 
 });
