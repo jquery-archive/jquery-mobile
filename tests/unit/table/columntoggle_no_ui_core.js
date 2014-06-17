@@ -44,3 +44,20 @@ test( "Columntoggle table correctly sets priority classes", function() {
 		false,
 		"Members of the first column have class 'ui-table-priority-5'" );
 });
+
+test( "setColumnVisibility() correctly resolves column from index/cell", function() {
+	var table = $( "#setColumnVisibility-test" ),
+		affectedCells = $( "[data-column-under-test]", table[ 0 ] );
+
+	table.table( "setColumnVisibility", 1, true );
+	deepEqual( table.find( ".ui-table-cell-visible" ).is( affectedCells ), true,
+		"Turning on visibility by index affects only the expected cells" );
+
+	table.table( "setColumnVisibility", affectedCells.eq( 0 ), false );
+	deepEqual( table.find( ".ui-table-cell-hidden" ).is( affectedCells ), true,
+		"Turning off visibility by thead cell affects only the expected cells" );
+
+	table.table( "setColumnVisibility", affectedCells.eq( 2 ), true );
+	deepEqual( table.find( ".ui-table-cell-visible" ).is( affectedCells ), true,
+		"Turning on visibility by tbody cell affects only the expected cells" );
+});
