@@ -368,3 +368,21 @@ test( "Locked columns stay locked after row/column addition", function() {
 	deepEqual( $( "#refresh-hidden-column-test-popup" ).find( "input" ).eq( 4 ).prop( "checked" ),
 		true, "Checked checkbox remains checked after column addition and table refresh" );
 });
+
+test( "setColumnVisibility() correctly resolves column from index/cell", function() {
+	var table = $( "#setColumnVisibility-test" ),
+		affectedCells = $( "[data-column-under-test]", table[ 0 ] ),
+		input = affectedCells.eq( 0 ).data( $.camelCase( $.mobile.ns + "input" ) );
+
+	table.table( "setColumnVisibility", 0, true );
+	deepEqual( input.prop( "checked" ), true,
+		"Turning on visibility by index affects only the expected cells" );
+
+	table.table( "setColumnVisibility", affectedCells.eq( 0 ), false );
+	deepEqual( input.prop( "checked" ), false,
+		"Turning off visibility by thead cell affects only the expected cells" );
+
+	table.table( "setColumnVisibility", affectedCells.eq( 2 ), true );
+	deepEqual( input.prop( "checked" ), true,
+		"Turning on visibility by tbody cell affects only the expected cells" );
+});
