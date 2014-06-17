@@ -127,6 +127,19 @@ test( "Toggling option columnButton works", function() {
 	testColumnButtonOption( "", "columntoggle-toggle-button", true );
 });
 
+test( "Toggling option columnButton when initially false works", function() {
+	var tableId = "columntoggle-toggle-button-initially-absent",
+		table = $( "#" + tableId );
+
+	deepEqual( isMenuButton( table.prev(), tableId ), false,
+		"Initially, no button precedes the table" );
+
+	table.table( "option", "columnButton", true );
+
+	deepEqual( isMenuButton( table.prev(), tableId ), true,
+		"Button is present after option is turned on" );
+});
+
 test( "Toggling option columnUi works", function() {
 	var tableId = "columntoggle-toggle-ui",
 		table = $( "#" + tableId ),
