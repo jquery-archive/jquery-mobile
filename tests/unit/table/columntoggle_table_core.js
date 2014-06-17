@@ -22,8 +22,6 @@ var addRowToTable = ( function() {
 	};
 })();
 
-module( "Table integration tests" );
-
 test( "The page should be enhanced correctly", function() {
 	var table = $( "#movie-table-column" ),
 		popup = $( "#movie-table-column-popup" ),
@@ -399,4 +397,11 @@ test( "Columntoggle table with generated id works correctly", function() {
 		"Anchor's href points to an element with an ID sharing the link ID's prefix, but -popup" );
 	deepEqual( popup.length, 1,
 		"There is exactly one element enhanced as a popup with the id to which the anchor links" );
+});
+
+test( "Columntoggle table with UI initially turned off", function() {
+	var selector = "#turn-off-ui-test";
+
+	deepEqual( $( selector + "-popup" ).length, 0, "No popup is created when the UI is turned off" );
+	deepEqual( $( selector + "-button" ).length, 0, "No button is created when the UI is turned off" );
 });
