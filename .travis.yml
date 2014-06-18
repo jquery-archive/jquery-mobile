@@ -7,12 +7,16 @@ before_script:
 script: npm run-script ci
 branches:
   only:
-    - master
+    - 1.4-stable
 env:
   - TYPES=unit
     JQUERIES=1.8.3
   - TYPES=unit
+    JQUERIES=1.10.2
+  - TYPES=unit
     JQUERIES=1.11.1
+  - TYPES=unit
+    JQUERIES=2.0.3
   - TYPES=unit
     JQUERIES=2.1.1
   - TYPES=unit
@@ -22,7 +26,13 @@ env:
     JQUERIES=1.8.3
   - TYPES=integration
     SUITES=!navigation
+    JQUERIES=1.10.2
+  - TYPES=integration
+    SUITES=!navigation
     JQUERIES=1.11.1
+  - TYPES=integration
+    SUITES=!navigation
+    JQUERIES=2.0.3
   - TYPES=integration
     SUITES=!navigation
     JQUERIES=2.1.1
@@ -34,7 +44,13 @@ env:
     JQUERIES=1.8.3
   - TYPES=integration
     SUITES=navigation
+    JQUERIES=1.10.2
+  - TYPES=integration
+    SUITES=navigation
     JQUERIES=1.11.1
+  - TYPES=integration
+    SUITES=navigation
+    JQUERIES=2.0.3
   - TYPES=integration
     SUITES=navigation
     JQUERIES=2.1.1
