@@ -17,7 +17,6 @@ $files = array(
 	'events/touch.js',
 	'events/throttledresize.js',
 	'events/orientationchange.js',
-	'../external/jquery/plugins/jquery.hashchange.js',
 	'../external/jquery-ui/jquery.ui.core.js',
 	'defaults.js',
 	'helpers.js',

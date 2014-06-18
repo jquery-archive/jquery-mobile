@@ -9,7 +9,6 @@ requirejs.config({
 		"jquery-plugins": "../external/jquery/plugins"
 	},
 	"shim": {
-		"jquery-plugins/jquery.hashchange": [ "jquery" ],
 		"jquery-ui/jquery.ui.widget": [ "jquery" ],
 		"jquery-ui/jquery.ui.tabs": [ "jquery-ui/jquery.ui.widget" ],
 		"jquery-ui/jquery.ui.core": [ "jquery" ]

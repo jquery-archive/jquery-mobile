@@ -6,7 +6,6 @@
 // TODO break out pushstate support test so we don't depend on the whole thing
 define([
 	"jquery",
-	"jquery-plugins/jquery.hashchange",
 	"./../ns",
 	"./../support" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");

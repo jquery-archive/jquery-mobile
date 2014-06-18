@@ -223,7 +223,6 @@ module.exports = function( grunt ) {
 				files: {
 					src: [
 						"js/**/*.js",
-						"!js/jquery.hashchange.js",
 						"!js/jquery.js",
 						"!js/jquery.ui.widget.js",
 						"!js/widgets/jquery.ui.tabs.js",
@@ -954,11 +953,6 @@ module.exports = function( grunt ) {
 					"jquery-ui/jquery.ui.tabs.js": "jquery-ui-tabs/ui/jquery.ui.tabs.js"
 				}
 			},
-			"jquery-plugins": {
-				files: {
-					"jquery/plugins/jquery.hashchange.js": "jquery-hashchange/jquery.ba-hashchange.js"
-				}
-			}
 		},
 
 		clean: {

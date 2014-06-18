@@ -13,7 +13,6 @@ define( [
 	"../navigation/method",
 	"../events",
 	"../support",
-	"jquery-plugins/jquery.hashchange",
 	"../widgets/page",
 	"../transitions/handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
