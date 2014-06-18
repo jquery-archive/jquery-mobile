@@ -37,35 +37,48 @@ $.mobile.document
 		}
 
 		// Instantiate a filterable widget on the newly created listview and indicate that the
-		// generated input is to be used for the filtering.
+		// generated input form element is to be used for the filtering.
 		list.filterable({
 			input: input,
 			children: "> li:not(:jqmData(placeholder='true'))"
 		});
 	})
 
-	// The custom select list may show up as either a popup or a dialog, depending how much
+	// The custom select list may show up as either a popup or a dialog, depending on how much
 	// vertical room there is on the screen. If it shows up as a dialog, then the form containing
 	// the filter input field must be transferred to the dialog so that the user can continue to
 	// use it for filtering list items.
-	.on( "pagebeforeshow", "#filter-menu-dialog,#title-filter-menu-dialog", function( event ) {
-		var dialog = $( event.target )
-			listview = dialog.find( "ul" ),
-			form = listview.jqmData( "filter-form" );
+	.on( "pagecontainerbeforeshow", function( event, data ) {
+		var listview, form,
+			id = data.toPage && data.toPage.attr( "id" );
+
+		if ( !( id === "filter-menu-dialog" || id === "title-filter-menu-dialog" ) ) {
+			return;
+		}
+
+		listview = data.toPage.find( "ul" );
+		form = listview.jqmData( "filter-form" );
 
 		// Attach a reference to the listview as a data item to the dialog, because during the
-		// pagehide handler below the selectmenu widget will already have returned the listview
-		// to the popup, so we won't be able to find it inside the dialog with a selector.
-		dialog.jqmData( "listview", listview );
+		// pagecontainerhide handler below the selectmenu widget will already have returned the
+		// listview to the popup, so we won't be able to find it inside the dialog with a selector.
+		data.toPage.jqmData( "listview", listview );
 
 		// Place the form before the listview in the dialog.
 		listview.before( form );
 	})
 
 	// After the dialog is closed, the form containing the filter input is returned to the popup.
-	.on( "pagehide", "#filter-menu-dialog,#title-filter-menu-dialog", function( event ) {
-		var listview = $( event.target ).jqmData( "listview" ),
-			form = listview.jqmData( "filter-form" );
+	.on( "pagecontainerhide", function( event, data ) {
+		var listview, form,
+			id = data.toPage && data.toPage.attr( "id" );
+
+		if ( !( id === "filter-menu-dialog" || id === "title-filter-menu-dialog" ) ) {
+			return;
+		}
+
+		listview = data.toPage.jqmData( "listview" ),
+		form = listview.jqmData( "filter-form" );
 
 		// Put the form back in the popup. It goes ahead of the listview.
 		listview.before( form );
