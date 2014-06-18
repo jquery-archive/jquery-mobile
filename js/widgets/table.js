@@ -48,8 +48,11 @@ return $.widget( "mobile.table", {
 	allHeaders: null,
 
 	_create: function() {
-		if ( !this.options.enhanced ) {
-			this.element.addClass( this.options.classes.table );
+		var options = this.options;
+
+		if ( !options.enhanced ) {
+			this.element.addClass( options.classes.table +
+				( options.disabled ? " ui-state-disabled" : "" ) );
 		}
 
 		this.refresh();
