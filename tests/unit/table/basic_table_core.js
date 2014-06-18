@@ -21,3 +21,8 @@ test( "Basic table is disabled/enabled correctly", function() {
 	deepEqual( table.hasClass( "ui-state-disabled" ), false,
 		"Table does not have the ui-state-disabled class when enabled" );
 });
+
+test( "Basic initially disabled table has ui-state-disabled class", function() {
+	deepEqual( $( "#table-initially-disabled" ).hasClass( "ui-state-disabled" ), true,
+		"class 'ui-state-disabled' is present" );
+});
