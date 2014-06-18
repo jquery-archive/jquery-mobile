@@ -22,7 +22,8 @@
 }
 .ui-navbar li .ui-button {
 	font-size: 12.5px;
-	display: block;
+	display: inline-block;
+	width: 100%;
 	margin: 0;
 	border-right-width: 0;
 }
