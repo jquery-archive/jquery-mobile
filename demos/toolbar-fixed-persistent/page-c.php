@@ -101,7 +101,7 @@
 					<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 				</a></li>
 
-				<li><a href="index.html">
+				<li><a href="index.php">
 					<img src="../_assets/img/album-k.jpg">
 					<h3>Hot Fuss</h3>
 				<p>Killers</p>

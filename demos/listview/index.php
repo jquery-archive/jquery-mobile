@@ -128,13 +128,13 @@
 		<p>A listview can be configured to automatically generate dividers for its items by adding a <code>data-autodividers="true"</code> attribute to any listview. By default, the text used to create dividers is the uppercased first letter of the item's text. Alternatively you can specify divider text by setting the <code>autodividersSelector</code> option on the listview programmatically. This feature is designed to work seamlessly with the filter.</p>
 			<div data-demo-html="true">
 				<ul data-role="listview" data-autodividers="true" data-filter="true" data-inset="true">
-					<li><a href="index.html">Adam Kinkaid</a></li>
-					<li><a href="index.html">Alex Wickerham</a></li>
-					<li><a href="index.html">Avery Johnson</a></li>
-					<li><a href="index.html">Bob Cabot</a></li>
-					<li><a href="index.html">Caleb Booth</a></li>
-					<li><a href="index.html">Christopher Adams</a></li>
-					<li><a href="index.html">Culver James</a></li>
+					<li><a href="index.php">Adam Kinkaid</a></li>
+					<li><a href="index.php">Alex Wickerham</a></li>
+					<li><a href="index.php">Avery Johnson</a></li>
+					<li><a href="index.php">Bob Cabot</a></li>
+					<li><a href="index.php">Caleb Booth</a></li>
+					<li><a href="index.php">Christopher Adams</a></li>
+					<li><a href="index.php">Culver James</a></li>
 				</ul>
 			</div><!--/demo-html -->
 
@@ -226,8 +226,8 @@
 				<div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 					<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
-					<a href="index.html" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Buy: $10.99</a>
-					<a href="index.html" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Cancel</a>
+					<a href="index.php" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Buy: $10.99</a>
+					<a href="index.php" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Cancel</a>
 				</div>
 			</div><!--/demo-html -->
 
@@ -238,20 +238,20 @@
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true">
 					<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
-					<li><a href="index.html">
+					<li><a href="index.php">
 					<h2>Stephen Weber</h2>
 					<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
 					<p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
 						<p class="ui-li-aside"><strong>6:24</strong>PM</p>
 					</a></li>
-					<li><a href="index.html">
+					<li><a href="index.php">
 					<h2>jQuery Team</h2>
 					<p><strong>Boston Conference Planning</strong></p>
 					<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
 						<p class="ui-li-aside"><strong>9:18</strong>AM</p>
 					</a></li>
 					<li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-li-count">1</span></li>
-					<li><a href="index.html">
+					<li><a href="index.php">
 					<h2>Avery Walker</h2>
 					<p><strong>Re: Dinner Tonight</strong></p>
 					<p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait!</p>
@@ -268,9 +268,9 @@
 
 				<ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
 					<li data-role="list-divider">Divider</li>
-					<li><a href="index.html" data-theme="a">Inbox <span class="ui-li-count">12</span></a></li>
-					<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
-					<li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
+					<li><a href="index.php" data-theme="a">Inbox <span class="ui-li-count">12</span></a></li>
+					<li><a href="index.php">Outbox <span class="ui-li-count">0</span></a></li>
+					<li><a href="index.php">Sent <span class="ui-li-count">328</span></a></li>
 				</ul>
 			</div><!--/demo-html -->
 
@@ -354,47 +354,47 @@
 				<div data-role="collapsible" data-theme="b" data-content-theme="b">
 				<h2>Choose a car model...</h2>
 					<ul data-role="listview" data-filter="true">
-						<li><a href="index.html">Acura</a></li>
-						<li><a href="index.html">Audi</a></li>
-						<li><a href="index.html">BMW</a></li>
-						<li><a href="index.html">Cadillac</a></li>
-						<li><a href="index.html">Chrysler</a></li>
-						<li><a href="index.html">Dodge</a></li>
-						<li><a href="index.html">Ferrari</a></li>
-						<li><a href="index.html">Ford</a></li>
-						<li><a href="index.html">GMC</a></li>
-						<li><a href="index.html">Honda</a></li>
+						<li><a href="index.php">Acura</a></li>
+						<li><a href="index.php">Audi</a></li>
+						<li><a href="index.php">BMW</a></li>
+						<li><a href="index.php">Cadillac</a></li>
+						<li><a href="index.php">Chrysler</a></li>
+						<li><a href="index.php">Dodge</a></li>
+						<li><a href="index.php">Ferrari</a></li>
+						<li><a href="index.php">Ford</a></li>
+						<li><a href="index.php">GMC</a></li>
+						<li><a href="index.php">Honda</a></li>
 					</ul>
 				</div>
 			</div><!--/demo-html -->
 
 		<h2>Grouped collapsible with listviews</h2>
 
-		<p>You can also use listviews inside a <a href="../accordions/">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once.</p>
+		<p>You can also use listviews inside a <a href="../collapsibleset/">collapsible set</a> (accordion) to visually group the list and ensure that only a single item can be open at once.</p>
 
 			<div data-demo-html="true">
 				<div data-role="collapsibleset" data-theme="a" data-content-theme="b">
 					<div data-role="collapsible">
 					<h2>Filtered list</h2>
 						<ul data-role="listview" data-filter="true" data-filter-theme="a" data-divider-theme="b">
-							<li><a href="index.html">Adam Kinkaid</a></li>
-							<li><a href="index.html">Alex Wickerham</a></li>
-							<li><a href="index.html">Avery Johnson</a></li>
-							<li><a href="index.html">Bob Cabot</a></li>
-							<li><a href="index.html">Caleb Booth</a></li>
+							<li><a href="index.php">Adam Kinkaid</a></li>
+							<li><a href="index.php">Alex Wickerham</a></li>
+							<li><a href="index.php">Avery Johnson</a></li>
+							<li><a href="index.php">Bob Cabot</a></li>
+							<li><a href="index.php">Caleb Booth</a></li>
 						</ul>
 					</div>
 					<div data-role="collapsible">
 					<h2>Formatted text</h2>
 						<ul data-role="listview" data-theme="a" data-divider-theme="b">
 							<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
-							<li><a href="index.html">
+							<li><a href="index.php">
 								<h3>Stephen Weber</h3>
 							<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
 							<p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
 								<p class="ui-li-aside"><strong>6:24</strong>PM</p>
 							</a></li>
-							<li><a href="index.html">
+							<li><a href="index.php">
 								<h3>jQuery Team</h3>
 							<p><strong>Boston Conference Planning</strong></p>
 							<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
@@ -405,23 +405,23 @@
 					<div data-role="collapsible">
 					<h2>Thumbnails and split button</h2>
 						<ul data-role="listview" data-split-icon="gear" data-split-theme="a">
-							<li><a href="index.html">
+							<li><a href="index.php">
 								<img src="../_assets/img/album-bb.jpg">
 								<h3>Broken Bells</h3>
 							<p>Broken Bells</p>
-								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+								</a><a href="index.php" data-rel="dialog" data-transition="slideup">Purchase album
 							</a></li>
-							<li><a href="index.html">
+							<li><a href="index.php">
 								<img src="../_assets/img/album-hc.jpg">
 								<h3>Warning</h3>
 							<p>Hot Chip</p>
-							</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+							</a><a href="index.php" data-rel="dialog" data-transition="slideup">Purchase album
 							</a></li>
-							<li><a href="index.html">
+							<li><a href="index.php">
 								<img src="../_assets/img/album-p.jpg">
 								<h3>Wolfgang Amadeus Phoenix</h3>
 							<p>Phoenix</p>
-								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+								</a><a href="index.php" data-rel="dialog" data-transition="slideup">Purchase album
 							</a></li>
 						</ul>
 					</div>
@@ -437,38 +437,38 @@
 					<div data-role="collapsible">
 					<h2>Mailbox</h2>
 						<ul data-role="listview">
-							<li><a href="index.html">Inbox <span class="ui-li-count">12</span></a></li>
-							<li><a href="index.html">Outbox <span class="ui-li-count">0</span></a></li>
-							<li><a href="index.html">Drafts <span class="ui-li-count">4</span></a></li>
-							<li><a href="index.html">Sent <span class="ui-li-count">328</span></a></li>
-							<li><a href="index.html">Trash <span class="ui-li-count">62</span></a></li>
+							<li><a href="index.php">Inbox <span class="ui-li-count">12</span></a></li>
+							<li><a href="index.php">Outbox <span class="ui-li-count">0</span></a></li>
+							<li><a href="index.php">Drafts <span class="ui-li-count">4</span></a></li>
+							<li><a href="index.php">Sent <span class="ui-li-count">328</span></a></li>
+							<li><a href="index.php">Trash <span class="ui-li-count">62</span></a></li>
 						</ul>
 					</div>
 					<div data-role="collapsible">
 					<h2>Calendar</h2>
 						<ul data-role="listview" data-theme="a" data-divider-theme="b">
 							<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
-							<li><a href="index.html">
+							<li><a href="index.php">
 									<h3>Stephen Weber</h3>
 								<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
 								<p>Hey Stephen, if you're available at 10am tomorrow, we've got a meeting with the jQuery team.</p>
 									<p class="ui-li-aside"><strong>6:24</strong>PM</p>
 							</a></li>
-							<li><a href="index.html">
+							<li><a href="index.php">
 								<h3>jQuery Team</h3>
 							<p><strong>Boston Conference Planning</strong></p>
 							<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
 								<p class="ui-li-aside"><strong>9:18</strong>AM</p>
 							</a></li>
 							<li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-li-count">1</span></li>
-							<li><a href="index.html">
+							<li><a href="index.php">
 								<h3>Avery Walker</h3>
 							<p><strong>Re: Dinner Tonight</strong></p>
 							<p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
 								<p class="ui-li-aside"><strong>4:48</strong>PM</p>
 							</a></li>
 							<li data-role="list-divider">Wednesday, October 6, 2010 <span class="ui-li-count">3</span></li>
-							<li><a href="index.html">
+							<li><a href="index.php">
 								<h3>Amazon.com</h3>
 							<p><strong>4-for-3 Books for Kids</strong></p>
 							<p>As someone who has purchased children's books from our 4-for-3 Store, you may be interested in these featured books.</p>
@@ -479,13 +479,13 @@
 					<div data-role="collapsible">
 					<h2>Contacts</h2>
 						<ul data-role="listview" data-autodividers="true" data-theme="a" data-divider-theme="b">
-							<li><a href="index.html">Adam Kinkaid</a></li>
-							<li><a href="index.html">Alex Wickerham</a></li>
-							<li><a href="index.html">Avery Johnson</a></li>
-							<li><a href="index.html">Bob Cabot</a></li>
-							<li><a href="index.html">Caleb Booth</a></li>
-							<li><a href="index.html">Christopher Adams</a></li>
-							<li><a href="index.html">Culver James</a></li>
+							<li><a href="index.php">Adam Kinkaid</a></li>
+							<li><a href="index.php">Alex Wickerham</a></li>
+							<li><a href="index.php">Avery Johnson</a></li>
+							<li><a href="index.php">Bob Cabot</a></li>
+							<li><a href="index.php">Caleb Booth</a></li>
+							<li><a href="index.php">Christopher Adams</a></li>
+							<li><a href="index.php">Culver James</a></li>
 						</ul>
 					</div>
 				</div>

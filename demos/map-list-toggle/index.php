@@ -179,7 +179,7 @@
 					  	  <p>34555 Dove Trl</p>
 					  	</div>
 					  </div>
-	            	  <a href="details.html?locationId=4719">
+	            	  <a href="#">
 	            	  	<h1 class="ui-gmap-marker-title wrap">Fast Clinic-Newtown</h1>
 	            	  	<div class="ui-li-count">
 	            	  		<span>4.15 miles</span>
