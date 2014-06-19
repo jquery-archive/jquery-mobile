@@ -11,7 +11,7 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-	<script src="https://rawgithub.com/arschmitz/jquery-mobile-event-debugger/v0.0.3/jquery.mobile.event.debugger.js"></script>
+	<script src="http://rawgithub.com/arschmitz/jquery-mobile-event-debugger/v0.0.4/jquery.mobile.event.debugger.js"></script>
 	<script>
 		$.mobile.eventLogger({
 			deprecated: true,
@@ -42,7 +42,7 @@
 		<h1>Navigate between pages and open and close panel and popup widgets to see which events fire and their data.</h1>
 		<a class="ui-btn ui-corner-all ui" href="logevents-2.php">Go To Page 2</a>
 		<a class="ui-btn ui-corner-all ui" href="logevents-3.php">Go To Page 3</a>
-		<a class="ui-btn ui-corner-all ui" href="foo.html">Go To Page that does not exist</a>
+		<a class="ui-btn ui-corner-all ui" href="notapage.html">Go To Page that does not exist</a>
 		<a class="ui-btn ui-corner-all ui" data-rel="popup" href="#popup">Open Popup</a>
 		<label for="select">Select Menu</label>
 		<select id="select" data-native-menu="false">

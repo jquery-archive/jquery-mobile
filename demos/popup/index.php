@@ -76,7 +76,7 @@
 		</div><!--/demo-html -->
 
 		<h2>Photo lightbox</h2>
-		<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="b"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="popup-images.php" data-ajax="false">scaling images in popups</a>.</p>
+		<p>A lightbox for displaying images can be created easily by placing an image in a popup. In this example, a close button is added to the markup by adding a link. The <code>data-overlay-theme="b"</code> attribute adds a dark backdrop behind the photos. For advanced photo techniques, see <a href="../popup-image-scaling/" data-ajax="false">scaling images in popups</a>.</p>
 
 		<div data-demo-html="true">
 			<a href="#popupParis" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../_assets/img/paris.jpg" alt="Paris, France" style="width:30%"></a>
@@ -95,7 +95,7 @@
 		</div><!--/demo-html -->
 
 		<h2>Menu</h2>
-		<p>A menu can be created by adding a <a href="../listviews/">listview</a> inside a popup.</p>
+		<p>A menu can be created by adding a <a href="../listview/">listview</a> inside a popup.</p>
 		<div data-demo-html="true">
 			<a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions...</a>
 
@@ -111,7 +111,7 @@
 		</div><!--/demo-html -->
 
 		<h2>Nested menu</h2>
-		<p>A nested menu can be created by placing <a href="../listviews/">listviews</a> into an <a href="../accordions/">accordion</a> inside a popup.</p>
+		<p>A nested menu can be created by placing <a href="../listview/">listview</a> into an <a href="../collapsible/">collapsible</a> inside a popup.</p>
 		<div data-demo-html="true">
 			<a href="#popupNested" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-b" data-transition="pop">Choose a creature...</a>
 

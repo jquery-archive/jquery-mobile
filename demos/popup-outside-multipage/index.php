@@ -12,8 +12,8 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<script id="popup-outside-page-script">
-// Instantiate the popup on DOMReady, and enhance its contents
-$( function() {
+/* Instantiate the popup on DOMReady, and enhance its contents */
+$(function(){
 	$( "#popup-outside-page" ).enhanceWithin().popup();
 });
 	</script>

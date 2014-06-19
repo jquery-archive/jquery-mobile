@@ -47,7 +47,7 @@
 			<a href="dialog.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Open dialog</a>
 
 		<h2>Transitions</h2>
-		<p>By default, the dialog will open with the same transition as a regular page. Like all pages, you can specify any <a href="page-transitions.html">page transition</a> you want on the dialog by adding the <code>data-transition</code> attribute to the link. To make it feel more dialog-like, we recommend specifying a transition of "pop", "slidedown" or "flip".</p>
+		<p>By default, the dialog will open with the same transition as a regular page. Like all pages, you can specify any <a href="../transitions/">page transition</a> you want on the dialog by adding the <code>data-transition</code> attribute to the link. To make it feel more dialog-like, we recommend specifying a transition of "pop", "slidedown" or "flip".</p>
 
 <code>
 &lt;a href=&quot;dialog.html&quot; role=&quot;button&quot; class=&quot;ui-shadow ui-btn ui-corner-all ui-btn-inline&quot; <strong>data-transition=&quot;slidedown&quot;</strong>&gt;data-transition=&quot;slidedown&quot;&lt;/a&gt;

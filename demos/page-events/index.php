@@ -31,7 +31,7 @@
 		<h2>Event Debugging</h2>
 
 		<p>This demo uses the jquery-mobile-event-debugger plugin from arschmitz available at <a href="https://github.com/arschmitz/jquery-mobile-event-debugger">https://github.com/arschmitz/jquery-mobile-event-debugger</a>.
-			This tool allows jQuery Mobile events to be logged or alerted as they happen for inspection and are agumented with descriptions from the API docs.</p>
+			This tool allows jQuery Mobile events to be logged or alerted as they happen for inspection and are augmented with descriptions from the API docs.</p>
 
 		<a class="ui-btn ui-corner-all" href="logevents.php" data-ajax="false">View Demo</a>
 		<a class="ui-btn ui-corner-all" href="alertevents.php" data-ajax="false">View Demo With Alerts</a>
