@@ -663,7 +663,7 @@ define( [
 				url: url,
 				absUrl: absUrl,
 				toPage: url,
-				prevPage: options.fromPage,
+				prevPage: options ? options.fromPage : undefined,
 				dataUrl: dataUrl,
 				deferred: deferred,
 				options: settings

@@ -232,12 +232,5 @@ asyncTest( "Event sequence during page load failure", function() {
 		}
 	]);
 });
-module( "load method");
-test( "load does not trigger an error when called withput a second param", function(){
-	var otherPageUrl = makeOtherPageUrl( "other-page.html" ),
-		pagecontainer = $( ":mobile-pagecontainer" );
-
-	throws( !pagecontainer.pagecontainer( "load", otherPageUrl ) );
-});
 
 })();
