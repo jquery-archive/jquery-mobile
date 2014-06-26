@@ -9,8 +9,8 @@ require.config( {
 		// Core Libraries
 		"jquery": "../external/jquery/jquery",
 		"jquerymobile": "jquery.mobile",
-		"underscore": "//rawgithub.com/lodash/lodash/2.4.1/dist/lodash",
-		"backbone": "//rawgithub.com/jashkenas/backbone/0.9.2/backbone",
+		"underscore": "//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min",
+		"backbone": "//cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min",
 
 		"backbone-requirejs-demos": "../demos/backbone-requirejs/js"
 	},

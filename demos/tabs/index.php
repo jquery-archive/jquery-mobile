@@ -46,7 +46,7 @@
 			    <ul>
 			      <li><a href="#one" data-ajax="false">one</a></li>
 			      <li><a href="#two" data-ajax="false">two</a></li>
-			      <li><a href="ajax-content.php" data-ajax="false">three</a></li>
+			      <li><a href="ajax-content-ignore.php" data-ajax="false">three</a></li>
 			    </ul>
 		      </div>
 		      <div id="one" class="ui-body-d ui-content">
@@ -69,7 +69,7 @@
 		      	<ul data-role="listview" data-inset="true" class="tablist-left">
 			      <li><a href="#one" data-ajax="false">one</a></li>
 			      <li><a href="#two" data-ajax="false">two</a></li>
-			      <li><a href="ajax-content.php" data-ajax="false">three</a></li>
+			      <li><a href="ajax-content-ignore.php" data-ajax="false">three</a></li>
 			    </ul>
 			    <div id="one" class="ui-body-d tablist-content">
 		        <h1>First tab contents</h1>

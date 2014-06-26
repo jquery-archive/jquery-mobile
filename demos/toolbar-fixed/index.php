@@ -61,7 +61,7 @@
 
 			<p>While all form elements are now tested to work correctly within <em>static</em> toolbars as of jQuery Mobile 1.1, we recommend extensive testing when using form elements within <em>fixed</em> toolbars or within any <code>position: fixed</code> elements. This can potentially trigger a number of unpredictable issues in various mobile browsers, Android 2.2/2.3 in particular (detailed in <b>Known issues in Android 2.2/2.3</b>, below).</p>
 
-			<p><a href="../toolbar-fixed-forms" data-ajax="false">Forms in toolbar example</a></p>
+			<p><a href="../toolbar-fixed-forms/" data-ajax="false">Forms in toolbar example</a></p>
 
 			<h2>Changes in jQuery Mobile 1.1</h2>
 

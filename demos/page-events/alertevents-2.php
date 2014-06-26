@@ -11,7 +11,7 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-	<script src="https://rawgithub.com/arschmitz/jquery-mobile-event-debugger/v0.0.3/jquery.mobile.event.debugger.js"></script>
+	<script src="http://rawgithub.com/arschmitz/jquery-mobile-event-debugger/v0.0.4/jquery.mobile.event.debugger.js"></script>
 	<script>
 		$.mobile.eventLogger({
 			deprecated: true,

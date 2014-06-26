@@ -20,7 +20,7 @@
 				<ul>
 			      <li><a href="#one" data-theme="a" data-ajax="false">one</a></li>
 			      <li><a href="#two" data-theme="a" data-ajax="false">two</a></li>
-			      <li><a href="ajax-content.php" data-theme="a" data-ajax="false">three</a></li>
+			      <li><a href="ajax-content-ignore.php" data-theme="a" data-ajax="false">three</a></li>
 			    </ul>
 			</div>
 
@@ -41,7 +41,6 @@
 			<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 			<p>Copyright 2014 The jQuery Foundation</p>
 		</div><!-- /footer -->
-		
 	</div>
 </div><!-- /page -->
 </body>
