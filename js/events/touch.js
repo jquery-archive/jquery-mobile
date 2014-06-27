@@ -218,7 +218,7 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 				minSwipeSpeed = $.event.special.swipe.minSwipeSpeed;
 
 			if ( isSwipeHorizontal &&
-				Math.abs( stop.coords[ 0 ] - start.coords[ 0 ] ) > horizontalDistanceThreshold &&
+				Math.abs( stop.coords[ 0 ] - start.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
 				swipeSpeed > minSwipeSpeed ) {
 				var direction = start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight";
 
