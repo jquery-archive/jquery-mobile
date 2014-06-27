@@ -143,16 +143,16 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 	$.event.special.swipe = {
 
 		// More than this horizontal displacement, and we will suppress scrolling.
-		scrollSupressionThreshold: 30,
+		scrollSupressionThreshold: 10,
 
 		// More time than this, and it isn't a swipe.
 		durationThreshold: 1000,
 
 		// Swipe horizontal displacement must be more than this.
-		horizontalDistanceThreshold: 30,
+		horizontalDistanceThreshold: 10,
 
-		// Swipe vertical displacement must be less than this.
-		verticalDistanceThreshold: 30,
+		// Minimum swipe speed is 0.03 px/ms
+		minSwipeSpeed: 0.03,
 
 		getLocation: function ( event ) {
 			var winPageX = window.pageXOffset,
@@ -203,10 +203,23 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 					};
 		},
 
+		isSwipeDirectionHorizontal: function ( start, stop ) {
+			return ( Math.abs( ( start.coords[ 0 ] - stop.coords[ 0 ] ) * 2 / 3 ) > Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) );
+		},
+
+		getSwipeSpeed: function ( start, stop ) {
+			// Speed is px/ms
+			return Math.abs( ( start.coords[ 0 ] - stop.coords[ 0 ] ) / ( start.time - stop.time ) );
+		},
+
 		handleSwipe: function( start, stop, thisObject, origTarget ) {
-			if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
-				Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
-				Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+			var isSwipeHorizontal = $.event.special.swipe.isSwipeDirectionHorizontal( start, stop ),
+				swipeSpeed = $.event.special.swipe.getSwipeSpeed( start, stop ),
+				minSwipeSpeed = $.event.special.swipe.minSwipeSpeed;
+
+			if ( isSwipeHorizontal &&
+				Math.abs( stop.coords[ 0 ] - start.coords[ 0 ] ) > horizontalDistanceThreshold &&
+				swipeSpeed > minSwipeSpeed ) {
 				var direction = start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight";
 
 				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget, swipestart: start, swipestop: stop }), true );
