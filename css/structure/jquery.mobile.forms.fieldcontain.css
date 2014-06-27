@@ -62,4 +62,7 @@
 		width: auto;
 		margin-right: .625em;
 	}
+	.ui-field-contain > label ~ .ui-btn-inline.ui-btn-icon-notext {
+		width: 1.75em;
+	}
 }
