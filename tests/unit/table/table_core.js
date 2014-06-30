@@ -4,7 +4,7 @@ var tableProto = $.mobile.table.prototype;
 
 function test_create( prefix, enhanced, disabled ) {
 
-	test( "_create()", function() {
+	test( prefix + "_create()", function() {
 		var expectDisabledClass = !enhanced && disabled,
 			context = {
 				refresh: $.noop,
