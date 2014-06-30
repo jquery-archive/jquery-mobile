@@ -552,9 +552,9 @@ module.exports = function( grunt ) {
 									script.remove();
 								} else if ( /require.js$/.test( script.attr( "src" ) ) ) {
 
-									// Use the rawgithub.com version for requirejs
+									// Use the CDN version for requirejs
 									script.attr( "src",
-										"//cdnjs.cloudflare.com/ajax/libs/require.js/" +
+										"//cdn.jsdelivr.net/requirejs/" +
 										grunt.template.process( "<%= pkg.devDependencies.requirejs %>" ) +
 										"/require.min.js" );
 								}
