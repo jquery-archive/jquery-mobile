@@ -121,10 +121,10 @@
 		<p>By default, icons in <code>input</code> buttons are placed to the left of the button text. This default may be overridden using the <code>data-iconpos</code> attribute to set the icon position to "right", "top", or "bottom". In case of link buttons or <code>button</code> elements you have to add an icon position class (<code>ui-btn-icon-[value]</code>).</p>
 
 		<div data-demo-html="true">
-			<a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-left">Left</a>
-			<a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Right</a>
-			<a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-u ui-btn-icon-top">Top</a>
-			<a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-d ui-btn-icon-bottom">Bottom</a>
+			<a href="index.php" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-left">Left</a>
+			<a href="index.php" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Right</a>
+			<a href="index.php" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-u ui-btn-icon-top">Top</a>
+			<a href="index.php" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-d ui-btn-icon-bottom">Bottom</a>
 		</div><!--/demo-html -->
 
 		<h2>Icon-only</h2>
@@ -132,7 +132,7 @@
 		<p>Use "notext" as value for icon position if you want to create an icon-only button.</p>
 
         <div data-demo-html="true">
-            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
+            <a href="index.php" class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext">Delete</a>
         </div><!--/demo-html -->
 
         <h2>Icon shadow</h2>
@@ -142,8 +142,8 @@
         <p><strong>Note: Icon shadow (option <code>iconShadow</code> in the button widget and class <code>ui-shadow-icon</code>) is deprecated as of jQuery Mobile 1.4.0 and will be removed in 1.5.0.</strong></p>
 
         <div data-demo-html="true">
-			<a href="index.html" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left">Icon shadow</a>
-			<a href="index.html" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-delete ui-btn-icon-left">Icon shadow</a>
+			<a href="index.php" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left">Icon shadow</a>
+			<a href="index.php" class="ui-shadow-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-delete ui-btn-icon-left">Icon shadow</a>
         </div><!--/demo-html -->
 
         <h2>Removing the disc</h2>
@@ -151,8 +151,8 @@
         <p>The semi-transparent dark circle behind the icon ensures good contrast on any background color so it works well with the jQuery Mobile theming system. If you prefer to not have this disc, it can be removed by adding the class <code>ui-nodisc-icon</code> to the element or its container.</p>
 
         <div data-demo-html="true">
-			<a href="index.html" class="ui-nodisc-icon ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left">No disc</a>
-			<a href="index.html" class="ui-nodisc-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-delete ui-btn-icon-left">No disc</a>
+			<a href="index.php" class="ui-nodisc-icon ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left">No disc</a>
+			<a href="index.php" class="ui-nodisc-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-delete ui-btn-icon-left">No disc</a>
         </div><!--/demo-html -->
 
 		<p>Example of the class being applied to a wrapper.</p>
@@ -171,8 +171,8 @@
         <p>Icons are white by default but you can switch to black icons by adding the <code>ui-alt-icon</code> class to the element or its container. This also changes the color that is used for the discs.</p>
 
         <div data-demo-html="true">
-        	<a href="index.html" class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left">Alt icon</a>
-			<a href="index.html" class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-delete ui-btn-icon-left">Alt icon</a>
+        	<a href="index.php" class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-left">Alt icon</a>
+			<a href="index.php" class="ui-alt-icon ui-btn ui-shadow ui-corner-all ui-btn-b ui-icon-delete ui-btn-icon-left">Alt icon</a>
         </div><!--/demo-html -->
 
 		<p>Example of the class being applied to a wrapper.</p>
