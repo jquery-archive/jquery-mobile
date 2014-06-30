@@ -88,7 +88,8 @@ module.exports = function( grunt ) {
 					}
 				);
 
-				if ( content.substring( 0, 15 ).toLowerCase() === "<!doctype html>" || srcPath.match( /\.php$/ ) ) {
+				if ( content.substring( 0, 15 ).toLowerCase() === "<!doctype html>" ||
+				srcPath.match( /\.php$/ ) ) {
 					processedName = grunt.config.process( name + "<%= versionSuffix %>" );
 					$ = cheerio.load( content );
 					$( "script" ).each( function() {
@@ -149,7 +150,8 @@ module.exports = function( grunt ) {
 
 							// References to the icons CSS file need to be processed here
 							.replace( /css\/themes\/default\/jquery\.mobile\.icons\.css/,
-								path.join( "css/themes/default", "jquery.mobile.icons.min.css" ) ) );
+								path.join( "css/themes/default", "jquery.mobile.icons.min.css" )
+							));
 
 					});
 
@@ -174,10 +176,12 @@ module.exports = function( grunt ) {
 			normal: [
 				"/*!",
 				"* jQuery Mobile <%= version %>",
-				"* <%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: "+ grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss Z" ),
+				"* <%if ( headHash ) {%>Git HEAD hash: <%= headHash %> <> <% } %>Date: " +
+				grunt.template.today( "UTC:ddd mmm d yyyy HH:MM:ss Z" ),
 				"* http://jquerymobile.com",
 				"*",
-				"* Copyright 2010, " + copyrightYear + " jQuery Foundation, Inc. and other contributors",
+				"* Copyright 2010, " + copyrightYear + " jQuery Foundation, Inc. and other" +
+				"contributors",
 				"* Released under the MIT license.",
 				"* http://jquery.org/license",
 				"*",
@@ -185,7 +189,10 @@ module.exports = function( grunt ) {
 				"",
 				"",
 				"" ].join( grunt.util.linefeed ),
-			minified: "/*! jQuery Mobile <%= version %> | <%if ( headShortHash ) {%>Git HEAD hash: <%= headShortHash %> <> <% } %>" + grunt.template.today( "UTC:yyyy-mm-dd" ) + "T" + grunt.template.today( "UTC:HH:MM:ss" ) + "Z | (c) 2010, " + copyrightYear + " jQuery Foundation, Inc. | jquery.org/license */\n"
+			minified: "/*! jQuery Mobile <%= version %> | <%if ( headShortHash ) {%>Git HEAD" +
+			"hash: <%= headShortHash %> <> <% } %>" + grunt.template.today( "UTC:yyyy-mm-dd" ) +
+			"T" + grunt.template.today( "UTC:HH:MM:ss" ) + "Z | (c) 2010, " + copyrightYear +
+			" jQuery Foundation, Inc. | jquery.org/license */\n"
 		},
 		dirs = {
 			dist: dist,
@@ -352,8 +359,8 @@ module.exports = function( grunt ) {
 					//Also, require.pause/resume calls will be inserted.
 					//Set it to true to avoid this. This is useful if you are building code that
 					//does not use require() in the built project or in the JS files, but you
-					//still want to use the optimization tool from RequireJS to concatenate modules
-					//together.
+					//still want to use the optimization tool from RequireJS to concatenate
+					//modules together.
 					skipModuleInsertion: true,
 
 					mainConfigFile: "js/requirejs.config.js",
@@ -382,7 +389,9 @@ module.exports = function( grunt ) {
 					},
 
 					onBuildWrite: function (moduleName, path, contents) {
-						return contents.replace(/__version__/g, grunt.config.process( "\"<%= version %>\"" ) );
+						return contents.replace(/__version__/g, grunt.config.process(
+							"\"<%= version %>\""
+						));
 					}
 				}
 			}
@@ -414,7 +423,8 @@ module.exports = function( grunt ) {
 					}
 				},
 				files: {
-					"dist/jquery.mobile<%= versionSuffix %>.min.js": path.join( dist, name ) + "<%= versionSuffix %>.js"
+					"dist/jquery.mobile<%= versionSuffix %>.min.js": path.join( dist, name ) +
+					"<%= versionSuffix %>.js"
 				}
 			}
 		},
@@ -470,7 +480,8 @@ module.exports = function( grunt ) {
 						content = content.replace( /^\s*<\?php include\(\s*['"]([^'"]+)['"].*$/gmi,
 							function( match, includePath /*, offset, string */ ) {
 
-								var fileToInclude = path.resolve( path.join( path.dirname( srcPath ), includePath ) );
+								var fileToInclude = path.resolve( path.join( path.dirname( srcPath )
+								, includePath ) );
 								return grunt.file.read( fileToInclude );
 							}
 						);
@@ -480,7 +491,11 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "demos/jqm-contents.php", "demos/jqm-navmenu.php", "demos/jqm-search.php" ],
+						src: [
+							"demos/jqm-contents.php",
+							"demos/jqm-navmenu.php",
+							"demos/jqm-search.php"
+						],
 						dest: dist
 					}
 				]
@@ -548,14 +563,17 @@ module.exports = function( grunt ) {
 								var script = $( element );
 								if ( /requirejs\.config\.js$/.test( script.attr( "src" ) ) ) {
 
-									// Get rid of the requirejs.config.js script tag since we're using the built bundle
+									// Get rid of the requirejs.config.js script tag since we're
+									// using the built bundle
 									script.remove();
 								} else if ( /require.js$/.test( script.attr( "src" ) ) ) {
 
 									// Use the CDN version for requirejs
 									script.attr( "src",
 										"//cdn.jsdelivr.net/requirejs/" +
-										grunt.template.process( "<%= pkg.devDependencies.requirejs %>" ) +
+										grunt.
+											template.
+											process( "<%= pkg.devDependencies.requirejs %>" ) +
 										"/require.min.js" );
 								}
 							});
@@ -579,7 +597,10 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "demos/backbone-requirejs/**/*", "!demos/backbone-requirejs/index.php" ],
+						src: [
+							"demos/backbone-requirejs/**/*",
+							"!demos/backbone-requirejs/index.php"
+						],
 						dest: dist
 					}
 				]
@@ -608,13 +629,19 @@ module.exports = function( grunt ) {
 					},
 					{
 						expand: true,
-						src: [ "demos/**/*", "!**/*.php", "!**/*.html", "!demos/backbone-requirejs/js/*" ],
+						src: [
+							"demos/**/*",
+							"!**/*.php",
+							"!**/*.html",
+							"!demos/backbone-requirejs/js/*"
+						],
 						dest: dist
 					}
 				]
 			},
 			sourcemap: {
-				// Processes the sourceMap to fix issue: https://github.com/mishoo/UglifyJS2/issues/47
+				// Processes the sourceMap to fix
+				// issue: https://github.com/mishoo/UglifyJS2/issues/47
 				options: {
 					processContent: function( content /*, srcPath*/ ) {
 						content = content.replace( /"dist\//g, "\"" );
@@ -641,7 +668,9 @@ module.exports = function( grunt ) {
 					processContent: function( content, srcPath ) {
 						if ( /\.min.js$|\.min.map$/.test( srcPath ) ) {
 							// We need to rewrite the map info
-							var re = new RegExp( grunt.template.process( "<%= versionSuffix %>" ), "g" );
+							var re = new RegExp(
+								grunt.template.process( "<%= versionSuffix %>" ),
+							"g" );
 							content = content.replace( re, "" );
 						}
 						return content;
@@ -766,7 +795,9 @@ module.exports = function( grunt ) {
 							// For requests to "[...]/js/" return the built jquery.mobile.js
 							// as opposed to the php combined version
 							function(req, res, next){
-								var bundle = grunt.config.process( "<%= requirejs.js.options.out %>" );
+								var bundle = grunt.config.process(
+									"<%= requirejs.js.options.out %>"
+								);
 								if (req.url === "/js/") {
 									grunt.log.debug( req.url + " requested, serving: " + bundle );
 									res.end( grunt.file.read( bundle ) );
@@ -818,10 +849,13 @@ module.exports = function( grunt ) {
 					urls: (function() {
 						var allSuites, patterns, paths,
 							testDirs = [ "unit", "integration", "css" ],
-							suites = ( grunt.option( "suites" ) || process.env.SUITES || "" ).split( "," ),
-							types = ( grunt.option( "types" ) || process.env.TYPES || "" ).split( "," ),
+							suites = ( grunt.option( "suites" ) || process.env.SUITES || "" )
+								.split( "," ),
+							types = ( grunt.option( "types" ) || process.env.TYPES || "" )
+								.split( "," ),
 							versionedPaths = [],
-							jQueries = ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" ).split( "," ),
+							jQueries = ( grunt.option( "jqueries" ) || process.env.JQUERIES || "" )
+								.split( "," ),
 							excludes = _.chain( suites )
 								.filter( function( suite ) { return ( /^!/.test( suite ) ); } )
 								.map( function( suite ) { return suite.substring( 1 ); } )
@@ -851,7 +885,9 @@ module.exports = function( grunt ) {
 
 
 						// Remove negations from list of suites
-						suites = _.filter( suites, function( suite ) { return ( !/^!/.test( suite ) ); } );
+						suites = _.filter( suites, function( suite ) {
+							return ( !/^!/.test( suite ) );
+						});
 
 						if ( types.length ){
 							testDirs = [];
@@ -887,7 +923,8 @@ module.exports = function( grunt ) {
 								return grunt.file.exists( testPath );
 							})
 							.map( function( path ) {
-								// Some of our tests (ie. navigation) don't like having the index.html too much
+								// Some of our tests (ie. navigation) don't like having the
+								// index.html too much
 								return path.replace( /\/index.html$/, "/" );
 							});
 
@@ -895,8 +932,9 @@ module.exports = function( grunt ) {
 
 						if ( jQueries.length ) {
 							paths.forEach( function( path ) {
-								versionedPaths = versionedPaths.concat( jQueries.map( function( jQVersion ) {
-									return path + "?jquery=" + jQVersion;
+								versionedPaths = versionedPaths.concat(
+									jQueries.map( function( jQVersion ) {
+										return path + "?jquery=" + jQVersion;
 								}) );
 							});
 						}
@@ -955,7 +993,10 @@ module.exports = function( grunt ) {
 				options: {
 					copyOptions: {
 						process: function( content ) {
-							var version = grunt.file.readJSON( "bower.json" ).dependencies[ "jquery-ui" ];
+							var version = grunt
+								.file
+								.readJSON( "bower.json" )
+								.dependencies[ "jquery-ui" ];
 							if ( /#/.test( version ) ) {
 								version = version.split( "#" )[ 1 ];
 							}
@@ -972,7 +1013,10 @@ module.exports = function( grunt ) {
 				options: {
 					copyOptions: {
 						process: function( content ) {
-							var version = grunt.file.readJSON( "bower.json" ).dependencies[ "jquery-ui-tabs" ];
+							var version = grunt
+								.file
+								.readJSON( "bower.json" )
+								.dependencies[ "jquery-ui-tabs" ];
 							if ( /#/.test( version ) ) {
 								version = version.split( "#" )[ 1 ];
 							}
