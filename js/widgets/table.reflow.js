@@ -54,7 +54,10 @@ return $.widget( "mobile.table", $.mobile.table, {
 	refresh: function() {
 		this._superApply( arguments );
 		if ( this.options.mode === "reflow" ) {
-			// get headers in reverse order so that top-level headers are appended last
+
+			// After the refresh completes, we need to iterate over the headers again, but this
+			// time in reverse order so that top-level headers are visited last. This causes <b>
+			// labels to be added in the correct order using a simple .prepend().
 			$( this.allHeaders.get().reverse() ).each( $.proxy( this, "_updateCellsFromHeader" ) );
 		}
 	},
