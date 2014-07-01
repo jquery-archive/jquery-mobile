@@ -2,7 +2,9 @@ function runAssertions( prefix, table, expectedColstart ) {
 	var expectedCells = table.find( "[data-column]" ),
 		header = table.find( ".test-column-header" );
 
-	deepEqual( expectedCells.is( header.data( $.camelCase( $.mobile.ns + "cells" ) ) ), true,
+	deepEqual( header.data( $.camelCase( $.mobile.ns + "cells" ) ).is( function( index, cell ) {
+			return ( expectedCells.index( cell ) < 0 );
+		}), false,
 		prefix + "header's 'cells' data item contains the right cells." );
 
 	deepEqual( table.find( ".test-column-header" ).jqmData( "colstart" ), expectedColstart,
