@@ -19,3 +19,4 @@ node_modules
 
 # phantom junit output
 build/test-results/
+/nbproject/private/

@@ -6,7 +6,11 @@ John Resig <jeresig@gmail.com>
 Scott González <scott.gonzalez@gmail.com>
 Jörn Zaefferer <joern.zaefferer@gmail.com>
 Kin Blas <jblas@adobe.com>
-Douglas Neiner <doug@pixelgraphics.us>
+Douglas N
+
+
+
+einer <doug@pixelgraphics.us>
 Todd Parker <todd@filamentgroup.com>
 Patty Toland <patty@filamentgroup.com>
 Jordan Dobson <jordan.dobson@madebysquad.com>
