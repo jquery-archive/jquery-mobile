@@ -256,7 +256,10 @@ define( [
 
 			// If current active page is not a dialog skip the dialog and continue
 			// in the same direction
-			if ( activeContent && !activeContent.hasClass( "ui-dialog" ) ) {
+			// Note: The dialog widget is deprecated as of 1.4.0 and will be removed in 1.5.0.
+			// Thus, as of 1.5.0 activeContent.data( "mobile-dialog" ) will always evaluate to
+			// falsy, so the second condition in the if-statement below can be removed altogether.
+			if ( activeContent && !activeContent.data( "mobile-dialog" ) ) {
 				// determine if we're heading forward or backward and continue
 				// accordingly past the current dialog
 				if ( data.direction === "back" ) {
