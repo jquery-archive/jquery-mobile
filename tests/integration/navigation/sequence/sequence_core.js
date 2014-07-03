@@ -545,4 +545,65 @@
 		], eventNs );
 	});
 
+	asyncTest( "Sequence page1 -> page2 -> popup -> page-styled-as-dialog <- back", function() {
+		var eventNs = ".page1Page2PopupDialogPageBack";
+
+		expect();
+
+		maybeWaitForStartPage([
+			function() {
+				$( "#openAnotherPage" ).click();
+			},
+			{
+				pagecontainerchange: {
+					src: $.mobile.pageContainer,
+					event: "pagecontainerchange" + eventNs + "1"
+				}
+			},
+			function() {
+				deepEqual( $.mobile.activePage.attr( "id" ), "anotherPage",
+					"Landed on another page" );
+				$( "#openPopupOnAnotherPage" ).click();
+			},
+			{
+				popupafteropen: {
+					src: function() { return $( "#popupOnAnotherPage" ); },
+					event: "popupafteropen" + eventNs + "2"
+				}
+			},
+			function() {
+				$( "#openPageStyledAsDialog" ).click();
+			},
+			{
+				pagecontainerchange: {
+					src: $.mobile.pageContainer,
+					event: "pagecontainerchange" + eventNs + "3"
+				}
+			},
+			function() {
+				deepEqual( $.mobile.activePage.attr( "id" ), "pageStyledAsDialog",
+					"Landed on page styled as dialog" );
+				$.mobile.back();
+			},
+			{
+				pagecontainerchange: {
+					src: $.mobile.pageContainer,
+					event: "pagecontainerchange" + eventNs + "4"
+				}
+			},
+			function() {
+				deepEqual( $.mobile.activePage.attr( "id" ), "anotherPage",
+					"Navigating back() from the page styled as a dialog reaches another page" );
+				$.mobile.back();
+			},
+			{
+				pagecontainerchange: {
+					src: $.mobile.pageContainer,
+					event: "pagecontainerchange" + eventNs + "4"
+				}
+			},
+			start
+		], eventNs );
+	});
+
 })( jQuery );
