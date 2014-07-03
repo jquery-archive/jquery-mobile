@@ -36,7 +36,7 @@
 
 		<h1>Navbar <a href="http://api.jquerymobile.com/navbar/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
-		<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar.</p>
+		<p>jQuery Mobile has a navbar widget that is useful for providing buttons with optional icons in a bar. The navbar can support any number of buttons resorting to multiple rows when the number of buttons exceeds the <code>maxbuttons</code> option. Alternatively, if you set the <code>morebutton</code> option you will turn the final button in the row into a popup that contains the remaining buttons</p>
 
 		<h2>Navbar basics</h2>
 
@@ -90,7 +90,7 @@
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
 
-		<p>The navbar maxes out with 5 items, each 1/5 the width of the browser window:</p>
+		<p>The navbar defaults to a maximum of 5 buttons, each 1/5 the width of the browser window:</p>
 
 			<div data-demo-html="true">
 				<div data-role="navbar" data-grid="d">
