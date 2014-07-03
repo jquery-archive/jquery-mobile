@@ -26,14 +26,17 @@
 	width: 100%;
 	margin: 0;
 	border-right-width: 0;
+	box-sizing: border-box;
 }
 .ui-navbar .ui-btn:focus {
 	z-index: 1;
 }
+ul.ui-navbar-row {
+	margin: -5px 0 0 0;
+}
 .ui-navbar-row li .ui-btn {
 	border-top-width: 0;
 }
-
 /* fixes gaps caused by subpixel problem */
 .ui-navbar li:last-child .ui-btn {
 	margin-right: -4px;
@@ -41,49 +44,19 @@
 .ui-navbar li:last-child .ui-btn:after {
 	margin-right: 4px;
 }
-
-.ui-content .ui-navbar li:last-child .ui-btn,
-.ui-content .ui-navbar .ui-grid-duo .ui-block-b .ui-btn {
+.ui-content .ui-navbar li:last-child .ui-btn {
 	border-right-width: 1px;
 	margin-right: 0;
 }
-.ui-content .ui-navbar li:last-child .ui-btn:after,
-.ui-content .ui-navbar .ui-grid-duo .ui-block-b .ui-btn:after {
+.ui-content .ui-navbar li:last-child .ui-btn:after {
 	margin-right: 0;
-}
-.ui-navbar .ui-grid-duo .ui-block-a:last-child .ui-btn {
-	border-right-width: 1px;
-	margin-right: -1px;
-}
-.ui-navbar .ui-grid-duo .ui-block-a:last-child .ui-btn:after {
-	margin-right: 1px;
-}
-
-.ui-navbar .ui-grid-duo .ui-btn {
-	border-top-width: 0;
-}
-.ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
-.ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn {
-	border-top-width: 1px;
 }
 .ui-header .ui-navbar .ui-btn,
 .ui-footer .ui-navbar .ui-btn {
 	border-top-width: 0;
 	border-bottom-width: 0;
 }
-.ui-header .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
-.ui-footer .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
-.ui-header .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn,
-.ui-footer .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn {
-	border-top-width: 0;
-}
 .ui-header .ui-title ~ .ui-navbar .ui-btn,
-.ui-footer .ui-title ~ .ui-navbar .ui-btn,
-.ui-header .ui-navbar .ui-grid-duo .ui-btn,
-.ui-footer .ui-navbar .ui-grid-duo .ui-btn,
-.ui-header .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
-.ui-footer .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child .ui-btn,
-.ui-header .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn,
-.ui-footer .ui-title ~ .ui-navbar .ui-grid-duo .ui-block-a:first-child + .ui-block-b .ui-btn {
+.ui-footer .ui-title ~ .ui-navbar .ui-btn {
 	border-top-width: 1px;
 }
