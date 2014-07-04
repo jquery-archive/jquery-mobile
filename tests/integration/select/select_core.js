@@ -19,6 +19,11 @@
 
 	var homeWithSearch = $.mobile.path.parseUrl(location.pathname).pathname + location.search;
 
+	test( "No tags are accidentally injected during list building", function() {
+		deepEqual( $( "#encoding-test-menu > li:first-child > a > script" ).length, 0,
+			"No script tag has ended up inside the anchor" );
+	});
+
 	module(libName, {
 		setup: function() {
 			$.mobile.navigate.history.stack = [];

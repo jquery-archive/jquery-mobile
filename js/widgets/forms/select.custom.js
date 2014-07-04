@@ -460,10 +460,15 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			}
 
 			parent = option.parentNode;
-			text = $option.getEncodedText();
-			anchor  = document.createElement( "a" );
 			classes = [];
 
+			// Although using .text() here raises the risk that, when we later paste this into the
+			// list item we end up pasting possibly malicious things like <script> tags, that risk
+			// only arises if we do something like $( "<li><a href='#'>" + text + "</a></li>" ). We
+			// don't do that. We do document.createTextNode( text ) instead, which guarantees that
+			// whatever we paste in will end up as text, with characters like <, > and & escaped.
+			text = $option.text();
+			anchor = document.createElement( "a" );
 			anchor.setAttribute( "href", "#" );
 			anchor.appendChild( document.createTextNode( text ) );
 
