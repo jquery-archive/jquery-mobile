@@ -20,6 +20,14 @@
             margin-left: 15px;
         }
     </style>
+	<script id="dynamic-slider">
+$( document ).on( "pagecreate", function() {
+	$( "<input type='number' data-type='range' min='0' max='100' step='1' value='17'>" )
+		.appendTo( "#dynamic-slider-form" )
+		.slider()
+		.textinput()
+});
+	</script>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -133,6 +141,14 @@
                     <input type="range" name="slider-12" id="slider-12" min="0" max="100" value="50">
                 </form>
                 </div><!-- /demo-html -->
+
+				<h2>Dynamically injected</h2>
+				<p>The slider below has been created at runtime.</p>
+
+				<div data-demo-html="true" data-demo-js="#dynamic-slider">
+					<form id="dynamic-slider-form">
+					</form>
+				</div>
 
 	</div><!-- /content -->
 
