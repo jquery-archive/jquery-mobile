@@ -22,7 +22,7 @@
 }
 .ui-navbar li .ui-btn {
 	font-size: 12.5px;
-	display: inline-block;
+	display: block;
 	width: 100%;
 	margin: 0;
 	border-right-width: 0;
@@ -30,9 +30,6 @@
 }
 .ui-navbar .ui-btn:focus {
 	z-index: 1;
-}
-ul.ui-navbar-row {
-	margin: -5px 0 0 0;
 }
 .ui-navbar-row li .ui-btn {
 	border-top-width: 0;
@@ -55,6 +52,7 @@ ul.ui-navbar-row {
 .ui-footer .ui-navbar .ui-btn {
 	border-top-width: 0;
 	border-bottom-width: 0;
+	display: inline-block;
 }
 .ui-header .ui-title ~ .ui-navbar .ui-btn,
 .ui-footer .ui-title ~ .ui-navbar .ui-btn {
