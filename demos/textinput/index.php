@@ -382,6 +382,17 @@
         </form>
         </div><!-- /demo-html -->
 
+        <h2>Negate style options</h2>
+
+        <div data-demo-html="true">
+            <form>
+                <div class="ui-field-contain">
+                     <label for="text-15">ui-corner-none</label>
+                     <input type="text" data-wrapper-class="ui-corner-none">
+                </div>
+            </form>
+        </div><!--/demo-html -->
+
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
