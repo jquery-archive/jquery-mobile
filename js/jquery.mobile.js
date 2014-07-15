@@ -18,6 +18,7 @@ define([
 	"./widgets/dialog",
 	"./widgets/collapsible",
 	"./widgets/collapsibleSet",
+	"./widgets/page.bottomreached.js",
 	"./fieldContain",
 	"./grid",
 	"./widgets/navbar",
