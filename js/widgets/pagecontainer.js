@@ -538,7 +538,7 @@ define( [
 				// Note that it is the responsibility of the listener/handler
 				// that called preventDefault(), to resolve/reject the
 				// deferred object within the triggerData.
-				if ( this._triggerWithDeprecated( "load" ).event.isDefaultPrevented() ) {
+				if ( this._triggerWithDeprecated( "load", triggerData ).event.isDefaultPrevented() ) {
 					return;
 				}
 
