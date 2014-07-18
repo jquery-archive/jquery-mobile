@@ -98,11 +98,11 @@ asyncTest( "Event sequence during navigation to another page", function() {
 
 			// Deprecated as of 1.4.0
 			{ type: "pageload", target: "the-body",
-				data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
+				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid
 			{ type: "pagecontainerload", target: "the-body",
-				data: { prevPage: undefined, nextPage: undefined, toPage: undefined } },
+				data: { prevPage: "start-page", nextPage: undefined, toPage: "other-page" } },
 
 			// Valid - page widget events
 			{ type: "pagebeforecreate", target: "other-page",
