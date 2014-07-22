@@ -149,9 +149,4 @@
 			"turning off clearBtn removes wrapper class 'ui-input-has-clear'" );
 	});
 
-	test ( "Negate style option ", function() {
-		var input = $("#negate-style-corner");
-		deepEqual( parseInt( input.css("border-radius"), 10 ), 0, "Inputtext does not have border-radius.");
-	});
-
 })(jQuery);
