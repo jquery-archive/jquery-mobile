@@ -250,7 +250,7 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 					emitted = false;
 
 				context.move = function( event ) {
-					if ( !start ) {
+					if ( !start || event.isDefaultPrevented() ) {
 						return;
 					}
 
