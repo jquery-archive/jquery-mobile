@@ -17,7 +17,7 @@
 			$( "[data-role='header'], [data-role='footer']" ).toolbar();
 		});
 		// Update the contents of the toolbars
-		$( document ).on( "pagecontainershow", function() {
+		$( document ).on( "pagecontainerchange", function() {
 			// Each of the four pages in this demo has a data-title attribute
 			// which value is equal to the text of the nav button
 			// For example, on first page: <div data-role="page" data-title="Info">
