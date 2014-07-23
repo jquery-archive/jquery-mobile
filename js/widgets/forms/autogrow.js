@@ -68,7 +68,7 @@ define( [
 							}, this ),
 						"transition" );
 				}
-				this._timeout();
+				this._prepareHeightUpdate();
 			}
 		},
 
