@@ -243,11 +243,16 @@ define( [
 			return to || this._getInitialContent();
 		},
 
-		_transitionFromHistory: function( direction, defaultTransition ) {
+		// The options by which a given page was reached are stored in the history entry for that
+		// page. When this function is called, history is already at the new entry. So, when moving
+		// back, this means we need to consult the old entry and reverse the meaning of the
+		// options. Otherwise, if we're moving forward, we need to consult the options for the
+		// current entry.
+		_optionFromHistory: function( direction, optionName, fallbackValue ) {
 			var history = this._getHistory(),
 				entry = ( direction === "back" ? history.getLast() : history.getActive() );
 
-			return ( entry && entry.transition ) || defaultTransition;
+			return ( ( entry && entry[ optionName ] ) || fallbackValue );
 		},
 
 		_handleDialog: function( changePageOptions, data ) {
@@ -276,8 +281,7 @@ define( [
 				// as most of this is lost by the domCache cleaning
 				$.extend( changePageOptions, {
 					role: active.role,
-					transition: this._transitionFromHistory(
-						data.direction,
+					transition: this._optionFromHistory( data.direction, "transition",
 						changePageOptions.transition ),
 					reverse: data.direction === "back"
 				});
@@ -294,7 +298,7 @@ define( [
 				// transition is false if it's the first page, undefined
 				// otherwise (and may be overridden by default)
 				transition = history.stack.length === 0 ? "none" :
-					this._transitionFromHistory( data.direction ),
+					this._optionFromHistory( data.direction, "transition" ),
 
 				// default options for the changPage calls made after examining
 				// the current state of the page and the hash, NOTE that the
