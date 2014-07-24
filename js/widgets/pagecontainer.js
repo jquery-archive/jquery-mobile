@@ -310,7 +310,9 @@ define( [
 				};
 
 			$.extend( changePageOptions, data, {
-				transition: transition
+				transition: transition,
+				allowSamePageTransition: this._optionFromHistory( data.direction,
+					"allowSamePageTransition" )
 			});
 
 			// TODO move to _handleDestination ?
