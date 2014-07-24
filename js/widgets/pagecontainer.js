@@ -1133,6 +1133,7 @@ define( [
 
 				// TODO the property names here are just silly
 				params = {
+					allowSamePageTransition: settings.allowSamePageTransition,
 					transition: settings.transition,
 					title: pageTitle,
 					pageUrl: pageUrl,
