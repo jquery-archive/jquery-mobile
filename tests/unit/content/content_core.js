@@ -120,7 +120,7 @@
 		var result, opts = {};
 
 		proto.getActivePage = function() {
-			return $( "<div>", {"class": "ui-dialog"} );
+			return $( "<div>" ).data( "mobile-dialog", true );
 		};
 
 		proto._getActiveHistory = function() {
