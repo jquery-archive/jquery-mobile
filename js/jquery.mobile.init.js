@@ -58,7 +58,7 @@ define([
 				$pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
 				hash = path.stripHash( path.stripQueryParams(path.parseLocation().hash) ),
 				theLocation = $.mobile.path.parseLocation(),
-				hashPage = document.getElementById( hash );
+				hashPage = hash ? document.getElementById( hash ) : undefined;
 
 			// if no pages are found, create one with body's inner html
 			if ( !$pages.length ) {
