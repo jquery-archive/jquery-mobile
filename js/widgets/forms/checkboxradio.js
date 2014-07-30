@@ -296,14 +296,13 @@ $.widget( "mobile.checkboxradio", $.extend( {
 	},
 
 	refresh: function() {
-		var hasIcon = this._hasIcon(),
-			isChecked = this.element[ 0 ].checked,
+		var isChecked = this.element[ 0 ].checked,
 			active = $.mobile.activeBtnClass,
 			iconposClass = "ui-btn-icon-" + this.options.iconpos,
 			addClasses = [],
 			removeClasses = [];
 
-		if ( hasIcon ) {
+		if ( this._hasIcon() ) {
 			removeClasses.push( active );
 			addClasses.push( iconposClass );
 		} else {
@@ -318,6 +317,8 @@ $.widget( "mobile.checkboxradio", $.extend( {
 			addClasses.push( this.uncheckedClass );
 			removeClasses.push( this.checkedClass );
 		}
+
+		this.widget().toggleClass( "ui-state-disabled", this.element.prop( "disabled" ) );
 
 		this.label
 			.addClass( addClasses.join( " " ) )
