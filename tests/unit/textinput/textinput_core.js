@@ -104,6 +104,21 @@
 		ok( ! $( "#textarea-clear-btn" ).next().is( "a.ui-input-clear" ), "data-clear-btn does not add clear button to textarea" );
 	});
 
+	test( "data-clear-btn does not add clear button to textarea", function() {
+		deepEqual( $( "#textarea-clear-btn" ).children( "a" ).length, 0,
+			"No anchors have been inserted as children of the data-clear-btn textarea element" );
+	});
+
+	test( "data-clear-btn does not add clear button to slider input", function() {
+		ok( ! $( "#slider-input" ).next().is( "a.ui-input-clear" ),
+			"data-clear-btn does not add clear button to slider input" );
+	});
+
+	test( "data-clear-btn does not add clear button to slider input", function() {
+		deepEqual( $( "#slider-input" ).children( "a" ).length, 0,
+			"No anchors have been inserted as children of the data-clear-btn input element" );
+	});
+
 	test( "data-clear-btn does not add native clear button to input button (IE10)", function() {
 		// Get an input element, initial height, and reserve d for height difference
 		var e = $( "input[data-clear-btn='true']" ),
@@ -147,6 +162,11 @@
 			"turning off clearBtn removes clear button anchor" );
 		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), false,
 			"turning off clearBtn removes wrapper class 'ui-input-has-clear'" );
+	});
+
+	test( "cannot inject script via clearBtnText option", function() {
+		deepEqual( !!$.clearBtnTextScriptInjected, false,
+			"no script was injected via clearBtnText option" );
 	});
 
 })(jQuery);
