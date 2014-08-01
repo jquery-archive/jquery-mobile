@@ -149,4 +149,9 @@
 			"turning off clearBtn removes wrapper class 'ui-input-has-clear'" );
 	});
 
+	test( "cannot inject script via clearBtnText option", function() {
+		deepEqual( !!$.clearBtnTextScriptInjected, false,
+			"no script was injected via clearBtnText option" );
+	});
+
 })(jQuery);
