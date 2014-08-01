@@ -26,10 +26,11 @@ define( [
 		},
 
 		clearButton: function() {
-
-			return $( "<a href='#' class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" +
-    "' title='" + this.options.clearBtnText + "'>" + this.options.clearBtnText + "</a>" );
-
+			return $( "<a href='#' " +
+				"class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all'>" +
+				"</a>" )
+					.attr( "title", this.options.clearBtnText )
+					.text( this.options.clearBtnText );
 		},
 
 		_clearBtnClick: function( event ) {
