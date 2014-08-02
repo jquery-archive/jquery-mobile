@@ -20,7 +20,11 @@ define( [
 		_create: function() {
 			this._super();
 
-			if ( !!this.options.clearBtn || this.isSearch ) {
+			if ( this.isSearch ) {
+				this.options.clearBtn = true;
+			}
+
+			if ( !!this.options.clearBtn && this.inputNeedsWrap ) {
 				this._addClearBtn();
 			}
 		},
