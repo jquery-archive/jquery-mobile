@@ -80,6 +80,9 @@ $.widget( "mobile.table", $.mobile.table, {
 	},
 
 	_addLabels: function( cells, label, contents ) {
+		if ( contents.length === 1 && contents[ 0 ].nodeName.toLowerCase() === "abbr" ) {
+			contents = contents.eq( 0 ).attr( "title" );
+		}
 		// .not fixes #6006
 		cells
 			.not( ":has(b." + label + ")" )

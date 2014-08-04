@@ -99,6 +99,13 @@
 		}, 800);
 	});
 
+	test( "Reflow mode honors <abbr> tag title", function() {
+		var table = $( "#reflow-abbr-test" );
+
+		deepEqual( $( "#reflow-abbr-td1 b" ).text(), "Player Name", "Row 1 has the right label" );
+		deepEqual( $( "#reflow-abbr-td2 b" ).text(), "Player Name", "Row 2 has the right label" );
+	});
+
 	asyncTest( "The appropriate label is added" , function(){
 		setTimeout(function(){
 			var $table = $( "#reflow-table-test table" ),
