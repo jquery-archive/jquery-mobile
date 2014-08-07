@@ -108,11 +108,6 @@ define([
 					$.mobile.path.isPath( hash ) ||
 					hash === $.mobile.dialogHashKey ) ) ) {
 
-				// Store the initial destination
-				if ( $.mobile.path.isHashValid( location.hash ) ) {
-					$.mobile.navigate.history.initialDst = hash.replace( "#", "" );
-				}
-
 				// make sure to set initial popstate state if it exists
 				// so that navigation back to the initial page works properly
 				if ( $.event.special.navigate.isPushStateEnabled() ) {
