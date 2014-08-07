@@ -117,6 +117,36 @@ $.testHelper.setPushState();
 		]);
 	});
 
+	asyncTest( "Entries with identical URLs are distinguishable when pushState is enabled",
+		function() {
+			$.testHelper.eventSequence( "navigate", [
+				function() {
+					$.mobile.navigate( "#foo" );
+				},
+				function() {
+					$.mobile.navigate( "#bar" );
+				},
+				function() {
+					$.mobile.navigate( "#foo" );
+				},
+				function() {
+					deepEqual( $.mobile.navigate.history.activeIndex, $.support.pushState ? 2 : 0,
+						"After sequence start -> #foo -> #bar -> #foo activeIndex is correct" );
+					window.history.back();
+				},
+				function() {
+					deepEqual( $.mobile.navigate.history.activeIndex, 1,
+						"After going back once in the sequence the activeIndex is correct" );
+					window.history.forward();
+				},
+				function() {
+					deepEqual( $.mobile.navigate.history.activeIndex, $.support.pushState ? 2 : 0,
+						"After returning to the last sequnce entry the activeIndex is correct" );
+					start();
+				}
+			]);
+		});
+
 	asyncTest( "setting the hash with a url not in history should always create a new history entry", function() {
 		$.testHelper.eventTarget = $( window );
 
