@@ -903,11 +903,6 @@ $.widget( "mobile.popup", {
 			url = $.mobile.path.parseLocation().hash + hashkey;
 		}
 
-		// Tack on an extra hashkey if this is the first page and we've just reconstructed the initial hash
-		if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
-			url += hashkey;
-		}
-
 		// swallow the the initial navigation event, and bind for the next
 		this.window.one( "beforenavigate", function( theEvent ) {
 			theEvent.preventDefault();
