@@ -198,23 +198,6 @@
 		equal( "foo/bar", proto._handleDestination( "#foo/bar" ) );
 	});
 
-	test( "returns initial content when the url is base plus initial destination", function() {
-		var initialContent = $( "<div>" );
-
-		proto._getHistory = function() {
-			return {
-				initialDst: "foo",
-				stack: [ {url: "will not be equal to initial destination"} ]
-			};
-		};
-
-		proto._getInitialContent = function() {
-			return initialContent;
-		};
-
-		equal( initialContent, proto._handleDestination(base + "#" + proto._getHistory().initialDst) );
-	});
-
 	module( "Content Widget _recordScroll" );
 
 	test( "does not record scroll position when disabled", function() {

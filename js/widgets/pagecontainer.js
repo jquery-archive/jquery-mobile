@@ -228,18 +228,6 @@ define( [
 				//
 				// TODO move check to history object or path object?
 				to = !$.mobile.path.isPath( to ) ? ( $.mobile.path.makeUrlAbsolute( "#" + to, this._getDocumentBase() ) ) : to;
-
-				// If we're about to go to an initial URL that contains a
-				// reference to a non-existent internal page, go to the first
-				// page instead. We know that the initial hash refers to a
-				// non-existent page, because the initial hash did not end
-				// up in the initial history entry
-				// TODO move check to history object?
-				if ( to === $.mobile.path.makeUrlAbsolute( "#" + history.initialDst, this._getDocumentBase() ) &&
-					history.stack.length &&
-					history.stack[0].url !== history.initialDst.replace( $.mobile.dialogHashKey, "" ) ) {
-					to = this._getInitialContent();
-				}
 			}
 			return to || this._getInitialContent();
 		},
@@ -318,8 +306,7 @@ define( [
 			// key, and the initial destination isn't equal to the current target
 			// page, use the special dialog handling
 			if ( history.activeIndex > 0 &&
-				to.indexOf( $.mobile.dialogHashKey ) > -1 &&
-				history.initialDst !== to ) {
+				to.indexOf( $.mobile.dialogHashKey ) > -1 ) {
 
 				to = this._handleDialog( changePageOptions, data );
 
@@ -1095,12 +1082,6 @@ define( [
 					url += $.mobile.dialogHashKey;
 				} else {
 					url += "#" + $.mobile.dialogHashKey;
-				}
-
-				// tack on another dialogHashKey if this is the same as the initial hash
-				// this makes sure that a history entry is created for this dialog
-				if ( $.mobile.navigate.history.activeIndex === 0 && url === $.mobile.navigate.history.initialDst ) {
-					url += $.mobile.dialogHashKey;
 				}
 			}
 
