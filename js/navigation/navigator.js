@@ -24,6 +24,7 @@ define(["jquery",
 	};
 
 	$.extend($.mobile.Navigator.prototype, {
+		historyEntryId: 0,
 		squash: function( url, data ) {
 			var state, href, hash = path.isPath(url) ? path.stripHash(url) : url;
 
@@ -32,6 +33,7 @@ define(["jquery",
 			// make sure to provide this information when it isn't explicitly set in the
 			// data object that was passed to the squash method
 			state = $.extend({
+				id: ++this.historyEntryId,
 				hash: hash,
 				url: href
 			}, data);
@@ -129,7 +131,7 @@ define(["jquery",
 					state: null
 				};
 
-				this.squash( url, state );
+				state.id = ( this.squash( url, state ) || {} ).id;
 
 				// Trigger a new faux popstate event to replace the one that we
 				// caught that was triggered by the hash setting above.
@@ -220,6 +222,7 @@ define(["jquery",
 			// If all else fails this is a popstate that comes from the back or forward buttons
 			// make sure to set the state of our history stack properly, and record the directionality
 			this.history.direct({
+				id: ( event.originalEvent.state || {} ).id,
 				url: (event.originalEvent.state || {}).url || hash,
 
 				// When the url is either forward or backward in history include the entry

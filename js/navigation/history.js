@@ -74,10 +74,29 @@ define([ "jquery", "./../ns", "./path" ], function( jQuery ) {
 			return index;
 		},
 
-		closest: function( url ) {
-			var closest, a = this.activeIndex;
+		_findById: function( id ) {
+			var stackIndex,
+				stackLength = this.stack.length;
 
-			// First, take the slice of the history stack before the current index and search
+			for ( stackIndex = 0 ; stackIndex < stackLength ; stackIndex++ ) {
+				if ( this.stack[ stackIndex ].id === id ) {
+					break;
+				}
+			}
+
+			return ( stackIndex < stackLength ? stackIndex : undefined );
+		},
+
+		closest: function( url, id ) {
+			var closest = ( id === undefined ? undefined : this._findById( id ) ),
+				a = this.activeIndex;
+
+			// First, we check whether we've found an entry by id. If so, we're done.
+			if ( closest !== undefined ) {
+				return closest;
+			}
+
+			// Failing that take the slice of the history stack before the current index and search
 			// for a url match. If one is found, we'll avoid avoid looking through forward history
 			// NOTE the preference for backward history movement is driven by the fact that
 			//      most mobile browsers only have a dedicated back button, and users rarely use
@@ -100,7 +119,7 @@ define([ "jquery", "./../ns", "./path" ], function( jQuery ) {
 		},
 
 		direct: function( opts ) {
-			var newActiveIndex = this.closest( opts.url ), a = this.activeIndex;
+			var newActiveIndex = this.closest( opts.url, opts.id ), a = this.activeIndex;
 
 			// save new page index, null check to prevent falsey 0 result
 			// record the previous index for reference
