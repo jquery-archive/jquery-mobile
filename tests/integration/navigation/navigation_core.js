@@ -41,11 +41,11 @@ $.testHelper.delayStart();
 			function(){
 				ok( $.mobile.activePage[0] === $( "#active-state-page1" )[ 0 ], "successful navigation to internal page." );
 
-				$.testHelper.openPage("#/tests/integration/navigation/external.html");
+				$.testHelper.openPage( "#" + $.mobile.path.parseLocation().directory + "external.html" );
 			},
 
 			function() {
-				ok( $.mobile.activePage.attr("id"), "external-test", "successful navigation to external page." );
+				deepEqual( $.mobile.activePage.attr("id"), "external-test", "successful navigation to external page." );
 				window.history.back();
 			},
 
