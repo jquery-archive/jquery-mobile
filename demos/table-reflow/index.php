@@ -151,7 +151,7 @@
 
 		<h2>Applying a preset breakpoint</h2>
 
-		<p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a single pre-configured breakpoint that targets the stacked style to smaller phones and swaps to a tabular prsentation on larger phones, tablet and desktop devices. To use this preset breakpoint, add the <code>ui-responsive</code> class to the table to convert from the stacked presentation to a tabular presentation at 560px (35em). If this breakpoint doesn't work for your content, we encourage you to write a custom breakpoint as descibed above.</p>
+		<p>Even though we strongly encourage you to write custom breakpoints yourself, the framework includes a single pre-configured breakpoint that targets the stacked style to smaller phones and swaps to a tabular presentation on larger phones, tablet and desktop devices. To use this preset breakpoint, add the <code>ui-responsive</code> class to the table to convert from the stacked presentation to a tabular presentation at 560px (35em). If this breakpoint doesn't work for your content, we encourage you to write a custom breakpoint as described above.</p>
 
 <pre><code>
 &lt;table data-role=&quot;table&quot; <strong>class=&quot;ui-responsive&quot;</strong>&gt;
@@ -159,7 +159,7 @@
 
 		<h2>Grouped column headers</h2>
 
-		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>TH</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a  class to the label of the first cell in each group to allow you to style these differently and provide additional visual hierarchy.</p>
+		<p>It's fairly common to need to logically group multiple columns together under a heading group for financial or scientific data. The framework can support the most simple version of this by allowing for two rows of table headers (<code>th</code>), with the first row containing simple <code>colspan</code> attributes to group the columns below. In this configuration, the framework will add a class to the label of the first cell in each group to allow you to style these differently and provide additional visual hierarchy.</p>
 
 		<div data-demo-html="true">
 		    <table data-role="table" id="temp-table" data-mode="reflow" class="ui-responsive table-stroke">
@@ -173,13 +173,13 @@
 					<th data-priority="persist">Month</th>
 					<th data-priority="1">Minimum Temp</th>
 					<th data-priority="1">Maximum Temp</th>
-					<th data-priority="2">Precipitaion (mm)</th>
+					<th data-priority="2">Precipitation (mm)</th>
 					<th data-priority="2">Rainfall Days</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<th>Jaunuary</th>
+					<th>January</th>
 					<td>3</td>
 					<td>8</td>
 					<td>17.8</td>
