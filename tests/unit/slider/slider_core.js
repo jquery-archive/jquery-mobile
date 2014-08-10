@@ -114,4 +114,13 @@
 
 		ok( slider.val() === sliderHandle.text(), "slider text should match handle text");
 	});
+
+	test( "slider input is disabled correctly", function() {
+		var slider = $( "#disable-input-test" );
+
+		slider.slider( "disable" );
+
+		ok( slider.hasClass( "ui-state-disabled" ), "disabling slider also disables the input" );
+	});
+
 })( jQuery );
