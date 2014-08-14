@@ -144,6 +144,11 @@ define( [ "jquery",
 			if ( options.highlight !== undefined ) {
 				this._setHighlight( options.highlight );
 			}
+
+			if ( options.disabled !== undefined ) {
+				this._setDisabled( options.disabled );
+			}
+
 			this._super( options );
 			this.refresh();
 		},
@@ -248,6 +253,11 @@ define( [ "jquery",
 		_setHighlight: function( value ) {
 			this._inputFirst.slider( "option", "highlight", value );
 			this._inputLast.slider( "option", "highlight", value );
+		},
+
+		_setDisabled: function( value ) {
+			this._inputFirst.prop( "disabled", value );
+			this._inputLast.prop( "disabled", value );
 		},
 
 		_destroy: function() {
