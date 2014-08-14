@@ -18,7 +18,7 @@ $.widget( "mobile.navbar", {
 	_create: function() {
 
 		var $navbar = this.element,
-			$navbtns = $navbar.find( "a" ),
+			$navbtns = $navbar.find( "a, button" ),
 			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
 
 		$navbar.addClass( "ui-navbar" )
