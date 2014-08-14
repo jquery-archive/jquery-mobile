@@ -293,6 +293,33 @@
 			</div><!-- /footer -->
 			</div><!--/demo-html -->
 
+		<h2>Navbars with button elements</h2>
+
+		<p>Instead of links you can also use button elements inside navbars.</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>
+						<li><button data-icon="home">One</button></li>
+						<li><button data-icon="grid" data-theme="b">Two</button></li>
+						<li><button data-icon="search">Three</button></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+				<div data-role="header" style="overflow:hidden;">
+				<h1>I'm a header</h1>
+					<div data-role="navbar" data-iconpos="right">
+						<ul>
+							<li><button data-icon="home">One</button></li>
+							<li><button data-icon="grid" data-theme="b">Two</button></li>
+							<li><button data-icon="search">Three</button></li>
+						</ul>
+					</div><!-- /navbar -->
+				</div><!-- /header -->
+			</div><!--/demo-html -->
+
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
