@@ -46,3 +46,5 @@ notifications:
   irc:
     channels:
       - "chat.freenode.net#jqueryui-dev"
+git:
+  depth: 10
