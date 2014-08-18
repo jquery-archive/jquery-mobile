@@ -64,19 +64,25 @@
 	});
 
 	asyncTest( "Returning from a popup results in the page from which it opened", function() {
-		var origActive, eventNs = ".returningFromAPopup";
+		var origActive, origUrl,
+			eventNs = ".returningFromAPopup";
 
-		expect( 3 );
+		expect( 4 );
 
 		maybeWaitForStartPage([
 			function() {
 				origActive = $.mobile.activePage;
+				origUrl = location.href;
 				$( "#openPopup" ).click();
 			},
 			{
 				popupafteropen: { src: function() { return $( "#thePopup" ); }, event: "popupafteropen" + eventNs + "1" }
 			},
 			function( result ) {
+				deepEqual( location.href, origUrl.indexOf( "#" ) >= 0 ?
+					origUrl + $.mobile.dialogHashKey :
+					origUrl + "#" + $.mobile.dialogHashKey,
+					"URL after popup opens differs only by an appended dialog hash key" );
 				ok( !result.popupafteropen.timedOut, "Popup emitted 'popupafteropen'" );
 				$( "#thePopup" ).parent().prev().click();
 			},
