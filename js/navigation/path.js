@@ -287,14 +287,25 @@ define([
 			},
 
 			squash: function( url, resolutionUrl ) {
-				var href, cleanedUrl, search, stateIndex,
+				var href, cleanedUrl, search, stateIndex, docUrl,
 					isPath = this.isPath( url ),
 					uri = this.parseUrl( url ),
 					preservedHash = uri.hash,
 					uiState = "";
 
-				// produce a url against which we can resole the provided path
-				resolutionUrl = resolutionUrl || (path.isPath(url) ? path.getLocation() : path.getDocumentUrl());
+				// produce a url against which we can resolve the provided path
+				if ( !resolutionUrl ) {
+					if ( isPath ) {
+						resolutionUrl = path.getLocation();
+					} else {
+						docUrl = path.getDocumentUrl( true );
+						if ( path.isPath( docUrl.hash ) ) {
+							resolutionUrl = path.squash( docUrl.href );
+						} else {
+							resolutionUrl = docUrl.href;
+						}
+					}
+				}
 
 				// If the url is anything but a simple string, remove any preceding hash
 				// eg #foo/bar -> foo/bar
