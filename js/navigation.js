@@ -363,9 +363,10 @@ define( [
 			//            lists and select dialogs, just write a hash in the link they
 			//            create. This means the actual URL path is based on whatever
 			//            the current value of the base tag is at the time this code
-			//            is called. For now we are just assuming that any url with a
-			//            hash in it is an application page reference.
-			if ( href.search( "#" ) !== -1 ) {
+			//            is called.
+			if ( href.search( "#" ) !== -1 &&
+				!( $.mobile.path.isExternal( href ) && $.mobile.path.isAbsoluteUrl( href ) ) ) {
+
 				href = href.replace( /[^#]*#/, "" );
 				if ( !href ) {
 					//link was an empty hash meant purely
