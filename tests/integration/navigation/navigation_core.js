@@ -16,6 +16,26 @@ $.testHelper.delayStart();
 			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
 
+	test( "Absolute link with hash works", function() {
+		var defaultIsPrevented,
+			theLink = $( "#goToGoogle" ),
+			theClickHandler = function( event ) {
+				defaultIsPrevented = !!event.isDefaultPrevented();
+				if ( event.target === theLink[ 0 ] ) {
+					event.preventDefault();
+				}
+			};
+
+		$.mobile.document.one( "click", theClickHandler );
+
+		$( "#goToGoogle" ).click();
+
+		$.mobile.document.off( "click", theClickHandler );
+
+		deepEqual( defaultIsPrevented, false,
+			"Default is not prevented when clicking on external link with hash" );
+	});
+
 	module('jquery.mobile.navigation.js', {
 		setup: function() {
 			$.mobile.navigate.history.stack = [];
