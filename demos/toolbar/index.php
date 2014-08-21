@@ -11,6 +11,21 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
+	<style id="footer-abs-buttons">
+		.footer-button-left,
+		.footer-button-right {
+			position: absolute;
+			margin: 0;
+			top: auto;
+			bottom: 0.24em;
+		}
+		.footer-button-left {
+			left: 0.4em;
+		}
+		.footer-button-right {
+			right: 0.4em;
+		}
+	</style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -117,6 +132,18 @@
 				<span class="ui-title"></span>
 			</div>
 		</div><!-- /demo-html -->
+
+		<h3>Buttons in footers</h3>
+
+		<p>The classes <code>ui-btn-left</code> and <code>ui-btn-right</code> were not meant to be used in footers, because they do not account for the possible presence of text, navbars, and and other elements often present in footers. You can nevertheless achieve a similar effect when you add a bit of custom CSS.</p>
+
+		<div data-demo-html="true" data-demo-css="#footer-abs-buttons">
+			<div data-role="footer">
+				<h2>Footer</h2>
+				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-power">Quit</a>
+				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-right ui-btn-icon-right ui-icon-carat-r">Next</a>
+			</div>
+		</div>
 
 		<h2>Adding back button to header</h2>
 
