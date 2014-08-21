@@ -95,4 +95,39 @@
 		);
 	});
 
+	asyncTest( "fire slidestart and slidestop on both handles", function() {
+		var rangeslider = $( "#rangeslider-startstop" ),
+			widget = rangeslider.data( "mobile-rangeslider" ),
+			sliders = widget._sliders,
+			handleFirst = sliders.find( ".ui-slider-handle" ).first(),
+			handleLast = sliders.find( ".ui-slider-handle" ).last();
+
+		$.testHelper.eventCascade([
+			function() {
+				handleFirst.mousedown();
+			},
+
+			"slidestart", function(timeout) {
+				ok( !timeout, "slidestart on first handle fired" );
+				handleFirst.mouseup();
+			},
+
+			"slidestop", function(timeout) {
+				ok( !timeout, "slidestop on first handle fired" );
+				handleLast.mousedown();
+			},
+
+			"slidestart", function(timeout) {
+				ok( !timeout, "slidestart on last handle fired" );
+				handleLast.mouseup();
+			},
+
+			"slidestop", function(timeout) {
+				ok( !timeout, "slidestop on last handle fired" );
+				start();
+			}
+
+		], 50)
+	});
+
 })( jQuery );
