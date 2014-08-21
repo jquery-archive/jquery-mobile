@@ -91,6 +91,7 @@ define( [ "jquery",
 			//if the first handle is dragged send the event to the first slider
 			$.data( this._inputFirst.get(0), "mobile-slider" ).dragging = true;
 			$.data( this._inputFirst.get(0), "mobile-slider" ).refresh( event );
+			$.data( this._inputFirst.get(0), "mobile-slider" )._trigger( "start" );
 			return false;
 		},
 
