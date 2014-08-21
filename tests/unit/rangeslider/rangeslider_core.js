@@ -95,4 +95,42 @@
 		);
 	});
 
+	test( " Rangeslider is enabled/disabled correctly ", function() {
+		var rangeslider = $( "#disable-rangeslider" ),
+			inputFirst = $( "#range-disabled-first" ),
+			inputLast = $( "#range-disabled-last" ),
+			sliderFirst = rangeslider.find( ".ui-slider-track" ).first(),
+			sliderLast =  rangeslider.find( ".ui-slider-track" ).first();
+
+		rangeslider.rangeslider( { disabled: true } );
+
+		ok( !!inputFirst.attr( "disabled" ),  "first input is disabled" );
+		ok( inputFirst.hasClass( "mobile-slider-disabled"),
+			"first input gets mobile-slider-disabled" );
+		ok( !!sliderFirst.attr( "aria-disabled" ), "first slider is aria-disabled" );
+		ok( sliderFirst.hasClass( "ui-state-disabled"), "first slider has ui-state-disabled" );
+		ok( !!inputLast.attr( "disabled" ),  "last input is disabled" );
+		ok( inputLast.hasClass( "mobile-slider-disabled"),
+			"last input gets mobile-slider-disabled" );
+		ok( !!sliderLast.attr( "aria-disabled" ), "last slider is aria-disabled" );
+		ok( sliderLast.hasClass( "ui-state-disabled"), "last slider has ui-state-disabled" );
+
+		rangeslider.rangeslider( {disabled: false } );
+
+		deepEqual( !!inputFirst.attr( "disabled" ), false, "first input is enabled" );
+		ok( !inputFirst.hasClass( "mobile-slider-disabled"),
+			"first input gets mobile-slider-disabled" );
+		deepEqual( sliderFirst.attr( "aria-disabled" ), "false",
+			"first slider aria-disabled is false" );
+		ok( !sliderFirst.hasClass( "ui-state-disabled"), "first slider ui-state-disabled removed" );
+		deepEqual( !!inputLast.attr( "disabled" ), false, "last input is enabled" );
+		ok( !inputLast.hasClass( "mobile-slider-disabled"),
+			"last input gets mobile-slider-disabled" );
+		deepEqual( sliderLast.attr( "aria-disabled" ), "false",
+			"last slider aria-disabled is false" );
+		ok( !sliderLast.hasClass( "ui-state-disabled"), "last slider ui-state-disabled removed" );
+
+
+	});
+
 })( jQuery );
