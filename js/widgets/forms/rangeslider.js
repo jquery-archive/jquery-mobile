@@ -255,8 +255,6 @@ define( [ "jquery",
 		},
 
 		_setDisabled: function( value ) {
-			value = !!value;
-
 			this._inputFirst.prop( "disabled", value );
 			this._inputLast.prop( "disabled", value );
 		},
