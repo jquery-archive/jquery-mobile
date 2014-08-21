@@ -1,7 +1,8 @@
 language: php
 php:
   - "5.5"
-before_script: 
+sudo: false
+before_script:
   - npm install -g grunt-cli
   - npm install
 script: npm run-script ci
