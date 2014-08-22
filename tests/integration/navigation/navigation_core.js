@@ -36,6 +36,49 @@ $.testHelper.delayStart();
 			"Default is not prevented when clicking on external link with hash" );
 	});
 
+( function() {
+
+	var goUrl, originalGo,
+		navigatorPrototype = $.mobile.Navigator.prototype;
+
+	module( "Navigation encoding", {
+		setup: function() {
+			goUrl = undefined;
+			originalGo = navigatorPrototype.go;
+			navigatorPrototype.go = function( url ) {
+				goUrl = url;
+
+				return originalGo.apply( this, arguments );
+			};
+		},
+		teardown: function() {
+			navigatorPrototype.go = originalGo;
+		}
+	});
+
+	asyncTest( "Going to a page requiring url encoding works", function() {
+		var endingString = $( "#goToPercentPage" ).attr( "href" );
+
+		$.testHelper.pageSequence([
+			function() {
+				$( "#goToPercentPage" ).click();
+			},
+			function() {
+				deepEqual( $.mobile.activePage.children( "#percentPageChild" ).length, 1,
+					"Active page is the one loaded from the directory with a percent symbol" );
+
+				deepEqual(
+					goUrl.lastIndexOf( endingString ),
+					goUrl.length - endingString.length,
+					"Location ends in '" + endingString + "'" );
+				$.mobile.back();
+			},
+			start
+		]);
+	});
+
+})();
+
 	module('jquery.mobile.navigation.js', {
 		setup: function() {
 			$.mobile.navigate.history.stack = [];
