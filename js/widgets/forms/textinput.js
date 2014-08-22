@@ -32,7 +32,9 @@ $.widget( "mobile.textinput", {
 
 	options: {
 		theme: null,
+		// Deprecated as of 1.5.0
 		corners: true,
+		// Deprecated as of 1.5.0
 		mini: false,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
