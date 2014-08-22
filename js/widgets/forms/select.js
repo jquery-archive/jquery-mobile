@@ -9,6 +9,12 @@ define( [ "jquery", "../../core", "../../widget", "../../zoom", "./reset" ], fun
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+  function defaultSelectionFormatter ( selectedOptions ) {
+    return selectedOptions.map(function() {
+      return $( this ).text();
+    }).get().join( ", " );
+  }
+
 $.widget( "mobile.selectmenu", $.extend( {
 	initSelector: "select:not( :jqmData(role='slider')):not( :jqmData(role='flipswitch') )",
 
@@ -27,7 +33,8 @@ $.widget( "mobile.selectmenu", $.extend( {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		mini: false
+		mini: false,
+		selectionFormatter: defaultSelectionFormatter
 	},
 
 	_button: function() {
@@ -230,13 +237,12 @@ $.widget( "mobile.selectmenu", $.extend( {
 		var self = this,
 			selected = this.selected(),
 			text = this.placeholder,
+			options = this.options,
 			span = $( document.createElement( "span" ) );
 
 		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( (function() {
 			if ( selected.length ) {
-				text = selected.map(function() {
-					return $( this ).text();
-				}).get().join( ", " );
+				text = options.selectionFormatter( selected );
 			} else {
 				text = self.placeholder;
 			}
