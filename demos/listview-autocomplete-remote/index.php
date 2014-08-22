@@ -62,15 +62,18 @@
 
 		<h1>Remote autocomplete</h1>
 
-		<p>To use the filter as an autocomplete that taps into remote data sources, you can use the <code>filterablebeforefilter</code> event to dynamically populate a listview as a user types a search query.</p>
+		<p>To create an autocomplete that taps into remote data sources, you can use the <code>filterablebeforefilter</code> event of the Filterable widget to dynamically populate a listview as a user types a search query.</p>
 
 		<p>This is useful when you have a very large data set like cities, zip codes, or products that can't be loaded up-front locally. Use the view source button to see the JavaScript that powers this demo.</p>
-		<p>If you have a small list of items, you can use the <a href="../listview/">listview</a> filter reveal option to make an autocomplete with local listview data.</p>
+		<p>If you have a small list of items, you can use the filter reveal option to make an <a href="../listview-autocomplete/">autocomplete with local listview data</a>.</p>
 
 			<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
 				<h3>Cities worldwide</h3>
             	<p>After you enter <strong>at least three characters</strong> the autocomplete function will show all possible matches.</p>
-				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a city..." data-filter-theme="a"></ul>
+				<form class="ui-filterable">
+					<input id="autocomplete-input" data-type="search" placeholder="Find a city...">
+				</form>
+				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input"></ul>
 			</div><!--/demo-html -->
 
 	</div><!-- /content -->
