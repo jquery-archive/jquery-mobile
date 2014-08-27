@@ -131,60 +131,8 @@ return $.widget( "mobile.table", $.mobile.table, {
 			.removeClass( classes.cellHidden + " " + classes.cellVisible );
 	},
 
-	// Use the .jqmData() stored on the checkboxes to determine which columns have show/hide
-	// overrides, and make a list of the indices of those that have such overrides
-	_recordLockedColumns: function() {
-		var headers = this.headers,
-			lockedColumns = [];
-
-		// Find the index of the column header associated with each old checkbox among the
-		// post-refresh headers and, if the header is still there, make sure the corresponding
-		// column will be hidden if the pre-refresh checkbox indicates that the column is
-		// hidden by recording its index in the array of hidden columns.
-		this._ui.menu.find( "input" ).each( function() {
-			var input = $( this ),
-				header = input.jqmData( "header" ),
-				index = -1;
-
-			if ( header ) {
-				index = headers.index( header[ 0 ] );
-			}
-
-			if ( index > -1 ) {
-				// The column header associated with /this/ checkbox is still present in the
-				// post-refresh table and it is locked, so the column associated with this column
-				// header is also currently locked. Let's record that.
-				lockedColumns = lockedColumns.concat(
-					header.hasClass( "ui-table-cell-visible" ) ?
-						[ { index: index, visible: true } ] :
-					header.hasClass( "ui-table-cell-hidden" ) ?
-						[ { index: index, visible: false } ] : [] );
-
-				lockedColumns.push( index );
-			}
-		});
-
-		return lockedColumns;
-	},
-
-	_restoreLockedColumns: function( lockedColumns ) {
-		var index, lockedStatus, input;
-
-		// At this point all columns are visible, so programmatically check/uncheck all the
-		// checkboxes that correspond to columns that were previously unlocked so as to ensure that
-		// the unlocked status is restored
-		for ( index = lockedColumns.length - 1 ; index > -1 ; index-- ) {
-			lockedStatus = lockedColumns[ index ];
-			input = this.headers.eq( lockedStatus.index ).jqmData( "input" );
-
-			if ( input ) {
-				input
-					.prop( "checked", lockedStatus.visible )
-					.checkboxradio( "refresh" )
-					.trigger( "change" );
-			}
-		}
-	},
+	_recordLockedColumns: $.noop,
+	_restoreLockedColumns: $.noop,
 
 	refresh: function() {
 		var lockedColumns;
