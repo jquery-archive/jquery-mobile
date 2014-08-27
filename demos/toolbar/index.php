@@ -12,17 +12,17 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style id="footer-abs-buttons">
-		.ui-button-footer-left,
-		.ui-button-footer-right {
+		.footer-button-left,
+		.footer-button-right {
 			position: absolute;
 			margin: 0;
 			top: auto;
 			bottom: 0.24em;
 		}
-		.ui-button-footer-left {
+		.footer-button-left {
 			left: 0.4em;
 		}
-		.ui-button-footer-right {
+		.footer-button-right {
 			right: 0.4em;
 		}
 	</style>
@@ -135,13 +135,13 @@
 
 		<h3>Buttons in footers</h3>
 
-		<p>The classes <code>ui-btn-left</code> and <code>ui-btn-right</code> were not meant to be used in footers, because they do not account for the possible presence of navbars and other elements often present in footers. You can nevertheless achieve a similar effect when you add a bit of custom CSS.</p>
+		<p>The classes <code>ui-btn-left</code> and <code>ui-btn-right</code> were not meant to be used in footers, because they do not account for the possible presence of text, navbars, and and other elements often present in footers. You can nevertheless achieve a similar effect when you add a bit of custom CSS.</p>
 
 		<div data-demo-html="true" data-demo-css="#footer-abs-buttons">
 			<div data-role="footer">
-				<h2>Footer with left/right buttons</h2>
-				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-button-footer-left ui-btn-icon-left ui-icon-power">Quit</a>
-				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini ui-button-footer-right ui-btn-icon-right ui-icon-carat-r">Next</a>
+				<h2>Footer</h2>
+				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-power">Quit</a>
+				<a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-right ui-btn-icon-right ui-icon-carat-r">Next</a>
 			</div>
 		</div>
 
