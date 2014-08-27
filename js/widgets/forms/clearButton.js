@@ -127,7 +127,9 @@ define( [
 
 		_destroy: function() {
 			this._super();
-			this._destroyClear();
+			if ( this.options.clearBtn ) {
+				this._destroyClear();
+			}
 		}
 
 	});
