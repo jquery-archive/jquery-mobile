@@ -169,4 +169,14 @@
 			"no script was injected via clearBtnText option" );
 	});
 
+	test( "textinput is destroyed correctly", function() {
+		var originalDOM = $( "#destroy-test-container" ).clone(),
+			entry = $( "#destroy-test" );
+
+		entry.textinput().textinput( "destroy" );
+
+		deepEqual( $.testHelper.domEqual( originalDOM, $( "#destroy-test-container" ) ), true,
+			"Original DOM is restored after textinput destruction" );
+	});
+
 })(jQuery);
