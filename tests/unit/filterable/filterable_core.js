@@ -71,4 +71,28 @@ test( "Refreshing the listview also refreshes the filterable", function() {
 		"All list items are hidden after listview refresh" );
 });
 
+asyncTest( "Empty dividers are hidden by default", function() {
+	var input = $( "#hide-empty-dividers-input" ),
+		listview = $( "#hide-empty-dividers" );
+
+	$.testHelper.detailedEventCascade([
+		function() {
+			input.val( "l" ).trigger( "change" );
+		},
+		{
+			filterablefilter: {
+				src: listview,
+				event: "filterablebeforefilter.emptyDividersHidden1"
+			}
+		},
+		function( result ) {
+			deepEqual( result.filterablefilter.timedOut, false,
+				"filterablefilter event was triggered" );
+			deepEqual( $( "#prev-is-hidden" ).prev().hasClass( "ui-screen-hidden" ), true,
+				"Divider for hidden item is hidden" );
+			start();
+		}
+	]);
+});
+
 })( jQuery );
