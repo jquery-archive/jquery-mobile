@@ -6,7 +6,7 @@
 
 define( [
 	"jquery",
-	"./listview",
+	"./listview.hidedividers",
 	"./filterable" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -160,6 +160,24 @@ $.widget( "mobile.filterable", $.mobile.filterable, {
 		return ret;
 	},
 
+	// The listview implementation accompanying this filterable backcompat layer will call
+	// filterable.refresh() after it's done refreshing the listview to make sure the filterable
+	// filters out any new items added. However, when the listview refresh has been initiated by
+	// the filterable itself, then such filtering has already taken place, and calling the
+	// filterable's refresh() method will cause an infinite recursion. We stop this by setting a
+	// flag that will cause the filterable's refresh() method to short-circuit.
+	_refreshChildWidget: function() {
+		this._refreshingChildWidget = true;
+		this._superApply( arguments );
+		this._refreshingChildWidget = false;
+	},
+
+	refresh: function() {
+		if ( !this._refreshingChildWidget ) {
+			this._superApply( arguments );
+		}
+	},
+
 	_destroy: function() {
 		if ( this._isSearchInternal() ) {
 			this._search.remove();
@@ -207,29 +225,18 @@ $.widget( "mobile.listview", $.mobile.listview, {
 		return this._super();
 	},
 
-	_afterListviewRefresh: function() {
-		var filterable = this.element.data( "mobile-filterable" );
-
-		if ( this.options.filter === true && filterable ) {
-			this._preventRefreshLoop = true;
-			filterable.refresh();
-		}
-	},
-
-	// Eliminate infinite recursion caused by the fact that we call filterable.refresh() from
-	// _afterListviewRefresh() above, which, in turn, calls _refreshChildWidget(), which, in
-	// turn, calls listview refresh(), which would, in turn, calls _afterListviewRefresh()
-	// above, if we wouldn't prevent that right here.
 	refresh: function() {
-		var returnValue;
+		var filterable;
 
-		if ( !this._preventRefreshLoop ) {
-			returnValue = this._superApply( arguments );
+		this._superApply( arguments );
+
+		if ( this.options.filter === true ) {
+			filterable = this.element.data( "mobile-filterable" );
+
+			if ( filterable ) {
+				filterable.refresh();
+			}
 		}
-
-		this._preventRefreshLoop = false;
-
-		return returnValue;
 	}
 });
 
