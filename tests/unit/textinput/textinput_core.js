@@ -97,7 +97,9 @@
 	});
 
 	test( "data-clear-btn adds clear button to text inputs", function() {
-		ok( $( '#text-input-clear-btn' ).next().is( 'a.ui-input-clear' ), "data-clear-btn adds clear button to text inputs" );
+		ok( $( '#text-input-clear-btn' ).next()
+			.is( 'a.ui-input-clear[tabindex="-1"][aria-hidden="true"]' ),
+			"correctly marked up clear button is present" );
 	});
 
 	test( "data-clear-btn does not add clear button to textarea", function() {
