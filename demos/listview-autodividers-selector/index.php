@@ -44,7 +44,7 @@
 
         <h1>Custom autodivider selector</h1>
 
-        <p>By default the the autodividers plugin will use the first character of a list item as selector. The option <code>autodividersSelector</code> allows you to return a different string. In this example we show you how to set an autodividers selector of "0-9" for list items that contain numbers so you can group them.</p>
+        <p>By default the autodividers plugin will use the first character of a list item as selector. The option <code>autodividersSelector</code> allows you to return a different string. In this example we show you how to set an autodividers selector of "0-9" for list items that contain numbers so you can group them.</p>
 
         <div data-demo-html="true" data-demo-js="true">
             <ul data-role="listview" data-autodividers="true" data-inset="true">
