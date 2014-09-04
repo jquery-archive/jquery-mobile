@@ -482,7 +482,7 @@
 
 		control.unbind( "change", changeFunc );
 
-		ok( changeCount === actualChanges, "change events match actual changes in value" );
+		deepEqual( actualChanges, changeCount, "change events match actual changes in value" );
 	});
 
 	// NOTE this test isn't run because the event data isn't easily accessible
