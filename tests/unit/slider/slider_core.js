@@ -95,17 +95,6 @@
 		testDisabled( "After setting option 'disabled' to true a second time: ", true );
 	});
 
-	test( "refresh is triggered on mouseup", function() {
-		expect( 1 );
-		var slider = $( "#mouseup-refresh" );
-
-		slider.val( parseInt(slider.val(), 10) +  10 );
-		slider.change(function() {
-			ok( true, "slider changed" );
-		});
-		slider.trigger( "mouseup" );
-	});
-
 	test( "slider tooltip & button values should match after input value changes", function() {
 		var slider = $("#tooltip-test-both");
 		var sliderHandle = slider.siblings(".ui-slider-track").children(".ui-slider-handle");
