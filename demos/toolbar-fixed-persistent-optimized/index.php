@@ -1,7 +1,13 @@
 <?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest') { ?>
 <!DOCTYPE html>
 <html>
-	<head>
+<head id="document-head">
+
+	<!-- The various documents reachable from within your navigation system must all have the
+	     necessary header information to be able to launch your application. Nevertheless, the
+		 server only needs to send this header information with the first request by the user. On
+		 Ajax requests by the application, this information can be discarded server-side in order
+		 to save bandwidth and to improve the time it takes to display a page. -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ajax optimized persistent toolbars - jQuery Mobile Demos</title>
@@ -12,13 +18,17 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
+
+	<!-- This script contains the code that is shared between all the documents of your
+	     application. It is responsible for enhancing the shared widgets during your application's
+		 startup. -->
 	<script id="shared-widget-init" src="shared-widget-init.js"></script>
 </head>
 <body>
     <div id="shared-header" data-role="header" data-position="fixed" data-theme="a">
-		<!-- Shared header markup must be added to all pages of the demo to ensure any of them can
-		     serve as the start page. The server can be instructed to omit sending this portion of
-			 the data whenever the request for the document is made via Ajax. -->
+		<!-- Shared header markup must be added to all documents of the demo to ensure any of them
+		     can serve as the start page. The server can be instructed to omit sending this portion
+			 of the data whenever the request for the document is made via Ajax. -->
 		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 		<a href="#nav-menu" data-rel="popup" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-right ui-icon-navigation">Navigation</a>
 		<div data-role="popup" id="nav-menu" data-theme="a">
@@ -50,7 +60,7 @@ if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQ
 
 		<h2>Shared scripts and widgets</h2>
 		<p>Any one of the pages in this demo must be able to serve as the start page for your application. Thus, when accessed via plain HTTP, the server will return the full page, including references to jQuery and jQuery Mobile, as well as custom scripts which ensure that widgets shared by all the pages in the application are initialized at startup, no matter which page the user chooses as their start page. Thus, you must copy references to jQuery, jQuery Mobile, and your custom startup script(s) to the <code>&lt;head&gt;</code> section of each of your documents, and all shared widgets to the corresponding <code>&lt;body&gt;</code> section.</p>
-		<div data-demo-html="#shared-header,#shared-navbar" data-demo-js="#shared-widget-init"></div>
+		<div data-demo-html="#document-head,#shared-header,#shared-navbar" data-demo-js="#shared-widget-init"></div>
 
 		</div><!-- /content -->
 
