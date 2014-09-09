@@ -20,7 +20,7 @@
 		<a href="#nav-menu" data-rel="popup" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-right ui-icon-navigation">Navigation</a>
 		<div data-role="popup" id="nav-menu" data-theme="a">
 			<ul id="nav-menu-links">
-				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
+				<li><a href="info.php" data-prefetch="true" data-transition="none">Info</a></li>
 				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
 				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
 				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
@@ -90,7 +90,7 @@
 					<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
 				</a></li>
 
-				<li><a href="index.php">
+				<li><a href="info.php">
 					<img src="../_assets/img/album-k.jpg">
 					<h3>Hot Fuss</h3>
 				<p>Killers</p>
@@ -119,7 +119,7 @@
 	<div data-role="footer" data-position="fixed" data-theme="a">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
+				<li><a href="info.php" data-prefetch="true" data-transition="none">Info</a></li>
 				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
 				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
 				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>

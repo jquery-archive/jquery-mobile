@@ -20,7 +20,7 @@
 		<a href="#nav-menu" data-rel="popup" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-right ui-icon-navigation">Navigation</a>
 		<div data-role="popup" id="nav-menu" data-theme="a">
 			<ul id="nav-menu-links">
-				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
+				<li><a href="info.php" data-prefetch="true" data-transition="none">Info</a></li>
 				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
 				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
 				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
@@ -75,13 +75,13 @@
 					<p class="ui-li-aside"><strong>5:52</strong>AM</p>
 				</a></li>
 				<li data-role="list-divider">Tuesday, October 5, 2010 <span class="ui-li-count">3</span></li>
-				<li><a href="index.php">
+				<li><a href="info.php">
 					<h3>Angela Smith</h3>
 				<p><strong>Link Request</strong></p>
 				<p>My name is Angela Smith, SEO Consultant. I've greatly enjoyed looking through your site and I was wondering if you'd be interested in providing a link</p>
 					<p class="ui-li-aside"><strong>6:24</strong>AM</p>
 				</a></li>
-				<li><a href="index.php">
+				<li><a href="info.php">
 					<h3>Mike Taylor</h3>
 				<p><strong>This weekend in Maine</strong></p>
 				<p>Sounds good, let me check into our plans.</p>
@@ -97,7 +97,7 @@
 	<div data-role="footer" data-position="fixed" data-theme="a">
 		<div data-role="navbar">
 			<ul>
-				<li><a href="index.php" data-prefetch="true" data-transition="none">Info</a></li>
+				<li><a href="info.php" data-prefetch="true" data-transition="none">Info</a></li>
 				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
 				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>
 				<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
