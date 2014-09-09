@@ -15,11 +15,23 @@
 	<script src="shared-widget-init.js"></script>
 </head>
 <body>
+	<!-- The following panel is shared across all pages of the application, and must therefore be
+	     copied to all the documents containing the application's pages. It will only be loaded
+		 once with the first page. On subsequent page loads the existing widget will be reused. -->
+	<div id="shared-panel" data-role="panel" data-theme="a">
+		<form>
+			<label for="login-field">Login:</label>
+			<input id="login-field" name="login">
+			<label for="password-field">Password:</label>
+			<input type="password" id="password-field" name="password">
+		</form>
+	</div>
     <div data-role="header" data-position="fixed" data-theme="a">
 		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 		<a href="#nav-menu" data-rel="popup" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-right ui-icon-navigation">Navigation</a>
 		<div data-role="popup" id="nav-menu" data-theme="a">
 			<ul id="nav-menu-links">
+				<li data-icon="lock"><a href="#shared-panel">Login</a></li>
 				<li><a href="info.php" data-prefetch="true" data-transition="none">Info</a></li>
 				<li><a href="page-b.php" data-prefetch="true" data-transition="flip">Friends</a></li>
 				<li><a href="page-c.php" data-prefetch="true" data-transition="turn">Albums</a></li>

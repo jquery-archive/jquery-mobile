@@ -15,6 +15,7 @@ $( function() {
 	$( "[data-role='header'], [data-role='footer']" ).toolbar();
 	$( "#nav-menu" ).popup();
 	$( "#nav-menu-links" ).listview();
+	$( "#shared-panel" ).enhanceWithin().panel();
 
 	/* Since the navbar we use is outside the page, it does not update itself to indicate the currently
 	   active page. We manually update the navbar whenever the page changes. */
