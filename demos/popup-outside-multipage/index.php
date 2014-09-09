@@ -51,7 +51,7 @@ $(function(){
 		</div>
 
 		<h2>Pages loaded via Ajax</h2>
-		<p>When your application consists of multiple HTML documents containing single jQuery Mobile pages linked together via <a href="../navigation/">Ajax navigation</a>, you can still use a single popup across multiple pages, however, since any of your documents may serve as the start page, you must include the code that initializes the popup as well as the markup for the popup itself in all documents. The <a href="../navigation-ajax-external-widgets/">external widgets</a> demo explains further and provides an example of such a structure.</p>
+		<p>When your application consists of multiple HTML documents containing single jQuery Mobile pages linked together via <a href="../navigation/">Ajax navigation</a>, you can still use a single popup across multiple pages, however, since any of your documents may serve as the start page, you must include the code that initializes the popup as well as the markup for the popup itself in all documents. The <a href="../external-widgets/">external widgets</a> demo explains further and provides an example of such a structure.</p>
 
 	</div><!-- /content -->
 
