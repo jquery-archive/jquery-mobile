@@ -61,11 +61,16 @@
 	<!-- This is the actual page. It will always be sent to the client. -->
 	<div data-role="page" class="jqm-demos">
 
+		<div data-role="panel" id="local-panel" data-position="right">
+			<p>This is an example of a panel that is not shared across pages.</p>
+		</div>
+
 	    <div class="ui-content jqm-content jqm-fullwidth" role="main">
 
 			<h1>External Widgets Demo</h1>
 			<p>This demo illustrates the use of widgets outside the page in an application consisting of multiple documents linked to each other via Ajax.</p>
-			<p>As you navigate from page to page using the navbar below or the popup opening via the button at the top right, the various pages of the demo are retrieved and displayed via Ajax, but the navigational elements which are outside the page, such as the header, the footer, and the popup remain in the DOM.</p>
+			<p>As you navigate from page to page using the navbar below or the popup opening via the button at the top right, the various pages of the demo are retrieved and displayed via Ajax, but the navigational elements which are outside the page, such as the header, the footer, the login panel, and the popup remain in the DOM.</p>
+			<p>There is a <a href="#local-panel">second panel</a> on this page which is not shared across pages.</p>
 
 		</div><!-- /content -->
 
