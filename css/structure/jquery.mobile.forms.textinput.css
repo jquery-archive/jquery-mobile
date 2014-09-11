@@ -67,12 +67,11 @@ textarea.ui-mini {
 .ui-input-search input {
 	padding-left: 1.75em;
 }
-.ui-input-search:after {
+.ui-input-search .ui-icon {
 	position: absolute;
 	left: .3125em;
 	top: 50%;
 	margin-top: -7px;
-	content: "";
 	background-position: center center;
 	background-repeat: no-repeat;
 	width: 14px;

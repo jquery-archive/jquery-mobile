@@ -140,11 +140,11 @@ label.ui-button {
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-button-icon-left:after,
-.ui-button-icon-right:after,
-.ui-button-icon-top:after,
-.ui-button-icon-bottom:after,
-.ui-button-icon-notext:after {
+.ui-button-icon-left .ui-icon,
+.ui-button-icon-right .ui-icon,
+.ui-button-icon-top .ui-icon,
+.ui-button-icon-bottom .ui-icon,
+.ui-button-icon-notext .ui-icon {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.3) /*{global-icon-disc}*/;
 	background-position: center center;
@@ -154,55 +154,55 @@ label.ui-button {
 }
 
 /* Alt icons */
-.ui-alt-icon.ui-button:after,
-.ui-alt-icon .ui-button:after,
-html .ui-alt-icon.ui-checkbox-off:after,
-html .ui-alt-icon.ui-radio-off:after,
-html .ui-alt-icon .ui-checkbox-off:after,
-html .ui-alt-icon .ui-radio-off:after {
+.ui-alt-icon.ui-button .ui-icon,
+.ui-alt-icon .ui-button .ui-icon,
+html .ui-alt-icon.ui-checkbox-off .ui-icon,
+html .ui-alt-icon.ui-radio-off .ui-icon,
+html .ui-alt-icon .ui-checkbox-off .ui-icon,
+html .ui-alt-icon .ui-radio-off .ui-icon {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.15) /*{global-icon-disc}*/;
 }
 
 /* No disc */
-.ui-nodisc-icon.ui-button:after,
-.ui-nodisc-icon .ui-button:after {
+.ui-nodisc-icon.ui-button .ui-icon,
+.ui-nodisc-icon .ui-button .ui-icon {
 	background-color: transparent;
 }
 
 /* Icon shadow */
-.ui-shadow-icon.ui-button:after,
-.ui-shadow-icon .ui-button:after {
+.ui-shadow-icon.ui-button .ui-icon,
+.ui-shadow-icon .ui-button .ui-icon {
 	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	-moz-box-shadow: 0 1px 0 				rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	box-shadow: 0 1px 0 					rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 }
 
 /* Checkbox and radio */
-.ui-button.ui-checkbox-off:after,
-.ui-button.ui-checkbox-on:after,
-.ui-button.ui-radio-off:after,
-.ui-button.ui-radio-on:after {
+.ui-button.ui-checkbox-off .ui-icon,
+.ui-button.ui-checkbox-on .ui-icon,
+.ui-button.ui-radio-off .ui-icon,
+.ui-button.ui-radio-on .ui-icon {
 	display: block;
 	width: 18px;
 	height: 18px;
 	margin: -9px 2px 0 2px;
 }
-.ui-checkbox-off:after,
-.ui-button.ui-radio-off:after {
+.ui-checkbox-off .ui-icon,
+.ui-button.ui-radio-off .ui-icon {
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 }
-.ui-button.ui-checkbox-off:after,
-.ui-button.ui-checkbox-on:after {
+.ui-button.ui-checkbox-off .ui-icon,
+.ui-button.ui-checkbox-on .ui-icon {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
 }
-.ui-button.ui-checkbox-off:after {
+.ui-button.ui-checkbox-off .ui-icon {
 	background-color: #666;
 	background-color: rgba(0,0,0,.3);
 }
-.ui-radio .ui-button.ui-radio-on:after {
+.ui-radio .ui-button.ui-radio-on .ui-icon {
 	background-image: none;
 	background-color: #fff;
 	width: 8px;
@@ -210,8 +210,8 @@ html .ui-alt-icon .ui-radio-off:after {
 	border-width: 5px;
 	border-style: solid; 
 }
-.ui-alt-icon.ui-button.ui-radio-on:after,
-.ui-alt-icon .ui-button.ui-radio-on:after {
+.ui-alt-icon.ui-button.ui-radio-on .ui-icon,
+.ui-alt-icon .ui-button.ui-radio-on .ui-icon {
 	background-color: #000;
 }
 
@@ -344,11 +344,11 @@ html .ui-body-a .ui-button.ui-button-active,
 html body .ui-group-theme-a .ui-button.ui-button-active,
 html head + body .ui-button.ui-button-a.ui-button-active,
 /* Active checkbox icon */
-.ui-page-theme-a .ui-checkbox-on:after,
-html .ui-bar-a .ui-checkbox-on:after,
-html .ui-body-a .ui-checkbox-on:after,
-html body .ui-group-theme-a .ui-checkbox-on:after,
-.ui-button.ui-checkbox-on.ui-button-a:after,
+.ui-page-theme-a .ui-checkbox-on .ui-icon,
+html .ui-bar-a .ui-checkbox-on .ui-icon,
+html .ui-body-a .ui-checkbox-on .ui-icon,
+html body .ui-group-theme-a .ui-checkbox-on .ui-icon,
+.ui-button.ui-checkbox-on.ui-button-a .ui-icon,
 /* Active flipswitch background */
 .ui-page-theme-a .ui-flipswitch-active,
 html .ui-bar-a .ui-flipswitch-active,
@@ -367,11 +367,11 @@ html body div.ui-slider-track.ui-body-a .ui-button-active {
 	text-shadow: 0 /*{a-active-shadow-x}*/ 1px /*{a-active-shadow-y}*/ 0 /*{a-active-shadow-radius}*/ #005599 /*{a-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-page-theme-a .ui-radio-on:after,
-html .ui-bar-a .ui-radio-on:after,
-html .ui-body-a .ui-radio-on:after,
-html body .ui-group-theme-a .ui-radio-on:after,
-.ui-button.ui-radio-on.ui-button-a:after {
+.ui-page-theme-a .ui-radio-on .ui-icon,
+html .ui-bar-a .ui-radio-on .ui-icon,
+html .ui-body-a .ui-radio-on .ui-icon,
+html body .ui-group-theme-a .ui-radio-on .ui-icon,
+.ui-button.ui-radio-on.ui-button-a .ui-icon {
 	border-color:			#3388cc /*{a-active-background-color}*/;
 }
 
@@ -514,11 +514,11 @@ html .ui-body-b .ui-button.ui-button-active,
 html body .ui-group-theme-b .ui-button.ui-button-active,
 html head + body .ui-button.ui-button-b.ui-button-active,
 /* Active checkbox icon */
-.ui-page-theme-b .ui-checkbox-on:after,
-html .ui-bar-b .ui-checkbox-on:after,
-html .ui-body-b .ui-checkbox-on:after,
-html body .ui-group-theme-b .ui-checkbox-on:after,
-.ui-button.ui-checkbox-on.ui-button-b:after,
+.ui-page-theme-b .ui-checkbox-on .ui-icon,
+html .ui-bar-b .ui-checkbox-on .ui-icon,
+html .ui-body-b .ui-checkbox-on .ui-icon,
+html body .ui-group-theme-b .ui-checkbox-on .ui-icon,
+.ui-button.ui-checkbox-on.ui-button-b .ui-icon,
 /* Active flipswitch background */
 .ui-page-theme-b .ui-flipswitch-active,
 html .ui-bar-b .ui-flipswitch-active,
@@ -537,11 +537,11 @@ html body div.ui-slider-track.ui-body-b .ui-button-active {
 	text-shadow: 0 /*{b-active-shadow-x}*/ 1px /*{b-active-shadow-y}*/ 0 /*{b-active-shadow-radius}*/ #0088bb /*{b-active-shadow-color}*/;
 }
 /* Active radio button icon */
-.ui-page-theme-b .ui-radio-on:after,
-html .ui-bar-b .ui-radio-on:after,
-html .ui-body-b .ui-radio-on:after,
-html body .ui-group-theme-b .ui-radio-on:after,
-.ui-button.ui-radio-on.ui-button-b:after {
+.ui-page-theme-b .ui-radio-on .ui-icon,
+html .ui-bar-b .ui-radio-on .ui-icon,
+html .ui-body-b .ui-radio-on .ui-icon,
+html body .ui-group-theme-b .ui-radio-on .ui-icon,
+.ui-button.ui-radio-on.ui-button-b .ui-icon {
 	border-color:			#22aadd /*{b-active-background-color}*/;
 }
 
@@ -590,8 +590,8 @@ button[disabled],
 .ui-noboxshadow .ui-shadow,
 .ui-noboxshadow .ui-shadow-inset,
 .ui-noboxshadow .ui-overlay-shadow,
-.ui-noboxshadow .ui-shadow-icon.ui-button:after,
-.ui-noboxshadow .ui-shadow-icon .ui-button:after,
+.ui-noboxshadow .ui-shadow-icon.ui-button .ui-icon,
+.ui-noboxshadow .ui-shadow-icon .ui-button .ui-icon,
 .ui-noboxshadow .ui-focus,
 .ui-noboxshadow .ui-button:focus,
 .ui-noboxshadow  input:focus,

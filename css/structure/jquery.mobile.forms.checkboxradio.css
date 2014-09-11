@@ -20,9 +20,8 @@
 .ui-radio .ui-button-icon-bottom {
 	text-align: center;
 }
-.ui-controlgroup-horizontal .ui-checkbox .ui-button:after,
-.ui-controlgroup-horizontal .ui-radio .ui-button:after {
-	content: none;
+.ui-controlgroup-horizontal .ui-checkbox .ui-button .ui-icon,
+.ui-controlgroup-horizontal .ui-radio .ui-button .ui-icon {
 	display: none;
 }
 /* Native input positioning */
