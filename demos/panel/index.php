@@ -80,7 +80,7 @@
 
 		<h2>Panels outside pages</h2>
 
-		<p>If you want to use the same panel on multiple pages you can place the markup outside the page. See <a href="../panel-external/" data-ajax="false">external panels</a>.</p>
+		<p>If you want to use the same panel on multiple pages you can place the markup outside the page. See <a href="../external-widgets/" data-ajax="false">external widgets</a>.</p>
 
 		<h2>Dynamic content</h2>
 
