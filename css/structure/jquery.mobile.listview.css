@@ -64,7 +64,7 @@
 }
 .ui-listview > li.ui-first-child,
 .ui-listview > li.ui-first-child > a.ui-btn {
-	-webkit-border-top-right-radius: inherit;	
+	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
@@ -83,7 +83,7 @@
 	border-bottom-right-radius: 0;
 }
 .ui-listview > li.ui-first-child > a.ui-btn + a.ui-btn {
-	-webkit-border-top-left-radius: 0;	
+	-webkit-border-top-left-radius: 0;
 	border-top-left-radius: 0;
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
@@ -96,15 +96,15 @@
 }
 .ui-listview > li.ui-first-child img:first-child:not(.ui-li-icon) {
 	-webkit-border-top-left-radius: inherit;
-	border-top-left-radius: inherit;	
+	border-top-left-radius: inherit;
 }
 .ui-listview > li.ui-last-child img:first-child:not(.ui-li-icon) {
 	-webkit-border-bottom-left-radius: inherit;
-	border-bottom-left-radius: inherit;	
+	border-bottom-left-radius: inherit;
 }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) {
 	-webkit-border-radius: inherit;
-	border-radius: inherit;	
+	border-radius: inherit;
 }
 .ui-listview > .ui-li-static {
 	padding: .7em 1em;

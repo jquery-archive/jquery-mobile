@@ -66,7 +66,7 @@ define([
 
                     // Programatically changes to the current categories page
                     $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
-    
+
                 } );
 
             }

@@ -207,7 +207,7 @@
 		ok( !collapsibles.eq(1).is( ".ui-last-child,.ui-first-child" ), "Middle collapsible should NOT have class ui-first-child or ui-last-child");
 		ok( !collapsibles.eq(2).is( ".ui-first-child" ), "Last collapsible should NOT have class ui-first-child");
 	});
-	
+
 	module( "Icons", {});
 
 	test( "expandedIcon behavior when collapsedIcon set to false", function() {

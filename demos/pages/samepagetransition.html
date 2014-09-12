@@ -17,7 +17,7 @@
 </head>
 <body>
 <div data-role="page" id="page1" data-theme="a">
-  
+
   <div data-role="header">
     <h1>same page transitions</h1>
     <div data-role="navbar" id="navh1">
@@ -68,13 +68,13 @@ $('#page1').on('pagecreate', function() {
 
 $('#page1').bind('pagehide', function(e) {
   $('a.ui-btn').removeClass('ui-btn-active');
-  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-btn-active') ) { 
+  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-btn-active') ) {
     $(this).addClass('ui-page-active');
   }
-});    
+});
 
 </script>
 
 </div><!-- /page 1 -->
-</body>    
+</body>
 </html>

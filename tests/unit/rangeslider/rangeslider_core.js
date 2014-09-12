@@ -18,20 +18,20 @@
 		rangeFirst.val( parseInt(rangeFirst.val(), 10) + 20 ).slider( "refresh" );
 
 		cssMarginLeft = bg.css( "margin-left" );
-		
+
 		// Check if browser returns a pixel or percentage value
 		if ( cssMarginLeft.indexOf( "%" ) > -1 ) {
 			bgMarginLeft = ( rangeFirst.val() / range * 100 ) + "%";
-			
+
 			deepEqual( cssMarginLeft, bgMarginLeft, "Highlight has correct left margin" );
 		} else {
 			var intMarginLeft = parseFloat( cssMarginLeft.replace("px", "") );
-			
+
 			bgMarginLeft = Math.round( rangeFirst.val() / range * width );
 			// Take a rounding difference of max 2px into account
 			ok( -2 >= ( intMarginLeft - bgMarginLeft ) <= 2, "Highlight has correct left margin" );
 		}
-		
+
 		cssWidth = bg.css( "width" );
 		intWidth = parseFloat( cssWidth.replace("px", "") );
 		bgWidth = Math.round( (rangeLast.val() - rangeFirst.val()) / range * width );
@@ -47,14 +47,14 @@
 
 		// Try to set first input val (30) higher than last input val (70)
 		rangeFirst.val( parseInt(rangeFirst.val(), 10) +  60 ).slider( "refresh" );
-		
+
 		equal( rangeFirst.val(), rangeLast.val(), "First input value is equal to last input value" );
-		
+
 		// Set first input value back to 30
 		rangeFirst.val( 30 ).slider( "refresh" );
 		// Try to set last input val (70) lower than first input val (30)
 		rangeLast.val( parseInt(rangeLast.val(), 10) -  60 ).slider( "refresh" );
-		
+
 		equal( rangeLast.val(), rangeFirst.val(), "Last input value is equal to first input value" );
 	});
 
@@ -74,8 +74,8 @@
 			track = rangeslider.find( ".ui-slider-track" ).first(),
 			trackOffset = track.offset(),
 			trackWidth = track.width();
-		
-		// Fake a click at the beginning of the track	
+
+		// Fake a click at the beginning of the track
 		track.trigger( createEvent( "mousedown", track[0], trackOffset.left + 15, trackOffset.top + 7 ) ).trigger( "mouseup" );
 		// Check if first input value (45) has decreased
 		ok(
@@ -84,7 +84,7 @@
 			}),
 			"Clicking at the beginning of the track updates the first input"
 		);
-		// Fake a click at the end of the track	
+		// Fake a click at the end of the track
 		track.trigger( createEvent( "mousedown", track[0], ( trackOffset.left + trackWidth ) - 15, trackOffset.top + 7 ) ).trigger( "mouseup" );
 		// Check if last input value (55) has increased
 		ok(

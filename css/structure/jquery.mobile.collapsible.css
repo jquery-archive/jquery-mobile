@@ -40,7 +40,7 @@
 }
 .ui-collapsible-content {
 	display: block;
-	margin: 0;	
+	margin: 0;
 	padding: .5em 1em;
 }
 .ui-collapsible-themed-content .ui-collapsible-content {
@@ -66,27 +66,27 @@
 }
 .ui-collapsible-heading,
 .ui-collapsible-heading > .ui-btn {
-	-webkit-border-radius: inherit;	
-	border-radius: inherit;	
+	-webkit-border-radius: inherit;
+	border-radius: inherit;
 }
 .ui-collapsible-set .ui-collapsible.ui-first-child {
-	-webkit-border-top-right-radius: inherit;	
+	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
-	-webkit-border-top-left-radius: inherit;	
-	border-top-left-radius: inherit;		
+	-webkit-border-top-left-radius: inherit;
+	border-top-left-radius: inherit;
 }
 .ui-collapsible-content,
 .ui-collapsible-set .ui-collapsible.ui-last-child {
-	-webkit-border-bottom-right-radius: inherit;	
+	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
-	-webkit-border-bottom-left-radius: inherit;	
-	border-bottom-left-radius: inherit;		
+	-webkit-border-bottom-left-radius: inherit;
+	border-bottom-left-radius: inherit;
 }
 .ui-collapsible-themed-content:not(.ui-collapsible-collapsed) > .ui-collapsible-heading {
-	-webkit-border-bottom-right-radius: 0;	
+	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
-	-webkit-border-bottom-left-radius: 0;	
-	border-bottom-left-radius: 0;		
+	-webkit-border-bottom-left-radius: 0;
+	border-bottom-left-radius: 0;
 }
 .ui-collapsible-set .ui-collapsible {
 	margin: -1px -1em 0;

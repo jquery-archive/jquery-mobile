@@ -2,17 +2,17 @@
 .flow {
 	-webkit-transform-origin: 50% 30%;
 	-webkit-box-shadow: 0 0 20px rgba(0,0,0,.4);
-	-moz-transform-origin: 50% 30%;	
+	-moz-transform-origin: 50% 30%;
 	-moz-box-shadow: 0 0 20px rgba(0,0,0,.4);
-	transform-origin: 50% 30%;	
+	transform-origin: 50% 30%;
 	box-shadow: 0 0 20px rgba(0,0,0,.4);
 }
 .ui-dialog.flow {
 	-webkit-transform-origin: none;
 	-webkit-box-shadow: none;
-	-moz-transform-origin: none;	
+	-moz-transform-origin: none;
 	-moz-box-shadow: none;
-	transform-origin: none;	
+	transform-origin: none;
 	box-shadow: none;
 }
 .flow.out {
