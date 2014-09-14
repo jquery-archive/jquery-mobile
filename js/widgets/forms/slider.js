@@ -514,7 +514,7 @@ $.widget( "mobile.slider", $.extend( {
 
 			// update control"s value
 			if ( isInput ) {
-				valueChanged = control.val() !== newval;
+				valueChanged = parseFloat( control.val() ) !== newval;
 				control.val( newval );
 			} else {
 				valueChanged = control[ 0 ].selectedIndex !== newval;

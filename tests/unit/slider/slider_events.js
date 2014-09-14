@@ -459,6 +459,32 @@
 		], 500);
 	});
 
+	test( "mouse move only triggers the change event when the value changes", function() {
+		var control = $( "#slider-change-event" ),
+			widget = control.data( "mobile-slider" ),
+			slider = widget.slider,
+			handle = widget.handle,
+			changeCount = 0,
+			actualChanges = 0,
+			changeFunc = function( e ) {
+				++changeCount;
+				if ( control.val() !== currentValue ) {
+					++actualChanges;
+				}
+			},
+			offset = handle.offset(),
+			currentValue = control.val();
+
+		control.bind( "change", changeFunc );
+
+		slider.trigger( createEvent( "mousedown", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+		slider.trigger( createEvent( "mouseup", handle[ 0 ], offset.left + 10, offset.top + 10 ) );
+
+		control.unbind( "change", changeFunc );
+
+		strictEqual( actualChanges, changeCount, "change events match actual changes in value" );
+	});
+
 	// NOTE this test isn't run because the event data isn't easily accessible
 	// and with the advent of the widget _on method we are actually testing the
 	// widget from UI which has it's own test suite for these sorts of things
