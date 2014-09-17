@@ -170,7 +170,7 @@ $.widget( "mobile.panel", {
 				self._unfixPanel();
 				$.mobile.resetActivePageHeight( panelInnerHeight );
 			}
-			if ( scrollToTop ) {
+			if ( scrollToTop === true ) {
 				this.window[ 0 ].scrollTo( 0, $.mobile.defaultHomeScroll );
 			}
 		} else {
