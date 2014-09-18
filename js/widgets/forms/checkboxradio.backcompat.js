@@ -9,30 +9,27 @@ define([
 	"jquery",
 	"../../core",
 	"../../widget",
-	"jquery-ui/checkboxradio",
-	"../widget.theme"
+	"../../widget.theme",
+	"checkboxradio",
+	"checkboxradio.backcompat"
 	], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-$.widget( "ui.checkboxradio", $.ui.checkboxradio, {
-	initSelector: "input[type='checkbox'], input[type='radio'], [data-role='checkboxradio']",
+if ( $.mobileBackcompat !== false ) {
+	$.widget( "ui.checkboxradio", $.ui.checkboxradio, {
+		options: {
 
-	options: {
-		enhanced: false,
-		theme: "inherit"
-	},
+			// Unimplemented until its decided if this will move to ui widget
+			iconpos: "left",
+			mini: false,
+			wrapperClass: null
+		},
 
-	_enhanced: function() {
-		if ( !this.options.enahnced ) {
-			this._super();
-		} else if ( this.options.icon ) {
-			this.icon = this.element.find( "ui-button-icon" );
-		}
-	}
-});
-
-$.widget( "ui.checkboxradio", $.ui.checkboxradio, $.mobile.widget.theme );
+		classProp: "ui-checkboxradio-label"
+	});
+	$.widget( "ui.checkboxradio", $.ui.checkboxradio, $.mobile.widget.backcompat );
+}
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -958,7 +958,11 @@ module.exports = function( grunt ) {
 				files: {
 					"jquery-ui/core.js": "jquery-ui/ui/core.js",
 					"jquery-ui/widget.js": "jquery-ui/ui/widget.js",
+					"jquery-ui/accordion.js": "jquery-ui/ui/accordion.js",
 					"jquery-ui/tabs.js": "jquery-ui/ui/tabs.js",
+					"jquery-ui/button.js": "jquery-ui/ui/button.js",
+					"jquery-ui/checkboxradio.js": "jquery-ui/ui/checkboxradio.js",
+					"jquery-ui/controlgroup.js": "jquery-ui/ui/controlgroup.js",
 					"jquery-ui/LICENSE.txt": "jquery-ui/LICENSE.txt"
 				}
 			},
