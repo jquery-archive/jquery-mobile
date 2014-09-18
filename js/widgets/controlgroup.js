@@ -24,16 +24,22 @@ $.widget( "mobile.controlgroup", $.extend( {
 
 	_create: function() {
 		var elem = this.element,
-			opts = this.options;
+			opts = this.options,
+			keepNative = $.mobile.page.prototype.keepNativeSelector();
 
 		// Run buttonmarkup
 		if ( $.fn.buttonMarkup ) {
-			this.element.find( $.fn.buttonMarkup.initSelector ).buttonMarkup();
+			this.element
+				.find( $.fn.buttonMarkup.initSelector )
+				.not( keepNative )
+				.buttonMarkup();
 		}
 		// Enhance child widgets
 		$.each( this._childWidgets, $.proxy( function( number, widgetName ) {
 			if ( $.mobile[ widgetName ] ) {
-				this.element.find( $.mobile[ widgetName ].initSelector ).not( $.mobile.page.prototype.keepNativeSelector() )[ widgetName ]();
+				this.element
+					.find( $.mobile[ widgetName ].initSelector )
+					.not( keepNative )[ widgetName ]();
 			}
 		}, this ));
 
