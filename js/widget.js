@@ -6,7 +6,7 @@
 
 define( [ "jquery",
 	"./ns",
-	"jquery-ui/jquery.ui.widget",
+	"jquery-ui/widget",
 	"./data" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
