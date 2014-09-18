@@ -6,7 +6,7 @@
 
 define( [ "jquery",
 	"./ns",
-	"jquery-ui/jquery.ui.widget",
+	"jquery-ui/widget",
 	"./data" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -26,7 +26,6 @@ $.extend( $.Widget.prototype, {
 		if ( !$.mobile.getAttribute( elem, "defaults" ) ) {
 			for ( option in this.options ) {
 				value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
-
 				if ( value != null ) {
 					options[ option ] = value;
 				}

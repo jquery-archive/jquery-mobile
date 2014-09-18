@@ -5,7 +5,7 @@
 
 define([
 	"jquery",
-	"jquery-ui/jquery.ui.core",
+	"jquery-ui/core",
 	"./defaults",
 	"./helpers",
 	"./data",
