@@ -29,12 +29,17 @@ $.widget( "mobile.controlgroup", $.extend( {
 
 		// Run buttonmarkup
 		if ( $.fn.buttonMarkup ) {
-			this.element.find( $.fn.buttonMarkup.initSelector ).not( keepNative ).buttonMarkup();
+			this.element
+				.find( $.fn.buttonMarkup.initSelector )
+				.not( keepNative )
+				.buttonMarkup();
 		}
 		// Enhance child widgets
 		$.each( this._childWidgets, $.proxy( function( number, widgetName ) {
 			if ( $.mobile[ widgetName ] ) {
-				this.element.find( $.mobile[ widgetName ].initSelector ).not( keepNative )[ widgetName ]();
+				this.element
+					.find( $.mobile[ widgetName ].initSelector )
+					.not( keepNative )[ widgetName ]();
 			}
 		}, this ));
 
