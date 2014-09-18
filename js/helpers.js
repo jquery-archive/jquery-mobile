@@ -9,7 +9,7 @@ define( [
 	"jquery",
 	"./ns",
 	"./navigation/base",
-	"jquery-ui/jquery.ui.core" ], function( jQuery ) {
+	"jquery-ui/core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
