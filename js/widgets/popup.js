@@ -51,6 +51,12 @@ function getWindowCoordinates( theWindow ) {
 
 $.widget( "mobile.popup", {
 	options: {
+		classes: {
+			"ui-popup-screen": null,
+			"ui-popup-placeholder": null,
+			"ui-popup": null,
+			"ui-popup-container": null
+		},
 		wrapperClass: null,
 		theme: null,
 		overlayTheme: null,
@@ -72,14 +78,6 @@ $.widget( "mobile.popup", {
 		//
 		// NOTE this option is modified in _create!
 		history: !$.mobile.browser.oldIE
-	},
-
-	// When the user depresses the mouse/finger on an element inside the popup while the popup is
-	// open, we ignore resize events for a short while. This prevents #6961.
-	_handleDocumentVmousedown: function( theEvent ) {
-		if ( this._isOpen && $.contains( this._ui.container[ 0 ], theEvent.target ) ) {
-			this._ignoreResizeEvents();
-		}
 	},
 
 	_create: function() {
@@ -143,10 +141,14 @@ $.widget( "mobile.popup", {
 		var currentOptions = this.options,
 			wrapperClass = currentOptions.wrapperClass,
 			ui = {
-				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
-				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
-				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
+				screen: $( "<div class='ui-screen-hidden " +
+					this._classes( "ui-popup-screen" ) + " " +
+					this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) +
+					"'></div>" ),
+				placeholder: $( "<div class='" + this._classes( "ui-popup-placeholder" ) +
+					"' style='display: none;'><!-- placeholder --></div>" ),
+				container: $( "<div class='" + this._classes( "ui-popup-container" ) +
+					" ui-popup-hidden ui-popup-truncate" +
 					( wrapperClass ? ( " " + wrapperClass ) : "" ) + "'></div>" )
 			},
 			fragment = this.document[ 0 ].createDocumentFragment();
@@ -168,13 +170,21 @@ $.widget( "mobile.popup", {
 		ui.placeholder.insertAfter( theElement );
 		theElement
 			.detach()
-			.addClass( "ui-popup " +
+			.addClass( this._classes( "ui-popup" ) + " " +
 				this._themeClassFromOption( "ui-body-", currentOptions.theme ) + " " +
 				( currentOptions.shadow ? "ui-overlay-shadow " : "" ) +
 				( currentOptions.corners ? "ui-corner-all " : "" ) )
 			.appendTo( ui.container );
 
 		return ui;
+	},
+
+	// When the user depresses the mouse/finger on an element inside the popup while the popup is
+	// open, we ignore resize events for a short while. This prevents #6961.
+	_handleDocumentVmousedown: function( theEvent ) {
+		if ( this._isOpen && $.contains( this._ui.container[ 0 ], theEvent.target ) ) {
+			this._ignoreResizeEvents();
+		}
 	},
 
 	_eatEventAndClose: function( theEvent ) {
