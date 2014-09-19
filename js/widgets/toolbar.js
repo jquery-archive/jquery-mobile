@@ -23,13 +23,12 @@ define( [
 			backBtnTheme: null,
 			backBtnText: "Back",
 			classes: {
-				"ui-header": null,
-				"ui-footer": null,
-				"ui-title": null,
-				"ui-toolbar-back-btn": null,
-				"ui-btn-right": null,
-				"ui-btn-left": null
-
+				"ui-header": "",
+				"ui-footer": "",
+				"ui-title": "",
+				"ui-toolbar-back-btn": "",
+				"ui-btn-right": "",
+				"ui-btn-left": ""
 			}
 		},
 
@@ -117,7 +116,7 @@ define( [
 			this.leftbtn = this.leftbtn ||
 				headerAnchors.eq( 0 )
 					.not( ".ui-btn-right,.ui-toolbar-back-btn" )
-					.addClass( this._classes("ui-button-left") )
+					.addClass( this._classes("ui-btn-left") )
 					.length;
 
 			this.rightbtn = this.rightbtn || headerAnchors.eq( 1 ).addClass( this._classes( "ui-btn-right" ) ).length;

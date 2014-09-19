@@ -22,15 +22,15 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			updatePagePadding: true,
 			trackPersistentToolbars: true,
 			classes: {
-				"ui-header-fixed": null,
-				"ui-footer-fixed": null,
-				"ui-header-fullscreen": null,
-				"ui-footer-fullscreen": null,
-				"ui-page-header-fixed": null,
-				"ui-page-footer-fixed": null,
-				"ui-page-header-fullscreen": null,
-				"ui-page-footer-fullscreen": null,
-				"ui-fixed-hidden": null
+				"ui-header-fixed": "",
+				"ui-footer-fixed": "",
+				"ui-header-fullscreen": "",
+				"ui-footer-fullscreen": "",
+				"ui-page-header-fixed": "",
+				"ui-page-footer-fixed": "",
+				"ui-page-header-fullscreen": "",
+				"ui-page-footer-fullscreen": "",
+				"ui-fixed-hidden": "" 
 			},
 
 			// Browser detection! Weeee, here we go...
@@ -92,7 +92,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				// use appropriate slide for header or footer
 				if ( tclass === "slide" ) {
 					tclass = this.element
-								.hasClass( this._classes( "ui-header" ) ) ? "slidedown" : "slideup";
+								.hasClass( "ui-header" ) ? "slidedown" : "slideup";
 				}
 
 				this.element.addClass( tclass );
