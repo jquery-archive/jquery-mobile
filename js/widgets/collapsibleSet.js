@@ -16,6 +16,12 @@ define( [
 $.widget( "mobile.collapsibleset", $.extend( {
 
 	options: $.extend( {
+		classes: {
+
+			// Class ui-collapsible-set is deprecated in favor of ui-collapsibleset as of 1.5.0.
+			// Class ui-collapsible-set will be removed in 1.6.0.
+			"ui-collapsibleset": "ui-collapsible-set"
+		},
 		enhanced: false
 	}, $.mobile.collapsible.defaults ),
 
@@ -33,12 +39,8 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		var elem = this.element,
 			opts = this.options;
 
-		$.extend( this, {
-			_classes: ""
-		});
-
 		if ( !opts.enhanced ) {
-			elem.addClass( "ui-collapsible-set " +
+			elem.addClass( this._classes( "ui-collapsibleset" ) + " " +
 				this._themeClassFromOption( "ui-group-theme-", opts.theme ) + " " +
 				( opts.corners && opts.inset ? "ui-corner-all " : "" ) );
 			this.element.children().collapsible();
@@ -95,7 +97,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 
 		this._removeFirstLastClasses( el.children( ":mobile-collapsible" ) );
 		el
-			.removeClass( "ui-collapsible-set ui-corner-all " +
+			.removeClass( this._classes( "ui-collapsibleset" ) + " ui-corner-all " +
 				this._themeClassFromOption( "ui-group-theme-", this.options.theme ) )
 			.children( ":mobile-collapsible" )
 			.collapsible( "destroy" );
