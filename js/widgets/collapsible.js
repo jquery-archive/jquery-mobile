@@ -21,6 +21,13 @@ var rInitialLetter = /([A-Z])/g,
 
 $.widget( "mobile.collapsible", {
 	options: {
+		classes: {
+			"ui-collapsible": null,
+			"ui-collapsible-heading": null,
+			"ui-collapsible-heading-toggle": null,
+			"ui-collapsible-heading-status": null,
+			"ui-collapsible-content": null
+		},
 		enhanced: false,
 		expandCueText: null,
 		collapseCueText: null,
@@ -115,14 +122,14 @@ $.widget( "mobile.collapsible", {
 			opts = this._renderedOptions,
 			contentThemeClass = this._themeClassFromOption( "ui-body-", opts.contentTheme );
 
-		elem.addClass( "ui-collapsible " +
+		elem.addClass( this._classes( "ui-collapsible" ) + " " +
 			( opts.inset ? "ui-collapsible-inset " : "" ) +
 			( opts.inset && opts.corners ? "ui-corner-all " : "" ) +
 			( contentThemeClass ? "ui-collapsible-themed-content " : "" ) );
 		ui.originalHeading = elem.children( this.options.heading ).first(),
 		ui.content = elem
 			.wrapInner( "<div " +
-				"class='ui-collapsible-content " +
+				"class='" + this._classes( "ui-collapsible-content" ) + " " +
 				contentThemeClass + "'></div>" )
 			.children( ".ui-collapsible-content" ),
 		ui.heading = ui.originalHeading;
@@ -137,13 +144,15 @@ $.widget( "mobile.collapsible", {
 		iconclass = ( opts.collapsed ? ( opts.collapsedIcon ? "ui-icon-" + opts.collapsedIcon : "" ):
 			( opts.expandedIcon ? "ui-icon-" + opts.expandedIcon : "" ) );
 
-		ui.status = $( "<span class='ui-collapsible-heading-status'></span>" );
+		ui.status = $( "<span class='" +
+			this._classes( "ui-collapsible-heading-status" ) + "'></span>" );
 		ui.anchor = ui.heading
 			.detach()
 			//modify markup & attributes
-			.addClass( "ui-collapsible-heading" )
+			.addClass( this._classes( "ui-collapsible-heading" ) )
 			.append( ui.status )
-			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
+			.wrapInner( "<a href='#' class='" + this._classes( "ui-collapsible-heading-toggle" ) +
+				"'></a>" )
 			.find( "a" )
 				.first()
 				.addClass( "ui-btn " +
@@ -325,7 +334,8 @@ $.widget( "mobile.collapsible", {
 		} else {
 			ui.status.remove();
 			ui.heading
-				.removeClass( "ui-collapsible-heading ui-collapsible-heading-collapsed" )
+				.removeClass( this._classes( "ui-collapsible-heading" ) +
+					" ui-collapsible-heading-collapsed" )
 				.children()
 					.contents()
 						.unwrap();
@@ -334,7 +344,7 @@ $.widget( "mobile.collapsible", {
 		ui.anchor.contents().unwrap();
 		ui.content.contents().unwrap();
 		this.element
-			.removeClass( "ui-collapsible ui-collapsible-collapsed " +
+			.removeClass( this._classes( "ui-collapsible" ) + " ui-collapsible-collapsed " +
 				"ui-collapsible-themed-content ui-collapsible-inset ui-corner-all" );
 	}
 });
