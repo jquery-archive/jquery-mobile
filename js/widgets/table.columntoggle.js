@@ -9,7 +9,7 @@ define( [
 	"./table",
 	"./popup",
 	"./controlgroup",
-	"./forms/checkboxradio" ], function( jQuery ) {
+	"../jquery-ui/checkboxradio" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
