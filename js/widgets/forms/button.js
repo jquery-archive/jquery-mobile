@@ -17,7 +17,6 @@ define( [
 		"ui-button-icon-only": "ui-button-icon-only",
 		"ui-button-icon": null
 	};
-	console.log( $.ui.button );
 	return $.ui.button;
 
 })( jQuery );
