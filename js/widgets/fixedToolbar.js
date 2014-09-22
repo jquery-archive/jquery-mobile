@@ -21,6 +21,17 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
 			trackPersistentToolbars: true,
+			classes: {
+				"ui-header-fixed": "",
+				"ui-footer-fixed": "",
+				"ui-header-fullscreen": "",
+				"ui-footer-fullscreen": "",
+				"ui-page-header-fixed": "",
+				"ui-page-footer-fixed": "",
+				"ui-page-header-fullscreen": "",
+				"ui-page-footer-fullscreen": "",
+				"ui-fixed-hidden": "" 
+			},
 
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -42,7 +53,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_makeFixed: function() {
-			this.element.addClass( "ui-"+ this.role +"-fixed" );
+			this.element.addClass( this._classes( "ui-"+ this.role +"-fixed" ) );
 			this.updatePagePadding();
 			this._addTransitionClass();
 			this._bindPageEvents();
@@ -58,13 +69,16 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
-						this.element.addClass( "ui-"+ this.role +"-fullscreen" );
-						$page.addClass( "ui-page-" + this.role + "-fullscreen" );
+						this.element.addClass( this._classes( "ui-"+ this.role +"-fullscreen" ) );
+						$page.addClass( this._classes( "ui-page-" + this.role + "-fullscreen" ) );
 					}
 					// If not fullscreen, add class to page to set top or bottom padding
 					else {
-						this.element.removeClass( "ui-"+ this.role +"-fullscreen" );
-						$page.removeClass( "ui-page-" + this.role + "-fullscreen" ).addClass( "ui-page-" + this.role+ "-fixed" );
+						this.element
+							.removeClass( this._classes( "ui-"+ this.role +"-fullscreen" ) );
+						$page
+							.removeClass( this._classes( "ui-page-" + this.role + "-fullscreen" ) )
+							.addClass( this._classes( "ui-page-" + this.role+ "-fixed" ) );
 					}
 				}
 			}
@@ -77,7 +91,8 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			if ( tclass && tclass !== "none" ) {
 				// use appropriate slide for header or footer
 				if ( tclass === "slide" ) {
-					tclass = this.element.hasClass( "ui-header" ) ? "slidedown" : "slideup";
+					tclass = this.element
+								.hasClass( "ui-header" ) ? "slidedown" : "slideup";
 				}
 
 				this.element.addClass( tclass );
@@ -185,7 +200,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		show: function( notransition ) {
-			var hideClass = "ui-fixed-hidden",
+			var hideClass = this._classes( "ui-fixed-hidden" ),
 				$el = this.element;
 
 			if ( this._useTransition( notransition ) ) {
@@ -203,7 +218,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		hide: function( notransition ) {
-			var hideClass = "ui-fixed-hidden",
+			var hideClass = this._classes( "ui-fixed-hidden" ),
 				$el = this.element,
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
@@ -289,15 +304,16 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				hasFullscreen = $(  "body>.ui-" + this.role + "-fixed" )
 							.add( page.find( ".ui-" + this.options.role + "-fullscreen" ) )
 							.not( this.element ).length > 0;
-				toolbarClasses =  "ui-header-fixed ui-footer-fixed ui-header-fullscreen in out" +
-					" ui-footer-fullscreen fade slidedown slideup ui-fixed-hidden";
+				toolbarClasses =  this._classes( "ui-header-fixed ui-footer-fixed ") + " " +
+					this._classes( "ui-header-fullscreen  ui-footer-fullscreen" ) + " in out" +
+					" fade slidedown slideup " + this._classes( "ui-fixed-hidden" );
 				this.element.removeClass( toolbarClasses );
 				if ( !hasFullscreen ) {
-					pageClasses = "ui-page-" + this.role + "-fullscreen";
+					pageClasses = this._classes( "ui-page-" + this.role + "-fullscreen" );
 				}
 				if ( !hasFixed ) {
 					header = this.role === "header";
-					pageClasses += " ui-page-" + this.role + "-fixed";
+					pageClasses += this._classes( " ui-page-" + this.role + "-fixed" );
 					page.css( "padding-" + ( header ? "top" : "bottom" ), "" );
 				}
 				page.removeClass( pageClasses );

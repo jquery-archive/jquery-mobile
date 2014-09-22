@@ -21,7 +21,15 @@ define( [
 			theme: null,
 			addBackBtn: false,
 			backBtnTheme: null,
-			backBtnText: "Back"
+			backBtnText: "Back",
+			classes: {
+				"ui-header": "",
+				"ui-footer": "",
+				"ui-title": "",
+				"ui-toolbar-back-btn": "",
+				"ui-btn-right": "",
+				"ui-btn-left": ""
+			}
 		},
 
 		_create: function() {
@@ -40,7 +48,7 @@ define( [
 				leftbtn: leftbtn,
 				rightbtn: rightbtn
 			});
-			this.element.attr( "role", role === "header" ? "banner" : "contentinfo" ).addClass( "ui-" + role );
+			this.element.attr( "role", role === "header" ? "banner" : "contentinfo" ).addClass( this._classes("ui-" + role) );
 			this.refresh();
 			this._setOptions( this.options );
 		},
@@ -51,7 +59,7 @@ define( [
 			if ( o.backBtnTheme != null ) {
 				this.element
 					.find( ".ui-toolbar-back-btn" )
-					.addClass( "ui-btn ui-btn-" + o.backBtnTheme );
+					.addClass( this._classes("ui-button") + "ui-btn-" + o.backBtnTheme );
 			}
 			if ( o.backBtnText !== undefined ) {
 				this.element.find( ".ui-toolbar-back-btn .ui-btn-text" ).text( o.backBtnText );
@@ -108,10 +116,10 @@ define( [
 			this.leftbtn = this.leftbtn ||
 				headerAnchors.eq( 0 )
 					.not( ".ui-btn-right,.ui-toolbar-back-btn" )
-					.addClass( "ui-btn-left" )
+					.addClass( this._classes("ui-btn-left") )
 					.length;
 
-			this.rightbtn = this.rightbtn || headerAnchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+			this.rightbtn = this.rightbtn || headerAnchors.eq( 1 ).addClass( this._classes( "ui-btn-right" ) ).length;
 		},
 		_updateBackButton: function() {
 			var backButton,
@@ -147,9 +155,12 @@ define( [
 				if ( !backButton.attached ) {
 					this.backButton = backButton.element = ( backButton.element ||
 						$( "<a role='button' href='javascript:void(0);' " +
-							"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
-								( theme ? "ui-btn-" + theme + " " : "" ) +
-								"ui-toolbar-back-btn ui-icon-carat-l ui-btn-icon-left' " +
+							"class='" +
+								this._classes( "ui-button" ) + " " +
+								this._classes( "ui-button-left" ) +
+								( theme ? " ui-btn-" + theme + " " : " " ) +
+								this._classes( "ui-toolbar-back-btn" ) +
+								" ui-icon-carat-l ui-btn-icon-left' " +
 							"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText +
 							"</a>" ) )
 							.prependTo( this.element );
@@ -164,7 +175,7 @@ define( [
 		},
 		_addHeadingClasses: function() {
 			this.element.children( "h1, h2, h3, h4, h5, h6" )
-				.addClass( "ui-title" )
+				.addClass( this._classes( "ui-title" ) )
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
 				.attr({
 					"role": "heading",
@@ -175,7 +186,7 @@ define( [
 			var currentTheme;
 
 			this.element.children( "h1, h2, h3, h4, h5, h6" )
-				.removeClass( "ui-title" )
+				.removeClass( this._classes( "ui-title" ) )
 				.removeAttr( "role" )
 				.removeAttr( "aria-level" );
 
@@ -190,7 +201,7 @@ define( [
 			currentTheme = this.options.theme ? this.options.theme : "inherit";
 			this.element.removeClass( "ui-bar-" + currentTheme );
 
-			this.element.removeClass( "ui-" + this.role ).removeAttr( "role" );
+			this.element.removeClass( this._classes( "ui-" + this.role ) ).removeAttr( "role" );
 		}
 	});
 
