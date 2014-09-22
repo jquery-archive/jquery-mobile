@@ -14,6 +14,10 @@ var getAttr = $.mobile.getAttribute;
 $.widget( "mobile.listview", $.extend( {
 
 	options: {
+		classes: {
+			"ui-listview": null,
+			"ui-listview-item": null
+		},
 		theme: null,
 		dividerTheme: null,
 		icon: "carat-r",
@@ -36,7 +40,7 @@ $.widget( "mobile.listview", $.extend( {
 		}
 
 		// create listview markup
-		t.element.addClass( " ui-listview" + listviewClasses );
+		t.element.addClass( t._classes( "ui-listview" ) + listviewClasses );
 
 		t.refresh( true );
 	},
@@ -62,6 +66,7 @@ $.widget( "mobile.listview", $.extend( {
 		var buttonClass, pos, numli, item, itemClass, itemTheme, itemIcon, icon, a,
 			isDivider, startCount, newStartCount, value, last, splittheme, splitThemeClass, spliticon,
 			altButtonClass, dividerTheme, li,
+			baseItemClass = this._classes( "ui-listview-item" ),
 			o = this.options,
 			$list = this.element,
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
@@ -160,7 +165,9 @@ $.widget( "mobile.listview", $.extend( {
 		// can give us a significant boost on platforms like WP7.5.
 
 		for ( itemClass in itemClassDict ) {
-			$( itemClassDict[ itemClass ] ).addClass( itemClass );
+			$( itemClassDict[ itemClass ] ).addClass( itemClass +
+				( itemClass ? " " : "" ) +
+				baseItemClass );
 		}
 
 		countBubbles.each( function() {

@@ -22,13 +22,16 @@
 	});
 
 	asyncTest( "The page should be enhanced correctly", function(){
-		expect( 3 );
+		expect( 4 );
 		$.testHelper.pageSequence([
 			function(){
 				$.mobile.changePage("#basic-linked-test");
 			},
 
 			function() {
+				deepEqual( $( "#basic-linked-test ul" ).children().is( function() {
+						return !$( this ).hasClass( "ui-listview-item" );
+					}), false, "All children have the class ui-listview-item" );
 				ok($('#basic-linked-test .ui-li-static').length, ".ui-li-static class added to read-only li elements");
 				ok($('#basic-linked-test .ui-li-divider').length, ".ui-li-divider class added to divider li elements");
 				ok($('#basic-linked-test li > .ui-btn').length, ".ui-btn classes added to anchors that are immediate child of li elements");
