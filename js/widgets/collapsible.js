@@ -23,6 +23,8 @@ $.widget( "mobile.collapsible", {
 	options: {
 		classes: {
 			"ui-collapsible": null,
+			"ui-collapsible-collapsed": null,
+			"ui-collapsible-heading-collapsed": null,
 			"ui-collapsible-heading": null,
 			"ui-collapsible-heading-toggle": null,
 			"ui-collapsible-heading-status": null,
@@ -294,7 +296,7 @@ $.widget( "mobile.collapsible", {
 
 		ui.status.text( isCollapse ? opts.expandCueText : opts.collapseCueText );
 		ui.heading
-			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
+			.toggleClass( this._classes( "ui-collapsible-heading-collapsed" ), isCollapse )
 			.find( "a" ).first()
 			.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
 
@@ -302,7 +304,7 @@ $.widget( "mobile.collapsible", {
 			.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
 			.removeClass( $.mobile.activeBtnClass );
 
-		this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
+		this.element.toggleClass( this._classes( "ui-collapsible-collapsed" ), isCollapse );
 		ui.content
 			.toggleClass( "ui-collapsible-content-collapsed", isCollapse )
 			.attr( "aria-hidden", isCollapse )
@@ -335,7 +337,7 @@ $.widget( "mobile.collapsible", {
 			ui.status.remove();
 			ui.heading
 				.removeClass( this._classes( "ui-collapsible-heading" ) +
-					" ui-collapsible-heading-collapsed" )
+					" " + this._classes( "ui-collapsible-heading-collapsed" ) )
 				.children()
 					.contents()
 						.unwrap();
@@ -344,7 +346,8 @@ $.widget( "mobile.collapsible", {
 		ui.anchor.contents().unwrap();
 		ui.content.contents().unwrap();
 		this.element
-			.removeClass( this._classes( "ui-collapsible" ) + " ui-collapsible-collapsed " +
+			.removeClass( this._classes( "ui-collapsible" ) + " " +
+				this._classes( "ui-collapsible-collapsed" ) + " " +
 				"ui-collapsible-themed-content ui-collapsible-inset ui-corner-all" );
 	}
 });

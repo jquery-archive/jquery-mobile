@@ -55,9 +55,23 @@
 	test( "The page should be enhanced correctly", function(){
 		ok($( "#collapsed-collapsible" ).hasClass( "ui-collapsible" ), ".ui-collapsible class added to collapsible elements" );
 		ok($( "#collapsed-collapsible >:header" ).hasClass( "ui-collapsible-heading" ), ".ui-collapsible-heading class added to collapsible heading" );
+		deepEqual(
+			$( "#collapsed-collapsible >:header > a" ).hasClass( "ui-collapsible-heading-toggle" ),
+			true, "Collapsible heading button has class 'ui-collapsible-heading-toggle'" );
+		deepEqual(
+			$( "#collapsed-collapsible >:header > a > span" ).hasClass( "ui-collapsible-heading-status" ),
+			true, "Collapsible heading button has span with class 'ui-collapsible-heading-status'" );
 		ok($( "#collapsed-collapsible > div" ).hasClass( "ui-collapsible-content" ), ".ui-collapsible-content class added to collapsible content" );
 		ok($( "#collapsed-collapsible" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed added to collapsed elements" );
 		ok(!$( "#expanded-collapsible" ).hasClass( "ui-collapsible-collapsed" ), ".ui-collapsible-collapsed not added to expanded elements" );
+		deepEqual(
+			$( "#collapsed-collapsible >:header" )
+				.hasClass( "ui-collapsible-heading-collapsed" ),
+			true, "collapsed heading has class 'ui-collapsible-heading-collapsed'" );
+		deepEqual(
+			$( "#expanded-collapsible >:header" )
+				.hasClass( "ui-collapsible-heading-collapsed" ),
+			false, "expanded heading does not have class 'ui-collapsible-heading-collapsed'" );
 	});
 
 	test( "Expand/Collapse", function(){
@@ -92,9 +106,9 @@
 	module( "Collapsible set", {});
 
 	test( "The page should be enhanced correctly", function(){
-		ok($( "#basic-collapsible-set" ).hasClass( "ui-collapsible-set" ), ".ui-collapsible-set class added to collapsible set" );
+		ok($( "#basic-collapsible-set" ).hasClass( "ui-collapsibleset" ), ".ui-collapsibleset class added to collapsible set" );
 		ok($( "#basic-collapsible-set > div" ).hasClass( "ui-collapsible" ), ".ui-collapsible class added to collapsible elements" );
-		$( ".ui-collapsible-set" ).each(function() {
+		$( ".ui-collapsibleset" ).each(function() {
 			var $this = $( this );
 
 			if ( $this.children().length > 0 ) {
