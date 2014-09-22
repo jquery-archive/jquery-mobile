@@ -127,8 +127,8 @@
 
 		<div data-demo-html="true">
 			<form>
-				<input disabled type="checkbox" name="checkbox-t-2a" id="checkbox-t-2a" data-theme="a">
-				<label for="checkbox-t-2a">One</label>
+				<input disabled type="checkbox" name="checkbox-t-3a" id="checkbox-t-3a" data-theme="a">
+				<label for="checkbox-t-3a">One</label>
 			</form>
 		</div><!--/demo-html -->
 
