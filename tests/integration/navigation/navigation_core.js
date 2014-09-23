@@ -1217,7 +1217,8 @@ $.testHelper.delayStart();
 			},
 
 			function() {
-				ok( $.mobile.activePage.is(".ui-dialog"), "prefetched page is rendered as a dialog" );
+				ok( $.mobile.activePage.is(".ui-page-dialog"),
+					"prefetched page is rendered as a dialog" );
         start();
 			}
 		]);

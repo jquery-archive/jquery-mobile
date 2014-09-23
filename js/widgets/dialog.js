@@ -60,12 +60,12 @@ $.widget( "mobile.dialog", {
 			opts = this.options;
 
 		// Class the markup for dialog styling and wrap interior
-		elem.addClass( "ui-dialog" )
+		elem.addClass( "ui-page-dialog" )
 			.wrapInner( $( "<div/>", {
 
 				// ARIA role
 				"role" : "dialog",
-				"class" : "ui-dialog-contain ui-overlay-shadow" +
+				"class" : "ui-page-dialog-contain ui-overlay-shadow" +
 					( !!opts.corners ? " ui-corner-all" : "" )
 			}));
 

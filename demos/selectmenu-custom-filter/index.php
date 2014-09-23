@@ -89,10 +89,10 @@ $.mobile.document
 			margin-left: .5em;
 			margin-right: .5em;
 		}
-		.ui-selectmenu.ui-dialog .ui-content {
+		.ui-selectmenu.ui-page-dialog .ui-content {
 			padding-top: 0;
 		}
-		.ui-selectmenu.ui-dialog .ui-selectmenu-list {
+		.ui-selectmenu.ui-page-dialog .ui-selectmenu-list {
 			margin-top: 0;
 		}
 		.ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
@@ -100,7 +100,7 @@ $.mobile.document
 			-webkit-border-radius: 0;
 			border-radius: 0;
 		}
-		.ui-selectmenu.ui-dialog .ui-header {
+		.ui-selectmenu.ui-page-dialog .ui-header {
 			border-bottom-width: 1px;
 		}
 	</style>

@@ -7,7 +7,7 @@
 	transform-origin: 50% 30%;	
 	box-shadow: 0 0 20px rgba(0,0,0,.4);
 }
-.ui-dialog.flow {
+.ui-page-dialog.flow {
 	-webkit-transform-origin: none;
 	-webkit-box-shadow: none;
 	-moz-transform-origin: none;	

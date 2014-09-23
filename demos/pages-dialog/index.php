@@ -12,7 +12,7 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
     <style>
-		.ui-dialog.dialog-actionsheet .ui-dialog-contain {
+		.ui-page-dialog.dialog-actionsheet .ui-page-dialog-contain {
 			margin-top: 0;
 		}
 	</style>
@@ -87,14 +87,14 @@
 		<p>Dialogs appear to be floating above an overlay layer. This overlay adopts the swatch "a" content color by default, but the <code>data-overlay-theme</code> attribute can be added to the page wrapper to set the overlay to any swatch letter. Here is an example of a dialog with the overlay set to swatch "e":</p>
 				<a href="dialog-overlay.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="pop">Custom overlay swatch</a>
 
-		<p>Dialogs can also be used more like a control sheet to offer multiple buttons if you simply remove the top margin from the dialog's inner container element. For example, if your dialog page had a class of <code>my-dialog</code>, you could add this CSS to pin that dialog to the top: <code>.ui-dialog.my-dialog .ui-dialog-contain { margin-top: 0 }</code>, or you could just apply that style to all dialogs with <code>.ui-dialog .ui-dialog-contain { margin-top: 0 }</code>.</p>
+		<p>Dialogs can also be used more like a control sheet to offer multiple buttons if you simply remove the top margin from the dialog's inner container element. For example, if your dialog page had a class of <code>my-dialog</code>, you could add this CSS to pin that dialog to the top: <code>.ui-page-dialog.my-dialog .ui-page-dialog-contain { margin-top: 0 }</code>, or you could just apply that style to all dialogs with <code>.ui-page-dialog .ui-page-dialog-contain { margin-top: 0 }</code>.</p>
 						<a href="dialog-buttons.html" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="slidedown">Share photos...</a>
 
 		<h2>Dialog width and margins</h2>
 		<p>For the sake of readability, dialogs have a default <code>width</code> of 92.5% and a <code>max-width</code> of 500 pixels. There is also a 10% top <code>margin</code> to give dialogs larger top margin on larger screens, but collapse to a small margin on smartphones. The dialog's inner container is shifted towards the <code>top</code> with 15px to hide the corner styling if a dialog is used as a control sheet (see above). To override these styles, add the following CSS override rule to your stylesheet and tweak as needed:</p>
 
 <pre><code>
-.ui-dialog-contain {
+.ui-page-dialog-contain {
 	<strong>width: 92.5%;</strong>
 	<strong>max-width: 500px;</strong>
 	<strong>margin: 10% auto 15px auto;</strong>
