@@ -11,6 +11,9 @@ define( [ "jquery", "../widget", "../grid" ], function( jQuery ) {
 
 $.widget( "mobile.navbar", {
 	options: {
+		classes: {
+			"ui-navbar": null
+		},
 		iconpos: "top",
 		grid: null
 	},
@@ -21,7 +24,7 @@ $.widget( "mobile.navbar", {
 			$navbtns = $navbar.find( "a, button" ),
 			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
 
-		$navbar.addClass( "ui-navbar" )
+		$navbar.addClass( this._classes( "ui-navbar" ) )
 			.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable()
