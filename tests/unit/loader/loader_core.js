@@ -116,6 +116,8 @@ $.testHelper.delayStart();
 			.loader( "show", { theme: "e", textonly: true } );
 
 		ok($(".ui-loader").hasClass("ui-loader-default"), "loader text is hidden");
+		deepEqual( $( ".ui-loader" ).hasClass( "ui-loader-textonly" ), true,
+			"loader has class ui-loader-textonly" );
 
 		$.mobile
 			.loading( "hide" )
@@ -134,5 +136,19 @@ $.testHelper.delayStart();
 
 		ok($(".ui-loader").hasClass( "ui-body-x" ), "has theme x");
 		deepEqual($(".ui-loader h1").text(), "fozzle", "has text fozzle in loading config object");
+	});
+
+	test( "Loader sets itself as fakefix when it's off-center", function() {
+		$.mobile.loading( "show" );
+
+		$( ".ui-loader" )
+			.css({ left: -10000, top: -10000 });
+
+		$.mobile.loading( "checkLoaderPosition" );
+
+		deepEqual( $( ".ui-loader" ).hasClass( "ui-loader-fakefix" ), true,
+			"loader has class ui-loader-fakefix" );
+
+		$( ".ui-loader" ).removeAttr( "style" );
 	});
 })(jQuery);
