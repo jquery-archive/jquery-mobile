@@ -4,6 +4,19 @@
 
 (function($){
 
+	module( "Native select" );
+
+	test( "Native select does not blur synchronously in response to change", function() {
+		var selectmenu = $( "#blur-test" );
+
+		selectmenu.focus();
+
+		selectmenu.trigger( "change" );
+
+		deepEqual( selectmenu.parent().hasClass( "ui-focus" ), true,
+			"Native select is focused after triggering 'change'" );
+	});
+
 	module( "Custom select" );
 
 	test( "Custom select is enhanced correctly", function() {
