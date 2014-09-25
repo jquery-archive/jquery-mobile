@@ -143,7 +143,9 @@ $.widget( "mobile.selectmenu", $.extend( {
 			self.refresh();
 
 			if ( !!options.nativeMenu ) {
-				this.blur();
+				self._delay( function() {
+					self.select.blur();
+				});
 			}
 		});
 
