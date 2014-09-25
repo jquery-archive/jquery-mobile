@@ -23,7 +23,14 @@ $.widget( "mobile.flipswitch", $.extend({
 		enhanced: false,
 		wrapperClass: null,
 		corners: true,
-		mini: false
+		mini: false,
+		classes: {
+			"ui-flipswitch": "",
+			"ui-flipswitch-on": "",
+			"ui-flipswitch-off": "",
+			"ui-flipswitch-active": "",
+			"ui-flipswitch-input": ""
+		}
 	},
 
 	_create: function() {
@@ -80,7 +87,7 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_left: function() {
-		this.flipswitch.removeClass( "ui-flipswitch-active" );
+		this.flipswitch.removeClass( this._classes( "ui-flipswitch-active" ) );
 		if ( this.type === "SELECT" ) {
 			this.element.get( 0 ).selectedIndex = 0;
 		} else {
@@ -90,7 +97,7 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_right: function() {
-		this.flipswitch.addClass( "ui-flipswitch-active" );
+		this.flipswitch.addClass( this._classes( "ui-flipswitch-active" ) );
 		if ( this.type === "SELECT" ) {
 			this.element.get( 0 ).selectedIndex = 1;
 		} else {
@@ -117,28 +124,28 @@ $.widget( "mobile.flipswitch", $.extend({
 				options.offText : element.find( "option" ).eq( 0 ).text();
 
 			on
-				.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" )
+				.addClass( this._classes( "ui-flipswitch-on" ) + " ui-btn ui-shadow ui-btn-inherit" )
 				.text( onText );
 			off
-				.addClass( "ui-flipswitch-off" )
+				.addClass( this._classes( "ui-flipswitch-off" ) )
 				.text( offText );
 
 			flipswitch
-				.addClass( "ui-flipswitch ui-shadow-inset " +
+				.addClass( this._classes( "ui-flipswitch" ) + " ui-shadow-inset " +
 					"ui-bar-" + theme + " " +
 					( options.wrapperClass ? options.wrapperClass : "" ) + " " +
 					( ( element.is( ":checked" ) ||
 						element
 							.find( "option" )
 							.eq( 1 )
-							.is( ":selected" ) ) ? "ui-flipswitch-active" : "" ) +
+							.is( ":selected" ) ) ? this._classes( "ui-flipswitch-active" ) : "" ) +
 					( element.is(":disabled") ? " ui-state-disabled": "") +
 					( options.corners ? " ui-corner-all": "" ) +
 					( options.mini ? " ui-mini": "" ) )
 				.append( on, off );
 
 			element
-				.addClass( "ui-flipswitch-input" )
+				.addClass( this._classes( "ui-flipswitch-input" ) )
 				.after( flipswitch )
 				.appendTo( flipswitch );
 
@@ -227,7 +234,7 @@ $.widget( "mobile.flipswitch", $.extend({
 		this.off.remove();
 		this.element.unwrap();
 		this.flipswitch.remove();
-		this.removeClass( "ui-flipswitch-input" );
+		this.removeClass( this._classes( "ui-flipswitch-input" ) );
 	}
 
 }, $.mobile.behaviors.formReset ) );
