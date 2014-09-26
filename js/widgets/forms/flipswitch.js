@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Consistent styling for native select menus. Tapping opens a native select menu.
+//>>description: Used for boolean style inputs for on/off or true/false functionality
 //>>label: Flip Switch
 //>>group: Forms
 //>>css.structure: ../css/structure/jquery.mobile.forms.flipswitch.css
@@ -21,22 +21,18 @@ $.widget( "mobile.flipswitch", $.extend({
 		offText: "Off",
 		theme: null,
 		enhanced: false,
-
-		// Deprecated in 1.5
-		wrapperClass: null,
-
-		// Deprecated in 1.5
-		corners: true,
-
-		// Deprecated in 1.5
-		mini: false,
 		classes: {
 			"ui-flipswitch": "ui-corner-all ui-shadow-inset ",
 			"ui-flipswitch-on": "ui-shadow",
 			"ui-flipswitch-off": "",
 			"ui-flipswitch-active": "",
 			"ui-flipswitch-input": ""
-		}
+		},
+
+		// Deprecated in 1.5
+		wrapperClass: null,
+		corners: true,
+		mini: false
 	},
 
 	_create: function() {
