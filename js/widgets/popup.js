@@ -52,9 +52,9 @@ function getWindowCoordinates( theWindow ) {
 $.widget( "mobile.popup", {
 	options: {
 		classes: {
-			"ui-popup-screen": null,
+			"ui-popup-screen": "ui-overlay-inherit",
 			"ui-popup-placeholder": null,
-			"ui-popup": null,
+			"ui-popup": "ui-overlay-shadow ui-body-inherit ui-corner-all",
 			"ui-popup-container": null,
 			"ui-popup-hidden": null,
 			"ui-popup-truncate": null
@@ -144,14 +144,12 @@ $.widget( "mobile.popup", {
 			wrapperClass = currentOptions.wrapperClass,
 			ui = {
 				screen: $( "<div class='ui-screen-hidden " +
-					this._classes( "ui-popup-screen" ) + " " +
-					this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) +
-					"'></div>" ),
+					this._classes( "ui-popup-screen" ) + "'></div>" ),
 				placeholder: $( "<div class='" + this._classes( "ui-popup-placeholder" ) +
 					"' style='display: none;'><!-- placeholder --></div>" ),
 				container: $( "<div class='" +
 					this._classes( "ui-popup-container ui-popup-hidden ui-popup-truncate" ) +
-					( wrapperClass ? ( " " + wrapperClass ) : "" ) + "'></div>" )
+					"'></div>" )
 			},
 			fragment = this.document[ 0 ].createDocumentFragment();
 
@@ -172,10 +170,7 @@ $.widget( "mobile.popup", {
 		ui.placeholder.insertAfter( theElement );
 		theElement
 			.detach()
-			.addClass( this._classes( "ui-popup" ) + " " +
-				this._themeClassFromOption( "ui-body-", currentOptions.theme ) + " " +
-				( currentOptions.shadow ? "ui-overlay-shadow " : "" ) +
-				( currentOptions.corners ? "ui-corner-all " : "" ) )
+			.addClass( this._classes( "ui-popup" ) )
 			.appendTo( ui.container );
 
 		return ui;
