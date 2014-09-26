@@ -55,7 +55,9 @@ $.widget( "mobile.popup", {
 			"ui-popup-screen": null,
 			"ui-popup-placeholder": null,
 			"ui-popup": null,
-			"ui-popup-container": null
+			"ui-popup-container": null,
+			"ui-popup-hidden": null,
+			"ui-popup-truncate": null
 		},
 		wrapperClass: null,
 		theme: null,
@@ -147,8 +149,8 @@ $.widget( "mobile.popup", {
 					"'></div>" ),
 				placeholder: $( "<div class='" + this._classes( "ui-popup-placeholder" ) +
 					"' style='display: none;'><!-- placeholder --></div>" ),
-				container: $( "<div class='" + this._classes( "ui-popup-container" ) +
-					" ui-popup-hidden ui-popup-truncate" +
+				container: $( "<div class='" +
+					this._classes( "ui-popup-container ui-popup-hidden ui-popup-truncate" ) +
 					( wrapperClass ? ( " " + wrapperClass ) : "" ) + "'></div>" )
 			},
 			fragment = this.document[ 0 ].createDocumentFragment();
@@ -249,7 +251,8 @@ $.widget( "mobile.popup", {
 			if ( !this._expectResizeEvent() ) {
 				if ( this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 					// effectively rapid-open the popup while leaving the screen intact
-					this._ui.container.removeClass( "ui-popup-hidden ui-popup-truncate" );
+					this._ui.container.removeClass(
+						this._classes( "ui-popup-hidden ui-popup-truncate" ) );
 					this.reposition( { positionTo: "window" } );
 					this._ignoreResizeEvents();
 				}
@@ -281,7 +284,7 @@ $.widget( "mobile.popup", {
 				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 				// effectively rapid-close the popup while leaving the screen intact
 				this._ui.container
-					.addClass( "ui-popup-hidden ui-popup-truncate" )
+					.addClass( this._classes( "ui-popup-hidden ui-popup-truncate" ) )
 					.removeAttr( "style" );
 			}
 		}
@@ -688,12 +691,12 @@ $.widget( "mobile.popup", {
 		this._applyTransition( openOptions.transition );
 
 		this._ui.screen.removeClass( "ui-screen-hidden" );
-		this._ui.container.removeClass( "ui-popup-truncate" );
+		this._ui.container.removeClass( this._classes( "ui-popup-truncate" ) );
 
 		// Give applications a chance to modify the contents of the container before it appears
 		this._reposition( openOptions );
 
-		this._ui.container.removeClass( "ui-popup-hidden" );
+		this._ui.container.removeClass( this._classes( "ui-popup-hidden" ) );
 
 		if ( this.options.overlayTheme && androidBlacklist ) {
 			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
@@ -726,7 +729,7 @@ $.widget( "mobile.popup", {
 	_closePrerequisiteContainer: function() {
 		this._ui.container
 			.removeClass( "reverse out" )
-			.addClass( "ui-popup-hidden ui-popup-truncate" )
+			.addClass( this._classes( "ui-popup-hidden ui-popup-truncate" ) )
 			.removeAttr( "style" );
 	},
 
