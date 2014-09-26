@@ -136,18 +136,29 @@ $.widget( "mobile.flipswitch", $.extend({
 				.addClass( this._classes( "ui-flipswitch-off" ) )
 				.text( offText );
 
+			// Proxy options deprecated in 1.5 to classes option
+			if ( options.wrapperClass ) {
+				options.classes[ "ui-flipswitch" ] += " " + options.wrapperClass + " ";
+			}
+
+			if ( options.mini ) {
+				options.classes[ "ui-flipswitch" ] += " ui-mini ";
+			}
+
+			if ( !options.corners ) {
+				options.classes[ "ui-flipswitch" ] =
+					options.classes[ "ui-flipswitch" ].replace( /ui-corner-all/, "" );
+			}
+
 			flipswitch
 				.addClass( this._classes( "ui-flipswitch" ) +
 					"ui-bar-" + theme + " " +
-					( options.wrapperClass ? options.wrapperClass : "" ) + " " +
 					( ( element.is( ":checked" ) ||
 						element
 							.find( "option" )
 							.eq( 1 )
 							.is( ":selected" ) ) ? this._classes( "ui-flipswitch-active" ) : "" ) +
-					( element.is(":disabled") ? " ui-state-disabled": "") +
-					( options.corners ? " ui-corner-all": "" ) +
-					( options.mini ? " ui-mini": "" ) )
+					( element.is(":disabled") ? " ui-state-disabled": "") )
 				.append( on, off );
 
 			element

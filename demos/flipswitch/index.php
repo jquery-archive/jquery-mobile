@@ -11,6 +11,20 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
+    <script id="mini-option">
+        $( function() {
+            $( "#flip-3, #flip-7" ).flipswitch({
+                classes: {"ui-flipswitch": "ui-corner-all ui-shadow-inset ui-mini " }
+            });
+        });
+    </script>
+    <script id="corners-option">
+        $( function() {
+            $( "#flip-8" ).flipswitch({
+                classes: {"ui-flipswitch": "ui-shadow-inset " }
+            });
+        });
+    </script>
 	<style id="custom-label-flipswitch">
 /* Custom indentations are needed because the length of custom labels differs from
    the length of the standard labels */
@@ -134,6 +148,29 @@
 				</form>
                 </div><!-- /demo-html -->
 
+                <h2>Mini</h2>
+
+                <p>With jQuery Mobile 1.5 the mini option is being deprecated. 
+                    To get the same behavior simply add the class <code>ui-mini</code> to the
+                    widget's classes option </a>
+                <div data-demo-html="true" data-demo-js="#mini-option">
+				<form>
+                    <label for="flip-3">Flip toggle switch:</label>
+                    <input type="checkbox" id="flip-3" name="flip-3">                    
+				</form>
+                </div><!-- /demo-html -->
+
+                <h2>No corners</h2>
+
+                <p>As of jQuery Mobile 1.5 the corners option is deprecated. You can reproduce
+                    this behavior by overriding the classes option for the widget.</p>
+                <div data-demo-html="true" data-demo-js="#corners-option">
+				<form>
+                    <label for="flip-8">Flip toggle switch:</label>
+                    <input type="checkbox" name="flip-8" id="flip-8" >
+				</form>
+                </div><!-- /demo-html -->
+
                 <h2>Disabled</h2>
 
                 <div data-demo-html="true">
@@ -171,7 +208,20 @@
 					</div>
 				</form>
                 </div><!-- /demo-html -->
-                
+
+                <h2>Fieldcontain, mini</h2>
+                <p> To get the <code>ui-mini</code> class applied to your flipswitch since the mini
+                    option has been deprecated, you can utilize the classes option when initializing your
+                    widget</p>
+                <div data-demo-html="true" data-demo-js="#mini-option">
+				<form>
+					<div class="ui-field-contain">
+                        <label for="flip-7">Flip toggle switch:</label>
+                        <input type="checkbox" id="flip-7" name="flip-7">
+					</div>
+				</form>
+                </div><!-- /demo-html -->
+
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>
