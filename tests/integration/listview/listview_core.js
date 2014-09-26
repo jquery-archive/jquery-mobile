@@ -92,8 +92,6 @@
 				ok( !items.eq( 4 ).hasClass( "ui-li-has-count"), "Fifth LI should NOT have ui-li-has-count class" );
 				ok( !items.eq( 4 ).find( "a" ).first().hasClass( "ui-icon-carat-r"), "Fifth LI A should NOT have ui-icon-carat-r class" );
 				ok( items.eq( 5 ).hasClass( "ui-li-has-alt"), "Sixth LI should have ui-li-has-alt class" );
-				ok( items.eq( 6 ).hasClass( "ui-li-has-icon"), "Seventh LI should have ui-li-has-icon class" );
-				ok( items.eq( 7 ).hasClass( "ui-li-has-thumb"), "Eight LI should have ui-li-has-thumb class" );
 				start();
 			}
 		]);
@@ -422,15 +420,6 @@
 				start();
 			}
 		]);
-	});
-
-	test( "Refresh applies thumb styling", function(){
-		var ul = $('.ui-page-active ul');
-
-		ul.append("<li id='fiz'><img/></li>");
-		ok(!ul.find("#fiz").hasClass("ui-li-has-thumb"));
-		ul.listview('refresh');
-		ok(ul.find("#fiz").hasClass("ui-li-has-thumb"));
 	});
 
 	module( "Programmatically generated list items", {
