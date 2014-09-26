@@ -134,30 +134,6 @@
 				</form>
                 </div><!-- /demo-html -->
 
-                <h2>Mini</h2>
-
-                <div data-demo-html="true">
-				<form>
-                    <label for="flip-3">Flip toggle switch:</label>
-                    <select name="flip-3" id="flip-3" data-role="flipswitch" data-mini="true">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select>
-				</form>
-                </div><!-- /demo-html -->
-
-                <h2>No corners</h2>
-
-                <div data-demo-html="true">
-				<form>
-                    <label for="flip-8">Flip toggle switch:</label>
-                    <select name="flip-8" id="flip-8" data-role="flipswitch" data-corners="false">
-                        <option value="off">Off</option>
-                        <option value="on">On</option>
-                    </select>
-				</form>
-                </div><!-- /demo-html -->
-
                 <h2>Disabled</h2>
 
                 <div data-demo-html="true">
@@ -195,21 +171,7 @@
 					</div>
 				</form>
                 </div><!-- /demo-html -->
-
-                <h2>Fieldcontain, mini</h2>
-
-                <div data-demo-html="true">
-				<form>
-					<div class="ui-field-contain">
-                        <label for="flip-7">Flip toggle switch:</label>
-                        <select name="flip-7" id="flip-7" data-role="flipswitch" data-mini="true">
-                            <option value="off">Off</option>
-                            <option value="on">On</option>
-                        </select>
-					</div>
-				</form>
-                </div><!-- /demo-html -->
-
+                
 	</div><!-- /content -->
 
 	<?php include( '../jqm-navmenu.php' ); ?>

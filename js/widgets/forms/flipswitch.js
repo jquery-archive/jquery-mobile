@@ -21,12 +21,18 @@ $.widget( "mobile.flipswitch", $.extend({
 		offText: "Off",
 		theme: null,
 		enhanced: false,
+
+		// Deprecated in 1.5
 		wrapperClass: null,
+
+		// Deprecated in 1.5
 		corners: true,
+
+		// Deprecated in 1.5
 		mini: false,
 		classes: {
-			"ui-flipswitch": "",
-			"ui-flipswitch-on": "",
+			"ui-flipswitch": "ui-corner-all ui-shadow-inset ",
+			"ui-flipswitch-on": "ui-shadow",
 			"ui-flipswitch-off": "",
 			"ui-flipswitch-active": "",
 			"ui-flipswitch-input": ""
@@ -124,14 +130,14 @@ $.widget( "mobile.flipswitch", $.extend({
 				options.offText : element.find( "option" ).eq( 0 ).text();
 
 			on
-				.addClass( this._classes( "ui-flipswitch-on" ) + " ui-btn ui-shadow ui-btn-inherit" )
+				.addClass( this._classes( "ui-flipswitch-on" ) + " ui-btn ui-btn-inherit" )
 				.text( onText );
 			off
 				.addClass( this._classes( "ui-flipswitch-off" ) )
 				.text( offText );
 
 			flipswitch
-				.addClass( this._classes( "ui-flipswitch" ) + " ui-shadow-inset " +
+				.addClass( this._classes( "ui-flipswitch" ) +
 					"ui-bar-" + theme + " " +
 					( options.wrapperClass ? options.wrapperClass : "" ) + " " +
 					( ( element.is( ":checked" ) ||
