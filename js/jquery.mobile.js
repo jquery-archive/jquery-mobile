@@ -53,6 +53,7 @@ define([
 	"./widgets/filterable",
 	"./widgets/filterable.backcompat",
 	"./jquery-ui/tabs",
+	"./widgets/tabs.ajax",
 	"./zoom",
 	"./zoom/iosorientationfix"
 ], function( require ) {
