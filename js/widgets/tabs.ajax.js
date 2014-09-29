@@ -7,6 +7,7 @@ define( [
 	"jquery",
 	"../defaults",
 	"../navigation/path",
+	"../navigation/base",
 	"jquery-ui/tabs" ], function( jQuery ) {
 
 //>>excludeEnd("jqmBuildExclude");
@@ -19,10 +20,12 @@ $.widget( "ui.tabs", $.ui.tabs, {
 
 		if ( $.mobile.ajaxEnabled ) {
 			path = $.mobile.path;
-			absUrl = path.makeUrlAbsolute( anchor.getAttribute( "href" ) );
+			baseUrl = path.parseUrl( $.mobile.base.element.attr( "href" ) );
+			absUrl = path.parseUrl( path.makeUrlAbsolute( anchor.getAttribute( "href" ),
+				baseUrl ) );
 
-			return ( path.isSameDomain( absUrl, path.documentBase.href ) &&
-				path.parseUrl( absUrl ).pathname === path.documentBase.pathname );
+			return ( path.isSameDomain( absUrl.href, baseUrl.href ) &&
+				absUrl.pathname === baseUrl.pathname );
 		}
 
 		return this._superApply( arguments );
