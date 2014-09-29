@@ -20,6 +20,17 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, .ui-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
+			classes: {
+				"ui-toolbar-header-fixed": "",
+				"ui-toolbar-footer-fixed": "",
+				"ui-toolbar-header-fullscreen": "",
+				"ui-toolbar-footer-fullscreen": "",
+				"ui-page-header-fixed": "",
+				"ui-page-footer-fixed": "",
+				"ui-page-header-fullscreen": "",
+				"ui-page-footer-fullscreen": "",
+				"ui-toolbar-fixed-hidden": ""
+			},
 
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -41,7 +52,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_makeFixed: function() {
-			this.element.addClass( "ui-"+ this.role +"-fixed" );
+			this.element.addClass( this._classes( "ui-toolbar-"+ this.role +"-fixed" ) );
 			this.updatePagePadding();
 			this._addTransitionClass();
 			this._bindPageEvents();
@@ -57,13 +68,16 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
-						this.element.addClass( "ui-"+ this.role +"-fullscreen" );
-						$page.addClass( "ui-page-" + this.role + "-fullscreen" );
+						this.element
+							.addClass( this._classes( "ui-toolbar-" + this.role + "-fullscreen" ) );
+						$page.addClass( this._classes( "ui-page-" + this.role + "-fullscreen" ) );
 					}
 					// If not fullscreen, add class to page to set top or bottom padding
 					else {
-						this.element.removeClass( "ui-"+ this.role +"-fullscreen" );
-						$page.removeClass( "ui-page-" + this.role + "-fullscreen" ).addClass( "ui-page-" + this.role+ "-fixed" );
+						this.element
+							.removeClass( this._classes( "ui-toolbar-" + this.role + "-fullscreen" ) );
+						$page.removeClass( this._classes( "ui-page-" + this.role + "-fullscreen" ) )
+							.addClass( this._classes( "ui-page-" + this.role + "-fixed" ) );
 					}
 				}
 			}
@@ -76,7 +90,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			if ( tclass && tclass !== "none" ) {
 				// use appropriate slide for header or footer
 				if ( tclass === "slide" ) {
-					tclass = this.element.hasClass( "ui-header" ) ? "slidedown" : "slideup";
+					tclass = this.element.hasClass( "ui-toolbar-header" ) ? "slidedown" : "slideup";
 				}
 
 				this.element.addClass( tclass );
@@ -166,7 +180,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		show: function( notransition ) {
-			var hideClass = "ui-fixed-hidden",
+			var hideClass = this._classes( "ui-toolbar-fixed-hidden" ),
 				$el = this.element;
 
 			if ( this._useTransition( notransition ) ) {
@@ -184,7 +198,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		hide: function( notransition ) {
-			var hideClass = "ui-fixed-hidden",
+			var hideClass = this._classes( "ui-toolbar-fixed-hidden" ),
 				$el = this.element,
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
@@ -227,7 +241,10 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 					//bottom of the screen addresses issues #4410 Footer navbar moves up when clicking on a textbox in an Android environment
 					//and issue #4113 Header and footer change their position after keyboard popup - iOS
 					//and issue #4410 Footer navbar moves up when clicking on a textbox in an Android environment
-					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ) {
+					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && 
+							!$( e.target )
+								.closest( ".ui-toolbar-header-fixed, .ui-toolbar-footer-fixed" )
+								.length ) {
 						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system
 						//controls causes fixed position, tap-toggle false Header to reveal itself
 						// isVisible instead of self._visible because the focusin and focusout events fire twice at the same time
@@ -265,13 +282,14 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			this._super();
 			if ( this.options.position === "fixed" ) {
 				hasFixed = $(  "body>.ui-" + this.role + "-fixed" )
-							.add( page.find( ".ui-" + this.options.role + "-fixed" ) )
+							.add( page.find( ".ui-toolbar-" + this.options.role + "-fixed" ) )
 							.not( this.element ).length > 0;
 				hasFullscreen = $(  "body>.ui-" + this.role + "-fixed" )
-							.add( page.find( ".ui-" + this.options.role + "-fullscreen" ) )
+							.add( page.find( ".ui-toolbar-" + this.options.role + "-fullscreen" ) )
 							.not( this.element ).length > 0;
-				toolbarClasses =  "ui-header-fixed ui-footer-fixed ui-header-fullscreen in out" +
-					" ui-footer-fullscreen fade slidedown slideup ui-fixed-hidden";
+				toolbarClasses =  "ui-toolbar-header-fixed ui-toolbar-footer-fixed fade in out" +
+					" ui-toolbar-footer-fullscreen ui-toolbar-header-fullscreen slidedown slideup" +
+					" ui-toolbar-fixed-hidden";
 				this.element.removeClass( toolbarClasses );
 				if ( !hasFullscreen ) {
 					pageClasses = "ui-page-" + this.role + "-fullscreen";
