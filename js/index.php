@@ -95,6 +95,7 @@ $files = array(
 	'widgets/table.columntoggle.js',
 	'widgets/table.reflow.js',
 	'../external/jquery-ui/tabs.js',
+	'widgets/tabs.ajax.js',
 	'zoom.js',
 	'zoom/iosorientationfix.js',
 	'init.js'
