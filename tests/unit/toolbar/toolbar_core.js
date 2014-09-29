@@ -8,8 +8,8 @@
         $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
         var toolbar = $( "#testHeaderClasses" );
 
-        ok( toolbar.hasClass( "ui-header" ), "toolbar gets ui-header after init" ); 
-        ok( toolbar.find( "h1" ).hasClass( "ui-title" ), "toolbar title assigned correctly");
+        ok( toolbar.hasClass( "ui-toolbar-header" ), "toolbar gets ui-toolbar-header after init" ); 
+        ok( toolbar.find( "h1" ).hasClass( "ui-toolbar-title" ), "toolbar title assigned correctly");
         ok( toolbar.attr( "role" ) === "banner", "header gets banner role assigned" );
         ok( toolbar.find( "h1" ).attr( "role" ) === "heading", "heading role properly assigned");
     });
@@ -19,8 +19,8 @@
         $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
         var toolbar = $( "#testFooterClasses" );
 
-        ok( toolbar.hasClass( "ui-footer" ), "toolbar gets ui-footer after init" ); 
-        ok( toolbar.find( "h1" ).hasClass( "ui-title" ), "toolbar title assigned correctly");
+        ok( toolbar.hasClass( "ui-toolbar-footer" ), "toolbar gets ui-toolbar-footer after init" ); 
+        ok( toolbar.find( "h1" ).hasClass( "ui-toolbar-title" ), "toolbar title assigned correctly");
         ok( toolbar.attr( "role" ) === "contentinfo", "footer gets contentinfo role assigned" );
         ok( toolbar.find( "h1" ).attr( "role" ) === "heading", "heading role properly assigned");
     });
@@ -37,8 +37,8 @@
             }
         });
 
-        ok( toolbar.hasClass( "ui-footer" ), "manual init gets footer class" );
-        ok( toolbar.find( "h1" ).hasClass( "ui-title" ), "ui-title assigned");
+        ok( toolbar.hasClass( "ui-toolbar-footer" ), "manual init gets footer class" );
+        ok( toolbar.find( "h1" ).hasClass( "ui-toolbar-title" ), "ui-toolbar-title assigned");
     });
 
     asyncTest( "external headers are created properly", function() {
@@ -52,8 +52,8 @@
             }
         });
 
-        ok( toolbar.hasClass( "ui-header" ), "external toolbar gets ui-header class" );
-        ok( toolbar.find( "h1" ).hasClass( "ui-title" ), "ui-title assigned properly" );
+        ok( toolbar.hasClass( "ui-toolbar-header" ), "external toolbar gets ui-toolbar-header class" );
+        ok( toolbar.find( "h1" ).hasClass( "ui-toolbar-title" ), "ui-toolbar-title assigned properly" );
     });
 
      asyncTest( "external footers are created properly", function() {
@@ -67,8 +67,8 @@
             }
         });
 
-        ok( toolbar.hasClass( "ui-footer" ), "external toolbar gets ui-footer class" );
-        ok( toolbar.find( "h1" ).hasClass( "ui-title" ), "ui-title assigned properly" );
+        ok( toolbar.hasClass( "ui-toolbar-footer" ), "external toolbar gets ui-toolbar-footer class" );
+        ok( toolbar.find( "h1" ).hasClass( "ui-toolbar-title" ), "ui-toolbar-title assigned properly" );
     });
 
     test( "destroy preserves original structure", function() {
