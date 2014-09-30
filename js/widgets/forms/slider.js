@@ -25,7 +25,8 @@ $.widget( "mobile.slider", $.extend( {
 		classes: {
 			"ui-slider": "",
 			"ui-slider-track": "ui-shadow-inset",
-			"ui-slider-input": ""
+			"ui-slider-input": "",
+			"ui-slider-handle": ""
 		},
 
 		// Deprecated in 1.5
@@ -41,7 +42,6 @@ $.widget( "mobile.slider", $.extend( {
 			control = this.element,
 			trackTheme = this.options.trackTheme || $.mobile.getAttribute( control[ 0 ], "theme" ),
 			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
-			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-mini" : "",
 			cType = control[ 0 ].nodeName.toLowerCase(),
 			isRangeslider = control.parent().is( ":jqmData(role='rangeslider')" ),
 			controlID = control.attr( "id" ),
@@ -59,19 +59,15 @@ $.widget( "mobile.slider", $.extend( {
 				bg.className = "ui-slider-bg " + $.mobile.activeBtnClass;
 				return $( bg ).prependTo( slider );
 			})() : false,
-			options,
-			wrapper,
-			j, length,
-			i, optionsCount, origTabIndex,
-			side, activeClass, sliderImg;
-
-			// Deprecated in 1.5
-			if ( this.options.corners || control.jqmData( "corners" ) )  {
-					this.options.classes[ "ui-slider-track" ] += " ui-corner-all";
-			}
-			if (this.options.mini || control.jqmData( "mini" ) ) {
-				this.options.classes[ "ui-slider-track" ] += " ui-mini";
-			}
+			wrapper;
+		
+		// Deprecated in 1.5
+		if ( this.options.corners || control.jqmData( "corners" ) )  {
+				this.options.classes[ "ui-slider-track" ] += " ui-corner-all";
+		}
+		if (this.options.mini || control.jqmData( "mini" ) ) {
+			this.options.classes[ "ui-slider-track" ] += " ui-mini";
+		}
 
 		$label.attr( "id", labelID );
 
@@ -275,7 +271,6 @@ $.widget( "mobile.slider", $.extend( {
 	_sliderVMouseUp: function() {
 		if ( this.dragging ) {
 			this.dragging = false;
-
 			this.mouseMoved = false;
 			this._trigger( "stop" );
 			return false;
@@ -327,7 +322,7 @@ $.widget( "mobile.slider", $.extend( {
 			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
 			left, width, data, tol,
 			pxStep, percent,
-			control, isInput, optionElements, min, max, step,
+			control, min, max, step,
 			newval, valModStep, alignValue, percentPerStep,
 			handlePercent, aPercent, bPercent,
 			valueChanged;
@@ -358,7 +353,6 @@ $.widget( "mobile.slider", $.extend( {
 		this.handle.addClass( "ui-btn" + themeClass + " ui-shadow" );
 
 		control = this.element;
-		optionElements = [];
 		min =  parseFloat( control.attr( "min" ) );
 		max =  parseFloat( control.attr( "max" ) );
 		step = ( parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
@@ -383,7 +377,7 @@ $.widget( "mobile.slider", $.extend( {
 			}
 		} else {
 			if ( val == null ) {
-				val = isInput ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
+				val = parseFloat( control.val() || 0 );
 			}
 			percent = ( parseFloat( val ) - min ) / ( max - min ) * 100;
 		}
@@ -410,7 +404,7 @@ $.widget( "mobile.slider", $.extend( {
 		if ( typeof pxStep === "undefined" ) {
 			pxStep = width / ( (max-min) / step );
 		}
-		if ( pxStep > 1 && isInput ) {
+		if ( pxStep > 1 ) {
 			percent = ( newval - min ) * percentPerStep * ( 1 / step );
 		}
 		if ( percent < 0 ) {
@@ -431,11 +425,11 @@ $.widget( "mobile.slider", $.extend( {
 
 		this.handle.css( "left", percent + "%" );
 
-		this.handle[0].setAttribute( "aria-valuenow", isInput ? newval : optionElements.eq( newval ).attr( "value" ) );
+		this.handle[0].setAttribute( "aria-valuenow", newval );
 
-		this.handle[0].setAttribute( "aria-valuetext", isInput ? newval : optionElements.eq( newval ).getEncodedText() );
+		this.handle[0].setAttribute( "aria-valuetext", newval );
 
-		this.handle[0].setAttribute( "title", isInput ? newval : optionElements.eq( newval ).getEncodedText() );
+		this.handle[0].setAttribute( "title", newval );
 
 		if ( this.valuebg ) {
 			this.valuebg.css( "width", percent + "%" );
@@ -457,13 +451,9 @@ $.widget( "mobile.slider", $.extend( {
 			valueChanged = false;
 
 			// update control"s value
-			if ( isInput ) {
-				valueChanged = parseFloat( control.val() ) !== newval;
-				control.val( newval );
-			} else {
-				valueChanged = control[ 0 ].selectedIndex !== newval;
-				control[ 0 ].selectedIndex = newval;
-			}
+			valueChanged = parseFloat( control.val() ) !== newval;
+			control.val( newval );
+			
 			if ( this._trigger( "beforechange", val ) === false) {
 					return false;
 			}
