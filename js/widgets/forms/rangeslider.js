@@ -19,6 +19,14 @@ define( [ "jquery",
 		options: {
 			theme: null,
 			trackTheme: null,
+			classes: {
+				"ui-rangeslider": "",
+				"ui-rangeslider-sliders": "",
+				"ui-rangeslider-first": "",
+				"ui-rangeslider-last": ""
+			},
+
+			// deprecated in 1.5
 			corners: true,
 			mini: false,
 			highlight: true
@@ -26,7 +34,6 @@ define( [ "jquery",
 
 		_create: function() {
 			var $el = this.element,
-			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
 			_inputFirst = $el.find( "input" ).first(),
 			_inputLast = $el.find( "input" ).last(),
 			_label = $el.find( "label" ).first(),
@@ -37,11 +44,18 @@ define( [ "jquery",
 			_sliderFirst = _sliderWidgetFirst.slider,
 			_sliderLast = _sliderWidgetLast.slider,
 			firstHandle = _sliderWidgetFirst.handle,
-			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
+			_sliders = $( "<div class='" + this._classes( "ui-rangeslider-sliders" ) + "' />" )
+				.appendTo( $el );
 
-			_inputFirst.addClass( "ui-rangeslider-first" );
-			_inputLast.addClass( "ui-rangeslider-last" );
-			$el.addClass( elClass );
+			_inputFirst.addClass( this._classes( "ui-rangeslider-first" ) );
+			_inputLast.addClass( this._classes( "ui-rangeslider-last" ) );
+
+			// Deprecated in 1.5
+			if (this.options.mini) {
+				this.options.classes[ "ui-rangeslider" ] += " ui-mini";
+			}
+
+			$el.addClass( this._classes( "ui-rangeslider") );
 
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
@@ -135,10 +149,6 @@ define( [ "jquery",
 
 			if ( options.trackTheme !== undefined ) {
 				this._setTrackTheme( options.trackTheme );
-			}
-
-			if ( options.mini !== undefined ) {
-				this._setMini( options.mini );
 			}
 
 			if ( options.highlight !== undefined ) {
@@ -244,12 +254,6 @@ define( [ "jquery",
 			this._inputLast.slider( "option", "trackTheme", value );
 		},
 
-		_setMini: function( value ) {
-			this._inputFirst.slider( "option", "mini", value );
-			this._inputLast.slider( "option", "mini", value );
-			this.element.toggleClass( "ui-mini", !!value );
-		},
-
 		_setHighlight: function( value ) {
 			this._inputFirst.slider( "option", "highlight", value );
 			this._inputLast.slider( "option", "highlight", value );
@@ -262,11 +266,15 @@ define( [ "jquery",
 
 		_destroy: function() {
 			this._label.prependTo( this.element );
-			this.element.removeClass( "ui-rangeslider ui-mini" );
+			this.element.removeClass( this._classes( "ui-rangeslider" ) );
 			this._inputFirst.after( this._sliderFirst );
 			this._inputLast.after( this._sliderLast );
 			this._sliders.remove();
-			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
+			this.element
+				.find( "input" )
+				.removeClass( this._classes( "ui-rangeslider-first" ) +
+					this._classes( "ui-rangeslider-last" ) )
+				.slider( "destroy" );
 		}
 
 	}, $.mobile.behaviors.formReset ) );
