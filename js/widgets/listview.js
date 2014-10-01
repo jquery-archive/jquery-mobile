@@ -5,15 +5,24 @@
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../widget", "./addFirstLastClasses" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../widget",
+	"./optionsToClasses",
+	"./addFirstLastClasses" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var getAttr = $.mobile.getAttribute;
+var getAttr = $.mobile.getAttribute,
+	styleOptions = {
+		corners: true,
+		shadow: true,
+		inset: false
+	};
 
 $.widget( "mobile.listview", $.extend( {
 
-	options: {
+	options: $.extend({
 		classes: {
 			"ui-listview": null,
 			"ui-listview-item": null
@@ -22,27 +31,39 @@ $.widget( "mobile.listview", $.extend( {
 		dividerTheme: null,
 		icon: "carat-r",
 		splitIcon: "carat-r",
-		splitTheme: null,
-		corners: true,
-		shadow: true,
-		inset: false
-	},
+		splitTheme: null
+	}, styleOptions ),
 
 	_create: function() {
-		var t = this,
-			listviewClasses = "";
 
-		listviewClasses += t.options.inset ? " ui-listview-inset" : "";
-
-		if ( !!t.options.inset ) {
-			listviewClasses += t.options.corners ? " ui-corner-all" : "";
-			listviewClasses += t.options.shadow ? " ui-shadow" : "";
-		}
+		// DEPRECATED as of 1.5.0. Will be removed in 1.6.0
+		// Update classes option to reflect style option values
+		this._updateClassesOption( styleOptions, this.options );
 
 		// create listview markup
-		t.element.addClass( t._classes( "ui-listview" ) + listviewClasses );
+		this.element.addClass( this._classes( "ui-listview" ) );
 
-		t.refresh( true );
+		this.refresh( true );
+	},
+
+	// DEPRECATED as of 1.5.0. Will be removed in 1.6.0
+	// Update classes option to reflect style option values
+	_optionsToClasses: function( oldOptions, newOptions ) {
+		var isInset = oldOptions.inset || newOptions.inset,
+			newClasses = {},
+			oldClasses = {};
+
+		if ( this._booleanOptionToClass( newOptions.corners, "ui-corner-all",
+			oldClasses, newClasses, newOptions.corners && isInset ) ||
+			this._booleanOptionToClass( newOptions.shadow, "ui-shadow",
+				oldClasses, newClasses, newOptions.shadow && isInset ) ||
+			this._booleanOptionToClass( newOptions.inset, "ui-listview-inset",
+				oldClasses, newClasses ) ) {
+
+			this.options.classes[ "ui-listview" ] =
+				this._calculateClassKeyValue( this.options.classes[ "ui-listview" ],
+					oldClasses, newClasses );
+		}
 	},
 
 	_getChildrenByTagName: function( ele, lcName, ucName ) {
@@ -178,7 +199,7 @@ $.widget( "mobile.listview", $.extend( {
 
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 	}
-}, $.mobile.behaviors.addFirstLastClasses ) );
+}, $.mobile.behaviors.addFirstLastClasses, $.mobile.behaviors._optionsToClasses ) );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
