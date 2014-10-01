@@ -18,8 +18,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-button-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -86,11 +86,11 @@
 					<p>Each swatch also includes default styles for interactive elements like list items and buttons. Each button has styles for normal, hover/focus and pressed states.</p>
 
 						<div class="swatch-preview">
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-a ui-btn-icon-left ui-icon-arrow-l">Button A</a>
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-b ui-btn-icon-left ui-icon-arrow-l">Button B</a>
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-c ui-btn-icon-left ui-icon-arrow-l">Button C</a>
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-d ui-btn-icon-left ui-icon-arrow-l">Button D</a>
-							<a href="index.html" class="ui-btn ui-corner-all ui-btn-e ui-btn-icon-left ui-icon-arrow-l">Button E</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-a ui-button-icon-left ui-icon-arrow-l">Button A</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-b ui-button-icon-left ui-icon-arrow-l">Button B</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-c ui-button-icon-left ui-icon-arrow-l">Button C</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-d ui-button-icon-left ui-icon-arrow-l">Button D</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-e ui-button-icon-left ui-icon-arrow-l">Button E</a>
 						</div><!-- end swatch-bars -->
 
 					<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box. This  behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container.</p>
@@ -98,7 +98,7 @@
 					<p>If you want to add visual emphasis to a button, an alternate swatch color can be set by adding a <code> data-theme="a"</code> to the anchor. Once an alternate swatch color is set on a button in the markup, the framework won't override that color if the parent theme is changed, because you made a conscious decision to set it.</p>
 
 						<h3>Global "Active" state</h3>
-					<p>The jQuery Mobile framework uses a swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the individual swatch of the given widget. We apply this in navigation and form controls whenever there is a need to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it cannot be overridden via the markup; it is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-btn-active</code> style rules.</p>
+					<p>The jQuery Mobile framework uses a swatch called "active" (bright blue in the default theme) to consistently indicate the selected state, regardless of the individual swatch of the given widget. We apply this in navigation and form controls whenever there is a need to indicate what is currently selected. Because this theme swatch is designed for clear, consistent user feedback, it cannot be overridden via the markup; it is set once in the theme and applied by the framework whenever a selected or active state is needed. The styling for this state is in the theme stylesheet under the <code>ui-button-active</code> style rules.</p>
 
 						<fieldset data-role="controlgroup" data-type="horizontal" class="ui-field-contain">
 					     	<legend>Active is used for the on state of these toggles:</legend>
@@ -118,10 +118,10 @@
 							<dd>Applies the toolbar theme styles for the selected swatch letter. Commonly used in conjunction with <code>ui-bar</code> structural class to add the standard bar padding styles.</dd>
 							<dt><code>ui-body-(a-z)</code></dt>
 							<dd>Applies the content body theme styles for the selected swatch letter. Commonly used in conjunction with <code>ui-body</code> structural class to add the standard content block padding styles. </dd>
-							<dt><code>ui-btn-up-(a-z)</code></dt>
-							<dd>Applies the button/clickable element theme styles for the selected swatch letter. Commonly used with the <code>ui-btn-hover-(a-z)</code> and <code>ui-btn-down-(a-z)</code> interaction class states to provide visual feedback and <code>ui-btn-active</code> to indicate the selected or "on" state.</dd>
+							<dt><code>ui-button-up-(a-z)</code></dt>
+							<dd>Applies the button/clickable element theme styles for the selected swatch letter. Commonly used with the <code>ui-button-hover-(a-z)</code> and <code>ui-button-down-(a-z)</code> interaction class states to provide visual feedback and <code>ui-button-active</code> to indicate the selected or "on" state.</dd>
 							<dt><code>ui-corner-all</code></dt>
-							<dd>Applies the theme's global border-radius for rounded corners and is used for container or grouped items in the framework (inset lists, radiobutton sets). There are additional classes for all the possible combinations of rounded corners, for example: <code>ui-corner-tl</code> (top left only), <code>-top</code> (both top corners), <code>-left</code> (both left corners),  etc. A second full set of corner classes is provided for buttons so these can have a different corner radius. These use classes with a similar naming convention, but with "btn-corner" instead of "corner", like this: <code>.ui-<strong>btn-corner</strong>-all</code>.</dd>
+							<dd>Applies the theme's global border-radius for rounded corners and is used for container or grouped items in the framework (inset lists, radiobutton sets). There are additional classes for all the possible combinations of rounded corners, for example: <code>ui-corner-tl</code> (top left only), <code>-top</code> (both top corners), <code>-left</code> (both left corners),  etc. A second full set of corner classes is provided for buttons so these can have a different corner radius. These use classes with a similar naming convention, but with "button-corner" instead of "corner", like this: <code>.ui-<strong>button-corner</strong>-all</code>.</dd>
 							<dt><code>ui-shadow</code></dt>
 							<dd>Applies the theme's global drop shadow to any element using CSS <code>box-shadow</code> property. </dd>
 							<dt><code>ui-disabled</code></dt>

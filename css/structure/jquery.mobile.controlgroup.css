@@ -10,18 +10,18 @@ fieldset.ui-controlgroup {
 .ui-mini .ui-controlgroup-label {
 	font-size: 16px;
 }
-.ui-controlgroup.ui-mini .ui-btn-icon-notext,
-.ui-controlgroup .ui-mini.ui-btn-icon-notext {
+.ui-controlgroup.ui-mini .ui-button-icon-notext,
+.ui-controlgroup .ui-mini.ui-button-icon-notext {
 	font-size: inherit;
 }
-.ui-controlgroup-controls .ui-btn,
+.ui-controlgroup-controls .ui-button,
 .ui-controlgroup-controls .ui-checkbox,
 .ui-controlgroup-controls .ui-radio,
 .ui-controlgroup-controls .ui-select {
 	margin: 0;
 }
-.ui-controlgroup-controls .ui-btn:focus,
-.ui-controlgroup-controls .ui-btn.ui-focus {
+.ui-controlgroup-controls .ui-button:focus,
+.ui-controlgroup-controls .ui-button.ui-focus {
 	z-index: 1;
 }
 .ui-controlgroup-controls li {
@@ -39,40 +39,40 @@ fieldset.ui-controlgroup {
 .ui-controlgroup-horizontal .ui-controlgroup-controls:after {
 	clear: both;
 }
-.ui-controlgroup-horizontal .ui-controlgroup-controls > .ui-btn,
-.ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-btn,
+.ui-controlgroup-horizontal .ui-controlgroup-controls > .ui-button,
+.ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-button,
 .ui-controlgroup-horizontal .ui-controlgroup-controls .ui-checkbox,
 .ui-controlgroup-horizontal .ui-controlgroup-controls .ui-radio,
 .ui-controlgroup-horizontal .ui-controlgroup-controls .ui-select {
 	float: left;
 	clear: none;
 }
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-btn,
-.ui-controlgroup-controls .ui-btn-icon-notext {
+.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button,
+.ui-controlgroup-controls .ui-button-icon-notext {
 	width: auto;
 }
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn-icon-notext,
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-btn-icon-notext {
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-button-icon-notext,
+.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button-icon-notext {
 	width: 1.5em;
 }
- .ui-controlgroup-controls .ui-btn-icon-notext {
+ .ui-controlgroup-controls .ui-button-icon-notext {
 	height: auto;
 	padding: .7em 1em;
 }
-.ui-controlgroup-vertical .ui-controlgroup-controls .ui-btn {
+.ui-controlgroup-vertical .ui-controlgroup-controls .ui-button {
 	border-bottom-width: 0;
 }
-.ui-controlgroup-vertical .ui-controlgroup-controls .ui-btn.ui-last-child {
+.ui-controlgroup-vertical .ui-controlgroup-controls .ui-button.ui-last-child {
 	border-bottom-width: 1px;
 }
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn {
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-button {
 	border-right-width: 0;
 }
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-btn.ui-last-child {
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-button.ui-last-child {
 	border-right-width: 1px;
 }
-.ui-controlgroup-controls .ui-btn-corner-all,
-.ui-controlgroup-controls .ui-btn.ui-corner-all {
+.ui-controlgroup-controls .ui-button-corner-all,
+.ui-controlgroup-controls .ui-button.ui-corner-all {
 	-webkit-border-radius: 0;
 	border-radius: 0;
 }
@@ -84,25 +84,25 @@ fieldset.ui-controlgroup {
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
-.ui-controlgroup-vertical .ui-btn.ui-first-child {
+.ui-controlgroup-vertical .ui-button.ui-first-child {
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 }
-.ui-controlgroup-vertical .ui-btn.ui-last-child {
+.ui-controlgroup-vertical .ui-button.ui-last-child {
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 }
-.ui-controlgroup-horizontal .ui-btn.ui-first-child {
+.ui-controlgroup-horizontal .ui-button.ui-first-child {
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 }
-.ui-controlgroup-horizontal .ui-btn.ui-last-child {
+.ui-controlgroup-horizontal .ui-button.ui-last-child {
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 	-webkit-border-bottom-right-radius: inherit;

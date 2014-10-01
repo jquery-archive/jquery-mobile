@@ -118,34 +118,34 @@ $.widget( "mobile.dialog", {
 
 	_setCloseBtn: function( location, text ) {
 		var dst,
-			btn = this._headerCloseButton;
+			button = this._headerCloseButton;
 
 		// Sanitize value
 		location = "left" === location ? "left" : "right" === location ? "right" : "none";
 
 		if ( "none" === location ) {
-			if ( btn ) {
-				btn.remove();
-				btn = null;
+			if ( button ) {
+				button.remove();
+				button = null;
 			}
-		} else if ( btn ) {
-			btn.removeClass( "ui-btn-left ui-btn-right" ).addClass( "ui-btn-" + location );
+		} else if ( button ) {
+			button.removeClass( "ui-button-left ui-button-right" ).addClass( "ui-button-" + location );
 			if ( text ) {
-				btn.text( text );
+				button.text( text );
 			}
 		} else {
 			dst = this._inner.find( ":jqmData(role='header')" ).first();
-			btn = $( "<a></a>", {
+			button = $( "<a></a>", {
 					"role": "button",
 					"href": "#",
-					"class": "ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-" + location
+					"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-notext ui-button-" + location
 				})
 				.text( text || this.options.closeBtnText || "" )
 				.prependTo( dst );
-			this._on( btn, { click: "close" } );
+			this._on( button, { click: "close" } );
 		}
 
-		this._headerCloseButton = btn;
+		this._headerCloseButton = button;
 	},
 
 	// Close method goes back in history

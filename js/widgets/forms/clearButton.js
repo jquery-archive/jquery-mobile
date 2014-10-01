@@ -31,7 +31,7 @@ define( [
 
 		clearButton: function() {
 			return $( "<a href='#' tabindex='-1' aria-hidden='true' " +
-				"class='ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all'>" +
+				"class='ui-input-clear ui-button ui-icon-delete ui-button-icon-notext ui-corner-all'>" +
 				"</a>" )
 					.attr( "title", this.options.clearBtnText )
 					.text( this.options.clearBtnText );

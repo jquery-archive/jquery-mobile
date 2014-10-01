@@ -145,7 +145,7 @@
 					this._on( document, {
 						"pagebeforechange": function(){
 							this.element.find(".jqm-quicklink-panel").panel("close");
-							this.element.find(".jqm-quicklink-panel .ui-btn-active").removeClass("ui-btn-active");
+							this.element.find(".jqm-quicklink-panel .ui-button-active").removeClass("ui-button-active");
 						}
 					});
 					if( $(h2dictionary).length > 0 ){

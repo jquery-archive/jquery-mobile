@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div data-role="header" data-theme="a">
-			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+			<a href="../toolbar/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-notext ui-icon-carat-l">Back</a>
 		<h1>External header</h1>
 	</div><!-- /header -->
 	

@@ -25,8 +25,8 @@
         <div data-role="header" class="jqm-header">
     		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
     		<p><span class="jqm-version"></span> Demos</p>
-            <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-            <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+            <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-button-left">Menu</a>
+            <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
         </div><!-- /header -->
 
         <div role="main" class="ui-content jqm-content">
@@ -40,7 +40,7 @@
     		<p>Here is an example of a 3rd party video player embedded in a popup:</p>
 
             <div data-demo-html="true" data-demo-css="true" data-demo-js="#video-script">
-        		<a href="#popupVideo" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Launch video player</a>
+        		<a href="#popupVideo" data-rel="popup" data-position-to="window" class="ui-button ui-corner-all ui-shadow ui-button-inline">Launch video player</a>
 
         		<div data-role="popup" id="popupVideo" data-overlay-theme="b" data-theme="a" data-tolerance="15,15" class="ui-content">
         			<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless=""></iframe>
@@ -62,10 +62,10 @@
     		<p>In the second example, an iframe is used to display <strong>Google Maps API</strong>. Using an iframe prevents issues with the controls of the map.</p>
 
             <div data-demo-html="true" data-demo-css="true" data-demo-js="#map-script">
-    			<a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open Map</a>
+    			<a href="#popupMap" data-rel="popup" data-position-to="window" class="ui-button ui-corner-all ui-shadow ui-button-inline">Open Map</a>
 
     			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
-    				<a href="#" data-rel="back" class="ui-btn ui-btn-b ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+    				<a href="#" data-rel="back" class="ui-button ui-button-b ui-corner-all ui-shadow ui-button-a ui-icon-delete ui-button-icon-notext ui-button-right">Close</a>
     				<iframe src="map.html" width="480" height="320" seamless=""></iframe>
     			</div>
             </div>

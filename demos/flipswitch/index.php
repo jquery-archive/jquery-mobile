@@ -14,7 +14,7 @@
 	<style id="custom-label-flipswitch">
 /* Custom indentations are needed because the length of custom labels differs from
    the length of the standard labels */
-.custom-label-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+.custom-label-flipswitch.ui-flipswitch .ui-button.ui-flipswitch-on {
 	text-indent: -3.4em;
 }
 .custom-label-flipswitch.ui-flipswitch .ui-flipswitch-off {
@@ -24,7 +24,7 @@
 	<style id="custom-size-flipswitch">
 /* Custom indentations are needed because the length of custom labels differs from
    the length of the standard labels */
-.custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+.custom-size-flipswitch.ui-flipswitch .ui-button.ui-flipswitch-on {
 	text-indent: -5.9em;
 }
 .custom-size-flipswitch.ui-flipswitch .ui-flipswitch-off {
@@ -53,13 +53,13 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-button-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Flip switch <a href="http://api.jquerymobile.com/flipswitch/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Flip switch <a href="http://api.jquerymobile.com/flipswitch/" class="jqm-api-docs-link ui-button ui-button-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API</a></h1>
 
 		<p>Flip switches are used for boolean style inputs like true/false or on/off in a compact UI element.
 			</p>

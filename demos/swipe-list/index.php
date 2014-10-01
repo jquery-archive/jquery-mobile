@@ -41,7 +41,7 @@
 
 			function confirmAndDelete( listitem, transition ) {
 				// Highlight the list item that will be removed
-				listitem.children( ".ui-btn" ).addClass( "ui-btn-active" );
+				listitem.children( ".ui-button" ).addClass( "ui-button-active" );
 				// Inject topic in confirmation popup after removing any previous injected topics
 				$( "#confirm .topic" ).remove();
 				listitem.find( ".topic" ).clone().insertAfter( "#question" );
@@ -65,7 +65,7 @@
 							// During the transition the previous button gets bottom border
 							.prev( "li" ).children( "a" ).addClass( "border-bottom" )
 							// Remove the highlight
-							.end().end().children( ".ui-btn" ).removeClass( "ui-btn-active" );
+							.end().end().children( ".ui-button" ).removeClass( "ui-button-active" );
 					}
 					// If it's not a touch device or the CSS transition isn't supported just remove the list item and refresh the list
 					else {
@@ -75,7 +75,7 @@
 				});
 				// Remove active state and unbind when the cancel button is clicked
 				$( "#confirm #cancel" ).on( "click", function() {
-					listitem.children( ".ui-btn" ).removeClass( "ui-btn-active" );
+					listitem.children( ".ui-button" ).removeClass( "ui-button-active" );
 					$( "#confirm #yes" ).off();
 				});
 			}
@@ -105,20 +105,20 @@
 			transform: translateX(100%);
 		}
 		/* Border bottom for the previous button during the transition*/
-		li.left a.ui-btn,
-		li.right a.ui-btn {
+		li.left a.ui-button,
+		li.right a.ui-button {
 			border-top-width: 0;
 			border-left-width: 1px;
 			border-right-width: 1px;
 		}
-		li a.ui-btn.border-bottom {
+		li a.ui-button.border-bottom {
 			border-bottom-width: 1px;
 		}
 		/* Hide the delete button on touch devices */
 		ul.touch li.ui-li-has-alt a.delete {
 			display: none;
 		}
-		ul.touch li.ui-li-has-alt a.ui-btn {
+		ul.touch li.ui-li-has-alt a.ui-button {
 			margin-right:0;
 		}
 		/* Styling for the popup */
@@ -136,8 +136,8 @@
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-button-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -146,7 +146,7 @@
 
 		<p>This demo shows how you can remove list items by swiping left or right. For devices without touchscreen there is a delete button. This demo also contains a custom styled confirmation popup.</p>
 
-		<p><a href="#demo-page" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open swipe list demo</a></p>
+		<p><a href="#demo-page" data-transition="fade" class="ui-button ui-corner-all ui-shadow ui-button-inline">Open swipe list demo</a></p>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div>
 
@@ -310,10 +310,10 @@
 
         <div class="ui-grid-a">
             <div class="ui-block-a">
-                <a id="yes" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Yes</a>
+                <a id="yes" class="ui-button ui-corner-all ui-mini ui-button-a" data-rel="back">Yes</a>
             </div>
             <div class="ui-block-b">
-                <a id="cancel" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
+                <a id="cancel" class="ui-button ui-corner-all ui-mini ui-button-a" data-rel="back">Cancel</a>
             </div>
         </div>
 

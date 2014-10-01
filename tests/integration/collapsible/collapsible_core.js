@@ -78,15 +78,15 @@
 
 	test( "iconpos option accepts arbitrary values", function() {
 		var collapsible = $( "#collapsible-iconpos-test" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-xyzzy" ),
-			true, "Initially anchor has class ui-btn-icon-xyzzy" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-xyzzy" ),
+			true, "Initially anchor has class ui-button-icon-xyzzy" );
 		collapsible.collapsible( "option", "iconpos", "gnurbles" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-xyzzy" ),
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-xyzzy" ),
 			false, "After setting iconpos option anchor no longer has class " +
-				"ui-btn-icon-xyzzy" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-gnurbles" ),
+				"ui-button-icon-xyzzy" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-gnurbles" ),
 			true, "After setting iconpos option anchor has class " +
-				"ui-btn-icon-gnurbles" );
+				"ui-button-icon-gnurbles" );
 	});
 
 	module( "Collapsible set", {});
@@ -216,12 +216,12 @@
 		collapsible.collapsible( "option", "collapsedIcon", false );
 		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
 			false, "Turning off collapsedIcon makes expanded icon disappear" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-left" ),
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-left" ),
 			false, "Turning off collapsedIcon makes iconpos class disappear" );
 		collapsible.collapsible( "option", "collapsedIcon", "plus" );
 		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
 			true, "Turning on collapsedIcon makes expanded icon reappear" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-left" ),
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-left" ),
 			true, "Turning on collapsedIcon makes iconpos class reappear" );
 	});
 
@@ -229,34 +229,34 @@
 		var collapsible = $( "#collapsible-collapsed-icon-false-iconpos" );
 		collapsible.collapsible( "option", "collapsedIcon", false );
 		collapsible.collapsible( "option", "iconpos", "top" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-btn-icon-top" ),
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-top" ),
 			false, "Setting iconpos while collapsedIcon is off has no effect" );
 	});
 
 	test( "Collapsible with custom icons", function(){
 		var collapsibles = $( "#collapsible-with-custom-icons" ).find( ".ui-collapsible" );
 
-		ok( collapsibles.eq(0).find( ".ui-btn" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
-		ok( collapsibles.eq(1).find( ".ui-btn" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
-		ok( collapsibles.eq(2).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
-		ok( collapsibles.eq(3).find( ".ui-btn" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d");
+		ok( collapsibles.eq(0).find( ".ui-button" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
+		ok( collapsibles.eq(1).find( ".ui-button" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
+		ok( collapsibles.eq(2).find( ".ui-button" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
+		ok( collapsibles.eq(3).find( ".ui-button" ).hasClass( "ui-icon-arrow-d" ), "Heading of fourth collapsible should have class ui-icon-arrow-d");
 
 		// issue #4801: BEGIN
-		ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should have class ui-icon-info");
+		ok( collapsibles.eq(4).find( ".ui-button" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should have class ui-icon-info");
 		collapsibles.eq( 4 ).trigger( "expand" );
-		ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should STILL have class ui-icon-info after click");
+		ok( collapsibles.eq(4).find( ".ui-button" ).hasClass( "ui-icon-info" ), "Heading of fifth collapsible should STILL have class ui-icon-info after click");
 		// issue #4801: END
 	});
 
 	test( "Collapsible sets with custom icons", function(){
 		var collapsibles = $( "#collapsible-set-with-custom-icons" ).find( ".ui-collapsible" );
 
-		ok( collapsibles.eq(0).find( ".ui-btn" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
-		ok( collapsibles.eq(1).find( ".ui-btn" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
-		ok( collapsibles.eq(2).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
-		ok( collapsibles.eq(3).find( ".ui-btn" ).hasClass( "ui-icon-arrow-r" ), "Heading of fourth collapsible should have class ui-icon-arrow-r");
-		ok( collapsibles.eq(4).find( ".ui-btn" ).hasClass( "ui-icon-arrow-l" ), "Heading of fifth collapsible should have class ui-icon-arrow-l");
-		ok( collapsibles.eq(5).find( ".ui-btn" ).hasClass( "ui-icon-arrow-u" ), "Heading of sixth collapsible should have class ui-icon-arrow-u");
+		ok( collapsibles.eq(0).find( ".ui-button" ).hasClass( "ui-icon-plus" ), "Heading of first collapsible should have class ui-icon-plus");
+		ok( collapsibles.eq(1).find( ".ui-button" ).hasClass( "ui-icon-minus" ), "Heading of second collapsible should have class ui-icon-minus");
+		ok( collapsibles.eq(2).find( ".ui-button" ).hasClass( "ui-icon-arrow-r" ), "Heading of third collapsible should have class ui-icon-arrow-r");
+		ok( collapsibles.eq(3).find( ".ui-button" ).hasClass( "ui-icon-arrow-r" ), "Heading of fourth collapsible should have class ui-icon-arrow-r");
+		ok( collapsibles.eq(4).find( ".ui-button" ).hasClass( "ui-icon-arrow-l" ), "Heading of fifth collapsible should have class ui-icon-arrow-l");
+		ok( collapsibles.eq(5).find( ".ui-button" ).hasClass( "ui-icon-arrow-u" ), "Heading of sixth collapsible should have class ui-icon-arrow-u");
 	});
 
 	module( "Theming", {});
@@ -264,28 +264,28 @@
 	test( "Collapsible", 6, function(){
 		var collapsibles = $( "#collapsible-with-theming" ).find( ".ui-collapsible" );
 
-		ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-a" ), "Heading of first collapsible should have class ui-btn-a");
-		ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-btn-a" ), "Content of first collapsible should NOT have class ui-btn-a");
-		ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-b" ), "Heading of second collapsible should have class ui-btn-b");
+		ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-button-a" ), "Heading of first collapsible should have class ui-button-a");
+		ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-button-a" ), "Content of first collapsible should NOT have class ui-button-a");
+		ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-button-b" ), "Heading of second collapsible should have class ui-button-b");
 		ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-body-b");
-		ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-c" ), "Heading of third collapsible should have class ui-btn-c");
+		ok( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-button-c" ), "Heading of third collapsible should have class ui-button-c");
 		ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-c" ), "Content of third collapsible should have class ui-body-c");
 	});
 
 	test( "Collapsible Set", function(){
 		var collapsibles = $( "#collapsible-set-with-theming" ).find( ".ui-collapsible" );
 
-		ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-a" ), "Heading of first collapsible should have class ui-btn-a" );
+		ok( collapsibles.eq(0).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-button-a" ), "Heading of first collapsible should have class ui-button-a" );
 		ok( !collapsibles.eq(0).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of first collapsible should NOT have class ui-body-[a,b,c]" );
 		ok( collapsibles.eq(0).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of first collapsible should NOT have class ui-body-d" );
-		ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-btn-b" ), "Heading of second collapsible should have class ui-btn-b" );
+		ok( collapsibles.eq(1).find( ".ui-collapsible-heading-toggle" ).hasClass( "ui-button-b" ), "Heading of second collapsible should have class ui-button-b" );
 		ok( !collapsibles.eq(1).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-c,.ui-body-d" ), "Content of second collapsible should NOT have class ui-body-[a,c,d]" );
 		ok( collapsibles.eq(1).find( ".ui-collapsible-content" ).hasClass( "ui-body-b" ), "Content of second collapsible should have class ui-body-b" );
-		deepEqual( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+		deepEqual( collapsibles.eq(2).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-button-b in the default theme */
 		ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of third collapsible should NOT have class ui-body-[a,b,c]" );
 		ok( collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of third collapsible should have class ui-body-d" );
 		ok( !collapsibles.eq(2).find( ".ui-collapsible-content" ).hasClass( "ui-collapsible-content-collapsed" ), "Content of third collapsible should NOT have class ui-collapsible-content-collapsed" );
-		deepEqual( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-btn-b in the default theme */
+		deepEqual( collapsibles.eq(3).find( ".ui-collapsible-heading-toggle" ).css( "background-color" ), "rgb(51, 51, 51)" ); /* The RGB value should match the background color we set for ui-button-b in the default theme */
 		ok( !collapsibles.eq(3).find( ".ui-collapsible-content" ).is( ".ui-body-a,.ui-body-b,.ui-body-c" ), "Content of fourth collapsible should NOT have class ui-body-[a,b,c]" );
 		ok( collapsibles.eq(3).find( ".ui-collapsible-content" ).hasClass( "ui-body-d" ), "Content of fourth collapsible should have class ui-body-d" );
 	});
@@ -308,9 +308,9 @@
 			"Option not set on inheriting child collapsible" );
 		deepEqual( $( "#explicit" ).collapsible( "option", "theme" ), "a",
 			"Option not set on explicitly assigned child collapsible" );
-		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-btn-b" ), true,
+		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-button-b" ), true,
 			"Inheriting collapsible has theme 'b'" );
-		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-btn-a" ), true,
+		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-button-a" ), true,
 			"Explicitly assigned collapsible has theme 'a'" );
 	});
 	test( "contentTheme", function() {
@@ -361,9 +361,9 @@
 		deepEqual( $( "#explicit" ).collapsible( "option", "iconpos" ),
 			"left",
 			"Option not set on explicitly assigned child collapsible" );
-		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-btn-icon-right" ),
+		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-button-icon-right" ),
 			true, "Inheriting collapsible has iconpos 'right'" );
-		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-btn-icon-left" ),
+		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-button-icon-left" ),
 			true, "Explicitly assigned collapsible has iconpos 'left'" );
 	});
 	test( "mini", function() {

@@ -140,7 +140,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 
 	refresh: function() {
 		var $el = this.container(),
-			els = $el.find( ".ui-btn" ).not( ".ui-slider-handle" ),
+			els = $el.find( ".ui-button" ).not( ".ui-slider-handle" ),
 			create = this._initialRefresh;
 		if ( $.mobile.checkboxradio ) {
 			$el.find( ":mobile-checkboxradio" ).checkboxradio( "refresh" );
@@ -166,7 +166,7 @@ $.widget( "mobile.controlgroup", $.extend( {
 			.removeClass( "ui-controlgroup " +
 				"ui-controlgroup-horizontal ui-controlgroup-vertical ui-corner-all ui-mini " +
 				this._themeClassFromOption( opts.theme ) )
-			.find( ".ui-btn" )
+			.find( ".ui-button" )
 			.not( ".ui-slider-handle" );
 
 		this._removeFirstLastClasses( buttons );

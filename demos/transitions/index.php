@@ -16,8 +16,8 @@
         th { text-align:left; }
         th h3 { margin:.6em 0 .6em .5em; }
         th, td { vertical-align:top; border-top:1px solid #eee; padding: 1px 3px; background-color:#fcfcfc; }
-        td .ui-btn { margin:.4em 0 .5em 0; }
-        td .ui-btn-inner { padding: .4em 15px; }
+        td .ui-button { margin:.4em 0 .5em 0; }
+        td .ui-button-inner { padding: .4em 15px; }
     </style>
 </head>
 <body>
@@ -26,8 +26,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-button-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
 	</div><!-- /header -->
 
 	<div role="main" class="jqm-content ui-content">
@@ -42,53 +42,53 @@
 			<table margin="0">
 				<tr>
 					<th><h3>fade</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="fade" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="fade" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>pop</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="pop" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="pop" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="pop" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>flip</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="flip" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="flip" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="flip" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>turn</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="turn" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="turn" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="turn" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>flow</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="flow" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="flow" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="flow" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="flow" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>slidefade</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="slidefade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="slidefade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="slidefade" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="slidefade" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>slide</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="slide" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="slide" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="slide" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>slideup</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="slideup" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="slideup" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>slidedown</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="slidedown" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="slidedown" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 				<tr>
 					<th><h3>none</h3></th>
-					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="none" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">dialog</a></td>
-					<td><a href="page-transitions-page.php" data-transition="none" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">page</a></td>
+					<td><a href="page-transitions-dialog.php" data-rel="dialog" data-transition="none" class="ui-button ui-corner-all ui-shadow ui-button-inline">dialog</a></td>
+					<td><a href="page-transitions-page.php" data-transition="none" class="ui-button ui-corner-all ui-shadow ui-button-inline">page</a></td>
 				</tr>
 			</table>
 			</div><!-- /demo-html -->

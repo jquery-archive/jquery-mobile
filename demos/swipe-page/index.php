@@ -26,8 +26,8 @@
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-button-left">Menu</a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -37,7 +37,7 @@
         <div data-demo-html="#city" data-demo-js="#demo-script" data-demo-css="#demo-style">
             <p>This demo shows how you can use the swipe event to navigate between pages. We are using single HTML files for each page. Here you can see the JavaScript and CSS source. On each of the demo pages you can see the page markup as well.</p>
 
-            <p><a href="newyork.html" data-ajax="false" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Open swipe page demo</a></p>
+            <p><a href="newyork.html" data-ajax="false" class="ui-button ui-corner-all ui-shadow ui-button-inline">Open swipe page demo</a></p>
         </div>
 
 	</div><!-- /content -->
@@ -69,7 +69,7 @@
 	<div role="main" class="ui-content">
 
 		<div id="trivia-city" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
-        	<a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all">Close</a>
+        	<a href="#" data-rel="back" class="ui-button ui-button-right ui-button-b ui-button-icon-notext ui-icon-delete ui-corner-all">Close</a>
 			<p>Here some text.</p>
         </div><!-- /popup -->
 
@@ -78,12 +78,12 @@
 </div><!-- /page -->
 
 <div id="_footer" data-id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
-	<div data-role="controlgroup" class="control ui-btn-left" data-type="horizontal" data-mini="true">
-    	<a href="#" class="prev ui-btn ui-btn-icon-notext ui-icon-carat-l">Previous</a>
-    	<a href="#" class="next ui-btn ui-btn-icon-notext ui-icon-carat-r">Next</a>
+	<div data-role="controlgroup" class="control ui-button-left" data-type="horizontal" data-mini="true">
+    	<a href="#" class="prev ui-button ui-button-icon-notext ui-icon-carat-l">Previous</a>
+    	<a href="#" class="next ui-button ui-button-icon-notext ui-icon-carat-r">Next</a>
     </div>
 
-	<a href="#" data-rel="popup" class="trivia-btn ui-btn ui-btn-right ui-btn-icon-left ui-icon-info ui-mini ui-corner-all">Trivia</a>
+	<a href="#" data-rel="popup" class="trivia-button ui-button ui-button-right ui-button-icon-left ui-icon-info ui-mini ui-corner-all">Trivia</a>
 </div><!-- /footer -->
 
 </body>

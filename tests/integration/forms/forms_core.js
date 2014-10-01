@@ -67,14 +67,14 @@ asyncTest( "Form resets correctly", function() {
 		var id = el.attr( "id" ),
 			label = el.parent().children( "label" ),
 			ctype = ( isRadio ? "radio" : "checkbox" ),
-			iconVisible = ( label.hasClass( "ui-btn-icon-left" ) || label.hasClass( "ui-btn-icon-right" ) ),
+			iconVisible = ( label.hasClass( "ui-button-icon-left" ) || label.hasClass( "ui-button-icon-right" ) ),
 			iconValue = ( ctype + "-" + ( value ? "on" : "off" ) );
 
 		ok( label.is( "label[for='" + id + "']" ), prefix + id + "'s label is a label for it" );
 		ok( label.parent().is( ".ui-" + ctype ), prefix + id + "'s parent's label is a div with the correct class" );
 		ok( label.hasClass( "ui-" + iconValue ), prefix + id + "'s icon has the right state class" );
 		ok( iconVisible === ( !isHoriz ), prefix + id + "'s icon is visible exactly when it's not part of a horizontal controlgroup" );
-		ok( label.hasClass( "ui-btn-active" ) === ( isHoriz && value ), prefix + id + "'s label has class ui-btn-active exactly when it's set and part of a horizontal controlgroup" );
+		ok( label.hasClass( "ui-button-active" ) === ( isHoriz && value ), prefix + id + "'s label has class ui-button-active exactly when it's set and part of a horizontal controlgroup" );
 	}
 
 	function verifyFlipswitch( prefix, el, value ) {

@@ -22,7 +22,7 @@
 
 	<div data-role="header">
 		<h1>External panels</h1>
-		<a href="../panel/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<a href="../panel/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-notext ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content jqm-fullwidth">
@@ -36,14 +36,14 @@
 		<p><a href="page-b.php">Navigate to page 2</a></p>
 
 		<p><strong>Left</strong> panel examples</p>
-		<a href="#leftpanel3" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Overlay</a>
-		<a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a>
-		<a href="#leftpanel2" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Push</a>
+		<a href="#leftpanel3" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Overlay</a>
+		<a href="#leftpanel1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Reveal</a>
+		<a href="#leftpanel2" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Push</a>
 
 		<p><strong>Right</strong> panel examples</p>
-		<a href="#rightpanel3" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Overlay</a>
-		<a href="#rightpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a>
-		<a href="#rightpanel2" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Push</a>
+		<a href="#rightpanel3" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Overlay</a>
+		<a href="#rightpanel1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Reveal</a>
+		<a href="#rightpanel2" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Push</a>
 
 	</div><!-- /content -->
 
@@ -54,7 +54,7 @@
         <h3>Left Panel: Reveal</h3>
         <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-delete ui-button-icon-left ui-button-inline">Close panel</a>
 
 	</div><!-- /leftpanel1 -->
 
@@ -64,7 +64,7 @@
         <h3>Left Panel: Push</h3>
         <p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-delete ui-button-icon-left ui-button-inline">Close panel</a>
 
 	</div><!-- /leftpanel2 -->
 
@@ -74,7 +74,7 @@
         <h3>Left Panel: Overlay</h3>
         <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-delete ui-button-icon-left ui-button-inline">Close panel</a>
 
 	</div><!-- /leftpanel3 -->
 
@@ -84,7 +84,7 @@
         <h3>Right Panel: Reveal</h3>
         <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-delete ui-button-icon-left ui-button-inline">Close panel</a>
 
 	</div><!-- /rightpanel1 -->
 
@@ -94,7 +94,7 @@
         <h3>Right Panel: Push</h3>
         <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-delete ui-button-icon-left ui-button-inline">Close panel</a>
 
 	</div><!-- /rightpanel2 -->
 
@@ -104,7 +104,7 @@
         <h3>Right Panel: Overlay</h3>
         <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close panel</a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-delete ui-button-icon-left ui-button-inline">Close panel</a>
 
 	</div><!-- /rightpanel3 -->
 </body>

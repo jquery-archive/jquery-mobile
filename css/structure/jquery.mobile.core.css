@@ -221,7 +221,7 @@ div.ui-mobile-viewport {
 }
 
 /* Buttons and icons */
-.ui-btn {
+.ui-button {
 	font-size: 16px;
 	margin: .5em 0;
 	padding: .7em 1em;
@@ -237,9 +237,9 @@ div.ui-mobile-viewport {
 	-ms-user-select: none;
 	user-select: none;
 }
-.ui-btn-icon-notext,
-.ui-header button.ui-btn.ui-btn-icon-notext,
-.ui-footer button.ui-btn.ui-btn-icon-notext {
+.ui-button-icon-notext,
+.ui-header button.ui-button.ui-button-icon-notext,
+.ui-footer button.ui-button.ui-button-icon-notext {
 	padding: 0;
 	width: 1.75em;
 	height: 1.75em;
@@ -249,135 +249,135 @@ div.ui-mobile-viewport {
 .ui-mini {
 	font-size: 12.5px;
 }
-.ui-mini .ui-btn {
+.ui-mini .ui-button {
 	font-size: inherit;
 }
 /* Make buttons in toolbars default to mini and inline. */
-.ui-header .ui-btn,
-.ui-footer .ui-btn {
+.ui-header .ui-button,
+.ui-footer .ui-button {
 	font-size: 12.5px;
 	display: inline-block;
 	vertical-align: middle;
 }
-.ui-header .ui-controlgroup .ui-btn-icon-notext,
-.ui-footer .ui-controlgroup .ui-btn-icon-notext {
+.ui-header .ui-controlgroup .ui-button-icon-notext,
+.ui-footer .ui-controlgroup .ui-button-icon-notext {
     font-size: 12.5px;
 }
 
-/* To ensure same top and left/right position when ui-btn-left/right are added to something other than buttons. */
-.ui-header .ui-btn-left,
-.ui-header .ui-btn-right {
+/* To ensure same top and left/right position when ui-button-left/right are added to something other than buttons. */
+.ui-header .ui-button-left,
+.ui-header .ui-button-right {
 	font-size: 12.5px;
 }
-.ui-mini.ui-btn-icon-notext,
-.ui-mini .ui-btn-icon-notext,
-.ui-header .ui-btn-icon-notext,
-.ui-footer .ui-btn-icon-notext {
+.ui-mini.ui-button-icon-notext,
+.ui-mini .ui-button-icon-notext,
+.ui-header .ui-button-icon-notext,
+.ui-footer .ui-button-icon-notext {
 	font-size: 16px;	
 	padding: 0;
 }
-.ui-btn-inline {
+.ui-button-inline {
 	display: inline-block;
 	vertical-align: middle;
 	margin-right: .625em;
 }
-.ui-btn-icon-left {
+.ui-button-icon-left {
 	padding-left: 2.5em;
 }
-.ui-btn-icon-right {
+.ui-button-icon-right {
 	padding-right: 2.5em;
 }
-.ui-btn-icon-top {
+.ui-button-icon-top {
 	padding-top: 2.5em;
 }
-.ui-btn-icon-bottom {
+.ui-button-icon-bottom {
 	padding-bottom: 2.5em;
 }
-.ui-header .ui-btn-icon-top,
-.ui-footer .ui-btn-icon-top,
-.ui-header .ui-btn-icon-bottom,
-.ui-footer .ui-btn-icon-bottom {
+.ui-header .ui-button-icon-top,
+.ui-footer .ui-button-icon-top,
+.ui-header .ui-button-icon-bottom,
+.ui-footer .ui-button-icon-bottom {
 	padding-left: .3125em;
 	padding-right: .3125em;
 }
-.ui-btn-icon-left:after,
-.ui-btn-icon-right:after,
-.ui-btn-icon-top:after,
-.ui-btn-icon-bottom:after,
-.ui-btn-icon-notext:after {
+.ui-button-icon-left:after,
+.ui-button-icon-right:after,
+.ui-button-icon-top:after,
+.ui-button-icon-bottom:after,
+.ui-button-icon-notext:after {
 	content: "";
 	position: absolute;
 	display: block;
 	width: 22px;
 	height: 22px;
 }
-.ui-btn-icon-notext:after,
-.ui-btn-icon-left:after,
-.ui-btn-icon-right:after {
+.ui-button-icon-notext:after,
+.ui-button-icon-left:after,
+.ui-button-icon-right:after {
 	top: 50%;
 	margin-top: -11px;
 }
-.ui-btn-icon-left:after {
+.ui-button-icon-left:after {
 	left: .5625em;
 }
-.ui-btn-icon-right:after {
+.ui-button-icon-right:after {
 	right: .5625em;
 }
-.ui-mini.ui-btn-icon-left:after,
-.ui-mini .ui-btn-icon-left:after,
-.ui-header .ui-btn-icon-left:after,
-.ui-footer .ui-btn-icon-left:after {
+.ui-mini.ui-button-icon-left:after,
+.ui-mini .ui-button-icon-left:after,
+.ui-header .ui-button-icon-left:after,
+.ui-footer .ui-button-icon-left:after {
 	left: .37em;
 }
-.ui-mini.ui-btn-icon-right:after,
-.ui-mini .ui-btn-icon-right:after,
-.ui-header .ui-btn-icon-right:after,
-.ui-footer .ui-btn-icon-right:after {
+.ui-mini.ui-button-icon-right:after,
+.ui-mini .ui-button-icon-right:after,
+.ui-header .ui-button-icon-right:after,
+.ui-footer .ui-button-icon-right:after {
 	right: .37em;
 }
-.ui-btn-icon-notext:after,
-.ui-btn-icon-top:after,
-.ui-btn-icon-bottom:after {
+.ui-button-icon-notext:after,
+.ui-button-icon-top:after,
+.ui-button-icon-bottom:after {
 	left: 50%;
 	margin-left: -11px;
 }
-.ui-btn-icon-top:after {
+.ui-button-icon-top:after {
 	top: .5625em;
 }
-.ui-btn-icon-bottom:after {
+.ui-button-icon-bottom:after {
 	top: auto;
 	bottom: .5625em;
 }
 /* Buttons in header position classes */
-.ui-header .ui-btn-left,
-.ui-header .ui-btn-right,
-.ui-btn-left > [class*="ui-"],
-.ui-btn-right > [class*="ui-"] {
+.ui-header .ui-button-left,
+.ui-header .ui-button-right,
+.ui-button-left > [class*="ui-"],
+.ui-button-right > [class*="ui-"] {
 	margin: 0;
 }
-.ui-btn-left,
-.ui-btn-right {
+.ui-button-left,
+.ui-button-right {
 	position: absolute;
 	top: .24em;
 }
-.ui-btn-left {
+.ui-button-left {
 	left: .4em;
 }
-.ui-btn-right {
+.ui-button-right {
 	right: .4em;
 }
-.ui-btn-icon-notext.ui-btn-left {
+.ui-button-icon-notext.ui-button-left {
 	top: .3125em;
 	left: .3125em;
 }
-.ui-btn-icon-notext.ui-btn-right {
+.ui-button-icon-notext.ui-button-right {
 	top: .3125em;
 	right: .3125em;
 }
 
 /* Button elements */
-button.ui-btn,
-.ui-controlgroup-controls button.ui-btn-icon-notext {
+button.ui-button,
+.ui-controlgroup-controls button.ui-button-icon-notext {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -385,17 +385,17 @@ button.ui-btn,
 	-moz-appearance: none;
 	width: 100%;
 }
-button.ui-btn-inline,
-.ui-header button.ui-btn,
-.ui-footer button.ui-btn {
+button.ui-button-inline,
+.ui-header button.ui-button,
+.ui-footer button.ui-button {
 	width: auto;
 }
 /* Firefox adds a 1px border in a button element. We negate this to make sure they have the same height as other buttons in controlgroups. */
-button.ui-btn::-moz-focus-inner {
+button.ui-button::-moz-focus-inner {
 	border: 0;
 }
-button.ui-btn-icon-notext,
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-btn {
+button.ui-button-icon-notext,
+.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;

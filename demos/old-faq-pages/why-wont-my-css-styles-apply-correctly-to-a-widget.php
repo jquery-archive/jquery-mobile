@@ -18,8 +18,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-button-left">Menu</a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -43,11 +43,11 @@
 		<p>After enhancement, the button markup has been modified by the framework to add classes and wrap the contents for styling:</p>
 <pre class="brush: html"><code>
 // Button after enhancement
-&#60;div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="null" data-iconpos="null" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" aria-disabled="false"&#62;
-	&#60;span class="ui-btn-inner ui-btn-corner-all"&#62;
-		&#60;span class="ui-btn-text"&#62;Button element&#60;/span&#62;
+&#60;div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="null" data-iconpos="null" data-theme="c" class="ui-button ui-shadow ui-button-corner-all ui-button-up-c" aria-disabled="false"&#62;
+	&#60;span class="ui-button-inner ui-button-corner-all"&#62;
+		&#60;span class="ui-button-text"&#62;Button element&#60;/span&#62;
 	&#60;/span&#62;
-	&#60;button class="ui-btn-hidden" aria-disabled="false"&#62;Button element&#60;/button&#62;
+	&#60;button class="ui-button-hidden" aria-disabled="false"&#62;Button element&#60;/button&#62;
 &#60;/div&#62;
 </code></pre>
 

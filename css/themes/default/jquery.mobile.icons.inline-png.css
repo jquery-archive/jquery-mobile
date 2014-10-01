@@ -60,7 +60,7 @@
 }
 .ui-icon-check:after,
 /* Used ui-checkbox-on twice to increase specificity. If active state has background-image for gradient this rule overrides. */
-html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
+html .ui-button.ui-checkbox-on.ui-checkbox-on:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAE5JREFUOMu10DEKACEQQ1GPHl2QxUvHZsURQRJhfzfFKzIp/R1JkISLMmdQUeEebtAKvw053I+KRuUGncLpYxoS9kgfrDYK+LVRwM1GTh2KeDEWoG7NGwAAAABJRU5ErkJggg==");
 }
 .ui-icon-clock:after {
@@ -234,8 +234,8 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 }
 .ui-alt-icon.ui-icon-check:after,
 .ui-alt-icon .ui-icon-check:after,
-html .ui-alt-icon.ui-btn.ui-checkbox-on:after,
-html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
+html .ui-alt-icon.ui-button.ui-checkbox-on:after,
+html .ui-alt-icon .ui-button.ui-checkbox-on:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEtJREFUOMtjYKADaIBikkAjEP+HYqI1NyFpIlozNk0YGhugToKBZmI1wSSayNGEDzfgCzGiNRHyD1Eh2EaOJhjoIEcTDHSRo4loAAAMpkH3I7j13AAAAABJRU5ErkJggg==");
 }
 .ui-alt-icon.ui-icon-clock:after,

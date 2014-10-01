@@ -1,5 +1,5 @@
 /* Hide the native input element */
-.ui-input-btn input {
+.ui-input-button input {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -22,7 +22,7 @@
 	z-index: 2;
 }
 /* Fixes IE/WP filter alpha opacity bugs */
-.ui-input-btn.ui-state-disabled input {
+.ui-input-button.ui-state-disabled input {
 	position: absolute !important;
 	height: 1px;
 	width: 1px;

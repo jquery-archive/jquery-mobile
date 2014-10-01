@@ -61,7 +61,7 @@
 }
 .ui-icon-check:after,
 /* Used ui-checkbox-on twice to increase specificity. If active state has background-image for gradient this rule overrides. */
-html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
+html .ui-button.ui-checkbox-on.ui-checkbox-on:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20style%3D%22fill%3A%23FFFFFF%3B%22%20points%3D%2214%2C4%2011%2C1%205.003%2C6.997%203%2C5%200%2C8%204.966%2C13%204.983%2C12.982%205%2C13%20%22%2F%3E%3C%2Fsvg%3E");
 }
 .ui-icon-clock:after {
@@ -235,8 +235,8 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 }
 .ui-alt-icon.ui-icon-check:after,
 .ui-alt-icon .ui-icon-check:after,
-html .ui-alt-icon.ui-btn.ui-checkbox-on:after,
-html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
+html .ui-alt-icon.ui-button.ui-checkbox-on:after,
+html .ui-alt-icon .ui-button.ui-checkbox-on:after {
 	background-image: url("data:image/svg+xml;charset=US-ASCII,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22iso-8859-1%22%3F%3E%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%20%20width%3D%2214px%22%20height%3D%2214px%22%20viewBox%3D%220%200%2014%2014%22%20style%3D%22enable-background%3Anew%200%200%2014%2014%3B%22%20xml%3Aspace%3D%22preserve%22%3E%3Cpolygon%20points%3D%2214%2C4%2011%2C1%205.003%2C6.997%203%2C5%200%2C8%204.966%2C13%204.983%2C12.982%205%2C13%20%22%2F%3E%3C%2Fsvg%3E");
 }
 .ui-alt-icon.ui-icon-clock:after,
@@ -419,7 +419,7 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 	background-image: url("images/icons-png/carat-u-white.png");
 }
 .ui-nosvg .ui-icon-check:after,
-html.ui-nosvg .ui-btn.ui-checkbox-on:after {
+html.ui-nosvg .ui-button.ui-checkbox-on:after {
 	background-image: url("images/icons-png/check-white.png");
 }
 .ui-nosvg .ui-icon-clock:after {
@@ -593,8 +593,8 @@ html.ui-nosvg .ui-btn.ui-checkbox-on:after {
 }
 .ui-nosvg .ui-alt-icon.ui-icon-check:after,
 .ui-nosvg .ui-alt-icon .ui-icon-check:after,
-.ui-nosvg .ui-alt-icon.ui-btn.ui-checkbox-on:after,
-.ui-nosvg .ui-alt-icon .ui-btn.ui-checkbox-on:after {
+.ui-nosvg .ui-alt-icon.ui-button.ui-checkbox-on:after,
+.ui-nosvg .ui-alt-icon .ui-button.ui-checkbox-on:after {
 	background-image: url("images/icons-png/check-black.png");
 }
 .ui-nosvg .ui-alt-icon.ui-icon-clock:after,

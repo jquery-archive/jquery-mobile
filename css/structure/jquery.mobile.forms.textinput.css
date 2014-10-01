@@ -80,8 +80,8 @@ textarea.ui-mini {
 	filter: Alpha(Opacity=50);
 	opacity: .5;
 }
-.ui-input-search.ui-input-has-clear .ui-btn.ui-input-clear,
-.ui-input-text.ui-input-has-clear .ui-btn.ui-input-clear {
+.ui-input-search.ui-input-has-clear .ui-button.ui-input-clear,
+.ui-input-text.ui-input-has-clear .ui-button.ui-input-clear {
 	position: absolute;
 	right: 0;
 	top: 50%;

@@ -13,7 +13,7 @@ define( [
 
 	$.ui.button.initSelector = "input[type=button], input[type=submit], input[type=reset], button";
 	$.ui.button.prototype.options.classes =  {
-		"ui-button": "ui-btn ui-shadow ui-corner-all",
+		"ui-button": "ui-button ui-shadow ui-corner-all",
 		"ui-button-icon-only": "ui-button-icon-only",
 		"ui-button-icon": null
 	};

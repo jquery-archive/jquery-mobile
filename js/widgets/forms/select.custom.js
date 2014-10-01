@@ -216,7 +216,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				"role": "button",
 				"text": o.closeText,
 				"href": "#",
-				"class": "ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-delete"
+				"class": "ui-button ui-corner-all ui-button-left ui-button-icon-notext ui-icon-delete"
 			}).appendTo( header );
 		}
 
@@ -377,7 +377,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	_focusMenuItem: function() {
 		var selector = this.list.find( "a." + $.mobile.activeBtnClass );
 		if ( selector.length === 0 ) {
-			selector = this.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-btn" );
+			selector = this.list.find( "li:not(" + unfocusableItemSelector + ") a.ui-button" );
 		}
 		selector.first().focus();
 	},
@@ -388,7 +388,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			selfListParent = self.list.parent(),
 			menuHeight = selfListParent.outerHeight(),
 			scrollTop = $window.scrollTop(),
-			btnOffset = self.button.offset().top,
+			buttonOffset = self.button.offset().top,
 			screenHeight = $window.height();
 
 		if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
@@ -403,9 +403,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			self.thisPage.unbind( "pagehide.remove" );
 
 			//for WebOS/Opera Mini (set lastscroll using button offset)
-			if ( scrollTop === 0 && btnOffset > screenHeight ) {
+			if ( scrollTop === 0 && buttonOffset > screenHeight ) {
 				self.thisPage.one( "pagehide", function() {
-					$( this ).jqmData( "lastScroll", btnOffset );
+					$( this ).jqmData( "lastScroll", buttonOffset );
 				});
 			}
 
@@ -519,7 +519,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			item.setAttribute( "role", "option" );
 			anchor.setAttribute( "tabindex", "-1" );
 			if ( this.isMultiple ) {
-				$( anchor ).addClass( "ui-btn ui-checkbox-off ui-btn-icon-right" );
+				$( anchor ).addClass( "ui-button ui-checkbox-off ui-button-icon-right" );
 			}
 
 			item.appendChild( anchor );

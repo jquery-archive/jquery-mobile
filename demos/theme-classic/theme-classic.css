@@ -15,7 +15,7 @@ input,
 select,
 textarea,
 button,
-.ui-btn {
+.ui-button {
 	font-size: 1em;
 	line-height: 1.3;
 	font-family: sans-serif /*{global-font-family}*/;
@@ -69,22 +69,22 @@ div.ui-controlgroup-label {
 /* Buttons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn,
-label.ui-btn {
+.ui-button,
+label.ui-button {
 	font-weight: bold;
 	border-width: 1px;
 	border-style: solid;
 }
-.ui-btn:link {
+.ui-button:link {
 	text-decoration: none !important;
 }
-.ui-btn-active {
+.ui-button-active {
 	cursor: pointer;
 }
 
 /* Corner rounding
 -----------------------------------------------------------------------------------------------------------*/
-/* Class ui-btn-corner-all deprecated in 1.4 */
+/* Class ui-button-corner-all deprecated in 1.4 */
 
 .ui-corner-all {
 	/* Note: change this radius to .6em if you want the old, more rounded, corner style. */
@@ -92,8 +92,8 @@ label.ui-btn {
 	border-radius: 						.3125em /*{global-radii-blocks}*/;
 }
 /* Buttons */
-.ui-btn-corner-all,
-.ui-btn.ui-corner-all,
+.ui-button-corner-all,
+.ui-button.ui-corner-all,
 /* Slider track */
 .ui-slider-track.ui-corner-all,
 /* Flipswitch */
@@ -105,13 +105,13 @@ label.ui-btn {
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }
 /* Icon-only buttons */
-.ui-btn-icon-notext.ui-btn-corner-all,
-.ui-btn-icon-notext.ui-corner-all {
+.ui-button-icon-notext.ui-button-corner-all,
+.ui-button-icon-notext.ui-corner-all {
 	-webkit-border-radius: 1em;
 	border-radius: 1em;
 }
 /* Radius clip workaround for cleaning up corner trapping */
-.ui-btn-corner-all,
+.ui-button-corner-all,
 .ui-corner-all {
 	-webkit-background-clip: padding;
 	background-clip: padding-box;
@@ -146,13 +146,13 @@ label.ui-btn {
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn-icon-left:after,
-.ui-btn-icon-right:after,
-.ui-btn-icon-top:after,
-.ui-btn-icon-bottom:after,
-.ui-btn-icon-notext:after,
-html .ui-btn.ui-checkbox-off:after,
-html .ui-btn.ui-radio-off:after {
+.ui-button-icon-left:after,
+.ui-button-icon-right:after,
+.ui-button-icon-top:after,
+.ui-button-icon-bottom:after,
+.ui-button-icon-notext:after,
+html .ui-button.ui-checkbox-off:after,
+html .ui-button.ui-radio-off:after {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.3) /*{global-icon-disc}*/;
 	background-position: center center;
@@ -162,8 +162,8 @@ html .ui-btn.ui-radio-off:after {
 }
 
 /* Alt icons */
-.ui-alt-icon.ui-btn:after,
-.ui-alt-icon .ui-btn:after,
+.ui-alt-icon.ui-button:after,
+.ui-alt-icon .ui-button:after,
 html .ui-alt-icon.ui-checkbox-off:after,
 html .ui-alt-icon.ui-radio-off:after,
 html .ui-alt-icon .ui-checkbox-off:after,
@@ -173,41 +173,41 @@ html .ui-alt-icon .ui-radio-off:after {
 }
 
 /* No disc */
-.ui-nodisc-icon.ui-btn:after,
-.ui-nodisc-icon .ui-btn:after {
+.ui-nodisc-icon.ui-button:after,
+.ui-nodisc-icon .ui-button:after {
 	background-color: transparent;
 }
 
 /* Icon shadow */
-.ui-shadow-icon.ui-btn:after,
-.ui-shadow-icon .ui-btn:after {
+.ui-shadow-icon.ui-button:after,
+.ui-shadow-icon .ui-button:after {
 	-webkit-box-shadow: 0 1px 0 			rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	-moz-box-shadow: 0 1px 0 				rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 	box-shadow: 0 1px 0 					rgba(255,255,255,.3) /*{global-icon-shadow}*/;
 }
 
 /* Checkbox and radio */
-html .ui-btn.ui-checkbox-off:after,
-html .ui-btn.ui-checkbox-on:after,
-html .ui-btn.ui-radio-off:after,
-html .ui-btn.ui-radio-on:after {
+html .ui-button.ui-checkbox-off:after,
+html .ui-button.ui-checkbox-on:after,
+html .ui-button.ui-radio-off:after,
+html .ui-button.ui-radio-on:after {
 	display: block;
 	width: 18px;
 	height: 18px;
 	margin: -9px 2px 0 2px;
 }
-.ui-btn.ui-checkbox-off:after,
-.ui-btn.ui-radio-off:after {
+.ui-button.ui-checkbox-off:after,
+.ui-button.ui-radio-off:after {
 	background-image: none;
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 }
-html .ui-btn.ui-checkbox-off:after,
-html .ui-btn.ui-checkbox-on:after {
+html .ui-button.ui-checkbox-off:after,
+html .ui-button.ui-checkbox-on:after {
 	-webkit-border-radius: .1875em;
 	border-radius: .1875em;
 }
-.ui-radio .ui-btn.ui-radio-on:after {
+.ui-radio .ui-button.ui-radio-on:after {
 	background-image: none;
 	background-color: #fff;
 	width: 8px;
@@ -215,8 +215,8 @@ html .ui-btn.ui-checkbox-on:after {
 	border-width: 5px;
 	border-style: solid;
 }
-.ui-alt-icon.ui-btn.ui-radio-on:after,
-.ui-alt-icon .ui-btn.ui-radio-on:after {
+.ui-alt-icon.ui-button.ui-radio-on:after,
+.ui-alt-icon .ui-button.ui-radio-on:after {
 	background-color: #000;
 }
 
@@ -321,17 +321,17 @@ html body .ui-group-theme-a a:active {
 }
 
 /* Button up */
-.ui-page-theme-a .ui-btn,
-html .ui-bar-a .ui-btn,
-html .ui-body-a .ui-btn,
-html body .ui-group-theme-a .ui-btn,
-html head + body .ui-btn.ui-btn-a,
+.ui-page-theme-a .ui-button,
+html .ui-bar-a .ui-button,
+html .ui-body-a .ui-button,
+html body .ui-group-theme-a .ui-button,
+html head + body .ui-button.ui-button-a,
 /* Button visited */
-.ui-page-theme-a .ui-btn:visited,
-html .ui-bar-a .ui-btn:visited,
-html .ui-body-a .ui-btn:visited,
-html body .ui-group-theme-a .ui-btn:visited,
-html head + body .ui-btn.ui-btn-a:visited {
+.ui-page-theme-a .ui-button:visited,
+html .ui-bar-a .ui-button:visited,
+html .ui-body-a .ui-button:visited,
+html body .ui-group-theme-a .ui-button:visited,
+html head + body .ui-button.ui-button-a:visited {
 	background: 			#333 /*{a-bup-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #444 /*{a-bup-background-start}*/), to( #2d2d2d /*{a-bup-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #444 /*{a-bup-background-start}*/, #2d2d2d /*{a-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -344,11 +344,11 @@ html head + body .ui-btn.ui-btn-a:visited {
 	text-shadow: 0 /*{a-bup-shadow-x}*/ 1px /*{a-bup-shadow-y}*/ 0 /*{a-bup-shadow-radius}*/ #111 /*{a-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-page-theme-a .ui-btn:hover,
-html .ui-bar-a .ui-btn:hover,
-html .ui-body-a .ui-btn:hover,
-html body .ui-group-theme-a .ui-btn:hover,
-html head + body .ui-btn.ui-btn-a:hover {
+.ui-page-theme-a .ui-button:hover,
+html .ui-bar-a .ui-button:hover,
+html .ui-body-a .ui-button:hover,
+html body .ui-group-theme-a .ui-button:hover,
+html head + body .ui-button.ui-button-a:hover {
 	background: 			#444 /*{a-bhover-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #555 /*{a-bhover-background-start}*/), to( #383838 /*{a-bhover-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #555 /*{a-bhover-background-start}*/, #383838 /*{a-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -361,11 +361,11 @@ html head + body .ui-btn.ui-btn-a:hover {
 	text-shadow: 0 /*{a-bhover-shadow-x}*/ 1px /*{a-bhover-shadow-y}*/ 0 /*{a-bhover-shadow-radius}*/ #111 /*{a-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-page-theme-a .ui-btn:active,
-html .ui-bar-a .ui-btn:active,
-html .ui-body-a .ui-btn:active,
-html body .ui-group-theme-a .ui-btn:active,
-html head + body .ui-btn.ui-btn-a:active {
+.ui-page-theme-a .ui-button:active,
+html .ui-bar-a .ui-button:active,
+html .ui-body-a .ui-button:active,
+html body .ui-group-theme-a .ui-button:active,
+html head + body .ui-button.ui-button-a:active {
 	background: 			#222 /*{a-bdown-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #202020 /*{a-bdown-background-start}*/), to( #2c2c2c /*{a-bdown-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #202020 /*{a-bdown-background-start}*/, #2c2c2c /*{a-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -379,17 +379,17 @@ html head + body .ui-btn.ui-btn-a:active {
 }
 
 /* Active button */
-.ui-page-theme-a .ui-btn.ui-btn-active,
-html .ui-bar-a .ui-btn.ui-btn-active,
-html .ui-body-a .ui-btn.ui-btn-active,
-html body .ui-group-theme-a .ui-btn.ui-btn-active,
-html head + body .ui-btn.ui-btn-a.ui-btn-active,
+.ui-page-theme-a .ui-button.ui-button-active,
+html .ui-bar-a .ui-button.ui-button-active,
+html .ui-body-a .ui-button.ui-button-active,
+html body .ui-group-theme-a .ui-button.ui-button-active,
+html head + body .ui-button.ui-button-a.ui-button-active,
 /* Active checkbox icon */
 .ui-page-theme-a .ui-checkbox-on:after,
 html .ui-bar-a .ui-checkbox-on:after,
 html .ui-body-a .ui-checkbox-on:after,
 html body .ui-group-theme-a .ui-checkbox-on:after,
-.ui-btn.ui-checkbox-on.ui-btn-a:after,
+.ui-button.ui-checkbox-on.ui-button-a:after,
 /* Active flipswitch background */
 .ui-page-theme-a .ui-flipswitch-active,
 html .ui-bar-a .ui-flipswitch-active,
@@ -397,11 +397,11 @@ html .ui-body-a .ui-flipswitch-active,
 html body .ui-group-theme-a .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active,
 /* Active slider track */
-.ui-page-theme-a .ui-slider-track .ui-btn-active,
-html .ui-bar-a .ui-slider-track .ui-btn-active,
-html .ui-body-a .ui-slider-track .ui-btn-active,
-html body .ui-group-theme-a .ui-slider-track .ui-btn-active,
-html body div.ui-slider-track.ui-body-a .ui-btn-active {
+.ui-page-theme-a .ui-slider-track .ui-button-active,
+html .ui-bar-a .ui-slider-track .ui-button-active,
+html .ui-body-a .ui-slider-track .ui-button-active,
+html body .ui-group-theme-a .ui-slider-track .ui-button-active,
+html body div.ui-slider-track.ui-body-a .ui-button-active {
 	background-color: 		#5393c5 /*{a-active-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #5393c5 /*{a-active-background-start}*/), to( #6facd5 /*{a-active-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #5393c5 /*{a-active-background-start}*/, #6facd5 /*{a-active-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -418,22 +418,22 @@ html body div.ui-slider-track.ui-body-a .ui-btn-active {
 html .ui-bar-a .ui-radio-on:after,
 html .ui-body-a .ui-radio-on:after,
 html body .ui-group-theme-a .ui-radio-on:after,
-.ui-btn.ui-radio-on.ui-btn-a:after {
+.ui-button.ui-radio-on.ui-button-a:after {
 	border-color:			#5393c5 /*{a-active-background-color}*/;
 }
 
 /* Focus */
-.ui-page-theme-a .ui-btn:focus,
-html .ui-bar-a .ui-btn:focus,
-html .ui-body-a .ui-btn:focus,
-html body .ui-group-theme-a .ui-btn:focus,
-html head + body .ui-btn.ui-btn-a:focus,
+.ui-page-theme-a .ui-button:focus,
+html .ui-bar-a .ui-button:focus,
+html .ui-body-a .ui-button:focus,
+html body .ui-group-theme-a .ui-button:focus,
+html head + body .ui-button.ui-button-a:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-a .ui-focus,
 html .ui-bar-a .ui-focus,
 html .ui-body-a .ui-focus,
 html body .ui-group-theme-a .ui-focus,
-html head + body .ui-btn-a.ui-focus,
+html head + body .ui-button-a.ui-focus,
 html head + body .ui-body-a.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{a-active-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{a-active-background-color}*/;
@@ -533,17 +533,17 @@ html body .ui-group-theme-b a:active {
 }
 
 /* Button up */
-.ui-page-theme-b .ui-btn,
-html .ui-bar-b .ui-btn,
-html .ui-body-b .ui-btn,
-html body .ui-group-theme-b .ui-btn,
-html head + body .ui-btn.ui-btn-b,
+.ui-page-theme-b .ui-button,
+html .ui-bar-b .ui-button,
+html .ui-body-b .ui-button,
+html body .ui-group-theme-b .ui-button,
+html head + body .ui-button.ui-button-b,
 /* Button visited */
-.ui-page-theme-b .ui-btn:visited,
-html .ui-bar-b .ui-btn:visited,
-html .ui-body-b .ui-btn:visited,
-html body .ui-group-theme-b .ui-btn:visited,
-html head + body .ui-btn.ui-btn-b:visited {
+.ui-page-theme-b .ui-button:visited,
+html .ui-bar-b .ui-button:visited,
+html .ui-body-b .ui-button:visited,
+html body .ui-group-theme-b .ui-button:visited,
+html head + body .ui-button.ui-button-b:visited {
 	background: 			#396b9e /*{b-bup-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #5f9cc5 /*{b-bup-background-start}*/), to( #396b9e /*{b-bup-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e /*{b-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -556,11 +556,11 @@ html head + body .ui-btn.ui-btn-b:visited {
 	text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 0 /*{b-bup-shadow-radius}*/ #194b7e /*{b-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-page-theme-b .ui-btn:hover,
-html .ui-bar-b .ui-btn:hover,
-html .ui-body-b .ui-btn:hover,
-html body .ui-group-theme-b .ui-btn:hover,
-html head + body .ui-btn.ui-btn-b:hover {
+.ui-page-theme-b .ui-button:hover,
+html .ui-bar-b .ui-button:hover,
+html .ui-body-b .ui-button:hover,
+html body .ui-group-theme-b .ui-button:hover,
+html head + body .ui-button.ui-button-b:hover {
 	background: 			#4b88b6 /*{b-bhover-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #6facd5 /*{b-bhover-background-start}*/), to( #4272a4 /*{b-bhover-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #6facd5 /*{b-bhover-background-start}*/, #4272a4 /*{b-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -573,11 +573,11 @@ html head + body .ui-btn.ui-btn-b:hover {
 	text-shadow: 0 /*{b-bhover-shadow-x}*/ 1px /*{b-bhover-shadow-y}*/ 0 /*{b-bhover-shadow-radius}*/ #194b7e /*{b-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-page-theme-b .ui-btn:active,
-html .ui-bar-b .ui-btn:active,
-html .ui-body-b .ui-btn:active,
-html body .ui-group-theme-b .ui-btn:active,
-html head + body .ui-btn.ui-btn-b:active {
+.ui-page-theme-b .ui-button:active,
+html .ui-bar-b .ui-button:active,
+html .ui-body-b .ui-button:active,
+html body .ui-group-theme-b .ui-button:active,
+html head + body .ui-button.ui-button-b:active {
 	background: 			#4e89c5 /*{b-bdown-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #295b8e /*{b-bdown-background-start}*/), to( #3e79b5 /*{b-bdown-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #295b8e /*{b-bdown-background-start}*/, #3e79b5 /*{b-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -591,17 +591,17 @@ html head + body .ui-btn.ui-btn-b:active {
 }
 
 /* Active button */
-.ui-page-theme-b .ui-btn.ui-btn-active,
-html .ui-bar-b .ui-btn.ui-btn-active,
-html .ui-body-b .ui-btn.ui-btn-active,
-html body .ui-group-theme-b .ui-btn.ui-btn-active,
-html head + body .ui-btn.ui-btn-b.ui-btn-active,
+.ui-page-theme-b .ui-button.ui-button-active,
+html .ui-bar-b .ui-button.ui-button-active,
+html .ui-body-b .ui-button.ui-button-active,
+html body .ui-group-theme-b .ui-button.ui-button-active,
+html head + body .ui-button.ui-button-b.ui-button-active,
 /* Active checkbox icon */
 .ui-page-theme-b .ui-checkbox-on:after,
 html .ui-bar-b .ui-checkbox-on:after,
 html .ui-body-b .ui-checkbox-on:after,
 html body .ui-group-theme-b .ui-checkbox-on:after,
-.ui-btn.ui-checkbox-on.ui-btn-b:after,
+.ui-button.ui-checkbox-on.ui-button-b:after,
 /* Active flipswitch background */
 .ui-page-theme-b .ui-flipswitch-active,
 html .ui-bar-b .ui-flipswitch-active,
@@ -609,11 +609,11 @@ html .ui-body-b .ui-flipswitch-active,
 html body .ui-group-theme-b .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-b.ui-flipswitch-active,
 /* Active slider track */
-.ui-page-theme-b .ui-slider-track .ui-btn-active,
-html .ui-bar-b .ui-slider-track .ui-btn-active,
-html .ui-body-b .ui-slider-track .ui-btn-active,
-html body .ui-group-theme-b .ui-slider-track .ui-btn-active,
-html body div.ui-slider-track.ui-body-b .ui-btn-active {
+.ui-page-theme-b .ui-slider-track .ui-button-active,
+html .ui-bar-b .ui-slider-track .ui-button-active,
+html .ui-body-b .ui-slider-track .ui-button-active,
+html body .ui-group-theme-b .ui-slider-track .ui-button-active,
+html body div.ui-slider-track.ui-body-b .ui-button-active {
 	background-color: 		#5393c5 /*{b-active-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #5393c5 /*{b-active-background-start}*/), to( #6facd5 /*{b-active-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #5393c5 /*{b-active-background-start}*/, #6facd5 /*{b-active-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -630,22 +630,22 @@ html body div.ui-slider-track.ui-body-b .ui-btn-active {
 html .ui-bar-b .ui-radio-on:after,
 html .ui-body-b .ui-radio-on:after,
 html body .ui-group-theme-b .ui-radio-on:after,
-.ui-btn.ui-radio-on.ui-btn-b:after {
+.ui-button.ui-radio-on.ui-button-b:after {
 	border-color:			#5393c5 /*{b-active-background-color}*/;
 }
 
 /* Focus */
-.ui-page-theme-b .ui-btn:focus,
-html .ui-bar-b .ui-btn:focus,
-html .ui-body-b .ui-btn:focus,
-html body .ui-group-theme-b .ui-btn:focus,
-html head + body .ui-btn.ui-btn-b:focus,
+.ui-page-theme-b .ui-button:focus,
+html .ui-bar-b .ui-button:focus,
+html .ui-body-b .ui-button:focus,
+html body .ui-group-theme-b .ui-button:focus,
+html head + body .ui-button.ui-button-b:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-b .ui-focus,
 html .ui-bar-b .ui-focus,
 html .ui-body-b .ui-focus,
 html body .ui-group-theme-b .ui-focus,
-html head + body .ui-btn-b.ui-focus,
+html head + body .ui-button-b.ui-focus,
 html head + body .ui-body-b.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{b-active-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{b-active-background-color}*/;
@@ -745,17 +745,17 @@ html body .ui-group-theme-c a:active {
 }
 
 /* Button up */
-.ui-page-theme-c .ui-btn,
-html .ui-bar-c .ui-btn,
-html .ui-body-c .ui-btn,
-html body .ui-group-theme-c .ui-btn,
-html head + body .ui-btn.ui-btn-c,
+.ui-page-theme-c .ui-button,
+html .ui-bar-c .ui-button,
+html .ui-body-c .ui-button,
+html body .ui-group-theme-c .ui-button,
+html head + body .ui-button.ui-button-c,
 /* Button visited */
-.ui-page-theme-c .ui-btn:visited,
-html .ui-bar-c .ui-btn:visited,
-html .ui-body-c .ui-btn:visited,
-html body .ui-group-theme-c .ui-btn:visited,
-html head + body .ui-btn.ui-btn-c:visited {
+.ui-page-theme-c .ui-button:visited,
+html .ui-bar-c .ui-button:visited,
+html .ui-body-c .ui-button:visited,
+html body .ui-group-theme-c .ui-button:visited,
+html head + body .ui-button.ui-button-c:visited {
 	background: 			#eee /*{c-bup-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff /*{c-bup-background-start}*/), to( #f1f1f1 /*{c-bup-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #fff /*{c-bup-background-start}*/, #f1f1f1 /*{c-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -768,11 +768,11 @@ html head + body .ui-btn.ui-btn-c:visited {
 	text-shadow: 0 /*{c-bup-shadow-x}*/ 1px /*{c-bup-shadow-y}*/ 0 /*{c-bup-shadow-radius}*/ #fff /*{c-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-page-theme-c .ui-btn:hover,
-html .ui-bar-c .ui-btn:hover,
-html .ui-body-c .ui-btn:hover,
-html body .ui-group-theme-c .ui-btn:hover,
-html head + body .ui-btn.ui-btn-c:hover {
+.ui-page-theme-c .ui-button:hover,
+html .ui-bar-c .ui-button:hover,
+html .ui-body-c .ui-button:hover,
+html body .ui-group-theme-c .ui-button:hover,
+html head + body .ui-button.ui-button-c:hover {
 	background: 			#dfdfdf /*{c-bhover-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #f6f6f6 /*{c-bhover-background-start}*/), to( #e0e0e0 /*{c-bhover-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -785,11 +785,11 @@ html head + body .ui-btn.ui-btn-c:hover {
 	text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ #fff /*{c-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-page-theme-c .ui-btn:active,
-html .ui-bar-c .ui-btn:active,
-html .ui-body-c .ui-btn:active,
-html body .ui-group-theme-c .ui-btn:active,
-html head + body .ui-btn.ui-btn-c:active {
+.ui-page-theme-c .ui-button:active,
+html .ui-bar-c .ui-button:active,
+html .ui-body-c .ui-button:active,
+html body .ui-group-theme-c .ui-button:active,
+html head + body .ui-button.ui-button-c:active {
 	background: 			#d6d6d6 /*{c-bdown-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #d0d0d0 /*{c-bdown-background-start}*/), to( #dfdfdf /*{c-bdown-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #d0d0d0 /*{c-bdown-background-start}*/, #dfdfdf /*{c-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -803,17 +803,17 @@ html head + body .ui-btn.ui-btn-c:active {
 }
 
 /* Active button */
-.ui-page-theme-c .ui-btn.ui-btn-active,
-html .ui-bar-c .ui-btn.ui-btn-active,
-html .ui-body-c .ui-btn.ui-btn-active,
-html body .ui-group-theme-c .ui-btn.ui-btn-active,
-html head + body .ui-btn.ui-btn-c.ui-btn-active,
+.ui-page-theme-c .ui-button.ui-button-active,
+html .ui-bar-c .ui-button.ui-button-active,
+html .ui-body-c .ui-button.ui-button-active,
+html body .ui-group-theme-c .ui-button.ui-button-active,
+html head + body .ui-button.ui-button-c.ui-button-active,
 /* Active checkbox icon */
 .ui-page-theme-c .ui-checkbox-on:after,
 html .ui-bar-c .ui-checkbox-on:after,
 html .ui-body-c .ui-checkbox-on:after,
 html body .ui-group-theme-c .ui-checkbox-on:after,
-.ui-btn.ui-checkbox-on.ui-btn-c:after,
+.ui-button.ui-checkbox-on.ui-button-c:after,
 /* Active flipswitch background */
 .ui-page-theme-c .ui-flipswitch-active,
 html .ui-bar-c .ui-flipswitch-active,
@@ -821,11 +821,11 @@ html .ui-body-c .ui-flipswitch-active,
 html body .ui-group-theme-c .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-c.ui-flipswitch-active,
 /* Active slider track */
-.ui-page-theme-c .ui-slider-track .ui-btn-active,
-html .ui-bar-c .ui-slider-track .ui-btn-active,
-html .ui-body-c .ui-slider-track .ui-btn-active,
-html body .ui-group-theme-c .ui-slider-track .ui-btn-active,
-html body div.ui-slider-track.ui-body-c .ui-btn-active {
+.ui-page-theme-c .ui-slider-track .ui-button-active,
+html .ui-bar-c .ui-slider-track .ui-button-active,
+html .ui-body-c .ui-slider-track .ui-button-active,
+html body .ui-group-theme-c .ui-slider-track .ui-button-active,
+html body div.ui-slider-track.ui-body-c .ui-button-active {
 	background-color: 		#5393c5 /*{c-active-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #5393c5 /*{c-active-background-start}*/), to( #6facd5 /*{c-active-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #5393c5 /*{c-active-background-start}*/, #6facd5 /*{c-active-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -842,22 +842,22 @@ html body div.ui-slider-track.ui-body-c .ui-btn-active {
 html .ui-bar-c .ui-radio-on:after,
 html .ui-body-c .ui-radio-on:after,
 html body .ui-group-theme-c .ui-radio-on:after,
-.ui-btn.ui-radio-on.ui-btn-c:after {
+.ui-button.ui-radio-on.ui-button-c:after {
 	border-color:			#5393c5 /*{c-active-background-color}*/;
 }
 
 /* Focus */
-.ui-page-theme-c .ui-btn:focus,
-html .ui-bar-c .ui-btn:focus,
-html .ui-body-c .ui-btn:focus,
-html body .ui-group-theme-c .ui-btn:focus,
-html head + body .ui-btn.ui-btn-c:focus,
+.ui-page-theme-c .ui-button:focus,
+html .ui-bar-c .ui-button:focus,
+html .ui-body-c .ui-button:focus,
+html body .ui-group-theme-c .ui-button:focus,
+html head + body .ui-button.ui-button-c:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-c .ui-focus,
 html .ui-bar-c .ui-focus,
 html .ui-body-c .ui-focus,
 html body .ui-group-theme-c .ui-focus,
-html head + body .ui-btn-c.ui-focus,
+html head + body .ui-button-c.ui-focus,
 html head + body .ui-body-c.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{c-active-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{c-active-background-color}*/;
@@ -957,17 +957,17 @@ html body .ui-group-theme-d a:active {
 }
 
 /* Button up */
-.ui-page-theme-d .ui-btn,
-html .ui-bar-d .ui-btn,
-html .ui-body-d .ui-btn,
-html body .ui-group-theme-d .ui-btn,
-html head + body .ui-btn.ui-btn-d,
+.ui-page-theme-d .ui-button,
+html .ui-bar-d .ui-button,
+html .ui-body-d .ui-button,
+html body .ui-group-theme-d .ui-button,
+html head + body .ui-button.ui-button-d,
 /* Button visited */
-.ui-page-theme-d .ui-btn:visited,
-html .ui-bar-d .ui-btn:visited,
-html .ui-body-d .ui-btn:visited,
-html body .ui-group-theme-d .ui-btn:visited,
-html head + body .ui-btn.ui-btn-d:visited {
+.ui-page-theme-d .ui-button:visited,
+html .ui-bar-d .ui-button:visited,
+html .ui-body-d .ui-button:visited,
+html body .ui-group-theme-d .ui-button:visited,
+html head + body .ui-button.ui-button-d:visited {
 	background: 			#fff /*{d-bup-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #fafafa /*{d-bup-background-start}*/), to( #f6f6f6 /*{d-bup-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #fafafa /*{d-bup-background-start}*/, #f6f6f6 /*{d-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -980,11 +980,11 @@ html head + body .ui-btn.ui-btn-d:visited {
 	text-shadow: 0 /*{d-bup-shadow-x}*/ 1px /*{d-bup-shadow-y}*/ 0 /*{d-bup-shadow-radius}*/ #fff /*{d-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-page-theme-d .ui-btn:hover,
-html .ui-bar-d .ui-btn:hover,
-html .ui-body-d .ui-btn:hover,
-html body .ui-group-theme-d .ui-btn:hover,
-html head + body .ui-btn.ui-btn-d:hover {
+.ui-page-theme-d .ui-button:hover,
+html .ui-bar-d .ui-button:hover,
+html .ui-body-d .ui-button:hover,
+html body .ui-group-theme-d .ui-button:hover,
+html head + body .ui-button.ui-button-d:hover {
 	background: 			#eee /*{d-bhover-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #eee /*{d-bhover-background-start}*/), to( #fff /*{d-bhover-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #eee /*{d-bhover-background-start}*/, #fff /*{d-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -997,11 +997,11 @@ html head + body .ui-btn.ui-btn-d:hover {
 	text-shadow: 0 /*{d-bhover-shadow-x}*/ 1px /*{d-bhover-shadow-y}*/ 0 /*{d-bhover-shadow-radius}*/ #fff /*{d-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-page-theme-d .ui-btn:active,
-html .ui-bar-d .ui-btn:active,
-html .ui-body-d .ui-btn:active,
-html body .ui-group-theme-d .ui-btn:active,
-html head + body .ui-btn.ui-btn-d:active {
+.ui-page-theme-d .ui-button:active,
+html .ui-bar-d .ui-button:active,
+html .ui-body-d .ui-button:active,
+html body .ui-group-theme-d .ui-button:active,
+html head + body .ui-button.ui-button-d:active {
 	background: 			#eee /*{d-bdown-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #e5e5e5 /*{d-bdown-background-start}*/), to( #f2f2f2 /*{d-bdown-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #e5e5e5 /*{d-bdown-background-start}*/, #f2f2f2 /*{d-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -1015,17 +1015,17 @@ html head + body .ui-btn.ui-btn-d:active {
 }
 
 /* Active button */
-.ui-page-theme-d .ui-btn.ui-btn-active,
-html .ui-bar-d .ui-btn.ui-btn-active,
-html .ui-body-d .ui-btn.ui-btn-active,
-html body .ui-group-theme-d .ui-btn.ui-btn-active,
-html head + body .ui-btn.ui-btn-d.ui-btn-active,
+.ui-page-theme-d .ui-button.ui-button-active,
+html .ui-bar-d .ui-button.ui-button-active,
+html .ui-body-d .ui-button.ui-button-active,
+html body .ui-group-theme-d .ui-button.ui-button-active,
+html head + body .ui-button.ui-button-d.ui-button-active,
 /* Active checkbox icon */
 .ui-page-theme-d .ui-checkbox-on:after,
 html .ui-bar-d .ui-checkbox-on:after,
 html .ui-body-d .ui-checkbox-on:after,
 html body .ui-group-theme-d .ui-checkbox-on:after,
-.ui-btn.ui-checkbox-on.ui-btn-d:after,
+.ui-button.ui-checkbox-on.ui-button-d:after,
 /* Active flipswitch background */
 .ui-page-theme-d .ui-flipswitch-active,
 html .ui-bar-d .ui-flipswitch-active,
@@ -1033,11 +1033,11 @@ html .ui-body-d .ui-flipswitch-active,
 html body .ui-group-theme-d .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-d.ui-flipswitch-active,
 /* Active slider track */
-.ui-page-theme-d .ui-slider-track .ui-btn-active,
-html .ui-bar-d .ui-slider-track .ui-btn-active,
-html .ui-body-d .ui-slider-track .ui-btn-active,
-html body .ui-group-theme-d .ui-slider-track .ui-btn-active,
-html body div.ui-slider-track.ui-body-d .ui-btn-active {
+.ui-page-theme-d .ui-slider-track .ui-button-active,
+html .ui-bar-d .ui-slider-track .ui-button-active,
+html .ui-body-d .ui-slider-track .ui-button-active,
+html body .ui-group-theme-d .ui-slider-track .ui-button-active,
+html body div.ui-slider-track.ui-body-d .ui-button-active {
 	background-color: 		#5393c5 /*{d-active-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #5393c5 /*{d-active-background-start}*/), to( #6facd5 /*{d-active-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #5393c5 /*{d-active-background-start}*/, #6facd5 /*{d-active-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -1054,22 +1054,22 @@ html body div.ui-slider-track.ui-body-d .ui-btn-active {
 html .ui-bar-d .ui-radio-on:after,
 html .ui-body-d .ui-radio-on:after,
 html body .ui-group-theme-d .ui-radio-on:after,
-.ui-btn.ui-radio-on.ui-btn-d:after {
+.ui-button.ui-radio-on.ui-button-d:after {
 	border-color:			#5393c5 /*{d-active-background-color}*/;
 }
 
 /* Focus */
-.ui-page-theme-d .ui-btn:focus,
-html .ui-bar-d .ui-btn:focus,
-html .ui-body-d .ui-btn:focus,
-html body .ui-group-theme-d .ui-btn:focus,
-html head + body .ui-btn.ui-btn-d:focus,
+.ui-page-theme-d .ui-button:focus,
+html .ui-bar-d .ui-button:focus,
+html .ui-body-d .ui-button:focus,
+html body .ui-group-theme-d .ui-button:focus,
+html head + body .ui-button.ui-button-d:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-d .ui-focus,
 html .ui-bar-d .ui-focus,
 html .ui-body-d .ui-focus,
 html body .ui-group-theme-d .ui-focus,
-html head + body .ui-btn-d.ui-focus,
+html head + body .ui-button-d.ui-focus,
 html head + body .ui-body-d.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{d-active-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{d-active-background-color}*/;
@@ -1169,17 +1169,17 @@ html body .ui-group-theme-e a:active {
 }
 
 /* Button up */
-.ui-page-theme-e .ui-btn,
-html .ui-bar-e .ui-btn,
-html .ui-body-e .ui-btn,
-html body .ui-group-theme-e .ui-btn,
-html head + body .ui-btn.ui-btn-e,
+.ui-page-theme-e .ui-button,
+html .ui-bar-e .ui-button,
+html .ui-body-e .ui-button,
+html body .ui-group-theme-e .ui-button,
+html head + body .ui-button.ui-button-e,
 /* Button visited */
-.ui-page-theme-e .ui-btn:visited,
-html .ui-bar-e .ui-btn:visited,
-html .ui-body-e .ui-btn:visited,
-html body .ui-group-theme-e .ui-btn:visited,
-html head + body .ui-btn.ui-btn-e:visited {
+.ui-page-theme-e .ui-button:visited,
+html .ui-bar-e .ui-button:visited,
+html .ui-body-e .ui-button:visited,
+html body .ui-group-theme-e .ui-button:visited,
+html head + body .ui-button.ui-button-e:visited {
 	background: 			#fadb4e /*{e-bup-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #ffefaa /*{e-bup-background-start}*/), to( #ffe155 /*{e-bup-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #ffefaa /*{e-bup-background-start}*/, #ffe155 /*{e-bup-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -1192,11 +1192,11 @@ html head + body .ui-btn.ui-btn-e:visited {
 	text-shadow: 0 /*{e-bup-shadow-x}*/ 1px /*{e-bup-shadow-y}*/ 0 /*{e-bup-shadow-radius}*/ #fff /*{e-bup-shadow-color}*/;
 }
 /* Button hover */
-.ui-page-theme-e .ui-btn:hover,
-html .ui-bar-e .ui-btn:hover,
-html .ui-body-e .ui-btn:hover,
-html body .ui-group-theme-e .ui-btn:hover,
-html head + body .ui-btn.ui-btn-e:hover {
+.ui-page-theme-e .ui-button:hover,
+html .ui-bar-e .ui-button:hover,
+html .ui-body-e .ui-button:hover,
+html body .ui-group-theme-e .ui-button:hover,
+html head + body .ui-button.ui-button-e:hover {
 	background: 			#fbe26f /*{e-bhover-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #fff5ba /*{e-bhover-background-start}*/), to( #fbdd52 /*{e-bhover-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #fff5ba /*{e-bhover-background-start}*/, #fbdd52 /*{e-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -1209,11 +1209,11 @@ html head + body .ui-btn.ui-btn-e:hover {
 	text-shadow: 0 /*{e-bhover-shadow-x}*/ 1px /*{e-bhover-shadow-y}*/ 0 /*{e-bhover-shadow-radius}*/ #fff /*{e-bhover-shadow-color}*/;
 }
 /* Button down */
-.ui-page-theme-e .ui-btn:active,
-html .ui-bar-e .ui-btn:active,
-html .ui-body-e .ui-btn:active,
-html body .ui-group-theme-e .ui-btn:active,
-html head + body .ui-btn.ui-btn-e:active {
+.ui-page-theme-e .ui-button:active,
+html .ui-bar-e .ui-button:active,
+html .ui-body-e .ui-button:active,
+html body .ui-group-theme-e .ui-button:active,
+html head + body .ui-button.ui-button-e:active {
 	background: 			#fceda7 /*{e-bdown-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #f8d94c /*{e-bdown-background-start}*/), to( #fadb4e /*{e-bdown-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #f8d94c /*{e-bdown-background-start}*/, #fadb4e /*{e-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -1227,17 +1227,17 @@ html head + body .ui-btn.ui-btn-e:active {
 }
 
 /* Active button */
-.ui-page-theme-e .ui-btn.ui-btn-active,
-html .ui-bar-e .ui-btn.ui-btn-active,
-html .ui-body-e .ui-btn.ui-btn-active,
-html body .ui-group-theme-e .ui-btn.ui-btn-active,
-html head + body .ui-btn.ui-btn-e.ui-btn-active,
+.ui-page-theme-e .ui-button.ui-button-active,
+html .ui-bar-e .ui-button.ui-button-active,
+html .ui-body-e .ui-button.ui-button-active,
+html body .ui-group-theme-e .ui-button.ui-button-active,
+html head + body .ui-button.ui-button-e.ui-button-active,
 /* Active checkbox icon */
 .ui-page-theme-e .ui-checkbox-on:after,
 html .ui-bar-e .ui-checkbox-on:after,
 html .ui-body-e .ui-checkbox-on:after,
 html body .ui-group-theme-e .ui-checkbox-on:after,
-.ui-btn.ui-checkbox-on.ui-btn-e:after,
+.ui-button.ui-checkbox-on.ui-button-e:after,
 /* Active flipswitch background */
 .ui-page-theme-e .ui-flipswitch-active,
 html .ui-bar-e .ui-flipswitch-active,
@@ -1245,11 +1245,11 @@ html .ui-body-e .ui-flipswitch-active,
 html body .ui-group-theme-e .ui-flipswitch-active,
 html body .ui-flipswitch.ui-bar-e.ui-flipswitch-active,
 /* Active slider track */
-.ui-page-theme-e .ui-slider-track .ui-btn-active,
-html .ui-bar-e .ui-slider-track .ui-btn-active,
-html .ui-body-e .ui-slider-track .ui-btn-active,
-html body .ui-group-theme-e .ui-slider-track .ui-btn-active,
-html body div.ui-slider-track.ui-body-e .ui-btn-active {
+.ui-page-theme-e .ui-slider-track .ui-button-active,
+html .ui-bar-e .ui-slider-track .ui-button-active,
+html .ui-body-e .ui-slider-track .ui-button-active,
+html body .ui-group-theme-e .ui-slider-track .ui-button-active,
+html body div.ui-slider-track.ui-body-e .ui-button-active {
 	background-color: 		#5393c5 /*{e-active-background-color}*/;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #5393c5 /*{e-active-background-start}*/), to( #6facd5 /*{e-active-background-end}*/)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient( #5393c5 /*{e-active-background-start}*/, #6facd5 /*{e-active-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -1266,22 +1266,22 @@ html body div.ui-slider-track.ui-body-e .ui-btn-active {
 html .ui-bar-e .ui-radio-on:after,
 html .ui-body-e .ui-radio-on:after,
 html body .ui-group-theme-e .ui-radio-on:after,
-.ui-btn.ui-radio-on.ui-btn-e:after {
+.ui-button.ui-radio-on.ui-button-e:after {
 	border-color:			#5393c5 /*{e-active-background-color}*/;
 }
 
 /* Focus */
-.ui-page-theme-e .ui-btn:focus,
-html .ui-bar-e .ui-btn:focus,
-html .ui-body-e .ui-btn:focus,
-html body .ui-group-theme-e .ui-btn:focus,
-html head + body .ui-btn.ui-btn-e:focus,
+.ui-page-theme-e .ui-button:focus,
+html .ui-bar-e .ui-button:focus,
+html .ui-body-e .ui-button:focus,
+html body .ui-group-theme-e .ui-button:focus,
+html head + body .ui-button.ui-button-e:focus,
 /* Focus buttons and text inputs with div wrap */
 .ui-page-theme-e .ui-focus,
 html .ui-bar-e .ui-focus,
 html .ui-body-e .ui-focus,
 html body .ui-group-theme-e .ui-focus,
-html head + body .ui-btn-e.ui-focus,
+html head + body .ui-button-e.ui-focus,
 html head + body .ui-body-e.ui-focus {
 	-webkit-box-shadow: 0 0 12px 	#387bbe /*{e-active-background-color}*/;
 	-moz-box-shadow: 0 0 12px 		#387bbe /*{e-active-background-color}*/;
@@ -1291,7 +1291,7 @@ html head + body .ui-body-e.ui-focus {
 /* "classic" theme specific rules
 -----------------------------------------------------------------------------------------------------------*/
 /* Button top highlight. Note: this won't work with buttons inside an ordered list because we use :before for list numbering */
-.ui-btn:before {
+.ui-button:before {
 	content: "";
 	display: block;
 	position: absolute;
@@ -1324,7 +1324,7 @@ input.ui-slider-input {
 .ui-disabled,
 .ui-state-disabled,
 button[disabled],
-.ui-select .ui-btn.ui-state-disabled {
+.ui-select .ui-button.ui-state-disabled {
 	filter: Alpha(Opacity=30);
 	opacity: .3;
 	cursor: default !important;
@@ -1334,25 +1334,25 @@ button[disabled],
 /* Focus state outline
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn:focus,
-.ui-btn.ui-focus {
+.ui-button:focus,
+.ui-button.ui-focus {
 	outline: 0;
 }
 /* Unset box-shadow in browsers that don't do it right */
 .ui-noboxshadow .ui-shadow,
 .ui-noboxshadow .ui-shadow-inset,
 .ui-noboxshadow .ui-overlay-shadow,
-.ui-noboxshadow .ui-shadow-icon.ui-btn:after,
-.ui-noboxshadow .ui-shadow-icon .ui-btn:after,
+.ui-noboxshadow .ui-shadow-icon.ui-button:after,
+.ui-noboxshadow .ui-shadow-icon .ui-button:after,
 .ui-noboxshadow .ui-focus,
-.ui-noboxshadow .ui-btn:focus,
+.ui-noboxshadow .ui-button:focus,
 .ui-noboxshadow  input:focus,
 .ui-noboxshadow .ui-panel {
 	-webkit-box-shadow: none !important;
 	-moz-box-shadow: none !important;
 	box-shadow: none !important;
 }
-.ui-noboxshadow .ui-btn:focus,
+.ui-noboxshadow .ui-button:focus,
 .ui-noboxshadow .ui-focus {
 	outline-width: 1px;
 	outline-style: auto;
