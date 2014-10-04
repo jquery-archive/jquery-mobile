@@ -65,7 +65,7 @@
 
 			<h3>A note about transitions</h3>
 
-			<p>By Removing the toolbars from the page container they are no longer part of the page transition which dramaticly improves the performance of complex 3D page transitions over the older style of persistent toolbars.</p>
+			<p>By Removing the toolbars from the page container they are no longer part of the page transition which dramatically improves the performance of complex 3D page transitions over the older style of persistent toolbars.</p>
 
 		</div><!-- /content -->
 

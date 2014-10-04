@@ -66,9 +66,6 @@ define( [
 			this._super( o );
 		},
 		refresh: function() {
-			if ( this.role === "header" ) {
-				this._addHeaderButtonClasses();
-			}
 			if ( !this.page ) {
 				this._setRelative();
 				if ( this.role === "footer" ) {
@@ -78,7 +75,6 @@ define( [
 				}
 			}
 			this._addHeadingClasses();
-			this._btnMarkup();
 		},
 
 		//we only want this to run on non fixed toolbars so make it easy to override
@@ -86,33 +82,6 @@ define( [
 			$( "[data-"+ $.mobile.ns + "role='page']" ).css({ "position": "relative" });
 		},
 
-		// Deprecated in 1.4. As from 1.5 button classes have to be present in the markup.
-		_btnMarkup: function() {
-			this.element
-				.children( "a" )
-				.filter( ":not([data-" + $.mobile.ns + "role='none'])" )
-				.attr( "data-" + $.mobile.ns + "role", "button" );
-			this.element.trigger( "create" );
-		},
-		// Deprecated in 1.4. As from 1.5 ui-btn-left/right classes have to be present in the markup.
-		_addHeaderButtonClasses: function() {
-			var headerAnchors = this.element.children( "a, button" );
-
-			// Do not mistake a back button for a left toolbar button
-			this.leftbtn = headerAnchors.hasClass( "ui-btn-left" ) &&
-				!headerAnchors.hasClass( "ui-toolbar-back-btn" );
-
-			this.rightbtn = headerAnchors.hasClass( "ui-btn-right" );
-
-			// Filter out right buttons and back buttons
-			this.leftbtn = this.leftbtn ||
-				headerAnchors.eq( 0 )
-					.not( ".ui-btn-right,.ui-toolbar-back-btn" )
-					.addClass( "ui-btn-left" )
-					.length;
-
-			this.rightbtn = this.rightbtn || headerAnchors.eq( 1 ).addClass( "ui-btn-right" ).length;
-		},
 		_updateBackButton: function() {
 			var backButton,
 				options = this.options,

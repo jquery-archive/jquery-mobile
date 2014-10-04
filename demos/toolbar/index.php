@@ -101,7 +101,7 @@
 
 		<h2>Buttons in toolbars</h2>
 
-		<p>The framework automatically enhances links in toolbars as buttons with inline and mini style, but this has been deprecated in version 1.4. The same goes for positioning the first two buttons in a header left and right if they are immediate child of the header. The demos below prepare you for the next version.</p>
+		<p>You can style anchors as buttons inside jQuery Mobile toolbars. The <code>ui-mini</code> class is particularly well-suited for use with toolbar buttons.</p>
 
 		<h3>Header button position classes</h3>
 
