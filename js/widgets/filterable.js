@@ -13,7 +13,19 @@ define( [
 
 // TODO rename filterCallback/deprecate and default to the item itself as the first argument
 var defaultFilterCallback = function( index, searchValue ) {
-	return ( ( "" + ( $.mobile.getAttribute( this, "filtertext" ) || $( this ).text() ) )
+	var element,
+		text = $.mobile.getAttribute( this, "filtertext" );
+
+	if ( !text ) {
+		element = $( this );
+		text = element.text();
+
+		if ( !text ) {
+			text = element.val() || "";
+		}
+	}
+
+	return ( ( "" + text )
 		.toLowerCase().indexOf( searchValue ) === -1 );
 };
 
@@ -26,7 +38,8 @@ $.widget( "mobile.filterable", {
 		filterCallback: defaultFilterCallback,
 		enhanced: false,
 		input: null,
-		children: "> li, > option, > optgroup option, > tbody tr, > .ui-controlgroup-controls > .ui-btn, > .ui-controlgroup-controls > .ui-checkbox, > .ui-controlgroup-controls > .ui-radio"
+		children: "> li, > option, > optgroup option, > tbody tr, > .ui-controlgroup > .ui-btn, " +
+			"> .ui-controlgroup > .ui-checkbox, > .ui-controlgroup > .ui-radio"
 	},
 
 	_create: function() {

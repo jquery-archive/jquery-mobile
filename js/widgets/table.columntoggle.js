@@ -9,7 +9,7 @@ define( [
 	"./table",
 	"./popup",
 	"./controlgroup",
-	"./forms/checkboxradio" ], function( jQuery ) {
+	"../jquery-ui/checkboxradio" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -85,7 +85,13 @@ $.widget( "mobile.table", $.mobile.table, {
 		this.headers.not( "td" ).each( function() {
 			var input, cells,
 				header = $( this ),
-				priority = $.mobile.getAttribute( this, "priority" );
+				priority = $.mobile.getAttribute( this, "priority" ),
+				makeInput = function( text ) {
+					var input = $( "<input type='checkbox' checked='checked' />" ).uniqueId(),
+						label = $( "<label>" ).text( text ).attr( "for", input.attr( "id" ) );
+
+					return input.add( label );
+				};
 
 			if ( priority ) {
 				cells = header.add( header.jqmData( "cells" ) );
@@ -94,12 +100,10 @@ $.widget( "mobile.table", $.mobile.table, {
 				// Make sure the (new?) checkbox is associated with its header via .jqmData() and
 				// that, vice versa, the header is also associated with the checkbox
 				input = ( keep ? inputs.eq( checkboxIndex++ ) :
-					$("<label><input type='checkbox' checked />" +
-						( header.children( "abbr" ).first().attr( "title" ) ||
-							header.text() ) +
-						"</label>" )
+					makeInput( ( header.children( "abbr" ).first().attr( "title" ) ||
+							header.text() ) )
 						.appendTo( container )
-						.children( 0 )
+						.first()
 						.checkboxradio( {
 							theme: opts.columnPopupTheme
 						}) )

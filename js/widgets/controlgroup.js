@@ -8,7 +8,7 @@
 define( [
 	"jquery",
 	"jquery-ui/widget",
-	"widget.theme",
+	"./widget.theme",
 	"jquery-ui/controlgroup"
 ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -29,6 +29,12 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 				}
 			}
 		});
+	},
+
+	// Deprecated as of 1.5.0 and will be removed in 1.6.0
+	// This method is no longer necessary since controlgroup no longer has a wrapper
+	container: function() {
+		return this.element;
 	},
 
 	_enhance: function() {

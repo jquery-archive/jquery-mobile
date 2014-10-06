@@ -2,14 +2,6 @@
 
 module( "Toolbar" );
 
-test( "Links are auto-enhanced, unless data-role is set to 'none'", function() {
-	var leftLink = $( "#start-page-header a:first" ),
-		rightLink = $( "#start-page-header a:last" );
-
-	deepEqual( leftLink.hasClass( "ui-btn" ), true, "Left link has been enhanced" );
-	deepEqual( rightLink.hasClass( "ui-btn" ), false, "Right link has not been enhanced" );
-});
-
 asyncTest( "Back button appears correctly", function() {
 
 	expect( 2 );
