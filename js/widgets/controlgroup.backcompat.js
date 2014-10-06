@@ -25,8 +25,6 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 		mini: false
 	},
 
-	classProp: "ui-controlgroup",
-
 	_create: function() {
 		if ( this.options.direction !== $.ui.controlgroup.prototype.options.direction ) {
 			this.options.type = this.options.type;
