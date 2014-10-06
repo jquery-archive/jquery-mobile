@@ -23,7 +23,9 @@ var rInitialLetter = /([A-Z])/g,
 
 	// Construct iconpos class from iconpos value
 	iconposClass = function( iconpos ) {
-		return ( "ui-btn-icon-" + ( iconpos === null ? "left" : iconpos ) );
+
+		return ( "ui-icon-" +
+			( iconpos === null ? $.mobile.collapsible.defaults.iconpos : iconpos ) );
 	};
 
 $.widget( "mobile.collapsible", {
@@ -356,7 +358,7 @@ $.mobile.collapsible.defaults = {
 	collapsedIcon: "plus",
 	contentTheme: "inherit",
 	expandedIcon: "minus",
-	iconpos: "left",
+	iconpos: "beginning",
 	inset: true,
 	corners: true,
 	theme: "inherit",

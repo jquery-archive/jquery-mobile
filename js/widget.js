@@ -37,7 +37,7 @@ $.extend( $.Widget.prototype, {
 });
 
 //TODO: Remove in 1.5 for backcompat only
-$.mobile.widget = $.Widget;
+$.mobile.widget = $.extend( {}, $.Widget, $.mobile.widget );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
