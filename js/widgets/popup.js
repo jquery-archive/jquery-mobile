@@ -639,7 +639,9 @@ $.widget( "mobile.popup", {
 		this._ui.container.addClass( "ui-popup-active" );
 		this._isOpen = true;
 		this._resizeScreen();
-		this._ui.container.attr( "tabindex", "0" ).focus();
+		setTimeout( function() {
+            this._ui.container.attr( "tabindex", "0" ).focus();
+        }, 300);
 		this._ignoreResizeEvents();
 		if ( id ) {
 			this.document.find( "[aria-haspopup='true'][aria-owns='" +  id + "']" ).attr( "aria-expanded", true );
