@@ -110,26 +110,6 @@
 				</div>
 			</div>
 
-		<h2>Filter Select</h2>
-		<p>The widget also works on <code>select</code> widgets by hiding options that do not match the filter text. To use a filter for <code>options</code>, declare the <code>data-filter</code> attribute on the select element.</p>
-
-			<div data-demo-html="true">
-				<form>
-					<input data-type="search" id="searchForSelect">
-				</form>
-				<select id="anotherSelect" data-filter="true" data-input="#searchForSelect">
-					<option value="A">Option A</option>
-					<option value="B">Option B</option>
-					<option value="C">Option C</option>
-					<option value="D">Option D</option>
-					<option value="E">Option E</option>
-					<option value="F">Option F</option>
-					<option value="G">Option G</option>
-					<option value="H">Option H</option>
-					<option value="I">Option I</option>
-					<option value="J">Option J</option>
-				</select>
-			</div>
 		<h2>Filter Collapsible Set</h2>
 		<div data-demo-html="true">
 			<form>
