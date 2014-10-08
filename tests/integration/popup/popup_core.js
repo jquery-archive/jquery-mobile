@@ -341,12 +341,20 @@
 	asyncTest( "Popup assure previous element is blurred", function() {
 		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" ), textinput = $( "#test-input" );
 
-		expect( 3 );
+		expect( 4 );
 
 		$.testHelper.detailedEventCascade([
 			function() {
 				//first focus on the text input
 				textinput.focus();
+			},
+			
+			{
+				focus: { src: textinput, event: "focus.popupFocusedAfterOpen0" }
+			},
+			
+			function( result ){
+				deepEqual( result.focus.timedOut, false );
 				$popup.popup( "open" );
 			},
 
