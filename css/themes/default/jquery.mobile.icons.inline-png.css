@@ -332,7 +332,7 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 }
 .ui-alt-icon.ui-icon-search:after,
 .ui-alt-icon .ui-icon-search:after,
-.ui-input-search:after {
+.ui-textinput-search:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAOZJREFUOMuV0U8rxFEUxvFPSjMUG/oRio2ivAZLG3ulZGsjzevwBpTZzAuYlD3Zi2JhZKEs7Aclf/Jvc3D7dX8TT906Pc/5nu49l1/VsYUjXOME25jUQ9O4xGfmPGA5B9XRiaYOVjCLReyF/4SFMriZQMOZwc3I98vBQQSrFc8YxRte4nY/ugpwvscObqJn5tvoQzfqiQqohiLqbgoeRt2oADcwgFPcp8E47uIqLYwl227gNbK13NQlPEbDO27xXPrPM4zk4Dm0E+ADx1jHRXjnseWs+jGFocQr/grnlMI7/qkCuxj8AkXLP4FD310vAAAAAElFTkSuQmCC");
 }
 .ui-alt-icon.ui-icon-shop:after,
