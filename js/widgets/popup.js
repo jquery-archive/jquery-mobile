@@ -633,8 +633,7 @@ $.widget( "mobile.popup", {
 	
 	_safelyBlur: function( currElement ){
 		if ($( currElement ) !== this.window[ 0 ] && currElement.nodeName.toLowerCase() !== "body") {
-				$( currElement ).blur();
-			}
+			$( currElement ).blur();
 		}
 	},
 
