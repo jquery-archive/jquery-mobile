@@ -3,7 +3,11 @@
 //>>label: Loading Message
 //>>group: Widgets
 
-define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../helpers",
+	"../defaults",
+	"../widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {
@@ -114,8 +118,11 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 				this.element.find( "h1" ).text( message );
 			}
 
-			// attach the loader to the DOM
-			this.element.appendTo( $.mobile.pageContainer );
+			// If the pagecontainer widget has been defined we may use the :mobile-pagecontainer
+			// and attach to the element on which the pagecontainer widget has been defined. If not,
+			// we attach to the body.
+			this.element.appendTo( $.mobile.pagecontainer ?
+				$( ":mobile-pagecontainer" ) : $( "body" ) );
 
 			// check that the loader is visible
 			this.checkLoaderPosition();
@@ -131,8 +138,8 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$.mobile.window.unbind( "scroll", this.fakeFixLoader );
-			$.mobile.window.unbind( "scroll", this.checkLoaderPosition );
+			this.window.unbind( "scroll", this.fakeFixLoader );
+			this.window.unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 
