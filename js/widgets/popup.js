@@ -644,7 +644,7 @@ $.widget( "mobile.popup", {
 		this._isOpen = true;
 		this._resizeScreen();
 		//check to see if currElement is not a child of the container.  If it's not, blur
-		if (this._ui.container.has($( this.document[ 0 ].activeElement ) ).length <= 0 ) {
+		if ( !$.contains( this._ui.container[ 0 ], this.document[ 0 ].activeElement ) ) {
 			this._safelyBlur( this.document[ 0 ].activeElement );
 		}
 		this._ignoreResizeEvents();
