@@ -5,20 +5,36 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../core", "../../widget", "../../zoom", "./reset" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../../core",
+	"../../widget",
+	"../../zoom",
+	"../optionsToClasses",
+	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+
+// These style options are deprecated as of 1.5.0 and will be removed in 1.6.0.
+var styleOptions = {
+	inline: false,
+	corners: true,
+	shadow: true,
+	mini: false
+};
 
 $.widget( "mobile.selectmenu", $.extend( {
 	initSelector: "select:not( :jqmData(role='slider')):not( :jqmData(role='flipswitch') )",
 
-	options: {
+	options: $.extend( {
+		classes: {
+			"ui-selectmenu": null,
+			"ui-selectmenu-button": "ui-corner-all ui-shadow",
+			"ui-selectmenu-nativeonly": null
+		},
 		theme: null,
 		icon: "carat-d",
 		iconpos: "right",
-		inline: false,
-		corners: true,
-		shadow: true,
 		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
 		overlayTheme: null,
 		dividerTheme: null,
@@ -26,12 +42,45 @@ $.widget( "mobile.selectmenu", $.extend( {
 		closeText: "Close",
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
-		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		mini: false
-	},
+		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1
+	}, styleOptions ),
 
 	_button: function() {
 		return $( "<div/>" );
+	},
+
+	// DEPRECATED as of 1.5.0. Will be removed in 1.6.0
+	// Update classes option to reflect style option values
+	_optionsToClasses: function( oldOptions, newOptions ) {
+		var classesOption = this.options.classes,
+			newClasses = {},
+			oldClasses = {};
+
+		// Calculate and set the value for "ui-selectmenu-button"
+		if ( this._booleanOptionToClass( newOptions.corners, "ui-corner-all",
+			oldClasses, newClasses ) ||
+			this._booleanOptionToClass( newOptions.shadow, "ui-shadow",
+				oldClasses, newClasses ) ) {
+
+			classesOption[ "ui-selectmenu-button" ] =
+				this._calculateClassKeyValue( classesOption[ "ui-selectmenu-button" ],
+					oldClasses, newClasses );
+		}
+
+		// Reset variables we use for calculation
+		newClasses = {};
+		oldClasses = {};
+
+		// Calculate and set the value for "ui-selectmenu"
+		if ( this._booleanOptionToClass( newOptions.mini, "ui-mini",
+			oldClasses, newClasses ) ||
+			this._booleanOptionToClass( newOptions.inline, "ui-btn-inline",
+				oldClasses, newClasses ) ) {
+
+			classesOption[ "ui-selectmenu" ] =
+				this._calculateClassKeyValue( classesOption[ "ui-selectmenu" ],
+					oldClasses, newClasses );
+		}
 	},
 
 	_setDisabled: function( value ) {
@@ -54,9 +103,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 
 	// setup items that are generally necessary for select menu extension
 	_preExtension: function() {
-		var inline = this.options.inline || this.element.jqmData( "inline" ),
-			mini = this.options.mini || this.element.jqmData( "mini" ),
-			classes = "";
+		var classes = "";
 		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
 		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
@@ -69,14 +116,9 @@ $.widget( "mobile.selectmenu", $.extend( {
 			classes = " ui-btn-right";
 		}
 
-		if ( inline ) {
-			classes += " ui-btn-inline";
-		}
-		if ( mini ) {
-			classes += " ui-mini";
-		}
-
-		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
+		this.select = this.element
+			.removeClass( "ui-btn-left ui-btn-right" )
+			.wrap( "<div class='" + this._classes( "ui-selectmenu" ) + classes + "'>" );
 		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
 		this.buttonId = this.selectId + "-button";
 		this.label = $( "label[for='"+ this.selectId +"']" );
@@ -84,7 +126,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 	},
 
 	_destroy: function() {
-		var wrapper = this.element.parents( ".ui-select" );
+		var wrapper = this.element.parents( ".ui-selectmenu" );
 		if ( wrapper.length > 0 ) {
 			if ( wrapper.is( ".ui-btn-left, .ui-btn-right" ) ) {
 				this.element.addClass( wrapper.hasClass( "ui-btn-left" ) ? "ui-btn-left" : "ui-btn-right" );
@@ -95,6 +137,10 @@ $.widget( "mobile.selectmenu", $.extend( {
 	},
 
 	_create: function() {
+		// Deprecated as of 1.5.0 - remove in 1.6.0
+		// Sync classes option to modified style option values
+		this._updateClassesOption( styleOptions, this.options );
+
 		this._preExtension();
 
 		this.button = this._button();
@@ -108,12 +154,10 @@ $.widget( "mobile.selectmenu", $.extend( {
 			button = this.button
 				.insertBefore( this.select )
 				.attr( "id", this.buttonId )
-				.addClass( "ui-btn" +
-					( options.icon ? ( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos +
-					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
-					( options.theme ? " ui-btn-" + options.theme : "" ) +
-					( options.corners ? " ui-corner-all" : "" ) +
-					( options.shadow ? " ui-shadow" : "" ) );
+				.addClass( this._classes( "ui-selectmenu" ) +
+					( options.icon ?
+						( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos ) : "" ) +
+					( options.theme ? " ui-btn-" + options.theme : "" ) );
 
 		this.setButtonText();
 
@@ -122,7 +166,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 		// On the desktop,it seems to do the opposite
 		// for these reasons, using the nativeMenu option results in a full native select in Opera
 		if ( options.nativeMenu && window.opera && window.opera.version ) {
-			button.addClass( "ui-select-nativeonly" );
+			button.addClass( this._classes( "ui-selectmenu-nativeonly" ) );
 		}
 
 		// Add counter for multi selects
@@ -297,7 +341,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 		this._setDisabled( false );
 		this.button.removeClass( "ui-state-disabled" );
 	}
-}, $.mobile.behaviors.formReset ) );
+}, $.mobile.behaviors.formReset, $.mobile.behaviors._optionsToClasses ) );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

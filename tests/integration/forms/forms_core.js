@@ -58,7 +58,7 @@ asyncTest( "Form resets correctly", function() {
 
 		ok( button.length === 1, prefix + id + " has a parent" );
 		ok( wrapper.length === 1, prefix + id + " has a wrapper" );
-		ok( wrapper.hasClass( "ui-select" ), prefix + id + "'s wrapper has class ui-select" );
+		ok( wrapper.hasClass( "ui-selectmenu" ), prefix + id + "'s wrapper has class ui-selectmenu" );
 		ok( anonySpan.length === 1, prefix + id + "'s wrapper contains a single span element as its first child" );
 		ok( anonySpan.text() === el.children("[value='" + el.val() + "']").text(), prefix + id + "'s text is identical to the text inside the selected <option> element" );
 	}

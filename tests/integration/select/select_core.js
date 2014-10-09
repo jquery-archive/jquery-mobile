@@ -187,7 +187,7 @@
 			},
 
 			function() {
-				menu = $( "#select-long-option-label-menu.ui-selectmenu-list" );
+				menu = $( "#select-long-option-label-menu.ui-selectmenu-custom-list" );
 
 				equal( menu.outerWidth( true ), menu.find( "li:nth-child(2) a" ).outerWidth( true ), "a element should not overflow" );
 				start();
@@ -298,7 +298,7 @@
 			},
 
 			function() {
-				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), "default" );
+				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu-custom-container ul" ).text(), "default" );
 				$( ".ui-popup-screen.in" ).click();
 			},
 
@@ -313,7 +313,7 @@
 			},
 
 			function() {
-				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu ul" ).text(), text );
+				deepEqual( $( ".ui-popup-container:not(.ui-popup-hidden) .ui-selectmenu-custom-container ul" ).text(), text );
 				$( ".ui-popup-screen.in" ).click();
 			},
 

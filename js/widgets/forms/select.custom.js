@@ -38,6 +38,13 @@ var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-li-divider,.u
 	};
 
 $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
+	options: {
+		classes: {
+			"ui-selectmenu-custom-container": null,
+			"ui-selectmenu-custom-list": null
+		}
+	},
+
 	_create: function() {
 		var o = this.options;
 
@@ -197,17 +204,21 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		overlayThemeAttr = overlayTheme ? ( " data-" + $.mobile.ns +
 			"overlay-theme='" + overlayTheme + "'" ) : "";
 		dividerThemeAttr = ( o.dividerTheme && isMultiple ) ? ( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
-		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogId + "'" + themeAttr + overlayThemeAttr + ">" +
+		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='" +
+			this._classes( "ui-selectmenu-custom-container" ) + "' id='" + dialogId + "'" +
+			themeAttr + overlayThemeAttr + ">" +
 			"<div data-" + $.mobile.ns + "role='header'>" +
 			"<div class='ui-title'></div>"+
 			"</div>"+
 			"<div data-" + $.mobile.ns + "role='content'></div>"+
 			"</div>" );
 		listbox = $( "<div" + themeAttr + overlayThemeAttr + " id='" + popupId +
-				"' class='ui-selectmenu'></div>" )
+				"' class='" + this._classes( "ui-selectmenu-custom-container" ) + "'></div>" )
 			.insertAfter( this.select )
 			.popup();
-		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" ).appendTo( listbox );
+		list = $( "<ul class='" + this._classes( "ui-selectmenu-custom-list" ) + "' id='" +
+			menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr +
+			dividerThemeAttr + "></ul>" ).appendTo( listbox );
 		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'></div>" ).prependTo( listbox );
 		headerTitle = $( "<h1 class='ui-title'></h1>" ).appendTo( header );
 
