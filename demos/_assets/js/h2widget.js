@@ -130,9 +130,9 @@
 
 						h2dictionary[id] =  text;
 						if(!first){
-							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-icon-carat-u ui-alt-icon'>Top</a>");
+							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-alt-icon'>Top <span class='ui-icon ui-icon-carat-u'>Icon carat up</span></a>");
 						} else {
-							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink jqm-open-quicklink-panel ui-icon-carat-l ui-alt-icon'>Quick Links</a>");
+							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink jqm-open-quicklink-panel ui-alt-icon'>Quick Links <span class='ui-icon ui-icon-carat-l'>Icon carat left</span></a>");
 						}
 						first = false;
 					});
