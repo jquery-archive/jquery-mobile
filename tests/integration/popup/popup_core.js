@@ -337,24 +337,35 @@
 		]);
 	});
 
-	asyncTest( "Popup focused after open", function() {
-		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" );
+	//The best below adds an input, gives it focus, then open the popup, and make sure the input has been blurred.
+	asyncTest( "Popup assure previous element is blurred", function() {
+		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" ), textinput = $( "#test-input" );
 
-		expect( 3 );
+		expect( 4 );
 
 		$.testHelper.detailedEventCascade([
 			function() {
+				//first focus on the text input
+				textinput.focus();
+			},
+			
+			{
+				focus: { src: textinput, event: "focus.popupFocusedAfterOpen0" }
+			},
+			
+			function( result ){
+				deepEqual( result.focus.timedOut, false );
 				$popup.popup( "open" );
 			},
 
 			{
-				focus: { src: $popup.parent(), event: "focus.popupFocusedAfterOpen1" },
+				blur: { src: textinput, event: "blur.popupFocusedAfterOpen1" },
 				opened: { src: $popup, event: "popupafteropen.popupFocusedAfterOpen1" }
 			},
 
 			function( result ) {
 				ok( !result.opened.timedOut, "popup emitted 'popupafteropen'" );
-				ok( !result.focus.timedOut, "focus fired after the popup opens" );
+				ok( !result.blur.timedOut, "blur fired after the popup opens" );
 				$popup.popup( "close" );
 			},
 
