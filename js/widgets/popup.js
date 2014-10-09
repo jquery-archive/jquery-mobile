@@ -298,13 +298,9 @@ $.widget( "mobile.popup", {
 		if ( targetElement !== ui.container[ 0 ] ) {
 			target = $( targetElement );
 			if ( 0 === target.parents().filter( ui.container[ 0 ] ).length ) {
-				this._safelyBlur( this.document[ 0 ].activeElement, target.parent() );
-				//lisa
-				/*$( this.document[ 0 ].activeElement ).one( "focus", function(/* theEvent /) {
-					if ( targetElement.nodeName.toLowerCase() !== "body" ) {
-				            target.blur();
-				        }
-				});*/
+				$( this.document[ 0 ].activeElement ).one( "focus", function(/* theEvent */) {
+					this._safelyBlur( this.document[ 0 ].activeElement );
+				});
 				ui.focusElement.focus();
 				theEvent.preventDefault();
 				theEvent.stopImmediatePropagation();
@@ -635,10 +631,8 @@ $.widget( "mobile.popup", {
 		}
 	},
 	
-	_safelyBlur: function(currElement, container2check ){
+	_safelyBlur: function( currElement ){
 		if ($( currElement ) !== this.window[ 0 ] && currElement.nodeName.toLowerCase() !== "body") {
-			//check to see if currElement is not a child of the container.  If it's not, blur
-			if (container2check.has($( currElement ) ).length <= 0 ) {
 				$( currElement ).blur();
 			}
 		}
@@ -650,7 +644,10 @@ $.widget( "mobile.popup", {
 		this._ui.container.addClass( "ui-popup-active" );
 		this._isOpen = true;
 		this._resizeScreen();
-		this._safelyBlur(this.document[ 0 ].activeElement, this._ui.container );
+		//check to see if currElement is not a child of the container.  If it's not, blur
+		if (this._ui.container.has($( this.document[ 0 ].activeElement ) ).length <= 0 ) {
+			this._safelyBlur( this.document[ 0 ].activeElement );
+		}
 		this._ignoreResizeEvents();
 		if ( id ) {
 			this.document.find( "[aria-haspopup='true'][aria-owns='" +  id + "']" ).attr( "aria-expanded", true );
