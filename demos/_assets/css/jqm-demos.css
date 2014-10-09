@@ -232,7 +232,7 @@
 .jqm-navmenu-panel .ui-listview .ui-listview .ui-button.ui-button-active {
 	color: #fff;
 }
-.jqm-navmenu-panel .ui-button:after {
+.jqm-navmenu-panel .ui-button > .ui-icon {
 	opacity: .4;
 	filter: Alpha(Opacity=40);
 }
@@ -294,15 +294,7 @@
 	padding-top: .2em;
 	margin: 0 0 1.5em;
 }
-.jqm-demos .jqm-content .jqm-deeplink:after {
-	content: "";
-	display: block;
-	float: right;
-	margin: .1em 0 0 .5em;
-	width: 1em;
-	height: 1em;
-	background-position: center center;
-	background-repeat: no-repeat;
+.jqm-demos .jqm-content .jqm-deeplink .ui-icon {
 	opacity: .4;
 	filter: Alpha(Opacity=40);
 }
@@ -408,13 +400,13 @@
 	.jqm-navmenu-panel .ui-button.ui-button-active {
 		color: #3388cc !important;
 	}
-	.jqm-navmenu-panel .ui-button::after {
+	.jqm-navmenu-panel .ui-button > .ui-icon {
 		opacity: 0;
 		-webkit-transition: opacity 500ms ease;
 		-moz-transition: opacity 500ms ease;
 		transition: opacity 500ms ease;
 	}
-	.jqm-navmenu-panel .ui-button:hover::after {
+	.jqm-navmenu-panel .ui-button:hover > .ui-icon {
 		opacity: .4;
 	}
 	.jqm-search-panel {
