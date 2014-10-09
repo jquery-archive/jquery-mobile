@@ -3,7 +3,11 @@
 //>>label: Loading Message
 //>>group: Widgets
 
-define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../helpers",
+	"../defaults",
+	"../widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {
@@ -115,7 +119,9 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 			}
 
 			// attach the loader to the DOM
-			this.element.appendTo( $.mobile.pageContainer );
+			this.element.appendTo(
+				( $.mobile.pageContainer && $.mobile.pageContainer.length > 0 ) ?
+					$.mobile.pageContainer : $( "body" ) );
 
 			// check that the loader is visible
 			this.checkLoaderPosition();
@@ -131,8 +137,8 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$.mobile.window.unbind( "scroll", this.fakeFixLoader );
-			$.mobile.window.unbind( "scroll", this.checkLoaderPosition );
+			this.window.unbind( "scroll", this.fakeFixLoader );
+			this.window.unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 
