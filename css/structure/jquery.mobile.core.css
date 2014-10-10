@@ -375,9 +375,11 @@ div.ui-mobile-viewport {
 	right: .3125em;
 }
 
-/* Button elements */
+/* Button elements and input buttons */
 button.ui-button,
-.ui-controlgroup-controls button.ui-button-icon-notext {
+input.ui-button,
+.ui-controlgroup-controls button.ui-button-icon-notext,
+.ui-controlgroup-controls input.ui-button-icon-notext {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -395,7 +397,9 @@ button.ui-button::-moz-focus-inner {
 	border: 0;
 }
 button.ui-button-icon-notext,
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button {
+input.ui-button-icon-notext,
+.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button,
+.ui-controlgroup-horizontal .ui-controlgroup-controls input.ui-button {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
