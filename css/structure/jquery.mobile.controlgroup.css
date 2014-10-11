@@ -10,8 +10,8 @@ fieldset.ui-controlgroup {
 .ui-mini .ui-controlgroup-label {
 	font-size: 16px;
 }
-.ui-controlgroup.ui-mini .ui-button-icon-notext,
-.ui-controlgroup .ui-mini.ui-button-icon-notext {
+.ui-controlgroup.ui-mini .ui-button-icon-only,
+.ui-controlgroup .ui-mini.ui-button-icon-only {
 	font-size: inherit;
 }
 .ui-controlgroup-controls .ui-button,
@@ -48,14 +48,14 @@ fieldset.ui-controlgroup {
 	clear: none;
 }
 .ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button,
-.ui-controlgroup-controls .ui-button-icon-notext {
+.ui-controlgroup-controls .ui-button-icon-only {
 	width: auto;
 }
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-button-icon-notext,
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button-icon-notext {
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-button-icon-only,
+.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button-icon-only {
 	width: 1.5em;
 }
- .ui-controlgroup-controls .ui-button-icon-notext {
+ .ui-controlgroup-controls .ui-button-icon-only {
 	height: auto;
 	padding: .7em 1em;
 }

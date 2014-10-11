@@ -99,8 +99,8 @@ label.ui-button {
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }
 /* Icon-only buttons */
-.ui-button-icon-notext.ui-button-corner-all,
-.ui-button-icon-notext.ui-corner-all {
+.ui-button-icon-only.ui-button-corner-all,
+.ui-button-icon-only.ui-corner-all {
 	-webkit-border-radius: 1em;
 	border-radius: 1em;
 }
@@ -140,11 +140,11 @@ label.ui-button {
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-button-icon-left .ui-icon,
-.ui-button-icon-right .ui-icon,
-.ui-button-icon-top .ui-icon,
-.ui-button-icon-bottom .ui-icon,
-.ui-button-icon-notext .ui-icon {
+.ui-icon-beginning .ui-icon,
+.ui-icon-end .ui-icon,
+.ui-icon-top .ui-icon,
+.ui-icon-bottom .ui-icon,
+.ui-button-icon-only .ui-icon {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.3) /*{global-icon-disc}*/;
 	background-position: center center;

@@ -136,8 +136,8 @@
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -167,8 +167,8 @@
 
     <div data-role="header" data-position="fixed" data-theme="b">
         <h1>Inbox</h1>
-        <a href="#demo-intro" data-rel="back" data-icon="carat-l" data-iconpos="notext">Back</a>
-        <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="notext">Refresh</a>
+        <a href="#demo-intro" data-rel="back" data-icon="carat-l" data-iconpos="icon-only">Back</a>
+        <a href="#" onclick="window.location.reload()" data-icon="back" data-iconpos="icon-only">Refresh</a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content">

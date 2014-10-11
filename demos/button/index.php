@@ -18,13 +18,13 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Input buttons <a href="http://api.jquerymobile.com/button/" class="jqm-api-docs-link ui-button ui-button-icon-right ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
+		<h1>Input buttons <a href="http://api.jquerymobile.com/button/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
 
 		<p>Examples of how to style input buttons; <code>input</code> elements with <code>type="button"</code>, <code>type="submit"</code>, or <code>type="reset"</code>. See <a href="../button-markup/">button markup</a> for examples of <code>a</code> and <code>button</code> elements.</p>
 
@@ -66,9 +66,9 @@
 
 		<div data-demo-html="true" data-demo-css="true">
 			<form>
-				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
+				<input type="button" data-icon="delete" data-iconpos="icon-only" value="Icon only">
 				<div id="custom-border-radius">
-					<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-notext ui-corner-all">
+					<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-only ui-corner-all">
 						Enhanced - Icon only
 						<input type="button" data-enhanced="true" value="Enhanced - Icon only">
 					</div>
@@ -140,7 +140,7 @@
 		<div data-demo-html="true">
 			<form>
 				<input type="button" data-icon="delete" value="Input">
-				<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-left">
+				<div class="ui-input-button ui-button ui-icon-delete ui-icon-beginning">
 					Enhanced
 					<input type="button" data-enhanced="true" value="Enhanced">
 				</div>
@@ -155,24 +155,24 @@
 				<input type="button" data-icon="delete" data-iconpos="right" value="Right">
 				<input type="button" data-icon="delete" data-iconpos="top" value="Top">
 				<input type="button" data-icon="delete" data-iconpos="bottom" value="Bottom">
-				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
-				<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-left">
+				<input type="button" data-icon="delete" data-iconpos="icon-only" value="Icon only">
+				<div class="ui-input-button ui-button ui-icon-delete ui-icon-beginning">
 					Enhanced - Left
 					<input type="button" data-enhanced="true" value="Enhanced - Left">
 				</div>
-				<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-right">
+				<div class="ui-input-button ui-button ui-icon-delete ui-icon-end">
 					Enhanced - Right
 					<input type="button" data-enhanced="true" value="Enhanced - Right">
 				</div>
-				<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-top">
+				<div class="ui-input-button ui-button ui-icon-delete ui-icon-top">
 					Enhanced - Top
 					<input type="button" data-enhanced="true" value="Enhanced - Top">
 				</div>
-				<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-bottom">
+				<div class="ui-input-button ui-button ui-icon-delete ui-icon-bottom">
 					Enhanced - Bottom
 					<input type="button" data-enhanced="true" value="Enhanced - Bottom">
 				</div>
-				<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-notext">
+				<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-only">
 					Enhanced - Icon only
 					<input type="button" data-enhanced="true" value="Enhanced - Icon only">
 				</div>
@@ -184,7 +184,7 @@
 		<div data-demo-html="true">
 			<form>
 				<input type="button" data-theme="b" data-icon="delete" data-iconshadow="true" value="Input">
-				<div class="ui-input-button ui-button ui-button-b ui-icon-delete ui-button-icon-left ui-shadow-icon">
+				<div class="ui-input-button ui-button ui-button-b ui-icon-delete ui-icon-beginning ui-shadow-icon">
 					Enhanced
 					<input type="button" data-enhanced="true" value="Enhanced">
 				</div>

@@ -216,7 +216,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 				"role": "button",
 				"text": o.closeText,
 				"href": "#",
-				"class": "ui-button ui-corner-all ui-button-left ui-button-icon-notext ui-icon-delete"
+				"class": "ui-button ui-corner-all ui-button-left ui-button-icon-only ui-icon-delete"
 			}).appendTo( header );
 		}
 
@@ -519,7 +519,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			item.setAttribute( "role", "option" );
 			anchor.setAttribute( "tabindex", "-1" );
 			if ( this.isMultiple ) {
-				$( anchor ).addClass( "ui-button ui-checkbox-off ui-button-icon-right" );
+				$( anchor ).addClass( "ui-button ui-checkbox-off ui-icon-end" );
 			}
 
 			item.appendChild( anchor );

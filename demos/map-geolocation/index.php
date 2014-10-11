@@ -66,8 +66,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 	</div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -82,7 +82,7 @@
             <li>How to display a default location (Hollywood, CA) if Geolocation is unavailable or a user declines to share it.</li>
         </ul>
 
-        <a href="#map-page" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini ui-icon-arrow-r ui-button-icon-right">Open demo</a>
+        <a href="#map-page" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini ui-icon-arrow-r ui-icon-end">Open demo</a>
 
         <div data-demo-html="#map-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 

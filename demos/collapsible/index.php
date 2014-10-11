@@ -21,13 +21,13 @@
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
 
-        <h1>Collapsible <a href="http://api.jquerymobile.com/collapsible/" class="jqm-api-docs-link ui-button ui-button-icon-right ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
+        <h1>Collapsible <a href="http://api.jquerymobile.com/collapsible/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
 
         <p>Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.</p>
 
@@ -225,7 +225,7 @@
 				<div data-demo-html="true">
 					<div data-role="collapsible" data-enhanced="true" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-collapsed">
 						<h4 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-							<a href="#" class="ui-collapsible-heading-toggle ui-button ui-button-icon-left ui-icon-plus">
+							<a href="#" class="ui-collapsible-heading-toggle ui-button ui-icon-beginning ui-icon-plus">
 							Heading
 							<div class="ui-collapsible-heading-status"> click to expand contents</div>
 							</a>

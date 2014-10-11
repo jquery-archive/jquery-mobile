@@ -49,7 +49,7 @@ li.ui-block-e {
 [class*="ui-block-"] > .ui-checkbox,
 [class*="ui-block-"] > .ui-radio,
 [class*="ui-block-"] > button.ui-button-inline,
-[class*="ui-block-"] > button.ui-button-icon-notext,
+[class*="ui-block-"] > button.ui-button-icon-only,
 .ui-header [class*="ui-block-"] > button.ui-button,
 .ui-footer [class*="ui-block-"] > button.ui-button {
 	margin-right: .3125em;

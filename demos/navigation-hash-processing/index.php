@@ -76,8 +76,8 @@ $.mobile.document
 		<div data-role="header" class="jqm-header">
 			<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 			<p><span class="jqm-version"></span> Demos</p>
-			<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-			<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+			<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+			<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 		</div><!-- /header -->
 
 		<div role="main" class="ui-content jqm-content">
@@ -101,7 +101,7 @@ $.mobile.document
 
 	<div id="demo-page" data-role="page">
 		<div data-role="header">
-			<a href="#main-page" class="ui-button ui-icon-back ui-button-icon-left">Back To Demos</a>
+			<a href="#main-page" class="ui-button ui-icon-back ui-icon-beginning">Back To Demos</a>
 			<h1>Demo Main Page</h1>
 		</div>
 		<div role="main" class="ui-content">
@@ -114,8 +114,8 @@ $.mobile.document
 
 	<div id="secondary-page" data-role="page">
 		<div data-role="header">
-			<a href="#demo-page" class="ui-button ui-icon-back ui-button-icon-left">Back To Main Page</a>
-			<a href="#main-page" class="ui-button ui-icon-arrow-u ui-button-icon-left">Back To Demos</a>
+			<a href="#demo-page" class="ui-button ui-icon-back ui-icon-beginning">Back To Main Page</a>
+			<a href="#main-page" class="ui-button ui-icon-arrow-u ui-icon-beginning">Back To Demos</a>
 			<h1 id="section"></h1>
 		</div>
 		<div role="main" class="ui-content">

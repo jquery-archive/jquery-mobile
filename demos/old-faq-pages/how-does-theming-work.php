@@ -18,8 +18,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -86,11 +86,11 @@
 					<p>Each swatch also includes default styles for interactive elements like list items and buttons. Each button has styles for normal, hover/focus and pressed states.</p>
 
 						<div class="swatch-preview">
-							<a href="index.html" class="ui-button ui-corner-all ui-button-a ui-button-icon-left ui-icon-arrow-l">Button A</a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-b ui-button-icon-left ui-icon-arrow-l">Button B</a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-c ui-button-icon-left ui-icon-arrow-l">Button C</a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-d ui-button-icon-left ui-icon-arrow-l">Button D</a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-e ui-button-icon-left ui-icon-arrow-l">Button E</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-a ui-icon-beginning ui-icon-arrow-l">Button A</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-b ui-icon-beginning ui-icon-arrow-l">Button B</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-c ui-icon-beginning ui-icon-arrow-l">Button C</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-d ui-icon-beginning ui-icon-arrow-l">Button D</a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-e ui-icon-beginning ui-icon-arrow-l">Button E</a>
 						</div><!-- end swatch-bars -->
 
 					<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box. This  behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container.</p>

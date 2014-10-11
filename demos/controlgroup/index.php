@@ -27,13 +27,13 @@
 	    <div data-role="header" class="jqm-header">
 			<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-	        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-	        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+	        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+	        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 		    </div><!-- /header -->
 
 	    <div role="main" class="ui-content jqm-content">
 
-        <h1>Controlgroup <a href="http://api.jquerymobile.com/controlgroup/" class="jqm-api-docs-link ui-button ui-button-icon-right ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
+        <h1>Controlgroup <a href="http://api.jquerymobile.com/controlgroup/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
 
         <p>Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.
         </p>
@@ -43,11 +43,11 @@
 			<div data-demo-html="true">
 				<div data-role="controlgroup">
 					<a href="#" class="ui-button ui-corner-all">No icon</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-left">Left</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-right">Right</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-top">Top</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-bottom">Bottom</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-notext">Icon only</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-beginning">Left</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-end">Right</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-top">Top</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-bottom">Bottom</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-only">Icon only</a>
 				</div>
 			</div><!--/demo-html -->
 
@@ -56,11 +56,11 @@
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-mini="true">
 					<a href="#" class="ui-button ui-corner-all">No icon</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-left">Left</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-right">Right</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-top">Top</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-bottom">Bottom</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-notext">Icon only</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-beginning">Left</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-end">Right</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-top">Top</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-bottom">Bottom</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-only">Icon only</a>
 				</div>
 			</div><!--/demo-html -->
 
@@ -69,25 +69,25 @@
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-type="horizontal">
 					<a href="#" class="ui-button ui-corner-all">No icon</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-left">Left</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-right">Right</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-beginning">Left</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-end">Right</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-top">Top</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-top">Top</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-top">Top</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-top">Top</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-bottom">Bottom</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-bottom">Bottom</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-bottom">Bottom</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-bottom">Bottom</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal">
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-notext">Icon only</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-notext">Icon only</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-only">Icon only</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-only">Icon only</a>
 				</div>
 				<form>
 					<fieldset data-role="controlgroup" data-type="horizontal">
 						<button data-icon="home">Home</button>
-						<button data-icon="search" data-iconpos="notext">Search</button>
+						<button data-icon="search" data-iconpos="icon-only">Search</button>
 						<label for="select-more-1a" class="ui-hidden-accessible">More</label>
 						<select name="select-more-1a" id="select-more-1a">
 							<option value="">Select&hellip;</option>
@@ -104,25 +104,25 @@
 			<div data-demo-html="true">
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
 					<a href="#" class="ui-button ui-corner-all">No icon</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-left">Left</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-right">Right</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-beginning">Left</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-end">Right</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-top">Top</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-top">Top</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-top">Top</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-top">Top</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-bottom">Bottom</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-bottom">Bottom</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-bottom">Bottom</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-icon-bottom">Bottom</a>
 				</div>
 				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-notext">Icon only</a>
-					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-notext">Icon only</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-only">Icon only</a>
+					<a href="#" class="ui-button ui-corner-all ui-icon-delete ui-button-icon-only">Icon only</a>
 				</div>
 				<form>
 					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 						<button data-icon="home">Home</button>
-						<button data-icon="search" data-iconpos="notext">Search</button>
+						<button data-icon="search" data-iconpos="icon-only">Search</button>
 						<label for="select-more-2a" class="ui-hidden-accessible">More</label>
 						<select name="select-more-2a" id="select-more-2a">
 							<option value="">Select&hellip;</option>

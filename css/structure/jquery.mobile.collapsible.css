@@ -17,8 +17,8 @@
 	border-left-width: 0;
 	border-right-width: 0;
 }
-.ui-collapsible-heading .ui-button-icon-top,
-.ui-collapsible-heading .ui-button-icon-bottom {
+.ui-collapsible-heading .ui-icon-top,
+.ui-collapsible-heading .ui-icon-bottom {
 	text-align: center;
 }
 .ui-collapsible-inset .ui-collapsible-heading .ui-button {

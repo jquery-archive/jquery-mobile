@@ -17,8 +17,8 @@
 
     <div data-role="header" data-position="fixed">
         <h1>Fixed header</h1>
-        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
-        <a href="#add-form" data-icon="gear" data-iconpos="notext">Add</a>
+        <a href="#nav-panel" data-icon="bars" data-iconpos="icon-only">Menu</a>
+        <a href="#add-form" data-icon="gear" data-iconpos="icon-only">Add</a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content jqm-fullwidth">
@@ -37,7 +37,7 @@
         <br>
         <br>
 
-        <a href="../" data-rel="back" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-mini ui-button-inline ui-icon-carat-l ui-button-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
+        <a href="../" data-rel="back" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-mini ui-button-inline ui-icon-carat-l ui-icon-beginning ui-alt-icon ui-nodisc-icon">Back</a>
 
         <br>
         <br>
@@ -139,7 +139,7 @@
 
         <p>This is just a landing page.</p>
 
-        <a href="#panel-fixed-page1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini ui-icon-back ui-button-icon-left">Back</a>
+        <a href="#panel-fixed-page1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini ui-icon-back ui-icon-beginning">Back</a>
 
     </div><!-- /content -->
 

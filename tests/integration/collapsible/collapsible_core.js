@@ -216,12 +216,12 @@
 		collapsible.collapsible( "option", "collapsedIcon", false );
 		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
 			false, "Turning off collapsedIcon makes expanded icon disappear" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-left" ),
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-beginning" ),
 			false, "Turning off collapsedIcon makes iconpos class disappear" );
 		collapsible.collapsible( "option", "collapsedIcon", "plus" );
 		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-minus" ),
 			true, "Turning on collapsedIcon makes expanded icon reappear" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-left" ),
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-beginning" ),
 			true, "Turning on collapsedIcon makes iconpos class reappear" );
 	});
 
@@ -229,7 +229,7 @@
 		var collapsible = $( "#collapsible-collapsed-icon-false-iconpos" );
 		collapsible.collapsible( "option", "collapsedIcon", false );
 		collapsible.collapsible( "option", "iconpos", "top" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-top" ),
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-top" ),
 			false, "Setting iconpos while collapsedIcon is off has no effect" );
 	});
 
@@ -361,9 +361,9 @@
 		deepEqual( $( "#explicit" ).collapsible( "option", "iconpos" ),
 			"left",
 			"Option not set on explicitly assigned child collapsible" );
-		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-button-icon-right" ),
+		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-icon-end" ),
 			true, "Inheriting collapsible has iconpos 'right'" );
-		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-button-icon-left" ),
+		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-icon-beginning" ),
 			true, "Explicitly assigned collapsible has iconpos 'left'" );
 	});
 	test( "mini", function() {

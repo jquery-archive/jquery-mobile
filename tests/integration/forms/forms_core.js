@@ -67,7 +67,7 @@ asyncTest( "Form resets correctly", function() {
 		var id = el.attr( "id" ),
 			label = el.parent().children( "label" ),
 			ctype = ( isRadio ? "radio" : "checkbox" ),
-			iconVisible = ( label.hasClass( "ui-button-icon-left" ) || label.hasClass( "ui-button-icon-right" ) ),
+			iconVisible = ( label.hasClass( "ui-icon-beginning" ) || label.hasClass( "ui-icon-end" ) ),
 			iconValue = ( ctype + "-" + ( value ? "on" : "off" ) );
 
 		ok( label.is( "label[for='" + id + "']" ), prefix + id + "'s label is a label for it" );

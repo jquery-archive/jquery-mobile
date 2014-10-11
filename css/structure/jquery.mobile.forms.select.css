@@ -60,10 +60,10 @@
 .ui-select .ui-li-has-count.ui-button {
 	padding-right: 2.8125em;
 }
-.ui-select .ui-li-has-count.ui-button-icon-right {
+.ui-select .ui-li-has-count.ui-icon-end {
 	padding-right: 4.6875em;
 }
-.ui-select .ui-button-icon-right .ui-li-count {
+.ui-select .ui-icon-end .ui-li-count {
 	right: 3.2em;
 }
 /* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */

@@ -53,8 +53,8 @@
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -65,7 +65,7 @@
 
         <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
 
-        <a href="#demo-page" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini ui-icon-carat-r ui-button-icon-right">Open demo</a>
+        <a href="#demo-page" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini ui-icon-carat-r ui-icon-end">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
@@ -86,8 +86,8 @@
 
     <div data-role="header" data-theme="b">
         <h1>Swipe left or right</h1>
-		<a href="#left-panel" data-icon="carat-r" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
-		<a href="#right-panel" data-icon="carat-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
+		<a href="#left-panel" data-icon="carat-r" data-iconpos="icon-only" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
+		<a href="#right-panel" data-icon="carat-l" data-iconpos="icon-only" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open right panel</a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content">
@@ -97,21 +97,21 @@
             <dd><b>1.</b> to strike or move with a sweeping motion</dd>
         </dl>
 
-		<a href="#demo-intro" data-rel="back" class="back-button ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-back ui-button-icon-right">Back to demo intro</a>
+		<a href="#demo-intro" data-rel="back" class="back-button ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-back ui-icon-end">Back to demo intro</a>
 
     </div><!-- /content -->
 
     <div data-role="panel" id="left-panel" data-theme="b">
 
     	<p>Left reveal panel.</p>
-		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-delete ui-button-icon-left ui-button-right">Close</a>
+		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-delete ui-icon-beginning ui-button-right">Close</a>
 
     </div><!-- /panel -->
 
     <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
 
     	<p>Right push panel.</p>
-		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-delete ui-button-icon-right">Close</a>
+		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-delete ui-icon-end">Close</a>
 
     </div><!-- /panel -->
 

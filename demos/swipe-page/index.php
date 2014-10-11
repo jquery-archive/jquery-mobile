@@ -26,8 +26,8 @@
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -61,7 +61,7 @@
 
 <div id="_header" data-role="header" data-id="header" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
 	<h1>City</h1>
-    <a href="./" data-direction="reverse" data-icon="delete" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Back</a>
+    <a href="./" data-direction="reverse" data-icon="delete" data-iconpos="icon-only" data-shadow="false" data-icon-shadow="false">Back</a>
 </div><!-- /header -->
 
 <div data-role="page" id="city" class="demo-page" data-dom-cache="true" data-theme="b" data-prev="prevCity" data-next="nextCity">
@@ -69,7 +69,7 @@
 	<div role="main" class="ui-content">
 
 		<div id="trivia-city" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="a">
-        	<a href="#" data-rel="back" class="ui-button ui-button-right ui-button-b ui-button-icon-notext ui-icon-delete ui-corner-all">Close</a>
+        	<a href="#" data-rel="back" class="ui-button ui-button-right ui-button-b ui-button-icon-only ui-icon-delete ui-corner-all">Close</a>
 			<p>Here some text.</p>
         </div><!-- /popup -->
 
@@ -79,11 +79,11 @@
 
 <div id="_footer" data-id="footer" data-position="fixed" data-fullscreen="true" data-tap-toggle="false">
 	<div data-role="controlgroup" class="control ui-button-left" data-type="horizontal" data-mini="true">
-    	<a href="#" class="prev ui-button ui-button-icon-notext ui-icon-carat-l">Previous</a>
-    	<a href="#" class="next ui-button ui-button-icon-notext ui-icon-carat-r">Next</a>
+    	<a href="#" class="prev ui-button ui-button-icon-only ui-icon-carat-l">Previous</a>
+    	<a href="#" class="next ui-button ui-button-icon-only ui-icon-carat-r">Next</a>
     </div>
 
-	<a href="#" data-rel="popup" class="trivia-button ui-button ui-button-right ui-button-icon-left ui-icon-info ui-mini ui-corner-all">Trivia</a>
+	<a href="#" data-rel="popup" class="trivia-button ui-button ui-button-right ui-icon-beginning ui-icon-info ui-mini ui-corner-all">Trivia</a>
 </div><!-- /footer -->
 
 </body>

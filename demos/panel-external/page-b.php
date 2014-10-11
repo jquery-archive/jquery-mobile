@@ -17,7 +17,7 @@
 
 	<div data-role="header">
 		<h1>External panels</h1>
-		<a href="../panel/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-notext ui-icon-carat-l">Back</a>
+		<a href="../panel/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content jqm-fullwidth">

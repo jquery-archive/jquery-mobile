@@ -121,7 +121,7 @@
 .ui-listview > .ui-li-divider.ui-li-has-count {
 	padding-right: 2.8125em;
 }
-.ui-listview > .ui-li-has-count > .ui-button-icon-right {
+.ui-listview > .ui-li-has-count > .ui-icon-end {
 	padding-right: 4.6875em;
 }
 .ui-listview > .ui-li-has-thumb > .ui-button,
@@ -151,7 +151,7 @@
 	top: 50%;
 	margin-top: -.88em;
 }
-.ui-listview .ui-button-icon-right .ui-li-count {
+.ui-listview .ui-icon-end .ui-li-count {
 	right: 3.2em;
 }
 .ui-listview .ui-li-has-thumb > img:first-child,

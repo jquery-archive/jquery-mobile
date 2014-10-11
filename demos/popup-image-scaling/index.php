@@ -19,8 +19,8 @@
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -36,11 +36,11 @@
 			<a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" class="ui-button ui-corner-all ui-shadow ui-button-inline" data-transition="fade">Photo portrait</a>
 
 			<div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-icon-delete ui-button-icon-notext ui-button-right">Close</a><img src="../_assets/img/photo-landscape.jpg" alt="Photo landscape">
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-icon-delete ui-button-icon-only ui-button-right">Close</a><img src="../_assets/img/photo-landscape.jpg" alt="Photo landscape">
 			</div>
 
 			<div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-icon-delete ui-button-icon-notext ui-button-right">Close</a><img src="../_assets/img/photo-portrait.jpg" alt="Photo portrait">
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-icon-delete ui-button-icon-only ui-button-right">Close</a><img src="../_assets/img/photo-portrait.jpg" alt="Photo portrait">
 			</div>
 		</div><!--/demo-html -->
 

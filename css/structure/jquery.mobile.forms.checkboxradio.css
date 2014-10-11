@@ -14,10 +14,10 @@
 .ui-controlgroup .ui-radio .ui-button.ui-focus {
 	z-index: 3;
 }
-.ui-checkbox .ui-button-icon-top,
-.ui-radio .ui-button-icon-top,
-.ui-checkbox .ui-button-icon-bottom,
-.ui-radio .ui-button-icon-bottom {
+.ui-checkbox .ui-icon-top,
+.ui-radio .ui-icon-top,
+.ui-checkbox .ui-icon-bottom,
+.ui-radio .ui-icon-bottom {
 	text-align: center;
 }
 .ui-controlgroup-horizontal .ui-checkbox .ui-button .ui-icon,

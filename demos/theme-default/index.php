@@ -59,9 +59,9 @@
 <div data-role="page" id="testpage">
 
 	<div data-role="header">
-		<h1>Default theme <a href="http://api.jquerymobile.com/theme/" class="jqm-api-docs-link ui-button ui-button-icon-right ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
-		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-icon-back ui-button-icon-left ui-button-icon-notext">Back</a>
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-icon-left ui-icon-gear">Button</a>
+		<h1>Default theme <a href="http://api.jquerymobile.com/theme/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
+		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-icon-back ui-icon-beginning ui-button-icon-only">Back</a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-beginning ui-icon-gear">Button</a>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-button-active ui-state-persist">Menu item 1</a></li>
@@ -125,8 +125,8 @@
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-icon-carat-r ui-button-icon-right">We</a>
-		<button class="ui-button ui-corner-all ui-shadow ui-button-inline ui-icon-carat-r ui-button-icon-right">are</button>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-icon-carat-r ui-icon-end">We</a>
+		<button class="ui-button ui-corner-all ui-shadow ui-button-inline ui-icon-carat-r ui-icon-end">are</button>
 		<input type="button" value="buttons" data-inline="true" data-icon="carat-r" data-iconpos="right">
 
 		<ul data-role="listview" data-inset="true">
@@ -209,9 +209,9 @@
 			<div class="ui-field-contain">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Controlgroup:</legend>
-					<button class="ui-button ui-corner-all ui-shadow ui-icon-home ui-button-icon-right">One</button>
+					<button class="ui-button ui-corner-all ui-shadow ui-icon-home ui-icon-end">One</button>
 					<input type="button" data-icon="back" data-iconpos="right" value="Two">
-					<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-grid ui-button-icon-right">Three</a>
+					<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-grid ui-icon-end">Three</a>
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
@@ -229,7 +229,7 @@
 			</div>
 		</form>
 
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-gear ui-button-icon-left ui-button-active">Active button</a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-gear ui-icon-beginning ui-button-active">Active button</a>
 
 		<p>Form inside static list:</p>
 

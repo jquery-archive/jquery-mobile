@@ -18,13 +18,13 @@
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-        <a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
 
-        <h1>Text inputs <a href="http://api.jquerymobile.com/textinput/" class="jqm-api-docs-link ui-button ui-button-icon-right ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
+        <h1>Text inputs <a href="http://api.jquerymobile.com/textinput/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
 
         <p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.
         </p>
@@ -316,13 +316,13 @@
             <label for="text-enhanced">Text input:</label>
             <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
                 <input type="text" data-enhanced="true" data-clear-button="true" name="text-enhanced" id="text-enhanced" value="">
-                <a href="#" class="ui-input-clear ui-button ui-icon-delete ui-button-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a>
+                <a href="#" class="ui-input-clear ui-button ui-icon-delete ui-button-icon-only ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a>
             </div>
 
             <label for="search-enhanced">Search:</label>
             <div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
                 <input type="text" data-type="search" data-enhanced="true" name="search-enhanced" id="search-enhanced" value="">
-                <a href="#" class="ui-input-clear ui-button ui-icon-delete ui-button-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a>
+                <a href="#" class="ui-input-clear ui-button ui-icon-delete ui-button-icon-only ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a>
             </div>
 
             <label for="textarea-enhanced">Textarea:</label>

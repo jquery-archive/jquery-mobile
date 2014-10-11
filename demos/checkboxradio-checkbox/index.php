@@ -18,13 +18,13 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Checkbox <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-button ui-button-icon-right ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
+		<h1>Checkbox <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
 
 		<p>Checkbox inputs are used to provide a list of options where more than one can be selected. Checkbox buttons are enhanced by the checkboxradio widget.</p>
 
@@ -136,7 +136,7 @@
 
 		<div data-demo-html="true">
 			<div class="ui-checkbox">
-				<label for="checkbox-enhanced" class="ui-button ui-corner-all ui-button-inherit ui-button-icon-left ui-checkbox-off">I agree</label>
+				<label for="checkbox-enhanced" class="ui-button ui-corner-all ui-button-inherit ui-icon-beginning ui-checkbox-off">I agree</label>
 				<input type="checkbox" name="checkbox-enhanced" id="checkbox-enhanced" data-enhanced="true">
 			</div>
 		</div><!--/demo-html -->

@@ -138,7 +138,7 @@ $.widget( "mobile.dialog", {
 			button = $( "<a></a>", {
 					"role": "button",
 					"href": "#",
-					"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-notext ui-button-" + location
+					"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-only ui-button-" + location
 				})
 				.text( text || this.options.closeBtnText || "" )
 				.prependTo( dst );

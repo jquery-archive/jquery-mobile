@@ -20,8 +20,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -30,7 +30,7 @@
 
 		<p>This demo shows the linkbar extension that adds a fixed positioned bar on the right of the screen that makes it easy to anchor down to a specific part of a listview. View the source to see how it works.</p>
 
-		<a href="autodividers-linkbar-demo.html" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini ui-icon-arrow-r ui-button-icon-right">Open demo</a>
+		<a href="autodividers-linkbar-demo.html" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini ui-icon-arrow-r ui-icon-end">Open demo</a>
 
 		<div data-demo-html="#demo-page" data-demo-js="#demo-script" data-demo-css="#demo-style"></div><!--/demo-html -->
 
@@ -53,7 +53,7 @@
 
 	<div data-role="header">
 		<h1>Listview Autodivider Linkbar</h1>
-		<a href="#" class="jqm-search-link ui-shadow ui-button ui-button-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
+		<a href="#" class="jqm-search-link ui-shadow ui-button ui-button-icon-only ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-button-right">Search</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content">

@@ -29,8 +29,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -107,11 +107,11 @@
 
         <div data-demo-html="true" data-demo-css="#center">
             <div class="ui-grid-d center">
-                <div class="ui-block-a"><a class="ui-shadow ui-button ui-corner-all ui-icon-home ui-button-icon-notext ui-button-inline">Button</a></div>
-                <div class="ui-block-b"><a class="ui-shadow ui-button ui-corner-all ui-icon-arrow-l ui-button-icon-notext ui-button-inline">Button</a></div>
-                <div class="ui-block-c"><a class="ui-shadow ui-button ui-corner-all ui-icon-grid ui-button-icon-notext ui-button-inline">Button</a></div>
-                <div class="ui-block-d"><a class="ui-shadow ui-button ui-corner-all ui-icon-arrow-r ui-button-icon-notext ui-button-inline">Button</a></div>
-                <div class="ui-block-e"><a class="ui-shadow ui-button ui-corner-all ui-icon-gear ui-button-icon-notext ui-button-inline">Button</a></div>
+                <div class="ui-block-a"><a class="ui-shadow ui-button ui-corner-all ui-icon-home ui-button-icon-only ui-button-inline">Button</a></div>
+                <div class="ui-block-b"><a class="ui-shadow ui-button ui-corner-all ui-icon-arrow-l ui-button-icon-only ui-button-inline">Button</a></div>
+                <div class="ui-block-c"><a class="ui-shadow ui-button ui-corner-all ui-icon-grid ui-button-icon-only ui-button-inline">Button</a></div>
+                <div class="ui-block-d"><a class="ui-shadow ui-button ui-corner-all ui-icon-arrow-r ui-button-icon-only ui-button-inline">Button</a></div>
+                <div class="ui-block-e"><a class="ui-shadow ui-button ui-corner-all ui-icon-gear ui-button-icon-only ui-button-inline">Button</a></div>
             </div>
         </div><!--/demo-html -->
 
@@ -121,7 +121,7 @@
 
         <div data-demo-html="true">
             <div class="ui-grid-b ui-responsive">
-                <div class="ui-block-a"><a href="#" class="ui-shadow ui-button ui-corner-all ui-button-icon-left ui-icon-arrow-l">Back to order</a></div>
+                <div class="ui-block-a"><a href="#" class="ui-shadow ui-button ui-corner-all ui-icon-beginning ui-icon-arrow-l">Back to order</a></div>
                 <div class="ui-block-b"><input type="button" data-icon="plus" value="Add products"></div>
                 <div class="ui-block-c"><input type="button" data-icon="check" data-iconpos="right" value="Confirm order"></div>
             </div>

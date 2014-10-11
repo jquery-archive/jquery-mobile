@@ -237,9 +237,9 @@ div.ui-mobile-viewport {
 	-ms-user-select: none;
 	user-select: none;
 }
-.ui-button-icon-notext,
-.ui-header button.ui-button.ui-button-icon-notext,
-.ui-footer button.ui-button.ui-button-icon-notext {
+.ui-button-icon-only,
+.ui-header button.ui-button.ui-button-icon-only,
+.ui-footer button.ui-button.ui-button-icon-only {
 	padding: 0;
 	width: 1.75em;
 	height: 1.75em;
@@ -259,8 +259,8 @@ div.ui-mobile-viewport {
 	display: inline-block;
 	vertical-align: middle;
 }
-.ui-header .ui-controlgroup .ui-button-icon-notext,
-.ui-footer .ui-controlgroup .ui-button-icon-notext {
+.ui-header .ui-controlgroup .ui-button-icon-only,
+.ui-footer .ui-controlgroup .ui-button-icon-only {
     font-size: 12.5px;
 }
 
@@ -269,10 +269,10 @@ div.ui-mobile-viewport {
 .ui-header .ui-button-right {
 	font-size: 12.5px;
 }
-.ui-mini.ui-button-icon-notext,
-.ui-mini .ui-button-icon-notext,
-.ui-header .ui-button-icon-notext,
-.ui-footer .ui-button-icon-notext {
+.ui-mini.ui-button-icon-only,
+.ui-mini .ui-button-icon-only,
+.ui-header .ui-button-icon-only,
+.ui-footer .ui-button-icon-only {
 	font-size: 16px;	
 	padding: 0;
 }
@@ -281,22 +281,22 @@ div.ui-mobile-viewport {
 	vertical-align: middle;
 	margin-right: .625em;
 }
-.ui-button-icon-left {
+.ui-icon-beginning {
 	padding-left: 2.5em;
 }
-.ui-button-icon-right {
+.ui-icon-end {
 	padding-right: 2.5em;
 }
-.ui-button-icon-top {
+.ui-icon-top {
 	padding-top: 2.5em;
 }
-.ui-button-icon-bottom {
+.ui-icon-bottom {
 	padding-bottom: 2.5em;
 }
-.ui-header .ui-button-icon-top,
-.ui-footer .ui-button-icon-top,
-.ui-header .ui-button-icon-bottom,
-.ui-footer .ui-button-icon-bottom {
+.ui-header .ui-icon-top,
+.ui-footer .ui-icon-top,
+.ui-header .ui-icon-bottom,
+.ui-footer .ui-icon-bottom {
 	padding-left: .3125em;
 	padding-right: .3125em;
 }
@@ -312,39 +312,39 @@ div.ui-mobile-viewport {
 	overflow: hidden;
 }
 .ui-button.ui-icon-notext .ui-icon,
-.ui-button.ui-button-icon-left .ui-icon,
-.ui-button.ui-button-icon-right .ui-icon {
+.ui-button.ui-icon-beginning .ui-icon,
+.ui-button.ui-icon-end .ui-icon {
 	top: 50%;
 	margin-top: -11px;
 }
-.ui-button-icon-left .ui-icon {
+.ui-icon-beginning .ui-icon {
 	left: .5625em;
 }
-.ui-button-icon-right .ui-icon {
+.ui-icon-end .ui-icon {
 	right: .5625em;
 }
-.ui-mini.ui-button-icon-left .ui-icon,
-.ui-mini .ui-button-icon-left .ui-icon,
-.ui-header .ui-button-icon-left .ui-icon,
-.ui-footer .ui-button-icon-left .ui-icon {
+.ui-mini.ui-icon-beginning .ui-icon,
+.ui-mini .ui-icon-beginning .ui-icon,
+.ui-header .ui-icon-beginning .ui-icon,
+.ui-footer .ui-icon-beginning .ui-icon {
 	left: .37em;
 }
-.ui-mini.ui-button-icon-right .ui-icon,
-.ui-mini .ui-button-icon-right .ui-icon,
-.ui-header .ui-button-icon-right .ui-icon,
-.ui-footer .ui-button-icon-right .ui-icon {
+.ui-mini.ui-icon-end .ui-icon,
+.ui-mini .ui-icon-end .ui-icon,
+.ui-header .ui-icon-end .ui-icon,
+.ui-footer .ui-icon-end .ui-icon {
 	right: .37em;
 }
-.ui-button.ui-button-icon-notext .ui-icon,
-.ui-button.ui-button-icon-top .ui-icon,
-.ui-button.ui-button-icon-bottom .ui-icon {
+.ui-button.ui-button-icon-only .ui-icon,
+.ui-button.ui-icon-top .ui-icon,
+.ui-button.ui-icon-bottom .ui-icon {
 	left: 50%;
 	margin-left: -11px;
 }
-.ui-button-icon-top .ui-icon {
+.ui-icon-top .ui-icon {
 	top: .5625em;
 }
-.ui-button-icon-bottom .ui-icon {
+.ui-icon-bottom .ui-icon {
 	top: auto;
 	bottom: .5625em;
 }
@@ -366,11 +366,11 @@ div.ui-mobile-viewport {
 .ui-button-right {
 	right: .4em;
 }
-.ui-button-icon-notext.ui-button-left {
+.ui-button-icon-only.ui-button-left {
 	top: .3125em;
 	left: .3125em;
 }
-.ui-button-icon-notext.ui-button-right {
+.ui-button-icon-only.ui-button-right {
 	top: .3125em;
 	right: .3125em;
 }
@@ -378,8 +378,8 @@ div.ui-mobile-viewport {
 /* Button elements and input buttons */
 button.ui-button,
 input.ui-button,
-.ui-controlgroup-controls button.ui-button-icon-notext,
-.ui-controlgroup-controls input.ui-button-icon-notext {
+.ui-controlgroup-controls button.ui-button-icon-only,
+.ui-controlgroup-controls input.ui-button-icon-only {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -396,8 +396,8 @@ button.ui-button-inline,
 button.ui-button::-moz-focus-inner {
 	border: 0;
 }
-button.ui-button-icon-notext,
-input.ui-button-icon-notext,
+button.ui-button-icon-only,
+input.ui-button-icon-only,
 .ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button,
 .ui-controlgroup-horizontal .ui-controlgroup-controls input.ui-button {
 	-webkit-box-sizing: content-box;

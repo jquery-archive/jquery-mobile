@@ -115,7 +115,7 @@ $.widget( "mobile.page", $.mobile.page, {
 			dst = this._inner.find( ":jqmData(role='header')" ).first();
 			button = $( "<a></a>", {
 					"href": "#",
-					"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-notext ui-button-" + location
+					"class": "ui-button ui-corner-all ui-icon-delete ui-button-icon-only ui-button-" + location
 				})
 				.attr( "data-" + $.mobile.ns + "rel", "back" )
 				.text( text || this.options.closeBtnText || "" )

@@ -139,7 +139,7 @@ $.widget( "mobile.listview", $.extend( {
 						splittheme = getAttr( last[ 0 ], "theme" ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
 						splitThemeClass = splittheme ? " ui-button-" + splittheme : "";
 						spliticon = getAttr( last[ 0 ], "icon" ) || getAttr( item[ 0 ], "icon" ) || o.splitIcon;
-						altButtonClass = "ui-button ui-button-icon-notext ui-icon-" + spliticon + splitThemeClass;
+						altButtonClass = "ui-button ui-button-icon-only ui-icon-" + spliticon + splitThemeClass;
 
 						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
@@ -149,7 +149,7 @@ $.widget( "mobile.listview", $.extend( {
 						// Reduce to the first anchor, because only the first gets the buttonClass
 						a = a.first();
 					} else if ( icon ) {
-						buttonClass += " ui-button-icon-right ui-icon-" + icon;
+						buttonClass += " ui-icon-end ui-icon-" + icon;
 					}
 
 					// Apply buttonClass to the (first) anchor

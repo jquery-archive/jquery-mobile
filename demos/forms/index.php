@@ -18,8 +18,8 @@
 		<div data-role="header" class="jqm-header">
 			<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-			<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
-			<a href="#" class="jqm-search-link ui-button ui-button-icon-notext ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
+			<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+			<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 			</div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -44,17 +44,17 @@
 
         <p>Inline buttons</p>
         <div data-demo-html="true">
-            <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-button-icon-left ui-icon-star">Inline + icon</a>
+            <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-icon-beginning ui-icon-star">Inline + icon</a>
             <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-button-b ui-mini">Mini + theme</a>
-            <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-icon-plus ui-button-icon-notext ui-button-b ui-mini">icon only button</a>
+            <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-icon-plus ui-button-icon-only ui-button-b ui-mini">icon only button</a>
         </div><!-- /demo-html -->
 
         <p>Horizontal grouped buttons</p>
         <div data-demo-html="true">
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-icon-left ui-icon-plus ui-button-b">Add</a>
-                <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-icon-left ui-icon-delete ui-button-b">Delete</a>
-                <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-icon-left ui-icon-grid ui-button-b">More</a>
+                <a href="#" class="ui-shadow ui-button ui-corner-all ui-icon-beginning ui-icon-plus ui-button-b">Add</a>
+                <a href="#" class="ui-shadow ui-button ui-corner-all ui-icon-beginning ui-icon-delete ui-button-b">Delete</a>
+                <a href="#" class="ui-shadow ui-button ui-corner-all ui-icon-beginning ui-icon-grid ui-button-b">More</a>
             </div>
         </div><!-- /demo-html -->
 
