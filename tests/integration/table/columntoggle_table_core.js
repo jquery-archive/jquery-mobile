@@ -390,7 +390,7 @@ test( "Columntoggle table with generated id works correctly", function() {
 		link = container.find( "a:first" ),
 		linkId = link.attr( "id" ),
 		popupId = ( linkId || "" ).replace( /-button$/, "-popup" ),
-		popup = $( "#" + popupId + ":data('mobilePopup')" );
+		popup = $( "#" + popupId + ":data('mobile-popup')" );
 
 	deepEqual( !!linkId, true, "Anchor has an ID" );
 	deepEqual( link.attr( "href" ), "#" + popupId,
