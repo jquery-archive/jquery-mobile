@@ -330,10 +330,8 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			.find( "a" ).removeClass( $.mobile.activeBtnClass ).end()
 			.attr( "aria-selected", false )
 			.each(function( i ) {
-
+				var item = $( this );
 				if ( $.inArray( i, indices ) > -1 ) {
-					var item = $( this );
-
 					// Aria selected attr
 					item.attr( "aria-selected", true );
 
@@ -347,6 +345,9 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 							item.find( "a" ).addClass( $.mobile.activeBtnClass );
 						}
 					}
+				}
+				else if ( self.isMultiple ) {
+					item.find( "a" ).removeClass( "ui-checkbox-off" ).addClass( "ui-checkbox-on" );
 				}
 			});
 	},
