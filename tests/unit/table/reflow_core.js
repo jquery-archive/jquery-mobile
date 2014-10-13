@@ -152,6 +152,7 @@ test( "_destroy() correctly removes markup", function() {
 		unenhancedTable = $( "#destroy-test-destroyed" ).clone().removeAttr( "id" ),
 		options = {
 			classes: {
+				table: "ui-table",
 				reflowTable: "ui-table-reflow",
 				cellLabels: "ui-table-cell-label"
 			}
