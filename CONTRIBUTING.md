@@ -28,7 +28,7 @@ When [submitting an issue](https://github.com/jquery/jquery-mobile/issues/new) i
 5. Actual outcome
 6. Platforms/browsers (including version) and devices tested
 7. jQuery Mobile and jQuery core version used
-8. Other relevant information, e.g. using PhoneGap
+8. Other relevant information, e.g. using Apache Cordova
 
 In the interest of creating readable issues please include code snippets inside a triple backtick box appropriate for the JavaScript, CSS, or HTML snippet you wish to discuss. More information is available on the [introduction page](http://github.github.com/github-flavored-markdown/) for GitHub Flavored Markdown (see Syntax Highlighting).
 
