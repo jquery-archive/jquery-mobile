@@ -374,14 +374,14 @@
 				textinput.focus();
             },
 
-            {
-                focus: { src: textinput, event: "focus.popupFocusedAfterOpen2" }
-            },
+			{
+				focus: { src: textinput, event: "focus.popupFocusedAfterOpen2" }
+			},
 
 			function( result ) {
-                deepEqual( result.focus.timedOut, false, "Focus event received" );
-                deepEqual( document.activeElement === textinput[ 0 ], false,
-                    "An input outside the popup is prevented from receiving focus while the popup is open" );
+				deepEqual( result.focus.timedOut, false, "Focus event received" );
+				deepEqual( document.activeElement === textinput[ 0 ], false,
+						  "An input outside the popup is prevented from receiving focus while the popup is open" );
 				popup.popup( "close" );
 			},
 
