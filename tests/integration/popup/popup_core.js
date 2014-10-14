@@ -350,11 +350,11 @@
 				//first focus on the text input
 				textinput.focus();
 			},
-			
+
 			{
 				focus: { src: textinput, event: "focus.popupFocusedAfterOpen0" }
 			},
-			
+
 			function( result ){
 				deepEqual( document.activeElement, textinput[ 0 ], "Textinput focused before popup is opened" );
 				deepEqual( result.focus.timedOut, false );
@@ -373,18 +373,18 @@
 				//Try to focus on the textinput again
 				textinput.focus();
             },
-			
+
             {
                 focus: { src: textinput, event: "focus.popupFocusedAfterOpen2" }
             },
-			
+
 			function( result ) {
                 deepEqual( result.focus.timedOut, false, "Focus event received" );
                 deepEqual( document.activeElement === textinput[ 0 ], false,
                     "An input outside the popup is prevented from receiving focus while the popup is open" );
 				popup.popup( "close" );
 			},
-			
+
 			{
 				closed: { src: popup, event: "popupafterclose.popupFocusedAfterOpen2" }
 			},
