@@ -298,9 +298,9 @@ $.widget( "mobile.popup", {
 		if ( targetElement !== ui.container[ 0 ] ) {
 			target = $( targetElement );
 			if ( 0 === target.parents().filter( ui.container[ 0 ] ).length ) {
-				$( this.document[ 0 ].activeElement ).one( "focus", function(/* theEvent */) {
+				$( this.document[ 0 ].activeElement ).one( "focus", $.proxy( function(/* theEvent */) {
 					this._safelyBlur( this.document[ 0 ].activeElement );
-				});
+				}, this ) );
 				ui.focusElement.focus();
 				theEvent.preventDefault();
 				theEvent.stopImmediatePropagation();
@@ -632,8 +632,8 @@ $.widget( "mobile.popup", {
 	},
 	
 	_safelyBlur: function( currElement ){
-		if ($( currElement ) !== this.window[ 0 ] && currElement.nodeName.toLowerCase() !== "body") {
-			$( currElement ).blur();
+		if (currElement !== this.window[ 0 ] && currElement.nodeName.toLowerCase() !== "body") {
+			currElement.blur();
 		}
 	},
 

@@ -337,11 +337,13 @@
 		]);
 	});
 
-	//The best below adds an input, gives it focus, then open the popup, and make sure the input has been blurred.
-	asyncTest( "Popup assure previous element is blurred", function() {
-		var $link = $( "#open-test-popup" ), $popup = $( "#test-popup" ), textinput = $( "#test-input" );
+	//The test below adds an input, gives it focus, then open the popup, and make sure the input has been blurred.
+	asyncTest( "Popup assures previous element is blurred", function() {
+		var link = $( "#open-test-popup" );
+		var popup = $( "#test-popup" );
+		var textinput = $( "#test-input" );
 
-		expect( 4 );
+		expect( 7 );
 
 		$.testHelper.detailedEventCascade([
 			function() {
@@ -354,23 +356,35 @@
 			},
 			
 			function( result ){
+				deepEqual( document.activeElement, textinput[ 0 ],
+                    "Textinput focused before popup is opened" );
 				deepEqual( result.focus.timedOut, false );
-				$popup.popup( "open" );
+				popup.popup( "open" );
 			},
 
 			{
 				blur: { src: textinput, event: "blur.popupFocusedAfterOpen1" },
-				opened: { src: $popup, event: "popupafteropen.popupFocusedAfterOpen1" }
+				opened: { src: popup, event: "popupafteropen.popupFocusedAfterOpen1" }
 			},
 
 			function( result ) {
 				ok( !result.opened.timedOut, "popup emitted 'popupafteropen'" );
-				ok( !result.blur.timedOut, "blur fired after the popup opens" );
-				$popup.popup( "close" );
+				deepEqual( result.blur.timedOut, false, "blur fired after the popup opens" );
+				//try to focus on the textinput again
+				textinput.focus();
+            },
+            {
+                focus: { src: textinput, event: "focus.popupFocusedAfterOpen2" }
+            },
+            function( result ) {
+                deepEqual( result.focus.timedOut, false, "Focus event received" );
+                deepEqual( document.activeElement === textinput[ 0 ], false,
+                    "An input outside the popup is prevented from receiving focus while the popup is open" );
+				popup.popup( "close" );
 			},
 
 			{
-				closed: { src: $popup, event: "popupafterclose.popupFocusedAfterOpen2" }
+				closed: { src: popup, event: "popupafterclose.popupFocusedAfterOpen2" }
 			},
 
 			function( result ) {
