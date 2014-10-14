@@ -372,7 +372,7 @@
 
 				//Try to focus on the textinput again
 				textinput.focus();
-            },
+			},
 
 			{
 				focus: { src: textinput, event: "focus.popupFocusedAfterOpen2" }
