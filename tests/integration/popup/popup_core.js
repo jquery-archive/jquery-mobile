@@ -347,7 +347,8 @@
 
 		$.testHelper.detailedEventCascade([
 			function() {
-				//first focus on the text input
+
+				//First focus on the text input
 				textinput.focus();
 			},
 
