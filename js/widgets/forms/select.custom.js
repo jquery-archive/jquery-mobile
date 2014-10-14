@@ -347,7 +347,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 					}
 				}
 				else if ( self.isMultiple ) {
-					item.find( "a" ).removeClass( "ui-checkbox-off" ).addClass( "ui-checkbox-on" );
+					item.find( "a" ).removeClass( "ui-checkbox-on" ).addClass( "ui-checkbox-off" );
 				}
 			});
 	},
