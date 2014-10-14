@@ -369,7 +369,7 @@
 			function( result ) {
 				ok( !result.opened.timedOut, "popup emitted 'popupafteropen'" );
 				deepEqual( result.blur.timedOut, false, "blur fired after the popup opens" );
-				
+
 				//Try to focus on the textinput again
 				textinput.focus();
             },
