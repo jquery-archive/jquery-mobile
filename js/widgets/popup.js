@@ -297,7 +297,7 @@ $.widget( "mobile.popup", {
 
 		if ( targetElement !== ui.container[ 0 ] ) {
 			target = $( targetElement );
-			if ( !$.contains( target.parents(), ui.container[ 0 ] ) ) {
+			if ( !$.contains( ui.container[ 0 ], targetElement ) ) {
 				$( this.document[ 0 ].activeElement ).one( "focus", $.proxy( function(/* theEvent */) {
 					this._safelyBlur( targetElement );
 				}, this ) );
