@@ -297,9 +297,9 @@ $.widget( "mobile.popup", {
 
 		if ( targetElement !== ui.container[ 0 ] ) {
 			target = $( targetElement );
-			if ( 0 === target.parents().filter( ui.container[ 0 ] ).length ) {
+			if ( !$.contains( target.parents(), ui.container[ 0 ] ) ) {
 				$( this.document[ 0 ].activeElement ).one( "focus", $.proxy( function(/* theEvent */) {
-					this._safelyBlur( this.document[ 0 ].activeElement );
+					this._safelyBlur( targetElement );
 				}, this ) );
 				ui.focusElement.focus();
 				theEvent.preventDefault();
@@ -631,9 +631,9 @@ $.widget( "mobile.popup", {
 		}
 	},
 
-	_safelyBlur: function( currElement ){
-		if (currElement !== this.window[ 0 ] && currElement.nodeName.toLowerCase() !== "body") {
-			currElement.blur();
+	_safelyBlur: function( currentElement ){
+		if (currentElement !== this.window[ 0 ] && currentElement.nodeName.toLowerCase() !== "body") {
+			currentElement.blur();
 		}
 	},
 
@@ -731,8 +731,6 @@ $.widget( "mobile.popup", {
 	_closePrerequisitesDone: function() {
 		var container = this._ui.container,
 			id = this.element.attr( "id" );
-
-		container.removeAttr( "tabindex" );
 
 		// remove the global mutex for popups
 		$.mobile.popup.active = undefined;
