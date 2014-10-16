@@ -648,6 +648,9 @@ $.widget( "mobile.popup", {
 		if ( !$.contains( this._ui.container[ 0 ], this.document[ 0 ].activeElement ) ) {
 			this._safelyBlur( this.document[ 0 ].activeElement );
 		}
+		if ( this._ui.container.find( ":focusable" ).first().length > 0 ) {
+			this._ui.focusElement = this.document[ 0 ].activeElement;
+		}
 		this._ignoreResizeEvents();
 		if ( id ) {
 			this.document.find( "[aria-haspopup='true'][aria-owns='" +  id + "']" ).attr( "aria-expanded", true );
