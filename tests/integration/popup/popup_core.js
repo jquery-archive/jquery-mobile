@@ -339,9 +339,9 @@
 
 	// The test below adds an input, gives it focus, then open the popup, and make sure the input has been blurred.
 	asyncTest( "Popup assures previous element is blurred", function() {
-		var link = $( "#open-test-popup" );
-		var popup = $( "#test-popup" );
-		var textinput = $( "#test-input" );
+		var link = $( "#open-test-popup" ),
+			popup = $( "#test-popup" ),
+			textinput = $( "#test-input" );
 
 		expect( 7 );
 

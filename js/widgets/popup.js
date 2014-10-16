@@ -638,7 +638,8 @@ $.widget( "mobile.popup", {
 	},
 
 	_openPrerequisitesComplete: function() {
-		var id = this.element.attr( "id" );
+		var id = this.element.attr( "id" ),
+			firstFocus = this._ui.container.find( ":focusable" ).first();
 
 		this._ui.container.addClass( "ui-popup-active" );
 		this._isOpen = true;
@@ -648,8 +649,8 @@ $.widget( "mobile.popup", {
 		if ( !$.contains( this._ui.container[ 0 ], this.document[ 0 ].activeElement ) ) {
 			this._safelyBlur( this.document[ 0 ].activeElement );
 		}
-		if ( this._ui.container.find( ":focusable" ).first().length > 0 ) {
-			this._ui.focusElement = this.document[ 0 ].activeElement;
+		if ( firstFocus.length > 0 ) {
+			this._ui.focusElement = firstFocus;
 		}
 		this._ignoreResizeEvents();
 		if ( id ) {
