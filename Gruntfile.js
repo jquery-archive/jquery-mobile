@@ -146,7 +146,8 @@ module.exports = function( grunt ) {
 							// processed here
 							.replace( /css\/structure\/jquery\.mobile\.structure\.css/gi,
 								path.join( "css", "themes", "default",
-									processedName + ".structure" + ".min.css" ) )
+									grunt.config.process( name + ".structure" +
+										"<%= versionSuffix %>" ) + ".min.css" ) )
 
 							// References to the icons CSS file need to be processed here
 							.replace( /css\/themes\/default\/jquery\.mobile\.icons\.css/,
