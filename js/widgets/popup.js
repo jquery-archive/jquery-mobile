@@ -298,7 +298,7 @@ $.widget( "mobile.popup", {
 		if ( targetElement !== ui.container[ 0 ] ) {
 			target = $( targetElement );
 			if ( !$.contains( ui.container[ 0 ], targetElement ) ) {
-				$( this.document[ 0 ].activeElement ).one( "focus", $.proxy( function(/* theEvent */) {
+				$( this.document[ 0 ].activeElement ).one( "focus", $.proxy( function() {
 					this._safelyBlur( targetElement );
 				}, this ) );
 				ui.focusElement.focus();
@@ -632,8 +632,9 @@ $.widget( "mobile.popup", {
 	},
 
 	_safelyBlur: function( currentElement ){
-		if (currentElement !== this.window[ 0 ] && currentElement.nodeName.toLowerCase() !== "body") {
-			$( currentElement ).blur();
+		if (currentElement !== this.window[ 0 ]
+			&& currentElement.nodeName.toLowerCase() !== "body") {
+				$( currentElement ).blur();
 		}
 	},
 
