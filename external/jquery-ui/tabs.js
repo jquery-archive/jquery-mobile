@@ -31,13 +31,13 @@ return $.widget( "ui.tabs", {
 		active: null,
 		classes: {
 			"ui-tabs": "ui-corner-all",
-			"ui-tabs-collapsible": null,
-			"ui-tabs-active": null,
+			"ui-tabs-collapsible": "",
+			"ui-tabs-active": "",
 			"ui-tabs-nav": "ui-corner-all",
 			"ui-tab": "ui-corner-top",
-			"ui-tabs-anchor": null,
+			"ui-tabs-anchor": "",
 			"ui-tabs-panel": "ui-corner-bottom",
-			"ui-tabs-loading": null
+			"ui-tabs-loading": ""
 		},
 		collapsible: false,
 		event: "click",
@@ -273,6 +273,33 @@ return $.widget( "ui.tabs", {
 		index = this._findNextTab( index, goingForward );
 		this.tabs.eq( index ).focus();
 		return index;
+	},
+
+	_elementsFromClassKey: function( classKey ) {
+		switch( classKey ) {
+			case "ui-tabs":
+				return this.element;
+			case "ui-tabs-collapsible":
+				if ( this.options.collapsible ) {
+					return this.element;
+				}
+			case "ui-tabs-active":
+				return this.active;
+			case "ui-tabs-nav":
+				return this.tablist;
+			case "ui-tab"
+				return this.tabs;
+			case "ui-tabs-anchor":
+				return this.anchors;
+			case "ui-tabs-panel":
+				return this.panels;
+			case "ui-tabs-loading":
+				if( this.tab.hasClass( classKey ) ) {
+					return this.tab;
+				}
+			default:
+				return this._superApply( arguments );
+		}
 	},
 
 	_setOption: function( key, value ) {

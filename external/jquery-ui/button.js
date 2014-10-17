@@ -24,7 +24,7 @@
 	}
 }(function( $ ) {
 
-var baseClasses = "ui-widget ui-corner-all",
+var baseClasses = "ui-button ui-widget ui-corner-all",
 	typeClasses = "ui-button-icons-only ui-button-icon-only ui-button-text-icons" +
 		" ui-button-text-only ui-icon-beginning ui-icon-end ui-icon-top ui-icon-bottom",
 	formResetHandler = function() {
@@ -97,7 +97,7 @@ $.widget( "ui.button", {
 	_enhance: function() {
 		this._setOption( "disabled", this.options.disabled );
 
-		this.element.addClass( this._classes( "ui-button" ) + " " + baseClasses ).attr( "role", "button" );
+		this.element.addClass( baseClasses ).attr( "role", "button" );
 
 		// Check to see if the label needs to be set or if its already correct
 		if ( this.options.label && this.options.label !== this.originalLabel ) {
@@ -124,10 +124,11 @@ $.widget( "ui.button", {
 	_updateIcon: function( icon ) {
 		if ( !this.icon ) {
 			this.icon = $( "<span>" ).addClass( this._classes( "ui-button-icon" ) + " ui-icon" );
-			this.element.addClass(  "ui-icon-" + this.options.iconPosition );
 
 			if ( !this.options.showLabel ){
 				this.element.addClass( this._classes( "ui-button-icon-only" ) );
+			} else {
+				this.element.addClass(  "ui-icon-" + this.options.iconPosition );
 			}
 		} else {
 			this.icon.removeClass( this.options.icon );
