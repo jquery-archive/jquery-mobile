@@ -404,7 +404,7 @@ $.widget( "mobile.popup", $.extend({
 
 	_setOptions: function( newOptions ) {
 		var classHash, optionsToUpdate, wrapperClassHash, updateWrapperClass, classIndex,
-			newWrapperClass,
+			newWrapperClass, styleOptionsChanged,
 			currentOptions = this.options,
 			theElement = this.element,
 			screen = this._ui.screen;
@@ -412,6 +412,7 @@ $.widget( "mobile.popup", $.extend({
 		// Reacting to the following five style option changes is deprecated in 1.5.0 and will be
 		// removed in 1.6.0
 		if ( newOptions.wrapperClass !== undefined ) {
+			styleOptionsChanged = true;
 			this._ui.container
 				.removeClass( currentOptions.wrapperClass )
 				.addClass( newOptions.wrapperClass );
@@ -434,10 +435,12 @@ $.widget( "mobile.popup", $.extend({
 		}
 
 		if ( newOptions.shadow !== undefined ) {
+			styleOptionsChanged = true;
 			theElement.toggleClass( "ui-overlay-shadow", newOptions.shadow );
 		}
 
 		if ( newOptions.corners !== undefined ) {
+			styleOptionsChanged = true;
 			theElement.toggleClass( "ui-corner-all", newOptions.corners );
 		}
 
@@ -459,7 +462,9 @@ $.widget( "mobile.popup", $.extend({
 
 		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0: update the classes option to
 		// reflect the values of the style options
-		this._optionsToClasses( currentOptions, newOptions );
+		if ( styleOptionsChanged ) {
+			this._optionsToClasses( currentOptions, newOptions );
+		}
 
 		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0: update the various style classes to
 		// reflect the value of the classes option. We do this last, because the value of the
