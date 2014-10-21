@@ -63,12 +63,12 @@ var styleOptions = {
 $.widget( "mobile.popup", $.extend({
 	options: $.extend({
 		classes: {
-			"ui-popup-screen": null,
-			"ui-popup-placeholder": null,
+			"ui-popup-screen": "",
+			"ui-popup-placeholder": "",
 			"ui-popup": "ui-overlay-shadow ui-corner-all",
-			"ui-popup-container": null,
-			"ui-popup-hidden": null,
-			"ui-popup-truncate": null
+			"ui-popup-container": "",
+			"ui-popup-hidden": "",
+			"ui-popup-truncate": ""
 		},
 		theme: null,
 		overlayTheme: null,
@@ -381,11 +381,32 @@ $.widget( "mobile.popup", $.extend({
 		}
 	},
 
+	_elementsFromClassKey: function( classKey ) {
+		switch( classKey ) {
+			case "ui-popup-screen":
+				return this._ui.screen;
+
+			case "ui-popup-placeholder":
+				return this._ui.placeholder;
+
+			case "ui-popup":
+				return this.element;
+
+			case "ui-popup-container":
+			case "ui-popup-hidden":
+			case "ui-popup-truncate":
+				return this._ui.container;
+
+			default:
+				return this._superApply( arguments );
+		}
+	},
+
 	_setOptions: function( newOptions ) {
-		var currentOptions = this.options,
+		var classHash, optionsToUpdate, wrapperClassHash, updateWrapperClass, classIndex,
+			newWrapperClass,
+			currentOptions = this.options,
 			theElement = this.element,
-			styleOptionsChanged = 0,
-			newStyleOptions = {},
 			screen = this._ui.screen;
 
 		// Reacting to the following five style option changes is deprecated in 1.5.0 and will be
@@ -394,8 +415,6 @@ $.widget( "mobile.popup", $.extend({
 			this._ui.container
 				.removeClass( currentOptions.wrapperClass )
 				.addClass( newOptions.wrapperClass );
-			newStyleOptions.wrapperClass = newOptions.wrapperClass;
-			styleOptionsChanged++;
 		}
 
 		if ( newOptions.theme !== undefined ) {
@@ -416,14 +435,10 @@ $.widget( "mobile.popup", $.extend({
 
 		if ( newOptions.shadow !== undefined ) {
 			theElement.toggleClass( "ui-overlay-shadow", newOptions.shadow );
-			newStyleOptions.shadow = newOptions.shadow;
-			styleOptionsChanged++;
 		}
 
 		if ( newOptions.corners !== undefined ) {
 			theElement.toggleClass( "ui-corner-all", newOptions.corners );
-			newStyleOptions.corners = newOptions.corners;
-			styleOptionsChanged++;
 		}
 
 		if ( newOptions.transition !== undefined ) {
@@ -442,11 +457,67 @@ $.widget( "mobile.popup", $.extend({
 			}
 		}
 
-		if ( styleOptionsChanged > 0 ) {
-			this._optionsToClasses( currentOptions, newStyleOptions );
+		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0: update the classes option to
+		// reflect the values of the style options
+		this._optionsToClasses( currentOptions, newOptions );
+
+		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0: update the various style classes to
+		// reflect the value of the classes option. We do this last, because the value of the
+		// classes option takes precedence over the values of the various style options. IOW, the
+		// classes option has the final say.
+		if ( newOptions.classes !== undefined ) {
+
+			// Style options related to the payload element
+			if ( newOptions.classes[ "ui-popup" ] !== this.options.classes[ "ui-popup" ] ) {
+				classHash = this._convertClassesToHash( newOptions.classes[ "ui-popup" ] );
+
+				// corners option
+				optionsToUpdate = ( newOptions.corners !== undefined ) ? newOptions : this.options;
+				if ( optionsToUpdate.corners !== !!classHash[ "ui-corner-all" ] ) {
+					optionsToUpdate.corners = !!classHash[ "ui-corner-all" ];
+				}
+
+				// shadow option
+				optionsToUpdate = ( newOptions.shadow !== undefined ) ? newOptions : this.options;
+				if ( optionsToUpdate.shadow !== !!classHash[ "ui-overlay-shadow" ] ) {
+					optionsToUpdate.shadow = !!classHash[ "ui-overlay-shadow" ];
+				}
+			}
+
+			// wrapperClass - we do the actual updating after we've chained up, because only then
+			// can we check whether any of the classes listed in wrapperClass are missing from the
+			// actual popup container, due to having been removed by the classes option's
+			// "ui-popup-container" key
+			if ( newOptions.classes[ "ui-popup-container" ] !==
+				this.options.classes[ "ui-popup-container" ] ) {
+
+				updateWrapperClass = true;
+			}
 		}
 
-		return this._super( newOptions );
+		this._super( newOptions );
+
+		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0: update the value of the
+		// wrapperClass option. We do this after we have chained up, because only then do we know
+		// the final result of all option processing. Since the classes option for the container is
+		// processed in the widget factory, if any classes present in the wrapperClass option are
+		// missing from the actual container at this point, then they must also be removed from
+		// the value of the wrapperClass option.
+		if ( updateWrapperClass ) {
+			classHash = this._convertClassesToHash( this._ui.container.attr( "class" ) );
+			wrapperClassHash = this._convertClassesToHash( this.options.wrapperClass );
+			newWrapperClass = [];
+
+			// Go over the classes in the wrapperClass option and remove any that are not actually
+			// present on the popup container
+			for ( classIndex in wrapperClassHash ) {
+				if ( classHash[ classIndex ] ) {
+					newWrapperClass.push( classIndex );
+				}
+			}
+
+			this.options.wrapperClass = newWrapperClass.join( " " );
+		}
 	},
 
 	_setTolerance: function( value ) {
