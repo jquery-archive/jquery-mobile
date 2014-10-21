@@ -6,7 +6,7 @@ define( [ "jquery", "./listview" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var rdivider = /(^|\s)ui-li-divider($|\s)/,
+var rdivider = /(^|\s)ui-listview-item-divider($|\s)/,
 	rhidden = /(^|\s)ui-screen-hidden($|\s)/;
 
 $.widget( "mobile.listview", $.mobile.listview, {

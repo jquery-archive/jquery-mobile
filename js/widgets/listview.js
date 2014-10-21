@@ -140,7 +140,7 @@ $.widget( "mobile.listview", $.extend( {
 			item = li.eq( pos );
 			itemClass = "";
 
-			if ( create || item[ 0 ].className.search( /\bui-li-static\b|\bui-li-divider\b/ ) < 0 ) {
+			if ( create || item[ 0 ].className.search( /\bui-listview-item-static\b|\bui-listview-item-divider\b/ ) < 0 ) {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttr( item[ 0 ], "role" ) === "list-divider" );
 				value = item.attr( "value" );
@@ -157,7 +157,7 @@ $.widget( "mobile.listview", $.extend( {
 					}
 
 					if ( a.length > 1 ) {
-						itemClass = "ui-li-has-alt";
+						itemClass = "ui-listview-item-has-alt";
 
 						last = a.last();
 						splittheme = getAttr( last[ 0 ], "theme" ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
@@ -181,11 +181,11 @@ $.widget( "mobile.listview", $.extend( {
 				} else if ( isDivider ) {
 					dividerTheme = ( getAttr( item[ 0 ], "theme" ) || o.dividerTheme || o.theme );
 
-					itemClass = "ui-li-divider ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
+					itemClass = "ui-listview-item-divider ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
 
 					item.attr( "role", "heading" );
 				} else if ( a.length <= 0 ) {
-					itemClass = "ui-li-static ui-body-" + ( itemTheme ? itemTheme : "inherit" );
+					itemClass = "ui-listview-item-static ui-body-" + ( itemTheme ? itemTheme : "inherit" );
 				}
 				if ( ol && value ) {
 					newStartCount = parseInt( value , 10 ) - 1;

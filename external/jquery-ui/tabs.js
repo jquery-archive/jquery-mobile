@@ -287,7 +287,7 @@ return $.widget( "ui.tabs", {
 				return this.active;
 			case "ui-tabs-nav":
 				return this.tablist;
-			case "ui-tab"
+			case "ui-tab":
 				return this.tabs;
 			case "ui-tabs-anchor":
 				return this.anchors;

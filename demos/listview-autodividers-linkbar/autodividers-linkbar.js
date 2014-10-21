@@ -4,7 +4,7 @@ $.mobile.document.on( "pagecreate", "#demo-page", function(){
 	$.mobile.document.on( "click", "#sorter li", function() {
 		var top,
 			letter = $( this ).text(),
-			divider = $( "#sortedList" ).find( "li.ui-li-divider:contains(" + letter + ")" );
+			divider = $( "#sortedList" ).find( "li.ui-listview-item-divider:contains(" + letter + ")" );
 
 		if ( divider.length > 0 ) {
 			top = divider.offset().top;
@@ -14,9 +14,9 @@ $.mobile.document.on( "pagecreate", "#demo-page", function(){
 		}
 	});
 	$( "#sorter li" ).hover(function() {
-		$( this ).addClass( "ui-btn" ).removeClass( "ui-li-static" );
+		$( this ).addClass( "ui-btn" ).removeClass( "ui-listview-item-static" );
 	}, function() {
-		$( this ).removeClass( "ui-btn" ).addClass( "ui-li-static" );
+		$( this ).removeClass( "ui-btn" ).addClass( "ui-listview-item-static" );
 	});
 });
 $( function(){

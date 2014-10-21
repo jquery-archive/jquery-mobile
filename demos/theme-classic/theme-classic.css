@@ -1305,7 +1305,7 @@ html head + body .ui-body-e.ui-focus {
 }
 
 /* Unset background gradient */
-.ui-li-static,
+.ui-listview-item-static,
 .ui-collapsible-content,
 .ui-input-text,
 .ui-input-search,

@@ -128,7 +128,7 @@
 	border-bottom-width: 0;
 }
 
-.ui-selectmenu .ui-btn.ui-li-divider {
+.ui-selectmenu .ui-btn.ui-listview-item-divider {
 	cursor: default;
 }
 

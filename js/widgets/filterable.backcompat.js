@@ -19,7 +19,7 @@ var replaceSetOptions = function( self, orig ) {
 			self._syncTextInputOptions( options );
 		};
 	},
-	rDividerListItem = /(^|\s)ui-li-divider(\s|$)/,
+	rDividerListItem = /(^|\s)ui-listview-item-divider(\s|$)/,
 	origDefaultFilterCallback = $.mobile.filterable.prototype.options.filterCallback;
 
 // Override the default filter callback with one that does not hide list dividers
