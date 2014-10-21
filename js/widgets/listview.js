@@ -24,8 +24,11 @@ $.widget( "mobile.listview", $.extend( {
 
 	options: $.extend({
 		classes: {
-			"ui-listview": null,
-			"ui-listview-item": null
+			"ui-listview": "",
+			"ui-listview-item": "",
+			"ui-listview-item-static": "",
+			"ui-listview-item-has-alt": "",
+			"ui-listview-item-divider": ""
 		},
 		theme: null,
 		dividerTheme: null,
@@ -115,6 +118,9 @@ $.widget( "mobile.listview", $.extend( {
 			isDivider, startCount, newStartCount, value, last, splittheme, splitThemeClass, spliticon,
 			altButtonClass, dividerTheme, li,
 			baseItemClass = this._classes( "ui-listview-item" ),
+			hasAltClass = this._classes( "ui-listview-item-has-alt" ),
+			staticClass = this._classes( "ui-listview-item-static" ),
+			dividerClass = this._classes( "ui-listview-item-divider" ),
 			o = this.options,
 			$list = this.element,
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
@@ -157,7 +163,7 @@ $.widget( "mobile.listview", $.extend( {
 					}
 
 					if ( a.length > 1 ) {
-						itemClass = "ui-listview-item-has-alt";
+						itemClass = hasAltClass;
 
 						last = a.last();
 						splittheme = getAttr( last[ 0 ], "theme" ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
@@ -181,11 +187,11 @@ $.widget( "mobile.listview", $.extend( {
 				} else if ( isDivider ) {
 					dividerTheme = ( getAttr( item[ 0 ], "theme" ) || o.dividerTheme || o.theme );
 
-					itemClass = "ui-listview-item-divider ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
+					itemClass = dividerClass + " ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
 
 					item.attr( "role", "heading" );
 				} else if ( a.length <= 0 ) {
-					itemClass = "ui-listview-item-static ui-body-" + ( itemTheme ? itemTheme : "inherit" );
+					itemClass = staticClass + " ui-body-" + ( itemTheme ? itemTheme : "inherit" );
 				}
 				if ( ol && value ) {
 					newStartCount = parseInt( value , 10 ) - 1;
