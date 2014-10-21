@@ -66,6 +66,33 @@ $.widget( "mobile.listview", $.extend( {
 		}
 	},
 
+	_elementsFromClassKey: function( classKey ) {
+		switch( classKey ) {
+			case "ui-listview":
+				return this.element;
+			case "ui-listview-item":
+				return this.element.children();
+			default:
+				return this._superApply( arguments );
+		}
+	},
+
+	// Deprecated as of 1.5.0 and will be removed in 1.6.0. Update style option values to reflect
+	// the presence/absence of the corresponding class in the classes option
+	_setOptions: function( newOptions ) {
+		var classHash;
+
+		if ( newOptions.classes !== undefined && newOptions.classes[ "ui-listview" ] ) {
+			classHash = this._convertClassesToHash( newOptions.classes[ "ui-listview" ] );
+
+			this.options.corners = !!classHash[ "ui-corner-all" ];
+			this.options.inset = !!classHash[ "ui-listview-inset" ];
+			this.options.shadow = !!classHash[ "ui-shadow" ];
+		}
+
+		return this._superApply( arguments );
+	},
+
 	_getChildrenByTagName: function( ele, lcName, ucName ) {
 		var results = [],
 			dict = {};
