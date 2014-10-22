@@ -53,7 +53,7 @@
         			<p><a href="grids/" data-ajax="false">Grids</a></p>
         			<p><a href="../body-bar-classes/" data-ajax="false">Body and bar classes</a></p>
         		</div>
-        	</div>        	
+        	</div>
         	<div class="ui-block-a">
         		<div class="jqm-block-content">
         			<h3>Widgets</h3>

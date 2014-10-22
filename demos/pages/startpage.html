@@ -24,10 +24,10 @@ $('#page1').on('pagecreate', function() {
 
 $('#page1').bind('pagehide', function(e) {
   $('a.ui-btn').removeClass('ui-btn-active');
-  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-btn-active') ) { 
+  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-btn-active') ) {
     $(this).addClass('ui-page-active');
   }
-});    
+});
 
 </script>
   <style>
@@ -36,7 +36,7 @@ $('#page1').bind('pagehide', function(e) {
 </head>
 <body>
 <div data-role="page" id="startpage" data-theme="a">
-  
+
   <div data-role="header">
     <h1>same page transitions</h1>
   </div><!-- /header 1 -->

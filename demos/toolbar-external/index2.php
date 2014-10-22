@@ -22,7 +22,7 @@
 			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 		<h1>External header</h1>
 	</div><!-- /header -->
-	
+
 	<div data-role="page" class="jqm-demos" data-quicklinks="true">
 
 		<div role="main" class="ui-content jqm-content">

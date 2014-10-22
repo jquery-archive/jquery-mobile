@@ -58,7 +58,7 @@
 			},
 
 			function() {
-				
+
 				$( "#doubleCloseTestPage a" ).click();
 			},
 

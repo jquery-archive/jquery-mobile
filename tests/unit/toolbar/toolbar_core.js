@@ -8,7 +8,7 @@
         $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
         var toolbar = $( "#testHeaderClasses" );
 
-        ok( toolbar.hasClass( "ui-header" ), "toolbar gets ui-header after init" ); 
+        ok( toolbar.hasClass( "ui-header" ), "toolbar gets ui-header after init" );
         ok( toolbar.find( "h1" ).hasClass( "ui-title" ), "toolbar title assigned correctly");
         ok( toolbar.attr( "role" ) === "banner", "header gets banner role assigned" );
         ok( toolbar.find( "h1" ).attr( "role" ) === "heading", "heading role properly assigned");
@@ -19,7 +19,7 @@
         $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
         var toolbar = $( "#testFooterClasses" );
 
-        ok( toolbar.hasClass( "ui-footer" ), "toolbar gets ui-footer after init" ); 
+        ok( toolbar.hasClass( "ui-footer" ), "toolbar gets ui-footer after init" );
         ok( toolbar.find( "h1" ).hasClass( "ui-title" ), "toolbar title assigned correctly");
         ok( toolbar.attr( "role" ) === "contentinfo", "footer gets contentinfo role assigned" );
         ok( toolbar.find( "h1" ).attr( "role" ) === "heading", "heading role properly assigned");

@@ -25,7 +25,7 @@
 	max-height: 100%;
 	outline: 0;
 	-webkit-border-radius: inherit;
-	border-radius: inherit;	
+	border-radius: inherit;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	cursor: pointer;
@@ -42,7 +42,7 @@
 .ui-select .ui-state-disabled select {
 	display: none;
 }
-/* Because we add all classes of the select and option elements to the span... */ 
+/* Because we add all classes of the select and option elements to the span... */
 .ui-select span.ui-state-disabled {
 	filter: Alpha(Opacity=100);
 	opacity: 1;
@@ -113,7 +113,7 @@
 .ui-selectmenu .ui-selectmenu-list {
 	margin: 0;
 	-webkit-border-radius: inherit;
-	border-radius: inherit;	
+	border-radius: inherit;
 }
 .ui-header:not(.ui-screen-hidden) + .ui-selectmenu-list {
 	-webkit-border-top-right-radius: 0;

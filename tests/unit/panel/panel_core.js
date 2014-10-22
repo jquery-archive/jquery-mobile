@@ -81,7 +81,7 @@
 			ok( $wrapper.hasClass( prefix + "-display-reveal" ), "wrapper display type class" );
 
 			ok( $modal.hasClass( defaults.classes.modalOpen ), "modal open class" );
-	
+
 			prefix = defaults.classes.modal;
 			ok( $modal.hasClass( prefix + "-position-left" ), "modal position class" );
 			ok( $modal.hasClass( prefix + "-display-reveal" ), "modal display type class" );
@@ -199,7 +199,7 @@
 
 	asyncTest( "panelclose not called on document", function() {
 		expect( 2 );
-		
+
 		$( document ).on( "panelopen", "#panel-panelclose-event", function() {
 			$(this).panel("close");
 		});
@@ -213,8 +213,8 @@
 			start();
 		});
 
-		$( "#panel-panelclose-event" ).panel("open");	
-		
+		$( "#panel-panelclose-event" ).panel("open");
+
 	});
 
 	asyncTest( "should be able to open a second panel", function() {
@@ -245,7 +245,7 @@
 	asyncTest( "click on dismissable modal closes panel", function() {
 
 		expect( 1 );
-		
+
 		var $panel = $( "#panel-test-dismiss" ),
 			$modal = getModalFromPanel( $panel );
 

@@ -168,7 +168,7 @@
 				$.mobile.changePage( "#fullscreen-test-a" );
 			},
 
-			function(){	
+			function(){
 				ok( $('#classes-test-l').closest( ".ui-page" ).hasClass( "ui-page-header-fullscreen" ), "Parent page of a fullscreen header has class ui-page-header-fullscreen" );
 				ok( $('#classes-test-m').closest( ".ui-page" ).hasClass( "ui-page-footer-fullscreen" ), "Parent page of a fullscreen footer has class ui-page-header-fullscreen" );
 			},
@@ -353,21 +353,21 @@
 			}
 		]);
 	});
-	
+
 	asyncTest( "destroy preserves original markup" , function() {
 		expect( 1 );
-		
+
 		$.testHelper.pageSequence([
 			function() {
 				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#page-destroy-test" );
 			},
 			function() {
 				var unEnhanced = $("#testDestroyFixedFullscreen").clone(),
-		            destroyed = $("#testDestroyFixedFullscreen").toolbar().toolbar("destroy");
+					destroyed = $("#testDestroyFixedFullscreen").toolbar().toolbar("destroy");
 
-		        ok( $.testHelper.domEqual( destroyed, unEnhanced ),
-		        	"unEnhanced equals destroyed" );
-		        start();
+				ok( $.testHelper.domEqual( destroyed, unEnhanced ),
+					"unEnhanced equals destroyed" );
+				start();
 			},
 			function() {
 				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );

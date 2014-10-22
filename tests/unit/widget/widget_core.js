@@ -11,7 +11,6 @@
 			$.Widget.prototype.element = element;
 		}
 	});
-	
 
 	test( "getting data from creation options", function(){
 		var expected = "bizzle";

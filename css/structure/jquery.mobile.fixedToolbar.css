@@ -67,7 +67,7 @@
 	clip: rect(1px,1px,1px,1px);
 }
 .ui-header-fixed .ui-btn,
-.ui-footer-fixed .ui-btn { 
+.ui-footer-fixed .ui-btn {
 	z-index: 10;
 }
 /* workarounds for other widgets */
