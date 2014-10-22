@@ -99,7 +99,7 @@ label.ui-btn {
 /* Flipswitch */
 .ui-flipswitch.ui-corner-all,
 /* Count bubble */
-.ui-li-count {
+.ui-listview-item-count-bubble {
 	/* Note: change this radius to 1em if you want the old, more rounded, button corner style. */
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
 	border-radius: 						.3125em /*{global-radii-buttons}*/;

@@ -19,7 +19,7 @@
 	#show-more .ui-li-heading { text-align:center; }
 	#show-more .ui-icon { visibility:hidden; }
 
-	.ui-li-has-count .ui-li-count { border-color:transparent; }
+	.ui-li-has-count .ui-listview-item-count-bubble { border-color:transparent; }
 	.wrap { white-space:normal; }
 	</style>
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
@@ -153,7 +153,7 @@
 					  </div>
 	            	  <a href="#">
 	            	  	<h1 class="ui-gmap-marker-title wrap">Fast Clinic</h1>
-	            	  	<div class="ui-li-count">
+						<div class="ui-listview-item-count-bubble ui-body-inherit">
 	            	  		<span>0.71 miles</span>
 	            	  	</div>
 	            	  </a>
@@ -167,7 +167,7 @@
 					  </div>
 	            	  <a href="#">
 	            	  	<h1 class="ui-gmap-marker-title wrap">North Memorial Care</h1>
-	            	  	<div class="ui-li-count">
+						<div class="ui-listview-item-count-bubble ui-body-inherit">
 	            	  		<span>0.71 miles</span>
 	            	  	</div>
 	            	  </a>
@@ -181,7 +181,7 @@
 					  </div>
 	            	  <a href="#">
 	            	  	<h1 class="ui-gmap-marker-title wrap">Fast Clinic-Newtown</h1>
-	            	  	<div class="ui-li-count">
+						<div class="ui-listview-item-count-bubble ui-body-inherit">
 	            	  		<span>4.15 miles</span>
 	            	  	</div>
 	            	  </a>
@@ -195,7 +195,7 @@
 					  </div>
 	            	  <a href="#">
 	            	  	<h1 class="ui-gmap-marker-title wrap">Brad's Medical Clinic</h1>
-	            	  	<div class="ui-li-count">
+						<div class="ui-listview-item-count-bubble ui-body-inherit">
 	            	  		<span>5.09 miles</span>
 	            	  	</div>
 	            	  </a>
@@ -209,7 +209,7 @@
 					  </div>
 	            	  <a href="#">
 	            	  	<h1 class="ui-gmap-marker-title wrap">Super Clinics</h1>
-	            	  	<div class="ui-li-count">
+						<div class="ui-listview-item-count-bubble ui-body-inherit">
 	            	  		<span>5.58 miles</span>
 	            	  	</div>
 	            	  </a>

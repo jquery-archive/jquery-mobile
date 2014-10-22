@@ -126,7 +126,7 @@ $.widget( "mobile.listview", $.extend( {
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
 			start = $list.attr( "start" ),
 			itemClassDict = {},
-			countBubbles = $list.find( ".ui-li-count" );
+			countBubbles = $list.find( ".ui-listview-item-count-bubble" );
 
 		if ( o.theme ) {
 			$list.addClass( "ui-group-theme-" + o.theme );

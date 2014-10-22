@@ -136,7 +136,7 @@
 	padding-left: 2.5em;
 }
 /* Used by both listview and custom multiple select button */
-.ui-li-count {
+.ui-listview-item-count-bubble {
 	position: absolute;
 	font-size: 12.5px;
 	font-weight: bold;
@@ -151,7 +151,7 @@
 	top: 50%;
 	margin-top: -.88em;
 }
-.ui-listview .ui-btn-icon-right .ui-li-count {
+.ui-listview .ui-btn-icon-right .ui-listview-item-count-bubble {
 	right: 3.2em;
 }
 .ui-listview .ui-li-has-thumb > img:first-child,

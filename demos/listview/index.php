@@ -143,15 +143,15 @@
 			</div><!--/demo-html -->
 
 		<h2>Count bubbles</h2>
-		<p>To add a count indicator to the right of the list item, wrap the number in an element with a class of <code>ui-li-count</code>. The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list and specifying a swatch letter. </p>
+		<p>To add a count indicator to the right of the list item, wrap the number in an element with a class of <code>ui-listview-item-count-bubble</code>. The theme for <strong>count bubbles</strong> can be set by adding the appropriate class <code>ui-body-*</code> to the element. Replace <code>*</code> with a swatch letter a-z.</p>
 
 			<div data-demo-html="true">
-				<ul data-role="listview" data-count-theme="b" data-inset="true">
-					<li><a href="#">Inbox <span class="ui-li-count">12</span></a></li>
-					<li><a href="#">Outbox <span class="ui-li-count">0</span></a></li>
-					<li><a href="#">Drafts <span class="ui-li-count">4</span></a></li>
-					<li><a href="#">Sent <span class="ui-li-count">328</span></a></li>
-					<li><a href="#">Trash <span class="ui-li-count">62</span></a></li>
+				<ul data-role="listview"  data-inset="true">
+					<li><a href="#">Inbox <span class="ui-listview-item-count-bubble ui-body-b">12</span></a></li>
+					<li><a href="#">Outbox <span class="ui-listview-item-count-bubble ui-body-b">0</span></a></li>
+					<li><a href="#">Drafts <span class="ui-listview-item-count-bubble ui-body-b">4</span></a></li>
+					<li><a href="#">Sent <span class="ui-listview-item-count-bubble ui-body-b">328</span></a></li>
+					<li><a href="#">Trash <span class="ui-listview-item-count-bubble ui-body-b">62</span></a></li>
 				</ul>
 			</div><!--/demo-html -->
 
@@ -241,7 +241,7 @@
 
 			<div data-demo-html="true">
 				<ul data-role="listview" data-inset="true">
-					<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+					<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-listview-item-count-bubble ui-body-inherit">2</span></li>
 					<li><a href="index.php">
 					<h2>Stephen Weber</h2>
 					<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
@@ -254,7 +254,7 @@
 					<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
 						<p class="ui-li-aside"><strong>9:18</strong>AM</p>
 					</a></li>
-					<li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-li-count">1</span></li>
+					<li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-listview-item-count-bubble ui-body-inherit">1</span></li>
 					<li><a href="index.php">
 					<h2>Avery Walker</h2>
 					<p><strong>Re: Dinner Tonight</strong></p>
@@ -266,15 +266,15 @@
 
 		<h2>Theme</h2>
 
-		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code> data-theme</code> attribute to the listview or to individual list items. The theme for <strong>list dividers</strong> can be set by adding the <code>data-divider-theme</code> to the list. The theme for <strong>count bubbles</strong> can be set by adding the <code>data-count-theme</code> to the list.</p>
+		<p>The list item color scheme can be changed to any button color theme swatch by adding the <code> data-theme</code> attribute to the listview or to individual list items. The theme for <strong>list dividers</strong> can be set by adding the <code>data-divider-theme</code> to the list. The theme for <strong>count bubbles</strong> can be set by adding the class <code>ui-body-*</code> to the count bubble, where <code>*</code> is a swatch letter a-z.</p>
 
 			<div data-demo-html="true">
 
-				<ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
+				<ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a">
 					<li data-role="list-divider">Divider</li>
-					<li><a href="index.php" data-theme="a">Inbox <span class="ui-li-count">12</span></a></li>
-					<li><a href="index.php">Outbox <span class="ui-li-count">0</span></a></li>
-					<li><a href="index.php">Sent <span class="ui-li-count">328</span></a></li>
+					<li><a href="index.php" data-theme="a">Inbox <span class="ui-listview-item-count-bubble ui-body-inherit">12</span></a></li>
+					<li><a href="index.php">Outbox <span class="ui-listview-item-count-bubble ui-body-inherit">0</span></a></li>
+					<li><a href="index.php">Sent <span class="ui-listview-item-count-bubble ui-body-inherit">328</span></a></li>
 				</ul>
 			</div><!--/demo-html -->
 
@@ -391,7 +391,7 @@
 					<div data-role="collapsible">
 					<h2>Formatted text</h2>
 						<ul data-role="listview" data-theme="a" data-divider-theme="b">
-							<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+							<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-listview-item-count-bubble ui-body-inherit">2</span></li>
 							<li><a href="index.php">
 								<h3>Stephen Weber</h3>
 							<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
@@ -441,17 +441,17 @@
 					<div data-role="collapsible">
 					<h2>Mailbox</h2>
 						<ul data-role="listview">
-							<li><a href="index.php">Inbox <span class="ui-li-count">12</span></a></li>
-							<li><a href="index.php">Outbox <span class="ui-li-count">0</span></a></li>
-							<li><a href="index.php">Drafts <span class="ui-li-count">4</span></a></li>
-							<li><a href="index.php">Sent <span class="ui-li-count">328</span></a></li>
-							<li><a href="index.php">Trash <span class="ui-li-count">62</span></a></li>
+							<li><a href="index.php">Inbox <span class="ui-listview-item-count-bubble ui-body-inherit">12</span></a></li>
+							<li><a href="index.php">Outbox <span class="ui-listview-item-count-bubble ui-body-inherit">0</span></a></li>
+							<li><a href="index.php">Drafts <span class="ui-listview-item-count-bubble ui-body-inherit">4</span></a></li>
+							<li><a href="index.php">Sent <span class="ui-listview-item-count-bubble ui-body-inherit">328</span></a></li>
+							<li><a href="index.php">Trash <span class="ui-listview-item-count-bubble ui-body-inherit">62</span></a></li>
 						</ul>
 					</div>
 					<div data-role="collapsible">
 					<h2>Calendar</h2>
 						<ul data-role="listview" data-theme="a" data-divider-theme="b">
-							<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
+							<li data-role="list-divider">Friday, October 8, 2010 <span class="ui-listview-item-count-bubble ui-body-inherit">2</span></li>
 							<li><a href="index.php">
 									<h3>Stephen Weber</h3>
 								<p><strong>You've been invited to a meeting at Filament Group in Boston, MA</strong></p>
@@ -464,14 +464,14 @@
 							<p>In preparation for the upcoming conference in Boston, we need to start gathering a list of sponsors and speakers.</p>
 								<p class="ui-li-aside"><strong>9:18</strong>AM</p>
 							</a></li>
-							<li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-li-count">1</span></li>
+							<li data-role="list-divider">Thursday, October 7, 2010 <span class="ui-listview-item-count-bubble ui-body-inherit">1</span></li>
 							<li><a href="index.php">
 								<h3>Avery Walker</h3>
 							<p><strong>Re: Dinner Tonight</strong></p>
 							<p>Sure, let's plan on meeting at Highland Kitchen at 8:00 tonight. Can't wait! </p>
 								<p class="ui-li-aside"><strong>4:48</strong>PM</p>
 							</a></li>
-							<li data-role="list-divider">Wednesday, October 6, 2010 <span class="ui-li-count">3</span></li>
+							<li data-role="list-divider">Wednesday, October 6, 2010 <span class="ui-listview-item-count-bubble ui-body-inherit">3</span></li>
 							<li><a href="index.php">
 								<h3>Amazon.com</h3>
 							<p><strong>4-for-3 Books for Kids</strong></p>
