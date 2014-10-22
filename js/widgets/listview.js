@@ -73,8 +73,15 @@ $.widget( "mobile.listview", $.extend( {
 		switch( classKey ) {
 			case "ui-listview":
 				return this.element;
+
 			case "ui-listview-item":
 				return this.element.children();
+
+			case "ui-listview-item-static":
+			case "ui-listview-item-has-alt":
+			case "ui-listview-item-divider":
+				return this.element.children( "." + classKey );
+
 			default:
 				return this._superApply( arguments );
 		}
