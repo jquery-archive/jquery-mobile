@@ -11,23 +11,26 @@ define( [ "jquery", "../widget", "../grid" ], function( jQuery ) {
 
 $.widget( "mobile.navbar", {
 	options: {
+		classes: {
+			"ui-navbar": null
+		},
 		iconpos: "top",
 		grid: null
 	},
 
 	_create: function() {
 
-		var $navbar = this.element,
-			$navbtns = $navbar.find( "a, button" ),
-			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
+		var navbar = this.element,
+			navbtns = navbar.find( "a, button" ),
+			iconpos = navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
 
-		$navbar.addClass( "ui-navbar" )
+		navbar.addClass( this._classes( "ui-navbar" ) )
 			.attr( "role", "navigation" )
 			.find( "ul" )
 			.jqmEnhanceable()
 			.grid({ grid: this.options.grid });
 
-		$navbtns
+		navbtns
 			.each( function() {
 				var icon = $.mobile.getAttribute( this, "icon" ),
 					theme = $.mobile.getAttribute( this, "theme" ),
@@ -42,7 +45,7 @@ $.widget( "mobile.navbar", {
 				$( this ).addClass( classes );
 			});
 
-		$navbar.delegate( "a", "vclick", function( /* event */ ) {
+		navbar.delegate( "a", "vclick", function( /* event */ ) {
 			var activeBtn = $( this );
 
 			if ( !( activeBtn.hasClass( "ui-state-disabled" ) ||
@@ -52,7 +55,7 @@ $.widget( "mobile.navbar", {
 				activeBtn.hasClass( "ui-disabled" ) ||
 				activeBtn.hasClass( $.mobile.activeBtnClass ) ) ) {
 
-				$navbtns.removeClass( $.mobile.activeBtnClass );
+				navbtns.removeClass( $.mobile.activeBtnClass );
 				activeBtn.addClass( $.mobile.activeBtnClass );
 
 				// The code below is a workaround to fix #1181
@@ -63,8 +66,8 @@ $.widget( "mobile.navbar", {
 		});
 
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
-		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+		navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
+			navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
 		});
 	}
 });
