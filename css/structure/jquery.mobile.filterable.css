@@ -5,7 +5,7 @@ html .ui-filterable.ui-listview {
 .ui-collapsible-content > form.ui-filterable {
 	margin-top: -.5em;
 }
-.ui-collapsible-content > .ui-input-search.ui-filterable {
+.ui-collapsible-content > .ui-textinput-search.ui-filterable {
 	margin-top: 0;
 }
 .ui-collapsible-content > .ui-filterable + .ui-listview:not(.ui-listview-inset) > li.ui-first-child,

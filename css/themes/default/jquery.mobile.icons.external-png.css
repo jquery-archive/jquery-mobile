@@ -332,7 +332,7 @@ html .ui-alt-icon .ui-btn.ui-checkbox-on:after {
 }
 .ui-alt-icon.ui-icon-search:after,
 .ui-alt-icon .ui-icon-search:after,
-.ui-input-search:after {
+.ui-textinput-search:after {
 	background-image: url("images/icons-png/search-black.png");
 }
 .ui-alt-icon.ui-icon-shop:after,

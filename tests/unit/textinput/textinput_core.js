@@ -37,14 +37,14 @@
 	});
 
 	test( "inputs without type specified are enhanced", function(){
-		ok( $( "#typeless-input" ).parent().hasClass( "ui-input-text" ) );
+		ok( $( "#typeless-input" ).parent().hasClass( "ui-textinput-text" ) );
 	});
 
 	$.mobile.page.prototype.options.keepNative = "textarea.should-be-native";
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "textarea in the keepNative set shouldn't be enhanced", function() {
-		ok( !$("textarea.should-be-native").is("ui-input-text") );
+		ok( !$("textarea.should-be-native").is("ui-textinput-text") );
 	});
 
 	asyncTest( "textarea should autogrow on document ready", function() {
@@ -93,7 +93,11 @@
 
 	// NOTE init binding to alter the setting is in settings.js
 	test( "'clear text' button for search inputs should use configured text", function(){
-		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
+		strictEqual(
+			$( "#search-input" )
+				.closest( ".ui-textinput-search" )
+					.find( ".ui-input-clear" )
+						.attr( "title" ), "custom value" );
 	});
 
 	test( "data-clear-btn adds clear button to text inputs", function() {
