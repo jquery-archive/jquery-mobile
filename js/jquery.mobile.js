@@ -25,6 +25,7 @@ define([
 	"./widgets/listview.autodividers",
 	"./widgets/listview.hidedividers",
 	"./nojs",
+	"./jquery-ui/accordion",
 	"./jquery-ui/checkboxradio",
 	"./jquery-ui/button",
 	"./widgets/forms/slider",

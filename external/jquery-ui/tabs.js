@@ -58,10 +58,6 @@ return $.widget( "ui.tabs", {
 		return function( anchor ) {
 			var anchorUrl, locationUrl;
 
-			// support: IE7
-			// IE7 doesn't normalize the href property when set via script (#9317)
-			anchor = anchor.cloneNode( false );
-
 			anchorUrl = anchor.href.replace( rhash, "" );
 			locationUrl = location.href.replace( rhash, "" );
 
@@ -276,30 +272,29 @@ return $.widget( "ui.tabs", {
 	},
 
 	_elementsFromClassKey: function( classKey ) {
-		switch( classKey ) {
-			case "ui-tabs":
-				return this.element;
+		switch ( classKey ) {
 			case "ui-tabs-collapsible":
-				if ( this.options.collapsible ) {
-					return this.element;
+				if ( !this.options.collapsible ) {
+					return $();
 				}
+				break;
 			case "ui-tabs-active":
 				return this.active;
 			case "ui-tabs-nav":
 				return this.tablist;
-			case "ui-tab"
+			case "ui-tab":
 				return this.tabs;
 			case "ui-tabs-anchor":
 				return this.anchors;
 			case "ui-tabs-panel":
 				return this.panels;
 			case "ui-tabs-loading":
-				if( this.tab.hasClass( classKey ) ) {
+				if ( this.tab.hasClass( classKey ) ) {
 					return this.tab;
 				}
-			default:
-				return this._superApply( arguments );
+				return $();
 		}
+		return this._superApply( arguments );
 	},
 
 	_setOption: function( key, value ) {
