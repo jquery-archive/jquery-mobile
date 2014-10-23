@@ -23,8 +23,8 @@
 	position: relative;
 	overflow: visible;
 }
-.ui-listview > .ui-li-static,
-.ui-listview > .ui-li-divider,
+.ui-listview > .ui-listview-item-static,
+.ui-listview > .ui-listview-item-divider,
 .ui-listview > li > a.ui-btn {
 	margin: 0;
 	display: block;
@@ -37,20 +37,20 @@
 .ui-listview > li > .ui-btn:focus {
 	z-index: 1;
 }
-.ui-listview > .ui-li-static,
-.ui-listview > .ui-li-divider,
+.ui-listview > .ui-listview-item-static,
+.ui-listview > .ui-listview-item-divider,
 .ui-listview > li > a.ui-btn {
 	border-width: 1px 0 0 0;
 	border-style: solid;
 }
-.ui-listview-inset > .ui-li-static,
-.ui-listview-inset > .ui-li-divider,
+.ui-listview-inset > .ui-listview-item-static,
+.ui-listview-inset > .ui-listview-item-divider,
 .ui-listview-inset > li > a.ui-btn {
 	border-right-width: 1px;
 	border-left-width: 1px;
 }
-.ui-listview > .ui-li-static.ui-last-child,
-.ui-listview > .ui-li-divider.ui-last-child,
+.ui-listview > .ui-listview-item-static.ui-last-child,
+.ui-listview > .ui-listview-item-divider.ui-last-child,
 .ui-listview > li.ui-last-child > a.ui-btn {
 	border-bottom-width: 1px;
 }
@@ -76,7 +76,7 @@
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 }
-.ui-listview > li.ui-li-has-alt > a.ui-btn {
+.ui-listview > li.ui-listview-item-has-alt > a.ui-btn {
 	-webkit-border-top-right-radius: 0;
 	border-top-right-radius: 0;
 	-webkit-border-bottom-right-radius: 0;
@@ -106,10 +106,10 @@
 	-webkit-border-radius: inherit;
 	border-radius: inherit;	
 }
-.ui-listview > .ui-li-static {
+.ui-listview > .ui-listview-item-static {
 	padding: .7em 1em;
 }
-.ui-listview > .ui-li-divider {
+.ui-listview > .ui-listview-item-divider {
 	padding: .5em 1.143em;
 	font-size: 14px;
 	font-weight: bold;
@@ -117,26 +117,26 @@
 	outline: 0; /* Dividers in custom selectmenus have tabindex */
 }
 .ui-listview > .ui-li-has-count > .ui-btn,
-.ui-listview > .ui-li-static.ui-li-has-count,
-.ui-listview > .ui-li-divider.ui-li-has-count {
+.ui-listview > .ui-listview-item-static.ui-li-has-count,
+.ui-listview > .ui-listview-item-divider.ui-li-has-count {
 	padding-right: 2.8125em;
 }
 .ui-listview > .ui-li-has-count > .ui-btn-icon-right {
 	padding-right: 4.6875em;
 }
 .ui-listview > .ui-li-has-thumb > .ui-btn,
-.ui-listview > .ui-li-static.ui-li-has-thumb {
+.ui-listview > .ui-listview-item-static.ui-li-has-thumb {
 	min-height: 3.625em;
 	padding-left: 6.25em;
 }
 /* ui-li-has-icon deprecated in 1.4. TODO: remove in 1.5 */
 .ui-listview > .ui-li-has-icon > .ui-btn,
-.ui-listview > .ui-li-static.ui-li-has-icon {
+.ui-listview > .ui-listview-item-static.ui-li-has-icon {
 	min-height: 1.25em;
 	padding-left: 2.5em;
 }
 /* Used by both listview and custom multiple select button */
-.ui-li-count {
+.ui-listview-item-count-bubble {
 	position: absolute;
 	font-size: 12.5px;
 	font-weight: bold;
@@ -151,7 +151,7 @@
 	top: 50%;
 	margin-top: -.88em;
 }
-.ui-listview .ui-btn-icon-right .ui-li-count {
+.ui-listview .ui-btn-icon-right .ui-listview-item-count-bubble {
 	right: 3.2em;
 }
 .ui-listview .ui-li-has-thumb > img:first-child,
@@ -202,11 +202,11 @@
 	margin: 0;
 	text-align: right;
 }
-.ui-listview > li.ui-li-has-alt > .ui-btn {
+.ui-listview > li.ui-listview-item-has-alt > .ui-btn {
 	margin-right: 2.5em;
 	border-right-width: 0;
 }
-.ui-listview > li.ui-li-has-alt > .ui-btn + .ui-btn {
+.ui-listview > li.ui-listview-item-has-alt > .ui-btn + .ui-btn {
 	position: absolute;
 	width: 2.5em;
 	height: 100%;
@@ -221,22 +221,22 @@
 	padding: 0;
 	z-index: 2;
 }
-.ui-listview-inset > li.ui-li-has-alt > .ui-btn + .ui-btn {
+.ui-listview-inset > li.ui-listview-item-has-alt > .ui-btn + .ui-btn {
 	border-right-width: 1px;
 }
-.ui-listview > li.ui-li-has-alt > .ui-btn + .ui-btn:focus {
+.ui-listview > li.ui-listview-item-has-alt > .ui-btn + .ui-btn:focus {
 	z-index: 3;
 }
 ol.ui-listview,
-ol.ui-listview > .ui-li-divider {
+ol.ui-listview > .ui-listview-item-divider {
 	counter-reset: listnumbering;
 }
 ol.ui-listview > li > .ui-btn,
-ol.ui-listview > li.ui-li-static {
+ol.ui-listview > li.ui-listview-item-static {
 	vertical-align: middle;
 }
 ol.ui-listview > li > .ui-btn:first-child:before,
-ol.ui-listview > li.ui-li-static:before,
+ol.ui-listview > li.ui-listview-item-static:before,
 ol.ui-listview > li.ui-field-contain > label:before,
 ol.ui-listview > li.ui-field-contain > .ui-controlgroup-label:before {
 	display: inline-block;

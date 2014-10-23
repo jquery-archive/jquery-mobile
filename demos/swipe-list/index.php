@@ -115,10 +115,10 @@
 			border-bottom-width: 1px;
 		}
 		/* Hide the delete button on touch devices */
-		ul.touch li.ui-li-has-alt a.delete {
+		ul.touch li.ui-listview-item-has-alt a.delete {
 			display: none;
 		}
-		ul.touch li.ui-li-has-alt a.ui-btn {
+		ul.touch li.ui-listview-item-has-alt a.ui-btn {
 			margin-right:0;
 		}
 		/* Styling for the popup */

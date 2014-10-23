@@ -5,64 +5,102 @@
 //>>css.structure: ../css/structure/jquery.mobile.listview.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../widget", "./addFirstLastClasses" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../widget",
+	"./optionsToClasses",
+	"./addFirstLastClasses" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var getAttr = $.mobile.getAttribute;
-
-$.widget( "mobile.listview", $.extend( {
-
-	options: {
-		theme: null,
-		countTheme: null, /* Deprecated in 1.4 */
-		dividerTheme: null,
-		icon: "carat-r",
-		splitIcon: "carat-r",
-		splitTheme: null,
+var getAttr = $.mobile.getAttribute,
+	styleOptions = {
 		corners: true,
 		shadow: true,
 		inset: false
-	},
+	};
+
+$.widget( "mobile.listview", $.extend( {
+
+	options: $.extend({
+		classes: {
+			"ui-listview": "",
+			"ui-listview-item": "",
+			"ui-listview-item-static": "",
+			"ui-listview-item-has-alt": "",
+			"ui-listview-item-divider": ""
+		},
+		theme: null,
+		dividerTheme: null,
+		icon: "carat-r",
+		splitIcon: "carat-r",
+		splitTheme: null
+	}, styleOptions ),
 
 	_create: function() {
-		var t = this,
-			listviewClasses = "";
 
-		listviewClasses += t.options.inset ? " ui-listview-inset" : "";
-
-		if ( !!t.options.inset ) {
-			listviewClasses += t.options.corners ? " ui-corner-all" : "";
-			listviewClasses += t.options.shadow ? " ui-shadow" : "";
-		}
+		// DEPRECATED as of 1.5.0. Will be removed in 1.6.0
+		// Update classes option to reflect style option values
+		this._updateClassesOption( styleOptions, this.options );
 
 		// create listview markup
-		t.element.addClass( " ui-listview" + listviewClasses );
+		this.element.addClass( this._classes( "ui-listview" ) );
 
-		t.refresh( true );
+		this.refresh( true );
 	},
 
-	// TODO: Remove in 1.5
-	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName ) {
-		var dict = {};
-		dict[ lcName ] = dict[ ucName ] = true;
-		while ( ele ) {
-			if ( dict[ ele.nodeName ] ) {
-				return ele;
-			}
-			ele = ele[ nextProp ];
+	// DEPRECATED as of 1.5.0. Will be removed in 1.6.0
+	// Update classes option to reflect style option values
+	_optionsToClasses: function( oldOptions, newOptions ) {
+		var isInset = oldOptions.inset || newOptions.inset,
+			newClasses = {},
+			oldClasses = {};
+
+		if ( this._booleanOptionToClass( newOptions.corners, "ui-corner-all",
+			oldClasses, newClasses, newOptions.corners && isInset ) ||
+			this._booleanOptionToClass( newOptions.shadow, "ui-shadow",
+				oldClasses, newClasses, newOptions.shadow && isInset ) ||
+			this._booleanOptionToClass( newOptions.inset, "ui-listview-inset",
+				oldClasses, newClasses ) ) {
+
+			this.options.classes[ "ui-listview" ] =
+				this._calculateClassKeyValue( this.options.classes[ "ui-listview" ],
+					oldClasses, newClasses );
 		}
-		return null;
 	},
-	// TODO: Remove in 1.5
-	_addThumbClasses: function( containers ) {
-		var i, img, len = containers.length;
-		for ( i = 0; i < len; i++ ) {
-			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
-			if ( img.length ) {
-				$( this._findFirstElementByTagName( img[ 0 ].parentNode, "parentNode", "li", "LI" ) ).addClass( img.hasClass( "ui-li-icon" ) ? "ui-li-has-icon" : "ui-li-has-thumb" );
-			}
+
+	_elementsFromClassKey: function( classKey ) {
+		switch( classKey ) {
+			case "ui-listview":
+				return this.element;
+
+			case "ui-listview-item":
+				return this.element.children();
+
+			case "ui-listview-item-static":
+			case "ui-listview-item-has-alt":
+			case "ui-listview-item-divider":
+				return this.element.children( "." + classKey );
+
+			default:
+				return this._superApply( arguments );
 		}
+	},
+
+	// Deprecated as of 1.5.0 and will be removed in 1.6.0. Update style option values to reflect
+	// the presence/absence of the corresponding class in the classes option
+	_setOptions: function( newOptions ) {
+		var classHash;
+
+		if ( newOptions.classes !== undefined && newOptions.classes[ "ui-listview" ] ) {
+			classHash = this._convertClassesToHash( newOptions.classes[ "ui-listview" ] );
+
+			this.options.corners = !!classHash[ "ui-corner-all" ];
+			this.options.inset = !!classHash[ "ui-listview-inset" ];
+			this.options.shadow = !!classHash[ "ui-shadow" ];
+		}
+
+		return this._superApply( arguments );
 	},
 
 	_getChildrenByTagName: function( ele, lcName, ucName ) {
@@ -86,14 +124,16 @@ $.widget( "mobile.listview", $.extend( {
 		var buttonClass, pos, numli, item, itemClass, itemTheme, itemIcon, icon, a,
 			isDivider, startCount, newStartCount, value, last, splittheme, splitThemeClass, spliticon,
 			altButtonClass, dividerTheme, li,
+			baseItemClass = this._classes( "ui-listview-item" ),
+			hasAltClass = this._classes( "ui-listview-item-has-alt" ),
+			staticClass = this._classes( "ui-listview-item-static" ),
+			dividerClass = this._classes( "ui-listview-item-divider" ),
 			o = this.options,
 			$list = this.element,
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
 			start = $list.attr( "start" ),
 			itemClassDict = {},
-			countBubbles = $list.find( ".ui-li-count" ),
-			countTheme = getAttr( $list[ 0 ], "counttheme" ) || this.options.countTheme,
-			countThemeClass = countTheme ? "ui-body-" + countTheme : "ui-body-inherit";
+			countBubbles = $list.find( ".ui-listview-item-count-bubble" );
 
 		if ( o.theme ) {
 			$list.addClass( "ui-group-theme-" + o.theme );
@@ -113,7 +153,7 @@ $.widget( "mobile.listview", $.extend( {
 			item = li.eq( pos );
 			itemClass = "";
 
-			if ( create || item[ 0 ].className.search( /\bui-li-static\b|\bui-li-divider\b/ ) < 0 ) {
+			if ( create || item[ 0 ].className.search( /\bui-listview-item-static\b|\bui-listview-item-divider\b/ ) < 0 ) {
 				a = this._getChildrenByTagName( item[ 0 ], "a", "A" );
 				isDivider = ( getAttr( item[ 0 ], "role" ) === "list-divider" );
 				value = item.attr( "value" );
@@ -123,9 +163,6 @@ $.widget( "mobile.listview", $.extend( {
 					itemIcon = getAttr( item[ 0 ], "icon" );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
-					// TODO: Remove in 1.5 together with links.js (links.js / .ui-link deprecated in 1.4)
-					a.removeClass( "ui-link" );
-
 					buttonClass = "ui-btn";
 
 					if ( itemTheme ) {
@@ -133,7 +170,7 @@ $.widget( "mobile.listview", $.extend( {
 					}
 
 					if ( a.length > 1 ) {
-						itemClass = "ui-li-has-alt";
+						itemClass = hasAltClass;
 
 						last = a.last();
 						splittheme = getAttr( last[ 0 ], "theme" ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
@@ -157,11 +194,11 @@ $.widget( "mobile.listview", $.extend( {
 				} else if ( isDivider ) {
 					dividerTheme = ( getAttr( item[ 0 ], "theme" ) || o.dividerTheme || o.theme );
 
-					itemClass = "ui-li-divider ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
+					itemClass = dividerClass + " ui-bar-" + ( dividerTheme ? dividerTheme : "inherit" );
 
 					item.attr( "role", "heading" );
 				} else if ( a.length <= 0 ) {
-					itemClass = "ui-li-static ui-body-" + ( itemTheme ? itemTheme : "inherit" );
+					itemClass = staticClass + " ui-body-" + ( itemTheme ? itemTheme : "inherit" );
 				}
 				if ( ol && value ) {
 					newStartCount = parseInt( value , 10 ) - 1;
@@ -189,25 +226,20 @@ $.widget( "mobile.listview", $.extend( {
 		// can give us a significant boost on platforms like WP7.5.
 
 		for ( itemClass in itemClassDict ) {
-			$( itemClassDict[ itemClass ] ).addClass( itemClass );
+			$( itemClassDict[ itemClass ] ).addClass( itemClass +
+				( itemClass ? " " : "" ) +
+				baseItemClass );
 		}
 
 		countBubbles.each( function() {
 			$( this ).closest( "li" ).addClass( "ui-li-has-count" );
 		});
-		if ( countThemeClass ) {
-			countBubbles.not( "[class*='ui-body-']" ).addClass( countThemeClass );
-		}
-
-		// Deprecated in 1.4. From 1.5 you have to add class ui-li-has-thumb or ui-li-has-icon to the LI.
-		this._addThumbClasses( li );
-		this._addThumbClasses( li.find( ".ui-btn" ) );
 
 		this._afterListviewRefresh();
 
 		this._addFirstLastClasses( li, this._getVisibles( li, create ), create );
 	}
-}, $.mobile.behaviors.addFirstLastClasses ) );
+}, $.mobile.behaviors.addFirstLastClasses, $.mobile.behaviors._optionsToClasses ) );
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

@@ -128,7 +128,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 		// Add counter for multi selects
 		if ( this.isMultiple ) {
 			this.buttonCount = $( "<span>" )
-				.addClass( "ui-li-count ui-body-inherit" )
+				.addClass( "ui-listview-item-count-bubble ui-body-inherit" )
 				.hide()
 				.appendTo( button.addClass( "ui-li-has-count" ) );
 		}
@@ -232,7 +232,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 			text = this.placeholder,
 			span = $( document.createElement( "span" ) );
 
-		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( (function() {
+		this.button.children( "span" ).not( ".ui-listview-item-count-bubble" ).remove().end().end().prepend( (function() {
 			if ( selected.length ) {
 				text = selected.map(function() {
 					return $( this ).text();
