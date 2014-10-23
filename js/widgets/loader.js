@@ -14,6 +14,14 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 		// NOTE if the global config settings are defined they will override these
 		//      options
 		options: {
+			classes: {
+				"ui-loader": null,
+				"ui-loader-verbose": null,
+				"ui-loader-default": null,
+				"ui-loader-fakefix": null,
+				"ui-loader-textonly": null
+			},
+
 			// the theme for the loading message
 			theme: "a",
 
@@ -27,7 +35,7 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 			text: "loading"
 		},
 
-		defaultHtml: "<div class='" + loaderClass + "'>" +
+		defaultHtml: "<div>" +
 			"<span class='ui-icon-loading'></span>" +
 			"<h1></h1>" +
 			"</div>",
@@ -51,7 +59,7 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 				screenHeight = $.mobile.getScreenHeight();
 
 			if ( offset.top < scrollTop || ( offset.top - scrollTop ) > screenHeight ) {
-				this.element.addClass( "ui-loader-fakefix" );
+				this.element.addClass( this._classes( "ui-loader-fakefix" ) );
 				this.fakeFixLoader();
 				this.window
 					.unbind( "scroll", this.checkLoaderPosition )
@@ -60,7 +68,8 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 		},
 
 		resetHtml: function() {
-			this.element.html( $( this.defaultHtml ).html() );
+			this.element
+				.html( $( this.defaultHtml ).addClass( this._classes( "ui-loader" ) ).html() );
 		},
 
 		// Turn on/off page loading message. Theme doubles as an object argument
@@ -99,10 +108,12 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 			// add the proper css given the options (theme, text, etc)
 			// Force text visibility if the second argument was supplied, or
 			// if the text was explicitly set in the object args
-			this.element.attr("class", loaderClass +
+			this.element.attr("class", this._classes( loaderClass ) +
 				" ui-corner-all ui-body-" + theme +
-				" ui-loader-" + ( textVisible || msgText || theme.text ? "verbose" : "default" ) +
-				( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
+				" " + this._classes( "ui-loader-" +
+					( textVisible || msgText || theme.text ? "verbose" : "default" ) ) +
+				( loadSettings.textonly || textonly ?
+					" " + this._classes( "ui-loader-textonly" ) : "" ) );
 
 			// TODO verify that jquery.fn.html is ok to use in both cases here
 			//      this might be overly defensive in preventing unknowing xss
@@ -128,7 +139,7 @@ define( [ "jquery",	"../core", "../widget" ], function( jQuery ) {
 			$html.removeClass( "ui-loading" );
 
 			if ( this.options.text ) {
-				this.element.removeClass( "ui-loader-fakefix" );
+				this.element.removeClass( this._classes( "ui-loader-fakefix" ) );
 			}
 
 			$.mobile.window.unbind( "scroll", this.fakeFixLoader );
