@@ -147,6 +147,14 @@ $.widget( "mobile.slider", $.extend( {
 		this.refresh( undefined, undefined, true );
 	},
 
+	_elementsFromClassKey: function( classKey ) {
+		switch ( classKey ) {
+			case "ui-slider":
+				return this.element;
+		}
+		return this._superApply( arguments );
+	},
+
 	_setOptions: function( options ) {
 		if ( options.theme !== undefined ) {
 			this._setTheme( options.theme );
