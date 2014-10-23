@@ -13,23 +13,22 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-var childCollapsiblesSelector = ":mobile-collapsible, " + $.mobile.collapsible.initSelector;
-
 $.widget( "mobile.collapsibleset", $.extend( {
 
-	// The initSelector is deprecated as of 1.4.0. In 1.5.0 we will use
-	// :jqmData(role='collapsibleset') which will allow us to get rid of the line
-	// below altogether, because the autoinit will generate such an initSelector
-	initSelector: ":jqmData(role='collapsible-set'),:jqmData(role='collapsibleset')",
-
 	options: $.extend( {
+		classes: {
+
+			// Class ui-collapsible-set is deprecated in favor of ui-collapsibleset as of 1.5.0.
+			// Class ui-collapsible-set will be removed in 1.6.0.
+			"ui-collapsibleset": "ui-collapsible-set"
+		},
 		enhanced: false
 	}, $.mobile.collapsible.defaults ),
 
 	_handleCollapsibleExpand: function( event ) {
 		var closestCollapsible = $( event.target ).closest( ".ui-collapsible" );
 
-		if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsible-set')" ) ) {
+		if ( closestCollapsible.parent().is( ":mobile-collapsibleset, :jqmData(role='collapsibleset')" ) ) {
 			closestCollapsible
 				.siblings( ".ui-collapsible:not(.ui-collapsible-collapsed)" )
 				.collapsible( "collapse" );
@@ -40,15 +39,11 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		var elem = this.element,
 			opts = this.options;
 
-		$.extend( this, {
-			_classes: ""
-		});
-
 		if ( !opts.enhanced ) {
-			elem.addClass( "ui-collapsible-set " +
+			elem.addClass( this._classes( "ui-collapsibleset" ) + " " +
 				this._themeClassFromOption( "ui-group-theme-", opts.theme ) + " " +
 				( opts.corners && opts.inset ? "ui-corner-all " : "" ) );
-			this.element.find( $.mobile.collapsible.initSelector ).collapsible();
+			this.element.children().collapsible();
 		}
 
 		this._on( elem, { collapsibleexpand: "_handleCollapsibleExpand" } );
@@ -64,7 +59,7 @@ $.widget( "mobile.collapsibleset", $.extend( {
 		// Because the corners are handled by the collapsible itself and the default state is collapsed
 		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
 		this.element
-			.children( childCollapsiblesSelector )
+			.children( ":mobile-collapsible" )
 			.filter( ":jqmData(collapsed='false')" )
 			.collapsible( "expand" );
 	},
@@ -100,20 +95,20 @@ $.widget( "mobile.collapsibleset", $.extend( {
 	_destroy: function() {
 		var el = this.element;
 
-		this._removeFirstLastClasses( el.children( childCollapsiblesSelector ) );
+		this._removeFirstLastClasses( el.children( ":mobile-collapsible" ) );
 		el
-			.removeClass( "ui-collapsible-set ui-corner-all " +
+			.removeClass( this._classes( "ui-collapsibleset" ) + " ui-corner-all " +
 				this._themeClassFromOption( "ui-group-theme-", this.options.theme ) )
 			.children( ":mobile-collapsible" )
 			.collapsible( "destroy" );
 	},
 
 	_refresh: function( create ) {
-		var collapsiblesInSet = this.element.children( childCollapsiblesSelector );
+		var children = this.element.children();
 
-		this.element.find( $.mobile.collapsible.initSelector ).not( ".ui-collapsible" ).collapsible();
+		children.not( ".ui-collapsible" ).collapsible();
 
-		this._addFirstLastClasses( collapsiblesInSet, this._getVisibles( collapsiblesInSet, create ), create );
+		this._addFirstLastClasses( children, this._getVisibles( children, create ), create );
 	},
 
 	refresh: function() {

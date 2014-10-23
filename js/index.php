@@ -22,6 +22,7 @@ $files = array(
 	'helpers.js',
 	'data.js',
 	'animationComplete.js',
+	'widgets/optionsToClasses.js',
 	'widgets/page.js',
 	'widgets/page.dialog.js',
 	'widgets/loader.js',

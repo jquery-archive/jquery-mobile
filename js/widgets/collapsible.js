@@ -7,14 +7,8 @@
 
 define( [
 	"jquery",
-
-	// Deprecated as of 1.4.0 and will be removed in 1.5.0
-	// We only need this dependency so we get the $.widget shim from page, so we
-	// can use $.mobile.collapsible.initSelector in collapsibleset. As of 1.5.0
-	// we will assume that all children of the collapsibleset are to be turned
-	// into collapsibles.
-	"./page",
 	"../core",
+	"./optionsToClasses",
 	"../widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -26,8 +20,18 @@ var rInitialLetter = /([A-Z])/g,
 		return ( "ui-btn-icon-" + ( iconpos === null ? "left" : iconpos ) );
 	};
 
-$.widget( "mobile.collapsible", {
+$.widget( "mobile.collapsible", $.extend({
 	options: {
+		classes: {
+			"ui-collapsible": "ui-collapsible-inset ui-corner-all",
+			"ui-collapsible-themed-content": null,
+			"ui-collapsible-collapsed": null,
+			"ui-collapsible-heading-collapsed": null,
+			"ui-collapsible-heading": null,
+			"ui-collapsible-heading-toggle": null,
+			"ui-collapsible-heading-status": null,
+			"ui-collapsible-content": null
+		},
 		enhanced: false,
 		expandCueText: null,
 		collapseCueText: null,
@@ -51,11 +55,21 @@ $.widget( "mobile.collapsible", {
 						":jqmData(role='collapsibleset')" +
 						( $.mobile.collapsibleset ? ", :mobile-collapsibleset" :
 							"" ) )
-					.addClass( "ui-collapsible-set" )
+					.addClass( "ui-collapsibleset" )
 			};
 
 		this._ui = ui;
 		this._renderedOptions = this._getOptions( this.options );
+
+		// Deprecated as of 1.5.0 - remove in 1.6.0
+		// Sync classes option to modified style option values
+		this._updateClassesOption({
+
+			// The defaults as encoded in the values of the various class keys
+			inset: true,
+			corners: true,
+			mini: false
+		}, this._renderedOptions );
 
 		if ( this.options.enhanced ) {
 			ui.heading = this.element.children( ".ui-collapsible-heading" );
@@ -77,6 +91,35 @@ $.widget( "mobile.collapsible", {
 				event.stopPropagation();
 			}
 		});
+	},
+
+	// DEPRECATED as of 1.5.0. Update the class keys of the classes option to reflect the new value
+	// of the various options
+	_optionsToClasses: function( oldOptions, newOptions ) {
+		var classesToAdd = {},
+			classesToRemove = {},
+			classesOption = this.options.classes;
+
+		if ( this._booleanOptionToClass( newOptions.inset, "ui-collapsible-inset",
+			classesToRemove, classesToAdd ) ||
+			this._booleanOptionToClass( newOptions.corners, "ui-corner-all",
+				classesToRemove, classesToAdd, newOptions.corners && newOptions.inset ) ) {
+
+			classesOption[ "ui-collapsible" ] =
+				this._calculateClassKeyValue( classesOption[ "ui-collapsible" ],
+					classesToRemove, classesToAdd );
+		}
+
+		classesToAdd = {};
+		classesToRemove = {};
+
+		if ( this._booleanOptionToClass( newOptions.mini, "ui-mini",
+			classesToRemove, classesToAdd ) ) {
+
+			classesOption[ "ui-collapsible-heading-toggle" ] =
+				this._calculateClassKeyValue( classesOption[ "ui-collapsible-heading-toggle" ],
+					classesToRemove, classesToAdd );
+		}
 	},
 
 	// Adjust the keys inside options for inherited values
@@ -122,14 +165,12 @@ $.widget( "mobile.collapsible", {
 			opts = this._renderedOptions,
 			contentThemeClass = this._themeClassFromOption( "ui-body-", opts.contentTheme );
 
-		elem.addClass( "ui-collapsible " +
-			( opts.inset ? "ui-collapsible-inset " : "" ) +
-			( opts.inset && opts.corners ? "ui-corner-all " : "" ) +
-			( contentThemeClass ? "ui-collapsible-themed-content " : "" ) );
+		elem.addClass( this._classes( "ui-collapsible" ) + " " +
+			( contentThemeClass ? this._classes( "ui-collapsible-themed-content" ) + " " : "" ) );
 		ui.originalHeading = elem.children( this.options.heading ).first(),
 		ui.content = elem
 			.wrapInner( "<div " +
-				"class='ui-collapsible-content " +
+				"class='" + this._classes( "ui-collapsible-content" ) + " " +
 				contentThemeClass + "'></div>" )
 			.children( ".ui-collapsible-content" ),
 		ui.heading = ui.originalHeading;
@@ -144,21 +185,22 @@ $.widget( "mobile.collapsible", {
 		iconclass = ( opts.collapsed ? ( opts.collapsedIcon ? "ui-icon-" + opts.collapsedIcon : "" ):
 			( opts.expandedIcon ? "ui-icon-" + opts.expandedIcon : "" ) );
 
-		ui.status = $( "<span class='ui-collapsible-heading-status'></span>" );
+		ui.status = $( "<span class='" +
+			this._classes( "ui-collapsible-heading-status" ) + "'></span>" );
 		ui.anchor = ui.heading
 			.detach()
 			//modify markup & attributes
-			.addClass( "ui-collapsible-heading" )
+			.addClass( this._classes( "ui-collapsible-heading" ) )
 			.append( ui.status )
-			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
+			.wrapInner( "<a href='#' class='" + this._classes( "ui-collapsible-heading-toggle" ) +
+				"'></a>" )
 			.find( "a" )
 				.first()
 				.addClass( "ui-btn " +
 					( iconclass ? iconclass + " " : "" ) +
 					( iconclass ? iconposClass( opts.iconpos ) +
 						" " : "" ) +
-					this._themeClassFromOption( "ui-btn-", opts.theme ) + " " +
-					( opts.mini ? "ui-mini " : "" ) );
+					this._themeClassFromOption( "ui-btn-", opts.theme ) );
 
 		//drop heading in before content
 		ui.heading.insertBefore( ui.content );
@@ -174,7 +216,7 @@ $.widget( "mobile.collapsible", {
 	},
 
 	_applyOptions: function( options ) {
-		var isCollapsed, newTheme, oldTheme, hasCorners, hasIcon,
+		var isCollapsed, newTheme, oldTheme, hasCorners, hasIcon, styleOptionsChanged,
 			elem = this.element,
 			currentOpts = this._renderedOptions,
 			ui = this._ui,
@@ -263,11 +305,13 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.inset !== undefined ) {
+			styleOptionsChanged = true;
 			elem.toggleClass( "ui-collapsible-inset", opts.inset );
 			hasCorners = !!( opts.inset && ( opts.corners || currentOpts.corners ) );
 		}
 
 		if ( opts.corners !== undefined ) {
+			styleOptionsChanged = true;
 			hasCorners = !!( opts.corners && ( opts.inset || currentOpts.inset ) );
 		}
 
@@ -276,7 +320,12 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.mini !== undefined ) {
+			styleOptionsChanged = true;
 			anchor.toggleClass( "ui-mini", opts.mini );
+		}
+
+		if ( styleOptionsChanged ) {
+			this._optionsToClasses( this._renderedOptions, opts );
 		}
 	},
 
@@ -292,7 +341,7 @@ $.widget( "mobile.collapsible", {
 
 		ui.status.text( isCollapse ? opts.expandCueText : opts.collapseCueText );
 		ui.heading
-			.toggleClass( "ui-collapsible-heading-collapsed", isCollapse )
+			.toggleClass( this._classes( "ui-collapsible-heading-collapsed" ), isCollapse )
 			.find( "a" ).first()
 			.toggleClass( "ui-icon-" + opts.expandedIcon, !isCollapse )
 
@@ -300,7 +349,7 @@ $.widget( "mobile.collapsible", {
 			.toggleClass( "ui-icon-" + opts.collapsedIcon, ( isCollapse || opts.expandedIcon === opts.collapsedIcon ) )
 			.removeClass( $.mobile.activeBtnClass );
 
-		this.element.toggleClass( "ui-collapsible-collapsed", isCollapse );
+		this.element.toggleClass( this._classes( "ui-collapsible-collapsed" ), isCollapse );
 		ui.content
 			.toggleClass( "ui-collapsible-content-collapsed", isCollapse )
 			.attr( "aria-hidden", isCollapse )
@@ -332,7 +381,8 @@ $.widget( "mobile.collapsible", {
 		} else {
 			ui.status.remove();
 			ui.heading
-				.removeClass( "ui-collapsible-heading ui-collapsible-heading-collapsed" )
+				.removeClass( this._classes( "ui-collapsible-heading" ) +
+					" " + this._classes( "ui-collapsible-heading-collapsed" ) )
 				.children()
 					.contents()
 						.unwrap();
@@ -341,10 +391,10 @@ $.widget( "mobile.collapsible", {
 		ui.anchor.contents().unwrap();
 		ui.content.contents().unwrap();
 		this.element
-			.removeClass( "ui-collapsible ui-collapsible-collapsed " +
-				"ui-collapsible-themed-content ui-collapsible-inset ui-corner-all" );
+			.removeClass( this._classes( "ui-collapsible" ) + " " +
+				this._classes( "ui-collapsible-collapsed ui-collapsible-themed-content" ) );
 	}
-});
+}, $.mobile.behaviors._optionsToClasses ) );
 
 // Defaults to be used by all instances of collapsible if per-instance values
 // are unset or if nothing is specified by way of inheritance from an accordion.
