@@ -11,6 +11,34 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
+    <script id="mini-classes-option">
+    $( document ).on( "pagecreate", function() {
+        $( "<input type='number' data-type='range' min='0' max='100' step='1' value='17'>" )
+            .appendTo( "#mini-slider-form" )
+            .slider({
+                classes: {
+                    "ui-slider": "ui-mini",
+                    "ui-slider-track": "ui-mini ui-shadow-inset",
+                    "ui-slider-input": ""
+                }
+            })
+            .textinput();
+        });
+    </script>
+    <script id="mini-fc-slider">
+    $( document ).on( "pagecreate", function() {
+        $( "<input type='number' data-type='range' min='0' max='100' step='1' value='17'>" )
+            .appendTo( "#mini-field-contain-slider-form > .ui-field-contain" )
+            .slider({
+                classes: {
+                    "ui-slider": "ui-mini",
+                    "ui-slider-track": "ui-mini ui-shadow-inset",
+                    "ui-slider-input": ""
+                }
+            })
+            .textinput();
+        });
+    </script>
     <style id="full-width-slider">
         /* Hide the number input */
         .full-width-slider input {
@@ -43,7 +71,7 @@ $( document ).on( "pagecreate", function() {
 
 		<h1>Slider <a href="http://api.jquerymobile.com/slider/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
 
-		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="../rangeslider/">range sliders</a> or <a href="../slider-flipswitch/">flip switches</a>.
+		<p>Sliders are used to enter numeric values along a continuum and can also be dual handle <a href="../rangeslider/">range sliders</a>.
 			</p>
 
                 <h2>Basic slider</h2>
@@ -84,10 +112,10 @@ $( document ).on( "pagecreate", function() {
 
                 <h2>Mini sized</h2>
 
-                <div data-demo-html="true">
-				<form>
+                <p>In jQuery Mobile 1.5 the mini option is deprecated. To replicate this behavior, use the classes option</p>
+                <div data-demo-html="true" data-demo-js="#mini-classes-option">
+				<form id="mini-slider-form">
                     <label for="slider-4">Slider:</label>
-                    <input type="range" name="slider-4" id="slider-4" data-mini="true" min="0" max="100" value="50">
 				</form>
                 </div><!-- /demo-html -->
 
@@ -122,11 +150,10 @@ $( document ).on( "pagecreate", function() {
 
                 <h2>Fieldcontain, mini sized</h2>
 
-                <div data-demo-html="true">
-				<form>
+                <div data-demo-html="true" data-demo-js="#mini-fc-slider">
+				<form id="mini-field-contain-slider-form">
 					<div class="ui-field-contain">
                         <label for="slider-8">Slider:</label>
-                        <input type="range" name="slider-8" id="slider-8" data-mini="true" min="0" max="100" value="50">
 					</div>
 				</form>
                 </div><!-- /demo-html -->
