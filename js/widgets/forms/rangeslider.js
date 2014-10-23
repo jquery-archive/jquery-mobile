@@ -142,6 +142,14 @@ define( [ "jquery",
 			}
 		},
 
+		_elementsFromClassKey: function ( classKey ) {
+			switch ( classKey ) {
+				case "ui-rangeslider":
+					return this.element;
+			}
+			return this._superApply( arguments );
+		},
+
 		_setOptions: function( options ) {
 			if ( options.theme !== undefined ) {
 				this._setTheme( options.theme );
