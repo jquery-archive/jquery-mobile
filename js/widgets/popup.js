@@ -22,6 +22,7 @@ define( [
 	"../navigation/navigator",
 	"../navigation/method",
 	"../animationComplete",
+	"./optionsToClasses",
 	"../navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -49,13 +50,28 @@ function getWindowCoordinates( theWindow ) {
 	};
 }
 
-$.widget( "mobile.popup", {
-	options: {
+// The following style options are deprecated as of 1.5.0 and will be removed in 1.6.0. If you need
+// to modify the style for all popups at startup, use the classes option above. You can also set
+// the data-classes attribute on a single element to a JSON string specifying the classes you wish
+// to use for the various elements.
+var styleOptions = {
 		wrapperClass: null,
+		shadow: true,
+		corners: true
+};
+
+$.widget( "mobile.popup", $.extend({
+	options: $.extend({
+		classes: {
+			"ui-popup-screen": "",
+			"ui-popup-placeholder": "",
+			"ui-popup": "ui-overlay-shadow ui-corner-all",
+			"ui-popup-container": "",
+			"ui-popup-hidden": "",
+			"ui-popup-truncate": ""
+		},
 		theme: null,
 		overlayTheme: null,
-		shadow: true,
-		corners: true,
 		transition: "none",
 		positionTo: "origin",
 		tolerance: null,
@@ -72,15 +88,7 @@ $.widget( "mobile.popup", {
 		//
 		// NOTE this option is modified in _create!
 		history: !$.mobile.browser.oldIE
-	},
-
-	// When the user depresses the mouse/finger on an element inside the popup while the popup is
-	// open, we ignore resize events for a short while. This prevents #6961.
-	_handleDocumentVmousedown: function( theEvent ) {
-		if ( this._isOpen && $.contains( this._ui.container[ 0 ], theEvent.target ) ) {
-			this._ignoreResizeEvents();
-		}
-	},
+	}, styleOptions ),
 
 	_create: function() {
 		var theElement = this.element,
@@ -91,6 +99,10 @@ $.widget( "mobile.popup", {
 		// We can't do it in the option declarations because those are run before
 		// it is determined whether there shall be AJAX nav.
 		currentOptions.history = currentOptions.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
+
+		// Deprecated as of 1.5.0 - remove in 1.6.0
+		// Sync classes option to modified style option values
+		this._updateClassesOption( styleOptions, this.options );
 
 		this._on( this.document, {
 			"vmousedown": "_handleDocumentVmousedown"
@@ -141,13 +153,15 @@ $.widget( "mobile.popup", {
 
 	_enhance: function( theElement, myId ) {
 		var currentOptions = this.options,
-			wrapperClass = currentOptions.wrapperClass,
 			ui = {
-				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
-				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
-				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
-					( wrapperClass ? ( " " + wrapperClass ) : "" ) + "'></div>" )
+				screen: $( "<div class='ui-screen-hidden " +
+					this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) +
+					" " + this._classes( "ui-popup-screen" ) + "'></div>" ),
+				placeholder: $( "<div class='" + this._classes( "ui-popup-placeholder" ) +
+					"' style='display: none;'><!-- placeholder --></div>" ),
+				container: $( "<div class='" +
+					this._classes( "ui-popup-container ui-popup-hidden ui-popup-truncate" ) +
+					"'></div>" )
 			},
 			fragment = this.document[ 0 ].createDocumentFragment();
 
@@ -168,13 +182,19 @@ $.widget( "mobile.popup", {
 		ui.placeholder.insertAfter( theElement );
 		theElement
 			.detach()
-			.addClass( "ui-popup " +
-				this._themeClassFromOption( "ui-body-", currentOptions.theme ) + " " +
-				( currentOptions.shadow ? "ui-overlay-shadow " : "" ) +
-				( currentOptions.corners ? "ui-corner-all " : "" ) )
+			.addClass( this._classes( "ui-popup" ) + " " +
+				this._themeClassFromOption( "ui-body-", currentOptions.theme ) )
 			.appendTo( ui.container );
 
 		return ui;
+	},
+
+	// When the user depresses the mouse/finger on an element inside the popup while the popup is
+	// open, we ignore resize events for a short while. This prevents #6961.
+	_handleDocumentVmousedown: function( theEvent ) {
+		if ( this._isOpen && $.contains( this._ui.container[ 0 ], theEvent.target ) ) {
+			this._ignoreResizeEvents();
+		}
 	},
 
 	_eatEventAndClose: function( theEvent ) {
@@ -239,7 +259,8 @@ $.widget( "mobile.popup", {
 			if ( !this._expectResizeEvent() ) {
 				if ( this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 					// effectively rapid-open the popup while leaving the screen intact
-					this._ui.container.removeClass( "ui-popup-hidden ui-popup-truncate" );
+					this._ui.container.removeClass(
+						this._classes( "ui-popup-hidden ui-popup-truncate" ) );
 					this.reposition( { positionTo: "window" } );
 					this._ignoreResizeEvents();
 				}
@@ -271,7 +292,7 @@ $.widget( "mobile.popup", {
 				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 				// effectively rapid-close the popup while leaving the screen intact
 				this._ui.container
-					.addClass( "ui-popup-hidden ui-popup-truncate" )
+					.addClass( this._classes( "ui-popup-hidden ui-popup-truncate" ) )
 					.removeAttr( "style" );
 			}
 		}
@@ -334,12 +355,64 @@ $.widget( "mobile.popup", {
 		return this;
 	},
 
+	// DEPRECATED as of 1.5.0. Will be removed in 1.6.0
+	// Update classes option to reflect style option values
+	_optionsToClasses: function( oldOptions, newOptions ) {
+		var newClasses = {},
+			oldClasses = {},
+			classesOption = this.options.classes;
+
+		if ( newOptions.wrapperClass !== undefined ) {
+			classesOption[ "ui-popup-container" ] =
+				this._calculateClassKeyValue( classesOption[ "ui-popup-container" ],
+					this._convertClassesToHash( oldOptions.wrapperClass ),
+					this._convertClassesToHash( newOptions.wrapperClass ) );
+		}
+
+		// Style options related to the payload div are handled together
+		if ( this._booleanOptionToClass( newOptions.shadow, "ui-overlay-shadow",
+			oldClasses, newClasses ) ||
+			this._booleanOptionToClass( newOptions.corners, "ui-corner-all",
+				oldClasses, newClasses ) ) {
+
+			classesOption[ "ui-popup" ] =
+				this._calculateClassKeyValue( classesOption[ "ui-popup" ],
+					oldClasses, newClasses );
+		}
+	},
+
+	_elementsFromClassKey: function( classKey ) {
+		switch( classKey ) {
+			case "ui-popup-screen":
+				return this._ui.screen;
+
+			case "ui-popup-placeholder":
+				return this._ui.placeholder;
+
+			case "ui-popup":
+				return this.element;
+
+			case "ui-popup-container":
+			case "ui-popup-hidden":
+			case "ui-popup-truncate":
+				return this._ui.container;
+
+			default:
+				return this._superApply( arguments );
+		}
+	},
+
 	_setOptions: function( newOptions ) {
-		var currentOptions = this.options,
+		var classHash, optionsToUpdate, wrapperClassHash, updateWrapperClass, classIndex,
+			newWrapperClass, styleOptionsChanged,
+			currentOptions = this.options,
 			theElement = this.element,
 			screen = this._ui.screen;
 
+		// Reacting to the following five style option changes is deprecated in 1.5.0 and will be
+		// removed in 1.6.0
 		if ( newOptions.wrapperClass !== undefined ) {
+			styleOptionsChanged = true;
 			this._ui.container
 				.removeClass( currentOptions.wrapperClass )
 				.addClass( newOptions.wrapperClass );
@@ -362,10 +435,12 @@ $.widget( "mobile.popup", {
 		}
 
 		if ( newOptions.shadow !== undefined ) {
+			styleOptionsChanged = true;
 			theElement.toggleClass( "ui-overlay-shadow", newOptions.shadow );
 		}
 
 		if ( newOptions.corners !== undefined ) {
+			styleOptionsChanged = true;
 			theElement.toggleClass( "ui-corner-all", newOptions.corners );
 		}
 
@@ -385,7 +460,69 @@ $.widget( "mobile.popup", {
 			}
 		}
 
-		return this._super( newOptions );
+		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0: update the classes option to
+		// reflect the values of the style options
+		if ( styleOptionsChanged ) {
+			this._optionsToClasses( currentOptions, newOptions );
+		}
+
+		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0: update the various style classes to
+		// reflect the value of the classes option. We do this last, because the value of the
+		// classes option takes precedence over the values of the various style options. IOW, the
+		// classes option has the final say.
+		if ( newOptions.classes !== undefined ) {
+
+			// Style options related to the payload element
+			if ( newOptions.classes[ "ui-popup" ] !== this.options.classes[ "ui-popup" ] ) {
+				classHash = this._convertClassesToHash( newOptions.classes[ "ui-popup" ] );
+
+				// corners option
+				optionsToUpdate = ( newOptions.corners !== undefined ) ? newOptions : this.options;
+				if ( optionsToUpdate.corners !== !!classHash[ "ui-corner-all" ] ) {
+					optionsToUpdate.corners = !!classHash[ "ui-corner-all" ];
+				}
+
+				// shadow option
+				optionsToUpdate = ( newOptions.shadow !== undefined ) ? newOptions : this.options;
+				if ( optionsToUpdate.shadow !== !!classHash[ "ui-overlay-shadow" ] ) {
+					optionsToUpdate.shadow = !!classHash[ "ui-overlay-shadow" ];
+				}
+			}
+
+			// wrapperClass - we do the actual updating after we've chained up, because only then
+			// can we check whether any of the classes listed in wrapperClass are missing from the
+			// actual popup container, due to having been removed by the classes option's
+			// "ui-popup-container" key
+			if ( newOptions.classes[ "ui-popup-container" ] !==
+				this.options.classes[ "ui-popup-container" ] ) {
+
+				updateWrapperClass = true;
+			}
+		}
+
+		this._super( newOptions );
+
+		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0: update the value of the
+		// wrapperClass option. We do this after we have chained up, because only then do we know
+		// the final result of all option processing. Since the classes option for the container is
+		// processed in the widget factory, if any classes present in the wrapperClass option are
+		// missing from the actual container at this point, then they must also be removed from
+		// the value of the wrapperClass option.
+		if ( updateWrapperClass ) {
+			classHash = this._convertClassesToHash( this._ui.container.attr( "class" ) );
+			wrapperClassHash = this._convertClassesToHash( this.options.wrapperClass );
+			newWrapperClass = [];
+
+			// Go over the classes in the wrapperClass option and remove any that are not actually
+			// present on the popup container
+			for ( classIndex in wrapperClassHash ) {
+				if ( classHash[ classIndex ] ) {
+					newWrapperClass.push( classIndex );
+				}
+			}
+
+			this.options.wrapperClass = newWrapperClass.join( " " );
+		}
 	},
 
 	_setTolerance: function( value ) {
@@ -678,12 +815,12 @@ $.widget( "mobile.popup", {
 		this._applyTransition( openOptions.transition );
 
 		this._ui.screen.removeClass( "ui-screen-hidden" );
-		this._ui.container.removeClass( "ui-popup-truncate" );
+		this._ui.container.removeClass( this._classes( "ui-popup-truncate" ) );
 
 		// Give applications a chance to modify the contents of the container before it appears
 		this._reposition( openOptions );
 
-		this._ui.container.removeClass( "ui-popup-hidden" );
+		this._ui.container.removeClass( this._classes( "ui-popup-hidden" ) );
 
 		if ( this.options.overlayTheme && androidBlacklist ) {
 			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
@@ -716,7 +853,7 @@ $.widget( "mobile.popup", {
 	_closePrerequisiteContainer: function() {
 		this._ui.container
 			.removeClass( "reverse out" )
-			.addClass( "ui-popup-hidden ui-popup-truncate" )
+			.addClass( this._classes( "ui-popup-hidden ui-popup-truncate" ) )
 			.removeAttr( "style" );
 	},
 
@@ -936,7 +1073,7 @@ $.widget( "mobile.popup", {
 
 		return this;
 	}
-});
+}, $.mobile.behaviors._optionsToClasses ) );
 
 // TODO this can be moved inside the widget
 $.mobile.popup.handleLink = function( $link ) {

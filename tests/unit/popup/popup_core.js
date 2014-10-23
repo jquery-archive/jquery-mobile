@@ -17,16 +17,27 @@
 			pointInRect( { x: small.x + small.cx, y: small.y + small.cy }, large ) );
 	}
 
-	function popupEnhancementTests( $sel, prefix ) {
-		var $container = $sel.parent(), $screen = $sel.parent().prev();
+	function popupEnhancementTests( sel, prefix ) {
+		var placeholder = $( document.getElementById( sel.attr( "id" ) + "-placeholder" ) ),
+			container = sel.parent(),
+			screen = sel.parent().prev();
 
-		ok( $sel.data( "mobile-popup" ),  prefix + ", popup div is associated with a popup widget" );
-		ok( $sel.hasClass( "ui-popup" ),  prefix + ", popup payload has class 'ui-popup'" );
-		ok( $container.hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
-		ok( $container.parent().hasClass( "ui-page" ), prefix + ", popup container parent is the page" );
-		ok( $screen.hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
-		ok( $container.attr( "id" ) === $sel.attr( "id" ) + "-popup", prefix + ", popup container has the id of the payload + '-popup'" );
-		ok( $screen.attr( "id" ) === $sel.attr( "id" ) + "-screen", prefix + ", popup screen has the id of the payload + '-screen'" );
+		deepEqual( !!sel.data( "mobile-popup" ), true,
+			prefix + ", popup div is associated with a popup widget" );
+		deepEqual( sel.hasClass( "ui-popup" ), true,
+			prefix + ", popup payload has class 'ui-popup'" );
+		deepEqual( container.hasClass( "ui-popup-container" ), true,
+			prefix + ", popup div parent has class ui-popup-container" );
+		deepEqual( container.parent().hasClass( "ui-page" ), true,
+			prefix + ", popup container parent is the page" );
+		deepEqual( screen.hasClass( "ui-popup-screen" ), true,
+			prefix + ", popup div is preceded by its screen" );
+		deepEqual( container.attr( "id" ), sel.attr( "id" ) + "-popup",
+			prefix + ", popup container has the id of the payload + '-popup'" );
+		deepEqual( screen.attr( "id" ), sel.attr( "id" ) + "-screen",
+			prefix + ", popup screen has the id of the payload + '-screen'" );
+		deepEqual( placeholder.hasClass( "ui-popup-placeholder" ), true,
+			prefix + ", popup placeholder has class 'ui-popup-placeholder'" );
 	}
 
 	function tolTest( el, popup, val, expected ) {

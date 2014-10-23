@@ -14,9 +14,9 @@ function( jQuery ) {
 
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
-		"<div class='ui-popup-arrow-guide'></div>" +
-		"<div class='ui-popup-arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
-			"<div class='ui-popup-arrow'></div>" +
+		"<div></div>" +
+		"<div" + ( ieHack ? " class='ie'" : "" ) + ">" +
+			"<div></div>" +
 		"</div>"
 	);
 
@@ -31,7 +31,15 @@ function getArrow() {
 
 $.widget( "mobile.popup", $.mobile.popup, {
 	options: {
-
+		classes: {
+			"ui-popup-arrow": null,
+			"ui-popup-arrow-l": null,
+			"ui-popup-arrow-t": null,
+			"ui-popup-arrow-r": null,
+			"ui-popup-arrow-b": null,
+			"ui-popup-arrow-guide": null,
+			"ui-popup-arrow-container": null
+		},
 		arrow: ""
 	},
 
@@ -50,6 +58,10 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		var theme,
 			opts = this.options,
 			ar = getArrow();
+
+		ar.gd.addClass( this._classes( "ui-popup-arrow-guide" ) );
+		ar.ct.addClass( this._classes( "ui-popup-arrow-container" ) );
+		ar.ar.addClass( this._classes( "ui-popup-arrow" ) );
 
 		theme = this._themeClassFromOption( "ui-body-", opts.theme );
 		ar.ar.addClass( theme + ( opts.shadow ? " ui-overlay-shadow" : "" ) );
@@ -170,8 +182,12 @@ $.widget( "mobile.popup", $.mobile.popup, {
 
 		// Move the arrow into place
 		ar.ct
-			.removeClass( "ui-popup-arrow-l ui-popup-arrow-t ui-popup-arrow-r ui-popup-arrow-b" )
-			.addClass( "ui-popup-arrow-" + best.dir )
+			.removeClass(
+				this._classes( "ui-popup-arrow-l" ) + " " +
+				this._classes( "ui-popup-arrow-t" ) + " " +
+				this._classes( "ui-popup-arrow-r" ) + " " +
+				this._classes( "ui-popup-arrow-b" ) )
+			.addClass( this._classes( "ui-popup-arrow-" + best.dir ) )
 			.removeAttr( "style" ).css( best.posProp, best.posVal )
 			.show();
 
