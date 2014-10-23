@@ -19,8 +19,8 @@
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -38,7 +38,7 @@
       </p>
       <p>Although there is a high amount of developer interest with using jQuery Mobile, Backbone.js, and Require.js together, there is a high barrier of entry.  Many users are confused about how to use the Backbone.js Router class object with the jQuery Mobile routing system.</p>
 
-	   <a href="backbone-require.html" rel="external" class="ui-btn ui-btn-inline ui-corner-all ui-shadow ui-btn-icon-right ui-icon-carat-r">View example page</a>
+	   <a href="backbone-require.html" rel="external" class="ui-button ui-button-inline ui-corner-all ui-shadow ui-icon-end ui-icon-carat-r">View example page</a>
 
       <h2>jQuery Mobile configuration</h2>
 

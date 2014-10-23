@@ -18,8 +18,8 @@
     <div data-role="header" class="jqm-header">
         <h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -76,9 +76,9 @@
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup">
                         <legend>Vertical controlgroup, buttons:</legend>
-                        <button disabled="disabled" class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-icon-home ui-icon-end">One</button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" class="ui-state-disabled ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                        <a href="#" class="ui-state-disabled ui-shadow ui-button ui-corner-all ui-icon-grid ui-icon-end">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -87,9 +87,9 @@
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, buttons:</legend>
-                        <button disabled="disabled" class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-icon-home ui-icon-end">One</button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" class="ui-shadow ui-state-disabled ui-btn ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                        <a href="#" class="ui-shadow ui-state-disabled ui-button ui-corner-all ui-icon-grid ui-icon-end">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -150,8 +150,8 @@
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal">
                         <legend>Horizontal controlgroup, mixed:</legend>
-                        <a href="#" class="ui-shadow ui-btn ui-state-disabled ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
-                        <button disabled="disabled" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext">Button</button>
+                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all ui-icon-arrow-r ui-icon-end">Link</a>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-icon-grid ui-button-icon-only">Button</button>
                         <label for="select-v-1e">Select</label>
                         <select disabled="disabled" name="select-v-1e" id="select-v-1e">
                             <option value="#">One</option>
@@ -248,7 +248,7 @@
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="submit-1">Send:</label>
-                    <button class="ui-btn ui-shadow ui-corner-all" disabled="disabled" type="submit" id="submit-1">Submit</button>
+                    <button class="ui-button ui-shadow ui-corner-all" disabled="disabled" type="submit" id="submit-1">Submit</button>
                 </div>
             </div><!--/demo-html -->
 
@@ -306,9 +306,9 @@
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-mini="true">
                         <legend>Vertical controlgroup, buttons:</legend>
-                        <button disabled="disabled" class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-icon-home ui-icon-end">One</button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" class="ui-shadow ui-btn ui-state-disabled ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all ui-icon-grid ui-icon-end">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -317,9 +317,9 @@
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, buttons:</legend>
-                        <button disabled="disabled" class="ui-shadow ui-btn ui-corner-all ui-icon-home ui-btn-icon-right">One</button>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-icon-home ui-icon-end">One</button>
                         <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Two">
-                        <a href="#" class="ui-shadow ui-btn ui-state-disabled ui-corner-all ui-icon-grid ui-btn-icon-right">Three</a>
+                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all ui-icon-grid ui-icon-end">Three</a>
                     </fieldset>
                 </div>
             </div><!--/demo-html -->
@@ -380,8 +380,8 @@
                 <div class="ui-field-contain">
                     <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                         <legend>Horizontal controlgroup, mixed:</legend>
-                        <a href="#" class="ui-shadow ui-btn ui-state-disabled ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link</a>
-                        <button disabled="disabled" class="ui-shadow ui-btn ui-corner-all ui-icon-grid ui-btn-icon-notext">Button</button>
+                        <a href="#" class="ui-shadow ui-button ui-state-disabled ui-corner-all ui-icon-arrow-r ui-icon-end">Link</a>
+                        <button disabled="disabled" class="ui-shadow ui-button ui-corner-all ui-icon-grid ui-button-icon-only">Button</button>
                         <label for="select-v-5e">Select</label>
                         <select disabled="disabled" name="select-v-5e" id="select-v-5e">
                             <option value="#">One</option>
@@ -478,7 +478,7 @@
             <div data-demo-html="true">
                 <div class="ui-field-contain">
                     <label for="submit-5">Send:</label>
-                    <button disabled="disabled" type="submit" id="submit-5" class="ui-shadow ui-btn ui-corner-all ui-mini">Submit</button>
+                    <button disabled="disabled" type="submit" id="submit-5" class="ui-shadow ui-button ui-corner-all ui-mini">Submit</button>
                 </div>
             </div><!--/demo-html -->
 
@@ -487,11 +487,11 @@
         <h2>Class ui-state-disabled</h2>
 
         <div data-demo-html="true">
-            <a href="#" class="ui-state-disabled ui-shadow ui-btn ui-corner-all ui-icon-arrow-r ui-btn-icon-right">Link button</a>
+            <a href="#" class="ui-state-disabled ui-shadow ui-button ui-corner-all ui-icon-arrow-r ui-icon-end">Link button</a>
         </div><!--/demo-html -->
 
         <div data-demo-html="true">
-            <a href="#" class="ui-shadow ui-btn ui-corner-all ui-state-disabled ui-icon-arrow-r ui-btn-icon-right ui-mini">Link button</a>
+            <a href="#" class="ui-shadow ui-button ui-corner-all ui-state-disabled ui-icon-arrow-r ui-icon-end ui-mini">Link button</a>
         </div><!--/demo-html -->
 
 	</div><!-- /content -->

@@ -14,9 +14,9 @@ $.mobile.document.on( "pagecreate", "#demo-page", function(){
 		}
 	});
 	$( "#sorter li" ).hover(function() {
-		$( this ).addClass( "ui-btn" ).removeClass( "ui-li-static" );
+		$( this ).addClass( "ui-button" ).removeClass( "ui-li-static" );
 	}, function() {
-		$( this ).removeClass( "ui-btn" ).addClass( "ui-li-static" );
+		$( this ).removeClass( "ui-button" ).addClass( "ui-li-static" );
 	});
 });
 $( function(){

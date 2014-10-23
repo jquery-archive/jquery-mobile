@@ -12,7 +12,7 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style>
-		#custom-border-radius .ui-btn-icon-notext.ui-corner-all {
+		#custom-border-radius .ui-button-icon-only.ui-corner-all {
 			-webkit-border-radius: .3125em;
 			border-radius: .3125em;
 		}
@@ -24,13 +24,13 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Button markup <a href="http://api.jquerymobile.com/classes/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Button markup <a href="http://api.jquerymobile.com/classes/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r">Icon carat right</span></a></h1>
 
 		<p>Add classes to style <code>a</code> and <code>button</code> elements. <code>input</code> buttons are enhanced by the button widget. See <a href="../button/" data-ajax="false">this page</a> for examples.</p>
 
@@ -39,98 +39,98 @@
 		<h2>Basic markup</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn">Anchor</a>
-			<button class="ui-btn">Button</button>
+			<a href="#" class="ui-button">Anchor</a>
+			<button class="ui-button">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Corners</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-corner-all">Anchor</a>
-			<button class="ui-btn ui-corner-all">Button</button>
+			<a href="#" class="ui-button ui-corner-all">Anchor</a>
+			<button class="ui-button ui-corner-all">Button</button>
 		</div><!--/demo-html -->
 
 		<p>Icon-only buttons are round by default. Here we show how you can set the same border-radius as other buttons.</p>
 
 		<div data-demo-html="true" data-demo-css="true">
-			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all">No text</a>
+			<a href="#" class="ui-button ui-icon-delete ui-button-icon-only ui-corner-all">No text</a>
 			<div id="custom-border-radius">
-				<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all">No text</a>
+				<a href="#" class="ui-button ui-icon-delete ui-button-icon-only ui-corner-all">No text</a>
 			</div>
 		</div><!--/demo-html -->
 
 		<h2>Shadow</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-shadow">Anchor</a>
-			<button class="ui-btn ui-shadow">Button</button>
+			<a href="#" class="ui-button ui-shadow">Anchor</a>
+			<button class="ui-button ui-shadow">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Inline</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-btn-inline">Anchor</a>
-			<button class="ui-btn ui-btn-inline">Button</button>
+			<a href="#" class="ui-button ui-button-inline">Anchor</a>
+			<button class="ui-button ui-button-inline">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Theme</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn">Anchor - Inherit</a>
-			<a href="#" class="ui-btn ui-btn-a">Anchor - Theme swatch A</a>
-			<a href="#" class="ui-btn ui-btn-b">Anchor - Theme swatch B</a>
-			<button class="ui-btn">Button - Inherit</button>
-			<button class="ui-btn ui-btn-a">Button - Theme swatch A</button>
-			<button class="ui-btn ui-btn-b">Button - Theme swatch B</button>
+			<a href="#" class="ui-button">Anchor - Inherit</a>
+			<a href="#" class="ui-button ui-button-a">Anchor - Theme swatch A</a>
+			<a href="#" class="ui-button ui-button-b">Anchor - Theme swatch B</a>
+			<button class="ui-button">Button - Inherit</button>
+			<button class="ui-button ui-button-a">Button - Theme swatch A</button>
+			<button class="ui-button ui-button-b">Button - Theme swatch B</button>
 		</div><!--/demo-html -->
 
 		<h2>Mini</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-mini">Anchor</a>
-			<button class="ui-btn ui-mini">Button</button>
+			<a href="#" class="ui-button ui-mini">Anchor</a>
+			<button class="ui-button ui-mini">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Icons</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left">Anchor</a>
-			<button class="ui-btn ui-icon-delete ui-btn-icon-left">Button</button>
+			<a href="#" class="ui-button ui-icon-delete ui-icon-beginning">Anchor</a>
+			<button class="ui-button ui-icon-delete ui-icon-beginning">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Icon position</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left">Left</a>
-			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-right">Right</a>
-			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-top">Top</a>
-			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-bottom">Bottom</a>
-			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext">Icon only</a>
+			<a href="#" class="ui-button ui-icon-delete ui-icon-beginning">Left</a>
+			<a href="#" class="ui-button ui-icon-delete ui-icon-end">Right</a>
+			<a href="#" class="ui-button ui-icon-delete ui-icon-top">Top</a>
+			<a href="#" class="ui-button ui-icon-delete ui-icon-bottom">Bottom</a>
+			<a href="#" class="ui-button ui-icon-delete ui-button-icon-only">Icon only</a>
 		</div><!--/demo-html -->
 
 		<p>Inline:</p>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-left">Left</a>
-			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right">Right</a>
-			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-top">Top</a>
-			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-bottom">Bottom</a>
-			<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-notext">Icon only</a>
+			<a href="#" class="ui-button ui-button-inline ui-icon-delete ui-icon-beginning">Left</a>
+			<a href="#" class="ui-button ui-button-inline ui-icon-delete ui-icon-end">Right</a>
+			<a href="#" class="ui-button ui-button-inline ui-icon-delete ui-icon-top">Top</a>
+			<a href="#" class="ui-button ui-button-inline ui-icon-delete ui-icon-bottom">Bottom</a>
+			<a href="#" class="ui-button ui-button-inline ui-icon-delete ui-button-icon-only">Icon only</a>
 		</div><!--/demo-html -->
 
 		<h2>Icon shadow</h2>
 		<p>Note: This styling option is deprecated in jQuery Mobile 1.4.0 and will be removed in 1.5.0. Accordingly, we changed the default for framework-enhanced buttons to false.</p>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-left ui-shadow-icon">Anchor</a>
+			<a href="#" class="ui-button ui-icon-delete ui-icon-beginning ui-shadow-icon">Anchor</a>
 			<p>Theme B:</p>
-			<button class="ui-btn ui-icon-delete ui-btn-icon-left ui-shadow-icon ui-btn-b">Button</button>
+			<button class="ui-button ui-icon-delete ui-icon-beginning ui-shadow-icon ui-button-b">Button</button>
 		</div><!--/demo-html -->
 
 		<h2>Disabled</h2>
 
 		<div data-demo-html="true">
-			<a href="#" class="ui-btn ui-state-disabled">Disabled anchor via class</a>
+			<a href="#" class="ui-button ui-state-disabled">Disabled anchor via class</a>
 			<button disabled>Button with disabled attribute</button>
 		</div><!--/demo-html -->
 

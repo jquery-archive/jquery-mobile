@@ -19,7 +19,7 @@
 				.listview("refresh");
 			return false;
 		}).bind("tap click", false);
-		$("#showbtn").bind("tap click", function(e){
+		$("#showbutton").bind("tap click", function(e){
 			$(".ui-grid-d a").show();
 			$("#log")
 				.prepend("<li>"+ e.type +" event; target: "+ e.target.nodeName +"; message: show all buttons</li>")
@@ -39,23 +39,23 @@
 
 		<div class="ui-grid-d">
 			<div class="ui-block-a">
-				<a data-role="button" id="btn1" data-theme="b">Button 1</a>
+				<a data-role="button" id="button1" data-theme="b">Button 1</a>
 			</div>
 			<div class="ui-block-b">
-				<a data-role="button" id="btn2" data-theme="b">Button 2</a>
+				<a data-role="button" id="button2" data-theme="b">Button 2</a>
 			</div>
 			<div class="ui-block-c">
-				<a data-role="button" id="btn3" data-theme="b">Button 3</a>
+				<a data-role="button" id="button3" data-theme="b">Button 3</a>
 			</div>
 			<div class="ui-block-d">
-				<a data-role="button" id="btn4" data-theme="b">Button 4</a>
+				<a data-role="button" id="button4" data-theme="b">Button 4</a>
 			</div>
 			<div class="ui-block-e">
-				<a data-role="button" id="btn5" data-theme="b">Button 5</a>
+				<a data-role="button" id="button5" data-theme="b">Button 5</a>
 			</div>
 		</div>
 
-		<a data-role="button" id="showbtn">Show all button</a>
+		<a data-role="button" id="showbutton">Show all button</a>
 
 		<ul data-role="listview" id="log">
 

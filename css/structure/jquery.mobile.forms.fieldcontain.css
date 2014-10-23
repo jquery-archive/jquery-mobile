@@ -58,11 +58,11 @@
 		float: none;
 		width: 100%;
 	}
-	.ui-field-contain > label ~ .ui-btn-inline {
+	.ui-field-contain > label ~ .ui-button-inline {
 		width: auto;
 		margin-right: .625em;
 	}
-	.ui-field-contain > label ~ .ui-btn-inline.ui-btn-icon-notext {
+	.ui-field-contain > label ~ .ui-button-inline.ui-button-icon-only {
 		width: 1.75em;
 	}
 }

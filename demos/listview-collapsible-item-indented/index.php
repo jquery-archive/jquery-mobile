@@ -31,20 +31,20 @@
 
 		/* collapse vertical borders */
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-last-child,
-		.ui-li-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-btn {
+		.ui-li-static.ui-collapsible.ui-collapsible-collapsed > .ui-collapsible-heading > a.ui-button {
 			border-bottom-width: 0;
 		}
 
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child,
-		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-btn,
-		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn {
+		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li.ui-first-child > a.ui-button,
+		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-button {
 			border-top-width: 0;
 		}
 
 		/* Remove right borders */
-		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
+		.ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-button,
 		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > .ui-li-static,
-		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-btn,
+		.ui-li-static.ui-collapsible > .ui-collapsible-content > .ui-listview > li > a.ui-button,
 		.ui-li-static.ui-collapsible > .ui-collapsible-content {
 			border-right-width: 0;
 		}
@@ -52,7 +52,7 @@
 		/* Remove left borders */
 		/* Here, we need class ui-listview-outer to identify the outermost listview */
 		.ui-listview-outer > .ui-li-static.ui-collapsible .ui-li-static.ui-collapsible.ui-collapsible,
-		.ui-listview-outer > .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-btn,
+		.ui-listview-outer > .ui-li-static.ui-collapsible > .ui-collapsible-heading > a.ui-button,
 		.ui-li-static.ui-collapsible > .ui-collapsible-content {
 			border-left-width: 0;
 		}
@@ -65,8 +65,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">

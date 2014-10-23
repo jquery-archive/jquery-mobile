@@ -40,17 +40,17 @@
 	      padding: 0;
 	      border: none !important;
 	    }
-	    .ui-collapsible + .ui-collapsible > .ui-collapsible-heading > .ui-btn {
+	    .ui-collapsible + .ui-collapsible > .ui-collapsible-heading > .ui-button {
 	      border-top: none !important;
 	    }
 	    /* Nested list button colors */
-	    .ui-listview .ui-listview .ui-btn {
+	    .ui-listview .ui-listview .ui-button {
 	    	background: #fff;
 	    }
-	    .ui-listview .ui-listview .ui-btn:hover {
+	    .ui-listview .ui-listview .ui-button:hover {
 	    	background: #f5f5f5;
 	    }
-	    .ui-listview .ui-listview .ui-btn:active {
+	    .ui-listview .ui-listview .ui-button:active {
 	    	background: #f1f1f1;
 	    }
 
@@ -94,7 +94,7 @@
 		.article p:last-child {
 			text-align: right;
 		}
-		.article a.ui-btn {
+		.article a.ui-button {
 			margin-right: 2em;
 		}
 		@media all and (min-width:769px) {
@@ -111,7 +111,7 @@
 			}
 			/* Fix for issue with buttons and form elements
 			if CSS columns are used on a page with a panel. */
-			.article a.ui-btn {
+			.article a.ui-button {
 				-webkit-transform: translate3d(0,0,0);
 			}
 		}
@@ -124,8 +124,8 @@
     <div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-        <a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-        <a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+        <a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars">Menu icon</span></a>
+        <a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search">Search icon</span></a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content jqm-content">
@@ -144,7 +144,7 @@
 
         <p>Click the "view source" button to see the CSS and markup of this demo and open the demo to see the result.</p>
 
-        <a href="#demo-page" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-carat-r ui-btn-icon-right">Open demo</a>
+        <a href="#demo-page" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini ui-icon-carat-r ui-icon-end">Open demo</a>
 
         <div data-demo-html="#demo-page" data-demo-css="true"></div><!--/demo-html -->
 
@@ -165,7 +165,7 @@
 
     <div data-role="header">
         <h1>Bikes</h1>
-        <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+        <a href="#left-panel" data-icon="bars" data-iconpos="icon-only" data-shadow="false" data-iconshadow="false">Menu</a>
     </div><!-- /header -->
 
     <div role="main" class="ui-content">
@@ -179,7 +179,7 @@
 
             <p><small>Source: Wikipedia</small></p>
 
-            <p><a href="#right-panel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Share</a></p>
+            <p><a href="#right-panel" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Share</a></p>
 
 		</div><!-- /article -->
 

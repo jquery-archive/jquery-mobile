@@ -35,7 +35,7 @@
 			<p>click on the button to dynamically inject toolbars. Note that we have to update the page height and padding by calling <code>$.mobile.resetActivePageHeight();</code>.</p>
 
 			<div data-demo-html="#page-with-dynamic-toolbars" data-demo-js="true">
-				<button id="inject-toolbars" class="ui-btn ui-btn-inline ui-corner-all">Inject toolbars</button>
+				<button id="inject-toolbars" class="ui-button ui-button-inline ui-corner-all">Inject toolbars</button>
 			</div>
 
 		</div><!-- /content -->

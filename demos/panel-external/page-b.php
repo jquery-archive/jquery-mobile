@@ -17,7 +17,7 @@
 
 	<div data-role="header">
 		<h1>External panels</h1>
-		<a href="../panel/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+		<a href="../panel/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only ui-icon-carat-l">Back</a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content jqm-fullwidth">
@@ -27,14 +27,14 @@
 		<p>These panels only exist if you navigated to this page from page 1, because the markup for the panels is in the HTML document of the first page. If you refresh this page the links below will no longer work.</p>
 
 		<p><strong>Left</strong> panel examples</p>
-		<a href="#leftpanel3" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Overlay</a>
-		<a href="#leftpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a>
-		<a href="#leftpanel2" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Push</a>
+		<a href="#leftpanel3" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Overlay</a>
+		<a href="#leftpanel1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Reveal</a>
+		<a href="#leftpanel2" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Push</a>
 
 		<p><strong>Right</strong> panel examples</p>
-		<a href="#rightpanel3" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Overlay</a>
-		<a href="#rightpanel1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Reveal</a>
-		<a href="#rightpanel2" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini">Push</a>
+		<a href="#rightpanel3" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Overlay</a>
+		<a href="#rightpanel1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Reveal</a>
+		<a href="#rightpanel2" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">Push</a>
 
 	</div><!-- /content -->
 
