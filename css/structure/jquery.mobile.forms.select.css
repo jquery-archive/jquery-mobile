@@ -1,20 +1,20 @@
-.ui-select {
+.ui-selectmenu {
 	margin-top: .5em;
 	margin-bottom: .5em; /* no shorthand for margin because it would override margin-right for inline selects */
 	position: relative;
 }
-.ui-select > select {
+.ui-selectmenu > select {
 	position: absolute !important;
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
 	clip: rect(1px,1px,1px,1px);
 }
-.ui-select .ui-btn {
+.ui-selectmenu .ui-btn {
 	margin: 0;
 	opacity: 1; /* Fixes #2588: When Windows Phone 7.5 (Mango) tries to calculate a numeric opacity for a select (including "inherit") without explicitly specifying an opacity on the parent to give it context, a bug appears where clicking elsewhere on the page after opening the select will open the select again. */
 }
-.ui-select .ui-btn select {
+.ui-selectmenu .ui-btn select {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -34,104 +34,100 @@
 	z-index: 2;
 }
 @-moz-document url-prefix() {
-	.ui-select .ui-btn select {
+	.ui-selectmenu .ui-btn select {
 		opacity: 0.0001;
 	}
 }
 /* Display none because of issues with IE/WP's filter alpha opacity */
-.ui-select .ui-state-disabled select {
+.ui-selectmenu .ui-state-disabled select {
 	display: none;
 }
 /* Because we add all classes of the select and option elements to the span... */ 
-.ui-select span.ui-state-disabled {
+.ui-selectmenu span.ui-state-disabled {
 	filter: Alpha(Opacity=100);
 	opacity: 1;
 }
-.ui-select .ui-btn.ui-select-nativeonly {
+.ui-selectmenu .ui-btn.ui-selectmenu-nativeonly {
 	border-radius: 0;
 	border: 0;
 }
-.ui-select .ui-btn.ui-select-nativeonly select {
+.ui-selectmenu .ui-btn.ui-selectmenu-nativeonly select {
 	opacity: 1;
 	text-indent: 0;
 	display: block;
 }
 /* ui-li-count is styled in the listview CSS. We set padding and offset here because select supports icon position while listview doesn't. */
-.ui-select .ui-li-has-count.ui-btn {
+.ui-selectmenu .ui-li-has-count.ui-btn {
 	padding-right: 2.8125em;
 }
-.ui-select .ui-li-has-count.ui-btn-icon-right {
+.ui-selectmenu .ui-li-has-count.ui-btn-icon-right {
 	padding-right: 4.6875em;
 }
-.ui-select .ui-btn-icon-right .ui-li-count {
+.ui-selectmenu .ui-btn-icon-right .ui-li-count {
 	right: 3.2em;
 }
 /* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */
-.ui-select .ui-btn > span:not(.ui-li-count) {
+.ui-selectmenu .ui-btn > span:not(.ui-li-count) {
 	display: block;
 	text-overflow: ellipsis;
 	overflow: hidden !important;
 	white-space: nowrap;
 }
 
-.ui-selectmenu.ui-popup {
+.ui-selectmenu-custom-container.ui-popup {
 	min-width: 11em;
 }
 
-.ui-selectmenu .ui-dialog-contain {
+.ui-selectmenu-custom-container .ui-dialog-contain {
 	overflow: hidden;
 }
 
-.ui-selectmenu .ui-header {
+.ui-selectmenu-custom-container .ui-header {
 	margin: 0;
 	padding: 0;
 	border-width: 0;
 }
-.ui-selectmenu.ui-dialog .ui-header {
+.ui-selectmenu-custom-container.ui-dialog .ui-header {
 	z-index: 1;
 	position: relative;
 }
-.ui-selectmenu.ui-popup .ui-header {
+.ui-selectmenu-custom-container.ui-popup .ui-header {
 	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
 	-webkit-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
 /* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
-.ui-selectmenu.ui-popup .ui-header h1:after {
+.ui-selectmenu-custom-container.ui-popup .ui-header h1:after {
 	content: '.';
 	visibility: hidden;
 }
-.ui-selectmenu .ui-header .ui-title {
+.ui-selectmenu-custom-container .ui-header .ui-title {
 	margin: 0 2.875em;
 }
-.ui-selectmenu.ui-dialog .ui-content {
+.ui-selectmenu-custom-container.ui-dialog .ui-content {
 	overflow: visible;
 	z-index: 1;
 }
 
-.ui-selectmenu .ui-selectmenu-list {
+.ui-selectmenu-custom-container .ui-selectmenu-custom-list {
 	margin: 0;
 	-webkit-border-radius: inherit;
 	border-radius: inherit;	
 }
-.ui-header:not(.ui-screen-hidden) + .ui-selectmenu-list {
+.ui-header:not(.ui-screen-hidden) + .ui-selectmenu-custom-list {
 	-webkit-border-top-right-radius: 0;
 	border-top-right-radius: 0;
 	-webkit-border-top-left-radius: 0;
 	border-top-left-radius: 0;
 }
-.ui-header.ui-screen-hidden + .ui-selectmenu-list li.ui-first-child .ui-btn {
+.ui-header.ui-screen-hidden + .ui-selectmenu-custom-list li.ui-first-child .ui-btn {
 	border-top-width: 0;
 }
-.ui-selectmenu .ui-selectmenu-list li.ui-last-child .ui-btn {
+.ui-selectmenu-custom-container .ui-selectmenu-custom-list li.ui-last-child .ui-btn {
 	border-bottom-width: 0;
 }
 
-.ui-selectmenu .ui-btn.ui-li-divider {
+.ui-selectmenu-custom-container .ui-btn.ui-li-divider {
 	cursor: default;
-}
-
-.ui-selectmenu .ui-selectmenu-placeholder {
-	display: none;
 }

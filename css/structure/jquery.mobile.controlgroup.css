@@ -17,7 +17,7 @@ fieldset.ui-controlgroup {
 .ui-controlgroup-controls .ui-btn,
 .ui-controlgroup-controls .ui-checkbox,
 .ui-controlgroup-controls .ui-radio,
-.ui-controlgroup-controls .ui-select {
+.ui-controlgroup-controls .ui-selectmenu {
 	margin: 0;
 }
 .ui-controlgroup-controls .ui-btn:focus,
@@ -43,7 +43,7 @@ fieldset.ui-controlgroup {
 .ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-btn,
 .ui-controlgroup-horizontal .ui-controlgroup-controls .ui-checkbox,
 .ui-controlgroup-horizontal .ui-controlgroup-controls .ui-radio,
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-select {
+.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-selectmenu {
 	float: left;
 	clear: none;
 }
@@ -79,7 +79,7 @@ fieldset.ui-controlgroup {
 .ui-controlgroup-controls,
 .ui-controlgroup-controls .ui-radio,
 .ui-controlgroup-controls .ui-checkbox,
-.ui-controlgroup-controls .ui-select,
+.ui-controlgroup-controls .ui-selectmenu,
 .ui-controlgroup-controls li {
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
