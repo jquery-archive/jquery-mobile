@@ -78,7 +78,7 @@
 	min-width: 11em;
 }
 
-.ui-selectmenu .ui-dialog-contain {
+.ui-selectmenu .ui-page-dialog-contain {
 	overflow: hidden;
 }
 
@@ -87,7 +87,7 @@
 	padding: 0;
 	border-width: 0;
 }
-.ui-selectmenu.ui-dialog .ui-header {
+.ui-selectmenu.ui-page-dialog .ui-header {
 	z-index: 1;
 	position: relative;
 }
@@ -105,7 +105,7 @@
 .ui-selectmenu .ui-header .ui-title {
 	margin: 0 2.875em;
 }
-.ui-selectmenu.ui-dialog .ui-content {
+.ui-selectmenu.ui-page-dialog .ui-content {
 	overflow: visible;
 	z-index: 1;
 }

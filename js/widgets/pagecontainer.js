@@ -1069,7 +1069,7 @@ define( [
 				if ( active.url &&
 					active.url.indexOf( $.mobile.dialogHashKey ) > -1 &&
 					this.activePage &&
-					!this.activePage.hasClass( "ui-dialog" ) &&
+					!this.activePage.hasClass( "ui-page-dialog" ) &&
 					$.mobile.navigate.history.activeIndex > 0 ) {
 
 					settings.changeHash = false;

@@ -42,12 +42,12 @@ test( "load does not trigger an error when called withput a second param", funct
 
 module( "_handleDialog()" );
 
-test( "A dialog is recognized via presence of the data key, not the ui-dialog class", function() {
+test( "Recognize dialog via presence of the data key, not the ui-page-dialog class", function() {
 	var getActiveHistoryCalled = false;
 
 	deepEqual( $.mobile.pagecontainer.prototype._handleDialog.call({
 			getActivePage: function() {
-				return $( "<div class='ui-dialog'></div>" );
+				return $( "<div class='ui-page-dialog'></div>" );
 			},
 			_getActiveHistory: function() {
 				getActiveHistoryCalled = true;
@@ -57,7 +57,7 @@ test( "A dialog is recognized via presence of the data key, not the ui-dialog cl
 			forward: $.noop,
 		}, {}, {
 			pageUrl: "xyzzy.html"
-		}), false, "page is recognized as page even when the ui-dialog class is present" );
+		}), false, "page is recognized as page even when the ui-page-dialog class is present" );
 
 	deepEqual( getActiveHistoryCalled, false, "_getActiveHistory() should not have been called" );
 });

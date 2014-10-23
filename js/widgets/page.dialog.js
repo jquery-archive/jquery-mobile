@@ -8,24 +8,37 @@
 define( [ "jquery",
 	"../widget",
 	"./page",
+	"./optionsToClasses",
 	"../navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
-$.widget( "mobile.page", $.mobile.page, {
-	options: {
+// Style options are deprecated as of 1.5.0 and will be removed in 1.6.0
+var styleOptions = {
+	corners: true
+};
+
+$.widget( "mobile.page", $.mobile.page, $.extend({
+	options: $.extend({
+		classes: {
+
+			"ui-page-dialog": null,
+			"ui-page-dialog-contain": "ui-corner-all",
+			"ui-page-dialog-close-button": "ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext"
+		},
 
 		// Accepts left, right and none
 		closeBtn: "left",
 		closeBtnText: "Close",
 		overlayTheme: "a",
-		corners: true,
 		dialog: false
-	},
+	}, styleOptions ),
 
 	_create: function() {
 		this._super();
 		if ( this.options.dialog ) {
+
+			this._updateClassesOption( styleOptions, this.options );
 
 			$.extend( this, {
 				_inner: this.element.children(),
@@ -43,14 +56,25 @@ $.widget( "mobile.page", $.mobile.page, {
 
 		// Class the markup for dialog styling and wrap interior
 		if ( this.options.dialog ) {
-			this.element.addClass( "ui-dialog" )
+			this.element.addClass( this._classes( "ui-page-dialog" ) )
 				.wrapInner( $( "<div/>", {
 
 					// ARIA role
 					"role" : "dialog",
-					"class" : "ui-dialog-contain ui-overlay-shadow" +
-						( this.options.corners ? " ui-corner-all" : "" )
+					"class" : this._classes( "ui-page-dialog-contain" ) + " ui-overlay-shadow"
 				}));
+		}
+	},
+
+	_optionsToClasses: function( oldOptions, newOptions ) {
+		var classesToAdd = {},
+			classesToRemove = {};
+
+		if ( this._booleanOptionToClass( newOptions.corners, "ui-corner-all",
+			classesToRemove, classesToAdd ) ) {
+			this.options.classes[ "ui-page-dialog-contain" ] =
+				this._calculateClassKeyValue( this.options.classes[ "ui-page-dialog-contain" ],
+					classesToRemove, classesToAdd );
 		}
 	},
 
@@ -60,6 +84,7 @@ $.widget( "mobile.page", $.mobile.page, {
 
 		if ( options.corners !== undefined ) {
 			this._inner.toggleClass( "ui-corner-all", !!options.corners );
+			this._optionsToClasses( currentOpts, options );
 		}
 
 		if ( options.overlayTheme !== undefined ) {
@@ -115,7 +140,7 @@ $.widget( "mobile.page", $.mobile.page, {
 			dst = this._inner.find( ":jqmData(role='header')" ).first();
 			btn = $( "<a></a>", {
 					"href": "#",
-					"class": "ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-" + location
+					"class": this._classes( "ui-page-dialog-close-button" ) + " ui-btn-" + location
 				})
 				.attr( "data-" + $.mobile.ns + "rel", "back" )
 				.text( text || this.options.closeBtnText || "" )
@@ -124,7 +149,7 @@ $.widget( "mobile.page", $.mobile.page, {
 
 		this._headerCloseButton = btn;
 	}
-});
+}, $.mobile.behaviors._optionsToClasses ) );
 
 })( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);

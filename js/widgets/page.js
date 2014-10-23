@@ -38,6 +38,9 @@ $.mobile.document.on( "create", function( event ) {
 
 $.widget( "mobile.page", {
 	options: {
+		classes: {
+			"ui-page": null
+		},
 		theme: "a",
 		domCache: false,
 
@@ -88,7 +91,7 @@ $.widget( "mobile.page", {
 
 		this.element
 			.attr( "tabindex", "0" )
-			.addClass( "ui-page ui-page-theme-" + this.options.theme );
+			.addClass( this._classes( "ui-page" ) + " ui-page-theme-" + this.options.theme );
 
 		// Manipulation of content os Deprecated as of 1.4 remove in 1.5
 		this.element.find( "[" + attrPrefix + "role='content']" ).each( function() {
