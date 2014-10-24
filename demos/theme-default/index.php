@@ -26,13 +26,6 @@
 					$( "#testpage" ).addClass( "noshadow" );
 				}
 			});
-			$( "#opt-iconshadow input" ).on( "change", function( event ) {
-				if ( $( "#off1" ).prop( "checked" ) ) {
-					$( "#testpage" ).removeClass( "ui-shadow-icon" );
-				} else if ( $( "#on1" ).prop( "checked" ) ) {
-					$( "#testpage" ).addClass( "ui-shadow-icon" );
-				}
-			});
 			$( "#opt-navbars input" ).on( "change", function( event ) {
 				if ( $( "#show" ).prop( "checked" ) ) {
 					$( "#testpage .ui-navbar" ).show();
@@ -99,15 +92,6 @@
 					<input type="radio" name="shadow" id="on" checked>
 					<label for="off">Off</label>
 					<input type="radio" name="shadow" id="off">
-				</fieldset>
-			</div>
-			<div class="ui-field-contain" id="opt-iconshadow">
-				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Icon shadow:<br><small>On: add class ui-shadow-icon to the button or its container</small></legend>
-					<label for="on1">On</label>
-					<input type="radio" name="iconshadow" id="on1">
-					<label for="off1">Off</label>
-					<input type="radio" name="iconshadow" id="off1" checked>
 				</fieldset>
 			</div>
 		</form>
