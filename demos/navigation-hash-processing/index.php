@@ -46,7 +46,7 @@ $.mobile.document
 	.on( "pagecontainerbeforechange", function( event, data ) {
 		var processedHash;
 
-		if ( $.type( data.toPage ) === "string" ) {
+		if ( typeof data.toPage === "string" ) {
 			processedHash = processHash( data.toPage );
 
 			// We only affect navigation behavior when going to #secondary-page
