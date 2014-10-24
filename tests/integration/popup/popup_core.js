@@ -337,8 +337,8 @@
 		]);
 	});
 
-	// The test below adds an input, gives it focus, then open the popup,
-	// and make sure the input has been blurred.
+	// The test below adds an input, gives it focus, then opens the popup,
+	// and makes sure the input has been blurred.
 	asyncTest( "Popup assures previous element is blurred", function() {
 		var link = $( "#open-test-popup" ),
 			popup = $( "#test-popup" ),
@@ -371,7 +371,7 @@
 
 			function( result ) {
 				ok( !result.opened.timedOut, "popup emitted 'popupafteropen'" );
-				deepEqual( result.blur.timedOut, false, "blur fired after the popup opens" );
+				deepEqual( result.blur.timedOut, false, "The blur event is fired after the popup opens" );
 
 				// Try to focus on the textinput again
 				textinput.focus();
