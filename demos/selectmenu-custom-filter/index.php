@@ -19,7 +19,7 @@ function pageIsSelectmenuDialog( page ) {
 		id = page && page.attr( "id" );
 
 	$( ".filterable-select" ).each( function() {
-		if ( ( $( this ).attr( "id" ) + "-dialog" ) === id ) {
+		if ( $( this ).attr( "id" ) + "-dialog" === id ) {
 			isDialog = true;
 			return false;
 		}
