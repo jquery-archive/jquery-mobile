@@ -269,7 +269,10 @@ $.widget( "mobile.panel", {
 			});
 		if ( !this._parentPage && this.options.display !== "overlay" ) {
 			this._on( this.document, {
-				"pageshow": "_getWrapper"
+				"pageshow": function() {
+					this._openedPage = null;
+					this._getWrapper();
+				}
 			});
 		}
 		// Clean up open panels after page hide
