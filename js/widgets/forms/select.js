@@ -145,7 +145,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 			if ( !!options.nativeMenu ) {
 				self._delay( function() {
 					self.select.blur();
-				}, 0 );
+				});
 			}
 		});
 
