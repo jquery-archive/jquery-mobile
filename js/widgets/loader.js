@@ -118,10 +118,11 @@ define( [
 				this.element.find( "h1" ).text( message );
 			}
 
-			// attach the loader to the DOM
-			this.element.appendTo(
-				( $.mobile.pageContainer && $.mobile.pageContainer.length > 0 ) ?
-					$.mobile.pageContainer : $( "body" ) );
+			// If the pagecontainer widget has been defined we may use the :mobile-pagecontainer
+			// and attach to the element on which the pagecontainer widget has been defined. If not,
+			// we attach to the body.
+			this.element.appendTo( $.mobile.pagecontainer ?
+				$( ":mobile-pagecontainer" ) : $( "body" ) );
 
 			// check that the loader is visible
 			this.checkLoaderPosition();
