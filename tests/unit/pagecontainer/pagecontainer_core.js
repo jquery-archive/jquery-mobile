@@ -13,10 +13,12 @@ test( "_find() can handle weird data-url attributes", function() {
 });
 
 ( function() {
-var originalLoad = $.mobile.pagecontainer.prototype._triggerWithDeprecated
+var triggerData,
+	originalLoad = $.mobile.pagecontainer.prototype._triggerWithDeprecated;
 module( "load method", {
 	setup: function(){
-		$.mobile.pagecontainer.prototype._triggerWithDeprecated = function(){
+		$.mobile.pagecontainer.prototype._triggerWithDeprecated = function( eventName, data ) {
+			triggerData = data;
 			return {
 				deprecatedEvent: {
 					isDefaultPrevented: function() {
@@ -30,6 +32,7 @@ module( "load method", {
 		}
 	},
 	teardown: function(){
+		triggerData = null;
 		$.mobile.pagecontainer.prototype._triggerWithDeprecated = originalLoad;
 	}
 });
@@ -38,6 +41,26 @@ test( "load does not trigger an error when called withput a second param", funct
 
 	pagecontainer.pagecontainer( "load", "stuff.html" );
 	ok( "no error triggered when load method called without options" );
+});
+
+test( "Options 'reload' and 'reloadPage' both work, and 'reload' takes precedence", function() {
+	var pagecontainer = $( ":mobile-pagecontainer" );
+
+	pagecontainer.pagecontainer( "load", "stuff.html", {
+		reload: true,
+		reloadPage: false
+	});
+
+	deepEqual( triggerData.options.reload, true,
+		"The value of option 'reload' is not affected by the value of option 'reloadPage'" );
+
+	pagecontainer.pagecontainer( "load", "stuff.html", {
+		reloadPage: true
+	});
+
+	deepEqual( triggerData.options.reload, true,
+		"The value of option 'reloadPage' is copied to the value of option 'reload' if the " +
+		"latter is absent from the options hash" );
 });
 
 module( "_handleDialog()" );
