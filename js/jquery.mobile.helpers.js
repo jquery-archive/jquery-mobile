@@ -10,13 +10,32 @@ define( [ "jquery", "./jquery.mobile.ns", "jquery-ui/jquery.ui.core" ], function
 (function( $, window, undefined ) {
 
 	// Subtract the height of external toolbars from the page height, if the page does not have
-	// internal toolbars of the same type
+	// internal toolbars of the same type. We take care to use the widget options if we find a
+	// widget instance and the element's data-attributes otherwise.
 	var compensateToolbars = function( page, desiredHeight ) {
 		var pageParent = page.parent(),
 			toolbarsAffectingHeight = [],
-			externalHeaders = pageParent.children( ":jqmData(role='header')" ),
+
+			// We use this function to filter fixed toolbars with option updatePagePadding set to
+			// true (which is the default) from our height subtraction, because fixed toolbars with
+			// option updatePagePadding set to true compensate for their presence by adding padding
+			// to the active page. We want to avoid double-counting by also subtracting their
+			// height from the desired page height.
+			noPadders = function() {
+				var theElement = $( this ),
+					widgetOptions = $.mobile.toolbar && theElement.data( "mobile-toolbar" ) ?
+						theElement.toolbar( "option" ) : {
+							position: theElement.attr( "data-" + $.mobile.ns + "position" ),
+							updatePagePadding: ( theElement.attr( "data-" + $.mobile.ns +
+								"update-page-padding" ) !== false )
+						};
+
+				return !( widgetOptions.position === "fixed" &&
+					widgetOptions.updatePagePadding === true );
+			},
+			externalHeaders = pageParent.children( ":jqmData(role='header')" ).filter( noPadders ),
 			internalHeaders = page.children( ":jqmData(role='header')" ),
-			externalFooters = pageParent.children( ":jqmData(role='footer')" ),
+			externalFooters = pageParent.children( ":jqmData(role='footer')" ).filter( noPadders ),
 			internalFooters = page.children( ":jqmData(role='footer')" );
 
 		// If we have no internal headers, but we do have external headers, then their height
