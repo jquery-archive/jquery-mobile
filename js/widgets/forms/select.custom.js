@@ -332,6 +332,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			.each(function( i ) {
 				var item = $( this );
 				if ( $.inArray( i, indices ) > -1 ) {
+
 					// Aria selected attr
 					item.attr( "aria-selected", true );
 
@@ -345,8 +346,7 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 							item.find( "a" ).addClass( $.mobile.activeBtnClass );
 						}
 					}
-				}
-				else if ( self.isMultiple ) {
+				} else if ( self.isMultiple ) {
 					item.find( "a" ).removeClass( "ui-checkbox-on" ).addClass( "ui-checkbox-off" );
 				}
 			});

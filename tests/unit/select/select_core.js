@@ -32,13 +32,14 @@
 
 	test( "Custom select multiple is cleared correctly", function() {
 		var popup = $( "#enhance-test-listbox" );
-		$("#enhance-test")
-        .find("option")
-        .attr("selected", false)
-        .prop("selected", false)
-        .end()
-		.selectmenu("refresh");
-        deepEqual(popup.find(".ui-checkbox-on").length,0,"Checkboxes should not have ui-checkbox-on class");
+		$( "#enhance-test" )
+			.find( "option" )
+				.attr( "selected", false )
+				.prop( "selected", false )
+			.end()
+			.selectmenu( "refresh" );
+		deepEqual( popup.find( ".ui-checkbox-on" ).length, 0,
+			"Checkboxes should not have ui-checkbox-on class" );
 	});
 
 	module( "Native select" );
