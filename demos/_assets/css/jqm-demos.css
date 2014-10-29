@@ -352,6 +352,7 @@
 		visibility: visible;
 		position: relative;
 		left: 0;
+		clip: initial;
 		float: left;
 		width: 25%;
 		background: none;
