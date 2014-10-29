@@ -25,6 +25,21 @@
 		deepEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + '"' + "role='button'" + '"' + " set" );
 		deepEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
 		deepEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
+
+	});
+
+	module( "Custom select Multiple" );
+
+	test( "Custom select multiple is cleared correctly", function() {
+		var popup = $( "#enhance-test-listbox" );
+		$( "#enhance-test" )
+			.find( "option" )
+				.attr( "selected", false )
+				.prop( "selected", false )
+			.end()
+			.selectmenu( "refresh" );
+		deepEqual( popup.find( ".ui-checkbox-on" ).length, 0,
+			"Checkboxes should not have ui-checkbox-on class" );
 	});
 
 	module( "Native select" );
