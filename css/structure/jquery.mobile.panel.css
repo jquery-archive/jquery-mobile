@@ -13,6 +13,8 @@
 	max-height: 100%;
 	overflow: hidden;
 	visibility: hidden;
+	left: 0;
+	clip: rect(1px,1px,1px,1px);
 }
 .ui-panel-fixed {
 	position: fixed;
