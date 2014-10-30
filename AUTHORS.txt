@@ -253,3 +253,5 @@ Rob DiCiuccio <rob@definitionstudio.com>
 Simon Reinhardt <simon.reinhardt@koeln.de>
 TrueEddie <ecosme@me.com>
 Josh Kalderimis <josh.kalderimis@gmail.com>
+Lisa Seacat DeLuca <ldeluca@us.ibm.com>
+Ian Maffett <ian.maffett@intel.com>
