@@ -26,7 +26,7 @@ var processHash = function( url ) {
 
 		if ( pair.length > 0 && pair[ 0 ] ) {
 			queryParameters[ pair[ 0 ] ] =
-				( pair.length > 1 ? pair[ 1 ] : true );
+				( pair.length > 1 ? decodeURIComponent( pair[ 1 ] ) : true );
 		}
 	});
 
