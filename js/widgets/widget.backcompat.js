@@ -48,7 +48,7 @@ if ( $.mobileBackcompat !== false ) {
 			}
 		},
 
-		_optionsToClasses: function( option, value ) {
+		_optionsToClasses: function( option ) {
 			var newValue = "",
 				prop = this.classProp,
 				classes = this.options.classes,
@@ -104,7 +104,7 @@ if ( $.mobileBackcompat !== false ) {
 
 			this._superApply( arguments );
 		}
-	}
+	};
 }
 
 })( jQuery );
