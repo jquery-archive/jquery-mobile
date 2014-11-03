@@ -46,16 +46,16 @@
 .ui-icon-camera:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJ1JREFUOMtjYKAW+P//vzoQ1wBxAxSD2KrYFHIBcSaSwqf/McFjJPksIOYEadz8n3SwCaTxDxaJh0A8AYj7oGx08IcBi+ABIBaFOh/kLBEgPoiuCJtGAzTnbwJiQ2I0sgDxLyT+TyBmJdbGTUj89UBsTIzGQ0h+zICyj2DT+BeL5kdA3A8N2ce4QnUTGfG4HqSREy3lEMIZ4JRDLgAADx5bua1tC5oAAAAASUVORK5CYII=");
 }
-.ui-icon-carat-d:after {
+.ui-icon-caret-d:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAHdJREFUKJHV0D0OwjAMBtCcpiBSVn7uv8MpUNVMwAUeSyuiKG3DyLdZ9rMlh/BfwR6nhrkLurnYYcAT5xV0xRsPdAF331TxdOmVzd0CIsYlXEEjDnOzildRtjkiFbhEcekBJd5GGe4LnDZRho8TSOibUIF/Qy35ADEDFfz8Tu1HAAAAAElFTkSuQmCC");
 }
-.ui-icon-carat-l:after {
+.ui-icon-caret-l:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAFNJREFUOMtjYMAD/v//rwvE54FYhYFYAFSsB8Sv/0PAUyBWJVUTCLwHYmNyNJkQo+kNqZr06aOJIo14NJuSEnfImj+Qqvk1mmYzumt+TGp6xZnIAZYXFgOYoY9iAAAAAElFTkSuQmCC");
 }
-.ui-icon-carat-r:after {
+.ui-icon-caret-r:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAGRJREFUOMtjYEAD////Vwfi80CsxUAsACrWAOLn/yHgJRBrE6vRDIg//EcAkjSbU1PzK0o161CiWZdYjR9JshWowIIcTZZYNGkTo+kTSdEBdd4nkuMQqEgNiJ+SHPFIms8RSuQASm4V+ztdam4AAAAASUVORK5CYII=");
 }
-.ui-icon-carat-u:after {
+.ui-icon-caret-u:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAG5JREFUOMtjYKA2+P//vz4Ik6PpDRTrkaoJBghrBilA0wQDr3Fqhmp6jaT4PRQja9YlRpMJEJsC8QesmkEMbJqQDEXX/AqsGUicx6UJj+ZzIEEVIH6KSxOSZjOo5scgPTBBVSA2JiKqzOCahg4AAODRFgCi4LIMAAAAAElFTkSuQmCC");
 }
 .ui-icon-check:after,
@@ -216,20 +216,20 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 .ui-alt-icon .ui-icon-camera:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAJxJREFUOMtjYKAiUAfiGiBugGIQWxWbQi4gzkRS+BSI/6Phx0jyWUDMCdK4GYtCQngTSOMfLBIPgXgCEPdB2ejyID0YggeAWBTqfJCzRID4IBZ1GAIGaM4HOcuQGI0sQPwLif8TiFmJtXETEn89EBsTo/EQkh8zoOwj2DT+xSL4CIj7oSH7GFeobiIjHkHOB6cC5JRDCGfAUg5ZAAAIx317SYGtJAAAAABJRU5ErkJggg==");
 }
-.ui-alt-icon.ui-icon-carat-d:after,
-.ui-alt-icon .ui-icon-carat-d:after {
+.ui-alt-icon.ui-icon-caret-d:after,
+.ui-alt-icon .ui-icon-caret-d:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAHFJREFUOMvV0DEKAjEQQNF3GhXXbXW9f6+nkGVTqRfQJoFlIDHa+SFFmHkpwt+1w7Fjb8KmXLaYccepgc544lbwFa98anjCY7V3gQFLA0e0YF+GNdxEa5wCjmiofUDEXah0CDj1oNKYQcoPfdX4C/rYG6dgMtFQD5sUAAAAAElFTkSuQmCC");
 }
-.ui-alt-icon.ui-icon-carat-l:after,
-.ui-alt-icon .ui-icon-carat-l:after {
+.ui-alt-icon.ui-icon-caret-l:after,
+.ui-alt-icon .ui-icon-caret-l:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAFBJREFUOMtjYMAPdIH4PBCrMJAA9ID4NRD/B+KnQKxKqiYQfg/ExuRoMiFG0xtSNenTTRNFGnFpNiUl7pA1fyBV82s0zWZ01/yY1PSKM5EDAGi5MtgV7LNzAAAAAElFTkSuQmCC");
 }
-.ui-alt-icon.ui-icon-carat-r:after,
-.ui-alt-icon .ui-icon-carat-r:after {
+.ui-alt-icon.ui-icon-caret-r:after,
+.ui-alt-icon .ui-icon-caret-r:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAFpJREFUOMtjYMAE6kB8Hoi1GEgAGkD8HIj/A/FLINYmVqMZEH+AaiRZszk1Nb+iVLMOJZp1idX4kVRbLcjRZIlFkzYxmj6RGh0W5GgCATUgfkpOxMM0nyOUyAF53TLQiFLV2gAAAABJRU5ErkJggg==");
 }
-.ui-alt-icon.ui-icon-carat-u:after,
-.ui-alt-icon .ui-icon-carat-u:after {
+.ui-alt-icon.ui-icon-caret-u:after,
+.ui-alt-icon .ui-icon-caret-u:after {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAGZJREFUOMtjYKAB0IdikjW9gWI9UjX9h2KiNOuhaYLh1/g060EVwBS/h2JkzbrEaDIBYlMg/oBLsy4OTTCArvkVTPN5PJpwaT4HElQB4qd4NMGAGVTzY6geMFAFYmMiosoMWdMQAQBshTLV2RAbgQAAAABJRU5ErkJggg==");
 }
 .ui-alt-icon.ui-icon-check:after,

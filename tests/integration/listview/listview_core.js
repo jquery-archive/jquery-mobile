@@ -82,15 +82,15 @@
 					items = page.find( "li" );
 
 				ok(  items.eq( 0 ).hasClass( "ui-li-has-count"), "First LI should have ui-li-has-count class" );
-				ok(  items.eq( 0 ).find( "a" ).first().hasClass( "ui-icon-carat-r"), "First LI A should have ui-icon-carat-r class" );
+				ok(  items.eq( 0 ).find( "a" ).first().hasClass( "ui-icon-caret-r"), "First LI A should have ui-icon-caret-r class" );
 				ok( !items.eq( 1 ).hasClass( "ui-li-has-count"), "Second LI should NOT have ui-li-has-count class" );
-				ok(  items.eq( 1 ).find( "a" ).first().hasClass( "ui-icon-carat-r"), "Second LI A should have ui-icon-carat-r class" );
+				ok(  items.eq( 1 ).find( "a" ).first().hasClass( "ui-icon-caret-r"), "Second LI A should have ui-icon-caret-r class" );
 				ok( !items.eq( 2 ).hasClass( "ui-li-has-count"), "Third LI should NOT have ui-li-has-count class" );
-				ok( !items.eq( 2 ).find( "a" ).first().hasClass( "ui-icon-carat-r"), "Third LI A should NOT have ui-icon-carat-r class" );
+				ok( !items.eq( 2 ).find( "a" ).first().hasClass( "ui-icon-caret-r"), "Third LI A should NOT have ui-icon-caret-r class" );
 				ok(  items.eq( 3 ).hasClass( "ui-li-has-count"), "Fourth LI should have ui-li-has-count class" );
-				ok( !items.eq( 3 ).find( "a" ).first().hasClass( "ui-icon-carat-r"), "Fourth LI A should NOT have ui-icon-carat-r class" );
+				ok( !items.eq( 3 ).find( "a" ).first().hasClass( "ui-icon-caret-r"), "Fourth LI A should NOT have ui-icon-caret-r class" );
 				ok( !items.eq( 4 ).hasClass( "ui-li-has-count"), "Fifth LI should NOT have ui-li-has-count class" );
-				ok( !items.eq( 4 ).find( "a" ).first().hasClass( "ui-icon-carat-r"), "Fifth LI A should NOT have ui-icon-carat-r class" );
+				ok( !items.eq( 4 ).find( "a" ).first().hasClass( "ui-icon-caret-r"), "Fifth LI A should NOT have ui-icon-caret-r class" );
 				ok( items.eq( 5 ).hasClass( "ui-li-has-alt"), "Sixth LI should have ui-li-has-alt class" );
 				ok( items.eq( 6 ).hasClass( "ui-li-has-icon"), "Seventh LI should have ui-li-has-icon class" );
 				ok( items.eq( 7 ).hasClass( "ui-li-has-thumb"), "Eight LI should have ui-li-has-thumb class" );
