@@ -9,9 +9,8 @@ define([
 	"jquery",
 	"../../core",
 	"../../widget",
-	"../../widget.theme",
-	"checkboxradio",
-	"checkboxradio.backcompat"
+	"../widget.theme",
+	"./checkboxradio"
 	], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
