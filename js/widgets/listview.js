@@ -17,8 +17,8 @@ $.widget( "mobile.listview", $.extend( {
 		theme: null,
 		countTheme: null, /* Deprecated in 1.4 */
 		dividerTheme: null,
-		icon: "carat-r",
-		splitIcon: "carat-r",
+		icon: "caret-r",
+		splitIcon: "caret-r",
 		splitTheme: null,
 		corners: true,
 		shadow: true,

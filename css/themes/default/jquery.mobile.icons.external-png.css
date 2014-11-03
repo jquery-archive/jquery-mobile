@@ -46,17 +46,17 @@
 .ui-icon-camera:after {
 	background-image: url("images/icons-png/camera-white.png");
 }
-.ui-icon-carat-d:after {
-	background-image: url("images/icons-png/carat-d-white.png");
+.ui-icon-caret-d:after {
+	background-image: url("images/icons-png/caret-d-white.png");
 }
-.ui-icon-carat-l:after {
-	background-image: url("images/icons-png/carat-l-white.png");
+.ui-icon-caret-l:after {
+	background-image: url("images/icons-png/caret-l-white.png");
 }
-.ui-icon-carat-r:after {
-	background-image: url("images/icons-png/carat-r-white.png");
+.ui-icon-caret-r:after {
+	background-image: url("images/icons-png/caret-r-white.png");
 }
-.ui-icon-carat-u:after {
-	background-image: url("images/icons-png/carat-u-white.png");
+.ui-icon-caret-u:after {
+	background-image: url("images/icons-png/caret-u-white.png");
 }
 .ui-icon-check:after,
 /* Used ui-checkbox-on twice to increase specificity. If active state has background-image for gradient this rule overrides. */
@@ -216,21 +216,21 @@ html .ui-btn.ui-checkbox-on.ui-checkbox-on:after {
 .ui-alt-icon .ui-icon-camera:after {
 	background-image: url("images/icons-png/camera-black.png");
 }
-.ui-alt-icon.ui-icon-carat-d:after,
-.ui-alt-icon .ui-icon-carat-d:after {
-	background-image: url("images/icons-png/carat-d-black.png");
+.ui-alt-icon.ui-icon-caret-d:after,
+.ui-alt-icon .ui-icon-caret-d:after {
+	background-image: url("images/icons-png/caret-d-black.png");
 }
-.ui-alt-icon.ui-icon-carat-l:after,
-.ui-alt-icon .ui-icon-carat-l:after {
-	background-image: url("images/icons-png/carat-l-black.png");
+.ui-alt-icon.ui-icon-caret-l:after,
+.ui-alt-icon .ui-icon-caret-l:after {
+	background-image: url("images/icons-png/caret-l-black.png");
 }
-.ui-alt-icon.ui-icon-carat-r:after,
-.ui-alt-icon .ui-icon-carat-r:after {
-	background-image: url("images/icons-png/carat-r-black.png");
+.ui-alt-icon.ui-icon-caret-r:after,
+.ui-alt-icon .ui-icon-caret-r:after {
+	background-image: url("images/icons-png/caret-r-black.png");
 }
-.ui-alt-icon.ui-icon-carat-u:after,
-.ui-alt-icon .ui-icon-carat-u:after {
-	background-image: url("images/icons-png/carat-u-black.png");
+.ui-alt-icon.ui-icon-caret-u:after,
+.ui-alt-icon .ui-icon-caret-u:after {
+	background-image: url("images/icons-png/caret-u-black.png");
 }
 .ui-alt-icon.ui-icon-check:after,
 .ui-alt-icon .ui-icon-check:after,
