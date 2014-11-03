@@ -410,6 +410,9 @@ $.widget( "mobile.panel", {
 
 					self.element.addClass( o.classes.panelClosed );
 
+					//scroll to the top
+					self._positionPanel( true );
+
 					if ( o.display !== "overlay" ) {
 						self._page().parent().removeClass( o.classes.pageContainer );
 						self._wrapper.removeClass( o.classes.pageContentPrefix + "-open" );
