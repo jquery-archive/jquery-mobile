@@ -149,7 +149,7 @@ define( [
 						$( "<a role='button' href='javascript:void(0);' " +
 							"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
 								( theme ? "ui-btn-" + theme + " " : "" ) +
-								"ui-toolbar-back-btn ui-icon-carat-l ui-btn-icon-left' " +
+								"ui-toolbar-back-btn ui-icon-caret-l ui-btn-icon-left' " +
 							"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText +
 							"</a>" ) )
 							.prependTo( this.element );

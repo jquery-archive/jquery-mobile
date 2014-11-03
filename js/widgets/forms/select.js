@@ -14,7 +14,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 
 	options: {
 		theme: null,
-		icon: "carat-d",
+		icon: "caret-d",
 		iconpos: "right",
 		inline: false,
 		corners: true,
