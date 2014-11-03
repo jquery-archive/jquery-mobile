@@ -8,7 +8,7 @@
 define( [
 	"jquery",
 	"jquery-ui/widget",
-	"widget.theme",
+	"./widget.theme",
 	"jquery-ui/controlgroup"
 ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
