@@ -10,6 +10,7 @@ define([
 	"../../core",
 	"../../widget",
 	"../widget.theme",
+	"../widget.backcompat",
 	"./checkboxradio"
 	], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");

@@ -63,20 +63,6 @@ asyncTest( "Form resets correctly", function() {
 		ok( anonySpan.text() === el.children("[value='" + el.val() + "']").text(), prefix + id + "'s text is identical to the text inside the selected <option> element" );
 	}
 
-	function verifyCheckboxRadio( prefix, el, isRadio, isHoriz, value ) {
-		var id = el.attr( "id" ),
-			label = el.parent().children( "label" ),
-			ctype = ( isRadio ? "radio" : "checkbox" ),
-			iconVisible = ( label.hasClass( "ui-icon-beginning" ) || label.hasClass( "ui-icon-end" ) ),
-			iconValue = ( ctype + "-" + ( value ? "on" : "off" ) );
-
-		ok( label.is( "label[for='" + id + "']" ), prefix + id + "'s label is a label for it" );
-		ok( label.parent().is( ".ui-" + ctype ), prefix + id + "'s parent's label is a div with the correct class" );
-		ok( label.hasClass( "ui-" + iconValue ), prefix + id + "'s icon has the right state class" );
-		ok( iconVisible === ( !isHoriz ), prefix + id + "'s icon is visible exactly when it's not part of a horizontal controlgroup" );
-		ok( label.hasClass( "ui-button-active" ) === ( isHoriz && value ), prefix + id + "'s label has class ui-button-active exactly when it's set and part of a horizontal controlgroup" );
-	}
-
 	function verifyFlipswitch( prefix, el, value ) {
 		var id = el.attr( "id" );
 
@@ -87,19 +73,6 @@ asyncTest( "Form resets correctly", function() {
 	// make assumptions about where the enhanced widget is wrt. the native widget
 	// and will cause a test failure if that relationship changes.
 	function verifyValues( prefix, widgets, values ) {
-		for ( idx in values.vcheckbox ) {
-			verifyCheckboxRadio( prefix, widgets.vcheckbox[ idx ], false, false, values.vcheckbox[ idx ] );
-		}
-		for ( idx in values.hcheckbox ) {
-			verifyCheckboxRadio( prefix, widgets.hcheckbox[ idx ], false, true, values.hcheckbox[ idx ] );
-		}
-		for ( idx in values.vradio ) {
-			verifyCheckboxRadio( prefix, widgets.vradio[ idx ], true, false, values.vradio[ idx ] );
-		}
-		for ( idx in values.hradio ) {
-			verifyCheckboxRadio( prefix, widgets.hradio[ idx ], true, true, values.hradio[ idx ] );
-		}
-
 		verifySelect( prefix, widgets.selectTest, values.selectTest );
 		verifyRange( prefix, widgets.range, values.range );
 
