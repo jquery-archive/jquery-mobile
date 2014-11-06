@@ -33,6 +33,7 @@ define([
 	"./widgets/forms/slider",
 	"./widgets/forms/slider.tooltip",
 	"./widgets/forms/flipswitch",
+	"./widgets/forms/flipswitch.backcompat",
 	"./widgets/forms/rangeslider",
 	"./widgets/forms/textinput",
 	"./widgets/forms/clearButton",

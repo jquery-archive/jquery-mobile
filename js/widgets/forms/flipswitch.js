@@ -27,12 +27,12 @@ $.widget( "mobile.flipswitch", $.extend({
 			"ui-flipswitch-off": "",
 			"ui-flipswitch-active": "",
 			"ui-flipswitch-input": ""
-		},
+		}//,
 
 		// Deprecated in 1.5
-		wrapperClass: null,
-		corners: true,
-		mini: false
+		// wrapperClass: null,
+		// corners: true,
+		// mini: false
 	},
 
 	_create: function() {
@@ -132,20 +132,6 @@ $.widget( "mobile.flipswitch", $.extend({
 				.addClass( this._classes( "ui-flipswitch-off" ) )
 				.text( offText );
 
-			// Proxy options deprecated in 1.5 to classes option
-			if ( options.wrapperClass ) {
-				options.classes[ "ui-flipswitch" ] += " " + options.wrapperClass + " ";
-			}
-
-			if ( options.mini ) {
-				options.classes[ "ui-flipswitch" ] += " ui-mini ";
-			}
-
-			if ( !options.corners ) {
-				options.classes[ "ui-flipswitch" ] =
-					options.classes[ "ui-flipswitch" ].replace( /ui-corner-all/, "" );
-			}
-
 			flipswitch
 				.addClass( this._classes( "ui-flipswitch" ) +
 					"ui-bar-" + theme + " " +
@@ -206,6 +192,15 @@ $.widget( "mobile.flipswitch", $.extend({
 		}
 	},
 
+	_elementsFromClassKey: function( classKey ) {
+			switch( classKey ) {
+				case "ui-flipswitch":
+					return this.flipswitch;
+			}
+
+			return this._superApply();
+	},
+
 	_setOptions: function( options ) {
 		if ( options.theme !== undefined ) {
 			var currentTheme = options.theme ? options.theme : "inherit",
@@ -223,12 +218,6 @@ $.widget( "mobile.flipswitch", $.extend({
 		}
 		if ( options.disabled !== undefined ) {
 			this.widget().toggleClass( "ui-state-disabled", options.disabled );
-		}
-		if ( options.mini !== undefined ) {
-			this.widget().toggleClass( "ui-mini", options.mini );
-		}
-		if ( options.corners !== undefined ) {
-			this.widget().toggleClass( "ui-corner-all", options.corners );
 		}
 
 		this._super( options );
