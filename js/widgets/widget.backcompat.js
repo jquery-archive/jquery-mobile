@@ -20,16 +20,17 @@ if ( $.mobileBackcompat !== false ) {
 		},
 
 		_create: function() {
-			this._setInitalOptions();
 			this._super();
+			this._setInitalOptions();
 		},
 
 		_enhance: function() {
+			this._super();
+
 			if ( !this.options.enhanced && this.options.wrapperClass ) {
 				this.widget().addClass( this.options.wrapperClass );
 			}
 
-			this._super();
 		},
 
 		_classesToOption: function( value ) {

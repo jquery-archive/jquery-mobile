@@ -37,6 +37,7 @@ $.widget( "mobile.flipswitch", $.extend({
 
 	_create: function() {
 			if ( !this.options.enhanced ) {
+				this._makeFlipswitch();
 				this._enhance();
 			} else {
 				$.extend( this, {
@@ -108,7 +109,7 @@ $.widget( "mobile.flipswitch", $.extend({
 		this.element.trigger( "change" );
 	},
 
-	_enhance: function() {
+	_makeFlipswitch: function() {
 		var flipswitch = $( "<div>" ),
 			options = this.options,
 			element = this.element,
@@ -147,12 +148,13 @@ $.widget( "mobile.flipswitch", $.extend({
 				.addClass( this._classes( "ui-flipswitch-input" ) )
 				.after( flipswitch )
 				.appendTo( flipswitch );
-
+	},
+	_enhance: function() {
 		$.extend( this, {
-			flipswitch: flipswitch,
-			on: on,
-			off: off,
-			type: type
+			flipswitch: this.element.parent(),
+			on: this.element.find( ".ui-flipswitch-on" ).eq( 0 ),
+			off: this.element.find( ".ui-flipswitch-off" ).eq(0),
+			type: this.element.get( 0 ).tagName
 		});
 	},
 
