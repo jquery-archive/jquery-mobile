@@ -134,8 +134,8 @@
 			$minilbl = $('[for="radio-mini"]'),
 			minictrl = $("#mini-control");
 
-		ok( !full.getAttribute('data-nstest-mini') && !$fulllbl.hasClass('ui-mini'), "Original element does not have data attribute, enhanced version does not recieve .ui-mini.");
-		ok( mini.getAttribute('data-nstest-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
+		ok( !full.getAttribute('data-nstest-mini') && !$fulllbl.hasClass('ui-mini'), "Original element does not have data attribute, enhanced version does not receive .ui-mini.");
+		ok( mini.getAttribute('data-nstest-mini'), "Original element has data attribute, enhanced version receives .ui-mini." );
 	});
 
 	test( "theme should be inherited", function() {
@@ -155,7 +155,7 @@
 			ok( false, "checkboxradio exception raised: " + e.toString() );
 		}
 
-		ok( $checkbox.parent().hasClass( "ui-checkbox" ), "enhancement has occured" );
+		ok( $checkbox.parent().hasClass( "ui-checkbox" ), "enhancement has occurred" );
 	});
 
 	test( "nested label (no [for]) checkbox still renders", function () {
@@ -167,7 +167,7 @@
 			ok( false, "checkboxradio exception raised: " + e.toString() );
 		}
 
-		ok( $checkbox.parent().hasClass( "ui-checkbox" ), "enhancement has occured" );
+		ok( $checkbox.parent().hasClass( "ui-checkbox" ), "enhancement has occurred" );
 	});
 
 	test( "Icon positioning", function() {
