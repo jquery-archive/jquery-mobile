@@ -38,9 +38,9 @@
 			$full = $("#full"),
 			$minicontrol = $('#mini-control');
 
-		ok( $full.not('.ui-mini'), "Original element does not have data attribute, enhanced version does not recieve .ui-mini.");
-		ok( $mini.is('.ui-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
-		ok( $minicontrol.is('.ui-mini'), "Controlgroup has data attribute and recieves .ui-mini.");
+		ok( $full.not('.ui-mini'), "Original element does not have data attribute, enhanced version does not receive .ui-mini.");
+		ok( $mini.is('.ui-mini'), "Original element has data attribute, enhanced version receives .ui-mini." );
+		ok( $minicontrol.is('.ui-mini'), "Controlgroup has data attribute and receives .ui-mini.");
 	});
 
 	test( "Ensure icon positioning defaults to left, and can be overridden with “data-iconpos”", function() {

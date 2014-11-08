@@ -360,7 +360,7 @@ define( [
 
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData pseudo selector because parenthesis
-			//      are a valid url char and it breaks on the first occurence
+			//      are a valid url char and it breaks on the first occurrence
 			page = this.element
 				.children( "[data-" + this._getNs() +
 					"url='" + $.mobile.path.hashToSelector( dataUrl ) + "']" );
@@ -915,7 +915,7 @@ define( [
 			// If the caller passed us a url, call loadPage()
 			// to make sure it is loaded into the DOM. We'll listen
 			// to the promise object it returns so we know when
-			// it is done loading or if an error ocurred.
+			// it is done loading or if an error occurred.
 			if ( $.type(to) === "string" ) {
 				// Set the isPageTransitioning flag to prevent any requests from
 				// entering this method while we are in the midst of loading a page

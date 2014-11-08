@@ -633,16 +633,16 @@ $.testHelper.delayStart();
 			}]);
 	});
 
-	asyncTest( "loading a relative file path after an embeded page works", function(){
+	asyncTest( "loading a relative file path after an embedded page works", function(){
 		$.testHelper.pageSequence([
 			// transition second page
-			function(){ $.testHelper.openPage("#relative-after-embeded-page-first"); },
+			function(){ $.testHelper.openPage("#relative-after-embedded-page-first"); },
 
 			// transition second page
-			function(){ $("#relative-after-embeded-page-first a").click(); },
+			function(){ $("#relative-after-embedded-page-first a").click(); },
 
 			// transition to the relative ajax loaded page
-			function(){ $("#relative-after-embeded-page-second a").click(); },
+			function(){ $("#relative-after-embedded-page-second a").click(); },
 
 			// make sure the page was loaded properly via ajax
 			function(){
@@ -655,7 +655,7 @@ $.testHelper.delayStart();
 	asyncTest( "Page title updates properly when clicking back to previous page", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.testHelper.openPage("#relative-after-embeded-page-first");
+				$.testHelper.openPage("#relative-after-embedded-page-first");
 			},
 
 			function(){
@@ -1389,7 +1389,7 @@ $.testHelper.delayStart();
 		]);
 	});
 
-	asyncTest( "loading an embeded page with query params works", function() {
+	asyncTest( "loading an embedded page with query params works", function() {
 		$.testHelper.pageSequence([
 			function() {
 				$.mobile.changePage( "#bar?baz=bak", { dataUrl: false } );

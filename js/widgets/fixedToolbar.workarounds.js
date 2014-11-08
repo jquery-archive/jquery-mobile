@@ -85,7 +85,7 @@ define( [ "jquery", "../widget", "../core", "../navigation", "./page", "../zoom"
 			//trigger page redraw to fix incorrectly positioned fixed elements
 			$( ".ui-page-active" ).css( "padding-bottom", ( paddingBottom + 1 ) + "px" );
 			//if the padding is reset with out a timeout the reposition will not occure.
-			//this is independant of JQM the browser seems to need the time to react.
+			//this is independent of JQM the browser seems to need the time to react.
 			setTimeout( function() {
 				$( ".ui-page-active" ).css( "padding-bottom", paddingBottom + "px" );
 			}, 0 );
