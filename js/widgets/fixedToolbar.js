@@ -250,7 +250,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system
 						//controls causes fixed position, tap-toggle false Header to reveal itself
 						// isVisible instead of self._visible because the focusin and focusout events fire twice at the same time
-						// Also use a delay for hiding the toolbars because on Android native browser focusin is direclty followed
+						// Also use a delay for hiding the toolbars because on Android native browser focusin is directly followed
 						// by a focusout when a native selects opens and the other way around when it closes.
 						if ( e.type === "focusout" && !isVisible ) {
 							isVisible = true;

@@ -76,15 +76,15 @@
 		testPageLoad("#doc-rel-test-three", "doc rel test three");
 	});
 
-	asyncTest( "dir refrence with nesting", function(){
+	asyncTest( "dir reference with nesting", function(){
 		testPageLoad("#doc-rel-test-four", "doc rel test four");
 	});
 
-	asyncTest( "file refrence with parent dir", function(){
+	asyncTest( "file reference with parent dir", function(){
 		testPageLoad("#doc-rel-test-five", "doc rel test five");
 	});
 
-	asyncTest( "dir refrence with parent dir", function(){
+	asyncTest( "dir reference with parent dir", function(){
 		testPageLoad("#doc-rel-test-six", "doc rel test six");
 	});
 
@@ -105,15 +105,15 @@
 		testPageLoad("#site-rel-test-three", "doc rel test three");
 	});
 
-	asyncTest( "dir refrence with nesting", function(){
+	asyncTest( "dir reference with nesting", function(){
 		testPageLoad("#site-rel-test-four", "doc rel test four");
 	});
 
-	asyncTest( "file refrence with parent dir", function(){
+	asyncTest( "file reference with parent dir", function(){
 		testPageLoad("#site-rel-test-five", "doc rel test five");
 	});
 
-	asyncTest( "dir refrence with parent dir", function(){
+	asyncTest( "dir reference with parent dir", function(){
 		testPageLoad("#site-rel-test-six", "doc rel test six");
 	});
 
@@ -134,15 +134,15 @@
 		testPageLoad("#protocol-rel-test-three", "doc rel test three");
 	});
 
-	asyncTest( "dir refrence with nesting", function(){
+	asyncTest( "dir reference with nesting", function(){
 		testPageLoad("#protocol-rel-test-four", "doc rel test four");
 	});
 
-	asyncTest( "file refrence with parent dir", function(){
+	asyncTest( "file reference with parent dir", function(){
 		testPageLoad("#protocol-rel-test-five", "doc rel test five");
 	});
 
-	asyncTest( "dir refrence with parent dir", function(){
+	asyncTest( "dir reference with parent dir", function(){
 		testPageLoad("#protocol-rel-test-six", "doc rel test six");
 	});
 
@@ -162,15 +162,15 @@
 		testPageLoad("#absolute-test-three", "doc rel test three");
 	});
 
-	asyncTest( "dir refrence with nesting", function(){
+	asyncTest( "dir reference with nesting", function(){
 		testPageLoad("#absolute-test-four", "doc rel test four");
 	});
 
-	asyncTest( "file refrence with parent dir", function(){
+	asyncTest( "file reference with parent dir", function(){
 		testPageLoad("#absolute-test-five", "doc rel test five");
 	});
 
-	asyncTest( "dir refrence with parent dir", function(){
+	asyncTest( "dir reference with parent dir", function(){
 		testPageLoad("#absolute-test-six", "doc rel test six");
 	});
 })(jQuery);

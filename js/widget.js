@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Widget factory extentions for mobile.
+//>>description: Widget factory extensions for mobile.
 //>>label: Widget Factory
 //>>group: Core
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css

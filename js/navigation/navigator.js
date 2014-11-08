@@ -250,7 +250,7 @@ define(["jquery",
 				return;
 			}
 
-			// On occasion explicitly want to prevent the next hash from propogating because we only
+			// On occasion explicitly want to prevent the next hash from propagating because we only
 			// with to alter the url to represent the new state do so here
 			if ( this.preventNextHashChange ) {
 				this.preventNextHashChange = false;
@@ -281,7 +281,7 @@ define(["jquery",
 				//      can't know the users intention. It might be better to explicitly _not_
 				//      support location.hash assignment in preference to $.navigate calls
 				// TODO first arg to add should be the href, but it causes issues in identifying
-				//      embeded pages
+				//      embedded pages
 				missing: function() {
 					history.add( hash, {
 						hash: hash,
