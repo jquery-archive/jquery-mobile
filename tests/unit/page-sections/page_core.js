@@ -18,14 +18,6 @@
 		ok(!$('.ui-bar > div > a').hasClass('ui-button'));
 	});
 
-	test( "unnested footer anchors are styled", function(){
-		ok($('.ui-footer > a').hasClass('ui-button'));
-	});
-
-	test( "unnested bar anchors are styled", function(){
-		ok($('.ui-bar > a').hasClass('ui-button'));
-	});
-
 	test( "no auto-generated back button exists on first page", function(){
 		ok( !$(".ui-header > :jqmData(rel='back')").length );
 	});
