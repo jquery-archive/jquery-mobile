@@ -249,15 +249,10 @@ define( [
 			$lastVClicked = $( target );
 
 			// Try to find a target element to which the active class will be applied
-			if ( $.data( target, "mobile-button" ) ) {
+			if ( $.data( target, "ui-button" ) ) {
 				// If the form will not be submitted via AJAX, do not add active class
 				if ( !getAjaxFormData( $( target ).closest( "form" ), true ) ) {
 					return;
-				}
-				// We will apply the active state to this button widget - the parent
-				// of the input that was clicked will have the associated data
-				if ( target.parentNode ) {
-					target = target.parentNode;
 				}
 			} else {
 				target = findClosestLink( target );
@@ -292,7 +287,7 @@ define( [
 			$btn = $( target );
 			// If the outer element wasn't found by the our heuristics, use .closest()
 			if ( needClosest ) {
-				$btn = $btn.closest( ".ui-btn" );
+				$btn = $btn.closest( ".ui-button" );
 			}
 
 			if ( $btn.length > 0 &&
@@ -326,7 +321,7 @@ define( [
 
 			// If a button was clicked, clean up the active class added by vclick above
 			if ( $.mobile.activeClickedLink &&
-				$.mobile.activeClickedLink[ 0 ] === event.target.parentNode ) {
+				$.mobile.activeClickedLink[ 0 ] === event.target ) {
 				httpCleanup();
 			}
 
