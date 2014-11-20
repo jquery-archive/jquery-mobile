@@ -130,9 +130,9 @@
 
 						h2dictionary[id] =  text;
 						if(!first){
-							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-icon-carat-u ui-alt-icon'>Top</a>");
+							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-alt-icon'>Top <span class='ui-icon ui-icon-carat-u'></span></a>");
 						} else {
-							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink jqm-open-quicklink-panel ui-icon-carat-l ui-alt-icon'>Quick Links</a>");
+							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink jqm-open-quicklink-panel ui-alt-icon'>Quick Links <span class='ui-icon ui-icon-carat-l'></span></a>");
 						}
 						first = false;
 					});
@@ -145,7 +145,7 @@
 					this._on( document, {
 						"pagebeforechange": function(){
 							this.element.find(".jqm-quicklink-panel").panel("close");
-							this.element.find(".jqm-quicklink-panel .ui-btn-active").removeClass("ui-btn-active");
+							this.element.find(".jqm-quicklink-panel .ui-button-active").removeClass("ui-button-active");
 						}
 					});
 					if( $(h2dictionary).length > 0 ){
