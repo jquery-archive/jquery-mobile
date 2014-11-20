@@ -5,9 +5,9 @@ test( "Controlgroup honors keepNative", function() {
 		"button instantiated where data-role='none' is absent" );
 	deepEqual( !!$( ".checkboxradio-enhanced" ).data( "mobile-checkboxradio" ), true,
 		"checkboxradio instantiated where data-role='none' is absent" );
-	deepEqual( $( "button.buttonMarkup-enhanced" ).hasClass( "ui-btn" ), true,
+	deepEqual( $( "button.buttonMarkup-enhanced" ).hasClass( "ui-button" ), true,
 		"button element enhanced where data-role='none' is absent" );
-	deepEqual( $( "a.buttonMarkup-enhanced" ).hasClass( "ui-btn" ), true,
+	deepEqual( $( "a.buttonMarkup-enhanced" ).hasClass( "ui-button" ), true,
 		"Anchor enhanced where data-role='none' is absent" );
 
 	deepEqual( !!$( "select.selectmenu-skipped" ).data( "mobile-selectmenu" ), false,
@@ -16,8 +16,8 @@ test( "Controlgroup honors keepNative", function() {
 		"button instantiation skipped where data-role='none' is present" );
 	deepEqual( !!$( ".checkboxradio-skipped" ).data( "mobile-checkboxradio" ), false,
 		"checkboxradio instantiation skipped where data-role='none' is present" );
-	deepEqual( $( "button.buttonMarkup-skipped" ).hasClass( "ui-btn" ), false,
+	deepEqual( $( "button.buttonMarkup-skipped" ).hasClass( "ui-button" ), false,
 		"button element enhancement skipped where data-role='none' is present" );
-	deepEqual( $( "a.buttonMarkup-skipped" ).hasClass( "ui-btn" ), false,
+	deepEqual( $( "a.buttonMarkup-skipped" ).hasClass( "ui-button" ), false,
 		"Anchor enhancement skipped where data-role='none' is present" );
 });

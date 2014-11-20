@@ -33,7 +33,7 @@
 	font-weight: 300;
 	text-transform: uppercase;
 }
-.jqm-demos .jqm-header .ui-btn {
+.jqm-demos .jqm-header .ui-button {
 	width: 2em;
 	height: 2em;
 	background: none;
@@ -194,18 +194,18 @@
 .jqm-demos .jqm-search .jqm-list {
 	margin: 0 -1em 1em;
 }
-.jqm-demos .jqm-list .ui-btn,
-.jqm-demos .jqm-list .ui-btn:visited,
+.jqm-demos .jqm-list .ui-button,
+.jqm-demos .jqm-list .ui-button:visited,
 .jqm-demos .jqm-list .ui-li-divider {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
 	text-shadow: none !important;
 }
-.jqm-demos .jqm-list .ui-btn:hover,
-.jqm-demos .jqm-list .ui-btn:active {
+.jqm-demos .jqm-list .ui-button:hover,
+.jqm-demos .jqm-list .ui-button:active {
 	color: #3388cc;
 }
-.jqm-demos .jqm-list .ui-btn.ui-btn-active {
+.jqm-demos .jqm-list .ui-button.ui-button-active {
 	color: #fff;
 }
 .jqm-demos .jqm-list .ui-li-divider {
@@ -220,19 +220,19 @@
 	padding: 0;
 	border: none !important;
 }
-.jqm-navmenu-panel .ui-collapsible + li > .ui-btn,
-.jqm-navmenu-panel .ui-collapsible + .ui-collapsible > .ui-collapsible-heading > .ui-btn,
-.jqm-navmenu-panel .ui-panel-inner > .ui-listview > li.ui-first-child .ui-btn {
+.jqm-navmenu-panel .ui-collapsible + li > .ui-button,
+.jqm-navmenu-panel .ui-collapsible + .ui-collapsible > .ui-collapsible-heading > .ui-button,
+.jqm-navmenu-panel .ui-panel-inner > .ui-listview > li.ui-first-child .ui-button {
 	border-top: none !important;
 }
-.jqm-navmenu-panel .ui-listview .ui-listview .ui-btn {
+.jqm-navmenu-panel .ui-listview .ui-listview .ui-button {
 	padding-left: 1.5em;
 	color: #999;
 }
-.jqm-navmenu-panel .ui-listview .ui-listview .ui-btn.ui-btn-active {
+.jqm-navmenu-panel .ui-listview .ui-listview .ui-button.ui-button-active {
 	color: #fff;
 }
-.jqm-navmenu-panel .ui-btn:after {
+.jqm-navmenu-panel .ui-button > .ui-icon {
 	opacity: .4;
 	filter: Alpha(Opacity=40);
 }
@@ -267,14 +267,14 @@
 	overflow: hidden;
 	white-space: nowrap;
 }
-.ui-btn-active .jqm-search-results-keywords {
+.ui-button-active .jqm-search-results-keywords {
     color: #fff;
 }
 .jqm-search-results-highlight {
     color: #3388cc;
     font-weight: 400;
 }
-.ui-btn-active .jqm-search-results-highlight {
+.ui-button-active .jqm-search-results-highlight {
     color: #fff;
     font-weight: 300;
 }
@@ -294,15 +294,7 @@
 	padding-top: .2em;
 	margin: 0 0 1.5em;
 }
-.jqm-demos .jqm-content .jqm-deeplink:after {
-	content: "";
-	display: block;
-	float: right;
-	margin: .1em 0 0 .5em;
-	width: 1em;
-	height: 1em;
-	background-position: center center;
-	background-repeat: no-repeat;
+.jqm-demos .jqm-content .jqm-deeplink .ui-icon {
 	opacity: .4;
 	filter: Alpha(Opacity=40);
 }
@@ -317,7 +309,7 @@
 	font-weight: 400;
 	margin: 2em 0 1.5em 1em;
 }
-.jqm-demos .jqm-content .jqm-view-source-link.ui-btn-active:link {
+.jqm-demos .jqm-content .jqm-view-source-link.ui-button-active:link {
 	color: #fff;
 }
 
@@ -394,28 +386,28 @@
 		padding-right: 15%;
 		float: none;
 	}
-	.jqm-navmenu-panel .ui-listview .ui-btn {
+	.jqm-navmenu-panel .ui-listview .ui-button {
 		padding-left: 12.5%;
 	}
-	.jqm-navmenu-panel .ui-listview .ui-listview .ui-btn {
+	.jqm-navmenu-panel .ui-listview .ui-listview .ui-button {
 		padding-left: 15%;
 	}
 	.jqm-navmenu-panel .ui-collapsible,
 	.jqm-navmenu-panel .ui-collapsible-content,
-	.jqm-navmenu-panel .ui-btn {
+	.jqm-navmenu-panel .ui-button {
 		background: none !important;
 		border-color: #ddd !important;
 	}
-	.jqm-navmenu-panel .ui-btn.ui-btn-active {
+	.jqm-navmenu-panel .ui-button.ui-button-active {
 		color: #3388cc !important;
 	}
-	.jqm-navmenu-panel .ui-btn::after {
+	.jqm-navmenu-panel .ui-button > .ui-icon {
 		opacity: 0;
 		-webkit-transition: opacity 500ms ease;
 		-moz-transition: opacity 500ms ease;
 		transition: opacity 500ms ease;
 	}
-	.jqm-navmenu-panel .ui-btn:hover::after {
+	.jqm-navmenu-panel .ui-button:hover > .ui-icon {
 		opacity: .4;
 	}
 	.jqm-search-panel {
@@ -447,11 +439,11 @@
 .jqm-view-source .ui-collapsible-set {
 	margin: 0;
 }
-.jqm-view-source .ui-collapsible-heading .ui-btn {
+.jqm-view-source .ui-collapsible-heading .ui-button {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 }
-.jqm-view-source .ui-collapsible-heading .ui-btn-inner {
+.jqm-view-source .ui-collapsible-heading .ui-button-inner {
 	padding: .4em;
 }
 .jqm-view-source .ui-collapsible-content {
@@ -483,44 +475,44 @@
 }
 
 /* Button C - HTML */
-.jqm-view-source .ui-btn.ui-btn-c,
-.jqm-view-source .ui-btn.ui-btn-c:visited,
-.jqm-view-source .ui-btn.ui-btn-c:hover,
-.jqm-view-source .ui-btn.ui-btn-c:active,
-.jqm-view-source .ui-btn.ui-btn-c.ui-btn-active {
+.jqm-view-source .ui-button.ui-button-c,
+.jqm-view-source .ui-button.ui-button-c:visited,
+.jqm-view-source .ui-button.ui-button-c:hover,
+.jqm-view-source .ui-button.ui-button-c:active,
+.jqm-view-source .ui-button.ui-button-c.ui-button-active {
 	background: #005aff;
 	border-color: #0033cc;
 	color: #fff;
 	text-shadow: 0 1px 0 #0033cc;
 }
 /* Button D - PHP */
-.jqm-view-source .ui-btn.ui-btn-d,
-.jqm-view-source .ui-btn.ui-btn-d:visited,
-.jqm-view-source .ui-btn.ui-btn-d:hover,
-.jqm-view-source .ui-btn.ui-btn-d:active,
-.jqm-view-source .ui-btn.ui-btn-d.ui-btn-active {
+.jqm-view-source .ui-button.ui-button-d,
+.jqm-view-source .ui-button.ui-button-d:visited,
+.jqm-view-source .ui-button.ui-button-d:hover,
+.jqm-view-source .ui-button.ui-button-d:active,
+.jqm-view-source .ui-button.ui-button-d.ui-button-active {
 	background: #ed1c24;
 	border-color: #ff0000;
 	color: #fff;
 	text-shadow: 0 1px 0 #ff0000;
 }
 /* Button E - JS */
-.jqm-view-source .ui-btn.ui-btn-e,
-.jqm-view-source .ui-btn.ui-btn-e:visited,
-.jqm-view-source .ui-btn.ui-btn-e:hover,
-.jqm-view-source .ui-btn.ui-btn-e:active,
-.jqm-view-source .ui-btn.ui-btn-e.ui-btn-active {
+.jqm-view-source .ui-button.ui-button-e,
+.jqm-view-source .ui-button.ui-button-e:visited,
+.jqm-view-source .ui-button.ui-button-e:hover,
+.jqm-view-source .ui-button.ui-button-e:active,
+.jqm-view-source .ui-button.ui-button-e.ui-button-active {
 	background: #3EB249;
 	border-color: #108040;
 	color: #fff;
 	text-shadow: 0 1px 0 #108040;
 }
 /* Button F - CSS */
-.jqm-view-source .ui-btn.ui-btn-f,
-.jqm-view-source .ui-btn.ui-btn-f:visited,
-.jqm-view-source .ui-btn.ui-btn-f:hover,
-.jqm-view-source .ui-btn.ui-btn-f:active,
-.jqm-view-source .ui-btn.ui-btn-f.ui-btn-active {
+.jqm-view-source .ui-button.ui-button-f,
+.jqm-view-source .ui-button.ui-button-f:visited,
+.jqm-view-source .ui-button.ui-button-f:hover,
+.jqm-view-source .ui-button.ui-button-f:active,
+.jqm-view-source .ui-button.ui-button-f.ui-button-active {
 	background: #ec008c;
 	border-color: #cc0099;
 	color: #fff;
