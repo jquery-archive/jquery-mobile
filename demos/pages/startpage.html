@@ -23,8 +23,8 @@ $('#page1').on('pagecreate', function() {
 });
 
 $('#page1').bind('pagehide', function(e) {
-  $('a.ui-btn').removeClass('ui-btn-active');
-  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-btn-active') ) { 
+  $('a.ui-button').removeClass('ui-button-active');
+  if ( !!$('#cb2').attr('checked') && !$(this).hasClass('ui-button-active') ) { 
     $(this).addClass('ui-page-active');
   }
 });    

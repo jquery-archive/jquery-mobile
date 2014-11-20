@@ -25,13 +25,13 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Listview <a href="http://api.jquerymobile.com/listview/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Listview <a href="http://api.jquerymobile.com/listview/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-carat-r"></span></a></h1>
 
 		<p>A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
 			</p>
@@ -230,8 +230,8 @@
 				<div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 					<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
-					<a href="index.php" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-b ui-icon-check ui-btn-icon-left ui-btn-inline ui-mini">Buy: $10.99</a>
-					<a href="index.php" data-rel="back" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini">Cancel</a>
+					<a href="index.php" data-rel="back" class="ui-shadow ui-button ui-corner-all ui-button-b ui-icon-beginning ui-button-inline ui-mini">Buy: $10.99<span class="ui-icon ui-icon-check"></span></a>
+					<a href="index.php" data-rel="back" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini">Cancel</a>
 				</div>
 			</div><!--/demo-html -->
 
@@ -313,7 +313,7 @@
 					<ul data-role="listview" data-inset="true">
                         <li class="ui-field-contain">
                             <label for="name2">Text Input:</label>
-                            <input type="text" name="name2" id="name2" value="" data-clear-btn="true">
+                            <input type="text" name="name2" id="name2" value="" data-clear-button="true">
                         </li>
                         <li class="ui-field-contain">
                             <label for="textarea2">Textarea:</label>
@@ -342,8 +342,8 @@
                         </li>
                         <li class="ui-body ui-body-b">
                             <fieldset class="ui-grid-a">
-                                    <div class="ui-block-a"><button type="submit" class="ui-btn ui-corner-all ui-btn-a">Cancel</button></div>
-                                    <div class="ui-block-b"><button type="submit" class="ui-btn ui-corner-all ui-btn-a">Submit</button></div>
+                                    <div class="ui-block-a"><button type="submit" class="ui-button ui-corner-all ui-button-a">Cancel</button></div>
+                                    <div class="ui-block-b"><button type="submit" class="ui-button ui-corner-all ui-button-a">Submit</button></div>
                             </fieldset>
                         </li>
 					</ul>
