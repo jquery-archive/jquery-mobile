@@ -31,7 +31,7 @@
 			function() {
 				ok($('#basic-linked-test .ui-li-static').length, ".ui-li-static class added to read-only li elements");
 				ok($('#basic-linked-test .ui-li-divider').length, ".ui-li-divider class added to divider li elements");
-				ok($('#basic-linked-test li > .ui-btn').length, ".ui-btn classes added to anchors that are immediate child of li elements");
+				ok($('#basic-linked-test li > .ui-button').length, ".ui-button classes added to anchors that are immediate child of li elements");
 				start();
 			}
 		]);
@@ -111,7 +111,7 @@
 			function(){
 				var $new_page = $('#numbered-list-test');
 				ok($new_page.hasClass('ui-page-active'), "Makes the new page active when the hash is changed.");
-				ok($('.ui-btn', $new_page).first().text() == "Number 1", "The text of the first LI should be Number 1");
+				ok($('.ui-button', $new_page).first().text() == "Number 1", "The text of the first LI should be Number 1");
 				start();
 			}
 		]);
@@ -179,7 +179,7 @@
 			function(){
 				var $new_page = $('#split-list-test');
 				ok($('.ui-li-has-alt', $new_page).length == 3);
-				ok($('li > .ui-btn', $new_page).length == 6);
+				ok($('li > .ui-button', $new_page).length == 6);
 				start();
 			}
 		]);
@@ -230,7 +230,7 @@
 			},
 
 			function(){
-				$('.ui-page-active .ui-li-has-alt > .ui-btn:eq(1)').click();
+				$('.ui-page-active .ui-li-has-alt > .ui-button:eq(1)').click();
 			},
 
 			function(){
@@ -572,7 +572,7 @@
 					var $elem = $(elem),
 						order = [ "star", "plus", "delete", "grid" ];
 
-					ok( $elem.children(".ui-btn").last().hasClass("ui-icon-" + order[i]) );
+					ok( $elem.children(".ui-button").last().hasClass("ui-icon-" + order[i]) );
 				});
 
 				window.history.back();
@@ -589,7 +589,7 @@
 			},
 
 			function() {
-				deepEqual($.mobile.activePage.find("#ignored-link .ui-btn-inner").length, 0, "no buttons in list dividers");
+				deepEqual($.mobile.activePage.find("#ignored-link .ui-button-inner").length, 0, "no buttons in list dividers");
 
 				window.history.back();
 			},
@@ -607,8 +607,8 @@
 			},
 
 			function() {
-				deepEqual($.mobile.activePage.find(".listitem > .ui-btn").css("border-bottom-width"), "0px", "has no border bottom");
-				deepEqual($.mobile.activePage.find("#lastitem > .ui-btn").css("border-bottom-width"), "1px", "has border bottom");
+				deepEqual($.mobile.activePage.find(".listitem > .ui-button").css("border-bottom-width"), "0px", "has no border bottom");
+				deepEqual($.mobile.activePage.find("#lastitem > .ui-button").css("border-bottom-width"), "1px", "has border bottom");
 
 				window.history.back();
 			},
@@ -624,8 +624,8 @@
 			},
 
 			function() {
-				deepEqual($.mobile.activePage.find("#noninsetlastli > .ui-btn").css("border-bottom-width"), "0px", "last li non-inset list has no border bottom");
-				deepEqual($.mobile.activePage.find("#insetlastli > .ui-btn").css("border-bottom-width"), "1px", "last li inset list has border bottom");
+				deepEqual($.mobile.activePage.find("#noninsetlastli > .ui-button").css("border-bottom-width"), "0px", "last li non-inset list has no border bottom");
+				deepEqual($.mobile.activePage.find("#insetlastli > .ui-button").css("border-bottom-width"), "1px", "last li inset list has border bottom");
 
 				window.history.back();
 			},

@@ -119,17 +119,17 @@ $.widget( "mobile.listview", $.extend( {
 				value = item.attr( "value" );
 				itemTheme = getAttr( item[ 0 ], "theme" );
 
-				if ( a.length && a[ 0 ].className.search( /\bui-btn\b/ ) < 0 && !isDivider ) {
+				if ( a.length && a[ 0 ].className.search( /\bui-button\b/ ) < 0 && !isDivider ) {
 					itemIcon = getAttr( item[ 0 ], "icon" );
 					icon = ( itemIcon === false ) ? false : ( itemIcon || o.icon );
 
 					// TODO: Remove in 1.5 together with links.js (links.js / .ui-link deprecated in 1.4)
 					a.removeClass( "ui-link" );
 
-					buttonClass = "ui-btn";
+					buttonClass = "ui-button";
 
 					if ( itemTheme ) {
-						buttonClass += " ui-btn-" + itemTheme;
+						buttonClass += " ui-button-" + itemTheme;
 					}
 
 					if ( a.length > 1 ) {
@@ -137,9 +137,9 @@ $.widget( "mobile.listview", $.extend( {
 
 						last = a.last();
 						splittheme = getAttr( last[ 0 ], "theme" ) || o.splitTheme || getAttr( item[ 0 ], "theme", true );
-						splitThemeClass = splittheme ? " ui-btn-" + splittheme : "";
+						splitThemeClass = splittheme ? " ui-button-" + splittheme : "";
 						spliticon = getAttr( last[ 0 ], "icon" ) || getAttr( item[ 0 ], "icon" ) || o.splitIcon;
-						altButtonClass = "ui-btn ui-btn-icon-notext ui-icon-" + spliticon + splitThemeClass;
+						altButtonClass = "ui-button ui-button-icon-only ui-icon-" + spliticon + splitThemeClass;
 
 						last
 							.attr( "title", $.trim( last.getEncodedText() ) )
@@ -149,7 +149,7 @@ $.widget( "mobile.listview", $.extend( {
 						// Reduce to the first anchor, because only the first gets the buttonClass
 						a = a.first();
 					} else if ( icon ) {
-						buttonClass += " ui-btn-icon-right ui-icon-" + icon;
+						buttonClass += " ui-icon-end ui-icon-" + icon;
 					}
 
 					// Apply buttonClass to the (first) anchor
@@ -201,7 +201,7 @@ $.widget( "mobile.listview", $.extend( {
 
 		// Deprecated in 1.4. From 1.5 you have to add class ui-li-has-thumb or ui-li-has-icon to the LI.
 		this._addThumbClasses( li );
-		this._addThumbClasses( li.find( ".ui-btn" ) );
+		this._addThumbClasses( li.find( ".ui-button" ) );
 
 		this._afterListviewRefresh();
 

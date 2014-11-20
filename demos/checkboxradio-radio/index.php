@@ -18,13 +18,13 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Radio buttons <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-caret-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Radio buttons <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
 		<p>Radio inputs are used to provide a list of options where only a single option can be selected. Radio buttons are enhanced by the checkboxradio widget.</p>
 
@@ -149,7 +149,7 @@
 
 		<div data-demo-html="true">
 			<div class="ui-radio">
-				<label for="radio-enhanced" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left ui-radio-off">I agree</label>
+				<label for="radio-enhanced" class="ui-button ui-corner-all ui-button-inherit ui-icon-beginning ui-radio-off">I agree</label>
 				<input type="radio" name="radio-enhanced" id="radio-enhanced" data-enhanced="true">
 			</div>
 		</div><!--/demo-html -->

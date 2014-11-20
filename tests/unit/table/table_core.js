@@ -167,10 +167,10 @@
 	asyncTest( "The page should be enhanced correctly" , function(){
 		setTimeout(function() {
 			var $popup = $('#column-table-test #movie-table-column-popup-popup'),
-				button = $('#column-table-test .ui-table-columntoggle-btn:last');
+				button = $('#column-table-test .ui-table-columntoggle-button:last');
 
 			ok($('#column-table-test .ui-table-columntoggle').length, ".ui-table-columntoggle class added to table element");
-			ok($('#column-table-test .ui-table-columntoggle-btn').length, ".ui-table-columntoggle-btn button added");
+			ok($('#column-table-test .ui-table-columntoggle-button').length, ".ui-table-columntoggle-button button added");
 			deepEqual( button.text(), "Columns...",  "Column toggle button has correct text");
 			ok( $popup.length, "dialog added" );
 			ok( $popup.is( ".ui-popup-hidden" ) , "dialog hidden");
@@ -335,7 +335,7 @@
 		var $input;
 		$.testHelper.pageSequence([
 			function() {
-				$( ".ui-table-columntoggle-btn:last" ).click();
+				$( ".ui-table-columntoggle-button:last" ).click();
 			},
 			function() {
 				setTimeout(function() {

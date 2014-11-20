@@ -96,34 +96,34 @@
 		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
 	});
 
-	test( "data-clear-btn adds clear button to text inputs", function() {
-		ok( $( '#text-input-clear-btn' ).next()
+	test( "data-clear-button adds clear button to text inputs", function() {
+		ok( $( '#text-input-clear-button' ).next()
 			.is( 'a.ui-input-clear[tabindex="-1"][aria-hidden="true"]' ),
 			"correctly marked up clear button is present" );
 	});
 
-	test( "data-clear-btn does not add clear button to textarea", function() {
-		ok( ! $( "#textarea-clear-btn" ).next().is( "a.ui-input-clear" ), "data-clear-btn does not add clear button to textarea" );
+	test( "data-clear-button does not add clear button to textarea", function() {
+		ok( ! $( "#textarea-clear-button" ).next().is( "a.ui-input-clear" ), "data-clear-button does not add clear button to textarea" );
 	});
 
-	test( "data-clear-btn does not add clear button to textarea", function() {
-		deepEqual( $( "#textarea-clear-btn" ).children( "a" ).length, 0,
-			"No anchors have been inserted as children of the data-clear-btn textarea element" );
+	test( "data-clear-button does not add clear button to textarea", function() {
+		deepEqual( $( "#textarea-clear-button" ).children( "a" ).length, 0,
+			"No anchors have been inserted as children of the data-clear-button textarea element" );
 	});
 
-	test( "data-clear-btn does not add clear button to slider input", function() {
+	test( "data-clear-button does not add clear button to slider input", function() {
 		ok( ! $( "#slider-input" ).next().is( "a.ui-input-clear" ),
-			"data-clear-btn does not add clear button to slider input" );
+			"data-clear-button does not add clear button to slider input" );
 	});
 
-	test( "data-clear-btn does not add clear button to slider input", function() {
+	test( "data-clear-button does not add clear button to slider input", function() {
 		deepEqual( $( "#slider-input" ).children( "a" ).length, 0,
-			"No anchors have been inserted as children of the data-clear-btn input element" );
+			"No anchors have been inserted as children of the data-clear-button input element" );
 	});
 
-	test( "data-clear-btn does not add native clear button to input button (IE10)", function() {
+	test( "data-clear-button does not add native clear button to input button (IE10)", function() {
 		// Get an input element, initial height, and reserve d for height difference
-		var e = $( "input[data-clear-btn='true']" ),
+		var e = $( "input[data-clear-button='true']" ),
 				h = e.height(), d;
 
 		e.addClass("msClear");
@@ -143,7 +143,7 @@
 	});
 
 	test( "clearBtn option works at runtime", function() {
-		var input = $( "#test-clear-btn-option" );
+		var input = $( "#test-clear-button-option" );
 
 		deepEqual( input.siblings( "a" ).length, 0,
 			"input initially has no clear button" );

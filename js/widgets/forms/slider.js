@@ -385,7 +385,7 @@ $.widget( "mobile.slider", $.extend( {
 		var self = this,
 			parentTheme = $.mobile.getAttribute( this.element[ 0 ], "theme" ),
 			theme = this.options.theme || parentTheme,
-			themeClass =  theme ? " ui-btn-" + theme : "",
+			themeClass =  theme ? " ui-button-" + theme : "",
 			trackTheme = this.options.trackTheme || parentTheme,
 			trackThemeClass = trackTheme ? " ui-bar-" + trackTheme : " ui-bar-inherit",
 			cornerClass = this.options.corners ? " ui-corner-all" : "",
@@ -411,7 +411,7 @@ $.widget( "mobile.slider", $.extend( {
 				return $( bg ).prependTo( self.slider );
 			})();
 		}
-		this.handle.addClass( "ui-btn" + themeClass + " ui-shadow" );
+		this.handle.addClass( "ui-button" + themeClass + " ui-shadow" );
 
 		control = this.element;
 		isInput = !this.isToggleSwitch;
@@ -543,8 +543,8 @@ $.widget( "mobile.slider", $.extend( {
 
 	_setTheme: function( value ) {
 		this.handle
-			.removeClass( "ui-btn-" + this.options.theme )
-			.addClass( "ui-btn-" + value );
+			.removeClass( "ui-button-" + this.options.theme )
+			.addClass( "ui-button-" + value );
 
 		var currentTheme = this.options.theme ? this.options.theme : "inherit",
 			newTheme = value ? value : "inherit";

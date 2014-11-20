@@ -70,7 +70,7 @@
 		.nogradient * {
 			background-image: none !important;
 		}
-		.nohighlight .ui-btn:before {
+		.nohighlight .ui-button:before {
 			display: none !important;
 		}
 		form.ui-mini .ui-field-contain fieldset.ui-controlgroup legend small {
@@ -83,11 +83,11 @@
 
 	<div data-role="header">
 		<h1>Classic theme</h1>
-		<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-back ui-btn-icon-notext">Back</a>
-		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left">Button</a>
+		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-icon-only">Back<span class="ui-icon ui-icon-back"></span></a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-beginning">Button<span class="ui-icon ui-icon-gear"></span></a>
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 1</a></li>
+				<li><a href="#" class="ui-button-active ui-state-persist">Menu item 1</a></li>
 				<li><a href="#">Menu item 2</a></li>
 				<li><a href="#">Menu item 3</a></li>
 			</ul>
@@ -154,7 +154,7 @@
 			</div>
 			<div class="ui-field-contain" id="opt-highlight">
 				<fieldset data-role="controlgroup" data-type="horizontal">
-					<legend>Highlight:<br><small>Off: remove .ui-btn:before rule from classic theme CSS</small></legend>
+					<legend>Highlight:<br><small>Off: remove .ui-button:before rule from classic theme CSS</small></legend>
 					<label for="on3">On</label>
 					<input type="radio" name="highlight" id="on3" checked>
 					<label for="off3">Off</label>
@@ -167,17 +167,17 @@
 		<p>I am a div with classes ui-body, ui-body-<span class="theme">a</span> and ui-corner-all.</p>
 		<p><a href="#">I am a link</a></p>
 			<h4>Panels</h4>
-			<a href="#panel-reveal" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Reveal</a>
-			<a href="#panel-overlay" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Overlay</a>
-			<a href="#panel-push" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-mini">Push</a>
+			<a href="#panel-reveal" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini">Reveal</a>
+			<a href="#panel-overlay" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini">Overlay</a>
+			<a href="#panel-push" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini">Push</a>
 		</div>
 
 		<div id="ui-bar-test" class="ui-bar ui-bar-a ui-corner-all" style="margin-bottom:1em;">
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 
-		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-caret-r ui-btn-icon-right">We</a>
-		<button class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-caret-r ui-btn-icon-right">are</button>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-icon-end">We<span class="ui-icon ui-icon-caret-r"></span></a>
+		<button class="ui-button ui-corner-all ui-shadow ui-button-inline ui-icon-end">are<span class="ui-icon ui-icon-caret-r"></span></button>
 		<input type="button" value="buttons" data-inline="true" data-icon="caret-r" data-iconpos="right">
 
 		<ul data-role="listview" data-inset="true" data-counttheme="c">
@@ -218,7 +218,7 @@
 		<form>
 			<div class="ui-field-contain">
 				<label for="name2">Text Input:</label>
-				<input type="text" name="name2" id="name2" value="" data-clear-btn="true">
+				<input type="text" name="name2" id="name2" value="" data-clear-button="true">
 			</div>
 			<div class="ui-field-contain">
 				<label for="textarea2">Textarea:</label>
@@ -260,9 +260,9 @@
 			<div class="ui-field-contain">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Controlgroup:</legend>
-					<button class="ui-btn ui-corner-all ui-shadow ui-icon-home ui-btn-icon-right">One</button>
+					<button class="ui-button ui-corner-all ui-shadow ui-icon-end">One<span class="ui-icon ui-icon-home"></span></button>
 					<input type="button" data-icon="back" data-iconpos="right" value="Two">
-					<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-grid ui-btn-icon-right">Three</a>
+					<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-end">Three<span class="ui-icon ui-icon-grid"></span></a>
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
@@ -280,7 +280,7 @@
 			</div>
 		</form>
 
-		<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-gear ui-btn-icon-left ui-btn-active">Active button</a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-beginning ui-button-active">Active button<span class="ui-icon ui-icon-gear"></span></a>
 
 		<p>Form inside static list:</p>
 
@@ -288,7 +288,7 @@
 			<ul data-role="listview" data-inset="true">
 				<li class="ui-field-contain">
 					<label for="name3">Text Input:</label>
-					<input type="text" name="name3" id="name3" value="" data-clear-btn="true">
+					<input type="text" name="name3" id="name3" value="" data-clear-button="true">
 				</li>
 				<li class="ui-field-contain">
 					<label for="flip3">Slider flip switch:</label>
@@ -308,7 +308,7 @@
 		<p>ui-bar-<span class="theme">a</span></p>
 			<div class="ui-field-contain">
 				<label for="name4">Text Input:</label>
-				<input type="text" name="name4" id="name4" value="" data-clear-btn="true">
+				<input type="text" name="name4" id="name4" value="" data-clear-button="true">
 			</div>
 			<div class="ui-field-contain">
 				<label for="flip4">Flip switch:</label>
@@ -349,7 +349,7 @@
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#">Menu item 1</a></li>
-				<li><a href="#" class="ui-btn-active ui-state-persist">Menu item 2</a></li>
+				<li><a href="#" class="ui-button-active ui-state-persist">Menu item 2</a></li>
 				<li><a href="#">Menu item 3</a></li>
 			</ul>
 		</div>
@@ -364,7 +364,7 @@
 			<li><a href="#">List item</a></li>
 		</ul>
 		<br><br>
-		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+		<button class="ui-button ui-corner-all ui-shadow">Button</button>
 	</div>
 
 	<div data-role="panel" id="panel-overlay" data-display="overlay">
@@ -375,7 +375,7 @@
 			<li><a href="#">List item</a></li>
 		</ul>
 		<br><br>
-		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+		<button class="ui-button ui-corner-all ui-shadow">Button</button>
 	</div>
 
 	<div data-role="panel" id="panel-push" data-display="push">
@@ -386,7 +386,7 @@
 			<li><a href="#">List item</a></li>
 		</ul>
 		<br><br>
-		<button class="ui-btn ui-corner-all ui-shadow">Button</button>
+		<button class="ui-button ui-corner-all ui-shadow">Button</button>
 	</div>
 
 </div><!-- /page -->

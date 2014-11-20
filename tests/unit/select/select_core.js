@@ -71,6 +71,6 @@
 	module( "Native select" );
 
 	test( "Select menu ID", function() {
-		ok( $( ".no-id-test" ).closest( ".ui-btn" ).attr( "id" ) !== "undefined-button", "Select menu without an ID does not result in the button having name 'undefined-button'" );
+		ok( $( ".no-id-test" ).closest( ".ui-button" ).attr( "id" ) !== "undefined-button", "Select menu without an ID does not result in the button having name 'undefined-button'" );
 	});
 })(jQuery);

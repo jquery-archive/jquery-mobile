@@ -33,16 +33,16 @@
 					}
 					if ( event.target.id === "opt-inline" ) {
 						if ( $( "#opt-inline" ).prop( "checked" ) ) {
-							$( "#test button" ).addClass( "ui-btn-inline" );
+							$( "#test button" ).addClass( "ui-button-inline" );
 						} else {
-							$( "#test button" ).removeClass( "ui-btn-inline" );
+							$( "#test button" ).removeClass( "ui-button-inline" );
 						}
 					}
 					if ( event.target.id === "opt-notext" ) {
 						if ( $( "#opt-notext" ).prop( "checked" ) ) {
-							$( "#test button" ).addClass( "ui-btn-icon-notext" ).removeClass( "ui-btn-icon-left" );
+							$( "#test button" ).addClass( "ui-button-icon-only" ).removeClass( "ui-icon-beginning" );
 						} else {
-							$( "#test button" ).removeClass( "ui-btn-icon-notext" ).addClass( "ui-btn-icon-left" );
+							$( "#test button" ).removeClass( "ui-button-icon-only" ).addClass( "ui-icon-beginning" );
 						}
 					}
 					if ( event.target.id === "opt-alt" ) {
@@ -105,8 +105,8 @@
 			<div data-role="header" class="jqm-header">
 				<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 				<p><span class="jqm-version"></span> Demos</p>
-				<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-				<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+				<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+				<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 			</div><!-- /header -->
 
 			<div role="main" class="ui-content jqm-content">
@@ -118,7 +118,7 @@
 
 				<p>jQuery Mobile uses grunticon to generate SVG icons with PNG fallbacks and the style sheets for these. By default the library uses inline SVGs but falls back to individual PNGs if inline SVG is not supported.</p>
 
-				<p>However, you can further optimize for a wider variety of devices by using a loader script for selecting the appropriate style sheet. This reduces data transfer and the length of the style sheet.</p>
+				<p>However, you can further optimize for a wider variety of devices by using a loader script for selecting the approriate style sheet. This reduces data transfer and the length of the style sheet.</p>
 
 				<p>To use the grunticon loader place the script in the "View Source" button below in the head of your page before all other stylesheets or scripts. In the script you will see a call to the grunticon function at the bottom which is being passed an array of three stylesheet URLs. You will want to change this to match your setup or to point at the corresponding style sheets on the CDN.</p>
 
@@ -167,56 +167,56 @@
 
 				<div id="test" class="ui-page-theme-a ui-content">
 					<form>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-action">action</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-alert">alert</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d">arrow-d</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d-l">arrow-d-l</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-d-r">arrow-d-r</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-l">arrow-l</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-r">arrow-r</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-u">arrow-u</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-u-l">arrow-u-l</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-arrow-u-r">arrow-u-r</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-audio">audio</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-back">back</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-bars">bars</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-bullets">bullets</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-calendar">calendar</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-camera">camera</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-caret-d">caret-d</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-caret-l">caret-l</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-caret-r">caret-r</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-caret-u">caret-u</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check">check</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-clock">clock</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-cloud">cloud</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-comment">comment</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete">delete</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-edit">edit</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-eye">eye</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-forbidden">forbidden</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-forward">forward</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-gear">gear</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-grid">grid</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-heart">heart</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-home">home</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-info">info</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location">location</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-lock">lock</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-mail">mail</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-minus">minus</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-navigation">navigation</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-phone">phone</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-plus">plus</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-power">power</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-recycle">recycle</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-refresh">refresh</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-search">search</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-shop">shop</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-star">star</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-tag">tag</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-user">user</button>
-						<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-video">video</button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">action<span class="ui-icon ui-icon-action"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">alert<span class="ui-icon ui-icon-alert"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">arrow-d<span class="ui-icon ui-icon-arrow-d"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">arrow-d-l<span class="ui-icon ui-icon-arrow-d-l"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">arrow-d-r<span class="ui-icon ui-icon-arrow-d-r"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">arrow-l<span class="ui-icon ui-icon-arrow-l"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">arrow-r<span class="ui-icon ui-icon-arrow-r"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">arrow-u<span class="ui-icon ui-icon-arrow-u"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">arrow-u-l<span class="ui-icon ui-icon-arrow-u-l"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">arrow-u-r<span class="ui-icon ui-icon-arrow-u-r"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">audio<span class="ui-icon ui-icon-audio"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">back<span class="ui-icon ui-icon-back"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">bars<span class="ui-icon ui-icon-bars"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">bullets<span class="ui-icon ui-icon-bullets"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">calendar<span class="ui-icon ui-icon-calendar"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">camera<span class="ui-icon ui-icon-camera"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">caret-d<span class="ui-icon ui-icon-caret-d"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">caret-l<span class="ui-icon ui-icon-caret-l"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">caret-r<span class="ui-icon ui-icon-caret-r"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">caret-u<span class="ui-icon ui-icon-caret-u"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">check<span class="ui-icon ui-icon-check"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">clock<span class="ui-icon ui-icon-clock"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">cloud<span class="ui-icon ui-icon-cloud"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">comment<span class="ui-icon ui-icon-comment"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">delete<span class="ui-icon ui-icon-delete"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">edit<span class="ui-icon ui-icon-edit"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">eye<span class="ui-icon ui-icon-eye"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">forbidden<span class="ui-icon ui-icon-forbidden"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">forward<span class="ui-icon ui-icon-forward"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">gear<span class="ui-icon ui-icon-gear"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">grid<span class="ui-icon ui-icon-grid"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">heart<span class="ui-icon ui-icon-heart"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">home<span class="ui-icon ui-icon-home"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">info<span class="ui-icon ui-icon-info"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">location<span class="ui-icon ui-icon-location"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">lock<span class="ui-icon ui-icon-lock"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">mail<span class="ui-icon ui-icon-mail"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">minus<span class="ui-icon ui-icon-minus"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">navigation<span class="ui-icon ui-icon-navigation"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">phone<span class="ui-icon ui-icon-phone"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">plus<span class="ui-icon ui-icon-plus"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">power<span class="ui-icon ui-icon-power"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">recycle<span class="ui-icon ui-icon-recycle"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">refresh<span class="ui-icon ui-icon-refresh"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">search<span class="ui-icon ui-icon-search"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">shop<span class="ui-icon ui-icon-shop"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">star<span class="ui-icon ui-icon-star"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">tag<span class="ui-icon ui-icon-tag"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">user<span class="ui-icon ui-icon-user"></span></button>
+						<button class="ui-button ui-shadow ui-corner-all ui-icon-beginning">video<span class="ui-icon ui-icon-video"></span></button>
 					</form>
 				</div>
 

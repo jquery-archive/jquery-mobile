@@ -12,27 +12,27 @@
 		}
 	});
 
-	asyncTest( "Test option data-close-btn", function() {
+	asyncTest( "Test option data-close-button", function() {
 		expect( 5 );
 
 		$.testHelper.pageSequence([
 			function() {
 				// bring up the dialog
-				$( "#close-btn-test-link" ).click();
+				$( "#close-button-test-link" ).click();
 			},
 
 			function() {
-				var a = $( "#close-btn-test .ui-header a" );
+				var a = $( "#close-button-test .ui-header a" );
 				deepEqual( a.length, 0, "Initially, the dialog header has no anchor elements (option value 'none')" );
 
-				$( "#close-btn-test" ).page( "option", "closeBtn", "left" );
-				a = $( "#close-btn-test .ui-header a" );
+				$( "#close-button-test" ).page( "option", "closeBtn", "left" );
+				a = $( "#close-button-test .ui-header a" );
 				deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'left'" );
-				ok( a.hasClass( "ui-btn-left" ), "The close button has class ui-btn-left when the closeBtn option is set to 'left'" );
-				$( "#close-btn-test" ).page( "option", "closeBtn", "right" );
-				a = $( "#close-btn-test .ui-header a" );
+				ok( a.hasClass( "ui-button-left" ), "The close button has class ui-button-left when the closeBtn option is set to 'left'" );
+				$( "#close-button-test" ).page( "option", "closeBtn", "right" );
+				a = $( "#close-button-test .ui-header a" );
 				deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'right'" );
-				ok( a.hasClass( "ui-btn-right" ), "The close button has class ui-btn-right when the closeBtn option is set to 'right'" );
+				ok( a.hasClass( "ui-button-right" ), "The close button has class ui-button-right when the closeBtn option is set to 'right'" );
 
 			},
 

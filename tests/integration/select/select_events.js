@@ -16,7 +16,7 @@
 	});
 
 	test( "selects marked with data-native-menu=true should use a div as their button", function(){
-		deepEqual($("#select-choice-native-container div.ui-btn").length, 1);
+		deepEqual($("#select-choice-native-container div.ui-button").length, 1);
 	});
 
 	test( "selects marked with data-native-menu=true should not have a custom menu", function(){
@@ -24,7 +24,7 @@
 	});
 
 	test( "selects marked with data-native-menu=true should sit inside the button", function(){
-		deepEqual($("#select-choice-native-container div.ui-btn select").length, 1);
+		deepEqual($("#select-choice-native-container div.ui-button select").length, 1);
 	});
 
 	test( "select controls will create when inside a container that receives a 'create' event", function(){

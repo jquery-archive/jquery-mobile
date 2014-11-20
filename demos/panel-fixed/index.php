@@ -37,7 +37,7 @@
         <br>
         <br>
 
-        <a href="../" data-rel="back" data-ajax="false" class="ui-btn ui-shadow ui-corner-all ui-mini ui-btn-inline ui-icon-caret-l ui-btn-icon-left ui-alt-icon ui-nodisc-icon">Back</a>
+        <a href="../" data-rel="back" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-mini ui-button-inline ui-icon-beginning ui-alt-icon ui-nodisc-icon">Back<span class="ui-icon ui-icon-caret-l"></span></a>
 
         <br>
         <br>
@@ -114,14 +114,14 @@
         	<h2>Login</h2>
 
             <label for="name">Username:</label>
-            <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+            <input type="text" name="name" id="name" value="" data-clear-button="true" data-mini="true">
 
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+            <input type="password" name="password" id="password" value="" data-clear-button="true" autocomplete="off" data-mini="true">
 
             <div class="ui-grid-a">
-                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-b ui-mini">Cancel</a></div>
-                <div class="ui-block-b"><a href="#" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-mini">Save</a></div>
+                <div class="ui-block-a"><a href="#" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-b ui-mini">Cancel</a></div>
+                <div class="ui-block-b"><a href="#" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-mini">Save</a></div>
 			</div>
         </form>
 
@@ -139,7 +139,7 @@
 
         <p>This is just a landing page.</p>
 
-        <a href="#panel-fixed-page1" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-mini ui-icon-back ui-btn-icon-left">Back</a>
+        <a href="#panel-fixed-page1" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini ui-icon-beginning">Back<span class="ui-icon ui-icon-back"></span></a>
 
     </div><!-- /content -->
 

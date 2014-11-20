@@ -16,15 +16,15 @@ define([
 (function( $, undefined ) {
 
 $.widget( "ui.checkboxradio", $.ui.checkboxradio, {
-	initSelector: "input[type='checkbox'], input[type='radio'], [data-role='checkboxradio']",
+	initSelector: "input[type='radio'],input[type='checkbox']:not(:jqmData(role='flipswitch'))",
 
 	options: {
 		enhanced: false,
 		theme: "inherit"
 	},
 
-	_enhanced: function() {
-		if ( !this.options.enahnced ) {
+	_enhance: function() {
+		if ( !this.options.enhanced ) {
 			this._super();
 		} else if ( this.options.icon ) {
 			this.icon = this.element.find( "ui-button-icon" );

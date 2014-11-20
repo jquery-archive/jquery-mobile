@@ -237,7 +237,7 @@ $( document ).on( "mobileinit", function() {
 				.parent()
 				.trigger( "create" );
 
-			this.element.parent().find( "form" ).children( ".ui-btn" ).addClass( "ui-hidden-accessible" );
+			this.element.parent().find( "form" ).children( ".ui-button" ).addClass( "ui-hidden-accessible" );
 
 			this._on( form, {
 				"submit": "submitHandler"
@@ -260,24 +260,24 @@ $( document ).on( "mobileinit", function() {
 				input = this.element.prev("form").find( "input" );
 
 			if ( e.which === $.ui.keyCode.DOWN ) {
-				if ( this.element.find( "li.ui-btn-active" ).length === 0 ) {
-					this.element.find( "li:first" ).toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+				if ( this.element.find( "li.ui-button-active" ).length === 0 ) {
+					this.element.find( "li:first" ).toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
 				} else {
-					this.element.find( "li.ui-btn-active a" ).toggleClass( "ui-btn-active");
-					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+					this.element.find( "li.ui-button-active a" ).toggleClass( "ui-button-active");
+					this.element.find( "li.ui-button-active" ).toggleClass( "ui-button-active" ).next().toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
 				}
 
 				this.highlightDown();
 			} else if ( e.which === $.ui.keyCode.UP ) {
-				if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
-					this.element.find( "li.ui-btn-active a" ).toggleClass( "ui-btn-active");
-					this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+				if ( this.element.find( "li.ui-button-active" ).length !== 0 ) {
+					this.element.find( "li.ui-button-active a" ).toggleClass( "ui-button-active");
+					this.element.find( "li.ui-button-active" ).toggleClass( "ui-button-active" ).prev().toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
 				} else {
-					this.element.find( "li:last" ).toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+					this.element.find( "li:last" ).toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
 				}
 				this.highlightUp();
 			} else if ( typeof e.which !== "undefined" ) {
-				this.element.find( "li.ui-btn-active" ).removeClass( "ui-btn-active" );
+				this.element.find( "li.ui-button-active" ).removeClass( "ui-button-active" );
 
 				if ( this.options.highlight ) {
 					search = input.val();
@@ -290,8 +290,8 @@ $( document ).on( "mobileinit", function() {
 			}
 		},
 		submitHandler: function() {
-			if ( this.element.find( "li.ui-btn-active" ).length !== 0 ) {
-				var href = this.element.find( "li.ui-btn-active a" ).attr( "href" );
+			if ( this.element.find( "li.ui-button-active" ).length !== 0 ) {
+				var href = this.element.find( "li.ui-button-active a" ).attr( "href" );
 
 				$( ":mobile-pagecontainer" ).pagecontainer( "change", href );
 				return false;
@@ -302,17 +302,17 @@ $( document ).on( "mobileinit", function() {
 			}
 		},
 		highlightDown: function() {
-			if ( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
-				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).next().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+			if ( this.element.find( "li.ui-button-active" ).hasClass( "ui-screen-hidden" ) ) {
+				this.element.find( "li.ui-button-active" ).find("a").toggleClass( "ui-button-active" );
+				this.element.find( "li.ui-button-active" ).toggleClass( "ui-button-active" ).next().toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
 				this.highlightDown();
 			}
 			return;
 		},
 		highlightUp: function() {
-			if ( this.element.find( "li.ui-btn-active" ).hasClass( "ui-screen-hidden" ) ) {
-				this.element.find( "li.ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
-				this.element.find( "li.ui-btn-active" ).toggleClass( "ui-btn-active" ).prev().toggleClass( "ui-btn-active" ).find("a").toggleClass( "ui-btn-active" );
+			if ( this.element.find( "li.ui-button-active" ).hasClass( "ui-screen-hidden" ) ) {
+				this.element.find( "li.ui-button-active" ).find("a").toggleClass( "ui-button-active" );
+				this.element.find( "li.ui-button-active" ).toggleClass( "ui-button-active" ).prev().toggleClass( "ui-button-active" ).find("a").toggleClass( "ui-button-active" );
 				this.highlightUp();
 			}
 			return;

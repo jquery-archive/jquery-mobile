@@ -15,7 +15,7 @@
 	z-index: 100;
 }
 
-.ui-slider-track .ui-btn.ui-slider-handle {
+.ui-slider-track .ui-button.ui-slider-handle {
 	font-size: .9em;
 	line-height: 30px;
 }

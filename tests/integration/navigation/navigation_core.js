@@ -1067,7 +1067,7 @@ $.testHelper.delayStart();
 			},
 
 			function( timeout ) {
-				ok( !$.mobile.activePage.find( "a" ).hasClass( $.mobile.activeBtnClass ), "vlick handler doesn't add the activebtn class" );
+				ok( !$.mobile.activePage.find( "a" ).hasClass( $.mobile.activeBtnClass ), "vlick handler doesn't add the activebutton class" );
 				ok( timeout, "no page change was fired" );
 				start();
 			}
@@ -1353,7 +1353,7 @@ $.testHelper.delayStart();
 				// force the active button class
 				$hijacked.addClass( $.mobile.activeBtnClass );
 				$hijacked.trigger( 'vclick' );
-				ok( $hijacked.hasClass( $.mobile.activeBtnClass ), "active btn class is added to the link per normal" );
+				ok( $hijacked.hasClass( $.mobile.activeBtnClass ), "active button class is added to the link per normal" );
 
 				$disabledByParent.trigger( 'vclick' );
 				ok( !$disabledByParent.hasClass( $.mobile.activeBtnClass ), "active button class is never added to the link" );

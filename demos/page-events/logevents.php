@@ -31,8 +31,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 	<div id="popup" data-role="popup">
 		Popup
@@ -40,10 +40,10 @@
 	<div role="main" class="ui-content jqm-content">
 
 		<h1>Navigate between pages and open and close panel and popup widgets to see which events fire and their data.</h1>
-		<a class="ui-btn ui-corner-all ui" href="logevents-2.php">Go To Page 2</a>
-		<a class="ui-btn ui-corner-all ui" href="logevents-3.php">Go To Page 3</a>
-		<a class="ui-btn ui-corner-all ui" href="notapage.html">Go To Page that does not exist</a>
-		<a class="ui-btn ui-corner-all ui" data-rel="popup" href="#popup">Open Popup</a>
+		<a class="ui-button ui-corner-all ui" href="logevents-2.php">Go To Page 2</a>
+		<a class="ui-button ui-corner-all ui" href="logevents-3.php">Go To Page 3</a>
+		<a class="ui-button ui-corner-all ui" href="notapage.html">Go To Page that does not exist</a>
+		<a class="ui-button ui-corner-all ui" data-rel="popup" href="#popup">Open Popup</a>
 		<label for="select">Select Menu</label>
 		<select id="select" data-native-menu="false">
 			<option>foo</option>

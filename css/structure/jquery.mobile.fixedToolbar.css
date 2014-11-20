@@ -15,12 +15,12 @@
 	top: 0;
 	padding-top: 0;
 }
-.ui-header-fixed .ui-btn-left,
-.ui-header-fixed .ui-btn-right {
+.ui-header-fixed .ui-button-left,
+.ui-header-fixed .ui-button-right {
 	margin-top: 1px;
 }
-.ui-header-fixed.ui-fixed-hidden .ui-btn-left,
-.ui-header-fixed.ui-fixed-hidden .ui-btn-right {
+.ui-header-fixed.ui-fixed-hidden .ui-button-left,
+.ui-header-fixed.ui-fixed-hidden .ui-button-right {
 	margin-top: 0;
 }
 .ui-footer-fixed {
@@ -66,8 +66,8 @@
 	overflow: hidden;
 	clip: rect(1px,1px,1px,1px);
 }
-.ui-header-fixed .ui-btn,
-.ui-footer-fixed .ui-btn { 
+.ui-header-fixed .ui-button,
+.ui-footer-fixed .ui-button { 
 	z-index: 10;
 }
 /* workarounds for other widgets */

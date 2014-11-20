@@ -33,7 +33,7 @@ define( [ "jquery", "./ns", "json!../package.json" ], function( jQuery, ns, pkg 
 
 		// Deprecated in 1.4 remove in 1.5
 		// Class used for "active" button state, from CSS framework
-		activeBtnClass: "ui-btn-active",
+		activeBtnClass: "ui-button-active",
 
 		// Deprecated in 1.4 remove in 1.5
 		// Class used for "focus" form element state, from CSS framework

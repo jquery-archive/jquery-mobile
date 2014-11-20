@@ -11,24 +11,24 @@
 	padding: 0;
 	position: relative;
 }
-.ui-collapsible-heading .ui-btn {
+.ui-collapsible-heading .ui-button {
 	text-align: left;
 	margin: 0;
 	border-left-width: 0;
 	border-right-width: 0;
 }
-.ui-collapsible-heading .ui-btn-icon-top,
-.ui-collapsible-heading .ui-btn-icon-bottom {
+.ui-collapsible-heading .ui-icon-top,
+.ui-collapsible-heading .ui-icon-bottom {
 	text-align: center;
 }
-.ui-collapsible-inset .ui-collapsible-heading .ui-btn {
+.ui-collapsible-inset .ui-collapsible-heading .ui-button {
 	border-right-width: 1px;
 	border-left-width: 1px;
 }
-.ui-collapsible-collapsed + .ui-collapsible:not(.ui-collapsible-inset) > .ui-collapsible-heading .ui-btn {
+.ui-collapsible-collapsed + .ui-collapsible:not(.ui-collapsible-inset) > .ui-collapsible-heading .ui-button {
 	border-top-width: 0;
 }
-.ui-collapsible-set .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn {
+.ui-collapsible-set .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-button {
 	border-top-width: 1px;
 }
 .ui-collapsible-heading-status {
@@ -65,7 +65,7 @@
 	border-radius: 0;
 }
 .ui-collapsible-heading,
-.ui-collapsible-heading > .ui-btn {
+.ui-collapsible-heading > .ui-button {
 	-webkit-border-radius: inherit;	
 	border-radius: inherit;	
 }

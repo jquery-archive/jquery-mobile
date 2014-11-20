@@ -67,24 +67,22 @@ $.widget( "mobile.selectmenu", $.extend( {
 		/* if ( $el[0].className.length ) {
 			classes = $el[0].className;
 		} */
-		if ( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
-			classes = " ui-btn-left";
+		if ( !!~this.element[0].className.indexOf( "ui-button-left" ) ) {
+			classes = " ui-button-left";
 		}
 
-		if (  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
-			classes = " ui-btn-right";
+		if (  !!~this.element[0].className.indexOf( "ui-button-right" ) ) {
+			classes = " ui-button-right";
 		}
 
 		if ( inline ) {
-			classes += " ui-btn-inline";
+			classes += " ui-button-inline";
 		}
 		if ( mini ) {
 			classes += " ui-mini";
 		}
 
-		this.select = this.element
-			.removeClass( "ui-btn-left ui-btn-right" )
-			.wrap( "<div class='ui-select" + classes + "'></div>" );
+		this.select = this.element.removeClass( "ui-button-left ui-button-right" ).wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
 		this.buttonId = this.selectId + "-button";
 		this.label = $( "label[for='"+ $.mobile.path.hashToSelector( this.selectId ) +"']" );
@@ -94,8 +92,8 @@ $.widget( "mobile.selectmenu", $.extend( {
 	_destroy: function() {
 		var wrapper = this.element.parents( ".ui-select" );
 		if ( wrapper.length > 0 ) {
-			if ( wrapper.is( ".ui-btn-left, .ui-btn-right" ) ) {
-				this.element.addClass( wrapper.hasClass( "ui-btn-left" ) ? "ui-btn-left" : "ui-btn-right" );
+			if ( wrapper.is( ".ui-button-left, .ui-button-right" ) ) {
+				this.element.addClass( wrapper.hasClass( "ui-button-left" ) ? "ui-button-left" : "ui-button-right" );
 			}
 			this.element.insertAfter( wrapper );
 			wrapper.remove();
@@ -114,10 +112,10 @@ $.widget( "mobile.selectmenu", $.extend( {
 			button = this.button
 				.insertBefore( this.select )
 				.attr( "id", this.buttonId )
-				.addClass( "ui-btn" +
-					( options.icon ? ( " ui-icon-" + options.icon + " ui-btn-icon-" + iconpos +
+				.addClass( "ui-button" +
+					( options.icon ? ( " ui-icon-" + options.icon + " ui-button-icon-" + iconpos +
 					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
-					( options.theme ? " ui-btn-" + options.theme : "" ) +
+					( options.theme ? " ui-button-" + options.theme : "" ) +
 					( options.corners ? " ui-corner-all" : "" ) +
 					( options.shadow ? " ui-shadow" : "" ) );
 

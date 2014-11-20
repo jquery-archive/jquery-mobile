@@ -197,7 +197,7 @@
 
 			function( result ) {
 				ok( !result.opened.timedOut, "Opening a popup did cause 'opened' event" );
-				ok( !$( "a#open-test-popup" ).closest( ".ui-btn" ).hasClass( "ui-btn-active" ), "Opening a popup removes active class from link that launched it" );
+				ok( !$( "a#open-test-popup" ).closest( ".ui-button" ).hasClass( "ui-button-active" ), "Opening a popup removes active class from link that launched it" );
 				$( "#test-popup" ).popup( "close" );
 			},
 
@@ -216,7 +216,7 @@
 			},
 
 			function( result ) {
-				ok( !$( "a#open-xyzzy-popup" ).closest( ".ui-btn" ).hasClass( "ui-btn-active" ), "Opening a non-existing popup removes active class from link that attempted to launch it" );
+				ok( !$( "a#open-xyzzy-popup" ).closest( ".ui-button" ).hasClass( "ui-button-active" ), "Opening a non-existing popup removes active class from link that attempted to launch it" );
 				$( "a#open-test-popup-li-link" ).click();
 			},
 

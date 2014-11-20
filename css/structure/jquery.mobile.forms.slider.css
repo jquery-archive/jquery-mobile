@@ -56,7 +56,7 @@ input.ui-slider-input {
 	height: 100%;
 }
 /* High level of specificity to override button margins in grids */
-.ui-slider-track .ui-btn.ui-slider-handle {
+.ui-slider-track .ui-button.ui-slider-handle {
 	position: absolute;
 	z-index: 1;
 	top: 50%;
@@ -102,7 +102,7 @@ div.ui-slider-switch.ui-mini {
 .ui-slider-switch.ui-mini .ui-slider-inneroffset {
 	margin: 0 15px 0 14px;
 }
-.ui-slider-switch .ui-btn.ui-slider-handle {
+.ui-slider-switch .ui-button.ui-slider-handle {
 	margin: 1px 0 0 -15px;
 }
 .ui-slider-switch.ui-mini .ui-slider-handle {

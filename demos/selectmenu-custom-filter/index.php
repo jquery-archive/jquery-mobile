@@ -121,7 +121,7 @@ $.mobile.document
 		.ui-selectmenu.ui-dialog .ui-selectmenu-list {
 			margin-top: 0;
 		}
-		.ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-btn {
+		.ui-selectmenu.ui-popup .ui-selectmenu-list li.ui-first-child .ui-button {
 			border-top-width: 1px;
 			-webkit-border-radius: 0;
 			border-radius: 0;
@@ -137,8 +137,8 @@ $.mobile.document
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
