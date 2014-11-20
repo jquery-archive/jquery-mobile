@@ -24,7 +24,7 @@
     	.ui-input-search {
     		margin: 0;
     	}
-    	button.ui-btn {
+    	button.ui-button {
     		margin: 0;
     	}
     </style>
@@ -34,7 +34,7 @@
 	<div data-role="page" class="jqm-demos">
 
 		<div data-role="header" data-position="fixed">
-			<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+			<a href="../toolbar/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-carat-l"></span></a>
 			<h1>2,146 Songs</h1>
 			<div class="ui-bar ui-bar-b">
 				<form action="#" method="get">
@@ -43,7 +43,7 @@
 				        <input type="search" name="search" id="search" value="" placeholder="Search songs...">
 					</div>
 					<div class="right">
-						<button type="submit" class="ui-btn ui-btn-a ui-corner-all ui-mini">Go</button>
+						<button type="submit" class="ui-button ui-button-a ui-corner-all ui-mini">Go</button>
 					</div>
 				</form>
 			</div>
@@ -111,8 +111,8 @@
 			<div data-role="popup" id="purchase" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 				<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
-				<a href="#" class="ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-shadow ui-btn-icon-left ui-icon-check" data-rel="back">Buy: $10.99</a>
-				<a href="#" class="ui-btn ui-btn-inline ui-mini ui-corner-all ui-shadow" data-rel="back">Cancel</a>
+				<a href="#" class="ui-button ui-button-b ui-button-inline ui-mini ui-corner-all ui-shadow ui-icon-beginning" data-rel="back">Buy: $10.99<span class="ui-icon ui-icon-check"></span></a>
+				<a href="#" class="ui-button ui-button-inline ui-mini ui-corner-all ui-shadow" data-rel="back">Cancel</a>
 			</div>
 
 		</div><!-- /content -->

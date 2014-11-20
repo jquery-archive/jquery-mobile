@@ -11,8 +11,8 @@
 	padding: .4em .5em;
 	vertical-align:top;
 }
-.ui-table th .ui-btn,
-.ui-table td .ui-btn {
+.ui-table th .ui-button,
+.ui-table td .ui-button {
 	line-height: normal;
 }
 .ui-table th {
