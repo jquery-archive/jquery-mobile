@@ -25,7 +25,7 @@
 }
 .ui-listview > .ui-li-static,
 .ui-listview > .ui-li-divider,
-.ui-listview > li > a.ui-btn {
+.ui-listview > li > a.ui-button {
 	margin: 0;
 	display: block;
 	position: relative;
@@ -34,61 +34,61 @@
 	overflow: hidden;
 	white-space: nowrap;
 }
-.ui-listview > li > .ui-btn:focus {
+.ui-listview > li > .ui-button:focus {
 	z-index: 1;
 }
 .ui-listview > .ui-li-static,
 .ui-listview > .ui-li-divider,
-.ui-listview > li > a.ui-btn {
+.ui-listview > li > a.ui-button {
 	border-width: 1px 0 0 0;
 	border-style: solid;
 }
 .ui-listview-inset > .ui-li-static,
 .ui-listview-inset > .ui-li-divider,
-.ui-listview-inset > li > a.ui-btn {
+.ui-listview-inset > li > a.ui-button {
 	border-right-width: 1px;
 	border-left-width: 1px;
 }
 .ui-listview > .ui-li-static.ui-last-child,
 .ui-listview > .ui-li-divider.ui-last-child,
-.ui-listview > li.ui-last-child > a.ui-btn {
+.ui-listview > li.ui-last-child > a.ui-button {
 	border-bottom-width: 1px;
 }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) > li.ui-first-child,
-.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) > li.ui-first-child > a.ui-btn {
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) > li.ui-first-child > a.ui-button {
 	border-top-width: 0;
 }
 .ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset) > li.ui-last-child,
-.ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset) > li.ui-last-child > a.ui-btn {
+.ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset) > li.ui-last-child > a.ui-button {
 	border-bottom-width: 0;
 }
 .ui-listview > li.ui-first-child,
-.ui-listview > li.ui-first-child > a.ui-btn {
+.ui-listview > li.ui-first-child > a.ui-button {
 	-webkit-border-top-right-radius: inherit;	
 	border-top-right-radius: inherit;
 	-webkit-border-top-left-radius: inherit;
 	border-top-left-radius: inherit;
 }
 .ui-listview > li.ui-last-child,
-.ui-listview > li.ui-last-child > a.ui-btn {
+.ui-listview > li.ui-last-child > a.ui-button {
 	-webkit-border-bottom-right-radius: inherit;
 	border-bottom-right-radius: inherit;
 	-webkit-border-bottom-left-radius: inherit;
 	border-bottom-left-radius: inherit;
 }
-.ui-listview > li.ui-li-has-alt > a.ui-btn {
+.ui-listview > li.ui-li-has-alt > a.ui-button {
 	-webkit-border-top-right-radius: 0;
 	border-top-right-radius: 0;
 	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
 }
-.ui-listview > li.ui-first-child > a.ui-btn + a.ui-btn {
+.ui-listview > li.ui-first-child > a.ui-button + a.ui-button {
 	-webkit-border-top-left-radius: 0;	
 	border-top-left-radius: 0;
 	-webkit-border-top-right-radius: inherit;
 	border-top-right-radius: inherit;
 }
-.ui-listview > li.ui-last-child > a.ui-btn + a.ui-btn {
+.ui-listview > li.ui-last-child > a.ui-button + a.ui-button {
 	-webkit-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
 	-webkit-border-bottom-right-radius: inherit;
@@ -116,21 +116,21 @@
 	cursor: default;
 	outline: 0; /* Dividers in custom selectmenus have tabindex */
 }
-.ui-listview > .ui-li-has-count > .ui-btn,
+.ui-listview > .ui-li-has-count > .ui-button,
 .ui-listview > .ui-li-static.ui-li-has-count,
 .ui-listview > .ui-li-divider.ui-li-has-count {
 	padding-right: 2.8125em;
 }
-.ui-listview > .ui-li-has-count > .ui-btn-icon-right {
+.ui-listview > .ui-li-has-count > .ui-icon-end {
 	padding-right: 4.6875em;
 }
-.ui-listview > .ui-li-has-thumb > .ui-btn,
+.ui-listview > .ui-li-has-thumb > .ui-button,
 .ui-listview > .ui-li-static.ui-li-has-thumb {
 	min-height: 3.625em;
 	padding-left: 6.25em;
 }
 /* ui-li-has-icon deprecated in 1.4. TODO: remove in 1.5 */
-.ui-listview > .ui-li-has-icon > .ui-btn,
+.ui-listview > .ui-li-has-icon > .ui-button,
 .ui-listview > .ui-li-static.ui-li-has-icon {
 	min-height: 1.25em;
 	padding-left: 2.5em;
@@ -151,11 +151,11 @@
 	top: 50%;
 	margin-top: -.88em;
 }
-.ui-listview .ui-btn-icon-right .ui-li-count {
+.ui-listview .ui-icon-end .ui-li-count {
 	right: 3.2em;
 }
 .ui-listview .ui-li-has-thumb > img:first-child,
-.ui-listview .ui-li-has-thumb > .ui-btn > img:first-child,
+.ui-listview .ui-li-has-thumb > .ui-button > img:first-child,
 .ui-listview .ui-li-has-thumb .ui-li-thumb {
 	position: absolute;
 	left: 0;
@@ -165,7 +165,7 @@
 }
 /* ui-li-has-icon deprecated in 1.4. TODO: remove in 1.5 */
 .ui-listview > .ui-li-has-icon > img:first-child,
-.ui-listview > .ui-li-has-icon > .ui-btn > img:first-child {
+.ui-listview > .ui-li-has-icon > .ui-button > img:first-child {
 	position: absolute;
 	left: .625em;
 	top: .9em;
@@ -202,11 +202,11 @@
 	margin: 0;
 	text-align: right;
 }
-.ui-listview > li.ui-li-has-alt > .ui-btn {
+.ui-listview > li.ui-li-has-alt > .ui-button {
 	margin-right: 2.5em;
 	border-right-width: 0;
 }
-.ui-listview > li.ui-li-has-alt > .ui-btn + .ui-btn {
+.ui-listview > li.ui-li-has-alt > .ui-button + .ui-button {
 	position: absolute;
 	width: 2.5em;
 	height: 100%;
@@ -221,21 +221,21 @@
 	padding: 0;
 	z-index: 2;
 }
-.ui-listview-inset > li.ui-li-has-alt > .ui-btn + .ui-btn {
+.ui-listview-inset > li.ui-li-has-alt > .ui-button + .ui-button {
 	border-right-width: 1px;
 }
-.ui-listview > li.ui-li-has-alt > .ui-btn + .ui-btn:focus {
+.ui-listview > li.ui-li-has-alt > .ui-button + .ui-button:focus {
 	z-index: 3;
 }
 ol.ui-listview,
 ol.ui-listview > .ui-li-divider {
 	counter-reset: listnumbering;
 }
-ol.ui-listview > li > .ui-btn,
+ol.ui-listview > li > .ui-button,
 ol.ui-listview > li.ui-li-static {
 	vertical-align: middle;
 }
-ol.ui-listview > li > .ui-btn:first-child:before,
+ol.ui-listview > li > .ui-button:first-child:before,
 ol.ui-listview > li.ui-li-static:before,
 ol.ui-listview > li.ui-field-contain > label:before,
 ol.ui-listview > li.ui-field-contain > .ui-controlgroup-label:before {

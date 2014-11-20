@@ -333,7 +333,7 @@
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "select elements in the keepNative set shouldn't be enhanced", function() {
-		ok( !$("#keep-native").parent().is("div.ui-btn") );
+		ok( !$("#keep-native").parent().is("div.ui-button") );
 	});
 
 	asyncTest( "dialog size select title should match the label", function() {
