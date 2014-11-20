@@ -28,7 +28,7 @@ $.mobile.links = function( target ) {
 			}
 		})
 		.end()
-		.not( ".ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
+		.not( ".ui-button, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.addClass( "ui-link" );
 
 };

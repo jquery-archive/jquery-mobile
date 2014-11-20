@@ -3,26 +3,25 @@
 	margin: .5em 0;
 	position: relative;
 }
-.ui-checkbox .ui-btn,
-.ui-radio .ui-btn {
+.ui-checkbox .ui-button,
+.ui-radio .ui-button {
 	margin: 0;
 	text-align: left;
 	white-space: normal; /* Nowrap + ellipsis doesn't work on label. Issue #1419. */
 	z-index: 2;
 }
-.ui-controlgroup .ui-checkbox .ui-btn.ui-focus,
-.ui-controlgroup .ui-radio .ui-btn.ui-focus {
+.ui-controlgroup .ui-checkbox .ui-button.ui-focus,
+.ui-controlgroup .ui-radio .ui-button.ui-focus {
 	z-index: 3;
 }
-.ui-checkbox .ui-btn-icon-top,
-.ui-radio .ui-btn-icon-top,
-.ui-checkbox .ui-btn-icon-bottom,
-.ui-radio .ui-btn-icon-bottom {
+.ui-checkbox .ui-icon-top,
+.ui-radio .ui-icon-top,
+.ui-checkbox .ui-icon-bottom,
+.ui-radio .ui-icon-bottom {
 	text-align: center;
 }
-.ui-controlgroup-horizontal .ui-checkbox .ui-btn:after,
-.ui-controlgroup-horizontal .ui-radio .ui-btn:after {
-	content: none;
+.ui-controlgroup-horizontal .ui-checkbox .ui-button .ui-icon,
+.ui-controlgroup-horizontal .ui-radio .ui-button .ui-icon {
 	display: none;
 }
 /* Native input positioning */
