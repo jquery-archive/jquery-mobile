@@ -18,8 +18,8 @@ $.widget( "mobile.navbar", {
 	_create: function() {
 
 		var $navbar = this.element,
-			$navbtns = $navbar.find( "a, button" ),
-			iconpos = $navbtns.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
+			$navbuttons = $navbar.find( "a, button" ),
+			iconpos = $navbuttons.filter( ":jqmData(icon)" ).length ? this.options.iconpos : undefined;
 
 		$navbar.addClass( "ui-navbar" )
 			.attr( "role", "navigation" )
@@ -27,17 +27,17 @@ $.widget( "mobile.navbar", {
 			.jqmEnhanceable()
 			.grid({ grid: this.options.grid });
 
-		$navbtns
+		$navbuttons
 			.each( function() {
 				var icon = $.mobile.getAttribute( this, "icon" ),
 					theme = $.mobile.getAttribute( this, "theme" ),
-					classes = "ui-btn";
+					classes = "ui-button";
 
 				if ( theme ) {
-					classes += " ui-btn-" + theme;
+					classes += " ui-button-" + theme;
 				}
 				if ( icon ) {
-					classes += " ui-icon-" + icon + " ui-btn-icon-" + iconpos;
+					classes += " ui-icon-" + icon + " ui-button-icon-" + iconpos;
 				}
 				$( this ).addClass( classes );
 			});
@@ -52,7 +52,7 @@ $.widget( "mobile.navbar", {
 				activeBtn.hasClass( "ui-disabled" ) ||
 				activeBtn.hasClass( $.mobile.activeBtnClass ) ) ) {
 
-				$navbtns.removeClass( $.mobile.activeBtnClass );
+				$navbuttons.removeClass( $.mobile.activeBtnClass );
 				activeBtn.addClass( $.mobile.activeBtnClass );
 
 				// The code below is a workaround to fix #1181
@@ -64,7 +64,7 @@ $.widget( "mobile.navbar", {
 
 		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
-			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+			$navbuttons.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
 		});
 	}
 });
