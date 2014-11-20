@@ -53,18 +53,18 @@ li.ui-block-e {
 	list-style: none;
 }
 /* No margin in grids for 100% width button elements until we can use max-width: fill-available; */
-[class*="ui-block-"] > button.ui-btn {
+[class*="ui-block-"] > button.ui-button {
 	margin-right: 0;
 	margin-left: 0;
 }
-[class*="ui-block-"] > .ui-btn,
+[class*="ui-block-"] > .ui-button,
 [class*="ui-block-"] > .ui-select,
 [class*="ui-block-"] > .ui-checkbox,
 [class*="ui-block-"] > .ui-radio,
-[class*="ui-block-"] > button.ui-btn-inline,
-[class*="ui-block-"] > button.ui-btn-icon-notext,
-.ui-header [class*="ui-block-"] > button.ui-btn,
-.ui-footer [class*="ui-block-"] > button.ui-btn {
+[class*="ui-block-"] > button.ui-button-inline,
+[class*="ui-block-"] > button.ui-button-icon-only,
+.ui-header [class*="ui-block-"] > button.ui-button,
+.ui-footer [class*="ui-block-"] > button.ui-button {
 	margin-right: .3125em;
 	margin-left: .3125em;
 }

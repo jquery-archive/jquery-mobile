@@ -238,6 +238,7 @@ define( [
 		//add active state on vclick
 		$.mobile.document.bind( "vclick", function( event ) {
 			var theButton, target = event.target;
+
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
 			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {

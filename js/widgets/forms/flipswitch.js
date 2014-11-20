@@ -136,7 +136,7 @@ $.widget( "mobile.flipswitch", $.extend({
 				options.offText : element.find( "option" ).eq( 0 ).text();
 
 			on
-				.addClass( "ui-flipswitch-on ui-btn ui-shadow ui-btn-inherit" )
+				.addClass( "ui-flipswitch-on ui-button ui-shadow ui-button-inherit" )
 				.text( onText );
 			off
 				.addClass( "ui-flipswitch-off" )

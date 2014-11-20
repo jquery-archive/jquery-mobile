@@ -23,7 +23,6 @@ var rInitialLetter = /([A-Z])/g,
 
 	// Construct iconpos class from iconpos value
 	iconposClass = function( iconpos ) {
-
 		return ( "ui-icon-" +
 			( iconpos === null ? $.mobile.collapsible.defaults.iconpos : iconpos ) );
 	};
@@ -155,11 +154,11 @@ $.widget( "mobile.collapsible", {
 			.wrapInner( "<a href='#' class='ui-collapsible-heading-toggle'></a>" )
 			.find( "a" )
 				.first()
-				.addClass( "ui-btn " +
+				.addClass( "ui-button " +
 					( iconclass ? iconclass + " " : "" ) +
 					( iconclass ? iconposClass( opts.iconpos ) +
 						" " : "" ) +
-					this._themeClassFromOption( "ui-btn-", opts.theme ) + " " +
+					this._themeClassFromOption( "ui-button-", opts.theme ) + " " +
 					( opts.mini ? "ui-mini " : "" ) );
 
 		//drop heading in before content
@@ -251,8 +250,8 @@ $.widget( "mobile.collapsible", {
 		}
 
 		if ( opts.theme !== undefined ) {
-			oldTheme = this._themeClassFromOption( "ui-btn-", currentOpts.theme );
-			newTheme = this._themeClassFromOption( "ui-btn-", opts.theme );
+			oldTheme = this._themeClassFromOption( "ui-button-", currentOpts.theme );
+			newTheme = this._themeClassFromOption( "ui-button-", opts.theme );
 			anchor.removeClass( oldTheme ).addClass( newTheme );
 		}
 

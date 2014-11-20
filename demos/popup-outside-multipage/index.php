@@ -35,8 +35,8 @@ $(function(){
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -47,7 +47,7 @@ $(function(){
 		<p>If you define the popup outside of any page, then you must take care to instantiate the popup widget yourself. You can do this as early as DOMReady, because the popup is not on any page.</p>
 		<p>The example below illustrates the setup with two pages.</p>
 		<div data-demo-html="#popup-outside-page,#other-page,#third-page" data-demo-js="#popup-outside-page-script">
-			<a href="#popup-outside-page" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Menu</a>
+			<a href="#popup-outside-page" data-rel="popup" class="ui-button ui-button-inline ui-corner-all">Menu</a>
 		</div>
 
 		<h2>Pages loaded via Ajax</h2>

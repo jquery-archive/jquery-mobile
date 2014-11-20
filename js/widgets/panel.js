@@ -233,7 +233,7 @@ $.widget( "mobile.panel", {
 
 			e.preventDefault();
 			link = $( e.target );
-			if ( link.hasClass( "ui-btn" ) ) {
+			if ( link.hasClass( "ui-button" ) ) {
 				link.addClass( $.mobile.activeBtnClass );
 				this.element.one( "panelopen panelclose", function() {
 					link.removeClass( $.mobile.activeBtnClass );
