@@ -38,32 +38,32 @@
 		]);
 	});
 
-	asyncTest( "Test option data-close-btn", function() {
+	asyncTest( "Test option data-close-button", function() {
 		expect( 7 );
 
 		$.testHelper.pageSequence([
 			function() {
 				// bring up the dialog
-				$( "#close-btn-test-link" ).click();
+				$( "#close-button-test-link" ).click();
 			},
 
 			function() {
-				var a = $( "#close-btn-test .ui-header a" );
+				var a = $( "#close-button-test .ui-header a" );
 				deepEqual( a.length, 0, "Initially, the dialog header has no anchor elements (option value 'none')" );
 
-				$( "#close-btn-test" ).dialog( "option", "closeBtn", "left" );
-				a = $( "#close-btn-test .ui-header a" );
+				$( "#close-button-test" ).dialog( "option", "closeBtn", "left" );
+				a = $( "#close-button-test .ui-header a" );
 				deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'left'" );
-				ok( a.hasClass( "ui-btn-left" ), "The close button has class ui-btn-left when the closeBtn option is set to 'left'" );
+				ok( a.hasClass( "ui-button-left" ), "The close button has class ui-button-left when the closeBtn option is set to 'left'" );
 				deepEqual( a.attr( "role" ), "button", "The close button has the attribute " + '"' + "role='button'" + '"' + "set" );
 
-				$( "#close-btn-test" ).dialog( "option", "closeBtn", "right" );
-				a = $( "#close-btn-test .ui-header a" );
+				$( "#close-button-test" ).dialog( "option", "closeBtn", "right" );
+				a = $( "#close-button-test .ui-header a" );
 				deepEqual( a.length, 1, "The dialog header has eactly one anchor element when the option value is set to 'right'" );
-				ok( a.hasClass( "ui-btn-right" ), "The close button has class ui-btn-right when the closeBtn option is set to 'right'" );
+				ok( a.hasClass( "ui-button-right" ), "The close button has class ui-button-right when the closeBtn option is set to 'right'" );
 				deepEqual( a.attr( "role" ), "button", "The close button has the attribute " + '"' + "role='button'" + '"' + "set" );
 
-				$( "#close-btn-test" ).dialog( "close" );
+				$( "#close-button-test" ).dialog( "close" );
 			},
 
 			function() {

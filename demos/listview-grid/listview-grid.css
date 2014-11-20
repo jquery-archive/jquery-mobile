@@ -1,8 +1,8 @@
 /* A bit custom styling */
-.my-page .ui-listview li .ui-btn p {
+.my-page .ui-listview li .ui-button p {
 	color: #c0c0c0;
 }
-.my-page .ui-listview li .ui-btn .ui-li-aside {
+.my-page .ui-listview li .ui-button .ui-li-aside {
 	color: #eee;
 }
 
@@ -17,7 +17,7 @@
 		height: 14.5em; /* 232p */
 		margin: .5625em 1.2%;
 	}
-	.my-page .ui-listview li > .ui-btn {
+	.my-page .ui-listview li > .ui-button {
 		-webkit-box-sizing: border-box; /* include padding and border in height so we can set it to 100% */
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
@@ -30,13 +30,13 @@
 	}
 	/* Make all list items and anchors inherit the border-radius from the UL. */
 	.my-page .ui-listview li,
-	.my-page .ui-listview li .ui-btn,
+	.my-page .ui-listview li .ui-button,
 	.my-page .ui-listview .ui-li-thumb {
 		-webkit-border-radius: inherit;
 		border-radius: inherit;
 	}
 	/* Hide the icon */
-	.my-page .ui-listview .ui-btn-icon-right:after {
+	.my-page .ui-listview .ui-icon-end:after {
 		display: none;
 	}
 	/* Make text wrap. */
@@ -99,14 +99,14 @@
 		box-shadow: 0px 0px 9px #111;
 	}
 	/* Images mask the hover bg color so we give desktop users feedback by applying the focus style on hover as well. */
-	.my-page .ui-listview li > .ui-btn:hover {
+	.my-page .ui-listview li > .ui-button:hover {
 		-moz-box-shadow: 0px 0px 12px #33ccff;
 		-webkit-box-shadow: 0px 0px 12px #33ccff;
 		box-shadow: 0px 0px 12px #33ccff;
 	}
 	/* Animate focus and hover style, and resizing. */
 	.my-page .ui-listview li,
-	.my-page .ui-listview .ui-btn {
+	.my-page .ui-listview .ui-button {
 		-webkit-transition: all 500ms ease;
 		-moz-transition: all 500ms ease;
 		-o-transition: all 500ms ease;
