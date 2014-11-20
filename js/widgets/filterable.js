@@ -26,7 +26,7 @@ $.widget( "mobile.filterable", {
 		filterCallback: defaultFilterCallback,
 		enhanced: false,
 		input: null,
-		children: "> li, > option, > optgroup option, > tbody tr, > .ui-controlgroup-controls > .ui-btn, > .ui-controlgroup-controls > .ui-checkbox, > .ui-controlgroup-controls > .ui-radio"
+		children: "> li, > option, > optgroup option, > tbody tr, > .ui-controlgroup-controls > .ui-button, > .ui-controlgroup-controls > .ui-checkbox, > .ui-controlgroup-controls > .ui-radio"
 	},
 
 	_create: function() {

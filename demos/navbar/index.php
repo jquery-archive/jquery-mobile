@@ -12,8 +12,8 @@
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
 	<style>
-		.nav-glyphish-example .ui-btn { padding-top: 40px !important; }
-		.nav-glyphish-example .ui-btn:after { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+		.nav-glyphish-example .ui-button { padding-top: 40px !important; }
+		.nav-glyphish-example .ui-button:after { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
 		#chat:after { background:  url("../_assets/img/glyphish-icons/09-chat2.png") 50% 50% no-repeat; background-size: 24px 22px; }
 		#email:after { background:  url("../_assets/img/glyphish-icons/18-envelope.png") 50% 50% no-repeat; background-size: 24px 16px;  }
 		#login:after { background:  url("../_assets/img/glyphish-icons/30-key.png") 50% 50% no-repeat;  background-size: 12px 26px; }
@@ -28,28 +28,28 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Navbar <a href="http://api.jquerymobile.com/navbar/" class="jqm-api-docs-link ui-btn ui-btn-icon-right ui-icon-carat-r ui-nodisc-icon ui-alt-icon ui-btn-inline ui-corner-all ui-mini">API</a></h1>
+		<h1>Navbar <a href="http://api.jquerymobile.com/navbar/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-carat-r"></span></a></h1>
 
 		<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar.</p>
 
 		<h2>Navbar basics</h2>
 
-		<p>A navbar is coded as an unordered list of links wrapped in a container element that has the <code> data-role="navbar"</code> attribute. When a link in the navbar is clicked it gets the active (selected) state. The <code>ui-btn-active</code> class is first removed from all anchors in the navbar before it is added to the activated link. If this is a link to another page, the class will be removed again after the transition has completed.</p>
+		<p>A navbar is coded as an unordered list of links wrapped in a container element that has the <code> data-role="navbar"</code> attribute. When a link in the navbar is clicked it gets the active (selected) state. The <code>ui-button-active</code> class is first removed from all anchors in the navbar before it is added to the activated link. If this is a link to another page, the class will be removed again after the transition has completed.</p>
 
-		<p>To set an item to the active state, add <code>class="ui-btn-active"</code> to an anchor in the markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.</p>
+		<p>To set an item to the active state, add <code>class="ui-button-active"</code> to an anchor in the markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.</p>
 
 		<p>Navbars with 1 item will render as 100% wide.</p>
 
 			<div data-demo-html="true">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" class="ui-btn-active">One</a></li>
+						<li><a href="#" class="ui-button-active">One</a></li>
 					</ul>
 				</div><!-- /navbar -->
 			</div><!--/demo-html -->
@@ -59,7 +59,7 @@
 			<div data-demo-html="true">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" class="ui-btn-active">One</a></li>
+						<li><a href="#" class="ui-button-active">One</a></li>
 						<li><a href="#">Two</a></li>
 					</ul>
 				</div><!-- /navbar -->
@@ -70,7 +70,7 @@
 			<div data-demo-html="true">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" class="ui-btn-active">One</a></li>
+						<li><a href="#" class="ui-button-active">One</a></li>
 						<li><a href="#">Two</a></li>
 						<li><a href="#">Three</a></li>
 					</ul>
@@ -82,7 +82,7 @@
 			<div data-demo-html="true">
 				<div data-role="navbar" data-grid="c">
 					<ul>
-						<li><a href="#" class="ui-btn-active">One</a></li>
+						<li><a href="#" class="ui-button-active">One</a></li>
 						<li><a href="#">Two</a></li>
 						<li><a href="#">Three</a></li>
 						<li><a href="#">Four</a></li>
@@ -95,7 +95,7 @@
 			<div data-demo-html="true">
 				<div data-role="navbar" data-grid="d">
 					<ul>
-						<li><a href="#" class="ui-btn-active">One</a></li>
+						<li><a href="#" class="ui-button-active">One</a></li>
 						<li><a href="#">Two</a></li>
 						<li><a href="#">Three</a></li>
 						<li><a href="#">Four</a></li>
@@ -111,7 +111,7 @@
 			<div data-demo-html="true">
 				<div data-role="navbar">
 					<ul>
-						<li><a href="#" class="ui-btn-active">One</a></li>
+						<li><a href="#" class="ui-button-active">One</a></li>
 						<li><a href="#">Two</a></li>
 						<li><a href="#">Three</a></li>
 						<li><a href="#">Four</a></li>
@@ -132,7 +132,7 @@
 			<div data-demo-html="true">
 				<div data-role="header" style="overflow:hidden;">
 				<h1>I'm a header</h1>
-					<a href="#" data-icon="gear" class="ui-btn-right">Options</a>
+					<a href="#" data-icon="gear" class="ui-button-right">Options</a>
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#">One</a></li>
@@ -162,7 +162,7 @@
 
 		<h2>Persistent</h2>
 
-		<p>The <a href="../toolbar-fixed-persistent/">persistent navbar</a> variation is designed to work more like a tab bar that stays fixed as you navigate across pages. To set an item to the active state upon initialization of the navbar, add <code>class="ui-btn-active"</code> to the corresponding anchor in your markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.</p>
+		<p>The <a href="../toolbar-fixed-persistent/">persistent navbar</a> variation is designed to work more like a tab bar that stays fixed as you navigate across pages. To set an item to the active state upon initialization of the navbar, add <code>class="ui-button-active"</code> to the corresponding anchor in your markup. Additionally add a class of <code>ui-state-persist</code> to make the framework restore the active state each time the page is shown while it exists in the DOM.</p>
 
 		<h2>Icons</h2>
 
@@ -173,7 +173,7 @@
 					<div data-role="navbar">
 						<ul>
 							<li><a href="#" data-icon="grid">Summary</a></li>
-							<li><a href="#" data-icon="star" class="ui-btn-active">Favs</a></li>
+							<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
 							<li><a href="#" data-icon="gear">Setup</a></li>
 						</ul>
 					</div><!-- /navbar -->
@@ -190,7 +190,7 @@
 				<div data-role="navbar" data-iconpos="bottom">
 					<ul>
 						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-btn-active">Favs</a></li>
+						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
 						<li><a href="#" data-icon="gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->
@@ -204,7 +204,7 @@
 				<div data-role="navbar" data-iconpos="left">
 					<ul>
 						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-btn-active">Favs</a></li>
+						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
 						<li><a href="#" data-icon="gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->
@@ -218,7 +218,7 @@
 				<div data-role="navbar" data-iconpos="right">
 					<ul>
 						<li><a href="#" data-icon="grid">Summary</a></li>
-						<li><a href="#" data-icon="star" class="ui-btn-active">Favs</a></li>
+						<li><a href="#" data-icon="star" class="ui-button-active">Favs</a></li>
 						<li><a href="#" data-icon="gear">Setup</a></li>
 					</ul>
 				</div><!-- /navbar -->

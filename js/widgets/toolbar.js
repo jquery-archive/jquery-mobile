@@ -25,7 +25,7 @@ define( [
 		},
 
 		_create: function() {
-			var leftbtn, rightbtn,
+			var leftbutton, rightbutton,
 				role =  this.element.is( ":jqmData(role='header')" ) ? "header" : "footer",
 				page = this.element.closest( ".ui-page" );
 			if ( page.length === 0 ) {
@@ -37,8 +37,8 @@ define( [
 			$.extend( this, {
 				role: role,
 				page: page,
-				leftbtn: leftbtn,
-				rightbtn: rightbtn
+				leftbutton: leftbutton,
+				rightbutton: rightbutton
 			});
 			this.element.attr( "role", role === "header" ? "banner" : "contentinfo" ).addClass( "ui-" + role );
 			this.refresh();
@@ -50,11 +50,11 @@ define( [
 			}
 			if ( o.backBtnTheme != null ) {
 				this.element
-					.find( ".ui-toolbar-back-btn" )
-					.addClass( "ui-btn ui-btn-" + o.backBtnTheme );
+					.find( ".ui-toolbar-back-button" )
+					.addClass( "ui-button ui-button-" + o.backBtnTheme );
 			}
 			if ( o.backBtnText !== undefined ) {
-				this.element.find( ".ui-toolbar-back-btn .ui-btn-text" ).text( o.backBtnText );
+				this.element.find( ".ui-toolbar-back-button .ui-button-text" ).text( o.backBtnText );
 			}
 			if ( o.theme !== undefined ) {
 				var currentTheme = this.options.theme ? this.options.theme : "inherit",
@@ -78,7 +78,7 @@ define( [
 				}
 			}
 			this._addHeadingClasses();
-			this._btnMarkup();
+			this._buttonMarkup();
 		},
 
 		//we only want this to run on non fixed toolbars so make it easy to override
@@ -87,31 +87,31 @@ define( [
 		},
 
 		// Deprecated in 1.4. As from 1.5 button classes have to be present in the markup.
-		_btnMarkup: function() {
+		_buttonMarkup: function() {
 			this.element
 				.children( "a" )
 				.filter( ":not([data-" + $.mobile.ns + "role='none'])" )
 				.attr( "data-" + $.mobile.ns + "role", "button" );
 			this.element.trigger( "create" );
 		},
-		// Deprecated in 1.4. As from 1.5 ui-btn-left/right classes have to be present in the markup.
+		// Deprecated in 1.4. As from 1.5 ui-button-left/right classes have to be present in the markup.
 		_addHeaderButtonClasses: function() {
 			var headerAnchors = this.element.children( "a, button" );
 
 			// Do not mistake a back button for a left toolbar button
-			this.leftbtn = headerAnchors.hasClass( "ui-btn-left" ) &&
-				!headerAnchors.hasClass( "ui-toolbar-back-btn" );
+			this.leftbutton = headerAnchors.hasClass( "ui-button-left" ) &&
+				!headerAnchors.hasClass( "ui-toolbar-back-button" );
 
-			this.rightbtn = headerAnchors.hasClass( "ui-btn-right" );
+			this.rightbutton = headerAnchors.hasClass( "ui-button-right" );
 
 			// Filter out right buttons and back buttons
-			this.leftbtn = this.leftbtn ||
+			this.leftbutton = this.leftbutton ||
 				headerAnchors.eq( 0 )
-					.not( ".ui-btn-right,.ui-toolbar-back-btn" )
-					.addClass( "ui-btn-left" )
+					.not( ".ui-button-right,.ui-toolbar-back-button" )
+					.addClass( "ui-button-left" )
 					.length;
 
-			this.rightbtn = this.rightbtn || headerAnchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+			this.rightbutton = this.rightbutton || headerAnchors.eq( 1 ).addClass( "ui-button-right" ).length;
 		},
 		_updateBackButton: function() {
 			var backButton,
@@ -141,15 +141,15 @@ define( [
 							$.mobile.navigate.history.activeIndex > 0 ) ) &&
 
 					// The toolbar does not have a left button
-					!this.leftbtn ) {
+					!this.leftbutton ) {
 
 				// Skip back button creation if one is already present
 				if ( !backButton.attached ) {
 					this.backButton = backButton.element = ( backButton.element ||
 						$( "<a role='button' href='#' " +
-							"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
-								( theme ? "ui-btn-" + theme + " " : "" ) +
-								"ui-toolbar-back-btn ui-icon-carat-l ui-btn-icon-left' " +
+							"class='ui-button ui-corner-all ui-shadow ui-button-left " +
+								( theme ? "ui-button-" + theme + " " : "" ) +
+								"ui-toolbar-back-button ui-icon-carat-l ui-icon-beginning' " +
 							"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText +
 							"</a>" ) )
 							.prependTo( this.element );
@@ -181,7 +181,7 @@ define( [
 
 			if ( this.role === "header" ) {
 				this.element.children( "a, button" )
-					.removeClass( "ui-btn-left ui-btn-right ui-btn ui-shadow ui-corner-all" );
+					.removeClass( "ui-button-left ui-button-right ui-button ui-shadow ui-corner-all" );
 				if ( this.backButton) {
 					this.backButton.remove();
 				}
