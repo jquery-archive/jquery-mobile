@@ -182,7 +182,7 @@ module.exports = function( grunt ) {
 				"* http://jquerymobile.com",
 				"*",
 				"* Copyright 2010, " + copyrightYear + " jQuery Foundation, Inc. and other" +
-				"contributors",
+				" contributors",
 				"* Released under the MIT license.",
 				"* http://jquery.org/license",
 				"*",
