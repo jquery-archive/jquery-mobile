@@ -175,7 +175,7 @@
 			ok( $popup.length, "dialog added" );
 			ok( $popup.is( ".ui-popup-hidden" ) , "dialog hidden");
 			ok($('#column-table-test #movie-table-column-popup-popup').find( "input[type=checkbox]" ).length > 0 , "Checkboxes added");
-			deepEqual( $( "#column-table-test #movie-table-column-popup-popup" ).find( "input[type=checkbox]:nth(2)" ).prev().text(),
+			deepEqual( $( "#column-table-test #movie-table-column-popup-popup" ).find( "input[type=checkbox]:nth(2)" ).parent().text(),
 				"Rotten Tomato Rating",
 				"The presence of an <abbr> tag with title attribute in the <th> causes the value of the attribute to be used for the checkbox label" );
 
