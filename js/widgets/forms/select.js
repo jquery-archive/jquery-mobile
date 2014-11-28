@@ -76,7 +76,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 			classes += " ui-mini";
 		}
 
-		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
+		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'></div>" );
 		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
 		this.buttonId = this.selectId + "-button";
 		this.label = $( "label[for='"+ this.selectId +"']" );
