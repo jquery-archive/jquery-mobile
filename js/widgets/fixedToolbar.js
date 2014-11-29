@@ -35,8 +35,8 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 		_create: function() {
 			this._super();
-			this.pagecontainer = $( ":mobile-pagecontainer" );
 			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
+				this.pagecontainer = this.element.closest( ":mobile-pagecontainer" );
 				this._makeFixed();
 			}
 		},
