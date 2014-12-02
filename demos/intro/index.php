@@ -36,7 +36,7 @@
 
 		<p>A <a href="../pages/">page</a> in jQuery Mobile consists of an element with a <code> data-role="page"</code> attribute. Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with <code>data-role="header"</code>, <code>class="ui-content"</code>, and <code>data-role="footer"</code>. The baseline requirement for a page is only the page wrapper to support the navigation system, the rest is optional.</p>
 
-		<p>A page can be styled as a <a href="../pages-dialog/">dialog</a> that makes the page look like it's a modal style overlay. To give a standard page the appearance of a modal dialog, add the <strong>data-rel="dialog"</strong> attribute to the link. Transitions can also be set on dialog links.</p>
+		<p>A page can be styled as a <a href="../pages-dialog/">dialog</a> that makes the page look like it's a modal style overlay. To give a standard page the appearance of a modal dialog, add the <strong>data-dialog="true"</strong> attribute to the page. Transitions can also be set on dialog links.</p>
 
 		<h2>Ajax Navigation & Transitions</h2>
 
@@ -45,8 +45,15 @@
 		<p>Whenever a link is clicked or a form is submitted, that event is automatically intercepted by the Ajax nav system and is used to issue an Ajax request based on the <code>href</code> or form action instead of reloading the page. While the framework waits for the Ajax response, a loader overlay is displayed.</p>
 
 		<p>When the requested page loads, jQuery Mobile parses the document for an element with the <code> data-role="page"</code> attribute and inserts that code into the DOM of the original page. Next, any widgets in the incoming page are enhanced to apply all the styles and behavior. The rest of the incoming page is discarded so any scripts, stylesheets or other information will not be included. The framework will also note the title of the incoming page to update the title when the new page is transitioned into view.</p>
+		<p><strong>Note:</strong> Since jQuery Mobile can combine multiple HTML documents into a single document by loading documents via Ajax, you must take care to avoid duplicate IDs on elements across <strong>all</strong> HTML documents accessible from your application.</p>
 
 		<p>Now that the requested page is in the DOM and enhanced, it is animated into view with a <a href="../transitions/" data-ajax="false">transition</a>. By default, the framework applies a <strong>fade</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link. </p>
+		<p>After the animation completes, the old page is removed from the DOM, unless</p>
+		<ul>
+			<li>it is the starting page.</li>
+			<li>it has the option <code>domCache</code> set to true. You can set this option by adding the following attribute to the page element: <code>data-dom-cache="true"</code>.</li>
+			<li>it is an internal page. That is, it is a second jQuery Mobile page defined inside the initial HTML document.</li>
+		</ul>
 
 		<h2>Content & Widgets</h2>
 
