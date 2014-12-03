@@ -362,4 +362,35 @@
 		]);
 	});
 
+	test( "Default not prevented on keystroke following 'Enter'", function() {
+		var event,
+			input = $( "#test-keyboard-flag-reset-input" );
+
+		event = $.Event( "keydown" );
+		event.keyCode = $.ui.keyCode.ENTER;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), true, "'Enter' keydown default prevented" );
+
+		event = $.Event( "keypress" );
+		event.keyCode = $.ui.keyCode.ENTER;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), true,
+			"'Enter' keypress following 'Enter' keydown default prevented" );
+
+		event = $.Event( "keydown" );
+		event.keyCode = $.ui.keyCode.ENTER;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), true, "'Enter' keydown default prevented again" );
+
+		event = $.Event( "keydown" );
+		event.keyCode = 85;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), false, "'u' keydown default not prevented" );
+
+		event = $.Event( "keypress" );
+		event.keyCode = 85;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), false, "'u' keypress default not prevented" );
+	});
+
 })(jQuery);
