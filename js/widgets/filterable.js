@@ -154,7 +154,7 @@ $.widget( "mobile.filterable", {
 		}
 
 		if ( search ) {
-			this._off( search, "keyup change input" );
+			this._off( search, "keyup keydown keypress change input" );
 			search = null;
 		}
 
@@ -177,6 +177,7 @@ $.widget( "mobile.filterable", {
 
 	// Prevent form submission
 	_onKeyDown: function( event ) {
+		this._preventKeyPress = false;
 		if ( event.keyCode === $.ui.keyCode.ENTER ) {
 			event.preventDefault();
 			this._preventKeyPress = true;
