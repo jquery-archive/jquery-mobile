@@ -154,7 +154,7 @@ $.widget( "mobile.filterable", {
 		}
 
 		if ( search ) {
-			this._off( search, "keyup change input" );
+			this._off( search, "keyup keydown keypress change input" );
 			search = null;
 		}
 
