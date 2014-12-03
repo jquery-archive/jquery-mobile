@@ -393,4 +393,21 @@
 		deepEqual( event.isDefaultPrevented(), false, "'u' keypress default not prevented" );
 	});
 
+	test( "All event handlers are removed from input", function() {
+		deepEqual( $._data( $( "#test-handler-removal-input" )[ 0 ] ), {},
+			"Private data for input is initially empty" );
+
+		$( "#test-handler-removal-list" )
+			.filterable( "option", "input", "#test-handler-removal-input" );
+
+		notDeepEqual( $._data( $( "#test-handler-removal-input" )[ 0 ] ), {},
+			"Private data for input not empty after setting as filterable input" );
+
+		$( "#test-handler-removal-list" )
+			.filterable( "option", "input", false );
+
+		deepEqual( $._data( $( "#test-handler-removal-input" )[ 0 ] ), {},
+			"Private data for input is empty again after unsetting as filterable input" );
+	});
+
 })(jQuery);
