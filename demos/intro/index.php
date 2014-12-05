@@ -52,7 +52,7 @@
 		<ul>
 			<li>it is the starting page.</li>
 			<li>it has the option <code>domCache</code> set to true. You can set this option by adding the following attribute to the page element: <code>data-dom-cache="true"</code>.</li>
-			<li>it is an internal page. That is, it is a second jQuery Mobile page defined inside the initial HTML document.</li>
+			<li>it is an internal page. The initial HTML document can contain any number of jQuery Mobile pages. The first one of these is shown when the HTML document is loaded. All these pages are considered "internal" and are never removed from the DOM.</li>
 		</ul>
 
 		<h2>Content & Widgets</h2>
