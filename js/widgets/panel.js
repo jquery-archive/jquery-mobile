@@ -240,19 +240,12 @@ $.widget( "mobile.panel", {
 	},
 
 	_bindSwipeEvents: function() {
-		var area = this._modal ? this.element.add( this._modal ) : this.element;
+		var handler = {};
 
 		// Close the panel on swipe if the swipe event's default is not prevented
 		if ( this.options.swipeClose ) {
-			if ( this.options.position === "left" ) {
-				this._on( area, {
-					swipeleft: "_handleSwipe"
-				});
-			} else {
-				this._on( area, {
-					swiperight: "_handleSwipe"
-				});
-			}
+			handler[ "swipe" + this.options.position ] = "_handleSwipe";
+			this._on( ( this._modal ? this.element.add( this._modal ) : this.element ), handler );
 		}
 	},
 
