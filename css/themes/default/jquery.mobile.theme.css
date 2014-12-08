@@ -24,7 +24,7 @@ legend,
 }
 /* Form labels (overrides font-weight bold in bars, and mini font-size) */
 .ui-mobile label,
-div.ui-controlgroup-label {
+.ui-mobile legend {
 	font-weight: normal;
 	font-size: 16px;
 }
@@ -98,6 +98,33 @@ label.ui-button {
 	-webkit-border-radius: 				.3125em /*{global-radii-buttons}*/;
 	border-radius: 						.3125em /*{global-radii-buttons}*/;
 }
+
+/* Controlgroups */
+.ui-button.ui-corner-top {
+	-webkit-border-top-left-radius:        .3125em /*{global-radii-buttons}*/;
+	border-top-left-radius:                .3125em /*{global-radii-buttons}*/;
+	-webkit-border-top-right-radius:       .3125em /*{global-radii-buttons}*/;
+	border-top-right-radius:               .3125em /*{global-radii-buttons}*/;
+}
+.ui-button.ui-corner-right {
+	-webkit-border-top-right-radius:       .3125em /*{global-radii-buttons}*/;
+	border-top-right-radius:               .3125em /*{global-radii-buttons}*/;
+	-webkit-border-bottom-right-radius:    .3125em /*{global-radii-buttons}*/;
+	border-bottom-right-radius:            .3125em /*{global-radii-buttons}*/;
+}
+.ui-button.ui-corner-bottom {
+	-webkit-border-bottom-right-radius:    .3125em /*{global-radii-buttons}*/;
+	border-bottom-right-radius:            .3125em /*{global-radii-buttons}*/;
+	-webkit-border-bottom-left-radius:     .3125em /*{global-radii-buttons}*/;
+	border-bottom-left-radius:             .3125em /*{global-radii-buttons}*/;
+}
+.ui-button.ui-corner-left {
+	-webkit-border-bottom-left-radius:     .3125em /*{global-radii-buttons}*/;
+	border-bottom-left-radius:             .3125em /*{global-radii-buttons}*/;
+	-webkit-border-top-left-radius:        .3125em /*{global-radii-buttons}*/;
+	border-top-left-radius:                .3125em /*{global-radii-buttons}*/;
+}
+
 /* Icon-only buttons */
 .ui-button-icon-only.ui-button-corner-all,
 .ui-button-icon-only.ui-corner-all {

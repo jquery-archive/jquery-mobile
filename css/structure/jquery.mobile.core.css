@@ -410,7 +410,7 @@ input.ui-button-icon-only,
 
 /* Form labels */
 .ui-mobile label,
-.ui-controlgroup-label {
+.ui-mobile legend {
 	display: block;
 	margin: 0 0 .4em;
 }
@@ -420,7 +420,8 @@ input.ui-button-icon-only,
 .ui-hide-label > label,
 .ui-hide-label .ui-controlgroup-label,
 .ui-hide-label .ui-rangeslider label,
-.ui-hidden-accessible {
+.ui-hidden-accessible,
+.ui-helper-hidden-accessible {
 	position: absolute !important;
 	height: 1px;
 	width: 1px;
