@@ -655,6 +655,7 @@ define( [
 			// users can bind to .done on the promise
 			if ( content.length && !settings.reload ) {
 				this._enhance( content, settings.role );
+				content.page( "bindRemove" );
 				deferred.resolve( absUrl, settings, content );
 
 				//if we are reloading the content make sure we update
