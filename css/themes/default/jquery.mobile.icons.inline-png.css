@@ -59,8 +59,8 @@
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAG5JREFUOMtjYKA2+P//vz4Ik6PpDRTrkaoJBghrBilA0wQDr3Fqhmp6jaT4PRQja9YlRpMJEJsC8QesmkEMbJqQDEXX/AqsGUicx6UJj+ZzIEEVIH6KSxOSZjOo5scgPTBBVSA2JiKqzOCahg4AAODRFgCi4LIMAAAAAElFTkSuQmCC");
 }
 .ui-icon-check,
-/* Used ui-checkbox-on twice to increase specificity. If active state has background-image for gradient this rule overrides. */
-html .ui-button.ui-checkbox-on.ui-checkbox-on {
+/* High specificity to override possible background-image (gradients) of active state */
+.ui-button.ui-checkboxradio-label.ui-checkboxradio-checked .ui-checkboxradio-icon.ui-icon-check {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAE5JREFUOMu10DEKACEQQ1GPHl2QxUvHZsURQRJhfzfFKzIp/R1JkISLMmdQUeEebtAKvw053I+KRuUGncLpYxoS9kgfrDYK+LVRwM1GTh2KeDEWoG7NGwAAAABJRU5ErkJggg==");
 }
 .ui-icon-clock {
@@ -234,8 +234,10 @@ html .ui-button.ui-checkbox-on.ui-checkbox-on {
 }
 .ui-alt-icon.ui-icon-check,
 .ui-alt-icon .ui-icon-check,
-html .ui-alt-icon.ui-button.ui-checkbox-on,
-html .ui-alt-icon .ui-button.ui-checkbox-on {
+/* High specificity to override possible background-image (gradients) of active state */
+.ui-alt-icon .ui-button.ui-checkboxradio-label.ui-checkboxradio-checked .ui-checkboxradio-icon.ui-icon-check,
+.ui-alt-icon.ui-button.ui-checkboxradio-label.ui-checkboxradio-checked .ui-checkboxradio-icon.ui-icon-check,
+.ui-button.ui-checkboxradio-label.ui-checkboxradio-checked .ui-alt-icon.ui-checkboxradio-icon.ui-icon-check {
 	background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAEtJREFUOMtjYKADaIBikkAjEP+HYqI1NyFpIlozNk0YGhugToKBZmI1wSSayNGEDzfgCzGiNRHyD1Eh2EaOJhjoIEcTDHSRo4loAAAMpkH3I7j13AAAAABJRU5ErkJggg==");
 }
 .ui-alt-icon.ui-icon-clock,
