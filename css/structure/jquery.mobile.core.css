@@ -295,6 +295,9 @@ div.ui-mobile-viewport {
 .ui-icon-bottom {
 	padding-bottom: 2.5em;
 }
+.ui-controlgroup-horizontal .ui-checkboxradio-label {
+	padding: .7em 1em;
+}
 .ui-header .ui-icon-top,
 .ui-footer .ui-icon-top,
 .ui-header .ui-icon-bottom,
@@ -302,6 +305,7 @@ div.ui-mobile-viewport {
 	padding-left: .3125em;
 	padding-right: .3125em;
 }
+
 .ui-icon {
 	position: absolute;
 	display: inline-block;
@@ -350,6 +354,7 @@ div.ui-mobile-viewport {
 	top: auto;
 	bottom: .5625em;
 }
+
 /* Buttons in header position classes */
 .ui-header .ui-button-left,
 .ui-header .ui-button-right,
