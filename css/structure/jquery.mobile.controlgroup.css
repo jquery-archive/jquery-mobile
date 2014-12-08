@@ -1,128 +1,88 @@
-.ui-controlgroup,
-fieldset.ui-controlgroup {
-	padding: 0;
-	margin: .5em 0;
+.ui-controlgroup {
+    margin: .5em 0;
 }
+
 .ui-field-contain .ui-controlgroup,
-.ui-field-contain fieldset.ui-controlgroup {
-	margin: 0;
+.ui-controlgroup .ui-button {
+    margin: 0;
 }
-.ui-mini .ui-controlgroup-label {
-	font-size: 16px;
+
+.ui-controlgroup li {
+	list-style: none;
 }
+
+.ui-controlgroup-horizontal:before,
+.ui-controlgroup-horizontal:after {
+	content: "";
+	display: table;
+}
+.ui-controlgroup-horizontal:after {
+	clear: both;
+}
+
+.ui-controlgroup-horizontal > .ui-button,
+.ui-controlgroup-horizontal > li > .ui-button {
+	float: left;
+	clear: none;
+    width: auto;
+}
+
+.ui-controlgroup-vertical > .ui-button,
+.ui-controlgroup-vertical > li > .ui-button {
+    display: block;
+    box-sizing: border-box;
+}
+
+.ui-controlgroup .ui-button-icon-only {
+	height: auto;
+	padding: .7em 1em;
+}
+
+.ui-controlgroup-horizontal .ui-button-icon-only,
+.ui-controlgroup-horizontal button.ui-button-icon-only {
+	width: 1.5em;
+}
+
+.ui-controlgroup-vertical .ui-button-icon-only,
+.ui-controlgroup-vertical button.ui-button-icon-only {
+	width: 100%;
+}
+
 .ui-controlgroup.ui-mini .ui-button-icon-only,
 .ui-controlgroup .ui-mini.ui-button-icon-only {
 	font-size: inherit;
 }
-.ui-controlgroup-controls .ui-button,
-.ui-controlgroup-controls .ui-checkbox,
-.ui-controlgroup-controls .ui-radio,
-.ui-controlgroup-controls .ui-select {
-	margin: 0;
+
+.ui-controlgroup-horizontal > .ui-button,
+.ui-controlgroup-horizontal > li > .ui-button {
+	border-left-width: 0;
 }
-.ui-controlgroup-controls .ui-button:focus,
-.ui-controlgroup-controls .ui-button.ui-focus {
+
+.ui-controlgroup-horizontal > .ui-corner-left,
+.ui-controlgroup-horizontal > li > .ui-corner-left {
+	border-left-width: 1px;
+}
+
+.ui-controlgroup-vertical > .ui-button,
+.ui-controlgroup-vertical > li > .ui-button {
+	border-top-width: 0;
+}
+
+.ui-controlgroup-vertical > .ui-corner-top,
+.ui-controlgroup-vertical > li > .ui-corner-top {
+	border-top-width: 1px;
+}
+
+.ui-controlgroup > .ui-button:focus,
+.ui-controlgroup > .ui-button.ui-focus,
+.ui-controlgroup > li > .ui-button:focus,
+.ui-controlgroup > li > .ui-button.ui-focus {
 	z-index: 1;
 }
-.ui-controlgroup-controls li {
-	list-style: none;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls {
-	display: inline-block;
-	vertical-align: middle;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls:before,
-.ui-controlgroup-horizontal .ui-controlgroup-controls:after {
-	content: "";
-	display: table;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls:after {
-	clear: both;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls > .ui-button,
-.ui-controlgroup-horizontal .ui-controlgroup-controls li > .ui-button,
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-checkbox,
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-radio,
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-select {
-	float: left;
-	clear: none;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button,
-.ui-controlgroup-controls .ui-button-icon-only {
-	width: auto;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-button-icon-only,
-.ui-controlgroup-horizontal .ui-controlgroup-controls button.ui-button-icon-only {
-	width: 1.5em;
-}
- .ui-controlgroup-controls .ui-button-icon-only {
-	height: auto;
-	padding: .7em 1em;
-}
-.ui-controlgroup-vertical .ui-controlgroup-controls .ui-button {
-	border-bottom-width: 0;
-}
-.ui-controlgroup-vertical .ui-controlgroup-controls .ui-button.ui-last-child {
-	border-bottom-width: 1px;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-button {
-	border-right-width: 0;
-}
-.ui-controlgroup-horizontal .ui-controlgroup-controls .ui-button.ui-last-child {
-	border-right-width: 1px;
-}
-.ui-controlgroup-controls .ui-button-corner-all,
-.ui-controlgroup-controls .ui-button.ui-corner-all {
-	-webkit-border-radius: 0;
-	border-radius: 0;
-}
-.ui-controlgroup-controls,
-.ui-controlgroup-controls .ui-radio,
-.ui-controlgroup-controls .ui-checkbox,
-.ui-controlgroup-controls .ui-select,
-.ui-controlgroup-controls li {
-	-webkit-border-radius: inherit;
-	border-radius: inherit;
-}
-.ui-controlgroup-vertical .ui-button.ui-first-child {
-	-webkit-border-top-left-radius: inherit;
-	border-top-left-radius: inherit;
-	-webkit-border-top-right-radius: inherit;
-	border-top-right-radius: inherit;
-}
-.ui-controlgroup-vertical .ui-button.ui-last-child {
-	-webkit-border-bottom-left-radius: inherit;
-	border-bottom-left-radius: inherit;
-	-webkit-border-bottom-right-radius: inherit;
-	border-bottom-right-radius: inherit;
-}
-.ui-controlgroup-horizontal .ui-button.ui-first-child {
-	-webkit-border-top-left-radius: inherit;
-	border-top-left-radius: inherit;
-	-webkit-border-bottom-left-radius: inherit;
-	border-bottom-left-radius: inherit;
-}
-.ui-controlgroup-horizontal .ui-button.ui-last-child {
-	-webkit-border-top-right-radius: inherit;
-	border-top-right-radius: inherit;
-	-webkit-border-bottom-right-radius: inherit;
-	border-bottom-right-radius: inherit;
-}
-.ui-controlgroup-controls a.ui-shadow:not(:focus),
-.ui-controlgroup-controls button.ui-shadow:not(:focus),
-.ui-controlgroup-controls div.ui-shadow:not(.ui-focus) {
+
+.ui-controlgroup > .ui-shadow:not(:focus),
+.ui-controlgroup > .ui-shadow:not(.ui-focus) {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
 	box-shadow: none;
-}
-/* Fixes legend not wrapping on IE10 */
-.ui-controlgroup-label legend {
-	max-width: 100%;
-}
-.ui-controlgroup-controls > label {
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
-	clip: rect(1px,1px,1px,1px);
 }
