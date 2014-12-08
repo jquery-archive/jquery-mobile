@@ -59,8 +59,8 @@
 	background-image: url("images/icons-png/carat-u-white.png");
 }
 .ui-icon-check,
-/* Used ui-checkbox-on twice to increase specificity. If active state has background-image for gradient this rule overrides. */
-html .ui-button.ui-checkbox-on.ui-checkbox-on {
+/* High specificity to override possible background-image (gradients) of active state */
+.ui-button.ui-checkboxradio-label.ui-checkboxradio-checked .ui-checkboxradio-icon.ui-icon-check {
 	background-image: url("images/icons-png/check-white.png");
 }
 .ui-icon-clock {
@@ -234,8 +234,10 @@ html .ui-button.ui-checkbox-on.ui-checkbox-on {
 }
 .ui-alt-icon.ui-icon-check,
 .ui-alt-icon .ui-icon-check,
-html .ui-alt-icon.ui-button.ui-checkbox-on,
-html .ui-alt-icon .ui-button.ui-checkbox-on {
+/* High specificity to override possible background-image (gradients) of active state */
+.ui-alt-icon .ui-button.ui-checkboxradio-label.ui-checkboxradio-checked .ui-checkboxradio-icon.ui-icon-check,
+.ui-alt-icon.ui-button.ui-checkboxradio-label.ui-checkboxradio-checked .ui-checkboxradio-icon.ui-icon-check,
+.ui-button.ui-checkboxradio-label.ui-checkboxradio-checked .ui-alt-icon.ui-checkboxradio-icon.ui-icon-check {
 	background-image: url("images/icons-png/check-black.png");
 }
 .ui-alt-icon.ui-icon-clock,
