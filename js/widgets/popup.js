@@ -26,6 +26,23 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+function pointInRectangle( x, y, windowCoordinates ) {
+	return ( x >= windowCoordinates.x && x <= windowCoordinates.x + windowCoordinates.cx &&
+		y >= windowCoordinates.y && y <= windowCoordinates.y + windowCoordinates.cy );
+}
+
+function isOutOfSight( element, windowCoordinates ) {
+	var offset = element.offset(),
+		width = element.outerWidth( true ),
+		height = element.outerHeight( true );
+
+	return !(
+		pointInRectangle( offset.left, offset.top, windowCoordinates ) ||
+		pointInRectangle( offset.left + width, offset.top, windowCoordinates ) ||
+		pointInRectangle( offset.left + width, offset.top + height, windowCoordinates ) ||
+		pointInRectangle( offset.left, offset.top + height, windowCoordinates ) );
+}
+
 function fitSegmentInsideSegment( windowSize, segmentSize, offset, desired ) {
 	var returnValue = desired;
 
@@ -267,8 +284,10 @@ $.widget( "mobile.popup", {
 
 	_handleWindowResize: function(/* theEvent */) {
 		if ( this._isOpen && this._ignoreResizeTo === 0 ) {
-			if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
+			if ( isOutOfSight( this._ui.container, getWindowCoordinates( this.window ) ) &&
+				( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
 				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
+
 				// effectively rapid-close the popup while leaving the screen intact
 				this._ui.container
 					.addClass( "ui-popup-hidden ui-popup-truncate" )
