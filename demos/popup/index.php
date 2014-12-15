@@ -231,7 +231,7 @@
 			</div>
 		</div><!--/demo-html -->
 
-		<h2>Position</h2>
+		<h2 id="position-header">Position</h2>
 		<p>By default, popups open centered vertically and horizontally over the element you clicked (the origin) which is good for popups used as tooltips or menus. If a popup should appear centered within the window instead of over the origin, add the <code>data-position-to</code> attribute to the <strong>link</strong> and specify a value of <code>window</code>. It's also possible to specify any valid selector as the value of <code>position-to</code> in addition to <code>origin</code> and <code>window</code>.</p>
 
 		<div data-demo-html="true">
