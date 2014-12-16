@@ -379,6 +379,10 @@ $.widget( "mobile.panel", {
 	close: function( immediate ) {
 		if ( this._open ) {
 			var self = this,
+
+				// Record what the page is the moment the process of closing begins, because it
+				// may change by the time the process completes
+				currentPage = self._page(),
 				o = this.options,
 
 				_closePanel = function() {
@@ -405,13 +409,14 @@ $.widget( "mobile.panel", {
 				},
 				complete = function() {
 					if ( o.theme && o.display !== "overlay" ) {
-						self._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
+						currentPage.parent().removeClass( o.classes.pageContainer + "-themed " +
+							o.classes.pageContainer + "-" + o.theme );
 					}
 
 					self.element.addClass( o.classes.panelClosed );
 
 					if ( o.display !== "overlay" ) {
-						self._page().parent().removeClass( o.classes.pageContainer );
+						currentPage.parent().removeClass( o.classes.pageContainer );
 						self._wrapper.removeClass( o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
 					}
@@ -425,7 +430,7 @@ $.widget( "mobile.panel", {
 					self._unbindFixListener();
 					$.mobile.resetActivePageHeight();
 
-					self._page().jqmRemoveData( "panel" );
+					currentPage.jqmRemoveData( "panel" );
 
 					self._trigger( "close" );
 
