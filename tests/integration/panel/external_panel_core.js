@@ -2,10 +2,11 @@ var panel = $( "#wrapper-test-panel" ).panel();
 
 asyncTest( "External panel updates wrapper correctly", function() {
 	var otherPageChildren,
+		thisPage = $( "#start-page" ),
 		otherPage = $( "#other-page" ),
 		otherPageLink = $( "#go-to-other-page" );
 
-	expect( 5 );
+	expect( 7 );
 
 	$.testHelper.detailedEventCascade([
 		function() {
@@ -16,6 +17,8 @@ asyncTest( "External panel updates wrapper correctly", function() {
 		},
 		function( result ) {
 			deepEqual( result.panelopen.timedOut, false, "Panel did open" );
+			deepEqual( thisPage.data( $.mobile.ns + "panel" ), "open",
+				"Data at key 'panel' on opening page present" );
 			otherPageLink.click();
 		},
 		{
@@ -33,6 +36,8 @@ asyncTest( "External panel updates wrapper correctly", function() {
 			deepEqual( otherPageChildren.length, 1, "Other page has exactly one child" );
 			deepEqual( otherPageChildren.hasClass( "ui-panel-wrapper" ), true,
 				"Other page child has class 'ui-panel-wrapper'" );
+			deepEqual( thisPage.data( $.mobile.ns + "panel" ), undefined,
+				"Data at key 'panel' on opening page absent" );
 			$.mobile.back();
 		},
 		{
