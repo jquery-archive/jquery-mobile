@@ -16,6 +16,7 @@ $files = array(
 	'vmouse.js',
 	'events/touch.js',
 	'events/swipe.js',
+	'events/tap.js',
 	'events/throttledresize.js',
 	'events/orientationchange.js',
 	'../external/jquery-ui/jquery.ui.core.js',

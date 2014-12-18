@@ -8,6 +8,7 @@ define( [
 	"./events/navigate",
 	"./events/touch",
 	"./events/swipe",
+	"./events/tap",
 	"./events/orientationchange" ], function() {
 });
 //>>excludeEnd("jqmBuildExclude");
