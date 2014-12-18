@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Touch events including: touchstart, touchmove, touchend, tap, taphold, scrollstart, scrollstop
+//>>description: Touch and scroll events including: touchstart, touchmove, touchend, scrollstart, scrollstop
 //>>label: Touch
 //>>group: Events
 

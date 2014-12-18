@@ -9,7 +9,7 @@ define( [ "jquery",
 		  "../core",
 
 		  // TODO event.special.scrollstart
-		  "../events/touch",
+		  "../events/scroll",
 		  "../animationComplete",
 
 		  // TODO $.mobile.focusPage reference

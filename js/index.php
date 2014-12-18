@@ -14,7 +14,7 @@ $files = array(
 	'support/orientation.js',
 	'support.js',
 	'vmouse.js',
-	'events/touch.js',
+	'events/scroll.js',
 	'events/swipe.js',
 	'events/tap.js',
 	'events/throttledresize.js',

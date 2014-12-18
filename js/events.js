@@ -6,7 +6,7 @@
 define( [
 	"jquery",
 	"./events/navigate",
-	"./events/touch",
+	"./events/scroll",
 	"./events/swipe",
 	"./events/tap",
 	"./events/orientationchange" ], function() {
