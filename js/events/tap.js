@@ -3,7 +3,7 @@
 //>>label: Tap
 //>>group: Events
 
-define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
+define( [ "jquery", "../vmouse" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {
