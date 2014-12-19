@@ -3,6 +3,13 @@
 //>>label: Events
 //>>group: Events
 
-define( [ "jquery", "./events/navigate", "./events/touch", "./events/orientationchange" ], function() {
+define( [
+	"jquery",
+	"./events/navigate",
+	"./events/touch.shortcuts",
+	"./events/scroll",
+	"./events/swipe",
+	"./events/tap",
+	"./events/orientationchange" ], function() {
 });
 //>>excludeEnd("jqmBuildExclude");
