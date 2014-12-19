@@ -1,6 +1,6 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Touch and scroll events including: touchstart, touchmove, touchend, scrollstart, scrollstop
-//>>label: Touch
+//>>description: Scroll events including: scrollstart, scrollstop
+//>>label: Scroll
 //>>group: Events
 
 define( [ "jquery", "../vmouse" ], function( jQuery ) {
@@ -10,8 +10,7 @@ define( [ "jquery", "../vmouse" ], function( jQuery ) {
 	var scrollEvent = "touchmove scroll";
 
 	// setup new event shortcuts
-	$.each( [ "touchstart", "touchmove", "touchend",
-		"scrollstart", "scrollstop" ], function( i, name ) {
+	$.each( [ "scrollstart", "scrollstop" ], function( i, name ) {
 
 		$.fn[ name ] = function( fn ) {
 			return fn ? this.bind( name, fn ) : this.trigger( name );

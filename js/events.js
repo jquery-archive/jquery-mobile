@@ -6,6 +6,7 @@
 define( [
 	"jquery",
 	"./events/navigate",
+	"./events/touch.shortcuts",
 	"./events/scroll",
 	"./events/swipe",
 	"./events/tap",
