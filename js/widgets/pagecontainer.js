@@ -11,7 +11,7 @@ define( [
 	"../navigation/history",
 	"../navigation/navigator",
 	"../navigation/method",
-	"../events",
+	"../events/scroll",
 	"../support",
 	"../widgets/page",
 	"../transitions/handlers" ], function( jQuery ) {
