@@ -10,7 +10,6 @@ define( [
 	"./navigation/history",
 	"./navigation/navigator",
 	"./navigation/method",
-	"./events",
 	"./support",
 	"./animationComplete",
 	"./widgets/pagecontainer",

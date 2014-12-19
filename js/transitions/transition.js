@@ -5,15 +5,16 @@
 //>>css.structure: ../css/structure/jquery.mobile.transition.css, ../css/structure/jquery.mobile.transition.fade.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery",
-		  "../core",
+define( [
+	"jquery",
+	"../core",
 
-		  // TODO event.special.scrollstart
-		  "../events/touch",
-		  "../animationComplete",
+	// TODO event.special.scrollstart
+	"../events/scroll",
+	"../animationComplete",
 
-		  // TODO $.mobile.focusPage reference
-		  "../navigation" ], function( jQuery ) {
+	// TODO $.mobile.focusPage reference
+	"../navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {
