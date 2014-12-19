@@ -26,17 +26,6 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 		}
 	});
 
-	function triggerCustomEvent( obj, eventType, event, bubble ) {
-		var originalType = event.type;
-		event.type = eventType;
-		if ( bubble ) {
-			$.event.trigger( event, undefined, obj );
-		} else {
-			$.event.dispatch.call( obj, event );
-		}
-		event.type = originalType;
-	}
-
 	// Also handles swipeleft, swiperight
 	$.event.special.swipe = {
 
@@ -107,8 +96,18 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 				Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
 				var direction = start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight";
 
-				triggerCustomEvent( thisObject, "swipe", $.Event( "swipe", { target: origTarget, swipestart: start, swipestop: stop }), true );
-				triggerCustomEvent( thisObject, direction,$.Event( direction, { target: origTarget, swipestart: start, swipestop: stop } ), true );
+				$.event.trigger( $.Event( "swipe", {
+						target: origTarget,
+						swipestart: start,
+						swipestop: stop
+					}), undefined, thisObject );
+
+				$.event.trigger( $.Event( direction, {
+						target: origTarget,
+						swipestart: start,
+						swipestop: stop
+					}), undefined, thisObject );
+
 				return true;
 			}
 			return false;

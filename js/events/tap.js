@@ -22,17 +22,6 @@ define( [ "jquery", "../vmouse" ], function( jQuery ) {
 		}
 	});
 
-	function triggerCustomEvent( obj, eventType, event, bubble ) {
-		var originalType = event.type;
-		event.type = eventType;
-		if ( bubble ) {
-			$.event.trigger( event, undefined, obj );
-		} else {
-			$.event.dispatch.call( obj, event );
-		}
-		event.type = originalType;
-	}
-
 	// also handles taphold
 	$.event.special.tap = {
 		tapholdThreshold: 750,
@@ -64,12 +53,18 @@ define( [ "jquery", "../vmouse" ], function( jQuery ) {
 				}
 
 				function clickHandler( event ) {
+					var originalEventType;
+
 					clearTapHandlers();
 
 					// ONLY trigger a 'tap' event if the start target is
 					// the same as the stop target.
 					if ( !isTaphold && origTarget === event.target ) {
-						triggerCustomEvent( thisObject, "tap", event );
+						originalEventType = event.type;
+						event.type = "tap";
+						$.event.dispatch.call( thisObject, event );
+						event.type = originalEventType;
+
 					} else if ( isTaphold ) {
 						event.preventDefault();
 					}
@@ -83,7 +78,8 @@ define( [ "jquery", "../vmouse" ], function( jQuery ) {
 					if ( !$.event.special.tap.emitTapOnTaphold ) {
 						isTaphold = true;
 					}
-					triggerCustomEvent( thisObject, "taphold", $.Event( "taphold", { target: origTarget } ) );
+
+					$.event.dispatch.call( thisObject, $.Event( "taphold", { target: origTarget } ) );
 				}, $.event.special.tap.tapholdThreshold );
 			});
 		},

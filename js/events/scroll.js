@@ -22,17 +22,6 @@ define( [ "jquery", "../vmouse" ], function( jQuery ) {
 		}
 	});
 
-	function triggerCustomEvent( obj, eventType, event, bubble ) {
-		var originalType = event.type;
-		event.type = eventType;
-		if ( bubble ) {
-			$.event.trigger( event, undefined, obj );
-		} else {
-			$.event.dispatch.call( obj, event );
-		}
-		event.type = originalType;
-	}
-
 	// also handles scrollstop
 	$.event.special.scrollstart = {
 
@@ -45,8 +34,13 @@ define( [ "jquery", "../vmouse" ], function( jQuery ) {
 				timer;
 
 			function trigger( event, state ) {
+				var originalType = event.type;
+
 				scrolling = state;
-				triggerCustomEvent( thisObject, scrolling ? "scrollstart" : "scrollstop", event );
+
+				event.type = scrolling ? "scrollstart" : "scrollstop";
+				$.event.dispatch.call( thisObject, event );
+				event.type = originalType;
 			}
 
 			// iPhone triggers scroll after a small delay; use touchmove instead
