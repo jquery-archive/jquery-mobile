@@ -112,7 +112,7 @@ function makeButton() {
 		a = document.createElement( "a" ),
 		txt = document.createTextNode( "View Source" );
 
-	a.className = "jqm-view-source-link ui-btn ui-corner-all ui-btn-inline ui-mini";
+	a.className = "jqm-view-source-link ui-button ui-corner-all ui-button-inline ui-mini";
 
 	a.setAttribute( "href", "#popupDemo" );
 	a.setAttribute( "data-rel", "popup" );

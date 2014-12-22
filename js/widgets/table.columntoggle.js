@@ -9,7 +9,7 @@ define( [
 	"./table",
 	"./popup",
 	"./controlgroup",
-	"./forms/checkboxradio" ], function( jQuery ) {
+	"../jquery-ui/checkboxradio" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -21,7 +21,7 @@ $.widget( "mobile.table", $.mobile.table, {
 		columnBtnText: "Columns...",
 		classes: $.extend( $.mobile.table.prototype.options.classes, {
 			popup: "ui-table-columntoggle-popup",
-			columnBtn: "ui-table-columntoggle-btn",
+			columnBtn: "ui-table-columntoggle-button",
 			priorityPrefix: "ui-table-priority-",
 			columnToggleTable: "ui-table-columntoggle"
 		})
@@ -142,8 +142,8 @@ $.widget( "mobile.table", $.mobile.table, {
 
 		id = this._id() + "-popup";
 		menuButton = $( "<a href='#" + id + "' " +
-			"class='" + opts.classes.columnBtn + " ui-btn " +
-			"ui-btn-" + ( opts.columnBtnTheme || "a" ) +
+			"class='" + opts.classes.columnBtn + " ui-button " +
+			"ui-button-" + ( opts.columnBtnTheme || "a" ) +
 			" ui-corner-all ui-shadow ui-mini' " +
 			"data-" + ns + "rel='popup'>" + opts.columnBtnText + "</a>" );
 		popup = $( "<div class='" + opts.classes.popup + "' id='" + id + "'></div>" );

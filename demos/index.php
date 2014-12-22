@@ -18,8 +18,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><img src="_assets/img/jquery-logo.png" alt="jQuery Mobile"></h2>
 		<p>Version <span class="jqm-version"></span></p>
-		<a href="#" class="jqm-navmenu-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-bars ui-nodisc-icon ui-alt-icon ui-btn-left">Menu</a>
-		<a href="#" class="jqm-search-link ui-btn ui-btn-icon-notext ui-corner-all ui-icon-search ui-nodisc-icon ui-alt-icon ui-btn-right">Search</a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -48,7 +48,7 @@
         			<h3>CSS Framework</h3>
 
         			<p><a href="theme-default/" data-ajax="false">Theming</a></p>
-        			<p><a href="button-markup/" data-ajax="false">Buttons</a></p>
+                    <p><a href="button/" data-ajax="false">Buttons</a></p>
         			<p><a href="icons/" data-ajax="false">Icons</a></p>
         			<p><a href="grids/" data-ajax="false">Grids</a></p>
         			<p><a href="../body-bar-classes/" data-ajax="false">Body and bar classes</a></p>
@@ -70,12 +70,12 @@
         		<div class="jqm-block-content">
         			<h3>Form widgets</h3>
 
+                    <p><a href="button/" data-ajax="false">Button</a></p>
+                    <p><a href="controlgroup/" data-ajax="false">Controlgroup</a></p>
         			<p><a href="checkboxradio-checkbox/" data-ajax="false">Checkboxes</a>, <a href="checkboxradio-radio/" data-ajax="false">Radio buttons</a></p>
         			<p><a href="selectmenu/" data-ajax="false">Selectmenu</a>, <a href="selectmenu-custom/" data-ajax="false">Custom menu</a></p>
         			<p><a href="flipswitch/" data-ajax="false">Flipswitch</a></p>
         			<p><a href="slider/" data-ajax="false">Slider</a>, <a href="rangeslider/" data-ajax="false">Rangeslider</a></p>
-        			<p><a href="button/" data-ajax="false">Input button</a></p>
-        			<p><a href="controlgroup/" data-ajax="false">Controlgroup</a></p>
         		</div>
         	</div>
         </div>

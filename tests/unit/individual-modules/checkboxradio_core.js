@@ -4,8 +4,8 @@ test( "Checkboxradio widget works correctly", function() {
 
 	deepEqual( checkbox.parent().hasClass( "ui-checkbox" ), true,
 		"Wrapper has class ui-checkbox" );
-	deepEqual( checkbox.siblings( "label" ).hasClass( "ui-btn" ), true,
-		"Input has a sibling <label> with class ui-btn" );
+	deepEqual( checkbox.siblings( "label" ).hasClass( "ui-button" ), true,
+		"Input has a sibling <label> with class ui-button" );
 
 	checkbox.siblings( "label" ).click();
 
