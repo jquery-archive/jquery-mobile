@@ -69,10 +69,7 @@ $.widget( "mobile.panel", {
 		this._bindCloseEvents();
 		this._bindLinkListeners();
 		this._bindPageEvents();
-
-		if ( !!this.options.dismissible ) {
-			this._createModal();
-		}
+		this._createModal();
 
 		this._bindSwipeEvents();
 	},
@@ -93,7 +90,10 @@ $.widget( "mobile.panel", {
 
 		self._modal = $( "<div class='" + self.options.classes.modal + "'></div>" )
 			.on( "mousedown", function() {
-				self.close();
+				if ( self.options.dismissible )
+				{
+					self.close();
+				}
 			})
 			.appendTo( target );
 	},
