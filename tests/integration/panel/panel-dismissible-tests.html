@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>jQuery Mobile Panel Test Suite</title>
+
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/requirejs.config.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
+	<script src="../../../tests/jquery.testHelper.js"></script>
+
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
+	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
+	<link rel="stylesheet" href="../../jqm-tests.css"/>
+	<script src="../../../external/qunit/qunit.js"></script>
+	<script>
+		$.testHelper.asyncLoad([
+			[
+				"widgets/panel",
+				"widgets/page"
+			],
+			[ "init" ],
+			[
+				"panel_dismissible_core.js"
+			]
+		]);
+	</script>
+
+	<script src="../../swarminject.js"></script>
+</head>
+<body class="ui-body-b">
+	<div id="qunit"></div>
+
+	<div data-nstest-role="page">
+		<div data-nstest-role="panel" id="reveal-initially-dismissible" data-nstest-display="reveal" data-nstest-dismissible="true">
+			<a href="#" id="reveal-close-initially-dismissible" data-nstest-rel="close">Close panel</a>
+			<p>Reveal panel - initially dismissible</p>
+		</div>
+		<div data-nstest-role="panel" id="reveal-initially-not-dismissible" data-nstest-display="reveal" data-nstest-dismissible="false">
+			<a href="#" id="reveal-close-initially-not-dismissible" data-nstest-rel="close">Close panel</a>
+			<p>Reveal panel - initially not dismissible</p>
+		</div>
+		<div data-nstest-role="panel" id="push-initially-dismissible" data-nstest-display="push" data-nstest-dismissible="true">
+			<a href="#" id="push-close-initially-dismissible" data-nstest-rel="close">Close panel</a>
+			<p>Push panel - initially dismissible</p>
+		</div>
+		<div data-nstest-role="panel" id="push-initially-not-dismissible" data-nstest-display="push" data-nstest-dismissible="false">
+			<a href="#" id="push-close-initially-not-dismissible" data-nstest-rel="close">Close panel</a>
+			<p>Push panel - initially not dismissible</p>
+		</div>
+		<div data-nstest-role="panel" id="overlay-initially-dismissible" data-nstest-display="overlay" data-nstest-dismissible="true">
+			<a href="#" id="overlay-close-initially-dismissible" data-nstest-rel="close">Close panel</a>
+			<p>Overlay panel - initially dismissible</p>
+		</div>
+		<div data-nstest-role="panel" id="overlay-initially-not-dismissible" data-nstest-display="overlay" data-nstest-dismissible="false">
+			<a href="#" id="overlay-close-initially-not-dismissible" data-nstest-rel="close">Close panel</a>
+			<p>Overlay panel - initially not dismissible</p>
+		</div>
+		<div class="ui-content">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac ante faucibus, imperdiet nisi vel, commodo augue. Ut rhoncus at turpis ac blandit. Vivamus maximus eu dui sit amet luctus. Donec malesuada urna sit amet mi congue aliquet. Proin semper, nisi et accumsan suscipit, diam urna aliquet orci, ultricies faucibus elit tellus ac eros. Curabitur placerat tincidunt justo, vitae tincidunt turpis vulputate eu. In semper, elit in euismod pretium, nibh eros facilisis urna, nec dignissim ligula felis tempor lectus. Pellentesque mollis, risus a tristique ullamcorper, leo lectus imperdiet nisl, sollicitudin rutrum leo velit et nisi. Fusce hendrerit nulla eu leo suscipit sollicitudin. Vivamus aliquam, magna quis rhoncus pulvinar, purus turpis bibendum leo, hendrerit viverra lacus nulla a magna. Nullam vitae nisl a libero tincidunt consequat.</p>
+			<p>Fusce vitae tincidunt sapien, non posuere mauris. Sed maximus ut tortor in imperdiet. Nulla at feugiat nisl, eget lobortis quam. Aenean gravida, turpis eget suscipit finibus, risus elit pellentesque lectus, ut iaculis mauris urna id neque. Ut eu erat interdum, gravida nunc in, posuere erat. Duis interdum, dui a rutrum consequat, turpis mauris posuere libero, et bibendum neque justo in massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc eget felis ut tellus suscipit consequat at a nunc. Pellentesque semper sed turpis nec bibendum. Mauris in ex vulputate, rhoncus nisl eu, malesuada ligula. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vitae dapibus ex. Donec vel nibh sit amet odio iaculis dignissim.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fringilla nibh mattis, commodo odio sit amet, malesuada nibh. Proin volutpat vehicula faucibus. Suspendisse rhoncus arcu leo, et hendrerit felis aliquam ac. Nam fermentum dolor ornare justo aliquet, ullamcorper dignissim ligula sollicitudin. Cras pulvinar orci nec purus sollicitudin, eu pretium turpis egestas. Integer cursus porttitor tellus, eget sodales justo sollicitudin ut. Maecenas condimentum et diam ac egestas. Nunc faucibus faucibus elit eu aliquet. Mauris ut urna dapibus, placerat dui nec, tristique dolor. Pellentesque dapibus elit et maximus auctor. Cras et tincidunt felis.</p>
+			<p>Duis nec consequat quam, eu ornare libero. In hendrerit purus non gravida fermentum. Sed maximus arcu eros, at porta arcu commodo quis. Duis id placerat enim. Aliquam erat volutpat. Quisque aliquam porttitor feugiat. Fusce mauris lacus, luctus ut est nec, suscipit vehicula nibh.</p>
+			<p>Maecenas et blandit ante, id dignissim erat. Proin sem dolor, auctor semper auctor ac, blandit imperdiet nulla. Nunc posuere consequat molestie. Fusce erat neque, cursus a imperdiet at, lacinia eget ipsum. Donec pharetra mi magna, vel imperdiet ante placerat et. In a massa enim. Nam sed sapien varius mi euismod condimentum id vitae tellus. Vivamus eu felis quis est blandit congue nec vitae lacus. Cras dapibus metus id facilisis vulputate. Proin imperdiet id mauris in vestibulum. Nulla vitae neque placerat, dictum sapien sit amet, pharetra justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam porttitor urna et dolor venenatis interdum. Suspendisse vitae turpis pellentesque turpis auctor ornare in ut ipsum.</p>
+			<p>Vestibulum vitae pretium libero, vitae tempor risus. Fusce eleifend dui dictum varius tincidunt. Curabitur ornare, nunc id elementum hendrerit, justo orci fermentum felis, imperdiet mattis eros nisl sit amet libero. Nullam a arcu porttitor, posuere mi eget, interdum ipsum. Nullam rhoncus mi enim, dignissim convallis felis blandit nec. Donec sed sollicitudin augue. Donec venenatis diam erat, at feugiat enim dapibus nec.</p>
+			<p>Vivamus lobortis, purus a gravida scelerisque, risus libero sagittis nisi, nec lacinia risus nisi ut felis. Nam pellentesque enim in fringilla consectetur. Morbi sed congue nibh. Interdum et malesuada fames ac ante ipsum primis in faucibus. In non orci dapibus, pulvinar ligula ac, pellentesque ex. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam ut ornare felis. Etiam molestie egestas semper. Quisque luctus mollis quam vitae scelerisque. Donec nulla sem, iaculis id pellentesque in, faucibus ac turpis.</p>
+			<p>Sed ultricies et nunc mollis iaculis. Integer ut diam quis odio eleifend fringilla luctus a nibh. Donec ut enim vel risus viverra tempor. Donec a dolor odio. Aenean nec sagittis sem. Donec vel turpis sed nulla tincidunt sollicitudin. Fusce et velit nec metus faucibus commodo euismod sit amet neque. Etiam justo justo, tempor in condimentum nec, fringilla in nisi. Quisque consectetur ipsum in lacinia egestas. Pellentesque feugiat gravida tortor sit amet pellentesque. Cras ac auctor ex. Aliquam auctor mi ut elit porta dapibus. In quis justo ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed leo velit, fermentum feugiat iaculis non, ornare et velit. Donec porttitor, odio id scelerisque posuere, ipsum velit commodo mi, et efficitur sem enim ac odio.</p>
+			<p>Nulla vel erat nisl. Donec et condimentum tortor. Nulla lorem tortor, luctus vel dui eget, vestibulum efficitur lacus. Phasellus metus nisl, imperdiet in augue ut, gravida dictum ex. Nulla porttitor est leo, vitae feugiat quam pellentesque commodo. Etiam vulputate malesuada eleifend. Vivamus et magna est.</p>
+			<p>Fusce vitae luctus ligula. Aenean lacinia ligula urna, in sagittis nisi dictum placerat. Proin at enim iaculis, dignissim odio sit amet, gravida purus. Fusce varius blandit accumsan. Cras vulputate imperdiet ligula, non sodales quam dictum quis. Cras sed ullamcorper eros. Donec tempus mollis urna ut efficitur. Maecenas volutpat nisl vitae nulla ornare commodo non vitae neque. Vivamus diam erat, varius ut pharetra a, feugiat ut lorem. Integer aliquet, neque quis feugiat elementum, est odio pulvinar diam, eget malesuada felis tellus eu mi. Integer risus libero, fermentum ac ante eu, egestas malesuada augue. Pellentesque porta posuere augue, ornare commodo odio sollicitudin id. Pellentesque quis est nunc. Proin pretium fringilla commodo.</p>
+			<p>Suspendisse sodales pulvinar enim, vitae condimentum diam maximus nec. Nullam sollicitudin a ligula non ornare. Suspendisse faucibus felis fermentum pulvinar facilisis. Vestibulum eu est ac orci interdum pulvinar. Duis vel ipsum eget ex viverra egestas et quis nunc. Sed ac ipsum sed massa elementum varius at nec neque. Phasellus at ex sapien. Quisque fringilla risus ac elementum ultrices. Fusce eu elementum ligula. Morbi ornare rutrum magna. Quisque porta leo non porta varius. Sed pretium pretium nibh ac tincidunt. Suspendisse venenatis tortor ligula, et blandit ipsum semper in. Suspendisse non velit leo. Vestibulum volutpat aliquam sapien id tempus. Etiam eu ligula sed diam congue ullamcorper.</p>
+			<p>Sed lobortis, magna sit amet faucibus egestas, sapien tortor pharetra erat, a bibendum enim augue ac sem. Quisque ut ultrices nibh. Nam convallis dolor in erat consequat, vitae pellentesque eros consequat. Maecenas id interdum justo. Cras massa libero, pulvinar sed posuere quis, elementum id massa. Vivamus et mauris in dolor sollicitudin consectetur at at nulla. Nulla ut posuere metus. Nunc in nunc id leo pharetra tempor. Aenean pharetra quis dui quis suscipit. Maecenas vitae commodo ex. Phasellus luctus orci eget odio hendrerit aliquet. </p>
+		</div>
+	</div>
+
+</body>
