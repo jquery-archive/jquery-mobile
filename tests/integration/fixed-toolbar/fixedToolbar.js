@@ -74,7 +74,7 @@
 			},
 
 			function() {
-				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar has the ui-fixed-hidden class applied after hide');
+				ok( $( '#classes-test-g' ).hasClass('ui-toolbar-fixed-hidden'), 'The toolbar has the ui-toolbar-fixed-hidden class applied after hide');
 				$( '#classes-test-g' ).toolbar( "show" );
 
 			},
@@ -107,7 +107,7 @@
 			},
 
 			function() {
-				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class applied after show');
+				ok( !$( '#classes-test-g' ).hasClass('ui-toolbar-fixed-hidden'), 'The toolbar does not have the ui-toolbar-fixed-hidden class applied after show');
 
 			},
 
@@ -132,7 +132,7 @@
 			},
 
 			function() {
-				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class');
+				ok( !$( '#classes-test-g' ).hasClass('ui-toolbar-fixed-hidden'), 'The toolbar does not have the ui-toolbar-fixed-hidden class');
 			},
 
 			function() {
@@ -140,7 +140,7 @@
 			},
 
 			function() {
-				ok( $( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does have the ui-fixed-hidden class');
+				ok( $( '#classes-test-g' ).hasClass('ui-toolbar-fixed-hidden'), 'The toolbar does have the ui-toolbar-fixed-hidden class');
 			},
 
 			function() {
@@ -148,7 +148,7 @@
 			},
 
 			function() {
-				ok( !$( '#classes-test-g' ).hasClass('ui-fixed-hidden'), 'The toolbar does not have the ui-fixed-hidden class');
+				ok( !$( '#classes-test-g' ).hasClass('ui-toolbar-fixed-hidden'), 'The toolbar does not have the ui-toolbar-fixed-hidden class');
 
 			},
 
@@ -186,8 +186,8 @@
 
 		$( "#persist-test-b, #persist-test-a" ).page();
 
-		var nextpageheader =  $( "#persist-test-b .ui-header-fixed" ),
-			nextpagefooter =  $( "#persist-test-b .ui-footer-fixed" );
+		var nextpageheader =  $( "#persist-test-b .ui-toolbar-header-fixed" ),
+			nextpagefooter =  $( "#persist-test-b .ui-toolbar-footer-fixed" );
 
 
 		$.testHelper.pageSequence([
@@ -220,7 +220,7 @@
 
 		$( "#persist-test-c, #persist-test-d" ).page();
 
-		var nextpageheader =  $( "#persist-test-d .ui-header-fixed" );
+		var nextpageheader =  $( "#persist-test-d .ui-toolbar-header-fixed" );
 
 		$.testHelper.pageSequence([
 			function(){
@@ -252,7 +252,7 @@
 
 		$( "#persist-test-e, #persist-test-f" ).page();
 
-		var nextpagefooter =  $( "#persist-test-f .ui-footer-fixed" );
+		var nextpagefooter =  $( "#persist-test-f .ui-toolbar-footer-fixed" );
 
 		$.testHelper.pageSequence([
 			function(){
@@ -285,15 +285,15 @@
 			},
 
 			function() {
-				var $footer = $.mobile.activePage.find( ".ui-footer" ),
-					$header = $.mobile.activePage.find( ".ui-header" ),
+				var $footer = $.mobile.activePage.find( ".ui-toolbar-footer" ),
+					$header = $.mobile.activePage.find( ".ui-toolbar-header" ),
 					hiddenStr = visible ? "hidden" : "visible";
 
 				equal( $footer.length, 1, "there should be one footer" );
 				equal( $header.length, 1, "there should be one header" );
 
-				equal( !$footer.hasClass( "ui-fixed-hidden" ), visible, "the footer should be " + hiddenStr );
-				equal( !$header.hasClass( "ui-fixed-hidden" ), visible, "the header should be " + hiddenStr );
+				equal( !$footer.hasClass( "ui-toolbar-fixed-hidden" ), visible, "the footer should be " + hiddenStr );
+				equal( !$header.hasClass( "ui-toolbar-fixed-hidden" ), visible, "the header should be " + hiddenStr );
 
 				$.mobile.changePage( "#default" );
 			},
