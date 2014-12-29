@@ -216,22 +216,12 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 	SyntaxHighlighter.defaults['auto-links'] = false;
 });
 
-$( document ).on( "pagecreate", function( e ) {
-	// prevent page scroll while scrolling source code
-	$( document ).on( "mousewheel", ".jqm-view-source .ui-collapsible-content", function( event, delta ) {
-		if ( delta > 0 && $( this ).scrollTop() === 0 ) {
-			event.preventDefault();
-		} else if ( delta < 0 &&  $( this ).scrollTop() === $( this ).get( 0 ).scrollHeight - $( this ).innerHeight() ) {
-			event.preventDefault();
-		}
-	});
-
+$( document )
 	// reposition when switching between html / js / css
-	$( e.target ).delegate( ".jqm-view-source .ui-collapsible", "expand", function() {
+	.on( "collapsibleexpand", ".jqm-view-source .ui-collapsible", function() {
 		$( this ).parents( ":mobile-popup" ).popup( "reposition", { positionTo: "window" } );
-	});
-
-	$( e.target ).delegate( ".jqm-view-source", "popupbeforeposition", function() {
+	})
+	.on( "popupbeforeposition", ".jqm-view-source", function() {
 		// max height: screen height - tolerance (2*30px) - 42px for each collapsible heading
 		var x = $( this ).find( ".ui-collapsible" ).length,
 			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
@@ -251,8 +241,17 @@ $( document ).on( "pagecreate", function( e ) {
 				$( line ).height( height );
 			}
 		});
+	})
+	.on( "pagecreate", function( e ) {
+		// prevent page scroll while scrolling source code
+		$( document ).on( "mousewheel", ".jqm-view-source .ui-collapsible-content", function( event, delta ) {
+			if ( delta > 0 && $( this ).scrollTop() === 0 ) {
+				event.preventDefault();
+			} else if ( delta < 0 &&  $( this ).scrollTop() === $( this ).get( 0 ).scrollHeight - $( this ).innerHeight() ) {
+				event.preventDefault();
+			}
+		});
 	});
-});
 
 /**
  * SyntaxHighlighter
