@@ -1,10 +1,10 @@
 <?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest' || isset( $_GET['source'])) { ?>
 <!DOCTYPE html>
 <html>
-<!-- This is an example of a page equipped to handle the startup of an application. It contains
-     a <head> section common to all pages of the application, and its body contains the markup
-	 for all widgets that will be shared across pages. The body for each page of the application
-	 contains such markup. -->
+<!-- This is an example of an HTML document equipped to handle the startup of an application. It
+     contains a <head> section common to all documents of the application, and its body contains
+     the markup for all widgets that will be shared across pages. The body for each document of the
+     application contains such markup. -->
 <head>
 
 	<!-- The various documents reachable from within your navigation system must all have the
@@ -42,9 +42,9 @@
 		</ul>
 	</div>
     <div id="shared-header" data-role="header" data-position="fixed" data-theme="a">
-		<!-- Shared header markup must be added to all documents of the demo to ensure any of them
-		     can serve as the start page. The server can be instructed to omit sending this portion
-			 of the data whenever the request for the document is made via Ajax. -->
+		<!-- Shared header markup must be added to all documents of the application to ensure any
+             of them can serve as the start page. The server can be instructed to omit sending
+             this portion of the data whenever the request for the document is made via Ajax. -->
 		<a href="../toolbar/" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 		<a href="#shared-panel" data-rel="panel" class="ui-btn ui-btn-right ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-right ui-icon-navigation">Navigation</a>
 		<div data-role="popup" id="nav-menu" data-theme="a">
@@ -78,9 +78,9 @@
 
 <?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest' || isset( $_GET['source'])) { ?>
 	<div id="shared-navbar" data-role="footer" data-position="fixed" data-theme="a">
-		<!-- Shared navbar markup must be added to all pages of the demo to ensure any of them can
-		     serve as the start page. The server can be instructed to omit sending this portion of
-			 the data whenever the request for the document is made via Ajax. -->
+		<!-- Shared navbar markup must be added to all documents of the application to ensure any
+             of them can serve as the start page. The server can be instructed to omit sending
+             this portion of the data whenever the request for the document is made via Ajax. -->
 		<div data-role="navbar">
 			<ul>
 				<li><a href="info.php" data-prefetch="true" data-transition="none">Info</a></li>
