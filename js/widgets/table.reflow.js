@@ -59,22 +59,18 @@ $.widget( "mobile.table", $.mobile.table, {
 				contents = $( this ).clone().contents(),
 				iteration, filter;
 
-				if ( contents.length > 0  ) {
+				if ( hierarchyClass ) {
+					iteration = parseInt( this.getAttribute( "colspan" ), 10 );
+					filter = "";
 
-					if ( hierarchyClass ) {
-						iteration = parseInt( this.getAttribute( "colspan" ), 10 );
-						filter = "";
-
-						if ( iteration ) {
-							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
-						}
-
-						table._addLabels( cells.filter( filter ),
-							opts.classes.cellLabels + hierarchyClass, contents );
-					} else {
-						table._addLabels( cells, opts.classes.cellLabels, contents );
+					if ( iteration ) {
+						filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
 					}
 
+					table._addLabels( cells.filter( filter ),
+						opts.classes.cellLabels + hierarchyClass, contents );
+				} else {
+					table._addLabels( cells, opts.classes.cellLabels, contents );
 				}
 		});
 	},
