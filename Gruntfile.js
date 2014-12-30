@@ -10,65 +10,6 @@ module.exports = function( grunt ) {
 				.replace( /\.\.\/css/, "css" )
 				.replace( /jquery\.mobile\.css/, processedName + ".min.css" );
 		},
-
-		// Ensure that modules specified via the --modules option are in the same
-		// order as the one in which they appear in js/jquery.mobile.js. To achieve
-		// this, we parse js/jquery.mobile.js and reconstruct the array of
-		// dependencies listed therein.
-		makeModulesList = function( modules ) {
-			var start, end, index,
-				modulesHash = {},
-				fixedModules = [],
-				jsFile = grunt.file.read( path.join( "js", "jquery.mobile.js" ) );
-
-			modules = modules.split( "," );
-
-			// This is highly dependent on the contents of js/jquery.mobile.js
-			if ( jsFile ) {
-				start = jsFile.indexOf( "[" );
-				if ( start > -1 ) {
-					start++;
-					end = jsFile.indexOf( "]" );
-					if ( start < jsFile.length &&
-						end > -1 && end < jsFile.length && end > start ) {
-
-						// Convert list of desired modules to a hash
-						for ( index = 0 ; index < modules.length ; index++ ) {
-							modulesHash[ modules[ index ] ] = true;
-						}
-
-						// Split list of modules from js/jquery.mobile.js into an array
-						jsFile = jsFile
-							.slice( start, end )
-							.match( /"[^"]*"/gm );
-
-						// Add each desired module to the fixed list of modules in the
-						// correct order
-						for ( index = 0 ; index < jsFile.length ; index++ ) {
-
-							// First we need to touch up each module from js/jquery.mobile.js
-							jsFile[ index ] = jsFile[ index ]
-								.replace( /"/g, "" )
-								.replace( /^.\//, "" );
-
-							// Then, if it's in the hash of desired modules, add it to the
-							// list containing the desired modules in the correct order
-							if ( modulesHash[ jsFile[ index ] ] ) {
-								fixedModules.push( jsFile[ index ] );
-							}
-						}
-
-						// If we've found all the desired modules, we re-create the comma-
-						// separated list and return it.
-						if ( fixedModules.length === modules.length ) {
-							modules = fixedModules;
-						}
-					}
-				}
-			}
-
-			return modules;
-		},
 		processDemos = function( content, srcPath ) {
 			var processedName, $;
 
@@ -365,9 +306,7 @@ module.exports = function( grunt ) {
 
 					mainConfigFile: "js/requirejs.config.js",
 
-					include: ( grunt.option( "modules" ) ?
-						makeModulesList( grunt.option( "modules" ) ) :
-						[ "jquery.mobile" ] ),
+					include: [ "jquery.mobile" ],
 
 					exclude: [
 						"jquery",
@@ -1072,13 +1011,15 @@ module.exports = function( grunt ) {
 	]);
 
 	grunt.registerTask( "dist", [
+		"modules",
 		"clean:dist",
 		"config:fetchHeadHash",
 		"js:release",
 		"css:release",
 		"demos",
 		"compress:dist",
-		"compress:images"
+		"compress:images",
+		"clean:tmp"
 	]);
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
 	grunt.registerTask( "dist:git", [ "dist", "clean:git", "config:copy:git:-git", "copy:git" ] );
