@@ -2,6 +2,7 @@ module.exports = function( grunt ) {
 	"use strict";
 
 	var _ = require( "underscore" ),
+		esprima = require( "esprima" ),
 		cheerio = require( "cheerio" ),
 
 		replaceCombinedCssReference = function( href, processedName ) {
@@ -16,53 +17,49 @@ module.exports = function( grunt ) {
 		// this, we parse js/jquery.mobile.js and reconstruct the array of
 		// dependencies listed therein.
 		makeModulesList = function( modules ) {
-			var start, end, index,
-				modulesHash = {},
+			var parsedFile, desiredModulesHash, listedModules, index, singleListedModule,
 				fixedModules = [],
 				jsFile = grunt.file.read( path.join( "js", "jquery.mobile.js" ) );
 
 			modules = modules.split( "," );
 
-			// This is highly dependent on the contents of js/jquery.mobile.js
+			// This is highly dependent on the contents of js/jquery.mobile.js. It assumes that all
+			// dependencies are listed flatly in the first argument of the first expression in the
+			// file.
 			if ( jsFile ) {
-				start = jsFile.indexOf( "[" );
-				if ( start > -1 ) {
-					start++;
-					end = jsFile.indexOf( "]" );
-					if ( start < jsFile.length &&
-						end > -1 && end < jsFile.length && end > start ) {
+				parsedFile = esprima.parse( jsFile, { raw: true, comment: true } );
 
-						// Convert list of desired modules to a hash
-						for ( index = 0 ; index < modules.length ; index++ ) {
-							modulesHash[ modules[ index ] ] = true;
+				// Descend into the parsed file to grab the array of deps
+				if ( parsedFile && parsedFile.body && parsedFile.body.length > 0 &&
+						parsedFile.body[ 0 ] && parsedFile.body[ 0 ].expression &&
+						parsedFile.body[ 0 ].expression.arguments &&
+						parsedFile.body[ 0 ].expression.arguments.length &&
+						parsedFile.body[ 0 ].expression.arguments.length > 0 &&
+						parsedFile.body[ 0 ].expression.arguments[ 0 ] &&
+						parsedFile.body[ 0 ].expression.arguments[ 0 ].elements &&
+						parsedFile.body[ 0 ].expression.arguments[ 0 ].elements.length > 0 ) {
+
+					listedModules = parsedFile.body[ 0 ].expression.arguments[ 0 ].elements;
+					desiredModulesHash = {};
+
+					// Convert list of desired modules to a hash
+					for ( index = 0 ; index < modules.length ; index++ ) {
+						desiredModulesHash[ modules[ index ] ] = true;
+					}
+
+					// Then, if a listed module is in the hash of desired modules, add it to the
+					// list containing the desired modules in the correct order
+					for ( index = 0 ; index < listedModules.length ; index++ ) {
+						singleListedModule = listedModules[ index ].value.replace( /^\.\//, "" );
+						if ( desiredModulesHash[ singleListedModule ] ) {
+							fixedModules.push( singleListedModule );
 						}
+					}
 
-						// Split list of modules from js/jquery.mobile.js into an array
-						jsFile = jsFile
-							.slice( start, end )
-							.match( /"[^"]*"/gm );
-
-						// Add each desired module to the fixed list of modules in the
-						// correct order
-						for ( index = 0 ; index < jsFile.length ; index++ ) {
-
-							// First we need to touch up each module from js/jquery.mobile.js
-							jsFile[ index ] = jsFile[ index ]
-								.replace( /"/g, "" )
-								.replace( /^.\//, "" );
-
-							// Then, if it's in the hash of desired modules, add it to the
-							// list containing the desired modules in the correct order
-							if ( modulesHash[ jsFile[ index ] ] ) {
-								fixedModules.push( jsFile[ index ] );
-							}
-						}
-
-						// If we've found all the desired modules, we re-create the comma-
-						// separated list and return it.
-						if ( fixedModules.length === modules.length ) {
-							modules = fixedModules;
-						}
+					// If we've found all the desired modules we can return the list of modules
+					// assembled, because that list contains the modules in the correct order.
+					if ( fixedModules.length === modules.length ) {
+						modules = fixedModules;
 					}
 				}
 			}
