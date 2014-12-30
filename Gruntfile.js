@@ -164,6 +164,11 @@ module.exports = function( grunt ) {
 				}
 				return content;
 		},
+		css = require( "css" ),
+		cssFiles = {
+			theme: { present: {}, list: [] },
+			structure: { present: {}, list: [] }
+		},
 		path = require( "path" ),
 		httpPort =  Math.floor( 9000 + Math.random()*1000 ),
 		phpPort = Math.floor( 8000 + Math.random()*1000 ),
@@ -385,7 +390,180 @@ module.exports = function( grunt ) {
 						endFile: "build/wrap.end"
 					},
 
+					// We assume that the source for the structure file is called
+					// "jquery.mobile.structure.css", that the source for the theme file is called
+					// "jquery.mobile.theme.css", and that the source for the combined
+					// theme+structure file is called "jquery.mobile.css"
+					onModuleBundleComplete: function() {
+						var cssFileContents, allFiles, structure, theme, all,
+							destinationPath = grunt.config.process( "<%= dirs.tmp %>" ),
+
+							// Traverse the tree produced by the CSS parser and update import paths
+							updateImportUrl = function( cssFilePath, cssRoot ) {
+								var index, item, match, filename;
+
+								for ( index in cssRoot ) {
+									item = cssRoot[ index ];
+
+									if ( item && item.type === "import" ) {
+
+										// NB: The regex below assumes there's no whitespace in the
+										// @import reference, i.e. url("path/to/filename");
+										match = item.import.match( /(url\()(.*)(\))$/ );
+										if ( match ) {
+
+											// Strip the quotes from around the filename
+											filename = match[ 2 ]
+												.substr( 1, match[ 2 ].length - 2 );
+
+											// Replace theme and structure with our custom
+											// reference
+											if ( path.basename( filename ) ===
+													"jquery.mobile.theme.css" ) {
+												item.import =
+													"url(\"jquery.mobile.custom.theme.css\")";
+											} else if ( path.basename( filename ) ===
+													"jquery.mobile.structure.css" ) {
+												item.import =
+													"url(\"jquery.mobile.custom.structure.css\")";
+
+											// Adjust the relative path for all other imports
+											} else {
+												item.import =
+
+													// url(
+													match[ 1 ] +
+
+													// quotation mark
+													match[ 2 ].charAt( 0 ) +
+
+													// path adjusted to be relative to the
+													// temporary directory
+													path.relative( destinationPath,
+														path.normalize( path.join( cssFilePath,
+															filename ) ) ) +
+
+													// quotation mark
+													match[ 2 ].charAt( 0 ) +
+
+													// )
+													match[ 3 ];
+											}
+										}
+									} else if ( typeof item === "object" ) {
+										updateImportUrl( cssFilePath, item );
+									}
+								}
+
+								return cssRoot;
+							};
+
+						// We do nothing unless the "modules" option is defined
+						if ( grunt.option( "modules" ) ) {
+
+							allFiles = grunt.config( "cssbuild.all.files" );
+
+							// Find the entries for the structure, the theme, and the combined
+							// theme+structure file, because we want to update them to point to our
+							// custom-built version
+							allFiles.forEach( function( singleCSSFile ) {
+								if ( path.basename( singleCSSFile.src )  ===
+										"jquery.mobile.structure.css" ) {
+									structure = singleCSSFile;
+								} else if ( path.basename( singleCSSFile.src )  ===
+										"jquery.mobile.theme.css" ) {
+									theme = singleCSSFile;
+								} else if ( path.basename( singleCSSFile.src ) ===
+										"jquery.mobile.css" ) {
+									all = singleCSSFile;
+								}
+							});
+
+							// Create temporary structure file and update the grunt config
+							// reference
+							cssFileContents = "";
+							if ( cssFiles.structure.list.length > 0 ) {
+								cssFiles.structure.list.forEach( function( file ) {
+
+									// Recalculate relative path from destination in the temporary
+									// directory
+									file = path.relative( destinationPath,
+
+										// css files are originally relative to "js/"
+										path.join( "js", file ) );
+									cssFileContents += "@import url(\"" + file + "\");\n";
+								});
+								structure.src = path.join( destinationPath,
+									"jquery.mobile.custom.structure.css" );
+								grunt.file.write( structure.src, cssFileContents,
+									{ encoding: "utf8" } );
+							}
+
+							// Create temporary theme file and update the grunt config reference
+							cssFileContents = "";
+							if ( cssFiles.theme.list.length > 0 ) {
+								cssFiles.theme.list.forEach( function( file ) {
+
+									// Recalculate relative path from destination in the temporary
+									// directory
+									file = path.relative( destinationPath,
+
+										// css files are originally relative to "js/"
+										path.join( "js", file ) );
+									cssFileContents += "@import url(\"" + file + "\");\n";
+								});
+								theme.src = path.join( destinationPath,
+									"jquery.mobile.custom.theme.css" );
+								grunt.file.write( theme.src, cssFileContents,
+									{ encoding: "utf8" } );
+							}
+
+							// Create temporary theme+structure file by replacing references to the
+							// standard theme and structure files with references to the custom
+							// theme and structure files created above, and update the grunt config
+							// reference
+							cssFileContents = css.stringify( updateImportUrl(
+								path.dirname( all.src ),
+								css.parse( grunt.file.read( all.src, { encoding: "utf8" } ) ) ) );
+							all.src = path.join( destinationPath, "jquery.mobile.custom.css" );
+							grunt.file.write( all.src, cssFileContents, { encoding: "utf8" } );
+
+							// Update grunt configuration
+							grunt.config( "cssbuild.all.files", allFiles );
+						}
+					},
+
 					onBuildWrite: function (moduleName, path, contents) {
+						var index, match, parsedFile,
+							addCSSFile = function( file ) {
+								file = file.trim();
+								if ( !cssFiles[ match[ 1 ] ].present[ file ] ) {
+									cssFiles[ match[ 1 ] ].list.push( file );
+									cssFiles[ match[ 1 ] ].present[ file ] = true;
+								}
+							};
+
+						// If the "modules" option was used, we parse the file for the special
+						// comments in order to assemble a list of structure and theme CSS files to
+						// serve as the basis for custom theme and structure files which we then
+						// feed to the optimizer
+						if ( grunt.option( "modules" ) ) {
+							parsedFile = esprima.parse( contents, { comment: true } );
+							if ( parsedFile.comments && parsedFile.comments.length > 0 ) {
+								for ( index = 0 ; index < parsedFile.comments.length ; index++ ) {
+									match = parsedFile.comments[ index ].value
+										.match( /^>>css\.(theme|structure): (.*)/ );
+
+									// Parse the special comment and add the files listed on the
+									// right hand side of the flag to the appropriate list of CSS
+									// files
+									if ( match && match.length > 2 ) {
+										match[ 2 ].split( "," ).forEach( addCSSFile );
+									}
+								}
+							}
+						}
+
 						return contents.replace(/__version__/g, grunt.config.process(
 							"\"<%= version %>\""
 						));
@@ -1075,7 +1253,8 @@ module.exports = function( grunt ) {
 		"css:release",
 		"demos",
 		"compress:dist",
-		"compress:images"
+		"compress:images",
+		"clean:tmp"
 	]);
 	grunt.registerTask( "dist:release", [ "release:init", "dist", "cdn" ] );
 	grunt.registerTask( "dist:git", [ "dist", "clean:git", "config:copy:git:-git", "copy:git" ] );
