@@ -10,12 +10,26 @@ define([
 
 (function( $, undefined ) {
 
-	// existing base tag?
-	var baseElement = $( "head" ).children( "base" ),
+	var base,
+
+		// existing base tag?
+		baseElement = $( "head" ).children( "base" ),
+
+		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 only
+		// base.dynamicBaseEnabled will be checked
+		getDynamicEnabled = function() {
+			if ( $.mobile.dynamicBaseEnabled !== undefined ) {
+				return $.mobile.dynamicBaseEnabled;
+			}
+			return base.dynamicBaseEnabled;
+		};
 
 	// base element management, defined depending on dynamic base tag support
 	// TODO move to external widget
 	base = {
+
+		// disable the alteration of the dynamic base tag or links
+		dynamicBaseEnabled: true,
 
 		// Make sure base element is defined, for use in routing asset urls that are referenced
 		// in Ajax-requested markup
@@ -33,7 +47,9 @@ define([
 
 			// we should do nothing if the user wants to manage their url base
 			// manually
-			if ( !$.mobile.dynamicBaseEnabled ) {
+			// DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 only
+			// base.dynamicBaseEnabled will be checked
+			if ( !getDynamicEnabled() ) {
 				return;
 			}
 
@@ -45,7 +61,9 @@ define([
 		// set the generated BASE element's href to a new page's base path
 		reset: function(/* href */) {
 
-			if ( !$.mobile.dynamicBaseEnabled ) {
+			// DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 only
+			// base.dynamicBaseEnabled will be checked
+			if ( !getDynamicEnabled() ) {
 				return;
 			}
 

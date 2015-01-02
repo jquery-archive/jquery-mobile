@@ -84,10 +84,6 @@ define( [ "jquery", "./ns", "json!../package.json" ], function( jQuery, ns, pkg 
 			hoverDelay: 200
 		},
 
-		// disable the alteration of the dynamic base tag or links in the case
-		// that a dynamic base tag isn't supported
-		dynamicBaseEnabled: true,
-
 		// default the property to remove dependency on assignment in init module
 		pageContainer: $(),
 
