@@ -17,10 +17,16 @@ define([
 	// TODO move to external widget
 	base = {
 
-		// define base element, for use in routing asset urls that are referenced
+		// Make sure base element is defined, for use in routing asset urls that are referenced
 		// in Ajax-requested markup
-		element: ( baseElement.length ? baseElement :
-			$( "<base>", { href: $.mobile.path.documentBase.hrefNoHash } ).prependTo( $( "head" ) ) ),
+		element: function() {
+			if ( !( baseElement && baseElement.length ) ) {
+				baseElement = $( "<base>", { href: $.mobile.path.documentBase.hrefNoSearch } )
+					.prependTo( $( "head" ) );
+			}
+
+			return baseElement;
+		},
 
 		// set the generated BASE element's href to a new page's base path
 		set: function( href ) {
@@ -32,7 +38,7 @@ define([
 			}
 
 			// we should use the base tag if we can manipulate it dynamically
-			base.element.attr( "href",
+			base.element().attr( "href",
 				$.mobile.path.makeUrlAbsolute( href, $.mobile.path.documentBase ) );
 		},
 
@@ -43,7 +49,7 @@ define([
 				return;
 			}
 
-			base.element.attr( "href", $.mobile.path.documentBase.hrefNoSearch );
+			base.element().attr( "href", $.mobile.path.documentBase.hrefNoSearch );
 		}
 	};
 
