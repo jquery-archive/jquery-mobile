@@ -76,30 +76,6 @@ function transform3dTest() {
 	return ( !!ret && ret !== "none" );
 }
 
-// Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
-function baseTagTest() {
-	var fauxBase = location.protocol + "//" + location.host + location.pathname + "ui-dir/",
-		base = $( "head base" ),
-		fauxEle = null,
-		href = "",
-		link, rebase;
-
-	if ( !base.length ) {
-		base = fauxEle = $( "<base>", { "href": fauxBase }).appendTo( "head" );
-	} else {
-		href = base.attr( "href" );
-	}
-
-	link = $( "<a href='testurl' />" ).prependTo( fakeBody );
-	rebase = link[ 0 ].href;
-	base[ 0 ].href = href || location.pathname;
-
-	if ( fauxEle ) {
-		fauxEle.remove();
-	}
-	return rebase.indexOf( fauxBase ) === 0;
-}
-
 // Thanks Modernizr
 function cssPointerEventsTest() {
 	var element = document.createElement( "x" ),
@@ -193,7 +169,6 @@ $.extend( $.support, {
 		"scrollTop" in document.documentElement ||
 		"scrollTop" in fakeBody[ 0 ]) && !webos && !operamini,
 
-	dynamicBaseTag: baseTagTest(),
 	cssPointerEvents: cssPointerEventsTest(),
 	boundingRect: boundingRect(),
 	inlineSVG: inlineSVG

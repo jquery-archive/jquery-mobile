@@ -464,10 +464,6 @@ define( [
 			}
 		},
 
-		_isRewritableBaseTag: function() {
-			return $.mobile.dynamicBaseEnabled && !$.support.dynamicBaseTag;
-		},
-
 		_createDataUrl: function( absoluteUrl ) {
 			return $.mobile.path.convertUrlToDataUrl( absoluteUrl );
 		},
@@ -550,11 +546,6 @@ define( [
 				// deferred object within the triggerData.
 				if ( this._triggerWithDeprecated( "load", triggerData ).event.isDefaultPrevented() ) {
 					return;
-				}
-
-				// rewrite src and href attrs to use a base url if the base tag won't work
-				if ( this._isRewritableBaseTag() && content ) {
-					this._getBase().rewrite( fileUrl, content );
 				}
 
 				this._include( content, settings );

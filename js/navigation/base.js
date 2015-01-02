@@ -22,8 +22,6 @@ define([
 		element: ( baseElement.length ? baseElement :
 			$( "<base>", { href: $.mobile.path.documentBase.hrefNoHash } ).prependTo( $( "head" ) ) ),
 
-		linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
-
 		// set the generated BASE element's href to a new page's base path
 		set: function( href ) {
 
@@ -34,35 +32,17 @@ define([
 			}
 
 			// we should use the base tag if we can manipulate it dynamically
-			if ( $.support.dynamicBaseTag ) {
-				base.element.attr( "href",
-					$.mobile.path.makeUrlAbsolute( href, $.mobile.path.documentBase ) );
-			}
-		},
-
-		rewrite: function( href, page ) {
-			var newPath = $.mobile.path.get( href );
-
-			page.find( base.linkSelector ).each(function( i, link ) {
-				var thisAttr = $( link ).is( "[href]" ) ? "href" :
-					$( link ).is( "[src]" ) ? "src" : "action",
-				theLocation = $.mobile.path.parseLocation(),
-				thisUrl = $( link ).attr( thisAttr );
-
-				// XXX_jblas: We need to fix this so that it removes the document
-				//            base URL, and then prepends with the new page URL.
-				// if full path exists and is same, chop it - helps IE out
-				thisUrl = thisUrl.replace( theLocation.protocol + theLocation.doubleSlash +
-					theLocation.host + theLocation.pathname, "" );
-
-				if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-					$( link ).attr( thisAttr, newPath + thisUrl );
-				}
-			});
+			base.element.attr( "href",
+				$.mobile.path.makeUrlAbsolute( href, $.mobile.path.documentBase ) );
 		},
 
 		// set the generated BASE element's href to a new page's base path
 		reset: function(/* href */) {
+
+			if ( !$.mobile.dynamicBaseEnabled ) {
+				return;
+			}
+
 			base.element.attr( "href", $.mobile.path.documentBase.hrefNoSearch );
 		}
 	};
