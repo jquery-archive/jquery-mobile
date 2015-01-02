@@ -243,25 +243,4 @@
 			ok( baseHref !== $( "base" ).attr( "href" ), "the base href value should be changed" );
 		});
 	});
-
-	asyncTest( "enabling base tag changes when a dynamic base isn't supported should alter links", function() {
-		$.mobile.dynamicBaseEnabled = true;
-		$.support.dynamicBaseTag = false;
-
-		testBaseTagAlteration(function() {
-			var linkHref = $.mobile.activePage.find( "#base-change-link" ).attr( "href" );
-
-			if ( $.support.pushState ) {
-				equal( linkHref,
-					$.mobile.path.get( location.href ) + "foo",
-					"the link's href is changed" );
-			} else {
-				// compare the pathname of the links href with the directory of the current
-				// location + foo
-				equal( $.mobile.path.parseUrl( linkHref ).pathname,
-					$.mobile.path.parseUrl( location.href ).directory + "foo",
-					"the link's href is changed" );
-			}
-		});
-	});
 })(jQuery);
