@@ -10,60 +10,69 @@ define([
 
 (function( $, undefined ) {
 
-	// existing base tag?
-	var baseElement = $( "head" ).children( "base" ),
+	var base,
+
+		// Existing base tag?
+		baseElement = $( "head" ).children( "base" ),
+
+		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 only
+		// base.dynamicBaseEnabled will be checked
+		getDynamicEnabled = function() {
+
+			// If a value has been set at the old, deprecated location, we return that value.
+			// Otherwise we return the value from the new location. We check explicitly for
+			// undefined because true and false are both valid values for dynamicBaseEnabled.
+			if ( $.mobile.dynamicBaseEnabled !== undefined ) {
+				return $.mobile.dynamicBaseEnabled;
+			}
+			return base.dynamicBaseEnabled;
+		};
 
 	// base element management, defined depending on dynamic base tag support
 	// TODO move to external widget
 	base = {
 
-		// define base element, for use in routing asset urls that are referenced
-		// in Ajax-requested markup
-		element: ( baseElement.length ? baseElement :
-			$( "<base>", { href: $.mobile.path.documentBase.hrefNoHash } ).prependTo( $( "head" ) ) ),
+		// Disable the alteration of the dynamic base tag or links
+		dynamicBaseEnabled: true,
 
-		linkSelector: "[src], link[href], a[rel='external'], :jqmData(ajax='false'), a[target]",
+		// Make sure base element is defined, for use in routing asset urls that are referenced
+		// in Ajax-requested markup
+		element: function() {
+			if ( !( baseElement && baseElement.length ) ) {
+				baseElement = $( "<base>", { href: $.mobile.path.documentBase.hrefNoSearch } )
+					.prependTo( $( "head" ) );
+			}
+
+			return baseElement;
+		},
 
 		// set the generated BASE element's href to a new page's base path
 		set: function( href ) {
 
-			// we should do nothing if the user wants to manage their url base
-			// manually
-			if ( !$.mobile.dynamicBaseEnabled ) {
+			// We should do nothing if the user wants to manage their url base manually.
+			// Note: Our method of ascertaining whether the user wants to manager their url base
+			// manually is DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 the
+			// flag base.dynamicBaseEnabled will be checked, so the function getDynamicEnabled()
+			// will be removed.
+			if ( !getDynamicEnabled() ) {
 				return;
 			}
 
 			// we should use the base tag if we can manipulate it dynamically
-			if ( $.support.dynamicBaseTag ) {
-				base.element.attr( "href",
-					$.mobile.path.makeUrlAbsolute( href, $.mobile.path.documentBase ) );
-			}
-		},
-
-		rewrite: function( href, page ) {
-			var newPath = $.mobile.path.get( href );
-
-			page.find( base.linkSelector ).each(function( i, link ) {
-				var thisAttr = $( link ).is( "[href]" ) ? "href" :
-					$( link ).is( "[src]" ) ? "src" : "action",
-				theLocation = $.mobile.path.parseLocation(),
-				thisUrl = $( link ).attr( thisAttr );
-
-				// XXX_jblas: We need to fix this so that it removes the document
-				//            base URL, and then prepends with the new page URL.
-				// if full path exists and is same, chop it - helps IE out
-				thisUrl = thisUrl.replace( theLocation.protocol + theLocation.doubleSlash +
-					theLocation.host + theLocation.pathname, "" );
-
-				if ( !/^(\w+:|#|\/)/.test( thisUrl ) ) {
-					$( link ).attr( thisAttr, newPath + thisUrl );
-				}
-			});
+			base.element().attr( "href",
+				$.mobile.path.makeUrlAbsolute( href, $.mobile.path.documentBase ) );
 		},
 
 		// set the generated BASE element's href to a new page's base path
 		reset: function(/* href */) {
-			base.element.attr( "href", $.mobile.path.documentBase.hrefNoSearch );
+
+			// DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 only
+			// base.dynamicBaseEnabled will be checked
+			if ( !getDynamicEnabled() ) {
+				return;
+			}
+
+			base.element().attr( "href", $.mobile.path.documentBase.hrefNoSearch );
 		}
 	};
 
