@@ -5,7 +5,11 @@
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./ns", "jquery-ui/jquery.ui.core" ], function( jQuery ) {
+define( [
+	"jquery",
+	"./ns",
+	"./navigation/base",
+	"jquery-ui/jquery.ui.core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -93,7 +97,7 @@ define( [ "jquery", "./ns", "jquery-ui/jquery.ui.core" ], function( jQuery ) {
 			var url = $( ele ).closest( ".ui-page" ).jqmData( "url" ),
 				base = $.mobile.path.documentBase.hrefNoHash;
 
-			if ( !$.mobile.dynamicBaseEnabled || !url || !$.mobile.path.isPath( url ) ) {
+			if ( !$.mobile.base.dynamicBaseEnabled || !url || !$.mobile.path.isPath( url ) ) {
 				url = base;
 			}
 

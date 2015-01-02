@@ -77,14 +77,6 @@ $.testHelper.excludeFileProtocol(function(){
 		};
 	};
 
-	asyncTest( "detects dynamic base tag when new base element added and base href updates", function(){
-		mockBaseCheck(location.protocol + '//' + location.host + location.pathname + "ui-dir/");
-		$.testHelper.reloadModule( moduleName ).done( function() {
-			ok($.support.dynamicBaseTag);
-			start();
-		});
-	});
-
 	asyncTest( "detects no dynamic base tag when new base element added and base href unchanged", function(){
 		mockBaseCheck('testurl');
 		$.testHelper.reloadModule( moduleName ).done( function() {
