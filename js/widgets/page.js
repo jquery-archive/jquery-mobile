@@ -46,6 +46,7 @@ $.widget( "mobile.page", {
 
 		// Deprecated in 1.4 remove in 1.5
 		contentTheme: null,
+		enhanceWithin: true,
 		enhanced: false
 	},
 
@@ -71,7 +72,9 @@ $.widget( "mobile.page", {
 			pagebeforeshow: "_handlePageBeforeShow"
 		});
 
-		this.element.enhanceWithin();
+		if ( this.options.enhanceWithin ) {
+			this.element.enhanceWithin();
+		}
 		// Dialog widget is deprecated in 1.4 remove this in 1.5
 		if ( $.mobile.getAttribute( this.element[0], "role" ) === "dialog" && $.mobile.dialog ) {
 			this.element.dialog();
