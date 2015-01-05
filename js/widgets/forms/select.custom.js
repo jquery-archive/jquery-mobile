@@ -197,17 +197,23 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		overlayThemeAttr = overlayTheme ? ( " data-" + $.mobile.ns +
 			"overlay-theme='" + overlayTheme + "'" ) : "";
 		dividerThemeAttr = ( o.dividerTheme && isMultiple ) ? ( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
-		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu' id='" + dialogId + "'" + themeAttr + overlayThemeAttr + ">" +
+		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu'" +
+			themeAttr + overlayThemeAttr + ">" +
 			"<div data-" + $.mobile.ns + "role='header'>" +
 			"<div class='ui-title'></div>"+
 			"</div>"+
 			"<div data-" + $.mobile.ns + "role='content'></div>"+
-			"</div>" );
-		listbox = $( "<div" + themeAttr + overlayThemeAttr + " id='" + popupId +
-				"' class='ui-selectmenu'></div>" )
+			"</div>" )
+			.attr( "id", dialogId );
+		listbox = $( "<div" + themeAttr + overlayThemeAttr +
+				" class='ui-selectmenu'></div>" )
+			.attr( "id", popupId )
 			.insertAfter( this.select )
 			.popup();
-		list = $( "<ul class='ui-selectmenu-list' id='" + menuId + "' role='listbox' aria-labelledby='" + this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" ).appendTo( listbox );
+		list = $( "<ul class='ui-selectmenu-list' role='listbox' aria-labelledby='" +
+				this.buttonId + "'" + themeAttr + dividerThemeAttr + "></ul>" )
+			.attr( "id", menuId )
+			.appendTo( listbox );
 		header = $( "<div class='ui-header ui-bar-" + ( o.theme ? o.theme : "inherit" ) + "'></div>" ).prependTo( listbox );
 		headerTitle = $( "<h1 class='ui-title'></h1>" ).appendTo( header );
 
