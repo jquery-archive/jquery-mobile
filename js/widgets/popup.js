@@ -655,7 +655,8 @@ $.widget( "mobile.popup", {
 		}
 		this._ignoreResizeEvents();
 		if ( id ) {
-			this.document.find( "[aria-haspopup='true'][aria-owns='" +  id + "']" ).attr( "aria-expanded", true );
+			this.document.find( "[aria-haspopup='true'][aria-owns='" +
+				$.mobile.path.hashToSelector( id ) + "']" ).attr( "aria-expanded", true );
 		}
 		this._trigger( "afteropen" );
 	},
@@ -744,7 +745,8 @@ $.widget( "mobile.popup", {
 		$( ":focus", container[ 0 ] ).add( container[ 0 ] ).blur();
 
 		if ( id ) {
-			this.document.find( "[aria-haspopup='true'][aria-owns='" +  id + "']" ).attr( "aria-expanded", false );
+			this.document.find( "[aria-haspopup='true'][aria-owns='" +
+				$.mobile.path.hashToSelector( id ) + "']" ).attr( "aria-expanded", false );
 		}
 
 		// alert users that the popup is closed
