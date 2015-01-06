@@ -101,9 +101,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 
 		this.button = this._button();
 
-		var self = this,
-
-			options = this.options,
+		var options = this.options,
 
 			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
@@ -141,14 +139,8 @@ $.widget( "mobile.selectmenu", $.extend( {
 		}
 
 		// Events on native select
-		this.select.change(function() {
-			self.refresh();
-
-			if ( !!options.nativeMenu ) {
-				self._delay( function() {
-					self.select.blur();
-				});
-			}
+		this._on( this.select, {
+			change: "refresh"
 		});
 
 		this._handleFormReset();
