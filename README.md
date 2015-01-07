@@ -4,8 +4,6 @@ jQuery Mobile is a unified, HTML5-based user interface system for all popular mo
 
 jQuery Mobile 1.4.x works with versions of jQuery core from 1.8.3 to 1.11.1 / 2.1.1. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://api.jquerymobile.com) and exploring the [demos](http://demos.jquerymobile.com/). Alternatively, more information can also be found on the [jquerymobile site](http://jquerymobile.com).
 
-jQuery Mobile 1.4.x works with versions of jQuery core from 1.8.3 to 1.11.1 / 2.1.1. You can find more information about how the library works, and what it is capable of, by reading the [documentation](http://api.jquerymobile.com) and exploring the [demos](http://demos.jquerymobile.com/).
-
 ## Contributing
 
 You can contribute to the project by reporting issues, suggesting new features, or submitting pull requests.
