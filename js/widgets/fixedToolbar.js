@@ -18,7 +18,6 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			fullscreen: false,
 			tapToggle: true,
 			tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, .ui-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
-			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
 			trackPersistentToolbars: true,
 
@@ -189,12 +188,17 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				$el = this.element;
 
 			if ( this._useTransition( notransition ) ) {
+				this._animationInProgress = "show";
 				$el
 					.removeClass( "out " + hideClass )
 					.addClass( "in" )
-					.animationComplete(function () {
-						$el.removeClass( "in" );
-					});
+					.animationComplete( $.proxy( function () {
+						if ( this._animationInProgress === "show" ) {
+							this._animationInProgress = false;
+
+							$el.removeClass( "in" );
+						}
+					}, this ) );
 			}
 			else {
 				$el.removeClass( hideClass );
@@ -209,12 +213,17 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
 			if ( this._useTransition( notransition ) ) {
+				this._animationInProgress = "hide";
 				$el
 					.addClass( outclass )
 					.removeClass( "in" )
-					.animationComplete(function() {
-						$el.addClass( hideClass ).removeClass( outclass );
-					});
+					.animationComplete( $.proxy( function() {
+						if ( this._animationInProgress === "hide" ) {
+							this._animationInProgress = false;
+
+							$el.addClass( hideClass ).removeClass( outclass );
+						}
+					}, this ) );
 			}
 			else {
 				$el.addClass( hideClass ).removeClass( outclass );
@@ -227,46 +236,18 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_bindToggleHandlers: function() {
+			this._attachToggleHandlersToPage( ( !!this.page ) ? this.page: $( ".ui-page" ) );
+		},
+
+		_attachToggleHandlersToPage: function( page ) {
 			var self = this,
-				o = self.options,
-				delayShow, delayHide,
-				isVisible = true,
-				page = ( !!this.page )? this.page: $(".ui-page");
+				o = self.options;
 
 			// tap toggle
 			page
 				.bind( "vclick", function( e ) {
 					if ( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ) {
 						self.toggle();
-					}
-				})
-				.bind( "focusin focusout", function( e ) {
-					//this hides the toolbars on a keyboard pop to give more screen room and prevent ios bug which
-					//positions fixed toolbars in the middle of the screen on pop if the input is near the top or
-					//bottom of the screen addresses issues #4410 Footer navbar moves up when clicking on a textbox in an Android environment
-					//and issue #4113 Header and footer change their position after keyboard popup - iOS
-					//and issue #4410 Footer navbar moves up when clicking on a textbox in an Android environment
-					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ) {
-						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system
-						//controls causes fixed position, tap-toggle false Header to reveal itself
-						// isVisible instead of self._visible because the focusin and focusout events fire twice at the same time
-						// Also use a delay for hiding the toolbars because on Android native browser focusin is direclty followed
-						// by a focusout when a native selects opens and the other way around when it closes.
-						if ( e.type === "focusout" && !isVisible ) {
-							isVisible = true;
-							//wait for the stack to unwind and see if we have jumped to another input
-							clearTimeout( delayHide );
-							delayShow = setTimeout( function() {
-								self.show();
-							}, 0 );
-						} else if ( e.type === "focusin" && !!isVisible ) {
-							//if we have jumped to another input clear the time out to cancel the show.
-							clearTimeout( delayShow );
-							isVisible = false;
-							delayHide = setTimeout( function() {
-								self.hide();
-							}, 0 );
-						}
 					}
 				});
 		},
