@@ -42,6 +42,7 @@ define([
 	"./links",
 	"./widgets/toolbar",
 	"./widgets/fixedToolbar",
+	"./widgets/fixedToolbar.backcompat",
 	"./widgets/fixedToolbar.workarounds",
 	"./widgets/popup",
 	"./widgets/popup.arrow",

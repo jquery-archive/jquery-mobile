@@ -77,6 +77,7 @@ $files = array(
 	'links.js',
 	'widgets/toolbar.js',
 	'widgets/fixedToolbar.js',
+	'widgets/fixedToolbar.backcompat.js',
 	'widgets/fixedToolbar.workarounds.js',
 	'widgets/panel.js',
 	'widgets/popup.js',
