@@ -11,82 +11,93 @@ define( [ "jquery", "./table" ], function( jQuery ) {
 $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		mode: "reflow",
-		classes: $.extend( $.mobile.table.prototype.options.classes, {
+		classes: $.extend( {}, $.mobile.table.prototype.options.classes, {
 			reflowTable: "ui-table-reflow",
-			cellLabels: "ui-table-cell-label"
+			cellLabels: "ui-table-cell-label",
+			cellLabelsTop: "ui-table-cell-label-top"
 		})
 	},
 
 	_create: function() {
-		this._super();
-
-		// If it's not reflow mode, return here.
-		if ( this.options.mode !== "reflow" ) {
-			return;
-		}
-
-		if ( !this.options.enhanced ) {
+		if ( this.options.mode === "reflow" && !this.options.enhanced ) {
 			this.element.addClass( this.options.classes.reflowTable );
-
-			this._updateReflow();
 		}
+
+		return this._superApply( arguments );
 	},
 
-	rebuild: function() {
-		this._super();
+	_refreshHeaderCell: function( cellIndex, element, columnCount ) {
+		element.setAttribute( "data-" + $.mobile.ns + "colstart", columnCount + 1 );
+		return this._superApply( arguments );
+	},
 
+	refresh: function() {
+		this._superApply( arguments );
 		if ( this.options.mode === "reflow" ) {
-			this._refresh( false );
+
+			// After the refresh completes, we need to iterate over the headers again, but this
+			// time in reverse order so that top-level headers are visited last. This causes <b>
+			// labels to be added in the correct order using a simple .prepend().
+			$( this.allHeaders.get().reverse() ).each( $.proxy( this, "_updateCellsFromHeader" ) );
 		}
 	},
 
-	_refresh: function( create ) {
-		this._super( create );
-		if ( !create && this.options.mode === "reflow" ) {
-			this._updateReflow( );
-		}
-	},
+	_updateCellsFromHeader: function( index, headerCell ) {
+		var iteration, cells, colstart, labelClasses,
+			header = $( headerCell ),
+			contents = header.clone().contents();
 
-	_updateReflow: function() {
-		var table = this,
-			opts = this.options;
+		if ( contents.length > 0  ) {
 
-		// get headers in reverse order so that top-level headers are appended last
-		$( table.allHeaders.get().reverse() ).each( function() {
-			var cells = $( this ).jqmData( "cells" ),
-				colstart = $.mobile.getAttribute( this, "colstart" ),
-				hierarchyClass = cells.not( this ).filter( "thead th" ).length && " ui-table-cell-label-top",
-				contents = $( this ).clone().contents(),
-				iteration, filter;
+			labelClasses = this.options.classes.cellLabels;
+			cells = header.jqmData( "cells" );
+			colstart = $.mobile.getAttribute( headerCell, "colstart" );
 
-				if ( contents.length > 0  ) {
+			if ( cells.not( headerCell ).filter( "thead th" ).length > 0 ) {
+				labelClasses = labelClasses + ( " " + this.options.classes.cellLabelsTop );
+				iteration = parseInt( headerCell.getAttribute( "colspan" ), 10 );
 
-					if ( hierarchyClass ) {
-						iteration = parseInt( this.getAttribute( "colspan" ), 10 );
-						filter = "";
-
-						if ( iteration ) {
-							filter = "td:nth-child("+ iteration +"n + " + ( colstart ) +")";
-						}
-
-						table._addLabels( cells.filter( filter ),
-							opts.classes.cellLabels + hierarchyClass, contents );
-					} else {
-						table._addLabels( cells, opts.classes.cellLabels, contents );
-					}
-
+				if ( iteration ) {
+					cells = cells.filter( "td:nth-child("+ iteration + "n + " + colstart + ")" );
 				}
-		});
+			}
+
+			this._addLabels( cells, labelClasses, contents );
+		}
 	},
 
-	_addLabels: function( cells, label, contents ) {
+	_addLabels: function( cells, labelClasses, contents ) {
 		if ( contents.length === 1 && contents[ 0 ].nodeName.toLowerCase() === "abbr" ) {
 			contents = contents.eq( 0 ).attr( "title" );
 		}
+
 		// .not fixes #6006
 		cells
-			.not( ":has(b." + label + ")" )
-				.prepend( $( "<b class='" + label + "'></b>" ).append( contents ) );
+			.not( ":has(b." + labelClasses.split( " " ).join( "." ) + ")" )
+				.prepend( $( "<b class='" + labelClasses + "'></b>" ).append( contents ) );
+	},
+
+	_destroy: function() {
+		var colstartAttr;
+
+		if ( this.options.mode === "reflow" ) {
+			colstartAttr = "data-" + $.mobile.ns + "colstart";
+
+			if ( !this.options.enhanced ) {
+				this.element
+					.children( "thead" )
+						.find( "[" + colstartAttr + "]" )
+							.removeAttr( colstartAttr )
+						.end()
+					.end()
+					.removeClass( this.options.classes.reflowTable )
+					.children( "tbody" )
+						.find( "b." + this.options.classes.cellLabels )
+							.remove();
+			}
+		}
+
+		return this._superApply( arguments );
 	}
 });
 

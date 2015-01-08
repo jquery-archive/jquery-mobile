@@ -8,206 +8,150 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
 	<script src="../../../external/qunit/qunit.js"></script>
-	<script type="text/javascript">
-		// redirects from push-state-tests.html
-		$( document ).bind( 'mobileinit', function(){
-			$.testHelper.setPushState();
-		});
-	</script>
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"widgets/table",
-				"widgets/table.reflow",
-				"widgets/table.columntoggle"
+				"widgets/table"
 			],
-			[ "init" ],
-			[ "table_core.js" ]
+			[
+				"../../jquery.setNameSpace.immediately.js"
+			],
+			[
+				"table_core.js"
+			]
 		]);
 	</script>
-
-	<link rel="stylesheet"	href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 
-	<style>
-.make-it-red {
-	color: red;
-}
-	</style>
 	<script src="../../swarminject.js"></script>
-	<script type="text/javascript">
-		// basic
-		var xcount = 0;
-		var ycount = 0;
-		$(window).on('refresh_test_table', function (e, data) {
-			var tb = $(data).find('tbody'),
-					numbers = [1,2,3,4,5,6,7,8,9],
-					chars = ["a","b","c","d","e","f","g","h","i"],
-					use = xcount % 2 === 1 ? numbers : chars,
-					newRow = '<tr><th data-test="abc">'+use[0]+'</th><td>'+use[1]+'</td><td data-test="foo">'+use[2]+'</td><td data-col="3">'+use[3]+'</td><td>'+use[4]+'</td></tr>';
-			tb.empty()
-				.append(newRow)
-				.closest('table')
-				.table('refresh');
-			xcount += 1;
-		})
-		.on('refresh_col_table', function (e, data) {
-			var tb = $(data).find('tbody'),
-				th = $(data).find('thead tr'),
-				numbers = [1,2,3,4,5,6,7,8,9],
-				chars = ["z","y","x","w","v","u","t","s","t"],
-				use = xcount % 2 === 1 ? numbers : chars,
-				newRow = '<tr><th>'+use[0]+'</th><td>'+use[1]+'</td><td data-test="foo">'+use[2]+'</td><td data-col="3">'+use[3]+'</td><td>'+use[4]+'</td><td>'+use[5]+'</td><td data-test="xyz">'+use[6]+'</td></tr>';
-			th.append('<th data-nstest-priority="3">New_A</th><th data-nstest-priority="5">New_B</th>');
-			tb.empty()
-				.append(newRow)
-				.closest('table')
-				.table('rebuild');
-			ycount += 1;
-		});
-	</script>
-
 </head>
 <body>
-
 	<div id="qunit"></div>
-
-	<!-- Basic Table test -->
-	<div data-nstest-role="page" id='basic-table-test'>
-		<div data-nstest-role="header" data-nstest-position="inline">
-			<h1>Basic Table</h1>
-		</div>
-		<div data-nstest-role="content">
-			<table data-nstest-role="table" id="movie-table">
+	<div data-nstest-role="page">
+		<div class="ui-content" role="main">
+			<table id="table-enhance-test" data-nstest-role="table" class="ui-responsive">
 				<thead>
-					<tr>
-						<th data-priority="1">Rank</th>
-						<th data-priority="persist">Movie Title</th>
-						<th data-priority="2">Year</th>
-						<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-						<th data-priority="4">Reviews</th>
+					<tr data-test-header-row data-header-rows>
+						<th data-test-header-cell data-headers data-all-headers data-nstest-priority="2">Rank</th>
+						<th data-headers data-all-headers>Movie Title</th>
+						<th data-headers data-all-headers data-nstest-priority="3">Year</th>
+						<th data-headers data-all-headers data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
+						<th data-headers data-all-headers data-nstest-priority="5">Reviews</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th>1</th>
-						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+					<tr data-all-rows-except-first>
+						<th data-test-header-expected-cells>1</th>
+						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-nstest-rel="external">Citizen Kane</a></td>
 						<td>1941</td>
 						<td>100%</td>
 						<td>74</td>
 					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div data-nstest-role="page" id='reflow-table-test'>
-		<div data-nstest-role="header" data-nstest-position="inline">
-			<h1>Basic Table</h1>
-		</div>
-		<div data-nstest-role="content">
-			<table data-nstest-role="table" data-nstest-mode="reflow" id="movie-table-reflow">
-				<thead>
-					<tr>
-						<th data-priority="1">Rank</th>
-						<th data-priority="persist">Movie <span class="make-it-red">Title</span></th>
-						<th data-priority="2">Year</th>
-						<th data-priority="3"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-						<th data-priority="4">Reviews</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>1</th>
-						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-						<td>1941</td>
-						<td>100%</td>
-						<td>74</td>
-					</tr>
-				</tbody>
-			</table>
-			<table data-nstest-role="table" data-nstest-mode="reflow" id="reflow-abbr-test">
-				<thead>
-					<tr>
-						<th><abbr title="Player Name">PN</abbr></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td id="reflow-abbr-td1">Player I</td>
-					</tr>
-					<tr>
-						<td id="reflow-abbr-td2">Player II</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-
-	<div data-nstest-role="page" id='column-table-test'>
-		<div data-nstest-role="header" data-nstest-position="inline">
-			<h1>Basic Table</h1>
-		</div>
-		<div data-nstest-role="content">
-			<table data-nstest-role="table" data-nstest-mode="columntoggle" id="toggle-column-test">
-				<thead>
-					<tr class="ui-bar-d">
-						<th data-nstest-priority="2">Rank</th>
-						<th>Movie Title</th>
-						<th data-nstest-priority="3">Year</th>
-						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-						<th data-nstest-priority="5">Reviews</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>1</th>
-						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-						<td>1941</td>
-						<td>100%</td>
-						<td>74</td>
-					</tr>
-					<tr>
-						<th>2</th>
-						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+					<tr data-all-rows-except-first>
+						<th data-test-header-expected-cells>2</th>
+						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-nstest-rel="external">Casablanca</a></td>
 						<td>1942</td>
 						<td>97%</td>
 						<td>64</td>
 					</tr>
 				</tbody>
 			</table>
-			<table data-nstest-role="table" data-nstest-mode="columntoggle" id="movie-table-column">
+			<table data-nstest-role="table" id="grouped-test-table" data-nstest-mode="reflow" class="ui-responsive">
 				<thead>
-					<tr class="ui-bar-d">
-						<th data-nstest-priority="2">Rank</th>
-						<th>Movie Title</th>
-						<th data-nstest-priority="3">Year</th>
-						<th data-nstest-priority="1"><abbr title="Rotten Tomato Rating">Rating</abbr></th>
-						<th data-nstest-priority="5">Reviews</th>
+					<tr data-header-rows>
+						<td data-headers data-all-headers></td>
+						<th data-test-header-cell data-headers data-all-headers colspan="3">Q1 2012</th>
+						<th data-headers data-all-headers class="test-column-header" colspan="3">Q2 2012</th>
+						<th data-headers data-all-headers colspan="3">Q3 2012</th>
+						<th data-headers data-all-headers colspan="3">Q4 2012</th>
+						<th data-headers data-all-headers colspan="3">YTD Totals</th>
+					</tr>
+					<tr data-header-rows data-all-rows-except-first>
+						<th data-all-headers>Store</th>
+						<th data-test-header-expected-cells data-all-headers>Income</th>
+						<th data-test-header-expected-cells data-all-headers>Profit</th>
+						<th data-test-header-expected-cells data-all-headers>Change</th>
+						<th data-all-headers>Income</th>
+						<th data-all-headers>Profit</th>
+						<th data-all-headers>Change</th>
+						<th data-all-headers>Income</th>
+						<th data-all-headers>Profit</th>
+						<th data-all-headers>Change</th>
+						<th data-all-headers>Income</th>
+						<th data-all-headers>Profit</th>
+						<th data-all-headers>Change</th>
+						<th data-all-headers>Income</th>
+						<th data-all-headers>Profit</th>
+						<th data-all-headers>Change</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th>1</th>
-						<td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-						<td>1941</td>
-						<td>100%</td>
-						<td>74</td>
+					<tr data-all-rows-except-first>
+						<th>Boston</th>
+						<td data-test-header-expected-cells>2,898</td>
+						<td data-test-header-expected-cells>739</td>
+						<td data-test-header-expected-cells>-5.8%</td>
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
 					</tr>
-					<tr>
-						<th>2</th>
-						<td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
-						<td>1942</td>
-						<td>97%</td>
-						<td>64</td>
+					<tr data-all-rows-except-first>
+						<th>Chicago</th>
+						<td data-test-header-expected-cells>2,898</td>
+						<td data-test-header-expected-cells>739</td>
+						<td data-test-header-expected-cells>-5.8%</td>
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
+					</tr>
+					<tr data-all-rows-except-first>
+						<th>NYC</th>
+						<td data-test-header-expected-cells>2,898</td>
+						<td data-test-header-expected-cells>739</td>
+						<td data-test-header-expected-cells>-5.8%</td>
+						<td>3,647</td>
+						<td>1,354</td>
+						<td>+5.8%</td>
+						<td>4,981</td>
+						<td>2,246</td>
+						<td>+13.4%</td>
+						<td>3,457</td>
+						<td>1,259</td>
+						<td>-3.9%</td>
+						<td>12,463</td>
+						<td>6,234</td>
+						<td>+5.9%</td>
 					</tr>
 				</tbody>
 			</table>
+			<table id="destroy-test">
+				<thead>
+					<tr><td></td><td></td></tr>
+				</thead>
+			</table>
 		</div>
 	</div>
-
 </body>
 </html>

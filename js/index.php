@@ -82,6 +82,7 @@ $files = array(
 	'widgets/popup.arrow.js',
 	'widgets/table.js',
 	'widgets/table.columntoggle.js',
+	'widgets/table.columntoggle.popup.js',
 	'widgets/table.reflow.js',
 	'../external/jquery-ui/jquery.ui.tabs.js',
 	'widgets/tabs.js',
