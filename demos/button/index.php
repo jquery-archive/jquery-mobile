@@ -51,10 +51,9 @@
 
 		<div data-demo-html="true">
 			<form>
-				<div class="ui-input-button ui-button ui-corner-all ui-shadow">
-					Input value
-					<input type="button" data-enhanced="true" value="Input value">
-				</div>
+				<label>Input value
+					<input type="button" data-enhanced="true" value="Input value" class="ui-input-button ui-button ui-corner-all ui-shadow">
+				</label>
 			</form>
 		</div><!--/demo-html -->
 
@@ -64,24 +63,14 @@
 			<form>
 				<input type="button" value="Has corners by default">
 				<input type="button" data-corners="false" value="Unset corners">
-				<div class="ui-input-button ui-button ui-corner-all">
-					Enhanced
-					<input type="button" data-enhanced="true" value="Enhanced">
-				</div>
-			</form>
+				<input type="button" data-enhanced="true" value="Enhanced" class="ui-input-button ui-button ui-corner-all">			</form>
 		</div><!--/demo-html -->
 
 		<p>Icon-only buttons are round by default. Here we show how you can set the same border-radius as other buttons.</p>
 
 		<div data-demo-html="true" data-demo-css="true">
 			<form>
-				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
-				<div id="custom-border-radius">
-					<div class="ui-input-button ui-button ui-icon-delete ui-button-icon-only ui-corner-all">
-						Enhanced - Icon only
-						<input type="button" data-enhanced="true" value="Enhanced - Icon only">
-					</div>
-				</div>
+				
 			</form>
 		</div><!--/demo-html -->
 
@@ -91,10 +80,7 @@
 			<form>
 				<input type="button" value="Has shadow by default">
 				<input type="button" data-shadow="false" value="Unset shadow">
-				<div class="ui-input-button ui-button ui-shadow">
-					Enhanced
-					<input type="button" data-enhanced="true" value="Enhanced">
-				</div>
+				<input type="button" data-enhanced="true" value="Enhanced" class="ui-input-button ui-button ui-shadow">
 			</form>
 		</div><!--/demo-html -->
 
@@ -103,10 +89,7 @@
 		<div data-demo-html="true">
 			<form>
 				<input type="button" data-inline="true" value="Input">
-				<div class="ui-input-button ui-button ui-button-inline">
-					Enhanced
-					<input type="button" data-enhanced="true" value="Enhanced">
-				</div>
+				<input type="button" data-enhanced="true" value="Enhanced" class="ui-input-button ui-button ui-button-inline">
 			</form>
 		</div><!--/demo-html -->
 

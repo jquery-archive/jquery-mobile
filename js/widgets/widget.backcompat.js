@@ -48,7 +48,7 @@ if ( $.mobileBackcompat !== false ) {
 			}
 		},
 
-		_optionsToClasses: function( option, value ) {
+		_optionsToClasses: function( option ) {
 			var newValue = "",
 				prop = this.classProp,
 				classes = this.options.classes,
@@ -58,7 +58,9 @@ if ( $.mobileBackcompat !== false ) {
 			if ( this.options[ option ] ) {
 				newValue = classes[ prop ] + " " + className;
 			} else {
-				newValue = classArray.splice( classArray.indexOf( prop ), 1 ).join( " " );
+				newValue = classArray
+					.splice( classArray.indexOf( this._boolOptions[ option ] ) - 1, 1 )
+					.join( " " );
 			}
 			this.option( "classes." + prop, newValue );
 
@@ -70,6 +72,7 @@ if ( $.mobileBackcompat !== false ) {
 				original = $[ this.namespace ][ this.widgetName ].prototype.options,
 				originalClasses = original.classes[ this.classProp ].split( " " ),
 				currentClasses = this.options.classes[ that.classProp ].split( " " );
+
 
 			$.each( this._boolOptions, function( option, className ) {
 				if( that.options[ option ] !== undefined ) {
@@ -104,7 +107,7 @@ if ( $.mobileBackcompat !== false ) {
 
 			this._superApply( arguments );
 		}
-	}
+	};
 }
 
 })( jQuery );

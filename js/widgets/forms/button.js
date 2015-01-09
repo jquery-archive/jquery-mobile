@@ -33,9 +33,7 @@ define( [
 	$.widget( "ui.button", $.ui.button, $.mobile.widget.theme );
 
 	$.ui.button.prototype.options.classes = {
-		"ui-button": "ui-shadow ui-corner-all",
-		"ui-button-icon-only": "",
-		"ui-button-icon": ""
+		"ui-button": "ui-shadow ui-corner-all"
 	};
 	return $.ui.button;
 
