@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Touch events including: touchstart, touchmove, touchend, tap, taphold, swipe, swipeleft, swiperight, scrollstart, scrollstop
+//>>description: Touch events including: touchstart, touchmove, touchend, tap, taphold, swipe, swipeleft, swiperight
 //>>label: Touch
 //>>group: Events
 
@@ -9,7 +9,6 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 (function( $, window, undefined ) {
 	var $document = $( document ),
 		supportTouch = $.mobile.support.touch,
-		scrollEvent = "touchmove scroll",
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
 		touchStopEvent = supportTouch ? "touchend" : "mouseup",
 		touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
@@ -17,8 +16,7 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 	// setup new event shortcuts
 	$.each( ( "touchstart touchmove touchend " +
 		"tap taphold " +
-		"swipe swipeleft swiperight " +
-		"scrollstart scrollstop" ).split( " " ), function( i, name ) {
+		"swipe swipeleft swiperight" ).split( " " ), function( i, name ) {
 
 		$.fn[ name ] = function( fn ) {
 			return fn ? this.bind( name, fn ) : this.trigger( name );
@@ -40,44 +38,6 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 		}
 		event.type = originalType;
 	}
-
-	// also handles scrollstop
-	$.event.special.scrollstart = {
-
-		enabled: true,
-		setup: function() {
-
-			var thisObject = this,
-				$this = $( thisObject ),
-				scrolling,
-				timer;
-
-			function trigger( event, state ) {
-				scrolling = state;
-				triggerCustomEvent( thisObject, scrolling ? "scrollstart" : "scrollstop", event );
-			}
-
-			// iPhone triggers scroll after a small delay; use touchmove instead
-			$this.bind( scrollEvent, function( event ) {
-
-				if ( !$.event.special.scrollstart.enabled ) {
-					return;
-				}
-
-				if ( !scrolling ) {
-					trigger( event, true );
-				}
-
-				clearTimeout( timer );
-				timer = setTimeout( function() {
-					trigger( event, false );
-				}, 50 );
-			});
-		},
-		teardown: function() {
-			$( this ).unbind( scrollEvent );
-		}
-	};
 
 	// also handles taphold
 	$.event.special.tap = {
@@ -311,7 +271,6 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 		}
 	};
 	$.each({
-		scrollstop: "scrollstart",
 		taphold: "tap",
 		swipeleft: "swipe.left",
 		swiperight: "swipe.right"
