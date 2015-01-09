@@ -27,7 +27,7 @@ $.mobile.widget.theme = {
 		}
 		this._superApply ( arguments );
 	}
-}
+};
 
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
