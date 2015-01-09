@@ -5,12 +5,15 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery-ui/widget" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../ns",
+	"jquery-ui/widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 if ( $.mobileBackcompat !== false ) {
-	$.mobile.widget.backcompat = {
+	$.mobile.widget = $.extend( {}, { backcompat: {
 
 		_boolOptions: {
 			inline:  "ui-button-inline",
@@ -48,7 +51,7 @@ if ( $.mobileBackcompat !== false ) {
 			}
 		},
 
-		_optionsToClasses: function( option, value ) {
+		_optionsToClasses: function( option ) {
 			var newValue = "",
 				prop = this.classProp,
 				classes = this.options.classes,
@@ -104,7 +107,7 @@ if ( $.mobileBackcompat !== false ) {
 
 			this._superApply( arguments );
 		}
-	}
+	}}, $.mobile.widget );
 }
 
 })( jQuery );
