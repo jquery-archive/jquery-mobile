@@ -18,6 +18,10 @@ define([
 		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 only
 		// base.dynamicBaseEnabled will be checked
 		getDynamicEnabled = function() {
+
+			// If a value has been set at the old, deprecated location, we return that value.
+			// Otherwise we return the value from the new location. We check explicitly for
+			// undefined because true and false are both valid values for dynamicBaseEnabled.
 			if ( $.mobile.dynamicBaseEnabled !== undefined ) {
 				return $.mobile.dynamicBaseEnabled;
 			}
