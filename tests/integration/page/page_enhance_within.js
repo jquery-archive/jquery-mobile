@@ -4,7 +4,7 @@ asyncTest( "Option enhanceWithin", function() {
 			$( "#open-enhance-within" ).click();
 		},
 		function() {
-			deepEqual( $( "#enhance-within" ).find( ":mobile-toolbar" ).length, 1,
+			deepEqual( !!$( "#enhance-within-header" ).toolbar( "instance" ), true,
 				"Page with option enhanceWithin contains a toolbar widget" );
 			$.mobile.back();
 		},
@@ -12,7 +12,7 @@ asyncTest( "Option enhanceWithin", function() {
 			$( "#open-no-enhance-within" ).click();
 		},
 		function() {
-			deepEqual( $( "#no-enhance-within" ).find( ":mobile-toolbar" ).length, 0,
+			deepEqual( !!$( "#no-enhance-within-header" ).toolbar( "instance" ), false,
 				"Page with option enhanceWithin turned off contains no toolbar widget" );
 			$.mobile.back();
 		},
