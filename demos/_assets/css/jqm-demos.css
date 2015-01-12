@@ -458,7 +458,7 @@
 	padding: 0;
 	overflow: auto;
 }
-.jqm-view-source .ui-collapsible-content .phpStatus {
+.jqm-view-source .ui-collapsible-content .jssStatus {
 	padding: 1em;
 }
 .jqm-view-source .ui-collapsible-content > div,

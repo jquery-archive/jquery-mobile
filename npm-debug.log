@@ -1,0 +1,163 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.32
+4 verbose readDependencies using package.json deps
+5 verbose install where, deps [ '/Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos',
+5 verbose install   [ 'jquery',
+5 verbose install     'async',
+5 verbose install     'casperjs',
+5 verbose install     'cheerio',
+5 verbose install     'connect',
+5 verbose install     'commitplease',
+5 verbose install     'grunt',
+5 verbose install     'grunt-bowercopy',
+5 verbose install     'grunt-casper',
+5 verbose install     'grunt-contrib-clean',
+5 verbose install     'grunt-contrib-compress',
+5 verbose install     'grunt-contrib-concat',
+5 verbose install     'grunt-contrib-connect',
+5 verbose install     'grunt-contrib-copy',
+5 verbose install     'grunt-contrib-cssmin',
+5 verbose install     'grunt-contrib-jshint',
+5 verbose install     'grunt-contrib-requirejs',
+5 verbose install     'grunt-contrib-uglify',
+5 verbose install     'grunt-coveralls',
+5 verbose install     'grunt-git-authors',
+5 verbose install     'grunt-hash-manifest',
+5 verbose install     'grunt-php',
+5 verbose install     'grunt-qunit-istanbul',
+5 verbose install     'grunt-qunit-junit',
+5 verbose install     'jsdom',
+5 verbose install     'load-grunt-tasks',
+5 verbose install     'optimist',
+5 verbose install     'requirejs',
+5 verbose install     'underscore',
+5 verbose install     'xmlhttprequest',
+5 verbose install     'cgi',
+5 verbose install     'serve-static',
+5 verbose install     'node-statis' ] ]
+6 info preinstall jquery-mobile@1.5.0-pre
+7 warn package.json grunt-contrib-connect@0.3.0 No README data
+8 verbose readDependencies using package.json deps
+9 verbose already installed skipping cheerio@0.12.4 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+10 verbose already installed skipping connect@~2.17.1 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+11 verbose already installed skipping commitplease@2.0.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+12 verbose already installed skipping grunt@0.4.2 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+13 verbose already installed skipping grunt-bowercopy@0.5.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+14 verbose already installed skipping grunt-casper@0.3.2 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+15 verbose already installed skipping grunt-contrib-clean@0.5.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+16 verbose already installed skipping grunt-contrib-compress@0.5.2 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+17 verbose already installed skipping grunt-contrib-concat@0.3.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+18 verbose already installed skipping grunt-contrib-connect@0.3.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+19 verbose already installed skipping grunt-contrib-copy@0.4.1 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+20 verbose already installed skipping grunt-contrib-cssmin@0.6.1 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+21 verbose already installed skipping grunt-contrib-jshint@0.6.3 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+22 verbose already installed skipping grunt-contrib-requirejs@0.4.1 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+23 verbose already installed skipping grunt-contrib-uglify@0.2.6 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+24 verbose already installed skipping grunt-coveralls@0.3.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+25 verbose already installed skipping grunt-git-authors@2.0.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+26 verbose already installed skipping grunt-hash-manifest@0.5.1 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+27 verbose already installed skipping grunt-php@0.3.2 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+28 verbose already installed skipping grunt-qunit-istanbul@0.3.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+29 verbose already installed skipping grunt-qunit-junit@0.1.0-alpha2 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+30 verbose already installed skipping jsdom@0.8.3 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+31 verbose already installed skipping load-grunt-tasks@0.3.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+32 verbose already installed skipping optimist@0.6.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+33 verbose already installed skipping requirejs@2.1.8 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+34 verbose already installed skipping underscore@1.5.2 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+35 verbose already installed skipping xmlhttprequest@1.6.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+36 verbose already installed skipping cgi@0.3.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+37 verbose already installed skipping serve-static@1.8.0 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+38 verbose cache add [ 'node-statis@0.7.6', null ]
+39 verbose cache add name=undefined spec="node-statis@0.7.6" args=["node-statis@0.7.6",null]
+40 verbose parsed url { protocol: null,
+40 verbose parsed url   slashes: null,
+40 verbose parsed url   auth: null,
+40 verbose parsed url   host: null,
+40 verbose parsed url   port: null,
+40 verbose parsed url   hostname: null,
+40 verbose parsed url   hash: null,
+40 verbose parsed url   search: null,
+40 verbose parsed url   query: null,
+40 verbose parsed url   pathname: 'node-statis@0.7.6',
+40 verbose parsed url   path: 'node-statis@0.7.6',
+40 verbose parsed url   href: 'node-statis@0.7.6' }
+41 verbose already installed skipping jquery@>=1.8.3 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+42 verbose already installed skipping async@0.2.9 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+43 verbose cache add name="node-statis" spec="0.7.6" args=["node-statis","0.7.6"]
+44 verbose parsed url { protocol: null,
+44 verbose parsed url   slashes: null,
+44 verbose parsed url   auth: null,
+44 verbose parsed url   host: null,
+44 verbose parsed url   port: null,
+44 verbose parsed url   hostname: null,
+44 verbose parsed url   hash: null,
+44 verbose parsed url   search: null,
+44 verbose parsed url   query: null,
+44 verbose parsed url   pathname: '0.7.6',
+44 verbose parsed url   path: '0.7.6',
+44 verbose parsed url   href: '0.7.6' }
+45 verbose addNamed [ 'node-statis', '0.7.6' ]
+46 verbose addNamed [ '0.7.6', '0.7.6' ]
+47 verbose already installed skipping casperjs@1.1.0-beta3 /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+48 silly lockFile e1b50aa2-node-statis-0-7-6 node-statis@0.7.6
+49 verbose lock node-statis@0.7.6 /Users/alexanderschmitz/.npm/e1b50aa2-node-statis-0-7-6.lock
+50 verbose request where is /node-statis
+51 verbose request registry https://registry.npmjs.org/
+52 verbose request id 57e1a03b2f98ebc3
+53 verbose url raw /node-statis
+54 verbose url resolving [ 'https://registry.npmjs.org/', './node-statis' ]
+55 verbose url resolved https://registry.npmjs.org/node-statis
+56 verbose request where is https://registry.npmjs.org/node-statis
+57 info trying registry request attempt 1 at 19:01:06
+58 http GET https://registry.npmjs.org/node-statis
+59 http 404 https://registry.npmjs.org/node-statis
+60 verbose headers { date: 'Mon, 12 Jan 2015 00:01:07 GMT',
+60 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+60 verbose headers   'content-type': 'application/json',
+60 verbose headers   'cache-control': 'max-age=0',
+60 verbose headers   'content-length': '52',
+60 verbose headers   'accept-ranges': 'bytes',
+60 verbose headers   via: '1.1 varnish',
+60 verbose headers   age: '0',
+60 verbose headers   'x-served-by': 'cache-dfw1830-DFW',
+60 verbose headers   'x-cache': 'MISS',
+60 verbose headers   'x-cache-hits': '0',
+60 verbose headers   'x-timer': 'S1421020867.337125,VS0,VE64',
+60 verbose headers   'keep-alive': 'timeout=10, max=50',
+60 verbose headers   connection: 'Keep-Alive' }
+61 silly registry.get cb [ 404,
+61 silly registry.get   { date: 'Mon, 12 Jan 2015 00:01:07 GMT',
+61 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+61 silly registry.get     'content-type': 'application/json',
+61 silly registry.get     'cache-control': 'max-age=0',
+61 silly registry.get     'content-length': '52',
+61 silly registry.get     'accept-ranges': 'bytes',
+61 silly registry.get     via: '1.1 varnish',
+61 silly registry.get     age: '0',
+61 silly registry.get     'x-served-by': 'cache-dfw1830-DFW',
+61 silly registry.get     'x-cache': 'MISS',
+61 silly registry.get     'x-cache-hits': '0',
+61 silly registry.get     'x-timer': 'S1421020867.337125,VS0,VE64',
+61 silly registry.get     'keep-alive': 'timeout=10, max=50',
+61 silly registry.get     connection: 'Keep-Alive' } ]
+62 silly lockFile e1b50aa2-node-statis-0-7-6 node-statis@0.7.6
+63 silly lockFile e1b50aa2-node-statis-0-7-6 node-statis@0.7.6
+64 error 404 404 Not Found: node-statis
+64 error 404
+64 error 404 'node-statis' is not in the npm registry.
+64 error 404 You should bug the author to publish it
+64 error 404 It was specified as a dependency of 'jquery-mobile'
+64 error 404
+64 error 404 Maybe try 'npm search statis'
+64 error 404
+64 error 404 Note that you can also install from a
+64 error 404 tarball, folder, or http url, or git url.
+65 error System Darwin 14.0.0
+66 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+67 error cwd /Users/alexanderschmitz/Dropbox/jq/jquery-mobile-node-demos
+68 error node -v v0.10.32
+69 error npm -v 1.4.28
+70 error code E404
+71 verbose exit [ 1, true ]

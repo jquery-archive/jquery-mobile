@@ -2,6 +2,11 @@ module.exports = function( grunt ) {
 	"use strict";
 
 	var _ = require( "underscore" ),
+		cgi = require( "cgi" ),
+		staticServer = require('node-static'),
+		file = new staticServer.Server('./'),
+		serveStatic = require ( "serve-static" ),
+		serve = serveStatic( "./" ),
 		cheerio = require( "cheerio" ),
 
 		replaceCombinedCssReference = function( href, processedName ) {
@@ -756,15 +761,6 @@ module.exports = function( grunt ) {
 			}
 		},
 
-		php: {
-			server: {
-				options: {
-					port: phpPort,
-					baseUrl: "."
-				}
-			}
-		},
-
 		casper: {
 			options: {
 				test: true,
@@ -774,13 +770,13 @@ module.exports = function( grunt ) {
 			},
 			"demos.src": {
 				options: {
-					args: [ "--port=" + phpPort ]
+					args: [ "--port=" + httpPort ]
 				},
 				src: [ "tests/casperjs/**/*.js" ]
 			},
 			"demos.dist": {
 				options: {
-					args: [ "--port=" + phpPort , "--path=dist" ]
+					args: [ "--port=" + httpPort , "--path=dist" ]
 				},
 				src: [ "tests/casperjs/**/*.js" ]
 			}
@@ -791,27 +787,29 @@ module.exports = function( grunt ) {
 				options: {
 					port: httpPort,
 					base: ".",
-					middleware: function( connect, options ) {
-						return [
-							// For requests to "[...]/js/" return the built jquery.mobile.js
-							// as opposed to the php combined version
-							function(req, res, next){
-								var bundle = grunt.config.process(
-									"<%= requirejs.js.options.out %>"
-								);
-								if (req.url === "/js/") {
-									grunt.log.debug( req.url + " requested, serving: " + bundle );
-									res.end( grunt.file.read( bundle ) );
-								} else {
-									next();
+					keepalive: true,
+					open: "http://google.com",
+					middleware: function( connect, options, middlewares ){
+						middlewares = middlewares || [ connect.logger() ];
+						middlewares.push(function( req, res, next){
+							if( !req.url ){
+								return;
+							}
+							if ( /\/$/.test( req.url ) ) req.url = req.url + "index.jss";
+							var parts = req.url.split(".");
+							if ( !/jss$/.test( parts[ parts.length - 1 ] ) ) {
+								console.log( "static" )
+								return serve( req, res, next );
+							}
+							return cgi(__dirname + '/cgi-bin/cgi-node.js',{
+								env: {
+							    	DOCUMENT_ROOT: __dirname.replace( /\/node_modules\/cgi/, "" ),
+							    	REQUEST_URI: req.url,
+							    	PATH_TRANSLATED: __dirname.replace( /\/node_modules\/cgi/, "" ) + req.url
 								}
-							},
-
-							// Serve static files.
-							connect[ "static" ](options.base),
-							// Make empty directories browsable.
-							connect.directory(options.base)
-						];
+							})( req, res, next );
+						});
+						return middlewares;
 					}
 				}
 			}
@@ -1085,7 +1083,7 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "updateDependencies", [ "bowercopy" ] );
 
-	grunt.registerTask( "test:demos:src", [ "php", "casper:demos.src" ] );
+	grunt.registerTask( "test:demos:src", [ "casper:demos.src" ] );
 
 	grunt.registerTask( "test:demos:dist", [ "casper:demos.dist" ] );
 
@@ -1104,6 +1102,7 @@ module.exports = function( grunt ) {
 	);
 	grunt.registerTask( "crawl",
 		[
+			"connect",
 			"test:demos:src",
 			"test:demos:dist"
 		]

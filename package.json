@@ -26,6 +26,7 @@
 		"async": "0.2.9",
 		"casperjs": "1.1.0-beta3",
 		"cheerio": "0.12.4",
+		"connect": "~2.17.1",
 		"commitplease": "2.0.0",
 		"grunt": "0.4.2",
 		"grunt-bowercopy": "0.5.0",
@@ -50,7 +51,10 @@
 		"optimist": "0.6.0",
 		"requirejs": "2.1.8",
 		"underscore": "1.5.2",
-		"xmlhttprequest": "1.6.0"
+		"xmlhttprequest": "1.6.0",
+		"cgi": "0.3.0",
+		"serve-static": "1.8.0",
+		"node-static": "0.7.6"
 	},
 	"main": "Gruntfile.js",
 	"engines": {

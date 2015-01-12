@@ -462,13 +462,13 @@ eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 			{ regex: new RegExp(this.getKeywords(keywords), 'gm'),		css: 'keyword' }			// keyword
 			];
 
-		this.forHtmlScript(SyntaxHighlighter.regexLib.phpScriptTags);
+		this.forHtmlScript(SyntaxHighlighter.regexLib.jssScriptTags);
 	};
 
 	Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['php'];
 
-	SyntaxHighlighter.brushes.Php = Brush;
+	SyntaxHighlighter.brushes.jss = Brush;
 
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
