@@ -233,21 +233,19 @@ $.widget( "mobile.panel", {
 		}
 	},
 
-	_bindSwipeEvents: function() {
-		var self = this,
-			area = self._modal ? self.element.add( self._modal ) : self.element;
+	_handleSwipe: function( event ) {
+		if ( !event.isDefaultPrevented() ) {
+			this.close();
+		}
+	},
 
-		// on swipe, close the panel
-		if ( !!self.options.swipeClose ) {
-			if ( self.options.position === "left" ) {
-				area.on( "swipeleft.panel", function(/* e */) {
-					self.close();
-				});
-			} else {
-				area.on( "swiperight.panel", function(/* e */) {
-					self.close();
-				});
-			}
+	_bindSwipeEvents: function() {
+		var handler = {};
+
+		// Close the panel on swipe if the swipe event's default is not prevented
+		if ( this.options.swipeClose ) {
+			handler[ "swipe" + this.options.position ] = "_handleSwipe";
+			this._on( ( this._modal ? this.element.add( this._modal ) : this.element ), handler );
 		}
 	},
 
@@ -379,6 +377,10 @@ $.widget( "mobile.panel", {
 	close: function( immediate ) {
 		if ( this._open ) {
 			var self = this,
+
+				// Record what the page is the moment the process of closing begins, because it
+				// may change by the time the process completes
+				currentPage = self._page(),
 				o = this.options,
 
 				_closePanel = function() {
@@ -405,13 +407,17 @@ $.widget( "mobile.panel", {
 				},
 				complete = function() {
 					if ( o.theme && o.display !== "overlay" ) {
-						self._page().parent().removeClass( o.classes.pageContainer + "-themed " + o.classes.pageContainer + "-" + o.theme );
+						currentPage.parent().removeClass( o.classes.pageContainer + "-themed " +
+							o.classes.pageContainer + "-" + o.theme );
 					}
 
 					self.element.addClass( o.classes.panelClosed );
 
+					//scroll to the top
+					self._positionPanel( true );
+
 					if ( o.display !== "overlay" ) {
-						self._page().parent().removeClass( o.classes.pageContainer );
+						currentPage.parent().removeClass( o.classes.pageContainer );
 						self._wrapper.removeClass( o.classes.pageContentPrefix + "-open" );
 						self._fixedToolbars().removeClass( o.classes.pageContentPrefix + "-open" );
 					}
@@ -425,7 +431,7 @@ $.widget( "mobile.panel", {
 					self._unbindFixListener();
 					$.mobile.resetActivePageHeight();
 
-					self._page().jqmRemoveData( "panel" );
+					currentPage.jqmRemoveData( "panel" );
 
 					self._trigger( "close" );
 
@@ -487,7 +493,6 @@ $.widget( "mobile.panel", {
 
 		this.element
 			.removeClass( [ this._getPanelClasses(), o.classes.panelOpen, o.classes.animate ].join( " " ) )
-			.off( "swipeleft.panel swiperight.panel" )
 			.off( "panelbeforeopen" )
 			.off( "panelhide" )
 			.off( "keyup.panel" )

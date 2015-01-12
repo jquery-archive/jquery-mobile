@@ -264,7 +264,48 @@
 
 	});
 
-	asyncTest( "swipe on dismissable modal closes panel", function() {
+	asyncTest( "swipe on dismissible panel does not close panel if the default is prevented",
+		function() {
+			var panel = $( "#panel-test-dismiss" ),
+				eventNs = ".swipeDoesNotClosePanel",
+				input = $( "#dismiss-input" ).one( "swipeleft", function( event ) {
+					event.preventDefault();
+				});
+
+			expect( 1 );
+
+			$.testHelper.detailedEventCascade([
+				function() {
+					panel.panel( "open" );
+				},
+
+				{
+					panelopen: { src: panel, event: "panelopen" + eventNs + "1" }
+				},
+
+				function() {
+					input.trigger( "swipeleft" );
+				},
+
+				{
+					panelclose: { src: panel, event: "panelclose" + eventNs + "2" }
+				},
+
+				function( result ) {
+					deepEqual( result.panelclose.timedOut, true,
+						"panelclose event did not happen in response to swipe on child input" );
+					panel.panel( "close" );
+				},
+
+				{
+					panelclose: { src: panel, event: "panelclose" + eventNs + "3" }
+				},
+
+				start
+			]);
+		});
+
+	asyncTest( "swipe on dismissible modal closes panel", function() {
 
 		expect( 1 );
 

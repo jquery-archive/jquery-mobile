@@ -362,4 +362,52 @@
 		]);
 	});
 
+	test( "Default not prevented on keystroke following 'Enter'", function() {
+		var event,
+			input = $( "#test-keyboard-flag-reset-input" );
+
+		event = $.Event( "keydown" );
+		event.keyCode = $.ui.keyCode.ENTER;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), true, "'Enter' keydown default prevented" );
+
+		event = $.Event( "keypress" );
+		event.keyCode = $.ui.keyCode.ENTER;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), true,
+			"'Enter' keypress following 'Enter' keydown default prevented" );
+
+		event = $.Event( "keydown" );
+		event.keyCode = $.ui.keyCode.ENTER;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), true, "'Enter' keydown default prevented again" );
+
+		event = $.Event( "keydown" );
+		event.keyCode = 85;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), false, "'u' keydown default not prevented" );
+
+		event = $.Event( "keypress" );
+		event.keyCode = 85;
+		input.trigger( event );
+		deepEqual( event.isDefaultPrevented(), false, "'u' keypress default not prevented" );
+	});
+
+	test( "All event handlers are removed from input", function() {
+		deepEqual( $._data( $( "#test-handler-removal-input" )[ 0 ] ), {},
+			"Private data for input is initially empty" );
+
+		$( "#test-handler-removal-list" )
+			.filterable( "option", "input", "#test-handler-removal-input" );
+
+		notDeepEqual( $._data( $( "#test-handler-removal-input" )[ 0 ] ), {},
+			"Private data for input not empty after setting as filterable input" );
+
+		$( "#test-handler-removal-list" )
+			.filterable( "option", "input", false );
+
+		deepEqual( $._data( $( "#test-handler-removal-input" )[ 0 ] ), {},
+			"Private data for input is empty again after unsetting as filterable input" );
+	});
+
 })(jQuery);

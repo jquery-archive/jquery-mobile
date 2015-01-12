@@ -115,6 +115,8 @@
 
 		<p>Set the <code>defaultPageTransition</code> global option if you'd prefer a different default transition. Dialogs have a different option called <code>defaultDialogTransition</code> that can also be configured.</p>
 
+		<p><strong>Note:</strong> since the dialog widget is deprecated as of jQuery Mobile 1.4.0, the <code>$.mobile.defaultDialogTransition</code> global option is also deprecated and will be removed.</p>
+
 		<h2>Browser support</h2>
 		<p>All transitions are built with CSS keyframe animations and include <code>-webkit</code> vendor prefixed rules for iOS, Blackberry, Android, Safari and Chrome browsers, <code>-moz</code> rules for Firefox browsers, and unprefixed rules for Windows Phone 8 and IE10. Support for keyframe animations and transition smoothness is determined by the browser version and hardware and will safely fall back to no transition if animations aren't supported. To proactively exclude transition in situations with poor performance, we exclude browsers that lack 3D transforms and provide a fallback transition and apply a max width for when transitions are applied.</p>
 

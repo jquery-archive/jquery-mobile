@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Panel Test Suite</title>
+	<title>jQuery Mobile Popup Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
@@ -16,11 +16,30 @@
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 	<script src="../../../external/qunit/qunit.js"></script>
 	<script>
+
+// The next call to $.fn.enhanceWithin() will have no effect
+$( document ).one( "pagebeforecreate", function() {
+	var overrideOnce = true;
+
+	$.fn.enhanceWithin = ( function( original ) {
+		return function() {
+			if ( overrideOnce ) {
+				overrideOnce = false;
+			} else {
+				return original.apply( this, arguments );
+			}
+		};
+	})( $.fn.enhanceWithin );
+});
+	</script>
+	<script>
 		$.testHelper.asyncLoad([
-			[ "widgets/page" ],
-			[ "widgets/panel" ],
+			[
+				"widgets/popup",
+				"links"
+			],
 			[ "init" ],
-			[ "external_panel_wrapper_update_core.js" ]
+			[ "weird_characters_in_id_core.js" ]
 		]);
 	</script>
 
@@ -29,20 +48,13 @@
 <body>
 	<div id="qunit"></div>
 
-	<div data-nstest-role="panel" id="wrapper-test-panel" data-nstest-display="reveal">
-		<p>The panel</p>
-		<a href="#other-page" id="go-to-other-page" data-nstest-transition="none">Go to other page</a>
-	</div>
-
-	<div data-nstest-role="page">
-		<div class="ui-content">
-			<p>Start page</p>
-		</div>
-	</div>
-
-	<div data-nstest-role="page" id="other-page">
-		<div class="ui-content">
-			<p>Other page</p>
+	<div data-nstest-role="page" id="start-page">
+		<div class="ui-content" id="page-content">
+			<div data-nstest-role="popup" id="the-['x']-popup">
+				<p>Popup with weird characters in its ID</p>
+			</div>
+			<a href="#the-['x']-popup" id="openPopup" data-nstest-rel="popup">Open Popup</a>
 		</div>
 	</div>
 </body>
+</html>

@@ -5,7 +5,13 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../../core", "../../widget", "../../zoom", "./reset" ], function( jQuery ) {
+define( [
+	"jquery",
+	"../../core",
+	"../../widget",
+	"../../zoom",
+	"../../navigation/path",
+	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -76,10 +82,12 @@ $.widget( "mobile.selectmenu", $.extend( {
 			classes += " ui-mini";
 		}
 
-		this.select = this.element.removeClass( "ui-btn-left ui-btn-right" ).wrap( "<div class='ui-select" + classes + "'>" );
+		this.select = this.element
+			.removeClass( "ui-btn-left ui-btn-right" )
+			.wrap( "<div class='ui-select" + classes + "'></div>" );
 		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
 		this.buttonId = this.selectId + "-button";
-		this.label = $( "label[for='"+ this.selectId +"']" );
+		this.label = $( "label[for='"+ $.mobile.path.hashToSelector( this.selectId ) +"']" );
 		this.isMultiple = this.select[ 0 ].multiple;
 	},
 

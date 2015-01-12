@@ -160,7 +160,8 @@ $.widget( "mobile.slider", $.extend( {
 
 		// wrap in a div for styling purposes
 		if ( !isToggleSwitch && !isRangeslider ) {
-			wrapper = this.options.mini ? "<div class='ui-slider ui-mini'>" : "<div class='ui-slider'>";
+			wrapper = "<div class='ui-slider" +
+				( this.options.mini ? " ui-mini" : "" ) + "'></div>";
 
 			control.add( slider ).wrapAll( wrapper );
 		}
