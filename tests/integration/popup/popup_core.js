@@ -11,10 +11,12 @@
 			var $popup = $( document.getElementById( popupId ) ),
 				link = $( linkSelector )[ 0 ];
 
-			expect( 14 );
+			expect( 17 );
 
 			$.testHelper.detailedEventCascade([
 				function() {
+					deepEqual( $popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
+						"Popup container does not have attribute tabindex" );
 					deepEqual( link.getAttribute( "aria-haspopup" ), "true", popupId + ": 'aria-haspopup' attribute is set to true on link that opens the popup" );
 					deepEqual( link.getAttribute( "aria-owns" ), popupId, popupId + ": 'aria-owns' attribute is set to the ID of the owned popup ('test-popup')" );
 					deepEqual( link.getAttribute( "aria-expanded" ), "false", popupId + ": 'aria-expanded' attribute is set to false when the popup is not open" );
@@ -36,6 +38,9 @@
 					ok( $popup.parent().prev().hasClass( "in" ), popupId + ": Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
 					ok( $popup.parent().hasClass( "ui-popup-active" ), popupId + ": Open popup has the 'ui-popup-active' class" );
 
+					deepEqual( $popup.parent().attr( "tabindex" ), "0",
+						"Popup container has attribute tabindex" );
+
 					animationCompleteCallCount = 0;
 					$.mobile.back();
 				},
@@ -51,6 +56,8 @@
 					ok( !$popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
 					ok( $popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
 					ok( !$popup.parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
+					deepEqual( $popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
+						"Popup container does not have attribute tabindex" );
 				},
 
 				{ timeout: { length: 500 } },
