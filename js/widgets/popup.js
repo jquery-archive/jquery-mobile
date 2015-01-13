@@ -658,6 +658,7 @@ $.widget( "mobile.popup", {
 			this.document.find( "[aria-haspopup='true'][aria-owns='" +
 				$.mobile.path.hashToSelector( id ) + "']" ).attr( "aria-expanded", true );
 		}
+		this._ui.container.attr( "tabindex", 0 );
 		this._trigger( "afteropen" );
 	},
 
@@ -748,6 +749,8 @@ $.widget( "mobile.popup", {
 			this.document.find( "[aria-haspopup='true'][aria-owns='" +
 				$.mobile.path.hashToSelector( id ) + "']" ).attr( "aria-expanded", false );
 		}
+
+		this._ui.container.removeAttr( "tabindex" );
 
 		// alert users that the popup is closed
 		this._trigger( "afterclose" );
