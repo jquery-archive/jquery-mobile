@@ -237,7 +237,7 @@ define( [
 
 		//add active state on vclick
 		$.mobile.document.bind( "vclick", function( event ) {
-			var $btn, btnEls, target = event.target, needClosest = false;
+			var theButton, target = event.target;
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
 			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
@@ -274,37 +274,16 @@ define( [
 				}
 			}
 
-			// Avoid calling .closest by using the data set during .buttonMarkup()
-			// List items have the button data in the parent of the element clicked
-			if ( !!~target.className.indexOf( "ui-link-inherit" ) ) {
-				if ( target.parentNode ) {
-					btnEls = $.data( target.parentNode, "buttonElements" );
-				}
-			// Otherwise, look for the data on the target itself
-			} else {
-				btnEls = $.data( target, "buttonElements" );
-			}
-			// If found, grab the button's outer element
-			if ( btnEls ) {
-				target = btnEls.outer;
-			} else {
-				needClosest = true;
-			}
+			theButton = $( target ).closest( ".ui-btn" );
 
-			$btn = $( target );
-			// If the outer element wasn't found by the our heuristics, use .closest()
-			if ( needClosest ) {
-				$btn = $btn.closest( ".ui-btn" );
-			}
-
-			if ( $btn.length > 0 &&
-				!( $btn.hasClass( "ui-state-disabled" ||
+			if ( theButton.length > 0 &&
+				!( theButton.hasClass( "ui-state-disabled" ||
 
 					// DEPRECATED as of 1.4.0 - remove after 1.4.0 release
 					// only ui-state-disabled should be present thereafter
-					$btn.hasClass( "ui-disabled" ) ) ) ) {
+					theButton.hasClass( "ui-disabled" ) ) ) ) {
 				$.mobile.removeActiveLinkClass( true );
-				$.mobile.activeClickedLink = $btn;
+				$.mobile.activeClickedLink = theButton;
 				$.mobile.activeClickedLink.addClass( $.mobile.activeBtnClass );
 			}
 		});

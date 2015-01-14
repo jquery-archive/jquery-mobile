@@ -80,10 +80,6 @@ define( [ "jquery", "./ns", "json!../package.json" ], function( jQuery, ns, pkg 
 		// data-ignored
 		ignoreContentEnabled: false,
 
-		buttonMarkup: {
-			hoverDelay: 200
-		},
-
 		// default the property to remove dependency on assignment in init module
 		pageContainer: $(),
 
