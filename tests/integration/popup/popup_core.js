@@ -5,11 +5,13 @@
 
 	var urlObject = $.mobile.path.parseLocation(),
 		home = urlObject.pathname + urlObject.search,
+		originalAnimationComplete = $.fn.animationComplete,
+		animationCompleteCallCount = 0,
 		opensAndCloses = function( eventNs, popupId, linkSelector, contentSelector ) {
 			var $popup = $( document.getElementById( popupId ) ),
 				link = $( linkSelector )[ 0 ];
 
-			expect( 13 );
+			expect( 14 );
 
 			$.testHelper.detailedEventCascade([
 				function() {
@@ -34,7 +36,8 @@
 					ok( $popup.parent().prev().hasClass( "in" ), popupId + ": Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
 					ok( $popup.parent().hasClass( "ui-popup-active" ), popupId + ": Open popup has the 'ui-popup-active' class" );
 
-					$popup.popup( "close" );
+					animationCompleteCallCount = 0;
+					$.mobile.back();
 				},
 
 				{
@@ -43,6 +46,7 @@
 				},
 
 				function( result) {
+					deepEqual( animationCompleteCallCount, 1, "animationComplete called only once" );
 					deepEqual( link.getAttribute( "aria-expanded" ), "false", "'aria-expanded' attribute is set to false when the popup is not open" );
 					ok( !$popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
 					ok( $popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
@@ -59,6 +63,13 @@
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( home );
+			$.fn.animationComplete = $.extend( function() {
+				animationCompleteCallCount++;
+				return originalAnimationComplete.apply( this, arguments );
+			}, $.fn.animationComplete );
+		},
+		teardown: function() {
+			$.fn.animationComplete = originalAnimationComplete;
 		}
 	});
 
