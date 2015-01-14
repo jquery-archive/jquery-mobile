@@ -816,7 +816,8 @@ $.widget( "mobile.popup", {
 			currentOptions = this.options,
 			immediate = false;
 
-		if ( ( theEvent && theEvent.isDefaultPrevented() ) || $.mobile.popup.active !== this ) {
+		if ( ( theEvent && theEvent.isDefaultPrevented() ) || $.mobile.popup.active !== this ||
+				!this._isOpen ) {
 			return;
 		}
 
