@@ -725,6 +725,10 @@ define( [
 				triggerData.textStatus = textStatus;
 				triggerData.errorThrown = errorThrown;
 
+				// Clean up internal pending operations like the loader and the transition lock
+				this._hideLoading();
+				this._releaseTransitionLock();
+
 				// Let listeners know the page load failed.
 				var plfEvent = this._triggerWithDeprecated( "loadfailed", triggerData );
 
