@@ -57,6 +57,10 @@ define( [
 			},
 			animationType = ( !type || type === "animation" ) ? "animation" : "transition";
 
+		if ( !this.length ) {
+			return this;
+		}
+
 		// Make sure selected type is supported by browser
 		if ( ( $.support.cssTransitions && animationType === "transition" ) ||
 			( $.support.cssAnimations && animationType === "animation" ) ) {
@@ -89,7 +93,7 @@ define( [
 			}, duration );
 
 			// Bind the event
-			return $( this ).one( props[ animationType ].event, eventBinding );
+			return this.one( props[ animationType ].event, eventBinding );
 		} else {
 
 			// CSS animation / transitions not supported
@@ -99,7 +103,7 @@ define( [
 					callback.apply( this );
 				});
 			}, 0 );
-			return $( this );
+			return this;
 		}
 	};
 
