@@ -127,7 +127,7 @@
 				transitionComplete = true;
 		}, "transition" );
 
-		$( "animation-test" ).addClass( "in" ).animationComplete( function() {
+		$( "#animation-test" ).addClass( "in" ).animationComplete( function() {
 			animationComplete = true;
 		});
 
@@ -159,10 +159,10 @@
 			animationComplete = true;
 		});
 		ok( Object.keys( $._data( $("#animation-test")[0], "events" ) ).length === 1,
-		 	"Only one animation event" );
+			"Only one animation event" );
 
 		ok( Object.keys( $._data( $("#transition-test")[0], "events" ) ).length === 1,
-			 "Only one transition event" );
+			"Only one transition event" );
 		window.setTimeout( function(){
 			start();
 		}, 800 );
@@ -266,4 +266,145 @@
 			start();
 		}, 1200 );
 	});
+
+	var createContextChecker = function( expectedTransitionContext, expectedAnimationContext ) {
+		var actualAnimationContext, actualTransitionContext,
+			completeCount = 0,
+			maybeAssert = function() {
+				completeCount++;
+				if ( completeCount === 2 ) {
+					deepEqual( actualTransitionContext, expectedTransitionContext,
+						"Transition context is correct" );
+					deepEqual( actualAnimationContext, expectedAnimationContext,
+						"Animation context is correct" );
+					start();
+				}
+			};
+
+		return {
+			animationHandler: function() {
+				actualAnimationContext = this;
+				maybeAssert();
+			},
+			transitionHandler: function() {
+				actualTransitionContext = this;
+				maybeAssert();
+			}
+		};
+	};
+
+	module( "Callback context and return value: event", {
+		teardown: function() {
+			$( "#transition-test" )
+				.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
+			$( "#animation-test" ).removeClass( "in" );
+		}
+	});
+
+	asyncTest( "Make sure context and return value is correct for event", function() {
+		expect( 4 );
+
+		var returnValue,
+			transitionTest = $( "#transition-test" ),
+			animationTest = $( "#animation-test" ),
+			checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
+
+		returnValue = transitionTest
+			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
+			.animationComplete( checker.transitionHandler, "transition" );
+
+		deepEqual( returnValue, transitionTest,
+			"Returned jQuery object for transition is the one passed in" );
+
+		returnValue = animationTest
+			.addClass( "in" )
+			.animationComplete( checker.animationHandler );
+
+		deepEqual( returnValue, animationTest,
+			"Returned jQuery object for animation is the one passed in" );
+
+	});
+
+	module( "Callback context and return value: fallback" );
+
+	asyncTest( "Make sure context and return value is correct for fallback", function() {
+		expect( 4 );
+
+		var returnValue,
+			transitionTest = $( "#transition-test" ),
+			animationTest = $( "#animation-test" ),
+			checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
+
+		returnValue = transitionTest.animationComplete( checker.transitionHandler, "transition" );
+
+		deepEqual( returnValue, transitionTest,
+			"Returned jQuery object for transition is the one passed in" );
+
+		returnValue = animationTest.animationComplete( checker.animationHandler );
+
+		deepEqual( returnValue, animationTest,
+			"Returned jQuery object for animation is the one passed in" );
+	});
+
+	module( "Callback context and return value: no support", {
+		setup: function() {
+			oldTransitions = $.support.cssTransitions,
+			oldAnimations = $.support.cssAnimations;
+
+			$.support.cssAnimations = false;
+			$.support.cssTransitions = false;
+		},
+		teardown: function() {
+			$.support.cssTransitions = oldTransitions;
+			$.support.cssAnimations = oldAnimations;
+			$( "#transition-test" )
+				.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
+			$( "#animation-test" ).removeClass( "in" );
+		}
+	});
+
+	asyncTest( "Make sure context and return value is correct for no support", function() {
+		expect( 4 );
+
+		var returnValue,
+			transitionTest = $( "#transition-test" ),
+			animationTest = $( "#animation-test" ),
+			checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
+
+		returnValue = transitionTest
+			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
+			.animationComplete( checker.transitionHandler, "transition" );
+
+		deepEqual( returnValue, transitionTest,
+			"Returned jQuery object for transition is the one passed in" );
+
+		returnValue = animationTest
+			.addClass( "in" )
+			.animationComplete( checker.animationHandler );
+
+		deepEqual( returnValue, animationTest,
+			"Returned jQuery object for animation is the one passed in" );
+	});
+
+	module( "Empty jQuery object" );
+
+	asyncTest( "Make sure callback is not called on empty jQuery object", function() {
+		var transitionCallbackExecuted = false,
+			animationCallbackExecuted = false;
+
+		$([]).animationComplete( function() {
+			transitionCallbackExecuted = true;
+		}, "transition" );
+
+		$([]).animationComplete( function() {
+			animationCallbackExecuted = true;
+		});
+
+		setTimeout( function() {
+			deepEqual( transitionCallbackExecuted, false, "Transition callback was not run" );
+			deepEqual( animationCallbackExecuted, false, "Animation callback was not run" );
+			start();
+		}, $.fn.animationComplete.defaultDuration * 1.5 );
+	});
+
 })( jQuery );

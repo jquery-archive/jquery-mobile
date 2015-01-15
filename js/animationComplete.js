@@ -21,7 +21,7 @@ define( [
 
 		$.each( vendorPrefixes, function( j, prefix ) {
 			if ( testElement.style[ $.camelCase( prefix + testName ) ] !== undefined ) {
-				 props[ test ][ "prefix" ] = prefix;
+				props[ test ][ "prefix" ] = prefix;
 				return false;
 			}
 		});
@@ -57,6 +57,10 @@ define( [
 			},
 			animationType = ( !type || type === "animation" ) ? "animation" : "transition";
 
+		if ( !this.length ) {
+			return this;
+		}
+
 		// Make sure selected type is supported by browser
 		if ( ( $.support.cssTransitions && animationType === "transition" ) ||
 			( $.support.cssAnimations && animationType === "animation" ) ) {
@@ -65,12 +69,12 @@ define( [
 			if ( fallbackTime === undefined ) {
 
 				// Make sure the was not bound to document before checking .css
-				if ( $( this ).context !== document ) {
+				if ( this.context !== document ) {
 
 					// Parse the durration since its in second multiple by 1000 for milliseconds
 					// Multiply by 3 to make sure we give the animation plenty of time.
 					duration = parseFloat(
-						$( this ).css( props[ animationType ].duration )
+						this.css( props[ animationType ].duration )
 					) * 3000;
 				}
 
@@ -82,18 +86,25 @@ define( [
 
 			// Sets up the fallback if event never comes
 			timer = setTimeout( function() {
-				$( that ).off( props[ animationType ].event, eventBinding );
-				callback.apply( that );
+				that
+					.off( props[ animationType ].event, eventBinding )
+					.each( function() {
+						callback.apply( this );
+					});
 			}, duration );
 
 			// Bind the event
-			return $( this ).one( props[ animationType ].event, eventBinding );
+			return this.one( props[ animationType ].event, eventBinding );
 		} else {
 
 			// CSS animation / transitions not supported
 			// Defer execution for consistency between webkit/non webkit
-			setTimeout( $.proxy( callback, this ), 0 );
-			return $( this );
+			setTimeout( function() {
+				that.each( function() {
+					callback.apply( this );
+				});
+			}, 0 );
+			return this;
 		}
 	};
 
