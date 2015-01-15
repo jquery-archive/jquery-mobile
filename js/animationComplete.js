@@ -21,7 +21,7 @@ define( [
 
 		$.each( vendorPrefixes, function( j, prefix ) {
 			if ( testElement.style[ $.camelCase( prefix + testName ) ] !== undefined ) {
-				 props[ test ][ "prefix" ] = prefix;
+				props[ test ][ "prefix" ] = prefix;
 				return false;
 			}
 		});
@@ -83,7 +83,9 @@ define( [
 			// Sets up the fallback if event never comes
 			timer = setTimeout( function() {
 				$( that ).off( props[ animationType ].event, eventBinding );
-				callback.apply( that );
+				that.each( function() {
+					callback.apply( this );
+				});
 			}, duration );
 
 			// Bind the event
@@ -92,7 +94,11 @@ define( [
 
 			// CSS animation / transitions not supported
 			// Defer execution for consistency between webkit/non webkit
-			setTimeout( $.proxy( callback, this ), 0 );
+			setTimeout( function() {
+				that.each( function() {
+					callback.apply( this );
+				});
+			}, 0 );
 			return $( this );
 		}
 	};
