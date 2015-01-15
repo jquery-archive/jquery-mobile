@@ -127,7 +127,7 @@
 				transitionComplete = true;
 		}, "transition" );
 
-		$( "animation-test" ).addClass( "in" ).animationComplete( function() {
+		$( "#animation-test" ).addClass( "in" ).animationComplete( function() {
 			animationComplete = true;
 		});
 
@@ -159,10 +159,10 @@
 			animationComplete = true;
 		});
 		ok( Object.keys( $._data( $("#animation-test")[0], "events" ) ).length === 1,
-		 	"Only one animation event" );
+			"Only one animation event" );
 
 		ok( Object.keys( $._data( $("#transition-test")[0], "events" ) ).length === 1,
-			 "Only one transition event" );
+			"Only one transition event" );
 		window.setTimeout( function(){
 			start();
 		}, 800 );
@@ -266,4 +266,90 @@
 			start();
 		}, 1200 );
 	});
+
+	module( "Callback context: event", {
+		teardown: function() {
+			$( "#transition-test" )
+				.removeClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" );
+			$( "#animation-test" ).removeClass( "in" );
+		}
+	});
+
+	asyncTest( "Make sure context is correct for event", function() {
+		expect( 2 );
+		var transitionContext, animationContext,
+			completeCount = 0,
+			maybeAssert = function() {
+				completeCount++;
+				if ( completeCount === 2 ) {
+					deepEqual( transitionContext, $( "#transition-test" )[ 0 ],
+						"Transition context is correct" );
+					deepEqual( animationContext, $( "#animation-test" )[ 0 ],
+						"Animation context is correct" );
+					start();
+				}
+			};
+
+		$( "#transition-test" )
+			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
+			.animationComplete( function() {
+				transitionContext = this;
+				maybeAssert();
+			}, "transition" );
+
+		$( "#animation-test" )
+			.addClass( "in" )
+			.animationComplete( function() {
+				animationContext = this;
+				maybeAssert();
+			});
+	});
+
+	module( "Callback context: fallback" );
+
+	asyncTest( "Make sure context is correct for fallback", function() {
+		expect( 2 );
+		var transitionContext, animationContext,
+			completeCount = 0,
+			maybeAssert = function() {
+				completeCount++;
+				if ( completeCount === 2 ) {
+					deepEqual( transitionContext, $( "#transition-test" )[ 0 ],
+						"Transition context is correct" );
+					deepEqual( animationContext, $( "#animation-test" )[ 0 ],
+						"Animation context is correct" );
+					start();
+				}
+			};
+
+		$( "#transition-test" ).animationComplete( function() {
+			transitionContext = this;
+			maybeAssert();
+		}, "transition" );
+
+		$( "#animation-test" ).animationComplete( function() {
+			animationContext = this;
+			maybeAssert();
+		});
+	});
+
+	asyncTest( "Make sure callback is not called on empty jQuery object", function() {
+		var transitionCallbackExecuted = false,
+			animationCallbackExecuted = false;
+
+		$([]).animationComplete( function() {
+			transitionCallbackExecuted = true;
+		}, "transition" );
+
+		$([]).animationComplete( function() {
+			animationCallbackExecuted = true;
+		});
+
+		setTimeout( function() {
+			deepEqual( transitionCallbackExecuted, false, "Transition callback was not run" );
+			deepEqual( animationCallbackExecuted, false, "Animation callback was not run" );
+			start();
+		}, $.fn.animationComplete.defaultDuration * 1.5 );
+	});
+
 })( jQuery );
