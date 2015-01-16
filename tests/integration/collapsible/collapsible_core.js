@@ -78,15 +78,13 @@
 
 	test( "iconpos option accepts arbitrary values", function() {
 		var collapsible = $( "#collapsible-iconpos-test" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-xyzzy" ),
-			true, "Initially anchor has class ui-button-icon-xyzzy" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-xyzzy" ), true,
+			"Initially anchor has class ui-icon-xyzzy" );
 		collapsible.collapsible( "option", "iconpos", "gnurbles" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-xyzzy" ),
-			false, "After setting iconpos option anchor no longer has class " +
-				"ui-button-icon-xyzzy" );
-		deepEqual( collapsible.find( "a" ).hasClass( "ui-button-icon-gnurbles" ),
-			true, "After setting iconpos option anchor has class " +
-				"ui-button-icon-gnurbles" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-xyzzy" ), false,
+			"After setting iconpos option anchor no longer has class ui-icon-xyzzy" );
+		deepEqual( collapsible.find( "a" ).hasClass( "ui-icon-gnurbles" ), true,
+			"After setting iconpos option anchor has class ui-icon-gnurbles" );
 	});
 
 	module( "Collapsible set", {});
@@ -354,17 +352,17 @@
 			true, "Explicitly assigned collapsible has expandedIcon 'minus'" );
 	});
 	test( "iconpos", function() {
-		$( "#inherit-test" ).collapsibleset( "option", "iconpos", "right" );
+		$( "#inherit-test" ).collapsibleset( "option", "iconpos", "end" );
 
 		deepEqual( $( "#inherits" ).collapsible( "option", "iconpos" ),
 			null, "Option not set on inheriting child collapsible" );
 		deepEqual( $( "#explicit" ).collapsible( "option", "iconpos" ),
-			"left",
+			"beginning",
 			"Option not set on explicitly assigned child collapsible" );
 		deepEqual( $( "#inherits" ).find( "a" ).hasClass( "ui-icon-end" ),
-			true, "Inheriting collapsible has iconpos 'right'" );
+			true, "Inheriting collapsible has iconpos 'end'" );
 		deepEqual( $( "#explicit" ).find( "a" ).hasClass( "ui-icon-beginning" ),
-			true, "Explicitly assigned collapsible has iconpos 'left'" );
+			true, "Explicitly assigned collapsible has iconpos 'beginning'" );
 	});
 	test( "mini", function() {
 		$( "#inherit-test" ).collapsibleset( "option", "mini", "true" );
