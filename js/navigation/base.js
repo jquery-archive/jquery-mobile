@@ -12,7 +12,7 @@ define([
 
 	var base,
 
-		// existing base tag?
+		// Existing base tag?
 		baseElement = $( "head" ).children( "base" ),
 
 		// DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 only
@@ -32,7 +32,7 @@ define([
 	// TODO move to external widget
 	base = {
 
-		// disable the alteration of the dynamic base tag or links
+		// Disable the alteration of the dynamic base tag or links
 		dynamicBaseEnabled: true,
 
 		// Make sure base element is defined, for use in routing asset urls that are referenced
@@ -49,10 +49,11 @@ define([
 		// set the generated BASE element's href to a new page's base path
 		set: function( href ) {
 
-			// we should do nothing if the user wants to manage their url base
-			// manually
-			// DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 only
-			// base.dynamicBaseEnabled will be checked
+			// We should do nothing if the user wants to manage their url base manually.
+			// Note: Our method of ascertaining whether the user wants to manager their url base
+			// manually is DEPRECATED as of 1.5.0 and will be removed in 1.6.0. As of 1.6.0 the
+			// flag base.dynamicBaseEnabled will be checked, so the function getDynamicEnabled()
+			// will be removed.
 			if ( !getDynamicEnabled() ) {
 				return;
 			}
