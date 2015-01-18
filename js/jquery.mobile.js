@@ -54,7 +54,8 @@ define([
 	"./widgets/filterable.backcompat",
 	"./widgets/tabs",
 	"./zoom",
-	"./zoom/iosorientationfix"
+	"./zoom/iosorientationfix",
+	"./widgets/pagecontainer.transitions"
 ], function( require ) {
 	require( [ "./init" ], function() {} );
 });

@@ -33,6 +33,7 @@ $files = array(
 	'navigation/navigator.js',
 	'navigation/method.js',
 	'widgets/pagecontainer.js',
+	'widgets/pagecontainer.transitions.js',
 	'navigation.js',
 	'transitions/transition.js',
 	'transitions/serial.js',

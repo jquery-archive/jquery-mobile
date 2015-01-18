@@ -98,23 +98,6 @@ define( [
 		}
 	};
 
-	// Direct focus to the page title, or otherwise first focusable element
-	$.mobile.focusPage = function ( page ) {
-		var autofocus = page.find( "[autofocus]" ),
-			pageTitle = page.find( ".ui-title:eq(0)" );
-
-		if ( autofocus.length ) {
-			autofocus.focus();
-			return;
-		}
-
-		if ( pageTitle.length ) {
-			pageTitle.focus();
-		} else{
-			page.focus();
-		}
-	};
-
 	// No-op implementation of transition degradation
 	$.mobile._maybeDegradeTransition = $.mobile._maybeDegradeTransition || function( transition ) {
 		return transition;

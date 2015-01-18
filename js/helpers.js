@@ -73,6 +73,25 @@ define( [
 		// Place to store various widget extensions
 		behaviors: {},
 
+		// Custom logic for giving focus to a page
+		focusPage: function( page ) {
+
+			// First, look for an element explicitly marked for page focus
+			var focusElement = page.find( "[autofocus]" );
+
+			// If we do not find an element with the "autofocus" attribute, look for the page title
+			if ( !focusElement.length ) {
+				focusElement = page.find( ".ui-title" ).eq( 0 );
+			}
+
+			// Finally, fall back to focusing the page itself
+			if ( !focusElement.length ) {
+				focusElement = page;
+			}
+
+			focusElement.focus();
+		},
+
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
 			if ( $.type( ypos ) !== "number" ) {
