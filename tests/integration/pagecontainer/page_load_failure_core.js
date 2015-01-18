@@ -15,12 +15,14 @@ asyncTest( "hides loader and clears transition lock when page load fails", funct
 					$( "#go-to-other-page" ).click();
 				},
 				function() {
-					deepEqual( $.mobile.activePage.attr( "id" ), "other-page",
+					deepEqual( $.mobile.pageContainer.pagecontainer( "getActivePage" )
+						.attr( "id" ), "other-page",
 						"The other page is the active page" );
 					$.mobile.back();
 				},
 				function() {
-					deepEqual( $.mobile.activePage.attr( "id" ), "start-page",
+					deepEqual( $.mobile.pageContainer.pagecontainer( "getActivePage" )
+						.attr( "id" ), "start-page",
 						"Returned to start page" );
 					start();
 				}
