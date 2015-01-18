@@ -237,7 +237,7 @@ define( [
 
 		//add active state on vclick
 		$.mobile.document.bind( "vclick", function( event ) {
-			var $btn, target = event.target;
+			var theButton, target = event.target;
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
 			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
@@ -272,16 +272,16 @@ define( [
 				}
 			}
 
-			$btn = $( target ).closest( ".ui-btn" );
+			theButton = $( target ).closest( ".ui-btn" );
 
-			if ( $btn.length > 0 &&
-				!( $btn.hasClass( "ui-state-disabled" ||
+			if ( theButton.length > 0 &&
+				!( theButton.hasClass( "ui-state-disabled" ||
 
 					// DEPRECATED as of 1.4.0 - remove after 1.4.0 release
 					// only ui-state-disabled should be present thereafter
-					$btn.hasClass( "ui-disabled" ) ) ) ) {
+					theButton.hasClass( "ui-disabled" ) ) ) ) {
 				$.mobile.removeActiveLinkClass( true );
-				$.mobile.activeClickedLink = $btn;
+				$.mobile.activeClickedLink = theButton;
 				$.mobile.activeClickedLink.addClass( $.mobile.activeBtnClass );
 			}
 		});
