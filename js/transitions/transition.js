@@ -11,10 +11,7 @@ define( [
 
 	// TODO event.special.scrollstart
 	"../events/scroll",
-	"../animationComplete",
-
-	// TODO $.mobile.focusPage reference
-	"../navigation" ], function( jQuery ) {
+	"../animationComplete" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {
