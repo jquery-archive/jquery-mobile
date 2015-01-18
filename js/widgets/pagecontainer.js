@@ -1,5 +1,5 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Widget to create page container which manages pages and transitions
+//>>description: Widget to create page container which manages pages
 //>>label: Content Management
 //>>group: Navigation
 define( [
@@ -13,8 +13,7 @@ define( [
 	"../navigation/method",
 	"../events/scroll",
 	"../support",
-	"../widgets/page",
-	"../transitions/handlers" ], function( jQuery ) {
+	"../widgets/page" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -746,15 +745,6 @@ define( [
 			}, this);
 		},
 
-		_getTransitionHandler: function( transition ) {
-			transition = $.mobile._maybeDegradeTransition( transition );
-
-			//find the transition handler for the specified transition. If there
-			//isn't one in our transitionHandlers dictionary, use the default one.
-			//call the handler immediately to kick-off the transition.
-			return $.mobile.transitionHandlers[ transition ] || $.mobile.defaultTransitionHandler;
-		},
-
 		// TODO move into transition handlers?
 		_triggerCssTransitionEvents: function( to, from, prefix ) {
 			var samePage = false;
@@ -788,12 +778,27 @@ define( [
 			}, to );
 		},
 
+		_performTransition: function( transition, reverse, to, from ) {
+			var transitionDeferred = $.Deferred();
+
+			if ( from ) {
+				from.removeClass( "ui-page-active" );
+			}
+			if ( to ) {
+				to.addClass( "ui-page-active" );
+			}
+			this._delay( function() {
+				transitionDeferred.resolve( transition, reverse, to, from, false );
+			}, 0 );
+
+			return transitionDeferred.promise();
+		},
+
 		// TODO make private once change has been defined in the widget
 		_cssTransition: function( to, from, options ) {
 			var transition = options.transition,
 				reverse = options.reverse,
 				deferred = options.deferred,
-				TransitionHandler,
 				promise;
 
 			this._triggerCssTransitionEvents( to, from, "before" );
@@ -801,9 +806,7 @@ define( [
 			// TODO put this in a binding to events *outside* the widget
 			this._hideLoading();
 
-			TransitionHandler = this._getTransitionHandler( transition );
-
-			promise = ( new TransitionHandler( transition, reverse, to, from ) ).transition();
+			promise = this._performTransition( transition, reverse, to, from );
 
 			promise.done( $.proxy( function() {
 				this._triggerCssTransitionEvents( to, from );
