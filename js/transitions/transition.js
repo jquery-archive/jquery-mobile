@@ -136,7 +136,7 @@ define( [
 			$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + this.name );
 		},
 
-		transition: function() {
+		transition: function( toScroll ) {
 			// NOTE many of these could be calculated/recorded in the constructor, it's my
 			//      opinion that binding them as late as possible has value with regards to
 			//      better transitions with fewer bugs. Ie, it's not guaranteed that the
@@ -148,7 +148,7 @@ define( [
 				maxTransitionOverride = $.mobile.maxTransitionWidth !== false &&
 					$.mobile.window.width() > $.mobile.maxTransitionWidth;
 
-			this.toScroll = $.mobile.navigate.history.getActive().lastScroll || $.mobile.defaultHomeScroll;
+			this.toScroll = ( toScroll ? toScroll : 0 );
 
 			none = !$.support.cssTransitions || !$.support.cssAnimations ||
 				maxTransitionOverride || !this.name || this.name === "none" ||

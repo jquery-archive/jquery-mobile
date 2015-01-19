@@ -5,6 +5,9 @@
 define( [
 	"jquery",
 	"./pagecontainer",
+
+	// For $.mobile.navigate.history
+	"../navigation/method",
 	"../transitions/handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
@@ -22,7 +25,8 @@ $.widget( "mobile.pagecontainer", $.mobile.pagecontainer, {
 	_performTransition: function( transition, reverse, to, from ) {
 		var TransitionHandler = this._getTransitionHandler( transition );
 
-		return ( new TransitionHandler( transition, reverse, to, from ) ).transition();
+		return ( new TransitionHandler( transition, reverse, to, from ) ).transition(
+			$.mobile.navigate.history.getActive().lastScroll || $.mobile.defaultHomeScroll );
 	}
 });
 
