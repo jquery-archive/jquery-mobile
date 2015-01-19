@@ -4,6 +4,7 @@
 define([
 	"require",
 	"./widgets/loader",
+	"./events",
 	"./events/navigate",
 	"./navigation/path",
 	"./navigation/history",
