@@ -14,7 +14,9 @@ asyncTest( "resetActivePageHeight() will be called when page is initialized late
 		})( $.mobile.resetActivePageHeight );
 	});
 
-	require([ "jquery", "./init" ], function() {
+	require([ "jquery", "./init" ]
+		.concat( ( window.location.search.indexOf( "transitions" ) > -1 ) ?
+			[ "./widgets/pagecontainer.transitions" ] : [] ), function() {
 		$.testHelper.detailedEventCascade([
 			function() {
 				$.mobile.initializePage();
