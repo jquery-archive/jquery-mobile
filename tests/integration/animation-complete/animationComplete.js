@@ -267,6 +267,32 @@
 		}, 1200 );
 	});
 
+	var createContextChecker = function( expectedTransitionContext, expectedAnimationContext ) {
+		var actualAnimationContext, actualTransitionContext,
+			completeCount = 0,
+			maybeAssert = function() {
+				completeCount++;
+				if ( completeCount === 2 ) {
+					deepEqual( actualTransitionContext, expectedTransitionContext,
+						"Transition context is correct" );
+					deepEqual( actualAnimationContext, expectedAnimationContext,
+						"Animation context is correct" );
+					start();
+				}
+			};
+
+		return {
+			animationHandler: function() {
+				actualAnimationContext = this;
+				maybeAssert();
+			},
+			transitionHandler: function() {
+				actualTransitionContext = this;
+				maybeAssert();
+			}
+		};
+	};
+
 	module( "Callback context and return value: event", {
 		teardown: function() {
 			$( "#transition-test" )
@@ -277,37 +303,22 @@
 
 	asyncTest( "Make sure context and return value is correct for event", function() {
 		expect( 4 );
-		var transitionContext, animationContext, returnValue,
+
+		var returnValue,
 			transitionTest = $( "#transition-test" ),
 			animationTest = $( "#animation-test" ),
-			completeCount = 0,
-			maybeAssert = function() {
-				completeCount++;
-				if ( completeCount === 2 ) {
-					deepEqual( transitionContext, $( "#transition-test" )[ 0 ],
-						"Transition context is correct" );
-					deepEqual( animationContext, $( "#animation-test" )[ 0 ],
-						"Animation context is correct" );
-					start();
-				}
-			};
+			checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
 
 		returnValue = transitionTest
 			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
-			.animationComplete( function() {
-				transitionContext = this;
-				maybeAssert();
-			}, "transition" );
+			.animationComplete( checker.transitionHandler, "transition" );
 
 		deepEqual( returnValue, transitionTest,
 			"Returned jQuery object for transition is the one passed in" );
 
 		returnValue = animationTest
 			.addClass( "in" )
-			.animationComplete( function() {
-				animationContext = this;
-				maybeAssert();
-			});
+			.animationComplete( checker.animationHandler );
 
 		deepEqual( returnValue, animationTest,
 			"Returned jQuery object for animation is the one passed in" );
@@ -318,33 +329,18 @@
 
 	asyncTest( "Make sure context and return value is correct for fallback", function() {
 		expect( 4 );
-		var transitionContext, animationContext, returnValue,
+
+		var returnValue,
 			transitionTest = $( "#transition-test" ),
 			animationTest = $( "#animation-test" ),
-			completeCount = 0,
-			maybeAssert = function() {
-				completeCount++;
-				if ( completeCount === 2 ) {
-					deepEqual( transitionContext, $( "#transition-test" )[ 0 ],
-						"Transition context is correct" );
-					deepEqual( animationContext, $( "#animation-test" )[ 0 ],
-						"Animation context is correct" );
-					start();
-				}
-			};
+			checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
 
-		returnValue = transitionTest.animationComplete( function() {
-			transitionContext = this;
-			maybeAssert();
-		}, "transition" );
+		returnValue = transitionTest.animationComplete( checker.transitionHandler, "transition" );
 
 		deepEqual( returnValue, transitionTest,
 			"Returned jQuery object for transition is the one passed in" );
 
-		returnValue = animationTest.animationComplete( function() {
-			animationContext = this;
-			maybeAssert();
-		});
+		returnValue = animationTest.animationComplete( checker.animationHandler );
 
 		deepEqual( returnValue, animationTest,
 			"Returned jQuery object for animation is the one passed in" );
@@ -369,37 +365,22 @@
 
 	asyncTest( "Make sure context and return value is correct for no support", function() {
 		expect( 4 );
-		var transitionContext, animationContext, returnValue,
+
+		var returnValue,
 			transitionTest = $( "#transition-test" ),
 			animationTest = $( "#animation-test" ),
-			completeCount = 0,
-			maybeAssert = function() {
-				completeCount++;
-				if ( completeCount === 2 ) {
-					deepEqual( transitionContext, $( "#transition-test" )[ 0 ],
-						"Transition context is correct" );
-					deepEqual( animationContext, $( "#animation-test" )[ 0 ],
-						"Animation context is correct" );
-					start();
-				}
-			};
+			checker = createContextChecker( transitionTest[ 0 ], animationTest[ 0 ] );
 
 		returnValue = transitionTest
 			.addClass( "ui-panel-animate ui-panel-position-left ui-panel-display-overlay" )
-			.animationComplete( function() {
-				transitionContext = this;
-				maybeAssert();
-			}, "transition" );
+			.animationComplete( checker.transitionHandler, "transition" );
 
 		deepEqual( returnValue, transitionTest,
 			"Returned jQuery object for transition is the one passed in" );
 
 		returnValue = animationTest
 			.addClass( "in" )
-			.animationComplete( function() {
-				animationContext = this;
-				maybeAssert();
-			});
+			.animationComplete( checker.animationHandler );
 
 		deepEqual( returnValue, animationTest,
 			"Returned jQuery object for animation is the one passed in" );
