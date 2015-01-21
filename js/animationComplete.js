@@ -69,12 +69,12 @@ define( [
 			if ( fallbackTime === undefined ) {
 
 				// Make sure the was not bound to document before checking .css
-				if ( $( this ).context !== document ) {
+				if ( this.context !== document ) {
 
 					// Parse the durration since its in second multiple by 1000 for milliseconds
 					// Multiply by 3 to make sure we give the animation plenty of time.
 					duration = parseFloat(
-						$( this ).css( props[ animationType ].duration )
+						this.css( props[ animationType ].duration )
 					) * 3000;
 				}
 
@@ -86,10 +86,11 @@ define( [
 
 			// Sets up the fallback if event never comes
 			timer = setTimeout( function() {
-				$( that ).off( props[ animationType ].event, eventBinding );
-				that.each( function() {
-					callback.apply( this );
-				});
+				that
+					.off( props[ animationType ].event, eventBinding )
+					.each( function() {
+						callback.apply( this );
+					});
 			}, duration );
 
 			// Bind the event
