@@ -939,7 +939,7 @@ define( [
 				historyDir, pageTitle, isDialog,
 				alreadyThere, newPageTitle,
 				params,	cssTransitionDeferred,
-				beforeTransition;
+				beforeTransition, focusElement;
 
 			// If we are in the midst of a transition, queue the current request.
 			// We'll call changePage() once we're done with the current transition
@@ -1036,21 +1036,18 @@ define( [
 			}
 
 			// Kill the keyboard.
-			// XXX_jblas: We need to stop crawling the entire document to kill focus.
-			//            Instead, we should be tracking focus with a delegate()
-			//            handler so we already have the element in hand at this
-			//            point.
-			// Wrap this in a try/catch block since IE9 throw "Unspecified error" if
+			// Wrap this in a try/catch block since IE9 throws "Unspecified error" if
 			// document.activeElement is undefined when we are in an IFrame.
 			try {
-				if ( document.activeElement &&
-					document.activeElement.nodeName.toLowerCase() !== "body" ) {
+				focusElement = this.document[ 0 ].activeElement;
+			}
+			catch( e ) {}
 
-					$( document.activeElement ).blur();
-				} else {
-					$( "input:focus, textarea:focus, select:focus" ).blur();
-				}
-			} catch( e ) {}
+			if ( focusElement &&
+					focusElement !== this.window[ 0 ] &&
+					focusElement.nodeName.toLowerCase() !== "body" ) {
+				$( focusElement ).blur();
+			}
 
 			// Record whether we are at a place in history where a dialog used to be -
 			// if so, do not add a new history entry and do not change the hash either
