@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Button button
+ * jQuery UI Button button-classes
  * http://jqueryui.com
  *
  * Copyright 2014 jQuery Foundation and other contributors
@@ -24,17 +24,18 @@
 	}
 }(function( $ ) {
 
-var typeClasses = "ui-button-icons-only ui-button-icon-only ui-button-text-icons" +
-		" ui-button-text-only ui-icon-beginning ui-icon-end ui-icon-top ui-icon-bottom",
-	formResetHandler = function() {
+var formResetHandler = function() {
 		var form = $( this );
 		setTimeout(function() {
+			// We find .ui-button first then filer by :ui-button because doing a
+			// widget pseudo selectors are very very slow but we need to filter out
+			// css only buttons
 			form.find( ".ui-button" ).filter( ":ui-button" ).button( "refresh" );
 		});
 	};
 
 $.widget( "ui.button", {
-	version: "button",
+	version: "button-classes",
 	defaultElement: "<button>",
 	options: {
 		disabled: null,
@@ -43,9 +44,7 @@ $.widget( "ui.button", {
 		icon: null,
 		iconPosition: "beginning",
 		classes: {
-			"ui-button": "ui-corner-all",
-			"ui-button-icon-only": "",
-			"ui-button-icon": ""
+			"ui-button": "ui-corner-all"
 		}
 	},
 
@@ -97,9 +96,8 @@ $.widget( "ui.button", {
 	_enhance: function() {
 		this._setOption( "disabled", this.options.disabled );
 
-		this.element
-			.addClass( this._classes( "ui-button" ) + " ui-widget" )
-			.attr( "role", "button" );
+		this._addClass( "ui-button", " ui-widget" );
+		this.element.attr( "role", "button" );
 
 		// Check to see if the label needs to be set or if its already correct
 		if ( this.options.label && this.options.label !== this.originalLabel ) {
@@ -124,26 +122,24 @@ $.widget( "ui.button", {
 
 	_updateIcon: function( icon ) {
 		if ( !this.icon ) {
-			this.icon = $( "<span>" ).addClass( this._classes( "ui-button-icon" ) + " ui-icon" );
+			this.icon = $( "<span>" );
+			this._addClass( this.icon, "ui-button-icon", " ui-icon" );
 
 			if ( !this.options.showLabel ) {
-				this.element.addClass( this._classes( "ui-button-icon-only" ) );
+				this._addClass( "ui-button-icon-only" );
 			} else {
-				this.element.addClass( "ui-icon-" + this.options.iconPosition );
+				this._addClass( null, "ui-icon-" + this.options.iconPosition );
 			}
 		} else {
-			this.icon.removeClass( this.options.icon );
+			this._removeClass( this.icon, null, this.options.icon );
 		}
-
-		this.icon.addClass( icon ).appendTo( this.element );
+		this._addClass( this.icon, null, icon );
+		this.icon.appendTo( this.element );
 		return this;
 	},
 
 	_destroy: function() {
-		this.element
-			.removeClass( this._classes( "ui-button ui-button-icon-only" ) + " ui-widget" +
-				" ui-state-active " + typeClasses )
-			.removeAttr( "role" );
+		this.element.removeAttr( "role" );
 
 		if ( this.icon ) {
 			this.icon.remove();
@@ -153,46 +149,29 @@ $.widget( "ui.button", {
 		}
 	},
 
-	_elementsFromClassKey: function( classKey ) {
-		switch ( classKey ) {
-			case "ui-button-icon-only":
-				if ( this.options.showLabel ) {
-					return $();
-				}
-				break;
-			case "ui-button-icon":
-				if ( this.icon ) {
-					return this.icon;
-				}
-				return $();
-			default:
-				return this._superApply( arguments );
-		}
-	},
-
 	_setOption: function( key, value ) {
 		if ( key === "icon" ) {
 			if ( value !== null ) {
 				this._updateIcon( value );
 			} else {
 				this.icon.remove();
-				this.element.removeClass( this._classes( "ui-button-icon" ) + " ui-icon-" +
-					this.options.iconPosition );
+				this._removeClass( "ui-button-icon", " ui-icon-" + this.options.iconPosition );
 			}
 		}
 
 		// Make sure we can't end up with a button that has no text nor icon
 		if ( key === "showLabel" ) {
 			if ( ( !value && this.options.icon ) || value ) {
-				this.element.toggleClass( this._classes( "ui-button-icon-only" ), !value )
-					.toggleClass( this.options.iconPosition, !!value );
+				this._toggleClass( this._classes( "ui-button-icon-only" ), null, !value )
+					._toggleClass( null, this.options.iconPosition, value );
 				this._updateTooltip();
 			} else {
 				value = true;
 			}
 		}
 		if ( key === "iconPosition" && this.options.icon ) {
-			this.element.addClass( value ).removeClass( this.options.iconPosition );
+			this._addClass( null, value )
+				._removeClass( null, this.options.iconPosition );
 		}
 		if ( key === "label" ) {
 			if ( this.isInput ) {
@@ -206,7 +185,7 @@ $.widget( "ui.button", {
 		}
 		this._super( key, value );
 		if ( key === "disabled" ) {
-			this.element.toggleClass( "ui-state-disabled", value )[ 0 ].disabled = value;
+			this._toggleClass( null, "ui-state-disabled", value ).element[ 0 ].disabled = value;
 			this.element.blur();
 		}
 	},
@@ -272,7 +251,6 @@ if ( $.uiBackCompat !== false ) {
 				this.options.icons.primary = value;
 			}
 			if ( key === "icons" ) {
-				this._setOption( "icon", value );
 				if ( value.primary ) {
 					this._setOption( "icon", value.primary );
 					this._setOption( "iconPosition", "beginning" );

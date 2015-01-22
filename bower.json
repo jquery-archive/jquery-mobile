@@ -15,7 +15,7 @@
 	],
 	"dependencies": {
 		"jquery": ">=1.11.1",
-		"jquery-ui": "jquery/jquery-ui#button"
+		"jquery-ui": "arschmitz/jquery-ui#button-classes"
 	},
 	"devDependencies": {
 		"requirejs": "2.1.2",
