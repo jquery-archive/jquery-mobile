@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Widget button
+ * jQuery UI Widget button-classes
  * http://jqueryui.com
  *
  * Copyright 2014 jQuery Foundation and other contributors
@@ -258,6 +258,7 @@ $.Widget.prototype = {
 		this.bindings = $();
 		this.hoverable = $();
 		this.focusable = $();
+		this.classObject = {};
 
 		if ( element !== this ) {
 			$.data( element, this.widgetFullName, this );
@@ -291,7 +292,12 @@ $.Widget.prototype = {
 	_init: $.noop,
 
 	destroy: function() {
+		var that = this;
 		this._destroy();
+		$.each( this.classObject, function( key, value ) {
+			that._removeClass( value, key );
+		});
+
 		// we can probably remove the unbind calls in 2.0
 		// all event bindings should go through this._on()
 		this.element
@@ -303,9 +309,7 @@ $.Widget.prototype = {
 		this.widget()
 			.unbind( this.eventNamespace )
 			.removeAttr( "aria-disabled" )
-			.removeClass(
-				this.widgetFullName + "-disabled " +
-				"ui-state-disabled" );
+			.removeClass( this.widgetFullName + "-disabled " + "ui-state-disabled" );
 
 		// clean up events and states
 		this.bindings.unbind( this.eventNamespace );
@@ -357,7 +361,6 @@ $.Widget.prototype = {
 
 		return this;
 	},
-
 	_setOptions: function( options ) {
 		var key;
 
@@ -367,22 +370,17 @@ $.Widget.prototype = {
 
 		return this;
 	},
-
-	_elementsFromClassKey: function( classKey ) {
-		if ( this.options.classes[ classKey ] ) {
-			return this.element;
-		} else {
-			return $();
-		}
-	},
-
 	_setOption: function( key, value ) {
+		var classKey, elements;
 		if ( key === "classes" ) {
-			for ( var classKey in value ) {
+			for ( classKey in value ) {
 				if ( value[ classKey ] !== this.options.classes[ classKey ] ) {
-					this._elementsFromClassKey( classKey )
-						.removeClass( this._classesFromObject( classKey, this.options.classes ) )
-						.addClass( this._classesFromObject( classKey, value ) );
+					if ( this.classObject[ classKey ] && this.classObject[ classKey ].length > 0 ) {
+						elements =  $.extend( {}, this.classObject[ classKey ] );
+						this._removeClass( this.classObject[ classKey ], classKey );
+						elements.addClass(
+							this._classes( elements, classKey, null, true, value ) );
+					}
 				}
 			}
 		}
@@ -403,32 +401,60 @@ $.Widget.prototype = {
 		return this;
 	},
 
-	_classesFromObject: function( key, classes ) {
-		var out = [],
-			parts = key.split( " " ),
-			i = parts.length;
-
-		while ( i-- ) {
-			out.push( parts[ i ] );
-
-			// Avoid extra spaces in the return value resulting from pushing an empty classes value
-			if ( classes[ parts[ i ] ] ) {
-				out.push( classes[ parts[ i ] ] );
-			}
-		}
-
-		return out.join( " " );
-	},
-
-	_classes: function( key ) {
-		return this._classesFromObject( key, this.options.classes );
-	},
-
 	enable: function() {
 		return this._setOptions({ disabled: false });
 	},
 	disable: function() {
 		return this._setOptions({ disabled: true });
+	},
+
+	_classes: function( element, keys, extra, add, object ) {
+		var full = [],
+			that = this;
+
+		object = object || this.options.classes;
+
+		function processClassString( classes, checkOption ) {
+			var current, i;
+			for ( i = 0; i < classes.length; i++ ) {
+				current = that.classObject[ classes[ i ] ] ? that.classObject[ classes[ i ] ] : $();
+				that.classObject[ classes[ i ] ] = current[ add ? "add" : "not" ]( element );
+
+				full.push( classes[ i ] );
+
+				if ( checkOption && object[ classes[ i ] ] ) {
+					full.push( object[ classes[ i ] ] );
+				}
+			}
+		}
+
+		if ( keys ) {
+			processClassString( keys.split( " " ), true );
+		}
+		if ( extra ) {
+			processClassString( extra.split( " " ) );
+		}
+
+		return full.join( " " );
+	},
+
+	_removeClass: function( element, keys, extra ) {
+		return this._toggleClass( element, keys, extra, false );
+	},
+
+	_addClass: function( element, keys, extra ) {
+		return this._toggleClass( element, keys, extra, true );
+	},
+
+	_toggleClass: function( element, keys, extra, bool ) {
+		bool = ( typeof bool === "boolean" ) ? bool : extra ;
+		if ( typeof element === "string" || element === null ) {
+			extra = keys;
+			keys = element;
+			element = this.element;
+		}
+		element.toggleClass( this._classes( element, keys, extra, bool ), bool );
+		return this;
 	},
 
 	_on: function( suppressDisabledCheck, element, handlers ) {
