@@ -1035,9 +1035,9 @@ define( [
 				historyDir = settings.direction === "back" ? -1 : 1;
 			}
 
-			// Kill the keyboard.
-			// Wrap this in a try/catch block since IE9 throws "Unspecified error" if
-			// document.activeElement is undefined when we are in an IFrame.
+			// We blur the focussed element to cause the virtual keyboard to disappear, but we must
+			// wrap the retrieval of the focussed element in a try/catch block since IE9 throws
+			// "Unspecified error" if document.activeElement is undefined when we are in an IFrame.
 			try {
 				focusElement = this.document[ 0 ].activeElement;
 			}

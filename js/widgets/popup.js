@@ -26,7 +26,7 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
-// Safely handle IE9 fragility
+// IE9 sometimes throws an exception when one attempts to access document.activeElement
 function getFocusElement( document ) {
 	var focusElement;
 
