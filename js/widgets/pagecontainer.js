@@ -934,11 +934,8 @@ define( [
 		},
 
 		transition: function( toPage, triggerData, settings ) {
-			var fromPage, url, pageUrl, fileUrl,
-				active, activeIsInitialPage,
-				historyDir, pageTitle, isDialog,
-				alreadyThere, newPageTitle,
-				params,	cssTransitionDeferred,
+			var fromPage, url, pageUrl, fileUrl, active, activeIsInitialPage, historyDir,
+				pageTitle, isDialog, alreadyThere, newPageTitle, params, cssTransitionDeferred,
 				beforeTransition, focusElement;
 
 			// If we are in the midst of a transition, queue the current request.
