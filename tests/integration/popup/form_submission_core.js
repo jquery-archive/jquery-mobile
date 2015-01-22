@@ -1,7 +1,7 @@
 asyncTest( "Form submission from popup works", function() {
-	var eventNs = ".formSubmissionFromPopupWorks";
-
 	expect( 4 );
+
+	var eventNs = ".formSubmissionFromPopupWorks";
 
 	$.testHelper.detailedEventCascade([
 		function() {
