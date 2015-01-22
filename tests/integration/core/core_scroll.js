@@ -4,12 +4,13 @@
 
 (function($){
 	var libName = "core",
-			scrollTimeout = 20, // TODO expose timing as an attribute
+			scrollTimeout = 70, // TODO expose timing as an attribute
 			scrollStartEnabledTimeout = 150;
 
 	module(libName, {
-		setup: function(){
-			$("<div id='scroll-testing' style='height: 1000px'></div>").appendTo("body");
+		setup: function() {
+			$( "<div id='scroll-testing' " +
+				"style='height: " + ( screen.height * 3 ) + "px'></div>").appendTo( "body" );
 		},
 
 		teardown: function(){
@@ -18,8 +19,9 @@
 	});
 
 	var scrollUp = function( pos ){
-		$(window).scrollTop(1000);
-		ok($(window).scrollTop() > 0, $(window).scrollTop());
+		$( window ).scrollTop( screen.height );
+		deepEqual( $( window ).scrollTop() > 0, true,
+			"After setting scrollTop, it is " + $( window ).scrollTop() );
 		$.mobile.silentScroll(pos);
 	};
 
@@ -27,7 +29,9 @@
 		scrollUp();
 
 		setTimeout(function(){
-			deepEqual($(window).scrollTop(), 0);
+			deepEqual( $(window).scrollTop(), $.mobile.defaultHomeScroll,
+				"After parameterless silentScroll(), scrollTop is $.mobile.defaultHomescroll: " +
+					$.mobile.defaultHomeScroll );
 			start();
 		}, scrollTimeout);
 	});

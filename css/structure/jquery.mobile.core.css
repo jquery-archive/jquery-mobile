@@ -1,6 +1,6 @@
 /* Some unsets */
 .ui-mobile,
-.ui-mobile body {
+.ui-mobile .ui-mobile-viewport {
 	height: 99.9%;
 }
 .ui-mobile fieldset,
