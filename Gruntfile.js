@@ -923,6 +923,8 @@ module.exports = function( grunt ) {
 					"qunit/qunit.js": "qunit/qunit/qunit.js",
 					"qunit/qunit.css": "qunit/qunit/qunit.css",
 					"qunit/LICENSE.txt": "qunit/LICENSE.txt",
+					"qunit-assert-classes/qunit-assert-classes.js": "qunit-assert-classes/qunit-assert-classes.js",
+					"qunit-assert-classes/LICENSE.txt": "qunit-assert-classes/LICENSE",
 					"jshint/jshint.js": "jshint/dist/jshint.js"
 				}
 			},
@@ -954,10 +956,10 @@ module.exports = function( grunt ) {
 					}
 				},
 				files: {
-					"jquery-ui/jquery.ui.core.js": "jquery-ui/ui/jquery.ui.core.js",
-					"jquery-ui/jquery.ui.widget.js": "jquery-ui/ui/jquery.ui.widget.js",
-					"jquery-ui/jquery.ui.tabs.js": "jquery-ui/ui/jquery.ui.tabs.js",
-					"jquery-ui/MIT-LICENSE.txt": "jquery-ui/MIT-LICENSE.txt"
+					"jquery-ui/core.js": "jquery-ui/ui/core.js",
+					"jquery-ui/widget.js": "jquery-ui/ui/widget.js",
+					"jquery-ui/tabs.js": "jquery-ui/ui/tabs.js",
+					"jquery-ui/LICENSE.txt": "jquery-ui/LICENSE.txt"
 				}
 			},
 		},
