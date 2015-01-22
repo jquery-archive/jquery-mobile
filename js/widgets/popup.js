@@ -835,7 +835,9 @@ $.widget( "mobile.popup", {
 			parsedDst = $.mobile.path.parseUrl( parsedDst );
 			toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
 
-			if ( this._myUrl !== $.mobile.path.makeUrlAbsolute( toUrl ) ) {
+			if ( this._myUrl !== $.mobile.path.makeUrlAbsolute( toUrl ) ||
+					data.options.reloadPage ) {
+
 				// Going to a different page - close immediately
 				immediate = true;
 			} else {
