@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Core button
+ * jQuery UI Core button-classes
  * http://jqueryui.com
  *
  * Copyright 2014 jQuery Foundation and other contributors
@@ -24,7 +24,7 @@
 $.ui = $.ui || {};
 
 $.extend( $.ui, {
-	version: "button",
+	version: "button-classes",
 
 	keyCode: {
 		BACKSPACE: 8,
