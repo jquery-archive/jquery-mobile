@@ -2,6 +2,8 @@
 .ui-mobile,
 .ui-mobile body {
 	height: 99.9%;
+    margin: 0;
+    padding: 0;
 }
 .ui-mobile fieldset,
 .ui-page {
