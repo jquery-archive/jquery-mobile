@@ -1,6 +1,8 @@
 asyncTest( "Form submission from popup works", function() {
 	var eventNs = ".formSubmissionFromPopupWorks";
 
+	expect( 4 );
+
 	$.testHelper.detailedEventCascade([
 		function() {
 			$( "#open-popup-link" ).click();
