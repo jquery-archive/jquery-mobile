@@ -36,7 +36,7 @@ if ( $.mobileBackcompat !== false ) {
 		},
 
 		_classesToOption: function( value ) {
-			if ( value[ this.classProp ] ) {
+			if ( this.classPop && value[ this.classProp ] ) {
 				var that = this,
 					valueArray = value[ this.classProp ].split( " " );
 				$.each( this._boolOptions, function( option, className ){
@@ -52,43 +52,50 @@ if ( $.mobileBackcompat !== false ) {
 		},
 
 		_optionsToClasses: function( option ) {
-			var newValue = "",
+			var classArray,
+				newValue = "",
 				prop = this.classProp,
 				classes = this.options.classes,
-				classArray = classes[ prop ].split ( " " ),
 				className = this._boolOptions[ option ];
 
-			if ( this.options[ option ] ) {
-				newValue = classes[ prop ] + " " + className;
-			} else {
-				newValue = classArray
-					.splice( classArray.indexOf( this._boolOptions[ option ] ) - 1, 1 )
-					.join( " " );
-			}
-			this.option( "classes." + prop, newValue );
+			if ( prop ) {
+				classArray = classes[ prop ].split ( " " );
 
+				if ( this.options[ option ] ) {
+					newValue = classes[ prop ] + " " + className;
+				} else {
+					newValue = classArray
+						.splice( classArray.indexOf( this._boolOptions[ option ] ) - 1, 1 )
+						.join( " " );
+				}
+				this.option( "classes." + prop, newValue );
+			}
 		},
 
 		_setInitalOptions: function() {
-			var that = this,
+			var originalClasses, currentClasses,
+				that = this,
 				options = this.options,
 				original = $[ this.namespace ][ this.widgetName ].prototype.options,
-				originalClasses = original.classes[ this.classProp ].split( " " ),
-				currentClasses = this.options.classes[ that.classProp ].split( " " );
+				prop = this.classProp;
 
+			if ( prop && original.classes[ prop ] && this.options.classes[ prop ] ) {
+				originalClasses = original.classes[ prop ].split( " " );
+				currentClasses = this.options.classes[ prop ].split( " " );
 
-			$.each( this._boolOptions, function( option, className ) {
-				if( that.options[ option ] !== undefined ) {
-					var initial = ( originalClasses.indexOf( className ) !== -1 ),
-						current = ( currentClasses.indexOf( className ) !== -1 );
+				$.each( this._boolOptions, function( option, className ) {
+					if( that.options[ option ] !== undefined ) {
+						var initial = ( originalClasses.indexOf( className ) !== -1 ),
+							current = ( currentClasses.indexOf( className ) !== -1 );
 
-					if ( initial !== current ) {
-						options[ option ] = current;
-					} else if ( options[ option ] !== original[ option ] ) {
-						that._optionsToClasses( option, options[ option ] );
+						if ( initial !== current ) {
+							options[ option ] = current;
+						} else if ( options[ option ] !== original[ option ] ) {
+							that._optionsToClasses( option, options[ option ] );
+						}
 					}
-				}
-			});
+				});
+			}
 		},
 
 		_setOption: function( key, value ) {
