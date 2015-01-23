@@ -24,8 +24,8 @@ $.widget( "ui.checkboxradio", $.ui.checkboxradio, {
 		theme: "inherit"
 	},
 
-	_enhanced: function() {
-		if ( !this.options.enahnced ) {
+	_enhance: function() {
+		if ( !this.options.enhanced ) {
 			this._super();
 		} else if ( this.options.icon ) {
 			this.icon = this.element.find( "ui-button-icon" );
