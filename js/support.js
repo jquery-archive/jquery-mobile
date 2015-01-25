@@ -244,11 +244,6 @@ if ( nokiaLTE7_3 ) {
 	});
 }
 
-// For ruling out shadows via css
-if ( !$.support.boxShadow ) {
-	$( "html" ).addClass( "ui-noboxshadow" );
-}
-
 })( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });

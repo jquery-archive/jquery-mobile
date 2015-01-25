@@ -26,6 +26,11 @@ define([
 		html.removeClass( "ui-mobile-rendering" );
 	}
 
+	// For ruling out shadows via css
+	if ( !$.support.boxShadow ) {
+		$( "html" ).addClass( "ui-noboxshadow" );
+	}
+
 	// trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
 	$( window.document ).trigger( "mobileinit" );
 
