@@ -109,6 +109,25 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		}
 	},
 
+	// Focus the button before the page containing the widget replaces the dialog page
+	_handleBeforeTransition: function( event, data ) {
+		var focusButton;
+
+		if ( data && data.prevPage && data.prevPage[ 0 ] === this.menuPage[ 0 ] ) {
+			focusButton = $.proxy( function() {
+				this._delay( function() {
+					this._focusButton();
+				});
+			}, this );
+
+			if ( data.options && data.options.transition && data.options.transition !== "none" ) {
+				data.prevPage.animationComplete( focusButton );
+			} else {
+				focusButton();
+			}
+		}
+	},
+
 	_handleMenuPageHide: function() {
 
 		// After the dialog's done, we may want to trigger change if the value has actually changed
@@ -286,6 +305,8 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 		if ( this.isMultiple ) {
 			this._on( this.headerClose, { click: "_handleHeaderCloseClick" } );
 		}
+
+		this._on( this.document, { pagecontainerbeforetransition: "_handleBeforeTransition" } );
 
 		return this;
 	},
