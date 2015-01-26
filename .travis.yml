@@ -14,6 +14,7 @@ script: npm run-script ci
 branches:
   only:
     - master
+    - ui-1-12-tests
 
 env:
   - TYPES=unit
