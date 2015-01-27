@@ -41,10 +41,14 @@
 	});
 
 	asyncTest( "placeholder correctly gets ui-screen-hidden class after rebuilding", function() {
+		expect( 3 );
+
 		$.testHelper.sequence( [
 			function() {
 				// bring up the optgroup menu
 				ok( $( "#optgroup-and-placeholder-container a" ).length > 0, "there is in fact a button in the page" );
+				deepEqual( $( "#optgroup-and-placeholder-menu li.ui-li-divider" )
+					.first().hasClass( "ui-bar-b" ), true, "Optgroup header has swatch b" );
 				$( "#optgroup-and-placeholder-container a" ).trigger( "click" );
 			},
 
