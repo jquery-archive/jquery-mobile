@@ -32,10 +32,6 @@ function attachPopupHandler( popup, sources ) {
 					}
 				});
 			SyntaxHighlighter.highlight( {}, pre[ 0 ] );
-
-			// Give the syntax highlighter top-level div a tabindex so one can select and copy the
-			// code snippet
-			collapsible.children().last().attr( "tabindex", 0 );
 		});
 
 		collapsibleSet.find( "[data-role='collapsible']" ).first().attr( "data-collapsed", "false" );
