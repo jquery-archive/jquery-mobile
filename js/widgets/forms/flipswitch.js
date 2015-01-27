@@ -28,7 +28,7 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_create: function() {
-			var labels = this._findLabels();
+			var labels;
 
 			if ( !this.options.enhanced ) {
 				this._enhance();
@@ -76,13 +76,16 @@ $.widget( "mobile.flipswitch", $.extend({
 			// On iOS we need to prevent default when the label is clicked, otherwise it drops down
 			// the native select menu. We nevertheless pass the click onto the element like the
 			// native code would.
-			if ( labels.length ) {
-				this._on( labels, {
-					"click": function( event ) {
-						this.element.click();
-						event.preventDefault();
-					}
-				});
+			if ( this.element[ 0 ].nodeName.toLowerCase() === "select" ) {
+				labels = this._findLabels();
+				if ( labels.length ) {
+					this._on( labels, {
+						"click": function( event ) {
+							this.element.click();
+							event.preventDefault();
+						}
+					});
+				}
 			}
 	},
 
