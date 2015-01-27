@@ -7,6 +7,7 @@
 
 define( [
 	"jquery",
+	"../../navigation/path",
 	"../../core",
 	"../../widget",
 	"../../zoom",
@@ -27,6 +28,8 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_create: function() {
+			var labels = this._findLabels();
+
 			if ( !this.options.enhanced ) {
 				this._enhance();
 			} else {
@@ -69,6 +72,18 @@ $.widget( "mobile.flipswitch", $.extend({
 			this._on( {
 				"change": "refresh"
 			});
+
+			// On iOS we need to prevent default when the label is clicked, otherwise it drops down
+			// the native select menu. We nevertheless pass the click onto the element like the
+			// native code would.
+			if ( labels.length ) {
+				this._on( labels, {
+					"click": function( event ) {
+						this.element.click();
+						event.preventDefault();
+					}
+				});
+			}
 	},
 
 	_handleInputFocus: function() {
@@ -167,6 +182,19 @@ $.widget( "mobile.flipswitch", $.extend({
 		if ( direction !== existingDirection ) {
 			this[ direction ]();
 		}
+	},
+
+	// Copied with modifications from checkboxradio
+	_findLabels: function() {
+		var input = this.element[ 0 ],
+			labelsList = input.labels;
+
+		// NOTE: Windows Phone could not find the label through a selector
+		// filter works though.
+		return ( ( labelsList && labelsList.length ) ? $( labelsList ) :
+			$( this.document[ 0 ].getElementsByTagName( "label" ) )
+				.filter( "[for='" +
+					$.mobile.path.hashToSelector( input.getAttribute( "id" ) ) + "']" ) );
 	},
 
 	_toggle: function() {
