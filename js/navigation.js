@@ -74,25 +74,6 @@ function findClosestLink( ele ) {
 	return ele;
 }
 
-$.mobile.loadPage = function( url, opts ) {
-	var container;
-
-	opts = opts || {};
-	container = ( opts.pageContainer || $.mobile.pageContainer );
-
-	// create the deferred that will be supplied to loadPage callers
-	// and resolved by the content widget's load method
-	opts.deferred = $.Deferred();
-
-	// Preferring to allow exceptions for uninitialized opts.pageContainer
-	// widgets so we know if we need to force init here for users
-	container.pagecontainer( "load", url, opts );
-
-	// provide the deferred
-	return opts.deferred.promise();
-};
-
-//define vars for interal use
 
 /* internal utility functions */
 
@@ -411,7 +392,10 @@ $.mobile._registerInternalEvents = function() {
 			if ( url && $.inArray( url, urls ) === -1 ) {
 				urls.push( url );
 
-				$.mobile.loadPage( url, { role: $link.attr( "data-" + $.mobile.ns + "rel" ), prefetch: true } );
+				$.mobile.pageContainer.pagecontainer( "load", url, {
+					role: $link.attr( "data-" + $.mobile.ns + "rel" ),
+					prefetch: true
+				});
 			}
 		} );
 	} );

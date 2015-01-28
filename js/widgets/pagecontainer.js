@@ -913,7 +913,7 @@ $.widget( "mobile.pagecontainer", {
 			triggerData.absUrl = $.mobile.path.makeUrlAbsolute( to, this._findBaseWithDefault() );
 		} else {
 
-			// If the toPage is a jQuery object grab the absolute url stored in the loadPage
+			// If the toPage is a jQuery object grab the absolute url stored in the load()
 			// callback where it exists
 			triggerData.absUrl = settings.absUrl;
 		}
@@ -955,7 +955,7 @@ $.widget( "mobile.pagecontainer", {
 		// string, because an object can also be replaced by a string
 		to = triggerData.toPage;
 
-		// If the caller passed us a url, call loadPage() to make sure it is loaded into the DOM.
+		// If the caller passed us a url, call load() to make sure it is loaded into the DOM.
 		// We'll listen to the promise object it returns so we know when it is done loading or if
 		// an error ocurred.
 		if ( $.type( to ) === "string" ) {
