@@ -33,7 +33,7 @@
 
   <div role="main" class="ui-content">
      <h1>same page transitions</h1>
-     <div>All links within this page navigate to the page itself having the <code>allowSamePageTransition</code> option at <code>changePage()</code> method set to <strong>true</strong>. It seems, just the slide transition raises an issue so the page gets hidden.
+     <div>All links within this page navigate to the page itself having the <code>allowSamePageTransition</code> option at the <code>$.mobile.pageContainer.pagecontainer( "change" )</code> method set to <strong>true</strong>. It seems, just the slide transition raises an issue so the page gets hidden.
       <label><input type="checkbox" id="cb1" data-theme="b"> reverse transition </label>
       <label><input type="checkbox" id="cb2" data-theme="b"> add ui-page-active on pageshow </label>
     </div>
@@ -59,9 +59,11 @@ $('#page1').on('pagecreate', function() {
     var trans = $(this).text() || 'none',
         rev = !!$('#cb1').attr('checked');
 
-    $.mobile.changePage('#page1', { transition: trans,
-                                    allowSamePageTransition: true,
-                                    reverse: rev } );
+    $.mobile.pageContainer.pagecontainer( "change", "#page1", {
+		transition: trans,
+		allowSamePageTransition: true,
+		reverse: rev
+	});
     $('#p1').text( 'last transition: ' + trans + ' - reverse: ' + rev );
   });
 });

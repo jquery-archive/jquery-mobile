@@ -48,7 +48,24 @@ $.widget( "mobile.pagecontainer", {
 >>>>>>> Page: Style fixes powered by esformatter
 
 	options: {
-		theme: "a"
+		theme: "a",
+		changeOptions: {
+			transition: undefined,
+			reverse: false,
+			changeHash: true,
+			fromHashChange: false,
+
+			// By default we rely on the role defined by the @data-role attribute.
+			role: undefined,
+			duplicateCachedPage: undefined,
+			pageContainer: undefined,
+
+			//loading message shows by default when pages are being fetched during change()
+			showLoadMsg: true,
+			dataUrl: undefined,
+			fromPage: undefined,
+			allowSamePageTransition: false
+		}
 	},
 
 	initSelector: false,
@@ -284,7 +301,7 @@ $.widget( "mobile.pagecontainer", {
 				this.forward();
 			}
 
-			// Prevent changePage call
+			// Prevent change() call
 			return false;
 		} else {
 
@@ -347,11 +364,7 @@ $.widget( "mobile.pagecontainer", {
 			}
 		}
 
-		this._changeContent( this._handleDestination( to ), changePageOptions );
-	},
-
-	_changeContent: function( to, opts ) {
-		$.mobile.changePage( to, opts );
+		this.change( this._handleDestination( to ), changePageOptions );
 	},
 
 	_getBase: function() {
@@ -861,7 +874,7 @@ $.widget( "mobile.pagecontainer", {
 		// Release transition lock so navigation is free again
 		isPageTransitioning = false;
 		if ( pageTransitionQueue.length > 0 ) {
-			$.mobile.changePage.apply( null, pageTransitionQueue.pop() );
+			this.change.apply( this, pageTransitionQueue.pop() );
 		}
 	},
 
@@ -886,7 +899,7 @@ $.widget( "mobile.pagecontainer", {
 			isPageTransitioning = false;
 
 			// Store the original absolute url so that it can be provided to events in the
-			// triggerData of the subsequent changePage call
+			// triggerData of the subsequent change() call
 			options.absUrl = triggerData.absUrl;
 
 			this.transition( content, triggerData, options );
@@ -938,13 +951,13 @@ $.widget( "mobile.pagecontainer", {
 	change: function( to, options ) {
 
 		// If we are in the midst of a transition, queue the current request. We'll call
-		// changePage() once we're done with the current transition to service the request.
+		// change() once we're done with the current transition to service the request.
 		if ( isPageTransitioning ) {
 			pageTransitionQueue.unshift( arguments );
 			return;
 		}
 
-		var settings = $.extend( {}, $.mobile.changePage.defaults, options ),
+		var settings = $.extend( {}, this.options.changeOptions, options ),
 			triggerData = {};
 
 		// Make sure we have a fromPage.
@@ -980,7 +993,7 @@ $.widget( "mobile.pagecontainer", {
 			isDialog, alreadyThere, newPageTitle, params, cssTransitionDeferred, beforeTransition;
 
 		// If we are in the midst of a transition, queue the current request. We'll call
-		// changePage() once we're done with the current transition to service the request.
+		// change() once we're done with the current transition to service the request.
 		if ( isPageTransitioning ) {
 
 			// Make sure to only queue the to and settings values so the arguments work with a call
@@ -1035,11 +1048,11 @@ $.widget( "mobile.pagecontainer", {
 			toPage.jqmData( "role" ) === "dialog" ) &&
 			toPage.jqmData( "dialog" ) !== true;
 
-		// By default, we prevent changePage requests when the fromPage and toPage are the same
+		// By default, we prevent change() requests when the fromPage and toPage are the same
 		// element, but folks that generate content manually/dynamically and reuse pages want to be
 		// able to transition to the same page. To allow this, they will need to change the default
 		// value of allowSamePageTransition to true, *OR*, pass it in as an option when they
-		// manually call changePage(). It should be noted that our default transition animations
+		// manually call change(). It should be noted that our default transition animations
 		// assume that the formPage and toPage are different elements, so they may behave
 		// unexpectedly. It is up to the developer that turns on the allowSamePageTransitiona
 		// option to either turn off transition animations, or make sure that an appropriate
@@ -1063,7 +1076,7 @@ $.widget( "mobile.pagecontainer", {
 		// We need to make sure the page we are given has already been enhanced.
 		toPage.page( { role: settings.role } );
 
-		// If the changePage request was sent from a hashChange event, check to see if the page is
+		// If the change() request was sent from a hashChange event, check to see if the page is
 		// already within the urlHistory stack. If so, we'll assume the user hit the forward/back
 		// button and will try to match the transition accordingly.
 		if ( settings.fromHashChange ) {

@@ -15,9 +15,11 @@ $('#page1').on('pagecreate', function() {
     var trans = $(this).text() || 'none',
         rev = !!$('#cb1').attr('checked');
 
-    $.mobile.changePage('#page1', { transition: trans,
-                                    allowSamePageTransition: true,
-                                    reverse: rev } );
+    $.mobile.pageContainer.pagecontainer( "change", "#page1", {
+		transition: trans,
+        allowSamePageTransition: true,
+        reverse: rev
+	});
     $('#p1').text( 'last transition: ' + trans + ' - reverse: ' + rev );
   });
 });

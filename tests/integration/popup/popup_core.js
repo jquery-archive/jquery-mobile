@@ -552,7 +552,7 @@ asyncTest( "Navigating away from the popup page closes the no-history popup", fu
 
 		function() {
 			ok( $popup.is( ":visible" ), "popup is indeed visible" );
-			$.mobile.changePage( "#no-popups" );
+			$.mobile.pageContainer.pagecontainer( "change", "#no-popups" );
 		},
 
 		{

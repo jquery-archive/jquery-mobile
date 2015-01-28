@@ -132,7 +132,7 @@ $.extend( $.mobile, {
 				$.mobile.navigate.navigator.squash( path.parseLocation().href );
 			}
 
-			$.mobile.changePage( $.mobile.firstPage, {
+			$.mobile.pageContainer.pagecontainer( "change", $.mobile.firstPage, {
 				transition: "none",
 				reverse: true,
 				changeHash: false,
