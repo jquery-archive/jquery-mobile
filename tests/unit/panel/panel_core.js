@@ -468,14 +468,14 @@
 			},
 			function() {
 				deepEqual( count, 0, "getWrapper not called on close" );
-				$.mobile.changePage( "#page2" );
+				$.mobile.pageContainer.pagecontainer( "change", "#page2" );
 			},
 			{
 				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
 			},
 			function() {
 				deepEqual( count, 0, "getWrapper not called on pagechange" );
-				$.mobile.changePage( "#page1" );
+				$.mobile.pageContainer.pagecontainer( "change", "#page1" );
 			},
 			{
 				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
@@ -513,14 +513,14 @@
 			},
 			function() {
 				deepEqual( count, 1, "getWrapper not called on close" );
-				$.mobile.changePage( "#page2" );
+				$.mobile.pageContainer.pagecontainer( "change", "#page2" );
 			},
 			{
 				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
 			},
 			function() {
 				deepEqual( count, 1, "getWrapper not called on pagechange" );
-				$.mobile.changePage( "#page1" );
+				$.mobile.pageContainer.pagecontainer( "change", "#page1" );
 			},
 			{
 				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
@@ -556,14 +556,14 @@
 			},
 			function() {
 				deepEqual( count, 1, "getWrapper not called on close" );
-				$.mobile.changePage( "#page2" );
+				$.mobile.pageContainer.pagecontainer( "change", "#page2" );
 			},
 			{
 				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "3" }
 			},
 			function() {
 				deepEqual( count, 1, "getWrapper not called on pagechange" );
-				$.mobile.changePage( "#page1" );
+				$.mobile.pageContainer.pagecontainer( "change", "#page1" );
 			},
 			{
 				pagechange: { src: $( "body" ), event: "pagechange" + eventNs + "4" }
@@ -600,7 +600,7 @@
 				},
 				function() {
 					deepEqual( count, 1, "getWrapper not called on close" );
-					$.mobile.changePage( "#page2" );
+					$.mobile.pageContainer.pagecontainer( "change", "#page2" );
 				},
 				{
 					pageshow: { src: $( "body" ), event: "pagecontainershow" }
@@ -617,7 +617,7 @@
 							start();
 						}, 0 );
 					});
-					$.mobile.changePage( "#page1" );
+					$.mobile.pageContainer.pagecontainer( "change", "#page1" );
 				}
 			]);
 		});

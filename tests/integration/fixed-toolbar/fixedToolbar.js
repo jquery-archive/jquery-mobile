@@ -165,7 +165,7 @@
 
 		$.testHelper.sequence([
 			function(){
-				$.mobile.changePage( "#fullscreen-test-a" );
+				$.mobile.pageContainer.pagecontainer( "change", "#fullscreen-test-a" );
 			},
 
 			function(){	
@@ -193,7 +193,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpageheader.length && nextpagefooter.length, "next page has fixed header and fixed footer" );
-				$.mobile.changePage( "#persist-test-a" );
+				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-a" );
 			},
 
 			function(){
@@ -202,12 +202,12 @@
 						ok( nextpageheader.parent( ".ui-mobile-viewport" ).length, "fixed header and footer are now a child of page container" );
 					});
 
-				$.mobile.changePage( "#persist-test-b" );
+				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-b" );
 			},
 
 			function() {
 				ok( nextpageheader.parent( ".ui-page" ).length, "fixed header and footer are now a child of page again" );
-				$.mobile.changePage( "#default" );
+				$.mobile.pageContainer.pagecontainer( "change", "#default" );
 			},
 
 			start
@@ -225,7 +225,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpageheader.length, "next page has fixed header and fixed footer" );
-				$.mobile.changePage( "#persist-test-c" );
+				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-c" );
 			},
 
 			function(){
@@ -234,12 +234,12 @@
 						deepEqual( nextpageheader.parent()[0], $.mobile.pageContainer[0], "fixed header is now a child of page container" );
 					});
 
-				$.mobile.changePage( "#persist-test-d" );
+				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-d" );
 			},
 
 			function() {
 				deepEqual( nextpageheader.parent()[0], $.mobile.activePage[0], "fixed header is now a child of page again" );
-				$.mobile.changePage( "#default" );
+				$.mobile.pageContainer.pagecontainer( "change", "#default" );
 			},
 
 			start
@@ -257,7 +257,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpagefooter.length, "next page has fixed footer and fixed footer" );
-				$.mobile.changePage( "#persist-test-e" );
+				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-e" );
 			},
 
 			function(){
@@ -266,12 +266,12 @@
 						deepEqual( nextpagefooter.parent()[0], $.mobile.pageContainer[0], "fixed footer is now a child of page container" );
 					});
 
-				$.mobile.changePage( "#persist-test-f" );
+				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-f" );
 			},
 
 			function() {
 				deepEqual( nextpagefooter.parent()[0], $.mobile.activePage[0], "fixed footer is now a child of page again" );
-				$.mobile.changePage( "#default" );
+				$.mobile.pageContainer.pagecontainer( "change", "#default" );
 			},
 
 			start
@@ -281,7 +281,7 @@
 	var asyncTestFooterAndHeader = function( pageSelector, visible ) {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( pageSelector );
+				$.mobile.pageContainer.pagecontainer( "change", pageSelector );
 			},
 
 			function() {
@@ -295,7 +295,7 @@
 				equal( !$footer.hasClass( "ui-fixed-hidden" ), visible, "the footer should be " + hiddenStr );
 				equal( !$header.hasClass( "ui-fixed-hidden" ), visible, "the header should be " + hiddenStr );
 
-				$.mobile.changePage( "#default" );
+				$.mobile.pageContainer.pagecontainer( "change", "#default" );
 			},
 
 			start

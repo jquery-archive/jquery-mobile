@@ -15,7 +15,7 @@
 					start();
 				});
 
-				$.mobile.changePage( hash );
+				$.mobile.pageContainer.pagecontainer( "change", hash );
 			}
 		},
 
@@ -82,7 +82,7 @@
 					start();
 				});
 
-				$.mobile.changePage( hash );
+				$.mobile.pageContainer.pagecontainer( "change", hash );
 			}
 		},
 
@@ -156,7 +156,7 @@
 					start();
 				});
 
-				$.mobile.changePage( hash );
+				$.mobile.pageContainer.pagecontainer( "change", hash );
 			}
 		},
 

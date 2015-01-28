@@ -89,37 +89,38 @@
 					report: "navigate from a page in a non-base directory to an internal page"
 				});
 
-				// Try calling changePage() directly with a relative path.
-				$.mobile.changePage("base-page-1.html");
+				// Try calling change() directly with a relative path.
+				$.mobile.pageContainer.pagecontainer( "change", "base-page-1.html" );
 			},
 
 			function(){
 				// Verify that we are on the expected page.
 				$.testHelper.assertUrlLocation({
 					hashOrPush: baseDir + "base-page-1.html",
-					report: "call changePage() with a filename (no path)"
+					report: "call change() with a filename (no path)"
 				});
 
-				// Try calling changePage() directly with a relative path.
-				$.mobile.changePage("../content/content-page-1.html");
+				// Try calling change() directly with a relative path.
+				$.mobile.pageContainer.pagecontainer( "change", "../content/content-page-1.html" );
 			},
 
 			function(){
 				// Verify that we are on the expected page.
 				$.testHelper.assertUrlLocation({
 					hashOrPush: contentDir + "content-page-1.html",
-					report: "call changePage() with a relative path containing up-level references"
+					report: "call change() with a relative path containing up-level references"
 				});
 
-				// Try calling changePage() with an id
-				$.mobile.changePage("content-page-2.html");
+				// Try calling change() with an id
+				$.mobile.pageContainer.pagecontainer( "change", "content-page-2.html" );
 			},
 
 			function(){
 				// Verify that we are on the expected page.
 				$.testHelper.assertUrlLocation({
 					hashOrPush: contentDir + "content-page-2.html",
-					report: "call changePage() with a relative path should resolve relative to current page"
+					report: "call change() with a relative path should resolve relative to " +
+						"current page"
 				});
 
 				// test that an internal page works
@@ -131,11 +132,11 @@
 				$.testHelper.assertUrlLocation({
 					hash:  "internal-page-2",
 					push: home + "#internal-page-2",
-					report: "call changePage() with a page id"
+					report: "call change() with a page id"
 				});
 
-				// Try calling changePage() with an id
-				$.mobile.changePage("internal-page-1");
+				// Try calling change() with an id
+				$.mobile.pageContainer.pagecontainer( "change", "internal-page-1" );
 			},
 
 			function(){
@@ -143,7 +144,8 @@
 				$.testHelper.assertUrlLocation({
 					hash:  "internal-page-2",
 					push: home + "#internal-page-2",
-					report: "calling changePage() with a page id that is not prefixed with '#' should not change page"
+					report: "calling change() with a page id that is not prefixed with '#' " +
+						"should not change page"
 				});
 
 				// Previous load should have failed and left us on internal-page-2.
@@ -206,7 +208,7 @@
 	var testBaseTagAlteration = function( assertions ) {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage( "../../base-change.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "../../base-change.html" );
 			},
 
 			function(){

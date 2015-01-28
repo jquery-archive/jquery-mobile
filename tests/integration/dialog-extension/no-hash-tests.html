@@ -9,7 +9,7 @@
 	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script>
 		$(document).bind('mobileinit',function(){
-			$.mobile.changePage.defaults.changeHash = false;
+			$.mobile.pagecontainer.prototype.options.changeOptions.changeHash = false;
 			$.mobile.hashListeningEnabled = false;
 			$.mobile.pushStateEnabled = false;
 		});

@@ -401,7 +401,7 @@
 
 	asyncTest( "destroying a select menu leaves no traces", function() {
 		$.testHelper.pageSequence( [
-			function() { $.mobile.changePage( "#destroyTest" ); },
+			function() { $.mobile.pageContainer.pagecontainer( "change", "#destroyTest" ); },
 			// Check if two chunks of DOM are identical
 			function() {
 				var unenhancedSelect = $(
@@ -440,7 +440,7 @@
 				"</select>");
 		$.testHelper.detailedEventCascade( [
 			function() {
-				$.mobile.changePage( "#destroyTest" );
+				$.mobile.pageContainer.pagecontainer( "change", "#destroyTest" );
 			},
 
 			{

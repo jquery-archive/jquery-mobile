@@ -25,7 +25,7 @@
 		expect( 3 );
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#basic-linked-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#basic-linked-test" );
 			},
 
 			function() {
@@ -40,7 +40,7 @@
 	asyncTest( "Slides to the listview page when the li a is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#basic-linked-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#basic-linked-test" );
 			},
 
 			function(){
@@ -57,7 +57,7 @@
 	asyncTest( "Slides back to main page when back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#basic-link-results");
+				$.mobile.pageContainer.pagecontainer( "change", "#basic-link-results" );
 			},
 
 			function(){
@@ -74,7 +74,7 @@
 	asyncTest( "Presence of ui-li-has- classes", function(){
 		$.testHelper.pageSequence( [
 			function() {
-				$.mobile.changePage( "#ui-li-has-test" );
+				$.mobile.pageContainer.pagecontainer( "change", "#ui-li-has-test" );
 			},
 
 			function() {
@@ -105,7 +105,7 @@
 	asyncTest( "changes to the numbered list page and enhances it", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#numbered-list-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#numbered-list-test" );
 			},
 
 			function(){
@@ -133,11 +133,11 @@
 	asyncTest( "takes us back to the numbered list when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage('#numbered-list-test');
+				$.mobile.pageContainer.pagecontainer( "change", "#numbered-list-test" );
 			},
 
 			function(){
-				$.mobile.changePage('#numbered-list-results');
+				$.mobile.pageContainer.pagecontainer( "change", "#numbered-list-results" );
 			},
 
 			function(){
@@ -156,7 +156,7 @@
 	asyncTest( "changes to the read only page when hash is changed", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#read-only-list-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#read-only-list-test" );
 			},
 
 			function(){
@@ -173,7 +173,7 @@
 	asyncTest( "changes the page to the split view list and enhances it correctly.", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#split-list-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#split-list-test" );
 			},
 
 			function(){
@@ -188,7 +188,7 @@
 	asyncTest( "change the page to the split view page 1 when the first link is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#split-list-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#split-list-test" );
 			},
 
 			function(){
@@ -205,7 +205,7 @@
 	asyncTest( "Slide back to the parent list view when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#split-list-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#split-list-test" );
 			},
 
 			function(){
@@ -226,7 +226,7 @@
 	asyncTest( "Clicking on the icon (the second link) should take the user to other a href of this LI", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#split-list-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#split-list-test" );
 			},
 
 			function(){
@@ -245,7 +245,7 @@
 	asyncTest( "Makes the list divider page the active page and enhances it correctly.", function() {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.changePage("#list-divider-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#list-divider-test" );
 			},
 
 			function(){
@@ -469,7 +469,8 @@
 		// https://github.com/jquery/jquery-mobile/issues/1470
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#programmatically-generated-list" );
+				$.mobile.pageContainer
+					.pagecontainer( "change", "#programmatically-generated-list" );
 			},
 			function() {
 				ok(!$( "#programmatically-generated-list-items li:first-child" ).hasClass( "ui-last-child" ), "First list item should not have class ui-last-child" );
@@ -483,7 +484,7 @@
 	asyncTest("Removing list items", 4, function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#removing-items-from-list-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#removing-items-from-list-test" );
 			},
 
 			function() {
@@ -509,7 +510,7 @@
 	asyncTest("Top and bottom corners rounded in inset list", 14, function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#corner-rounded-test");
+				$.mobile.pageContainer.pagecontainer( "change", "#corner-rounded-test" );
 			},
 
 			function() {
@@ -548,7 +549,7 @@
 	asyncTest( "list inherits theme from parent", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#list-theme-inherit");
+				$.mobile.pageContainer.pagecontainer( "change", "#list-theme-inherit" );
 			},
 
 			function() {
@@ -564,7 +565,7 @@
 	asyncTest( "split list items respect the icon", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#split-list-icon");
+				$.mobile.pageContainer.pagecontainer( "change", "#split-list-icon" );
 			},
 
 			function() {
@@ -585,7 +586,7 @@
 	asyncTest( "links in list dividers are ignored", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#list-divider-ignore-link");
+				$.mobile.pageContainer.pagecontainer( "change", "#list-divider-ignore-link" );
 			},
 
 			function() {
@@ -603,7 +604,7 @@
 	asyncTest( "last list item has border-bottom", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#list-last-visible-item-border");
+				$.mobile.pageContainer.pagecontainer( "change", "#list-last-visible-item-border" );
 			},
 
 			function() {
@@ -620,7 +621,8 @@
 	asyncTest( "list inside collapsible content", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage("#list-inside-collapsible-content");
+				$.mobile.pageContainer
+					.pagecontainer( "change", "#list-inside-collapsible-content" );
 			},
 
 			function() {

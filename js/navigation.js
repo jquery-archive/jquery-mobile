@@ -122,24 +122,6 @@ define( [
 
 	// Exposed $.mobile methods
 
-	$.mobile.changePage = function( to, options ) {
-		$.mobile.pageContainer.pagecontainer( "change", to, options );
-	};
-
-	$.mobile.changePage.defaults = {
-		transition: undefined,
-		reverse: false,
-		changeHash: true,
-		fromHashChange: false,
-		role: undefined, // By default we rely on the role defined by the @data-role attribute.
-		duplicateCachedPage: undefined,
-		pageContainer: undefined,
-		showLoadMsg: true, //loading message shows by default when pages are being fetched during changePage
-		dataUrl: undefined,
-		fromPage: undefined,
-		allowSamePageTransition: false
-	};
-
 	$.mobile._registerInternalEvents = function() {
 		var getAjaxFormData = function( $form, calculateOnly ) {
 			var url, ret = true, formData, vclickedName, method;
@@ -229,7 +211,8 @@ define( [
 			if ( !event.isDefaultPrevented() ) {
 				formData = getAjaxFormData( $( this ) );
 				if ( formData ) {
-					$.mobile.changePage( formData.url, formData.options );
+					$.mobile.pageContainer.pagecontainer( "change", formData.url,
+						formData.options );
 					event.preventDefault();
 				}
 			}
@@ -393,7 +376,12 @@ define( [
 			//this may need to be more specific as we use data-rel more
 			role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
-			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role, link: $link } );
+			$.mobile.pageContainer.pagecontainer( "change", href, {
+				transition: transition,
+				reverse: reverse,
+				role: role,
+				link: $link
+			});
 			event.preventDefault();
 		});
 

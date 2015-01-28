@@ -17,7 +17,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "cached.html" );
 			},
 
 			function(){
@@ -50,7 +50,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "cached.html" );
 			},
 
 			function(){
@@ -76,7 +76,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "cached-dom-cache-true.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "cached-dom-cache-true.html" );
 			},
 
 			function(){
@@ -90,7 +90,7 @@
 
 			function(){
 				ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ), "the dialog closed" );
-				$.mobile.changePage( $( "#default" ) );
+				$.mobile.pageContainer.pagecontainer( "change", $( "#default" ) );
 			},
 
 			function(){
@@ -106,7 +106,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.changePage( "uncached-dom-cached-false.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "uncached-dom-cached-false.html" );
 			},
 
 			function(){

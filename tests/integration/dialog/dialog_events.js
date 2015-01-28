@@ -79,11 +79,11 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( $( "#mypage" ) );
+				$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 			},
 
 			function() {
-				$.mobile.changePage( $( "#doubleCloseTestPage" ) );
+				$.mobile.pageContainer.pagecontainer( "change", $( "#doubleCloseTestPage" ) );
 			},
 
 			function() {
@@ -113,7 +113,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( $( "#mypage" ) );
+				$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 			},
 
 			function() {
@@ -144,7 +144,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( $( "#mypage" ) );
+				$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 			},
 
 			function() {
@@ -173,7 +173,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( $( "#mypage" ) );
+				$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 			},
 
 			function() {
@@ -203,7 +203,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.changePage( "#mypage" );
+				$.mobile.pageContainer.pagecontainer( "change", "#mypage" );
 			},
 
 			function() {
