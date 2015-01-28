@@ -4,7 +4,7 @@
 $.testHelper.delayStart();
 
 // TODO move siteDirectory over to the nav path helper
-var changePageFn = $.mobile.changePage,
+var changePageFn = $.mobile.pagecontainer.prototype.change,
 	originalTitle = document.title,
 	originalLinkBinding = $.mobile.linkBindingEnabled,
 	siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
@@ -89,7 +89,7 @@ QUnit.module( "jquery.mobile.navigation.js", {
 	teardown: function() {
 		$.Event.prototype.which = undefined;
 		$.mobile.linkBindingEnabled = originalLinkBinding;
-		$.mobile.changePage = changePageFn;
+		$.mobile.pagecontainer.prototype.change = changePageFn;
 		document.title = originalTitle;
 	}
 } );
@@ -127,7 +127,7 @@ QUnit.asyncTest( "window.history.back() from external to internal page", functio
 QUnit.asyncTest( "external empty page does not result in any contents", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "blank.html" );
+			$.mobile.pageContainer.pagecontainer( "change", "blank.html" );
 		},
 
 		function() {
@@ -145,7 +145,7 @@ QUnit.asyncTest( "external empty page does not result in any contents", function
 QUnit.asyncTest( "external page is removed from the DOM after pagehide", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "external.html" );
+			$.mobile.pageContainer.pagecontainer( "change", "external.html" );
 		},
 
 		// Page is pulled and displayed in the dom
@@ -175,7 +175,7 @@ QUnit.asyncTest( "preventDefault on pageremove prevents external page from being
 
 		$.testHelper.pageSequence( [
 			function() {
-				$.mobile.changePage( "external.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// Page is pulled and displayed in the dom
@@ -189,7 +189,7 @@ QUnit.asyncTest( "preventDefault on pageremove prevents external page from being
 				assert.strictEqual( $( "#external-test" ).length, 1 );
 
 				// Switch back to the page again!
-				$.mobile.changePage( "external.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// Page is still present and displayed in the dom
@@ -214,7 +214,7 @@ QUnit.asyncTest( "preventDefault on pageremove prevents external page from being
 QUnit.asyncTest( "external page is cached in the DOM after pagehide", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "cached-external.html" );
+			$.mobile.pageContainer.pagecontainer( "change", "cached-external.html" );
 		},
 
 		// Page is pulled and displayed in the dom
@@ -236,7 +236,7 @@ QUnit.asyncTest( "external page is cached after pagehide when option is set glob
 		$.testHelper.pageSequence( [
 			function() {
 				$.mobile.page.prototype.options.domCache = true;
-				$.mobile.changePage( "external.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// Page is pulled and displayed in the dom
@@ -259,7 +259,7 @@ QUnit.asyncTest( "page last scroll distance is remembered when navigating to/fro
 		$.testHelper.pageSequence( [
 			function() {
 				$( "body" ).height( $( window ).height() + 500 );
-				$.mobile.changePage( "external.html" );
+				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			function() {
@@ -293,7 +293,7 @@ QUnit.asyncTest( "page last scroll distance is remembered when navigating to/fro
 		] );
 	} );
 
-QUnit.asyncTest( "forms with data attribute ajax set to false will not call changePage",
+QUnit.asyncTest( "forms with data attribute ajax set to false will not call change()",
 	function( assert ) {
 		var called = false;
 		var newChangePage = function() {
@@ -302,9 +302,9 @@ QUnit.asyncTest( "forms with data attribute ajax set to false will not call chan
 
 		$.testHelper.sequence( [
 
-			// Avoid initial page load triggering changePage early
+			// Avoid initial page load triggering change() early
 			function() {
-				$.mobile.changePage = newChangePage;
+				$.mobile.pagecontainer.prototype.change = newChangePage;
 
 				$( "#non-ajax-form" ).one( "submit", function( event ) {
 					assert.ok( true, "submit callbacks are fired" );
@@ -319,7 +319,7 @@ QUnit.asyncTest( "forms with data attribute ajax set to false will not call chan
 	} );
 
 QUnit.asyncTest(
-	"forms with ajax attribute absent or set to anything but false will call changePage",
+	"forms with data-ajax attribute absent/set or set to anything but false will call change()",
 	function( assert ) {
 		var called = 0,
 			newChangePage = function() {
@@ -328,9 +328,9 @@ QUnit.asyncTest(
 
 		$.testHelper.sequence( [
 
-			// Avoid initial page load triggering changePage early
+			// Avoid initial page load triggering change() early
 			function() {
-				$.mobile.changePage = newChangePage;
+				$.mobile.pagecontainer.prototype.change = newChangePage;
 				$( "#ajax-form, #rand-ajax-form" ).submit();
 			},
 
@@ -520,7 +520,7 @@ QUnit.asyncTest(
 
 			// Setup
 			function() {
-				$.mobile.changePage( "#skip-dialog-first" );
+				$.mobile.pageContainer.pagecontainer( "change", "#skip-dialog-first" );
 			},
 
 			// Transition to the dialog
@@ -998,13 +998,13 @@ QUnit.asyncTest( "query param link from a dialog to itself should be a not add a
 		] );
 	} );
 
-QUnit.asyncTest( "query data passed as a string to changePage is appended to URL",
+QUnit.asyncTest( "query data passed as a string to change() is appended to URL",
 	function( assert ) {
 		$.testHelper.pageSequence( [
 
 			// Open our test page
 			function() {
-				$.mobile.changePage( "form-tests/changepage-data.html", {
+				$.mobile.pageContainer.pagecontainer( "change", "form-tests/changepage-data.html", {
 					data: "foo=1&bar=2"
 				} );
 			},
@@ -1020,13 +1020,13 @@ QUnit.asyncTest( "query data passed as a string to changePage is appended to URL
 		] );
 	} );
 
-QUnit.asyncTest( "query data passed as an object to changePage is appended to URL",
+QUnit.asyncTest( "query data passed as an object to change() is appended to URL",
 	function( assert ) {
 		$.testHelper.pageSequence( [
 
 			// Open our test page
 			function() {
-				$.mobile.changePage( "form-tests/changepage-data.html", {
+				$.mobile.pageContainer.pagecontainer( "change", "form-tests/changepage-data.html", {
 					data: {
 						foo: 3,
 						bar: 4
@@ -1319,7 +1319,7 @@ QUnit.asyncTest( "application url with dialogHashKey loads first application pag
 					"navigated successfully to #foo" );
 
 				// Now navigate to an hash that contains just a dialogHashKey.
-				$.mobile.changePage( "#" + $.mobile.dialogHashKey );
+				$.mobile.pageContainer.pagecontainer( "change", "#" + $.mobile.dialogHashKey );
 			},
 
 			function() {
@@ -1507,7 +1507,7 @@ QUnit.asyncTest( "clicks are ignored where data-ajax='false' parents exist", fun
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "#link-hijacking-test" );
+			$.mobile.pageContainer.pagecontainer( "change", "#link-hijacking-test" );
 		},
 
 		function() {
@@ -1552,7 +1552,7 @@ QUnit.asyncTest( "vclicks are ignored where data-ajax='false' parents exist", fu
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "#link-hijacking-test" );
+			$.mobile.pageContainer.pagecontainer( "change", "#link-hijacking-test" );
 		},
 
 		function() {
@@ -1580,7 +1580,8 @@ QUnit.asyncTest( "vclicks are ignored where data-ajax='false' parents exist", fu
 QUnit.asyncTest( "data-urls with parens work properly (avoid jqmData regex)", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "data-url-tests/parentheses.html?foo=(bar)" );
+			$.mobile.pageContainer.pagecontainer( "change",
+				"data-url-tests/parentheses.html?foo=(bar)" );
 		},
 
 		function() {
@@ -1602,7 +1603,7 @@ QUnit.asyncTest( "data-urls with parens work properly (avoid jqmData regex)", fu
 QUnit.asyncTest( "loading an embedded page with query params works", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "#bar?baz=bak", { dataUrl: false } );
+			$.mobile.pageContainer.pagecontainer( "change", "#bar?baz=bak", { dataUrl: false } );
 		},
 
 		function() {
@@ -1618,7 +1619,7 @@ QUnit.asyncTest( "external page is accessed correctly even if it has a space in 
 	function( assert ) {
 		$.testHelper.pageSequence( [
 			function() {
-				$.mobile.changePage( " external.html" );
+				$.mobile.pageContainer.pagecontainer( "change", " external.html" );
 			},
 			function() {
 				assert.equal( $.mobile.activePage.attr( "id" ), "external-test",
@@ -1646,7 +1647,7 @@ QUnit.asyncTest( "page load events are providided with the absolute url for the 
 			assert.equal( data.absUrl, absHomeUrl + "#bar" );
 		} );
 
-		$.mobile.changePage( "#bar" );
+		$.mobile.pageContainer.pagecontainer( "change", "#bar" );
 
 		requestPath = "/theres/no/way/this/page/exists.html";
 
@@ -1655,7 +1656,7 @@ QUnit.asyncTest( "page load events are providided with the absolute url for the 
 			QUnit.start();
 		} );
 
-		$.mobile.changePage( requestPath );
+		$.mobile.pageContainer.pagecontainer( "change", requestPath );
 	} );
 
 } )( QUnit, jQuery );
