@@ -93,11 +93,11 @@ QUnit.asyncTest( "Clicking dialog 'Close' button renders it unclickable", functi
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( $( "#mypage" ) );
+			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
-			$.mobile.changePage( $( "#doubleCloseTestPage" ) );
+			$.mobile.pageContainer.pagecontainer( "change", $( "#doubleCloseTestPage" ) );
 		},
 
 		function() {
@@ -129,7 +129,7 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( $( "#mypage" ) );
+			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -163,7 +163,7 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( $( "#mypage" ) );
+			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -196,7 +196,7 @@ QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( $( "#mypage" ) );
+			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -229,7 +229,7 @@ QUnit.asyncTest( "page container is updated to dialog overlayTheme at pagebefore
 
 		$.testHelper.pageSequence( [
 			function() {
-				$.mobile.changePage( "#mypage" );
+				$.mobile.pageContainer.pagecontainer( "change", "#mypage" );
 			},
 
 			function() {

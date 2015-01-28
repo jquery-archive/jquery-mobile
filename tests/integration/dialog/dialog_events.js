@@ -59,7 +59,7 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( $( "#mypage" ) );
+			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -95,7 +95,7 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( $( "#mypage" ) );
+			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -129,7 +129,7 @@ QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function
 
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( $( "#mypage" ) );
+			$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
 		},
 
 		function() {
@@ -164,7 +164,7 @@ QUnit.asyncTest( "pagecontainer is set to dialog overlayTheme at pagebeforeshow"
 
 		$.testHelper.pageSequence( [
 			function() {
-				$.mobile.changePage( "#mypage" );
+				$.mobile.pageContainer.pagecontainer( "change", "#mypage" );
 			},
 
 			function() {

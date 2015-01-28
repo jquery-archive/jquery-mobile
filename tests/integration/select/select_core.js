@@ -456,7 +456,7 @@ QUnit.asyncTest( "dialog size select title should match the label when changed a
 QUnit.asyncTest( "destroying a select menu leaves no traces", function( assert ) {
 	$.testHelper.pageSequence( [
 		function() {
-			$.mobile.changePage( "#destroyTest" );
+			$.mobile.pageContainer.pagecontainer( "change", "#destroyTest" );
 		},
 
 		// Check if two chunks of DOM are identical
@@ -501,7 +501,7 @@ QUnit.asyncTest( "destroying a custom select menu leaves no traces", function( a
 			"</select>" );
 	$.testHelper.detailedEventCascade( [
 		function() {
-			$.mobile.changePage( "#destroyTest" );
+			$.mobile.pageContainer.pagecontainer( "change", "#destroyTest" );
 		},
 
 		{
