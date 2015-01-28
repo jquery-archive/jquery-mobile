@@ -167,9 +167,9 @@ asyncTest( "The toggle method is working properly", function( assert ) {
 asyncTest( "Fullscreen toolbars add classes to page", function( assert ) {
 	expect( 2 );
 
-	$.testHelper.sequence( [
-		function() {
-			$.mobile.changePage( "#fullscreen-test-a" );
+	$.testHelper.sequence([
+		function(){
+			$.mobile.pageContainer.pagecontainer( "change", "#fullscreen-test-a" );
 		},
 
 		function() {
@@ -201,7 +201,7 @@ asyncTest( "The persistent headers and footers are working properly", function()
 		function() {
 			ok( nextpageheader.length && nextpagefooter.length,
 				"next page has fixed header and fixed footer" );
-			$.mobile.changePage( "#persist-test-a" );
+			$.mobile.pageContainer.pagecontainer( "change", "#persist-test-a" );
 		},
 
 		function() {
@@ -211,13 +211,13 @@ asyncTest( "The persistent headers and footers are working properly", function()
 						"fixed header and footer are now a child of page container" );
 				} );
 
-			$.mobile.changePage( "#persist-test-b" );
+			$.mobile.pageContainer.pagecontainer( "change", "#persist-test-b" );
 		},
 
 		function() {
 			ok( nextpageheader.parent( ".ui-page" ).length,
 				"fixed header and footer are now a child of page again" );
-			$.mobile.changePage( "#default" );
+			$.mobile.pageContainer.pagecontainer( "change", "#default" );
 		},
 
 		start
@@ -232,10 +232,10 @@ asyncTest( "The persistent headers should work without a footer", function() {
 
 	var nextpageheader = $( "#persist-test-d .ui-toolbar-header-fixed" );
 
-	$.testHelper.pageSequence( [
-		function() {
+	$.testHelper.pageSequence([
+		function(){
 			ok( nextpageheader.length, "next page has fixed header and fixed footer" );
-			$.mobile.changePage( "#persist-test-c" );
+			$.mobile.pageContainer.pagecontainer( "change", "#persist-test-c" );
 		},
 
 		function() {
@@ -245,13 +245,13 @@ asyncTest( "The persistent headers should work without a footer", function() {
 						"fixed header is now a child of page container" );
 				} );
 
-			$.mobile.changePage( "#persist-test-d" );
+			$.mobile.pageContainer.pagecontainer( "change", "#persist-test-d" );
 		},
 
 		function() {
 			deepEqual( nextpageheader.parent()[ 0 ], $.mobile.activePage[ 0 ],
 				"fixed header is now a child of page again" );
-			$.mobile.changePage( "#default" );
+			$.mobile.pageContainer.pagecontainer( "change", "#default" );
 		},
 
 		start
@@ -266,12 +266,11 @@ asyncTest( "The persistent footers should work without a header", function() {
 
 	var nextpagefooter = $( "#persist-test-f .ui-toolbar-footer-fixed" );
 
-	$.testHelper.pageSequence( [
-		function() {
+	$.testHelper.pageSequence([
+		function(){
 			ok( nextpagefooter.length, "next page has fixed footer and fixed footer" );
-			$.mobile.changePage( "#persist-test-e" );
+			$.mobile.pageContainer.pagecontainer( "change", "#persist-test-e" );
 		},
-
 		function() {
 			$( "#persist-test-f" )
 				.one( "pagebeforeshow", function() {
@@ -279,23 +278,24 @@ asyncTest( "The persistent footers should work without a header", function() {
 						"fixed footer is now a child of page container" );
 				} );
 
-			$.mobile.changePage( "#persist-test-f" );
+			$.mobile.pageContainer.pagecontainer( "change", "#persist-test-f" );
 		},
 
 		function() {
 			deepEqual( nextpagefooter.parent()[ 0 ], $.mobile.activePage[ 0 ],
 				"fixed footer is now a child of page again" );
-			$.mobile.changePage( "#default" );
+			$.mobile.pageContainer.pagecontainer( "change", "#default" );
 		},
 
 		start
 	] );
 } );
 
+
 var asyncTestFooterAndHeader = function( pageSelector, visible ) {
-	$.testHelper.pageSequence( [
+	$.testHelper.pageSequence([
 		function() {
-			$.mobile.changePage( pageSelector );
+			$.mobile.pageContainer.pagecontainer( "change", pageSelector );
 		},
 
 		function() {
@@ -311,7 +311,8 @@ var asyncTestFooterAndHeader = function( pageSelector, visible ) {
 			equal( !$header.hasClass( "ui-toolbar-fixed-hidden" ), visible,
 				"the header should be " + hiddenStr );
 
-			$.mobile.changePage( "#default" );
+
+			$.mobile.pageContainer.pagecontainer( "change", "#default" );
 		},
 
 		start
