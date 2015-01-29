@@ -2,6 +2,7 @@
     "ignore": [
         "bower_components/**",
         "external/**",
-        "node_modules/**"
+        "node_modules/**",
+        "tests/**"
     ]
 }
