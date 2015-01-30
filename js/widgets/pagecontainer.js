@@ -5,6 +5,7 @@
 define( [
 	"jquery",
 	"../core",
+	"../helpers",
 	"../navigation/path",
 	"../navigation/base",
 	"../events/navigate",
@@ -936,7 +937,7 @@ define( [
 		transition: function( toPage, triggerData, settings ) {
 			var fromPage, url, pageUrl, fileUrl, active, activeIsInitialPage, historyDir,
 				pageTitle, isDialog, alreadyThere, newPageTitle, params, cssTransitionDeferred,
-				beforeTransition, focusElement;
+				beforeTransition;
 
 			// If we are in the midst of a transition, queue the current request.
 			// We'll call changePage() once we're done with the current transition
@@ -1032,19 +1033,8 @@ define( [
 				historyDir = settings.direction === "back" ? -1 : 1;
 			}
 
-			// We blur the focussed element to cause the virtual keyboard to disappear, but we must
-			// wrap the retrieval of the focussed element in a try/catch block since IE9 throws
-			// "Unspecified error" if document.activeElement is undefined when we are in an IFrame.
-			try {
-				focusElement = this.document[ 0 ].activeElement;
-			}
-			catch( e ) {}
-
-			if ( focusElement &&
-					focusElement !== this.window[ 0 ] &&
-					focusElement.nodeName.toLowerCase() !== "body" ) {
-				$( focusElement ).blur();
-			}
+			// We blur the focused element to cause the virtual keyboard to disappear
+			$.mobile.safelyBlur( this.document[ 0 ] );
 
 			// Record whether we are at a place in history where a dialog used to be -
 			// if so, do not add a new history entry and do not change the hash either

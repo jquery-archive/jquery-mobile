@@ -16,6 +16,7 @@ define( [
 	"../links",
 	"../widget",
 	"../support",
+	"../helpers",
 	"../events/navigate",
 	"../navigation/path",
 	"../navigation/history",
@@ -25,17 +26,6 @@ define( [
 	"../navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
-
-// IE9 sometimes throws an exception when one attempts to access document.activeElement
-function getFocusElement( document ) {
-	var focusElement;
-
-	try {
-		focusElement = document.activeElement;
-	} catch( e ) {}
-
-	return focusElement;
-}
 
 function fitSegmentInsideSegment( windowSize, segmentSize, offset, desired ) {
 	var returnValue = desired;
@@ -309,9 +299,10 @@ $.widget( "mobile.popup", {
 		if ( targetElement !== ui.container[ 0 ] ) {
 			target = $( targetElement );
 			if ( !$.contains( ui.container[ 0 ], targetElement ) ) {
-				$( getFocusElement( this.document[ 0 ] ) ).one( "focus", $.proxy( function() {
-					this._safelyBlur( targetElement );
-				}, this ) );
+				$( $.mobile.getFocusElement( this.document[ 0 ] ) ).one( "focus",
+					$.proxy( function() {
+						$.mobile.safelyBlur( targetElement );
+					}, this ) );
 				ui.focusElement.focus();
 				theEvent.preventDefault();
 				theEvent.stopImmediatePropagation();
@@ -642,17 +633,10 @@ $.widget( "mobile.popup", {
 		}
 	},
 
-	_safelyBlur: function( currentElement ){
-		if ( currentElement !== this.window[ 0 ] &&
-			currentElement.nodeName.toLowerCase() !== "body" ) {
-				$( currentElement ).blur();
-		}
-	},
-
 	_openPrerequisitesComplete: function() {
 		var id = this.element.attr( "id" ),
 			firstFocus = this._ui.container.find( ":focusable" ).first(),
-			focusElement = getFocusElement( this.document[ 0 ] );
+			focusElement = $.mobile.getFocusElement( this.document[ 0 ] );
 
 		this._ui.container.addClass( "ui-popup-active" );
 		this._isOpen = true;
@@ -660,7 +644,7 @@ $.widget( "mobile.popup", {
 
 		// Check to see if currElement is not a child of the container.  If it's not, blur
 		if ( focusElement && !$.contains( this._ui.container[ 0 ], focusElement ) ) {
-			this._safelyBlur( focusElement );
+			$.mobile.safelyBlur( focusElement );
 		}
 		if ( firstFocus.length > 0 ) {
 			this._ui.focusElement = firstFocus;

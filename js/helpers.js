@@ -200,6 +200,42 @@ define( [ "jquery", "./ns", "jquery-ui/jquery.ui.core" ], function( jQuery ) {
 			}
 		},
 
+		// IE9 sometimes throws an exception when one attempts to access document.activeElement
+		getFocusElement: function( theDocument ) {
+			try {
+				return theDocument.activeElement;
+			} catch( anException ) {}
+		},
+
+		// Able to handle an element, a window, or a document
+		// Given a window or a document, it will safely blur its active element
+		// Given an element, it will safely blur it
+		safelyBlur: function( entity ) {
+			var theElement, theDocument, theWindow;
+
+			// document and window retrieval inspired by the widget factory
+			if ( entity.style ) {
+				theElement = entity;
+				theDocument = entity.ownerDocument;
+				theWindow = theDocument.defaultView || theDocument.parentWindow;
+			} else {
+				if ( entity.document ) {
+					theWindow = entity;
+					theDocument = entity.document;
+					theElement = $.mobile.getFocusElement( theDocument );
+				} else {
+					theDocument = entity;
+					theWindow = theDocument.defaultView || theDocument.parentWindow;
+					theElement = $.mobile.getFocusElement( theDocument );
+				}
+			}
+
+			if ( theElement && theElement !== theWindow &&
+					theElement.nodeName.toLowerCase() !== "body" ) {
+				$.event.trigger( "blur", undefined, theElement );
+			}
+		},
+
 		loading: function() {
 			// If this is the first call to this function, instantiate a loader widget
 			var loader = this.loading._widget || $( $.mobile.loader.prototype.defaultHtml ).loader(),
