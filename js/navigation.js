@@ -32,7 +32,8 @@ define( [
 			loadDeferred = null;
 		},
 
-		documentUrl = $.mobile.path.documentUrl,
+		path = $.mobile.path,
+		documentUrl = path.documentUrl,
 
 		// used to track last vclicked element to make sure its value is added to form data
 		$lastVClicked = null;
@@ -168,10 +169,10 @@ define( [
 				// NOTE: If the method is "get", we need to strip off the query string
 				// because it will get replaced with the new form data. See issue #5710.
 				if ( method === "get" ) {
-					url = $.mobile.path.parseUrl( url ).hrefNoSearch;
+					url = path.parseUrl( url ).hrefNoSearch;
 				}
 
-				if ( url === $.mobile.path.documentBase.hrefNoHash ) {
+				if ( url === path.documentBase.hrefNoHash ) {
 					// The url we got back matches the document base,
 					// which means the page must be an internal/embedded page,
 					// so default to using the actual document url as a browser
@@ -180,9 +181,9 @@ define( [
 				}
 			}
 
-			url = $.mobile.path.makeUrlAbsolute(  url, $.mobile.getClosestBaseUrl( $form ) );
+			url = path.makeUrlAbsolute(  url, $.mobile.getClosestBaseUrl( $form ) );
 
-			if ( ( $.mobile.path.isExternal( url ) && !$.mobile.path.isPermittedCrossDomainRequest( documentUrl, url ) ) ) {
+			if ( ( path.isExternal( url ) && !path.isPermittedCrossDomainRequest( documentUrl, url ) ) ) {
 				return false;
 			}
 
@@ -260,7 +261,9 @@ define( [
 				}
 			} else {
 				target = findClosestLink( target );
-				if ( !( target && $.mobile.path.parseUrl( target.getAttribute( "href" ) || "#" ).hash !== "#" ) ) {
+				if ( !target ||
+						( path.parseUrl( target.getAttribute( "href" ) || "#" ).hash === "#" &&
+							target.getAttribute( "data-" + $.mobile.ns + "rel" ) !== "back" ) ) {
 					return;
 				}
 
@@ -346,10 +349,10 @@ define( [
 			baseUrl = $.mobile.getClosestBaseUrl( $link );
 
 			//get href, if defined, otherwise default to empty hash
-			href = $.mobile.path.makeUrlAbsolute( $link.attr( "href" ) || "#", baseUrl );
+			href = path.makeUrlAbsolute( $link.attr( "href" ) || "#", baseUrl );
 
 			//if ajax is disabled, exit early
-			if ( !$.mobile.ajaxEnabled && !$.mobile.path.isEmbeddedPage( href ) ) {
+			if ( !$.mobile.ajaxEnabled && !path.isEmbeddedPage( href ) ) {
 				httpCleanup();
 				//use default click handling
 				return;
@@ -364,7 +367,7 @@ define( [
 			//            the current value of the base tag is at the time this code
 			//            is called.
 			if ( href.search( "#" ) !== -1 &&
-				!( $.mobile.path.isExternal( href ) && $.mobile.path.isAbsoluteUrl( href ) ) ) {
+				!( path.isExternal( href ) && path.isAbsoluteUrl( href ) ) ) {
 
 				href = href.replace( /[^#]*#/, "" );
 				if ( !href ) {
@@ -372,12 +375,12 @@ define( [
 					//for interaction, so we ignore it.
 					event.preventDefault();
 					return;
-				} else if ( $.mobile.path.isPath( href ) ) {
+				} else if ( path.isPath( href ) ) {
 					//we have apath so make it the href we want to load.
-					href = $.mobile.path.makeUrlAbsolute( href, baseUrl );
+					href = path.makeUrlAbsolute( href, baseUrl );
 				} else {
 					//we have a simple id so use the documentUrl as its base.
-					href = $.mobile.path.makeUrlAbsolute( "#" + href, documentUrl.hrefNoHash );
+					href = path.makeUrlAbsolute( "#" + href, documentUrl.hrefNoHash );
 				}
 			}
 
@@ -394,7 +397,7 @@ define( [
 			//check for protocol or rel and its not an embedded page
 			//TODO overlap in logic from isExternal, rel=external check should be
 			//     moved into more comprehensive isExternalLink
-			isExternal = useDefaultUrlHandling || ( $.mobile.path.isExternal( href ) && !$.mobile.path.isPermittedCrossDomainRequest( documentUrl, href ) );
+			isExternal = useDefaultUrlHandling || ( path.isExternal( href ) && !path.isPermittedCrossDomainRequest( documentUrl, href ) );
 
 			if ( isExternal ) {
 				httpCleanup();
