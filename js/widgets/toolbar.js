@@ -146,7 +146,7 @@ define( [
 				// Skip back button creation if one is already present
 				if ( !backButton.attached ) {
 					this.backButton = backButton.element = ( backButton.element ||
-						$( "<a role='button' href='javascript:void(0);' " +
+						$( "<a role='button' href='#' " +
 							"class='ui-btn ui-corner-all ui-shadow ui-btn-left " +
 								( theme ? "ui-btn-" + theme + " " : "" ) +
 								"ui-toolbar-back-btn ui-icon-carat-l ui-btn-icon-left' " +
