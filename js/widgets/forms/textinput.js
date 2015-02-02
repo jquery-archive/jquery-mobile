@@ -34,7 +34,8 @@ $.widget( "mobile.textinput", {
 		classes: {
 			"ui-textinput": "ui-corner-all ui-body-inherit ui-shadow-inset",
 			"ui-textinput-text": null,
-			"ui-textinput-search": null
+			"ui-textinput-search": null,
+			"ui-textinput-search-icon": "ui-icon ui-icon-search"
 		},
 
 		// The following four options are deprecated as of 1.5.0 and will be removed in 1.6.0
@@ -103,10 +104,18 @@ $.widget( "mobile.textinput", {
 	},
 
 	_enhance: function() {
+		var wrap;
 
 		//"search" and "text" input widgets
 		if ( this.inputNeedsWrap ) {
-			this._wrap().insertBefore( this.element ).append( this.element );
+			wrap = this._wrap();
+
+			if ( this.isSearch ) {
+				this._searchIcon = $( "<span>" ).appendTo( wrap );
+				this._addClass( this._searchIcon, "ui-textinput-search-icon" );
+			}
+
+			wrap.insertBefore( this.element ).append( this.element );
 		} else {
 
 			// Same classes are added to the element itself as are added in _wrap() to the wrapper
@@ -199,6 +208,9 @@ $.widget( "mobile.textinput", {
 			return;
 		}
 		if ( this.inputNeedsWrap ) {
+			if ( this._searchIcon ) {
+				this._searchIcon.remove();
+			}
 			this.element.unwrap();
 		}
 	}
