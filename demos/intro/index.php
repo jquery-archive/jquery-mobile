@@ -85,7 +85,7 @@
 		<div data-demo-html="true">
 		<form>
 			<label for="textinput-s">Text Input:</label>
-			<input type="text" name="textinput-s" id="textinput-s" placeholder="Text input" value="" data-clear-button="true">
+			<input type="text" name="textinput-s" id="textinput-s" placeholder="Text input" value="" data-clear-btn="true">
 
 			<label for="select-native-s">Select:</label>
 			<select name="select-native-s" id="select-native-s">

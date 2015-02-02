@@ -313,7 +313,7 @@
 					<ul data-role="listview" data-inset="true">
                         <li class="ui-field-contain">
                             <label for="name2">Text Input:</label>
-                            <input type="text" name="name2" id="name2" value="" data-clear-button="true">
+                            <input type="text" name="name2" id="name2" value="" data-clear-btn="true">
                         </li>
                         <li class="ui-field-contain">
                             <label for="textarea2">Textarea:</label>

@@ -218,7 +218,7 @@
 		<form>
 			<div class="ui-field-contain">
 				<label for="name2">Text Input:</label>
-				<input type="text" name="name2" id="name2" value="" data-clear-button="true">
+				<input type="text" name="name2" id="name2" value="" data-clear-btn="true">
 			</div>
 			<div class="ui-field-contain">
 				<label for="textarea2">Textarea:</label>
@@ -288,7 +288,7 @@
 			<ul data-role="listview" data-inset="true">
 				<li class="ui-field-contain">
 					<label for="name3">Text Input:</label>
-					<input type="text" name="name3" id="name3" value="" data-clear-button="true">
+					<input type="text" name="name3" id="name3" value="" data-clear-btn="true">
 				</li>
 				<li class="ui-field-contain">
 					<label for="flip3">Slider flip switch:</label>
@@ -308,7 +308,7 @@
 		<p>ui-bar-<span class="theme">a</span></p>
 			<div class="ui-field-contain">
 				<label for="name4">Text Input:</label>
-				<input type="text" name="name4" id="name4" value="" data-clear-button="true">
+				<input type="text" name="name4" id="name4" value="" data-clear-btn="true">
 			</div>
 			<div class="ui-field-contain">
 				<label for="flip4">Flip switch:</label>
