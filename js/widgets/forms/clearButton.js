@@ -14,7 +14,8 @@ define( [
 	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
 			classes: {
-				"ui-textinput-clear": "ui-button ui-icon-delete ui-button-icon-only ui-corner-all",
+				"ui-textinput-clear": "ui-button ui-button-icon-only ui-corner-all",
+				"ui-textinput-clear-icon": "ui-icon ui-icon-delete",
 				"ui-textinput-clear-hidden": null,
 				"ui-textinput-has-clear": null
 			},
@@ -35,11 +36,14 @@ define( [
 		},
 
 		clearButton: function() {
-			var button = $( "<a href='#' tabindex='-1' aria-hidden='true'></a>" )
-				.attr( "title", this.options.clearBtnText )
-				.text( this.options.clearBtnText );
+			var icon = $( "<span>" ),
+				button = $( "<a href='#' tabindex='-1' aria-hidden='true'></a>" )
+					.attr( "title", this.options.clearBtnText )
+					.text( this.options.clearBtnText )
+					.append( icon );
 
 			this._addClass( button, "ui-textinput-clear" );
+			this._addClass( icon, "ui-textinput-clear-icon" );
 
 			return button;
 		},
