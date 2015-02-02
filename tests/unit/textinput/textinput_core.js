@@ -37,14 +37,14 @@
 	});
 
 	test( "inputs without type specified are enhanced", function(){
-		ok( $( "#typeless-input" ).parent().hasClass( "ui-input-text" ) );
+		ok( $( "#typeless-input" ).parent().hasClass( "ui-textinput-text" ) );
 	});
 
 	$.mobile.page.prototype.options.keepNative = "textarea.should-be-native";
 
 	// not testing the positive case here since's it's obviously tested elsewhere
 	test( "textarea in the keepNative set shouldn't be enhanced", function() {
-		ok( !$("textarea.should-be-native").is("ui-input-text") );
+		ok( !$("textarea.should-be-native").is("ui-textinput-text") );
 	});
 
 	asyncTest( "textarea should autogrow on document ready", function() {
@@ -93,17 +93,17 @@
 
 	// NOTE init binding to alter the setting is in settings.js
 	test( "'clear text' button for search inputs should use configured text", function(){
-		strictEqual( $( "#search-input" ).closest( ".ui-input-search" ).find( ".ui-input-clear" ).attr( "title" ), "custom value" );
+		strictEqual( $( "#search-input" ).closest( ".ui-textinput-search" ).find( ".ui-textinput-clear" ).attr( "title" ), "custom value" );
 	});
 
 	test( "data-clear-button adds clear button to text inputs", function() {
 		ok( $( '#text-input-clear-button' ).next()
-			.is( 'a.ui-input-clear[tabindex="-1"][aria-hidden="true"]' ),
+			.is( 'a.ui-textinput-clear[tabindex="-1"][aria-hidden="true"]' ),
 			"correctly marked up clear button is present" );
 	});
 
 	test( "data-clear-button does not add clear button to textarea", function() {
-		ok( ! $( "#textarea-clear-button" ).next().is( "a.ui-input-clear" ), "data-clear-button does not add clear button to textarea" );
+		ok( ! $( "#textarea-clear-button" ).next().is( "a.ui-textinput-clear" ), "data-clear-button does not add clear button to textarea" );
 	});
 
 	test( "data-clear-button does not add clear button to textarea", function() {
@@ -112,7 +112,7 @@
 	});
 
 	test( "data-clear-button does not add clear button to slider input", function() {
-		ok( ! $( "#slider-input" ).next().is( "a.ui-input-clear" ),
+		ok( ! $( "#slider-input" ).next().is( "a.ui-textinput-clear" ),
 			"data-clear-button does not add clear button to slider input" );
 	});
 
@@ -147,26 +147,31 @@
 
 		deepEqual( input.siblings( "a" ).length, 0,
 			"input initially has no clear button" );
-		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), false,
-			"wrapper does not initially have class 'ui-input-has-clear'" );
+		deepEqual( input.parent().hasClass( "ui-textinput-has-clear" ), false,
+			"wrapper does not initially have class 'ui-textinput-has-clear'" );
 
 		input.textinput( "option", "clearBtn", true );
 
 		deepEqual( input.siblings( "a" ).length, 1,
 			"turning on clearBtn option causes an anchor to be added" );
-		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), true,
-			"turning on clearBtn option causes 'ui-input-has-clear' to be " +
+		deepEqual( input.parent().hasClass( "ui-textinput-has-clear" ), true,
+			"turning on clearBtn option causes 'ui-textinput-has-clear' to be " +
 				"added to wrapper" );
 
 		input.textinput( "option", "clearBtn", false );
 
 		deepEqual( input.siblings( "a" ).length, 0,
 			"turning off clearBtn removes clear button anchor" );
-		deepEqual( input.parent().hasClass( "ui-input-has-clear" ), false,
-			"turning off clearBtn removes wrapper class 'ui-input-has-clear'" );
+		deepEqual( input.parent().hasClass( "ui-textinput-has-clear" ), false,
+			"turning off clearBtn removes wrapper class 'ui-textinput-has-clear'" );
 	});
 
 	test( "cannot inject script via clearBtnText option", function() {
+		deepEqual(
+			$( '#injection-test' ).next()
+				.is( 'a.ui-textinput-clear[tabindex="-1"][aria-hidden="true"]' ),
+			true,
+			"Clear button created" );
 		deepEqual( !!$.clearBtnTextScriptInjected, false,
 			"no script was injected via clearBtnText option" );
 	});

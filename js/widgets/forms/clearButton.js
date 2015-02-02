@@ -13,6 +13,11 @@ define( [
 
 	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
+			classes: {
+				"ui-textinput-clear": "ui-button ui-icon-delete ui-button-icon-only ui-corner-all",
+				"ui-textinput-clear-hidden": null,
+				"ui-textinput-has-clear": null
+			},
 			clearBtn: false,
 			clearBtnText: "Clear text"
 		},
@@ -30,11 +35,13 @@ define( [
 		},
 
 		clearButton: function() {
-			return $( "<a href='#' tabindex='-1' aria-hidden='true' " +
-				"class='ui-input-clear ui-button ui-icon-delete ui-button-icon-only ui-corner-all'>" +
-				"</a>" )
-					.attr( "title", this.options.clearBtnText )
-					.text( this.options.clearBtnText );
+			var button = $( "<a href='#' tabindex='-1' aria-hidden='true'></a>" )
+				.attr( "title", this.options.clearBtnText )
+				.text( this.options.clearBtnText );
+
+			this._addClass( button, "ui-textinput-clear" );
+
+			return button;
 		},
 
 		_clearBtnClick: function( event ) {
@@ -42,7 +49,7 @@ define( [
 					.focus()
 					.trigger( "change" );
 
-			this._clearBtn.addClass( "ui-input-clear-hidden" );
+			this._addClass( this._clearBtn, "ui-textinput-clear-hidden" );
 			event.preventDefault();
 		},
 
@@ -53,7 +60,7 @@ define( [
 			}
 
 			$.extend( this, {
-				_clearBtn: this.widget().find("a.ui-input-clear")
+				_clearBtn: this.widget().find( "a.ui-textinput-clear" )
 			});
 
 			this._bindClearEvents();
@@ -65,7 +72,7 @@ define( [
 		_enhanceClear: function() {
 
 			this.clearButton().appendTo( this.widget() );
-			this.widget().addClass( "ui-input-has-clear" );
+			this._addClass( this.widget(), "ui-textinput-has-clear" );
 
 		},
 
@@ -116,11 +123,12 @@ define( [
 		},
 
 		_toggleClearClass: function() {
-			this._clearBtn.toggleClass( "ui-input-clear-hidden", !this.element.val() );
+			this._toggleClass( this._clearBtn, "ui-textinput-clear-hidden", undefined,
+				!this.element.val() );
 		},
 
 		_destroyClear: function() {
-			this.widget().removeClass( "ui-input-has-clear" );
+			this._removeClass( this.widget(), "ui-textinput-has-clear" );
 			this._unbindClear();
 			this._clearBtn.remove();
 		},

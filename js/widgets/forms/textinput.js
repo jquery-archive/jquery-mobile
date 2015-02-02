@@ -31,18 +31,29 @@ $.widget( "mobile.textinput", {
 		"input[type='file']",
 
 	options: {
+		classes: {
+			"ui-textinput": "ui-corner-all ui-body-inherit ui-shadow-inset",
+			"ui-textinput-text": null,
+			"ui-textinput-search": null
+		},
+
+		// The following four options are deprecated as of 1.5.0 and will be removed in 1.6.0
+		// Their default value is set to null for 1.5.0, because the classes option now stores
+		// the default value
 		theme: null,
-		corners: true,
-		mini: false,
+		corners: null,
+		mini: null,
+		wrapperClass: null,
+
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		wrapperClass: "",
 		enhanced: false
 	},
 
 	_create: function() {
 
-		var options = this.options,
+		var optionsToSet,
+			options = this.options,
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
 			isTextarea = this.element[ 0 ].tagName === "TEXTAREA",
 			isRange = this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ),
@@ -55,7 +66,6 @@ $.widget( "mobile.textinput", {
 		}
 
 		$.extend( this, {
-			classes: this._classesFromOptions(),
 			isSearch: isSearch,
 			isTextarea: isTextarea,
 			isRange: isRange,
@@ -73,65 +83,49 @@ $.widget( "mobile.textinput", {
 			"blur": "_handleBlur"
 		});
 
+		// DEPRECATED as of 1.5.0 to be removed in 1.6.0: Check if any style options have deviated
+		// from the defaults, and call _setOptions() on those that have
+		$.each([ "theme", "corners", "mini", "wrapperClass" ], function() {
+			if ( options[ this ] !== null ) {
+				optionsToSet = optionsToSet || {};
+				optionsToSet[ this ] = options[ this ];
+			}
+		});
+		if ( optionsToSet ) {
+			this._setOptions( optionsToSet );
+		}
 	},
 
 	refresh: function() {
-		this.setOptions({
+		this._setOptions({
 			"disabled" : this.element.is( ":disabled" )
 		});
 	},
 
 	_enhance: function() {
-		var elementClasses = [];
-
-		if ( this.isTextarea ) {
-			elementClasses.push( "ui-input-text" );
-		}
-
-		if ( this.isTextarea || this.isRange ) {
-			elementClasses.push( "ui-shadow-inset" );
-		}
 
 		//"search" and "text" input widgets
 		if ( this.inputNeedsWrap ) {
-			this.element.wrap( this._wrap() );
+			this._wrap().insertBefore( this.element ).append( this.element );
 		} else {
-			elementClasses = elementClasses.concat( this.classes );
-		}
 
-		this.element.addClass( elementClasses.join( " " ) );
+			// Same classes are added to the element itself as are added in _wrap() to the wrapper
+			this._addClass( this.element, "ui-textinput ui-textinput-" +
+				( this.isSearch ? "search" : "text" ) );
+		}
 	},
 
 	widget: function() {
 		return ( this.inputNeedsWrap ) ? this.element.parent() : this.element;
 	},
 
-	_classesFromOptions: function() {
-		var options = this.options,
-			classes = [];
-
-		classes.push( "ui-body-" + ( ( options.theme === null ) ? "inherit" : options.theme ) );
-		if ( options.corners ) {
-			classes.push( "ui-corner-all" );
-		}
-		if ( options.mini ) {
-			classes.push( "ui-mini" );
-		}
-		if ( options.disabled ) {
-			classes.push( "ui-state-disabled" );
-		}
-		if ( options.wrapperClass ) {
-			classes.push( options.wrapperClass );
-		}
-
-		return classes;
-	},
-
 	_wrap: function() {
-		return $( "<div class='" +
-			( this.isSearch ? "ui-input-search " : "ui-input-text " ) +
-			this.classes.join( " " ) + " " +
-			"ui-shadow-inset'></div>" );
+		var wrapper = $( "<div>" );
+
+		this._addClass( wrapper, "ui-textinput ui-textinput-" +
+			( this.isSearch ? "search" : "text" ) );
+
+		return wrapper;
 	},
 
 	_autoCorrect: function() {
@@ -172,22 +166,32 @@ $.widget( "mobile.textinput", {
 	_setOptions: function ( options ) {
 		var outer = this.widget();
 
-		this._super( options );
-
-		if ( !( options.disabled === undefined &&
-			options.mini === undefined &&
-			options.corners === undefined &&
-			options.theme === undefined &&
-			options.wrapperClass === undefined ) ) {
-
-			outer.removeClass( this.classes.join( " " ) );
-			this.classes = this._classesFromOptions();
-			outer.addClass( this.classes.join( " " ) );
-		}
-
 		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", !!options.disabled );
+			this._toggleClass( outer, "ui-textinput", "ui-state-disabled", options.disabled );
 		}
+
+		if ( options.mini !== undefined ) {
+			this._toggleClass( outer, "ui-textinput", "ui-mini", options.mini );
+		}
+
+		if ( options.corners !== undefined ) {
+			this._toggleClass( outer, "ui-textinput", "ui-corner-all", options.corners );
+		}
+
+		if ( options.theme !== undefined ) {
+			this._removeClass( outer, "ui-textinput",
+				( "ui-theme-" + ( this.options.theme ? this.options.theme : "inherit" ) ) );
+			this._addClass( outer, "ui-textinput",
+				( "ui-theme-" + ( options.theme ? options.theme : "inherit" ) ) );
+		}
+
+		if ( options.wrapperClass !== undefined ) {
+			this._removeClass( outer, "ui-textinput", this.options.wrapperClass );
+			this._addClass( outer, "ui-textinput", options.wrapperClass );
+		}
+
+		return this._superApply( arguments );
 	},
 
 	_destroy: function() {
@@ -197,7 +201,6 @@ $.widget( "mobile.textinput", {
 		if ( this.inputNeedsWrap ) {
 			this.element.unwrap();
 		}
-		this.element.removeClass( "ui-input-text " + this.classes.join( " " ) );
 	}
 });
 
