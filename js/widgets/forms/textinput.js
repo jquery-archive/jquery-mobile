@@ -38,9 +38,11 @@ $.widget( "mobile.textinput", {
 			"ui-textinput-search-icon": "ui-icon ui-icon-search"
 		},
 
-		// The following four options are deprecated as of 1.5.0 and will be removed in 1.6.0
-		// Their default value is set to null for 1.5.0, because the classes option now stores
-		// the default value
+		// The following style options are DEPRECATED as of 1.5.0 and will be removed in 1.6.0.
+		// Their default value has been set to null because the effect of the old default value
+		// is now being achieved via the default value of the new class key(s). Setting the default
+		// value to null also allows us upon _create() to detect which of the style options has
+		// been set via deprecated data-attributes or code.
 		theme: null,
 		corners: null,
 		mini: null,
