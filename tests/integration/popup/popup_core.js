@@ -30,13 +30,20 @@
 
 				function( result ) {
 					deepEqual( link.getAttribute( "aria-expanded" ), "true", popupId + ": 'aria-expanded' attribute is set to true when the popup is open" );
-					ok( !popup.parent().prev().hasClass( "ui-screen-hidden" ), popupId + ": Open popup screen is not hidden" );
-					ok( popup.attr( "class" ).match( /( |^)ui-body-([a-z]|inherit)( |$)/ ), popupId + ": Open popup has a valid theme" );
+					ok( !popup.parent().prev().hasClass( "ui-screen-hidden" ),
+						popupId + ": Open popup screen is not hidden" );
+					ok( popup.attr( "class" ).match( /( |^)ui-body-([a-z]|inherit)( |$)/ ),
+						popupId + ": Open popup has a valid theme" );
 
 					popup.popup( "option", "overlayTheme", "a" );
-					ok( popup.parent().prev().hasClass( "ui-overlay-a" ), popupId + ": Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
-					ok( popup.parent().prev().hasClass( "in" ), popupId + ": Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
-					ok( popup.parent().hasClass( "ui-popup-active" ), popupId + ": Open popup has the 'ui-popup-active' class" );
+					ok( popup.parent().prev().hasClass( "ui-overlay-a" ),
+						popupId + ": Setting an overlay theme while the popup is open causes " +
+							"the theme to be applied and the screen to be faded in" );
+					ok( popup.parent().prev().hasClass( "in" ),
+						popupId + ": Setting an overlay theme while the popup is open causes " +
+							"the theme to be applied and the screen to be faded in" );
+					ok( popup.parent().hasClass( "ui-popup-active" ),
+						popupId + ": Open popup has the 'ui-popup-active' class" );
 
 					deepEqual( popup.parent().attr( "tabindex" ), "0",
 						"Popup container has attribute tabindex" );
@@ -53,9 +60,12 @@
 				function( result) {
 					deepEqual( animationCompleteCallCount, 1, "animationComplete called only once" );
 					deepEqual( link.getAttribute( "aria-expanded" ), "false", "'aria-expanded' attribute is set to false when the popup is not open" );
-					ok( !popup.parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
-					ok( popup.parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
-					ok( !popup.parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
+					ok( !popup.parent().hasClass( "in" ),
+						"Closed popup container does not have class 'in'" );
+					ok( popup.parent().prev().hasClass( "ui-screen-hidden" ),
+						"Closed popup screen is hidden" );
+					ok( !popup.parent().hasClass( "ui-popup-active" ),
+						"Open popup dos not have the 'ui-popup-active' class" );
 					deepEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
 						"Popup container does not have attribute tabindex" );
 				},
