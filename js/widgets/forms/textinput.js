@@ -31,12 +31,19 @@ $.widget( "mobile.textinput", {
 		"input[type='file']",
 
 	options: {
+		classes: {
+
+			// We also have the following keys which are empty by default:
+			// "ui-textinput-text"
+			// "ui-textinput-search"
+			"ui-textinput": "ui-corner-all ui-body-inherit ui-shadow-inset",
+			"ui-textinput-search-icon": "ui-alt-icon ui-icon-search"
+		},
+
 		theme: null,
-		corners: true,
-		mini: false,
+
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		wrapperClass: "",
 		enhanced: false
 	},
 
@@ -55,7 +62,6 @@ $.widget( "mobile.textinput", {
 		}
 
 		$.extend( this, {
-			classes: this._classesFromOptions(),
 			isSearch: isSearch,
 			isTextarea: isTextarea,
 			isRange: isRange,
@@ -66,6 +72,11 @@ $.widget( "mobile.textinput", {
 
 		if ( !options.enhanced ) {
 			this._enhance();
+		} else {
+			this._outer = ( inputNeedsWrap ? this.element.parent() : this.element );
+			if ( isSearch ) {
+				this._searchIcon = this._outer.children( ".ui-textinput-search-icon" );
+			}
 		}
 
 		this._on( {
@@ -82,56 +93,30 @@ $.widget( "mobile.textinput", {
 	},
 
 	_enhance: function() {
-		var elementClasses = [];
+		var outer;
 
-		if ( this.isTextarea ) {
-			elementClasses.push( "ui-input-text" );
-		}
-
-		if ( this.isTextarea || this.isRange ) {
-			elementClasses.push( "ui-shadow-inset" );
-		}
-
-		//"search" and "text" input widgets
 		if ( this.inputNeedsWrap ) {
-			this.element.wrap( this._wrap() );
+			outer = $( "<div>" );
+			if ( this.isSearch ) {
+				this._searchIcon = $( "<span>" ).appendTo( outer );
+				this._addClass( this._searchIcon, "ui-textinput-search-icon" );
+			}
 		} else {
-			elementClasses = elementClasses.concat( this.classes );
+			outer = this.element;
 		}
 
-		this.element.addClass( elementClasses.join( " " ) );
+		this._addClass( outer, "ui-textinput ui-textinput-" +
+			( this.isSearch ? "search" : "text" ) );
+
+		if ( this.inputNeedsWrap ) {
+			outer.insertBefore( this.element ).append( this.element );
+		}
+
+		this._outer = outer;
 	},
 
 	widget: function() {
-		return ( this.inputNeedsWrap ) ? this.element.parent() : this.element;
-	},
-
-	_classesFromOptions: function() {
-		var options = this.options,
-			classes = [];
-
-		classes.push( "ui-body-" + ( ( options.theme === null ) ? "inherit" : options.theme ) );
-		if ( options.corners ) {
-			classes.push( "ui-corner-all" );
-		}
-		if ( options.mini ) {
-			classes.push( "ui-mini" );
-		}
-		if ( options.disabled ) {
-			classes.push( "ui-state-disabled" );
-		}
-		if ( options.wrapperClass ) {
-			classes.push( options.wrapperClass );
-		}
-
-		return classes;
-	},
-
-	_wrap: function() {
-		return $( "<div class='" +
-			( this.isSearch ? "ui-input-search " : "ui-input-text " ) +
-			this.classes.join( " " ) + " " +
-			"ui-shadow-inset'></div>" );
+		return this._outer;
 	},
 
 	_autoCorrect: function() {
@@ -154,7 +139,7 @@ $.widget( "mobile.textinput", {
 	},
 
 	_handleBlur: function() {
-		this.widget().removeClass( $.mobile.focusClass );
+		this._outer.removeClass( $.mobile.focusClass );
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.enable( true );
 		}
@@ -166,38 +151,31 @@ $.widget( "mobile.textinput", {
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.disable( true );
 		}
-		this.widget().addClass( $.mobile.focusClass );
+		this._outer.addClass( $.mobile.focusClass );
 	},
 
 	_setOptions: function ( options ) {
-		var outer = this.widget();
-
-		this._super( options );
-
-		if ( !( options.disabled === undefined &&
-			options.mini === undefined &&
-			options.corners === undefined &&
-			options.theme === undefined &&
-			options.wrapperClass === undefined ) ) {
-
-			outer.removeClass( this.classes.join( " " ) );
-			this.classes = this._classesFromOptions();
-			outer.addClass( this.classes.join( " " ) );
+		if ( options.theme !== undefined ) {
+			this._outer
+				.removeClass(
+					"ui-body-" + ( this.options.theme === null ? "inherit" : this.options.theme ) )
+				.addClass(
+					"ui-body-" + ( options.theme === null ? "inherit" : options.theme ) );
 		}
 
-		if ( options.disabled !== undefined ) {
-			this.element.prop( "disabled", !!options.disabled );
-		}
+		return this._superApply( arguments );
 	},
 
 	_destroy: function() {
 		if ( this.options.enhanced ) {
 			return;
 		}
+		if ( this._searchIcon ) {
+			this._searchIcon.remove();
+		}
 		if ( this.inputNeedsWrap ) {
 			this.element.unwrap();
 		}
-		this.element.removeClass( "ui-input-text " + this.classes.join( " " ) );
 	}
 });
 
