@@ -35,6 +35,7 @@ define([
 	"./widgets/forms/flipswitch",
 	"./widgets/forms/rangeslider",
 	"./widgets/forms/textinput",
+	"./widgets/forms/textinput.backcompat",
 	"./widgets/forms/clearButton",
 	"./widgets/forms/autogrow",
 	"./widgets/forms/select.custom",
