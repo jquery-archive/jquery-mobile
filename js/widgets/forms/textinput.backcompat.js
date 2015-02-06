@@ -15,6 +15,14 @@ define([
 (function( $, undefined ) {
 
 if ( $.mobileBackcompat !== false ) {
+	$.widget( "mobile.textinput", $.mobile.textinput, {
+		options: {
+			corners: true,
+			mini: false,
+			wrapperClass: null
+		},
+		classProp: "ui-textinput"
+	});
 	$.widget( "mobile.textinput", $.mobile.textinput, $.mobile.widget.backcompat );
 }
 
