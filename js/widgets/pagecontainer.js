@@ -26,11 +26,7 @@ define( [
 				reverse: false,
 				changeHash: true,
 				fromHashChange: false,
-
-				// By default we rely on the role defined by the @data-role attribute.
-				role: undefined,
 				duplicateCachedPage: undefined,
-				pageContainer: undefined,
 
 				//loading message shows by default when pages are being fetched during change()
 				showLoadMsg: true,
