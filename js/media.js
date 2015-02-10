@@ -41,7 +41,9 @@ define( [ "jquery", "./core" ], function( jQuery ) {
 
 	// $.mobile.media uses matchMedia to return a boolean.
 	$.mobile.media = function( q ) {
-		return window.matchMedia( q ).matches;
+		var mediaQueryList = window.matchMedia( q );
+		// Firefox returns null in a hidden iframe
+		return mediaQueryList && mediaQueryList.matches;
 	};
 
 })(jQuery);
