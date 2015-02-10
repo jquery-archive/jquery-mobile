@@ -9,6 +9,7 @@
 
 //>>label: Content Management
 //>>group: Navigation
+<<<<<<< HEAD
 //>>description: Widget to create page container which manages pages and transitions
 //>>docs: http://api.jquerymobile.com/pagecontainer/
 //>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
@@ -49,11 +50,7 @@ $.widget( "mobile.pagecontainer", {
 			reverse: false,
 			changeHash: true,
 			fromHashChange: false,
-
-			// By default we rely on the role defined by the @data-role attribute.
-			role: undefined,
 			duplicateCachedPage: undefined,
-			pageContainer: undefined,
 
 			//loading message shows by default when pages are being fetched during change()
 			showLoadMsg: true,
