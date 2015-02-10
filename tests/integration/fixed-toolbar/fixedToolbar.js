@@ -2,6 +2,8 @@
  * mobile Fixed Toolbar unit tests
  */
 (function($){
+	var pageContainer = $( ":mobile-pagecontainer" );
+
 	$( "html" ).height( screen.height * 3 );
 
 	function scrollDown(){
@@ -165,7 +167,7 @@
 
 		$.testHelper.sequence([
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "#fullscreen-test-a" );
+				pageContainer.pagecontainer( "change", "#fullscreen-test-a" );
 			},
 
 			function(){	
@@ -193,7 +195,7 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpageheader.length && nextpagefooter.length, "next page has fixed header and fixed footer" );
-				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-a" );
+				pageContainer.pagecontainer( "change", "#persist-test-a" );
 			},
 
 			function(){
@@ -202,12 +204,12 @@
 						ok( nextpageheader.parent( ".ui-mobile-viewport" ).length, "fixed header and footer are now a child of page container" );
 					});
 
-				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-b" );
+				pageContainer.pagecontainer( "change", "#persist-test-b" );
 			},
 
 			function() {
 				ok( nextpageheader.parent( ".ui-page" ).length, "fixed header and footer are now a child of page again" );
-				$.mobile.pageContainer.pagecontainer( "change", "#default" );
+				pageContainer.pagecontainer( "change", "#default" );
 			},
 
 			start
@@ -225,21 +227,21 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpageheader.length, "next page has fixed header and fixed footer" );
-				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-c" );
+				pageContainer.pagecontainer( "change", "#persist-test-c" );
 			},
 
 			function(){
 				$( "#persist-test-d" )
 					.one( "pagebeforeshow", function(){
-						deepEqual( nextpageheader.parent()[0], $.mobile.pageContainer[0], "fixed header is now a child of page container" );
+						deepEqual( nextpageheader.parent()[0], pageContainer[0], "fixed header is now a child of page container" );
 					});
 
-				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-d" );
+				pageContainer.pagecontainer( "change", "#persist-test-d" );
 			},
 
 			function() {
 				deepEqual( nextpageheader.parent()[0], $.mobile.activePage[0], "fixed header is now a child of page again" );
-				$.mobile.pageContainer.pagecontainer( "change", "#default" );
+				pageContainer.pagecontainer( "change", "#default" );
 			},
 
 			start
@@ -257,21 +259,21 @@
 		$.testHelper.pageSequence([
 			function(){
 				ok( nextpagefooter.length, "next page has fixed footer and fixed footer" );
-				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-e" );
+				pageContainer.pagecontainer( "change", "#persist-test-e" );
 			},
 
 			function(){
 				$( "#persist-test-f" )
 					.one( "pagebeforeshow", function(){
-						deepEqual( nextpagefooter.parent()[0], $.mobile.pageContainer[0], "fixed footer is now a child of page container" );
+						deepEqual( nextpagefooter.parent()[0], pageContainer[0], "fixed footer is now a child of page container" );
 					});
 
-				$.mobile.pageContainer.pagecontainer( "change", "#persist-test-f" );
+				pageContainer.pagecontainer( "change", "#persist-test-f" );
 			},
 
 			function() {
 				deepEqual( nextpagefooter.parent()[0], $.mobile.activePage[0], "fixed footer is now a child of page again" );
-				$.mobile.pageContainer.pagecontainer( "change", "#default" );
+				pageContainer.pagecontainer( "change", "#default" );
 			},
 
 			start
@@ -281,7 +283,7 @@
 	var asyncTestFooterAndHeader = function( pageSelector, visible ) {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", pageSelector );
+				pageContainer.pagecontainer( "change", pageSelector );
 			},
 
 			function() {
@@ -295,7 +297,7 @@
 				equal( !$footer.hasClass( "ui-fixed-hidden" ), visible, "the footer should be " + hiddenStr );
 				equal( !$header.hasClass( "ui-fixed-hidden" ), visible, "the header should be " + hiddenStr );
 
-				$.mobile.pageContainer.pagecontainer( "change", "#default" );
+				pageContainer.pagecontainer( "change", "#default" );
 			},
 
 			start
@@ -348,7 +350,7 @@
 
 			function() {
 
-				$.mobile.pageContainer.change( "#default" );
+				pageContainer.change( "#default" );
 
 			}
 		]);

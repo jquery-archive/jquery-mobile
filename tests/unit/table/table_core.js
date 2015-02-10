@@ -4,6 +4,7 @@
  */
 
 (function($){
+	var pageContainer = $( ":mobile-pagecontainer" );
 
 	module( "Basic Table", {
 		setup: function(){
@@ -15,7 +16,7 @@
 					start();
 				});
 
-				$.mobile.pageContainer.pagecontainer( "change", hash );
+				pageContainer.pagecontainer( "change", hash );
 			}
 		},
 
@@ -82,7 +83,7 @@
 					start();
 				});
 
-				$.mobile.pageContainer.pagecontainer( "change", hash );
+				pageContainer.pagecontainer( "change", hash );
 			}
 		},
 
@@ -156,7 +157,7 @@
 					start();
 				});
 
-				$.mobile.pageContainer.pagecontainer( "change", hash );
+				pageContainer.pagecontainer( "change", hash );
 			}
 		},
 

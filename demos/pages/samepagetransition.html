@@ -8,12 +8,6 @@
   <link rel="stylesheet" href="../../css/themes/default/jquery.mobile.css">
   <script src="../../external/jquery/jquery.js"></script>
   <script src="../../js/"></script>
-  <script>
-    // JS
-  </script>
-  <style>
-    #edit-with-js-bin { display: none !important; }
-  </style>
 </head>
 <body>
 <div data-role="page" id="page1" data-theme="a">
@@ -33,7 +27,7 @@
 
   <div role="main" class="ui-content">
      <h1>same page transitions</h1>
-     <div>All links within this page navigate to the page itself having the <code>allowSamePageTransition</code> option at the <code>$.mobile.pageContainer.pagecontainer( "change" )</code> method set to <strong>true</strong>. It seems, just the slide transition raises an issue so the page gets hidden.
+     <div>All links within this page navigate to the page itself by having the <code>allowSamePageTransition</code> option of the pagecontainer widget's <code>change()</code> method set to <strong>true</strong>. The slide transition is the only one that raises an issue so the page gets hidden. This is understandable, since the slide transition requires two pages to be simultaneously visible.
       <label><input type="checkbox" id="cb1" data-theme="b"> reverse transition </label>
       <label><input type="checkbox" id="cb2" data-theme="b"> add ui-page-active on pageshow </label>
     </div>
@@ -59,7 +53,7 @@ $('#page1').on('pagecreate', function() {
     var trans = $(this).text() || 'none',
         rev = !!$('#cb1').attr('checked');
 
-    $.mobile.pageContainer.pagecontainer( "change", "#page1", {
+    $( ":mobile-pagecontainer" ).pagecontainer( "change", "#page1", {
 		transition: trans,
 		allowSamePageTransition: true,
 		reverse: rev

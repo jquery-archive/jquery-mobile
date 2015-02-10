@@ -15,7 +15,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", $( "#mypage" ) );
+				$( ":mobile-pagecontainer" ).pagecontainer( "change", $( "#mypage" ) );
 			},
 
 			function() {

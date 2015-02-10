@@ -4,6 +4,7 @@
 (function($){
 
 	var urlObject = $.mobile.path.parseLocation(),
+		pageContainer = $( ":mobile-pagecontainer" ),
 		home = urlObject.pathname + urlObject.search,
 		originalAnimationComplete = $.fn.animationComplete,
 		animationCompleteCallCount = 0,
@@ -138,7 +139,7 @@
 				$( "#go-to-another-page" ).click();
 			},
 			{
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
+				pagechange: { src: pageContainer, event: "pagechange" + eventNs + "1" }
 			},
 			function() {
 				deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Reached another page" );
@@ -330,7 +331,7 @@
 
 			{
 				hashchange: { src: $( window ), event: $.event.special.navigate.originalEventName + ".anotherPageStep3" },
-				pagechange: { src: $.mobile.pageContainer, event: "pagechange.anotherPageStep3" }
+				pagechange: { src: pageContainer, event: "pagechange.anotherPageStep3" }
 			},
 
 			function( result ) {
@@ -472,7 +473,7 @@
 
 			function() {
 				ok( $popup.is( ":visible" ), "popup is indeed visible" );
-				$.mobile.pageContainer.pagecontainer( "change", "#no-popups" );
+				pageContainer.pagecontainer( "change", "#no-popups" );
 			},
 
 			{

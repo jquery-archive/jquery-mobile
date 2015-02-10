@@ -45,7 +45,7 @@ define([
         home: function() {
 
             // Programatically changes to the categories page
-            $.mobile.pageContainer.pagecontainer( "change", "#categories", {
+            $( ":mobile-pagecontainer" ).pagecontainer( "change", "#categories", {
 				reverse: false,
 				changeHash: false
 			});
@@ -68,7 +68,7 @@ define([
                 currentView.collection.fetch().done( function() {
 
                     // Programatically changes to the current categories page
-                    $.mobile.pageContainer.pagecontainer( "change", "#" + type, {
+                    $( ":mobile-pagecontainer" ).pagecontainer( "change", "#" + type, {
 						reverse: false,
 						changeHash: false
 					});
@@ -81,7 +81,7 @@ define([
             else {
 
                 // Programatically changes to the current categories page
-                $.mobile.pageContainer.pagecontainer( "change", "#" + type, {
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "#" + type, {
 					reverse: false,
 					changeHash: false
 				});

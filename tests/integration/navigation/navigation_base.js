@@ -2,7 +2,8 @@
  * mobile navigation base tag unit tests
  */
 (function($){
-	var baseDir = $.mobile.path.parseUrl($("base").attr("href")).directory,
+	var pagecontainer,
+		baseDir = $.mobile.path.parseUrl($("base").attr("href")).directory,
 		contentDir = $.mobile.path.makePathAbsolute("../content/", baseDir),
 		home = location.pathname + location.search,
 		baseTagEnabled = $.mobile.dynamicBaseTagEnabled,
@@ -13,6 +14,7 @@
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( home );
+			pageContainer = $( ":mobile-pagecontainer" );
 		}
 	});
 
@@ -90,7 +92,7 @@
 				});
 
 				// Try calling change() directly with a relative path.
-				$.mobile.pageContainer.pagecontainer( "change", "base-page-1.html" );
+				pageContainer.pagecontainer( "change", "base-page-1.html" );
 			},
 
 			function(){
@@ -101,7 +103,7 @@
 				});
 
 				// Try calling change() directly with a relative path.
-				$.mobile.pageContainer.pagecontainer( "change", "../content/content-page-1.html" );
+				pageContainer.pagecontainer( "change", "../content/content-page-1.html" );
 			},
 
 			function(){
@@ -112,7 +114,7 @@
 				});
 
 				// Try calling change() with an id
-				$.mobile.pageContainer.pagecontainer( "change", "content-page-2.html" );
+				pageContainer.pagecontainer( "change", "content-page-2.html" );
 			},
 
 			function(){
@@ -136,7 +138,7 @@
 				});
 
 				// Try calling change() with an id
-				$.mobile.pageContainer.pagecontainer( "change", "internal-page-1" );
+				pageContainer.pagecontainer( "change", "internal-page-1" );
 			},
 
 			function(){
@@ -208,7 +210,7 @@
 	var testBaseTagAlteration = function( assertions ) {
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "../../base-change.html" );
+				pageContainer.pagecontainer( "change", "../../base-change.html" );
 			},
 
 			function(){

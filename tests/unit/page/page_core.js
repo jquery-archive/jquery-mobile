@@ -3,7 +3,8 @@
  */
 (function($){
 	var libName = 'jquery.mobile.page',
-		themedefault = $.mobile.page.prototype.options.theme;
+		themedefault = $.mobile.page.prototype.options.theme,
+		pageContainer = $( "body" );
 
 	module(libName);
 
@@ -99,11 +100,11 @@
 
 		var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
 
-		$.mobile.pageContainer.removeClass( pageTheme );
+		pageContainer.removeClass( pageTheme );
 
 		$.mobile.activePage
 			.bind( "pagebeforeshow", function(){
-				ok( $.mobile.pageContainer.hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
+				ok( pageContainer.hasClass( pageTheme ), "Page container has the same theme as the page on pagebeforeshow" );
 				start();
 			})
 			.trigger( "pagebeforeshow" );
@@ -116,11 +117,11 @@
 
 		var pageTheme = "ui-overlay-" + $.mobile.activePage.page( "option", "theme" );
 
-		$.mobile.pageContainer.addClass( pageTheme );
+		pageContainer.addClass( pageTheme );
 
 		$.mobile.activePage
 			.bind( "pagebeforehide", function(){
-				ok( !$.mobile.pageContainer.hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
+				ok( !pageContainer.hasClass( pageTheme ), "Page container does not have the same theme as the page on pagebeforeshow" );
 				start();
 			})
 			.trigger( "pagebeforehide" );

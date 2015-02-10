@@ -4,7 +4,8 @@ $.testHelper.delayStart();
  */
 (function($){
 	// TODO move siteDirectory over to the nav path helper
-	var changePageFn = $.mobile.pagecontainer.prototype.change,
+	var pageContainer,
+		changePageFn = $.mobile.pagecontainer.prototype.change,
 		originalTitle = document.title,
 		originalLinkBinding = $.mobile.linkBindingEnabled,
 		siteDirectory = location.pathname.replace( /[^/]+$/, "" ),
@@ -15,6 +16,10 @@ $.testHelper.delayStart();
 		navigateTestRoot = function(){
 			$.testHelper.openPage( "#" + location.pathname + location.search );
 		};
+
+	$( document ).one( "pagecontainercreate", function( event ) {
+		pageContainer = $( event.target );
+	});
 
 	test( "Absolute link with hash works", function() {
 		var defaultIsPrevented,
@@ -122,7 +127,7 @@ $.testHelper.delayStart();
 	asyncTest( "external empty page does not result in any contents", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "blank.html" );
+				pageContainer.pagecontainer( "change", "blank.html" );
 			},
 
 			function() {
@@ -139,7 +144,7 @@ $.testHelper.delayStart();
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -168,7 +173,7 @@ $.testHelper.delayStart();
 
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -182,7 +187,7 @@ $.testHelper.delayStart();
 				deepEqual( $( "#external-test" ).length, 1 );
 
 				// Switch back to the page again!
-				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// page is still present and displayed in the dom
@@ -207,7 +212,7 @@ $.testHelper.delayStart();
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "cached-external.html" );
+				pageContainer.pagecontainer( "change", "cached-external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -228,7 +233,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			function(){
 				$.mobile.page.prototype.options.domCache = true;
-				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			// page is pulled and displayed in the dom
@@ -250,7 +255,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			function(){
 				$( "body" ).height( $( window ).height() + 500 );
-				$.mobile.pageContainer.pagecontainer( "change", "external.html" );
+				pageContainer.pagecontainer( "change", "external.html" );
 			},
 
 			function(){
@@ -462,7 +467,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			// setup
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "#skip-dialog-first" );
+				pageContainer.pagecontainer( "change", "#skip-dialog-first" );
 			},
 
 			// transition to the dialog
@@ -858,7 +863,7 @@ $.testHelper.delayStart();
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
-				$.mobile.pageContainer
+				pageContainer
 					.pagecontainer( "change", "form-tests/changepage-data.html", {
 						data: "foo=1&bar=2"
 					});
@@ -1145,7 +1150,7 @@ $.testHelper.delayStart();
 				ok( $.mobile.activePage[ 0 ] === $( "#foo" )[ 0 ], "navigated successfully to #foo" );
 
 				// Now navigate to an hash that contains just a dialogHashKey.
-				$.mobile.pageContainer.pagecontainer( "change", "#" + $.mobile.dialogHashKey );
+				pageContainer.pagecontainer( "change", "#" + $.mobile.dialogHashKey );
 			},
 
 			function(){
@@ -1306,7 +1311,7 @@ $.testHelper.delayStart();
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "#link-hijacking-test" );
+				pageContainer.pagecontainer( "change", "#link-hijacking-test" );
 			},
 
 			function() {
@@ -1348,7 +1353,7 @@ $.testHelper.delayStart();
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "#link-hijacking-test" );
+				pageContainer.pagecontainer( "change", "#link-hijacking-test" );
 			},
 
 			function() {
@@ -1372,7 +1377,7 @@ $.testHelper.delayStart();
 	asyncTest( "data-urls with parens work properly (avoid jqmData regex)", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer
+				pageContainer
 					.pagecontainer( "change", "data-url-tests/parentheses.html?foo=(bar)" );
 			},
 
@@ -1395,7 +1400,7 @@ $.testHelper.delayStart();
 	asyncTest( "loading an embeded page with query params works", function() {
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer
+				pageContainer
 					.pagecontainer( "change", "#bar?baz=bak", { dataUrl: false } );
 			},
 
@@ -1410,7 +1415,7 @@ $.testHelper.delayStart();
 	asyncTest( "external page is accessed correctly even if it has a space in the url", function(){
 		$.testHelper.pageSequence([
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", " external.html" );
+				pageContainer.pagecontainer( "change", " external.html" );
 			},
 			function(){
 				equal( $.mobile.activePage.attr( "id" ), "external-test", "the correct page is loaded" );
@@ -1436,7 +1441,7 @@ $.testHelper.delayStart();
 			equal( data.absUrl, absHomeUrl + "#bar" );
 		});
 
-		$.mobile.pageContainer.pagecontainer( "change", "#bar" );
+		pageContainer.pagecontainer( "change", "#bar" );
 
 		requestPath = "/theres/no/way/this/page/exists.html";
 
@@ -1445,6 +1450,6 @@ $.testHelper.delayStart();
 			start();
 		});
 
-		$.mobile.pageContainer.pagecontainer( "change", requestPath );
+		pageContainer.pagecontainer( "change", requestPath );
 	});
 })(jQuery);

@@ -2,7 +2,8 @@
  * mobile navigation unit tests
  */
 (function($){
-	var transitioning = "ui-mobile-viewport-transitioning",
+	var pageContainer,
+		transitioning = "ui-mobile-viewport-transitioning",
 			animationCompleteFn = $.fn.animationComplete,
 			defaultMaxTrans = $.mobile.maxTransitionWidth,
 
@@ -53,7 +54,7 @@
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
-
+			pageContainer = $( ":mobile-pagecontainer" );
 
 			// disable this option so we can test transitions regardless of window width
 			disableMaxTransWidth();
@@ -102,7 +103,7 @@
 
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "#foo" );
+				pageContainer.pagecontainer( "change", "#foo" );
 			},
 
 			function() {
@@ -120,7 +121,7 @@
 		expect(1);
 		$.testHelper.pageSequence([
 			function() {
-				$.mobile.pageContainer.pagecontainer( "change", "#baz" );
+				pageContainer.pagecontainer( "change", "#baz" );
 			},
 
 			function() {
@@ -165,8 +166,8 @@
 		var firstPage = $("#foo"),
 			secondPage = $("#bar");
 
-		$.mobile.pageContainer.pagecontainer( "change", firstPage );
-		$.mobile.pageContainer.pagecontainer( "change", secondPage );
+		pageContainer.pagecontainer( "change", firstPage );
+		pageContainer.pagecontainer( "change", secondPage );
 
 		onToComplete(function(){
 			ok(isTransitioningIn(firstPage), "first page begins transition");
@@ -204,7 +205,7 @@
 			start();
 		}, 5000);
 
-		$.mobile.pageContainer
+		pageContainer
 			.pagecontainer( "change", $(".ui-page:not(.ui-page-active)").first() );
 
 	}

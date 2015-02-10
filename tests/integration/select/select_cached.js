@@ -3,7 +3,8 @@
  */
 
 (function($){
-	var resetHash;
+	var resetHash,
+		pageContainer = $( ":mobile-pagecontainer" );
 
 	resetHash = function(timeout){
 		$.testHelper.openPage( location.hash.indexOf("#default") >= 0 ? "#" : "#default" );
@@ -17,7 +18,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "cached.html" );
+				pageContainer.pagecontainer( "change", "cached.html" );
 			},
 
 			function(){
@@ -50,7 +51,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "cached.html" );
+				pageContainer.pagecontainer( "change", "cached.html" );
 			},
 
 			function(){
@@ -76,7 +77,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "cached-dom-cache-true.html" );
+				pageContainer.pagecontainer( "change", "cached-dom-cache-true.html" );
 			},
 
 			function(){
@@ -90,7 +91,7 @@
 
 			function(){
 				ok( $.mobile.activePage.is( "#dialog-select-parent-domcache-test" ), "the dialog closed" );
-				$.mobile.pageContainer.pagecontainer( "change", $( "#default" ) );
+				pageContainer.pagecontainer( "change", $( "#default" ) );
 			},
 
 			function(){
@@ -106,7 +107,7 @@
 			resetHash,
 
 			function(){
-				$.mobile.pageContainer.pagecontainer( "change", "uncached-dom-cached-false.html" );
+				pageContainer.pagecontainer( "change", "uncached-dom-cached-false.html" );
 			},
 
 			function(){

@@ -42,7 +42,7 @@
 
       <h2>jQuery Mobile configuration</h2>
 
-      <p>The technique used in this <a href="backbone-require.html" rel="external">example page</a> is by no means the only technique available, but it is one of the most elegant.  The Backbone.js router is used exclusively to handle all hashchange events, and the jQuery Mobile <code>$.mobile.pageContainer.pagecontainer( "change", url, options )</code> method is used to programmatically change the page.</p>
+      <p>The technique used in this <a href="backbone-require.html" rel="external">example page</a> is by no means the only technique available, but it is one of the most elegant. The Backbone.js router is used exclusively to handle all hashchange events, and the jQuery Mobile pagecontainer widget's<code>change()</code> method is used to programmatically change the page.</p>
 
       <p>Below are two internal jQuery Mobile properties that are turned off to allow this to happen:</p>
 
@@ -115,7 +115,7 @@
       } );
 </code>
 </pre>
-<p>Next, inside of the Backbone.js Router class object, we can respond to haschange events and manually call the <code>$.mobile.pageContainer.pagecontainer( "change" )</code> method.  Below is a small snippet of <strong>mobileRouter.js</strong>.</p>
+<p>Next, inside of the Backbone.js Router class object, we can respond to haschange events and manually call the pagecontainer widget's<code>change()</code> method. Below is a small snippet of <strong>mobileRouter.js</strong>.</p>
 <pre>
 <code>
         // Backbone.js Routes
@@ -133,7 +133,7 @@
         home: function() {
 
             // Programatically changes to the categories page
-            $.mobile.pageContainer.pagecontainer( "change", "#categories" , {
+            $( :mobile-pagecontainer" ).pagecontainer( "change", "#categories" , {
 				reverse: false,
 				changeHash: false
 			});
