@@ -2,11 +2,15 @@
  * mobile page unit tests
  */
 (function($){
-	var libName = 'jquery.mobile.page',
-		themedefault = $.mobile.page.prototype.options.theme,
-		pageContainer = $( "body" );
+	var pageContainer,
+		libName = 'jquery.mobile.page',
+		themedefault = $.mobile.page.prototype.options.theme;
 
-	module(libName);
+	module(libName, {
+		setup: function() {
+			pageContainer = $( ":mobile-pagecontainer" );
+		}
+	});
 
 	var eventStack = [],
 		etargets = [],
