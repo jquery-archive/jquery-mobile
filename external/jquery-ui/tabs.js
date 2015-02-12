@@ -2,12 +2,17 @@
  * jQuery UI Tabs button-classes
  * http://jqueryui.com
  *
- * Copyright 2014 jQuery Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
- *
- * http://api.jqueryui.com/tabs/
  */
+
+//>>label: Tabs
+//>>group: Widgets
+//>>description: Transforms a set of container elements into a tab structure.
+//>>docs: http://api.jqueryui.com/tabs/
+//>>demos: http://jqueryui.com/tabs/
+
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -76,7 +81,7 @@ return $.widget( "ui.tabs", {
 		this.running = false;
 
 		this._addClass( "ui-tabs", "ui-widget ui-widget-content" );
-		this._toggleClass( "ui-tabs-collapsible", null, !!options.collapsible );
+		this._toggleClass( "ui-tabs-collapsible", null, options.collapsible );
 
 		this._processTabs();
 		options.active = this._initialActive();
@@ -283,7 +288,7 @@ return $.widget( "ui.tabs", {
 		this._super( key, value);
 
 		if ( key === "collapsible" ) {
-			this._toggleClass( "ui-tabs-collapsible", null, !!value );
+			this._toggleClass( "ui-tabs-collapsible", null, value );
 
 			// Setting collapsible: false while collapsed; open first panel
 			if ( !value && this.options.active === false ) {
@@ -365,7 +370,6 @@ return $.widget( "ui.tabs", {
 					"aria-expanded": "true",
 					tabIndex: 0
 				});
-
 			this._addClass( this.active, "ui-tabs-active", "ui-state-active" );
 			this._getPanelForTab( this.active )
 				.show()
@@ -382,28 +386,27 @@ return $.widget( "ui.tabs", {
 			prevPanels = this.panels;
 
 		this.tablist = this._getList().attr( "role", "tablist" );
-
 		this._addClass( this.tablist, "ui-tabs-nav",
 			"ui-helper-reset ui-helper-clearfix ui-widget-header" );
 
-			// Prevent users from focusing disabled tabs via click
+		// Prevent users from focusing disabled tabs via click
 		this.tablist.delegate( "> li", "mousedown" + this.eventNamespace, function( event ) {
-				if ( $( this ).is( ".ui-state-disabled" ) ) {
-					event.preventDefault();
-				}
-			})
+			if ( $( this ).is( ".ui-state-disabled" ) ) {
+				event.preventDefault();
+			}
+		})
 
-			// support: IE <9
-			// Preventing the default action in mousedown doesn't prevent IE
-			// from focusing the element, so if the anchor gets focused, blur.
-			// We don't have to worry about focusing the previously focused
-			// element since clicking on a non-focusable element should focus
-			// the body anyway.
-			.delegate( ".ui-tabs-anchor", "focus" + this.eventNamespace, function() {
-				if ( $( this ).closest( "li" ).is( ".ui-state-disabled" ) ) {
-					this.blur();
-				}
-			});
+		// support: IE <9
+		// Preventing the default action in mousedown doesn't prevent IE
+		// from focusing the element, so if the anchor gets focused, blur.
+		// We don't have to worry about focusing the previously focused
+		// element since clicking on a non-focusable element should focus
+		// the body anyway.
+		.delegate( ".ui-tabs-anchor", "focus" + this.eventNamespace, function() {
+			if ( $( this ).closest( "li" ).is( ".ui-state-disabled" ) ) {
+				this.blur();
+			}
+		});
 
 		this.tabs = this.tablist.find( "> li:has(a[href])" )
 			.attr({
@@ -419,6 +422,7 @@ return $.widget( "ui.tabs", {
 				role: "presentation",
 				tabIndex: -1
 			});
+
 		this._addClass( this.anchors, "ui-tabs-anchor" );
 		this.panels = $();
 
@@ -481,6 +485,7 @@ return $.widget( "ui.tabs", {
 	},
 
 	_setupDisabled: function( disabled ) {
+		var currentItem, li, i;
 		if ( $.isArray( disabled ) ) {
 			if ( !disabled.length ) {
 				disabled = false;
@@ -490,13 +495,14 @@ return $.widget( "ui.tabs", {
 		}
 
 		// disable tabs
-		for ( var i = 0, li; ( li = this.tabs[ i ] ); i++ ) {
+		for ( i = 0; ( li = this.tabs[ i ] ); i++ ) {
+			currentItem = $( li );
 			if ( disabled === true || $.inArray( i, disabled ) !== -1 ) {
-				this._addClass( $( li ).attr( "aria-disabled", "true" ), null,
-					"ui-state-disabled" );
+				currentItem.attr( "aria-disabled", "true" );
+				this._addClass( currentItem, null, "ui-state-disabled" );
 			} else {
-				this._removeClass( $( li ).removeAttr( "aria-disabled" ), null,
-					"ui-state-disabled" );
+				currentItem.removeAttr( "aria-disabled" );
+				this._removeClass( currentItem, null, "ui-state-disabled" );
 			}
 		}
 
@@ -713,7 +719,10 @@ return $.widget( "ui.tabs", {
 
 		this.tablist.removeAttr( "role" ).unbind( this.eventNamespace );
 
-		this.anchors.removeAttr( "role" ).removeAttr( "tabIndex" ).removeUniqueId();
+		this.anchors
+			.removeAttr( "role" )
+			.removeAttr( "tabIndex" )
+			.removeUniqueId();
 
 		this.tabs.add( this.panels ).each(function() {
 			if ( $.data( this, "ui-tabs-destroy" ) ) {
