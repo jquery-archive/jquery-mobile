@@ -2,12 +2,17 @@
  * jQuery UI Accordion button-classes
  * http://jqueryui.com
  *
- * Copyright 2014 jQuery Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
- *
- * http://api.jqueryui.com/accordion/
  */
+
+//>>label: Accordion
+//>>group: Widgets
+//>>description: Displays collapsible content panels for presenting information in a limited amount of space.
+//>>docs: http://api.jqueryui.com/accordion/
+//>>demos: http://jqueryui.com/accordion/
+
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -283,9 +288,9 @@ return $.widget( "ui.accordion", {
 
 		this.active = this._findActive( options.active );
 		this._addClass( this.active, "ui-accordion-header-active", "ui-state-active" )
-			._removeClass( this.active, "ui-accordion-header-collapsed" )
-			._addClass( this.active.next(), "ui-accordion-content-active" )
-			.active.next().show();
+			._removeClass( this.active, "ui-accordion-header-collapsed" );
+		this._addClass( this.active.next(), "ui-accordion-content-active" );
+		this.active.next().show();
 
 		this.headers
 			.attr( "role", "tab" )
@@ -404,10 +409,9 @@ return $.widget( "ui.accordion", {
 	},
 
 	_eventHandler: function( event ) {
-		var options = this.options,
+		var activeChildren, clickedChildren,
+			options = this.options,
 			active = this.active,
-			activeChildren = null,
-			clickedChildren = null,
 			clicked = $( event.currentTarget ),
 			clickedIsActive = clicked[ 0 ] === active[ 0 ],
 			collapsing = clickedIsActive && options.collapsible,
@@ -479,7 +483,10 @@ return $.widget( "ui.accordion", {
 		toHide.attr({
 			"aria-hidden": "true"
 		});
-		toHide.prev().attr( "aria-selected", "false" );
+		toHide.prev().attr({
+			"aria-selected": "false",
+			"aria-expanded": "false"
+		});
 		// if we're switching panels, remove the old header from the tab order
 		// if we're opening from collapsed state, remove the previous header from the tab order
 		// if we're collapsing, then keep the collapsing header in the tab order
@@ -490,7 +497,7 @@ return $.widget( "ui.accordion", {
 			});
 		} else if ( toShow.length ) {
 			this.headers.filter(function() {
-				return $( this ).attr( "tabIndex" ) === 0;
+				return parseInt( $( this ).attr( "tabIndex" ), 10 ) === 0;
 			})
 			.attr( "tabIndex", -1 );
 		}
@@ -500,8 +507,8 @@ return $.widget( "ui.accordion", {
 			.prev()
 				.attr({
 					"aria-selected": "true",
-					tabIndex: 0,
-					"aria-expanded": "true"
+					"aria-expanded": "true",
+					tabIndex: 0
 				});
 	},
 
@@ -564,8 +571,8 @@ return $.widget( "ui.accordion", {
 		var toHide = data.oldPanel,
 			prev = toHide.prev();
 
-		this._removeClass( toHide, "ui-accordion-content-active" )
-			._removeClass( prev, "ui-accordion-header-active" )
+		this._removeClass( toHide, "ui-accordion-content-active" );
+		this._removeClass( prev, "ui-accordion-header-active" )
 			._addClass( prev, "ui-accordion-header-collapsed" );
 
 		// Work around for rendering bug in IE (#5421)

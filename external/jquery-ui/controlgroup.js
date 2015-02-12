@@ -24,7 +24,7 @@
 	}
 }(function( $ ) {
 
-$.widget( "ui.controlgroup", {
+return $.widget( "ui.controlgroup", {
 	version: "button-classes",
 	defaultElement: "<div>",
 	options: {
@@ -43,7 +43,7 @@ $.widget( "ui.controlgroup", {
 		this._enhance();
 	},
 
-	// To support enhanced option in jQuery mobile we isolate dom manipulation here
+	// The support the enhanced option in jQuery Mobile, we isolate DOM manipulation
 	_enhance: function() {
 		this.element.attr( "role", "toolbar" );
 		this.refresh();
@@ -52,8 +52,8 @@ $.widget( "ui.controlgroup", {
 	_destroy: function() {
 		var that = this;
 		$.each( this.options.items, function( widget, selector ) {
-			that.element.children( selector ).map(function(){
-				return $( this )[ widget ]( "widget" )[ 0 ];
+			that.element.children( selector ).map( function() {
+				return $( this )[ widget ]( "widget" ).removeData( "ui-controlgroup-data" )[ 0 ];
 			}).removeData( "ui-controlgroup-data" );
 		});
 		this._callChildMethod( "destroy" );
@@ -62,6 +62,8 @@ $.widget( "ui.controlgroup", {
 
 	_callChildMethod: function( method ) {
 		var that = this;
+
+		this.buttons = $();
 		$.each( this.options.items, function( widget, selector ) {
 			var options = {};
 			if ( that[ "_" + widget + "_options" ] ) {
@@ -69,68 +71,68 @@ $.widget( "ui.controlgroup", {
 			}
 			if ( $.fn[ widget ] && selector ) {
 				that.element
-					.children( selector )[ widget ]( method ? method: options )
-					.each(function(){
-						if ( method !== "destroy" ) {
-							$( this )[ widget ]( "widget" ).data( "ui-controlgroup-data", {
-								"type": widget,
-								"element": $( this )
-							});
-						}
-					});
+					.find( selector )[ widget ]( method ? method : options )
+						.each( function() {
+							if ( method !== "destroy" ) {
+								var button =
+									$( this )[ widget ]( "widget" ).data( "ui-controlgroup-data", {
+										"widgetType": widget,
+										"element": $( this )
+									});
+								that.buttons = that.buttons.add( button );
+							}
+						});
 			}
 		});
 	},
 
-	_button_options: function( position ) {
-		var cornerClasses = {
-			"middle": null,
-			"first": "ui-corner-" + ( ( this.options.direction === "vertical" )? "top" : "left" ),
-			"last": "ui-corner-" + ( ( this.options.direction === "vertical" )? "bottom" : "right" )
-		};
-
+	_button_options: function( position, direction ) {
 		return {
-					classes: {
-						"ui-button": cornerClasses[ position ]
-					}
-				};
-	},
-
-	_checkboxradio_options: function( position ) {
-		var cornerClasses = {
-			"middle": null,
-			"first": "ui-corner-" + ( ( this.options.direction === "vertical" )? "top" : "left" ),
-			"last": "ui-corner-" + ( ( this.options.direction === "vertical" )? "bottom" : "right" )
-		};
-
-		return {
-					classes: {
-						"ui-checkboxradio-label": cornerClasses[ position ]
-					}
-				};
-	},
-
-	_selectmenu_options: function( position ) {
-		var classes = {
-			middle: {
-				"ui-selectmenu-button-open": null,
-				"ui-selectmenu-button-closed": null
-			},
-			first: {
-				"ui-selectmenu-button-open":
-					"ui-corner-" + ( ( this.options.direction === "vertical" )? "top": "tl" ),
-				"ui-selectmenu-button-closed":
-					"ui-corner-" + ( ( this.options.direction === "vertical" )? "top": "left" )
-			},
-			last: {
-				"ui-selectmenu-button-open":
-					( this.options.direction === "vertical" )? null: "ui-corner-tr",
-				"ui-selectmenu-button-closed":
-					"ui-corner-" + ( ( this.options.direction === "vertical" )? "bottom": "right" )
+			classes: {
+				"ui-button": {
+					"middle": null,
+					"first": "ui-corner-" + ( direction ? "top" : "left" ),
+					"last": "ui-corner-" + ( direction ? "bottom" : "right" )
+				}[ position ]
 			}
-
 		};
-		return { classes: classes[ position ] };
+	},
+
+	_checkboxradio_options: function( position, direction ) {
+		return {
+			classes: {
+				"ui-checkboxradio-label": {
+					"middle": null,
+					"first": "ui-corner-" + ( direction ? "top" : "left" ),
+					"last": "ui-corner-" + ( direction ? "bottom" : "right" )
+				}[ position ]
+			}
+		};
+	},
+
+	_selectmenu_options: function( position, direction ) {
+		return {
+			width: "auto",
+			classes: {
+				middle: {
+					"ui-selectmenu-button-open": null,
+					"ui-selectmenu-button-closed": null
+				},
+				first: {
+					"ui-selectmenu-button-open":
+						"ui-corner-" + ( direction ? "top" : "tl" ),
+					"ui-selectmenu-button-closed":
+						"ui-corner-" + ( direction ? "top" : "left" )
+				},
+				last: {
+					"ui-selectmenu-button-open":
+						direction ? null : "ui-corner-tr",
+					"ui-selectmenu-button-closed":
+						"ui-corner-" + ( direction ? "bottom" : "right" )
+				}
+
+			}[ position ]
+		};
 	},
 
 	_setOption: function( key, value ) {
@@ -138,14 +140,14 @@ $.widget( "ui.controlgroup", {
 
 		this._super( key, value );
 		if ( key === "direction" ) {
-			this.element.removeClass( "ui-controlgroup-" + original );
+			this._removeClass( "ui-controlgroup-" + original );
 		}
 		if ( key === "disabled" ) {
 			this._callChildMethod( value ? "disable" : "enable" );
-		} else {
-			this.refresh();
+			return;
 		}
 
+		this.refresh();
 	},
 
 	refresh: function() {
@@ -154,22 +156,28 @@ $.widget( "ui.controlgroup", {
 
 		this._addClass( "ui-controlgroup ui-controlgroup-" + this.options.direction );
 		this._callChildMethod();
-		children = this.element.children( ".ui-button" );
+
+		children = this.buttons;
 
 		if ( this.options.excludeInvisible ) {
 			children = children.filter( ":visible" );
 		}
 		if ( children.length ) {
-			[ "first", "last" ].forEach( function( value ){
+			[ "first", "last" ].forEach( function( value ) {
 				var data = children[ value ]().data( "ui-controlgroup-data" );
-				data.element[ data.type ]( that[ "_" + data.type + "_options" ]( value ) );
+				if ( that[ "_" + data.widgetType + "_options" ] ) {
+					data.element[ data.widgetType ](
+						that[ "_" + data.widgetType + "_options" ](
+							value,
+							that.options.direction === "vertical"
+						)
+					);
+				}
 			});
 			this._callChildMethod( "refresh" );
 		}
 	}
 
 });
-
-return $.ui.controlgroup;
 
 }));

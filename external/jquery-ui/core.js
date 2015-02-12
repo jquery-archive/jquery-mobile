@@ -2,12 +2,18 @@
  * jQuery UI Core button-classes
  * http://jqueryui.com
  *
- * Copyright 2014 jQuery Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
  *
- * http://api.jqueryui.com/category/ui-core/
  */
+
+//>>label: Core
+//>>group: UI Core
+//>>description: The core of jQuery UI, required for all interactions and widgets.
+//>>docs: http://api.jqueryui.com/category/ui-core/
+//>>demos: http://jqueryui.com/
+
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -97,7 +103,7 @@ function focusable( element, isTabIndexNotNaN ) {
 		img = $( "img[usemap='#" + mapName + "']" )[ 0 ];
 		return !!img && visible( img );
 	}
-	return ( /input|select|textarea|button|object/.test( nodeName ) ?
+	return ( /^(input|select|textarea|button|object)$/.test( nodeName ) ?
 		!element.disabled :
 		"a" === nodeName ?
 			element.href || isTabIndexNotNaN :
@@ -190,19 +196,6 @@ if ( !$.fn.addBack ) {
 			this.prevObject : this.prevObject.filter( selector )
 		);
 	};
-}
-
-// support: jQuery 1.6.1, 1.6.2 (http://bugs.jquery.com/ticket/9413)
-if ( $( "<a>" ).data( "a-b", "a" ).removeData( "a-b" ).data( "a-b" ) ) {
-	$.fn.removeData = (function( removeData ) {
-		return function( key ) {
-			if ( arguments.length ) {
-				return removeData.call( this, $.camelCase( key ) );
-			} else {
-				return removeData.call( this );
-			}
-		};
-	})( $.fn.removeData );
 }
 
 // deprecated
