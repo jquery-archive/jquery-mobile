@@ -19,6 +19,14 @@ define( [ "jquery",
 		options: {
 			theme: null,
 			trackTheme: null,
+			classes: {
+				"ui-rangeslider": "",
+				"ui-rangeslider-sliders": "",
+				"ui-rangeslider-first": "",
+				"ui-rangeslider-last": ""
+			},
+
+			// deprecated in 1.5
 			corners: true,
 			mini: false,
 			highlight: true
@@ -26,7 +34,6 @@ define( [ "jquery",
 
 		_create: function() {
 			var $el = this.element,
-			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
 			_inputFirst = $el.find( "input" ).first(),
 			_inputLast = $el.find( "input" ).last(),
 			_label = $el.find( "label" ).first(),
@@ -37,11 +44,12 @@ define( [ "jquery",
 			_sliderFirst = _sliderWidgetFirst.slider,
 			_sliderLast = _sliderWidgetLast.slider,
 			firstHandle = _sliderWidgetFirst.handle,
-			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
+			_sliders = $( "<div />" ).appendTo( $el );
+			this._addClass( _sliders, "ui-rangeslider-sliders" );
 
-			_inputFirst.addClass( "ui-rangeslider-first" );
-			_inputLast.addClass( "ui-rangeslider-last" );
-			$el.addClass( elClass );
+			this._addClass( _inputFirst, "ui-rangeslider-first" );
+			this._addClass( _inputLast, "ui-rangeslider-last" );
+			this._addClass( "ui-rangeslider" );
 
 			_sliderFirst.appendTo( _sliders );
 			_sliderLast.appendTo( _sliders );
@@ -262,11 +270,13 @@ define( [ "jquery",
 
 		_destroy: function() {
 			this._label.prependTo( this.element );
-			this.element.removeClass( "ui-rangeslider ui-mini" );
+			this._removeClass( "ui-rangeslider" );
 			this._inputFirst.after( this._sliderFirst );
 			this._inputLast.after( this._sliderLast );
 			this._sliders.remove();
-			this.element.find( "input" ).removeClass( "ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
+			this._removeClass( 
+					this.element.find( "input" ), 
+					"ui-rangeslider-first ui-rangeslider-last" ).slider( "destroy" );
 		}
 
 	}, $.mobile.behaviors.formReset ) );
