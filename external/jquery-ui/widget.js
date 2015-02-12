@@ -2,12 +2,17 @@
  * jQuery UI Widget button-classes
  * http://jqueryui.com
  *
- * Copyright 2014 jQuery Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
  * http://jquery.org/license
- *
- * http://api.jqueryui.com/jQuery.widget/
  */
+
+//>>label: Widget
+//>>group: UI Core
+//>>description: Provides a factory for creating stateful widgets with a common API.
+//>>docs: http://api.jqueryui.com/jQuery.widget/
+//>>demos: http://jqueryui.com/widget/
+
 (function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -190,11 +195,6 @@ $.widget.bridge = function( name, object ) {
 			args = widget_slice.call( arguments, 1 ),
 			returnValue = this;
 
-		// allow multiple hashes to be passed on init
-		options = !isMethodCall && args.length ?
-			$.widget.extend.apply( null, [ options ].concat(args) ) :
-			options;
-
 		if ( isMethodCall ) {
 			this.each(function() {
 				var methodValue,
@@ -219,6 +219,12 @@ $.widget.bridge = function( name, object ) {
 				}
 			});
 		} else {
+
+			// Allow multiple hashes to be passed on init
+			if ( args.length ) {
+				options = $.widget.extend.apply( null, [ options ].concat(args) );
+			}
+
 			this.each(function() {
 				var instance = $.data( this, fullName );
 				if ( instance ) {
@@ -245,6 +251,7 @@ $.Widget.prototype = {
 	defaultElement: "<div>",
 	options: {
 		disabled: false,
+		classes: {},
 
 		// callbacks
 		create: null
@@ -258,7 +265,7 @@ $.Widget.prototype = {
 		this.bindings = $();
 		this.hoverable = $();
 		this.focusable = $();
-		this.classObject = {};
+		this.classesElementLookup = {};
 
 		if ( element !== this ) {
 			$.data( element, this.widgetFullName, this );
@@ -294,7 +301,7 @@ $.Widget.prototype = {
 	destroy: function() {
 		var that = this;
 		this._destroy();
-		$.each( this.classObject, function( key, value ) {
+		$.each( this.classesElementLookup, function( key, value ) {
 			that._removeClass( value, key );
 		});
 
@@ -302,19 +309,13 @@ $.Widget.prototype = {
 		// all event bindings should go through this._on()
 		this.element
 			.unbind( this.eventNamespace )
-			.removeData( this.widgetFullName )
-			// support: jquery <1.6.3
-			// http://bugs.jquery.com/ticket/9413
-			.removeData( $.camelCase( this.widgetFullName ) );
+			.removeData( this.widgetFullName );
 		this.widget()
 			.unbind( this.eventNamespace )
-			.removeAttr( "aria-disabled" )
-			.removeClass( this.widgetFullName + "-disabled " + "ui-state-disabled" );
+			.removeAttr( "aria-disabled" );
 
 		// clean up events and states
 		this.bindings.unbind( this.eventNamespace );
-		this.hoverable.removeClass( "ui-state-hover" );
-		this.focusable.removeClass( "ui-state-focus" );
 	},
 	_destroy: $.noop,
 
@@ -370,31 +371,44 @@ $.Widget.prototype = {
 
 		return this;
 	},
-	_setOption: function( key, value ) {
-		var classKey, elements;
-		if ( key === "classes" ) {
-			for ( classKey in value ) {
-				if ( value[ classKey ] !== this.options.classes[ classKey ] ) {
-					if ( this.classObject[ classKey ] && this.classObject[ classKey ].length > 0 ) {
-						elements =  $.extend( {}, this.classObject[ classKey ] );
-						this._removeClass( this.classObject[ classKey ], classKey );
-						elements.addClass(
-							this._classes( elements, classKey, null, true, value ) );
-					}
-				}
+	_updateClassesOption: function( value ) {
+		var classKey, elements, currentElements;
+		for ( classKey in value ) {
+			currentElements = this.classesElementLookup[ classKey ];
+			if ( value[ classKey ] === this.options.classes[ classKey ] ||
+					!currentElements ||
+					!currentElements.length ) {
+				continue;
 			}
+			elements = $( currentElements.get() );
+			this._removeClass( currentElements, classKey );
+
+			// We don't use _addClass here because that uses this.options.classes
+			// for generating the string of classes we want to use value is the new
+			// value for classes which was passed to _setOption so we call _classes
+			// directly to pass in this value.
+			elements.addClass( this._classes({
+				element: elements,
+				keys: classKey,
+				classes: value,
+				add: true
+			}));
+		}
+	},
+	_setOption: function( key, value ) {
+		if ( key === "classes" ) {
+			this._updateClassesOption( value );
 		}
 
 		this.options[ key ] = value;
 
 		if ( key === "disabled" ) {
-			this.widget()
-				.toggleClass( this.widgetFullName + "-disabled", !!value );
+			this._toggleClass( this.widget(), this.widgetFullName + "-disabled", null, !!value );
 
 			// If the widget is becoming disabled, then nothing is interactive
 			if ( value ) {
-				this.hoverable.removeClass( "ui-state-hover" );
-				this.focusable.removeClass( "ui-state-focus" );
+				this._removeClass( this.hoverable, null, "ui-state-hover" );
+				this._removeClass( this.focusable, null, "ui-state-focus" );
 			}
 		}
 
@@ -408,31 +422,36 @@ $.Widget.prototype = {
 		return this._setOptions({ disabled: true });
 	},
 
-	_classes: function( element, keys, extra, add, object ) {
+	_classes: function( options ) {
 		var full = [],
-			that = this;
-
-		object = object || this.options.classes;
+			that = this,
+			settings = $.extend({
+				element: this.element,
+				classes: this.options.classes || {}
+			}, options );
 
 		function processClassString( classes, checkOption ) {
 			var current, i;
 			for ( i = 0; i < classes.length; i++ ) {
-				current = that.classObject[ classes[ i ] ] ? that.classObject[ classes[ i ] ] : $();
-				that.classObject[ classes[ i ] ] = current[ add ? "add" : "not" ]( element );
-
+				current = that.classesElementLookup[ classes[ i ] ] || $();
+				if ( settings.add ) {
+					current = $( $.unique( current.get().concat( settings.element.get() ) ) );
+				} else {
+					current = $( current.not( settings.element ).get() );
+				}
+				that.classesElementLookup[ classes[ i ] ] = current;
 				full.push( classes[ i ] );
-
-				if ( checkOption && object[ classes[ i ] ] ) {
-					full.push( object[ classes[ i ] ] );
+				if ( checkOption && settings.classes[ classes[ i ] ] ) {
+					full.push( settings.classes[ classes[ i ] ] );
 				}
 			}
 		}
 
-		if ( keys ) {
-			processClassString( keys.split( " " ), true );
+		if ( settings.keys ) {
+			processClassString( settings.keys.split( " " ), true );
 		}
-		if ( extra ) {
-			processClassString( extra.split( " " ) );
+		if ( settings.extra ) {
+			processClassString( settings.extra.split( " " ) );
 		}
 
 		return full.join( " " );
@@ -446,14 +465,16 @@ $.Widget.prototype = {
 		return this._toggleClass( element, keys, extra, true );
 	},
 
-	_toggleClass: function( element, keys, extra, bool ) {
-		bool = ( typeof bool === "boolean" ) ? bool : extra ;
-		if ( typeof element === "string" || element === null ) {
-			extra = keys;
-			keys = element;
-			element = this.element;
-		}
-		element.toggleClass( this._classes( element, keys, extra, bool ), bool );
+	_toggleClass: function( element, keys, extra, add ) {
+		add = ( typeof add === "boolean" ) ? add : extra;
+		var shift = ( typeof element === "string" || element === null ),
+			options = {
+				extra: shift ? keys : extra,
+				keys: shift ? element : keys,
+				element: shift ? this.element : element,
+				add: add
+			};
+		options.element.toggleClass( this._classes( options ), add );
 		return this;
 	},
 
@@ -530,25 +551,27 @@ $.Widget.prototype = {
 	},
 
 	_hoverable: function( element ) {
+		var that = this;
 		this.hoverable = this.hoverable.add( element );
 		this._on( element, {
 			mouseenter: function( event ) {
-				$( event.currentTarget ).addClass( "ui-state-hover" );
+				that._addClass( $( event.currentTarget ), null, "ui-state-hover" );
 			},
 			mouseleave: function( event ) {
-				$( event.currentTarget ).removeClass( "ui-state-hover" );
+				that._removeClass( $( event.currentTarget ), null, "ui-state-hover" );
 			}
 		});
 	},
 
 	_focusable: function( element ) {
+		var that = this;
 		this.focusable = this.focusable.add( element );
 		this._on( element, {
 			focusin: function( event ) {
-				$( event.currentTarget ).addClass( "ui-state-focus" );
+				that._addClass( $( event.currentTarget ), null, "ui-state-focus" );
 			},
 			focusout: function( event ) {
-				$( event.currentTarget ).removeClass( "ui-state-focus" );
+				that._removeClass( $( event.currentTarget ), null, "ui-state-focus" );
 			}
 		});
 	},
