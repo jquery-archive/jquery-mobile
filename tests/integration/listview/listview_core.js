@@ -4,14 +4,15 @@
 
 // TODO split out into seperate test files
 (function($){
-	var home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
-		insetVal = $.mobile.listview.prototype.options.inset,
-		pageContainer = $( ":mobile-pagecontainer" );
+	var pageContainer,
+		home = $.mobile.path.parseUrl( location.href ).pathname + location.search,
+		insetVal = $.mobile.listview.prototype.options.inset;
 
 	$.mobile.defaultTransition = "none";
 
 	module( "Basic Linked list", {
 		setup: function(){
+			pageContainer = $( ":mobile-pagecontainer" );
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( home );
