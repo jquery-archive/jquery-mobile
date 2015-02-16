@@ -13,6 +13,13 @@ define( [
 
 	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
+			classes: {
+
+				// We also have the following keys which are empty by default:
+				// "ui-textinput-clear-button-hidden"
+				// "ui-textinput-has-clear-button"
+				"ui-textinput-clear-button": "ui-button ui-icon-delete ui-button-icon-only ui-corner-all ui-alt-icon"
+			},
 			clearBtn: false,
 			clearBtnText: "Clear text"
 		},
@@ -20,59 +27,52 @@ define( [
 		_create: function() {
 			this._super();
 
+			if ( !this.inputNeedsWrap ) {
+				return;
+			}
+
 			if ( this.isSearch ) {
 				this.options.clearBtn = true;
 			}
 
-			if ( !!this.options.clearBtn && this.inputNeedsWrap ) {
-				this._addClearBtn();
+			if ( this.options.clearBtn ) {
+				if ( this.options.enhanced ) {
+					this._clearButton = this._outer.children( "a.ui-textinput-clear-button" );
+					this._bindClearEvents();
+				} else {
+					this._addClearButton();
+				}
 			}
 		},
 
 		clearButton: function() {
-			return $( "<a href='#' tabindex='-1' aria-hidden='true' " +
-				"class='ui-input-clear ui-button ui-icon-delete ui-button-icon-only ui-corner-all'>" +
-				"</a>" )
-					.attr( "title", this.options.clearBtnText )
-					.text( this.options.clearBtnText );
+			var button = $( "<a href='#' tabindex='-1' aria-hidden='true'></a>" )
+				.attr( "title", this.options.clearBtnText )
+				.text( this.options.clearBtnText );
+
+			this._addClass( button, "ui-textinput-clear-button" );
+
+			return button;
 		},
 
-		_clearBtnClick: function( event ) {
-			this.element.val( "" )
-					.focus()
-					.trigger( "change" );
-
-			this._clearBtn.addClass( "ui-input-clear-hidden" );
-			event.preventDefault();
-		},
-
-		_addClearBtn: function() {
-
-			if ( !this.options.enhanced ) {
-				this._enhanceClear();
-			}
-
-			$.extend( this, {
-				_clearBtn: this.widget().find("a.ui-input-clear")
-			});
-
+		_addClearButton: function() {
+			this._addClass( this._outer, "ui-textinput-has-clear-button" );
+			this._clearButton = this.clearButton().appendTo( this._outer );
 			this._bindClearEvents();
-
 			this._toggleClear();
 
 		},
 
-		_enhanceClear: function() {
-
-			this.clearButton().appendTo( this.widget() );
-			this.widget().addClass( "ui-input-has-clear" );
-
+		_removeClearButton: function() {
+			this._removeClass( this._outer, "ui-textinput-has-clear-button" );
+			this._unbindClearEvents();
+			this._clearButton.remove();
+			this._clearButton = null;
 		},
 
 		_bindClearEvents: function() {
-
-			this._on( this._clearBtn, {
-				"click": "_clearBtnClick"
+			this._on( this._clearButton, {
+				"click": "_clearButtonClick"
 			});
 
 			this._on({
@@ -85,30 +85,20 @@ define( [
 				"paste": "_toggleClear"
 
 			});
-
 		},
 
-		_unbindClear: function() {
-			this._off( this._clearBtn, "click");
+		_unbindClearEvents: function() {
+			this._off( this._clearButton, "click" );
 			this._off( this.element, "keyup change input focus blur cut paste" );
 		},
 
-		_setOptions: function( options ) {
-			this._super( options );
+		_clearButtonClick: function( event ) {
+			this.element.val( "" )
+					.focus()
+					.trigger( "change" );
 
-			if ( options.clearBtn !== undefined &&
-				!this.element.is( "textarea, :jqmData(type='range')" ) ) {
-				if ( options.clearBtn ) {
-					this._addClearBtn();
-				} else {
-					this._destroyClear();
-				}
-			}
-
-			if ( options.clearBtnText !== undefined && this._clearBtn !== undefined ) {
-				this._clearBtn.text( options.clearBtnText )
-					.attr("title", options.clearBtnText);
-			}
+			this._addClass( this._clearButton, "ui-textinput-clear-button-hidden" );
+			event.preventDefault();
 		},
 
 		_toggleClear: function() {
@@ -116,19 +106,31 @@ define( [
 		},
 
 		_toggleClearClass: function() {
-			this._clearBtn.toggleClass( "ui-input-clear-hidden", !this.element.val() );
+			this._toggleClass( this._clearButton, "ui-textinput-clear-button-hidden",
+				undefined, !this.element.val() );
 		},
 
-		_destroyClear: function() {
-			this.widget().removeClass( "ui-input-has-clear" );
-			this._unbindClear();
-			this._clearBtn.remove();
+		_setOptions: function( options ) {
+			this._super( options );
+
+			if ( options.clearBtn !== undefined && this.inputNeedsWrap ) {
+				if ( options.clearBtn ) {
+					this._addClearButton();
+				} else {
+					this._removeClearButton();
+				}
+			}
+
+			if ( options.clearBtnText !== undefined && this._clearButton !== undefined ) {
+				this._clearButton.text( options.clearBtnText )
+					.attr("title", options.clearBtnText);
+			}
 		},
 
 		_destroy: function() {
 			this._super();
-			if ( this.options.clearBtn ) {
-				this._destroyClear();
+			if ( !this.options.enhanced && this._clearButton ) {
+				this._removeClearButton();
 			}
 		}
 
