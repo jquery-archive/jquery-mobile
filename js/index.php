@@ -80,7 +80,6 @@ $files = array(
 	'widgets/forms/select.js',
 	'widgets/forms/select.custom.js',
 	'widgets/filterable.js',
-	'widgets/filterable.backcompat.js',
 	'../external/jquery-ui/controlgroup.js',
 	'widgets/controlgroup.js',
 	'widgets/controlgroup.backcompat.js',

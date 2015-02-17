@@ -51,7 +51,6 @@ define([
 	"./widgets/table.columntoggle",
 	"./widgets/table.reflow",
 	"./widgets/filterable",
-	"./widgets/filterable.backcompat",
 	"./jquery-ui/tabs",
 	"./widgets/tabs.ajax",
 	"./zoom",
