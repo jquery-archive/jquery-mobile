@@ -70,7 +70,7 @@ textarea.ui-mini {
 .ui-textinput-search input {
 	padding-left: 1.75em;
 }
-.ui-textinput-search .ui-icon {
+.ui-textinput-search .ui-textinput-search-icon {
 	position: absolute;
 	left: .3125em;
 	top: 50%;

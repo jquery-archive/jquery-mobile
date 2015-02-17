@@ -306,8 +306,7 @@ div.ui-mobile-viewport {
 	padding-right: .3125em;
 }
 
-.ui-icon,
-.ui-alt-icon {
+.ui-icon {
 	position: absolute;
 	display: inline-block;
 	width: 22px;

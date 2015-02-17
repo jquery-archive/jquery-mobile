@@ -37,7 +37,7 @@ $.widget( "mobile.textinput", {
 			// "ui-textinput-text"
 			// "ui-textinput-search"
 			"ui-textinput": "ui-corner-all ui-body-inherit ui-shadow-inset",
-			"ui-textinput-search-icon": "ui-alt-icon ui-icon-search"
+			"ui-textinput-search-icon": "ui-icon ui-alt-icon ui-icon-search"
 		},
 
 		theme: null,
