@@ -9,6 +9,10 @@ module.exports = {
 		src: [
 
 			// Source
+			"js/widgets/forms/autogrow.js",
+			"js/widgets/forms/clearButton.js",
+			"js/widgets/forms/textinput.backcompat.js",
+			"js/widgets/forms/textinput.js",
 			"js/widgets/accordion.js",
 			"js/widgets/widget.backcompat.js",
 			"js/widgets/widget.theme.js",
