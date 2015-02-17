@@ -60,11 +60,13 @@
 
 	// NOTE init binding to alter the setting is in settings.js
 	test( "slider input does not get clear button", function() {
-		deepEqual( $( ".textinput-test" ).find( ".ui-textinput-clear-button" ).length, 0, "slider input does not get clear button" );
+		deepEqual( $( ".textinput-test" ).find( ".ui-textinput-clear-button" ).length, 0,
+			"slider input does not get clear button" );
 	});
 	
 	test( "slider input is not wrapped in div.ui-textinput-text", function() {
-		ok( ! $( "#textinput-test" ).parents().is( "div.ui-textinput-text" ), "slider input is not wrapped in div.ui-textinput-text" );
+		ok( ! $( "#textinput-test" ).parents().is( "div.ui-textinput-text" ),
+			"slider input is not wrapped in div.ui-textinput-text" );
 	});
 
 	test( "slider tooltip", function() {
