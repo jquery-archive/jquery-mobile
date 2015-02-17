@@ -13,13 +13,7 @@ define( [
 
 	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
-
-			classes: {
-
-				// We have the following keys which are empty by default:
-				// "ui-textinput-autogrow"
-				// "ui-textinput-autogrow-resize"
-			},
+			classes: {},
 			autogrow:true,
 			keyupTimeoutBuffer: 100
 		},

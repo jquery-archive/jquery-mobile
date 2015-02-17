@@ -32,10 +32,6 @@ $.widget( "mobile.textinput", {
 
 	options: {
 		classes: {
-
-			// We also have the following keys which are empty by default:
-			// "ui-textinput-text"
-			// "ui-textinput-search"
 			"ui-textinput": "ui-corner-all ui-body-inherit ui-shadow-inset",
 			"ui-textinput-search-icon": "ui-icon ui-alt-icon ui-icon-search"
 		},
