@@ -68,6 +68,8 @@ define( [
 			this._unbindClearEvents();
 			this._clearButton.remove();
 			this._clearButton = null;
+			clearTimeout( this._toggleClearDelay );
+			this._toggleClearDelay = 0;
 		},
 
 		_bindClearEvents: function() {
@@ -100,13 +102,14 @@ define( [
 		},
 
 		_toggleClear: function() {
-			this._delay( "_toggleClearClass", 0 );
+			this._toggleClearDelay = this._delay( "_toggleClearClass", 0 );
 		},
 
 		_toggleClearClass: function() {
 			this._toggleClass( this._clearButton, "ui-textinput-clear-button-hidden",
 				undefined, !this.element.val() );
 			this._clearButton.attr( "aria-hidden", !this.element.val() );
+			this._toggleClearDelay = 0;
 		},
 
 		_setOptions: function( options ) {
