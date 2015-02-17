@@ -12,21 +12,21 @@
     <script src="../_assets/js/"></script>
     <script src="../../js/"></script>
     <style>
-    	.left {
-    		float: left;
-    		width: 78%;
-    		margin-right: 2%;
-    	}
-    	.right {
-    		float: right;
-    		width: 20%;
-    	}
-    	.ui-input-search {
-    		margin: 0;
-    	}
-    	button.ui-button {
-    		margin: 0;
-    	}
+		.left {
+			float: left;
+			width: 78%;
+			margin-right: 2%;
+		}
+		.right {
+			float: right;
+			width: 20%;
+		}
+		.ui-textinput-search {
+			margin: 0;
+		}
+		button.ui-button {
+			margin: 0;
+		}
     </style>
 </head>
 <body>

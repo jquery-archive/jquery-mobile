@@ -249,10 +249,10 @@
 .jqm-search-panel .ui-panel-inner {
 	padding-top: 0;
 }
-.jqm-search-panel .ui-input-search {
+.jqm-search-panel .ui-textinput-search {
 	margin: 1em 0;
 }
-.jqm-search-panel .ui-input-search.ui-focus {
+.jqm-search-panel .ui-textinput-search.ui-focus {
 	-webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
 	-moz-box-shadow: inset 0 1px 3px rgba(0,0,0,.2);
 	box-shadow: inset 0 1px 3px rgba(0,0,0,.2);

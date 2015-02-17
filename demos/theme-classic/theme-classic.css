@@ -21,8 +21,8 @@ button,
 	font-family: sans-serif /*{global-font-family}*/;
 }
 legend,
-.ui-input-text input,
-.ui-input-search input {
+.ui-textinput-text input,
+.ui-textinput-search input {
 	color: inherit;
 	text-shadow: inherit;
 }
@@ -1307,8 +1307,8 @@ html head + body .ui-body-e.ui-focus {
 /* Unset background gradient */
 .ui-li-static,
 .ui-collapsible-content,
-.ui-input-text,
-.ui-input-search,
+.ui-textinput-text,
+.ui-textinput-search,
 .ui-flipswitch,
 .ui-slider-track,
 input.ui-slider-input {

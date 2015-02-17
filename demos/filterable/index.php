@@ -285,7 +285,7 @@
 	<p>The filterable widget is able to use the search input whether or not the search input is itself pre-rendered. In the example below, both the search input and the filterable are pre-rendered.</p>
 	<div data-demo-html="true">
 		<form>
-			<div class="ui-input-search ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+			<div class="ui-textinput-search ui-body-inherit ui-corner-all ui-shadow-inset ui-textinput-has-clear-button">
 				<input data-type="search" data-enhanced="true" data-inset="false" id="pre-rendered-example-input" placeholder="Filter items..." value="au">
 			</div>
 			<div data-role="controlgroup" data-enhanced="true" data-filter="true" data-filter-reveal="true" data-input="#pre-rendered-example-input" class="ui-controlgroup ui-controlgroup-vertical ui-corner-all">

@@ -333,8 +333,7 @@
 	background-image: url("images/icons-png/refresh-black.png");
 }
 .ui-alt-icon.ui-icon-search,
-.ui-alt-icon .ui-icon-search,
-.ui-input-search {
+.ui-alt-icon .ui-icon-search {
 	background-image: url("images/icons-png/search-black.png");
 }
 .ui-alt-icon.ui-icon-shop,

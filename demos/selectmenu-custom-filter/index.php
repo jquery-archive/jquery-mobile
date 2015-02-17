@@ -111,7 +111,7 @@ $.mobile.document
 })( jQuery );
 	</script>
 	<style>
-		.ui-selectmenu.ui-popup .ui-input-search {
+		.ui-selectmenu.ui-popup .ui-textinput-search {
 			margin-left: .5em;
 			margin-right: .5em;
 		}
