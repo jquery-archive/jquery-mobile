@@ -96,8 +96,6 @@ define( [
 			this.element.val( "" )
 					.focus()
 					.trigger( "change" );
-
-			this._addClass( this._clearButton, "ui-textinput-clear-button-hidden" );
 			event.preventDefault();
 		},
 
@@ -108,6 +106,7 @@ define( [
 		_toggleClearClass: function() {
 			this._toggleClass( this._clearButton, "ui-textinput-clear-button-hidden",
 				undefined, !this.element.val() );
+			this._clearButton.attr( "aria-hidden", !this.element.val() );
 		},
 
 		_setOptions: function( options ) {
