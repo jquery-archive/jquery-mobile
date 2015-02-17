@@ -161,7 +161,7 @@ $.widget( "mobile.textinput", {
 
 		if ( options.disabled !== undefined ) {
 			this.element.prop( "disabled", !!options.disabled );
-			this._outer.toggleClass( "ui-state-disabled", !!options.disabled );
+			this._toggleClass( this._outer, null, "ui-state-disabled", !!options.disabled );
 		}
 		return this._superApply( arguments );
 	},
