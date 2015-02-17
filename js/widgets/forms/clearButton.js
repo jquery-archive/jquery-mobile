@@ -18,7 +18,8 @@ define( [
 				// We also have the following keys which are empty by default:
 				// "ui-textinput-clear-button-hidden"
 				// "ui-textinput-has-clear-button"
-				"ui-textinput-clear-button": "ui-button ui-button-icon-only ui-corner-all ui-button-right",
+				"ui-textinput-clear-button":
+					"ui-button ui-button-icon-only ui-corner-all ui-button-right",
 				"ui-textinput-clear-button-icon": "ui-icon-delete ui-icon"
 			},
 			clearBtn: false,

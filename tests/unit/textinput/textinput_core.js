@@ -96,7 +96,10 @@
 
 	// NOTE init binding to alter the setting is in settings.js
 	test( "'clear text' button for search inputs should use configured text", function(){
-		strictEqual( $( "#search-input" ).closest( ".ui-textinput-search" ).find( ".ui-textinput-clear-button" ).attr( "title" ), "custom value" );
+		strictEqual( $( "#search-input" )
+			.closest( ".ui-textinput-search" )
+				.find( ".ui-textinput-clear-button" )
+					.attr( "title" ), "custom value" );
 	});
 
 	test( "data-clear-button adds clear button to text inputs", function() {
@@ -105,13 +108,14 @@
 			"correctly marked up clear button is present" );
 	});
 
-	test( "data-clear-button does not add clear button to textarea", function() {
-		ok( ! $( "#textarea-clear-button" ).next().is( "a.ui-textinput-clear-button" ), "data-clear-button does not add clear button to textarea" );
+	test( "data-clear-btn does not add clear button to textarea", function() {
+		assert.lacksClasses( $( "#textarea-clear-btn" ).next()[ 0 ], "ui-textinput-clear-button",
+			"data-clear-btn does not add clear button to textarea" );
 	});
 
 	test( "data-clear-button does not add clear button to textarea", function() {
-		deepEqual( $( "#textarea-clear-button" ).children( "a" ).length, 0,
-			"No anchors have been inserted as children of the data-clear-button textarea element" );
+		deepEqual( $( "#textarea-clear-btn" ).children( "a" ).length, 0,
+			"No anchors have been inserted as children of the data-clear-btn textarea element" );
 	});
 
 	test( "data-clear-button does not add clear button to slider input", function() {
