@@ -22,7 +22,7 @@
 		});
 	}
 
-	test( "focus/blur adds resp. removes focus class", function() {
+	test( "focus/blur adds resp. removes focus class", function( assert ) {
 		var input = $( "#focus-class-test-for-input" ),
 			textarea = $( "#focus-class-test-for-textarea" ),
 			testFocusBlur = function( widget ) {
@@ -38,7 +38,7 @@
 		testFocusBlur( textarea );
 	});
 
-	test( "inputs without type specified are enhanced", function() {
+	test( "inputs without type specified are enhanced", function( assert ) {
 		assert.hasClasses( $( "#typeless-input" ).parent()[ 0 ], "ui-textinput-text",
 			"Input is enhanced" );
 	});
@@ -108,8 +108,9 @@
 			"correctly marked up clear button is present" );
 	});
 
-	test( "data-clear-btn does not add clear button to textarea", function() {
-		assert.lacksClasses( $( "#textarea-clear-btn" ).next()[ 0 ], "ui-textinput-clear-button",
+	test( "data-clear-btn does not add clear button to textarea", function( assert ) {
+		assert.lacksClasses( $( "#textarea-clear-btn" ).next()[ 0 ],
+			"ui-textinput-clear-button",
 			"data-clear-btn does not add clear button to textarea" );
 	});
 
@@ -149,7 +150,7 @@
 		ok( !d, "native clear button is still visible" );
 	});
 
-	test( "clearBtn option works at runtime", function() {
+	test( "clearBtn option works at runtime", function( assert ) {
 		var input = $( "#test-clear-button-option" );
 
 		deepEqual( input.siblings( "a" ).length, 0,
@@ -188,4 +189,19 @@
 			"Original DOM is restored after textinput destruction" );
 	});
 
+	test( "textinput is disabled/enabled correctly", function( assert ) {
+		var textinput = $( "#disable-test" );
+
+		assert.lacksClasses( textinput.parent()[ 0 ], "ui-state-disabled",
+			"Initially the ui-state-disabled class is absent" );
+		assert.deepEqual( textinput.prop( "disabled" ), false,
+			"Initially the 'disabled' prop is false" );
+
+		textinput.textinput( "option", "disabled", true );
+
+		assert.hasClasses( textinput.parent()[ 0 ], "ui-state-disabled",
+			"After disabling, the ui-state-disabled class is present" );
+		assert.deepEqual( textinput.prop( "disabled" ), true,
+			"After disabling, the 'disabled' prop is true" );
+	} );
 })(jQuery);

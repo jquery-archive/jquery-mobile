@@ -1,4 +1,4 @@
-test( "Textinput widget works correctly", function() {
+test( "Textinput widget works correctly", function( assert ) {
 	var plainText = $( "#plain-text" ).textinput(),
 		searchText = $( "#search-text" ).textinput(),
 		textarea = $( "#textarea" ).textinput();
