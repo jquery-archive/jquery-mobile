@@ -27,17 +27,20 @@
 			textarea = $( "#focus-class-test-for-textarea" ),
 			testFocusBlur = function( widget ) {
 				widget.blur();
-				deepEqual( widget.textinput( "widget" ).hasClass( $.mobile.focusClass ), false, widget.attr( "id" ) + ": focus class is absent when the widget is blurred." );
+				assert.lacksClasses( widget.textinput( "widget" )[ 0 ], $.mobile.focusClass,
+					widget.attr( "id" ) + ": focus class is absent when the widget is blurred." );
 				widget.focus();
-				deepEqual( widget.textinput( "widget" ).hasClass( $.mobile.focusClass ), true, widget.attr( "id" ) + ": focus class is present when the widget is focused." );
+				assert.hasClasses( widget.textinput( "widget" )[ 0 ], $.mobile.focusClass,
+					widget.attr( "id" ) + ": focus class is present when the widget is focused." );
 			};
 
 		testFocusBlur( input );
 		testFocusBlur( textarea );
 	});
 
-	test( "inputs without type specified are enhanced", function(){
-		ok( $( "#typeless-input" ).parent().hasClass( "ui-textinput-text" ) );
+	test( "inputs without type specified are enhanced", function() {
+		assert.hasClasses( $( "#typeless-input" ).parent()[ 0 ], "ui-textinput-text",
+			"Input is enhanced" );
 	});
 
 	$.mobile.page.prototype.options.keepNative = "textarea.should-be-native";
@@ -147,14 +150,14 @@
 
 		deepEqual( input.siblings( "a" ).length, 0,
 			"input initially has no clear button" );
-		deepEqual( input.parent().hasClass( "ui-textinput-has-clear-button" ), false,
+		assert.lacksClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
 			"wrapper does not initially have class 'ui-textinput-has-clear-button'" );
 
 		input.textinput( "option", "clearBtn", true );
 
 		deepEqual( input.siblings( "a" ).length, 1,
 			"turning on clearBtn option causes an anchor to be added" );
-		deepEqual( input.parent().hasClass( "ui-textinput-has-clear-button" ), true,
+		assert.hasClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
 			"turning on clearBtn option causes 'ui-textinput-has-clear-button' to be " +
 				"added to wrapper" );
 
@@ -162,7 +165,7 @@
 
 		deepEqual( input.siblings( "a" ).length, 0,
 			"turning off clearBtn removes clear button anchor" );
-		deepEqual( input.parent().hasClass( "ui-textinput-has-clear-button" ), false,
+		assert.lacksClasses( input.parent()[ 0 ], "ui-textinput-has-clear-button",
 			"turning off clearBtn removes wrapper class 'ui-textinput-has-clear-button'" );
 	});
 
