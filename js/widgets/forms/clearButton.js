@@ -18,7 +18,8 @@ define( [
 				// We also have the following keys which are empty by default:
 				// "ui-textinput-clear-button-hidden"
 				// "ui-textinput-has-clear-button"
-				"ui-textinput-clear-button": "ui-button ui-icon-delete ui-button-icon-only ui-corner-all ui-alt-icon"
+				"ui-textinput-clear-button": "ui-button ui-button-icon-only ui-corner-all ui-button-right",
+				"ui-textinput-clear-button-icon": "ui-icon-delete ui-icon"
 			},
 			clearBtn: false,
 			clearBtnText: "Clear text"
@@ -48,9 +49,11 @@ define( [
 		clearButton: function() {
 			var button = $( "<a href='#' tabindex='-1' aria-hidden='true'></a>" )
 				.attr( "title", this.options.clearBtnText )
-				.text( this.options.clearBtnText );
+				.text( this.options.clearBtnText )
+				.append( "<span>" );
 
 			this._addClass( button, "ui-textinput-clear-button" );
+			this._addClass( button.children(), "ui-textinput-clear-button-icon" );
 
 			return button;
 		},
