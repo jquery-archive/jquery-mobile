@@ -21,7 +21,7 @@
     		float: right;
     		width: 20%;
     	}
-		.ui-textinput-search {
+    	.ui-textinput-search {
     		margin: 0;
     	}
     	button.ui-button {
