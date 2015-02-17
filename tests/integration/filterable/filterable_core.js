@@ -331,37 +331,6 @@
 		], 500 );
 	});
 
-	module( "Filter widget backwards compatibility" );
-
-	asyncTest( "Triggering 'filterablebeforefilter' on a filtered listview also triggers 'listviewbeforefilter'", function() {
-		expect( 2 );
-
-		var input = $( "#test-backcompat-signal-emission-input" ),
-			list = $( "#test-backcompat-signal-emission" ),
-			eventNs = ".backcompatEventIsFiring";
-
-		$.testHelper.detailedEventCascade([
-			function() {
-				input.val( "a" ).trigger( "change" );
-			},
-			{
-				filterablebeforefilter: {
-					src: list,
-					event: "filterablebeforefilter" + eventNs + "1"
-				},
-				listviewbeforefilter: {
-					src: list,
-					event: "listviewbeforefilter" + eventNs + "1"
-				}
-			},
-			function( result ) {
-				deepEqual( result.filterablebeforefilter.timedOut, false, "Received 'filterablebeforefilter'" );
-				deepEqual( result.listviewbeforefilter.timedOut, false, "Received 'listviewbeforefilter'" );
-				start();
-			}
-		]);
-	});
-
 	test( "Default not prevented on keystroke following 'Enter'", function() {
 		var event,
 			input = $( "#test-keyboard-flag-reset-input" );
