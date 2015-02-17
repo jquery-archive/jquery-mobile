@@ -159,6 +159,9 @@ $.widget( "mobile.textinput", {
 					"ui-body-" + ( options.theme === null ? "inherit" : options.theme ) );
 		}
 
+		if ( options.disabled !== undefined ) {
+			this.element.prop( "disabled", !!options.disabled );
+		}
 		return this._superApply( arguments );
 	},
 
