@@ -1,10 +1,14 @@
-test( "Textinput widget works correctly", function() {
+test( "Textinput widget works correctly", function( assert ) {
 var plainText = $( "#plain-text" ).textinput(),
 	searchText = $( "#search-text" ).textinput(),
 	textarea = $( "#textarea" ).textinput();
 
-deepEqual( plainText.textinput( "widget" ).hasClass( "ui-input-text" ), true, "Plain text widget has class ui-input-text" );
-deepEqual( searchText.textinput( "widget" ).hasClass( "ui-input-search" ), true, "Search text widget has class ui-input-search" );
-deepEqual( searchText.textinput( "widget" ).hasClass( "ui-input-has-clear" ), true, "Search text widget has class ui-input-has-clear" );
-deepEqual( textarea.textinput( "widget" ).hasClass( "ui-input-text" ), true, "Textarea widget has class ui-input-text" );
+assert.hasClasses( plainText.textinput( "widget" )[ 0 ], "ui-textinput-text",
+	"Plain text widget has class ui-textinput-text" );
+assert.hasClasses( searchText.textinput( "widget" )[ 0 ], "ui-textinput-search",
+	"Search text widget has class ui-textinput-search" );
+assert.hasClasses( searchText.textinput( "widget" )[ 0 ], "ui-textinput-has-clear-button",
+	"Search text widget has class ui-textinput-has-clear-button" );
+assert.hasClasses( textarea.textinput( "widget" )[ 0 ], "ui-textinput-text",
+	"Textarea widget has class ui-textinput-text" );
 } );

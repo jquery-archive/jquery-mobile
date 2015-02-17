@@ -10,6 +10,7 @@
 	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../external/qunit/qunit.js"></script>
+	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 	<script src="../../../tests/jquery.setNameSpace.js"></script>
 	<script>
@@ -33,7 +34,7 @@
 
 	<div  data-nstest-role="page">
 		<input name="" id="typeless-input" />
-		<textarea class="should-be-native"></textarea>
+		<textarea class="should-be-native" data-nstest-role="none"></textarea>
 
 		<textarea id="reference-autogrow">
 		</textarea>
@@ -74,6 +75,7 @@
 		<div id="destroy-test-container">
 			<input type="text" id="destroy-test" data-nstest-role="none">
 		</div>
+		<input type="text" id="disable-test">
 	</div>
 </body>
 </html>
