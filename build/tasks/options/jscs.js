@@ -9,6 +9,10 @@ module.exports = {
 		src: [
 
 			// Source
+			"js/widgets/forms/autogrow.js",
+			"js/widgets/forms/clearButton.js",
+			"js/widgets/forms/textinput.backcompat.js",
+			"js/widgets/forms/textinput.js",
 			"js/widgets/accordion.js",
 			"js/widgets/widget.backcompat.js",
 			"js/widgets/widget.theme.js",
@@ -24,6 +28,8 @@ module.exports = {
 			"js/degradeInputs.js",
 
 			// Tests
+			"tests/unit/textinput/settings.js",
+			"tests/unit/textinput/textinput_core.js",
 			"tests/unit/degrade-inputs/degradeInputs.js",
 			"tests/unit/enhancer/enhancer.js"
 		]

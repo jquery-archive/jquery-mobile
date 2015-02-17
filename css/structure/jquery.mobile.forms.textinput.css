@@ -1,11 +1,11 @@
-.ui-input-text,
-.ui-input-search {
+.ui-textinput-text,
+.ui-textinput-search {
 	margin: .5em 0;
 	border-width: 1px;
 	border-style: solid;
 }
-.ui-input-text input,
-.ui-input-search input,
+.ui-textinput-text input,
+.ui-textinput-search input,
 textarea.ui-input-text {
 	padding: .4em;
 	line-height: 1.4em;
@@ -16,8 +16,8 @@ textarea.ui-input-text {
 	box-sizing: border-box;
 	outline: 0;
 }
-.ui-input-text input,
-.ui-input-search input {
+.ui-textinput-text input,
+.ui-textinput-search input {
 	margin: 0;
 	min-height: 2.2em;
 	text-align: left; /* Opera aligns type="date" right by default */
@@ -27,35 +27,35 @@ textarea.ui-input-text {
 	-webkit-border-radius: inherit;
 	border-radius: inherit;
 }
-textarea.ui-input-text {
+textarea.ui-textinput-text {
 	overflow: auto;
 	resize: vertical;
 }
-.ui-mini .ui-input-text input,
-.ui-mini .ui-input-search input,
-.ui-input-text.ui-mini input,
-.ui-input-search.ui-mini input,
-.ui-mini textarea.ui-input-text,
+.ui-mini .ui-textinput-text input,
+.ui-mini .ui-textinput-search input,
+.ui-textinput-text.ui-mini input,
+.ui-textinput-search.ui-mini input,
+.ui-mini textarea.ui-textinput-text,
 textarea.ui-mini {
 	font-size: 14px;
 }
 /* Same margin for mini textareas as other mini sized widgets (12.5/14 * 0.5em) */
-.ui-mini textarea.ui-input-text,
+.ui-mini textarea.ui-textinput-text,
 textarea.ui-mini {
 	margin: .446em 0;
 }
-.ui-input-has-clear,
-.ui-input-search {
+.ui-textinput-has-clear-button,
+.ui-textinput-search {
 	position: relative;
 }
 /* Padding on the div instead of input because of browser spinners etc. */
-.ui-input-has-clear {
+.ui-textinput-has-clear-button {
 	padding-right: 2.375em;
 }
-.ui-mini.ui-input-has-clear {
+.ui-mini.ui-textinput-has-clear-button {
 	padding-right: 2.923em;
 }
-.ui-input-has-clear input {
+.ui-textinput-has-clear-button input {
 	padding-right: 0;
 	/* Autofill on Chrome has bg color so we unset corners right as well. */
 	-webkit-border-top-right-radius: 0;
@@ -64,10 +64,10 @@ textarea.ui-mini {
 	border-bottom-right-radius: 0;
 }
 /* Search icon */
-.ui-input-search input {
+.ui-textinput-search input {
 	padding-left: 1.75em;
 }
-.ui-input-search .ui-icon {
+.ui-textinput-search .ui-textinput-search-icon {
 	position: absolute;
 	left: .3125em;
 	top: 50%;
@@ -79,8 +79,8 @@ textarea.ui-mini {
 	filter: Alpha(Opacity=50);
 	opacity: .5;
 }
-.ui-input-search.ui-input-has-clear .ui-button.ui-input-clear,
-.ui-input-text.ui-input-has-clear .ui-button.ui-input-clear {
+.ui-textinput-search.ui-textinput-has-clear-button .ui-button.ui-textinput-clear-button,
+.ui-textinput-text.ui-textinput-has-clear-button .ui-button.ui-textinput-clear-button {
 	position: absolute;
 	right: 0;
 	top: 50%;
@@ -88,26 +88,26 @@ textarea.ui-mini {
 	border: 0;
 	background-color: transparent;
 }
-.ui-input-search .ui-input-clear-hidden,
-.ui-input-text .ui-input-clear-hidden {
+.ui-textinput-search .ui-textinput-clear-button-hidden,
+.ui-textinput-text .ui-textinput-clear-button-hidden {
 	display: none;
 }
 /* Resolves issue #5166: Added to support issue introduced in Firefox 15. We can likely remove this in the future. */
-.ui-input-text input::-moz-placeholder,
-.ui-input-search input::-moz-placeholder,
-textarea.ui-input-text::-moz-placeholder {
+.ui-textinput-text input::-moz-placeholder,
+.ui-textinput-search input::-moz-placeholder,
+textarea.ui-textinput-text::-moz-placeholder {
 	color: #aaa;
 }
 /* Same for IE10 */
-.ui-input-text input:-ms-input-placeholder,
-.ui-input-search input:-ms-input-placeholder,
-textarea.ui-input-text:-ms-input-placeholder {
+.ui-textinput-text input:-ms-input-placeholder,
+.ui-textinput-search input:-ms-input-placeholder,
+textarea.ui-textinput-text:-ms-input-placeholder {
 	color: #aaa;
 }
 
 /* Resolves issue #5131: Width of textinput depends on its type,
 for Android 4.1 */
-.ui-input-text input[type=number]::-webkit-outer-spin-button {
+.ui-textinput-text input[type=number]::-webkit-outer-spin-button {
 	margin: 0;
 }
 /* Resolves issue #8001: Default clear button in date input type*/
@@ -118,8 +118,8 @@ for Android 4.1 */
 .ui-textinput-hide-clear::-webkit-clear-button{
 	display: none;
 }
-.ui-input-text input:focus,
-.ui-input-search input:focus {
+.ui-textinput-text input:focus,
+.ui-textinput-search input:focus {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
