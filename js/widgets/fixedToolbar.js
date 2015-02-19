@@ -22,7 +22,6 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				".ui-panel, .ui-panel-dismiss-open",
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
-			trackPersistentToolbars: true,
 
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -132,7 +131,9 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_handlePageBeforeHide: function() {
-			if ( this.options.disablePageZoom ) {
+			var o = this.options;
+
+			if ( o.disablePageZoom ) {
 				$.mobile.zoom.enable( true );
 			}
 			if ( this.options.updatePagePadding ) {
