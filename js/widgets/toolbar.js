@@ -1,8 +1,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Behavior for "fixed" headers and footers - be sure to also include the item 'Browser specific workarounds for "fixed" headers and footers' when supporting Android 2.x or iOS 5
+//>>description: Behavior for headers and footers
 //>>label: Toolbars: Fixed
 //>>group: Widgets
-//>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
+//>>css.structure: ../css/structure/jquery.mobile.toolbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 define( [
@@ -21,7 +21,13 @@ define( [
 			theme: null,
 			addBackBtn: false,
 			backBtnTheme: null,
-			backBtnText: "Back"
+			backBtnText: "Back",
+			classes: {
+				"ui-toolbar-header": "",
+				"ui-toolbar-footer": "",
+				"ui-toolbar-title": "",
+				"ui-toolbar-back-button": ""
+			}
 		},
 
 		_create: function() {
@@ -40,7 +46,8 @@ define( [
 				leftbutton: leftbutton,
 				rightbutton: rightbutton
 			});
-			this.element.attr( "role", role === "header" ? "banner" : "contentinfo" ).addClass( "ui-" + role );
+			this.element.attr( "role", role === "header" ? "banner" : "contentinfo" );
+			this._addClass( "ui-toolbar-" + role );
 			this.refresh();
 			this._setOptions( this.options );
 		},
@@ -132,8 +139,10 @@ define( [
 			}
 		},
 		_addHeadingClasses: function() {
-			this.element.children( "h1, h2, h3, h4, h5, h6" )
-				.addClass( "ui-title" )
+			var headerElements = this.element.children( "h1, h2, h3, h4, h5, h6" );
+			this._addClass(  headerElements, "ui-toolbar-title" )
+
+			headerElements
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
 				.attr({
 					"role": "heading",
@@ -141,12 +150,11 @@ define( [
 				});
 		},
 		_destroy: function() {
-			var currentTheme;
+			var currentTheme,
+				headerElements = this.element.children( "h1, h2, h3, h4, h5, h6" );
 
-			this.element.children( "h1, h2, h3, h4, h5, h6" )
-				.removeClass( "ui-title" )
-				.removeAttr( "role" )
-				.removeAttr( "aria-level" );
+			this._removeClass( headerElements, "ui-toolbar-title" );
+			headerElements.removeAttr( "role" ).removeAttr( "aria-level" );
 
 			if ( this.role === "header" ) {
 				this.element.children( "a, button" )
@@ -157,9 +165,9 @@ define( [
 			}
 
 			currentTheme = this.options.theme ? this.options.theme : "inherit";
-			this.element.removeClass( "ui-bar-" + currentTheme );
-
-			this.element.removeClass( "ui-" + this.role ).removeAttr( "role" );
+			this._removeClass( "ui-bar-" + currentTheme );
+			this._removeClass( "ui-toolbar-" + this.role )
+			this.element.removeAttr( "role" );
 		}
 	});
 
