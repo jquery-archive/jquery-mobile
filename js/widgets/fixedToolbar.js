@@ -20,7 +20,6 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, .ui-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
-			trackPersistentToolbars: true,
 
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -122,9 +121,8 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			}
 		},
 
-		_handlePageBeforeHide: function( e, ui ) {
-			var o = this.options,
-				thisFooter, thisHeader, nextFooter, nextHeader;
+		_handlePageBeforeHide: function() {
+			var o = this.options;
 
 			if ( o.disablePageZoom ) {
 				$.mobile.zoom.enable( true );
@@ -133,22 +131,6 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				this._off( this.window, "throttledresize" );
 			}
 
-			if ( o.trackPersistentToolbars ) {
-				thisFooter = $( ".ui-footer-fixed:jqmData(id)", this.page );
-				thisHeader = $( ".ui-header-fixed:jqmData(id)", this.page );
-				nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ) || $();
-				nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage ) || $();
-
-				if ( nextFooter.length || nextHeader.length ) {
-
-					nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
-
-					ui.nextPage.one( "pageshow", function() {
-						nextHeader.prependTo( this );
-						nextFooter.appendTo( this );
-					});
-				}
-			}
 		},
 
 		_visible: true,
