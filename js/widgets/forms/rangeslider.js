@@ -25,11 +25,11 @@ define( [ "jquery",
 				"ui-rangeslider-first": "",
 				"ui-rangeslider-last": ""
 			},
-
+			highlight: true,
+			
 			// deprecated in 1.5
 			corners: true,
-			mini: false,
-			highlight: true
+			mini: false
 		},
 
 		_create: function() {
@@ -49,6 +49,12 @@ define( [ "jquery",
 
 			this._addClass( _inputFirst, "ui-rangeslider-first" );
 			this._addClass( _inputLast, "ui-rangeslider-last" );
+
+			// deprecated in 1.5
+			if ( this.options.mini ) {
+				this.options.classes[ "ui-rangeslider" ] += " ui-mini";
+			}
+
 			this._addClass( "ui-rangeslider" );
 
 			_sliderFirst.appendTo( _sliders );
@@ -143,10 +149,6 @@ define( [ "jquery",
 
 			if ( options.trackTheme !== undefined ) {
 				this._setTrackTheme( options.trackTheme );
-			}
-
-			if ( options.mini !== undefined ) {
-				this._setMini( options.mini );
 			}
 
 			if ( options.highlight !== undefined ) {
@@ -250,12 +252,6 @@ define( [ "jquery",
 		_setTrackTheme: function( value ) {
 			this._inputFirst.slider( "option", "trackTheme", value );
 			this._inputLast.slider( "option", "trackTheme", value );
-		},
-
-		_setMini: function( value ) {
-			this._inputFirst.slider( "option", "mini", value );
-			this._inputLast.slider( "option", "mini", value );
-			this.element.toggleClass( "ui-mini", !!value );
 		},
 
 		_setHighlight: function( value ) {
