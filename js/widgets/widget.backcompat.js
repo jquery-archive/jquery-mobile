@@ -13,6 +13,24 @@ define( [
 (function( $, undefined ) {
 
 if ( $.mobileBackcompat !== false ) {
+
+	var classSplitterRegex = /\S+/g,
+
+		// splice() is incapable of removing the first element, because specifying a negative
+		// starting index is interpreted as wanting to count from the end of the array. So, we use
+		// shift() to remove the first element
+		removeFromArray = function( array, index ) {
+			index--;
+
+			if ( index === -1 ) {
+				array.shift();
+			} else {
+				array = array.splice( index, 1 );
+			}
+
+			return array;
+		};
+
 	$.mobile.widget = $.extend( {}, { backcompat: {
 
 		_boolOptions: {
@@ -23,22 +41,18 @@ if ( $.mobileBackcompat !== false ) {
 		},
 
 		_create: function() {
-			this._setInitalOptions();
+			this._setInitialOptions();
 			this._super();
-		},
-
-		_enhance: function() {
 			if ( !this.options.enhanced && this.options.wrapperClass ) {
-				this.widget().addClass( this.options.wrapperClass );
+				this._addClass( this.widget(), null, this.options.wrapperClass );
 			}
-
-			this._super();
 		},
 
 		_classesToOption: function( value ) {
-			if ( this.classPop && value[ this.classProp ] ) {
+			if ( this.classProp && ( typeof value[ this.classProp ] === "string" ) ) {
 				var that = this,
-					valueArray = value[ this.classProp ].split( " " );
+					valueArray = value[ this.classProp ].match( classSplitterRegex ) || [];
+
 				$.each( this._boolOptions, function( option, className ){
 					if ( that.options[ option ] !== undefined ) {
 						if ( valueArray.indexOf( className ) !== -1 ) {
@@ -51,54 +65,67 @@ if ( $.mobileBackcompat !== false ) {
 			}
 		},
 
-		_optionsToClasses: function( option ) {
+		_optionsToClasses: function( option, value ) {
 			var classArray,
-				newValue = "",
 				prop = this.classProp,
 				classes = this.options.classes,
 				className = this._boolOptions[ option ];
 
 			if ( prop ) {
-				classArray = classes[ prop ].split ( " " );
+				classArray = classes[ prop ].match( classSplitterRegex ) || [];
 
-				if ( this.options[ option ] ) {
-					newValue = classes[ prop ] + " " + className;
+				if ( value ) {
+					classArray.push( className );
 				} else {
-					newValue = classArray
-						.splice( classArray.indexOf( this._boolOptions[ option ] ) - 1, 1 )
-						.join( " " );
+					classArray = removeFromArray( classArray,
+							classArray.indexOf( this._boolOptions[ option ] ) );
 				}
-				this.option( "classes." + prop, newValue );
+				this.option( "classes." + prop, classArray.join( " " ) );
 			}
 		},
 
-		_setInitalOptions: function() {
-			var originalClasses, currentClasses,
-				that = this,
+		_setInitialOptions: function() {
+			var currentClasses,
 				options = this.options,
 				original = $[ this.namespace ][ this.widgetName ].prototype.options,
 				prop = this.classProp;
 
-			if ( prop && original.classes[ prop ] && this.options.classes[ prop ] ) {
-				originalClasses = original.classes[ prop ].split( " " );
-				currentClasses = this.options.classes[ prop ].split( " " );
+			if ( prop && typeof original.classes[ prop ] === "string" &&
+					typeof this.options.classes[ prop ] === "string" ) {
+				currentClasses = this.options.classes[ prop ].match( classSplitterRegex ) || [];
 
-				$.each( this._boolOptions, function( option, className ) {
-					if( that.options[ option ] !== undefined ) {
-						var initial = ( originalClasses.indexOf( className ) !== -1 ),
-							current = ( currentClasses.indexOf( className ) !== -1 );
-
-						if ( initial !== current ) {
-							options[ option ] = current;
-						} else if ( options[ option ] !== original[ option ] ) {
-							that._optionsToClasses( option, options[ option ] );
+				// If the classes option value has diverged from the default, then its value takes
+				// precedence, causing us to update all the style options to reflect the contents
+				// of the classes option value
+				if ( original.classes[ prop ] !== this.options.classes[ prop ] ) {
+					$.each( this._boolOptions, function( option, className ) {
+						if( options[ option ] !== undefined ) {
+							options[ option ] = ( currentClasses.indexOf( className ) !== -1 );
 						}
-					}
-				});
+					}) ;
+
+				// Otherwise we assume that we're dealing with legacy code and look for style
+				// option values which diverge from the defaults. If we find any that diverge, we
+				// update the classes option value accordingly.
+				} else {
+					$.each( this._boolOptions, function( option, className ) {
+						if ( options[ option ] !== original[ option ] ) {
+							if ( options[ option ] ) {
+								currentClasses.push( className );
+							} else {
+								currentClasses = removeFromArray( currentClasses,
+									currentClasses.indexOf( className ) );
+							}
+						}
+					} );
+
+					options.classes[ prop ] = currentClasses.join( " " );
+				}
 			}
 		},
 
 		_setOption: function( key, value ) {
+			var widgetElement;
 
 			// Update deprecated option based on classes option
 			if ( key === "classes" ) {
@@ -112,7 +139,9 @@ if ( $.mobileBackcompat !== false ) {
 
 			// Update wrapperClass
 			if ( key === "wrapperClass" ) {
-				this.widget().removeClass( this.options.wrapperClass ).addClass( value );
+				widgetElement = this.widget();
+				this._removeClass( widgetElement, null, this.options.wrapperClass )
+					._addClass( widgetElement, null, value );
 			}
 
 			this._superApply( arguments );
