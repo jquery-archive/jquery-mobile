@@ -22,12 +22,7 @@ define( [
 			addBackBtn: false,
 			backBtnTheme: null,
 			backBtnText: "Back",
-			classes: {
-				"ui-toolbar-header": "",
-				"ui-toolbar-footer": "",
-				"ui-toolbar-title": "",
-				"ui-toolbar-back-button": ""
-			}
+			classes: {}
 		},
 
 		_create: function() {
@@ -153,7 +148,6 @@ define( [
 			var currentTheme,
 				headerElements = this.element.children( "h1, h2, h3, h4, h5, h6" );
 
-			this._removeClass( headerElements, "ui-toolbar-title" );
 			headerElements.removeAttr( "role" ).removeAttr( "aria-level" );
 
 			if ( this.role === "header" ) {
@@ -165,8 +159,6 @@ define( [
 			}
 
 			currentTheme = this.options.theme ? this.options.theme : "inherit";
-			this._removeClass( "ui-bar-" + currentTheme );
-			this._removeClass( "ui-toolbar-" + this.role )
 			this.element.removeAttr( "role" );
 		}
 	});
