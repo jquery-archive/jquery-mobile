@@ -72,19 +72,18 @@
 				this._updateBackButton();
 			}
 			if ( o.backBtnTheme != null ) {
-				this.element
-					.find( ".ui-toolbar-back-button" )
-					.addClass( "ui-button ui-button-" + o.backBtnTheme );
-		}
-		if ( o.backBtnText !== undefined ) {
-			this.element.find( ".ui-toolbar-back-button .ui-button-text" ).text( o.backBtnText );
-		}
-		if ( o.theme !== undefined ) {
-			var currentTheme = this.options.theme ? this.options.theme : "inherit",
-				newTheme = o.theme ? o.theme : "inherit";
+				this._addClass( this.element.find( ".ui-toolbar-back-button" ), null, "ui-button ui-button-" + o.backBtnTheme );
+			}
+			if ( o.backBtnText !== undefined ) {
+				this.element.find( ".ui-toolbar-back-button .ui-button-text" ).text( o.backBtnText );
+			}
+			if ( o.theme !== undefined ) {
+				var currentTheme = this.options.theme ? this.options.theme : "inherit",
+					newTheme = o.theme ? o.theme : "inherit";
 
-			this.element.removeClass( "ui-bar-" + currentTheme ).addClass( "ui-bar-" + newTheme );
-		}
+				this._removeClass( null, "ui-bar-" + currentTheme );
+				this._addClass( null, "ui-bar-" + newTheme );
+			}
 
 		this._super( o );
 	},
@@ -203,8 +202,9 @@
 			headerElements.removeAttr( "role" ).removeAttr( "aria-level" );
 
 			if ( this.role === "header" ) {
-				this.element.children( "a, button" )
-					.removeClass( "ui-button-left ui-button-right ui-button ui-shadow ui-corner-all" );
+				this._removeClass( this.element.children( "a, button" ), null,
+					"ui-button-left ui-button-right ui-button ui-shadow ui-corner-all" );
+
 				if ( this.backButton) {
 					this.backButton.remove();
 				}
