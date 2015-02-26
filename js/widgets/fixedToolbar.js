@@ -42,7 +42,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_makeFixed: function() {
-			this.element.addClass( "ui-"+ this.role +"-fixed" );
+			this._addClass( "ui-toolbar-"+ this.role +"-fixed" );
 			this.updatePagePadding();
 			this._addTransitionClass();
 			this._bindPageEvents();
@@ -58,13 +58,14 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
-						this.element.addClass( "ui-"+ this.role +"-fullscreen" );
-						$page.addClass( "ui-page-" + this.role + "-fullscreen" );
+						this._addClass( "ui-toolbar-"+ this.role +"-fullscreen" );
+						this._addClass( $page,  "ui-page-" + this.role + "-fullscreen" );
 					}
 					// If not fullscreen, add class to page to set top or bottom padding
 					else {
-						this.element.removeClass( "ui-"+ this.role +"-fullscreen" );
-						$page.removeClass( "ui-page-" + this.role + "-fullscreen" ).addClass( "ui-page-" + this.role+ "-fixed" );
+						this._removeClass( "ui-toolbar-"+ this.role +"-fullscreen" );
+						this._removeClass( $page, "ui-page-" + this.role + "-fullscreen" );
+						this._addClass( $page, "ui-page-" + this.role + "-fixed" );
 					}
 				}
 			}
@@ -77,10 +78,10 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			if ( tclass && tclass !== "none" ) {
 				// use appropriate slide for header or footer
 				if ( tclass === "slide" ) {
-					tclass = this.element.hasClass( "ui-header" ) ? "slidedown" : "slideup";
+					tclass = this.element.hasClass( "ui-toolbar-header" ) ? "slidedown" : "slideup";
 				}
 
-				this.element.addClass( tclass );
+				this._addClass( null, tclass );
 			}
 		},
 
@@ -189,15 +190,14 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				$el = this.element;
 
 			if ( this._useTransition( notransition ) ) {
-				$el
-					.removeClass( "out " + hideClass )
-					.addClass( "in" )
-					.animationComplete(function () {
-						$el.removeClass( "in" );
-					});
+				this._removeClass( null, "out " + hideClass );
+				this._addClass( null, "in" );
+				$el.animationComplete(function () {
+					this._removeClass( null, "in" );
+				});
 			}
 			else {
-				$el.removeClass( hideClass );
+				this._removeClass( hideClass );
 			}
 			this._visible = true;
 		},
@@ -209,15 +209,16 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
 			if ( this._useTransition( notransition ) ) {
-				$el
-					.addClass( outclass )
-					.removeClass( "in" )
-					.animationComplete(function() {
-						$el.addClass( hideClass ).removeClass( outclass );
-					});
+				this._addClass( null, outclass );
+				this._removeClass( null, "in" );
+				$el.animationComplete(function() {
+					this._addClass( hideClass );
+					this._removeClass( outclass );
+				});
 			}
 			else {
-				$el.addClass( hideClass ).removeClass( outclass );
+				this._addClass( hideClass );
+				this._removeClass( outclass );
 			}
 			this._visible = false;
 		},
@@ -278,7 +279,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_destroy: function() {
-			var pageClasses, toolbarClasses, hasFixed, header, hasFullscreen,
+			var hasFixed, header,
 				page = this.pagecontainer.pagecontainer( "getActivePage" );
 
 			this._super();
@@ -286,21 +287,11 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				hasFixed = $(  "body>.ui-" + this.role + "-fixed" )
 							.add( page.find( ".ui-" + this.options.role + "-fixed" ) )
 							.not( this.element ).length > 0;
-				hasFullscreen = $(  "body>.ui-" + this.role + "-fixed" )
-							.add( page.find( ".ui-" + this.options.role + "-fullscreen" ) )
-							.not( this.element ).length > 0;
-				toolbarClasses =  "ui-header-fixed ui-footer-fixed ui-header-fullscreen in out" +
-					" ui-footer-fullscreen fade slidedown slideup ui-fixed-hidden";
-				this.element.removeClass( toolbarClasses );
-				if ( !hasFullscreen ) {
-					pageClasses = "ui-page-" + this.role + "-fullscreen";
-				}
+
 				if ( !hasFixed ) {
 					header = this.role === "header";
-					pageClasses += " ui-page-" + this.role + "-fixed";
 					page.css( "padding-" + ( header ? "top" : "bottom" ), "" );
 				}
-				page.removeClass( pageClasses );
 			}
 		}
 
