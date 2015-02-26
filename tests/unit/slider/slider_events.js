@@ -8,8 +8,9 @@ window.onChangeCounter = function() {
 	onChangeCnt++;
 };
 
-module( 'jquery.mobile.slider.js events', {
+module( "jquery.mobile.slider.js events", {
 	setup: function() {
+
 		// force the value to be an increment of 10 when we aren't testing the rounding
 		$( "#stepped" ).val( 20 );
 	}
@@ -18,7 +19,7 @@ module( 'jquery.mobile.slider.js events', {
 var keypressTest = function( opts ) {
 	var slider = $( opts.selector ),
 		val = window.parseFloat( slider.val() ),
-		handle = slider.siblings( '.ui-slider-track' ).find( '.ui-slider-handle' );
+		handle = slider.siblings( ".ui-slider-track" ).find( ".ui-slider-handle" );
 
 	expect( opts.keyCodes.length );
 
@@ -26,25 +27,26 @@ var keypressTest = function( opts ) {
 
 		// stub the keycode value and trigger the keypress
 		$.Event.prototype.keyCode = $.mobile.keyCode[ elem ];
-		handle.trigger( 'keydown' );
+		handle.trigger( "keydown" );
 
 		val += opts.increment;
-		deepEqual( val, window.parseFloat( slider.val(), 10 ), "new value is " + opts.increment + " different" );
+		deepEqual( val, window.parseFloat( slider.val(), 10 ),
+			"new value is " + opts.increment + " different" );
 	} );
 };
 
 test( "slider should move right with up, right, and page up keypress", function() {
 	keypressTest( {
-		selector: '#range-slider-up',
-		keyCodes: [ 'UP', 'RIGHT', 'PAGE_UP' ],
+		selector: "#range-slider-up",
+		keyCodes: [ "UP", "RIGHT", "PAGE_UP" ],
 		increment: 1
 	} );
 } );
 
 test( "slider should move left with down, left, and page down keypress", function() {
 	keypressTest( {
-		selector: '#range-slider-down',
-		keyCodes: [ 'DOWN', 'LEFT', 'PAGE_DOWN' ],
+		selector: "#range-slider-down",
+		keyCodes: [ "DOWN", "LEFT", "PAGE_DOWN" ],
 		increment: -1
 	} );
 } );
@@ -52,11 +54,11 @@ test( "slider should move left with down, left, and page down keypress", functio
 test( "slider should move to range minimum on end keypress", function() {
 	var selector = "#range-slider-end",
 		initialVal = window.parseFloat( $( selector ).val(), 10 ),
-		max = window.parseFloat( $( selector ).attr( 'max' ), 10 );
+		max = window.parseFloat( $( selector ).attr( "max" ), 10 );
 
 	keypressTest( {
 		selector: selector,
-		keyCodes: [ 'END' ],
+		keyCodes: [ "END" ],
 		increment: max - initialVal
 	} );
 } );
@@ -67,7 +69,7 @@ test( "slider should move to range minimum on end keypress", function() {
 
 	keypressTest( {
 		selector: selector,
-		keyCodes: [ 'HOME' ],
+		keyCodes: [ "HOME" ],
 		increment: 0 - initialVal
 	} );
 } );
@@ -75,7 +77,7 @@ test( "slider should move to range minimum on end keypress", function() {
 test( "slider should move positive by steps on keypress", function() {
 	keypressTest( {
 		selector: "#stepped",
-		keyCodes: [ 'RIGHT' ],
+		keyCodes: [ "RIGHT" ],
 		increment: 10
 	} );
 } );
@@ -83,7 +85,7 @@ test( "slider should move positive by steps on keypress", function() {
 test( "slider should move negative by steps on keypress", function() {
 	keypressTest( {
 		selector: "#stepped",
-		keyCodes: [ 'LEFT' ],
+		keyCodes: [ "LEFT" ],
 		increment: -10
 	} );
 } );
@@ -94,7 +96,7 @@ test( "slider should validate input value on blur", function() {
 	slider.val( 200 );
 	deepEqual( slider.val(), "200" );
 	slider.blur();
-	deepEqual( slider.val(), slider.attr( 'max' ) );
+	deepEqual( slider.val(), slider.attr( "max" ) );
 } );
 
 test( "slider should not validate input on keyup", function() {
@@ -120,9 +122,12 @@ test( "onchange should be called onchange", function() {
 	equal( onChangeCnt, 1, "onChange should have been called once" );
 } );
 
-test( "slider controls will create when inside a container that receives a 'create' event", function() {
-	ok( !$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-slider-track" ).length, "did not have enhancements applied" );
-	ok( $( "#enhancetest" ).enhance().find( ".ui-slider-track" ).length, "enhancements applied" );
+test( "slider controls will create when inside a container that receives a 'create' event",
+	function() {
+		ok( !$( "#enhancetest" ).appendTo( ".ui-page-active" ).find( ".ui-slider-track" ).length,
+			"did not have enhancements applied" );
+		ok( $( "#enhancetest" ).enhance().find( ".ui-slider-track" ).length,
+			"enhancements applied" );
 } );
 
 var createEvent = function( name, target, x, y ) {
@@ -136,17 +141,19 @@ var createEvent = function( name, target, x, y ) {
 var assertLeftCSS = function( obj, opts ) {
 	var integerLeft, compare, css, threshold;
 
-	css = obj.css( 'left' );
+	css = obj.css( "left" );
 	threshold = opts.pxThreshold || 0;
 
 	if ( css.indexOf( "px" ) > -1 ) {
+
 		// parse the actual pixel value returned by the left css value
 		// and the pixels passed in for comparison
 		integerLeft = Math.round( parseFloat( css.replace( "px", "" ) ) ),
 		compare = parseInt( opts.pixels.replace( "px", "" ), 10 );
 
 		// check that the pixel value provided is within a given threshold; default is 0px
-		ok( compare >= integerLeft - threshold && compare <= integerLeft + threshold, opts.message );
+		ok( compare >= integerLeft - threshold && compare <= integerLeft + threshold,
+			opts.message );
 	} else {
 		equal( css, opts.percent, opts.message );
 	}
@@ -172,7 +179,8 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "0" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon 0 button press" );
+			deepEqual( result.slidestart.timedOut, false,
+				"slider did emit 'slidestart' event upon 0 button press" );
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
 			event.which = 1;
 			slider.trigger( event );
@@ -181,7 +189,8 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "1" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon left button press" );
+			deepEqual( result.slidestart.timedOut, false,
+				"slider did emit 'slidestart' event upon left button press" );
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
 			event.which = undefined;
 			slider.trigger( event );
@@ -190,7 +199,8 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "1" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, false, "slider did emit 'slidestart' event upon undefined button press" );
+			deepEqual( result.slidestart.timedOut, false,
+				"slider did emit 'slidestart' event upon undefined button press" );
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
 			event.which = 2;
 			slider.trigger( event );
@@ -199,7 +209,8 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "2" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon middle button press" );
+			deepEqual( result.slidestart.timedOut, true,
+				"slider did not emit 'slidestart' event upon middle button press" );
 			event = $.Event( "mousedown", { target: handle[ 0 ] } );
 			event.which = 3;
 			slider.trigger( event );
@@ -208,7 +219,8 @@ asyncTest( "drag should start only when clicked with left button", function() {
 			slidestart: { src: control, event: "slidestart" + eventNs + "3" }
 		},
 		function( result ) {
-			deepEqual( result.slidestart.timedOut, true, "slider did not emit 'slidestart' event upon right button press" );
+			deepEqual( result.slidestart.timedOut, true,
+				"slider did not emit 'slidestart' event upon right button press" );
 			start();
 		}
 	] );
@@ -221,6 +233,7 @@ asyncTest( "moving the slider triggers 'slidestart' and 'slidestop' events", fun
 
 	$.testHelper.eventCascade( [
 		function() {
+
 			// trigger the slider grab event
 			slider.trigger( "mousedown" );
 		},
@@ -277,7 +290,7 @@ if ( $.testHelper.versionTest( $.fn.jquery, function( l, r ) {
 			vmousemoveLength;
 
 		function getDocumentEventsLength( name ) {
-			return ( doc.data( 'events' )[ name ] || [] ).length;
+			return ( doc.data( "events" )[ name ] || [] ).length;
 		}
 
 		vmouseupLength = getDocumentEventsLength( "vmouseup" );
@@ -285,8 +298,10 @@ if ( $.testHelper.versionTest( $.fn.jquery, function( l, r ) {
 
 		slider.remove();
 
-		equal( getDocumentEventsLength( "vmouseup" ), ( vmouseupLength - 1 ), 'vmouseup event was removed' );
-		equal( getDocumentEventsLength( "vmousemove" ), ( vmousemoveLength - 1 ), 'vmousemove event was removed' );
+		equal( getDocumentEventsLength( "vmouseup" ), ( vmouseupLength - 1 ),
+			"vmouseup event was removed" );
+		equal( getDocumentEventsLength( "vmousemove" ), ( vmousemoveLength - 1 ),
+			"vmousemove event was removed" );
 	} );
 }
 } )( jQuery );

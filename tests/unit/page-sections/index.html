@@ -35,14 +35,14 @@
 
 	<div id="qunit-fixture">
 		<div data-nstest-role="page">
-			<div data-nstest-role="header">
+			<div data-nstest-role="toolbar" data-nstest-type="header">
 				<div>
 					<a href="foo">foo</a>
 				</div>
 				<a href="foo">foo</a>
 			</div><!-- /header -->
 
-			<div  data-nstest-role="footer">
+			<div  data-nstest-role="toolbar" data-nstest-type="footer">
 				<div>
 					<a href="foo">foo</a>
 				</div>
@@ -61,7 +61,7 @@
 	</div>
 
 	<div data-nstest-enhance="false">
-		<div data-nstest-role="header" id="ignored-header">
+		<div data-nstest-role="toolbar" data-nstest-type="header" id="ignored-header">
 			<div>
 				<a href="foo">foo</a>
 			</div>
@@ -70,7 +70,7 @@
 	</div>
 
 	<div>
-		<div data-nstest-role="header" id="enhanced-header">
+		<div data-nstest-role="toolbar" data-nstest-type="header" id="enhanced-header">
 			<div>
 				<a href="foo">foo</a>
 			</div>

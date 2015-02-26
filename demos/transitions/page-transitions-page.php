@@ -15,7 +15,7 @@
 <body>
 
 	<div data-role="page" id="page-success" data-dom-cache="true"><!-- page-->
-		<div data-role="header" data-theme="a">
+		<div data-role="toolbar" data-type="header" data-theme="a">
 		<h1>Page</h1>
 		</div><!-- /header -->
 
@@ -56,7 +56,7 @@
 			<a href="index.php" class="ui-button ui-corner-all ui-shadow ui-button-b ui-button-inline" data-rel="back">Take me back</a>
 		</div>
 
-		<div data-role="footer" data-theme="a">
+		<div data-role="toolbar" data-type="footer" data-theme="a">
 			<div style="margin:5px 10px;"><!-- To add a bit of spacing -->
 			<label for="search" class="ui-hidden-accessible">Search:</label>
 	        <input type="search" name="password" id="search" placeholder="Search..." value="">

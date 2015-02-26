@@ -15,7 +15,8 @@ asyncTest( "Back button appears correctly", function() {
 			var backBtn = $( "#header a:first" );
 
 			deepEqual( backBtn.length, 1, "A 'Back' button was added to the header." );
-			deepEqual( backBtn.attr( "role" ), "button", "The 'Back' button has the attribute " + '"' + "data-role='button'" + '"' );
+			deepEqual( backBtn.attr( "role" ), "button",
+				"The 'Back' button has the attribute " + "\"" + "data-role='button'" + "\"" );
 			$.mobile.back();
 		},
 

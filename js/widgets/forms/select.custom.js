@@ -235,7 +235,7 @@ return $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 			( " data-" + $.mobile.ns + "divider-theme='" + o.dividerTheme + "'" ) : "";
 		menuPage = $( "<div data-" + $.mobile.ns + "role='dialog' class='ui-selectmenu'" +
 			themeAttr + overlayThemeAttr + ">" +
-			"<div data-" + $.mobile.ns + "role='header'>" +
+			"<div data-" + $.mobile.ns + "type='header'>" +
 			"<div class='ui-title'></div>" +
 			"</div>" +
 			"<div class='ui-content'></div>" +

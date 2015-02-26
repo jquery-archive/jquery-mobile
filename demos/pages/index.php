@@ -15,7 +15,7 @@
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
 
-	<div data-role="header" class="jqm-header">
+	<div data-role="toolbar" data-type="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
 		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
@@ -73,13 +73,13 @@
 &lt;/div&gt;
 </code></pre>
 
-		<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with <code>data-role="header"</code>, <code>class="ui-content"</code>, and <code>data-role="footer"</code>.</p>
+		<p>Within the "page" container, any valid HTML markup can be used, but for typical pages in jQuery Mobile, the immediate children of a "page" are divs with <code>data-role="toolbar" data-type="header"</code>, <code>class="ui-content"</code>, and <code>data-role="toolbar" data-type="footer"</code>.</p>
 
 <pre><code>
 &lt;div data-role="page"&gt;
-	&lt;div data-role="header"&gt;...&lt;/div&gt;
+	&lt;div data-role="toolbar" data-type="header"&gt;...&lt;/div&gt;
 	&lt;div role="main" class="ui-content"&gt;...&lt;/div&gt;
-	&lt;div data-role="footer"&gt;...&lt;/div&gt;
+	&lt;div data-role="toolbar" data-type="footer"&gt;...&lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
 
@@ -229,7 +229,7 @@ $.mobile.page.prototype.options.domCache = true;
 
 	<?php include( '../jqm-navmenu.php' ); ?>
 
-	<div data-role="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
+	<div data-role="toolbar" data-type="footer" data-position="fixed" data-tap-toggle="false" class="jqm-footer">
 		<p>jQuery Mobile Demos version <span class="jqm-version"></span></p>
 		<p>Copyright jQuery Foundation</p>
 	</div><!-- /footer -->

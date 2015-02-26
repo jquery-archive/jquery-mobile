@@ -13,13 +13,13 @@
 	<script src="../../js/"></script>
 	<script>
 		$(function(){
-			$( "[data-role='header'], [data-role='footer']" ).toolbar();
+			$( "[data-role='toolbar']" ).toolbar();
 		});
 	</script>
 </head>
 <body>
-	<div data-role="header" data-theme="a">
-			<a href="../toolbar/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
+	<div data-role="toolbar"  data-type="header" data-theme="a">
+			<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
 		<h1>External header</h1>
 	</div><!-- /header -->
 	
@@ -33,7 +33,7 @@
 
 	</div><!-- /page -->
 
-	<div data-role="footer" data-theme="a">
+	<div data-role="toolbar" data-type="footer" data-theme="a">
 		<h1>External footer</h1>
 	</div><!-- /footer -->
 
