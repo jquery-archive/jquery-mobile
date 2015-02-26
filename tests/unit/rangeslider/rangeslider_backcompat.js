@@ -31,7 +31,8 @@
 			bgMarginLeft = Math.round( rangeFirst.val() / range * width );
 
 			// Take a rounding difference of max 2px into account
-			assert.ok( -2 >= ( intMarginLeft - bgMarginLeft ) <= 2, "Highlight has correct left margin" );
+			assert.ok( -2 >= ( intMarginLeft - bgMarginLeft ) <= 2,
+				"Highlight has correct left margin" );
 		}
 
 		cssWidth = bg.css( "width" );

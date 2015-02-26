@@ -16,8 +16,8 @@
 
 	<div data-role="page" class="jqm-demos">
 
-	    <div data-role="header" data-position="fixed" data-fullscreen="true">
-			<a href="../toolbar/" data-rel="back" class="ui-button ui-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
+	    <div data-role="toolbar" data-type="header" data-position="fixed" data-fullscreen="true">
+			<a href="../toolbar/" data-rel="back" class="ui-button ui-toolbar-header-button-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-button-icon-only">Back<span class="ui-icon ui-icon-caret-l"></span></a>
 	        <h1>Fullscreen fixed header</h1>
 	    </div><!-- /header -->
 
@@ -36,7 +36,7 @@
 
 		</div><!-- /content -->
 
-	    <div data-role="footer" data-theme="a" data-position="fixed" data-fullscreen="true">
+	    <div data-role="toolbar" data-type="footer" data-theme="a" data-position="fixed" data-fullscreen="true">
 	    	<h1>Fullscreen fixed Footer</h1>
 	    </div><!-- /footer -->
 

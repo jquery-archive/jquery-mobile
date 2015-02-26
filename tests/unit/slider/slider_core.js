@@ -11,7 +11,7 @@ test( "refresh should force val to nearest step", function() {
 
 	slider.val( step + 1 );
 
-	slider.slider( 'refresh' );
+	slider.slider( "refresh" );
 
 	ok( step > 1, "the step is greater than one" );
 	ok( slider.val() > 0, "the value has been altered" );
@@ -20,10 +20,10 @@ test( "refresh should force val to nearest step", function() {
 
 test( "empty string value results defaults to slider min value", function() {
 	var slider = $( "#empty-string-val-slider" );
-	deepEqual( slider.attr( 'min' ), "10", "slider min is greater than 0" );
-	deepEqual( slider.val( '' ).slider( 'refresh' ).val(), slider.attr( 'min' ), "val is equal to min attr" );
+	deepEqual( slider.attr( "min" ), "10", "slider min is greater than 0" );
+	deepEqual( slider.val( "" ).slider( "refresh" ).val(), slider.attr( "min" ),
+		"val is equal to min attr" );
 } );
-
 
 test( "labels that have id keep that id", function() {
 	var label = $( "[for=label-id-slider]" );
@@ -33,7 +33,8 @@ test( "labels that have id keep that id", function() {
 test( "labels without an id get an id", function() {
 	var slider = $( "#empty-string-val-slider" ),
 		label = $( "[for=empty-string-val-slider]" );
-	equal( label.attr( "id" ), slider.attr( "id" ) + "-label", "the label id is based off the slider id" );
+	equal( label.attr( "id" ), slider.attr( "id" ) + "-label",
+		"the label id is based off the slider id" );
 } );
 
 // NOTE init binding to alter the setting is in settings.js
@@ -56,7 +57,7 @@ test( "slider tooltip", function() {
 
 test( "slider is enabled/disabled correctly", function( assert ) {
 	var slider = $( "#disable-test" ),
-		track = slider.siblings( "div" );
+		track = slider.siblings( "div" ),
 
 	testDisabled = function( prefix, expectedDisabled ) {
 		deepEqual( !!track.attr( "aria-disabled" ), expectedDisabled,

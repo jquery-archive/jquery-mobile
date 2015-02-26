@@ -33,14 +33,14 @@ test( "sections inside an ignored container do not enhance", function() {
 			.attr( "data-" + $.mobile.ns + "role", "page" )
 			.page();
 
-	ok( !$ignored.hasClass( "ui-header" ), "ignored header has no class" );
+	ok( !$ignored.hasClass( "ui-toolbar-header" ), "ignored header has no class" );
 
 	$enhanced
 		.parent()
 			.attr( "data-" + $.mobile.ns + "role", "page" )
 			.page();
 
-	ok( $enhanced.hasClass( "ui-header" ), "enhanced header has classes" );
+	ok( $enhanced.hasClass( "ui-toolbar-header" ), "enhanced header has classes" );
 
 	$.mobile.ignoreContentEnabled = false;
 } );

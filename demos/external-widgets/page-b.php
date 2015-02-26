@@ -41,7 +41,7 @@
 			<li><a href="page-d.php" data-prefetch="true" data-transition="slide">Emails</a></li>
 		</ul>
 	</div>
-    <div id="shared-header" data-role="header" data-position="fixed" data-theme="a">
+    <div id="shared-header" data-role="toolbar" data-type="header" data-position="fixed" data-theme="a">
 		<!-- Shared header markup must be added to all documents of the application to ensure any
              of them can serve as the start page. The server can be instructed to omit sending
              this portion of the data whenever the request for the document is made via Ajax. -->
@@ -107,7 +107,7 @@
 	</div><!-- /page -->
 
 <?php if (!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) !== 'xmlhttprequest' || isset( $_GET['source'])) { ?>
-	<div id="shared-navbar" data-role="footer" data-position="fixed" data-theme="a">
+	<div id="shared-navbar" data-role="toolbar" data-type="footer" data-position="fixed" data-theme="a">
 		<!-- Shared navbar markup must be added to all documents of the application to ensure any
              of them can serve as the start page. The server can be instructed to omit sending
              this portion of the data whenever the request for the document is made via Ajax. -->

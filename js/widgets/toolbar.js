@@ -7,13 +7,13 @@
  * http://jquery.org/license
  */
 
-//>>label: Toolbars: Fixed
+//>>label: Toolbars
 //>>group: Widgets
 //>>description: Headers and footers
 //>>docs: http://api.jquerymobile.com/toolbar/
 //>>demos: http://demos.jquerymobile.com/@VERSION/toolbar/
 //>>css.structure: ../css/structure/jquery.mobile.core.css
-//>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
+//>>css.structure: ../css/structure/jquery.mobile.toolbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 ( function( factory ) {
@@ -25,6 +25,7 @@
 			"../widget",
 			"../core",
 			"../navigation",
+			"./widget.theme",
 			"../zoom" ], factory );
 	} else {
 
@@ -33,22 +34,26 @@
 	}
 } )( function( $ ) {
 
-return $.widget( "mobile.toolbar", {
+$.widget( "mobile.toolbar", {
 	version: "@VERSION",
 
-	initSelector: ":jqmData(role='footer'), :jqmData(role='header')",
-
 	options: {
-		theme: null,
+		theme: "inherit",
 		addBackBtn: false,
 		backBtnTheme: null,
-		backBtnText: "Back"
+		backBtnText: "Back",
+		type: "toolbar",
+		ariaRole: null
 	},
 
 	_create: function() {
 		var leftbutton, rightbutton,
-			role = this.element.is( ":jqmData(role='header')" ) ? "header" : "footer",
-			page = this.element.closest( ".ui-page" );
+			role =  this.options.type,
+			page = this.element.closest( ".ui-page" ),
+			toolbarAriaRole = this.options.ariaRole === null ?
+				role === "header" ? "banner" :
+				( role === "footer" ? "contentinfo" : "toolbar" ) :
+				this.options.ariaRole;
 		if ( page.length === 0 ) {
 			page = false;
 			this._on( this.document, {
@@ -61,35 +66,23 @@ return $.widget( "mobile.toolbar", {
 			leftbutton: leftbutton,
 			rightbutton: rightbutton
 		} );
-		this.element.attr( "role", role === "header" ? "banner" : "contentinfo" ).addClass( "ui-" + role );
+		this.element.attr( "role", toolbarAriaRole );
+		this._addClass( "ui-toolbar" + ( role !== "toolbar" ? "-" + role : "" ) );
 		this.refresh();
 		this._setOptions( this.options );
 	},
 	_setOptions: function( o ) {
-		if ( o.addBackBtn !== undefined ) {
+		if ( o.addBackBtn ) {
 			this._updateBackButton();
 		}
-		if ( o.backBtnTheme != null ) {
-			this.element
-				.find( ".ui-toolbar-back-button" )
-					.addClass( "ui-button ui-button-" + o.backBtnTheme );
-		}
 		if ( o.backBtnText !== undefined ) {
-			this.element.find( ".ui-toolbar-back-button .ui-button-text" ).text( o.backBtnText );
-		}
-		if ( o.theme !== undefined ) {
-			var currentTheme = this.options.theme ? this.options.theme : "inherit",
-				newTheme = o.theme ? o.theme : "inherit";
-
-			this.element.removeClass( "ui-bar-" + currentTheme ).addClass( "ui-bar-" + newTheme );
+			this.element
+				.find( ".ui-toolbar-back-button .ui-button-text" ).text( o.backBtnText );
 		}
 
 		this._super( o );
 	},
 	refresh: function() {
-		if ( this.role === "header" ) {
-			this._addHeaderButtonClasses();
-		}
 		if ( !this.page ) {
 			this._setRelative();
 			if ( this.role === "footer" ) {
@@ -99,7 +92,6 @@ return $.widget( "mobile.toolbar", {
 			}
 		}
 		this._addHeadingClasses();
-		this._buttonMarkup();
 	},
 
 	//we only want this to run on non fixed toolbars so make it easy to override
@@ -107,33 +99,6 @@ return $.widget( "mobile.toolbar", {
 		$( "[data-" + $.mobile.ns + "role='page']" ).css( { "position": "relative" } );
 	},
 
-	// Deprecated in 1.4. As from 1.5 button classes have to be present in the markup.
-	_buttonMarkup: function() {
-		this.element
-			.children( "a" )
-				.filter( ":not([data-" + $.mobile.ns + "role='none'])" )
-					.attr( "data-" + $.mobile.ns + "role", "button" );
-		this.element.enhanceWithin();
-	},
-	// Deprecated in 1.4. As from 1.5 ui-button-left/right classes have to be present in the markup.
-	_addHeaderButtonClasses: function() {
-		var headerAnchors = this.element.children( "a, button" );
-
-		// Do not mistake a back button for a left toolbar button
-		this.leftbutton = headerAnchors.hasClass( "ui-button-left" ) &&
-			!headerAnchors.hasClass( "ui-toolbar-back-button" );
-
-		this.rightbutton = headerAnchors.hasClass( "ui-button-right" );
-
-		// Filter out right buttons and back buttons
-		this.leftbutton = this.leftbutton ||
-			headerAnchors.eq( 0 )
-				.not( ".ui-button-right,.ui-toolbar-back-button" )
-					.addClass( "ui-button-left" )
-					.length;
-
-		this.rightbutton = this.rightbutton || headerAnchors.eq( 1 ).addClass( "ui-button-right" ).length;
-	},
 	_updateBackButton: function() {
 		var backButton,
 			options = this.options,
@@ -154,12 +119,12 @@ return $.widget( "mobile.toolbar", {
 
 					// If the toolbar is internal the page's URL must differ from the hash
 					( this.page[ 0 ].getAttribute( "data-" + $.mobile.ns + "url" ) !==
-					$.mobile.path.stripHash( location.hash ) ) :
+						$.mobile.path.stripHash( location.hash ) ) :
 
 					// Otherwise, if the toolbar is external there must be at least one
 					// history item to which one can go back
 					( $.mobile.navigate && $.mobile.navigate.history &&
-					$.mobile.navigate.history.activeIndex > 0 ) ) &&
+						$.mobile.navigate.history.activeIndex > 0 ) ) &&
 
 				// The toolbar does not have a left button
 				!this.leftbutton ) {
@@ -167,13 +132,13 @@ return $.widget( "mobile.toolbar", {
 			// Skip back button creation if one is already present
 			if ( !backButton.attached ) {
 				this.backButton = backButton.element = ( backButton.element ||
-				$( "<a role='button' href='#' " +
-					"class='ui-button ui-corner-all ui-shadow ui-button-left " +
-					( theme ? "ui-button-" + theme + " " : "" ) +
-					"ui-toolbar-back-button ui-icon-caret-l ui-icon-beginning' " +
-					"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText +
-					"</a>" ) )
-					.prependTo( this.element );
+					$( "<a role='button' href='#' " +
+						"class='ui-button ui-corner-all ui-shadow ui-toolbar-header-button-left " +
+							( theme ? "ui-button-" + theme + " " : "" ) +
+							"ui-toolbar-back-button ui-icon-carat-l ui-icon-beginning' " +
+						"data-" + $.mobile.ns + "rel='back'>" + options.backBtnText +
+						"</a>" ) )
+						.prependTo( this.element );
 				backButton.attached = true;
 			}
 
@@ -184,8 +149,11 @@ return $.widget( "mobile.toolbar", {
 		}
 	},
 	_addHeadingClasses: function() {
-		this.element.children( "h1, h2, h3, h4, h5, h6" )
-			.addClass( "ui-title" )
+		this.headerElements = this.element.children( "h1, h2, h3, h4, h5, h6" );
+		this._addClass( this.headerElements, "ui-toolbar-title" );
+
+		this.headerElements
+
 			// Regardless of h element number in src, it becomes h1 for the enhanced page
 			.attr( {
 				"role": "heading",
@@ -195,23 +163,35 @@ return $.widget( "mobile.toolbar", {
 	_destroy: function() {
 		var currentTheme;
 
-		this.element.children( "h1, h2, h3, h4, h5, h6" )
-			.removeClass( "ui-title" )
-			.removeAttr( "role" )
-			.removeAttr( "aria-level" );
+		this.headerElements.removeAttr( "role aria-level" );
 
 		if ( this.role === "header" ) {
-			this.element.children( "a, button" )
-				.removeClass( "ui-button-left ui-button-right ui-button ui-shadow ui-corner-all" );
 			if ( this.backButton ) {
 				this.backButton.remove();
 			}
 		}
 
 		currentTheme = this.options.theme ? this.options.theme : "inherit";
-		this.element.removeClass( "ui-bar-" + currentTheme );
-
-		this.element.removeClass( "ui-" + this.role ).removeAttr( "role" );
+		this.element.removeAttr( "role" );
+	},
+	_themeElements: function() {
+		var elements = [
+			{
+				element: this.element,
+				prefix: "ui-bar-"
+			}
+		];
+		if ( this.options.addBackBtn && this.backButton !== undefined ) {
+			elements.push( {
+				element: this.backButton,
+				prefix: "ui-button-",
+				option: "backBtnTheme"
+			} );
+		}
+		return elements;
 	}
 } );
+
+return $.widget( "mobile.toolbar", $.mobile.toolbar, $.mobile.widget.theme );
+
 } );

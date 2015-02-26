@@ -5,24 +5,25 @@
 
 	QUnit.module( "jquery.mobile.rangeslider.js core" );
 
-	QUnit.test( "First input value is always lower than last input value and vice versa", function( assert ) {
-		assert.expect( 2 );
-		var	rangeFirst = $( "#rangeslider-minmax-first" ),
-			rangeLast = $( "#rangeslider-minmax-last" );
+	QUnit.test( "First input value is always lower than last input value and vice versa",
+		function( assert ) {
+			assert.expect( 2 );
+			var	rangeFirst = $( "#rangeslider-minmax-first" ),
+				rangeLast = $( "#rangeslider-minmax-last" );
 
-		// Try to set first input val (30) higher than last input val (70)
-		rangeFirst.val( parseInt( rangeFirst.val(), 10 ) +  60 ).slider( "refresh" );
-		assert.equal( rangeFirst.val(), rangeLast.val(),
-			"First input value is equal to last input value" );
+			// Try to set first input val (30) higher than last input val (70)
+			rangeFirst.val( parseInt( rangeFirst.val(), 10 ) +  60 ).slider( "refresh" );
+			assert.equal( rangeFirst.val(), rangeLast.val(),
+				"First input value is equal to last input value" );
 
-		// Set first input value back to 30
-		rangeFirst.val( 30 ).slider( "refresh" );
+			// Set first input value back to 30
+			rangeFirst.val( 30 ).slider( "refresh" );
 
-		// Try to set last input val (70) lower than first input val (30)
-		rangeLast.val( parseInt( rangeLast.val(), 10 ) -  60 ).slider( "refresh" );
+			// Try to set last input val (70) lower than first input val (30)
+			rangeLast.val( parseInt( rangeLast.val(), 10 ) -  60 ).slider( "refresh" );
 
-		assert.equal( rangeLast.val(), rangeFirst.val(),
-			"Last input value is equal to first input value" );
+			assert.equal( rangeLast.val(), rangeFirst.val(),
+				"Last input value is equal to first input value" );
 	} );
 
 	var createEvent = function( name, target, x, y ) {
@@ -144,11 +145,11 @@
 			handleFirst = rangeslider.find( ".ui-slider-handle" ).first(),
 			sliderFirst = $( "#rangeslider-proximity-first" );
 
-
 		$( sliderFirst ).on( "change", function() {
-			assert.equal( 2, $( this ).val(), "values should be equal on change when handles meet" );
+			assert.equal( 2, $( this ).val(),
+				"values should be equal on change when handles meet" );
 		} );
-		$.Event.prototype.keyCode = $.mobile.keyCode[ "UP" ];
+		$.Event.prototype.keyCode = $.mobile.keyCode.UP;
 		handleFirst.trigger( "keydown" );
 	} );
 

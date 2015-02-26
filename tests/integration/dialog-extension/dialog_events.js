@@ -54,14 +54,14 @@ QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
 			var a,
 				dialog = $( "#close-button-test" );
 
-			assert.strictEqual( $( "#close-button-test .ui-header a" ).length, 0,
+			assert.strictEqual( $( "#close-button-test .ui-toolbar-header a" ).length, 0,
 				"Initially, the dialog header has no anchor elements (option value 'none')" );
 
 			dialog.page( "option", "closeBtn", "left" );
-			a = $( "#close-button-test .ui-header a" );
+			a = $( "#close-button-test .ui-toolbar-header a" );
 			assert.strictEqual( a.length, 1,
 				"The dialog header has exactly one anchor when the option value is 'left'" );
-			assert.hasClasses( a, "ui-button-left",
+			assert.hasClasses( a, "ui-toolbar-header-button-left",
 				"The close button has class ui-button-left when the closeBtn option is set " +
 				"to 'left'" );
 
@@ -69,16 +69,16 @@ QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
 				"closeBtn": "right",
 				"closeBtnText": "Custom text"
 			} );
-			a = $( "#close-button-test .ui-header a" );
+			a = $( "#close-button-test .ui-toolbar-header a" );
 			assert.strictEqual( a.length, 1,
 				"The dialog header has exactly one anchor when the option value is 'right'" );
-			assert.hasClasses( a, "ui-button-right",
+			assert.hasClasses( a, "ui-toolbar-header-button-right",
 				"The close button has class ui-button-right when the closeBtn option is set " +
 				"to 'right'" );
 			assert.strictEqual( a.text(), "Custom text", "Anchor text updated via option" );
 
 			dialog.page( "option", "closeBtn", "none" );
-			assert.strictEqual( $( "#close-button-test .ui-header a" ).length, 0,
+			assert.strictEqual( $( "#close-button-test .ui-toolbar-header a" ).length, 0,
 				"Initially, the dialog header has no anchor elements (option value 'none')" );
 		},
 
@@ -145,9 +145,9 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 				"Expected explicit theme ui-page-theme-a" );
 			assert.hasClasses( $( "body" ), "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();
@@ -181,9 +181,9 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 				"Expected no overlay theme ui-overlay-b" );
 			assert.hasClasses( $( "body" ), "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();
@@ -211,9 +211,9 @@ QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function
 				"Expected explicit theme ui-page-theme-e" );
 			assert.hasClasses( $( "body" ), "ui-overlay-b",
 				"Expected explicit overlay theme ui-overlay-b" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();
@@ -266,9 +266,9 @@ QUnit.asyncTest( "pre-rendered dialog options work", function( assert ) {
 				"enhanced dialog is the current page" );
 
 			$( "#enhanced-dialog" ).page( "option", "closeBtn", "right" );
-			assert.hasClasses( $( "#enhanced-dialog a" ), "ui-button-right",
+			assert.hasClasses( $( "#enhanced-dialog a" ), "ui-toolbar-header-button-right",
 				"enhanced dialog button location can be changed" );
-			assert.lacksClasses( $( "#enhanced-dialog a" ), "ui-button-left",
+			assert.lacksClasses( $( "#enhanced-dialog a" ), "ui-toolbar-header-button-left",
 				"enhanced dialog button does not retain old location" );
 
 			$.mobile.back();

@@ -27,23 +27,23 @@ QUnit.asyncTest( "Test option data-close-btn", function( assert ) {
 		},
 
 		function() {
-			var a = $( "#close-button-test .ui-header a" );
+			var a = $( "#close-button-test .ui-toolbar-header a" );
 			assert.strictEqual( a.length, 0,
 				"Initially, the dialog header has no anchor elements (option value 'none')" );
 
 			$( "#close-button-test" ).page( "option", "closeBtn", "left" );
-			a = $( "#close-button-test .ui-header a" );
+			a = $( "#close-button-test .ui-toolbar-header a" );
 			assert.strictEqual( a.length, 1,
 				"The dialog header has exactly one anchor when the option value is 'left'" );
-			assert.hasClasses( a, "ui-button-left",
-				"The close button has class ui-button-left when the closeBtn option is 'left'" );
+			assert.hasClasses( a, "ui-toolbar-header-button-left",
+				"Close button has class ui-toolbar-header-button-left when closeBtn is 'left'" );
 
 			$( "#close-button-test" ).page( "option", "closeBtn", "right" );
-			a = $( "#close-button-test .ui-header a" );
+			a = $( "#close-button-test .ui-toolbar-header a" );
 			assert.strictEqual( a.length, 1,
 				"The dialog header has eactly one anchor when the option value is 'right'" );
-			assert.hasClasses( a, "ui-button-right",
-				"The close button has class ui-button-right when the closeBtn option is 'right'" );
+			assert.hasClasses( a, "ui-toolbar-header-button-right",
+				"Close button has class ui-toolbar-header-button-right when closeBtn is 'right'" );
 
 			$.mobile.back();
 		},
@@ -76,9 +76,9 @@ QUnit.asyncTest( "dialog element with no theming", function( assert ) {
 				"Expected explicit theme ui-page-theme-a" );
 			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();
@@ -114,9 +114,9 @@ QUnit.asyncTest( "dialog element with data-theme", function( assert ) {
 				"Expected no overlay theme ui-overlay-b" );
 			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-a",
 				"Expected default overlay theme ui-overlay-a" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();
@@ -146,9 +146,9 @@ QUnit.asyncTest( "dialog element with data-theme & data-overlay-theme", function
 				"Expected explicit theme ui-page-theme-e" );
 			assert.hasClasses( $.mobile.pageContainer, "ui-overlay-b",
 				"Expected explicit overlay theme ui-overlay-b" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=header" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=header" ) ), "ui-bar-inherit",
 				"Expected header to inherit from dialog" );
-			assert.hasClasses( dialog.find( jqmDataSelector( "role=footer" ) ), "ui-bar-inherit",
+			assert.hasClasses( dialog.find( jqmDataSelector( "type=footer" ) ), "ui-bar-inherit",
 				"Expected footer to inherit from dialog" );
 
 			QUnit.start();
