@@ -8,7 +8,7 @@
 		originalAnimationComplete = $.fn.animationComplete,
 		animationCompleteCallCount = 0,
 		opensAndCloses = function( eventNs, popupId, linkSelector, contentSelector ) {
-			var popup = $( document.getElementById( popupId ) ),
+			var popup = $( "#" + popupId ),
 				link = $( linkSelector )[ 0 ];
 
 			expect( 17 );
