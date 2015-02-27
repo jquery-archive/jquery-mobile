@@ -141,7 +141,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 				if ( nextFooter.length || nextHeader.length ) {
 
-					nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
+					nextFooter.add( nextHeader ).appendTo( "body" );
 
 					ui.nextPage.one( "pageshow", function() {
 						nextHeader.prependTo( this );

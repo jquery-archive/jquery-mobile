@@ -14,7 +14,7 @@
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( home );
-			pageContainer = $( ":mobile-pagecontainer" );
+			pageContainer = $( "body" );
 		}
 	});
 

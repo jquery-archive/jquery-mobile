@@ -8,7 +8,7 @@
 
 	module(libName, {
 		setup: function() {
-			pageContainer = $( ":mobile-pagecontainer" );
+			pageContainer = $( "body" );
 		}
 	});
 

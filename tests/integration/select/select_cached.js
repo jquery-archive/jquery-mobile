@@ -4,7 +4,7 @@
 
 (function($){
 	var resetHash,
-		pageContainer = $( ":mobile-pagecontainer" );
+		pageContainer = $( "body" );
 
 	resetHash = function(timeout){
 		$.testHelper.openPage( location.hash.indexOf("#default") >= 0 ? "#" : "#default" );

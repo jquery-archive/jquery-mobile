@@ -4,7 +4,7 @@
 
 (function($){
 	var libName = "forms.select",
-		pageContainer = $( ":mobile-pagecontainer" ),
+		pageContainer = $( "body" ),
 		originalDefaultDialogTrans = $.mobile.defaultDialogTransition,
 		originalDefTransitionHandler = $.mobile.defaultTransitionHandler.prototype.transition,
 		originalGetEncodedText = $.fn.getEncodedText,

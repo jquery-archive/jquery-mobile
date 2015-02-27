@@ -54,7 +54,7 @@
 
 	module('jquery.mobile.navigation.js', {
 		setup: function(){
-			pageContainer = $( ":mobile-pagecontainer" );
+			pageContainer = $( "body" );
 
 			// disable this option so we can test transitions regardless of window width
 			disableMaxTransWidth();

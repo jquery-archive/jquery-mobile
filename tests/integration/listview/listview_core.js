@@ -12,7 +12,7 @@
 
 	module( "Basic Linked list", {
 		setup: function(){
-			pageContainer = $( ":mobile-pagecontainer" );
+			pageContainer = $( "body" );
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;
 			$.testHelper.navReset( home );

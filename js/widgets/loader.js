@@ -121,8 +121,7 @@ define( [
 			// If the pagecontainer widget has been defined we may use the :mobile-pagecontainer
 			// and attach to the element on which the pagecontainer widget has been defined. If not,
 			// we attach to the body.
-			this.element.appendTo( $.mobile.pagecontainer ?
-				$( ":mobile-pagecontainer" ) : $( "body" ) );
+			this.element.appendTo( "body" );
 
 			// check that the loader is visible
 			this.checkLoaderPosition();

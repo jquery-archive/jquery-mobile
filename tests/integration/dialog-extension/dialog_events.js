@@ -4,7 +4,7 @@
 (function($) {
 	var home = $.mobile.path.parseUrl(location.pathname).directory,
 		homeWithSearch = home + location.search,
-		pageContainer = $( ":mobile-pagecontainer" );
+		pageContainer = $( "body" );
 
 	module( "dialog", {
 		setup: function() {

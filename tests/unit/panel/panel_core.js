@@ -6,7 +6,7 @@
 (function( $ ){
 
 	var count,
-		pageContainer = $( ":mobile-pagecontainer" ),
+		pageContainer = $( "body" ),
 		defaults = $.mobile.panel.prototype.options,
 		classes = defaults.classes,
 		originalWidget = $.mobile.panel.prototype;

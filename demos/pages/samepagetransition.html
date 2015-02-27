@@ -53,7 +53,7 @@ $('#page1').on('pagecreate', function() {
     var trans = $(this).text() || 'none',
         rev = !!$('#cb1').attr('checked');
 
-    $( ":mobile-pagecontainer" ).pagecontainer( "change", "#page1", {
+    $( "body" ).pagecontainer( "change", "#page1", {
 		transition: trans,
 		allowSamePageTransition: true,
 		reverse: rev

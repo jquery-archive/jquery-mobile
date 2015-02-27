@@ -1,5 +1,5 @@
 (function($) {
-	var pageContainer = $( ":mobile-pagecontainer" );
+	var pageContainer = $( "body" );
 
 	//disable inlineSVG support test
 	$.support.inlineSVG = $.noop;

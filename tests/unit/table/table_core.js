@@ -4,7 +4,7 @@
  */
 
 (function($){
-	var pageContainer = $( ":mobile-pagecontainer" );
+	var pageContainer = $( "body" );
 
 	module( "Basic Table", {
 		setup: function(){

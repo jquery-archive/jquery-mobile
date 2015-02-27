@@ -160,7 +160,7 @@ $.widget( "mobile.dialog", {
 			if ( $.mobile.hashListeningEnabled && hist.activeIndex > 0 ) {
 				$.mobile.back();
 			} else {
-				$.mobile.pageContainer.pagecontainer( "back" );
+				$( "body" ).pagecontainer( "back" );
 			}
 		}
 	}

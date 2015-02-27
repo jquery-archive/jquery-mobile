@@ -4,7 +4,7 @@
 (function($){
 
 	var urlObject = $.mobile.path.parseLocation(),
-		pageContainer = $( ":mobile-pagecontainer" ),
+		pageContainer = $( "body" ),
 		home = urlObject.pathname + urlObject.search,
 		originalAnimationComplete = $.fn.animationComplete,
 		animationCompleteCallCount = 0,

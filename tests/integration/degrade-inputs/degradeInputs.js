@@ -13,7 +13,7 @@
 		// and _expect_ that the default page will remain "unreaped". This will break if that assumption changes
 		$.testHelper.pageSequence([
 			function() {
-				$( ":mobile-pagecontainer" ).pagecontainer( "change", "#dialog" );
+				$( "body" ).pagecontainer( "change", "#dialog" );
 			},
 
 			function() {

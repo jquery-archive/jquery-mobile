@@ -114,7 +114,7 @@ define([
 					$.mobile.navigate.navigator.squash( path.parseLocation().href );
 				}
 
-				$.mobile.pageContainer.pagecontainer( "change", $.mobile.firstPage, {
+				$( "body" ).pagecontainer( "change", $.mobile.firstPage, {
 					transition: "none",
 					reverse: true,
 					changeHash: false,

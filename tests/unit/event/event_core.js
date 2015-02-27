@@ -609,7 +609,7 @@
 			}
 		]);
 
-		( ( $.mobile.pagecontainer && $( ":mobile-pagecontainer" ) ) || $( "body" ) )
+		$( "body" )
 			.trigger( "resize" )
 			.trigger( "resize" )
 			.trigger( "resize" );

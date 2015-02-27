@@ -76,7 +76,7 @@ define( [
 			nav.app.backHistory ) {
 			nav.app.backHistory();
 		} else {
-			$.mobile.pageContainer.pagecontainer( "back" );
+			$( "body" ).pagecontainer( "back" );
 		}
 	};
 
@@ -193,7 +193,7 @@ define( [
 			if ( !event.isDefaultPrevented() ) {
 				formData = getAjaxFormData( $( this ) );
 				if ( formData ) {
-					$.mobile.pageContainer.pagecontainer( "change", formData.url,
+					$( "body" ).pagecontainer( "change", formData.url,
 						formData.options );
 					event.preventDefault();
 				}
@@ -358,7 +358,7 @@ define( [
 			//this may need to be more specific as we use data-rel more
 			role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
-			$.mobile.pageContainer.pagecontainer( "change", href, {
+			$( "body" ).pagecontainer( "change", href, {
 				transition: transition,
 				reverse: reverse,
 				role: role,
@@ -377,7 +377,7 @@ define( [
 				if ( url && $.inArray( url, urls ) === -1 ) {
 					urls.push( url );
 
-					$.mobile.pageContainer.pagecontainer( "load", url, {
+					$( "body" ).pagecontainer( "load", url, {
 						role: $link.attr( "data-" + $.mobile.ns + "rel" ),
 						prefetch: true
 					});
@@ -386,7 +386,7 @@ define( [
 		});
 
 		// TODO ensure that the navigate binding in the content widget happens at the right time
-		$.mobile.pageContainer.pagecontainer();
+		$( "body" ).pagecontainer();
 
 		//set page min-heights to be device specific
 		$.mobile.document.bind( "pageshow", function() {

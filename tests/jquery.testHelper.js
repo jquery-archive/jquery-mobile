@@ -212,9 +212,7 @@
 				}, 10000);
 
 				// bind the recursive call to the event
-				( self.eventTarget ||
-						( $.mobile.pagecontainer && $( ":mobile-pagecontainer" ) ) ||
-						$( "body" ) )
+				( self.eventTarget || $( "body" ) )
 					.one(event, function( event, data ) {
 						clearTimeout( warnTimer );
 
