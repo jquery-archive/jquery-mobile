@@ -14,6 +14,8 @@ define( [
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+var selectorEscapeRegex = /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g;
+
 $.widget( "mobile.flipswitch", $.extend({
 
 	options: {
@@ -27,6 +29,8 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_create: function() {
+			var labels;
+
 			if ( !this.options.enhanced ) {
 				this._enhance();
 			} else {
@@ -69,6 +73,21 @@ $.widget( "mobile.flipswitch", $.extend({
 			this._on( {
 				"change": "refresh"
 			});
+
+			// On iOS we need to prevent default when the label is clicked, otherwise it drops down
+			// the native select menu. We nevertheless pass the click onto the element like the
+			// native code would.
+			if ( this.element[ 0 ].nodeName.toLowerCase() === "select" ) {
+				labels = this._findLabels();
+				if ( labels.length ) {
+					this._on( labels, {
+						"click": function( event ) {
+							this.element.click();
+							event.preventDefault();
+						}
+					});
+				}
+			}
 	},
 
 	_handleInputFocus: function() {
@@ -167,6 +186,29 @@ $.widget( "mobile.flipswitch", $.extend({
 		if ( direction !== existingDirection ) {
 			this[ direction ]();
 		}
+	},
+
+	// Copied with modifications from checkboxradio
+	_findLabels: function() {
+		var input = this.element[ 0 ],
+			labelsList = input.labels;
+
+		if ( labelsList && labelsList.length ) {
+			labelsList = $( labelsList );
+		} else {
+			labelsList = this.element.closest( "label" );
+			if ( labelsList.length === 0 ) {
+
+				// NOTE: Windows Phone could not find the label through a selector
+				// filter works though.
+				labelsList = $( this.document[ 0 ].getElementsByTagName( "label" ) )
+					.filter( "[for='" +
+						input.getAttribute( "id" ).replace( selectorEscapeRegex, "\\$1" ) +
+						"']" );
+			}
+		}
+
+		return labelsList;
 	},
 
 	_toggle: function() {
