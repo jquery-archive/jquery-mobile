@@ -7,13 +7,14 @@
 
 define( [
 	"jquery",
-	"../../navigation/path",
 	"../../core",
 	"../../widget",
 	"../../zoom",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
+
+var selectorEscapeRegex = /([!"#$%&'()*+,./:;<=>?@[\]^`{|}~])/g;
 
 $.widget( "mobile.flipswitch", $.extend({
 
@@ -192,12 +193,22 @@ $.widget( "mobile.flipswitch", $.extend({
 		var input = this.element[ 0 ],
 			labelsList = input.labels;
 
-		// NOTE: Windows Phone could not find the label through a selector
-		// filter works though.
-		return ( ( labelsList && labelsList.length ) ? $( labelsList ) :
-			$( this.document[ 0 ].getElementsByTagName( "label" ) )
-				.filter( "[for='" +
-					$.mobile.path.hashToSelector( input.getAttribute( "id" ) ) + "']" ) );
+		if ( labelsList && labelsList.length ) {
+			labelsList = $( labelsList );
+		} else {
+			labelsList = this.element.closest( "label" );
+			if ( labelsList.length === 0 ) {
+
+				// NOTE: Windows Phone could not find the label through a selector
+				// filter works though.
+				labelsList = $( this.document[ 0 ].getElementsByTagName( "label" ) )
+					.filter( "[for='" +
+						input.getAttribute( "id" ).replace( selectorEscapeRegex, "\\$1" ) +
+						"']" );
+			}
+		}
+
+		return labelsList;
 	},
 
 	_toggle: function() {

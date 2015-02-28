@@ -34,7 +34,7 @@
 		});
 
 	asyncTest( "Default is prevented on label click, but click is sent to element", function() {
-		var eventNs = ".defaultIsPreventedButClickIsPropagated",
+		var eventNs = ".preventDefaultAndPropagateClick",
 			label = $( "label[for='test-select-label']" ),
 			select = $( "#test-select-label" );
 
