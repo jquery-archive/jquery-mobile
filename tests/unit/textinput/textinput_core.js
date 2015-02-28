@@ -102,7 +102,7 @@
 					.attr( "title" ), "custom value" );
 	});
 
-	test( "data-clear-button adds clear button to text inputs", function() {
+	test( "data-clear-btn adds clear button to text inputs", function() {
 		ok( $( '#text-input-clear-button' ).next()
 			.is( 'a.ui-textinput-clear-button[tabindex="-1"][aria-hidden="true"]' ),
 			"correctly marked up clear button is present" );

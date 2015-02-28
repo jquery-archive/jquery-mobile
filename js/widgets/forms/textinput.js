@@ -7,7 +7,7 @@
 
 define( [ "jquery", "../../core", "../../widget", "../../degradeInputs", "../../zoom" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 $.widget( "mobile.textinput", {
 	initSelector: "input[type='text']," +
@@ -32,7 +32,7 @@ $.widget( "mobile.textinput", {
 
 	options: {
 		classes: {
-			"ui-textinput": "ui-corner-all ui-body-inherit ui-shadow-inset",
+			"ui-textinput": "ui-corner-all ui-shadow-inset",
 			"ui-textinput-search-icon": "ui-icon ui-alt-icon ui-icon-search"
 		},
 
@@ -47,11 +47,9 @@ $.widget( "mobile.textinput", {
 
 		var options = this.options,
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
-			isTextarea = this.element[ 0 ].nodeName.toLowerCase() === "textarea",
-			isRange = this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ),
 			inputNeedsWrap = ( (this.element.is( "input" ) ||
 				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
-					!isRange );
+					!this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ) );
 
 		if ( this.element.prop( "disabled" ) ) {
 			options.disabled = true;
@@ -59,10 +57,8 @@ $.widget( "mobile.textinput", {
 
 		$.extend( this, {
 			isSearch: isSearch,
-			isTextarea: isTextarea,
-			isRange: isRange,
 			inputNeedsWrap: inputNeedsWrap
-		});
+		} );
 
 		this._autoCorrect();
 
@@ -73,19 +69,29 @@ $.widget( "mobile.textinput", {
 			if ( isSearch ) {
 				this._searchIcon = this._outer.children( ".ui-textinput-search-icon" );
 			}
+			this._addClasses();
 		}
 
 		this._on( {
 			"focus": "_handleFocus",
 			"blur": "_handleBlur"
-		});
+		} );
 
 	},
 
 	refresh: function() {
-		this.setOptions({
+		this.setOptions( {
 			"disabled" : this.element.is( ":disabled" )
-		});
+		} );
+	},
+
+	_addClasses: function() {
+		if ( this._searchIcon ) {
+			this._addClass( this._searchIcon, "ui-textinput-search-icon" );
+		}
+		this._addClass( this._outer,
+			"ui-textinput ui-textinput-" + ( this.isSearch ? "search" : "text" ),
+			"ui-body-" + ( this.options.theme ? this.options.theme : "inherit" ) );
 	},
 
 	_enhance: function() {
@@ -95,20 +101,20 @@ $.widget( "mobile.textinput", {
 			outer = $( "<div>" );
 			if ( this.isSearch ) {
 				this._searchIcon = $( "<span>" ).appendTo( outer );
-				this._addClass( this._searchIcon, "ui-textinput-search-icon" );
+				$( "<span> </span>" ).appendTo( outer );
 			}
 		} else {
 			outer = this.element;
 		}
 
-		this._addClass( outer, "ui-textinput ui-textinput-" +
-			( this.isSearch ? "search" : "text" ) );
+		this._outer = outer;
 
+		this._addClasses();
+
+		// Now that we're done building up the wrapper, wrap the input in it
 		if ( this.inputNeedsWrap ) {
 			outer.insertBefore( this.element ).append( this.element );
 		}
-
-		this._outer = outer;
 	},
 
 	widget: function() {
@@ -135,28 +141,28 @@ $.widget( "mobile.textinput", {
 	},
 
 	_handleBlur: function() {
-		this._outer.removeClass( $.mobile.focusClass );
+		this._removeClass( this._outer, null, $.mobile.focusClass );
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.enable( true );
 		}
 	},
 
 	_handleFocus: function() {
+
 		// In many situations, iOS will zoom into the input upon tap, this
 		// prevents that from happening
 		if ( this.options.preventFocusZoom ) {
 			$.mobile.zoom.disable( true );
 		}
-		this._outer.addClass( $.mobile.focusClass );
+		this._addClass( this._outer, null, $.mobile.focusClass );
 	},
 
 	_setOptions: function ( options ) {
 		if ( options.theme !== undefined ) {
-			this._outer
-				.removeClass(
-					"ui-body-" + ( this.options.theme === null ? "inherit" : this.options.theme ) )
-				.addClass(
-					"ui-body-" + ( options.theme === null ? "inherit" : options.theme ) );
+			this._removeClass( this._outer, null,
+				"ui-body-" + ( this.options.theme === null ? "inherit" : this.options.theme ) );
+			this._addClass( this._outer, null,
+				"ui-body-" + ( options.theme === null ? "inherit" : options.theme ) );
 		}
 
 		if ( options.disabled !== undefined ) {
@@ -168,6 +174,7 @@ $.widget( "mobile.textinput", {
 
 	_destroy: function() {
 		if ( this.options.enhanced ) {
+			this.classesElementLookup = {};
 			return;
 		}
 		if ( this._searchIcon ) {
@@ -177,9 +184,9 @@ $.widget( "mobile.textinput", {
 			this.element.unwrap();
 		}
 	}
-});
+} );
 
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
