@@ -13,12 +13,12 @@ define( [
 
 	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
-			classes: {},
-			autogrow:true,
+			autogrow: true,
 			keyupTimeoutBuffer: 100
 		},
 
 		_create: function() {
+			this.isTextarea = ( this.element[ 0 ].nodeName.toLowerCase() === "textarea" );
 			this._super();
 
 			if ( this.options.autogrow && this.isTextarea ) {
@@ -27,14 +27,14 @@ define( [
 		},
 
 		_autogrow: function() {
-			this._addClass( this.element, "ui-textinput-autogrow" );
+			this._addClass( "ui-textinput-autogrow" );
 
-			this._on({
+			this._on( {
 				"keyup": "_timeout",
 				"change": "_timeout",
 				"input": "_timeout",
 				"paste": "_timeout"
-			});
+			} );
 
 			// Attach to the various you-have-become-visible notifications that the
 			// various framework elements emit.
@@ -46,7 +46,7 @@ define( [
 				"popupbeforeposition": "_handleShow",
 				"updatelayout": "_handleShow",
 				"panelopen": "_handleShow"
-			});
+			} );
 		},
 
 		// Synchronously fix the widget height if this widget's parents are such
@@ -61,11 +61,11 @@ define( [
 				this.element.is( ":visible" ) ) {
 
 				if ( event.type !== "popupbeforeposition" ) {
-					this._addClass( this.element, "ui-textinput-autogrow-resize" );
+					this._addClass( "ui-textinput-autogrow-resize" );
 					this.element
 						.animationComplete(
 							$.proxy( function() {
-								this._removeClass( this.element, "ui-textinput-autogrow-resize" );
+								this._removeClass( "ui-textinput-autogrow-resize" );
 							}, this ),
 						"transition" );
 				}
@@ -73,8 +73,10 @@ define( [
 			}
 		},
 
-		_unbindAutogrow: function() {
-			this._removeClass( this.element, "ui-textinput-autogrow" );
+		_unbindAutogrow: function( removeClass ) {
+			if ( removeClass ) {
+				this._removeClass( "ui-textinput-autogrow" );
+			}
 			this._off( this.element, "keyup change input paste" );
 			this._off( this.document,
 				"pageshow popupbeforeposition updatelayout panelopen" );
@@ -105,11 +107,11 @@ define( [
 
 			// IE8 textareas have the onpage property - others do not
 			if ( !( "onpage" in this.element[ 0 ] ) ) {
-				this.element.css({
+				this.element.css( {
 					"height": 0,
 					"min-height": 0,
 					"max-height": 0
-				});
+				} );
 			}
 
 			scrollHeight = this.element[ 0 ].scrollHeight;
@@ -133,11 +135,11 @@ define( [
 				height += paddingHeight;
 			}
 
-			this.element.css({
+			this.element.css( {
 				"height": height,
 				"min-height": "",
 				"max-height": ""
-			});
+			} );
 
 			this.window.scrollTop( scrollTop );
 		},
@@ -156,13 +158,18 @@ define( [
 				if ( options.autogrow ) {
 					this._autogrow();
 				} else {
-					this._unbindAutogrow();
+					this._unbindAutogrow( true );
 				}
 			}
+		},
+
+		_destroy: function() {
+			this._unbindAutogrow( false );
+			return this._superApply( arguments );
 		}
 
-	});
-})( jQuery );
+	} );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
