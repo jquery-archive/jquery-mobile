@@ -8,46 +8,41 @@
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
-	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 	<script src="../../../external/qunit/qunit.js"></script>
+	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
 		( function( $, undefined ) {
+			$.mobileBackcompat = false;
 			// Set the default transition to "fade" if specified in the query
 			if ( !!~location.search.indexOf( "setFadeTransition" ) ) {
 				$( document ).one( "mobileinit", function() {
 					$.mobile.popup.prototype.options.transition = "fade";
-				});
+				} );
 			}
-		})( jQuery );
+		} )( jQuery );
 	</script>
 	<script>
-		$.testHelper.asyncLoad([
-			[
-				"widgets/popup",
-			],
+		$.testHelper.asyncLoad( [
+			[ "widgets/popup" ],
 			[ "init" ],
-			[
-				"popup_core.js"
-			]
-		]);
+			[ "popup_core.js" ]
+		] );
 	</script>
-
-	<script src="../../swarminject.js"></script>
 </head>
 <body>
 	<div id="qunit"></div>
 
-	<div data-nstest-role="page" id="start-page">
-		<div data-nstest-role="content" id="page-content">
-			<div data-nstest-role="popup" id="test-popup">
+	<div data-ui-role="page" id="start-page">
+		<div class="ui-content" id="page-content">
+			<div data-ui-role="popup" id="test-popup">
 				<p>This is the test popup</p>
 			</div>
-			<div data-nstest-role="popup" id="tolerance-test">
+			<div data-ui-role="popup" id="tolerance-test">
 				<p>Tolerance test popup</p>
 			</div>
 		</div>

@@ -137,6 +137,13 @@ $.mobile.browser.oldIE = ( function() {
 
 	return v > 4 ? v : !v;
 } )();
+$.mobile.browser.newIEMobile = ( function() {
+	var div = document.createElement( "div" );
+	return ( ( !$.mobile.browser.oldIE ) &&
+		"onmsgesturehold" in div &&
+		"ontouchstart" in div &&
+		"onpointerdown" in div );
+} )();
 
 function fixedPosition() {
 	var w = window,

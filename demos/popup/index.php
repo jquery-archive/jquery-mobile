@@ -43,8 +43,8 @@
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu <span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search <span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -68,7 +68,7 @@
 		<h2>Tooltip</h2>
 		<p>A tooltip can be created by adding a theme swatch to a basic popup and adding padding via the <code>ui-content</code> class. Here we also show how you can custom style the tooltip button.</p>
 		<div data-demo-html="true" data-demo-css="#tooltip-button">
-			<p>A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup" data-transition="pop" class="my-tooltip-button ui-button ui-alt-icon ui-nodisc-icon ui-button-inline ui-button-icon-only" title="Learn more">Learn more</a><span class="ui-icon ui-icon-info"></span></p>
+			<p>A paragraph with a tooltip. <a href="#popupInfo" data-rel="popup" data-transition="pop" class="my-tooltip-button ui-button ui-alt-icon ui-nodisc-icon ui-button-inline ui-button-icon-only" title="Learn more">Learn more <span class="ui-icon ui-icon-info"></span></a></p>
 
 			<div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width:350px;">
 	          <p>Here is a <strong>tiny popup</strong> being used like a tooltip. The text will wrap to multiple lines as needed.</p>
@@ -84,20 +84,20 @@
 			<a href="#popupNYC" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="../_assets/img/newyork.jpg" alt="New York, USA" style="width:30%"></a>
 
 			<div data-role="popup" id="popupParis" data-overlay-theme="b" data-theme="b" data-corners="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close</a><span class="ui-icon ui-icon-delete"></span><img class="popphoto" src="../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/paris.jpg" style="max-height:512px;" alt="Paris, France">
 			</div>
 			<div data-role="popup" id="popupSydney" data-overlay-theme="b" data-theme="b" data-corners="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close</a><span class="ui-icon ui-icon-delete"></span><img class="popphoto" src="../_assets/img/sydney.jpg" style="max-height:512px;" alt="Sydney, Australia">
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/sydney.jpg" style="max-height:512px;" alt="Sydney, Australia">
 			</div>
 			<div data-role="popup" id="popupNYC" data-overlay-theme="b" data-theme="b" data-corners="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close</a><span class="ui-icon ui-icon-delete"></span><img class="popphoto" src="../_assets/img/newyork.jpg" style="max-height:512px;" alt="New York, USA">
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a><img class="popphoto" src="../_assets/img/newyork.jpg" style="max-height:512px;" alt="New York, USA">
 			</div>
 		</div><!--/demo-html -->
 
 		<h2>Menu</h2>
 		<p>A menu can be created by adding a <a href="../listview/">listview</a> inside a popup.</p>
 		<div data-demo-html="true">
-			<a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-a">Actions...<span class="ui-icon ui-icon-gear"></span></a>
+			<a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-a">Actions... <span class="ui-icon ui-icon-gear"></span></a>
 
 			<div data-role="popup" id="popupMenu" data-theme="b">
 					<ul data-role="listview" data-inset="true" style="min-width:210px;">
@@ -113,7 +113,7 @@
 		<h2>Nested menu</h2>
 		<p>A nested menu can be created by placing <a href="../listview/">listview</a> into an <a href="../collapsible/">collapsible</a> inside a popup.</p>
 		<div data-demo-html="true">
-			<a href="#popupNested" data-rel="popup" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-b" data-transition="pop">Choose a creature...<span class="ui-icon ui-icon-bars"></span></a>
+			<a href="#popupNested" data-rel="popup" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-b" data-transition="pop">Choose a creature... <span class="ui-icon ui-icon-bars"></span></a>
 
 			<div data-role="popup" id="popupNested" data-theme="none">
 				<div data-role="collapsibleset" data-theme="b" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
@@ -160,7 +160,7 @@
 		<h2>Form</h2>
 		<p>You can place a form inside a popup. When it opens, focus will be restricted to elements inside the popup.</p>
 		<div data-demo-html="true">
-			<a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-a" data-transition="pop">Sign in<span class="ui-icon ui-icon-check"></span></a>
+			<a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-a" data-transition="pop">Sign in <span class="ui-icon ui-icon-check"></span></a>
 
 			<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
 				<form>
@@ -172,7 +172,7 @@
 				        <label for="pw" class="ui-hidden-accessible">Password:</label>
 				        <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a">
 
-				    	<button type="submit" class="ui-button ui-corner-all ui-shadow ui-button-b">Sign in<span class="ui-icon ui-icon-check"></span></button>
+						<button type="submit" class="ui-button ui-corner-all ui-shadow ui-button-b">Sign in <span class="ui-icon ui-icon-check"></span></button>
 					</div>
 				</form>
 			</div>
@@ -181,7 +181,7 @@
 		<h2>Dialog</h2>
 		<p>Standard dialog markup can be placed into a popup. To create a modal style dialog, add the <code>data-dismissible="false"</code> attribute to the popup to prevent the click-outside-to-close behavior so people need to interact with popup buttons to close it.</p>
 		<div data-demo-html="true">
-			<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-b">Delete page...<span class="ui-icon ui-icon-delete"></span></a>
+			<a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-button-b">Delete page... <span class="ui-icon ui-icon-delete"></span></a>
 
 			<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
 				<div data-role="header" data-theme="a">
@@ -216,17 +216,17 @@
 			<a href="#popupUndismissible" data-rel="popup" class="ui-button ui-corner-all ui-shadow ui-button-inline">Undismissible Popup</a>
 
 			<div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close<span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>
 			<p>I have a close button at the top right corner with simple HTML markup.</p>
 			</div>
 
 			<div data-role="popup" id="popupCloseLeft" class="ui-content" style="max-width:280px">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-left">Close<span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-left">Close <span class="ui-icon ui-icon-delete"></span></a>
 			<p>I have a close button at the top left corner with simple HTML markup.</p>
 			</div>
 
 			<div data-role="popup" id="popupUndismissible" class="ui-content" style="max-width:280px" data-dismissible="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-left">Close<span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-left">Close <span class="ui-icon ui-icon-delete"></span></a>
 			<p>I have the <code>data-dismissible</code> attribute set to <code>false</code>. I'm not closeable by clicking outside of me.</p>
 			</div>
 		</div><!--/demo-html -->
@@ -284,7 +284,7 @@
 
 			<a href="#transparent" data-rel="popup" class="ui-button ui-corner-all ui-shadow ui-button-inline">Theme "none", no shadow</a>
 			<div id="transparent" data-role="popup" data-theme="none" data-shadow="false">
-				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close<span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-a ui-button-icon-only ui-button-right">Close <span class="ui-icon ui-icon-delete"></span></a>
 			  <img src="../_assets/img/firefox-logo.png" class="popphoto" alt="firefox logo on a transparent popup" height="300" width="300">
 			</div>
 
@@ -313,7 +313,7 @@
 		<h2>Pre-rendered markup</h2>
 		<p>You can supply pre-rendered popup markup to save startup time. The page in the example below contains a popup with pre-rendered markup supplied as part of the original page markup.</p>
 			<div data-demo-html="#pre-rendered-page">
-				<a href="#pre-rendered-page" class="ui-button ui-corner-all ui-shadow" data-mini="true" data-inline="true">Go to demo<span class="ui-icon ui-icon-arrow-r"></span></a>
+				<a href="#pre-rendered-page" class="ui-button ui-corner-all ui-shadow" data-mini="true" data-inline="true">Go to demo <span class="ui-icon ui-icon-arrow-r"></span></a>
 			</div>
 
 	</div><!-- /content -->
