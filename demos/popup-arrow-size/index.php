@@ -161,8 +161,8 @@ $.mobile.document
 	<div data-role="header" class="jqm-header">
 		<h2><a href="../" title="jQuery Mobile Demos home"><img src="../_assets/img/jquery-logo.png" alt="jQuery Mobile"></a></h2>
 		<p><span class="jqm-version"></span> Demos</p>
-		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu<span class="ui-icon ui-icon-bars"></span></a>
-		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search<span class="ui-icon ui-icon-search"></span></a>
+		<a href="#" class="jqm-navmenu-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-left">Menu <span class="ui-icon ui-icon-bars"></span></a>
+		<a href="#" class="jqm-search-link ui-button ui-button-icon-only ui-corner-all ui-nodisc-icon ui-alt-icon ui-button-right">Search <span class="ui-icon ui-icon-search"></span></a>
 	</div><!-- /header -->
 
 	<div role="main" class="ui-content jqm-content">
@@ -171,11 +171,10 @@ $.mobile.document
 		<div style="padding: 100px;">
 			<div style="position: static;" class="ui-popup-container ui-popup-active">
 				<div class="ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all">
-				<p>This is what a popup would look like.</p>
-				<p>It contains multiple paragraphs.</p>
-				<p>Note that large arrows may not be displayed at all.</p>
-				<p>This is because their sides would "stick out" of the popup.</p>
-				<p>The arrow placement code prevents this.</p>
+				<p>This is a preview of what a popup with an arrow would look like.</p>
+				<p>It contains multiple paragraphs to increase its height.</p>
+				<p>Note that in a real popup only one arrow will be displayed at a time, and large arrows may not be displayed at all.</p>
+				<p>This is because the arrow placement code prevents arrow sides from "sticking out" of the popup.</p>
 					<div id="exampleArrow-l" class="ui-popup-arrow-container ui-popup-arrow-l">
 						<div class="ui-popup-arrow ui-body-inherit ui-overlay-shadow"></div>
 					</div>

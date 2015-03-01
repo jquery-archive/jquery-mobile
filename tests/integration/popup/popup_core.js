@@ -7,7 +7,7 @@ var urlObject = $.mobile.path.parseLocation(),
 	home = urlObject.pathname + urlObject.search,
 	originalAnimationComplete = $.fn.animationComplete,
 	animationCompleteCallCount = 0,
-	opensAndCloses = function( eventNs, popupId, linkSelector, contentSelector ) {
+	opensAndCloses = function( assert, eventNs, popupId, linkSelector, contentSelector ) {
 		var popup = $( "#" + popupId ),
 			link = $( linkSelector )[ 0 ];
 
@@ -15,37 +15,47 @@ var urlObject = $.mobile.path.parseLocation(),
 
 		$.testHelper.detailedEventCascade( [
 			function() {
-				deepEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
+				strictEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
 					"Popup container does not have attribute tabindex" );
-				deepEqual( link.getAttribute( "aria-haspopup" ), "true", popupId + ": 'aria-haspopup' attribute is set to true on link that opens the popup" );
-				deepEqual( link.getAttribute( "aria-owns" ), popupId, popupId + ": 'aria-owns' attribute is set to the ID of the owned popup ('test-popup')" );
-				deepEqual( link.getAttribute( "aria-expanded" ), "false", popupId + ": 'aria-expanded' attribute is set to false when the popup is not open" );
+				strictEqual( link.getAttribute( "aria-haspopup" ), "true",
+					popupId + ": 'aria-haspopup' is set to true on link that opens the popup" );
+				strictEqual( link.getAttribute( "aria-owns" ), popupId,
+					popupId + ": 'aria-owns' is set to the ID of the owned popup ('test-popup')" );
+				strictEqual( link.getAttribute( "aria-expanded" ), "false",
+					popupId + ": 'aria-expanded' is set to false when the popup is not open" );
 				popup.popup( "open" );
 			},
 
 			{
-				opened: { src: popup, event: "popupafteropen" + eventNs },
-				navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + eventNs }
+				opened: {
+					src: popup,
+					event: "popupafteropen" + eventNs
+				},
+				navigate: {
+					src: $( window ),
+					event: $.event.special.navigate.originalEventName + eventNs
+				}
 			},
 
 			function( result ) {
-				deepEqual( link.getAttribute( "aria-expanded" ), "true", popupId + ": 'aria-expanded' attribute is set to true when the popup is open" );
-				ok( !popup.parent().prev().hasClass( "ui-screen-hidden" ),
+				strictEqual( link.getAttribute( "aria-expanded" ), "true",
+					popupId + ": 'aria-expanded' is set to true when the popup is open" );
+				assert.lacksClasses( popup.parent().prev(), "ui-screen-hidden",
 					popupId + ": Open popup screen is not hidden" );
-				ok( popup.attr( "class" ).match( /( |^)ui-body-([a-z]|inherit)( |$)/ ),
+				assert.hasClassRegex( popup[ 0 ], /( |^)ui-body-([a-z]|inherit)( |$)/,
 					popupId + ": Open popup has a valid theme" );
 
 				popup.popup( "option", "overlayTheme", "a" );
-				ok( popup.parent().prev().hasClass( "ui-overlay-a" ),
+				assert.hasClasses( popup.parent().prev(), "ui-overlay-a",
 					popupId + ": Setting an overlay theme while the popup is open causes " +
 					"the theme to be applied and the screen to be faded in" );
-				ok( popup.parent().prev().hasClass( "in" ),
-					popupId + ": Setting an overlay theme while the popup is open causes " +
-					"the theme to be applied and the screen to be faded in" );
-				ok( popup.parent().hasClass( "ui-popup-active" ),
+				assert.hasClasses( popup.parent().prev(), "in",
+					popupId + ": Setting an " + "overlay theme while the popup is open " +
+					"causes the theme to be applied and the screen to be faded in" );
+				assert.hasClasses( popup.parent(), "ui-popup-active",
 					popupId + ": Open popup has the 'ui-popup-active' class" );
 
-				deepEqual( popup.parent().attr( "tabindex" ), "0",
+				strictEqual( popup.parent().attr( "tabindex" ), "0",
 					"Popup container has attribute tabindex" );
 
 				animationCompleteCallCount = 0;
@@ -53,20 +63,27 @@ var urlObject = $.mobile.path.parseLocation(),
 			},
 
 			{
-				closed: { src: popup, event: "popupafterclose" + eventNs + "2" },
-				navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + eventNs + "2" }
+				closed: {
+					src: popup,
+					event: "popupafterclose" + eventNs + "2"
+				},
+				navigate: {
+					src: $( window ),
+					event: $.event.special.navigate.originalEventName + eventNs + "2"
+				}
 			},
 
 			function( result ) {
-				deepEqual( animationCompleteCallCount, 1, "animationComplete called only once" );
-				deepEqual( link.getAttribute( "aria-expanded" ), "false", "'aria-expanded' attribute is set to false when the popup is not open" );
-				ok( !popup.parent().hasClass( "in" ),
+				strictEqual( animationCompleteCallCount, 1, "animationComplete called only once" );
+				strictEqual( link.getAttribute( "aria-expanded" ), "false",
+					"'aria-expanded' attribute is set to false when the popup is not open" );
+				assert.lacksClasses( popup.parent(), "in",
 					"Closed popup container does not have class 'in'" );
-				ok( popup.parent().prev().hasClass( "ui-screen-hidden" ),
+				assert.hasClasses( popup.parent().prev(), "ui-screen-hidden",
 					"Closed popup screen is hidden" );
-				ok( !popup.parent().hasClass( "ui-popup-active" ),
-					"Open popup dos not have the 'ui-popup-active' class" );
-				deepEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
+				assert.lacksClasses( popup.parent(), "ui-popup-active",
+					"Open popup does not have the 'ui-popup-active' class" );
+				strictEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
 					"Popup container does not have attribute tabindex" );
 			},
 
@@ -144,14 +161,16 @@ asyncTest( "Popup does not go back in history twice when opening on separate pag
 			pagechange: { src: $.mobile.pageContainer, event: "pagechange" + eventNs + "1" }
 		},
 		function() {
-			deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Reached another page" );
+			strictEqual( $.mobile.activePage.attr( "id" ), "another-page",
+				"Reached another page" );
 			$( "#open-back-twice-test-popup" ).click();
 		},
 		{
 			popupafteropen: { src: popup, event: "popupafteropen" + eventNs + "2" }
 		},
 		function( result ) {
-			deepEqual( result.popupafteropen.timedOut, false, "popupafteropen event did arrive" );
+			strictEqual( result.popupafteropen.timedOut, false,
+				"popupafteropen event did arrive" );
 			$( "#back-twice-test-popup-screen" ).click();
 		},
 		{
@@ -159,54 +178,75 @@ asyncTest( "Popup does not go back in history twice when opening on separate pag
 			pagechange: { src: $( document ), event: "pagechange" + eventNs + "3" }
 		},
 		function( result ) {
-			deepEqual( result.popupafterclose.timedOut, false, "popupafterclose event did arrive" );
-			deepEqual( result.pagechange.timedOut, true, "pagechange event did not arrive" );
-			deepEqual( $.mobile.activePage.attr( "id" ), "another-page", "Back to another page" );
+			strictEqual( result.popupafterclose.timedOut, false,
+				"popupafterclose event did arrive" );
+			strictEqual( result.pagechange.timedOut, true, "pagechange event did not arrive" );
+			strictEqual( $.mobile.activePage.attr( "id" ), "another-page",
+				"Back to another page" );
 			$.mobile.back();
 		},
 		{
 			pagechange: { src: $( document ), event: "pagechange" + eventNs + "4" }
 		},
 		function( result ) {
-			deepEqual( result.pagechange.timedOut, false, "pagechange event did arrive" );
-			deepEqual( $.mobile.activePage.attr( "id" ), "start-page", "Back to start page" );
+			strictEqual( result.pagechange.timedOut, false, "pagechange event did arrive" );
+			strictEqual( $.mobile.activePage.attr( "id" ), "start-page", "Back to start page" );
 			start();
 		}
 	] );
 } );
 
-asyncTest( "Popup opens and closes", function() {
-	opensAndCloses( ".opensandcloses", "test-popup", "a#open-test-popup", "#test-popup p" );
+asyncTest( "Popup opens and closes", function( assert ) {
+	opensAndCloses( assert, ".opensandcloses", "test-popup", "a#open-test-popup",
+		"#test-popup p" );
 } );
 
-asyncTest( "Already-enhanced popup opens and closes", function() {
-	opensAndCloses( ".alreadyenhancedopensandcloses", "already-enhanced", "a#open-already-enhanced", "#already-enhanced p" );
+asyncTest( "Already-enhanced popup opens and closes", function( assert ) {
+	opensAndCloses( assert, ".alreadyenhancedopensandcloses", "already-enhanced",
+		"a#open-already-enhanced", "#already-enhanced p" );
 } );
 
-asyncTest( "Link that launches popup is deactivated", function() {
+asyncTest( "Link that launches popup is deactivated", function( assert ) {
 
-	expect( 4 );
+	expect( 5 );
 
 	$.testHelper.detailedEventCascade( [
 		function() {
 			$( "a#open-test-popup" ).click();
+			assert.hasClasses( $( "a#open-test-popup" ).closest( ".ui-button" ),
+				"ui-button-active",
+				"Active class added in response to click" );
 		},
 
 		{
-			opened: { src: $( "#test-popup" ), event: "popupafteropen.linkActiveTestStep1" },
-			navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + ".linkActive" },
+			opened: {
+				src: $( "#test-popup" ),
+				event: "popupafteropen.linkActiveTestStep1"
+			},
+			navigate: {
+				src: $( window ),
+				event: $.event.special.navigate.originalEventName + ".linkActive"
+			},
 			timeout: { length: 1000 }
 		},
 
 		function( result ) {
 			ok( !result.opened.timedOut, "Opening a popup did cause 'opened' event" );
-			ok( !$( "a#open-test-popup" ).closest( ".ui-button" ).hasClass( "ui-button-active" ), "Opening a popup removes active class from link that launched it" );
+			assert.lacksClasses( $( "a#open-test-popup" ).closest( ".ui-button" ),
+				"ui-button-active",
+				"Opening a popup removes active class from link that launched it" );
 			$( "#test-popup" ).popup( "close" );
 		},
 
 		{
-			closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep2" },
-			navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + ".linkActive2" }
+			closed: {
+				src: $( "#test-popup" ),
+				event: "popupafterclose.linkActiveTestStep2"
+			},
+			navigate: {
+				src: $( window ),
+				event: $.event.special.navigate.originalEventName + ".linkActive2"
+			}
 		},
 
 		function( result ) {
@@ -219,13 +259,22 @@ asyncTest( "Link that launches popup is deactivated", function() {
 		},
 
 		function( result ) {
-			ok( !$( "a#open-xyzzy-popup" ).closest( ".ui-button" ).hasClass( "ui-button-active" ), "Opening a non-existing popup removes active class from link that attempted to launch it" );
+			assert.lacksClasses( $( "a#open-xyzzy-popup" ).closest( ".ui-button" ),
+				"ui-button-active",
+				"Opening a non-existing popup removes active class from link that attempted " +
+				"to launch it" );
 			$( "a#open-test-popup-li-link" ).click();
 		},
 
 		{
-			opened: { src: $( "#test-popup" ), event: "popupafteropen.linkActiveTestStep4" },
-			navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + ".linkActive4" }
+			opened: {
+				src: $( "#test-popup" ),
+				event: "popupafteropen.linkActiveTestStep4"
+			},
+			navigate: {
+				src: $( window ),
+				event: $.event.special.navigate.originalEventName + ".linkActive4"
+			}
 		},
 
 		function() {
@@ -233,8 +282,14 @@ asyncTest( "Link that launches popup is deactivated", function() {
 		},
 
 		{
-			closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep4" },
-			navigate: { src: $( window ), event: $.event.special.navigate.originalEventName + ".linkActive4" },
+			closed: {
+				src: $( "#test-popup" ),
+				event: "popupafterclose.linkActiveTestStep4"
+			},
+			navigate: {
+				src: $( window ),
+				event: $.event.special.navigate.originalEventName + ".linkActive4"
+			},
 			timeout: { length: 500 }
 		},
 
@@ -268,9 +323,13 @@ asyncTest( "Popup interacts correctly with hashchange", function() {
 		},
 
 		function( result ) {
-			ok( !result.hashchange.timedOut, "Opening a popup from a non-dialogHashKey location causes a hashchange event" );
-			equal( decodeURIComponent( location.href ), baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey, "location.href has been updated correctly" );
-			ok( $.mobile.navigate.history.activeIndex === activeIndex + 1, "$.mobile.navigate.history has been advanced correctly" );
+			ok( !result.hashchange.timedOut,
+				"Opening a popup from a non-dialogHashKey location causes a hashchange event" );
+			equal( decodeURIComponent( location.href ),
+				baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey,
+				"location.href has been updated correctly" );
+			ok( $.mobile.navigate.history.activeIndex === activeIndex + 1,
+				"$.mobile.navigate.history has been advanced correctly" );
 			$( "#test-popup" ).popup( "close" );
 		},
 
@@ -279,8 +338,10 @@ asyncTest( "Popup interacts correctly with hashchange", function() {
 		},
 
 		function( result ) {
-			ok( decodeURIComponent( location.href ) === baseUrl, "location.href has been restored after the popup" );
-			ok( $.mobile.navigate.history.activeIndex === activeIndex, "$.mobile.navigate.history has been restored correctly" );
+			ok( decodeURIComponent( location.href ) === baseUrl,
+				"location.href has been restored after the popup" );
+			ok( $.mobile.navigate.history.activeIndex === activeIndex,
+				"$.mobile.navigate.history has been restored correctly" );
 		},
 
 		{ timeout: { length: 500 } },
@@ -290,84 +351,97 @@ asyncTest( "Popup interacts correctly with hashchange", function() {
 
 // This test assumes that the popup opens into a state that does not include dialogHashKey.
 // This should be the case if the previous test has cleaned up correctly.
-asyncTest( "Opening another page from the popup leaves no trace of the popup in history", function() {
-	var initialActive = $.extend( {}, {}, $.mobile.navigate.history.getActive() ),
-		initialHRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) ),
-		initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority + initialHRef.directory,
-		$popup = $( "#test-popup" );
+asyncTest( "Opening another page from the popup leaves no trace of the popup in history",
+	function() {
+		var initialActive = $.extend( {}, {}, $.mobile.navigate.history.getActive() ),
+			initialHRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) ),
+			initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority +
+				initialHRef.directory,
+			$popup = $( "#test-popup" );
 
-	if ( !$popup.data( "mobile-popup" ).options.history ) {
-		expect( 1 )
-		ok( true, "hash change disabled" );
-		start();
-		return;
-	}
+		if ( !$popup.data( "mobile-popup" ).options.history ) {
+			expect( 1 )
+			ok( true, "hash change disabled" );
+			start();
+			return;
+		}
 
-	expect( 6 );
+		expect( 6 );
 
-	$.testHelper.detailedEventCascade( [
-		function() {
-			$( "#test-popup" ).popup( "open" );
-		},
+		$.testHelper.detailedEventCascade( [
+			function() {
+				$( "#test-popup" ).popup( "open" );
+			},
 
-		{
-			opened: { src: $( "#test-popup" ), event: "popupafteropen.anotherPageStep1" },
-			hashchange: { src: $( window ), event: "hashchange.anotherPageStep1" }
-		},
+			{
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.anotherPageStep1" },
+				hashchange: { src: $( window ), event: "hashchange.anotherPageStep1" }
+			},
 
-		function() {
-			$( "#test-popup a" ).click();
-		},
+			function() {
+				$( "#test-popup a" ).click();
+			},
 
-		{
-			closed: { src: $( "#test-popup" ), event: "popupafterclose.anotherPageStep2" },
-			hashchange: { src: $( window ), event: "hashchange.anotherPageStep2" }
-		},
+			{
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.anotherPageStep2" },
+				hashchange: { src: $( window ), event: "hashchange.anotherPageStep2" }
+			},
 
-		function( result ) {
-			var hRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) );
-			ok( !result.closed.timedOut, "Popup closed" );
-			ok( !result.hashchange.timedOut, "hashchange did occur" );
-			ok( decodeURIComponent( location.href ) === initialBase + hRef.filename, "New location is exactly the previous location (up to and including path) and the new filename" );
-			window.history.back();
-		},
+			function( result ) {
+				var hRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) );
+				ok( !result.closed.timedOut, "Popup closed" );
+				ok( !result.hashchange.timedOut, "hashchange did occur" );
+				ok( decodeURIComponent( location.href ) === initialBase + hRef.filename,
+					"New location is exactly the previous location (up to and including path) " +
+					"and the new filename" );
+				window.history.back();
+			},
 
-		{
-			hashchange: { src: $( window ), event: $.event.special.navigate.originalEventName + ".anotherPageStep3" },
-			pagechange: { src: $.mobile.pageContainer, event: "pagechange.anotherPageStep3" }
-		},
-
-		function( result ) {
-			var active = $.mobile.navigate.history.getActive(),
-				identical = true;
-
-			$.each( initialActive, function( key, value ) {
-				if ( active[ key ] !== value ) {
-					identical = false;
-					return false;
+			{
+				hashchange: {
+					src: $( window ),
+					event: $.event.special.navigate.originalEventName + ".anotherPageStep3"
+				},
+				pagechange: {
+					src: $.mobile.pageContainer,
+					event: "pagechange.anotherPageStep3"
 				}
-			} );
+			},
 
-			if ( identical ) {
-				$.each( active, function( key, value ) {
-					if ( initialActive[ key ] !== value ) {
+			function( result ) {
+				var active = $.mobile.navigate.history.getActive(),
+					identical = true;
+
+				$.each( initialActive, function( key, value ) {
+					if ( active[ key ] !== value ) {
 						identical = false;
 						return false;
 					}
 				} );
-			}
 
+				if ( identical ) {
+					$.each( active, function( key, value ) {
+						if ( initialActive[ key ] !== value ) {
+							identical = false;
+							return false;
+						}
+					} );
+				}
 
-			ok( decodeURIComponent( location.href ) === initialHRef.href, "Going back once places the browser on the initial page" );
-			ok( identical, "Going back returns $.mobile.navigate.history to its initial value" );
-			ok( $.mobile.navigate.history.activeIndex === $.mobile.navigate.history.stack.length - 3, "Going back leaves exactly two entries ahead in $.mobile.navigate.history" );
-		},
+				ok( decodeURIComponent( location.href ) === initialHRef.href,
+					"Going back once places the browser on the initial page" );
+				ok( identical,
+					"Going back returns $.mobile.navigate.history to its initial value" );
+				ok( $.mobile.navigate.history.activeIndex ===
+						$.mobile.navigate.history.stack.length - 3,
+					"Going back leaves exactly two entries ahead in $.mobile.navigate.history" );
+			},
 
-		{ timeout: { length: 500 } },
+			{ timeout: { length: 500 } },
 
-		start
-	] );
-} );
+			start
+		] );
+	} );
 
 // The test below adds an input, gives it focus, then opens the popup,
 // and makes sure the input has been blurred.
@@ -392,7 +466,7 @@ asyncTest( "Popup assures previous element is blurred", function() {
 		function( result ) {
 			deepEqual( document.activeElement, textinput[ 0 ],
 				"Textinput focused before popup is opened" );
-			deepEqual( result.focus.timedOut, false );
+			strictEqual( result.focus.timedOut, false );
 			popup.popup( "open" );
 		},
 
@@ -403,7 +477,8 @@ asyncTest( "Popup assures previous element is blurred", function() {
 
 		function( result ) {
 			ok( !result.opened.timedOut, "popup emitted 'popupafteropen'" );
-			deepEqual( result.blur.timedOut, false, "The blur event is fired after the popup opens" );
+			strictEqual( result.blur.timedOut, false,
+				"The blur event is fired after the popup opens" );
 
 			// Try to focus on the textinput again
 			textinput.focus();
@@ -414,8 +489,8 @@ asyncTest( "Popup assures previous element is blurred", function() {
 		},
 
 		function( result ) {
-			deepEqual( result.focus.timedOut, false, "Focus event received" );
-			deepEqual( document.activeElement === textinput[ 0 ], false,
+			strictEqual( result.focus.timedOut, false, "Focus event received" );
+			strictEqual( document.activeElement === textinput[ 0 ], false,
 				"An input outside the popup does not receive focus while the popup is open" );
 			popup.popup( "close" );
 		},
@@ -461,7 +536,7 @@ asyncTest( "Popup doesn't alter the url when the history option is disabled", fu
 	] );
 } );
 
-asyncTest( "Navigating away from the popup page closes the popup without history enabled", function() {
+asyncTest( "Navigating away from the popup page closes the no-history popup", function() {
 	var $popup = $( "#test-history-popup" );
 
 	expect( 3 );
@@ -579,7 +654,9 @@ asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", fun
 		},
 
 		function( results ) {
-			ok( !results.popupafteropen.timedOut, "The popup has emitted a 'popupafteropen' event" );
+			ok( !results.popupafteropen.timedOut,
+				"The popup has emitted a 'popupafteropen' event" );
+
 			// Click on popup screen
 			$popup.parent().prev().click();
 		},
@@ -589,7 +666,8 @@ asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", fun
 		},
 
 		function( results ) {
-			ok( results.popupafterclose.timedOut, "The popup has not emitted a 'popupafterclose' event" );
+			ok( results.popupafterclose.timedOut,
+				"The popup has not emitted a 'popupafterclose' event" );
 			$.mobile.back();
 		},
 
@@ -598,7 +676,8 @@ asyncTest( "Cannot close a non-dismissible popup by clicking on the screen", fun
 		},
 
 		function( results ) {
-			ok( !results.popupafterclose.timedOut, "The popup has emitted a 'popupafterclose' event" );
+			ok( !results.popupafterclose.timedOut,
+				"The popup has emitted a 'popupafterclose' event" );
 			start();
 		}
 	] );
@@ -621,66 +700,72 @@ asyncTest( "Elements inside the popup lose focus when the popup is closed", func
 			popupafteropen: { src: $popup, event: "popupafteropen" + eventSuffix + "1" }
 		},
 		function( result ) {
-			deepEqual( result.popupafteropen.timedOut, false, "Popup did open" );
+			strictEqual( result.popupafteropen.timedOut, false, "Popup did open" );
 			$textBox.focus();
 		},
 		{
 			focusevent: { src: $textBox, event: "focus" + eventSuffix + "2" }
 		},
 		function( result ) {
-			deepEqual( result.focusevent.timedOut, false, "Text box did experience focus event" );
+			strictEqual( result.focusevent.timedOut, false, "Text box did get focus event" );
 			$popup.popup( "close" );
 		},
 		{
 			popupafterclose: { src: $popup, event: "popupafterclose" + eventSuffix + "3" }
 		},
 		function( result ) {
-			deepEqual( result.popupafterclose.timedOut, false, "Popup did close" );
-			deepEqual( $popupContainer.is( ":focus" ), false, "The popup container is not focused" );
-			deepEqual( $popupContainer.find( ":focus" ).length, 0, "The popup container contains no focused elements" );
+			strictEqual( result.popupafterclose.timedOut, false, "Popup did close" );
+			strictEqual( $popupContainer.is( ":focus" ), false,
+				"The popup container is not focused" );
+			strictEqual( $popupContainer.find( ":focus" ).length, 0,
+				"The popup container contains no focused elements" );
 			start();
 		}
 	] );
 } );
 
-asyncTest( "A popup is closed when it becomes disabled, and cannot be opened while it is disabled", function() {
-	var $popup = $( "#disabled-popup" ),
-		$link = $( "a#open-disabled-popup" ),
-		eventNs = ".apopupisclosedwhendisabled";
+asyncTest( "A popup is closed when it becomes disabled, and cannot be opened while it is disabled",
+	function() {
+		var $popup = $( "#disabled-popup" ),
+			$link = $( "a#open-disabled-popup" ),
+			eventNs = ".apopupisclosedwhendisabled";
 
-	expect( 3 );
+		expect( 3 );
 
-	$.testHelper.detailedEventCascade( [
-		function() {
-			$link.click();
-		},
+		$.testHelper.detailedEventCascade( [
+			function() {
+				$link.click();
+			},
 
-		{
-			popupafteropen: { src: $popup, event: "popupafteropen" + eventNs + "1" }
-		},
+			{
+				popupafteropen: { src: $popup, event: "popupafteropen" + eventNs + "1" }
+			},
 
-		function( result ) {
-			deepEqual( result.popupafteropen.timedOut, false, "Received 'popupafteropen' event" );
-			$popup.popup( "disable" );
-		},
+			function( result ) {
+				strictEqual( result.popupafteropen.timedOut, false,
+					"Received 'popupafteropen' event" );
+				$popup.popup( "disable" );
+			},
 
-		{
-			popupafterclose: { src: $popup, event: "popupafterclose" + eventNs + "2" }
-		},
+			{
+				popupafterclose: { src: $popup, event: "popupafterclose" + eventNs + "2" }
+			},
 
-		function( result ) {
-			deepEqual( result.popupafterclose.timedOut, false, "Received 'popupafterclose' event after calling disable()" );
-			$link.click();
-		},
+			function( result ) {
+				strictEqual( result.popupafterclose.timedOut, false,
+					"Received 'popupafterclose' event after calling disable()" );
+				$link.click();
+			},
 
-		{
-			popupafteropen: { src: $popup, event: "popupafteropen" + eventNs + "3" }
-		},
+			{
+				popupafteropen: { src: $popup, event: "popupafteropen" + eventNs + "3" }
+			},
 
-		function( result ) {
-			deepEqual( result.popupafteropen.timedOut, true, "Did not receive 'popupafteropen' when opening a disabled popup" );
-			start();
-		}
-	] );
-} );
+			function( result ) {
+				strictEqual( result.popupafteropen.timedOut, true,
+					"Did not receive 'popupafteropen' when opening a disabled popup" );
+				start();
+			}
+		] );
+	} );
 } )( jQuery );

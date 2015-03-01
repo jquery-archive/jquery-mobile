@@ -3,40 +3,37 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Popup Repositioning Test Suite</title>
+	<title>jQuery Mobile Popup Test Suite</title>
 
 	<script src="../../../external/requirejs/require.js"></script>
 	<script src="../../../js/requirejs.config.js"></script>
 	<script src="../../../js/jquery.tag.inserter.js"></script>
+	<script src="../../jquery.setNameSpace.js"></script>
 	<script src="../../../tests/jquery.testHelper.js"></script>
 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 	<script src="../../../external/qunit/qunit.js"></script>
-	<script>
-		( function( $ ) {
-			$.mobileBackcompat = false;
-		} )( jQuery );
-	</script>
+	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
 		$.testHelper.asyncLoad( [
-			[ "widgets/popup" ],
+			[ "widgets/popup.arrow.backcompat" ],
 			[ "init" ],
-			[ "popup_repositioning_core.js" ]
+			[ "backcompat_core.js" ]
 		] );
 	</script>
-
-	<script src="../../swarminject.js"></script>
 </head>
 <body>
 	<div id="qunit"></div>
-	<div data-ui-role="page">
-		<div class="ui-content">
-			<div data-ui-role="popup" id="test-popup">
-				<p>This is the test popup</p>
+
+	<div data-nstest-role="page" id="start-page">
+		<div class="ui-content" id="page-content">
+			<div data-nstest-arrow="true" data-nstest-role="popup" id="backcompat-test">
+				<p>A popup</a>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

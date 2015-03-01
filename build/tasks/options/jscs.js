@@ -35,12 +35,19 @@ module.exports = {
 			"js/widgets/enhancer.js",
 			"js/widgets/enhancer.backcompat.js",
 			"js/degradeInputs.js",
+			"js/widgets/popup.arrow.backcompat.js",
+			"js/widgets/popup.arrow.js",
+			"js/widgets/popup.backcompat.js",
+			"js/widgets/popup.js",
 
 			// Tests
 			"tests/unit/textinput/settings.js",
 			"tests/unit/textinput/textinput_core.js",
 			"tests/unit/degrade-inputs/degradeInputs.js",
-			"tests/unit/enhancer/enhancer.js"
+			"tests/unit/enhancer/enhancer.js",
+			"tests/integration/popup/popup_core.js",
+			"tests/integration/popup/backcompat_core.js",
+			"tests/unit/popup/popup_core.js"
 		]
 	},
 	tests: {
