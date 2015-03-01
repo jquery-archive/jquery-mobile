@@ -56,6 +56,7 @@
 			"./widgets/fixedToolbar",
 			"./widgets/fixedToolbar.workarounds",
 			"./widgets/popup",
+			"./widgets/popup.backcompat",
 			"./widgets/popup.arrow",
 			"./widgets/panel",
 			"./widgets/table",

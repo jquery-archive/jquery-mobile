@@ -90,11 +90,8 @@ $.widget( "mobile.popup", {
 	version: "@VERSION",
 
 	options: {
-		wrapperClass: null,
 		theme: null,
 		overlayTheme: null,
-		shadow: true,
-		corners: true,
 		transition: "none",
 		positionTo: "origin",
 		tolerance: null,
