@@ -90,6 +90,7 @@ $files = array(
 	'widgets/fixedToolbar.workarounds.js',
 	'widgets/panel.js',
 	'widgets/popup.js',
+	'widgets/popup.backcompat.js',
 	'widgets/popup.arrow.js',
 	'widgets/table.js',
 	'widgets/table.columntoggle.js',
