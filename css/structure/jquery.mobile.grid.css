@@ -101,3 +101,23 @@ li.ui-block-e {
 		float: none; 
 	}
 }
+
+/* colspan-like grid columns */
+.ui-grid-b > .ui-block-span2 {
+  width: 66.6666%;
+}
+.ui-grid-c > .ui-block-span2 {
+  width: 50%;
+}
+.ui-grid-c > .ui-block-span3 {
+  width: 75%;
+}
+.ui-grid-d > .ui-block-span2 {
+  width: 40%;
+}
+.ui-grid-d > .ui-block-span3 {
+  width: 60%;
+}
+.ui-grid-d > .ui-block-span4 {
+  width: 80%;
+}
