@@ -172,14 +172,16 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		show: function( notransition ) {
-			var hideClass = "ui-fixed-hidden",
+			var hideClass = "ui-toolbar-fixed-hidden",
+				self = this,
 				$el = this.element;
 
 			if ( this._useTransition( notransition ) ) {
-				this._removeClass( null, "out " + hideClass );
+				this._removeClass( null, "out" );
+				this._removeClass( hideClass );
 				this._addClass( null, "in" );
-				$el.animationComplete( function () {
-					this._removeClass( null, "in" );
+				$el.animationComplete( function() {
+					self._removeClass( null, "in" );
 				} );
 			}
 			else {
@@ -189,7 +191,8 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		hide: function( notransition ) {
-			var hideClass = "ui-fixed-hidden",
+			var hideClass = "ui-toolbar-fixed-hidden",
+				self = this,
 				$el = this.element,
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
@@ -197,14 +200,14 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			if ( this._useTransition( notransition ) ) {
 				this._addClass( null, outclass );
 				this._removeClass( null, "in" );
-				$el.animationComplete(function() {
-					this._addClass( hideClass );
-					this._removeClass( outclass );
-				});
+				$el.animationComplete( function() {
+					self._addClass( hideClass );
+					self._removeClass( null, outclass );
+				} );
 			}
 			else {
 				this._addClass( hideClass );
-				this._removeClass( outclass );
+				this._removeClass( null, outclass );
 			}
 			this._visible = false;
 		},
