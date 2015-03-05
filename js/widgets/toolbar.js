@@ -42,8 +42,7 @@
 			theme: null,
 			addBackBtn: false,
 			backBtnTheme: null,
-			backBtnText: "Back",
-			classes: {}
+			backBtnText: "Back"
 		},
 
 		_create: function() {
@@ -81,8 +80,8 @@
 				var currentTheme = this.options.theme ? this.options.theme : "inherit",
 					newTheme = o.theme ? o.theme : "inherit";
 
-				this._removeClass( null, "ui-bar-" + currentTheme );
-				this._addClass( null, "ui-bar-" + newTheme );
+				this._removeClass( this.element, null, "ui-bar-" + currentTheme );
+				this._addClass( this.element, null, "ui-bar-" + newTheme );
 			}
 
 		this._super( o );
