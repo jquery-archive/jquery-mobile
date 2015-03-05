@@ -53,18 +53,22 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				this._makeFixed();
 			}
 			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
-				var $page = ( !!this.page )? this.page: ( $(".ui-page-active").length > 0 )? $(".ui-page-active"): $(".ui-page").eq(0);
+				var currentPage = ( !!this.page ) ? 
+					this.page : 
+					( $(".ui-page-active").length > 0 ) ? 
+					$(".ui-page-active") : 
+					$(".ui-page").eq(0);
 
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
 						this._addClass( "ui-toolbar-"+ this.role +"-fullscreen" );
-						this._addClass( $page,  "ui-page-" + this.role + "-fullscreen" );
+						this._addClass( currentPage,  "ui-page-" + this.role + "-fullscreen" );
 					}
 					// If not fullscreen, add class to page to set top or bottom padding
 					else {
 						this._removeClass( "ui-toolbar-"+ this.role +"-fullscreen" );
-						this._removeClass( $page, "ui-page-" + this.role + "-fullscreen" );
-						this._addClass( $page, "ui-page-" + this.role + "-fixed" );
+						this._removeClass( currentPage, "ui-page-" + this.role + "-fullscreen" );
+						this._addClass( currentPage, "ui-page-" + this.role + "-fixed" );
 					}
 				}
 			}
@@ -72,15 +76,17 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_addTransitionClass: function() {
-			var tclass = this.options.transition;
+			var transitionClass = this.options.transition;
 
-			if ( tclass && tclass !== "none" ) {
+			if ( transitionClass && transitionClass !== "none" ) {
 				// use appropriate slide for header or footer
-				if ( tclass === "slide" ) {
-					tclass = this.element.hasClass( "ui-toolbar-header" ) ? "slidedown" : "slideup";
+				if ( transitionClass === "slide" ) {
+					transitionClass = this.element.hasClass( "ui-toolbar-header" ) ? 
+					"slidedown" : 
+					"slideup";
 				}
 
-				this._addClass( null, tclass );
+				this._addClass( null, transitionClass );
 			}
 		},
 
@@ -100,11 +106,10 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_handlePageBeforeShow: function( ) {
-			var o = this.options;
-			if ( o.disablePageZoom ) {
+			if ( this.options.disablePageZoom ) {
 				$.mobile.zoom.disable( true );
 			}
-			if ( !o.visibleOnPageShow ) {
+			if ( !this.options.visibleOnPageShow ) {
 				this.hide( true );
 			}
 		},
@@ -123,15 +128,12 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_handlePageBeforeHide: function() {
-			var o = this.options;
-
-			if ( o.disablePageZoom ) {
+			if ( this.options.disablePageZoom ) {
 				$.mobile.zoom.enable( true );
 			}
-			if ( o.updatePagePadding ) {
+			if ( this.options.updatePagePadding ) {
 				this._off( this.window, "throttledresize" );
 			}
-
 		},
 
 		_visible: true,
@@ -174,9 +176,9 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			if ( this._useTransition( notransition ) ) {
 				this._removeClass( null, "out " + hideClass );
 				this._addClass( null, "in" );
-				$el.animationComplete(function () {
+				$el.animationComplete( function () {
 					this._removeClass( null, "in" );
-				});
+				} );
 			}
 			else {
 				this._removeClass( hideClass );
