@@ -72,7 +72,7 @@
 				this._updateBackButton();
 			}
 			if ( o.backBtnTheme != null ) {
-				this._addClass( this.element.find( ".ui-toolbar-back-button" ), null, "ui-button ui-button-" + o.backBtnTheme );
+				this._addClass( this.backButton, null, "ui-button ui-button-" + o.backBtnTheme );
 			}
 			if ( o.backBtnText !== undefined ) {
 				this.element.find( ".ui-toolbar-back-button .ui-button-text" ).text( o.backBtnText );
@@ -202,9 +202,6 @@
 			headerElements.removeAttr( "role" ).removeAttr( "aria-level" );
 
 			if ( this.role === "header" ) {
-				this._removeClass( this.element.children( "a, button" ), null,
-					"ui-button-left ui-button-right ui-button ui-shadow ui-corner-all" );
-
 				if ( this.backButton) {
 					this.backButton.remove();
 				}
