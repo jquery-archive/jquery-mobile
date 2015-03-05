@@ -61,14 +61,15 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
-						this._addClass( "ui-toolbar-"+ this.role +"-fullscreen" );
-						this._addClass( currentPage,  "ui-page-" + this.role + "-fullscreen" );
+						this._addClass( "ui-toolbar-" + this.role + "-fullscreen" );
+						this._addClass( currentPage, null, "ui-page-" + this.role + "-fullscreen" );
 					}
 					// If not fullscreen, add class to page to set top or bottom padding
 					else {
-						this._removeClass( "ui-toolbar-"+ this.role +"-fullscreen" );
-						this._removeClass( currentPage, "ui-page-" + this.role + "-fullscreen" );
-						this._addClass( currentPage, "ui-page-" + this.role + "-fixed" );
+						this._removeClass( "ui-toolbar-" + this.role + "-fullscreen" );
+						this._removeClass( currentPage, null, 
+							"ui-page-" + this.role + "-fullscreen" );
+						this._addClass( currentPage, null, "ui-page-" + this.role + "-fixed" );
 					}
 				}
 			}
@@ -81,8 +82,8 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			if ( transitionClass && transitionClass !== "none" ) {
 				// use appropriate slide for header or footer
 				if ( transitionClass === "slide" ) {
-					transitionClass = this.element.hasClass( "ui-toolbar-header" ) ? 
-					"slidedown" : 
+					transitionClass = this.role === "header" ?
+					"slidedown" :
 					"slideup";
 				}
 
