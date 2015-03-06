@@ -15,6 +15,8 @@
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
     <script src="../../../external/qunit/qunit.js"></script>
     <script>
+		QUnit.config.autostart = false;
+
         $.testHelper.asyncLoad([
             [ "tests/unit/init/init_core" ]
         ]);
