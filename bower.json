@@ -14,7 +14,7 @@
 		"tools"
 	],
 	"dependencies": {
-		"jquery": "1.11.1",
+		"jquery": ">=1.11.1",
 		"jquery-ui": "jquery/jquery-ui#c0ab71056b936627e8a7821f03c044aec6280a40"
 	},
 	"devDependencies": {
