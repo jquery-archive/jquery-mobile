@@ -27,14 +27,15 @@ $.widget( "mobile.flipswitch", $.extend({
 	},
 
 	_create: function() {
+			this.type = this.element[ 0 ].nodeName.toLowerCase();
+
 			if ( !this.options.enhanced ) {
 				this._enhance();
 			} else {
 				$.extend( this, {
 					flipswitch: this.element.parent(),
 					on: this.element.find( ".ui-flipswitch-on" ).eq( 0 ),
-					off: this.element.find( ".ui-flipswitch-off" ).eq(0),
-					type: this.element.get( 0 ).tagName
+					off: this.element.find( ".ui-flipswitch-off" ).eq( 0 )
 				});
 			}
 
@@ -81,7 +82,7 @@ $.widget( "mobile.flipswitch", $.extend({
 
 	_left: function() {
 		this.flipswitch.removeClass( "ui-flipswitch-active" );
-		if ( this.type === "SELECT" ) {
+		if ( this.type === "select" ) {
 			this.element.get( 0 ).selectedIndex = 0;
 		} else {
 			this.element.prop( "checked", false );
@@ -91,7 +92,7 @@ $.widget( "mobile.flipswitch", $.extend({
 
 	_right: function() {
 		this.flipswitch.addClass( "ui-flipswitch-active" );
-		if ( this.type === "SELECT" ) {
+		if ( this.type === "select" ) {
 			this.element.get( 0 ).selectedIndex = 1;
 		} else {
 			this.element.prop( "checked", true );
@@ -110,10 +111,9 @@ $.widget( "mobile.flipswitch", $.extend({
 				"href": "#"
 			}),
 			off = $( "<span></span>" ),
-			type = element.get( 0 ).tagName,
-			onText = ( type === "INPUT" ) ?
+			onText = ( this.type === "input" ) ?
 				options.onText : element.find( "option" ).eq( 1 ).text(),
-			offText = ( type === "INPUT" ) ?
+			offText = ( this.type === "input" ) ?
 				options.offText : element.find( "option" ).eq( 0 ).text();
 
 			on
@@ -145,8 +145,7 @@ $.widget( "mobile.flipswitch", $.extend({
 		$.extend( this, {
 			flipswitch: flipswitch,
 			on: on,
-			off: off,
-			type: type
+			off: off
 		});
 	},
 
@@ -158,7 +157,7 @@ $.widget( "mobile.flipswitch", $.extend({
 		var direction,
 			existingDirection = this.flipswitch.hasClass( "ui-flipswitch-active" ) ? "_right" : "_left";
 
-		if ( this.type === "SELECT" ) {
+		if ( this.type === "select" ) {
 			direction = ( this.element.get( 0 ).selectedIndex > 0 ) ? "_right": "_left";
 		} else {
 			direction = this.element.prop( "checked" ) ? "_right": "_left";
