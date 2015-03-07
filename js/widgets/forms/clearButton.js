@@ -43,15 +43,6 @@ define( [
 			}
 		},
 
-		_toggleClasses: function( operation ) {
-			this[ "_" + operation + "Class" ]( this._outer, "ui-textinput-has-clear-button" );
-			this[ "_" + operation + "Class" ]( this._clearButton, "ui-textinput-clear-button",
-				"ui-button ui-button-icon-only ui-button-right" );
-			this[ "_" + operation + "Class" ]( this._clearButtonIcon,
-				"ui-textinput-clear-button-icon",
-				"ui-icon-delete, ui-icon" );
-		},
-
 		clearButton: function() {
 			var icon = $( "<span>" ),
 				button = $( "<a href='#' tabindex='-1' aria-hidden='true'></a>" )
@@ -65,6 +56,22 @@ define( [
 			};
 		},
 
+		_clearButtonClick: function( event ) {
+			this.element.val( "" )
+					.focus()
+					.trigger( "change" );
+			event.preventDefault();
+		},
+
+		_toggleClasses: function( operation ) {
+			this[ "_" + operation + "Class" ]( this._outer, "ui-textinput-has-clear-button" );
+			this[ "_" + operation + "Class" ]( this._clearButton, "ui-textinput-clear-button",
+				"ui-button ui-button-icon-only ui-button-right" );
+			this[ "_" + operation + "Class" ]( this._clearButtonIcon,
+				"ui-textinput-clear-button-icon",
+				"ui-icon-delete ui-icon" );
+		},
+
 		_addClearButton: function() {
 			this._addClass( this._outer, "ui-textinput-has-clear-button" );
 			$.extend( this, this.clearButton() );
@@ -74,24 +81,24 @@ define( [
 			this._toggleClear();
 		},
 
-		_removeClearButton: function( removeClass ) {
-			if ( removeClass ) {
+		_removeClearButton: function( isDestroy ) {
+			if ( !isDestroy ) {
 				this._toggleClasses( "remove" );
+				this._unbindClearEvents();
 			}
-			this._unbindClearEvents();
 			this._clearButton.remove();
+			clearTimeout( this._toggleClearDelay );
 			delete this._clearButton;
 			delete this._clearButtonIcon;
-			clearTimeout( this._toggleClearDelay );
-			this._toggleClearDelay = 0;
+			delete this._toggleClearDelay;
 		},
 
 		_bindClearEvents: function() {
 			this._on( this._clearButton, {
 				"click": "_clearButtonClick"
-			} );
+			});
 
-			this._on( {
+			this._on({
 				"keyup": "_toggleClear",
 				"change": "_toggleClear",
 				"input": "_toggleClear",
@@ -100,7 +107,7 @@ define( [
 				"cut": "_toggleClear",
 				"paste": "_toggleClear"
 
-			} );
+			});
 		},
 
 		_unbindClearEvents: function() {
@@ -108,11 +115,21 @@ define( [
 			this._off( this.element, "keyup change input focus blur cut paste" );
 		},
 
-		_clearButtonClick: function( event ) {
-			this.element.val( "" )
-					.focus()
-					.trigger( "change" );
-			event.preventDefault();
+		_setOptions: function( options ) {
+			this._super( options );
+
+			if ( options.clearBtn !== undefined && this.inputNeedsWrap ) {
+				if ( options.clearBtn ) {
+					this._addClearButton();
+				} else {
+					this._removeClearButton( false );
+				}
+			}
+
+			if ( options.clearBtnText !== undefined && this._clearButton !== undefined ) {
+				this._clearButton.text( options.clearBtnText )
+					.attr( "title", options.clearBtnText );
+			}
 		},
 
 		_toggleClear: function() {
@@ -123,36 +140,19 @@ define( [
 			this._toggleClass( this._clearButton, "ui-textinput-clear-button-hidden",
 				undefined, !this.element.val() );
 			this._clearButton.attr( "aria-hidden", !this.element.val() );
-			this._toggleClearDelay = 0;
-		},
-
-		_setOptions: function( options ) {
-			this._super( options );
-
-			if ( options.clearBtn !== undefined && this.inputNeedsWrap ) {
-				if ( options.clearBtn ) {
-					this._addClearButton();
-				} else {
-					this._removeClearButton( true );
-				}
-			}
-
-			if ( options.clearBtnText !== undefined && this._clearButton !== undefined ) {
-				this._clearButton.text( options.clearBtnText )
-					.attr( "title", options.clearBtnText );
-			}
+			delete this._toggleClearDelay;
 		},
 
 		_destroy: function() {
 			this._super();
 			if ( !this.options.enhanced && this._clearButton ) {
-				this._removeClearButton( false );
+				this._removeClearButton( true );
 			}
 		}
 
-	} );
+	});
 
-} )( jQuery );
+})( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-} );
+});
 //>>excludeEnd("jqmBuildExclude");
