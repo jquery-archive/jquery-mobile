@@ -13,7 +13,7 @@ define( [
 
 	$.widget( "mobile.textinput", $.mobile.textinput, {
 		options: {
-			autogrow: true,
+			autogrow:true,
 			keyupTimeoutBuffer: 100
 		},
 
@@ -29,12 +29,12 @@ define( [
 		_autogrow: function() {
 			this._addClass( "ui-textinput-autogrow" );
 
-			this._on( {
+			this._on({
 				"keyup": "_timeout",
 				"change": "_timeout",
 				"input": "_timeout",
 				"paste": "_timeout"
-			} );
+			});
 
 			// Attach to the various you-have-become-visible notifications that the
 			// various framework elements emit.
@@ -46,7 +46,7 @@ define( [
 				"popupbeforeposition": "_handleShow",
 				"updatelayout": "_handleShow",
 				"panelopen": "_handleShow"
-			} );
+			});
 		},
 
 		// Synchronously fix the widget height if this widget's parents are such
@@ -107,11 +107,11 @@ define( [
 
 			// IE8 textareas have the onpage property - others do not
 			if ( !( "onpage" in this.element[ 0 ] ) ) {
-				this.element.css( {
+				this.element.css({
 					"height": 0,
 					"min-height": 0,
 					"max-height": 0
-				} );
+				});
 			}
 
 			scrollHeight = this.element[ 0 ].scrollHeight;
@@ -135,11 +135,11 @@ define( [
 				height += paddingHeight;
 			}
 
-			this.element.css( {
+			this.element.css({
 				"height": height,
 				"min-height": "",
 				"max-height": ""
-			} );
+			});
 
 			this.window.scrollTop( scrollTop );
 		},
@@ -168,8 +168,8 @@ define( [
 			return this._superApply( arguments );
 		}
 
-	} );
-} )( jQuery );
+	});
+})( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-} );
+});
 //>>excludeEnd("jqmBuildExclude");

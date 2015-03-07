@@ -7,7 +7,7 @@
 
 define( [ "jquery", "../../core", "../../widget", "../../degradeInputs", "../../zoom" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-( function( $, undefined ) {
+(function( $, undefined ) {
 
 $.widget( "mobile.textinput", {
 	initSelector: "input[type='text']," +
@@ -58,7 +58,7 @@ $.widget( "mobile.textinput", {
 		$.extend( this, {
 			isSearch: isSearch,
 			inputNeedsWrap: inputNeedsWrap
-		} );
+		});
 
 		this._autoCorrect();
 
@@ -75,14 +75,14 @@ $.widget( "mobile.textinput", {
 		this._on( {
 			"focus": "_handleFocus",
 			"blur": "_handleBlur"
-		} );
+		});
 
 	},
 
 	refresh: function() {
-		this.setOptions( {
+		this.setOptions({
 			"disabled" : this.element.is( ":disabled" )
-		} );
+		});
 	},
 
 	_addClasses: function() {
@@ -184,9 +184,9 @@ $.widget( "mobile.textinput", {
 			this.element.unwrap();
 		}
 	}
-} );
+});
 
-} )( jQuery );
+})( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-} );
+});
 //>>excludeEnd("jqmBuildExclude");
