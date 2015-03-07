@@ -64,9 +64,9 @@
 			"slider input does not get clear button" );
 	});
 	
-	test( "slider input is not wrapped in div.ui-textinput-text", function() {
-		ok( ! $( "#textinput-test" ).parents().is( "div.ui-textinput-text" ),
-			"slider input is not wrapped in div.ui-textinput-text" );
+	test( "slider input is not wrapped in .ui-textinput-text", function( assert ) {
+		assert.lacksClasses( $( "#textinput-test" ).parent()[ 0 ], "ui-textinput-text",
+			"slider input is not wrapped in .ui-textinput-text" );
 	});
 
 	test( "slider tooltip", function() {

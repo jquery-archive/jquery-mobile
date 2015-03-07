@@ -46,8 +46,9 @@
 	$.mobile.page.prototype.options.keepNative = "textarea.should-be-native";
 
 	// not testing the positive case here since's it's obviously tested elsewhere
-	test( "textarea in the keepNative set shouldn't be enhanced", function() {
-		ok( !$("textarea.should-be-native").is("ui-textinput-text") );
+	test( "textarea in the keepNative set shouldn't be enhanced", function( assert ) {
+		assert.lacksClasses( $( "textarea.should-be-native" )[ 0 ], "ui-textinput-text",
+			"Class ui-textinput-text not present" );
 	});
 
 	asyncTest( "textarea should autogrow on document ready", function() {
@@ -102,10 +103,12 @@
 					.attr( "title" ), "custom value" );
 	});
 
-	test( "data-clear-btn adds clear button to text inputs", function() {
+	test( "data-clear-btn adds clear button to text inputs", function( assert ) {
 		ok( $( '#text-input-clear-button' ).next()
-			.is( 'a.ui-textinput-clear-button[tabindex="-1"][aria-hidden="true"]' ),
+			.is( 'a[tabindex="-1"][aria-hidden="true"]' ),
 			"correctly marked up clear button is present" );
+		assert.hasClasses( $( "#text-input-clear-button" ).next()[ 0 ], "ui-textinput-clear-button",
+			"clear button has class ui-textinput-clear-button" );
 	});
 
 	test( "data-clear-btn does not add clear button to textarea", function( assert ) {
