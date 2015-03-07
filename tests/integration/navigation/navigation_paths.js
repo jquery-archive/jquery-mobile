@@ -5,9 +5,10 @@
 	var url = $.mobile.path.parseUrl( location.href ),
 		home = location.href.replace( url.domain, "" );
 
-	var testPageLoad = function(testPageAnchorSelector, expectedTextValue){
+	var testPageLoad = function(testPageAnchorSelector, expectedTextValue, assert){
 		expect( 2 );
 
+		var done = assert.async();
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -28,7 +29,7 @@
 			// verify that the page has changed and the expected text value is present
 			function(){
 				deepEqual($.mobile.activePage.find(".test-value").text(), expectedTextValue);
-				start();
+				done();
 			}
 		]);
 	};
@@ -58,119 +59,119 @@
 
 
 	//Doc relative tests
-	module("document relative paths", {
+	QUnit.module("document relative paths", {
 		teardown: function() {
 			$.testHelper.navReset( url.pathname + url.search );
 		}
 	});
 
-	asyncTest( "file reference no nesting", function(){
-		testPageLoad("#doc-rel-test-one", "doc rel test one");
+	QUnit.test( "file reference no nesting", function(assert){
+		testPageLoad("#doc-rel-test-one", "doc rel test one", assert);
 	});
 
-	asyncTest( "file reference with nesting", function(){
-		testPageLoad("#doc-rel-test-two", "doc rel test two");
+	QUnit.test( "file reference with nesting", function(assert){
+		testPageLoad("#doc-rel-test-two", "doc rel test two", assert);
 	});
 
-	asyncTest( "file reference with double nesting", function(){
-		testPageLoad("#doc-rel-test-three", "doc rel test three");
+	QUnit.test( "file reference with double nesting", function(assert){
+		testPageLoad("#doc-rel-test-three", "doc rel test three", assert);
 	});
 
-	asyncTest( "dir refrence with nesting", function(){
-		testPageLoad("#doc-rel-test-four", "doc rel test four");
+	QUnit.test( "dir refrence with nesting", function(assert){
+		testPageLoad("#doc-rel-test-four", "doc rel test four", assert);
 	});
 
-	asyncTest( "file refrence with parent dir", function(){
-		testPageLoad("#doc-rel-test-five", "doc rel test five");
+	QUnit.test( "file refrence with parent dir", function(assert){
+		testPageLoad("#doc-rel-test-five", "doc rel test five", assert);
 	});
 
-	asyncTest( "dir refrence with parent dir", function(){
-		testPageLoad("#doc-rel-test-six", "doc rel test six");
+	QUnit.test( "dir refrence with parent dir", function(assert){
+		testPageLoad("#doc-rel-test-six", "doc rel test six", assert);
 	});
 
 
 	// Site relative tests
 	// NOTE does not test root path or non nested references
-	module("site relative paths");
+	QUnit.module("site relative paths");
 
- 	asyncTest( "file reference no nesting", function(){
-		testPageLoad("#site-rel-test-one", "doc rel test one");
+ 	QUnit.test( "file reference no nesting", function(assert){
+		testPageLoad("#site-rel-test-one", "doc rel test one", assert);
 	});
 
-	asyncTest( "file reference with nesting", function(){
-		testPageLoad("#site-rel-test-two", "doc rel test two");
+	QUnit.test( "file reference with nesting", function(assert){
+		testPageLoad("#site-rel-test-two", "doc rel test two", assert);
 	});
 
-	asyncTest( "file reference with double nesting", function(){
-		testPageLoad("#site-rel-test-three", "doc rel test three");
+	QUnit.test( "file reference with double nesting", function(assert){
+		testPageLoad("#site-rel-test-three", "doc rel test three", assert);
 	});
 
-	asyncTest( "dir refrence with nesting", function(){
-		testPageLoad("#site-rel-test-four", "doc rel test four");
+	QUnit.test( "dir refrence with nesting", function(assert){
+		testPageLoad("#site-rel-test-four", "doc rel test four", assert);
 	});
 
-	asyncTest( "file refrence with parent dir", function(){
-		testPageLoad("#site-rel-test-five", "doc rel test five");
+	QUnit.test( "file refrence with parent dir", function(assert){
+		testPageLoad("#site-rel-test-five", "doc rel test five", assert);
 	});
 
-	asyncTest( "dir refrence with parent dir", function(){
-		testPageLoad("#site-rel-test-six", "doc rel test six");
+	QUnit.test( "dir refrence with parent dir", function(assert){
+		testPageLoad("#site-rel-test-six", "doc rel test six", assert);
 	});
 
 
 	// Protocol relative tests
 	// NOTE does not test root path or non nested references
-	module("protocol relative paths");
+	QUnit.module("protocol relative paths");
 
- 	asyncTest( "file reference no nesting", function(){
-		testPageLoad("#protocol-rel-test-one", "doc rel test one");
+ 	QUnit.test( "file reference no nesting", function(assert){
+		testPageLoad("#protocol-rel-test-one", "doc rel test one", assert);
 	});
 
-	asyncTest( "file reference with nesting", function(){
-		testPageLoad("#protocol-rel-test-two", "doc rel test two");
+	QUnit.test( "file reference with nesting", function(assert){
+		testPageLoad("#protocol-rel-test-two", "doc rel test two", assert);
 	});
 
-	asyncTest( "file reference with double nesting", function(){
-		testPageLoad("#protocol-rel-test-three", "doc rel test three");
+	QUnit.test( "file reference with double nesting", function(assert){
+		testPageLoad("#protocol-rel-test-three", "doc rel test three", assert);
 	});
 
-	asyncTest( "dir refrence with nesting", function(){
-		testPageLoad("#protocol-rel-test-four", "doc rel test four");
+	QUnit.test( "dir refrence with nesting", function(assert){
+		testPageLoad("#protocol-rel-test-four", "doc rel test four", assert);
 	});
 
-	asyncTest( "file refrence with parent dir", function(){
-		testPageLoad("#protocol-rel-test-five", "doc rel test five");
+	QUnit.test( "file refrence with parent dir", function(assert){
+		testPageLoad("#protocol-rel-test-five", "doc rel test five", assert);
 	});
 
-	asyncTest( "dir refrence with parent dir", function(){
-		testPageLoad("#protocol-rel-test-six", "doc rel test six");
+	QUnit.test( "dir refrence with parent dir", function(assert){
+		testPageLoad("#protocol-rel-test-six", "doc rel test six", assert);
 	});
 
 	// absolute tests
 	// NOTE does not test root path or non nested references
-	module("absolute paths");
+	QUnit.module("absolute paths");
 
- 	asyncTest( "file reference no nesting", function(){
-		testPageLoad("#absolute-test-one", "doc rel test one");
+ 	QUnit.test( "file reference no nesting", function(assert){
+		testPageLoad("#absolute-test-one", "doc rel test one", assert);
 	});
 
-	asyncTest( "file reference with nesting", function(){
-		testPageLoad("#absolute-test-two", "doc rel test two");
+	QUnit.test( "file reference with nesting", function(assert){
+		testPageLoad("#absolute-test-two", "doc rel test two", assert);
 	});
 
-	asyncTest( "file reference with double nesting", function(){
-		testPageLoad("#absolute-test-three", "doc rel test three");
+	QUnit.test( "file reference with double nesting", function(assert){
+		testPageLoad("#absolute-test-three", "doc rel test three", assert);
 	});
 
-	asyncTest( "dir refrence with nesting", function(){
-		testPageLoad("#absolute-test-four", "doc rel test four");
+	QUnit.test( "dir refrence with nesting", function(assert){
+		testPageLoad("#absolute-test-four", "doc rel test four", assert);
 	});
 
-	asyncTest( "file refrence with parent dir", function(){
-		testPageLoad("#absolute-test-five", "doc rel test five");
+	QUnit.test( "file refrence with parent dir", function(assert){
+		testPageLoad("#absolute-test-five", "doc rel test five", assert);
 	});
 
-	asyncTest( "dir refrence with parent dir", function(){
-		testPageLoad("#absolute-test-six", "doc rel test six");
+	QUnit.test( "dir refrence with parent dir", function(assert){
+		testPageLoad("#absolute-test-six", "doc rel test six", assert);
 	});
 })(jQuery);
