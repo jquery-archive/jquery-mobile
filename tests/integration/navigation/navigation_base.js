@@ -8,7 +8,7 @@
 		baseTagEnabled = $.mobile.dynamicBaseTagEnabled,
 		baseTagSupported = $.support.dynamicBaseTag;
 
-	module('jquery.mobile.navigation.js - base tag', {
+	QUnit.module('jquery.mobile.navigation.js - base tag', {
 		setup: function(){
 			$.mobile.navigate.history.stack = [];
 			$.mobile.navigate.history.activeIndex = 0;
@@ -16,7 +16,9 @@
 		}
 	});
 
-	asyncTest( "can navigate between internal and external pages", function(){
+	QUnit.test( "can navigate between internal and external pages", function(assert) {
+		var done = assert.async();
+
 		$.testHelper.pageSequence([
 			function(){
 				// Navigate from default internal page to another internal page.
@@ -147,12 +149,14 @@
 				});
 
 				// Previous load should have failed and left us on internal-page-2.
-				start();
+				done();
 			}
 		]);
 	});
 
-	asyncTest( "internal form with no action submits to document URL", function(){
+	QUnit.test( "internal form with no action submits to document URL", function(assert) {
+		var done = assert.async();
+
 		$.testHelper.pageSequence([
 			// open our test page
 			function(){
@@ -169,12 +173,14 @@
 					report: "hash should match document url and not base url"
 				});
 
-				start();
+				done();
 			}
 		]);
 	});
 
-	asyncTest( "external page form with no action submits to external page URL", function(){
+	QUnit.test( "external page form with no action submits to external page URL", function(assert) {
+		var done = assert.async();
+
 		$.testHelper.pageSequence([
 			function(){
 				// Go to an external page that has a form.
@@ -198,12 +204,12 @@
 					report: "hash should match page url and not document url"
 				});
 
-				start();
+				done();
 			}
 		]);
 	});
 
-	var testBaseTagAlteration = function( assertions ) {
+	var testBaseTagAlteration = function( assertions, done ) {
 		$.testHelper.pageSequence([
 			function(){
 				$.mobile.changePage( "../../base-change.html" );
@@ -215,13 +221,15 @@
 			},
 
 			function() {
-				start();
+				done();
 			}
 		]);
 
 	};
 
-	asyncTest( "disabling base tag changes should prevent base href value changes", function() {
+	QUnit.test( "disabling base tag changes should prevent base href value changes", function(assert) {
+		var done = assert.async();
+
 		var baseHref = $( "base" ).attr( "href" );
 		$.mobile.dynamicBaseEnabled = false;
 
@@ -231,20 +239,24 @@
 				} else {
 					equal( $.mobile.activePage.find( "#base-change-link" ).attr( "href" ), "foo", "the link href's remain unchanged" );
 				}
-		});
+		}, done);
 	});
 
-	asyncTest( "enabling base tag changes should enable base href value changes", function() {
+	QUnit.test( "enabling base tag changes should enable base href value changes", function(assert) {
+		var done = assert.async();
+
 		var baseHref = $( "base" ).attr( "href" );
 		$.mobile.dynamicBaseEnabled = true;
 		$.support.dynamicBaseTag = true;
 
 		testBaseTagAlteration(function() {
 			ok( baseHref !== $( "base" ).attr( "href" ), "the base href value should be changed" );
-		});
+		}, done);
 	});
 
-	asyncTest( "enabling base tag changes when a dynamic base isn't supported should alter links", function() {
+	QUnit.test( "enabling base tag changes when a dynamic base isn't supported should alter links", function(assert) {
+		var done = assert.async();
+
 		$.mobile.dynamicBaseEnabled = true;
 		$.support.dynamicBaseTag = false;
 
@@ -262,6 +274,6 @@
 					$.mobile.path.parseUrl( location.href ).directory + "foo",
 					"the link's href is changed" );
 			}
-		});
+		}, done);
 	});
 })(jQuery);
