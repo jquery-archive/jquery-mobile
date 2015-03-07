@@ -36,8 +36,8 @@
              <label for="text-1">Text input:</label>
              <input type="text" name="text-1" id="text-1" value="">
 
-             <label for="text-3">Text input: data-clear-button="true"</label>
-             <input type="text" data-clear-button="true" name="text-3" id="text-3" value="">
+             <label for="text-3">Text input: data-clear-btn="true"</label>
+             <input type="text" data-clear-btn="true" name="text-3" id="text-3" value="">
         </form>
         </div><!-- /demo-html -->
 
