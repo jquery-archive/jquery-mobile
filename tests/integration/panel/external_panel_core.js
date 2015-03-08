@@ -1,4 +1,5 @@
-var panel = $( "#wrapper-test-panel" ).panel();
+var panel = $( "#wrapper-test-panel" ).panel(),
+	stretchTestPanel = $( "#panel-stretch-test" ).panel();
 
 asyncTest( "External panel updates wrapper correctly", function() {
 	var otherPageChildren,
@@ -49,3 +50,47 @@ asyncTest( "External panel updates wrapper correctly", function() {
 		start
 	]);
 });
+
+asyncTest( "External panel stretches to acommodate page height", function( assert ) {
+	expect( 4 );
+
+	var eventNs = ".externalPanelStretches";
+
+	$.testHelper.detailedEventCascade( [
+		function() {
+			$( "body" ).pagecontainer( "change", "#panel-stretch-page" );
+		},
+		{
+			pagecontainerchange: { src: $( window ), event: "pagecontainerchange" + eventNs + "1" }
+		},
+		function( result ) {
+			assert.deepEqual( result.pagecontainerchange.timedOut, false,
+				"Successfully changed to page '#panel-stretch-page'" );
+
+			// Make the page scroll
+			$( "#panel-stretch-page .ui-content" ).height( $.mobile.getScreenHeight() * 3 );
+
+			stretchTestPanel.panel( "open" );
+		},
+		{
+			panelopen: { src: stretchTestPanel, event: "panelopen" + eventNs + "2" }
+		},
+		function( result ) {
+			assert.deepEqual( result.panelopen.timedOut, false, "Panel opened successfully" );
+			assert.deepEqual( stretchTestPanel.height(), $( document ).height(),
+				"Panel is as tall as the document" );
+			stretchTestPanel.panel( "close" );
+		},
+		{
+			panelclose: { src: stretchTestPanel, event: "panelclose" + eventNs + "3" }
+		},
+		function( result ) {
+			assert.deepEqual( result.panelclose.timedOut, false, "Panel closedsuccessfully" );
+			$.mobile.back();
+		},
+		{
+			pagecontainerchange: { src: $( window ), event: "pagecontainerchange" + eventNs + "4" }
+		},
+		start
+	] );
+} );
