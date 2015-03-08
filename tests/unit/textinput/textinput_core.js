@@ -120,9 +120,9 @@
 			"No anchors have been inserted as children of the data-clear-btn textarea element" );
 	});
 
-	test( "data-clear-button does not add clear button to slider input", function() {
-		ok( ! $( "#slider-input" ).next().is( "a.ui-textinput-clear-button" ),
-			"data-clear-button does not add clear button to slider input" );
+	test( "data-clear-btn does not add clear button to slider input", function( assert ) {
+		assert.lacksClasses( $( "#slider-input" ).next(), "ui-textinput-clear-button",
+			"data-clear-btn does not add clear button to slider input" );
 	});
 
 	test( "data-clear-button does not add clear button to slider input", function() {
