@@ -65,7 +65,7 @@
 	});
 	
 	test( "slider input is not wrapped in .ui-textinput-text", function( assert ) {
-		assert.lacksClasses( $( "#textinput-test" ).parent()[ 0 ], "ui-textinput-text",
+		assert.lacksClasses( $( ".textinput-test" ).parent()[ 0 ], "ui-textinput-text",
 			"slider input is not wrapped in .ui-textinput-text" );
 	});
 
