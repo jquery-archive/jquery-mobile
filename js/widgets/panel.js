@@ -169,6 +169,10 @@ $.widget( "mobile.panel", {
 			if ( expand ) {
 				self._unfixPanel();
 				$.mobile.resetActivePageHeight( panelInnerHeight );
+			} else if ( !this._parentPage ) {
+				if ( this.element.height() < this.document.height() ) {
+					this.element.height( this.document.height() );
+				}
 			}
 			if ( scrollToTop ) {
 				this.window[ 0 ].scrollTo( 0, $.mobile.defaultHomeScroll );
