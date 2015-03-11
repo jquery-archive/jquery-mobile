@@ -37,7 +37,7 @@ $.widget( "mobile.slider", $.mobile.slider, {
 
 		this._setOption( "popupEnabled", this.options.popupEnabled );
 
-		this._on( this.handle, { "vmousedown" : "_showPopup" } );
+		this._on( this.handle.add( this.slider ), { "vmousedown" : "_showPopup" } );
 		this._on( this.slider.add( this.document ), { "vmouseup" : "_hidePopup" } );
 		this._refresh();
 	},
@@ -102,7 +102,6 @@ $.widget( "mobile.slider", $.mobile.slider, {
 
 	_showPopup: function() {
 		if ( this.options.popupEnabled && !this._popupVisible ) {
-			this.handle.html( "" );
 			this._popup.show();
 			this._positionPopup();
 			this._popupVisible = true;
