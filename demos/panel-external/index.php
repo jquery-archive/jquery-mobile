@@ -49,7 +49,7 @@
 
 </div><!-- /page -->
 
-	<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a">
+	<div data-role="panel" id="leftpanel1" data-position="left" data-display="reveal" data-theme="a" style="position: fixed">
 
         <h3>Left Panel: Reveal</h3>
         <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -59,7 +59,7 @@
 	</div><!-- /leftpanel1 -->
 
 	<!-- leftpanel2  -->
-	<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-theme="a">
+	<div data-role="panel" id="leftpanel2" data-position="left" data-display="push" data-theme="a" style="position: fixed">
 
         <h3>Left Panel: Push</h3>
         <p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -69,7 +69,7 @@
 	</div><!-- /leftpanel2 -->
 
 	<!-- leftpanel3  -->
-	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a">
+	<div data-role="panel" id="leftpanel3" data-position="left" data-display="overlay" data-theme="a" style="position: fixed">
 
         <h3>Left Panel: Overlay</h3>
         <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -79,7 +79,7 @@
 	</div><!-- /leftpanel3 -->
 
 	<!-- rightpanel1  -->
-	<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b">
+	<div data-role="panel" id="rightpanel1" data-position="right" data-display="reveal" data-theme="b" style="position: fixed">
 
         <h3>Right Panel: Reveal</h3>
         <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -89,7 +89,7 @@
 	</div><!-- /rightpanel1 -->
 
 	<!-- rightpanel2  -->
-	<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-theme="b">
+	<div data-role="panel" id="rightpanel2" data-position="right" data-display="push" data-theme="b" style="position: fixed">
 
         <h3>Right Panel: Push</h3>
         <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
@@ -99,7 +99,7 @@
 	</div><!-- /rightpanel2 -->
 
 	<!-- rightpanel3  -->
-	<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-theme="b">
+	<div data-role="panel" id="rightpanel3" data-position="right" data-display="overlay" data-theme="b" style="position: fixed">
 
         <h3>Right Panel: Overlay</h3>
         <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
