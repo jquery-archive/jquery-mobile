@@ -73,10 +73,8 @@ define( [
 			}
 		},
 
-		_unbindAutogrow: function( removeClass ) {
-			if ( removeClass ) {
-				this._removeClass( "ui-textinput-autogrow" );
-			}
+		_unbindAutogrow: function() {
+			this._removeClass( "ui-textinput-autogrow" );
 			this._off( this.element, "keyup change input paste" );
 			this._off( this.document,
 				"pageshow popupbeforeposition updatelayout panelopen" );
@@ -158,14 +156,14 @@ define( [
 				if ( options.autogrow ) {
 					this._autogrow();
 				} else {
-					this._unbindAutogrow( true );
+					this._unbindAutogrow();
 				}
 			}
 		},
 
 		_destroy: function() {
-			this._unbindAutogrow( false );
-			return this._superApply( arguments );
+			this._unbindAutogrow();
+			this._super();
 		}
 
 	});
