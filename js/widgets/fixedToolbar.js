@@ -88,14 +88,13 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
 						this._addClass( "ui-toolbar-" + this.role + "-fullscreen" );
-						this._addClass( currentPage, null, "ui-page-" + this.role + "-fullscreen" );
+						this._addClass( currentPage, "ui-toolbar-page-" + this.role + "-fullscreen" );
 					}
 					// If not fullscreen, add class to page to set top or bottom padding
 					else {
 						this._removeClass( "ui-toolbar-" + this.role + "-fullscreen" );
-						this._removeClass( currentPage, null, 
-							"ui-page-" + this.role + "-fullscreen" );
-						this._addClass( currentPage, null, "ui-page-" + this.role + "-fixed" );
+						this._removeClass( currentPage, "ui-toolbar-page-" + this.role + "-fullscreen" );
+						this._addClass( currentPage, "ui-toolbar-page-" + this.role + "-fixed" );
 					}
 				}
 			}
