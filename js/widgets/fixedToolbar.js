@@ -17,7 +17,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			transition: "slide", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
-			tapToggleBlacklist: "a, button, input, select, textarea, .ui-header-fixed, .ui-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
+			tapToggleBlacklist: "a, button, input, select, textarea, .ui-toolbar-header-fixed, .ui-toolbar-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
 			trackPersistentToolbars: true,
@@ -63,14 +63,13 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
 						this._addClass( "ui-toolbar-" + this.role + "-fullscreen" );
-						this._addClass( currentPage, null, "ui-page-" + this.role + "-fullscreen" );
+						this._addClass( currentPage, "ui-toolbar-page-" + this.role + "-fullscreen" );
 					}
 					// If not fullscreen, add class to page to set top or bottom padding
 					else {
 						this._removeClass( "ui-toolbar-" + this.role + "-fullscreen" );
-						this._removeClass( currentPage, null, 
-							"ui-page-" + this.role + "-fullscreen" );
-						this._addClass( currentPage, null, "ui-page-" + this.role + "-fixed" );
+						this._removeClass( currentPage, "ui-toolbar-page-" + this.role + "-fullscreen" );
+						this._addClass( currentPage, "ui-toolbar-page-" + this.role + "-fixed" );
 					}
 				}
 			}
@@ -236,7 +235,8 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 					//bottom of the screen addresses issues #4410 Footer navbar moves up when clicking on a textbox in an Android environment
 					//and issue #4113 Header and footer change their position after keyboard popup - iOS
 					//and issue #4410 Footer navbar moves up when clicking on a textbox in an Android environment
-					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ) {
+					if ( screen.width < 1025 && $( e.target ).is( o.hideDuringFocus ) && 
+						!$( e.target ).closest( ".ui-toolbar-header-fixed, .ui-toolbar-footer-fixed" ).length ) {
 						//Fix for issue #4724 Moving through form in Mobile Safari with "Next" and "Previous" system
 						//controls causes fixed position, tap-toggle false Header to reveal itself
 						// isVisible instead of self._visible because the focusin and focusout events fire twice at the same time
