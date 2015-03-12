@@ -43,8 +43,8 @@
 .ui-page-footer-fixed {
 	padding-bottom: 2.8125em;
 }
-.ui-page-header-fullscreen > .ui-content,
-.ui-page-footer-fullscreen > .ui-content {
+.ui-toolbar-page-header-fullscreen > .ui-content,
+.ui-toolbar-page-footer-fullscreen > .ui-content {
 	padding: 0;
 }
 .ui-toolbar-fixed-hidden {
@@ -58,8 +58,8 @@
   display: block
 }
 
-.ui-page-header-fullscreen .ui-toolbar-fixed-hidden,
-.ui-page-footer-fullscreen .ui-toolbar-fixed-hidden {
+.ui-toolbar-page-header-fullscreen .ui-toolbar-fixed-hidden,
+.ui-toolbar-page-footer-fullscreen .ui-toolbar-fixed-hidden {
 	position: absolute !important;
 	height: 1px;
 	width: 1px;
