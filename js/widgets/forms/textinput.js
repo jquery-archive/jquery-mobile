@@ -100,8 +100,8 @@ $.widget( "mobile.textinput", {
 		if ( this.inputNeedsWrap ) {
 			outer = $( "<div>" );
 			if ( this.isSearch ) {
-				this._searchIcon = $( "<span>" ).appendTo( outer );
-				$( "<span> </span>" ).appendTo( outer );
+				this._searchIcon = $( "<span>" ).prependTo( outer );
+				this._searchIcon.after( "<span> </span>" );
 			}
 		} else {
 			outer = this.element;

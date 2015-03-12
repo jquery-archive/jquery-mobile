@@ -33,27 +33,14 @@ define( [
 			}
 
 			if ( this.options.enhanced ) {
-				this._clearButton = this._outer.children( "a.ui-textinput-clear-button" );
+				this._clearButton = this._outer.children( ".ui-textinput-clear-button" );
 				this._clearButtonIcon = this._clearButton
-					.children( "span.ui-textinput-clear-button-icon" );
-				this._toggleClasses( "add" );
+					.children( ".ui-textinput-clear-button-icon" );
+				this._toggleClasses( true );
 				this._bindClearEvents();
 			} else {
 				this._addClearButton();
 			}
-		},
-
-		clearButton: function() {
-			var icon = $( "<span>" ),
-				button = $( "<a href='#' tabindex='-1' aria-hidden='true'></a>" )
-					.attr( "title", this.options.clearBtnText )
-					.text( this.options.clearBtnText )
-					.append( icon );
-
-			return {
-				_clearButton: button,
-				_clearButtonIcon: icon
-			};
 		},
 
 		_clearButtonClick: function( event ) {
@@ -63,33 +50,31 @@ define( [
 			event.preventDefault();
 		},
 
-		_toggleClasses: function( operation ) {
-			this[ "_" + operation + "Class" ]( this._outer, "ui-textinput-has-clear-button" );
-			this[ "_" + operation + "Class" ]( this._clearButton, "ui-textinput-clear-button",
-				"ui-button ui-button-icon-only ui-button-right" );
-			this[ "_" + operation + "Class" ]( this._clearButtonIcon,
-				"ui-textinput-clear-button-icon",
-				"ui-icon-delete ui-icon" );
+		_toggleClasses: function( add ) {
+			this._toggleClass( this._outer, "ui-textinput-has-clear-button", null, add );
+			this._toggleClass( this._clearButton, "ui-textinput-clear-button",
+				"ui-button ui-button-icon-only ui-button-right", add );
+			this._toggleClass( this._clearButtonIcon, "ui-textinput-clear-button-icon",
+				"ui-icon-delete ui-icon", add );
 		},
 
 		_addClearButton: function() {
-			this._addClass( this._outer, "ui-textinput-has-clear-button" );
-			$.extend( this, this.clearButton() );
-			this._toggleClasses( "add" );
+			this._clearButtonIcon = $( "<span>" );
+			this._clearButton = $( "<a href='#' tabindex='-1' aria-hidden='true'></a>" )
+				.attr( "title", this.options.clearBtnText )
+				.text( this.options.clearBtnText )
+				.append( this._clearButtonIcon );
+			this._toggleClasses( true );
 			this._clearButton.appendTo( this._outer );
 			this._bindClearEvents();
 			this._toggleClear();
 		},
 
-		_removeClearButton: function( isDestroy ) {
-			if ( !isDestroy ) {
-				this._toggleClasses( "remove" );
-				this._unbindClearEvents();
-			}
+		_removeClearButton: function() {
+			this._toggleClasses( false );
+			this._unbindClearEvents();
 			this._clearButton.remove();
 			clearTimeout( this._toggleClearDelay );
-			delete this._clearButton;
-			delete this._clearButtonIcon;
 			delete this._toggleClearDelay;
 		},
 
@@ -122,7 +107,7 @@ define( [
 				if ( options.clearBtn ) {
 					this._addClearButton();
 				} else {
-					this._removeClearButton( false );
+					this._removeClearButton();
 				}
 			}
 
@@ -146,7 +131,7 @@ define( [
 		_destroy: function() {
 			this._super();
 			if ( !this.options.enhanced && this._clearButton ) {
-				this._removeClearButton( true );
+				this._removeClearButton();
 			}
 		}
 
