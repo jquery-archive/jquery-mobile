@@ -20,7 +20,7 @@
 	"devDependencies": {
 		"requirejs": "2.1.2",
 		"qunit": "1.17.1",
-		"qunit-assert-classes": "0.1.5",
+		"qunit-assert-classes": "0.1.7",
 		"jshint": "2.4.0",
 		"requirejs-text": "2.0.3",
 		"requirejs-plugins": "millermedeiros/requirejs-plugins#34330a5d735474ac0b518eb1eb270c9e5505a537"
