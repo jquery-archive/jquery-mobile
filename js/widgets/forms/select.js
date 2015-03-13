@@ -41,7 +41,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 	},
 
 	_setDisabled: function( value ) {
-		this.element.attr( "disabled", value );
+		this.element.prop( "disabled", value );
 		this.button.attr( "aria-disabled", value );
 		return this._setOption( "disabled", value );
 	},
@@ -140,7 +140,7 @@ $.widget( "mobile.selectmenu", $.extend( {
 		}
 
 		// Disable if specified
-		if ( options.disabled || this.element.attr( "disabled" )) {
+		if ( options.disabled || this.element.prop( "disabled" ) ) {
 			this.disable();
 		}
 
