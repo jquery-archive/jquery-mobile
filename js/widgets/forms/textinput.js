@@ -44,7 +44,7 @@ $.widget( "mobile.textinput", {
 
 		var options = this.options,
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
-			isTextarea = this.element[ 0 ].tagName === "TEXTAREA",
+			isTextarea = this.element[ 0 ].nodeName.toLowerCase() === "textarea",
 			isRange = this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ),
 			inputNeedsWrap = ( (this.element.is( "input" ) ||
 				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
