@@ -18,7 +18,6 @@ define( [
 		},
 
 		_create: function() {
-			this.isTextarea = ( this.element[ 0 ].nodeName.toLowerCase() === "textarea" );
 			this._super();
 
 			if ( this.options.autogrow && this.isTextarea ) {

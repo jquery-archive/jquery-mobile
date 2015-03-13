@@ -13,7 +13,7 @@ $.widget( "mobile.textinput", {
 	initSelector: "input[type='text']," +
 		"input[type='search']," +
 		":jqmData(type='search')," +
-		"input[type='number']," +
+		"input[type='number']:not(:jqmData(type='range'))," +
 		":jqmData(type='number')," +
 		"input[type='password']," +
 		"input[type='email']," +
@@ -47,9 +47,7 @@ $.widget( "mobile.textinput", {
 
 		var options = this.options,
 			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
-			inputNeedsWrap = ( (this.element.is( "input" ) ||
-				this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='search']" ) ) &&
-					!this.element.is( "[data-" + ( $.mobile.ns || "" ) + "type='range']" ) );
+			isTextarea = this.element[ 0 ].nodeName.toLowerCase() === "textarea";
 
 		if ( this.element.prop( "disabled" ) ) {
 			options.disabled = true;
@@ -57,7 +55,7 @@ $.widget( "mobile.textinput", {
 
 		$.extend( this, {
 			isSearch: isSearch,
-			inputNeedsWrap: inputNeedsWrap
+			isTextarea: isTextarea
 		});
 
 		this._autoCorrect();
@@ -65,7 +63,7 @@ $.widget( "mobile.textinput", {
 		if ( !options.enhanced ) {
 			this._enhance();
 		} else {
-			this._outer = ( inputNeedsWrap ? this.element.parent() : this.element );
+			this._outer = ( isTextarea ? this.element.parent() : this.element );
 			if ( isSearch ) {
 				this._searchIcon = this._outer.children( ".ui-textinput-search-icon" );
 			}
@@ -97,7 +95,7 @@ $.widget( "mobile.textinput", {
 	_enhance: function() {
 		var outer;
 
-		if ( this.inputNeedsWrap ) {
+		if ( !this.isTextarea ) {
 			outer = $( "<div>" );
 			if ( this.isSearch ) {
 				this._searchIcon = $( "<span>" ).prependTo( outer );
@@ -112,7 +110,7 @@ $.widget( "mobile.textinput", {
 		this._addClasses();
 
 		// Now that we're done building up the wrapper, wrap the input in it
-		if ( this.inputNeedsWrap ) {
+		if ( !this.isTextarea ) {
 			outer.insertBefore( this.element ).append( this.element );
 		}
 	},
@@ -180,7 +178,7 @@ $.widget( "mobile.textinput", {
 		if ( this._searchIcon ) {
 			this._searchIcon.remove();
 		}
-		if ( this.inputNeedsWrap ) {
+		if ( !this.isTextarea ) {
 			this.element.unwrap();
 		}
 	}
