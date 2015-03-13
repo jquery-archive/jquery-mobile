@@ -139,7 +139,8 @@ $.widget( "mobile.slider", $.extend( {
 		}
 
 		// monitor the input for updated values
-		control.addClass( isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
+		control.addClass( isToggleSwitch ? "ui-slider-switch" :
+			"ui-slider-input ui-corner-all ui-shadow-inset ui-body-inherit" );
 
 		this._on( control, {
 			"change": "_controlChange",

@@ -105,8 +105,8 @@
 		ok( $( '#text-input-clear-button' ).next()
 			.is( 'a[tabindex="-1"][aria-hidden="true"]' ),
 			"correctly marked up clear button is present" );
-		assert.hasClasses( $( "#text-input-clear-button" ).next()[ 0 ], "ui-textinput-clear-button",
-			"clear button has class ui-textinput-clear-button" );
+		assert.hasClasses( $( "#text-input-clear-button" ).next()[ 0 ],
+			"ui-textinput-clear-button", "clear button has class ui-textinput-clear-button" );
 	});
 
 	test( "data-clear-btn does not add clear button to textarea", function( assert ) {

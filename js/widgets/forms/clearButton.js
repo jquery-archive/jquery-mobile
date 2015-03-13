@@ -28,7 +28,7 @@ define( [
 			}
 
 			// We do nothing on startup if the options is off or if this is not a wrapped input
-			if ( !this.options.clearBtn || !this.inputNeedsWrap ) {
+			if ( !this.options.clearBtn || this.isTextarea ) {
 				return;
 			}
 
@@ -103,7 +103,7 @@ define( [
 		_setOptions: function( options ) {
 			this._super( options );
 
-			if ( options.clearBtn !== undefined && this.inputNeedsWrap ) {
+			if ( options.clearBtn !== undefined && !this.isTextarea ) {
 				if ( options.clearBtn ) {
 					this._addClearButton();
 				} else {
