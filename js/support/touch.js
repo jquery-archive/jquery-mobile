@@ -3,7 +3,19 @@
 //>>label: Touch support test
 //>>group: Core
 
-define( [ "jquery", "../ns" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../ns" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 	(function( $, undefined ) {
 		var support = {

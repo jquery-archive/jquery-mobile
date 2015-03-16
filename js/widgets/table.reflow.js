@@ -4,7 +4,19 @@
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.table.reflow.css
 
-define( [ "jquery", "./table" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./table" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

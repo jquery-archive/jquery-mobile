@@ -5,12 +5,22 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.flipswitch.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../../core",
-	"../../widget",
-	"../../zoom",
-	"./reset" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../../core",
+			"../../widget",
+			"../../zoom",
+			"./reset" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

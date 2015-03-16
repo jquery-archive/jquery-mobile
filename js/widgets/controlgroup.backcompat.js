@@ -5,15 +5,23 @@
 //>>css.structure: ../css/structure/jquery.mobile.controlgroup.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../widget",
-	"widget.theme",
-	"jquery-ui/controlgroup",
-	"controlgroup",
-	"widget.backcompat"
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-], function( jQuery ) {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../widget",
+			"widget.theme",
+			"jquery-ui/controlgroup",
+			"controlgroup",
+			"widget.backcompat" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

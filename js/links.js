@@ -3,9 +3,20 @@
 //>>label: Link Classes
 //>>group: Utilities
 
-define( [ "jquery",
-	"./core",
-	"./navigation/path" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./core",
+			"./navigation/path" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

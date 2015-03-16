@@ -4,10 +4,20 @@
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.filterable.css
 
-define( [
-	"jquery",
-	"./listview",
-	"./filterable" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./listview",
+			"./filterable" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

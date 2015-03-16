@@ -8,7 +8,19 @@
 //>>group: Transitions
 //>>css.structure: ../css/structure/jquery.mobile.transition.flow.css
 
-define( [ "jquery", "../handlers" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../handlers" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 

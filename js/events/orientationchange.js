@@ -3,7 +3,20 @@
 //>>label: Orientation Change
 //>>group: Events
 
-define( [ "jquery", "../support/orientation", "./throttledresize" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../support/orientation",
+			"./throttledresize" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window ) {

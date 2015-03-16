@@ -4,10 +4,20 @@
 //>>group: Events
 
 // TODO break out pushstate support test so we don't depend on the whole thing
-define([
-	"jquery",
-	"./../ns",
-	"./../support" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./../ns",
+			"./../support" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {

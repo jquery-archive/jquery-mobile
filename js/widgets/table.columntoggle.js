@@ -4,12 +4,22 @@
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
-define( [
-	"jquery",
-	"./table",
-	"./popup",
-	"./controlgroup",
-	"../jquery-ui/checkboxradio" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./table",
+			"./popup",
+			"./controlgroup",
+			"../jquery-ui/checkboxradio" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

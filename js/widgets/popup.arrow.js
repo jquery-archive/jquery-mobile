@@ -5,9 +5,19 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 //>>css.structure: ../css/structure/jquery.mobile.popup.arrow.css
 
-define( [ "jquery", "./popup" ],
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-function( jQuery ) {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./popup" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 ( function( $, undefined ) {

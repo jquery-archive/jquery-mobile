@@ -2,7 +2,19 @@
 //>>description: Hides dividers when all items in the section they designate become hidden
 //>>label: Listview Hide Dividers
 //>>group: Widgets
-define( [ "jquery", "./listview" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./listview" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

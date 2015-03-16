@@ -2,10 +2,20 @@
 //>>description: Dynamic Base Tag Support
 //>>label: Base Tag
 //>>group: Navigation
-define([
-	"jquery",
-	"./path",
-	"./../ns" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./path",
+			"./../ns" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {

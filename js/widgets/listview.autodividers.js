@@ -2,7 +2,19 @@
 //>>description: Generates dividers for listview items
 //>>label: Listview Autodividers
 //>>group: Widgets
-define( [ "jquery", "./listview" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./listview" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

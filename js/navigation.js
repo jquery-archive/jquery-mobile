@@ -2,19 +2,29 @@
 //>>description: Applies the AJAX navigation system to links and forms to enable page transitions
 //>>label: Content Management
 //>>group: Navigation
-define( [
-	"jquery",
-	"./core",
-	"./navigation/path",
-	"./events/navigate",
-	"./navigation/history",
-	"./navigation/navigator",
-	"./navigation/method",
-	"./support",
-	"./animationComplete",
-	"./widgets/pagecontainer",
-	"./widgets/page",
-	"./transitions/handlers" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./core",
+			"./navigation/path",
+			"./events/navigate",
+			"./navigation/history",
+			"./navigation/navigator",
+			"./navigation/method",
+			"./support",
+			"./animationComplete",
+			"./widgets/pagecontainer",
+			"./widgets/page",
+			"./transitions/handlers" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

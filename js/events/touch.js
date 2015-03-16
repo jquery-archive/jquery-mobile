@@ -3,7 +3,20 @@
 //>>label: Touch
 //>>group: Events
 
-define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../vmouse",
+			"../support/touch" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {

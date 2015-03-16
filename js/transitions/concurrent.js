@@ -3,7 +3,19 @@
 //>>label: Transition Concurrent
 //>>group: Transitions
 
-define( [ "jquery", "./transition" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./transition" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {

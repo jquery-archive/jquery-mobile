@@ -11,18 +11,28 @@
 // if there is no history. If there is history, remove nav bindings from the nav
 // bindings handler - that way, only one of them can fire per close process.
 
-define( [
-	"jquery",
-	"../links",
-	"../widget",
-	"../support",
-	"../events/navigate",
-	"../navigation/path",
-	"../navigation/history",
-	"../navigation/navigator",
-	"../navigation/method",
-	"../animationComplete",
-	"../navigation" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../links",
+			"../widget",
+			"../support",
+			"../events/navigate",
+			"../navigation/path",
+			"../navigation/history",
+			"../navigation/navigator",
+			"../navigation/method",
+			"../animationComplete",
+			"../navigation" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

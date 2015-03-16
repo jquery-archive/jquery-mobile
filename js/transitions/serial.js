@@ -3,7 +3,20 @@
 //>>label: Transition Serial
 //>>group: Transitions
 
-define( [ "jquery", "../animationComplete", "./transition" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../animationComplete",
+			"./transition" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $ ) {

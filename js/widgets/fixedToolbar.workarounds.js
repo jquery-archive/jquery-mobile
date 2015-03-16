@@ -3,7 +3,24 @@
 //>>label: Toolbars: Fixed: Workarounds
 //>>group: Widgets
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
-define( [ "jquery", "../widget", "../core", "../navigation", "./page", "../zoom", "./fixedToolbar" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../widget",
+			"../core",
+			"../navigation",
+			"./page",
+			"../zoom",
+			"./fixedToolbar" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	$.widget( "mobile.toolbar", $.mobile.toolbar, {

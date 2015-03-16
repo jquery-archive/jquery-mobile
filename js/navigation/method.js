@@ -2,7 +2,21 @@
 //>>description: A wrapper for the primary Navigator and History objects in jQuery Mobile
 //>>label: Navigate Method
 //>>group: Navigation
-define([ "jquery", "./path", "./history", "./navigator" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./path",
+			"./history",
+			"./navigator" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {

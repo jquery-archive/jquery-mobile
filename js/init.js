@@ -3,19 +3,29 @@
 //>>label: Init
 //>>group: Core
 
-define([
-	"jquery",
-	"jquery-ui/core",
-	"./defaults",
-	"./helpers",
-	"./data",
-	"./support",
-	"./events/navigate",
-	"./navigation/path",
-	"./navigation/method",
-	"./navigation",
-	"./widgets/loader",
-	"./vmouse" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"jquery-ui/core",
+			"./defaults",
+			"./helpers",
+			"./data",
+			"./support",
+			"./events/navigate",
+			"./navigation/path",
+			"./navigation/method",
+			"./navigation",
+			"./widgets/loader",
+			"./vmouse" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 	var	$html = $( "html" ),

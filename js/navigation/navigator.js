@@ -2,11 +2,22 @@
 //>>description: Manages URL history and information in conjunction with the navigate event
 //>>label: Navigation Manager
 //>>group: Navigation
-define(["jquery",
-	"./../ns",
-	"../events/navigate",
-	"./path",
-	"./history" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./../ns",
+			"../events/navigate",
+			"./path",
+			"./history" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {

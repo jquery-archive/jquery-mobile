@@ -2,19 +2,29 @@
 //>>description: Widget to create page container which manages pages and transitions
 //>>label: Content Management
 //>>group: Navigation
-define( [
-	"jquery",
-	"../core",
-	"../navigation/path",
-	"../navigation/base",
-	"../events/navigate",
-	"../navigation/history",
-	"../navigation/navigator",
-	"../navigation/method",
-	"../events/scroll",
-	"../support",
-	"../widgets/page",
-	"../transitions/handlers" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../core",
+			"../navigation/path",
+			"../navigation/base",
+			"../events/navigate",
+			"../navigation/history",
+			"../navigation/navigator",
+			"../navigation/method",
+			"../events/scroll",
+			"../support",
+			"../widgets/page",
+			"../transitions/handlers" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 

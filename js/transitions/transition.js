@@ -5,16 +5,26 @@
 //>>css.structure: ../css/structure/jquery.mobile.transition.css, ../css/structure/jquery.mobile.transition.fade.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../core",
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-	// TODO event.special.scrollstart
-	"../events/scroll",
-	"../animationComplete",
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../core",
 
-	// TODO $.mobile.focusPage reference
-	"../navigation" ], function( jQuery ) {
+			// TODO event.special.scrollstart
+			"../events/scroll",
+			"../animationComplete",
+
+			// TODO $.mobile.focusPage reference
+			"../navigation" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, window, undefined ) {

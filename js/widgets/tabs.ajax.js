@@ -3,13 +3,22 @@
 //>>label: Tabs
 //>>group: Widgets
 
-define( [
-	"jquery",
-	"../defaults",
-	"../navigation/path",
-	"../navigation/base",
-	"jquery-ui/tabs" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../defaults",
+			"../navigation/path",
+			"../navigation/base",
+			"jquery-ui/tabs" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 ( function( $, undefined ) {

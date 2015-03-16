@@ -2,7 +2,20 @@
 //>>description: Manages a stack of history entries. Used exclusively by the Navigation Manager
 //>>label: History Manager
 //>>group: Navigation
-define([ "jquery", "./../ns", "./path" ], function( jQuery ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./../ns",
+			"./path" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
 (function( $, undefined ) {
