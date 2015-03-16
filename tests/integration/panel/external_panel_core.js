@@ -77,7 +77,7 @@ asyncTest( "External panel stretches to acommodate page height", function( asser
 		},
 		function( result ) {
 			assert.deepEqual( result.panelopen.timedOut, false, "Panel opened successfully" );
-			assert.deepEqual( stretchTestPanel.height(), $( document ).height(),
+			assert.deepEqual( stretchTestPanel.outerHeight( true ), $( document ).height(),
 				"Panel is as tall as the document" );
 			stretchTestPanel.panel( "close" );
 		},
