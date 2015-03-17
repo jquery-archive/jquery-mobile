@@ -1,7 +1,6 @@
 /*
  * mobile init tests
  */
-QUnit.config.autostart = false;
 
 define([
 	"jquery",
@@ -21,8 +20,6 @@ define([
 				return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ))
 			};
 
-
-		QUnit.start();
 
 		module(libName, {
 			setup: function(){
