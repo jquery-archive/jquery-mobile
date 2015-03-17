@@ -84,10 +84,10 @@
 		$.mobile.ignoreContentEnabled = true;
 
 		$ignored.parent().trigger( "create" );
-		deepEqual( $ignored.attr( "class" ), undefined, "ignored link doesn't have link class" );
+		ok( !$ignored.hasClass( "ui-link" ), "ignored link doesn't have link class" );
 
 		$enhanced.parent().trigger( "create" );
-		deepEqual( $enhanced.attr( "class" ).indexOf("ui-link"), 0, "enhanced link has link class" );
+		ok( $enhanced.hasClass( "ui-link" ), "enhanced link has link class" );
 
 		$.mobile.ignoreContentEnabled = false;
 	});
