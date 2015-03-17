@@ -5,67 +5,67 @@
 //>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define([
+define( [
 	"jquery",
 	"../../core",
 	"../../widget",
 	"../widget.theme",
 	"checkboxradio",
 	"checkboxradio.backcompat"
-	], function( jQuery ) {
+], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
-if ( $.mobileBackcompat !== false ) {
-	$.widget( "ui.button", $.ui.button, {
-		options: {
-			iconpos: "left",
-			mini: false,
-			wrapperClass: null,
-			inline: null,
-			shadow: true,
-			corners: true
-		},
+	if ( $.mobileBackcompat !== false ) {
+		$.widget( "ui.button", $.ui.button, {
+			options: {
+				iconpos: "left",
+				mini: false,
+				wrapperClass: null,
+				inline: null,
+				shadow: true,
+				corners: true
+			},
 
 
-		classProp: "ui-button",
+			classProp: "ui-button",
 
-		_create: function() {
-			if ( this.options.iconPosition !== $.ui.button.prototype.options.iconPosition ) {
-				this._set_iconpos( this.options.iconPosition );
-			} else if ( this.options.iconpos !== $.ui.button.prototype.options.iconpos ) {
-				this._set_iconPosition( this.options.iconpos );
+			_create: function() {
+				if ( this.options.iconPosition !== $.ui.button.prototype.options.iconPosition ) {
+					this._set_iconpos( this.options.iconPosition );
+				} else if ( this.options.iconpos !== $.ui.button.prototype.options.iconpos ) {
+					this._set_iconPosition( this.options.iconpos );
+				}
+				this._super();
+			},
+
+			_set_iconPosition: function( value ) {
+				if ( value === "end" ) {
+					this.options.iconpos = "right";
+				} else if ( value !== "left" ) {
+					this.options.iconpos = value;
+				}
+			},
+
+			_set_iconpos: function( value ) {
+				if ( value === "right" ) {
+					this._setOption( "iconPosition", "end" );
+				} else if ( value !== "left" ) {
+					this._setOption( "iconPosition", value );
+				}
+			},
+
+			_setOption: function( key, value ) {
+				if ( key === "iconPosition" || key === "iconpos" ) {
+					this[ "_set" + key ]( value );
+				}
+				this._superApply( arguments );
 			}
-			this._super();
-		},
+		} );
+		$.widget( "ui.button", $.ui.button, $.mobile.widget.backcompat );
+	}
 
-		_set_iconPosition: function( value ) {
-			if ( value === "end" ) {
-				this.options.iconpos = "right";
-			} else if ( value !== "left" ) {
-				this.options.iconpos = value;
-			}
-		},
-
-		_set_iconpos: function( value ) {
-			if ( value === "right" ) {
-				this._setOption( "iconPosition", "end" );
-			} else if ( value !== "left" ) {
-				this._setOption( "iconPosition", value );
-			}
-		},
-
-		_setOption: function( key, value ) {
-			if ( key === "iconPosition" || key === "iconpos" ) {
-				this[ "_set" +  key ]( value );
-			}
-			this._superApply( arguments );
-		}
-	});
-	$.widget( "ui.button", $.ui.button, $.mobile.widget.backcompat );
-}
-
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
