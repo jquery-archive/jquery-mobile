@@ -1,4 +1,12 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+/*!
+ * jQuery Mobile Library @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>group: exclude
 
 define([
@@ -60,4 +68,3 @@ define([
 ], function( require ) {
 	require( [ "./init" ], function() {} );
 });
-//>>excludeEnd("jqmBuildExclude");
