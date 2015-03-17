@@ -1,7 +1,7 @@
 /*
  * mobile init tests
  */
-QUnit.stop();
+QUnit.config.autostart = false;
 
 define([
 	"jquery",
