@@ -13,293 +13,293 @@ define( [
 	"../../navigation/path",
 	"./reset" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
-$.widget( "mobile.selectmenu", $.extend( {
-	initSelector: "select:not( :jqmData(role='slider')):not( :jqmData(role='flipswitch') )",
+	$.widget( "mobile.selectmenu", $.extend( {
+		initSelector: "select:not( :jqmData(role='slider')):not( :jqmData(role='flipswitch') )",
 
-	options: {
-		theme: null,
-		icon: "carat-d",
-		iconpos: "right",
-		inline: false,
-		corners: true,
-		shadow: true,
-		iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
-		overlayTheme: null,
-		dividerTheme: null,
-		hidePlaceholderMenuItems: true,
-		closeText: "Close",
-		nativeMenu: true,
-		// This option defaults to true on iOS devices.
-		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		mini: false
-	},
+		options: {
+			theme: null,
+			icon: "carat-d",
+			iconpos: "right",
+			inline: false,
+			corners: true,
+			shadow: true,
+			iconshadow: false, /* TODO: Deprecated in 1.4, remove in 1.5. */
+			overlayTheme: null,
+			dividerTheme: null,
+			hidePlaceholderMenuItems: true,
+			closeText: "Close",
+			nativeMenu: true,
+			// This option defaults to true on iOS devices.
+			preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
+			mini: false
+		},
 
-	_button: function() {
-		return $( "<div/>" );
-	},
+		_button: function() {
+			return $( "<div/>" );
+		},
 
-	_setDisabled: function( value ) {
-		this.element.attr( "disabled", value );
-		this.button.attr( "aria-disabled", value );
-		return this._setOption( "disabled", value );
-	},
+		_setDisabled: function( value ) {
+			this.element.attr( "disabled", value );
+			this.button.attr( "aria-disabled", value );
+			return this._setOption( "disabled", value );
+		},
 
-	_focusButton : function() {
-		var self = this;
+		_focusButton: function() {
+			var self = this;
 
-		setTimeout( function() {
-			self.button.focus();
-		}, 40);
-	},
+			setTimeout( function() {
+				self.button.focus();
+			}, 40 );
+		},
 
-	_selectOptions: function() {
-		return this.select.find( "option" );
-	},
+		_selectOptions: function() {
+			return this.select.find( "option" );
+		},
 
-	// setup items that are generally necessary for select menu extension
-	_preExtension: function() {
-		var inline = this.options.inline || this.element.jqmData( "inline" ),
-			mini = this.options.mini || this.element.jqmData( "mini" ),
-			classes = "";
-		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
-		/* if ( $el[0].className.length ) {
-			classes = $el[0].className;
-		} */
-		if ( !!~this.element[0].className.indexOf( "ui-button-left" ) ) {
-			classes = " ui-button-left";
-		}
-
-		if (  !!~this.element[0].className.indexOf( "ui-button-right" ) ) {
-			classes = " ui-button-right";
-		}
-
-		if ( inline ) {
-			classes += " ui-button-inline";
-		}
-		if ( mini ) {
-			classes += " ui-mini";
-		}
-
-		this.select = this.element.removeClass( "ui-button-left ui-button-right" ).wrap( "<div class='ui-select" + classes + "'>" );
-		this.selectId  = this.select.attr( "id" ) || ( "select-" + this.uuid );
-		this.buttonId = this.selectId + "-button";
-		this.label = $( "label[for='"+ $.mobile.path.hashToSelector( this.selectId ) +"']" );
-		this.isMultiple = this.select[ 0 ].multiple;
-	},
-
-	_destroy: function() {
-		var wrapper = this.element.parents( ".ui-select" );
-		if ( wrapper.length > 0 ) {
-			if ( wrapper.is( ".ui-button-left, .ui-button-right" ) ) {
-				this.element.addClass( wrapper.hasClass( "ui-button-left" ) ? "ui-button-left" : "ui-button-right" );
+		// setup items that are generally necessary for select menu extension
+		_preExtension: function() {
+			var inline = this.options.inline || this.element.jqmData( "inline" ),
+				mini = this.options.mini || this.element.jqmData( "mini" ),
+				classes = "";
+			// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
+			/* if ( $el[0].className.length ) {
+				classes = $el[0].className;
+			} */
+			if ( !!~this.element[ 0 ].className.indexOf( "ui-button-left" ) ) {
+				classes = " ui-button-left";
 			}
-			this.element.insertAfter( wrapper );
-			wrapper.remove();
-		}
-	},
 
-	_create: function() {
-		this._preExtension();
+			if ( !!~this.element[ 0 ].className.indexOf( "ui-button-right" ) ) {
+				classes = " ui-button-right";
+			}
 
-		this.button = this._button();
+			if ( inline ) {
+				classes += " ui-button-inline";
+			}
+			if ( mini ) {
+				classes += " ui-mini";
+			}
 
-		var options = this.options,
+			this.select = this.element.removeClass( "ui-button-left ui-button-right" ).wrap( "<div class='ui-select" + classes + "'>" );
+			this.selectId = this.select.attr( "id" ) || ( "select-" + this.uuid );
+			this.buttonId = this.selectId + "-button";
+			this.label = $( "label[for='" + $.mobile.path.hashToSelector( this.selectId ) + "']" );
+			this.isMultiple = this.select[ 0 ].multiple;
+		},
 
-			iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
+		_destroy: function() {
+			var wrapper = this.element.parents( ".ui-select" );
+			if ( wrapper.length > 0 ) {
+				if ( wrapper.is( ".ui-button-left, .ui-button-right" ) ) {
+					this.element.addClass( wrapper.hasClass( "ui-button-left" ) ? "ui-button-left" : "ui-button-right" );
+				}
+				this.element.insertAfter( wrapper );
+				wrapper.remove();
+			}
+		},
 
-			button = this.button
-				.insertBefore( this.select )
-				.attr( "id", this.buttonId )
-				.addClass( "ui-button" +
-					( options.icon ? ( " ui-icon-" + options.icon + " ui-button-icon-" + iconpos +
-					( options.iconshadow ? " ui-shadow-icon" : "" ) ) :	"" ) + /* TODO: Remove in 1.5. */
-					( options.theme ? " ui-button-" + options.theme : "" ) +
-					( options.corners ? " ui-corner-all" : "" ) +
-					( options.shadow ? " ui-shadow" : "" ) );
+		_create: function() {
+			this._preExtension();
 
-		this.setButtonText();
+			this.button = this._button();
 
-		// Opera does not properly support opacity on select elements
-		// In Mini, it hides the element, but not its text
-		// On the desktop,it seems to do the opposite
-		// for these reasons, using the nativeMenu option results in a full native select in Opera
-		if ( options.nativeMenu && window.opera && window.opera.version ) {
-			button.addClass( "ui-select-nativeonly" );
-		}
+			var options = this.options,
 
-		// Add counter for multi selects
-		if ( this.isMultiple ) {
-			this.buttonCount = $( "<span>" )
-				.addClass( "ui-li-count ui-body-inherit" )
-				.hide()
-				.appendTo( button.addClass( "ui-li-has-count" ) );
-		}
+				iconpos = options.icon ? ( options.iconpos || this.select.jqmData( "iconpos" ) ) : false,
 
-		// Disable if specified
-		if ( options.disabled || this.element.attr( "disabled" )) {
-			this.disable();
-		}
+				button = this.button
+					.insertBefore( this.select )
+					.attr( "id", this.buttonId )
+					.addClass( "ui-button" +
+						( options.icon ? ( " ui-icon-" + options.icon + " ui-button-icon-" + iconpos +
+						( options.iconshadow ? " ui-shadow-icon" : "" ) ) : "" ) + /* TODO: Remove in 1.5. */
+						( options.theme ? " ui-button-" + options.theme : "" ) +
+						( options.corners ? " ui-corner-all" : "" ) +
+						( options.shadow ? " ui-shadow" : "" ) );
 
-		// Events on native select
-		this._on( this.select, {
-			change: "refresh"
-		});
+			this.setButtonText();
 
-		this._handleFormReset();
+			// Opera does not properly support opacity on select elements
+			// In Mini, it hides the element, but not its text
+			// On the desktop,it seems to do the opposite
+			// for these reasons, using the nativeMenu option results in a full native select in Opera
+			if ( options.nativeMenu && window.opera && window.opera.version ) {
+				button.addClass( "ui-select-nativeonly" );
+			}
 
-		this._on( this.button, {
-			keydown: "_handleKeydown"
-		});
+			// Add counter for multi selects
+			if ( this.isMultiple ) {
+				this.buttonCount = $( "<span>" )
+					.addClass( "ui-li-count ui-body-inherit" )
+					.hide()
+					.appendTo( button.addClass( "ui-li-has-count" ) );
+			}
 
-		this.build();
-	},
+			// Disable if specified
+			if ( options.disabled || this.element.attr( "disabled" ) ) {
+				this.disable();
+			}
 
-	build: function() {
-		var self = this;
+			// Events on native select
+			this._on( this.select, {
+				change: "refresh"
+			} );
 
-		this.select
-			.appendTo( self.button )
-			.bind( "vmousedown", function() {
-				// Add active class to button
-				self.button.addClass( $.mobile.activeBtnClass );
-			})
-			.bind( "focus", function() {
-				self.button.addClass( $.mobile.focusClass );
-			})
-			.bind( "blur", function() {
-				self.button.removeClass( $.mobile.focusClass );
-			})
-			.bind( "focus vmouseover", function() {
-				self.button.trigger( "vmouseover" );
-			})
-			.bind( "vmousemove", function() {
-				// Remove active class on scroll/touchmove
-				self.button.removeClass( $.mobile.activeBtnClass );
-			})
-			.bind( "change blur vmouseout", function() {
-				self.button.trigger( "vmouseout" )
-					.removeClass( $.mobile.activeBtnClass );
-			});
+			this._handleFormReset();
 
-		// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
-		self.button.bind( "vmousedown", function() {
-			if ( self.options.preventFocusZoom ) {
+			this._on( this.button, {
+				keydown: "_handleKeydown"
+			} );
+
+			this.build();
+		},
+
+		build: function() {
+			var self = this;
+
+			this.select
+				.appendTo( self.button )
+				.bind( "vmousedown", function() {
+					// Add active class to button
+					self.button.addClass( $.mobile.activeBtnClass );
+				} )
+				.bind( "focus", function() {
+					self.button.addClass( $.mobile.focusClass );
+				} )
+				.bind( "blur", function() {
+					self.button.removeClass( $.mobile.focusClass );
+				} )
+				.bind( "focus vmouseover", function() {
+					self.button.trigger( "vmouseover" );
+				} )
+				.bind( "vmousemove", function() {
+					// Remove active class on scroll/touchmove
+					self.button.removeClass( $.mobile.activeBtnClass );
+				} )
+				.bind( "change blur vmouseout", function() {
+					self.button.trigger( "vmouseout" )
+						.removeClass( $.mobile.activeBtnClass );
+				} );
+
+			// In many situations, iOS will zoom into the select upon tap, this prevents that from happening
+			self.button.bind( "vmousedown", function() {
+				if ( self.options.preventFocusZoom ) {
 					$.mobile.zoom.disable( true );
-			}
-		});
-		self.label.bind( "click focus", function() {
-			if ( self.options.preventFocusZoom ) {
+				}
+			} );
+			self.label.bind( "click focus", function() {
+				if ( self.options.preventFocusZoom ) {
 					$.mobile.zoom.disable( true );
-			}
-		});
-		self.select.bind( "focus", function() {
-			if ( self.options.preventFocusZoom ) {
+				}
+			} );
+			self.select.bind( "focus", function() {
+				if ( self.options.preventFocusZoom ) {
 					$.mobile.zoom.disable( true );
-			}
-		});
-		self.button.bind( "mouseup", function() {
-			if ( self.options.preventFocusZoom ) {
-				setTimeout(function() {
+				}
+			} );
+			self.button.bind( "mouseup", function() {
+				if ( self.options.preventFocusZoom ) {
+					setTimeout( function() {
+						$.mobile.zoom.enable( true );
+					}, 0 );
+				}
+			} );
+			self.select.bind( "blur", function() {
+				if ( self.options.preventFocusZoom ) {
 					$.mobile.zoom.enable( true );
-				}, 0 );
+				}
+			} );
+
+		},
+
+		selected: function() {
+			return this._selectOptions().filter( ":selected" );
+		},
+
+		selectedIndices: function() {
+			var self = this;
+
+			return this.selected().map( function() {
+				return self._selectOptions().index( this );
+			} ).get();
+		},
+
+		setButtonText: function() {
+			var self = this,
+				selected = this.selected(),
+				text = this.placeholder,
+				span = $( document.createElement( "span" ) );
+
+			this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( ( function() {
+				if ( selected.length ) {
+					text = selected.map( function() {
+						return $( this ).text();
+					} ).get().join( ", " );
+				} else {
+					text = self.placeholder;
+				}
+
+				if ( text ) {
+					span.text( text );
+				} else {
+
+					// Set the contents to &nbsp; which we write as &#160; to be XHTML compliant - see gh-6699
+					span.html( "&#160;" );
+				}
+
+				// TODO possibly aggregate multiple select option classes
+				return span
+					.addClass( self.select.attr( "class" ) )
+					.addClass( selected.attr( "class" ) )
+					.removeClass( "ui-screen-hidden" );
+			} )() );
+		},
+
+		setButtonCount: function() {
+			var selected = this.selected();
+
+			// multiple count inside button
+			if ( this.isMultiple ) {
+				this.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
 			}
-		});
-		self.select.bind( "blur", function() {
-			if ( self.options.preventFocusZoom ) {
-				$.mobile.zoom.enable( true );
-			}
-		});
+		},
 
-	},
+		_handleKeydown: function( /* event */ ) {
+			this._delay( "_refreshButton" );
+		},
 
-	selected: function() {
-		return this._selectOptions().filter( ":selected" );
-	},
+		_reset: function() {
+			this.refresh();
+		},
 
-	selectedIndices: function() {
-		var self = this;
+		_refreshButton: function() {
+			this.setButtonText();
+			this.setButtonCount();
+		},
 
-		return this.selected().map(function() {
-			return self._selectOptions().index( this );
-		}).get();
-	},
+		refresh: function() {
+			this._refreshButton();
+		},
 
-	setButtonText: function() {
-		var self = this,
-			selected = this.selected(),
-			text = this.placeholder,
-			span = $( document.createElement( "span" ) );
+		// open and close preserved in native selects
+		// to simplify users code when looping over selects
+		open: $.noop,
+		close: $.noop,
 
-		this.button.children( "span" ).not( ".ui-li-count" ).remove().end().end().prepend( (function() {
-			if ( selected.length ) {
-				text = selected.map(function() {
-					return $( this ).text();
-				}).get().join( ", " );
-			} else {
-				text = self.placeholder;
-			}
+		disable: function() {
+			this._setDisabled( true );
+			this.button.addClass( "ui-state-disabled" );
+		},
 
-			if ( text ) {
-				span.text( text );
-			} else {
-
-				// Set the contents to &nbsp; which we write as &#160; to be XHTML compliant - see gh-6699
-				span.html( "&#160;" );
-			}
-
-			// TODO possibly aggregate multiple select option classes
-			return span
-				.addClass( self.select.attr( "class" ) )
-				.addClass( selected.attr( "class" ) )
-				.removeClass( "ui-screen-hidden" );
-		})());
-	},
-
-	setButtonCount: function() {
-		var selected = this.selected();
-
-		// multiple count inside button
-		if ( this.isMultiple ) {
-			this.buttonCount[ selected.length > 1 ? "show" : "hide" ]().text( selected.length );
+		enable: function() {
+			this._setDisabled( false );
+			this.button.removeClass( "ui-state-disabled" );
 		}
-	},
+	}, $.mobile.behaviors.formReset ) );
 
-	_handleKeydown: function( /* event */ ) {
-		this._delay( "_refreshButton" );
-	},
-
-	_reset: function() {
-		this.refresh();
-	},
-
-	_refreshButton: function() {
-		this.setButtonText();
-		this.setButtonCount();
-	},
-
-	refresh: function() {
-		this._refreshButton();
-	},
-
-	// open and close preserved in native selects
-	// to simplify users code when looping over selects
-	open: $.noop,
-	close: $.noop,
-
-	disable: function() {
-		this._setDisabled( true );
-		this.button.addClass( "ui-state-disabled" );
-	},
-
-	enable: function() {
-		this._setDisabled( false );
-		this.button.removeClass( "ui-state-disabled" );
-	}
-}, $.mobile.behaviors.formReset ) );
-
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
