@@ -1,5 +1,5 @@
-requirejs.config({
+requirejs.config( {
 	"paths": {
 		"tests": "../tests"
 	}
-});
+} );
