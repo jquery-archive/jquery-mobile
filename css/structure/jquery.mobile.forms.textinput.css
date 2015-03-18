@@ -111,9 +111,12 @@ for Android 4.1 */
 .ui-input-text input[type=number]::-webkit-outer-spin-button {
 	margin: 0;
 }
-/* Resolves issue #5756: Textinput in IE10 has a default clear button */
-.ui-input-text input::-ms-clear,
-.ui-input-search input::-ms-clear {
+/* Resolves issue #8001: Default clear button in date input type*/
+.ui-textinput-hide-clear::-ms-clear{
+	display: none;
+}
+/* This needs to be its own rule because browsers have to drop the whole rule if they encounter an invalid pseudo element*/
+.ui-textinput-hide-clear::-webkit-clear-button{
 	display: none;
 }
 .ui-input-text input:focus,
