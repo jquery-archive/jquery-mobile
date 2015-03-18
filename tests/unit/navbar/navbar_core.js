@@ -23,9 +23,8 @@
 
 		$("#foo").trigger( "create" );
 
-		deepEqual( $ignored.attr( "class" ), undefined, "ignored list doesn't have the grid theme" );
+		ok( !$ignored.hasClass( "ui-grid" ), "ignored list doesn't have the grid theme" );
 		deepEqual( $enhanced.attr( "class" ).indexOf("ui-grid"), 0, "enhanced list has the grid theme" );
-
 		$.mobile.ignoreContentEnabled = false;
 	});
 
