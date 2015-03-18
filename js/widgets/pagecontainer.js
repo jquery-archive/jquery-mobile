@@ -16,7 +16,7 @@ define( [
 	"../widgets/page",
 	"../transitions/handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
 	$.widget( "mobile.pagecontainer", {
 		options: {
@@ -39,20 +39,20 @@ define( [
 				// bind to scrollstop for the first page, "pagechange" won't be
 				// fired in that case
 				scrollstop: "_delayedRecordScroll"
-			});
+			} );
 
 			// TODO consider moving the navigation handler OUT of widget into
 			//      some other object as glue between the navigate event and the
 			//      content widget load and change methods
-			this._on( this.window, { navigate: "_filterNavigateEvents" });
+			this._on( this.window, { navigate: "_filterNavigateEvents" } );
 
 			// TODO move from page* events to content* events
-			this._on({ pagechange: "_afterContentChange" });
+			this._on( { pagechange: "_afterContentChange" } );
 
 			// handle initial hashchange from chrome :(
-			this.window.one( "navigate", $.proxy(function() {
+			this.window.one( "navigate", $.proxy( function() {
 				this.setLastScrollEnabled = true;
-			}, this));
+			}, this ) );
 		},
 
 		_setOptions: function( options ) {
@@ -86,7 +86,7 @@ define( [
 
 			// determine and bind to the current scoll element which may be the
 			// window or in the case of touch overflow the element touch overflow
-			this._on( this.window, { scrollstop: "_delayedRecordScroll" });
+			this._on( this.window, { scrollstop: "_delayedRecordScroll" } );
 		},
 
 		_recordScroll: function() {
@@ -111,7 +111,7 @@ define( [
 		},
 
 		_delayedRecordScroll: function() {
-			setTimeout( $.proxy(this, "_recordScroll"), 100 );
+			setTimeout( $.proxy( this, "_recordScroll" ), 100 );
 		},
 
 		_getScroll: function() {
@@ -194,7 +194,7 @@ define( [
 				var activeIndex = $.mobile.navigate.history.activeIndex,
 					index = activeIndex + parseInt( steps, 10 ),
 					url = $.mobile.navigate.history.stack[ index ].url,
-					direction = ( steps >= 1 )? "forward" : "back";
+					direction = ( steps >= 1 ) ? "forward" : "back";
 
 				//update the history object
 				$.mobile.navigate.history.activeIndex = index;
@@ -210,7 +210,7 @@ define( [
 			var history;
 
 			// clean the hash for comparison if it's a url
-			if ( $.type(to) === "string" ) {
+			if ( $.type( to ) === "string" ) {
 				to = $.mobile.path.stripHash( to );
 			}
 
@@ -244,7 +244,8 @@ define( [
 		},
 
 		_handleDialog: function( changePageOptions, data ) {
-			var to, active, activeContent = this.getActivePage();
+			var to, active,
+				activeContent = this.getActivePage();
 
 			// If current active page is not a dialog skip the dialog and continue
 			// in the same direction
@@ -275,7 +276,7 @@ define( [
 					transition: this._optionFromHistory( data.direction, "transition",
 						changePageOptions.transition ),
 					reverse: data.direction === "back"
-				});
+				} );
 			}
 
 			return to;
@@ -284,7 +285,8 @@ define( [
 		_handleNavigate: function( url, data ) {
 			//find first page via hash
 			// TODO stripping the hash twice with handleUrl
-			var to = $.mobile.path.stripHash( url ), history = this._getHistory(),
+			var to = $.mobile.path.stripHash( url ),
+				history = this._getHistory(),
 
 				// transition is false if it's the first page, undefined
 				// otherwise (and may be overridden by default)
@@ -304,14 +306,14 @@ define( [
 				transition: transition,
 				allowSamePageTransition: this._optionFromHistory( data.direction,
 					"allowSamePageTransition" )
-			});
+			} );
 
 			// TODO move to _handleDestination ?
 			// If this isn't the first page, if the current url is a dialog hash
 			// key, and the initial destination isn't equal to the current target
 			// page, use the special dialog handling
 			if ( history.activeIndex > 0 &&
-				to.indexOf( $.mobile.dialogHashKey ) > -1 ) {
+					to.indexOf( $.mobile.dialogHashKey ) > -1 ) {
 
 				to = this._handleDialog( changePageOptions, data );
 
@@ -338,7 +340,7 @@ define( [
 		_enhance: function( content, role ) {
 			// TODO consider supporting a custom callback, and passing in
 			// the settings which includes the role
-			return content.page({ role: role });
+			return content.page( { role: role } );
 		},
 
 		_include: function( page, settings ) {
@@ -356,7 +358,8 @@ define( [
 			// TODO consider supporting a custom callback
 			var fileUrl = this._createFileUrl( absUrl ),
 				dataUrl = this._createDataUrl( absUrl ),
-				page, initialContent = this._getInitialContent();
+				page,
+				initialContent = this._getInitialContent();
 
 			// Check to see if the page already exists in the DOM.
 			// NOTE do _not_ use the :jqmData pseudo selector because parenthesis
@@ -370,7 +373,7 @@ define( [
 			// injected by a developer, in which case it would be lacking a
 			// data-url attribute and in need of enhancement.
 			if ( page.length === 0 && dataUrl && !$.mobile.path.isPath( dataUrl ) ) {
-				page = this.element.children( $.mobile.path.hashToSelector("#" + dataUrl) )
+				page = this.element.children( $.mobile.path.hashToSelector( "#" + dataUrl ) )
 					.attr( "data-" + this._getNs() + "url", dataUrl )
 					.jqmData( "url", dataUrl );
 			}
@@ -382,9 +385,9 @@ define( [
 			// We check for this case here because we don't want a first-page with
 			// an id falling through to the non-existent embedded page error case.
 			if ( page.length === 0 &&
-				$.mobile.path.isFirstPageUrl( fileUrl ) &&
-				initialContent &&
-				initialContent.parent().length ) {
+					$.mobile.path.isFirstPageUrl( fileUrl ) &&
+					initialContent &&
+					initialContent.parent().length ) {
 				page = $( initialContent );
 			}
 
@@ -402,10 +405,10 @@ define( [
 				return;
 			}
 
-			this._loadMsg = setTimeout($.proxy(function() {
+			this._loadMsg = setTimeout( $.proxy( function() {
 				this._getLoader().loader( "show", theme, msg, textonly );
 				this._loadMsg = 0;
-			}, this), delay );
+			}, this ), delay );
 		},
 
 		_hideLoading: function() {
@@ -426,12 +429,13 @@ define( [
 
 			// hide the error message after a delay
 			// TODO configuration
-			setTimeout( $.proxy(this, "_hideLoading"), 1500 );
+			setTimeout( $.proxy( this, "_hideLoading" ), 1500 );
 		},
 
 		_parse: function( html, fileUrl ) {
 			// TODO consider allowing customization of this method. It's very JQM specific
-			var page, all = $( "<div></div>" );
+			var page,
+				all = $( "<div></div>" );
 
 			//workaround to allow scripts to execute when included in page divs
 			all.get( 0 ).innerHTML = html;
@@ -441,7 +445,7 @@ define( [
 			//if page elem couldn't be found, create one and insert the body element's contents
 			if ( !page.length ) {
 				page = $( "<div data-" + this._getNs() + "role='page'>" +
-					( html.split( /<\/?body[^>]*>/gmi )[1] || "" ) +
+					( html.split( /<\/?body[^>]*>/gmi )[ 1 ] || "" ) +
 					"</div>" );
 			}
 
@@ -458,7 +462,7 @@ define( [
 			//page title regexp
 			var newPageTitle = html.match( /<title[^>]*>([^<]*)/ ) && RegExp.$1;
 
-			if ( newPageTitle && !page.jqmData("title") ) {
+			if ( newPageTitle && !page.jqmData( "title" ) ) {
 				newPageTitle = $( "<div>" + newPageTitle + "</div>" ).text();
 				page.jqmData( "title", newPageTitle );
 			}
@@ -499,7 +503,7 @@ define( [
 		_loadSuccess: function( absUrl, triggerData, settings, deferred ) {
 			var fileUrl = this._createFileUrl( absUrl );
 
-			return $.proxy(function( html, textStatus, xhr ) {
+			return $.proxy( function( html, textStatus, xhr ) {
 				//pre-parse html to check for a data-url,
 				//use it as the new fileUrl, base path, etc
 				var content,
@@ -513,10 +517,10 @@ define( [
 				// can be directed to the correct url. loading into a temprorary
 				// element makes these requests immediately
 				if ( pageElemRegex.test( html ) &&
-					RegExp.$1 &&
-					dataUrlRegex.test( RegExp.$1 ) &&
-					RegExp.$1 ) {
-					fileUrl = $.mobile.path.getFilePath( $("<div>" + RegExp.$1 + "</div>").text() );
+						RegExp.$1 &&
+						dataUrlRegex.test( RegExp.$1 ) &&
+						RegExp.$1 ) {
+					fileUrl = $.mobile.path.getFilePath( $( "<div>" + RegExp.$1 + "</div>" ).text() );
 
 					// We specify that, if a data-url attribute is given on the page div, its value
 					// must be given non-URL-encoded. However, in this part of the code, fileUrl is
@@ -565,7 +569,7 @@ define( [
 				}
 
 				deferred.resolve( absUrl, settings, content );
-			}, this);
+			}, this );
 		},
 
 		_loadDefaults: {
@@ -595,10 +599,9 @@ define( [
 				// Examining the option "reloadPage" passed by the user is deprecated as of 1.4.0
 				// and will be removed in 1.5.0.
 				// Copy option "reloadPage" to "reload", but only if option "reload" is not present
-				reloadOptionExtension =
-					( ( options && options.reload === undefined &&
-						options.reloadPage !== undefined ) ?
-							{ reload: options.reloadPage } : {} ),
+				reloadOptionExtension = ( ( options && options.reload === undefined &&
+				options.reloadPage !== undefined ) ?
+					{ reload: options.reloadPage } : {} ),
 
 				// The default load options with overrides specified by the caller.
 				settings = $.extend( {}, this._loadDefaults, options, reloadOptionExtension ),
@@ -639,8 +642,8 @@ define( [
 			// If it isn't a reference to the first content and refers to missing
 			// embedded content reject the deferred and return
 			if ( content.length === 0 &&
-				$.mobile.path.isEmbeddedPage(fileUrl) &&
-				!$.mobile.path.isFirstPageUrl(fileUrl) ) {
+					$.mobile.path.isEmbeddedPage( fileUrl ) &&
+					!$.mobile.path.isFirstPageUrl( fileUrl ) ) {
 				deferred.reject( absUrl, settings );
 				return deferred.promise();
 			}
@@ -660,7 +663,7 @@ define( [
 				//if we are reloading the content make sure we update
 				// the base if its not a prefetch
 				if ( !settings.prefetch ) {
-					this._getBase().set(url);
+					this._getBase().set( url );
 				}
 
 				return deferred.promise();
@@ -681,7 +684,7 @@ define( [
 
 			// If the default behavior is prevented, stop here!
 			if ( pblEvent.deprecatedEvent.isDefaultPrevented() ||
-				pblEvent.event.isDefaultPrevented() ) {
+					pblEvent.event.isDefaultPrevented() ) {
 				return deferred.promise();
 			}
 
@@ -696,13 +699,13 @@ define( [
 			}
 
 			if ( !( $.mobile.allowCrossDomainPages ||
-				$.mobile.path.isSameDomain($.mobile.path.documentUrl, absUrl ) ) ) {
+					$.mobile.path.isSameDomain( $.mobile.path.documentUrl, absUrl ) ) ) {
 				deferred.reject( absUrl, settings );
 				return deferred.promise();
 			}
 
 			// Load the new content.
-			$.ajax({
+			$.ajax( {
 				url: fileUrl,
 				type: settings.type,
 				data: settings.data,
@@ -710,13 +713,13 @@ define( [
 				dataType: "html",
 				success: this._loadSuccess( absUrl, triggerData, settings, deferred ),
 				error: this._loadError( absUrl, triggerData, settings, deferred )
-			});
+			} );
 
 			return deferred.promise();
 		},
 
 		_loadError: function( absUrl, triggerData, settings, deferred ) {
-			return $.proxy(function( xhr, textStatus, errorThrown ) {
+			return $.proxy( function( xhr, textStatus, errorThrown ) {
 				//set base back to current path
 				this._getBase().set( $.mobile.path.get() );
 
@@ -733,7 +736,7 @@ define( [
 				// that called preventDefault(), to resolve/reject the
 				// deferred object within the triggerData.
 				if ( plfEvent.deprecatedEvent.isDefaultPrevented() ||
-					plfEvent.event.isDefaultPrevented() ) {
+						plfEvent.event.isDefaultPrevented() ) {
 					return;
 				}
 
@@ -743,7 +746,7 @@ define( [
 				}
 
 				deferred.reject( absUrl, settings );
-			}, this);
+			}, this );
 		},
 
 		_getTransitionHandler: function( transition ) {
@@ -765,7 +768,7 @@ define( [
 			if ( from ) {
 
 				//Check if this is a same page transition and tell the handler in page
-				if( to[0] === from[0] ){
+				if ( to[ 0 ] === from[ 0 ] ) {
 					samePage = true;
 				}
 
@@ -807,12 +810,12 @@ define( [
 
 			promise.done( $.proxy( function() {
 				this._triggerCssTransitionEvents( to, from );
-			}, this ));
+			}, this ) );
 
 			// TODO temporary accomodation of argument deferred
-			promise.done(function() {
+			promise.done( function() {
 				deferred.resolve.apply( deferred, arguments );
-			});
+			} );
 		},
 
 		_releaseTransitionLock: function() {
@@ -839,7 +842,7 @@ define( [
 
 			this.load( to, settings );
 
-			settings.deferred.done($.proxy(function( url, options, content ) {
+			settings.deferred.done( $.proxy( function( url, options, content ) {
 				isPageTransitioning = false;
 
 				// store the original absolute url so that it can be provided
@@ -847,13 +850,13 @@ define( [
 				options.absUrl = triggerData.absUrl;
 
 				this.transition( content, triggerData, options );
-			}, this));
+			}, this ) );
 
-			settings.deferred.fail($.proxy(function(/* url, options */) {
+			settings.deferred.fail( $.proxy( function( /* url, options */ ) {
 				this._removeActiveLinkClass( true );
 				this._releaseTransitionLock();
 				this._triggerWithDeprecated( "changefailed", triggerData );
-			}, this));
+			}, this ) );
 		},
 
 		_triggerPageBeforeChange: function( to, triggerData, settings ) {
@@ -863,14 +866,14 @@ define( [
 			$.extend( triggerData, {
 				toPage: to,
 				options: settings
-			});
+			} );
 
 			// NOTE: preserve the original target as the dataUrl value will be
 			// simplified eg, removing ui-state, and removing query params from
 			// the hash this is so that users who want to use query params have
 			// access to them in the event bindings for the page life cycle
 			// See issue #5085
-			if ( $.type(to) === "string" ) {
+			if ( $.type( to ) === "string" ) {
 				// if the toPage is a string simply convert it
 				triggerData.absUrl = $.mobile.path.makeUrlAbsolute( to, this._findBaseWithDefault() );
 			} else {
@@ -884,7 +887,7 @@ define( [
 
 			// If the default behavior is prevented, stop here!
 			if ( returnEvents.event.isDefaultPrevented() ||
-				returnEvents.deprecatedEvent.isDefaultPrevented() ) {
+					returnEvents.deprecatedEvent.isDefaultPrevented() ) {
 				return false;
 			}
 
@@ -907,7 +910,7 @@ define( [
 			settings.fromPage = settings.fromPage || this.activePage;
 
 			// if the page beforechange default is prevented return early
-			if ( !this._triggerPageBeforeChange(to, triggerData, settings) ) {
+			if ( !this._triggerPageBeforeChange( to, triggerData, settings ) ) {
 				return;
 			}
 
@@ -921,7 +924,7 @@ define( [
 			// to make sure it is loaded into the DOM. We'll listen
 			// to the promise object it returns so we know when
 			// it is done loading or if an error ocurred.
-			if ( $.type(to) === "string" ) {
+			if ( $.type( to ) === "string" ) {
 				// Set the isPageTransitioning flag to prevent any requests from
 				// entering this method while we are in the midst of loading a page
 				// or transitioning.
@@ -938,7 +941,7 @@ define( [
 				active, activeIsInitialPage,
 				historyDir, pageTitle, isDialog,
 				alreadyThere, newPageTitle,
-				params,	cssTransitionDeferred,
+				params, cssTransitionDeferred,
 				beforeTransition;
 
 			// If we are in the midst of a transition, queue the current request.
@@ -947,13 +950,13 @@ define( [
 			if ( isPageTransitioning ) {
 				// make sure to only queue the to and settings values so the arguments
 				// work with a call to the change method
-				pageTransitionQueue.unshift( [toPage, settings] );
+				pageTransitionQueue.unshift( [ toPage, settings ] );
 				return;
 			}
 
 			// DEPRECATED - this call only, in favor of the before transition
 			// if the page beforechange default is prevented return early
-			if ( !this._triggerPageBeforeChange(toPage, triggerData, settings) ) {
+			if ( !this._triggerPageBeforeChange( toPage, triggerData, settings ) ) {
 				return;
 			}
 
@@ -961,8 +964,8 @@ define( [
 			// if the (content|page)beforetransition default is prevented return early
 			// Note, we have to check for both the deprecated and new events
 			beforeTransition = this._triggerWithDeprecated( "beforetransition", triggerData );
-			if (beforeTransition.deprecatedEvent.isDefaultPrevented() ||
-				beforeTransition.event.isDefaultPrevented() ) {
+			if ( beforeTransition.deprecatedEvent.isDefaultPrevented() ||
+					beforeTransition.event.isDefaultPrevented() ) {
 				return;
 			}
 
@@ -982,7 +985,7 @@ define( [
 			// The caller passed us a real page DOM element. Update our
 			// internal state and then trigger a transition to the page.
 			fromPage = settings.fromPage;
-			url = ( settings.dataUrl && $.mobile.path.convertUrlToDataUrl(settings.dataUrl) ) ||
+			url = ( settings.dataUrl && $.mobile.path.convertUrlToDataUrl( settings.dataUrl ) ) ||
 				toPage.jqmData( "url" );
 
 			// The pageUrl var is usually the same as url, except when url is obscured
@@ -1008,8 +1011,8 @@ define( [
 			// the developer that turns on the allowSamePageTransitiona option to
 			// either turn off transition animations, or make sure that an appropriate
 			// animation transition is used.
-			if ( fromPage && fromPage[0] === toPage[0] &&
-				!settings.allowSamePageTransition ) {
+			if ( fromPage && fromPage[ 0 ] === toPage[ 0 ] &&
+					!settings.allowSamePageTransition ) {
 
 				isPageTransitioning = false;
 				this._triggerWithDeprecated( "transition", triggerData );
@@ -1018,14 +1021,14 @@ define( [
 				// Even if there is no page change to be done, we should keep the
 				// urlHistory in sync with the hash changes
 				if ( settings.fromHashChange ) {
-					$.mobile.navigate.history.direct({ url: url });
+					$.mobile.navigate.history.direct( { url: url } );
 				}
 
 				return;
 			}
 
 			// We need to make sure the page we are given has already been enhanced.
-			toPage.page({ role: settings.role });
+			toPage.page( { role: settings.role } );
 
 			// If the changePage request was sent from a hashChange event, check to
 			// see if the page is already within the urlHistory stack. If so, we'll
@@ -1044,13 +1047,13 @@ define( [
 			// document.activeElement is undefined when we are in an IFrame.
 			try {
 				if ( document.activeElement &&
-					document.activeElement.nodeName.toLowerCase() !== "body" ) {
+						document.activeElement.nodeName.toLowerCase() !== "body" ) {
 
 					$( document.activeElement ).blur();
 				} else {
 					$( "input:focus, textarea:focus, select:focus" ).blur();
 				}
-			} catch( e ) {}
+			} catch ( e ) {}
 
 			// Record whether we are at a place in history where a dialog used to be -
 			// if so, do not add a new history entry and do not change the hash either
@@ -1072,10 +1075,10 @@ define( [
 				// and history entry on top so that one may navigate back to the
 				// original dialog
 				if ( active.url &&
-					active.url.indexOf( $.mobile.dialogHashKey ) > -1 &&
-					this.activePage &&
-					!this.activePage.hasClass( "ui-dialog" ) &&
-					$.mobile.navigate.history.activeIndex > 0 ) {
+						active.url.indexOf( $.mobile.dialogHashKey ) > -1 &&
+						this.activePage &&
+						!this.activePage.hasClass( "ui-dialog" ) &&
+						$.mobile.navigate.history.activeIndex > 0 ) {
 
 					settings.changeHash = false;
 					alreadyThere = true;
@@ -1086,7 +1089,7 @@ define( [
 				url = ( active.url || "" );
 
 				// account for absolute urls instead of just relative urls use as hashes
-				if ( !alreadyThere && url.indexOf("#") > -1 ) {
+				if ( !alreadyThere && url.indexOf( "#" ) > -1 ) {
 					url += $.mobile.dialogHashKey;
 				} else {
 					url += "#" + $.mobile.dialogHashKey;
@@ -1097,7 +1100,7 @@ define( [
 			// If this is a deep-link or a reload ( active === undefined ) then just
 			// use pageTitle
 			newPageTitle = ( !active ) ? pageTitle : toPage.jqmData( "title" ) ||
-				toPage.children( ":jqmData(role='header')" ).find( ".ui-title" ).text();
+			toPage.children( ":jqmData(role='header')" ).find( ".ui-title" ).text();
 			if ( !!newPageTitle && pageTitle === document.title ) {
 				pageTitle = newPageTitle;
 			}
@@ -1134,7 +1137,7 @@ define( [
 				};
 
 				if ( settings.changeHash !== false && $.mobile.hashListeningEnabled ) {
-					$.mobile.navigate( this.window[ 0 ].encodeURI( url ), params, true);
+					$.mobile.navigate( this.window[ 0 ].encodeURI( url ), params, true );
 				} else if ( toPage[ 0 ] !== $.mobile.firstPage[ 0 ] ) {
 					$.mobile.navigate.history.add( url, params );
 				}
@@ -1154,13 +1157,13 @@ define( [
 
 			cssTransitionDeferred = $.Deferred();
 
-			this._cssTransition(toPage, fromPage, {
+			this._cssTransition( toPage, fromPage, {
 				transition: settings.transition,
 				reverse: settings.reverse,
 				deferred: cssTransitionDeferred
-			});
+			} );
 
-			cssTransitionDeferred.done($.proxy(function( name, reverse, $to, $from, alreadyFocused ) {
+			cssTransitionDeferred.done( $.proxy( function( name, reverse, $to, $from, alreadyFocused ) {
 				$.mobile.removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -1177,16 +1180,16 @@ define( [
 				this._releaseTransitionLock();
 				this._triggerWithDeprecated( "transition", triggerData );
 				this._triggerWithDeprecated( "change", triggerData );
-			}, this));
+			}, this ) );
 		},
 
 		// determine the current base url
 		_findBaseWithDefault: function() {
 			var closestBase = ( this.activePage &&
-			$.mobile.getClosestBaseUrl( this.activePage ) );
-		return closestBase || $.mobile.path.documentBase.hrefNoHash;
+				$.mobile.getClosestBaseUrl( this.activePage ) );
+			return closestBase || $.mobile.path.documentBase.hrefNoHash;
 		}
-	});
+	} );
 
 	// The following handlers should be bound after mobileinit has been triggered
 	// the following deferred is resolved in the init file
@@ -1199,7 +1202,7 @@ define( [
 		// indicates whether or not page is in process of transitioning
 		isPageTransitioning = false;
 
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
