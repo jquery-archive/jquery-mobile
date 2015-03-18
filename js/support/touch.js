@@ -5,15 +5,15 @@
 
 define( [ "jquery", "../ns" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-	(function( $, undefined ) {
-		var support = {
-			touch: "ontouchend" in document
-		};
+( function( $, undefined ) {
+	var support = {
+		touch: "ontouchend" in document
+	};
 
-		$.mobile.support = $.mobile.support || {};
-		$.extend( $.support, support );
-		$.extend( $.mobile.support, support );
-	}( jQuery ));
+	$.mobile.support = $.mobile.support || {};
+	$.extend( $.support, support );
+	$.extend( $.mobile.support, support );
+}( jQuery ) );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
