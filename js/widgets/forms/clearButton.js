@@ -47,6 +47,9 @@ define( [
 		},
 
 		_addClearBtn: function() {
+			
+			//Removes default clear button if jqm clear button is ON
+			this.element.addClass( "ui-textinput-hide-clear" ) ;
 
 			if ( !this.options.enhanced ) {
 				this._enhanceClear();
