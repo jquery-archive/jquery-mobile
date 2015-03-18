@@ -2,250 +2,250 @@
 //>>description: Assorted tests to qualify browsers by detecting features
 //>>label: Support Tests
 //>>group: Core
-define( [  "jquery", "./core", "./media", "./support/touch", "./support/orientation" ], function( jQuery ) {
+define( [ "jquery", "./core", "./media", "./support/touch", "./support/orientation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
-// thx Modernizr
-function propExists( prop ) {
-	var uc_prop = prop.charAt( 0 ).toUpperCase() + prop.substr( 1 ),
-		props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " ),
-		v;
+	// thx Modernizr
+	function propExists( prop ) {
+		var uc_prop = prop.charAt( 0 ).toUpperCase() + prop.substr( 1 ),
+			props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " ),
+			v;
 
-	for ( v in props ) {
-		if ( fbCSS[ props[ v ] ] !== undefined ) {
-			return true;
-		}
-	}
-}
-
-var fakeBody = $( "<body>" ).prependTo( "html" ),
-	fbCSS = fakeBody[ 0 ].style,
-	vendors = [ "Webkit", "Moz", "O" ],
-	webos = "palmGetResource" in window, //only used to rule out scrollTop
-	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
-	bb = window.blackberry && !propExists( "-webkit-transform" ), //only used to rule out box shadow, as it's filled opaque on BB 5 and lower
-	nokiaLTE7_3;
-
-// inline SVG support test
-function inlineSVG() {
-	// Thanks Modernizr & Erik Dahlstrom
-	var w = window,
-		svg = !!w.document.createElementNS && !!w.document.createElementNS( "http://www.w3.org/2000/svg", "svg" ).createSVGRect && !( w.opera && navigator.userAgent.indexOf( "Chrome" ) === -1 ),
-		support = function( data ) {
-			if ( !( data && svg ) ) {
-				$( "html" ).addClass( "ui-nosvg" );
+		for ( v in props ) {
+			if ( fbCSS[ props[ v ] ] !== undefined ) {
+				return true;
 			}
-		},
-		img = new w.Image();
-
-	img.onerror = function() {
-		support( false );
-	};
-	img.onload = function() {
-		support( img.width === 1 && img.height === 1 );
-	};
-	img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-}
-
-function transform3dTest() {
-	var mqProp = "transform-3d",
-		// Because the `translate3d` test below throws false positives in Android:
-		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" ),
-		el, transforms, t;
-
-	if ( ret ) {
-		return !!ret;
-	}
-
-	el = document.createElement( "div" );
-	transforms = {
-		// We’re omitting Opera for the time being; MS uses unprefixed.
-		"MozTransform": "-moz-transform",
-		"transform": "transform"
-	};
-
-	fakeBody.append( el );
-
-	for ( t in transforms ) {
-		if ( el.style[ t ] !== undefined ) {
-			el.style[ t ] = "translate3d( 100px, 1px, 1px )";
-			ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
 		}
 	}
-	return ( !!ret && ret !== "none" );
-}
 
-// Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
-function baseTagTest() {
-	var fauxBase = location.protocol + "//" + location.host + location.pathname + "ui-dir/",
-		base = $( "head base" ),
-		fauxEle = null,
-		href = "",
-		link, rebase;
+	var fakeBody = $( "<body>" ).prependTo( "html" ),
+		fbCSS = fakeBody[ 0 ].style,
+		vendors = [ "Webkit", "Moz", "O" ],
+		webos = "palmGetResource" in window, //only used to rule out scrollTop
+		operamini = window.operamini && ( {} ).toString.call( window.operamini ) === "[object OperaMini]",
+		bb = window.blackberry && !propExists( "-webkit-transform" ), //only used to rule out box shadow, as it's filled opaque on BB 5 and lower
+		nokiaLTE7_3;
 
-	if ( !base.length ) {
-		base = fauxEle = $( "<base>", { "href": fauxBase }).appendTo( "head" );
-	} else {
-		href = base.attr( "href" );
+	// inline SVG support test
+	function inlineSVG() {
+		// Thanks Modernizr & Erik Dahlstrom
+		var w = window,
+			svg = !!w.document.createElementNS && !!w.document.createElementNS( "http://www.w3.org/2000/svg", "svg" ).createSVGRect && !( w.opera && navigator.userAgent.indexOf( "Chrome" ) === -1 ),
+			support = function( data ) {
+				if ( !( data && svg ) ) {
+					$( "html" ).addClass( "ui-nosvg" );
+				}
+			},
+			img = new w.Image();
+
+		img.onerror = function() {
+			support( false );
+		};
+		img.onload = function() {
+			support( img.width === 1 && img.height === 1 );
+		};
+		img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 	}
 
-	link = $( "<a href='testurl' />" ).prependTo( fakeBody );
-	rebase = link[ 0 ].href;
-	base[ 0 ].href = href || location.pathname;
+	function transform3dTest() {
+		var mqProp = "transform-3d",
+			// Because the `translate3d` test below throws false positives in Android:
+			ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" ),
+			el, transforms, t;
 
-	if ( fauxEle ) {
-		fauxEle.remove();
-	}
-	return rebase.indexOf( fauxBase ) === 0;
-}
+		if ( ret ) {
+			return !!ret;
+		}
 
-// Thanks Modernizr
-function cssPointerEventsTest() {
-	var element = document.createElement( "x" ),
-		documentElement = document.documentElement,
-		getComputedStyle = window.getComputedStyle,
-		supports;
+		el = document.createElement( "div" );
+		transforms = {
+			// We’re omitting Opera for the time being; MS uses unprefixed.
+			"MozTransform": "-moz-transform",
+			"transform": "transform"
+		};
 
-	if ( !( "pointerEvents" in element.style ) ) {
-		return false;
-	}
+		fakeBody.append( el );
 
-	element.style.pointerEvents = "auto";
-	element.style.pointerEvents = "x";
-	documentElement.appendChild( element );
-	supports = getComputedStyle &&
-	getComputedStyle( element, "" ).pointerEvents === "auto";
-	documentElement.removeChild( element );
-	return !!supports;
-}
-
-function boundingRect() {
-	var div = document.createElement( "div" );
-	return typeof div.getBoundingClientRect !== "undefined";
-}
-
-// non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
-// allows for inclusion of IE 6+, including Windows Mobile 7
-$.extend( $.mobile, { browser: {} } );
-$.mobile.browser.oldIE = (function() {
-	var v = 3,
-		div = document.createElement( "div" ),
-		a = div.all || [];
-
-	do {
-		div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->";
-	} while( a[0] );
-
-	return v > 4 ? v : !v;
-})();
-
-function fixedPosition() {
-	var w = window,
-		ua = navigator.userAgent,
-		platform = navigator.platform,
-		// Rendering engine is Webkit, and capture major version
-		wkmatch = ua.match( /AppleWebKit\/([0-9]+)/ ),
-		wkversion = !!wkmatch && wkmatch[ 1 ],
-		ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
-		ffversion = !!ffmatch && ffmatch[ 1 ],
-		operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
-		omversion = !!operammobilematch && operammobilematch[ 1 ];
-
-	if (
-		// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
-		( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
-		// Opera Mini
-		( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" ) ||
-		( operammobilematch && omversion < 7458 )	||
-		//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
-		( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 ) ||
-		// Firefox Mobile before 6.0 -
-		( ffversion && ffversion < 6 ) ||
-		// WebOS less than 3
-		( "palmGetResource" in window && wkversion && wkversion < 534 )	||
-		// MeeGo
-		( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 ) ) {
-		return false;
+		for ( t in transforms ) {
+			if ( el.style[ t ] !== undefined ) {
+				el.style[ t ] = "translate3d( 100px, 1px, 1px )";
+				ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
+			}
+		}
+		return ( !!ret && ret !== "none" );
 	}
 
-	return true;
-}
+	// Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
+	function baseTagTest() {
+		var fauxBase = location.protocol + "//" + location.host + location.pathname + "ui-dir/",
+			base = $( "head base" ),
+			fauxEle = null,
+			href = "",
+			link, rebase;
 
-$.extend( $.support, {
-	// Note, Chrome for iOS has an extremely quirky implementation of popstate.
-	// We've chosen to take the shortest path to a bug fix here for issue #5426
-	// See the following link for information about the regex chosen
-	// https://developers.google.com/chrome/mobile/docs/user-agent#chrome_for_ios_user-agent
-	pushState: "pushState" in history &&
-		"replaceState" in history &&
-		// When running inside a FF iframe, calling replaceState causes an error
-		!( window.navigator.userAgent.indexOf( "Firefox" ) >= 0 && window.top !== window ) &&
-		( window.navigator.userAgent.search(/CriOS/) === -1 ),
+		if ( !base.length ) {
+			base = fauxEle = $( "<base>", { "href": fauxBase } ).appendTo( "head" );
+		} else {
+			href = base.attr( "href" );
+		}
 
-	mediaquery: $.mobile.media( "only all" ),
-	cssPseudoElement: !!propExists( "content" ),
-	touchOverflow: !!propExists( "overflowScrolling" ),
-	cssTransform3d: transform3dTest(),
-	boxShadow: !!propExists( "boxShadow" ) && !bb,
-	fixedPosition: fixedPosition(),
-	scrollTop: ("pageXOffset" in window ||
-		"scrollTop" in document.documentElement ||
-		"scrollTop" in fakeBody[ 0 ]) && !webos && !operamini,
+		link = $( "<a href='testurl' />" ).prependTo( fakeBody );
+		rebase = link[ 0 ].href;
+		base[ 0 ].href = href || location.pathname;
 
-	dynamicBaseTag: baseTagTest(),
-	cssPointerEvents: cssPointerEventsTest(),
-	boundingRect: boundingRect(),
-	inlineSVG: inlineSVG
-});
+		if ( fauxEle ) {
+			fauxEle.remove();
+		}
+		return rebase.indexOf( fauxBase ) === 0;
+	}
 
-fakeBody.remove();
+	// Thanks Modernizr
+	function cssPointerEventsTest() {
+		var element = document.createElement( "x" ),
+			documentElement = document.documentElement,
+			getComputedStyle = window.getComputedStyle,
+			supports;
 
-// $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
-// or that generally work better browsing in regular http for full page refreshes (Opera Mini)
-// Note: This detection below is used as a last resort.
-// We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
-nokiaLTE7_3 = (function() {
+		if ( !( "pointerEvents" in element.style ) ) {
+			return false;
+		}
 
-	var ua = window.navigator.userAgent;
+		element.style.pointerEvents = "auto";
+		element.style.pointerEvents = "x";
+		documentElement.appendChild( element );
+		supports = getComputedStyle &&
+			getComputedStyle( element, "" ).pointerEvents === "auto";
+		documentElement.removeChild( element );
+		return !!supports;
+	}
 
-	//The following is an attempt to match Nokia browsers that are running Symbian/s60, with webkit, version 7.3 or older
-	return ua.indexOf( "Nokia" ) > -1 &&
+	function boundingRect() {
+		var div = document.createElement( "div" );
+		return typeof div.getBoundingClientRect !== "undefined";
+	}
+
+	// non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
+	// allows for inclusion of IE 6+, including Windows Mobile 7
+	$.extend( $.mobile, { browser: {} } );
+	$.mobile.browser.oldIE = ( function() {
+		var v = 3,
+			div = document.createElement( "div" ),
+			a = div.all || [];
+
+		do {
+			div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->";
+		} while ( a[ 0 ] );
+
+		return v > 4 ? v : !v;
+	} )();
+
+	function fixedPosition() {
+		var w = window,
+			ua = navigator.userAgent,
+			platform = navigator.platform,
+			// Rendering engine is Webkit, and capture major version
+			wkmatch = ua.match( /AppleWebKit\/([0-9]+)/ ),
+			wkversion = !!wkmatch && wkmatch[ 1 ],
+			ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
+			ffversion = !!ffmatch && ffmatch[ 1 ],
+			operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
+			omversion = !!operammobilematch && operammobilematch[ 1 ];
+
+		if (
+				// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
+				( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1 || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
+				// Opera Mini
+				( w.operamini && ( {} ).toString.call( w.operamini ) === "[object OperaMini]" ) ||
+				( operammobilematch && omversion < 7458 ) ||
+				//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
+				( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 ) ||
+				// Firefox Mobile before 6.0 -
+				( ffversion && ffversion < 6 ) ||
+				// WebOS less than 3
+				( "palmGetResource" in window && wkversion && wkversion < 534 ) ||
+				// MeeGo
+				( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	$.extend( $.support, {
+		// Note, Chrome for iOS has an extremely quirky implementation of popstate.
+		// We've chosen to take the shortest path to a bug fix here for issue #5426
+		// See the following link for information about the regex chosen
+		// https://developers.google.com/chrome/mobile/docs/user-agent#chrome_for_ios_user-agent
+		pushState: "pushState" in history &&
+			"replaceState" in history &&
+			// When running inside a FF iframe, calling replaceState causes an error
+			!( window.navigator.userAgent.indexOf( "Firefox" ) >= 0 && window.top !== window ) &&
+			( window.navigator.userAgent.search( /CriOS/ ) === -1 ),
+
+		mediaquery: $.mobile.media( "only all" ),
+		cssPseudoElement: !!propExists( "content" ),
+		touchOverflow: !!propExists( "overflowScrolling" ),
+		cssTransform3d: transform3dTest(),
+		boxShadow: !!propExists( "boxShadow" ) && !bb,
+		fixedPosition: fixedPosition(),
+		scrollTop: ( "pageXOffset" in window ||
+			"scrollTop" in document.documentElement ||
+			"scrollTop" in fakeBody[ 0 ] ) && !webos && !operamini,
+
+		dynamicBaseTag: baseTagTest(),
+		cssPointerEvents: cssPointerEventsTest(),
+		boundingRect: boundingRect(),
+		inlineSVG: inlineSVG
+	} );
+
+	fakeBody.remove();
+
+	// $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
+	// or that generally work better browsing in regular http for full page refreshes (Opera Mini)
+	// Note: This detection below is used as a last resort.
+	// We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
+	nokiaLTE7_3 = ( function() {
+
+		var ua = window.navigator.userAgent;
+
+		//The following is an attempt to match Nokia browsers that are running Symbian/s60, with webkit, version 7.3 or older
+		return ua.indexOf( "Nokia" ) > -1 &&
 			( ua.indexOf( "Symbian/3" ) > -1 || ua.indexOf( "Series60/5" ) > -1 ) &&
 			ua.indexOf( "AppleWebKit" ) > -1 &&
 			ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );
-})();
+	} )();
 
-// Support conditions that must be met in order to proceed
-// default enhanced qualifications are media query support OR IE 7+
+	// Support conditions that must be met in order to proceed
+	// default enhanced qualifications are media query support OR IE 7+
 
-$.mobile.gradeA = function() {
-	return ( ( $.support.mediaquery && $.support.cssPseudoElement ) || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 8 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
-};
+	$.mobile.gradeA = function() {
+		return ( ( $.support.mediaquery && $.support.cssPseudoElement ) || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 8 ) && ( $.support.boundingRect || $.fn.jquery.match( /1\.[0-7+]\.[0-9+]?/ ) !== null );
+	};
 
-$.mobile.ajaxBlacklist =
-			// BlackBerry browsers, pre-webkit
-			window.blackberry && !window.WebKitPoint ||
-			// Opera Mini
-			operamini ||
-			// Symbian webkits pre 7.3
-			nokiaLTE7_3;
+	$.mobile.ajaxBlacklist =
+		// BlackBerry browsers, pre-webkit
+		window.blackberry && !window.WebKitPoint ||
+		// Opera Mini
+		operamini ||
+		// Symbian webkits pre 7.3
+		nokiaLTE7_3;
 
-// Lastly, this workaround is the only way we've found so far to get pre 7.3 Symbian webkit devices
-// to render the stylesheets when they're referenced before this script, as we'd recommend doing.
-// This simply reappends the CSS in place, which for some reason makes it apply
-if ( nokiaLTE7_3 ) {
-	$(function() {
-		$( "head link[rel='stylesheet']" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
-	});
-}
+	// Lastly, this workaround is the only way we've found so far to get pre 7.3 Symbian webkit devices
+	// to render the stylesheets when they're referenced before this script, as we'd recommend doing.
+	// This simply reappends the CSS in place, which for some reason makes it apply
+	if ( nokiaLTE7_3 ) {
+		$( function() {
+			$( "head link[rel='stylesheet']" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
+		} );
+	}
 
-// For ruling out shadows via css
-if ( !$.support.boxShadow ) {
-	$( "html" ).addClass( "ui-noboxshadow" );
-}
+	// For ruling out shadows via css
+	if ( !$.support.boxShadow ) {
+		$( "html" ).addClass( "ui-noboxshadow" );
+	}
 
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
