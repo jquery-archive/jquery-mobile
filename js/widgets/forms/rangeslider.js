@@ -13,7 +13,7 @@ define( [ "jquery",
 	"./reset",
 	"./slider" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 	$.widget( "mobile.rangeslider", $.extend( {
 
 		options: {
@@ -26,18 +26,18 @@ define( [ "jquery",
 
 		_create: function() {
 			var $el = this.element,
-			elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
-			_inputFirst = $el.find( "input" ).first(),
-			_inputLast = $el.find( "input" ).last(),
-			_label = $el.find( "label" ).first(),
-			_sliderWidgetFirst = $.data( _inputFirst.get( 0 ), "mobile-slider" ) ||
-				$.data( _inputFirst.slider().get( 0 ), "mobile-slider" ),
-			_sliderWidgetLast = $.data( _inputLast.get(0), "mobile-slider" ) ||
-				$.data( _inputLast.slider().get( 0 ), "mobile-slider" ),
-			_sliderFirst = _sliderWidgetFirst.slider,
-			_sliderLast = _sliderWidgetLast.slider,
-			firstHandle = _sliderWidgetFirst.handle,
-			_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
+				elClass = this.options.mini ? "ui-rangeslider ui-mini" : "ui-rangeslider",
+				_inputFirst = $el.find( "input" ).first(),
+				_inputLast = $el.find( "input" ).last(),
+				_label = $el.find( "label" ).first(),
+				_sliderWidgetFirst = $.data( _inputFirst.get( 0 ), "mobile-slider" ) ||
+					$.data( _inputFirst.slider().get( 0 ), "mobile-slider" ),
+				_sliderWidgetLast = $.data( _inputLast.get( 0 ), "mobile-slider" ) ||
+					$.data( _inputLast.slider().get( 0 ), "mobile-slider" ),
+				_sliderFirst = _sliderWidgetFirst.slider,
+				_sliderLast = _sliderWidgetLast.slider,
+				firstHandle = _sliderWidgetFirst.handle,
+				_sliders = $( "<div class='ui-rangeslider-sliders' />" ).appendTo( $el );
 
 			_inputFirst.addClass( "ui-rangeslider-first" );
 			_inputLast.addClass( "ui-rangeslider-last" );
@@ -58,7 +58,7 @@ define( [ "jquery",
 				_sliderTarget: false,
 				_sliders: _sliders,
 				_proxy: false
-			});
+			} );
 
 			this.refresh();
 			this._on( this.element.find( "input.ui-slider-input" ), {
@@ -68,30 +68,30 @@ define( [ "jquery",
 				"slidebeforechange": "_change",
 				"blur": "_change",
 				"keyup": "_change"
-			});
-			this._on({
-				"mousedown":"_change"
-			});
+			} );
+			this._on( {
+				"mousedown": "_change"
+			} );
 			this._on( this.element.closest( "form" ), {
-				"reset":"_handleReset"
-			});
+				"reset": "_handleReset"
+			} );
 			this._on( firstHandle, {
 				"vmousedown": "_dragFirstHandle"
-			});
+			} );
 		},
 		_handleReset: function() {
 			var self = this;
 			//we must wait for the stack to unwind before updateing other wise sliders will not have updated yet
 			setTimeout( function() {
 				self._updateHighlight();
-			},0);
+			}, 0 );
 		},
 
 		_dragFirstHandle: function( event ) {
 			//if the first handle is dragged send the event to the first slider
-			$.data( this._inputFirst.get(0), "mobile-slider" ).dragging = true;
-			$.data( this._inputFirst.get(0), "mobile-slider" ).refresh( event );
-			$.data( this._inputFirst.get(0), "mobile-slider" )._trigger( "start" );
+			$.data( this._inputFirst.get( 0 ), "mobile-slider" ).dragging = true;
+			$.data( this._inputFirst.get( 0 ), "mobile-slider" ).refresh( event );
+			$.data( this._inputFirst.get( 0 ), "mobile-slider" )._trigger( "start" );
 			return false;
 		},
 
@@ -103,8 +103,8 @@ define( [ "jquery",
 			//if the drag was initiated on an extreme and the other handle is focused send the events to
 			//the closest handle
 			if ( ( this._proxy === "first" && first ) || ( this._proxy === "last" && !first ) ) {
-				$.data( otherSlider.get(0), "mobile-slider" ).dragging = true;
-				$.data( otherSlider.get(0), "mobile-slider" ).refresh( event );
+				$.data( otherSlider.get( 0 ), "mobile-slider" ).dragging = true;
+				$.data( otherSlider.get( 0 ), "mobile-slider" ).refresh( event );
 				return false;
 			}
 		},
@@ -161,14 +161,14 @@ define( [ "jquery",
 				this.options.disabled = true;
 			}
 
-			$el.find( "input" ).slider({
+			$el.find( "input" ).slider( {
 				theme: o.theme,
 				trackTheme: o.trackTheme,
 				disabled: o.disabled,
 				corners: o.corners,
 				mini: o.mini,
 				highlight: o.highlight
-			}).slider( "refresh" );
+			} ).slider( "refresh" );
 			this._updateHighlight();
 		},
 
@@ -185,14 +185,14 @@ define( [ "jquery",
 				thisSlider = first ? this._inputFirst : this._inputLast,
 				otherSlider = first ? this._inputLast : this._inputFirst;
 
-			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$(event.target).hasClass("ui-slider-handle")) ) {
+			if ( ( this._inputFirst.val() > this._inputLast.val() && event.type === "mousedown" && !$( event.target ).hasClass( "ui-slider-handle" ) ) ) {
 				thisSlider.blur();
 			} else if ( event.type === "mousedown" ) {
 				return;
 			}
 			if ( min > max && !this._sliderTarget ) {
 				//this prevents min from being greater then max
-				thisSlider.val( first ? max: min ).slider( "refresh" );
+				thisSlider.val( first ? max : min ).slider( "refresh" );
 				this._trigger( "normalize" );
 			} else if ( min > max ) {
 				//this makes it so clicks on the target on either extreme go to the closest handle
@@ -200,8 +200,8 @@ define( [ "jquery",
 
 				//You must wait for the stack to unwind so first slider is updated before updating second
 				setTimeout( function() {
-					otherSlider.val( first ? min: max ).slider( "refresh" );
-					$.data( otherSlider.get(0), "mobile-slider" ).handle.focus();
+					otherSlider.val( first ? min : max ).slider( "refresh" );
+					$.data( otherSlider.get( 0 ), "mobile-slider" ).handle.focus();
 					self._sliderFirst.css( "z-index", first ? "" : 1 );
 					self._trigger( "normalize" );
 				}, 0 );
@@ -209,11 +209,11 @@ define( [ "jquery",
 			}
 			//fixes issue where when both _sliders are at min they cannot be adjusted
 			if ( min === max ) {
-				$.data( thisSlider.get(0), "mobile-slider" ).handle.css( "z-index", 1 );
-				$.data( otherSlider.get(0), "mobile-slider" ).handle.css( "z-index", 0 );
+				$.data( thisSlider.get( 0 ), "mobile-slider" ).handle.css( "z-index", 1 );
+				$.data( otherSlider.get( 0 ), "mobile-slider" ).handle.css( "z-index", 0 );
 			} else {
-				$.data( otherSlider.get(0), "mobile-slider" ).handle.css( "z-index", "" );
-				$.data( thisSlider.get(0), "mobile-slider" ).handle.css( "z-index", "" );
+				$.data( otherSlider.get( 0 ), "mobile-slider" ).handle.css( "z-index", "" );
+				$.data( thisSlider.get( 0 ), "mobile-slider" ).handle.css( "z-index", "" );
 			}
 
 			this._updateHighlight();
@@ -224,14 +224,14 @@ define( [ "jquery",
 		},
 
 		_updateHighlight: function() {
-			var min = parseInt( $.data( this._inputFirst.get(0), "mobile-slider" ).handle.get(0).style.left, 10 ),
-				max = parseInt( $.data( this._inputLast.get(0), "mobile-slider" ).handle.get(0).style.left, 10 ),
-				width = (max - min);
+			var min = parseInt( $.data( this._inputFirst.get( 0 ), "mobile-slider" ).handle.get( 0 ).style.left, 10 ),
+				max = parseInt( $.data( this._inputLast.get( 0 ), "mobile-slider" ).handle.get( 0 ).style.left, 10 ),
+				width = ( max - min );
 
-			this.element.find( ".ui-slider-bg" ).css({
+			this.element.find( ".ui-slider-bg" ).css( {
 				"margin-left": min + "%",
 				"width": width + "%"
-			});
+			} );
 		},
 
 		_setTheme: function( value ) {
@@ -271,7 +271,7 @@ define( [ "jquery",
 
 	}, $.mobile.behaviors.formReset ) );
 
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
