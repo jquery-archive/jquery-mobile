@@ -17,7 +17,7 @@ define( [
 	"../navigation" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
-(function( $, window, undefined ) {
+( function( $, window, undefined ) {
 
 	// TODO remove direct references to $.mobile and properties, we should
 	//      favor injection with params to the constructor
@@ -25,17 +25,17 @@ define( [
 		this.init.apply( this, arguments );
 	};
 
-	$.extend($.mobile.Transition.prototype, {
+	$.extend( $.mobile.Transition.prototype, {
 		toPreClass: " ui-page-pre-in",
 
 		init: function( name, reverse, $to, $from ) {
-			$.extend(this, {
+			$.extend( this, {
 				name: name,
 				reverse: reverse,
 				$to: $to,
 				$from: $from,
 				deferred: new $.Deferred()
-			});
+			} );
 		},
 
 		cleanFrom: function() {
@@ -95,7 +95,7 @@ define( [
 		},
 
 		startIn: function( screenHeight, reverseClass, none, preventFocus ) {
-			this.hideIn(function() {
+			this.hideIn( function() {
 				this.$to.addClass( $.mobile.activePageClass + this.toPreClass );
 
 				// Send focus to page as it is now display: block
@@ -106,19 +106,19 @@ define( [
 				// Set to page height
 				this.$to.height( screenHeight + this.toScroll );
 
-                if ( !none ) {
-                    this.scrollPage();
-                }
-			});
+				if ( !none ) {
+					this.scrollPage();
+				}
+			} );
 
 			this.$to
 				.removeClass( this.toPreClass )
 				.addClass( this.name + " in " + reverseClass );
 
 			if ( !none ) {
-				this.$to.animationComplete( $.proxy(function() {
+				this.$to.animationComplete( $.proxy( function() {
 					this.doneIn();
-				}, this ));
+				}, this ) );
 			} else {
 				this.doneIn();
 			}
@@ -156,7 +156,7 @@ define( [
 			none = !$.support.cssTransitions || !$.support.cssAnimations ||
 				maxTransitionOverride || !this.name || this.name === "none" ||
 				Math.max( $.mobile.window.scrollTop(), this.toScroll ) >
-					$.mobile.getMaxScrollForTransition();
+				$.mobile.getMaxScrollForTransition();
 
 			this.toggleViewportClass();
 
@@ -168,8 +168,8 @@ define( [
 
 			return this.deferred.promise();
 		}
-	});
-})( jQuery, this );
+	} );
+} )( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");

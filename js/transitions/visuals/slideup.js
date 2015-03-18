@@ -10,11 +10,11 @@
 
 define( [ "jquery", "../handlers" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+( function( $, window, undefined ) {
 
-$.mobile.transitionFallbacks.slideup = "fade";
+	$.mobile.transitionFallbacks.slideup = "fade";
 
-})( jQuery, this );
+} )( jQuery, this );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
