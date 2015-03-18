@@ -5,8 +5,8 @@
 
 define( [ "jquery", "./core" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $ ) {
-	var	meta = $( "meta[name=viewport]" ),
+( function( $ ) {
+	var meta = $( "meta[name=viewport]" ),
 		initialContent = meta.attr( "content" ),
 		disabledZoom = initialContent + ",maximum-scale=1, user-scalable=no",
 		enabledZoom = initialContent + ",maximum-scale=10, user-scalable=yes",
@@ -35,9 +35,9 @@ define( [ "jquery", "./core" ], function( jQuery ) {
 				$.mobile.zoom.enabled = true;
 			}
 		}
-	});
+	} );
 
-}( jQuery ));
+}( jQuery ) );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");

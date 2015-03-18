@@ -5,7 +5,7 @@
 
 define( [ "jquery", "../core", "../zoom" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, window ) {
+( function( $, window ) {
 
 	$.mobile.iosorientationfixEnabled = true;
 
@@ -30,11 +30,11 @@ define( [ "jquery", "../core", "../zoom" ], function( jQuery ) {
 
 		// If portrait orientation and in one of the danger zones
 		if ( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ) {
-				if ( zoom.enabled ) {
-					zoom.disable();
-				}
-		}	else if ( !zoom.enabled ) {
-				zoom.enable();
+			if ( zoom.enabled ) {
+				zoom.disable();
+			}
+		} else if ( !zoom.enabled ) {
+			zoom.enable();
 		}
 	}
 
@@ -44,9 +44,9 @@ define( [ "jquery", "../core", "../zoom" ], function( jQuery ) {
 				.bind( "orientationchange.iosorientationfix", zoom.enable )
 				.bind( "devicemotion.iosorientationfix", checkTilt );
 		}
-	});
+	} );
 
-}( jQuery, this ));
+}( jQuery, this ) );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
