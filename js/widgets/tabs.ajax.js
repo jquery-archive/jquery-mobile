@@ -14,26 +14,26 @@ define( [
 
 ( function( $, undefined ) {
 
-$.widget( "ui.tabs", $.ui.tabs, {
-	_isLocal: function( anchor ) {
-		var path, baseUrl, absUrl;
+	$.widget( "ui.tabs", $.ui.tabs, {
+		_isLocal: function( anchor ) {
+			var path, baseUrl, absUrl;
 
-		if ( $.mobile.ajaxEnabled ) {
-			path = $.mobile.path;
-			baseUrl = path.parseUrl( $.mobile.base.element.attr( "href" ) );
-			absUrl = path.parseUrl( path.makeUrlAbsolute( anchor.getAttribute( "href" ),
-				baseUrl ) );
+			if ( $.mobile.ajaxEnabled ) {
+				path = $.mobile.path;
+				baseUrl = path.parseUrl( $.mobile.base.element.attr( "href" ) );
+				absUrl = path.parseUrl( path.makeUrlAbsolute( anchor.getAttribute( "href" ),
+					baseUrl ) );
 
-			return ( path.isSameDomain( absUrl.href, baseUrl.href ) &&
-				absUrl.pathname === baseUrl.pathname );
+				return ( path.isSameDomain( absUrl.href, baseUrl.href ) &&
+					absUrl.pathname === baseUrl.pathname );
+			}
+
+			return this._superApply( arguments );
 		}
+	} );
 
-		return this._superApply( arguments );
-	}
-});
-
-})( jQuery );
+} )( jQuery );
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
