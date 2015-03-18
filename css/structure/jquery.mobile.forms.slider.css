@@ -49,6 +49,7 @@ input.ui-slider-input {
 	top: 6px;
 }
 .ui-slider-track.ui-mini {
+	margin: 0 15px 0 68px;
 	height: 12px;
 	top: 8px;
 }
