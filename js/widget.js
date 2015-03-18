@@ -9,37 +9,37 @@ define( [ "jquery",
 	"jquery-ui/widget",
 	"./data" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( $, undefined ) {
 
-var rcapitals = /[A-Z]/g,
-	replaceFunction = function( c ) {
-		return "-" + c.toLowerCase();
-	};
+	var rcapitals = /[A-Z]/g,
+		replaceFunction = function( c ) {
+			return "-" + c.toLowerCase();
+		};
 
-$.extend( $.Widget.prototype, {
-	_getCreateOptions: function() {
-		var option, value,
-			elem = this.element[ 0 ],
-			options = {};
+	$.extend( $.Widget.prototype, {
+		_getCreateOptions: function() {
+			var option, value,
+				elem = this.element[ 0 ],
+				options = {};
 
-		//
-		if ( !$.mobile.getAttribute( elem, "defaults" ) ) {
-			for ( option in this.options ) {
-				value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
-				if ( value != null ) {
-					options[ option ] = value;
+			//
+			if ( !$.mobile.getAttribute( elem, "defaults" ) ) {
+				for ( option in this.options ) {
+					value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
+					if ( value != null ) {
+						options[ option ] = value;
+					}
 				}
 			}
+
+			return options;
 		}
+	} );
 
-		return options;
-	}
-});
+	//TODO: Remove in 1.5 for backcompat only
+	$.mobile.widget = $.extend( {}, $.Widget, $.mobile.widget );
 
-//TODO: Remove in 1.5 for backcompat only
-$.mobile.widget = $.extend( {}, $.Widget, $.mobile.widget );
-
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
