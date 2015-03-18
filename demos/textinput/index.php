@@ -81,11 +81,15 @@
 
         <div data-demo-html="true">
         <form>
-             <label for="date-1">Date: data-clear-btn="false"</label>
+             <label for="date-1">Date: data-clear-btn="false" And Default clear button is enabled</label>
              <input type="date" data-clear-btn="false" name="date-1" id="date-1" value="">
 
-             <label for="date-2">Date: data-clear-btn="true"</label>
-             <input type="date" data-clear-btn="true" name="date-2" id="date-2" value="">
+	     <label for="date-2">Date: data-clear-btn="false" And Removes default clear button</label>
+             <input type="date" class="ui-textinput-hide-clear" data-clear-btn="false" name="date-2" id="date-2" value="">
+
+             <label for="date-3">Date: data-clear-btn="true"</label>
+             <input type="date" data-clear-btn="true" name="date-3" id="date-3" value="">
+
         </form>
         </div><!-- /demo-html -->
 
@@ -93,11 +97,14 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="month-1">Month: data-clear-btn="false"</label>
+            <label for="month-1">Month: data-clear-btn="false" And Default clear button is enabled</label>
             <input type="month" data-clear-btn="false" name="month-1" id="month-1" value="">
 
-            <label for="month-2">Month: data-clear-btn="true"</label>
-            <input type="month" data-clear-btn="true" name="month-2" id="month-2" value="">
+		<label for="month-2">Month: data-clear-btn="false" And Removes default clear button</label>
+            <input type="month" class="ui-textinput-hide-clear" data-clear-btn="false" name="month-2" id="month-2" value="">
+
+            <label for="month-3">Month: data-clear-btn="true"</label>
+            <input type="month" data-clear-btn="true" name="month-3" id="month-3" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -105,11 +112,14 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="week-1">Week: data-clear-btn="false"</label>
+            <label for="week-1">Week: data-clear-btn="false" And Default clear button is enabled</label>
             <input type="week" data-clear-btn="false" name="week-1" id="week-1" value="">
 
-            <label for="week-2">Week: data-clear-btn="true"</label>
-            <input type="week" data-clear-btn="true" name="week-2" id="week-2" value="">
+            <label for="week-2">Week: data-clear-btn="false" And Removes default clear button</label>
+            <input type="week" class="ui-textinput-hide-clear" data-clear-btn="false" name="week-2" id="week-2" value="">
+
+            <label for="week-3">Week: data-clear-btn="true"</label>
+            <input type="week" data-clear-btn="true" name="week-3" id="week-3" value="">
         </form>
         </div><!-- /demo-html -->
 
@@ -117,11 +127,14 @@
 
         <div data-demo-html="true">
         <form>
-            <label for="time-1">Time: data-clear-btn="false"</label>
+            <label for="time-1">Time: data-clear-btn="false" And Default clear button is enabled</label>
             <input type="time" data-clear-btn="false" name="time-1" id="time-1" value="">
 
-            <label for="time-2">Time: data-clear-btn="true"</label>
-            <input type="time" data-clear-btn="true" name="time-2" id="time-2" value="">
+            <label for="time-2">Time: data-clear-btn="false" And Removes default clear button</label>
+            <input type="time" class="ui-textinput-hide-clear" data-clear-btn="false" name="time-2" id="time-2" value="">
+
+            <label for="time-3">Time: data-clear-btn="true"</label>
+            <input type="time" data-clear-btn="true" name="time-3" id="time-3" value="">
         </form>
         </div><!-- /demo-html -->
 
