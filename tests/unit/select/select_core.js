@@ -2,49 +2,49 @@
  * mobile select unit tests
  */
 
-(function($){
+( function( $ ) {
 
-	module( "Native select" );
+module( "Native select" );
 
-	test( "Native select does not blur synchronously in response to change", function() {
-		var selectmenu = $( "#blur-test" );
+test( "Native select does not blur synchronously in response to change", function() {
+	var selectmenu = $( "#blur-test" );
 
-		selectmenu.focus();
+	selectmenu.focus();
 
-		selectmenu.trigger( "change" );
+	selectmenu.trigger( "change" );
 
-		deepEqual( selectmenu.parent().hasClass( "ui-focus" ), true,
-			"Native select is focused after triggering 'change'" );
-	});
+	deepEqual( selectmenu.parent().hasClass( "ui-focus" ), true,
+		"Native select is focused after triggering 'change'" );
+} );
 
-	module( "Custom select" );
+module( "Custom select" );
 
-	test( "Custom select is enhanced correctly", function() {
-		var popup = $( "#enhance-test-listbox" );
+test( "Custom select is enhanced correctly", function() {
+	var popup = $( "#enhance-test-listbox" );
 
-		deepEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + '"' + "role='button'" + '"' + " set" );
-		deepEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
-		deepEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
+	deepEqual( $( "#enhance-test-listbox a:first" ).attr( "role" ), "button", "The close button for a multiple choice select popup has the " + '"' + "role='button'" + '"' + " set" );
+	deepEqual( popup.popup( "option", "overlayTheme" ), "b", "Popup has overlayTheme b" );
+	deepEqual( popup.popup( "option", "theme" ), "x", "Popup has theme x" );
 
-	});
+} );
 
-	module( "Custom select Multiple" );
+module( "Custom select Multiple" );
 
-	test( "Custom select multiple is cleared correctly", function() {
-		var popup = $( "#enhance-test-listbox" );
-		$( "#enhance-test" )
-			.find( "option" )
-				.attr( "selected", false )
-				.prop( "selected", false )
-			.end()
-			.selectmenu( "refresh" );
-		deepEqual( popup.find( ".ui-checkbox-on" ).length, 0,
-			"Checkboxes should not have ui-checkbox-on class" );
-	});
+test( "Custom select multiple is cleared correctly", function() {
+	var popup = $( "#enhance-test-listbox" );
+	$( "#enhance-test" )
+		.find( "option" )
+			.attr( "selected", false )
+			.prop( "selected", false )
+		.end()
+		.selectmenu( "refresh" );
+	deepEqual( popup.find( ".ui-checkbox-on" ).length, 0,
+		"Checkboxes should not have ui-checkbox-on class" );
+} );
 
-	module( "Native select" );
+module( "Native select" );
 
-	test( "Select menu ID", function() {
-		ok( $( ".no-id-test" ).closest( ".ui-button" ).attr( "id" ) !== "undefined-button", "Select menu without an ID does not result in the button having name 'undefined-button'" );
-	});
-})(jQuery);
+test( "Select menu ID", function() {
+	ok( $( ".no-id-test" ).closest( ".ui-button" ).attr( "id" ) !== "undefined-button", "Select menu without an ID does not result in the button having name 'undefined-button'" );
+} );
+} )( jQuery );
