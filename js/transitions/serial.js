@@ -6,13 +6,13 @@
 define( [ "jquery", "../animationComplete", "./transition" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
-(function( $ ) {
+( function( $ ) {
 
 	$.mobile.SerialTransition = function() {
-		this.init.apply(this, arguments);
+		this.init.apply( this, arguments );
 	};
 
-	$.extend($.mobile.SerialTransition.prototype, $.mobile.Transition.prototype, {
+	$.extend( $.mobile.SerialTransition.prototype, $.mobile.Transition.prototype, {
 		sequential: true,
 
 		beforeDoneOut: function() {
@@ -22,13 +22,13 @@ define( [ "jquery", "../animationComplete", "./transition" ], function( jQuery )
 		},
 
 		beforeStartOut: function( screenHeight, reverseClass, none ) {
-			this.$from.animationComplete($.proxy(function() {
+			this.$from.animationComplete( $.proxy( function() {
 				this.doneOut( screenHeight, reverseClass, none );
-			}, this ));
+			}, this ) );
 		}
-	});
+	} );
 
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");

@@ -3,10 +3,10 @@
 //>>label: Transition Handlers
 //>>group: Transitions
 
-define( ["jquery", "../core", "./serial", "./concurrent"], function( jQuery ) {
+define( [ "jquery", "../core", "./serial", "./concurrent" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
-(function( $ ) {
+( function( $ ) {
 
 	// generate the handlers from the above
 	var defaultGetMaxScrollForTransition = function() {
@@ -36,7 +36,7 @@ define( ["jquery", "../core", "./serial", "./concurrent"], function( jQuery ) {
 	// Set the getMaxScrollForTransition to default if no implementation was set by user
 	$.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defaultGetMaxScrollForTransition;
 
-})( jQuery );
+} )( jQuery );
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
