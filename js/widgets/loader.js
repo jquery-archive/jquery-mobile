@@ -10,9 +10,10 @@ define( [
 	"../widget" ], function( jQuery ) {
 //>>excludeEnd("jqmBuildExclude");
 
-(function( $ ) {
+( function( $ ) {
 	// TODO move loader class down into the widget settings
-	var loaderClass = "ui-loader", $html = $( "html" );
+	var loaderClass = "ui-loader",
+		$html = $( "html" );
 
 	$.widget( "mobile.loader", {
 		// NOTE if the global config settings are defined they will override these
@@ -41,10 +42,10 @@ define( [
 			var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
 
 			this.element
-				.css({
+				.css( {
 					top: $.support.scrollTop && this.window.scrollTop() + this.window.height() / 2 ||
 						activeBtn.length && activeBtn.offset().top || 100
-				});
+				} );
 		},
 
 		// check position of loader to see if it appears to be "fixed" to center
@@ -103,7 +104,7 @@ define( [
 			// add the proper css given the options (theme, text, etc)
 			// Force text visibility if the second argument was supplied, or
 			// if the text was explicitly set in the object args
-			this.element.attr("class", loaderClass +
+			this.element.attr( "class", loaderClass +
 				" ui-corner-all ui-body-" + theme +
 				" ui-loader-" + ( textVisible || msgText || theme.text ? "verbose" : "default" ) +
 				( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
@@ -141,10 +142,10 @@ define( [
 			this.window.unbind( "scroll", this.fakeFixLoader );
 			this.window.unbind( "scroll", this.checkLoaderPosition );
 		}
-	});
+	} );
 
-})(jQuery, this);
+} )( jQuery, this );
 
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
+} );
 //>>excludeEnd("jqmBuildExclude");
