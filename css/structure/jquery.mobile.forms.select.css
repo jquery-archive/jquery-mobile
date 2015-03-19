@@ -66,6 +66,10 @@
 .ui-select .ui-btn-icon-right .ui-li-count {
 	right: 3.2em;
 }
+/* Count indicator position must be different for mini version. */
+.ui-select.ui-mini .ui-btn-icon-right .ui-li-count {
+	right: 2.5em;
+}
 /* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */
 .ui-select .ui-btn > span:not(.ui-li-count) {
 	display: block;
