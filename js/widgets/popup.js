@@ -90,6 +90,9 @@ $.widget( "mobile.popup", {
 	version: "@VERSION",
 
 	options: {
+		classes: {
+			"ui-popup": "ui-corner-all ui-overlay-shadow"
+		},
 		theme: null,
 		overlayTheme: null,
 		transition: "none",
@@ -157,8 +160,9 @@ $.widget( "mobile.popup", {
 				screen: theElement.parent().prev(),
 				placeholder: $( this.document[ 0 ].getElementById( myId + "-placeholder" ) )
 			};
+			this._addClasses();
 		} else {
-			this._ui = this._enhance( theElement, myId );
+			this._enhance();
 			this._applyTransition( currentOptions.transition );
 		}
 		this
@@ -175,17 +179,28 @@ $.widget( "mobile.popup", {
 		this._on( this.document, { "focusin": "_handleDocumentFocusIn" } );
 	},
 
-	_enhance: function( theElement, myId ) {
-		var currentOptions = this.options,
-			wrapperClass = currentOptions.wrapperClass,
+	_addClasses: function() {
+		this._addClass( this._ui.placeholder, null, "ui-screen-hidden" );
+		this._addClass( this._ui.screen, "ui-popup-screen",
+			"ui-screen-hidden " +
+			this._themeClassFromOption( "ui-overlay-", this.options.overlayTheme ) );
+		this._addClass( this._ui.container,
+			"ui-popup-container ui-popup-hidden ui-popup-truncate" );
+		this._addClass( "ui-popup",
+			this._themeClassFromOption( "ui-body-", this.options.theme ) );
+	},
+
+	_enhance: function() {
+		var myId = this.element.attr( "id" ),
+			placeholder = "placeholder",
 			ui = {
-				screen: $( "<div class='ui-screen-hidden ui-popup-screen " +
-				this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) + "'></div>" ),
-				placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-				container: $( "<div class='ui-popup-container ui-popup-hidden ui-popup-truncate" +
-					( wrapperClass ? ( " " + wrapperClass ) : "" ) + "'></div>" )
+				screen: $( "<div>" ),
+				placeholder: $( "<div>" ),
+				container: $( "<div>" )
 			},
 			fragment = this.document[ 0 ].createDocumentFragment();
+
+		this._ui = ui;
 
 		fragment.appendChild( ui.screen[ 0 ] );
 		fragment.appendChild( ui.container[ 0 ] );
@@ -193,22 +208,25 @@ $.widget( "mobile.popup", {
 		if ( myId ) {
 			ui.screen.attr( "id", myId + "-screen" );
 			ui.container.attr( "id", myId + "-popup" );
-			ui.placeholder
-				.attr( "id", myId + "-placeholder" )
-				.html( "<!-- placeholder for " + myId + " -->" );
+			ui.placeholder.attr( "id", myId + "-placeholder" );
+			placeholder = "placeholder for " + myId;
 		}
 
+		// Using a wonderful golfing tradition we leave a token where the element used to be so we
+		// know where to put it back upon _destroy()
+		ui.placeholder.html( "<!-- " + placeholder + " -->" ).insertBefore( this.element );
+
+		// We detach the payload, add the classes, and then insert it into the popup container
+		this.element.detach();
+
+		// this._ui needs to be fully established before we can all this._addClasses(), because
+		// this._addClasses() uses this._ui, but we don't want any of the UI elements to be
+		// attached, so as to avoid reflows as this._addClasses() adds classes.
+		this._addClasses();
+
 		// Apply the proto
+		this.element.appendTo( ui.container );
 		this._page[ 0 ].appendChild( fragment );
-		// Leave a placeholder where the element used to be
-		ui.placeholder.insertAfter( theElement );
-		theElement
-			.detach()
-			.addClass( "ui-popup " +
-				this._themeClassFromOption( "ui-body-", currentOptions.theme ) + " " +
-				( currentOptions.shadow ? "ui-overlay-shadow " : "" ) +
-				( currentOptions.corners ? "ui-corner-all " : "" ) )
-			.appendTo( ui.container );
 
 		return ui;
 	},
@@ -274,8 +292,9 @@ $.widget( "mobile.popup", {
 		if ( this._isOpen ) {
 			if ( !this._expectResizeEvent() ) {
 				if ( this._ui.container.hasClass( "ui-popup-hidden" ) ) {
+
 					// effectively rapid-open the popup while leaving the screen intact
-					this._ui.container.removeClass( "ui-popup-hidden ui-popup-truncate" );
+					this._removeClass( this._ui.container, "ui-opup-hidden ui-popup-truncate" );
 					this.reposition( { positionTo: "window" } );
 					this._ignoreResizeEvents();
 				}
@@ -308,9 +327,8 @@ $.widget( "mobile.popup", {
 				!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
 
 				// effectively rapid-close the popup while leaving the screen intact
-				this._ui.container
-					.addClass( "ui-popup-hidden ui-popup-truncate" )
-					.removeAttr( "style" );
+				this._addClass( this._ui.container, "ui-popup-hidden ui-popup-truncate" );
+				this._ui.container.removeAttr( "style" );
 			}
 		}
 	},
@@ -357,13 +375,13 @@ $.widget( "mobile.popup", {
 
 	_applyTransition: function( value ) {
 		if ( value ) {
-			this._ui.container.removeClass( this._fallbackTransition );
+			this._removeClass( this._ui.container, null, this._fallbackTransition );
 			if ( value !== "none" ) {
 				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
 				if ( this._fallbackTransition === "none" ) {
 					this._fallbackTransition = "";
 				}
-				this._ui.container.addClass( this._fallbackTransition );
+				this._addClass( this._ui.container, null, this._fallbackTransition );
 			}
 		}
 
@@ -375,34 +393,22 @@ $.widget( "mobile.popup", {
 			theElement = this.element,
 			screen = this._ui.screen;
 
-		if ( newOptions.wrapperClass !== undefined ) {
-			this._ui.container
-				.removeClass( currentOptions.wrapperClass )
-				.addClass( newOptions.wrapperClass );
-		}
-
 		if ( newOptions.theme !== undefined ) {
-			theElement
-				.removeClass( this._themeClassFromOption( "ui-body-", currentOptions.theme ) )
-				.addClass( this._themeClassFromOption( "ui-body-", newOptions.theme ) );
+			this._removeClass( theElement, null,
+					this._themeClassFromOption( "ui-body-", currentOptions.theme ) )
+				._addClass( theElement, null,
+					this._themeClassFromOption( "ui-body-", newOptions.theme ) );
 		}
 
 		if ( newOptions.overlayTheme !== undefined ) {
-			screen
-				.removeClass( this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) )
-				.addClass( this._themeClassFromOption( "ui-overlay-", newOptions.overlayTheme ) );
+			this._removeClass( screen,
+					this._themeClassFromOption( "ui-overlay-", currentOptions.overlayTheme ) )
+				._addClass( screen,
+					this._themeClassFromOption( "ui-overlay-", newOptions.overlayTheme ) );
 
 			if ( this._isOpen ) {
-				screen.addClass( "in" );
+				this._addClass( screen, null, "in" );
 			}
-		}
-
-		if ( newOptions.shadow !== undefined ) {
-			theElement.toggleClass( "ui-overlay-shadow", newOptions.shadow );
-		}
-
-		if ( newOptions.corners !== undefined ) {
-			theElement.toggleClass( "ui-corner-all", newOptions.corners );
 		}
 
 		if ( newOptions.transition !== undefined ) {
@@ -576,13 +582,13 @@ $.widget( "mobile.popup", {
 	},
 
 	_animate: function( args ) {
+
 		// NOTE before removing the default animation of the screen
 		//      this had an animate callback that would resolve the deferred
 		//      now the deferred is resolved immediately
 		// TODO remove the dependency on the screen deferred
-		this._ui.screen
-			.removeClass( args.classToRemove )
-			.addClass( args.screenClassToAdd );
+		this._removeClass( this._ui.screen, null, args.classToRemove )
+			._addClass( this._ui.screen, null, args.screenClassToAdd );
 
 		args.prerequisites.screen.resolve();
 
@@ -591,14 +597,14 @@ $.widget( "mobile.popup", {
 				this._applyTransition( args.transition );
 			}
 			if ( this._fallbackTransition ) {
+				this._addClass( this._ui.container, null, args.containerClassToAdd )
+					._removeClass( this._ui.container, null, args.classToRemove );
 				this._ui.container
-					.addClass( args.containerClassToAdd )
-					.removeClass( args.classToRemove )
 					.animationComplete( $.proxy( args.prerequisites.container, "resolve" ) );
 				return;
 			}
 		}
-		this._ui.container.removeClass( args.classToRemove );
+		this._removeClass( this._ui.container, null, args.classToRemove );
 		args.prerequisites.container.resolve();
 	},
 
@@ -680,7 +686,7 @@ $.widget( "mobile.popup", {
 		var id = this.element.attr( "id" ),
 			firstFocus = this._ui.container.find( ":focusable" ).first();
 
-		this._ui.container.addClass( "ui-popup-active" );
+		this._addClass( this._ui.container, "ui-popup-active" );
 		this._isOpen = true;
 		this._resizeScreen();
 
@@ -730,13 +736,13 @@ $.widget( "mobile.popup", {
 		this._currentTransition = openOptions.transition;
 		this._applyTransition( openOptions.transition );
 
-		this._ui.screen.removeClass( "ui-screen-hidden" );
-		this._ui.container.removeClass( "ui-popup-truncate" );
+		this._removeClass( this._ui.screen, null, "ui-screen-hidden" );
+		this._removeClass( this._ui.container, "ui-popup-truncate" );
 
 		// Give applications a chance to modify the contents of the container before it appears
 		this._reposition( openOptions );
 
-		this._ui.container.removeClass( "ui-popup-hidden" );
+		this._removeClass( this._ui.container, "ui-popup-hidden" );
 
 		if ( this.options.overlayTheme && androidBlacklist ) {
 			/* TODO: The native browser on Android 4.0.X ("Ice Cream Sandwich") suffers from an issue where the popup overlay appears to be z-indexed above the popup itself when certain other styles exist on the same page -- namely, any element set to `position: fixed` and certain types of input. These issues are reminiscent of previously uncovered bugs in older versions of Android's native browser: https://github.com/scottjehl/Device-Bugs/issues/3
@@ -747,7 +753,7 @@ $.widget( "mobile.popup", {
 			*/
 
 			// TODO sort out why this._page isn't working
-			this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
+			this._addClass( this.element.closest( ".ui-page" ), "ui-popup-open" );
 		}
 		this._animate({
 			additionalCondition: true,
@@ -761,16 +767,14 @@ $.widget( "mobile.popup", {
 	},
 
 	_closePrerequisiteScreen: function() {
-		this._ui.screen
-			.removeClass( "out" )
-			.addClass( "ui-screen-hidden" );
+		this._removeClass( this._ui.screen, null, "out" )
+			._addClass( this._ui.screen, null, "ui-screen-hidden" );
 	},
 
 	_closePrerequisiteContainer: function() {
-		this._ui.container
-			.removeClass( "reverse out" )
-			.addClass( "ui-popup-hidden ui-popup-truncate" )
-			.removeAttr( "style" );
+		this._removeClass( this._ui.container, null, "reverse out" )
+			._addClass( this._ui.container, "ui-popup-hidden ui-popup-truncate" );
+		this._ui.container.removeAttr( "style" );
 	},
 
 	_closePrerequisitesDone: function() {
@@ -795,8 +799,8 @@ $.widget( "mobile.popup", {
 	},
 
 	_close: function( immediate ) {
-		this._ui.container.removeClass( "ui-popup-active" );
-		this._page.removeClass( "ui-popup-open" );
+		this._removeClass( this._ui.container, "ui-popup-active" )
+			._removeClass( this._page, "ui-popup-open" );
 
 		this._isOpen = false;
 
@@ -827,6 +831,7 @@ $.widget( "mobile.popup", {
 		// Put the element back to where the placeholder was and remove the "ui-popup" class
 		this._setOptions( { theme: $.mobile.popup.prototype.options.theme } );
 		this.element
+
 			// Cannot directly insertAfter() - we need to detach() first, because
 			// insertAfter() will do nothing if the payload div was not attached
 			// to the DOM at the time the widget was created, and so the payload
@@ -834,14 +839,16 @@ $.widget( "mobile.popup", {
 			// If that happens and we remove the container a few lines below, we
 			// will cause an infinite recursion - #5244
 			.detach()
-			.insertAfter( this._ui.placeholder )
-			.removeClass( "ui-popup ui-overlay-shadow ui-corner-all ui-body-inherit" );
+			.insertAfter( this._ui.placeholder );
 		this._ui.screen.remove();
 		this._ui.container.remove();
 		this._ui.placeholder.remove();
 	},
 
 	_destroy: function() {
+		if ( this.options.enhanced ) {
+			this.classesElementLookup = {};
+		}
 		if ( $.mobile.popup.active === this ) {
 			this.element.one( "popupafterclose", $.proxy( this, "_unenhance" ) );
 			this.close();
@@ -849,7 +856,7 @@ $.widget( "mobile.popup", {
 			this._unenhance();
 		}
 
-		return this;
+		return this._superApply( arguments );
 	},
 
 	_closePopup: function( theEvent, data ) {
