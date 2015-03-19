@@ -4,30 +4,32 @@
 (function($){
     module( "toolbar" );
 
-    test( "header classes and roles assigned correctly", function( assert ) {
-        $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
-        var toolbar = $( "#testHeaderClasses" );
+    test( "markup structure", function( assert ) {
+        $( "body" ).pagecontainer( "change", "#default" );
+        var toolbar = $( "#testHeaderClasses" ),
+            toolbarH1 = toolbar.find( "h1" );
 
         assert.hasClasses( toolbar, "ui-toolbar-header", "toolbar gets ui-toolbar-header after init" ); 
-        assert.hasClasses( toolbar.find( "h1" ), "ui-toolbar-title", "toolbar title assigned correctly");
+        assert.hasClasses( toolbarH1, "ui-toolbar-title", "toolbar title assigned correctly" );
         ok( toolbar.attr( "role" ) === "banner", "header gets banner role assigned" );
-        ok( toolbar.find( "h1" ).attr( "role" ) === "heading", "heading role properly assigned");
+        ok( toolbarH1.attr( "role" ) === "heading", "heading role properly assigned" );
     });
 
 
     test( "footer classes and roles assigned correctly", function( assert ) {
         $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
-        var toolbar = $( "#testFooterClasses" );
+        var toolbar = $( "#testFooterClasses" ),
+            toolbarH1 = toolbar.find( "h1" );
 
         assert.hasClasses( toolbar, "ui-toolbar-footer", "toolbar gets ui-toolbar-footer after init" ); 
-        assert.hasClasses( toolbar.find( "h1" ), "ui-toolbar-title", "toolbar title assigned correctly");
+        assert.hasClasses( toolbarH1, "ui-toolbar-title", "toolbar title assigned correctly" );
         ok( toolbar.attr( "role" ) === "contentinfo", "footer gets contentinfo role assigned" );
-        ok( toolbar.find( "h1" ).attr( "role" ) === "heading", "heading role properly assigned");
+        ok( toolbarH1.attr( "role" ) === "heading", "heading role properly assigned" );
     });
 
 
     asyncTest( "manual init works properly", function( assert ) {
-        $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
+        $( "body" ).pagecontainer( "change", "#default" );
         expect( 3 );
 
         var toolbar = $( "#testInit" ).toolbar({
@@ -42,7 +44,7 @@
     });
 
     asyncTest( "external headers are created properly", function( assert ) {
-        $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
+        $( "body" ).pagecontainer( "change", "#default" );
         expect( 3 );
 
         var toolbar = $( "#testExternalHeader" ).toolbar({
@@ -57,7 +59,7 @@
     });
 
      asyncTest( "external footers are created properly", function( assert ) {
-        $( ":mobile-pagecontainer" ).pagecontainer( "change", "#default" );
+        $( "body" ).pagecontainer( "change", "#default" );
         expect( 3 );
 
         var toolbar = $( "#testExternalFooter" ).toolbar({
@@ -72,7 +74,7 @@
     });
 
     test( "destroy preserves original structure", function() {
-        $( ":mobile-pagecontainer" ).pagecontainer( "change", "#destroyPage" );
+        $( "body" ).pagecontainer( "change", "#destroyPage" );
 
         var unEnhanced = $("#testDestroy").clone(),
             destroyed = $("#testDestroy").toolbar().toolbar("destroy"),

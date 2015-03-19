@@ -17,7 +17,9 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			transition: "slide", //can be none, fade, slide (slide maps to slideup or slidedown)
 			fullscreen: false,
 			tapToggle: true,
-			tapToggleBlacklist: "a, button, input, select, textarea, .ui-toolbar-header-fixed, .ui-toolbar-footer-fixed, .ui-flipswitch, .ui-popup, .ui-panel, .ui-panel-dismiss-open",
+			tapToggleBlacklist: "a, button, input, select, textarea, .ui-popup, " +
+				".ui-toolbar-header-fixed, .ui-toolbar-footer-fixed, .ui-flipswitch, " +
+				".ui-panel, .ui-panel-dismiss-open",
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
 			trackPersistentToolbars: true,
@@ -42,7 +44,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		_makeFixed: function() {
-			this._addClass( "ui-toolbar-"+ this.role +"-fixed" );
+			this._addClass( "ui-toolbar-" + this.role + "-fixed" );
 			this.updatePagePadding();
 			this._addTransitionClass();
 			this._bindPageEvents();
@@ -54,11 +56,12 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				this._makeFixed();
 			}
 			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
-				var currentPage = ( !!this.page ) ? 
+				var pageActive = $( ".ui-page-active" );
+				var currentPage = !!this.page ? 
 					this.page : 
-					( $(".ui-page-active").length > 0 ) ? 
-					$(".ui-page-active") : 
-					$(".ui-page").eq(0);
+					pageActive.length ? 
+					pageActive : 
+					$( ".ui-page" ).eq(0);
 
 				if ( o.fullscreen !== undefined) {
 					if ( o.fullscreen ) {
@@ -171,42 +174,39 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 		},
 
 		show: function( notransition ) {
-			var hideClass = "ui-toolbar-fixed-hidden",
-				self = this,
-				$el = this.element;
+			var self = this;
 
 			if ( this._useTransition( notransition ) ) {
 				this._removeClass( null, "out" );
-				this._removeClass( hideClass );
+				this._removeClass( "ui-toolbar-fixed-hidden" );
 				this._addClass( null, "in" );
-				$el.animationComplete( function() {
+				this.element.animationComplete( function() {
 					self._removeClass( null, "in" );
 				} );
 			}
 			else {
-				this._removeClass( hideClass );
+				this._removeClass( "ui-toolbar-fixed-hidden" );
 			}
 			this._visible = true;
 		},
 
 		hide: function( notransition ) {
-			var hideClass = "ui-toolbar-fixed-hidden",
-				self = this,
-				$el = this.element,
+			var self = this,
+			
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
-				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
+				outClass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
 			if ( this._useTransition( notransition ) ) {
-				this._addClass( null, outclass );
+				this._addClass( null, outClass );
 				this._removeClass( null, "in" );
-				$el.animationComplete( function() {
-					self._addClass( hideClass );
-					self._removeClass( null, outclass );
+				this.element.animationComplete( function() {
+					self._addClass( "ui-toolbar-fixed-hidden" );
+					self._removeClass( null, outClass );
 				} );
 			}
 			else {
-				this._addClass( hideClass );
-				this._removeClass( null, outclass );
+				this._addClass( "ui-toolbar-fixed-hidden" );
+				this._removeClass( null, outClass );
 			}
 			this._visible = false;
 		},
