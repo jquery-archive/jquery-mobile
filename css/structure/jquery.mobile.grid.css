@@ -1,10 +1,23 @@
 /* content configurations. */
-.ui-grid-a,
-.ui-grid-b,
-.ui-grid-c,
-.ui-grid-d,
-.ui-grid-solo {
-	overflow: hidden;
+.ui-grid-a:before,
+.ui-grid-b:before,
+.ui-grid-c:before,
+.ui-grid-d:before,
+.ui-grid-solo:before,
+.ui-grid-a:after,
+.ui-grid-b:after,
+.ui-grid-c:after,
+.ui-grid-d:after,
+.ui-grid-solo:after {
+	content: "";
+	display: table;
+}
+.ui-grid-a:after,
+.ui-grid-b:after,
+.ui-grid-c:after,
+.ui-grid-d:after,
+.ui-grid-solo:after {
+	clear: both;
 }
 .ui-block-a,
 .ui-block-b,
