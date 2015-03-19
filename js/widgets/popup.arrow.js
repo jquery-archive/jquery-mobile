@@ -14,9 +14,15 @@ function( jQuery ) {
 
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
-		"<div class='ui-popup-arrow-guide'></div>" +
-		"<div class='ui-popup-arrow-container" + ( ieHack ? " ie" : "" ) + "'>" +
-			"<div class='ui-popup-arrow'></div>" +
+
+		// guide
+		"<div></div>" +
+
+		// container
+		"<div>" +
+
+			// arrow
+			"<div></div>" +
 		"</div>"
 	);
 
@@ -31,7 +37,9 @@ function getArrow() {
 
 $.widget( "mobile.popup", $.mobile.popup, {
 	options: {
-
+		classes: {
+			"ui-popup-arrow": "ui-overlay-shadow"
+		},
 		arrow: ""
 	},
 
@@ -47,12 +55,13 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	},
 
 	_addArrow: function() {
-		var theme,
-			opts = this.options,
-			ar = getArrow();
+		var ar = getArrow();
 
-		theme = this._themeClassFromOption( "ui-body-", opts.theme );
-		ar.ar.addClass( theme + ( opts.shadow ? " ui-overlay-shadow" : "" ) );
+		this._addClass( ar.gd, "ui-popup-arrow-guide" );
+		this._addClass( ar.ct, "ui-popup-arrow-container", ieHack ? "ie" : "" );
+		this._addClass( ar.ar, "ui-popup-arrow",
+			this._themeClassFromOption( "ui-body-", this.options.theme ) );
+
 		ar.arEls.hide().appendTo( this.element );
 
 		return ar;
@@ -169,9 +178,10 @@ $.widget( "mobile.popup", $.mobile.popup, {
 		}
 
 		// Move the arrow into place
+		this._removeClass( ar.ct,
+			"ui-popup-arrow-l ui-popup-arrow-t ui-popup-arrow-r ui-popup-arrow-b" )
+			._addClass( ar.ct, "ui-popup-arrow-" + best.dir );
 		ar.ct
-			.removeClass( "ui-popup-arrow-l ui-popup-arrow-t ui-popup-arrow-r ui-popup-arrow-b" )
-			.addClass( "ui-popup-arrow-" + best.dir )
 			.removeAttr( "style" ).css( best.posProp, best.posVal )
 			.show();
 
@@ -203,7 +213,7 @@ $.widget( "mobile.popup", $.mobile.popup, {
 				return;
 			} else if ( ar && !opts.arrow ) {
 				ar.arEls.remove();
-				this._ui.arrow = null;
+				delete this._ui.arrow;
 			}
 		}
 
@@ -214,11 +224,8 @@ $.widget( "mobile.popup", $.mobile.popup, {
 			if ( opts.theme !== undefined ) {
 				oldTheme = this._themeClassFromOption( "ui-body-", oldTheme );
 				newTheme = this._themeClassFromOption( "ui-body-", opts.theme );
-				ar.ar.removeClass( oldTheme ).addClass( newTheme );
-			}
-
-			if ( opts.shadow !== undefined ) {
-				ar.ar.toggleClass( "ui-overlay-shadow", opts.shadow );
+				this._removeClass( ar.ar, null, oldTheme )
+					._addClass( ar.ar, null, newTheme );
 			}
 		}
 
