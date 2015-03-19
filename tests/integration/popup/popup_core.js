@@ -7,7 +7,7 @@
 		home = urlObject.pathname + urlObject.search,
 		originalAnimationComplete = $.fn.animationComplete,
 		animationCompleteCallCount = 0,
-		opensAndCloses = function( eventNs, popupId, linkSelector, contentSelector ) {
+		opensAndCloses = function( assert, eventNs, popupId, linkSelector, contentSelector ) {
 			var popup = $( "#" + popupId ),
 				link = $( linkSelector )[ 0 ];
 
@@ -30,19 +30,19 @@
 
 				function( result ) {
 					deepEqual( link.getAttribute( "aria-expanded" ), "true", popupId + ": 'aria-expanded' attribute is set to true when the popup is open" );
-					ok( !popup.parent().prev().hasClass( "ui-screen-hidden" ),
+					assert.lacksClasses( popup.parent().prev()[ 0 ], "ui-screen-hidden",
 						popupId + ": Open popup screen is not hidden" );
-					ok( popup.attr( "class" ).match( /( |^)ui-body-([a-z]|inherit)( |$)/ ),
+					assert.hasClassRegex( popup[ 0 ], /( |^)ui-body-([a-z]|inherit)( |$)/,
 						popupId + ": Open popup has a valid theme" );
 
 					popup.popup( "option", "overlayTheme", "a" );
-					ok( popup.parent().prev().hasClass( "ui-overlay-a" ),
+					assert.hasClasses( popup.parent().prev()[ 0 ], "ui-overlay-a",
 						popupId + ": Setting an overlay theme while the popup is open causes " +
 							"the theme to be applied and the screen to be faded in" );
-					ok( popup.parent().prev().hasClass( "in" ),
-						popupId + ": Setting an overlay theme while the popup is open causes " +
-							"the theme to be applied and the screen to be faded in" );
-					ok( popup.parent().hasClass( "ui-popup-active" ),
+					assert.hasClasses( popup.parent().prev()[ 0 ], "in",
+						popupId + ": Setting an " + "overlay theme while the popup is open " +
+						"causes the theme to be applied and the screen to be faded in" );
+					assert.hasClasses( popup.parent()[ 0 ], "ui-popup-active",
 						popupId + ": Open popup has the 'ui-popup-active' class" );
 
 					deepEqual( popup.parent().attr( "tabindex" ), "0",
@@ -60,12 +60,12 @@
 				function( result) {
 					deepEqual( animationCompleteCallCount, 1, "animationComplete called only once" );
 					deepEqual( link.getAttribute( "aria-expanded" ), "false", "'aria-expanded' attribute is set to false when the popup is not open" );
-					ok( !popup.parent().hasClass( "in" ),
+					assert.lacksClasses( popup.parent()[ 0 ], "in",
 						"Closed popup container does not have class 'in'" );
-					ok( popup.parent().prev().hasClass( "ui-screen-hidden" ),
+					assert.hasClasses( popup.parent().prev()[ 0 ], "ui-screen-hidden",
 						"Closed popup screen is hidden" );
-					ok( !popup.parent().hasClass( "ui-popup-active" ),
-						"Open popup dos not have the 'ui-popup-active' class" );
+					assert.lacksClasses( popup.parent()[ 0 ], "ui-popup-active",
+						"Open popup does not have the 'ui-popup-active' class" );
 					deepEqual( popup.parent()[ 0 ].hasAttribute( "tabindex" ), false,
 						"Popup container does not have attribute tabindex" );
 				},
@@ -172,21 +172,26 @@
 		]);
 	});
 
-	asyncTest( "Popup opens and closes", function() {
-		opensAndCloses( ".opensandcloses", "test-popup", "a#open-test-popup", "#test-popup p" );
+	asyncTest( "Popup opens and closes", function( assert ) {
+		opensAndCloses( assert, ".opensandcloses", "test-popup", "a#open-test-popup",
+			"#test-popup p" );
 	});
 
-	asyncTest( "Already-enhanced popup opens and closes", function() {
-		opensAndCloses( ".alreadyenhancedopensandcloses", "already-enhanced", "a#open-already-enhanced", "#already-enhanced p" );
+	asyncTest( "Already-enhanced popup opens and closes", function( assert ) {
+		opensAndCloses( assert, ".alreadyenhancedopensandcloses", "already-enhanced",
+			"a#open-already-enhanced", "#already-enhanced p" );
 	});
 
-	asyncTest( "Link that launches popup is deactivated", function() {
+	asyncTest( "Link that launches popup is deactivated", function( assert ) {
 
-		expect( 4 );
+		expect( 5 );
 
 		$.testHelper.detailedEventCascade([
 			function() {
 				$( "a#open-test-popup" ).click();
+				assert.hasClasses( $( "a#open-test-popup" ).closest( ".ui-button" )[ 0 ],
+					"ui-button-active",
+					"Active class added in response to click" );
 			},
 
 			{
@@ -197,7 +202,9 @@
 
 			function( result ) {
 				ok( !result.opened.timedOut, "Opening a popup did cause 'opened' event" );
-				ok( !$( "a#open-test-popup" ).closest( ".ui-button" ).hasClass( "ui-button-active" ), "Opening a popup removes active class from link that launched it" );
+				assert.lacksClasses( $( "a#open-test-popup" ).closest( ".ui-button" )[ 0 ],
+					"ui-button-active",
+					"Opening a popup removes active class from link that launched it" );
 				$( "#test-popup" ).popup( "close" );
 			},
 
@@ -216,7 +223,10 @@
 			},
 
 			function( result ) {
-				ok( !$( "a#open-xyzzy-popup" ).closest( ".ui-button" ).hasClass( "ui-button-active" ), "Opening a non-existing popup removes active class from link that attempted to launch it" );
+				assert.lacksClasses( $( "a#open-xyzzy-popup" ).closest( ".ui-button" )[ 0 ],
+					"ui-button-active",
+					"Opening a non-existing popup removes active class from link that attempted " +
+						"to launch it" );
 				$( "a#open-test-popup-li-link" ).click();
 			},
 

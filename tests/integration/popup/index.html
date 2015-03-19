@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="../../../external/qunit/qunit.css"/>
 	<link rel="stylesheet" href="../../jqm-tests.css"/>
 	<script src="../../../external/qunit/qunit.js"></script>
+	<script src="../../../external/qunit-assert-classes/qunit-assert-classes.js"></script>
 	<script>
 		( function( $, undefined ) {
 			// Set the default transition to "fade" if specified in the query
@@ -53,9 +54,9 @@
 			<div data-nstest-role="popup" id="test-popup-2">
 				<p>This is another test popup</p>
 			</div>
-			<a id="open-xyzzy-popup" href="#xyzzy" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
+			<a id="open-xyzzy-popup" class="ui-button" href="#xyzzy" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
 			<input type="text" id="test-input" value="test" />
-			<a id="open-test-popup" href="#test-popup" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
+			<a id="open-test-popup" class="ui-button" href="#test-popup" data-nstest-rel="popup" data-nstest-role="button">Pop</a>
 			<ul data-nstest-role="listview">
 				<li id="open-test-popup-li"><a id="open-test-popup-li-link" href="#test-popup" data-nstest-rel="popup">Pop</a></li>
 			</ul>
