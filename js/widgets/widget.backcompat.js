@@ -55,7 +55,7 @@ if ( $.mobileBackcompat !== false ) {
 
 				$.each( this._boolOptions, function( option, className ){
 					if ( that.options[ option ] !== undefined ) {
-						if ( valueArray.indexOf( className ) !== -1 ) {
+						if ( $.inArray( className, valueArray ) !== -1 ) {
 							that.options[ option ] = true;
 						} else {
 							that.options[ option ] = false;
@@ -86,7 +86,7 @@ if ( $.mobileBackcompat !== false ) {
 					classArray.push( className );
 				} else {
 					classArray = removeFromArray( classArray,
-							classArray.indexOf( this._boolOptions[ option ] ) );
+							$.inArray( this._boolOptions[ option ], classArray ) );
 				}
 				this.option( "classes." + prop, classArray.join( " " ) );
 			}
@@ -108,7 +108,7 @@ if ( $.mobileBackcompat !== false ) {
 				if ( original.classes[ prop ] !== this.options.classes[ prop ] ) {
 					$.each( this._boolOptions, function( option, className ) {
 						if( options[ option ] !== undefined ) {
-							options[ option ] = ( currentClasses.indexOf( className ) !== -1 );
+							options[ option ] = ( $.inArray( className, currentClasses ) !== -1 );
 						}
 					}) ;
 
@@ -122,7 +122,7 @@ if ( $.mobileBackcompat !== false ) {
 								currentClasses.push( className );
 							} else {
 								currentClasses = removeFromArray( currentClasses,
-									currentClasses.indexOf( className ) );
+									$.inArray( className, currentClasses ) );
 							}
 						}
 					} );
