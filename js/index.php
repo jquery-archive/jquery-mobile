@@ -92,6 +92,7 @@ $files = array(
 	'widgets/popup.js',
 	'widgets/popup.backcompat.js',
 	'widgets/popup.arrow.js',
+	'widgets/popup.arrow.backcompat.js',
 	'widgets/table.js',
 	'widgets/table.columntoggle.js',
 	'widgets/table.reflow.js',
