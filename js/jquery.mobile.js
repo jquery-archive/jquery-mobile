@@ -58,6 +58,7 @@
 			"./widgets/popup",
 			"./widgets/popup.backcompat",
 			"./widgets/popup.arrow",
+			"./widgets/popup.arrow.backcompat",
 			"./widgets/panel",
 			"./widgets/table",
 			"./widgets/table.columntoggle",
