@@ -100,7 +100,10 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 	//setting the li's to -webkit-transform:translate3d(0,0,0); solves this problem to avoide potential issues in other
 	//platforms we scope this with the class ui-android-2x-fix
 	_bindListThumbWorkaround: function() {
-		this._addClass( this.element.closest( ".ui-page" ), null, "ui-android-2x-fixed" );
+		var pageActive = $( ".ui-page-active" );
+		var currentPage = !!this.page ? this.page : pageActive.length ? 
+			pageActive : $( ".ui-page" ).eq(0);
+		this._addClass( currentPage, "ui-toolbar-android-2x-fix" );
 	},
 	//this addresses issues #4337 Fixed header problem after scrolling content on iOS and Android
 	//and device bugs project issue #1 Form elements can lose click hit area in position: fixed containers.
@@ -120,8 +123,12 @@ return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 	destroy: function() {
 		this._super();
+		var pageActive = $( ".ui-page-active" );
+		var currentPage = !!this.page ? this.page : pageActive.length ? 
+			pageActive : $( ".ui-page" ).eq(0);
+
 		//Remove the class we added to the page previously in android 2.x
-		this._removeClass( this.element.closest( ".ui-page-active" ), null, "ui-android-2x-fix" );
+		this._removeClass( currentPage, "ui-toolbar-android-2x-fix" );
 	}
 } );
 

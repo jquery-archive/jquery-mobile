@@ -184,10 +184,10 @@
 			}
 		},
 		_addHeadingClasses: function() {
-			var headerElements = this.element.children( "h1, h2, h3, h4, h5, h6" );
-			this._addClass(  headerElements, "ui-toolbar-title" );
+			this.headerElements = this.element.children( "h1, h2, h3, h4, h5, h6" );
+			this._addClass( this.headerElements, "ui-toolbar-title" );
 
-			headerElements
+			this.headerElements
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
 				.attr({
 					"role": "heading",
@@ -195,10 +195,9 @@
 				});
 		},
 		_destroy: function() {
-			var currentTheme,
-				headerElements = this.element.children( "h1, h2, h3, h4, h5, h6" );
+			var currentTheme;
 
-			headerElements.removeAttr( "role" ).removeAttr( "aria-level" );
+			this.headerElements.removeAttr( "role aria-level" );
 
 			if ( this.role === "header" ) {
 				if ( this.backButton) {
