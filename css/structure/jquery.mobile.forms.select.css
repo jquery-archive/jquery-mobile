@@ -38,10 +38,12 @@
 		opacity: 0.0001;
 	}
 }
+
 /* Display none because of issues with IE/WP's filter alpha opacity */
 .ui-select .ui-state-disabled select {
 	display: none;
 }
+
 /* Because we add all classes of the select and option elements to the span... */ 
 .ui-select span.ui-state-disabled {
 	filter: Alpha(Opacity=100);
@@ -56,6 +58,7 @@
 	text-indent: 0;
 	display: block;
 }
+
 /* ui-li-count is styled in the listview CSS. We set padding and offset here because select supports icon position while listview doesn't. */
 .ui-select .ui-li-has-count.ui-btn {
 	padding-right: 2.8125em;
@@ -66,10 +69,12 @@
 .ui-select .ui-btn-icon-right .ui-li-count {
 	right: 3.2em;
 }
+
 /* Count indicator position must be different for mini version. */
 .ui-select.ui-mini .ui-btn-icon-right .ui-li-count {
 	right: 2.5em;
 }
+
 /* We set the rules for the span as well to fix an issue on Chrome with text-overflow ellipsis for the button in combination with text-align center. */
 .ui-select .ui-btn > span:not(.ui-li-count) {
 	display: block;
@@ -101,6 +106,7 @@
 	-webkit-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
 }
+
 /* when no placeholder is defined in a multiple select, the header height doesn't even extend past the close button.  this shim's content in there */
 .ui-selectmenu.ui-popup .ui-header h1:after {
 	content: '.';
@@ -138,4 +144,9 @@
 
 .ui-selectmenu .ui-selectmenu-placeholder {
 	display: none;
+}
+
+/* This is necessary because multi inline select menu hides if width exceeds device width. */
+.ui-select.ui-btn-inline {
+	max-width: 100% ;
 }
