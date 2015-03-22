@@ -42,6 +42,32 @@
 			"Checkboxes should not have ui-checkbox-on class" );
 	});
 
+	module( "Custom select Multiple Inline" ) ;
+
+	test( "Custom select multiple inline width is adjusted correctly", function() {
+		var selectMenu = $( "#width-test" ),
+			parent = selectMenu.parent(),
+			widths = [ 100, 250, 500, 1000 ],
+			finalResult = 0,
+			result = 0;
+
+		$.each( widths, function( index, width ){
+			parent.css( {"width": width+"px"} );
+			selectMenu
+				.find( "option" )
+					.prop( "selected", true )
+				.end();
+			selectMenu.selectmenu( "refresh" );
+			result = selectMenu.width() < parent.width() ? 1 : 0;
+			if ( result === 1 ) {
+				finalResult += 1;
+			}
+		});
+
+		strictEqual( finalResult, 4, 
+			"select menu width should not exceed parent's width" );
+	});
+
 	module( "Native select" );
 
 	test( "Select menu ID", function() {
