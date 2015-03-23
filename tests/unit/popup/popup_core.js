@@ -17,14 +17,18 @@
 			pointInRect( { x: small.x + small.cx, y: small.y + small.cy }, large ) );
 	}
 
-	function popupEnhancementTests( $sel, prefix ) {
+	function popupEnhancementTests( assert, $sel, prefix ) {
 		var $container = $sel.parent(), $screen = $sel.parent().prev();
 
 		ok( $sel.data( "mobile-popup" ),  prefix + ", popup div is associated with a popup widget" );
-		ok( $sel.hasClass( "ui-popup" ),  prefix + ", popup payload has class 'ui-popup'" );
-		ok( $container.hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
-		ok( $container.parent().hasClass( "ui-page" ), prefix + ", popup container parent is the page" );
-		ok( $screen.hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
+		assert.hasClasses( $sel[ 0 ], "ui-popup",
+			prefix + ", popup payload has class 'ui-popup'" );
+		assert.hasClasses( $container[ 0 ], "ui-popup-container",
+			prefix + ", popup div parent has class ui-popup-container" );
+		assert.hasClasses( $container.parent()[ 0 ], "ui-page",
+			prefix + ", popup container parent is the page" );
+		assert.hasClasses( $screen, "ui-popup-screen",
+			prefix + ", popup div is preceded by its screen" );
 		ok( $container.attr( "id" ) === $sel.attr( "id" ) + "-popup", prefix + ", popup container has the id of the payload + '-popup'" );
 		ok( $screen.attr( "id" ) === $sel.attr( "id" ) + "-screen", prefix + ", popup screen has the id of the payload + '-screen'" );
 	}
@@ -93,34 +97,45 @@
 		tolTest( tolTestElement, tolTestPopup, null, defaultValues );
 	});
 
-	test( "Popup is enhanced correctly", function() {
-		popupEnhancementTests( $( "#test-popup" ), "When autoenhanced" );
+	test( "Popup is enhanced correctly", function( assert ) {
+		popupEnhancementTests( assert, $( "#test-popup" ), "When autoenhanced" );
 		ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->", "When autoenhanced, there is a placeholder in the popup div's original location" );
 	});
 
-	test( "Popup rearranges DOM elements correctly when it is destroyed and again when it is re-created", function() {
-		$( "#test-popup" ).popup( "destroy" );
+	test( "Popup rearranges DOM elements correctly when it is destroyed and again when it is " +
+		"re-created", function( assert ) {
+			$( "#test-popup" ).popup( "destroy" );
 
-		ok( $( "#page-content" ).children().first().attr( "id" ) === "test-popup", "After destroying a popup, its payload is returned to its original location" );
-		ok( $( "#page-content" ).children().first().prev().html() !== "<!-- placeholder for test-popup -->", "No placeholder precedes the restored popup" );
-		ok( $( "#page-content" ).children().first().next().html() !== "<!-- placeholder for test-popup -->", "No placeholder succeedes the restored popup" );
+			ok( $( "#page-content" ).children().first().attr( "id" ) === "test-popup",
+				"After destroying a popup, its payload is returned to its original location" );
+			ok( $( "#page-content" ).children().first().prev().html() !==
+				"<!-- placeholder for test-popup -->",
+				"No placeholder precedes the restored popup" );
+			ok( $( "#page-content" ).children().first().next().html() !==
+				"<!-- placeholder for test-popup -->",
+				"No placeholder succeedes the restored popup" );
 
-		$( "#test-popup" ).popup();
+			$( "#test-popup" ).popup();
 
-		popupEnhancementTests( $( "#test-popup" ), "When re-created" );
-		ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->", "When re-created, there is a placeholder in the popup div's original location" );
-	});
+			popupEnhancementTests( assert, $( "#test-popup" ), "When re-created" );
+			ok( $( "#page-content" ).children().first().html() ===
+				"<!-- placeholder for test-popup -->",
+				"When re-created, there is a placeholder in the popup div's original location" );
+		});
 
-	test( "On-the-fly popup is enhanced and de-enhanced correctly", function() {
+	test( "On-the-fly popup is enhanced and de-enhanced correctly", function( assert ) {
 		var $container = $( "<div></div>" ).appendTo( $( "#page-content" ) ),
-			$payload = $( "<p id='otf-popup'>This is an on-the-fly-popup</p>" ).appendTo( $container );
+			$payload = $( "<p id='otf-popup'>This is an on-the-fly-popup</p>" )
+				.appendTo( $container ),
+			reference = $payload.clone();
 
 		$payload.popup();
 
-		popupEnhancementTests( $payload, "When created on-the-fly" );
+		popupEnhancementTests( assert, $payload, "When created on-the-fly" );
 		ok( $container.children().first().html() === "<!-- placeholder for otf-popup -->", "When created on-the-fly, there is a placeholder in the popup div's original location" );
 		$payload.popup( "destroy" );
-		ok( !$payload.attr( "class" ), "After destroying on-the-fly popup, the payload has no 'class' attribute" );
+		deepEqual( $.testHelper.domEqual( $payload, reference ), true,
+			"After destroying on-the-fly popup, the payload is restored" );
 		ok( $container.children().is( $payload ), "After destroying on-the-fly popup, its payload is returned to its original location" );
 	});
 
