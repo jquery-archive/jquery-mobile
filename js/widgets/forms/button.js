@@ -1,18 +1,37 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Consistent styling for native butttons.
+/*!
+ * jQuery Mobile Button @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Mobile Button
 //>>group: Forms
+//>>description: Consistent styling for native butttons.
+//>>docs: http://api.jquerymobile.com/button/
+//>>demos: http://demos.jquerymobile.com/@VERSION/button/
+//>>css.structure: ../css/structure/jquery.mobile.forms.slider.tooltip.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../../core",
-	"../../widget",
-	"../widget.theme",
-	"jquery-ui/button"
-], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../../core",
+			"../../widget",
+			"../widget.theme",
+			"jquery-ui/button" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 	$.widget( "ui.button", $.ui.button, {
 		initSelector: "input[type='button'], input[type='submit'], input[type='reset'], button," +
 		" [data-role='button']",
@@ -38,7 +57,4 @@ define( [
 	};
 	return $.ui.button;
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

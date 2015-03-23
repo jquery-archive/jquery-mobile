@@ -1,25 +1,39 @@
-/*
-* custom "selectmenu" plugin
-*/
+/*!
+ * jQuery Mobile Custom Select @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features.
 //>>label: Selects: Custom menus
 //>>group: Forms
+//>>description: Extension to select menus to support menu styling, placeholder options, and multi-select features.
+//>>docs: http://api.jquerymobile.com/selectmenu/
+//>>demos: http://demos.jquerymobile.com/@VERSION/selectmenu-custom/
 //>>css.structure: ../css/structure/jquery.mobile.forms.select.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"../../core",
-	"../../navigation",
-	"../dialog",
-	"./select",
-	"../listview",
-	"../page",
-	"../popup" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../../core",
+			"../../navigation",
+			"../dialog",
+			"./select",
+			"../listview",
+			"../page",
+			"../popup" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 var unfocusableItemSelector = ".ui-disabled,.ui-state-disabled,.ui-li-divider,.ui-screen-hidden,:jqmData(role='placeholder')",
 	goToAdjacentItem = function( item, target, direction ) {
@@ -593,7 +607,4 @@ $.widget( "mobile.selectmenu", $.mobile.selectmenu, {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

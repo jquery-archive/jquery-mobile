@@ -1,3 +1,17 @@
+/*!
+ * jQuery Mobile Virtual Mouse @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+//>>label: Virtual Mouse (vmouse) Bindings
+//>>group: Core
+//>>description: Normalizes touch/mouse events.
+//>>docs: http://api.jquerymobile.com/?s=vmouse
+
 // This plugin is an experiment for abstracting away the touch and mouse
 // events so that developers don't have to worry about which method of input
 // the device their document is loaded on supports.
@@ -13,14 +27,17 @@
 // The current version exposes the following virtual events to jQuery bind methods:
 // "vmouseover vmousedown vmousemove vmouseup vclick vmouseout vmousecancel"
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Normalizes touch/mouse events.
-//>>label: Virtual Mouse (vmouse) Bindings
-//>>group: Core
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-define( [ "jquery" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, document, undefined ) {
+		// AMD. Register as an anonymous module.
+		define( [ "jquery" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 var dataPropertyName = "virtualMouseBindings",
 	touchTargetPropertyName = "virtualTouchID",
@@ -506,7 +523,4 @@ if ( eventCaptureSupported ) {
 		}
 	}, true);
 }
-})( jQuery, window, document );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

@@ -1,11 +1,30 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Changes input type to another after custom enhancements are made (ex. range > numeric).
+/*!
+ * jQuery Mobile Orientation @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Degrade Inputs
 //>>group: Utilities
+//>>description: Changes input type to another after custom enhancements are made (ex. range > numeric).
+//>>docs: http://api.jquerymobile.com/jQuery.mobile.degradeInputsWithin/
 
-define( [ "jquery", "./widgets/page" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./widgets/page" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 $.mobile.degradeInputs = {
 	color: false,
@@ -50,7 +69,4 @@ $.mobile.degradeInputsWithin = function( target ) {
 
 };
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

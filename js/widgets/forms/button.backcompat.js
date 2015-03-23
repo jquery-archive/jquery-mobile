@@ -1,20 +1,37 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Consistent styling for checkboxes/radio buttons.
-//>>label: Checkboxes & Radio Buttons
+/*!
+ * jQuery Mobile Button Backcompat @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+//>>label: Button
 //>>group: Forms
-//>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
+//>>description: Backwards-compatibility for buttons.
+//>>docs: http://api.jquerymobile.com/button/
+//>>demos: http://demos.jquerymobile.com/@VERSION/button/
+//>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define([
-	"jquery",
-	"../../core",
-	"../../widget",
-	"../widget.theme",
-	"checkboxradio",
-	"checkboxradio.backcompat"
-	], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../../core",
+			"../../widget",
+			"../widget.theme",
+			"checkboxradio",
+			"checkboxradio.backcompat" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 if ( $.mobileBackcompat !== false ) {
 	$.widget( "ui.button", $.ui.button, {
@@ -65,7 +82,4 @@ if ( $.mobileBackcompat !== false ) {
 	$.widget( "ui.button", $.ui.button, $.mobile.widget.backcompat );
 }
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

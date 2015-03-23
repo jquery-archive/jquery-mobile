@@ -1,12 +1,30 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Touch events including: touchstart, touchmove, touchend, tap, taphold, swipe, swipeleft, swiperight
+/*!
+ * jQuery Mobile Orientation Change Event @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Touch
 //>>group: Events
+//>>description: Touch events including: touchstart, touchmove, touchend, tap, taphold, swipe, swipeleft, swiperight
 
-define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
 
-(function( $, window, undefined ) {
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../vmouse",
+			"../support/touch" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 	var $document = $( document ),
 		supportTouch = $.mobile.support.touch,
 		touchStartEvent = supportTouch ? "touchstart" : "mousedown",
@@ -285,8 +303,5 @@ define( [ "jquery", "../vmouse", "../support/touch" ], function( jQuery ) {
 			}
 		};
 	});
-
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");
+

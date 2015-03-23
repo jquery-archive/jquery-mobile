@@ -1,17 +1,35 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Extends the table widget to a column toggle menu and responsive column visibility
+/*!
+ * jQuery Mobile Column-toggling Table @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Table: Column Toggle
 //>>group: Widgets
+//>>description: Extends the table widget to a column toggle menu and responsive column visibility
+//>>docs: http://api.jquerymobile.com/table-columntoggle/
+//>>demos: http://demos.jquerymobile.com/@VERSION/table-column-toggle/
 //>>css.structure: ../css/structure/jquery.mobile.table.columntoggle.css
 
-define( [
-	"jquery",
-	"./table",
-	"./popup",
-	"./controlgroup",
-	"../jquery-ui/checkboxradio" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./table",
+			"./popup",
+			"./controlgroup",
+			"../jquery-ui/checkboxradio" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 $.widget( "mobile.table", $.mobile.table, {
 	options: {
@@ -238,7 +256,4 @@ $.widget( "mobile.table", $.mobile.table, {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

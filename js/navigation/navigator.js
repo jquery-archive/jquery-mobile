@@ -1,15 +1,33 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Manages URL history and information in conjunction with the navigate event
+/*!
+ * jQuery Mobile Navigator @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Navigation Manager
 //>>group: Navigation
-define(["jquery",
-	"./../ns",
-	"../events/navigate",
-	"./path",
-	"./history" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+//>>description: Manages URL history and information in conjunction with the navigate event
 
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./../ns",
+			"../events/navigate",
+			"./path",
+			"./history" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 	var path = $.mobile.path,
 		initialHref = location.href;
 
@@ -291,8 +309,6 @@ define(["jquery",
 			});
 		}
 	});
-})( jQuery );
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return $.mobile.Navigator;
 });
-//>>excludeEnd("jqmBuildExclude");

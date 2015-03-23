@@ -1,12 +1,28 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: A handler for css transition & animation end events to ensure callback is executed
+/*!
+ * jQuery Mobile animationComplete @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Animation Complete
 //>>group: Core
-define( [
-	"jquery"
-], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+//>>description: A handler for css transition & animation end events to ensure callback is executed
+
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [ "jquery" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 	var props = {
 			"animation": {},
 			"transition": {}
@@ -99,7 +115,6 @@ define( [
 
 	// Allow default callback to be configured on mobileInit
 	$.fn.animationComplete.defaultDuration = 1000;
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+
+	return $.fn.animationComplete;
 });
-//>>excludeEnd("jqmBuildExclude");

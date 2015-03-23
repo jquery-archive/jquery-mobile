@@ -1,16 +1,35 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Default values for jQuery Mobile
+/*!
+ * jQuery Mobile Defaults @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Defaults
 //>>group: Core
+//>>description: Default values for jQuery Mobile
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "./ns", "json!../package.json" ], function( jQuery, ns, pkg ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"./ns",
+			"json!../package.json" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $, ns, pkg ) {
+
 	var __version__ = ( pkg && pkg.version ) || "dev";
-//>>excludeEnd("jqmBuildExclude");
+
 	$.extend( $.mobile, {
 
 		// Version of the jQuery Mobile Framework
@@ -96,7 +115,4 @@ define( [ "jquery", "./ns", "json!../package.json" ], function( jQuery, ns, pkg 
 
 		dialogHashKey: "&ui-state=dialog"
 	});
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

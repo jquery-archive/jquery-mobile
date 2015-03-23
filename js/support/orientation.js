@@ -1,15 +1,30 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Feature test for orientation
+/*!
+ * jQuery Mobile Orientation @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Orientation support test
 //>>group: Core
+//>>description: Feature test for orientation
 
-define( [ "jquery" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-	(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [ "jquery" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
+
 		$.extend( $.support, {
 			orientation: "orientation" in window && "onorientationchange" in window
 		});
-	}( jQuery ));
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");
+

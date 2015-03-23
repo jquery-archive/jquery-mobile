@@ -1,22 +1,42 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Widget to create page container which manages pages and transitions
+/*!
+ * jQuery Mobile Page Container @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Content Management
 //>>group: Navigation
-define( [
-	"jquery",
-	"../core",
-	"../navigation/path",
-	"../navigation/base",
-	"../events/navigate",
-	"../navigation/history",
-	"../navigation/navigator",
-	"../navigation/method",
-	"../events/scroll",
-	"../support",
-	"../widgets/page",
-	"../transitions/handlers" ], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+//>>description: Widget to create page container which manages pages and transitions
+//>>docs: http://api.jquerymobile.com/pagecontainer/
+//>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"../core",
+			"../navigation/path",
+			"../navigation/base",
+			"../events/navigate",
+			"../navigation/history",
+			"../navigation/navigator",
+			"../navigation/method",
+			"../events/scroll",
+			"../support",
+			"../widgets/page",
+			"../transitions/handlers" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 	$.widget( "mobile.pagecontainer", {
 		options: {
@@ -1199,7 +1219,6 @@ define( [
 		// indicates whether or not page is in process of transitioning
 		isPageTransitioning = false;
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return $.mobile.pagecontainer;
+
 });
-//>>excludeEnd("jqmBuildExclude");

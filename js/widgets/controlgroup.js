@@ -1,18 +1,35 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Visually groups sets of buttons, checks, radios, etc.
+/*!
+ * jQuery Mobile Controlgroups @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Controlgroups
 //>>group: Forms
+//>>description: Visually groups sets of buttons, checks, radios, etc.
+//>>docs: http://api.jquerymobile.com/toolbar/
+//>>demos: http://demos.jquerymobile.com/@VERSION/toolbar-fixed/
 //>>css.structure: ../css/structure/jquery.mobile.controlgroup.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [
-	"jquery",
-	"jquery-ui/widget",
-	"./widget.theme",
-	"jquery-ui/controlgroup"
-], function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+( function( factory ) {
+	if ( typeof define === "function" && define.amd ) {
+
+		// AMD. Register as an anonymous module.
+		define( [
+			"jquery",
+			"jquery-ui/widget",
+			"./widget.theme",
+			"jquery-ui/controlgroup" ], factory );
+	} else {
+
+		// Browser globals
+		factory( jQuery );
+	}
+})( function( $ ) {
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, {
 	options: {
@@ -46,7 +63,6 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, $.mobile.widget.theme );
 
-})(jQuery);
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+return $.ui.controlgroup;
+
 });
-//>>excludeEnd("jqmBuildExclude");
