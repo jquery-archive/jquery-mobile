@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: The mobile namespace on the jQuery object
+/*!
+ * jQuery Mobile Namespace @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Namespace
 //>>group: Core
+//>>description: The mobile namespace on the jQuery object
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -13,11 +21,9 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $ ) {
-	$.mobile = {};
-}( jQuery ));
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+})( function( $ ) {
+
+	$.mobile = { version: "@VERSION" };
+
+	return $.mobile;
 });
-//>>excludeEnd("jqmBuildExclude");

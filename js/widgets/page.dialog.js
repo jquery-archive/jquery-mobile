@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Styles a page as a modal dialog with inset appearance and overlay background
+/*!
+ * jQuery Mobile Page Styled As Dialog @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Dialog styling
 //>>group: Widgets
+//>>description: Styles a page as a modal dialog with inset appearance and overlay background
+//>>docs: http://api.jquerymobile.com/page/
+//>>demos: http://demos.jquerymobile.com/@VERSION/pages-dialog/
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -20,10 +30,8 @@
 		factory( jQuery );
 	}
 })( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
 
-$.widget( "mobile.page", $.mobile.page, {
+return $.widget( "mobile.page", $.mobile.page, {
 	options: {
 
 		// Accepts left, right and none
@@ -137,7 +145,4 @@ $.widget( "mobile.page", $.mobile.page, {
 	}
 });
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

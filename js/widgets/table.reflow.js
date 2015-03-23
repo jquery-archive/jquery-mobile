@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Extends the table widget to reflow on narrower screens
+/*!
+ * jQuery Mobile Reflow Table @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Table: reflow
 //>>group: Widgets
+//>>description: Extends the table widget to reflow on narrower screens
+//>>docs: http://api.jquerymobile.com/table/
+//>>demos: http://demos.jquerymobile.com/@VERSION/table-reflow/
 //>>css.structure: ../css/structure/jquery.mobile.table.reflow.css
 
 ( function( factory ) {
@@ -16,11 +26,9 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
-$.widget( "mobile.table", $.mobile.table, {
+return $.widget( "mobile.table", $.mobile.table, {
 	options: {
 		mode: "reflow",
 		classes: $.extend( $.mobile.table.prototype.options.classes, {
@@ -98,7 +106,4 @@ $.widget( "mobile.table", $.mobile.table, {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

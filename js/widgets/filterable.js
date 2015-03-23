@@ -1,8 +1,19 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Renders the children of an element filterable via a callback and a textinput
+/*!
+ * jQuery Mobile Filterable @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Filterable
 //>>group: Widgets
+//>>description: Renders the children of an element filterable via a callback and a textinput
+//>>docs: http://api.jquerymobile.com/filterable/
+//>>demos: http://demos.jquerymobile.com/@VERSION/filterable/
 //>>css.structure: ../css/structure/jquery.mobile.filterable.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -16,9 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 // TODO rename filterCallback/deprecate and default to the item itself as the first argument
 var defaultFilterCallback = function( index, searchValue ) {
@@ -38,7 +47,8 @@ var defaultFilterCallback = function( index, searchValue ) {
 		.toLowerCase().indexOf( searchValue ) === -1 );
 };
 
-$.widget( "mobile.filterable", {
+return $.widget( "mobile.filterable", {
+	version: "@VERSION",
 
 	initSelector: ":jqmData(filter='true')",
 
@@ -250,7 +260,4 @@ $.widget( "mobile.filterable", {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

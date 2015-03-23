@@ -1,9 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Consistent styling for checkboxes/radio buttons.
+/*!
+ * jQuery Mobile Widget Backcompat @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Backcompat option setting code
 //>>group: Backcompat
-//>>css.structure: ../css/structure/jquery.mobile.forms.checkboxradio.css
-//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+//>>description: Synchronize deprecated style options and the value of the classes option.
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -18,9 +24,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 if ( $.mobileBackcompat !== false ) {
 
@@ -159,7 +163,6 @@ if ( $.mobileBackcompat !== false ) {
 	}}, $.mobile.widget );
 }
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+return $.mobile.widget;
+
 });
-//>>excludeEnd("jqmBuildExclude");

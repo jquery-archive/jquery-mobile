@@ -1,8 +1,19 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Browser specific workarounds for "fixed" headers and footers
+/*!
+ * jQuery Mobile Fixed Toolbar Workarounds @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Toolbars: Fixed: Workarounds
 //>>group: Widgets
+//>>description: Browser specific workarounds for "fixed" headers and footers
+//>>docs: http://api.jquerymobile.com/toolbar/
+//>>demos: http://demos.jquerymobile.com/@VERSION/toolbar-fixed/
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
+
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -20,10 +31,9 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
-	$.widget( "mobile.toolbar", $.mobile.toolbar, {
+})( function( $ ) {
+
+	return $.widget( "mobile.toolbar", $.mobile.toolbar, {
 
 		_makeFixed: function() {
 			this._super();
@@ -115,7 +125,4 @@
 		}
 	});
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

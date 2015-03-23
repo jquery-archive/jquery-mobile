@@ -1,7 +1,18 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Consistent styling for native butttons.
+/*!
+ * jQuery Mobile Button @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Mobile Button
 //>>group: Forms
+//>>description: Consistent styling for native butttons.
+//>>docs: http://api.jquerymobile.com/button/
+//>>demos: http://demos.jquerymobile.com/@VERSION/button/
+//>>css.structure: ../css/structure/jquery.mobile.forms.slider.tooltip.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 ( function( factory ) {
@@ -19,9 +30,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
+
 	$.widget( "ui.button", $.ui.button, {
 		initSelector: "input[type='button'], input[type='submit'], input[type='reset'], button," +
 		" [data-role='button']",
@@ -47,7 +57,4 @@
 	};
 	return $.ui.button;
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

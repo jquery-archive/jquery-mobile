@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Creates collapsible content blocks.
+/*!
+ * jQuery Mobile Collapsible @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Collapsible
 //>>group: Widgets
+//>>description: Creates collapsible content blocks.
+//>>docs: http://api.jquerymobile.com/collapsible/
+//>>demos: http://demos.jquerymobile.com/@VERSION/collapsible/
 //>>css.structure: ../css/structure/jquery.mobile.collapsible.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -25,9 +35,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 var rInitialLetter = /([A-Z])/g,
 
@@ -38,6 +46,8 @@ var rInitialLetter = /([A-Z])/g,
 	};
 
 $.widget( "mobile.collapsible", {
+	version: "@VERSION",
+
 	options: {
 		enhanced: false,
 		expandCueText: null,
@@ -374,7 +384,6 @@ $.mobile.collapsible.defaults = {
 	mini: false
 };
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+return $.mobile.collapsible;
+
 });
-//>>excludeEnd("jqmBuildExclude");

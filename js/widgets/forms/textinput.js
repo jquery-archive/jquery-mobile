@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Enhances and consistently styles text inputs.
+/*!
+ * jQuery Mobile Textinput @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Text Inputs & Textareas
 //>>group: Forms
+//>>description: Enhances and consistently styles text inputs.
+//>>docs: http://api.jquerymobile.com/textinput/
+//>>demos: http://demos.jquerymobile.com/@VERSION/textinput/
 //>>css.structure: ../css/structure/jquery.mobile.forms.textinput.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -20,11 +30,11 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 $.widget( "mobile.textinput", {
+	version: "@VERSION",
+
 	initSelector: "input[type='text']," +
 		"input[type='search']," +
 		":jqmData(type='search')," +
@@ -216,7 +226,4 @@ $.widget( "mobile.textinput", {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

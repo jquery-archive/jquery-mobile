@@ -1,9 +1,21 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Popup windows
+/*!
+ * jQuery Mobile Popup @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Popups
 //>>group: Widgets
+//>>description: Popup windows
+//>>docs: http://api.jquerymobile.com/popup/
+//>>demos: http://demos.jquerymobile.com/@VERSION/popup/
+//>>css.structure: ../css/structure/jquery.mobile.popup.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.fade.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
-//>>css.structure: ../css/structure/jquery.mobile.popup.css,../css/structure/jquery.mobile.transition.css,../css/structure/jquery.mobile.transition.fade.css
 
 // Lessons:
 // You must remove nav bindings even if there is no history. Make sure you
@@ -32,9 +44,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 function fitSegmentInsideSegment( windowSize, segmentSize, offset, desired ) {
 	var returnValue = desired;
@@ -60,6 +70,8 @@ function getWindowCoordinates( theWindow ) {
 }
 
 $.widget( "mobile.popup", {
+	version: "@VERSION",
+
 	options: {
 		wrapperClass: null,
 		theme: null,
@@ -995,7 +1007,6 @@ $.mobile.document.on( "pagebeforechange", function( theEvent, data ) {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+return $.mobile.popup;
+
 });
-//>>excludeEnd("jqmBuildExclude");

@@ -1,7 +1,16 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Responsive presentation and behavior for HTML data tables
+/*!
+ * jQuery Mobile Table @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Table
 //>>group: Widgets
+//>>description: Responsive presentation and behavior for HTML data tables
+//>>docs: http://api.jquerymobile.com/table/
 //>>css.structure: ../css/structure/jquery.mobile.table.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -18,11 +27,11 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
-$.widget( "mobile.table", {
+return $.widget( "mobile.table", {
+	version: "@VERSION",
+
 	options: {
 		classes: {
 			table: "ui-table"
@@ -99,7 +108,4 @@ $.widget( "mobile.table", {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

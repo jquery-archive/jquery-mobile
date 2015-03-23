@@ -1,9 +1,19 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Arrow for popups
+/*!
+ * jQuery Mobile Popup Arrow @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: popuparrow
 //>>group: Widgets
-//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+//>>description: Arrow for popups
+//>>docs: http://api.jquerymobile.com/popup/#option-arrow
+//>>demos: http://demos.jquerymobile.com/@VERSION/popup/#Arrow
 //>>css.structure: ../css/structure/jquery.mobile.popup.arrow.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -17,10 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-
-( function( $, undefined ) {
+})( function( $ ) {
 
 var ieHack = ( $.mobile.browser.oldIE && $.mobile.browser.oldIE <= 8 ),
 	uiTemplate = $(
@@ -39,7 +46,7 @@ function getArrow() {
 	return { arEls: ct.add( gd ), gd: gd, ct: ct, ar: ar };
 }
 
-$.widget( "mobile.popup", $.mobile.popup, {
+return $.widget( "mobile.popup", $.mobile.popup, {
 	options: {
 
 		arrow: ""
@@ -246,8 +253,4 @@ $.widget( "mobile.popup", $.mobile.popup, {
 	}
 });
 
-})( jQuery );
-
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

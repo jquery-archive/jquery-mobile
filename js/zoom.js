@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Utility methods for enabling and disabling user scaling (pinch zoom)
+/*!
+ * jQuery Mobile Zoom @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Zoom Handling
 //>>group: Utilities
+//>>description: Utility methods for enabling and disabling user scaling (pinch zoom)
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -15,9 +23,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $ ) {
+})( function( $ ) {
+
 	var	meta = $( "meta[name=viewport]" ),
 		initialContent = meta.attr( "content" ),
 		disabledZoom = initialContent + ",maximum-scale=1, user-scalable=no",
@@ -49,7 +56,6 @@
 		}
 	});
 
-}( jQuery ));
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return $.mobile.zoom;
 });
-//>>excludeEnd("jqmBuildExclude");
+

@@ -1,7 +1,19 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Basic page definition and formatting.
+/*!
+ * jQuery Mobile Page @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Page Creation
 //>>group: Core
+//>>description: Basic page definition and formatting.
+//>>docs: http://api.jquerymobile.com/page/
+//>>demos: http://demos.jquerymobile.com/@VERSION/pages/
+//>>css.structure: ../css/structure/jquery.mobile.core.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -16,9 +28,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
+
 $.mobile.widgets = {};
 
 var originalWidget = $.widget,
@@ -50,6 +61,8 @@ $.mobile.document.on( "create", function( event ) {
 });
 
 $.widget( "mobile.page", {
+	version: "@VERSION",
+
 	options: {
 		theme: "a",
 		domCache: false,
@@ -187,7 +200,7 @@ $.widget( "mobile.page", {
 			.join( ", " ) );
 	}
 });
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+
+return $.mobile.page;
+
 });
-//>>excludeEnd("jqmBuildExclude");

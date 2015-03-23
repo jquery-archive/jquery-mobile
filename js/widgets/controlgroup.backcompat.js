@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Visually groups sets of buttons, checks, radios, etc.
+/*!
+ * jQuery Mobile Controlgroup Backcompat @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Controlgroups
 //>>group: Forms
+//>>description: Visually groups sets of buttons, checks, radios, etc.
+//>>docs: http://api.jquerymobile.com/controlgroup/
+//>>demos: http://demos.jquerymobile.com/@VERSION/controlgroup/
 //>>css.structure: ../css/structure/jquery.mobile.controlgroup.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -21,9 +31,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, {
 	options: {
@@ -55,7 +63,6 @@ $.widget( "ui.controlgroup", $.ui.controlgroup, {
 
 $.widget( "ui.controlgroup", $.ui.controlgroup, $.mobile.widget.backcompat );
 
-})(jQuery);
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+return $.ui.controlgroup;
+
 });
-//>>excludeEnd("jqmBuildExclude");

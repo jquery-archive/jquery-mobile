@@ -1,9 +1,19 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Slider tooltip extension
+/*!
+ * jQuery Mobile Slider Tooltip @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Slidertooltip
 //>>group: Forms
-//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+//>>description: Slider tooltip extension
+//>>docs: http://api.jquerymobile.com/slider/
+//>>demos: http://demos.jquerymobile.com/@VERSION/slider-tooltip/
 //>>css.structure: ../css/structure/jquery.mobile.forms.slider.tooltip.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -17,9 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 var popup;
 
@@ -33,6 +41,8 @@ function getPopup() {
 }
 
 $.widget( "mobile.slider", $.mobile.slider, {
+	version: "@VERSION",
+
 	options: {
 		popupEnabled: false,
 		showValue: false
@@ -134,7 +144,4 @@ $.widget( "mobile.slider", $.mobile.slider, {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

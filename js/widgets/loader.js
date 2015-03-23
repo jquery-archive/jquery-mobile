@@ -1,7 +1,19 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Loading message for page transitions
+/*!
+ * jQuery Mobile Loader @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Loading Message
 //>>group: Widgets
+//>>description: Loading message for page transitions
+//>>docs: http://api.jquerymobile.com/loader/
+//>>demos: http://demos.jquerymobile.com/@VERSION/loader/
+//>>css.structure: ../css/structure/jquery.mobile.core.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -17,14 +29,14 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+})( function( $ ) {
 
-(function( $ ) {
 	// TODO move loader class down into the widget settings
 	var loaderClass = "ui-loader", $html = $( "html" );
 
-	$.widget( "mobile.loader", {
+	return $.widget( "mobile.loader", {
+		version: "@VERSION",
+
 		// NOTE if the global config settings are defined they will override these
 		//      options
 		options: {
@@ -153,8 +165,4 @@
 		}
 	});
 
-})(jQuery, this);
-
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

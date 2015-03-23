@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Extension to make Tabs widget aware of jQuery Mobile's navigation
+/*!
+ * jQuery Mobile Tabs @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Tabs
 //>>group: Widgets
+//>>description: Extension to make Tabs widget aware of jQuery Mobile's navigation
+//>>docs: http://api.jquerymobile.com/tabs/
+//>>demos: http://demos.jquerymobile.com/@VERSION/tabs/
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -18,12 +28,9 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+})( function( $ ) {
 
-( function( $, undefined ) {
-
-$.widget( "ui.tabs", $.ui.tabs, {
+return $.widget( "ui.tabs", $.ui.tabs, {
 	_isLocal: function( anchor ) {
 		var path, baseUrl, absUrl;
 
@@ -41,8 +48,4 @@ $.widget( "ui.tabs", $.ui.tabs, {
 	}
 });
 
-})( jQuery );
-
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

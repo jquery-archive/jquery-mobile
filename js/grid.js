@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Applies classes for creating grid or column styling.
+/*!
+ * jQuery Mobile Grid @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Grid Layouts (Columns)
 //>>group: Widgets
+//>>description: Applies classes for creating grid or column styling.
+//>>docs: http://api.jquerymobile.com/grid-layout/
+//>>demos: http://demos.jquerymobile.com/@VERSION/grids/
 //>>css.structure:../css/structure/jquery.mobile.grid.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -15,9 +25,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})(function( $ ) {
 
 $.fn.grid = function( options ) {
 	return this.each(function() {
@@ -64,7 +72,7 @@ $.fn.grid = function( options ) {
 		}
 	});
 };
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+
+return $.fn.grid;
+
 });
-//>>excludeEnd("jqmBuildExclude");

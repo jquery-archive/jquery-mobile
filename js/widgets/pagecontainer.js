@@ -1,7 +1,19 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Widget to create page container which manages pages and transitions
+/*!
+ * jQuery Mobile Page Container @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Content Management
 //>>group: Navigation
+//>>description: Widget to create page container which manages pages and transitions
+//>>docs: http://api.jquerymobile.com/pagecontainer/
+//>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
+
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -24,9 +36,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 	$.widget( "mobile.pagecontainer", {
 		options: {
@@ -1209,7 +1219,6 @@
 		// indicates whether or not page is in process of transitioning
 		isPageTransitioning = false;
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+	return $.mobile.pagecontainer;
+
 });
-//>>excludeEnd("jqmBuildExclude");
