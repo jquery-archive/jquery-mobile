@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Mobile versions of Data functions to allow for namespaceing
+/*!
+ * jQuery Mobile Data @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: jqmData
 //>>group: Core
+//>>description: Mobile versions of Data functions to allow for namespaceing
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -17,9 +25,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+})( function( $ ) {
+
 	var nsNormalizeDict = {},
 		oldFind = $.find,
 		rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/,
@@ -127,7 +134,4 @@
 
 	$.extend( $.find, oldFind );
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Behavior for "fixed" headers and footers - be sure to also include the item 'Browser specific workarounds for "fixed" headers and footers' when supporting Android 2.x or iOS 5
+/*!
+ * jQuery Mobile Fixed Toolbar @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Toolbars: Fixed
 //>>group: Widgets
+//>>description: Behavior for "fixed" headers and footers - be sure to also include the item 'Browser specific workarounds for "fixed" headers and footers' when supporting Android 2.x or iOS 5
+//>>docs: http://api.jquerymobile.com/toolbar/
+//>>demos: http://demos.jquerymobile.com/@VERSION/toolbar-fixed/
 //>>css.structure: ../css/structure/jquery.mobile.fixedToolbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -23,9 +33,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 	$.widget( "mobile.toolbar", $.mobile.toolbar, {
 		options: {
@@ -323,7 +331,4 @@
 		}
 
 	});
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

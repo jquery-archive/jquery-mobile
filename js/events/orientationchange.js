@@ -1,7 +1,16 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Provides a wrapper around the inconsistent browser implementations of orientationchange
+/*!
+ * jQuery Mobile Orientation Change Event @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Orientation Change
 //>>group: Events
+//>>description: Provides a wrapper around the inconsistent browser implementations of orientationchange
+//>>docs: http://api.jquerymobile.com/orientationchange/
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -16,10 +25,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+})( function( $ ) {
 
-(function( $, window ) {
 	var win = $( window ),
 		event_name = "orientationchange",
 		get_orientation,
@@ -158,8 +165,4 @@
 		$.attrFn[ event_name ] = true;
 	}
 
-}( jQuery, this ));
-
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

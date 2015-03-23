@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Touch feature test
+/*!
+ * jQuery Mobile Links @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Touch support test
 //>>group: Core
+//>>description: Touch feature test
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -15,9 +23,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-	(function( $, undefined ) {
+})( function( $ ) {
+
 		var support = {
 			touch: "ontouchend" in document
 		};
@@ -25,7 +32,5 @@
 		$.mobile.support = $.mobile.support || {};
 		$.extend( $.support, support );
 		$.extend( $.mobile.support, support );
-	}( jQuery ));
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");
+

@@ -1,7 +1,16 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fires a resize event with a slight delay to prevent excessive callback invocation
+/*!
+ * jQuery Mobile Throttled Resize @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Throttled Resize
 //>>group: Events
+//>>description: Fires a resize event with a slight delay to prevent excessive callback invocation
+//>>docs: http://api.jquerymobile.com/throttledresize/
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -13,11 +22,9 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+})( function( $ ) {
 
 	// throttled resize event
-	(function( $ ) {
 		$.event.special.throttledresize = {
 			setup: function() {
 				$( this ).bind( "resize", handler );
@@ -51,7 +58,4 @@
 			heldCall,
 			curr,
 			diff;
-	})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

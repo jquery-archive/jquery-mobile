@@ -1,7 +1,16 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animated page change handlers for integrating with Navigation
+/*!
+ * jQuery Mobile Transition Handlers @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Transition Handlers
 //>>group: Transitions
+//>>description: Animated page change handlers for integrating with Navigation
+//>>demos: http://demos.jquerymobile.com/@VERSION/transitions/
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -17,10 +26,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-
-(function( $ ) {
+})( function( $ ) {
 
 	// generate the handlers from the above
 	var defaultGetMaxScrollForTransition = function() {
@@ -50,7 +56,4 @@
 	// Set the getMaxScrollForTransition to default if no implementation was set by user
 	$.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defaultGetMaxScrollForTransition;
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

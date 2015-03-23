@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Helper functions and references
+/*!
+ * jQuery Mobile Helpers @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Helpers
 //>>group: Core
+//>>description: Helper functions and references
 //>>css.structure: ../css/structure/jquery.mobile.core.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -18,9 +26,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+})( function( $ ) {
 
 	// Subtract the height of external toolbars from the page height, if the page does not have
 	// internal toolbars of the same type. We take care to use the widget options if we find a
@@ -347,7 +353,4 @@
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

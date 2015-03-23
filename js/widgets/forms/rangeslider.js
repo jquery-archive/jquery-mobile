@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Range Slider form widget
+/*!
+ * jQuery Mobile Range Slider @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Range Slider
 //>>group: Forms
+//>>description: Range Slider form widget
+//>>docs: http://api.jquerymobile.com/rangeslider/
+//>>demos: http://demos.jquerymobile.com/@VERSION/rangeslider/
 //>>css.structure: ../css/structure/jquery.mobile.forms.rangeslider.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -22,10 +32,10 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
+
 	$.widget( "mobile.rangeslider", $.extend( {
+		version: "@VERSION",
 
 		options: {
 			theme: null,
@@ -282,7 +292,4 @@
 
 	}, $.mobile.behaviors.formReset ) );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

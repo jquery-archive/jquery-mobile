@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Consistent styling for native select menus. Tapping opens a native select menu.
+/*!
+ * jQuery Mobile Flipswitch @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Flip Switch
 //>>group: Forms
+//>>description: Consistent styling for native select menus. Tapping opens a native select menu.
+//>>docs: http://api.jquerymobile.com/flipswitch/
+//>>demos: http://demos.jquerymobile.com/@VERSION/flipswitch/
 //>>css.structure: ../css/structure/jquery.mobile.forms.flipswitch.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -20,11 +30,10 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 $.widget( "mobile.flipswitch", $.extend({
+	version: "@VERSION",
 
 	options: {
 		onText: "On",
@@ -241,7 +250,4 @@ $.widget( "mobile.flipswitch", $.extend({
 
 }, $.mobile.behaviors.formReset ) );
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

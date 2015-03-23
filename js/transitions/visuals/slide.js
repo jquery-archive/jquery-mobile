@@ -1,11 +1,16 @@
-/*
-* fallback transition for slide in non-3D supporting browsers (which tend to handle complex transitions poorly in general
-*/
+/*!
+ * jQuery Mobile Slide Transition Fallback @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animation styles and fallback transitions definition for non-3D supporting browsers
 //>>label: Slide Transition
 //>>group: Transitions
+//>>description: Slide transition fallback definition for non-3D supporting browsers
+//>>demos: http://demos.jquerymobile.com/@VERSION/transitions/
 //>>css.structure: ../css/structure/jquery.mobile.transition.slide.css
 
 ( function( factory ) {
@@ -20,9 +25,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+})( function( $ ) {
 
 // Use the simultaneous transitions handler for slide transitions
 $.mobile.transitionHandlers.slide = $.mobile.transitionHandlers.simultaneous;
@@ -30,7 +33,4 @@ $.mobile.transitionHandlers.slide = $.mobile.transitionHandlers.simultaneous;
 // Set the slide transitions's fallback to "fade"
 $.mobile.transitionFallbacks.slide = "fade";
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

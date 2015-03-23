@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Formats groups of links as horizontal navigation bars.
+/*!
+ * jQuery Mobile Navbar @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Navbars
 //>>group: Widgets
+//>>description: Formats groups of links as horizontal navigation bars.
+//>>docs: http://api.jquerymobile.com/navbar/
+//>>demos: http://demos.jquerymobile.com/@VERSION/navbar/
 //>>css.structure: ../css/structure/jquery.mobile.navbar.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -18,11 +28,11 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 $.widget( "mobile.navbar", {
+	version: "@VERSION",
+
 	options: {
 		iconpos: "top",
 		grid: null
@@ -82,7 +92,4 @@ $.widget( "mobile.navbar", {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

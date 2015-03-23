@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Displays collapsible content panels for presenting information in a limited space.
+/*!
+ * jQuery Mobile Accordion @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Accordion
 //>>group: Widgets
+//>>description: Displays collapsible content panels for presenting information in a limited space.
 //>>css.structure: ../css/structure/jquery.mobile.accordion.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
@@ -19,9 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 $.widget( "ui.accordion", $.ui.accordion, {
 	options: {
@@ -31,7 +37,4 @@ $.widget( "ui.accordion", $.ui.accordion, {
 
 $.widget( "ui.accordion", $.ui.accordion, $.mobile.widget.theme );
 
-})(jQuery);
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Applies the AJAX navigation system to links and forms to enable page transitions
+/*!
+ * jQuery Mobile Navigation @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Content Management
 //>>group: Navigation
+//>>description: Applies the AJAX navigation system to links and forms to enable page transitions
+//>>demos: http://demos.jquerymobile.com/@VERSION/navigation/
+
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
 
@@ -24,9 +34,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 		// resolved on domready
 	var domreadyDeferred = $.Deferred(),
@@ -466,7 +474,6 @@
 	}
 
 	$.when( domreadyDeferred, $.mobile.navreadyDeferred ).done( function() { $.mobile._registerInternalEvents(); } );
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+
 });
-//>>excludeEnd("jqmBuildExclude");
+

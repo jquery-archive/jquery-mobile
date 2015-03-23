@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fixes the orientation change bug in iOS when switching between landscape and portrait
+/*!
+ * jQuery Mobile iOS Orientation Fix @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: iOS Orientation Change Fix
 //>>group: Utilities
+//>>description: Fixes the orientation change bug in iOS when switching between landscape and portrait
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -16,9 +24,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window ) {
+})( function( $ ) {
 
 	$.mobile.iosorientationfixEnabled = true;
 
@@ -59,7 +65,4 @@
 		}
 	});
 
-}( jQuery, this ));
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

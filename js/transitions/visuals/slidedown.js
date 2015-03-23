@@ -1,11 +1,16 @@
-/*
-* fallback transition for slidedown in non-3D supporting browsers (which tend to handle complex transitions poorly in general
-*/
+/*!
+ * jQuery Mobile Slidedown Transition Fallback @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
 
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animation styles and fallback transitions definition for non-3D supporting browsers
 //>>label: Slidedown Transition
 //>>group: Transitions
+//>>description: Slidedown transition fallback definition for non-3D supporting browsers
+//>>demos: http://demos.jquerymobile.com/@VERSION/transitions/
 //>>css.structure: ../css/structure/jquery.mobile.transition.slidedown.css
 
 ( function( factory ) {
@@ -20,13 +25,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, window, undefined ) {
+})( function( $ ) {
 
 $.mobile.transitionFallbacks.slidedown = "fade";
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

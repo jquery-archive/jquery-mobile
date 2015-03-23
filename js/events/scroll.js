@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Scroll events including: scrollstart, scrollstop
+/*!
+ * jQuery Mobile Scroll Events @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Scroll
 //>>group: Events
+//>>description: Scroll events including: scrollstart, scrollstop
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -13,10 +21,8 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
+})( function( $ ) {
 
-(function( $, window, undefined ) {
 	var scrollEvent = "touchmove scroll";
 
 	// setup new event shortcuts
@@ -89,7 +95,4 @@
 		};
 	});
 
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

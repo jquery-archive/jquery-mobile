@@ -1,7 +1,17 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Links options present in the widget to be filtered to the input
+/*!
+ * jQuery Mobile Filterable Backcompat @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Filterable-widgetlink
 //>>group: Widgets
+//>>description: Links options present in the widget to be filtered to the input
+//>>docs: http://api.jquerymobile.com/filterable/
+//>>demos: http://demos.jquerymobile.com/@VERSION/filterable/
 //>>css.structure: ../css/structure/jquery.mobile.filterable.css
 
 ( function( factory ) {
@@ -17,9 +27,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-(function( $, undefined ) {
+})( function( $ ) {
 
 // Create a function that will replace the _setOptions function of a widget,
 // and will pass the options on to the input of the filterable.
@@ -218,7 +226,4 @@ $.widget( "mobile.listview", $.mobile.listview, {
 	}
 });
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

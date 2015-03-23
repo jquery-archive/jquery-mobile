@@ -1,7 +1,16 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animated page change with serial transition style application
+/*!
+ * jQuery Mobile Serial Transition @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Transition Serial
 //>>group: Transitions
+//>>description: Animated page change with serial transition style application
+//>>demos: http://demos.jquerymobile.com/@VERSION/transitions/
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -16,10 +25,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-
-(function( $ ) {
+})( function( $ ) {
 
 	$.mobile.SerialTransition = function() {
 		this.init.apply(this, arguments);
@@ -41,7 +47,4 @@
 		}
 	});
 
-})( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

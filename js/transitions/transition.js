@@ -1,8 +1,18 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Animated page change base constructor and logic
+/*!
+ * jQuery Mobile Transition @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Transition Core
 //>>group: Transitions
-//>>css.structure: ../css/structure/jquery.mobile.transition.css, ../css/structure/jquery.mobile.transition.fade.css
+//>>description: Animated page change base constructor and logic
+//>>demos: http://demos.jquerymobile.com/@VERSION/transitions/
+//>>css.structure: ../css/structure/jquery.mobile.transition.css
+//>>css.structure: ../css/structure/jquery.mobile.transition.fade.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
 ( function( factory ) {
@@ -24,10 +34,7 @@
 		// Browser globals
 		factory( jQuery );
 	}
-})( function( jQuery ) {
-//>>excludeEnd("jqmBuildExclude");
-
-(function( $, window, undefined ) {
+})( function( $ ) {
 
 	// TODO remove direct references to $.mobile and properties, we should
 	//      favor injection with params to the constructor
@@ -179,7 +186,4 @@
 			return this.deferred.promise();
 		}
 	});
-})( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 });
-//>>excludeEnd("jqmBuildExclude");

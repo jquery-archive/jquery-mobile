@@ -1,7 +1,15 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Custom events and shortcuts.
+/*!
+ * jQuery Mobile Events @VERSION
+ * http://jquerymobile.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
 //>>label: Events
 //>>group: Events
+//>>description: Custom events and shortcuts.
 
 ( function( factory ) {
 	if ( typeof define === "function" && define.amd ) {
@@ -19,4 +27,3 @@
 		factory( jQuery );
 	}
 } )( function() {} );
-//>>excludeEnd("jqmBuildExclude");
