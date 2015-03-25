@@ -71,14 +71,6 @@ if ( $.mobileBackcompat !== false ) {
 				classes = this.options.classes,
 				className = this._boolOptions[ option ];
 
-			if ( this.options[ option ] ) {
-				newValue = classes[ prop ] + " " + className;
-			} else {
-				newValue = classArray
-					.splice( classArray.indexOf( this._boolOptions[ option ] ) - 1, 1 )
-					.join( " " );
-			}
-			this.option( "classes." + prop, newValue );
 			if ( prop ) {
 				classArray = classes[ prop ].match( classSplitterRegex ) || [];
 
