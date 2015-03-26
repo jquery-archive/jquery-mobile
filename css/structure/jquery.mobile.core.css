@@ -172,32 +172,6 @@ div.ui-mobile-viewport {
 	font-size: 1em;
 	display: inline-block;
 }
-.ui-header,
-.ui-footer {
-	border-width: 1px 0;
-	border-style: solid;
-	position: relative;
-}
-.ui-header:empty,
-.ui-footer:empty {
-	min-height: 2.6875em;
-}
-.ui-header .ui-title,
-.ui-footer .ui-title {
-	font-size: 1em;
-	min-height: 1.1em;
-	text-align: center;
-	display: block;
-	margin: 0 30%;
-	padding: .7em 0;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	outline: 0 !important;
-}
-.ui-footer .ui-title {
-	margin: 0 1em;
-}
 .ui-content {
 	border-width: 0;
 	overflow: visible;
@@ -353,33 +327,6 @@ div.ui-mobile-viewport {
 .ui-icon-bottom .ui-icon {
 	top: auto;
 	bottom: .5625em;
-}
-
-/* Buttons in header position classes */
-.ui-header .ui-button-left,
-.ui-header .ui-button-right,
-.ui-button-left > [class*="ui-"],
-.ui-button-right > [class*="ui-"] {
-	margin: 0;
-}
-.ui-button-left,
-.ui-button-right {
-	position: absolute;
-	top: .24em;
-}
-.ui-button-left {
-	left: .4em;
-}
-.ui-button-right {
-	right: .4em;
-}
-.ui-button-icon-only.ui-button-left {
-	top: .3125em;
-	left: .3125em;
-}
-.ui-button-icon-only.ui-button-right {
-	top: .3125em;
-	right: .3125em;
 }
 
 /* Button elements and input buttons */

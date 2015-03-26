@@ -2,45 +2,59 @@
  * mobile Fixed Toolbar unit tests
  */
 (function($){
-	module('jquery.mobile.toolbar.js');
+	module( "jquery.mobile.toolbar.js" );
 
-	test( "Fixed Header Structural Classes are applied correctly", function(){
-		//footer
-		ok( !$('#classes-test-a').hasClass('ui-header-fixed'), 'An ordinary header should not have fixed classes');
-		ok( $('#classes-test-b').hasClass('ui-header-fixed'), 'An header with data-position=fixed should have ui-header-fixed class');
-		ok( $('#classes-test-c').hasClass('ui-header-fullscreen'), 'An header with data-position=fixed and data-fullscreen should have ui-header-fullscreen class');
+	var pageActiveFixedHeader = $( ".ui-page-active .ui-toolbar-header-fixed" );
+	test( "markup structure", function( assert ){
+		var classesB = $( "#classes-test-b" ),
+			classesE = $( "#classes-test-e" );
+		// Footer
+		assert.lacksClasses( $( "#classes-test-a" ), "ui-toolbar-header-fixed", 
+			"An ordinary header should not have fixed classes" );
+		assert.hasClasses( classesB, "ui-toolbar-header-fixed", 
+			"A header with data-position=fixed should have ui-toolbar-header-fixed class" );
+		assert.hasClasses( $( "#classes-test-c" ), "ui-toolbar-header-fullscreen",
+			"A header with =fixed and data-fullscreen gets ui-toolbar-header-fullscreen class" );
 
-		//footer
-		ok( !$('#classes-test-d').hasClass('ui-footer-fixed'), 'An ordinary footer should not have fixed classes');
-		ok( $('#classes-test-e').hasClass('ui-footer-fixed'), 'A footer with data-position=fixed should have ui-footer-fixed class"');
-		ok( $('#classes-test-f').hasClass('ui-footer-fullscreen'), 'A footer with data-position=fixed and data-fullscreen should have ui-footer-fullscreen class');
+		// Footer
+		assert.lacksClasses( $( "#classes-test-d" ), "ui-toolbar-footer-fixed", 
+			"An ordinary footer should not have fixed classes");
+		assert.hasClasses( classesE, "ui-toolbar-footer-fixed", 
+			"A footer with data-position=fixed should have ui-toolbar-footer-fixed class" );
+		assert.hasClasses( $( "#classes-test-f" ), "ui-toolbar-footer-fullscreen", 
+			"A footer with =fixed and data-fullscreen gets ui-toolbar-footer-fullscreen class" );
 
-		//parent
-		ok( $('#classes-test-b').closest( ".ui-page" ).hasClass( "ui-page-header-fixed" ), "Parent page of a fixed header has class ui-page-header-fixed" );
-		ok( $('#classes-test-e').closest( ".ui-page" ).hasClass( "ui-page-footer-fixed" ), "Parent page of a fixed footer has class ui-page-header-fixed" );
+		// Parent
+		assert.hasClasses( classesB.closest( ".ui-page" ),
+			"ui-toolbar-page-header-fixed", 
+			"Parent page of a fixed header has class ui-page-header-fixed" );
+		assert.hasClasses( classesE.closest( ".ui-page" ),
+			"ui-toolbar-page-footer-fixed", 
+			"Parent page of a fixed footer has class ui-page-header-fixed" );
 	});
 
 	test( "User zooming is disabled when the header is visible and disablePageZoom is true", function(){
 		$.mobile.zoom.enable();
 		var defaultZoom = $.mobile.toolbar.prototype.options.disablePageZoom;
-		$( ".ui-page-active .ui-header-fixed" ).toolbar("option", "disablePageZoom", true );
+		pageActiveFixedHeader.toolbar( "option", "disablePageZoom", true );
 
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 		ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
-		$( ".ui-page-active .ui-header-fixed" ).toolbar("option", "disablePageZoom", defaultZoom );
+		pageActiveFixedHeader
+			.toolbar( "option", "disablePageZoom", defaultZoom );
 		$.mobile.zoom.enable();
 	});
 
 	test( "Meta viewport content is restored to previous state, and zooming renabled, after pagebeforehide", function(){
 		$.mobile.zoom.enable( true );
 		var defaultZoom = $.mobile.toolbar.prototype.options.disablePageZoom;
-		$( ".ui-page-active .ui-header-fixed" ).toolbar("option", "disablePageZoom", true );
+		pageActiveFixedHeader.toolbar( "option", "disablePageZoom", true );
 
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 		ok( !$.mobile.zoom.enabled, "Viewport scaling is disabled before page show." );
 		$( ".ui-page-active" ).trigger( "pagebeforehide" );
 		ok( $.mobile.zoom.enabled, "Viewport scaling is enabled." );
-		$( ".ui-page-active .ui-header-fixed" ).toolbar("option", "disablePageZoom", defaultZoom );
+		pageActiveFixedHeader.toolbar( "option", "disablePageZoom", defaultZoom );
 		$.mobile.zoom.enable( true );
 	});
 
