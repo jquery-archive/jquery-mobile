@@ -1,15 +1,34 @@
 <!doctype html>
 <html>
 <head>
-	<script src="../../../../external/jquery/jquery.js"></script>
-	<script src="../../../../js/"></script>
 	<script>
-(function($) {
-	var l = $.mobile.path.parseLocation();
+(function() {
+
+	// Regex taken from navigation/path
+	var parsedLocation = location.href.match( /^\s*(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/ );
 
 	// Redirect to sequence/index.html in the same directory as this file
-	location.href = l.protocol + "//" + l.host + l.directory + "index.html" + l.search + "#&ui-state=dialog";
-})( jQuery );
+	location.href =
+
+		// protocol
+		( parsedLocation[ 4 ] || "" ) +
+
+		// double slash
+		( parsedLocation[ 5 ] || "" ) +
+
+		// host
+		( parsedLocation[ 10 ] || "" ) +
+
+		// directory
+		( parsedLocation[ 14 ] || "" ) +
+
+		"index.html" +
+
+		// search
+		( parsedLocation[ 16 ] || "" ) +
+
+		"#&ui-state=dialog";
+})();
 	</script>
 </head>
 </html>
