@@ -11,43 +11,15 @@ before_script:
 
 script: npm run-script ci
 
-branches:
-  only:
-    - master
+after_script:
+  - npm run-script demos
 
 env:
-  - TYPES=unit
-    JQUERIES=1.8.3
-  - TYPES=unit
-    JQUERIES=1.11.1
-  - TYPES=unit
-    JQUERIES=2.1.1
-  - TYPES=unit
-    JQUERIES=git
-  - TYPES=integration
-    SUITES=!navigation
-    JQUERIES=1.8.3
-  - TYPES=integration
-    SUITES=!navigation
-    JQUERIES=1.11.1
-  - TYPES=integration
-    SUITES=!navigation
-    JQUERIES=2.1.1
-  - TYPES=integration
-    SUITES=!navigation
-    JQUERIES=git
-  - TYPES=integration
-    SUITES=navigation
-    JQUERIES=1.8.3
-  - TYPES=integration
-    SUITES=navigation
-    JQUERIES=1.11.1
-  - TYPES=integration
-    SUITES=navigation
-    JQUERIES=2.1.1
-  - TYPES=integration
-    SUITES=navigation
-    JQUERIES=git
+  - JQUERIES=1.8.3
+  - JQUERIES=1.11.1
+  - JQUERIES=2.1.1
+  - JQUERIES=git
+  - CITYPE=demos
 
 notifications:
   irc:
