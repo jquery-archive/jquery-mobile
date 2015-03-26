@@ -15,10 +15,11 @@ after_script:
   - npm run-script demos
 
 env:
-    JQUERIES=1.8.3
-    JQUERIES=1.11.1
-    JQUERIES=2.1.1
-    JQUERIES=git
+  - JQUERIES=1.8.3
+  - JQUERIES=1.11.1
+  - JQUERIES=2.1.1
+  - JQUERIES=git
+  - CITYPE=demos
 
 notifications:
   irc:
