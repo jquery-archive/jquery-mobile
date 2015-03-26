@@ -42,11 +42,11 @@
 .ui-toolbar-header-button-right {
 	right: .4em;
 }
-.ui-btn-icon-notext.ui-toolbar-header-button-left {
+.ui-toolbar .ui-toolbar-header-button-left {
 	top: .3125em;
 	left: .3125em;
 }
-.ui-btn-icon-notext.ui-toolbar-header-button-right {
+.ui-toolbar .ui-toolbar-header-button-right {
 	top: .3125em;
 	right: .3125em;
 }

@@ -55,11 +55,11 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 				this._makeFixed();
 			}
 			if ( this.options.position === "fixed" && !this.options.supportBlacklist() ) {
-				var pageActive = $( ".ui-page-active" );
+				var activePage = $( ".ui-page-active" );
 				var currentPage = !!this.page ? 
 					this.page : 
-					pageActive.length ? 
-					pageActive : 
+					activePage.length ? 
+					activePage : 
 					$( ".ui-page" ).eq(0);
 
 				if ( o.fullscreen !== undefined) {
@@ -84,9 +84,7 @@ define( [ "jquery", "../widget", "../core", "../animationComplete", "../navigati
 			if ( transitionClass && transitionClass !== "none" ) {
 				// use appropriate slide for header or footer
 				if ( transitionClass === "slide" ) {
-					transitionClass = this.role === "header" ?
-					"slidedown" :
-					"slideup";
+					transitionClass = this.role === "header" ? "slidedown" : "slideup";
 				}
 
 				this._addClass( null, transitionClass );
