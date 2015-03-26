@@ -699,29 +699,24 @@ module.exports = function( grunt ) {
 			server: {
 				options: {
 					port: phpPort,
-					baseUrl: "."
+					baseUrl: ".",
+					silent: true
 				}
 			}
 		},
 
-		casper: {
-			options: {
-				test: true,
-				verbose : true,
-				"log-level": "error",
-				parallel: false
-			},
+		spider: {
 			"demos.src": {
 				options: {
-					args: [ "--port=" + phpPort ]
-				},
-				src: [ "tests/casperjs/**/*.js" ]
+					url: "http://localhost:" + phpPort,
+					ignore: "notapage|intel|api\\.jquerymobile\\.com/[0-9]\\.[0-9]|packt|twitter\\.com/jquery"
+				}
 			},
 			"demos.dist": {
 				options: {
-					args: [ "--port=" + phpPort , "--path=dist" ]
-				},
-				src: [ "tests/casperjs/**/*.js" ]
+					url: "http://localhost:" + phpPort + "/dist/",
+					ignore: "notapage|intel|api\\.jquerymobile\\.com/[0-9]\\.[0-9]|packt|twitter\\.com/jquery"
+				}
 			}
 		},
 
@@ -1032,9 +1027,9 @@ module.exports = function( grunt ) {
 
 	grunt.registerTask( "updateDependencies", [ "bowercopy" ] );
 
-	grunt.registerTask( "test:demos:src", [ "php", "casper:demos.src" ] );
+	grunt.registerTask( "test:demos:src", [ "php", "spider:demos.src" ] );
 
-	grunt.registerTask( "test:demos:dist", [ "casper:demos.dist" ] );
+	grunt.registerTask( "test:demos:dist", [ "spider:demos.dist" ] );
 
 	grunt.registerTask( "test",
 		[
@@ -1052,6 +1047,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( "crawl",
 		[
 			"test:demos:src",
+			"dist",
 			"test:demos:dist"
 		]
 	);

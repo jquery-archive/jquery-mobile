@@ -20,7 +20,7 @@
 					html = "";
 				$ul.html( "" );
 				if ( value && value.length > 2 ) {
-					$ul.html( "<li><div class='ui-loader'><span class='ui-icon'></span></div><span class="ui-icon ui-icon-loading"></span></li>" );
+					$ul.html( "<li><div class='ui-loader'><span class='ui-icon'></span></div><span class=\"ui-icon ui-icon-loading\"></span></li>" );
 					$ul.listview( "refresh" );
 					$.ajax({
 						url: "http://gd.geobytes.com/AutoCompleteCity",
