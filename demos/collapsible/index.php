@@ -27,7 +27,7 @@
 
     <div role="main" class="ui-content jqm-content">
 
-        <h1>Collapsible <a href="http://api.jquerymobile.com/collapsible/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-carat-r"></span></a></h1>
+        <h1>Collapsible <a href="http://api.jquerymobile.com/collapsible/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r"></span></a></h1>
 
         <p>Collapsibles are simple widgets that allow you to expand or collapse content when tapped and are useful in mobile to provide a compact presentation of content.</p>
 
@@ -225,7 +225,7 @@
 				<div data-demo-html="true">
 					<div data-role="collapsible" data-enhanced="true" class="ui-collapsible ui-collapsible-inset ui-corner-all ui-collapsible-collapsed">
 						<h4 class="ui-collapsible-heading ui-collapsible-heading-collapsed">
-							<a href="#" class="ui-collapsible-heading-toggle ui-button ui-icon-beginning ui-icon-plus">
+							<a href="#" class="ui-collapsible-heading-toggle ui-button ui-icon-plus">
 							Heading
 							<div class="ui-collapsible-heading-status"> click to expand contents</div>
 							</a>

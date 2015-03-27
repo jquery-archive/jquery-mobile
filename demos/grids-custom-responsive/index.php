@@ -118,7 +118,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-        <h1>Custom responsive grid <a href="http://api.jquerymobile.com/responsive-grid/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-carat-r"></span></a></h1>
+        <h1>Custom responsive grid <a href="http://api.jquerymobile.com/responsive-grid/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r"></span></a></h1>
 
         <p>It's easy to extend the basic grid styles into a custom responsive layout by using CSS media queries to adjust the layout and design across various screen width breakpoints.</p>
 

@@ -96,7 +96,7 @@
         <div data-demo-html="#demo-page" data-demo-js="true">
             <p>This demo shows how you can dynamically create a popup. The popup contains images which means we have to set the image width and height to make sure the popup gets the right size and position. At client side we can only get the size when the image has been loaded in the DOM. In this demo we use the <code>load</code> event, but with a fallback because it has some caveats (see <a href="http://api.jquery.com/load-event/" rel="external">.load() - jQuery API</a>).</p>
 
-            <p><a href="#demo-page" data-transition="fade" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini ui-icon-end">Open dynamic popup demo</a><span class="ui-icon ui-icon-arrow-r"></span></p>
+            <p><a href="#demo-page" data-transition="fade" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini">Open dynamic popup demo</a><span class="ui-icon ui-icon-arrow-r"></span></p>
         </div><!--/demo-html -->
 
 	</div><!-- /content -->
