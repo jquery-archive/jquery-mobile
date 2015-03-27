@@ -29,8 +29,10 @@ var plugin = {
 
 // Generate the init selector to be used by a widget
 plugin.enhance.initGenerator = function( widgetName ) {
-	return "[data-" + $.mobile.ns + "role='" + widgetName + "']";
+	return "[data-" + plugin.enhance.ns + "role='" + widgetName + "']";
 };
+
+plugin.enhance.ns = "";
 
 // Check if the enhancer has already been defined if it has copy its hooks if not
 // define an empty array
@@ -71,7 +73,7 @@ $.extend( $.Widget.prototype, {
 
 		// Translate data-attributes to options
 		for ( option in this.options ) {
-			value = data[ option ];
+			value = data[ plugin.enhance.ns.replace( "-", "" ) + option.charAt(0).toUpperCase() + option.slice(1) ];
 			if ( value !== undefined ) {
 				options[ option ] = value;
 			}

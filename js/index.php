@@ -44,7 +44,6 @@ $files = array(
 	'transitions/visuals/flip.js',
 	'transitions/visuals/flow.js',
 	'transitions/visuals/turn.js',
-	'degradeInputs.js',
 	'../external/jquery-ui/accordion.js',
 	'widgets/accordion.js',
 	'widgets/dialog.js',

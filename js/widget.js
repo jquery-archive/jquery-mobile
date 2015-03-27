@@ -28,34 +28,6 @@
 	}
 } )( function( $ ) {
 
-var rcapitals = /[A-Z]/g,
-	replaceFunction = function( c ) {
-		return "-" + c.toLowerCase();
-	};
-
-$.extend( $.Widget.prototype, {
-	_getCreateOptions: function() {
-		var option, value,
-			elem = this.element[ 0 ],
-			options = {};
-
-		//
-		if ( !$.mobile.getAttribute( elem, "defaults" ) ) {
-			for ( option in this.options ) {
-				value = $.mobile.getAttribute( elem, option.replace( rcapitals, replaceFunction ) );
-				if ( value != null ) {
-					options[ option ] = value;
-				}
-			}
-		}
-
-		return options;
-	}
-} );
-
-//TODO: Remove in 1.5 for backcompat only
-$.mobile.widget = $.extend( {}, $.Widget, $.mobile.widget );
-
 return $.Widget;
 
 } );
