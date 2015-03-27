@@ -33,7 +33,7 @@
 
 	    <div role="main" class="ui-content jqm-content">
 
-        <h1>Controlgroup <a href="http://api.jquerymobile.com/controlgroup/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-carat-r"></span></a></h1>
+        <h1>Controlgroup <a href="http://api.jquerymobile.com/controlgroup/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r"></span></a></h1>
 
         <p>Controlgroups are used to visually group a set of buttons to form a single block that looks contained like a navigation component.</p>
 
@@ -42,16 +42,16 @@
         <div data-demo-html="true">
             <div data-role="controlgroup">
                 <a href="#" class="ui-button ui-corner-all">No icon</a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-beginning">Left<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-end">Right<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Left<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Right<span class="ui-icon ui-icon-delete"></span></a>
             </div>
             <div data-role="controlgroup">
-                <a href="#" class="ui-button ui-corner-all ui-icon-top">Top<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-top">Top<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
             </div>
             <div data-role="controlgroup">
-                <a href="#" class="ui-button ui-corner-all ui-icon-bottom">Bottom<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-bottom">Bottom<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
             </div>
             <div data-role="controlgroup">
                 <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
@@ -78,10 +78,10 @@
         <div data-demo-html="true">
             <div data-role="controlgroup" data-direction="vertical">
                 <a href="#" class="ui-button ui-corner-all">No icon</a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-beginning">Left<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-end">Right<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-top">Top<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-bottom">Bottom<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Left<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Right<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
                 <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
             </div>
         </div><!--/demo-html -->
@@ -91,16 +91,16 @@
         <div data-demo-html="true">
             <div data-role="controlgroup" data-mini="true">
                 <a href="#" class="ui-button ui-corner-all">No icon</a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-beginning">Left<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-end">Right<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Left<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Right<span class="ui-icon ui-icon-delete"></span></a>
             </div>
             <div data-role="controlgroup" data-mini="true">
-                <a href="#" class="ui-button ui-corner-all ui-icon-top">Top<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-top">Top<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
             </div>
             <div data-role="controlgroup" data-mini="true">
-                <a href="#" class="ui-button ui-corner-all ui-icon-bottom">Bottom<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-bottom">Bottom<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
             </div>
             <div data-role="controlgroup" data-mini="true">
                 <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
@@ -124,10 +124,10 @@
         <div data-demo-html="true">
             <div data-role="controlgroup" data-direction="vertical" data-mini="true">
                 <a href="#" class="ui-button ui-corner-all">No icon</a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-beginning">Left<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-end">Right<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-top">Top<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-button ui-corner-all ui-icon-bottom">Bottom<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Left<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Right<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Top<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-button ui-corner-all">Bottom<span class="ui-icon ui-icon-delete"></span></a>
                 <a href="#" class="ui-button ui-corner-all ui-button-icon-only">Icon only<span class="ui-icon ui-icon-delete"></span></a>
             </div>
         </div><!--/demo-html -->

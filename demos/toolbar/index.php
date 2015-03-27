@@ -39,7 +39,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Toolbar <a href="http://api.jquerymobile.com/toolbar/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-carat-r"></span></a></h1>
+		<h1>Toolbar <a href="http://api.jquerymobile.com/toolbar/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r"></span></a></h1>
 
 		<p>The toolbar widget is used to enhance headers and footers.</p>
 
@@ -109,16 +109,16 @@
 
 		<div data-demo-html="true">
 			<div data-role="header">
-				<a href="#" class="ui-button-left ui-button ui-button-inline ui-mini ui-corner-all ui-icon-beginning">Cancel<span class="ui-icon ui-icon-delete"></span></a>
+				<a href="#" class="ui-button-left ui-button ui-button-inline ui-mini ui-corner-all">Cancel<span class="ui-icon ui-icon-delete"></span></a>
 			<h1>My App</h1>
-				<button class="ui-button-right ui-button ui-button-b ui-button-inline ui-mini ui-corner-all ui-icon-end">Save<span class="ui-icon ui-icon-check"></span></button>
+				<button class="ui-button-right ui-button ui-button-b ui-button-inline ui-mini ui-corner-all">Save<span class="ui-icon ui-icon-check"></span></button>
 			</div>
 		</div><!-- /demo-html -->
 
 		<div data-demo-html="true">
 			<div data-role="header">
 			<h1>Page Title</h1>
-				<a href="#" class="ui-button-right ui-button ui-button-inline ui-mini ui-corner-all ui-icon-end">Options<span class="ui-icon ui-icon-gear"></span></a>
+				<a href="#" class="ui-button-right ui-button ui-button-inline ui-mini ui-corner-all">Options<span class="ui-icon ui-icon-gear"></span></a>
 			</div>
 		</div><!-- /demo-html -->
 
@@ -128,7 +128,7 @@
 
 		<div data-demo-html="true">
 			<div data-role="header">
-				<a href="#" class="ui-button-left ui-button ui-button-inline ui-mini ui-corner-all ui-icon-beginning">View<span class="ui-icon ui-icon-grid"></span></a>
+				<a href="#" class="ui-button-left ui-button ui-button-inline ui-mini ui-corner-all">View<span class="ui-icon ui-icon-grid"></span></a>
 				<span class="ui-title"></span>
 			</div>
 		</div><!-- /demo-html -->
@@ -140,8 +140,8 @@
 		<div data-demo-html="true" data-demo-css="#footer-abs-buttons">
 			<div data-role="footer">
 				<h2>Footer</h2>
-				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-left ui-icon-beginning">Quit<span class="ui-icon ui-icon-power"></span></a>
-				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-right ui-icon-end">Next<span class="ui-icon ui-icon-carat-r"></span></a>
+				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-left">Quit<span class="ui-icon ui-icon-power"></span></a>
+				<a href="#" class="ui-button ui-corner-all ui-button-inline ui-mini footer-button-right">Next<span class="ui-icon ui-icon-carat-r"></span></a>
 			</div>
 		</div>
 
@@ -174,9 +174,9 @@
 		<div data-demo-html="true">
 			<div data-role="header">
 				<div data-role="controlgroup" data-type="horizontal" class="ui-mini ui-button-left">
-					<a href="#" class="ui-button ui-icon-end">Add<span class="ui-icon ui-icon-plus"></span></a>
-					<a href="#" class="ui-button ui-icon-end">Up<span class="ui-icon ui-icon-arrow-u"></span></a>
-					<a href="#" class="ui-button ui-icon-end">Down<span class="ui-icon ui-icon-arrow-d"></span></a>
+					<a href="#" class="ui-button">Add<span class="ui-icon ui-icon-plus"></span></a>
+					<a href="#" class="ui-button">Up<span class="ui-icon ui-icon-arrow-u"></span></a>
+					<a href="#" class="ui-button">Down<span class="ui-icon ui-icon-arrow-d"></span></a>
 				</div>
 				<h6>My header</h6>
 			</div>

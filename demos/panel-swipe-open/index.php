@@ -65,7 +65,7 @@
 
         <p>The demo page has two menus, one at each side. Both can be opened with swipe or with the buttons in the header.</p>
 
-        <a href="#demo-page" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini ui-icon-end">Open demo<span class="ui-icon ui-icon-carat-r"></span></a>
+        <a href="#demo-page" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-mini">Open demo<span class="ui-icon ui-icon-carat-r"></span></a>
 
         <div data-demo-html="#demo-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 
@@ -97,21 +97,21 @@
             <dd><b>1.</b> to strike or move with a sweeping motion</dd>
         </dl>
 
-		<a href="#demo-intro" data-rel="back" class="back-button ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-end">Back to demo intro<span class="ui-icon ui-icon-back"></span></a>
+		<a href="#demo-intro" data-rel="back" class="back-button ui-button ui-corner-all ui-shadow ui-mini ui-button-inline">Back to demo intro<span class="ui-icon ui-icon-back"></span></a>
 
     </div><!-- /content -->
 
     <div data-role="panel" id="left-panel" data-theme="b">
 
     	<p>Left reveal panel.</p>
-		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-beginning ui-button-right">Close<span class="ui-icon ui-icon-delete"></span></a>
+		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-button-right">Close<span class="ui-icon ui-icon-delete"></span></a>
 
     </div><!-- /panel -->
 
     <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="b">
 
     	<p>Right push panel.</p>
-		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline ui-icon-end">Close<span class="ui-icon ui-icon-delete"></span></a>
+		<a href="#" data-rel="close" class="ui-button ui-corner-all ui-shadow ui-mini ui-button-inline">Close<span class="ui-icon ui-icon-delete"></span></a>
 
     </div><!-- /panel -->
 
