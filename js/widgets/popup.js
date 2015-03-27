@@ -515,13 +515,13 @@ $.widget( "mobile.popup", {
 			container: $.Deferred()
 		};
 
-		prerequisites.screen.then( function() {
+		prerequisites.screen.done( function() {
 			if ( prerequisites === self._prerequisites ) {
 				screenPrerequisite();
 			}
 		});
 
-		prerequisites.container.then( function() {
+		prerequisites.container.done( function() {
 			if ( prerequisites === self._prerequisites ) {
 				containerPrerequisite();
 			}
