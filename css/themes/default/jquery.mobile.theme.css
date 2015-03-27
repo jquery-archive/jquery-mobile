@@ -167,11 +167,7 @@ label.ui-button {
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-icon-beginning .ui-icon,
-.ui-icon-end .ui-icon,
-.ui-icon-top .ui-icon,
-.ui-icon-bottom .ui-icon,
-.ui-button-icon-only .ui-icon {
+.ui-icon {
 	background-color: 					#666 /*{global-icon-color}*/;
 	background-color: 					rgba(0,0,0,.3) /*{global-icon-disc}*/;
 	background-position: center center;
