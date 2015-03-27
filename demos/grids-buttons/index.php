@@ -121,7 +121,7 @@
 
         <div data-demo-html="true">
             <div class="ui-grid-b ui-responsive">
-                <div class="ui-block-a"><a href="#" class="ui-shadow ui-button ui-corner-all ui-icon-beginning">Back to order</a><span class="ui-icon ui-icon-arrow-l"></span></div>
+                <div class="ui-block-a"><a href="#" class="ui-shadow ui-button ui-corner-all">Back to order</a><span class="ui-icon ui-icon-arrow-l"></span></div>
                 <div class="ui-block-b"><input type="button" data-icon="plus" value="Add products"></div>
                 <div class="ui-block-c"><input type="button" data-icon="check" data-iconpos="right" value="Confirm order"></div>
             </div>

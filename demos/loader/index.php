@@ -44,7 +44,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Loader <a href="http://api.jquerymobile.com/loader/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-carat-r"></span></a></h1>
+		<h1>Loader <a href="http://api.jquerymobile.com/loader/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r"></span></a></h1>
 
 		<p>A small loading overlay displayed when jQuery Mobile loads in content via Ajax, or for use in custom notifications.
 			</p>

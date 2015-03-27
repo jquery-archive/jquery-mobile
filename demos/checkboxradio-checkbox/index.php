@@ -24,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Checkbox <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-carat-r"></span></a></h1>
+		<h1>Checkbox <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-carat-r"></span></a></h1>
 
 		<p>Checkbox inputs are used to provide a list of options where more than one can be selected. Checkbox buttons are enhanced by the checkboxradio widget.</p>
 
@@ -87,24 +87,6 @@
 			</form>
 		</div><!--/demo-html -->
 
-		<h2>Icon position</h2>
-
-		<p>To swap the position of the check icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the fieldset.</p>
-
-		<div data-demo-html="true">
-			<form>
-				<fieldset data-role="controlgroup" data-iconpos="right">
-					<legend>Icon right:</legend>
-					<input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
-					<label for="checkbox-h-6a">One</label>
-					<input type="checkbox" name="checkbox-h-6b" id="checkbox-h-6b">
-					<label for="checkbox-h-6b">Two</label>
-					<input type="checkbox" name="checkbox-h-6c" id="checkbox-h-6c">
-					<label for="checkbox-h-6c">Three</label>
-				</fieldset>
-			</form>
-		</div><!--/demo-html -->
-
 		<h2>Theme</h2>
 
 		<p>To set the theme, add the <code>data-theme</code> attribute on the <code>fieldset</code> to the individual checkbox inputs.</p>
@@ -136,7 +118,7 @@
 
 		<div data-demo-html="true">
 			<div class="ui-checkbox">
-				<label for="checkbox-enhanced" class="ui-button ui-corner-all ui-button-inherit ui-icon-beginning ui-checkbox-off">I agree</label>
+				<label for="checkbox-enhanced" class="ui-button ui-corner-all ui-button-inherit ui-checkbox-off">I agree</label>
 				<input type="checkbox" name="checkbox-enhanced" id="checkbox-enhanced" data-enhanced="true">
 			</div>
 		</div><!--/demo-html -->
