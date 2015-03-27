@@ -86,11 +86,11 @@
 					<p>Each swatch also includes default styles for interactive elements like list items and buttons. Each button has styles for normal, hover/focus and pressed states.</p>
 
 						<div class="swatch-preview">
-							<a href="index.html" class="ui-button ui-corner-all ui-button-a ui-icon-beginning">Button A<span class="ui-icon ui-icon-arrow-l"></span></a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-b ui-icon-beginning">Button B<span class="ui-icon ui-icon-arrow-l"></span></a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-c ui-icon-beginning">Button C<span class="ui-icon ui-icon-arrow-l"></span></a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-d ui-icon-beginning">Button D<span class="ui-icon ui-icon-arrow-l"></span></a>
-							<a href="index.html" class="ui-button ui-corner-all ui-button-e ui-icon-beginning">Button E<span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-a">Button A<span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-b">Button B<span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-c">Button C<span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-d">Button D<span class="ui-icon ui-icon-arrow-l"></span></a>
+							<a href="index.html" class="ui-button ui-corner-all ui-button-e">Button E<span class="ui-icon ui-icon-arrow-l"></span></a>
 						</div><!-- end swatch-bars -->
 
 					<p>By default, any button that's placed in a bar is automatically assigned a swatch letter that matches its parent bar or content box. This  behavior makes it easy to ripple a theme change through a page by setting a theme swatch on a parent because you know the buttons will maintain the same relative visual weight across themes. Since form elements use the button styles, they will also adapt to their parent container.</p>

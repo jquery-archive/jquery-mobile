@@ -37,7 +37,7 @@
 
         <p>The list items have a thumbail. In the grid layout those will get the same size as the tile. One list item doesn't hold an image to demonstrate how you can take advantage of class <code>ui-li-has-thumb</code> to adjust the style.</p>
 
-        <a href="listview-grid.html" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini ui-icon-end">Open demo<span class="ui-icon ui-icon-arrow-r"></span></a>
+        <a href="listview-grid.html" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini">Open demo<span class="ui-icon ui-icon-arrow-r"></span></a>
 
         <div data-demo-html="#demo-page" data-demo-css="#listview-grid-css"></div>
 

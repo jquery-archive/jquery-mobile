@@ -11,13 +11,6 @@
 	<script src="../../external/jquery/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script src="../../js/"></script>
-	<style>
-		/* border-radius values are copied from theme.css */
-		.custom-border-radius.ui-button-icon-only.ui-button-corner-all {
-			-webkit-border-radius: .3125em;
-			border-radius: .3125em;
-		}
-	</style>
 </head>
 <body>
 <div data-role="page" class="jqm-demos" data-quicklinks="true">
@@ -31,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Buttons <a href="http://api.jquerymobile.com/button/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-caret-r"></span></a></h1>
+		<h1>Buttons <a href="http://api.jquerymobile.com/button/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
 		<h2>Basic markup</h2>
 
@@ -51,7 +44,7 @@
 
 		<div data-demo-html="true">
 			<form>
-				<label>Input value
+				<label>Label
 					<input type="button" data-enhanced="true" value="Input value" class="ui-input-button ui-button ui-corner-all ui-shadow">
 				</label>
 			</form>
@@ -64,15 +57,7 @@
 				<input type="button" value="Has corners by default">
 				<input type="button" data-corners="false" value="Unset corners">
 				<input type="button" data-enhanced="true" value="Enhanced" class="ui-input-button ui-button ui-corner-all">
-			</form>
-		</div><!--/demo-html -->
-
-		<p>Icon-only buttons are round by default. Here we show how you can set the same border-radius as other buttons.</p>
-
-		<div data-demo-html="true" data-demo-css="true">
-			<form>
-				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
-			</form>
+            </form>
 		</div><!--/demo-html -->
 
 		<h2>Shadow</h2>
@@ -133,7 +118,7 @@
 		<div data-demo-html="true">
 			<form>
 				<input type="button" data-icon="delete" value="Input">
-				<div class="ui-input-button ui-button ui-icon-delete ui-icon-beginning">
+				<div class="ui-input-button ui-button ui-icon-delete">
 					Enhanced
 					<input type="button" data-enhanced="true" value="Enhanced">
 				</div>
@@ -149,19 +134,19 @@
 				<input type="button" data-icon="delete" data-iconpos="top" value="Top">
 				<input type="button" data-icon="delete" data-iconpos="bottom" value="Bottom">
 				<input type="button" data-icon="delete" data-iconpos="notext" value="Icon only">
-				<div class="ui-input-button ui-button ui-icon-delete ui-icon-beginning">
+				<div class="ui-input-button ui-button ui-icon-delete">
 					Enhanced - Left
 					<input type="button" data-enhanced="true" value="Enhanced - Left">
 				</div>
-				<div class="ui-input-button ui-button ui-icon-delete ui-icon-end">
+				<div class="ui-input-button ui-button ui-icon-delete">
 					Enhanced - Right
 					<input type="button" data-enhanced="true" value="Enhanced - Right">
 				</div>
-				<div class="ui-input-button ui-button ui-icon-delete ui-icon-top">
+				<div class="ui-input-button ui-button ui-icon-delete">
 					Enhanced - Top
 					<input type="button" data-enhanced="true" value="Enhanced - Top">
 				</div>
-				<div class="ui-input-button ui-button ui-icon-delete ui-icon-bottom">
+				<div class="ui-input-button ui-button ui-icon-delete">
 					Enhanced - Bottom
 					<input type="button" data-enhanced="true" value="Enhanced - Bottom">
 				</div>
@@ -177,7 +162,7 @@
 		<div data-demo-html="true">
 			<form>
 				<input type="button" data-theme="b" data-icon="delete" data-iconshadow="true" value="Input">
-				<div class="ui-input-button ui-button ui-button-b ui-icon-delete ui-icon-beginning ui-shadow-icon">
+				<div class="ui-input-button ui-button ui-button-b ui-icon-delete ui-shadow-icon">
 					Enhanced
 					<input type="button" data-enhanced="true" value="Enhanced">
 				</div>

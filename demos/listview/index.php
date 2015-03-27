@@ -31,7 +31,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Listview <a href="http://api.jquerymobile.com/listview/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-caret-r"></span></a></h1>
+		<h1>Listview <a href="http://api.jquerymobile.com/listview/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
 		<p>A listview is coded as a simple unordered list (ul) or ordered list (ol) with a <code> data-role="listview"</code> attribute and has a wide range of features.
 			</p>
@@ -230,7 +230,7 @@
 				<div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
 					<h3>Purchase Album?</h3>
 				<p>Your download will begin immediately on your mobile device when you purchase.</p>
-					<a href="index.php" data-rel="back" class="ui-shadow ui-button ui-corner-all ui-button-b ui-icon-beginning ui-button-inline ui-mini">Buy: $10.99<span class="ui-icon ui-icon-check"></span></a>
+					<a href="index.php" data-rel="back" class="ui-shadow ui-button ui-corner-all ui-button-b ui-button-inline ui-mini">Buy: $10.99<span class="ui-icon ui-icon-check"></span></a>
 					<a href="index.php" data-rel="back" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini">Cancel</a>
 				</div>
 			</div><!--/demo-html -->

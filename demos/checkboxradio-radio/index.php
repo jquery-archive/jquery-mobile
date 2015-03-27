@@ -24,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Radio buttons <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-caret-r"></span></a></h1>
+		<h1>Radio buttons <a href="http://api.jquerymobile.com/checkboxradio/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
 		<p>Radio inputs are used to provide a list of options where only a single option can be selected. Radio buttons are enhanced by the checkboxradio widget.</p>
 
@@ -97,24 +97,6 @@
 			</form>
 		</div><!--/demo-html -->
 
-		<h2>Icon position</h2>
-
-		<p>To swap the position of the radio icon from the default position on the left, add the <code>data-iconpos="right"</code> attribute to the controlgroup.</p>
-
-		<div data-demo-html="true">
-			<form>
-				<fieldset data-role="controlgroup" data-iconpos="right">
-					<legend>Vertical, icon right:</legend>
-					<input type="radio" name="radio-choice-w-6" id="radio-choice-w-6a" value="on" checked="checked">
-					<label for="radio-choice-w-6a">One</label>
-					<input type="radio" name="radio-choice-w-6" id="radio-choice-w-6b" value="off">
-					<label for="radio-choice-w-6b">Two</label>
-					<input type="radio" name="radio-choice-w-6" id="radio-choice-w-6c" value="other">
-					<label for="radio-choice-w-6c">Three</label>
-				</fieldset>
-			</form>
-		</div><!--/demo-html -->
-
 		<h2>Theme</h2>
 
 		<p>To set the theme, add the <code>data-theme</code> attribute to the controlgroup or each of the individual checkbox inputs.</p>
@@ -149,7 +131,7 @@
 
 		<div data-demo-html="true">
 			<div class="ui-radio">
-				<label for="radio-enhanced" class="ui-button ui-corner-all ui-button-inherit ui-icon-beginning ui-radio-off">I agree</label>
+				<label for="radio-enhanced" class="ui-button ui-corner-all ui-button-inherit ui-radio-off">I agree</label>
 				<input type="radio" name="radio-enhanced" id="radio-enhanced" data-enhanced="true">
 			</div>
 		</div><!--/demo-html -->

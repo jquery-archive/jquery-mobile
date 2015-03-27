@@ -54,7 +54,7 @@
         <h3>Left Panel: Reveal</h3>
         <p>This panel is positioned on the left with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-beginning ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
 
 	</div><!-- /leftpanel1 -->
 
@@ -64,7 +64,7 @@
         <h3>Left Panel: Push</h3>
         <p>This panel is positioned on the left with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-beginning ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
 
 	</div><!-- /leftpanel2 -->
 
@@ -74,7 +74,7 @@
         <h3>Left Panel: Overlay</h3>
         <p>This panel is positioned on the left with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-beginning ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
 
 	</div><!-- /leftpanel3 -->
 
@@ -84,7 +84,7 @@
         <h3>Right Panel: Reveal</h3>
         <p>This panel is positioned on the right with the reveal display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-beginning ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
 
 	</div><!-- /rightpanel1 -->
 
@@ -94,7 +94,7 @@
         <h3>Right Panel: Push</h3>
         <p>This panel is positioned on the right with the push display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-beginning ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
 
 	</div><!-- /rightpanel2 -->
 
@@ -104,7 +104,7 @@
         <h3>Right Panel: Overlay</h3>
         <p>This panel is positioned on the right with the overlay display mode. The panel markup is <em>after</em> the header, content and footer in the source order.</p>
         <p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
-        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-icon-beginning ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
+        <a href="#demo-links" data-rel="close" class="ui-button ui-shadow ui-corner-all ui-button-a ui-button-inline">Close panel<span class="ui-icon ui-icon-delete"></span></a>
 
 	</div><!-- /rightpanel3 -->
 </body>

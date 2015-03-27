@@ -84,7 +84,7 @@
 	<div data-role="header">
 		<h1>Classic theme</h1>
 		<a href="#" data-rel="back" class="ui-button ui-corner-all ui-shadow ui-button-icon-only">Back<span class="ui-icon ui-icon-back"></span></a>
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-beginning">Button<span class="ui-icon ui-icon-gear"></span></a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow">Button<span class="ui-icon ui-icon-gear"></span></a>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-button-active ui-state-persist">Menu item 1</a></li>
@@ -176,8 +176,8 @@
 		<p>I am a div with classes ui-bar, ui-bar-<span class="theme">a</span> and ui-corner-all. <a href="#">I am a link</a></p>
 		</div>
 
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline ui-icon-end">We<span class="ui-icon ui-icon-caret-r"></span></a>
-		<button class="ui-button ui-corner-all ui-shadow ui-button-inline ui-icon-end">are<span class="ui-icon ui-icon-caret-r"></span></button>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-inline">We<span class="ui-icon ui-icon-caret-r"></span></a>
+		<button class="ui-button ui-corner-all ui-shadow ui-button-inline">are<span class="ui-icon ui-icon-caret-r"></span></button>
 		<input type="button" value="buttons" data-inline="true" data-icon="caret-r" data-iconpos="right">
 
 		<ul data-role="listview" data-inset="true" data-counttheme="c">
@@ -260,9 +260,9 @@
 			<div class="ui-field-contain">
 				<fieldset data-role="controlgroup" data-type="horizontal">
 					<legend>Controlgroup:</legend>
-					<button class="ui-button ui-corner-all ui-shadow ui-icon-end">One<span class="ui-icon ui-icon-home"></span></button>
+					<button class="ui-button ui-corner-all ui-shadow">One<span class="ui-icon ui-icon-home"></span></button>
 					<input type="button" data-icon="back" data-iconpos="right" value="Two">
-					<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-end">Three<span class="ui-icon ui-icon-grid"></span></a>
+					<a href="#" class="ui-button ui-corner-all ui-shadow">Three<span class="ui-icon ui-icon-grid"></span></a>
 				</fieldset>
 			</div>
 			<div class="ui-field-contain">
@@ -280,7 +280,7 @@
 			</div>
 		</form>
 
-		<a href="#" class="ui-button ui-corner-all ui-shadow ui-icon-beginning ui-button-active">Active button<span class="ui-icon ui-icon-gear"></span></a>
+		<a href="#" class="ui-button ui-corner-all ui-shadow ui-button-active">Active button<span class="ui-icon ui-icon-gear"></span></a>
 
 		<p>Form inside static list:</p>
 

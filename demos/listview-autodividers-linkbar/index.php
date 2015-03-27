@@ -30,7 +30,7 @@
 
 		<p>This demo shows the linkbar extension that adds a fixed positioned bar on the right of the screen that makes it easy to anchor down to a specific part of a listview. View the source to see how it works.</p>
 
-		<a href="autodividers-linkbar-demo.html" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini ui-icon-end">Open demo<span class="ui-icon ui-icon-arrow-r"></span></a>
+		<a href="autodividers-linkbar-demo.html" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini">Open demo<span class="ui-icon ui-icon-arrow-r"></span></a>
 
 		<div data-demo-html="#demo-page" data-demo-js="#demo-script" data-demo-css="#demo-style"></div><!--/demo-html -->
 
