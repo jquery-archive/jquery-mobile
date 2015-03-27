@@ -83,7 +83,7 @@
     	<a href="#" class="next ui-button ui-button-icon-only">Next<span class="ui-icon ui-icon-caret-r"></span></a>
     </div>
 
-	<a href="#" data-rel="popup" class="trivia-button ui-button ui-button-right ui-icon-beginning ui-mini ui-corner-all">Trivia<span class="ui-icon ui-icon-info"></span></a>
+	<a href="#" data-rel="popup" class="trivia-button ui-button ui-button-right ui-mini ui-corner-all">Trivia<span class="ui-icon ui-icon-info"></span></a>
 </div><!-- /footer -->
 
 </body>

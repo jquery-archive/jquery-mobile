@@ -46,7 +46,7 @@
 
         <p>Inline buttons</p>
         <div data-demo-html="true">
-            <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-icon-beginning">Inline + icon<span class="ui-icon ui-icon-star"></span></a>
+            <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline">Inline + icon<span class="ui-icon ui-icon-star"></span></a>
             <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-button-b ui-mini">Mini + theme</a>
             <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-button-icon-only ui-button-b ui-mini">icon only button<span class="ui-icon ui-icon-plus"></span></a>
         </div><!-- /demo-html -->
@@ -54,9 +54,9 @@
         <p>Horizontal grouped buttons</p>
         <div data-demo-html="true">
             <div data-role="controlgroup" data-type="horizontal" data-mini="true">
-                <a href="#" class="ui-shadow ui-button ui-corner-all ui-icon-beginning ui-button-b">Add<span class="ui-icon ui-icon-plus"></span></a>
-                <a href="#" class="ui-shadow ui-button ui-corner-all ui-icon-beginning ui-button-b">Delete<span class="ui-icon ui-icon-delete"></span></a>
-                <a href="#" class="ui-shadow ui-button ui-corner-all ui-icon-beginning ui-button-b">More<span class="ui-icon ui-icon-grid"></span></a>
+                <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-b">Add<span class="ui-icon ui-icon-plus"></span></a>
+                <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-b">Delete<span class="ui-icon ui-icon-delete"></span></a>
+                <a href="#" class="ui-shadow ui-button ui-corner-all ui-button-b">More<span class="ui-icon ui-icon-grid"></span></a>
             </div>
         </div><!-- /demo-html -->
 

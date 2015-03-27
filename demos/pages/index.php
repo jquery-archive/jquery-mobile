@@ -24,7 +24,7 @@
 
 	<div role="main" class="ui-content jqm-content">
 
-		<h1>Pages <a href="http://api.jquerymobile.com/page/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-caret-r"></span></a></h1>
+		<h1>Pages <a href="http://api.jquerymobile.com/page/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
 		<p>The page is the primary unit of interaction in jQuery Mobile and is used to group content into logical views that can be animated in and out of view with page transitions. A HTML document may start with a single "page" and the Ajax navigation system will load additional pages on demand into the DOM as users navigate around. Alternatively, a HTML document can be built with multiple "pages" inside it and the framework will transition between these local views with no need to request content from the server.</p>
 
@@ -120,7 +120,7 @@
 &lt;/html&gt;
 </code></pre>
 
-		<a href="../pages-single-page/index.html" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini ui-icon-end">View page template<span class="ui-icon ui-icon-arrow-r"></span></a>
+		<a href="../pages-single-page/index.html" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">View page template<span class="ui-icon ui-icon-arrow-r"></span></a>
 
 		<h2>Multi-page template structure</h2>
 
@@ -167,7 +167,7 @@
 &lt;/body&gt;
 </code></pre>
 
-		<a href="../pages-multi-page/index.html" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini ui-icon-end">View multi-page template<span class="ui-icon ui-icon-arrow-r"></span></a>
+		<a href="../pages-multi-page/index.html" data-ajax="false" class="ui-button ui-shadow ui-corner-all ui-button-inline ui-mini">View multi-page template<span class="ui-icon ui-icon-arrow-r"></span></a>
 
 		<p>PLEASE NOTE: Since we are using the hash to track navigation history for all the Ajax "pages", it's not currently possible to deep link to an anchor (<code>index.html#foo</code>) on a page in jQuery Mobile, because the framework will look for a "page" with an <code>id</code> of <code>#foo</code> instead of the native behavior of scrolling to the content with that <code>id</code>.</p>
 

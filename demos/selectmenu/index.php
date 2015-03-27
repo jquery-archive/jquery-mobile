@@ -24,7 +24,7 @@
 
     <div role="main" class="ui-content jqm-content">
 
-        <h1>Select menu <a href="http://api.jquerymobile.com/selectmenu/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-caret-r"></span></a></h1>
+        <h1>Select menu <a href="http://api.jquerymobile.com/selectmenu/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
         <p>The select menu is based on a native select element, which is hidden from view and replaced with a custom-styled select button. Tapping it opens the native menu. There is also a <a href="../selectmenu-custom/">custom select menu</a> widget, which also replaces the native dropdown.
         </p>

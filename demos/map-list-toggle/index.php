@@ -147,7 +147,7 @@
             <li>How to display an info box on the map when a push pin is tapped.</li>
         </ul>
 
-        <a href="#map-page" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini ui-icon-end">Open demo<span class="ui-icon ui-icon-arrow-r"></span></a>
+        <a href="#map-page" data-ajax="false" class="ui-shadow ui-button ui-corner-all ui-button-inline ui-mini">Open demo<span class="ui-icon ui-icon-arrow-r"></span></a>
 
         <div data-demo-html="#map-page" data-demo-js="true" data-demo-css="true"></div><!--/demo-html -->
 

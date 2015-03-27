@@ -24,7 +24,7 @@
 
     <div role="main" class="ui-content jqm-content">
 
-        <h1>Text inputs <a href="http://api.jquerymobile.com/textinput/" class="jqm-api-docs-link ui-button ui-icon-end ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API<span class="ui-icon ui-icon-caret-r"></span></a></h1>
+        <h1>Text inputs <a href="http://api.jquerymobile.com/textinput/" class="jqm-api-docs-link ui-button ui-nodisc-icon ui-alt-icon ui-button-inline ui-corner-all ui-mini">API <span class="ui-icon ui-icon-caret-r"></span></a></h1>
 
         <p>Text inputs and textareas are coded with standard HTML elements, then enhanced by jQuery Mobile to make them more attractive and useable on a mobile device.
         </p>
