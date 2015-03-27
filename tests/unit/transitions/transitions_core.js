@@ -75,7 +75,7 @@
 		instance.doneIn();
 	});
 
-	test( "resolves the transition deferred with the requisite data", function() {
+	asyncTest( "resolves the transition deferred with the requisite data", function() {
 		expect( 4 );
 
 		$.when( instance.deferred ).then(function( name, reverse, to, from ) {
@@ -83,6 +83,7 @@
 			equal( reverse, "reverse" );
 			equal( to, $to );
 			equal( from, "from" );
+			start();
 		});
 
 		instance.doneIn();
