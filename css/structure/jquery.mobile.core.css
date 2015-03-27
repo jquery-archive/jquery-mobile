@@ -227,6 +227,7 @@ div.ui-mobile-viewport {
 	font-size: 16px;
 	margin: .5em 0;
 	padding: .7em 1em;
+	line-height: 1.375;
 	display: block;
 	position: relative;
 	text-align: center;
@@ -249,7 +250,8 @@ div.ui-mobile-viewport {
 	white-space: nowrap !important;
 }
 .ui-mini {
-	font-size: 12.5px;
+	font-size: 13px;
+	line-height: 1.7;
 }
 .ui-mini .ui-button {
 	font-size: inherit;
@@ -257,19 +259,15 @@ div.ui-mobile-viewport {
 /* Make buttons in toolbars default to mini and inline. */
 .ui-header .ui-button,
 .ui-footer .ui-button {
-	font-size: 12.5px;
+	font-size: 13px;
 	display: inline-block;
 	vertical-align: middle;
 }
 .ui-header .ui-controlgroup .ui-button-icon-only,
-.ui-footer .ui-controlgroup .ui-button-icon-only {
-    font-size: 12.5px;
-}
-
-/* To ensure same top and left/right position when ui-button-left/right are added to something other than buttons. */
+.ui-footer .ui-controlgroup .ui-button-icon-only,
 .ui-header .ui-button-left,
 .ui-header .ui-button-right {
-	font-size: 12.5px;
+	font-size: 13px;
 }
 .ui-mini.ui-button-icon-only,
 .ui-mini .ui-button-icon-only,
@@ -283,76 +281,38 @@ div.ui-mobile-viewport {
 	vertical-align: middle;
 	margin-right: .625em;
 }
-.ui-icon-beginning {
-	padding-left: 2.5em;
-}
-.ui-icon-end {
-	padding-right: 2.5em;
-}
-.ui-icon-top {
-	padding-top: 2.5em;
-}
-.ui-icon-bottom {
-	padding-bottom: 2.5em;
-}
 .ui-controlgroup-horizontal .ui-checkboxradio-label {
 	padding: .7em 1em;
 }
-.ui-header .ui-icon-top,
-.ui-footer .ui-icon-top,
-.ui-header .ui-icon-bottom,
-.ui-footer .ui-icon-bottom {
-	padding-left: .3125em;
-	padding-right: .3125em;
-}
-
 .ui-icon {
-	position: absolute;
 	display: inline-block;
 	width: 22px;
 	height: 22px;
-	background-position: center;
-	background-repeat: no-repeat;
+	line-height: 1;
+	vertical-align: middle;
+	position: relative;
+	bottom: 2px;
+}
+.ui-icon-display-block {
+	display: block;
+	margin: 0 auto;
+	top: 0;
+}
+.ui-button-icon-only .ui-icon {
+	position: absolute;
+	display: inline-block;
 	text-indent: 100%;
 	white-space: nowrap;
 	overflow: hidden;
-}
-.ui-button.ui-button-icon-only .ui-icon,
-.ui-button.ui-icon-beginning .ui-icon,
-.ui-button.ui-icon-end .ui-icon {
+	bottom: auto;
 	top: 50%;
-	margin-top: -11px;
-}
-.ui-icon-beginning .ui-icon {
-	left: .5625em;
-}
-.ui-icon-end .ui-icon {
-	right: .5625em;
-}
-.ui-mini.ui-icon-beginning .ui-icon,
-.ui-mini .ui-icon-beginning .ui-icon,
-.ui-header .ui-icon-beginning .ui-icon,
-.ui-footer .ui-icon-beginning .ui-icon {
-	left: .37em;
-}
-.ui-mini.ui-icon-end .ui-icon,
-.ui-mini .ui-icon-end .ui-icon,
-.ui-header .ui-icon-end .ui-icon,
-.ui-footer .ui-icon-end .ui-icon {
-	right: .37em;
-}
-.ui-button.ui-button-icon-only .ui-icon,
-.ui-button.ui-icon-top .ui-icon,
-.ui-button.ui-icon-bottom .ui-icon {
 	left: 50%;
+}
+.ui-button-icon-only .ui-icon,
+.ui-button-icon-only.ui-button-left > .ui-icon,
+.ui-button-icon-only.ui-button-right > .ui-icon {
+	margin-top: -11px;
 	margin-left: -11px;
-}
-.ui-icon-top .ui-icon {
-	top: .5625em;
-}
-.ui-icon-bottom .ui-icon {
-	top: auto;
-	bottom: .5625em;
 }
 
 /* Buttons in header position classes */
@@ -395,6 +355,7 @@ input.ui-button,
 	width: 100%;
 }
 button.ui-button-inline,
+input.ui-button-inline,
 .ui-header button.ui-button,
 .ui-footer button.ui-button {
 	width: auto;
