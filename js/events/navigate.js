@@ -47,9 +47,15 @@ define([
 
 		// TODO a lot of duplication between popstate and hashchange
 		popstate: function( event ) {
-			var newEvent = new $.Event( "navigate" ),
-				beforeNavigate = new $.Event( "beforenavigate" ),
-				state = event.originalEvent.state || {};
+			var newEvent, beforeNavigate, state;
+
+			if ( event.isDefaultPrevented() ) {
+				return;
+			}
+
+			newEvent = new $.Event( "navigate" );
+			beforeNavigate = new $.Event( "beforenavigate" );
+			state = event.originalEvent.state || {};
 
 			beforeNavigate.originalEvent = event;
 			$win.trigger( beforeNavigate );
