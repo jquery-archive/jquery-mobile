@@ -105,6 +105,41 @@ $.testHelper.setPushState();
 				}
 			]);
 		});
+
+		// relies on having the early popstate handler defined in early_popstate_handler.js
+		asyncTest( "Default-prevented popstate does not trigger a navigate event",
+			function( assert ) {
+				var eventNs = ".defaultPreventedPopstate";
+
+				assert.expect( 2 );
+
+				$.testHelper.detailedEventCascade( [
+					function() {
+						window.history.replaceState( { foo: "bar" }, document.title,
+							location.href.replace(/#.*/, "" ) + "#foo" );
+						location.hash = "#foo2";
+					},
+					{
+						navigate: { src: $( window ), event: "navigate" + eventNs + "1" }
+					},
+					function( result ) {
+						assert.deepEqual( result.navigate.timedOut, false,
+							"Received navigate event going forward" );
+						window.preventDefaultForNextPopstate = true;
+						window.history.back();
+					},
+					{
+						navigate: { src: $( window ), event: "navigate" + eventNs + "2" }
+					},
+					function( result ) {
+						assert.deepEqual( result.navigate.timedOut, true,
+							"Received no navigate event from a default-prevented popstate" );
+						delete window.preventDefaultForNextPopstate;
+						start();
+					}
+				] );
+			} );
+
 	} else {
 		asyncTest( "hashchange navigation provides for data added in a later binding", function() {
 			$( window ).one( "beforenavigate", function( event, data ) {
